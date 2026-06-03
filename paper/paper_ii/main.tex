@@ -1,0 +1,465 @@
+\documentclass[reprint,amsmath,amssymb,aps,prl,nofootinbib,floatfix]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{placeins}
+\usepackage[nopatch=footnote]{microtype}
+
+% Reduce minor underfull/overfull boxes without manual line-breaking
+\setlength{\emergencystretch}{2em}
+
+\begin{document}
+
+\title{Emergent Spacetime Kinematics from Irreversible Memory Dynamics}
+
+\author{H. Horn}
+\affiliation{Peine Stederdorf, Germany}
+
+\date{\today}
+
+\begin{abstract}
+We propose a minimal irreversible, finite-memory dynamics in which effective space and relativistic kinematics arise as coarse-grained consistency conditions of metastable, localized structures (``dynamical knots''). We outline how effective dimensionality, a finite propagation speed, and Lorentz-like kinematics emerge without postulating spacetime at the microscopic level.
+\end{abstract}
+
+\maketitle
+
+
+%-------------------------------------------------
+\section{Introduction}\label{sec:introduction}
+%-------------------------------------------------
+
+Modern physics treats space, time, and relativistic structure as fundamental ingredients. Even in approaches that aim at deeper unification—ranging from quantum gravity programs \cite{Rovelli2004Quantum} to discrete or information-theoretic models \cite{Bombelli1987Causal,Wen2004Quantum}—the dimensionality of space and the kinematical structure of spacetime are typically assumed from the outset rather than derived.
+
+In Paper I, we introduced a minimal irreversible dynamical framework based on a single generative process with finite, relaxing memory \cite{Mori1965Transport,Zwanzig2001Nonequilibrium,Hanggi1995Colored}. Without assuming spacetime, geometry, or quantum postulates, we showed that an intrinsic arrow of update order arises from the non-invertibility of the memory update, that a coarse-grained notion of time emerges operationally, and that the dynamics self-organizes into localized, metastable structures (``dynamical knots'') characterized by intrinsic relaxation scales.
+
+The present work builds directly on this foundation. Its purpose is to address the next conceptual step: under what conditions may the abstract state space $\Omega$ of the minimal model be interpreted as physical space \cite{Coifman2006Diffusion,Ollivier2009Ricci}, and why does a relativistic kinematics emerge at large scales?
+
+Crucially, we do not assume spatial dimensionality, isotropy, or Lorentz invariance \cite{Liberati2013Lorentz}. Instead, we treat these notions as diagnostic properties of metastable dynamical regimes. Our guiding principle is that physical structure should be inferred from the internal consistency and robustness of the emergent dynamics, not imposed as a background scaffold.
+
+The present work adopts a deliberately minimal and dynamical notion of structure. No geometric or algebraic framework beyond an abstract continuous state space with local coarse-graining is assumed. In particular, spatial dimension, isotropy, and relativistic kinematics are not postulated but diagnosed operationally from the stability properties of metastable dynamical regimes. This places our approach conceptually close to a broad class of pre-geometric and emergent-geometry programs, while remaining distinct in its methodological commitments.
+
+From a mathematical perspective, it is worth noting that modern geometry itself has increasingly moved away from treating classical manifolds as fundamental. Examples include noncommutative geometry, topos-theoretic approaches, and more recently perfectoid and adic spaces \cite{Scholze2012Perfectoid}, which are designed to interpolate between discrete and continuous structures across scales. While such frameworks demonstrate that classical geometric intuition need not be fundamental, we do not employ any of these formalisms directly. Our construction remains intentionally pre-geometric and dynamical, relying only on stochastic evolution with finite, relaxing memory.
+
+The role of these developments in the present context is therefore purely conceptual. They provide independent evidence that emergent smooth geometry from non-classical substrates is neither exotic nor inconsistent. However, rather than introducing sophisticated mathematical structures at the outset, we ask which geometric notions are forced upon us by the internal consistency of the dynamics itself. In this sense, geometry is treated not as an axiom, but as an effective descriptor whose validity is limited to metastable, macroscopic regimes.
+
+The central claim of this paper is that space and relativistic kinematics arise as consistency conditions of interacting, memory-driven dynamical structures. In particular:
+\begin{itemize}
+\item Effective spatial dimensionality is tied to the stability and decoupling of degrees of freedom of metastable knots \cite{Ambjorn2005Spectral,Benedetti2009Spectral,Carlip2017Dimension}.
+\item Finite memory and delayed self-interaction necessarily imply a finite propagation speed for information between distinct structures.
+\item Requiring consistency of descriptions across different localized dynamical regimes leads to a Lorentz-like kinematical invariance at large scales \cite{Volovik2003Universe,Liberati2013Lorentz}.
+\end{itemize}
+
+Importantly, the scope of this paper is deliberately limited. We address only kinematical aspects of spacetime emergence. Quantum dynamics, spinor structure, and gauge interactions are deferred to a companion work. Likewise, we do not attempt to construct a dynamical theory of gravity; curvature and spacetime dynamics are explicitly outside the present scope.
+
+\paragraph{Paper outline.}
+We first establish an effective spatial interpretation of $\Omega$ (including the macroscopic selection $d=3$), then derive a finite and universal propagation speed $c_{\mathrm{eff}}$ from finite memory coupling, and finally obtain Lorentz-like kinematics from observer equivalence and invariant $c_{\mathrm{eff}}$.
+
+
+\section{From Abstract State Space to Effective Space}\label{sec:effective_space}
+\subsection{Status of the state space $\Omega$}
+
+In Paper~I the dynamics was formulated on an abstract continuous state space $\Omega$, equipped with minimal coordinate structure sufficient to define local coarse-graining and gradients.
+No physical interpretation of $\Omega$ as space was assumed.
+In particular, neither spatial dimensionality nor isotropy were postulated.
+
+The aim of the present section is to clarify under which conditions $\Omega$ admits an \emph{effective spatial interpretation} in the coarse-grained, metastable regime of the dynamics. 
+Throughout, ``space'' will be understood operationally, as a set of coordinates in which localized dynamical structures can be consistently compared.
+
+\subsection{Memory-driven dynamics}
+We briefly recall the minimal dynamical rules introduced in Paper~I.
+The state at update step $n$ is given by $\sigma_n = (x_n,\rho_n)$, where
+$x_n \in \Omega$ denotes the position of the process and $\rho_n$ is a
+finite, relaxing memory distribution.
+
+The memory update rule reads
+\begin{equation}
+\rho_{n+1}(x)
+= (1-\alpha)\,\rho_n(x)
++ \alpha\,G_\sigma(x-x_{n+1}),  \label{eq:memory_update}
+\end{equation}
+where $0<\alpha<1$ is the memory relaxation rate and $G_\sigma$ a localized kernel of width $\sigma$.
+This update is explicitly non-invertible and introduces an intrinsic arrow of update order.
+
+On coarse-grained scales $t=\alpha n$, the trajectory dynamics may be written in effective form as \cite{Oksendal2003}
+\begin{equation}
+dx_t
+= -\gamma\,\nabla\Phi[\rho_t](x_t)\,dt
++ \sqrt{2D}\,dW_t, \qquad \gamma:=\frac{\eta}{\alpha}, \label{eq:effective_SDE}
+\end{equation}
+with diffusion constant $D\sim\varepsilon^2/(2\alpha)$.
+
+\subsection{Dynamical knots and local linearization}
+In metastable regimes the dynamics self-organizes into localized regions of repeated visitation, termed \emph{dynamical knots}. 
+Operationally, a knot corresponds to a region in which the memory density remains elevated over many persistence times.
+
+Near such a metastable configuration $x_\ast$, the effective dynamics Eq.~\eqref{eq:effective_SDE} may be linearized, yielding an Ornstein--Uhlenbeck (OU)-type process \cite{OrnsteinUhlenbeck1930}
+\begin{equation}
+dx_t
+= -\gamma\,H\,(x_t-x_\ast)\,dt + \sqrt{2D}\,dW_t, \label{eq:OU_local}
+\end{equation}
+where $H=\nabla\nabla\Phi|_{x_\ast}$ denotes the Hessian of the memory-induced potential.
+The eigenvalues of $H$ define characteristic relaxation rates of perturbations around the knot.
+
+\subsection{Classification of dynamical knot types}
+
+Metastable dynamical knots are not uniform objects.
+Depending on the balance between stochastic exploration, memory accumulation,
+and relaxation, qualitatively distinct knot types arise.
+We classify knots according to their stability properties and dynamical role.
+
+\paragraph{Definition (Local relaxation spectrum).}
+Let $H=\nabla\nabla\Phi|_{x_\ast}$ denote the Hessian of the effective potential
+at a metastable configuration $x_\ast$.
+We write its ordered eigenvalues as
+\begin{equation}
+\lambda_1 \le \lambda_2 \le \dots \le \lambda_d .
+\end{equation}
+The associated relaxation times are
+\begin{equation}
+\tau_i \sim (\gamma \lambda_i)^{-1}.
+\end{equation}
+
+\paragraph{Type I: Transient knots.}
+A knot is called transient if
+\begin{equation}
+\tau_i \lesssim \tau_{\mathrm{mem}}
+\quad\text{for all } i.
+\end{equation}
+
+Such structures decay on timescales comparable to the memory persistence time and do not define stable effective coordinates.
+They dominate microscopic and short-time dynamics but do not contribute to macroscopic geometry.
+
+\paragraph{Type II: Marginal knots.}
+A knot is marginal if there exists a subset of modes $\mathcal{I}$ such that
+\begin{equation}
+\tau_i \gg \tau_{\mathrm{mem}}
+\quad\text{for } i\in\mathcal{I},
+\qquad
+\tau_j \lesssim \tau_{\mathrm{mem}}
+\quad\text{for } j\notin\mathcal{I}.
+\end{equation}
+
+Marginal knots exhibit partial stability and may support transient effective coordinates.
+They are sensitive to fluctuations and typically appear near dynamical phase boundaries.
+
+\paragraph{Type III: Robust macroscopic knots.}
+A knot is robust if
+\begin{equation}
+\tau_i \gg \tau_{\mathrm{mem}}
+\quad\text{for exactly } i=1,\dots,d_{\mathrm{eff}},
+\qquad
+d_{\mathrm{eff}}\ge 1,
+\end{equation}
+
+and the remaining modes relax rapidly.
+Only such knots admit long-lived, coarse-grained descriptions and define effective spatial coordinates.
+In the following, we argue that robust macroscopic knots require $d_{\mathrm{eff}}=3$.
+
+\paragraph{Type IV: Delocalized regimes.}
+If no subset of modes satisfies $\tau_i\gg\tau_{\mathrm{mem}}$, the dynamics does not localize.
+Such regimes correspond to purely exploratory motion and do not support macroscopic observables.
+
+\paragraph{Remark (Hierarchy of relevance).}
+Only Type~III knots contribute to emergent spatial structure, finite signal propagation, and Lorentz kinematics.
+Type~I and Type~II knots play a role in microscopic dynamics and transitions, but decouple from macroscopic physics.
+
+\subsection{Effective dimensionality}
+The local relaxation spectrum of Eq.~\eqref{eq:OU_local} provides a natural diagnostic of effective dimensionality.
+Directions associated with large eigenvalues of $H$ relax rapidly and decouple from long-time dynamics, while directions with comparable small eigenvalues remain dynamically relevant.
+
+We therefore define the \emph{effective spatial dimension} of a knot as the number of weakly coupled modes with relaxation times exceeding the memory persistence scale.
+This definition is inherently scale-dependent and allows for transient or microscopic excursions into higher-dimensional behavior, while favoring low-dimensional stable regimes at macroscopic scales.
+
+\subsection{Emergence of isotropy}
+Isotropy is not assumed at the level of the state space $\Omega$.
+However, metastable knots that are robust under stochastic perturbations tend to suppress strong directional asymmetries. Anisotropic relaxation spectra are dynamically unstable, as noise-driven drift leads to reorganization of the knot configuration.
+
+As a consequence, long-lived macroscopic regimes typically exhibit approximate isotropy in their effective coordinates.
+Numerical evidence indicates that three effective spatial dimensions form a particularly robust macroscopic regime, whereas higher-dimensional structures tend to be short-lived and lower-dimensional ones lack sufficient degrees of freedom for stable interactions.
+
+
+\subsection{Why three dimensions (macroscopically)}
+
+\vspace{2em}
+
+\textit{[TODO: Insert figure: knot stability vs. effective dimensionality / relaxation spectrum.]}
+
+\vspace{2em}
+
+The linearized OU description introduced above provides a diagnostic of stability for a given number of effective degrees of freedom.
+It does not, however, by itself select a preferred spatial dimension.
+The selection of three macroscopic dimensions arises at an earlier, nonlinear stage of the memory-driven dynamics.
+
+We consider a stochastic trajectory $\{x_n\}_{n\in\mathbb{N}}$ in an abstract state space $\Omega\simeq\mathbb{R}^d$ with finite-memory self-interaction.
+The position update is
+\begin{equation}
+x_{n+1} = x_n + \varepsilon\,\xi_n - \eta\,\nabla\Phi_n(x_n),
+\label{eq:dyn}
+\end{equation}
+with memory update
+\begin{equation}
+\rho_{n+1} = (1-\alpha)\rho_n + \alpha\,G_\sigma(\cdot-x_{n+1}),
+\label{eq:mem}
+\end{equation}
+where $G_\sigma$ is localized and normalized.
+No additional geometric structure is assumed beyond measurability.
+
+\paragraph{Definition (Metastable knot).}
+A region $K\subset\Omega$ is called metastable if
+\begin{equation}
+\liminf_{N\to\infty}\frac{1}{N}\sum_{n=1}^N\mathbf{1}_K(x_n) > 0,
+\label{eq:knot_def}
+\end{equation}
+and the associated memory-induced drift balances stochastic fluctuations.
+
+\paragraph{Lemma 1 (Recurrence obstruction for $d\leq 2$).}
+Let $\{x_n\}$ be the stochastic component of \eqref{eq:dyn}.
+For $d\leq 2$ the process is recurrent \cite{Polya1921}:
+\begin{equation}
+\mathbb{P}\bigl(x_n\in B_r(x_0)\ \text{i.o.}\bigr)=1
+\qquad\forall r>0.
+\label{eq:recurrence}
+\end{equation}
+
+\paragraph{Consequence.}
+For $d\leq 2$ the accumulated memory gradient
+$\nabla\Phi_n(x)$ diverges along recurrent returns,
+\begin{equation}
+\|\nabla\Phi_n\|\xrightarrow[n\to\infty]{}\infty,
+\end{equation}
+destroying the balance condition required by \eqref{eq:knot_def}.
+Hence, no metastable knots exist for $d\leq 2$.
+
+\paragraph{Lemma 2 (Memory dilution for large $d$).}
+Let $B_\sigma(x)$ denote the support of $G_\sigma$.
+Its volume scales as
+\begin{equation}
+\mathrm{Vol}(B_\sigma)\sim\sigma^d.
+\label{eq:volume}
+\end{equation}
+
+The typical memory density obeys
+$\rho(x)\sim\frac{N_{\mathrm{visits}}(x)}{\sigma^d}$, implying for the drift magnitude
+\begin{equation}
+\|\nabla\Phi\| \sim \|\nabla K\|\,\rho \propto \sigma^{1-d}.
+\label{eq:dilution}
+\end{equation}
+
+\paragraph{Lemma 3 (Loss of confinement for $d\geq 4$).}
+The stochastic term in \eqref{eq:dyn} induces fluctuations of order $\delta x_{\mathrm{noise}}\sim\varepsilon$.
+
+Metastability requires
+\begin{equation}
+\|\nabla\Phi\| \gtrsim \varepsilon,
+\label{eq:stability_cond}
+\end{equation}
+which fails for sufficiently large $d$ due to \eqref{eq:dilution}.
+In particular, for $d\geq 4$ the inequality \eqref{eq:stability_cond} cannot be satisfied at fixed $(\sigma,\varepsilon)$.
+Thus, no long-lived knots exist for $d\geq 4$.
+
+Metastable macroscopic structure requires simultaneously
+\begin{align}
+d &\geq 3 \quad\text{(to avoid recurrent self-blocking)},
+\qquad \\
+&\leq 3 \quad\text{(to prevent memory dilution)}.
+\end{align}
+The unique solution satisfying both requirements is
+\begin{equation}
+\boxed{d = 3}.
+\end{equation}
+
+\paragraph{Remark (Scale dependence).}
+Additional weakly coupled modes may exist on microscopic timescales.
+Such modes satisfy
+\begin{equation}
+\tau_{\mathrm{mode}}\ll\tau_{\mathrm{mem}}\sim\alpha^{-1},
+\end{equation}
+and therefore do not contribute to macroscopic metastability.
+The effective dimension is thus scale-dependent, with $d=3$ selected in the long-lived regime.
+
+\subsection{Interim conclusion}
+Physical space is thus identified not with the abstract state space $\Omega$ itself, but with the effective coordinate system defined by stable, approximately isotropic, low-dimensional metastable dynamical regimes.
+Spatial dimensionality emerges as a diagnostic property of the dynamics rather than as a fundamental assumption.
+
+
+\section{Finite Propagation Speed from Memory Coupling}\label{sec:finite_speed}
+
+\subsection{Motivation and scope}
+In Section~\ref{sec:effective_space} we argued that stable, isotropic, low-dimensional metastable regimes motivate an effective spatial interpretation of the abstract state space $\Omega$.
+We now turn to the question of signal propagation: how do distinct localized dynamical structures influence one another, and at what rate?
+
+Importantly, we do not assume locality, causality, or a light-cone structure a priori.
+Instead, we analyze how information transfer arises when multiple memory-driven processes are coupled only through finite, relaxing memory fields.
+
+\subsection{Coupled dynamical knots}
+
+We now consider a collection of metastable dynamical knots.
+Each knot is localized in the effective space identified in Section~\ref{sec:effective_space} and is characterized by its internal relaxation spectrum.
+
+Interactions between knots arise exclusively through the memory field.
+No direct instantaneous coupling between positions is assumed; all influence is mediated by modifications of the memory distribution.
+
+\subsection{Retarded response from finite memory}
+Because the memory update Eq.~\eqref{eq:memory_update} is finite and relaxing, the response of one knot to perturbations of another cannot be instantaneous.
+At the coarse-grained level, variations induced by knot $A$ enter the effective potential experienced by knot $B$ through a retarded memory kernel \cite{Kubo1957},
+\begin{equation}
+\delta\Phi_B(t)
+\sim \int_{-\infty}^{t} K_{AB}(t-t')\,\delta x_A(t')\,dt',
+\label{eq:retarded_kernel}
+\end{equation}
+where $K_{AB}$ decays on a characteristic memory time scale.
+This form expresses the fact that information transfer is delayed by the finite persistence of memory.
+
+\subsection{Inconsistency of instantaneous influence}
+
+If instantaneous propagation were allowed, Eq.~\eqref{eq:retarded_kernel} would reduce to a delta-like kernel.
+Such behavior would contradict the finite relaxation time encoded in Eq.~\eqref{eq:memory_update}, effectively bypassing the irreversible memory dynamics that defines the model.
+
+Consistency of the coupled dynamics therefore excludes instantaneous influence and enforces a finite response time between spatially separated knots.
+
+\subsection{Effective maximal propagation speed}
+The delayed memory response implies the existence of a maximal propagation speed for dynamical influence.
+On coarse-grained scales this speed may be estimated as
+\begin{equation}
+c_{\mathrm{eff}}
+\sim \frac{\ell_{\mathrm{mem}}}{\tau_{\mathrm{mem}}},
+\label{eq:ceff}
+\end{equation}
+where $\ell_{\mathrm{mem}}$ characterizes the spatial range of the memory kernel and $\tau_{\mathrm{mem}}\sim\alpha^{-1}$ its relaxation time.
+
+The quantity $c_{\mathrm{eff}}$ is not a fundamental constant, but an emergent scale determined by the underlying memory dynamics.
+
+\paragraph{Remark (Minimal assumptions behind a speed limit).}
+The estimate \eqref{eq:ceff} becomes a genuine \,\emph{upper bound} once one assumes that (i) the memory kernel has a finite effective range $\ell_{\mathrm{mem}}$ (e.g. sufficiently fast decay), and (ii) influence between distant knots is mediated only through successive updates of the same relaxing memory field \cite{LiebRobinson1972}.
+Under these conditions, a perturbation produced at knot $A$ cannot affect knot $B$ at distance $L$ in a time shorter than $\sim (L/\ell_{\mathrm{mem}})\,\tau_{\mathrm{mem}}$.
+If, by contrast, the kernel had effectively infinite range or instantaneous nonlocal components, no strict finite-speed statement would follow.
+
+\subsection{Universality}
+For multiple knots sharing a common memory substrate, consistency of their effective descriptions requires that the maximal propagation speed be universal.
+Different values of $c_{\mathrm{eff}}$ would prevent a coherent comparison of spatial and temporal scales between knots.
+
+Thus, a universal maximal propagation speed emerges dynamically as a consistency condition of interacting memory-driven structures.
+
+\subsection{Interim conclusion}
+Finite, relaxing memory generically enforces a finite and universal maximal propagation speed for information between metastable dynamical structures.
+This result is independent of any spacetime or relativistic postulates and follows solely from the irreversible memory dynamics.
+
+\section{Emergent Lorentz Kinematics}\label{sec:lorentz}
+\subsection{Operational notion of observers}
+In the metastable regime identified in Sections~\ref{sec:effective_space} and \ref{sec:finite_speed}, each dynamical knot defines an effective local coordinate system through its coarse-grained trajectory statistics.
+Different knots correspond to distinct operational descriptions of the same underlying memory-driven dynamics.
+
+An ``observer'' is therefore identified with a choice of metastable reference knot together with its associated effective spatial and temporal coordinates.
+No preferred observer is assumed.
+
+\subsection{Universality of the maximal propagation speed}
+
+Section~\ref{sec:finite_speed} established the existence of a finite maximal propagation speed $c_{\mathrm{eff}}$, arising as a consistency condition of finite, relaxing memory.
+For multiple knots to admit a coherent mutual description, this speed must be observer-independent.
+
+Let $(t,\mathbf{x})$ and $(t',\mathbf{x}')$ denote effective coordinates associated with two distinct metastable knots.
+Consistency of information transfer requires
+\begin{equation}
+\frac{\|\Delta\mathbf{x}\|}{\Delta t}
+\leq
+c_{\mathrm{eff}}
+\quad\Longleftrightarrow\quad
+\frac{\|\Delta\mathbf{x}'\|}{\Delta t'}
+\leq
+c_{\mathrm{eff}}.
+\label{eq:ceff_invariance}
+\end{equation}
+
+\subsection{Kinematical invariance group}
+We now characterize the class of transformations between effective coordinate
+systems that preserve the bound \eqref{eq:ceff_invariance}.
+Consider linear transformations of the form
+\begin{equation}
+\begin{pmatrix}
+c_{\mathrm{eff}}\,t' \\
+\mathbf{x}'
+\end{pmatrix}
+= \Lambda
+\begin{pmatrix}
+c_{\mathrm{eff}}\,t \\
+\mathbf{x}
+\end{pmatrix},
+\label{eq:linear_transform}
+\end{equation}
+where $\Lambda$ is an invertible $(d+1)\times(d+1)$ matrix.
+
+
+\paragraph{Remark (From invariant speed to an invariant interval).}
+To pass from the observer-independent bound \eqref{eq:ceff_invariance} to a specific invariance group, we assume that in the macroscopic, metastable regime
+(i) transformations between effective observers are well-approximated as linear,
+(ii) the effective space is homogeneous and isotropic, and
+(iii) the ``null'' propagation defined by $\|\Delta\mathbf{x}\|=c_{\mathrm{eff}}\Delta t$ is mapped into itself.
+Under these standard kinematical assumptions, preserving the $c_{\mathrm{eff}}$-cone is equivalent (up to an overall scale choice) to preserving a quadratic form of signature $(1,d)$.
+
+Requiring invariance of the quadratic form
+\begin{equation}
+s^2
+:=
+c_{\mathrm{eff}}^2 t^2 - \|\mathbf{x}\|^2
+\label{eq:interval}
+\end{equation}
+yields the constraint
+\begin{equation}
+\Lambda^{\mathrm T}
+\begin{pmatrix} 1 & 0 \\
+0 & -\mathbb{I}_d \end{pmatrix}\Lambda 
+= \begin{pmatrix} 1 & 0 \\
+0 & -\mathbb{I}_d \end{pmatrix}.
+\label{eq:lorentz_condition}
+\end{equation}
+
+\subsection{Emergent Lorentz group}
+
+Equation~\eqref{eq:lorentz_condition} defines the Lorentz group
+$\mathrm{O}(1,d)$ associated with the invariant speed $c_{\mathrm{eff}}$ \cite{Einstein1905,Rindler2006}.
+Thus, the transformations relating different effective observers are elements of $\mathrm{O}(1,d)$, restricted to the proper, orthochronous component and assuming a consistent time orientation.
+
+\subsection{Interpretation}
+
+The emergence of Lorentz kinematics in the present framework does not rely on postulated spacetime structure, causal axioms, or relativistic principles.
+Instead, it follows uniquely from:
+\begin{enumerate}
+\item the existence of a finite, universal maximal propagation speed $c_{\mathrm{eff}}$,
+\item the requirement that effective descriptions associated with different metastable knots remain mutually consistent.
+\end{enumerate}
+
+Lorentz symmetry thus appears as a kinematical redundancy of the coarse-grained description, not as a fundamental microscopic symmetry.
+
+\subsection{Limiting case: absence of proper time}
+
+The invariant interval \eqref{eq:interval} implies that trajectories satisfying
+\begin{equation}
+c_{\mathrm{eff}}^2\,dt^2 = \|\mathrm d\mathbf{x}\|^2
+\label{eq:null}
+\end{equation}
+have vanishing proper time.
+In the present framework, such trajectories correspond to modes that do not form metastable, memory-supported structures and therefore carry no intrinsic relaxation scale.
+This provides an operational interpretation of lightlike propagation without introducing additional postulates.
+
+\subsection{Interim conclusion}
+Lorentz kinematics emerges as the unique linear invariance structure compatible with a finite, universal propagation speed and observer equivalence in the metastable regime of memory-driven dynamics.
+No microscopic spacetime assumptions are required.
+
+\section{Outlook}\label{sec:outlook}
+
+In this paper we have argued that effective space and relativistic kinematics need not be postulated at the microscopic level: they can arise as coarse-grained consistency conditions of an irreversible, finite-memory dynamics. Metastable localized structures (dynamical knots) furnish operational coordinates, finite memory enforces a universal maximal propagation speed $c_{\mathrm{eff}}$, and observer equivalence in the metastable regime selects Lorentz-like kinematics.
+
+The present scope is purely kinematical. We do not construct a dynamical theory of gravity, and we do not introduce quantum postulates here. Quantum dynamics and the basis for the Standard Model are deferred to Paper~III.
+
+\paragraph{Take-home and near-term targets.}
+\begin{itemize}
+\item \textbf{Minimal ingredients.} A finite memory persistence time and finite effective memory range are sufficient to exclude instantaneous influence and imply a maximal propagation speed $c_{\mathrm{eff}}$.
+\item \textbf{Where Lorentz symmetry can fail.} At finite coarse-graining and finite memory length, small departures from exact Lorentz invariance are expected; these deviations should scale with ratios such as $\tau_{\mathrm{mem}}/\tau_{\mathrm{macro}}$ and $\ell_{\mathrm{mem}}/L$.
+\item \textbf{Testable numerical diagnostics.} In simulations one can measure (i) the retarded response kernel $K_{AB}$ between knots, (ii) the emergent speed estimate $c_{\mathrm{eff}}\sim \ell_{\mathrm{mem}}/\tau_{\mathrm{mem}}$, and (iii) the stability spectrum of knots (and its relation to the effective dimension diagnostic).
+\item \textbf{Open dynamical questions.} A next step is to derive how interactions between multiple knots renormalize $c_{\mathrm{eff}}$ and constrain admissible effective field content in the metastable regime.
+\end{itemize}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references2}
+\end{document}
