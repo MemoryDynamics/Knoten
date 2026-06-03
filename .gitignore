@@ -12,3 +12,9 @@ __pycache__/
 *.log
 Thumbs.db
 desktop.ini
+
+# Ignore generated outputs
+data/processed/
+results/
+src/emergenz_knoten.egg-info/
+
