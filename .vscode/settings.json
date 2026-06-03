@@ -1,0 +1,10 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "&": true,
+        "Get-Process": true,
+        "/^& \"C:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten\\\\\\.venv\\\\Scripts\\\\python\\.exe\" \"C:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten\\\\tmp_speccovfrac_mini_out\\.py\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

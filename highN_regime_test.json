@@ -1,0 +1,18 @@
+{
+  "D_cov": 6.582931078447992,
+  "D_occ": 0.18301352751708877,
+  "burn_in": 100,
+  "elapsed_seconds": 19.949224800016964,
+  "max_memory": 3000,
+  "n_samples": 996,
+  "residence": {
+    "knot_count": 13.0,
+    "max_residence": 1.675,
+    "mean_residence": 1.1373325193421073,
+    "visited_voxels": 19.0
+  },
+  "sample_every": 20,
+  "seed": 1,
+  "steps": 20000,
+  "steps_per_second": 1002.5452217062085
+}

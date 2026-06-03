@@ -1,0 +1,15 @@
+{
+  "D_cov": 1.413267312757438,
+  "D_occ": 1.6018041894749564,
+  "burn_in": 10000,
+  "n_samples": 1801,
+  "residence": {
+    "knot_count": 33.0,
+    "max_residence": 10.428571428571429,
+    "mean_residence": 2.6364599128351,
+    "visited_voxels": 42.0
+  },
+  "sample_every": 50,
+  "seed": 3,
+  "steps": 100000
+}

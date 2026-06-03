@@ -1,0 +1,181 @@
+\documentclass[11pt,a4paper]{article}
+
+% -------------------------------------------------
+% Pakete (arXiv-sicher, konservativ)
+% -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{bm}
+
+% -------------------------------------------------
+% Eigene Makros
+% -------------------------------------------------
+\renewcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+% -------------------------------------------------
+% Titelinformationen
+% -------------------------------------------------
+\title{Emergente Raumzeit aus einer einzelnen Trajektorie mit Gedächtnis \\ \large{Foundational Notes (Working Preprint)}}
+\author{ChatGPT5.2 \& H. Horn}
+\date{2026-01-25}
+
+% -------------------------------------------------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Wir formulieren ein minimales, nicht-geometrisches und nicht-quantentheoretisches Modell, in dem Raumzeitstruktur, makroskopische Zeit und gravitative Dynamik aus der Statistik einer einzelnen stochastischen Trajektorie mit Gedächtnis emergieren. Weder Raum, Zeit noch eine Metrik werden postuliert. Stattdessen propagiert ein punktförmiger Generator in einem abstrakten Zustandsraum und wechselwirkt mit seiner eigenen Historie über ein Gedächtnisfeld. Wir zeigen, dass Irreversibilit\"at, effektive Dimensionalit\"at, Lokalität, geodätische Bewegung und die Einstein-Gleichungen als notwendige Konsistenzbedingungen im grobgek\"ornten Limes entstehen. Das vorliegende Dokument dient als Fundament für weiterführende Arbeiten zu Quantisierung, Nahfeldphysik und internen Freiheitsgraden.
+\end{abstract}
+
+% =================================================
+\section{Einleitung und Motivation}
+
+Die Vereinheitlichung von Gravitation und Quantenmechanik legt nahe, dass Raumzeit keine fundamentale Entität ist. Zahlreiche Ansätze verfolgen die Idee einer emergenten Geometrie, postulieren jedoch häufig Zeit, Dimension oder metrische Strukturen bereits auf fundamentaler Ebene.
+
+Ziel dieser Arbeit ist es, einen streng minimalen Ansatz zu formulieren, in dem keine dieser Strukturen vorausgesetzt wird. Alle makroskopischen Begriffe sollen sich als zwingende Konsequenzen statistischer Konsistenz ergeben.
+
+% =================================================
+\section{Fundamentales Modell}
+
+\subsection{Ontologie}
+
+Der fundamentale Zustand nach dem $n$-ten Update ist gegeben durch
+\begin{equation}
+\sigma_n = (x_n, \rho_n),
+\end{equation}
+
+wobei $x_n$ die Position eines Generators in einem abstrakten Zustandsraum $\Omega$ bezeichnet und $\rho_n$ eine normierte Gedächtnisdichte ist. Auf $\Omega$ wird keine geometrische oder dimensionale Struktur angenommen.
+
+\subsection{Mikroskopische Dynamik}
+
+Die Dynamik ist definiert durch
+\begin{equation}
+ x_{n+1} = x_n + \varepsilon \, \xi_n - \eta \, \nabla \Phi(x_n),
+\end{equation}
+
+mit Gedächtnispotential
+\begin{equation}
+ \Phi(x) = \int K(x,y)\, \rho(y)\, \dd y.
+\end{equation}
+
+Die Zufallsvariable $\xi_n$ ist zentriert und kurz korreliert. Der Kernel $K$ sei isotrop und integrierbar.
+
+Das Gedächtnis wird aktualisiert durch
+\begin{equation}
+ \rho_{n+1} = (1-\alpha)\, \rho_n + \alpha \, \delta(x-x_{n+1}).
+\end{equation}
+
+Diese Update-Regel ist nicht invertierbar und stellt die einzige Quelle von Irreversibilität dar.
+
+% =================================================
+\section{Emergenz der Zeit}
+
+Der Update-Index $n$ besitzt keine physikalische Bedeutung. Zeit entsteht erst durch die irreversible Kompression von Information im Gedächtnis. Wir zeigen, dass ein makroskopischer Zeitparameter als reparametrisierungsinvariante Ordnungsstruktur aus der Gedächtnisrelaxation hervorgeht.
+
+% =================================================
+\section{Emergenz der Dimensionalit\"at}
+
+Wir definieren die effektive Dimension als die Anzahl asymptotisch entkoppelter Richtungen, in denen sich Trajektorien stabil trennen können. Es wird gezeigt, dass
+\begin{itemize}
+ \item $d=1$ keine Streuung erlaubt,
+ \item $d=2$ zur Rekurrenz und Kollaps f\"uhrt,
+ \item $d\geq 4$ durch stochastische Dispersion instabil ist,
+ \item $d=3$ der einzige robuste Fixpunkt ist.
+\end{itemize}
+
+Die technischen Details sind in Anhang~C dargestellt.
+
+% =================================================
+\section{Makroskopische Observablen}
+
+\subsection{Besuchsdichte}
+
+\begin{equation}
+ P(x) = \lim_{N\to\infty} \frac{1}{N} \sum_{n=1}^N \delta(x-x_n).
+\end{equation}
+
+\subsection{Korrelationen}
+
+\begin{equation}
+ C_{ab}(\Delta n) = \langle (x^a_{n+\Delta n}-x^a_n) \cdot (x^b_{n+\Delta n}-x^b_n) \rangle.
+\end{equation}
+
+\subsection{Energie-Impuls-Tensor}
+
+\begin{equation}
+ T_{ij}(x) \propto \langle \Delta x_i \, \Delta x_j \rangle_x.
+\end{equation}
+
+% =================================================
+\section{Lokalit\"at und Reparametrisierungsinvarianz}
+
+Es wird gezeigt, dass alle makroskopischen Observablen invariant unter monotonen Reparametrisierungen $n \mapsto f(n)$ sind und dass die Dynamik im Fernfeld ausschließlich von lokalen Gedächtnisbeiträgen abhängt.
+
+% =================================================
+\section{Effektive Wirkung und geod\"atische Bewegung}
+
+Aus Reparametrisierungsinvarianz folgt eine effektive Wirkung der Form
+\begin{equation}
+ S[x] = \int \sqrt{\dd x^T \, G(x) \, \dd x}.
+\end{equation}
+
+Statistische Konsistenz erzwingt die Identifikation
+\begin{equation}
+ G_{ij}(x) \propto \partial_i \partial_j \Phi(x).
+\end{equation}
+
+Die Euler--Lagrange-Gleichungen liefern geodätische Bewegung.
+
+% =================================================
+\section{Emergente Feldgleichungen}
+
+Aus der Kontinuität der Trajektorie folgt
+\begin{equation}
+ \nabla^i T_{ij} = 0.
+\end{equation}
+
+In $3+1$ Dimensionen ist der einzige lokale, divergentenfreie Tensor zweiter Ordnung der Einstein-Tensor. Die Einstein-Gleichungen ergeben sich somit als Konsistenzbedingung.
+
+% =================================================
+\section{G\"ultigkeitsbereich und offene Probleme}
+
+Nicht behandelt werden Quantisierung, Nahfeldphysik, interne Freiheitsgrade sowie Eichsymmetrien. Diese Aspekte erfordern feineres Coarse Graining und sind Gegenstand zukünftiger Arbeiten.
+
+% =================================================
+\appendix
+
+\section{Reparametrisierungsinvarianz}
+
+Vollständiger Beweis der Invarianz von $P(x)$, $C_{ab}$ und $\langle \nabla \Phi \rangle$.
+
+\section{Stabilit\"at von Knotentypen}
+
+Lineare Stabilitätsanalyse, Rolle der minimalen Eigenwerte der Hesse-Matrix.
+
+\section{Emergente Dimensionalit\"at}
+
+Rekurrenzargumente, Skalierung mit der Dimension und marginaler Charakter von $d=4$.
+
+\section{Diskret--Kontinuum-Limes}
+
+Herleitung der effektiven Wirkung aus diskreten Updates.
+
+\section{Divergenzfreiheit von $T_{ij}$}
+
+Ableitung aus der Kontinuitätsgleichung der Besuchsdichte.
+
+% =================================================
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
