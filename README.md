@@ -5,10 +5,77 @@ Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
 Stand dieses ersten Audits: 2026-05-22.
 
+## Schnellstart
+
+```python
+from pathlib import Path
+from emergenz_knoten import SimulationConfig, run_simulation, save_simulation_result
+
+config = SimulationConfig(
+    steps=5000,
+    dim=3,
+    alpha=0.005,
+    sample_every=50,
+    max_memory=200,
+)
+result = run_simulation(config, seed=1, output_path=Path('results/simulation.npz'))
+
+print(result['samples'].shape)
+```
+
+## Installation
+
+Empfohlen in einer virtuellen Umgebung:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+```
+
+Zum Entwickeln und Paketieren:
+
+```bash
+python -m pip install -e .
+```
+
+Tests ausführen:
+
+```bash
+python -m pytest tests -q
+```
+
+Der Kernexport umfasst:
+
+- `SimulationConfig`
+- `simulate_finite_memory`
+- `simulate_finite_memory_numba`
+- `SimulationRunner`
+- `run_simulation`
+- `save_simulation_result`
+- `load_simulation_result`
+
+## Experiment Entry Point
+
+Für reproduzierbare Experimente steht ein zentrales CLI-Skript zur Verfügung:
+
+```bash
+python experiments/cli.py --list
+python experiments/cli.py dimension_selection --list
+python experiments/cli.py dimension_selection --script DimensionsHeatmap.py
+```
+
+Ein kleines Starter-Demo ist ebenfalls vorhanden:
+
+```bash
+python experiments/demo_simulation.py
+```
+
 ## Startpunkte
 
 - [Projektkarte](docs/project_map.md): Was liegt wo, welche historischen
   Skriptfamilien gibt es, und welche Zielstruktur ist sinnvoll.
+- [Architekturübersicht](docs/architecture_overview.md): Kernkomponenten und
+  Datenfluss des aktuellen Projektzustands.
 - [Paper-Claims](docs/paper_claims.md): Extrahierte Kernaussagen aus den
   aktuellen Paper-Drafts und ihr aktueller Haertungsstatus.
 - [Haertungsplan](docs/hardening_plan.md): Konkrete Tests, Gegenproben und
@@ -25,6 +92,9 @@ Stand dieses ersten Audits: 2026-05-22.
   und wofuer Hauke gebraucht wird.
 - [Paper I Source Audit](reports/paper1_source_audit_2026-06-01.md):
   erster Audit der aktuellen `1.tex` Quelle.
+ - [Theoretical Context](docs/THEORETICAL_CONTEXT.md): kurze, zusammenfassende
+   Kontext- und Claim-Mapping-Datei, die die Chat-basierten Notizen mit den
+   Experiment-Entry-Points verknüpft.
 
 ## Modellkern in einem Satz
 
