@@ -14,8 +14,9 @@
 # ------------------------------------------------------------
 
 import os
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 from numba import njit
 
 # ============================================================
@@ -32,7 +33,7 @@ D_LIST = np.arange(2, 10)
 
 # parameter sweep
 ALPHAS = [0.0015, 0.0025]
-ETAS   = [0.12, 0.18]
+ETAS = [0.12, 0.18]
 
 # noise
 EPSILON = 0.03
@@ -64,11 +65,9 @@ MAX_SAMPLES = 2500
 # TRUE DOUBLE-KERNEL GRADIENT FROM HISTORY
 # ============================================================
 
+
 @njit
-def compute_gradient(x, hist, weights,
-                     mlen,
-                     sigma_rep, sigma_att,
-                     A_rep, B_att):
+def compute_gradient(x, hist, weights, mlen, sigma_rep, sigma_att, A_rep, B_att):
 
     d = x.shape[0]
     g = np.zeros(d)
@@ -91,7 +90,7 @@ def compute_gradient(x, hist, weights,
         # attractive Gaussian
         fatt = B_att * np.exp(-0.5 * r2 / satt2) / satt2
 
-        fac = (frep - fatt)
+        fac = frep - fatt
 
         for j in range(d):
             g[j] += w * fac * dx[j]
@@ -102,6 +101,7 @@ def compute_gradient(x, hist, weights,
 # ============================================================
 # COVARIANCE DIMENSION
 # ============================================================
+
 
 @njit
 def covariance_dimension(X):
@@ -144,6 +144,7 @@ def covariance_dimension(X):
 # SINGLE RUN
 # ============================================================
 
+
 def run_single(d, alpha, eta):
 
     rng = np.random.default_rng()
@@ -173,9 +174,7 @@ def run_single(d, alpha, eta):
 
         if mlen > 0:
             g = compute_gradient(
-                x, hist[:mlen], weights[:mlen], mlen,
-                SIGMA_REP, SIGMA_ATT,
-                A_REP, B_ATT
+                x, hist[:mlen], weights[:mlen], mlen, SIGMA_REP, SIGMA_ATT, A_REP, B_ATT
             )
         else:
             g = np.zeros(d)
@@ -186,7 +185,7 @@ def run_single(d, alpha, eta):
         # update history: shift right (newest at index 0)
         if mlen < M:
             if mlen > 0:
-                hist[1:mlen+1] = hist[0:mlen]
+                hist[1 : mlen + 1] = hist[0:mlen]
             hist[0] = x
             filled += 1
         else:
@@ -216,12 +215,14 @@ def run_single(d, alpha, eta):
                 slope = abs(Ds[-1] - Ds[-4]) / np.log(Ns[-1] / Ns[-4])
 
                 if (
-                    d1 < PLATEAU_TOL and
-                    d2 < PLATEAU_TOL and
-                    d3 < PLATEAU_TOL and
-                    slope < PLATEAU_SLOPE
+                    d1 < PLATEAU_TOL
+                    and d2 < PLATEAU_TOL
+                    and d3 < PLATEAU_TOL
+                    and slope < PLATEAU_SLOPE
                 ):
-                    print(f"Plateau reached d={d} alpha={alpha} eta={eta} N={n} D={D_eff:.3f}")
+                    print(
+                        f"Plateau reached d={d} alpha={alpha} eta={eta} N={n} D={D_eff:.3f}"
+                    )
                     break
 
         if n % 1_000_000 == 0:
@@ -234,10 +235,12 @@ def run_single(d, alpha, eta):
 # CHECKPOINT
 # ============================================================
 
+
 def load_checkpoint():
     if not os.path.exists(CHECKPOINT):
         return {}
     return dict(np.load(CHECKPOINT, allow_pickle=True))["data"].item()
+
 
 def save_checkpoint(data):
     np.savez(CHECKPOINT, data=data)
@@ -246,6 +249,7 @@ def save_checkpoint(data):
 # ============================================================
 # PLOTS
 # ============================================================
+
 
 def make_plots(data):
 
@@ -303,6 +307,7 @@ def make_plots(data):
 # MAIN
 # ============================================================
 
+
 def main():
 
     data = load_checkpoint()
@@ -328,10 +333,7 @@ def main():
 
                 N, Dv = run_single(d, alpha, eta)
 
-                data[key][ds] = {
-                    "N": N,
-                    "D": Dv
-                }
+                data[key][ds] = {"N": N, "D": Dv}
 
                 save_checkpoint(data)
                 make_plots(data)

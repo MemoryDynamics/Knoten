@@ -1,6 +1,6 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from scipy.optimize import curve_fit
 
 # --------------------------------------------------
@@ -11,7 +11,7 @@ df = pd.read_csv("resultsN.csv")
 
 dims = sorted(df["dim"].unique())
 
-colors = ["blue","red","green","magenta","black","cyan","gray","lightgray"]
+colors = ["blue", "red", "green", "magenta", "black", "cyan", "gray", "lightgray"]
 
 # --------------------------------------------------
 # compute mean curves
@@ -21,13 +21,13 @@ curves = {}
 
 for dim in dims:
 
-    sub = df[df["dim"]==dim]
+    sub = df[df["dim"] == dim]
 
     grouped = sub.groupby("N")["D"]
 
-    Ns = np.array(sorted(grouped.mean().index),dtype=float)
+    Ns = np.array(sorted(grouped.mean().index), dtype=float)
     means = grouped.mean().values
-    stds  = grouped.std().values
+    stds = grouped.std().values
 
     curves[dim] = (Ns, means, stds)
 
@@ -35,19 +35,13 @@ for dim in dims:
 # plot original
 # --------------------------------------------------
 
-plt.figure(figsize=(7,5))
+plt.figure(figsize=(7, 5))
 
-for i,dim in enumerate(dims):
+for i, dim in enumerate(dims):
 
     Ns, means, stds = curves[dim]
 
-    plt.errorbar(
-        Ns, means,
-        yerr=stds,
-        marker="o",
-        color=colors[i],
-        label=f"d={dim}"
-    )
+    plt.errorbar(Ns, means, yerr=stds, marker="o", color=colors[i], label=f"d={dim}")
 
 plt.xscale("log")
 plt.xlabel("N")
@@ -114,9 +108,9 @@ plt.show()
 # curve collapse
 # --------------------------------------------------
 
-plt.figure(figsize=(7,5))
+plt.figure(figsize=(7, 5))
 
-for i,dim in enumerate(dims):
+for i, dim in enumerate(dims):
 
     Ns, means, _ = curves[dim]
 
@@ -124,13 +118,7 @@ for i,dim in enumerate(dims):
 
     x = Ns / Ns[idx]
 
-    plt.plot(
-        x,
-        means,
-        "o-",
-        color=colors[i],
-        label=f"d={dim}"
-    )
+    plt.plot(x, means, "o-", color=colors[i], label=f"d={dim}")
 
 plt.xlabel("N / N_peak")
 plt.ylabel("Docc")
@@ -151,13 +139,13 @@ curves = {}
 
 for dim in dims:
 
-    sub = df[df["dim"]==dim]
+    sub = df[df["dim"] == dim]
     grouped = sub.groupby("N")["D"]
 
     Ns = np.array(sorted(grouped.mean().index))
     means = grouped.mean().values
 
-    curves[dim] = (Ns,means)
+    curves[dim] = (Ns, means)
 
 # extract peaks
 Npeak = {}
@@ -165,7 +153,7 @@ Dmax = {}
 
 for dim in dims:
 
-    Ns,means = curves[dim]
+    Ns, means = curves[dim]
 
     i = np.argmax(means)
 
@@ -173,16 +161,16 @@ for dim in dims:
     Dmax[dim] = means[i]
 
 # collapse
-plt.figure(figsize=(6,5))
+plt.figure(figsize=(6, 5))
 
 for dim in dims:
 
-    Ns,means = curves[dim]
+    Ns, means = curves[dim]
 
     x = Ns / Npeak[dim]
     y = means / Dmax[dim]
 
-    plt.plot(x,y,"o-",label=f"d={dim}")
+    plt.plot(x, y, "o-", label=f"d={dim}")
 
 plt.xscale("log")
 plt.xlabel("N / N_peak")
@@ -191,12 +179,12 @@ plt.title("Universal scaling collapse")
 plt.legend()
 plt.show()
 
-X=[]
-Y=[]
+X = []
+Y = []
 
 for dim in dims:
 
-    Ns,means = curves[dim]
+    Ns, means = curves[dim]
 
     x = Ns / Npeak[dim]
     y = means / Dmax[dim]
@@ -204,14 +192,16 @@ for dim in dims:
     X.extend(x)
     Y.extend(y)
 
-X=np.array(X)
-Y=np.array(Y)
+X = np.array(X)
+Y = np.array(Y)
 
-def F(x,gamma):
-    return x**gamma/(1+x**gamma)
 
-popt,_=curve_fit(F,X,Y,p0=[0.7])
+def F(x, gamma):
+    return x**gamma / (1 + x**gamma)
 
-gamma=popt[0]
 
-print(F"gamma={gamma}")
+popt, _ = curve_fit(F, X, Y, p0=[0.7])
+
+gamma = popt[0]
+
+print(f"gamma={gamma}")

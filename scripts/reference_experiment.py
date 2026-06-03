@@ -8,7 +8,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import numpy as np
 
 from emergenz_knoten import (
     SimulationConfig,
@@ -24,11 +23,25 @@ def parse_args() -> argparse.Namespace:
         description="Run a reproducible reference experiment for the finite-memory model."
     )
     parser.add_argument("--seed", type=int, default=1, help="RNG seed")
-    parser.add_argument("--steps", type=int, default=10_000, help="Number of update steps")
-    parser.add_argument("--sample-every", type=int, default=25, help="Sampling interval")
+    parser.add_argument(
+        "--steps", type=int, default=10_000, help="Number of update steps"
+    )
+    parser.add_argument(
+        "--sample-every", type=int, default=25, help="Sampling interval"
+    )
     parser.add_argument("--burn-in", type=int, default=1_000, help="Burn-in steps")
-    parser.add_argument("--voxel-size", type=float, default=0.5, help="Voxel size for residence statistics")
-    parser.add_argument("--output", type=str, default="reference_experiment.json", help="Output JSON file")
+    parser.add_argument(
+        "--voxel-size",
+        type=float,
+        default=0.5,
+        help="Voxel size for residence statistics",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="reference_experiment.json",
+        help="Output JSON file",
+    )
     return parser.parse_args()
 
 
@@ -66,7 +79,9 @@ def main() -> None:
         "n_samples": int(len(samples)),
         "D_cov": float(covariance_dimension(samples)),
         "D_occ": float(occupancy_dimension(samples)),
-        "residence": residence_statistics(samples, voxel_size=args.voxel_size, min_visits=3),
+        "residence": residence_statistics(
+            samples, voxel_size=args.voxel_size, min_visits=3
+        ),
     }
 
     output_path = Path(args.output)

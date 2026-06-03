@@ -23,11 +23,22 @@ def parse_args() -> argparse.Namespace:
         description="Run a pilot simulation for the legacy high-N 3D regime."
     )
     parser.add_argument("--seed", type=int, default=1, help="RNG seed")
-    parser.add_argument("--steps", type=int, default=10_000, help="Number of update steps")
-    parser.add_argument("--sample-every", type=int, default=2_000, help="Sampling interval for post-burn-in samples")
+    parser.add_argument(
+        "--steps", type=int, default=10_000, help="Number of update steps"
+    )
+    parser.add_argument(
+        "--sample-every",
+        type=int,
+        default=2_000,
+        help="Sampling interval for post-burn-in samples",
+    )
     parser.add_argument("--burn-in", type=int, default=0, help="Burn-in steps")
-    parser.add_argument("--max-memory", type=int, default=3_000, help="Maximum memory horizon")
-    parser.add_argument("--output", type=str, default="highN_regime.json", help="Output JSON file")
+    parser.add_argument(
+        "--max-memory", type=int, default=3_000, help="Maximum memory horizon"
+    )
+    parser.add_argument(
+        "--output", type=str, default="highN_regime.json", help="Output JSON file"
+    )
     return parser.parse_args()
 
 

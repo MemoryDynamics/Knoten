@@ -1,10 +1,11 @@
-import numpy as np
 import matplotlib
+import numpy as np
+
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 from multiprocessing import Pool
+
+import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
-import os
 
 # =====================================================
 # GLOBALS
@@ -16,11 +17,13 @@ L_values = np.linspace(5, 35, 12)
 
 np.random.seed()
 
+
 # =====================================================
 # KERNEL
 # =====================================================
 def gradK(r, sigma):
-    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma)**2)
+    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma) ** 2)
+
 
 # =====================================================
 # SINGLE RUN (vectorized memory)
@@ -40,7 +43,7 @@ def run_single(args):
     for n in range(T - 1):
 
         # valid memory length
-        mlen = min(n, N_mem-1)
+        mlen = min(n, N_mem - 1)
 
         if mlen > 0:
             past = histA[:mlen]
@@ -52,19 +55,20 @@ def run_single(args):
             gradPhiA = 0.0
             gradPhiB = 0.0
 
-        xA[n+1] = xA[n] + eps*np.random.randn() - eta*gradPhiA
-        xB[n+1] = xB[n] + eps*np.random.randn() - eta*gradPhiB
+        xA[n + 1] = xA[n] + eps * np.random.randn() - eta * gradPhiA
+        xB[n + 1] = xB[n] + eps * np.random.randn() - eta * gradPhiB
 
         if with_kick and n == kick_time:
-            xA[n+1] += kick_strength
+            xA[n + 1] += kick_strength
 
         # shift memory
         histA[1:] = histA[:-1]
-        histA[0] = xA[n+1]
+        histA[0] = xA[n + 1]
 
         gradB[n] = gradPhiB
 
     return gradB
+
 
 # =====================================================
 # ENSEMBLE
@@ -74,7 +78,7 @@ def ensemble_response(params):
     L, alpha, eta, eps, sigma, kick_strength = params
 
     args_kick = [(L, alpha, eta, eps, sigma, kick_strength, True)] * N_ens
-    args_ref  = [(L, alpha, eta, eps, sigma, kick_strength, False)] * N_ens
+    args_ref = [(L, alpha, eta, eps, sigma, kick_strength, False)] * N_ens
 
     with Pool(processes=4) as pool:
         Gk = pool.map(run_single, args_kick)
@@ -85,17 +89,19 @@ def ensemble_response(params):
 
     return Gk.mean(axis=0) - Gr.mean(axis=0)
 
+
 # =====================================================
 # FRONT DETECTION
 # =====================================================
 def detect_front(signal):
-    smooth = np.convolve(signal, np.ones(30)/30, mode="same")
-    peaks, props = find_peaks(smooth[kick_time+50:], prominence=1e-4)
+    smooth = np.convolve(signal, np.ones(30) / 30, mode="same")
+    peaks, props = find_peaks(smooth[kick_time + 50 :], prominence=1e-4)
 
     if len(peaks) == 0:
         return None
 
     return peaks[0]
+
 
 # =====================================================
 # RUN REGIME
@@ -113,7 +119,7 @@ def run_regime(name, alpha, eta, eps, sigma, kick_strength):
 
     # ---- Delay vs L ----
     plt.figure()
-    plt.plot(L_values, delays, marker='o')
+    plt.plot(L_values, delays, marker="o")
     plt.xlabel("L")
     plt.ylabel("delay")
     plt.title(f"{name}: Delay vs L")
@@ -123,7 +129,7 @@ def run_regime(name, alpha, eta, eps, sigma, kick_strength):
 
     # ---- Delay vs L^2 ----
     plt.figure()
-    plt.plot(L_values**2, delays, marker='o')
+    plt.plot(L_values**2, delays, marker="o")
     plt.xlabel("L^2")
     plt.ylabel("delay")
     plt.title(f"{name}: Delay vs L^2")
@@ -141,6 +147,7 @@ def run_regime(name, alpha, eta, eps, sigma, kick_strength):
     plt.savefig(f"{name}_lightcone.pdf")
     plt.close()
 
+
 # =====================================================
 # DEFINE REGIMES
 # =====================================================
@@ -150,15 +157,15 @@ regimes = {
         "eta": 0.8,
         "eps": 0.3,
         "sigma": 1.0,
-        "kick_strength": 2.0
+        "kick_strength": 2.0,
     },
     "front": {
         "alpha": 0.01,
         "eta": 3.0,
         "eps": 0.2,
         "sigma": 0.4,
-        "kick_strength": 4.0
-    }
+        "kick_strength": 4.0,
+    },
 }
 
 # =====================================================

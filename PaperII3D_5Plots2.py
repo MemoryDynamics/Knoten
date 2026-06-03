@@ -1,9 +1,10 @@
-import numpy as np
 import matplotlib
+import numpy as np
+
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 from multiprocessing import Pool
-import os
+
+import matplotlib.pyplot as plt
 
 # =====================================================
 # PARAMETERS
@@ -19,11 +20,13 @@ alpha0 = 0.05
 
 np.random.seed(42)
 
+
 # =====================================================
 # KERNEL
 # =====================================================
 def gradK(r, sigma=1.0):
-    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma)**2)
+    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma) ** 2)
+
 
 # =====================================================
 # SINGLE RUN
@@ -49,13 +52,13 @@ def run_single(args):
             gradPhiA += weight * gradK(xA[n] - h)
             gradPhiB += weight * gradK(xB[n] - h)
 
-        xA[n+1] = xA[n] + eps*np.random.randn() - eta*gradPhiA
-        xB[n+1] = xB[n] + eps*np.random.randn() - eta*gradPhiB
+        xA[n + 1] = xA[n] + eps * np.random.randn() - eta * gradPhiA
+        xB[n + 1] = xB[n] + eps * np.random.randn() - eta * gradPhiB
 
         if with_kick and n == kick_time:
-            xA[n+1] += kick_strength
+            xA[n + 1] += kick_strength
 
-        histA.append(xA[n+1])
+        histA.append(xA[n + 1])
         if len(histA) > N_mem:
             histA = histA[-N_mem:]
 
@@ -63,13 +66,14 @@ def run_single(args):
 
     return gradB
 
+
 # =====================================================
 # ENSEMBLE (parallel safe for Windows)
 # =====================================================
 def ensemble_response(L, alpha):
 
     args_kick = [(L, alpha, True)] * N_ens
-    args_ref  = [(L, alpha, False)] * N_ens
+    args_ref = [(L, alpha, False)] * N_ens
 
     with Pool(processes=4) as pool:
         Gk = pool.map(run_single, args_kick)
@@ -80,11 +84,12 @@ def ensemble_response(L, alpha):
 
     return Gk.mean(axis=0) - Gr.mean(axis=0)
 
+
 # =====================================================
 # SMOOTH + PEAK DETECTION
 # =====================================================
 def detect_front(signal):
-    smooth = np.convolve(signal, np.ones(20)/20, mode="same")
+    smooth = np.convolve(signal, np.ones(20) / 20, mode="same")
     threshold = 3 * smooth[:kick_time].std()
     for n in range(kick_time, len(smooth)):
         if smooth[n] > threshold:
@@ -121,7 +126,7 @@ if __name__ == "__main__":
         delays.append(dt)
 
     plt.figure()
-    plt.plot(Ls, delays, marker='o')
+    plt.plot(Ls, delays, marker="o")
     plt.xlabel("L")
     plt.ylabel("delay")
     plt.tight_layout()
@@ -148,7 +153,7 @@ if __name__ == "__main__":
         c_eff.append(L0 / dt)
 
     plt.figure()
-    plt.plot(alphas, c_eff, marker='o')
+    plt.plot(alphas, c_eff, marker="o")
     plt.xlabel("alpha")
     plt.ylabel("c_eff")
     plt.tight_layout()
@@ -159,7 +164,7 @@ if __name__ == "__main__":
     # DIAGRAM 5 – EFFECTIVE DIMENSION
     # =====================================================
     def effective_dimension(signal):
-        window = signal[kick_time+100:kick_time+600]
+        window = signal[kick_time + 100 : kick_time + 600]
         cov = np.cov(window)
         eig = np.linalg.eigvalsh([[cov]])
         s1 = np.sum(eig)
@@ -173,7 +178,7 @@ if __name__ == "__main__":
         d_vals.append(effective_dimension(delta))
 
     plt.figure()
-    plt.plot(Ls, d_vals, marker='o')
+    plt.plot(Ls, d_vals, marker="o")
     plt.xlabel("L")
     plt.ylabel("d_eff")
     plt.tight_layout()

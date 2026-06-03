@@ -1,14 +1,13 @@
 import numpy as np
 from numpy.random import normal
-import math
 
 # ============================================================
 # PARAMETERS (Paper II optimized)
 # ============================================================
 
-d = 7                      # embedding dimension
-N = 500_000            # steps
-sample_every = 2000        # diagnostics sampling
+d = 7  # embedding dimension
+N = 500_000  # steps
+sample_every = 2000  # diagnostics sampling
 
 # dynamics
 epsilon = 0.03
@@ -27,12 +26,13 @@ memory_horizon = int(6 / alpha)
 
 # diagnostics
 window_spec = 2000
-window_cov  = 4000
+window_cov = 4000
 
 
 # ============================================================
 # FAST DOUBLE KERNEL GRADIENT
 # ============================================================
+
 
 def grad_double_kernel(x, memory):
 
@@ -44,10 +44,10 @@ def grad_double_kernel(x, memory):
         r2 = np.dot(r, r)
 
         # repulsive
-        rep = A_rep * np.exp(-r2/(2*sigma_rep**2)) / sigma_rep**2
+        rep = A_rep * np.exp(-r2 / (2 * sigma_rep**2)) / sigma_rep**2
 
         # attractive
-        att = B_att * np.exp(-r2/(2*sigma_att**2)) / sigma_att**2
+        att = B_att * np.exp(-r2 / (2 * sigma_att**2)) / sigma_att**2
 
         g += w * (rep - att) * r
 
@@ -57,6 +57,7 @@ def grad_double_kernel(x, memory):
 # ============================================================
 # FRACTAL DIMENSION (occupancy)
 # ============================================================
+
 
 def fractal_dimension(points):
 
@@ -74,7 +75,7 @@ def fractal_dimension(points):
     for s in scales:
 
         bins = ((pts - mins) / s).astype(int)
-        counts.append(len(set(map(tuple,bins))))
+        counts.append(len(set(map(tuple, bins))))
 
     coeff = np.polyfit(np.log(scales), np.log(counts), 1)
 
@@ -84,6 +85,7 @@ def fractal_dimension(points):
 # ============================================================
 # COVARIANCE DIMENSION
 # ============================================================
+
 
 def covariance_dimension(points):
 
@@ -100,12 +102,13 @@ def covariance_dimension(points):
 
     p = eig / eig.sum()
 
-    return np.exp(-np.sum(p*np.log(p)))
+    return np.exp(-np.sum(p * np.log(p)))
 
 
 # ============================================================
 # SPECTRAL DIMENSION (diffusion)
 # ============================================================
+
 
 def spectral_dimension(points):
 
@@ -114,17 +117,17 @@ def spectral_dimension(points):
 
     pts = np.array(points)
 
-    D2 = ((pts[:,None,:]-pts[None,:,:])**2).sum(-1)
+    D2 = ((pts[:, None, :] - pts[None, :, :]) ** 2).sum(-1)
 
     eps = np.median(D2)
 
-    K = np.exp(-D2/eps)
+    K = np.exp(-D2 / eps)
 
     w = np.linalg.eigvalsh(K)
 
-    w = w[w>1e-8]
+    w = w[w > 1e-8]
 
-    return np.log(len(w)) / np.log(1/w.mean())
+    return np.log(len(w)) / np.log(1 / w.mean())
 
 
 # ============================================================
@@ -149,10 +152,10 @@ for n in range(N):
     g = grad_double_kernel(x, memory)
 
     # step
-    x += epsilon*normal(size=d) - eta*g
+    x += epsilon * normal(size=d) - eta * g
 
     # update memory weights
-    memory = [(w*(1-alpha), y) for w,y in memory]
+    memory = [(w * (1 - alpha), y) for w, y in memory]
 
     # add new point
     memory.append((alpha, x.copy()))

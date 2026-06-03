@@ -1,9 +1,8 @@
 # Compute effective lambda (Hessian proxy) and visualize trajectory
 # Separate plots, no custom styles
 
-import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
 # --- Parameters ---
 alpha = 0.0005
@@ -26,8 +25,8 @@ def grad_rho(x_current):
         return np.zeros(d)
     centers = np.array(memory_positions)
     diff = x_current - centers
-    weights = np.exp(-np.sum(diff ** 2, axis=1) / (2 * sigma ** 2))
-    grad = np.sum((diff / (sigma ** 2)) * weights[:, None], axis=0)
+    weights = np.exp(-np.sum(diff**2, axis=1) / (2 * sigma**2))
+    grad = np.sum((diff / (sigma**2)) * weights[:, None], axis=0)
     return grad
 
 
@@ -55,7 +54,7 @@ Xi = eta * tau_p * lambda_max
 
 # --- Plot trajectory ---
 plt.figure()
-ax = plt.axes(projection='3d')
+ax = plt.axes(projection="3d")
 ax.plot3D(x_last[:, 0], x_last[:, 1], x_last[:, 2], linewidth=0.2)
 ax.set_xlabel("x1")
 ax.set_ylabel("x2")

@@ -1,10 +1,10 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 eta = 1.0
 lam = 1.0
 eps = 0.2
-T = 50.0   # effective observation time
+T = 50.0  # effective observation time
 
 alphas = np.logspace(-4, 0, 200)
 
@@ -15,18 +15,18 @@ Delta_Gamma = np.sqrt(D / T)
 
 fig = plt.figure(figsize=(7, 5))
 
-plt.loglog(alphas, Gamma, 'k-', label=r'$\langle\Gamma\rangle$')
+plt.loglog(alphas, Gamma, "k-", label=r"$\langle\Gamma\rangle$")
 plt.fill_between(
     alphas,
     Gamma - Delta_Gamma,
     Gamma + Delta_Gamma,
-    color='gray',
+    color="gray",
     alpha=0.4,
-    label=r'fluctuations'
+    label=r"fluctuations",
 )
 
-plt.xlabel(r'memory rate $\alpha$')
-plt.ylabel(r'relaxation rate $\Gamma$')
+plt.xlabel(r"memory rate $\alpha$")
+plt.ylabel(r"relaxation rate $\Gamma$")
 plt.title("Emergent drift with microscopic uncertainty")
 plt.legend()
 plt.grid(True, which="both")

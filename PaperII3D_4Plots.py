@@ -12,8 +12,8 @@
 # - no explicit color choices
 # - single plots per figure
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 np.random.seed(0)
 
@@ -36,7 +36,7 @@ def K(r, sigma=1.0):
 
 
 def gradK(r, sigma=1.0):
-    return -(r / sigma ** 2) * np.exp(-0.5 * (r / sigma) ** 2)
+    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma) ** 2)
 
 
 # -----------------------------
@@ -76,7 +76,7 @@ def simulate_two_knots(L, alpha, T):
 L0 = 10.0
 resp = simulate_two_knots(L0, alpha, T)
 
-fig1=plt.figure()
+fig1 = plt.figure()
 plt.plot(resp)
 plt.axvline(kick_time)
 plt.xlabel("update index n")
@@ -96,7 +96,7 @@ for L in Ls:
     onsets.append(idx[0] - kick_time if len(idx) > 0 else np.nan)
 
 plt.figure()
-plt.plot(Ls, onsets, marker='o')
+plt.plot(Ls, onsets, marker="o")
 plt.xlabel("distance L")
 plt.ylabel("onset delay Δn")
 plt.title("Diagram 2: Time-of-flight")
@@ -114,7 +114,7 @@ for a in alphas:
     c_eff.append(L0 / (idx[0] - kick_time) if len(idx) > 0 else np.nan)
 
 plt.figure()
-plt.plot(alphas, c_eff, marker='o')
+plt.plot(alphas, c_eff, marker="o")
 plt.xlabel("alpha")
 plt.ylabel("effective speed c_eff")
 plt.title("Diagram 3: Scaling of c_eff with memory")

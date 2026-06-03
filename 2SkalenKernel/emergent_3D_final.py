@@ -1,7 +1,8 @@
-import numpy as np
-import os, json, time
-from numba import njit
+import os
+
 import matplotlib.pyplot as plt
+import numpy as np
+from numba import njit
 
 # ============================================================
 # CONFIG
@@ -10,7 +11,7 @@ import matplotlib.pyplot as plt
 D_LIST = np.arange(2, 10)
 
 alpha_list = [0.0015, 0.002, 0.003]
-eta_list   = [0.1, 0.15, 0.2]
+eta_list = [0.1, 0.15, 0.2]
 
 epsilon = 0.03
 sigma = 1.0
@@ -29,6 +30,7 @@ os.makedirs(out_dir, exist_ok=True)
 # RECURSIVE MEMORY (KEY SPEEDUP)
 # ============================================================
 
+
 @njit
 def step(x, g_prev, x_prev, alpha, eta, epsilon, sigma):
 
@@ -36,7 +38,7 @@ def step(x, g_prev, x_prev, alpha, eta, epsilon, sigma):
     dx = x - x_prev
     r2 = np.dot(dx, dx)
 
-    fac = np.exp(-0.5 * r2 / (sigma*sigma)) / (sigma*sigma)
+    fac = np.exp(-0.5 * r2 / (sigma * sigma)) / (sigma * sigma)
 
     g_new = -fac * dx
 
@@ -48,9 +50,11 @@ def step(x, g_prev, x_prev, alpha, eta, epsilon, sigma):
 
     return x_new, g
 
+
 # ============================================================
 # DIMENSION
 # ============================================================
+
 
 @njit
 def covariance_dim(points):
@@ -68,22 +72,24 @@ def covariance_dim(points):
         diff = points[i] - mean
         for a in range(d):
             for b in range(d):
-                C[a, b] += diff[a]*diff[b]
+                C[a, b] += diff[a] * diff[b]
     C /= n
 
     eig = np.linalg.eigvalsh(C)
 
     s1 = np.sum(eig)
-    s2 = np.sum(eig*eig)
+    s2 = np.sum(eig * eig)
 
     if s2 == 0:
         return np.nan
 
-    return (s1*s1)/s2
+    return (s1 * s1) / s2
+
 
 # ============================================================
 # PLATEAU DETECTION
 # ============================================================
+
 
 def check_plateau(Ds, Ns):
 
@@ -94,16 +100,20 @@ def check_plateau(Ds, Ns):
     d2 = abs(Ds[-2] - Ds[-3])
     d3 = abs(Ds[-3] - Ds[-4])
 
-    slope = abs(Ds[-1] - Ds[-4]) / np.log(Ns[-1]/Ns[-4])
+    slope = abs(Ds[-1] - Ds[-4]) / np.log(Ns[-1] / Ns[-4])
 
-    return (d1 < plateau_tol and
-            d2 < plateau_tol and
-            d3 < plateau_tol and
-            slope < plateau_slope)
+    return (
+        d1 < plateau_tol
+        and d2 < plateau_tol
+        and d3 < plateau_tol
+        and slope < plateau_slope
+    )
+
 
 # ============================================================
 # SINGLE RUN
 # ============================================================
+
 
 def run_simulation(d, alpha, eta):
 
@@ -143,21 +153,26 @@ def run_simulation(d, alpha, eta):
 
     return np.array(Ns), np.array(Ds)
 
+
 # ============================================================
 # CHECKPOINT
 # ============================================================
 
+
 def save_checkpoint(data):
     np.savez(checkpoint_file, **data)
+
 
 def load_checkpoint():
     if not os.path.exists(checkpoint_file):
         return {}
     return dict(np.load(checkpoint_file, allow_pickle=True))
 
+
 # ============================================================
 # MAIN SWEEP
 # ============================================================
+
 
 def main():
 
@@ -182,18 +197,17 @@ def main():
 
                 Ns, Ds = run_simulation(d, alpha, eta)
 
-                results[key][str(d)] = {
-                    "N": Ns,
-                    "D": Ds
-                }
+                results[key][str(d)] = {"N": Ns, "D": Ds}
 
                 save_checkpoint({"results": results})
 
     save_plots(results)
 
+
 # ============================================================
 # PLOTS
 # ============================================================
+
 
 def save_plots(results):
 
@@ -238,6 +252,7 @@ def save_plots(results):
     plt.tight_layout()
     plt.savefig(os.path.join(out_dir, "D_vs_d.png"))
     plt.close()
+
 
 # ============================================================
 # RUN

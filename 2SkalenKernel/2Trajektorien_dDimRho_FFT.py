@@ -1,6 +1,6 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from numpy.fft import rfft, irfft
+import numpy as np
+from numpy.fft import irfft, rfft
 
 # -------------------------
 # parameters
@@ -35,21 +35,26 @@ dr = r[1] - r[0]
 # kernel and FFT precompute
 # -------------------------
 
+
 def kernel(r_):
     g1 = np.exp(-r_ * r_ / (2 * sigma1 * sigma1))
     g2 = np.exp(-r_ * r_ / (2 * sigma2 * sigma2))
     return A * g1 - B * g2
 
+
 kernel_vals = kernel(r)
 kernel_fft = rfft(kernel_vals)
+
 
 def potential(rho):
     # Faltung via FFT: phi = K * rho
     return irfft(rfft(rho) * kernel_fft, n=nr) * dr
 
+
 # -------------------------
 # gradient
 # -------------------------
+
 
 def grad(phi):
     g = np.zeros_like(phi)
@@ -57,17 +62,21 @@ def grad(phi):
     # g[0] und g[-1] bleiben 0 (bewusst so gelassen)
     return g
 
+
 # -------------------------
 # deposition (vektorisiert)
 # -------------------------
 
+
 def deposit(rho, ri):
     rho += kernel(abs(r - ri))
-    #rho += np.exp(-(r - ri) ** 2 / (2 * sigma1 ** 2))
+    # rho += np.exp(-(r - ri) ** 2 / (2 * sigma1 ** 2))
+
 
 # -------------------------
 # simulation
 # -------------------------
+
 
 def simulate(d, recompute_potential_every=1):
     x1 = np.zeros(d)
@@ -108,7 +117,7 @@ def simulate(d, recompute_potential_every=1):
         x2 -= eta * force + noise2
 
         # memory decay
-        rho *= (1 - alpha)
+        rho *= 1 - alpha
 
         # neue Distanz und Ablagerung
         dist = np.linalg.norm(x1 - x2)
@@ -135,6 +144,7 @@ def simulate(d, recompute_potential_every=1):
 
     return np.mean(angular)
 
+
 # -------------------------
 # dimension scan
 # -------------------------
@@ -148,7 +158,7 @@ for rseed in range(runs):
         stab[rseed, i] = simulate(d, recompute_potential_every=1)
 
     # optional: Zwischenspeichern nach jedem Run
-    np.save("stab_partial.npy", stab[:rseed + 1])
+    np.save("stab_partial.npy", stab[: rseed + 1])
 
 mean = stab.mean(axis=0)
 std = stab.std(axis=0)
@@ -158,7 +168,7 @@ std = stab.std(axis=0)
 # -------------------------
 
 plt.figure(figsize=(7, 5))
-plt.errorbar(dims, mean, yerr=std, fmt='o-', capsize=4)
+plt.errorbar(dims, mean, yerr=std, fmt="o-", capsize=4)
 plt.xlabel("dimension")
 plt.ylabel("rotation strength")
 plt.tight_layout()

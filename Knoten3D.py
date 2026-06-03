@@ -1,33 +1,29 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
 # ============================================================
 # Matplotlib style (PRD-like)
 # ============================================================
-plt.rcParams.update({
-    "font.family": "serif",
-    "font.serif": ["Times New Roman", "STIXGeneral"],
-    "mathtext.fontset": "stix",
-    "font.size": 13,
-    "axes.labelsize": 14,
-    "axes.titlesize": 15,
-    "xtick.labelsize": 11,
-    "ytick.labelsize": 11,
-    "lines.linewidth": 1.6,
-})
+plt.rcParams.update(
+    {
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "STIXGeneral"],
+        "mathtext.fontset": "stix",
+        "font.size": 13,
+        "axes.labelsize": 14,
+        "axes.titlesize": 15,
+        "xtick.labelsize": 11,
+        "ytick.labelsize": 11,
+        "lines.linewidth": 1.6,
+    }
+)
+
 
 # ============================================================
 # Core dynamics
 # ============================================================
 def generate_trajectory(
-    dim=3,
-    steps=6000,
-    eps=0.15,
-    eta=0.9,
-    alpha=0.8,
-    sigma=0.45,
-    seed=3
+    dim=3, steps=6000, eps=0.15, eta=0.9, alpha=0.8, sigma=0.45, seed=3
 ):
     rng = np.random.default_rng(seed)
     x = np.zeros(dim)
@@ -53,6 +49,7 @@ def generate_trajectory(
 
     return np.array(traj)
 
+
 # ============================================================
 # Generate trajectories
 # ============================================================
@@ -62,8 +59,8 @@ traj3d = generate_trajectory(dim=3, steps=6000)
 # ============================================================
 # FIGURE 1 — 2D TRAJECTORY (LINE)
 # ============================================================
-fig1, ax1 = plt.subplots(figsize=(6,6))
-ax1.plot(traj2d[:,0], traj2d[:,1], color="black", alpha=0.7, linewidth=0.7)
+fig1, ax1 = plt.subplots(figsize=(6, 6))
+ax1.plot(traj2d[:, 0], traj2d[:, 1], color="black", alpha=0.7, linewidth=0.7)
 ax1.set_xlabel(r"$x_1$")
 ax1.set_ylabel(r"$x_2$")
 ax1.set_title("Memory-driven self-avoiding trajectory")
@@ -76,18 +73,18 @@ fig1.savefig("fig1_knot_trajectory.pdf", bbox_inches="tight")
 # ============================================================
 # FIGURE 2 — 3D KNOT STRUCTURE (SCATTER)
 # ============================================================
-fig2 = plt.figure(figsize=(7,6))
+fig2 = plt.figure(figsize=(7, 6))
 ax2 = fig2.add_subplot(111, projection="3d")
 
 t3 = np.arange(len(traj3d))
 sc2 = ax2.scatter(
-    traj3d[::3,0],
-    traj3d[::3,1],
-    traj3d[::3,2],
+    traj3d[::3, 0],
+    traj3d[::3, 1],
+    traj3d[::3, 2],
     c=t3[::3],
     s=2.2,
     cmap="plasma",
-    alpha=0.9
+    alpha=0.9,
 )
 
 ax2.set_xlabel(r"$x_1$")
@@ -111,28 +108,23 @@ fig2.savefig("fig2_knot_scatter.pdf", bbox_inches="tight")
 # ============================================================
 # FIGURE 3 — 3D TRAJECTORY (LINE + SCATTER)
 # ============================================================
-fig3 = plt.figure(figsize=(7,6))
+fig3 = plt.figure(figsize=(7, 6))
 ax3 = fig3.add_subplot(111, projection="3d")
 
 # trajectory line
 ax3.plot(
-    traj3d[:,0],
-    traj3d[:,1],
-    traj3d[:,2],
-    color="black",
-    linewidth=0.7,
-    alpha=0.55
+    traj3d[:, 0], traj3d[:, 1], traj3d[:, 2], color="black", linewidth=0.7, alpha=0.55
 )
 
 # scatter overlay
 sc3 = ax3.scatter(
-    traj3d[::4,0],
-    traj3d[::4,1],
-    traj3d[::4,2],
+    traj3d[::4, 0],
+    traj3d[::4, 1],
+    traj3d[::4, 2],
     c=t3[::4],
     s=2.0,
     cmap="plasma",
-    alpha=0.85
+    alpha=0.85,
 )
 
 ax3.set_xlabel(r"$x_1$")

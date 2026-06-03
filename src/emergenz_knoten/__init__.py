@@ -8,7 +8,11 @@ from .diagnostics import (
     spectral_dimension,
 )
 from .kernels import double_gaussian_gradient, exponential_weights, gaussian_gradient
-from .simulation import SimulationConfig, simulate_finite_memory, simulate_finite_memory_numba
+from .simulation import (
+    SimulationConfig,
+    simulate_finite_memory,
+    simulate_finite_memory_numba,
+)
 
 __all__ = [
     "SimulationConfig",

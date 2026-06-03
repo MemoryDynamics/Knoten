@@ -1,5 +1,6 @@
-import numpy as np
 import matplotlib
+import numpy as np
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
@@ -12,18 +13,20 @@ T = 4500
 kick_time = 700
 kick_strength = 2.0
 
-N_ens = 300          # increase for quality
+N_ens = 300  # increase for quality
 alpha0 = 0.05
-sigma_cut = 2.5      # relaxed threshold
+sigma_cut = 2.5  # relaxed threshold
 m_consec = 5
 
 np.random.seed(3)
+
 
 # =============================
 # Kernel
 # =============================
 def gradK(r, sigma=1.0):
-    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma)**2)
+    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma) ** 2)
+
 
 # =============================
 # Single run
@@ -35,23 +38,24 @@ def run_single(L, alpha, with_kick):
     histA = []
     gradB = np.zeros(T)
 
-    for n in range(T-1):
+    for n in range(T - 1):
         gradPhiA = sum(gradK(xA[n] - h) for h in histA)
         gradPhiB = sum(gradK(xB[n] - h) for h in histA)
 
-        xA[n+1] = xA[n] + eps*np.random.randn() - eta*gradPhiA
-        xB[n+1] = xB[n] + eps*np.random.randn() - eta*gradPhiB
+        xA[n + 1] = xA[n] + eps * np.random.randn() - eta * gradPhiA
+        xB[n + 1] = xB[n] + eps * np.random.randn() - eta * gradPhiB
 
         if with_kick and n == kick_time:
-            xA[n+1] += kick_strength
+            xA[n + 1] += kick_strength
 
-        histA = [(1-alpha)*h + alpha*xA[n+1] for h in histA]
-        histA.append(xA[n+1])
+        histA = [(1 - alpha) * h + alpha * xA[n + 1] for h in histA]
+        histA.append(xA[n + 1])
         histA = histA[-N_mem:]
 
         gradB[n] = gradPhiB
 
     return gradB
+
 
 # =============================
 # Ensemble response
@@ -66,18 +70,20 @@ def ensemble_response(L, alpha):
 
     return Gk.mean(axis=0) - Gr.mean(axis=0)
 
+
 # =============================
 # Smoothed onset detection
 # =============================
 def detect_onset(signal, window=20):
-    smooth = np.convolve(signal, np.ones(window)/window, mode="same")
+    smooth = np.convolve(signal, np.ones(window) / window, mode="same")
     pre = smooth[:kick_time]
     sigma = pre.std()
 
-    for n in range(kick_time, T-m_consec):
-        if np.all(smooth[n:n+m_consec] > sigma_cut*sigma):
+    for n in range(kick_time, T - m_consec):
+        if np.all(smooth[n : n + m_consec] > sigma_cut * sigma):
             return n - kick_time
     return None
+
 
 # =============================
 # Diagram 1
@@ -110,7 +116,7 @@ valid = [(L, d) for L, d in zip(Ls, delays) if d is not None]
 if valid:
     Ls_v, dts_v = zip(*valid)
     plt.figure()
-    plt.plot(Ls_v, dts_v, marker='o')
+    plt.plot(Ls_v, dts_v, marker="o")
     plt.xlabel("distance L")
     plt.ylabel("onset delay Δn")
     plt.title("Diagram 2: Time-of-flight")
@@ -135,10 +141,10 @@ c_eff = []
 for a in alphas:
     delta = ensemble_response(L0, a)
     dt = detect_onset(delta)
-    c_eff.append(L0/dt if dt else np.nan)
+    c_eff.append(L0 / dt if dt else np.nan)
 
 plt.figure()
-plt.plot(alphas, c_eff, marker='o')
+plt.plot(alphas, c_eff, marker="o")
 plt.xlabel("alpha")
 plt.ylabel("c_eff")
 plt.title("Diagram 3: Scaling of c_eff")

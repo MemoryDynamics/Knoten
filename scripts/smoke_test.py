@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from emergenz_knoten import (  # noqa: E402
-    SimulationConfig,
+from emergenz_knoten import (
+    SimulationConfig,  # noqa: E402
     covariance_dimension,
     occupancy_dimension,
     residence_statistics,

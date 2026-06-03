@@ -7,24 +7,27 @@ import time
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
+import concurrent.futures
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
-import os
-import concurrent.futures
 
 ROOT = Path(__file__).resolve().parents[1]
 import sys
+
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (
     SimulationConfig,
+    bootstrap_mean_ci,
     covariance_dimension,
     occupancy_dimension,
-    spectral_dimension,
-    bootstrap_mean_ci,
     simulate_finite_memory,
     simulate_finite_memory_numba,
+    spectral_dimension,
 )
 
 
@@ -32,18 +35,63 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Alpha sweep and plateau plot for D_cov, D_occ, and D_spec."
     )
-    parser.add_argument("--alpha-values", type=str, default="0.001,0.0015,0.002,0.0025,0.003,0.004,0.005,0.007,0.01,0.015,0.02",
-                        help="Comma-separated alpha values to sweep.")
-    parser.add_argument("--alpha-log", action="store_true", help="Plot alpha on a logarithmic x-axis")
-    parser.add_argument("--mode", type=str, choices=["alpha", "D_vs_N"], default="alpha", help="Run mode: alpha sweep or D_vs_N time stability")
-    parser.add_argument("--n-seeds", type=int, default=3, help="Number of seeds per alpha (reduce seed count for longer N)")
-    parser.add_argument("--steps", type=int, default=100000, help="Number of update steps (increase for stronger temporal stability)")
-    parser.add_argument("--sample-every", type=int, default=200, help="Sampling interval")
-    parser.add_argument("--n-checkpoints", type=int, default=30, help="Number of log-spaced checkpoints for D_vs_N mode")
-    parser.add_argument("--use-numba", action="store_true", help="Use the numba-accelerated finite-memory simulator")
-    parser.add_argument("--output-json", type=str, default="alpha_plateau_data.json", help="Save sweep data to JSON")
-    parser.add_argument("--output-plot", type=str, default="alpha_plateau_plot.png", help="Save plot image")
-    parser.add_argument("--show", action="store_true", help="Show the plot interactively")
+    parser.add_argument(
+        "--alpha-values",
+        type=str,
+        default="0.001,0.0015,0.002,0.0025,0.003,0.004,0.005,0.007,0.01,0.015,0.02",
+        help="Comma-separated alpha values to sweep.",
+    )
+    parser.add_argument(
+        "--alpha-log", action="store_true", help="Plot alpha on a logarithmic x-axis"
+    )
+    parser.add_argument(
+        "--mode",
+        type=str,
+        choices=["alpha", "D_vs_N"],
+        default="alpha",
+        help="Run mode: alpha sweep or D_vs_N time stability",
+    )
+    parser.add_argument(
+        "--n-seeds",
+        type=int,
+        default=3,
+        help="Number of seeds per alpha (reduce seed count for longer N)",
+    )
+    parser.add_argument(
+        "--steps",
+        type=int,
+        default=100000,
+        help="Number of update steps (increase for stronger temporal stability)",
+    )
+    parser.add_argument(
+        "--sample-every", type=int, default=200, help="Sampling interval"
+    )
+    parser.add_argument(
+        "--n-checkpoints",
+        type=int,
+        default=30,
+        help="Number of log-spaced checkpoints for D_vs_N mode",
+    )
+    parser.add_argument(
+        "--use-numba",
+        action="store_true",
+        help="Use the numba-accelerated finite-memory simulator",
+    )
+    parser.add_argument(
+        "--output-json",
+        type=str,
+        default="alpha_plateau_data.json",
+        help="Save sweep data to JSON",
+    )
+    parser.add_argument(
+        "--output-plot",
+        type=str,
+        default="alpha_plateau_plot.png",
+        help="Save plot image",
+    )
+    parser.add_argument(
+        "--show", action="store_true", help="Show the plot interactively"
+    )
     return parser.parse_args()
 
 
@@ -80,7 +128,9 @@ def _log_spaced_indices(n: int, n_points: int) -> np.ndarray:
     return indices
 
 
-def run_stability_curve(cfg: SimulationConfig, seed: int, n_checkpoints: int, simulate_fn) -> dict[str, object]:
+def run_stability_curve(
+    cfg: SimulationConfig, seed: int, n_checkpoints: int, simulate_fn
+) -> dict[str, object]:
     result = simulate_fn(cfg, seed=seed)
     samples = result["samples"]
     sample_steps = result["sample_steps"].tolist()
@@ -96,7 +146,9 @@ def run_stability_curve(cfg: SimulationConfig, seed: int, n_checkpoints: int, si
         prefix = samples[: idx + 1]
         selected_steps.append(sample_steps[idx])
         d_cov_series.append(float(covariance_dimension(prefix)))
-        d_occ_series.append(float(occupancy_dimension(prefix, n_scales=10, min_count=2)))
+        d_occ_series.append(
+            float(occupancy_dimension(prefix, n_scales=10, min_count=2))
+        )
         d_spec_series.append(float(spectral_dimension(prefix)))
 
     return {
@@ -109,7 +161,12 @@ def run_stability_curve(cfg: SimulationConfig, seed: int, n_checkpoints: int, si
     }
 
 
-def make_plot(alphas: list[float], summary: dict[str, dict[str, float]], output_path: Path, alpha_log: bool = False) -> None:
+def make_plot(
+    alphas: list[float],
+    summary: dict[str, dict[str, float]],
+    output_path: Path,
+    alpha_log: bool = False,
+) -> None:
     fig, ax1 = plt.subplots(figsize=(9, 6))
 
     cov_means = [summary[a]["D_cov_stats"]["mean"] for a in alphas]
@@ -117,7 +174,15 @@ def make_plot(alphas: list[float], summary: dict[str, dict[str, float]], output_
     occ_means = [summary[a]["D_occ_stats"]["mean"] for a in alphas]
     occ_stds = [summary[a]["D_occ_stats"]["std"] for a in alphas]
 
-    ax1.errorbar(alphas, cov_means, yerr=cov_stds, marker="o", capsize=4, label="D_cov", color="#1f77b4")
+    ax1.errorbar(
+        alphas,
+        cov_means,
+        yerr=cov_stds,
+        marker="o",
+        capsize=4,
+        label="D_cov",
+        color="#1f77b4",
+    )
     ax1.set_xlabel("alpha")
     ax1.set_ylabel("D_cov", color="#1f77b4")
     ax1.tick_params(axis="y", labelcolor="#1f77b4")
@@ -126,7 +191,15 @@ def make_plot(alphas: list[float], summary: dict[str, dict[str, float]], output_
     ax1.set_xlim(min(alphas) * 0.95, max(alphas) * 1.05)
 
     ax2 = ax1.twinx()
-    ax2.errorbar(alphas, occ_means, yerr=occ_stds, marker="s", capsize=4, label="D_occ", color="#ff7f0e")
+    ax2.errorbar(
+        alphas,
+        occ_means,
+        yerr=occ_stds,
+        marker="s",
+        capsize=4,
+        label="D_occ",
+        color="#ff7f0e",
+    )
     ax2.set_ylabel("D_occ", color="#ff7f0e")
     ax2.tick_params(axis="y", labelcolor="#ff7f0e")
 
@@ -144,7 +217,12 @@ def make_plot(alphas: list[float], summary: dict[str, dict[str, float]], output_
     plt.close(fig)
 
 
-def make_plot_d_vs_n(alpha_values: list[float], curve_data: dict[float, dict[str, object]], output_path: Path, alpha_log: bool = False) -> None:
+def make_plot_d_vs_n(
+    alpha_values: list[float],
+    curve_data: dict[float, dict[str, object]],
+    output_path: Path,
+    alpha_log: bool = False,
+) -> None:
     fig, axs = plt.subplots(3, 1, figsize=(10, 14), sharex=True)
     metrics = [
         ("D_cov", "D_cov", "blue", 3.0),
@@ -158,7 +236,14 @@ def make_plot_d_vs_n(alpha_values: list[float], curve_data: dict[float, dict[str
         for idx, (key, label, color, ref) in enumerate(metrics):
             mean = np.asarray(data[f"{key}_mean"], dtype=float)
             std = np.asarray(data[f"{key}_std"], dtype=float)
-            axs[idx].plot(steps, mean, marker="o", markersize=3, color=color, label=f"alpha={alpha}")
+            axs[idx].plot(
+                steps,
+                mean,
+                marker="o",
+                markersize=3,
+                color=color,
+                label=f"alpha={alpha}",
+            )
             axs[idx].fill_between(steps, mean - std, mean + std, color=color, alpha=0.2)
             if ref is not None:
                 axs[idx].axhline(ref, color="gray", linestyle="--", alpha=0.7)
@@ -207,20 +292,26 @@ def main() -> None:
         print(f"Running alpha={alpha} with {args.n_seeds} seeds...")
         start = time.perf_counter()
 
-        simulate_fn = simulate_finite_memory_numba if args.use_numba else simulate_finite_memory
+        simulate_fn = (
+            simulate_finite_memory_numba if args.use_numba else simulate_finite_memory
+        )
         max_workers = min(args.n_seeds, (os.cpu_count() or 1))
         if args.mode == "alpha":
             seeds = list(range(1, args.n_seeds + 1))
             runs: list[dict[str, object]] = []
             with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as ex:
-                futures = [ex.submit(run_seed, cfg, seed, simulate_fn) for seed in seeds]
+                futures = [
+                    ex.submit(run_seed, cfg, seed, simulate_fn) for seed in seeds
+                ]
                 for f in concurrent.futures.as_completed(futures):
                     runs.append(f.result())
 
             elapsed = time.perf_counter() - start
-            d_cov_values = [run["D_cov"] for run in runs if not np.isnan(run["D_cov"]) ]
-            d_occ_values = [run["D_occ"] for run in runs if not np.isnan(run["D_occ"]) ]
-            d_spec_values = [run["D_spec"] for run in runs if not np.isnan(run["D_spec"]) ]
+            d_cov_values = [run["D_cov"] for run in runs if not np.isnan(run["D_cov"])]
+            d_occ_values = [run["D_occ"] for run in runs if not np.isnan(run["D_occ"])]
+            d_spec_values = [
+                run["D_spec"] for run in runs if not np.isnan(run["D_spec"])
+            ]
 
             stats = {
                 "D_cov_stats": summarize(d_cov_values),
@@ -236,7 +327,12 @@ def main() -> None:
             seeds = list(range(1, args.n_seeds + 1))
             curves: list[dict[str, object]] = []
             with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as ex:
-                futures = [ex.submit(run_stability_curve, cfg, seed, args.n_checkpoints, simulate_fn) for seed in seeds]
+                futures = [
+                    ex.submit(
+                        run_stability_curve, cfg, seed, args.n_checkpoints, simulate_fn
+                    )
+                    for seed in seeds
+                ]
                 for f in concurrent.futures.as_completed(futures):
                     curves.append(f.result())
             elapsed = time.perf_counter() - start
@@ -247,9 +343,15 @@ def main() -> None:
                 continue
 
             common_steps = curves[0]["sample_steps"][:min_len]
-            d_cov_arrays = np.vstack([np.asarray(curve["D_cov"][:min_len], dtype=float) for curve in curves])
-            d_occ_arrays = np.vstack([np.asarray(curve["D_occ"][:min_len], dtype=float) for curve in curves])
-            d_spec_arrays = np.vstack([np.asarray(curve["D_spec"][:min_len], dtype=float) for curve in curves])
+            d_cov_arrays = np.vstack(
+                [np.asarray(curve["D_cov"][:min_len], dtype=float) for curve in curves]
+            )
+            d_occ_arrays = np.vstack(
+                [np.asarray(curve["D_occ"][:min_len], dtype=float) for curve in curves]
+            )
+            d_spec_arrays = np.vstack(
+                [np.asarray(curve["D_spec"][:min_len], dtype=float) for curve in curves]
+            )
 
             d_cov_mean = np.full(d_cov_arrays.shape[1], np.nan, dtype=float)
             d_cov_std = np.full(d_cov_arrays.shape[1], 0.0, dtype=float)
@@ -269,13 +371,17 @@ def main() -> None:
                 if np.count_nonzero(valid_occ) > 0:
                     d_occ_mean[idx] = float(np.nanmean(d_occ_arrays[valid_occ, idx]))
                 if np.count_nonzero(valid_occ) > 1:
-                    d_occ_std[idx] = float(np.nanstd(d_occ_arrays[valid_occ, idx], ddof=1))
+                    d_occ_std[idx] = float(
+                        np.nanstd(d_occ_arrays[valid_occ, idx], ddof=1)
+                    )
 
                 valid_spec = np.isfinite(d_spec_arrays[:, idx])
                 if np.count_nonzero(valid_spec) > 0:
                     d_spec_mean[idx] = float(np.nanmean(d_spec_arrays[valid_spec, idx]))
                 if np.count_nonzero(valid_spec) > 1:
-                    d_spec_std[idx] = float(np.nanstd(d_spec_arrays[valid_spec, idx], ddof=1))
+                    d_spec_std[idx] = float(
+                        np.nanstd(d_spec_arrays[valid_spec, idx], ddof=1)
+                    )
 
             curve_data[alpha] = {
                 "sample_steps": common_steps,
@@ -292,14 +398,18 @@ def main() -> None:
 
     output_json = ROOT / args.output_json
     if args.mode == "alpha":
-        output_json.write_text(json.dumps({"summary": summary, "sweep_data": sweep_data}, indent=2))
+        output_json.write_text(
+            json.dumps({"summary": summary, "sweep_data": sweep_data}, indent=2)
+        )
         print(f"Wrote sweep data to {output_json}")
 
         plot_path = ROOT / args.output_plot
         make_plot(alpha_values, summary, plot_path, alpha_log=args.alpha_log)
         print(f"Wrote plot to {plot_path}")
     else:
-        output_json.write_text(json.dumps({"curve_data": curve_data, "sweep_data": sweep_data}, indent=2))
+        output_json.write_text(
+            json.dumps({"curve_data": curve_data, "sweep_data": sweep_data}, indent=2)
+        )
         print(f"Wrote D_vs_N data to {output_json}")
 
         plot_path = ROOT / args.output_plot
@@ -307,10 +417,12 @@ def main() -> None:
         print(f"Wrote D_vs_N plot to {plot_path}")
     if args.show:
         import matplotlib.pyplot as plt
+
         img = plt.imread(plot_path)
         plt.imshow(img)
-        plt.axis('off')
+        plt.axis("off")
         plt.show()
+
 
 if __name__ == "__main__":
     main()

@@ -11,6 +11,7 @@ from .kernels import double_gaussian_gradient, exponential_weights
 try:
     import numba
     from numba import njit
+
     _NUMBA_AVAILABLE = True
 except ImportError:
     _NUMBA_AVAILABLE = False
@@ -18,6 +19,7 @@ except ImportError:
     def njit(*args, **kwargs):
         def wrapper(func):
             return func
+
         return wrapper
 
 
@@ -38,7 +40,9 @@ class SimulationConfig:
     sample_every: int = 100
 
 
-def simulate_finite_memory(config: SimulationConfig, *, seed: int = 0) -> dict[str, np.ndarray]:
+def simulate_finite_memory(
+    config: SimulationConfig, *, seed: int = 0
+) -> dict[str, np.ndarray]:
     """Run a small finite-memory trajectory simulation.
 
     This is a clear reference path, not the high-performance implementation.
@@ -222,7 +226,9 @@ def _simulate_finite_memory_numba(
     return samples[:n_sample], sample_steps[:n_sample]
 
 
-def simulate_finite_memory_numba(config: SimulationConfig, *, seed: int = 0) -> dict[str, np.ndarray]:
+def simulate_finite_memory_numba(
+    config: SimulationConfig, *, seed: int = 0
+) -> dict[str, np.ndarray]:
     if not _NUMBA_AVAILABLE:
         raise ImportError("numba is not installed")
     samples, sample_steps = _simulate_finite_memory_numba(

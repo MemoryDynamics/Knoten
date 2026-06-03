@@ -22,7 +22,9 @@ def _as_points(points: Iterable[Iterable[float]]) -> np.ndarray:
     return arr
 
 
-def covariance_dimension(points: Iterable[Iterable[float]], *, rtol: float = 1e-12) -> float:
+def covariance_dimension(
+    points: Iterable[Iterable[float]], *, rtol: float = 1e-12
+) -> float:
     """Estimate effective dimension by covariance participation ratio.
 
     For covariance eigenvalues lambda_i, the diagnostic is
@@ -153,50 +155,49 @@ def residence_statistics(
 
 def spectral_dimension(points: Iterable[Iterable[float]]) -> float:
     """Estimate spectral dimension from heat kernel eigenvalue distribution.
-    
-    Uses normalized Laplacian spectrum: eigenvalues measure scale-dependence 
+
+    Uses normalized Laplacian spectrum: eigenvalues measure scale-dependence
     of local connectivity. Returns NaN if computation is unreliable.
     """
     pts = _as_points(points)
     if len(pts) < 100:
         return float("nan")
-    
+
     D2 = ((pts[:, None, :] - pts[None, :, :]) ** 2).sum(-1)
     eps = float(np.median(D2[D2 > 1e-10]))
     if not np.isfinite(eps) or eps <= 0.0:
         return float("nan")
-    
+
     K = np.exp(-D2 / eps)
-    
+
     # Normalize K to be more stable
     rowsums = K.sum(axis=1, keepdims=True)
     K_norm = K / (rowsums + 1e-12)
-    
+
     w = np.linalg.eigvalsh(K_norm)
-    
+
     # Filter out spurious eigenvalues
     w = w[(w > 1e-10) & (w < 1.0 - 1e-10)]
-    
+
     if len(w) < 2:
         return float("nan")
-    
+
     # Use only the largest eigenvalues that represent significant structure
-    w = np.sort(w)[-min(50, len(w)):]
-    
+    w = np.sort(w)[-min(50, len(w)) :]
+
     w_mean = float(np.mean(w))
     if not np.isfinite(w_mean) or w_mean <= 0.0:
         return float("nan")
-    
+
     log_ratio = float(np.log(w.max() / w_mean))
     if not np.isfinite(log_ratio) or log_ratio <= 0.0:
         return float("nan")
-    
+
     result = float(np.log(len(w)) / log_ratio)
     if not np.isfinite(result) or result < 0.5 or result > 10.0:
         return float("nan")
-    
-    return result
 
+    return result
 
 
 def bootstrap_mean_ci(

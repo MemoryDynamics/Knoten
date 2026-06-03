@@ -1,8 +1,10 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
 import os
 from multiprocessing import Pool, cpu_count
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
 matplotlib.use("Agg")
 
 # -------------------------
@@ -15,7 +17,7 @@ sigma = 1.0
 r0 = 0.5
 
 alpha_vals = np.logspace(-3, -0.3, 10)
-eta_vals   = np.linspace(0.2, 2.0, 10)
+eta_vals = np.linspace(0.2, 2.0, 10)
 
 # Anzahl Prozesse (ggf. anpassen)
 N_PROCESSES = min(4, cpu_count())
@@ -121,7 +123,11 @@ def spectral_dimension(alpha, eta, n_ens=N_ens, n_proc=N_PROCESSES):
     args_list = []
     for b in range(n_batches):
         # Letzte Batch ggf. kleiner
-        bs = batch_size if (b < n_batches - 1) else (n_ens - batch_size * (n_batches - 1))
+        bs = (
+            batch_size
+            if (b < n_batches - 1)
+            else (n_ens - batch_size * (n_batches - 1))
+        )
         args_list.append((alpha, eta, bs, base_seed, b))
 
     if n_proc > 1:
@@ -189,18 +195,17 @@ def compute_heatmap(alpha_vals, eta_vals):
 
     return D
 
-def plot_heatmap(D, alpha_vals, eta_vals, filename="spectral_dimension_heatmap_optimized.pdf"):
+
+def plot_heatmap(
+    D, alpha_vals, eta_vals, filename="spectral_dimension_heatmap_optimized.pdf"
+):
     plt.figure(figsize=(6, 4))
 
     # Für alpha bietet sich log-Skala an
     extent = [eta_vals[0], eta_vals[-1], alpha_vals[0], alpha_vals[-1]]
 
     im = plt.imshow(
-        D,
-        origin="lower",
-        extent=extent,
-        aspect="auto",
-        interpolation="nearest"
+        D, origin="lower", extent=extent, aspect="auto", interpolation="nearest"
     )
 
     plt.xlabel("eta")
@@ -211,6 +216,7 @@ def plot_heatmap(D, alpha_vals, eta_vals, filename="spectral_dimension_heatmap_o
     plt.tight_layout()
     plt.savefig(filename, dpi=200)
     plt.close()
+
 
 if __name__ == "__main__":
     D = compute_heatmap(alpha_vals, eta_vals)

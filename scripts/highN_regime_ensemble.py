@@ -11,10 +11,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (
     SimulationConfig,
+    bootstrap_mean_ci,
     covariance_dimension,
     occupancy_dimension,
     residence_statistics,
-    bootstrap_mean_ci,
     simulate_finite_memory,
 )
 
@@ -27,23 +27,63 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument("--seed-start", type=int, default=1, help="Starting seed")
-    parser.add_argument("--n-seeds", type=int, default=5, help="Number of consecutive seeds to run")
-    parser.add_argument("--seeds", type=str, default="", help="Comma-separated explicit seed list")
-    parser.add_argument("--steps", type=int, default=20000, help="Number of update steps")
-    parser.add_argument("--sample-every", type=int, default=2000, help="Sampling interval for post-burn-in samples")
+    parser.add_argument(
+        "--n-seeds", type=int, default=5, help="Number of consecutive seeds to run"
+    )
+    parser.add_argument(
+        "--seeds", type=str, default="", help="Comma-separated explicit seed list"
+    )
+    parser.add_argument(
+        "--steps", type=int, default=20000, help="Number of update steps"
+    )
+    parser.add_argument(
+        "--sample-every",
+        type=int,
+        default=2000,
+        help="Sampling interval for post-burn-in samples",
+    )
     parser.add_argument("--burn-in", type=int, default=0, help="Burn-in steps")
-    parser.add_argument("--max-memory", type=int, default=3000, help="Maximum memory horizon")
+    parser.add_argument(
+        "--max-memory", type=int, default=3000, help="Maximum memory horizon"
+    )
     parser.add_argument("--epsilon", type=float, default=0.03, help="Noise step size")
     parser.add_argument("--eta", type=float, default=0.15, help="Gradient strength")
-    parser.add_argument("--alpha", type=float, default=0.002, help="Memory decay parameter")
-    parser.add_argument("--sigma-rep", type=float, default=1.0, help="Repulsive kernel width")
-    parser.add_argument("--sigma-att", type=float, default=3.0, help="Attractive kernel width")
-    parser.add_argument("--amplitude-rep", type=float, default=1.0, help="Repulsive kernel amplitude")
-    parser.add_argument("--amplitude-att", type=float, default=0.35, help="Attractive kernel amplitude")
-    parser.add_argument("--memory-factor", type=float, default=6.0, help="Memory factor for horizon")
-    parser.add_argument("--voxel-size", type=float, default=0.5, help="Voxel size for residence statistics")
-    parser.add_argument("--n-scales", type=int, default=10, help="Number of box scales for occupancy dimension fit")
-    parser.add_argument("--min-count", type=int, default=2, help="Minimum number of occupied boxes per scale")
+    parser.add_argument(
+        "--alpha", type=float, default=0.002, help="Memory decay parameter"
+    )
+    parser.add_argument(
+        "--sigma-rep", type=float, default=1.0, help="Repulsive kernel width"
+    )
+    parser.add_argument(
+        "--sigma-att", type=float, default=3.0, help="Attractive kernel width"
+    )
+    parser.add_argument(
+        "--amplitude-rep", type=float, default=1.0, help="Repulsive kernel amplitude"
+    )
+    parser.add_argument(
+        "--amplitude-att", type=float, default=0.35, help="Attractive kernel amplitude"
+    )
+    parser.add_argument(
+        "--memory-factor", type=float, default=6.0, help="Memory factor for horizon"
+    )
+    parser.add_argument(
+        "--voxel-size",
+        type=float,
+        default=0.5,
+        help="Voxel size for residence statistics",
+    )
+    parser.add_argument(
+        "--n-scales",
+        type=int,
+        default=10,
+        help="Number of box scales for occupancy dimension fit",
+    )
+    parser.add_argument(
+        "--min-count",
+        type=int,
+        default=2,
+        help="Minimum number of occupied boxes per scale",
+    )
     parser.add_argument(
         "--output",
         type=str,
@@ -70,7 +110,14 @@ def parse_seed_list(seed_text: str, start: int, count: int) -> list[int]:
     return seeds
 
 
-def run_seed(cfg: SimulationConfig, seed: int, *, voxel_size: float, n_scales: int, min_count: int) -> dict:
+def run_seed(
+    cfg: SimulationConfig,
+    seed: int,
+    *,
+    voxel_size: float,
+    n_scales: int,
+    min_count: int,
+) -> dict:
     result = simulate_finite_memory(cfg, seed=seed)
     samples = result["samples"]
     d_cov = covariance_dimension(samples)
@@ -128,11 +175,21 @@ def main() -> None:
     start = time.perf_counter()
     for seed in seeds:
         print(f"Running seed={seed}...")
-        runs.append(run_seed(cfg, seed, voxel_size=args.voxel_size, n_scales=args.n_scales, min_count=args.min_count))
+        runs.append(
+            run_seed(
+                cfg,
+                seed,
+                voxel_size=args.voxel_size,
+                n_scales=args.n_scales,
+                min_count=args.min_count,
+            )
+        )
     elapsed = time.perf_counter() - start
 
     d_cov_values = [run["D_cov"] for run in runs]
-    d_occ_values = [run["D_occ"] for run in runs if not __import__("math").isnan(run["D_occ"])]
+    d_occ_values = [
+        run["D_occ"] for run in runs if not __import__("math").isnan(run["D_occ"])
+    ]
 
     stats = {
         "seed_list": seeds,
@@ -144,7 +201,9 @@ def main() -> None:
         "voxel_size": args.voxel_size,
         "n_seeds": len(seeds),
         "elapsed_seconds": float(elapsed),
-        "steps_per_second": float(args.steps * len(seeds) / elapsed) if elapsed > 0 else None,
+        "steps_per_second": (
+            float(args.steps * len(seeds) / elapsed) if elapsed > 0 else None
+        ),
         "regime": {
             "dim": 7,
             "epsilon": args.epsilon,
@@ -158,12 +217,16 @@ def main() -> None:
         },
         "runs": runs,
         "D_cov_stats": summarize(d_cov_values, "D_cov"),
-        "D_occ_stats": summarize(d_occ_values, "D_occ") if d_occ_values else {
-            "mean": float("nan"),
-            "std": float("nan"),
-            "ci_95_lo": float("nan"),
-            "ci_95_hi": float("nan"),
-        },
+        "D_occ_stats": (
+            summarize(d_occ_values, "D_occ")
+            if d_occ_values
+            else {
+                "mean": float("nan"),
+                "std": float("nan"),
+                "ci_95_lo": float("nan"),
+                "ci_95_hi": float("nan"),
+            }
+        ),
     }
 
     output_path = Path(args.output)

@@ -1,14 +1,17 @@
 import os
 import time
+
 import numpy as np
 
 src = "progress.npy"
+
 
 def wait_until_stable(path, delay=0.5):
     size1 = os.path.getsize(path)
     time.sleep(delay)
     size2 = os.path.getsize(path)
     return size1 == size2
+
 
 # Warten, bis die Datei nicht mehr wächst
 while not wait_until_stable(src):

@@ -8,9 +8,11 @@
 #
 # This scaffold is meant to be PRL-quality and extensible.
 
-import numpy as np
+import ctypes
+import os
+
 import matplotlib.pyplot as plt
-import ctypes, os
+import numpy as np
 
 # CPU-Affinity: Kerne 0–3
 ctypes.windll.kernel32.SetProcessAffinityMask(os.getpid(), 0b1111)
@@ -35,7 +37,7 @@ np.random.seed(1)
 # Kernel
 # -----------------------------
 def gradK(r, sigma=1.0):
-    return -(r / sigma ** 2) * np.exp(-0.5 * (r / sigma) ** 2)
+    return -(r / sigma**2) * np.exp(-0.5 * (r / sigma) ** 2)
 
 
 # -----------------------------
@@ -98,7 +100,7 @@ def detect_onset(signal):
     sigma = pre.std()
 
     for n in range(kick_time, T - m_consec):
-        if np.all(signal[n:n + m_consec] > sigma_cut * sigma):
+        if np.all(signal[n : n + m_consec] > sigma_cut * sigma):
             return n - kick_time
     return np.nan
 
@@ -130,7 +132,7 @@ for L in Ls:
     onsets.append(detect_onset(delta))
 
 plt.figure()
-plt.plot(Ls, onsets, marker='o')
+plt.plot(Ls, onsets, marker="o")
 plt.xlabel("distance L")
 plt.ylabel("onset delay Δn")
 plt.title("Diagram 2: Time-of-flight")
@@ -148,7 +150,7 @@ for a in alphas:
     c_eff.append(L0 / dt if dt == dt else np.nan)
 
 plt.figure()
-plt.plot(alphas, c_eff, marker='o')
+plt.plot(alphas, c_eff, marker="o")
 plt.xlabel("alpha")
 plt.ylabel("effective speed c_eff")
 plt.title("Diagram 3: Scaling of c_eff")

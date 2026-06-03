@@ -27,11 +27,25 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument("--seed", type=int, default=1, help="RNG seed")
-    parser.add_argument("--steps", type=int, default=20000, help="Number of update steps")
-    parser.add_argument("--sample-every", type=int, default=2000, help="Sampling interval for post-burn-in samples")
+    parser.add_argument(
+        "--steps", type=int, default=20000, help="Number of update steps"
+    )
+    parser.add_argument(
+        "--sample-every",
+        type=int,
+        default=2000,
+        help="Sampling interval for post-burn-in samples",
+    )
     parser.add_argument("--burn-in", type=int, default=0, help="Burn-in steps")
-    parser.add_argument("--max-memory", type=int, default=3000, help="Maximum memory horizon")
-    parser.add_argument("--voxel-size", type=float, default=0.5, help="Voxel size for residence statistics")
+    parser.add_argument(
+        "--max-memory", type=int, default=3000, help="Maximum memory horizon"
+    )
+    parser.add_argument(
+        "--voxel-size",
+        type=float,
+        default=0.5,
+        help="Voxel size for residence statistics",
+    )
     parser.add_argument(
         "--output",
         type=str,
@@ -122,7 +136,9 @@ def main() -> None:
         "scales": occ_result.scales.tolist(),
         "counts": occ_result.counts.tolist(),
     }
-    stats["residence"] = residence_statistics(samples, voxel_size=args.voxel_size, min_visits=3)
+    stats["residence"] = residence_statistics(
+        samples, voxel_size=args.voxel_size, min_visits=3
+    )
 
     output_path = Path(args.output)
     if not output_path.is_absolute():
