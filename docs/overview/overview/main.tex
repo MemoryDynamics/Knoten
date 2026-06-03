@@ -1,0 +1,209 @@
+\documentclass[11pt,a4paper]{article}
+
+% -------------------------------------------------
+% Pakete (arXiv-sicher, konservativ)
+% -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{bm}
+
+% -------------------------------------------------
+% Eigene Makros
+% -------------------------------------------------
+\renewcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+% -------------------------------------------------
+% Titelinformationen
+% -------------------------------------------------
+\title{Emergente Raumzeit aus einer einzelnen Trajektorie mit Gedächtnis \\ \large{Foundational Notes (Working Preprint)}}
+\author{ }
+\date{ }
+
+% -------------------------------------------------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Wir formulieren ein minimales, nicht-geometrisches und nicht-quantentheoretisches Modell, in dem Raumzeitstruktur, makroskopische Zeit und gravitative Dynamik aus der Statistik einer einzelnen stochastischen Trajektorie mit Gedächtnis emergieren. Weder Raum, Zeit noch eine Metrik werden postuliert. Stattdessen propagiert ein punktförmiger Generator in einem abstrakten Zustandsraum und wechselwirkt mit seiner eigenen Historie über ein Gedächtnisfeld. Wir zeigen, dass Irreversibilit\"at, effektive Dimensionalit\"at, Lokalität, geodätische Bewegung und die Einstein-Gleichungen als notwendige Konsistenzbedingungen im grobgek\"ornten Limes entstehen. Das vorliegende Dokument dient als Fundament für weiterführende Arbeiten zu Quantisierung, Nahfeldphysik und internen Freiheitsgraden.
+\end{abstract}
+
+% =================================================
+\section{Einleitung und Motivation}
+
+Die Vereinheitlichung von Gravitation und Quantenmechanik legt nahe, dass Raumzeit keine fundamentale Entität ist. Zahlreiche Ansätze verfolgen die Idee einer emergenten Geometrie, postulieren jedoch häufig Zeit, Dimension oder metrische Strukturen bereits auf fundamentaler Ebene.
+
+Ziel dieser Arbeit ist es, einen streng minimalen Ansatz zu formulieren, in dem keine dieser Strukturen vorausgesetzt wird. Alle makroskopischen Begriffe sollen sich als zwingende Konsequenzen statistischer Konsistenz ergeben.
+
+% =================================================
+\section{Fundamentales Modell}
+
+\subsection{Ontologie}
+
+Der fundamentale Zustand nach dem $n$-ten Update ist gegeben durch
+\begin{equation}
+\sigma_n = (x_n, \rho_n),
+\end{equation}
+
+wobei $x_n$ die Position eines Generators in einem abstrakten Zustandsraum $\Omega$ bezeichnet und $\rho_n$ eine normierte Gedächtnisdichte ist. Auf $\Omega$ wird keine geometrische oder dimensionale Struktur angenommen.
+
+\subsection{Mikroskopische Dynamik}
+
+Die Dynamik ist definiert durch
+\begin{equation}
+ x_{n+1} = x_n + \varepsilon \, \xi_n - \eta \, \nabla \Phi(x_n),
+\end{equation}
+
+mit Gedächtnispotential
+\begin{equation}
+ \Phi(x) = \int K(x,y)\, \rho(y)\, \dd y.
+\end{equation}
+
+Die Zufallsvariable $\xi_n$ ist zentriert und kurz korreliert. Der Kernel $K$ sei isotrop und integrierbar. Für kleine n wird $\nabla$ diskret und das Integral als Summe repräsentiert.
+
+Das Gedächtnis wird aktualisiert durch
+\begin{equation}
+ \rho_{n+1} = (1-\alpha)\, \rho_n + \alpha \, \delta(x-x_{n+1}).
+\end{equation}
+
+Diese Update-Regel ist nicht invertierbar und stellt die einzige Quelle von Irreversibilität dar.
+
+% =================================================
+\section{Emergenz der Zeit}
+
+In diesem Kapitel wird gezeigt, dass Zeit in dem vorliegenden Modell keine fundamentale Koordinate darstellt, sondern als makroskopische Ordnungsstruktur aus irreversibler Gedächtnisdynamik emergiert. Insbesondere wird zwischen der mikroskopischen Update-Ordnung $n$ und einem physikalisch interpretierbaren Zeitbegriff strikt unterschieden.
+
+Der Update-Index $n$ besitzt keine physikalische Bedeutung. Zeit entsteht erst durch die irreversible Kompression von Information im Gedächtnis. Wir zeigen, dass ein makroskopischer Zeitparameter als reparametrisierungsinvariante Ordnungsstruktur aus der Gedächtnisrelaxation hervorgeht.
+
+% =================================================
+\section{Emergenz der Dimensionalit\"at}
+
+Wir definieren die effektive Dimension als die Anzahl asymptotisch entkoppelter Richtungen, in denen sich Trajektorien stabil trennen können. Es wird gezeigt, dass
+\begin{itemize}
+ \item $d=1$ keine Streuung erlaubt,
+ \item $d=2$ zur Rekurrenz und Kollaps f\"uhrt,
+ \item $d\geq 4$ durch stochastische Dispersion instabil ist,
+ \item $d=3$ der einzige robuste Fixpunkt ist.
+\end{itemize}
+
+Die technischen Details sind in Anhang~C dargestellt.
+
+% =================================================
+\section{Makroskopische Observablen}
+
+\subsection{Besuchsdichte}
+
+\begin{equation}
+ P(x) = \lim_{N\to\infty} \frac{1}{N} \sum_{n=1}^N \delta(x-x_n).
+\end{equation}
+
+\subsection{Korrelationen}
+
+\begin{equation}
+ C_{ab}(\Delta n) = \langle (x^a_{n+\Delta n}-x^a_n) \cdot (x^b_{n+\Delta n}-x^b_n) \rangle.
+\end{equation}
+
+\subsection{Energie-Impuls-Tensor}
+
+\begin{equation}
+ T_{ij}(x) \propto \langle \Delta x_i \, \Delta x_j \rangle_x.
+\end{equation}
+
+% =================================================
+\section{Lokalit\"at und Reparametrisierungsinvarianz}
+
+Es wird gezeigt, dass alle makroskopischen Observablen invariant unter monotonen Reparametrisierungen $n \mapsto f(n)$ sind und dass die Dynamik im Fernfeld ausschließlich von lokalen Gedächtnisbeiträgen abhängt.
+
+% =================================================
+\section{Effektive Wirkung und geod\"atische Bewegung}
+
+Aus Reparametrisierungsinvarianz folgt eine effektive Wirkung der Form
+\begin{equation}
+ S[x] = \int \sqrt{\dd x^T \, G(x) \, \dd x}.
+\end{equation}
+
+Statistische Konsistenz erzwingt die Identifikation
+\begin{equation}
+ G_{ij}(x) \propto \partial_i \partial_j \Phi(x).
+\end{equation}
+
+Die Euler--Lagrange-Gleichungen liefern geodätische Bewegung.
+
+% =================================================
+\section{Emergente Feldgleichungen}
+
+Aus der Kontinuität der Trajektorie folgt
+\begin{equation}
+ \nabla^i T_{ij} = 0.
+\end{equation}
+
+In $3+1$ Dimensionen ist der einzige lokale, divergentenfreie Tensor zweiter Ordnung der Einstein-Tensor. Die Einstein-Gleichungen ergeben sich somit als Konsistenzbedingung.
+
+% =================================================
+\section{G\"ultigkeitsbereich und offene Probleme}
+
+Nicht behandelt werden Quantisierung, Nahfeldphysik, interne Freiheitsgrade sowie Eichsymmetrien. Diese Aspekte erfordern feineres Coarse Graining und sind Gegenstand zukünftiger Arbeiten.
+
+% =================================================
+\appendix
+
+\section{Variationsproblem und Signaturselektion (Robustheitsanalyse)}
+\subsection{Geod\"atische Wirkung und Reparametrisierungsinvarianz}
+Wir betrachten die reparametrisierungsinvariante Wirkung $S=\int \sqrt{G_{ij}(x)\,\dot x^i\dot x^j}\,\mathrm d\lambda$. Die Euler--Lagrange-Gleichungen liefern Geod\"aten unabh\"angig von der Signatur von $G_{ij}$. Reparametrisierungsfreiheit eliminiert genau eine longitudinale Richtung.
+
+\subsection{Zweite Variation und Stabilit\"at}
+Die zweite Variation besitzt die Standardform $\delta^2 S=\int[(G_{ij}D_\lambda\delta x^i D_\lambda\delta x^j)-(R_{ikjl}\dot x^k\dot x^l\delta x^i\delta x^j)]\,\mathrm d\lambda/L$. Stabilit\"at erfordert Positivit\"at modulo Gauge.
+
+\subsection{Signaturklassifikation}
+(i) Positiv definite Signatur: konvex, aber ohne ausgezeichnete Zeit und ohne Kausalstruktur. (ii) Mehrere negative Eigenwerte: unbeschr\"ankt nach unten, instabil. (iii) Genau eine negative Eigenrichtung: stabil modulo Gauge. \textbf{Nur Fall (iii) ist physikalisch konsistent}.
+
+\subsection{R\"uckkopplung an die Statistik}
+Aus der Trajektorienstatistik folgt $T_{ij}=v_i v_j+\varepsilon^2\sigma^2\delta_{ij}$ mit eindeutigem Eigenvektor $u^i=v^i/|v|$. Diese Richtung stimmt mit der im Variationsproblem selektierten Zeitrichtung \"uberein.
+
+\subsection{Kontrollgr\"o\ss e}
+Die dimensionslose Kontrollgr\"o\ss e $\mathcal R=\lambda_\parallel/\lambda_\perp=1+|v|^2/(\varepsilon^2\sigma^2)$ misst die Stabilit\"at der Zeitrichtung; ihr Kehrwert ist ein Raum--Zeit-Verh\"altnis.
+
+\subsection{Grenzf\"alle und Exotika}
+$\alpha\to0$: zeitlos. $\alpha\gg\varepsilon$: klassische Raumzeit. Anisotropes oder nicht-gau\ss sches Rauschen ist RG-irrelevant. Mehrere Ged\"achtniskerne brechen zur dominanten Zeitrichtung.
+
+\section{Explizites Beispiel (flach)}
+F\"ur $G_{ij}=\delta_{ij}$ und Drift $v^i=(v,0,\dots)$ ergibt sich $T_{ij}=\mathrm{diag}(v^2+\varepsilon^2\sigma^2,\varepsilon^2\sigma^2,\dots)$, womit die Eigenwerttrennung und die Selektion einer Zeitrichtung unmittelbar sichtbar sind.
+
+\section{Robustheits-Stresstest (Zusammenfassung)}
+Systematische Gegenargumente (Gauge-Artefakte, implizite Lorentzannahmen, Koordinateneffekte, Kr\"ummung, multiple Zeiten, Anisotropie, Mehrkern-Ged\"achtnis, Thermodynamik-Einwand, Wick-Trick) f\"uhren zu keiner konsistenten Verletzung der obigen Ergebnisse.
+
+
+\section{Reparametrisierungsinvarianz}
+
+Vollständiger Beweis der Invarianz von $P(x)$, $C_{ab}$ und $\langle \nabla \Phi \rangle$.
+
+\section{Stabilit\"at von Knotentypen}
+
+Lineare Stabilitätsanalyse, Rolle der minimalen Eigenwerte der Hesse-Matrix.
+
+\section{Emergente Dimensionalit\"at}
+
+Rekurrenzargumente, Skalierung mit der Dimension und marginaler Charakter von $d=4$.
+
+\section{Diskret--Kontinuum-Limes}
+
+Herleitung der effektiven Wirkung aus diskreten Updates.
+
+\section{Divergenzfreiheit von $T_{ij}$}
+
+Ableitung aus der Kontinuitätsgleichung der Besuchsdichte.
+
+% =================================================
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
