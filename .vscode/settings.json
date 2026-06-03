@@ -5,6 +5,18 @@
         "/^& \"C:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten\\\\\\.venv\\\\Scripts\\\\python\\.exe\" \"C:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten\\\\tmp_speccovfrac_mini_out\\.py\"$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^cd c:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten; `\nNew-Item -Path experiments/dimension_selection -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path experiments/propagation_speed -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path experiments/knot_stability -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path experiments/ou_limit -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path experiments/fractal_analysis -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path experiments/legacy -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path data/raw -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path data/processed -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path figures/draft -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path figures/paper -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path paper/paper_i -ItemType Directory -Force \\| Out-Null; `\nNew-Item -Path paper/paper_ii -ItemType Directory -Force \\| Out-Null; `\nWrite-Host \"✓ Verzeichnisstruktur erstellt\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd c:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten; `\n# === experiments/knot_stability: Frühe Knoten-Modelle ===\nMove-Item -Path Knoten\\.py -Destination experiments/knot_stability/ -Force; `\nMove-Item -Path Knoten3D\\.py -Destination experiments/knot_stability/ -Force; `\nMove-Item -Path Knoten3D_prism\\.py -Destination experiments/knot_stability/ -Force; `\nMove-Item -Path knot_chi_scan\\.py -Destination experiments/knot_stability/ -Force; `\nWrite-Host \"✓ knot_stability: 4 Dateien\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd c:\\\\Users\\\\Hauke\\\\Documents\\\\Emergenz_Knoten; `\n# === experiments/knot_stability: Frühe Knoten-Modelle ===\ngit mv Knoten\\.py experiments/knot_stability/; `\ngit mv Knoten3D\\.py experiments/knot_stability/; `\ngit mv Knoten3D_prism\\.py experiments/knot_stability/; `\ngit mv knot_chi_scan\\.py experiments/knot_stability/; `\nWrite-Host \"✓ knot_stability: 4 Dateien mit git mv\"$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
