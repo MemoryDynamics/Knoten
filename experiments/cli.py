@@ -39,6 +39,8 @@ CATEGORIES = {
         "OU-Limit.py",
     ],
     "fractal_analysis": [
+        "analyze_dimension_claim.py",
+        "reproduce_dimension_pilot.py",
         "Fraktale/FD2.py",
         "Fraktale/Fraktaldimension.py",
         "Fraktale/fit_n_plot.py",
