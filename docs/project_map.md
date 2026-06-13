@@ -115,11 +115,24 @@ experiments/
 
 data/
   raw/
+    alpha/
+    heatmap/
+    highN_regime/
+    progress/
+    reference/
+    sweep_alpha/
   processed/
+    alpha/
+    heatmap/
+    highN_regime/
+    progress/
+    reference/
+    sweep_alpha/
 
-figures/
-  draft/
-  paper/
+docs/
+  overview/
+
+tests/
 
 paper/
   paper_i/

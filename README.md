@@ -140,13 +140,13 @@ reports/                    # datierte Audits und Ergebnisberichte
 Ein erster leichter Referenzkern liegt unter `src/emergenz_knoten`.
 Er umfasst Kernelgradienten, eine kleine finite-memory Simulation und
 Diagnostiken fuer Kovarianzdimension, Occupancy-Dimension, Residence und
-Bootstrap-CI. Zum reproduzierbaren Referenzlauf steht auch `scripts/reference_experiment.py` bereit.
-Die Tests laufen mit der gebuendelten Codex-Python-Runtime:
+Bootstrap-CI. Zum reproduzierbaren Referenzlauf steht
+`experiments/reference_experiment.py` bereit.
+Die Kernlogik laesst sich mit der gebuendelten Codex-Python-Runtime pruefen,
+wenn `PYTHONPATH` auf `src` gesetzt wird:
 
 ```powershell
+$env:PYTHONPATH="src"
 & "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" tests\test_core.py
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\smoke_test.py
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output reference_experiment.json
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\highN_regime.py --steps 20000 --sample-every 2000 --output highN_regime.json
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\highN_regime_validation.py --steps 20000 --sample-every 2000 --output highN_regime_validation.json
+& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" experiments\reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
 ```
