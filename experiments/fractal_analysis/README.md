@@ -43,6 +43,38 @@ und faellt sonst auf eine vektorisierte NumPy-Implementierung zurueck. Ergebniss
 landen standardmaessig in
 `data/processed/fractal_analysis/dimension_reproduction_pilot.json`.
 
+Historischer Alpha-Sweep mit bewusst beibehaltenem `max_memory=300` und
+historischer Kopplung:
+
+```bash
+python experiments/fractal_analysis/reproduce_dimension_pilot.py ^
+  --dims 3,4,5,6 ^
+  --alpha-list 0.005,0.0075,0.01,0.015,0.02 ^
+  --steps-list 300000,1000000,2500000 ^
+  --conditions baseline ^
+  --engine auto
+```
+
+Entkoppelter Kontroll-Sweep mit konstantem `eta*alpha` und Speicherhorizont
+nach 95 Prozent Gewichtsmasse:
+
+```bash
+python experiments/fractal_analysis/reproduce_dimension_pilot.py ^
+  --dims 3,4,5,6 ^
+  --alpha-list 0.005,0.0075,0.01,0.015,0.02 ^
+  --steps-list 300000,1000000 ^
+  --conditions baseline ^
+  --coupling-mode fixed-eta-alpha ^
+  --eta-alpha-target 0.02 ^
+  --memory-mode tail-mass ^
+  --memory-tail-mass 0.95 ^
+  --engine auto
+```
+
+Jede Ergebniszeile dokumentiert `alpha`, `eta`, `eta_alpha`,
+`uncapped_horizon`, `used_horizon` und `stored_weight_mass`, damit Alpha nicht
+unbemerkt als mehrere Parameter zugleich interpretiert wird.
+
 ## Theoretical Mapping
 
 Siehe [docs/THEORETICAL_CONTEXT.md](../../docs/THEORETICAL_CONTEXT.md) — Fokus auf

@@ -1,6 +1,10 @@
 # Reproduzierbarkeitsstatus
 
-Stand: 2026-05-22.
+Stand: 2026-06-13.
+
+Update 2026-06-13: `main` ist die Arbeitslinie. Der ehemalige `cleanup`-Stand
+wurde als `origin/main` gepusht und der GitHub-Default-Branch wurde vom Nutzer
+auf `main` gesetzt.
 
 Update 2026-06-01: Eine gebuendelte Codex-Python-Runtime ist verfuegbar und
 reicht fuer kleine NumPy/Pandas-basierte Tests. Die lokale Projekt-`.venv`
@@ -8,10 +12,11 @@ bleibt defekt.
 
 ## Git
 
-- Repository vorhanden.
-- Noch kein Commit auf `master`.
-- Fast alle Dateien sind unversioniert.
-- Empfehlung: Erst Baseline committen, danach strukturelles Refactoring.
+- Repository: `https://github.com/MemoryDynamics/Knoten`
+- Arbeitsbranch: `main`
+- Historischer Branch `cleanup` bleibt als Referenz vorhanden.
+- Alter `master`-Branch zeigt nur auf den Baseline-Import und sollte nicht mehr
+  fuer neue Arbeit verwendet werden.
 
 ## Lokale Tools
 
@@ -28,7 +33,11 @@ PDF-Metadaten:
 
 ## Python
 
-Beim Audit wurde kein globales `python`/`py` auf PATH gefunden.
+Beim Audit wurde aus der Codex-Umgebung kein globales `python`/`py` auf PATH
+gefunden. Der Nutzer meldet, dass
+`experiments/fractal_analysis/reproduce_dimension_pilot.py` aus seiner
+PowerShell heraus mit `numba` laeuft; diese Umgebung ist aus Codex heraus
+aktuell nicht direkt sichtbar.
 
 Die vorhandenen virtuellen Umgebungen sind nicht lauffaehig:
 
@@ -57,7 +66,7 @@ Verfuegbar fuer leichte Tests:
 C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
 ```
 
-Geprueft am 2026-06-01:
+Geprueft am 2026-06-13:
 
 - Python 3.12.13
 - `numpy` vorhanden
@@ -77,8 +86,9 @@ Beispiel:
 C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output reference_experiment.json
 ```
 
-Damit sind kleine Referenztests moeglich, aber keine Reproduktion der
-historischen Plot-/Numba-/GPU-Skripte.
+Damit sind kleine Referenztests moeglich. Fuer die langen Fraktal- und
+Dimensionslaeufe sollte die vom Nutzer genannte PowerShell/Numba-Umgebung
+verwendet werden.
 
 ## Laufzeitrisiken
 
