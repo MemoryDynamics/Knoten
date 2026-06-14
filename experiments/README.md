@@ -1,58 +1,58 @@
 # Experiments
 
-Dieses Verzeichnis enthält die sauber strukturierten Reproduktions- und
-Explorationszugänge für den Emergenz-Knoten-Kern.
+Stand: 2026-06-14.
 
-## Struktur
+Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
+Explorationsskripte fuer den Emergenz-Knoten-Kern.
 
-- `dimension_selection/` — Experimente zur effektiven Dimensionswahl und zum
-  Einfluss verschiedener Kernel-Parameter.
-- `propagation_speed/` — Messungen zur Ausbreitungsgeschwindigkeit, Time-of-
-  Flight und Signalfronten.
-- `knot_stability/` — historische Knoten- und Trajektorienläufe mit Fokus auf
-  metastabile Strukturen.
-- `ou_limit/` — OU-Kontrollläufe und analytische Grenzfälle.
-- `fractal_analysis/` — Box-counting und Occupancy-Dimensionen.
-- `LQG/` — orbitartige Explorationslaeufe und Kruemmungsstatistiken.
-- `legacy/` — Alte Scripts und uneingepasste Explorationsläufe. Diese bleiben
-  als Referenz erhalten, aber neue Reproduktion sollte aus den anderen
-  Unterverzeichnissen erfolgen.
-
-## Workflow
-
-1. Installiere das Paket im Entwicklungsmodus:
-
-```bash
-python -m pip install -e .
-```
-
-2. Der erste reproduzierbare Einstiegspunkt ist `experiments/reference_experiment.py`.
-3. Für kategorisierte Experimente kannst du `experiments/cli.py` verwenden.
+## Aktive Einstiege
 
 ```bash
 python experiments/cli.py --list
-python experiments/cli.py dimension_selection --list
-python experiments/cli.py dimension_selection --script DimensionsHeatmap.py
+python experiments/cli.py reference --list
+python experiments/cli.py reference --script reference_experiment.py
+python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
 ```
 
-4. Wähle ein Experimentverzeichnis und prüfe vorhandene Skripte.
-5. Erzeuge eine neue, reproduzierbare Version eines Laufs mit klaren
-   Eingabedaten und Ausgabeformaten.
-6. Speichere Resultate in `data/raw/` oder `data/processed/` und beschreibe
-   Parameter in einer separaten Metadatei, wenn möglich.
+## Struktur
 
-## Ziel
+- `reference_experiment.py`: kleiner reproduzierbarer Referenzlauf.
+- `cli.py`: kategorisierte Steuerung vorhandener Skripte.
+- `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
+- `fractal_analysis/`: Box-counting, Occupancy-Dimension,
+  Dimensionsclaim-Audit und Reproduktionspiloten.
+- `propagation_speed/`: Time-of-flight, retarded response, Signalfronten.
+- `knot_stability/`: Knoten- und Trajektorienlaeufe.
+- `ou_limit/`: OU-Kontrollen und analytische Grenzfaelle.
+- `LQG/`: orbitartige Explorationslaeufe und Kruemmungsstatistiken.
+- `legacy/`: alte Skripte und temporaere Tests.
 
-- Historische Explorationsskripte werden nicht gelöscht, sondern als `legacy`
-  archiviert.
-- Neue Experiment-Entry-Points sollen den Paketkern `emergenz_knoten`
-  nutzen, statt auf rohe Skripte mit hartkodierten Pfaden.
-- Die Dokumentation soll klar machen, welche Ordner für welchen Zweck da
-  sind.
+## Workflow fuer neue Experimente
 
-## Theoretical Context
+1. Wenn moeglich den Paketkern `src/emergenz_knoten` nutzen.
+2. Parameter, Seeds, Git-Revision und Runtime dokumentieren.
+3. Outputs unter `data/processed/<thema>/` speichern.
+4. Diagnostikversion und Fitfenster im JSON oder Report festhalten.
+5. Negativkontrollen frueh planen, aber zuerst dort laufen lassen, wo ein
+   Baseline-Signal sichtbar ist.
 
-Für die Einordnung der Experimente siehe [docs/THEORETICAL_CONTEXT.md](../docs/THEORETICAL_CONTEXT.md)
-— dort sind die zentralen theoretischen Aussagen (Zeit, Raum, Knoten, ℏ_eff)
-kompakt zusammengefasst und mit den passenden Experiment-Entry-Points
-verlinkt.
+## Aktueller Schwerpunkt
+
+Die naechste Experimentfamilie sollte die Non-Markovian/Markov-Embedding
+Schicht vorbereiten:
+
+- Memory-Summary-Features pro Samplezeitpunkt.
+- Lagged datasets.
+- Transition Counts und Uebergangsmatrizen.
+- Implied timescales, Chapman-Kolmogorov-Checks und spectral gaps.
+
+Fuer den archivierten Dimensionsclaim bleibt
+`experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle
+Reproduktionspfad.
+
+## Kontext
+
+- `docs/current_status.md`
+- `docs/non_markovian_basis.md`
+- `docs/experiment_catalog.md`
+- `reports/dimension_reproduction_results_2026-06-13.md`

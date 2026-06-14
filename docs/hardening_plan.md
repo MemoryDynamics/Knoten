@@ -1,18 +1,36 @@
 # Haertungsplan
 
-Stand: 2026-05-22.
+Stand: 2026-06-14.
 
 Ziel: Aus einem stark gewachsenen Explorationsprojekt ein reproduzierbares,
 falsifizierbares Modellprogramm machen. Die Grundhaltung ist nicht, das Modell
 zu schuetzen, sondern es so fair wie moeglich scheitern zu lassen.
 
-## Phase 0: Reproduzierbarkeit herstellen
+## Aktueller Status
+
+Phase 0 ist teilweise erfuellt:
+
+- Das Repository hat eine aktive `main`-Linie.
+- Der Paketkern liegt unter `src/emergenz_knoten`.
+- Kleine Tests und Referenzlaeufe existieren.
+- Requirements sind gepinnt.
+- ReadTheDocs/MkDocs ist vorbereitet.
+
+Noch offen:
+
+- eine saubere lokale Numba-faehige Projektumgebung fuer lange Laeufe;
+- explizite Seeds/Manifeste fuer alle neuen Runs;
+- Memory-Traces fuer die Non-Markovian/Markov-Embedding-Schiene;
+- systematische Negativkontrollen im Millionenbereich.
+
+## Phase 0: Reproduzierbarkeit halten
 
 Definition of done:
 
-- Python-Umgebung funktioniert lokal.
-- `requirements.txt` oder Lockfile ist installierbar.
-- Es gibt einen Baseline-Commit des historischen Stands.
+- Python-Umgebung funktioniert lokal und installiert die gepinnten Requirements.
+- `requirements.txt`, `requirements-dev.txt` und `docs/requirements.txt` sind
+  installierbar.
+- Das Repo bleibt auf `main` reproduzierbar.
 - Jedes neue Experiment schreibt Parameter, Seed, Git-Revision und Outputs in
   ein Manifest.
 - Lange Laeufe koennen fortgesetzt werden und erzeugen keine stillen
@@ -24,7 +42,7 @@ Soforttests:
 - Smoke-Test mit kleinem `N`, der in Sekunden laeuft.
 - Determinismus-Test: gleicher Seed, gleiche Messwerte innerhalb Toleranz.
 
-## Phase 1: Kanonischen Modellkern extrahieren
+## Phase 1: Kanonischen Modellkern stabilisieren
 
 Zu kapseln:
 
@@ -33,6 +51,7 @@ Zu kapseln:
 - Kernelklassen: single Gaussian, double Gaussian, finite window, recursive
   memory approximation
 - Diagnostiken: `D_cov`, `D_occ`, `D_spec`, Knot count, Residence, Relaxation
+- optionale Memory-Traces oder Memory-Summary-Features pro Samplezeitpunkt
 
 Minimaltests:
 
@@ -44,6 +63,26 @@ Minimaltests:
 - Diagnosefunktionen liefern auf synthetischen Punktwolken bekannte Werte
   (Linie ca. 1, Flaeche ca. 2, isotrope Wolke in 3D ca. 3 fuer passende
   Schaetzer).
+
+## Phase 1.5: Non-Markovian / Markov-Embedding Schicht
+
+Ziel: den sichtbaren nichtmarkovschen Prozess `x_n` und den augmentierten
+Markov-Zustand `(x_n, rho_n)` operational trennen.
+
+Zu bauen:
+
+- Memory-Traces oder Memory-Summary-Features entlang der Trajektorie.
+- Lagged datasets fuer `z_t -> z_{t+tau}`.
+- Zustandszuordnung ueber Voxel, Cluster oder einfache Prototypen.
+- Transition Counts und Uebergangsmatrizen.
+- Implied timescales, Chapman-Kolmogorov-Checks und spectral gaps.
+- Spaeter PCCA-/HMM-Fallbacks, falls `x_n`-Projektionen nicht markovsch genug
+  sind.
+
+Erfolgskriterium:
+
+- Delay- oder Memory-Summary-Features liefern bessere CK/ITS-Konsistenz als
+  plain `x_n` auf denselben Trajektorien.
 
 ## Phase 2: Hauptclaims reproduzieren
 

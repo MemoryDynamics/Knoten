@@ -1,15 +1,26 @@
 # Legacy
 
-Historische Skripte und temporäre Tests. Diese Dateien sind als
-Referenz zu erhalten, aber nicht als primäre Reproduktionspfade.
+Historische Skripte und temporaere Tests. Diese Dateien sind als Referenz zu
+erhalten, aber nicht als primaere Reproduktionspfade zu behandeln.
 
-Wichtige Dateien:
-- `snapshot.py`, `tmp_*`-Skripte, `scripts/reference_experiment.py`
+Wichtige Inhalte:
 
-Ziel: Verwende diesen Ordner nur zur Einsicht in alte Arbeitsstände.
+- `snapshot.py`
+- `tmp_*`-Skripte
+- `experiments/legacy/scripts/highN_regime*.py`
+- `experiments/legacy/scripts/smoke_test.py`
+- `experiments/legacy/scripts/reference_experiment.py`
+
+Der aktive Referenzlauf liegt inzwischen unter:
+
+```text
+experiments/reference_experiment.py
+```
+
+Nutze diesen Ordner zur Rekonstruktion alter Arbeitsstaende. Neue Laeufe sollen
+nach Moeglichkeit ueber den Paketkern `src/emergenz_knoten` und klare
+Entry-Points unter `experiments/` laufen.
 
 ## Theoretical Mapping
 
-Siehe [docs/THEORETICAL_CONTEXT.md](../../docs/THEORETICAL_CONTEXT.md) — dieses Verzeichnis
-enthält historische Skripte, die in den Chat-Notizen referenziert sind; nutze es
-zur Rekonstruktion alter Läufe, nicht als primäre Reproduktionsquelle.
+Siehe `docs/THEORETICAL_CONTEXT.md` und `docs/non_markovian_basis.md`.

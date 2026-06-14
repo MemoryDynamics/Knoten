@@ -18,3 +18,4 @@ data/processed/
 results/
 src/emergenz_knoten.egg-info/
 experiments/reference_output*.json
+site/

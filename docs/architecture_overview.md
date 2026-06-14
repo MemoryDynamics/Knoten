@@ -1,60 +1,168 @@
-# Architekturübersicht
+# Architekturuebersicht
 
-Dieses Projekt besteht aus drei Hauptschichten:
+Stand: 2026-06-14.
+
+Das Projekt besteht aktuell aus vier Schichten:
 
 1. Kernbibliothek (`src/emergenz_knoten`)
 2. Experiment-Entry-Points (`experiments/`)
-3. Dokumentation und Audit-Berichte (`docs/`, `reports/`)
+3. Daten, Figuren und Reports (`data/`, `figures/`, `reports/`)
+4. Dokumentation (`docs/`, ReadTheDocs/MkDocs)
+
+Die naechste geplante Schicht ist eine additive Non-Markovian/Markov-Embedding
+Ebene unter `src/emergenz_knoten/markov/`.
 
 ## 1. Kernbibliothek
 
-- `src/emergenz_knoten/__init__.py`
-  - Exportiert den öffentlichen API-Kern.
-- `src/emergenz_knoten/core.py`
-  - Definiert `SimulationConfig` und die finite-memory Simulation.
-  - Enthält die Numba-optimierte Variante `simulate_finite_memory_numba`.
-- `src/emergenz_knoten/kernels.py`
-  - Berechnet die attraktiven/repulsiven Gradientenkraftkomponenten und die exponentiellen Memory-Gewichte.
-- `src/emergenz_knoten/diagnostics.py`
-  - Misst Dimensionswerte (`covariance_dimension`, `occupancy_dimension`, `spectral_dimension`).
-  - Berechnet `residence_statistics` und Bootstrap-Konfidenzintervalle.
-- `src/emergenz_knoten/experiments.py`
-  - Serialisiert Simulationsergebnisse in `.npz`- und `.json`-Formate.
-  - Bietet `SimulationRunner` für wiederholbare Ausführung.
+`src/emergenz_knoten/__init__.py`
 
-## 2. Experiment-Entry-Points
+- Exportiert den oeffentlichen API-Kern.
 
-- `experiments/cli.py`
-  - Kategorisiert historische Auswertungsskripte und startet sie reproduzierbar.
-- `experiments/demo_simulation.py`
-  - Kleines Starter-Demo für einen schnellen funktionalen Proof-of-Concept.
-- `experiments/legacy/`
-  - Historische Explorationsskripte, die bisher nicht in die modulare Bibliothek migriert wurden.
+`src/emergenz_knoten/core.py`
 
-## 3. Dokumentation und Audit
+- Definiert `SimulationConfig`.
+- Implementiert `simulate_finite_memory`.
+- Implementiert optional `simulate_finite_memory_numba`.
+- Berechnet den effektiven Speicherhorizont aus `memory_factor / alpha` und
+  `max_memory`.
 
-- `README.md`
-  - Projektübersicht, Schnellstart und Installationsanleitung.
-- `docs/`
-  - Projektkarte, Haertungsplan, Experimentkatalog und theoretischer Kontext.
-- `reports/`
-  - Datierte Audits, Paper-Übergabedokumente und jetzt auch die Projektübergabe.
+`src/emergenz_knoten/kernels.py`
 
-## Daten- und Ergebnisfluss
+- Berechnet exponentielle Memory-Gewichte.
+- Berechnet Gaussian- und Double-Gaussian-Gradienten.
+- Kapselt die Zwei-Skalen-Struktur aus Repulsion und Attraction.
 
-1. `SimulationConfig` definieren.
-2. `simulate_finite_memory` oder `run_simulation` aufrufen.
-3. Ergebnisse mit `save_simulation_result` in `.npz` oder `.json` speichern.
-4. Diagnosen mit `diagnostics.py` berechnen.
-5. Optional: Skripte aus `experiments/` nutzen, um historische Auswertungen zu reproduzieren.
+`src/emergenz_knoten/diagnostics.py`
 
-## Wichtige Annahmen
+- `covariance_dimension`
+- `occupancy_dimension`
+- punktwolkenbasierte `spectral_dimension`
+- `residence_statistics`
+- `bootstrap_mean_ci`
 
-- Das Modell verwendet eine endliche Gedächtnisspanne mit exponentiell fallenden Gewichten.
-- Der Speicherhorizont wird aus `config.memory_factor / config.alpha` und `config.max_memory` berechnet.
-- Zufallsgeneratoren werden über `seed` wiederholbar gemacht.
-- `numba` ist optional, aber empfohlen für beschleunigte Simulationen.
+Wichtig: Die aktuelle `spectral_dimension` ist eine Geometrie-Diagnostik auf
+einem Punktwolken-Kernel. Sie ist nicht das Spektrum eines dynamischen
+Transferoperators.
 
-## Empfehlung
+`src/emergenz_knoten/experiments.py`
 
-Der nächste Schritt ist, die historische Experimentstruktur in der `experiments/`-Ebenen systematisch auf `src/` zurückzuführen und einen klaren Referenzworkflow für die Dimensionsanalyse zu definieren.
+- `SimulationRunner`
+- `run_simulation`
+- `save_simulation_result`
+- `load_simulation_result`
+- NPZ/JSON-Serialisierung
+
+## 2. Dynamisches Modell
+
+Sichtbarer Update:
+
+```text
+x_{n+1} = x_n + epsilon * noise_n - eta * grad Phi_n(x_n)
+```
+
+Memory-Gewichte:
+
+```text
+w_k = alpha * (1 - alpha)^k
+```
+
+Der sichtbare Prozess `x_n` ist nichtmarkovsch, weil `grad Phi_n` von der
+gespeicherten Vergangenheit abhaengt. Der augmentierte Zustand
+`(x_n, history_n, weights_n)` ist dagegen die natuerliche Markov-Einbettung.
+
+## 3. Experiment-Entry-Points
+
+`experiments/reference_experiment.py`
+
+- Kleine reproduzierbare Referenzlaeufe.
+- Berichtet `D_cov`, `D_occ` und Residence-Statistik.
+
+`experiments/cli.py`
+
+- Listet und startet kategorisierte Skripte.
+- Kategorien: `reference`, `dimension_selection`, `propagation_speed`,
+  `knot_stability`, `fractal_analysis`, `ou_limit`, `LQG`.
+
+`experiments/fractal_analysis/`
+
+- Aktueller Schwerpunkt fuer den archivierten Dimensionsclaim.
+- Enthalten sind Audit- und Reproduktionsskripte.
+
+`experiments/legacy/`
+
+- Historische Skripte und fruehere Referenzpfade.
+- Nicht als neue API behandeln.
+
+## 4. Daten- und Ergebnisfluss
+
+Aktueller Flow:
+
+```text
+SimulationConfig
+  -> simulate_finite_memory / run_simulation
+  -> samples, sample_steps, final memory, weights
+  -> diagnostics.py
+  -> data/processed/*.json|*.npz
+  -> reports/*.md
+```
+
+Limit:
+
+- Es gibt noch keine Memory-Snapshots pro Samplezeitpunkt.
+- Es gibt noch keine lagged datasets.
+- Es gibt noch keine Uebergangsmatrizen oder Transferoperatoren.
+
+## 5. Geplante Non-Markovian/Markov-Schicht
+
+Zielstruktur:
+
+```text
+src/emergenz_knoten/markov/
+  dataset.py
+  transition.py
+  validation.py
+  metastability.py
+```
+
+Minimaler Flow:
+
+```text
+samples + memory summaries
+  -> augmented features z_t
+  -> lagged pairs (z_t, z_{t+tau})
+  -> state assignment
+  -> transition counts
+  -> transition matrix
+  -> implied timescales / CK / spectral gap
+  -> metastable memberships
+```
+
+Warum additiv:
+
+- Der bestehende Kern bleibt schlank.
+- Historische Diagnostik bleibt reproduzierbar.
+- Die neue Schicht kann direkt gegen negative Controls getestet werden.
+
+## 6. Dokumentation
+
+ReadTheDocs/MkDocs-Dateien:
+
+- `.readthedocs.yaml`
+- `mkdocs.yml`
+- `docs/requirements.txt`
+- `docs/index.md`
+
+Kuratierte Statusseiten:
+
+- `docs/current_status.md`
+- `docs/non_markovian_basis.md`
+- `docs/reproducibility_status.md`
+
+## 7. Architekturprinzipien
+
+- Neue Features zuerst im Paketkern oder in klaren Experiment-Entry-Points.
+- Historische Skripte nicht stillschweigend umdeuten.
+- Jede Paper-Evidenz braucht Parameter, Seeds, Outputpfad und Diagnostikversion.
+- Nichtmarkovsche Sprache nur dort verwenden, wo klar ist, ob `x_n` oder der
+  augmentierte Zustand gemeint ist.
+- Geometrische Dimensionen und dynamische Operator-Spektren getrennt halten.

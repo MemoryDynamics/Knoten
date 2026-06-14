@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\title{Minimal Point-Process Dynamics with Memory: Emergent Time and Metastable Structures}
+\title{Minimal Point-Process Dynamics with Finite Memory: Markov Embedding and Metastable Structures}
 
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
@@ -19,11 +19,12 @@
 \date{28 February 2026} % explicit date for submissions/arXiv
 
 \begin{abstract}
-We propose a minimal stochastic dynamics on an abstract continuous state space $\Omega$ in which a trajectory $x_n$ is coupled to an explicit, finite, relaxing memory density $\rho_n$.
+We propose a minimal stochastic dynamics on an abstract continuous state space $\Omega$ in which a visible trajectory $x_n$ is coupled to an explicit, finite, exponentially relaxing memory density $\rho_n$.
+The marginal process $\{x_n\}$ is generally non-Markovian, while the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
 The memory update is generically non-invertible, yielding an intrinsic arrow of \emph{update order}.
-Coarse-graining over $n\gg\alpha^{-1}$ motivates an effective parameter $t=\alpha n$ and, when a separation of scales is present, an approximate continuum SDE/Fokker--Planck description.
+Coarse-graining over the internal persistence scale $n\gg\alpha^{-1}$ motivates an effective parameter $t=\alpha n$ and, when a separation of scales is present, an approximate continuum SDE/Fokker--Planck description.
 In this regime we introduce trajectory-based, coordinate-robust diagnostics (persistence/relaxation rates, dimensionless stability measures, and metastable residence-time statistics) to identify and compare long-lived localized dynamical structures induced by the endogenous memory coupling.
-Calibration to spacetime units and connections to relativistic dynamics and Standard-Model-like structures are deferred to companion work.
+Any calibration to spacetime units, physical mass scales, relativistic dynamics, or Standard-Model-like structures is deferred to companion work.
 \end{abstract}
 
 \maketitle
@@ -45,10 +46,15 @@ Concretely, we assume only a sequence of non-trivial update events defining a tr
 Related ideas appear in digital-physics approaches \cite{Wolfram2002,tHooft2016} and in history-dependent random-walk models \cite{Nelson1966,Pemantle2007,BenAImRaimond2002}.
 Closest in spirit are self-interacting walks biased by their visitation history, such as the true (myopic) self-avoiding walk (TSAW) \cite{AmitParisiPeliti1983,TothWerner1998} and the self-repelling Brownian polymer (SRBP) \cite{DurrettRogers1992}; see also \cite{PelitiPietronero1987}.
 
-While our model shares with these approaches the idea of a trajectory coupled to a self-generated field, it differs structurally: the memory is an explicit, finite, relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}). This makes the update map generically non-invertible (information-losing) and thereby induces an intrinsic arrow of \emph{update order} at the fundamental level; that is, the full past cannot be reconstructed from the present state. (We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
+While our model shares with these approaches the idea of a trajectory coupled to a self-generated field, it differs structurally: the memory is an explicit, finite, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
+Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
+This Markov embedding is the main mathematical anchor of Paper~I.
+The same memory update is generically non-invertible (information-losing) and thereby induces an intrinsic arrow of \emph{update order} at the fundamental level; that is, the full past cannot be reconstructed from the present state.
+(We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
 Memory and trajectory thus emerge jointly as the minimal departure from trivial dynamics, rather than being encoded in external boundary conditions.
 
 By contrast, TSAW/SRBP-type formulations are typically written directly in terms of the full occupation history (or local time) without explicit forgetting \cite{AmitParisiPeliti1983,TothWerner1998,DurrettRogers1992,PelitiPietronero1987}.
+The broader placement of this construction within self-interacting diffusions, self-repelling polymers, and Markovian embeddings of memory processes is a natural subject for a separate mathematical companion note; the present paper keeps only the model definition and operational diagnostics needed for the minimal construction.
 
 \paragraph{Roadmap (conceptual to operational).}
 We first give a brief motivation (without a formal proof) for why a locally linear, metric-like coarse-grained description is a natural attractor once one assumes only directed, comparable update steps (Sec.~\ref{sec:minimalist_motivation}); readers primarily interested in the model and diagnostics may skip directly to Sec.~\ref{sec:MinDynModel}.
@@ -56,7 +62,7 @@ In Sec.~\ref{sec:MinDynModel} we specify the minimal generator---a stochastic po
 Sec.~\ref{sec:EmergenceTime} introduces an effective coarse-grained time parametrization and discusses when a continuum description is useful.
 Subsequent sections develop operational diagnostics (metastability, persistence/relaxation rates, and dimensionless stability measures) and analyze memory-induced irreversibility and the formation of robust, typically metastable dynamical structures.
 
-A minimal reference implementation accompanies this work in the repository, with a NumPy-based finite-memory simulator, diagnostic functions, and reproducible runner scripts (`scripts/smoke_test.py` and `scripts/reference_experiment.py`) that support the reproducibility of the key numerical claims.
+A small reference implementation accompanies this work in the project repository and includes a finite-memory simulator, diagnostic functions, tests, and a reproducible reference runner.
 
 %-------------------------------------------------
 \subsection{Minimalist motivation: from directed updates to effective geometry}\label{sec:minimalist_motivation}
@@ -110,6 +116,9 @@ The full process state at update step $n$ is
 \end{equation}
 
 Here $x_n$ denotes the current position of the process, while $\rho_n$ represents a memory distribution encoding the influence of past states.
+Given $\sigma_n$ and a fresh noise draw $\xi_n$, the distribution of $\sigma_{n+1}$ is determined by Eqs.~(\ref{eq:trajectory}) and~(\ref{eq:memorydistribution}).
+This is the Markovian description used in Paper~I.
+The projected process $\{x_n\}$ alone is generally non-Markovian, because two identical visible positions with different memory densities can generate different next-step distributions.
 
 \paragraph{Notation (update index vs.\ time).}
 We use $n\in\mathbb{N}$ for the discrete update index and reserve the word ``time'' for the coarse-grained parameter introduced later (Sec.~\ref{sec:EmergenceTime}). In Eq.~(\ref{eq:sigma}), $x_n\in\Omega$ is the current process position and $\rho_n$ is a normalized, non-negative \emph{memory density} on $\Omega$ (with respect to the reference measure $dx$). While $\rho_n$ is normalized like a probability density, in Paper~I it is primarily a bookkeeping device for finite, relaxing memory; its normalization fixes an overall scale and should not be read as an epistemic probability unless explicitly stated.
@@ -153,6 +162,7 @@ The memory distribution evolves according to
 \rho_{n+1}(x) = (1-\alpha)\rho_n(x) + \alpha\,G_\sigma(x-x_{n+1}),
 \end{equation}
 where $G_\sigma$ is a smooth, normalized kernel with finite width $\sigma$. The update rule is explicitly non-invertible.
+It is also the finite-memory embedding that makes the model Markov in the augmented state: the exponentially weighted past is represented by the current field $\rho_n$ rather than by retaining the full history as a primitive object.
 
 \paragraph{Standing notation.}
 Unless stated otherwise: $n\in\mathbb{N}$ denotes the discrete update index; $x_n\in\Omega$ the point-valued state; $\rho_n$ a probability density on $\Omega$ with respect to $dx$; $G_\sigma$ a normalized smoothing kernel (width $\sigma$); and $K$ an interaction kernel used to define the memory potential in Eq.~(\ref{eq:memorypotential}). We reserve the term ``time'' for the coarse-grained parameter introduced later (Sec.~\ref{sec:EmergenceTime}).
@@ -326,11 +336,12 @@ In this sense, the continuum parameter $t$ is tied to a dynamical coarse-grainin
 \subsubsection{Operational diagnostics}
 
 The present work uses a small set of intrinsically defined, data-driven quantities for cross-run comparison:
-
-- $\alpha$ is estimated from the exponential decay of memory weights in the linear update, i.e. by fitting the age-dependent factor $(1-\alpha)^m\simeq e^{-\alpha m}$ or by fitting the decay of a memory-sensitive observable such as $\Phi[\rho_n](x_n)$.
-- $D$ is the effective diffusion coefficient of the coarse-grained dynamics, with the standard scaling estimate $D\sim\varepsilon^2/(2\alpha)$ in the continuum limit.
-- $\Gamma_{\mathrm{rel}}$ is the knot relaxation rate extracted from the decay of an in-knot autocorrelation $C(t)\propto e^{-\Gamma_{\mathrm{rel}} t}$ or from the dominant relaxation eigenvalue of a quasi-stationary local linearization.
-- $\widehat{\Gamma} := (\sigma^2/D)\,\Gamma_{\mathrm{rel}}$ is a dimensionless stability measure that compensates for uniform coordinate rescalings of the effective state space.
+\begin{itemize}
+\item $\alpha$ is estimated from the exponential decay of memory weights in the linear update, i.e. by fitting the age-dependent factor $(1-\alpha)^m\simeq e^{-\alpha m}$ or by fitting the decay of a memory-sensitive observable such as $\Phi[\rho_n](x_n)$.
+\item $D$ is the effective diffusion coefficient of the coarse-grained dynamics, with the standard scaling estimate $D\sim\varepsilon^2/(2\alpha)$ in the continuum limit.
+\item $\Gamma_{\mathrm{rel}}$ is the knot relaxation rate extracted from the decay of an in-knot autocorrelation $C(t)\propto e^{-\Gamma_{\mathrm{rel}} t}$ or from the dominant relaxation eigenvalue of a quasi-stationary local linearization.
+\item $\widehat{\Gamma} := (\sigma^2/D)\,\Gamma_{\mathrm{rel}}$ is a dimensionless stability measure that compensates for uniform coordinate rescalings of the effective state space.
+\end{itemize}
 
 These diagnostics are intended to be operational: they can be estimated from simulation trajectories without assuming an a priori physical time unit.
 
@@ -431,7 +442,7 @@ where $H$ denotes the Hessian of the memory potential evaluated at $x_\star$, an
 collects the effective coupling to the memory-induced drift in the continuum description.
 
 \paragraph{Remark (stability condition and time dependence).}
-Strictly, $x_\star$ is a fixed point only for a \\emph{frozen} memory field (i.e., if $\rho$ is quasi-stationary on the relaxation time scale).
+Strictly, $x_\star$ is a fixed point only for a \emph{frozen} memory field (i.e., if $\rho$ is quasi-stationary on the relaxation time scale).
 Local stability in the linearized (OU) approximation requires the symmetric part of $H$ to be positive definite (so that the drift is restoring) in the directions of interest; otherwise $x_\star$ is unstable or saddle-like and does not define a metastable knot.
 
 This form describes a relaxation process toward the attractor, with characteristic decay
@@ -457,7 +468,11 @@ As a simple consistency check (and to remove coordinate-scaling ambiguities), on
 In knot regimes where a quasi-stationary linearization is valid, one expects $\Gamma_{\mathrm{rel}}$ to track the Hessian eigenvalue scale (Sec.~\emph{Mass as an attractor property} below), up to convention-dependent numerical factors.\looseness=-1
 Moreover, under a uniform rescaling of coordinates $x\mapsto a x$ (with corresponding rescalings of the coarse-graining width $\sigma$), the dimensionless quantity $\widehat{\Gamma}$ should remain approximately invariant.
 A sharper identification with a physical mass scale requires (and is deferred to later work) an emergent geometric calibration and an operational mapping to energy units.
-\\paragraph{Terminology (``mass'' as an operational proxy).} We stress that ``mass'' here is not meant as a postulated inertial parameter of a background spacetime. Rather, it is a coarse-grained, quasi-time-independent property of a metastable attractor regime, quantified by how rapidly perturbations relax back into the knot. The terminology is therefore intentionally closer to ``stiffness'' or ``confinement strength'' than to Newtonian inertia; a mapping to conventional energy/mass units requires an additional calibration and is deferred to companion work.
+
+\paragraph{Terminology (``mass'' as an operational proxy).}
+We stress that ``mass'' here is not meant as a postulated inertial parameter of a background spacetime.
+Rather, it is a coarse-grained, quasi-time-independent property of a metastable attractor regime, quantified by how rapidly perturbations relax back into the knot.
+The terminology is therefore intentionally closer to ``stiffness'' or ``confinement strength'' than to Newtonian inertia; a mapping to conventional energy/mass units requires an additional calibration and is deferred to companion work.
 
 \subsection{Metastability and transitions}
 
@@ -521,7 +536,8 @@ Heavier structures correspond to steeper memory-induced potentials and/or strong
 \section{Discussion and Outlook}
 %-------------------------------------------------
 
-We introduced a minimal self-interacting stochastic dynamics with finite, relaxing memory.
+We introduced a minimal self-interacting stochastic dynamics with finite, exponentially relaxing memory.
+The visible coordinate is generally non-Markovian, while the augmented state $(x_n,\rho_n)$ gives a natural Markov embedding.
 The non-invertibility of the memory update induces an intrinsic arrow of \emph{update order} without assuming thermodynamic irreversibility, physical time, or spacetime structure.
 Coarse-graining on the memory-persistence scale yields an effective integration parameter $t=\alpha n$ and, when a separation of scales is present, a useful continuum SDE/FP approximation.
 
@@ -531,7 +547,7 @@ Interpreting such stability scales as mass-like proxies is natural at the level 
 
 Several limitations and open directions remain.
 The continuum description is used here as an effective approximation rather than as a proven scaling limit; a rigorous convergence analysis, including conditions on $(G_\sigma,K)$ and parameter scalings, is left for future work.
-A small NumPy reference implementation in `src/emergenz_knoten` and reproducible runner scripts (`scripts/smoke_test.py` and `scripts/reference_experiment.py`) provide a concrete basis for verifying the numerical diagnostics reported in this draft.
+A small NumPy reference implementation, tests, and a reproducible reference runner provide a concrete basis for verifying the numerical diagnostics reported in this draft.
 Finally, extending the framework to multiple coupled generators and exploring when consistent universal scales emerge are natural next steps.
 
 \begin{acknowledgments}

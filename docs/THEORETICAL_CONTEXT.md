@@ -1,90 +1,148 @@
-# Theoretical Context — Emergenz Knoten (concise)
+# Theoretical Context
 
-This document extracts the core theoretical claims from the ChatGPT-derived
-notes in `docs/ChatGPT Chatverläufe/` and links them to the concrete
-experimental entry points in `experiments/`.
+Stand: 2026-06-14.
 
-## Core claims (short)
+Diese Datei fasst den kuratierten theoretischen Kontext des Projekts zusammen.
+Rohnotizen und Chatverlaeufe bleiben unter `docs/ChatGPT Chatverläufe/`, sind
+aber keine zitierfaehige Fassung.
 
-- Minimal dynamical model: a discrete order parameter n and a state
-  σ_n = (x_n, ρ_n) with stochastic updates (trajectory + memory) and
-  irreversible memory updates.
+## Minimaler Modellkern
 
-- Emergence of time: Arrow-of-Time arises from memory relaxation; an
-  emergent proper time scale τ_p ∼ 1/α; time as an integration parameter,
-  not identical to the discrete index n.
+Das Modell startet mit einem sichtbaren Punktprozess `x_n` und einem
+relaxierenden Speicherzustand `rho_n` bzw. einem endlichen History-Buffer.
 
-- Emergence of space & kinematics: spatial structure and an effective
-  light-speed c emerge from trajectory statistics and maximal drift.
-  Local Lorentz behaviour and macroscopic GR-like coupling are
-  conceptually compatible.
+Sichtbarer Update:
 
-- Knot dynamics & phases: clear knot typology (free, transient, attractor,
-  metastable, destructor); phase transitions controlled by
-  Λ = η/(α ε); mean free path is an order parameter; mass emerges as
-  an attractor relaxation scale.
+```text
+x_{n+1} = x_n + epsilon * noise_n - eta * grad Phi_n(x_n)
+```
 
-- Microscopic → quantum: linearization near attractors yields complex
-  structures; Schrödinger / Dirac normal forms emerge with
-  ℏ_eff ∼ ε^2/α; spinor structure appears from frame redundancies.
+Memory-Update:
 
-- Parameter elimination: ε, η, α become replaceable by emergent
-  physical quantities (ℏ, c, m, τ_p) in the effective description.
+```text
+rho_{n+1} = (1 - alpha) rho_n + alpha G(x_{n+1})
+```
 
-## Practical mapping to repository experiments
+Der sichtbare Prozess `x_n` ist nichtmarkovsch. Der augmentierte Zustand
+`(x_n, rho_n)` ist die natuerliche Markov-Einbettung.
 
-- `experiments/reference_experiment.py`
-  - Purpose: small, reproducible reference runs; computes
-    `D_cov`, `D_occ`, `residence_statistics` (connects to claims about
-    effective dimension and knot diagnostics).
+## Zentrale Claims
 
-- `experiments/dimension_selection/` (Heatmaps, 2SkalenKernel)
-  - Purpose: map `D_spec` / spectral dimension across parameter space
-    (connects to Emergence of Space & kinematics, two-scale kernels).
+### Zeit
 
-- `experiments/fractal_analysis/` (Fraktale)
-  - Purpose: occupancy dimension, box-counting, finite-size scaling
-    (connects to knot occupancy and fractal-like spatial structure).
+Arbeitsclaim:
 
-- `experiments/propagation_speed/` (Paper II scripts)
-  - Purpose: time-of-flight, retarded response, operational light-cone
-    (direct test of emergent c and propagation scaling).
+- Eine interne Update-Richtung entsteht aus dem irreversiblen
+  Speicherupdate.
+- `alpha^{-1}` ist eine Persistenz- bzw. Relaxationsskala des Speichers.
+- Grobkoernungen wie `t = alpha n` sind Hilfsparameter der internen
+  Speicherpersistenz, keine postulierte fundamentale Zeit.
 
-- `experiments/knot_stability/`
-  - Purpose: trajectory-based knot tests, scans for metastable
-    attractors and lifetime statistics (connects to Knot dynamics).
+Status: gut als Modellstruktur formulierbar, aber bei Paper-I-Texten muss die
+Rolle von `t` konsequent operational bleiben.
 
-- `experiments/cli.py` and `experiments/reference_experiment.py`
-  - Use these as canonical entry points for reproducible runs and
-    linking with the theoretical claims above.
+### Knoten
 
-## Where the Chat notes live
+Arbeitsclaim:
 
-See `docs/ChatGPT Chatverläufe/` for the raw conversational notes used to
-compile this summary. Most relevant files included:
+- Metastabile Strukturen entstehen in bestimmten Parameterregimen durch das
+  Zusammenspiel von Rauschen, Repulsion, Attraction und relaxierendem Speicher.
+- Knoten duerfen nicht nur visuell definiert werden.
 
-- `ErsterEmergenzChat.md` — high-level program, Paper I/II/III split
-- `Nebenrechnungen.md` — linearization, effective dimension derivations
-- `Skriptreview.md` — script-level corrections and plotting guidance
-- OU and mathematical drafts: `OU-Limit.md`, `Mathematische Formulierung der Existenz.md` (if present)
+Noetige Operationalisierung:
 
-## Recommended next steps (short)
+- Residence-Verteilungen.
+- Rueckkehrzeiten.
+- lokale Relaxationsraten.
+- spaeter metastabile Memberships eines Uebergangsoperators.
 
-1. Finalize Sections 2 (Minimal Model) and 3 (Memory & Arrow-of-Time)
-   formally — these are the mathematical backbone for Paper I.
-2. Use `experiments/reference_experiment.py` as a reproducible smoke test
-   and then run targeted scans in `dimension_selection/` and
-   `propagation_speed/` to gather the diagnostics required for Paper I.
-3. Consolidate plotting scripts following `Skriptreview.md` to ensure
-   figures are reviewer-proof (use the corrected OU/ℏ_eff-based plots).
+### Effektive Dimension
 
----
+Arbeitsclaim:
 
-If you want, I can now:
+- Es gibt archivierte Hinweise auf niedrige effektive Dimensionen und ein
+  Near-3-Signal in langen Finite-Size-Laeufen.
 
-- Insert short context links into each `experiments/*/README.md` referencing
-  the relevant paragraphs above, and
-- Produce a short `docs/THEORETICAL_CONTEXT_BRIEF.md` for the paper
-  introduction.
+Aktueller belastbarer Befund:
 
-Tell me which of these you prefer next.
+- Staerkster Archivpunkt:
+  `embedding dim = 5`, `N = 60,000,000`, fuenf Runs,
+  `mean D_occ = 2.810559`.
+
+Status:
+
+- vielversprechend;
+- noch kein Beweis eindeutiger 3D-Selektion;
+- braucht frische Seed-Ensembles, Negativkontrollen und gemeinsame Berichte
+  von `D_occ`, `D_cov` und dynamischen Operator-Diagnostiken.
+
+### Masse und Relaxation
+
+Arbeitsclaim:
+
+- "Masse" ist vorerst ein Relaxations- oder Konfinierungsproxy von
+  metastabilen Knoten.
+- Eine moegliche Verbindung zwischen Speicherlaenge, Relaxationsrate und
+  effektiver Masse ist eine Arbeitshypothese, keine Folgerung.
+
+Paper-I-Sprache:
+
+- `mass proxy`, `relaxation scale` oder `confinement scale` bevorzugen, bis
+  die physikalische Kalibrierung tragfaehig ist.
+
+### Raum, Propagation und Lorentz-Kinematik
+
+Arbeitsclaim:
+
+- Endliche Speicherreichweite und gekoppelte Knoten koennen endliche
+  Antwortzeiten und einen operationalen Lichtkegel nahelegen.
+
+Status:
+
+- konzeptionell wichtig fuer Paper II;
+- aktuell noch staerker als Konsistenzprogramm denn als harter Befund;
+- sollte nach Paper 0/I-Haertung weiter getestet werden.
+
+## Experiment-Mapping
+
+| Claim | Primaere Orte | Aktueller Status |
+| --- | --- | --- |
+| Minimaler Speicherprozess | `src/emergenz_knoten/core.py`, `kernels.py` | implementiert |
+| Geometrische Diagnostik | `src/emergenz_knoten/diagnostics.py` | implementiert, aber nicht operatorisch |
+| Referenzlauf | `experiments/reference_experiment.py` | aktiv |
+| Archivierter Dimensionsclaim | `experiments/fractal_analysis/Fraktale/resultsN.csv` | auditiert |
+| Reproduktionspfad | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | aktiv |
+| Propagation | `experiments/propagation_speed/` | historisch, noch zu haerten |
+| Non-Markovian Basis | `docs/non_markovian_basis.md` | kuratiert, Implementierung offen |
+
+## Methodische Andockpunkte
+
+Naheliegende Literatur- und Methodenfamilien:
+
+- self-interacting diffusions;
+- reinforced random walks und self-repelling processes;
+- generalized Langevin equations mit exponentiellen Memory-Kernen;
+- Markovian embeddings;
+- transfer operators und Markov State Models;
+- PCCA/PCCA+ fuer metastabile Mengen;
+- HMM/PMM, wenn die Projektion auf sichtbare Cluster nicht markovsch ist.
+
+Quantum-non-Markovianity, Renewal-Prozesse und Process-Tensor-Literatur sind
+spaeter relevant, aber nicht der direkteste Ausgangspunkt fuer Paper I, weil
+sie meist bereits vorhandene Quantenzustaende voraussetzen.
+
+## Sprachregel
+
+Bis zur Haertung:
+
+- "We define" fuer Modellannahmen.
+- "We observe numerically" fuer reproduzierbare Simulationsergebnisse.
+- "We conjecture" fuer Weltmodell-, Lorentz-, Quanten- oder
+  Standardmodell-Bruecken.
+
+Nicht vermischen:
+
+- geometrische Spektraldiagnostik und Transferoperator-Spektrum;
+- sichtbaren nichtmarkovschen Prozess und augmentierten Markov-Zustand;
+- Archivbefund und frisch reproduzierte Evidenz;
+- Relaxationsproxy und physikalische Masse.

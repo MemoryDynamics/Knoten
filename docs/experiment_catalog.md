@@ -1,80 +1,107 @@
 # Experiment-Katalog
 
-Stand: 2026-05-22.
+Stand: 2026-06-14.
 
-## Wichtigste Skripte
+## Kanonische Entry-Points
 
-| Datei | Thema | Relevanz | Risiko |
+| Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `Knoten.py` | 2D self-avoiding memory trajectory | frueher Modellkern, einfache Visualisierung | Top-level plotting, keine Parameterlogs |
-| `Knoten3D.py` / `Knoten3D_prism.py` | 3D Trajektorien/Knotenfiguren | papernahe Knotenvisuals | noch keine reproduzierbare CLI |
-| `DimensionsHeatmap*.py` | Spektral-/Kovarianzdimension ueber `alpha, eta` | zentrale Dimensionsdiagnostik | mehrere Versionen, teils schwere GPU/Numba-Laeufe |
-| `DimensionsHeatmap4OptGPU.py` | CUDA Heatmap, `T=1_500_000` | groesster Scan fuer Dimension/Fitqualitaet | GPU-Abhaengigkeit, lange Laufzeit |
-| `PaperII3D_*.py` | Retarded response, Time-of-flight, `c_eff`, Lichtkegel | zentrale Paper-II-Figuren | Threshold-/Glattungsrobustheit offen |
-| `2SkalenKernel/emergent_3D_final.py` | Dimension plateau ueber `d=2..9`, `alpha`, `eta` | sehr wichtig fuer `d~3`-Claim | `N_MAX=2e8`, Checkpoint-Format ad hoc |
-| `2SkalenKernel/SpecCovFrac.py` | Occupancy, covariance, spectral dimension im Double-Kernel | multi-diagnostic claim support | `N=150_000_000`, spektrale Diagnose O(n^2) im Fenster |
-| `scripts/highN_regime.py` | Reproduzierbarer Pilot fuer das historischen 3D-High-N-Regime | Referenz-Entry-Point fuer Legacy-Parameter | ermoeglicht kleine Testlaeufe mit dem gleichen Kern |
-| `scripts/highN_regime_validation.py` | Validierungs-Pilot fuer den historischen 7D-Regimepunkt | kleiner Einpunkttest mit Legacy-Parametern und Occupancy-Fit-Details | schneller Check ohne vollen 150M-Lauf |
-| `scripts/highN_regime_ensemble.py` | Seed-Ensemble-Wrapper fuer das historische 7D-Regime | erlaubt Mittelwerte, Standardabweichungen und CI fuer D_cov/D_occ; unterstützt variable Regimeparameter | bevorzugt valide Fehlerbalken statt Einzelwerte |
-| `knot_chi_scan.py` | Sweep ueber `chi = eta/(alpha sigma_att^2)` | Knotenanzahl/Residence/Dimension | schreibt nach `chi_scan`, lange Laeufe |
-| `Fraktale/FD2.py` | Fraktaldimension, Parameter-Scan, finite-size scaling | wichtigste Occupancy-/Skalierungsbasis | CSV-Header passt nicht immer zum Row-Format |
-| `Fraktale/fit_n_plot.py` | Fit von `D_inf`/Skalierung | Paper-Auswertung moeglich | Fitmodell muss preregistriert werden |
-| `OU-Limit.py` | OU-Grenzfall | analytischer Kontrollfall | standalone plot |
-| `EmergenzGravitation.py` / `emergenz_2regime.py` | Regime-/Anisotropiefiguren | konzeptionelle Karten | eher schematisch als beweisend |
+| `experiments/reference_experiment.py` | kleiner Referenzlauf mit `D_cov`, `D_occ`, Residence | aktiv | Smoke-Test und Basis fuer neue Trace-Erweiterung |
+| `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstiegspunkt fuer vorhandene Skriptfamilien |
+| `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register und Paper-Formulierung |
+| `experiments/fractal_analysis/reproduce_dimension_pilot.py` | seed-kontrollierte Reproduktion kleiner/mittlerer `N` | aktiv | Naechste Numba-Millionenlaeufe |
 
-## Ergebnisartefakte nach Claim
+## Historische und thematische Skriptfamilien
+
+| Familie | Dateien | Relevanz | Risiko |
+| --- | --- | --- | --- |
+| Knotenstabilitaet | `experiments/knot_stability/*.py` | Trajektorien, Knotenvisuals, Residence-Ideen | meist historische Parameter, teils lange Laeufe |
+| Dimension Selection | `experiments/dimension_selection/DimensionsHeatmap*.py` | Heatmaps, Kovarianz-/Spektraldimension | lange Laufzeiten, GPU/Numba-Zweige |
+| Zwei-Skalen-Kernel | `experiments/dimension_selection/2SkalenKernel/*.py` | Double-Kernel-Regime, Dimension/Attraktor-Hypothesen | sehr hohe `N`, Checkpoints, unterschiedliche Konventionen |
+| Fraktalanalyse | `experiments/fractal_analysis/Fraktale/*.py` | Archivquelle des `D_occ ~ 2.8`-Befunds | alte CSVs ohne explizite Seed-Spalten |
+| Propagation Speed | `experiments/propagation_speed/PaperII3D_*.py` | Time-of-flight, Response, `c_eff` | Threshold-/Glattungsrobustheit offen |
+| OU-Limit | `experiments/ou_limit/*.py` | analytische Kontroll- und Regimefiguren | eher schematisch als beweisend |
+| Legacy-Validierung | `experiments/legacy/scripts/highN_regime*.py` | reproduzierbare Varianten historischer High-N-Regime | nur mit kleinen Parametern als Pilot starten |
+
+## Wichtigste Ergebnisartefakte
 
 ### Effektive Dimension
 
-- `heatmap_spectral_dimension_gpu*.pdf`
-- `heatmap_covariance_dimension_gpu*.pdf`
-- `spectral_dimension_heatmap_optimized.pdf`
-- `progress*.npy`, `progress*.npz`
-- `2SkalenKernel/results*/D_vs_N.png`
-- `2SkalenKernel/results*/D_vs_d.png`
-- `Fraktale/results*.csv`
-- `Fraktale/N_*.png`
+- `experiments/fractal_analysis/Fraktale/resultsN.csv`
+- `data/processed/fractal_analysis/dimension_claim_summary.json`
+- `data/processed/fractal_analysis/dimension_reproduction_pilot.json`
+- `data/processed/fractal_analysis/dimension_reproduction_archive_scaling_check.json`
+- `data/processed/fractal_analysis/fractal_alpha_sweep_pilot_historical_30k.json`
+- `reports/dimension_claim_seed_audit_2026-06-13.md`
+- `reports/dimension_reproduction_results_2026-06-13.md`
+- `reports/fractal_parameter_landscape_reading_2026-06-13.md`
+
+### High-N- und Alpha-Regime
+
+- `data/processed/highN_regime/*.json`
+- `data/processed/sweep_alpha/*.json`
+- `data/processed/alpha/*.json`
+- `reports/fractal_alpha_sweep_pilot_historical_30k_2026-06-13.md`
 
 ### Endliche Propagation
 
-- `diagram1_retarded_response.pdf`
-- `diagram2_time_of_flight.pdf`
-- `diagram3_ceff_scaling.pdf`
-- `diagram4_light_cone.pdf`
-- `front_delay_vs_L*.pdf`
-- `front_lightcone.pdf`
-- `diffusive_delay_vs_L*.pdf`
-- `diffusive_lightcone.pdf`
+- `figures/draft/diagram1_retarded_response.pdf`
+- `figures/draft/diagram2_time_of_flight.pdf`
+- `figures/draft/diagram3_ceff_scaling.pdf`
+- `figures/draft/diagram4_light_cone.pdf`
+- `figures/draft/front_*`
+- `figures/draft/diffusive_*`
 
-### Knotenvisualisierung
+### Paper-I-Figuren
 
-- `fig1_knot_trajectory.pdf`
-- `fig2_knot_scatter.pdf`
-- `fig3_knot_trajectory.pdf`
-- `Fraktale/N_*.png`
+- `paper/paper_i/fig1_knot_trajectory.pdf`
+- `paper/paper_i/fig2_knot_scatter.pdf`
+- `paper/paper_i/fig3_knot_trajectory.pdf`
+- `paper/paper_i/fig_alpha.pdf`
+- `paper/paper_i/fig_Gamma_alpha.pdf`
 
-### Regime/Analytik
+## Aktueller Dimensionsstand
 
-- `fig_alpha*.pdf`
-- `fig_etaalpha.pdf`
-- `fig_Gamma_alpha.pdf`
-- `fig_OUlimit.pdf`
+Archiv:
 
-## Auffaellige technische Punkte
+| embedding dim | N | runs | mean D_occ | Lesart |
+| ---: | ---: | ---: | ---: | --- |
+| 5 | 60,000,000 | 5 | 2.810559 | staerkster Near-3-Long-N-Befund |
+| 3 | 60,000,000 | 10 | 2.372485 | nicht der staerkste Long-N-Punkt |
+| 4 | 60,000,000 | 5 | 2.682259 | nahe, aber unter dim 5 |
+| 6 | 60,000,000 | 5 | 2.695450 | ein Run gewinnt gegen dim 5 |
 
-- Viele Skripte fuehren lange Simulationen direkt auf Top-Level aus.
-- Mehrere Dateinamen enthalten historische Varianten statt semantischer
-  Versionen (`*2`, `*3`, `Opt`, `GPU`, `cpy`, `copy`).
-- Ergebnisdateien sind nicht eindeutig mit Parameterdateien verbunden.
-- Einige CSV-Schreibfunktionen haben Header, die nicht zum tatsaechlichen
-  Row-Format passen.
-- Die Python-Umgebung ist beim Audit nicht lauffaehig; siehe
-  `docs/reproducibility_status.md`.
+Neue Reproduktion:
 
-## Priorisierte Reproduktionsziele
+- `50k` und `100k`: neuer Pfad trifft die Archivskala sehr gut.
+- `300k`: gleiche Groessenordnung, aber noch nicht long-N.
+- `<= 60k` mit Kontrollen: kein Near-3-Claim sichtbar.
 
-1. Kleiner Smoke-Test des kanonischen Kernels.
-2. Reproduktion eines bekannten Heatmap-Punktes mit kurzer Laufzeit.
-3. Reproduktion des staerksten `D_eff ~ 2.8/3`-Befunds mit 20 Seeds.
-4. Reproduktion einer Time-of-flight-Grafik mit Fehlerbalken.
-5. Negative-Control-Bundle fuer alle Hauptdiagnostiken.
+Konsequenz:
+
+> Der aktuelle Claim ist ein archivierter Long-N-Near-3-Befund mit plausibler
+> Reproduktionskopplung, nicht der Nachweis eindeutiger 3D-Selektion.
+
+## Kontrollstrategie
+
+Prioritaet fuer neue Laeufe:
+
+1. Baseline `embedding dim = 5` mit expliziten Seeds im Millionenbereich.
+2. `shuffled_memory`, weil diese Kontrolle direkt die Altersstruktur des
+   Speichers testet.
+3. `eta_zero` als Random-Walk/Brownian-artiger Nullpfad.
+4. `single_scale`, um die Notwendigkeit der zweiten Kernel-Skala zu testen.
+5. Fitfenster-, Burn-in- und Sampling-Sensitivitaet.
+
+## Non-Markovian Experiment Gap
+
+Noch nicht vorhanden:
+
+- Memory-Traces pro Sample.
+- Lag-time sweeps.
+- Uebergangsmatrizen.
+- Implied timescales.
+- Chapman-Kolmogorov-Checks.
+- PCCA-/HMM-basierte metastabile Zustandsmodelle.
+
+Das ist die naechste Experimentfamilie, falls Paper 0 zuerst geschrieben wird.

@@ -1,107 +1,103 @@
 # Action Matrix
 
-Stand: 2026-06-01.
+Stand: 2026-06-14.
 
-Diese Matrix beantwortet: Was kann Codex allein weiterziehen, und wofuer wird
+Diese Matrix beantwortet: Was kann Codex autonom weiterziehen, und wofuer wird
 Hauke gebraucht?
 
-## Kann ich autonom erledigen
+## Kann Codex autonom erledigen
 
-### Projektstruktur und Inventar
+### Dokumentation und Inventar
 
-- lokale Skripte, PDFs, CSV/NPZ/NPY-Dateien weiter katalogisieren
-- historische Skriptfamilien in Claim- und Experimentgruppen einordnen
-- Querverweise zwischen Paper-Claims, Skripten und Ergebnisartefakten pflegen
-- neue Strukturdateien, Reports und Tests im Workspace
-  `C:\Users\Hauke\Documents\Emergenz_Knoten` anlegen
+- ReadTheDocs/MkDocs pflegen.
+- Projektkarte, Architektur, Experiment-Katalog und Claim-Register aktuell
+  halten.
+- Historische Skripte und Ergebnisartefakte fachlich einordnen.
+- Reports fuer neue Laeufe oder Audits schreiben.
+
+### Code und Reproduzierbarkeit
+
+- Kleine NumPy-basierte Tests und Smoke-Tests ausfuehren.
+- Paketkern unter `src/emergenz_knoten` erweitern.
+- Tests unter `tests/` ergaenzen.
+- Ergebnisformate und Manifeste standardisieren.
+- Kurze Reproduktionslaeufe starten, sofern die lokale Umgebung die
+  Abhaengigkeiten bereitstellt.
+
+### Non-Markovian / Markov-Embedding Schicht
+
+- Memory-Summary-Features entwerfen.
+- Additive Module unter `src/emergenz_knoten/markov/` anlegen.
+- Lagged-Dataset-, Transition-Count- und Validation-Funktionen bauen.
+- Tests fuer synthetische Markov-Ketten und nichtmarkovsche Projektionen
+  schreiben.
+- Ergebnisse gegen Residence- und Dimensionsdiagnostiken querpruefen.
 
 ### Paper-nahe Arbeit
 
-- Paper-I-Quelle `1.tex` lesen und auditieren
-- konkrete Paper-Probleme als Report oder Patch-Vorschlag dokumentieren
-- Claim-Sprache schaerfen: Definition / Observation / Conjecture trennen
-- offene Formeln, unklare Diagnostiken und fehlende Datenbindung markieren
+- Paper-I-Quelle lesen und gezielt patchen.
+- Abschnitte zu Minimalmodell, emergenter Zeit, Knoten, Masse und Diagnostik
+  mit der Non-Markovian-Basis abgleichen.
+- Claim-Sprache schaerfen: Definition / numerical observation / conjecture.
+- Patch-Reports oder direkte LaTeX-Edits im Workspace ausfuehren.
 
-Wichtig: Direktes Editieren im Paper-Ordner
-`C:\Users\Hauke\Documents\Hobby\Weltformel\EmergenteRaumzeit` braucht eine
-separate Freigabe, weil dieser Ordner ausserhalb des aktuellen Workspace liegt.
+## Braucht Haukes Entscheidung
 
-### Reproduzierbarkeit
+### Paper-Reihenfolge
 
-- mit der gebuendelten Codex-Python-Runtime kleine NumPy-basierte Tests laufen
-  lassen
-- pure-NumPy-Referenzimplementierungen fuer Kernel, Simulation und Diagnostik
-  bauen
-- Smoke-Tests und kleine Kontrolllaeufe erstellen
-- vorhandene CSV-Dateien mit PowerShell/Python auswerten
-- Ergebnisreports erzeugen
+Optionen:
 
-Aktuell verfuegbar:
+- **Paper 0 zuerst:** Literatur- und Methodenbasis fuer finite-memory
+  self-interacting processes, Markov-Einbettung, Transferoperatoren.
+- **Paper I zuerst:** bestehendes Minimalmodell schrittweise haerten und
+  Non-Markovian-Basis in die aktuelle Erzaehlung integrieren.
 
-- Codex Python: `C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`
-- vorhanden: `numpy`, `pandas`
-- nicht vorhanden: `matplotlib`, `scipy`, `numba`
+Empfehlung aus aktuellem Stand: Paper 0 ist strategisch stark, weil es die
+Mathematik und Methodensprache klaert, bevor Paper I groessere Physikclaims
+traegt.
 
-### Modellhaertung
+### Rechenumgebung
 
-- Tests fuer `D_cov`, `D_occ`, Residence/Knotenstatistiken schreiben
-- negative Controls vorbereiten
-- alte Diagnostiken in saubere Funktionen ueberfuehren
-- kurze Parameterprofile bauen, die in Sekunden/Minuten laufen
-- bestehende lange Fraktal-CSV-Spuren analysieren
-
-## Brauche ich von Dir
-
-### 1. Schreibfreigabe fuer den Paper-Ordner
-
-Nur wenn ich `1.tex`, `references.bib` oder die dortigen Build-Artefakte direkt
-aendern/builden soll. Ohne Freigabe arbeite ich read-only und schreibe Reports
-ins Hauptrepo.
-
-### 2. Git-Entscheidung
-
-Das Repo hat noch keinen Commit. Sinnvolle Optionen:
-
-- `baseline-all`: alles Historische inklusive PDFs/NPY/NPZ committen
-- `baseline-code-docs`: zuerst Code/Dokumentation committen, grosse Daten
-  separat kuratieren
-- `no-commit-yet`: weiter lokal strukturieren, aber noch nichts committen
-
-Meine Empfehlung: erst `baseline-code-docs`, danach Datenartefakte bewusst
-kuratieren.
-
-### 3. Python/Plotting/GPU
-
-Fuer kleine Tests reicht die Codex-Runtime. Fuer volle Reproduktion der
-historischen Skripte brauchen wir eine funktionierende lokale Umgebung mit:
+Fuer lange Fraktal-/Dimensionslaeufe braucht es eine funktionierende lokale
+Python/Numba-Umgebung mit:
 
 - `numpy`
 - `matplotlib`
 - `numba`
 - `scipy`
 - `pandas`
-- optional CUDA/Numba-CUDA fuer GPU-Laeufe
 
-### 4. Prioritaet des ersten grossen Claims
+Codex kann kleine Checks machen, aber die Millionen-/Zehnmillionen-Laeufe
+sollten in einer bewusst eingerichteten Projektumgebung laufen.
 
-Wenn Du nichts anderes sagst, nehme ich diese Reihenfolge:
+### Claim-Prioritaet
 
-1. `D_occ ~ 2.8/3` aus vorhandenen Fraktal-Laeufen reproduzierbar machen.
-2. Paper-I-Formeln/Definitionen reparieren.
-3. `c_eff`/Time-of-flight Experimente haerten.
-4. 3D-Selektionsargument formal sortieren.
+Wenn nichts anderes gesagt wird, ist die Reihenfolge:
 
-### 5. Externe Datenquellen
+1. Non-Markovian Basis / Markov-Einbettung operationalisieren.
+2. Archivierten `D_occ ~ 2.8`-Befund im Millionenbereich reproduzieren.
+3. Paper I mit sauberer Claim-Sprache ueberarbeiten.
+4. Propagation/`c_eff` und Paper II danach haerten.
 
-Falls wichtige Daten ausserhalb des Workspaces liegen, brauche ich nur Pfade.
-Ich kann dann read-only inventarisieren und entscheiden, ob eine Kopie ins Repo
-sinnvoll ist.
+## Aktuelle No-Gos
 
-## Bereits umgesetzt am 2026-06-01
+- Keine eindeutige 3D-Selektion behaupten, bevor Seed-Ensembles,
+  Negativkontrollen und robuste Fitfenster vorliegen.
+- `spectral_dimension` aus `diagnostics.py` nicht als Transferoperator-Spektrum
+  formulieren.
+- Historische Chatnotizen nicht als zitierfaehige Quelle behandeln.
+- Long-Run-Skripte nicht als CI- oder Smoke-Tests starten.
+- Alte Ergebnisdaten nicht ohne Parameter-/Seed-Kontext als neue Evidenz
+  ausgeben.
 
-- Paper-I-Ordner gefunden und `1.tex` gelesen.
-- Aktueller Paper-I-PDF-Build erkannt: 9 Seiten, erstellt am 2026-06-01.
-- Gebuendelte Codex-Python-Runtime geprueft.
-- Pure-NumPy-Referenzkern unter `src/emergenz_knoten` angelegt.
-- Tests unter `tests/test_core.py` angelegt und erfolgreich ausgefuehrt.
-- Smoke-Test unter `scripts/smoke_test.py` angelegt und erfolgreich ausgefuehrt.
+## Sofort anschlussfaehige Tasks
+
+1. `src/emergenz_knoten/markov/dataset.py` mit Delay- und
+   Memory-Summary-Features.
+2. `src/emergenz_knoten/markov/transition.py` mit Counts und
+   zeilenstochastischen Matrizen.
+3. `src/emergenz_knoten/markov/validation.py` mit implied timescales und
+   einfachen CK-Fehlern.
+4. Paper-I-Patch: sichtbarer nichtmarkovscher Prozess vs. augmentierter
+   Markov-Zustand.
+5. Numba-faehiger Millionenlauf fuer `embedding dim = 5` mit expliziten Seeds.

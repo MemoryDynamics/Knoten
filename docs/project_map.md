@@ -1,151 +1,160 @@
 # Projektkarte
 
-Stand: 2026-05-22.
+Stand: 2026-06-14.
 
-## Grobinventar
+## Grobstruktur
 
-Ohne virtuelle Umgebungen und IDE-Dateien liegen aktuell vor:
+```text
+src/emergenz_knoten/        # kanonischer Paketkern
+experiments/                # reproduzierbare und historische Experiment-Entry-Points
+data/raw/                   # unveraenderte Rohdaten und Platzhalter
+data/processed/             # kuratierte Auswertungen und JSON/NPY/NPZ-Artefakte
+figures/                    # papernahe und draft-Figuren
+paper/                      # aktuelle Paper-I- und Paper-II-Quellen
+docs/                       # ReadTheDocs/MkDocs, Claim-Register, Projektkarte
+reports/                    # datierte Audits und Ergebnisberichte
+tests/                      # schnelle Unit-/Smoke-Tests
+```
 
-| Typ | Anzahl | Rolle |
-| --- | ---: | --- |
-| Python-Skripte | 43 | Simulationen, Scans, Plot-Generatoren |
-| PDFs | 27 | Paper-Figuren, Diagramme, Heatmaps |
-| PNGs | 7 | Ergebnisplots in Unterordnern |
-| NPY/NPZ | 13 | Checkpoints, Progress-Dateien, Ergebnisdaten |
-| CSV/TXT | 9 | Fraktal- und Skalierungsresultate |
+`main` ist die aktuelle Arbeitslinie. Der historische `cleanup`-Branch bleibt
+als Referenz bestehen, neue Arbeit soll aber auf `main` laufen.
 
-Git-Zustand beim Audit: Repository existiert, aber es gibt noch keinen Commit;
-praktisch alle Projektdateien sind unversioniert.
+## Kanonische Schicht
+
+Die aktuelle Paket-API lebt unter `src/emergenz_knoten`:
+
+- `core.py`: finite-memory Update, `SimulationConfig`, NumPy- und
+  optionale Numba-Simulation.
+- `kernels.py`: exponentielle Gewichte und single/double Gaussian
+  Gradienten.
+- `diagnostics.py`: geometrische Dimensions- und Residence-Diagnostiken.
+- `experiments.py`: `SimulationRunner`, NPZ/JSON-I/O.
+- `simulation.py`: Legacy-Kompatibilitaetslayer.
+
+Diese Schicht ist die Basis fuer neue Arbeit. Historische Skripte sollen nur
+noch dann direkt erweitert werden, wenn ein reproduzierbarer Vergleich zum
+Paketkern vorliegt.
 
 ## Historische Skriptfamilien
 
-### Fruehe Knoten- und Trajektorienmodelle
+### Knoten- und Trajektorienmodelle
 
-- `Knoten.py`
-- `Knoten3D.py`
-- `Knoten3D_prism.py`
-- `fig1_knot_trajectory.pdf`, `fig2_knot_scatter.pdf`,
-  `fig3_knot_trajectory.pdf`
+- `experiments/knot_stability/Knoten.py`
+- `experiments/knot_stability/Knoten3D.py`
+- `experiments/knot_stability/Knoten3D_prism.py`
+- `experiments/knot_stability/knot_chi_scan.py`
 
-Rolle: fruehe memory-driven self-avoiding trajectories, Visualisierung von
-Knotenbildung und metastabilen Spuren.
+Rolle: fruehe memory-driven self-avoiding trajectories, Knotenbildung,
+metastabile Spuren und Residence-Intuition.
 
 ### Spektral-/Kovarianzdimension und Heatmaps
 
-- `DimensionsHeatmap.py`
-- `DimensionsHeatmapOpt.py`
-- `DimensionsHeatmap2Opt.py`
-- `DimensionsHeatmap3Opt.py`
-- `DimensionsHeatmap4OptGPU.py`
-- `plotD.py`, `plotDgpu.py`
-- `progress*.npy`, `progress*.npz`
-- `heatmap_*dimension*.pdf`, `spectral_dimension_heatmap_optimized.pdf`
+- `experiments/dimension_selection/DimensionsHeatmap*.py`
+- `experiments/dimension_selection/plotD*.py`
+- `figures/draft/heatmap_*dimension*.pdf`
+- `data/processed/heatmap/`
 
-Rolle: parameterabhaengige Schaetzung von Spektraldimension,
-Kovarianzdimension und Fitqualitaet. Der GPU-Zweig enthaelt sehr lange Laeufe
-und Checkpoint-Artefakte.
-
-### Retardierung, Lichtkegel, effektive Signalgeschwindigkeit
-
-- `PaperII3D_4Plots.py`
-- `PaperII3D_4Plots2.py`
-- `PaperII3D_5Plots1.py`
-- `PaperII3D_5Plots2.py`
-- `diagram1_retarded_response.pdf`
-- `diagram2_time_of_flight.pdf`
-- `diagram3_ceff_scaling.pdf`
-- `diagram4_light_cone.pdf`
-- `front_*`, `diffusive_*`
-
-Rolle: numerische Stuetze fuer endliche Antwortzeiten, Time-of-flight,
-effektive Fronten und operationalen Lichtkegel.
+Rolle: parameterabhaengige Schaetzung von Spektral-/Kovarianzdimension und
+Fitqualitaet. Der GPU-Zweig ist langlaufend und muss kontrolliert gestartet
+werden.
 
 ### Zwei-Skalen-Kernel / Dimension Selection
 
-- `2SkalenKernel/`
+- `experiments/dimension_selection/2SkalenKernel/`
 - Besonders wichtig: `emergent_3D_final.py`, `emergent_3d_scan.py`,
-  `SpecCovFrac.py`, `3Plots2Traj.py`, `Ueff.py`, `rho.py`
-- Ergebnisse: `2SkalenKernel/results*/D_vs_*.png`,
-  `2SkalenKernel/checkpoint_emergent3d.npz`
+  `SpecCovFrac.py`, `Ueff.py`, `rho.py`
 
-Rolle: Wechsel von Ein-Skalen-Gauss auf Repulsion/Attraction bzw.
-Zwei-Skalen-Kernel. Das ist derzeit der wichtigste Zweig fuer die Frage, ob
-eine makroskopisch stabile effektive Dimension nahe 3 bevorzugt wird.
+Rolle: Repulsion/Attraction- bzw. Zwei-Skalen-Kernel als moeglicher Mechanismus
+fuer stabilere effektive Dimensionen und metastabile Strukturen.
 
-### Fraktale / Occupancy Dimension / Finite-Size Scaling
+### Fraktale / Occupancy Dimension
 
-- `Fraktale/FD2.py`
-- `Fraktale/Fraktaldimension.py`
-- `Fraktale/fit_n_plot.py`
-- `Fraktale/results_plot.py`
-- `Fraktale/results*.csv`, `Fraktale/scan_results.txt`,
-  `Fraktale/N_*.png`
+- `experiments/fractal_analysis/Fraktale/FD2.py`
+- `experiments/fractal_analysis/Fraktale/resultsN.csv`
+- `experiments/fractal_analysis/analyze_dimension_claim.py`
+- `experiments/fractal_analysis/reproduce_dimension_pilot.py`
 
-Rolle: Box-counting/Occupancy-Dimension, Skalierungsanalyse ueber `N`,
-Embedding-Dimension-Tests und Ergebnisplots.
+Rolle: Quelle des archivierten `D_occ ~ 2.8`-Long-N-Befunds und aktueller
+Reproduktionspfad fuer kleine/mittlere `N`.
 
-### Analytische oder schematische Figuren
+### Retardierung, Lichtkegel, effektive Signalgeschwindigkeit
 
-- `OU-Limit.py`
-- `Oszillationen.py`
-- `EmergenzGravitation.py`
-- `emergenz_2regime.py`
-- `fig_alpha*.py`, `fig_Gamma_alpha.py`, `fig_Hlamda_alpha.py`
+- `experiments/propagation_speed/PaperII3D_*.py`
+- `figures/draft/diagram*.pdf`
+- `figures/draft/front_*`
+- `figures/draft/diffusive_*`
 
-Rolle: OU-Grenzfall, Relaxations-/Regime-Diagramme, heuristische
-Parameterkarten und papernahe Visualisierungen.
+Rolle: numerische Grundlage fuer endliche Antwortzeiten, Time-of-flight,
+effektive Fronten und operationalen Lichtkegel. Der Claim ist wichtig, aber
+aktuell nachrangig gegenueber Paper 0/I-Haertung.
 
-## Zielstruktur fuer die naechste Refactor-Runde
+### OU-Limit und analytische Figuren
 
-Diese Struktur sollte erst nach einem Baseline-Commit der bestehenden Dateien
-aktiv durch Verschieben/Refactoring umgesetzt werden:
+- `experiments/ou_limit/`
+- `figures/draft/fig_OUlimit.pdf`
+- `figures/draft/fig_alpha_hbar_eff*.pdf`
+
+Rolle: OU-Grenzfall, Relaxations-/Regime-Diagramme und papernahe
+Visualisierungen.
+
+### Legacy
+
+- `experiments/legacy/`
+- `experiments/legacy/scripts/highN_regime*.py`
+
+Rolle: fruehere Referenz- und Validierungslaeufe. Nicht loeschen; bei neuer
+Nutzung zuerst Parameter, Seed und Outputpfad manifestieren.
+
+## Dokumentation
+
+ReadTheDocs/MkDocs:
+
+- `.readthedocs.yaml`
+- `mkdocs.yml`
+- `docs/index.md`
+- `docs/current_status.md`
+- `docs/non_markovian_basis.md`
+
+Kuratierte Projekt-Dokumente:
+
+- `docs/architecture_overview.md`
+- `docs/experiment_catalog.md`
+- `docs/reproducibility_status.md`
+- `docs/hardening_plan.md`
+- `docs/paper_claims.md`
+- `docs/action_matrix.md`
+- `docs/THEORETICAL_CONTEXT.md`
+
+Datierte Reports:
+
+- `reports/dimension_claim_seed_audit_2026-06-13.md`
+- `reports/dimension_reproduction_results_2026-06-13.md`
+- `reports/fractal_parameter_landscape_reading_2026-06-13.md`
+- `reports/fractal_alpha_sweep_pilot_historical_30k_2026-06-13.md`
+
+## Naechste Zielstruktur
+
+Additiv, ohne historische Daten zu zerstoeren:
 
 ```text
 src/emergenz_knoten/
-  core.py              # Speicherupdate, Kernel, Einzelschritt
-  kernels.py           # Gaussian, double Gaussian, austauschbare Kernel
-  diagnostics.py       # D_cov, D_occ, D_spec, Residence, Relaxation
-  experiments.py       # gemeinsame Runner/Seed/Checkpoint-Hilfen
-
-experiments/
-  dimension_selection/
-  propagation_speed/
-  knot_stability/
-  ou_limit/
-
-data/
-  raw/
-    alpha/
-    heatmap/
-    highN_regime/
-    progress/
-    reference/
-    sweep_alpha/
-  processed/
-    alpha/
-    heatmap/
-    highN_regime/
-    progress/
-    reference/
-    sweep_alpha/
-
-docs/
-  overview/
-
-tests/
-
-paper/
-  paper_i/
-  paper_ii/
+  markov/
+    dataset.py          # augmentierte Features und lagged datasets
+    transition.py       # counts, transition matrices, spectra
+    validation.py       # ITS, CK, spectral gaps
+    metastability.py    # PCCA-/Membership-Schicht
 ```
+
+Ziel: die bestehende geometrische Diagnostik um eine dynamische
+Operator-Schicht erweitern. Dadurch koennen Knoten als metastabile Mengen des
+augmentierten Speicherprozesses getestet werden.
 
 ## Aufraeumprinzip
 
-Nicht zuerst Dateien nach Geschmack sortieren, sondern zuerst Bedeutung
-konservieren:
-
-1. Historische Skripte versionieren.
-2. Pro Skriptfamilie klaeren: Eingaben, Outputs, Laufzeit, relevante Claims.
-3. Einen kanonischen Modellkern extrahieren.
-4. Alte Skripte nur noch als Reproduktionshistorie behalten oder in
-   `experiments/legacy/` verschieben.
+1. Historische Skripte erhalten.
+2. Neue Experimente ueber Paketkern und klare Entry-Points bauen.
+3. Parameter, Seeds, Runtime und Outputpfade manifestieren.
+4. Alte Resultate nur dann als Paper-Evidenz nutzen, wenn ihre Herkunft und
+   Diagnosevariante dokumentiert ist.
+5. Starke physikalische Claims erst nach Negativkontrollen, Seed-Ensembles und
+   stabilen Fitfenstern formulieren.

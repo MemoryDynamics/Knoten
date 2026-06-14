@@ -1,47 +1,43 @@
-# Paper II - Propagation Speed & Light-Cone Dynamics
+# Paper II - Propagation Speed and Light-Cone Dynamics
 
-## Übersicht
+Stand: 2026-06-14.
 
-Dieses Verzeichnis enthält **Paper II** der Emergenz_Knoten-Forschung:
-- **Fokus**: Propagation Speed, retardierte Effekte, effektive Light-Cone-Struktur
-- **Status**: In Entwicklung (Main-Struktur vorbereitet)
+## Rolle
+
+Paper II sammelt die These, dass aus irreversibler Speicherdynamik und
+gekoppelten metastabilen Knoten endliche Antwortzeiten, effektive
+Signalfronten und spaeter Lorentz-artige Kinematik entstehen koennen.
+
+## Status
+
+Die Struktur ist vorbereitet, aber die empirische Haertung steht hinter der
+aktuellen Paper-0/Paper-I-Arbeit:
+
+- Zuerst Non-Markovian Basis und Markov-Einbettung klaeren.
+- Dann Paper I als Minimalmodell haerten.
+- Danach Propagation, `c_eff` und Lorentz-Kinematik mit klaren
+  Negativkontrollen und robusten Onset-Kriterien weiterziehen.
 
 ## Dateien
 
-- `main.tex` — LaTeX-Hauptdatei
-- `references2.bib` — Bibliographie
+- `main.tex`: LaTeX-Hauptdatei.
+- `references2.bib`: Bibliographie.
 
-## Verwandte Experimente & Daten
+## Verwandte Experimente und Figuren
 
-### Skripte
-- `experiments/propagation_speed/` — Light-cone Analyse Skripte:
-  - `PaperII3D_*.py` (4 Visualisierungs-Skripte)
+- `experiments/propagation_speed/`
+- `figures/draft/diagram1_retarded_response.pdf`
+- `figures/draft/diagram2_time_of_flight.pdf`
+- `figures/draft/diagram3_ceff_scaling.pdf`
+- `figures/draft/diagram4_light_cone.pdf`
+- `figures/draft/front_*`
+- `figures/draft/diffusive_*`
 
-### Figures (Draft)
-- `figures/draft/` — Analysis Plots (noch nicht in Paper integriert):
-  - `diagram*.pdf` — Retardierte Response, Time-of-Flight
-  - `front_*`, `diffusive_*` — Light-Cone Diagramme
+## Haertungsbedarf
 
-### Daten
-- `data/processed/` — JSON/NPY Simulationsergebnisse
-
-## Workflow
-
-1. Bearbeite `main.tex`
-2. Referenziere Figures aus `figures/draft/` oder generiere neue
-3. Kompiliere mit `pdflatex main.tex`
-4. Aktualisiere `references2.bib`
-5. Commit mit `git add -A && git commit -m "paper_ii: ..."`
-
-## Nächste Schritte
-
-- [ ] Main-Struktur finalisieren
-- [ ] Figures selektion & Beschreibung
-- [ ] References compilieren
-- [ ] Erste Draft-Version
-
-## Hinweise
-
-- Unterscheide zwischen Rohfiguren (figures/draft/) und Production-Figures
-- Simulationsergebnisse in data/processed/ referenzierbar
-- Skripte in experiments/propagation_speed/ sind reproduzierbare Datenquellen
+- Kick/no-kick-Ensembles mit gleicher Seed-Struktur.
+- Vorab definierte Response-Observable.
+- Onset-Detection robust gegen Threshold, Glaettung und Fenster.
+- `t_onset(L)`-Fits mit Fehlerbalken.
+- Tests gegen Speicher-Randomisierung und diffusive Nullmodelle.
+- Pruefung, ob verschiedene Knoten denselben effektiven `c_eff` messen.

@@ -56,7 +56,7 @@ In Sec.~\ref{sec:MinDynModel} we specify the minimal generator---a stochastic po
 Sec.~\ref{sec:EmergenceTime} introduces an effective coarse-grained time parametrization and discusses when a continuum description is useful.
 Subsequent sections develop operational diagnostics (metastability, persistence/relaxation rates, and dimensionless stability measures) and analyze memory-induced irreversibility and the formation of robust, typically metastable dynamical structures.
 
-A minimal reference implementation accompanies this work in the repository, with a NumPy-based finite-memory simulator, diagnostic functions, and reproducible runner scripts (`scripts/smoke_test.py` and `scripts/reference_experiment.py`) that support the reproducibility of the key numerical claims.
+A minimal reference implementation accompanies this work in the repository, with a NumPy-based finite-memory simulator, diagnostic functions, tests under `tests/`, and the reproducible runner `experiments/reference_experiment.py` that support the reproducibility of the key numerical claims.
 
 %-------------------------------------------------
 \subsection{Minimalist motivation: from directed updates to effective geometry}\label{sec:minimalist_motivation}
@@ -531,7 +531,7 @@ Interpreting such stability scales as mass-like proxies is natural at the level 
 
 Several limitations and open directions remain.
 The continuum description is used here as an effective approximation rather than as a proven scaling limit; a rigorous convergence analysis, including conditions on $(G_\sigma,K)$ and parameter scalings, is left for future work.
-A small NumPy reference implementation in `src/emergenz_knoten` and reproducible runner scripts (`scripts/smoke_test.py` and `scripts/reference_experiment.py`) provide a concrete basis for verifying the numerical diagnostics reported in this draft.
+A small NumPy reference implementation in `src/emergenz_knoten`, tests under `tests/`, and the reproducible runner `experiments/reference_experiment.py` provide a concrete basis for verifying the numerical diagnostics reported in this draft.
 Finally, extending the framework to multiple coupled generators and exploring when consistent universal scales emerge are natural next steps.
 
 \begin{acknowledgments}

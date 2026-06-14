@@ -1,0 +1,27 @@
+site_name: Emergenz Knoten
+site_description: Documentation for the finite-memory Emergenz Knoten project.
+repo_url: https://github.com/MemoryDynamics/Knoten
+docs_dir: docs
+
+theme:
+  name: readthedocs
+
+nav:
+  - Start: index.md
+  - Aktueller Stand: current_status.md
+  - Non-Markovian Basis: non_markovian_basis.md
+  - Projektkarte: project_map.md
+  - Architektur: architecture_overview.md
+  - Experimente: experiment_catalog.md
+  - Reproduzierbarkeit: reproducibility_status.md
+  - Haertungsplan: hardening_plan.md
+  - Paper-Claims: paper_claims.md
+  - Action Matrix: action_matrix.md
+  - Theoretical Context: THEORETICAL_CONTEXT.md
+
+markdown_extensions:
+  - admonition
+  - fenced_code
+  - tables
+  - toc:
+      permalink: true

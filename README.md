@@ -3,13 +3,59 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand dieses ersten Audits: 2026-05-22.
+Stand: 2026-06-14.
+
+## Worum es geht
+
+Das Projekt untersucht einen stochastischen Punktprozess mit endlichem,
+relaxierendem Gedaechtnis. Der sichtbare Prozess `x_n` ist im Allgemeinen
+nicht markovsch, weil sein naechster Schritt von gespeicherter Vergangenheit
+abhaengt. Der augmentierte Zustand aus Position und Speicher,
+z. B. `(x_n, rho_n)` oder `(x_n, history_n)`, ist dagegen der natuerliche
+Markov-Zustand.
+
+Diese Sicht ist der aktuelle inhaltliche Anker fuer die naechste Phase:
+
+- Paper 0: Einordnung als finite-memory self-interacting process mit
+  Markov-Einbettung und Transferoperator-/MSM-Anschluss.
+- Paper I: schrittweise Ueberarbeitung des Minimalmodells, damit Zeit,
+  Knoten, Relaxationsskalen und Mass-Proxies operationaler und weniger
+  spekulativ formuliert sind.
+
+## Aktueller Stand
+
+- `main` ist die Arbeitslinie und tracked `origin/main`.
+- Der Paketkern liegt unter `src/emergenz_knoten`.
+- Die wichtigsten Entry-Points liegen unter `experiments/`.
+- Tests liegen unter `tests/`.
+- ReadTheDocs/MkDocs-Konfiguration ist vorbereitet:
+  `.readthedocs.yaml`, `mkdocs.yml`, `docs/index.md`.
+- Die historischen Chat-Notizen bleiben Rohmaterial; kuratierte Aussagen
+  gehoeren in `docs/` und `reports/`.
+
+Wissenschaftlich belastbar ist derzeit:
+
+- Der archivierte Long-N-Finite-Size-Befund enthaelt ein Near-3-Signal:
+  `embedding dim = 5`, `N = 60,000,000`, fuenf Runs,
+  `mean D_occ = 2.810559`.
+- Ein neuer reproduzierbarer Pfad koppelt bei kleineren/mittleren `N`
+  plausibel an den Archivpfad an.
+- Die Kurzlaeufe und Negativkontrollen zeigen noch keinen starken Near-3-Claim.
+  Die robuste Formulierung ist daher: ein vielversprechender archivierter
+  Dimensionsbefund, aber noch kein Nachweis einer eindeutigen 3D-Selektion.
+
+Der wichtigste technische Gap fuer die Non-Markovian-Schiene:
+
+- Die Simulation gibt bisher `samples`, `sample_steps`, finalen `memory` und
+  `weights` zurueck.
+- Fuer Transferoperatoren, MSM/PCCA oder HMM/PMM brauchen wir zusaetzlich
+  Memory-Traces oder konsistente Memory-Summary-Features entlang der Trajektorie.
 
 ## Schnellstart
 
 ```python
 from pathlib import Path
-from emergenz_knoten import SimulationConfig, run_simulation, save_simulation_result
+from emergenz_knoten import SimulationConfig, run_simulation
 
 config = SimulationConfig(
     steps=5000,
@@ -18,9 +64,9 @@ config = SimulationConfig(
     sample_every=50,
     max_memory=200,
 )
-result = run_simulation(config, seed=1, output_path=Path('results/simulation.npz'))
+result = run_simulation(config, seed=1, output_path=Path("results/simulation.npz"))
 
-print(result['samples'].shape)
+print(result["samples"].shape)
 ```
 
 ## Installation
@@ -30,21 +76,16 @@ Empfohlen in einer virtuellen Umgebung:
 ```bash
 python -m pip install -r requirements.txt
 python -m pip install -r requirements-dev.txt
-```
-
-Zum Entwickeln und Paketieren:
-
-```bash
 python -m pip install -e .
 ```
 
-Tests ausführen:
+Tests ausfuehren:
 
 ```bash
 python -m pytest tests -q
 ```
 
-Der Kernexport umfasst:
+Der oeffentliche Kernexport umfasst:
 
 - `SimulationConfig`
 - `simulate_finite_memory`
@@ -53,100 +94,67 @@ Der Kernexport umfasst:
 - `run_simulation`
 - `save_simulation_result`
 - `load_simulation_result`
+- `covariance_dimension`
+- `occupancy_dimension`
+- `spectral_dimension`
+- `residence_statistics`
+
+## Dokumentation
+
+Lokaler MkDocs-Build:
+
+```bash
+python -m pip install -r docs/requirements.txt
+python -m mkdocs serve
+python -m mkdocs build
+```
+
+Wichtige Einstiegspunkte:
+
+- [ReadTheDocs-Startseite](docs/index.md)
+- [Aktueller Stand](docs/current_status.md)
+- [Non-Markovian Basis](docs/non_markovian_basis.md)
+- [Projektkarte](docs/project_map.md)
+- [Architekturuebersicht](docs/architecture_overview.md)
+- [Experiment-Katalog](docs/experiment_catalog.md)
+- [Reproduzierbarkeitsstatus](docs/reproducibility_status.md)
+- [Paper-Claims](docs/paper_claims.md)
+- [Haertungsplan](docs/hardening_plan.md)
 
 ## Experiment Entry Point
 
-Für reproduzierbare Experimente steht ein zentrales CLI-Skript zur Verfügung:
-
 ```bash
 python experiments/cli.py --list
+python experiments/cli.py reference --list
+python experiments/cli.py reference --script reference_experiment.py
 python experiments/cli.py dimension_selection --list
 python experiments/cli.py dimension_selection --script DimensionsHeatmap.py
 ```
 
-Ein kleines Starter-Demo ist ebenfalls vorhanden:
+Direkter Referenzlauf:
 
 ```bash
-python experiments/demo_simulation.py
+python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
 ```
-
-## Startpunkte
-
-- [Projektkarte](docs/project_map.md): Was liegt wo, welche historischen
-  Skriptfamilien gibt es, und welche Zielstruktur ist sinnvoll.
-- [Architekturübersicht](docs/architecture_overview.md): Kernkomponenten und
-  Datenfluss des aktuellen Projektzustands.
-- [Paper-Claims](docs/paper_claims.md): Extrahierte Kernaussagen aus den
-  aktuellen Paper-Drafts und ihr aktueller Haertungsstatus.
-- [Haertungsplan](docs/hardening_plan.md): Konkrete Tests, Gegenproben und
-  Reproduzierbarkeitskriterien.
-- [Experiment-Katalog](docs/experiment_catalog.md): Bestehende Skripte und
-  Ergebnisartefakte nach Thema.
-- [Reproduzierbarkeitsstatus](docs/reproducibility_status.md): Aktueller
-  technischer Zustand, inklusive Python-Umgebung.
-- [Initial Audit](reports/initial_audit_2026-05-22.md): Kurze Diagnose der
-  groessten Staerken, Risiken und naechsten Schritte.
-- [Fractal Results Quicklook](reports/fractal_results_quicklook_2026-05-22.md):
-  erster Reality Check zu vorhandenen `D_occ ~ 2.8` CSV-Spuren.
-- [Action Matrix](docs/action_matrix.md): Was Codex autonom weiterziehen kann
-  und wofuer Hauke gebraucht wird.
-- [Paper I Source Audit](reports/paper1_source_audit_2026-06-01.md):
-  erster Audit der aktuellen `1.tex` Quelle.
- - [Theoretical Context](docs/THEORETICAL_CONTEXT.md): kurze, zusammenfassende
-   Kontext- und Claim-Mapping-Datei, die die Chat-basierten Notizen mit den
-   Experiment-Entry-Points verknüpft.
 
 ## Modellkern in einem Satz
 
 Ein Punktprozess `x_n` in einem abstrakten Zustandsraum wird mit einer
-endlichen, relaxierenden Speicherverteilung `rho_n` gekoppelt. Die
-Nicht-Invertierbarkeit des Speicherupdates erzeugt eine Update-Richtung; unter
-geeigneter Grobkoernung koennen metastabile, lokalisierte Strukturen entstehen,
-deren effektive Dimension, Relaxationsskalen und Signalantworten als Kandidaten
-fuer Raum, Zeit und Kinematik untersucht werden.
+endlichen, relaxierenden Speicherverteilung gekoppelt. Das Speicherupdate ist
+irreversibel und macht den sichtbaren Prozess nichtmarkovsch; im augmentierten
+Speicherzustand entsteht jedoch eine saubere Markov-Einbettung, aus der
+metastabile Strukturen, Relaxationsskalen und effektive Grobstrukturen
+operational untersucht werden koennen.
 
-## Arbeitsregel ab jetzt
+## Naechste Prioritaeten
 
-Die bestehenden Skripte bleiben zunaechst unangetastet, weil sie historische
-Explorationslaeufe und relative Ausgabepfade enthalten. Neue Arbeit sollte in
-einer sauberen Zielstruktur entstehen und nur dann alte Skripte ersetzen, wenn
-ein reproduzierbarer Vergleich vorliegt.
-
-Empfohlene Zielstruktur fuer die naechste Refactor-Runde:
-
-```text
-src/emergenz_knoten/        # kanonischer Modellkern und Diagnostiken
-experiments/                # reproduzierbare Experiment-Entry-Points
-data/raw/                   # unveraenderte Rohresultate
-data/processed/             # kuratierte Auswertungen
-figures/                    # paperfaehige Abbildungen
-paper/                      # LaTeX/Prism-Quellen, wenn verfuegbar
-docs/                       # Claim-Register, Projektkarte, Haertung
-reports/                    # datierte Audits und Ergebnisberichte
-```
-
-## Naechste technische Prioritaeten
-
-1. Eine funktionierende Python-Umgebung wiederherstellen.
-2. Einen ersten Baseline-Commit der historischen Artefakte erstellen.
-3. Den Modellkern aus den Explorationsskripten in ein testbares Paket
-   extrahieren.
-4. Den wichtigsten Befund, insbesondere die behauptete Naehe zu effektiver
-   Dimension ca. 2.8/3, mit Seeds, Konfidenzintervallen und Negativkontrollen
-   reproduzieren.
-
-## Aktueller Fortschritt 2026-06-01
-
-Ein erster leichter Referenzkern liegt unter `src/emergenz_knoten`.
-Er umfasst Kernelgradienten, eine kleine finite-memory Simulation und
-Diagnostiken fuer Kovarianzdimension, Occupancy-Dimension, Residence und
-Bootstrap-CI. Zum reproduzierbaren Referenzlauf steht
-`experiments/reference_experiment.py` bereit.
-Die Kernlogik laesst sich mit der gebuendelten Codex-Python-Runtime pruefen,
-wenn `PYTHONPATH` auf `src` gesetzt wird:
-
-```powershell
-$env:PYTHONPATH="src"
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" tests\test_core.py
-& "C:\Users\Hauke\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" experiments\reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
-```
+1. Paper-0-Basis schaerfen: finite-memory self-interaction,
+   exponentiell gewichtetes Besuchsmass, Markov-Einbettung, relevante
+   Literatur.
+2. Memory-Traces oder Memory-Summary-Features im kanonischen Kern ergaenzen.
+3. Erste Markov-Schiene bauen: Lagged Dataset, Transition Counts, Implied
+   Timescales, Chapman-Kolmogorov-Checks, spectral gaps.
+4. Den archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
+   Negativkontrollen und mehreren Diagnostiken haerten.
+5. Paper I so ueberarbeiten, dass starke Claims klar als Definition,
+   numerical observation oder conjecture getrennt sind.
