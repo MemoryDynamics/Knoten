@@ -40,7 +40,7 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
   Diagnostikfiguren.
 - `../../reports/paper1_olaf_note_2026-06-14.md`: kurze Begleitnotiz fuer
   Sichtung/Diskussion.
-- `../../reports/paper1_olaf_note_2026-06-16.md`: aktuelles Anschreiben fuer
+- `../../reports/paper1_olaf_note_2026-06-17.md`: aktuelles Anschreiben fuer
   Olaf mit Verweis auf `https://memorydynamics.org`.
 - `archiv/`: fruehere Versionen.
 - `fig*.pdf`: lokal kopierte Figuren fuer reproduzierbare Builds.

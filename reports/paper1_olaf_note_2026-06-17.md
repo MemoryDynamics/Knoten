@@ -1,14 +1,26 @@
 # Begleittext fuer Olaf Lechtenfeld
 
-Datum: 2026-06-16
+Datum: 2026-06-17
 
 Lieber Olaf,
 
-im November 2025 hatte ich Dir einen noch sehr vorlaeufigen und, rueckblickend,
-zu oberflaechlichen Zwischenstand geschickt. Das ist mir nicht ganz aus dem Kopf
-gegangen. Inzwischen ist aus dem Projekt deutlich mehr Begriffsarbeit und
-technische Pruefung entstanden, unter anderem mit vielen Simulations- und
-Verifikationsschleifen.
+vor ziemlich genau einem Jahr, im Juni 2025, hatte ich Dir ein Manuskript zu
+emergenter Gravitation aus Dirac-/Torsionsideen geschickt. Deine damalige
+Rueckmeldung war sehr direkt und im Rueckblick genau richtig: Das Manuskript
+war mathematisch und physikalisch nicht tragfaehig, enthielt falsche
+Identifikationen, Gauge-Probleme und zu viele KI-Halluzinationen.
+
+Diese Erfahrung ist fuer mich der eigentliche Grund, diesmal deutlich
+vorsichtiger vorzugehen. Ich habe den damaligen Ansatz nicht weiterverfolgt;
+insbesondere Asymptotic Safety war fuer mich eher eine Sackgasse als ein
+tragfaehiger Einstieg. Die Knotendynamik kam erst spaeter, etwa ab November,
+als neuer und deutlich konkreterer Versuch hinzu.
+
+Persoenlich steckt dahinter ein altes Motiv: Fragen nach Raum, Zeit und
+Gravitation gehoeren zu den Kindheitstraeumen, die mich urspruenglich zum
+Physikstudium gebracht haben. Gerade deshalb moechte ich diesmal nicht mit
+grossen Behauptungen beginnen, sondern mit einem kleinen, pruefbaren
+Minimalmodell und sauber dokumentierten Verifikationsschleifen.
 
 Ich wuerde Dir deshalb gerne eine straffere, neu formulierte Fassung zur
 Sichtung schicken. Der Fokus liegt bewusst nicht auf grossen Raumzeit-,
@@ -23,11 +35,11 @@ Minimalmodell:
 
 Die kompakte Fassung liegt hier:
 
-- `paper/paper_i/main_compact.pdf`
+- https://github.com/MemoryDynamics/Knoten/blob/main/paper/paper_i/main_compact.pdf
 
 Die ausfuehrlichere Arbeitsfassung bleibt als argumentative Reserve erhalten:
 
-- `paper/paper_i/main.pdf`
+- https://github.com/MemoryDynamics/Knoten/blob/main/paper/paper_i/main.pdf
 
 Zusaetzlich gibt es eine kurze Projektseite:
 
