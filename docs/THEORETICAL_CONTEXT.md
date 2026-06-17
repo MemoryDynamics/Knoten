@@ -1,10 +1,10 @@
 # Theoretical Context
 
-Stand: 2026-06-14.
+Stand: 2026-06-17.
 
 Diese Datei fasst den kuratierten theoretischen Kontext des Projekts zusammen.
-Rohnotizen und Chatverlaeufe bleiben unter `docs/ChatGPT Chatverläufe/`, sind
-aber keine zitierfaehige Fassung.
+Rohnotizen und Chatverlaeufe bleiben unter `docs/historical/chatgpt/`, sind aber
+keine zitierfaehige Fassung.
 
 ## Minimaler Modellkern
 

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-06-14.
+Stand: 2026-06-17.
 
 ## Repository
 
@@ -8,8 +8,8 @@ Stand: 2026-06-14.
 - Remote: `https://github.com/MemoryDynamics/Knoten`.
 - Der historische `cleanup`-Stand existiert noch als Referenz, neue Arbeit
   laeuft auf `main`.
-- Zwei Chatverlaufs-Dateien zur Markov-/Non-Markovian-Recherche liegen lokal
-  untracked unter `docs/ChatGPT Chatverläufe/`. Sie sind Rohmaterial, keine
+- Rohnotizen und Chatverlaufs-Exporte liegen unter
+  `docs/historical/chatgpt/`. Sie sind historisches Rohmaterial, keine
   kuratierte Projektdokumentation.
 
 ## Code
