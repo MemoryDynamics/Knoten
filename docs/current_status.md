@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-06-17.
+Stand: 2026-06-24.
 
 ## Repository
 
@@ -25,9 +25,11 @@ Der kanonische Paketkern liegt unter `src/emergenz_knoten`:
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
 
 Der sichtbare Prozess `x_n` ist wegen der History nichtmarkovsch. Der
-augmentierte Zustand aus Position und Speicher ist die natuerliche
+augmentierte Zustand `z_n` aus Position und Speicher ist die natuerliche
 Markov-Einbettung. Diese Einsicht ist der wichtigste Anschluss fuer Paper 0
-und die naechste Implementationsschicht.
+und die naechste Implementationsschicht. In den Papers wird diese Schicht
+jetzt als Markov-/Koopman-Operator auf Observablen von `z_n` formuliert; die
+zugehoerige numerische Operatorpipeline ist aber noch nicht implementiert.
 
 ## Experimente und Daten
 
@@ -86,10 +88,14 @@ Was fehlt fuer eine echte Operator-/MSM-Schiene:
 ## Paper-Status
 
 - `paper/paper_i/main.tex`: Minimal Point-Process Dynamics with Memory.
-  Inhaltlich aktiv; braucht eine Schaerfung der operationalen Diagnostik und
-  eine explizitere Non-Markovian/Markov-Embedding-Sprache.
+  Inhaltlich aktiv; enthaelt jetzt explizite Non-Markovian/Markov-Embedding-
+  Sprache, `z_n` als augmentierte Zustandsnotation und eine Operator-/
+  Halbgruppenformulierung.
 - `paper/paper_ii/main.tex`: Propagation Speed und Light-Cone-Dynamik.
-  Struktur vorhanden, aber die empirische Haertung steht hinter Paper 0/I.
+  Struktur vorhanden; enthaelt jetzt den Anschluss an die Operator-Schicht und
+  liest Lorentz-Kinematik als effektive Stabilisatorstruktur des
+  makroskopischen Propagationskegels. Die empirische Haertung steht weiterhin
+  hinter Paper 0/I.
 
 ## Naechste technische Schritte
 

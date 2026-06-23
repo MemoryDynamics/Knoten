@@ -1,6 +1,6 @@
 # Architekturuebersicht
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 Das Projekt besteht aktuell aus vier Schichten:
 
@@ -68,7 +68,13 @@ w_k = alpha * (1 - alpha)^k
 
 Der sichtbare Prozess `x_n` ist nichtmarkovsch, weil `grad Phi_n` von der
 gespeicherten Vergangenheit abhaengt. Der augmentierte Zustand
-`(x_n, history_n, weights_n)` ist dagegen die natuerliche Markov-Einbettung.
+`z_n = (x_n, history_n, weights_n)` ist dagegen die natuerliche
+Markov-Einbettung.
+
+Algebraisch erzeugt diese Einbettung einen Markov-/Koopman-Operator auf
+Observablen von `z_n`. Die Iterationen dieses Operators bilden die relevante
+Vorwaerts-Halbgruppe. Das ist aktuell eine theoretische Schicht; im Paketkern
+existieren noch keine Operator-Schaetzungen.
 
 ## 3. Experiment-Entry-Points
 
@@ -119,6 +125,7 @@ Zielstruktur:
 ```text
 src/emergenz_knoten/markov/
   dataset.py
+  operators.py
   transition.py
   validation.py
   metastability.py
@@ -133,6 +140,7 @@ samples + memory summaries
   -> state assignment
   -> transition counts
   -> transition matrix
+  -> Markov/Koopman operator U_tau
   -> implied timescales / CK / spectral gap
   -> metastable memberships
 ```
@@ -165,4 +173,6 @@ Kuratierte Statusseiten:
 - Jede Paper-Evidenz braucht Parameter, Seeds, Outputpfad und Diagnostikversion.
 - Nichtmarkovsche Sprache nur dort verwenden, wo klar ist, ob `x_n` oder der
   augmentierte Zustand gemeint ist.
+- `z_n` fuer augmentierte Zustaende verwenden; `sigma` nur fuer Kernelbreiten
+  wie `G_sigma`.
 - Geometrische Dimensionen und dynamische Operator-Spektren getrennt halten.

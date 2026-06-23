@@ -1,6 +1,6 @@
 # Non-Markovian Basis
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 Diese Seite ist die kuratierte Arbeitsbasis fuer Paper 0 oder die
 Paper-I-Ueberarbeitung. Sie ersetzt nicht die Literaturarbeit, sondern legt
@@ -34,6 +34,51 @@ z_n = (x_n, history_n, weights_n)
 Wenn `z_n` und der neue Rauschterm bekannt sind, ist `z_{n+1}` bestimmt. Das
 ist die zentrale Bruecke: sichtbar nichtmarkovsch, im erweiterten Zustand
 markovsch.
+
+Notation:
+
+- `z_n` bezeichnet den augmentierten Markov-Zustand.
+- `G_sigma` bezeichnet weiterhin den Glattungs-/Depositionskernel mit Breite
+  `sigma`.
+
+Diese Trennung verhindert die alte Kollision zwischen `sigma_n` als
+Zustandsnotation und `G_sigma` als Kernelnotation.
+
+## Operatoralgebraische Lesart
+
+Auf dem augmentierten Zustandsraum `Sigma` definiert die Dynamik einen
+Markov-Kern:
+
+```text
+P(z, A) = Prob(z_{n+1} in A | z_n = z)
+```
+
+Fuer Observablen `f` wirkt derselbe Prozess als Markov-/Koopman-Operator:
+
+```text
+(U f)(z) = E[f(z_{n+1}) | z_n = z]
+```
+
+Dieser Operator ist linear, positiv und unital (`U 1 = 1`). Seine Iterierten
+bilden eine Halbgruppe:
+
+```text
+U^{m+n} = U^m U^n
+```
+
+Im stochastischen Fall ist `U` im Allgemeinen nicht multiplikativ, also kein
+deterministischer Algebra-Automorphismus. Genau diese Unterscheidung ist
+wichtig: Die algebraische Sprache ist passend, aber sie ist die Sprache
+positiver Markov-Operatoren bzw. Transferoperatoren, nicht die Sprache einer
+reversiblen Symmetriegruppe.
+
+Konsequenz fuer Knoten:
+
+- lokal: Hessian-/OU-Spektrum als Relaxationsdiagnostik;
+- global: slow modes, spectral gaps, almost-invariant sets und metastabile
+  Memberships des Operators;
+- spaeter: Symmetrie- oder Stabilisatorgruppen robuster Knotentypen, nicht
+  als Eingabe, sondern als emergente Struktur.
 
 ## Speicherform
 

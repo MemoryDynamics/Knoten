@@ -18,7 +18,7 @@
 
 \begin{abstract}
 We define a minimal point-valued stochastic dynamics on an abstract continuous state space $\Omega$ in which a visible trajectory $x_n$ is coupled to an explicit exponentially relaxing memory density $\rho_n$.
-The projected process $x_n$ is generally non-Markovian, whereas the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
+The projected process $x_n$ is generally non-Markovian, whereas the augmented state $z_n=(x_n,\rho_n)$ is Markov by construction.
 The memory update compresses ordered histories into a current density and thereby defines an intrinsic arrow of update order without assuming spacetime, physical time, or thermodynamic irreversibility.
 Coarse-graining on the memory-persistence scale gives an effective parameter $t=\alpha n$ and, when a separation of scales exists, an approximate SDE/Fokker--Planck description.
 Within this effective regime we define metastable dynamical knots and coordinate-robust relaxation diagnostics.
@@ -46,7 +46,7 @@ Let $\Omega$ be a continuous state space with a reference measure $dx$ and local
 The background coordinates are a mathematical scaffold for the generator and diagnostics, not a postulated physical spacetime.
 At update step $n$ the full state is
 \begin{equation}
-\sigma_n=(x_n,\rho_n),
+z_n=(x_n,\rho_n),
 \end{equation}
 where $x_n\in\Omega$ is the visible state and $\rho_n$ is a normalized non-negative memory density on $\Omega$.
 The normalization is a baseline convention: it fixes the overall memory scale and makes $M_n(\mathcal K)$ below a visitation weight, while the same mechanism could be formulated with finite positive measures and a corresponding rescaling of $\eta$.
@@ -73,16 +73,16 @@ The gradient in Eq.~(\ref{eq:compact_trajectory}) acts on the first argument of 
 whenever differentiating under the integral is justified.
 For a translation-invariant kernel $K(x,y)=K_\ell(x-y)$ this is the convolution of $\rho_n$ with $\nabla K_\ell$.
 
-Given $\sigma_n$ and a fresh draw $\xi_n$, Eqs.~(\ref{eq:compact_trajectory})--(\ref{eq:compact_memory}) determine the distribution of $\sigma_{n+1}$.
-Thus the sequence $\{\sigma_n\}_{n\ge0}$ is Markov.
+Given $z_n$ and a fresh draw $\xi_n$, Eqs.~(\ref{eq:compact_trajectory})--(\ref{eq:compact_memory}) determine the distribution of $z_{n+1}$.
+Thus the sequence $\{z_n\}_{n\ge0}$ is Markov.
 The visible sequence $\{x_n\}_{n\ge0}$ alone is generally non-Markovian, because identical visible states can have different retained memory fields and hence different next-step laws.
 This is the basic Markov embedding of the model.
 
-To make this embedding explicit, define the transition kernel $P(\sigma,A)=\mathbb{P}\{\sigma_{n+1}\in A\mid\sigma_n=\sigma\}$ on the augmented state space $\Sigma$.
+To make this embedding explicit, define the transition kernel $P(z,A)=\mathbb{P}\{z_{n+1}\in A\mid z_n=z\}$ on the augmented state space $\Sigma$.
 On bounded observables this kernel acts by the positive unital Markov/Koopman operator
 \begin{equation}\label{eq:compact_observable_operator}
-(Uf)(\sigma)=\int_\Sigma f(\sigma')P(\sigma,d\sigma')
-=\mathbb{E}[f(\sigma_{n+1})\mid\sigma_n=\sigma].
+(Uf)(z)=\int_\Sigma f(z')P(z,dz')
+=\mathbb{E}[f(z_{n+1})\mid z_n=z].
 \end{equation}
 The iterates form a semigroup, $U^{m+n}=U^mU^n$.
 Because of noise and history compression this is not, in general, a reversible group action or a deterministic algebra automorphism; in stochastic settings $U(fg)$ need not equal $(Uf)(Ug)$.

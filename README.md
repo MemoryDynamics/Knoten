@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 ## Worum es geht
 
@@ -11,8 +11,14 @@ Das Projekt untersucht einen stochastischen Punktprozess mit endlichem,
 relaxierendem Gedaechtnis. Der sichtbare Prozess `x_n` ist im Allgemeinen
 nicht markovsch, weil sein naechster Schritt von gespeicherter Vergangenheit
 abhaengt. Der augmentierte Zustand aus Position und Speicher,
-z. B. `(x_n, rho_n)` oder `(x_n, history_n)`, ist dagegen der natuerliche
-Markov-Zustand.
+z. B. `z_n = (x_n, rho_n)` oder `z_n = (x_n, history_n)`, ist dagegen der
+natuerliche Markov-Zustand.
+
+Damit besitzt das Modell bereits eine algebraische Grundschicht: Die
+Uebergangsdynamik auf `z_n` definiert einen Markov-/Koopman-Operator auf
+Observablen, dessen Iterationen eine vorwaertsgerichtete Halbgruppe bilden.
+Diese Sprache ersetzt keine Simulation, macht aber Knoten als metastabile
+Operatorstrukturen, slow modes oder fast-invariante Mengen pruefbar.
 
 Diese Sicht ist der aktuelle inhaltliche Anker fuer die naechste Phase:
 
@@ -21,6 +27,9 @@ Diese Sicht ist der aktuelle inhaltliche Anker fuer die naechste Phase:
 - Paper I: schrittweise Ueberarbeitung des Minimalmodells, damit Zeit,
   Knoten, Relaxationsskalen und Mass-Proxies operationaler und weniger
   spekulativ formuliert sind.
+- Paper II: Anschluss der Raum-/Lorentz-Kinematik an dieselbe
+  Operator-Schicht; Lorentz-Symmetrie wird als effektiver Stabilisator des
+  makroskopischen Propagationskegels gelesen, nicht als Mikropostulat.
 
 ## Aktueller Stand
 
@@ -50,6 +59,7 @@ Der wichtigste technische Gap fuer die Non-Markovian-Schiene:
   `weights` zurueck.
 - Fuer Transferoperatoren, MSM/PCCA oder HMM/PMM brauchen wir zusaetzlich
   Memory-Traces oder konsistente Memory-Summary-Features entlang der Trajektorie.
+  Erst daraus lassen sich Operatoren auf `z_n` schaetzen.
 
 ## Schnellstart
 
@@ -142,9 +152,9 @@ python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 
 Ein Punktprozess `x_n` in einem abstrakten Zustandsraum wird mit einer
 endlichen, relaxierenden Speicherverteilung gekoppelt. Das Speicherupdate ist
 irreversibel und macht den sichtbaren Prozess nichtmarkovsch; im augmentierten
-Speicherzustand entsteht jedoch eine saubere Markov-Einbettung, aus der
+Speicherzustand `z_n` entsteht jedoch eine saubere Markov-Einbettung, aus der
 metastabile Strukturen, Relaxationsskalen und effektive Grobstrukturen
-operational untersucht werden koennen.
+operational und operatorisch untersucht werden koennen.
 
 ## Naechste Prioritaeten
 
@@ -154,7 +164,9 @@ operational untersucht werden koennen.
 2. Memory-Traces oder Memory-Summary-Features im kanonischen Kern ergaenzen.
 3. Erste Markov-Schiene bauen: Lagged Dataset, Transition Counts, Implied
    Timescales, Chapman-Kolmogorov-Checks, spectral gaps.
-4. Den archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
+4. Operator-/Algebra-Sprache in den Papers konsistent halten: `z_n` fuer den
+   augmentierten Zustand, `G_sigma` nur fuer die Kernelbreite.
+5. Den archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
    Negativkontrollen und mehreren Diagnostiken haerten.
-5. Paper I so ueberarbeiten, dass starke Claims klar als Definition,
+6. Paper I so ueberarbeiten, dass starke Claims klar als Definition,
    numerical observation oder conjecture getrennt sind.

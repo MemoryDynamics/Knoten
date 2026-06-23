@@ -91,7 +91,7 @@ In practice one may take $\Omega\subseteq\mathbb{R}^d$ with the Lebesgue measure
 This background structure is a minimal mathematical scaffold for writing the generator and the diagnostics; it is not assumed to be a fundamental physical spacetime metric.
 
 Two distinct notions of ``invariance'' are relevant.
-First, once the extended state is defined in Eq.~(\ref{eq:sigma}), the resulting process is Markov by construction, and the update order $n\mapsto n+1$ is physically meaningful because the memory update is generally non-invertible.
+First, once the extended state is defined in Eq.~(\ref{eq:augmented_state}), the resulting process is Markov by construction, and the update order $n\mapsto n+1$ is physically meaningful because the memory update is generally non-invertible.
 Second, many of the observables we use are designed to be operational and robust under benign reparametrizations of $\Omega$ (e.g., translations, rotations, and global rescalings in the chosen coordinate chart), in the sense that they depend on coarse-grained residence statistics and relaxation rates rather than on absolute coordinate values.
 
 Quantities that explicitly use $\nabla$ (e.g., drifts of the form $-\nabla\Phi[\rho]$ and Hessian-based OU linearizations) depend on the chosen coordinate/inner-product structure and should be interpreted as part of the effective description.
@@ -105,14 +105,14 @@ The parameter $n$ labels successive update steps of the process and does not rep
 \subsection{State definition}
 
 The full process state at update step $n$ is
-\begin{equation} \label{eq:sigma}
-\sigma_n := (x_n,\rho_n).
+\begin{equation} \label{eq:augmented_state}
+z_n := (x_n,\rho_n).
 \end{equation}
 
 Here $x_n$ denotes the current position of the process, while $\rho_n$ represents a memory distribution encoding the influence of past states.
 
 \paragraph{Notation (update index vs.\ time).}
-We use $n\in\mathbb{N}$ for the discrete update index and reserve the word ``time'' for the coarse-grained parameter introduced later (Sec.~\ref{sec:EmergenceTime}). In Eq.~(\ref{eq:sigma}), $x_n\in\Omega$ is the current process position and $\rho_n$ is a normalized, non-negative \emph{memory density} on $\Omega$ (with respect to the reference measure $dx$). While $\rho_n$ is normalized like a probability density, in Paper~I it is primarily a bookkeeping device for finite, relaxing memory; its normalization fixes an overall scale and should not be read as an epistemic probability unless explicitly stated.
+We use $n\in\mathbb{N}$ for the discrete update index and reserve the word ``time'' for the coarse-grained parameter introduced later (Sec.~\ref{sec:EmergenceTime}). In Eq.~(\ref{eq:augmented_state}), $x_n\in\Omega$ is the current process position and $\rho_n$ is a normalized, non-negative \emph{memory density} on $\Omega$ (with respect to the reference measure $dx$). While $\rho_n$ is normalized like a probability density, in Paper~I it is primarily a bookkeeping device for finite, relaxing memory; its normalization fixes an overall scale and should not be read as an epistemic probability unless explicitly stated.
 
 Assumptions on $\Omega$ (continuity, reference measure, and coordinate/inner-product scaffold) were fixed in Sec.~\ref{sec:background_invariances} and are used here as an effective parametrization for writing Eqs.~(\ref{eq:trajectory})--(\ref{eq:memorypotential}). Throughout Paper~I, $\Omega$ remains an abstract state space; any identification with physical space or spacetime geometry is deferred to companion work.
 
@@ -214,7 +214,7 @@ We do not assume spacetime, quantum postulates, fields, symmetries, or conservat
 
 The defining feature of the model in Sec.~\ref{sec:MinDynModel} is a finite, self-interacting memory.
 In contrast to thermodynamic or informational approaches \cite{Zeh2007,Prigogine1980,Rovelli1993}, irreversibility is built into the fundamental update rule.
-We work exclusively with the update index $n$ and the ordered state sequence $\sigma_n$.
+We work exclusively with the update index $n$ and the ordered state sequence $z_n$.
 
 \subsection{Irreversibility of the memory update}
 
@@ -232,9 +232,9 @@ This information compression distinguishes the present framework from reversible
 
 \subsection{Arrow of update order}
 
-Because the memory update is non-invertible, the state sequence in Eq.~(\ref{eq:sigma})
+Because the memory update is non-invertible, the state sequence in Eq.~(\ref{eq:augmented_state})
 \[
-\sigma_0 \rightarrow \sigma_1 \rightarrow \sigma_2 \rightarrow \dots
+z_0 \rightarrow z_1 \rightarrow z_2 \rightarrow \dots
 \]
 acquires an intrinsic, irreversible ordering.
 This defines an arrow of update order without assuming spacetime or physical time.
@@ -312,7 +312,7 @@ Correspondingly, since $\Delta t = \alpha$ per update step, differences in Eq.~(
 
 This provides a convenient parametrization of the large-scale behavior of the discrete dynamics; different choices of coarse-graining correspond to different effective time resolutions.
 
-A conceptual caveat: the extended state $\sigma_n=(x_n,\rho_n)$ is Markov by construction, but the marginal process $\{x_n\}$ is generally non-Markovian because it depends on memory.
+A conceptual caveat: the extended state $z_n=(x_n,\rho_n)$ is Markov by construction, but the marginal process $\{x_n\}$ is generally non-Markovian because it depends on memory.
 
 We stress that $t$ is, at this stage, an auxiliary coarse-grained parameter and remains dimensionless unless an additional calibration is introduced.
 Moreover, in a strict continuum limit the discrete noise $\varepsilon\,\xi_n$ must be rescaled to yield a finite diffusion coefficient; a standard choice is a joint limit $\alpha\to 0$ and $\varepsilon\to 0$ at fixed $\varepsilon^2/\alpha$ (equivalently, fixed $D\sim \varepsilon^2/(2\alpha)$).

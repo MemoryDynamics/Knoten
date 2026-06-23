@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-06-17.
+Stand: 2026-06-24.
 
 Diese Datei fasst den kuratierten theoretischen Kontext des Projekts zusammen.
 Rohnotizen und Chatverlaeufe bleiben unter `docs/historical/chatgpt/`, sind aber
@@ -24,7 +24,32 @@ rho_{n+1} = (1 - alpha) rho_n + alpha G(x_{n+1})
 ```
 
 Der sichtbare Prozess `x_n` ist nichtmarkovsch. Der augmentierte Zustand
-`(x_n, rho_n)` ist die natuerliche Markov-Einbettung.
+`z_n = (x_n, rho_n)` ist die natuerliche Markov-Einbettung.
+
+## Operator- und Algebra-Schicht
+
+Die Markov-Einbettung macht aus dem Prozess auf `z_n` eine
+Uebergangsdynamik. Formal entspricht das einem Markov-Kern
+
+```text
+P(z, A) = Prob(z_{n+1} in A | z_n = z)
+```
+
+und einem positiven, unitalen Operator auf Observablen
+
+```text
+(U f)(z) = E[f(z_{n+1}) | z_n = z].
+```
+
+Die Iterationen von `U` bilden eine Halbgruppe. Wegen Rauschen,
+Coarse-Graining und Speicherkompression ist das im Allgemeinen keine
+invertierbare Gruppe und kein deterministischer Algebra-Automorphismus.
+
+Aus dieser Sicht sind Knoten nicht nur geometrische Haeufungen von Punkten,
+sondern Kandidaten fuer fast-invariante Mengen, slow modes oder metastabile
+Memberships eines Uebergangsoperators. Die lokale Hessian-/OU-Analyse bleibt
+nuetzlich, sollte aber langfristig durch diese globale Operator-Diagnostik
+ergaenzt werden.
 
 ## Zentrale Claims
 
@@ -55,6 +80,8 @@ Noetige Operationalisierung:
 - Rueckkehrzeiten.
 - lokale Relaxationsraten.
 - spaeter metastabile Memberships eines Uebergangsoperators.
+- Konsistenz zwischen lokaler Hessian-Stabilitaet und globalen Operator-
+  Spektren.
 
 ### Effektive Dimension
 
@@ -109,6 +136,7 @@ Status:
 | --- | --- | --- |
 | Minimaler Speicherprozess | `src/emergenz_knoten/core.py`, `kernels.py` | implementiert |
 | Geometrische Diagnostik | `src/emergenz_knoten/diagnostics.py` | implementiert, aber nicht operatorisch |
+| Operator-/Algebra-Schicht auf `z_n` | Paper I/II, geplantes `markov/` | theoretisch formuliert, Implementierung offen |
 | Referenzlauf | `experiments/reference_experiment.py` | aktiv |
 | Archivierter Dimensionsclaim | `experiments/fractal_analysis/Fraktale/resultsN.csv` | auditiert |
 | Reproduktionspfad | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | aktiv |

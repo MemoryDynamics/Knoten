@@ -20,7 +20,7 @@
 
 \begin{abstract}
 We propose a minimal point-valued stochastic dynamics on an abstract continuous state space $\Omega$ in which a visible trajectory $x_n$ is coupled to an explicit, exponentially relaxing memory density $\rho_n$.
-The marginal process $\{x_n\}$ is generally non-Markovian, while the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
+The marginal process $\{x_n\}$ is generally non-Markovian, while the augmented state $z_n=(x_n,\rho_n)$ is Markov by construction.
 The memory update is history-compressing, yielding an intrinsic arrow of \emph{update order}.
 Coarse-graining over the internal persistence scale $n\gg\alpha^{-1}$ motivates an effective parameter $t=\alpha n$ and, when a separation of scales is present, an approximate continuum SDE/Fokker--Planck description.
 In this regime we define trajectory-based, coordinate-robust diagnostics (persistence/relaxation rates, dimensionless stability measures, and metastable residence-time statistics) to identify and compare long-lived localized dynamical structures induced by the endogenous memory coupling.
@@ -52,7 +52,7 @@ For finite memory, the basic mechanism is elementary: one enlarges the state unt
 Related embedding ideas also appear in generalized Langevin and nonlocal-memory equations, where auxiliary variables or spectral representations turn nonlocal memory terms into local evolution in an extended space \cite{NoeNuske2013,NoeWuPrinzPlattner2013,JaganathanValani2025,WisniewskiLuczkaSpiechowicz2024}.
 
 Our model shares with self-interacting processes the idea of a trajectory coupled to a self-generated field, but differs structurally: the memory is an explicit, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
-Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
+Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $z_n=(x_n,\rho_n)$ is Markov by construction.
 This Markov embedding is the main mathematical anchor of the present paper.
 The same memory update is information-losing at the level of histories and thereby induces an intrinsic arrow of \emph{update order} in the update dynamics; that is, in general the full ordered past cannot be reconstructed from the present state.
 (We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
@@ -98,7 +98,7 @@ In practice one may take $\Omega\subseteq\mathbb{R}^d$ with the Lebesgue measure
 This background structure is a minimal mathematical scaffold for writing the generator and the diagnostics; it is not assumed to be a fundamental physical spacetime metric.
 
 Two distinct notions of ``invariance'' are relevant.
-First, once the extended state is defined in Eq.~(\ref{eq:sigma}), the resulting process is Markov by construction, and the update order $n\mapsto n+1$ is dynamically meaningful because the relaxing memory state compresses the ordered past.
+First, once the extended state is defined in Eq.~(\ref{eq:augmented_state}), the resulting process is Markov by construction, and the update order $n\mapsto n+1$ is dynamically meaningful because the relaxing memory state compresses the ordered past.
 Second, many of the observables we use are designed to be operational and robust under benign reparametrizations of $\Omega$ (e.g., translations, rotations, and global rescalings in the chosen coordinate chart), in the sense that they depend on coarse-grained residence statistics and relaxation rates rather than on absolute coordinate values.
 
 Quantities that explicitly use $\nabla$ (e.g., drifts of the form $-\nabla\Phi[\rho]$ and Hessian-based OU linearizations) depend on the chosen coordinate/inner-product structure and should be interpreted as part of the effective description.
@@ -110,13 +110,13 @@ We consider a single generative process producing a sequence of states indexed b
 The parameter $n$ labels successive update steps of the process and does not represent physical time.
 
 The full process state at update step $n$ is
-\begin{equation} \label{eq:sigma}
-\sigma_n := (x_n,\rho_n).
+\begin{equation} \label{eq:augmented_state}
+z_n := (x_n,\rho_n).
 \end{equation}
 
 Here $x_n\in\Omega$ denotes the current position of the process, while $\rho_n$ is a memory density on $\Omega$ encoding the influence of past states.
 The normalization condition specified below fixes the scale of the memory density and should not be read as an epistemic probability unless explicitly stated.
-Given $\sigma_n$ and a fresh noise draw $\xi_n$, the distribution of $\sigma_{n+1}$ is determined by Eqs.~(\ref{eq:trajectory}) and~(\ref{eq:memorydistribution}).
+Given $z_n$ and a fresh noise draw $\xi_n$, the distribution of $z_{n+1}$ is determined by Eqs.~(\ref{eq:trajectory}) and~(\ref{eq:memorydistribution}).
 This Markov embedding, summarized in Fig.~\ref{fig:markov_embedding}, is the Markovian description used throughout this paper.
 The projected process $\{x_n\}$ alone is generally non-Markovian, because two identical visible positions with different memory densities can generate different next-step distributions.
 
@@ -128,22 +128,22 @@ Coupled multiple generators, for example through a shared memory field, are a na
 
 \subsection{Markov kernel and observable dynamics}
 
-Let $\Sigma$ denote the augmented state space of pairs $\sigma=(x,\rho)$.
+Let $\Sigma$ denote the augmented state space of pairs $z=(x,\rho)$.
 To make the Markov embedding explicit, and to fix the operator language used later for relaxation and metastability, we represent the one-step stochastic update by a transition kernel rather than by a deterministic map:
 \begin{equation}
-P(\sigma,A)
+P(z,A)
 :=
-\mathbb{P}\{\sigma_{n+1}\in A\mid \sigma_n=\sigma\},
+\mathbb{P}\{z_{n+1}\in A\mid z_n=z\},
 \qquad
 A\subseteq\Sigma .
 \end{equation}
 Equivalently, the dynamics acts on bounded observables $f:\Sigma\to\mathbb{R}$ through the Markov/Koopman operator
 \begin{equation}\label{eq:observable_operator}
-(Uf)(\sigma)
+(Uf)(z)
 :=
-\int_\Sigma f(\sigma')\,P(\sigma,d\sigma')
+\int_\Sigma f(z')\,P(z,dz')
 =
-\mathbb{E}[f(\sigma_{n+1})\mid\sigma_n=\sigma].
+\mathbb{E}[f(z_{n+1})\mid z_n=z].
 \end{equation}
 This operator is linear, positive, and unital ($U1=1$), while the dual operator propagates probability measures on $\Sigma$.
 The iterates satisfy the semigroup relation $U^{m+n}=U^mU^n$.
@@ -204,7 +204,7 @@ This memory-state embedding is what makes the model Markov in the augmented stat
     \caption{
     Memory-state Markov embedding.
     The visible coordinate $x_n$ is generally non-Markovian by itself, because the next update depends on the accumulated memory field $\rho_n$.
-    Once $\sigma_n=(x_n,\rho_n)$ is used as the state, all past influence enters through $\rho_n$, while fresh randomness enters through $\xi_n$.
+    Once $z_n=(x_n,\rho_n)$ is used as the state, all past influence enters through $\rho_n$, while fresh randomness enters through $\xi_n$.
     }
     \label{fig:markov_embedding}
 \end{figure}
@@ -249,7 +249,7 @@ We do not assume spacetime, quantum postulates, physical fields, physical symmet
 
 The defining feature of the model in Sec.~\ref{sec:MinDynModel} is a self-interacting, exponentially relaxing memory.
 Irreversibility here does not mean thermodynamic entropy production; it means loss of ordered-history information under compression into the current memory state.
-We therefore work with the update index $n$ and the ordered state sequence $\sigma_n$.
+We therefore work with the update index $n$ and the ordered state sequence $z_n$.
 
 \subsection{Information compression and update order}
 
@@ -258,9 +258,9 @@ For fixed $x_{n+1}$ and $0<\alpha<1$, the equation is algebraically invertible a
 The structural many-to-one map is from ordered histories to the current memory density.
 Thus $\rho_n$ stores cumulative influence rather than a sequence of past positions, and multiple distinct histories may lead to the same present state even without noise in Eq.~(\ref{eq:trajectory}).
 This information compression gives dynamical relevance to the update ordering.
-The state sequence in Eq.~(\ref{eq:sigma})
+The state sequence in Eq.~(\ref{eq:augmented_state})
 \[
-\sigma_0 \rightarrow \sigma_1 \rightarrow \sigma_2 \rightarrow \dots
+z_0 \rightarrow z_1 \rightarrow z_2 \rightarrow \dots
 \]
 acquires an intrinsic, irreversible ordering without assuming spacetime or calibrated physical time.
 

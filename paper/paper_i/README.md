@@ -1,14 +1,15 @@
 # Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
 
-Stand: 2026-06-16.
+Stand: 2026-06-24.
 
 ## Rolle
 
 Paper I ist die aktuelle eigenstaendige Minimalmodell-Fassung. Es definiert
 einen exponentiell relaxierenden Speicherzustand, den sichtbaren
-nichtmarkovschen Prozess `x_n`, die Markov-Einbettung `(x_n, rho_n)`, interne
-Zeitskalen, metastabile Knoten und Relaxationsproxies, ohne bereits Raumzeit,
-Quantenmechanik oder Standardmodell-Claims vorauszusetzen.
+nichtmarkovschen Prozess `x_n`, die Markov-Einbettung
+`z_n = (x_n, rho_n)`, interne Zeitskalen, metastabile Knoten und
+Relaxationsproxies, ohne bereits Raumzeit, Quantenmechanik oder
+Standardmodell-Claims vorauszusetzen.
 
 Es gibt bewusst zwei Varianten:
 
@@ -22,7 +23,10 @@ Es gibt bewusst zwei Varianten:
 Die aktuelle Fassung ist auf folgende Lesart geschaerft:
 
 - `x_n` als sichtbarer nichtmarkovscher Prozess;
-- `(x_n, rho_n)` bzw. `(x_n, history_n)` als Markov-Einbettung;
+- `z_n = (x_n, rho_n)` bzw. `z_n = (x_n, history_n)` als
+  Markov-Einbettung;
+- Markov-/Koopman-Operatoren und Vorwaerts-Halbgruppen als algebraische
+  Beschreibung der augmentierten Dynamik;
 - `alpha^{-1}` als interne Speicherpersistenzskala;
 - Knoten als operational messbare metastabile Strukturen;
 - Masse nur als Relaxations-/Konfinierungsproxy;
@@ -48,7 +52,9 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
 Aktiv im Paper verwendet:
 
 - `fig_markov_embedding.pdf`: sichtbarer nichtmarkovscher Prozess vs.
-  Markov-Einbettung.
+  Markov-Einbettung. Diese PDF ist auf die aktuelle `z_n`-Notation
+  aktualisiert; der Generator selbst wurde in dieser Runde bewusst nicht
+  angepasst.
 - `fig_memory_weights.pdf`: Speichergewichte und Persistenzskala
   `alpha^{-1}`.
 - `fig3_knot_trajectory.pdf`: representative metastabile Knotenbildung.
@@ -97,6 +103,8 @@ Weltmodell-Claims liegen, sondern auf:
 
 1. Traegt die Minimalmodell-Definition?
 2. Ist die Non-Markov/Markov-Embedding-Sprache mathematisch sauber?
-3. Sind `t = alpha n`, Knoten und Mass-/Relaxationsproxies defensiv genug
+3. Ist die neue `z_n`-/Operatornotation konsistent mit `G_sigma` als
+   Kernelbreite?
+4. Sind `t = alpha n`, Knoten und Mass-/Relaxationsproxies defensiv genug
    formuliert?
-4. Ist Paper 0 als separates mathematisches Einordnungspaper sinnvoll?
+5. Ist Paper 0 als separates mathematisches Einordnungspaper sinnvoll?

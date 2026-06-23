@@ -29,7 +29,7 @@ We propose a minimal irreversible, finite-memory dynamics in which effective spa
 \section{Introduction}\label{sec:introduction}
 %-------------------------------------------------
 
-Modern physics treats space, time, and relativistic structure as fundamental ingredients. Even in approaches that aim at deeper unification—ranging from quantum gravity programs \cite{Rovelli2004Quantum} to discrete or information-theoretic models \cite{Bombelli1987Causal,Wen2004Quantum}—the dimensionality of space and the kinematical structure of spacetime are typically assumed from the outset rather than derived.
+Modern physics treats space, time, and relativistic structure as fundamental ingredients. Even in approaches that aim at deeper unification--ranging from quantum gravity programs \cite{Rovelli2004Quantum} to discrete or information-theoretic models \cite{Bombelli1987Causal,Wen2004Quantum}--the dimensionality of space and the kinematical structure of spacetime are typically assumed from the outset rather than derived.
 
 In Paper I, we introduced a minimal irreversible dynamical framework based on a single generative process with finite, relaxing memory \cite{Mori1965Transport,Zwanzig2001Nonequilibrium,Hanggi1995Colored}. Without assuming spacetime, geometry, or quantum postulates, we showed that an intrinsic arrow of update order arises from the non-invertibility of the memory update, that a coarse-grained notion of time emerges operationally, and that the dynamics self-organizes into localized, metastable structures (``dynamical knots'') characterized by intrinsic relaxation scales.
 
@@ -37,7 +37,7 @@ The present work builds directly on this foundation. Its purpose is to address t
 
 Crucially, we do not assume spatial dimensionality, isotropy, or Lorentz invariance \cite{Liberati2013Lorentz}. Instead, we treat these notions as diagnostic properties of metastable dynamical regimes. Our guiding principle is that physical structure should be inferred from the internal consistency and robustness of the emergent dynamics, not imposed as a background scaffold.
 
-The present work adopts a deliberately minimal and dynamical notion of structure. No geometric or algebraic framework beyond an abstract continuous state space with local coarse-graining is assumed. In particular, spatial dimension, isotropy, and relativistic kinematics are not postulated but diagnosed operationally from the stability properties of metastable dynamical regimes. This places our approach conceptually close to a broad class of pre-geometric and emergent-geometry programs, while remaining distinct in its methodological commitments.
+The present work adopts a deliberately minimal and dynamical notion of structure. No geometry and no spacetime symmetry algebra are postulated. The only algebraic layer used from the start is the one already forced by Paper~I: the augmented Markov state and its one-step action on observables. In particular, spatial dimension, isotropy, and relativistic kinematics are not assumed but diagnosed operationally from the stability properties of metastable dynamical regimes. This places our approach conceptually close to a broad class of pre-geometric and emergent-geometry programs, while remaining distinct in its methodological commitments.
 
 From a mathematical perspective, it is worth noting that modern geometry itself has increasingly moved away from treating classical manifolds as fundamental. Examples include noncommutative geometry, topos-theoretic approaches, and more recently perfectoid and adic spaces \cite{Scholze2012Perfectoid}, which are designed to interpolate between discrete and continuous structures across scales. While such frameworks demonstrate that classical geometric intuition need not be fundamental, we do not employ any of these formalisms directly. Our construction remains intentionally pre-geometric and dynamical, relying only on stochastic evolution with finite, relaxing memory.
 
@@ -68,7 +68,7 @@ Throughout, ``space'' will be understood operationally, as a set of coordinates 
 
 \subsection{Memory-driven dynamics}
 We briefly recall the minimal dynamical rules introduced in Paper~I.
-The state at update step $n$ is given by $\sigma_n = (x_n,\rho_n)$, where
+The state at update step $n$ is given by $z_n = (x_n,\rho_n)$, where
 $x_n \in \Omega$ denotes the position of the process and $\rho_n$ is a
 finite, relaxing memory distribution.
 
@@ -80,6 +80,19 @@ The memory update rule reads
 \end{equation}
 where $0<\alpha<1$ is the memory relaxation rate and $G_\sigma$ a localized kernel of width $\sigma$.
 This update is explicitly non-invertible and introduces an intrinsic arrow of update order.
+
+As in Paper~I, the visible coordinate sequence $\{x_n\}$ is generally non-Markovian, while the augmented sequence $\{z_n\}$ is Markov by construction.
+Let $\Sigma$ denote the augmented state space and write the one-step transition kernel as
+\begin{equation}
+P(z,A):=\mathbb{P}\{z_{n+1}\in A\mid z_n=z\},
+\qquad A\subseteq\Sigma .
+\end{equation}
+On bounded observables $f:\Sigma\to\mathbb{R}$ this defines the positive unital Markov/Koopman operator
+\begin{equation}
+(Uf)(z)=\int_\Sigma f(z')P(z,dz').
+\end{equation}
+Its iterates form a forward semigroup rather than, in general, a reversible group action or deterministic algebra automorphism.
+This operator layer is not an additional spacetime axiom; it is the bookkeeping structure of the finite-memory dynamics and provides the global language in which metastable knots can be tested as slow modes or almost-invariant sets \cite{NoeNuske2013,FroylandLloydSantitissadeekorn2010,WilliamsKevrekidisRowley2015,KlusEtAl2018,Parzygnat2017,Fritz2020}.
 
 On coarse-grained scales $t=\alpha n$, the trajectory dynamics may be written in effective form as \cite{Oksendal2003}
 \begin{equation}
@@ -100,6 +113,9 @@ dx_t
 \end{equation}
 where $H=\nabla\nabla\Phi|_{x_\ast}$ denotes the Hessian of the memory-induced potential.
 The eigenvalues of $H$ define characteristic relaxation rates of perturbations around the knot.
+This Hessian spectrum is a local diagnostic.
+At finite lag, the corresponding global diagnostic is the spectrum of the transfer/Koopman operator restricted to an appropriate coarse-grained representation of $z_n$.
+A robust knot should therefore be visible both locally, through slow relaxation modes of $H$, and globally, through a persistent slow spectral subspace or metastable membership of the Markov operator.
 
 \subsection{Classification of dynamical knot types}
 
@@ -155,6 +171,7 @@ d_{\mathrm{eff}}\ge 1,
 and the remaining modes relax rapidly.
 Only such knots admit long-lived, coarse-grained descriptions and define effective spatial coordinates.
 In the following, we argue that robust macroscopic knots require $d_{\mathrm{eff}}=3$.
+Equivalently, in the operator language these are the regimes expected to generate stable almost-invariant components or slow spectral modes at lags long compared with $\tau_{\mathrm{mem}}$ but short compared with macroscopic relaxation.
 
 \paragraph{Type IV: Delocalized regimes.}
 If no subset of modes satisfies $\tau_i\gg\tau_{\mathrm{mem}}$, the dynamics does not localize.
@@ -419,6 +436,7 @@ yields the constraint
 Equation~\eqref{eq:lorentz_condition} defines the Lorentz group
 $\mathrm{O}(1,d)$ associated with the invariant speed $c_{\mathrm{eff}}$ \cite{Einstein1905,Rindler2006}.
 Thus, the transformations relating different effective observers are elements of $\mathrm{O}(1,d)$, restricted to the proper, orthochronous component and assuming a consistent time orientation.
+In this sense the Lorentz group is the effective stabilizer of the macroscopic propagation cone selected by the metastable operator dynamics, not a microscopic input symmetry of $\Omega$.
 
 \subsection{Interpretation}
 
@@ -456,8 +474,8 @@ The present scope is purely kinematical. We do not construct a dynamical theory 
 \begin{itemize}
 \item \textbf{Minimal ingredients.} A finite memory persistence time and finite effective memory range are sufficient to exclude instantaneous influence and imply a maximal propagation speed $c_{\mathrm{eff}}$.
 \item \textbf{Where Lorentz symmetry can fail.} At finite coarse-graining and finite memory length, small departures from exact Lorentz invariance are expected; these deviations should scale with ratios such as $\tau_{\mathrm{mem}}/\tau_{\mathrm{macro}}$ and $\ell_{\mathrm{mem}}/L$.
-\item \textbf{Testable numerical diagnostics.} In simulations one can measure (i) the retarded response kernel $K_{AB}$ between knots, (ii) the emergent speed estimate $c_{\mathrm{eff}}\sim \ell_{\mathrm{mem}}/\tau_{\mathrm{mem}}$, and (iii) the stability spectrum of knots (and its relation to the effective dimension diagnostic).
-\item \textbf{Open dynamical questions.} A next step is to derive how interactions between multiple knots renormalize $c_{\mathrm{eff}}$ and constrain admissible effective field content in the metastable regime.
+\item \textbf{Testable numerical diagnostics.} In simulations one can measure (i) the retarded response kernel $K_{AB}$ between knots, (ii) the emergent speed estimate $c_{\mathrm{eff}}\sim \ell_{\mathrm{mem}}/\tau_{\mathrm{mem}}$, (iii) the local stability spectrum of knots, and (iv) transfer-operator spectra and metastable memberships on the augmented states $z_n$.
+\item \textbf{Open dynamical questions.} A next step is to derive how interactions between multiple knots renormalize $c_{\mathrm{eff}}$, constrain admissible effective field content in the metastable regime, and determine the stabilizer/equivariance groups of robust knot classes.
 \end{itemize}
 
 \bibliographystyle{unsrtnat}

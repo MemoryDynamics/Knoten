@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Rohnotizen,
 Chatverlaeufe und historische Skripte bleiben erhalten, aber der belastbare
@@ -30,10 +30,13 @@ sondern das Modell als endlich-gedaechtnisbehafteten, selbstinteragierenden
 Prozess sauber zu verankern:
 
 - Der sichtbare Prozess `x_n` ist nichtmarkovsch.
-- Der augmentierte Zustand `(x_n, rho_n)` bzw. `(x_n, history_n)` ist die
-  natuerliche Markov-Einbettung.
+- Der augmentierte Zustand `z_n = (x_n, rho_n)` bzw.
+  `z_n = (x_n, history_n)` ist die natuerliche Markov-Einbettung.
 - Metastabile Knoten sollen nicht nur visuell oder geometrisch, sondern ueber
   Operator-/Uebergangsdynamik messbar werden.
+- Algebraisch ist die Grundstruktur damit ein positiver Markov-/Koopman-
+  Operator auf Observablen des augmentierten Zustandsraums; seine Iterierten
+  bilden eine vorwaertsgerichtete Halbgruppe, keine reversible Gruppe.
 
 Damit ergeben sich zwei moegliche naechste Schreibpfade:
 
@@ -41,6 +44,9 @@ Damit ergeben sich zwei moegliche naechste Schreibpfade:
   self-interacting processes, Markovian embeddings und Transferoperatoren.
 - **Paper I:** Ueberarbeitung des Minimalmodells mit klarer Trennung von
   Definition, numerical observation und conjecture.
+- **Paper II:** Kinematik als Konsistenzstruktur metastabiler Operator-
+  Regime formulieren; Lorentz-Symmetrie erscheint dann als effektiver
+  Stabilisator des makroskopischen Propagationskegels.
 
 ## Nicht ueberclaimen
 

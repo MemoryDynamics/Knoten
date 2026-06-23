@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 Quellen beim Audit:
 
@@ -19,8 +19,8 @@ Neuere Projektquellen:
 
 Kernthese: Das Knotenmodell ist ein endlich-gedaechtnisbehafteter,
 selbstinteragierender stochastischer Prozess. Der sichtbare Prozess `x_n` ist
-nichtmarkovsch; der augmentierte Zustand `(x_n, rho_n)` bzw.
-`(x_n, history_n)` ist eine natuerliche Markov-Einbettung.
+nichtmarkovsch; der augmentierte Zustand `z_n = (x_n, rho_n)` bzw.
+`z_n = (x_n, history_n)` ist eine natuerliche Markov-Einbettung.
 
 Paper-0-Aufgabe:
 
@@ -55,8 +55,9 @@ Wichtige bewusste Nicht-Claims im Draft:
 - Standardmodell-/Relativitaets-Anbindung wird an Companion Works delegiert
 
 Status: als konzeptionelles Fundament brauchbar. Die naechste Ueberarbeitung
-sollte `x_n` als sichtbaren nichtmarkovschen Prozess und `rho_n` als
-Markov-Embedding-Variable explizit trennen. Diagnostiken muessen als
+trennt `x_n` als sichtbaren nichtmarkovschen Prozess und `z_n` als
+Markov-Embedding-Zustand explizit. Die neue Operator-/Halbgruppenformulierung
+staerkt den Transferoperator-Anschluss; Diagnostiken muessen weiterhin als
 Definition, numerical observation oder conjecture markiert werden.
 
 ## Paper II: Emergent Spacetime Kinematics from Irreversible Memory Dynamics
@@ -72,6 +73,9 @@ Konsistenzbedingungen metastabiler Knoten:
   Speicherrelaxation, grob `c_eff ~ l_mem / tau_mem`
 - Lorentz-artige Kinematik aus universeller maximaler Propagationsgeschwindigkeit
   und Beobachter-/Knoten-Aequivalenz
+- Operatorische Lesart: robuste Knoten sind metastabile Regime des
+  Markov-Operators auf `z_n`; Lorentz-Symmetrie erscheint als effektiver
+  Stabilisator des makroskopischen Propagationskegels.
 
 Bewusst ausgeklammert:
 
@@ -117,6 +121,7 @@ Fuer Paper-Haertung fehlen weiterhin:
 | Nichtinvertierbarer Speicher erzeugt Update-Richtung | gut formulierbar | formale Minimalannahmen und Gegenbeispielgrenzen |
 | Metastabile Knoten entstehen in bestimmten Parameterregimen | numerisch plausibel | Residence-Verteilungen, Lebensdauern, Seed-Ensembles |
 | Sichtbarer Prozess `x_n` ist nichtmarkovsch, augmentierter Speicherzustand ist markovsch | gut formulierbar | formale Definition und erste Trace-/Lagged-Dataset-API |
+| Knoten als fast-invariante Operatorstrukturen auf `z_n` | theoretisch gut anschlussfaehig | Memory-Traces, Operator-Schaetzung, spectral gaps, Memberships |
 | Effektive Dimension nahe 3 ist stabil bevorzugt | archiviert vielversprechend, neu noch nicht gehaertet | Reproduktion mit D_cov, D_occ, D_spec, finite-size scaling, CI, Negativkontrollen |
 | `d <= 2` wird durch Wiederkehr/Selbstblockade ausgeschlossen | heuristisch stark, formal offen | saubere finite-memory-Version der Wiederkehraussage |
 | `d >= 4` verliert Stabilitaet durch Speicherverduennung | heuristisch, parameterabhaengig | Skalierung mit `sigma`, `epsilon`, `alpha`, Kernelklasse |

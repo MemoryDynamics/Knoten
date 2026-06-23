@@ -1,6 +1,6 @@
 # Projektkarte
 
-Stand: 2026-06-14.
+Stand: 2026-06-24.
 
 ## Grobstruktur
 
@@ -140,6 +140,7 @@ Additiv, ohne historische Daten zu zerstoeren:
 src/emergenz_knoten/
   markov/
     dataset.py          # augmentierte Features und lagged datasets
+    operators.py        # Markov-/Koopman-Operatoren auf z_n-Observablen
     transition.py       # counts, transition matrices, spectra
     validation.py       # ITS, CK, spectral gaps
     metastability.py    # PCCA-/Membership-Schicht
@@ -147,7 +148,9 @@ src/emergenz_knoten/
 
 Ziel: die bestehende geometrische Diagnostik um eine dynamische
 Operator-Schicht erweitern. Dadurch koennen Knoten als metastabile Mengen des
-augmentierten Speicherprozesses getestet werden.
+augmentierten Speicherprozesses `z_n` getestet werden. Spaetere Symmetrie-
+oder Stabilisatorgruppen robuster Knotentypen sollten erst auf dieser
+operatorisch stabilen Ebene gesucht werden.
 
 ## Aufraeumprinzip
 

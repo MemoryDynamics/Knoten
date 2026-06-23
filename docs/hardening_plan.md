@@ -67,7 +67,7 @@ Minimaltests:
 ## Phase 1.5: Non-Markovian / Markov-Embedding Schicht
 
 Ziel: den sichtbaren nichtmarkovschen Prozess `x_n` und den augmentierten
-Markov-Zustand `(x_n, rho_n)` operational trennen.
+Markov-Zustand `z_n = (x_n, rho_n)` operational trennen.
 
 Zu bauen:
 
