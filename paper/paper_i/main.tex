@@ -45,10 +45,15 @@ Concretely, we assume only a sequence of non-trivial update events defining a tr
 
 Related ideas appear in digital-physics approaches \cite{Wolfram2002,tHooft2016} and in history-dependent random-walk models \cite{Nelson1966,Pemantle2007,BenAImRaimond2002}.
 Closest in spirit are self-interacting walks biased by their visitation history, such as the true (myopic) self-avoiding walk (TSAW) \cite{AmitParisiPeliti1983,TothWerner1998} and the self-repelling Brownian polymer (SRBP) \cite{DurrettRogers1992}; see also \cite{PelitiPietronero1987}.
+Recent work on self-interacting diffusions continues to analyze processes whose drift depends on occupation-type memory variables \cite{HolbachRaimond2026}.
 
-While our model shares with these approaches the idea of a trajectory coupled to a self-generated field, it differs structurally: the memory is an explicit, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
+The second relevant strand is the use of Markovian embeddings for systems with memory.
+For finite memory, the basic mechanism is elementary: one enlarges the state until the retained past is part of the present state.
+Related embedding ideas also appear in generalized Langevin and nonlocal-memory equations, where auxiliary variables or spectral representations turn nonlocal memory terms into local evolution in an extended space \cite{NoeNuske2013,NoeWuPrinzPlattner2013,JaganathanValani2025,WisniewskiLuczkaSpiechowicz2024}.
+
+Our model shares with self-interacting processes the idea of a trajectory coupled to a self-generated field, but differs structurally: the memory is an explicit, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
 Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
-This Markov embedding is the main mathematical anchor of the present paper and is consistent with the standard observation that finite-memory stochastic processes can be represented as Markov processes on an enlarged state space \cite{NoeNuske2013,NoeWuPrinzPlattner2013}.
+This Markov embedding is the main mathematical anchor of the present paper.
 The same memory update is information-losing at the level of histories and thereby induces an intrinsic arrow of \emph{update order} in the update dynamics; that is, in general the full ordered past cannot be reconstructed from the present state.
 (We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
 Memory and trajectory thus emerge jointly as the minimal departure from trivial dynamics, rather than being encoded in external boundary conditions.
@@ -121,10 +126,10 @@ The analysis below focuses on a single generative process.
 This is sufficient for the Markov embedding, the memory-induced arrow of update order, and the metastability diagnostics developed here.
 Coupled multiple generators, for example through a shared memory field, are a natural extension but are not required for the construction in this paper.
 
-\subsection{Transition kernel and observable semigroup}
+\subsection{Markov kernel and observable dynamics}
 
 Let $\Sigma$ denote the augmented state space of pairs $\sigma=(x,\rho)$.
-Because the fresh noise draw is sampled at each update, the one-step dynamics is most naturally represented by a Markov transition kernel rather than by a deterministic map:
+To make the Markov embedding explicit, and to fix the operator language used later for relaxation and metastability, we represent the one-step stochastic update by a transition kernel rather than by a deterministic map:
 \begin{equation}
 P(\sigma,A)
 :=
@@ -146,7 +151,7 @@ In the stochastic case $U$ is generally not multiplicative, i.e. $U(fg)$ need no
 For compact or otherwise suitably topologized state spaces, closely related algebraic formulations identify stochastic maps with positive unital maps on commutative $C^*$-algebras, or more generally with morphisms in Markov categories \cite{Parzygnat2017,Fritz2020}.
 This operator viewpoint is also the one used in transfer-operator and Koopman-based analyses of stochastic dynamics \cite{WilliamsKevrekidisRowley2015,KlusEtAl2018}.
 
-The absence of a two-sided inverse should therefore be understood carefully.
+This formulation also clarifies the sense in which the dynamics is irreversible.
 For a fixed deposited kernel and $0<\alpha<1$, the affine update in $\rho$ can be algebraically rearranged, but the current augmented state does not retain the full ordered history and the stochastic kernel does not define a reversible group action in general.
 The forward update order is represented by a Markov semigroup.
 
@@ -371,9 +376,10 @@ Persistence means that $M_n(\mathcal{K})$ remains above a chosen threshold over 
 Here $M_n$ is a region-level observable, while the induced potential $\Phi_n(x)=\int K(x,y)\rho_n(y)\,dy$ is a field on $\Omega$.
 Intuitively, elevated $M_n(\mathcal{K})$ means that $\rho_n$ carries substantial weight near $\mathcal{K}$; through the convolution with $K$, this can generate a locally restoring drift $-\nabla\Phi_n$ that stabilizes the knot.
 
-An operator-theoretic refinement is available once augmented features along the trajectory are recorded.
-For a chosen lag and a coarse partition or basis on $\Sigma$, candidate knots can be tested as metastable or almost-invariant sets of the transfer operator, equivalently as slowly decaying modes separated by a spectral gap \cite{FroylandLloydSantitissadeekorn2010,NoeNuske2013}.
-The present paper uses residence weights and relaxation fits as trajectory-level diagnostics; a full transfer-operator/MSM analysis is left to subsequent work.
+This trajectory-level definition is deliberately minimal, but it has a direct operator-theoretic refinement.
+Once augmented features along the trajectory are recorded, a chosen lag and a coarse partition or basis on $\Sigma$ define an estimated transfer operator.
+Candidate knots can then be tested as metastable or almost-invariant sets, equivalently as slowly decaying modes separated by a spectral gap \cite{FroylandLloydSantitissadeekorn2010,NoeNuske2013}.
+The present paper uses residence weights and relaxation fits as the minimal diagnostic version of this criterion; a full transfer-operator/MSM analysis is left to subsequent work.
 
 \begin{figure}[!b]
     \centering
@@ -429,14 +435,15 @@ The stability of a dynamical knot is governed by the rate at which perturbations
 We therefore associate the mass-like scale of a knot not with resistance to acceleration, but with a relaxation scale characterizing the response of the system to fluctuations.
 
 Concretely, in the coarse-grained (Markovian) regime one may define a characteristic relaxation time $\tau_{\mathrm{rel}}$ from linear response, e.g., from the decay of the autocorrelation of $x(t)$ within a metastable region.
-Equivalently, $\tau_{\mathrm{rel}}$ can be obtained from the spectral gap of the linearized Fokker--Planck generator around the knot.
+Locally, $\tau_{\mathrm{rel}}$ can be obtained from the spectral gap of the linearized Fokker--Planck generator around the knot.
+Globally, the same diagnostic is naturally phrased in terms of slow eigenvalues of a lagged transfer operator.
 Figure~\ref{fig:relaxation_diagnostic} shows the corresponding trajectory-level diagnostic.
 It is then natural to work with the associated relaxation rate
 \begin{equation}
 \Gamma_{\mathrm{rel}} := \frac{1}{\tau_{\mathrm{rel}}},
 \end{equation}
 with ``heavier'' knots corresponding to larger $\Gamma_{\mathrm{rel}}$ (faster relaxation, stronger confinement against fluctuations).
-In a global transfer-operator description at lag $\tau$, the same idea would be expressed through a slow eigenvalue $\mu_i(\tau)$ via
+In a transfer-operator description at lag $\tau$, a slow eigenvalue $\mu_i(\tau)$ gives the rate
 \begin{equation}
 \Gamma_i(\tau) := -\frac{1}{\tau}\log|\mu_i(\tau)|,
 \end{equation}
