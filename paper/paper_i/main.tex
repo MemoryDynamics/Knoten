@@ -48,13 +48,13 @@ Closest in spirit are self-interacting walks biased by their visitation history,
 
 While our model shares with these approaches the idea of a trajectory coupled to a self-generated field, it differs structurally: the memory is an explicit, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
 Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $\sigma_n=(x_n,\rho_n)$ is Markov by construction.
-This Markov embedding is the main mathematical anchor of the present paper.
+This Markov embedding is the main mathematical anchor of the present paper and is consistent with the standard observation that finite-memory stochastic processes can be represented as Markov processes on an enlarged state space \cite{NoeNuske2013,NoeWuPrinzPlattner2013}.
 The same memory update is information-losing at the level of histories and thereby induces an intrinsic arrow of \emph{update order} in the update dynamics; that is, in general the full ordered past cannot be reconstructed from the present state.
 (We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
 Memory and trajectory thus emerge jointly as the minimal departure from trivial dynamics, rather than being encoded in external boundary conditions.
 
 By contrast, TSAW/SRBP-type formulations are typically written directly in terms of the full occupation history (or local time) without explicit forgetting \cite{AmitParisiPeliti1983,TothWerner1998,DurrettRogers1992,PelitiPietronero1987}.
-The broader placement of this construction within self-interacting diffusions, self-repelling polymers, and Markovian embeddings of memory processes is a natural subject for a separate mathematical companion note; the present paper keeps only the model definition and operational diagnostics needed for the minimal construction.
+The broader placement of this construction within self-interacting diffusions, self-repelling polymers, Markovian embeddings of memory processes, and positive-operator formulations of stochastic maps is a natural subject for a separate mathematical companion note; the present paper keeps only the model definition and operational diagnostics needed for the minimal construction.
 
 \paragraph{Roadmap (conceptual to operational).}
 We first give a brief motivation (without a formal proof) for why a locally linear, metric-like coarse-grained description is a natural effective description once one assumes only directed, comparable update steps (Sec.~\ref{sec:minimalist_motivation}); readers primarily interested in the model and diagnostics may skip directly to Sec.~\ref{sec:MinDynModel}.
@@ -120,6 +120,35 @@ Assumptions on $\Omega$ (continuity, reference measure, and coordinate/inner-pro
 The analysis below focuses on a single generative process.
 This is sufficient for the Markov embedding, the memory-induced arrow of update order, and the metastability diagnostics developed here.
 Coupled multiple generators, for example through a shared memory field, are a natural extension but are not required for the construction in this paper.
+
+\subsection{Transition kernel and observable semigroup}
+
+Let $\Sigma$ denote the augmented state space of pairs $\sigma=(x,\rho)$.
+Because the fresh noise draw is sampled at each update, the one-step dynamics is most naturally represented by a Markov transition kernel rather than by a deterministic map:
+\begin{equation}
+P(\sigma,A)
+:=
+\mathbb{P}\{\sigma_{n+1}\in A\mid \sigma_n=\sigma\},
+\qquad
+A\subseteq\Sigma .
+\end{equation}
+Equivalently, the dynamics acts on bounded observables $f:\Sigma\to\mathbb{R}$ through the Markov/Koopman operator
+\begin{equation}\label{eq:observable_operator}
+(Uf)(\sigma)
+:=
+\int_\Sigma f(\sigma')\,P(\sigma,d\sigma')
+=
+\mathbb{E}[f(\sigma_{n+1})\mid\sigma_n=\sigma].
+\end{equation}
+This operator is linear, positive, and unital ($U1=1$), while the dual operator propagates probability measures on $\Sigma$.
+The iterates satisfy the semigroup relation $U^{m+n}=U^mU^n$.
+In the stochastic case $U$ is generally not multiplicative, i.e. $U(fg)$ need not equal $(Uf)(Ug)$; hence the appropriate present language is a positive Markov operator on an observable algebra, not a deterministic automorphism of that algebra.
+For compact or otherwise suitably topologized state spaces, closely related algebraic formulations identify stochastic maps with positive unital maps on commutative $C^*$-algebras, or more generally with morphisms in Markov categories \cite{Parzygnat2017,Fritz2020}.
+This operator viewpoint is also the one used in transfer-operator and Koopman-based analyses of stochastic dynamics \cite{WilliamsKevrekidisRowley2015,KlusEtAl2018}.
+
+The absence of a two-sided inverse should therefore be understood carefully.
+For a fixed deposited kernel and $0<\alpha<1$, the affine update in $\rho$ can be algebraically rearranged, but the current augmented state does not retain the full ordered history and the stochastic kernel does not define a reversible group action in general.
+The forward update order is represented by a Markov semigroup.
 
 \subsection{Why a point-valued state? (minimal carrier choice)}
 
@@ -342,6 +371,10 @@ Persistence means that $M_n(\mathcal{K})$ remains above a chosen threshold over 
 Here $M_n$ is a region-level observable, while the induced potential $\Phi_n(x)=\int K(x,y)\rho_n(y)\,dy$ is a field on $\Omega$.
 Intuitively, elevated $M_n(\mathcal{K})$ means that $\rho_n$ carries substantial weight near $\mathcal{K}$; through the convolution with $K$, this can generate a locally restoring drift $-\nabla\Phi_n$ that stabilizes the knot.
 
+An operator-theoretic refinement is available once augmented features along the trajectory are recorded.
+For a chosen lag and a coarse partition or basis on $\Sigma$, candidate knots can be tested as metastable or almost-invariant sets of the transfer operator, equivalently as slowly decaying modes separated by a spectral gap \cite{FroylandLloydSantitissadeekorn2010,NoeNuske2013}.
+The present paper uses residence weights and relaxation fits as trajectory-level diagnostics; a full transfer-operator/MSM analysis is left to subsequent work.
+
 \begin{figure}[!b]
     \centering
     \includegraphics[width=0.88\linewidth]{fig3_knot_trajectory.pdf}
@@ -403,6 +436,12 @@ It is then natural to work with the associated relaxation rate
 \Gamma_{\mathrm{rel}} := \frac{1}{\tau_{\mathrm{rel}}},
 \end{equation}
 with ``heavier'' knots corresponding to larger $\Gamma_{\mathrm{rel}}$ (faster relaxation, stronger confinement against fluctuations).
+In a global transfer-operator description at lag $\tau$, the same idea would be expressed through a slow eigenvalue $\mu_i(\tau)$ via
+\begin{equation}
+\Gamma_i(\tau) := -\frac{1}{\tau}\log|\mu_i(\tau)|,
+\end{equation}
+with small $\Gamma_i$ corresponding to slowly relaxing modes.
+The local Hessian formula above is therefore best read as a quasi-stationary, local approximation to this broader spectral diagnostic.
 
 For coordinate-scaling robustness, one may report a dimensionless version using the intrinsic coarse-graining scales $\sigma$ and $D$ of the continuum description,
 \begin{equation}
@@ -489,6 +528,8 @@ Several limitations and open directions remain.
 The continuum description is used here as an effective approximation rather than as a proven scaling limit; a rigorous convergence analysis, including conditions on $(G_\sigma,K)$ and parameter scalings, is left for future work.
 A small NumPy reference implementation, tests, and a reproducible reference runner provide a concrete basis for verifying the numerical diagnostics reported in this draft.
 Finally, extending the framework to multiple coupled generators and exploring when consistent universal scales emerge are natural next steps.
+From the algebraic viewpoint, a later stage can also ask which transformations preserve the transition kernel or its metastable sets.
+Such stabilizer or equivariance structures would be the appropriate place to look for effective symmetry algebras; they are not assumed in the present minimal model.
 
 \begin{acknowledgments}
 The author thanks colleagues for valuable feedback and discussion.
