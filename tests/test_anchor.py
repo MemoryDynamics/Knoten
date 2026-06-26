@@ -7,6 +7,7 @@ from emergenz_knoten.anchor import (
     estimate_transfer_operator,
     memory_summary_features,
     memory_weight_in_ball,
+    row_stochastic_matrix,
     simulate_augmented_features,
     transition_count_matrix,
     vector_autocorrelation,
@@ -69,6 +70,16 @@ def test_voxel_labels_and_transition_counts() -> None:
     assert counts[1, 0] == 1.0
 
 
+def test_row_stochastic_matrix_handles_empty_rows_explicitly() -> None:
+    counts = np.array([[0.0, 2.0], [0.0, 0.0]])
+
+    stochastic = row_stochastic_matrix(counts)
+    substochastic = row_stochastic_matrix(counts, empty_row="zero")
+
+    assert np.allclose(stochastic.sum(axis=1), [1.0, 1.0])
+    assert stochastic[1, 1] == 1.0
+    assert np.allclose(substochastic.sum(axis=1), [1.0, 0.0])
+
 def test_estimate_transfer_operator_returns_rates() -> None:
     features = np.array(
         [
@@ -87,3 +98,4 @@ def test_estimate_transfer_operator_returns_rates() -> None:
     assert estimate.transition_matrix.shape[0] >= 2
     assert estimate.eigenvalues.size == estimate.transition_matrix.shape[0]
     assert estimate.relaxation_rates.ndim == 1
+    assert estimate.empty_rows.ndim == 1

@@ -266,15 +266,30 @@ def transition_count_matrix(
     return counts
 
 
-def row_stochastic_matrix(counts: Iterable[Iterable[float]]) -> np.ndarray:
-    """Normalize transition counts row-wise, leaving empty rows at zero."""
+def row_stochastic_matrix(
+    counts: Iterable[Iterable[float]],
+    *,
+    empty_row: str = "self",
+) -> np.ndarray:
+    """Normalize transition counts row-wise.
+
+    Finite trajectories can produce states that are observed only as terminal
+    targets for the chosen lag and therefore have no outgoing transition
+    counts. By default these rows are made absorbing. Use ``empty_row="zero"``
+    to keep a substochastic matrix with explicit zero rows.
+    """
 
     mat = np.asarray(counts, dtype=float)
     if mat.ndim != 2 or mat.shape[0] != mat.shape[1]:
         raise ValueError("counts must be a square matrix")
+    if empty_row not in {"self", "zero"}:
+        raise ValueError("empty_row must be 'self' or 'zero'")
     row_sum = mat.sum(axis=1, keepdims=True)
     out = np.zeros_like(mat, dtype=float)
     np.divide(mat, row_sum, out=out, where=row_sum > 0.0)
+    if empty_row == "self":
+        empty = np.flatnonzero(row_sum[:, 0] == 0.0)
+        out[empty, empty] = 1.0
     return out
 
 
@@ -298,11 +313,9 @@ def implied_relaxation_rates(
     order = np.argsort(-np.abs(eigenvalues))
     eigenvalues = eigenvalues[order]
     rates: list[float] = []
-    skipped_stationary = False
     for value in eigenvalues:
         modulus = float(abs(value))
-        if drop_stationary and not skipped_stationary and abs(modulus - 1.0) < 1e-8:
-            skipped_stationary = True
+        if drop_stationary and abs(modulus - 1.0) < 1e-8:
             continue
         if modulus <= 0.0:
             rates.append(float("inf"))
@@ -318,6 +331,7 @@ class TransferOperatorEstimate:
     transition_matrix: np.ndarray
     eigenvalues: np.ndarray
     relaxation_rates: np.ndarray
+    empty_rows: np.ndarray
 
 
 def estimate_transfer_operator(
@@ -326,12 +340,14 @@ def estimate_transfer_operator(
     voxel_size: float,
     lag: int = 1,
     lag_time: float | None = None,
+    empty_row: str = "self",
 ) -> TransferOperatorEstimate:
     """Estimate a finite-state transfer operator from augmented features."""
 
     labels = voxel_labels(features, voxel_size=voxel_size)
     counts = transition_count_matrix(labels, lag=lag)
-    transition = row_stochastic_matrix(counts)
+    empty_rows = np.flatnonzero(counts.sum(axis=1) == 0.0)
+    transition = row_stochastic_matrix(counts, empty_row=empty_row)
     eigenvalues, rates = implied_relaxation_rates(
         transition,
         lag_time=float(lag if lag_time is None else lag_time),
@@ -343,4 +359,5 @@ def estimate_transfer_operator(
         transition_matrix=transition,
         eigenvalues=eigenvalues,
         relaxation_rates=rates,
+        empty_rows=empty_rows,
     )

@@ -24,7 +24,7 @@ Markovian Embedding, Contractive Memory Fibres, and Metastability}
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{25 June 2026}
+\date{26 June 2026}
 
 \begin{abstract}
 We formulate a minimal class of self-interacting stochastic processes in which
@@ -101,9 +101,12 @@ is differentiable in the regimes considered below.
 \begin{assumption}[Baseline regularity]
 For the structural statements in Sections \ref{sec:memory}--\ref{sec:markov},
 it is enough that $G_\sigma$ is a normalized nonnegative density and that the
-update equations are well-defined. For continuum approximations one should
-assume enough smoothness and growth control on $K$ and $\nabla K$ to make the
-drift locally Lipschitz or otherwise well posed in the chosen function space.
+update equations are well-defined. We either take $\Omega=\mathbb{R}^d$ or
+impose boundary/extension conventions under which $x_{n+1}\in\Omega$ and the
+kernel deposition has the stated total mass. For continuum approximations one
+should assume enough smoothness and growth control on $K$ and $\nabla K$ to
+make the drift locally Lipschitz or otherwise well posed in the chosen function
+space.
 \end{assumption}
 
 The discrete process is
@@ -275,12 +278,18 @@ where
 \[
 T_x(\rho)=(1-\alpha)\rho+\alpha G_\sigma(\cdot-x).
 \]
+Equivalently, define the one-step augmented map
+\[
+\mathcal{F}_\xi(x,\rho)
+=\left(F_\rho(x,\xi),\,T_{F_\rho(x,\xi)}(\rho)\right).
+\]
 Thus the system is a self-coupled random affine skew product with an
 exponentially contractive memory fibre along fixed visible paths. For a noise
 sequence $\omega=(\xi_0,\xi_1,\ldots)$ one obtains the random cocycle
 \[
 \varphi(n,\omega,z_0)
-=F_{\xi_{n-1}(\omega)}\circ\cdots\circ F_{\xi_0(\omega)}(z_0),
+=\mathcal{F}_{\xi_{n-1}(\omega)}\circ\cdots\circ
+\mathcal{F}_{\xi_0(\omega)}(z_0),
 \]
 in the standard sense of random dynamical systems
 \cite{Arnold1998}. This viewpoint is useful for discussing random attractors,
@@ -374,7 +383,14 @@ transition matrix at lag $\ell$ from pairs
 \[
 (\psi(z_n),\psi(z_{n+\ell})).
 \]
-Slow eigenvalues $\lambda_i$ give implied rates
+For finite trajectories, states that are observed only as terminal lagged
+targets have no empirical outgoing row. The reference implementation reports
+how many such rows are handled and, by default, treats them as absorbing in the
+finite matrix. Eigenvalues introduced only by this terminal-row convention are
+excluded from the reported relaxation-rate list. Production analyses should
+check the terminal-row count, vary the lag and discretization, and compare
+against independent residence diagnostics. Slow eigenvalues $\lambda_i$ then
+give implied rates
 \begin{equation}
 \Gamma_i(\ell)=-\frac{1}{\ell}\log|\lambda_i|.
 \label{eq:impliedrates}
@@ -393,7 +409,8 @@ workflow, not evidence for a universal phase diagram.
 \includegraphics[width=0.58\linewidth]{fig_transfer_spectrum.pdf}
 \caption{Example eigenvalues of a finite-state transfer estimate from reduced
 augmented features. Slow modes near the unit circle are candidates for
-metastable structure, subject to lag, discretization, and sampling checks.}
+metastable structure, subject to lag, discretization, finite-sample row
+handling, and sampling checks.}
 \label{fig:transferspectrum}
 \end{figure}
 
@@ -493,5 +510,3 @@ needed before stronger emergence claims can be formulated and tested.
 \bibliography{references}
 
 \end{document}
-
-
