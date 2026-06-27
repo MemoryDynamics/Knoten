@@ -299,7 +299,12 @@ def implied_relaxation_rates(
     lag_time: float = 1.0,
     drop_stationary: bool = True,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Return eigenvalues and rates ``-log(|lambda|)/lag_time``."""
+    """Return eigenvalues and non-unit rates ``-log(|lambda|)/lag_time``.
+
+    When ``drop_stationary`` is true, all eigenvalues with modulus numerically
+    equal to one remain in the returned eigenvalue list but are omitted from
+    the relaxation-rate list.
+    """
 
     if lag_time <= 0.0:
         raise ValueError("lag_time must be positive")

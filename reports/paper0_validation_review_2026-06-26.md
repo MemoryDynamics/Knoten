@@ -131,3 +131,17 @@ self-interacting diffusion literature.
 4. Add lag/discretization sensitivity checks for transfer spectra.
 5. Decide whether "knots" remains in the title/abstract or is reserved for
    project-internal language.
+## Addendum: 2026-06-27 Micro-Review
+
+A third pass found and corrected smaller consistency issues:
+
+- The transfer-operator rate formula now distinguishes the sample lag `ell`
+  from the actual lag time `tau_ell` used for relaxation rates.
+- Unit-modulus eigenvalues are now described as reported spectral information,
+  not automatically as relaxation rates.
+- The pipeline reports both `empty_rows_handled` and
+  `unit_eigenvalues_reported`, making finite-sample transfer-matrix conventions
+  visible in machine-readable output.
+- The figure caption now says non-unit modes near the unit circle are candidate
+  slow modes, avoiding accidental interpretation of terminal-row artifacts as
+  metastability.

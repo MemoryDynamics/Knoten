@@ -24,7 +24,7 @@ Markovian Embedding, Contractive Memory Fibres, and Metastability}
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{26 June 2026}
+\date{27 June 2026}
 
 \begin{abstract}
 We formulate a minimal class of self-interacting stochastic processes in which
@@ -379,20 +379,21 @@ Let $\psi(z_n)$ be a reduced feature vector for the augmented state, for
 example position, memory centroid, current offset from the memory centroid,
 memory spread, retained memory mass, or learned/PCA/Fourier features of
 $\rho_n$. A finite-rank Ulam or Markov-state approximation estimates a
-transition matrix at lag $\ell$ from pairs
+transition matrix at sample lag $\ell$ from pairs
 \[
 (\psi(z_n),\psi(z_{n+\ell})).
 \]
-For finite trajectories, states that are observed only as terminal lagged
-targets have no empirical outgoing row. The reference implementation reports
-how many such rows are handled and, by default, treats them as absorbing in the
-finite matrix. Eigenvalues introduced only by this terminal-row convention are
-excluded from the reported relaxation-rate list. Production analyses should
-check the terminal-row count, vary the lag and discretization, and compare
-against independent residence diagnostics. Slow eigenvalues $\lambda_i$ then
-give implied rates
+Let $\tau_\ell$ denote the update-time or scaled-time lag represented by those
+pairs. For finite trajectories, states that are observed only as terminal
+lagged targets have no empirical outgoing row. The reference implementation
+reports how many such rows are handled and, by default, treats them as
+absorbing in the finite matrix. Eigenvalues with modulus numerically equal to
+one are still reported in the spectrum but are not converted into relaxation
+rates. Production analyses should check the terminal-row count, vary the lag
+and discretization, and compare against independent residence diagnostics.
+Slow non-unit eigenvalues $\lambda_i(\tau_\ell)$ then give implied rates
 \begin{equation}
-\Gamma_i(\ell)=-\frac{1}{\ell}\log|\lambda_i|.
+\Gamma_i(\tau_\ell)=-\frac{1}{\tau_\ell}\log|\lambda_i(\tau_\ell)|.
 \label{eq:impliedrates}
 \end{equation}
 Almost-invariant sets and coherent sets are then candidate metastable knots
@@ -408,8 +409,8 @@ workflow, not evidence for a universal phase diagram.
 \centering
 \includegraphics[width=0.58\linewidth]{fig_transfer_spectrum.pdf}
 \caption{Example eigenvalues of a finite-state transfer estimate from reduced
-augmented features. Slow modes near the unit circle are candidates for
-metastable structure, subject to lag, discretization, finite-sample row
+augmented features. Non-unit modes close to the unit circle are candidates for
+metastable structure, subject to lag-time choice, discretization, finite-sample row
 handling, and sampling checks.}
 \label{fig:transferspectrum}
 \end{figure}
@@ -424,9 +425,9 @@ kernel scales, kernel amplitudes, and dimension;
 $\psi(z_n)=(x_n,\text{summary}(\rho_n))$ at fixed sampling intervals;
 \item compute residence statistics, covariance/occupancy diagnostics, and
 autocorrelation functions;
-\item estimate a finite transition matrix on augmented features at lag $\ell$;
+\item estimate a finite transition matrix on augmented features at sample lag $\ell$;
 \item report leading eigenvalues and implied rates
-$-\ell^{-1}\log|\lambda_i|$;
+$-\tau_\ell^{-1}\log|\lambda_i(\tau_\ell)|$;
 \item validate candidate metastable sets against residence statistics and
 autocorrelation decay.
 \end{enumerate}

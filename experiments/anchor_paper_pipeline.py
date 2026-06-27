@@ -120,6 +120,9 @@ def run_case(args: argparse.Namespace, *, alpha: float, seed: int) -> dict[str, 
             "n_states": int(transfer.transition_matrix.shape[0]),
             "nonzero_transitions": int(np.count_nonzero(transfer.counts)),
             "empty_rows_handled": int(len(transfer.empty_rows)),
+            "unit_eigenvalues_reported": int(
+                np.sum(np.isclose(np.abs(transfer.eigenvalues), 1.0))
+            ),
             "eigenvalues": _complex_summary(transfer.eigenvalues),
             "relaxation_rates": _float_list(transfer.relaxation_rates, limit=8),
         },
