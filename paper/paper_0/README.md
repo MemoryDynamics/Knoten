@@ -12,6 +12,12 @@ proves the direct structural statements, and frames knots as metastable
 objects diagnosed through residence times, memory weight, autocorrelation,
 local relaxation, and transfer-operator modes.
 
+The paper now states the more general memory update
+`rho_{n+1}=(1-lambda_m) rho_n + beta G_sigma`. The previously used
+`alpha` form is the normalized convention `lambda_m=beta=alpha`, which
+preserves unit memory mass for normalized kernels and unit-mass initial data.
+The current figures and simulation pipeline use this normalized convention.
+
 It deliberately does not claim derivations of spacetime, Lorentz kinematics,
 quantum dynamics, Standard-Model structure, physical masses, or constants.
 Those topics are treated only as future-work directions.

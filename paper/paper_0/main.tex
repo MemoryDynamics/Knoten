@@ -55,8 +55,10 @@ for systems whose future evolution is shaped by their own past. Reinforced
 random walks, self-interacting diffusions, true self-avoiding walks, and
 self-repelling Brownian polymers all instantiate the general pattern
 \[
-\text{trajectory}\longrightarrow \text{occupation history}
+\begin{gathered}
+\text{trajectory}\longrightarrow \text{occupation history}\\
 \longrightarrow \text{self-induced drift}.
+\end{gathered}
 \]
 Classical examples include self-interacting diffusions
 \cite{BenAImRaimond2002}, reinforced random processes
@@ -126,17 +128,32 @@ x_{n+1}
 &=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),
 \label{eq:xupdate}\\
 \rho_{n+1}(x)
-&=(1-\alpha)\rho_n(x)+\alpha G_\sigma(x-x_{n+1}),
+&=(1-\lambda_{\mathrm m})\rho_n(x)
++\beta G_\sigma(x-x_{n+1}),
 \label{eq:rhoupdate}\\
 \Phi_n(x)&=(K*\rho_n)(x),
 \label{eq:potential}
 \end{align}
-where $0<\alpha<1$, $\varepsilon\geq0$, $\eta\geq0$, and $\xi_n$ are
-independent centered noise variables, typically taken isotropic with unit
-covariance. If $\rho_0$ and $G_\sigma$ have unit mass, then every $\rho_n$ has
-unit mass. If they are nonnegative, every $\rho_n$ is nonnegative. This
-normalization is a modelling convention; one could equivalently work with
-finite positive measures and absorb an overall memory scale into $\eta$.
+where $0<\lambda_{\mathrm m}<1$, $\beta\geq0$, $\varepsilon\geq0$,
+$\eta\geq0$, and $\xi_n$ are independent centered noise variables, typically
+taken isotropic with unit covariance. The parameter $\lambda_{\mathrm m}$ is
+the forgetting rate, while $\beta$ is the deposited memory strength. The
+previously used normalized convention is the special case
+$\lambda_{\mathrm m}=\beta=\alpha$.
+
+Let $m_G=\int_\Omega G_\sigma(x)\,dx$ and $M_n=\int_\Omega\rho_n(x)\,dx$.
+Then
+\begin{equation}
+M_{n+1}=(1-\lambda_{\mathrm m})M_n+\beta m_G.
+\label{eq:massrecursion}
+\end{equation}
+Thus the stationary total retained memory mass, when the scalar recursion is
+stable, is $M_*=\beta m_G/\lambda_{\mathrm m}$. Unit mass is preserved only in
+the normalized case $m_G=1$, $M_0=1$, and $\beta=\lambda_{\mathrm m}$. If
+$\rho_0$, $G_\sigma$, and $\beta$ are nonnegative, every $\rho_n$ is
+nonnegative. The choice $\beta=\lambda_{\mathrm m}$ is therefore a useful
+density normalization, not a structural requirement; an overall memory scale
+can often be absorbed into $K$ or $\eta$.
 
 The project terminology calls long-lived localized feedback regimes
 ``knots.'' In this paper the word has only an operational meaning: a knot is a
@@ -152,8 +169,8 @@ The memory equation can be unrolled exactly.
 For $n\geq1$,
 \begin{equation}
 \rho_n
-=(1-\alpha)^n\rho_0
-+\alpha\sum_{j=0}^{n-1}(1-\alpha)^j
+=(1-\lambda_{\mathrm m})^n\rho_0
++\beta\sum_{j=0}^{n-1}(1-\lambda_{\mathrm m})^j
 G_\sigma(\,\cdot-x_{n-j}).
 \label{eq:memoryexpansion}
 \end{equation}
@@ -163,33 +180,39 @@ G_\sigma(\,\cdot-x_{n-j}).
 The claim follows by induction. For $n=1$ it is exactly
 Eq.~\eqref{eq:rhoupdate}. If it holds at $n$, then
 \[
-\rho_{n+1}=(1-\alpha)^{n+1}\rho_0
-+\alpha\sum_{j=1}^{n}(1-\alpha)^jG_\sigma(\cdot-x_{n+1-j})
-+\alpha G_\sigma(\cdot-x_{n+1}),
+\begin{aligned}
+\rho_{n+1}
+&=(1-\lambda_{\mathrm m})^{n+1}\rho_0\\
+&\quad+\beta\sum_{j=1}^{n}(1-\lambda_{\mathrm m})^j
+G_\sigma(\cdot-x_{n+1-j})\\
+&\quad+\beta G_\sigma(\cdot-x_{n+1}),
+\end{aligned}
 \]
 which is Eq.~\eqref{eq:memoryexpansion} with $n+1$.
 \end{proof}
 
-The weights are
+The deposited weights are
 \begin{equation}
-w_j=\alpha(1-\alpha)^j.
+w_j=\beta(1-\lambda_{\mathrm m})^j.
 \end{equation}
-For a rest-weight threshold $\delta$, the effective memory depth satisfies
+Their relative tail is controlled by $\lambda_{\mathrm m}$, independently of
+the deposition scale $\beta$. For a rest-weight threshold $\delta$, the
+effective memory depth satisfies
 \begin{equation}
-j_\delta=\frac{\log\delta}{\log(1-\alpha)}
-\sim\frac{|\log\delta|}{\alpha}
-\quad(\alpha\ll1).
+j_\delta=\frac{\log\delta}{\log(1-\lambda_{\mathrm m})}
+\sim\frac{|\log\delta|}{\lambda_{\mathrm m}}
+\quad(\lambda_{\mathrm m}\ll1).
 \label{eq:memorydepth}
 \end{equation}
-Thus $\alpha^{-1}$ is the natural update-count scale for memory persistence.
-Figure \ref{fig:memoryweights} shows the exponential weights for representative
-values of $\alpha$.
+Thus $\lambda_{\mathrm m}^{-1}$ is the natural update-count scale for memory
+persistence. Figure \ref{fig:memoryweights} shows the normalized convention
+$\beta=\lambda_{\mathrm m}=\alpha$ for representative values of $\alpha$.
 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=0.7\linewidth]{fig_memory_weights.pdf}
-\caption{Exponential memory weights $w_j=\alpha(1-\alpha)^j$. Vertical guide
-lines mark $j=\alpha^{-1}$ for each curve.}
+\caption{Normalized exponential memory weights $w_j=\alpha(1-\alpha)^j$, corresponding to $\beta=\lambda_{\mathrm m}=\alpha$. Vertical guide
+lines mark $j=\lambda_{\mathrm m}^{-1}=\alpha^{-1}$ for each curve.}
 \label{fig:memoryweights}
 \end{figure}
 
@@ -198,12 +221,12 @@ Fix a common visible trajectory $x_1,\ldots,x_n$. Let $\rho_k$ and
 $\tilde\rho_k$ solve Eq.~\eqref{eq:rhoupdate} with the same deposited kernels
 but different initial memory fields. Then
 \begin{equation}
-\rho_n-\tilde\rho_n=(1-\alpha)^n(\rho_0-\tilde\rho_0).
+\rho_n-\tilde\rho_n=(1-\lambda_{\mathrm m})^n(\rho_0-\tilde\rho_0).
 \label{eq:fibrecontraction}
 \end{equation}
 Consequently, for any homogeneous norm on the memory space,
 \begin{equation}
-\|\rho_n-\tilde\rho_n\|=(1-\alpha)^n\|\rho_0-\tilde\rho_0\|.
+\|\rho_n-\tilde\rho_n\|=(1-\lambda_{\mathrm m})^n\|\rho_0-\tilde\rho_0\|.
 \end{equation}
 \end{proposition}
 
@@ -212,7 +235,7 @@ Subtract the two memory recursions. The deposited kernels cancel because the
 visible trajectory is common:
 \[
 \rho_{k+1}-\tilde\rho_{k+1}
-=(1-\alpha)(\rho_k-\tilde\rho_k).
+=(1-\lambda_{\mathrm m})(\rho_k-\tilde\rho_k).
 \]
 Iterating gives Eq.~\eqref{eq:fibrecontraction}.
 \end{proof}
@@ -269,9 +292,9 @@ does not determine the next-step law.
 \end{proof}
 
 The memory update should not be described as algebraically noninvertible in
-isolation. If $x_{n+1}$ and $\rho_{n+1}$ are known and $\alpha\neq1$, then
+isolation. If $x_{n+1}$ and $\rho_{n+1}$ are known and $\lambda_{\mathrm m}\neq1$, then
 \[
-\rho_n=\frac{\rho_{n+1}-\alpha G_\sigma(\cdot-x_{n+1})}{1-\alpha}
+\rho_n=\frac{\rho_{n+1}-\beta G_\sigma(\cdot-x_{n+1})}{1-\lambda_{\mathrm m}}
 \]
 is a formal rearrangement. The precise irreversibility statement is different:
 the present augmented state does not generally encode the full ordered
@@ -287,7 +310,7 @@ x_{n+1}&=F_{\rho_n}(x_n,\xi_n),\\
 \end{align}
 where
 \[
-T_x(\rho)=(1-\alpha)\rho+\alpha G_\sigma(\cdot-x).
+T_x(\rho)=(1-\lambda_{\mathrm m})\rho+\beta G_\sigma(\cdot-x).
 \]
 Equivalently, define the one-step augmented map
 \[
@@ -309,29 +332,33 @@ paper uses it only as structural orientation.
 
 \section{Formal Continuum Approximation}
 
-Let $t=\alpha n$ and consider a joint scaling
+Let $t=\lambda_{\mathrm m} n$ and consider a joint scaling
 \[
-\alpha\to0,\qquad \varepsilon\to0,\qquad
-\frac{\varepsilon^2}{2\alpha}\to D,\qquad
-\frac{\eta}{\alpha}\to\gamma.
+\begin{gathered}
+\lambda_{\mathrm m}\to0,\qquad \varepsilon\to0,\qquad
+\frac{\varepsilon^2}{2\lambda_{\mathrm m}}\to D,\\
+\frac{\eta}{\lambda_{\mathrm m}}\to\gamma,
+\qquad \frac{\beta}{\lambda_{\mathrm m}}\to\kappa.
+\end{gathered}
 \]
-Formally, the visible coordinate approaches
+The final scaling assumption keeps the memory source finite; the normalized
+case has $\kappa=1$. Formally, the visible coordinate approaches
 \begin{equation}
 dX_t=-\gamma\nabla(K*\rho_t)(X_t)\,dt+\sqrt{2D}\,dW_t,
 \label{eq:sde}
 \end{equation}
 while the memory field satisfies
 \begin{equation}
-\partial_t\rho_t=G_\sigma(\cdot-X_t)-\rho_t.
+\partial_t\rho_t=\kappa G_\sigma(\cdot-X_t)-\rho_t.
 \label{eq:memoryode}
 \end{equation}
 More generally one may introduce a memory time $\tau$ and write
 \[
-\partial_t\rho_t=\tau^{-1}\left(G_\sigma(\cdot-X_t)-\rho_t\right),
+\partial_t\rho_t=\tau^{-1}\left(\kappa G_\sigma(\cdot-X_t)-\rho_t\right),
 \]
 equivalently
 \[
-\rho_t=\tau^{-1}\int_{-\infty}^{t}e^{-(t-s)/\tau}
+\rho_t=\kappa\tau^{-1}\int_{-\infty}^{t}e^{-(t-s)/\tau}
 G_\sigma(\cdot-X_s)\,ds
 \]
 after transients. The extended process $(X_t,\rho_t)$ is local in the scaled
@@ -340,7 +367,7 @@ time variable and Markovian; the visible process $X_t$ alone retains memory.
 Equations \eqref{eq:sde}--\eqref{eq:memoryode} are a formal effective
 description, not a convergence theorem in this paper. A rigorous limit would
 require specifying topology, tightness estimates, regularity of $K$, boundary
-conditions, and the scaling of $\Omega$ if the domain changes with $\alpha$.
+conditions, and the scaling of $\Omega$ if the domain changes with $\lambda_{\mathrm m}$.
 
 \section{Metastability and Knot Diagnostics}
 
@@ -352,7 +379,7 @@ M_n(\mathcal{K})=\int_{\mathcal{K}}\rho_n(x)\,dx.
 \end{equation}
 Persistence over many memory times,
 \[
-\Delta n\gg\alpha^{-1},
+\Delta n\gg\lambda_{\mathrm m}^{-1},
 \]
 is a minimal diagnostic for metastability, not a proof of a new particle-like
 object.

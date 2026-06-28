@@ -8,7 +8,12 @@ import numpy as np
 
 
 def exponential_weights(alpha: float, horizon: int) -> np.ndarray:
-    """Return finite exponential memory weights alpha * (1-alpha)^k."""
+    """Return normalized finite exponential memory weights.
+
+    This is the paper's normalized convention beta=lambda_m=alpha, giving
+    weights alpha * (1-alpha)^k. The general update would use weights
+    beta * (1-lambda_m)^k.
+    """
 
     if not 0.0 < alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")

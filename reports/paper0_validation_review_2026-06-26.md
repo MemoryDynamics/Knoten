@@ -198,3 +198,27 @@ with systematic sweeps and validation tables.
 
 A realistic next target is: circulate to one or two trusted expert readers, add
 one clean theorem block and one small evidence table, then reassess journal fit.
+
+## Addendum: 2026-06-28 Memory Normalization Correction
+
+A late notation review found that the mathematically natural memory update is
+
+```text
+rho_{n+1} = (1-lambda_m) rho_n + beta G_sigma(. - x_{n+1}).
+```
+
+The previous `alpha` formulation is the normalized special case
+`lambda_m=beta=alpha`. Paper 0 has been updated accordingly:
+
+- `lambda_m` controls exponential forgetting and the memory time scale.
+- `beta` controls deposited memory strength.
+- The expansion is now `beta sum_j (1-lambda_m)^j G_sigma`.
+- Pathwise fibre contraction is `(1-lambda_m)^n`.
+- Unit mass is preserved only when the kernel and initial memory have unit mass
+  and `beta=lambda_m`.
+- The formal continuum scaling now assumes `beta/lambda_m -> kappa`, with the
+  normalized convention corresponding to `kappa=1`.
+
+This correction improves the paper. It does not remove the journal-submission
+blockers listed above: the continuum approximation is still formal, and the
+numerical evidence remains preliminary.

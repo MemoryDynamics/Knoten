@@ -29,7 +29,7 @@ def save_memory_weights() -> None:
     ax.set_yscale("log")
     ax.set_ylim(1e-5, 2e-1)
     ax.legend(frameon=False, fontsize=8)
-    ax.set_title("Exponential memory weights")
+    ax.set_title("Normalized exponential memory weights")
     fig.tight_layout()
     fig.savefig(HERE / "fig_memory_weights.pdf")
     plt.close(fig)
