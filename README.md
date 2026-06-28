@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-06-24.
+Stand: 2026-06-29.
 
 ## Worum es geht
 
@@ -123,6 +123,7 @@ Wichtige Einstiegspunkte:
 
 - [ReadTheDocs-Startseite](docs/index.md)
 - [Aktueller Stand](docs/current_status.md)
+- [Projektprioritaeten](docs/project_priorities.md)
 - [Non-Markovian Basis](docs/non_markovian_basis.md)
 - [Projektkarte](docs/project_map.md)
 - [Architekturuebersicht](docs/architecture_overview.md)
@@ -158,15 +159,21 @@ operational und operatorisch untersucht werden koennen.
 
 ## Naechste Prioritaeten
 
-1. Paper-0-Basis schaerfen: finite-memory self-interaction,
-   exponentiell gewichtetes Besuchsmass, Markov-Einbettung, relevante
-   Literatur.
-2. Memory-Traces oder Memory-Summary-Features im kanonischen Kern ergaenzen.
-3. Erste Markov-Schiene bauen: Lagged Dataset, Transition Counts, Implied
-   Timescales, Chapman-Kolmogorov-Checks, spectral gaps.
-4. Operator-/Algebra-Sprache in den Papers konsistent halten: `z_n` fuer den
-   augmentierten Zustand, `G_sigma` nur fuer die Kernelbreite.
-5. Den archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
+Die aktuelle konsolidierte Liste steht in
+[docs/project_priorities.md](docs/project_priorities.md). Der wichtigste
+naechste Schritt ist die Markov-/Transferoperator-Schicht als echte Paket- und
+Teststruktur auf augmentierten Zustaenden.
+
+Kurzfassung:
+
+1. `src/emergenz_knoten/markov/` anlegen: Features, Lagged Dataset,
+   Transition Counts, Operatoren, Validation.
+2. Paper-0-Pipeline auf diese Schicht umstellen und eine kleine Evidenztabelle
+   mit Seeds, Lag-Sensitivitaet und Negativkontrolle erzeugen.
+3. Paper 0 auf Expert-Feedback-Niveau bringen: kompakter Theoremblock,
+   Kernelklassen, Evidenztabelle.
+4. Paper I mit Paper 0 abgleichen, besonders Memory-Normierung,
+   Markov-Einbettung und Mass-Proxy-Sprache.
+5. Archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
    Negativkontrollen und mehreren Diagnostiken haerten.
-6. Paper I so ueberarbeiten, dass starke Claims klar als Definition,
-   numerical observation oder conjecture getrennt sind.
+6. Paper II/III erst danach weiterziehen.

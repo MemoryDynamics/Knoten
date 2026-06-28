@@ -9,6 +9,7 @@ theme:
 nav:
   - Start: index.md
   - Aktueller Stand: current_status.md
+  - Projektprioritaeten: project_priorities.md
   - Non-Markovian Basis: non_markovian_basis.md
   - Projektkarte: project_map.md
   - Architektur: architecture_overview.md

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-06-24.
+Stand: 2026-06-29.
 
 ## Repository
 
@@ -30,6 +30,7 @@ Markov-Einbettung. Diese Einsicht ist der wichtigste Anschluss fuer Paper 0
 und die naechste Implementationsschicht. In den Papers wird diese Schicht
 jetzt als Markov-/Koopman-Operator auf Observablen von `z_n` formuliert; die
 zugehoerige numerische Operatorpipeline ist aber noch nicht implementiert.
+Die konsolidierte Priorisierung steht in `docs/project_priorities.md`.
 
 ## Experimente und Daten
 
@@ -99,9 +100,13 @@ Was fehlt fuer eine echte Operator-/MSM-Schiene:
 
 ## Naechste technische Schritte
 
-1. Simulation optional mit Memory-Traces oder Memory-Summaries erweitern.
-2. Additive `markov/`-Schicht bauen: lagged data, counts, MSM, validation.
-3. Reproduktionslaeufe im Millionenbereich mit Numba-faehiger Umgebung
+1. Additive `markov/`-Schicht bauen: Features, lagged data, counts,
+   row-stochastic operators, implied timescales, CK-Checks, spectral gaps.
+2. Paper-0-Pipeline auf diese Schicht umstellen und eine kleine
+   Evidenztabelle mit Seed-, Lag- und Negativkontrollinformationen erzeugen.
+3. Paper 0 mit Theoremblock, Kernelklassen und Evidenztabelle auf
+   Expert-Feedback-Niveau bringen.
+4. Paper I mit Paper 0 abgleichen: allgemeine Memory-Normierung,
+   Markov-Einbettung, Stabilitaets-/Mass-Proxy-Sprache.
+5. Reproduktionslaeufe im Millionenbereich mit Numba-faehiger Umgebung
    vorbereiten.
-4. Paper-I-Abschnitte zu Zeit, Knoten, Masse und Diagnostik mit der
-   Non-Markovian-Basis abgleichen.

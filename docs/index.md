@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-06-24.
+Stand: 2026-06-29.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Rohnotizen,
 Chatverlaeufe und historische Skripte bleiben erhalten, aber der belastbare
@@ -16,12 +16,13 @@ Grobstrukturen operational entstehen koennen.
 ## Wichtigste Lesereihenfolge
 
 1. [Aktueller Stand](current_status.md)
-2. [Non-Markovian Basis](non_markovian_basis.md)
-3. [Architekturuebersicht](architecture_overview.md)
-4. [Experiment-Katalog](experiment_catalog.md)
-5. [Reproduzierbarkeitsstatus](reproducibility_status.md)
-6. [Haertungsplan](hardening_plan.md)
-7. [Paper-Claims](paper_claims.md)
+2. [Projektprioritaeten](project_priorities.md)
+3. [Non-Markovian Basis](non_markovian_basis.md)
+4. [Architekturuebersicht](architecture_overview.md)
+5. [Experiment-Katalog](experiment_catalog.md)
+6. [Reproduzierbarkeitsstatus](reproducibility_status.md)
+7. [Haertungsplan](hardening_plan.md)
+8. [Paper-Claims](paper_claims.md)
 
 ## Aktuelle Arbeitsentscheidung
 
@@ -38,7 +39,12 @@ Prozess sauber zu verankern:
   Operator auf Observablen des augmentierten Zustandsraums; seine Iterierten
   bilden eine vorwaertsgerichtete Halbgruppe, keine reversible Gruppe.
 
-Damit ergeben sich zwei moegliche naechste Schreibpfade:
+Die aktuelle Arbeitsentscheidung nach Paper 0 ist technischer: zuerst muss die
+Markov-/Transferoperator-Schicht auf augmentierten Zustaenden als echte
+Paket- und Teststruktur entstehen. Die priorisierte Liste steht in
+[Projektprioritaeten](project_priorities.md).
+
+Damit ergeben sich drei Schreibpfade, aber nicht mit gleicher Prioritaet:
 
 - **Paper 0:** Literatur- und Methodenbasis fuer finite-memory
   self-interacting processes, Markovian embeddings und Transferoperatoren.
