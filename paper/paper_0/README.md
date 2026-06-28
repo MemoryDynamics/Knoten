@@ -16,6 +16,13 @@ It deliberately does not claim derivations of spacetime, Lorentz kinematics,
 quantum dynamics, Standard-Model structure, physical masses, or constants.
 Those topics are treated only as future-work directions.
 
+Concrete companion locations:
+
+- Paper II, propagation and spacetime-kinematics programme:
+  <https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_ii>
+- Paper III, planned quantum and Standard-Model programme roadmap:
+  <https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_iii>
+
 ## Files
 
 - `main.tex`: LaTeX source.

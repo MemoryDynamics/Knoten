@@ -145,3 +145,56 @@ A third pass found and corrected smaller consistency issues:
 - The figure caption now says non-unit modes near the unit circle are candidate
   slow modes, avoiding accidental interpretation of terminal-row artifacts as
   metastability.
+
+## Addendum: 2026-06-28 Final Review
+
+### Incorporation Check
+
+The accumulated review findings have been checked against the current Paper 0
+source, README, pipeline, and report artifacts.
+
+Addressed items:
+
+- The scope boundary is explicit: Paper 0 does not claim spacetime, Lorentz
+  kinematics, quantum mechanics, Standard-Model structure, physical masses, or
+  constants.
+- The Markov embedding claim is correctly formulated for the augmented state
+  and not for the visible coordinate alone.
+- The memory update is no longer described as algebraically noninvertible when
+  the deposited kernel and next visible point are known; the text now states
+  the weaker and correct loss of ordered full history.
+- Relaxation rates are described as stability or mass-like proxies, not as
+  calibrated physical masses.
+- Dimension selection, finite propagation speed, Lorentz kinematics, and
+  quantum/Standard-Model topics are confined to future-work language.
+- Transfer-operator diagnostics now distinguish sample lag from physical or
+  scaled lag time, make terminal-row handling visible, and avoid converting
+  unit-modulus eigenvalues into relaxation rates.
+- Concrete repository links now point to Paper II and a planned Paper III
+  roadmap, while making clear that these companion tracks are not evidence for
+  the claims of Paper 0.
+
+Remaining submission blockers:
+
+- There is still no rigorous well-posedness, Feller, invariant-measure, or
+  ergodicity theorem for a named kernel/state-space class.
+- The continuum approximation remains formal rather than a proved scaling
+  limit.
+- The numerical evidence is still a smoke-test and diagnostic scaffold, not a
+  systematic parameter sweep with seed statistics and lag/discretization
+  sensitivity.
+- The novelty claim relative to self-interacting diffusions and reinforced
+  processes is plausible but would need a sharper theorem-level comparison for
+  a mathematical journal.
+
+### Final Referee Verdict
+
+Do not submit the paper to a journal as a standalone peer-review manuscript in
+its present form. It is suitable as an internal mathematical anchor and close
+to a technical preprint or discussion draft. For journal review, it should first
+be upgraded with either a compact rigorous theorem package for a bounded or
+compact setting, or a substantially stronger reproducible numerical section
+with systematic sweeps and validation tables.
+
+A realistic next target is: circulate to one or two trusted expert readers, add
+one clean theorem block and one small evidence table, then reassess journal fit.
