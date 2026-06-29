@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-06-14.
+Stand: 2026-06-29.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -12,11 +12,15 @@ python experiments/cli.py --list
 python experiments/cli.py reference --list
 python experiments/cli.py reference --script reference_experiment.py
 python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
+python experiments/anchor_paper_pipeline.py
+python experiments/anchor_sensitivity_analysis.py
 ```
 
 ## Struktur
 
 - `reference_experiment.py`: kleiner reproduzierbarer Referenzlauf.
+- `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
+- `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -38,13 +42,14 @@ python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 
 
 ## Aktueller Schwerpunkt
 
-Die naechste Experimentfamilie sollte die Non-Markovian/Markov-Embedding
-Schicht vorbereiten:
+Die Non-Markovian/Markov-Embedding-Schicht ist initial vorhanden. Der aktuelle
+Experimentfokus ist ihre Haertung:
 
-- Memory-Summary-Features pro Samplezeitpunkt.
-- Lagged datasets.
-- Transition Counts und Uebergangsmatrizen.
-- Implied timescales, Chapman-Kolmogorov-Checks und spectral gaps.
+- Seed-Sensitivitaet.
+- Lag-Sensitivitaet in Sample-Indizes und Update-Schritten.
+- Voxel-/Feature-Sensitivitaet.
+- Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
+- Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle
@@ -53,6 +58,8 @@ Reproduktionspfad.
 ## Kontext
 
 - `docs/current_status.md`
+- `docs/markov_architecture.md`
+- `docs/markov_requirements.md`
 - `docs/non_markovian_basis.md`
 - `docs/experiment_catalog.md`
 - `reports/dimension_reproduction_results_2026-06-13.md`

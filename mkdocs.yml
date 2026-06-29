@@ -10,6 +10,7 @@ nav:
   - Start: index.md
   - Aktueller Stand: current_status.md
   - Projektprioritaeten: project_priorities.md
+  - Repository Map: repository_map.md
   - Non-Markovian Basis: non_markovian_basis.md
   - Markov-Architektur: markov_architecture.md
   - Markov-Anforderungen: markov_requirements.md

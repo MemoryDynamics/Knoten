@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-06-14.
+Stand: 2026-06-29.
 
 ## Kanonische Entry-Points
 
@@ -10,6 +10,8 @@ Stand: 2026-06-14.
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstiegspunkt fuer vorhandene Skriptfamilien |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register und Paper-Formulierung |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | seed-kontrollierte Reproduktion kleiner/mittlerer `N` | aktiv | Naechste Numba-Millionenlaeufe |
+| `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung | aktiv | schneller Operator-Pipeline-Check |
+| `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht | aktiv | kleine Evidenztabelle und P0.2-Validierung |
 
 ## Historische und thematische Skriptfamilien
 
@@ -24,6 +26,11 @@ Stand: 2026-06-14.
 | Legacy-Validierung | `experiments/legacy/scripts/highN_regime*.py` | reproduzierbare Varianten historischer High-N-Regime | nur mit kleinen Parametern als Pilot starten |
 
 ## Wichtigste Ergebnisartefakte
+
+### Paper-0-Markov-Schicht
+
+- `data/processed/anchor_paper/sensitivity_summary.json`
+- `reports/anchor_sensitivity_2026-06-29.md`
 
 ### Effektive Dimension
 
@@ -93,15 +100,19 @@ Prioritaet fuer neue Laeufe:
 4. `single_scale`, um die Notwendigkeit der zweiten Kernel-Skala zu testen.
 5. Fitfenster-, Burn-in- und Sampling-Sensitivitaet.
 
-## Non-Markovian Experiment Gap
+## Non-Markovian / Markov-Embedding Status
 
-Noch nicht vorhanden:
+Initial vorhanden:
 
-- Memory-Traces pro Sample.
-- Lag-time sweeps.
-- Uebergangsmatrizen.
-- Implied timescales.
-- Chapman-Kolmogorov-Checks.
-- PCCA-/HMM-basierte metastabile Zustandsmodelle.
+- reduzierte Memory-Summary-Features pro Sample;
+- Lagged datasets auf Sample-Indizes;
+- Transition Counts und Uebergangsmatrizen;
+- implied timescales und einfache Chapman-Kolmogorov-Fehler;
+- kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet.
 
-Das ist die naechste Experimentfamilie, falls Paper 0 zuerst geschrieben wird.
+Weiter offen:
+
+- vollstaendige Memory-Traces oder reichere Feature-Familien;
+- systematische Bootstrap-Auswertung;
+- PCCA-/HMM-basierte metastabile Zustandsmodelle;
+- groessere Parameter- und Negativkontroll-Sweeps.

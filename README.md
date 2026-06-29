@@ -124,6 +124,7 @@ Wichtige Einstiegspunkte:
 - [ReadTheDocs-Startseite](docs/index.md)
 - [Aktueller Stand](docs/current_status.md)
 - [Projektprioritaeten](docs/project_priorities.md)
+- [Repository Map](docs/repository_map.md)
 - [Non-Markovian Basis](docs/non_markovian_basis.md)
 - [Markov-Architektur](docs/markov_architecture.md)
 - [Markov-Anforderungen](docs/markov_requirements.md)

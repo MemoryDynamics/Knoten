@@ -17,14 +17,15 @@ Grobstrukturen operational entstehen koennen.
 
 1. [Aktueller Stand](current_status.md)
 2. [Projektprioritaeten](project_priorities.md)
-3. [Non-Markovian Basis](non_markovian_basis.md)
-4. [Markov-Architektur](markov_architecture.md)
-5. [Markov-Anforderungen](markov_requirements.md)
-6. [Architekturuebersicht](architecture_overview.md)
-7. [Experiment-Katalog](experiment_catalog.md)
-8. [Reproduzierbarkeitsstatus](reproducibility_status.md)
-9. [Haertungsplan](hardening_plan.md)
-10. [Paper-Claims](paper_claims.md)
+3. [Repository Map](repository_map.md)
+4. [Non-Markovian Basis](non_markovian_basis.md)
+5. [Markov-Architektur](markov_architecture.md)
+6. [Markov-Anforderungen](markov_requirements.md)
+7. [Architekturuebersicht](architecture_overview.md)
+8. [Experiment-Katalog](experiment_catalog.md)
+9. [Reproduzierbarkeitsstatus](reproducibility_status.md)
+10. [Haertungsplan](hardening_plan.md)
+11. [Paper-Claims](paper_claims.md)
 
 ## Aktuelle Arbeitsentscheidung
 

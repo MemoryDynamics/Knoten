@@ -1,0 +1,2033 @@
+{
+  "aggregates": [
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9595239156597429,
+          "std": 0.043247162944071195
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.004235651077859827,
+          "std": 0.004582283063383577
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.04047608434025707,
+          "std": 0.043247162944071195
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9227353861494185,
+          "std": 0.07625853130594562
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002799323068628514,
+          "std": 0.002845371484216946
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.07726461385058155,
+          "std": 0.07625853130594562
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9070244200689217,
+          "std": 0.08141433717681416
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002036227094697852,
+          "std": 0.0018600153340778524
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.0929755799310783,
+          "std": 0.08141433717681416
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 5
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9597287159574379,
+          "std": 0.042459727805954924
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0042104927286399215,
+          "std": 0.004496996413828052
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.04027128404256212,
+          "std": 0.042459727805954924
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9333191550638382,
+          "std": 0.05495772199606113
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0023598081779991225,
+          "std": 0.002006936005007322
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.0666808449361617,
+          "std": 0.05495772199606113
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9198069585135838,
+          "std": 0.05823930311605051
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0017132068728947427,
+          "std": 0.0012965085671264908
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.08019304148641622,
+          "std": 0.05823930311605051
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 5
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9227353861494185,
+          "std": 0.07625853130594562
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002799323068628514,
+          "std": 0.002845371484216946
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.07726461385058155,
+          "std": 0.07625853130594562
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9333191550638382,
+          "std": 0.05495772199606113
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0023598081779991225,
+          "std": 0.002006936005007322
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.0666808449361617,
+          "std": 0.05495772199606113
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9843068680090807,
+          "std": 0.0027554278721338417
+        },
+        "empty_rows": {
+          "mean": 1.0,
+          "std": 0.816496580927726
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9682696497526181,
+          "std": 0.015081118723513406
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.001078881601175188,
+          "std": 0.0005207352080247565
+        },
+        "n_states": {
+          "mean": 85.66666666666667,
+          "std": 1.699673171197595
+        },
+        "residence_mean": {
+          "mean": 3.667338010430116,
+          "std": 0.41501740844676827
+        },
+        "spectral_gap": {
+          "mean": 0.03173035024738199,
+          "std": 0.015081118723513406
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9843068680090807,
+          "std": 0.0027554278721338417
+        },
+        "empty_rows": {
+          "mean": 1.0,
+          "std": 0.816496580927726
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9719849332459917,
+          "std": 0.01336223984904955
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0009503346368549178,
+          "std": 0.0004603090829308722
+        },
+        "n_states": {
+          "mean": 100.0,
+          "std": 6.683312551921141
+        },
+        "residence_mean": {
+          "mean": 3.667338010430116,
+          "std": 0.41501740844676827
+        },
+        "spectral_gap": {
+          "mean": 0.028015066754008295,
+          "std": 0.01336223984904955
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.3333333333333333,
+          "std": 0.4714045207910317
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.8163773588735769,
+          "std": 0.20884856450193842
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.008046407386024296,
+          "std": 0.009610490046729371
+        },
+        "n_states": {
+          "mean": 104.0,
+          "std": 28.296053906272277
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.1836226411264232,
+          "std": 0.2088485645019384
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.6666666666666666,
+          "std": 0.9428090415820634
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.923132370879577,
+          "std": 0.08838586133027286
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0028268281019753765,
+          "std": 0.003314053954848101
+        },
+        "n_states": {
+          "mean": 101.66666666666667,
+          "std": 31.329787033357817
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.076867629120423,
+          "std": 0.08838586133027286
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9227353861494185,
+          "std": 0.07625853130594562
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002799323068628514,
+          "std": 0.002845371484216946
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.07726461385058155,
+          "std": 0.07625853130594562
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9227353861494185,
+          "std": 0.07625853130594562
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002799323068628514,
+          "std": 0.002845371484216946
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.07726461385058155,
+          "std": 0.07625853130594562
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.7727944970974887,
+          "std": 0.06069676596291244
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9227353861494185,
+          "std": 0.07625853130594562
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002799323068628514,
+          "std": 0.002845371484216946
+        },
+        "n_states": {
+          "mean": 59.0,
+          "std": 12.083045973594572
+        },
+        "residence_mean": {
+          "mean": 2.2331003342892752,
+          "std": 0.3174271077642511
+        },
+        "spectral_gap": {
+          "mean": 0.07726461385058155,
+          "std": 0.07625853130594562
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.3333333333333333,
+          "std": 0.4714045207910317
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9405470756574456,
+          "std": 0.044747240565857584
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.002081746230009934,
+          "std": 0.0016140864491738622
+        },
+        "n_states": {
+          "mean": 59.666666666666664,
+          "std": 4.988876515698588
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.059452924342554524,
+          "std": 0.044747240565857584
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9333191550638382,
+          "std": 0.05495772199606113
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0023598081779991225,
+          "std": 0.002006936005007322
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.0666808449361617,
+          "std": 0.05495772199606113
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": {
+          "mean": 0.9320372946931649,
+          "std": 0.021447413296775623
+        },
+        "empty_rows": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "leading_nontrivial_abs": {
+          "mean": 0.9333191550638382,
+          "std": 0.05495772199606113
+        },
+        "leading_relaxation_rate": {
+          "mean": 0.0023598081779991225,
+          "std": 0.002006936005007322
+        },
+        "n_states": {
+          "mean": 48.666666666666664,
+          "std": 6.128258770283412
+        },
+        "residence_mean": {
+          "mean": 4.696535903992044,
+          "std": 1.7861018431932
+        },
+        "spectral_gap": {
+          "mean": 0.0666808449361617,
+          "std": 0.05495772199606113
+        }
+      },
+      "n_cases": 3,
+      "sample_lag": 3
+    }
+  ],
+  "cases": [
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.898503410226755,
+        "leading_relaxation_rate": 0.010702477729910956,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 194,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.10149658977324505,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8149037576254614,
+        "leading_relaxation_rate": 0.006822842050580696,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 200,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.1850962423745386,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.7918935945052705,
+        "leading_relaxation_rate": 0.004666564931313281,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 210,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.20810640549472947,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8149037576254614,
+        "leading_relaxation_rate": 0.006822842050580696,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 200,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.1850962423745386,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8149037576254614,
+        "leading_relaxation_rate": 0.006822842050580696,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 200,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.1850962423745386,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8149037576254614,
+        "leading_relaxation_rate": 0.006822842050580696,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 200,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.1850962423745386,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8149037576254614,
+        "leading_relaxation_rate": 0.006822842050580696,
+        "n_samples": 271,
+        "n_states": 42,
+        "nonzero_transitions": 200,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.1850962423745386,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9809520890410139,
+        "covariance_dimension": 1.8148366840138495,
+        "empty_rows": 0,
+        "knot_count": 19.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9844977538630106,
+        "leading_relaxation_rate": 0.0005207887468600859,
+        "n_samples": 271,
+        "n_states": 84,
+        "nonzero_transitions": 188,
+        "residence_max": 6.1,
+        "residence_mean": 3.0901002506265662,
+        "spectral_gap": 0.015502246136989362,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7025360586389522,
+        "covariance_dimension": 2.3237287483731732,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.5235200704380911,
+        "leading_relaxation_rate": 0.021572663682024377,
+        "n_samples": 271,
+        "n_states": 64,
+        "nonzero_transitions": 244,
+        "residence_max": 3.9642857142857144,
+        "residence_mean": 2.6371862934362937,
+        "spectral_gap": 0.4764799295619089,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.9936187313333602,
+        "leading_relaxation_rate": 0.000640171599454813,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 216,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.006381268666639794,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9781678786282029,
+        "leading_relaxation_rate": 0.0007357989546432649,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 220,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.02183212137179713,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.9635356978100285,
+        "leading_relaxation_rate": 0.0007429148334782351,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 225,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.03646430218997154,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9781678786282029,
+        "leading_relaxation_rate": 0.0007357989546432649,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 220,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.02183212137179713,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9781678786282029,
+        "leading_relaxation_rate": 0.0007357989546432649,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 220,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.02183212137179713,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9781678786282029,
+        "leading_relaxation_rate": 0.0007357989546432649,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 220,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.02183212137179713,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9781678786282029,
+        "leading_relaxation_rate": 0.0007357989546432649,
+        "n_samples": 271,
+        "n_states": 69,
+        "nonzero_transitions": 220,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.02183212137179713,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9877011348021728,
+        "covariance_dimension": 1.218616513484113,
+        "empty_rows": 1,
+        "knot_count": 22.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9481703279605425,
+        "leading_relaxation_rate": 0.0017740374007178086,
+        "n_samples": 271,
+        "n_states": 85,
+        "nonzero_transitions": 180,
+        "residence_max": 14.0,
+        "residence_mean": 3.863997113997114,
+        "spectral_gap": 0.05182967203945754,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.8506315606479221,
+        "covariance_dimension": 1.452402997872509,
+        "empty_rows": 0,
+        "knot_count": 7.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9296014732882708,
+        "leading_relaxation_rate": 0.0024333102674382826,
+        "n_samples": 271,
+        "n_states": 125,
+        "nonzero_transitions": 264,
+        "residence_max": 4.944444444444445,
+        "residence_mean": 2.2003968253968256,
+        "spectral_gap": 0.07039852671172919,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.9864496054191136,
+        "leading_relaxation_rate": 0.0013643039042137133,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.01355039458088636,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9751345221945911,
+        "leading_relaxation_rate": 0.000839328200661583,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.02486547780540893,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.9656439678914661,
+        "leading_relaxation_rate": 0.0006992015193020399,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 230,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.034356032108533885,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9751345221945911,
+        "leading_relaxation_rate": 0.000839328200661583,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.02486547780540893,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9751345221945911,
+        "leading_relaxation_rate": 0.000839328200661583,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.02486547780540893,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9751345221945911,
+        "leading_relaxation_rate": 0.000839328200661583,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.02486547780540893,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9751345221945911,
+        "leading_relaxation_rate": 0.000839328200661583,
+        "n_samples": 271,
+        "n_states": 66,
+        "nonzero_transitions": 226,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.02486547780540893,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9842673801840552,
+        "covariance_dimension": 1.2869579630373753,
+        "empty_rows": 2,
+        "knot_count": 16.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.972140867434301,
+        "leading_relaxation_rate": 0.0009418186559476696,
+        "n_samples": 271,
+        "n_states": 88,
+        "nonzero_transitions": 203,
+        "residence_max": 9.333333333333334,
+        "residence_mean": 4.0479166666666675,
+        "spectral_gap": 0.027859132565699052,
+        "unit_eigenvalues": 2
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.02,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.7652158720055919,
+        "covariance_dimension": 1.751472885615115,
+        "empty_rows": 1,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9960105328943685,
+        "leading_relaxation_rate": 0.0001332482086102244,
+        "n_samples": 271,
+        "n_states": 123,
+        "nonzero_transitions": 265,
+        "residence_max": 2.740740740740741,
+        "residence_mean": 1.8617178840347055,
+        "spectral_gap": 0.003989467105631528,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.8997649519259535,
+        "leading_relaxation_rate": 0.010562171429393852,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 162,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.10023504807404648,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8556674067902463,
+        "leading_relaxation_rate": 0.005195784060410171,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 166,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.14433259320975367,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.8377308929657136,
+        "leading_relaxation_rate": 0.003541167203717674,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 174,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.16226910703428643,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8773511685710679,
+        "leading_relaxation_rate": 0.0043615982164426055,
+        "n_samples": 271,
+        "n_states": 65,
+        "nonzero_transitions": 204,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.12264883142893213,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8556674067902463,
+        "leading_relaxation_rate": 0.005195784060410171,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 166,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.14433259320975367,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8556674067902463,
+        "leading_relaxation_rate": 0.005195784060410171,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 166,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.14433259320975367,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.8556674067902463,
+        "leading_relaxation_rate": 0.005195784060410171,
+        "n_samples": 271,
+        "n_states": 40,
+        "nonzero_transitions": 166,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.14433259320975367,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9809520890410139,
+        "covariance_dimension": 1.8148366840138495,
+        "empty_rows": 0,
+        "knot_count": 19.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9837057841490666,
+        "leading_relaxation_rate": 0.0005476142162586718,
+        "n_samples": 271,
+        "n_states": 91,
+        "nonzero_transitions": 224,
+        "residence_max": 6.1,
+        "residence_mean": 3.0901002506265662,
+        "spectral_gap": 0.01629421585093338,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9054389393732,
+        "covariance_dimension": 1.9248735067245744,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.7983378171300131,
+        "leading_relaxation_rate": 0.007507448045807429,
+        "n_samples": 271,
+        "n_states": 58,
+        "nonzero_transitions": 233,
+        "residence_max": 5.071428571428571,
+        "residence_mean": 2.4671653882180196,
+        "spectral_gap": 0.20166218286998694,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 1
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.9924497548536853,
+        "leading_relaxation_rate": 0.0007578892534830602,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 194,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.007550245146314749,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.975005326918625,
+        "leading_relaxation_rate": 0.000843744816431092,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 195,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.02499467308137504,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.9548982073414602,
+        "leading_relaxation_rate": 0.0009230106670736406,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 204,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.04510179265853975,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 1,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.975005326918625,
+        "leading_relaxation_rate": 0.000843744816431092,
+        "n_samples": 271,
+        "n_states": 61,
+        "nonzero_transitions": 202,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.02499467308137504,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.975005326918625,
+        "leading_relaxation_rate": 0.000843744816431092,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 195,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.02499467308137504,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.975005326918625,
+        "leading_relaxation_rate": 0.000843744816431092,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 195,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.02499467308137504,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.975005326918625,
+        "leading_relaxation_rate": 0.000843744816431092,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 195,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.02499467308137504,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9877011348021728,
+        "covariance_dimension": 1.218616513484113,
+        "empty_rows": 1,
+        "knot_count": 22.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9532874356494436,
+        "leading_relaxation_rate": 0.0015946269806329655,
+        "n_samples": 271,
+        "n_states": 107,
+        "nonzero_transitions": 219,
+        "residence_max": 14.0,
+        "residence_mean": 3.863997113997114,
+        "spectral_gap": 0.046712564350556374,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9579611674539699,
+        "covariance_dimension": 1.2576093933878743,
+        "empty_rows": 0,
+        "knot_count": 6.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9793790184795016,
+        "leading_relaxation_rate": 0.0006945520924735108,
+        "n_samples": 271,
+        "n_states": 130,
+        "nonzero_transitions": 260,
+        "residence_max": 12.2,
+        "residence_mean": 6.839652014652015,
+        "spectral_gap": 0.020620981520498405,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 2
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 10,
+        "leading_nontrivial_abs": 0.9869714410926749,
+        "leading_relaxation_rate": 0.001311417503042851,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 210,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.013028558907325127,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 1,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9692847314826436,
+        "leading_relaxation_rate": 0.0010398956571561044,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 219,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.030715268517356398,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "lag_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 50,
+        "leading_nontrivial_abs": 0.9667917752335775,
+        "leading_relaxation_rate": 0.0006754427478929131,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 217,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.03320822476642249,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 5,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 0.75,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9692847314826436,
+        "leading_relaxation_rate": 0.0010398956571561044,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 219,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.030715268517356398,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9692847314826436,
+        "leading_relaxation_rate": 0.0010398956571561044,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 219,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.030715268517356398,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "voxel_sensitivity",
+      "control": "baseline",
+      "feature_voxel_size": 1.25,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9692847314826436,
+        "leading_relaxation_rate": 0.0010398956571561044,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 219,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.030715268517356398,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "baseline",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 0,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9692847314826436,
+        "leading_relaxation_rate": 0.0010398956571561044,
+        "n_samples": 271,
+        "n_states": 53,
+        "nonzero_transitions": 219,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.030715268517356398,
+        "unit_eigenvalues": 1
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "eta_zero",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.9842673801840552,
+        "covariance_dimension": 1.2869579630373753,
+        "empty_rows": 2,
+        "knot_count": 16.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9789615799394649,
+        "leading_relaxation_rate": 0.000708762713673116,
+        "n_samples": 271,
+        "n_states": 102,
+        "nonzero_transitions": 227,
+        "residence_max": 9.333333333333334,
+        "residence_mean": 4.0479166666666675,
+        "spectral_gap": 0.021038420060535135,
+        "unit_eigenvalues": 2
+      },
+      "sample_lag": 3,
+      "seed": 3
+    },
+    {
+      "alpha": 0.05,
+      "category": "negative_control",
+      "control": "shuffled_memory_features",
+      "feature_voxel_size": 1.0,
+      "metrics": {
+        "autocorrelation_lag1": 0.932711777252325,
+        "covariance_dimension": 1.3820613107123998,
+        "empty_rows": 2,
+        "knot_count": 4.0,
+        "lag_updates": 30,
+        "leading_nontrivial_abs": 0.9916802770292164,
+        "leading_relaxation_rate": 0.0002784841676451903,
+        "n_samples": 271,
+        "n_states": 117,
+        "nonzero_transitions": 267,
+        "residence_max": 7.444444444444445,
+        "residence_mean": 4.782790309106098,
+        "spectral_gap": 0.00831972297078365,
+        "unit_eigenvalues": 2
+      },
+      "sample_lag": 3,
+      "seed": 3
+    }
+  ],
+  "date": "2026-06-29",
+  "description": "Small sensitivity analysis for the Paper-0 Markov layer.",
+  "git": {
+    "revision": "6f9be65f2c4e6105377569fcb43c4b918b4c87fb",
+    "status": "M README.md\n M docs/experiment_catalog.md\n M docs/index.md\n M experiments/README.md\n M mkdocs.yml\n?? docs/repository_map.md\n?? experiments/anchor_sensitivity_analysis.py\n?? reports/anchor_sensitivity_2026-06-29.md"
+  },
+  "parameters": {
+    "alpha": [
+      0.02,
+      0.05
+    ],
+    "amplitude_att": 0.35,
+    "amplitude_rep": 1.0,
+    "base_feature_voxel_size": 1.0,
+    "base_lag": 3,
+    "burn_in": 300,
+    "controls": [
+      "baseline",
+      "eta_zero",
+      "shuffled_memory_features"
+    ],
+    "dim": 3,
+    "epsilon": 0.03,
+    "eta": 0.15,
+    "feature_voxel_size": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "lag": [
+      1,
+      3,
+      5
+    ],
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "sample_every": 10,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "steps": 3000,
+    "voxel_size": 0.75
+  }
+}
