@@ -176,7 +176,7 @@ features -> lagged dataset -> state assignment -> transition counts
 Reihenfolge fuer eine schlanke Implementierung:
 
 1. `build_augmented_features`: Modi `raw`, `delay`, `memory_summary`.
-2. `make_lagged_dataset`: Paare `(z_t, z_{t+lag})`.
+2. `make_lagged_dataset`: Sample-Paare `(z_i, z_{i+ell})` mit separat dokumentiertem Update-Lag.
 3. `assign_states`: zunaechst einfache Voxel/Cluster-Prototypen.
 4. `transition_counts`: Zaehle Label-Uebergaenge.
 5. `transition_matrix`: zeilenstochastische Normalisierung.

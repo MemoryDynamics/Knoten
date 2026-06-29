@@ -9,8 +9,10 @@ Das Projekt besteht aktuell aus vier Schichten:
 3. Daten, Figuren und Reports (`data/`, `figures/`, `reports/`)
 4. Dokumentation (`docs/`, ReadTheDocs/MkDocs)
 
-Die naechste geplante Schicht ist eine additive Non-Markovian/Markov-Embedding
-Ebene unter `src/emergenz_knoten/markov/`.
+Die additive Non-Markovian/Markov-Embedding-Schicht ist initial unter
+`src/emergenz_knoten/markov/` angelegt. Sie arbeitet indexbasiert auf
+Update-Zustaenden `z_n` und Sample-Zustaenden `z_i`; eine physikalische
+Zeitparametrisierung wird dort nicht vorausgesetzt.
 
 ## 1. Kernbibliothek
 
@@ -51,6 +53,18 @@ Transferoperators.
 - `save_simulation_result`
 - `load_simulation_result`
 - NPZ/JSON-Serialisierung
+
+`src/emergenz_knoten/markov/`
+
+- `features.py`: reduzierte augmentierte Features aus Position und Memory.
+- `dataset.py`: Sample-indexed augmented trajectories und Lagged Datasets.
+- `transition.py`: Voxel-Labels, Transition Counts und row-stochastic matrices.
+- `validation.py`: Autokorrelation, implied timescales und CK-Fehler.
+- `metastability.py`: erste slow-mode und spectral-gap helpers.
+
+`src/emergenz_knoten/anchor.py`
+
+- Kompatibilitaets-Fassade fuer fruehere Paper-0-Imports.
 
 ## 2. Dynamisches Modell
 
@@ -114,18 +128,22 @@ SimulationConfig
 
 Limit:
 
-- Es gibt noch keine Memory-Snapshots pro Samplezeitpunkt.
-- Es gibt noch keine lagged datasets.
-- Es gibt noch keine Uebergangsmatrizen oder Transferoperatoren.
+- Der kanonische Simulation-Output speichert weiterhin keine vollstaendigen
+  Memory-Snapshots pro Samplezeitpunkt.
+- Die neue Operator-Schicht nutzt deshalb zunaechst reduzierte
+  Memory-Summary-Features.
+- Voxelbasierte Zustandszuordnung ist ein erster robuster Baseline-Pfad, noch
+  keine finale metastability decomposition.
 
-## 5. Geplante Non-Markovian/Markov-Schicht
+## 5. Non-Markovian/Markov-Schicht
 
-Zielstruktur:
+Aktuelle Struktur:
 
 ```text
 src/emergenz_knoten/markov/
+  __init__.py
+  features.py
   dataset.py
-  operators.py
   transition.py
   validation.py
   metastability.py
@@ -135,12 +153,12 @@ Minimaler Flow:
 
 ```text
 samples + memory summaries
-  -> augmented features z_t
-  -> lagged pairs (z_t, z_{t+tau})
+  -> augmented features z_i sampled from z_n
+  -> lagged pairs (z_i, z_{i+ell})
   -> state assignment
   -> transition counts
   -> transition matrix
-  -> Markov/Koopman operator U_tau
+  -> Markov/Koopman operator U_ell
   -> implied timescales / CK / spectral gap
   -> metastable memberships
 ```
@@ -149,7 +167,7 @@ Warum additiv:
 
 - Der bestehende Kern bleibt schlank.
 - Historische Diagnostik bleibt reproduzierbar.
-- Die neue Schicht kann direkt gegen negative Controls getestet werden.
+- Die neue Schicht kann direkt gegen negative Controls getestet und spaeter um PCCA/HMM/PMM erweitert werden.
 
 ## 6. Dokumentation
 

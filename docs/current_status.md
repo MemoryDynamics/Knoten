@@ -23,14 +23,21 @@ Der kanonische Paketkern liegt unter `src/emergenz_knoten`:
 - `diagnostics.py`: `D_cov`, `D_occ`, punktwolkenbasierte
   `spectral_dimension`, Residence-Statistiken, Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
+- `markov/`: erste additive Markov-/Transferoperator-Schicht mit reduzierten
+  augmentierten Features, Sample-Lag-Datasets, Transition Counts,
+  row-stochastic operators, implied timescales, CK-Fehlern und einfachen
+  metastability helpers.
+- `anchor.py`: Kompatibilitaets-Fassade fuer fruehere Paper-0-Imports; die
+  Implementierung liegt jetzt unter `markov/`.
 
 Der sichtbare Prozess `x_n` ist wegen der History nichtmarkovsch. Der
 augmentierte Zustand `z_n` aus Position und Speicher ist die natuerliche
 Markov-Einbettung. Diese Einsicht ist der wichtigste Anschluss fuer Paper 0
 und die naechste Implementationsschicht. In den Papers wird diese Schicht
 jetzt als Markov-/Koopman-Operator auf Observablen von `z_n` formuliert; die
-zugehoerige numerische Operatorpipeline ist aber noch nicht implementiert.
-Die konsolidierte Priorisierung steht in `docs/project_priorities.md`.
+erste numerische Operatorpipeline ist im Paketkern angelegt und wird von der
+Paper-0-Anchor-Pipeline genutzt. Die konsolidierte Priorisierung steht in
+`docs/project_priorities.md`.
 
 ## Experimente und Daten
 
@@ -76,15 +83,15 @@ Vorsicht:
 
 ## Non-Markovian Gap
 
-Was fehlt fuer eine echte Operator-/MSM-Schiene:
+Was fuer eine vollwertige Operator-/MSM-Schiene noch fehlt:
 
-- Memory-Snapshots oder Memory-Summary-Features pro Samplezeitpunkt.
-- Lagged datasets.
-- Zustandsdiskretisierung oder dynamische Embeddings.
-- Transition Counts und Uebergangsmatrizen.
-- Implied timescales, Chapman-Kolmogorov-Tests, spectral gaps.
+- Vollstaendige Memory-Snapshots oder staerkere Memory-Feature-Varianten pro
+  Samplezeitpunkt; die aktuelle Schicht nutzt reduzierte Summary-Features.
+- Systematische Zustandsdiskretisierung jenseits einfacher Voxel.
+- Lag-, Voxel- und Feature-Sensitivitaet mit Seed-Bootstrap.
 - PCCA-/metastability-Memberships.
-- HMM/PMM-Fallback, falls die Projektion auf `x_n` allein nicht markovsch ist.
+- HMM/PMM-Fallback, falls die Projektion auf reduzierte Features noch zu viel
+  Gedachtnis versteckt.
 
 ## Paper-Status
 
@@ -100,10 +107,10 @@ Was fehlt fuer eine echte Operator-/MSM-Schiene:
 
 ## Naechste technische Schritte
 
-1. Additive `markov/`-Schicht bauen: Features, lagged data, counts,
-   row-stochastic operators, implied timescales, CK-Checks, spectral gaps.
-2. Paper-0-Pipeline auf diese Schicht umstellen und eine kleine
-   Evidenztabelle mit Seed-, Lag- und Negativkontrollinformationen erzeugen.
+1. Die neue `markov/`-Schicht gegen laengere Trajektorien, mehrere Seeds,
+   Lag-Sensitivitaet und Voxel-/Feature-Sensitivitaet validieren.
+2. Eine kleine Paper-0-Evidenztabelle mit Seed-, Lag- und
+   Negativkontrollinformationen erzeugen.
 3. Paper 0 mit Theoremblock, Kernelklassen und Evidenztabelle auf
    Expert-Feedback-Niveau bringen.
 4. Paper I mit Paper 0 abgleichen: allgemeine Memory-Normierung,

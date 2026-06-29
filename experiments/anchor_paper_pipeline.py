@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import SimulationConfig, covariance_dimension, residence_statistics
-from emergenz_knoten.anchor import (
+from emergenz_knoten.markov import (
     estimate_transfer_operator,
     simulate_augmented_features,
     vector_autocorrelation,
@@ -99,7 +99,8 @@ def run_case(args: argparse.Namespace, *, alpha: float, seed: int) -> dict[str, 
     transfer = estimate_transfer_operator(
         features,
         voxel_size=args.feature_voxel_size,
-        lag=args.lag,
+        sample_lag=args.lag,
+        sample_steps=result["sample_steps"],
         lag_time=float(args.lag * args.sample_every),
     )
     ac = vector_autocorrelation(samples, max_lag=args.max_ac_lag)
@@ -115,8 +116,8 @@ def run_case(args: argparse.Namespace, *, alpha: float, seed: int) -> dict[str, 
         ),
         "position_autocorrelation": _float_list(ac),
         "transfer": {
-            "lag_samples": int(args.lag),
-            "lag_updates": int(args.lag * args.sample_every),
+            "lag_samples": int(transfer.sample_lag),
+            "lag_updates": int(transfer.lag_updates or args.lag * args.sample_every),
             "n_states": int(transfer.transition_matrix.shape[0]),
             "nonzero_transitions": int(np.count_nonzero(transfer.counts)),
             "empty_rows_handled": int(len(transfer.empty_rows)),

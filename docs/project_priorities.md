@@ -32,8 +32,9 @@ Begruendung:
 
 ### P0.1 Markov-Paketstruktur schaffen
 
-Ziel: Den Paper-0-Prototypen aus `anchor.py` in eine klare, testbare
-Operator-Schicht ueberfuehren.
+Status: initial umgesetzt. Der Paper-0-Prototyp aus `anchor.py` wurde in eine
+klare, testbare Operator-Schicht unter `src/emergenz_knoten/markov/`
+ueberfuehrt; `anchor.py` bleibt als Kompatibilitaets-Fassade bestehen.
 
 Vorgeschlagene Module:
 
@@ -50,7 +51,7 @@ src/emergenz_knoten/markov/
 Minimaler Inhalt:
 
 - `features.py`: reduzierte Memory-Summary-Features fuer `z_n`.
-- `dataset.py`: lagged pairs `(z_t, z_{t+tau})`, Sample-Lag vs. Update-Lag.
+- `dataset.py`: lagged pairs `(z_i, z_{i+ell})`, Sample-Lag vs. Update-Lag.
 - `transition.py`: State assignment, Transition Counts, row-stochastic
   operators, terminal-row conventions.
 - `validation.py`: implied timescales, einfache Chapman-Kolmogorov-Fehler,
@@ -67,6 +68,13 @@ Akzeptanzkriterien:
 - `pytest` bleibt gruen.
 - Die Paper-0-Pipeline nutzt die neue Schicht, nicht einen isolierten
   Sonderpfad.
+
+Naechster Ausbau:
+
+- Lag-, Voxel- und Feature-Sensitivitaet systematisch auswerten.
+- Seed-Bootstrap und eine kleine Evidenztabelle erzeugen.
+- Spaeter PCCA/HMM/PMM-Fallbacks pruefen, falls reduzierte Features nicht
+  ausreichend markovsch sind.
 
 ### P0.2 Kleine Evidenztabelle fuer Paper 0 erzeugen
 

@@ -72,7 +72,7 @@ Markov-Zustand `z_n = (x_n, rho_n)` operational trennen.
 Zu bauen:
 
 - Memory-Traces oder Memory-Summary-Features entlang der Trajektorie.
-- Lagged datasets fuer `z_t -> z_{t+tau}`.
+- Lagged datasets fuer Sample-Paare `z_i -> z_{i+ell}` mit getrenntem Update-Lag.
 - Zustandszuordnung ueber Voxel, Cluster oder einfache Prototypen.
 - Transition Counts und Uebergangsmatrizen.
 - Implied timescales, Chapman-Kolmogorov-Checks und spectral gaps.
