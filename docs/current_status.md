@@ -37,7 +37,9 @@ und die naechste Implementationsschicht. In den Papers wird diese Schicht
 jetzt als Markov-/Koopman-Operator auf Observablen von `z_n` formuliert; die
 erste numerische Operatorpipeline ist im Paketkern angelegt und wird von der
 Paper-0-Anchor-Pipeline genutzt. Die konsolidierte Priorisierung steht in
-`docs/project_priorities.md`.
+docs/project_priorities.md.
+Architektur und Akzeptanzkriterien der Markov-Schicht stehen in
+`docs/markov_architecture.md` und `docs/markov_requirements.md`.
 
 ## Experimente und Daten
 

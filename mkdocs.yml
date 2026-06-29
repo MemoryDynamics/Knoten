@@ -11,6 +11,8 @@ nav:
   - Aktueller Stand: current_status.md
   - Projektprioritaeten: project_priorities.md
   - Non-Markovian Basis: non_markovian_basis.md
+  - Markov-Architektur: markov_architecture.md
+  - Markov-Anforderungen: markov_requirements.md
   - Projektkarte: project_map.md
   - Architektur: architecture_overview.md
   - Experimente: experiment_catalog.md

@@ -1,6 +1,6 @@
 # Architekturuebersicht
 
-Stand: 2026-06-24.
+Stand: 2026-06-29.
 
 Das Projekt besteht aktuell aus vier Schichten:
 
@@ -12,7 +12,9 @@ Das Projekt besteht aktuell aus vier Schichten:
 Die additive Non-Markovian/Markov-Embedding-Schicht ist initial unter
 `src/emergenz_knoten/markov/` angelegt. Sie arbeitet indexbasiert auf
 Update-Zustaenden `z_n` und Sample-Zustaenden `z_i`; eine physikalische
-Zeitparametrisierung wird dort nicht vorausgesetzt.
+Zeitparametrisierung wird dort nicht vorausgesetzt. Die Detailarchitektur steht
+in [Markov-Architektur](markov_architecture.md), die Akzeptanzkriterien in
+[Markov-Anforderungen](markov_requirements.md).
 
 ## 1. Kernbibliothek
 

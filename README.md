@@ -125,6 +125,8 @@ Wichtige Einstiegspunkte:
 - [Aktueller Stand](docs/current_status.md)
 - [Projektprioritaeten](docs/project_priorities.md)
 - [Non-Markovian Basis](docs/non_markovian_basis.md)
+- [Markov-Architektur](docs/markov_architecture.md)
+- [Markov-Anforderungen](docs/markov_requirements.md)
 - [Projektkarte](docs/project_map.md)
 - [Architekturuebersicht](docs/architecture_overview.md)
 - [Experiment-Katalog](docs/experiment_catalog.md)
@@ -160,7 +162,10 @@ operational und operatorisch untersucht werden koennen.
 ## Naechste Prioritaeten
 
 Die aktuelle konsolidierte Liste steht in
-[docs/project_priorities.md](docs/project_priorities.md). Der wichtigste
+[docs/project_priorities.md](docs/project_priorities.md). Die technische
+Einordnung steht in [docs/markov_architecture.md](docs/markov_architecture.md),
+die Akzeptanzkriterien in
+[docs/markov_requirements.md](docs/markov_requirements.md). Der wichtigste
 naechste Schritt ist die Markov-/Transferoperator-Schicht als echte Paket- und
 Teststruktur auf augmentierten Zustaenden.
 

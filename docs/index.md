@@ -18,11 +18,13 @@ Grobstrukturen operational entstehen koennen.
 1. [Aktueller Stand](current_status.md)
 2. [Projektprioritaeten](project_priorities.md)
 3. [Non-Markovian Basis](non_markovian_basis.md)
-4. [Architekturuebersicht](architecture_overview.md)
-5. [Experiment-Katalog](experiment_catalog.md)
-6. [Reproduzierbarkeitsstatus](reproducibility_status.md)
-7. [Haertungsplan](hardening_plan.md)
-8. [Paper-Claims](paper_claims.md)
+4. [Markov-Architektur](markov_architecture.md)
+5. [Markov-Anforderungen](markov_requirements.md)
+6. [Architekturuebersicht](architecture_overview.md)
+7. [Experiment-Katalog](experiment_catalog.md)
+8. [Reproduzierbarkeitsstatus](reproducibility_status.md)
+9. [Haertungsplan](hardening_plan.md)
+10. [Paper-Claims](paper_claims.md)
 
 ## Aktuelle Arbeitsentscheidung
 
@@ -42,7 +44,9 @@ Prozess sauber zu verankern:
 Die aktuelle Arbeitsentscheidung nach Paper 0 ist technischer: zuerst muss die
 Markov-/Transferoperator-Schicht auf augmentierten Zustaenden als echte
 Paket- und Teststruktur entstehen. Die priorisierte Liste steht in
-[Projektprioritaeten](project_priorities.md).
+[Projektprioritaeten](project_priorities.md). Die neue Schicht wird in
+[Markov-Architektur](markov_architecture.md) erklaert; die Akzeptanzkriterien
+stehen in [Markov-Anforderungen](markov_requirements.md).
 
 Damit ergeben sich drei Schreibpfade, aber nicht mit gleicher Prioritaet:
 

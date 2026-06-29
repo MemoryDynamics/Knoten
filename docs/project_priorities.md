@@ -30,6 +30,16 @@ Begruendung:
 
 ## P0: Jetzt
 
+### P0.0 Architektur- und Anforderungsdoku nachziehen
+
+Status: umgesetzt. Vor P0.2 sind Begriffe, Datenfluesse,
+Akzeptanzkriterien und Nicht-Claims der Markov-Schicht explizit dokumentiert.
+
+Dokumente:
+
+- [Markov-Architektur](markov_architecture.md)
+- [Markov-Anforderungen](markov_requirements.md)
+
 ### P0.1 Markov-Paketstruktur schaffen
 
 Status: initial umgesetzt. Der Paper-0-Prototyp aus `anchor.py` wurde in eine
