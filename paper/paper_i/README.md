@@ -1,6 +1,6 @@
 # Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
 
-Stand: 2026-06-24.
+Stand: 2026-06-29.
 
 ## Rolle
 
@@ -27,7 +27,8 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
   Markov-Einbettung;
 - Markov-/Koopman-Operatoren und Vorwaerts-Halbgruppen als algebraische
   Beschreibung der augmentierten Dynamik;
-- `alpha^{-1}` als interne Speicherpersistenzskala;
+- allgemeine Memory-Form `(1-lambda_m) rho_n + beta G_sigma` mit normierter Arbeitskonvention `lambda_m=beta=alpha`;
+- `alpha^{-1}` als interne Speicherpersistenzskala in dieser normierten Konvention;
 - Knoten als operational messbare metastabile Strukturen;
 - Masse nur als Relaxations-/Konfinierungsproxy;
 - klare Trennung von Definition, numerical observation und conjecture.
@@ -107,4 +108,5 @@ Weltmodell-Claims liegen, sondern auf:
    Kernelbreite?
 4. Sind `t = alpha n`, Knoten und Mass-/Relaxationsproxies defensiv genug
    formuliert?
-5. Ist Paper 0 als separates mathematisches Einordnungspaper sinnvoll?
+5. Ist Paper 0 als separates mathematisches Einordnungspaper bzw. Supplement sinnvoll?
+6. Welche Long-Run-Evidenz mit `n >= 10^7` braucht Paper I, bevor robuste Knotenexistenz behauptet wird?

@@ -6,11 +6,13 @@ Working title:
 
 ## Role
 
-Paper 0 is the conservative mathematical anchor for the project. It defines
-the discrete self-interacting stochastic process with exponential forgetting,
+Paper 0 is the conservative mathematical anchor for the project and can be
+used as supplementary mathematical material for Paper I. It defines the
+discrete self-interacting stochastic process with exponential forgetting,
 proves the direct structural statements, and frames knots as metastable
 objects diagnosed through residence times, memory weight, autocorrelation,
-local relaxation, and transfer-operator modes.
+local relaxation, and transfer-operator modes. It is not meant to carry a
+standalone numerical claim that robust knots exist across parameter ranges.
 
 The paper now states the more general memory update
 `rho_{n+1}=(1-lambda_m) rho_n + beta G_sigma`. The previously used
@@ -58,4 +60,4 @@ python experiments/anchor_paper_pipeline.py
 
 runs a small parameter sweep, records reduced augmented-state features, and
 writes residence, autocorrelation, and transfer-operator diagnostics to
-`results/anchor_paper/pipeline_summary.json`.
+`results/anchor_paper/pipeline_summary.json`. This is a pipeline sanity check, not the Long-Run metastability campaign for Paper I.

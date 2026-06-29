@@ -48,8 +48,8 @@ At update step $n$ the full state is
 \begin{equation}
 z_n=(x_n,\rho_n),
 \end{equation}
-where $x_n\in\Omega$ is the visible state and $\rho_n$ is a normalized non-negative memory density on $\Omega$.
-The normalization is a baseline convention: it fixes the overall memory scale and makes $M_n(\mathcal K)$ below a visitation weight, while the same mechanism could be formulated with finite positive measures and a corresponding rescaling of $\eta$.
+where $x_n\in\Omega$ is the visible state and $\rho_n$ is a non-negative memory density on $\Omega$.
+The general finite-measure formulation uses an independent forgetting rate $\lambda_{\mathrm m}$ and deposition strength $\beta$. The normalized convention used below sets $\lambda_{\mathrm m}=\beta=\alpha$, fixes the overall memory scale, and makes $M_n(\mathcal K)$ a visitation weight.
 
 The visible update is
 \begin{equation}\label{eq:compact_trajectory}
@@ -57,11 +57,15 @@ x_{n+1}=x_n+\varepsilon \xi_n-\eta\nabla\Phi_n(x_n),
 \end{equation}
 where $\xi_n$ is an independent isotropic unit-variance noise variable \cite{Gardiner2009}.
 The memory evolves as
-\begin{equation}\label{eq:compact_memory}
-\rho_{n+1}(x)=(1-\alpha)\rho_n(x)+\alpha G_\sigma(x-x_{n+1}),
-\qquad 0<\alpha\le 1,
-\end{equation}
-with $G_\sigma$ a smooth normalized kernel of width $\sigma$.
+\begin{align}
+\rho_{n+1}(x)
+&=(1-\lambda_{\mathrm m})\rho_n(x)+\beta G_\sigma(x-x_{n+1}),
+\label{eq:compact_memory}\\
+&\qquad 0<\lambda_{\mathrm m}<1.
+\notag
+\end{align}
+with $\beta\ge0$ and $G_\sigma$ a smooth normalized kernel of width $\sigma$.
+In the normalized convention $\lambda_{\mathrm m}=\beta=\alpha$, this reduces to the update used in the figures and scaling discussion.
 The memory-induced potential is
 \begin{equation}\label{eq:compact_potential}
 \Phi_n(x)=\int_\Omega K(x,y)\rho_n(y)\,dy.
@@ -88,12 +92,12 @@ The iterates form a semigroup, $U^{m+n}=U^mU^n$.
 Because of noise and history compression this is not, in general, a reversible group action or a deterministic algebra automorphism; in stochastic settings $U(fg)$ need not equal $(Uf)(Ug)$.
 This places the model in the same operator-theoretic language as stochastic Koopman/transfer-operator methods, while related algebraic formulations view stochastic maps as positive unital maps on commutative $C^*$-algebras or as morphisms in Markov categories \cite{WilliamsKevrekidisRowley2015,KlusEtAl2018,Parzygnat2017,Fritz2020}.
 
-Equation~(\ref{eq:compact_memory}) also explains the arrow of update order.
+In the normalized convention, Eq.~(\ref{eq:compact_memory}) also explains the arrow of update order.
 It maps an ordered trajectory history to a current density by exponentially suppressing older contributions.
 For fixed $x_{n+1}$ the affine update can be inverted as a map in $\rho_n$, but the inverse does not recover the discarded ordered sequence of past positions.
 The irreversibility used here is therefore history compression, not thermodynamic entropy production.
 
-Iterating Eq.~(\ref{eq:compact_memory}) gives, for $n>k$,
+Iterating the normalized form of Eq.~(\ref{eq:compact_memory}) gives, for $n>k$,
 \begin{equation}\label{eq:compact_sum}
 \rho_n(x)=(1-\alpha)^{n-k}\rho_k(x)
 +\alpha\sum_{j=k+1}^n(1-\alpha)^{n-j}G_\sigma(x-x_j).

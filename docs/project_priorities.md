@@ -2,149 +2,139 @@
 
 Stand: 2026-06-29.
 
-Diese Seite ist die aktuelle Arbeitsliste nach dem Paper-0-Sprint. Sie
-konsolidiert die offenen Punkte aus Paper-Reviews, Architektur-Doku,
-Experiment-Katalog und Reproduzierbarkeitsstatus. Ziel ist eine klare
-Reihenfolge, nicht eine vollstaendige Ideensammlung.
+Diese Seite ist die aktuelle Arbeitsliste nach dem Paper-0- und
+Markov-Paket-Sprint. Sie priorisiert die naechsten Arbeitsschritte und trennt
+bewusst zwischen mathematischem Anker, Paper-I-Evidenz und spaeteren
+Emergenzprogrammen.
 
 ## Leitentscheidung
 
-Der naechste wichtigste Schritt ist:
+Der naechste wichtigste Schritt ist jetzt:
 
-**Die Markov-/Transferoperator-Pipeline auf augmentierten Zustaenden in den
-Paketkern heben und reproduzierbar validieren.**
+**Paper 0 als technischen Anker einfrieren, Paper I konsistent dazu ziehen und
+parallel eine echte `n >= 10^7`-Metastabilitaetskampagne laufen lassen.**
 
 Begruendung:
 
-- Paper 0 definiert den mathematischen Anker bereits ausreichend fuer interne
-  Weiterarbeit.
-- Paper I, Paper II und spaetere Physikclaims haengen jetzt methodisch daran,
-  ob Knoten wirklich als metastabile Regime eines Operators auf `z_n`
-  gemessen werden koennen.
-- Der Code enthaelt mit `src/emergenz_knoten/anchor.py` bereits einen
-  Paper-0-nahen Prototypen, aber noch keine saubere additive
-  `src/emergenz_knoten/markov/`-Schicht.
-- Ohne lagged augmented datasets, Transition Counts, implied timescales,
-  CK-Checks und Sensitivitaetsanalysen bleibt die Operator-Sprache eine gute
-  Formulierung, aber noch keine robuste Evidenzpipeline.
+- Die Markov-/Transferoperator-Schicht existiert initial als Paketstruktur
+  unter `src/emergenz_knoten/markov/` und ist mit Tests abgesichert.
+- Paper 0 traegt als mathematische Einordnung bzw. moegliches Supplement:
+  Modell, exponentielles Gedaechtnis, Markov-Einbettung, kontraktive
+  Gedaechtnisfaser und metastabilitaetsfaehige Diagnostik.
+- Paper 0 traegt noch nicht als eigenstaendiges numerisches Knotenpaper. Die
+  kleinen Sensitivitaetslaeufe sind Pipeline-Sanity-Checks, keine robuste
+  Knotenexistenz-Evidenz.
+- Fuer Paper I ist die kritische Evidenzfrage jetzt empirisch: treten
+  langlebige Knoten in reproduzierbaren Long-Runs auf, insbesondere bei
+  `n > 10^7`, und trennen sie sich von einfachen Negativkontrollen?
 
 ## P0: Jetzt
 
-### P0.0 Architektur- und Anforderungsdoku nachziehen
+### P0.0 Markov-Schicht und Anforderungen
 
-Status: umgesetzt. Vor P0.2 sind Begriffe, Datenfluesse,
-Akzeptanzkriterien und Nicht-Claims der Markov-Schicht explizit dokumentiert.
+Status: umgesetzt.
 
-Dokumente:
+Vorhanden:
 
 - [Markov-Architektur](markov_architecture.md)
 - [Markov-Anforderungen](markov_requirements.md)
+- `src/emergenz_knoten/markov/`
+- `tests/test_markov.py`
+- kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Paper-0-Pipeline
 
-### P0.1 Markov-Paketstruktur schaffen
+Naechster Ausbau bleibt sinnvoll, ist aber nicht mehr der Blocker fuer Paper
+0: reichere Memory-Features, Bootstrap ueber Seeds, PCCA/HMM und bessere
+Chapman-Kolmogorov-Validierung.
 
-Status: initial umgesetzt. Der Paper-0-Prototyp aus `anchor.py` wurde in eine
-klare, testbare Operator-Schicht unter `src/emergenz_knoten/markov/`
-ueberfuehrt; `anchor.py` bleibt als Kompatibilitaets-Fassade bestehen.
+### P0.1 Paper 0 einfrieren
 
-Vorgeschlagene Module:
+Ziel: Paper 0 als konservativen technischen Anker und moegliches Supplement
+fuer Paper I rahmen.
+
+Konkrete Regeln:
+
+- Keine Verkaufsrhetorik fuer robuste Knotenexistenz.
+- Die numerische Pipeline nur als methodische Demonstration oder Sanity-Check
+  lesen.
+- Allgemeine Speicherform
+  `(1-lambda_m) rho_n + beta G_sigma` fuehren; die `alpha`-Form ist die
+  normierte Konvention `lambda_m=beta=alpha`.
+- Aussagen zu `d=3`, endlicher Signalgeschwindigkeit, Lorentzkinematik,
+  Quantenmechanik, Standardmodell und physikalischen Massen bleiben Future
+  Work bzw. Paper II/III.
+
+Akzeptanzkriterium: Das Paper beantwortet nur
+`Modell definieren -> Markov-Einbettung beweisen -> Metastabilitaet messbar
+machen`.
+
+### P0.2 Paper I gegen Paper 0 synchronisieren
+
+Ziel: Paper I soll dieselbe mathematische Sprache verwenden, ohne seine
+Minimalmodell-Lesbarkeit zu verlieren.
+
+Zu synchronisieren:
+
+- allgemeine Speicherform und normierte `alpha`-Konvention;
+- sichtbarer nichtmarkovscher Prozess vs. augmentierter Markov-Zustand;
+- `t=alpha n` nur als effektive Reparametrisierung nach Speicherskala;
+- Relaxationsraten nur als Stabilitaets- oder mass-like proxies;
+- Paper II/III als Folgeprogramme, nicht als Resultate von Paper I.
+
+### P0.3 Long-Run-Metastabilitaet starten
+
+Ziel: Die Beobachtung pruefen, dass metastabile Knoten meist erst bei
+`n > 10^7` sichtbar werden.
+
+Dokument:
+
+- [Long-Run Metastability Plan](long_run_metastability_plan.md)
+
+Kanonischer Entry-Point:
 
 ```text
-src/emergenz_knoten/markov/
-  __init__.py
-  features.py
-  dataset.py
-  transition.py
-  validation.py
-  metastability.py
+experiments/long_run_metastability.py
 ```
 
-Minimaler Inhalt:
+Start klein, aber echt:
 
-- `features.py`: reduzierte Memory-Summary-Features fuer `z_n`.
-- `dataset.py`: lagged pairs `(z_i, z_{i+ell})`, Sample-Lag vs. Update-Lag.
-- `transition.py`: State assignment, Transition Counts, row-stochastic
-  operators, terminal-row conventions.
-- `validation.py`: implied timescales, einfache Chapman-Kolmogorov-Fehler,
-  spectral gaps, Bootstrap ueber Seeds.
-- `metastability.py`: fast-invariante Mengen oder mindestens slow-mode
-  Diagnostik als erster Schritt.
+- `n=10^7`;
+- ein Baseline-Seed;
+- danach `eta_zero` und `single_scale`;
+- Residence-Zeiten in Update-Einheiten und in Einheiten von `alpha^{-1}`;
+- spaeter mehrere Seeds und ggf. groessere `n`.
 
-Akzeptanzkriterien:
+Nicht verwechseln: Diese Kampagne ist fuer Paper I. Paper 0 braucht sie nicht,
+solange Paper 0 keine robuste Knotenexistenz behauptet.
 
-- Bestehende `anchor.py`-Funktionen bleiben kompatibel oder werden mit klaren
-  Re-Exports weitergefuehrt.
-- Tests fuer synthetische Markov-Ketten, terminal rows und nichtmarkovsche
-  Projektionen existieren.
-- `pytest` bleibt gruen.
-- Die Paper-0-Pipeline nutzt die neue Schicht, nicht einen isolierten
-  Sonderpfad.
+## P1: Naechste Auswertung
 
-Naechster Ausbau:
+### P1.1 Erste Long-Run-Ergebnisse bewerten
 
-- Lag-, Voxel- und Feature-Sensitivitaet systematisch auswerten.
-- Seed-Bootstrap und eine kleine Evidenztabelle erzeugen.
-- Spaeter PCCA/HMM/PMM-Fallbacks pruefen, falls reduzierte Features nicht
-  ausreichend markovsch sind.
+Sobald der erste Hintergrundlauf fertig ist:
 
-### P0.2 Kleine Evidenztabelle fuer Paper 0 erzeugen
+- JSON auf Vollstaendigkeit pruefen;
+- Residence-Ratios gegen Voxelgroesse lesen;
+- Laufzeit und Steps/s fuer weitere Seeds abschaetzen;
+- entscheiden, ob zuerst mehr Seeds oder zuerst Negativkontrollen laufen.
 
-Ziel: Aus dem vorhandenen Smoke-Test eine belastbarere Mini-Tabelle machen,
-ohne einen grossen Dimensions- oder Physikclaim daraus abzuleiten.
+### P1.2 Paper-I-Evidenztabelle aufbauen
 
-Minimaler Sweep:
+Erst nach Long-Run-Ergebnissen:
 
-- `lambda_m = beta = alpha` als normierte Baseline.
-- Zwei bis drei `alpha`-Werte.
-- Mindestens drei Seeds pro Wert.
-- Fester Lag-Satz, plus eine Lag-Sensitivitaetsvariante.
-- Eine Negativkontrolle: `eta=0` oder shuffelte Memory-Summaries.
+- Baseline vs. `eta_zero` vs. `single_scale`;
+- mehrere Seeds;
+- Residence-Verteilungen statt Einzelbilder;
+- Autokorrelation und Dimension nur als Nebenbefunde;
+- klare Fail Conditions dokumentieren.
 
-Zu berichten:
+### P1.3 Transferoperator-Schicht erweitern
 
-- Residence-Statistik.
-- Autokorrelationszeit oder grobe Korrelationslaenge.
-- Fuehrende nichttriviale Eigenwerte des Operators.
-- Implied timescales bzw. Relaxationsraten.
-- Sensitivitaet gegen Lag und Diskretisierung.
+Nach den ersten Long-Runs:
 
-Akzeptanzkriterien:
-
-- Ergebnis als maschinenlesbares JSON unter `data/processed/anchor_paper/`.
-- Kurzer Report unter `reports/`.
-- Eine kompakte Tabelle, die Paper 0 als methodische Demonstration tragen
-  kann, aber keine Robustheitsclaims ueber breite Parameterbereiche macht.
-
-## P1: Danach
-
-### P1.1 Paper 0 auf Preprint-/Expert-Feedback-Niveau bringen
-
-Offene Punkte aus dem Review:
-
-- Ein sauberer Theorem-/Proposition-Block fuer einen bounded oder compact
-  state-space Spezialfall.
-- Explizite Kernelklassen: rein repulsiv, rein attraktiv, zweiskalig
-  attraktiv-repulsiv.
-- Eine kleine Evidenztabelle aus P0.2.
-- Klarere Positionierung gegen self-interacting diffusions und reinforced
-  processes.
-
-Ziel: Technischer Diskussionsentwurf fuer Expert-Feedback, noch kein
-Journal-Submission-Ziel.
-
-### P1.2 Paper I gegen Paper 0 abgleichen
-
-Ziel: Paper I als Minimalmodell konsistent mit dem neuen Anker halten.
-
-Zu pruefen:
-
-- Nutzt Paper I die allgemeine Memory-Form
-  `(1-lambda_m) rho_n + beta G_sigma` oder benennt es bewusst die normierte
-  Konvention?
-- Sind sichtbarer nichtmarkovscher Prozess und augmentierter Markov-Zustand
-  eindeutig getrennt?
-- Sind Relaxationsraten nur Stabilitaets- oder mass-like proxies?
-- Sind Raumzeit-, Dimensions- und Physikclaims sauber als spaeteres Programm
-  markiert?
+- Memory-Summary-Features laengerer Laeufe speichern;
+- Lag-/Voxel-Sensitivitaet auf Long-Run-Daten wiederholen;
+- PCCA/HMM/PMM-Fallbacks pruefen;
+- Slow modes gegen Residence-Statistik validieren.
 
 ## P2: Spaeter
 
@@ -191,9 +181,12 @@ Erst anfassen, wenn:
   kein Transferoperator-Spektrum.
 - Paper-Claims werden konsequent als `definition`, `numerical observation`
   oder `conjecture` markiert.
+- Long-Run-Ausgaben unter `data/processed/` bleiben generiert; relevante
+  Resultate werden erst nach Pruefung als Report committed.
 
 ## Kurzantwort
 
-Der naechste wichtigste Schritt ist **P0.1: die Markov-/Transferoperator-
-Schicht als echte Paket- und Teststruktur bauen**. Das ist der Engpass, der
-Paper 0, Paper I, Dimensionsdiagnostik und Paper II gleichzeitig entwirrt.
+Paper 0 traegt als mathematischer Anker. Der naechste wichtigste Schritt fuer
+die Projekt-Evidenz ist **nicht** ein weiteres Kurzlaufdiagramm, sondern der
+erste echte Long-Run mit `n >= 10^7`, danach Negativkontrollen und erst dann
+eine belastbare Paper-I-Evidenztabelle.

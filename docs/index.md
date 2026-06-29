@@ -23,9 +23,10 @@ Grobstrukturen operational entstehen koennen.
 6. [Markov-Anforderungen](markov_requirements.md)
 7. [Architekturuebersicht](architecture_overview.md)
 8. [Experiment-Katalog](experiment_catalog.md)
-9. [Reproduzierbarkeitsstatus](reproducibility_status.md)
-10. [Haertungsplan](hardening_plan.md)
-11. [Paper-Claims](paper_claims.md)
+9. [Long-Run Metastability Plan](long_run_metastability_plan.md)
+10. [Reproduzierbarkeitsstatus](reproducibility_status.md)
+11. [Haertungsplan](hardening_plan.md)
+12. [Paper-Claims](paper_claims.md)
 
 ## Aktuelle Arbeitsentscheidung
 
@@ -42,22 +43,25 @@ Prozess sauber zu verankern:
   Operator auf Observablen des augmentierten Zustandsraums; seine Iterierten
   bilden eine vorwaertsgerichtete Halbgruppe, keine reversible Gruppe.
 
-Die aktuelle Arbeitsentscheidung nach Paper 0 ist technischer: zuerst muss die
-Markov-/Transferoperator-Schicht auf augmentierten Zustaenden als echte
-Paket- und Teststruktur entstehen. Die priorisierte Liste steht in
-[Projektprioritaeten](project_priorities.md). Die neue Schicht wird in
-[Markov-Architektur](markov_architecture.md) erklaert; die Akzeptanzkriterien
-stehen in [Markov-Anforderungen](markov_requirements.md).
+Die aktuelle Arbeitsentscheidung nach Paper 0 ist zweigeteilt: Paper 0 wird
+als mathematischer Anker bzw. moegliches Supplement eingefroren, waehrend Paper
+I gegen diesen Anker synchronisiert und empirisch durch echte Long-Run-Laeufe
+gehaertet wird. Die Markov-/Transferoperator-Schicht steht initial als
+Paketstruktur; sie wird in [Markov-Architektur](markov_architecture.md)
+erklaert, die Akzeptanzkriterien stehen in
+[Markov-Anforderungen](markov_requirements.md).
 
-Damit ergeben sich drei Schreibpfade, aber nicht mit gleicher Prioritaet:
+Damit ergeben sich drei aktive Schreib- und Evidenzpfade, aber nicht mit
+gleicher Prioritaet:
 
-- **Paper 0:** Literatur- und Methodenbasis fuer finite-memory
-  self-interacting processes, Markovian embeddings und Transferoperatoren.
-- **Paper I:** Ueberarbeitung des Minimalmodells mit klarer Trennung von
-  Definition, numerical observation und conjecture.
-- **Paper II:** Kinematik als Konsistenzstruktur metastabiler Operator-
-  Regime formulieren; Lorentz-Symmetrie erscheint dann als effektiver
-  Stabilisator des makroskopischen Propagationskegels.
+- **Paper 0:** technischer Anker fuer finite-memory self-interacting processes,
+  Markovian embeddings und Transferoperator-Diagnostik; keine robuste
+  Knotenexistenzbehauptung.
+- **Paper I:** Minimalmodell mit konsistenter Speicherform, Markov-Sprache und
+  spaeter Long-Run-Evidenztabelle fuer metastabile Knoten.
+- **Long-Run-Kampagne:** Hintergrundlaeufe mit `n >= 10^7`, Residence-Zeiten,
+  Negativkontrollen und Voxel-Sensitivitaet; siehe
+  [Long-Run Metastability Plan](long_run_metastability_plan.md).
 
 ## Nicht ueberclaimen
 

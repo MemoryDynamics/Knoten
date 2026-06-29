@@ -17,6 +17,7 @@ nav:
   - Projektkarte: project_map.md
   - Architektur: architecture_overview.md
   - Experimente: experiment_catalog.md
+  - Long-Run Metastabilitaet: long_run_metastability_plan.md
   - Reproduzierbarkeit: reproducibility_status.md
   - Haertungsplan: hardening_plan.md
   - Paper-Claims: paper_claims.md

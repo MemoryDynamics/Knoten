@@ -12,6 +12,7 @@ Stand: 2026-06-29.
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | seed-kontrollierte Reproduktion kleiner/mittlerer `N` | aktiv | Naechste Numba-Millionenlaeufe |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung | aktiv | schneller Operator-Pipeline-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht | aktiv | kleine Evidenztabelle und P0.2-Validierung |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik (`n >= 10^7`) | aktiv | Hintergrundlauf fuer Paper-I-Evidenz |
 
 ## Historische und thematische Skriptfamilien
 
@@ -26,6 +27,12 @@ Stand: 2026-06-29.
 | Legacy-Validierung | `experiments/legacy/scripts/highN_regime*.py` | reproduzierbare Varianten historischer High-N-Regime | nur mit kleinen Parametern als Pilot starten |
 
 ## Wichtigste Ergebnisartefakte
+
+### Long-Run-Metastabilitaet
+
+- `experiments/long_run_metastability.py`
+- `data/processed/long_run_metastability/*/summary.json` nach Abschluss eines Laufs
+- [Long-Run Metastability Plan](long_run_metastability_plan.md)
 
 ### Paper-0-Markov-Schicht
 
@@ -93,11 +100,10 @@ Konsequenz:
 
 Prioritaet fuer neue Laeufe:
 
-1. Baseline `embedding dim = 5` mit expliziten Seeds im Millionenbereich.
-2. `shuffled_memory`, weil diese Kontrolle direkt die Altersstruktur des
-   Speichers testet.
-3. `eta_zero` als Random-Walk/Brownian-artiger Nullpfad.
-4. `single_scale`, um die Notwendigkeit der zweiten Kernel-Skala zu testen.
+1. Long-Run-Metastabilitaet im kanonischen Paper-I-Modell mit `n >= 10^7`.
+2. Baseline gegen `eta_zero` und `single_scale` trennen.
+3. Mehrere Seeds erst nach erster Laufzeit- und Skalenmessung.
+4. Archivierten Dimensionspfad separat mit expliziten Seeds im Millionenbereich haerten.
 5. Fitfenster-, Burn-in- und Sampling-Sensitivitaet.
 
 ## Non-Markovian / Markov-Embedding Status
@@ -115,4 +121,4 @@ Weiter offen:
 - vollstaendige Memory-Traces oder reichere Feature-Familien;
 - systematische Bootstrap-Auswertung;
 - PCCA-/HMM-basierte metastabile Zustandsmodelle;
-- groessere Parameter- und Negativkontroll-Sweeps.
+- Long-Run-Transferoperatoren statt nur Kurzlauf-Sanity-Checks.

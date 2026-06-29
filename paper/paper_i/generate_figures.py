@@ -90,7 +90,7 @@ def markov_embedding() -> None:
         (0.39, 0.40),
         0.24,
         0.20,
-        r"augmented state" + "\n" + r"$\sigma_n=(x_n,\rho_n)$",
+        r"augmented state" + "\n" + r"$z_n=(x_n,\rho_n)$",
         facecolor="#f4f4f4",
         edgecolor=GRAY,
     )
@@ -99,7 +99,7 @@ def markov_embedding() -> None:
         (0.75, 0.40),
         0.20,
         0.20,
-        r"next state" + "\n" + r"$\sigma_{n+1}$",
+        r"next state" + "\n" + r"$z_{n+1}$",
         facecolor=LIGHT_ORANGE,
         edgecolor=ORANGE,
     )

@@ -53,13 +53,15 @@ Wissenschaftlich belastbar ist derzeit:
   Die robuste Formulierung ist daher: ein vielversprechender archivierter
   Dimensionsbefund, aber noch kein Nachweis einer eindeutigen 3D-Selektion.
 
-Der wichtigste technische Gap fuer die Non-Markovian-Schiene:
+Der wichtigste technische Gap hat sich verschoben:
 
-- Die Simulation gibt bisher `samples`, `sample_steps`, finalen `memory` und
-  `weights` zurueck.
-- Fuer Transferoperatoren, MSM/PCCA oder HMM/PMM brauchen wir zusaetzlich
-  Memory-Traces oder konsistente Memory-Summary-Features entlang der Trajektorie.
-  Erst daraus lassen sich Operatoren auf `z_n` schaetzen.
+- Die Markov-/Transferoperator-Schicht existiert initial unter
+  `src/emergenz_knoten/markov/` und erzeugt reduzierte Memory-Summary-Features,
+  Lagged Datasets, Transition Counts und einfache Validierungsmetriken.
+- Fuer robuste Paper-I-Evidenz fehlen jetzt echte Long-Run-Laeufe mit
+  `n >= 10^7`, mehreren Seeds und Negativkontrollen.
+- Die aktuelle Long-Run-Schiene startet mit Residence-Diagnostik in Einheiten
+  von `alpha^{-1}`; reichere Operatorfeatures auf Long-Run-Daten folgen danach.
 
 ## Schnellstart
 
@@ -131,6 +133,7 @@ Wichtige Einstiegspunkte:
 - [Projektkarte](docs/project_map.md)
 - [Architekturuebersicht](docs/architecture_overview.md)
 - [Experiment-Katalog](docs/experiment_catalog.md)
+- [Long-Run Metastability Plan](docs/long_run_metastability_plan.md)
 - [Reproduzierbarkeitsstatus](docs/reproducibility_status.md)
 - [Paper-Claims](docs/paper_claims.md)
 - [Haertungsplan](docs/hardening_plan.md)
@@ -166,20 +169,16 @@ Die aktuelle konsolidierte Liste steht in
 [docs/project_priorities.md](docs/project_priorities.md). Die technische
 Einordnung steht in [docs/markov_architecture.md](docs/markov_architecture.md),
 die Akzeptanzkriterien in
-[docs/markov_requirements.md](docs/markov_requirements.md). Der wichtigste
-naechste Schritt ist die Markov-/Transferoperator-Schicht als echte Paket- und
-Teststruktur auf augmentierten Zustaenden.
+[docs/markov_requirements.md](docs/markov_requirements.md). Die Long-Run-Schiene
+steht in [docs/long_run_metastability_plan.md](docs/long_run_metastability_plan.md).
 
 Kurzfassung:
 
-1. `src/emergenz_knoten/markov/` anlegen: Features, Lagged Dataset,
-   Transition Counts, Operatoren, Validation.
-2. Paper-0-Pipeline auf diese Schicht umstellen und eine kleine Evidenztabelle
-   mit Seeds, Lag-Sensitivitaet und Negativkontrolle erzeugen.
-3. Paper 0 auf Expert-Feedback-Niveau bringen: kompakter Theoremblock,
-   Kernelklassen, Evidenztabelle.
-4. Paper I mit Paper 0 abgleichen, besonders Memory-Normierung,
+1. Paper 0 als technischen Anker bzw. moegliches Supplement einfrieren.
+2. Paper I mit Paper 0 abgleichen, besonders allgemeine Memory-Form,
    Markov-Einbettung und Mass-Proxy-Sprache.
-5. Archivierten `D_occ ~ 2.8`-Befund mit expliziten Seeds, groesseren `N`,
-   Negativkontrollen und mehreren Diagnostiken haerten.
-6. Paper II/III erst danach weiterziehen.
+3. Einen echten Long-Run mit `n >= 10^7` im Hintergrund starten.
+4. Danach `eta_zero` und `single_scale` als Negativkontrollen laufen lassen.
+5. Erst aus Long-Run-Resultaten eine Paper-I-Evidenztabelle bauen.
+6. Paper II/III bleiben Folgeprogramme, bis Metastabilitaet und Propagation
+   empirisch sauberer sind.

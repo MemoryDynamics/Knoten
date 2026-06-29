@@ -32,14 +32,18 @@ Der kanonische Paketkern liegt unter `src/emergenz_knoten`:
 
 Der sichtbare Prozess `x_n` ist wegen der History nichtmarkovsch. Der
 augmentierte Zustand `z_n` aus Position und Speicher ist die natuerliche
-Markov-Einbettung. Diese Einsicht ist der wichtigste Anschluss fuer Paper 0
-und die naechste Implementationsschicht. In den Papers wird diese Schicht
-jetzt als Markov-/Koopman-Operator auf Observablen von `z_n` formuliert; die
-erste numerische Operatorpipeline ist im Paketkern angelegt und wird von der
-Paper-0-Anchor-Pipeline genutzt. Die konsolidierte Priorisierung steht in
-docs/project_priorities.md.
-Architektur und Akzeptanzkriterien der Markov-Schicht stehen in
-`docs/markov_architecture.md` und `docs/markov_requirements.md`.
+Markov-Einbettung. Diese Schicht ist inzwischen initial im Paketkern angelegt
+und wird von der Paper-0-Anchor-Pipeline genutzt. Die aktuelle Priorisierung
+ist jetzt: Paper 0 als technischen Anker einfrieren, Paper I dazu
+synchronisieren und parallel eine Long-Run-Metastabilitaetskampagne mit
+`n >= 10^7` laufen lassen.
+
+Wichtige Dokumente:
+
+- `docs/project_priorities.md`
+- `docs/markov_architecture.md`
+- `docs/markov_requirements.md`
+- `docs/long_run_metastability_plan.md`
 
 ## Experimente und Daten
 
@@ -49,6 +53,7 @@ Wichtige Entry-Points:
 - `experiments/cli.py`
 - `experiments/fractal_analysis/reproduce_dimension_pilot.py`
 - `experiments/fractal_analysis/analyze_dimension_claim.py`
+- `experiments/long_run_metastability.py`
 - historische High-N-Regime-Skripte unter `experiments/legacy/scripts/`
 
 Kuratierte Ergebnisdaten liegen unter `data/processed/`, besonders:
@@ -57,6 +62,7 @@ Kuratierte Ergebnisdaten liegen unter `data/processed/`, besonders:
   Alpha-Sweep-Smokes.
 - `highN_regime/`: Validierungs- und Ensemble-Laeufe fuer Legacy-Regime.
 - `reference/`: kleine Referenzlaeufe.
+- `long_run_metastability/`: generierte Long-Run-Ausgaben nach Abschluss.
 - `sweep_alpha/` und `alpha/`: Alpha-Scan-Artefakte.
 
 ## Dimensionsbefund
@@ -83,10 +89,13 @@ Vorsicht:
 - Die aktuellen Diagnostiken `D_cov`, `D_occ` und `D_spec` messen verschiedene
   Dinge und duerfen nicht austauschbar formuliert werden.
 
-## Non-Markovian Gap
+## Long-Run- und Operator-Gap
 
-Was fuer eine vollwertige Operator-/MSM-Schiene noch fehlt:
+Was fuer eine vollwertige Paper-I-Evidenz- und Operator-/MSM-Schiene noch
+fehlt:
 
+- Long-Run-Laeufe mit `n >= 10^7`, mehreren Seeds und Negativkontrollen.
+- Residence-Ratios in Einheiten von `alpha^{-1}` statt nur kurzer Trajektorienbilder.
 - Vollstaendige Memory-Snapshots oder staerkere Memory-Feature-Varianten pro
   Samplezeitpunkt; die aktuelle Schicht nutzt reduzierte Summary-Features.
 - Systematische Zustandsdiskretisierung jenseits einfacher Voxel.
@@ -97,25 +106,23 @@ Was fuer eine vollwertige Operator-/MSM-Schiene noch fehlt:
 
 ## Paper-Status
 
+- `paper/paper_0/main.tex`: mathematischer Anker bzw. moegliches Supplement.
+  Es definiert die allgemeine Speicherform, beweist Markov-Einbettung und
+  Pfadkontraktion und verkauft keine robuste Knotenexistenz.
 - `paper/paper_i/main.tex`: Minimal Point-Process Dynamics with Memory.
-  Inhaltlich aktiv; enthaelt jetzt explizite Non-Markovian/Markov-Embedding-
-  Sprache, `z_n` als augmentierte Zustandsnotation und eine Operator-/
-  Halbgruppenformulierung.
+  Inhaltlich aktiv; enthaelt jetzt die allgemeine Speicherform mit normierter
+  `alpha`-Konvention, Non-Markovian/Markov-Embedding-Sprache, `z_n` als
+  augmentierte Zustandsnotation und eine Operator-/Halbgruppenformulierung.
 - `paper/paper_ii/main.tex`: Propagation Speed und Light-Cone-Dynamik.
-  Struktur vorhanden; enthaelt jetzt den Anschluss an die Operator-Schicht und
-  liest Lorentz-Kinematik als effektive Stabilisatorstruktur des
-  makroskopischen Propagationskegels. Die empirische Haertung steht weiterhin
-  hinter Paper 0/I.
+  Struktur vorhanden; enthaelt den Anschluss an die Operator-Schicht, bleibt
+  aber ein spaeteres Folgeprogramm hinter Paper 0/I.
 
 ## Naechste technische Schritte
 
-1. Die neue `markov/`-Schicht gegen laengere Trajektorien, mehrere Seeds,
-   Lag-Sensitivitaet und Voxel-/Feature-Sensitivitaet validieren.
-2. Eine kleine Paper-0-Evidenztabelle mit Seed-, Lag- und
-   Negativkontrollinformationen erzeugen.
-3. Paper 0 mit Theoremblock, Kernelklassen und Evidenztabelle auf
-   Expert-Feedback-Niveau bringen.
-4. Paper I mit Paper 0 abgleichen: allgemeine Memory-Normierung,
+1. Paper 0 als technischen Anker bzw. moegliches Supplement einfrieren.
+2. Paper I mit Paper 0 abgleichen: allgemeine Memory-Form,
    Markov-Einbettung, Stabilitaets-/Mass-Proxy-Sprache.
-5. Reproduktionslaeufe im Millionenbereich mit Numba-faehiger Umgebung
-   vorbereiten.
+3. Einen ersten echten Long-Run mit `n >= 10^7` im Hintergrund starten.
+4. Nach Abschluss zuerst Laufzeit, Residence-Ratios und Voxel-Sensitivitaet
+   lesen, dann `eta_zero` und `single_scale` als Negativkontrollen starten.
+5. Erst danach eine belastbare Paper-I-Evidenztabelle formulieren.
