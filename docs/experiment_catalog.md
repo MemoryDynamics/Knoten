@@ -16,6 +16,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
+| `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 
 ## Long-Run-Metastabilitaet
@@ -58,9 +59,10 @@ Residence nach Voxelgroesse:
 | `1.0` | `180` | `168` | `20,400` | `204` |
 | `2.0` | `56` | `54` | `25,600` | `256` |
 
-Lesart: gutes Baseline-Signal, aber noch keine robuste Knotenexistenz. Als
-Naechstes muessen identische Parameter mit `eta_zero` und `single_scale`
-laufen. Danach entscheiden wir ueber weitere Seeds.
+Lesart: gutes Baseline-Signal, aber noch keine robuste Knotenexistenz. Die
+passenden Seed-Ensembles fuer `eta_zero` und `single_scale` sind inzwischen
+lokal vorhanden. Naechster Schritt ist ein gemeinsamer Kontrollreport ueber
+Baseline, `eta_zero` und `single_scale`.
 
 ## Reproduzierbarkeitsregeln
 
@@ -106,6 +108,12 @@ Archiv:
 
 Konsequenz: archivierter Long-N-Near-3-Befund mit plausibler
 Reproduktionskopplung, kein Nachweis eindeutiger 3D-Selektion.
+
+Seeded d-alpha-N-Scan 2026-06-30:
+
+| Scan | Ergebnis | Lesart |
+| --- | --- | --- |
+| `d=3..8`, `alpha=0.01/0.02`, `N=30k/100k/300k`, Seeds `1..5` | `D_cov`-Naehe zu 3 wandert von `d=3` ueber `d=5` zu `d=6/7` | kein stabiles `d=3`-Plateau; eher endliche-N-/Fitfenster-/Schaetzerabhaengigkeit |
 
 ## Historische Skriptfamilien
 

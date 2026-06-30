@@ -109,3 +109,15 @@ flowchart TD
 - `reports/` sind datierte, zitierbare Zwischenstaende.
 - `data/processed/` und `results/` bleiben generiert und werden nur nach
   Review ueber Reports zusammengefasst.
+
+## Aufraeumregeln
+
+- Die sieben MkDocs-Seiten sind die aktive Steuerzentrale. Neue Arbeitsnotizen
+  sollen zuerst dort einsortiert werden, bevor neue Dokumente entstehen.
+- `docs/EmergenteRaumzeit`, `docs/ChatGPT Chatverlaeufe`, `paper/*/archiv`
+  und `experiments/legacy` sind Rohmaterial oder historische Referenz, keine
+  aktive Quelle fuer Claims.
+- Generierte Rohdaten unter `data/processed/` bleiben ignoriert. Nur reviewed
+  JSON-Zusammenfassungen, Reports und Figuren werden gezielt committed.
+- Top-level Buildprodukte wie `site/`, `results/`, Caches und lokale Venvs
+  duerfen nicht als Projektstand gelesen werden.

@@ -41,7 +41,11 @@ Memory-Reprasentation ist die Markov-Einbettung.
 
 ## Long-Run-Status
 
-Der erste echte Baseline-Lauf ist abgeschlossen:
+Der erste Baseline-Seed-Satz ist abgeschlossen; die passenden Kontroll-Seed-
+Saetze fuer `eta_zero` und `single_scale` liegen inzwischen ebenfalls lokal
+vor und muessen als naechstes zusammengefuehrt werden.
+
+Der initiale Baseline-Lauf:
 
 | Feld | Wert |
 | --- | --- |
@@ -59,8 +63,9 @@ Der erste echte Baseline-Lauf ist abgeschlossen:
 | `D_cov` / `D_occ` | `1.699` / `1.792` |
 
 Lesart: Das ist ein starkes Baseline-Signal fuer langlebige Residence in genau
-diesem Lauf. Es ist noch kein robuster Paper-I-Befund, weil `eta_zero`,
-`single_scale`, weitere Seeds und Sensitivitaeten fehlen.
+diesem Lauf. Der naechste Paper-I-Engpass ist nicht ein weiterer einzelner
+Long-Run, sondern die gemeinsame Statistik der Baseline-, `eta_zero`- und
+`single_scale`-Seed-Ensembles.
 
 ## Dimensionsbefund
 
@@ -75,12 +80,15 @@ Belastbar aus neuen Kurzlaeufen:
 - `50k` und `100k` koppeln plausibel an den Archivpfad an.
 - Bei `N <= 60k` ist kein Near-3-`D_occ` sichtbar.
 - Die Kontrollen trennen den Claim noch nicht stark genug.
+- Der seeded d-alpha-N-Scan fuer `d=3..8`, `alpha=0.01/0.02`,
+  `N=30k/100k/300k`, Seeds `1..5`, stuetzt keinen stabilen `d=3`-Plateau-
+  Claim: die Naehe von `D_cov` zu 3 wandert mit `N`.
 
 ## Naechste technische Schritte
 
-1. `eta_zero` und `single_scale` fuer denselben Long-Run-Satz laufen lassen.
-2. Baseline gegen Kontrollen auswerten und als Report committen.
-3. Danach mehrere Seeds oder Voxel-/Lag-Sensitivitaet entscheiden.
+1. Baseline, `eta_zero` und `single_scale` seedweise zusammenfuehren.
+2. Kontrollstatistik als Report committen und Paper-I-Evidenzstatus bewerten.
+3. Danach Voxel-/Lag-/Sampling-Sensitivitaet entscheiden.
 4. Erst danach eine Paper-I-Evidenztabelle formulieren.
 5. Transferoperatorfeatures fuer Long-Run-Daten erweitern, wenn die
    Residence-Kontrollen tragen.

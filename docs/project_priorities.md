@@ -51,7 +51,7 @@ Aktive Docs sind jetzt auf sieben Seiten begrenzt:
 
 ## P1: Jetzt
 
-### P1.1 Long-Run-Kontrollen starten
+### P1.1 Long-Run-Kontrollen auswerten
 
 Status: naechster operativer Schritt.
 
@@ -62,11 +62,13 @@ Baseline ist abgeschlossen:
 - Laufzeit etwa `338 s`;
 - noch keine robuste Evidenz ohne Kontrollen.
 
-Als Naechstes:
+Aktuell liegen vor:
 
-1. `eta_zero` mit identischen Parametern.
-2. `single_scale` mit identischen Parametern.
-3. Beide gegen Baseline vergleichen.
+1. Baseline-Seed-Ensemble `1..5`.
+2. `eta_zero`-Seed-Ensemble `1..5`.
+3. `single_scale`-Seed-Ensemble `1..5`.
+
+Als Naechstes: alle drei Bedingungen in einem Kontrollreport vergleichen.
 
 ### P1.2 Auswertung nach Kontrollen
 
@@ -104,6 +106,8 @@ Wenn die Kontrollen nicht tragen:
 
 - Archivierten `D_occ ~ 2.8`-Befund separat mit expliziten Seeds,
   Negativkontrollen und Fitfenster-Sensitivitaet haerten.
+- Seeded d-alpha-N-Scan `d=3..8`, `alpha=0.01/0.02`, `N=30k..300k`,
+  Seeds `1..5`, defensiv lesen: kein stabiles `d=3`-Plateau.
 - Keine eindeutige `d=3`-Selektion behaupten.
 
 ### P2.3 Paper II / III

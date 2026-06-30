@@ -46,9 +46,10 @@ Noch nicht tragbar:
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
-Der erste Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal,
-aber Paper-I-Evidenz braucht jetzt `eta_zero`, `single_scale`, Seeds und
-Sensitivitaeten.
+Der erste Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal.
+Die passenden Baseline-, `eta_zero`- und `single_scale`-Seed-Ensembles liegen
+inzwischen lokal vor; Paper-I-Evidenz braucht jetzt deren gemeinsame Statistik
+und Sensitivitaeten.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -81,7 +82,7 @@ Mehrknoten-Wechselwirkungen und Propagation reproduzierbar sind.
 | Knoten als metastabile Regime | Definition/Diagnostik | Long-Run-Kontrollen und Seeds |
 | Baseline `n=10^7` zeigt langlebige Residence | numerische Beobachtung | `eta_zero`, `single_scale`, weitere Seeds |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
-| Eindeutige `d=3`-Selektion | conjecture/offen | nicht behaupten |
+| Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |

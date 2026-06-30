@@ -14,7 +14,8 @@ Thumbs.db
 desktop.ini
 
 # Ignore generated outputs
-data/processed/
+data/processed/*
+!data/processed/README.md
 results/
 src/emergenz_knoten.egg-info/
 experiments/reference_output*.json
