@@ -9,20 +9,17 @@ theme:
 nav:
   - Start: index.md
   - Aktueller Stand: current_status.md
-  - Projektprioritaeten: project_priorities.md
+  - Prioritaeten: project_priorities.md
+  - Theorie: THEORETICAL_CONTEXT.md
   - Repository Map: repository_map.md
-  - Non-Markovian Basis: non_markovian_basis.md
-  - Markov-Architektur: markov_architecture.md
-  - Markov-Anforderungen: markov_requirements.md
-  - Projektkarte: project_map.md
-  - Architektur: architecture_overview.md
   - Experimente: experiment_catalog.md
-  - Long-Run Metastabilitaet: long_run_metastability_plan.md
-  - Reproduzierbarkeit: reproducibility_status.md
-  - Haertungsplan: hardening_plan.md
   - Paper-Claims: paper_claims.md
-  - Action Matrix: action_matrix.md
-  - Theoretical Context: THEORETICAL_CONTEXT.md
+
+not_in_nav: |
+  historical/**
+  ChatGPT Chatverläufe/**
+  EmergenteRaumzeit/**
+  overview/**
 
 markdown_extensions:
   - admonition

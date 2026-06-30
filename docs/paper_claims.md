@@ -1,148 +1,96 @@
 # Paper-Claims und Status
 
-Stand: 2026-06-24.
+Stand: 2026-06-30.
 
-Quellen beim Audit:
+Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
+strukturelle Resultate, numerische Beobachtungen und Future Work.
 
-- `C:\Users\Hauke\Downloads\1-3.pdf`
-- `C:\Users\Hauke\Downloads\main-5.pdf`
-- `C:\Users\Hauke\Documents\Hobby\Weltformel\EmergenteRaumzeit\PNGs\N_D29.pdf`
+## Paper 0: Mathematical Anchor
 
-Neuere Projektquellen:
+Status: traegt als technischer Anker oder Supplement.
 
-- `reports/dimension_claim_seed_audit_2026-06-13.md`
-- `reports/dimension_reproduction_results_2026-06-13.md`
-- `reports/fractal_parameter_landscape_reading_2026-06-13.md`
-- `docs/non_markovian_basis.md`
+Robuste Aufgabe:
 
-## Paper 0: Non-Markovian Basis und Markov-Einbettung
+- self-interacting stochastic dynamics with exponential memory definieren;
+- allgemeine Memory-Form `(1-lambda_m)rho_n + beta G_sigma` fuehren;
+- normierte `alpha`-Konvention als Spezialfall erklaeren;
+- explizite exponentielle Memory-Expansion ableiten;
+- Markov-Einbettung des augmentierten Zustands formulieren;
+- pfadweise Kontraktion der Memory-Faser beweisen;
+- Metastabilitaet als messbare Diagnostik rahmen.
 
-Kernthese: Das Knotenmodell ist ein endlich-gedaechtnisbehafteter,
-selbstinteragierender stochastischer Prozess. Der sichtbare Prozess `x_n` ist
-nichtmarkovsch; der augmentierte Zustand `z_n = (x_n, rho_n)` bzw.
-`z_n = (x_n, history_n)` ist eine natuerliche Markov-Einbettung.
+Nicht Aufgabe von Paper 0:
 
-Paper-0-Aufgabe:
+- robuste Knotenexistenz ueber Parameterbereiche;
+- eindeutige `d=3`-Selektion;
+- endliche Signalgeschwindigkeit;
+- Lorentz-, Quanten- oder Standardmodell-Ableitung;
+- physikalische Massen.
 
-- Literaturumgebung klaeren: self-interacting diffusions, reinforced/random
-  walks, self-repelling Brownian polymer, exponentielle Memory-Kerne,
-  generalized Langevin equations, Markovian embeddings, Transferoperatoren.
-- Zeigen, welche Teile des Modells Standard sind und wo die spezifische
-  Neuheit liegt.
-- Operational definieren, wie metastabile Knoten ueber Uebergangsdynamik,
-  Residence, Relaxationsspektren und negative Controls getestet werden.
+## Paper I: Minimal Dynamical Foundation
 
-Status: strategisch wahrscheinlich der robusteste naechste Schreibpfad, weil
-er die existierende Mathematik andockt, bevor Paper I staerkere Physikclaims
-traegt.
+Status: mathematisch mit Paper 0 synchronisiert; numerische Evidenz wird jetzt
+gehaertet.
 
-## Paper I: Minimal Point-Process Dynamics with Memory
+Aktuell tragbar:
 
-Kernthese: Ein minimaler Punktprozess auf einem abstrakten Zustandsraum `Omega`
-wird an eine explizite, endliche, relaxierende Speicherverteilung gekoppelt.
-Das Speicherupdate ist nicht invertierbar und erzeugt eine intrinsische
-Update-Richtung. Unter Grobkoernung `t = alpha n` kann eine SDE/Fokker-Planck
-Beschreibung sinnvoll werden. Metastabile lokalisierte Strukturen ("Knoten")
-werden ueber Relaxationsraten, Stabilitaetsmasse und Residence-Statistiken
-diagnostiziert.
+- Minimalmodell mit relaxierendem Memory;
+- sichtbarer Prozess nichtmarkovsch, augmentierter Zustand markovsch;
+- interne Speicherskala `alpha^{-1}` in der normierten Konvention;
+- Knoten als metastabile Kandidaten;
+- Relaxationsraten nur als Stabilitaets- oder mass-like proxies.
 
-Wichtige bewusste Nicht-Claims im Draft:
+Noch nicht tragbar:
 
-- keine fundamentale Raumzeit
-- keine Quantum-Postulate
-- keine Felder oder Erhaltungsgroessen
-- keine Kalibrierung zu SI-/Spacetime-Einheiten
-- Standardmodell-/Relativitaets-Anbindung wird an Companion Works delegiert
+- robuste Knotenexistenz aus einem einzelnen Baseline-Long-Run;
+- physikalische Masse;
+- starke Dimensions- oder Raumzeitclaims.
 
-Status: als konzeptionelles Fundament brauchbar. Die naechste Ueberarbeitung
-trennt `x_n` als sichtbaren nichtmarkovschen Prozess und `z_n` als
-Markov-Embedding-Zustand explizit. Die neue Operator-/Halbgruppenformulierung
-staerkt den Transferoperator-Anschluss; Diagnostiken muessen weiterhin als
-Definition, numerical observation oder conjecture markiert werden.
+Der erste Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal,
+aber Paper-I-Evidenz braucht jetzt `eta_zero`, `single_scale`, Seeds und
+Sensitivitaeten.
 
-## Paper II: Emergent Spacetime Kinematics from Irreversible Memory Dynamics
+## Paper II: Propagation and Spacetime Kinematics
 
-Kernthese: Effektiver Raum und relativistische Kinematik entstehen als
-Konsistenzbedingungen metastabiler Knoten:
+Status: Folgeprogramm.
 
-- effektive Dimension aus robusten, schwach gekoppelten Relaxationsmoden
-- makroskopische Auswahl `d = 3` durch Kombination aus
-  Wiederkehr-/Selbstblockade fuer `d <= 2` und Speicherverduennung fuer
-  `d >= 4`
-- endliche Signalgeschwindigkeit aus endlicher Speicherreichweite und
-  Speicherrelaxation, grob `c_eff ~ l_mem / tau_mem`
-- Lorentz-artige Kinematik aus universeller maximaler Propagationsgeschwindigkeit
-  und Beobachter-/Knoten-Aequivalenz
-- Operatorische Lesart: robuste Knoten sind metastabile Regime des
-  Markov-Operators auf `z_n`; Lorentz-Symmetrie erscheint als effektiver
-  Stabilisator des makroskopischen Propagationskegels.
+Nur als Future Work formulieren:
 
-Bewusst ausgeklammert:
+- effektive Dimension;
+- Zwei-Knoten-Propagation;
+- `c_eff` und Antwortkegel;
+- Lorentz-artige Kinematik.
 
-- dynamische Gravitation/Kruemmung
-- Quantenstruktur, Spinoren, Gauge-Wechselwirkungen
-- konkrete physikalische Kalibrierung
+Kritische Bedingung: exponentielles Memory allein erzeugt keine harte kausale
+Schranke, solange direkte Fernkopplung ueber `K` moeglich ist.
 
-Status: spannende These, aber mehrere Saetze sind derzeit eher
-Konsistenzargumente als harte Ableitungen. Besonders die `d=3`-Selektion,
-Propagation und Lorentz-Argumentation brauchen getrennte Schichten:
-mathematische Annahmen, numerische Evidenz, und klar benannte Fail-Conditions.
-Diese Arbeit sollte nach Paper 0 oder nach einer Paper-I-Haertung priorisiert
-werden.
+## Paper III: Quantum / Standard-Model Programme
 
-## N_D29.pdf
+Status: geparkt.
 
-Extrahierte Beschriftungen zeigen einen Plot `D_occ` gegen `N` fuer
-Embedding-Dimensionen `d=2` bis `d=9`, mit `N` etwa im Bereich `10^5` bis
-`10^7`. Das Artefakt gehoert wahrscheinlich zur Fraktal-/Occupancy-Dimension
-und Dimension-Selection-Linie.
-
-Status: als Ergebnisgrafik nuetzlich. Die neueren Reports zeigen, dass die
-staerkste archivierte Long-N-Spur in `resultsN.csv` liegt:
-
-- `embedding dim = 5`
-- `N = 60,000,000`
-- fuenf Runs
-- `mean D_occ = 2.810559`
-- population std etwa `0.029533`
-
-Fuer Paper-Haertung fehlen weiterhin:
-
-- genaue Parameter
-- Seed-Strategie
-- Anzahl der Runs
-- Fehlerbalken oder Konfidenzintervalle
-- Rohdatenzuordnung
+Erst wieder anfassen, wenn metastabile Regime, Relaxationsskalen,
+Mehrknoten-Wechselwirkungen und Propagation reproduzierbar sind.
 
 ## Claim-Register
 
-| Claim | Aktueller Status | Noetige Haertung |
+| Claim | Aktueller Status | Naechste Haertung |
 | --- | --- | --- |
-| Nichtinvertierbarer Speicher erzeugt Update-Richtung | gut formulierbar | formale Minimalannahmen und Gegenbeispielgrenzen |
-| Metastabile Knoten entstehen in bestimmten Parameterregimen | numerisch plausibel | Residence-Verteilungen, Lebensdauern, Seed-Ensembles |
-| Sichtbarer Prozess `x_n` ist nichtmarkovsch, augmentierter Speicherzustand ist markovsch | gut formulierbar | formale Definition und erste Trace-/Lagged-Dataset-API |
-| Knoten als fast-invariante Operatorstrukturen auf `z_n` | theoretisch gut anschlussfaehig | Memory-Traces, Operator-Schaetzung, spectral gaps, Memberships |
-| Effektive Dimension nahe 3 ist stabil bevorzugt | archiviert vielversprechend, neu noch nicht gehaertet | Reproduktion mit D_cov, D_occ, D_spec, finite-size scaling, CI, Negativkontrollen |
-| `d <= 2` wird durch Wiederkehr/Selbstblockade ausgeschlossen | heuristisch stark, formal offen | saubere finite-memory-Version der Wiederkehraussage |
-| `d >= 4` verliert Stabilitaet durch Speicherverduennung | heuristisch, parameterabhaengig | Skalierung mit `sigma`, `epsilon`, `alpha`, Kernelklasse |
-| Endliche Propagation folgt aus endlichem Speicher | plausibel | Kick/no-kick-Experimente, Threshold-Robustheit, Scaling von `c_eff` |
-| Lorentz-Kinematik folgt aus universalem `c_eff` | derzeit Konsistenzargument | Annahmen explizit machen, lineare Transformationsklasse pruefen |
-| Bezug zu Elektron/Standardmodell | spekulativ | erst nach dimensionsloser, robuster Kalibrierung anfassen |
-| Masse als Funktion der Speicherlaenge | Arbeitshypothese | Relaxationsraten gegen `alpha`, Memory-Horizon und Kernelklasse testen |
+| Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
+| Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
+| Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
+| Knoten als metastabile Regime | Definition/Diagnostik | Long-Run-Kontrollen und Seeds |
+| Baseline `n=10^7` zeigt langlebige Residence | numerische Beobachtung | `eta_zero`, `single_scale`, weitere Seeds |
+| `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
+| Eindeutige `d=3`-Selektion | conjecture/offen | nicht behaupten |
+| Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
+| Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
+| Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
+| Standardmodellbezug | spekulativ | Paper III, spaeter |
 
 ## Paper-taugliche Sprachregel
 
-Bis die Haertung steht, sollte der Text zwischen drei Kategorien trennen:
-
-- "We define" fuer Modellannahmen und Diagnostiken.
-- "We observe numerically" fuer Simulationsergebnisse.
-- "We conjecture" fuer Weltmodell-/Standardmodell-/Lorentz-Bruecken, die noch
-  nicht durch reproduzierbare Tests getragen sind.
-
-Aktuelle robuste Dimensionssprache:
-
-> In archived finite-size occupancy data, the strongest near-3 signal appears
-> in a higher embedding space, most clearly for embedding dimension 5 at
-> `N = 60,000,000`, where five runs cluster around `D_occ = 2.81`. New
-> short-to-mid-scale reproductions are consistent with the archived finite-size
-> trend but do not yet establish robust 3D selection.
+- `We define` fuer Modellannahmen und Diagnostiken.
+- `We prove` fuer direkte Strukturresultate.
+- `We observe numerically` fuer reproduzierbare Simulationsergebnisse.
+- `We conjecture` fuer Weltmodell-, Lorentz-, Quanten- oder
+  Standardmodell-Bruecken.

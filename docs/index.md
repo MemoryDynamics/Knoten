@@ -1,90 +1,64 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-06-29.
+Stand: 2026-06-30.
 
-Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Rohnotizen,
-Chatverlaeufe und historische Skripte bleiben erhalten, aber der belastbare
-Arbeitsstand wird hier und in den datierten Reports zusammengefuehrt.
+Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
+bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
+Historische Chatverlaeufe, alte Paper-Artefakte und Rohnotizen bleiben im
+Repository, gelten aber nicht als kuratierte Quelle.
 
 ## Projekt in einem Satz
 
-`Emergenz Knoten` untersucht, ob aus einem irreversiblen stochastischen
-Punktprozess mit endlichem, relaxierendem Gedaechtnis metastabile Strukturen,
-effektive Dimensionen, interne Zeitskalen und spaeter physikalische
-Grobstrukturen operational entstehen koennen.
+`Emergenz Knoten` untersucht einen selbstinteragierenden stochastischen
+Prozess mit relaxierendem Gedaechtnis. Der sichtbare Prozess `x_n` ist im
+Allgemeinen nichtmarkovsch; der augmentierte Zustand `z_n=(x_n,rho_n)` bzw.
+eine explizite Memory-Reprasentation ist die Markov-Einbettung. Metastabile
+Knoten sollen ueber Residence-Zeiten, Operator-Moden und Kontrollen messbar
+werden, nicht ueber Einzelbilder.
 
-## Wichtigste Lesereihenfolge
+## Die sieben aktiven Dokumente
 
-1. [Aktueller Stand](current_status.md)
-2. [Projektprioritaeten](project_priorities.md)
-3. [Repository Map](repository_map.md)
-4. [Non-Markovian Basis](non_markovian_basis.md)
-5. [Markov-Architektur](markov_architecture.md)
-6. [Markov-Anforderungen](markov_requirements.md)
-7. [Architekturuebersicht](architecture_overview.md)
-8. [Experiment-Katalog](experiment_catalog.md)
-9. [Long-Run Metastability Plan](long_run_metastability_plan.md)
-10. [Reproduzierbarkeitsstatus](reproducibility_status.md)
-11. [Haertungsplan](hardening_plan.md)
-12. [Paper-Claims](paper_claims.md)
+1. [Aktueller Stand](current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
+2. [Prioritaeten](project_priorities.md) - Was als Naechstes zu tun ist.
+3. [Theoretical Context](THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
+4. [Repository Map](repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
+5. [Experiment-Katalog](experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
+6. [Paper-Claims](paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
+7. Diese Startseite.
 
-## Aktuelle Arbeitsentscheidung
+Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
+`hardening_plan`, `markov_architecture`, `markov_requirements`,
+`non_markovian_basis`, `project_map`, `architecture_overview`,
+`reproducibility_status` und `long_run_metastability_plan`.
 
-Die naechste inhaltliche Klammer ist nicht "direkt neue Physik behaupten",
-sondern das Modell als endlich-gedaechtnisbehafteten, selbstinteragierenden
-Prozess sauber zu verankern:
+## Aktuelle Entscheidung
 
-- Der sichtbare Prozess `x_n` ist nichtmarkovsch.
-- Der augmentierte Zustand `z_n = (x_n, rho_n)` bzw.
-  `z_n = (x_n, history_n)` ist die natuerliche Markov-Einbettung.
-- Metastabile Knoten sollen nicht nur visuell oder geometrisch, sondern ueber
-  Operator-/Uebergangsdynamik messbar werden.
-- Algebraisch ist die Grundstruktur damit ein positiver Markov-/Koopman-
-  Operator auf Observablen des augmentierten Zustandsraums; seine Iterierten
-  bilden eine vorwaertsgerichtete Halbgruppe, keine reversible Gruppe.
+Paper 0 wird als mathematischer Anker bzw. moegliches Supplement gefuehrt. Es
+muss nur Modell, Markov-Einbettung, kontraktive Memory-Faser und
+Metastabilitaetsdiagnostik sauber machen. Paper I traegt die numerische
+Knoten-Evidenz erst nach Long-Run-Kontrollen.
 
-Die aktuelle Arbeitsentscheidung nach Paper 0 ist zweigeteilt: Paper 0 wird
-als mathematischer Anker bzw. moegliches Supplement eingefroren, waehrend Paper
-I gegen diesen Anker synchronisiert und empirisch durch echte Long-Run-Laeufe
-gehaertet wird. Die Markov-/Transferoperator-Schicht steht initial als
-Paketstruktur; sie wird in [Markov-Architektur](markov_architecture.md)
-erklaert, die Akzeptanzkriterien stehen in
-[Markov-Anforderungen](markov_requirements.md).
-
-Damit ergeben sich drei aktive Schreib- und Evidenzpfade, aber nicht mit
-gleicher Prioritaet:
-
-- **Paper 0:** technischer Anker fuer finite-memory self-interacting processes,
-  Markovian embeddings und Transferoperator-Diagnostik; keine robuste
-  Knotenexistenzbehauptung.
-- **Paper I:** Minimalmodell mit konsistenter Speicherform, Markov-Sprache und
-  spaeter Long-Run-Evidenztabelle fuer metastabile Knoten.
-- **Long-Run-Kampagne:** Hintergrundlaeufe mit `n >= 10^7`, Residence-Zeiten,
-  Negativkontrollen und Voxel-Sensitivitaet; siehe
-  [Long-Run Metastability Plan](long_run_metastability_plan.md).
+Der erste echte Baseline-Long-Run mit `n=10^7` ist abgeschlossen. Er zeigt in
+diesem einen Lauf ein langlebiges Residence-Signal, aber das ist noch kein
+robuster Paper-I-Befund. Die naechste Prioritaet sind die Kontrollen
+`eta_zero` und `single_scale`, danach weitere Seeds und erst dann eine
+Evidenztabelle.
 
 ## Nicht ueberclaimen
 
-Der archivierte Dimensionsbefund ist vielversprechend, aber noch nicht
-abschliessend:
-
-- In `experiments/fractal_analysis/Fraktale/resultsN.csv` liegt bei
-  `embedding dim = 5`, `N = 60,000,000` ein Gruppenmittel
-  `D_occ = 2.810559` ueber fuenf Runs vor.
-- Neue Kurzlaeufe koppeln bei kleineren `N` plausibel an den Archivpfad an.
-- Die getesteten Kurzlauf-Kontrollen zeigen noch keinen robusten Near-3-Claim.
-
-Die belastbare Sprache bleibt deshalb: reproduzierbarer Archivanschluss und
-klarer Haertungsplan, noch kein Nachweis eindeutiger 3D-Selektion.
+- Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.
+- Keine harte endliche Signalgeschwindigkeit aus exponentiellem Gedaechtnis
+  allein.
+- Keine Identifikation von Relaxationsraten mit physikalischer Masse.
+- Keine Lorentz-, Quanten- oder Standardmodell-Claims in Paper 0/I ausser als
+  Future Work.
 
 ## Build
-
-Lokal:
 
 ```bash
 python -m pip install -r docs/requirements.txt
 python -m mkdocs serve
-python -m mkdocs build
+python -m mkdocs build --strict
 ```
 
 ReadTheDocs nutzt `.readthedocs.yaml` und `mkdocs.yml`.

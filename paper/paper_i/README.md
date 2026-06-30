@@ -1,6 +1,6 @@
 # Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
 
-Stand: 2026-06-29.
+Stand: 2026-06-30.
 
 ## Rolle
 
@@ -72,7 +72,7 @@ Paper I bewusst nicht mehr Teil der Hauptargumentation.
 
 ## Verwandte Projektstellen
 
-- `docs/non_markovian_basis.md`
+- `docs/THEORETICAL_CONTEXT.md`
 - `docs/current_status.md`
 - `docs/paper_claims.md`
 - `reports/paper1_source_audit_2026-06-01.md`

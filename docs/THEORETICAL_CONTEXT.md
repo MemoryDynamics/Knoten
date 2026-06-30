@@ -1,176 +1,137 @@
 # Theoretical Context
 
-Stand: 2026-06-24.
+Stand: 2026-06-30.
 
-Diese Datei fasst den kuratierten theoretischen Kontext des Projekts zusammen.
-Rohnotizen und Chatverlaeufe bleiben unter `docs/historical/chatgpt/`, sind aber
-keine zitierfaehige Fassung.
+Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
+Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
+Markov-Anforderungen.
 
 ## Minimaler Modellkern
 
-Das Modell startet mit einem sichtbaren Punktprozess `x_n` und einem
-relaxierenden Speicherzustand `rho_n` bzw. einem endlichen History-Buffer.
+Das Modell beschreibt eine sichtbare Zustandsvariable `x_n` und ein explizites
+Gedaechtnisfeld oder eine endliche Memory-Reprasentation.
 
 Sichtbarer Update:
 
 ```text
-x_{n+1} = x_n + epsilon * noise_n - eta * grad Phi_n(x_n)
+x_{n+1} = x_n + epsilon xi_n - eta grad (K * rho_n)(x_n)
 ```
 
-Memory-Update:
+Allgemeines Memory-Update:
 
 ```text
-rho_{n+1} = (1 - alpha) rho_n + alpha G(x_{n+1})
+rho_{n+1}(x) = (1 - lambda_m) rho_n(x) + beta G_sigma(x - x_{n+1})
 ```
 
-Der sichtbare Prozess `x_n` ist nichtmarkovsch. Der augmentierte Zustand
-`z_n = (x_n, rho_n)` ist die natuerliche Markov-Einbettung.
+mit `0 < lambda_m < 1` und `beta >= 0`. Die oft verwendete Paper-I-Konvention
+ist der normierte Spezialfall `lambda_m = beta = alpha`. Dann bleibt die
+Memory-Masse bei normiertem `G_sigma` und normiertem Anfangszustand konstant.
 
-## Operator- und Algebra-Schicht
+Ausgerollt ergibt das eine exponentiell gewichtete Vergangenheit. Die
+charakteristische Speicherpersistenz liegt in der normierten Konvention bei
+`alpha^{-1}` Updates.
 
-Die Markov-Einbettung macht aus dem Prozess auf `z_n` eine
-Uebergangsdynamik. Formal entspricht das einem Markov-Kern
+## Markov-Einbettung
+
+Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der
+naechste Schritt vom gespeicherten Feld abhaengt. Der augmentierte Zustand
+
+```text
+z_n = (x_n, rho_n)
+```
+
+bzw. eine konkrete Memory-Reprasentation ist dagegen die natuerliche
+Markov-Einbettung. Formal gibt es einen Uebergangskern
 
 ```text
 P(z, A) = Prob(z_{n+1} in A | z_n = z)
 ```
 
-und einem positiven, unitalen Operator auf Observablen
+und einen positiven, unitalen Operator auf Observablen
 
 ```text
 (U f)(z) = E[f(z_{n+1}) | z_n = z].
 ```
 
-Die Iterationen von `U` bilden eine Halbgruppe. Wegen Rauschen,
-Coarse-Graining und Speicherkompression ist das im Allgemeinen keine
-invertierbare Gruppe und kein deterministischer Algebra-Automorphismus.
+Die Iterationen bilden eine vorwaertsgerichtete Halbgruppe. Das ist im
+stochastischen Fall im Allgemeinen kein deterministischer Algebra-
+Automorphismus und keine reversible Gruppenwirkung.
 
-Aus dieser Sicht sind Knoten nicht nur geometrische Haeufungen von Punkten,
-sondern Kandidaten fuer fast-invariante Mengen, slow modes oder metastabile
-Memberships eines Uebergangsoperators. Die lokale Hessian-/OU-Analyse bleibt
-nuetzlich, sollte aber langfristig durch diese globale Operator-Diagnostik
-ergaenzt werden.
+Wichtig: Das affine Memory-Update ist bei bekanntem Depositionsort formal in
+`rho_n` invertierbar, solange `lambda_m != 1`. Die Irreversibilitaet liegt
+nicht in dieser einzelnen algebraischen Abbildung, sondern darin, dass der
+aktuelle Zustand die vollstaendige geordnete Vergangenheit im Allgemeinen
+nicht kodiert.
 
-## Zentrale Claims
+## Kontraktive Memory-Faser
 
-### Zeit
+Fuer denselben sichtbaren Pfad gilt
 
-Arbeitsclaim:
+```text
+rho_{n+1} - rho'_{n+1} = (1 - lambda_m)(rho_n - rho'_n).
+```
 
-- Eine interne Update-Richtung entsteht aus dem irreversiblen
-  Speicherupdate.
-- `alpha^{-1}` ist eine Persistenz- bzw. Relaxationsskala des Speichers.
-- Grobkoernungen wie `t = alpha n` sind Hilfsparameter der internen
-  Speicherpersistenz, keine postulierte fundamentale Zeit.
+Damit kontrahiert die Memory-Faser pfadweise exponentiell. Die volle Dynamik
+kann trotzdem komplex sein, weil `rho_n` auf die sichtbare Bewegung
+zurueckwirkt.
 
-Status: gut als Modellstruktur formulierbar, aber bei Paper-I-Texten muss die
-Rolle von `t` konsequent operational bleiben.
+## Numerische Operator-Schicht
 
-### Knoten
+Die implementierte Schicht unter `src/emergenz_knoten/markov/` operationalisiert
+diese Theorie:
 
-Arbeitsclaim:
+| Modul | Rolle |
+| --- | --- |
+| `features.py` | verlustbehaftete Memory-Summary-Features fuer `z_n` |
+| `dataset.py` | Sample-Trajektorien und Lagged Pairs `(z_i,z_{i+ell})` |
+| `transition.py` | Labels, Transition Counts, row-stochastic matrices |
+| `validation.py` | implied rates, timescales, CK-Fehler, Autokorrelation |
+| `metastability.py` | slow modes und einfache spectral gaps |
 
-- Metastabile Strukturen entstehen in bestimmten Parameterregimen durch das
-  Zusammenspiel von Rauschen, Repulsion, Attraction und relaxierendem Speicher.
-- Knoten duerfen nicht nur visuell definiert werden.
+Begriffliche Hygiene:
 
-Noetige Operationalisierung:
+- `n` ist der Update-Index.
+- `i` ist der Index gespeicherter Samples.
+- `z_n` ist der mathematische augmentierte Zustand.
+- `z_i` ist eine gespeicherte, meist reduzierte Feature-Reprasentation.
+- `lag_time` ist nur ein numerischer Nenner fuer Raten, keine physikalische
+  Zeit.
 
-- Residence-Verteilungen.
-- Rueckkehrzeiten.
-- lokale Relaxationsraten.
-- spaeter metastabile Memberships eines Uebergangsoperators.
-- Konsistenz zwischen lokaler Hessian-Stabilitaet und globalen Operator-
-  Spektren.
+Reduzierte Features beweisen nicht, dass die Projektion exakt markovsch ist.
+Sie liefern eine praktische Operatorapproximation, die gegen Residence,
+Autokorrelation, CK-Fehler und Kontrollen getestet werden muss.
 
-### Effektive Dimension
+## Metastabilitaet
 
-Arbeitsclaim:
+Ein Knoten ist im aktuellen Projekt kein fundamentales Teilchen und kein
+exakter Fixpunkt. Er ist ein Kandidat fuer ein langlebiges Rueckkopplungsregime.
+Diagnostiken:
 
-- Es gibt archivierte Hinweise auf niedrige effektive Dimensionen und ein
-  Near-3-Signal in langen Finite-Size-Laeufen.
+- Residence-Zeiten in Updates und in Einheiten von `alpha^{-1}`;
+- Memory-Gewicht in einer Region;
+- Autokorrelation und Rueckkehrzeiten;
+- lokale OU-/Hessian-Approximationen;
+- slow modes oder fast-invariante Mengen eines Transferoperators.
 
-Aktueller belastbarer Befund:
+Relaxationsraten sind derzeit Stabilitaets- oder mass-like proxies, keine
+physikalischen Massen.
 
-- Staerkster Archivpunkt:
-  `embedding dim = 5`, `N = 60,000,000`, fuenf Runs,
-  `mean D_occ = 2.810559`.
+## Aktuelle Evidenzgrenzen
 
-Status:
-
-- vielversprechend;
-- noch kein Beweis eindeutiger 3D-Selektion;
-- braucht frische Seed-Ensembles, Negativkontrollen und gemeinsame Berichte
-  von `D_occ`, `D_cov` und dynamischen Operator-Diagnostiken.
-
-### Masse und Relaxation
-
-Arbeitsclaim:
-
-- "Masse" ist vorerst ein Relaxations- oder Konfinierungsproxy von
-  metastabilen Knoten.
-- Eine moegliche Verbindung zwischen Speicherlaenge, Relaxationsrate und
-  effektiver Masse ist eine Arbeitshypothese, keine Folgerung.
-
-Paper-I-Sprache:
-
-- `mass proxy`, `relaxation scale` oder `confinement scale` bevorzugen, bis
-  die physikalische Kalibrierung tragfaehig ist.
-
-### Raum, Propagation und Lorentz-Kinematik
-
-Arbeitsclaim:
-
-- Endliche Speicherreichweite und gekoppelte Knoten koennen endliche
-  Antwortzeiten und einen operationalen Lichtkegel nahelegen.
-
-Status:
-
-- konzeptionell wichtig fuer Paper II;
-- aktuell noch staerker als Konsistenzprogramm denn als harter Befund;
-- sollte nach Paper 0/I-Haertung weiter getestet werden.
-
-## Experiment-Mapping
-
-| Claim | Primaere Orte | Aktueller Status |
-| --- | --- | --- |
-| Minimaler Speicherprozess | `src/emergenz_knoten/core.py`, `kernels.py` | implementiert |
-| Geometrische Diagnostik | `src/emergenz_knoten/diagnostics.py` | implementiert, aber nicht operatorisch |
-| Operator-/Algebra-Schicht auf `z_n` | Paper I/II, geplantes `markov/` | theoretisch formuliert, Implementierung offen |
-| Referenzlauf | `experiments/reference_experiment.py` | aktiv |
-| Archivierter Dimensionsclaim | `experiments/fractal_analysis/Fraktale/resultsN.csv` | auditiert |
-| Reproduktionspfad | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | aktiv |
-| Propagation | `experiments/propagation_speed/` | historisch, noch zu haerten |
-| Non-Markovian Basis | `docs/non_markovian_basis.md` | kuratiert, Implementierung offen |
-
-## Methodische Andockpunkte
-
-Naheliegende Literatur- und Methodenfamilien:
-
-- self-interacting diffusions;
-- reinforced random walks und self-repelling processes;
-- generalized Langevin equations mit exponentiellen Memory-Kernen;
-- Markovian embeddings;
-- transfer operators und Markov State Models;
-- PCCA/PCCA+ fuer metastabile Mengen;
-- HMM/PMM, wenn die Projektion auf sichtbare Cluster nicht markovsch ist.
-
-Quantum-non-Markovianity, Renewal-Prozesse und Process-Tensor-Literatur sind
-spaeter relevant, aber nicht der direkteste Ausgangspunkt fuer Paper I, weil
-sie meist bereits vorhandene Quantenzustaende voraussetzen.
+- Ein Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal.
+- Ohne `eta_zero`, `single_scale`, weitere Seeds und Sensitivitaeten ist das
+  kein robuster Paper-I-Befund.
+- Der archivierte Near-3-Dimensionsbefund ist vielversprechend, aber keine
+  allgemeine `d=3`-Ableitung.
+- Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;
+  dafuer braucht es lokale Reichweite, mehrstufige Uebertragung und keine
+  direkte Fernkopplung.
 
 ## Sprachregel
 
-Bis zur Haertung:
-
-- "We define" fuer Modellannahmen.
-- "We observe numerically" fuer reproduzierbare Simulationsergebnisse.
-- "We conjecture" fuer Weltmodell-, Lorentz-, Quanten- oder
-  Standardmodell-Bruecken.
-
-Nicht vermischen:
-
-- geometrische Spektraldiagnostik und Transferoperator-Spektrum;
-- sichtbaren nichtmarkovschen Prozess und augmentierten Markov-Zustand;
-- Archivbefund und frisch reproduzierte Evidenz;
-- Relaxationsproxy und physikalische Masse.
+- `We define` fuer Modellannahmen und Diagnostiken.
+- `We prove` nur fuer direkte strukturelle Aussagen wie Markov-Einbettung oder
+  pfadweise Memory-Kontraktion.
+- `We observe numerically` fuer reproduzierbare Simulationsergebnisse.
+- `We conjecture` fuer Raumzeit-, Lorentz-, Quanten- oder Standardmodell-
+  Bruecken.

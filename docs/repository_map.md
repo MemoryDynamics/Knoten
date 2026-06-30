@@ -1,10 +1,9 @@
 # Repository Map
 
-Stand: 2026-06-29.
+Stand: 2026-06-30.
 
-Diese Seite ist als visuelle Orientierung gedacht. Die Diagramme sind bewusst
-grob: Sie zeigen, welche Teile des Repositories welche Rolle spielen und wie
-Code, Experimente, Papers und Dokumentation zusammenhaengen.
+Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
+sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
 
 ## Top-Level-Struktur
 
@@ -15,13 +14,11 @@ flowchart TD
     root --> src["src/emergenz_knoten<br/>kanonischer Paketkern"]
     root --> experiments["experiments<br/>reproduzierbare Entry-Points"]
     root --> tests["tests<br/>kleine deterministische Tests"]
-    root --> docs["docs<br/>kuratierte Projektdokumentation"]
+    root --> docs["docs<br/>7 aktive Dokumente + Rohmaterial"]
     root --> paper["paper<br/>Paper 0, I, II, III und Kindle-PDFs"]
     root --> reports["reports<br/>datierte Reviews und Analyseberichte"]
-    root --> data["data<br/>processed outputs, meist ignoriert"]
+    root --> data["data/processed<br/>generierte Outputs, ignoriert"]
     root --> figures["figures<br/>draft/result figures"]
-    root --> results["results<br/>lokale Pipeline-Ausgaben, ignoriert"]
-    root --> tmp["tmp/site/cache<br/>lokale Build-Artefakte, ignoriert"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian kernels"]
@@ -37,74 +34,78 @@ flowchart TD
     markov --> metastability["metastability.py<br/>slow modes, spectral gap"]
 ```
 
+## Aktive Doku-Struktur
+
+```mermaid
+flowchart TD
+    index["index.md<br/>Frontdoor"]
+    current["current_status.md<br/>Status und naechste Schritte"]
+    priorities["project_priorities.md<br/>Arbeitsreihenfolge"]
+    theory["THEORETICAL_CONTEXT.md<br/>Modell, Markov, Grenzen"]
+    map["repository_map.md<br/>Bilder fuer Code/Datenfluss"]
+    experiments_doc["experiment_catalog.md<br/>Entry-Points und Evidenz"]
+    claims["paper_claims.md<br/>Claim-Register"]
+
+    index --> current
+    index --> priorities
+    index --> theory
+    index --> map
+    index --> experiments_doc
+    index --> claims
+
+    priorities --> experiments_doc
+    theory --> claims
+    map --> experiments_doc
+    experiments_doc --> claims
+```
+
 ## Code- und Datenfluss
 
 ```mermaid
 flowchart LR
-    config["SimulationConfig"] --> sim["simulate_finite_memory<br/>or simulate_augmented_features"]
+    config["SimulationConfig"] --> sim["finite-memory simulation<br/>or augmented feature simulation"]
 
     sim --> samples["samples x_i"]
     sim --> steps["sample_steps n_i"]
-    sim --> memory["final memory / weights"]
-    sim --> features["augmented_features z_i<br/>lossy summaries of z_n"]
+    sim --> memory["memory buffer / weights"]
+    sim --> zfeatures["augmented features z_i"]
 
     samples --> geom["diagnostics.py<br/>D_cov, D_occ, residence"]
-    features --> lagged["markov.dataset<br/>(z_i, z_{i+ell})"]
+    zfeatures --> lagged["markov.dataset<br/>(z_i, z_i+ell)"]
     steps --> lagged
 
-    lagged --> labels["markov.transition<br/>voxel labels"]
+    lagged --> labels["markov.transition<br/>labels"]
     labels --> counts["transition counts"]
     counts --> matrix["row-stochastic matrix U_ell"]
     matrix --> validation["markov.validation<br/>eigenvalues, rates, CK"]
-    matrix --> meta["markov.metastability<br/>slow modes, spectral gaps"]
+    matrix --> meta["markov.metastability<br/>slow modes"]
 
-    geom --> report["reports / paper tables"]
-    validation --> report
-    meta --> report
+    geom --> reports["reports / paper tables"]
+    validation --> reports
+    meta --> reports
 
-    report --> paper0["Paper 0<br/>methodological anchor"]
-    report --> paper1["Paper I<br/>minimal model"]
-    report -.later.-> paper2["Paper II<br/>propagation / c_eff"]
+    reports --> paper0["Paper 0<br/>technical anchor"]
+    reports --> paper1["Paper I<br/>minimal model and evidence"]
+    paper1 -.later.-> paper2["Paper II<br/>propagation / c_eff"]
 ```
 
-## Paper- und Doku-Fluss
+## Long-Run-Schiene
 
 ```mermaid
 flowchart TD
-    docs_front["docs/index.md<br/>front door"] --> priorities["project_priorities.md"]
-    docs_front --> current["current_status.md"]
-    docs_front --> nonmarkov["non_markovian_basis.md"]
-    docs_front --> markov_arch["markov_architecture.md"]
-    docs_front --> markov_req["markov_requirements.md"]
-    docs_front --> repro["reproducibility_status.md"]
-    docs_front --> claims["paper_claims.md"]
-
-    priorities --> p0task["P0.1/P0.2<br/>Markov layer and sensitivity checks"]
-    markov_arch --> p0task
-    markov_req --> p0task
-    repro --> p0task
-
-    p0task --> paper0["paper/paper_0<br/>mathematical anchor"]
-    paper0 --> paper1["paper/paper_i<br/>minimal dynamical foundation"]
-    paper1 --> paper2["paper/paper_ii<br/>propagation and kinematics"]
-    paper2 --> paper3["paper/paper_iii<br/>future quantum/SM roadmap"]
-
-    claims --> paper0
-    claims --> paper1
-    claims -.future work.-> paper2
-    claims -.future work.-> paper3
-
-    reports["reports/<br/>dated reviews and audits"] --> docs_front
-    reports --> paper0
+    plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/long_run_metastability.py"]
+    runner --> local["data/processed/long_run_metastability<br/>ignored JSON/log outputs"]
+    local --> review["manual review<br/>residence, controls, runtime"]
+    review --> report["reports/<br/>committed result report"]
+    report --> paper1["Paper I evidence table"]
 ```
 
 ## Leseregeln
 
 - `src/emergenz_knoten` ist der belastbare Codekern.
-- `experiments/` sind Entry-Points, nicht automatisch API.
-- `docs/` und `reports/` sind kuratiert; historische Chatnotizen bleiben
-  Rohmaterial.
-- `paper/` darf nur Claims tragen, die durch Modell, Code oder klar markierte
-  Future-Work-Sprache gedeckt sind.
-- `data/processed/` und `results/` sind standardmaessig generiert und
-  ignoriert; kleine Evidenzartefakte koennen gezielt committed werden.
+- `experiments/` sind Entry-Points, nicht automatisch stabile API.
+- `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
+  sind Rohmaterial.
+- `reports/` sind datierte, zitierbare Zwischenstaende.
+- `data/processed/` und `results/` bleiben generiert und werden nur nach
+  Review ueber Reports zusammengefasst.

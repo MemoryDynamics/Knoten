@@ -3,33 +3,26 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-06-29.
+Stand: 2026-06-30.
 
 ## Worum es geht
 
-Das Projekt untersucht einen stochastischen Punktprozess mit endlichem,
-relaxierendem Gedaechtnis. Der sichtbare Prozess `x_n` ist im Allgemeinen
-nicht markovsch, weil sein naechster Schritt von gespeicherter Vergangenheit
-abhaengt. Der augmentierte Zustand aus Position und Speicher,
-z. B. `z_n = (x_n, rho_n)` oder `z_n = (x_n, history_n)`, ist dagegen der
-natuerliche Markov-Zustand.
+Das Projekt untersucht einen stochastischen Punktprozess mit relaxierendem
+Gedaechtnis. Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch,
+weil sein naechster Schritt von gespeicherter Vergangenheit abhaengt. Der
+augmentierte Zustand aus Position und Speicher, z. B. `z_n=(x_n,rho_n)` oder
+`z_n=(x_n,history_n)`, ist dagegen der natuerliche Markov-Zustand.
 
-Damit besitzt das Modell bereits eine algebraische Grundschicht: Die
-Uebergangsdynamik auf `z_n` definiert einen Markov-/Koopman-Operator auf
-Observablen, dessen Iterationen eine vorwaertsgerichtete Halbgruppe bilden.
-Diese Sprache ersetzt keine Simulation, macht aber Knoten als metastabile
-Operatorstrukturen, slow modes oder fast-invariante Mengen pruefbar.
+Die Uebergangsdynamik auf `z_n` definiert einen Markov-/Koopman-Operator auf
+Observablen. Diese Sprache macht Knoten als metastabile Operatorstrukturen,
+slow modes oder fast-invariante Mengen pruefbar.
 
-Diese Sicht ist der aktuelle inhaltliche Anker fuer die naechste Phase:
+Aktuelle Rollen:
 
-- Paper 0: Einordnung als finite-memory self-interacting process mit
-  Markov-Einbettung und Transferoperator-/MSM-Anschluss.
-- Paper I: schrittweise Ueberarbeitung des Minimalmodells, damit Zeit,
-  Knoten, Relaxationsskalen und Mass-Proxies operationaler und weniger
-  spekulativ formuliert sind.
-- Paper II: Anschluss der Raum-/Lorentz-Kinematik an dieselbe
-  Operator-Schicht; Lorentz-Symmetrie wird als effektiver Stabilisator des
-  makroskopischen Propagationskegels gelesen, nicht als Mikropostulat.
+- Paper 0: mathematischer Anker bzw. moegliches Supplement.
+- Paper I: Minimalmodell plus Long-Run-Evidenz fuer metastabile Knoten.
+- Paper II/III: Folgeprogramme fuer Propagation, Raumzeit, Quanten- und
+  Standardmodellfragen.
 
 ## Aktueller Stand
 
@@ -37,31 +30,22 @@ Diese Sicht ist der aktuelle inhaltliche Anker fuer die naechste Phase:
 - Der Paketkern liegt unter `src/emergenz_knoten`.
 - Die wichtigsten Entry-Points liegen unter `experiments/`.
 - Tests liegen unter `tests/`.
-- ReadTheDocs/MkDocs-Konfiguration ist vorbereitet:
-  `.readthedocs.yaml`, `mkdocs.yml`, `docs/index.md`.
-- Die historischen Chat-Notizen bleiben Rohmaterial; kuratierte Aussagen
-  gehoeren in `docs/` und `reports/`.
+- Die aktive Dokumentation ist auf sieben kuratierte Dokumente reduziert.
 
-Wissenschaftlich belastbar ist derzeit:
+Belastbar derzeit:
 
-- Der archivierte Long-N-Finite-Size-Befund enthaelt ein Near-3-Signal:
-  `embedding dim = 5`, `N = 60,000,000`, fuenf Runs,
-  `mean D_occ = 2.810559`.
-- Ein neuer reproduzierbarer Pfad koppelt bei kleineren/mittleren `N`
-  plausibel an den Archivpfad an.
-- Die Kurzlaeufe und Negativkontrollen zeigen noch keinen starken Near-3-Claim.
-  Die robuste Formulierung ist daher: ein vielversprechender archivierter
-  Dimensionsbefund, aber noch kein Nachweis einer eindeutigen 3D-Selektion.
-
-Der wichtigste technische Gap hat sich verschoben:
-
+- Paper 0 traegt als technischer Anker.
 - Die Markov-/Transferoperator-Schicht existiert initial unter
-  `src/emergenz_knoten/markov/` und erzeugt reduzierte Memory-Summary-Features,
-  Lagged Datasets, Transition Counts und einfache Validierungsmetriken.
-- Fuer robuste Paper-I-Evidenz fehlen jetzt echte Long-Run-Laeufe mit
-  `n >= 10^7`, mehreren Seeds und Negativkontrollen.
-- Die aktuelle Long-Run-Schiene startet mit Residence-Diagnostik in Einheiten
-  von `alpha^{-1}`; reichere Operatorfeatures auf Long-Run-Daten folgen danach.
+  `src/emergenz_knoten/markov/` und ist getestet.
+- Der erste Baseline-Long-Run mit `n=10^7` ist abgeschlossen und zeigt ein
+  starkes Residence-Signal.
+
+Noch nicht belastbar:
+
+- robuste Knotenexistenz ohne Negativkontrollen und Seeds;
+- eindeutige `d=3`-Selektion;
+- harte endliche Signalgeschwindigkeit;
+- physikalische Massen oder Standardmodellclaims.
 
 ## Schnellstart
 
@@ -91,25 +75,11 @@ python -m pip install -r requirements-dev.txt
 python -m pip install -e .
 ```
 
-Tests ausfuehren:
+Tests:
 
 ```bash
 python -m pytest tests -q
 ```
-
-Der oeffentliche Kernexport umfasst:
-
-- `SimulationConfig`
-- `simulate_finite_memory`
-- `simulate_finite_memory_numba`
-- `SimulationRunner`
-- `run_simulation`
-- `save_simulation_result`
-- `load_simulation_result`
-- `covariance_dimension`
-- `occupancy_dimension`
-- `spectral_dimension`
-- `residence_statistics`
 
 ## Dokumentation
 
@@ -118,27 +88,20 @@ Lokaler MkDocs-Build:
 ```bash
 python -m pip install -r docs/requirements.txt
 python -m mkdocs serve
-python -m mkdocs build
+python -m mkdocs build --strict
 ```
 
-Wichtige Einstiegspunkte:
+Aktive Einstiegspunkte:
 
-- [ReadTheDocs-Startseite](docs/index.md)
+- [Startseite](docs/index.md)
 - [Aktueller Stand](docs/current_status.md)
-- [Projektprioritaeten](docs/project_priorities.md)
+- [Prioritaeten](docs/project_priorities.md)
+- [Theoretical Context](docs/THEORETICAL_CONTEXT.md)
 - [Repository Map](docs/repository_map.md)
-- [Non-Markovian Basis](docs/non_markovian_basis.md)
-- [Markov-Architektur](docs/markov_architecture.md)
-- [Markov-Anforderungen](docs/markov_requirements.md)
-- [Projektkarte](docs/project_map.md)
-- [Architekturuebersicht](docs/architecture_overview.md)
 - [Experiment-Katalog](docs/experiment_catalog.md)
-- [Long-Run Metastability Plan](docs/long_run_metastability_plan.md)
-- [Reproduzierbarkeitsstatus](docs/reproducibility_status.md)
 - [Paper-Claims](docs/paper_claims.md)
-- [Haertungsplan](docs/hardening_plan.md)
 
-## Experiment Entry Point
+## Experiment Entry Points
 
 ```bash
 python experiments/cli.py --list
@@ -154,31 +117,16 @@ Direkter Referenzlauf:
 python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
 ```
 
-## Modellkern in einem Satz
+Long-Run-Metastabilitaet:
 
-Ein Punktprozess `x_n` in einem abstrakten Zustandsraum wird mit einer
-endlichen, relaxierenden Speicherverteilung gekoppelt. Das Speicherupdate ist
-irreversibel und macht den sichtbaren Prozess nichtmarkovsch; im augmentierten
-Speicherzustand `z_n` entsteht jedoch eine saubere Markov-Einbettung, aus der
-metastabile Strukturen, Relaxationsskalen und effektive Grobstrukturen
-operational und operatorisch untersucht werden koennen.
+```bash
+python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
+```
 
 ## Naechste Prioritaeten
 
-Die aktuelle konsolidierte Liste steht in
-[docs/project_priorities.md](docs/project_priorities.md). Die technische
-Einordnung steht in [docs/markov_architecture.md](docs/markov_architecture.md),
-die Akzeptanzkriterien in
-[docs/markov_requirements.md](docs/markov_requirements.md). Die Long-Run-Schiene
-steht in [docs/long_run_metastability_plan.md](docs/long_run_metastability_plan.md).
-
-Kurzfassung:
-
-1. Paper 0 als technischen Anker bzw. moegliches Supplement einfrieren.
-2. Paper I mit Paper 0 abgleichen, besonders allgemeine Memory-Form,
-   Markov-Einbettung und Mass-Proxy-Sprache.
-3. Einen echten Long-Run mit `n >= 10^7` im Hintergrund starten.
-4. Danach `eta_zero` und `single_scale` als Negativkontrollen laufen lassen.
-5. Erst aus Long-Run-Resultaten eine Paper-I-Evidenztabelle bauen.
-6. Paper II/III bleiben Folgeprogramme, bis Metastabilitaet und Propagation
-   empirisch sauberer sind.
+1. `eta_zero` und `single_scale` als Long-Run-Kontrollen starten.
+2. Baseline gegen Kontrollen als Report auswerten.
+3. Danach weitere Seeds oder Sensitivitaeten entscheiden.
+4. Erst dann eine Paper-I-Evidenztabelle bauen.
+5. Paper II/III bleiben Folgeprogramme.
