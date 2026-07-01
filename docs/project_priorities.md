@@ -10,7 +10,7 @@ markiert.
 ## Leitentscheidung
 
 **Paper 0 ist als mathematischer Anker ausreichend. Der naechste Engpass ist
-Paper-I-Evidenz: Baseline gegen Negativkontrollen und Seeds haerten.**
+Paper-I-Evidenz: ein strengeres Knotenkriterium nach dem Kontrollreport.**
 
 Begruendung:
 
@@ -18,8 +18,8 @@ Begruendung:
   getestet.
 - Paper 0 behauptet keine robuste Knotenexistenz und braucht daher keine
   weiteren Long-Run-Daten, um als technischer Anker nuetzlich zu sein.
-- Paper I darf robuste Knoten erst behaupten, wenn Long-Run-Baseline und
-  Kontrollen klar getrennt sind.
+- Paper I darf robuste Knoten erst behaupten, wenn Residence, Kompaktheit,
+  Voxel-Stabilitaet und Kontrolltrennung gemeinsam tragen.
 
 ## P0: Abgeschlossen fuer den Moment
 
@@ -53,45 +53,52 @@ Aktive Docs sind jetzt auf sieben Seiten begrenzt:
 
 ### P1.1 Long-Run-Kontrollen auswerten
 
-Status: naechster operativer Schritt.
+Status: erledigt im Kontrollreport `reports/long_run_control_report_2026-07-01.md`.
 
-Baseline ist abgeschlossen:
+Ergebnis:
 
-- `n=10^7`, Seed `1`, `alpha=0.01`, `dim=3`;
-- bestes Residence-Verhaeltnis `256 alpha^{-1}`;
-- Laufzeit etwa `338 s`;
-- noch keine robuste Evidenz ohne Kontrollen.
+- `eta_zero` ist die echte Negativkontrolle: deutlich geringere Residence und
+  viel groessere Ausdehnung.
+- `baseline` ist kompakt und langlebig, aber seed-variabel.
+- `single_scale` ist ebenfalls kompakt und oft langlebiger als baseline. Es ist
+  daher keine Negativkontrolle, sondern eine Kernelklassen-Ablation.
 
-Aktuell liegen vor:
+Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
+unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
+isoliert.
 
-1. Baseline-Seed-Ensemble `1..5`.
-2. `eta_zero`-Seed-Ensemble `1..5`.
-3. `single_scale`-Seed-Ensemble `1..5`.
-
-Als Naechstes: alle drei Bedingungen in einem Kontrollreport vergleichen.
-
-### P1.2 Auswertung nach Kontrollen
+### P1.2 Knotenkriterium v0.2 definieren
 
 Akzeptanz fuer einen Paper-I-Befund:
 
-- Baseline trennt sich klar von `eta_zero` und `single_scale`.
-- Residence-Ratios sind nicht nur ein Voxel-Artefakt.
+- Interagierende Bedingungen trennen sich klar von `eta_zero` in Residence und
+  Kompaktheit.
+- Ein Claim ueber einen bestimmten Kernelmechanismus trennt sich auch von
+  passenden Kernel-Ablationen wie `single_scale`.
+- Residence-Ratios sind nicht nur ein Voxel-Artefakt, sondern stabil ueber
+  mindestens mehrere feste Voxelgroessen.
 - Git-Revision, Seeds, Burn-in, Sampling und Runtime sind dokumentiert.
 - Ergebnis wird als Report committed, nicht nur als lokale JSON-Datei gelesen.
 
 ### P1.3 Danach entscheiden
 
-Wenn die Kontrollen tragen:
+Naechster operativer Schritt:
 
-- mehrere Seeds fuer Baseline und Kontrollen;
-- Voxel- und Sampling-Sensitivitaet;
-- Paper-I-Evidenztabelle.
+1. Robusteren Knotenscore auf bestehenden JSONs definieren:
+   Residence, Radius/Kompaktheit, Voxel-Stabilitaet, Seed-Robustheit.
+2. `long_run_metastability.py` um reduzierte Center-/Shape-Stabilitaetsmetriken
+   erweitern.
+3. Danach genau eine neue Kernel-Ablation einfuehren, z.B. `amplitude_rep = 0`,
+   um `single_scale` symmetrisch zu kontrollieren.
 
-Wenn die Kontrollen nicht tragen:
+Wenn der Score traegt:
 
-- Parameterdiagnose statt Paper-Claim;
-- pruefen, ob Residence-Kriterium, Kernelklasse oder Speicherhorizont zu grob
-  sind;
+- Paper-I-Evidenztabelle mit vorsichtiger Claim-Sprache.
+- Transferoperatorfeatures auf Long-Run-Daten.
+
+Wenn der Score nicht traegt:
+
+- Residence-Kriterium und Kernelkonventionen ueberarbeiten;
 - keine starke Knotenbehauptung in Paper I.
 
 ## P2: Spaeter

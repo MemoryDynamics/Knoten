@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Kontrollen `eta_zero`, `single_scale` |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.2 und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
@@ -60,10 +60,17 @@ Residence nach Voxelgroesse:
 | `1.0` | `180` | `168` | `20,400` | `204` |
 | `2.0` | `56` | `54` | `25,600` | `256` |
 
-Lesart: gutes Baseline-Signal, aber noch keine robuste Knotenexistenz. Die
-passenden Seed-Ensembles fuer `eta_zero` und `single_scale` sind inzwischen
-lokal vorhanden. Naechster Schritt ist ein gemeinsamer Kontrollreport ueber
-Baseline, `eta_zero` und `single_scale`.
+Kontrollreport 2026-07-01:
+
+| Condition | Best residence mean +/- SD in `alpha^{-1}` | Mean centered radius | Lesart |
+| --- | ---: | ---: | --- |
+| `baseline` | `437.6 +/- 323.1` | `3.880` | kompakt, langlebig, seed-variabel |
+| `eta_zero` | `80.0 +/- 12.2` | `57.284` | echte Negativkontrolle |
+| `single_scale` | `697.7 +/- 534.6` | `3.734` | Kernel-Ablation, keine Negativkontrolle |
+
+Lesart: Memory-Gradient-Feedback trennt sich deutlich von `eta_zero`; der
+zweiskalige Baseline-Kernel ist aber noch nicht als notwendiger Mechanismus
+isoliert. Der Report liegt unter `reports/long_run_control_report_2026-07-01.md`.
 
 ## Reproduzierbarkeitsregeln
 

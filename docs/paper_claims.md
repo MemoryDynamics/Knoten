@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -46,10 +46,11 @@ Noch nicht tragbar:
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
-Der erste Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal.
-Die passenden Baseline-, `eta_zero`- und `single_scale`-Seed-Ensembles liegen
-inzwischen lokal vor; Paper-I-Evidenz braucht jetzt deren gemeinsame Statistik
-und Sensitivitaeten.
+Der Kontrollreport vom 2026-07-01 zeigt: Memory-Gradient-Feedback trennt
+sich deutlich von `eta_zero` in Residence und Kompaktheit. `single_scale` ist
+aber ebenfalls kompakt und langlebig. Paper-I-Evidenz darf daher derzeit nur
+vorsichtig als self-interaction-induced confinement formuliert werden, nicht
+als spezifisch zweiskaliger Knotenmechanismus.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -67,10 +68,12 @@ Schranke, solange direkte Fernkopplung ueber `K` moeglich ist.
 
 ## Paper III: Quantum / Standard-Model Programme
 
-Status: geparkt.
+Status: offene Future-Work-Tuer, aber ohne Claim-Status.
 
-Erst wieder anfassen, wenn metastabile Regime, Relaxationsskalen,
-Mehrknoten-Wechselwirkungen und Propagation reproduzierbar sind.
+Der Weg ueber QFT-artige kollektive Moden und spaeter moegliche
+Standardmodellstrukturen bleibt ausdruecklich offen. Er wird erst belastbar,
+wenn metastabile Regime, Relaxationsskalen, Mehrknoten-Wechselwirkungen,
+Synchronisation und Propagation reproduzierbar sind.
 
 ## Claim-Register
 
@@ -79,14 +82,14 @@ Mehrknoten-Wechselwirkungen und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | Definition/Diagnostik | Long-Run-Kontrollen und Seeds |
-| Baseline `n=10^7` zeigt langlebige Residence | numerische Beobachtung | `eta_zero`, `single_scale`, weitere Seeds |
+| Knoten als metastabile Regime | teilweise numerisch: kompakte Long-Residence gegenueber `eta_zero`, aber nicht kernel-spezifisch | strenger Knotenscore und weitere Kernel-Ablation |
+| Baseline `n=10^7` zeigt langlebige Residence | numerisch reproduziert ueber Seeds, aber `single_scale` ebenfalls stark | Knotenscore, Voxel-Sensitivitaet, Kernel-Ablation |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
-| Standardmodellbezug | spekulativ | Paper III, spaeter |
+| Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 
 ## Paper-taugliche Sprachregel
 

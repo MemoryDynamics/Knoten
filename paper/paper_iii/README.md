@@ -3,7 +3,9 @@
 This directory is a planning surface for a later companion programme. It is not
 a result of Paper 0 and should not be cited as evidence for quantum mechanics,
 particle spectra, gauge structure, physical constants, or Standard-Model
-phenomenology.
+phenomenology. It deliberately keeps that route open as a future research
+question, but only behind reproducible knot, synchronization, and collective-mode
+evidence.
 
 ## Reframed Aim
 

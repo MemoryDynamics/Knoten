@@ -39,35 +39,29 @@ Memory-Reprasentation ist die Markov-Einbettung.
   starke Knoten-Evidenz muss aus Long-Runs und Kontrollen kommen.
 - Paper II: Propagation, `c_eff` und Raumzeit-Kinematik bleiben Folgeprogramm.
 - Paper III: als Innen/Aussen- und Synchronisationsprogramm neu orientiert;
-  weiterhin ohne Quanten-/Standardmodellclaims.
+  QFT-/Standardmodellbruecken bleiben als offene Future-Work-Tuer erhalten,
+  aber ohne Claim-Status.
 
 ## Long-Run-Status
 
-Der erste Baseline-Seed-Satz ist abgeschlossen; die passenden Kontroll-Seed-
-Saetze fuer `eta_zero` und `single_scale` liegen inzwischen ebenfalls lokal
-vor und muessen als naechstes zusammengefuehrt werden.
+Der Kontrollreport vom 2026-07-01 fuehrt die vorhandenen fuenf Seeds fuer
+`baseline`, `eta_zero` und `single_scale` zusammen.
 
-Der initiale Baseline-Lauf:
+| Condition | Best residence mean +/- SD in `alpha^{-1}` | Mean centered radius | Lesart |
+| --- | ---: | ---: | --- |
+| `baseline` | `437.6 +/- 323.1` | `3.880` | kompakt und langlebig, aber seed-variabel |
+| `eta_zero` | `80.0 +/- 12.2` | `57.284` | echte Negativkontrolle, diffundiert weit |
+| `single_scale` | `697.7 +/- 534.6` | `3.734` | keine Negativkontrolle, sondern starke Kernel-Ablation |
 
-| Feld | Wert |
-| --- | --- |
-| Condition | `baseline` |
-| Seed | `1` |
-| Updates | `10,000,000` |
-| Dimension | `3` |
-| `alpha` | `0.01` |
-| Burn-in | `1,000,000` |
-| Sample-Abstand | `1000` Updates |
-| Samples | `9001` |
-| Laufzeit | `337.997 s` |
-| Git-Revision | `c36816e` |
-| Bestes Residence-Verhaeltnis | `256 alpha^{-1}` |
-| `D_cov` / `D_occ` | `1.699` / `1.792` |
+Lesart: Memory-Gradient-Feedback erzeugt in diesem Slice kompakte
+Long-Residence-Regime relativ zu `eta_zero`. Der zweiskalige Baseline-Kernel
+ist dadurch aber noch nicht als notwendiger Mechanismus isoliert, weil
+`single_scale` ebenfalls kompakt und oft noch langlebiger ist. `D_cov` und
+`D_occ` trennen die Bedingungen in diesem Kontrollsatz nicht zuverlaessig.
 
-Lesart: Das ist ein starkes Baseline-Signal fuer langlebige Residence in genau
-diesem Lauf. Der naechste Paper-I-Engpass ist nicht ein weiterer einzelner
-Long-Run, sondern die gemeinsame Statistik der Baseline-, `eta_zero`- und
-`single_scale`-Seed-Ensembles.
+Konsequenz fuer Paper I: tragbar ist derzeit ein vorsichtiger Befund zu
+self-interaction-induced confinement gegenueber `eta_zero`. Noch nicht tragbar
+ist ein starker Claim eines spezifisch zweiskaligen stabilen Knotenmechanismus.
 
 ## Dimensionsbefund
 
@@ -104,12 +98,15 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Baseline, `eta_zero` und `single_scale` seedweise zusammenfuehren.
-2. Kontrollstatistik als Report committen und Paper-I-Evidenzstatus bewerten.
-3. Dimension-Reproduction nicht weiter blind verlaengern, sondern zuerst den
-   Archivbefund gegen aktuelle Parameterdefinitionen, Schaetzfenster und
-   Sampling rekonstruieren.
-4. Danach Voxel-/Lag-/Sampling-Sensitivitaet entscheiden.
-5. Erst danach eine Paper-I-Evidenztabelle formulieren.
-6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, wenn die
-   Residence-Kontrollen tragen.
+1. Strengeres Knotenkriterium v0.2 definieren: Residence, Kompaktheit,
+   Voxel-Stabilitaet und Trennung von `eta_zero` gemeinsam bewerten.
+2. Long-Run-Ausgabe um reduzierte Center-/Shape-Stabilitaetsmetriken erweitern,
+   damit kuenftige Laeufe echte Lokalisierung besser von Voxel-Residence
+   unterscheiden.
+3. Erst danach weitere einparametrige Kernel-Ablationen starten, z.B.
+   `amplitude_rep = 0`, um die Rolle der einzelnen Kernelkomponenten zu klaeren.
+4. Paper-I-Evidenztabelle erst formulieren, wenn das Knotenkriterium und die
+   naechsten Ablationen die gewaehlte Claim-Sprache tragen.
+5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
+6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, sobald das
+   Knotenkriterium stabil ist.

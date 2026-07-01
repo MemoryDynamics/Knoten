@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -38,11 +38,11 @@ muss nur Modell, Markov-Einbettung, kontraktive Memory-Faser und
 Metastabilitaetsdiagnostik sauber machen. Paper I traegt die numerische
 Knoten-Evidenz erst nach Long-Run-Kontrollen.
 
-Der erste echte Baseline-Long-Run mit `n=10^7` ist abgeschlossen. Er zeigt in
-diesem einen Lauf ein langlebiges Residence-Signal, aber das ist noch kein
-robuster Paper-I-Befund. Die naechste Prioritaet sind die Kontrollen
-`eta_zero` und `single_scale`, danach weitere Seeds und erst dann eine
-Evidenztabelle.
+Der Kontrollreport vom 2026-07-01 zeigt: Memory-Gradient-Feedback trennt
+sich klar von `eta_zero`, aber `single_scale` ist ebenfalls kompakt und
+langlebig. Die naechste Prioritaet ist daher kein neuer Blindscan, sondern ein
+strengeres Knotenkriterium aus Residence, Kompaktheit, Voxel-Stabilitaet und
+Kontrolltrennung.
 
 ## Nicht ueberclaimen
 
