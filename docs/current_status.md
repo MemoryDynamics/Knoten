@@ -63,6 +63,11 @@ Konsequenz fuer Paper I: tragbar ist derzeit ein vorsichtiger Befund zu
 self-interaction-induced confinement gegenueber `eta_zero`. Noch nicht tragbar
 ist ein starker Claim eines spezifisch zweiskaligen stabilen Knotenmechanismus.
 
+Epsilon-Step-Balance 2026-07-01: Bei `epsilon=0.03,0.015,0.01,0.005`
+bleibt der mediane Noise/Repulsion-Quotient nahe `3.6` und die mittlere
+Richtungskorrelation nahe `-0.071`. Kleineres `epsilon` allein macht den
+Lauf kleiner, aber nicht glatter oder drift-dominierter.
+
 ## Dimensionsbefund
 
 Belastbar aus dem Archiv:

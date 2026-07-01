@@ -13,6 +13,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.2 und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
+| `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -71,6 +72,21 @@ Kontrollreport 2026-07-01:
 Lesart: Memory-Gradient-Feedback trennt sich deutlich von `eta_zero`; der
 zweiskalige Baseline-Kernel ist aber noch nicht als notwendiger Mechanismus
 isoliert. Der Report liegt unter `reports/long_run_control_report_2026-07-01.md`.
+
+## Epsilon-Step-Balance
+
+Gezielter Baseline-Run vom 2026-07-01:
+
+| epsilon | median noise | median repulsive step | median net drift | median noise/repulsive | mean turn cosine |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| `0.03` | `0.04624` | `0.01281` | `0.01231` | `3.615` | `-0.070` |
+| `0.015` | `0.02312` | `0.00643` | `0.00618` | `3.598` | `-0.071` |
+| `0.01` | `0.01541` | `0.00429` | `0.00412` | `3.594` | `-0.071` |
+| `0.005` | `0.00771` | `0.00215` | `0.00206` | `3.593` | `-0.071` |
+
+Lesart: Kleineres `epsilon` skaliert in diesem Slice Noise, Drift und Radius
+fast gemeinsam herunter. Es macht die Trajektorie kleiner, aber nicht glatter
+oder drift-dominierter. Report: `reports/epsilon_step_balance_2026-07-01.md`.
 
 ## Reproduzierbarkeitsregeln
 

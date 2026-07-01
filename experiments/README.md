@@ -14,6 +14,7 @@ python experiments/cli.py reference --script reference_experiment.py
 python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
 python experiments/anchor_paper_pipeline.py
 python experiments/anchor_sensitivity_analysis.py
+python experiments/epsilon_step_balance.py
 ```
 
 ## Struktur
@@ -21,6 +22,7 @@ python experiments/anchor_sensitivity_analysis.py
 - `reference_experiment.py`: kleiner reproduzierbarer Referenzlauf.
 - `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
 - `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
+- `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -52,6 +54,7 @@ Experimentfokus ist ihre Haertung:
 - Voxel-/Feature-Sensitivitaet.
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
+- Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die lokale Bewegung, macht sie aber in der getesteten Baseline nicht glatter.
 - Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt

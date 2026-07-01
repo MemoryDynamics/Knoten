@@ -62,6 +62,8 @@ Ergebnis:
 - `baseline` ist kompakt und langlebig, aber seed-variabel.
 - `single_scale` ist ebenfalls kompakt und oft langlebiger als baseline. Es ist
   daher keine Negativkontrolle, sondern eine Kernelklassen-Ablation.
+- Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die Trajektorie
+  herunter, reduziert aber nicht das Noise/Drift-Verhaeltnis.
 
 Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
