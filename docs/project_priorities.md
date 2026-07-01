@@ -64,6 +64,8 @@ Ergebnis:
   daher keine Negativkontrolle, sondern eine Kernelklassen-Ablation.
 - Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die Trajektorie
   herunter, reduziert aber nicht das Noise/Drift-Verhaeltnis.
+- Kernel-Shape-Probe: staerkere oder breitere Kernel komprimieren den Lauf,
+  erzeugen im aktuellen First-Order-Update aber keine runden Bahnen.
 
 Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
@@ -90,7 +92,10 @@ Naechster operativer Schritt:
    Residence, Radius/Kompaktheit, Voxel-Stabilitaet, Seed-Robustheit.
 2. `long_run_metastability.py` um reduzierte Center-/Shape-Stabilitaetsmetriken
    erweitern.
-3. Danach genau eine neue Kernel-Ablation einfuehren, z.B. `amplitude_rep = 0`,
+3. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
+   `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
+   `eta A_att/sigma_att^2`.
+4. Danach genau eine neue Kernel-Ablation einfuehren, z.B. `amplitude_rep = 0`,
    um `single_scale` symmetrisch zu kontrollieren.
 
 Wenn der Score traegt:

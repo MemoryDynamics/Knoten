@@ -14,6 +14,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
+| `experiments/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -87,6 +88,25 @@ Gezielter Baseline-Run vom 2026-07-01:
 Lesart: Kleineres `epsilon` skaliert in diesem Slice Noise, Drift und Radius
 fast gemeinsam herunter. Es macht die Trajektorie kleiner, aber nicht glatter
 oder drift-dominierter. Report: `reports/epsilon_step_balance_2026-07-01.md`.
+
+
+## Kernel-Shape-Probe
+
+Punktueller 3D-Fuehrungskoordinaten-Run vom 2026-07-01:
+
+| case | sigma_rep | sigma_att | A_rep | A_att | mean radius | median step | turn mean | path/chord |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `1` | `3` | `1` | `0.35` | `0.233` | `0.1099` | `-0.342` | `1202.3` |
+| `single_scale` | `1` | `3` | `1` | `0` | `0.225` | `0.1090` | `-0.348` | `1238.7` |
+| `strong_local` | `1` | `3` | `4` | `0.35` | `0.075` | `0.0707` | `-0.430` | `2746.5` |
+| `wide_strong` | `2` | `6` | `16` | `1.4` | `0.075` | `0.0707` | `-0.430` | `2752.4` |
+
+Lesart: Staerkere bzw. breitere Kernel koennen die Trajektorie kompakter
+machen, erzeugen in der aktuellen overdamped Dynamik aber keine
+Richtungspersistenz. `epsilon` ist nicht frei auf `1` setzbar, ausser die
+Laengeneinheit wird mitskaliert; relevant sind dimensionslose Groessen wie
+`epsilon/sigma_rep`, `sigma_att/sigma_rep` und Driftstaerken der Form
+`eta A/sigma^2`. Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 ## Reproduzierbarkeitsregeln
 

@@ -15,6 +15,7 @@ python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 
 python experiments/anchor_paper_pipeline.py
 python experiments/anchor_sensitivity_analysis.py
 python experiments/epsilon_step_balance.py
+python experiments/kernel_shape_probe.py
 ```
 
 ## Struktur
@@ -23,6 +24,7 @@ python experiments/epsilon_step_balance.py
 - `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
 - `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
+- `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden-Probe mit 3D-Fuehrungskoordinatenplot.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -55,6 +57,7 @@ Experimentfokus ist ihre Haertung:
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die lokale Bewegung, macht sie aber in der getesteten Baseline nicht glatter.
+- Kernel-Shape-Probe: staerkere oder breitere Kernel komprimieren den Lauf, erzeugen aber ohne Persistenz/Inertialterm keine runden Trajektorien.
 - Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
