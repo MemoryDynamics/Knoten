@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "alpha_values": [
+      0.01
+    ],
+    "base_configs": [
+      {
+        "alpha": 0.01,
+        "amplitude_att": 3.0,
+        "amplitude_rep": 1.0,
+        "burn_in": 0,
+        "deposit_beta": 0.01,
+        "dim": 5,
+        "epsilon": 0.05,
+        "eta": 2.0,
+        "max_memory": 300,
+        "memory_factor": 5.0,
+        "sample_every": 1000,
+        "sigma_att": 0.15,
+        "sigma_rep": 1.0,
+        "steps": 100000000
+      }
+    ],
+    "beta_over_alpha_values": [
+      1.0
+    ],
+    "beta_values": [
+      0.01
+    ],
+    "burn_in_fraction": 0.2,
+    "conditions": [
+      "baseline"
+    ],
+    "configured_max_memory": 300,
+    "coupling_mode": "historical",
+    "dims": [
+      5
+    ],
+    "engine_request": "auto",
+    "eta_alpha_target": null,
+    "git_revision": "e824f80",
+    "memory_mode": "capped",
+    "memory_tail_mass": 0.95,
+    "sample_every": 1000,
+    "seeds": [
+      1
+    ],
+    "steps_list": [
+      100000000
+    ],
+    "total_elapsed_seconds": 1559.5085327000124
+  },
+  "runs": [
+    {
+      "D_cov": 1.3365792336498976,
+      "D_occ": 2.013308985393745,
+      "D_occ_estimator": "archive_fraktale_box_counting",
+      "D_occ_reference": 2.0863231911665916,
+      "D_spec": 1.209789210952134,
+      "alpha": 0.01,
+      "amplitude_att": 3.0,
+      "amplitude_rep": 1.0,
+      "beta_over_alpha": 1.0,
+      "condition": "baseline",
+      "config": {
+        "alpha": 0.01,
+        "amplitude_att": 3.0,
+        "amplitude_rep": 1.0,
+        "burn_in": 20000000,
+        "deposit_beta": 0.01,
+        "dim": 5,
+        "epsilon": 0.05,
+        "eta": 2.0,
+        "max_memory": 300,
+        "memory_factor": 5.0,
+        "sample_every": 1000,
+        "sigma_att": 0.15,
+        "sigma_rep": 1.0,
+        "steps": 100000000
+      },
+      "deposit_beta": 0.01,
+      "dim": 5,
+      "elapsed_seconds": 1555.9284510000143,
+      "engine": "numba",
+      "eta": 2.0,
+      "eta_alpha": 0.02,
+      "max_memory": 300,
+      "n_samples": 80001,
+      "occupancy_counts": [
+        75202.0,
+        62596.0,
+        40566.0,
+        21335.0,
+        10288.0,
+        4962.0,
+        2348.0,
+        1129.0,
+        554.0,
+        282.0,
+        140.0,
+        64.0
+      ],
+      "occupancy_scales": [
+        0.06542464178721988,
+        0.09149201044071517,
+        0.12794549187916376,
+        0.17892326131371422,
+        0.2502122815657341,
+        0.34990523527603246,
+        0.48931920090985076,
+        0.6842803600528338,
+        0.9569205751243375,
+        1.3381897838271892,
+        1.8713694156976182,
+        2.6169856714887954
+      ],
+      "residence": {
+        "knot_count": 1631.0,
+        "max_residence": 10.333333333333334,
+        "mean_residence": 1.7112590189342531,
+        "visited_voxels": 2210.0
+      },
+      "seed": 1,
+      "sigma_att": 0.15,
+      "sigma_rep": 1.0,
+      "spectral_points": 1000,
+      "steps": 100000000,
+      "steps_per_second": 64270.3075040043,
+      "stored_weight_mass": 0.9509591059287142,
+      "uncapped_horizon": 501,
+      "used_horizon": 300
+    }
+  ],
+  "summary": [
+    {
+      "D_cov": {
+        "ci_95_hi": 1.3365792336498976,
+        "ci_95_lo": 1.3365792336498976,
+        "max": 1.3365792336498976,
+        "mean": 1.3365792336498976,
+        "min": 1.3365792336498976,
+        "n": 1,
+        "std": 0.0
+      },
+      "D_occ": {
+        "ci_95_hi": 2.013308985393745,
+        "ci_95_lo": 2.013308985393745,
+        "max": 2.013308985393745,
+        "mean": 2.013308985393745,
+        "min": 2.013308985393745,
+        "n": 1,
+        "std": 0.0
+      },
+      "D_occ_reference": {
+        "ci_95_hi": 2.0863231911665916,
+        "ci_95_lo": 2.0863231911665916,
+        "max": 2.0863231911665916,
+        "mean": 2.0863231911665916,
+        "min": 2.0863231911665916,
+        "n": 1,
+        "std": 0.0
+      },
+      "D_spec": {
+        "ci_95_hi": 1.209789210952134,
+        "ci_95_lo": 1.209789210952134,
+        "max": 1.209789210952134,
+        "mean": 1.209789210952134,
+        "min": 1.209789210952134,
+        "n": 1,
+        "std": 0.0
+      },
+      "alpha": 0.01,
+      "beta_over_alpha": 1.0,
+      "condition": "baseline",
+      "deposit_beta": 0.01,
+      "dim": 5,
+      "eta": 2.0,
+      "eta_alpha": 0.02,
+      "mean_steps_per_second": 64270.3075040043,
+      "n_runs": 1,
+      "sigma_att": 0.15,
+      "sigma_rep": 1.0,
+      "steps": 100000000,
+      "stored_weight_mass": 0.9509591059287142,
+      "used_horizon": 300
+    }
+  ]
+}
