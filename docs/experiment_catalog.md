@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -17,6 +17,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
+| `experiments/synchronization/` | Innen/Aussen- und Mehrknoten-Synchronisation | geplant | Single-Knot-Observablen und Response-Rank |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 
 ## Long-Run-Metastabilitaet
@@ -114,6 +115,20 @@ Seeded d-alpha-N-Scan 2026-06-30:
 | Scan | Ergebnis | Lesart |
 | --- | --- | --- |
 | `d=3..8`, `alpha=0.01/0.02`, `N=30k/100k/300k`, Seeds `1..5` | `D_cov`-Naehe zu 3 wandert von `d=3` ueber `d=5` zu `d=6/7` | kein stabiles `d=3`-Plateau; eher endliche-N-/Fitfenster-/Schaetzerabhaengigkeit |
+
+## Innen/Aussen- und Synchronisationsprogramm
+
+Neuer geplanter Pfad:
+
+| Stufe | Ziel | Messgroessen |
+| --- | --- | --- |
+| Einzelknoten | stabile externe und interne Observablen extrahieren | center, shape tensor, radius, mode coefficients, residence |
+| Basin-Statistik | Seeds als Attraktionskanal-Sampler behandeln | `P(knot type | parameters, seed)` |
+| Zwei-Knoten-Pilot | Synchronisation von zwei Knoten testen | cross-correlation, phase-locking, response delay |
+| Externer Subraum | gemeinsame makroskopische Wechselwirkungsstruktur messen | response matrix, response rank, subspace stability |
+
+Guardrail: Diese Stufe behauptet keine Quantenfeldtheorie. Sie prueft nur, ob
+synchronisierte Knoten kollektive externe Observablen ausbilden.
 
 ## Historische Skriptfamilien
 

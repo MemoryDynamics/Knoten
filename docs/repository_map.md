@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -20,12 +20,15 @@ flowchart TD
     root --> data["data/processed<br/>generierte Outputs, ignoriert"]
     root --> figures["figures<br/>draft/result figures"]
 
+    experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
+
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian kernels"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
+    src --> sync["synchronization.py<br/>phase-lock, lag response, response rank"]
 
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
@@ -87,6 +90,7 @@ flowchart LR
     reports --> paper0["Paper 0<br/>technical anchor"]
     reports --> paper1["Paper I<br/>minimal model and evidence"]
     paper1 -.later.-> paper2["Paper II<br/>propagation / c_eff"]
+    paper2 -.later.-> paper3["Paper III<br/>internal modes / synchronization"]
 ```
 
 ## Long-Run-Schiene
@@ -102,7 +106,7 @@ flowchart TD
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern.
+- `src/emergenz_knoten` ist der belastbare Codekern; `synchronization.py` ist aktuell nur eine kleine Diagnostikschicht.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

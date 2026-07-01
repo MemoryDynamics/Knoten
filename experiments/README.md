@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-06-29.
+Stand: 2026-07-01.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -26,6 +26,8 @@ python experiments/anchor_sensitivity_analysis.py
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
   Dimensionsclaim-Audit und Reproduktionspiloten.
 - `propagation_speed/`: Time-of-flight, retarded response, Signalfronten.
+- `synchronization/`: geplanter Pfad fuer Single-Knot-Observablen,
+  Mehrknoten-Synchronisation und Response-Rank.
 - `knot_stability/`: Knoten- und Trajektorienlaeufe.
 - `ou_limit/`: OU-Kontrollen und analytische Grenzfaelle.
 - `LQG/`: orbitartige Explorationslaeufe und Kruemmungsstatistiken.
@@ -50,6 +52,7 @@ Experimentfokus ist ihre Haertung:
 - Voxel-/Feature-Sensitivitaet.
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
+- Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

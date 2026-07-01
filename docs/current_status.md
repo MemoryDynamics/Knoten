@@ -38,7 +38,8 @@ Memory-Reprasentation ist die Markov-Einbettung.
 - Paper I: Minimalmodell mit synchronisierter Memory- und Markov-Sprache. Die
   starke Knoten-Evidenz muss aus Long-Runs und Kontrollen kommen.
 - Paper II: Propagation, `c_eff` und Raumzeit-Kinematik bleiben Folgeprogramm.
-- Paper III: Quanten-/Standardmodellprogramm bleibt geparkt.
+- Paper III: als Innen/Aussen- und Synchronisationsprogramm neu orientiert;
+  weiterhin ohne Quanten-/Standardmodellclaims.
 
 ## Long-Run-Status
 

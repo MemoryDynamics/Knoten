@@ -128,11 +128,40 @@ Schaetzfenster, Samplingdichte, Memory-Normierung und Negativkontrollen
 nebeneinanderstellen. Neue Dimensionsergebnisse muessen `D_occ`, `D_win`,
 `valid win` und lokale Slopes gemeinsam berichten.
 
-### P2.3 Paper II / III
+### P2.3 Innen/Aussen- und Synchronisationsprogramm
+
+Status: Orientierung begonnen; keine Physikclaims.
+
+Die Leitfrage verschiebt sich von eindeutiger `d=3`-Selektion zu:
+
+```text
+Koennen intern hochdimensionale Knoten einen gemeinsamen niedrigdimensionalen
+externen Wechselwirkungssektor ausbilden?
+```
+
+Prioritaet:
+
+1. Einzelknoten-Observablen extrahieren: Zentrum, Formtensor, Radius,
+   lokale Moden, optionale Phase, Residence.
+2. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
+3. Zwei-Knoten-Synchronisation testen: shared memory, weak cross-potential,
+   no-coupling control.
+4. Externen Response-Rang messen: nicht interne Dimension, sondern Rang und
+   Stabilitaet der Wechselwirkungs-/Antwortmatrix.
+5. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+   Parameterstoerungen ueber Paper-III-Analogien sprechen.
+
+Naechster konkreter Schritt: `experiments/synchronization/` mit
+Single-Knot-Observable-Extractor und synthetischen Tests fuer Phase-Locking,
+Cross-Correlation und Response-Rank fuellen.
+
+### P2.4 Paper II / III Guardrails
 
 - Paper II: Propagation, Response-Observable, `c_eff`, lokale Kopplung.
-- Paper III: Quanten-/Standardmodellprogramm.
-- Beide bleiben Folgeprogramme hinter reproduzierbarer Metastabilitaet.
+- Paper III: interne Knotenstruktur, Synchronisation, kollektive Moden.
+- Keine Quanten-, Eichgruppen-, Teilchen-, Massen- oder Standardmodellclaims,
+  bevor stabile Mehrknoten-Synchronisation und externe Response-Subraeume
+  reproduzierbar gemessen sind.
 
 ## Laufende Hygiene
 
