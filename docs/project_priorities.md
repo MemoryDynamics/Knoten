@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -104,11 +104,26 @@ Wenn die Kontrollen nicht tragen:
 
 ### P2.2 Dimensionsclaim
 
-- Archivierten `D_occ ~ 2.8`-Befund separat mit expliziten Seeds,
-  Negativkontrollen und Fitfenster-Sensitivitaet haerten.
+Status: defensiv lesen; kein `d=3`-Selektionsclaim.
+
+- Archivierter `D_occ ~ 2.8`-Befund: weiterhin separat interessant, aber noch
+  nicht durch die aktuelle Reproduktionspipeline abgesichert.
 - Seeded d-alpha-N-Scan `d=3..8`, `alpha=0.01/0.02`, `N=30k..300k`,
-  Seeds `1..5`, defensiv lesen: kein stabiles `d=3`-Plateau.
-- Keine eindeutige `d=3`-Selektion behaupten.
+  Seeds `1..5`: kein stabiles `d=3`-Plateau.
+- Kontrollierte Scans vom 2026-07-01:
+  - Memory-Zeit: `d=3,5,7`, `alpha=0.005/0.01/0.02`, `beta/alpha=1`,
+    `eta*alpha=0.02`, `N=300k/1M`, Seeds `1..5`.
+  - Memory-Masse: `d=3,5,7`, `alpha=0.01`, `beta/alpha=0.5/1/2`,
+    `N=300k/1M`, Seeds `1..5`.
+  - Kernel-Skala: `sigma_att=0.10/0.15/0.225`, sonst gleicher Kernslice.
+  - High-N-Referenz: `d=5`, `N=100M`, Seed `1`, `D_occ=2.013`.
+- Ergebnis: keine getestete Achse liefert bei `N=1M` ein Near-3-Plateau; der
+  High-N-Referenzlauf reproduziert den archivierten Near-3-Wert ebenfalls nicht.
+
+Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
+gezielte Reconciliation des Archivbefunds: historische Parameterdefinitionen,
+Schaetzfenster, Samplingdichte, Memory-Normierung und Negativkontrollen
+nebeneinanderstellen.
 
 ### P2.3 Paper II / III
 

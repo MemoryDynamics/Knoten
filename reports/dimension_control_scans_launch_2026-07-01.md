@@ -1,4 +1,4 @@
-# Dimension Control Scans Launch - 2026-07-01
+# Dimension Control Scans - 2026-07-01
 
 This launch report records the long-running dimension-control scans started after
 decoupling memory decay (`alpha`, interpreted as `lambda_m`) from deposited
@@ -40,6 +40,38 @@ and Markdown reports are written to versioned repository paths under
 | `kernel_scale_scan_d357_alpha001_beta1_sigmaatt015_N300k-1M_seed1-5` | 15200 | Re-run default attractive scale under the new beta-aware schema. | `d=3,5,7`, `alpha=0.01`, `beta/alpha=1`, `sigma_att=0.15`, `N=300000,1000000`, `seeds=1..5`, `sample_every=100` | `data/processed/fractal_analysis/kernel_scale_scan_d357_alpha001_beta1_sigmaatt015_N300k-1M_seed1-5.json` |
 | `kernel_scale_scan_d357_alpha001_beta1_sigmaatt0225_N300k-1M_seed1-5` | 34680 | Test broader attractive scale. | `d=3,5,7`, `alpha=0.01`, `beta/alpha=1`, `sigma_att=0.225`, `N=300000,1000000`, `seeds=1..5`, `sample_every=100` | `data/processed/fractal_analysis/kernel_scale_scan_d357_alpha001_beta1_sigmaatt0225_N300k-1M_seed1-5.json` |
 
+## Completion Status
+
+All six scan families completed on 2026-07-01. The stderr logs were empty at
+completion check. The result commits are:
+
+- kernel-scale results: [`e824f80`](https://github.com/MemoryDynamics/Knoten/commit/e824f80)
+- memory-time, memory-mass, and high-N results: [`e0804cb`](https://github.com/MemoryDynamics/Knoten/commit/e0804cb)
+
+## Result Snapshot
+
+At `N=1000000`, none of the controlled scan families shows a stable
+near-three-dimensional plateau. The strongest `D_occ` values remain below 1.6
+in these runs, while `D_cov` typically sits between about 1.5 and 2.4. The
+single high-N reference run at `d=5`, `N=100000000`, `alpha=0.01`,
+`beta/alpha=1`, and `sigma_att=0.15` gives:
+
+| dim | steps | alpha | beta/alpha | sigma_att | D_occ | D_cov | D_spec |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 5 | 100000000 | 0.01 | 1 | 0.15 | 2.013 | 1.337 | 1.210 |
+
+The memory-time scan, with fixed `eta*alpha=0.02`, changes the stored memory
+mass and effective horizon but does not reveal a stable `d=3` macroscopic
+plateau at `N=1000000`. The deposited-memory scan suggests that lowering
+`beta/alpha` can increase `D_occ` in these settings, but this does not turn into
+a near-three-dimensional result. The kernel-scale scan likewise shifts the
+numbers without creating a stable `D~3` signature.
+
+Conservative reading: the new scan batch weakens a direct `d=3` plateau claim
+for the current reproduction pipeline. The archived near-3 result should now be
+treated as a historical/high-N observation that needs reconciliation against
+parameter definitions, estimator windows, sampling, and control conditions.
+
 ## Interpretation Guardrails
 
 - These runs vary one scientific axis per scan family, not all parameters at once.
@@ -48,4 +80,5 @@ and Markdown reports are written to versioned repository paths under
 - The kernel-scale scans vary `sigma_att` while holding `alpha` and `beta/alpha` fixed.
 - `N=100000000` is a reference stress run, not a full replicated result.
 - These scans are still baseline-only; negative controls and lag/voxel sensitivity remain separate follow-up steps.
-
+- Do not present these scans as selecting `d=3`; they are evidence against a
+  simple plateau story in the tested parameter slice.

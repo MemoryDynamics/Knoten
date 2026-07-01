@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-06-30.
+Stand: 2026-07-01.
 
 ## Repository
 
@@ -75,20 +75,36 @@ Belastbar aus dem Archiv:
 - Staerkster Long-N-Gruppenbefund: `embedding dim = 5`, `N = 60,000,000`,
   fuenf Runs, `mean D_occ = 2.810559`, population std etwa `0.029533`.
 
-Belastbar aus neuen Kurzlaeufen:
+Belastbar aus den neuen kontrollierten Reproduktionslaeufen vom 2026-07-01:
 
-- `50k` und `100k` koppeln plausibel an den Archivpfad an.
-- Bei `N <= 60k` ist kein Near-3-`D_occ` sichtbar.
-- Die Kontrollen trennen den Claim noch nicht stark genug.
-- Der seeded d-alpha-N-Scan fuer `d=3..8`, `alpha=0.01/0.02`,
-  `N=30k/100k/300k`, Seeds `1..5`, stuetzt keinen stabilen `d=3`-Plateau-
-  Claim: die Naehe von `D_cov` zu 3 wandert mit `N`.
+- Die allgemeine Memory-Variante ist technisch umgesetzt:
+  `rho_{n+1}=(1-lambda_m)rho_n+beta G_sigma`, mit altem Spezialfall
+  `beta=lambda_m=alpha`.
+- Kernel-Skalen-, Memory-Zeit- und Memory-Masse-Scans sind abgeschlossen und
+  reportgebunden committed.
+- Der einzelne High-N-Referenzlauf `d=5`, `N=100,000,000`, `alpha=0.01`,
+  `beta/alpha=1`, `sigma_att=0.15`, Seed `1`, liefert `D_occ=2.013`,
+  `D_cov=1.337`, `D_spec=1.210`.
+- Bei `N=1,000,000`, Seeds `1..5`, zeigt keine getestete Achse ein stabiles
+  Plateau nahe `D=3`. Die groessten `D_occ`-Mittelwerte liegen unter `1.6`.
+- Niedrigeres `beta/alpha` kann in dieser Pipeline `D_occ` erhoehen, erzeugt
+  aber keine robuste Dreidimensionalitaet.
+
+Lesart: Der archivierte Near-3-Befund bleibt als historischer/high-N-Befund
+interessant, ist aber nicht durch die aktuelle kontrollierte Reproduktions-
+pipeline bestaetigt. Fuer Paper I/II darf daraus kein `d=3`-Selektionsclaim
+abgeleitet werden. Der naechste wissenschaftliche Schritt ist Reconciliation:
+Parameterdefinitionen, Schaetzfenster, Sampling, historische Skripte und
+Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
 1. Baseline, `eta_zero` und `single_scale` seedweise zusammenfuehren.
 2. Kontrollstatistik als Report committen und Paper-I-Evidenzstatus bewerten.
-3. Danach Voxel-/Lag-/Sampling-Sensitivitaet entscheiden.
-4. Erst danach eine Paper-I-Evidenztabelle formulieren.
-5. Transferoperatorfeatures fuer Long-Run-Daten erweitern, wenn die
+3. Dimension-Reproduction nicht weiter blind verlaengern, sondern zuerst den
+   Archivbefund gegen aktuelle Parameterdefinitionen, Schaetzfenster und
+   Sampling rekonstruieren.
+4. Danach Voxel-/Lag-/Sampling-Sensitivitaet entscheiden.
+5. Erst danach eine Paper-I-Evidenztabelle formulieren.
+6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, wenn die
    Residence-Kontrollen tragen.
