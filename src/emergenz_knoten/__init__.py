@@ -8,7 +8,9 @@ from .core import (
 from .diagnostics import (
     bootstrap_mean_ci,
     covariance_dimension,
+    fit_occupancy_scaling_window,
     occupancy_dimension,
+    occupancy_local_slopes,
     residence_statistics,
     spectral_dimension,
 )
@@ -27,11 +29,13 @@ __all__ = [
     "SimulationResult",
     "bootstrap_mean_ci",
     "covariance_dimension",
+    "fit_occupancy_scaling_window",
     "double_gaussian_gradient",
     "exponential_weights",
     "gaussian_gradient",
     "load_simulation_result",
     "occupancy_dimension",
+    "occupancy_local_slopes",
     "residence_statistics",
     "run_simulation",
     "save_simulation_result",

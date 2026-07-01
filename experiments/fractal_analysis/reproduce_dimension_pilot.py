@@ -18,7 +18,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from emergenz_knoten import (  # noqa: E402
     bootstrap_mean_ci,
     covariance_dimension,
+    fit_occupancy_scaling_window,
     occupancy_dimension,
+    occupancy_local_slopes,
     residence_statistics,
     spectral_dimension,
 )
@@ -418,6 +420,54 @@ def legacy_occupancy_dimension(points: np.ndarray) -> OccupancyDetails:
     return OccupancyDetails(dimension, sizes, counts_arr)
 
 
+def occupancy_window_metrics(
+    scales: list[float] | np.ndarray,
+    counts: list[float] | np.ndarray,
+    *,
+    n_samples: int,
+) -> tuple[dict[str, object], list[float]]:
+    window = fit_occupancy_scaling_window(scales, counts, n_samples=n_samples)
+    scales_arr = np.asarray(scales, dtype=float)
+    counts_arr = np.asarray(counts, dtype=float)
+    payload: dict[str, object] = asdict(window)
+    if window.start_index >= 0 and window.stop_index > window.start_index:
+        window_scales = scales_arr[window.start_index : window.stop_index]
+        window_counts = counts_arr[window.start_index : window.stop_index]
+        payload.update(
+            {
+                "scale_min": float(np.min(window_scales)),
+                "scale_max": float(np.max(window_scales)),
+                "count_min": float(np.min(window_counts)),
+                "count_max": float(np.max(window_counts)),
+            }
+        )
+    else:
+        payload.update(
+            {
+                "scale_min": float("nan"),
+                "scale_max": float("nan"),
+                "count_min": float("nan"),
+                "count_max": float("nan"),
+            }
+        )
+    slopes = occupancy_local_slopes(scales_arr, counts_arr)
+    return payload, slopes.tolist()
+
+
+def add_occupancy_window_metrics(run: dict[str, object]) -> dict[str, object]:
+    if "occupancy_scales" not in run or "occupancy_counts" not in run:
+        return run
+    metrics, local_slopes = occupancy_window_metrics(
+        run["occupancy_scales"],
+        run["occupancy_counts"],
+        n_samples=int(run.get("n_samples", 0)),
+    )
+    run["D_occ_windowed"] = float(metrics["dimension"])
+    run["D_occ_window_valid"] = bool(metrics["valid_scaling"])
+    run["occupancy_fit_window"] = metrics
+    run["occupancy_local_slopes"] = local_slopes
+    return run
+
 def spectral_subset(points: np.ndarray, max_points: int) -> np.ndarray:
     if len(points) <= max_points:
         return points
@@ -477,6 +527,9 @@ def run_case(
     samples = result["samples"]
 
     occ = legacy_occupancy_dimension(samples)
+    occ_window, occ_local_slopes = occupancy_window_metrics(
+        occ.scales, occ.counts, n_samples=len(samples)
+    )
     reference_occ = occupancy_dimension(samples, n_scales=10, min_count=2)
     spec_points = spectral_subset(samples, spectral_max_points)
     metrics = config_metrics(config)
@@ -506,11 +559,15 @@ def run_case(
         "D_occ": float(occ.dimension),
         "D_occ_estimator": "archive_fraktale_box_counting",
         "D_occ_reference": float(reference_occ),
+        "D_occ_windowed": float(occ_window["dimension"]),
+        "D_occ_window_valid": bool(occ_window["valid_scaling"]),
         "D_cov": float(covariance_dimension(samples)),
         "D_spec": float(spectral_dimension(spec_points)),
         "spectral_points": int(len(spec_points)),
         "occupancy_scales": occ.scales.tolist(),
         "occupancy_counts": occ.counts.tolist(),
+        "occupancy_fit_window": occ_window,
+        "occupancy_local_slopes": occ_local_slopes,
         "residence": residence_statistics(samples, voxel_size=voxel_size, min_visits=3),
         "config": asdict(config),
     }
@@ -557,6 +614,12 @@ def summarize_runs(runs: list[dict[str, object]]) -> list[dict[str, object]]:
             "D_occ_reference": summarize(
                 [float(run["D_occ_reference"]) for run in group]
             ),
+            "D_occ_windowed": summarize(
+                [float(run.get("D_occ_windowed", float("nan"))) for run in group]
+            ),
+            "D_occ_window_valid_fraction": float(
+                np.mean([bool(run.get("D_occ_window_valid", False)) for run in group])
+            ),
             "D_cov": summarize([float(run["D_cov"]) for run in group]),
             "D_spec": summarize([float(run["D_spec"]) for run in group]),
             "mean_steps_per_second": float(np.mean(speeds)) if speeds else None,
@@ -569,15 +632,17 @@ def markdown_table(summary: list[dict[str, object]]) -> str:
     lines = [
         (
             "| dim | alpha | beta/alpha | sigma_att | condition | steps | runs | D_occ mean | "
-            "D_occ 95% CI | D_cov mean | D_spec mean | horizon | mass |"
+            "D_occ 95% CI | D_win mean | valid win | D_cov mean | D_spec mean | horizon | mass |"
         ),
-        "| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary:
         d_occ = row["D_occ"]
+        d_win = row["D_occ_windowed"]
         d_cov = row["D_cov"]
         d_spec = row["D_spec"]
         assert isinstance(d_occ, dict)
+        assert isinstance(d_win, dict)
         assert isinstance(d_cov, dict)
         assert isinstance(d_spec, dict)
         ci = f"{d_occ['ci_95_lo']:.3f}..{d_occ['ci_95_hi']:.3f}"
@@ -592,6 +657,8 @@ def markdown_table(summary: list[dict[str, object]]) -> str:
             f"{row['n_runs']} | "
             f"{d_occ['mean']:.3f} | "
             f"{ci} | "
+            f"{d_win['mean']:.3f} | "
+            f"{row['D_occ_window_valid_fraction']:.2f} | "
             f"{d_cov['mean']:.3f} | "
             f"{d_spec['mean']:.3f} | "
             f"{row['used_horizon']} | "
@@ -666,6 +733,54 @@ konsistente Trennung des Baseline-Regimes von `eta_zero`, `single_scale` und
 """
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(text, encoding="utf-8")
+
+
+def reanalyze_occupancy_windows(payload: dict[str, object]) -> dict[str, object]:
+    runs = payload.get("runs", [])
+    if not isinstance(runs, list):
+        raise ValueError("payload must contain a runs list")
+    for run in runs:
+        if isinstance(run, dict):
+            add_occupancy_window_metrics(run)
+    payload["summary"] = summarize_runs([run for run in runs if isinstance(run, dict)])
+    metadata = payload.setdefault("metadata", {})
+    if isinstance(metadata, dict):
+        metadata["occupancy_window_method"] = {
+            "min_points": 4,
+            "min_boxes": 20,
+            "max_count_fraction": 0.8,
+            "min_r_squared": 0.98,
+            "max_local_slope_std": 0.35,
+        }
+        metadata["occupancy_window_reanalysis_date"] = date.today().isoformat()
+    return payload
+
+
+def resolved_path(path: Path) -> Path:
+    return path if path.is_absolute() else ROOT / path
+
+
+def reanalyze_json_file(
+    *,
+    input_path: Path,
+    output_path: Path,
+    report_output: Path | None,
+) -> None:
+    payload = json.loads(input_path.read_text(encoding="utf-8"))
+    payload = reanalyze_occupancy_windows(payload)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    metadata = payload.get("metadata", {})
+    summary = payload.get("summary", [])
+    if report_output is not None:
+        if not isinstance(metadata, dict) or not isinstance(summary, list):
+            raise ValueError("reanalyzed payload has invalid metadata or summary")
+        write_report(
+            output_path=report_output,
+            output_json=output_path,
+            metadata=metadata,
+            summary=summary,
+        )
 
 
 def parse_args() -> argparse.Namespace:
@@ -777,6 +892,17 @@ def parse_args() -> argparse.Namespace:
         help="Simulation engine. auto uses numba when importable.",
     )
     parser.add_argument(
+        "--reanalyze-json",
+        type=Path,
+        default=None,
+        help="Existing result JSON to annotate with automatic occupancy fit windows.",
+    )
+    parser.add_argument(
+        "--in-place",
+        action="store_true",
+        help="With --reanalyze-json, overwrite the input JSON path.",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path("data/processed/fractal_analysis/dimension_reproduction_pilot.json"),
@@ -793,6 +919,22 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if args.reanalyze_json is not None:
+        input_path = resolved_path(args.reanalyze_json)
+        output_path = input_path if args.in_place else resolved_path(args.output)
+        report_output = resolved_path(args.report_output) if args.report_output else None
+        reanalyze_json_file(
+            input_path=input_path,
+            output_path=output_path,
+            report_output=report_output,
+        )
+        payload = json.loads(output_path.read_text(encoding="utf-8"))
+        print(f"reanalyzed JSON to {output_path}")
+        if report_output is not None:
+            print(f"wrote report to {report_output}")
+        print(markdown_table(payload["summary"]))
+        return
+
     if not 0.0 <= args.burn_in_fraction < 1.0:
         raise SystemExit("--burn-in-fraction must be in [0, 1)")
     if args.max_memory < 1:

@@ -38,9 +38,9 @@ wird.
 
 ## Ergebnis
 
-| dim | alpha | beta/alpha | sigma_att | condition | steps | runs | D_occ mean | D_occ 95% CI | D_cov mean | D_spec mean | horizon | mass |
-| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 5 | 0.01 | 1 | 0.15 | baseline | 100000000 | 1 | 2.013 | 2.013..2.013 | 1.337 | 1.210 | 300 | 0.951 |
+| dim | alpha | beta/alpha | sigma_att | condition | steps | runs | D_occ mean | D_occ 95% CI | D_win mean | valid win | D_cov mean | D_spec mean | horizon | mass |
+| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 5 | 0.01 | 1 | 0.15 | baseline | 100000000 | 1 | 2.013 | 2.013..2.013 | 2.098 | 1.00 | 1.337 | 1.210 | 300 | 0.951 |
 
 ## Interpretation
 

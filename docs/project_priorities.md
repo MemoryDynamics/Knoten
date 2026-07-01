@@ -116,14 +116,17 @@ Status: defensiv lesen; kein `d=3`-Selektionsclaim.
   - Memory-Masse: `d=3,5,7`, `alpha=0.01`, `beta/alpha=0.5/1/2`,
     `N=300k/1M`, Seeds `1..5`.
   - Kernel-Skala: `sigma_att=0.10/0.15/0.225`, sonst gleicher Kernslice.
-  - High-N-Referenz: `d=5`, `N=100M`, Seed `1`, `D_occ=2.013`.
-- Ergebnis: keine getestete Achse liefert bei `N=1M` ein Near-3-Plateau; der
+  - High-N-Referenz: `d=5`, `N=100M`, Seed `1`, `D_occ=2.013`,
+    `D_win=2.098`.
+- Ergebnis: keine getestete Achse liefert bei `N=1M` ein Near-3-Plateau; die
+  automatischen Fensterwerte liegen meist im Bereich `2..2.5`, und der
   High-N-Referenzlauf reproduziert den archivierten Near-3-Wert ebenfalls nicht.
 
 Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
 gezielte Reconciliation des Archivbefunds: historische Parameterdefinitionen,
 Schaetzfenster, Samplingdichte, Memory-Normierung und Negativkontrollen
-nebeneinanderstellen.
+nebeneinanderstellen. Neue Dimensionsergebnisse muessen `D_occ`, `D_win`,
+`valid win` und lokale Slopes gemeinsam berichten.
 
 ### P2.3 Paper II / III
 

@@ -41,6 +41,14 @@
     "git_revision": "e824f80",
     "memory_mode": "capped",
     "memory_tail_mass": 0.95,
+    "occupancy_window_method": {
+      "max_count_fraction": 0.8,
+      "max_local_slope_std": 0.35,
+      "min_boxes": 20,
+      "min_points": 4,
+      "min_r_squared": 0.98
+    },
+    "occupancy_window_reanalysis_date": "2026-07-01",
     "sample_every": 1000,
     "seeds": [
       1
@@ -56,6 +64,8 @@
       "D_occ": 2.013308985393745,
       "D_occ_estimator": "archive_fraktale_box_counting",
       "D_occ_reference": 2.0863231911665916,
+      "D_occ_window_valid": true,
+      "D_occ_windowed": 2.0983674544242255,
       "D_spec": 1.209789210952134,
       "alpha": 0.01,
       "amplitude_att": 3.0,
@@ -99,6 +109,34 @@
         282.0,
         140.0,
         64.0
+      ],
+      "occupancy_fit_window": {
+        "count_max": 62596.0,
+        "count_min": 64.0,
+        "dimension": 2.0983674544242255,
+        "local_slope_mean": 2.053233515903822,
+        "local_slope_std": 0.29072611908412654,
+        "log_width": 3.3535267764672154,
+        "n_points": 11,
+        "r_squared": 0.9985369720978046,
+        "scale_max": 2.6169856714887954,
+        "scale_min": 0.09149201044071517,
+        "start_index": 1,
+        "stop_index": 12,
+        "valid_scaling": true
+      },
+      "occupancy_local_slopes": [
+        0.5471149040270169,
+        1.2934773743518024,
+        1.9161360666801157,
+        2.1749364110134173,
+        2.1743356496881803,
+        2.2312181568205647,
+        2.1834673333656704,
+        2.1229079857008206,
+        2.0135745464973533,
+        2.0881439004536757,
+        2.3341377344666197
       ],
       "occupancy_scales": [
         0.06542464178721988,
@@ -157,6 +195,16 @@
         "max": 2.0863231911665916,
         "mean": 2.0863231911665916,
         "min": 2.0863231911665916,
+        "n": 1,
+        "std": 0.0
+      },
+      "D_occ_window_valid_fraction": 1.0,
+      "D_occ_windowed": {
+        "ci_95_hi": 2.0983674544242255,
+        "ci_95_lo": 2.0983674544242255,
+        "max": 2.0983674544242255,
+        "mean": 2.0983674544242255,
+        "min": 2.0983674544242255,
         "n": 1,
         "std": 0.0
       },

@@ -51,26 +51,28 @@ completion check. The result commits are:
 ## Result Snapshot
 
 At `N=1000000`, none of the controlled scan families shows a stable
-near-three-dimensional plateau. The strongest `D_occ` values remain below 1.6
-in these runs, while `D_cov` typically sits between about 1.5 and 2.4. The
-single high-N reference run at `d=5`, `N=100000000`, `alpha=0.01`,
+near-three-dimensional plateau. The historical all-scale `D_occ` values remain
+below 1.6 in these runs. After reanalysis with an automatic occupancy fit
+window, the accepted windowed estimates `D_win` mostly sit around 2 to 2.5, not
+3. The single high-N reference run at `d=5`, `N=100000000`, `alpha=0.01`,
 `beta/alpha=1`, and `sigma_att=0.15` gives:
 
-| dim | steps | alpha | beta/alpha | sigma_att | D_occ | D_cov | D_spec |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 5 | 100000000 | 0.01 | 1 | 0.15 | 2.013 | 1.337 | 1.210 |
+| dim | steps | alpha | beta/alpha | sigma_att | D_occ | D_win | valid win | D_cov | D_spec |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 5 | 100000000 | 0.01 | 1 | 0.15 | 2.013 | 2.098 | 1.00 | 1.337 | 1.210 |
 
 The memory-time scan, with fixed `eta*alpha=0.02`, changes the stored memory
 mass and effective horizon but does not reveal a stable `d=3` macroscopic
-plateau at `N=1000000`. The deposited-memory scan suggests that lowering
-`beta/alpha` can increase `D_occ` in these settings, but this does not turn into
-a near-three-dimensional result. The kernel-scale scan likewise shifts the
-numbers without creating a stable `D~3` signature.
+plateau at `N=1000000`. The deposited-memory and kernel-scale scans shift the
+windowed estimates, but they do not create a robust near-three-dimensional
+scaling window.
 
 Conservative reading: the new scan batch weakens a direct `d=3` plateau claim
-for the current reproduction pipeline. The archived near-3 result should now be
-treated as a historical/high-N observation that needs reconciliation against
-parameter definitions, estimator windows, sampling, and control conditions.
+for the current reproduction pipeline. It also shows why the historical
+all-scale `D_occ` is insufficient by itself: the scaling-window choice matters.
+The archived near-3 result should now be treated as a historical/high-N
+observation that needs reconciliation against parameter definitions, estimator
+windows, sampling, and control conditions.
 
 ## Interpretation Guardrails
 
@@ -80,5 +82,6 @@ parameter definitions, estimator windows, sampling, and control conditions.
 - The kernel-scale scans vary `sigma_att` while holding `alpha` and `beta/alpha` fixed.
 - `N=100000000` is a reference stress run, not a full replicated result.
 - These scans are still baseline-only; negative controls and lag/voxel sensitivity remain separate follow-up steps.
+- Prefer `D_win` plus `valid win` over all-scale `D_occ` for future finite-size interpretation.
 - Do not present these scans as selecting `d=3`; they are evidence against a
   simple plateau story in the tested parameter slice.

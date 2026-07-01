@@ -55,3 +55,19 @@ def test_reproduce_dimension_pilot_separates_beta_from_alpha() -> None:
     assert pilot.deposit_beta(cfg) == 0.005
     assert pilot.beta_over_alpha(cfg) == 0.5
     assert np.isclose(pilot.stored_weight_mass(cfg), 0.4754795529643571)
+
+
+def test_reproduce_dimension_pilot_adds_occupancy_window_metrics() -> None:
+    pilot = load_reproduce_dimension_pilot()
+    run = {
+        "n_samples": 1000,
+        "occupancy_scales": np.geomspace(0.001, 0.1, 10).tolist(),
+        "occupancy_counts": [1000, 990, 920, 700, 252, 91, 33, 12, 5, 2],
+    }
+
+    pilot.add_occupancy_window_metrics(run)
+
+    assert run["D_occ_window_valid"] is True
+    assert 1.7 <= run["D_occ_windowed"] <= 2.3
+    assert run["occupancy_fit_window"]["start_index"] >= 3
+    assert len(run["occupancy_local_slopes"]) == 9

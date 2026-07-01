@@ -15,7 +15,8 @@ Stand: 2026-07-01.
 - `core.py`: `SimulationConfig`, finite-memory Simulation, Numba-Variante,
   Memory-Horizon `min(max_memory, memory_factor / alpha)`.
 - `kernels.py`: exponentielle Memory-Gewichte und Gaussian-Kernelgradienten.
-- `diagnostics.py`: `D_cov`, `D_occ`, geometrische `spectral_dimension`,
+- `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
+  Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   Residence-Statistiken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
@@ -84,15 +85,18 @@ Belastbar aus den neuen kontrollierten Reproduktionslaeufen vom 2026-07-01:
   reportgebunden committed.
 - Der einzelne High-N-Referenzlauf `d=5`, `N=100,000,000`, `alpha=0.01`,
   `beta/alpha=1`, `sigma_att=0.15`, Seed `1`, liefert `D_occ=2.013`,
-  `D_cov=1.337`, `D_spec=1.210`.
+  automatisches Fenster `D_win=2.098`, `D_cov=1.337`, `D_spec=1.210`.
 - Bei `N=1,000,000`, Seeds `1..5`, zeigt keine getestete Achse ein stabiles
-  Plateau nahe `D=3`. Die groessten `D_occ`-Mittelwerte liegen unter `1.6`.
+  Plateau nahe `D=3`. Die groessten historischen `D_occ`-Mittelwerte liegen
+  unter `1.6`; die automatischen Fensterwerte `D_win` liegen meist eher um
+  `2..2.5`.
 - Niedrigeres `beta/alpha` kann in dieser Pipeline `D_occ` erhoehen, erzeugt
   aber keine robuste Dreidimensionalitaet.
 
 Lesart: Der archivierte Near-3-Befund bleibt als historischer/high-N-Befund
 interessant, ist aber nicht durch die aktuelle kontrollierte Reproduktions-
-pipeline bestaetigt. Fuer Paper I/II darf daraus kein `d=3`-Selektionsclaim
+pipeline bestaetigt. Die neue `D_win`-Diagnostik zeigt, dass Fitfensterwahl
+eine zentrale Fehlerquelle war. Fuer Paper I/II darf daraus kein `d=3`-Selektionsclaim
 abgeleitet werden. Der naechste wissenschaftliche Schritt ist Reconciliation:
 Parameterdefinitionen, Schaetzfenster, Sampling, historische Skripte und
 Negativkontrollen gegeneinander pruefen.

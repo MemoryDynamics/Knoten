@@ -56,6 +56,143 @@ class OccupancyDimensionResult:
     counts: np.ndarray
 
 
+@dataclass(frozen=True)
+class OccupancyScalingWindow:
+    dimension: float
+    start_index: int
+    stop_index: int
+    r_squared: float
+    local_slope_mean: float
+    local_slope_std: float
+    log_width: float
+    n_points: int
+    valid_scaling: bool
+
+
+def occupancy_local_slopes(
+    scales: Iterable[float],
+    counts: Iterable[float],
+) -> np.ndarray:
+    """Return adjacent log-log occupancy slopes."""
+
+    scales_arr = np.asarray(list(scales), dtype=float)
+    counts_arr = np.asarray(list(counts), dtype=float)
+    if scales_arr.size != counts_arr.size:
+        raise ValueError("scales and counts must have the same length")
+    if scales_arr.size < 2:
+        return np.array([], dtype=float)
+
+    x = np.log(1.0 / scales_arr)
+    y = np.log(counts_arr)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        slopes = np.diff(y) / np.diff(x)
+    return slopes[np.isfinite(slopes)]
+
+
+def fit_occupancy_scaling_window(
+    scales: Iterable[float],
+    counts: Iterable[float],
+    *,
+    n_samples: int | None = None,
+    min_points: int = 4,
+    min_boxes: int = 20,
+    max_count_fraction: float = 0.8,
+    min_r_squared: float = 0.98,
+    max_local_slope_std: float = 0.35,
+) -> OccupancyScalingWindow:
+    """Choose a stable log-log box-counting fit window.
+
+    The historical occupancy estimator fits every box scale. This helper is
+    stricter: it excludes undersampled large boxes and, when ``n_samples`` is
+    known, the small-scale regime where occupied boxes saturate near the number
+    of sampled points. Among contiguous windows it prefers valid, wide, locally
+    stable scaling ranges.
+    """
+
+    scales_arr = np.asarray(list(scales), dtype=float)
+    counts_arr = np.asarray(list(counts), dtype=float)
+    if scales_arr.size != counts_arr.size:
+        raise ValueError("scales and counts must have the same length")
+    if min_points < 3:
+        raise ValueError("min_points must be at least 3")
+    if not 0.0 < max_count_fraction <= 1.0:
+        raise ValueError("max_count_fraction must satisfy 0 < value <= 1")
+
+    finite = (
+        np.isfinite(scales_arr)
+        & np.isfinite(counts_arr)
+        & (scales_arr > 0.0)
+        & (counts_arr > 0.0)
+    )
+    finite_indices = np.flatnonzero(finite)
+    if finite_indices.size < min_points:
+        return OccupancyScalingWindow(
+            float("nan"), -1, -1, float("nan"), float("nan"),
+            float("nan"), 0.0, 0, False
+        )
+
+    valid = finite & (counts_arr >= min_boxes)
+    if n_samples is not None and n_samples > 0:
+        valid &= counts_arr <= max_count_fraction * float(n_samples)
+
+    candidates: list[tuple[bool, float, OccupancyScalingWindow]] = []
+    n_scales = len(scales_arr)
+    for start in range(n_scales):
+        for stop in range(start + min_points, n_scales + 1):
+            window_indices = np.arange(start, stop)
+            if not bool(np.all(valid[window_indices])):
+                continue
+
+            x = np.log(1.0 / scales_arr[start:stop])
+            y = np.log(counts_arr[start:stop])
+            if np.unique(x).size < 2 or np.unique(y).size < 2:
+                continue
+
+            coeff = np.polyfit(x, y, 1)
+            fit = coeff[0] * x + coeff[1]
+            ss_res = float(np.sum((y - fit) ** 2))
+            ss_tot = float(np.sum((y - y.mean()) ** 2))
+            r_squared = float(1.0 - ss_res / ss_tot) if ss_tot > 0.0 else float("nan")
+            slopes = np.diff(y) / np.diff(x)
+            slopes = slopes[np.isfinite(slopes)]
+            if slopes.size == 0:
+                continue
+            local_std = float(np.std(slopes, ddof=1)) if slopes.size > 1 else 0.0
+            local_mean = float(np.mean(slopes))
+            log_width = float(abs(x[-1] - x[0]))
+            dimension = float(coeff[0])
+            valid_scaling = (
+                np.isfinite(dimension)
+                and dimension > 0.0
+                and np.isfinite(r_squared)
+                and r_squared >= min_r_squared
+                and local_std <= max_local_slope_std
+            )
+            result = OccupancyScalingWindow(
+                dimension=dimension,
+                start_index=start,
+                stop_index=stop,
+                r_squared=r_squared,
+                local_slope_mean=local_mean,
+                local_slope_std=local_std,
+                log_width=log_width,
+                n_points=stop - start,
+                valid_scaling=valid_scaling,
+            )
+            score = log_width + 0.25 * r_squared - 0.25 * local_std
+            candidates.append((valid_scaling, score, result))
+
+    if not candidates:
+        return OccupancyScalingWindow(
+            float("nan"), -1, -1, float("nan"), float("nan"),
+            float("nan"), 0.0, 0, False
+        )
+
+    valid_candidates = [item for item in candidates if item[0]]
+    pool = valid_candidates if valid_candidates else candidates
+    return max(pool, key=lambda item: item[1])[2]
+
+
 def occupancy_dimension(
     points: Iterable[Iterable[float]],
     *,

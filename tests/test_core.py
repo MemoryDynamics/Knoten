@@ -12,7 +12,9 @@ from emergenz_knoten import (
     SimulationConfig,  # noqa: E402
     covariance_dimension,
     exponential_weights,
+    fit_occupancy_scaling_window,
     occupancy_dimension,
+    occupancy_local_slopes,
     residence_statistics,
     simulate_finite_memory,
     simulate_finite_memory_numba,
@@ -38,6 +40,29 @@ def test_occupancy_dimension_line_is_finite() -> None:
     value = occupancy_dimension(line)
     assert np.isfinite(value)
     assert 0.7 <= value <= 1.3
+
+
+def test_occupancy_scaling_window_skips_sample_saturation() -> None:
+    scales = np.geomspace(0.001, 1.0, 10)
+    counts = np.array([1000, 990, 920, 600, 129, 28, 6, 3, 2, 1], dtype=float)
+
+    slopes = occupancy_local_slopes(scales, counts)
+    assert slopes.shape == (9,)
+
+    window = fit_occupancy_scaling_window(
+        scales,
+        counts,
+        n_samples=1000,
+        min_points=4,
+        min_boxes=5,
+        max_count_fraction=0.8,
+    )
+
+    assert window.start_index >= 3
+    assert window.n_points >= 4
+    assert window.valid_scaling
+    assert 1.7 <= window.dimension <= 2.3
+    assert window.r_squared >= 0.98
 
 
 def test_residence_statistics_counts_repeated_voxels() -> None:
