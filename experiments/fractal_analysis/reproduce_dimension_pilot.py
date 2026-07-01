@@ -46,6 +46,7 @@ class ArchiveFractalConfig:
     epsilon: float = 0.05
     eta: float = 2.0
     alpha: float = 0.01
+    deposit_beta: float | None = None
     amplitude_rep: float = 1.0
     amplitude_att: float = 3.0
     sigma_rep: float = 1.0
@@ -102,6 +103,21 @@ def git_revision() -> str:
     return result.stdout.strip() or "unknown"
 
 
+def deposit_beta(config: ArchiveFractalConfig) -> float:
+    """Return the deposited memory weight beta.
+
+    The historical convention is beta=lambda_m=alpha. A separate beta lets
+    memory mass and memory decay be scanned independently without changing old
+    command lines.
+    """
+
+    return float(config.alpha if config.deposit_beta is None else config.deposit_beta)
+
+
+def beta_over_alpha(config: ArchiveFractalConfig) -> float:
+    return float(deposit_beta(config) / config.alpha)
+
+
 def horizon(config: ArchiveFractalConfig) -> int:
     if not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
@@ -143,13 +159,16 @@ def max_memory_for_mode(
 
 
 def stored_weight_mass(config: ArchiveFractalConfig) -> float:
-    return float(1.0 - (1.0 - config.alpha) ** horizon(config))
+    beta = deposit_beta(config)
+    return float(beta * (1.0 - (1.0 - config.alpha) ** horizon(config)) / config.alpha)
 
 
 def config_metrics(config: ArchiveFractalConfig) -> dict[str, float | int]:
     return {
         "uncapped_horizon": int(uncapped_horizon(config.alpha, config.memory_factor)),
         "used_horizon": int(horizon(config)),
+        "deposit_beta": deposit_beta(config),
+        "beta_over_alpha": beta_over_alpha(config),
         "stored_weight_mass": stored_weight_mass(config),
         "eta_alpha": float(config.eta * config.alpha),
     }
@@ -211,6 +230,7 @@ def simulate_archive_fractal_numpy(
     weights = np.zeros(memory_horizon, dtype=float)
     idx = 0
     filled = 0
+    beta = deposit_beta(config)
     x = np.zeros(config.dim, dtype=float)
     samples = []
     sample_steps = []
@@ -230,7 +250,7 @@ def simulate_archive_fractal_numpy(
 
         weights *= 1.0 - config.alpha
         memory[idx] = x
-        weights[idx] = config.alpha
+        weights[idx] = beta
         if filled < memory_horizon:
             filled += 1
         idx = (idx + 1) % memory_horizon
@@ -255,6 +275,7 @@ def _simulate_archive_fractal_numba(
     epsilon: float,
     eta: float,
     alpha: float,
+    deposit_beta: float,
     amplitude_rep: float,
     amplitude_att: float,
     sigma_rep: float,
@@ -304,7 +325,7 @@ def _simulate_archive_fractal_numba(
             weights[k] *= 1.0 - alpha
         for d in range(dim):
             memory[idx, d] = x[d]
-        weights[idx] = alpha
+        weights[idx] = deposit_beta
         if filled < memory_horizon:
             filled += 1
         idx = (idx + 1) % memory_horizon
@@ -330,6 +351,7 @@ def simulate_archive_fractal_numba(
             config.epsilon,
             config.eta,
             config.alpha,
+            deposit_beta(config),
             config.amplitude_rep,
             config.amplitude_att,
             config.sigma_rep,
@@ -465,8 +487,14 @@ def run_case(
         "steps": steps,
         "dim": int(config.dim),
         "alpha": float(config.alpha),
+        "deposit_beta": metrics["deposit_beta"],
+        "beta_over_alpha": metrics["beta_over_alpha"],
         "eta": float(config.eta),
         "eta_alpha": metrics["eta_alpha"],
+        "sigma_rep": float(config.sigma_rep),
+        "sigma_att": float(config.sigma_att),
+        "amplitude_rep": float(config.amplitude_rep),
+        "amplitude_att": float(config.amplitude_att),
         "uncapped_horizon": metrics["uncapped_horizon"],
         "used_horizon": metrics["used_horizon"],
         "stored_weight_mass": metrics["stored_weight_mass"],
@@ -489,19 +517,22 @@ def run_case(
 
 
 def summarize_runs(runs: list[dict[str, object]]) -> list[dict[str, object]]:
-    groups: dict[tuple[int, float, str, int], list[dict[str, object]]] = {}
+    groups: dict[tuple[int, float, float, float, float, str, int], list[dict[str, object]]] = {}
     for run in runs:
         key = (
             int(run["dim"]),
             float(run["alpha"]),
+            float(run["deposit_beta"]),
+            float(run["sigma_rep"]),
+            float(run["sigma_att"]),
             str(run["condition"]),
             int(run["steps"]),
         )
         groups.setdefault(key, []).append(run)
 
     summary = []
-    for (dim, alpha, condition, steps), group in sorted(
-        groups.items(), key=lambda item: (item[0][3], item[0][0], item[0][1], item[0][2])
+    for (dim, alpha, beta, sigma_rep, sigma_att, condition, steps), group in sorted(
+        groups.items(), key=lambda item: (item[0][6], item[0][0], item[0][1], item[0][2], item[0][5])
     ):
         speeds = [
             float(run["steps_per_second"])
@@ -511,6 +542,10 @@ def summarize_runs(runs: list[dict[str, object]]) -> list[dict[str, object]]:
         row = {
             "dim": dim,
             "alpha": alpha,
+            "deposit_beta": beta,
+            "beta_over_alpha": float(group[0]["beta_over_alpha"]),
+            "sigma_rep": sigma_rep,
+            "sigma_att": sigma_att,
             "condition": condition,
             "steps": steps,
             "n_runs": len(group),
@@ -533,10 +568,10 @@ def summarize_runs(runs: list[dict[str, object]]) -> list[dict[str, object]]:
 def markdown_table(summary: list[dict[str, object]]) -> str:
     lines = [
         (
-            "| dim | alpha | condition | steps | runs | D_occ mean | "
+            "| dim | alpha | beta/alpha | sigma_att | condition | steps | runs | D_occ mean | "
             "D_occ 95% CI | D_cov mean | D_spec mean | horizon | mass |"
         ),
-        "| ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary:
         d_occ = row["D_occ"]
@@ -550,6 +585,8 @@ def markdown_table(summary: list[dict[str, object]]) -> str:
             "| "
             f"{row['dim']} | "
             f"{row['alpha']:.5g} | "
+            f"{row['beta_over_alpha']:.5g} | "
+            f"{row['sigma_att']:.5g} | "
             f"{row['condition']} | "
             f"{row['steps']} | "
             f"{row['n_runs']} | "
@@ -599,7 +636,9 @@ wird.
 ## Parameter
 
 - embedding dimensions: `{metadata["dims"]}`
-- alpha values: `{metadata["alpha_values"]}`
+- alpha/lambda_m values: `{metadata["alpha_values"]}`
+- beta values: `{metadata["beta_values"]}`
+- beta/alpha values: `{metadata["beta_over_alpha_values"]}`
 - seeds: `{metadata["seeds"]}`
 - steps ladder: `{metadata["steps_list"]}`
 - conditions: `{metadata["conditions"]}`
@@ -671,7 +710,25 @@ def parse_args() -> argparse.Namespace:
         "--alpha-list",
         type=parse_float_list,
         default=None,
-        help="Comma-separated alpha values. Overrides --alpha.",
+        help="Comma-separated alpha/lambda_m values. Overrides --alpha.",
+    )
+    parser.add_argument(
+        "--beta",
+        type=float,
+        default=None,
+        help="Deposited memory weight beta. Defaults to beta=alpha for legacy runs.",
+    )
+    parser.add_argument(
+        "--beta-list",
+        type=parse_float_list,
+        default=None,
+        help="Comma-separated deposited beta values. Mutually exclusive with --beta-over-alpha-list.",
+    )
+    parser.add_argument(
+        "--beta-over-alpha-list",
+        type=parse_float_list,
+        default=None,
+        help="Comma-separated beta/alpha ratios. Mutually exclusive with --beta-list.",
     )
     parser.add_argument(
         "--coupling-mode",
@@ -742,6 +799,15 @@ def main() -> None:
         raise SystemExit("--max-memory must be positive")
     if not 0.0 < args.memory_tail_mass < 1.0:
         raise SystemExit("--memory-tail-mass must satisfy 0 < value < 1")
+    beta_sources = sum(value is not None for value in (args.beta, args.beta_list, args.beta_over_alpha_list))
+    if beta_sources > 1:
+        raise SystemExit("Use only one of --beta, --beta-list, or --beta-over-alpha-list")
+    if args.beta is not None and args.beta < 0.0:
+        raise SystemExit("--beta must be non-negative")
+    if args.beta_list is not None and any(beta < 0.0 for beta in args.beta_list):
+        raise SystemExit("--beta-list values must be non-negative")
+    if args.beta_over_alpha_list is not None and any(ratio < 0.0 for ratio in args.beta_over_alpha_list):
+        raise SystemExit("--beta-over-alpha-list values must be non-negative")
 
     dim_values = args.dims if args.dims is not None else [args.dim]
     alpha_values = args.alpha_list if args.alpha_list is not None else [args.alpha]
@@ -749,37 +815,48 @@ def main() -> None:
     if args.coupling_mode == "fixed-eta-alpha" and eta_alpha_target is None:
         eta_alpha_target = args.eta * args.alpha
 
+    def beta_values_for_alpha(alpha: float) -> list[float]:
+        if args.beta_list is not None:
+            return args.beta_list
+        if args.beta_over_alpha_list is not None:
+            return [ratio * alpha for ratio in args.beta_over_alpha_list]
+        if args.beta is not None:
+            return [args.beta]
+        return [alpha]
+
     base_configs = []
     for dim in dim_values:
         for alpha in alpha_values:
-            eta = args.eta
-            if args.coupling_mode == "fixed-eta-alpha":
-                assert eta_alpha_target is not None
-                eta = eta_alpha_target / alpha
-            max_memory = max_memory_for_mode(
-                alpha=alpha,
-                memory_factor=args.memory_factor,
-                configured_max_memory=args.max_memory,
-                memory_mode=args.memory_mode,
-                target_mass=args.memory_tail_mass,
-            )
-            base_configs.append(
-                ArchiveFractalConfig(
-                    steps=max(args.steps_list),
-                    dim=dim,
-                    epsilon=args.epsilon,
-                    eta=eta,
+            for beta in beta_values_for_alpha(alpha):
+                eta = args.eta
+                if args.coupling_mode == "fixed-eta-alpha":
+                    assert eta_alpha_target is not None
+                    eta = eta_alpha_target / alpha
+                max_memory = max_memory_for_mode(
                     alpha=alpha,
-                    sigma_rep=args.sigma_rep,
-                    sigma_att=args.sigma_att,
-                    amplitude_rep=args.amplitude_rep,
-                    amplitude_att=args.amplitude_att,
                     memory_factor=args.memory_factor,
-                    max_memory=max_memory,
-                    burn_in=0,
-                    sample_every=args.sample_every,
+                    configured_max_memory=args.max_memory,
+                    memory_mode=args.memory_mode,
+                    target_mass=args.memory_tail_mass,
                 )
-            )
+                base_configs.append(
+                    ArchiveFractalConfig(
+                        steps=max(args.steps_list),
+                        dim=dim,
+                        epsilon=args.epsilon,
+                        eta=eta,
+                        alpha=alpha,
+                        deposit_beta=beta,
+                        sigma_rep=args.sigma_rep,
+                        sigma_att=args.sigma_att,
+                        amplitude_rep=args.amplitude_rep,
+                        amplitude_att=args.amplitude_att,
+                        memory_factor=args.memory_factor,
+                        max_memory=max_memory,
+                        burn_in=0,
+                        sample_every=args.sample_every,
+                    )
+                )
 
     runs = []
     total_started = time.perf_counter()
@@ -789,7 +866,7 @@ def main() -> None:
                 for seed in args.seeds:
                     print(
                         "running "
-                        f"dim={base_config.dim} alpha={base_config.alpha:g} "
+                        f"dim={base_config.dim} alpha={base_config.alpha:g} beta/alpha={beta_over_alpha(base_config):g} "
                         f"condition={condition} steps={steps} seed={seed}"
                     )
                     runs.append(
@@ -815,6 +892,8 @@ def main() -> None:
         "base_configs": [asdict(config) for config in base_configs],
         "dims": dim_values,
         "alpha_values": alpha_values,
+        "beta_values": sorted({deposit_beta(config) for config in base_configs}),
+        "beta_over_alpha_values": sorted({beta_over_alpha(config) for config in base_configs}),
         "steps_list": args.steps_list,
         "seeds": args.seeds,
         "conditions": args.conditions,
