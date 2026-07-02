@@ -54,7 +54,7 @@ def test_shape_statistics_detects_weighted_center_and_roundness() -> None:
     )
     stats = shape_statistics(points, weights=[1.0, 1.0, 1.0, 3.0])
 
-    assert stats["center"] == [0.0, 1.0 / 3.0]
+    assert np.allclose(stats["center"], [0.0, 1.0 / 3.0])
     assert stats["effective_dimension"] is not None
     assert 1.5 <= float(stats["effective_dimension"]) <= 2.0
     assert stats["axis_ratio_min_max"] is not None
