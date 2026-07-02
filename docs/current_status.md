@@ -103,6 +103,19 @@ isoliert aber weiter keinen spezifisch zweiskaligen Baseline-Mechanismus. Neue
 Long-Run-Ausgaben schreiben jetzt `sample_shape` und `memory_cloud` mit; die
 archivierten 10M-JSONs enthalten diese Formmetriken noch nicht.
 
+Shape-Pilot 1M 2026-07-02: Fuer `baseline`, `eta_zero` und `single_scale`
+wurden Seeds `1..5` mit `N=1,000,000`, `burn-in=100,000` und
+`sample_every=200` neu geschrieben. Der Report
+`reports/knot_score_v0_3_shape_pilot_1M_2026-07-02.md` zeigt: Der rohe
+Sample-Pfad bleibt bei allen Bedingungen eher zweidimensional/elongiert
+(`sample roundness median ~0.32`). Die aktive Memory-Cloud von `baseline` und
+`single_scale` ist dagegen kompakt und deutlich runder (`memory roundness
+median ~0.64`, `memory dimension median ~2.68`, `memory radius median ~0.10`).
+`eta_zero` hat eine viel groessere Sample-Ausdehnung (`radius median ~16.1`)
+und eine weniger runde, niedriger dimensionale Memory-Cloud (`roundness median
+~0.33`, `dimension median ~1.64`). Damit spricht der Pilot klar dafuer, die
+Knotenform ueber die Memory-Cloud statt ueber den rohen Pfad zu bewerten.
+
 ## Dimensionsbefund
 
 Belastbar aus dem Archiv:
@@ -138,11 +151,10 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Knotenscore v0.3 auf ausgewaehlten neuen Long-Run-JSONs wiederholen,
-   damit `sample_shape` und `memory_cloud` erstmals numerisch in die Evidenz
-   eingehen.
-2. Formmetriken in v0.4 in den Score integrieren, sobald neue Runs dieselben
-   Bedingungen mit `sample_shape` und `memory_cloud` enthalten.
+1. Score v0.4 definieren: Memory-Cloud-Kompaktheit, Memory-Cloud-Rundheit und
+   Memory-Cloud-Formdimension als transparente Zusatzkomponenten pruefen.
+2. Scorecard v0.4 zuerst auf den vorhandenen 1M-Shape-Pilot anwenden; der rohe
+   Sample-Pfad bleibt zunaechst berichtete Diagnostik, nicht Rundheitskriterium.
 3. Erst danach weitere einparametrige Kernel-Ablationen starten, z.B.
    `amplitude_rep = 0`, um die Rolle der einzelnen Kernelkomponenten zu klaeren.
    Separat davon kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob

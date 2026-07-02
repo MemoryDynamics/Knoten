@@ -109,12 +109,12 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Ausgewaehlten kleinen Long-Run-Satz mit der neuen JSON-Struktur laufen
-   lassen: mindestens `baseline`, `eta_zero`, `single_scale`, Seeds `1..5`,
-   damit `sample_shape` und `memory_cloud` vergleichbar vorliegen.
-2. Scorecard v0.3 auf diese neuen JSONs anwenden und daraus v0.4 ableiten:
-   Form/Rundheit und Memory-Cloud-Stabilitaet nur dann in den Skalar aufnehmen,
-   wenn sie ueber Bedingungen und Seeds robust genug sind.
+1. Score v0.4 definieren: Memory-Cloud-Kompaktheit, Memory-Cloud-Rundheit und
+   Memory-Cloud-Formdimension als getrennte Kandidaten pruefen. Der rohe
+   Sample-Pfad soll zunaechst nur berichtet, nicht als Rundheitskriterium
+   gewertet werden.
+2. Scorecard v0.4 auf den vorhandenen 1M-Shape-Pilot anwenden und nur dann als
+   Paper-I-Evidenzkriterium nutzen, wenn die Schwellen transparent bleiben.
 3. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
    `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
    `eta A_att/sigma_att^2`.

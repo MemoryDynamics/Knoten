@@ -62,8 +62,8 @@ Experimentfokus ist ihre Haertung:
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
-- Knotenscore v0.3: Scorecard trennt Feedback-Confinement von `eta_zero`; `D_occ` dient als internes Nicht-Kollaps-Signal, isoliert aber keinen zweiskaligen Baseline-Mechanismus.
-- Danach v0.3 auf neue Long-Run-Outputs mit `sample_shape`/`memory_cloud` anwenden, Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
+- Knotenscore v0.3 plus 1M-Shape-Pilot: Scorecard trennt Feedback-Confinement von `eta_zero`; Memory-Cloud-Shape trennt aktive Bedingungen von `eta_zero`, isoliert aber keinen zweiskaligen Baseline-Mechanismus.
+- Danach Score v0.4 mit Memory-Cloud-Kompaktheit/Rundheit/Formdimension, Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

@@ -133,13 +133,76 @@ def build_rows(cases: dict[tuple[str, int], CaseRecord]) -> list[dict[str, Any]]
             case.payload["diagnostics"],
             control.payload["diagnostics"],
         )
+        diagnostics = case.payload["diagnostics"]
+        sample_shape = diagnostics.get("sample_shape", {})
+        memory_cloud = diagnostics.get("memory_cloud", {})
+        memory_shape = memory_cloud.get("shape", {}) if isinstance(memory_cloud, dict) else {}
         rows.append(
             {
                 "condition": condition,
                 "seed": seed,
                 "case_path": case.path,
                 "control_path": control.path,
+                "sample_shape_dimension": sample_shape.get("effective_dimension")
+                if isinstance(sample_shape, dict)
+                else None,
+                "sample_roundness": sample_shape.get("axis_ratio_min_max")
+                if isinstance(sample_shape, dict)
+                else None,
+                "sample_shape_radius": sample_shape.get("mean_radius")
+                if isinstance(sample_shape, dict)
+                else None,
+                "memory_shape_dimension": memory_shape.get("effective_dimension")
+                if isinstance(memory_shape, dict)
+                else None,
+                "memory_roundness": memory_shape.get("axis_ratio_min_max")
+                if isinstance(memory_shape, dict)
+                else None,
+                "memory_shape_radius": memory_shape.get("mean_radius")
+                if isinstance(memory_shape, dict)
+                else None,
                 **score,
+            }
+        )
+    return rows
+
+
+def _shape_metrics_from_diagnostics(
+    diagnostics: dict[str, Any],
+) -> dict[str, float | None]:
+    sample_shape = diagnostics.get("sample_shape", {})
+    memory_cloud = diagnostics.get("memory_cloud", {})
+    memory_shape = memory_cloud.get("shape", {}) if isinstance(memory_cloud, dict) else {}
+    return {
+        "sample_shape_dimension": sample_shape.get("effective_dimension")
+        if isinstance(sample_shape, dict)
+        else None,
+        "sample_roundness": sample_shape.get("axis_ratio_min_max")
+        if isinstance(sample_shape, dict)
+        else None,
+        "sample_shape_radius": sample_shape.get("mean_radius")
+        if isinstance(sample_shape, dict)
+        else None,
+        "memory_shape_dimension": memory_shape.get("effective_dimension")
+        if isinstance(memory_shape, dict)
+        else None,
+        "memory_roundness": memory_shape.get("axis_ratio_min_max")
+        if isinstance(memory_shape, dict)
+        else None,
+        "memory_shape_radius": memory_shape.get("mean_radius")
+        if isinstance(memory_shape, dict)
+        else None,
+    }
+
+
+def build_shape_rows(cases: dict[tuple[str, int], CaseRecord]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for (condition, seed), case in sorted(cases.items()):
+        rows.append(
+            {
+                "condition": condition,
+                "seed": seed,
+                **_shape_metrics_from_diagnostics(case.payload["diagnostics"]),
             }
         )
     return rows
@@ -147,6 +210,7 @@ def build_rows(cases: dict[tuple[str, int], CaseRecord]) -> list[dict[str, Any]]
 
 def build_report(payload: dict[str, Any]) -> str:
     rows = payload["rows"]
+    shape_rows = payload.get("shape_rows", [])
     lines = [
         "# Knot Score v0.3 Report",
         "",
@@ -168,8 +232,8 @@ def build_report(payload: dict[str, Any]) -> str:
         "",
         "The `D_occ` component is an internal-dimensional-support signal, not an",
         "external three-dimensionality criterion. Shape roundness is reported where",
-        "available, but it is not yet included in the scalar score because the",
-        "archived 10M JSON files predate the new center/shape diagnostics.",
+        "available, but it is not yet included in the scalar score; older JSON files",
+        "may report `n/a` for the newer center/shape diagnostics.",
         "",
         "## Seed Scorecard",
         "",
@@ -220,6 +284,58 @@ def build_report(payload: dict[str, Any]) -> str:
             f"{_fmt(dimension_summary['median'])} |"
         )
 
+    has_shape = any(row.get("memory_roundness") is not None for row in shape_rows)
+    if has_shape:
+        lines.extend([
+            "",
+            "## Shape Summary",
+            "",
+            "| condition | sample dim med | sample roundness med | sample radius med | memory dim med | memory roundness med | memory radius med |",
+            "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ])
+        grouped_shape: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for row in shape_rows:
+            grouped_shape[row["condition"]].append(row)
+        for condition, condition_rows in sorted(grouped_shape.items()):
+            sample_dim_summary = _summary([
+                row["sample_shape_dimension"]
+                for row in condition_rows
+                if row["sample_shape_dimension"] is not None
+            ])
+            sample_round_summary = _summary([
+                row["sample_roundness"]
+                for row in condition_rows
+                if row["sample_roundness"] is not None
+            ])
+            sample_radius_summary = _summary([
+                row["sample_shape_radius"]
+                for row in condition_rows
+                if row["sample_shape_radius"] is not None
+            ])
+            memory_dim_summary = _summary([
+                row["memory_shape_dimension"]
+                for row in condition_rows
+                if row["memory_shape_dimension"] is not None
+            ])
+            memory_round_summary = _summary([
+                row["memory_roundness"]
+                for row in condition_rows
+                if row["memory_roundness"] is not None
+            ])
+            memory_radius_summary = _summary([
+                row["memory_shape_radius"]
+                for row in condition_rows
+                if row["memory_shape_radius"] is not None
+            ])
+            lines.append(
+                f"| `{condition}` | {_fmt(sample_dim_summary['median'])} | "
+                f"{_fmt(sample_round_summary['median'])} | "
+                f"{_fmt(sample_radius_summary['median'])} | "
+                f"{_fmt(memory_dim_summary['median'])} | "
+                f"{_fmt(memory_round_summary['median'])} | "
+                f"{_fmt(memory_radius_summary['median'])} |"
+            )
+
     baseline = grouped.get("baseline", [])
     single = grouped.get("single_scale", [])
     paired = []
@@ -243,9 +359,9 @@ def build_report(payload: dict[str, Any]) -> str:
             f"- Baseline minus `single_scale` score difference has median {_fmt(paired_summary['median'])};",
             "  therefore the current score still does not isolate the baseline two-scale",
             "  kernel as necessary.",
-            "- New long-run outputs now include center/shape diagnostics, but the archived",
-            "  10M JSON files do not; the next evidence step is to rerun selected cases",
-            "  and compare sample-shape versus memory-cloud shape.",
+            "- New long-run outputs include center/shape diagnostics; the next evidence",
+            "  step is to decide whether sample-shape, memory-cloud shape, or both",
+            "  deserve separate v0.4 score components.",
             "",
         ]
     )
@@ -270,6 +386,7 @@ def main() -> None:
         "git_revision": _git_output(["rev-parse", "--short", "HEAD"]),
         "git_status": _git_output(["status", "--short"]),
         "source_dirs": [str(path) for path in source_dirs],
+        "shape_rows": build_shape_rows(cases),
         "rows": [
             {
                 **row,

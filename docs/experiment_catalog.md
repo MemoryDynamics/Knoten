@@ -169,6 +169,20 @@ zweiskalige Baseline-Mechanismus ist daher weiterhin nicht isoliert. Neue
 Long-Run-JSONs enthalten nun `sample_shape` und `memory_cloud`; die alten
 10M-JSONs enthalten diese Formmetriken noch nicht.
 
+Shape-Pilot 1M vom 2026-07-02: `reports/knot_score_v0_3_shape_pilot_1M_2026-07-02.md`.
+
+| condition | score median | sample dim med | sample roundness med | sample radius med | memory dim med | memory roundness med | memory radius med |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `0.875` | `2.005` | `0.323` | `1.090` | `2.678` | `0.642` | `0.098` |
+| `eta_zero` | `n/a` | `2.001` | `0.318` | `16.098` | `1.639` | `0.331` | `0.508` |
+| `single_scale` | `0.750` | `2.006` | `0.323` | `1.049` | `2.683` | `0.644` | `0.096` |
+
+Lesart: Der rohe Pfad ist kein guter Rundheitsindikator, weil alle drei
+Bedingungen aehnliche Sample-Rundheit zeigen. Die Memory-Cloud trennt dagegen
+aktive Feedbackbedingungen von `eta_zero`: deutlich kompakter, runder und
+hoeher dimensional. Baseline und `single_scale` bleiben auch hier praktisch
+nicht unterschieden.
+
 ## Reproduzierbarkeitsregeln
 
 Jeder Lauf, der als Evidenz genutzt wird, braucht:
