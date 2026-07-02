@@ -92,21 +92,23 @@ oder drift-dominierter. Report: `reports/epsilon_step_balance_2026-07-01.md`.
 
 ## Kernel-Shape-Probe
 
-Punktueller 3D-Fuehrungskoordinaten-Run vom 2026-07-01:
+Punktueller 3D-Fuehrungskoordinaten-Run vom 2026-07-02:
 
-| case | sigma_rep | sigma_att | A_rep | A_att | mean radius | median step | turn mean | path/chord |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `baseline` | `1` | `3` | `1` | `0.35` | `0.233` | `0.1099` | `-0.342` | `1202.3` |
-| `single_scale` | `1` | `3` | `1` | `0` | `0.225` | `0.1090` | `-0.348` | `1238.7` |
-| `strong_local` | `1` | `3` | `4` | `0.35` | `0.075` | `0.0707` | `-0.430` | `2746.5` |
-| `wide_strong` | `2` | `6` | `16` | `1.4` | `0.075` | `0.0707` | `-0.430` | `2752.4` |
+| case | sigma_rep | sigma_att | A_rep | A_att | k_eff | mean radius | median step | turn mean | path/chord |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `1` | `3` | `1` | `0.35` | `0.1442` | `0.233` | `0.1099` | `-0.342` | `1202.3` |
+| `att_zero` | `1` | `3` | `1` | `0` | `0.1500` | `0.225` | `0.1090` | `-0.348` | `1238.7` |
+| `rep_zero` | `1` | `3` | `0` | `0.35` | `-0.0058` | `6.620` | `0.1519` | `0.059` | `48.9` |
+| `strong_local` | `1` | `3` | `4` | `0.35` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2746.5` |
+| `wide_strong` | `2` | `6` | `16` | `1.4` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2752.4` |
 
-Lesart: Staerkere bzw. breitere Kernel koennen die Trajektorie kompakter
-machen, erzeugen in der aktuellen overdamped Dynamik aber keine
-Richtungspersistenz. `epsilon` ist nicht frei auf `1` setzbar, ausser die
-Laengeneinheit wird mitskaliert; relevant sind dimensionslose Groessen wie
-`epsilon/sigma_rep`, `sigma_att/sigma_rep` und Driftstaerken der Form
-`eta A/sigma^2`. Report: `reports/kernel_shape_probe_2026-07-01.md`.
+Lesart: Die schwarze Linie in der Figur ist eine geglaettete Rolling-Mean-
+Trajektorie; die farbige Linie ist der roh gesampelte Pfad desselben Cases.
+`k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)` ist die lokale
+restaurierende Skala in der aktuellen Euler-Konvention. Deshalb zerfaellt
+`A_att=0` nicht: der `A_rep`-Anteil ist lokal bindend. Die schaerfere
+Dispersionskontrolle ist `A_rep=0`, die hier den Radius stark vergroessert.
+Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 ## Reproduzierbarkeitsregeln
 

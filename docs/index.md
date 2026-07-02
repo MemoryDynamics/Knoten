@@ -44,6 +44,10 @@ langlebig. Die naechste Prioritaet ist daher kein neuer Blindscan, sondern ein
 strengeres Knotenkriterium aus Residence, Kompaktheit, Voxel-Stabilitaet und
 Kontrolltrennung.
 
+Die Kernel-Shape-Probe zeigt ausserdem: `A_att=0` ist in der aktuellen
+Euler-Konvention keine Zerfallskontrolle; `A_rep=0` ist die passendere
+Dispersionsablation.
+
 ## Nicht ueberclaimen
 
 - Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.

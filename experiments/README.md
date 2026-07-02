@@ -57,7 +57,7 @@ Experimentfokus ist ihre Haertung:
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die lokale Bewegung, macht sie aber in der getesteten Baseline nicht glatter.
-- Kernel-Shape-Probe: staerkere oder breitere Kernel komprimieren den Lauf, erzeugen aber ohne Persistenz/Inertialterm keine runden Trajektorien.
+- Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation und 3D-Fuehrungskoordinatenplot.
 - Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt

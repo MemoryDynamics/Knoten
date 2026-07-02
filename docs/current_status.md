@@ -68,14 +68,14 @@ bleibt der mediane Noise/Repulsion-Quotient nahe `3.6` und die mittlere
 Richtungskorrelation nahe `-0.071`. Kleineres `epsilon` allein macht den
 Lauf kleiner, aber nicht glatter oder drift-dominierter.
 
-Kernel-Shape-Probe 2026-07-01: In einem punktuellen 3D-Fuehrungskoordinaten-
-Run reduzieren `strong_local` und `wide_strong` den mittleren Radius von
-`0.233` auf `0.075`, machen die Richtungswechsel aber staerker negativ
-(`turn mean` etwa `-0.43`). Kernelbreiten und Amplituden steuern also zuerst
-Kompaktheit und Skala; runde Trajektorien brauchen wahrscheinlich Persistenz,
-einen Inertialterm oder eine explizit geglaettete Observable. `epsilon` kann
-nur nach Wahl einer Laengeneinheit eliminiert werden, etwa ueber
-`epsilon/sigma_rep`, nicht durch ein isoliertes Setzen auf `1`.
+Kernel-Shape-Probe 2026-07-02: Code-Review bestaetigt, dass die Probe jetzt
+denselben `double_gaussian_gradient` wie der Paketkern nutzt. In der aktuellen
+Euler-Konvention wirkt `A_rep` lokal restaurierend, waehrend `A_att` diese
+Skala abschwaecht. Daher bleibt `A_att=0` kompakt (`mean radius 0.225`),
+waehrend `A_rep=0` deutlich diffundiert (`mean radius 6.620`). `strong_local`
+und `wide_strong` reduzieren den Radius auf `0.075`, erzeugen aber weiter
+keine runden Bahnen (`turn mean` etwa `-0.43`). Runde Trajektorien brauchen
+wahrscheinlich Persistenz, einen Inertialterm oder eine geglaettete Observable.
 
 ## Dimensionsbefund
 

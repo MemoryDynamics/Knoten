@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-06-30.
+Stand: 2026-07-02.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -30,6 +30,14 @@ Memory-Masse bei normiertem `G_sigma` und normiertem Anfangszustand konstant.
 Ausgerollt ergibt das eine exponentiell gewichtete Vergangenheit. Die
 charakteristische Speicherpersistenz liegt in der normierten Konvention bei
 `alpha^{-1}` Updates.
+
+Implementationskonvention fuer den aktuellen Double-Gaussian-Kernel:
+Der Paketkern berechnet `grad = rep - att` und integriert
+`x_{n+1}=x_n + epsilon xi_n - eta grad`. Operational wirkt `A_rep`
+damit lokal restaurierend, waehrend `A_att` diese Skala abschwaecht.
+Die Namen bezeichnen Kernelkomponenten, nicht direkt die Richtung des
+realisierten Euler-Schritts. Die lokale linearisierte Skala ist
+`k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)`.
 
 ## Markov-Einbettung
 

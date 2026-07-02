@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import SimulationConfig  # noqa: E402
+from emergenz_knoten.kernels import double_gaussian_gradient, exponential_weights  # noqa: E402
 
 
 @dataclass(frozen=True)
@@ -33,7 +34,8 @@ class ProbeCase:
 
 DEFAULT_CASES = [
     ProbeCase("baseline", 1.0, 3.0, 1.0, 0.35),
-    ProbeCase("single_scale", 1.0, 3.0, 1.0, 0.0),
+    ProbeCase("att_zero", 1.0, 3.0, 1.0, 0.0),
+    ProbeCase("rep_zero", 1.0, 3.0, 0.0, 0.35),
     ProbeCase("strong_local", 1.0, 3.0, 4.0, 0.35),
     ProbeCase("wide_strong", 2.0, 6.0, 16.0, 1.4),
 ]
@@ -67,24 +69,26 @@ def simulate_probe_numpy(config: SimulationConfig, *, seed: int) -> np.ndarray:
 
     rng = np.random.default_rng(seed)
     horizon = _horizon(config)
-    weights = config.alpha * np.power(1.0 - config.alpha, np.arange(horizon))
+    weights = exponential_weights(config.alpha, horizon)
     memory = np.zeros((horizon, config.dim), dtype=float)
     x = np.zeros(config.dim, dtype=float)
     samples: list[np.ndarray] = []
     idx = 0
     filled = 0
-    sigma_rep2 = config.sigma_rep * config.sigma_rep
-    sigma_att2 = config.sigma_att * config.sigma_att
 
     for step in range(1, config.steps + 1):
         if filled:
             order = (idx - 1 - np.arange(filled)) % horizon
             mem = memory[order]
-            dx = x[None, :] - mem
-            r2 = np.einsum("ij,ij->i", dx, dx)
-            rep = config.amplitude_rep * np.exp(-0.5 * r2 / sigma_rep2) / sigma_rep2
-            att = config.amplitude_att * np.exp(-0.5 * r2 / sigma_att2) / sigma_att2
-            grad = np.sum((weights[:filled] * (rep - att))[:, None] * dx, axis=0)
+            grad = double_gaussian_gradient(
+                x,
+                mem,
+                weights[:filled],
+                sigma_rep=config.sigma_rep,
+                sigma_att=config.sigma_att,
+                amplitude_rep=config.amplitude_rep,
+                amplitude_att=config.amplitude_att,
+            )
         else:
             grad = np.zeros(config.dim, dtype=float)
         x = x + config.epsilon * rng.normal(size=config.dim) - config.eta * grad
@@ -186,7 +190,8 @@ def _plot_cases_svg(cases: list[dict[str, Any]], figure_path: Path, *, rolling: 
     margin = 40
     title_h = 46
     width = panel_w * 2 + margin * 3
-    height = (panel_h + title_h) * 2 + margin * 3
+    rows = int(np.ceil(len(cases) / 2))
+    height = (panel_h + title_h) * rows + margin * (rows + 1)
     colors = ["#2563eb", "#16a34a", "#dc2626", "#7c3aed"]
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
@@ -207,12 +212,13 @@ def _plot_cases_svg(cases: list[dict[str, Any]], figure_path: Path, *, rolling: 
         smooth = _scale_to_panel(_project_isometric(smooth3), x0, y0 + title_h, panel_w, panel_h)
         metrics = case["metrics"]
         title = html.escape(case["name"])
+        color = colors[idx % len(colors)]
         parts.extend(
             [
                 f'<rect x="{x0}" y="{y0}" width="{panel_w}" height="{panel_h + title_h}" rx="6" fill="#ffffff" stroke="#cbd5e1"/>',
                 f'<text x="{x0 + 14}" y="{y0 + 24}" font-family="Arial" font-size="16" font-weight="700" fill="#0f172a">{title}</text>',
                 f'<text x="{x0 + 14}" y="{y0 + 43}" font-family="Arial" font-size="12" fill="#475569">R={metrics["mean_centered_radius"]:.3f}, turn={metrics["turn_cosine_mean"]:.3f}, path/chord={metrics["path_to_chord"]:.1f}</text>',
-                f'<polyline points="{_polyline(scaled)}" fill="none" stroke="{colors[idx]}" stroke-width="0.7" stroke-opacity="0.40"/>',
+                f'<polyline points="{_polyline(scaled)}" fill="none" stroke="{color}" stroke-width="0.7" stroke-opacity="0.40"/>',
                 f'<polyline points="{_polyline(smooth)}" fill="none" stroke="#020617" stroke-width="1.5" stroke-opacity="0.9"/>',
             ]
         )
@@ -233,6 +239,18 @@ def _case_config(base: SimulationConfig, case: ProbeCase) -> SimulationConfig:
     )
 
 
+def _local_scales(config: SimulationConfig) -> dict[str, float]:
+    """Return the linearized kernel scales in the current update convention."""
+
+    rep_scale = config.eta * config.amplitude_rep / (config.sigma_rep * config.sigma_rep)
+    att_scale = config.eta * config.amplitude_att / (config.sigma_att * config.sigma_att)
+    return {
+        "rep_scale": float(rep_scale),
+        "att_scale": float(att_scale),
+        "net_restoring_scale": float(rep_scale - att_scale),
+    }
+
+
 def build_report(payload: dict[str, Any]) -> str:
     lines = [
         "# Kernel Shape Probe",
@@ -246,9 +264,14 @@ def build_report(payload: dict[str, Any]) -> str:
         "It is not a broad parameter sweep and not Paper-I evidence by itself.",
         "",
         "Important sign convention: in the current Euler update, the kernel",
-        "contributes a deterministic drift term. It does not impose a hard",
-        "minimum step length; without inertia or correlated noise the path can",
-        "remain jagged even when it is spatially confined.",
+        "contributes a deterministic drift term `-eta (rep - att)`. With the",
+        "package convention, `A_rep` is locally restoring and `A_att` weakens",
+        "that restoring scale. The labels therefore name kernel components,",
+        "not directly the sign of the realized Euler displacement.",
+        "",
+        "The kernel does not impose a hard minimum step length; without inertia",
+        "or correlated noise the path can remain jagged even when it is",
+        "spatially confined.",
         "",
         "## Figure",
         "",
@@ -256,8 +279,8 @@ def build_report(payload: dict[str, Any]) -> str:
         "",
         "## Results",
         "",
-        "| case | sigma_rep | sigma_att | A_rep | A_att | mean radius | median step | turn mean | path/chord | PCA energy first 3 |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+        "| case | sigma_rep | sigma_att | A_rep | A_att | k_eff | mean radius | median step | turn mean | path/chord | PCA energy first 3 |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for case in payload["cases"]:
         metrics = case["metrics"]
@@ -266,6 +289,7 @@ def build_report(payload: dict[str, Any]) -> str:
             f"| `{case['name']}` | `{case['config']['sigma_rep']:.3g}` | "
             f"`{case['config']['sigma_att']:.3g}` | `{case['config']['amplitude_rep']:.3g}` | "
             f"`{case['config']['amplitude_att']:.3g}` | "
+            f"`{case['local_scales']['net_restoring_scale']:.4f}` | "
             f"`{metrics['mean_centered_radius']:.3f}` | "
             f"`{metrics['median_sample_step']:.4f}` | "
             f"`{metrics['turn_cosine_mean']:.3f}` | "
@@ -276,8 +300,13 @@ def build_report(payload: dict[str, Any]) -> str:
             "",
             "## Reading",
             "",
-            "- Increasing local kernel strength changes confinement scale, but it",
-            "  does not automatically create directionally persistent, round paths.",
+            "- In this implementation, `A_att=0` removes the broad counter-term",
+            "  and can remain compact because the `A_rep` component is the",
+            "  locally restoring part of the Euler update.",
+            "- `A_rep=0` leaves only the broad counter-term and is therefore the",
+            "  sharper ablation for dispersal in this convention.",
+            "- Increasing local restoring scale changes confinement, but it does",
+            "  not automatically create directionally persistent, round paths.",
             "- Co-scaling amplitudes with kernel width can leave the local",
             "  stiffness scale A/sigma^2 almost unchanged in compact regimes.",
             "- If the scientific target is visibly smooth curves rather than compact",
@@ -358,6 +387,7 @@ def main() -> None:
                 "name": case.name,
                 "config": asdict(config),
                 "metrics": _metrics(samples, projection),
+                "local_scales": _local_scales(config),
                 "pca_energy": pca_energy,
                 "projection": projection.astype(float).tolist(),
             }

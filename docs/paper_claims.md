@@ -52,6 +52,10 @@ aber ebenfalls kompakt und langlebig. Paper-I-Evidenz darf daher derzeit nur
 vorsichtig als self-interaction-induced confinement formuliert werden, nicht
 als spezifisch zweiskaliger Knotenmechanismus.
 
+Die Kernel-Shape-Probe praezisiert die Ablationssprache: `A_att=0` entfernt
+in der aktuellen Update-Konvention den breiten Gegenanteil, zerstoert aber
+nicht die lokale Restaurierung. `A_rep=0` ist die haertere Dispersionskontrolle.
+
 ## Paper II: Propagation and Spacetime Kinematics
 
 Status: Folgeprogramm.
