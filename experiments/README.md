@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -24,7 +24,7 @@ python experiments/kernel_shape_probe.py
 - `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
 - `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
-- `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden-Probe mit 3D-Fuehrungskoordinatenplot.
+- `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden- und Seed-Probe mit skaliertem 3D-Fuehrungskoordinatenplot.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -57,7 +57,7 @@ Experimentfokus ist ihre Haertung:
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die lokale Bewegung, macht sie aber in der getesteten Baseline nicht glatter.
-- Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation und 3D-Fuehrungskoordinatenplot.
+- Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und skalierter 3D-Fuehrungskoordinatenplot.
 - Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
@@ -67,8 +67,8 @@ Reproduktionspfad.
 ## Kontext
 
 - `docs/current_status.md`
-- `docs/markov_architecture.md`
-- `docs/markov_requirements.md`
-- `docs/non_markovian_basis.md`
+- `docs/project_priorities.md`
+- `docs/THEORETICAL_CONTEXT.md`
+- `docs/repository_map.md`
 - `docs/experiment_catalog.md`
-- `reports/dimension_reproduction_results_2026-06-13.md`
+- `docs/paper_claims.md`

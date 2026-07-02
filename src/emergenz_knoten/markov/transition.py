@@ -52,6 +52,8 @@ def transition_count_matrix(
         n_states = int(arr.max()) + 1
     if n_states < 1:
         raise ValueError("n_states must be positive")
+    if n_states <= int(arr.max()):
+        raise ValueError("n_states must exceed the maximum label")
 
     counts = np.zeros((n_states, n_states), dtype=float)
     for i in range(arr.size - sample_lag):

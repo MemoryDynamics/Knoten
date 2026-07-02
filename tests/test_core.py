@@ -110,6 +110,23 @@ def test_finite_memory_step_accepts_seeded_rng() -> None:
     )
 
 
+def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
+    invalid_cases = [
+        ({"sigma_rep": 0.0}, "sigma_rep"),
+        ({"sigma_att": 0.0}, "sigma_att"),
+        ({"memory_factor": 0.0}, "memory_factor"),
+        ({"burn_in": -1}, "burn_in"),
+    ]
+    for kwargs, expected in invalid_cases:
+        cfg = SimulationConfig(steps=10, **kwargs)
+        try:
+            simulate_finite_memory(cfg, seed=1)
+        except ValueError as exc:
+            assert expected in str(exc)
+        else:
+            raise AssertionError(f"expected ValueError for {expected}")
+
+
 def test_numba_reference_simulation_runs() -> None:
     try:
         import numba  # noqa: F401
@@ -124,6 +141,21 @@ def test_numba_reference_simulation_runs() -> None:
     assert result["weights"].shape[0] == result["memory"].shape[0]
 
 
+def test_numba_wrapper_reuses_config_validation() -> None:
+    try:
+        import numba  # noqa: F401
+    except ImportError:
+        return
+
+    cfg = SimulationConfig(steps=10, sigma_rep=0.0)
+    try:
+        simulate_finite_memory_numba(cfg, seed=42)
+    except ValueError as exc:
+        assert "sigma_rep" in str(exc)
+    else:
+        raise AssertionError("expected numba wrapper to validate sigma_rep")
+
+
 if __name__ == "__main__":
     test_covariance_dimension_synthetic_clouds()
     test_occupancy_dimension_line_is_finite()
@@ -131,4 +163,7 @@ if __name__ == "__main__":
     test_exponential_weights_are_finite_memory()
     test_reference_simulation_runs()
     test_finite_memory_step_accepts_seeded_rng()
+    test_simulation_config_rejects_invalid_scales_and_horizon()
+    test_numba_reference_simulation_runs()
+    test_numba_wrapper_reuses_config_validation()
     print("core tests ok")

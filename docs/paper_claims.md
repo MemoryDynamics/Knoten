@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -55,6 +55,8 @@ als spezifisch zweiskaliger Knotenmechanismus.
 Die Kernel-Shape-Probe praezisiert die Ablationssprache: `A_att=0` entfernt
 in der aktuellen Update-Konvention den breiten Gegenanteil, zerstoert aber
 nicht die lokale Restaurierung. `A_rep=0` ist die haertere Dispersionskontrolle.
+Der optisch rundere `A_rep=0`-Fall ist dabei kein Stabilitaetsbefund, sondern
+ein schwach rueckgekoppelter, breiterer Diffusionsfall.
 
 ## Paper II: Propagation and Spacetime Kinematics
 

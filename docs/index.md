@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -46,7 +46,8 @@ Kontrolltrennung.
 
 Die Kernel-Shape-Probe zeigt ausserdem: `A_att=0` ist in der aktuellen
 Euler-Konvention keine Zerfallskontrolle; `A_rep=0` ist die passendere
-Dispersionsablation.
+Dispersionsablation. Der Seedvergleich zeigt verschiedene konkrete Pfade,
+aber aehnliche lokale Schritt- und Turn-Metriken im Baseline-Regime.
 
 ## Nicht ueberclaimen
 

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 ## Repository
 
@@ -72,10 +72,14 @@ Kernel-Shape-Probe 2026-07-02: Code-Review bestaetigt, dass die Probe jetzt
 denselben `double_gaussian_gradient` wie der Paketkern nutzt. In der aktuellen
 Euler-Konvention wirkt `A_rep` lokal restaurierend, waehrend `A_att` diese
 Skala abschwaecht. Daher bleibt `A_att=0` kompakt (`mean radius 0.225`),
-waehrend `A_rep=0` deutlich diffundiert (`mean radius 6.620`). `strong_local`
-und `wide_strong` reduzieren den Radius auf `0.075`, erzeugen aber weiter
-keine runden Bahnen (`turn mean` etwa `-0.43`). Runde Trajektorien brauchen
-wahrscheinlich Persistenz, einen Inertialterm oder eine geglaettete Observable.
+waehrend `A_rep=0` deutlich diffundiert (`mean radius 6.620`). Die Baseline-
+Seedvergleiche `1..5` zeigen unterschiedliche Lage/Spannweite, aber aehnliche
+Schritt- und Turn-Metriken (`median step` etwa `0.110`, `turn mean` etwa
+`-0.34`). Der Grundverlauf ist daher eher Regime-/Kernel-getrieben als eine
+reine Seed-Kopie. `strong_local` und `wide_strong` reduzieren den Radius auf
+`0.075`, erzeugen aber weiter keine runden Bahnen (`turn mean` etwa `-0.43`).
+Runde sichtbare Trajektorien brauchen wahrscheinlich Persistenz, einen
+Inertialterm, tangentiale Drift oder eine geglaettete Center-Observable.
 
 ## Dimensionsbefund
 
@@ -119,6 +123,8 @@ Negativkontrollen gegeneinander pruefen.
    unterscheiden.
 3. Erst danach weitere einparametrige Kernel-Ablationen starten, z.B.
    `amplitude_rep = 0`, um die Rolle der einzelnen Kernelkomponenten zu klaeren.
+   Separat davon kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob
+   sichtbar runde Bahnen im aktuellen overdamped Modell ueberhaupt erwartbar sind.
 4. Paper-I-Evidenztabelle erst formulieren, wenn das Knotenkriterium und die
    naechsten Ablationen die gewaehlte Claim-Sprache tragen.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.

@@ -11,6 +11,7 @@ from emergenz_knoten.markov import (
     leading_nontrivial_eigenvalues,
     simulate_augmented_features,
     spectral_gap,
+    transition_count_matrix,
 )
 
 
@@ -62,6 +63,16 @@ def test_transfer_operator_reports_sample_and_update_lags() -> None:
     assert estimate.lag_updates == 10
     assert estimate.transition_matrix.shape[0] == 2
 
+
+def test_transition_count_matrix_rejects_too_few_states() -> None:
+    labels = np.array([0, 2, 1, 2])
+
+    try:
+        transition_count_matrix(labels, n_states=2)
+    except ValueError as exc:
+        assert "maximum label" in str(exc)
+    else:
+        raise AssertionError("expected ValueError for too-small n_states")
 
 def test_validation_helpers_on_simple_chain() -> None:
     p = np.array([[0.9, 0.1], [0.2, 0.8]])

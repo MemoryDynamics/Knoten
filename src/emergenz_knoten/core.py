@@ -48,8 +48,16 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("sample_every must be positive")
     if config.max_memory < 1:
         raise ValueError("max_memory must be positive")
-    if not 0.0 < config.alpha <= 1.0:
+    if config.burn_in < 0:
+        raise ValueError("burn_in must be non-negative")
+    if not np.isfinite(config.memory_factor) or config.memory_factor <= 0.0:
+        raise ValueError("memory_factor must be positive")
+    if not np.isfinite(config.alpha) or not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
+    if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
+        raise ValueError("sigma_rep must be positive")
+    if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:
+        raise ValueError("sigma_att must be positive")
 
 
 def _horizon(config: SimulationConfig) -> int:
@@ -281,6 +289,7 @@ def simulate_finite_memory_numba(
 ) -> dict[str, np.ndarray]:
     if not _NUMBA_AVAILABLE:
         raise ImportError("numba is not installed")
+    _validate_config(config)
     samples, sample_steps, x, history, weights, n_sample, filled = (
         _simulate_finite_memory_numba(
             config.steps,

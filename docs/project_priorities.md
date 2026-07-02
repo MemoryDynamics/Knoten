@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -66,6 +66,8 @@ Ergebnis:
   herunter, reduziert aber nicht das Noise/Drift-Verhaeltnis.
 - Kernel-Shape-Probe/Code-Review: `A_rep` ist in der aktuellen Konvention
   lokal restaurierend; `A_rep=0` ist die schaerfere Dispersionskontrolle.
+  Baseline-Seeds `1..5` liefern verschiedene Pfade, aber aehnliche
+  Schritt- und Turn-Metriken.
 
 Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
@@ -97,6 +99,9 @@ Naechster operativer Schritt:
    `eta A_att/sigma_att^2`.
 4. Danach Long-Run-`amplitude_rep = 0` als echte Dispersionsablation laufen lassen,
    nicht als blosse Symmetrie zu `single_scale`.
+5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
+   Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
+   nach optischer Rundheit zu durchsuchen.
 
 Wenn der Score traegt:
 

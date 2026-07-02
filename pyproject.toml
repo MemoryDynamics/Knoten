@@ -27,5 +27,8 @@ classifiers = [
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-packages = ["emergenz_knoten"]
 include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["emergenz_knoten*"]

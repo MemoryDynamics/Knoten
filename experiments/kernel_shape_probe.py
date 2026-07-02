@@ -5,6 +5,7 @@ from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 import html
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -39,6 +40,13 @@ DEFAULT_CASES = [
     ProbeCase("strong_local", 1.0, 3.0, 4.0, 0.35),
     ProbeCase("wide_strong", 2.0, 6.0, 16.0, 1.4),
 ]
+
+
+def _parse_int_list(value: str) -> list[int]:
+    values = [int(item.strip()) for item in value.split(",") if item.strip()]
+    if not values:
+        raise argparse.ArgumentTypeError("expected at least one integer")
+    return values
 
 
 def _git_output(args: list[str]) -> str:
@@ -168,12 +176,25 @@ def _project_isometric(coords: np.ndarray) -> np.ndarray:
     return np.column_stack([x2, y2])
 
 
-def _scale_to_panel(points: np.ndarray, x0: float, y0: float, width: float, height: float) -> np.ndarray:
-    mins = points.min(axis=0)
-    maxs = points.max(axis=0)
+def _panel_frame(cases: list[dict[str, Any]], panel_w: float, panel_h: float) -> tuple[np.ndarray, float, float]:
+    projected: list[np.ndarray] = []
+    for case in cases:
+        coords = np.asarray(case["projection"], dtype=float)
+        projected.append(_project_isometric(coords))
+    all_points = np.vstack(projected)
+    mins = all_points.min(axis=0)
+    maxs = all_points.max(axis=0)
     span = np.maximum(maxs - mins, 1e-12)
-    scale = 0.86 * min(width / span[0], height / span[1])
-    centered = points - 0.5 * (mins + maxs)
+    scale = 0.72 * min(panel_w / span[0], panel_h / span[1])
+    world_span = max(
+        float(max(np.max(np.abs(np.asarray(case["projection"], dtype=float))) for case in cases)),
+        1e-12,
+    )
+    return 0.5 * (mins + maxs), float(scale), world_span
+
+
+def _scale_projected_points(points: np.ndarray, x0: float, y0: float, width: float, height: float, center: np.ndarray, scale: float) -> np.ndarray:
+    centered = points - center[None, :]
     out = np.empty_like(points)
     out[:, 0] = x0 + 0.5 * width + centered[:, 0] * scale
     out[:, 1] = y0 + 0.5 * height + centered[:, 1] * scale
@@ -184,44 +205,83 @@ def _polyline(points: np.ndarray, *, decimals: int = 1) -> str:
     return " ".join(f"{x:.{decimals}f},{y:.{decimals}f}" for x, y in points)
 
 
-def _plot_cases_svg(cases: list[dict[str, Any]], figure_path: Path, *, rolling: int) -> None:
+def _nice_axis_unit(world_span: float) -> float:
+    raw = max(world_span / 4.0, 1e-9)
+    exponent = math.floor(math.log10(raw))
+    base = 10.0 ** exponent
+    for multiplier in (1.0, 2.0, 5.0, 10.0):
+        if raw <= multiplier * base:
+            return multiplier * base
+    return 10.0 * base
+
+
+def _draw_axis_triad(x: float, y: float, unit: float, scale: float) -> list[str]:
+    vectors = {
+        "x": (0.8660254038 * unit * scale, 0.5 * unit * scale, "#dc2626"),
+        "y": (-0.8660254038 * unit * scale, 0.5 * unit * scale, "#16a34a"),
+        "z": (0.0, -1.0 * unit * scale, "#2563eb"),
+    }
+    parts = [f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.3" fill="#0f172a"/>']
+    for label, (dx, dy, color) in vectors.items():
+        x2 = x + dx
+        y2 = y + dy
+        parts.extend(
+            [
+                f'<line x1="{x:.1f}" y1="{y:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{color}" stroke-width="1.4"/>',
+                f'<text x="{x2 + 4:.1f}" y="{y2 + 4:.1f}" font-family="Arial" font-size="10" fill="{color}">{label}</text>',
+            ]
+        )
+    parts.append(f'<text x="{x - 28:.1f}" y="{y + 30:.1f}" font-family="Arial" font-size="10" fill="#475569">axis unit={unit:.3g}</text>')
+    return parts
+
+
+def _plot_trajectories_svg(cases: list[dict[str, Any]], figure_path: Path, *, title: str, rolling: int) -> None:
     panel_w = 430
     panel_h = 360
     margin = 40
-    title_h = 46
-    width = panel_w * 2 + margin * 3
-    rows = int(np.ceil(len(cases) / 2))
+    title_h = 58
+    cols = 2
+    rows = int(np.ceil(len(cases) / cols))
+    width = panel_w * cols + margin * (cols + 1)
     height = (panel_h + title_h) * rows + margin * (rows + 1)
-    colors = ["#2563eb", "#16a34a", "#dc2626", "#7c3aed"]
+    colors = ["#2563eb", "#16a34a", "#dc2626", "#7c3aed", "#ea580c", "#0891b2", "#be123c"]
+    global_center, global_scale, world_span = _panel_frame(cases, panel_w, panel_h)
+    axis_unit = _nice_axis_unit(world_span)
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#f8fafc"/>',
-        '<text x="40" y="28" font-family="Arial" font-size="20" font-weight="700">Kernel Shape Probe: isometric 3D leading-coordinate projections</text>',
+        f'<text x="40" y="28" font-family="Arial" font-size="20" font-weight="700">{html.escape(title)}</text>',
+        f'<text x="40" y="48" font-family="Arial" font-size="12" fill="#475569">shared projected scale across panels; black=rolling mean, color=sampled path</text>',
     ]
     for idx, case in enumerate(cases):
-        row = idx // 2
-        col = idx % 2
+        row = idx // cols
+        col = idx % cols
         x0 = margin + col * (panel_w + margin)
-        y0 = margin + 18 + row * (panel_h + title_h + margin)
+        y0 = margin + 24 + row * (panel_h + title_h + margin)
         coords = np.asarray(case["projection"], dtype=float)
         stride = max(1, int(np.ceil(len(coords) / 2800)))
         plot_coords = coords[::stride]
         projected = _project_isometric(plot_coords)
-        scaled = _scale_to_panel(projected, x0, y0 + title_h, panel_w, panel_h)
+        scaled = _scale_projected_points(projected, x0, y0 + title_h, panel_w, panel_h, global_center, global_scale)
         smooth3 = _rolling_mean(plot_coords, rolling)
-        smooth = _scale_to_panel(_project_isometric(smooth3), x0, y0 + title_h, panel_w, panel_h)
+        smooth = _scale_projected_points(_project_isometric(smooth3), x0, y0 + title_h, panel_w, panel_h, global_center, global_scale)
         metrics = case["metrics"]
-        title = html.escape(case["name"])
+        spans = metrics["plot_span"]
+        title_text = html.escape(case["name"])
         color = colors[idx % len(colors)]
         parts.extend(
             [
                 f'<rect x="{x0}" y="{y0}" width="{panel_w}" height="{panel_h + title_h}" rx="6" fill="#ffffff" stroke="#cbd5e1"/>',
-                f'<text x="{x0 + 14}" y="{y0 + 24}" font-family="Arial" font-size="16" font-weight="700" fill="#0f172a">{title}</text>',
-                f'<text x="{x0 + 14}" y="{y0 + 43}" font-family="Arial" font-size="12" fill="#475569">R={metrics["mean_centered_radius"]:.3f}, turn={metrics["turn_cosine_mean"]:.3f}, path/chord={metrics["path_to_chord"]:.1f}</text>',
-                f'<polyline points="{_polyline(scaled)}" fill="none" stroke="{color}" stroke-width="0.7" stroke-opacity="0.40"/>',
-                f'<polyline points="{_polyline(smooth)}" fill="none" stroke="#020617" stroke-width="1.5" stroke-opacity="0.9"/>',
+                f'<text x="{x0 + 14}" y="{y0 + 24}" font-family="Arial" font-size="16" font-weight="700" fill="#0f172a">{title_text}</text>',
+                f'<text x="{x0 + 14}" y="{y0 + 43}" font-family="Arial" font-size="12" fill="#475569">R={metrics["mean_centered_radius"]:.3f}, step={metrics["median_sample_step"]:.3f}, turn={metrics["turn_cosine_mean"]:.3f}</text>',
+                f'<text x="{x0 + 14}" y="{y0 + 58}" font-family="Arial" font-size="11" fill="#64748b">span xyz={spans[0]:.2f}, {spans[1]:.2f}, {spans[2]:.2f}</text>',
+                f'<line x1="{x0 + 18}" y1="{y0 + title_h + panel_h * 0.5:.1f}" x2="{x0 + panel_w - 18}" y2="{y0 + title_h + panel_h * 0.5:.1f}" stroke="#e2e8f0" stroke-width="1"/>',
+                f'<line x1="{x0 + panel_w * 0.5:.1f}" y1="{y0 + title_h + 18}" x2="{x0 + panel_w * 0.5:.1f}" y2="{y0 + title_h + panel_h - 18}" stroke="#e2e8f0" stroke-width="1"/>',
+                f'<polyline points="{_polyline(scaled)}" fill="none" stroke="{color}" stroke-width="0.7" stroke-opacity="0.45"/>',
+                f'<polyline points="{_polyline(smooth)}" fill="none" stroke="#020617" stroke-width="1.6" stroke-opacity="0.95"/>',
             ]
         )
+        parts.extend(_draw_axis_triad(x0 + 55, y0 + title_h + panel_h - 54, axis_unit, global_scale))
     parts.append("</svg>")
     figure_path.parent.mkdir(parents=True, exist_ok=True)
     figure_path.write_text("\n".join(parts) + "\n", encoding="utf-8")
@@ -251,38 +311,26 @@ def _local_scales(config: SimulationConfig) -> dict[str, float]:
     }
 
 
-def build_report(payload: dict[str, Any]) -> str:
+def _entry_from_samples(name: str, config: SimulationConfig, samples: np.ndarray) -> dict[str, Any]:
+    if len(samples) < 3:
+        raise RuntimeError("not enough samples; decrease --sample-every or --burn-in")
+    projection, pca_energy = _pca_projection(samples)
+    return {
+        "name": name,
+        "config": asdict(config),
+        "metrics": _metrics(samples, projection),
+        "local_scales": _local_scales(config),
+        "pca_energy": pca_energy,
+        "projection": projection.astype(float).tolist(),
+    }
+
+
+def _results_table(cases: list[dict[str, Any]]) -> list[str]:
     lines = [
-        "# Kernel Shape Probe",
-        "",
-        f"Date: {payload['finished_utc']}.",
-        "",
-        "## Scope",
-        "",
-        "This is a targeted visual probe for smoother or rounder 3D trajectories.",
-        "It varies only kernel widths/amplitudes across a few motivated cases.",
-        "It is not a broad parameter sweep and not Paper-I evidence by itself.",
-        "",
-        "Important sign convention: in the current Euler update, the kernel",
-        "contributes a deterministic drift term `-eta (rep - att)`. With the",
-        "package convention, `A_rep` is locally restoring and `A_att` weakens",
-        "that restoring scale. The labels therefore name kernel components,",
-        "not directly the sign of the realized Euler displacement.",
-        "",
-        "The kernel does not impose a hard minimum step length; without inertia",
-        "or correlated noise the path can remain jagged even when it is",
-        "spatially confined.",
-        "",
-        "## Figure",
-        "",
-        f"![Kernel shape probe]({payload['figure_path']})",
-        "",
-        "## Results",
-        "",
         "| case | sigma_rep | sigma_att | A_rep | A_att | k_eff | mean radius | median step | turn mean | path/chord | PCA energy first 3 |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
-    for case in payload["cases"]:
+    for case in cases:
         metrics = case["metrics"]
         pca = ", ".join(f"{value:.2f}" for value in case["pca_energy"])
         lines.append(
@@ -295,6 +343,71 @@ def build_report(payload: dict[str, Any]) -> str:
             f"`{metrics['turn_cosine_mean']:.3f}` | "
             f"`{metrics['path_to_chord']:.1f}` | `{pca}` |"
         )
+    return lines
+
+
+def _seed_table(cases: list[dict[str, Any]]) -> list[str]:
+    lines = [
+        "| seed | mean radius | median step | turn mean | path/chord | span xyz |",
+        "| ---: | ---: | ---: | ---: | ---: | --- |",
+    ]
+    for case in cases:
+        metrics = case["metrics"]
+        spans = ", ".join(f"{value:.2f}" for value in metrics["plot_span"])
+        seed = case.get("seed", case["name"].replace("seed_", ""))
+        lines.append(
+            f"| `{seed}` | `{metrics['mean_centered_radius']:.3f}` | "
+            f"`{metrics['median_sample_step']:.4f}` | `{metrics['turn_cosine_mean']:.3f}` | "
+            f"`{metrics['path_to_chord']:.1f}` | `{spans}` |"
+        )
+    return lines
+
+
+def build_report(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Kernel Shape Probe",
+        "",
+        f"Date: {payload['finished_utc']}.",
+        "",
+        "## Scope",
+        "",
+        "This is a targeted visual probe for smoother or rounder 3D trajectories.",
+        "It varies only kernel widths/amplitudes across a few motivated cases.",
+        "It also compares baseline seeds to test whether the visible course is seed-specific.",
+        "It is not a broad parameter sweep and not Paper-I evidence by itself.",
+        "",
+        "Important sign convention: in the current Euler update, the kernel",
+        "contributes a deterministic drift term `-eta (rep - att)`. With the",
+        "package convention, `A_rep` is locally restoring and `A_att` weakens",
+        "that restoring scale. The labels therefore name kernel components,",
+        "not directly the sign of the realized Euler displacement.",
+        "",
+        "The kernel does not impose a hard minimum step length; without inertia",
+        "or correlated noise the path can remain jagged even when it is",
+        "spatially confined.",
+        "",
+        "## Figures",
+        "",
+        f"![Kernel shape probe]({payload['figure_path']})",
+        "",
+        f"![Kernel seed comparison]({payload['seed_figure_path']})",
+        "",
+        "Both SVGs use a shared projected scale within the figure. The black line",
+        "is a rolling mean of the same trajectory; the colored line is the raw",
+        "sampled path. Axis triads show the coordinate unit used in the projection.",
+        "",
+        "## Kernel Cases",
+        "",
+    ]
+    lines.extend(_results_table(payload["cases"]))
+    lines.extend(
+        [
+            "",
+            "## Seed Comparison",
+            "",
+        ]
+    )
+    lines.extend(_seed_table(payload["seed_cases"]))
     lines.extend(
         [
             "",
@@ -304,15 +417,16 @@ def build_report(payload: dict[str, Any]) -> str:
             "  and can remain compact because the `A_rep` component is the",
             "  locally restoring part of the Euler update.",
             "- `A_rep=0` leaves only the broad counter-term and is therefore the",
-            "  sharper ablation for dispersal in this convention.",
+            "  sharper ablation for dispersal in this convention. It can look rounder",
+            "  because the restoring feedback is weak and the path is closer to ordinary",
+            "  isotropic diffusion; roundness here is not knot stability.",
             "- Increasing local restoring scale changes confinement, but it does",
             "  not automatically create directionally persistent, round paths.",
             "- Co-scaling amplitudes with kernel width can leave the local",
             "  stiffness scale A/sigma^2 almost unchanged in compact regimes.",
-            "- If the scientific target is visibly smooth curves rather than compact",
-            "  residence, the model likely needs an additional mechanism such as",
-            "  persistent noise, an inertial/velocity variable, or a smoother",
-            "  coarse-grained trajectory observable.",
+            "- Truly round trajectories in the visible path likely need an added",
+            "  persistence mechanism: correlated noise, a velocity/inertial variable,",
+            "  rotational/tangential drift, or a smoother center-of-knot observable.",
             "",
         ]
     )
@@ -327,6 +441,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--burn-in", type=int, default=8_000)
     parser.add_argument("--sample-every", type=int, default=10)
     parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--compare-seeds", type=_parse_int_list, default=[1, 2, 3, 4, 5])
     parser.add_argument("--dim", type=int, default=3)
     parser.add_argument("--epsilon", type=float, default=0.03)
     parser.add_argument("--eta", type=float, default=0.15)
@@ -343,6 +458,11 @@ def parse_args() -> argparse.Namespace:
         "--figure",
         type=Path,
         default=Path("figures/draft/kernel_shape_probe_2026-07-01.svg"),
+    )
+    parser.add_argument(
+        "--seed-figure",
+        type=Path,
+        default=Path("figures/draft/kernel_seed_probe_2026-07-02.svg"),
     )
     parser.add_argument(
         "--report",
@@ -379,35 +499,48 @@ def main() -> None:
         config = _case_config(base, case)
         print(f"running case={case.name}", flush=True)
         samples = simulate_probe_numpy(config, seed=args.seed)
-        if len(samples) < 3:
-            raise RuntimeError("not enough samples; decrease --sample-every or --burn-in")
-        projection, pca_energy = _pca_projection(samples)
-        out_cases.append(
-            {
-                "name": case.name,
-                "config": asdict(config),
-                "metrics": _metrics(samples, projection),
-                "local_scales": _local_scales(config),
-                "pca_energy": pca_energy,
-                "projection": projection.astype(float).tolist(),
-            }
-        )
+        out_cases.append(_entry_from_samples(case.name, config, samples))
+
+    seed_cases = []
+    baseline = DEFAULT_CASES[0]
+    baseline_config = _case_config(base, baseline)
+    for seed in args.compare_seeds:
+        print(f"running seed comparison seed={seed}", flush=True)
+        samples = simulate_probe_numpy(baseline_config, seed=seed)
+        entry = _entry_from_samples(f"seed_{seed}", baseline_config, samples)
+        entry["seed"] = int(seed)
+        seed_cases.append(entry)
+
     figure = args.figure if args.figure.is_absolute() else ROOT / args.figure
-    _plot_cases_svg(out_cases, figure, rolling=args.rolling)
+    seed_figure = args.seed_figure if args.seed_figure.is_absolute() else ROOT / args.seed_figure
     output_json = args.output_json if args.output_json.is_absolute() else ROOT / args.output_json
     report = args.report if args.report.is_absolute() else ROOT / args.report
-    figure_path = Path(os.path.relpath(figure, report.parent)).as_posix()
+    _plot_trajectories_svg(
+        out_cases,
+        figure,
+        title="Kernel Shape Probe: scaled isometric 3D leading-coordinate projections",
+        rolling=args.rolling,
+    )
+    _plot_trajectories_svg(
+        seed_cases,
+        seed_figure,
+        title="Baseline Seed Comparison: scaled isometric 3D leading-coordinate projections",
+        rolling=args.rolling,
+    )
     payload: dict[str, Any] = {
-        "description": "Targeted kernel shape probe for 3D leading-coordinate trajectories.",
+        "description": "Targeted kernel shape and seed probe for 3D leading-coordinate trajectories.",
         "started_utc": started,
         "finished_utc": _utc_now(),
         "elapsed_seconds": float(time.perf_counter() - total_start),
         "git_revision": _git_output(["rev-parse", "--short", "HEAD"]),
         "git_status": _git_output(["status", "--short"]),
         "seed": int(args.seed),
+        "compare_seeds": [int(seed) for seed in args.compare_seeds],
         "base_config": asdict(base),
-        "figure_path": figure_path,
+        "figure_path": Path(os.path.relpath(figure, report.parent)).as_posix(),
+        "seed_figure_path": Path(os.path.relpath(seed_figure, report.parent)).as_posix(),
         "cases": out_cases,
+        "seed_cases": seed_cases,
     }
     output_json.parent.mkdir(parents=True, exist_ok=True)
     report.parent.mkdir(parents=True, exist_ok=True)
@@ -415,6 +548,7 @@ def main() -> None:
     report.write_text(build_report(payload), encoding="utf-8")
     print(f"wrote {output_json}", flush=True)
     print(f"wrote {figure}", flush=True)
+    print(f"wrote {seed_figure}", flush=True)
     print(f"wrote {report}", flush=True)
 
 

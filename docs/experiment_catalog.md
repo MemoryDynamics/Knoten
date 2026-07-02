@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-01.
+Stand: 2026-07-02.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -102,12 +102,30 @@ Punktueller 3D-Fuehrungskoordinaten-Run vom 2026-07-02:
 | `strong_local` | `1` | `3` | `4` | `0.35` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2746.5` |
 | `wide_strong` | `2` | `6` | `16` | `1.4` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2752.4` |
 
+Die zugehoerigen SVGs sind `figures/draft/kernel_shape_probe_2026-07-01.svg`
+und `figures/draft/kernel_seed_probe_2026-07-02.svg`. Beide nutzen innerhalb
+der jeweiligen Figur eine gemeinsame projektive Skala und zeigen eine
+isometrische 3D-Projektion der fuehrenden Koordinaten.
+
+Seedvergleich fuer den Baseline-Case:
+
+| seed | mean radius | median step | turn mean | span xyz |
+| ---: | ---: | ---: | ---: | --- |
+| `1` | `0.233` | `0.1099` | `-0.342` | `1.01, 0.78, 0.87` |
+| `2` | `0.318` | `0.1113` | `-0.351` | `1.08, 0.88, 1.16` |
+| `3` | `0.387` | `0.1100` | `-0.346` | `0.76, 0.95, 1.54` |
+| `4` | `0.474` | `0.1095` | `-0.340` | `1.75, 0.78, 0.97` |
+| `5` | `0.214` | `0.1099` | `-0.343` | `0.85, 0.98, 0.67` |
+
 Lesart: Die schwarze Linie in der Figur ist eine geglaettete Rolling-Mean-
 Trajektorie; die farbige Linie ist der roh gesampelte Pfad desselben Cases.
 `k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)` ist die lokale
 restaurierende Skala in der aktuellen Euler-Konvention. Deshalb zerfaellt
 `A_att=0` nicht: der `A_rep`-Anteil ist lokal bindend. Die schaerfere
 Dispersionskontrolle ist `A_rep=0`, die hier den Radius stark vergroessert.
+Der Baseline-Seedvergleich spricht fuer ein robustes kompaktes Regime, aber
+nicht fuer identische Trajektorien; Seed `5` zeigt zudem, dass `path/chord`
+bei sehr kleinem Endpunktabstand schlecht konditioniert sein kann.
 Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 ## Reproduzierbarkeitsregeln
