@@ -62,8 +62,9 @@ Ergebnis:
 - `baseline` ist kompakt und langlebig, aber seed-variabel.
 - `single_scale` ist ebenfalls kompakt und oft langlebiger als baseline. Es ist
   daher keine Negativkontrolle, sondern eine Kernelklassen-Ablation.
-- Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die Trajektorie
-  herunter, reduziert aber nicht das Noise/Drift-Verhaeltnis.
+- Epsilon-Step-Balance/Floor-Probe: `epsilon=0` friert den Nullstart ein;
+  positive Werte bis `1e-34` skalieren die Trajektorie herunter, reduzieren
+  aber nicht das Noise/Drift-Verhaeltnis.
 - Kernel-Shape-Probe/Code-Review: `A_rep` ist in der aktuellen Konvention
   lokal restaurierend; `A_rep=0` ist die schaerfere Dispersionskontrolle.
   Baseline-Seeds `1..5` liefern verschiedene Pfade, aber aehnliche
@@ -75,6 +76,11 @@ isoliert.
 
 ### P1.2 Knotenkriterium v0.2 definieren
 
+Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
+sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
+Knoten nur wegen eines guenstigen Voxels, Seeds oder Einzelplots akzeptiert
+wird.
+
 Akzeptanz fuer einen Paper-I-Befund:
 
 - Interagierende Bedingungen trennen sich klar von `eta_zero` in Residence und
@@ -83,8 +89,19 @@ Akzeptanz fuer einen Paper-I-Befund:
   passenden Kernel-Ablationen wie `single_scale`.
 - Residence-Ratios sind nicht nur ein Voxel-Artefakt, sondern stabil ueber
   mindestens mehrere feste Voxelgroessen.
+- Der Center-of-knot, z.B. Memory-Schwerpunkt, dominanter Residence-Voxel oder
+  geglaettetes externes Antwortzentrum, driftet deutlich langsamer als die rohe
+  Trajektorie.
+- Shape-/Radius-Metriken bleiben ueber mehrere Memory-Zeiten begrenzt.
+- Seed-Robustheit wird als Median/IQR ueber Seeds berichtet, nicht als bester
+  Seed.
 - Git-Revision, Seeds, Burn-in, Sampling und Runtime sind dokumentiert.
 - Ergebnis wird als Report committed, nicht nur als lokale JSON-Datei gelesen.
+
+Ein spaeterer skalarer Score kann daraus entstehen, etwa als normalisierte
+Kombination aus Residence, Kompaktheit, Voxel-Stabilitaet, Center-Stabilitaet,
+Seed-Robustheit und Kontrolltrennung. Fuer den naechsten Schritt reicht eine
+transparente Scorecard.
 
 ### P1.3 Danach entscheiden
 

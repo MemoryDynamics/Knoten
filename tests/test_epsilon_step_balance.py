@@ -30,3 +30,12 @@ def test_summarize_array_ignores_nonfinite_values() -> None:
     assert summary["n"] == 3
     assert summary["mean"] == pytest.approx(2.0)
     assert summary["median"] == pytest.approx(2.0)
+
+
+def test_report_format_helpers_handle_nonfinite_and_tiny_values() -> None:
+    assert epsilon_step_balance._fmt(None) == "`n/a`"
+    assert epsilon_step_balance._fmt(float("nan")) == "`n/a`"
+    assert epsilon_step_balance._fmt(1.0e-20) == "`1.000e-20`"
+    assert epsilon_step_balance._mean_finite(
+        [None, float("nan"), 2.0, 4.0]
+    ) == pytest.approx(3.0)

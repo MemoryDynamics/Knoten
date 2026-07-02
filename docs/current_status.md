@@ -68,6 +68,13 @@ bleibt der mediane Noise/Repulsion-Quotient nahe `3.6` und die mittlere
 Richtungskorrelation nahe `-0.071`. Kleineres `epsilon` allein macht den
 Lauf kleiner, aber nicht glatter oder drift-dominierter.
 
+Epsilon-Floor-Probe 2026-07-02: Bei `epsilon=0` und Nullstart friert der
+Prozess exakt ein (`zero-step fraction 1.0`). Fuer positive Werte bis
+`epsilon=1e-34` skalieren Noise, Drift, totaler Schritt und Radius linear mit,
+waehrend `noise/drift` nahe `3.74` und `turn mean` nahe `-0.071` bleiben.
+Damit ist `epsilon` in diesem Slice Symmetriebrecher und Skalenfaktor, aber
+kein Glattheitsregler.
+
 Kernel-Shape-Probe 2026-07-02: Code-Review bestaetigt, dass die Probe jetzt
 denselben `double_gaussian_gradient` wie der Paketkern nutzt. In der aktuellen
 Euler-Konvention wirkt `A_rep` lokal restaurierend, waehrend `A_att` diese

@@ -89,6 +89,20 @@ Lesart: Kleineres `epsilon` skaliert in diesem Slice Noise, Drift und Radius
 fast gemeinsam herunter. Es macht die Trajektorie kleiner, aber nicht glatter
 oder drift-dominierter. Report: `reports/epsilon_step_balance_2026-07-01.md`.
 
+Epsilon-Floor-Run vom 2026-07-02:
+
+| epsilon | median total step | median noise/drift | turn mean | zero-step fraction | mean radius |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| `0` | `0` | `n/a` | `n/a` | `1.000` | `0` |
+| `1e-5` | `1.594e-05` | `3.738` | `-0.071` | `0` | `2.351e-04` |
+| `1e-10` | `1.594e-10` | `3.738` | `-0.071` | `0` | `2.351e-09` |
+| `1e-20` | `1.594e-20` | `3.738` | `-0.071` | `0` | `2.351e-19` |
+| `1e-34` | `1.594e-34` | `3.738` | `-0.071` | `0` | `2.351e-33` |
+
+Lesart: Exakt `epsilon=0` ist fuer den Nullstart ein deterministischer
+Fixpunkt. Jedes positive getestete `epsilon` skaliert die Bewegung fast exakt
+linear, ohne die Richtungsstatistik zu glaetten. Report:
+`reports/epsilon_floor_probe_2026-07-02.md`.
 
 ## Kernel-Shape-Probe
 

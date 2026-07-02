@@ -23,8 +23,11 @@ dimension near three.
 
 A single-knot run should provide:
 
-- `x_center(t)`: coarse external center, for example a rolling mean or dominant
-  residence voxel center;
+- `x_center(t)`: coarse external center, for example a rolling mean, dominant
+  residence voxel center, memory centroid, or response center induced by an
+  external probe field;
+- `external_response(t)`: optional coarse field-facing observable, such as the
+  displacement of the knot center or shape under a weak applied probe;
 - `shape_tensor(t)`: covariance or inertia tensor around the current knot
   center;
 - `radius(t)`: scalar size proxy from the shape tensor;

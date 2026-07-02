@@ -127,6 +127,37 @@ def summarize_array(values: Iterable[float]) -> dict[str, float | int | None]:
     }
 
 
+def _as_finite(value: object) -> float | None:
+    if value is None:
+        return None
+    try:
+        out = float(value)
+    except (TypeError, ValueError):
+        return None
+    return out if np.isfinite(out) else None
+
+
+def _mean_finite(values: Iterable[object]) -> float | None:
+    finite = [_as_finite(value) for value in values]
+    arr = np.asarray([value for value in finite if value is not None], dtype=float)
+    if arr.size == 0:
+        return None
+    return float(np.mean(arr))
+
+
+def _fmt(value: object, *, digits: int = 3) -> str:
+    finite = _as_finite(value)
+    if finite is None:
+        return "`n/a`"
+    if finite == 0.0:
+        text = "0"
+    elif abs(finite) < 1.0e-3 or abs(finite) >= 1.0e4:
+        text = f"{finite:.{digits}e}"
+    else:
+        text = f"{finite:.{digits}f}"
+    return f"`{text}`"
+
+
 @njit(cache=True)
 def _simulate_step_balance_numba(
     steps: int,
@@ -280,6 +311,7 @@ def run_case(config: SimulationConfig, *, seed: int) -> dict[str, object]:
     centered = samples - samples.mean(axis=0, keepdims=True)
     radii = np.linalg.norm(centered, axis=1)
     increments = np.linalg.norm(np.diff(samples, axis=0), axis=1)
+    total_steps = metrics[:, METRIC_COLUMNS.index("total_step_norm")]
     return {
         "seed": int(seed),
         "epsilon": float(config.epsilon),
@@ -290,6 +322,9 @@ def run_case(config: SimulationConfig, *, seed: int) -> dict[str, object]:
         "mean_centered_radius": float(np.mean(radii)) if radii.size else None,
         "max_centered_radius": float(np.max(radii)) if radii.size else None,
         "mean_sample_increment": float(np.mean(increments)) if increments.size else None,
+        "zero_total_step_fraction": (
+            float(np.mean(total_steps == 0.0)) if total_steps.size else None
+        ),
         "metric_summary": metric_summary,
     }
 
@@ -297,9 +332,9 @@ def run_case(config: SimulationConfig, *, seed: int) -> dict[str, object]:
 def build_report(payload: dict[str, object]) -> str:
     cases = payload["cases"]
     assert isinstance(cases, list)
-    med_noise_rep = []
-    med_noise_drift = []
-    mean_turn = []
+    med_noise_rep: list[object] = []
+    med_noise_drift: list[object] = []
+    mean_turn: list[object] = []
     for case in cases:
         assert isinstance(case, dict)
         metrics = case["metric_summary"]
@@ -341,8 +376,8 @@ def build_report(payload: dict[str, object]) -> str:
         "",
         "## Results",
         "",
-        "| epsilon | median noise | median repulsive step | median net drift | median total step | median noise/repulsive | median noise/drift | mean turn cosine | mean radius |",
-        "| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| epsilon | median noise | median repulsive step | median net drift | median total step | median noise/repulsive | median noise/drift | mean turn cosine | zero-step fraction | mean radius |",
+        "| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for case in cases:
         assert isinstance(case, dict)
@@ -361,28 +396,38 @@ def build_report(payload: dict[str, object]) -> str:
         }
         turn = metrics["turn_cosine"]["mean"]
         lines.append(
-            f"| `{case['epsilon']:.5g}` | `{row['noise_norm']:.5f}` | "
-            f"`{row['repulsive_step_norm']:.5f}` | `{row['net_drift_norm']:.5f}` | "
-            f"`{row['total_step_norm']:.5f}` | `{row['noise_to_repulsive']:.3f}` | "
-            f"`{row['noise_to_net_drift']:.3f}` | `{turn:.3f}` | "
-            f"`{case['mean_centered_radius']:.3f}` |"
+            f"| `{case['epsilon']:.5g}` | {_fmt(row['noise_norm'])} | "
+            f"{_fmt(row['repulsive_step_norm'])} | {_fmt(row['net_drift_norm'])} | "
+            f"{_fmt(row['total_step_norm'])} | {_fmt(row['noise_to_repulsive'])} | "
+            f"{_fmt(row['noise_to_net_drift'])} | {_fmt(turn)} | "
+            f"{_fmt(case.get('zero_total_step_fraction'))} | "
+            f"{_fmt(case['mean_centered_radius'])} |"
         )
+    mean_noise_rep = _mean_finite(med_noise_rep)
+    mean_noise_drift = _mean_finite(med_noise_drift)
+    mean_turn_value = _mean_finite(mean_turn)
     lines.extend(
         [
             "",
             "## Observed Result",
             "",
-            "In this slice, lowering `epsilon` scales down the whole local motion",
-            "rather than changing the balance between stochastic and memory-induced",
-            "updates. The median `noise_to_repulsive` ratio remains near",
-            f"`{np.nanmean(med_noise_rep):.2f}`, and median `noise_to_net_drift`",
-            f"remains near `{np.nanmean(med_noise_drift):.2f}` across the tested",
-            "epsilon values.",
+            "For positive `epsilon` values in this slice, lowering `epsilon`",
+            "scales down the whole local motion rather than changing the balance",
+            "between stochastic and memory-induced updates. The median",
+            "`noise_to_repulsive` ratio remains near",
+            f"{_fmt(mean_noise_rep, digits=2)}, and median `noise_to_net_drift`",
+            f"remains near {_fmt(mean_noise_drift, digits=2)} across the tested",
+            "positive epsilon values.",
             "",
-            "The mean `turn_cosine` also remains essentially unchanged",
-            f"(`{np.nanmean(mean_turn):.3f}` on average). This indicates that",
-            "smaller `epsilon` alone makes a smaller trajectory, not a smoother",
-            "or more drift-dominated one.",
+            "The exact `epsilon=0` case is different: with the zero initial",
+            "state used here it remains at the deterministic fixed point, so no",
+            "memory gradient is seeded.",
+            "",
+            "The mean `turn_cosine` for positive epsilon values also remains",
+            "essentially unchanged",
+            f"({_fmt(mean_turn_value)} on average). This indicates that",
+            "smaller positive `epsilon` alone makes a smaller trajectory, not a",
+            "smoother or more drift-dominated one.",
             "",
             "In the current Euler update, the repulsive potential does not define",
             "a hard minimum step length. It defines a deterministic force contribution",
@@ -390,11 +435,13 @@ def build_report(payload: dict[str, object]) -> str:
             "",
             "## Reading",
             "",
-            "- `epsilon=0.03` is fluctuation-dominated if its median noise step is",
-            "  larger than the median net memory drift and comparable to or larger",
-            "  than the repulsive contribution.",
-            "- Lower `epsilon` values are interesting only if they reduce noise/drift",
-            "  ratios without merely freezing the trajectory.",
+            "- `epsilon=0` is a fixed-point control for the zero-start baseline:",
+            "  without stochastic novelty, no displacement and no memory gradient",
+            "  are generated.",
+            "- Positive `epsilon` values remain scale-equivalent in this slice:",
+            "  noise, drift, radius, and total step shrink together.",
+            "- Lower positive `epsilon` values are interesting only if they reduce",
+            "  noise/drift ratios without merely shrinking the trajectory.",
             "- `turn_cosine` close to zero means jagged random-walk-like directions;",
             "  larger positive values indicate smoother directional persistence.",
             "",

@@ -56,7 +56,7 @@ Experimentfokus ist ihre Haertung:
 - Voxel-/Feature-Sensitivitaet.
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
-- Epsilon-Step-Balance: kleineres `epsilon` allein skaliert die lokale Bewegung, macht sie aber in der getesteten Baseline nicht glatter.
+- Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und skalierter 3D-Fuehrungskoordinatenplot.
 - Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
