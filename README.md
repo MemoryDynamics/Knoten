@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-06-30.
+Stand: 2026-07-02.
 
 ## Worum es geht
 
@@ -37,12 +37,15 @@ Belastbar derzeit:
 - Paper 0 traegt als technischer Anker.
 - Die Markov-/Transferoperator-Schicht existiert initial unter
   `src/emergenz_knoten/markov/` und ist getestet.
-- Der erste Baseline-Long-Run mit `n=10^7` ist abgeschlossen und zeigt ein
-  starkes Residence-Signal.
+- Long-Run-Kontrollen mit Seeds `1..5` zeigen Feedback-Confinement gegenueber
+  `eta_zero`.
+- Knotenscore v0.4 trennt aktive Bedingungen im 1M-Shape-Pilot ueber Residence,
+  Kompaktheit und Memory-Cloud-Shape von der no-feedback-Kontrolle.
 
 Noch nicht belastbar:
 
-- robuste Knotenexistenz ohne Negativkontrollen und Seeds;
+- ein spezifisch zweiskaliger Baseline-Knotenmechanismus, weil `single_scale`
+  ebenfalls stark bleibt;
 - eindeutige `d=3`-Selektion;
 - harte endliche Signalgeschwindigkeit;
 - physikalische Massen oder Standardmodellclaims.
@@ -125,8 +128,10 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. `eta_zero` und `single_scale` als Long-Run-Kontrollen starten.
-2. Baseline gegen Kontrollen als Report auswerten.
-3. Danach weitere Seeds oder Sensitivitaeten entscheiden.
-4. Erst dann eine Paper-I-Evidenztabelle bauen.
+1. Knotenscore v0.4 als aktuelles Kandidatenkriterium verwenden.
+2. `amplitude_rep = 0` als echte Dispersionsablation im 1M-Shape-Pilot-Protokoll
+   gegenpruefen.
+3. Bei tragendem Score eine kleine 10M-Wiederholung fuer ausgewaehlte Seeds
+   vorbereiten.
+4. Erst danach eine Paper-I-Evidenztabelle bauen.
 5. Paper II/III bleiben Folgeprogramme.

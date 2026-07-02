@@ -16,7 +16,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
 | `experiments/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
-| `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.3 und Paper-I-Evidenzhygiene |
+| `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.3/v0.4 und Paper-I-Evidenzhygiene |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -182,6 +182,26 @@ Bedingungen aehnliche Sample-Rundheit zeigen. Die Memory-Cloud trennt dagegen
 aktive Feedbackbedingungen von `eta_zero`: deutlich kompakter, runder und
 hoeher dimensional. Baseline und `single_scale` bleiben auch hier praktisch
 nicht unterschieden.
+
+## Knotenscore v0.4
+
+Report vom 2026-07-02: `reports/knot_score_v0_4_shape_pilot_1M_2026-07-02.md`.
+
+v0.4 behaelt die vier v0.3-Komponenten bei und fuegt drei Memory-Cloud-
+Komponenten hinzu: Kompaktheit gegen `eta_zero`, Rundheits-Gain und
+Formdimensions-Gain. Der rohe Sample-Pfad bleibt Diagnostik, nicht
+Knotenform-Kriterium.
+
+| condition | score mean | score median | residence gain median | sample compactness median | voxel stability median | D_occ median | memory compactness median | memory roundness gain median | memory dimension gain median |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `0.900` | `0.929` | `2.150` | `14.740` | `0.451` | `1.846` | `5.208` | `2.110` | `1.634` |
+| `single_scale` | `0.886` | `0.857` | `1.843` | `15.314` | `0.357` | `1.847` | `5.321` | `2.117` | `1.637` |
+
+Lesart: v0.4 macht den Memory-Cloud-Knotenbegriff expliziter und trennt die
+aktiven Bedingungen klar von `eta_zero`. Es isoliert aber weiterhin keinen
+notwendigen zweiskaligen Baseline-Mechanismus, weil `single_scale` fast gleich
+stark bleibt. Der naechste Kontrollschritt ist daher `amplitude_rep = 0` als
+echte Dispersionsablation in genau demselben 1M-Shape-Pilot-Protokoll.
 
 ## Reproduzierbarkeitsregeln
 

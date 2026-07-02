@@ -74,9 +74,9 @@ Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
 isoliert.
 
-### P1.2 Knotenkriterium v0.3 definieren
+### P1.2 Knotenkriterium v0.3/v0.4 definieren
 
-Status: Scorecard v0.3 umgesetzt in `reports/knot_score_v0_3_2026-07-02.md`.
+Status: Scorecard v0.3 umgesetzt; v0.4 mit Memory-Cloud-Shape-Komponenten liegt als aktuelles Kandidatenkriterium vor.
 
 Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
 sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
@@ -109,17 +109,17 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Score v0.4 definieren: Memory-Cloud-Kompaktheit, Memory-Cloud-Rundheit und
-   Memory-Cloud-Formdimension als getrennte Kandidaten pruefen. Der rohe
-   Sample-Pfad soll zunaechst nur berichtet, nicht als Rundheitskriterium
-   gewertet werden.
-2. Scorecard v0.4 auf den vorhandenen 1M-Shape-Pilot anwenden und nur dann als
-   Paper-I-Evidenzkriterium nutzen, wenn die Schwellen transparent bleiben.
-3. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
+1. Score v0.4 als aktuelles Kandidatenkriterium behandeln. Es wertet Residence,
+   Sample-Kompaktheit, Voxel-Stabilitaet, `D_occ` und Memory-Cloud-Shape gegen
+   das seedgleiche `eta_zero`.
+2. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
    `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
    `eta A_att/sigma_att^2`.
-4. Danach Long-Run-`amplitude_rep = 0` als echte Dispersionsablation laufen lassen,
-   nicht als blosse Symmetrie zu `single_scale`.
+3. Danach `amplitude_rep = 0` als echte Dispersionsablation im gleichen
+   1M-Shape-Pilot-Protokoll laufen lassen, nicht als blosse Symmetrie zu
+   `single_scale`.
+4. Nur wenn v0.4 plus diese Ablation tragen, eine kleine 10M-Wiederholung fuer
+   ausgewaehlte Seeds vorbereiten und daraus eine Paper-I-Evidenztabelle bauen.
 5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
    Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
    nach optischer Rundheit zu durchsuchen.

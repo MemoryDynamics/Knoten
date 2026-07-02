@@ -116,6 +116,15 @@ und eine weniger runde, niedriger dimensionale Memory-Cloud (`roundness median
 ~0.33`, `dimension median ~1.64`). Damit spricht der Pilot klar dafuer, die
 Knotenform ueber die Memory-Cloud statt ueber den rohen Pfad zu bewerten.
 
+Knotenscore v0.4 2026-07-02: `reports/knot_score_v0_4_shape_pilot_1M_2026-07-02.md`
+erweitert v0.3 um Memory-Cloud-Kompaktheit, Memory-Cloud-Rundheits-Gain und
+Memory-Cloud-Formdimensions-Gain gegenueber dem seedgleichen `eta_zero`.
+Baseline erreicht im 1M-Shape-Pilot `score median 0.929`, `single_scale`
+`median 0.857`. Beide aktiven Bedingungen trennen sich damit klar von
+`eta_zero` in Residence, Kompaktheit und Memory-Cloud-Shape. Baseline bleibt
+gegenueber `single_scale` aber nicht isoliert; der Befund stuetzt also weiter
+Feedback-Confinement, noch keinen spezifisch zweiskaligen Mechanismus.
+
 ## Dimensionsbefund
 
 Belastbar aus dem Archiv:
@@ -151,16 +160,16 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Score v0.4 definieren: Memory-Cloud-Kompaktheit, Memory-Cloud-Rundheit und
-   Memory-Cloud-Formdimension als transparente Zusatzkomponenten pruefen.
-2. Scorecard v0.4 zuerst auf den vorhandenen 1M-Shape-Pilot anwenden; der rohe
-   Sample-Pfad bleibt zunaechst berichtete Diagnostik, nicht Rundheitskriterium.
-3. Erst danach weitere einparametrige Kernel-Ablationen starten, z.B.
-   `amplitude_rep = 0`, um die Rolle der einzelnen Kernelkomponenten zu klaeren.
-   Separat davon kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob
-   sichtbar runde Bahnen im aktuellen overdamped Modell ueberhaupt erwartbar sind.
-4. Paper-I-Evidenztabelle erst formulieren, wenn das Knotenkriterium und die
-   naechsten Ablationen die gewaehlte Claim-Sprache tragen.
+1. Score v0.4 als aktuelles Kandidatenkriterium verwenden: der rohe Sample-Pfad
+   bleibt berichtete Diagnostik, die Knotenform wird ueber die Memory-Cloud
+   gelesen.
+2. Als naechste einparametrige Kernel-Ablation `amplitude_rep = 0` gegen
+   denselben 1M-Shape-Pilot-Satz laufen lassen, weil dies die echte
+   Dispersionskontrolle in der aktuellen Kernelkonvention ist.
+3. Falls v0.4 plus `amplitude_rep = 0` tragen, eine kleine 10M-Wiederholung fuer
+   ausgewaehlte Seeds vorbereiten; erst danach Paper-I-Evidenztabelle.
+4. Separat kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob sichtbar
+   runde Bahnen im aktuellen overdamped Modell ueberhaupt erwartbar sind.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
 6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, sobald das
    Knotenkriterium stabil ist.

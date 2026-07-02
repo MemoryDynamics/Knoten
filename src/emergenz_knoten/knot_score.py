@@ -102,6 +102,41 @@ def shape_roundness_value(diagnostics: Mapping[str, Any]) -> float | None:
     return max(0.0, min(1.0, value))
 
 
+def memory_shape_value(diagnostics: Mapping[str, Any], key: str) -> float | None:
+    """Return one scalar from ``diagnostics.memory_cloud.shape``."""
+
+    memory_cloud = _mapping(diagnostics.get("memory_cloud"))
+    if memory_cloud is None:
+        return None
+    shape = _mapping(memory_cloud.get("shape"))
+    if shape is None:
+        return None
+    value = _as_finite(shape.get(key))
+    if value is None:
+        return None
+    if key == "axis_ratio_min_max":
+        return max(0.0, min(1.0, value))
+    return value if value > 0.0 else None
+
+
+def memory_mean_radius(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the mean radius of the weighted memory cloud."""
+
+    return memory_shape_value(diagnostics, "mean_radius")
+
+
+def memory_roundness_value(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the min/max axis ratio of the weighted memory cloud."""
+
+    return memory_shape_value(diagnostics, "axis_ratio_min_max")
+
+
+def memory_shape_dimension_value(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the covariance participation dimension of the memory cloud."""
+
+    return memory_shape_value(diagnostics, "effective_dimension")
+
+
 def _ratio(numerator: float | None, denominator: float | None) -> float | None:
     if numerator is None or denominator is None or denominator <= 0.0:
         return None
@@ -194,3 +229,81 @@ def score_against_control(
         "internal_dimension": internal_dimension,
         "shape_roundness": shape_roundness,
     }
+
+
+def score_v0_4_against_control(
+    case_diagnostics: Mapping[str, Any],
+    control_diagnostics: Mapping[str, Any],
+    *,
+    memory_compactness_partial_at: float = 2.0,
+    memory_compactness_pass_at: float = 3.0,
+    memory_roundness_partial_at: float = 1.2,
+    memory_roundness_pass_at: float = 1.5,
+    memory_dimension_partial_at: float = 1.15,
+    memory_dimension_pass_at: float = 1.35,
+) -> dict[str, float | None]:
+    """Score v0.4 with memory-cloud shape support.
+
+    This extends v0.3 by adding memory-cloud compactness, roundness gain, and
+    shape-dimension gain against the matched ``eta_zero`` control. The raw
+    sample path remains diagnostic output only; v0.4 treats the weighted memory
+    cloud as the candidate knot shape observable.
+    """
+
+    score = score_against_control(case_diagnostics, control_diagnostics)
+    case_memory_radius = memory_mean_radius(case_diagnostics)
+    control_memory_radius = memory_mean_radius(control_diagnostics)
+    case_memory_roundness = memory_roundness_value(case_diagnostics)
+    control_memory_roundness = memory_roundness_value(control_diagnostics)
+    case_memory_dimension = memory_shape_dimension_value(case_diagnostics)
+    control_memory_dimension = memory_shape_dimension_value(control_diagnostics)
+
+    memory_compactness_gain = _ratio(control_memory_radius, case_memory_radius)
+    memory_roundness_gain = _ratio(case_memory_roundness, control_memory_roundness)
+    memory_dimension_gain = _ratio(case_memory_dimension, control_memory_dimension)
+
+    memory_compactness_score = threshold_score(
+        memory_compactness_gain,
+        partial_at=memory_compactness_partial_at,
+        pass_at=memory_compactness_pass_at,
+    )
+    memory_roundness_score = threshold_score(
+        memory_roundness_gain,
+        partial_at=memory_roundness_partial_at,
+        pass_at=memory_roundness_pass_at,
+    )
+    memory_dimension_score = threshold_score(
+        memory_dimension_gain,
+        partial_at=memory_dimension_partial_at,
+        pass_at=memory_dimension_pass_at,
+    )
+    base_scores = [
+        float(score["residence_score"] or 0.0),
+        float(score["compactness_score"] or 0.0),
+        float(score["voxel_score"] or 0.0),
+        float(score["dimension_score"] or 0.0),
+    ]
+    memory_scores = [
+        memory_compactness_score,
+        memory_roundness_score,
+        memory_dimension_score,
+    ]
+    score.update(
+        {
+            "score": sum(base_scores + memory_scores) / 7.0,
+            "score_v0_3": score["score"],
+            "memory_compactness_score": memory_compactness_score,
+            "memory_roundness_score": memory_roundness_score,
+            "memory_dimension_score": memory_dimension_score,
+            "case_memory_radius": case_memory_radius,
+            "control_memory_radius": control_memory_radius,
+            "memory_compactness_gain": memory_compactness_gain,
+            "case_memory_roundness": case_memory_roundness,
+            "control_memory_roundness": control_memory_roundness,
+            "memory_roundness_gain": memory_roundness_gain,
+            "case_memory_dimension": case_memory_dimension,
+            "control_memory_dimension": control_memory_dimension,
+            "memory_dimension_gain": memory_dimension_gain,
+        }
+    )
+    return score

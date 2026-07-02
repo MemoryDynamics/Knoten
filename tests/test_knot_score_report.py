@@ -41,21 +41,32 @@ def _payload(condition: str, seed: int, *, radius: float, memory_roundness: floa
     }
 
 
-def test_shape_rows_include_eta_zero_controls() -> None:
-    cases = {
+def _cases() -> dict[tuple[str, int], object]:
+    return {
         ("baseline", 1): knot_score_report.CaseRecord(
-            "baseline", 1, Path("baseline.json"), _payload("baseline", 1, radius=1.0, memory_roundness=0.6)
+            "baseline",
+            1,
+            Path("baseline.json"),
+            _payload("baseline", 1, radius=1.0, memory_roundness=0.6),
         ),
         ("eta_zero", 1): knot_score_report.CaseRecord(
-            "eta_zero", 1, Path("eta_zero.json"), _payload("eta_zero", 1, radius=10.0, memory_roundness=0.3)
+            "eta_zero",
+            1,
+            Path("eta_zero.json"),
+            _payload("eta_zero", 1, radius=10.0, memory_roundness=0.3),
         ),
     }
 
-    rows = knot_score_report.build_rows(cases)
+
+def test_shape_rows_include_eta_zero_controls() -> None:
+    cases = _cases()
+
+    rows = knot_score_report.build_rows(cases, score_version="v0.3")
     shape_rows = knot_score_report.build_shape_rows(cases)
     report = knot_score_report.build_report(
         {
             "finished_utc": "2026-07-02T00:00:00Z",
+            "score_version": "v0.3",
             "rows": rows,
             "shape_rows": shape_rows,
         }
@@ -65,3 +76,24 @@ def test_shape_rows_include_eta_zero_controls() -> None:
     assert "| `eta_zero` |" in report
     assert "## Shape Summary" in report
     assert "memory roundness med" in report
+
+
+def test_v0_4_report_includes_memory_cloud_components() -> None:
+    cases = _cases()
+
+    rows = knot_score_report.build_rows(cases, score_version="v0.4")
+    shape_rows = knot_score_report.build_shape_rows(cases)
+    report = knot_score_report.build_report(
+        {
+            "finished_utc": "2026-07-02T00:00:00Z",
+            "score_version": "v0.4",
+            "rows": rows,
+            "shape_rows": shape_rows,
+        }
+    )
+
+    assert "# Knot Score v0.4 Report" in report
+    assert "memory-cloud compactness gain" in report
+    assert "memory roundness gain" in report
+    assert "components R/C/V/D/MC/MR/MD" in report
+    assert rows[0]["memory_compactness_score"] == 1.0
