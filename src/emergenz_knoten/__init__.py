@@ -22,6 +22,12 @@ from .experiments import (
     save_simulation_result,
 )
 from .kernels import double_gaussian_gradient, exponential_weights, gaussian_gradient
+from .knot_score import (
+    best_residence_memory_times,
+    score_against_control,
+    threshold_score,
+    voxel_stability_ratio,
+)
 from .synchronization import (
     LaggedCorrelationResult,
     ResponseRankResult,
@@ -38,6 +44,7 @@ __all__ = [
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
+    "best_residence_memory_times",
     "bootstrap_mean_ci",
     "covariance_dimension",
     "fit_occupancy_scaling_window",
@@ -54,8 +61,11 @@ __all__ = [
     "response_rank",
     "run_simulation",
     "save_simulation_result",
+    "score_against_control",
     "shape_tensor",
     "simulate_finite_memory",
     "simulate_finite_memory_numba",
     "spectral_dimension",
+    "threshold_score",
+    "voxel_stability_ratio",
 ]

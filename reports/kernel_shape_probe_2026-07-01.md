@@ -1,6 +1,6 @@
 # Kernel Shape Probe
 
-Date: 2026-07-02T01:56:16Z.
+Date: 2026-07-02T03:04:47Z.
 
 ## Scope
 
@@ -23,11 +23,17 @@ spatially confined.
 
 ![Kernel shape probe](../figures/draft/kernel_shape_probe_2026-07-01.svg)
 
+![Kernel shape probe flexible](../figures/draft/kernel_shape_probe_flexible_2026-07-02.svg)
+
 ![Kernel seed comparison](../figures/draft/kernel_seed_probe_2026-07-02.svg)
 
-Both SVGs use a shared projected scale within the figure. The black line
-is a rolling mean of the same trajectory; the colored line is the raw
-sampled path. Axis triads show the coordinate unit used in the projection.
+![Kernel seed comparison flexible](../figures/draft/kernel_seed_probe_flexible_2026-07-02.svg)
+
+The standard SVGs use a shared projected scale within the figure. The
+flexible SVGs use panel-specific scales and should be read for shape rather
+than absolute size. The black line is a rolling mean of the same trajectory;
+the colored line is the raw sampled path. Axis triads show the coordinate
+unit used in each projection.
 
 ## Kernel Cases
 

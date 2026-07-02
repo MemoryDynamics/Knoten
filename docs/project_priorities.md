@@ -76,6 +76,8 @@ isoliert.
 
 ### P1.2 Knotenkriterium v0.2 definieren
 
+Status: erste Scorecard umgesetzt in `reports/knot_score_v0_2_2026-07-02.md`.
+
 Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
 sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
 Knoten nur wegen eines guenstigen Voxels, Seeds oder Einzelplots akzeptiert
@@ -107,10 +109,10 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Robusteren Knotenscore auf bestehenden JSONs definieren:
-   Residence, Radius/Kompaktheit, Voxel-Stabilitaet, Seed-Robustheit.
-2. `long_run_metastability.py` um reduzierte Center-/Shape-Stabilitaetsmetriken
-   erweitern.
+1. `long_run_metastability.py` um reduzierte Center-/Shape-Stabilitaetsmetriken
+   erweitern, damit Knotenscore v0.3 echte Center-of-knot-Stabilitaet messen kann.
+2. Scorecard v0.2 danach auf neue Long-Run-JSONs anwenden und Center/Shape als
+   vierte/fuenfte Komponente ergaenzen.
 3. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
    `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
    `eta A_att/sigma_att^2`.

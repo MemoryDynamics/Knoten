@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="1414" viewBox="0 0 980 1414">
 <rect width="100%" height="100%" fill="#f8fafc"/>
-<text x="40" y="28" font-family="Arial" font-size="20" font-weight="700">Baseline Seed Comparison: scaled isometric 3D leading-coordinate projections</text>
+<text x="40" y="28" font-family="Arial" font-size="20" font-weight="700">Baseline Seed Comparison: shared-scale isometric 3D leading-coordinate projections</text>
 <text x="40" y="48" font-family="Arial" font-size="12" fill="#475569">shared projected scale across panels; black=rolling mean, color=sampled path</text>
 <rect x="40" y="64" width="430" height="418" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
 <text x="54" y="88" font-family="Arial" font-size="16" font-weight="700" fill="#0f172a">seed_1</text>

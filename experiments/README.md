@@ -15,7 +15,9 @@ python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 
 python experiments/anchor_paper_pipeline.py
 python experiments/anchor_sensitivity_analysis.py
 python experiments/epsilon_step_balance.py
+python experiments/epsilon_floor_visual_probe.py
 python experiments/kernel_shape_probe.py
+python experiments/knot_score_report.py
 ```
 
 ## Struktur
@@ -24,7 +26,9 @@ python experiments/kernel_shape_probe.py
 - `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
 - `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
+- `epsilon_floor_visual_probe.py`: flexible 3D-Visualisierung der Epsilon-Floor-Faelle.
 - `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden- und Seed-Probe mit skaliertem 3D-Fuehrungskoordinatenplot.
+- `knot_score_report.py`: Scorecard-Auswertung vorhandener Long-Run-JSONs.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -57,8 +61,9 @@ Experimentfokus ist ihre Haertung:
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
-- Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und skalierter 3D-Fuehrungskoordinatenplot.
-- Danach Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
+- Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
+- Knotenscore v0.2: Scorecard trennt Feedback-Confinement von `eta_zero`, isoliert aber keinen zweiskaligen Baseline-Mechanismus.
+- Danach Center-/Shape-Metriken fuer Long-Run-Outputs, Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

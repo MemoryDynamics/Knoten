@@ -73,7 +73,9 @@ Prozess exakt ein (`zero-step fraction 1.0`). Fuer positive Werte bis
 `epsilon=1e-34` skalieren Noise, Drift, totaler Schritt und Radius linear mit,
 waehrend `noise/drift` nahe `3.74` und `turn mean` nahe `-0.071` bleiben.
 Damit ist `epsilon` in diesem Slice Symmetriebrecher und Skalenfaktor, aber
-kein Glattheitsregler.
+kein Glattheitsregler. Eine flexible 3D-Visualisierung zeigt entsprechend
+form-aehnliche positive Epsilon-Faelle bei sehr unterschiedlichen absoluten
+Skalen.
 
 Kernel-Shape-Probe 2026-07-02: Code-Review bestaetigt, dass die Probe jetzt
 denselben `double_gaussian_gradient` wie der Paketkern nutzt. In der aktuellen
@@ -83,10 +85,20 @@ waehrend `A_rep=0` deutlich diffundiert (`mean radius 6.620`). Die Baseline-
 Seedvergleiche `1..5` zeigen unterschiedliche Lage/Spannweite, aber aehnliche
 Schritt- und Turn-Metriken (`median step` etwa `0.110`, `turn mean` etwa
 `-0.34`). Der Grundverlauf ist daher eher Regime-/Kernel-getrieben als eine
-reine Seed-Kopie. `strong_local` und `wide_strong` reduzieren den Radius auf
-`0.075`, erzeugen aber weiter keine runden Bahnen (`turn mean` etwa `-0.43`).
-Runde sichtbare Trajektorien brauchen wahrscheinlich Persistenz, einen
-Inertialterm, tangentiale Drift oder eine geglaettete Center-Observable.
+reine Seed-Kopie. Zusaetzlich liegen jetzt flexible SVGs mit panel-eigener
+Skala vor; sie sind fuer Formvergleich gedacht, nicht fuer absolute Groesse.
+`strong_local` und `wide_strong` reduzieren den Radius auf `0.075`, erzeugen
+aber weiter keine runden Bahnen (`turn mean` etwa `-0.43`). Runde sichtbare
+Trajektorien brauchen wahrscheinlich Persistenz, einen Inertialterm,
+tangentiale Drift oder eine geglaettete Center-Observable.
+
+Knotenscore v0.2 2026-07-02: Die Scorecard auf vorhandenen Long-Run-JSONs
+bewertet Residence-Gain, Kompaktheit gegenueber `eta_zero` und
+Voxel-Stabilitaet. Baseline erzielt `score mean 0.900`, `median 1.000`;
+`single_scale` erzielt ebenfalls hoch (`mean 0.833`, `median 0.833`). Damit
+traegt die Scorecard Feedback-Confinement gegenueber `eta_zero`, isoliert aber
+weiter keinen spezifisch zweiskaligen Baseline-Mechanismus. Center-/Shape-
+Stabilitaet fehlt noch, weil die alten JSONs keine Samples enthalten.
 
 ## Dimensionsbefund
 

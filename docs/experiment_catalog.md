@@ -14,7 +14,9 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
+| `experiments/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
+| `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.2 und Paper-I-Evidenzhygiene |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -101,8 +103,9 @@ Epsilon-Floor-Run vom 2026-07-02:
 
 Lesart: Exakt `epsilon=0` ist fuer den Nullstart ein deterministischer
 Fixpunkt. Jedes positive getestete `epsilon` skaliert die Bewegung fast exakt
-linear, ohne die Richtungsstatistik zu glaetten. Report:
-`reports/epsilon_floor_probe_2026-07-02.md`.
+linear, ohne die Richtungsstatistik zu glaetten. Reports:
+`reports/epsilon_floor_probe_2026-07-02.md` und
+`reports/epsilon_floor_visual_probe_2026-07-02.md`.
 
 ## Kernel-Shape-Probe
 
@@ -116,10 +119,13 @@ Punktueller 3D-Fuehrungskoordinaten-Run vom 2026-07-02:
 | `strong_local` | `1` | `3` | `4` | `0.35` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2746.5` |
 | `wide_strong` | `2` | `6` | `16` | `1.4` | `0.5942` | `0.075` | `0.0707` | `-0.430` | `2752.4` |
 
-Die zugehoerigen SVGs sind `figures/draft/kernel_shape_probe_2026-07-01.svg`
-und `figures/draft/kernel_seed_probe_2026-07-02.svg`. Beide nutzen innerhalb
-der jeweiligen Figur eine gemeinsame projektive Skala und zeigen eine
-isometrische 3D-Projektion der fuehrenden Koordinaten.
+Die zugehoerigen Shared-Scale-SVGs sind
+`figures/draft/kernel_shape_probe_2026-07-01.svg` und
+`figures/draft/kernel_seed_probe_2026-07-02.svg`. Zusaetzlich liegen flexible
+Varianten mit panel-eigener Skala unter
+`figures/draft/kernel_shape_probe_flexible_2026-07-02.svg` und
+`figures/draft/kernel_seed_probe_flexible_2026-07-02.svg`. Flexible Varianten
+zeigen Form, nicht absolute Groesse.
 
 Seedvergleich fuer den Baseline-Case:
 
@@ -141,6 +147,21 @@ Der Baseline-Seedvergleich spricht fuer ein robustes kompaktes Regime, aber
 nicht fuer identische Trajektorien; Seed `5` zeigt zudem, dass `path/chord`
 bei sehr kleinem Endpunktabstand schlecht konditioniert sein kann.
 Report: `reports/kernel_shape_probe_2026-07-01.md`.
+
+
+## Knotenscore v0.2
+
+Report vom 2026-07-02: `reports/knot_score_v0_2_2026-07-02.md`.
+
+| condition | n | score mean | score median | residence gain median | compactness gain median | voxel stability median |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `5` | `0.900` | `1.000` | `3.975` | `14.764` | `0.503` |
+| `single_scale` | `5` | `0.833` | `0.833` | `5.675` | `15.340` | `0.188` |
+
+Lesart: Der Score trennt interagierende Bedingungen klar von `eta_zero` in
+Residence und Kompaktheit. Er isoliert aber weiterhin keinen spezifisch
+zweiskaligen Baseline-Mechanismus, weil `single_scale` ebenfalls hoch scored.
+Center-/Shape-Stabilitaet ist in diesem Score noch nicht enthalten.
 
 ## Reproduzierbarkeitsregeln
 

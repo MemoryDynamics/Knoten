@@ -70,3 +70,9 @@ def test_local_scales_capture_current_sign_convention() -> None:
 
     assert kernel_shape_probe._local_scales(rep_only)["net_restoring_scale"] > 0.0
     assert kernel_shape_probe._local_scales(att_only)["net_restoring_scale"] < 0.0
+
+def test_metric_formatter_handles_degenerate_values() -> None:
+    assert kernel_shape_probe._fmt_metric(None) == "n/a"
+    assert kernel_shape_probe._fmt_metric(float("nan")) == "n/a"
+    assert kernel_shape_probe._fmt_metric(0.0) == "0"
+    assert kernel_shape_probe._fmt_metric(1.0e-20) == "1.000e-20"
