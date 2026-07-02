@@ -17,7 +17,7 @@ Stand: 2026-07-02.
 - `kernels.py`: exponentielle Memory-Gewichte und Gaussian-Kernelgradienten.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
-  Residence-Statistiken und Bootstrap-CI.
+  Residence-Statistiken, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
@@ -92,13 +92,16 @@ aber weiter keine runden Bahnen (`turn mean` etwa `-0.43`). Runde sichtbare
 Trajektorien brauchen wahrscheinlich Persistenz, einen Inertialterm,
 tangentiale Drift oder eine geglaettete Center-Observable.
 
-Knotenscore v0.2 2026-07-02: Die Scorecard auf vorhandenen Long-Run-JSONs
-bewertet Residence-Gain, Kompaktheit gegenueber `eta_zero` und
-Voxel-Stabilitaet. Baseline erzielt `score mean 0.900`, `median 1.000`;
-`single_scale` erzielt ebenfalls hoch (`mean 0.833`, `median 0.833`). Damit
-traegt die Scorecard Feedback-Confinement gegenueber `eta_zero`, isoliert aber
-weiter keinen spezifisch zweiskaligen Baseline-Mechanismus. Center-/Shape-
-Stabilitaet fehlt noch, weil die alten JSONs keine Samples enthalten.
+Knotenscore v0.3 2026-07-02: Die Scorecard auf vorhandenen Long-Run-JSONs
+bewertet Residence-Gain, Kompaktheit gegenueber `eta_zero`,
+Voxel-Stabilitaet und interne Occupancy-Dimension `D_occ`. Baseline erzielt
+`score mean 0.925`, `median 1.000`; `single_scale` erzielt ebenfalls hoch
+(`mean 0.875`, `median 0.875`). `D_occ` liegt bei beiden Bedingungen um
+`1.8` und dient derzeit als Nicht-Kollaps-Signal, nicht als externer
+3D-Nachweis. Die Scorecard traegt Feedback-Confinement gegenueber `eta_zero`,
+isoliert aber weiter keinen spezifisch zweiskaligen Baseline-Mechanismus. Neue
+Long-Run-Ausgaben schreiben jetzt `sample_shape` und `memory_cloud` mit; die
+archivierten 10M-JSONs enthalten diese Formmetriken noch nicht.
 
 ## Dimensionsbefund
 
@@ -135,11 +138,11 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Strengeres Knotenkriterium v0.2 definieren: Residence, Kompaktheit,
-   Voxel-Stabilitaet und Trennung von `eta_zero` gemeinsam bewerten.
-2. Long-Run-Ausgabe um reduzierte Center-/Shape-Stabilitaetsmetriken erweitern,
-   damit kuenftige Laeufe echte Lokalisierung besser von Voxel-Residence
-   unterscheiden.
+1. Knotenscore v0.3 auf ausgewaehlten neuen Long-Run-JSONs wiederholen,
+   damit `sample_shape` und `memory_cloud` erstmals numerisch in die Evidenz
+   eingehen.
+2. Formmetriken in v0.4 in den Score integrieren, sobald neue Runs dieselben
+   Bedingungen mit `sample_shape` und `memory_cloud` enthalten.
 3. Erst danach weitere einparametrige Kernel-Ablationen starten, z.B.
    `amplitude_rep = 0`, um die Rolle der einzelnen Kernelkomponenten zu klaeren.
    Separat davon kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob

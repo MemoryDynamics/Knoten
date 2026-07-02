@@ -17,6 +17,10 @@ def _as_finite(value: Any) -> float | None:
     return out if math.isfinite(out) else None
 
 
+def _mapping(value: Any) -> Mapping[str, Any] | None:
+    return value if isinstance(value, Mapping) else None
+
+
 def best_residence_memory_times(diagnostics: Mapping[str, Any]) -> float | None:
     """Return the largest max-residence value measured in memory times."""
 
@@ -62,6 +66,42 @@ def mean_centered_radius(diagnostics: Mapping[str, Any]) -> float | None:
     return value if value is not None and value > 0.0 else None
 
 
+def occupancy_dimension_value(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the preferred internal occupancy dimension diagnostic.
+
+    Newer long-run outputs contain an automatic scaling-window fit under
+    ``occupancy.scaling_window``. When that window is marked valid, it is used.
+    Older outputs only contain the historical top-level ``occupancy_dimension``;
+    those remain valid fallback inputs for retrospective scorecards.
+    """
+
+    occupancy = _mapping(diagnostics.get("occupancy"))
+    if occupancy is not None:
+        window = _mapping(occupancy.get("scaling_window"))
+        if window is not None and bool(window.get("valid_scaling")):
+            value = _as_finite(window.get("dimension"))
+            if value is not None and value > 0.0:
+                return value
+        value = _as_finite(occupancy.get("dimension"))
+        if value is not None and value > 0.0:
+            return value
+
+    value = _as_finite(diagnostics.get("occupancy_dimension"))
+    return value if value is not None and value > 0.0 else None
+
+
+def shape_roundness_value(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return a sample-cloud axis ratio when newer diagnostics contain it."""
+
+    sample_shape = _mapping(diagnostics.get("sample_shape"))
+    if sample_shape is None:
+        return None
+    value = _as_finite(sample_shape.get("axis_ratio_min_max"))
+    if value is None:
+        return None
+    return max(0.0, min(1.0, value))
+
+
 def _ratio(numerator: float | None, denominator: float | None) -> float | None:
     if numerator is None or denominator is None or denominator <= 0.0:
         return None
@@ -95,14 +135,16 @@ def score_against_control(
     compactness_pass_at: float = 5.0,
     voxel_partial_at: float = 0.15,
     voxel_pass_at: float = 0.25,
+    dimension_partial_at: float = 1.25,
+    dimension_pass_at: float = 1.5,
 ) -> dict[str, float | None]:
     """Score one case against a matched negative control.
 
-    The returned ``score`` is a transparent scorecard average of three available
-    components: residence gain over control, compactness gain over control, and
-    voxel stability. Center/shape stability is intentionally not included here
-    because the current archived long-run JSON files do not contain trajectory
-    samples.
+    The returned ``score`` averages four explicit components: residence gain
+    over control, compactness gain over control, voxel stability, and internal
+    occupancy dimension support. The dimension component deliberately does not
+    target external three-dimensionality; it only penalizes collapsed or nearly
+    one-dimensional internal support in single-knot diagnostics.
     """
 
     case_residence = best_residence_memory_times(case_diagnostics)
@@ -112,6 +154,8 @@ def score_against_control(
     residence_gain = _ratio(case_residence, control_residence)
     compactness_gain = _ratio(control_radius, case_radius)
     voxel_stability = voxel_stability_ratio(case_diagnostics)
+    internal_dimension = occupancy_dimension_value(case_diagnostics)
+    shape_roundness = shape_roundness_value(case_diagnostics)
 
     residence_score = threshold_score(
         residence_gain,
@@ -128,12 +172,18 @@ def score_against_control(
         partial_at=voxel_partial_at,
         pass_at=voxel_pass_at,
     )
-    score = (residence_score + compactness_score + voxel_score) / 3.0
+    dimension_score = threshold_score(
+        internal_dimension,
+        partial_at=dimension_partial_at,
+        pass_at=dimension_pass_at,
+    )
+    score = (residence_score + compactness_score + voxel_score + dimension_score) / 4.0
     return {
         "score": score,
         "residence_score": residence_score,
         "compactness_score": compactness_score,
         "voxel_score": voxel_score,
+        "dimension_score": dimension_score,
         "case_best_residence": case_residence,
         "control_best_residence": control_residence,
         "residence_gain": residence_gain,
@@ -141,4 +191,6 @@ def score_against_control(
         "control_mean_radius": control_radius,
         "compactness_gain": compactness_gain,
         "voxel_stability": voxel_stability,
+        "internal_dimension": internal_dimension,
+        "shape_roundness": shape_roundness,
     }

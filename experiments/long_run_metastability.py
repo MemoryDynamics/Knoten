@@ -19,8 +19,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from emergenz_knoten import (  # noqa: E402
     SimulationConfig,
     covariance_dimension,
+    fit_occupancy_scaling_window,
     occupancy_dimension,
     residence_statistics,
+    shape_statistics,
 )
 from emergenz_knoten.markov import vector_autocorrelation  # noqa: E402
 
@@ -172,7 +174,7 @@ def _simulate_circular_numba(
             sample_steps[n_sample] = step
             n_sample += 1
 
-    return samples[:n_sample], sample_steps[:n_sample], x, memory, weights, filled
+    return samples[:n_sample], sample_steps[:n_sample], x, memory, weights, filled, idx
 
 
 def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.ndarray]:
@@ -185,6 +187,7 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         memory,
         weights,
         filled,
+        idx,
     ) = _simulate_circular_numba(
         config.steps,
         config.dim,
@@ -201,11 +204,16 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         config.sample_every,
         seed,
     )
+    if filled > 0:
+        order = np.asarray([(idx - 1 - age) % memory.shape[0] for age in range(filled)])
+        ordered_memory = memory[order].copy()
+    else:
+        ordered_memory = memory[:0].copy()
     return {
         "samples": samples,
         "sample_steps": sample_steps,
         "final_x": final_x.copy(),
-        "memory": memory[:filled].copy(),
+        "memory": ordered_memory,
         "weights": weights[:filled].copy(),
     }
 
@@ -221,6 +229,40 @@ def _sample_span(samples: np.ndarray) -> list[float]:
     if samples.size == 0:
         return []
     return (samples.max(axis=0) - samples.min(axis=0)).astype(float).tolist()
+
+
+def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
+    details = occupancy_dimension(points, return_details=True)
+    window = fit_occupancy_scaling_window(
+        details.scales,
+        details.counts,
+        n_samples=len(points),
+    )
+    return {
+        "dimension": _finite_float(details.dimension),
+        "scales": details.scales.astype(float).tolist(),
+        "counts": details.counts.astype(float).tolist(),
+        "scaling_window": {
+            "dimension": _finite_float(window.dimension),
+            "start_index": int(window.start_index),
+            "stop_index": int(window.stop_index),
+            "r_squared": _finite_float(window.r_squared),
+            "local_slope_mean": _finite_float(window.local_slope_mean),
+            "local_slope_std": _finite_float(window.local_slope_std),
+            "log_width": _finite_float(window.log_width),
+            "n_points": int(window.n_points),
+            "valid_scaling": bool(window.valid_scaling),
+        },
+    }
+
+
+def _memory_cloud_diagnostics(memory: np.ndarray, weights: np.ndarray) -> dict[str, object] | None:
+    if len(memory) < 2:
+        return None
+    return {
+        "shape": shape_statistics(memory, weights=weights),
+        "occupancy": _occupancy_payload(memory),
+    }
 
 
 def metastability_diagnostics(
@@ -256,6 +298,8 @@ def metastability_diagnostics(
     increments = np.linalg.norm(np.diff(samples, axis=0), axis=1)
     centered = samples - samples.mean(axis=0, keepdims=True)
     radii = np.linalg.norm(centered, axis=1)
+    occupancy = _occupancy_payload(samples)
+    sample_shape = shape_statistics(samples)
 
     return {
         "n_samples": int(len(samples)),
@@ -267,7 +311,9 @@ def metastability_diagnostics(
         "mean_centered_radius": _finite_float(radii.mean()),
         "max_centered_radius": _finite_float(radii.max()),
         "covariance_dimension": _finite_float(covariance_dimension(samples)),
-        "occupancy_dimension": _finite_float(occupancy_dimension(samples)),
+        "occupancy_dimension": occupancy["dimension"],
+        "occupancy": occupancy,
+        "sample_shape": sample_shape,
         "autocorrelation": [_finite_float(value) for value in autocorrelation],
         "residence_by_voxel_size": voxel_results,
     }
@@ -300,6 +346,9 @@ def run_case(
         max_ac_lag=max_ac_lag,
         min_memory_times=min_memory_times,
     )
+    memory_cloud = _memory_cloud_diagnostics(result["memory"], result["weights"])
+    if memory_cloud is not None:
+        diagnostics["memory_cloud"] = memory_cloud
     payload: dict[str, object] = {
         "condition": condition,
         "seed": int(seed),
@@ -337,6 +386,19 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
             if isinstance(ratio, (float, int)) and math.isfinite(float(ratio)):
                 best_ratio = max(best_ratio, float(ratio))
             candidate = candidate or bool(metrics.get("candidate_long_lived"))
+        occupancy = diagnostics.get("occupancy")
+        occupancy_window = {}
+        if isinstance(occupancy, dict):
+            maybe_window = occupancy.get("scaling_window")
+            if isinstance(maybe_window, dict):
+                occupancy_window = maybe_window
+        sample_shape = diagnostics.get("sample_shape")
+        if not isinstance(sample_shape, dict):
+            sample_shape = {}
+        memory_cloud = diagnostics.get("memory_cloud")
+        memory_shape = {}
+        if isinstance(memory_cloud, dict) and isinstance(memory_cloud.get("shape"), dict):
+            memory_shape = memory_cloud["shape"]
         rows.append(
             {
                 "condition": case["condition"],
@@ -346,6 +408,12 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "steps_per_second": case["steps_per_second"],
                 "covariance_dimension": diagnostics["covariance_dimension"],
                 "occupancy_dimension": diagnostics["occupancy_dimension"],
+                "occupancy_window_dimension": occupancy_window.get("dimension"),
+                "occupancy_window_valid": occupancy_window.get("valid_scaling"),
+                "sample_shape_dimension": sample_shape.get("effective_dimension"),
+                "sample_axis_ratio_min_max": sample_shape.get("axis_ratio_min_max"),
+                "memory_shape_dimension": memory_shape.get("effective_dimension"),
+                "memory_axis_ratio_min_max": memory_shape.get("axis_ratio_min_max"),
                 "best_max_residence_memory_times": best_ratio,
                 "candidate_long_lived": candidate,
             }

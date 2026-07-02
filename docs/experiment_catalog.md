@@ -10,13 +10,13 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.2 und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3/v0.4 und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
 | `experiments/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
-| `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.2 und Paper-I-Evidenzhygiene |
+| `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.3 und Paper-I-Evidenzhygiene |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -149,19 +149,25 @@ bei sehr kleinem Endpunktabstand schlecht konditioniert sein kann.
 Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 
-## Knotenscore v0.2
+## Knotenscore v0.3
 
-Report vom 2026-07-02: `reports/knot_score_v0_2_2026-07-02.md`.
+Report vom 2026-07-02: `reports/knot_score_v0_3_2026-07-02.md`.
 
-| condition | n | score mean | score median | residence gain median | compactness gain median | voxel stability median |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `baseline` | `5` | `0.900` | `1.000` | `3.975` | `14.764` | `0.503` |
-| `single_scale` | `5` | `0.833` | `0.833` | `5.675` | `15.340` | `0.188` |
+Der Score mittelt aktuell vier Komponenten: Residence-Gain, Kompaktheit gegen
+`eta_zero`, Voxel-Stabilitaet und interne Occupancy-Dimension `D_occ`. `D_occ`
+ist ein Nicht-Kollaps-/Innenraum-Signal, kein externer 3D-Nachweis.
+
+| condition | n | score mean | score median | residence gain median | compactness gain median | voxel stability median | D_occ median |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `baseline` | `5` | `0.925` | `1.000` | `3.975` | `14.764` | `0.503` | `1.815` |
+| `single_scale` | `5` | `0.875` | `0.875` | `5.675` | `15.340` | `0.188` | `1.816` |
 
 Lesart: Der Score trennt interagierende Bedingungen klar von `eta_zero` in
-Residence und Kompaktheit. Er isoliert aber weiterhin keinen spezifisch
-zweiskaligen Baseline-Mechanismus, weil `single_scale` ebenfalls hoch scored.
-Center-/Shape-Stabilitaet ist in diesem Score noch nicht enthalten.
+Residence und Kompaktheit. `D_occ` bestaetigt nicht-kollabierte interne
+Ausdehnung, trennt aber Baseline und `single_scale` nicht. Der spezifisch
+zweiskalige Baseline-Mechanismus ist daher weiterhin nicht isoliert. Neue
+Long-Run-JSONs enthalten nun `sample_shape` und `memory_cloud`; die alten
+10M-JSONs enthalten diese Formmetriken noch nicht.
 
 ## Reproduzierbarkeitsregeln
 

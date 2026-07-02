@@ -74,9 +74,9 @@ Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
 isoliert.
 
-### P1.2 Knotenkriterium v0.2 definieren
+### P1.2 Knotenkriterium v0.3 definieren
 
-Status: erste Scorecard umgesetzt in `reports/knot_score_v0_2_2026-07-02.md`.
+Status: Scorecard v0.3 umgesetzt in `reports/knot_score_v0_3_2026-07-02.md`.
 
 Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
 sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
@@ -109,10 +109,12 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. `long_run_metastability.py` um reduzierte Center-/Shape-Stabilitaetsmetriken
-   erweitern, damit Knotenscore v0.3 echte Center-of-knot-Stabilitaet messen kann.
-2. Scorecard v0.2 danach auf neue Long-Run-JSONs anwenden und Center/Shape als
-   vierte/fuenfte Komponente ergaenzen.
+1. Ausgewaehlten kleinen Long-Run-Satz mit der neuen JSON-Struktur laufen
+   lassen: mindestens `baseline`, `eta_zero`, `single_scale`, Seeds `1..5`,
+   damit `sample_shape` und `memory_cloud` vergleichbar vorliegen.
+2. Scorecard v0.3 auf diese neuen JSONs anwenden und daraus v0.4 ableiten:
+   Form/Rundheit und Memory-Cloud-Stabilitaet nur dann in den Skalar aufnehmen,
+   wenn sie ueber Bedingungen und Seeds robust genug sind.
 3. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
    `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
    `eta A_att/sigma_att^2`.

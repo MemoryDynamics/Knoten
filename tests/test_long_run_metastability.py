@@ -64,3 +64,7 @@ def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     assert residence["max_residence_memory_times"] == 5.0
     assert residence["candidate_long_lived"] is True
     assert len(diagnostics["autocorrelation"]) == 3
+    assert "occupancy" in diagnostics
+    assert "scaling_window" in diagnostics["occupancy"]
+    assert "sample_shape" in diagnostics
+    assert diagnostics["sample_shape"]["effective_dimension"] is not None

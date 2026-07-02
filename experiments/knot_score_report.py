@@ -148,38 +148,44 @@ def build_rows(cases: dict[tuple[str, int], CaseRecord]) -> list[dict[str, Any]]
 def build_report(payload: dict[str, Any]) -> str:
     rows = payload["rows"]
     lines = [
-        "# Knot Score v0.2 Report",
+        "# Knot Score v0.3 Report",
         "",
         f"Date: {payload['finished_utc']}.",
         "",
         "## Scope",
         "",
-        "This report applies a first scorecard-style knot criterion to the existing",
+        "This report applies a scorecard-style knot criterion to the existing",
         "matched long-run JSON files. It does not rerun simulations and it does not",
         "claim a final scalar knot definition.",
         "",
-        "The current score averages three available components against the matched",
+        "The current score averages four available components against the matched",
         "`eta_zero` seed control:",
         "",
         "- residence gain over control, pass at `>=3`, partial at `>=2`;",
         "- compactness gain, defined as `eta_zero radius / case radius`, pass at `>=5`, partial at `>=3`;",
-        "- voxel stability, defined as min/max residence across voxel sizes, pass at `>=0.25`, partial at `>=0.15`.",
+        "- voxel stability, defined as min/max residence across voxel sizes, pass at `>=0.25`, partial at `>=0.15`;",
+        "- internal occupancy dimension `D_occ`, pass at `>=1.5`, partial at `>=1.25`.",
         "",
-        "Center/shape stability is not scored here because the archived JSON files do",
-        "not contain trajectory samples. Future long-run outputs should add these",
-        "observables before this becomes a Paper-I evidence table.",
+        "The `D_occ` component is an internal-dimensional-support signal, not an",
+        "external three-dimensionality criterion. Shape roundness is reported where",
+        "available, but it is not yet included in the scalar score because the",
+        "archived 10M JSON files predate the new center/shape diagnostics.",
         "",
         "## Seed Scorecard",
         "",
-        "| condition | seed | score | residence gain | compactness gain | voxel stability | best residence | radius | components R/C/V |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+        "| condition | seed | score | residence gain | compactness gain | voxel stability | D_occ | roundness | best residence | radius | components R/C/V/D |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for row in rows:
-        components = f"{row['residence_score']:.1f}/{row['compactness_score']:.1f}/{row['voxel_score']:.1f}"
+        components = (
+            f"{row['residence_score']:.1f}/{row['compactness_score']:.1f}/"
+            f"{row['voxel_score']:.1f}/{row['dimension_score']:.1f}"
+        )
         lines.append(
             f"| `{row['condition']}` | `{row['seed']}` | {_fmt(row['score'])} | "
             f"{_fmt(row['residence_gain'])} | {_fmt(row['compactness_gain'])} | "
-            f"{_fmt(row['voxel_stability'])} | {_fmt(row['case_best_residence'])} | "
+            f"{_fmt(row['voxel_stability'])} | {_fmt(row['internal_dimension'])} | "
+            f"{_fmt(row['shape_roundness'])} | {_fmt(row['case_best_residence'])} | "
             f"{_fmt(row['case_mean_radius'])} | `{components}` |"
         )
 
@@ -190,18 +196,28 @@ def build_report(payload: dict[str, Any]) -> str:
         "",
         "## Condition Summary",
         "",
-        "| condition | n | score mean | score median | residence gain median | compactness gain median | voxel stability median |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| condition | n | score mean | score median | residence gain median | compactness gain median | voxel stability median | D_occ median |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ])
     for condition, condition_rows in sorted(grouped.items()):
         score_summary = _summary([row["score"] for row in condition_rows])
-        residence_summary = _summary([row["residence_gain"] for row in condition_rows if row["residence_gain"] is not None])
-        compact_summary = _summary([row["compactness_gain"] for row in condition_rows if row["compactness_gain"] is not None])
-        voxel_summary = _summary([row["voxel_stability"] for row in condition_rows if row["voxel_stability"] is not None])
+        residence_summary = _summary([
+            row["residence_gain"] for row in condition_rows if row["residence_gain"] is not None
+        ])
+        compact_summary = _summary([
+            row["compactness_gain"] for row in condition_rows if row["compactness_gain"] is not None
+        ])
+        voxel_summary = _summary([
+            row["voxel_stability"] for row in condition_rows if row["voxel_stability"] is not None
+        ])
+        dimension_summary = _summary([
+            row["internal_dimension"] for row in condition_rows if row["internal_dimension"] is not None
+        ])
         lines.append(
             f"| `{condition}` | `{score_summary['n']}` | {_fmt(score_summary['mean'])} | "
             f"{_fmt(score_summary['median'])} | {_fmt(residence_summary['median'])} | "
-            f"{_fmt(compact_summary['median'])} | {_fmt(voxel_summary['median'])} |"
+            f"{_fmt(compact_summary['median'])} | {_fmt(voxel_summary['median'])} | "
+            f"{_fmt(dimension_summary['median'])} |"
         )
 
     baseline = grouped.get("baseline", [])
@@ -220,26 +236,26 @@ def build_report(payload: dict[str, Any]) -> str:
             "## Reading",
             "",
             "- High score means the condition separates from the no-feedback",
-            "  `eta_zero` control for that seed in residence, compactness, and voxel",
-            "  stability.",
-            "- This is a feedback-confinement score, not yet a proof of a specific",
-            "  two-scale knot mechanism.",
+            "  `eta_zero` control for that seed in residence, compactness, voxel",
+            "  stability, and non-collapsed internal occupancy dimension.",
+            "- This is a feedback-confinement plus internal-dimensional-support score,",
+            "  not yet a proof of a specific two-scale knot mechanism.",
             f"- Baseline minus `single_scale` score difference has median {_fmt(paired_summary['median'])};",
             "  therefore the current score still does not isolate the baseline two-scale",
             "  kernel as necessary.",
-            "- The next implementation step is to add center-of-knot and shape stability",
-            "  metrics to future long-run JSON files, then rerun this scorecard.",
+            "- New long-run outputs now include center/shape diagnostics, but the archived",
+            "  10M JSON files do not; the next evidence step is to rerun selected cases",
+            "  and compare sample-shape versus memory-cloud shape.",
             "",
         ]
     )
     return "\n".join(lines)
 
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Score existing long-run knot evidence JSON files.")
     parser.add_argument("--source-dir", action="append", default=[], help="Source directory or comma-separated directories with case_*.json files.")
-    parser.add_argument("--report", type=Path, default=Path("reports/knot_score_v0_2_2026-07-02.md"))
-    parser.add_argument("--output-json", type=Path, default=Path("data/processed/knot_score/2026-07-02_v0_2/summary.json"))
+    parser.add_argument("--report", type=Path, default=Path("reports/knot_score_v0_3_2026-07-02.md"))
+    parser.add_argument("--output-json", type=Path, default=Path("data/processed/knot_score/2026-07-02_v0_3/summary.json"))
     return parser.parse_args()
 
 
@@ -249,7 +265,7 @@ def main() -> None:
     cases = load_cases(source_dirs)
     rows = build_rows(cases)
     payload = {
-        "description": "Knot score v0.2 scorecard on existing long-run JSON files.",
+        "description": "Knot score v0.3 scorecard on existing long-run JSON files.",
         "finished_utc": _utc_now(),
         "git_revision": _git_output(["rev-parse", "--short", "HEAD"]),
         "git_status": _git_output(["status", "--short"]),

@@ -16,6 +16,7 @@ from emergenz_knoten import (
     occupancy_dimension,
     occupancy_local_slopes,
     residence_statistics,
+    shape_statistics,
     simulate_finite_memory,
     simulate_finite_memory_numba,
 )
@@ -40,6 +41,24 @@ def test_occupancy_dimension_line_is_finite() -> None:
     value = occupancy_dimension(line)
     assert np.isfinite(value)
     assert 0.7 <= value <= 1.3
+
+
+def test_shape_statistics_detects_weighted_center_and_roundness() -> None:
+    points = np.array(
+        [
+            [-1.0, 0.0],
+            [1.0, 0.0],
+            [0.0, -1.0],
+            [0.0, 1.0],
+        ]
+    )
+    stats = shape_statistics(points, weights=[1.0, 1.0, 1.0, 3.0])
+
+    assert stats["center"] == [0.0, 1.0 / 3.0]
+    assert stats["effective_dimension"] is not None
+    assert 1.5 <= float(stats["effective_dimension"]) <= 2.0
+    assert stats["axis_ratio_min_max"] is not None
+    assert 0.5 <= float(stats["axis_ratio_min_max"]) <= 1.0
 
 
 def test_occupancy_scaling_window_skips_sample_saturation() -> None:
@@ -159,6 +178,7 @@ def test_numba_wrapper_reuses_config_validation() -> None:
 if __name__ == "__main__":
     test_covariance_dimension_synthetic_clouds()
     test_occupancy_dimension_line_is_finite()
+    test_shape_statistics_detects_weighted_center_and_roundness()
     test_residence_statistics_counts_repeated_voxels()
     test_exponential_weights_are_finite_memory()
     test_reference_simulation_runs()

@@ -28,7 +28,7 @@ python experiments/knot_score_report.py
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
 - `epsilon_floor_visual_probe.py`: flexible 3D-Visualisierung der Epsilon-Floor-Faelle.
 - `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden- und Seed-Probe mit skaliertem 3D-Fuehrungskoordinatenplot.
-- `knot_score_report.py`: Scorecard-Auswertung vorhandener Long-Run-JSONs.
+- `knot_score_report.py`: Scorecard-Auswertung vorhandener Long-Run-JSONs mit `D_occ`-Komponente.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -62,8 +62,8 @@ Experimentfokus ist ihre Haertung:
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
-- Knotenscore v0.2: Scorecard trennt Feedback-Confinement von `eta_zero`, isoliert aber keinen zweiskaligen Baseline-Mechanismus.
-- Danach Center-/Shape-Metriken fuer Long-Run-Outputs, Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
+- Knotenscore v0.3: Scorecard trennt Feedback-Confinement von `eta_zero`; `D_occ` dient als internes Nicht-Kollaps-Signal, isoliert aber keinen zweiskaligen Baseline-Mechanismus.
+- Danach v0.3 auf neue Long-Run-Outputs mit `sample_shape`/`memory_cloud` anwenden, Single-Knot-Observable-Extractor und Zwei-Knoten-Synchronisationspilot.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

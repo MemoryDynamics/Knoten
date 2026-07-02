@@ -49,6 +49,91 @@ def covariance_dimension(
     return s1 * s1 / s2
 
 
+def _finite_float(value: float | np.floating | None) -> float | None:
+    if value is None:
+        return None
+    out = float(value)
+    return out if np.isfinite(out) else None
+
+
+def _weighted_covariance(points: np.ndarray, weights: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    total = float(weights.sum())
+    if total <= 0.0 or not np.isfinite(total):
+        raise ValueError("weights must have positive finite mass")
+    normalized = weights / total
+    center = np.sum(points * normalized[:, None], axis=0)
+    centered = points - center
+    cov = centered.T @ (centered * normalized[:, None])
+    return center, cov
+
+
+def shape_statistics(
+    points: Iterable[Iterable[float]],
+    *,
+    weights: Iterable[float] | None = None,
+    rtol: float = 1e-12,
+) -> dict[str, object]:
+    """Return center, radius, anisotropy, and effective shape dimension.
+
+    This diagnostic treats the supplied points as a sampled cloud. If weights
+    are provided, they are interpreted as nonnegative memory weights aligned
+    with the points. The returned axis ratios are one for a spherical cloud and
+    approach zero for collapsed or strongly elongated clouds.
+    """
+
+    pts = _as_points(points)
+    if weights is None:
+        w = np.ones(len(pts), dtype=float)
+    else:
+        w = np.asarray(list(weights), dtype=float)
+        if w.ndim != 1 or w.size != len(pts):
+            raise ValueError("weights must be a 1D array matching points")
+        if np.any(~np.isfinite(w)) or np.any(w < 0.0):
+            raise ValueError("weights must be finite and nonnegative")
+
+    center, cov = _weighted_covariance(pts, w)
+    centered = pts - center
+    radii = np.linalg.norm(centered, axis=1)
+    eig = np.linalg.eigvalsh(cov)
+    eig = np.maximum(eig, 0.0)
+    eig_desc = eig[::-1]
+    eig_max = float(eig_desc[0]) if eig_desc.size else 0.0
+    eig_sum = float(eig_desc.sum())
+    eig_floor = max(eig_max * rtol, rtol)
+    positive = eig_desc[eig_desc > eig_floor]
+
+    if eig_sum > 0.0:
+        participation = eig_sum * eig_sum / float(np.dot(eig_desc, eig_desc))
+    else:
+        participation = float("nan")
+
+    if eig_max > 0.0 and positive.size:
+        axis_ratio_min_max = float(np.sqrt(float(positive[-1]) / eig_max))
+    else:
+        axis_ratio_min_max = float("nan")
+    if eig_desc.size >= 2 and eig_max > 0.0:
+        axis_ratio_second_first = float(np.sqrt(float(eig_desc[1]) / eig_max))
+    else:
+        axis_ratio_second_first = float("nan")
+    if eig_desc.size >= 3 and eig_max > 0.0:
+        axis_ratio_third_first = float(np.sqrt(float(eig_desc[2]) / eig_max))
+    else:
+        axis_ratio_third_first = float("nan")
+
+    return {
+        "center": center.astype(float).tolist(),
+        "center_norm": _finite_float(np.linalg.norm(center)),
+        "mean_radius": _finite_float(radii.mean()),
+        "rms_radius": _finite_float(np.sqrt(eig_sum)),
+        "max_radius": _finite_float(radii.max()),
+        "covariance_eigenvalues": eig_desc.astype(float).tolist(),
+        "effective_dimension": _finite_float(participation),
+        "axis_ratio_min_max": _finite_float(axis_ratio_min_max),
+        "axis_ratio_second_first": _finite_float(axis_ratio_second_first),
+        "axis_ratio_third_first": _finite_float(axis_ratio_third_first),
+    }
+
+
 @dataclass(frozen=True)
 class OccupancyDimensionResult:
     dimension: float
