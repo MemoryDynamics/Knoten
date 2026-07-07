@@ -17,6 +17,7 @@ from emergenz_knoten import (
     occupancy_local_slopes,
     residence_statistics,
     shape_statistics,
+    repulsive_gaussian_gradient,
     simulate_finite_memory,
     simulate_finite_memory_numba,
 )
@@ -105,6 +106,15 @@ def test_exponential_weights_are_finite_memory() -> None:
     expected_sum = 1.0 - (1.0 - 0.1) ** 5
     assert np.all(weights > 0)
     assert abs(weights.sum() - expected_sum) < 1e-12
+
+
+def test_repulsive_gaussian_gradient_points_away_from_memory() -> None:
+    x = np.array([1.0, 0.0])
+    memory = np.array([[0.0, 0.0]])
+    weights = np.array([1.0])
+    grad = repulsive_gaussian_gradient(x, memory, weights, sigma=1.0, amplitude=1.0)
+    assert grad[0] > 0.0
+    assert grad[1] == 0.0
 
 
 def test_reference_simulation_runs() -> None:

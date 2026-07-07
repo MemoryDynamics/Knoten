@@ -28,9 +28,13 @@ from .transition import (
     voxel_labels,
 )
 from .validation import (
+    ballistic_scaling_slope,
     chapman_kolmogorov_error,
+    critical_gamma,
     implied_relaxation_rates,
     implied_timescales,
+    mean_squared_displacement,
+    self_consistency_residual,
     vector_autocorrelation,
 )
 
@@ -39,15 +43,19 @@ __all__ = [
     "LaggedDataset",
     "TransferOperatorEstimate",
     "augmented_feature_names",
+    "ballistic_scaling_slope",
     "chapman_kolmogorov_error",
+    "critical_gamma",
     "estimate_transfer_operator",
     "implied_relaxation_rates",
     "implied_timescales",
     "lagged_pairs",
     "leading_nontrivial_eigenvalues",
+    "mean_squared_displacement",
     "memory_summary_features",
     "memory_weight_in_ball",
     "row_stochastic_matrix",
+    "self_consistency_residual",
     "simulate_augmented_features",
     "spectral_gap",
     "transition_count_matrix",

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-02.
+Stand: 2026-07-07.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -109,17 +109,17 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Score v0.4 als aktuelles Kandidatenkriterium behandeln. Es wertet Residence,
-   Sample-Kompaktheit, Voxel-Stabilitaet, `D_occ` und Memory-Cloud-Shape gegen
-   das seedgleiche `eta_zero`.
-2. Vor neuen Kernel-Ablationen die dimensionslosen Steuerparameter festhalten:
-   `epsilon/sigma_rep`, `sigma_att/sigma_rep`, `eta A_rep/sigma_rep^2` und
-   `eta A_att/sigma_att^2`.
-3. Danach `amplitude_rep = 0` als echte Dispersionsablation im gleichen
-   1M-Shape-Pilot-Protokoll laufen lassen, nicht als blosse Symmetrie zu
-   `single_scale`.
-4. Nur wenn v0.4 plus diese Ablation tragen, eine kleine 10M-Wiederholung fuer
-   ausgewaehlte Seeds vorbereiten und daraus eine Paper-I-Evidenztabelle bauen.
+1. Score v0.4 als aktuelles Kandidatenkriterium beibehalten. Die Seeds `1..15`
+   bestaetigen Feedback-Confinement gegenueber `eta_zero`, aber nicht die
+   Notwendigkeit des zweiskaligen Baseline-Kernels.
+2. Paper-I-Evidenz deshalb als Ein-/Feedback-Kernel-Confinement formulieren:
+   robust gegenueber `eta_zero`, nicht spezifisch zweiskalig.
+3. `amplitude_rep = 0` als echte Dispersionsablation nachziehen, um zu klaeren,
+   ob der lokal restaurierende Anteil allein die Knotenstruktur traegt.
+4. Photon-/Ballistik-Fragen in einen getrennten Track verschieben. Das skalare
+   overdamped Modell zeigt im korrigierten Ein-Kernel-Pilot keine ballistische
+   oder harmonische Mode; ein erweiterter Zustand mit Geschwindigkeit, Phase
+   oder Vektormemory ist vorher zu pruefen.
 5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
    Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
    nach optischer Rundheit zu durchsuchen.
@@ -191,7 +191,7 @@ Prioritaet:
 5. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
    Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt: `experiments/synchronization/` mit
+Naechster konkreter Schritt nach Paper-I-Confinement: `experiments/synchronization/` mit
 Single-Knot-Observable-Extractor und synthetischen Tests fuer Phase-Locking,
 Cross-Correlation und Response-Rank fuellen.
 

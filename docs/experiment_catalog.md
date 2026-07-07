@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-02.
+Stand: 2026-07-07.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -23,6 +23,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/synchronization/` | Innen/Aussen- und Mehrknoten-Synchronisation | geplant | Single-Knot-Observablen und Response-Rank |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
+| `experiments/propagation_speed/ballistic_kernel_probe.py` | ein-/mehrskaliger Ballistik-Track fuer MSD- und Vektorautokorrelation | aktiv | negative Kontrolle fuer skalare Photon-Analogien |
 
 ## Long-Run-Metastabilitaet
 
@@ -202,6 +203,33 @@ aktiven Bedingungen klar von `eta_zero`. Es isoliert aber weiterhin keinen
 notwendigen zweiskaligen Baseline-Mechanismus, weil `single_scale` fast gleich
 stark bleibt. Der naechste Kontrollschritt ist daher `amplitude_rep = 0` als
 echte Dispersionsablation in genau demselben 1M-Shape-Pilot-Protokoll.
+
+15-Seed-Erweiterung vom 2026-07-07:
+
+| run | report | baseline median | single_scale median | reading |
+| --- | --- | ---: | ---: | --- |
+| 1M, Seeds `1..15` | `reports/knot_score_v0_4_seeds_1-15_1M_2026-07-07.md` | `0.857` | `0.857` | gleiche Scorelage |
+| 100M, Seeds `1..15` | `reports/knot_score_v0_4_seeds_1-15_100M_2026-07-07.md` | `1.000` | `1.000` | gleiche Scorelage; Quellordner heisst `10M`, JSON sagt `100M`, dirty provenance |
+
+Damit ist Feedback-Confinement robuster, aber der zweiskalige Baseline-Claim
+schwaecher. Fuer Paper I ist ein ein- oder feedback-kernelbasierter
+Confinement-Claim sauberer als ein spezifischer Zwei-Skalen-Claim.
+
+## Ballistische MSD-Probe
+
+Report vom 2026-07-07: `reports/ballistic_kernel_probe_2026-07-07.md`.
+
+Der korrigierte skalare Ein-Kernel-Test nutzt `lambda` als tatsaechliche
+Memory-Relaxation und fuer die selbstabstossende Ballistik-Probe das
+Drift-Vorzeichen `+ eta * grad`. Ergebnis: keine ballistische Skalierung.
+Deterministische Faelle relaxieren oder stagnieren; rauschgetriebene Faelle
+liegen bei maximaler MSD-Slope etwa `1.138`, nicht nahe `2`.
+
+Lesart: Das skalare overdamped Memory-Modell ist derzeit keine tragfaehige
+Photon- oder harmonischer-Oszillator-Probe. Vor physikalischer Skalierung mit
+`hbar nu`, `mc^2` oder grossen/kleinen Zahlen braucht es erst ein
+dimensionsloses oszillierendes oder ballistisches Regime, vermutlich mit
+Velocity-, Phasen- oder Vektormemory.
 
 ## Reproduzierbarkeitsregeln
 

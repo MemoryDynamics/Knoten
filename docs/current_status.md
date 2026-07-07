@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-02.
+Stand: 2026-07-07.
 
 ## Repository
 
@@ -125,6 +125,25 @@ Baseline erreicht im 1M-Shape-Pilot `score median 0.929`, `single_scale`
 gegenueber `single_scale` aber nicht isoliert; der Befund stuetzt also weiter
 Feedback-Confinement, noch keinen spezifisch zweiskaligen Mechanismus.
 
+Knotenscore v0.4 mit Seeds `1..15` 2026-07-07: Die 1M-Auswertung liefert fuer
+`baseline` und `single_scale` jeweils `score median 0.857`; die 100M-Auswertung
+liefert fuer beide `score median 1.000`. Auch Memory-Cloud-Radius,
+Memory-Rundheit und Memory-Formdimension bleiben praktisch deckungsgleich. Der
+Befund wird damit robuster, aber enger: Der aktive Kernel erzeugt stabile
+Memory-Cloud-Confinement-Regime gegenueber `eta_zero`, der zweiskalige Anteil
+ist in diesem Parameterschnitt aber nicht als notwendig nachweisbar. Der
+100M-Quellsatz liegt in einem `10M` benannten Ordner, enthaelt aber
+`steps=100000000` und wurde laut `summary.json` mit dirty Worktree erzeugt.
+
+Ballistik-/Photon-Pilot 2026-07-07: Die korrigierte skalare Ein-Kernel-Probe
+nutzt die Memory-Relaxation `lambda` tatsaechlich als Exponentialgewicht und
+fuer den selbstabstossenden Test das Drift-Vorzeichen `+ eta * grad`. Trotzdem
+zeigt der Sweep keine ballistische MSD-Skalierung: deterministische Faelle
+relaxieren bzw. stagnieren, rauschgetriebene Faelle liegen bei maximaler
+MSD-Slope etwa `1.138`, weit unter dem ballistischen Zielwert `2`. Das stuetzt
+die Einschaetzung, dass ein skalares overdamped Memory-Modell allein keinen
+harmonischen Oszillator oder photonartigen Modus traegt.
+
 ## Dimensionsbefund
 
 Belastbar aus dem Archiv:
@@ -160,16 +179,17 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Score v0.4 als aktuelles Kandidatenkriterium verwenden: der rohe Sample-Pfad
-   bleibt berichtete Diagnostik, die Knotenform wird ueber die Memory-Cloud
-   gelesen.
-2. Als naechste einparametrige Kernel-Ablation `amplitude_rep = 0` gegen
-   denselben 1M-Shape-Pilot-Satz laufen lassen, weil dies die echte
-   Dispersionskontrolle in der aktuellen Kernelkonvention ist.
-3. Falls v0.4 plus `amplitude_rep = 0` tragen, eine kleine 10M-Wiederholung fuer
-   ausgewaehlte Seeds vorbereiten; erst danach Paper-I-Evidenztabelle.
-4. Separat kann ein kleiner Persistenz-/Inertial-Pilot klaeren, ob sichtbar
-   runde Bahnen im aktuellen overdamped Modell ueberhaupt erwartbar sind.
+1. Paper-I-Claim-Sprache auf Feedback-Confinement gegenueber `eta_zero`
+   zuschneiden; keinen notwendigen zweiskaligen Baseline-Mechanismus behaupten.
+2. `amplitude_rep = 0` weiter als echte Dispersionsablation nutzen, aber nicht
+   zur Rettung des zweiskaligen Claims, sondern zur Klaerung, ob ein einzelner
+   restaurierender Kernel fuer Paper I genuegt.
+3. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
+   oszillierendes oder ballistisches Regime in einem erweiterten Modell zeigen,
+   dann mit `hbar nu`, `mc^2` oder grossen/kleinen Zahlen skalieren.
+4. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
+   Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
+   nach optischer Rundheit zu durchsuchen.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
 6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, sobald das
    Knotenkriterium stabil ist.

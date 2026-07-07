@@ -22,7 +22,12 @@ from .experiments import (
     run_simulation,
     save_simulation_result,
 )
-from .kernels import double_gaussian_gradient, exponential_weights, gaussian_gradient
+from .kernels import (
+    double_gaussian_gradient,
+    exponential_weights,
+    gaussian_gradient,
+    repulsive_gaussian_gradient,
+)
 from .knot_score import (
     best_residence_memory_times,
     memory_mean_radius,
@@ -44,6 +49,12 @@ from .synchronization import (
     response_rank,
     shape_tensor,
 )
+from .markov.validation import (
+    ballistic_scaling_slope,
+    critical_gamma,
+    mean_squared_displacement,
+    self_consistency_residual,
+)
 
 __all__ = [
     "LaggedCorrelationResult",
@@ -52,14 +63,18 @@ __all__ = [
     "SimulationRunner",
     "SimulationResult",
     "best_residence_memory_times",
+    "ballistic_scaling_slope",
     "bootstrap_mean_ci",
     "covariance_dimension",
+    "critical_gamma",
     "fit_occupancy_scaling_window",
     "double_gaussian_gradient",
     "exponential_weights",
     "gaussian_gradient",
     "lagged_cross_correlation",
+    "repulsive_gaussian_gradient",
     "load_simulation_result",
+    "mean_squared_displacement",
     "memory_mean_radius",
     "memory_roundness_value",
     "memory_shape_dimension_value",
@@ -75,6 +90,7 @@ __all__ = [
     "save_simulation_result",
     "score_against_control",
     "score_v0_4_against_control",
+    "self_consistency_residual",
     "shape_statistics",
     "shape_tensor",
     "simulate_finite_memory",

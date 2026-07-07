@@ -22,6 +22,7 @@ CATEGORIES = {
         "PaperII3D_4Plots2.py",
         "PaperII3D_5Plots1.py",
         "PaperII3D_5Plots2.py",
+        "ballistic_kernel_probe.py",
     ],
     "knot_stability": [
         "Knoten.py",

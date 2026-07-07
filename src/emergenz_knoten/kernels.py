@@ -50,6 +50,25 @@ def gaussian_gradient(
     return np.sum((w * fac)[:, None] * dx, axis=0)
 
 
+def repulsive_gaussian_gradient(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma: float,
+    amplitude: float = 1.0,
+) -> np.ndarray:
+    """Return the outward Gaussian memory gradient for repulsive drift tests.\n\n    The returned vector points away from the memory cloud. A simulation becomes\n    repulsive only when this vector is added to the update; the canonical\n    overdamped confinement update uses the opposite sign.\n    """
+
+    return gaussian_gradient(
+        x,
+        memory,
+        weights,
+        sigma=sigma,
+        amplitude=amplitude,
+    )
+
+
 def double_gaussian_gradient(
     x: Iterable[float],
     memory: Iterable[Iterable[float]],
