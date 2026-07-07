@@ -112,8 +112,9 @@ Naechster operativer Schritt:
 1. Score v0.4 als aktuelles Kandidatenkriterium beibehalten. Die Seeds `1..15`
    bestaetigen Feedback-Confinement gegenueber `eta_zero`, aber nicht die
    Notwendigkeit des zweiskaligen Baseline-Kernels.
-2. Paper-I-Evidenz deshalb als Ein-/Feedback-Kernel-Confinement formulieren:
-   robust gegenueber `eta_zero`, nicht spezifisch zweiskalig.
+2. Paper-I-Evidenz deshalb als effektives Memory-Kernel-Confinement formulieren:
+   robust gegenueber `eta_zero`, nicht spezifisch zweiskalig. Details stehen in
+   `reports/kernel_memory_photon_decision_2026-07-07.md`.
 3. `amplitude_rep = 0` als echte Dispersionsablation nachziehen, um zu klaeren,
    ob der lokal restaurierende Anteil allein die Knotenstruktur traegt.
 4. Photon-/Ballistik-Fragen in einen getrennten Track verschieben. Das skalare

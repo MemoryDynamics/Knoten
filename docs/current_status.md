@@ -144,6 +144,12 @@ MSD-Slope etwa `1.138`, weit unter dem ballistischen Zielwert `2`. Das stuetzt
 die Einschaetzung, dass ein skalares overdamped Memory-Modell allein keinen
 harmonischen Oszillator oder photonartigen Modus traegt.
 
+Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
+fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
+effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
+optionale Erweiterung, nicht Kernclaim. Photon-/Oszillatorfragen brauchen einen
+separaten erweiterten Zustand, etwa Velocity-, Phasen- oder Vektormemory.
+
 ## Dimensionsbefund
 
 Belastbar aus dem Archiv:

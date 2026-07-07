@@ -231,6 +231,12 @@ Photon- oder harmonischer-Oszillator-Probe. Vor physikalischer Skalierung mit
 dimensionsloses oszillierendes oder ballistisches Regime, vermutlich mit
 Velocity-, Phasen- oder Vektormemory.
 
+## Entscheidungsnotizen
+
+| Datei | Thema | Lesart |
+| --- | --- | --- |
+| `reports/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
+
 ## Reproduzierbarkeitsregeln
 
 Jeder Lauf, der als Evidenz genutzt wird, braucht:
