@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from ..core import SimulationConfig
-from ..kernels import double_gaussian_gradient, exponential_weights
+from ..kernels import double_gaussian_gradient, exponential_memory_weights
 from .features import augmented_feature_names, memory_summary_features
 
 
@@ -69,6 +69,8 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("max_memory must be positive")
     if not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
+    if not np.isfinite(config.memory_mass) or config.memory_mass <= 0.0:
+        raise ValueError("memory_mass must be positive")
 
 
 def _horizon(config: SimulationConfig) -> int:
@@ -86,7 +88,11 @@ def simulate_augmented_features(
     _validate_config(config)
     rng = np.random.default_rng(seed)
     horizon = _horizon(config)
-    weights = exponential_weights(config.alpha, horizon)
+    weights = exponential_memory_weights(
+        config.alpha,
+        horizon,
+        memory_mass=config.memory_mass,
+    )
     history = np.zeros((horizon, config.dim), dtype=float)
     filled = 0
     x = np.zeros(config.dim, dtype=float)

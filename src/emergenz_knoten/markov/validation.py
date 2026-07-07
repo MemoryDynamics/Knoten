@@ -6,6 +6,8 @@ from typing import Iterable
 
 import numpy as np
 
+from ..analytic import critical_eta
+
 
 def critical_gamma(lambda_value: float) -> float:
     """Return the analytic critical coupling gamma_c(lambda)."""

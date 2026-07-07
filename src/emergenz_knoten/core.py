@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 
-from .kernels import double_gaussian_gradient, exponential_weights
+from .kernels import double_gaussian_gradient, exponential_memory_weights
 
 try:
     import numba
@@ -29,6 +29,7 @@ class SimulationConfig:
     epsilon: float = 0.03
     eta: float = 0.15
     alpha: float = 0.002
+    memory_mass: float = 1.0
     sigma_rep: float = 1.0
     sigma_att: float = 3.0
     amplitude_rep: float = 1.0
@@ -54,6 +55,8 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("memory_factor must be positive")
     if not np.isfinite(config.alpha) or not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
+    if not np.isfinite(config.memory_mass) or config.memory_mass <= 0.0:
+        raise ValueError("memory_mass must be positive")
     if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
         raise ValueError("sigma_rep must be positive")
     if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:
@@ -116,7 +119,11 @@ def simulate_finite_memory(
     _validate_config(config)
     rng = np.random.default_rng(seed)
     horizon = _horizon(config)
-    weights = exponential_weights(config.alpha, horizon)
+    weights = exponential_memory_weights(
+        config.alpha,
+        horizon,
+        memory_mass=config.memory_mass,
+    )
 
     history = np.zeros((horizon, config.dim), dtype=float)
     filled = 0
@@ -162,12 +169,16 @@ def simulate_finite_memory(
 
 
 @njit(cache=True)
-def _exponential_weights_numba(alpha: float, horizon: int) -> np.ndarray:
+def _exponential_weights_numba(
+    alpha: float,
+    horizon: int,
+    memory_mass: float,
+) -> np.ndarray:
     out = np.empty(horizon, np.float64)
     factor = 1.0 - alpha
     val = 1.0
     for i in range(horizon):
-        out[i] = alpha * val
+        out[i] = memory_mass * alpha * val
         val *= factor
     return out
 
@@ -219,6 +230,7 @@ def _simulate_finite_memory_numba(
     epsilon: float,
     eta: float,
     alpha: float,
+    memory_mass: float,
     sigma_rep: float,
     sigma_att: float,
     amplitude_rep: float,
@@ -238,7 +250,7 @@ def _simulate_finite_memory_numba(
 
     np.random.seed(seed)
     horizon = min(max_memory, max(1, int(memory_factor / alpha)))
-    weights = _exponential_weights_numba(alpha, horizon)
+    weights = _exponential_weights_numba(alpha, horizon, memory_mass)
     history = np.zeros((horizon, dim), np.float64)
     filled = 0
     x = np.zeros(dim, np.float64)
@@ -297,6 +309,7 @@ def simulate_finite_memory_numba(
             config.epsilon,
             config.eta,
             config.alpha,
+            config.memory_mass,
             config.sigma_rep,
             config.sigma_att,
             config.amplitude_rep,

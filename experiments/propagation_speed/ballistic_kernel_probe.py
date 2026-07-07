@@ -16,7 +16,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from emergenz_knoten import (  # noqa: E402
     SimulationConfig,
     ballistic_scaling_slope,
-    exponential_weights,
+    critical_eta,
+    exponential_memory_weights,
     mean_squared_displacement,
     repulsive_gaussian_gradient,
 )
@@ -47,35 +48,53 @@ def _utc_now() -> str:
 
 
 def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Probe ballistic scaling in the dimensionless kernel model")
-    parser.add_argument("--steps", type=int, default=20000)
+    parser = argparse.ArgumentParser(
+        description="Probe ballistic scaling in the dimensionless kernel model"
+    )
+    parser.add_argument("--steps", type=int, default=50000)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--dim", type=int, default=1)
-
     parser.add_argument("--sample-every", type=int, default=5)
     parser.add_argument("--burn-in", type=int, default=1000)
     parser.add_argument("--max-memory", type=int, default=800)
-    parser.add_argument("--output", type=Path, default=Path("data/processed/propagation_speed/ballistic_kernel_probe.json"))
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("data/processed/propagation_speed/ballistic_kernel_probe.json"),
+    )
     return parser.parse_args()
 
 
 def _sweep_cases() -> list[dict[str, float]]:
-    lambdas = [0.05, 0.10, 0.20]
-    rs = [0.90, 0.95, 0.98, 1.00, 1.02, 1.05, 1.10]
-    deltas = [0.0, 1e-4, 1e-3, 1e-2]
+    lambda_value = 0.10
+    memory_mass = 1.0
+    curvature = 1.0
+    rs = [0.75, 0.90, 0.98, 1.02, 1.10, 1.25, 1.50, 2.00]
+    deltas = [0.0, 1e-4, 1e-3, 3e-3, 1e-2]
+    eta_c = critical_eta(
+        lambda_value,
+        memory_mass=memory_mass,
+        curvature=curvature,
+    )
+    gamma_c = critical_gamma(lambda_value)
     cases: list[dict[str, float]] = []
-    for lambda_value in lambdas:
-        gamma_c = critical_gamma(lambda_value)
-        for r_value in rs:
-            eta = r_value * gamma_c
-            for delta in deltas:
-                cases.append({
+    for r_value in rs:
+        eta = r_value * eta_c
+        gamma = eta * lambda_value * memory_mass * curvature
+        for delta in deltas:
+            cases.append(
+                {
                     "lambda": float(lambda_value),
+                    "memory_mass": float(memory_mass),
+                    "curvature": float(curvature),
                     "r": float(r_value),
                     "delta": float(delta),
                     "eta": float(eta),
+                    "eta_c": float(eta_c),
+                    "gamma": float(gamma),
                     "gamma_c": float(gamma_c),
-                })
+                }
+            )
     return cases
 
 
@@ -89,15 +108,19 @@ def _simulate_repulsive_probe(
 ) -> np.ndarray:
     rng = np.random.default_rng(seed)
     horizon = min(config.max_memory, max(1, int(config.memory_factor / lambda_value)))
-    weights = exponential_weights(lambda_value, horizon)
+    weights = exponential_memory_weights(
+        lambda_value,
+        horizon,
+        memory_mass=config.memory_mass,
+    )
 
     history = np.zeros((horizon, config.dim), dtype=float)
     filled = 0
     x = np.zeros(config.dim, dtype=float)
     direction = np.zeros(config.dim, dtype=float)
     direction[0] = 1.0
-    seed_count = max(1, int(np.ceil(5.0 / lambda_value)))
-    seed_spacing = 0.01
+    seed_count = max(1, int(np.ceil(25.0 / lambda_value)))
+    seed_spacing = 1e-3
 
     for step in range(1, seed_count + 1):
         prior = -step * seed_spacing * direction
@@ -146,6 +169,7 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
             epsilon=case["delta"],
             eta=case["eta"],
             alpha=case["lambda"],
+            memory_mass=case["memory_mass"],
             sample_every=args.sample_every,
             burn_in=args.burn_in,
             max_memory=args.max_memory,
@@ -161,29 +185,44 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
             continue
 
         increments = np.diff(samples, axis=0)
-        velocity_autocorr = vector_autocorrelation(increments, max_lag=min(20, len(increments) - 1))
+        velocity_autocorr = vector_autocorrelation(
+            increments, max_lag=min(20, len(increments) - 1)
+        )
         msd = mean_squared_displacement(samples, max_lag=min(40, len(samples) - 1))
         slope = ballistic_scaling_slope(samples, fit_window=(5, min(40, len(samples) - 1)))
+        mean_step = float(np.mean(np.linalg.norm(increments, axis=1))) if len(increments) else 0.0
         residual = self_consistency_residual(
-            float(np.mean(np.linalg.norm(increments, axis=1))) if len(increments) else 0.0,
-            gamma=case["eta"],
+            mean_step,
+            gamma=case["gamma"],
             lambda_value=case["lambda"],
         )
-        results.append({
-            "lambda": case["lambda"],
-            "r": case["r"],
-            "delta": case["delta"],
-            "eta": case["eta"],
-            "gamma_c": case["gamma_c"],
-            "n_samples": int(samples.shape[0]),
-            "velocity_autocorr": velocity_autocorr.tolist(),
-            "msd": msd.tolist(),
-            "ballistic_slope": float(slope),
-            "self_consistency_residual": float(residual),
-            "mean_step": float(np.mean(np.linalg.norm(increments, axis=1))),
-            "mean_radius": float(np.mean(np.linalg.norm(samples - samples.mean(axis=0, keepdims=True), axis=1))),
-            "drift_sign": "plus_repulsive_gradient",
-        })
+        results.append(
+            {
+                "lambda": case["lambda"],
+                "memory_mass": case["memory_mass"],
+                "curvature": case["curvature"],
+                "r": case["r"],
+                "delta": case["delta"],
+                "eta": case["eta"],
+                "eta_c": case["eta_c"],
+                "gamma": case["gamma"],
+                "gamma_c": case["gamma_c"],
+                "n_samples": int(samples.shape[0]),
+                "velocity_autocorr": velocity_autocorr.tolist(),
+                "msd": msd.tolist(),
+                "ballistic_slope": float(slope),
+                "self_consistency_residual": float(residual),
+                "mean_step": mean_step,
+                "mean_radius": float(
+                    np.mean(
+                        np.linalg.norm(
+                            samples - samples.mean(axis=0, keepdims=True), axis=1
+                        )
+                    )
+                ),
+                "drift_sign": "plus_repulsive_gradient",
+            }
+        )
 
     summary = {
         "timestamp": _utc_now(),
@@ -191,7 +230,6 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
         "seed": args.seed,
         "steps": int(args.steps),
         "dim": int(args.dim),
-
         "sample_every": int(args.sample_every),
         "burn_in": int(args.burn_in),
         "max_memory": int(args.max_memory),

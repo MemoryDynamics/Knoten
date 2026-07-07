@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-07.
+Stand: 2026-07-08.
 
 ## Repository
 
@@ -13,8 +13,9 @@ Stand: 2026-07-07.
 ## Codekern
 
 - `core.py`: `SimulationConfig`, finite-memory Simulation, Numba-Variante,
-  Memory-Horizon `min(max_memory, memory_factor / alpha)`.
-- `kernels.py`: exponentielle Memory-Gewichte und Gaussian-Kernelgradienten.
+  Memory-Horizon `min(max_memory, memory_factor / alpha)` und `memory_mass`/`M0`
+  als getrennte Speicher-Masse.
+- `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k` und Gaussian-Kernelgradienten; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   Residence-Statistiken, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
@@ -143,6 +144,15 @@ relaxieren bzw. stagnieren, rauschgetriebene Faelle liegen bei maximaler
 MSD-Slope etwa `1.138`, weit unter dem ballistischen Zielwert `2`. Das stuetzt
 die Einschaetzung, dass ein skalares overdamped Memory-Modell allein keinen
 harmonischen Oszillator oder photonartigen Modus traegt.
+
+Alpha-/M0-Korrektur 2026-07-08: Die allgemeine Memory-Form wird im Paketkern
+jetzt als `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma` abgebildet.
+Der alte Spezialfall `beta=lambda_m=alpha` ist `M0=1`. Die Ballistikprobe
+verwendet nun `eta_c=lambda_m/((1-lambda_m)M0 a0)` statt `gamma_c` als rohe
+Eta-Schwelle. Konsequenz: Alpha-Scans muessen `lambda_m`, gespeicherte Masse
+`M0=beta/lambda_m`, Tail-Cutoff und effektive Kopplung getrennt berichten;
+weitere Blindscans sind weniger wertvoll als die geplante Block-Markov-/AR-
+Reanalyse vorhandener Long-Runs auf reelle versus komplexe langsame Moden.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als

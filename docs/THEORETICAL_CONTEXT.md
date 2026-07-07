@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-02.
+Stand: 2026-07-08.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und

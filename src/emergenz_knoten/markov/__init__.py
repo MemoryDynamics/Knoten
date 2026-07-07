@@ -30,6 +30,7 @@ from .transition import (
 from .validation import (
     ballistic_scaling_slope,
     chapman_kolmogorov_error,
+    critical_eta,
     critical_gamma,
     implied_relaxation_rates,
     implied_timescales,
@@ -45,6 +46,7 @@ __all__ = [
     "augmented_feature_names",
     "ballistic_scaling_slope",
     "chapman_kolmogorov_error",
+    "critical_eta",
     "critical_gamma",
     "estimate_transfer_operator",
     "implied_relaxation_rates",

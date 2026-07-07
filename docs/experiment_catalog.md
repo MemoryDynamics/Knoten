@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-07.
+Stand: 2026-07-08.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -23,7 +23,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/synchronization/` | Innen/Aussen- und Mehrknoten-Synchronisation | geplant | Single-Knot-Observablen und Response-Rank |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
-| `experiments/propagation_speed/ballistic_kernel_probe.py` | ein-/mehrskaliger Ballistik-Track fuer MSD- und Vektorautokorrelation | aktiv | negative Kontrolle fuer skalare Photon-Analogien |
+| `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
 ## Long-Run-Metastabilitaet
 
@@ -221,9 +221,13 @@ Report vom 2026-07-07: `reports/ballistic_kernel_probe_2026-07-07.md`.
 
 Der korrigierte skalare Ein-Kernel-Test nutzt `lambda` als tatsaechliche
 Memory-Relaxation und fuer die selbstabstossende Ballistik-Probe das
-Drift-Vorzeichen `+ eta * grad`. Ergebnis: keine ballistische Skalierung.
-Deterministische Faelle relaxieren oder stagnieren; rauschgetriebene Faelle
-liegen bei maximaler MSD-Slope etwa `1.138`, nicht nahe `2`.
+Drift-Vorzeichen `+ eta * grad`. Am 2026-07-08 wurde zusaetzlich die
+Schwellenlogik korrigiert: der Sweep laeuft ueber `r=eta/eta_c` mit
+`eta_c=lambda_m/((1-lambda_m)M0 a0)`, waehrend der analytische Residualtest
+`gamma=eta lambda_m M0 a0` verwendet. Ergebnis des bisherigen 2026-07-07-
+Reports: keine ballistische Skalierung. Deterministische Faelle relaxieren
+oder stagnieren; rauschgetriebene Faelle liegen bei maximaler MSD-Slope etwa
+`1.138`, nicht nahe `2`.
 
 Lesart: Das skalare overdamped Memory-Modell ist derzeit keine tragfaehige
 Photon- oder harmonischer-Oszillator-Probe. Vor physikalischer Skalierung mit
@@ -236,6 +240,7 @@ Velocity-, Phasen- oder Vektormemory.
 | Datei | Thema | Lesart |
 | --- | --- | --- |
 | `reports/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
+| `reports/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
 
 ## Reproduzierbarkeitsregeln
 

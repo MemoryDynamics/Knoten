@@ -7,20 +7,38 @@ from typing import Iterable
 import numpy as np
 
 
+def exponential_memory_weights(
+    lambda_value: float,
+    horizon: int,
+    *,
+    memory_mass: float = 1.0,
+) -> np.ndarray:
+    """Return finite exponential weights for mass ``memory_mass``.
+
+    The general memory update is
+    ``rho[n+1] = (1-lambda) rho[n] + lambda*M0*G_sigma``.
+    For a normalized deposition kernel this has stationary mass ``M0`` and
+    path weights ``lambda*M0*(1-lambda)^k``.
+    """
+
+    if not 0.0 < lambda_value <= 1.0:
+        raise ValueError("lambda_value must satisfy 0 < value <= 1")
+    if horizon < 1:
+        raise ValueError("horizon must be positive")
+    if not np.isfinite(memory_mass) or memory_mass <= 0.0:
+        raise ValueError("memory_mass must be positive")
+    k = np.arange(horizon, dtype=float)
+    return memory_mass * lambda_value * np.power(1.0 - lambda_value, k)
+
+
 def exponential_weights(alpha: float, horizon: int) -> np.ndarray:
     """Return normalized finite exponential memory weights.
 
-    This is the paper's normalized convention beta=lambda_m=alpha, giving
-    weights alpha * (1-alpha)^k. The general update would use weights
-    beta * (1-lambda_m)^k.
+    This backward-compatible wrapper is the paper's normalized convention
+    ``lambda_m=beta=alpha``, equivalent to ``memory_mass=1``.
     """
 
-    if not 0.0 < alpha <= 1.0:
-        raise ValueError("alpha must satisfy 0 < alpha <= 1")
-    if horizon < 1:
-        raise ValueError("horizon must be positive")
-    k = np.arange(horizon, dtype=float)
-    return alpha * np.power(1.0 - alpha, k)
+    return exponential_memory_weights(alpha, horizon, memory_mass=1.0)
 
 
 def gaussian_gradient(
@@ -58,7 +76,12 @@ def repulsive_gaussian_gradient(
     sigma: float,
     amplitude: float = 1.0,
 ) -> np.ndarray:
-    """Return the outward Gaussian memory gradient for repulsive drift tests.\n\n    The returned vector points away from the memory cloud. A simulation becomes\n    repulsive only when this vector is added to the update; the canonical\n    overdamped confinement update uses the opposite sign.\n    """
+    """Return the outward Gaussian memory gradient for repulsive drift tests.
+
+    The returned vector points away from the memory cloud. A simulation becomes
+    repulsive only when this vector is added to the update; the canonical
+    overdamped confinement update uses the opposite sign.
+    """
 
     return gaussian_gradient(
         x,

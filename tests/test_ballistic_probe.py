@@ -8,6 +8,7 @@ import numpy as np
 from emergenz_knoten import SimulationConfig
 from emergenz_knoten.markov.validation import (
     ballistic_scaling_slope,
+    critical_eta,
     critical_gamma,
     mean_squared_displacement,
     self_consistency_residual,
@@ -27,9 +28,13 @@ def test_mean_squared_displacement_is_quadratic_for_linear_motion() -> None:
     assert 1.95 <= slope <= 2.05
 
 
-def test_critical_gamma_and_residual_match_expected_values() -> None:
+def test_critical_gamma_eta_and_residual_match_expected_values() -> None:
     gamma_c = critical_gamma(0.1)
+    eta_c = critical_eta(0.1)
+
     assert np.isclose(gamma_c, 0.011111111111111112)
+    assert np.isclose(eta_c, 0.11111111111111112)
+    assert np.isclose(0.1 * eta_c, gamma_c)
 
     residual = self_consistency_residual(0.0, gamma=gamma_c, lambda_value=0.1)
     assert abs(residual) < 1e-6
@@ -45,13 +50,23 @@ def _load_ballistic_probe_module():
     return module
 
 
+def test_ballistic_probe_sweep_uses_eta_threshold() -> None:
+    module = _load_ballistic_probe_module()
+    cases = module._sweep_cases()
+
+    assert cases
+    assert np.isclose(cases[0]["eta_c"], critical_eta(0.1))
+    assert np.isclose(cases[0]["gamma_c"], critical_gamma(0.1))
+    assert np.isclose(cases[0]["gamma"], cases[0]["eta"] * 0.1)
+
+
 def test_ballistic_probe_smoke_uses_lambda_and_repulsive_sign() -> None:
     module = _load_ballistic_probe_module()
     config = SimulationConfig(
         steps=200,
         dim=1,
         epsilon=0.0,
-        eta=1.1 * critical_gamma(0.1),
+        eta=1.1 * critical_eta(0.1),
         alpha=0.1,
         sample_every=1,
         burn_in=20,

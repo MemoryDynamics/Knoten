@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-07.
+Stand: 2026-07-08.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -134,6 +134,27 @@ Wenn der Score nicht traegt:
 
 - Residence-Kriterium und Kernelkonventionen ueberarbeiten;
 - keine starke Knotenbehauptung in Paper I.
+
+### P1.4 Alpha/M0 und lokale Moden klaeren
+
+Status: Paketkern korrigiert; naechster Schritt ist Reanalyse statt Blindscan.
+
+Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
+`rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
+`beta=lambda_m=alpha` bleibt `M0=1`. Konsequenz: Alpha-Laeufe muessen
+mindestens `lambda_m`, `M0=beta/lambda_m`, Tail-Cutoff und effektive Kopplung
+oder `eta/eta_c` gemeinsam dokumentieren.
+
+Prioritaet:
+
+1. Bestehende 15-Seed-/Long-Run-Daten blockweise coarse-grainen und lineare
+   AR-/Transfermoden auf reelle, negative oder komplexe Eigenwerte pruefen.
+2. Die korrigierte kurze Ballistikprobe nur als dimensionslosen Sanity-Check
+   nutzen; sie ersetzt keine Long-Run-Knotenevidenz.
+3. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
+   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
+4. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
+   propagierender effektiver Modus gemessen ist.
 
 ## P2: Spaeter
 
