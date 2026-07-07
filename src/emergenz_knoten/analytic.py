@@ -20,6 +20,11 @@ def _validate_positive(name: str, value: float) -> None:
         raise ValueError(f"{name} must be positive")
 
 
+def _validate_non_negative(name: str, value: float) -> None:
+    if not np.isfinite(value) or value < 0.0:
+        raise ValueError(f"{name} must be non-negative")
+
+
 def stationary_deposition_weight(
     lambda_value: float,
     *,
@@ -34,7 +39,7 @@ def stationary_deposition_weight(
     """
 
     _validate_lambda(lambda_value)
-    _validate_positive("memory_mass", memory_mass)
+    _validate_non_negative("memory_mass", memory_mass)
     return float(lambda_value * memory_mass)
 
 
@@ -68,7 +73,8 @@ def critical_eta(
     """Return the local ballistic threshold eta_c.
 
     The formula is ``eta_c=lambda/((1-lambda)*M0*a0)`` with
-    ``a0=-w''(0)>0`` for the effective kernel ``W=K*G``.
+    ``a0=-w''(0)>0`` for the effective kernel ``W=K*G``. It is undefined for
+    ``M0=0`` and deliberately validates ``memory_mass`` as strictly positive.
     """
 
     _validate_lambda(lambda_value, strict_upper=True)

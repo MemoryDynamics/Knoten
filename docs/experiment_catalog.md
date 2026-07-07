@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3/v0.4 und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3/v0.4, `m0_zero`, `alpha_one` und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -241,6 +241,7 @@ Velocity-, Phasen- oder Vektormemory.
 | --- | --- | --- |
 | `reports/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
 | `reports/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
+| `reports/private_olaf_and_control_plan_2026-07-08.md` | Olaf-Privacy und M0/Alpha-One-Kontrollen | Private Klartexte gehoeren nicht in ein Public Repo; `m0_zero` und `alpha_one` sind die naechsten Long-Run-Kontrollen. |
 
 ## Reproduzierbarkeitsregeln
 

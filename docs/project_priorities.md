@@ -152,7 +152,8 @@ Prioritaet:
 2. Die korrigierte kurze Ballistikprobe nur als dimensionslosen Sanity-Check
    nutzen; sie ersetzt keine Long-Run-Knotenevidenz.
 3. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
-   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
+   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`. Als erste
+   harte Kontrollen sind `m0_zero` (`M0=0`) und `alpha_one` (`alpha=1`) definiert.
 4. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
    propagierender effektiver Modus gemessen ist.
 

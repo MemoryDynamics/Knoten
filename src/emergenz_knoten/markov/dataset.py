@@ -69,8 +69,8 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("max_memory must be positive")
     if not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
-    if not np.isfinite(config.memory_mass) or config.memory_mass <= 0.0:
-        raise ValueError("memory_mass must be positive")
+    if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
+        raise ValueError("memory_mass must be non-negative")
 
 
 def _horizon(config: SimulationConfig) -> int:

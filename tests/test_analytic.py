@@ -18,6 +18,7 @@ def test_stationary_memory_mass_parametrization() -> None:
 
     assert np.isclose(beta, 0.25)
     assert np.isclose(stationary_memory_mass(0.1, beta), 2.5)
+    assert stationary_deposition_weight(0.1, memory_mass=0.0) == 0.0
 
 
 def test_critical_eta_uses_memory_mass_and_curvature() -> None:
@@ -27,6 +28,16 @@ def test_critical_eta_uses_memory_mass_and_curvature() -> None:
         critical_eta(0.1, curvature=gaussian_kernel_curvature(amplitude=2.0, length=2.0)),
         0.22222222222222224,
     )
+
+
+
+def test_critical_eta_rejects_zero_memory_mass() -> None:
+    try:
+        critical_eta(0.1, memory_mass=0.0)
+    except ValueError as exc:
+        assert "memory_mass" in str(exc)
+    else:
+        raise AssertionError("expected critical_eta to reject M0=0")
 
 
 def test_local_scalar_memory_modes_are_real() -> None:

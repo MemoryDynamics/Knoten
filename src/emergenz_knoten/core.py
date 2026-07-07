@@ -55,8 +55,8 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("memory_factor must be positive")
     if not np.isfinite(config.alpha) or not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
-    if not np.isfinite(config.memory_mass) or config.memory_mass <= 0.0:
-        raise ValueError("memory_mass must be positive")
+    if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
+        raise ValueError("memory_mass must be non-negative")
     if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
         raise ValueError("sigma_rep must be positive")
     if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:

@@ -109,6 +109,11 @@ def test_exponential_weights_are_finite_memory() -> None:
     assert abs(weights.sum() - expected_sum) < 1e-12
 
 
+def test_exponential_memory_weights_allow_zero_memory_mass() -> None:
+    weights = exponential_memory_weights(0.1, 5, memory_mass=0.0)
+    assert np.all(weights == 0.0)
+
+
 def test_exponential_memory_weights_scale_with_memory_mass() -> None:
     weights = exponential_memory_weights(0.1, 5, memory_mass=2.0)
     expected_sum = 2.0 * (1.0 - (1.0 - 0.1) ** 5)
@@ -134,6 +139,34 @@ def test_reference_simulation_runs() -> None:
     assert np.isfinite(samples).all()
 
 
+
+def test_zero_memory_mass_matches_eta_zero_for_same_seed() -> None:
+    base = SimulationConfig(
+        steps=100,
+        dim=2,
+        alpha=0.1,
+        memory_mass=0.0,
+        eta=0.15,
+        sample_every=10,
+        max_memory=20,
+    )
+    eta_zero = SimulationConfig(
+        steps=100,
+        dim=2,
+        alpha=0.1,
+        memory_mass=1.0,
+        eta=0.0,
+        sample_every=10,
+        max_memory=20,
+    )
+
+    zero_mass_result = simulate_finite_memory(base, seed=123)
+    eta_zero_result = simulate_finite_memory(eta_zero, seed=123)
+
+    assert np.allclose(zero_mass_result["samples"], eta_zero_result["samples"])
+    assert np.all(zero_mass_result["weights"] == 0.0)
+
+
 def test_finite_memory_step_accepts_seeded_rng() -> None:
     cfg = SimulationConfig(dim=2, epsilon=0.1)
     x = np.zeros(2)
@@ -153,7 +186,7 @@ def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
         ({"sigma_rep": 0.0}, "sigma_rep"),
         ({"sigma_att": 0.0}, "sigma_att"),
         ({"memory_factor": 0.0}, "memory_factor"),
-        ({"memory_mass": 0.0}, "memory_mass"),
+        ({"memory_mass": -1.0}, "memory_mass"),
         ({"burn_in": -1}, "burn_in"),
     ]
     for kwargs, expected in invalid_cases:
@@ -201,7 +234,9 @@ if __name__ == "__main__":
     test_shape_statistics_detects_weighted_center_and_roundness()
     test_residence_statistics_counts_repeated_voxels()
     test_exponential_weights_are_finite_memory()
+    test_exponential_memory_weights_allow_zero_memory_mass()
     test_exponential_memory_weights_scale_with_memory_mass()
+    test_zero_memory_mass_matches_eta_zero_for_same_seed()
     test_reference_simulation_runs()
     test_finite_memory_step_accepts_seeded_rng()
     test_simulation_config_rejects_invalid_scales_and_horizon()

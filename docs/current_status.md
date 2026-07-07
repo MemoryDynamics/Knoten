@@ -154,6 +154,18 @@ Eta-Schwelle. Konsequenz: Alpha-Scans muessen `lambda_m`, gespeicherte Masse
 weitere Blindscans sind weniger wertvoll als die geplante Block-Markov-/AR-
 Reanalyse vorhandener Long-Runs auf reelle versus komplexe langsame Moden.
 
+
+Privacy-/Provenance-Notiz 2026-07-08: Olaf-bezogene Klartexte sind fuer ein
+oeffentliches Repo ungeeignet. Entweder bleibt nur eine sanitisierte Fassung im
+Repo, oder private Inhalte werden ignoriert bzw. verschluesselt committed. Neue
+Long-Run-JSONs protokollieren `git_status`; die lokale Olaf-Notiz sollte vor
+sauberen Evidenzlaeufen geloest oder explizit als unrelated dirty file
+dokumentiert werden.
+
+Long-Run-Kontrollen 2026-07-08: `experiments/long_run_metastability.py` kennt
+nun `m0_zero` (`memory_mass=0`) und `alpha_one` (`alpha=1`). `m0_zero` ist die
+saubere Null-Feld-Kontrolle, `alpha_one` ist der Ein-Schritt-Memory-Grenzfall.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

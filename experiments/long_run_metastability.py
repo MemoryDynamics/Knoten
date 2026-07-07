@@ -55,7 +55,7 @@ def _parse_float_list(value: str) -> list[float]:
 
 
 def _parse_conditions(value: str) -> list[str]:
-    allowed = {"baseline", "eta_zero", "single_scale"}
+    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one"}
     values = [item.strip() for item in value.split(",") if item.strip()]
     unknown = sorted(set(values) - allowed)
     if unknown:
@@ -88,8 +88,8 @@ def _horizon(config: SimulationConfig) -> int:
     return min(config.max_memory, max(1, int(config.memory_factor / config.alpha)))
 
 
-def _stored_weight_mass(alpha: float, horizon: int) -> float:
-    return float(1.0 - (1.0 - alpha) ** horizon)
+def _stored_weight_mass(alpha: float, horizon: int, memory_mass: float) -> float:
+    return float(memory_mass * (1.0 - (1.0 - alpha) ** horizon))
 
 
 def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConfig:
@@ -99,8 +99,11 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
         return replace(config, eta=0.0)
     if condition == "single_scale":
         return replace(config, amplitude_att=0.0)
+    if condition == "m0_zero":
+        return replace(config, memory_mass=0.0)
+    if condition == "alpha_one":
+        return replace(config, alpha=1.0)
     raise ValueError(f"unknown condition: {condition}")
-
 
 @njit(cache=True)
 def _simulate_circular_numba(
@@ -109,6 +112,7 @@ def _simulate_circular_numba(
     epsilon: float,
     eta: float,
     alpha: float,
+    memory_mass: float,
     sigma_rep: float,
     sigma_att: float,
     amplitude_rep: float,
@@ -130,7 +134,7 @@ def _simulate_circular_numba(
     weight = alpha
     decay = 1.0 - alpha
     for age in range(horizon):
-        weights[age] = weight
+        weights[age] = memory_mass * weight
         weight *= decay
 
     memory = np.zeros((horizon, dim), np.float64)
@@ -194,6 +198,7 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         config.epsilon,
         config.eta,
         config.alpha,
+        config.memory_mass,
         config.sigma_rep,
         config.sigma_att,
         config.amplitude_rep,
@@ -257,7 +262,7 @@ def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
 
 
 def _memory_cloud_diagnostics(memory: np.ndarray, weights: np.ndarray) -> dict[str, object] | None:
-    if len(memory) < 2:
+    if len(memory) < 2 or float(np.sum(weights)) <= 0.0:
         return None
     return {
         "shape": shape_statistics(memory, weights=weights),
@@ -359,7 +364,7 @@ def run_case(
         "steps_per_second": float(config.steps / elapsed) if elapsed > 0 else None,
         "config": asdict(config),
         "memory_horizon": int(horizon),
-        "stored_weight_mass": _stored_weight_mass(config.alpha, horizon),
+        "stored_weight_mass": _stored_weight_mass(config.alpha, horizon, config.memory_mass),
         "diagnostics": diagnostics,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -447,6 +452,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--epsilon", type=float, default=0.03)
     parser.add_argument("--eta", type=float, default=0.15)
     parser.add_argument("--alpha", type=float, default=0.01)
+    parser.add_argument("--memory-mass", type=float, default=1.0)
     parser.add_argument("--sigma-rep", type=float, default=1.0)
     parser.add_argument("--sigma-att", type=float, default=3.0)
     parser.add_argument("--amplitude-rep", type=float, default=1.0)
@@ -482,6 +488,8 @@ def main() -> None:
         raise SystemExit("--max-memory must be positive")
     if not 0.0 < args.alpha <= 1.0:
         raise SystemExit("--alpha must satisfy 0 < alpha <= 1")
+    if not math.isfinite(args.memory_mass) or args.memory_mass < 0.0:
+        raise SystemExit("--memory-mass must be non-negative")
     if not _NUMBA_AVAILABLE:
         raise SystemExit("numba is required for long-run simulations")
 
@@ -495,6 +503,7 @@ def main() -> None:
         epsilon=args.epsilon,
         eta=args.eta,
         alpha=args.alpha,
+        memory_mass=args.memory_mass,
         sigma_rep=args.sigma_rep,
         sigma_att=args.sigma_att,
         amplitude_rep=args.amplitude_rep,
@@ -513,7 +522,7 @@ def main() -> None:
             print(
                 "running "
                 f"condition={condition} seed={seed} steps={base_config.steps} "
-                f"alpha={base_config.alpha:g} dim={base_config.dim}",
+                f"alpha={base_config.alpha:g} memory_mass={base_config.memory_mass:g} dim={base_config.dim}",
                 flush=True,
             )
             cases.append(

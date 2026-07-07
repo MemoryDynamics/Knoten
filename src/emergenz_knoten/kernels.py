@@ -25,8 +25,8 @@ def exponential_memory_weights(
         raise ValueError("lambda_value must satisfy 0 < value <= 1")
     if horizon < 1:
         raise ValueError("horizon must be positive")
-    if not np.isfinite(memory_mass) or memory_mass <= 0.0:
-        raise ValueError("memory_mass must be positive")
+    if not np.isfinite(memory_mass) or memory_mass < 0.0:
+        raise ValueError("memory_mass must be non-negative")
     k = np.arange(horizon, dtype=float)
     return memory_mass * lambda_value * np.power(1.0 - lambda_value, k)
 

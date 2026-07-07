@@ -115,7 +115,7 @@ Ein Knoten ist im aktuellen Projekt kein fundamentales Teilchen und kein
 exakter Fixpunkt. Er ist ein Kandidat fuer ein langlebiges Rueckkopplungsregime.
 Diagnostiken:
 
-- Residence-Zeiten in Updates und in Einheiten von `alpha^{-1}`;
+- Residence-Zeiten in Updates und in Einheiten von `lambda_m^{-1}` bzw. `alpha^{-1}` in der normierten Konvention;
 - Memory-Gewicht in einer Region;
 - Autokorrelation und Rueckkehrzeiten;
 - lokale OU-/Hessian-Approximationen;
