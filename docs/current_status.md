@@ -182,6 +182,15 @@ radius `212.678`, mediane beste Residence `8000` Updates). Lesart: bei
 Grenzfall ist daher eine Negativkontrolle, kein Knotenregime. Report:
 `reports/long_run_m0_alpha_one_results_2026-07-08.md`.
 
+Deposition-Kernel-Audit 2026-07-08: Der Paketkern speichert Punktdepositionen
+und berechnet die Kraft als Summe ueber `grad K(x-x_k)`. Das ist numerisch
+bereits `G=delta`; `sigma_rep` und `sigma_att` sind effektive Interaktions-
+laengen, keine separate Depositionsbreite. `SimulationConfig` schreibt kuenftig
+`deposition_kernel="delta"` in neue JSONs. Eine neue Delta-Condition waere
+seedgleich zur Baseline; die sinnvolle Zusatzkontrolle ist stattdessen ein
+endlicher Gaussian-Depositionskernel. Report:
+`reports/deposition_kernel_audit_2026-07-08.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

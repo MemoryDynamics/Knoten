@@ -1,4 +1,9 @@
-"""Kernel gradients for finite-memory trajectory simulations."""
+"""Kernel gradients for finite-memory trajectory simulations.
+
+The canonical simulation backend stores point deposits in the retained history.
+This corresponds to a delta deposition kernel; the Gaussian lengths below are
+therefore interaction/effective-kernel lengths, not a separate smoothing width.
+"""
 
 from __future__ import annotations
 

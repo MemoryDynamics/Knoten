@@ -30,6 +30,7 @@ class SimulationConfig:
     eta: float = 0.15
     alpha: float = 0.002
     memory_mass: float = 1.0
+    deposition_kernel: str = "delta"
     sigma_rep: float = 1.0
     sigma_att: float = 3.0
     amplitude_rep: float = 1.0
@@ -57,6 +58,8 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
     if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
         raise ValueError("memory_mass must be non-negative")
+    if config.deposition_kernel != "delta":
+        raise ValueError("only delta deposition_kernel is implemented")
     if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
         raise ValueError("sigma_rep must be positive")
     if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:

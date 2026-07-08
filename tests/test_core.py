@@ -214,6 +214,7 @@ def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
         ({"sigma_att": 0.0}, "sigma_att"),
         ({"memory_factor": 0.0}, "memory_factor"),
         ({"memory_mass": -1.0}, "memory_mass"),
+        ({"deposition_kernel": "gaussian"}, "deposition_kernel"),
         ({"burn_in": -1}, "burn_in"),
     ]
     for kwargs, expected in invalid_cases:

@@ -523,7 +523,7 @@ def main() -> None:
             print(
                 "running "
                 f"condition={condition} seed={seed} steps={case_config.steps} "
-                f"alpha={case_config.alpha:g} memory_mass={case_config.memory_mass:g} dim={case_config.dim}",
+                f"alpha={case_config.alpha:g} memory_mass={case_config.memory_mass:g} deposition={case_config.deposition_kernel} dim={case_config.dim}",
                 flush=True,
             )
             cases.append(

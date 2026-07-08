@@ -267,6 +267,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
 | `reports/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
 | `reports/private_review_notes_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Private Klartexte gehoeren nicht in ein Public Repo; `m0_zero` und `alpha_one` sind Negativkontrollen fuer die Long-Run-Evidenz. |
+| `reports/deposition_kernel_audit_2026-07-08.md` | Deposition-Kernel-Audit | Der Paketkern ist bereits Delta-Deposition; sinnvoller naechster Kontrolllauf waere finite Gaussian deposition. |
 
 ## Reproduzierbarkeitsregeln
 
