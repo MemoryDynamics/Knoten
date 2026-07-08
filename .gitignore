@@ -23,5 +23,6 @@ site/
 tmp/
 
 # Local private notes
-reports/*olaf*.md
-reports/paper1_delivery_package_2026-06-01.md
+reports/paper1_*_2026-06-01.md
+reports/paper1_*note_2026-06-14.md
+reports/paper1_*note_2026-06-17.md
