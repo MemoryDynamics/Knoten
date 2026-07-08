@@ -25,6 +25,7 @@ from emergenz_knoten import (  # noqa: E402
     occupancy_dimension,
     residence_statistics,
     shape_statistics,
+    simulate_finite_memory,
 )
 from emergenz_knoten.markov import vector_autocorrelation  # noqa: E402
 
@@ -186,8 +187,6 @@ def _simulate_circular_numba(
 
 
 def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.ndarray]:
-    if not _NUMBA_AVAILABLE:
-        raise ImportError("numba is required for long-run simulations")
     effective_kernel = effective_double_gaussian_parameters(
         dim=config.dim,
         sigma_rep=config.sigma_rep,
@@ -197,6 +196,10 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         deposition_kernel=config.deposition_kernel,
         deposition_sigma=config.deposition_sigma,
     )
+    if not _NUMBA_AVAILABLE:
+        result = simulate_finite_memory(config, seed=seed)
+        return {**result, "effective_kernel": effective_kernel}
+
     (
         samples,
         sample_steps,
@@ -485,6 +488,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-ac-lag", type=int, default=50)
     parser.add_argument("--min-memory-times", type=float, default=10.0)
+    parser.add_argument("--allow-slow-python", action="store_true")
     parser.add_argument(
         "--output-dir",
         type=Path,
@@ -515,8 +519,8 @@ def main() -> None:
         raise SystemExit("--deposition-sigma must be positive for gaussian deposition")
     if args.deposition_kernel == "matched_gaussian" and args.deposition_sigma != 0.0:
         raise SystemExit("--deposition-sigma must be zero for matched_gaussian deposition")
-    if not _NUMBA_AVAILABLE:
-        raise SystemExit("numba is required for long-run simulations")
+    if not _NUMBA_AVAILABLE and not args.allow_slow_python:
+        raise SystemExit("numba is required for long-run simulations unless --allow-slow-python is set")
 
     output_dir = args.output_dir
     if not output_dir.is_absolute():
