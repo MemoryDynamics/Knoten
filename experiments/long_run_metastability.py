@@ -519,10 +519,11 @@ def main() -> None:
     total_started = time.perf_counter()
     for condition in args.conditions:
         for seed in args.seeds:
+            case_config = _apply_condition(base_config, condition)
             print(
                 "running "
-                f"condition={condition} seed={seed} steps={base_config.steps} "
-                f"alpha={base_config.alpha:g} memory_mass={base_config.memory_mass:g} dim={base_config.dim}",
+                f"condition={condition} seed={seed} steps={case_config.steps} "
+                f"alpha={case_config.alpha:g} memory_mass={case_config.memory_mass:g} dim={case_config.dim}",
                 flush=True,
             )
             cases.append(
