@@ -24,6 +24,7 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     single_scale = long_run_metastability._apply_condition(cfg, "single_scale")
     m0_zero = long_run_metastability._apply_condition(cfg, "m0_zero")
     alpha_one = long_run_metastability._apply_condition(cfg, "alpha_one")
+    matched = long_run_metastability._apply_condition(cfg, "matched_deposition")
 
     assert baseline == cfg
     assert eta_zero.eta == 0.0
@@ -34,6 +35,8 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     assert m0_zero.eta == cfg.eta
     assert alpha_one.alpha == 1.0
     assert alpha_one.memory_mass == cfg.memory_mass
+    assert matched.deposition_kernel == "matched_gaussian"
+    assert matched.deposition_sigma == 0.0
 
 
 def test_stored_weight_mass_scales_with_memory_mass() -> None:

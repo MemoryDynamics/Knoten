@@ -17,8 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
+    DEPOSITION_KERNELS,
     SimulationConfig,
     covariance_dimension,
+    effective_double_gaussian_parameters,
     fit_occupancy_scaling_window,
     occupancy_dimension,
     residence_statistics,
@@ -55,7 +57,7 @@ def _parse_float_list(value: str) -> list[float]:
 
 
 def _parse_conditions(value: str) -> list[str]:
-    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one"}
+    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one", "matched_deposition"}
     values = [item.strip() for item in value.split(",") if item.strip()]
     unknown = sorted(set(values) - allowed)
     if unknown:
@@ -103,6 +105,8 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
         return replace(config, memory_mass=0.0)
     if condition == "alpha_one":
         return replace(config, alpha=1.0)
+    if condition == "matched_deposition":
+        return replace(config, deposition_kernel="matched_gaussian", deposition_sigma=0.0)
     raise ValueError(f"unknown condition: {condition}")
 
 @njit(cache=True)
@@ -184,6 +188,15 @@ def _simulate_circular_numba(
 def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.ndarray]:
     if not _NUMBA_AVAILABLE:
         raise ImportError("numba is required for long-run simulations")
+    effective_kernel = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
     (
         samples,
         sample_steps,
@@ -199,10 +212,10 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         config.eta,
         config.alpha,
         config.memory_mass,
-        config.sigma_rep,
-        config.sigma_att,
-        config.amplitude_rep,
-        config.amplitude_att,
+        effective_kernel["sigma_rep"],
+        effective_kernel["sigma_att"],
+        effective_kernel["amplitude_rep"],
+        effective_kernel["amplitude_att"],
         config.memory_factor,
         config.max_memory,
         config.burn_in,
@@ -220,6 +233,7 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         "final_x": final_x.copy(),
         "memory": ordered_memory,
         "weights": weights[:filled].copy(),
+        "effective_kernel": effective_kernel,
     }
 
 
@@ -363,6 +377,7 @@ def run_case(
         "elapsed_seconds": float(elapsed),
         "steps_per_second": float(config.steps / elapsed) if elapsed > 0 else None,
         "config": asdict(config),
+        "effective_kernel": result["effective_kernel"],
         "memory_horizon": int(horizon),
         "stored_weight_mass": _stored_weight_mass(config.alpha, horizon, config.memory_mass),
         "diagnostics": diagnostics,
@@ -453,6 +468,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--eta", type=float, default=0.15)
     parser.add_argument("--alpha", type=float, default=0.01)
     parser.add_argument("--memory-mass", type=float, default=1.0)
+    parser.add_argument("--deposition-kernel", choices=sorted(DEPOSITION_KERNELS), default="delta")
+    parser.add_argument("--deposition-sigma", type=float, default=0.0)
     parser.add_argument("--sigma-rep", type=float, default=1.0)
     parser.add_argument("--sigma-att", type=float, default=3.0)
     parser.add_argument("--amplitude-rep", type=float, default=1.0)
@@ -490,6 +507,14 @@ def main() -> None:
         raise SystemExit("--alpha must satisfy 0 < alpha <= 1")
     if not math.isfinite(args.memory_mass) or args.memory_mass < 0.0:
         raise SystemExit("--memory-mass must be non-negative")
+    if not math.isfinite(args.deposition_sigma) or args.deposition_sigma < 0.0:
+        raise SystemExit("--deposition-sigma must be non-negative")
+    if args.deposition_kernel == "delta" and args.deposition_sigma != 0.0:
+        raise SystemExit("--deposition-sigma must be zero for delta deposition")
+    if args.deposition_kernel == "gaussian" and args.deposition_sigma <= 0.0:
+        raise SystemExit("--deposition-sigma must be positive for gaussian deposition")
+    if args.deposition_kernel == "matched_gaussian" and args.deposition_sigma != 0.0:
+        raise SystemExit("--deposition-sigma must be zero for matched_gaussian deposition")
     if not _NUMBA_AVAILABLE:
         raise SystemExit("numba is required for long-run simulations")
 
@@ -504,6 +529,8 @@ def main() -> None:
         eta=args.eta,
         alpha=args.alpha,
         memory_mass=args.memory_mass,
+        deposition_kernel=args.deposition_kernel,
+        deposition_sigma=args.deposition_sigma,
         sigma_rep=args.sigma_rep,
         sigma_att=args.sigma_att,
         amplitude_rep=args.amplitude_rep,

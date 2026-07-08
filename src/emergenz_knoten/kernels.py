@@ -1,8 +1,9 @@
 """Kernel gradients for finite-memory trajectory simulations.
 
-The canonical simulation backend stores point deposits in the retained history.
-This corresponds to a delta deposition kernel; the Gaussian lengths below are
-therefore interaction/effective-kernel lengths, not a separate smoothing width.
+The canonical backend stores point deposits in the retained history. With
+``deposition_kernel="delta"`` the Gaussian lengths are interaction-kernel
+lengths. Finite Gaussian deposition is represented through the exact effective
+convolution of Gaussian write/read kernels.
 """
 
 from __future__ import annotations
@@ -10,6 +11,9 @@ from __future__ import annotations
 from typing import Iterable
 
 import numpy as np
+
+
+DEPOSITION_KERNELS = {"delta", "gaussian", "matched_gaussian"}
 
 
 def exponential_memory_weights(
@@ -44,6 +48,81 @@ def exponential_weights(alpha: float, horizon: int) -> np.ndarray:
     """
 
     return exponential_memory_weights(alpha, horizon, memory_mass=1.0)
+
+
+def effective_gaussian_parameters(
+    *,
+    sigma: float,
+    amplitude: float,
+    dim: int,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+    matched_sigma: float | None = None,
+) -> tuple[float, float]:
+    """Return effective read-kernel parameters after Gaussian deposition.
+
+    For a normalized Gaussian deposition kernel with width ``s``, convolution
+    maps ``A exp(-r^2/(2 L^2))`` to
+    ``A (L / sqrt(L^2+s^2))^dim exp(-r^2/(2(L^2+s^2)))``.
+    ``matched_gaussian`` sets ``s`` to the read-kernel length unless an explicit
+    ``matched_sigma`` is supplied.
+    """
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    if sigma <= 0.0 or not np.isfinite(sigma):
+        raise ValueError("sigma must be positive")
+    if deposition_kernel not in DEPOSITION_KERNELS:
+        raise ValueError(f"unknown deposition_kernel: {deposition_kernel}")
+    if deposition_kernel == "delta":
+        if deposition_sigma != 0.0:
+            raise ValueError("deposition_sigma must be zero for delta deposition")
+        return float(sigma), float(amplitude)
+    if deposition_kernel == "gaussian":
+        dep_sigma = deposition_sigma
+    else:
+        if deposition_sigma != 0.0:
+            raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
+        dep_sigma = sigma if matched_sigma is None else matched_sigma
+    if dep_sigma <= 0.0 or not np.isfinite(dep_sigma):
+        raise ValueError("deposition_sigma must be positive for finite deposition")
+    effective_sigma = float(np.sqrt(sigma * sigma + dep_sigma * dep_sigma))
+    effective_amplitude = float(amplitude) * float((sigma / effective_sigma) ** dim)
+    return effective_sigma, effective_amplitude
+
+
+def effective_double_gaussian_parameters(
+    *,
+    dim: int,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+) -> dict[str, float]:
+    """Return effective two-scale parameters for the selected deposition mode."""
+
+    rep_sigma, rep_amp = effective_gaussian_parameters(
+        sigma=sigma_rep,
+        amplitude=amplitude_rep,
+        dim=dim,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    att_sigma, att_amp = effective_gaussian_parameters(
+        sigma=sigma_att,
+        amplitude=amplitude_att,
+        dim=dim,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    return {
+        "sigma_rep": rep_sigma,
+        "sigma_att": att_sigma,
+        "amplitude_rep": rep_amp,
+        "amplitude_att": att_amp,
+    }
 
 
 def gaussian_gradient(
@@ -106,21 +185,33 @@ def double_gaussian_gradient(
     sigma_att: float,
     amplitude_rep: float = 1.0,
     amplitude_att: float = 0.35,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
 ) -> np.ndarray:
-    """Repulsive-attractive two-scale gradient used in later scans."""
+    """Repulsive-attractive two-scale gradient with optional write-kernel convolution."""
 
+    x_arr = np.asarray(x, dtype=float)
+    params = effective_double_gaussian_parameters(
+        dim=x_arr.size,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
     rep = gaussian_gradient(
-        x,
+        x_arr,
         memory,
         weights,
-        sigma=sigma_rep,
-        amplitude=amplitude_rep,
+        sigma=params["sigma_rep"],
+        amplitude=params["amplitude_rep"],
     )
     att = gaussian_gradient(
-        x,
+        x_arr,
         memory,
         weights,
-        sigma=sigma_att,
-        amplitude=amplitude_att,
+        sigma=params["sigma_att"],
+        amplitude=params["amplitude_att"],
     )
     return rep - att

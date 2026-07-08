@@ -32,7 +32,10 @@ from .experiments import (
     save_simulation_result,
 )
 from .kernels import (
+    DEPOSITION_KERNELS,
     double_gaussian_gradient,
+    effective_double_gaussian_parameters,
+    effective_gaussian_parameters,
     exponential_memory_weights,
     exponential_weights,
     gaussian_gradient,
@@ -71,6 +74,7 @@ from .markov.validation import (
 __all__ = [
     "LaggedCorrelationResult",
     "ResponseRankResult",
+    "DEPOSITION_KERNELS",
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
@@ -82,6 +86,8 @@ __all__ = [
     "critical_eta",
     "critical_gamma",
     "double_gaussian_gradient",
+    "effective_double_gaussian_parameters",
+    "effective_gaussian_parameters",
     "exponential_memory_weights",
     "exponential_weights",
     "fit_occupancy_scaling_window",

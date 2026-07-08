@@ -7,7 +7,10 @@ from dataclasses import dataclass
 import numpy as np
 
 from ..core import SimulationConfig
-from ..kernels import double_gaussian_gradient, exponential_memory_weights
+from ..kernels import (
+    double_gaussian_gradient,
+    exponential_memory_weights,
+)
 from .features import augmented_feature_names, memory_summary_features
 
 
@@ -71,6 +74,16 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
     if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
         raise ValueError("memory_mass must be non-negative")
+    if config.deposition_kernel not in {"delta", "gaussian", "matched_gaussian"}:
+        raise ValueError("unknown deposition_kernel")
+    if not np.isfinite(config.deposition_sigma) or config.deposition_sigma < 0.0:
+        raise ValueError("deposition_sigma must be non-negative")
+    if config.deposition_kernel == "delta" and config.deposition_sigma != 0.0:
+        raise ValueError("deposition_sigma must be zero for delta deposition")
+    if config.deposition_kernel == "gaussian" and config.deposition_sigma <= 0.0:
+        raise ValueError("deposition_sigma must be positive for gaussian deposition")
+    if config.deposition_kernel == "matched_gaussian" and config.deposition_sigma != 0.0:
+        raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
 
 
 def _horizon(config: SimulationConfig) -> int:
@@ -110,6 +123,8 @@ def simulate_augmented_features(
                 sigma_att=config.sigma_att,
                 amplitude_rep=config.amplitude_rep,
                 amplitude_att=config.amplitude_att,
+                deposition_kernel=config.deposition_kernel,
+                deposition_sigma=config.deposition_sigma,
             )
         else:
             grad = np.zeros(config.dim, dtype=float)

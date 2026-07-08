@@ -11,6 +11,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from emergenz_knoten import (
     SimulationConfig,  # noqa: E402
     covariance_dimension,
+    double_gaussian_gradient,
+    effective_double_gaussian_parameters,
     exponential_memory_weights,
     exponential_weights,
     fit_occupancy_scaling_window,
@@ -131,6 +133,73 @@ def test_repulsive_gaussian_gradient_points_away_from_memory() -> None:
     assert grad[1] == 0.0
 
 
+def test_effective_matched_deposition_convolves_each_gaussian_component() -> None:
+    params = effective_double_gaussian_parameters(
+        dim=3,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=0.35,
+        deposition_kernel="matched_gaussian",
+    )
+
+    assert np.isclose(params["sigma_rep"], np.sqrt(2.0))
+    assert np.isclose(params["sigma_att"], 3.0 * np.sqrt(2.0))
+    assert np.isclose(params["amplitude_rep"], 2.0 ** -1.5)
+    assert np.isclose(params["amplitude_att"], 0.35 * 2.0 ** -1.5)
+
+
+def test_delta_deposition_preserves_default_double_gradient() -> None:
+    x = np.array([1.0, 0.0, 0.0])
+    memory = np.array([[0.0, 0.0, 0.0]])
+    weights = np.array([1.0])
+
+    default = double_gaussian_gradient(
+        x,
+        memory,
+        weights,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=0.35,
+    )
+    explicit_delta = double_gaussian_gradient(
+        x,
+        memory,
+        weights,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=0.35,
+        deposition_kernel="delta",
+    )
+
+    assert np.allclose(default, explicit_delta)
+
+
+def test_gaussian_deposition_modes_run_in_reference_simulation() -> None:
+    matched = SimulationConfig(
+        steps=40,
+        dim=3,
+        alpha=0.1,
+        sample_every=10,
+        max_memory=20,
+        deposition_kernel="matched_gaussian",
+    )
+    finite = SimulationConfig(
+        steps=40,
+        dim=3,
+        alpha=0.1,
+        sample_every=10,
+        max_memory=20,
+        deposition_kernel="gaussian",
+        deposition_sigma=0.5,
+    )
+
+    assert simulate_finite_memory(matched, seed=11)["samples"].shape == (4, 3)
+    assert simulate_finite_memory(finite, seed=11)["samples"].shape == (4, 3)
+
+
 def test_reference_simulation_runs() -> None:
     cfg = SimulationConfig(steps=200, dim=3, alpha=0.05, sample_every=10, max_memory=50)
     result = simulate_finite_memory(cfg, seed=42)
@@ -214,7 +283,9 @@ def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
         ({"sigma_att": 0.0}, "sigma_att"),
         ({"memory_factor": 0.0}, "memory_factor"),
         ({"memory_mass": -1.0}, "memory_mass"),
-        ({"deposition_kernel": "gaussian"}, "deposition_kernel"),
+        ({"deposition_kernel": "gaussian"}, "deposition_sigma"),
+        ({"deposition_kernel": "delta", "deposition_sigma": 1.0}, "deposition_sigma"),
+        ({"deposition_kernel": "matched_gaussian", "deposition_sigma": 1.0}, "deposition_sigma"),
         ({"burn_in": -1}, "burn_in"),
     ]
     for kwargs, expected in invalid_cases:

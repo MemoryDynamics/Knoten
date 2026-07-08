@@ -5,7 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 
-from .kernels import double_gaussian_gradient, exponential_memory_weights
+from .kernels import (
+    DEPOSITION_KERNELS,
+    double_gaussian_gradient,
+    effective_double_gaussian_parameters,
+    exponential_memory_weights,
+)
 
 try:
     import numba
@@ -31,6 +36,7 @@ class SimulationConfig:
     alpha: float = 0.002
     memory_mass: float = 1.0
     deposition_kernel: str = "delta"
+    deposition_sigma: float = 0.0
     sigma_rep: float = 1.0
     sigma_att: float = 3.0
     amplitude_rep: float = 1.0
@@ -58,8 +64,16 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
     if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
         raise ValueError("memory_mass must be non-negative")
-    if config.deposition_kernel != "delta":
-        raise ValueError("only delta deposition_kernel is implemented")
+    if config.deposition_kernel not in DEPOSITION_KERNELS:
+        raise ValueError("unknown deposition_kernel")
+    if not np.isfinite(config.deposition_sigma) or config.deposition_sigma < 0.0:
+        raise ValueError("deposition_sigma must be non-negative")
+    if config.deposition_kernel == "delta" and config.deposition_sigma != 0.0:
+        raise ValueError("deposition_sigma must be zero for delta deposition")
+    if config.deposition_kernel == "gaussian" and config.deposition_sigma <= 0.0:
+        raise ValueError("deposition_sigma must be positive for gaussian deposition")
+    if config.deposition_kernel == "matched_gaussian" and config.deposition_sigma != 0.0:
+        raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
     if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
         raise ValueError("sigma_rep must be positive")
     if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:
@@ -113,6 +127,8 @@ def finite_memory_step(
             sigma_att=config.sigma_att,
             amplitude_rep=config.amplitude_rep,
             amplitude_att=config.amplitude_att,
+            deposition_kernel=config.deposition_kernel,
+            deposition_sigma=config.deposition_sigma,
         )
     else:
         grad = np.zeros_like(x)
@@ -150,6 +166,8 @@ def simulate_finite_memory(
                 sigma_att=config.sigma_att,
                 amplitude_rep=config.amplitude_rep,
                 amplitude_att=config.amplitude_att,
+                deposition_kernel=config.deposition_kernel,
+                deposition_sigma=config.deposition_sigma,
             )
         else:
             grad = np.zeros(config.dim, dtype=float)
@@ -311,6 +329,15 @@ def simulate_finite_memory_numba(
     if not _NUMBA_AVAILABLE:
         raise ImportError("numba is not installed")
     _validate_config(config)
+    effective = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
     samples, sample_steps, x, history, weights, n_sample, filled = (
         _simulate_finite_memory_numba(
             config.steps,
@@ -319,10 +346,10 @@ def simulate_finite_memory_numba(
             config.eta,
             config.alpha,
             config.memory_mass,
-            config.sigma_rep,
-            config.sigma_att,
-            config.amplitude_rep,
-            config.amplitude_att,
+            effective["sigma_rep"],
+            effective["sigma_att"],
+            effective["amplitude_rep"],
+            effective["amplitude_att"],
             config.memory_factor,
             config.max_memory,
             config.burn_in,
