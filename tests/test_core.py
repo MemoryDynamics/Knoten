@@ -167,7 +167,34 @@ def test_zero_memory_mass_matches_eta_zero_for_same_seed() -> None:
     assert np.all(zero_mass_result["weights"] == 0.0)
 
 
+def test_alpha_one_matches_zero_memory_mass_for_same_seed() -> None:
+    alpha_one = SimulationConfig(
+        steps=100,
+        dim=3,
+        alpha=1.0,
+        memory_mass=1.0,
+        eta=0.15,
+        sample_every=10,
+        max_memory=20,
+    )
+    zero_mass = SimulationConfig(
+        steps=100,
+        dim=3,
+        alpha=0.1,
+        memory_mass=0.0,
+        eta=0.15,
+        sample_every=10,
+        max_memory=20,
+    )
+
+    alpha_one_result = simulate_finite_memory(alpha_one, seed=456)
+    zero_mass_result = simulate_finite_memory(zero_mass, seed=456)
+
+    assert np.allclose(alpha_one_result["samples"], zero_mass_result["samples"])
+
+
 def test_finite_memory_step_accepts_seeded_rng() -> None:
+
     cfg = SimulationConfig(dim=2, epsilon=0.1)
     x = np.zeros(2)
     history = np.zeros((0, 2))

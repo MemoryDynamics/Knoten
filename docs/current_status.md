@@ -155,16 +155,22 @@ weitere Blindscans sind weniger wertvoll als die geplante Block-Markov-/AR-
 Reanalyse vorhandener Long-Runs auf reelle versus komplexe langsame Moden.
 
 
-Privacy-/Provenance-Notiz 2026-07-08: Olaf-bezogene Klartexte sind fuer ein
+Privacy-/Provenance-Notiz 2026-07-08: Personenbezogene Review-Klartexte sind fuer ein
 oeffentliches Repo ungeeignet. Entweder bleibt nur eine sanitisierte Fassung im
 Repo, oder private Inhalte werden ignoriert bzw. verschluesselt committed. Neue
-Long-Run-JSONs protokollieren `git_status`; die lokale Olaf-Notiz sollte vor
-sauberen Evidenzlaeufen geloest oder explizit als unrelated dirty file
-dokumentiert werden.
+Long-Run-JSONs protokollieren `git_status`; private Notizen muessen vor
+sauberen Evidenzlaeufen ignoriert, verschluesselt oder ausserhalb des Repos
+gehalten werden.
 
 Long-Run-Kontrollen 2026-07-08: `experiments/long_run_metastability.py` kennt
 nun `m0_zero` (`memory_mass=0`) und `alpha_one` (`alpha=1`). `m0_zero` ist die
 saubere Null-Feld-Kontrolle, `alpha_one` ist der Ein-Schritt-Memory-Grenzfall.
+Der 100M-Lauf mit Seeds `1..10` ist abgeschlossen: `m0_zero` und `alpha_one`
+liefern seedweise identische Trajektorienmetriken (`D_occ` mean `1.819`, mean
+radius `212.678`, mediane beste Residence `8000` Updates). Lesart: bei
+`symmetric self-memory` verschwindet der Selbstgradient fuer `alpha=1`; der
+Grenzfall ist daher eine Negativkontrolle, kein Knotenregime. Report:
+`reports/long_run_m0_alpha_one_results_2026-07-08.md`.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als

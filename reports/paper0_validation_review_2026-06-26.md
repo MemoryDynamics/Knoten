@@ -33,7 +33,7 @@ Contractive Memory Fibres, and Metastability`.
    explicitly and reported by the pipeline.
 5. Updated tests for empty-row handling in finite transition matrices.
 
-## Olaf-Style Review
+## Senior External Review
 
 ### Main Impression
 

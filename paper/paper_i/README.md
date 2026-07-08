@@ -15,7 +15,7 @@ Es gibt bewusst zwei Varianten:
 
 - `main.tex`: rigorose Langfassung mit ausfuehrlicher Begriffsarbeit und
   defensiver Argumentation.
-- `main_compact.tex`: komprimierte Olaf-/Publikationsvariante mit gleicher
+- `main_compact.tex`: kompakte Review-/Publikationsvariante mit gleicher
   Kernkonstruktion, weniger Absicherungstext und strafferem roten Faden.
 
 ## Aktueller Fokus
@@ -43,10 +43,8 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
 - `main_compact.pdf`: kompilierte Kurzfassung, falls gebaut.
 - `generate_figures.py`: erzeugt die Paper-I-spezifischen Modell- und
   Diagnostikfiguren.
-- `../../reports/paper1_olaf_note_2026-06-14.md`: kurze Begleitnotiz fuer
-  Sichtung/Diskussion.
-- `../../reports/paper1_olaf_note_2026-06-17.md`: aktuelles Anschreiben fuer
-  Olaf mit Verweis auf `https://memorydynamics.org`.
+- Private Begleitnotizen und Anschreiben werden nicht im oeffentlichen Repo
+  getrackt. Fuer externe Sichtung nur sanitisierte Reports verwenden.
 - `archiv/`: fruehere Versionen.
 - `fig*.pdf`: lokal kopierte Figuren fuer reproduzierbare Builds.
 
@@ -97,9 +95,9 @@ Kompakte Variante:
 latexmk -xelatex main_compact.tex
 ```
 
-## Aktueller Versandfokus
+## Aktueller Reviewfokus
 
-Fuer eine erste Sichtung durch Olaf sollte der Fokus nicht auf spaeteren
+Fuer eine erste externe Sichtung sollte der Fokus nicht auf spaeteren
 Weltmodell-Claims liegen, sondern auf:
 
 1. Traegt die Minimalmodell-Definition?

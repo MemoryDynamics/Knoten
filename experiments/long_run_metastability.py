@@ -150,7 +150,7 @@ def _simulate_circular_numba(
 
     for step in range(1, steps + 1):
         grad = np.zeros(dim, np.float64)
-        if eta != 0.0:
+        if eta != 0.0 and memory_mass != 0.0:
             for age in range(filled):
                 mem_idx = (idx - 1 - age) % horizon
                 r2 = 0.0

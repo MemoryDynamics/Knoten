@@ -77,6 +77,17 @@ Lesart: Memory-Gradient-Feedback trennt sich deutlich von `eta_zero`; der
 zweiskalige Baseline-Kernel ist aber noch nicht als notwendiger Mechanismus
 isoliert. Der Report liegt unter `reports/long_run_control_report_2026-07-01.md`.
 
+M0-/Alpha-One-Kontrolle 2026-07-08 (`N=100,000,000`, Seeds `1..10`):
+
+| Condition | stored mass | Memory-Horizon | Mean radius | Mean `D_occ` | median best residence | Lesart |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `m0_zero` | `0` | `600` | `212.678` | `1.819` | `8000` Updates / `80 alpha^{-1}` | Null-Feld-Kontrolle, diffundiert weit |
+| `alpha_one` | `1` | `6` | `212.678` | `1.819` | `8000` Updates / `8000 alpha^{-1}` | seedgleich zu `m0_zero`; Selbstgradient verschwindet |
+
+Lesart: `alpha=1` ist fuer den symmetrischen selbstzentrierten Kernel effektiv
+eine Negativkontrolle, nicht ein konfiniertes Ein-Schritt-Memory-Regime. Report:
+`reports/long_run_m0_alpha_one_results_2026-07-08.md`.
+
 ## Epsilon-Step-Balance
 
 Gezielter Baseline-Run vom 2026-07-01:
@@ -241,7 +252,7 @@ Velocity-, Phasen- oder Vektormemory.
 | --- | --- | --- |
 | `reports/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
 | `reports/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
-| `reports/private_olaf_and_control_plan_2026-07-08.md` | Olaf-Privacy und M0/Alpha-One-Kontrollen | Private Klartexte gehoeren nicht in ein Public Repo; `m0_zero` und `alpha_one` sind die naechsten Long-Run-Kontrollen. |
+| `reports/private_review_notes_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Private Klartexte gehoeren nicht in ein Public Repo; `m0_zero` und `alpha_one` sind Negativkontrollen fuer die Long-Run-Evidenz. |
 
 ## Reproduzierbarkeitsregeln
 

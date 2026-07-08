@@ -1,4 +1,4 @@
-# Private Olaf Material and M0/Alpha-One Control Plan
+# Private Reviewer Material and M0/Alpha-One Control Plan
 
 Date: 2026-07-08.
 
@@ -8,7 +8,7 @@ A public GitHub repository cannot contain private cleartext. If a file is
 committed to a public repo, it should be treated as public, including old
 commits and GitHub caches.
 
-For Olaf-related notes the viable options are:
+For private reviewer notes the viable options are:
 
 1. Keep only sanitized public text in the public repository.
 2. Keep the private note outside Git, for example under an ignored `private/`
@@ -16,24 +16,26 @@ For Olaf-related notes the viable options are:
 3. Commit only encrypted ciphertext to the public repository, for example an
    `age`/SOPS/git-crypt encrypted file. The decryption key must not be in the
    repository.
-4. If the current cleartext file must be made non-public, remove it from the
-   public history with a history rewrite and force-push. This reduces exposure
-   in the repo but cannot guarantee removal from already cloned copies or
-   external caches.
+4. If a cleartext file must be made non-public, remove it from the public
+   history with a history rewrite and force-push. This reduces exposure in the
+   repo but cannot guarantee removal from already cloned copies or external
+   caches.
 
 Recommended project policy: use a public sanitized summary plus an encrypted or
-ignored private source. Do not add further Olaf cleartext to `reports/`.
+ignored private source. Do not add further private reviewer cleartext to
+`reports/`.
 
 ## Scientific controls
 
-Two new long-run controls are now defined:
+Two long-run controls are now defined:
 
 - `m0_zero`: sets `memory_mass=0`. This is the clean zero-field control with the
   same stochastic update and code path. It should match an `eta_zero` trajectory
   distribution for the same seed up to implementation details.
-- `alpha_one`: sets `alpha=1`. This is not no-memory. It is the one-step memory
-  limit: only the most recent deposited event carries weight. It tests whether
-  the long exponential tail is necessary for the observed confinement.
+- `alpha_one`: sets `alpha=1`. This is the one-step memory limit: only the most
+  recent deposited event carries weight. For a symmetric kernel centered at the
+  current position, its self-gradient vanishes, so this limit should behave as a
+  negative control rather than a confined knot regime.
 
 These controls fit the proposed Block-Markov/AR campaign:
 
@@ -47,9 +49,8 @@ These controls fit the proposed Block-Markov/AR campaign:
 
 ## Provenance guardrail
 
-Long-run JSONs record `git_status`. The current local Olaf-note edit makes the
-worktree dirty. For clean provenance, either resolve the privacy handling first
-or explicitly document that the dirty file is unrelated to simulation code.
+Long-run JSONs record `git_status`. Local private-note edits must stay ignored,
+encrypted, or outside the repository before clean evidence runs are launched.
 
 ## Implementation status
 
@@ -75,8 +76,3 @@ A small non-Numba import/function smoke passed locally:
 - `simulate_finite_memory` accepts `SimulationConfig(memory_mass=0.0)`;
 - `_apply_condition(..., "m0_zero")` sets `memory_mass=0.0`;
 - `_apply_condition(..., "alpha_one")` sets `alpha=1.0`.
-
-The Numba long-run smoke could not be executed in the current sandbox because
-the available target installations expose `numba` only as an incomplete
-namespace package and `from numba import njit` fails. A real long run needs a
-working Numba environment or an explicit fallback implementation.

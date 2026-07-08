@@ -67,7 +67,7 @@ Dieses Skript erzeugt aktuell die Datei `results/demo_simulation.npz`.
 - `simulate_finite_memory_numba` funktioniert, falls `numba` installiert ist.
 - Die `experiments/`-Ordnerstruktur enthält historische Explorationsskripte; der robuste Kern liegt in `src/`.
 
-## Offene Punkte für Olaf
+## Offene Punkte fuer externe Sichtung
 
 1. `experiments/cli.py` und die experimentellen Skripte sollten als nächster Schritt auf eine gemeinsame Pipeline einheitlich abgestimmt werden.
 2. Es gibt noch keinen kanonischen Referenzlauf für die behauptete Dimensionsmessung `D_occ ≈ 2.8`; das ist die wichtigste Reproduktionsfrage.
@@ -76,12 +76,12 @@ Dieses Skript erzeugt aktuell die Datei `results/demo_simulation.npz`.
 
 ## Übergabe-Empfehlung
 
-- `reports/paper1_delivery_package_2026-06-01.md` für die Paper-Übergabe an Olaf nutzen.
+- Personenbezogene Uebergabepakete nicht im oeffentlichen Repo referenzieren; fuer externe Sichtung nur sanitisierte Reports nutzen.
 - Dieses Projektpaket ergänzt das um den aktuellen Code- und Testzustand.
 - Ergänzende Dokumente:
   - `docs/architecture_overview.md`
   - `reports/project_open_points_2026-06-03.md`
-- Als nächster Schritt empfiehlt sich ein kurzes Review mit Olaf, in dem die folgenden Fragen geklärt werden:
+- Als naechster Schritt empfiehlt sich ein kurzes externes Review, in dem die folgenden Fragen geklärt werden:
   - Validität des aktuellen Kernmodells für die angestrebten dimensionellen Befunde
   - Priorisierung historischer Experimente vs. Neustrukturierung in `src/`
   - Weitere Dokumentationsbedarfe für reproduzierbare Ausführung

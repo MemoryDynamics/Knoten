@@ -47,5 +47,5 @@ running condition=m0_zero seed=1 steps=100000000 alpha=0.01 memory_mass=0 dim=3
 
 ## Notes
 
-The public worktree was clean before launch. The Olaf note is now ignored and
-kept only as a local private file; it does not affect `git status --short`.
+The public worktree was clean before launch. Private reviewer notes are ignored
+or kept outside the public repository; they do not affect `git status --short`.

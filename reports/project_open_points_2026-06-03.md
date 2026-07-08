@@ -16,9 +16,9 @@ Datum: 2026-06-03
 
 ## 3. Dokumentation und Übergabe
 
-- Einen klaren Review-Workflow mit Olaf abstimmen: Code, Daten, Paper-Claims.
-- Die bestehenden Audit-Reports (`reports/paper1_delivery_package_2026-06-01.md`) als Grundlage nutzen.
-- Zusätzliche Entscheidungsdokumente erstellen, falls Olaf Varianten-Tests oder Risikobewertungen verlangt.
+- Einen klaren externen Review-Workflow abstimmen: Code, Daten, Paper-Claims.
+- Die bestehenden Audit-Reports als Grundlage nutzen; personenbezogene Uebergabedokumente bleiben lokal/ignoriert.
+- Zusätzliche Entscheidungsdokumente erstellen, falls externe Reviewer Varianten-Tests oder Risikobewertungen verlangen.
 
 ## 4. Technische Details
 

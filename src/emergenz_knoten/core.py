@@ -95,7 +95,13 @@ def finite_memory_step(
     *,
     rng: np.random.Generator | None = None,
 ) -> np.ndarray:
-    if history.shape[0] and history.shape[0] > 0 and weights.size > 0:
+    if (
+        history.shape[0]
+        and history.shape[0] > 0
+        and weights.size > 0
+        and config.eta != 0.0
+        and config.memory_mass != 0.0
+    ):
         grad = double_gaussian_gradient(
             x,
             history,
@@ -132,7 +138,7 @@ def simulate_finite_memory(
     sample_steps = []
 
     for step in range(1, config.steps + 1):
-        if filled:
+        if filled and config.eta != 0.0 and config.memory_mass != 0.0:
             grad = double_gaussian_gradient(
                 x,
                 history[:filled],
@@ -260,7 +266,7 @@ def _simulate_finite_memory_numba(
     n_sample = 0
 
     for step in range(1, steps + 1):
-        if filled:
+        if filled and eta != 0.0 and memory_mass != 0.0:
             grad = _double_gaussian_gradient_numba(
                 x,
                 history[:filled],
