@@ -136,6 +136,16 @@ ist in diesem Parameterschnitt aber nicht als notwendig nachweisbar. Der
 100M-Quellsatz liegt in einem `10M` benannten Ordner, enthaelt aber
 `steps=100000000` und wurde laut `summary.json` mit dirty Worktree erzeugt.
 
+Knotenscore v0.5 mit 100M-Kontrollen 2026-07-08: `reports/knot_score_v0_5_controls_100M_2026-07-08.md`
+verwendet raw update counts fuer Residence und wertet Memory-Kompaktheit nur
+bei nichtdegenerierter Memory-Cloud. Ergebnis: `baseline` und `single_scale`
+bleiben hoch (`score median 1.000`, `score mean 0.948`), waehrend `m0_zero`
+und `alpha_one` seedgleich niedrig liegen (`score median 0.286`, Residence-
+Gain `1.000`, Compactness-Gain `1.000`). Der Score korrigiert damit den
+cross-alpha-Artefakt der v0.4-Memory-Zeit-Skalierung und bestaetigt: aktives
+Memory-Feedback erzeugt Confinement, der zweiskalige Baseline-Kernel ist in
+diesem Slice nicht isoliert.
+
 Ballistik-/Photon-Pilot 2026-07-07: Die korrigierte skalare Ein-Kernel-Probe
 nutzt die Memory-Relaxation `lambda` tatsaechlich als Exponentialgewicht und
 fuer den selbstabstossenden Test das Drift-Vorzeichen `+ eta * grad`. Trotzdem

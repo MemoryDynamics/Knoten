@@ -21,22 +21,57 @@ def _mapping(value: Any) -> Mapping[str, Any] | None:
     return value if isinstance(value, Mapping) else None
 
 
-def best_residence_memory_times(diagnostics: Mapping[str, Any]) -> float | None:
-    """Return the largest max-residence value measured in memory times."""
-
+def _residence_values(
+    diagnostics: Mapping[str, Any],
+    *,
+    residence_field: str,
+) -> list[float]:
     residence = diagnostics.get("residence_by_voxel_size")
     if not isinstance(residence, Mapping):
-        return None
+        return []
     values: list[float] = []
     for metrics in residence.values():
         if isinstance(metrics, Mapping):
-            value = _as_finite(metrics.get("max_residence_memory_times"))
+            value = _as_finite(metrics.get(residence_field))
             if value is not None:
                 values.append(value)
+    return values
+
+
+def best_residence_value(
+    diagnostics: Mapping[str, Any],
+    *,
+    residence_field: str = "max_residence_memory_times",
+) -> float | None:
+    """Return the largest max-residence value for one residence field."""
+
+    values = _residence_values(diagnostics, residence_field=residence_field)
     return max(values) if values else None
 
 
-def voxel_stability_ratio(diagnostics: Mapping[str, Any]) -> float | None:
+def best_residence_memory_times(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the largest max-residence value measured in memory times."""
+
+    return best_residence_value(
+        diagnostics,
+        residence_field="max_residence_memory_times",
+    )
+
+
+def best_residence_updates(diagnostics: Mapping[str, Any]) -> float | None:
+    """Return the largest max-residence value measured in raw updates."""
+
+    return best_residence_value(
+        diagnostics,
+        residence_field="max_residence_updates",
+    )
+
+
+def voxel_stability_ratio(
+    diagnostics: Mapping[str, Any],
+    *,
+    residence_field: str = "max_residence_memory_times",
+) -> float | None:
     """Return min/max residence across voxel sizes.
 
     Values near one mean that the residence signal is similar across the tested
@@ -44,15 +79,11 @@ def voxel_stability_ratio(diagnostics: Mapping[str, Any]) -> float | None:
     coarse or fine voxel choice.
     """
 
-    residence = diagnostics.get("residence_by_voxel_size")
-    if not isinstance(residence, Mapping):
-        return None
-    values: list[float] = []
-    for metrics in residence.values():
-        if isinstance(metrics, Mapping):
-            value = _as_finite(metrics.get("max_residence_memory_times"))
-            if value is not None and value > 0.0:
-                values.append(value)
+    values = [
+        value
+        for value in _residence_values(diagnostics, residence_field=residence_field)
+        if value > 0.0
+    ]
     if not values:
         return None
     high = max(values)
@@ -172,6 +203,7 @@ def score_against_control(
     voxel_pass_at: float = 0.25,
     dimension_partial_at: float = 1.25,
     dimension_pass_at: float = 1.5,
+    residence_field: str = "max_residence_memory_times",
 ) -> dict[str, float | None]:
     """Score one case against a matched negative control.
 
@@ -182,13 +214,13 @@ def score_against_control(
     one-dimensional internal support in single-knot diagnostics.
     """
 
-    case_residence = best_residence_memory_times(case_diagnostics)
-    control_residence = best_residence_memory_times(control_diagnostics)
+    case_residence = best_residence_value(case_diagnostics, residence_field=residence_field)
+    control_residence = best_residence_value(control_diagnostics, residence_field=residence_field)
     case_radius = mean_centered_radius(case_diagnostics)
     control_radius = mean_centered_radius(control_diagnostics)
     residence_gain = _ratio(case_residence, control_residence)
     compactness_gain = _ratio(control_radius, case_radius)
-    voxel_stability = voxel_stability_ratio(case_diagnostics)
+    voxel_stability = voxel_stability_ratio(case_diagnostics, residence_field=residence_field)
     internal_dimension = occupancy_dimension_value(case_diagnostics)
     shape_roundness = shape_roundness_value(case_diagnostics)
 
@@ -228,6 +260,7 @@ def score_against_control(
         "voxel_stability": voxel_stability,
         "internal_dimension": internal_dimension,
         "shape_roundness": shape_roundness,
+        "residence_field": residence_field,
     }
 
 
@@ -241,6 +274,7 @@ def score_v0_4_against_control(
     memory_roundness_pass_at: float = 1.5,
     memory_dimension_partial_at: float = 1.15,
     memory_dimension_pass_at: float = 1.35,
+    residence_field: str = "max_residence_memory_times",
 ) -> dict[str, float | None]:
     """Score v0.4 with memory-cloud shape support.
 
@@ -250,7 +284,11 @@ def score_v0_4_against_control(
     cloud as the candidate knot shape observable.
     """
 
-    score = score_against_control(case_diagnostics, control_diagnostics)
+    score = score_against_control(
+        case_diagnostics,
+        control_diagnostics,
+        residence_field=residence_field,
+    )
     case_memory_radius = memory_mean_radius(case_diagnostics)
     control_memory_radius = memory_mean_radius(control_diagnostics)
     case_memory_roundness = memory_roundness_value(case_diagnostics)
@@ -306,4 +344,43 @@ def score_v0_4_against_control(
             "memory_dimension_gain": memory_dimension_gain,
         }
     )
+    return score
+
+
+def score_v0_5_against_control(
+    case_diagnostics: Mapping[str, Any],
+    control_diagnostics: Mapping[str, Any],
+) -> dict[str, float | None]:
+    """Score v0.5 with cross-alpha-safe residence and memory-shape gating.
+
+    v0.5 is meant for comparison sets that include different memory decay
+    rates. It compares residence in raw update counts rather than in
+    ``alpha^{-1}`` units and only awards memory compactness when the case has a
+    nondegenerate memory cloud with both roundness and dimension diagnostics.
+    """
+
+    score = score_v0_4_against_control(
+        case_diagnostics,
+        control_diagnostics,
+        residence_field="max_residence_updates",
+    )
+    memory_shape_valid = (
+        score["case_memory_roundness"] is not None
+        and score["case_memory_dimension"] is not None
+    )
+    if not memory_shape_valid:
+        score["memory_compactness_gain"] = None
+        score["memory_compactness_score"] = 0.0
+
+    components = [
+        float(score["residence_score"] or 0.0),
+        float(score["compactness_score"] or 0.0),
+        float(score["voxel_score"] or 0.0),
+        float(score["dimension_score"] or 0.0),
+        float(score["memory_compactness_score"] or 0.0),
+        float(score["memory_roundness_score"] or 0.0),
+        float(score["memory_dimension_score"] or 0.0),
+    ]
+    score["score"] = sum(components) / 7.0
+    score["memory_shape_valid"] = memory_shape_valid
     return score

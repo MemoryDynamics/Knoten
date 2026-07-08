@@ -226,6 +226,20 @@ Damit ist Feedback-Confinement robuster, aber der zweiskalige Baseline-Claim
 schwaecher. Fuer Paper I ist ein ein- oder feedback-kernelbasierter
 Confinement-Claim sauberer als ein spezifischer Zwei-Skalen-Claim.
 
+Kontrollfester v0.5-Score vom 2026-07-08:
+`reports/knot_score_v0_5_controls_100M_2026-07-08.md`.
+
+v0.5 vergleicht Residence in rohen Updates statt in `alpha^{-1}` und laesst
+Memory-Kompaktheit nur bei nichtdegenerierter Memory-Cloud zaehlen. Dadurch
+fallen `m0_zero` und `alpha_one` korrekt zusammen.
+
+| condition | n | score median | residence gain median | compactness gain median | memory valid | Lesart |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `baseline` | `15` | `1.000` | `6.667` | `14.767` | `15/15` | aktives Feedback-Confinement |
+| `single_scale` | `15` | `1.000` | `8.500` | `15.344` | `15/15` | ebenso stark; kein Zwei-Skalen-Nachweis |
+| `m0_zero` | `10` | `0.286` | `1.000` | `1.000` | `0/10` | Null-Feld-Kontrolle |
+| `alpha_one` | `10` | `0.286` | `1.000` | `1.000` | `0/10` | Ein-Punkt-Memory degeneriert zu Nullkraft |
+
 ## Ballistische MSD-Probe
 
 Report vom 2026-07-07: `reports/ballistic_kernel_probe_2026-07-07.md`.

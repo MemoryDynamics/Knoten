@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from emergenz_knoten.knot_score import (  # noqa: E402
     score_against_control,
     score_v0_4_against_control,
+    score_v0_5_against_control,
 )
 
 
@@ -171,7 +172,12 @@ def build_rows(
     control_by_seed = {
         seed: case for (condition, seed), case in cases.items() if condition == "eta_zero"
     }
-    scorer = score_v0_4_against_control if score_version == "v0.4" else score_against_control
+    if score_version == "v0.5":
+        scorer = score_v0_5_against_control
+    elif score_version == "v0.4":
+        scorer = score_v0_4_against_control
+    else:
+        scorer = score_against_control
     for (condition, seed), case in sorted(cases.items()):
         if condition == "eta_zero":
             continue
@@ -195,7 +201,24 @@ def build_rows(
     return rows
 
 
+def _uses_memory_components(score_version: str) -> bool:
+    return score_version in {"v0.4", "v0.5"}
+
+
 def _score_scope_lines(score_version: str) -> list[str]:
+    if score_version == "v0.5":
+        return [
+            "The v0.5 score is the control-safe variant for mixed-alpha comparisons.",
+            "It keeps the seven v0.4 components but changes two conventions:",
+            "",
+            "- residence gain is compared in raw update counts, not in `alpha^{-1}` units;",
+            "- memory-cloud compactness only scores when the case has nondegenerate",
+            "  memory roundness and memory dimension diagnostics.",
+            "",
+            "This prevents the `alpha=1` one-point memory limit from looking",
+            "artificially long-lived or compact merely because its memory time is one",
+            "update and its active memory cloud is degenerate.",
+        ]
     if score_version == "v0.4":
         return [
             "The v0.4 score averages seven components against the matched",
@@ -235,7 +258,7 @@ def _component_text(row: dict[str, Any], score_version: str) -> str:
         row["voxel_score"],
         row["dimension_score"],
     ]
-    if score_version == "v0.4":
+    if _uses_memory_components(score_version):
         components.extend([
             row["memory_compactness_score"],
             row["memory_roundness_score"],
@@ -246,7 +269,7 @@ def _component_text(row: dict[str, Any], score_version: str) -> str:
 
 def _append_seed_scorecard(lines: list[str], rows: list[dict[str, Any]], score_version: str) -> None:
     lines.extend(["", "## Seed Scorecard", ""])
-    if score_version == "v0.4":
+    if _uses_memory_components(score_version):
         lines.extend([
             "| condition | seed | score | residence gain | sample compactness | voxel stability | D_occ | memory compactness | memory roundness gain | memory dimension gain | components R/C/V/D/MC/MR/MD |",
             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
@@ -279,7 +302,7 @@ def _append_condition_summary(lines: list[str], rows: list[dict[str, Any]], scor
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         grouped[row["condition"]].append(row)
-    if score_version == "v0.4":
+    if _uses_memory_components(score_version):
         lines.extend([
             "",
             "## Condition Summary",
@@ -309,7 +332,7 @@ def _append_condition_summary(lines: list[str], rows: list[dict[str, Any]], scor
         dimension_summary = _summary([
             row["internal_dimension"] for row in condition_rows if row["internal_dimension"] is not None
         ])
-        if score_version == "v0.4":
+        if _uses_memory_components(score_version):
             memory_compact_summary = _summary([
                 row["memory_compactness_gain"]
                 for row in condition_rows
@@ -430,6 +453,11 @@ def build_report(payload: dict[str, Any]) -> str:
             continue
         paired.append(float(row["score"]) - float(other["score"]))
     paired_summary = _summary(paired)
+    memory_reading = (
+        "- Memory-cloud shape is explicit in v0.5, and residence is compared in raw updates."
+        if score_version == "v0.5"
+        else "- Memory-cloud shape is now explicit in v0.4; the raw sample path remains"
+    )
     lines.extend(
         [
             "",
@@ -442,8 +470,8 @@ def build_report(payload: dict[str, Any]) -> str:
             f"- Baseline minus `single_scale` score difference has median {_fmt(paired_summary['median'])};",
             "  therefore this score still does not isolate the baseline two-scale",
             "  kernel as necessary.",
-            "- Memory-cloud shape is now explicit in v0.4; the raw sample path remains",
-            "  a reported diagnostic rather than the knot-shape criterion.",
+            memory_reading,
+            "  The raw sample path remains a reported diagnostic rather than the knot-shape criterion.",
             "",
         ]
     )
@@ -453,7 +481,7 @@ def build_report(payload: dict[str, Any]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Score existing long-run knot evidence JSON files.")
     parser.add_argument("--source-dir", action="append", default=[], help="Source directory or comma-separated directories with case_*.json files.")
-    parser.add_argument("--score-version", choices=("v0.3", "v0.4"), default="v0.3")
+    parser.add_argument("--score-version", choices=("v0.3", "v0.4", "v0.5"), default="v0.3")
     parser.add_argument("--report", type=Path, default=Path("reports/knot_score_v0_3_2026-07-02.md"))
     parser.add_argument("--output-json", type=Path, default=Path("data/processed/knot_score/2026-07-02_v0_3/summary.json"))
     return parser.parse_args()

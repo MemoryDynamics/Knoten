@@ -4,12 +4,14 @@ import pytest
 
 from emergenz_knoten.knot_score import (
     best_residence_memory_times,
+    best_residence_updates,
     memory_mean_radius,
     memory_roundness_value,
     memory_shape_dimension_value,
     occupancy_dimension_value,
     score_against_control,
     score_v0_4_against_control,
+    score_v0_5_against_control,
     shape_roundness_value,
     threshold_score,
     voxel_stability_ratio,
@@ -20,17 +22,23 @@ def _diagnostics(
     *,
     radius: float,
     residences: list[float],
+    residence_updates: list[float] | None = None,
     d_occ: float = 1.8,
     roundness: float | None = None,
     memory_radius: float | None = None,
     memory_roundness: float | None = None,
     memory_dimension: float | None = None,
 ) -> dict[str, object]:
+    if residence_updates is None:
+        residence_updates = residences
     diagnostics: dict[str, object] = {
         "mean_centered_radius": radius,
         "occupancy_dimension": d_occ,
         "residence_by_voxel_size": {
-            str(i): {"max_residence_memory_times": value}
+            str(i): {
+                "max_residence_memory_times": value,
+                "max_residence_updates": residence_updates[i],
+            }
             for i, value in enumerate(residences)
         },
     }
@@ -55,6 +63,7 @@ def test_best_residence_and_voxel_stability() -> None:
     diagnostics = _diagnostics(radius=2.0, residences=[10.0, 20.0, 40.0])
 
     assert best_residence_memory_times(diagnostics) == 40.0
+    assert best_residence_updates(diagnostics) == 40.0
     assert voxel_stability_ratio(diagnostics) == pytest.approx(0.25)
 
 
@@ -116,6 +125,34 @@ def test_score_against_control_combines_available_components() -> None:
     assert score["internal_dimension"] == pytest.approx(1.8)
     assert score["dimension_score"] == pytest.approx(1.0)
     assert score["score"] == pytest.approx(1.0)
+
+
+def test_score_v0_5_uses_update_residence_and_gates_degenerate_memory() -> None:
+    case = _diagnostics(
+        radius=10.0,
+        residences=[8000.0],
+        residence_updates=[8000.0],
+        d_occ=1.8,
+        memory_radius=0.1,
+    )
+    control = _diagnostics(
+        radius=10.0,
+        residences=[80.0],
+        residence_updates=[8000.0],
+        d_occ=1.8,
+        memory_radius=0.5,
+        memory_roundness=0.3,
+        memory_dimension=1.8,
+    )
+
+    old_score = score_v0_4_against_control(case, control)
+    new_score = score_v0_5_against_control(case, control)
+
+    assert old_score["residence_gain"] == pytest.approx(100.0)
+    assert new_score["residence_gain"] == pytest.approx(1.0)
+    assert new_score["memory_shape_valid"] is False
+    assert new_score["memory_compactness_gain"] is None
+    assert new_score["score"] == pytest.approx(2.0 / 7.0)
 
 
 def test_score_v0_4_adds_memory_cloud_components() -> None:

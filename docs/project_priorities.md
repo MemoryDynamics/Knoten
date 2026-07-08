@@ -147,6 +147,8 @@ oder `eta/eta_c` gemeinsam dokumentieren.
 
 Prioritaet:
 
+0. Abgeschlossen: Der v0.5-Kontrollvergleich trennt `baseline`/`single_scale`
+   sauber von `m0_zero`/`alpha_one`, isoliert aber keinen Zwei-Skalen-Mechanismus.
 1. Bestehende 15-Seed-/Long-Run-Daten blockweise coarse-grainen und lineare
    AR-/Transfermoden auf reelle, negative oder komplexe Eigenwerte pruefen.
 2. Die korrigierte kurze Ballistikprobe nur als dimensionslosen Sanity-Check
