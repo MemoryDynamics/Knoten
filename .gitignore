@@ -21,3 +21,6 @@ src/emergenz_knoten.egg-info/
 experiments/reference_output*.json
 site/
 tmp/
+
+# Local private notes
+reports/paper1_olaf_note_2026-06-17.md
