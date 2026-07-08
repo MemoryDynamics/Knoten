@@ -51,6 +51,11 @@ signature. That would directly test the smoothing/washout hypothesis.
 
 ## Implementation status
 
-`SimulationConfig` now records `deposition_kernel="delta"`. Non-delta values are
-rejected until a finite-width deposition backend is implemented. Future JSON
-outputs will therefore make the assumption explicit in their config payload.
+Original audit result: `SimulationConfig` recorded `deposition_kernel="delta"`
+to make the point-memory convention explicit.
+
+Follow-up implementation on 2026-07-08: finite Gaussian deposition is now
+implemented through effective convolution parameters. Supported modes are
+`delta`, `gaussian`, and `matched_gaussian`; long-run payloads include the
+resulting `effective_kernel`. The first matched-deposition pilot is reported in
+`reports/matched_deposition_kernel_pilot_2026-07-08.md`.

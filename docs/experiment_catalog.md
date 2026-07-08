@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3/v0.4, `m0_zero`, `alpha_one` und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3-v0.5, `m0_zero`, `alpha_one`, `matched_deposition` und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -87,6 +87,21 @@ M0-/Alpha-One-Kontrolle 2026-07-08 (`N=100,000,000`, Seeds `1..10`):
 Lesart: `alpha=1` ist fuer den symmetrischen selbstzentrierten Kernel effektiv
 eine Negativkontrolle, nicht ein konfiniertes Ein-Schritt-Memory-Regime. Report:
 `reports/long_run_m0_alpha_one_results_2026-07-08.md`.
+
+Matched-Deposition-Pilot 2026-07-08 (`N=100,000`, Seeds `1..5`, Slow Python):
+
+| condition | score median | sample radius median | memory radius median | memory roundness median | Lesart |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `baseline` | `0.857` | `0.362` | `0.097` | `0.767` | kompakter Delta-Referenzlauf |
+| `matched_deposition` | `0.714` | `1.535` | `0.244` | `0.668` | weiter confined, aber breiter/schwaecher |
+| `eta_zero` | `n/a` | `5.167` | `0.622` | `0.380` | Negativkontrolle |
+
+Lesart: `matched_gaussian` ist die konservative positive Schreib-/Lese-
+Kernel-Variante. Ohne Steifigkeitsrenormierung reduziert die normierte Faltung
+in `d=3` die lokale Kraftskala um etwa Faktor `5.66`; der faire naechste Test
+ist daher curvature-renormalized matching. Reports:
+`reports/matched_deposition_kernel_pilot_2026-07-08.md` und
+`reports/knot_score_v0_5_matched_deposition_100k_2026-07-08.md`.
 
 ## Epsilon-Step-Balance
 
@@ -268,6 +283,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
 | `reports/private_review_notes_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Private Klartexte gehoeren nicht in ein Public Repo; `m0_zero` und `alpha_one` sind Negativkontrollen fuer die Long-Run-Evidenz. |
 | `reports/deposition_kernel_audit_2026-07-08.md` | Deposition-Kernel-Audit | Der Paketkern ist bereits Delta-Deposition; sinnvoller naechster Kontrolllauf waere finite Gaussian deposition. |
+| `reports/matched_deposition_kernel_pilot_2026-07-08.md` | Matched-Deposition-Pilot | Normalisiertes Gaussian-Matching trennt von `eta_zero`, ist im 100k-Pilot aber breiter als Delta; naechster Test braucht Steifigkeitsrenormierung. |
 
 ## Reproduzierbarkeitsregeln
 

@@ -185,11 +185,21 @@ Grenzfall ist daher eine Negativkontrolle, kein Knotenregime. Report:
 Deposition-Kernel-Audit 2026-07-08: Der Paketkern speichert Punktdepositionen
 und berechnet die Kraft als Summe ueber `grad K(x-x_k)`. Das ist numerisch
 bereits `G=delta`; `sigma_rep` und `sigma_att` sind effektive Interaktions-
-laengen, keine separate Depositionsbreite. `SimulationConfig` schreibt kuenftig
-`deposition_kernel="delta"` in neue JSONs. Eine neue Delta-Condition waere
-seedgleich zur Baseline; die sinnvolle Zusatzkontrolle ist stattdessen ein
-endlicher Gaussian-Depositionskernel. Report:
+laengen, keine separate Depositionsbreite. Report:
 `reports/deposition_kernel_audit_2026-07-08.md`.
+
+Matched-Deposition-Update 2026-07-08: Der Code kennt jetzt `delta`, `gaussian`
+und `matched_gaussian`. Die Condition `matched_deposition` verwendet eine
+positive, normalisierte Gauss-Deposition mit derselben Breite wie die jeweilige
+Lesekomponente und rechnet sie als effektiven Faltungskernel aus. Der 100k-
+Slow-Python-Pilot trennt weiter klar von `eta_zero`, ist aber schwaecher als
+die Delta-Baseline (`score median 0.714` vs. `0.857`, Memory-Radius `0.244`
+vs. `0.097`). Lesart: Matching allein erzeugt nicht sofort staerkere Knoten,
+weil die normierte Faltung in `d=3` die lokale Steifigkeit um etwa Faktor
+`5.66` reduziert. Naechster fairer Test ist eine curvature-renormalized
+matched condition, nicht direkt ein 100M-Lauf. Reports:
+`reports/matched_deposition_kernel_pilot_2026-07-08.md` und
+`reports/knot_score_v0_5_matched_deposition_100k_2026-07-08.md`.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
