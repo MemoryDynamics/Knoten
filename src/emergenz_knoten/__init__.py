@@ -66,6 +66,14 @@ from .synchronization import (
     response_rank,
     shape_tensor,
 )
+from .vector_memory import (
+    VectorMemoryConfig,
+    normalize_orientation,
+    simulate_vector_memory,
+    update_vector_history,
+    vector_gaussian_field,
+    vector_memory_force,
+)
 from .markov.validation import (
     ballistic_scaling_slope,
     critical_gamma,
@@ -80,6 +88,7 @@ __all__ = [
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
+    "VectorMemoryConfig",
     "best_residence_memory_times",
     "best_residence_updates",
     "ballistic_scaling_slope",
@@ -104,6 +113,7 @@ __all__ = [
     "memory_mean_radius",
     "memory_roundness_value",
     "memory_shape_dimension_value",
+    "normalize_orientation",
     "occupancy_dimension",
     "occupancy_dimension_value",
     "occupancy_local_slopes",
@@ -123,11 +133,15 @@ __all__ = [
     "shape_tensor",
     "simulate_finite_memory",
     "simulate_finite_memory_numba",
+    "simulate_vector_memory",
     "spectral_dimension",
     "stationary_deposition_weight",
     "stationary_memory_mass",
     "threshold_score",
     "two_scale_force_crossing_radius",
+    "update_vector_history",
+    "vector_gaussian_field",
+    "vector_memory_force",
     "voxel_stability_ratio",
     "zero_mean_attractive_amplitude",
 ]
