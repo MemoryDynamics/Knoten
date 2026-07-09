@@ -256,6 +256,18 @@ skalare Memory-Modell stuetzt Relaxation/Kompaktheit, aber noch keinen
 oszillatorischen oder photonartigen Modus. Report:
 `reports/ar_mode_probe_corrected_candidates_2026-07-09.md`.
 
+Grenzscan 2026-07-09: Mit Seeds `1..10`, `N=50,000` und
+`A_att=3.5..9.0` wurde die korrigierte Uebergangsgrenze verfeinert.
+`rep/att=1` liegt bei `A_att ~= 7.93`, `net cos=0` bei `A_att ~= 7.85`;
+also `chi ~= 0.87..0.88`. Report:
+`reports/transition_boundary_corrected_sign_q3_2026-07-09.md`.
+
+Vektorgedaechtnis-Notiz 2026-07-09: Der naechste Modellschritt fuer
+oszillatorische, photonartige oder bosonische Kandidaten ist ein orientierter
+Memory-Kanal `p_n` mit klaren Kontrollen (`eta_v=0`, shuffled vector memory,
+`M_v=0`, `lambda_v=1`). Report:
+`reports/vector_memory_minimal_design_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -297,14 +309,12 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Fuer Paper I entscheiden, ob die skalaren Kandidaten `A_att=9..35` mit
-   laengeren Long-Runs/Residence-Statistik gehaertet werden sollen.
-2. Fuer Paper III/Photon-/Wellenrichtung nicht weiter aus dem skalaren
-   Memory-Modell ueberclaimen: naechster Modellschritt ist Vektor-, Phasen-
-   oder Velocity-Memory.
-3. Falls Vektormemory begonnen wird, zuerst Minimalanforderungen definieren:
-   Normierung, Kopplung an den Drift, interne Rotations-/Phasenvariable und
-   klare Negativkontrollen.
+1. Fuer Paper I nur bei Bedarf Long-Run-Residence/Score im engen skalaren
+   Fenster `A_att=7.75..9.0` bzw. im Kompaktheitsfenster `9..35` haerten.
+2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis als separaten
+   Modellzweig beginnen; skalares Memory nicht ueberclaimen.
+3. Minimalen Vektormemory-Prototyp erst mit `eta_v=0`-Rueckfalltest,
+   shuffled-vector-Kontrolle und AR-Slow-Mode-Kriterium implementieren.
 4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder
    aufnehmen und nur mit klarer Mechanismusfrage.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.

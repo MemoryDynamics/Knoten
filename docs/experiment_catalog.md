@@ -295,6 +295,8 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/corrected_sign_q3_pilot_2026-07-09.md` | Corrected-sign q=3 | Historische Baseline `A_att=0.35` dispergiert; `rep_zero` bestaetigt den attraktiven Kanal. |
 | `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md` | Amplitudenhierarchie | Drift-Umschlag zwischen `A_att=3.5` und `9`; kompakte Kandidaten bei `A_att=9..35`, aber noch keine Long-Run-Knoten. |
 | `reports/ar_mode_probe_corrected_candidates_2026-07-09.md` | AR-Modenprobe | Langsame Moden auf korrigierten Kandidaten bleiben reell; keine stabile komplexe Slow-Mode-Evidenz im skalaren Memory-Modell. |
+| `reports/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
+| `reports/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

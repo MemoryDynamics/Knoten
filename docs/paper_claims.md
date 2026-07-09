@@ -50,7 +50,7 @@ Der bisherige v0.5-Kontrollstand ist nach dem Vorzeichenfund nur noch
 `legacy-sign`-Evidenz. Der korrigierte q=3-Retest zeigt, dass die historische
 Baseline mit `A_att=0.35` repulsionsdominiert dispergiert. Die anschliessende
 Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
-`A_att=9..35`, aber noch keine robuste Long-Run-Metastabilitaet.
+`A_att=9..35`, mit verfeinerter Uebergangsgrenze bei `A_att ~= 7.9` (`chi ~= 0.88`), aber noch keine robuste Long-Run-Metastabilitaet.
 
 Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
@@ -86,7 +86,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | korrigierte kompakte Kurzlauf-Kandidaten bei `A_att=9..35`; Long-Run-Metastabilitaet offen | laengere Residence/Score-Laeufe nur im Kandidatenfenster |
+| Knoten als metastabile Regime | korrigierte kompakte Kurzlauf-Kandidaten; Uebergang bei `A_att ~= 7.9`, Long-Run-Metastabilitaet offen | laengere Residence/Score-Laeufe nur im Kandidatenfenster |
 | Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |

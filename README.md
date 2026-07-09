@@ -42,6 +42,8 @@ Belastbar derzeit:
 - Der korrigierte q=3-Retest zeigt: die historische Baseline mit `A_att=0.35`
   dispergiert; kompakte Kandidaten entstehen erst im Amplitudenfenster
   `A_att=9..35` bei festem `A_rep=1`, sind aber noch keine Long-Run-Knoten.
+- Der Grenzscan unterhalb `A_att=9` lokalisiert den korrigierten Umschlag bei
+  `A_att ~= 7.9` bzw. `chi ~= 0.88`.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
   Deposition; `matched_deposition` ist ohne Steifigkeitsrenormierung breiter
   als die Delta-Baseline.
@@ -132,12 +134,12 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Skalare Kandidaten `A_att=9..35` weiter nur als Relaxations-/
-   Kompaktheitsregime behandeln; der erste AR-Modentest fand keine stabilen
-   langsamen komplexen Moden.
-2. Fuer Paper I: laengere Long-Runs im Kandidatenfenster nur starten, wenn
-   Residence/Score als naechster Evidenzschritt gebraucht wird.
-3. Fuer Paper III/Photon-/Wellenrichtung: Vektor-, Phasen- oder Velocity-
-   Memory als explizite Modell-Erweiterung entwerfen und separat testen.
+1. Fuer skalare Paper-I-Haertung nur noch das enge Fenster `A_att=7.75..9`
+   als Uebergang und `A_att=9..35` als Kompaktheitsbereich verwenden.
+2. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-
+   Memory als explizite Modell-Erweiterung beginnen; skalares Memory zeigte
+   bisher nur reelle langsame Moden.
+3. Erste Vektormemory-Kriterien: `eta_v=0` muss exakt den skalaren Baseline-
+   Fall liefern; komplexe Slow-Modes muessen lag-stabil sein.
 4. Zero-Mean/Matched-Deposition erst unter korrigierter Sign-Konvention wieder
    aufnehmen, falls sie eine konkrete Mechanismusfrage klaeren.

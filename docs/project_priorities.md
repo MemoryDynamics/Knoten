@@ -116,8 +116,10 @@ Naechster operativer Schritt:
 4. Abgeschlossen: erster AR-Modentest auf `A_att=0.35`, `9`, `35`.
    Ergebnis: langsame Moden bleiben reell; schnelle kleine komplexe Reste
    tragen keinen Oszillatorclaim.
-5. Jetzt: fuer Paper I skalare Long-Run-Haertung im Fenster `A_att=9..35`
-   gegen Vektor-/Phasenmemory als Paper-III-Modellschritt abwaegen.
+5. Abgeschlossen: Grenzscan unterhalb `A_att=9`; Uebergang bei
+   `A_att ~= 7.9`, `chi ~= 0.88`.
+6. Jetzt: Vektorgedaechtnis-Prototyp spezifizieren/implementieren; skalare
+   Long-Run-Haertung nur bei Bedarf im engen Kandidatenfenster.
 
 Wenn der Score traegt:
 
@@ -146,11 +148,13 @@ Prioritaet:
    sind `legacy-sign`.
 1. Abgeschlossen: erster AR-Modentest auf den korrigierten kompakten
    Kandidaten. Die langsamen Moden sind reell, nicht stabil komplex.
-2. Fuer Paper I: wenn noetig, Long-Run-Residence/Score im Fenster
-   `A_att=9..35` haerten.
-3. Fuer Paper III: Vektor-/Phasenmemory priorisieren, wenn ein echter
+2. Abgeschlossen: Grenzscan im Bereich `A_att<9`; die Driftgrenze liegt bei
+   `A_att ~= 7.9`.
+3. Fuer Paper I: wenn noetig, Long-Run-Residence/Score nur noch im engen
+   skalaren Kandidatenfenster haerten.
+4. Fuer Paper III: Vektor-/Phasenmemory priorisieren, wenn ein echter
    oszillatorischer oder photonartiger Modus benoetigt wird.
-4. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
+5. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
    festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
 
 ### P2.1 Transferoperator auf Long-Run-Daten
