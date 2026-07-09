@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-07-02.
+Stand: 2026-07-09.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -17,6 +17,7 @@ python experiments/anchor_sensitivity_analysis.py
 python experiments/epsilon_step_balance.py
 python experiments/epsilon_floor_visual_probe.py
 python experiments/kernel_shape_probe.py
+python experiments/long_run_metastability.py --help
 python experiments/knot_score_report.py
 ```
 
@@ -28,7 +29,10 @@ python experiments/knot_score_report.py
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
 - `epsilon_floor_visual_probe.py`: flexible 3D-Visualisierung der Epsilon-Floor-Faelle.
 - `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden- und Seed-Probe mit skaliertem 3D-Fuehrungskoordinatenplot.
-- `knot_score_report.py`: Scorecard-Auswertung vorhandener Long-Run-JSONs mit v0.3/v0.4-Knotenscore.
+- `long_run_metastability.py`: seedfaehige Long-Run-Piloten mit
+  `baseline`, `eta_zero`, `single_scale`, `zero_mean_two_scale` und
+  `matched_deposition_renormalized`.
+- `knot_score_report.py`: Scorecard-Auswertung vorhandener Long-Run-JSONs mit v0.3-v0.5-Knotenscore.
 - `cli.py`: kategorisierte Steuerung vorhandener Skripte.
 - `dimension_selection/`: effektive Dimensionswahl und Kernel-Parameter.
 - `fractal_analysis/`: Box-counting, Occupancy-Dimension,
@@ -62,8 +66,13 @@ Experimentfokus ist ihre Haertung:
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
-- Knotenscore v0.4 plus 1M-Shape-Pilot: Scorecard trennt Feedback-Confinement und Memory-Cloud-Shape von `eta_zero`, isoliert aber noch keinen zweiskaligen Baseline-Mechanismus.
-- Naechster Kontrollschritt: `amplitude_rep = 0` als echte Dispersionsablation, danach erst Paper-I-Evidenztabelle oder Long-Run-Transferoperatorfeatures.
+- Knotenscore v0.5 plus Zero-Mean-/Matched-Pilot: Scorecard trennt
+  Feedback-Confinement und Memory-Cloud-Shape von `eta_zero`, isoliert bei
+  `sigma_att/sigma_rep=1.5` aber noch keinen Zero-Mean- oder
+  Matched-Deposition-Mechanismus.
+- Naechster Kontrollschritt: Scale-Ratio-Pilot fuer
+  `sigma_att/sigma_rep in {2,3}`, danach `amplitude_rep = 0` als echte
+  Dispersionsablation und erst dann Block-Markov-/AR-Modentests.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

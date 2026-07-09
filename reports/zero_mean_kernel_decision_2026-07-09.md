@@ -92,3 +92,13 @@ Interpretation guardrail: a positive result supports a compensated-kernel
 hypothesis, not a proof of a unique knot mechanism. It must still separate from
 `eta_zero`, from `single_scale`, and from matched-deposition controls over
 longer runs.
+
+
+## Pilot result
+
+The first 100k seed-matched pilot at `sigma_att/sigma_rep=1.5` is reported in
+`reports/zero_mean_matched_pilot_100k_2026-07-09.md`. Result: `baseline`,
+`zero_mean_two_scale`, and `matched_deposition_renormalized` are nearly
+indistinguishable at this horizon, while all active conditions remain compact
+relative to `eta_zero`. This suggests the short-run geometry is dominated by
+local effective curvature rather than the global zero-integral constraint.

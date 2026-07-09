@@ -209,6 +209,14 @@ fuer den unnormalisierten zweiskaligen Kernel. Der alte Baseline-Slice
 `sigma_att=1.5`, wo `A_att=0.296` gilt. Report:
 `reports/zero_mean_kernel_decision_2026-07-09.md`.
 
+Zero-Mean-/Matched-Pilot 2026-07-09: Der 100k-Pilot bei `sigma_att/sigma_rep=1.5`
+zeigt praktisch deckungsgleiche aktive Bedingungen: `baseline`,
+`zero_mean_two_scale` und `matched_deposition_renormalized` haben jeweils
+`score median 0.857`, Memory-Radius um `0.102..0.103` und trennen sich klar von
+`eta_zero`. Lesart: In diesem Kurzlauf dominiert lokale effektive Kruemmung;
+die globale Bedingung `int K=0` ist noch nicht als separater Mechanismus
+sichtbar. Report: `reports/zero_mean_matched_pilot_100k_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

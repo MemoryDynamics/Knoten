@@ -60,8 +60,9 @@ Der `matched_deposition`-Pilot zeigt ausserdem: normiertes Schreib-/Lese-
 Matching bleibt zwar confined relativ zu `eta_zero`, ist ohne
 Steifigkeitsrenormierung aber breiter als die Delta-Baseline.
 Der neue `zero_mean_two_scale`-Track testet zusaetzlich, ob ein kompensierter
-Kernel mit `int K=0` die Zweiskaligkeit sauberer isoliert; das ist aktuell eine
-Hypothese, kein Claim.
+Kernel mit `int K=0` die Zweiskaligkeit sauberer isoliert. Der erste 100k-Pilot
+bei `sigma_att/sigma_rep=1.5` isoliert diesen Mechanismus noch nicht; die
+aktiven Bedingungen sind praktisch deckungsgleich.
 
 ## Paper II: Propagation and Spacetime Kinematics
 

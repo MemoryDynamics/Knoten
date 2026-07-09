@@ -129,12 +129,9 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. `zero_mean_two_scale` und curvature-renormalized `matched_deposition` als
-   faire Kernel-Normierungstests implementieren.
-2. Kurzen seedgleichen Pilot gegen `baseline` und `eta_zero` laufen lassen,
-   zuerst bei `sigma_att/sigma_rep=1.5`.
-3. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
-4. Danach Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
+1. Scale-Ratio-Pilot fuer `zero_mean_two_scale` bei `sigma_att/sigma_rep in {2,3}`.
+2. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
+3. Danach Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
    Eigenwerte pruefen.
-5. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben
+4. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben
    Folgeprogramme.
