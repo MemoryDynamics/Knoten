@@ -39,7 +39,9 @@ from .kernels import (
     exponential_memory_weights,
     exponential_weights,
     gaussian_gradient,
+    matched_local_stiffness_renormalization,
     repulsive_gaussian_gradient,
+    zero_mean_attractive_amplitude,
 )
 from .knot_score import (
     best_residence_memory_times,
@@ -97,6 +99,7 @@ __all__ = [
     "lagged_cross_correlation",
     "load_simulation_result",
     "local_scalar_memory_modes",
+    "matched_local_stiffness_renormalization",
     "mean_squared_displacement",
     "memory_mean_radius",
     "memory_roundness_value",
@@ -126,4 +129,5 @@ __all__ = [
     "threshold_score",
     "two_scale_force_crossing_radius",
     "voxel_stability_ratio",
+    "zero_mean_attractive_amplitude",
 ]

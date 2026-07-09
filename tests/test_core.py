@@ -16,6 +16,7 @@ from emergenz_knoten import (
     exponential_memory_weights,
     exponential_weights,
     fit_occupancy_scaling_window,
+    matched_local_stiffness_renormalization,
     occupancy_dimension,
     occupancy_local_slopes,
     residence_statistics,
@@ -23,6 +24,7 @@ from emergenz_knoten import (
     repulsive_gaussian_gradient,
     simulate_finite_memory,
     simulate_finite_memory_numba,
+    zero_mean_attractive_amplitude,
 )
 from emergenz_knoten.core import finite_memory_step  # noqa: E402
 
@@ -131,6 +133,29 @@ def test_repulsive_gaussian_gradient_points_away_from_memory() -> None:
     grad = repulsive_gaussian_gradient(x, memory, weights, sigma=1.0, amplitude=1.0)
     assert grad[0] > 0.0
     assert grad[1] == 0.0
+
+
+def test_zero_mean_attractive_amplitude_cancels_unnormalized_gaussian_integrals() -> None:
+    amplitude = zero_mean_attractive_amplitude(
+        dim=3,
+        sigma_rep=1.0,
+        sigma_att=1.5,
+        amplitude_rep=1.0,
+    )
+
+    assert np.isclose(amplitude, 1.0 / (1.5 ** 3))
+    assert np.isclose(1.0 * 1.0**3, amplitude * 1.5**3)
+
+
+def test_matched_local_stiffness_renormalization_preserves_curvature_scale() -> None:
+    factor = matched_local_stiffness_renormalization(3)
+    raw_stiffness = 1.0 / (1.0**2)
+    effective_sigma = np.sqrt(2.0)
+    effective_amplitude = factor * (1.0 / effective_sigma) ** 3
+    effective_stiffness = effective_amplitude / (effective_sigma**2)
+
+    assert np.isclose(factor, 2.0 ** 2.5)
+    assert np.isclose(effective_stiffness, raw_stiffness)
 
 
 def test_effective_matched_deposition_convolves_each_gaussian_component() -> None:

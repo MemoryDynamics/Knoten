@@ -202,6 +202,13 @@ matched condition, nicht direkt ein 100M-Lauf. Reports:
 `reports/matched_deposition_kernel_pilot_2026-07-08.md` und
 `reports/knot_score_v0_5_matched_deposition_100k_2026-07-08.md`.
 
+Zero-Mean-Kernel-Notiz 2026-07-09: Die neue Condition `zero_mean_two_scale`
+setzt `A_att = A_rep (sigma_rep/sigma_att)^d` und erzwingt damit `int K = 0`
+fuer den unnormalisierten zweiskaligen Kernel. Der alte Baseline-Slice
+`L_att=3`, `A_att=0.35` war nicht kompensiert; ein erster fairer Test ist
+`sigma_att=1.5`, wo `A_att=0.296` gilt. Report:
+`reports/zero_mean_kernel_decision_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

@@ -58,6 +58,24 @@ In `d=3` reduziert Matching ohne Renormierung die lokale Steifigkeit um etwa
 Faktor `5.66`. Deshalb ist der naechste faire Kerneltest nicht bloss
 `matched_deposition`, sondern eine curvature-renormalized matched condition.
 
+Zero-Mean-Zweiskalenkernel:
+
+Fuer den unnormalisierten Double-Gaussian-Kernel
+
+```text
+K(r) = A_rep exp(-r^2/(2 L_rep^2)) - A_att exp(-r^2/(2 L_att^2))
+```
+
+ist `int K = 0` aequivalent zu
+
+```text
+A_att = A_rep (L_rep/L_att)^d.
+```
+
+Diese kompensierte Normierung entfernt den globalen DC-Anteil des Kernels und
+ist eine eigene, sauber testbare Kernelhypothese. Sie ist nicht dasselbe wie ein
+signierter Depositionskernel `G=K`.
+
 ## Markov-Einbettung
 
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der

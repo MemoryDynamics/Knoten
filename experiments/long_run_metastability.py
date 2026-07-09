@@ -22,10 +22,12 @@ from emergenz_knoten import (  # noqa: E402
     covariance_dimension,
     effective_double_gaussian_parameters,
     fit_occupancy_scaling_window,
+    matched_local_stiffness_renormalization,
     occupancy_dimension,
     residence_statistics,
     shape_statistics,
     simulate_finite_memory,
+    zero_mean_attractive_amplitude,
 )
 from emergenz_knoten.markov import vector_autocorrelation  # noqa: E402
 
@@ -58,7 +60,7 @@ def _parse_float_list(value: str) -> list[float]:
 
 
 def _parse_conditions(value: str) -> list[str]:
-    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one", "matched_deposition"}
+    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one", "matched_deposition", "matched_deposition_renormalized", "zero_mean_two_scale"}
     values = [item.strip() for item in value.split(",") if item.strip()]
     unknown = sorted(set(values) - allowed)
     if unknown:
@@ -108,6 +110,25 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
         return replace(config, alpha=1.0)
     if condition == "matched_deposition":
         return replace(config, deposition_kernel="matched_gaussian", deposition_sigma=0.0)
+    if condition == "matched_deposition_renormalized":
+        factor = matched_local_stiffness_renormalization(config.dim)
+        return replace(
+            config,
+            deposition_kernel="matched_gaussian",
+            deposition_sigma=0.0,
+            amplitude_rep=config.amplitude_rep * factor,
+            amplitude_att=config.amplitude_att * factor,
+        )
+    if condition == "zero_mean_two_scale":
+        return replace(
+            config,
+            amplitude_att=zero_mean_attractive_amplitude(
+                dim=config.dim,
+                sigma_rep=config.sigma_rep,
+                sigma_att=config.sigma_att,
+                amplitude_rep=config.amplitude_rep,
+            ),
+        )
     raise ValueError(f"unknown condition: {condition}")
 
 @njit(cache=True)

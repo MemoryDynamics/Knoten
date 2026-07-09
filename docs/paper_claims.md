@@ -59,6 +59,9 @@ nicht die lokale Restaurierung. `A_rep=0` ist die haertere Dispersionskontrolle.
 Der `matched_deposition`-Pilot zeigt ausserdem: normiertes Schreib-/Lese-
 Matching bleibt zwar confined relativ zu `eta_zero`, ist ohne
 Steifigkeitsrenormierung aber breiter als die Delta-Baseline.
+Der neue `zero_mean_two_scale`-Track testet zusaetzlich, ob ein kompensierter
+Kernel mit `int K=0` die Zweiskaligkeit sauberer isoliert; das ist aktuell eine
+Hypothese, kein Claim.
 
 ## Paper II: Propagation and Spacetime Kinematics
 

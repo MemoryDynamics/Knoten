@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.3-v0.5, `m0_zero`, `alpha_one`, `matched_deposition` und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -284,6 +284,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/privacy_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Privacy-Policy und Kontrollplan; lokale private Klartexte entfernt, `m0_zero` und `alpha_one` bleiben Negativkontrollen. |
 | `reports/deposition_kernel_audit_2026-07-08.md` | Deposition-Kernel-Audit | Delta ist die Baseline; finite `gaussian` und `matched_gaussian` sind jetzt als effektive Faltung implementiert. |
 | `reports/matched_deposition_kernel_pilot_2026-07-08.md` | Matched-Deposition-Pilot | Normalisiertes Gaussian-Matching trennt von `eta_zero`, ist im 100k-Pilot aber breiter als Delta; naechster Test braucht Steifigkeitsrenormierung. |
+| `reports/zero_mean_kernel_decision_2026-07-09.md` | Zero-Mean-Kernel | Kompensierter Zwei-Skalen-Kernel mit `int K=0`; erster Test bei `sigma_att/sigma_rep=1.5`. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

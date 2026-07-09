@@ -25,6 +25,8 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     m0_zero = long_run_metastability._apply_condition(cfg, "m0_zero")
     alpha_one = long_run_metastability._apply_condition(cfg, "alpha_one")
     matched = long_run_metastability._apply_condition(cfg, "matched_deposition")
+    renormalized = long_run_metastability._apply_condition(cfg, "matched_deposition_renormalized")
+    zero_mean = long_run_metastability._apply_condition(cfg, "zero_mean_two_scale")
 
     assert baseline == cfg
     assert eta_zero.eta == 0.0
@@ -37,6 +39,10 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     assert alpha_one.memory_mass == cfg.memory_mass
     assert matched.deposition_kernel == "matched_gaussian"
     assert matched.deposition_sigma == 0.0
+    assert renormalized.deposition_kernel == "matched_gaussian"
+    assert renormalized.amplitude_rep > cfg.amplitude_rep
+    assert renormalized.amplitude_att > cfg.amplitude_att
+    assert np.isclose(zero_mean.amplitude_att, cfg.amplitude_rep * (cfg.sigma_rep / cfg.sigma_att) ** cfg.dim)
 
 
 def test_stored_weight_mass_scales_with_memory_mass() -> None:

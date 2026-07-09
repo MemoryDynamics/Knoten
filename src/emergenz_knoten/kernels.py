@@ -16,6 +16,34 @@ import numpy as np
 DEPOSITION_KERNELS = {"delta", "gaussian", "matched_gaussian"}
 
 
+def zero_mean_attractive_amplitude(
+    *,
+    dim: int,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+) -> float:
+    """Return ``A_att`` such that the unnormalized two-Gaussian kernel has zero integral."""
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    if sigma_rep <= 0.0 or not np.isfinite(sigma_rep):
+        raise ValueError("sigma_rep must be positive")
+    if sigma_att <= 0.0 or not np.isfinite(sigma_att):
+        raise ValueError("sigma_att must be positive")
+    if not np.isfinite(amplitude_rep):
+        raise ValueError("amplitude_rep must be finite")
+    return float(amplitude_rep) * float((sigma_rep / sigma_att) ** dim)
+
+
+def matched_local_stiffness_renormalization(dim: int) -> float:
+    """Return the amplitude factor preserving local Gaussian stiffness after matching."""
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    return float(2.0 ** (0.5 * dim + 1.0))
+
+
 def exponential_memory_weights(
     lambda_value: float,
     horizon: int,

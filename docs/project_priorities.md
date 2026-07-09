@@ -109,18 +109,19 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Eine curvature-renormalized matched-deposition Condition implementieren.
-   Grund: `matched_gaussian` mit normierter Deposition reduziert in `d=3` die
-   lokale Steifigkeit um etwa Faktor `5.66`; ohne Renormierung ist der Vergleich
-   gegen die Delta-Baseline nicht fair.
-2. Kurzer seedgleicher Pilot gegen `baseline` und `eta_zero`; erst bei einem
+1. `zero_mean_two_scale` als kompensierten Kerneltest priorisieren:
+   `A_att = A_rep (sigma_rep/sigma_att)^d`. Erster sinnvoller Slice:
+   `sigma_rep=1`, `sigma_att=1.5`, weil `A_att=0.296` nahe an der alten
+   Baseline-Amplitude liegt, aber `int K=0` erfuellt.
+2. Parallel `matched_deposition_renormalized` testen. Grund:
+   `matched_gaussian` mit normierter Deposition reduziert in `d=3` die lokale
+   Steifigkeit um etwa Faktor `5.66`; ohne Renormierung ist der Vergleich gegen
+   die Delta-Baseline nicht fair.
+3. Kurzer seedgleicher Pilot gegen `baseline` und `eta_zero`; erst bei einem
    klaren Signal auf 1M/100M skalieren.
-3. `amplitude_rep = 0` als echte Dispersionsablation nachziehen, getrennt vom
-   matched-deposition Track.
-4. Danach Block-Markov-/AR-Reanalyse auf reelle, negative oder komplexe
+4. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
+5. Danach Block-Markov-/AR-Reanalyse auf reelle, negative oder komplexe
    langsame Moden. Photon-/Welleninterpretationen bleiben bis dahin pausiert.
-5. Paper-I-Evidenz als effektives Memory-Feedback-Confinement formulieren:
-   robust gegen harte Negativkontrollen, aber derzeit nicht kernel-spezifisch.
 
 Wenn der Score traegt:
 
