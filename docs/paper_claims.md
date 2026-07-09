@@ -47,19 +47,17 @@ Noch nicht tragbar:
 - starke Dimensions- oder Raumzeitclaims.
 
 Der bisherige v0.5-Kontrollstand ist nach dem Vorzeichenfund nur noch
-`legacy-sign`-Evidenz. Nach der Korrektur des Kernelgradienten muss Paper-I-
-Evidenz neu aufgebaut werden: zuerst korrigierte Kurz-Kontrollen, dann
-Amplitudenhierarchie, dann erst Knotenscore und Modentests.
+`legacy-sign`-Evidenz. Der korrigierte q=3-Retest zeigt, dass die historische
+Baseline mit `A_att=0.35` repulsionsdominiert dispergiert. Die anschliessende
+Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
+`A_att=9..35`, aber noch keine robuste Long-Run-Metastabilitaet.
 
 Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
-repulsiv, `A_att` breit attraktiv im Potentialmodell.
-Matched-, Zero-Mean-, Scale-Ratio- und Rep-Zero-Piloten vor diesem Report
-bleiben als Diagnose der alten Implementierung nuetzlich. Fuer Paper I muessen
-sie unter korrigierter Sign-Konvention neu gerechnet werden, bevor daraus ein
-Confinement- oder Mechanismusclaim abgeleitet wird.
-
-## Paper II: Propagation and Spacetime Kinematics
+repulsiv, `A_att` breit attraktiv im Potentialmodell. Fuer Paper I ist damit
+der naechste Belegschritt nicht ein weiterer Blindscan, sondern ein
+Block-Markov-/AR-Modentest auf den korrigierten Kandidaten `A_att=9` und
+`A_att=35`.
 
 Status: Folgeprogramm.
 

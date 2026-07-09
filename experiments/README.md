@@ -68,10 +68,11 @@ Experimentfokus ist ihre Haertung:
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
 - Der Kernelgradient wurde korrigiert; fruehere Knotenscore-/Force-Piloten
   sind `legacy-sign`-Auditmaterial.
-- Force-Komponenten/Vorzeichen sind direkt ausgebbar und sollen in korrigierten
-  Kurz-Kontrollen mitlaufen.
-- Naechster Kontrollschritt: korrigierter q=3-Retest, danach Amplitudenhierarchie,
-  erst dann Block-Markov-/AR-Modentests.
+- Der korrigierte q=3-Retest und die Amplitudenhierarchie sind gelaufen:
+  `A_att=0.35` dispergiert, kompakte Kandidaten liegen im Kurzpilot bei
+  `A_att=9..35`.
+- Naechster Kontrollschritt: Block-Markov-/AR-Modentests auf diesen
+  korrigierten Kandidatendaten.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

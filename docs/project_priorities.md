@@ -104,16 +104,16 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Abgeschlossen: Sign-Konventionsentscheidung. Korrigiert wird der
+1. Abgeschlossen: Sign-Konventionsentscheidung. Korrigiert wurde der
    Potentialgradient, nicht `eta` und nicht bloss das Labeling. Report:
    `reports/kernel_sign_convention_correction_2026-07-09.md`.
-2. Jetzt: korrigierte Kurz-Kontrollen bei `q=3` rechnen:
-   `baseline`, `single_scale`, `rep_zero`, `eta_zero`, inklusive
-   Force-Komponenten.
-3. Danach: Amplitudenhierarchie testen, insbesondere breite Attraktion ueber
-   mehrere Groessenordnungen gegen den lokalen repulsiven Kern.
-4. Erst wenn ein kompaktes korrigiertes Regime sichtbar ist: Knotenscore,
-   Residence/Shape und Block-Markov-/AR-Moden neu auswerten.
+2. Abgeschlossen: korrigierter q=3-Retest. Historische Baseline und
+   `single_scale` dispergieren; `rep_zero` bestaetigt den attraktiven Kanal.
+   Report: `reports/corrected_sign_q3_pilot_2026-07-09.md`.
+3. Abgeschlossen: Amplitudenhierarchie. Der Drift-Umschlag liegt zwischen
+   `A_att=3.5` und `A_att=9`; kompakte Kandidaten liegen bei `A_att=9..35`.
+   Report: `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
+4. Jetzt: Block-Markov-/AR-Moden auf `A_att=9` und `A_att=35` testen.
 5. Photon-/Welleninterpretationen bleiben pausiert, bis ein komplexer oder
    propagierender effektiver Modus gemessen ist.
 
@@ -139,17 +139,17 @@ oder `eta/eta_c` gemeinsam dokumentieren.
 
 Prioritaet:
 
-0. Abgeschlossen: Memory-Form und Sign-Konventionsentscheidung sind im
-   Paketkern umgesetzt; vorhandene v0.5-Daten sind `legacy-sign`.
-1. Korrigierten q=3-Retest mit Force-Komponenten auswerten.
-2. Danach Amplitudenhierarchie und gegebenenfalls Zero-Mean/Matched-Varianten
-   unter korrigierter Konvention testen.
-3. Erst auf einem kompakten korrigierten Datensatz blockweise coarse-grainen
+0. Abgeschlossen: Memory-Form, Sign-Konventionsentscheidung, q=3-Retest und
+   Amplitudenhierarchie sind umgesetzt; vorhandene v0.5-Daten vor dem Fix
+   sind `legacy-sign`.
+1. Jetzt: auf den korrigierten kompakten Kandidaten blockweise coarse-grainen
    und lineare AR-/Transfermoden auf reelle, negative oder komplexe
    Eigenwerte pruefen.
-4. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
+2. Wenn die langsamen Moden rein reell bleiben, den skalaren Memory-Track als
+   Relaxationsmodell behandeln und den Vektor-/Phasenmemory-Track priorisieren.
+3. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
    festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
-5. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
+4. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
    propagierender effektiver Modus gemessen ist.
 
 ## P2: Spaeter

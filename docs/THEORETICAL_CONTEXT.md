@@ -166,14 +166,15 @@ physikalischen Massen.
 
 ## Aktuelle Evidenzgrenzen
 
-- Die bisherigen `baseline`/`single_scale`-Confinement-Befunde sind
-  `legacy-sign`-Befunde und nach der Kernelgradient-Korrektur nicht mehr als
-  Evidenz fuer das korrigierte Potentialmodell zitierbar.
-- Aktuelle Prioritaet ist Retest der korrigierten Vorzeichenkonvention:
-  `baseline`, `single_scale`, `rep_zero`, `eta_zero`, danach Amplitudenhierarchie.
-- Der normalisierte `matched_deposition`-Pilot muss ebenfalls neu gerechnet
-  werden, falls die korrigierten Basiskontrollen ein kompaktes Regime zeigen.
-- Der archivierte Near-3-Dimensionsbefund ist vielversprechend, aber keine
+- Die bisherigen `baseline`/`single_scale`-Confinement-Befunde vor dem
+  Sign-Fix sind `legacy-sign`-Befunde und nicht als Evidenz fuer das
+  korrigierte Potentialmodell zitierbar.
+- Der korrigierte q=3-Retest zeigt repulsionsdominierte Dispersion bei
+  `A_att=0.35`; die Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten
+  bei `A_att=9..35`.
+- Diese Kandidaten sind noch keine robusten metastabilen Knoten. Der naechste
+  Test ist AR-/Transferoperator-Modenklassifikation auf den korrigierten
+  Kandidatendaten.
   allgemeine `d=3`-Ableitung.
 - Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;
   dafuer braucht es lokale Reichweite, mehrstufige Uebertragung und keine

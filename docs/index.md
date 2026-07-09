@@ -38,12 +38,13 @@ soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
 Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
 Der bisherige v0.5-Knotenscore und die matched-/zero-mean-/rep-zero-Piloten
-sind `legacy-sign`-Auditmaterial. Sie erklaeren den Vorzeichenfund, zaehlen
-aber nicht mehr als Evidenz fuer das korrigierte Potentialmodell.
+sind `legacy-sign`-Auditmaterial. Der korrigierte q=3-Retest zeigt, dass die
+historische Baseline mit `A_att=0.35` repulsionsdominiert dispergiert.
 
-Naechster gezielter Schritt: korrigierte q=3-Kontrollen fuer `baseline`,
-`single_scale`, `rep_zero` und `eta_zero`, danach eine Amplitudenhierarchie
-ueber mehrere Groessenordnungen und erst dann Score-/Modentests.
+Die korrigierte Amplitudenhierarchie findet kompakte Kandidaten im Fenster
+`A_att=9..35` bei `A_rep=1`, aber noch keine belastbare Long-Run-
+Metastabilitaet. Naechster gezielter Schritt: Block-Markov-/AR-Modentests auf
+`A_att=9` und `A_att=35`.
 
 ## Nicht ueberclaimen
 

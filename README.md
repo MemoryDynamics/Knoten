@@ -39,8 +39,9 @@ Belastbar derzeit:
   `src/emergenz_knoten/markov/` und ist getestet.
 - Der Kernelgradient wurde korrigiert: `A_rep`/`A_att` sind jetzt wieder
   repulsiver/attraktiver Potentialkanal im Sinn der Paper-Gleichung.
-- Bisherige v0.5-Kontrollen sind `legacy-sign`-Evidenz und muessen fuer das
-  korrigierte Potentialmodell neu gerechnet werden.
+- Der korrigierte q=3-Retest zeigt: die historische Baseline mit `A_att=0.35`
+  dispergiert; kompakte Kandidaten entstehen erst im Amplitudenfenster
+  `A_att=9..35` bei festem `A_rep=1`, sind aber noch keine Long-Run-Knoten.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
   Deposition; `matched_deposition` ist ohne Steifigkeitsrenormierung breiter
   als die Delta-Baseline.
@@ -131,11 +132,12 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Korrigierte Sign-Konvention testen: `baseline`, `single_scale`,
-   `rep_zero`, `eta_zero` bei q=3 mit Force-Komponenten.
-2. Danach Amplitudenhierarchie testen, z. B. `A_att/A_rep` ueber mehrere
-   Groessenordnungen bei festem repulsivem Kern.
-3. Erst bei einem kompakten korrigierten Regime Block-Markov-/AR-Moden auf
-   reelle, negative oder komplexe langsame Eigenwerte pruefen.
-4. Paper I bleibt Feedback-Confinement-Evidenz, aber nur mit korrigierten
-   Retest-Daten; Paper II/III bleiben Folgeprogramme.
+1. Block-Markov-/AR-Moden auf den korrigierten Kandidaten `A_att=9` und
+   `A_att=35` testen; langsame Eigenwerte als reell, negativ oder komplex
+   klassifizieren.
+2. Fuer `A_att=9..35` laengere Seeds nur dann skalieren, wenn der Modentest
+   nicht sofort rein kollabierende oder rein diffusive Dynamik zeigt.
+3. Zero-Mean/Matched-Deposition erst unter korrigierter Sign-Konvention wieder
+   aufnehmen, falls sie im Kandidatenfenster eine mechanische Frage klaeren.
+4. Paper I bleibt vorsichtig: korrigierte kompakte Kandidaten ja, robuste
+   metastabile Knoten erst nach Long-Run- und Moden-Evidenz.

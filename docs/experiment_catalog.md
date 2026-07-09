@@ -27,6 +27,11 @@ Hardening und Long-Run-Metastabilitaet.
 
 ## Long-Run-Metastabilitaet
 
+Hinweis: Alle numerischen Long-Run-Abschnitte bis zum Force-Komponenten-Pilot
+vom 2026-07-09 sind `legacy-sign`-Auditmaterial. Korrigierte Evidenz beginnt
+mit `reports/corrected_sign_q3_pilot_2026-07-09.md` und
+`reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
+
 Kanonischer Start:
 
 ```powershell
@@ -287,6 +292,8 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |
+| `reports/corrected_sign_q3_pilot_2026-07-09.md` | Corrected-sign q=3 | Historische Baseline `A_att=0.35` dispergiert; `rep_zero` bestaetigt den attraktiven Kanal. |
+| `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md` | Amplitudenhierarchie | Drift-Umschlag zwischen `A_att=3.5` und `9`; kompakte Kandidaten bei `A_att=9..35`, aber noch keine Long-Run-Knoten. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

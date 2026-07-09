@@ -237,6 +237,17 @@ werden. Reports: `reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md
 und `reports/force_component_q3_pilot_2026-07-09.md`.
 
 
+Corrected-Sign-Piloten 2026-07-09: Der q=3-Retest nach der
+Kernelgradient-Korrektur zeigt, dass `baseline` mit `A_att=0.35` und
+`single_scale` repulsionsdominiert dispergieren. Force-Komponenten bestaetigen
+die neue Lesart direkt: `A_rep` zeigt vom Memory-Zentrum weg, `A_att` dorthin.
+Die Amplitudenhierarchie bei festem `A_rep=1`, `sigma_rep=1`, `sigma_att=3`
+findet den Drift-Umschlag zwischen `A_att=3.5` und `A_att=9`. Kompakte
+Kandidaten liegen im Kurzpilot bei `A_att=9..35`; `A_att=35` hat die rundeste
+Memory-Cloud, aber noch nur kurze Residence. `A_att=350` wirkt uebersteuert.
+Reports: `reports/corrected_sign_q3_pilot_2026-07-09.md` und
+`reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -278,16 +289,15 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Korrigierte Sign-Konvention testen: `baseline`, `single_scale`,
-   `rep_zero`, `eta_zero` bei `q=3`, inklusive Force-Komponenten.
-2. Amplitudenhierarchie testen: breite Attraktion gegen lokalen repulsiven Kern,
-   z. B. `A_att/A_rep` ueber mehrere Groessenordnungen.
-3. Nur bei sichtbarem kompaktem Regime: Knotenscore, Residence/Shape und
-   Block-Markov-/AR-Moden neu auswerten.
-4. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
-   oszillierendes oder ballistisches Regime in einem erweiterten Modell zeigen,
-   dann mit `hbar nu`, `mc^2` oder grossen/kleinen Zahlen skalieren.
-5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
-   Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
-   nach optischer Rundheit zu durchsuchen.
+1. Block-Markov-/AR-Moden auf den korrigierten kompakten Kandidaten
+   `A_att=9` und `A_att=35` testen; langsame Eigenwerte als reell, negativ
+   oder komplex klassifizieren.
+2. Wenn der Modentest nur reelle Relaxation findet, den skalaren Track nicht
+   zum Photon-/Wellenmodell ueberdehnen, sondern Vektor-/Phasenmemory als
+   Modell-Erweiterung priorisieren.
+3. Laengere Long-Runs im Fenster `A_att=9..35` erst skalieren, wenn der
+   Modentest ein nichttriviales Kandidatenregime rechtfertigt.
+4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder
+   aufnehmen und nur mit klarer Mechanismusfrage.
+5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
 6. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
