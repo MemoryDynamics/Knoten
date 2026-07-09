@@ -113,9 +113,11 @@ Naechster operativer Schritt:
 3. Abgeschlossen: Amplitudenhierarchie. Der Drift-Umschlag liegt zwischen
    `A_att=3.5` und `A_att=9`; kompakte Kandidaten liegen bei `A_att=9..35`.
    Report: `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
-4. Jetzt: Block-Markov-/AR-Moden auf `A_att=9` und `A_att=35` testen.
-5. Photon-/Welleninterpretationen bleiben pausiert, bis ein komplexer oder
-   propagierender effektiver Modus gemessen ist.
+4. Abgeschlossen: erster AR-Modentest auf `A_att=0.35`, `9`, `35`.
+   Ergebnis: langsame Moden bleiben reell; schnelle kleine komplexe Reste
+   tragen keinen Oszillatorclaim.
+5. Jetzt: fuer Paper I skalare Long-Run-Haertung im Fenster `A_att=9..35`
+   gegen Vektor-/Phasenmemory als Paper-III-Modellschritt abwaegen.
 
 Wenn der Score traegt:
 
@@ -142,17 +144,14 @@ Prioritaet:
 0. Abgeschlossen: Memory-Form, Sign-Konventionsentscheidung, q=3-Retest und
    Amplitudenhierarchie sind umgesetzt; vorhandene v0.5-Daten vor dem Fix
    sind `legacy-sign`.
-1. Jetzt: auf den korrigierten kompakten Kandidaten blockweise coarse-grainen
-   und lineare AR-/Transfermoden auf reelle, negative oder komplexe
-   Eigenwerte pruefen.
-2. Wenn die langsamen Moden rein reell bleiben, den skalaren Memory-Track als
-   Relaxationsmodell behandeln und den Vektor-/Phasenmemory-Track priorisieren.
-3. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
+1. Abgeschlossen: erster AR-Modentest auf den korrigierten kompakten
+   Kandidaten. Die langsamen Moden sind reell, nicht stabil komplex.
+2. Fuer Paper I: wenn noetig, Long-Run-Residence/Score im Fenster
+   `A_att=9..35` haerten.
+3. Fuer Paper III: Vektor-/Phasenmemory priorisieren, wenn ein echter
+   oszillatorischer oder photonartiger Modus benoetigt wird.
+4. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
    festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
-4. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
-   propagierender effektiver Modus gemessen ist.
-
-## P2: Spaeter
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 

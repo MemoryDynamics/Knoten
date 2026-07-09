@@ -71,8 +71,7 @@ Experimentfokus ist ihre Haertung:
 - Der korrigierte q=3-Retest und die Amplitudenhierarchie sind gelaufen:
   `A_att=0.35` dispergiert, kompakte Kandidaten liegen im Kurzpilot bei
   `A_att=9..35`.
-- Naechster Kontrollschritt: Block-Markov-/AR-Modentests auf diesen
-  korrigierten Kandidatendaten.
+- Erster AR-Modentest auf den korrigierten Kandidaten: langsame Moden bleiben reell; fuer oszillatorische/Photon-Tracks ist Vektor-/Phasenmemory wahrscheinlicher als weiteres Skalieren des skalaren Modells.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

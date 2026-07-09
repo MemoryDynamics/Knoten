@@ -132,12 +132,12 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Block-Markov-/AR-Moden auf den korrigierten Kandidaten `A_att=9` und
-   `A_att=35` testen; langsame Eigenwerte als reell, negativ oder komplex
-   klassifizieren.
-2. Fuer `A_att=9..35` laengere Seeds nur dann skalieren, wenn der Modentest
-   nicht sofort rein kollabierende oder rein diffusive Dynamik zeigt.
-3. Zero-Mean/Matched-Deposition erst unter korrigierter Sign-Konvention wieder
-   aufnehmen, falls sie im Kandidatenfenster eine mechanische Frage klaeren.
-4. Paper I bleibt vorsichtig: korrigierte kompakte Kandidaten ja, robuste
-   metastabile Knoten erst nach Long-Run- und Moden-Evidenz.
+1. Skalare Kandidaten `A_att=9..35` weiter nur als Relaxations-/
+   Kompaktheitsregime behandeln; der erste AR-Modentest fand keine stabilen
+   langsamen komplexen Moden.
+2. Fuer Paper I: laengere Long-Runs im Kandidatenfenster nur starten, wenn
+   Residence/Score als naechster Evidenzschritt gebraucht wird.
+3. Fuer Paper III/Photon-/Wellenrichtung: Vektor-, Phasen- oder Velocity-
+   Memory als explizite Modell-Erweiterung entwerfen und separat testen.
+4. Zero-Mean/Matched-Deposition erst unter korrigierter Sign-Konvention wieder
+   aufnehmen, falls sie eine konkrete Mechanismusfrage klaeren.

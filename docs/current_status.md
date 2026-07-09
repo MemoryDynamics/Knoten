@@ -248,6 +248,14 @@ Memory-Cloud, aber noch nur kurze Residence. `A_att=350` wirkt uebersteuert.
 Reports: `reports/corrected_sign_q3_pilot_2026-07-09.md` und
 `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
 
+AR-Modenprobe 2026-07-09: Auf PCA-reduzierten augmentierten Features fuer
+`A_att=0.35`, `9` und `35`, Seeds `1..3`, `N=50,000`, Lags `1,2,5,10`,
+werden alle langsamen Moden als reell klassifiziert. Kleine komplexe Paare
+treten nur als schnelle Restmoden unter `|mu|<0.2` auf. Lesart: Das korrigierte
+skalare Memory-Modell stuetzt Relaxation/Kompaktheit, aber noch keinen
+oszillatorischen oder photonartigen Modus. Report:
+`reports/ar_mode_probe_corrected_candidates_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -289,15 +297,14 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Block-Markov-/AR-Moden auf den korrigierten kompakten Kandidaten
-   `A_att=9` und `A_att=35` testen; langsame Eigenwerte als reell, negativ
-   oder komplex klassifizieren.
-2. Wenn der Modentest nur reelle Relaxation findet, den skalaren Track nicht
-   zum Photon-/Wellenmodell ueberdehnen, sondern Vektor-/Phasenmemory als
-   Modell-Erweiterung priorisieren.
-3. Laengere Long-Runs im Fenster `A_att=9..35` erst skalieren, wenn der
-   Modentest ein nichttriviales Kandidatenregime rechtfertigt.
+1. Fuer Paper I entscheiden, ob die skalaren Kandidaten `A_att=9..35` mit
+   laengeren Long-Runs/Residence-Statistik gehaertet werden sollen.
+2. Fuer Paper III/Photon-/Wellenrichtung nicht weiter aus dem skalaren
+   Memory-Modell ueberclaimen: naechster Modellschritt ist Vektor-, Phasen-
+   oder Velocity-Memory.
+3. Falls Vektormemory begonnen wird, zuerst Minimalanforderungen definieren:
+   Normierung, Kopplung an den Drift, interne Rotations-/Phasenvariable und
+   klare Negativkontrollen.
 4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder
    aufnehmen und nur mit klarer Mechanismusfrage.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
-6. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.

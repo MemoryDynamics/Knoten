@@ -172,9 +172,9 @@ physikalischen Massen.
 - Der korrigierte q=3-Retest zeigt repulsionsdominierte Dispersion bei
   `A_att=0.35`; die Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten
   bei `A_att=9..35`.
-- Diese Kandidaten sind noch keine robusten metastabilen Knoten. Der naechste
-  Test ist AR-/Transferoperator-Modenklassifikation auf den korrigierten
-  Kandidatendaten.
+- Der erste AR-Modentest auf diesen Kandidaten findet nur reelle langsame
+  Moden. Das stuetzt eine Relaxations-/Kompaktheitslesart des skalaren
+  Memory-Modells, aber noch keine oszillatorische oder photonartige Dynamik.
   allgemeine `d=3`-Ableitung.
 - Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;
   dafuer braucht es lokale Reichweite, mehrstufige Uebertragung und keine

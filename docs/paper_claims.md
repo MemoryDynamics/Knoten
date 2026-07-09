@@ -54,10 +54,9 @@ Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
 
 Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
-repulsiv, `A_att` breit attraktiv im Potentialmodell. Fuer Paper I ist damit
-der naechste Belegschritt nicht ein weiterer Blindscan, sondern ein
-Block-Markov-/AR-Modentest auf den korrigierten Kandidaten `A_att=9` und
-`A_att=35`.
+repulsiv, `A_att` breit attraktiv im Potentialmodell. Der erste Block-Markov-/AR-Modentest auf `A_att=9` und `A_att=35` findet nur reelle langsame Moden. Fuer Paper I bleibt daher skalare Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
+
+## Paper II: Propagation and Spacetime Kinematics
 
 Status: Folgeprogramm.
 
@@ -87,7 +86,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | nach Sign-Korrektur neu zu testen | korrigierte Kontrollen, Amplitudenhierarchie, dann AR-/Transfermoden |
+| Knoten als metastabile Regime | korrigierte kompakte Kurzlauf-Kandidaten bei `A_att=9..35`; Long-Run-Metastabilitaet offen | laengere Residence/Score-Laeufe nur im Kandidatenfenster |
 | Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
