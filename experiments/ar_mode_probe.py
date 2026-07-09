@@ -56,6 +56,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ridge", type=float, default=1e-6)
     parser.add_argument("--imag-tol", type=float, default=1e-3)
     parser.add_argument("--unstable-tol", type=float, default=1.05)
+    parser.add_argument("--slow-abs-min", type=float, default=0.2)
     parser.add_argument(
         "--output-json",
         type=str,
@@ -169,11 +170,14 @@ def classify_eigenvalues(
     *,
     imag_tol: float = 1e-3,
     unstable_tol: float = 1.05,
+    slow_abs_min: float = 0.2,
 ) -> str:
     values = np.asarray(list(eigenvalues), dtype=complex)
     if values.size == 0:
         return "empty"
-    leading = values[np.argsort(-np.abs(values))[: min(4, values.size)]]
+    ordered = values[np.argsort(-np.abs(values))]
+    slow = ordered[np.abs(ordered) >= slow_abs_min]
+    leading = slow[: min(4, slow.size)] if slow.size else ordered[:1]
     if np.max(np.abs(leading)) > unstable_tol:
         return "unstable"
     if np.any(np.abs(np.imag(leading)) > imag_tol):
@@ -191,7 +195,9 @@ def _fmt_complex(value: complex) -> str:
     return f"{z.real:.4f}{sign}{abs(z.imag):.4f}i"
 
 
-def _fit_to_row(fit: ARFit, *, imag_tol: float, unstable_tol: float) -> dict[str, Any]:
+def _fit_to_row(
+    fit: ARFit, *, imag_tol: float, unstable_tol: float, slow_abs_min: float
+) -> dict[str, Any]:
     eig = fit.eigenvalues
     leading = eig[0] if eig.size else complex(np.nan)
     return {
@@ -199,7 +205,12 @@ def _fit_to_row(fit: ARFit, *, imag_tol: float, unstable_tol: float) -> dict[str
         "lag_updates": fit.lag_updates,
         "n_pairs": fit.n_pairs,
         "residual_rms": fit.residual_rms,
-        "classification": classify_eigenvalues(eig, imag_tol=imag_tol, unstable_tol=unstable_tol),
+        "classification": classify_eigenvalues(
+            eig,
+            imag_tol=imag_tol,
+            unstable_tol=unstable_tol,
+            slow_abs_min=slow_abs_min,
+        ),
         "leading_abs": float(abs(leading)) if eig.size else None,
         "leading_real": float(np.real(leading)) if eig.size else None,
         "leading_imag": float(np.imag(leading)) if eig.size else None,
@@ -228,7 +239,14 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
                 lag_updates=int(lag * args.sample_every),
                 ridge=float(args.ridge),
             )
-            rows.append(_fit_to_row(fit, imag_tol=args.imag_tol, unstable_tol=args.unstable_tol))
+            rows.append(
+                _fit_to_row(
+                    fit,
+                    imag_tol=args.imag_tol,
+                    unstable_tol=args.unstable_tol,
+                    slow_abs_min=args.slow_abs_min,
+                )
+            )
         results.append(
             {
                 "amplitude_att": float(amplitude_att),
@@ -301,6 +319,7 @@ def build_report(payload: dict[str, Any]) -> str:
         "lags",
         "pca_components",
         "ridge",
+        "slow_abs_min",
     ]:
         lines.append(f"- `{key}`: `{params[key]}`")
     lines.extend(["", "## Mode Summary", ""])
@@ -333,6 +352,8 @@ def build_report(payload: dict[str, Any]) -> str:
             "",
             "- Treat classifications as lag- and feature-dependent diagnostics.",
             "- A classification is meaningful only if it is stable across several lags.",
+            "- Fast complex residues below `slow_abs_min` are reported in the eigenvalue",
+            "  list but do not make the slow-mode classification complex.",
             "- If the corrected scalar candidates show only real modes, the current",
             "  scalar memory model supports relaxation/confinement more directly than",
             "  oscillator or photon analogies.",
