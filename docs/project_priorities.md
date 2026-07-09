@@ -112,14 +112,14 @@ Naechster operativer Schritt:
 1. Abgeschlossen: Zero-Mean-/Matched-Piloten bei
    `sigma_att/sigma_rep in {1.5,2,3}`. Ergebnis: aktive Bedingungen sind
    scorecard-nah; ein Zero-Mean-Mechanismus ist nicht isoliert.
-2. Abgeschlossen: `rep_zero` bei `q=3`. Ergebnis: `rep_zero` dispergiert stark,
-   waehrend `single_scale` baseline-artig bleibt. Damit ist `A_rep` im
-   aktuellen Update der lokale Confinement-Kanal, nicht eine Negativkontrolle.
-3. Naechster Schritt: Kraftkomponenten und Vorzeichen direkt messen
-   (`grad_rep`, `grad_att`, Netto-Drift, Projektion auf Memory-Zentrum), damit
-   wir nicht weiter ueber Parameterlabels argumentieren.
-4. Danach Block-Markov-/AR-Reanalyse auf reelle, negative oder komplexe
-   langsame Moden. Photon-/Welleninterpretationen bleiben bis dahin pausiert.
+2. Abgeschlossen: `rep_zero` und Force-Komponenten bei `q=3`. Ergebnis:
+   `A_rep` ist im aktuellen Update der lokale Confinement-Kanal;
+   `rep_zero` entfernt diesen Kanal und dispergiert.
+3. Naechster Schritt: Block-Markov-/AR-Reanalyse auf reelle, negative oder
+   komplexe langsame Moden. Force-Komponenten koennen als Hilfsfeatures oder
+   Sanity-Checks mitlaufen.
+4. Photon-/Welleninterpretationen bleiben pausiert, bis ein komplexer oder
+   propagierender effektiver Modus gemessen ist.
 5. Paper-I-Evidenz weiterhin als Feedback-Confinement formulieren, nicht als
    spezifischen Zwei-Skalen- oder Zero-Mean-Mechanismus.
 

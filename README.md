@@ -129,12 +129,12 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Kraftvorzeichen und Komponenten diagnostizieren: `A_rep` ist in der
-   aktuellen Update-Konvention der lokale Confinement-Kanal; `rep_zero` ist die
-   harte Dispersionskontrolle.
-2. Keine Zero-Mean-Longruns skalieren, bis Kraftkomponenten und Vorzeichen
-   sauber getrennt sind.
-3. Danach Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
-   Eigenwerte pruefen.
+1. Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
+   Eigenwerte pruefen, zunaechst auf den kompakten `baseline`/`single_scale`
+   Regimen.
+2. Force-Komponenten als Hilfsfeatures/Sanity-Checks mitfuehren; sie bestaetigen
+   `A_rep` als lokalen Confinement-Kanal und `rep_zero` als Dispersionskontrolle.
+3. Keine weiteren Zero-Mean-Longruns skalieren, bis ein neues
+   mechanismusspezifisches Observable definiert ist.
 4. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben
    Folgeprogramme.

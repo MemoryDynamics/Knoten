@@ -65,7 +65,9 @@ Kernel mit `int K=0` die Zweiskaligkeit sauberer isoliert. Die 100k-Piloten bei
 aktiven Bedingungen sind praktisch deckungsgleich. Der `rep_zero`-Pilot bei
 `q=3` zeigt zugleich, dass die historischen Labels nicht literal gelesen werden
 duerfen: `A_rep` ist in der aktuellen Update-Konvention der lokale
-Confinement-Kanal, `A_att` ein breiter Gegenkanal.
+Confinement-Kanal, `A_att` ein breiter Gegenkanal. Der Force-Komponenten-Pilot
+bestaetigt diese Lesart direkt ueber Schritt-Normen und Memory-Center-
+Projektionen.
 
 ## Paper II: Propagation and Spacetime Kinematics
 

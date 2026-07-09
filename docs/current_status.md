@@ -227,6 +227,15 @@ Confinement-Kanal unter `x <- x - eta grad`; `A_att` wirkt als breiter
 Gegenkanal. Report:
 `reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md`.
 
+Force-Komponenten-Pilot 2026-07-09: Der seedgleiche 100k-Lauf bei `q=3`
+bestaetigt die Vorzeichenlesart direkt. Median ueber Seeds: `baseline` hat
+`rep_step 0.01293`, `att_step 0.000508`, `rep/att 25.4` und
+`net_step_memory_center_cos 0.906`; `single_scale` bleibt gleichartig
+konfinierend; `rep_zero` hat `rep_step 0`, `att_step 0.00257` und
+`net_step_memory_center_cos -0.997`, also driftet der verbleibende Kanal vom
+Memory-Zentrum weg. Report: `reports/force_component_q3_pilot_2026-07-09.md`.
+
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -270,15 +279,15 @@ Negativkontrollen gegeneinander pruefen.
 
 1. Paper-I-Claim-Sprache auf Feedback-Confinement gegenueber `eta_zero`
    zuschneiden; keinen notwendigen zweiskaligen Baseline-Mechanismus behaupten.
-2. Kraftkomponenten als Observablen ausgeben: `||eta grad_rep||`,
-   `||eta grad_att||`, Netto-Drift und Projektion auf den Memory-Schwerpunkt.
-   Ohne diese Vorzeichendiagnostik keine weiteren Zero-Mean-Longruns skalieren.
-3. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
+2. Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
+   Eigenwerte pruefen, zuerst auf kompakten `baseline`/`single_scale`-Regimen.
+3. Force-Komponenten als Hilfsfeatures/Sanity-Checks mitfuehren, aber keine
+   weiteren Zero-Mean-Longruns ohne neues mechanismusspezifisches Observable
+   skalieren.
+4. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
    oszillierendes oder ballistisches Regime in einem erweiterten Modell zeigen,
    dann mit `hbar nu`, `mc^2` oder grossen/kleinen Zahlen skalieren.
-4. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
+5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
    Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
    nach optischer Rundheit zu durchsuchen.
-5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
-6. Transferoperatorfeatures fuer Long-Run-Daten erweitern, sobald das
-   Knotenkriterium stabil ist.
+6. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.

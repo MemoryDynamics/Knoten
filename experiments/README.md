@@ -69,8 +69,9 @@ Experimentfokus ist ihre Haertung:
 - Knotenscore v0.5 plus Zero-Mean-/Matched-/Rep-Zero-Piloten: Scorecard trennt
   Feedback-Confinement und Memory-Cloud-Shape von `eta_zero`, isoliert aber
   keinen notwendigen Zero-Mean- oder Zwei-Skalen-Mechanismus.
-- Naechster Kontrollschritt: Kraftkomponenten/Vorzeichen direkt ausgeben,
-  danach erst Block-Markov-/AR-Modentests.
+- Force-Komponenten/Vorzeichen sind jetzt direkt ausgebbar; der q=3-Pilot
+  bestaetigt `A_rep` als lokalen Confinement-Kanal.
+- Naechster Kontrollschritt: Block-Markov-/AR-Modentests.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle
