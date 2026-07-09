@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-02.
+Stand: 2026-07-09.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -46,17 +46,19 @@ Noch nicht tragbar:
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
-Der Kontrollreport vom 2026-07-01 zeigt: Memory-Gradient-Feedback trennt
-sich deutlich von `eta_zero` in Residence und Kompaktheit. `single_scale` ist
-aber ebenfalls kompakt und langlebig. Paper-I-Evidenz darf daher derzeit nur
-vorsichtig als self-interaction-induced confinement formuliert werden, nicht
-als spezifisch zweiskaliger Knotenmechanismus.
+Der v0.5-Kontrollstand zeigt: Memory-Gradient-Feedback trennt sich deutlich
+von `eta_zero`, `m0_zero` und `alpha_one` in Residence, Kompaktheit und
+Memory-Cloud-Form. `single_scale` bleibt aber ebenfalls kompakt und langlebig.
+Paper-I-Evidenz darf daher derzeit nur vorsichtig als
+self-interaction-induced confinement formuliert werden, nicht als spezifisch
+zweiskaliger Knotenmechanismus.
 
 Die Kernel-Shape-Probe praezisiert die Ablationssprache: `A_att=0` entfernt
 in der aktuellen Update-Konvention den breiten Gegenanteil, zerstoert aber
 nicht die lokale Restaurierung. `A_rep=0` ist die haertere Dispersionskontrolle.
-Der optisch rundere `A_rep=0`-Fall ist dabei kein Stabilitaetsbefund, sondern
-ein schwach rueckgekoppelter, breiterer Diffusionsfall.
+Der `matched_deposition`-Pilot zeigt ausserdem: normiertes Schreib-/Lese-
+Matching bleibt zwar confined relativ zu `eta_zero`, ist ohne
+Steifigkeitsrenormierung aber breiter als die Delta-Baseline.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -88,8 +90,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | teilweise numerisch: kompakte Long-Residence gegenueber `eta_zero`, aber nicht kernel-spezifisch | strenger Knotenscore und weitere Kernel-Ablation |
-| Baseline `n=10^7` zeigt langlebige Residence | numerisch reproduziert ueber Seeds, aber `single_scale` ebenfalls stark | Knotenscore, Voxel-Sensitivitaet, Kernel-Ablation |
+| Knoten als metastabile Regime | numerisch gestuetzt gegen `eta_zero`, `m0_zero`, `alpha_one`; nicht kernel-spezifisch | v0.5 beibehalten, curvature-renormalized matching und `A_rep=0` testen |
+| Baseline/Single-scale zeigen langlebige Residence | robust gegen harte Negativkontrollen, aber Mechanismus nicht isoliert | Paper-I-Sprache auf Feedback-Confinement begrenzen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |

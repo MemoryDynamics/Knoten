@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-08.
+Stand: 2026-07-09.
 
 ## Repository
 
@@ -9,6 +9,9 @@ Stand: 2026-07-08.
 - Der kanonische Paketkern liegt unter `src/emergenz_knoten`.
 - Die aktive Doku-Oberflaeche ist auf sieben Dokumente reduziert; historische
   Chat- und Paper-Artefakte bleiben Rohmaterial.
+- Cleanup 2026-07-09: lokale ignorierte Klartext-Reviewer-Notizen wurden aus
+  dem Workspace entfernt. Der getrackte Privacy-/Control-Report heisst jetzt
+  `reports/privacy_and_control_plan_2026-07-08.md`.
 
 ## Codekern
 
@@ -165,12 +168,10 @@ weitere Blindscans sind weniger wertvoll als die geplante Block-Markov-/AR-
 Reanalyse vorhandener Long-Runs auf reelle versus komplexe langsame Moden.
 
 
-Privacy-/Provenance-Notiz 2026-07-08: Personenbezogene Review-Klartexte sind fuer ein
-oeffentliches Repo ungeeignet. Entweder bleibt nur eine sanitisierte Fassung im
-Repo, oder private Inhalte werden ignoriert bzw. verschluesselt committed. Neue
-Long-Run-JSONs protokollieren `git_status`; private Notizen muessen vor
-sauberen Evidenzlaeufen ignoriert, verschluesselt oder ausserhalb des Repos
-gehalten werden.
+Privacy-/Provenance-Notiz 2026-07-09: Personenbezogene Review-Klartexte
+gehoeren nicht in den getrackten Public-Repo-Stand. Die lokalen ignorierten
+Klartextnotizen wurden entfernt; die oeffentliche Spur ist eine sanitisierte
+Policy-/Control-Notiz. Neue Long-Run-JSONs protokollieren weiter `git_status`.
 
 Long-Run-Kontrollen 2026-07-08: `experiments/long_run_metastability.py` kennt
 nun `m0_zero` (`memory_mass=0`) und `alpha_one` (`alpha=1`). `m0_zero` ist die

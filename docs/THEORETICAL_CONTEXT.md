@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-08.
+Stand: 2026-07-09.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -38,6 +38,25 @@ damit lokal restaurierend, waehrend `A_att` diese Skala abschwaecht.
 Die Namen bezeichnen Kernelkomponenten, nicht direkt die Richtung des
 realisierten Euler-Schritts. Die lokale linearisierte Skala ist
 `k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)`.
+
+Deposition-Konventionen:
+
+- `delta`: alte Punktspur; `rho_n` ist eine gewichtete Liste vergangener Punkte.
+- `gaussian`: normierter endlicher Depositionskernel mit expliziter Breite.
+- `matched_gaussian`: normierte Gauss-Deposition mit derselben Breite wie die
+  jeweilige Lesekomponente, gerechnet als effektiver Faltungskernel.
+
+Fuer normierte Gauss-Deposition gilt bei `s=L`:
+
+```text
+L_eff = sqrt(2) L,
+A_eff = A 2^{-d/2},
+(A_eff/L_eff^2)/(A/L^2) = 2^{-(d/2+1)}.
+```
+
+In `d=3` reduziert Matching ohne Renormierung die lokale Steifigkeit um etwa
+Faktor `5.66`. Deshalb ist der naechste faire Kerneltest nicht bloss
+`matched_deposition`, sondern eine curvature-renormalized matched condition.
 
 ## Markov-Einbettung
 
@@ -126,9 +145,13 @@ physikalischen Massen.
 
 ## Aktuelle Evidenzgrenzen
 
-- Ein Baseline-Long-Run mit `n=10^7` zeigt ein starkes Residence-Signal.
-- Ohne `eta_zero`, `single_scale`, weitere Seeds und Sensitivitaeten ist das
-  kein robuster Paper-I-Befund.
+- `baseline` und `single_scale` trennen sich im v0.5-Score klar von
+  `eta_zero`, `m0_zero` und `alpha_one`.
+- Diese Evidenz stuetzt Feedback-Confinement, aber keinen notwendigen
+  zweiskaligen Baseline-Mechanismus.
+- Der normalisierte `matched_deposition`-Pilot ist weiter confined relativ zu
+  `eta_zero`, aber breiter als die Delta-Baseline; wegen der
+  Steifigkeitsreduktion ist das kein finaler Test der Matching-Idee.
 - Der archivierte Near-3-Dimensionsbefund ist vielversprechend, aber keine
   allgemeine `d=3`-Ableitung.
 - Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;

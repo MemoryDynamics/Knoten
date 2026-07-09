@@ -1,4 +1,4 @@
-# Private Reviewer Material and M0/Alpha-One Control Plan
+# Privacy and Control Plan
 
 Date: 2026-07-08.
 
@@ -76,3 +76,9 @@ A small non-Numba import/function smoke passed locally:
 - `simulate_finite_memory` accepts `SimulationConfig(memory_mass=0.0)`;
 - `_apply_condition(..., "m0_zero")` sets `memory_mass=0.0`;
 - `_apply_condition(..., "alpha_one")` sets `alpha=1.0`.
+
+## Cleanup status
+
+2026-07-09 repository cleanup: local ignored cleartext handoff notes with
+person-specific reviewer naming were removed from the workspace. The tracked
+repository keeps only this sanitized public policy/control report.

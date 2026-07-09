@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-08.
+Stand: 2026-07-09.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -74,9 +74,9 @@ Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
 unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
 isoliert.
 
-### P1.2 Knotenkriterium v0.3/v0.4 definieren
+### P1.2 Knotenkriterium v0.5 verwenden
 
-Status: Scorecard v0.3 umgesetzt; v0.4 mit Memory-Cloud-Shape-Komponenten liegt als aktuelles Kandidatenkriterium vor.
+Status: Scorecard v0.5 ist das aktuelle Kandidatenkriterium; sie nutzt raw update residence und gated degenerierte Memory-Clouds.
 
 Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
 sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
@@ -105,25 +105,22 @@ Kombination aus Residence, Kompaktheit, Voxel-Stabilitaet, Center-Stabilitaet,
 Seed-Robustheit und Kontrolltrennung. Fuer den naechsten Schritt reicht eine
 transparente Scorecard.
 
-### P1.3 Danach entscheiden
+### P1.3 Jetzt entscheiden und testen
 
 Naechster operativer Schritt:
 
-1. Score v0.4 als aktuelles Kandidatenkriterium beibehalten. Die Seeds `1..15`
-   bestaetigen Feedback-Confinement gegenueber `eta_zero`, aber nicht die
-   Notwendigkeit des zweiskaligen Baseline-Kernels.
-2. Paper-I-Evidenz deshalb als effektives Memory-Kernel-Confinement formulieren:
-   robust gegenueber `eta_zero`, nicht spezifisch zweiskalig. Details stehen in
-   `reports/kernel_memory_photon_decision_2026-07-07.md`.
-3. `amplitude_rep = 0` als echte Dispersionsablation nachziehen, um zu klaeren,
-   ob der lokal restaurierende Anteil allein die Knotenstruktur traegt.
-4. Photon-/Ballistik-Fragen in einen getrennten Track verschieben. Das skalare
-   overdamped Modell zeigt im korrigierten Ein-Kernel-Pilot keine ballistische
-   oder harmonische Mode; ein erweiterter Zustand mit Geschwindigkeit, Phase
-   oder Vektormemory ist vorher zu pruefen.
-5. Falls sichtbar runde Bahnen ein eigenes Ziel bleiben: erst einen kleinen
-   Persistenz-/Inertial-Pilot definieren, statt weitere Kernelparameter blind
-   nach optischer Rundheit zu durchsuchen.
+1. Eine curvature-renormalized matched-deposition Condition implementieren.
+   Grund: `matched_gaussian` mit normierter Deposition reduziert in `d=3` die
+   lokale Steifigkeit um etwa Faktor `5.66`; ohne Renormierung ist der Vergleich
+   gegen die Delta-Baseline nicht fair.
+2. Kurzer seedgleicher Pilot gegen `baseline` und `eta_zero`; erst bei einem
+   klaren Signal auf 1M/100M skalieren.
+3. `amplitude_rep = 0` als echte Dispersionsablation nachziehen, getrennt vom
+   matched-deposition Track.
+4. Danach Block-Markov-/AR-Reanalyse auf reelle, negative oder komplexe
+   langsame Moden. Photon-/Welleninterpretationen bleiben bis dahin pausiert.
+5. Paper-I-Evidenz als effektives Memory-Feedback-Confinement formulieren:
+   robust gegen harte Negativkontrollen, aber derzeit nicht kernel-spezifisch.
 
 Wenn der Score traegt:
 

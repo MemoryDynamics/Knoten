@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-02.
+Stand: 2026-07-09.
 
 ## Worum es geht
 
@@ -37,10 +37,11 @@ Belastbar derzeit:
 - Paper 0 traegt als technischer Anker.
 - Die Markov-/Transferoperator-Schicht existiert initial unter
   `src/emergenz_knoten/markov/` und ist getestet.
-- Long-Run-Kontrollen mit Seeds `1..5` zeigen Feedback-Confinement gegenueber
-  `eta_zero`.
-- Knotenscore v0.4 trennt aktive Bedingungen im 1M-Shape-Pilot ueber Residence,
-  Kompaktheit und Memory-Cloud-Shape von der no-feedback-Kontrolle.
+- v0.5-Kontrollen trennen aktive Bedingungen von `eta_zero`, `m0_zero` und
+  `alpha_one`.
+- Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
+  Deposition; `matched_deposition` ist ohne Steifigkeitsrenormierung breiter
+  als die Delta-Baseline.
 
 Noch nicht belastbar:
 
@@ -128,10 +129,11 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Knotenscore v0.4 als aktuelles Kandidatenkriterium verwenden.
-2. `amplitude_rep = 0` als echte Dispersionsablation im 1M-Shape-Pilot-Protokoll
-   gegenpruefen.
-3. Bei tragendem Score eine kleine 10M-Wiederholung fuer ausgewaehlte Seeds
-   vorbereiten.
-4. Erst danach eine Paper-I-Evidenztabelle bauen.
-5. Paper II/III bleiben Folgeprogramme.
+1. Curvature-renormalized `matched_deposition` als fairen Kernel-Matching-Test
+   implementieren.
+2. Kurzen seedgleichen Pilot gegen `baseline` und `eta_zero` laufen lassen.
+3. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
+4. Danach Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
+   Eigenwerte pruefen.
+5. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben
+   Folgeprogramme.

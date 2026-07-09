@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-02.
+Stand: 2026-07-09.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -33,21 +33,19 @@ Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
 
 ## Aktuelle Entscheidung
 
-Paper 0 wird als mathematischer Anker bzw. moegliches Supplement gefuehrt. Es
-muss nur Modell, Markov-Einbettung, kontraktive Memory-Faser und
-Metastabilitaetsdiagnostik sauber machen. Paper I traegt die numerische
-Knoten-Evidenz erst nach Long-Run-Kontrollen.
+Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
+soll aktuell nicht die gesamte Emergenzphysik tragen, sondern den belastbaren
+Befund formulieren: aktives Memory-Feedback erzeugt confinement-artige,
+metastabile Regime relativ zu `eta_zero`, `m0_zero` und `alpha_one`.
 
-Der Kontrollreport vom 2026-07-01 zeigt: Memory-Gradient-Feedback trennt
-sich klar von `eta_zero`, aber `single_scale` ist ebenfalls kompakt und
-langlebig. Die naechste Prioritaet ist daher kein neuer Blindscan, sondern ein
-strengeres Knotenkriterium aus Residence, Kompaktheit, Voxel-Stabilitaet und
-Kontrolltrennung.
+Der v0.5-Knotenscore trennt `baseline` und `single_scale` klar von den harten
+Negativkontrollen. Er isoliert aber keinen notwendigen zweiskaligen
+Baseline-Mechanismus. Auch der neue `matched_deposition`-Pilot bleibt zwar
+confined relativ zu `eta_zero`, ist ohne Steifigkeitsrenormierung aber breiter
+als die Delta-Baseline.
 
-Die Kernel-Shape-Probe zeigt ausserdem: `A_att=0` ist in der aktuellen
-Euler-Konvention keine Zerfallskontrolle; `A_rep=0` ist die passendere
-Dispersionsablation. Der Seedvergleich zeigt verschiedene konkrete Pfade,
-aber aehnliche lokale Schritt- und Turn-Metriken im Baseline-Regime.
+Naechster gezielter Schritt: eine curvature-renormalized matched-deposition
+Condition testen, bevor weitere 100M-Laeufe gestartet werden.
 
 ## Nicht ueberclaimen
 

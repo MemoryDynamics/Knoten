@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-01.
+Stand: 2026-07-09.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -23,7 +23,7 @@ flowchart TD
     experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
-    src --> kernels["kernels.py<br/>Memory weights, Gaussian kernels"]
+    src --> kernels["kernels.py<br/>Memory weights, deposition modes, Gaussian kernels"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
@@ -87,6 +87,7 @@ flowchart LR
     validation --> reports
     meta --> reports
 
+    reports --> privacy["privacy_and_control_plan<br/>public sanitized policy"]
     reports --> paper0["Paper 0<br/>technical anchor"]
     reports --> paper1["Paper I<br/>minimal model and evidence"]
     paper1 -.later.-> paper2["Paper II<br/>propagation / c_eff"]
@@ -98,7 +99,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/long_run_metastability.py"]
-    runner --> local["data/processed/long_run_metastability<br/>ignored JSON/log outputs"]
+    runner --> local["data/processed/long_run_metastability<br/>ignored JSON outputs"]
     local --> review["manual review<br/>residence, controls, runtime"]
     review --> report["reports/<br/>committed result report"]
     report --> paper1["Paper I evidence table"]
