@@ -16,6 +16,7 @@ from emergenz_knoten import (
     exponential_memory_weights,
     exponential_weights,
     fit_occupancy_scaling_window,
+    gaussian_gradient,
     matched_local_stiffness_renormalization,
     occupancy_dimension,
     occupancy_local_slopes,
@@ -124,6 +125,15 @@ def test_exponential_memory_weights_scale_with_memory_mass() -> None:
     assert np.all(weights > 0)
     assert abs(weights.sum() - expected_sum) < 1e-12
     assert np.allclose(weights, 2.0 * exponential_weights(0.1, 5))
+
+
+def test_gaussian_gradient_is_potential_gradient_toward_memory() -> None:
+    x = np.array([1.0, 0.0])
+    memory = np.array([[0.0, 0.0]])
+    weights = np.array([1.0])
+    grad = gaussian_gradient(x, memory, weights, sigma=1.0, amplitude=1.0)
+    assert grad[0] < 0.0
+    assert grad[1] == 0.0
 
 
 def test_repulsive_gaussian_gradient_points_away_from_memory() -> None:

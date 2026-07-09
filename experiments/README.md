@@ -66,12 +66,12 @@ Experimentfokus ist ihre Haertung:
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
 - Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
-- Knotenscore v0.5 plus Zero-Mean-/Matched-/Rep-Zero-Piloten: Scorecard trennt
-  Feedback-Confinement und Memory-Cloud-Shape von `eta_zero`, isoliert aber
-  keinen notwendigen Zero-Mean- oder Zwei-Skalen-Mechanismus.
-- Force-Komponenten/Vorzeichen sind jetzt direkt ausgebbar; der q=3-Pilot
-  bestaetigt `A_rep` als lokalen Confinement-Kanal.
-- Naechster Kontrollschritt: Block-Markov-/AR-Modentests.
+- Der Kernelgradient wurde korrigiert; fruehere Knotenscore-/Force-Piloten
+  sind `legacy-sign`-Auditmaterial.
+- Force-Komponenten/Vorzeichen sind direkt ausgebbar und sollen in korrigierten
+  Kurz-Kontrollen mitlaufen.
+- Naechster Kontrollschritt: korrigierter q=3-Retest, danach Amplitudenhierarchie,
+  erst dann Block-Markov-/AR-Modentests.
 
 Fuer den archivierten Dimensionsclaim bleibt
 `experiments/fractal_analysis/reproduce_dimension_pilot.py` der aktuelle

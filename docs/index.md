@@ -34,18 +34,16 @@ Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
 ## Aktuelle Entscheidung
 
 Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
-soll aktuell nicht die gesamte Emergenzphysik tragen, sondern den belastbaren
-Befund formulieren: aktives Memory-Feedback erzeugt confinement-artige,
-metastabile Regime relativ zu `eta_zero`, `m0_zero` und `alpha_one`.
+soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
+Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
-Der v0.5-Knotenscore trennt `baseline` und `single_scale` klar von den harten
-Negativkontrollen. Er isoliert aber keinen notwendigen zweiskaligen
-Baseline-Mechanismus. Auch der neue `matched_deposition`-Pilot bleibt zwar
-confined relativ zu `eta_zero`, ist ohne Steifigkeitsrenormierung aber breiter
-als die Delta-Baseline.
+Der bisherige v0.5-Knotenscore und die matched-/zero-mean-/rep-zero-Piloten
+sind `legacy-sign`-Auditmaterial. Sie erklaeren den Vorzeichenfund, zaehlen
+aber nicht mehr als Evidenz fuer das korrigierte Potentialmodell.
 
-Naechster gezielter Schritt: eine curvature-renormalized matched-deposition
-Condition testen, bevor weitere 100M-Laeufe gestartet werden.
+Naechster gezielter Schritt: korrigierte q=3-Kontrollen fuer `baseline`,
+`single_scale`, `rep_zero` und `eta_zero`, danach eine Amplitudenhierarchie
+ueber mehrere Groessenordnungen und erst dann Score-/Modentests.
 
 ## Nicht ueberclaimen
 

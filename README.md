@@ -37,8 +37,10 @@ Belastbar derzeit:
 - Paper 0 traegt als technischer Anker.
 - Die Markov-/Transferoperator-Schicht existiert initial unter
   `src/emergenz_knoten/markov/` und ist getestet.
-- v0.5-Kontrollen trennen aktive Bedingungen von `eta_zero`, `m0_zero` und
-  `alpha_one`.
+- Der Kernelgradient wurde korrigiert: `A_rep`/`A_att` sind jetzt wieder
+  repulsiver/attraktiver Potentialkanal im Sinn der Paper-Gleichung.
+- Bisherige v0.5-Kontrollen sind `legacy-sign`-Evidenz und muessen fuer das
+  korrigierte Potentialmodell neu gerechnet werden.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
   Deposition; `matched_deposition` ist ohne Steifigkeitsrenormierung breiter
   als die Delta-Baseline.
@@ -129,12 +131,11 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
-   Eigenwerte pruefen, zunaechst auf den kompakten `baseline`/`single_scale`
-   Regimen.
-2. Force-Komponenten als Hilfsfeatures/Sanity-Checks mitfuehren; sie bestaetigen
-   `A_rep` als lokalen Confinement-Kanal und `rep_zero` als Dispersionskontrolle.
-3. Keine weiteren Zero-Mean-Longruns skalieren, bis ein neues
-   mechanismusspezifisches Observable definiert ist.
-4. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben
-   Folgeprogramme.
+1. Korrigierte Sign-Konvention testen: `baseline`, `single_scale`,
+   `rep_zero`, `eta_zero` bei q=3 mit Force-Komponenten.
+2. Danach Amplitudenhierarchie testen, z. B. `A_att/A_rep` ueber mehrere
+   Groessenordnungen bei festem repulsivem Kern.
+3. Erst bei einem kompakten korrigierten Regime Block-Markov-/AR-Moden auf
+   reelle, negative oder komplexe langsame Eigenwerte pruefen.
+4. Paper I bleibt Feedback-Confinement-Evidenz, aber nur mit korrigierten
+   Retest-Daten; Paper II/III bleiben Folgeprogramme.

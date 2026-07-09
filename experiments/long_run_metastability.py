@@ -189,7 +189,7 @@ def _simulate_circular_numba(
                     r2 += diff * diff
                 rep = amplitude_rep * np.exp(-0.5 * r2 / sigma_rep2) / sigma_rep2
                 att = amplitude_att * np.exp(-0.5 * r2 / sigma_att2) / sigma_att2
-                factor = weights[age] * (rep - att)
+                factor = weights[age] * (att - rep)
                 for d in range(dim):
                     grad[d] += factor * (x[d] - memory[mem_idx, d])
 

@@ -229,7 +229,7 @@ def _gaussian_gradient_numba(
         for d in range(dim):
             dx = x[d] - memory[i, d]
             r2 += dx * dx
-        fac = amplitude * np.exp(-0.5 * r2 / sigma2) / sigma2
+        fac = -amplitude * np.exp(-0.5 * r2 / sigma2) / sigma2
         for d in range(dim):
             grad[d] += weights[i] * fac * (x[d] - memory[i, d])
     return grad

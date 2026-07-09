@@ -93,7 +93,7 @@ Matched-Deposition-Pilot 2026-07-08 (`N=100,000`, Seeds `1..5`, Slow Python):
 | condition | score median | sample radius median | memory radius median | memory roundness median | Lesart |
 | --- | ---: | ---: | ---: | ---: | --- |
 | `baseline` | `0.857` | `0.362` | `0.097` | `0.767` | kompakter Delta-Referenzlauf |
-| `matched_deposition` | `0.714` | `1.535` | `0.244` | `0.668` | weiter confined, aber breiter/schwaecher |
+| `matched_deposition` | `0.714` | `1.535` | `0.244` | `0.668` | `legacy-sign`: confined, aber breiter/schwaecher |
 | `eta_zero` | `n/a` | `5.167` | `0.622` | `0.380` | Negativkontrolle |
 
 Lesart: `matched_gaussian` ist die konservative positive Schreib-/Lese-
@@ -164,16 +164,14 @@ Seedvergleich fuer den Baseline-Case:
 | `4` | `0.474` | `0.1095` | `-0.340` | `1.75, 0.78, 0.97` |
 | `5` | `0.214` | `0.1099` | `-0.343` | `0.85, 0.98, 0.67` |
 
-Lesart: Die schwarze Linie in der Figur ist eine geglaettete Rolling-Mean-
-Trajektorie; die farbige Linie ist der roh gesampelte Pfad desselben Cases.
-`k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)` ist die lokale
-restaurierende Skala in der aktuellen Euler-Konvention. Deshalb zerfaellt
-`A_att=0` nicht: der `A_rep`-Anteil ist lokal bindend. Die schaerfere
-Dispersionskontrolle ist `A_rep=0`, die hier den Radius stark vergroessert.
-Der Baseline-Seedvergleich spricht fuer ein robustes kompaktes Regime, aber
-nicht fuer identische Trajektorien; Seed `5` zeigt zudem, dass `path/chord`
-bei sehr kleinem Endpunktabstand schlecht konditioniert sein kann.
-Report: `reports/kernel_shape_probe_2026-07-01.md`.
+Legacy-sign-Lesart: Die schwarze Linie in der Figur ist eine geglaettete
+Rolling-Mean-Trajektorie; die farbige Linie ist der roh gesampelte Pfad
+desselben Cases. Die Tabelle nutzt die alte Gradientenrichtung, in der
+`A_rep` lokal bindend und `A_att` ein breiter Gegenkanal war. Deshalb sind
+die dortigen `A_att=0`/`A_rep=0`-Vergleiche nur noch Auditmaterial fuer den
+Vorzeichenfund. Unter der korrigierten Potentialkonvention muss der Shape-
+Probe neu gerechnet werden; dann ist `A_rep` lokal repulsiv und `A_att` breit
+attraktiv. Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 
 ## Knotenscore v0.3
@@ -287,7 +285,8 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/zero_mean_matched_pilot_100k_2026-07-09.md` | Zero-Mean-/Matched-Pilot | Bei `sigma_att/sigma_rep=1.5` sind Baseline, Zero-Mean und renormiertes Matching praktisch deckungsgleich. |
 | `reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md` | Scale-Ratio-/Rep-Zero-Kontrollen | Ratios `{1.5,2,3}` isolieren keinen Zero-Mean-Mechanismus; `rep_zero` dispergiert stark und klaert die aktuelle Vorzeichenkonvention. |
 | `reports/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
-| `reports/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `A_rep` zeigt zum Memory-Zentrum, `A_att` im q=3-Slice vom Memory-Zentrum weg; naechster Schritt ist Block-Markov/AR. |
+| `reports/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
+| `reports/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

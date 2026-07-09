@@ -64,12 +64,12 @@ def test_probe_simulation_matches_package_core() -> None:
     assert np.allclose(probe_samples, core_samples)
 
 
-def test_local_scales_capture_current_sign_convention() -> None:
+def test_local_scales_capture_corrected_potential_convention() -> None:
     rep_only = SimulationConfig(eta=0.15, sigma_rep=1.0, sigma_att=3.0, amplitude_rep=1.0, amplitude_att=0.0)
     att_only = SimulationConfig(eta=0.15, sigma_rep=1.0, sigma_att=3.0, amplitude_rep=0.0, amplitude_att=0.35)
 
-    assert kernel_shape_probe._local_scales(rep_only)["net_restoring_scale"] > 0.0
-    assert kernel_shape_probe._local_scales(att_only)["net_restoring_scale"] < 0.0
+    assert kernel_shape_probe._local_scales(rep_only)["net_repulsive_scale"] > 0.0
+    assert kernel_shape_probe._local_scales(att_only)["net_repulsive_scale"] < 0.0
 
 def test_metric_formatter_handles_degenerate_values() -> None:
     assert kernel_shape_probe._fmt_metric(None) == "n/a"

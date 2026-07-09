@@ -46,28 +46,18 @@ Noch nicht tragbar:
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
-Der v0.5-Kontrollstand zeigt: Memory-Gradient-Feedback trennt sich deutlich
-von `eta_zero`, `m0_zero` und `alpha_one` in Residence, Kompaktheit und
-Memory-Cloud-Form. `single_scale` bleibt aber ebenfalls kompakt und langlebig.
-Paper-I-Evidenz darf daher derzeit nur vorsichtig als
-self-interaction-induced confinement formuliert werden, nicht als spezifisch
-zweiskaliger Knotenmechanismus.
+Der bisherige v0.5-Kontrollstand ist nach dem Vorzeichenfund nur noch
+`legacy-sign`-Evidenz. Nach der Korrektur des Kernelgradienten muss Paper-I-
+Evidenz neu aufgebaut werden: zuerst korrigierte Kurz-Kontrollen, dann
+Amplitudenhierarchie, dann erst Knotenscore und Modentests.
 
-Die Kernel-Shape-Probe praezisiert die Ablationssprache: `A_att=0` entfernt
-in der aktuellen Update-Konvention den breiten Gegenanteil, zerstoert aber
-nicht die lokale Restaurierung. `A_rep=0` ist die haertere Dispersionskontrolle.
-Der `matched_deposition`-Pilot zeigt ausserdem: normiertes Schreib-/Lese-
-Matching bleibt zwar confined relativ zu `eta_zero`, ist ohne
-Steifigkeitsrenormierung aber breiter als die Delta-Baseline.
-Der neue `zero_mean_two_scale`-Track testet zusaetzlich, ob ein kompensierter
-Kernel mit `int K=0` die Zweiskaligkeit sauberer isoliert. Die 100k-Piloten bei
-`sigma_att/sigma_rep in {1.5,2,3}` isolieren diesen Mechanismus noch nicht; die
-aktiven Bedingungen sind praktisch deckungsgleich. Der `rep_zero`-Pilot bei
-`q=3` zeigt zugleich, dass die historischen Labels nicht literal gelesen werden
-duerfen: `A_rep` ist in der aktuellen Update-Konvention der lokale
-Confinement-Kanal, `A_att` ein breiter Gegenkanal. Der Force-Komponenten-Pilot
-bestaetigt diese Lesart direkt ueber Schritt-Normen und Memory-Center-
-Projektionen.
+Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
+Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
+repulsiv, `A_att` breit attraktiv im Potentialmodell.
+Matched-, Zero-Mean-, Scale-Ratio- und Rep-Zero-Piloten vor diesem Report
+bleiben als Diagnose der alten Implementierung nuetzlich. Fuer Paper I muessen
+sie unter korrigierter Sign-Konvention neu gerechnet werden, bevor daraus ein
+Confinement- oder Mechanismusclaim abgeleitet wird.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -99,8 +89,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | numerisch gestuetzt gegen `eta_zero`, `m0_zero`, `alpha_one`; nicht kernel-spezifisch | v0.5 beibehalten, Kraftkomponenten/Vorzeichen messen, dann AR-/Transfermoden testen |
-| Baseline/Single-scale zeigen langlebige Residence | robust gegen harte Negativkontrollen, aber Mechanismus nicht isoliert | Paper-I-Sprache auf Feedback-Confinement begrenzen |
+| Knoten als metastabile Regime | nach Sign-Korrektur neu zu testen | korrigierte Kontrollen, Amplitudenhierarchie, dann AR-/Transfermoden |
+| Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |

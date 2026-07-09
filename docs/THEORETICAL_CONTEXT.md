@@ -31,13 +31,16 @@ Ausgerollt ergibt das eine exponentiell gewichtete Vergangenheit. Die
 charakteristische Speicherpersistenz liegt in der normierten Konvention bei
 `alpha^{-1}` Updates.
 
-Implementationskonvention fuer den aktuellen Double-Gaussian-Kernel:
-Der Paketkern berechnet `grad = rep - att` und integriert
-`x_{n+1}=x_n + epsilon xi_n - eta grad`. Operational wirkt `A_rep`
-damit lokal restaurierend, waehrend `A_att` diese Skala abschwaecht.
-Die Namen bezeichnen Kernelkomponenten, nicht direkt die Richtung des
-realisierten Euler-Schritts. Die lokale linearisierte Skala ist
-`k_eff = eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)`.
+Implementationskonvention fuer den korrigierten Double-Gaussian-Kernel:
+Der Paketkern berechnet jetzt den echten Potentialgradienten von
+`K = A_rep G_rep - A_att G_att` und integriert
+`x_{n+1}=x_n + epsilon xi_n - eta grad`. Damit ist `A_rep` ein lokaler
+repulsiver Potentialkanal und `A_att` ein breiter attraktiver Potentialkanal.
+Die lokale linearisierte repulsive Skala ist
+`eta(A_rep/sigma_rep^2 - A_att/sigma_att^2)`. Vor dem Report
+`reports/kernel_sign_convention_correction_2026-07-09.md` erzeugte numerische
+Evidenz gehoert zur `legacy-sign`-Konvention und muss fuer das korrigierte
+Potentialmodell neu gerechnet werden.
 
 Deposition-Konventionen:
 
@@ -163,13 +166,13 @@ physikalischen Massen.
 
 ## Aktuelle Evidenzgrenzen
 
-- `baseline` und `single_scale` trennen sich im v0.5-Score klar von
-  `eta_zero`, `m0_zero` und `alpha_one`.
-- Diese Evidenz stuetzt Feedback-Confinement, aber keinen notwendigen
-  zweiskaligen Baseline-Mechanismus.
-- Der normalisierte `matched_deposition`-Pilot ist weiter confined relativ zu
-  `eta_zero`, aber breiter als die Delta-Baseline; wegen der
-  Steifigkeitsreduktion ist das kein finaler Test der Matching-Idee.
+- Die bisherigen `baseline`/`single_scale`-Confinement-Befunde sind
+  `legacy-sign`-Befunde und nach der Kernelgradient-Korrektur nicht mehr als
+  Evidenz fuer das korrigierte Potentialmodell zitierbar.
+- Aktuelle Prioritaet ist Retest der korrigierten Vorzeichenkonvention:
+  `baseline`, `single_scale`, `rep_zero`, `eta_zero`, danach Amplitudenhierarchie.
+- Der normalisierte `matched_deposition`-Pilot muss ebenfalls neu gerechnet
+  werden, falls die korrigierten Basiskontrollen ein kompaktes Regime zeigen.
 - Der archivierte Near-3-Dimensionsbefund ist vielversprechend, aber keine
   allgemeine `d=3`-Ableitung.
 - Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;

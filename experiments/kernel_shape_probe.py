@@ -337,14 +337,14 @@ def _case_config(base: SimulationConfig, case: ProbeCase) -> SimulationConfig:
 
 
 def _local_scales(config: SimulationConfig) -> dict[str, float]:
-    """Return the linearized kernel scales in the current update convention."""
+    """Return local drift scales after the corrected potential-gradient sign."""
 
     rep_scale = config.eta * config.amplitude_rep / (config.sigma_rep * config.sigma_rep)
     att_scale = config.eta * config.amplitude_att / (config.sigma_att * config.sigma_att)
     return {
-        "rep_scale": float(rep_scale),
-        "att_scale": float(att_scale),
-        "net_restoring_scale": float(rep_scale - att_scale),
+        "repulsive_scale": float(rep_scale),
+        "attractive_scale": float(att_scale),
+        "net_repulsive_scale": float(rep_scale - att_scale),
     }
 
 
@@ -364,7 +364,7 @@ def _entry_from_samples(name: str, config: SimulationConfig, samples: np.ndarray
 
 def _results_table(cases: list[dict[str, Any]]) -> list[str]:
     lines = [
-        "| case | sigma_rep | sigma_att | A_rep | A_att | k_eff | mean radius | median step | turn mean | path/chord | PCA energy first 3 |",
+        "| case | sigma_rep | sigma_att | A_rep | A_att | k_rep-eff | mean radius | median step | turn mean | path/chord | PCA energy first 3 |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for case in cases:
@@ -374,7 +374,7 @@ def _results_table(cases: list[dict[str, Any]]) -> list[str]:
             f"| `{case['name']}` | `{case['config']['sigma_rep']:.3g}` | "
             f"`{case['config']['sigma_att']:.3g}` | `{case['config']['amplitude_rep']:.3g}` | "
             f"`{case['config']['amplitude_att']:.3g}` | "
-            f"`{case['local_scales']['net_restoring_scale']:.4f}` | "
+            f"`{case['local_scales']['net_repulsive_scale']:.4f}` | "
             f"`{metrics['mean_centered_radius']:.3f}` | "
             f"`{metrics['median_sample_step']:.4f}` | "
             f"`{metrics['turn_cosine_mean']:.3f}` | "
@@ -413,11 +413,10 @@ def build_report(payload: dict[str, Any]) -> str:
         "It also compares baseline seeds to test whether the visible course is seed-specific.",
         "It is not a broad parameter sweep and not Paper-I evidence by itself.",
         "",
-        "Important sign convention: in the current Euler update, the kernel",
-        "contributes a deterministic drift term `-eta (rep - att)`. With the",
-        "package convention, `A_rep` is locally restoring and `A_att` weakens",
-        "that restoring scale. The labels therefore name kernel components,",
-        "not directly the sign of the realized Euler displacement.",
+        "Important sign convention: the package now treats `double_gaussian_gradient`",
+        "as the potential gradient of `A_rep G_rep - A_att G_att`.",
+        "With `x <- x - eta grad`, `A_rep` is locally repulsive and",
+        "the broad `A_att` component is attractive at its active scale.",
         "",
         "The kernel does not impose a hard minimum step length; without inertia",
         "or correlated noise the path can remain jagged even when it is",
@@ -456,15 +455,12 @@ def build_report(payload: dict[str, Any]) -> str:
             "",
             "## Reading",
             "",
-            "- In this implementation, `A_att=0` removes the broad counter-term",
-            "  and can remain compact because the `A_rep` component is the",
-            "  locally restoring part of the Euler update.",
-            "- `A_rep=0` leaves only the broad counter-term and is therefore the",
-            "  sharper ablation for dispersal in this convention. It can look rounder",
-            "  because the restoring feedback is weak and the path is closer to ordinary",
-            "  isotropic diffusion; roundness here is not knot stability.",
-            "- Increasing local restoring scale changes confinement, but it does",
-            "  not automatically create directionally persistent, round paths.",
+            "- In the corrected convention, `A_att=0` is repulsion-only and should",
+            "  be treated as a dispersive control rather than a knot-positive case.",
+            "- `A_rep=0` is attraction-only and can collapse or confine depending on",
+            "  noise, memory scale, and amplitude.",
+            "- Increasing the local repulsive scale changes core exclusion, but it",
+            "  does not automatically create directionally persistent, round paths.",
             "- Co-scaling amplitudes with kernel width can leave the local",
             "  stiffness scale A/sigma^2 almost unchanged in compact regimes.",
             "- Truly round trajectories in the visible path likely need an added",

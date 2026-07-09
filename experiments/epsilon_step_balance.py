@@ -232,7 +232,7 @@ def _simulate_step_balance_numba(
         turn_dot = 0.0
         for d in range(dim):
             noise[d] = epsilon * np.random.normal(0.0, 1.0)
-            drift[d] = -eta * (rep_grad[d] - att_grad[d])
+            drift[d] = eta * (rep_grad[d] - att_grad[d])
             total[d] = noise[d] + drift[d]
             x[d] += total[d]
             noise_norm2 += noise[d] * noise[d]
@@ -358,7 +358,7 @@ def build_report(payload: dict[str, object]) -> str:
         "- `noise_norm = ||epsilon xi_n||`;",
         "- `repulsive_step_norm = ||eta grad_rep||`;",
         "- `attractive_step_norm = ||eta grad_att||`;",
-        "- `net_drift_norm = ||-eta(grad_rep-grad_att)||`;",
+        "- `net_drift_norm = ||eta(grad_rep-grad_att)||` after the corrected potential-gradient sign;",
         "- `total_step_norm = ||x_{n+1}-x_n||`;",
         "- `turn_cosine` between consecutive update vectors.",
         "",
@@ -429,7 +429,7 @@ def build_report(payload: dict[str, object]) -> str:
             "smaller positive `epsilon` alone makes a smaller trajectory, not a",
             "smoother or more drift-dominated one.",
             "",
-            "In the current Euler update, the repulsive potential does not define",
+            "In the corrected Euler update, the repulsive potential does not define",
             "a hard minimum step length. It defines a deterministic force contribution",
             "that competes with the independent stochastic displacement `epsilon xi_n`.",
             "",

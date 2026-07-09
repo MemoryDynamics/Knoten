@@ -33,6 +33,13 @@ Der sichtbare Prozess `x_n` ist wegen des Speichers im Allgemeinen
 nichtmarkovsch. Der augmentierte Zustand `z_n=(x_n,rho_n)` bzw. eine konkrete
 Memory-Reprasentation ist die Markov-Einbettung.
 
+Sign-Konvention 2026-07-09: Der Kernelgradient wurde korrigiert. `gaussian_gradient`
+ist jetzt der echte Gradient eines positiven Gauss-Potentials; `A_rep` ist im
+Update `x <- x - eta grad` lokal repulsiv, `A_att` breit attraktiv. Die
+bisherigen Confinement-Reports sind `legacy-sign`-Evidenz und muessen fuer das
+korrigierte Potentialmodell neu gerechnet werden. Report:
+`reports/kernel_sign_convention_correction_2026-07-09.md`.
+
 ## Paper-Status
 
 - Paper 0: mathematischer Anker bzw. moegliches Supplement. Es formuliert die
@@ -47,6 +54,10 @@ Memory-Reprasentation ist die Markov-Einbettung.
   aber ohne Claim-Status.
 
 ## Long-Run-Status
+
+Die folgenden Long-Run-Befunde bis einschliesslich Force-Komponenten-Pilot vom
+2026-07-09 sind `legacy-sign`-Befunde. Sie erklaeren die Historie und den
+Vorzeichenfund, ersetzen aber nicht den korrigierten Retest.
 
 Der Kontrollreport vom 2026-07-01 fuehrt die vorhandenen fuenf Seeds fuer
 `baseline`, `eta_zero` und `single_scale` zusammen.
@@ -81,20 +92,16 @@ kein Glattheitsregler. Eine flexible 3D-Visualisierung zeigt entsprechend
 form-aehnliche positive Epsilon-Faelle bei sehr unterschiedlichen absoluten
 Skalen.
 
-Kernel-Shape-Probe 2026-07-02: Code-Review bestaetigt, dass die Probe jetzt
-denselben `double_gaussian_gradient` wie der Paketkern nutzt. In der aktuellen
-Euler-Konvention wirkt `A_rep` lokal restaurierend, waehrend `A_att` diese
-Skala abschwaecht. Daher bleibt `A_att=0` kompakt (`mean radius 0.225`),
-waehrend `A_rep=0` deutlich diffundiert (`mean radius 6.620`). Die Baseline-
-Seedvergleiche `1..5` zeigen unterschiedliche Lage/Spannweite, aber aehnliche
-Schritt- und Turn-Metriken (`median step` etwa `0.110`, `turn mean` etwa
-`-0.34`). Der Grundverlauf ist daher eher Regime-/Kernel-getrieben als eine
-reine Seed-Kopie. Zusaetzlich liegen jetzt flexible SVGs mit panel-eigener
-Skala vor; sie sind fuer Formvergleich gedacht, nicht fuer absolute Groesse.
-`strong_local` und `wide_strong` reduzieren den Radius auf `0.075`, erzeugen
-aber weiter keine runden Bahnen (`turn mean` etwa `-0.43`). Runde sichtbare
-Trajektorien brauchen wahrscheinlich Persistenz, einen Inertialterm,
-tangentiale Drift oder eine geglaettete Center-Observable.
+Kernel-Shape-Probe 2026-07-02 (`legacy-sign`): Code-Review bestaetigte,
+dass die Probe denselben `double_gaussian_gradient` wie der damalige
+Paketkern nutzte. Unter der alten Vorzeichenkonvention wirkte `A_rep` lokal
+restaurierend und `A_att` als breiter Gegenkanal; deshalb blieb `A_att=0`
+kompakt (`mean radius 0.225`), waehrend `A_rep=0` diffundierte (`mean radius
+6.620`). Diese Zahlen erklaeren den Vorzeichenfund, sind aber keine Evidenz
+fuer das korrigierte Potentialmodell. Die Baseline-Seedvergleiche `1..5`
+zeigen trotzdem eine nuetzliche methodische Lektion: unterschiedliche Lage/
+Spannweite, aber aehnliche Schritt- und Turn-Metriken. Die Shape-Frage muss
+nach der Korrektur neu getestet werden.
 
 Knotenscore v0.3 2026-07-02: Die Scorecard auf vorhandenen Long-Run-JSONs
 bewertet Residence-Gain, Kompaktheit gegenueber `eta_zero`,
@@ -217,23 +224,17 @@ zeigt praktisch deckungsgleiche aktive Bedingungen: `baseline`,
 die globale Bedingung `int K=0` ist noch nicht als separater Mechanismus
 sichtbar. Report: `reports/zero_mean_matched_pilot_100k_2026-07-09.md`.
 
-Scale-Ratio-/Rep-Zero-Kontrollen 2026-07-09: Die 100k-Piloten fuer
-`sigma_att/sigma_rep in {2,3}` bestaetigen die Kurzbefundlage: `baseline`,
-`zero_mean_two_scale`, `matched_deposition_renormalized` und `single_scale`
-bleiben scorecard-nah, waehrend `rep_zero` bei `q=3` stark dispersiv wird
-(`score median 0.214`, Sample-Radius `10.742`, Memory-Radius `1.156`). Damit
-ist die aktuelle Code-Konvention geklaert: `A_rep` ist der lokale
-Confinement-Kanal unter `x <- x - eta grad`; `A_att` wirkt als breiter
-Gegenkanal. Report:
-`reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md`.
-
-Force-Komponenten-Pilot 2026-07-09: Der seedgleiche 100k-Lauf bei `q=3`
-bestaetigt die Vorzeichenlesart direkt. Median ueber Seeds: `baseline` hat
-`rep_step 0.01293`, `att_step 0.000508`, `rep/att 25.4` und
-`net_step_memory_center_cos 0.906`; `single_scale` bleibt gleichartig
-konfinierend; `rep_zero` hat `rep_step 0`, `att_step 0.00257` und
-`net_step_memory_center_cos -0.997`, also driftet der verbleibende Kanal vom
-Memory-Zentrum weg. Report: `reports/force_component_q3_pilot_2026-07-09.md`.
+Scale-Ratio-/Rep-Zero-Kontrollen 2026-07-09 (`legacy-sign`): Die 100k-
+Piloten fuer `sigma_att/sigma_rep in {2,3}` zeigen unter der alten
+Gradientenrichtung, dass `baseline`, `zero_mean_two_scale`,
+`matched_deposition_renormalized` und `single_scale` scorecard-nah bleiben,
+waehrend `rep_zero` bei `q=3` stark dispersiv wird. Der anschliessende
+Force-Komponenten-Pilot machte den Fehler sichtbar: die gemessenen
+Memory-Center-Projektionen passten zur alten, nicht zur intendierten
+Potentialkonvention. Mit der korrigierten Konvention ist `A_rep` lokal
+repulsiv und `A_att` breit attraktiv; diese Kontrollen muessen neu gerechnet
+werden. Reports: `reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md`
+und `reports/force_component_q3_pilot_2026-07-09.md`.
 
 
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
@@ -277,13 +278,12 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Paper-I-Claim-Sprache auf Feedback-Confinement gegenueber `eta_zero`
-   zuschneiden; keinen notwendigen zweiskaligen Baseline-Mechanismus behaupten.
-2. Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
-   Eigenwerte pruefen, zuerst auf kompakten `baseline`/`single_scale`-Regimen.
-3. Force-Komponenten als Hilfsfeatures/Sanity-Checks mitfuehren, aber keine
-   weiteren Zero-Mean-Longruns ohne neues mechanismusspezifisches Observable
-   skalieren.
+1. Korrigierte Sign-Konvention testen: `baseline`, `single_scale`,
+   `rep_zero`, `eta_zero` bei `q=3`, inklusive Force-Komponenten.
+2. Amplitudenhierarchie testen: breite Attraktion gegen lokalen repulsiven Kern,
+   z. B. `A_att/A_rep` ueber mehrere Groessenordnungen.
+3. Nur bei sichtbarem kompaktem Regime: Knotenscore, Residence/Shape und
+   Block-Markov-/AR-Moden neu auswerten.
 4. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
    oszillierendes oder ballistisches Regime in einem erweiterten Modell zeigen,
    dann mit `hbar nu`, `mc^2` oder grossen/kleinen Zahlen skalieren.

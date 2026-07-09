@@ -10,7 +10,7 @@ markiert.
 ## Leitentscheidung
 
 **Paper 0 ist als mathematischer Anker ausreichend. Der naechste Engpass ist
-Paper-I-Evidenz: ein strengeres Knotenkriterium nach dem Kontrollreport.**
+Paper-I-Evidenz nach Korrektur der Kernel-Vorzeichenkonvention.**
 
 Begruendung:
 
@@ -57,22 +57,17 @@ Status: erledigt im Kontrollreport `reports/long_run_control_report_2026-07-01.m
 
 Ergebnis:
 
-- `eta_zero` ist die echte Negativkontrolle: deutlich geringere Residence und
-  viel groessere Ausdehnung.
-- `baseline` ist kompakt und langlebig, aber seed-variabel.
-- `single_scale` ist ebenfalls kompakt und oft langlebiger als baseline. Es ist
-  daher keine Negativkontrolle, sondern eine Kernelklassen-Ablation.
-- Epsilon-Step-Balance/Floor-Probe: `epsilon=0` friert den Nullstart ein;
-  positive Werte bis `1e-34` skalieren die Trajektorie herunter, reduzieren
-  aber nicht das Noise/Drift-Verhaeltnis.
-- Kernel-Shape-Probe/Code-Review: `A_rep` ist in der aktuellen Konvention
-  lokal restaurierend; `A_rep=0` ist die schaerfere Dispersionskontrolle.
-  Baseline-Seeds `1..5` liefern verschiedene Pfade, aber aehnliche
-  Schritt- und Turn-Metriken.
+- Die bisherigen Long-Run-Kontrollen waren reproduzierbar, gehoeren aber zur
+  `legacy-sign`-Konvention.
+- Der Kernelgradient wurde korrigiert, damit `A_rep` lokal repulsiv und
+  `A_att` breit attraktiv im Sinn von `K=A_rep G_rep-A_att G_att` wirkt.
+- Paper-I-Evidenz muss deshalb neu aufgebaut werden. Alte Reports bleiben als
+  Audit der Vorzeichenhistorie nuetzlich, nicht als Evidenz fuer das
+  korrigierte Potentialmodell.
 
-Paper-I-Lesart: Self-interaction-induced confinement gegenueber `eta_zero` ist
-unterstuetzt. Ein spezifisch zweiskaliger Knotenmechanismus ist noch nicht
-isoliert.
+Paper-I-Lesart: offen bis zum korrigierten Retest. Der aktuelle Claim lautet
+nur: Das Modell und die Diagnostik sind definiert; die stabile Knotenexistenz
+muss unter korrigierter Sign-Konvention neu gehaertet werden.
 
 ### P1.2 Knotenkriterium v0.5 verwenden
 
@@ -109,19 +104,18 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Abgeschlossen: Zero-Mean-/Matched-Piloten bei
-   `sigma_att/sigma_rep in {1.5,2,3}`. Ergebnis: aktive Bedingungen sind
-   scorecard-nah; ein Zero-Mean-Mechanismus ist nicht isoliert.
-2. Abgeschlossen: `rep_zero` und Force-Komponenten bei `q=3`. Ergebnis:
-   `A_rep` ist im aktuellen Update der lokale Confinement-Kanal;
-   `rep_zero` entfernt diesen Kanal und dispergiert.
-3. Naechster Schritt: Block-Markov-/AR-Reanalyse auf reelle, negative oder
-   komplexe langsame Moden. Force-Komponenten koennen als Hilfsfeatures oder
-   Sanity-Checks mitlaufen.
-4. Photon-/Welleninterpretationen bleiben pausiert, bis ein komplexer oder
+1. Abgeschlossen: Sign-Konventionsentscheidung. Korrigiert wird der
+   Potentialgradient, nicht `eta` und nicht bloss das Labeling. Report:
+   `reports/kernel_sign_convention_correction_2026-07-09.md`.
+2. Jetzt: korrigierte Kurz-Kontrollen bei `q=3` rechnen:
+   `baseline`, `single_scale`, `rep_zero`, `eta_zero`, inklusive
+   Force-Komponenten.
+3. Danach: Amplitudenhierarchie testen, insbesondere breite Attraktion ueber
+   mehrere Groessenordnungen gegen den lokalen repulsiven Kern.
+4. Erst wenn ein kompaktes korrigiertes Regime sichtbar ist: Knotenscore,
+   Residence/Shape und Block-Markov-/AR-Moden neu auswerten.
+5. Photon-/Welleninterpretationen bleiben pausiert, bis ein komplexer oder
    propagierender effektiver Modus gemessen ist.
-5. Paper-I-Evidenz weiterhin als Feedback-Confinement formulieren, nicht als
-   spezifischen Zwei-Skalen- oder Zero-Mean-Mechanismus.
 
 Wenn der Score traegt:
 
@@ -145,16 +139,17 @@ oder `eta/eta_c` gemeinsam dokumentieren.
 
 Prioritaet:
 
-0. Abgeschlossen: Der v0.5-Kontrollvergleich trennt `baseline`/`single_scale`
-   sauber von `m0_zero`/`alpha_one`, isoliert aber keinen Zwei-Skalen-Mechanismus.
-1. Bestehende 15-Seed-/Long-Run-Daten blockweise coarse-grainen und lineare
-   AR-/Transfermoden auf reelle, negative oder komplexe Eigenwerte pruefen.
-2. Die korrigierte kurze Ballistikprobe nur als dimensionslosen Sanity-Check
-   nutzen; sie ersetzt keine Long-Run-Knotenevidenz.
-3. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
-   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`. Als erste
-   harte Kontrollen sind `m0_zero` (`M0=0`) und `alpha_one` (`alpha=1`) definiert.
-4. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
+0. Abgeschlossen: Memory-Form und Sign-Konventionsentscheidung sind im
+   Paketkern umgesetzt; vorhandene v0.5-Daten sind `legacy-sign`.
+1. Korrigierten q=3-Retest mit Force-Komponenten auswerten.
+2. Danach Amplitudenhierarchie und gegebenenfalls Zero-Mean/Matched-Varianten
+   unter korrigierter Konvention testen.
+3. Erst auf einem kompakten korrigierten Datensatz blockweise coarse-grainen
+   und lineare AR-/Transfermoden auf reelle, negative oder komplexe
+   Eigenwerte pruefen.
+4. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
+   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
+5. Photon-/Wellenrichtung pausieren, bis ein stabiler komplexer oder
    propagierender effektiver Modus gemessen ist.
 
 ## P2: Spaeter
