@@ -217,6 +217,16 @@ zeigt praktisch deckungsgleiche aktive Bedingungen: `baseline`,
 die globale Bedingung `int K=0` ist noch nicht als separater Mechanismus
 sichtbar. Report: `reports/zero_mean_matched_pilot_100k_2026-07-09.md`.
 
+Scale-Ratio-/Rep-Zero-Kontrollen 2026-07-09: Die 100k-Piloten fuer
+`sigma_att/sigma_rep in {2,3}` bestaetigen die Kurzbefundlage: `baseline`,
+`zero_mean_two_scale`, `matched_deposition_renormalized` und `single_scale`
+bleiben scorecard-nah, waehrend `rep_zero` bei `q=3` stark dispersiv wird
+(`score median 0.214`, Sample-Radius `10.742`, Memory-Radius `1.156`). Damit
+ist die aktuelle Code-Konvention geklaert: `A_rep` ist der lokale
+Confinement-Kanal unter `x <- x - eta grad`; `A_att` wirkt als breiter
+Gegenkanal. Report:
+`reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -260,9 +270,9 @@ Negativkontrollen gegeneinander pruefen.
 
 1. Paper-I-Claim-Sprache auf Feedback-Confinement gegenueber `eta_zero`
    zuschneiden; keinen notwendigen zweiskaligen Baseline-Mechanismus behaupten.
-2. `amplitude_rep = 0` weiter als echte Dispersionsablation nutzen, aber nicht
-   zur Rettung des zweiskaligen Claims, sondern zur Klaerung, ob ein einzelner
-   restaurierender Kernel fuer Paper I genuegt.
+2. Kraftkomponenten als Observablen ausgeben: `||eta grad_rep||`,
+   `||eta grad_att||`, Netto-Drift und Projektion auf den Memory-Schwerpunkt.
+   Ohne diese Vorzeichendiagnostik keine weiteren Zero-Mean-Longruns skalieren.
 3. Photon-/Ballistik-Track getrennt halten: erst ein dimensionsloses
    oszillierendes oder ballistisches Regime in einem erweiterten Modell zeigen,
    dann mit `hbar nu`, `mc^2` oder grossen/kleinen Zahlen skalieren.

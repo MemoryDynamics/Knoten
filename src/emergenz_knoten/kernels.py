@@ -216,7 +216,12 @@ def double_gaussian_gradient(
     deposition_kernel: str = "delta",
     deposition_sigma: float = 0.0,
 ) -> np.ndarray:
-    """Repulsive-attractive two-scale gradient with optional write-kernel convolution."""
+    """Historical two-scale gradient with optional write-kernel convolution.
+
+    The canonical simulator subtracts this vector. Therefore positive
+    components of this gradient act as restoring terms under that update.
+    Treat ``rep``/``att`` as channel labels unless the update sign is stated.
+    """
 
     x_arr = np.asarray(x, dtype=float)
     params = effective_double_gaussian_parameters(

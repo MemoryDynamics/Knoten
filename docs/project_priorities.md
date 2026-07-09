@@ -109,14 +109,15 @@ transparente Scorecard.
 
 Naechster operativer Schritt:
 
-1. Abgeschlossen: kurzer 100k-Pilot bei `sigma_rep=1`, `sigma_att=1.5`.
-   Ergebnis: `baseline`, `zero_mean_two_scale` und
-   `matched_deposition_renormalized` sind praktisch deckungsgleich; lokale
-   effektive Kruemmung dominiert diesen Kurzlauf.
-2. Naechster gezielter Kerneltest: kleiner Scale-Ratio-Pilot fuer
-   `sigma_att/sigma_rep in {2, 3}`, wieder seedgleich gegen `baseline` und
-   `eta_zero`. Erst bei sichtbarer Trennung auf 1M/100M skalieren.
-3. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
+1. Abgeschlossen: Zero-Mean-/Matched-Piloten bei
+   `sigma_att/sigma_rep in {1.5,2,3}`. Ergebnis: aktive Bedingungen sind
+   scorecard-nah; ein Zero-Mean-Mechanismus ist nicht isoliert.
+2. Abgeschlossen: `rep_zero` bei `q=3`. Ergebnis: `rep_zero` dispergiert stark,
+   waehrend `single_scale` baseline-artig bleibt. Damit ist `A_rep` im
+   aktuellen Update der lokale Confinement-Kanal, nicht eine Negativkontrolle.
+3. Naechster Schritt: Kraftkomponenten und Vorzeichen direkt messen
+   (`grad_rep`, `grad_att`, Netto-Drift, Projektion auf Memory-Zentrum), damit
+   wir nicht weiter ueber Parameterlabels argumentieren.
 4. Danach Block-Markov-/AR-Reanalyse auf reelle, negative oder komplexe
    langsame Moden. Photon-/Welleninterpretationen bleiben bis dahin pausiert.
 5. Paper-I-Evidenz weiterhin als Feedback-Confinement formulieren, nicht als

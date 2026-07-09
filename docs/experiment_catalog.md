@@ -227,8 +227,7 @@ Knotenform-Kriterium.
 Lesart: v0.4 macht den Memory-Cloud-Knotenbegriff expliziter und trennt die
 aktiven Bedingungen klar von `eta_zero`. Es isoliert aber weiterhin keinen
 notwendigen zweiskaligen Baseline-Mechanismus, weil `single_scale` fast gleich
-stark bleibt. Der naechste Kontrollschritt ist daher `amplitude_rep = 0` als
-echte Dispersionsablation in genau demselben 1M-Shape-Pilot-Protokoll.
+stark bleibt. Die spaetere `rep_zero`-Kontrolle zeigt, dass dieser Fall tatsaechlich dispersiv ist; naechster Schritt sind direkte Kraftkomponenten statt ein weiterer reiner Parametersweep.
 
 15-Seed-Erweiterung vom 2026-07-07:
 
@@ -285,7 +284,9 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/deposition_kernel_audit_2026-07-08.md` | Deposition-Kernel-Audit | Delta ist die Baseline; finite `gaussian` und `matched_gaussian` sind jetzt als effektive Faltung implementiert. |
 | `reports/matched_deposition_kernel_pilot_2026-07-08.md` | Matched-Deposition-Pilot | Normalisiertes Gaussian-Matching trennt von `eta_zero`, ist im 100k-Pilot aber breiter als Delta; naechster Test braucht Steifigkeitsrenormierung. |
 | `reports/zero_mean_kernel_decision_2026-07-09.md` | Zero-Mean-Kernel | Kompensierter Zwei-Skalen-Kernel mit `int K=0`; erster Test bei `sigma_att/sigma_rep=1.5`. |
-| `reports/zero_mean_matched_pilot_100k_2026-07-09.md` | Zero-Mean-/Matched-Pilot | Bei `sigma_att/sigma_rep=1.5` sind Baseline, Zero-Mean und renormiertes Matching praktisch deckungsgleich; naechster Test ist Ratio `{2,3}`. |
+| `reports/zero_mean_matched_pilot_100k_2026-07-09.md` | Zero-Mean-/Matched-Pilot | Bei `sigma_att/sigma_rep=1.5` sind Baseline, Zero-Mean und renormiertes Matching praktisch deckungsgleich. |
+| `reports/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md` | Scale-Ratio-/Rep-Zero-Kontrollen | Ratios `{1.5,2,3}` isolieren keinen Zero-Mean-Mechanismus; `rep_zero` dispergiert stark und klaert die aktuelle Vorzeichenkonvention. |
+| `reports/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

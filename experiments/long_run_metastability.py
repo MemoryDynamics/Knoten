@@ -21,7 +21,9 @@ from emergenz_knoten import (  # noqa: E402
     SimulationConfig,
     covariance_dimension,
     effective_double_gaussian_parameters,
+    exponential_memory_weights,
     fit_occupancy_scaling_window,
+    gaussian_gradient,
     matched_local_stiffness_renormalization,
     occupancy_dimension,
     residence_statistics,
@@ -60,7 +62,7 @@ def _parse_float_list(value: str) -> list[float]:
 
 
 def _parse_conditions(value: str) -> list[str]:
-    allowed = {"baseline", "eta_zero", "single_scale", "m0_zero", "alpha_one", "matched_deposition", "matched_deposition_renormalized", "zero_mean_two_scale"}
+    allowed = {"baseline", "eta_zero", "single_scale", "rep_zero", "m0_zero", "alpha_one", "matched_deposition", "matched_deposition_renormalized", "zero_mean_two_scale"}
     values = [item.strip() for item in value.split(",") if item.strip()]
     unknown = sorted(set(values) - allowed)
     if unknown:
@@ -104,6 +106,8 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
         return replace(config, eta=0.0)
     if condition == "single_scale":
         return replace(config, amplitude_att=0.0)
+    if condition == "rep_zero":
+        return replace(config, amplitude_rep=0.0)
     if condition == "m0_zero":
         return replace(config, memory_mass=0.0)
     if condition == "alpha_one":
@@ -261,6 +265,133 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
     }
 
 
+
+def _median_or_none(values: list[float]) -> float | None:
+    if not values:
+        return None
+    return float(np.median(np.asarray(values, dtype=float)))
+
+
+def _mean_or_none(values: list[float]) -> float | None:
+    if not values:
+        return None
+    return float(np.mean(np.asarray(values, dtype=float)))
+
+
+def _cosine_or_none(step: np.ndarray, target: np.ndarray) -> float | None:
+    step_norm = float(np.linalg.norm(step))
+    target_norm = float(np.linalg.norm(target))
+    if step_norm == 0.0 or target_norm == 0.0:
+        return None
+    return float(np.dot(step, target) / (step_norm * target_norm))
+
+
+def _force_component_diagnostics(config: SimulationConfig, *, seed: int) -> dict[str, object]:
+    """Return sampled force-component summaries for the current update sign."""
+
+    rng = np.random.default_rng(seed)
+    horizon = _horizon(config)
+    weights = exponential_memory_weights(config.alpha, horizon, memory_mass=config.memory_mass)
+    effective = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
+
+    history = np.zeros((horizon, config.dim), dtype=float)
+    filled = 0
+    x = np.zeros(config.dim, dtype=float)
+    rep_norms: list[float] = []
+    att_norms: list[float] = []
+    net_norms: list[float] = []
+    noise_norms: list[float] = []
+    rep_center_cos: list[float] = []
+    att_center_cos: list[float] = []
+    net_center_cos: list[float] = []
+
+    for step in range(1, config.steps + 1):
+        rep_grad = np.zeros(config.dim, dtype=float)
+        att_grad = np.zeros(config.dim, dtype=float)
+        memory_center = x.copy()
+        if filled and config.eta != 0.0 and config.memory_mass != 0.0:
+            mem = history[:filled]
+            w = weights[:filled]
+            rep_grad = gaussian_gradient(
+                x,
+                mem,
+                w,
+                sigma=effective["sigma_rep"],
+                amplitude=effective["amplitude_rep"],
+            )
+            att_grad = gaussian_gradient(
+                x,
+                mem,
+                w,
+                sigma=effective["sigma_att"],
+                amplitude=effective["amplitude_att"],
+            )
+            weight_sum = float(np.sum(w))
+            if weight_sum > 0.0:
+                memory_center = np.average(mem, axis=0, weights=w)
+        noise = config.epsilon * rng.normal(size=config.dim)
+        rep_step = -config.eta * rep_grad
+        att_step = config.eta * att_grad
+        net_step = rep_step + att_step
+        x = x + noise + net_step
+
+        if filled < horizon:
+            if filled > 0:
+                history[1 : filled + 1] = history[:filled]
+            filled += 1
+        else:
+            history[1:] = history[:-1]
+        history[0] = x
+
+        if step >= config.burn_in and step % config.sample_every == 0:
+            target = memory_center - x
+            rep_norms.append(float(np.linalg.norm(rep_step)))
+            att_norms.append(float(np.linalg.norm(att_step)))
+            net_norms.append(float(np.linalg.norm(net_step)))
+            noise_norms.append(float(np.linalg.norm(noise)))
+            for bucket, vector in (
+                (rep_center_cos, rep_step),
+                (att_center_cos, att_step),
+                (net_center_cos, net_step),
+            ):
+                cosine = _cosine_or_none(vector, target)
+                if cosine is not None and math.isfinite(cosine):
+                    bucket.append(cosine)
+
+    rep_median = _median_or_none(rep_norms)
+    att_median = _median_or_none(att_norms)
+    net_median = _median_or_none(net_norms)
+    noise_median = _median_or_none(noise_norms)
+    return {
+        "n_samples": len(net_norms),
+        "rep_step_norm_median": rep_median,
+        "att_step_norm_median": att_median,
+        "net_drift_norm_median": net_median,
+        "noise_norm_median": noise_median,
+        "rep_to_att_norm_median_ratio": (
+            rep_median / att_median if rep_median is not None and att_median not in (None, 0.0) else None
+        ),
+        "noise_to_net_drift_median_ratio": (
+            noise_median / net_median if noise_median is not None and net_median not in (None, 0.0) else None
+        ),
+        "rep_step_memory_center_cos_median": _median_or_none(rep_center_cos),
+        "att_step_memory_center_cos_median": _median_or_none(att_center_cos),
+        "net_step_memory_center_cos_median": _median_or_none(net_center_cos),
+        "rep_step_norm_mean": _mean_or_none(rep_norms),
+        "att_step_norm_mean": _mean_or_none(att_norms),
+        "net_drift_norm_mean": _mean_or_none(net_norms),
+        "noise_norm_mean": _mean_or_none(noise_norms),
+    }
+
+
 def _finite_float(value: float | np.floating | None) -> float | None:
     if value is None:
         return None
@@ -375,6 +506,7 @@ def run_case(
     max_ac_lag: int,
     min_memory_times: float,
     output_dir: Path,
+    force_components: bool = False,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
@@ -392,6 +524,8 @@ def run_case(
     memory_cloud = _memory_cloud_diagnostics(result["memory"], result["weights"])
     if memory_cloud is not None:
         diagnostics["memory_cloud"] = memory_cloud
+    if force_components:
+        diagnostics["force_components"] = _force_component_diagnostics(config, seed=seed)
     payload: dict[str, object] = {
         "condition": condition,
         "seed": int(seed),
@@ -511,6 +645,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-memory-times", type=float, default=10.0)
     parser.add_argument("--allow-slow-python", action="store_true")
     parser.add_argument(
+        "--force-components",
+        action="store_true",
+        help="store sampled force-component summaries; re-simulates each case in Python",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=Path("data/processed/long_run_metastability/2026-06-29_initial"),
@@ -587,6 +726,7 @@ def main() -> None:
                     max_ac_lag=args.max_ac_lag,
                     min_memory_times=args.min_memory_times,
                     output_dir=output_dir,
+                    force_components=args.force_components,
                 )
             )
 

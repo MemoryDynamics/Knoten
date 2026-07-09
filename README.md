@@ -129,8 +129,11 @@ python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --condit
 
 ## Naechste Prioritaeten
 
-1. Scale-Ratio-Pilot fuer `zero_mean_two_scale` bei `sigma_att/sigma_rep in {2,3}`.
-2. `amplitude_rep = 0` als echte Dispersionsablation separat nachziehen.
+1. Kraftvorzeichen und Komponenten diagnostizieren: `A_rep` ist in der
+   aktuellen Update-Konvention der lokale Confinement-Kanal; `rep_zero` ist die
+   harte Dispersionskontrolle.
+2. Keine Zero-Mean-Longruns skalieren, bis Kraftkomponenten und Vorzeichen
+   sauber getrennt sind.
 3. Danach Block-Markov-/AR-Moden auf reelle, negative oder komplexe langsame
    Eigenwerte pruefen.
 4. Paper I als Feedback-Confinement-Evidenz formulieren; Paper II/III bleiben

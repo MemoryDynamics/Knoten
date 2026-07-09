@@ -22,6 +22,7 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     baseline = long_run_metastability._apply_condition(cfg, "baseline")
     eta_zero = long_run_metastability._apply_condition(cfg, "eta_zero")
     single_scale = long_run_metastability._apply_condition(cfg, "single_scale")
+    rep_zero = long_run_metastability._apply_condition(cfg, "rep_zero")
     m0_zero = long_run_metastability._apply_condition(cfg, "m0_zero")
     alpha_one = long_run_metastability._apply_condition(cfg, "alpha_one")
     matched = long_run_metastability._apply_condition(cfg, "matched_deposition")
@@ -33,6 +34,10 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     assert eta_zero.amplitude_att == cfg.amplitude_att
     assert single_scale.eta == cfg.eta
     assert single_scale.amplitude_att == 0.0
+    assert single_scale.amplitude_rep == cfg.amplitude_rep
+    assert rep_zero.eta == cfg.eta
+    assert rep_zero.amplitude_rep == 0.0
+    assert rep_zero.amplitude_att == cfg.amplitude_att
     assert m0_zero.memory_mass == 0.0
     assert m0_zero.eta == cfg.eta
     assert alpha_one.alpha == 1.0
@@ -102,3 +107,41 @@ def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     assert "scaling_window" in diagnostics["occupancy"]
     assert "sample_shape" in diagnostics
     assert diagnostics["sample_shape"]["effective_dimension"] is not None
+
+def test_force_component_diagnostics_reports_update_channels() -> None:
+    cfg = SimulationConfig(
+        steps=200,
+        dim=2,
+        eta=0.15,
+        alpha=0.1,
+        burn_in=20,
+        sample_every=10,
+        max_memory=20,
+    )
+
+    diagnostics = long_run_metastability._force_component_diagnostics(cfg, seed=7)
+
+    assert diagnostics["n_samples"] == 19
+    assert diagnostics["rep_step_norm_median"] is not None
+    assert diagnostics["net_drift_norm_median"] is not None
+    assert diagnostics["noise_norm_median"] is not None
+    assert diagnostics["rep_step_norm_median"] >= 0.0
+
+
+def test_force_component_diagnostics_zero_eta_has_zero_drift() -> None:
+    cfg = SimulationConfig(
+        steps=100,
+        dim=2,
+        eta=0.0,
+        alpha=0.1,
+        burn_in=10,
+        sample_every=10,
+        max_memory=20,
+    )
+
+    diagnostics = long_run_metastability._force_component_diagnostics(cfg, seed=7)
+
+    assert diagnostics["rep_step_norm_median"] == 0.0
+    assert diagnostics["att_step_norm_median"] == 0.0
+    assert diagnostics["net_drift_norm_median"] == 0.0
+    assert diagnostics["noise_norm_median"] is not None
