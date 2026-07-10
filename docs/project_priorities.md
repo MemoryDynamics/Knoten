@@ -124,8 +124,10 @@ Naechster operativer Schritt:
 7. Abgeschlossen: `eta_s=eta_v=0` und `alignment`-Kontrollen. Ergebnis:
    komplexe AR-Paare entstehen schon im Nullkraft-/Random-Walk-Zweig;
    `alignment` erzeugt noch keinen isolierten Oszillator.
-8. Jetzt: `lambda_v`-Variation, shuffled/randomized-vector-Kontrolle und
-   fallspezifischen `ModeScore` definieren, getrennt vom Knotenscore.
+8. Jetzt: KPI-Register und fallspezifischen `ModeScore` definieren, getrennt
+   vom Knotenscore. Danach erst `lambda_v`-Variation und shuffled/randomized-vector.
+9. `beta/M0/sigma/A`-Variationen erst starten, wenn Scorecard, Kontrollen,
+   Schwellen und Seed-Aggregation fuer die jeweilige Frage festgelegt sind.
 
 Wenn der Score traegt:
 
@@ -161,8 +163,9 @@ Prioritaet:
 4. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
-5. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
-   festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
+5. Neue Alpha-/M0-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
+   festlegen, dann eine Hauptachse variieren (`lambda_m` bei festem `M0`,
+   danach `M0`, dann `sigma`, dann Amplitudenverhaeltnis).
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 

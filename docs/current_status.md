@@ -270,6 +270,8 @@ Memory-Kanal `p_n` mit klaren Kontrollen (`eta_v=0`, shuffled vector memory,
 `M_v=0`, `lambda_v=1`). Report:
 `reports/vector_memory_minimal_design_2026-07-09.md`.
 
+Score-Architektur 2026-07-10: Der Experiment-Katalog enthaelt jetzt ein KPI-Register. `KnotScore` bleibt fuer Metastabilitaet/Residence/Kompaktheit reserviert; `ModeScore`, `PropagationScore` und `FormationScore` werden als separate Scorecards gefuehrt. Dimensionen sind eingeordnet: `D_occ` ist die aktuelle KnotScore-Dimensionskomponente, `memory_shape_dimension` ist covariance participation der Memory-Cloud, `D_cov` bleibt Sample-/Shape-Diagnostik und `D_spec` ist vorerst Geometrie-/Reconciliation-KPI statt Scorekomponente.
+
 Initialer Vektormemory-Pilot 2026-07-10: Der Paketkern enthaelt jetzt einen
 2D-Transverse-Pilotmodus. Der Kurzlauf mit `burn_in=0`, Seeds `1..3`,
 `A_att in {0.35,7.75,8.0,9.0,20.0}` und `eta_v in {0,0.01,0.03}`

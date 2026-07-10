@@ -292,6 +292,107 @@ fallen `m0_zero` und `alpha_one` korrekt zusammen.
 | `m0_zero` | `10` | `0.286` | `1.000` | `1.000` | `0/10` | Null-Feld-Kontrolle |
 | `alpha_one` | `10` | `0.286` | `1.000` | `1.000` | `0/10` | Ein-Punkt-Memory degeneriert zu Nullkraft |
 
+
+## KPI-Register fuer Scores
+
+Die Scores sollen feste Fragen beantworten. KPIs duerfen je Score anders sein,
+aber die Scorecard muss vor dem Parameterlauf feststehen.
+
+### KnotScore: Metastabilitaet und Knotenform
+
+Aktuell enthalten oder direkt verwandt:
+
+| KPI | Status | Rolle |
+| --- | --- | --- |
+| Residence-Gain | in v0.5 | langlebige Rueckkehr/Verweildauer gegen `eta_zero` |
+| Sample-Kompaktheit | in v0.5 | rohe Pfadausdehnung gegen Kontrolle |
+| Voxel-Stabilitaet | in v0.5 | Schutz gegen Einzelvoxel-Artefakte |
+| `D_occ` / Occupancy-Fenster | in v0.5 | interne Nicht-Kollaps-Dimension, kein externer 3D-Claim |
+| Memory-Kompaktheit | in v0.5 | eigentliche Knotenform eher ueber Memory-Cloud als rohen Pfad |
+| Memory-Rundheit | in v0.5 | anisotrope oder degenerierte Memory-Clouds abwerten |
+| Memory-Formdimension | in v0.5 | covariance participation dimension der Memory-Cloud |
+
+Weitere sinnvolle KnotScore-Kandidaten:
+
+| KPI | Quelle | Warum relevant |
+| --- | --- | --- |
+| Center-Drift | Memory-Schwerpunkt, Residence-Voxel oder geglaettetes Antwortzentrum | Knoten sollten langsamer driften als die rohe Trajektorie |
+| Radius-Stabilitaet | Blockweise Memory-/Sample-Radien | stabiler Knoten statt transienter Kollaps/Explosion |
+| Survival/Hazard | Residence-Verteilung statt nur Maximum | trennt langlebige Tails von einzelnen Ausreissern |
+| Force-Balance | `rep/att`, net-cos, Noise/Drift-Verhaeltnis | Mechanismus-KPI fuer korrigierte Kernel statt nur Geometrie |
+| Hessian-/OU-Stabilitaet | lokale Hessian-Eigenwerte um Memory-Zentrum | verbindet Score mit Relaxations-/Stabilitaetsskala |
+| Transfer-Spektralluecke | Markov-/Transferoperator | metastabile Menge sollte langsamen Modus plus Gap zeigen |
+| CK-/Closure-Fehler | Chapman-Kolmogorov und AR-Residual | Score nur glaubwuerdig, wenn reduzierte Features ausreichend geschlossen sind |
+| Seed-Passrate/IQR | Report-Ebene | Score sollte ueber Seeds tragen, nicht nur im Median gluecken |
+| Parameter-Robustheit | lokale Nachbarschaft in `A`, `sigma`, `M0`, `lambda` | nachhaltiger als Einzelparameter-Treffer |
+
+### Dimensionsmetriken einordnen
+
+- `D_occ`: box-/occupancyartige interne Ausdehnung. Das ist aktuell die
+  KnotScore-Dimensionskomponente.
+- `D_cov`: covariance participation ratio der Sample-Cloud. Als
+  `sample_shape.effective_dimension` ist es Diagnostik, aber nicht direkt
+  v0.5-Scorekomponente.
+- `memory_shape_dimension`: ebenfalls covariance participation ratio, aber auf
+  der gewichteten Memory-Cloud. Diese Groesse ist in v0.5 ueber den
+  Memory-Formdimension-Gain enthalten.
+- `D_spec`: spektrale Dimension aus einer lokalen Kernel-/Graphstruktur. Sie
+  ist implementiert, aber noch nicht stabil genug als KnotScore-Komponente.
+  Sinnvoller Einsatz: als Reconciliation-/Geometrie-KPI oder als Peak-/Band-
+  KPI in einem separaten Mode-/GeometryScore.
+
+### ModeScore: oszillatorische oder quantenartige effektive Moden
+
+Ein ModeScore sollte nicht Residence bewerten, sondern die Modenfrage:
+
+| KPI | Idee |
+| --- | --- |
+| Slow complex pair | fuehrende komplexe Eigenwerte mit `|mu|` ueber Schwelle |
+| Lag-stabile Frequenz | `omega = arg(mu)/lag_updates` bleibt ueber Lags stabil |
+| Lag-stabile Daempfung | `Gamma = -log(|mu|)/lag_updates` bleibt ueber Lags stabil |
+| Control separation | Unterschied zu `eta_s=eta_v=0`, shuffled-vector und `eta_v=0` |
+| Residual/Closure | AR- oder Transfermodell residualarm genug |
+| Phase coherence | Autokorrelation/PLV einer expliziten Phase oder Orientierung |
+| Spectral peak | Peak in Frequenz-/Spektraldiagnostik, aber nur mit Kontrollabstand |
+
+Ein Peak in `D_spec` waere nicht automatisch Mode-Evidenz. Er waere ein
+Geometrie-/Skalenhinweis. Fuer ModeScore zaehlt ein reproduzierbarer Peak in
+Frequenz, Eigenphase oder Autokorrelation staerker.
+
+### PropagationScore: gerichtete Ausbreitung und Antwort
+
+| KPI | Idee |
+| --- | --- |
+| MSD-Slope | diffusiv `~1`, ballistisch `~2`, subdiffus/konfiniert `<1` |
+| Drift-Persistenz | Geschwindigkeits-/Orientierungsautokorrelation |
+| Response-Lag | Stoerung an Knoten A, Antwort an Knoten B mit stabiler Verzogerung |
+| Directionality | Antwort staerker entlang Kopplungsrichtung als quer dazu |
+| Signal-to-control | Abstand gegen shuffled, `eta=0`, `M0=0` und Fernkopplungs-Ablation |
+| Retardierungsrobustheit | Lag bleibt ueber Seeds und Distanzen konsistent |
+
+### FormationScore: Geburt statt stationaerer Auswertung
+
+| KPI | Idee |
+| --- | --- |
+| Time-to-compactness | Updates bis Memory-Radius unter Schwelle faellt |
+| Early seed sensitivity | Streuung ueber Seeds in fruehen Memory-Zeiten |
+| Capture probability | Anteil Seeds, die in Kandidatenregime eintreten |
+| Overshoot/settling | Radius- oder Kraftantwort ueberschiesst und relaxiert |
+| Burn-in-free provenance | `burn_in=0`, Formation nicht herausgeschnitten |
+
+### Praktische Regel fuer Parameterstudien
+
+Vor jeder `beta/M0/sigma/A`-Variation wird festgelegt:
+
+1. Welche Scorecard? `KnotScore`, `ModeScore`, `PropagationScore` oder
+   `FormationScore`.
+2. Welche Kontrollen? Mindestens `eta_zero`/`M0=0` fuer KnotScore,
+   `eta_s=eta_v=0`, `eta_v=0` und shuffled-vector fuer ModeScore.
+3. Welche Pass-/Partial-Schwellen? Vor dem Sweep, nicht danach.
+4. Welche Aggregation? Median/IQR und Seed-Passrate statt best seed.
+5. Welche Parameterachse? Immer nur eine Hauptachse pro Scan, z.B. erst `M0`,
+   dann `lambda`, dann `sigma`, dann Amplitudenverhaeltnis.
+
 ## Ballistische MSD-Probe
 
 Report vom 2026-07-07: `reports/ballistic_kernel_probe_2026-07-07.md`.
