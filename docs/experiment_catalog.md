@@ -1,4 +1,4 @@
-# Experiment-Katalog
+﻿# Experiment-Katalog
 
 Stand: 2026-07-10.
 
@@ -17,6 +17,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
 | `experiments/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
+| `experiments/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
 | `experiments/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -136,6 +137,20 @@ Lesart: Das korrigierte Skalarmodell erzeugt im 1M-Pilot seed-robuste kompakte
 Memory-Clouds fuer `A_att=20..35`. Der offene Paper-I-Engpass ist jetzt
 Residence-Skalierung mit `N`, nicht mehr die blosse Existenz kompakter
 Memory-Clouds. Report: `reports/scalar_hardening_q3_1M_2026-07-10.md`.
+
+N-Skalierung korrigierter skalarer Kandidaten 2026-07-10 (`burn_in=0`,
+`N=100k..3M`, Seeds `1..5`, Score v0.5):
+
+| A_att | N range | score median | memory radius trend | raw D_occ trend | D_win trend | residence gain at 3M | Lesart |
+| ---: | --- | ---: | --- | --- | --- | ---: | --- |
+| `20` | `100k..3M` | `0.857` | `0.087 -> 0.092` | `1.110 -> 2.002` | `1.675 -> 2.016` | `1.584` | balanced compact candidate, Residence offen |
+| `35` | `100k..3M` | `0.857` | `0.060 -> 0.060` | `1.042 -> 2.078` | `1.650 -> 2.084` | `1.684` | tighter memory cloud, Residence offen |
+
+Lesart: Die korrigierten Kandidaten bilden kompakte Memory-Clouds schnell. Die
+Dimensionen wachsen entlang N in Richtung etwa `2`, waehrend die Memory-Shape-
+Dimension frueh nahe `2.7..3.0` liegt. Der offene Punkt ist nicht Formation,
+sondern Residence-Konvergenz bzw. Residence-Messmethodik. Report und Plots:
+`reports/scalar_n_scaling_q3_2026-07-10.md`.
 
 ## Epsilon-Step-Balance
 
@@ -463,6 +478,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
 | `reports/m0_axis_knot_score_pilot_2026-07-10.md` | M0-Achsenpilot | Bei `A_att=8` macht hoeheres `M0` die Laeufe kompakter, traegt im 100k-Pilot aber noch keinen starken v0.5-KnotScore. |
 | `reports/scalar_hardening_q3_1M_2026-07-10.md` | Scalar-Haertung q=3 1M | `A_att=20` und `35` tragen hohe v0.5-Kompaktheit/Memory-Shape-Scores; Residence-Skalierung bleibt der naechste Engpass. |
+| `reports/scalar_n_scaling_q3_2026-07-10.md` | Scalar-N-Skalierung q=3 | `A_att=20/35`, `N=100k..3M`, `burn_in=0`; kompakte Memory-Clouds bilden schnell, Residence bleibt Engpass. |
 | `reports/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |

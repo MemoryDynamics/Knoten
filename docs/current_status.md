@@ -306,6 +306,17 @@ Memory-Clouds; fuer Paper-I-Metastabilitaet muss jetzt Residence-Skalierung mit
 laengerem `N` gehaertet werden. Report:
 `reports/scalar_hardening_q3_1M_2026-07-10.md`.
 
+N-Skalierung 2026-07-10: Fuer `A_att=20` und `35` wurde `N in {100k,300k,1M,3M}`
+mit `burn_in=0` gemessen, damit das Einschwingen sichtbar bleibt. Ergebnis:
+KnotScore v0.5 bleibt fuer beide Kandidaten ueber alle N-Punkte bei Median
+`0.857`, die Memory-Radien bleiben nahezu stationaer (`~0.09` fuer `A_att=20`,
+`~0.06` fuer `A_att=35`), und die Memory-Shape-Dimension liegt frueh nahe
+`2.7..3.0`. Rohes `D_occ`/`D_win` steigen mit N bis etwa `2.0`. Residence-Gain
+bleibt dagegen median unter der Partial-Schwelle `2` (`N=3M`: `1.584` bzw.
+`1.684`). Lesart: kompakte Memory-Cloud-Formation geschieht schnell; offen ist
+Residence-Konvergenz bzw. ein schaerferes Residence-Observable. Report:
+`reports/scalar_n_scaling_q3_2026-07-10.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

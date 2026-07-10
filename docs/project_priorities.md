@@ -1,4 +1,4 @@
-# Projektprioritaeten
+﻿# Projektprioritaeten
 
 Stand: 2026-07-10.
 
@@ -135,9 +135,13 @@ Naechster operativer Schritt:
     `A_att=20` und `35` tragen hohe v0.5-Kompaktheit/Memory-Shape-Scores;
     `A_att=9` bleibt Boundary-Control. Report:
     `reports/scalar_hardening_q3_1M_2026-07-10.md`.
-11. Jetzt: Residence-Skalierung mit laengerem `N` fuer `A_att=20` und `35`
-    pruefen. Vektormemory parallel nur mit klaren Nullkraft-/Shuffle-Kontrollen
-    weiterfuehren.
+11. Abgeschlossen: N-Skalierung mit `burn_in=0` fuer `A_att=20/35`,
+    `N=100k..3M`. Ergebnis: kompakte Memory-Clouds bilden schnell;
+    Residence-Gain bleibt median unter der Partial-Schwelle. Report:
+    `reports/scalar_n_scaling_q3_2026-07-10.md`.
+12. Jetzt: Residence-Messmethodik schaerfen, insbesondere Center-/Memory-
+    basierte Residence statt reinem Voxelmaximum; erst danach gezielt laenger
+    laufen lassen.
 
 Wenn der Score traegt:
 
@@ -170,15 +174,19 @@ Prioritaet:
    `A_att ~= 7.9`.
 3. Abgeschlossen: 1M-Haertung fuer `A_att in {9,20,35}`. `A_att=20` und
    `35` sind kompakte Kandidaten; Residence-Gain ist noch nicht median-stark.
-4. Fuer Paper I: Residence-Skalierung nur noch fuer `A_att=20` und `35`
-   laenger testen; `A_att=9` bleibt Boundary-Control, kein Hauptkandidat.
-5. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
+4. Abgeschlossen: N-Skalierung fuer `A_att=20/35` bis `N=3M`.
+   Kompaktheit und Memory-Shape sind schnell stabil; Residence-Gain bleibt
+   median unter `2`.
+5. Fuer Paper I: Residence-Messmethodik verbessern, z.B. Center-of-knot-
+   oder Memory-Cloud-basierte Verweildauer, bevor die naechsten langen Runs
+   gestartet werden.
+6. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
-6. Abgeschlossen: erster M0-Achsenpilot bei festem `A_att=8`. Hoeheres `M0`
+7. Abgeschlossen: erster M0-Achsenpilot bei festem `A_att=8`. Hoeheres `M0`
    verbessert Kompaktheit und Memory-Form leicht, traegt aber noch keinen
    starken v0.5-KnotScore.
-7. Neue Alpha-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
+8. Neue Alpha-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
    festlegen, dann eine Hauptachse variieren (`lambda_m` bei festem `M0`,
    danach `sigma`, danach Amplitudenverhaeltnis). `M0` bleibt vorerst
    sekundaerer Skalierungshebel, kein breiter Blindscan.
