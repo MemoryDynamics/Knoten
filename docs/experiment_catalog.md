@@ -209,7 +209,11 @@ v0.5 unterscheidet sich von v0.4 vor allem dadurch, dass Residence in rohen
 Updates verglichen wird und Memory-Kompaktheit nur bei nichtdegenerierter
 Memory-Cloud zaehlt. Das verhindert, dass `alpha_one` oder `M0=0` durch
 Skalierungsartefakte wie Knoten aussehen.
-
+Score-Hygiene: Der Knotenscore bleibt ein metastabilitaetsbezogener Score. Fuer
+andere Fragen sind separate, benannte Scorecards sinnvoll, z.B. `ModeScore`
+fuer lag-stabile komplexe Slow-Modes, `PropagationScore` fuer ballistische oder
+retardierte Antwort und `FormationScore` fuer Geburts-/Burn-in-freie Historien.
+Diese Scores duerfen nicht rueckwirkend als Knotenscore ausgegeben werden.
 ## Knotenscore v0.3
 
 Report vom 2026-07-02: `reports/knot_score_v0_3_2026-07-02.md`.
@@ -329,6 +333,8 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
 | `reports/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
+| `reports/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |
+| `reports/vector_memory_alignment_control_2026-07-10.md` | Alignment-Vektorkontrolle | `alignment` vergroessert schwache/transitionale Radien eher; `A_att=20` bleibt kompakt und ueberwiegend real. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln

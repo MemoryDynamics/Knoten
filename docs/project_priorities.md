@@ -121,8 +121,11 @@ Naechster operativer Schritt:
 6. Abgeschlossen: minimaler Vektorgedaechtnis-Prototyp und erster 2D-Pilot.
    Ergebnis: komplexe AR-Moden treten schon im `eta_v=0`-Fallback auf;
    noch kein isolierter Vektoreffekt.
-7. Jetzt: echte Kontrollen fuer die Modenfrage: `eta_s=eta_v=0`,
-   `alignment` vs. `transverse_2d`, `lambda_v`-Variation und shuffled-vector.
+7. Abgeschlossen: `eta_s=eta_v=0` und `alignment`-Kontrollen. Ergebnis:
+   komplexe AR-Paare entstehen schon im Nullkraft-/Random-Walk-Zweig;
+   `alignment` erzeugt noch keinen isolierten Oszillator.
+8. Jetzt: `lambda_v`-Variation, shuffled/randomized-vector-Kontrolle und
+   fallspezifischen `ModeScore` definieren, getrennt vom Knotenscore.
 
 Wenn der Score traegt:
 
@@ -157,7 +160,7 @@ Prioritaet:
    skalaren Kandidatenfenster haerten.
 4. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
-   entscheidend ist nun Differenz gegen `eta_s=eta_v=0` und shuffled-vector.
+   entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
 5. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
    festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
 

@@ -273,10 +273,14 @@ Memory-Kanal `p_n` mit klaren Kontrollen (`eta_v=0`, shuffled vector memory,
 Initialer Vektormemory-Pilot 2026-07-10: Der Paketkern enthaelt jetzt einen
 2D-Transverse-Pilotmodus. Der Kurzlauf mit `burn_in=0`, Seeds `1..3`,
 `A_att in {0.35,7.75,8.0,9.0,20.0}` und `eta_v in {0,0.01,0.03}`
-zeigt komplexe AR-Klassifikationen bereits in `eta_v=0`-Fallbacks. Lesart:
-noch keine Evidenz fuer einen vektorinduzierten Oszillator; ein Vektoreffekt
-muss relativ zum `eta_v=0`-Kontrollzweig lag- und seedstabil werden. Report:
-`reports/vector_memory_pilot_initial_2026-07-10.md`.
+zeigt komplexe AR-Klassifikationen bereits in `eta_v=0`-Fallbacks. Die
+nachgeschobene `eta_s=eta_v=0`-Kontrolle zeigt ebenfalls komplexe AR-Paare;
+diese sind daher zunaechst Feature-/Random-Walk-/Sampling-Moden, keine
+Schroedinger- oder Photonenevidenz. Die `alignment`-Kontrolle vergroessert
+schwache/transitionale Radien eher; `A_att=20` bleibt kompakt und ueberwiegend
+real. Reports: `reports/vector_memory_pilot_initial_2026-07-10.md`,
+`reports/vector_memory_eta_s_zero_control_2026-07-10.md` und
+`reports/vector_memory_alignment_control_2026-07-10.md`.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als

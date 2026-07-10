@@ -182,7 +182,8 @@ physikalischen Massen.
   `eta_v=0`-Fallback. Das ist nicht dasselbe wie `eta_s=0`: der skalare
   Potentialkanal war in diesem Pilot weiter aktiv. Ein echter Vektoreffekt
   muss sich gegen diesen Fallback und gegen reine `eta_s=eta_v=0`-
-  Rauschkontrollen durchsetzen.
+  Rauschkontrollen durchsetzen. Die erste `eta_s=eta_v=0`-Kontrolle zeigt
+  bereits komplexe AR-Paare, also ist Komplexitaet allein kein Modenclaim.
 - Komplexe AR-Eigenwerte einer reduzierten Feature-Projektion sind noch keine
   Schroedinger-Gleichung. Fuer eine quantenartige Lesart braucht es eine
   stabile Phasenstruktur, Norm-/Wahrscheinlichkeitserhaltung bzw. eine
