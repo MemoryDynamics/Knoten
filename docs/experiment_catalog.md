@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -107,6 +107,21 @@ in `d=3` die lokale Kraftskala um etwa Faktor `5.66`; der faire naechste Test
 ist daher curvature-renormalized matching. Reports:
 `reports/matched_deposition_kernel_pilot_2026-07-08.md` und
 `reports/knot_score_v0_5_matched_deposition_100k_2026-07-08.md`.
+
+M0-Achsenpilot 2026-07-10 (`N=100,000`, Seeds `1..5`, korrigiertes Vorzeichen,
+`A_att=8`, Score v0.5):
+
+| M0 | score median | residence gain median | sample radius median | memory radius median | memory dimension median | Lesart |
+| ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `0.5` | `0.286` | `1.227` | `3.632` | `0.439` | `2.001` | kompakter als Kontrolle, aber keine starke Residence |
+| `1.0` | `0.286` | `0.613` | `3.132` | `0.405` | `2.103` | nomineller Spezialfall, weiter schwacher Score |
+| `2.0` | `0.286` | `0.971` | `2.596` | `0.408` | `2.204` | kompakter, aber noch kein starker KnotScore |
+
+Lesart: `M0` ist ein echter Skalierungs-/Kopplungshebel und macht den aktiven
+Lauf in diesem Slice kompakter. Der 100k-Pilot rechtfertigt aber keinen breiten
+M0-Blindscan, weil Residence-Gain, Sample-Kompaktheit und Memory-Kompaktheit
+die v0.5-Partial-Schwellen nicht gemeinsam erreichen. Report:
+`reports/m0_axis_knot_score_pilot_2026-07-10.md`.
 
 ## Epsilon-Step-Balance
 
@@ -432,6 +447,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md` | Amplitudenhierarchie | Drift-Umschlag zwischen `A_att=3.5` und `9`; kompakte Kandidaten bei `A_att=9..35`, aber noch keine Long-Run-Knoten. |
 | `reports/ar_mode_probe_corrected_candidates_2026-07-09.md` | AR-Modenprobe | Langsame Moden auf korrigierten Kandidaten bleiben reell; keine stabile komplexe Slow-Mode-Evidenz im skalaren Memory-Modell. |
 | `reports/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
+| `reports/m0_axis_knot_score_pilot_2026-07-10.md` | M0-Achsenpilot | Bei `A_att=8` macht hoeheres `M0` die Laeufe kompakter, traegt im 100k-Pilot aber noch keinen starken v0.5-KnotScore. |
 | `reports/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |

@@ -124,10 +124,16 @@ Naechster operativer Schritt:
 7. Abgeschlossen: `eta_s=eta_v=0` und `alignment`-Kontrollen. Ergebnis:
    komplexe AR-Paare entstehen schon im Nullkraft-/Random-Walk-Zweig;
    `alignment` erzeugt noch keinen isolierten Oszillator.
-8. Jetzt: KPI-Register und fallspezifischen `ModeScore` definieren, getrennt
-   vom Knotenscore. Danach erst `lambda_v`-Variation und shuffled/randomized-vector.
-9. `beta/M0/sigma/A`-Variationen erst starten, wenn Scorecard, Kontrollen,
-   Schwellen und Seed-Aggregation fuer die jeweilige Frage festgelegt sind.
+8. Abgeschlossen: KPI-Register und fallspezifische Score-Familien sind im
+   Experiment-Katalog dokumentiert. `KnotScore` bleibt fuer Metastabilitaet;
+   `ModeScore`, `PropagationScore` und `FormationScore` werden getrennt.
+9. Abgeschlossen: erster Pareto-M0-Pilot bei `A_att=8`, `M0 in {0.5,1.0,2.0}`.
+   Ergebnis: hoeheres `M0` macht Laeufe kompakter, liefert aber im 100k-Pilot
+   keinen starken v0.5-KnotScore. Report:
+   `reports/m0_axis_knot_score_pilot_2026-07-10.md`.
+10. Jetzt: kein breiter M0-Blindscan. Erst das korrigierte skalare
+    Kandidatenfenster gezielt haerten und Vektormemory nur mit klaren
+    Nullkraft-/Shuffle-Kontrollen weiterfuehren.
 
 Wenn der Score traegt:
 
@@ -163,9 +169,13 @@ Prioritaet:
 4. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
-5. Neue Alpha-/M0-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
+5. Abgeschlossen: erster M0-Achsenpilot bei festem `A_att=8`. Hoeheres `M0`
+   verbessert Kompaktheit und Memory-Form leicht, traegt aber noch keinen
+   starken v0.5-KnotScore.
+6. Neue Alpha-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
    festlegen, dann eine Hauptachse variieren (`lambda_m` bei festem `M0`,
-   danach `M0`, dann `sigma`, dann Amplitudenverhaeltnis).
+   danach `sigma`, danach Amplitudenverhaeltnis). `M0` bleibt vorerst
+   sekundaerer Skalierungshebel, kein breiter Blindscan.
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 

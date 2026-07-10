@@ -284,6 +284,17 @@ real. Reports: `reports/vector_memory_pilot_initial_2026-07-10.md`,
 `reports/vector_memory_eta_s_zero_control_2026-07-10.md` und
 `reports/vector_memory_alignment_control_2026-07-10.md`.
 
+M0-Achsenpilot 2026-07-10: Nach Pareto-Regel wurde bei festem korrigiertem
+Kandidatenschnitt `A_att=8`, `A_rep=1`, `sigma_att/sigma_rep=3`, `alpha=0.01`
+nur `M0 in {0.5,1.0,2.0}` variiert (`N=100,000`, Seeds `1..5`, Score v0.5).
+Hoeheres `M0` macht die aktiven Laeufe kompakter: medianer Sample-Radius
+`3.632 -> 2.596`, Memory-Shape-Dimension `2.001 -> 2.204`. Der v0.5-Score
+bleibt im Median aber bei `0.286`, weil Residence-Gain, Sample-Kompaktheit und
+Memory-Kompaktheit die Partial-Schwellen nicht gemeinsam erreichen. Lesart:
+`M0` ist ein echter Skalierungs-/Kopplungshebel, aber kein alleiniger
+Knotenhebel in diesem Kurzpilot. Report:
+`reports/m0_axis_knot_score_pilot_2026-07-10.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
