@@ -21,7 +21,7 @@ Stand: 2026-07-10.
 - `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k` und Gaussian-Kernelgradienten; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
-  Residence-Statistiken, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
+  voxelbasierte Residence-Statistiken, neue Center-/Memory-Ball-Residence, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
 - `knot_score.py`: Scorecard-Helfer v0.3-v0.5 fuer Residence, Kompaktheit, Voxelstabilitaet, interne Dimension und Memory-Cloud-Form.
 - `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
@@ -317,6 +317,11 @@ bleibt dagegen median unter der Partial-Schwelle `2` (`N=3M`: `1.584` bzw.
 Residence-Konvergenz bzw. ein schaerferes Residence-Observable. Report:
 `reports/scalar_n_scaling_q3_2026-07-10.md`.
 
+Residence-Update 2026-07-10: Long-Run-Ausgaben schreiben nun
+`center_residence.sample_center` und `center_residence.memory_center`. Die
+Summary verwendet fuer beide den festen Ballradius-Faktor `2`; groessere
+Faktoren bleiben nur als Detaildiagnostik erhalten, damit der Residence-Wert
+nicht durch einen zu grossen Suchball trivial wird.
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

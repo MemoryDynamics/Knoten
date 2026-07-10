@@ -375,6 +375,66 @@ def residence_statistics(
     }
 
 
+
+def ball_residence_statistics(
+    points: Iterable[Iterable[float]],
+    *,
+    center: Iterable[float] | None = None,
+    radius: float | None = None,
+    min_run_length: int = 1,
+) -> dict[str, object]:
+    """Compute consecutive residence inside a ball around a chosen center.
+
+    Unlike voxel residence, this diagnostic is translation- and grid-invariant.
+    It is intended as a center-of-knot observable: pick a sample center,
+    memory-cloud center, or externally supplied knot center, then measure how
+    long sampled trajectory points remain within a radius around it.
+    """
+
+    pts = _as_points(points)
+    if min_run_length < 1:
+        raise ValueError("min_run_length must be at least one")
+    if center is None:
+        c = pts.mean(axis=0)
+    else:
+        c = np.asarray(list(center), dtype=float)
+        if c.ndim != 1 or c.size != pts.shape[1]:
+            raise ValueError("center must be a 1D vector matching point dimension")
+        if np.any(~np.isfinite(c)):
+            raise ValueError("center must be finite")
+
+    distances = np.linalg.norm(pts - c[None, :], axis=1)
+    if radius is None:
+        r = float(np.mean(distances))
+    else:
+        r = float(radius)
+    if not np.isfinite(r) or r <= 0.0:
+        raise ValueError("radius must be positive and finite")
+
+    inside = distances <= r
+    runs: list[int] = []
+    current = 0
+    for value in inside:
+        if bool(value):
+            current += 1
+        elif current:
+            if current >= min_run_length:
+                runs.append(current)
+            current = 0
+    if current >= min_run_length:
+        runs.append(current)
+
+    run_arr = np.asarray(runs, dtype=float)
+    return {
+        "center": c.astype(float).tolist(),
+        "radius": float(r),
+        "n_samples": int(len(pts)),
+        "inside_count": int(np.sum(inside)),
+        "inside_fraction": float(np.mean(inside)),
+        "run_count": int(len(runs)),
+        "mean_run_length": _finite_float(run_arr.mean()) if run_arr.size else 0.0,
+        "max_run_length": int(np.max(run_arr)) if run_arr.size else 0,
+    }
 def spectral_dimension(points: Iterable[Iterable[float]]) -> float:
     """Estimate spectral dimension from heat kernel eigenvalue distribution.
 

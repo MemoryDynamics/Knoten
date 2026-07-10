@@ -15,6 +15,7 @@ from .core import (
     simulate_finite_memory_numba,
 )
 from .diagnostics import (
+    ball_residence_statistics,
     bootstrap_mean_ci,
     covariance_dimension,
     fit_occupancy_scaling_window,
@@ -93,6 +94,7 @@ __all__ = [
     "VectorMemoryConfig",
     "best_residence_memory_times",
     "best_residence_updates",
+    "ball_residence_statistics",
     "ballistic_scaling_slope",
     "bootstrap_mean_ci",
     "covariance_dimension",

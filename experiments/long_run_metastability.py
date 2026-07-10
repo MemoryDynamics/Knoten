@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
     DEPOSITION_KERNELS,
+    ball_residence_statistics,
     SimulationConfig,
     covariance_dimension,
     effective_double_gaussian_parameters,
@@ -439,6 +440,74 @@ def _memory_cloud_diagnostics(memory: np.ndarray, weights: np.ndarray) -> dict[s
     }
 
 
+def _center_residence_payload(
+    samples: np.ndarray,
+    *,
+    config: SimulationConfig,
+    center: object,
+    base_radius: object,
+    radius_factors: Iterable[float],
+    primary_radius_factor: float,
+    min_memory_times: float,
+) -> dict[str, object] | None:
+    if center is None or base_radius is None:
+        return None
+    try:
+        radius0 = float(base_radius)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(radius0) or radius0 <= 0.0:
+        return None
+
+    memory_persistence_updates = 1.0 / config.alpha
+    out: dict[str, object] = {
+        "center": list(center) if isinstance(center, list) else center,
+        "base_radius": radius0,
+        "radius_factors": [float(factor) for factor in radius_factors],
+        "primary_radius_factor": float(primary_radius_factor),
+    }
+    by_factor: dict[str, object] = {}
+    unconstrained_best = 0.0
+    primary_key = f"{float(primary_radius_factor):g}"
+    for factor in radius_factors:
+        stats = ball_residence_statistics(
+            samples,
+            center=center,  # type: ignore[arg-type]
+            radius=radius0 * float(factor),
+            min_run_length=1,
+        )
+        mean_updates = float(float(stats["mean_run_length"]) * config.sample_every)
+        max_updates = float(float(stats["max_run_length"]) * config.sample_every)
+        max_memory_times = max_updates / memory_persistence_updates
+        is_long_lived = bool(max_updates >= min_memory_times * memory_persistence_updates)
+        unconstrained_best = max(unconstrained_best, max_memory_times)
+        by_factor[f"{float(factor):g}"] = {
+            **stats,
+            "mean_run_updates": mean_updates,
+            "max_run_updates": max_updates,
+            "mean_run_memory_times": mean_updates / memory_persistence_updates,
+            "max_run_memory_times": max_memory_times,
+            "candidate_long_lived": is_long_lived,
+        }
+
+    primary = by_factor.get(primary_key)
+    primary_candidate = False
+    if isinstance(primary, dict):
+        primary_max = primary.get("max_run_memory_times")
+        primary_inside = primary.get("inside_fraction")
+        primary_candidate = bool(primary.get("candidate_long_lived"))
+    else:
+        primary_max = None
+        primary_inside = None
+
+    out["unconstrained_best_max_run_memory_times"] = unconstrained_best
+    out["primary_max_run_memory_times"] = primary_max
+    out["primary_inside_fraction"] = primary_inside
+    out["candidate_long_lived"] = primary_candidate
+    out["by_radius_factor"] = by_factor
+    return out
+
+
 def metastability_diagnostics(
     samples: np.ndarray,
     *,
@@ -474,6 +543,15 @@ def metastability_diagnostics(
     radii = np.linalg.norm(centered, axis=1)
     occupancy = _occupancy_payload(samples)
     sample_shape = shape_statistics(samples)
+    sample_center_residence = _center_residence_payload(
+        samples,
+        config=config,
+        center=sample_shape.get("center"),
+        base_radius=sample_shape.get("mean_radius"),
+        radius_factors=[1.0, 2.0, 4.0, 8.0, 16.0],
+        primary_radius_factor=2.0,
+        min_memory_times=min_memory_times,
+    )
 
     return {
         "n_samples": int(len(samples)),
@@ -488,6 +566,9 @@ def metastability_diagnostics(
         "occupancy_dimension": occupancy["dimension"],
         "occupancy": occupancy,
         "sample_shape": sample_shape,
+        "center_residence": {"sample_center": sample_center_residence}
+        if sample_center_residence is not None
+        else {},
         "autocorrelation": [_finite_float(value) for value in autocorrelation],
         "residence_by_voxel_size": voxel_results,
     }
@@ -524,6 +605,21 @@ def run_case(
     memory_cloud = _memory_cloud_diagnostics(result["memory"], result["weights"])
     if memory_cloud is not None:
         diagnostics["memory_cloud"] = memory_cloud
+        memory_shape = memory_cloud.get("shape")
+        if isinstance(memory_shape, dict):
+            memory_center_residence = _center_residence_payload(
+                samples,
+                config=config,
+                center=memory_shape.get("center"),
+                base_radius=memory_shape.get("mean_radius"),
+                radius_factors=[1.0, 2.0, 4.0, 8.0, 16.0],
+                primary_radius_factor=2.0,
+                min_memory_times=min_memory_times,
+            )
+            if memory_center_residence is not None:
+                center_residence = diagnostics.setdefault("center_residence", {})
+                if isinstance(center_residence, dict):
+                    center_residence["memory_center"] = memory_center_residence
     if force_components:
         diagnostics["force_components"] = _force_component_diagnostics(config, seed=seed)
     payload: dict[str, object] = {
@@ -548,6 +644,18 @@ def run_case(
     )
     return payload
 
+
+def _center_residence_field(diagnostics: dict[str, object], key: str, field: str) -> float | None:
+    center_residence = diagnostics.get("center_residence")
+    if not isinstance(center_residence, dict):
+        return None
+    payload = center_residence.get(key)
+    if not isinstance(payload, dict):
+        return None
+    value = payload.get(field)
+    if isinstance(value, (float, int)) and math.isfinite(float(value)):
+        return float(value)
+    return None
 
 def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
     rows = []
@@ -593,6 +701,18 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "memory_shape_dimension": memory_shape.get("effective_dimension"),
                 "memory_axis_ratio_min_max": memory_shape.get("axis_ratio_min_max"),
                 "best_max_residence_memory_times": best_ratio,
+                "sample_center_primary_max_run_memory_times": _center_residence_field(
+                    diagnostics, "sample_center", "primary_max_run_memory_times"
+                ),
+                "sample_center_primary_inside_fraction": _center_residence_field(
+                    diagnostics, "sample_center", "primary_inside_fraction"
+                ),
+                "memory_center_primary_max_run_memory_times": _center_residence_field(
+                    diagnostics, "memory_center", "primary_max_run_memory_times"
+                ),
+                "memory_center_primary_inside_fraction": _center_residence_field(
+                    diagnostics, "memory_center", "primary_inside_fraction"
+                ),
                 "candidate_long_lived": candidate,
             }
         )

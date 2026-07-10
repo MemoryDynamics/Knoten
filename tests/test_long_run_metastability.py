@@ -107,6 +107,42 @@ def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     assert "scaling_window" in diagnostics["occupancy"]
     assert "sample_shape" in diagnostics
     assert diagnostics["sample_shape"]["effective_dimension"] is not None
+    assert "center_residence" in diagnostics
+    sample_center = diagnostics["center_residence"]["sample_center"]
+    assert sample_center["primary_max_run_memory_times"] >= 5.0
+    assert sample_center["by_radius_factor"]["1"]["max_run_memory_times"] == 5.0
+
+
+def test_run_case_reports_memory_center_residence(tmp_path: Path) -> None:
+    cfg = SimulationConfig(
+        steps=200,
+        dim=2,
+        eta=0.15,
+        alpha=0.1,
+        burn_in=20,
+        sample_every=10,
+        max_memory=20,
+    )
+
+    payload = long_run_metastability.run_case(
+        base_config=cfg,
+        condition="baseline",
+        seed=7,
+        voxel_sizes=[1.0],
+        max_ac_lag=2,
+        min_memory_times=2.0,
+        output_dir=tmp_path,
+    )
+
+    diagnostics = payload["diagnostics"]
+    center_residence = diagnostics["center_residence"]
+    assert "sample_center" in center_residence
+    assert "memory_center" in center_residence
+    assert "2" in center_residence["memory_center"]["by_radius_factor"]
+
+    summary = long_run_metastability.summarize_cases([payload])[0]
+    assert summary["sample_center_primary_max_run_memory_times"] is not None
+    assert summary["memory_center_primary_max_run_memory_times"] is not None
 
 def test_force_component_diagnostics_reports_update_channels() -> None:
     cfg = SimulationConfig(

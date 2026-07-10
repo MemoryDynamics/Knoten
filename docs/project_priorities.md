@@ -139,9 +139,13 @@ Naechster operativer Schritt:
     `N=100k..3M`. Ergebnis: kompakte Memory-Clouds bilden schnell;
     Residence-Gain bleibt median unter der Partial-Schwelle. Report:
     `reports/scalar_n_scaling_q3_2026-07-10.md`.
-12. Jetzt: Residence-Messmethodik schaerfen, insbesondere Center-/Memory-
-    basierte Residence statt reinem Voxelmaximum; erst danach gezielt laenger
-    laufen lassen.
+12. Abgeschlossen: Residence-Messmethodik geschaerft. `long_run_metastability.py`
+    schreibt jetzt Center-/Memory-Ball-Residence bei Radiusfaktoren
+    `1,2,4,8,16`. Die Summary verwendet den festen Primaerfaktor `2`,
+    damit groessere Suchradien die Residence nicht trivialisieren.
+13. Jetzt: korrigierte Kandidaten `A_att=20` und `35` mit geschaerfter
+    Residence entlang `N` weiterziehen, Zielskala mindestens `N=1e8`.
+    Der Lauf bleibt ein Kandidaten-Hardening, kein neuer Parameterblindscan.
 
 Wenn der Score traegt:
 
@@ -177,9 +181,10 @@ Prioritaet:
 4. Abgeschlossen: N-Skalierung fuer `A_att=20/35` bis `N=3M`.
    Kompaktheit und Memory-Shape sind schnell stabil; Residence-Gain bleibt
    median unter `2`.
-5. Fuer Paper I: Residence-Messmethodik verbessern, z.B. Center-of-knot-
-   oder Memory-Cloud-basierte Verweildauer, bevor die naechsten langen Runs
-   gestartet werden.
+5. Fuer Paper I: naechste Long-Runs mit Center-/Memory-Ball-Residence fahren.
+   Akzeptiert wird nicht nur ein hohes Voxelmaximum, sondern konsistente
+   Residence um ein nachvollziehbares Knoten-/Memory-Zentrum plus stabile
+   Memory-Cloud-Kompaktheit.
 6. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.

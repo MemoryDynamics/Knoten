@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (
     SimulationConfig,  # noqa: E402
+    ball_residence_statistics,
     covariance_dimension,
     double_gaussian_gradient,
     effective_double_gaussian_parameters,
@@ -106,6 +107,27 @@ def test_residence_statistics_counts_repeated_voxels() -> None:
     assert stats["knot_count"] == 2.0
     assert stats["max_residence"] >= 2.0
 
+
+def test_ball_residence_statistics_counts_consecutive_inside_runs() -> None:
+    points = np.array(
+        [
+            [0.0, 0.0],
+            [0.2, 0.0],
+            [0.4, 0.0],
+            [2.0, 0.0],
+            [0.3, 0.0],
+            [0.1, 0.0],
+        ],
+        dtype=float,
+    )
+
+    stats = ball_residence_statistics(points, center=[0.0, 0.0], radius=0.5)
+
+    assert stats["inside_count"] == 5
+    assert stats["run_count"] == 2
+    assert stats["mean_run_length"] == 2.5
+    assert stats["max_run_length"] == 3
+    assert np.isclose(stats["inside_fraction"], 5.0 / 6.0)
 
 def test_exponential_weights_are_finite_memory() -> None:
     weights = exponential_weights(alpha=0.1, horizon=5)

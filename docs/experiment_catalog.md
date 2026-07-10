@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -151,6 +151,18 @@ Dimensionen wachsen entlang N in Richtung etwa `2`, waehrend die Memory-Shape-
 Dimension frueh nahe `2.7..3.0` liegt. Der offene Punkt ist nicht Formation,
 sondern Residence-Konvergenz bzw. Residence-Messmethodik. Report und Plots:
 `reports/scalar_n_scaling_q3_2026-07-10.md`.
+
+Residence-Observable ab 2026-07-10: Long-Run-JSONs enthalten neben
+`residence_by_voxel_size` nun `center_residence.sample_center` und, falls die
+Memory-Cloud nicht degeneriert ist, `center_residence.memory_center`. Beide
+nutzen Ballradien relativ zum jeweiligen mittleren Cloud-Radius mit Faktoren
+`1,2,4,8,16`. Die Summary berichtet den festen Primaerfaktor `2` als
+`*_primary_max_run_memory_times` und `*_primary_inside_fraction`; der
+unbeschraenkte Maximalwert ueber alle Faktoren bleibt nur in der Detail-Payload
+als explorative Diagnose. Operativ ist vor allem `memory_center` relevant,
+waehrend `sample_center` als Drift-/Pfadkontrolle mitlaufen darf. Diese Felder
+sind fuer die naechste N-Skalierung bis `1e8` massgeblich, weil sie weniger
+grid- und translationsabhaengig sind als das reine Voxelmaximum.
 
 ## Epsilon-Step-Balance
 
