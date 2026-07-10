@@ -224,6 +224,7 @@ def build_report(payload: dict[str, Any]) -> str:
         "## Parameters",
         "",
         f"- `amplitude_att`: `{params['amplitude_att']}`",
+        f"- `eta_s`: `{params['eta']}`",
         f"- `eta_vector`: `{params['eta_vector']}`",
         f"- `force_mode`: `{params['force_mode']}`",
         f"- `alpha=lambda_s`: `{params['alpha']}`",
