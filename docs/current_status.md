@@ -23,6 +23,7 @@ Stand: 2026-07-09.
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   Residence-Statistiken, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
+- `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
   row-stochastic operators, implied timescales, CK-Fehlern und slow-mode
@@ -268,6 +269,14 @@ Memory-Kanal `p_n` mit klaren Kontrollen (`eta_v=0`, shuffled vector memory,
 `M_v=0`, `lambda_v=1`). Report:
 `reports/vector_memory_minimal_design_2026-07-09.md`.
 
+Initialer Vektormemory-Pilot 2026-07-10: Der Paketkern enthaelt jetzt einen
+2D-Transverse-Pilotmodus. Der Kurzlauf mit `burn_in=0`, Seeds `1..3`,
+`A_att in {0.35,7.75,8.0,9.0,20.0}` und `eta_v in {0,0.01,0.03}`
+zeigt komplexe AR-Klassifikationen bereits in `eta_v=0`-Fallbacks. Lesart:
+noch keine Evidenz fuer einen vektorinduzierten Oszillator; ein Vektoreffekt
+muss relativ zum `eta_v=0`-Kontrollzweig lag- und seedstabil werden. Report:
+`reports/vector_memory_pilot_initial_2026-07-10.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -311,10 +320,11 @@ Negativkontrollen gegeneinander pruefen.
 
 1. Fuer Paper I nur bei Bedarf Long-Run-Residence/Score im engen skalaren
    Fenster `A_att=7.75..9.0` bzw. im Kompaktheitsfenster `9..35` haerten.
-2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis als separaten
-   Modellzweig beginnen; skalares Memory nicht ueberclaimen.
-3. Minimalen Vektormemory-Prototyp erst mit `eta_v=0`-Rueckfalltest,
-   shuffled-vector-Kontrolle und AR-Slow-Mode-Kriterium implementieren.
+2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis weiter als separaten
+   Modellzweig behandeln; der erste Pilot zeigt noch keinen isolierten
+   Vektoreffekt.
+3. Naechste Vektormemory-Piloten: Feature-Sensitivitaet, `alignment` gegen
+   `transverse_2d`, `lambda_v`-Variation und shuffled-vector-Kontrolle.
 4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder
    aufnehmen und nur mit klarer Mechanismusfrage.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.

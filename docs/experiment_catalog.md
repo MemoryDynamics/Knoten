@@ -297,6 +297,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/ar_mode_probe_corrected_candidates_2026-07-09.md` | AR-Modenprobe | Langsame Moden auf korrigierten Kandidaten bleiben reell; keine stabile komplexe Slow-Mode-Evidenz im skalaren Memory-Modell. |
 | `reports/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
 | `reports/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
+| `reports/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln
