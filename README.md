@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 ## Worum es geht
 
@@ -110,7 +110,7 @@ Aktive Einstiegspunkte:
 - [Prioritaeten](docs/project_priorities.md)
 - [Theoretical Context](docs/THEORETICAL_CONTEXT.md)
 - [Repository Map](docs/repository_map.md)
-- [Experiment-Katalog](docs/experiment_catalog.md)
+- [Experiment-Katalog](docs/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
 - [Paper-Claims](docs/paper_claims.md)
 
 ## Experiment Entry Points

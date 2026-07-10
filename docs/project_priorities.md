@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -118,8 +118,11 @@ Naechster operativer Schritt:
    tragen keinen Oszillatorclaim.
 5. Abgeschlossen: Grenzscan unterhalb `A_att=9`; Uebergang bei
    `A_att ~= 7.9`, `chi ~= 0.88`.
-6. Jetzt: Vektorgedaechtnis-Prototyp spezifizieren/implementieren; skalare
-   Long-Run-Haertung nur bei Bedarf im engen Kandidatenfenster.
+6. Abgeschlossen: minimaler Vektorgedaechtnis-Prototyp und erster 2D-Pilot.
+   Ergebnis: komplexe AR-Moden treten schon im `eta_v=0`-Fallback auf;
+   noch kein isolierter Vektoreffekt.
+7. Jetzt: echte Kontrollen fuer die Modenfrage: `eta_s=eta_v=0`,
+   `alignment` vs. `transverse_2d`, `lambda_v`-Variation und shuffled-vector.
 
 Wenn der Score traegt:
 
@@ -152,8 +155,9 @@ Prioritaet:
    `A_att ~= 7.9`.
 3. Fuer Paper I: wenn noetig, Long-Run-Residence/Score nur noch im engen
    skalaren Kandidatenfenster haerten.
-4. Fuer Paper III: Vektor-/Phasenmemory priorisieren, wenn ein echter
-   oszillatorischer oder photonartiger Modus benoetigt wird.
+4. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
+   Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
+   entscheidend ist nun Differenz gegen `eta_s=eta_v=0` und shuffled-vector.
 5. Neue Alpha-Scans nur kontrolliert starten: `lambda_m` bei festem `M0` und
    festem Tail-Mass-Cutoff, danach `M0` bei festem `lambda_m`.
 

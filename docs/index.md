@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -37,14 +37,9 @@ Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
 soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
 Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
-Der bisherige v0.5-Knotenscore und die matched-/zero-mean-/rep-zero-Piloten
-sind `legacy-sign`-Auditmaterial. Der korrigierte q=3-Retest zeigt, dass die
-historische Baseline mit `A_att=0.35` repulsionsdominiert dispergiert.
+Der v0.5-Knotenscore ist die aktuelle Scorecard, dokumentiert im Experiment-Katalog. Die alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
-Die korrigierte Amplitudenhierarchie findet kompakte Kandidaten im Fenster
-`A_att=9..35` bei `A_rep=1`, aber noch keine belastbare Long-Run-
-Metastabilitaet. Naechster gezielter Schritt: Block-Markov-/AR-Modentests auf
-`A_att=9` und `A_att=35`.
+Die korrigierte Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster `A_att=9..35` bei `A_rep=1`; der Umschlag liegt bei `A_att ~= 7.9`. Der erste Vektormemory-Pilot ist ein Kontrollbefund: komplexe AR-Moden treten bereits im `eta_v=0`-Fallback auf und sind noch kein isolierter Vektoreffekt.
 
 ## Nicht ueberclaimen
 

@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -135,6 +135,8 @@ diese Theorie:
 | `transition.py` | Labels, Transition Counts, row-stochastic matrices |
 | `validation.py` | implied rates, timescales, CK-Fehler, Autokorrelation |
 | `metastability.py` | slow modes und einfache spectral gaps |
+| `vector_memory.py` | orientierte Memory-Features und kontrollierte Vektor-Pilotdynamik |
+| `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 
 Begriffliche Hygiene:
 
@@ -172,9 +174,21 @@ physikalischen Massen.
 - Der korrigierte q=3-Retest zeigt repulsionsdominierte Dispersion bei
   `A_att=0.35`; die Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten
   bei `A_att=9..35`.
-- Der erste AR-Modentest auf diesen Kandidaten findet nur reelle langsame
-  Moden. Das stuetzt eine Relaxations-/Kompaktheitslesart des skalaren
-  Memory-Modells, aber noch keine oszillatorische oder photonartige Dynamik.
+- Der erste AR-Modentest auf den skalaren Kandidaten findet nur reelle
+  langsame Moden. Das stuetzt eine Relaxations-/Kompaktheitslesart des
+  skalaren Memory-Modells, aber noch keine oszillatorische oder photonartige
+  Dynamik.
+- Der erste Vektormemory-Pilot zeigt komplexe AR-Moden bereits im
+  `eta_v=0`-Fallback. Das ist nicht dasselbe wie `eta_s=0`: der skalare
+  Potentialkanal war in diesem Pilot weiter aktiv. Ein echter Vektoreffekt
+  muss sich gegen diesen Fallback und gegen reine `eta_s=eta_v=0`-
+  Rauschkontrollen durchsetzen.
+- Komplexe AR-Eigenwerte einer reduzierten Feature-Projektion sind noch keine
+  Schroedinger-Gleichung. Fuer eine quantenartige Lesart braucht es eine
+  stabile Phasenstruktur, Norm-/Wahrscheinlichkeitserhaltung bzw. eine
+  effektiv antihermitesche/hamiltonsche Komponente, die ueber Lags und
+  Kontrollen reproduzierbar bleibt.
+- Der archivierte `d~3`-Befund bleibt offen; daraus folgt noch keine
   allgemeine `d=3`-Ableitung.
 - Endliche Signalgeschwindigkeit folgt nicht aus exponentiellem Memory allein;
   dafuer braucht es lokale Reichweite, mehrstufige Uebertragung und keine

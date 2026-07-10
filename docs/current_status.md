@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 ## Repository
 
@@ -23,6 +23,7 @@ Stand: 2026-07-09.
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   Residence-Statistiken, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
+- `knot_score.py`: Scorecard-Helfer v0.3-v0.5 fuer Residence, Kompaktheit, Voxelstabilitaet, interne Dimension und Memory-Cloud-Form.
 - `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,

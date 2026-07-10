@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-09.
+Stand: 2026-07-10.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -21,14 +21,18 @@ flowchart TD
     root --> figures["figures<br/>draft/result figures"]
 
     experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
+    experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
+    experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, deposition modes, Gaussian kernels"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
+    src --> knot_score["knot_score.py<br/>scorecard helpers v0.3-v0.5"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
     src --> sync["synchronization.py<br/>phase-lock, lag response, response rank"]
+    src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
 
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
@@ -72,9 +76,12 @@ flowchart LR
     sim --> steps["sample_steps n_i"]
     sim --> memory["memory buffer / weights"]
     sim --> zfeatures["augmented features z_i"]
+    sim --> vfeatures["vector-memory features<br/>optional p_i summaries"]
 
     samples --> geom["diagnostics.py<br/>D_cov, D_occ, residence"]
+    geom --> score["knot_score.py<br/>v0.5 scorecard vs eta_zero"]
     zfeatures --> lagged["markov.dataset<br/>(z_i, z_i+ell)"]
+    vfeatures --> lagged
     steps --> lagged
 
     lagged --> labels["markov.transition<br/>labels"]
@@ -84,6 +91,7 @@ flowchart LR
     matrix --> meta["markov.metastability<br/>slow modes"]
 
     geom --> reports["reports / paper tables"]
+    score --> reports
     validation --> reports
     meta --> reports
 
@@ -107,8 +115,8 @@ flowchart TD
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `synchronization.py` ist aktuell nur eine kleine Diagnostikschicht.
-- `experiments/` sind Entry-Points, nicht automatisch stabile API.
+- `src/emergenz_knoten` ist der belastbare Codekern; `synchronization.py` ist aktuell nur eine kleine Diagnostikschicht, `vector_memory.py` ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
+- `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.
 - `reports/` sind datierte, zitierbare Zwischenstaende.

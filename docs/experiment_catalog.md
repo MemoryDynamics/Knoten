@@ -179,6 +179,37 @@ Probe neu gerechnet werden; dann ist `A_rep` lokal repulsiv und `A_att` breit
 attraktiv. Report: `reports/kernel_shape_probe_2026-07-01.md`.
 
 
+## Knotenscore-Referenz
+
+Die aktuelle Knotenscore-Dokumentation liegt absichtlich in diesem Katalog,
+nicht als neue Einzelseite. Die Implementierung liegt in
+`src/emergenz_knoten/knot_score.py`; der Report-Generator ist
+`experiments/knot_score_report.py`.
+
+Der Score ist eine Evidenz-Scorecard, kein mathematischer Knotensatz. Er
+bewertet eine aktive Bedingung seedweise gegen die passende `eta_zero`-
+Negativkontrolle. Ein hoher Score bedeutet daher: diese Bedingung trennt sich
+unter den gewaehlten Observablen von der no-feedback-Kontrolle. Er bedeutet
+nicht automatisch stabile Teilchen, physikalische Masse oder einen
+zweiskaligen Mechanismus.
+
+Aktuelle produktive Variante ist v0.5:
+
+| Komponente | Messgroesse | Schwellen |
+| --- | --- | --- |
+| Residence | beste Residence gegen `eta_zero`, in raw updates | partial `>=2`, pass `>=3` |
+| Sample-Kompaktheit | `eta_zero`-Radius / Case-Radius | partial `>=3`, pass `>=5` |
+| Voxel-Stabilitaet | min/max Residence ueber Voxelgroessen | partial `>=0.15`, pass `>=0.25` |
+| Interne Dimension | `D_occ` bzw. gueltiges automatisches Fenster | partial `>=1.25`, pass `>=1.5` |
+| Memory-Kompaktheit | `eta_zero`-Memory-Radius / Case-Memory-Radius | partial `>=2`, pass `>=3` |
+| Memory-Rundheit | Case/Control-Achsenverhaeltnis | partial `>=1.2`, pass `>=1.5` |
+| Memory-Formdimension | Case/Control-Memory-Dimension | partial `>=1.15`, pass `>=1.35` |
+
+v0.5 unterscheidet sich von v0.4 vor allem dadurch, dass Residence in rohen
+Updates verglichen wird und Memory-Kompaktheit nur bei nichtdegenerierter
+Memory-Cloud zaehlt. Das verhindert, dass `alpha_one` oder `M0=0` durch
+Skalierungsartefakte wie Knoten aussehen.
+
 ## Knotenscore v0.3
 
 Report vom 2026-07-02: `reports/knot_score_v0_3_2026-07-02.md`.
