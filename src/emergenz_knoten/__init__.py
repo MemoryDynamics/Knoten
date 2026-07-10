@@ -72,7 +72,9 @@ from .vector_memory import (
     simulate_vector_memory,
     update_vector_history,
     vector_gaussian_field,
+    vector_memory_feature_names,
     vector_memory_force,
+    vector_memory_summary_features,
 )
 from .markov.validation import (
     ballistic_scaling_slope,
@@ -141,7 +143,9 @@ __all__ = [
     "two_scale_force_crossing_radius",
     "update_vector_history",
     "vector_gaussian_field",
+    "vector_memory_feature_names",
     "vector_memory_force",
+    "vector_memory_summary_features",
     "voxel_stability_ratio",
     "zero_mean_attractive_amplitude",
 ]

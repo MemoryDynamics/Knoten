@@ -129,3 +129,21 @@ def test_transverse_mode_requires_two_dimensions() -> None:
         assert "dim=2" in str(exc)
     else:
         raise AssertionError("expected transverse_2d to reject dim=3")
+
+
+def test_vector_simulation_records_augmented_features() -> None:
+    scalar = SimulationConfig(
+        steps=20,
+        dim=2,
+        epsilon=0.03,
+        eta=0.0,
+        alpha=0.2,
+        max_memory=10,
+        sample_every=5,
+    )
+    result = simulate_vector_memory(VectorMemoryConfig(scalar=scalar), seed=21)
+
+    assert result["samples"].shape == (4, 2)
+    assert result["augmented_features"].shape == (4, 16)
+    assert result["feature_names"].shape == (16,)
+    assert "vector_field_norm" in set(result["feature_names"])

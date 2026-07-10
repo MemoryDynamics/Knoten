@@ -9,6 +9,7 @@ import numpy as np
 
 from .core import SimulationConfig, _horizon, _validate_config
 from .kernels import double_gaussian_gradient, exponential_memory_weights
+from .markov.features import augmented_feature_names, memory_summary_features
 
 
 VectorForceMode = Literal["alignment", "transverse_2d"]
@@ -135,6 +136,66 @@ def vector_gaussian_field(
     return np.sum((w * kernel)[:, None] * orient, axis=0)
 
 
+def vector_memory_feature_names(dim: int) -> list[str]:
+    """Return feature names for the reduced vector-memory summary."""
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    return (
+        [f"vector_field_{i}" for i in range(dim)]
+        + [f"mean_orientation_{i}" for i in range(dim)]
+        + ["vector_field_norm", "mean_orientation_norm", "vector_memory_mass"]
+    )
+
+
+def vector_memory_summary_features(
+    x: np.ndarray,
+    positions: np.ndarray,
+    orientations: np.ndarray,
+    weights: np.ndarray,
+    *,
+    sigma: float,
+) -> np.ndarray:
+    """Compress oriented finite memory into diagnostic features."""
+
+    x_arr = np.asarray(x, dtype=float)
+    pos = np.asarray(positions, dtype=float)
+    orient = np.asarray(orientations, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    if pos.size == 0 or w.size == 0:
+        field = np.zeros_like(x_arr)
+        mean_orientation = np.zeros_like(x_arr)
+        tail = np.array([0.0, 0.0, 0.0], dtype=float)
+        return np.concatenate([field, mean_orientation, tail])
+    if orient.shape != pos.shape:
+        raise ValueError("orientations must match positions")
+    if pos.shape[0] != w.shape[0]:
+        raise ValueError("weights must match positions length")
+    mass = float(w.sum())
+    if mass <= 0.0:
+        field = np.zeros_like(x_arr)
+        mean_orientation = np.zeros_like(x_arr)
+        tail = np.array([0.0, 0.0, 0.0], dtype=float)
+        return np.concatenate([field, mean_orientation, tail])
+
+    field = vector_gaussian_field(
+        x_arr,
+        pos,
+        orient,
+        w,
+        sigma=sigma,
+    )
+    mean_orientation = np.sum((w / mass)[:, None] * orient, axis=0)
+    tail = np.array(
+        [
+            float(np.linalg.norm(field)),
+            float(np.linalg.norm(mean_orientation)),
+            mass,
+        ],
+        dtype=float,
+    )
+    return np.concatenate([field, mean_orientation, tail])
+
 def vector_memory_force(
     x: np.ndarray,
     positions: np.ndarray,
@@ -193,6 +254,7 @@ def simulate_vector_memory(
     x = np.zeros(scalar.dim, dtype=float)
     samples: list[np.ndarray] = []
     sample_steps: list[int] = []
+    features: list[np.ndarray] = []
 
     for step in range(1, scalar.steps + 1):
         if scalar_filled and scalar.eta != 0.0 and scalar.memory_mass != 0.0:
@@ -245,12 +307,36 @@ def simulate_vector_memory(
         )
 
         if step >= scalar.burn_in and step % scalar.sample_every == 0:
+            current_memory = scalar_history[:scalar_filled].copy()
+            current_weights = scalar_weights[:scalar_filled].copy()
+            current_vector_positions = vector_positions[:vector_filled].copy()
+            current_vector_orientations = vector_orientations[:vector_filled].copy()
+            current_vector_weights = vector_weights[:vector_filled].copy()
             samples.append(x.copy())
             sample_steps.append(step)
+            features.append(
+                np.concatenate(
+                    [
+                        memory_summary_features(x, current_memory, current_weights),
+                        vector_memory_summary_features(
+                            x,
+                            current_vector_positions,
+                            current_vector_orientations,
+                            current_vector_weights,
+                            sigma=config.sigma_vector,
+                        ),
+                    ]
+                )
+            )
 
     return {
         "samples": np.asarray(samples, dtype=float),
         "sample_steps": np.asarray(sample_steps, dtype=int),
+        "augmented_features": np.asarray(features, dtype=float),
+        "feature_names": np.asarray(
+            [*augmented_feature_names(scalar.dim), *vector_memory_feature_names(scalar.dim)],
+            dtype=str,
+        ),
         "final_x": x.copy(),
         "memory": scalar_history[:scalar_filled].copy(),
         "weights": scalar_weights[:scalar_filled].copy(),
