@@ -295,6 +295,17 @@ Memory-Kompaktheit die Partial-Schwellen nicht gemeinsam erreichen. Lesart:
 Knotenhebel in diesem Kurzpilot. Report:
 `reports/m0_axis_knot_score_pilot_2026-07-10.md`.
 
+Scalar-Haertung 1M 2026-07-10: Im korrigierten q=3-Skalarfenster wurden
+`A_att in {9,20,35}` bei festem `M0=1`, `alpha=0.01`, Seeds `1..5` und
+`N=1,000,000` getestet. `A_att=20` und `35` tragen hohe v0.5-Scores
+(`median 0.857`) und trennen sich stark von `eta_zero` in Sample-Kompaktheit,
+Memory-Kompaktheit, Memory-Rundheit und Memory-Formdimension. Der Engpass
+bleibt Residence-Gain: Median `1.237` fuer `A_att=20`, `1.040` fuer `A_att=35`.
+Lesart: Das korrigierte Skalarmodell bildet seed-robuste kompakte
+Memory-Clouds; fuer Paper-I-Metastabilitaet muss jetzt Residence-Skalierung mit
+laengerem `N` gehaertet werden. Report:
+`reports/scalar_hardening_q3_1M_2026-07-10.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

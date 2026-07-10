@@ -131,9 +131,13 @@ Naechster operativer Schritt:
    Ergebnis: hoeheres `M0` macht Laeufe kompakter, liefert aber im 100k-Pilot
    keinen starken v0.5-KnotScore. Report:
    `reports/m0_axis_knot_score_pilot_2026-07-10.md`.
-10. Jetzt: kein breiter M0-Blindscan. Erst das korrigierte skalare
-    Kandidatenfenster gezielt haerten und Vektormemory nur mit klaren
-    Nullkraft-/Shuffle-Kontrollen weiterfuehren.
+10. Abgeschlossen: korrigiertes skalares Kandidatenfenster bei 1M gehaertet.
+    `A_att=20` und `35` tragen hohe v0.5-Kompaktheit/Memory-Shape-Scores;
+    `A_att=9` bleibt Boundary-Control. Report:
+    `reports/scalar_hardening_q3_1M_2026-07-10.md`.
+11. Jetzt: Residence-Skalierung mit laengerem `N` fuer `A_att=20` und `35`
+    pruefen. Vektormemory parallel nur mit klaren Nullkraft-/Shuffle-Kontrollen
+    weiterfuehren.
 
 Wenn der Score traegt:
 
@@ -164,15 +168,17 @@ Prioritaet:
    Kandidaten. Die langsamen Moden sind reell, nicht stabil komplex.
 2. Abgeschlossen: Grenzscan im Bereich `A_att<9`; die Driftgrenze liegt bei
    `A_att ~= 7.9`.
-3. Fuer Paper I: wenn noetig, Long-Run-Residence/Score nur noch im engen
-   skalaren Kandidatenfenster haerten.
-4. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
+3. Abgeschlossen: 1M-Haertung fuer `A_att in {9,20,35}`. `A_att=20` und
+   `35` sind kompakte Kandidaten; Residence-Gain ist noch nicht median-stark.
+4. Fuer Paper I: Residence-Skalierung nur noch fuer `A_att=20` und `35`
+   laenger testen; `A_att=9` bleibt Boundary-Control, kein Hauptkandidat.
+5. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
-5. Abgeschlossen: erster M0-Achsenpilot bei festem `A_att=8`. Hoeheres `M0`
+6. Abgeschlossen: erster M0-Achsenpilot bei festem `A_att=8`. Hoeheres `M0`
    verbessert Kompaktheit und Memory-Form leicht, traegt aber noch keinen
    starken v0.5-KnotScore.
-6. Neue Alpha-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
+7. Neue Alpha-/Sigma-/A-Scans nur kontrolliert starten: erst Scorecard
    festlegen, dann eine Hauptachse variieren (`lambda_m` bei festem `M0`,
    danach `sigma`, danach Amplitudenverhaeltnis). `M0` bleibt vorerst
    sekundaerer Skalierungshebel, kein breiter Blindscan.
