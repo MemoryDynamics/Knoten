@@ -234,8 +234,8 @@ def build_report(payload: dict[str, Any]) -> str:
         "",
         "## AR Summary",
         "",
-        "| A_att | eta_v | radius med | lag | class | leading abs | leading imag | residual |",
-        "| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |",
+        "| A_att | eta_v | radius med | lag | class | leading abs | leading imag | residual | top eigenvalues |",
+        "| ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: | --- |",
     ]
     for scenario in payload["scenarios"]:
         for row in scenario["rows"]:
@@ -243,10 +243,22 @@ def build_report(payload: dict[str, Any]) -> str:
                 f"| `{scenario['amplitude_att']:.6g}` | `{scenario['eta_vector']:.6g}` | "
                 f"{_fmt(scenario['sample_radius_median'])} | `{row['lag']}` | "
                 f"`{row['classification']}` | {_fmt(row['leading_abs'])} | "
-                f"{_fmt(row['leading_imag'])} | {_fmt(row['residual_rms'])} |"
+                f"{_fmt(row['leading_imag'])} | {_fmt(row['residual_rms'])} | "
+                f"`{' ; '.join(row['top_eigenvalues'][:3])}` |"
             )
     lines.extend(
         [
+            "",
+            "## Immediate Reading",
+            "",
+            "- Complex AR classifications in this pilot are not by themselves evidence",
+            "  for vector-induced oscillators, because `eta_vector=0` is included as",
+            "  a scalar fallback control and can already show complex projected modes.",
+            "- A vector effect requires a change relative to the `eta_vector=0` rows",
+            "  that is stable across lag, seed, and feature choices.",
+            "- The compact `A_att=20.0` reference should be read separately from the",
+            "  transition band `7.75..9.0`; it tests over-confinement/relaxation, not",
+            "  the boundary itself.",
             "",
             "## Reading Rules",
             "",
