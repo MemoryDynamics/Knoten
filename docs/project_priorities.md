@@ -1,6 +1,6 @@
-﻿# Projektprioritaeten
+# Projektprioritaeten
 
-Stand: 2026-07-10.
+Stand: 2026-07-11.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -147,9 +147,13 @@ Naechster operativer Schritt:
     v0.5-Score und Voxel-Residence tragen; die fixe finale Memory-Center-
     Residence zeigt aber Drift/Rezentrierung. Report:
     `reports/long_run_3e8_results_2026-07-11.md`.
-14. Jetzt: dynamische Center-Trace-Diagnostik implementieren. Ziel ist eine
+14. In Arbeit: dynamische Center-Trace-Diagnostik implementieren. Ziel ist eine
     zeitlokale Memory-Center-/Radius-Spur und co-moving Residence, bevor neue
     Parameterachsen oder weitere Overnight-Laeufe gestartet werden.
+15. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+    invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
+    zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
+    lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`.
 
 Wenn der Score traegt:
 
@@ -249,10 +253,17 @@ Prioritaet:
    lokale Moden, optionale Phase, Residence.
 2. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
 3. Zwei-Knoten-Synchronisation testen: shared memory, weak cross-potential,
-   no-coupling control.
+   no-coupling control. Mesonartige Zwei-Knoten-Bindung und baryonartige
+   Drei-Knoten-Bindung sind getrennte Folgeprogramme, nicht Voraussetzung fuer
+   den Einzelknoten-Score.
 4. Externen Response-Rang messen: nicht interne Dimension, sondern Rang und
-   Stabilitaet der Wechselwirkungs-/Antwortmatrix.
-5. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+   Stabilitaet der Wechselwirkungs-/Antwortmatrix. Eine spaetere Ladungs-
+   diagnose muss als Antwort auf andere Knoten definiert werden, nicht als
+   isoliertes Ein-Knoten-Label.
+5. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
+   momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
+   Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
+6. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
    Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
 Naechster konkreter Schritt nach Paper-I-Confinement: `experiments/synchronization/` mit

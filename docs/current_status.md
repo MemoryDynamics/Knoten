@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-10.
+Stand: 2026-07-11.
 
 ## Repository
 
@@ -330,6 +330,14 @@ Residence-Update 2026-07-10: Long-Run-Ausgaben schreiben nun
 Summary verwendet fuer beide den festen Ballradius-Faktor `2`; groessere
 Faktoren bleiben nur als Detaildiagnostik erhalten, damit der Residence-Wert
 nicht durch einen zu grossen Suchball trivial wird.
+
+Center-Trace-Update 2026-07-11: `experiments/long_run_metastability.py`
+kann mit `--trace-every` eine zeitlokale Memory-Center-/Radius-Spur schreiben.
+Die neue Diagnose `dynamic_center_trace` misst co-moving Inside-Fraction,
+maximale co-moving Runs in Memory-Zeiten und Center-Drift pro Memory-Zeit.
+Damit wird ein Einzelknoten als mitbewegtes Objekt bewertet, nicht als fixes
+absolutes Zentrum. Das ist die naechste Paper-I-Pruefung vor neuen Blindscans.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -371,11 +379,12 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Fuer Paper I nur bei Bedarf Long-Run-Residence/Score im engen skalaren
-   Fenster `A_att=7.75..9.0` bzw. im Kompaktheitsfenster `9..35` haerten.
+1. Fuer Paper I zuerst die vorhandenen `3e8`-Kandidaten mit `--trace-every`
+   bzw. kurzen Trace-Reruns im co-moving Frame bewerten. Neue Long-Runs nur,
+   wenn Center-Trace gegen `eta_zero` sauber trennt.
 2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis weiter als separaten
-   Modellzweig behandeln; der erste Pilot zeigt noch keinen isolierten
-   Vektoreffekt.
+   Modellzweig behandeln; Spin/Zirkulation und Ladung/Response sind Zukunfts-
+   observablen, keine aktuellen Paper-I-Claims.
 3. Naechste Vektormemory-Piloten: Feature-Sensitivitaet, `alignment` gegen
    `transverse_2d`, `lambda_v`-Variation und shuffled-vector-Kontrolle.
 4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder

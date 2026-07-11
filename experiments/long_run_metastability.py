@@ -152,6 +152,7 @@ def _simulate_circular_numba(
     max_memory: int,
     burn_in: int,
     sample_every: int,
+    trace_every: int,
     seed: int,
 ):
     np.random.seed(seed)
@@ -173,9 +174,18 @@ def _simulate_circular_numba(
     max_samples = steps // sample_every + 2
     samples = np.zeros((max_samples, dim), np.float64)
     sample_steps = np.zeros(max_samples, np.int64)
+    max_traces = 0
+    if trace_every > 0:
+        max_traces = steps // trace_every + 2
+    trace_steps = np.zeros(max_traces, np.int64)
+    trace_centers = np.zeros((max_traces, dim), np.float64)
+    trace_mean_radii = np.zeros(max_traces, np.float64)
+    trace_rms_radii = np.zeros(max_traces, np.float64)
+    trace_x_distances = np.zeros(max_traces, np.float64)
     idx = 0
     filled = 0
     n_sample = 0
+    n_trace = 0
     sigma_rep2 = sigma_rep * sigma_rep
     sigma_att2 = sigma_att * sigma_att
 
@@ -209,10 +219,74 @@ def _simulate_circular_numba(
             sample_steps[n_sample] = step
             n_sample += 1
 
-    return samples[:n_sample], sample_steps[:n_sample], x, memory, weights, filled, idx
+        if trace_every > 0 and step >= burn_in and step % trace_every == 0:
+            mass = 0.0
+            for age in range(filled):
+                mass += weights[age]
 
+            center = np.zeros(dim, np.float64)
+            if mass > 0.0:
+                for age in range(filled):
+                    mem_idx = (idx - 1 - age) % horizon
+                    w = weights[age]
+                    for d in range(dim):
+                        center[d] += w * memory[mem_idx, d]
+                for d in range(dim):
+                    center[d] /= mass
+            else:
+                for d in range(dim):
+                    center[d] = x[d]
 
-def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.ndarray]:
+            mean_radius = 0.0
+            rms_radius2 = 0.0
+            if mass > 0.0:
+                for age in range(filled):
+                    mem_idx = (idx - 1 - age) % horizon
+                    w = weights[age]
+                    r2 = 0.0
+                    for d in range(dim):
+                        diff = memory[mem_idx, d] - center[d]
+                        r2 += diff * diff
+                    radius = np.sqrt(r2)
+                    mean_radius += w * radius
+                    rms_radius2 += w * r2
+                mean_radius /= mass
+                rms_radius2 /= mass
+
+            x_dist2 = 0.0
+            for d in range(dim):
+                diff = x[d] - center[d]
+                x_dist2 += diff * diff
+
+            trace_steps[n_trace] = step
+            for d in range(dim):
+                trace_centers[n_trace, d] = center[d]
+            trace_mean_radii[n_trace] = mean_radius
+            trace_rms_radii[n_trace] = np.sqrt(rms_radius2)
+            trace_x_distances[n_trace] = np.sqrt(x_dist2)
+            n_trace += 1
+
+    return (
+        samples[:n_sample],
+        sample_steps[:n_sample],
+        x,
+        memory,
+        weights,
+        filled,
+        idx,
+        trace_steps[:n_trace],
+        trace_centers[:n_trace],
+        trace_mean_radii[:n_trace],
+        trace_rms_radii[:n_trace],
+        trace_x_distances[:n_trace],
+    )
+
+def simulate_long_run(
+    config: SimulationConfig,
+    *,
+    seed: int,
+    trace_every: int = 0,
+) -> dict[str, np.ndarray]:
     effective_kernel = effective_double_gaussian_parameters(
         dim=config.dim,
         sigma_rep=config.sigma_rep,
@@ -224,7 +298,16 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
     )
     if not _NUMBA_AVAILABLE:
         result = simulate_finite_memory(config, seed=seed)
-        return {**result, "effective_kernel": effective_kernel}
+        empty_trace = np.empty((0, config.dim), dtype=float)
+        return {
+            **result,
+            "effective_kernel": effective_kernel,
+            "trace_steps": np.empty(0, dtype=np.int64),
+            "trace_centers": empty_trace,
+            "trace_mean_radii": np.empty(0, dtype=float),
+            "trace_rms_radii": np.empty(0, dtype=float),
+            "trace_x_distances": np.empty(0, dtype=float),
+        }
 
     (
         samples,
@@ -234,6 +317,11 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         weights,
         filled,
         idx,
+        trace_steps,
+        trace_centers,
+        trace_mean_radii,
+        trace_rms_radii,
+        trace_x_distances,
     ) = _simulate_circular_numba(
         config.steps,
         config.dim,
@@ -249,6 +337,7 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         config.max_memory,
         config.burn_in,
         config.sample_every,
+        trace_every,
         seed,
     )
     if filled > 0:
@@ -263,6 +352,11 @@ def simulate_long_run(config: SimulationConfig, *, seed: int) -> dict[str, np.nd
         "memory": ordered_memory,
         "weights": weights[:filled].copy(),
         "effective_kernel": effective_kernel,
+        "trace_steps": trace_steps.copy(),
+        "trace_centers": trace_centers.copy(),
+        "trace_mean_radii": trace_mean_radii.copy(),
+        "trace_rms_radii": trace_rms_radii.copy(),
+        "trace_x_distances": trace_x_distances.copy(),
     }
 
 
@@ -406,6 +500,131 @@ def _sample_span(samples: np.ndarray) -> list[float]:
     return (samples.max(axis=0) - samples.min(axis=0)).astype(float).tolist()
 
 
+def _run_lengths(mask: np.ndarray) -> np.ndarray:
+    if mask.size == 0:
+        return np.empty(0, dtype=int)
+    runs: list[int] = []
+    current = 0
+    for value in mask.astype(bool):
+        if value:
+            current += 1
+        elif current:
+            runs.append(current)
+            current = 0
+    if current:
+        runs.append(current)
+    return np.asarray(runs, dtype=int)
+
+
+def _dynamic_center_trace_diagnostics(
+    result: dict[str, np.ndarray],
+    *,
+    config: SimulationConfig,
+    trace_every: int,
+    primary_radius_factor: float = 2.0,
+    include_trace: bool = True,
+    max_trace_points: int = 50_000,
+) -> dict[str, object] | None:
+    steps = np.asarray(result.get("trace_steps", np.empty(0, dtype=np.int64)), dtype=np.int64)
+    centers = np.asarray(result.get("trace_centers", np.empty((0, config.dim))), dtype=float)
+    mean_radii = np.asarray(result.get("trace_mean_radii", np.empty(0)), dtype=float)
+    rms_radii = np.asarray(result.get("trace_rms_radii", np.empty(0)), dtype=float)
+    x_distances = np.asarray(result.get("trace_x_distances", np.empty(0)), dtype=float)
+    if len(steps) == 0:
+        return None
+    if centers.shape != (len(steps), config.dim):
+        return None
+    if not (len(mean_radii) == len(steps) == len(rms_radii) == len(x_distances)):
+        return None
+
+    valid_radius = np.isfinite(rms_radii) & (rms_radii > 0.0)
+    degenerate_radius = ~valid_radius
+    inside = np.zeros(len(steps), dtype=bool)
+    inside[valid_radius] = x_distances[valid_radius] <= primary_radius_factor * rms_radii[valid_radius]
+    runs = _run_lengths(inside)
+
+    if len(steps) > 1:
+        gaps = np.diff(steps).astype(float)
+        positive_gaps = gaps[gaps > 0.0]
+        trace_stride_updates = float(np.median(positive_gaps)) if len(positive_gaps) else float(trace_every)
+    else:
+        gaps = np.empty(0, dtype=float)
+        trace_stride_updates = float(trace_every)
+    if trace_stride_updates <= 0.0:
+        trace_stride_updates = float(config.sample_every)
+    trace_stride_memory_times = trace_stride_updates * config.alpha
+    run_memory_times = runs.astype(float) * trace_stride_memory_times
+
+    center_steps = np.linalg.norm(np.diff(centers, axis=0), axis=1) if len(steps) > 1 else np.empty(0)
+    center_path_length = float(np.sum(center_steps)) if len(center_steps) else 0.0
+    center_net_displacement = float(np.linalg.norm(centers[-1] - centers[0])) if len(steps) > 1 else 0.0
+    center_path_to_chord = center_path_length / center_net_displacement if center_net_displacement > 0.0 else None
+
+    drift_per_memory_time = np.empty(0, dtype=float)
+    drift_radius_fraction_per_memory_time = np.empty(0, dtype=float)
+    if len(center_steps):
+        memory_gaps = gaps * config.alpha
+        valid_gap = memory_gaps > 0.0
+        drift_per_memory_time = center_steps[valid_gap] / memory_gaps[valid_gap]
+        radius_mid = 0.5 * (rms_radii[:-1] + rms_radii[1:])
+        valid_radius_gap = valid_gap & np.isfinite(radius_mid) & (radius_mid > 0.0)
+        drift_radius_fraction_per_memory_time = (
+            center_steps[valid_radius_gap] / radius_mid[valid_radius_gap] / memory_gaps[valid_radius_gap]
+        )
+
+    radius_ratio = np.full(len(steps), np.nan, dtype=float)
+    radius_ratio[valid_radius] = x_distances[valid_radius] / rms_radii[valid_radius]
+    finite_ratio = radius_ratio[np.isfinite(radius_ratio)]
+
+    out: dict[str, object] = {
+        "n_traces": int(len(steps)),
+        "trace_stride_updates": _finite_float(trace_stride_updates),
+        "trace_stride_memory_times": _finite_float(trace_stride_memory_times),
+        "primary_radius_factor": float(primary_radius_factor),
+        "valid_radius_fraction": _finite_float(float(np.mean(valid_radius))),
+        "degenerate_radius_fraction": _finite_float(float(np.mean(degenerate_radius))),
+        "comoving_inside_fraction": _finite_float(float(np.mean(inside))),
+        "max_run_trace_points": int(runs.max()) if len(runs) else 0,
+        "mean_run_trace_points": _finite_float(float(np.mean(runs))) if len(runs) else 0.0,
+        "max_run_memory_times": _finite_float(float(run_memory_times.max())) if len(run_memory_times) else 0.0,
+        "mean_run_memory_times": _finite_float(float(np.mean(run_memory_times))) if len(run_memory_times) else 0.0,
+        "rms_radius_median": _finite_float(float(np.median(rms_radii))),
+        "rms_radius_mean": _finite_float(float(np.mean(rms_radii))),
+        "mean_radius_median": _finite_float(float(np.median(mean_radii))),
+        "x_distance_median": _finite_float(float(np.median(x_distances))),
+        "x_distance_to_rms_radius_median": (
+            _finite_float(float(np.median(finite_ratio))) if len(finite_ratio) else None
+        ),
+        "center_step_median": _finite_float(float(np.median(center_steps))) if len(center_steps) else 0.0,
+        "center_drift_per_memory_time_median": (
+            _finite_float(float(np.median(drift_per_memory_time)))
+            if len(drift_per_memory_time)
+            else 0.0
+        ),
+        "center_drift_radius_fraction_per_memory_time_median": (
+            _finite_float(float(np.median(drift_radius_fraction_per_memory_time)))
+            if len(drift_radius_fraction_per_memory_time)
+            else None
+        ),
+        "center_path_length": _finite_float(center_path_length),
+        "center_net_displacement": _finite_float(center_net_displacement),
+        "center_path_to_chord": _finite_float(center_path_to_chord),
+    }
+    if include_trace:
+        stride = max(1, int(math.ceil(len(steps) / max_trace_points)))
+        sl = slice(None, None, stride)
+        out["trace"] = {
+            "stored_point_count": int(len(steps[sl])),
+            "decimation_stride": int(stride),
+            "steps": steps[sl].astype(int).tolist(),
+            "centers": centers[sl].astype(float).tolist(),
+            "mean_radii": mean_radii[sl].astype(float).tolist(),
+            "rms_radii": rms_radii[sl].astype(float).tolist(),
+            "x_distances": x_distances[sl].astype(float).tolist(),
+            "inside_primary_radius": inside[sl].astype(bool).tolist(),
+        }
+    return out
+
 def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
     details = occupancy_dimension(points, return_details=True)
     window = fit_occupancy_scaling_window(
@@ -465,6 +684,8 @@ def _center_residence_payload(
         "base_radius": radius0,
         "radius_factors": [float(factor) for factor in radius_factors],
         "primary_radius_factor": float(primary_radius_factor),
+        "valid_radius_fraction": _finite_float(float(np.mean(valid_radius))),
+        "degenerate_radius_fraction": _finite_float(float(np.mean(degenerate_radius))),
     }
     by_factor: dict[str, object] = {}
     unconstrained_best = 0.0
@@ -588,10 +809,11 @@ def run_case(
     min_memory_times: float,
     output_dir: Path,
     force_components: bool = False,
+    trace_every: int = 0,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
-    result = simulate_long_run(config, seed=seed)
+    result = simulate_long_run(config, seed=seed, trace_every=trace_every)
     elapsed = time.perf_counter() - started
     samples = result["samples"]
     horizon = _horizon(config)
@@ -602,6 +824,13 @@ def run_case(
         max_ac_lag=max_ac_lag,
         min_memory_times=min_memory_times,
     )
+    dynamic_center_trace = _dynamic_center_trace_diagnostics(
+        result,
+        config=config,
+        trace_every=trace_every,
+    )
+    if dynamic_center_trace is not None:
+        diagnostics["dynamic_center_trace"] = dynamic_center_trace
     memory_cloud = _memory_cloud_diagnostics(result["memory"], result["weights"])
     if memory_cloud is not None:
         diagnostics["memory_cloud"] = memory_cloud
@@ -655,6 +884,17 @@ def _center_residence_field(diagnostics: dict[str, object], key: str, field: str
     value = payload.get(field)
     if isinstance(value, (float, int)) and math.isfinite(float(value)):
         return float(value)
+    return None
+
+def _dynamic_center_field(diagnostics: dict[str, object], field: str) -> float | int | None:
+    payload = diagnostics.get("dynamic_center_trace")
+    if not isinstance(payload, dict):
+        return None
+    value = payload.get(field)
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float) and math.isfinite(value):
+        return value
     return None
 
 def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
@@ -713,6 +953,18 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "memory_center_primary_inside_fraction": _center_residence_field(
                     diagnostics, "memory_center", "primary_inside_fraction"
                 ),
+                "dynamic_center_trace_count": _dynamic_center_field(diagnostics, "n_traces"),
+                "dynamic_center_rms_radius_median": _dynamic_center_field(diagnostics, "rms_radius_median"),
+                "dynamic_center_comoving_inside_fraction": _dynamic_center_field(
+                    diagnostics, "comoving_inside_fraction"
+                ),
+                "dynamic_center_max_run_memory_times": _dynamic_center_field(diagnostics, "max_run_memory_times"),
+                "dynamic_center_drift_per_memory_time_median": _dynamic_center_field(
+                    diagnostics, "center_drift_per_memory_time_median"
+                ),
+                "dynamic_center_drift_radius_fraction_per_memory_time_median": _dynamic_center_field(
+                    diagnostics, "center_drift_radius_fraction_per_memory_time_median"
+                ),
                 "candidate_long_lived": candidate,
             }
         )
@@ -757,6 +1009,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--burn-in", type=int, default=1_000_000)
     parser.add_argument("--sample-every", type=int, default=1000)
     parser.add_argument(
+        "--trace-every",
+        type=int,
+        default=0,
+        help="store time-local memory-center traces every N updates; 0 disables it",
+    )
+    parser.add_argument(
         "--voxel-sizes",
         type=_parse_float_list,
         default=_parse_float_list("0.5,1.0,2.0"),
@@ -785,6 +1043,8 @@ def main() -> None:
         raise SystemExit("--burn-in must satisfy 0 <= burn_in < steps")
     if args.sample_every < 1:
         raise SystemExit("--sample-every must be positive")
+    if args.trace_every < 0:
+        raise SystemExit("--trace-every must be non-negative")
     if args.max_memory < 1:
         raise SystemExit("--max-memory must be positive")
     if not 0.0 < args.alpha <= 1.0:
@@ -847,6 +1107,7 @@ def main() -> None:
                     min_memory_times=args.min_memory_times,
                     output_dir=output_dir,
                     force_components=args.force_components,
+                    trace_every=args.trace_every,
                 )
             )
 
@@ -864,6 +1125,7 @@ def main() -> None:
             "voxel_sizes": args.voxel_sizes,
             "max_ac_lag": args.max_ac_lag,
             "min_memory_times": args.min_memory_times,
+            "trace_every": args.trace_every,
         },
         "base_config": asdict(base_config),
         "case_summaries": summarize_cases(cases),

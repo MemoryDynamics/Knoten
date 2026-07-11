@@ -69,6 +69,51 @@ def test_memory_cloud_diagnostics_skips_zero_weight_mass() -> None:
     assert long_run_metastability._memory_cloud_diagnostics(memory, weights) is None
 
 
+def test_dynamic_center_trace_diagnostics_reports_comoving_runs() -> None:
+    cfg = SimulationConfig(steps=40, dim=2, alpha=0.1, sample_every=10)
+    result = {
+        "trace_steps": np.array([10, 20, 30, 40], dtype=np.int64),
+        "trace_centers": np.array(
+            [[0.0, 0.0], [0.1, 0.0], [0.2, 0.0], [0.3, 0.0]],
+            dtype=float,
+        ),
+        "trace_mean_radii": np.array([1.0, 1.0, 1.0, 1.0], dtype=float),
+        "trace_rms_radii": np.array([1.0, 1.0, 1.0, 1.0], dtype=float),
+        "trace_x_distances": np.array([0.5, 1.5, 3.0, 0.2], dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=10,
+        primary_radius_factor=2.0,
+    )
+
+    assert diagnostics is not None
+    assert diagnostics["n_traces"] == 4
+    assert diagnostics["comoving_inside_fraction"] == 0.75
+    assert diagnostics["max_run_trace_points"] == 2
+    assert diagnostics["max_run_memory_times"] == 2.0
+    assert np.isclose(diagnostics["center_drift_per_memory_time_median"], 0.1)
+    assert diagnostics["trace"]["inside_primary_radius"] == [True, True, False, True]
+
+    zero_radius = {
+        "trace_steps": np.array([10, 20], dtype=np.int64),
+        "trace_centers": np.zeros((2, 2), dtype=float),
+        "trace_mean_radii": np.zeros(2, dtype=float),
+        "trace_rms_radii": np.zeros(2, dtype=float),
+        "trace_x_distances": np.zeros(2, dtype=float),
+    }
+    degenerate = long_run_metastability._dynamic_center_trace_diagnostics(
+        zero_radius,
+        config=cfg,
+        trace_every=10,
+    )
+
+    assert degenerate is not None
+    assert degenerate["comoving_inside_fraction"] == 0.0
+    assert degenerate["degenerate_radius_fraction"] == 1.0
+
 def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     samples = np.array(
         [

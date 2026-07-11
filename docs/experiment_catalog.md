@@ -1,6 +1,6 @@
-﻿# Experiment-Katalog
+# Experiment-Katalog
 
-Stand: 2026-07-10.
+Stand: 2026-07-11.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -10,7 +10,7 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
+| `experiments/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -43,6 +43,7 @@ python experiments/long_run_metastability.py `
   --dim 3 `
   --alpha 0.01 `
   --sample-every 1000 `
+  --trace-every 100000 `
   --burn-in 1000000 `
   --max-memory 800 `
   --output-dir data/processed/long_run_metastability/2026-06-29_initial
@@ -163,6 +164,15 @@ als explorative Diagnose. Operativ ist vor allem `memory_center` relevant,
 waehrend `sample_center` als Drift-/Pfadkontrolle mitlaufen darf. Diese Felder
 sind fuer die naechste N-Skalierung bis `1e8` massgeblich, weil sie weniger
 grid- und translationsabhaengig sind als das reine Voxelmaximum.
+
+Dynamischer Center-Trace ab 2026-07-11: Mit `--trace-every N` schreibt
+`long_run_metastability.py` zusaetzlich `diagnostics.dynamic_center_trace`.
+Gemessen werden die zeitlokale Memory-Center-Spur, RMS-Radius, Distanz des
+aktuellen Punkts zum Center, co-moving Inside-Fraction, maximale co-moving
+Run-Laenge in Memory-Zeiten und Center-Drift pro Memory-Zeit. Fuer `N=3e8`
+ist `--trace-every 100000` ein praktikabler Startpunkt: etwa 3000 Tracepunkte
+pro Case, also genug fuer Drift/Residence ohne riesige JSONs. Degenerierte
+Nullradius-Traces zaehlen nicht als co-moving Residence-Evidenz.
 
 ## Epsilon-Step-Balance
 
