@@ -317,6 +317,14 @@ bleibt dagegen median unter der Partial-Schwelle `2` (`N=3M`: `1.584` bzw.
 Residence-Konvergenz bzw. ein schaerferes Residence-Observable. Report:
 `reports/scalar_n_scaling_q3_2026-07-10.md`.
 
+3e8-Resultat 2026-07-11: Die `N=300,000,000`-Laeufe fuer `A_att=20` und
+`35`, Seeds `1..5`, sind abgeschlossen. Beide Kandidaten tragen v0.5 deutlich
+gegen `eta_zero` (`score median 0.929`; Residence-Gain median `2.833` bzw.
+`3.090`). Die Memory-Clouds bleiben kompakt/rund und nahe dreidimensional.
+Die fixe finale `memory_center`-Residence ist dagegen kurz und selten, was auf
+Drift/Rezentrierung hindeutet. Naechster Schritt ist deshalb dynamische,
+zeitlokale Center-Diagnostik statt weiterer Blindscan. Report:
+`reports/long_run_3e8_results_2026-07-11.md`.
 Residence-Update 2026-07-10: Long-Run-Ausgaben schreiben nun
 `center_residence.sample_center` und `center_residence.memory_center`. Die
 Summary verwendet fuer beide den festen Ballradius-Faktor `2`; groessere

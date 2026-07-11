@@ -143,9 +143,13 @@ Naechster operativer Schritt:
     schreibt jetzt Center-/Memory-Ball-Residence bei Radiusfaktoren
     `1,2,4,8,16`. Die Summary verwendet den festen Primaerfaktor `2`,
     damit groessere Suchradien die Residence nicht trivialisieren.
-13. Jetzt: korrigierte Kandidaten `A_att=20` und `35` mit geschaerfter
-    Residence entlang `N` weiterziehen, Zielskala mindestens `N=1e8`.
-    Der Lauf bleibt ein Kandidaten-Hardening, kein neuer Parameterblindscan.
+13. Abgeschlossen: `N=300M`-Hardening fuer `A_att=20` und `35`, Seeds `1..5`.
+    v0.5-Score und Voxel-Residence tragen; die fixe finale Memory-Center-
+    Residence zeigt aber Drift/Rezentrierung. Report:
+    `reports/long_run_3e8_results_2026-07-11.md`.
+14. Jetzt: dynamische Center-Trace-Diagnostik implementieren. Ziel ist eine
+    zeitlokale Memory-Center-/Radius-Spur und co-moving Residence, bevor neue
+    Parameterachsen oder weitere Overnight-Laeufe gestartet werden.
 
 Wenn der Score traegt:
 
@@ -181,10 +185,10 @@ Prioritaet:
 4. Abgeschlossen: N-Skalierung fuer `A_att=20/35` bis `N=3M`.
    Kompaktheit und Memory-Shape sind schnell stabil; Residence-Gain bleibt
    median unter `2`.
-5. Fuer Paper I: naechste Long-Runs mit Center-/Memory-Ball-Residence fahren.
-   Akzeptiert wird nicht nur ein hohes Voxelmaximum, sondern konsistente
-   Residence um ein nachvollziehbares Knoten-/Memory-Zentrum plus stabile
-   Memory-Cloud-Kompaktheit.
+5. Fuer Paper I: dynamische Center-Trace-Diagnostik bauen. Die `3e8`-Laeufe
+   tragen compact co-moving memory-cloud evidence, aber noch keinen fixen
+   spatial-knot claim. Akzeptiert wird kuenftig ein zeitlokaler Center-Drift-
+   und co-moving-Residence-Befund gegen `eta_zero`.
 6. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.
