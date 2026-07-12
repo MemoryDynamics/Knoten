@@ -63,9 +63,11 @@ For Paper I, dynamic center diagnostics should be reported as:
 - final-center residence only as a warning/drift diagnostic.
 
 Next technical step: repeat this trace diagnostic at a longer scale
-(`30M` first, not immediately `300M`) with `trace_every=100,000` if
-the goal is to test whether the normalized drift and compact radius
-remain stable over much longer trajectories.
+(`30M` first, not immediately `300M`) with about 100 logarithmically
+spaced trace points, e.g. `--trace-points 100 --trace-spacing log`.
+This resolves the early transient while still validating late-time stability.
+For nonuniform traces, dynamic run durations must be interpreted through the
+time-weighted fields rather than point counts.
 
 ## Figures
 

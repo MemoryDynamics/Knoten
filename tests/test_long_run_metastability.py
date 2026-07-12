@@ -16,6 +16,30 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(long_run_metastability)
 
 
+
+def test_trace_targets_support_fixed_and_log_schedules() -> None:
+    fixed = long_run_metastability._trace_targets(
+        steps=100,
+        burn_in=0,
+        trace_every=25,
+        trace_points=0,
+        trace_spacing="log",
+    )
+    assert fixed.tolist() == [25, 50, 75, 100]
+
+    log_targets = long_run_metastability._trace_targets(
+        steps=1000,
+        burn_in=0,
+        trace_every=0,
+        trace_points=8,
+        trace_spacing="log",
+    )
+    assert log_targets[0] == 1
+    assert log_targets[-1] == 1000
+    assert len(log_targets) <= 8
+    assert np.all(np.diff(log_targets) > 0)
+    assert np.diff(log_targets)[0] < np.diff(log_targets)[-1]
+
 def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     cfg = SimulationConfig(steps=100, eta=0.15, amplitude_att=0.35)
 

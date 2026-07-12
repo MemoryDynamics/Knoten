@@ -81,6 +81,39 @@ def _parse_conditions(value: str) -> list[str]:
     return values
 
 
+
+def _trace_targets(
+    *,
+    steps: int,
+    burn_in: int,
+    trace_every: int,
+    trace_points: int,
+    trace_spacing: str,
+) -> np.ndarray:
+    if trace_points > 0:
+        start = max(1, burn_in)
+        if trace_points == 1:
+            raw = np.asarray([steps], dtype=float)
+        elif trace_spacing == "linear":
+            raw = np.linspace(start, steps, trace_points)
+        elif trace_spacing == "log":
+            raw = np.geomspace(start, steps, trace_points)
+        else:
+            raise ValueError(f"unknown trace spacing: {trace_spacing}")
+        targets = np.unique(np.rint(raw).astype(np.int64))
+        targets = targets[(targets >= start) & (targets <= steps)]
+        if len(targets) == 0 or targets[-1] != steps:
+            targets = np.unique(np.append(targets, np.int64(steps)))
+        return targets.astype(np.int64)
+
+    if trace_every <= 0:
+        return np.empty(0, dtype=np.int64)
+    start = max(1, burn_in)
+    first = int(math.ceil(start / trace_every) * trace_every)
+    if first > steps:
+        return np.empty(0, dtype=np.int64)
+    return np.arange(first, steps + 1, trace_every, dtype=np.int64)
+
 def _git_output(args: list[str]) -> str:
     try:
         completed = subprocess.run(
@@ -160,7 +193,7 @@ def _simulate_circular_numba(
     max_memory: int,
     burn_in: int,
     sample_every: int,
-    trace_every: int,
+    trace_targets: np.ndarray,
     seed: int,
 ):
     np.random.seed(seed)
@@ -182,9 +215,7 @@ def _simulate_circular_numba(
     max_samples = steps // sample_every + 2
     samples = np.zeros((max_samples, dim), np.float64)
     sample_steps = np.zeros(max_samples, np.int64)
-    max_traces = 0
-    if trace_every > 0:
-        max_traces = steps // trace_every + 2
+    max_traces = len(trace_targets)
     trace_steps = np.zeros(max_traces, np.int64)
     trace_centers = np.zeros((max_traces, dim), np.float64)
     trace_mean_radii = np.zeros(max_traces, np.float64)
@@ -227,7 +258,7 @@ def _simulate_circular_numba(
             sample_steps[n_sample] = step
             n_sample += 1
 
-        if trace_every > 0 and step >= burn_in and step % trace_every == 0:
+        if n_trace < max_traces and step == trace_targets[n_trace]:
             mass = 0.0
             for age in range(filled):
                 mass += weights[age]
@@ -294,6 +325,7 @@ def simulate_long_run(
     *,
     seed: int,
     trace_every: int = 0,
+    trace_targets: np.ndarray | None = None,
 ) -> dict[str, np.ndarray]:
     effective_kernel = effective_double_gaussian_parameters(
         dim=config.dim,
@@ -304,6 +336,17 @@ def simulate_long_run(
         deposition_kernel=config.deposition_kernel,
         deposition_sigma=config.deposition_sigma,
     )
+    if trace_targets is None:
+        trace_targets = _trace_targets(
+            steps=config.steps,
+            burn_in=config.burn_in,
+            trace_every=trace_every,
+            trace_points=0,
+            trace_spacing="log",
+        )
+    else:
+        trace_targets = np.asarray(trace_targets, dtype=np.int64)
+
     if not _NUMBA_AVAILABLE:
         result = simulate_finite_memory(config, seed=seed)
         empty_trace = np.empty((0, config.dim), dtype=float)
@@ -345,7 +388,7 @@ def simulate_long_run(
         config.max_memory,
         config.burn_in,
         config.sample_every,
-        trace_every,
+        trace_targets,
         seed,
     )
     if filled > 0:
@@ -524,6 +567,38 @@ def _run_lengths(mask: np.ndarray) -> np.ndarray:
     return np.asarray(runs, dtype=int)
 
 
+
+def _trace_point_update_weights(steps: np.ndarray, fallback_stride: float) -> np.ndarray:
+    if len(steps) == 0:
+        return np.empty(0, dtype=float)
+    stride = float(fallback_stride) if fallback_stride > 0.0 else 1.0
+    if len(steps) == 1:
+        return np.asarray([stride], dtype=float)
+    gaps = np.diff(steps).astype(float)
+    safe_gaps = np.where(gaps > 0.0, gaps, stride)
+    weights = np.empty(len(steps), dtype=float)
+    weights[0] = safe_gaps[0]
+    weights[-1] = safe_gaps[-1]
+    if len(steps) > 2:
+        weights[1:-1] = 0.5 * (safe_gaps[:-1] + safe_gaps[1:])
+    return weights
+
+
+def _weighted_run_sums(mask: np.ndarray, weights: np.ndarray) -> np.ndarray:
+    if mask.size == 0:
+        return np.empty(0, dtype=float)
+    runs: list[float] = []
+    current = 0.0
+    for flag, weight in zip(mask, weights, strict=False):
+        if bool(flag):
+            current += float(weight)
+        elif current > 0.0:
+            runs.append(current)
+            current = 0.0
+    if current > 0.0:
+        runs.append(current)
+    return np.asarray(runs, dtype=float)
+
 def _dynamic_center_trace_diagnostics(
     result: dict[str, np.ndarray],
     *,
@@ -555,13 +630,26 @@ def _dynamic_center_trace_diagnostics(
         gaps = np.diff(steps).astype(float)
         positive_gaps = gaps[gaps > 0.0]
         trace_stride_updates = float(np.median(positive_gaps)) if len(positive_gaps) else float(trace_every)
+        trace_interval_updates_min = float(np.min(positive_gaps)) if len(positive_gaps) else None
+        trace_interval_updates_max = float(np.max(positive_gaps)) if len(positive_gaps) else None
     else:
         gaps = np.empty(0, dtype=float)
         trace_stride_updates = float(trace_every)
+        trace_interval_updates_min = None
+        trace_interval_updates_max = None
     if trace_stride_updates <= 0.0:
         trace_stride_updates = float(config.sample_every)
     trace_stride_memory_times = trace_stride_updates * config.alpha
-    run_memory_times = runs.astype(float) * trace_stride_memory_times
+    trace_point_update_weights = _trace_point_update_weights(steps, trace_stride_updates)
+    trace_point_memory_times = trace_point_update_weights * config.alpha
+    run_memory_times = _weighted_run_sums(inside, trace_point_memory_times)
+    trace_time_memory_times = float(np.sum(trace_point_memory_times)) if len(trace_point_memory_times) else 0.0
+    if trace_time_memory_times > 0.0:
+        comoving_inside_fraction_time_weighted = float(
+            np.sum(trace_point_memory_times[inside]) / trace_time_memory_times
+        )
+    else:
+        comoving_inside_fraction_time_weighted = 0.0
 
     center_steps = np.linalg.norm(np.diff(centers, axis=0), axis=1) if len(steps) > 1 else np.empty(0)
     center_path_length = float(np.sum(center_steps)) if len(center_steps) else 0.0
@@ -588,10 +676,14 @@ def _dynamic_center_trace_diagnostics(
         "n_traces": int(len(steps)),
         "trace_stride_updates": _finite_float(trace_stride_updates),
         "trace_stride_memory_times": _finite_float(trace_stride_memory_times),
+        "trace_interval_updates_min": _finite_float(trace_interval_updates_min),
+        "trace_interval_updates_max": _finite_float(trace_interval_updates_max),
+        "trace_time_memory_times": _finite_float(trace_time_memory_times),
         "primary_radius_factor": float(primary_radius_factor),
         "valid_radius_fraction": _finite_float(float(np.mean(valid_radius))),
         "degenerate_radius_fraction": _finite_float(float(np.mean(degenerate_radius))),
         "comoving_inside_fraction": _finite_float(float(np.mean(inside))),
+        "comoving_inside_fraction_time_weighted": _finite_float(comoving_inside_fraction_time_weighted),
         "max_run_trace_points": int(runs.max()) if len(runs) else 0,
         "mean_run_trace_points": _finite_float(float(np.mean(runs))) if len(runs) else 0.0,
         "max_run_memory_times": _finite_float(float(run_memory_times.max())) if len(run_memory_times) else 0.0,
@@ -818,10 +910,11 @@ def run_case(
     output_dir: Path,
     force_components: bool = False,
     trace_every: int = 0,
+    trace_targets: np.ndarray | None = None,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
-    result = simulate_long_run(config, seed=seed, trace_every=trace_every)
+    result = simulate_long_run(config, seed=seed, trace_every=trace_every, trace_targets=trace_targets)
     elapsed = time.perf_counter() - started
     samples = result["samples"]
     horizon = _horizon(config)
@@ -966,6 +1059,9 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "dynamic_center_comoving_inside_fraction": _dynamic_center_field(
                     diagnostics, "comoving_inside_fraction"
                 ),
+                "dynamic_center_comoving_inside_fraction_time_weighted": _dynamic_center_field(
+                    diagnostics, "comoving_inside_fraction_time_weighted"
+                ),
                 "dynamic_center_max_run_memory_times": _dynamic_center_field(diagnostics, "max_run_memory_times"),
                 "dynamic_center_drift_per_memory_time_median": _dynamic_center_field(
                     diagnostics, "center_drift_per_memory_time_median"
@@ -1023,6 +1119,18 @@ def parse_args() -> argparse.Namespace:
         help="store time-local memory-center traces every N updates; 0 disables it",
     )
     parser.add_argument(
+        "--trace-points",
+        type=int,
+        default=0,
+        help="store this many explicit trace points; overrides --trace-every when positive",
+    )
+    parser.add_argument(
+        "--trace-spacing",
+        choices=("linear", "log"),
+        default="log",
+        help="spacing for --trace-points",
+    )
+    parser.add_argument(
         "--voxel-sizes",
         type=_parse_float_list,
         default=_parse_float_list("0.5,1.0,2.0"),
@@ -1053,6 +1161,8 @@ def main() -> None:
         raise SystemExit("--sample-every must be positive")
     if args.trace_every < 0:
         raise SystemExit("--trace-every must be non-negative")
+    if args.trace_points < 0:
+        raise SystemExit("--trace-points must be non-negative")
     if args.max_memory < 1:
         raise SystemExit("--max-memory must be positive")
     if not 0.0 < args.alpha <= 1.0:
@@ -1093,6 +1203,14 @@ def main() -> None:
         sample_every=args.sample_every,
     )
 
+    trace_targets = _trace_targets(
+        steps=base_config.steps,
+        burn_in=base_config.burn_in,
+        trace_every=args.trace_every,
+        trace_points=args.trace_points,
+        trace_spacing=args.trace_spacing,
+    )
+
     run_started = _utc_now()
     cases: list[dict[str, object]] = []
     total_started = time.perf_counter()
@@ -1116,6 +1234,7 @@ def main() -> None:
                     output_dir=output_dir,
                     force_components=args.force_components,
                     trace_every=args.trace_every,
+                    trace_targets=trace_targets,
                 )
             )
 
@@ -1134,6 +1253,11 @@ def main() -> None:
             "max_ac_lag": args.max_ac_lag,
             "min_memory_times": args.min_memory_times,
             "trace_every": args.trace_every,
+            "trace_points": args.trace_points,
+            "trace_spacing": args.trace_spacing,
+            "trace_target_count": int(len(trace_targets)),
+            "trace_first_step": int(trace_targets[0]) if len(trace_targets) else None,
+            "trace_last_step": int(trace_targets[-1]) if len(trace_targets) else None,
         },
         "base_config": asdict(base_config),
         "case_summaries": summarize_cases(cases),

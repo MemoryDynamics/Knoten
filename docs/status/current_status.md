@@ -338,7 +338,10 @@ maximale co-moving Runs in Memory-Zeiten und Center-Drift pro Memory-Zeit.
 Damit wird ein Einzelknoten als mitbewegtes Objekt bewertet, nicht als fixes
 absolutes Zentrum. Das ist die naechste Paper-I-Pruefung vor neuen Blindscans.
 
-Dynamic-Center-Validation 2026-07-12: Der erste `N=3M`-Trace-Pilot fuer
+Dynamic-Center-Validation 2026-07-12: `long_run_metastability.py` kennt nun neben
+festem `--trace-every` auch logarithmische explizite Trace-Zeitpunkte ueber
+`--trace-points` und `--trace-spacing log`; dynamische Run-Dauern werden fuer
+nichtuniforme Tracepunkte zeitgewichtet. Der erste `N=3M`-Trace-Pilot fuer
 `A_att=20/35`, Seeds `1..5`, gegen `eta_zero` ist abgeschlossen. Ergebnis:
 `dynamic_inside_fraction` und `dynamic_max_run` sind nicht allein trennend,
 weil `eta_zero` im eigenen grossen Memory-Ball ebenfalls innen bleibt. Die
@@ -389,9 +392,10 @@ Negativkontrollen gegeneinander pruefen.
 ## Naechste technische Schritte
 
 1. Fuer Paper I als naechstes einen gezielten `N=30M`-Center-Trace fuer
-   `A_att=20/35` gegen `eta_zero` rechnen. Akzeptanzmetriken sind dynamischer
-   Radius, radiusnormalisierte Center-Drift und Memory-Shape; dynamic-inside
-   Residence bleibt nur Hilfsdiagnostik.
+   `A_att=20/35` gegen `eta_zero` rechnen, mit etwa 100 logarithmisch
+   verteilten Tracepunkten (`--trace-points 100 --trace-spacing log`).
+   Akzeptanzmetriken sind dynamischer Radius, radiusnormalisierte Center-Drift
+   und Memory-Shape; dynamic-inside Residence bleibt nur Hilfsdiagnostik.
 2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis weiter als separaten
    Modellzweig behandeln; Spin/Zirkulation und Ladung/Response sind Zukunfts-
    observablen, keine aktuellen Paper-I-Claims.

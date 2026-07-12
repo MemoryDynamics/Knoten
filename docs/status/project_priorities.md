@@ -155,9 +155,10 @@ Naechster operativer Schritt:
     innen bleibt. Trennend sind dynamischer RMS-Radius, radiusnormalisierte
     Center-Drift und Memory-Shape.
 15. Naechster Paper-I-Schritt: gezielter `N=30M`-Trace fuer `A_att=20/35` mit
-    `trace_every=100000`, keine neue Parameterachse. Ziel ist Stabilitaet von
-    dynamischem Radius, Drift/Radius/Memory-Zeit und Memory-Shape gegen
-    `eta_zero` ueber laengere Trajektorien.
+    logarithmischem Trace-Zeitplan (`--trace-points 100 --trace-spacing log`),
+    keine neue Parameterachse. Ziel ist Stabilitaet von dynamischem Radius,
+    Drift/Radius/Memory-Zeit und Memory-Shape gegen `eta_zero` ueber laengere
+    Trajektorien.
 16. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter

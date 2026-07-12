@@ -160,6 +160,10 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
             ("center_residence", "memory_center", "primary_max_run_memory_times"),
         ),
         "dynamic_inside_fraction": _diagnostic_value(dynamic, ("comoving_inside_fraction",)),
+        "dynamic_inside_fraction_time_weighted": (
+            _diagnostic_value(dynamic, ("comoving_inside_fraction_time_weighted",))
+            or _diagnostic_value(dynamic, ("comoving_inside_fraction",))
+        ),
         "dynamic_max_run_memory_times": _diagnostic_value(dynamic, ("max_run_memory_times",)),
         "dynamic_rms_radius_median": _diagnostic_value(dynamic, ("rms_radius_median",)),
         "dynamic_x_distance_to_radius_median": _diagnostic_value(
@@ -181,6 +185,7 @@ SUMMARY_METRICS = [
     "best_residence_memory_times",
     "memory_center_residence_memory_times",
     "dynamic_inside_fraction",
+    "dynamic_inside_fraction_time_weighted",
     "dynamic_max_run_memory_times",
     "dynamic_rms_radius_median",
     "dynamic_x_distance_to_radius_median",
@@ -330,7 +335,7 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
                 ("best_residence_memory_times", "Voxel Residence", "memory times", True),
                 ("memory_center_residence_memory_times", "Final Memory-Center Residence", "memory times", True),
                 ("dynamic_max_run_memory_times", "Dynamic Center Max Run", "memory times", True),
-                ("dynamic_inside_fraction", "Dynamic Inside Fraction", "fraction", False),
+                ("dynamic_inside_fraction_time_weighted", "Dynamic Inside Fraction", "time-weighted fraction", False),
             ],
         ),
     ]
@@ -410,7 +415,7 @@ def write_report(
         "",
         "## Median Summary",
         "",
-        "| A_att | condition | dyn radius | dyn drift/radius/memtime | dyn inside | dyn max run | final-center residence | voxel residence | memory dim | memory roundness |",
+        "| A_att | condition | dyn radius | dyn drift/radius/memtime | dyn inside weighted | dyn max run | final-center residence | voxel residence | memory dim | memory roundness |",
         "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary:
@@ -422,7 +427,7 @@ def write_report(
                     f"`{row['condition']}`",
                     _fmt(row.get("dynamic_rms_radius_median_median")),
                     _fmt(row.get("dynamic_center_drift_radius_fraction_per_memory_time_median")),
-                    _fmt(row.get("dynamic_inside_fraction_median")),
+                    _fmt(row.get("dynamic_inside_fraction_time_weighted_median")),
                     _fmt(row.get("dynamic_max_run_memory_times_median")),
                     _fmt(row.get("memory_center_residence_memory_times_median")),
                     _fmt(row.get("best_residence_memory_times_median")),

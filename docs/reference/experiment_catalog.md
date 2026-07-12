@@ -175,7 +175,9 @@ ist `--trace-every 100000` ein praktikabler Startpunkt: etwa 3000 Tracepunkte
 pro Case, also genug fuer Drift/Residence ohne riesige JSONs. Degenerierte
 Nullradius-Traces zaehlen nicht als co-moving Residence-Evidenz.
 
-Trace-Validation 2026-07-12: Der `N=3M`-Pilot fuer `A_att=20/35`, Seeds `1..5`,
+Trace-Validation 2026-07-12: `--trace-points N --trace-spacing log` erzeugt
+explizite logarithmische Trace-Zeitpunkte; bei nichtuniformen Traces werden
+co-moving Run-Dauern zeitgewichtet. Der `N=3M`-Pilot fuer `A_att=20/35`, Seeds `1..5`,
 zeigt, dass `dynamic_inside_fraction` und `dynamic_max_run` nicht als alleinige
 Knotenkriterien taugen. `eta_zero` bleibt im eigenen grossen Memory-Ball
 ebenfalls innen. Fuer Paper I sind daher dynamischer RMS-Radius,
@@ -183,6 +185,8 @@ radiusnormalisierte Center-Drift pro Memory-Zeit und Memory-Shape die
 relevanten co-moving Metriken. Aggregation/Plots:
 `experiments/current/dynamics/dynamic_center_trace_report.py`; Report:
 `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
+Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
+`--trace-spacing log`, keine neue Parameterachse.
 
 ## Epsilon-Step-Balance
 
