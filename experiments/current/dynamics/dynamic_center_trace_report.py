@@ -29,6 +29,9 @@ ROOT = _repo_root()
 
 sys.path.insert(0, str(ROOT / "src"))
 
+from emergenz_knoten import SimulationConfig  # noqa: E402
+import long_run_metastability as metastability_run  # noqa: E402
+
 
 SOURCE_RE = re.compile(
     r"dynamic_center_trace_q3_Aatt_(?P<a_att>[\dp]+)_N(?P<n>[\dMk]+)_seed"
@@ -80,6 +83,12 @@ def _fmt(value: float | int | None, digits: int = 3) -> str:
     else:
         text = f"{number:.{digits}f}"
     return f"`{text}`"
+
+
+def _fmt_int(value: float | int | None) -> str:
+    if value is None or not math.isfinite(float(value)):
+        return "`n/a`"
+    return f"`{int(round(float(value)))}`"
 
 
 def _median(values: Iterable[float | None]) -> float | None:
@@ -164,6 +173,46 @@ def _rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def _ensure_trend_payload(payload: dict[str, Any]) -> None:
+    diagnostics = payload.get("diagnostics")
+    if not isinstance(diagnostics, dict):
+        return
+    dynamic = diagnostics.get("dynamic_center_trace")
+    if not isinstance(dynamic, dict) or isinstance(dynamic.get("trend"), dict):
+        return
+    spin = dynamic.get("spin_proxy")
+    trace = dynamic.get("trace")
+    config_payload = payload.get("config")
+    if not isinstance(spin, dict) or not isinstance(trace, dict) or not isinstance(config_payload, dict):
+        return
+    try:
+        config = SimulationConfig(**config_payload)
+        sample_count = int(spin["sample_count"])
+        steps = np.asarray(trace.get("steps", []), dtype=np.int64)
+        trend_stop = len(steps) - sample_count
+        if sample_count < 3 or trend_stop <= 0:
+            return
+        indices = np.append(np.arange(trend_stop), len(steps) - 1)
+        result = {
+            "trace_steps": steps[indices],
+            "trace_centers": np.asarray(trace.get("centers", []), dtype=float)[indices],
+            "trace_positions": np.asarray(trace.get("positions", []), dtype=float)[indices],
+            "trace_mean_radii": np.asarray(trace.get("mean_radii", []), dtype=float)[indices],
+            "trace_rms_radii": np.asarray(trace.get("rms_radii", []), dtype=float)[indices],
+            "trace_x_distances": np.asarray(trace.get("x_distances", []), dtype=float)[indices],
+        }
+    except (IndexError, KeyError, TypeError, ValueError):
+        return
+    trend = metastability_run._dynamic_center_trace_diagnostics(
+        result,
+        config=config,
+        trace_every=0,
+        include_trace=False,
+    )
+    if isinstance(trend, dict):
+        dynamic["trend"] = trend
+
+
 def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
     cases: list[CaseRecord] = []
     for source_dir in source_dirs:
@@ -175,6 +224,7 @@ def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
         steps = _parse_steps(match.group("n"))
         for path in sorted(directory.glob("case_*.json")):
             payload = json.loads(path.read_text(encoding="utf-8"))
+            _ensure_trend_payload(payload)
             cases.append(
                 CaseRecord(
                     a_att=a_att,
@@ -193,6 +243,9 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
     dynamic = diagnostics.get("dynamic_center_trace", {})
     if not isinstance(dynamic, dict):
         dynamic = {}
+    trend = dynamic.get("trend", dynamic)
+    if not isinstance(trend, dict):
+        trend = dynamic
     spin = dynamic.get("spin_proxy", {})
     if not isinstance(spin, dict):
         spin = {}
@@ -211,24 +264,31 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
             diagnostics,
             ("center_residence", "memory_center", "primary_max_run_memory_times"),
         ),
-        "dynamic_trace_count": _diagnostic_value(dynamic, ("n_traces",)),
-        "dynamic_inside_fraction": _diagnostic_value(dynamic, ("comoving_inside_fraction",)),
+        "dynamic_trace_count": _diagnostic_value(trend, ("n_traces",)),
+        "dynamic_inside_fraction": _diagnostic_value(trend, ("comoving_inside_fraction",)),
         "dynamic_inside_fraction_time_weighted": (
-            _diagnostic_value(dynamic, ("comoving_inside_fraction_time_weighted",))
-            or _diagnostic_value(dynamic, ("comoving_inside_fraction",))
+            _diagnostic_value(trend, ("comoving_inside_fraction_time_weighted",))
+            or _diagnostic_value(trend, ("comoving_inside_fraction",))
         ),
-        "dynamic_max_run_memory_times": _diagnostic_value(dynamic, ("max_run_memory_times",)),
-        "dynamic_rms_radius_median": _diagnostic_value(dynamic, ("rms_radius_median",)),
+        "dynamic_max_run_memory_times": _diagnostic_value(trend, ("max_run_memory_times",)),
+        "dynamic_rms_radius_median": _diagnostic_value(trend, ("rms_radius_median",)),
         "dynamic_x_distance_to_radius_median": _diagnostic_value(
-            dynamic, ("x_distance_to_rms_radius_median",)
+            trend, ("x_distance_to_rms_radius_median",)
         ),
         "dynamic_center_drift_per_memory_time": _diagnostic_value(
-            dynamic, ("center_drift_per_memory_time_median",)
+            trend, ("center_drift_per_memory_time_median",)
         ),
         "dynamic_center_drift_radius_fraction_per_memory_time": _diagnostic_value(
-            dynamic, ("center_drift_radius_fraction_per_memory_time_median",)
+            trend, ("center_drift_radius_fraction_per_memory_time_median",)
         ),
         "spin_valid_fraction": _diagnostic_value(spin, ("valid_fraction",)),
+        "spin_sample_count": _diagnostic_value(spin, ("sample_count",)),
+        "spin_sample_interval_memory_times": _diagnostic_value(
+            spin, ("sample_interval_memory_times",)
+        ),
+        "spin_window_span_memory_times": _diagnostic_value(
+            spin, ("window_span_memory_times",)
+        ),
         "spin_amplitude_median": _diagnostic_value(spin, ("amplitude_median",)),
         "spin_amplitude_cv": _diagnostic_value(spin, ("amplitude_cv",)),
         "spin_angular_speed_median": _diagnostic_value(spin, ("angular_speed_median",)),
@@ -255,6 +315,9 @@ SUMMARY_METRICS = [
     "dynamic_center_drift_per_memory_time",
     "dynamic_center_drift_radius_fraction_per_memory_time",
     "spin_valid_fraction",
+    "spin_sample_count",
+    "spin_sample_interval_memory_times",
+    "spin_window_span_memory_times",
     "spin_amplitude_median",
     "spin_amplitude_cv",
     "spin_angular_speed_median",
@@ -378,13 +441,30 @@ def _case_alpha(case: CaseRecord) -> float:
 
 def _spin_trace_from_case(case: CaseRecord) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     trace = _trace(case)
+    diagnostics = case.payload.get("diagnostics", {})
+    dynamic = diagnostics.get("dynamic_center_trace", {}) if isinstance(diagnostics, dict) else {}
+    spin = dynamic.get("spin_proxy", {}) if isinstance(dynamic, dict) else {}
+    sample_count_value = spin.get("sample_count") if isinstance(spin, dict) else None
+    try:
+        sample_count = int(sample_count_value)
+    except (TypeError, ValueError):
+        sample_count = 0
     steps = np.asarray(trace.get("steps", []), dtype=float)
     centers = np.asarray(trace.get("centers", []), dtype=float)
     positions = np.asarray(trace.get("positions", []), dtype=float)
     radii = np.asarray(trace.get("rms_radii", []), dtype=float)
-    if steps.size < 2 or centers.shape != positions.shape or centers.ndim != 2:
+    if (
+        sample_count < 3
+        or steps.size < sample_count
+        or centers.shape != positions.shape
+        or centers.ndim != 2
+    ):
         empty = np.empty(0, dtype=float)
         return empty, empty, empty
+    steps = steps[-sample_count:]
+    centers = centers[-sample_count:]
+    positions = positions[-sample_count:]
+    radii = radii[-sample_count:]
     alpha = _case_alpha(case)
     gaps = np.diff(steps) * alpha
     valid_gap = np.isfinite(gaps) & (gaps > 0.0)
@@ -416,21 +496,24 @@ def _spin_trace_from_case(case: CaseRecord) -> tuple[np.ndarray, np.ndarray, np.
     angular_speed[valid_radius] = amplitude[valid_radius] / (radius_mid[valid_radius] ** 2)
     return times, amplitude, angular_speed
 
-def _representative_cases(cases: list[CaseRecord]) -> list[CaseRecord]:
-    selected: list[CaseRecord] = []
+
+def _trace_case_groups(cases: list[CaseRecord]) -> list[tuple[float, str, list[CaseRecord]]]:
+    groups: list[tuple[float, str, list[CaseRecord]]] = []
     for a_att in sorted({case.a_att for case in cases}):
         for condition in ["baseline", "eta_zero"]:
-            options = [
-                case
-                for case in cases
-                if float(case.a_att) == float(a_att)
-                and case.condition == condition
-                and case.seed == 1
-                and _trace(case)
-            ]
+            options = sorted(
+                [
+                    case
+                    for case in cases
+                    if float(case.a_att) == float(a_att)
+                    and case.condition == condition
+                    and _trace(case)
+                ],
+                key=lambda case: case.seed,
+            )
             if options:
-                selected.append(options[0])
-    return selected
+                groups.append((a_att, condition, options))
+    return groups
 
 
 def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir: Path) -> list[Path]:
@@ -496,40 +579,85 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
         plt.close(fig)
         outputs.append(path)
 
-    representatives = _representative_cases(cases)
-    if representatives:
-        fig, axes = plt.subplots(3, len(representatives), figsize=(4.2 * len(representatives), 8.4), squeeze=False)
-        for col, case in enumerate(representatives):
-            trace = _trace(case)
-            alpha = _case_alpha(case)
-            steps = [float(value) * alpha for value in trace.get("steps", [])]
-            radii = [float(value) for value in trace.get("rms_radii", [])]
-            xdist = [float(value) for value in trace.get("x_distances", [])]
-            ratio = [
-                (dist / radius) if radius > 0.0 else math.nan
-                for dist, radius in zip(xdist, radii, strict=False)
-            ]
-            axes[0, col].plot(steps, radii, color="#2563eb" if case.condition == "baseline" else "#64748b")
-            axes[0, col].set_title(f"A_att={case.a_att:g}, {case.condition}, seed {case.seed}")
+    trace_groups = _trace_case_groups(cases)
+    if trace_groups:
+        fig, axes = plt.subplots(
+            3,
+            len(trace_groups),
+            figsize=(4.4 * len(trace_groups), 8.4),
+            squeeze=False,
+        )
+        seeds = sorted({case.seed for _, _, group in trace_groups for case in group})
+        seed_colors = {
+            seed: plt.get_cmap("tab10")((index % 10) / 10.0)
+            for index, seed in enumerate(seeds)
+        }
+        for col, (a_att, condition, group) in enumerate(trace_groups):
+            plotted_spin = False
+            for case in group:
+                trace = _trace(case)
+                steps = np.asarray(trace.get("steps", []), dtype=float)
+                radii = np.asarray(trace.get("rms_radii", []), dtype=float)
+                xdist = np.asarray(trace.get("x_distances", []), dtype=float)
+                valid_trace = (
+                    np.isfinite(steps)
+                    & (steps > 0.0)
+                    & np.isfinite(radii)
+                    & (radii > 0.0)
+                )
+                ratio = np.full(radii.shape, np.nan, dtype=float)
+                ratio[valid_trace] = xdist[valid_trace] / radii[valid_trace]
+                color = seed_colors[case.seed]
+                axes[0, col].plot(
+                    steps[valid_trace],
+                    radii[valid_trace],
+                    color=color,
+                    linewidth=1.35,
+                    alpha=0.9,
+                    label=f"seed {case.seed}",
+                )
+                axes[1, col].plot(
+                    steps[valid_trace],
+                    ratio[valid_trace],
+                    color=color,
+                    linewidth=1.35,
+                    alpha=0.9,
+                )
+                spin_times, _, spin_omega = _spin_trace_from_case(case)
+                spin_steps = spin_times / _case_alpha(case)
+                finite_spin = (
+                    np.isfinite(spin_steps)
+                    & (spin_steps > 0.0)
+                    & np.isfinite(spin_omega)
+                    & (spin_omega > 0.0)
+                )
+                if np.any(finite_spin):
+                    axes[2, col].plot(
+                        spin_steps[finite_spin],
+                        spin_omega[finite_spin],
+                        color=color,
+                        linewidth=1.35,
+                        alpha=0.9,
+                    )
+                    plotted_spin = True
+            axes[0, col].set_title(f"A_att={a_att:g}, {condition}")
             axes[0, col].set_ylabel("RMS radius")
-            axes[0, col].grid(True, alpha=0.25)
-            axes[1, col].plot(steps, ratio, color="#0f766e")
             axes[1, col].axhline(2.0, color="#dc2626", linestyle="--", linewidth=1.0)
             axes[1, col].set_ylabel("x distance / RMS radius")
-            axes[1, col].grid(True, alpha=0.25)
-            spin_times, _, spin_omega = _spin_trace_from_case(case)
-            finite_spin = np.isfinite(spin_times) & np.isfinite(spin_omega) & (spin_omega > 0.0)
-            if np.any(finite_spin):
-                axes[2, col].plot(spin_times[finite_spin], spin_omega[finite_spin], color="#7c3aed")
-                axes[2, col].set_yscale("log")
-            else:
+            if not plotted_spin:
                 axes[2, col].text(0.5, 0.5, "n/a", ha="center", va="center", transform=axes[2, col].transAxes)
-            axes[2, col].set_xlabel("memory times")
+            axes[2, col].set_yscale("log")
+            axes[2, col].set_xlabel("updates N")
             axes[2, col].set_ylabel("spin |L| / R^2")
-            axes[2, col].grid(True, which="both", alpha=0.25)
-        fig.suptitle("Representative dynamic trace, seed 1", y=1.02)
+            for row in range(3):
+                axes[row, col].set_xscale("log")
+                axes[row, col].grid(True, which="both", alpha=0.25)
+        handles, labels = axes[0, 0].get_legend_handles_labels()
+        if handles:
+            fig.legend(handles, labels, loc="upper center", ncol=len(handles), frameon=False)
+        fig.suptitle("Seedwise dynamic traces on logarithmic update time", y=1.02)
         fig.tight_layout()
-        path = output_dir / "dynamic_center_trace_q3_seed1_timeseries_2026-07-12.png"
+        path = output_dir / "dynamic_center_trace_q3_seedwise_timeseries_2026-07-12.png"
         fig.savefig(path, dpi=220, bbox_inches="tight")
         plt.close(fig)
         outputs.append(path)
@@ -596,8 +724,8 @@ def write_report(
             "",
             "## Spin-Proxy Median Summary",
             "",
-            "| A_att | condition | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |",
-            "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+            "| A_att | condition | samples | dt_mem | window_mem | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |",
+            "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
     for row in summary:
@@ -607,6 +735,9 @@ def write_report(
                 [
                     f"`{float(row['a_att']):g}`",
                     f"`{row['condition']}`",
+                    _fmt_int(row.get("spin_sample_count_median")),
+                    _fmt(row.get("spin_sample_interval_memory_times_median")),
+                    _fmt(row.get("spin_window_span_memory_times_median")),
                     _fmt(row.get("spin_valid_fraction_median")),
                     _fmt(row.get("spin_amplitude_median_median")),
                     _fmt(row.get("spin_angular_speed_median_median")),
@@ -622,6 +753,16 @@ def write_report(
     lines.extend(
         [
             "",
+            "## Current Finding",
+            "",
+            "The cadence-separated analysis preserves the earlier logarithmic-trend",
+            "compactness and drift values. The uniformly sampled end window resolves",
+            "the spin direction at one-update cadence: median dephasing equals the",
+            "sampling interval and axis polarization remains near zero in active and",
+            "`eta_zero` cases. The larger active angular-speed proxy occurs together",
+            "with a much smaller radius, while raw spin amplitude is larger in the",
+            "control. This is not evidence for a persistent scalar spin mode.",
+            "",
             "## Reading",
             "",
             "The dynamic-center diagnostics remain the primary knot observables:",
@@ -632,6 +773,10 @@ def write_report(
             "",
             "Interpretation rules for this stage:",
             "",
+            "- The time-series figure overlays every seed per condition on a logarithmic",
+            "  update axis `N`; any undefined `N=0` point is omitted from the plot only.",
+            "- Spin observables use only the uniformly sampled end window. Logarithmic",
+            "  checkpoints alone define the reported dynamic-center trend KPIs.",
             "- `spin_amplitude_median` measures the typical co-moving angular momentum scale.",
             "- `spin_angular_speed_median` divides that amplitude by the squared memory radius.",
             "- `spin_axis_polarization` near `1` means a stable oriented axis; near `0` means",
@@ -647,12 +792,11 @@ def write_report(
             "",
             "## Decision",
             "",
-            "Use this trace layer to decide whether the next expensive run has stable",
-            "co-moving compactness and stable or dephasing spin proxies. If the spin",
-            "metrics are noisy but the compactness/drift metrics remain separated from",
-            "`eta_zero`, continue the scalar-knot track. If spin-axis persistence appears",
-            "only in active cases and survives longer N, it becomes a candidate input for",
-            "a separate ModeScore or vector-memory test, not a KnotScore replacement.",
+            "Proceed to the targeted `N=30M` scalar-knot trace for `A_att=20/35`.",
+            "Acceptance remains based on logarithmic-trend radius, radius-normalized",
+            "center drift, Memory-Shape, and seedwise separation from `eta_zero`.",
+            "The terminal spin window remains a recorded negative-control observable;",
+            "it is not a Paper-I gate and is not promoted to a spin or photon claim.",
             "",
             "## Figures",
             "",

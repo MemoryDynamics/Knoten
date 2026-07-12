@@ -154,16 +154,22 @@ Naechster operativer Schritt:
     diskriminierend, weil `eta_zero` im eigenen grossen Memory-Ball ebenfalls
     innen bleibt. Trennend sind dynamischer RMS-Radius, radiusnormalisierte
     Center-Drift und Memory-Shape.
-15. Abgeschlossen: Spin-Proxy-Trace fuer `N=1M`, `A_att=20/35`, Seeds `1..5`,
-    gegen `eta_zero`. Der Bivector-Proxy relativ zum dynamischen Memory-Center
-    ist technisch validiert, trennt aber in diesem Pre-Run nicht als stabile
-    Achse oder quantisierte Spin-Amplitude. Report:
+15. Abgeschlossen: cadence-korrigierter Hybrid-Trace fuer `N=1M`,
+    `A_att=20/35`, Seeds `1..5`, gegen `eta_zero`. Rund 100 logarithmische
+    Punkte definieren Trend-KPIs; ein gleichmaessiges Endfenster mit 10,001
+    Punkten (`dt_mem=0.01`, 100 Memory-Zeiten) definiert lokale Spin-KPIs.
+    Radius und Trend-Drift trennen robust. Die Spinachse dephasiert dagegen in
+    allen Faellen nach einem Update (`axis_polarization ~= 0.01`): negativer
+    skalarer Modenbefund, kein Paper-I-Blocker. Report:
     `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
-16. Naechster Paper-I-Schritt: gezielter `N=30M`-Trace fuer `A_att=20/35` mit
-    logarithmischem Trace-Zeitplan (`--trace-points 100 --trace-spacing log`),
-    keine neue Parameterachse. Ziel ist Stabilitaet von dynamischem Radius,
-    Drift/Radius/Memory-Zeit, Memory-Shape und Spin-Proxy-Dephasierung gegen
-    `eta_zero` ueber laengere Trajektorien.
+16. Naechster Paper-I-Schritt: gezielter `N=30M`-Hybrid-Trace fuer
+    `A_att=20/35`, keine neue Parameterachse. Zeitplan: `--trace-points 100`,
+    `--trace-spacing log`, `--trace-every 1` und
+    `--trace-window-memory-times 100`.
+    Akzeptanz basiert auf Trend-Radius, Trend-Drift/Radius/Memory-Zeit,
+    Memory-Shape und Seedtrennung gegen `eta_zero`. Spin bleibt dokumentierte
+    Negativkontrolle und wird nicht als ModeScore- oder Teilchenspin-Evidenz
+    gewertet.
 17. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter

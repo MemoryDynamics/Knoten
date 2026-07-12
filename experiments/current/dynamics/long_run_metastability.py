@@ -89,9 +89,11 @@ def _trace_targets(
     trace_every: int,
     trace_points: int,
     trace_spacing: str,
+    trace_window_updates: int = 0,
 ) -> np.ndarray:
+    start = max(1, burn_in)
+    targets = np.empty(0, dtype=np.int64)
     if trace_points > 0:
-        start = max(1, burn_in)
         if trace_points == 1:
             raw = np.asarray([steps], dtype=float)
         elif trace_spacing == "linear":
@@ -104,15 +106,24 @@ def _trace_targets(
         targets = targets[(targets >= start) & (targets <= steps)]
         if len(targets) == 0 or targets[-1] != steps:
             targets = np.unique(np.append(targets, np.int64(steps)))
-        return targets.astype(np.int64)
 
     if trace_every <= 0:
-        return np.empty(0, dtype=np.int64)
-    start = max(1, burn_in)
+        return targets.astype(np.int64)
+    if trace_window_updates > 0:
+        requested_intervals = max(2, int(trace_window_updates // trace_every))
+        available_intervals = max(0, int((steps - start) // trace_every))
+        interval_count = min(requested_intervals, available_intervals)
+        fixed_start = steps - interval_count * trace_every
+        fixed = np.arange(fixed_start, steps + 1, trace_every, dtype=np.int64)
+        earlier = targets[targets < fixed_start]
+        return np.unique(np.concatenate((earlier, fixed))).astype(np.int64)
+    if trace_points > 0:
+        return targets.astype(np.int64)
     first = int(math.ceil(start / trace_every) * trace_every)
     if first > steps:
         return np.empty(0, dtype=np.int64)
     return np.arange(first, steps + 1, trace_every, dtype=np.int64)
+
 
 def _git_output(args: list[str]) -> str:
     try:
@@ -606,6 +617,24 @@ def _weighted_run_sums(mask: np.ndarray, weights: np.ndarray) -> np.ndarray:
     return np.asarray(runs, dtype=float)
 
 
+def _regular_tail_slice(
+    steps: np.ndarray,
+    *,
+    expected_gap: int,
+    min_points: int = 3,
+) -> slice | None:
+    arr = np.asarray(steps, dtype=np.int64)
+    if arr.ndim != 1 or arr.size < min_points or expected_gap <= 0:
+        return None
+    gaps = np.diff(arr)
+    start = len(arr) - 1
+    while start > 0 and int(gaps[start - 1]) == int(expected_gap):
+        start -= 1
+    if len(arr) - start < min_points:
+        return None
+    return slice(start, len(arr))
+
+
 def _bivector_components(rel: np.ndarray, velocity: np.ndarray) -> np.ndarray:
     if rel.ndim != 2 or velocity.ndim != 2 or rel.shape != velocity.shape:
         return np.empty((0, 0), dtype=float)
@@ -674,12 +703,17 @@ def _spin_proxy_diagnostics(
     positions: np.ndarray,
     rms_radii: np.ndarray,
     alpha: float,
-    max_lag: int = 20,
+    max_lag: int = 1_000,
 ) -> dict[str, object] | None:
     if positions.shape != centers.shape or len(steps) != len(centers) or len(steps) < 3:
         return None
     gaps = np.diff(steps).astype(float)
     memory_gaps = gaps * float(alpha)
+    finite_memory_gaps = memory_gaps[np.isfinite(memory_gaps) & (memory_gaps > 0.0)]
+    sample_interval_memory_times = (
+        float(np.median(finite_memory_gaps)) if len(finite_memory_gaps) else None
+    )
+    window_span_memory_times = float((steps[-1] - steps[0]) * float(alpha))
     valid_gap = np.isfinite(memory_gaps) & (memory_gaps > 0.0)
     if not np.any(valid_gap):
         return None
@@ -700,6 +734,9 @@ def _spin_proxy_diagnostics(
         return {
             "valid_fraction": 0.0,
             "component_count": int(spin_components.shape[1]),
+            "sample_count": int(len(steps)),
+            "sample_interval_memory_times": _finite_float(sample_interval_memory_times),
+            "window_span_memory_times": _finite_float(window_span_memory_times),
             "amplitude_median": 0.0,
             "amplitude_q25": 0.0,
             "amplitude_q75": 0.0,
@@ -736,6 +773,9 @@ def _spin_proxy_diagnostics(
     return {
         "valid_fraction": _finite_float(float(np.mean(valid_amplitude))),
         "component_count": int(spin_components.shape[1]),
+        "sample_count": int(len(steps)),
+        "sample_interval_memory_times": _finite_float(sample_interval_memory_times),
+        "window_span_memory_times": _finite_float(window_span_memory_times),
         "amplitude_median": _finite_float(float(np.median(amplitude_valid))),
         "amplitude_q25": _finite_percentile(amplitude_valid, 25.0),
         "amplitude_q75": _finite_percentile(amplitude_valid, 75.0),
@@ -867,16 +907,39 @@ def _dynamic_center_trace_diagnostics(
         "center_net_displacement": _finite_float(center_net_displacement),
         "center_path_to_chord": _finite_float(center_path_to_chord),
     }
-    if has_positions:
+    spin_slice = _regular_tail_slice(steps, expected_gap=trace_every)
+    if has_positions and spin_slice is not None:
         spin_proxy = _spin_proxy_diagnostics(
-            steps=steps,
-            centers=centers,
-            positions=positions,
-            rms_radii=rms_radii,
+            steps=steps[spin_slice],
+            centers=centers[spin_slice],
+            positions=positions[spin_slice],
+            rms_radii=rms_radii[spin_slice],
             alpha=config.alpha,
         )
         if spin_proxy is not None:
             out["spin_proxy"] = spin_proxy
+    if spin_slice is not None and spin_slice.start is not None and spin_slice.start > 0:
+        trend_indices = np.append(np.arange(spin_slice.start), len(steps) - 1)
+        trend_result = {
+            "trace_steps": steps[trend_indices],
+            "trace_centers": centers[trend_indices],
+            "trace_positions": (
+                positions[trend_indices] if has_positions else np.empty((0, config.dim))
+            ),
+            "trace_mean_radii": mean_radii[trend_indices],
+            "trace_rms_radii": rms_radii[trend_indices],
+            "trace_x_distances": x_distances[trend_indices],
+        }
+        trend = _dynamic_center_trace_diagnostics(
+            trend_result,
+            config=config,
+            trace_every=0,
+            primary_radius_factor=primary_radius_factor,
+            include_trace=False,
+            max_trace_points=max_trace_points,
+        )
+        if trend is not None:
+            out["trend"] = trend
     if include_trace:
         stride = max(1, int(math.ceil(len(steps) / max_trace_points)))
         sl = slice(None, None, stride)
@@ -1161,7 +1224,9 @@ def _dynamic_center_field(diagnostics: dict[str, object], field: str) -> float |
     payload = diagnostics.get("dynamic_center_trace")
     if not isinstance(payload, dict):
         return None
-    value = payload.get(field)
+    trend = payload.get("trend")
+    source = trend if isinstance(trend, dict) else payload
+    value = source.get(field)
     if isinstance(value, int):
         return value
     if isinstance(value, float) and math.isfinite(value):
@@ -1325,6 +1390,15 @@ def parse_args() -> argparse.Namespace:
         help="spacing for --trace-points",
     )
     parser.add_argument(
+        "--trace-window-memory-times",
+        type=float,
+        default=0.0,
+        help=(
+            "append a uniformly sampled end window of this many memory times; "
+            "requires --trace-every and enables local spin/dephasing diagnostics"
+        ),
+    )
+    parser.add_argument(
         "--voxel-sizes",
         type=_parse_float_list,
         default=_parse_float_list("0.5,1.0,2.0"),
@@ -1357,6 +1431,13 @@ def main() -> None:
         raise SystemExit("--trace-every must be non-negative")
     if args.trace_points < 0:
         raise SystemExit("--trace-points must be non-negative")
+    if (
+        not math.isfinite(args.trace_window_memory_times)
+        or args.trace_window_memory_times < 0.0
+    ):
+        raise SystemExit("--trace-window-memory-times must be non-negative")
+    if args.trace_window_memory_times > 0.0 and args.trace_every <= 0:
+        raise SystemExit("--trace-window-memory-times requires positive --trace-every")
     if args.max_memory < 1:
         raise SystemExit("--max-memory must be positive")
     if not 0.0 < args.alpha <= 1.0:
@@ -1397,12 +1478,14 @@ def main() -> None:
         sample_every=args.sample_every,
     )
 
+    trace_window_updates = int(math.ceil(args.trace_window_memory_times / base_config.alpha))
     trace_targets = _trace_targets(
         steps=base_config.steps,
         burn_in=base_config.burn_in,
         trace_every=args.trace_every,
         trace_points=args.trace_points,
         trace_spacing=args.trace_spacing,
+        trace_window_updates=trace_window_updates,
     )
 
     run_started = _utc_now()
@@ -1449,6 +1532,8 @@ def main() -> None:
             "trace_every": args.trace_every,
             "trace_points": args.trace_points,
             "trace_spacing": args.trace_spacing,
+            "trace_window_memory_times": args.trace_window_memory_times,
+            "trace_window_updates": trace_window_updates,
             "trace_target_count": int(len(trace_targets)),
             "trace_first_step": int(trace_targets[0]) if len(trace_targets) else None,
             "trace_last_step": int(trace_targets[-1]) if len(trace_targets) else None,

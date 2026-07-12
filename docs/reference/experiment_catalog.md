@@ -186,16 +186,19 @@ relevanten co-moving Metriken. Aggregation/Plots:
 `experiments/current/dynamics/dynamic_center_trace_report.py`; Report:
 `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
 
-Spin-Proxy-Erweiterung 2026-07-12: Die Trace-Payload enthaelt nun auch
-`trace.positions`; daraus wird der kontinuierliche Bivector-Proxy
-`L=(x-c_mem) wedge dx/dt_mem` berechnet. Felder: `spin_proxy.amplitude_median`,
-`angular_speed_median`, `axis_polarization`, `direction_autocorrelation` und
-`direction_dephasing_memory_times`. Der `N=1M`-Pre-Run zeigt keine belastbare
-Spinachse; `axis_polarization` bleibt niedrig und `eta_zero` hat groessere rohe
-Amplitude. Report:
+Hybrid-Trace-/Spin-Proxy-Erweiterung 2026-07-12: `--trace-points` plus
+`--trace-spacing log` definiert die langfristige Trendspur. Optional fuegt
+`--trace-every` zusammen mit `--trace-window-memory-times` ein gleichmaessig
+abgetastetes Endfenster an. Nur dieses Fenster darf fuer lokale Geschwindigkeits-, Bivector- und Dephasierungswerte verwendet werden; logarithmische Differenzen
+sind dafuer nicht zulaessig. Die Trace-Payload enthaelt `trace.positions`, und
+`spin_proxy` dokumentiert `sample_count`, `sample_interval_memory_times`,
+`window_span_memory_times`, Amplitude, Winkelgeschwindigkeit,
+Achsenpolarisation und Dephasierung. Der `N=1M`-Pre-Run findet keine persistente
+Spinachse; der Befund ist eine Negativkontrolle, kein Spin-/Photonclaim. Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
-`--trace-spacing log`, keine neue Parameterachse.
+`--trace-spacing log`, `--trace-every 1`, `--trace-window-memory-times 100`,
+keine neue Parameterachse.
 
 ## Epsilon-Step-Balance
 

@@ -109,7 +109,7 @@ flowchart LR
 flowchart TD
     plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_run_metastability.py"]
     runner --> local["data/processed/long_run_metastability<br/>ignored JSON outputs"]
-    local --> trace_review["dynamic_center_trace_report.py<br/>radius, drift, spin-proxy figures"]
+    local --> trace_review["dynamic_center_trace_report.py<br/>log-trend radius/drift + local spin figures"]
     local --> review["manual review<br/>residence, controls, runtime"]
     trace_review --> report["reports/<br/>committed result report"]
     review --> report["reports/<br/>committed result report"]

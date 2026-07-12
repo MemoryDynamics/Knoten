@@ -40,6 +40,17 @@ def test_trace_targets_support_fixed_and_log_schedules() -> None:
     assert np.all(np.diff(log_targets) > 0)
     assert np.diff(log_targets)[0] < np.diff(log_targets)[-1]
 
+    hybrid = long_run_metastability._trace_targets(
+        steps=100,
+        burn_in=0,
+        trace_every=10,
+        trace_points=5,
+        trace_spacing="log",
+        trace_window_updates=30,
+    )
+    assert hybrid[-4:].tolist() == [70, 80, 90, 100]
+    assert np.all(hybrid[:-4] < 70)
+
 def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     cfg = SimulationConfig(steps=100, eta=0.15, amplitude_att=0.35)
 
@@ -162,6 +173,9 @@ def test_dynamic_center_trace_reports_spin_proxy() -> None:
     assert diagnostics is not None
     spin = diagnostics["spin_proxy"]
     assert spin["component_count"] == 1
+    assert spin["sample_count"] == 5
+    assert np.isclose(spin["sample_interval_memory_times"], 1.0)
+    assert np.isclose(spin["window_span_memory_times"], 4.0)
     assert np.isclose(spin["valid_fraction"], 1.0)
     assert spin["amplitude_median"] > 0.0
     assert spin["angular_speed_median"] > 0.0
@@ -171,6 +185,62 @@ def test_dynamic_center_trace_reports_spin_proxy() -> None:
     assert len(spin["amplitudes"]) == 4
     assert len(spin["angular_speeds"]) == 4
     assert diagnostics["trace"]["positions"][0] == [1.0, 0.0]
+
+def test_hybrid_trace_separates_log_trend_from_local_spin_window() -> None:
+    cfg = SimulationConfig(steps=100, dim=2, alpha=0.1, sample_every=10)
+    steps = np.array([1, 10, 70, 80, 90, 100], dtype=np.int64)
+    result = {
+        "trace_steps": steps,
+        "trace_centers": np.column_stack((0.01 * steps, np.zeros(len(steps)))),
+        "trace_positions": np.column_stack((0.01 * steps + 1.0, np.zeros(len(steps)))),
+        "trace_mean_radii": np.array([1.0, 1.0, 2.0, 2.0, 2.0, 2.0]),
+        "trace_rms_radii": np.array([1.0, 1.0, 2.0, 2.0, 2.0, 2.0]),
+        "trace_x_distances": np.ones(len(steps), dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=10,
+        primary_radius_factor=2.0,
+    )
+
+    assert diagnostics is not None
+    assert diagnostics["spin_proxy"]["sample_count"] == 4
+    assert diagnostics["trend"]["n_traces"] == 3
+    assert diagnostics["trend"]["trace_interval_updates_min"] == 9.0
+    assert diagnostics["trend"]["trace_interval_updates_max"] == 90.0
+    assert diagnostics["rms_radius_median"] == 2.0
+    assert diagnostics["trend"]["rms_radius_median"] == 1.0
+    assert long_run_metastability._dynamic_center_field(
+        {"dynamic_center_trace": diagnostics}, "rms_radius_median"
+    ) == 1.0
+
+
+def test_irregular_log_trace_does_not_report_local_spin_proxy() -> None:
+    cfg = SimulationConfig(steps=100, dim=2, alpha=0.1, sample_every=10)
+    result = {
+        "trace_steps": np.array([1, 3, 10, 30, 100], dtype=np.int64),
+        "trace_centers": np.zeros((5, 2), dtype=float),
+        "trace_positions": np.array(
+            [[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0], [1.0, 0.0]],
+            dtype=float,
+        ),
+        "trace_mean_radii": np.ones(5, dtype=float),
+        "trace_rms_radii": np.ones(5, dtype=float),
+        "trace_x_distances": np.ones(5, dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=0,
+        primary_radius_factor=2.0,
+    )
+
+    assert diagnostics is not None
+    assert "spin_proxy" not in diagnostics
+
 
 def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     samples = np.array(

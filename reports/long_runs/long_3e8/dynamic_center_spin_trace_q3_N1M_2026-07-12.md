@@ -30,12 +30,22 @@ claim of quantized spin.
 
 ## Spin-Proxy Median Summary
 
-| A_att | condition | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |
-| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `20` | `baseline` | `1.000` | `0.001` | `0.172` | `0.119` | `2.453` | `n/a` | `2.033` |
-| `20` | `eta_zero` | `1.000` | `0.037` | `0.313` | `0.089` | `2.453` | `n/a` | `1.328` |
-| `35` | `baseline` | `1.000` | `9.629e-04` | `0.240` | `0.118` | `2.453` | `n/a` | `2.232` |
-| `35` | `eta_zero` | `1.000` | `0.037` | `0.313` | `0.089` | `2.453` | `n/a` | `1.328` |
+| A_att | condition | samples | dt_mem | window_mem | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `20` | `baseline` | `10001` | `0.010` | `100.000` | `1.000` | `0.254` | `33.248` | `0.010` | `0.010` | `n/a` | `0.707` |
+| `20` | `eta_zero` | `10001` | `0.010` | `100.000` | `1.000` | `1.074` | `8.895` | `0.010` | `0.010` | `n/a` | `0.697` |
+| `35` | `baseline` | `10001` | `0.010` | `100.000` | `1.000` | `0.179` | `45.932` | `0.011` | `0.010` | `n/a` | `0.707` |
+| `35` | `eta_zero` | `10001` | `0.010` | `100.000` | `1.000` | `1.074` | `8.895` | `0.010` | `0.010` | `n/a` | `0.697` |
+
+## Current Finding
+
+The cadence-separated analysis preserves the earlier logarithmic-trend
+compactness and drift values. The uniformly sampled end window resolves
+the spin direction at one-update cadence: median dephasing equals the
+sampling interval and axis polarization remains near zero in active and
+`eta_zero` cases. The larger active angular-speed proxy occurs together
+with a much smaller radius, while raw spin amplitude is larger in the
+control. This is not evidence for a persistent scalar spin mode.
 
 ## Reading
 
@@ -47,6 +57,10 @@ memory center.
 
 Interpretation rules for this stage:
 
+- The time-series figure overlays every seed per condition on a logarithmic
+  update axis `N`; any undefined `N=0` point is omitted from the plot only.
+- Spin observables use only the uniformly sampled end window. Logarithmic
+  checkpoints alone define the reported dynamic-center trend KPIs.
 - `spin_amplitude_median` measures the typical co-moving angular momentum scale.
 - `spin_angular_speed_median` divides that amplitude by the squared memory radius.
 - `spin_axis_polarization` near `1` means a stable oriented axis; near `0` means
@@ -62,19 +76,18 @@ calibration, not as particle-spin evidence.
 
 ## Decision
 
-Use this trace layer to decide whether the next expensive run has stable
-co-moving compactness and stable or dephasing spin proxies. If the spin
-metrics are noisy but the compactness/drift metrics remain separated from
-`eta_zero`, continue the scalar-knot track. If spin-axis persistence appears
-only in active cases and survives longer N, it becomes a candidate input for
-a separate ModeScore or vector-memory test, not a KnotScore replacement.
+Proceed to the targeted `N=30M` scalar-knot trace for `A_att=20/35`.
+Acceptance remains based on logarithmic-trend radius, radius-normalized
+center drift, Memory-Shape, and seedwise separation from `eta_zero`.
+The terminal spin window remains a recorded negative-control observable;
+it is not a Paper-I gate and is not promoted to a spin or photon claim.
 
 ## Figures
 
 - `figures/draft/dynamic_center_spin/dynamic_center_trace_q3_compactness_drift_2026-07-12.png`
 - `figures/draft/dynamic_center_spin/dynamic_center_trace_q3_residence_observables_2026-07-12.png`
 - `figures/draft/dynamic_center_spin/dynamic_center_trace_q3_spin_proxy_2026-07-12.png`
-- `figures/draft/dynamic_center_spin/dynamic_center_trace_q3_seed1_timeseries_2026-07-12.png`
+- `figures/draft/dynamic_center_spin/dynamic_center_trace_q3_seedwise_timeseries_2026-07-12.png`
 
 ## Raw Rows
 
