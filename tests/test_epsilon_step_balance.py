@@ -7,7 +7,7 @@ import pytest
 
 
 SCRIPT_PATH = (
-    Path(__file__).resolve().parents[1] / "experiments" / "epsilon_step_balance.py"
+    Path(__file__).resolve().parents[1] / "experiments" / "current" / "dynamics" / "epsilon_step_balance.py"
 )
 SPEC = importlib.util.spec_from_file_location("epsilon_step_balance", SCRIPT_PATH)
 assert SPEC is not None

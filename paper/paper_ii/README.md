@@ -33,12 +33,12 @@ aktuellen Paper-0/Paper-I-Arbeit:
 ## Verwandte Experimente und Figuren
 
 - `experiments/propagation_speed/`
-- `figures/draft/diagram1_retarded_response.pdf`
-- `figures/draft/diagram2_time_of_flight.pdf`
-- `figures/draft/diagram3_ceff_scaling.pdf`
-- `figures/draft/diagram4_light_cone.pdf`
-- `figures/draft/front_*`
-- `figures/draft/diffusive_*`
+- `figures/draft/propagation/diagrams/diagram1_retarded_response.pdf`
+- `figures/draft/propagation/diagrams/diagram2_time_of_flight.pdf`
+- `figures/draft/propagation/diagrams/diagram3_ceff_scaling.pdf`
+- `figures/draft/propagation/diagrams/diagram4_light_cone.pdf`
+- `figures/draft/propagation/front/front_*`
+- `figures/draft/propagation/diffusive/diffusive_*`
 
 ## Haertungsbedarf
 

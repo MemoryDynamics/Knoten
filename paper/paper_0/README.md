@@ -55,7 +55,7 @@ If `latexmk` is unavailable, run `xelatex`, `bibtex`, `xelatex`, `xelatex`.
 The repository-level script
 
 ```powershell
-python experiments/anchor_paper_pipeline.py
+python experiments/current/anchors/anchor_paper_pipeline.py
 ```
 
 runs a small parameter sweep, records reduced augmented-state features, and

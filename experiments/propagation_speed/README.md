@@ -13,7 +13,7 @@ Ziel: Neue Reproduktionen sollten Daten aus `data/raw/` generieren und in
 
 ## Theoretical Mapping
 
-Siehe [docs/THEORETICAL_CONTEXT.md](../../docs/THEORETICAL_CONTEXT.md). Dieser
+Siehe [docs/reference/THEORETICAL_CONTEXT.md](../../docs/reference/THEORETICAL_CONTEXT.md). Dieser
 Ordner testet direkt Aussagen zur "Emergence of space & kinematics" und zur
 operationalen Lichtkegel-Definition, etwa emergentes `c` oder Time-of-Flight.
 

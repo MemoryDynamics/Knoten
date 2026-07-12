@@ -18,12 +18,12 @@ werden, nicht ueber Einzelbilder.
 
 ## Die sieben aktiven Dokumente
 
-1. [Aktueller Stand](current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
-2. [Prioritaeten](project_priorities.md) - Was als Naechstes zu tun ist.
-3. [Theoretical Context](THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
-4. [Repository Map](repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
-5. [Experiment-Katalog](experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
-6. [Paper-Claims](paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
+1. [Aktueller Stand](status/current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
+2. [Prioritaeten](status/project_priorities.md) - Was als Naechstes zu tun ist.
+3. [Theoretical Context](reference/THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
+4. [Repository Map](reference/repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
+5. [Experiment-Katalog](reference/experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
+6. [Paper-Claims](status/paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
 7. Diese Startseite.
 
 Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,

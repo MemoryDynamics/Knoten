@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 
-SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "knot_score_report.py"
+SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "current" / "markov" / "knot_score_report.py"
 SPEC = importlib.util.spec_from_file_location("knot_score_report", SCRIPT_PATH)
 assert SPEC is not None
 knot_score_report = importlib.util.module_from_spec(SPEC)

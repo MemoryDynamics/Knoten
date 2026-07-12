@@ -12,7 +12,15 @@ import time
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]
+def _repo_root() -> Path:
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "pyproject.toml").exists():
+            return parent
+    raise RuntimeError("repository root not found")
+
+
+ROOT = _repo_root()
+
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
@@ -694,7 +702,7 @@ Quelle:
 ## Ziel
 
 Ressourcenschonender Seed-Pilot fuer den archivierten Dimensionsbefund aus
-`experiments/fractal_analysis/Fraktale/resultsN.csv`. Der Lauf nutzt den
+`experiments/fractal_analysis/archive_source/data/n_scaling/resultsN.csv`. Der Lauf nutzt den
 historischen Fraktal-Parametersatz und den historischen Box-Counting-Schaetzer.
 Er ersetzt nicht den `N=60,000,000`-Befund, sondern prueft, ob bei kleineren
 `N` bereits eine trennbare Signatur gegen einfache Negativkontrollen sichtbar

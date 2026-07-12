@@ -8,7 +8,7 @@ import numpy as np
 
 from emergenz_knoten import SimulationConfig, simulate_finite_memory
 
-SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "kernel_shape_probe.py"
+SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "current" / "kernels" / "kernel_shape_probe.py"
 SPEC = importlib.util.spec_from_file_location("kernel_shape_probe", SCRIPT_PATH)
 assert SPEC is not None
 kernel_shape_probe = importlib.util.module_from_spec(SPEC)

@@ -1987,7 +1987,7 @@
   "description": "Small sensitivity analysis for the Paper-0 Markov layer.",
   "git": {
     "revision": "6f9be65f2c4e6105377569fcb43c4b918b4c87fb",
-    "status": "M README.md\n M docs/experiment_catalog.md\n M docs/index.md\n M experiments/README.md\n M mkdocs.yml\n?? docs/repository_map.md\n?? experiments/anchor_sensitivity_analysis.py\n?? reports/anchor_sensitivity_2026-06-29.md"
+    "status": "M README.md\n M docs/reference/experiment_catalog.md\n M docs/index.md\n M experiments/README.md\n M mkdocs.yml\n?? docs/reference/repository_map.md\n?? experiments/current/anchors/anchor_sensitivity_analysis.py\n?? reports/anchors/anchor_sensitivity_2026-06-29.md"
   },
   "parameters": {
     "alpha": [

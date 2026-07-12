@@ -5,54 +5,73 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[0]
+ROOT = Path(__file__).resolve().parent
 
 CATEGORIES = {
+    "anchors": [
+        "current/anchors/anchor_paper_pipeline.py",
+        "current/anchors/anchor_sensitivity_analysis.py",
+    ],
     "dimension_selection": [
-        "DimensionsHeatmap.py",
-        "DimensionsHeatmap2Opt.py",
-        "DimensionsHeatmap3Opt.py",
-        "DimensionsHeatmap4OptGPU.py",
-        "DimensionsHeatmapOpt.py",
-        "plotD.py",
-        "plotDgpu.py",
+        "dimension_selection/heatmaps/DimensionsHeatmap.py",
+        "dimension_selection/heatmaps/DimensionsHeatmap2Opt.py",
+        "dimension_selection/heatmaps/DimensionsHeatmap3Opt.py",
+        "dimension_selection/heatmaps/DimensionsHeatmap4OptGPU.py",
+        "dimension_selection/heatmaps/DimensionsHeatmapOpt.py",
+        "dimension_selection/heatmaps/plotD.py",
+        "dimension_selection/heatmaps/plotDgpu.py",
     ],
-    "propagation_speed": [
-        "PaperII3D_4Plots.py",
-        "PaperII3D_4Plots2.py",
-        "PaperII3D_5Plots1.py",
-        "PaperII3D_5Plots2.py",
-        "ballistic_kernel_probe.py",
-    ],
-    "knot_stability": [
-        "Knoten.py",
-        "Knoten3D.py",
-        "Knoten3D_prism.py",
-        "knot_chi_scan.py",
-    ],
-    "ou_limit": [
-        "EmergenzGravitation.py",
-        "emergenz_2regime.py",
-        "fig_alpha_hbareff.py",
-        "fig_Gamma_alpha.py",
-        "fig_Hlamda_alpha.py",
-        "Oszillationen.py",
-        "OU-Limit.py",
+    "dynamics": [
+        "current/dynamics/long_run_metastability.py",
+        "current/dynamics/epsilon_step_balance.py",
+        "current/dynamics/epsilon_floor_visual_probe.py",
+        "current/dynamics/scalar_n_scaling_report.py",
     ],
     "fractal_analysis": [
-        "analyze_dimension_claim.py",
-        "reproduce_dimension_pilot.py",
-        "Fraktale/FD2.py",
-        "Fraktale/Fraktaldimension.py",
-        "Fraktale/fit_n_plot.py",
-        "Fraktale/results_plot.py",
-        "Fraktale/analyze_peaks.py",
+        "fractal_analysis/analyze_dimension_claim.py",
+        "fractal_analysis/reproduce_dimension_pilot.py",
+        "fractal_analysis/plot_d_alpha_n_intensity.py",
+        "fractal_analysis/archive_source/scripts/FD2.py",
+        "fractal_analysis/archive_source/scripts/Fraktaldimension.py",
+        "fractal_analysis/archive_source/scripts/fit_n_plot.py",
+        "fractal_analysis/archive_source/scripts/analyze_peaks.py",
     ],
-    "LQG": [
-        "orbit_labor.py",
+    "kernels": [
+        "current/kernels/kernel_shape_probe.py",
+        "propagation_speed/ballistic_kernel_probe.py",
+    ],
+    "knot_stability": [
+        "current/knot_stability/Knoten.py",
+        "current/knot_stability/Knoten3D.py",
+        "current/knot_stability/Knoten3D_prism.py",
+        "current/knot_stability/knot_chi_scan.py",
+    ],
+    "markov": [
+        "current/markov/ar_mode_probe.py",
+        "current/markov/knot_score_report.py",
+    ],
+    "memory": [
+        "current/memory/vector_memory_pilot.py",
+    ],
+    "propagation_speed": [
+        "propagation_speed/PaperII3D_4Plots.py",
+        "propagation_speed/PaperII3D_4Plots2.py",
+        "propagation_speed/PaperII3D_5Plots1.py",
+        "propagation_speed/PaperII3D_5Plots2.py",
+        "propagation_speed/ballistic_kernel_probe.py",
     ],
     "reference": [
-        "reference_experiment.py",
+        "current/reference/reference_experiment.py",
+        "current/reference/demo_simulation.py",
+    ],
+    "archive": [
+        "archive/lqg/orbit_labor.py",
+        "archive/ou_limit/EmergenzGravitation.py",
+        "archive/ou_limit/emergenz_2regime.py",
+        "archive/ou_limit/Oszillationen.py",
+        "archive/ou_limit/OU-Limit.py",
+        "archive/legacy/scripts/alpha_plateau_plot.py",
+        "archive/legacy/scripts/debug_diagnostics.py",
     ],
 }
 
@@ -76,14 +95,11 @@ def run_script(category: str, script: str, extra_args: list[str]) -> int:
         raise ValueError(f"Unknown category: {category}")
     if script not in CATEGORIES[category]:
         raise ValueError(f"Unknown script for {category}: {script}")
-    if category == "reference":
-        script_path = ROOT / script
-    else:
-        script_path = ROOT / category / script
+    script_path = ROOT / script
     if not script_path.exists():
         raise FileNotFoundError(f"Script not found: {script_path}")
-    print(f"Running {category}/{script}...")
-    return subprocess.run([sys.executable, str(script_path), *extra_args], cwd=str(script_path.parent)).returncode
+    print(f"Running {script}...")
+    return subprocess.run([sys.executable, str(script_path), *extra_args], cwd=str(ROOT)).returncode
 
 
 def parse_args() -> argparse.Namespace:
@@ -104,7 +120,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--script",
         type=str,
-        help="Script name to run within the selected category.",
+        help="Script path to run within the selected category.",
     )
     parser.add_argument(
         "--args",

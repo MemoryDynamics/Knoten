@@ -12,6 +12,6 @@ klar dokumentierte Ausgabepfade verwenden.
 
 ## Theoretical Mapping
 
-Siehe [docs/THEORETICAL_CONTEXT.md](../../docs/THEORETICAL_CONTEXT.md) — relevant sind
+Siehe [docs/reference/THEORETICAL_CONTEXT.md](../../docs/reference/THEORETICAL_CONTEXT.md) — relevant sind
 die Abschnitte zur "Emergence of space & kinematics" und zur
 "Parameter elimination" (Effektive Dimensionen, zwei-skalige Kernel).

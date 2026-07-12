@@ -7,7 +7,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from experiments.ar_mode_probe import classify_eigenvalues, fit_ar_map
+from experiments.current.markov.ar_mode_probe import classify_eigenvalues, fit_ar_map
 
 
 def test_fit_ar_map_recovers_damped_rotation_modes() -> None:

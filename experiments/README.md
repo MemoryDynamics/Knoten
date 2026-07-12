@@ -10,15 +10,15 @@ Explorationsskripte fuer den Emergenz-Knoten-Kern.
 ```bash
 python experiments/cli.py --list
 python experiments/cli.py reference --list
-python experiments/cli.py reference --script reference_experiment.py
-python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
-python experiments/anchor_paper_pipeline.py
-python experiments/anchor_sensitivity_analysis.py
-python experiments/epsilon_step_balance.py
-python experiments/epsilon_floor_visual_probe.py
-python experiments/kernel_shape_probe.py
-python experiments/long_run_metastability.py --help
-python experiments/knot_score_report.py
+python experiments/cli.py reference --script current/reference/reference_experiment.py
+python experiments/current/reference/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
+python experiments/current/anchors/anchor_paper_pipeline.py
+python experiments/current/anchors/anchor_sensitivity_analysis.py
+python experiments/current/dynamics/epsilon_step_balance.py
+python experiments/current/dynamics/epsilon_floor_visual_probe.py
+python experiments/current/kernels/kernel_shape_probe.py
+python experiments/current/dynamics/long_run_metastability.py --help
+python experiments/current/markov/knot_score_report.py
 ```
 
 ## Struktur
@@ -79,9 +79,9 @@ Reproduktionspfad.
 
 ## Kontext
 
-- `docs/current_status.md`
-- `docs/project_priorities.md`
-- `docs/THEORETICAL_CONTEXT.md`
-- `docs/repository_map.md`
-- `docs/experiment_catalog.md`
-- `docs/paper_claims.md`
+- `docs/status/current_status.md`
+- `docs/status/project_priorities.md`
+- `docs/reference/THEORETICAL_CONTEXT.md`
+- `docs/reference/repository_map.md`
+- `docs/reference/experiment_catalog.md`
+- `docs/status/paper_claims.md`

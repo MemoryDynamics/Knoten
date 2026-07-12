@@ -8,7 +8,7 @@ import numpy as np
 from emergenz_knoten import SimulationConfig
 
 
-SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "long_run_metastability.py"
+SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "current" / "dynamics" / "long_run_metastability.py"
 SPEC = importlib.util.spec_from_file_location("long_run_metastability", SCRIPT_PATH)
 assert SPEC is not None
 long_run_metastability = importlib.util.module_from_spec(SPEC)

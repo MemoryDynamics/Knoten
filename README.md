@@ -106,33 +106,33 @@ python -m mkdocs build --strict
 Aktive Einstiegspunkte:
 
 - [Startseite](docs/index.md)
-- [Aktueller Stand](docs/current_status.md)
-- [Prioritaeten](docs/project_priorities.md)
-- [Theoretical Context](docs/THEORETICAL_CONTEXT.md)
-- [Repository Map](docs/repository_map.md)
-- [Experiment-Katalog](docs/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
-- [Paper-Claims](docs/paper_claims.md)
+- [Aktueller Stand](docs/status/current_status.md)
+- [Prioritaeten](docs/status/project_priorities.md)
+- [Theoretical Context](docs/reference/THEORETICAL_CONTEXT.md)
+- [Repository Map](docs/reference/repository_map.md)
+- [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
+- [Paper-Claims](docs/status/paper_claims.md)
 
 ## Experiment Entry Points
 
 ```bash
 python experiments/cli.py --list
 python experiments/cli.py reference --list
-python experiments/cli.py reference --script reference_experiment.py
+python experiments/cli.py reference --script current/reference/reference_experiment.py
 python experiments/cli.py dimension_selection --list
-python experiments/cli.py dimension_selection --script DimensionsHeatmap.py
+python experiments/cli.py dimension_selection --script dimension_selection/heatmaps/DimensionsHeatmap.py
 ```
 
 Direkter Referenzlauf:
 
 ```bash
-python experiments/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
+python experiments/current/reference/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
 ```
 
 Long-Run-Metastabilitaet:
 
 ```bash
-python experiments/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
+python experiments/current/dynamics/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
 ```
 
 ## Naechste Prioritaeten

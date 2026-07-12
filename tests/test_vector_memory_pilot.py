@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from experiments.vector_memory_pilot import build_report, run_pilot  # noqa: E402
+from experiments.current.memory.vector_memory_pilot import build_report, run_pilot  # noqa: E402
 
 
 def test_vector_memory_pilot_runs_small_case() -> None:

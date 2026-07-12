@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 import json
@@ -13,8 +13,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-ROOT = Path(__file__).resolve().parents[2]
+def _repo_root() -> Path:
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "pyproject.toml").exists():
+            return parent
+    raise RuntimeError("repository root not found")
 
+
+ROOT = _repo_root()
 
 def _metric_value(row: dict[str, Any], metric: str) -> float:
     value = row.get(metric)
@@ -132,7 +138,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("figures/draft/d_alpha_n_intensity_D_occ.png"),
+        default=Path("figures/draft/dimensions/d_alpha_n/d_alpha_n_intensity_D_occ.png"),
     )
     parser.add_argument("--metric", default="D_occ", choices=["D_occ", "D_occ_reference", "D_cov", "D_spec"])
     parser.add_argument("--condition", default="baseline")

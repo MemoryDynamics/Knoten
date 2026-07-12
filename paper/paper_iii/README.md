@@ -106,4 +106,4 @@ single-knot observables
     -> response-rank and phase-lock diagnostics
 ```
 
-See `experiments/synchronization/README.md` for the first experimental protocol.
+See `experiments/current/memory/synchronization/README.md` for the first experimental protocol.

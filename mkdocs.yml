@@ -8,17 +8,16 @@ theme:
 
 nav:
   - Start: index.md
-  - Aktueller Stand: current_status.md
-  - Prioritaeten: project_priorities.md
-  - Theorie: THEORETICAL_CONTEXT.md
-  - Repository Map: repository_map.md
-  - Experimente: experiment_catalog.md
-  - Paper-Claims: paper_claims.md
+  - Aktueller Stand: status/current_status.md
+  - Prioritaeten: status/project_priorities.md
+  - Theorie: reference/THEORETICAL_CONTEXT.md
+  - Repository Map: reference/repository_map.md
+  - Experimente: reference/experiment_catalog.md
+  - Paper-Claims: status/paper_claims.md
 
 not_in_nav: |
+  archive/**
   historical/**
-  ChatGPT Chatverläufe/**
-  EmergenteRaumzeit/**
   overview/**
 
 markdown_extensions:

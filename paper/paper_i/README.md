@@ -70,12 +70,12 @@ Paper I bewusst nicht mehr Teil der Hauptargumentation.
 
 ## Verwandte Projektstellen
 
-- `docs/THEORETICAL_CONTEXT.md`
-- `docs/current_status.md`
-- `docs/paper_claims.md`
-- `reports/paper1_source_audit_2026-06-01.md`
-- `reports/dimension_claim_seed_audit_2026-06-13.md`
-- `experiments/reference_experiment.py`
+- `docs/reference/THEORETICAL_CONTEXT.md`
+- `docs/status/current_status.md`
+- `docs/status/paper_claims.md`
+- `reports/project/papers/paper1_source_audit_2026-06-01.md`
+- `reports/dimensions/reproduction/dimension_claim_seed_audit_2026-06-13.md`
+- `experiments/current/reference/reference_experiment.py`
 - `src/emergenz_knoten/`
 
 ## Build

@@ -10,7 +10,15 @@ from typing import Any
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]
+def _repo_root() -> Path:
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "pyproject.toml").exists():
+            return parent
+    raise RuntimeError("repository root not found")
+
+
+ROOT = _repo_root()
+
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
