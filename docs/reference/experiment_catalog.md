@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-11.
+Stand: 2026-07-12.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -11,6 +11,7 @@ Hardening und Long-Run-Metastabilitaet.
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
+| `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius und Memory-Shape gegen `eta_zero` |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/current/dynamics/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -173,6 +174,15 @@ Run-Laenge in Memory-Zeiten und Center-Drift pro Memory-Zeit. Fuer `N=3e8`
 ist `--trace-every 100000` ein praktikabler Startpunkt: etwa 3000 Tracepunkte
 pro Case, also genug fuer Drift/Residence ohne riesige JSONs. Degenerierte
 Nullradius-Traces zaehlen nicht als co-moving Residence-Evidenz.
+
+Trace-Validation 2026-07-12: Der `N=3M`-Pilot fuer `A_att=20/35`, Seeds `1..5`,
+zeigt, dass `dynamic_inside_fraction` und `dynamic_max_run` nicht als alleinige
+Knotenkriterien taugen. `eta_zero` bleibt im eigenen grossen Memory-Ball
+ebenfalls innen. Fuer Paper I sind daher dynamischer RMS-Radius,
+radiusnormalisierte Center-Drift pro Memory-Zeit und Memory-Shape die
+relevanten co-moving Metriken. Aggregation/Plots:
+`experiments/current/dynamics/dynamic_center_trace_report.py`; Report:
+`reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
 
 ## Epsilon-Step-Balance
 

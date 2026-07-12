@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-11.
+Stand: 2026-07-12.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -147,10 +147,18 @@ Naechster operativer Schritt:
     v0.5-Score und Voxel-Residence tragen; die fixe finale Memory-Center-
     Residence zeigt aber Drift/Rezentrierung. Report:
     `reports/long_runs/long_3e8/long_run_3e8_results_2026-07-11.md`.
-14. In Arbeit: dynamische Center-Trace-Diagnostik implementieren. Ziel ist eine
-    zeitlokale Memory-Center-/Radius-Spur und co-moving Residence, bevor neue
-    Parameterachsen oder weitere Overnight-Laeufe gestartet werden.
-15. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+14. Abgeschlossen: dynamische Center-Trace-Diagnostik als `N=3M`-Pilot fuer
+    `A_att=20/35`, Seeds `1..5`, gegen `eta_zero`. Report:
+    `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
+    Ergebnis: `dynamic_inside_fraction` und `dynamic_max_run` sind allein nicht
+    diskriminierend, weil `eta_zero` im eigenen grossen Memory-Ball ebenfalls
+    innen bleibt. Trennend sind dynamischer RMS-Radius, radiusnormalisierte
+    Center-Drift und Memory-Shape.
+15. Naechster Paper-I-Schritt: gezielter `N=30M`-Trace fuer `A_att=20/35` mit
+    `trace_every=100000`, keine neue Parameterachse. Ziel ist Stabilitaet von
+    dynamischem Radius, Drift/Radius/Memory-Zeit und Memory-Shape gegen
+    `eta_zero` ueber laengere Trajektorien.
+16. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`.
@@ -189,10 +197,12 @@ Prioritaet:
 4. Abgeschlossen: N-Skalierung fuer `A_att=20/35` bis `N=3M`.
    Kompaktheit und Memory-Shape sind schnell stabil; Residence-Gain bleibt
    median unter `2`.
-5. Fuer Paper I: dynamische Center-Trace-Diagnostik bauen. Die `3e8`-Laeufe
-   tragen compact co-moving memory-cloud evidence, aber noch keinen fixen
-   spatial-knot claim. Akzeptiert wird kuenftig ein zeitlokaler Center-Drift-
-   und co-moving-Residence-Befund gegen `eta_zero`.
+5. Fuer Paper I: dynamische Center-Trace-Diagnostik ist implementiert und im
+   `N=3M`-Pilot validiert. Die `3e8`-Laeufe tragen compact co-moving
+   memory-cloud evidence, aber noch keinen fixen spatial-knot claim. Akzeptiert
+   wird kuenftig ein zeitlokaler Befund aus Radius, radiusnormalisierter
+   Center-Drift und Memory-Shape gegen `eta_zero`; reine dynamic-inside
+   Residence ist als Akzeptanzmetric zu schwach.
 6. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
    Der erste Pilot zeigt komplexe AR-Moden bereits im Skalar-Fallback;
    entscheidend ist nun Differenz gegen Nullkraftkontrollen, `lambda_v`-Sensitivitaet und shuffled/randomized-vector.

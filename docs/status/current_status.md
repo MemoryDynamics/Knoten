@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-11.
+Stand: 2026-07-12.
 
 ## Repository
 
@@ -338,6 +338,15 @@ maximale co-moving Runs in Memory-Zeiten und Center-Drift pro Memory-Zeit.
 Damit wird ein Einzelknoten als mitbewegtes Objekt bewertet, nicht als fixes
 absolutes Zentrum. Das ist die naechste Paper-I-Pruefung vor neuen Blindscans.
 
+Dynamic-Center-Validation 2026-07-12: Der erste `N=3M`-Trace-Pilot fuer
+`A_att=20/35`, Seeds `1..5`, gegen `eta_zero` ist abgeschlossen. Ergebnis:
+`dynamic_inside_fraction` und `dynamic_max_run` sind nicht allein trennend,
+weil `eta_zero` im eigenen grossen Memory-Ball ebenfalls innen bleibt. Die
+trennenden Metriken sind dynamischer RMS-Radius (`0.087/0.062` vs. `0.344`),
+radiusnormalisierte Center-Drift pro Memory-Zeit (`0.028/0.017` vs. `0.129`)
+und Memory-Shape-Dimension (`2.72/2.88` vs. `1.53`). Report und Plots:
+`reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben
@@ -379,9 +388,10 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Fuer Paper I zuerst die vorhandenen `3e8`-Kandidaten mit `--trace-every`
-   bzw. kurzen Trace-Reruns im co-moving Frame bewerten. Neue Long-Runs nur,
-   wenn Center-Trace gegen `eta_zero` sauber trennt.
+1. Fuer Paper I als naechstes einen gezielten `N=30M`-Center-Trace fuer
+   `A_att=20/35` gegen `eta_zero` rechnen. Akzeptanzmetriken sind dynamischer
+   Radius, radiusnormalisierte Center-Drift und Memory-Shape; dynamic-inside
+   Residence bleibt nur Hilfsdiagnostik.
 2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis weiter als separaten
    Modellzweig behandeln; Spin/Zirkulation und Ladung/Response sind Zukunfts-
    observablen, keine aktuellen Paper-I-Claims.
