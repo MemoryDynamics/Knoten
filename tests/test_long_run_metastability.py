@@ -181,6 +181,12 @@ def test_dynamic_center_trace_reports_spin_proxy() -> None:
     assert spin["angular_speed_median"] > 0.0
     assert spin["axis_polarization"] > 0.99
     assert spin["signed_component_median"] > 0.0
+    assert spin["direction_dephasing_is_upper_bound"] is None
+    assert spin["raw_spin_dephasing_is_upper_bound"] is None
+    assert len(spin["raw_spin_autocorrelation"]) == len(
+        spin["raw_spin_autocorrelation_lag_memory_times"]
+    )
+    assert spin["raw_spin_autocorrelation"][0] == 1.0
     assert len(spin["transition_memory_times"]) == 4
     assert len(spin["amplitudes"]) == 4
     assert len(spin["angular_speeds"]) == 4
@@ -298,6 +304,19 @@ def test_irregular_log_trace_does_not_report_local_spin_proxy() -> None:
     assert diagnostics is not None
     assert "spin_proxy" not in diagnostics
 
+
+def test_first_lag_dephasing_is_reported_as_upper_bound() -> None:
+    correlation = np.array([1.0, 0.0, 0.2], dtype=float)
+    lag_times = np.array([0.0, 0.01, 0.02], dtype=float)
+
+    dephasing = long_run_metastability._first_dephasing_time(correlation, lag_times)
+
+    assert np.isclose(dephasing, 0.01)
+    assert long_run_metastability._dephasing_is_first_resolved_lag(
+        correlation,
+        lag_times,
+        dephasing,
+    ) is True
 
 def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     samples = np.array(

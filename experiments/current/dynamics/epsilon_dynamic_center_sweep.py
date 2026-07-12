@@ -196,6 +196,15 @@ def _case_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
         "spin_direction_dephasing_memory_times": _diagnostic_value(
             spin, ("direction_dephasing_memory_times",)
         ),
+        "spin_direction_dephasing_is_upper_bound": _diagnostic_value(
+            spin, ("direction_dephasing_is_upper_bound",)
+        ),
+        "spin_raw_spin_dephasing_memory_times": _diagnostic_value(
+            spin, ("raw_spin_dephasing_memory_times",)
+        ),
+        "spin_raw_spin_dephasing_is_upper_bound": _diagnostic_value(
+            spin, ("raw_spin_dephasing_is_upper_bound",)
+        ),
         "spin_sample_interval_memory_times": _diagnostic_value(
             spin, ("sample_interval_memory_times",)
         ),
@@ -317,6 +326,9 @@ SUMMARY_METRICS = [
     "spin_center_speed_median",
     "spin_axis_polarization",
     "spin_direction_dephasing_memory_times",
+    "spin_direction_dephasing_is_upper_bound",
+    "spin_raw_spin_dephasing_memory_times",
+    "spin_raw_spin_dephasing_is_upper_bound",
     "spin_sample_interval_memory_times",
     "memory_shape_dimension",
     "memory_roundness",
@@ -457,7 +469,7 @@ def write_plots(output_dir: Path, rows: list[dict[str, Any]], figure_dir: Path) 
                 ("spin_amplitude_median", "Spin-Proxy Amplitude", "median |r wedge v|", True, False),
                 ("spin_angular_speed_median", "Angular Speed Proxy", "median |L| / R^2", True, False),
                 ("spin_axis_polarization", "Axis Polarization", "|mean unit axis|", False, False),
-                ("spin_direction_dephasing_memory_times", "Axis Dephasing", "memory times", True, False),
+                ("spin_raw_spin_dephasing_memory_times", "Raw Spin Dephasing", "memory times", True, False),
             ],
         ),
     ]
@@ -581,8 +593,8 @@ def write_report(
         "",
         "## Median Summary",
         "",
-        "| epsilon | condition | score | dyn radius | drift/radius/memtime | memory dim | memory roundness | internal spin amp | lab spin amp | spin omega | axis pol | dephase |",
-        "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| epsilon | condition | score | dyn radius | drift/radius/memtime | memory dim | memory roundness | internal spin amp | lab spin amp | spin omega | axis pol | axis dephase | raw L dephase | raw L <=dt frac |",
+        "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary:
         lines.append(
@@ -601,6 +613,8 @@ def write_report(
                     _fmt(row.get("spin_angular_speed_median_median")),
                     _fmt(row.get("spin_axis_polarization_median")),
                     _fmt(row.get("spin_direction_dephasing_memory_times_median")),
+                    _fmt(row.get("spin_raw_spin_dephasing_memory_times_median")),
+                    _fmt(row.get("spin_raw_spin_dephasing_is_upper_bound_median")),
                 ]
             )
             + " |"
@@ -633,8 +647,9 @@ def write_report(
             "Spin quantities use `r = x - c_memory` and the co-moving velocity",
             "`d(x - c_memory)/dt`; the adjacent laboratory-frame amplitude reports the",
             "translation removed by that correction. Persistent internal circulation would",
-            "require amplitude, axis polarization, and dephasing to separate from controls.",
-            "A large angular-speed proxy alone is insufficient.",
+            "require amplitude, axis polarization, raw normalized `L` autocorrelation, and",
+            "dephasing bounds to separate from controls. A large angular-speed proxy alone",
+            "is insufficient.",
             "",
             "## Figures",
             "",
@@ -818,6 +833,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-

@@ -173,6 +173,47 @@ def _rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def _refresh_dynamic_center_payload(payload: dict[str, Any]) -> None:
+    diagnostics = payload.get("diagnostics")
+    config_payload = payload.get("config")
+    if not isinstance(diagnostics, dict) or not isinstance(config_payload, dict):
+        return
+    dynamic = diagnostics.get("dynamic_center_trace")
+    trace = dynamic.get("trace") if isinstance(dynamic, dict) else None
+    if not isinstance(trace, dict):
+        return
+    try:
+        config = SimulationConfig(**config_payload)
+        steps = np.asarray(trace.get("steps", []), dtype=np.int64)
+        centers = np.asarray(trace.get("centers", []), dtype=float)
+        positions = np.asarray(trace.get("positions", []), dtype=float)
+        mean_radii = np.asarray(trace.get("mean_radii", []), dtype=float)
+        rms_radii = np.asarray(trace.get("rms_radii", []), dtype=float)
+        x_distances = np.asarray(trace.get("x_distances", []), dtype=float)
+        if len(steps) < 3:
+            return
+        tail_gap = int(steps[-1] - steps[-2])
+        if tail_gap <= 0:
+            return
+        result = {
+            "trace_steps": steps,
+            "trace_centers": centers,
+            "trace_positions": positions,
+            "trace_mean_radii": mean_radii,
+            "trace_rms_radii": rms_radii,
+            "trace_x_distances": x_distances,
+        }
+    except (TypeError, ValueError):
+        return
+    refreshed = metastability_run._dynamic_center_trace_diagnostics(
+        result,
+        config=config,
+        trace_every=tail_gap,
+    )
+    if isinstance(refreshed, dict):
+        diagnostics["dynamic_center_trace"] = refreshed
+
+
 def _ensure_trend_payload(payload: dict[str, Any]) -> None:
     diagnostics = payload.get("diagnostics")
     if not isinstance(diagnostics, dict):
@@ -224,6 +265,7 @@ def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
         steps = _parse_steps(match.group("n"))
         for path in sorted(directory.glob("case_*.json")):
             payload = json.loads(path.read_text(encoding="utf-8"))
+            _refresh_dynamic_center_payload(payload)
             _ensure_trend_payload(payload)
             cases.append(
                 CaseRecord(
@@ -296,6 +338,15 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
         "spin_direction_dephasing_memory_times": _diagnostic_value(
             spin, ("direction_dephasing_memory_times",)
         ),
+        "spin_direction_dephasing_is_upper_bound": _diagnostic_value(
+            spin, ("direction_dephasing_is_upper_bound",)
+        ),
+        "spin_raw_spin_dephasing_memory_times": _diagnostic_value(
+            spin, ("raw_spin_dephasing_memory_times",)
+        ),
+        "spin_raw_spin_dephasing_is_upper_bound": _diagnostic_value(
+            spin, ("raw_spin_dephasing_is_upper_bound",)
+        ),
         "spin_signed_component_median": _diagnostic_value(spin, ("signed_component_median",)),
         "memory_shape_dimension": _diagnostic_value(memory_shape, ("effective_dimension",)),
         "memory_roundness": _diagnostic_value(memory_shape, ("axis_ratio_min_max",)),
@@ -323,6 +374,9 @@ SUMMARY_METRICS = [
     "spin_angular_speed_median",
     "spin_axis_polarization",
     "spin_direction_dephasing_memory_times",
+    "spin_direction_dephasing_is_upper_bound",
+    "spin_raw_spin_dephasing_memory_times",
+    "spin_raw_spin_dephasing_is_upper_bound",
     "spin_signed_component_median",
     "memory_shape_dimension",
     "memory_roundness",
@@ -552,8 +606,8 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
                 ("spin_angular_speed_median", "Angular Speed Proxy", "median |L| / R^2", True),
                 ("spin_axis_polarization", "Axis Polarization", "|mean unit axis|", False),
                 (
-                    "spin_direction_dephasing_memory_times",
-                    "Axis Dephasing",
+                    "spin_raw_spin_dephasing_memory_times",
+                    "Raw Spin Dephasing",
                     "memory times to 1/e",
                     True,
                 ),
@@ -724,8 +778,8 @@ def write_report(
             "",
             "## Spin-Proxy Median Summary",
             "",
-            "| A_att | condition | samples | dt_mem | window_mem | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |",
-            "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+            "| A_att | condition | samples | dt_mem | window_mem | valid frac | amplitude | angular speed | axis polarization | axis dephase | axis <=dt frac | raw L dephase | raw L <=dt frac | signed comp | amplitude CV |",
+            "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
     for row in summary:
@@ -743,6 +797,9 @@ def write_report(
                     _fmt(row.get("spin_angular_speed_median_median")),
                     _fmt(row.get("spin_axis_polarization_median")),
                     _fmt(row.get("spin_direction_dephasing_memory_times_median")),
+                    _fmt(row.get("spin_direction_dephasing_is_upper_bound_median")),
+                    _fmt(row.get("spin_raw_spin_dephasing_memory_times_median")),
+                    _fmt(row.get("spin_raw_spin_dephasing_is_upper_bound_median")),
                     _fmt(row.get("spin_signed_component_median_median")),
                     _fmt(row.get("spin_amplitude_cv_median")),
                 ]
@@ -757,9 +814,11 @@ def write_report(
             "",
             "The cadence-separated analysis preserves the earlier logarithmic-trend",
             "compactness and drift values. The uniformly sampled end window resolves",
-            "the spin direction at one-update cadence: median dephasing equals the",
-            "sampling interval and axis polarization remains near zero in active and",
-            "`eta_zero` cases. The larger active angular-speed proxy occurs together",
+            "the spin direction at one-update cadence: median dephasing is at or below",
+            "the sampling interval and axis polarization remains near zero in active and",
+            "`eta_zero` cases. The raw normalized `L` autocorrelation is reported beside",
+            "the axis-only correlation to avoid overreading instantaneous amplitudes.",
+            "The larger active angular-speed proxy occurs together",
             "with a much smaller radius, while raw spin amplitude is larger in the",
             "control. This is not evidence for a persistent scalar spin mode.",
             "",
@@ -781,8 +840,11 @@ def write_report(
             "- `spin_angular_speed_median` divides that amplitude by the squared memory radius.",
             "- `spin_axis_polarization` near `1` means a stable oriented axis; near `0` means",
             "  strong axis dephasing or axis wandering across the trace.",
-            "- `spin_direction_dephasing_memory_times` is the first autocorrelation lag below",
-            "  `1/e`, if that crossing occurs within the stored trace lags.",
+            "- `spin_direction_dephasing_memory_times` is the first axis-autocorrelation lag below",
+            "  `1/e`; when `spin_direction_dephasing_is_upper_bound` is `1`, the crossing",
+            "  already occurred at the first resolved lag and should be read as `<= dt_mem`.",
+            "- `spin_raw_spin_dephasing_memory_times` applies the same rule to the normalized",
+            "  untruncated spin-bivector autocorrelation, retaining sign and amplitude variation.",
             "- `eta_zero` can still generate incidental angular momentum from random walks, so",
             "  active conditions only become interesting if amplitude, axis stability, or",
             "  dephasing separate seedwise from matched controls and remain stable with N.",

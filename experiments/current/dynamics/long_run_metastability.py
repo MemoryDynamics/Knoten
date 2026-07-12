@@ -704,6 +704,23 @@ def _first_dephasing_time(correlation: np.ndarray, lag_times: np.ndarray) -> flo
     return None
 
 
+def _dephasing_is_first_resolved_lag(
+    correlation: np.ndarray,
+    lag_times: np.ndarray,
+    dephasing: float | None,
+) -> bool | None:
+    if dephasing is None or len(correlation) < 2 or len(lag_times) < 2:
+        return None
+    threshold = math.exp(-1.0)
+    first_value = correlation[1]
+    first_lag = lag_times[1]
+    if not (math.isfinite(float(first_value)) and math.isfinite(float(first_lag))):
+        return None
+    if not math.isclose(float(dephasing), float(first_lag), rel_tol=1.0e-9, abs_tol=1.0e-12):
+        return False
+    return bool(float(first_value) <= threshold)
+
+
 def _finite_percentile(values: np.ndarray, percentile: float) -> float | None:
     arr = np.asarray(values, dtype=float)
     finite = arr[np.isfinite(arr)]
@@ -775,9 +792,14 @@ def _spin_proxy_diagnostics(
             "lab_frame_amplitude_median": _finite_percentile(lab_amplitude, 50.0),
             "axis_polarization": None,
             "direction_dephasing_memory_times": None,
+            "direction_dephasing_is_upper_bound": None,
+            "raw_spin_dephasing_memory_times": None,
+            "raw_spin_dephasing_is_upper_bound": None,
             "transition_memory_times": [_finite_float(value) for value in transition_times],
             "amplitudes": [_finite_float(value) for value in amplitude],
             "angular_speeds": [],
+            "raw_spin_autocorrelation": [],
+            "raw_spin_autocorrelation_lag_memory_times": [],
         }
     amplitude_valid = amplitude[valid_amplitude]
     unit = spin_components[valid_amplitude] / amplitude_valid[:, None]
@@ -790,6 +812,24 @@ def _spin_proxy_diagnostics(
     valid_times = transition_times[valid_amplitude]
     lag_times = _lag_memory_times(valid_times, max_lag=max_lag)
     dephasing = _first_dephasing_time(direction_ac, lag_times)
+    direction_dephasing_is_upper_bound = _dephasing_is_first_resolved_lag(
+        direction_ac,
+        lag_times,
+        dephasing,
+    )
+    raw_spin_values = spin_components[valid_amplitude]
+    raw_spin_ac_max_lag = min(max_lag, max(0, len(raw_spin_values) - 1))
+    try:
+        raw_spin_ac = vector_autocorrelation(raw_spin_values, max_lag=raw_spin_ac_max_lag)
+    except ValueError:
+        raw_spin_ac = np.empty(0, dtype=float)
+    raw_spin_lag_times = _lag_memory_times(valid_times, max_lag=raw_spin_ac_max_lag)
+    raw_spin_dephasing = _first_dephasing_time(raw_spin_ac, raw_spin_lag_times)
+    raw_spin_dephasing_is_upper_bound = _dephasing_is_first_resolved_lag(
+        raw_spin_ac,
+        raw_spin_lag_times,
+        raw_spin_dephasing,
+    )
     mean_unit = np.average(unit, axis=0, weights=amplitude_valid)
     axis_norm = float(np.linalg.norm(mean_unit)) if len(mean_unit) else None
     amplitude_mean = float(np.mean(amplitude_valid))
@@ -827,6 +867,13 @@ def _spin_proxy_diagnostics(
         "direction_autocorrelation": [_finite_float(value) for value in direction_ac],
         "direction_autocorrelation_lag_memory_times": [_finite_float(value) for value in lag_times],
         "direction_dephasing_memory_times": _finite_float(dephasing),
+        "direction_dephasing_is_upper_bound": direction_dephasing_is_upper_bound,
+        "raw_spin_autocorrelation": [_finite_float(value) for value in raw_spin_ac],
+        "raw_spin_autocorrelation_lag_memory_times": [
+            _finite_float(value) for value in raw_spin_lag_times
+        ],
+        "raw_spin_dephasing_memory_times": _finite_float(raw_spin_dephasing),
+        "raw_spin_dephasing_is_upper_bound": raw_spin_dephasing_is_upper_bound,
     }
 
 def _dynamic_center_trace_diagnostics(
@@ -1362,6 +1409,15 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "spin_proxy_signed_component_median": _dynamic_center_spin_field(diagnostics, "signed_component_median"),
                 "spin_proxy_direction_dephasing_memory_times": _dynamic_center_spin_field(
                     diagnostics, "direction_dephasing_memory_times"
+                ),
+                "spin_proxy_direction_dephasing_is_upper_bound": _dynamic_center_spin_field(
+                    diagnostics, "direction_dephasing_is_upper_bound"
+                ),
+                "spin_proxy_raw_spin_dephasing_memory_times": _dynamic_center_spin_field(
+                    diagnostics, "raw_spin_dephasing_memory_times"
+                ),
+                "spin_proxy_raw_spin_dephasing_is_upper_bound": _dynamic_center_spin_field(
+                    diagnostics, "raw_spin_dephasing_is_upper_bound"
                 ),
                 "candidate_long_lived": candidate,
             }

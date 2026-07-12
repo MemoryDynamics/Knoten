@@ -159,9 +159,11 @@ Naechster operativer Schritt:
     Punkte definieren Trend-KPIs; ein gleichmaessiges Endfenster mit 10,001
     Punkten (`dt_mem=0.01`, 100 Memory-Zeiten) definiert lokale Spin-KPIs.
     Radius und Trend-Drift trennen robust. Der Spin-Proxy wird im mitbewegten
-    Memory-Center-Rahmen berechnet; die Spinachse dephasiert dagegen in allen
-    Faellen nach einem Update (`axis_polarization ~= 0.01`): negativer
-    skalarer Modenbefund, kein Paper-I-Blocker. Report:
+    Memory-Center-Rahmen berechnet; Achsen- und rohe `L`-Korrelation werden
+    getrennt berichtet. Faellt die Korrelation bereits beim ersten messbaren
+    Lag unter `1/e`, wird die Dephasierung als `<= dt_mem`-Obergrenze gelesen,
+    nicht als exakt bestimmte Zeit. Aktueller Befund: negativer skalarer
+    Modenbefund, kein Paper-I-Blocker. Report:
     `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 16. Abgeschlossen: Epsilon-Dynamic-Center-Sweep fuer `A_att=35`, Seeds `1..3`,
     `N=100k`, `epsilon=0` plus 24 logarithmische Werte `1e-12..1e1`, gegen
@@ -172,8 +174,9 @@ Naechster operativer Schritt:
     Translationsanteil: Spin bleibt negativ (`axis_polarization ~0.017`,
     Dephasierung ein Update). Report:
     `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
-17. Naechster Paper-I-Schritt: kurzer Bestaetigungsslice im Epsilon-Plateau,
-    bevor der `N=30M`-Hybrid-Trace gestartet wird. Kandidaten: `epsilon in
+17. Naechster Paper-I-Schritt: Messmethodik-Refresh der vorhandenen Hybrid-Trace-
+    Reports mit roher normierter Spin-Korrelation und Dephasierungs-Obergrenzen,
+    danach kurzer Bestaetigungsslice im Epsilon-Plateau. Kandidaten: `epsilon in
     {1.65e-6, 1e-4, 0.015}` fuer `A_att=20/35`, Seeds `1..5`, `N=1M` oder
     `3M`, mit denselben Hybrid-Trace-KPIs. Danach `N=30M` nur fuer die beste
     begruendete Rauschskala, nicht blind fuer `epsilon=0.03`.
@@ -181,8 +184,9 @@ Naechster operativer Schritt:
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`. Spin-
-    Proxies bleiben Observablen fuer Orientierung/Dephasierung, nicht
-    KnotScore- oder Teilchenspin-Claims.
+    Proxies bleiben Observablen fuer Orientierung/Dephasierung. Dephasierungswerte
+    am ersten Lag sind zensierte Obergrenzen `<= dt_mem`, nicht exakt aufgeloeste
+    Zeiten; kein KnotScore- oder Teilchenspin-Claim.
 
 Wenn der Score traegt:
 

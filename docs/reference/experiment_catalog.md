@@ -1,4 +1,4 @@
-﻿# Experiment-Katalog
+# Experiment-Katalog
 
 Stand: 2026-07-12.
 
@@ -194,8 +194,11 @@ abgetastetes Endfenster an. Nur dieses Fenster darf fuer lokale Geschwindigkeits
 sind dafuer nicht zulaessig. Die Trace-Payload enthaelt `trace.positions`, und
 `spin_proxy` dokumentiert `sample_count`, `sample_interval_memory_times`,
 `window_span_memory_times`, Amplitude, Winkelgeschwindigkeit,
-Achsenpolarisation und Dephasierung. Der `N=1M`-Pre-Run findet keine persistente
-Spinachse; der Befund ist eine Negativkontrolle, kein Spin-/Photonclaim. Report:
+Achsenpolarisation, Achsen-Dephasierung und die rohe normierte Spin-Bivektor-
+Autokorrelation. Wenn die erste `1/e`-Kreuzung schon beim ersten messbaren Lag
+liegt, ist die Dephasierungszeit als Obergrenze `<= dt_mem` zu lesen. Der
+`N=1M`-Pre-Run findet keine persistente Spinachse; der Befund ist eine
+Negativkontrolle, kein Spin-/Photonclaim. Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
 `--trace-spacing log`, `--trace-every 1`, `--trace-window-memory-times 100`,
