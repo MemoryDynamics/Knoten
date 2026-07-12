@@ -1,4 +1,4 @@
-# Experiments
+﻿# Experiments
 
 Stand: 2026-07-09.
 
@@ -27,7 +27,7 @@ python experiments/current/markov/knot_score_report.py
 - `anchor_paper_pipeline.py`: Paper-0-Smoke mit augmentierten Features und Transferoperator-Schaetzung.
 - `anchor_sensitivity_analysis.py`: kleine Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet fuer die Markov-Schicht.
 - `epsilon_step_balance.py`: gezielte Update-Bilanz zwischen Rauschen, repulsivem Beitrag und Netto-Drift.
-- `epsilon_floor_visual_probe.py`: flexible 3D-Visualisierung der Epsilon-Floor-Faelle.
+- `epsilon_floor_visual_probe.py`: flexible 3D-Visualisierung der Epsilon-Floor-Faelle.`r`n- `epsilon_dynamic_center_sweep.py`: kurzer Epsilon-Sweep auf dynamischem Center, KnotScore v0.5 und Spin-Proxy gegen `eta_zero`.
 - `kernel_shape_probe.py`: gezielte Kernelbreiten-/Amplituden- und Seed-Probe mit skaliertem 3D-Fuehrungskoordinatenplot.
 - `long_run_metastability.py`: seedfaehige Long-Run-Piloten mit
   `baseline`, `eta_zero`, `single_scale`, `zero_mean_two_scale` und
@@ -64,7 +64,7 @@ Experimentfokus ist ihre Haertung:
 - Voxel-/Feature-Sensitivitaet.
 - Negativkontrollen wie `eta_zero` und shuffelte Memory-Features.
 - Spaeter PCCA/HMM/PMM-Fallbacks, falls reduzierte Features nicht ausreichend markovsch sind.
-- Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.
+- Epsilon-Step-Balance: `epsilon=0` friert den Nullstart ein; positive Werte skalieren die lokale Bewegung, machen sie aber in der getesteten Baseline nicht glatter.`r`n- Epsilon-Dynamic-Center-Sweep 2026-07-12: fuer `A_att=35`, `N=100k`, Seeds `1..3` traegt ein kurzes v0.5-Score-Plateau von etwa `epsilon=1.65e-6` bis `0.741`; ab `epsilon=2.72` kollabiert der aktive Lauf auf `eta_zero`-aehnliche Metriken.
 - Kernel-Shape-Probe: Paketkernel-Paritaet, `A_att=0`/`A_rep=0`-Ablation, Seedvergleich und Shared-/Flexible-Scale-3D-Fuehrungskoordinatenplots.
 - Der Kernelgradient wurde korrigiert; fruehere Knotenscore-/Force-Piloten
   sind `legacy-sign`-Auditmaterial.

@@ -1,4 +1,4 @@
-# Experiment-Katalog
+﻿# Experiment-Katalog
 
 Stand: 2026-07-12.
 
@@ -12,6 +12,7 @@ Hardening und Long-Run-Metastabilitaet.
 | --- | --- | --- | --- |
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
+| `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/current/dynamics/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -199,6 +200,16 @@ Spinachse; der Befund ist eine Negativkontrolle, kein Spin-/Photonclaim. Report:
 Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
 `--trace-spacing log`, `--trace-every 1`, `--trace-window-memory-times 100`,
 keine neue Parameterachse.
+
+Epsilon-Dynamic-Center-Sweep 2026-07-12: `epsilon_dynamic_center_sweep.py`
+variiert nur `epsilon` fuer den korrigierten kompakten Referenzkandidaten
+`A_att=35`, Seeds `1..3`, `N=100k`, gegen seedgleiche `eta_zero`-Kontrollen.
+Der kurze Sweep zeigt ein v0.5-Score-Plateau ab etwa `epsilon=1.65e-6` bis
+`epsilon=0.741`; bei `epsilon=2.72` kollabiert der aktive Lauf auf
+`eta_zero`-aehnliche Metriken. Unterhalb `~1e-6` bleibt die Form skalenartig,
+aber Shape-/Roundness-Gating ist teils degeneriert. Spin bleibt negativ:
+Achsenpolarisation nahe null und Dephasierung nach einem Update. Report:
+`reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
 
 ## Epsilon-Step-Balance
 

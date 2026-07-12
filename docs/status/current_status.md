@@ -1,4 +1,4 @@
-# Aktueller Stand
+﻿# Aktueller Stand
 
 Stand: 2026-07-12.
 
@@ -364,6 +364,17 @@ aktive normierte Winkelgeschwindigkeit entsteht bei viel kleinerem Radius;
 die rohe Amplitude ist in `eta_zero` groesser. Kein Spinquantisierungs- oder
 Photonclaim. Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
+
+Epsilon-Dynamic-Center-Sweep 2026-07-12: Fuer `A_att=35`, Seeds `1..3`,
+`N=100k`, `epsilon=0` plus 24 logarithmische Werte `1e-12..1e1`, gegen
+seedgleiche `eta_zero`-Kontrollen, zeigt sich ein klares kurzes Score-Plateau:
+`score >= 0.75` ab etwa `epsilon=1.65e-6` bis `0.741`. Bei `epsilon=2.72`
+werden Radius, Drift, Memory-Dimension und Spin-Proxy praktisch
+`eta_zero`-aehnlich. Unterhalb `~1e-6` ist die Dynamik skalenartig, aber
+Memory-Roundness/Score-Gating teils degeneriert. Operativ: vor dem naechsten
+30M-Lauf zuerst einen kurzen Plateau-Bestaetigungsslice fuer `A_att=20/35`
+rechnen; `epsilon=0.03` ist nicht mehr als alternativloser Default zu lesen.
+Report: `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als

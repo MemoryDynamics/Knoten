@@ -1,4 +1,4 @@
-# Projektprioritaeten
+﻿# Projektprioritaeten
 
 Stand: 2026-07-12.
 
@@ -162,15 +162,19 @@ Naechster operativer Schritt:
     allen Faellen nach einem Update (`axis_polarization ~= 0.01`): negativer
     skalarer Modenbefund, kein Paper-I-Blocker. Report:
     `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
-16. Naechster Paper-I-Schritt: gezielter `N=30M`-Hybrid-Trace fuer
-    `A_att=20/35`, keine neue Parameterachse. Zeitplan: `--trace-points 100`,
-    `--trace-spacing log`, `--trace-every 1` und
-    `--trace-window-memory-times 100`.
-    Akzeptanz basiert auf Trend-Radius, Trend-Drift/Radius/Memory-Zeit,
-    Memory-Shape und Seedtrennung gegen `eta_zero`. Spin bleibt dokumentierte
-    Negativkontrolle und wird nicht als ModeScore- oder Teilchenspin-Evidenz
-    gewertet.
-17. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+16. Abgeschlossen: Epsilon-Dynamic-Center-Sweep fuer `A_att=35`, Seeds `1..3`,
+    `N=100k`, `epsilon=0` plus 24 logarithmische Werte `1e-12..1e1`, gegen
+    seedgleiche `eta_zero`-Kontrollen. Ergebnis: v0.5-Score-Plateau ab etwa
+    `epsilon=1.65e-6` bis `0.741`; bei `epsilon=2.72` kollabiert der aktive
+    Lauf auf `eta_zero`-aehnliche Metriken. Spin bleibt negativ
+    (`axis_polarization ~0.017`, Dephasierung ein Update). Report:
+    `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
+17. Naechster Paper-I-Schritt: kurzer Bestaetigungsslice im Epsilon-Plateau,
+    bevor der `N=30M`-Hybrid-Trace gestartet wird. Kandidaten: `epsilon in
+    {1.65e-6, 1e-4, 0.015}` fuer `A_att=20/35`, Seeds `1..5`, `N=1M` oder
+    `3M`, mit denselben Hybrid-Trace-KPIs. Danach `N=30M` nur fuer die beste
+    begruendete Rauschskala, nicht blind fuer `epsilon=0.03`.
+18. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`. Spin-
