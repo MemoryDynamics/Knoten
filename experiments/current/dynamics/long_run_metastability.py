@@ -218,6 +218,7 @@ def _simulate_circular_numba(
     max_traces = len(trace_targets)
     trace_steps = np.zeros(max_traces, np.int64)
     trace_centers = np.zeros((max_traces, dim), np.float64)
+    trace_positions = np.zeros((max_traces, dim), np.float64)
     trace_mean_radii = np.zeros(max_traces, np.float64)
     trace_rms_radii = np.zeros(max_traces, np.float64)
     trace_x_distances = np.zeros(max_traces, np.float64)
@@ -300,6 +301,7 @@ def _simulate_circular_numba(
             trace_steps[n_trace] = step
             for d in range(dim):
                 trace_centers[n_trace, d] = center[d]
+                trace_positions[n_trace, d] = x[d]
             trace_mean_radii[n_trace] = mean_radius
             trace_rms_radii[n_trace] = np.sqrt(rms_radius2)
             trace_x_distances[n_trace] = np.sqrt(x_dist2)
@@ -315,6 +317,7 @@ def _simulate_circular_numba(
         idx,
         trace_steps[:n_trace],
         trace_centers[:n_trace],
+        trace_positions[:n_trace],
         trace_mean_radii[:n_trace],
         trace_rms_radii[:n_trace],
         trace_x_distances[:n_trace],
@@ -355,6 +358,7 @@ def simulate_long_run(
             "effective_kernel": effective_kernel,
             "trace_steps": np.empty(0, dtype=np.int64),
             "trace_centers": empty_trace,
+            "trace_positions": empty_trace,
             "trace_mean_radii": np.empty(0, dtype=float),
             "trace_rms_radii": np.empty(0, dtype=float),
             "trace_x_distances": np.empty(0, dtype=float),
@@ -370,6 +374,7 @@ def simulate_long_run(
         idx,
         trace_steps,
         trace_centers,
+        trace_positions,
         trace_mean_radii,
         trace_rms_radii,
         trace_x_distances,
@@ -405,6 +410,7 @@ def simulate_long_run(
         "effective_kernel": effective_kernel,
         "trace_steps": trace_steps.copy(),
         "trace_centers": trace_centers.copy(),
+        "trace_positions": trace_positions.copy(),
         "trace_mean_radii": trace_mean_radii.copy(),
         "trace_rms_radii": trace_rms_radii.copy(),
         "trace_x_distances": trace_x_distances.copy(),
@@ -599,6 +605,155 @@ def _weighted_run_sums(mask: np.ndarray, weights: np.ndarray) -> np.ndarray:
         runs.append(current)
     return np.asarray(runs, dtype=float)
 
+
+def _bivector_components(rel: np.ndarray, velocity: np.ndarray) -> np.ndarray:
+    if rel.ndim != 2 or velocity.ndim != 2 or rel.shape != velocity.shape:
+        return np.empty((0, 0), dtype=float)
+    n_points, dim = rel.shape
+    if n_points == 0 or dim < 2:
+        return np.empty((n_points, 0), dtype=float)
+    if dim == 3:
+        return np.cross(rel, velocity)
+    components: list[np.ndarray] = []
+    for i in range(dim):
+        for j in range(i + 1, dim):
+            components.append(rel[:, i] * velocity[:, j] - rel[:, j] * velocity[:, i])
+    return np.stack(components, axis=1) if components else np.empty((n_points, 0), dtype=float)
+
+
+def _direction_autocorrelation(unit_vectors: np.ndarray, *, max_lag: int) -> np.ndarray:
+    arr = np.asarray(unit_vectors, dtype=float)
+    if arr.ndim != 2 or arr.shape[0] < 2 or max_lag < 0:
+        return np.empty(0, dtype=float)
+    lag_max = min(max_lag, arr.shape[0] - 1)
+    out = np.empty(lag_max + 1, dtype=float)
+    out[0] = 1.0
+    for lag in range(1, lag_max + 1):
+        dots = np.sum(arr[:-lag] * arr[lag:], axis=1)
+        out[lag] = float(np.mean(dots)) if len(dots) else float("nan")
+    return out
+
+
+def _lag_memory_times(times: np.ndarray, *, max_lag: int) -> np.ndarray:
+    arr = np.asarray(times, dtype=float)
+    if arr.ndim != 1 or arr.size < 2 or max_lag < 0:
+        return np.empty(0, dtype=float)
+    lag_max = min(max_lag, arr.size - 1)
+    out = np.zeros(lag_max + 1, dtype=float)
+    for lag in range(1, lag_max + 1):
+        deltas = arr[lag:] - arr[:-lag]
+        finite = deltas[np.isfinite(deltas) & (deltas > 0.0)]
+        out[lag] = float(np.median(finite)) if len(finite) else float("nan")
+    return out
+
+
+def _first_dephasing_time(correlation: np.ndarray, lag_times: np.ndarray) -> float | None:
+    if len(correlation) == 0 or len(lag_times) != len(correlation):
+        return None
+    threshold = math.exp(-1.0)
+    for value, lag_time in zip(correlation[1:], lag_times[1:], strict=False):
+        if not (math.isfinite(float(value)) and math.isfinite(float(lag_time))):
+            continue
+        if float(value) <= threshold:
+            return float(lag_time)
+    return None
+
+
+def _finite_percentile(values: np.ndarray, percentile: float) -> float | None:
+    arr = np.asarray(values, dtype=float)
+    finite = arr[np.isfinite(arr)]
+    if len(finite) == 0:
+        return None
+    return float(np.percentile(finite, percentile))
+
+
+def _spin_proxy_diagnostics(
+    *,
+    steps: np.ndarray,
+    centers: np.ndarray,
+    positions: np.ndarray,
+    rms_radii: np.ndarray,
+    alpha: float,
+    max_lag: int = 20,
+) -> dict[str, object] | None:
+    if positions.shape != centers.shape or len(steps) != len(centers) or len(steps) < 3:
+        return None
+    gaps = np.diff(steps).astype(float)
+    memory_gaps = gaps * float(alpha)
+    valid_gap = np.isfinite(memory_gaps) & (memory_gaps > 0.0)
+    if not np.any(valid_gap):
+        return None
+
+    rel = positions - centers
+    displacements = np.diff(positions, axis=0)
+    velocity = displacements[valid_gap] / memory_gaps[valid_gap, None]
+    rel_mid = 0.5 * (rel[:-1] + rel[1:])[valid_gap]
+    radius_mid = 0.5 * (rms_radii[:-1] + rms_radii[1:])[valid_gap]
+    transition_times = 0.5 * (steps[:-1] + steps[1:])[valid_gap].astype(float) * float(alpha)
+
+    spin_components = _bivector_components(rel_mid, velocity)
+    if spin_components.shape[1] == 0:
+        return None
+    amplitude = np.linalg.norm(spin_components, axis=1)
+    valid_amplitude = np.isfinite(amplitude) & (amplitude > 0.0)
+    if not np.any(valid_amplitude):
+        return {
+            "valid_fraction": 0.0,
+            "component_count": int(spin_components.shape[1]),
+            "amplitude_median": 0.0,
+            "amplitude_q25": 0.0,
+            "amplitude_q75": 0.0,
+            "amplitude_cv": None,
+            "angular_speed_median": None,
+            "axis_polarization": None,
+            "direction_dephasing_memory_times": None,
+            "transition_memory_times": [_finite_float(value) for value in transition_times],
+            "amplitudes": [_finite_float(value) for value in amplitude],
+            "angular_speeds": [],
+        }
+    amplitude_valid = amplitude[valid_amplitude]
+    unit = spin_components[valid_amplitude] / amplitude_valid[:, None]
+    finite_radius = np.isfinite(radius_mid) & (radius_mid > 0.0) & valid_amplitude
+    angular_speed_full = np.full(amplitude.shape, np.nan, dtype=float)
+    if np.any(finite_radius):
+        angular_speed_full[finite_radius] = amplitude[finite_radius] / (radius_mid[finite_radius] ** 2)
+    angular_speed = angular_speed_full[np.isfinite(angular_speed_full)]
+    direction_ac = _direction_autocorrelation(unit, max_lag=max_lag)
+    valid_times = transition_times[valid_amplitude]
+    lag_times = _lag_memory_times(valid_times, max_lag=max_lag)
+    dephasing = _first_dephasing_time(direction_ac, lag_times)
+    mean_unit = np.mean(unit, axis=0)
+    axis_norm = float(np.linalg.norm(mean_unit)) if len(mean_unit) else None
+    amplitude_mean = float(np.mean(amplitude_valid))
+    amplitude_std = float(np.std(amplitude_valid))
+    signed_component_median = None
+    signed_component_mean = None
+    if spin_components.shape[1] == 1:
+        signed_values = spin_components[valid_amplitude, 0]
+        signed_component_median = _finite_float(float(np.median(signed_values)))
+        signed_component_mean = _finite_float(float(np.mean(signed_values)))
+
+    return {
+        "valid_fraction": _finite_float(float(np.mean(valid_amplitude))),
+        "component_count": int(spin_components.shape[1]),
+        "amplitude_median": _finite_float(float(np.median(amplitude_valid))),
+        "amplitude_q25": _finite_percentile(amplitude_valid, 25.0),
+        "amplitude_q75": _finite_percentile(amplitude_valid, 75.0),
+        "amplitude_cv": _finite_float(amplitude_std / amplitude_mean) if amplitude_mean > 0.0 else None,
+        "angular_speed_median": _finite_percentile(angular_speed, 50.0),
+        "angular_speed_q25": _finite_percentile(angular_speed, 25.0),
+        "angular_speed_q75": _finite_percentile(angular_speed, 75.0),
+        "axis_polarization": _finite_float(axis_norm),
+        "signed_component_median": signed_component_median,
+        "signed_component_mean": signed_component_mean,
+        "transition_memory_times": [_finite_float(value) for value in transition_times],
+        "amplitudes": [_finite_float(value) for value in amplitude],
+        "angular_speeds": [_finite_float(value) for value in angular_speed_full],
+        "direction_autocorrelation": [_finite_float(value) for value in direction_ac],
+        "direction_autocorrelation_lag_memory_times": [_finite_float(value) for value in lag_times],
+        "direction_dephasing_memory_times": _finite_float(dephasing),
+    }
+
 def _dynamic_center_trace_diagnostics(
     result: dict[str, np.ndarray],
     *,
@@ -610,6 +765,7 @@ def _dynamic_center_trace_diagnostics(
 ) -> dict[str, object] | None:
     steps = np.asarray(result.get("trace_steps", np.empty(0, dtype=np.int64)), dtype=np.int64)
     centers = np.asarray(result.get("trace_centers", np.empty((0, config.dim))), dtype=float)
+    positions = np.asarray(result.get("trace_positions", np.empty((0, config.dim))), dtype=float)
     mean_radii = np.asarray(result.get("trace_mean_radii", np.empty(0)), dtype=float)
     rms_radii = np.asarray(result.get("trace_rms_radii", np.empty(0)), dtype=float)
     x_distances = np.asarray(result.get("trace_x_distances", np.empty(0)), dtype=float)
@@ -617,6 +773,7 @@ def _dynamic_center_trace_diagnostics(
         return None
     if centers.shape != (len(steps), config.dim):
         return None
+    has_positions = positions.shape == centers.shape
     if not (len(mean_radii) == len(steps) == len(rms_radii) == len(x_distances)):
         return None
 
@@ -710,6 +867,16 @@ def _dynamic_center_trace_diagnostics(
         "center_net_displacement": _finite_float(center_net_displacement),
         "center_path_to_chord": _finite_float(center_path_to_chord),
     }
+    if has_positions:
+        spin_proxy = _spin_proxy_diagnostics(
+            steps=steps,
+            centers=centers,
+            positions=positions,
+            rms_radii=rms_radii,
+            alpha=config.alpha,
+        )
+        if spin_proxy is not None:
+            out["spin_proxy"] = spin_proxy
     if include_trace:
         stride = max(1, int(math.ceil(len(steps) / max_trace_points)))
         sl = slice(None, None, stride)
@@ -718,12 +885,14 @@ def _dynamic_center_trace_diagnostics(
             "decimation_stride": int(stride),
             "steps": steps[sl].astype(int).tolist(),
             "centers": centers[sl].astype(float).tolist(),
+            "positions": positions[sl].astype(float).tolist() if has_positions else [],
             "mean_radii": mean_radii[sl].astype(float).tolist(),
             "rms_radii": rms_radii[sl].astype(float).tolist(),
             "x_distances": x_distances[sl].astype(float).tolist(),
             "inside_primary_radius": inside[sl].astype(bool).tolist(),
         }
     return out
+
 
 def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
     details = occupancy_dimension(points, return_details=True)
@@ -987,11 +1156,27 @@ def _center_residence_field(diagnostics: dict[str, object], key: str, field: str
         return float(value)
     return None
 
+
 def _dynamic_center_field(diagnostics: dict[str, object], field: str) -> float | int | None:
     payload = diagnostics.get("dynamic_center_trace")
     if not isinstance(payload, dict):
         return None
     value = payload.get(field)
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float) and math.isfinite(value):
+        return value
+    return None
+
+
+def _dynamic_center_spin_field(diagnostics: dict[str, object], field: str) -> float | int | None:
+    payload = diagnostics.get("dynamic_center_trace")
+    if not isinstance(payload, dict):
+        return None
+    spin = payload.get("spin_proxy")
+    if not isinstance(spin, dict):
+        return None
+    value = spin.get(field)
     if isinstance(value, int):
         return value
     if isinstance(value, float) and math.isfinite(value):
@@ -1068,6 +1253,15 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 ),
                 "dynamic_center_drift_radius_fraction_per_memory_time_median": _dynamic_center_field(
                     diagnostics, "center_drift_radius_fraction_per_memory_time_median"
+                ),
+                "spin_proxy_valid_fraction": _dynamic_center_spin_field(diagnostics, "valid_fraction"),
+                "spin_proxy_amplitude_median": _dynamic_center_spin_field(diagnostics, "amplitude_median"),
+                "spin_proxy_amplitude_cv": _dynamic_center_spin_field(diagnostics, "amplitude_cv"),
+                "spin_proxy_angular_speed_median": _dynamic_center_spin_field(diagnostics, "angular_speed_median"),
+                "spin_proxy_axis_polarization": _dynamic_center_spin_field(diagnostics, "axis_polarization"),
+                "spin_proxy_signed_component_median": _dynamic_center_spin_field(diagnostics, "signed_component_median"),
+                "spin_proxy_direction_dephasing_memory_times": _dynamic_center_spin_field(
+                    diagnostics, "direction_dephasing_memory_times"
                 ),
                 "candidate_long_lived": candidate,
             }

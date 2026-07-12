@@ -350,6 +350,19 @@ radiusnormalisierte Center-Drift pro Memory-Zeit (`0.028/0.017` vs. `0.129`)
 und Memory-Shape-Dimension (`2.72/2.88` vs. `1.53`). Report und Plots:
 `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
 
+Spin-Proxy-Trace 2026-07-12: Der Long-Run schreibt nun zusaetzlich die aktuelle
+Trace-Position und berechnet relativ zum mitlaufenden Memory-Center den
+Bivector-Proxy `L=(x-c_mem) wedge dx/dt_mem`. Reportet werden Amplitude,
+Radius-normalisierte Winkelgeschwindigkeit, Achsenpolarisation und eine
+Autokorrelations-Dephasierungszeit. Der `N=1M`-Pre-Run fuer `A_att=20/35`, Seeds
+`1..5`, trennt weiterhin klar in dynamischem Radius, Drift und Memory-Dimension.
+Der Spin-Proxy zeigt dagegen noch keine stabile Achse: `axis_polarization` liegt
+fuer aktive Faelle nur bei etwa `0.12`, die Dephasierung faellt bereits auf den
+ersten messbaren Trace-Lag und `eta_zero` erzeugt groessere rohe
+Spin-Amplituden. Lesart: gute Observablenbasis, aber kein Spinquantisierungs-
+oder Photonclaim. Report:
+`reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

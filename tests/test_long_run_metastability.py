@@ -138,6 +138,40 @@ def test_dynamic_center_trace_diagnostics_reports_comoving_runs() -> None:
     assert degenerate["comoving_inside_fraction"] == 0.0
     assert degenerate["degenerate_radius_fraction"] == 1.0
 
+def test_dynamic_center_trace_reports_spin_proxy() -> None:
+    cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
+    result = {
+        "trace_steps": np.array([10, 20, 30, 40, 50], dtype=np.int64),
+        "trace_centers": np.zeros((5, 2), dtype=float),
+        "trace_positions": np.array(
+            [[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0], [1.0, 0.0]],
+            dtype=float,
+        ),
+        "trace_mean_radii": np.ones(5, dtype=float),
+        "trace_rms_radii": np.ones(5, dtype=float),
+        "trace_x_distances": np.ones(5, dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=10,
+        primary_radius_factor=2.0,
+    )
+
+    assert diagnostics is not None
+    spin = diagnostics["spin_proxy"]
+    assert spin["component_count"] == 1
+    assert np.isclose(spin["valid_fraction"], 1.0)
+    assert spin["amplitude_median"] > 0.0
+    assert spin["angular_speed_median"] > 0.0
+    assert spin["axis_polarization"] > 0.99
+    assert spin["signed_component_median"] > 0.0
+    assert len(spin["transition_memory_times"]) == 4
+    assert len(spin["amplitudes"]) == 4
+    assert len(spin["angular_speeds"]) == 4
+    assert diagnostics["trace"]["positions"][0] == [1.0, 0.0]
+
 def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     samples = np.array(
         [

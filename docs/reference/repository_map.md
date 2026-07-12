@@ -22,7 +22,7 @@ flowchart TD
 
     experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
-    experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace plots"]
+    experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
@@ -109,7 +109,7 @@ flowchart LR
 flowchart TD
     plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_run_metastability.py"]
     runner --> local["data/processed/long_run_metastability<br/>ignored JSON outputs"]
-    local --> trace_review["dynamic_center_trace_report.py<br/>radius, drift, trace figures"]
+    local --> trace_review["dynamic_center_trace_report.py<br/>radius, drift, spin-proxy figures"]
     local --> review["manual review<br/>residence, controls, runtime"]
     trace_review --> report["reports/<br/>committed result report"]
     review --> report["reports/<br/>committed result report"]

@@ -15,6 +15,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def _repo_root() -> Path:
@@ -54,6 +55,16 @@ def _parse_steps(value: str) -> int:
 
 def _parse_float_token(value: str) -> float:
     return float(value.replace("p", "."))
+
+
+def _format_count(value: int | None) -> str:
+    if value is None:
+        return "n/a"
+    if value >= 1_000_000 and value % 1_000_000 == 0:
+        return f"{value // 1_000_000}M"
+    if value >= 1_000 and value % 1_000 == 0:
+        return f"{value // 1_000}k"
+    return f"{value:,}"
 
 
 def _fmt(value: float | int | None, digits: int = 3) -> str:
@@ -101,7 +112,6 @@ def _diagnostic_value(diagnostics: dict[str, Any], path: tuple[str, ...]) -> flo
     return out if math.isfinite(out) else None
 
 
-
 def _best_voxel_residence(diagnostics: dict[str, Any]) -> float | None:
     payload = diagnostics.get("residence_by_voxel_size")
     if not isinstance(payload, dict):
@@ -120,6 +130,40 @@ def _best_voxel_residence(diagnostics: dict[str, Any]) -> float | None:
         if math.isfinite(number):
             values.append(number)
     return max(values) if values else None
+
+
+def _steps_label(rows: list[dict[str, Any]]) -> str:
+    values = sorted({int(row["steps"]) for row in rows if row.get("steps") is not None})
+    if not values:
+        return "N=n/a"
+    if len(values) == 1:
+        return f"N={_format_count(values[0])}"
+    return "N in {" + ", ".join(_format_count(value) for value in values) + "}"
+
+
+def _seed_label(rows: list[dict[str, Any]]) -> str:
+    values = sorted({int(row["seed"]) for row in rows if row.get("seed") is not None})
+    if not values:
+        return "n/a"
+    if values == list(range(values[0], values[-1] + 1)):
+        return f"{values[0]}..{values[-1]}"
+    return ",".join(str(value) for value in values)
+
+
+def _a_label(rows: list[dict[str, Any]]) -> str:
+    values = sorted({float(row["a_att"]) for row in rows if row.get("a_att") is not None})
+    return "{" + ",".join(f"{value:g}" for value in values) + "}" if values else "n/a"
+
+
+def _condition_label(rows: list[dict[str, Any]]) -> str:
+    values = sorted({str(row["condition"]) for row in rows if row.get("condition") is not None})
+    return "{" + ",".join(values) + "}" if values else "n/a"
+
+
+def _rel(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
+
 def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
     cases: list[CaseRecord] = []
     for source_dir in source_dirs:
@@ -147,18 +191,27 @@ def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
 def _case_row(case: CaseRecord) -> dict[str, Any]:
     diagnostics = case.payload["diagnostics"]
     dynamic = diagnostics.get("dynamic_center_trace", {})
-    memory_shape = diagnostics.get("memory_cloud", {}).get("shape", {})
+    if not isinstance(dynamic, dict):
+        dynamic = {}
+    spin = dynamic.get("spin_proxy", {})
+    if not isinstance(spin, dict):
+        spin = {}
+    memory_cloud = diagnostics.get("memory_cloud", {})
+    memory_shape = memory_cloud.get("shape", {}) if isinstance(memory_cloud, dict) else {}
+    if not isinstance(memory_shape, dict):
+        memory_shape = {}
     return {
         "a_att": case.a_att,
         "steps": case.steps,
         "condition": case.condition,
         "seed": case.seed,
-        "path": case.path.relative_to(ROOT).as_posix(),
+        "path": _rel(case.path),
         "best_residence_memory_times": _best_voxel_residence(diagnostics),
         "memory_center_residence_memory_times": _diagnostic_value(
             diagnostics,
             ("center_residence", "memory_center", "primary_max_run_memory_times"),
         ),
+        "dynamic_trace_count": _diagnostic_value(dynamic, ("n_traces",)),
         "dynamic_inside_fraction": _diagnostic_value(dynamic, ("comoving_inside_fraction",)),
         "dynamic_inside_fraction_time_weighted": (
             _diagnostic_value(dynamic, ("comoving_inside_fraction_time_weighted",))
@@ -175,6 +228,15 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
         "dynamic_center_drift_radius_fraction_per_memory_time": _diagnostic_value(
             dynamic, ("center_drift_radius_fraction_per_memory_time_median",)
         ),
+        "spin_valid_fraction": _diagnostic_value(spin, ("valid_fraction",)),
+        "spin_amplitude_median": _diagnostic_value(spin, ("amplitude_median",)),
+        "spin_amplitude_cv": _diagnostic_value(spin, ("amplitude_cv",)),
+        "spin_angular_speed_median": _diagnostic_value(spin, ("angular_speed_median",)),
+        "spin_axis_polarization": _diagnostic_value(spin, ("axis_polarization",)),
+        "spin_direction_dephasing_memory_times": _diagnostic_value(
+            spin, ("direction_dephasing_memory_times",)
+        ),
+        "spin_signed_component_median": _diagnostic_value(spin, ("signed_component_median",)),
         "memory_shape_dimension": _diagnostic_value(memory_shape, ("effective_dimension",)),
         "memory_roundness": _diagnostic_value(memory_shape, ("axis_ratio_min_max",)),
         "memory_radius": _diagnostic_value(memory_shape, ("mean_radius",)),
@@ -184,6 +246,7 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
 SUMMARY_METRICS = [
     "best_residence_memory_times",
     "memory_center_residence_memory_times",
+    "dynamic_trace_count",
     "dynamic_inside_fraction",
     "dynamic_inside_fraction_time_weighted",
     "dynamic_max_run_memory_times",
@@ -191,6 +254,13 @@ SUMMARY_METRICS = [
     "dynamic_x_distance_to_radius_median",
     "dynamic_center_drift_per_memory_time",
     "dynamic_center_drift_radius_fraction_per_memory_time",
+    "spin_valid_fraction",
+    "spin_amplitude_median",
+    "spin_amplitude_cv",
+    "spin_angular_speed_median",
+    "spin_axis_polarization",
+    "spin_direction_dephasing_memory_times",
+    "spin_signed_component_median",
     "memory_shape_dimension",
     "memory_roundness",
     "memory_radius",
@@ -254,9 +324,11 @@ def _scatter_metric(
         x_labels.append(f"{a_att:g}")
         for condition in ["baseline", "eta_zero"]:
             values = _row_values(rows, a_att, condition, metric)
+            if log_y:
+                values = [value for value in values if value > 0.0]
             if not values:
                 continue
-            x = index + offsets[condition]
+            x = index + offsets.get(condition, 0.0)
             label = condition if condition not in labels_seen else None
             labels_seen.add(condition)
             ax.scatter(
@@ -264,16 +336,16 @@ def _scatter_metric(
                 values,
                 s=42,
                 alpha=0.75,
-                color=colors[condition],
+                color=colors.get(condition, "#0f172a"),
                 edgecolor="white",
                 linewidth=0.5,
                 label=label,
             )
             median = statistics.median(values)
             q1, q3 = _iqr(values)
-            ax.plot([x - 0.08, x + 0.08], [median, median], color=colors[condition], linewidth=2.4)
+            ax.plot([x - 0.08, x + 0.08], [median, median], color=colors.get(condition, "#0f172a"), linewidth=2.4)
             if q1 is not None and q3 is not None:
-                ax.vlines(x, q1, q3, color=colors[condition], linewidth=2.0, alpha=0.7)
+                ax.vlines(x, q1, q3, color=colors.get(condition, "#0f172a"), linewidth=2.0, alpha=0.7)
     ax.set_title(title)
     ax.set_xlabel("A_att")
     ax.set_ylabel(ylabel)
@@ -289,9 +361,60 @@ def _scatter_metric(
 def _trace(case: CaseRecord) -> dict[str, list[Any]]:
     diagnostics = case.payload["diagnostics"]
     dynamic = diagnostics.get("dynamic_center_trace", {})
-    trace = dynamic.get("trace", {})
+    trace = dynamic.get("trace", {}) if isinstance(dynamic, dict) else {}
     return trace if isinstance(trace, dict) else {}
 
+
+def _case_alpha(case: CaseRecord) -> float:
+    config = case.payload.get("config", {})
+    if not isinstance(config, dict):
+        return 1.0
+    try:
+        value = float(config.get("alpha", 1.0))
+    except (TypeError, ValueError):
+        return 1.0
+    return value if math.isfinite(value) and value > 0.0 else 1.0
+
+
+def _spin_trace_from_case(case: CaseRecord) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    trace = _trace(case)
+    steps = np.asarray(trace.get("steps", []), dtype=float)
+    centers = np.asarray(trace.get("centers", []), dtype=float)
+    positions = np.asarray(trace.get("positions", []), dtype=float)
+    radii = np.asarray(trace.get("rms_radii", []), dtype=float)
+    if steps.size < 2 or centers.shape != positions.shape or centers.ndim != 2:
+        empty = np.empty(0, dtype=float)
+        return empty, empty, empty
+    alpha = _case_alpha(case)
+    gaps = np.diff(steps) * alpha
+    valid_gap = np.isfinite(gaps) & (gaps > 0.0)
+    if not np.any(valid_gap):
+        empty = np.empty(0, dtype=float)
+        return empty, empty, empty
+    rel = positions - centers
+    velocity = np.diff(positions, axis=0)[valid_gap] / gaps[valid_gap, None]
+    rel_mid = 0.5 * (rel[:-1] + rel[1:])[valid_gap]
+    radius_mid = 0.5 * (radii[:-1] + radii[1:])[valid_gap]
+    times = 0.5 * (steps[:-1] + steps[1:])[valid_gap] * alpha
+    dim = rel_mid.shape[1]
+    if dim == 3:
+        components = np.cross(rel_mid, velocity)
+    elif dim >= 2:
+        pieces = []
+        for i in range(dim):
+            for j in range(i + 1, dim):
+                pieces.append(rel_mid[:, i] * velocity[:, j] - rel_mid[:, j] * velocity[:, i])
+        components = np.stack(pieces, axis=1) if pieces else np.empty((len(times), 0), dtype=float)
+    else:
+        components = np.empty((len(times), 0), dtype=float)
+    if components.shape[1] == 0:
+        empty = np.empty(0, dtype=float)
+        return empty, empty, empty
+    amplitude = np.linalg.norm(components, axis=1)
+    angular_speed = np.full(amplitude.shape, np.nan, dtype=float)
+    valid_radius = np.isfinite(radius_mid) & (radius_mid > 0.0) & np.isfinite(amplitude)
+    angular_speed[valid_radius] = amplitude[valid_radius] / (radius_mid[valid_radius] ** 2)
+    return times, amplitude, angular_speed
 
 def _representative_cases(cases: list[CaseRecord]) -> list[CaseRecord]:
     selected: list[CaseRecord] = []
@@ -313,6 +436,7 @@ def _representative_cases(cases: list[CaseRecord]) -> list[CaseRecord]:
 def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir: Path) -> list[Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     a_values = sorted({float(row["a_att"]) for row in rows})
+    run_label = _steps_label(rows)
     outputs: list[Path] = []
 
     specs = [
@@ -338,6 +462,20 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
                 ("dynamic_inside_fraction_time_weighted", "Dynamic Inside Fraction", "time-weighted fraction", False),
             ],
         ),
+        (
+            "dynamic_center_trace_q3_spin_proxy_2026-07-12.png",
+            [
+                ("spin_amplitude_median", "Spin-Proxy Amplitude", "median |r wedge v|", True),
+                ("spin_angular_speed_median", "Angular Speed Proxy", "median |L| / R^2", True),
+                ("spin_axis_polarization", "Axis Polarization", "|mean unit axis|", False),
+                (
+                    "spin_direction_dephasing_memory_times",
+                    "Axis Dephasing",
+                    "memory times to 1/e",
+                    True,
+                ),
+            ],
+        ),
     ]
     for filename, panels in specs:
         fig, axes = plt.subplots(1, len(panels), figsize=(5.0 * len(panels), 4.2), squeeze=False)
@@ -351,7 +489,7 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
                 a_values=a_values,
                 log_y=log_y,
             )
-        fig.suptitle("Dynamic center trace validation, N=3M", y=1.03)
+        fig.suptitle(f"Dynamic center trace validation, {run_label}", y=1.03)
         fig.tight_layout()
         path = output_dir / filename
         fig.savefig(path, dpi=220, bbox_inches="tight")
@@ -360,10 +498,11 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
 
     representatives = _representative_cases(cases)
     if representatives:
-        fig, axes = plt.subplots(2, len(representatives), figsize=(4.2 * len(representatives), 6.4), squeeze=False)
+        fig, axes = plt.subplots(3, len(representatives), figsize=(4.2 * len(representatives), 8.4), squeeze=False)
         for col, case in enumerate(representatives):
             trace = _trace(case)
-            steps = [float(value) * 0.01 for value in trace.get("steps", [])]
+            alpha = _case_alpha(case)
+            steps = [float(value) * alpha for value in trace.get("steps", [])]
             radii = [float(value) for value in trace.get("rms_radii", [])]
             xdist = [float(value) for value in trace.get("x_distances", [])]
             ratio = [
@@ -376,9 +515,18 @@ def write_plots(cases: list[CaseRecord], rows: list[dict[str, Any]], output_dir:
             axes[0, col].grid(True, alpha=0.25)
             axes[1, col].plot(steps, ratio, color="#0f766e")
             axes[1, col].axhline(2.0, color="#dc2626", linestyle="--", linewidth=1.0)
-            axes[1, col].set_xlabel("memory times")
             axes[1, col].set_ylabel("x distance / RMS radius")
             axes[1, col].grid(True, alpha=0.25)
+            spin_times, _, spin_omega = _spin_trace_from_case(case)
+            finite_spin = np.isfinite(spin_times) & np.isfinite(spin_omega) & (spin_omega > 0.0)
+            if np.any(finite_spin):
+                axes[2, col].plot(spin_times[finite_spin], spin_omega[finite_spin], color="#7c3aed")
+                axes[2, col].set_yscale("log")
+            else:
+                axes[2, col].text(0.5, 0.5, "n/a", ha="center", va="center", transform=axes[2, col].transAxes)
+            axes[2, col].set_xlabel("memory times")
+            axes[2, col].set_ylabel("spin |L| / R^2")
+            axes[2, col].grid(True, which="both", alpha=0.25)
         fig.suptitle("Representative dynamic trace, seed 1", y=1.02)
         fig.tight_layout()
         path = output_dir / "dynamic_center_trace_q3_seed1_timeseries_2026-07-12.png"
@@ -393,27 +541,32 @@ def write_report(
     summary: list[dict[str, Any]],
     rows: list[dict[str, Any]],
     figures: list[Path],
+    output_json: Path,
     output_path: Path,
 ) -> None:
     lines: list[str] = [
-        "# Dynamic Center Trace Validation",
+        "# Dynamic Center and Spin-Proxy Trace Validation",
         "",
         "Date: 2026-07-12.",
         "",
         "## Scope",
         "",
-        "This is the first validation run for the dynamic memory-center trace.",
-        "It is a measurement-methodology check, not a replacement for the",
-        "`N=300M` evidence set.",
+        "This report aggregates dynamic memory-center traces and the new",
+        "seedwise spin-proxy observables. It is a pre-long-run methodology check,",
+        "not a replacement for the `N=300M` evidence set.",
         "",
-        "Fixed parameters: `d=3`, seeds `1..5`, `N=3,000,000`, `trace_every=10,000`,",
-        "`burn_in=0`, `sample_every=200`, `alpha=lambda_m=0.01`, `M0=1`,",
-        "`epsilon=0.03`, `eta=0.15`, `A_rep=1`, `sigma_rep=1`, `sigma_att=3`,",
-        "`memory_factor=6`, `max_memory=600`, deposition `delta`.",
+        f"Run label: `{_steps_label(rows)}`.",
+        f"Seeds: `{_seed_label(rows)}`.",
+        f"A_att values: `{_a_label(rows)}`.",
+        f"Conditions: `{_condition_label(rows)}`.",
         "",
-        "Axis: `A_att in {20,35}` against matched `eta_zero` controls.",
+        "The spin proxy is the co-moving angular-momentum bivector",
+        "`L = (x - c_mem) wedge dx/dt_mem`, where `c_mem` is the contemporaneous",
+        "memory center and `t_mem = alpha n`. It is a continuous diagnostic of",
+        "amplitude, angular speed, axis polarization, and dephasing. It is not a",
+        "claim of quantized spin.",
         "",
-        "## Median Summary",
+        "## Dynamic-Center Median Summary",
         "",
         "| A_att | condition | dyn radius | dyn drift/radius/memtime | dyn inside weighted | dyn max run | final-center residence | voxel residence | memory dim | memory roundness |",
         "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
@@ -441,63 +594,80 @@ def write_report(
     lines.extend(
         [
             "",
+            "## Spin-Proxy Median Summary",
+            "",
+            "| A_att | condition | valid frac | amplitude | angular speed | axis polarization | dephase time | signed comp | amplitude CV |",
+            "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in summary:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{float(row['a_att']):g}`",
+                    f"`{row['condition']}`",
+                    _fmt(row.get("spin_valid_fraction_median")),
+                    _fmt(row.get("spin_amplitude_median_median")),
+                    _fmt(row.get("spin_angular_speed_median_median")),
+                    _fmt(row.get("spin_axis_polarization_median")),
+                    _fmt(row.get("spin_direction_dephasing_memory_times_median")),
+                    _fmt(row.get("spin_signed_component_median_median")),
+                    _fmt(row.get("spin_amplitude_cv_median")),
+                ]
+            )
+            + " |"
+        )
+
+    lines.extend(
+        [
+            "",
             "## Reading",
             "",
-            "The dynamic-center trace fixes one failure mode of the static final",
-            "memory-center residence: compact active runs can drift or re-center, so",
-            "a final absolute center is not a good global residence target.",
+            "The dynamic-center diagnostics remain the primary knot observables:",
+            "compact co-moving radius, slow normalized center drift, memory-shape",
+            "dimension/roundness, and residence controls. The spin proxy adds a",
+            "seedwise test for persistent oriented circulation around the moving",
+            "memory center.",
             "",
-            "However, `dynamic_inside_fraction` and `dynamic_max_run` are not by",
-            "themselves discriminating acceptance metrics. The `eta_zero` controls",
-            "also remain inside their own contemporaneous memory ball, because that",
-            "ball is much larger and follows the random walk.",
+            "Interpretation rules for this stage:",
             "",
-            "The useful discriminants in this pilot are therefore co-moving",
-            "compactness and normalized center drift:",
+            "- `spin_amplitude_median` measures the typical co-moving angular momentum scale.",
+            "- `spin_angular_speed_median` divides that amplitude by the squared memory radius.",
+            "- `spin_axis_polarization` near `1` means a stable oriented axis; near `0` means",
+            "  strong axis dephasing or axis wandering across the trace.",
+            "- `spin_direction_dephasing_memory_times` is the first autocorrelation lag below",
+            "  `1/e`, if that crossing occurs within the stored trace lags.",
+            "- `eta_zero` can still generate incidental angular momentum from random walks, so",
+            "  active conditions only become interesting if amplitude, axis stability, or",
+            "  dephasing separate seedwise from matched controls and remain stable with N.",
             "",
-            "- `A_att=20`: median dynamic RMS radius is about `0.087` versus",
-            "  `0.344` for `eta_zero`; median drift/radius/memory-time is about",
-            "  `0.028` versus `0.129`.",
-            "- `A_att=35`: median dynamic RMS radius is about `0.062` versus",
-            "  `0.344` for `eta_zero`; median drift/radius/memory-time is about",
-            "  `0.017` versus `0.129`.",
-            "- Memory-shape dimension remains near three for the active candidates",
-            "  and near `1.5` for `eta_zero` in this pilot.",
-            "",
-            "Interpretation: the co-moving-object picture is methodologically",
-            "stronger than the fixed-center picture, but the acceptance criterion",
-            "should be `compact, slowly drifting memory cloud`, not merely",
-            "`point remains inside the moving memory ball`.",
+            "For the current pre-long-run scale, these values should be read as observable",
+            "calibration, not as particle-spin evidence.",
             "",
             "## Decision",
             "",
-            "For Paper I, dynamic center diagnostics should be reported as:",
-            "",
-            "- dynamic RMS radius / memory compactness;",
-            "- center drift normalized by current radius and memory time;",
-            "- memory shape dimension and roundness;",
-            "- voxel residence as a complementary but grid-sensitive observable;",
-            "- final-center residence only as a warning/drift diagnostic.",
-            "",
-            "Next technical step: repeat this trace diagnostic at a longer scale",
-            "(`30M` first, not immediately `300M`) with `trace_every=100,000` if",
-            "the goal is to test whether the normalized drift and compact radius",
-            "remain stable over much longer trajectories.",
+            "Use this trace layer to decide whether the next expensive run has stable",
+            "co-moving compactness and stable or dephasing spin proxies. If the spin",
+            "metrics are noisy but the compactness/drift metrics remain separated from",
+            "`eta_zero`, continue the scalar-knot track. If spin-axis persistence appears",
+            "only in active cases and survives longer N, it becomes a candidate input for",
+            "a separate ModeScore or vector-memory test, not a KnotScore replacement.",
             "",
             "## Figures",
             "",
         ]
     )
     for figure in figures:
-        lines.append(f"- `{figure.relative_to(ROOT).as_posix()}`")
+        lines.append(f"- `{_rel(figure)}`")
     lines.extend(
         [
             "",
             "## Raw Rows",
             "",
             f"- Case rows: `{len(rows)}`.",
+            f"- Machine-readable aggregate: `{_rel(output_json)}`.",
             "- Raw JSON outputs remain under ignored `data/processed/long_run_metastability/`.",
-            "- Machine-readable aggregate: `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_summary_2026-07-12.json`.",
         ]
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -545,6 +715,7 @@ def main() -> None:
     output_json.write_text(
         json.dumps(
             {
+                "run_label": _steps_label(rows),
                 "source_dirs": [path.relative_to(ROOT).as_posix() for path in source_dirs],
                 "rows": rows,
                 "summary": summary,
@@ -557,7 +728,7 @@ def main() -> None:
         encoding="utf-8",
     )
     report = args.report if args.report.is_absolute() else ROOT / args.report
-    write_report(summary=summary, rows=rows, figures=figures, output_path=report)
+    write_report(summary=summary, rows=rows, figures=figures, output_json=output_json, output_path=report)
     print(f"wrote {output_json}")
     print(f"wrote {report}")
     for figure in figures:

@@ -11,7 +11,7 @@ Hardening und Long-Run-Metastabilitaet.
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
-| `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius und Memory-Shape gegen `eta_zero` |
+| `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
 | `experiments/current/dynamics/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
@@ -185,6 +185,15 @@ radiusnormalisierte Center-Drift pro Memory-Zeit und Memory-Shape die
 relevanten co-moving Metriken. Aggregation/Plots:
 `experiments/current/dynamics/dynamic_center_trace_report.py`; Report:
 `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
+
+Spin-Proxy-Erweiterung 2026-07-12: Die Trace-Payload enthaelt nun auch
+`trace.positions`; daraus wird der kontinuierliche Bivector-Proxy
+`L=(x-c_mem) wedge dx/dt_mem` berechnet. Felder: `spin_proxy.amplitude_median`,
+`angular_speed_median`, `axis_polarization`, `direction_autocorrelation` und
+`direction_dephasing_memory_times`. Der `N=1M`-Pre-Run zeigt keine belastbare
+Spinachse; `axis_polarization` bleibt niedrig und `eta_zero` hat groessere rohe
+Amplitude. Report:
+`reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
 `--trace-spacing log`, keine neue Parameterachse.
 
