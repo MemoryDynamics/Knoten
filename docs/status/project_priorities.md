@@ -1,4 +1,4 @@
-﻿# Projektprioritaeten
+# Projektprioritaeten
 
 Stand: 2026-07-12.
 
@@ -158,16 +158,19 @@ Naechster operativer Schritt:
     `A_att=20/35`, Seeds `1..5`, gegen `eta_zero`. Rund 100 logarithmische
     Punkte definieren Trend-KPIs; ein gleichmaessiges Endfenster mit 10,001
     Punkten (`dt_mem=0.01`, 100 Memory-Zeiten) definiert lokale Spin-KPIs.
-    Radius und Trend-Drift trennen robust. Die Spinachse dephasiert dagegen in
-    allen Faellen nach einem Update (`axis_polarization ~= 0.01`): negativer
+    Radius und Trend-Drift trennen robust. Der Spin-Proxy wird im mitbewegten
+    Memory-Center-Rahmen berechnet; die Spinachse dephasiert dagegen in allen
+    Faellen nach einem Update (`axis_polarization ~= 0.01`): negativer
     skalarer Modenbefund, kein Paper-I-Blocker. Report:
     `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 16. Abgeschlossen: Epsilon-Dynamic-Center-Sweep fuer `A_att=35`, Seeds `1..3`,
     `N=100k`, `epsilon=0` plus 24 logarithmische Werte `1e-12..1e1`, gegen
     seedgleiche `eta_zero`-Kontrollen. Ergebnis: v0.5-Score-Plateau ab etwa
     `epsilon=1.65e-6` bis `0.741`; bei `epsilon=2.72` kollabiert der aktive
-    Lauf auf `eta_zero`-aehnliche Metriken. Spin bleibt negativ
-    (`axis_polarization ~0.017`, Dephasierung ein Update). Report:
+    Lauf auf `eta_zero`-aehnliche Metriken. Die mitbewegte Reanalyse korrigiert
+    `L_int=(x-c_mem) wedge d(x-c_mem)/dt_mem`, entfernt aber nur einen kleinen
+    Translationsanteil: Spin bleibt negativ (`axis_polarization ~0.017`,
+    Dephasierung ein Update). Report:
     `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
 17. Naechster Paper-I-Schritt: kurzer Bestaetigungsslice im Epsilon-Plateau,
     bevor der `N=30M`-Hybrid-Trace gestartet wird. Kandidaten: `epsilon in

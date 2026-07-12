@@ -650,16 +650,32 @@ def _bivector_components(rel: np.ndarray, velocity: np.ndarray) -> np.ndarray:
     return np.stack(components, axis=1) if components else np.empty((n_points, 0), dtype=float)
 
 
-def _direction_autocorrelation(unit_vectors: np.ndarray, *, max_lag: int) -> np.ndarray:
+def _direction_autocorrelation(
+    unit_vectors: np.ndarray,
+    *,
+    max_lag: int,
+    weights: np.ndarray | None = None,
+) -> np.ndarray:
     arr = np.asarray(unit_vectors, dtype=float)
     if arr.ndim != 2 or arr.shape[0] < 2 or max_lag < 0:
         return np.empty(0, dtype=float)
+    if weights is None:
+        sample_weights = np.ones(arr.shape[0], dtype=float)
+    else:
+        sample_weights = np.asarray(weights, dtype=float)
+        if sample_weights.shape != (arr.shape[0],):
+            return np.empty(0, dtype=float)
+        sample_weights = np.where(
+            np.isfinite(sample_weights) & (sample_weights > 0.0), sample_weights, 0.0
+        )
     lag_max = min(max_lag, arr.shape[0] - 1)
     out = np.empty(lag_max + 1, dtype=float)
     out[0] = 1.0
     for lag in range(1, lag_max + 1):
         dots = np.sum(arr[:-lag] * arr[lag:], axis=1)
-        out[lag] = float(np.mean(dots)) if len(dots) else float("nan")
+        pair_weights = sample_weights[:-lag] * sample_weights[lag:]
+        total_weight = float(np.sum(pair_weights))
+        out[lag] = float(np.sum(pair_weights * dots) / total_weight) if total_weight > 0.0 else float("nan")
     return out
 
 
@@ -719,16 +735,27 @@ def _spin_proxy_diagnostics(
         return None
 
     rel = positions - centers
-    displacements = np.diff(positions, axis=0)
-    velocity = displacements[valid_gap] / memory_gaps[valid_gap, None]
+    lab_displacements = np.diff(positions, axis=0)
+    center_displacements = np.diff(centers, axis=0)
+    relative_displacements = np.diff(rel, axis=0)
+    lab_velocity = lab_displacements[valid_gap] / memory_gaps[valid_gap, None]
+    center_velocity = center_displacements[valid_gap] / memory_gaps[valid_gap, None]
+    velocity = relative_displacements[valid_gap] / memory_gaps[valid_gap, None]
     rel_mid = 0.5 * (rel[:-1] + rel[1:])[valid_gap]
     radius_mid = 0.5 * (rms_radii[:-1] + rms_radii[1:])[valid_gap]
     transition_times = 0.5 * (steps[:-1] + steps[1:])[valid_gap].astype(float) * float(alpha)
 
+    # This is internal circulation in the frame of the moving memory center.
+    # The laboratory-frame value is retained solely to quantify removed drift.
     spin_components = _bivector_components(rel_mid, velocity)
+    lab_spin_components = _bivector_components(rel_mid, lab_velocity)
     if spin_components.shape[1] == 0:
         return None
     amplitude = np.linalg.norm(spin_components, axis=1)
+    lab_amplitude = np.linalg.norm(lab_spin_components, axis=1)
+    lab_amplitude = lab_amplitude[np.isfinite(lab_amplitude) & (lab_amplitude > 0.0)]
+    center_speed = np.linalg.norm(center_velocity, axis=1)
+    comoving_speed = np.linalg.norm(velocity, axis=1)
     valid_amplitude = np.isfinite(amplitude) & (amplitude > 0.0)
     if not np.any(valid_amplitude):
         return {
@@ -737,11 +764,15 @@ def _spin_proxy_diagnostics(
             "sample_count": int(len(steps)),
             "sample_interval_memory_times": _finite_float(sample_interval_memory_times),
             "window_span_memory_times": _finite_float(window_span_memory_times),
+            "velocity_frame": "memory_center_comoving",
             "amplitude_median": 0.0,
             "amplitude_q25": 0.0,
             "amplitude_q75": 0.0,
             "amplitude_cv": None,
             "angular_speed_median": None,
+            "comoving_speed_median": _finite_percentile(comoving_speed, 50.0),
+            "center_speed_median": _finite_percentile(center_speed, 50.0),
+            "lab_frame_amplitude_median": _finite_percentile(lab_amplitude, 50.0),
             "axis_polarization": None,
             "direction_dephasing_memory_times": None,
             "transition_memory_times": [_finite_float(value) for value in transition_times],
@@ -755,11 +786,11 @@ def _spin_proxy_diagnostics(
     if np.any(finite_radius):
         angular_speed_full[finite_radius] = amplitude[finite_radius] / (radius_mid[finite_radius] ** 2)
     angular_speed = angular_speed_full[np.isfinite(angular_speed_full)]
-    direction_ac = _direction_autocorrelation(unit, max_lag=max_lag)
+    direction_ac = _direction_autocorrelation(unit, max_lag=max_lag, weights=amplitude_valid)
     valid_times = transition_times[valid_amplitude]
     lag_times = _lag_memory_times(valid_times, max_lag=max_lag)
     dephasing = _first_dephasing_time(direction_ac, lag_times)
-    mean_unit = np.mean(unit, axis=0)
+    mean_unit = np.average(unit, axis=0, weights=amplitude_valid)
     axis_norm = float(np.linalg.norm(mean_unit)) if len(mean_unit) else None
     amplitude_mean = float(np.mean(amplitude_valid))
     amplitude_std = float(np.std(amplitude_valid))
@@ -776,6 +807,7 @@ def _spin_proxy_diagnostics(
         "sample_count": int(len(steps)),
         "sample_interval_memory_times": _finite_float(sample_interval_memory_times),
         "window_span_memory_times": _finite_float(window_span_memory_times),
+        "velocity_frame": "memory_center_comoving",
         "amplitude_median": _finite_float(float(np.median(amplitude_valid))),
         "amplitude_q25": _finite_percentile(amplitude_valid, 25.0),
         "amplitude_q75": _finite_percentile(amplitude_valid, 75.0),
@@ -783,6 +815,9 @@ def _spin_proxy_diagnostics(
         "angular_speed_median": _finite_percentile(angular_speed, 50.0),
         "angular_speed_q25": _finite_percentile(angular_speed, 25.0),
         "angular_speed_q75": _finite_percentile(angular_speed, 75.0),
+        "comoving_speed_median": _finite_percentile(comoving_speed, 50.0),
+        "center_speed_median": _finite_percentile(center_speed, 50.0),
+        "lab_frame_amplitude_median": _finite_percentile(lab_amplitude, 50.0),
         "axis_polarization": _finite_float(axis_norm),
         "signed_component_median": signed_component_median,
         "signed_component_mean": signed_component_mean,

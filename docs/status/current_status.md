@@ -1,4 +1,4 @@
-﻿# Aktueller Stand
+# Aktueller Stand
 
 Stand: 2026-07-12.
 
@@ -357,11 +357,13 @@ Center-Geschwindigkeit und Winkelgeschwindigkeit von der Abtastkadenz
 abhaengen. Der `N=1M`-Pre-Run fuer `A_att=20/35`, Seeds `1..5`, verwendet im
 letzten Fenster 10,001 Punkte ueber 100 Memory-Zeiten (`dt_mem=0.01`). Die
 logarithmischen Trendwerte bestaetigen Radius/Drift-Trennung gegen `eta_zero`.
-Der lokale Bivector-Proxy `L=(x-c_mem) wedge dx/dt_mem` zeigt dagegen keinen
+Der lokale Bivector-Proxy verwendet nun den mitbewegten Rahmen
+`L_int=(x-c_mem) wedge d(x-c_mem)/dt_mem`; der Radius bleibt dabei eine
+separate Knotenobservable. Der korrigierte Proxy zeigt weiterhin keinen
 persistenten skalaren Spinmodus: `axis_polarization ~= 0.01` und Dephasierung
-bereits nach einem Update in aktiven Faellen und Kontrollen. Die groessere
-aktive normierte Winkelgeschwindigkeit entsteht bei viel kleinerem Radius;
-die rohe Amplitude ist in `eta_zero` groesser. Kein Spinquantisierungs- oder
+bereits nach einem Update in aktiven Faellen und Kontrollen. Labor- und
+mitbewegte Amplituden liegen im Epsilon-Sweep nahe beieinander, daher erklaert
+Center-Drift diesen negativen Befund nicht. Kein Spinquantisierungs- oder
 Photonclaim. Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
 
@@ -370,7 +372,9 @@ Epsilon-Dynamic-Center-Sweep 2026-07-12: Fuer `A_att=35`, Seeds `1..3`,
 seedgleiche `eta_zero`-Kontrollen, zeigt sich ein klares kurzes Score-Plateau:
 `score >= 0.75` ab etwa `epsilon=1.65e-6` bis `0.741`. Bei `epsilon=2.72`
 werden Radius, Drift, Memory-Dimension und Spin-Proxy praktisch
-`eta_zero`-aehnlich. Unterhalb `~1e-6` ist die Dynamik skalenartig, aber
+`eta_zero`-aehnlich. Die nachtraegliche mitbewegte Spin-Reanalyse entfernt
+nur einen kleinen Labor-Translationsanteil und bestaetigt den negativen
+Orientierungsbefund. Unterhalb `~1e-6` ist die Dynamik skalenartig, aber
 Memory-Roundness/Score-Gating teils degeneriert. Operativ: vor dem naechsten
 30M-Lauf zuerst einen kurzen Plateau-Bestaetigungsslice fuer `A_att=20/35`
 rechnen; `epsilon=0.03` ist nicht mehr als alternativloser Default zu lesen.

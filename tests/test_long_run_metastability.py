@@ -186,6 +186,63 @@ def test_dynamic_center_trace_reports_spin_proxy() -> None:
     assert len(spin["angular_speeds"]) == 4
     assert diagnostics["trace"]["positions"][0] == [1.0, 0.0]
 
+def test_spin_proxy_removes_common_memory_center_translation() -> None:
+    cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
+    steps = np.array([10, 20, 30, 40, 50], dtype=np.int64)
+    centers = np.column_stack((np.arange(len(steps), dtype=float), np.zeros(len(steps))))
+    result = {
+        "trace_steps": steps,
+        "trace_centers": centers,
+        "trace_positions": centers + np.array([0.0, 1.0]),
+        "trace_mean_radii": np.ones(len(steps), dtype=float),
+        "trace_rms_radii": np.ones(len(steps), dtype=float),
+        "trace_x_distances": np.ones(len(steps), dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=10,
+    )
+
+    assert diagnostics is not None
+    spin = diagnostics["spin_proxy"]
+    assert spin["velocity_frame"] == "memory_center_comoving"
+    assert spin["amplitude_median"] == 0.0
+    assert spin["lab_frame_amplitude_median"] > 0.0
+    assert spin["center_speed_median"] > 0.0
+    assert spin["comoving_speed_median"] == 0.0
+
+
+def test_spin_proxy_preserves_rotation_under_common_translation() -> None:
+    cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
+    steps = np.array([10, 20, 30, 40, 50], dtype=np.int64)
+    centers = np.column_stack((np.arange(len(steps), dtype=float), np.zeros(len(steps))))
+    orbit = np.array(
+        [[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0], [1.0, 0.0]],
+        dtype=float,
+    )
+    result = {
+        "trace_steps": steps,
+        "trace_centers": centers,
+        "trace_positions": centers + orbit,
+        "trace_mean_radii": np.ones(len(steps), dtype=float),
+        "trace_rms_radii": np.ones(len(steps), dtype=float),
+        "trace_x_distances": np.ones(len(steps), dtype=float),
+    }
+
+    diagnostics = long_run_metastability._dynamic_center_trace_diagnostics(
+        result,
+        config=cfg,
+        trace_every=10,
+    )
+
+    assert diagnostics is not None
+    spin = diagnostics["spin_proxy"]
+    assert spin["amplitude_median"] > 0.0
+    assert spin["axis_polarization"] > 0.99
+    assert spin["lab_frame_amplitude_median"] > 0.0
+
 def test_hybrid_trace_separates_log_trend_from_local_spin_window() -> None:
     cfg = SimulationConfig(steps=100, dim=2, alpha=0.1, sample_every=10)
     steps = np.array([1, 10, 70, 80, 90, 100], dtype=np.int64)

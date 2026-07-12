@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 from dataclasses import asdict
@@ -188,7 +188,10 @@ def _case_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
         ),
         "dynamic_max_run_memory_times": _diagnostic_value(trend, ("max_run_memory_times",)),
         "spin_amplitude_median": _diagnostic_value(spin, ("amplitude_median",)),
+        "spin_lab_frame_amplitude_median": _diagnostic_value(spin, ("lab_frame_amplitude_median",)),
         "spin_angular_speed_median": _diagnostic_value(spin, ("angular_speed_median",)),
+        "spin_comoving_speed_median": _diagnostic_value(spin, ("comoving_speed_median",)),
+        "spin_center_speed_median": _diagnostic_value(spin, ("center_speed_median",)),
         "spin_axis_polarization": _diagnostic_value(spin, ("axis_polarization",)),
         "spin_direction_dephasing_memory_times": _diagnostic_value(
             spin, ("direction_dephasing_memory_times",)
@@ -202,10 +205,57 @@ def _case_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _refresh_dynamic_center_payload(payload: dict[str, Any]) -> None:
+    """Recompute frame-sensitive diagnostics from persisted center/position traces."""
+    diagnostics = payload.get("diagnostics")
+    config_payload = payload.get("config")
+    if not isinstance(diagnostics, dict) or not isinstance(config_payload, dict):
+        return
+    dynamic = diagnostics.get("dynamic_center_trace")
+    trace = dynamic.get("trace") if isinstance(dynamic, dict) else None
+    if not isinstance(trace, dict):
+        return
+    try:
+        config = SimulationConfig(**config_payload)
+        steps = np.asarray(trace.get("steps", []), dtype=np.int64)
+        centers = np.asarray(trace.get("centers", []), dtype=float)
+        positions = np.asarray(trace.get("positions", []), dtype=float)
+        mean_radii = np.asarray(trace.get("mean_radii", []), dtype=float)
+        rms_radii = np.asarray(trace.get("rms_radii", []), dtype=float)
+        x_distances = np.asarray(trace.get("x_distances", []), dtype=float)
+        if len(steps) < 3:
+            return
+        tail_gap = int(steps[-1] - steps[-2])
+        if tail_gap <= 0:
+            return
+        result = {
+            "trace_steps": steps,
+            "trace_centers": centers,
+            "trace_positions": positions,
+            "trace_mean_radii": mean_radii,
+            "trace_rms_radii": rms_radii,
+            "trace_x_distances": x_distances,
+        }
+    except (TypeError, ValueError) as error:
+        raise ValueError("cannot reconstruct dynamic-center diagnostics from persisted trace") from error
+    refreshed = metastability_run._dynamic_center_trace_diagnostics(
+        result,
+        config=config,
+        trace_every=tail_gap,
+    )
+    if not isinstance(refreshed, dict):
+        raise ValueError("persisted trace did not yield dynamic-center diagnostics")
+    if "spin_proxy" not in refreshed:
+        raise ValueError("persisted trace did not yield a regular spin window")
+    diagnostics["dynamic_center_trace"] = refreshed
+
+
 def _load_payloads(output_dir: Path) -> list[tuple[Path, dict[str, Any]]]:
-    items: list[tuple[Path, dict[str, Any]]] = []
+    items: list[tuple[Path, dict[str, Any]]]
+    items = []
     for path in sorted(output_dir.glob("eps_*/case_*.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
+        _refresh_dynamic_center_payload(payload)
         trace_report._ensure_trend_payload(payload)
         items.append((path, payload))
     return items
@@ -261,7 +311,10 @@ SUMMARY_METRICS = [
     "dynamic_inside_fraction_time_weighted",
     "dynamic_max_run_memory_times",
     "spin_amplitude_median",
+    "spin_lab_frame_amplitude_median",
     "spin_angular_speed_median",
+    "spin_comoving_speed_median",
+    "spin_center_speed_median",
     "spin_axis_polarization",
     "spin_direction_dephasing_memory_times",
     "spin_sample_interval_memory_times",
@@ -528,8 +581,8 @@ def write_report(
         "",
         "## Median Summary",
         "",
-        "| epsilon | condition | score | dyn radius | drift/radius/memtime | memory dim | memory roundness | spin amp | spin omega | axis pol | dephase |",
-        "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| epsilon | condition | score | dyn radius | drift/radius/memtime | memory dim | memory roundness | internal spin amp | lab spin amp | spin omega | axis pol | dephase |",
+        "| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary:
         lines.append(
@@ -544,6 +597,7 @@ def write_report(
                     _fmt(row.get("memory_shape_dimension_median")),
                     _fmt(row.get("memory_roundness_median")),
                     _fmt(row.get("spin_amplitude_median_median")),
+                    _fmt(row.get("spin_lab_frame_amplitude_median_median")),
                     _fmt(row.get("spin_angular_speed_median_median")),
                     _fmt(row.get("spin_axis_polarization_median")),
                     _fmt(row.get("spin_direction_dephasing_memory_times_median")),
@@ -576,8 +630,11 @@ def write_report(
             "Use this sweep as a threshold finder, not as final evidence. The relevant",
             "signal is a band where radius and radius-normalized center drift improve",
             "against `eta_zero` without creating only a deterministic zero-start artifact.",
-            "Persistent spin would require axis polarization or dephasing to separate",
-            "from controls; a large angular-speed proxy alone is insufficient.",
+            "Spin quantities use `r = x - c_memory` and the co-moving velocity",
+            "`d(x - c_memory)/dt`; the adjacent laboratory-frame amplitude reports the",
+            "translation removed by that correction. Persistent internal circulation would",
+            "require amplitude, axis polarization, and dephasing to separate from controls.",
+            "A large angular-speed proxy alone is insufficient.",
             "",
             "## Figures",
             "",
