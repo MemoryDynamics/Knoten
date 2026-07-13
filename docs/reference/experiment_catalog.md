@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-12.
+Stand: 2026-07-13.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -12,6 +12,7 @@ Hardening und Long-Run-Metastabilitaet.
 | --- | --- | --- | --- |
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
+| `experiments/current/dynamics/paper_i_evidence_table.py` | Paper-I-Evidenztabelle aus Long-Run-Summaries | aktiv | konservative Claim-Tabelle fuer co-moving scalar-knot Evidenz |
 | `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
@@ -19,6 +20,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/current/kernels/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
+| `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/dynamics/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
 | `experiments/current/reference/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
@@ -209,6 +211,10 @@ langsamere radiusnormalisierte Center-Drift, `D_mem ~=2.94` und Roundness
 `~=0.843`. Spin bleibt negativ (`axis_polarization ~=0.01`, rohe
 `L`-Dephasierung `<=dt_mem`). Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md`.
+
+Paper-I-Evidenztabelle 2026-07-13: `experiments/current/dynamics/paper_i_evidence_table.py` verdichtet den `N=30M`-Hybrid-Trace in eine konservative Claim-Tabelle. Fuer `A_att=35`, `epsilon=1e-4` ist der aktive Lauf im Median etwa Faktor `4.96` kompakter als `eta_zero`, und die radiusnormalisierte Center-Drift ist um etwa Faktor `7.33` getrennt. Raw Voxel-Residence bleibt eine Guardrail, aber keine Hauptakzeptanzmetrik. Report: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
+
+Long-Run-Trace-AR 2026-07-13: `experiments/current/markov/long_run_trace_ar_report.py` fittet Block-AR-Maps auf dem gleichmaessig abgetasteten Endfenster derselben `N=30M`-Laeufe. Komplexe Klassifikationen treten auch in `eta_zero` auf und sind nicht als aktiver skalarer Phasen-/Photonmodus isoliert. Fuer Paper I ist der Befund neutral bis negativ fuer Oszillationssprache, aber kompatibel mit Relaxations-/Kompaktheitsevidenz. Report: `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md`.
 
 Epsilon-Dynamic-Center-Sweep 2026-07-12: `epsilon_dynamic_center_sweep.py`
 variiert nur `epsilon` fuer den korrigierten kompakten Referenzkandidaten
@@ -551,6 +557,9 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/long_runs/scalar_hardening/scalar_n_scaling_q3_2026-07-10.md` | Scalar-N-Skalierung q=3 | `A_att=20/35`, `N=100k..3M`, `burn_in=0`; kompakte Memory-Clouds bilden schnell, Residence bleibt Engpass. |
 | `reports/long_runs/long_3e8/long_run_3e8_launch_2026-07-10.md` | 3e8-Launch | Hintergrundlaeufe fuer `A_att=20/35`, Seeds `1..5`, `N=300M`, mit Center-/Memory-Ball-Residence gestartet. |
 | `reports/long_runs/long_3e8/long_run_3e8_results_2026-07-11.md` | 3e8-Resultate | v0.5-Score und Voxel-Residence tragen bei `A_att=20/35`; fixe finale Memory-Center-Residence zeigt Drift/Rezentering und motiviert dynamische Center-Diagnostik. |
+| `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | `A_att=35`, `epsilon=1e-4` ist der aktuelle scalar long-run reference candidate; Spin-Proxy bleibt negativ. |
+| `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md` | Paper-I-Evidenztabelle | Co-moving Radius, Drift/Radius, Memory-Dimension und Roundness trennen `A_att=35` klar von `eta_zero`; keine Spin-/Photon-/Masseclaims. |
+| `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/vector_memory/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |
@@ -586,7 +595,8 @@ Weiter offen:
 - vollstaendige Memory-Traces oder reichere Feature-Familien;
 - systematischer Bootstrap;
 - PCCA-/HMM-/PMM-basierte metastabile Zustandsmodelle;
-- Long-Run-Transferoperatoren statt Kurzlauf-Sanity-Checks.
+- Long-Run-Trace-AR auf dem N=30M-Endfenster ist als erster Reanalyse-Schritt vorhanden;
+- Long-Run-Transferoperatoren mit reicheren Features statt Kurzlauf-Sanity-Checks.
 
 ## Effektive Dimension
 

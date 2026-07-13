@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-09.
+Stand: 2026-07-13.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -29,8 +29,7 @@ Nicht Aufgabe von Paper 0:
 
 ## Paper I: Minimal Dynamical Foundation
 
-Status: mathematisch mit Paper 0 synchronisiert; numerische Evidenz wird jetzt
-gehaertet.
+Status: mathematisch mit Paper 0 synchronisiert; korrigierte skalare Long-Run-Evidenz traegt als vorsichtiger co-moving Memory-Cloud-Befund.
 
 Aktuell tragbar:
 
@@ -42,7 +41,8 @@ Aktuell tragbar:
 
 Noch nicht tragbar:
 
-- robuste Knotenexistenz aus einem einzelnen Baseline-Long-Run;
+- fixed absolute spatial knots;
+- stabiler skalarer Spin-/Phasen-/Photonmodus;
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
@@ -54,7 +54,7 @@ Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
 
 Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
-repulsiv, `A_att` breit attraktiv im Potentialmodell. Der erste Block-Markov-/AR-Modentest auf `A_att=9` und `A_att=35` findet nur reelle langsame Moden. Fuer Paper I bleibt daher skalare Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
+repulsiv, `A_att` breit attraktiv im Potentialmodell. Der `N=30M`, `epsilon=1e-4`-Hybrid-Trace fuer `A_att=20/35` trennt aktive Laeufe in co-moving Radius, Drift/Radius, Memory-Dimension und Roundness klar von `eta_zero`; `A_att=35` ist der aktuelle skalare Referenzkandidat. Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`, also keinen kontrollgetrennten skalaren Oszillator. Fuer Paper I bleibt daher Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -86,7 +86,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | korrigierte kompakte Kurzlauf-Kandidaten; Uebergang bei `A_att ~= 7.9`, Long-Run-Metastabilitaet offen | laengere Residence/Score-Laeufe nur im Kandidatenfenster |
+| Knoten als metastabile Regime | korrigierte `N=30M`-Evidenz fuer co-moving kompakte Memory-Clouds bei `A_att=20/35`, staerkster Kandidat `A_att=35`; kein fixes Zentrum | Paper-I-Text auf Radius, Drift/Radius, Memory-Shape und Kontrolltrennung ausrichten |
 | Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |

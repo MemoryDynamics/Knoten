@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-12.
+Stand: 2026-07-13.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -186,7 +186,11 @@ Naechster operativer Schritt:
     negativ: Achsenpolarisation nahe `0.01`, rohe `L`-Dephasierung `<=dt_mem`.
     Report:
     `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md`.
-18. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+18. Abgeschlossen: Paper-I-Evidenztabelle fuer den `N=30M`, `epsilon=1e-4`-Referenzslice. Fuer `A_att=35` ist die aktive Memory-Cloud im Median etwa Faktor `4.96` kompakter als `eta_zero`, die radiusnormalisierte Center-Drift ist um Faktor `7.33` getrennt. Report:
+    `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
+19. Abgeschlossen: Long-Run-Trace-AR-Modencheck auf dem gleichmaessigen Endfenster derselben `N=30M`-Laeufe. Komplexe AR-Klassifikationen treten auch in `eta_zero` auf und sind nicht kontrollgetrennt; kein skalarer Photon-/Phasenclaim. Report:
+    `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md`.
+20. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`. Spin-
@@ -194,19 +198,15 @@ Naechster operativer Schritt:
     am ersten Lag sind zensierte Obergrenzen `<= dt_mem`, nicht exakt aufgeloeste
     Zeiten; kein KnotScore- oder Teilchenspin-Claim.
 
-Wenn der Score traegt:
+Aktueller naechster Schritt:
 
-- Paper-I-Evidenztabelle mit vorsichtiger Claim-Sprache auf Basis des `N=30M`, `epsilon=1e-4`, `A_att=35` reference candidate.
-- Transferoperator-/AR-Mode-Features auf den `N=30M`-Long-Run-Daten.
-
-Wenn der Score nicht traegt:
-
-- Residence-Kriterium und Kernelkonventionen ueberarbeiten;
-- keine starke Knotenbehauptung in Paper I.
+- Paper-I-Text und ggf. Supplement auf die neue Evidenztabelle synchronisieren.
+- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in Paper I.
+- Naechste technische Haertung: richer Transferoperator-/Feature-Closure statt weiterer Blindscans; danach erst gezielte `lambda_m`/`sigma`/Amplitudenachsen.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; naechster Schritt ist Reanalyse statt Blindscan.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse ist erledigt, naechster Schritt ist Paper-I-Synchronisierung plus gezielte Feature-Closure.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -229,9 +229,9 @@ Prioritaet:
    Kompaktheit und Memory-Shape sind schnell stabil; Residence-Gain bleibt
    median unter `2`.
 5. Fuer Paper I: dynamische Center-Trace-Diagnostik ist implementiert und im
-   `N=3M`-Pilot validiert. Die `3e8`-Laeufe tragen compact co-moving
-   memory-cloud evidence, aber noch keinen fixen spatial-knot claim. Akzeptiert
-   wird kuenftig ein zeitlokaler Befund aus Radius, radiusnormalisierter
+   `N=30M`-Referenzslice validiert. Die Laeufe tragen co-moving compact
+   memory-cloud evidence, aber keinen fixed absolute spatial-knot claim.
+   Akzeptiert wird ein zeitlokaler Befund aus Radius, radiusnormalisierter
    Center-Drift und Memory-Shape gegen `eta_zero`; reine dynamic-inside
    Residence ist als Akzeptanzmetric zu schwach.
 6. Fuer Paper III: Vektor-/Phasenmemory nur kontrolliert weiterfuehren.
@@ -247,7 +247,10 @@ Prioritaet:
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 
-- Memory-Summary-Features laengerer Laeufe speichern.
+Status: erster Long-Run-Trace-AR-Check erledigt; noch kein geschlossener Transferoperatorbefund.
+
+- Abgeschlossen: Block-AR auf dem `N=30M`-Endfenster. Komplexe Klassifikationen sind nicht kontrollgetrennt von `eta_zero`.
+- Naechste Haertung: Memory-Summary-Features laengerer Laeufe und Feature-Closure-Kriterien speichern.
 - Lag-/Voxel-/Feature-Sensitivitaet wiederholen.
 - PCCA/HMM/PMM-Fallbacks erst dann pruefen.
 
