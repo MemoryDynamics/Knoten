@@ -21,6 +21,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
+| `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
 | `experiments/current/dynamics/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
 | `experiments/current/reference/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
@@ -215,6 +216,16 @@ langsamere radiusnormalisierte Center-Drift, `D_mem ~=2.94` und Roundness
 Paper-I-Evidenztabelle 2026-07-13: `experiments/current/dynamics/paper_i_evidence_table.py` verdichtet den `N=30M`-Hybrid-Trace in eine konservative Claim-Tabelle. Fuer `A_att=35`, `epsilon=1e-4` ist der aktive Lauf im Median etwa Faktor `4.96` kompakter als `eta_zero`, und die radiusnormalisierte Center-Drift ist um etwa Faktor `7.33` getrennt. Raw Voxel-Residence bleibt eine Guardrail, aber keine Hauptakzeptanzmetrik. Report: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
 
 Long-Run-Trace-AR 2026-07-13: `experiments/current/markov/long_run_trace_ar_report.py` fittet Block-AR-Maps auf dem gleichmaessig abgetasteten Endfenster derselben `N=30M`-Laeufe. Komplexe Klassifikationen treten auch in `eta_zero` auf und sind nicht als aktiver skalarer Phasen-/Photonmodus isoliert. Fuer Paper I ist der Befund neutral bis negativ fuer Oszillationssprache, aber kompatibel mit Relaxations-/Kompaktheitsevidenz. Report: `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md`.
+
+Feature-Closure 2026-07-13: `experiments/current/markov/feature_closure_report.py`
+prueft Leave-one-seed-out AR-Skill gegen shuffled und persistence controls. Der
+aktive skalare Referenzlauf zeigt den staerksten Closure-Lift in
+Shape-/Radius-Scalars (`AR R2 ~=0.50` bei `0.1` Memory-Zeiten), nicht im
+Spin-Scalar. `eta_zero` kann hohe raw `R2` in Geometrie zeigen, aber oft als
+Persistence-Effekt. Lesart: skalares Memory eignet sich fuer erste
+Grobkoernung von Kompaktheit/Radius/Relaxation; Phasen-Sektoren bleiben
+Vector-/Tensor-/Internal-Memory-Future-Work. Report:
+`reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
 
 Epsilon-Dynamic-Center-Sweep 2026-07-12: `epsilon_dynamic_center_sweep.py`
 variiert nur `epsilon` fuer den korrigierten kompakten Referenzkandidaten
@@ -560,6 +571,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | `A_att=35`, `epsilon=1e-4` ist der aktuelle scalar long-run reference candidate; Spin-Proxy bleibt negativ. |
 | `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md` | Paper-I-Evidenztabelle | Co-moving Radius, Drift/Radius, Memory-Dimension und Roundness trennen `A_att=35` klar von `eta_zero`; keine Spin-/Photon-/Masseclaims. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
+| `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/vector_memory/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |
@@ -595,7 +607,7 @@ Weiter offen:
 - vollstaendige Memory-Traces oder reichere Feature-Familien;
 - systematischer Bootstrap;
 - PCCA-/HMM-/PMM-basierte metastabile Zustandsmodelle;
-- Long-Run-Trace-AR auf dem N=30M-Endfenster ist als erster Reanalyse-Schritt vorhanden;
+- Long-Run-Trace-AR und Feature-Closure auf dem `N=30M`-Endfenster sind als erste Reanalyse-Schritte vorhanden;
 - Long-Run-Transferoperatoren mit reicheren Features statt Kurzlauf-Sanity-Checks.
 
 ## Effektive Dimension

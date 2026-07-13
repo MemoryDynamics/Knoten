@@ -190,7 +190,11 @@ Naechster operativer Schritt:
     `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
 19. Abgeschlossen: Long-Run-Trace-AR-Modencheck auf dem gleichmaessigen Endfenster derselben `N=30M`-Laeufe. Komplexe AR-Klassifikationen treten auch in `eta_zero` auf und sind nicht kontrollgetrennt; kein skalarer Photon-/Phasenclaim. Report:
     `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md`.
-20. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+20. Abgeschlossen: Feature-Closure auf `A_att=35`, `epsilon=1e-4`, `N=30M`.
+    Aktive Shape-/Radius-Scalars zeigen den klarsten Closure-Lift; der
+    Spin-Scalar bleibt kein geschlossener Phasenkanal. Report:
+    `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
+21. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`. Spin-
@@ -200,13 +204,13 @@ Naechster operativer Schritt:
 
 Aktueller naechster Schritt:
 
-- Paper-I-Text und ggf. Supplement auf die neue Evidenztabelle synchronisieren.
-- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in Paper I.
-- Naechste technische Haertung: richer Transferoperator-/Feature-Closure statt weiterer Blindscans; danach erst gezielte `lambda_m`/`sigma`/Amplitudenachsen.
+- Paper-I-Text und ggf. Supplement auf die neue Evidenztabelle und Feature-Closure synchronisieren.
+- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in Paper I; skalares Memory ist erste Grobkoernung fuer Kompaktheit/Radius/Relaxation.
+- Naechste technische Haertung: 3D-Memory-Shape-Befund seedweise im Paper herausarbeiten, dann erst gezielte `lambda_m`/`sigma`/Amplitudenachsen.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse ist erledigt, naechster Schritt ist Paper-I-Synchronisierung plus gezielte Feature-Closure.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse ist erledigt, naechster Schritt ist Paper-I-Synchronisierung auf Evidenztabelle, 3D-Memory-Shape und Feature-Closure.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -247,9 +251,10 @@ Prioritaet:
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 
-Status: erster Long-Run-Trace-AR-Check erledigt; noch kein geschlossener Transferoperatorbefund.
+Status: Long-Run-Trace-AR und Feature-Closure erledigt; noch kein geschlossener Transferoperatorbefund.
 
 - Abgeschlossen: Block-AR auf dem `N=30M`-Endfenster. Komplexe Klassifikationen sind nicht kontrollgetrennt von `eta_zero`.
+- Abgeschlossen: Feature-Closure. Aktive Shape-/Radius-Scalars sind vorhersagbar; Spin-Scalar nicht.
 - Naechste Haertung: Memory-Summary-Features laengerer Laeufe und Feature-Closure-Kriterien speichern.
 - Lag-/Voxel-/Feature-Sensitivitaet wiederholen.
 - PCCA/HMM/PMM-Fallbacks erst dann pruefen.

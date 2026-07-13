@@ -54,7 +54,7 @@ Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
 
 Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
-repulsiv, `A_att` breit attraktiv im Potentialmodell. Der `N=30M`, `epsilon=1e-4`-Hybrid-Trace fuer `A_att=20/35` trennt aktive Laeufe in co-moving Radius, Drift/Radius, Memory-Dimension und Roundness klar von `eta_zero`; `A_att=35` ist der aktuelle skalare Referenzkandidat. Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`, also keinen kontrollgetrennten skalaren Oszillator. Fuer Paper I bleibt daher Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
+repulsiv, `A_att` breit attraktiv im Potentialmodell. Der `N=30M`, `epsilon=1e-4`-Hybrid-Trace fuer `A_att=20/35` trennt aktive Laeufe in co-moving Radius, Drift/Radius, Memory-Dimension und Roundness klar von `eta_zero`; `A_att=35` ist der aktuelle skalare Referenzkandidat. Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`, also keinen kontrollgetrennten skalaren Oszillator. Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars, nicht fuer den Spin-Scalar. Fuer Paper I bleibt daher Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -89,6 +89,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Knoten als metastabile Regime | korrigierte `N=30M`-Evidenz fuer co-moving kompakte Memory-Clouds bei `A_att=20/35`, staerkster Kandidat `A_att=35`; kein fixes Zentrum | Paper-I-Text auf Radius, Drift/Radius, Memory-Shape und Kontrolltrennung ausrichten |
 | Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
+| `D_mem ~2.94` im aktuellen `A_att=35`-Slice | numerische Beobachtung einer lokalen Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; keine Ableitung von externer `d=3`-Selektion | seedweise im Paper als Shape-Diagnostik mit Roundness und Kontrolle berichten |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
