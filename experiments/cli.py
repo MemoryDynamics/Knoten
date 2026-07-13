@@ -25,6 +25,7 @@ CATEGORIES = {
         "current/dynamics/long_run_metastability.py",
         "current/dynamics/dynamic_center_trace_report.py",
         "current/dynamics/paper_i_evidence_table.py",
+        "current/dynamics/ambient_dimension_memory_shape_report.py",
         "current/dynamics/epsilon_dynamic_center_sweep.py",
         "current/dynamics/epsilon_step_balance.py",
         "current/dynamics/epsilon_floor_visual_probe.py",
