@@ -200,19 +200,27 @@ liegt, ist die Dephasierungszeit als Obergrenze `<= dt_mem` zu lesen. Der
 `N=1M`-Pre-Run findet keine persistente Spinachse; der Befund ist eine
 Negativkontrolle, kein Spin-/Photonclaim. Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N1M_2026-07-12.md`.
-Naechster Long-Trace-Standard: `N=30M`, `--trace-points 100`,
-`--trace-spacing log`, `--trace-every 1`, `--trace-window-memory-times 100`,
-keine neue Parameterachse.
+Long-Trace-Standard: `N=30M`, `--trace-points 100`, `--trace-spacing log`,
+`--trace-every 1`, `--trace-window-memory-times 100`, keine neue Parameterachse.
+Der abgeschlossene `N=30M`-Run fuer `epsilon=1e-4`, `A_att=20/35`, Seeds
+`1..5`, gegen `eta_zero` bestaetigt die co-moving scalar-knot Evidenz. Der
+staerkere Referenzkandidat ist `A_att=35`: kleinerer dynamischer Radius,
+langsamere radiusnormalisierte Center-Drift, `D_mem ~=2.94` und Roundness
+`~=0.843`. Spin bleibt negativ (`axis_polarization ~=0.01`, rohe
+`L`-Dephasierung `<=dt_mem`). Report:
+`reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md`.
 
 Epsilon-Dynamic-Center-Sweep 2026-07-12: `epsilon_dynamic_center_sweep.py`
 variiert nur `epsilon` fuer den korrigierten kompakten Referenzkandidaten
 `A_att=35`, Seeds `1..3`, `N=100k`, gegen seedgleiche `eta_zero`-Kontrollen.
 Der kurze Sweep zeigt ein v0.5-Score-Plateau ab etwa `epsilon=1.65e-6` bis
 `epsilon=0.741`; bei `epsilon=2.72` kollabiert der aktive Lauf auf
-`eta_zero`-aehnliche Metriken. Unterhalb `~1e-6` bleibt die Form skalenartig,
-aber Shape-/Roundness-Gating ist teils degeneriert. Spin bleibt negativ:
-Achsenpolarisation nahe null und Dephasierung nach einem Update. Report:
-`reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
+`eta_zero`-aehnliche Metriken. Der `N=1M`-Bestaetigungsslice fuer
+`epsilon in {1.65e-6,1e-4,0.015}` und `A_att=20/35` bestaetigt dieses Plateau;
+`epsilon=1e-4` wurde fuer den `N=30M`-Run gewaehlt. Reports:
+`reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`,
+`reports/long_runs/epsilon/epsilon_confirm_q3_Aatt20_N1M_2026-07-12.md`,
+`reports/long_runs/epsilon/epsilon_confirm_q3_Aatt35_N1M_2026-07-12.md`.
 
 ## Epsilon-Step-Balance
 

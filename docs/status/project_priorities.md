@@ -174,12 +174,18 @@ Naechster operativer Schritt:
     Translationsanteil: Spin bleibt negativ (`axis_polarization ~0.017`,
     Dephasierung ein Update). Report:
     `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
-17. Naechster Paper-I-Schritt: Messmethodik-Refresh der vorhandenen Hybrid-Trace-
-    Reports mit roher normierter Spin-Korrelation und Dephasierungs-Obergrenzen,
-    danach kurzer Bestaetigungsslice im Epsilon-Plateau. Kandidaten: `epsilon in
-    {1.65e-6, 1e-4, 0.015}` fuer `A_att=20/35`, Seeds `1..5`, `N=1M` oder
-    `3M`, mit denselben Hybrid-Trace-KPIs. Danach `N=30M` nur fuer die beste
-    begruendete Rauschskala, nicht blind fuer `epsilon=0.03`.
+17. Abgeschlossen: Epsilon-Bestaetigungsslice und `N=30M`-Hybrid-Trace fuer
+    `epsilon=1e-4`, `A_att=20/35`, Seeds `1..5`, gegen `eta_zero`. Alle drei
+    Bestaetigungswerte `{1.65e-6, 1e-4, 0.015}` lagen im v0.5-Score-Plateau;
+    `1e-4` wurde als kleine, aber nicht randstaendige Rauschskala gewaehlt.
+    Ergebnis bei `N=30M`: Beide aktiven Kandidaten trennen sich in
+    dynamischem Radius, radiusnormalisierter Center-Drift, Memory-Dimension
+    und Roundness klar von `eta_zero`. `A_att=35` ist staerker und ist jetzt
+    der scalar long-run reference candidate (`radius ~=2.09e-4`,
+    `drift/radius ~=0.044`, `D_mem ~=2.94`, `roundness ~=0.843`). Spin bleibt
+    negativ: Achsenpolarisation nahe `0.01`, rohe `L`-Dephasierung `<=dt_mem`.
+    Report:
+    `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md`.
 18. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
@@ -190,8 +196,8 @@ Naechster operativer Schritt:
 
 Wenn der Score traegt:
 
-- Paper-I-Evidenztabelle mit vorsichtiger Claim-Sprache.
-- Transferoperatorfeatures auf Long-Run-Daten.
+- Paper-I-Evidenztabelle mit vorsichtiger Claim-Sprache auf Basis des `N=30M`, `epsilon=1e-4`, `A_att=35` reference candidate.
+- Transferoperator-/AR-Mode-Features auf den `N=30M`-Long-Run-Daten.
 
 Wenn der Score nicht traegt:
 
