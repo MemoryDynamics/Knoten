@@ -63,6 +63,7 @@ Status: Folgeprogramm.
 Nur als Future Work formulieren:
 
 - effektive Dimension;
+- externe/macroskopische `d=3`-Selektion aus lokalen Memory-Shape-Befunden;
 - Zwei-Knoten-Propagation;
 - `c_eff` und Antwortkegel;
 - Lorentz-artige Kinematik.
@@ -89,7 +90,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Knoten als metastabile Regime | korrigierte `N=30M`-Evidenz fuer co-moving kompakte Memory-Clouds bei `A_att=20/35`, staerkster Kandidat `A_att=35`; kein fixes Zentrum | Paper-I-Text auf Radius, Drift/Radius, Memory-Shape und Kontrolltrennung ausrichten |
 | Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
-| `D_mem ~2.94` im aktuellen `A_att=35`-Slice | numerische Beobachtung einer lokalen Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; keine Ableitung von externer `d=3`-Selektion | seedweise im Paper als Shape-Diagnostik mit Roundness und Kontrolle berichten |
+| `D_mem ~2.94` im aktuellen `A_att=35`-Slice | seed-stabile numerische Beobachtung einer lokalen, co-moving Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; `D_mem` ist covariance participation der Memory-Cloud, nicht `D_occ`; keine Ableitung von externer `d=3`-Selektion | Paper I als Shape-Diagnostik mit Roundness/Radius/Drift gegen `eta_zero` berichten; Paper II klaert externe/macroskopische 3D-Selektion |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

@@ -220,82 +220,60 @@ where $G_\sigma$ is localized and normalized.
 No additional geometric structure is assumed beyond measurability.
 
 \paragraph{Definition (Metastable knot).}
-A region $K\subset\Omega$ is called metastable if
-\begin{equation}
-\liminf_{N\to\infty}\frac{1}{N}\sum_{n=1}^N\mathbf{1}_K(x_n) > 0,
-\label{eq:knot_def}
-\end{equation}
-and the associated memory-induced drift balances stochastic fluctuations.
+A region $K\subset\Omega$ is called metastable if the process remains in,
+or repeatedly returns to, a localized memory-supported regime for many memory
+times, and if the associated memory-induced drift remains comparable to the
+stochastic fluctuations. This is an operational diagnostic rather than a
+dimension-selection theorem.
 
-\paragraph{Lemma 1 (Recurrence obstruction for $d\leq 2$).}
-Let $\{x_n\}$ be the stochastic component of \eqref{eq:dyn}.
-For $d\leq 2$ the process is recurrent \cite{Polya1921}:
-\begin{equation}
-\mathbb{P}\bigl(x_n\in B_r(x_0)\ \text{i.o.}\bigr)=1
-\qquad\forall r>0.
-\label{eq:recurrence}
-\end{equation}
+\paragraph{Dimension-selection heuristic.}
+Low-dimensional random motion is strongly recurrent, while very high ambient
+dimension can dilute localized memory unless kernel scales, amplitudes, and
+normalizations compensate for the available volume. These competing effects
+motivate the search for an intermediate effective dimension, and they explain
+why near-three-dimensional diagnostics are scientifically interesting.
 
-\paragraph{Consequence.}
-For $d\leq 2$ the accumulated memory gradient
-$\nabla\Phi_n(x)$ diverges along recurrent returns,
+The present repository, however, does not prove the classical heuristic as a
+lemma. Recurrence is modified by self-interaction, the memory gradient need not
+diverge for all admissible kernels, and large-dimensional dilution depends on
+kernel normalization, deposition scale, memory mass, and coupling strength.
+Consequently, the current status is a research programme:
 \begin{equation}
-\|\nabla\Phi_n\|\xrightarrow[n\to\infty]{}\infty,
+\text{local memory shape} \quad\longrightarrow\quad
+\text{external coarse dimension}
 \end{equation}
-destroying the balance condition required by \eqref{eq:knot_def}.
-Hence, no metastable knots exist for $d\leq 2$.
+remains to be established by controlled simulations and operator diagnostics.
 
-\paragraph{Lemma 2 (Memory dilution for large $d$).}
-Let $B_\sigma(x)$ denote the support of $G_\sigma$.
-Its volume scales as
+\paragraph{Current numerical input.}
+The corrected scalar long-run reference slice in the companion analysis shows
+a compact co-moving memory cloud whose covariance participation dimension is
+near three in the chosen three-dimensional embedding. For the strongest current
+candidate the seedwise range is approximately
 \begin{equation}
-\mathrm{Vol}(B_\sigma)\sim\sigma^d.
-\label{eq:volume}
+D_{\mathrm{mem}}\in[2.914,2.947],
 \end{equation}
-
-The typical memory density obeys
-$\rho(x)\sim\frac{N_{\mathrm{visits}}(x)}{\sigma^d}$, implying for the drift magnitude
-\begin{equation}
-\|\nabla\Phi\| \sim \|\nabla K\|\,\rho \propto \sigma^{1-d}.
-\label{eq:dilution}
-\end{equation}
-
-\paragraph{Lemma 3 (Loss of confinement for $d\geq 4$).}
-The stochastic term in \eqref{eq:dyn} induces fluctuations of order $\delta x_{\mathrm{noise}}\sim\varepsilon$.
-
-Metastability requires
-\begin{equation}
-\|\nabla\Phi\| \gtrsim \varepsilon,
-\label{eq:stability_cond}
-\end{equation}
-which fails for sufficiently large $d$ due to \eqref{eq:dilution}.
-In particular, for $d\geq 4$ the inequality \eqref{eq:stability_cond} cannot be satisfied at fixed $(\sigma,\varepsilon)$.
-Thus, no long-lived knots exist for $d\geq 4$.
-
-Metastable macroscopic structure requires simultaneously
-\begin{align}
-d &\geq 3 \quad\text{(to avoid recurrent self-blocking)},
-\qquad \\
-&\leq 3 \quad\text{(to prevent memory dilution)}.
-\end{align}
-The unique solution satisfying both requirements is
-\begin{equation}
-\boxed{d = 3}.
-\end{equation}
+with memory-roundness in the range $0.809$--$0.849$, while the matched
+$\eta=0$ controls are broader, less round, and lower-dimensional on average.
+This supports a local shape diagnostic, not a derivation of three external
+dimensions.
 
 \paragraph{Remark (Scale dependence).}
-Additional weakly coupled modes may exist on microscopic timescales.
-Such modes satisfy
+Additional weakly coupled or internal modes may exist on microscopic
+timescales,
 \begin{equation}
 \tau_{\mathrm{mode}}\ll\tau_{\mathrm{mem}}\sim\alpha^{-1},
 \end{equation}
-and therefore do not contribute to macroscopic metastability.
-The effective dimension is thus scale-dependent, with $d=3$ selected in the long-lived regime.
+and need not contribute to macroscopic metastability. Paper~II therefore treats
+effective dimension as scale- and observer-dependent until multi-knot response,
+ambient-dimension robustness, and coarse-grained closure are demonstrated.
 
 \subsection{Interim conclusion}
-Physical space is thus identified not with the abstract state space $\Omega$ itself, but with the effective coordinate system defined by stable, approximately isotropic, low-dimensional metastable dynamical regimes.
-Spatial dimensionality emerges as a diagnostic property of the dynamics rather than as a fundamental assumption.
-
+Physical space should not yet be identified with the abstract state space
+$\Omega$ itself, nor has a unique $d=3$ macroscopic dimension been derived.
+The defensible claim is narrower: stable, approximately isotropic,
+low-dimensional memory-supported regimes can define candidate effective
+coordinates. Whether the observed local three-dimensional memory shape becomes
+a shared external spatial dimension is the central open task of this paper.
 
 \section{Finite Propagation Speed from Memory Coupling}\label{sec:finite_speed}
 

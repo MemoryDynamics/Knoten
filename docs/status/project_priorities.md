@@ -194,7 +194,15 @@ Naechster operativer Schritt:
     Aktive Shape-/Radius-Scalars zeigen den klarsten Closure-Lift; der
     Spin-Scalar bleibt kein geschlossener Phasenkanal. Report:
     `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
-21. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
+21. Abgeschlossen: 3D-Memory-Shape-Boundary-Notiz fuer den `N=30M`-
+    Referenzslice. Ergebnis: `D_mem ~=2.94` bei `A_att=35` ist ein
+    seed-stabiler lokaler Memory-Shape-Befund im gewaehlten 3D-Embedding,
+    nicht die Ableitung externer/macroskopischer `d=3`-Selektion. Paper II
+    uebernimmt die Frage, ob lokale 3D-Memory-Cloud-Geometrie unter
+    Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung
+    robust bleibt. Report:
+    `reports/dimensions/memory_shape_boundary_2026-07-13.md`.
+22. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
     lokaler Radius, langsame Center-Drift und Trennung gegen `eta_zero`. Spin-
@@ -206,7 +214,7 @@ Aktueller naechster Schritt:
 
 - Paper-I-Text und ggf. Supplement auf die neue Evidenztabelle und Feature-Closure synchronisieren.
 - Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in Paper I; skalares Memory ist erste Grobkoernung fuer Kompaktheit/Radius/Relaxation.
-- Naechste technische Haertung: 3D-Memory-Shape-Befund seedweise im Paper herausarbeiten, dann erst gezielte `lambda_m`/`sigma`/Amplitudenachsen.
+- Naechste technische Haertung: Paper-I-Text auf die 3D-Memory-Shape-Grenze synchronisieren, dann gezielte `lambda_m`/`sigma`/Amplitudenachsen.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 

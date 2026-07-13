@@ -27,6 +27,10 @@ aktuellen Paper-0/Paper-I-Arbeit:
   numerische Operatorpipeline aber noch offen.
 - Keine `d=3`-Selektion, keine harte Signalgeschwindigkeit und keine
   Lorentz-Kinematik als aktuelles Resultat behaupten.
+- Aktueller Input aus Paper I: lokale `D_mem ~=2.94`-Memory-Shape im
+  gewaehlten 3D-Embedding. Paper II muss erst klaeren, ob daraus unter
+  Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Grobkoernung eine
+  robuste externe/macroskopische 3D-Beschreibung wird.
 
 ## Dateien
 
