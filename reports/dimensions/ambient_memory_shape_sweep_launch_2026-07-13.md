@@ -23,6 +23,7 @@ This is still a Paper-II bridge test, not a dimension-selection theorem.
 - seeds `1..5`
 - conditions `baseline,eta_zero`
 - trace: `trace_points=100`, `trace_spacing=log`, `trace_every=1`, `trace_window_memory_times=100`
+- spectral geometry: `spectral_points=1000` for both sampled path and memory cloud `D_spec`
 
 ## Ambient Dimensions
 
@@ -48,6 +49,41 @@ data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d{di
 
 Each directory should contain `case_*.json`, `summary.json`, `run.stdout.log`, `run.stderr.log`, and `run.exitcode`.
 
+## Long-Run Command Template
+
+Run once per ambient dimension, replacing `{dim}` in both places:
+
+```text
+python experiments/current/dynamics/long_run_metastability.py \
+  --steps 30000000 \
+  --dim {dim} \
+  --seeds 1,2,3,4,5 \
+  --conditions baseline,eta_zero \
+  --epsilon 1e-4 \
+  --eta 0.15 \
+  --alpha 0.01 \
+  --memory-mass 1 \
+  --deposition-kernel delta \
+  --deposition-sigma 0 \
+  --sigma-rep 1 \
+  --sigma-att 3 \
+  --amplitude-rep 1 \
+  --amplitude-att 35 \
+  --memory-factor 6 \
+  --max-memory 800 \
+  --burn-in 0 \
+  --sample-every 1000 \
+  --trace-every 1 \
+  --trace-points 100 \
+  --trace-spacing log \
+  --trace-window-memory-times 100 \
+  --spectral-points 1000 \
+  --voxel-sizes 0.5,1.0,2.0 \
+  --max-ac-lag 50 \
+  --min-memory-times 10 \
+  --output-dir data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d{dim}_seed1-5_eps1em4_2026-07-13
+```
+
 ## Post-Run Aggregation
 
 After completion, aggregate with:
@@ -68,4 +104,5 @@ python experiments/current/dynamics/ambient_dimension_memory_shape_report.py \
 ## Decision Rule
 
 - If active `D_mem` remains near three, active roundness remains high, and radius/drift separation survives across ambient dimensions, then the phrase "chosen 3D embedding" can be weakened to "local 3D memory-shape phenomenon".
+- `D_spec` is an unweighted point-cloud reconciliation metric, not the primary acceptance criterion. Agreement between memory `D_spec` and `D_mem` near three strengthens the Paper-II geometry reading; disagreement flags estimator or scale sensitivity that must be reviewed before any stronger claim.
 - If `D_mem` increases with ambient dimension or loses control separation, keep the current conservative wording and treat macroscopic 3D as Paper-II open work.

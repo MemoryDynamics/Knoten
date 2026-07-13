@@ -384,6 +384,8 @@ N30M-Referenzslice 2026-07-13: Der Bestaetigungslauf mit `epsilon=1e-4`, `A_att=
 
 3D-Memory-Shape-Grenze 2026-07-13: Der `D_mem ~=2.94`-Befund wurde als lokales Memory-Shape-Observable geschaerft. Bei `A_att=35` liegen alle fuenf aktiven Seeds eng bei `D_mem=2.914..2.947` und Roundness `0.809..0.849`, waehrend die seedgleichen `eta_zero`-Kontrollen breiter und niedriger streuen (`D_mem=1.312..2.679`, Roundness `0.219..0.626`). Lesart: Paper I darf einen seed-stabilen co-moving Memory-Cloud-Befund im gewaehlten 3D-Embedding berichten. Paper II uebernimmt die offene Frage, ob daraus eine extern/macroskopisch robuste 3D-Selektion unter Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung folgt. Report: `reports/dimensions/memory_shape_boundary_2026-07-13.md`.
 
+Ambient-Dimension-Sweep vorbereitet 2026-07-13: Der naechste Paper-II-Brueckentest legt denselben `A_att=35`, `epsilon=1e-4`, `N=30M`-Referenzslice in `d in {4,5,7,10,13,20}` und vergleicht `baseline` gegen `eta_zero`. `long_run_metastability.py` schreibt nun ungewichtetes `D_spec` fuer Sample-Pfad und Memory-Cloud mit begrenzten `spectral_points`; der Ambient-Report aggregiert `D_mem`, `D_spec`, Roundness, Radius und Drift gemeinsam. Launch-Notiz: `reports/dimensions/ambient_memory_shape_sweep_launch_2026-07-13.md`.
+
 Entscheidungsnotiz 2026-07-07: `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
 effektives Memory-Kernel-Confinement formulieren. Zwei-Skalen-Kernel bleiben

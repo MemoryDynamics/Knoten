@@ -36,6 +36,8 @@ SUMMARY_METRICS = [
     "dynamic_rms_radius_median",
     "dynamic_center_drift_radius_fraction_per_memory_time",
     "memory_shape_dimension",
+    "sample_spectral_dimension",
+    "memory_spectral_dimension",
     "memory_roundness",
     "memory_radius",
     "memory_center_residence_memory_times",
@@ -214,6 +216,8 @@ def case_row(case: CaseRecord) -> dict[str, Any]:
             trend, ("center_drift_radius_fraction_per_memory_time_median",)
         ),
         "memory_shape_dimension": _diagnostic_value(memory_shape, ("effective_dimension",)),
+        "sample_spectral_dimension": _diagnostic_value(diagnostics, ("sample_spectral", "dimension")),
+        "memory_spectral_dimension": _diagnostic_value(memory_cloud, ("spectral", "dimension")) if isinstance(memory_cloud, dict) else None,
         "memory_roundness": _diagnostic_value(memory_shape, ("axis_ratio_min_max",)),
         "memory_radius": _diagnostic_value(memory_shape, ("mean_radius",)),
         "memory_center_residence_memory_times": _diagnostic_value(
@@ -280,7 +284,9 @@ def build_report(
         "",
         "Fixed target slice: `A_att=35`, `epsilon=1e-4`, corrected q=3 scalar",
         "kernel, `baseline` versus matched `eta_zero`, same co-moving dynamic",
-        "center observables as the Paper-I N30M reference.",
+        "center observables as the Paper-I N30M reference. The report also",
+        "tracks unweighted point-cloud spectral dimensions `D_spec` for the sampled path and",
+        "the memory cloud as Paper-II geometry reconciliation metrics.",
         "",
         "## Provenance",
         "",
@@ -291,8 +297,8 @@ def build_report(
         "",
         "## Dimension Summary",
         "",
-        "| dim | condition | seeds | N | radius median [q1,q3] | drift/r median [q1,q3] | D_mem median [q1,q3] | roundness median [q1,q3] |",
-        "| ---: | --- | ---: | ---: | --- | --- | --- | --- |",
+        "| dim | condition | seeds | N | radius median [q1,q3] | drift/r median [q1,q3] | D_mem median [q1,q3] | D_spec sample median [q1,q3] | D_spec memory median [q1,q3] | roundness median [q1,q3] |",
+        "| ---: | --- | ---: | ---: | --- | --- | --- | --- | --- | --- |",
     ]
     for item in summary:
         lines.append(
@@ -319,6 +325,16 @@ def build_report(
                         item.get("memory_shape_dimension_q3"),
                     ),
                     _fmt_iqr(
+                        item.get("sample_spectral_dimension_median"),
+                        item.get("sample_spectral_dimension_q1"),
+                        item.get("sample_spectral_dimension_q3"),
+                    ),
+                    _fmt_iqr(
+                        item.get("memory_spectral_dimension_median"),
+                        item.get("memory_spectral_dimension_q1"),
+                        item.get("memory_spectral_dimension_q3"),
+                    ),
+                    _fmt_iqr(
                         item.get("memory_roundness_median"),
                         item.get("memory_roundness_q1"),
                         item.get("memory_roundness_q3"),
@@ -333,8 +349,8 @@ def build_report(
             "",
             "## Baseline/Control Separation",
             "",
-            "| dim | radius gain eta0/baseline | drift separation eta0/baseline | D_mem delta | roundness delta |",
-            "| ---: | ---: | ---: | ---: | ---: |",
+            "| dim | radius gain eta0/baseline | drift separation eta0/baseline | D_mem delta | D_spec memory delta | roundness delta |",
+            "| ---: | ---: | ---: | ---: | ---: | ---: |",
         ]
     )
     for dim in dims:
@@ -350,12 +366,15 @@ def build_report(
         )
         base_dim = _finite_float(baseline.get("memory_shape_dimension_median"))
         ctrl_dim = _finite_float(eta_zero.get("memory_shape_dimension_median"))
+        base_spec = _finite_float(baseline.get("memory_spectral_dimension_median"))
+        ctrl_spec = _finite_float(eta_zero.get("memory_spectral_dimension_median"))
         base_round = _finite_float(baseline.get("memory_roundness_median"))
         ctrl_round = _finite_float(eta_zero.get("memory_roundness_median"))
         lines.append(
             f"| `{dim}` | {_fmt(_ratio(ctrl_radius, base_radius))} | "
             f"{_fmt(_ratio(ctrl_drift, base_drift))} | "
             f"{_fmt(base_dim - ctrl_dim if base_dim is not None and ctrl_dim is not None else None)} | "
+            f"{_fmt(base_spec - ctrl_spec if base_spec is not None and ctrl_spec is not None else None)} | "
             f"{_fmt(base_round - ctrl_round if base_round is not None and ctrl_round is not None else None)} |"
         )
 
@@ -369,6 +388,10 @@ def build_report(
             "  with roundness separated from `eta_zero` across ambient dimensions.",
             "- If `D_mem` rises with ambient dimension, the old phrase `chosen 3D",
             "  embedding` remains necessary and Paper II must treat 3D as open.",
+            "- `D_spec` is an unweighted point-cloud spectral-geometry check. Agreement with",
+            "  `D_mem` near three strengthens the Paper-II geometry reading;",
+            "  disagreement flags estimator or scale sensitivity rather than a direct",
+            "  failure of the memory-shape claim.",
             "- If `D_mem` stays near three while roundness and compactness remain",
             "  controlled, the phrase can be upgraded to a local 3D memory-shape",
             "  phenomenon that is not tied to the original embedding.",

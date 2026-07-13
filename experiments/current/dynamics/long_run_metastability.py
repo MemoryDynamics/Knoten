@@ -38,6 +38,7 @@ from emergenz_knoten import (  # noqa: E402
     residence_statistics,
     shape_statistics,
     simulate_finite_memory,
+    spectral_dimension,
     zero_mean_attractive_amplitude,
 )
 from emergenz_knoten.markov import vector_autocorrelation  # noqa: E402
@@ -1064,12 +1065,38 @@ def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
     }
 
 
-def _memory_cloud_diagnostics(memory: np.ndarray, weights: np.ndarray) -> dict[str, object] | None:
+def _spectral_dimension_payload(points: np.ndarray, *, max_points: int) -> dict[str, object]:
+    source_n_points = int(len(points))
+    arr = np.asarray(points, dtype=float)
+    if max_points == 0:
+        arr = arr[:0]
+        dimension = float("nan")
+    else:
+        if len(arr) > max_points:
+            indices = np.linspace(0, len(arr) - 1, max_points, dtype=int)
+            arr = arr[indices]
+        dimension = spectral_dimension(arr)
+    return {
+        "dimension": _finite_float(dimension),
+        "n_points": int(len(arr)),
+        "source_n_points": source_n_points,
+        "max_points": int(max_points),
+        "weighted": False,
+    }
+
+
+def _memory_cloud_diagnostics(
+    memory: np.ndarray,
+    weights: np.ndarray,
+    *,
+    spectral_points: int = 1000,
+) -> dict[str, object] | None:
     if len(memory) < 2 or float(np.sum(weights)) <= 0.0:
         return None
     return {
         "shape": shape_statistics(memory, weights=weights),
         "occupancy": _occupancy_payload(memory),
+        "spectral": _spectral_dimension_payload(memory, max_points=spectral_points),
     }
 
 
@@ -1150,6 +1177,7 @@ def metastability_diagnostics(
     voxel_sizes: Iterable[float],
     max_ac_lag: int,
     min_memory_times: float,
+    spectral_points: int = 1000,
 ) -> dict[str, object]:
     if len(samples) < 2:
         raise ValueError("at least two samples are required")
@@ -1201,6 +1229,7 @@ def metastability_diagnostics(
         "occupancy_dimension": occupancy["dimension"],
         "occupancy": occupancy,
         "sample_shape": sample_shape,
+        "sample_spectral": _spectral_dimension_payload(samples, max_points=spectral_points),
         "center_residence": {"sample_center": sample_center_residence}
         if sample_center_residence is not None
         else {},
@@ -1225,6 +1254,7 @@ def run_case(
     force_components: bool = False,
     trace_every: int = 0,
     trace_targets: np.ndarray | None = None,
+    spectral_points: int = 1000,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
@@ -1238,6 +1268,7 @@ def run_case(
         voxel_sizes=voxel_sizes,
         max_ac_lag=max_ac_lag,
         min_memory_times=min_memory_times,
+        spectral_points=spectral_points,
     )
     dynamic_center_trace = _dynamic_center_trace_diagnostics(
         result,
@@ -1246,7 +1277,11 @@ def run_case(
     )
     if dynamic_center_trace is not None:
         diagnostics["dynamic_center_trace"] = dynamic_center_trace
-    memory_cloud = _memory_cloud_diagnostics(result["memory"], result["weights"])
+    memory_cloud = _memory_cloud_diagnostics(
+        result["memory"],
+        result["weights"],
+        spectral_points=spectral_points,
+    )
     if memory_cloud is not None:
         diagnostics["memory_cloud"] = memory_cloud
         memory_shape = memory_cloud.get("shape")
@@ -1358,6 +1393,12 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
         memory_shape = {}
         if isinstance(memory_cloud, dict) and isinstance(memory_cloud.get("shape"), dict):
             memory_shape = memory_cloud["shape"]
+        sample_spectral = diagnostics.get("sample_spectral")
+        if not isinstance(sample_spectral, dict):
+            sample_spectral = {}
+        memory_spectral = {}
+        if isinstance(memory_cloud, dict) and isinstance(memory_cloud.get("spectral"), dict):
+            memory_spectral = memory_cloud["spectral"]
         rows.append(
             {
                 "condition": case["condition"],
@@ -1371,8 +1412,10 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "occupancy_window_valid": occupancy_window.get("valid_scaling"),
                 "sample_shape_dimension": sample_shape.get("effective_dimension"),
                 "sample_axis_ratio_min_max": sample_shape.get("axis_ratio_min_max"),
+                "sample_spectral_dimension": sample_spectral.get("dimension"),
                 "memory_shape_dimension": memory_shape.get("effective_dimension"),
                 "memory_axis_ratio_min_max": memory_shape.get("axis_ratio_min_max"),
+                "memory_spectral_dimension": memory_spectral.get("dimension"),
                 "best_max_residence_memory_times": best_ratio,
                 "sample_center_primary_max_run_memory_times": _center_residence_field(
                     diagnostics, "sample_center", "primary_max_run_memory_times"
@@ -1496,6 +1539,15 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-ac-lag", type=int, default=50)
     parser.add_argument("--min-memory-times", type=float, default=10.0)
+    parser.add_argument(
+        "--spectral-points",
+        type=int,
+        default=1000,
+        help=(
+            "maximum points used for sample and memory D_spec diagnostics; "
+            "0 disables spectral-dimension estimation"
+        ),
+    )
     parser.add_argument("--allow-slow-python", action="store_true")
     parser.add_argument(
         "--force-components",
@@ -1545,6 +1597,8 @@ def main() -> None:
         raise SystemExit("--deposition-sigma must be zero for matched_gaussian deposition")
     if not _NUMBA_AVAILABLE and not args.allow_slow_python:
         raise SystemExit("numba is required for long-run simulations unless --allow-slow-python is set")
+    if args.spectral_points < 0:
+        raise SystemExit("--spectral-points must be non-negative")
 
     output_dir = args.output_dir
     if not output_dir.is_absolute():
@@ -1603,6 +1657,7 @@ def main() -> None:
                     force_components=args.force_components,
                     trace_every=args.trace_every,
                     trace_targets=trace_targets,
+                    spectral_points=args.spectral_points,
                 )
             )
 
@@ -1620,6 +1675,7 @@ def main() -> None:
             "voxel_sizes": args.voxel_sizes,
             "max_ac_lag": args.max_ac_lag,
             "min_memory_times": args.min_memory_times,
+            "spectral_points": args.spectral_points,
             "trace_every": args.trace_every,
             "trace_points": args.trace_points,
             "trace_spacing": args.trace_spacing,

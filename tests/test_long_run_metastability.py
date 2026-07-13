@@ -386,6 +386,7 @@ def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
         voxel_sizes=[1.0],
         max_ac_lag=2,
         min_memory_times=2.0,
+        spectral_points=4,
     )
 
     residence = diagnostics["residence_by_voxel_size"]["1.0"]
@@ -398,6 +399,8 @@ def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     assert "scaling_window" in diagnostics["occupancy"]
     assert "sample_shape" in diagnostics
     assert diagnostics["sample_shape"]["effective_dimension"] is not None
+    assert diagnostics["sample_spectral"]["source_n_points"] == len(samples)
+    assert diagnostics["sample_spectral"]["n_points"] == 4
     assert "center_residence" in diagnostics
     sample_center = diagnostics["center_residence"]["sample_center"]
     assert sample_center["primary_max_run_memory_times"] >= 5.0
@@ -432,6 +435,8 @@ def test_run_case_reports_memory_center_residence(tmp_path: Path) -> None:
     assert "2" in center_residence["memory_center"]["by_radius_factor"]
 
     summary = long_run_metastability.summarize_cases([payload])[0]
+    assert "sample_spectral_dimension" in summary
+    assert "memory_spectral_dimension" in summary
     assert summary["sample_center_primary_max_run_memory_times"] is not None
     assert summary["memory_center_primary_max_run_memory_times"] is not None
 
