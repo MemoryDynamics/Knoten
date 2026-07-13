@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import importlib.util
 from pathlib import Path
 
 import numpy as np
 
-from emergenz_knoten import SimulationConfig
+from emergenz_knoten import SimulationConfig, simulate_finite_memory_numba
 
 
 SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "current" / "dynamics" / "long_run_metastability.py"
@@ -83,6 +84,47 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     assert renormalized.amplitude_rep > cfg.amplitude_rep
     assert renormalized.amplitude_att > cfg.amplitude_att
     assert np.isclose(zero_mean.amplitude_att, cfg.amplitude_rep * (cfg.sigma_rep / cfg.sigma_att) ** cfg.dim)
+
+
+def test_long_run_numba_matches_package_backend_for_core_modes() -> None:
+    if not long_run_metastability._NUMBA_AVAILABLE:
+        return
+
+    base = SimulationConfig(
+        steps=80,
+        dim=2,
+        epsilon=0.05,
+        eta=0.15,
+        alpha=0.1,
+        memory_mass=1.0,
+        sample_every=10,
+        max_memory=30,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=0.35,
+    )
+    cases = [
+        base,
+        replace(base, eta=0.0),
+        replace(base, memory_mass=0.0),
+        replace(base, deposition_kernel="matched_gaussian"),
+        replace(base, deposition_kernel="gaussian", deposition_sigma=0.5),
+    ]
+
+    for cfg in cases:
+        expected = simulate_finite_memory_numba(cfg, seed=123)
+        actual = long_run_metastability.simulate_long_run(
+            cfg,
+            seed=123,
+            trace_targets=np.empty(0, dtype=np.int64),
+        )
+
+        assert np.array_equal(actual["sample_steps"], expected["sample_steps"])
+        assert np.allclose(actual["samples"], expected["samples"])
+        assert np.allclose(actual["final_x"], expected["final_x"])
+        assert np.allclose(actual["memory"], expected["memory"])
+        assert np.allclose(actual["weights"], expected["weights"])
 
 
 def test_stored_weight_mass_scales_with_memory_mass() -> None:

@@ -1,16 +1,18 @@
 # Paper II - Propagation Speed and Light-Cone Dynamics
 
-Stand: 2026-06-24.
+Stand: 2026-07-13.
 
 ## Rolle
 
-Paper II sammelt die These, dass aus irreversibler Speicherdynamik und
-gekoppelten metastabilen Knoten endliche Antwortzeiten, effektive
-Signalfronten und spaeter Lorentz-artige Kinematik entstehen koennen.
-Die aktuelle Fassung bindet diese Kinematik an die Operator-Schicht aus
-Paper I: robuste Knoten werden als metastabile Regime des Markov-Operators
-auf `z_n` gelesen, und Lorentz-Symmetrie erscheint als effektiver
-Stabilisator des makroskopischen Propagationskegels.
+Paper II ist aktuell ein Companion-Draft und Future-Work-Programm. Es sammelt
+die These, dass aus irreversibler Speicherdynamik und gekoppelten metastabilen
+Knoten endliche Antwortzeiten, effektive Signalfronten und spaeter
+Lorentz-artige Kinematik entstehen koennen.
+
+Der Draft darf derzeit nicht als Claim-Paper gelesen werden. Die aktuelle
+Paper-0/Paper-I-Linie bleibt konservativ: erst Markov-Einbettung,
+co-moving scalar-knot Evidenz und Kontrolltrennung; danach erst Propagation,
+`c_eff` und Lorentz-artige Kinematik.
 
 ## Status
 
@@ -23,6 +25,8 @@ aktuellen Paper-0/Paper-I-Arbeit:
   Negativkontrollen und robusten Onset-Kriterien weiterziehen.
 - Die algebraische/operatorische Sprache ist textlich eingearbeitet, die
   numerische Operatorpipeline aber noch offen.
+- Keine `d=3`-Selektion, keine harte Signalgeschwindigkeit und keine
+  Lorentz-Kinematik als aktuelles Resultat behaupten.
 
 ## Dateien
 

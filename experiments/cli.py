@@ -23,6 +23,9 @@ CATEGORIES = {
     ],
     "dynamics": [
         "current/dynamics/long_run_metastability.py",
+        "current/dynamics/dynamic_center_trace_report.py",
+        "current/dynamics/paper_i_evidence_table.py",
+        "current/dynamics/epsilon_dynamic_center_sweep.py",
         "current/dynamics/epsilon_step_balance.py",
         "current/dynamics/epsilon_floor_visual_probe.py",
         "current/dynamics/scalar_n_scaling_report.py",
@@ -49,6 +52,8 @@ CATEGORIES = {
     "markov": [
         "current/markov/ar_mode_probe.py",
         "current/markov/knot_score_report.py",
+        "current/markov/long_run_trace_ar_report.py",
+        "current/markov/feature_closure_report.py",
     ],
     "memory": [
         "current/memory/vector_memory_pilot.py",

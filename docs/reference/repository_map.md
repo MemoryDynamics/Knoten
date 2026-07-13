@@ -17,7 +17,7 @@ flowchart TD
     root --> docs["docs<br/>7 aktive Dokumente + Rohmaterial"]
     root --> paper["paper<br/>Paper 0, I, II, III und Kindle-PDFs"]
     root --> reports["reports<br/>datierte Reviews und Analyseberichte"]
-    root --> data["data/processed<br/>generierte Outputs, ignoriert"]
+    root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft/result figures"]
 
     experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
@@ -108,7 +108,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_run_metastability.py"]
-    runner --> local["data/processed/long_run_metastability<br/>ignored JSON outputs"]
+    runner --> local["data/processed/long_run_metastability<br/>ignored bulk JSON outputs"]
     local --> trace_review["dynamic_center_trace_report.py<br/>log-trend radius/drift + local spin figures"]
     local --> review["manual review<br/>residence, controls, runtime"]
     trace_review --> report["reports/<br/>committed result report"]
@@ -124,7 +124,9 @@ flowchart TD
   sind Rohmaterial.
 - `reports/` sind datierte, zitierbare Zwischenstaende.
 - `data/processed/` und `results/` bleiben generiert und werden nur nach
-  Review ueber Reports zusammengefasst.
+  Review ueber Reports zusammengefasst. Einzelne getrackte JSONs unter
+  `data/processed/` sind kuratierte Snapshots oder Test-/Report-Fixtures, nicht
+  das Muster fuer neue Bulk-Laeufe.
 
 ## Aufraeumregeln
 
@@ -133,7 +135,8 @@ flowchart TD
 - `docs/archive/emergente_raumzeit`, `docs/historical/chatgpt/topics`, `paper/*/archiv`
   und `experiments/archive/legacy` sind Rohmaterial oder historische Referenz, keine
   aktive Quelle fuer Claims.
-- Generierte Rohdaten unter `data/processed/` bleiben ignoriert. Nur reviewed
-  JSON-Zusammenfassungen, Reports und Figuren werden gezielt committed.
+- Generierte Rohdaten unter `data/processed/` bleiben standardmaessig ignoriert.
+  Nur reviewed JSON-Zusammenfassungen, Reports und Figuren werden gezielt
+  committed; fuer neue Snapshots ist ein explizites `git add -f` erforderlich.
 - Top-level Buildprodukte wie `site/`, `results/`, Caches und lokale Venvs
   duerfen nicht als Projektstand gelesen werden.

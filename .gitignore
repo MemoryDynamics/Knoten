@@ -1,6 +1,7 @@
 .idea/
 .venv/
 .venv1/
+.vscode/settings.json
 __pycache__/
 *.py[cod]
 *.pyo

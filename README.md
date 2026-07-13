@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-10.
+Stand: 2026-07-13.
 
 ## Worum es geht
 
@@ -20,9 +20,10 @@ slow modes oder fast-invariante Mengen pruefbar.
 Aktuelle Rollen:
 
 - Paper 0: mathematischer Anker bzw. moegliches Supplement.
-- Paper I: Minimalmodell plus Long-Run-Evidenz fuer metastabile Knoten.
+- Paper I: Minimalmodell plus kontrollierte Long-Run-Evidenz fuer scalar
+  co-moving memory-cloud candidates.
 - Paper II/III: Folgeprogramme fuer Propagation, Raumzeit, Quanten- und
-  Standardmodellfragen.
+  Standardmodellfragen; derzeit keine Claim-Basis.
 
 ## Aktueller Stand
 
@@ -39,25 +40,28 @@ Belastbar derzeit:
   `src/emergenz_knoten/markov/` und ist getestet.
 - Der Kernelgradient wurde korrigiert: `A_rep`/`A_att` sind jetzt wieder
   repulsiver/attraktiver Potentialkanal im Sinn der Paper-Gleichung.
-- Der korrigierte q=3-Retest zeigt: die historische Baseline mit `A_att=0.35`
-  dispergiert; kompakte Kandidaten entstehen erst im Amplitudenfenster
-  `A_att=9..35` bei festem `A_rep=1`, sind aber noch keine Long-Run-Knoten.
-- Der Grenzscan unterhalb `A_att=9` lokalisiert den korrigierten Umschlag bei
-  `A_att ~= 7.9` bzw. `chi ~= 0.88`.
-- Der erste Vektormemory-Pilot ist implementiert; sein Kurzlauf zeigt noch
-  keinen isolierten vektorinduzierten Oszillator, weil komplexe AR-Moden
-  bereits im `eta_v=0`-Kontrollzweig auftreten.
+- Nach korrigierter Sign-Konvention ist `A_att=35`, `epsilon=1e-4`, `N=30M`
+  der aktuelle skalare Long-Run-Referenzkandidat. Gegen `eta_zero` trennt er
+  sich in co-moving Radius, radiusnormalisierter Center-Drift, Memory-Dimension
+  und Roundness.
+- Die Paper-I-Evidenz ist als co-moving compact memory-cloud evidence zu lesen:
+  kein fixes absolutes Zentrum, kein physikalischer Teilchenclaim.
+- Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`; es
+  gibt daher keinen kontrollgetrennten skalaren Phasen-/Photonmodus.
+- Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars,
+  nicht fuer den Spin-Scalar.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
-  Deposition; `matched_deposition` ist ohne Steifigkeitsrenormierung breiter
-  als die Delta-Baseline.
+  Deposition; `memory_mass=M0` ist als eigene Memory-Skala abgebildet.
 
 Noch nicht belastbar:
 
 - ein spezifisch zweiskaliger Baseline-Knotenmechanismus, weil `single_scale`
-  ebenfalls stark bleibt;
-- eindeutige `d=3`-Selektion;
+  historisch ebenfalls stark war;
+- eindeutige externe `d=3`-Selektion; `D_mem ~2.94` ist aktuell eine lokale
+  Memory-Cloud-Shape-Diagnostik im gewaehlten 3D-Embedding;
+- stabile skalare Spin-, Phasen- oder Photonmoden;
 - harte endliche Signalgeschwindigkeit;
-- physikalische Massen oder Standardmodellclaims.
+- physikalische Massen, Lorentz-, Quanten- oder Standardmodellclaims.
 
 ## Schnellstart
 
@@ -93,17 +97,14 @@ Tests:
 python -m pytest tests -q
 ```
 
-## Dokumentation
-
-Lokaler MkDocs-Build:
+Dokumentation:
 
 ```bash
 python -m pip install -r docs/requirements.txt
-python -m mkdocs serve
 python -m mkdocs build --strict
 ```
 
-Aktive Einstiegspunkte:
+## Aktive Dokumentation
 
 - [Startseite](docs/index.md)
 - [Aktueller Stand](docs/status/current_status.md)
@@ -119,8 +120,8 @@ Aktive Einstiegspunkte:
 python experiments/cli.py --list
 python experiments/cli.py reference --list
 python experiments/cli.py reference --script current/reference/reference_experiment.py
-python experiments/cli.py dimension_selection --list
-python experiments/cli.py dimension_selection --script dimension_selection/heatmaps/DimensionsHeatmap.py
+python experiments/cli.py dynamics --list
+python experiments/cli.py markov --list
 ```
 
 Direkter Referenzlauf:
@@ -137,12 +138,12 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 ## Naechste Prioritaeten
 
-1. Fuer skalare Paper-I-Haertung nur noch das enge Fenster `A_att=7.75..9`
-   als Uebergang und `A_att=9..35` als Kompaktheitsbereich verwenden.
-2. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-
-   Memory weiter separat testen; der erste Vektorpilot ist ein Kontrollbefund,
-   noch kein Oszillatorclaim.
-3. Naechste Vektormemory-Kriterien: `alignment` vs. `transverse_2d`,
-   `lambda_v`-Variation, shuffled-vector-Kontrolle und lag-stabile Slow-Modes.
-4. Zero-Mean/Matched-Deposition erst unter korrigierter Sign-Konvention wieder
-   aufnehmen, falls sie eine konkrete Mechanismusfrage klaeren.
+1. Paper-I-Text und Supplement auf Evidenztabelle, Feature-Closure und den
+   seedweisen 3D-Memory-Shape-Befund synchronisieren.
+2. Fuer skalare Paper-I-Haertung `A_att=35`, `epsilon=1e-4`, `N=30M` als
+   aktuellen Referenzslice verwenden; weitere `lambda_m`/`sigma`/`M0`-Achsen
+   erst nach Text-Synchronisierung.
+3. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-Memory
+   separat testen; der bisherige skalare Befund ist Relaxations-/Shape-Evidenz.
+4. Paper II bleibt Future Work, bis Propagation, lokale Kopplung und
+   Mehrknoten-Response mit Negativkontrollen tragen.

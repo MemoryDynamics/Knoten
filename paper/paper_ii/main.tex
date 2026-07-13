@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\title{Emergent Spacetime Kinematics from Irreversible Memory Dynamics}
+\title{Companion Draft: Emergent Spacetime Kinematics from Irreversible Memory Dynamics}
 
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
@@ -19,7 +19,7 @@
 \date{\today}
 
 \begin{abstract}
-We propose a minimal irreversible, finite-memory dynamics in which effective space and relativistic kinematics arise as coarse-grained consistency conditions of metastable, localized structures (``dynamical knots''). We outline how effective dimensionality, a finite propagation speed, and Lorentz-like kinematics emerge without postulating spacetime at the microscopic level.
+This companion draft records a future-work programme for testing whether a minimal irreversible, finite-memory dynamics can support effective space and relativistic kinematics as coarse-grained consistency conditions of metastable, localized structures (``dynamical knots''). It does not claim a derivation of spatial dimensionality, finite signal speed, or Lorentz invariance. Those statements remain conditional targets for later multi-knot propagation and operator-based metastability tests.
 \end{abstract}
 
 \maketitle
@@ -43,17 +43,17 @@ From a mathematical perspective, it is worth noting that modern geometry itself 
 
 The role of these developments in the present context is therefore purely conceptual. They provide independent evidence that emergent smooth geometry from non-classical substrates is neither exotic nor inconsistent. However, rather than introducing sophisticated mathematical structures at the outset, we ask which geometric notions are forced upon us by the internal consistency of the dynamics itself. In this sense, geometry is treated not as an axiom, but as an effective descriptor whose validity is limited to metastable, macroscopic regimes.
 
-The central claim of this paper is that space and relativistic kinematics arise as consistency conditions of interacting, memory-driven dynamical structures. In particular:
+The working conjecture of this companion draft is that space and relativistic kinematics may arise as consistency conditions of interacting, memory-driven dynamical structures. In particular, the following remain test targets rather than established results:
 \begin{itemize}
 \item Effective spatial dimensionality is tied to the stability and decoupling of degrees of freedom of metastable knots \cite{Ambjorn2005Spectral,Benedetti2009Spectral,Carlip2017Dimension}.
-\item Finite memory and delayed self-interaction necessarily imply a finite propagation speed for information between distinct structures.
-\item Requiring consistency of descriptions across different localized dynamical regimes leads to a Lorentz-like kinematical invariance at large scales \cite{Volovik2003Universe,Liberati2013Lorentz}.
+\item Finite memory and delayed self-interaction may support finite response speeds only under additional locality and multi-knot transfer assumptions.
+\item Requiring consistency of descriptions across different localized dynamical regimes could motivate Lorentz-like kinematical invariance at large scales \cite{Volovik2003Universe,Liberati2013Lorentz}.
 \end{itemize}
 
 Importantly, the scope of this paper is deliberately limited. We address only kinematical aspects of spacetime emergence. Quantum dynamics, spinor structure, and gauge interactions are deferred to a companion work. Likewise, we do not attempt to construct a dynamical theory of gravity; curvature and spacetime dynamics are explicitly outside the present scope.
 
 \paragraph{Paper outline.}
-We first establish an effective spatial interpretation of $\Omega$ (including the macroscopic selection $d=3$), then derive a finite and universal propagation speed $c_{\mathrm{eff}}$ from finite memory coupling, and finally obtain Lorentz-like kinematics from observer equivalence and invariant $c_{\mathrm{eff}}$.
+We first state how an effective spatial interpretation of $\Omega$ could be tested, then outline finite-propagation diagnostics for multi-knot response, and finally describe the consistency conditions that would be required before Lorentz-like kinematics could be claimed.
 
 
 \section{From Abstract State Space to Effective Space}\label{sec:effective_space}
@@ -198,15 +198,12 @@ Numerical evidence indicates that three effective spatial dimensions form a part
 
 \subsection{Why three dimensions (macroscopically)}
 
-\vspace{2em}
-
-\textit{[TODO: Insert figure: knot stability vs. effective dimensionality / relaxation spectrum.]}
-
-\vspace{2em}
+\paragraph{Status note.}
+The current repository does not yet establish a robust dimension-selection theorem. The historical occupancy-dimension evidence and the current scalar memory-cloud result are useful diagnostics, but the claim of macroscopic $d=3$ selection remains future work.
 
 The linearized OU description introduced above provides a diagnostic of stability for a given number of effective degrees of freedom.
 It does not, however, by itself select a preferred spatial dimension.
-The selection of three macroscopic dimensions arises at an earlier, nonlinear stage of the memory-driven dynamics.
+A possible macroscopic selection of three dimensions would have to arise at an earlier, nonlinear stage of the memory-driven dynamics.
 
 We consider a stochastic trajectory $\{x_n\}_{n\in\mathbb{N}}$ in an abstract state space $\Omega\simeq\mathbb{R}^d$ with finite-memory self-interaction.
 The position update is
@@ -333,10 +330,10 @@ This form expresses the fact that information transfer is delayed by the finite 
 If instantaneous propagation were allowed, Eq.~\eqref{eq:retarded_kernel} would reduce to a delta-like kernel.
 Such behavior would contradict the finite relaxation time encoded in Eq.~\eqref{eq:memory_update}, effectively bypassing the irreversible memory dynamics that defines the model.
 
-Consistency of the coupled dynamics therefore excludes instantaneous influence and enforces a finite response time between spatially separated knots.
+Consistency of the coupled dynamics would exclude instantaneous influence only under explicit locality assumptions and would then enforce a finite response time between spatially separated knots.
 
 \subsection{Effective maximal propagation speed}
-The delayed memory response implies the existence of a maximal propagation speed for dynamical influence.
+A delayed memory response can imply a maximal propagation speed for dynamical influence only when direct long-range coupling terms are absent or sufficiently suppressed.
 On coarse-grained scales this speed may be estimated as
 \begin{equation}
 c_{\mathrm{eff}}
@@ -353,14 +350,14 @@ Under these conditions, a perturbation produced at knot $A$ cannot affect knot $
 If, by contrast, the kernel had effectively infinite range or instantaneous nonlocal components, no strict finite-speed statement would follow.
 
 \subsection{Universality}
-For multiple knots sharing a common memory substrate, consistency of their effective descriptions requires that the maximal propagation speed be universal.
+For multiple knots sharing a common memory substrate, consistency of their effective descriptions would require any measured maximal propagation speed to be universal within the tested regime.
 Different values of $c_{\mathrm{eff}}$ would prevent a coherent comparison of spatial and temporal scales between knots.
 
-Thus, a universal maximal propagation speed emerges dynamically as a consistency condition of interacting memory-driven structures.
+Thus, a universal maximal propagation speed remains a dynamical consistency target for interacting memory-driven structures.
 
 \subsection{Interim conclusion}
-Finite, relaxing memory generically enforces a finite and universal maximal propagation speed for information between metastable dynamical structures.
-This result is independent of any spacetime or relativistic postulates and follows solely from the irreversible memory dynamics.
+Finite, relaxing memory alone does not generically enforce a finite and universal maximal propagation speed; this would require local transfer assumptions and multi-knot response evidence.
+This is a conditional test target rather than a result: without local transfer assumptions and multi-knot evidence, finite memory alone does not prove a speed limit.
 
 \section{Emergent Lorentz Kinematics}\label{sec:lorentz}
 \subsection{Operational notion of observers}
@@ -372,7 +369,7 @@ No preferred observer is assumed.
 
 \subsection{Universality of the maximal propagation speed}
 
-Section~\ref{sec:finite_speed} established the existence of a finite maximal propagation speed $c_{\mathrm{eff}}$, arising as a consistency condition of finite, relaxing memory.
+Section~\ref{sec:finite_speed} outlined conditions under which a finite maximal propagation speed $c_{\mathrm{eff}}$ could arise as a consistency condition of finite, relaxing memory.
 For multiple knots to admit a coherent mutual description, this speed must be observer-independent.
 
 Let $(t,\mathbf{x})$ and $(t',\mathbf{x}')$ denote effective coordinates associated with two distinct metastable knots.
@@ -443,7 +440,7 @@ In this sense the Lorentz group is the effective stabilizer of the macroscopic p
 The emergence of Lorentz kinematics in the present framework does not rely on postulated spacetime structure, causal axioms, or relativistic principles.
 Instead, it follows uniquely from:
 \begin{enumerate}
-\item the existence of a finite, universal maximal propagation speed $c_{\mathrm{eff}}$,
+\item the measured existence of a finite, universal maximal propagation speed $c_{\mathrm{eff}}$,
 \item the requirement that effective descriptions associated with different metastable knots remain mutually consistent.
 \end{enumerate}
 
@@ -461,21 +458,21 @@ In the present framework, such trajectories correspond to modes that do not form
 This provides an operational interpretation of lightlike propagation without introducing additional postulates.
 
 \subsection{Interim conclusion}
-Lorentz kinematics emerges as the unique linear invariance structure compatible with a finite, universal propagation speed and observer equivalence in the metastable regime of memory-driven dynamics.
+Lorentz kinematics would have to be tested as the effective linear invariance structure compatible with a measured finite, universal propagation speed and observer equivalence in the metastable regime of memory-driven dynamics.
 No microscopic spacetime assumptions are required.
 
 \section{Outlook}\label{sec:outlook}
 
-In this paper we have argued that effective space and relativistic kinematics need not be postulated at the microscopic level: they can arise as coarse-grained consistency conditions of an irreversible, finite-memory dynamics. Metastable localized structures (dynamical knots) furnish operational coordinates, finite memory enforces a universal maximal propagation speed $c_{\mathrm{eff}}$, and observer equivalence in the metastable regime selects Lorentz-like kinematics.
+This companion draft has outlined how effective space and relativistic kinematics could be tested as coarse-grained consistency conditions of an irreversible, finite-memory dynamics. Metastable localized structures would have to furnish operational coordinates, local memory-mediated transfer would have to produce a universal maximal propagation speed $c_{\mathrm{eff}}$, and observer equivalence in the metastable regime would then motivate Lorentz-like kinematics.
 
 The present scope is purely kinematical. We do not construct a dynamical theory of gravity, and we do not introduce quantum postulates here. Quantum dynamics and the basis for the Standard Model are deferred to Paper~III.
 
 \paragraph{Take-home and near-term targets.}
 \begin{itemize}
-\item \textbf{Minimal ingredients.} A finite memory persistence time and finite effective memory range are sufficient to exclude instantaneous influence and imply a maximal propagation speed $c_{\mathrm{eff}}$.
+\item \textbf{Minimal ingredients.} A finite memory persistence time and finite effective memory range are not by themselves sufficient; finite propagation requires local transfer assumptions and absence of direct long-range response terms.
 \item \textbf{Where Lorentz symmetry can fail.} At finite coarse-graining and finite memory length, small departures from exact Lorentz invariance are expected; these deviations should scale with ratios such as $\tau_{\mathrm{mem}}/\tau_{\mathrm{macro}}$ and $\ell_{\mathrm{mem}}/L$.
 \item \textbf{Testable numerical diagnostics.} In simulations one can measure (i) the retarded response kernel $K_{AB}$ between knots, (ii) the emergent speed estimate $c_{\mathrm{eff}}\sim \ell_{\mathrm{mem}}/\tau_{\mathrm{mem}}$, (iii) the local stability spectrum of knots, and (iv) transfer-operator spectra and metastable memberships on the augmented states $z_n$.
-\item \textbf{Open dynamical questions.} A next step is to derive how interactions between multiple knots renormalize $c_{\mathrm{eff}}$, constrain admissible effective field content in the metastable regime, and determine the stabilizer/equivariance groups of robust knot classes.
+\item \textbf{Open dynamical questions.} A next step is to measure whether interactions between multiple knots define a stable $c_{\mathrm{eff}}$, constrain admissible effective field content in the metastable regime, and determine the stabilizer/equivariance groups of robust knot classes.
 \end{itemize}
 
 \bibliographystyle{unsrtnat}
