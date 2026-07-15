@@ -75,8 +75,13 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   isotrop abtasten.
 - `D_spec` ist aktuell eine Point-Cloud-Diffusions-/Spektralgeometrie, kein FFT-
   Fenster und kein Transferoperatorspektrum. Eine saubere Aussenansicht braucht
-  als naechstes tiefpass-/center-trace-basierte Dimensionen und spaeter
-  Response-Tests mit einem zweiten Knoten oder schwachem externem Feld.
+  als naechstes D_spec-Skalenempfindlichkeit und spaeter Response-Tests mit
+  einem zweiten Knoten oder schwachem externem Feld.
+- 3D-Audit 2026-07-15: `D_p90`/`D_p95` bestaetigen, dass die interne
+  Memory-Varianz in hohen Einbettungen nicht auf drei Achsen kollabiert.
+  Paper-I-tauglich bleibt der lokale `d=3`-Memory-Shape-Teaser; Paper II
+  sollte `D_spec memory ~=3` und relationale Response-Dimensionen pruefen.
+  Report: `reports/dimensions/dimension_claim_audit_2026-07-15.md`.
 
 ## Long-Run-Status
 

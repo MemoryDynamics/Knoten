@@ -216,18 +216,25 @@ Naechster operativer Schritt:
     liegt nahe `2.52`, waehrend `D_mem` bis `9.16` steigt; d3 erreicht
     `D_mem ~=2.95`, aber die rohe Spur bleibt bei `D_cov ~=1.8`. Report:
     `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md`.
+24. Abgeschlossen: 3D-Dimensionsclaim-Audit auf vorhandenen `A_att=35`,
+    `epsilon=1e-4`, `N=30M` Case-JSONs fuer `d in {3,4,5,7,10,13,20}`.
+    Ergebnis: Paper I darf den lokalen 3D-Memory-Shape-Befund im gewaehlten
+    3D-Slice als Teaser nutzen. Ein starker ambient-unabhaengiger 3D-Claim
+    wird nicht gestuetzt, weil `D_mem`, `D_p90` und `D_p95` mit `d` wachsen.
+    Paper-II-Hebel ist `D_spec memory`, das bei grossen `d` in Richtung 3
+    laeuft. Report: `reports/dimensions/dimension_claim_audit_2026-07-15.md`.
 
 Aktueller naechster Schritt:
 
 - Paper-I-Text und ggf. Supplement auf Evidenztabelle, Feature-Closure und die
-  defensiv formulierte Memory-Shape-Grenze synchronisieren.
+  defensiv formulierte Memory-Shape-/3D-Teaser-Grenze synchronisieren.
 - Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in
   Paper I; skalares Memory ist erste Grobkoernung fuer
   Kompaktheit/Radius/Relaxation.
-- Paper-II-Dimensionsfrage nicht ueber weitere Blindscans treiben, sondern
-  methodisch schaerfen: Center-Trace-`D_cov`/`D_occ`/`D_spec`,
-  `D_p90`/`D_p95`-Memory-Dimensionen, D_spec-Skalenempfindlichkeit und danach
-  Response-/Zwei-Knoten-Tests.
+- Paper-II-Dimensionsfrage methodisch weiter treiben: zuerst D_spec-
+  Bandbreiten-/kNN-Sensitivitaet, dann relationaler Response-Rang mit zweitem
+  Knoten oder schwachem externem Feld. Keine weiteren Dimensions-Blindscans
+  als Hauptpfad.
 - Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
   Scorecard-Sprache fortsetzen.
 
@@ -306,14 +313,19 @@ Status: defensiv lesen; kein `d=3`-Selektionsclaim; aktueller Befund stuetzt ehe
   `9.16`; `d=3` zeigt `D_mem ~=2.95`, aber die rohe Spur bleibt bei
   `D_cov ~=1.8`. Das ist ein starkes Reconciliation-Signal, aber kein
   makroskopischer `d=3`-Selektionssatz.
+- 3D-Audit 2026-07-15: `D_mem`, `D_p90` und `D_p95` wachsen mit der
+  bereitgestellten Dimension. Der starke Selektionsclaim bleibt damit offen
+  bis negativ. Interessant fuer Paper II ist `D_spec memory`, das bei grossen
+  `d` gegen etwa 3 laeuft, waehrend `D_center` fuer einen einzelnen driftenden
+  Knoten eher eindimensional bleibt.
 
 Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
 gezielte Reconciliation der Dimensionsdiagnostik: historische
 Parameterdefinitionen, Schaetzfenster, Samplingdichte, Memory-Normierung,
-Negativkontrollen, Center-Trace-Dimensionen, Eigenwert-Tail-Schwellen und
-D_spec-Skalenempfindlichkeit nebeneinanderstellen. Neue Dimensionsergebnisse
-muessen `D_occ`, `D_win`, `valid win`, lokale Slopes und die zugehoerige
-Memory-/Center-Geometrie gemeinsam berichten.
+Negativkontrollen, Center-Trace-Dimensionen, Eigenwert-Tail-Schwellen,
+D_spec-Skalenempfindlichkeit und relationale Response-Raenge nebeneinanderstellen.
+Neue Dimensionsergebnisse muessen `D_occ`, `D_win`, `valid win`, lokale Slopes
+und die zugehoerige Memory-/Center-Geometrie gemeinsam berichten.
 
 ### P2.3 Innen/Aussen- und Synchronisationsprogramm
 
