@@ -19,6 +19,8 @@ jobs:
           python -m pip install -r requirements-dev.txt
           python -m pip install -r docs/requirements.txt
           python -m pip install -e .
+      - name: Lint Python
+        run: python -m ruff check src tests experiments/current experiments/cli.py
       - name: Run tests
         run: python -m pytest tests -q
       - name: Build docs

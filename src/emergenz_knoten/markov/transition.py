@@ -94,6 +94,7 @@ class TransferOperatorEstimate:
     counts: np.ndarray
     transition_matrix: np.ndarray
     eigenvalues: np.ndarray
+    relaxation_eigenvalues: np.ndarray
     relaxation_rates: np.ndarray
     empty_rows: np.ndarray
     sample_lag: int
@@ -144,7 +145,12 @@ def estimate_transfer_operator(
         if inferred_lag_updates is not None
         else sample_lag
     )
-    eigenvalues, rates = implied_relaxation_rates(
+    eigenvalues, _ = implied_relaxation_rates(
+        transition,
+        lag_time=rate_denominator,
+        drop_stationary=False,
+    )
+    relaxation_eigenvalues, rates = implied_relaxation_rates(
         transition,
         lag_time=rate_denominator,
         drop_stationary=True,
@@ -154,6 +160,7 @@ def estimate_transfer_operator(
         counts=counts,
         transition_matrix=transition,
         eigenvalues=eigenvalues,
+        relaxation_eigenvalues=relaxation_eigenvalues,
         relaxation_rates=rates,
         empty_rows=empty_rows,
         sample_lag=int(sample_lag),

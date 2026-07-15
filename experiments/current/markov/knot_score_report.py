@@ -5,6 +5,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
 import json
+import math
 from pathlib import Path
 import statistics
 import subprocess
@@ -45,6 +46,71 @@ class CaseRecord:
     path: Path
     payload: dict[str, Any]
 
+CONDITION_CONFIG_OVERRIDES: dict[str, frozenset[str]] = {
+    "baseline": frozenset(),
+    "eta_zero": frozenset({"eta"}),
+    "single_scale": frozenset({"amplitude_att"}),
+    "rep_zero": frozenset({"amplitude_rep"}),
+    "m0_zero": frozenset({"memory_mass"}),
+    "alpha_one": frozenset({"alpha"}),
+    "matched_deposition": frozenset({"deposition_kernel", "deposition_sigma"}),
+    "matched_deposition_renormalized": frozenset(
+        {
+            "deposition_kernel",
+            "deposition_sigma",
+            "amplitude_rep",
+            "amplitude_att",
+        }
+    ),
+    "zero_mean_two_scale": frozenset({"amplitude_att"}),
+}
+
+
+def _case_config(case: CaseRecord) -> dict[str, Any]:
+    config = case.payload.get("config")
+    if not isinstance(config, dict):
+        raise ValueError(f"missing config in {case.path}")
+    return config
+
+
+def _config_signature(config: dict[str, Any]) -> str:
+    try:
+        return json.dumps(
+            config,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+    except (TypeError, ValueError) as exc:
+        raise ValueError("config must be finite and JSON-serializable") from exc
+
+
+def _assert_matched_configs(case: CaseRecord, control: CaseRecord) -> None:
+    case_base = case.payload.get("base_config")
+    control_base = control.payload.get("base_config")
+    if isinstance(case_base, dict) and isinstance(control_base, dict):
+        left = case_base
+        right = control_base
+    else:
+        ignored = (
+            CONDITION_CONFIG_OVERRIDES.get(case.condition, frozenset())
+            | CONDITION_CONFIG_OVERRIDES.get(control.condition, frozenset())
+        )
+        left = {
+            key: value
+            for key, value in _case_config(case).items()
+            if key not in ignored
+        }
+        right = {
+            key: value
+            for key, value in _case_config(control).items()
+            if key not in ignored
+        }
+    if _config_signature(left) != _config_signature(right):
+        raise ValueError(
+            "cannot pair cases with different base configurations: "
+            f"{case.path} vs {control.path}"
+        )
 
 def _utc_now() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -75,13 +141,9 @@ def _parse_path_list(values: Iterable[str]) -> list[Path]:
     return out
 
 
-def _case_sort_key(case: CaseRecord) -> tuple[int, int, str]:
-    steps = int(case.payload.get("config", {}).get("steps", 0))
-    return (case.seed, steps, str(case.path))
-
-
 def load_cases(source_dirs: Iterable[Path]) -> dict[tuple[str, int], CaseRecord]:
     by_key: dict[tuple[str, int], CaseRecord] = {}
+    representative_by_condition: dict[str, CaseRecord] = {}
     for source_dir in source_dirs:
         directory = source_dir if source_dir.is_absolute() else ROOT / source_dir
         if not directory.exists():
@@ -91,10 +153,26 @@ def load_cases(source_dirs: Iterable[Path]) -> dict[tuple[str, int], CaseRecord]
             condition = str(payload.get("condition"))
             seed = int(payload.get("seed"))
             case = CaseRecord(condition, seed, path, payload)
+            config = _case_config(case)
             key = (condition, seed)
             previous = by_key.get(key)
-            if previous is None or _case_sort_key(previous) < _case_sort_key(case):
-                by_key[key] = case
+            if previous is not None:
+                raise ValueError(
+                    "duplicate condition/seed case; select one source cohort: "
+                    f"{previous.path} vs {case.path}"
+                )
+            representative = representative_by_condition.get(condition)
+            if (
+                representative is not None
+                and _config_signature(_case_config(representative))
+                != _config_signature(config)
+            ):
+                raise ValueError(
+                    f"mixed configurations for condition {condition!r}: "
+                    f"{representative.path} vs {case.path}"
+                )
+            by_key[key] = case
+            representative_by_condition.setdefault(condition, case)
     return by_key
 
 
@@ -117,7 +195,7 @@ def _fmt(value: Any, digits: int = 3) -> str:
 
 
 def _summary(values: list[float]) -> dict[str, float | int | None]:
-    finite = [float(value) for value in values if value == value]
+    finite = [float(value) for value in values if math.isfinite(float(value))]
     if not finite:
         return {"n": 0, "mean": None, "median": None, "min": None, "max": None, "sd": None}
     return {
@@ -192,6 +270,7 @@ def build_rows(
         control = control_by_seed.get(seed)
         if control is None:
             continue
+        _assert_matched_configs(case, control)
         score = scorer(
             case.payload["diagnostics"],
             control.payload["diagnostics"],
@@ -490,8 +569,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Score existing long-run knot evidence JSON files.")
     parser.add_argument("--source-dir", action="append", default=[], help="Source directory or comma-separated directories with case_*.json files.")
     parser.add_argument("--score-version", choices=("v0.3", "v0.4", "v0.5"), default="v0.3")
-    parser.add_argument("--report", type=Path, default=Path("reports/knot_scores/v0_2_to_v0_4/knot_score_v0_3_2026-07-02.md"))
-    parser.add_argument("--output-json", type=Path, default=Path("data/processed/knot_score/2026-07-02_v0_3/summary.json"))
+    parser.add_argument("--report", type=Path)
+    parser.add_argument("--output-json", type=Path)
     return parser.parse_args()
 
 
@@ -517,8 +596,15 @@ def main() -> None:
             for row in rows
         ],
     }
-    report = args.report if args.report.is_absolute() else ROOT / args.report
-    output_json = args.output_json if args.output_json.is_absolute() else ROOT / args.output_json
+    version_slug = args.score_version.replace(".", "_")
+    report_arg = args.report or Path(
+        f"reports/knot_scores/generated/knot_score_{version_slug}.md"
+    )
+    output_arg = args.output_json or Path(
+        f"data/processed/knot_score/{version_slug}/summary.json"
+    )
+    report = report_arg if report_arg.is_absolute() else ROOT / report_arg
+    output_json = output_arg if output_arg.is_absolute() else ROOT / output_arg
     report.parent.mkdir(parents=True, exist_ok=True)
     output_json.parent.mkdir(parents=True, exist_ok=True)
     output_json.write_text(json.dumps(payload, indent=2, sort_keys=True, allow_nan=False), encoding="utf-8")

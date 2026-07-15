@@ -2,6 +2,8 @@
 
 Stand: 2026-07-15  
 Review-Basis: `75c5e80` (`main`, identisch zu `origin/main` zu Review-Beginn)  
+Umsetzung: [Repository Code Review - Remediation](repository_code_review_remediation_2026-07-15.md)
+
 Scope: kanonischer Paketkern unter `src/emergenz_knoten`, aktive Analyse- und
 Reportpfade unter `experiments/current`, Tests, CI und aktuelle
 Dimensions-/Paper-I-Datenfluesse.

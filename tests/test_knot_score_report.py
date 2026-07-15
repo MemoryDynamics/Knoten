@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
 import sys
 
@@ -18,6 +19,14 @@ def _payload(condition: str, seed: int, *, radius: float, memory_roundness: floa
     return {
         "condition": condition,
         "seed": seed,
+        "config": {
+            "steps": 100,
+            "dim": 3,
+            "eta": 0.0 if condition == "eta_zero" else 0.15,
+            "alpha": 0.1,
+            "epsilon": 0.03,
+            "sample_every": 10,
+        },
         "diagnostics": {
             "mean_centered_radius": radius,
             "occupancy_dimension": 1.8,
@@ -97,3 +106,42 @@ def test_v0_4_report_includes_memory_cloud_components() -> None:
     assert "memory roundness gain" in report
     assert "components R/C/V/D/MC/MR/MD" in report
     assert rows[0]["memory_compactness_score"] == 1.0
+
+
+
+def test_build_rows_rejects_mismatched_base_configuration() -> None:
+    cases = _cases()
+    baseline = cases[("baseline", 1)]
+    baseline.payload["config"]["steps"] = 200  # type: ignore[index]
+
+    try:
+        knot_score_report.build_rows(cases, score_version="v0.3")
+    except ValueError as exc:
+        assert "different base configurations" in str(exc)
+    else:
+        raise AssertionError("expected mismatched configuration rejection")
+
+
+def test_load_cases_rejects_duplicate_condition_and_seed(tmp_path: Path) -> None:
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    first.mkdir()
+    second.mkdir()
+    payload = _payload("baseline", 1, radius=1.0, memory_roundness=0.6)
+    serialized = json.dumps(payload)
+    (first / "case_baseline_seed1_a.json").write_text(serialized, encoding="utf-8")
+    (second / "case_baseline_seed1_b.json").write_text(serialized, encoding="utf-8")
+
+    try:
+        knot_score_report.load_cases([first, second])
+    except ValueError as exc:
+        assert "duplicate condition/seed" in str(exc)
+    else:
+        raise AssertionError("expected duplicate case rejection")
+
+
+def test_summary_ignores_all_nonfinite_values() -> None:
+    summary = knot_score_report._summary([1.0, float("inf"), float("nan")])
+
+    assert summary["n"] == 1
+    assert summary["mean"] == 1.0

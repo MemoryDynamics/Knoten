@@ -18,6 +18,7 @@ from emergenz_knoten import (
     exponential_weights,
     fit_occupancy_scaling_window,
     gaussian_gradient,
+    heat_trace_spectral_dimension,
     matched_local_stiffness_renormalization,
     occupancy_dimension,
     occupancy_local_slopes,
@@ -52,18 +53,37 @@ def test_occupancy_dimension_line_is_finite() -> None:
     assert 0.7 <= value <= 1.3
 
 
-def test_spectral_dimension_is_parameterized_and_finite() -> None:
-    rng = np.random.default_rng(321)
-    points = rng.normal(size=(300, 3))
+def test_heat_trace_spectral_dimension_calibrates_circle() -> None:
+    theta = np.linspace(0.0, 2.0 * np.pi, 240, endpoint=False)
+    circle = np.column_stack((np.cos(theta), np.sin(theta)))
 
-    symmetric = spectral_dimension(points)
+    result = heat_trace_spectral_dimension(circle)
+    wide = heat_trace_spectral_dimension(circle, bandwidth_factor=4.0)
+
+    assert result.valid_scaling
+    assert 0.85 <= result.dimension <= 1.15
+    assert result.log_width >= np.log(2.0)
+    assert np.isclose(wide.bandwidth, 4.0 * result.bandwidth)
+    assert np.isclose(spectral_dimension(circle), result.dimension)
+
+
+def test_heat_trace_spectral_dimension_calibrates_flat_two_torus() -> None:
+    axis = np.linspace(0.0, 2.0 * np.pi, 20, endpoint=False)
+    angles = np.stack(np.meshgrid(axis, axis, indexing="ij"), axis=-1).reshape(-1, 2)
+    torus = np.concatenate((np.cos(angles), np.sin(angles)), axis=1)
+
+    result = heat_trace_spectral_dimension(torus)
+
+    assert result.valid_scaling
+    assert 1.8 <= result.dimension <= 2.5
+
+
+def test_legacy_spectral_dimension_remains_available_for_reproduction() -> None:
+    points = np.random.default_rng(321).normal(size=(300, 3))
+
     legacy = spectral_dimension(points, normalization="legacy_row")
-    wide = spectral_dimension(points, bandwidth_factor=4.0)
 
-    assert np.isfinite(symmetric)
     assert np.isfinite(legacy)
-    assert np.isfinite(wide)
-    assert abs(symmetric - wide) > 1e-6
 
 
 def test_spectral_dimension_rejects_invalid_parameters() -> None:
@@ -98,6 +118,29 @@ def test_shape_statistics_detects_weighted_center_and_roundness() -> None:
     assert stats["axis_ratio_min_max"] is not None
     assert 0.5 <= float(stats["axis_ratio_min_max"]) <= 1.0
 
+
+def test_shape_statistics_applies_weights_to_mean_radius() -> None:
+    points = np.array([[0.0], [10.0]])
+    weights = np.array([0.999, 0.001])
+    stats = shape_statistics(points, weights=weights)
+
+    assert np.isclose(stats["mean_radius"], 0.01998)
+    assert np.isclose(stats["unweighted_mean_radius"], 5.0)
+
+
+def test_shape_statistics_reports_ambient_and_intrinsic_axis_ratios() -> None:
+    line = np.array([[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
+    plane = np.array(
+        [[-1.0, -1.0, 0.0], [-1.0, 1.0, 0.0], [1.0, -1.0, 0.0], [1.0, 1.0, 0.0]]
+    )
+    line_stats = shape_statistics(line)
+    plane_stats = shape_statistics(plane)
+
+    assert line_stats["axis_ratio_min_max"] == 0.0
+    assert line_stats["axis_ratio_intrinsic_min_max"] == 1.0
+    assert line_stats["axis_ratio_second_first"] == 0.0
+    assert plane_stats["axis_ratio_min_max"] == 0.0
+    assert plane_stats["axis_ratio_intrinsic_min_max"] == 1.0
 
 def test_occupancy_scaling_window_skips_sample_saturation() -> None:
     scales = np.geomspace(0.001, 1.0, 10)
@@ -374,9 +417,15 @@ def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
         ({"deposition_kernel": "delta", "deposition_sigma": 1.0}, "deposition_sigma"),
         ({"deposition_kernel": "matched_gaussian", "deposition_sigma": 1.0}, "deposition_sigma"),
         ({"burn_in": -1}, "burn_in"),
+        ({"burn_in": 10}, "burn_in"),
+        ({"epsilon": float("nan")}, "epsilon"),
+        ({"eta": float("inf")}, "eta"),
+        ({"amplitude_rep": float("nan")}, "amplitudes"),
+        ({"amplitude_att": float("inf")}, "amplitudes"),
+        ({"steps": 10.5}, "steps"),
     ]
     for kwargs, expected in invalid_cases:
-        cfg = SimulationConfig(steps=10, **kwargs)
+        cfg = SimulationConfig(**{"steps": 10, **kwargs})
         try:
             simulate_finite_memory(cfg, seed=1)
         except ValueError as exc:

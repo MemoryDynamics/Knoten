@@ -6,7 +6,11 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ..core import SimulationConfig
+from ..core import (
+    SimulationConfig,
+    memory_horizon,
+    validate_simulation_config,
+)
 from ..kernels import (
     double_gaussian_gradient,
     exponential_memory_weights,
@@ -61,33 +65,6 @@ class LaggedDataset:
     lag_updates: int | None
 
 
-def _validate_config(config: SimulationConfig) -> None:
-    if config.steps < 1:
-        raise ValueError("steps must be positive")
-    if config.dim < 1:
-        raise ValueError("dim must be positive")
-    if config.sample_every < 1:
-        raise ValueError("sample_every must be positive")
-    if config.max_memory < 1:
-        raise ValueError("max_memory must be positive")
-    if not 0.0 < config.alpha <= 1.0:
-        raise ValueError("alpha must satisfy 0 < alpha <= 1")
-    if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
-        raise ValueError("memory_mass must be non-negative")
-    if config.deposition_kernel not in {"delta", "gaussian", "matched_gaussian"}:
-        raise ValueError("unknown deposition_kernel")
-    if not np.isfinite(config.deposition_sigma) or config.deposition_sigma < 0.0:
-        raise ValueError("deposition_sigma must be non-negative")
-    if config.deposition_kernel == "delta" and config.deposition_sigma != 0.0:
-        raise ValueError("deposition_sigma must be zero for delta deposition")
-    if config.deposition_kernel == "gaussian" and config.deposition_sigma <= 0.0:
-        raise ValueError("deposition_sigma must be positive for gaussian deposition")
-    if config.deposition_kernel == "matched_gaussian" and config.deposition_sigma != 0.0:
-        raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
-
-
-def _horizon(config: SimulationConfig) -> int:
-    return min(config.max_memory, max(1, int(config.memory_factor / config.alpha)))
 
 
 def simulate_augmented_features(
@@ -98,9 +75,9 @@ def simulate_augmented_features(
 ) -> dict[str, np.ndarray] | AugmentedTrajectory:
     """Run the finite-memory model and record reduced augmented-state features."""
 
-    _validate_config(config)
+    validate_simulation_config(config)
     rng = np.random.default_rng(seed)
-    horizon = _horizon(config)
+    horizon = memory_horizon(config)
     weights = exponential_memory_weights(
         config.alpha,
         horizon,

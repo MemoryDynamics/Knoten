@@ -115,3 +115,31 @@ def test_ambient_dimension_report_groups_by_dim_and_condition(tmp_path: Path) ->
     assert "| `4` | `baseline`" in report
     assert "radius gain eta0/baseline" in report
     assert "D_spec memory delta" in report
+
+
+
+def test_ambient_summary_rejects_mixed_configurations(tmp_path: Path) -> None:
+    source = tmp_path / "mixed"
+    _write_case(
+        source,
+        dim=4,
+        condition="baseline",
+        seed=1,
+        radius=0.2,
+        drift=0.05,
+        d_mem=2.9,
+        roundness=0.8,
+    )
+    rows = [
+        ambient_report.case_row(case)
+        for case in ambient_report.load_cases([source])
+    ]
+    mismatched = dict(rows[0])
+    mismatched["config"] = {"dim": 4, "steps": 2000}
+
+    try:
+        ambient_report.build_summary([rows[0], mismatched])
+    except ValueError as exc:
+        assert "mixed configurations" in str(exc)
+    else:
+        raise AssertionError("expected mixed configuration rejection")

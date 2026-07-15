@@ -12,6 +12,8 @@ from typing import Iterable
 
 import numpy as np
 
+from .spectral import heat_trace_spectral_dimension
+
 
 def _as_points(points: Iterable[Iterable[float]]) -> np.ndarray:
     arr = np.asarray(points, dtype=float)
@@ -19,6 +21,8 @@ def _as_points(points: Iterable[Iterable[float]]) -> np.ndarray:
         raise ValueError("points must be a 2D array with shape (n_points, dim)")
     if arr.shape[0] < 2:
         raise ValueError("at least two points are required")
+    if not np.isfinite(arr).all():
+        raise ValueError("points must be finite")
     return arr
 
 
@@ -77,8 +81,12 @@ def shape_statistics(
 
     This diagnostic treats the supplied points as a sampled cloud. If weights
     are provided, they are interpreted as nonnegative memory weights aligned
-    with the points. The returned axis ratios are one for a spherical cloud and
-    approach zero for collapsed or strongly elongated clouds.
+    with the points and are used for both ``mean_radius`` and ``rms_radius``.
+    ``unweighted_mean_radius`` is retained as an explicitly named reference.
+    ``axis_ratio_min_max`` includes collapsed ambient axes, while
+    ``axis_ratio_intrinsic_min_max`` only compares numerically nonzero axes.
+    The former is one for a spherical cloud and zero for a rank-deficient
+    embedding.
     """
 
     pts = _as_points(points)
@@ -92,6 +100,7 @@ def shape_statistics(
             raise ValueError("weights must be finite and nonnegative")
 
     center, cov = _weighted_covariance(pts, w)
+    normalized_weights = w / float(w.sum())
     centered = pts - center
     radii = np.linalg.norm(centered, axis=1)
     eig = np.linalg.eigvalsh(cov)
@@ -107,10 +116,21 @@ def shape_statistics(
     else:
         participation = float("nan")
 
-    if eig_max > 0.0 and positive.size:
-        axis_ratio_min_max = float(np.sqrt(float(positive[-1]) / eig_max))
+    if eig_max > 0.0 and eig_desc.size:
+        ambient_min = float(eig_desc[-1])
+        axis_ratio_min_max = (
+            float(np.sqrt(ambient_min / eig_max))
+            if ambient_min > eig_floor
+            else 0.0
+        )
     else:
         axis_ratio_min_max = float("nan")
+    if eig_max > 0.0 and positive.size:
+        axis_ratio_intrinsic_min_max = float(
+            np.sqrt(float(positive[-1]) / eig_max)
+        )
+    else:
+        axis_ratio_intrinsic_min_max = float("nan")
     if eig_desc.size >= 2 and eig_max > 0.0:
         axis_ratio_second_first = float(np.sqrt(float(eig_desc[1]) / eig_max))
     else:
@@ -123,12 +143,16 @@ def shape_statistics(
     return {
         "center": center.astype(float).tolist(),
         "center_norm": _finite_float(np.linalg.norm(center)),
-        "mean_radius": _finite_float(radii.mean()),
+        "mean_radius": _finite_float(np.dot(normalized_weights, radii)),
+        "unweighted_mean_radius": _finite_float(radii.mean()),
         "rms_radius": _finite_float(np.sqrt(eig_sum)),
         "max_radius": _finite_float(radii.max()),
         "covariance_eigenvalues": eig_desc.astype(float).tolist(),
         "effective_dimension": _finite_float(participation),
         "axis_ratio_min_max": _finite_float(axis_ratio_min_max),
+        "axis_ratio_intrinsic_min_max": _finite_float(
+            axis_ratio_intrinsic_min_max
+        ),
         "axis_ratio_second_first": _finite_float(axis_ratio_second_first),
         "axis_ratio_third_first": _finite_float(axis_ratio_third_first),
     }
@@ -443,14 +467,16 @@ def spectral_dimension(
     eigen_count: int = 50,
     normalization: str = "symmetric",
 ) -> float:
-    """Estimate a point-cloud spectral dimension from a heat-kernel spectrum.
+    """Return a conservative scalar point-cloud spectral dimension.
 
-    The diagnostic is intentionally lightweight. It should be read as a
-    scale-sensitive geometry probe, not as a theorem-level dimension estimator.
-    ``normalization="symmetric"`` uses the symmetric normalized kernel
-    ``D^{-1/2} K D^{-1/2}``, so the use of ``eigvalsh`` is algebraically
-    justified. ``normalization="legacy_row"`` reproduces the older row-normalized
-    convention for historical comparisons only.
+    The default uses :func:`heat_trace_spectral_dimension` and returns NaN
+    unless a stable intermediate-scale heat-trace plateau is detected.
+    ``normalization="legacy_row"`` preserves the pre-2026-07-15 scalar
+    heuristic strictly for historical reproduction; its values are not
+    interchangeable with the corrected estimator.
+
+    Use :func:`heat_trace_spectral_dimension` directly to inspect the full
+    scale-dependent profile and the selected window.
     """
     pts = _as_points(points)
     if len(pts) < 100:
@@ -461,6 +487,13 @@ def spectral_dimension(
         raise ValueError("eigen_count must be greater than one")
     if normalization not in {"symmetric", "legacy_row"}:
         raise ValueError("normalization must be 'symmetric' or 'legacy_row'")
+
+    if normalization == "symmetric":
+        return heat_trace_spectral_dimension(
+            pts,
+            bandwidth_factor=float(bandwidth_factor),
+            eigen_count=int(eigen_count),
+        ).dimension
 
     D2 = ((pts[:, None, :] - pts[None, :, :]) ** 2).sum(-1)
     eps = float(np.median(D2[D2 > 1e-10])) * float(bandwidth_factor)

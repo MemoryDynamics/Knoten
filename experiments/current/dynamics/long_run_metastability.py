@@ -34,10 +34,12 @@ from emergenz_knoten import (  # noqa: E402
     fit_occupancy_scaling_window,
     gaussian_gradient,
     matched_local_stiffness_renormalization,
+    memory_horizon,
     occupancy_dimension,
     residence_statistics,
     shape_statistics,
     simulate_finite_memory,
+    validate_simulation_config,
     spectral_dimension,
     zero_mean_attractive_amplitude,
 )
@@ -143,10 +145,6 @@ def _git_output(args: list[str]) -> str:
 
 def _utc_now() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def _horizon(config: SimulationConfig) -> int:
-    return min(config.max_memory, max(1, int(config.memory_factor / config.alpha)))
 
 
 def _stored_weight_mass(alpha: float, horizon: int, memory_mass: float) -> float:
@@ -342,6 +340,7 @@ def simulate_long_run(
     trace_every: int = 0,
     trace_targets: np.ndarray | None = None,
 ) -> dict[str, np.ndarray]:
+    validate_simulation_config(config)
     effective_kernel = effective_double_gaussian_parameters(
         dim=config.dim,
         sigma_rep=config.sigma_rep,
@@ -454,7 +453,7 @@ def _force_component_diagnostics(config: SimulationConfig, *, seed: int) -> dict
     """Return sampled force-component summaries for the current update sign."""
 
     rng = np.random.default_rng(seed)
-    horizon = _horizon(config)
+    horizon = memory_horizon(config)
     weights = exponential_memory_weights(config.alpha, horizon, memory_mass=config.memory_mass)
     effective = effective_double_gaussian_parameters(
         dim=config.dim,
@@ -1292,7 +1291,7 @@ def run_case(
     result = simulate_long_run(config, seed=seed, trace_every=trace_every, trace_targets=trace_targets)
     elapsed = time.perf_counter() - started
     samples = result["samples"]
-    horizon = _horizon(config)
+    horizon = memory_horizon(config)
     diagnostics = metastability_diagnostics(
         samples,
         config=config,
@@ -1348,6 +1347,7 @@ def run_case(
         "elapsed_seconds": float(elapsed),
         "steps_per_second": float(config.steps / elapsed) if elapsed > 0 else None,
         "config": asdict(config),
+        "base_config": asdict(base_config),
         "effective_kernel": result["effective_kernel"],
         "memory_horizon": int(horizon),
         "stored_weight_mass": _stored_weight_mass(config.alpha, horizon, config.memory_mass),

@@ -13,7 +13,6 @@ from .kernels import (
 )
 
 try:
-    import numba
     from numba import njit
 
     _NUMBA_AVAILABLE = True
@@ -47,7 +46,14 @@ class SimulationConfig:
     sample_every: int = 100
 
 
-def _validate_config(config: SimulationConfig) -> None:
+def validate_simulation_config(config: SimulationConfig) -> None:
+    """Validate every canonical scalar simulation parameter."""
+
+    for name in ("steps", "dim", "sample_every", "max_memory", "burn_in"):
+        value = getattr(config, name)
+        if isinstance(value, bool) or not isinstance(value, (int, np.integer)):
+            raise ValueError(f"{name} must be an integer")
+
     if config.steps < 1:
         raise ValueError("steps must be positive")
     if config.dim < 1:
@@ -58,16 +64,22 @@ def _validate_config(config: SimulationConfig) -> None:
         raise ValueError("max_memory must be positive")
     if config.burn_in < 0:
         raise ValueError("burn_in must be non-negative")
+    if config.burn_in >= config.steps:
+        raise ValueError("burn_in must be smaller than steps")
+    if not np.isfinite(config.epsilon) or config.epsilon < 0.0:
+        raise ValueError("epsilon must be non-negative and finite")
+    if not np.isfinite(config.eta):
+        raise ValueError("eta must be finite")
     if not np.isfinite(config.memory_factor) or config.memory_factor <= 0.0:
-        raise ValueError("memory_factor must be positive")
+        raise ValueError("memory_factor must be positive and finite")
     if not np.isfinite(config.alpha) or not 0.0 < config.alpha <= 1.0:
         raise ValueError("alpha must satisfy 0 < alpha <= 1")
     if not np.isfinite(config.memory_mass) or config.memory_mass < 0.0:
-        raise ValueError("memory_mass must be non-negative")
+        raise ValueError("memory_mass must be non-negative and finite")
     if config.deposition_kernel not in DEPOSITION_KERNELS:
         raise ValueError("unknown deposition_kernel")
     if not np.isfinite(config.deposition_sigma) or config.deposition_sigma < 0.0:
-        raise ValueError("deposition_sigma must be non-negative")
+        raise ValueError("deposition_sigma must be non-negative and finite")
     if config.deposition_kernel == "delta" and config.deposition_sigma != 0.0:
         raise ValueError("deposition_sigma must be zero for delta deposition")
     if config.deposition_kernel == "gaussian" and config.deposition_sigma <= 0.0:
@@ -75,17 +87,28 @@ def _validate_config(config: SimulationConfig) -> None:
     if config.deposition_kernel == "matched_gaussian" and config.deposition_sigma != 0.0:
         raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
     if not np.isfinite(config.sigma_rep) or config.sigma_rep <= 0.0:
-        raise ValueError("sigma_rep must be positive")
+        raise ValueError("sigma_rep must be positive and finite")
     if not np.isfinite(config.sigma_att) or config.sigma_att <= 0.0:
-        raise ValueError("sigma_att must be positive")
+        raise ValueError("sigma_att must be positive and finite")
+    if not np.isfinite(config.amplitude_rep) or not np.isfinite(config.amplitude_att):
+        raise ValueError("force amplitudes must be finite")
 
 
-def _horizon(config: SimulationConfig) -> int:
+_validate_config = validate_simulation_config
+
+
+def memory_horizon(config: SimulationConfig) -> int:
+    """Return the bounded scalar-memory horizon for a validated config."""
+
+    validate_simulation_config(config)
     return min(config.max_memory, max(1, int(config.memory_factor / config.alpha)))
 
 
+_horizon = memory_horizon
+
+
 def initialize_history(config: SimulationConfig) -> tuple[np.ndarray, int]:
-    horizon = _horizon(config)
+    horizon = memory_horizon(config)
     return np.zeros((horizon, config.dim), dtype=float), 0
 
 

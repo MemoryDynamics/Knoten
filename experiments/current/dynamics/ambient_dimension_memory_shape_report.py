@@ -184,10 +184,19 @@ def _load_case(path: Path) -> CaseRecord:
 
 def load_cases(source_dirs: Iterable[Path]) -> list[CaseRecord]:
     cases: list[CaseRecord] = []
+    seen: dict[tuple[int, str, int], Path] = {}
     for source_dir in source_dirs:
         directory = _resolve(source_dir)
         for path in sorted(directory.glob("case_*.json")):
-            cases.append(_load_case(path))
+            case = _load_case(path)
+            key = (case.dim, case.condition, case.seed)
+            if key in seen:
+                raise ValueError(
+                    "duplicate dim/condition/seed case; select one source cohort: "
+                    f"{seen[key]} vs {case.path}"
+                )
+            seen[key] = case.path
+            cases.append(case)
     return sorted(cases, key=lambda item: (item.dim, item.condition, item.seed))
 
 
@@ -211,6 +220,7 @@ def case_row(case: CaseRecord) -> dict[str, Any]:
         "seed": case.seed,
         "steps": case.steps,
         "path": _rel(case.path),
+        "config": case.payload["config"],
         "dynamic_rms_radius_median": _diagnostic_value(trend, ("rms_radius_median",)),
         "dynamic_center_drift_radius_fraction_per_memory_time": _diagnostic_value(
             trend, ("center_drift_radius_fraction_per_memory_time_median",)
@@ -235,6 +245,14 @@ def build_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
     summary: list[dict[str, Any]] = []
     for (dim, condition), group in sorted(grouped.items()):
+        config_signatures = {
+            json.dumps(row.get("config"), sort_keys=True, allow_nan=False)
+            for row in group
+        }
+        if len(config_signatures) != 1:
+            raise ValueError(
+                f"mixed configurations for dim={dim}, condition={condition}"
+            )
         item: dict[str, Any] = {
             "dim": dim,
             "condition": condition,

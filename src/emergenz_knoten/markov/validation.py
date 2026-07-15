@@ -6,7 +6,8 @@ from typing import Iterable
 
 import numpy as np
 
-from ..analytic import critical_eta
+from ..analytic import critical_eta  # noqa: F401 - compatibility re-export
+
 
 
 def critical_gamma(lambda_value: float) -> float:
@@ -128,6 +129,27 @@ def vector_autocorrelation(
     return out
 
 
+def _drop_one_stationary_mode(
+    eigenvalues: np.ndarray,
+    *,
+    unit_tol: float = 1e-8,
+) -> np.ndarray:
+    """Remove exactly one eigenvalue near +1, preserving periodic modes."""
+    if not np.isfinite(unit_tol) or unit_tol < 0.0:
+        raise ValueError("unit_tol must be non-negative and finite")
+
+    values = np.asarray(eigenvalues, dtype=complex)
+    stationary = np.flatnonzero(
+        np.isclose(values, 1.0 + 0.0j, atol=unit_tol, rtol=0.0)
+    )
+    if stationary.size == 0:
+        return values
+    remove = int(stationary[np.argmin(np.abs(values[stationary] - 1.0))])
+    keep = np.ones(values.size, dtype=bool)
+    keep[remove] = False
+    return values[keep]
+
+
 def implied_relaxation_rates(
     transition_matrix: Iterable[Iterable[float]],
     *,
@@ -140,11 +162,13 @@ def implied_relaxation_rates(
     a sample lag or update-index lag, not a physical time variable.
     """
 
-    if lag_time <= 0.0:
-        raise ValueError("lag_time must be positive")
+    if not np.isfinite(lag_time) or lag_time <= 0.0:
+        raise ValueError("lag_time must be positive and finite")
     matrix = np.asarray(transition_matrix, dtype=float)
     if matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1]:
         raise ValueError("transition_matrix must be square")
+    if not np.isfinite(matrix).all():
+        raise ValueError("transition_matrix must be finite")
     if matrix.size == 0:
         return np.array([], dtype=complex), np.array([], dtype=float)
 
@@ -152,14 +176,14 @@ def implied_relaxation_rates(
     order = np.argsort(-np.abs(eigenvalues))
     eigenvalues = eigenvalues[order]
     rates: list[float] = []
+    if drop_stationary:
+        eigenvalues = _drop_one_stationary_mode(eigenvalues)
     for value in eigenvalues:
         modulus = float(abs(value))
-        if drop_stationary and abs(modulus - 1.0) < 1e-8:
-            continue
         if modulus <= 0.0:
             rates.append(float("inf"))
         else:
-            rates.append(float(-np.log(min(modulus, 1.0)) / lag_time))
+            rates.append(float(-np.log(modulus) / lag_time))
     return eigenvalues, np.asarray(rates, dtype=float)
 
 
@@ -171,14 +195,14 @@ def implied_timescales(
 ) -> np.ndarray:
     """Return implied timescales ``-lag_time/log(|lambda|)`` for eigenvalues."""
 
-    if lag_time <= 0.0:
-        raise ValueError("lag_time must be positive")
+    if not np.isfinite(lag_time) or lag_time <= 0.0:
+        raise ValueError("lag_time must be positive and finite")
     values = np.asarray(eigenvalues, dtype=complex)
+    if drop_stationary:
+        values = _drop_one_stationary_mode(values)
     times: list[float] = []
     for value in values:
         modulus = float(abs(value))
-        if drop_stationary and abs(modulus - 1.0) < 1e-8:
-            continue
         if modulus <= 0.0:
             times.append(0.0)
         elif modulus >= 1.0:

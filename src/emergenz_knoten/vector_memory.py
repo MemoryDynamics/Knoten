@@ -7,7 +7,11 @@ from typing import Literal
 
 import numpy as np
 
-from .core import SimulationConfig, _horizon, _validate_config
+from .core import (
+    SimulationConfig,
+    memory_horizon,
+    validate_simulation_config,
+)
 from .kernels import double_gaussian_gradient, exponential_memory_weights
 from .markov.features import augmented_feature_names, memory_summary_features
 
@@ -34,7 +38,7 @@ class VectorMemoryConfig:
 
 
 def _validate_vector_config(config: VectorMemoryConfig) -> None:
-    _validate_config(config.scalar)
+    validate_simulation_config(config.scalar)
     lambda_vector = _lambda_vector(config)
     if not np.isfinite(lambda_vector) or not 0.0 < lambda_vector <= 1.0:
         raise ValueError("lambda_vector must satisfy 0 < value <= 1")
@@ -232,7 +236,7 @@ def simulate_vector_memory(
     scalar = config.scalar
     rng = np.random.default_rng(seed)
 
-    scalar_horizon = _horizon(scalar)
+    scalar_horizon = memory_horizon(scalar)
     scalar_weights = exponential_memory_weights(
         scalar.alpha,
         scalar_horizon,

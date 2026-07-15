@@ -11,8 +11,10 @@ from .analytic import (
 )
 from .core import (
     SimulationConfig,
+    memory_horizon,
     simulate_finite_memory,
     simulate_finite_memory_numba,
+    validate_simulation_config,
 )
 from .diagnostics import (
     ball_residence_statistics,
@@ -24,6 +26,10 @@ from .diagnostics import (
     residence_statistics,
     shape_statistics,
     spectral_dimension,
+)
+from .spectral import (
+    SpectralDimensionResult,
+    heat_trace_spectral_dimension,
 )
 from .experiments import (
     SimulationResult,
@@ -91,6 +97,7 @@ __all__ = [
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
+    "SpectralDimensionResult",
     "VectorMemoryConfig",
     "best_residence_memory_times",
     "best_residence_updates",
@@ -109,6 +116,7 @@ __all__ = [
     "frozen_hessian_stability",
     "gaussian_gradient",
     "gaussian_kernel_curvature",
+    "heat_trace_spectral_dimension",
     "lagged_cross_correlation",
     "load_simulation_result",
     "local_scalar_memory_modes",
@@ -119,6 +127,7 @@ __all__ = [
     "memory_shape_dimension_value",
     "normalize_orientation",
     "occupancy_dimension",
+    "memory_horizon",
     "occupancy_dimension_value",
     "occupancy_local_slopes",
     "phase_locking_value",
@@ -146,6 +155,7 @@ __all__ = [
     "update_vector_history",
     "vector_gaussian_field",
     "vector_memory_feature_names",
+    "validate_simulation_config",
     "vector_memory_force",
     "vector_memory_summary_features",
     "voxel_stability_ratio",

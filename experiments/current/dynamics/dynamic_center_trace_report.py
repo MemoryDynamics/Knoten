@@ -256,6 +256,7 @@ def _ensure_trend_payload(payload: dict[str, Any]) -> None:
 
 def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
     cases: list[CaseRecord] = []
+    seen: dict[tuple[float, str, int], Path] = {}
     for source_dir in source_dirs:
         directory = source_dir if source_dir.is_absolute() else ROOT / source_dir
         match = SOURCE_RE.search(directory.name)
@@ -267,12 +268,28 @@ def _load_cases(source_dirs: list[Path]) -> list[CaseRecord]:
             payload = json.loads(path.read_text(encoding="utf-8"))
             _refresh_dynamic_center_payload(payload)
             _ensure_trend_payload(payload)
+            config = payload.get("config")
+            if not isinstance(config, dict):
+                raise ValueError(f"missing config in {path}")
+            if int(config.get("steps", -1)) != steps:
+                raise ValueError(
+                    f"source-directory steps do not match config in {path}"
+                )
+            condition = str(payload.get("condition"))
+            seed = int(payload.get("seed"))
+            key = (a_att, condition, seed)
+            if key in seen:
+                raise ValueError(
+                    "duplicate A_att/condition/seed case; select one source cohort: "
+                    f"{seen[key]} vs {path}"
+                )
+            seen[key] = path
             cases.append(
                 CaseRecord(
                     a_att=a_att,
                     steps=steps,
-                    condition=str(payload.get("condition")),
-                    seed=int(payload.get("seed")),
+                    condition=condition,
+                    seed=seed,
                     path=path,
                     payload=payload,
                 )
@@ -301,6 +318,7 @@ def _case_row(case: CaseRecord) -> dict[str, Any]:
         "condition": case.condition,
         "seed": case.seed,
         "path": _rel(case.path),
+        "config": case.payload.get("base_config", case.payload["config"]),
         "best_residence_memory_times": _best_voxel_residence(diagnostics),
         "memory_center_residence_memory_times": _diagnostic_value(
             diagnostics,
@@ -391,6 +409,14 @@ def build_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
     summary: list[dict[str, Any]] = []
     for (a_att, condition), group in sorted(grouped.items()):
+        config_signatures = {
+            json.dumps(row.get("config"), sort_keys=True, allow_nan=False)
+            for row in group
+        }
+        if len(config_signatures) != 1:
+            raise ValueError(
+                f"mixed configurations for A_att={a_att}, condition={condition}"
+            )
         item: dict[str, Any] = {
             "a_att": a_att,
             "condition": condition,

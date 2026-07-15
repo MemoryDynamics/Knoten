@@ -18,7 +18,7 @@ import numpy as np
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from emergenz_knoten import covariance_dimension, spectral_dimension
+from emergenz_knoten import covariance_dimension
 
 
 def _repo_root() -> Path:
@@ -272,6 +272,64 @@ def _dimension_from_eigenvalues(values: np.ndarray, *, eigen_count: int = 50) ->
     return out if np.isfinite(out) and 0.5 <= out <= 20.0 else None
 
 
+
+
+def _heat_trace_dimension_from_transition_eigenvalues(
+    values: np.ndarray,
+    *,
+    eigen_count: int = 50,
+) -> float | None:
+    transition = np.asarray(values, dtype=float)
+    transition = transition[np.isfinite(transition)]
+    if transition.size < 3:
+        return None
+    laplacian = np.maximum(1.0 - transition, 0.0)
+    laplacian.sort()
+    zero_modes = laplacian[laplacian <= 1e-10]
+    positive_modes = laplacian[laplacian > 1e-10]
+    if positive_modes.size < 2:
+        return None
+    positive_modes = positive_modes[: min(int(eigen_count), positive_modes.size)]
+    modes = np.concatenate((zero_modes, positive_modes))
+    times = np.geomspace(
+        0.1 / float(positive_modes[-1]),
+        10.0 / float(positive_modes[0]),
+        256,
+    )
+    heat_trace = np.exp(-np.outer(times, modes)).sum(axis=1)
+    log_times = np.log(times)
+    local_dimensions = -2.0 * np.gradient(
+        np.log(heat_trace), log_times, edge_order=2
+    )
+    local_change = np.gradient(local_dimensions, log_times, edge_order=2)
+    eligible = (
+        np.isfinite(local_dimensions)
+        & np.isfinite(local_change)
+        & (heat_trace > max(float(zero_modes.size) + 1.0, 2.5))
+        & (heat_trace < 0.5 * float(modes.size))
+        & (local_dimensions >= 0.25)
+        & (local_dimensions <= 20.0)
+        & (np.abs(local_change) <= 0.25)
+    )
+    windows: list[tuple[float, int, int]] = []
+    start: int | None = None
+    for index, is_eligible in enumerate(eligible):
+        if bool(is_eligible) and start is None:
+            start = index
+        if start is not None and (
+            not bool(is_eligible) or index == len(eligible) - 1
+        ):
+            stop = index if bool(is_eligible) else index - 1
+            width = float(log_times[stop] - log_times[start])
+            if width >= float(np.log(2.0)):
+                windows.append((width, start, stop))
+            start = None
+    if not windows:
+        return None
+    _, start, stop = max(windows, key=lambda item: item[0])
+    dimension = float(np.median(local_dimensions[start : stop + 1]))
+    return dimension if np.isfinite(dimension) else None
+
 def _pairwise_squared(points: np.ndarray) -> np.ndarray:
     return ((points[:, None, :] - points[None, :, :]) ** 2).sum(-1)
 
@@ -283,21 +341,48 @@ def heat_spectral_from_d2(
     normalization: str = "symmetric",
     eigen_count: int = 50,
 ) -> float | None:
-    positive = d2[d2 > 1e-10]
-    if positive.size == 0:
+    distances = np.asarray(d2, dtype=float)
+    if (
+        distances.ndim != 2
+        or distances.shape[0] != distances.shape[1]
+        or distances.shape[0] < 100
+    ):
         return None
-    eps = float(np.median(positive)) * float(bandwidth_factor)
-    if not np.isfinite(eps) or eps <= 0.0:
-        return None
-    kernel = np.exp(-d2 / eps)
-    rowsums = kernel.sum(axis=1)
-    if normalization == "symmetric":
-        matrix = kernel / np.sqrt(np.outer(rowsums, rowsums) + 1e-24)
-    elif normalization == "legacy_row":
-        matrix = kernel / (rowsums[:, None] + 1e-12)
-    else:
+    if not np.isfinite(bandwidth_factor) or bandwidth_factor <= 0.0:
+        raise ValueError("bandwidth_factor must be positive and finite")
+    if normalization == "legacy_row":
+        positive = distances[distances > 1e-10]
+        if positive.size == 0:
+            return None
+        bandwidth = float(np.median(positive)) * float(bandwidth_factor)
+        kernel = np.exp(-distances / bandwidth)
+        matrix = kernel / (kernel.sum(axis=1)[:, None] + 1e-12)
+        return _dimension_from_eigenvalues(
+            np.linalg.eigvalsh(matrix), eigen_count=eigen_count
+        )
+    if normalization != "symmetric":
         raise ValueError("unknown normalization")
-    return _dimension_from_eigenvalues(np.linalg.eigvalsh(matrix), eigen_count=eigen_count)
+
+    neighbor_distances = distances.copy()
+    np.fill_diagonal(neighbor_distances, np.inf)
+    neighbor_index = min(7, distances.shape[0] - 2)
+    local_scales = np.partition(
+        neighbor_distances, neighbor_index, axis=1
+    )[:, neighbor_index]
+    local_scales = local_scales[
+        np.isfinite(local_scales) & (local_scales > 1e-14)
+    ]
+    if local_scales.size == 0:
+        return None
+    bandwidth = float(np.median(local_scales)) * float(bandwidth_factor)
+    kernel = np.exp(-distances / bandwidth)
+    density = kernel.sum(axis=1)
+    corrected = kernel / (np.outer(density, density) + 1e-24)
+    degree = corrected.sum(axis=1)
+    matrix = corrected / np.sqrt(np.outer(degree, degree) + 1e-24)
+    return _heat_trace_dimension_from_transition_eigenvalues(
+        np.linalg.eigvalsh(matrix), eigen_count=eigen_count
+    )
 
 
 def knn_spectral_from_d2(d2: np.ndarray, *, k: int, eigen_count: int = 50) -> float | None:
@@ -315,7 +400,9 @@ def knn_spectral_from_d2(d2: np.ndarray, *, k: int, eigen_count: int = 50) -> fl
     adjacency += np.eye(n)
     degree = adjacency.sum(axis=1)
     matrix = adjacency / np.sqrt(np.outer(degree, degree) + 1e-24)
-    return _dimension_from_eigenvalues(np.linalg.eigvalsh(matrix), eigen_count=eigen_count)
+    return _heat_trace_dimension_from_transition_eigenvalues(
+        np.linalg.eigvalsh(matrix), eigen_count=eigen_count
+    )
 
 
 def case_row(case: CaseRecord, *, surrogate_points: int) -> dict[str, Any] | None:

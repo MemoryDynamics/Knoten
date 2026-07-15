@@ -34,8 +34,8 @@ def test_covariance_surrogate_preserves_effective_rank_order() -> None:
 
 
 def test_heat_and_knn_spectral_sensitivity_return_finite_values() -> None:
-    rng = np.random.default_rng(456)
-    points = rng.normal(size=(220, 3))
+    theta = np.linspace(0.0, 2.0 * np.pi, 240, endpoint=False)
+    points = np.column_stack((np.cos(theta), np.sin(theta)))
     d2 = dspec_sensitivity_report._pairwise_squared(points)
 
     heat = dspec_sensitivity_report.heat_spectral_from_d2(
@@ -43,7 +43,7 @@ def test_heat_and_knn_spectral_sensitivity_return_finite_values() -> None:
         bandwidth_factor=1.0,
         normalization="symmetric",
     )
-    knn = dspec_sensitivity_report.knn_spectral_from_d2(d2, k=16)
+    knn = dspec_sensitivity_report.knn_spectral_from_d2(d2, k=8)
 
     assert heat is not None
     assert knn is not None
