@@ -23,6 +23,7 @@ from emergenz_knoten import (
     occupancy_local_slopes,
     residence_statistics,
     shape_statistics,
+    spectral_dimension,
     repulsive_gaussian_gradient,
     simulate_finite_memory,
     simulate_finite_memory_numba,
@@ -50,6 +51,35 @@ def test_occupancy_dimension_line_is_finite() -> None:
     assert np.isfinite(value)
     assert 0.7 <= value <= 1.3
 
+
+def test_spectral_dimension_is_parameterized_and_finite() -> None:
+    rng = np.random.default_rng(321)
+    points = rng.normal(size=(300, 3))
+
+    symmetric = spectral_dimension(points)
+    legacy = spectral_dimension(points, normalization="legacy_row")
+    wide = spectral_dimension(points, bandwidth_factor=4.0)
+
+    assert np.isfinite(symmetric)
+    assert np.isfinite(legacy)
+    assert np.isfinite(wide)
+    assert abs(symmetric - wide) > 1e-6
+
+
+def test_spectral_dimension_rejects_invalid_parameters() -> None:
+    points = np.random.default_rng(654).normal(size=(120, 2))
+
+    for kwargs, expected in [
+        ({"bandwidth_factor": 0.0}, "bandwidth_factor"),
+        ({"eigen_count": 1}, "eigen_count"),
+        ({"normalization": "row"}, "normalization"),
+    ]:
+        try:
+            spectral_dimension(points, **kwargs)
+        except ValueError as exc:
+            assert expected in str(exc)
+        else:
+            raise AssertionError(f"expected ValueError for {expected}")
 
 def test_shape_statistics_detects_weighted_center_and_roundness() -> None:
     points = np.array(

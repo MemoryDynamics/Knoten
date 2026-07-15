@@ -426,6 +426,7 @@ def test_run_case_reports_memory_center_residence(tmp_path: Path) -> None:
         max_ac_lag=2,
         min_memory_times=2.0,
         output_dir=tmp_path,
+        memory_snapshot_points=5,
     )
 
     diagnostics = payload["diagnostics"]
@@ -433,6 +434,11 @@ def test_run_case_reports_memory_center_residence(tmp_path: Path) -> None:
     assert "sample_center" in center_residence
     assert "memory_center" in center_residence
     assert "2" in center_residence["memory_center"]["by_radius_factor"]
+    snapshot = diagnostics["memory_cloud"]["snapshot"]
+    assert snapshot["n_points"] == 5
+    assert len(snapshot["points"]) == 5
+    assert len(snapshot["weights"]) == 5
+    assert snapshot["source_n_points"] >= snapshot["n_points"]
 
     summary = long_run_metastability.summarize_cases([payload])[0]
     assert "sample_spectral_dimension" in summary

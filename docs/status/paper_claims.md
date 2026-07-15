@@ -93,7 +93,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | `D_mem ~2.94` im aktuellen `A_att=35`-Slice | seed-stabile numerische Beobachtung einer lokalen, co-moving Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; `D_mem` ist covariance participation der Memory-Cloud, nicht `D_occ`; keine Ableitung von externer `d=3`-Selektion | Paper I als Shape-Diagnostik mit Roundness/Radius/Drift gegen `eta_zero` berichten; Paper II klaert externe/macroskopische 3D-Selektion |
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
-| `D_spec memory` naehrt sich bei hohen `d` etwa 3 | numerische Beobachtung und Paper-II-Hebel; kein Transferoperator- oder FFT-Spektrum und noch keine externe Dimension | D_spec-Bandbreiten-/kNN-Sensitivitaet, dann relationaler Response-Rang |
+| `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; aktueller Sensitivitaetsreport zeigt starke Bandwidth-/kNN-Abhaengigkeit und keine robuste externe Dimension | Rohpunkte/Snapshot persistieren, D_spec auf echten Memory-Clouds neu messen, dann relationaler Response-Rang |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

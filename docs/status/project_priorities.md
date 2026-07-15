@@ -224,23 +224,27 @@ Naechster operativer Schritt:
     Paper-II-Hebel ist `D_spec memory`, das bei grossen `d` in Richtung 3
     laeuft. Report: `reports/dimensions/dimension_claim_audit_2026-07-15.md`.
 
+25. Abgeschlossen: D_spec-Sensitivitaetsaudit. Ergebnis: Die `D_spec memory ~=3`-Spur
+    ist ein Paper-II-Hypothesenhinweis, aber kein robuster Dimensionsclaim. Die
+    bisherige Implementierung war als Legacy-Diagnostik zu lesen; kuenftige
+    `spectral_dimension` nutzt symmetrische Kernel-Normalisierung und schreibt
+    die verwendete Konvention in Long-Run-Payloads. Report:
+    `reports/dimensions/dspec_sensitivity_2026-07-15.md`.
+
 Aktueller naechster Schritt:
 
-- Paper-I-Text und ggf. Supplement auf Evidenztabelle, Feature-Closure und die
-  defensiv formulierte Memory-Shape-/3D-Teaser-Grenze synchronisieren.
-- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in
-  Paper I; skalares Memory ist erste Grobkoernung fuer
-  Kompaktheit/Radius/Relaxation.
-- Paper-II-Dimensionsfrage methodisch weiter treiben: zuerst D_spec-
-  Bandbreiten-/kNN-Sensitivitaet, dann relationaler Response-Rang mit zweitem
-  Knoten oder schwachem externem Feld. Keine weiteren Dimensions-Blindscans
-  als Hauptpfad.
+- Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
+  weiter treiben. Zuerst echte Memory-Cloud-Rohsnapshots fuer neue
+  D_spec-Sensitivitaet speichern, dann relationaler Response-Rang mit zweitem
+  Knoten oder schwachem externem Feld.
+- Keine weiteren Dimensions-Blindscans als Hauptpfad; neue Runs nur, wenn sie
+  die Messmethodik oder Response-Frage direkt entscheiden.
 - Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
   Scorecard-Sprache fortsetzen.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse ist erledigt, naechster Schritt ist Paper-I-Synchronisierung auf Evidenztabelle, 3D-Memory-Shape und Feature-Closure.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung und D_spec-Sensitivitaetsaudit sind erledigt. Naechster methodischer Schritt ist Roh-Memory-Cloud-Snapshot plus echter D_spec-Retest, danach Response-Rang.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -323,7 +327,7 @@ Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
 gezielte Reconciliation der Dimensionsdiagnostik: historische
 Parameterdefinitionen, Schaetzfenster, Samplingdichte, Memory-Normierung,
 Negativkontrollen, Center-Trace-Dimensionen, Eigenwert-Tail-Schwellen,
-D_spec-Skalenempfindlichkeit und relationale Response-Raenge nebeneinanderstellen.
+D_spec-Skalenempfindlichkeit auf echten Rohwolken und relationale Response-Raenge nebeneinanderstellen.
 Neue Dimensionsergebnisse muessen `D_occ`, `D_win`, `valid win`, lokale Slopes
 und die zugehoerige Memory-/Center-Geometrie gemeinsam berichten.
 

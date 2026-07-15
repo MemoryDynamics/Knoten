@@ -435,26 +435,45 @@ def ball_residence_statistics(
         "mean_run_length": _finite_float(run_arr.mean()) if run_arr.size else 0.0,
         "max_run_length": int(np.max(run_arr)) if run_arr.size else 0,
     }
-def spectral_dimension(points: Iterable[Iterable[float]]) -> float:
-    """Estimate spectral dimension from heat kernel eigenvalue distribution.
 
-    Uses normalized Laplacian spectrum: eigenvalues measure scale-dependence
-    of local connectivity. Returns NaN if computation is unreliable.
+def spectral_dimension(
+    points: Iterable[Iterable[float]],
+    *,
+    bandwidth_factor: float = 1.0,
+    eigen_count: int = 50,
+    normalization: str = "symmetric",
+) -> float:
+    """Estimate a point-cloud spectral dimension from a heat-kernel spectrum.
+
+    The diagnostic is intentionally lightweight. It should be read as a
+    scale-sensitive geometry probe, not as a theorem-level dimension estimator.
+    ``normalization="symmetric"`` uses the symmetric normalized kernel
+    ``D^{-1/2} K D^{-1/2}``, so the use of ``eigvalsh`` is algebraically
+    justified. ``normalization="legacy_row"`` reproduces the older row-normalized
+    convention for historical comparisons only.
     """
     pts = _as_points(points)
     if len(pts) < 100:
         return float("nan")
+    if not np.isfinite(bandwidth_factor) or bandwidth_factor <= 0.0:
+        raise ValueError("bandwidth_factor must be positive and finite")
+    if eigen_count <= 1:
+        raise ValueError("eigen_count must be greater than one")
+    if normalization not in {"symmetric", "legacy_row"}:
+        raise ValueError("normalization must be 'symmetric' or 'legacy_row'")
 
     D2 = ((pts[:, None, :] - pts[None, :, :]) ** 2).sum(-1)
-    eps = float(np.median(D2[D2 > 1e-10]))
+    eps = float(np.median(D2[D2 > 1e-10])) * float(bandwidth_factor)
     if not np.isfinite(eps) or eps <= 0.0:
         return float("nan")
 
     K = np.exp(-D2 / eps)
 
-    # Normalize K to be more stable
-    rowsums = K.sum(axis=1, keepdims=True)
-    K_norm = K / (rowsums + 1e-12)
+    rowsums = K.sum(axis=1)
+    if normalization == "symmetric":
+        K_norm = K / np.sqrt(np.outer(rowsums, rowsums) + 1e-24)
+    else:
+        K_norm = K / (rowsums[:, None] + 1e-12)
 
     w = np.linalg.eigvalsh(K_norm)
 
@@ -465,7 +484,7 @@ def spectral_dimension(points: Iterable[Iterable[float]]) -> float:
         return float("nan")
 
     # Use only the largest eigenvalues that represent significant structure
-    w = np.sort(w)[-min(50, len(w)) :]
+    w = np.sort(w)[-min(int(eigen_count), len(w)) :]
 
     w_mean = float(np.mean(w))
     if not np.isfinite(w_mean) or w_mean <= 0.0:
@@ -476,7 +495,7 @@ def spectral_dimension(points: Iterable[Iterable[float]]) -> float:
         return float("nan")
 
     result = float(np.log(len(w)) / log_ratio)
-    if not np.isfinite(result) or result < 0.5 or result > 10.0:
+    if not np.isfinite(result) or result < 0.5 or result > 20.0:
         return float("nan")
 
     return result

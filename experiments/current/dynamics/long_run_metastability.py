@@ -1082,6 +1082,9 @@ def _spectral_dimension_payload(points: np.ndarray, *, max_points: int) -> dict[
         "source_n_points": source_n_points,
         "max_points": int(max_points),
         "weighted": False,
+        "normalization": "symmetric",
+        "bandwidth_factor": 1.0,
+        "eigen_count": 50,
     }
 
 
@@ -1097,6 +1100,33 @@ def _memory_cloud_diagnostics(
         "shape": shape_statistics(memory, weights=weights),
         "occupancy": _occupancy_payload(memory),
         "spectral": _spectral_dimension_payload(memory, max_points=spectral_points),
+    }
+
+
+def _memory_cloud_snapshot(
+    memory: np.ndarray,
+    weights: np.ndarray,
+    *,
+    max_points: int,
+) -> dict[str, object] | None:
+    if max_points <= 0 or len(memory) == 0:
+        return None
+    source_n_points = int(len(memory))
+    if len(memory) > max_points:
+        indices = np.linspace(0, len(memory) - 1, int(max_points), dtype=int)
+        points = memory[indices]
+        selected_weights = weights[indices]
+    else:
+        points = memory
+        selected_weights = weights
+    return {
+        "points": points.astype(float).tolist(),
+        "weights": selected_weights.astype(float).tolist(),
+        "n_points": int(len(points)),
+        "source_n_points": source_n_points,
+        "weight_mass": _finite_float(np.sum(selected_weights)),
+        "source_weight_mass": _finite_float(np.sum(weights)),
+        "selection": "uniform_index",
     }
 
 
@@ -1255,6 +1285,7 @@ def run_case(
     trace_every: int = 0,
     trace_targets: np.ndarray | None = None,
     spectral_points: int = 1000,
+    memory_snapshot_points: int = 0,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
@@ -1285,6 +1316,13 @@ def run_case(
     if memory_cloud is not None:
         diagnostics["memory_cloud"] = memory_cloud
         memory_shape = memory_cloud.get("shape")
+        snapshot = _memory_cloud_snapshot(
+            result["memory"],
+            result["weights"],
+            max_points=memory_snapshot_points,
+        )
+        if snapshot is not None:
+            memory_cloud["snapshot"] = snapshot
         if isinstance(memory_shape, dict):
             memory_center_residence = _center_residence_payload(
                 samples,
@@ -1548,6 +1586,12 @@ def parse_args() -> argparse.Namespace:
             "0 disables spectral-dimension estimation"
         ),
     )
+    parser.add_argument(
+        "--memory-snapshot-points",
+        type=int,
+        default=0,
+        help="store up to this many final memory-cloud points and weights in each case JSON",
+    )
     parser.add_argument("--allow-slow-python", action="store_true")
     parser.add_argument(
         "--force-components",
@@ -1599,6 +1643,8 @@ def main() -> None:
         raise SystemExit("numba is required for long-run simulations unless --allow-slow-python is set")
     if args.spectral_points < 0:
         raise SystemExit("--spectral-points must be non-negative")
+    if args.memory_snapshot_points < 0:
+        raise SystemExit("--memory-snapshot-points must be non-negative")
 
     output_dir = args.output_dir
     if not output_dir.is_absolute():
@@ -1658,6 +1704,7 @@ def main() -> None:
                     trace_every=args.trace_every,
                     trace_targets=trace_targets,
                     spectral_points=args.spectral_points,
+                    memory_snapshot_points=args.memory_snapshot_points,
                 )
             )
 
@@ -1676,6 +1723,7 @@ def main() -> None:
             "max_ac_lag": args.max_ac_lag,
             "min_memory_times": args.min_memory_times,
             "spectral_points": args.spectral_points,
+            "memory_snapshot_points": args.memory_snapshot_points,
             "trace_every": args.trace_every,
             "trace_points": args.trace_points,
             "trace_spacing": args.trace_spacing,
