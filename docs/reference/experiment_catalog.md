@@ -16,6 +16,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/aatt_transition_report.py` | A_att-Uebergang `d=3` vs. `d=10` | aktiv | Dimensions-Reconciliation, beta=0/M0=0-Referenzverweis und KPI-Kurven ueber `A_att` |
 | `experiments/current/dynamics/dimension_claim_audit.py` | 3D-Dimensionsclaim-Audit | aktiv | Claim-Leiter, `D_p90`/`D_p95`, low-pass Center-Trace-Dimensionen und Paper-II-Reconciliation |
 | `experiments/current/dynamics/dspec_sensitivity_report.py` | D_spec-Sensitivitaet | aktiv | Legacy-D_spec, symmetrische Heat-Kernel-Skalen, kNN-Skalen und Kovarianz-Surrogate fuer Paper-II-Guardrail |
+| `experiments/current/dynamics/dspec_raw_snapshot_report.py` | Rohsnapshot-D_spec | aktiv | Heat-Trace-/Scale-Audit auf echten `memory_cloud.snapshot`-Punkten; Pilot-Gate vor Response-Rang |
 | `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
@@ -587,6 +588,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md` | A_att-Transition d3/d10 | `D_cov` und `D_mem` trennen sich im d10-kompakt-Ast; `beta=0`/`M0=0`-Referenz ist verlinkt; Paper-II-Reconciliation, kein Selektionsclaim. |
 | `reports/dimensions/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | Paper I bekommt einen lokalen 3D-Memory-Shape-Teaser; starker ambient-unabhaengiger 3D-Claim wird durch `D_mem`/`D_p90`/`D_p95` nicht gestuetzt; `D_spec memory` bleibt Paper-II-Hebel. |
 | `reports/dimensions/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; symmetrische Heat-Kernel- und kNN-Surrogate stuetzen keinen robusten `D_spec ~=3`-Claim; naechster Schritt ist Rohwolken-Snapshot plus relationaler Response-Rang. |
+| `reports/dimensions/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

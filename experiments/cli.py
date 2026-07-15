@@ -25,6 +25,7 @@ CATEGORIES = {
         "current/dynamics/aatt_transition_report.py",
         "current/dynamics/dimension_claim_audit.py",
         "current/dynamics/dspec_sensitivity_report.py",
+        "current/dynamics/dspec_raw_snapshot_report.py",
         "current/dynamics/long_run_metastability.py",
         "current/dynamics/dynamic_center_trace_report.py",
         "current/dynamics/paper_i_evidence_table.py",

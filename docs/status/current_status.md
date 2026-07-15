@@ -77,13 +77,17 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Fenster und kein Transferoperatorspektrum. Der Sensitivitaetsreport vom
   2026-07-15 zeigt, dass `D_spec memory ~=3` nur ein Hypothesenhinweis ist:
   Bandwidth und kNN-Skala bewegen Kovarianz-Surrogate um order-one Betraege.
+  Der Rohsnapshot-Pilot (`N=200k`, `d=3/10`, Seeds 1-3) validiert den echten
+  Snapshot-Auswertepfad, reproduziert aber noch kein robustes Heat-Trace-Nahe-3-
+  Signal; fuer Paper II braucht es einen laengeren Rohsnapshot-Retest.
 - 3D-Audit 2026-07-15: `D_p90`/`D_p95` bestaetigen, dass die interne
   Memory-Varianz in hohen Einbettungen nicht auf drei Achsen kollabiert.
   Paper-I-tauglich bleibt der lokale `d=3`-Memory-Shape-Teaser; Paper II
-  braucht jetzt Roh-Memory-Cloud-Snapshots, neue D_spec-Sensitivitaet auf
-  echten Wolken und relationale Response-Dimensionen.
+  braucht einen laengeren Rohsnapshot-Dspec-Retest auf echten Wolken und
+  danach relationale Response-Dimensionen.
   Reports: `reports/dimensions/dimension_claim_audit_2026-07-15.md`,
-  `reports/dimensions/dspec_sensitivity_2026-07-15.md`.
+  `reports/dimensions/dspec_sensitivity_2026-07-15.md`,
+  `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`.
 
 ## Long-Run-Status
 

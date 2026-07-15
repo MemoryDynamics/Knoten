@@ -231,12 +231,19 @@ Naechster operativer Schritt:
     die verwendete Konvention in Long-Run-Payloads. Report:
     `reports/dimensions/dspec_sensitivity_2026-07-15.md`.
 
+26. Abgeschlossen: Rohsnapshot-D_spec-Pilot. Ergebnis: `N=200k` fuer `d=3`
+    und `d=10` mit Seeds 1-3 validiert den neuen `memory_cloud.snapshot`-
+    Auswertepfad, ist aber noch keine Langlauf-Evidenz. Heat-Trace-`D_spec`
+    reproduziert im Pilot kein robustes Nahe-3-Signal; im `d=10`-Baseline-Fall
+    findet der konservative Estimator kein stabiles Skalierungsfenster. Report:
+    `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`.
+
 Aktueller naechster Schritt:
 
 - Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
-  weiter treiben. Zuerst echte Memory-Cloud-Rohsnapshots fuer neue
-  D_spec-Sensitivitaet speichern, dann relationaler Response-Rang mit zweitem
-  Knoten oder schwachem externem Feld.
+  weiter treiben. Der Rohsnapshot-Pilot ist erledigt; naechstes Gate ist ein
+  laengerer Rohsnapshot-Retest auf dem etablierten Long-Run-Slice, danach erst
+  relationaler Response-Rang mit zweitem Knoten oder schwachem externem Feld.
 - Keine weiteren Dimensions-Blindscans als Hauptpfad; neue Runs nur, wenn sie
   die Messmethodik oder Response-Frage direkt entscheiden.
 - Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
@@ -244,7 +251,7 @@ Aktueller naechster Schritt:
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung und D_spec-Sensitivitaetsaudit sind erledigt. Naechster methodischer Schritt ist Roh-Memory-Cloud-Snapshot plus echter D_spec-Retest, danach Response-Rang.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit und Rohsnapshot-Pilot sind erledigt. Naechster methodischer Schritt ist ein laengerer Rohsnapshot-D_spec-Retest, danach Response-Rang.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
