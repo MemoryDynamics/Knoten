@@ -35,7 +35,7 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
   Drift/Radius, `D_mem` und Roundness;
 - `D_mem ~=2.94` im gewaehlten 3D-Embedding nur als lokaler
   Memory-Shape-Teaser; keine makroskopische `d=3`-Selektion in Paper I;
-- Masse nur als Relaxations-/Konfinierungsproxy;
+- Massenbezug nur als spaetere Kalibrierungsfrage; aktuell nur Relaxations-/Konfinierungsproxy;
 - klare Trennung von Definition, numerical observation und conjecture.
 
 ## Dateien
@@ -112,7 +112,7 @@ Weltmodell-Claims liegen, sondern auf:
 2. Ist die Non-Markov/Markov-Embedding-Sprache mathematisch sauber?
 3. Ist die neue `z_n`-/Operatornotation konsistent mit `G_sigma` als
    Kernelbreite?
-4. Sind `t = alpha n`, Knoten und Mass-/Relaxationsproxies defensiv genug
+4. Sind `t = alpha n`, Knoten und Relaxations-/Konfinierungsproxies defensiv genug
    formuliert?
 5. Ist Paper 0 als separates mathematisches Einordnungspaper bzw. Supplement sinnvoll?
 6. Ist die Long-Run-Evidenz defensiv genug als co-moving Memory-Cloud-Befund
