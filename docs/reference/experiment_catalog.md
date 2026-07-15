@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-13.
+Stand: 2026-07-15.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -13,6 +13,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
 | `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
 | `experiments/current/dynamics/paper_i_evidence_table.py` | Paper-I-Evidenztabelle aus Long-Run-Summaries | aktiv | konservative Claim-Tabelle fuer co-moving scalar-knot Evidenz |
+| `experiments/current/dynamics/aatt_transition_report.py` | A_att-Uebergang `d=3` vs. `d=10` | aktiv | Dimensions-Reconciliation, beta=0/M0=0-Referenzverweis und KPI-Kurven ueber `A_att` |
 | `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
@@ -226,6 +227,15 @@ Persistence-Effekt. Lesart: skalares Memory eignet sich fuer erste
 Grobkoernung von Kompaktheit/Radius/Relaxation; Phasen-Sektoren bleiben
 Vector-/Tensor-/Internal-Memory-Future-Work. Report:
 `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
+
+A_att-Transition 2026-07-15: `experiments/current/dynamics/aatt_transition_report.py`
+verdichtet die `N=10M`-Runs fuer `d=3` und `d=10` zu KPI-Kurven ueber
+`A_att`. Der Report enthaelt die gematchten Punkte `A_att in {7,8,9,10,12,15}`
+plus vorhandene Referenzen bei `20` und `35` und verweist explizit auf die
+`beta=0`/`M0=0`-Kontrolle. Lesart: `D_cov`, `D_occ_window`, `D_mem` und
+`D_spec_mem` sind unterschiedliche Messkanale; das Ergebnis stuetzt eine
+Innen/Aussen-Reconciliation, aber keinen externen `d=3`-Claim. Report:
+`reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md`.
 
 Epsilon-Dynamic-Center-Sweep 2026-07-12: `epsilon_dynamic_center_sweep.py`
 variiert nur `epsilon` fuer den korrigierten kompakten Referenzkandidaten
@@ -572,6 +582,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md` | Paper-I-Evidenztabelle | Co-moving Radius, Drift/Radius, Memory-Dimension und Roundness trennen `A_att=35` klar von `eta_zero`; keine Spin-/Photon-/Masseclaims. |
 | `reports/dimensions/memory_shape_boundary_2026-07-13.md` | 3D-Memory-Shape-Grenze | `D_mem ~=2.94` bei `A_att=35` ist seed-stabile lokale Memory-Cloud-Shape im 3D-Embedding; externe/macroskopische `d=3`-Selektion bleibt Paper-II-Frage. |
 | `reports/dimensions/ambient_memory_shape_sweep_launch_2026-07-13.md` | Ambient-Dimension-Launch | Paper-II-Brueckentest fuer `d=4,5,7,10,13,20`; aggregiert `D_mem`, ungewichtete Sample-/Memory-`D_spec`, Roundness, Radius und Drift gegen `eta_zero`. |
+| `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md` | A_att-Transition d3/d10 | `D_cov` und `D_mem` trennen sich im d10-kompakt-Ast; `beta=0`/`M0=0`-Referenz ist verlinkt; Paper-II-Reconciliation, kein Selektionsclaim. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

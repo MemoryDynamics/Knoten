@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-13.
+Stand: 2026-07-15.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -210,11 +210,26 @@ Naechster operativer Schritt:
     am ersten Lag sind zensierte Obergrenzen `<= dt_mem`, nicht exakt aufgeloeste
     Zeiten; kein KnotScore- oder Teilchenspin-Claim.
 
+23. Abgeschlossen: A_att-Transition `d=3` vs. `d=10` bei `N=10M`, Seeds
+    `1..5`, `epsilon=1e-4`, Delta-Deposition. Der Report schliesst zugleich
+    die `beta=0`/`M0=0`-Referenzluecke. Ergebnis: `D_cov` im d10-kompakt-Ast
+    liegt nahe `2.52`, waehrend `D_mem` bis `9.16` steigt; d3 erreicht
+    `D_mem ~=2.95`, aber die rohe Spur bleibt bei `D_cov ~=1.8`. Report:
+    `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md`.
+
 Aktueller naechster Schritt:
 
-- Paper-I-Text und ggf. Supplement auf die neue Evidenztabelle und Feature-Closure synchronisieren.
-- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in Paper I; skalares Memory ist erste Grobkoernung fuer Kompaktheit/Radius/Relaxation.
-- Naechste technische Haertung: Paper-I-Text auf die 3D-Memory-Shape-Grenze synchronisieren, dann gezielte `lambda_m`/`sigma`/Amplitudenachsen.
+- Paper-I-Text und ggf. Supplement auf Evidenztabelle, Feature-Closure und die
+  defensiv formulierte Memory-Shape-Grenze synchronisieren.
+- Keine Photon-, Spin-, physikalische Masse- oder feste-Zentrum-Sprache in
+  Paper I; skalares Memory ist erste Grobkoernung fuer
+  Kompaktheit/Radius/Relaxation.
+- Paper-II-Dimensionsfrage nicht ueber weitere Blindscans treiben, sondern
+  methodisch schaerfen: Center-Trace-`D_cov`/`D_occ`/`D_spec`,
+  `D_p90`/`D_p95`-Memory-Dimensionen, D_spec-Skalenempfindlichkeit und danach
+  Response-/Zwei-Knoten-Tests.
+- Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
+  Scorecard-Sprache fortsetzen.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
@@ -269,7 +284,7 @@ Status: Long-Run-Trace-AR und Feature-Closure erledigt; noch kein geschlossener 
 
 ### P2.2 Dimensionsclaim
 
-Status: defensiv lesen; kein `d=3`-Selektionsclaim.
+Status: defensiv lesen; kein `d=3`-Selektionsclaim; aktueller Befund stuetzt eher eine Innen/Aussen-Aufspaltung als eine einzelne Dimensionszahl.
 
 - Archivierter `D_occ ~ 2.8`-Befund: weiterhin separat interessant, aber noch
   nicht durch die aktuelle Reproduktionspipeline abgesichert.
@@ -286,12 +301,19 @@ Status: defensiv lesen; kein `d=3`-Selektionsclaim.
 - Ergebnis: keine getestete Achse liefert bei `N=1M` ein Near-3-Plateau; die
   automatischen Fensterwerte liegen meist im Bereich `2..2.5`, und der
   High-N-Referenzlauf reproduziert den archivierten Near-3-Wert ebenfalls nicht.
+- A_att-Transition 2026-07-15: Im korrigierten Skalarslice zeigt `d=10` im
+  kompakten Ast `D_cov ~=2.52`, aber zugleich hohe interne `D_mem`-Werte bis
+  `9.16`; `d=3` zeigt `D_mem ~=2.95`, aber die rohe Spur bleibt bei
+  `D_cov ~=1.8`. Das ist ein starkes Reconciliation-Signal, aber kein
+  makroskopischer `d=3`-Selektionssatz.
 
 Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
-gezielte Reconciliation des Archivbefunds: historische Parameterdefinitionen,
-Schaetzfenster, Samplingdichte, Memory-Normierung und Negativkontrollen
-nebeneinanderstellen. Neue Dimensionsergebnisse muessen `D_occ`, `D_win`,
-`valid win` und lokale Slopes gemeinsam berichten.
+gezielte Reconciliation der Dimensionsdiagnostik: historische
+Parameterdefinitionen, Schaetzfenster, Samplingdichte, Memory-Normierung,
+Negativkontrollen, Center-Trace-Dimensionen, Eigenwert-Tail-Schwellen und
+D_spec-Skalenempfindlichkeit nebeneinanderstellen. Neue Dimensionsergebnisse
+muessen `D_occ`, `D_win`, `valid win`, lokale Slopes und die zugehoerige
+Memory-/Center-Geometrie gemeinsam berichten.
 
 ### P2.3 Innen/Aussen- und Synchronisationsprogramm
 

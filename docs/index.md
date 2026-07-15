@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-10.
+Stand: 2026-07-15.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -39,7 +39,7 @@ Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
 Der v0.5-Knotenscore ist die aktuelle Scorecard, dokumentiert im Experiment-Katalog. Die alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
-Die korrigierte Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster `A_att=9..35` bei `A_rep=1`; der Umschlag liegt bei `A_att ~= 7.9`. Der erste Vektormemory-Pilot ist ein Kontrollbefund: komplexe AR-Moden treten bereits im `eta_v=0`-Fallback auf und sind noch kein isolierter Vektoreffekt.
+Die korrigierte Amplitudenhierarchie findet kompakte Kandidaten im Fenster `A_att=9..35` bei `A_rep=1`; der Umschlag liegt bei `A_att ~= 7.9`. Der aktuelle Referenzslice ist `A_att=35`, `epsilon=1e-4`, `N=30M`. Der neue `d=3`/`d=10`-A_att-Vergleich zeigt eine Trennung von sichtbarer Sample-Geometrie und interner Memory-Shape; das ist Paper-II-Material und noch kein externer `d=3`-Selektionsclaim. Der erste Vektormemory-Pilot ist ein Kontrollbefund: komplexe AR-Moden treten bereits im `eta_v=0`-Fallback auf und sind noch kein isolierter Vektoreffekt.
 
 ## Nicht ueberclaimen
 

@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-13.
+Stand: 2026-07-15.
 
 ## Worum es geht
 
@@ -50,6 +50,9 @@ Belastbar derzeit:
   gibt daher keinen kontrollgetrennten skalaren Phasen-/Photonmodus.
 - Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars,
   nicht fuer den Spin-Scalar.
+- Der `A_att`-Uebergang fuer `d=3` und `d=10` zeigt eine Trennung von
+  sichtbarer Sample-Geometrie (`D_cov`) und interner Memory-Shape (`D_mem`);
+  die `beta=0`-Referenz ist als `M0=0`/`m0_zero` dokumentiert.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
   Deposition; `memory_mass=M0` ist als eigene Memory-Skala abgebildet.
 
@@ -58,7 +61,8 @@ Noch nicht belastbar:
 - ein spezifisch zweiskaliger Baseline-Knotenmechanismus, weil `single_scale`
   historisch ebenfalls stark war;
 - eindeutige externe `d=3`-Selektion; `D_mem ~2.94` ist aktuell eine lokale
-  Memory-Cloud-Shape-Diagnostik im gewaehlten 3D-Embedding;
+  Memory-Cloud-Shape-Diagnostik im gewaehlten 3D-Embedding, und `D_cov ~2.5`
+  in `d=10` ist ein Reconciliation-Signal, kein Selektionssatz;
 - stabile skalare Spin-, Phasen- oder Photonmoden;
 - harte endliche Signalgeschwindigkeit;
 - physikalische Massen, Lorentz-, Quanten- oder Standardmodellclaims.
@@ -138,12 +142,13 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 ## Naechste Prioritaeten
 
-1. Paper-I-Text und Supplement auf Evidenztabelle, Feature-Closure und den
-   seedweisen 3D-Memory-Shape-Befund synchronisieren.
-2. Fuer skalare Paper-I-Haertung `A_att=35`, `epsilon=1e-4`, `N=30M` als
+1. Paper-I-Text und Supplement auf Evidenztabelle, Feature-Closure und die
+   defensive Memory-Shape-/A_att-Reconciliation synchronisieren.
+2. Fuer Paper II zuerst Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-
+   Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests aufbauen; keine
+   weiteren Dimensions-Blindscans als Hauptpfad.
+3. Fuer skalare Paper-I-Haertung `A_att=35`, `epsilon=1e-4`, `N=30M` als
    aktuellen Referenzslice verwenden; weitere `lambda_m`/`sigma`/`M0`-Achsen
    erst nach Text-Synchronisierung.
-3. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-Memory
+4. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-Memory
    separat testen; der bisherige skalare Befund ist Relaxations-/Shape-Evidenz.
-4. Paper II bleibt Future Work, bis Propagation, lokale Kopplung und
-   Mehrknoten-Response mit Negativkontrollen tragen.

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-13.
+Stand: 2026-07-15.
 
 ## Repository
 
@@ -54,6 +54,29 @@ korrigierte Potentialmodell neu gerechnet werden. Report:
 - Paper III: als Innen/Aussen- und Synchronisationsprogramm neu orientiert;
   QFT-/Standardmodellbruecken bleiben als offene Future-Work-Tuer erhalten,
   aber ohne Claim-Status.
+
+## Aktueller Dimensions-/A_att-Befund
+
+A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
+`1..5` fuer `d=3` und `d=10` wurde fuer den korrigierten q=3-Skalarslice
+(`epsilon=1e-4`, `M0=1`, Delta-Deposition) ausgewertet. Report:
+`reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md`.
+
+- Die fehlende Report-Referenz fuer `beta=0` ist geschlossen: im Code ist das
+  die `M0=0`/`m0_zero`-Kontrolle, dokumentiert in
+  `reports/long_runs/scalar_hardening/d10_memory_controls_2026-07-14.md`.
+- In `d=10` liegt der kompakte Ast ab `A_att>=9` bei `D_cov ~=2.52`, waehrend
+  `D_mem` von `2.49` bis `9.16` weiter ansteigt. Das spricht fuer eine
+  Trennung von sichtbarer Sample-Geometrie und interner Memory-Shape, nicht
+  fuer eine einzelne Dimensionszahl.
+- In `d=3` laeuft `D_mem` bei `A_att=35` auf `2.95` gegen die Einbettungsgrenze,
+  waehrend die rohe Ein-Knoten-Spur bei `D_cov ~=1.8` und `D_occ_win ~=1.9`
+  bleibt. Ein einzelner driftender Knoten muss die externen Richtungen nicht
+  isotrop abtasten.
+- `D_spec` ist aktuell eine Point-Cloud-Diffusions-/Spektralgeometrie, kein FFT-
+  Fenster und kein Transferoperatorspektrum. Eine saubere Aussenansicht braucht
+  als naechstes tiefpass-/center-trace-basierte Dimensionen und spaeter
+  Response-Tests mit einem zweiten Knoten oder schwachem externem Feld.
 
 ## Long-Run-Status
 
