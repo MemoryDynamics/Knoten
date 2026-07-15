@@ -1,6 +1,6 @@
 # Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
 
-Stand: 2026-06-30.
+Stand: 2026-07-15.
 
 ## Rolle
 
@@ -30,6 +30,11 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
 - allgemeine Memory-Form `(1-lambda_m) rho_n + beta G_sigma` mit normierter Arbeitskonvention `lambda_m=beta=alpha`;
 - `alpha^{-1}` als interne Speicherpersistenzskala in dieser normierten Konvention;
 - Knoten als operational messbare metastabile Strukturen;
+- aktueller numerischer Paper-I-Kern: co-moving kompakte Memory-Clouds im
+  korrigierten scalar reference slice, getrennt von `eta_zero` ueber Radius,
+  Drift/Radius, `D_mem` und Roundness;
+- `D_mem ~=2.94` im gewaehlten 3D-Embedding nur als lokaler
+  Memory-Shape-Teaser; keine makroskopische `d=3`-Selektion in Paper I;
 - Masse nur als Relaxations-/Konfinierungsproxy;
 - klare Trennung von Definition, numerical observation und conjecture.
 
@@ -74,6 +79,9 @@ Paper I bewusst nicht mehr Teil der Hauptargumentation.
 - `docs/status/current_status.md`
 - `docs/status/paper_claims.md`
 - `reports/project/papers/paper1_source_audit_2026-06-01.md`
+- `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`
+- `reports/dimensions/memory_shape_boundary_2026-07-13.md`
+- `reports/dimensions/dimension_claim_audit_2026-07-15.md`
 - `reports/dimensions/reproduction/dimension_claim_seed_audit_2026-06-13.md`
 - `experiments/current/reference/reference_experiment.py`
 - `src/emergenz_knoten/`
@@ -107,4 +115,7 @@ Weltmodell-Claims liegen, sondern auf:
 4. Sind `t = alpha n`, Knoten und Mass-/Relaxationsproxies defensiv genug
    formuliert?
 5. Ist Paper 0 als separates mathematisches Einordnungspaper bzw. Supplement sinnvoll?
-6. Welche Long-Run-Evidenz mit `n >= 10^7` braucht Paper I, bevor robuste Knotenexistenz behauptet wird?
+6. Ist die Long-Run-Evidenz defensiv genug als co-moving Memory-Cloud-Befund
+   formuliert, ohne feste Zentren, Spin, Photon- oder Teilchenclaims?
+7. Ist der `D_mem ~=2.94`-Befund klar als lokaler 3D-Embedding-Teaser und
+   nicht als makroskopischer Dimensionssatz abgegrenzt?

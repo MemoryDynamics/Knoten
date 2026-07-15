@@ -409,6 +409,20 @@ In such regimes, the coarse-grained dynamics typically exhibits two distinct tim
 Operationally, $\tau_{\mathrm{rel}}$ is defined with respect to the coarse-grained parameter $t$ (Sec.~\ref{sec:EffectiveTime}), e.g., by an exponential decay law of an in-knot autocorrelation $C(t)\propto e^{-t/\tau_{\mathrm{rel}}}$.
 This motivates using a relaxation rate (and its dimensionless variant) as an operational descriptor of knot stability.
 
+\subsection{Numerical status and claim boundary}\label{sec:numerical_status}
+
+The numerical role of this paper is diagnostic rather than theorem-proving.
+In the current corrected-sign scalar reference slice, five-seed runs of length $N=3\times10^7$ show a co-moving compact memory-cloud regime separated from the matched $\eta=0$ control.
+For the strongest current slice ($A_{\mathrm{att}}=35$ in the two-scale kernel convention used by the implementation), the median co-moving radius is approximately $2.1\times10^{-4}$, compared with about $10^{-3}$ in the $\eta=0$ control, and the radius-normalized center drift is about $0.044$, compared with about $0.320$ in the control.
+The weighted memory cloud in the chosen three-dimensional embedding has covariance participation dimension $D_{\mathrm{mem}}\simeq2.94$ and roundness about $0.84$, compared with $D_{\mathrm{mem}}\simeq1.90$ and roundness about $0.45$ in the corresponding control.
+These numbers support the limited Paper-I statement that the scalar memory feedback can generate seed-stable, co-moving compact memory-cloud candidates in this parameter slice.
+
+This should not be read as a dimension-selection result.
+Here $D_{\mathrm{mem}}$ is a memory-cloud shape diagnostic in the chosen coordinate scaffold, not a proof that physical space has three dimensions.
+Ambient-dimension audits in the repository indicate that strict memory-variance diagnostics such as $D_{\mathrm{mem}}$ and the number of axes required to capture 90--95\% of memory variance grow with the supplied embedding dimension.
+At the same time, spectral/coarse memory diagnostics show near-three-dimensional behavior in some high-dimensional runs.
+We therefore treat the local three-dimensional memory shape as a Paper-I diagnostic and as motivation for Paper-II tests of external/coarse dimensionality, not as a conclusion of the present minimal model.
+
 \subsection{Attractors of the effective dynamics}
 
 In the continuum description, the influence of memory may be summarized by an effective potential $\Phi[\rho](x)$ induced by the memory field.
