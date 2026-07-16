@@ -121,6 +121,18 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   (`M_stored=0.997595`), nicht auf den formal unendlichen Schwanz. Report:
   `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md`.
 
+- Frozen-Source-Pilot 2026-07-16: Die beiden kanonischen `N=1e8`-
+  Checkpoints wurden als Target und starr eingefrorene geklonte Quelle bei
+  einem Abstand von `1 sigma_rep` fortgesetzt. `eta_cross=0` ist bitgenau
+  null; die Bare-Kalibrierung trifft `0.03` Target-Radien pro Memory-Zeit,
+  und die Jacobi-Matrizen fuer `delta/sigma_rep=0.03/0.10` stimmen relativ
+  auf besser als `7.3e-4` ueberein. Die Center-Antwort ist jedoch jeweils
+  voll ambient-rangig (`3` bzw. `10`) und zerfaellt in einen radialen sowie
+  `d-1` nahezu entartete transversale Kanaele (`|J_parallel/J_perp| ~=1.063`).
+  Das ist die erwartete Symmetrie des isotropen skalaren Fernfeldkernels,
+  keine externe 3D-Selektion. Report:
+  `reports/response/frozen_source_pilot_2026-07-16.md`.
+
 ## Long-Run-Status
 
 Die folgenden Long-Run-Befunde bis einschliesslich Force-Komponenten-Pilot vom
@@ -502,16 +514,18 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Frozen-Source-Protokoll implementieren: stabilen Snapshot als Target um den
-   Memory-Schwerpunkt platzieren, geklonten Source vollstaendig versetzen und
-   einfrieren, Source-Lage mit `+delta/-delta` lokal perturbieren.
-2. Source-Abstand und Kreuzkopplung dimensionslos kalibrieren: Kernelreichweite,
-   Knotradius und Verschiebung pro Memory-Zeit; Kontrollen sind `no source`,
-   `eta_zero` und der abgeschlossene uniforme Probe.
-3. Zuerst Clone-/Orientierungs-Pilot in `d=3/10`; danach mindestens sechs und
-   vorzugsweise zehn unabhaengige Seedpaare fuer eine 5-Prozent-Signflip-
-   Entscheidung. Gemeinsames Memory bleibt ausserhalb dieses Protokolls.
-4. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis als separaten
-   Modellzweig behandeln; Spin/Zirkulation und Ladung/Response sind Zukunfts-
-   observablen, keine aktuellen Paper-I-Claims.
-5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
+1. Frozen-Source-Distanzleiter auf den bestehenden `N=1e8`-Checkpoints:
+   knotennah in Einheiten des Memory-Radius bis zum Fernfeld bei
+   `1 sigma_rep`; Kreuzkopplung weiter auf dieselbe schwache Baseline-
+   Verschiebung kalibrieren und `delta` lokal zur jeweiligen Skala waehlen.
+2. Fuer jede Distanz radiale/transversale Symmetrie, Formantwort,
+   Orientierungsabhaengigkeit, Identitaetsverlust und Nullkontrollen gemeinsam
+   auswerten. Ziel ist die Trennung von universeller Kernelantwort und
+   zustandsabhaengiger Knotenstruktur, nicht ein weiterer Rangclaim.
+3. Erst bei nachweisbarer zustands- oder orientierungsabhaengiger Antwort
+   mindestens sechs, vorzugsweise zehn unabhaengige Source-/Target-Seedpaare
+   bilden; danach kleine Basisrotations- und Abstandskontrollen.
+4. Einseitig dynamische und spaeter reziproke Kopplung erst nach diesem Gate.
+   Gemeinsames Memory bleibt ausserhalb des Frozen-Source-Protokolls.
+5. Vektorgedaechtnis fuer Paper III getrennt halten; Spin, Phase, Ladung und
+   photonartige Moden bleiben Zukunftsobservablen ohne aktuellen Claim.

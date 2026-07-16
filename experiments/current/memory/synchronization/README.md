@@ -65,6 +65,18 @@ translation scales test finite-difference convergence before any independent-see
 or dynamic-source claim.
 
 
+## Clone-Pilot Result
+
+At one effective `sigma_rep`, the calibrated source is thousands of target
+memory radii away. The `d=3` and `d=10` center Jacobians are correspondingly
+full ambient rank and split into one radial plus `d-1` nearly degenerate
+transverse sectors. This is an isotropic scalar far-field response, not an
+external-dimension measurement. The next gate is a radius-to-kernel distance
+ladder before independent-seed formation is scaled up.
+
+Report: `reports/response/frozen_source_pilot_2026-07-16.md`.
+
+
 ## Observables
 
 A target knot provides:
