@@ -58,6 +58,8 @@ def test_reference_state_job_writes_reloadable_complete_checkpoint(
     assert checkpoint.state.n_memory == 20
     assert result["state_geometry"]["memory_points"] == 20
     assert result["checkpoint_bytes"] > 0
+    assert result["post_save_validation"]["schema_checksum_reload"] is True
+    assert result["post_save_validation"]["exact_array_reload"] is True
 
 
 def test_reference_state_cli_list_validation() -> None:

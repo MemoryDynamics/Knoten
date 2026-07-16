@@ -73,6 +73,13 @@ Ensemble-Evidenz. Fuer Signifikanztests werden spaeter mindestens sechs,
 vorzugsweise zehn unabhaengige Seedzustaende pro relevante Basin-/Score-Klasse
 gebildet.
 
+Der Lauf vom 2026-07-16 ist abgeschlossen. Beide Dateien wurden auf Revision
+`e8f4af2` gebildet und mit Schema-/Checksum-Reload, Transformationsinvarianz
+und exakt reproduzierbarem Paired-Branch-Replay geprueft. Der finale
+`d=3`-Zustand besitzt `D_mem=2.860`, der `d=10`-Zustand `D_mem=9.431`; dies
+ist eine Entwicklungsbasis und kein Dimensionsclaim. Report:
+`reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md`.
+
 ## Long-Run-Metastabilitaet
 
 Hinweis: Alle numerischen Long-Run-Abschnitte bis zum Force-Komponenten-Pilot
@@ -630,6 +637,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/dimensions/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
 | `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`, Baseline gegen `eta_zero`; Shape-Dimension und Heat-Trace-`D_spec` bleiben getrennte Kanaele, Response-Rang ist der naechste Paper-II-Gate. |
 | `reports/response/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
+| `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md` | kanonische N100M-Referenzzustaende | Checksum-validierte vollstaendige Finite-Memory-Zustaende fuer `d=3/10`, Seed 1; reproduzierbare Absprungbasis fuer Frozen-Source- und spaetere Mehrknotenarme. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

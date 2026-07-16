@@ -19,6 +19,7 @@ from emergenz_knoten import (
     FiniteMemoryCheckpoint,
     SimulationConfig,
     finite_memory_checkpoint_manifest,
+    load_finite_memory_checkpoint,
     memory_centroid,
     memory_shape_tensor,
     save_finite_memory_checkpoint,
@@ -119,6 +120,15 @@ def _run_job(job: FormationJob) -> dict[str, Any]:
         generator=GENERATOR,
     )
     save_finite_memory_checkpoint(checkpoint, destination)
+    reloaded = load_finite_memory_checkpoint(destination)
+    if not (
+        np.array_equal(reloaded.state.x, state.x)
+        and np.array_equal(reloaded.state.memory, state.memory)
+        and np.array_equal(reloaded.state.weights, state.weights)
+    ):
+        raise RuntimeError("checkpoint reload did not reproduce the formed state")
+    checkpoint = reloaded
+    state = reloaded.state
 
     shape = shape_statistics(state.memory, weights=state.weights)
     tensor = memory_shape_tensor(state)
@@ -128,6 +138,10 @@ def _run_job(job: FormationJob) -> dict[str, Any]:
         "checkpoint_bytes": destination.stat().st_size,
         "elapsed_seconds": elapsed,
         "steps_per_second": job.config.steps / elapsed,
+        "post_save_validation": {
+            "schema_checksum_reload": True,
+            "exact_array_reload": True,
+        },
         "manifest": finite_memory_checkpoint_manifest(checkpoint),
         "state_geometry": {
             "memory_points": state.n_memory,

@@ -387,13 +387,14 @@ Prioritaet:
 3. Abgeschlossen: exakte Seed-Signflip-Inferenz neben deskriptivem
    95-Prozent-Energierang. Mit fuenf Seeds ist `p_min=1/16=0.0625`; der Pilot
    darf daher nur auf 90-Prozent-Niveau explorativ gelesen werden.
-4. In Arbeit: versionierte Referenzzustands-Checkpoints als kontrollierte
-   Absprungbasis. Der Paketpfad speichert `x_N`, den vollstaendigen
-   altersgeordneten Finite-Memory-Puffer, Gewichte, Parameter, Updatealter,
-   Seed, Git-Revision und Array-Pruefsummen. Kanonische Entwicklungsreferenzen
-   werden bei `N=1e8` fuer `d=3` und `d=10`, zunaechst Seed 1, gebildet.
-   Vollstaendig bedeutet hier: alle 600 Punkte der implementierten
-   Finite-Memory-Naeherung, nicht der formal unendliche exponentielle Schwanz.
+4. Abgeschlossen: versionierte Referenzzustands-Checkpoints als kontrollierte
+   Absprungbasis. Die kanonischen Entwicklungsreferenzen fuer `N=1e8`,
+   `d=3/10`, Seed 1 sind auf sauberer Revision `e8f4af2` gebildet,
+   checksum-validiert und mit exakt reproduzierbarem Branch-Replay geprueft.
+   Vollstaendig bedeutet hier: `x_N` und alle 600 Punkte der implementierten
+   Finite-Memory-Naeherung (`M_stored=0.997595`), nicht der formal unendliche
+   exponentielle Schwanz. Report:
+   `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md`.
 5. Naechstes Interaktions-Gate: eingefrorenen Quellknoten einsetzen. Zunaechst
    denselben Referenzzustand klonen, vollstaendig versetzen und ueber
    kontrollierte orthogonale Lagen pruefen; danach unabhaengige
@@ -420,11 +421,11 @@ Prioritaet:
 11. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
     Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt: die beiden `N=1e8`-Referenzzustands-Checkpoints
-auf sauberer Git-Revision erzeugen, wieder einlesen und geometrisch pruefen.
-Danach folgt der Frozen-Source-Runner zuerst mit geklontem Source-/Target-
-Zustand. Mindestens sechs, vorzugsweise zehn unabhaengige Seedpaare sind erst
-fuer den anschliessenden Signifikanzlauf noetig.
+Naechster konkreter Schritt: Frozen-Source-Runner zuerst mit geklontem
+Source-/Target-Zustand implementieren und gegen freie, zero-cross-coupling-,
+`eta_zero`- und uniforme Probe kontrollieren. Mindestens sechs, vorzugsweise
+zehn unabhaengige Seedpaare sind erst fuer den anschliessenden Signifikanzlauf
+noetig.
 
 ### P2.4 Paper II / III Guardrails
 

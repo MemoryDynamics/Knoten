@@ -1,0 +1,223 @@
+{
+  "command": [
+    "C:\\Users\\Hauke\\Documents\\Emergenz_Knoten\\.venv\\Scripts\\python.exe",
+    "experiments/current/memory/reference_state_checkpoints.py",
+    "--steps",
+    "100000000",
+    "--dims",
+    "3,10",
+    "--seeds",
+    "1",
+    "--workers",
+    "2",
+    "--epsilon",
+    "1e-4",
+    "--eta",
+    "0.15",
+    "--alpha",
+    "0.01",
+    "--memory-mass",
+    "1",
+    "--deposition-kernel",
+    "delta",
+    "--deposition-sigma",
+    "0",
+    "--sigma-rep",
+    "1",
+    "--sigma-att",
+    "3",
+    "--amplitude-rep",
+    "1",
+    "--amplitude-att",
+    "35",
+    "--memory-factor",
+    "6",
+    "--max-memory",
+    "800",
+    "--output-dir",
+    "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16"
+  ],
+  "continuation_design": "all compared arms load the same z_N and receive the same explicit fresh future-noise array",
+  "entries": [
+    {
+      "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+      "checkpoint_bytes": 19385,
+      "elapsed_seconds": 3501.277767899999,
+      "manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "20e9d8350608022a19cf36f23468711da41033ae6c2be9f82c9a85f67e3b68c3",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "92be2f73c4bd914534e7e349370e81f4ab13638f749d0f3d7779a165dc4b9487",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "28edc3db62ccce9c57d6ea1236580bf7abb6ae5dce097a99a55c892cd68df4fb",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 100000000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 100000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T16:34:49Z",
+        "formation_seed": 1,
+        "generator": "experiments/current/memory/reference_state_checkpoints.py",
+        "git_revision": "e8f4af2ca23d6f264068dde971adb47a75d76eaa",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 100000000
+      },
+      "state_geometry": {
+        "axis_ratio_intrinsic_min_max": 0.7548109196318883,
+        "axis_ratio_min_max": 0.7548109196318883,
+        "mean_radius": 0.00019382567626014883,
+        "memory_center": [
+          -0.010756459708495513,
+          0.008226467224736328,
+          -0.051103171313242296
+        ],
+        "memory_points": 600,
+        "rms_radius": 0.00021165345794842206,
+        "shape_effective_dimension": 2.860234907504114,
+        "shape_eigenvalues": [
+          1.8539297799178448e-08,
+          1.5695317751614872e-08,
+          1.0562570710731152e-08
+        ],
+        "stored_weight_mass": 0.9975949907086882,
+        "visible_to_center_distance": 0.00014145032715651745
+      },
+      "steps_per_second": 28561.001619696723
+    },
+    {
+      "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d10_seed1_N100000000.npz",
+      "checkpoint_bytes": 51237,
+      "elapsed_seconds": 5272.740950899984,
+      "manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "2f9b48258bc18a6426dd4e076955f6b4a46f951c1b69ce6fdcb834220ba51d42",
+            "shape": [
+              600,
+              10
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "92be2f73c4bd914534e7e349370e81f4ab13638f749d0f3d7779a165dc4b9487",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "d2f3fa8da40dac76416f6539aa10be5dd2c944f9dd05fe42c1f851f46c388fd2",
+            "shape": [
+              10
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 10,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 100000000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 100000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T17:04:20Z",
+        "formation_seed": 1,
+        "generator": "experiments/current/memory/reference_state_checkpoints.py",
+        "git_revision": "e8f4af2ca23d6f264068dde971adb47a75d76eaa",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 100000000
+      },
+      "state_geometry": {
+        "axis_ratio_intrinsic_min_max": 0.6793270340640365,
+        "axis_ratio_min_max": 0.6793270340640365,
+        "mean_radius": 0.00037502649258951945,
+        "memory_center": [
+          -0.006604894563304018,
+          -0.014536416429512611,
+          0.004440486809384747,
+          -0.0037962357828471463,
+          -0.02897777596090616,
+          -0.044151006477794394,
+          -0.027003773282179424,
+          0.027295013296544483,
+          -0.03704357663037808,
+          -0.006491722606362808
+        ],
+        "memory_points": 600,
+        "rms_radius": 0.0003833730429282566,
+        "shape_effective_dimension": 9.430675401517815,
+        "shape_eigenvalues": [
+          2.0747673137014762e-08,
+          1.8483302983837607e-08,
+          1.8115097323130137e-08,
+          1.660357953611062e-08,
+          1.547893608796944e-08,
+          1.3726069869075931e-08,
+          1.2489264761799847e-08,
+          1.1952596830148088e-08,
+          9.803625029246828e-09,
+          9.574744485737678e-09
+        ],
+        "stored_weight_mass": 0.9975949907086882,
+        "visible_to_center_distance": 0.0005305230354712961
+      },
+      "steps_per_second": 18965.46804237204
+    }
+  ],
+  "generated_utc": "2026-07-16T17:04:21Z",
+  "git_revision": "e8f4af2ca23d6f264068dde971adb47a75d76eaa",
+  "git_status": "",
+  "purpose": "canonical branch points for paired free, weak-probe, frozen-source, and later multi-knot continuations",
+  "schema": "emergenz-knoten.reference-state-index",
+  "schema_version": 1
+}

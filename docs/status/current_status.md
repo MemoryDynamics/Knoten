@@ -107,14 +107,16 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   besitzt. Das ist eine uniforme Vollrang-Negativkontrolle, kein externer
   Dimensionsbefund. Report:
   `reports/response/weak_probe_calibration_2026-07-16.md`.
-- Referenzzustands-Infrastruktur 2026-07-16: Der neue Entry-Point
-  `experiments/current/memory/reference_state_checkpoints.py` bildet ohne
-  Zeitreihenallokation einen vollstaendigen numerischen Markov-Zustand und
-  verweigert wissenschaftliche Formation auf einem schmutzigen Worktree. Die
-  geplanten kanonischen Entwicklungszustaende sind `N=1e8`, Seed 1, `d=3/10`.
-  Alle Folgearme starten mit neuem explizitem gemeinsamen Zukunftsrauschen;
-  der PRNG-Zustand ist kein Bestandteil von `z_N`. Vollstaendigkeit bezieht
-  sich auf den trunkierten 600-Punkte-Puffer (`M_stored ~=0.9976`).
+- Referenzzustands-Checkpoints 2026-07-16: Die kanonischen
+  Entwicklungszustaende fuer `N=1e8`, Seed 1 und `d=3/10` sind auf Revision
+  `e8f4af2` gebildet, checksum-validiert und mit exakt reproduzierbarem
+  Branch-Replay gespeichert. `d=3` endet bei `D_mem=2.860`, `d=10` bei
+  `D_mem=9.431`; der einzelne d10-Zustand zeigt damit keinen internen
+  Drei-Dimensions-Kollaps. Alle Folgearme starten mit neuem explizitem
+  gemeinsamen Zukunftsrauschen; der PRNG-Zustand ist kein Bestandteil von
+  `z_N`. Vollstaendigkeit bezieht sich auf den trunkierten 600-Punkte-Puffer
+  (`M_stored=0.997595`), nicht auf den formal unendlichen Schwanz. Report:
+  `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md`.
 
 ## Long-Run-Status
 
