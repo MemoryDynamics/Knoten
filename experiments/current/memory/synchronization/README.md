@@ -5,7 +5,8 @@ Status: active measurement programme.
 The package diagnostics live in `src/emergenz_knoten/synchronization.py`.
 Complete retained-memory states and rigid placement are implemented in
 `src/emergenz_knoten/state.py`; paired weak pulses live in
-`src/emergenz_knoten/weak_probe.py`.
+`src/emergenz_knoten/weak_probe.py`, and localized fixed-source continuation
+lives in `src/emergenz_knoten/frozen_source.py`.
 
 ## Core Question
 
@@ -48,6 +49,21 @@ The direct field spans the supplied basis by construction. The first
 relationally meaningful rank test is therefore the localized frozen source.
 
 Report: `reports/response/weak_probe_calibration_2026-07-16.md`.
+
+## Frozen-Source Implementation
+
+`frozen_source_response.py` loads the checksum-validated `N=100M` checkpoints,
+uses the same complete state as target and rigidly translated source, and places
+one unperturbed source at a fixed reference offset. The complete source state is
+then translated locally by `+delta/-delta` along each basis direction. Perturbed
+branches, the baseline-source branch, and a free no-source branch share future
+noise. Self-coupling `eta` and source cross-coupling `eta_cross` remain separate.
+`eta_cross=0` must reproduce every free path exactly; `eta_zero` retains the
+localized source force and provides the bare-response control. One fixed
+interaction strength is calibrated from the baseline source force; two local
+translation scales test finite-difference convergence before any independent-seed
+or dynamic-source claim.
+
 
 ## Observables
 

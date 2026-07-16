@@ -32,6 +32,9 @@ Stand: 2026-07-16.
 - `weak_probe.py`/`synchronization.py`: gepaarte uniforme Probeantwort mit
   gemeinsamem Zukunftsrauschen, ungeprobtem Pfad, Response-Matrizen und exakter
   Seed-Signflip-Ranginferenz.
+- `frozen_source.py`: lokalisierte eingefrorene Quellfelder mit getrennter
+  Selbst-/Kreuzkopplung, gepaarten Quelllagen, freiem Pfad und exakter
+  Null-Kreuzkopplungskontrolle.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
   row-stochastic operators, implied timescales, CK-Fehlern und slow-mode

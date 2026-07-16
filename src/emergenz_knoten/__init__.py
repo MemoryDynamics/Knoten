@@ -53,6 +53,12 @@ from .experiments import (
     run_simulation,
     save_simulation_result,
 )
+from .frozen_source import (
+    FrozenSourceCalibration,
+    PairedFrozenSourceResponse,
+    calibrate_frozen_source_cross_eta,
+    paired_frozen_source_response,
+)
 from .kernels import (
     DEPOSITION_KERNELS,
     double_gaussian_gradient,
@@ -119,6 +125,8 @@ __all__ = [
     "DEPOSITION_KERNELS",
     "FiniteMemoryCheckpoint",
     "FiniteMemoryState",
+    "FrozenSourceCalibration",
+    "PairedFrozenSourceResponse",
     "PairedProbeResponse",
     "SimulationConfig",
     "SimulationRunner",
@@ -130,6 +138,7 @@ __all__ = [
     "ball_residence_statistics",
     "ballistic_scaling_slope",
     "bootstrap_mean_ci",
+    "calibrate_frozen_source_cross_eta",
     "covariance_dimension",
     "critical_eta",
     "critical_gamma",
@@ -161,6 +170,7 @@ __all__ = [
     "memory_horizon",
     "occupancy_dimension_value",
     "occupancy_local_slopes",
+    "paired_frozen_source_response",
     "paired_uniform_probe_response",
     "phase_locking_value",
     "place_finite_memory_state",

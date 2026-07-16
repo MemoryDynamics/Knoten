@@ -20,7 +20,7 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft/result figures"]
 
-    experiments --> sync_exp["synchronization/<br/>paired weak probe; frozen source next"]
+    experiments --> sync_exp["synchronization/<br/>paired weak probe + frozen source"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
@@ -36,6 +36,10 @@ flowchart TD
     src --> state["state.py<br/>complete memory state; rigid placement"]
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
+    src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
+    src --> continuation["_continuation.py<br/>shared Numba continuation primitives"]
+    probe --> continuation
+    frozen --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
 
@@ -151,7 +155,7 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `checkpoints.py`, `weak_probe.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
+- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

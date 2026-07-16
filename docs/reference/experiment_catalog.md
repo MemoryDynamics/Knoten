@@ -33,6 +33,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/current/memory/synchronization/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
+| `experiments/current/memory/synchronization/frozen_source_response.py` | gepaarter lokalisierter Frozen-Source-Pilot | aktiv | geklonte `N=1e8`-Quelle; `eta_cross=0`, `eta_zero`, feste Kreuzkopplung und zwei lokale Verschiebungsskalen |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |

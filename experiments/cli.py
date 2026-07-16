@@ -65,6 +65,7 @@ CATEGORIES = {
         "current/memory/vector_memory_pilot.py",
         "current/memory/reference_state_checkpoints.py",
         "current/memory/synchronization/weak_probe_response.py",
+        "current/memory/synchronization/frozen_source_response.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",
