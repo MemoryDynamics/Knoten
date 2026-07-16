@@ -115,9 +115,11 @@ def test_frozen_source_case_has_exact_zero_control_and_rank_rows(
 
     ranks = frozen_source_response.rank_rows(results)
     linearity = frozen_source_response.linearity_rows(results)
+    symmetry = frozen_source_response.symmetry_rows(results)
 
     assert ranks
     assert linearity
+    assert symmetry
     assert {row["observable"] for row in linearity} == set(results[0]["responses"])
 
 
@@ -140,6 +142,7 @@ def test_report_keeps_cloned_source_guardrails(tmp_path: Path) -> None:
         "lag_memory_times": [0.0, 1.0],
         "case_results": results,
         "rank_rows": frozen_source_response.rank_rows(results),
+        "symmetry_rows": frozen_source_response.symmetry_rows(results),
         "linearity_rows": frozen_source_response.linearity_rows(results),
     }
 

@@ -417,6 +417,52 @@ def rank_rows(case_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def symmetry_rows(case_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Audit radial/transverse sectors in the source-aligned response basis."""
+
+    rows: list[dict[str, Any]] = []
+    for result in case_results:
+        if result["dim"] < 2:
+            continue
+        for lag_index, lag in enumerate(result["lag_memory_times"]):
+            for observable in (
+                "bare_position",
+                "active_memory_center",
+                "memory_center_feedback",
+                "position_feedback",
+            ):
+                matrix = np.asarray(result["responses"][observable][lag_index])
+                diagonal = np.diag(matrix)
+                transverse = diagonal[1:]
+                matrix_norm = float(np.linalg.norm(matrix))
+                transverse_scale = float(np.mean(np.abs(transverse)))
+                off_diagonal = matrix - np.diag(diagonal)
+                rows.append(
+                    {
+                        "dim": result["dim"],
+                        "seed": result["seed"],
+                        "perturbation_sigma_rep": result["perturbation_sigma_rep"],
+                        "lag_memory_times": float(lag),
+                        "observable": observable,
+                        "radial_response": float(diagonal[0]),
+                        "transverse_response_mean": float(np.mean(transverse)),
+                        "radial_transverse_abs_ratio": float(
+                            abs(diagonal[0])
+                            / max(transverse_scale, np.finfo(float).tiny)
+                        ),
+                        "transverse_relative_spread": float(
+                            np.std(transverse)
+                            / max(transverse_scale, np.finfo(float).tiny)
+                        ),
+                        "off_diagonal_fraction": float(
+                            np.linalg.norm(off_diagonal)
+                            / max(matrix_norm, np.finfo(float).tiny)
+                        ),
+                    }
+                )
+    return rows
+
+
 def linearity_rows(case_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     keys = sorted({(row["dim"], row["seed"]) for row in case_results})
@@ -694,6 +740,43 @@ def build_report(
             if row["dim"] == dim and row["observable"] == "shape_feedback"
         )
         lines.append(f"| {dim} | {_fmt(zero_error)} | {_fmt(center)} | {_fmt(shape)} |")
+    lines.extend(
+        [
+            "",
+            "## Source-aligned symmetry audit",
+            "",
+            "The baseline source lies on axis 1. The table resolves the center-",
+            "feedback Jacobian into its radial entry, the mean transverse entry,",
+            "and leakage away from this diagonal radial/transverse form.",
+            "",
+            "| d | delta/sigma_rep | radial | transverse mean | abs ratio | off-diagonal fraction | transverse spread |",
+            "| ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    symmetry = [
+        row
+        for row in payload["symmetry_rows"]
+        if row["lag_memory_times"] == 1.0
+        and row["observable"] == "memory_center_feedback"
+    ]
+    for row in symmetry:
+        lines.append(
+            f"| {row['dim']} | {_fmt(row['perturbation_sigma_rep'])} | "
+            f"{_fmt(row['radial_response'])} | "
+            f"{_fmt(row['transverse_response_mean'])} | "
+            f"{_fmt(row['radial_transverse_abs_ratio'])} | "
+            f"{_fmt(row['off_diagonal_fraction'])} | "
+            f"{_fmt(row['transverse_relative_spread'])} |"
+        )
+    lines.extend(
+        [
+            "",
+            "The full ambient ranks split into one radial and d-1 nearly",
+            "degenerate transverse responses. This is the symmetry expected from",
+            "an isotropic scalar kernel. It is not evidence for selection of three",
+            "external dimensions.",
+        ]
+    )
     response_path, spectra_path, quality_path = figure_paths
     lines.extend(
         [
@@ -770,7 +853,7 @@ def main() -> None:
     figure_paths = make_figures(case_results, _resolve(args.figure_dir))
     payload = {
         "schema": "emergenz-knoten.frozen-source-pilot",
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "git_revision": git_revision,
         "git_status_at_start": git_status,
@@ -784,6 +867,7 @@ def main() -> None:
         "noise_base_seed": int(args.noise_base_seed),
         "case_results": case_results,
         "rank_rows": rank_rows(case_results),
+        "symmetry_rows": symmetry_rows(case_results),
         "linearity_rows": linearity_rows(case_results),
         "summary_json": summary_path,
         "figures": list(figure_paths),
