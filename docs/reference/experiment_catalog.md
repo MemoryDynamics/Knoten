@@ -27,6 +27,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
 | `experiments/current/dynamics/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
+| `experiments/current/dynamics/n_dependence_recheck_report.py` | N-Abhaengigkeits-Reconciliation | aktiv | Formation-Skalierung, `N=30M`-Referenz und Rohsnapshot-Pilot in einer Guardrail-Grafik |
 | `experiments/current/reference/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
@@ -579,6 +580,7 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/long_runs/m0_axis/m0_axis_knot_score_pilot_2026-07-10.md` | M0-Achsenpilot | Bei `A_att=8` macht hoeheres `M0` die Laeufe kompakter, traegt im 100k-Pilot aber noch keinen starken v0.5-KnotScore. |
 | `reports/long_runs/scalar_hardening/scalar_hardening_q3_1M_2026-07-10.md` | Scalar-Haertung q=3 1M | `A_att=20` und `35` tragen hohe v0.5-Kompaktheit/Memory-Shape-Scores; Residence-Skalierung bleibt der naechste Engpass. |
 | `reports/long_runs/scalar_hardening/scalar_n_scaling_q3_2026-07-10.md` | Scalar-N-Skalierung q=3 | `A_att=20/35`, `N=100k..3M`, `burn_in=0`; kompakte Memory-Clouds bilden schnell, Residence bleibt Engpass. |
+| `reports/long_runs/scalar_hardening/n_dependence_recheck_2026-07-16.md` | N-Abhaengigkeits-Recheck | `N=100k..3M`, `N=200k`-Rohsnapshot-Pilot und `N=30M`-Referenz in einer Grafik; `N=200k` ist nur Pipelinecheck, Memory-Shape bleibt qualitativ konsistent. |
 | `reports/long_runs/long_3e8/long_run_3e8_launch_2026-07-10.md` | 3e8-Launch | Hintergrundlaeufe fuer `A_att=20/35`, Seeds `1..5`, `N=300M`, mit Center-/Memory-Ball-Residence gestartet. |
 | `reports/long_runs/long_3e8/long_run_3e8_results_2026-07-11.md` | 3e8-Resultate | v0.5-Score und Voxel-Residence tragen bei `A_att=20/35`; fixe finale Memory-Center-Residence zeigt Drift/Rezentering und motiviert dynamische Center-Diagnostik. |
 | `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | `A_att=35`, `epsilon=1e-4` ist der aktuelle scalar long-run reference candidate; Spin-Proxy bleibt negativ. |

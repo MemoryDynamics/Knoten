@@ -351,6 +351,15 @@ bleibt dagegen median unter der Partial-Schwelle `2` (`N=3M`: `1.584` bzw.
 Residence-Konvergenz bzw. ein schaerferes Residence-Observable. Report:
 `reports/long_runs/scalar_hardening/scalar_n_scaling_q3_2026-07-10.md`.
 
+N-Abhaengigkeits-Recheck 2026-07-16: Der neue Reconciliation-Plot fuehrt die
+alte Formation-Skalierung (`N=100k..3M`, `epsilon=0.03`), den kurzen
+Rohsnapshot-Pilot (`N=200k`, `epsilon=1e-4`) und den `N=30M`-Referenzslice
+zusammen. Lesart: Die Memory-Shape-Formation verhaelt sich qualitativ wie
+zuvor; `N=200k` bleibt ein Pipelinecheck und ist fuer Heat-Trace-`D_spec` zu
+kurz. Exakt `3D` ist kein hartes Kriterium; fuer Paper II zaehlen stabile
+aktive Dimensionen bzw. Response-Raenge gegen Kontrollen. Report:
+`reports/long_runs/scalar_hardening/n_dependence_recheck_2026-07-16.md`.
+
 3e8-Resultat 2026-07-11: Die `N=300,000,000`-Laeufe fuer `A_att=20` und
 `35`, Seeds `1..5`, sind abgeschlossen. Beide Kandidaten tragen v0.5 deutlich
 gegen `eta_zero` (`score median 0.929`; Residence-Gain median `2.833` bzw.

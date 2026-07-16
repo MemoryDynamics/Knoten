@@ -238,6 +238,14 @@ Naechster operativer Schritt:
     findet der konservative Estimator kein stabiles Skalierungsfenster. Report:
     `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`.
 
+27. Abgeschlossen: N-Abhaengigkeits-Recheck. Ergebnis: Die alte
+    `N=100k..3M`-Formation-Skalierung, der kurze `N=200k`-Rohsnapshot-Pilot
+    und der `N=30M`-Referenzslice sind in einer Guardrail-Grafik
+    zusammengefuehrt. `N=200k` bleibt nur Pipelinecheck; Memory-Shape verhaelt
+    sich qualitativ wie zuvor. Exakt `3D` ist kein hartes Kriterium; fuer Paper
+    II zaehlen stabile aktive Dimensionen bzw. Response-Raenge gegen Kontrollen.
+    Report: `reports/long_runs/scalar_hardening/n_dependence_recheck_2026-07-16.md`.
+
 Aktueller naechster Schritt:
 
 - Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
