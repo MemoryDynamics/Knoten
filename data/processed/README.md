@@ -6,6 +6,7 @@ Default policy:
 
 - Raw run directories and bulk outputs remain ignored by Git.
 - A result JSON is committed only after review, when a report, figure, or test fixture depends on it.
+- Compact, versioned reference-state checkpoints may be committed after checksum validation when controlled continuation experiments depend on them.
 - Existing tracked JSON files under `data/processed/fractal_analysis/` and `data/processed/anchor_paper/` are archival reviewed snapshots, not the default pattern for new bulk runs.
 - Human-readable interpretation belongs in `reports/` or the active `docs/` pages.
 - Use stable subdirectories by topic, for example `fractal_analysis/` and `long_run_metastability/`.

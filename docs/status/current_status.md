@@ -16,8 +16,8 @@ Stand: 2026-07-16.
 ## Codekern
 
 - `core.py`: `SimulationConfig`, finite-memory Simulation, Numba-Variante,
-  Memory-Horizon `min(max_memory, memory_factor / alpha)` und `memory_mass`/`M0`
-  als getrennte Speicher-Masse.
+  Memory-Horizon `min(max_memory, memory_factor / alpha)`, `memory_mass`/`M0`
+  sowie ein ringgepufferter Finalzustands-Runner ohne Trajektorienspeicherung.
 - `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k` und Gaussian-Kernelgradienten; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
@@ -27,6 +27,8 @@ Stand: 2026-07-16.
 - `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
 - `state.py`: unveraenderlicher vollstaendiger Finite-Memory-Zustand sowie
   gemeinsame Translation und orthogonale Platzierung von Position und Memory.
+- `checkpoints.py`: versionierte, pickle-freie NPZ-Checkpoints mit vollstaendiger
+  Finite-Memory-Pruefung, Formation-Provenienz und SHA-256-Arraypruefsummen.
 - `weak_probe.py`/`synchronization.py`: gepaarte uniforme Probeantwort mit
   gemeinsamem Zukunftsrauschen, ungeprobtem Pfad, Response-Matrizen und exakter
   Seed-Signflip-Ranginferenz.
@@ -105,6 +107,14 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   besitzt. Das ist eine uniforme Vollrang-Negativkontrolle, kein externer
   Dimensionsbefund. Report:
   `reports/response/weak_probe_calibration_2026-07-16.md`.
+- Referenzzustands-Infrastruktur 2026-07-16: Der neue Entry-Point
+  `experiments/current/memory/reference_state_checkpoints.py` bildet ohne
+  Zeitreihenallokation einen vollstaendigen numerischen Markov-Zustand und
+  verweigert wissenschaftliche Formation auf einem schmutzigen Worktree. Die
+  geplanten kanonischen Entwicklungszustaende sind `N=1e8`, Seed 1, `d=3/10`.
+  Alle Folgearme starten mit neuem explizitem gemeinsamen Zukunftsrauschen;
+  der PRNG-Zustand ist kein Bestandteil von `z_N`. Vollstaendigkeit bezieht
+  sich auf den trunkierten 600-Punkte-Puffer (`M_stored ~=0.9976`).
 
 ## Long-Run-Status
 

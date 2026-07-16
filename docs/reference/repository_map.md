@@ -24,6 +24,7 @@ flowchart TD
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
+    experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, deposition modes, Gaussian kernels"]
@@ -33,6 +34,7 @@ flowchart TD
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
     src --> state["state.py<br/>complete memory state; rigid placement"]
+    src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
@@ -79,7 +81,9 @@ flowchart LR
     sim --> steps["sample_steps n_i"]
     sim --> memory["memory buffer / weights"]
     memory --> fullstate["FiniteMemoryState<br/>x + complete retained memory"]
-    fullstate --> rigid["rigid placement<br/>translation / orthogonal rotation"]
+    fullstate --> checkpoint["versioned checkpoint<br/>config + N + seed + checksums"]
+    checkpoint --> reload["validated reload<br/>fresh common future noise"]
+    reload --> rigid["rigid placement<br/>translation / orthogonal rotation"]
     rigid --> weakprobe["paired weak probe<br/>+delta / -delta / unprobed / eta_zero"]
     weakprobe --> response["response matrices<br/>energy rank + sign-flip rank"]
     sim --> zfeatures["augmented features z_i"]
@@ -123,9 +127,31 @@ flowchart TD
     report --> paper1["Paper I evidence table"]
 ```
 
+## Referenzzustands- und Interaktionsschiene
+
+```mermaid
+flowchart LR
+    clean["clean Git revision"] --> formation["final-state formation<br/>N=1e8; no trajectory storage"]
+    formation --> z3["checkpoint d=3<br/>x_N + 600 memory points"]
+    formation --> z10["checkpoint d=10<br/>x_N + 600 memory points"]
+    z3 --> paired["paired branches<br/>same z_N + same future noise"]
+    z10 --> paired
+    paired --> free["free self-dynamics<br/>no cross coupling"]
+    paired --> probe["weak localized frozen source"]
+    paired --> multi["later: independent / dynamic knots"]
+    free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
+    probe --> delta
+    multi --> delta
+```
+
+The checkpoint is complete for the implemented finite-memory approximation.
+It deliberately does not contain the preceding `1e8` positions or a PRNG state:
+the Markov branch comparison supplies a fresh explicit common future-noise
+array. Independent seeds remain necessary for inferential claims.
+
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `weak_probe.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
+- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `checkpoints.py`, `weak_probe.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

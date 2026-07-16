@@ -63,6 +63,7 @@ CATEGORIES = {
     ],
     "memory": [
         "current/memory/vector_memory_pilot.py",
+        "current/memory/reference_state_checkpoints.py",
         "current/memory/synchronization/weak_probe_response.py",
     ],
     "propagation_speed": [

@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 
+from .state import FiniteMemoryState
+
 from .kernels import (
     DEPOSITION_KERNELS,
     double_gaussian_gradient,
@@ -387,3 +389,144 @@ def simulate_finite_memory_numba(
         "memory": history[:filled].copy(),
         "weights": weights[:filled].copy(),
     }
+
+
+@njit(cache=True)
+def _circular_double_gaussian_gradient_numba(
+    x: np.ndarray,
+    history: np.ndarray,
+    head: int,
+    filled: int,
+    weights: np.ndarray,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float,
+    amplitude_att: float,
+) -> np.ndarray:
+    """Evaluate the age-ordered gradient without shifting the memory buffer."""
+
+    dim = x.shape[0]
+    horizon = history.shape[0]
+    rep_gradient = np.zeros(dim, np.float64)
+    att_gradient = np.zeros(dim, np.float64)
+    sigma_rep2 = sigma_rep * sigma_rep
+    sigma_att2 = sigma_att * sigma_att
+    for age in range(filled):
+        memory_index = (head + age) % horizon
+        radius2 = 0.0
+        for coord in range(dim):
+            delta = x[coord] - history[memory_index, coord]
+            radius2 += delta * delta
+        rep_factor = -amplitude_rep * np.exp(-0.5 * radius2 / sigma_rep2) / sigma_rep2
+        att_factor = -amplitude_att * np.exp(-0.5 * radius2 / sigma_att2) / sigma_att2
+        for coord in range(dim):
+            delta = x[coord] - history[memory_index, coord]
+            rep_gradient[coord] += weights[age] * rep_factor * delta
+            att_gradient[coord] += weights[age] * att_factor * delta
+    return rep_gradient - att_gradient
+
+
+@njit(cache=True)
+def _simulate_final_finite_memory_state_numba(
+    steps: int,
+    dim: int,
+    epsilon: float,
+    eta: float,
+    alpha: float,
+    memory_mass: float,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float,
+    amplitude_att: float,
+    memory_factor: float,
+    max_memory: int,
+    seed: int,
+):
+    """Run formation with a circular buffer and retain only the final state."""
+
+    np.random.seed(seed)
+    horizon = min(max_memory, max(1, int(memory_factor / alpha)))
+    weights = _exponential_weights_numba(alpha, horizon, memory_mass)
+    history = np.zeros((horizon, dim), np.float64)
+    x = np.zeros(dim, np.float64)
+    head = 0
+    filled = 0
+
+    for _step in range(steps):
+        if filled and eta != 0.0 and memory_mass != 0.0:
+            gradient = _circular_double_gaussian_gradient_numba(
+                x,
+                history,
+                head,
+                filled,
+                weights,
+                sigma_rep,
+                sigma_att,
+                amplitude_rep,
+                amplitude_att,
+            )
+        else:
+            gradient = np.zeros(dim, np.float64)
+
+        for coord in range(dim):
+            x[coord] = (
+                x[coord]
+                + epsilon * np.random.normal(0.0, 1.0)
+                - eta * gradient[coord]
+            )
+
+        if filled == 0:
+            head = 0
+        else:
+            head = (head - 1) % horizon
+        for coord in range(dim):
+            history[head, coord] = x[coord]
+        if filled < horizon:
+            filled += 1
+
+    return x, history, weights, head, filled
+
+
+def simulate_final_finite_memory_state(
+    config: SimulationConfig, *, seed: int = 0
+) -> FiniteMemoryState:
+    """Return only the complete final augmented state after formation.
+
+    This path uses a circular memory buffer and does not allocate trajectory
+    samples. It is intended for long formation runs whose output is a reusable
+    Markov-state checkpoint.
+    """
+
+    if not _NUMBA_AVAILABLE:
+        raise ImportError("numba is required for final-state formation runs")
+    validate_simulation_config(config)
+    effective = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
+    x, history, weights, head, filled = _simulate_final_finite_memory_state_numba(
+        config.steps,
+        config.dim,
+        config.epsilon,
+        config.eta,
+        config.alpha,
+        config.memory_mass,
+        effective["sigma_rep"],
+        effective["sigma_att"],
+        effective["amplitude_rep"],
+        effective["amplitude_att"],
+        config.memory_factor,
+        config.max_memory,
+        seed,
+    )
+    order = (head + np.arange(filled, dtype=int)) % history.shape[0]
+    return FiniteMemoryState(
+        x=x.copy(),
+        memory=history[order].copy(),
+        weights=weights[:filled].copy(),
+    )

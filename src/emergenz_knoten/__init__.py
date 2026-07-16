@@ -9,11 +9,19 @@ from .analytic import (
     stationary_memory_mass,
     two_scale_force_crossing_radius,
 )
+from .checkpoints import (
+    CHECKPOINT_SCHEMA_VERSION,
+    FiniteMemoryCheckpoint,
+    finite_memory_checkpoint_manifest,
+    load_finite_memory_checkpoint,
+    save_finite_memory_checkpoint,
+)
 from .core import (
     SimulationConfig,
     memory_horizon,
     simulate_finite_memory,
     simulate_finite_memory_numba,
+    simulate_final_finite_memory_state,
     validate_simulation_config,
 )
 from .diagnostics import (
@@ -107,7 +115,9 @@ __all__ = [
     "LaggedCorrelationResult",
     "ResponseRankInferenceResult",
     "ResponseRankResult",
+    "CHECKPOINT_SCHEMA_VERSION",
     "DEPOSITION_KERNELS",
+    "FiniteMemoryCheckpoint",
     "FiniteMemoryState",
     "PairedProbeResponse",
     "SimulationConfig",
@@ -128,6 +138,7 @@ __all__ = [
     "effective_gaussian_parameters",
     "exponential_memory_weights",
     "exponential_weights",
+    "finite_memory_checkpoint_manifest",
     "fit_occupancy_scaling_window",
     "frozen_hessian_stability",
     "gaussian_gradient",
@@ -135,6 +146,7 @@ __all__ = [
     "heat_trace_spectral_dimension",
     "infer_reproducible_response_rank",
     "lagged_cross_correlation",
+    "load_finite_memory_checkpoint",
     "load_simulation_result",
     "local_scalar_memory_modes",
     "matched_local_stiffness_renormalization",
@@ -157,6 +169,7 @@ __all__ = [
     "residence_statistics",
     "response_rank",
     "run_simulation",
+    "save_finite_memory_checkpoint",
     "save_simulation_result",
     "score_against_control",
     "score_v0_4_against_control",
@@ -167,6 +180,7 @@ __all__ = [
     "shape_tensor",
     "simulate_finite_memory",
     "simulate_finite_memory_numba",
+    "simulate_final_finite_memory_state",
     "simulate_vector_memory",
     "spectral_dimension",
     "stationary_deposition_weight",

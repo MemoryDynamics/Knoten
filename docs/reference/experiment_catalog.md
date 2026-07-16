@@ -33,8 +33,45 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/current/memory/synchronization/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
+| `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
+
+## Referenzzustands-Checkpoints
+
+Der Checkpoint-Runner speichert nur den finalen augmentierten Zustand der
+implementierten Finite-Memory-Naeherung. Bei `alpha=0.01`, `memory_factor=6`
+und `max_memory=800` sind das `x_N`, 600 altersgeordnete Memory-Punkte und
+600 Gewichte. Die vorherigen `N` Positionen werden nicht benoetigt. Die
+gespeicherte Gewichtsmasse ist `1-(1-alpha)^600 ~= 0.9976`; der formale
+unendliche exponentielle Schwanz bleibt eine bekannte Trunkierungsnaeherung.
+
+Der Runner verlangt einen sauberen Worktree und schreibt Git-Revision,
+Formation-Seed, Parameter, Updatealter und Array-Pruefsummen in jedes
+pickle-freie NPZ. Folgeexperimente laden dasselbe `z_N` und verwenden fuer
+alle verglichenen Arme eine neue explizite gemeinsame Zukunftsrauschfolge.
+
+```powershell
+python experiments/current/memory/reference_state_checkpoints.py `
+  --steps 100000000 `
+  --dims 3,10 `
+  --seeds 1 `
+  --workers 2 `
+  --epsilon 1e-4 `
+  --eta 0.15 `
+  --alpha 0.01 `
+  --memory-mass 1 `
+  --deposition-kernel delta `
+  --sigma-rep 1 `
+  --sigma-att 3 `
+  --amplitude-rep 1 `
+  --amplitude-att 35
+```
+
+Seed 1 je Dimension ist eine kanonische Entwicklungsreferenz, keine
+Ensemble-Evidenz. Fuer Signifikanztests werden spaeter mindestens sechs,
+vorzugsweise zehn unabhaengige Seedzustaende pro relevante Basin-/Score-Klasse
+gebildet.
 
 ## Long-Run-Metastabilitaet
 

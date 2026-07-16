@@ -387,35 +387,44 @@ Prioritaet:
 3. Abgeschlossen: exakte Seed-Signflip-Inferenz neben deskriptivem
    95-Prozent-Energierang. Mit fuenf Seeds ist `p_min=1/16=0.0625`; der Pilot
    darf daher nur auf 90-Prozent-Niveau explorativ gelesen werden.
-4. Naechstes Gate: eingefrorenen Quellknoten einsetzen. Zunaechst denselben
-   stabilen Snapshot klonen, vollstaendig versetzen und ueber kontrollierte
-   orthogonale Lagen pruefen; danach unabhaengige Seed-Zustaende derselben
-   Basin-/Score-Klasse verwenden. Der Source-Puls ist lokalisiert und wird
-   gegen `no source`, `eta_zero` und uniformen Probe kalibriert.
-5. Distanz und Kreuzkopplung ueber dimensionslose Groessen waehlen: Abstand
+4. In Arbeit: versionierte Referenzzustands-Checkpoints als kontrollierte
+   Absprungbasis. Der Paketpfad speichert `x_N`, den vollstaendigen
+   altersgeordneten Finite-Memory-Puffer, Gewichte, Parameter, Updatealter,
+   Seed, Git-Revision und Array-Pruefsummen. Kanonische Entwicklungsreferenzen
+   werden bei `N=1e8` fuer `d=3` und `d=10`, zunaechst Seed 1, gebildet.
+   Vollstaendig bedeutet hier: alle 600 Punkte der implementierten
+   Finite-Memory-Naeherung, nicht der formal unendliche exponentielle Schwanz.
+5. Naechstes Interaktions-Gate: eingefrorenen Quellknoten einsetzen. Zunaechst
+   denselben Referenzzustand klonen, vollstaendig versetzen und ueber
+   kontrollierte orthogonale Lagen pruefen; danach unabhaengige
+   Seed-Zustaende derselben Basin-/Score-Klasse verwenden. Der Source-Puls ist
+   lokalisiert und wird gegen `no source`, `eta_zero` und uniformen Probe
+   kalibriert.
+6. Distanz und Kreuzkopplung ueber dimensionslose Groessen waehlen: Abstand
    relativ zu Source-/Target-Radius und Kernelreichweite; Stoerung relativ zur
    Radiusverschiebung pro Memory-Zeit. Erst kleine diskrete Kalibrierpunkte,
    kein Distanz-/Kopplungs-Blindscan.
-6. Erst nach dem eingefrorenen Source-Test zwei dynamische Knoten mit getrennten
+7. Erst nach dem eingefrorenen Source-Test zwei dynamische Knoten mit getrennten
    Memory-Feldern koppeln: `no coupling`, einseitiges Lesen und reziprokes
    Lesen. Gemeinsames Memory ist wegen Massennormierung und Identitaetsverlust
    eine spaetere eigene Modellvariante.
-7. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
+8. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
    Wechselwirkungs-/Antwortmatrix messen. Exakt `3` wird nicht vorgegeben;
    interessant ist ein kontrollgetrennter niedriger Rang, der bei hoeherer
    Einbettungsdimension ueber Seeds, Lags, Probestarken und Basisrotationen
    stabil ist.
-8. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
-9. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
-   momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
-   Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
-10. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+9. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
+10. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
+    momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
+    Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
+11. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
     Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt: ein Frozen-Source-Protokoll und einen kleinen
-Runner auf dem validierten Snapshot-/Probe-Kern implementieren. Der erste Lauf
-verwendet geklonte Source-/Target-Zustaende; mindestens sechs, vorzugsweise zehn
-unabhaengige Seedpaare sind erst fuer den anschliessenden Signifikanzlauf noetig.
+Naechster konkreter Schritt: die beiden `N=1e8`-Referenzzustands-Checkpoints
+auf sauberer Git-Revision erzeugen, wieder einlesen und geometrisch pruefen.
+Danach folgt der Frozen-Source-Runner zuerst mit geklontem Source-/Target-
+Zustand. Mindestens sechs, vorzugsweise zehn unabhaengige Seedpaare sind erst
+fuer den anschliessenden Signifikanzlauf noetig.
 
 ### P2.4 Paper II / III Guardrails
 
