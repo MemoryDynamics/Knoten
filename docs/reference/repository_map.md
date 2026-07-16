@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-12.
+Stand: 2026-07-16.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -20,7 +20,7 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft/result figures"]
 
-    experiments --> sync_exp["synchronization/<br/>planned single-/multi-knot protocols"]
+    experiments --> sync_exp["synchronization/<br/>paired weak probe; frozen source next"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
@@ -32,7 +32,9 @@ flowchart TD
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
-    src --> sync["synchronization.py<br/>phase-lock, lag response, response rank"]
+    src --> state["state.py<br/>complete memory state; rigid placement"]
+    src --> probe["weak_probe.py<br/>paired pulse + null path"]
+    src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
 
     markov --> features["features.py<br/>memory-summary features"]
@@ -76,6 +78,10 @@ flowchart LR
     sim --> samples["samples x_i"]
     sim --> steps["sample_steps n_i"]
     sim --> memory["memory buffer / weights"]
+    memory --> fullstate["FiniteMemoryState<br/>x + complete retained memory"]
+    fullstate --> rigid["rigid placement<br/>translation / orthogonal rotation"]
+    rigid --> weakprobe["paired weak probe<br/>+delta / -delta / unprobed / eta_zero"]
+    weakprobe --> response["response matrices<br/>energy rank + sign-flip rank"]
     sim --> zfeatures["augmented features z_i"]
     sim --> vfeatures["vector-memory features<br/>optional p_i summaries"]
 
@@ -95,6 +101,7 @@ flowchart LR
     score --> reports
     validation --> reports
     meta --> reports
+    response --> reports
 
     reports --> privacy["privacy_and_control_plan<br/>public sanitized policy"]
     reports --> paper0["Paper 0<br/>technical anchor"]
@@ -118,7 +125,7 @@ flowchart TD
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `synchronization.py` ist aktuell nur eine kleine Diagnostikschicht, `vector_memory.py` ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
+- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `weak_probe.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

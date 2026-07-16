@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-15.
+Stand: 2026-07-16.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -32,7 +32,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
-| `experiments/current/memory/synchronization/` | Innen/Aussen- und Mehrknoten-Synchronisation | geplant | Single-Knot-Observablen und Response-Rank |
+| `experiments/current/memory/synchronization/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
@@ -591,7 +591,8 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/dimensions/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | Paper I bekommt einen lokalen 3D-Memory-Shape-Teaser; starker ambient-unabhaengiger 3D-Claim wird durch `D_mem`/`D_p90`/`D_p95` nicht gestuetzt; `D_spec memory` bleibt Paper-II-Hebel. |
 | `reports/dimensions/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; symmetrische Heat-Kernel- und kNN-Surrogate stuetzen keinen robusten `D_spec ~=3`-Claim; naechster Schritt ist Rohwolken-Snapshot plus relationaler Response-Rang. |
 | `reports/dimensions/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
-| `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`, Baseline gegen `eta_zero`; Shape-Dimension und Heat-Trace-`D_spec` bleiben getrennte Kanaele, Response-Rang wird der nächste Paper-II-Gate. |
+| `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`, Baseline gegen `eta_zero`; Shape-Dimension und Heat-Trace-`D_spec` bleiben getrennte Kanaele, Response-Rang ist der naechste Paper-II-Gate. |
+| `reports/response/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
@@ -654,17 +655,19 @@ Seeded d-alpha-N-Scan 2026-06-30:
 
 ## Innen/Aussen- und Synchronisationsprogramm
 
-Neuer geplanter Pfad:
+Aktiver gestufter Pfad:
 
-| Stufe | Ziel | Messgroessen |
+| Stufe | Status | Messgroessen |
 | --- | --- | --- |
-| Einzelknoten | stabile externe und interne Observablen extrahieren | center, shape tensor, radius, mode coefficients, residence |
-| Basin-Statistik | Seeds als Attraktionskanal-Sampler behandeln | `P(knot type | parameters, seed)` |
-| Zwei-Knoten-Pilot | Synchronisation von zwei Knoten testen | cross-correlation, phase-locking, response delay |
-| Externer Subraum | gemeinsame makroskopische Wechselwirkungsstruktur messen | response matrix, response rank, subspace stability |
+| Vollstaendiger Zustand | erledigt | gemeinsame Translation/Rotation von `x` und Memory, Kraft-/Form-Invarianz |
+| Uniformer Weak Probe | erledigt; isotrope Vollrang-Negativkontrolle | paired response, Nullpfad, `eta_zero`, Signflip-Rang, Linearitaet |
+| Eingefrorener Quellknoten | naechstes Gate | lokalisierte Antwort, Lag, Rang, Subraum- und Orientierungsstabilitaet |
+| Getrennte dynamische Memories | spaeter | one-way/reciprocal response, identity retention, cross-correlation |
+| Gemeinsames Memory | eigene Modellvariante | Massennormierung, Identitaetsverlust, kollektive Moden |
 
-Guardrail: Diese Stufe behauptet keine Quantenfeldtheorie. Sie prueft nur, ob
-synchronisierte Knoten kollektive externe Observablen ausbilden.
+Guardrail: Diese Stufe behauptet keine Quantenfeldtheorie. Uniforme Vollrang-
+Antwort ist keine emergente Dimension; nur lokalisierte, kontrollgetrennte und
+seed-reproduzierbare relationale Antworten koennen Paper-II-Evidenz werden.
 
 ## Historische Skriptfamilien
 

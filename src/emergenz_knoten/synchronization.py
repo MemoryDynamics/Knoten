@@ -23,6 +23,20 @@ class ResponseRankResult:
     cumulative_energy: np.ndarray
 
 
+@dataclass(frozen=True)
+class ResponseRankInferenceResult:
+    rank: int
+    energy_rank: int
+    singular_values: np.ndarray
+    null_thresholds: np.ndarray
+    p_values: np.ndarray
+    significant: np.ndarray
+    n_samples: int
+    n_null: int
+    confidence: float
+    minimum_attainable_p: float
+
+
 def _as_series(values: Iterable[float] | Iterable[Iterable[float]]) -> np.ndarray:
     arr = np.asarray(values, dtype=float)
     if arr.ndim == 1:
@@ -138,6 +152,97 @@ def response_rank(
     rank = int(np.searchsorted(cumulative, energy_threshold, side="left") + 1)
     return ResponseRankResult(rank, singular_values, cumulative)
 
+
+def infer_reproducible_response_rank(
+    response_matrices: Iterable[Iterable[Iterable[float]]],
+    *,
+    confidence: float = 0.90,
+    energy_threshold: float = 0.95,
+    max_exact_samples: int = 12,
+    n_permutations: int = 4096,
+    seed: int = 0,
+) -> ResponseRankInferenceResult:
+    """Infer a seed-reproducible response rank with a sign-flip null.
+
+    The input has shape ``(n_independent_samples, n_outputs, n_inputs)``.
+    For small ensembles all unique two-sided sign patterns are enumerated.
+    The first sign is fixed because a global sign leaves singular values
+    unchanged. Consequently five independent seeds have only 16 unique null
+    patterns and cannot attain a two-sided p-value below 1/16.
+    """
+
+    if not 0.0 < confidence < 1.0:
+        raise ValueError("confidence must satisfy 0 < value < 1")
+    if max_exact_samples < 2:
+        raise ValueError("max_exact_samples must be at least two")
+    if n_permutations < 1:
+        raise ValueError("n_permutations must be positive")
+
+    matrices = np.asarray(response_matrices, dtype=float)
+    if matrices.ndim != 3 or matrices.shape[0] < 2:
+        raise ValueError("response_matrices must have shape (n>=2, outputs, inputs)")
+    if matrices.shape[1] < 1 or matrices.shape[2] < 1:
+        raise ValueError("response matrices must be non-empty")
+    if not np.isfinite(matrices).all():
+        raise ValueError("response_matrices contains non-finite values")
+
+    n_samples = int(matrices.shape[0])
+    observed = np.mean(matrices, axis=0)
+    singular_values = np.linalg.svd(observed, compute_uv=False)
+    energy_rank = response_rank(observed, energy_threshold=energy_threshold).rank
+
+    if n_samples <= max_exact_samples:
+        n_null = 1 << (n_samples - 1)
+        signs = np.ones((n_null, n_samples), dtype=float)
+        for code in range(n_null):
+            for sample in range(1, n_samples):
+                signs[code, sample] = 1.0 if code & (1 << (sample - 1)) else -1.0
+        exact = True
+    else:
+        rng = np.random.default_rng(seed)
+        signs = rng.choice(np.array([-1.0, 1.0]), size=(n_permutations, n_samples))
+        signs[:, 0] = 1.0
+        n_null = int(n_permutations)
+        exact = False
+
+    null_singular_values = np.empty((n_null, singular_values.size), dtype=float)
+    for index, sign_pattern in enumerate(signs):
+        null_mean = np.mean(matrices * sign_pattern[:, None, None], axis=0)
+        null_singular_values[index] = np.linalg.svd(null_mean, compute_uv=False)
+
+    null_thresholds = np.quantile(
+        null_singular_values,
+        confidence,
+        axis=0,
+        method="higher",
+    )
+    exceedances = np.sum(null_singular_values >= singular_values[None, :], axis=0)
+    if exact:
+        p_values = exceedances.astype(float) / float(n_null)
+        minimum_attainable_p = 1.0 / float(n_null)
+    else:
+        p_values = (exceedances.astype(float) + 1.0) / float(n_null + 1)
+        minimum_attainable_p = 1.0 / float(n_null + 1)
+    significant = p_values <= (1.0 - confidence)
+
+    rank = 0
+    for is_significant in significant:
+        if not bool(is_significant):
+            break
+        rank += 1
+
+    return ResponseRankInferenceResult(
+        rank=rank,
+        energy_rank=energy_rank,
+        singular_values=singular_values,
+        null_thresholds=null_thresholds,
+        p_values=p_values,
+        significant=significant,
+        n_samples=n_samples,
+        n_null=n_null,
+        confidence=float(confidence),
+        minimum_attainable_p=float(minimum_attainable_p),
+    )
 
 def shape_tensor(points: Iterable[Iterable[float]]) -> np.ndarray:
     """Return covariance-like shape tensor for a trajectory window."""

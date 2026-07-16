@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-15.
+Stand: 2026-07-16.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -93,7 +93,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | `D_mem ~2.94` im aktuellen `A_att=35`-Slice | seed-stabile numerische Beobachtung einer lokalen, co-moving Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; `D_mem` ist covariance participation der Memory-Cloud, nicht `D_occ`; keine Ableitung von externer `d=3`-Selektion | Paper I als Shape-Diagnostik mit Roundness/Radius/Drift gegen `eta_zero` berichten; Paper II klaert externe/macroskopische 3D-Selektion |
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
-| `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; aktueller Sensitivitaetsreport zeigt starke Bandwidth-/kNN-Abhaengigkeit und keine robuste externe Dimension | Rohpunkte/Snapshot persistieren, D_spec auf echten Memory-Clouds neu messen, dann relationaler Response-Rang |
+| `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; Sensitivitaets- und `N=3M`-Rohsnapshot-Retest zeigen keine robuste externe Dimension | nicht isoliert claimen; nur gemeinsam mit lokalisierter relationaler Response weiterverfolgen |
+| Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Negativkontrolle berichten; naechster Test ist ein lokalisierter eingefrorener Quellknoten |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

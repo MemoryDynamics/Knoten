@@ -31,6 +31,13 @@ from .spectral import (
     SpectralDimensionResult,
     heat_trace_spectral_dimension,
 )
+from .state import (
+    FiniteMemoryState,
+    memory_centroid,
+    memory_shape_tensor,
+    place_finite_memory_state,
+    translate_finite_memory_state,
+)
 from .experiments import (
     SimulationResult,
     SimulationRunner,
@@ -66,12 +73,18 @@ from .knot_score import (
 )
 from .synchronization import (
     LaggedCorrelationResult,
+    ResponseRankInferenceResult,
     ResponseRankResult,
+    infer_reproducible_response_rank,
     lagged_cross_correlation,
     phase_locking_value,
     radius_from_shape,
     response_rank,
     shape_tensor,
+)
+from .weak_probe import (
+    PairedProbeResponse,
+    paired_uniform_probe_response,
 )
 from .vector_memory import (
     VectorMemoryConfig,
@@ -92,8 +105,11 @@ from .markov.validation import (
 
 __all__ = [
     "LaggedCorrelationResult",
+    "ResponseRankInferenceResult",
     "ResponseRankResult",
     "DEPOSITION_KERNELS",
+    "FiniteMemoryState",
+    "PairedProbeResponse",
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
@@ -117,12 +133,15 @@ __all__ = [
     "gaussian_gradient",
     "gaussian_kernel_curvature",
     "heat_trace_spectral_dimension",
+    "infer_reproducible_response_rank",
     "lagged_cross_correlation",
     "load_simulation_result",
     "local_scalar_memory_modes",
     "matched_local_stiffness_renormalization",
     "mean_squared_displacement",
+    "memory_centroid",
     "memory_mean_radius",
+    "memory_shape_tensor",
     "memory_roundness_value",
     "memory_shape_dimension_value",
     "normalize_orientation",
@@ -130,7 +149,9 @@ __all__ = [
     "memory_horizon",
     "occupancy_dimension_value",
     "occupancy_local_slopes",
+    "paired_uniform_probe_response",
     "phase_locking_value",
+    "place_finite_memory_state",
     "radius_from_shape",
     "repulsive_gaussian_gradient",
     "residence_statistics",
@@ -151,6 +172,7 @@ __all__ = [
     "stationary_deposition_weight",
     "stationary_memory_mass",
     "threshold_score",
+    "translate_finite_memory_state",
     "two_scale_force_crossing_radius",
     "update_vector_history",
     "vector_gaussian_field",

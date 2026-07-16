@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-15.
+Stand: 2026-07-16.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -258,9 +258,10 @@ Naechster operativer Schritt:
 Aktueller naechster Schritt:
 
 - Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
-  weiter treiben. Rohsnapshot-Pilot und `N=3M`-Retest sind erledigt; naechstes
-  Gate ist relationaler Response-Rang mit zweitem Knoten oder schwachem
-  externem Feld im Weak-Probe-Setup.
+  weiter treiben. Der gepaarte uniforme Weak-Probe-Pilot ist abgeschlossen
+  und liefert die erwartete isotrope Vollrang-Negativkontrolle. Naechstes Gate
+  ist ein lokalisierter eingefrorener Quellknoten, zuerst geklont und danach
+  aus unabhaengigen Seed-Zustaenden.
 - Keine weiteren Dimensions-Blindscans als Hauptpfad; neue Runs nur, wenn sie
   die Messmethodik oder Response-Frage direkt entscheiden.
 - Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
@@ -268,7 +269,7 @@ Aktueller naechster Schritt:
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Pilot und `N=3M`-Rohsnapshot-Retest sind erledigt. Naechster methodischer Schritt ist Response-Rang im Weak-Probe-Setup.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Retest und uniforme Weak-Probe-Kalibrierung sind erledigt. Naechster methodischer Schritt ist der lokalisierte eingefrorene Quellknoten.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -346,6 +347,12 @@ Status: defensiv lesen; kein `d=3`-Selektionsclaim; aktueller Befund stuetzt ehe
   bis negativ. Interessant fuer Paper II ist `D_spec memory`, das bei grossen
   `d` gegen etwa 3 laeuft, waehrend `D_center` fuer einen einzelnen driftenden
   Knoten eher eindimensional bleibt.
+- Uniformer Weak-Probe-Pilot 2026-07-16: Die kontrollsubtrahierte
+  Memory-Zentrumantwort ist isotrop und vollrangig (`3` in `d=3`, `10` in
+  `d=10`); die Formantwort ist ueber Seeds nicht reproduzierbar. Das ist eine
+  belastbare Negativkontrolle gegen einen aus uniformer Translation gelesenen
+  niedrigdimensionalen Response-Claim, entscheidet aber keine lokalisierte
+  relationale Wechselwirkung.
 
 Naechster sinnvoller Schritt ist kein weiterer grosser Blindscan, sondern eine
 gezielte Reconciliation der Dimensionsdiagnostik: historische
@@ -368,26 +375,47 @@ externen Wechselwirkungssektor ausbilden?
 
 Prioritaet:
 
-1. Einzelknoten-Observablen extrahieren: Zentrum, Formtensor, Radius,
-   lokale Moden, optionale Phase, Residence.
-2. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
-3. Zwei-Knoten-Synchronisation testen: shared memory, weak cross-potential,
-   no-coupling control. Mesonartige Zwei-Knoten-Bindung und baryonartige
-   Drei-Knoten-Bindung sind getrennte Folgeprogramme, nicht Voraussetzung fuer
-   den Einzelknoten-Score.
-4. Externen Response-Rang messen: nicht interne Dimension, sondern Rang und
-   Stabilitaet der Wechselwirkungs-/Antwortmatrix. Eine spaetere Ladungs-
-   diagnose muss als Antwort auf andere Knoten definiert werden, nicht als
-   isoliertes Ein-Knoten-Label.
-5. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
+1. Abgeschlossen: vollstaendiger `FiniteMemoryState` sowie gemeinsame
+   Translation/orthogonale Rotation von Position und Memory-Puffer.
+   Selbstkraft- und Form-Invarianz sind synthetisch getestet.
+2. Abgeschlossen: gepaarte uniforme Weak-Probe-Kalibrierung auf den vorhandenen
+   `N=3M`, `d=3/10`, Seeds `1..5` Snapshots. `+delta`, `-delta`, ungeprobter
+   Pfad und `eta_zero` teilen jeweils dieselbe Zukunftsrauschfolge. Die
+   Probestarken `0.03` und `0.10` Memory-Radien sind linear und nicht
+   destruktiv. Report:
+   `reports/response/weak_probe_calibration_2026-07-16.md`.
+3. Abgeschlossen: exakte Seed-Signflip-Inferenz neben deskriptivem
+   95-Prozent-Energierang. Mit fuenf Seeds ist `p_min=1/16=0.0625`; der Pilot
+   darf daher nur auf 90-Prozent-Niveau explorativ gelesen werden.
+4. Naechstes Gate: eingefrorenen Quellknoten einsetzen. Zunaechst denselben
+   stabilen Snapshot klonen, vollstaendig versetzen und ueber kontrollierte
+   orthogonale Lagen pruefen; danach unabhaengige Seed-Zustaende derselben
+   Basin-/Score-Klasse verwenden. Der Source-Puls ist lokalisiert und wird
+   gegen `no source`, `eta_zero` und uniformen Probe kalibriert.
+5. Distanz und Kreuzkopplung ueber dimensionslose Groessen waehlen: Abstand
+   relativ zu Source-/Target-Radius und Kernelreichweite; Stoerung relativ zur
+   Radiusverschiebung pro Memory-Zeit. Erst kleine diskrete Kalibrierpunkte,
+   kein Distanz-/Kopplungs-Blindscan.
+6. Erst nach dem eingefrorenen Source-Test zwei dynamische Knoten mit getrennten
+   Memory-Feldern koppeln: `no coupling`, einseitiges Lesen und reziprokes
+   Lesen. Gemeinsames Memory ist wegen Massennormierung und Identitaetsverlust
+   eine spaetere eigene Modellvariante.
+7. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
+   Wechselwirkungs-/Antwortmatrix messen. Exakt `3` wird nicht vorgegeben;
+   interessant ist ein kontrollgetrennter niedriger Rang, der bei hoeherer
+   Einbettungsdimension ueber Seeds, Lags, Probestarken und Basisrotationen
+   stabil ist.
+8. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
+9. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
    momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
    Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
-6. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
-   Parameterstoerungen ueber Paper-III-Analogien sprechen.
+10. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+    Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt nach Paper-I-Confinement: `experiments/current/memory/synchronization/` mit
-Single-Knot-Observable-Extractor und synthetischen Tests fuer Phase-Locking,
-Cross-Correlation und Response-Rank fuellen.
+Naechster konkreter Schritt: ein Frozen-Source-Protokoll und einen kleinen
+Runner auf dem validierten Snapshot-/Probe-Kern implementieren. Der erste Lauf
+verwendet geklonte Source-/Target-Zustaende; mindestens sechs, vorzugsweise zehn
+unabhaengige Seedpaare sind erst fuer den anschliessenden Signifikanzlauf noetig.
 
 ### P2.4 Paper II / III Guardrails
 

@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from emergenz_knoten import (
+    infer_reproducible_response_rank,
     lagged_cross_correlation,
     phase_locking_value,
     radius_from_shape,
@@ -59,3 +60,25 @@ def test_shape_tensor_and_radius_are_translation_invariant():
     assert tensor.shape == (2, 2)
     np.testing.assert_allclose(tensor, shifted_tensor)
     assert radius_from_shape(tensor) == pytest.approx(np.sqrt(2.0))
+
+
+def test_response_rank_inference_separates_energy_from_exact_significance():
+    matrices = np.stack(
+        [np.diag([3.0 + 0.1 * index, 2.0 - 0.05 * index, 0.0]) for index in range(5)]
+    )
+
+    exploratory = infer_reproducible_response_rank(matrices, confidence=0.90)
+    conventional = infer_reproducible_response_rank(matrices, confidence=0.95)
+
+    assert exploratory.energy_rank == 2
+    assert exploratory.rank == 2
+    assert exploratory.n_null == 16
+    assert exploratory.minimum_attainable_p == pytest.approx(1.0 / 16.0)
+    assert exploratory.p_values[:2].tolist() == pytest.approx([1.0 / 16.0, 1.0 / 16.0])
+    assert conventional.energy_rank == 2
+    assert conventional.rank == 0
+
+
+def test_response_rank_inference_rejects_single_matrix():
+    with pytest.raises(ValueError, match="n>=2"):
+        infer_reproducible_response_rank(np.eye(3)[None, :, :])

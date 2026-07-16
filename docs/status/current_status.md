@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-15.
+Stand: 2026-07-16.
 
 ## Repository
 
@@ -25,6 +25,11 @@ Stand: 2026-07-15.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
 - `knot_score.py`: Scorecard-Helfer v0.3-v0.5 fuer Residence, Kompaktheit, Voxelstabilitaet, interne Dimension und Memory-Cloud-Form.
 - `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
+- `state.py`: unveraenderlicher vollstaendiger Finite-Memory-Zustand sowie
+  gemeinsame Translation und orthogonale Platzierung von Position und Memory.
+- `weak_probe.py`/`synchronization.py`: gepaarte uniforme Probeantwort mit
+  gemeinsamem Zukunftsrauschen, ungeprobtem Pfad, Response-Matrizen und exakter
+  Seed-Signflip-Ranginferenz.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
   row-stochastic operators, implied timescales, CK-Fehlern und slow-mode
@@ -92,6 +97,14 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   `reports/dimensions/dspec_sensitivity_2026-07-15.md`,
   `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`,
   `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
+- Uniformer Weak-Probe-Pilot 2026-07-16: Vollstaendige `N=3M`-Snapshots fuer
+  `d=3/10`, Seeds `1..5`, wurden fuer `0.03` und `0.10` Memory-Radien gepaart
+  perturbiert. Die Bare-Position reproduziert `I_d` bis `4.7e-12`; die
+  kontrollsubtrahierte Memory-Zentrumantwort ist isotrop vollrangig (`3` bzw.
+  `10`), waehrend die Formantwort keinen seed-reproduzierbaren Signflip-Rang
+  besitzt. Das ist eine uniforme Vollrang-Negativkontrolle, kein externer
+  Dimensionsbefund. Report:
+  `reports/response/weak_probe_calibration_2026-07-16.md`.
 
 ## Long-Run-Status
 
@@ -474,17 +487,16 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Fuer Paper I als naechstes einen gezielten `N=30M`-Hybrid-Trace fuer
-   `A_att=20/35` gegen `eta_zero` rechnen: `--trace-points 100`,
-   `--trace-spacing log`, `--trace-every 1` und
-   `--trace-window-memory-times 100`. Akzeptanzmetriken sind Trend-Radius,
-   radiusnormalisierte Trend-Center-Drift und Memory-Shape; Spin und
-   dynamic-inside Residence bleiben Hilfsdiagnostik.
-2. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis weiter als separaten
+1. Frozen-Source-Protokoll implementieren: stabilen Snapshot als Target um den
+   Memory-Schwerpunkt platzieren, geklonten Source vollstaendig versetzen und
+   einfrieren, Source-Lage mit `+delta/-delta` lokal perturbieren.
+2. Source-Abstand und Kreuzkopplung dimensionslos kalibrieren: Kernelreichweite,
+   Knotradius und Verschiebung pro Memory-Zeit; Kontrollen sind `no source`,
+   `eta_zero` und der abgeschlossene uniforme Probe.
+3. Zuerst Clone-/Orientierungs-Pilot in `d=3/10`; danach mindestens sechs und
+   vorzugsweise zehn unabhaengige Seedpaare fuer eine 5-Prozent-Signflip-
+   Entscheidung. Gemeinsames Memory bleibt ausserhalb dieses Protokolls.
+4. Fuer Paper III/Photon-/Wellenrichtung Vektorgedaechtnis als separaten
    Modellzweig behandeln; Spin/Zirkulation und Ladung/Response sind Zukunfts-
    observablen, keine aktuellen Paper-I-Claims.
-3. Naechste Vektormemory-Piloten: Feature-Sensitivitaet, `alignment` gegen
-   `transverse_2d`, `lambda_v`-Variation und shuffled-vector-Kontrolle.
-4. Zero-Mean/Matched-Deposition nur unter korrigierter Sign-Konvention wieder
-   aufnehmen und nur mit klarer Mechanismusfrage.
 5. Dimension-Reproduction bleibt Reconciliation-Aufgabe, nicht Blindscan.
