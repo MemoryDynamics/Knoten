@@ -79,15 +79,19 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Bandwidth und kNN-Skala bewegen Kovarianz-Surrogate um order-one Betraege.
   Der Rohsnapshot-Pilot (`N=200k`, `d=3/10`, Seeds 1-3) validiert den echten
   Snapshot-Auswertepfad, reproduziert aber noch kein robustes Heat-Trace-Nahe-3-
-  Signal; fuer Paper II braucht es einen laengeren Rohsnapshot-Retest.
+  Signal. Der laengere Rohsnapshot-Retest (`N=3M`, `d=3/10`, Seeds 1-5)
+  bestaetigt diese Trennung: `d=3` bleibt shape-nahe-drei, aber Heat-Trace
+  liegt deutlich darunter; `d=10`-Baseline bleibt shape-hochdimensional ohne
+  akzeptiertes Heat-Trace-Skalierungsfenster.
 - 3D-Audit 2026-07-15: `D_p90`/`D_p95` bestaetigen, dass die interne
   Memory-Varianz in hohen Einbettungen nicht auf drei Achsen kollabiert.
   Paper-I-tauglich bleibt der lokale `d=3`-Memory-Shape-Teaser; Paper II
-  braucht einen laengeren Rohsnapshot-Dspec-Retest auf echten Wolken und
-  danach relationale Response-Dimensionen.
+  sollte jetzt relationale Response-Dimensionen statt isolierter D_spec-Claims
+  testen.
   Reports: `reports/dimensions/dimension_claim_audit_2026-07-15.md`,
   `reports/dimensions/dspec_sensitivity_2026-07-15.md`,
-  `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`.
+  `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`,
+  `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
 
 ## Long-Run-Status
 

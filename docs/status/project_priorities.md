@@ -246,12 +246,21 @@ Naechster operativer Schritt:
     II zaehlen stabile aktive Dimensionen bzw. Response-Raenge gegen Kontrollen.
     Report: `reports/long_runs/scalar_hardening/n_dependence_recheck_2026-07-16.md`.
 
+28. Abgeschlossen: Rohsnapshot-D_spec-Retest. Ergebnis: `N=3M` fuer `d=3`
+    und `d=10` mit Seeds 1-5 bestaetigt die Trennung der Dimensionkanaele.
+    `d=3`-Baseline bleibt in der gewichteten Shape-Dimension nahe drei, aber
+    Heat-Trace-`D_spec` bleibt deutlich unter drei. `d=10`-Baseline bleibt
+    shape-hochdimensional und hat kein akzeptiertes Heat-Trace-Skalierungsfenster.
+    Damit ist isoliertes `D_spec` kein belastbarer 3D-Claim; naechster Gate ist
+    relationaler Response-Rang. Report:
+    `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
+
 Aktueller naechster Schritt:
 
 - Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
-  weiter treiben. Der Rohsnapshot-Pilot ist erledigt; naechstes Gate ist ein
-  laengerer Rohsnapshot-Retest auf dem etablierten Long-Run-Slice, danach erst
-  relationaler Response-Rang mit zweitem Knoten oder schwachem externem Feld.
+  weiter treiben. Rohsnapshot-Pilot und `N=3M`-Retest sind erledigt; naechstes
+  Gate ist relationaler Response-Rang mit zweitem Knoten oder schwachem
+  externem Feld im Weak-Probe-Setup.
 - Keine weiteren Dimensions-Blindscans als Hauptpfad; neue Runs nur, wenn sie
   die Messmethodik oder Response-Frage direkt entscheiden.
 - Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
@@ -259,7 +268,7 @@ Aktueller naechster Schritt:
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit und Rohsnapshot-Pilot sind erledigt. Naechster methodischer Schritt ist ein laengerer Rohsnapshot-D_spec-Retest, danach Response-Rang.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Pilot und `N=3M`-Rohsnapshot-Retest sind erledigt. Naechster methodischer Schritt ist Response-Rang im Weak-Probe-Setup.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
