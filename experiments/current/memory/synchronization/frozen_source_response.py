@@ -72,17 +72,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--report",
         type=Path,
-        default=Path("reports/response/frozen_source_pilot_2026-07-17.md"),
+        default=Path("reports/response/frozen_source_pilot_2026-07-16.md"),
     )
     parser.add_argument(
         "--summary-json",
         type=Path,
-        default=Path("reports/response/frozen_source_pilot_summary_2026-07-17.json"),
+        default=Path("reports/response/frozen_source_pilot_summary_2026-07-16.json"),
     )
     parser.add_argument(
         "--figure-dir",
         type=Path,
-        default=Path("figures/draft/response/frozen_source_pilot_2026-07-17"),
+        default=Path("figures/draft/response/frozen_source_pilot_2026-07-16"),
     )
     return parser.parse_args()
 
