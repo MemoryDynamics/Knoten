@@ -9,7 +9,7 @@ import math
 import os
 from pathlib import Path
 import subprocess
-from typing import Any, Iterable
+from typing import Any
 
 import matplotlib
 import numpy as np
