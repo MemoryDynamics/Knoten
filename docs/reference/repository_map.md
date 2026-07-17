@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-16.
+Stand: 2026-07-17.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -20,14 +20,14 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft/result figures"]
 
-    experiments --> sync_exp["synchronization/<br/>paired weak probe + frozen source"]
+    experiments --> sync_exp["synchronization/<br/>weak probe, frozen field audit, distance ladder"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
-    src --> kernels["kernels.py<br/>Memory weights, deposition modes, Gaussian kernels"]
+    src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> knot_score["knot_score.py<br/>scorecard helpers v0.3-v0.5"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
@@ -142,7 +142,11 @@ flowchart LR
     z10 --> paired
     paired --> free["free self-dynamics<br/>no cross coupling"]
     paired --> probe["weak localized frozen source"]
-    paired --> multi["later: independent / dynamic knots"]
+    probe --> fieldaudit["static potential / force audit<br/>sign, parity, monopole error"]
+    probe --> ladder["calibrated distance ladder<br/>target deformation / response rank"]
+    fieldaudit --> channel["next: signed scalar cross-channel<br/>q=0 and sign reversal"]
+    ladder --> channel
+    channel --> multi["later: independent / dynamic knots"]
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
     multi --> delta
@@ -155,7 +159,7 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests.
+- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests, nicht die minimale Loesung fuer ein skalares Ladungsvorzeichen.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

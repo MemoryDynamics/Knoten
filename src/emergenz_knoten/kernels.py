@@ -110,7 +110,9 @@ def effective_gaussian_parameters(
         dep_sigma = deposition_sigma
     else:
         if deposition_sigma != 0.0:
-            raise ValueError("deposition_sigma must be zero for matched_gaussian deposition")
+            raise ValueError(
+                "deposition_sigma must be zero for matched_gaussian deposition"
+            )
         dep_sigma = sigma if matched_sigma is None else matched_sigma
     if dep_sigma <= 0.0 or not np.isfinite(dep_sigma):
         raise ValueError("deposition_sigma must be positive for finite deposition")
@@ -151,6 +153,83 @@ def effective_double_gaussian_parameters(
         "amplitude_rep": rep_amp,
         "amplitude_att": att_amp,
     }
+
+
+def gaussian_potential(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma: float,
+    amplitude: float = 1.0,
+) -> float:
+    """Weighted ``amplitude * exp(-r^2/(2 sigma^2))`` potential."""
+
+    x_arr = np.asarray(x, dtype=float)
+    mem = np.asarray(memory, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    if mem.size == 0:
+        return 0.0
+    if x_arr.ndim != 1:
+        raise ValueError("x must be one-dimensional")
+    if mem.ndim != 2 or mem.shape[1] != x_arr.size:
+        raise ValueError("memory must have shape (n_memory, dim)")
+    if w.ndim != 1 or mem.shape[0] != w.shape[0]:
+        raise ValueError("weights must match memory length")
+    if sigma <= 0.0 or not np.isfinite(sigma):
+        raise ValueError("sigma must be positive and finite")
+    if not np.isfinite(amplitude):
+        raise ValueError("amplitude must be finite")
+    if not np.isfinite(x_arr).all() or not np.isfinite(mem).all():
+        raise ValueError("field coordinates must be finite")
+    if not np.isfinite(w).all():
+        raise ValueError("weights must be finite")
+    dx = x_arr[None, :] - mem
+    r2 = np.einsum("ij,ij->i", dx, dx)
+    return float(np.sum(w * amplitude * np.exp(-0.5 * r2 / (sigma * sigma))))
+
+
+def double_gaussian_potential(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+) -> float:
+    """Potential ``A_rep G_rep - A_att G_att`` after write convolution."""
+
+    x_arr = np.asarray(x, dtype=float)
+    if x_arr.ndim != 1:
+        raise ValueError("x must be one-dimensional")
+    params = effective_double_gaussian_parameters(
+        dim=x_arr.size,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    rep = gaussian_potential(
+        x_arr,
+        memory,
+        weights,
+        sigma=params["sigma_rep"],
+        amplitude=params["amplitude_rep"],
+    )
+    att = gaussian_potential(
+        x_arr,
+        memory,
+        weights,
+        sigma=params["sigma_att"],
+        amplitude=params["amplitude_att"],
+    )
+    return rep - att
 
 
 def gaussian_gradient(

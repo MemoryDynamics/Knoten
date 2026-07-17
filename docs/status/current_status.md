@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-16.
+Stand: 2026-07-17.
 
 ## Repository
 
@@ -18,7 +18,8 @@ Stand: 2026-07-16.
 - `core.py`: `SimulationConfig`, finite-memory Simulation, Numba-Variante,
   Memory-Horizon `min(max_memory, memory_factor / alpha)`, `memory_mass`/`M0`
   sowie ein ringgepufferter Finalzustands-Runner ohne Trajektorienspeicherung.
-- `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k` und Gaussian-Kernelgradienten; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
+- `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k`
+  sowie konsistente Gaussian-Potential- und Gradient-APIs; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   voxelbasierte Residence-Statistiken, neue Center-/Memory-Ball-Residence, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
@@ -34,7 +35,8 @@ Stand: 2026-07-16.
   Seed-Signflip-Ranginferenz.
 - `frozen_source.py`: lokalisierte eingefrorene Quellfelder mit getrennter
   Selbst-/Kreuzkopplung, gepaarten Quelllagen, freiem Pfad und exakter
-  Null-Kreuzkopplungskontrolle.
+  Null-Kreuzkopplungskontrolle; Kreuzkopplung kann auf die anfaengliche
+  Richtungsdrift oder die realisierte Common-Noise-Bare-Antwort kalibriert werden.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
   row-stochastic operators, implied timescales, CK-Fehlern und slow-mode
@@ -132,6 +134,18 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Das ist die erwartete Symmetrie des isotropen skalaren Fernfeldkernels,
   keine externe 3D-Selektion. Report:
   `reports/response/frozen_source_pilot_2026-07-16.md`.
+
+- Frozen-Source-Feld- und Distanzpruefung 2026-07-17: Der reale
+  Checkpoint-Feldverlauf stimmt von `5 R_mem` bis `1 sigma_rep` praktisch mit
+  einem Punktmonopol ueberein. Beim aktuellen `A_att=35`-Kern gibt es weder
+  analytisch noch richtungsweise einen Kraftvorzeichenwechsel; alle geprueften
+  Richtungen sind attraktiv. Die Distanzleiter trifft die realisierte Bare-
+  Verschiebung von `0.03 R_mem` auf etwa `1e-4` relativ und behaelt in `d=3`
+  und `d=10` vollen Ambient-Rang. Die groesste normierte Target-Deformation
+  bleibt unter `0.002`. Das ist ein vorzeichenloser skalarer, mass-like
+  Kreuzkanal und kein Neutralitaets-, Ladungs-, Reziprozitaets- oder 3D-Claim.
+  Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` und
+  `reports/response/frozen_source_distance_ladder_2026-07-17.md`.
 
 ## Long-Run-Status
 
@@ -514,18 +528,20 @@ Negativkontrollen gegeneinander pruefen.
 
 ## Naechste technische Schritte
 
-1. Frozen-Source-Distanzleiter auf den bestehenden `N=1e8`-Checkpoints:
-   knotennah in Einheiten des Memory-Radius bis zum Fernfeld bei
-   `1 sigma_rep`; Kreuzkopplung weiter auf dieselbe schwache Baseline-
-   Verschiebung kalibrieren und `delta` lokal zur jeweiligen Skala waehlen.
-2. Fuer jede Distanz radiale/transversale Symmetrie, Formantwort,
-   Orientierungsabhaengigkeit, Identitaetsverlust und Nullkontrollen gemeinsam
-   auswerten. Ziel ist die Trennung von universeller Kernelantwort und
-   zustandsabhaengiger Knotenstruktur, nicht ein weiterer Rangclaim.
-3. Erst bei nachweisbarer zustands- oder orientierungsabhaengiger Antwort
-   mindestens sechs, vorzugsweise zehn unabhaengige Source-/Target-Seedpaare
-   bilden; danach kleine Basisrotations- und Abstandskontrollen.
-4. Einseitig dynamische und spaeter reziproke Kopplung erst nach diesem Gate.
-   Gemeinsames Memory bleibt ausserhalb des Frozen-Source-Protokolls.
-5. Vektorgedaechtnis fuer Paper III getrennt halten; Spin, Phase, Ladung und
-   photonartige Moden bleiben Zukunftsobservablen ohne aktuellen Claim.
+1. Minimalen signierten skalaren Kreuzkanal spezifizieren, getrennt vom
+   unveraenderten selbstkonfinierenden `rho>=0`-Kanal. Pflichtkontrollen:
+   `s_target=0`, `s_source=0`, einseitiger Vorzeichenwechsel, gleiches
+   Zukunftsrauschen und unveraenderte freie Selbstentwicklung.
+2. Die Vorzeichenkonvention des Kreuzkerns explizit entscheiden. Ein Label darf
+   erst dann charge-like heissen, wenn der Vorzeichenwechsel die Antwort
+   reproduzierbar umkehrt und like/unlike Paarungen getrennt getestet sind.
+3. Aufloesung von Selbst- und Kreuzkernel trennen. Der aktuelle Kreuzkernel ist
+   gegenueber `R_mem` um mehrere Tausend breiter und sieht nur einen
+   Punktmonopol; ein schmalerer oder momentengekoppelter Kanal braucht eigene
+   Stabilitaets- und Nulltests.
+4. Erst danach einseitig dynamische und reziproke Zwei-Knoten-Arme mit getrennten
+   Memory-Feldern starten. Fuer Inferenz mindestens sechs, vorzugsweise zehn
+   unabhaengige Source-/Target-Seedpaare bilden.
+5. Vektorgedaechtnis fuer Paper III getrennt halten. Es wird erst fuer
+   Orientierung, Phase, Zirkulation oder Polarisation benoetigt; Ladungsvorzeichen
+   allein rechtfertigt keinen Vektorkanal.

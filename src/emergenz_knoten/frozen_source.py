@@ -41,6 +41,7 @@ class FrozenSourceCalibration:
     source_center_offset: np.ndarray
     target_radius: float
     baseline_gradient_norm: float
+    baseline_directional_drift: float
     cross_eta: float
 
 
@@ -145,13 +146,13 @@ def _source_placements(
     )
 
 
-def _source_gradient_norm(
+def _source_gradient(
     target_state: FiniteMemoryState,
     source_memory: np.ndarray,
     source_state: FiniteMemoryState,
     source_config: SimulationConfig,
-) -> float:
-    gradient = double_gaussian_gradient(
+) -> np.ndarray:
+    return double_gaussian_gradient(
         target_state.x,
         source_memory,
         source_state.weights,
@@ -162,7 +163,24 @@ def _source_gradient_norm(
         deposition_kernel=source_config.deposition_kernel,
         deposition_sigma=source_config.deposition_sigma,
     )
-    return float(np.linalg.norm(gradient))
+
+
+def _source_gradient_norm(
+    target_state: FiniteMemoryState,
+    source_memory: np.ndarray,
+    source_state: FiniteMemoryState,
+    source_config: SimulationConfig,
+) -> float:
+    return float(
+        np.linalg.norm(
+            _source_gradient(
+                target_state,
+                source_memory,
+                source_state,
+                source_config,
+            )
+        )
+    )
 
 
 def _initial_gradient_norms(
@@ -204,9 +222,10 @@ def calibrate_frozen_source_cross_eta(
     """Calibrate cross-coupling from the unperturbed initial source force.
 
     The calibration solves
-    eta_cross * |grad Phi_source| * pulse_steps = fraction * target_radius.
-    It fixes a transparent weak-interaction scale; it does not impose the
-    nonlinear displacement after a complete pulse.
+    ``eta_cross * dot(-grad Phi_source, source_direction) * pulse_steps
+    = response_fraction * target_radius``. It fixes a transparent weak-
+    interaction scale; it does not impose the nonlinear displacement after
+    a complete pulse.
     """
 
     validate_simulation_config(target_config)
@@ -230,21 +249,30 @@ def calibrate_frozen_source_cross_eta(
         baseline_center,
         rotation=source_rotation,
     )
-    gradient_norm = _source_gradient_norm(
+    gradient = _source_gradient(
         target_state,
         baseline_source.memory,
         source_state,
         source_cfg,
     )
+    gradient_norm = float(np.linalg.norm(gradient))
     if gradient_norm <= np.finfo(float).eps:
         raise ValueError("initial frozen-source gradient is too small to calibrate")
+    source_direction = offset / np.linalg.norm(offset)
+    directional_drift = float(np.dot(-gradient, source_direction))
+    if directional_drift <= np.finfo(float).eps:
+        raise ValueError(
+            "initial frozen-source drift does not point toward the source centre"
+        )
     target_radius = float(
         np.sqrt(max(np.trace(memory_shape_tensor(target_state)), 0.0))
     )
     if target_radius <= 0.0:
         raise ValueError("target memory radius must be positive")
     cross_eta = (
-        float(response_fraction) * target_radius / (float(pulse_steps) * gradient_norm)
+        float(response_fraction)
+        * target_radius
+        / (float(pulse_steps) * directional_drift)
     )
     return FrozenSourceCalibration(
         response_fraction=float(response_fraction),
@@ -252,6 +280,7 @@ def calibrate_frozen_source_cross_eta(
         source_center_offset=offset,
         target_radius=target_radius,
         baseline_gradient_norm=gradient_norm,
+        baseline_directional_drift=directional_drift,
         cross_eta=float(cross_eta),
     )
 

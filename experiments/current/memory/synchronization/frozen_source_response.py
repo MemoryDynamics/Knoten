@@ -193,6 +193,76 @@ def _zero_cross_error(response: Any) -> float:
     return float(max(np.max(np.abs(array)) for array in arrays))
 
 
+def refine_cross_eta_for_realized_fraction(
+    case: CheckpointCase,
+    *,
+    directions: np.ndarray,
+    source_center_offset: np.ndarray,
+    perturbation: float,
+    noise: np.ndarray,
+    pulse_steps: int,
+    target_fraction: float,
+    initial_cross_eta: float,
+    relative_tolerance: float = 1e-4,
+    max_expansions: int = 16,
+    max_iterations: int = 24,
+) -> tuple[float, float, int]:
+    """Match the realized bare displacement under the supplied future noise."""
+
+    if target_fraction <= 0.0 or not np.isfinite(target_fraction):
+        raise ValueError("target_fraction must be positive and finite")
+    if initial_cross_eta <= 0.0 or not np.isfinite(initial_cross_eta):
+        raise ValueError("initial_cross_eta must be positive and finite")
+    eta_zero = replace(case.config, eta=0.0)
+    direction = source_center_offset / np.linalg.norm(source_center_offset)
+
+    def realized_fraction(cross_eta: float) -> float:
+        response = paired_frozen_source_response(
+            case.state,
+            case.state,
+            eta_zero,
+            directions=directions[:1],
+            source_center_offset=source_center_offset,
+            perturbation=perturbation,
+            noise=noise[:pulse_steps],
+            sample_steps=[pulse_steps],
+            cross_eta=cross_eta,
+            pulse_steps=pulse_steps,
+        )
+        displacement = response.baseline_positions[0] - response.free_positions[0]
+        return float(np.dot(direction, displacement) / case.initial_radius)
+
+    low_eta = 0.0
+    low_value = 0.0
+    high_eta = float(initial_cross_eta)
+    high_value = realized_fraction(high_eta)
+    expansions = 0
+    while high_value < target_fraction and expansions < max_expansions:
+        low_eta = high_eta
+        low_value = high_value
+        high_eta *= 2.0
+        high_value = realized_fraction(high_eta)
+        expansions += 1
+    if high_value < target_fraction:
+        raise ValueError("could not bracket the requested realized source displacement")
+
+    tolerance = relative_tolerance * target_fraction
+    for iteration in range(1, max_iterations + 1):
+        midpoint = 0.5 * (low_eta + high_eta)
+        value = realized_fraction(midpoint)
+        if abs(value - target_fraction) <= tolerance:
+            return midpoint, value, expansions + iteration
+        if value < target_fraction:
+            low_eta = midpoint
+            low_value = value
+        else:
+            high_eta = midpoint
+            high_value = value
+    if abs(low_value - target_fraction) < abs(high_value - target_fraction):
+        return low_eta, low_value, expansions + max_iterations
+    return high_eta, high_value, expansions + max_iterations
+
+
 def run_checkpoint_case(
     case: CheckpointCase,
     *,
@@ -202,7 +272,10 @@ def run_checkpoint_case(
     pulse_memory_times: float,
     lag_memory_times: list[float],
     noise_base_seed: int,
+    calibration_mode: str = "initial",
 ) -> list[dict[str, Any]]:
+    if calibration_mode not in {"initial", "realized"}:
+        raise ValueError("calibration_mode must be initial or realized")
     if not np.isfinite(interaction_fraction) or interaction_fraction <= 0.0:
         raise ValueError("interaction_fraction must be positive and finite")
     if any(value <= 0.0 for value in perturbation_sigma_rep):
@@ -252,6 +325,10 @@ def run_checkpoint_case(
         pulse_steps=pulse_steps,
     )
 
+    initial_cross_eta = calibration.cross_eta
+    realized_calibration_fraction: float | None = None
+    calibration_iterations = 0
+
     common = {
         "directions": directions,
         "source_center_offset": source_offset,
@@ -259,6 +336,21 @@ def run_checkpoint_case(
         "sample_steps": sample_steps,
         "pulse_steps": pulse_steps,
     }
+    if calibration_mode == "realized":
+        refined_eta, realized_calibration_fraction, calibration_iterations = (
+            refine_cross_eta_for_realized_fraction(
+                case,
+                directions=directions,
+                source_center_offset=source_offset,
+                perturbation=min(perturbation_sigma_rep) * sigma_rep,
+                noise=noise,
+                pulse_steps=pulse_steps,
+                target_fraction=interaction_fraction,
+                initial_cross_eta=initial_cross_eta,
+            )
+        )
+        calibration = replace(calibration, cross_eta=refined_eta)
+
     zero_cross = paired_frozen_source_response(
         case.state,
         case.state,
@@ -357,9 +449,16 @@ def run_checkpoint_case(
                 "lag_updates": lag_updates,
                 "sample_steps": sample_steps,
                 "calibration": {
+                    "mode": calibration_mode,
+                    "initial_cross_eta": initial_cross_eta,
+                    "realized_calibration_fraction": realized_calibration_fraction,
+                    "iterations": calibration_iterations,
                     "cross_eta": calibration.cross_eta,
                     "baseline_initial_gradient_norm": (
                         calibration.baseline_gradient_norm
+                    ),
+                    "baseline_directional_drift": (
+                        calibration.baseline_directional_drift
                     ),
                     "perturbed_gradient_norm_min": float(np.min(initial_norms)),
                     "perturbed_gradient_norm_max": float(np.max(initial_norms)),

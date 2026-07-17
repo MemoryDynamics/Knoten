@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-16.
+Stand: 2026-07-17.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -56,6 +56,14 @@ Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
 Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
 repulsiv, `A_att` breit attraktiv im Potentialmodell. Der `N=30M`, `epsilon=1e-4`-Hybrid-Trace fuer `A_att=20/35` trennt aktive Laeufe in co-moving Radius, Drift/Radius, Memory-Dimension und Roundness klar von `eta_zero`; `A_att=35` ist der aktuelle skalare Referenzkandidat. Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`, also keinen kontrollgetrennten skalaren Oszillator. Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars, nicht fuer den Spin-Scalar. Fuer Paper I bleibt daher Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
 
+
+The static field audit and calibrated distance ladder sharpen the interaction
+interpretation: with `A_att=35`, the scalar point-source field is attractive at
+all tested radii, and the stored d3/d10 clouds are unresolved by the much broader
+cross-kernel. The full Ambient-Rang response is therefore expected. The current
+`rho>=0` channel has no knot-specific sign and cannot support charge or
+neutrality claims. A signed scalar cross-channel is the minimal next test;
+vector memory remains reserved for oriented observables.
 ## Paper II: Propagation and Spacetime Kinematics
 
 Status: Folgeprogramm.
@@ -94,7 +102,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | `D_mem ~2.94` im aktuellen `A_att=35`-Slice | seed-stabile numerische Beobachtung einer lokalen, co-moving Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; `D_mem` ist covariance participation der Memory-Cloud, nicht `D_occ`; keine Ableitung von externer `d=3`-Selektion | Paper I als Shape-Diagnostik mit Roundness/Radius/Drift gegen `eta_zero` berichten; Paper II klaert externe/macroskopische 3D-Selektion |
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
 | `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; Sensitivitaets- und `N=3M`-Rohsnapshot-Retest zeigen keine robuste externe Dimension | nicht isoliert claimen; nur gemeinsam mit lokalisierter relationaler Response weiterverfolgen |
-| Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Negativkontrolle berichten; naechster Test ist ein lokalisierter eingefrorener Quellknoten |
+| Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
+| Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | nicht gestuetzt: der aktuelle `rho>=0`-Cross-Kanal ist vorzeichenlos, der `A_att=35`-Punktkern ueberall attraktiv und die Quelle unaufgeloest; bisher nur einseitiger Frozen-Source-Test | signierten skalaren Cross-Kanal mit Null-, Label-Flip- und like/unlike Kontrollen testen; danach Reziprozitaet |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

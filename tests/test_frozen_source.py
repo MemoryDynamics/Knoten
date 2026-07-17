@@ -126,13 +126,39 @@ def test_cross_eta_calibration_matches_requested_baseline_fraction() -> None:
 
     reconstructed = (
         calibration.cross_eta
-        * calibration.baseline_gradient_norm
+        * calibration.baseline_directional_drift
         * calibration.pulse_steps
         / calibration.target_radius
     )
     assert reconstructed == pytest.approx(0.03)
     np.testing.assert_array_equal(calibration.source_center_offset, [1.0, 0.0])
     assert calibration.cross_eta > 0.0
+
+
+def test_cross_eta_uses_source_axis_projection_for_off_center_visible_state() -> None:
+    base = _target_state()
+    target = FiniteMemoryState(
+        x=np.array([0.0, 0.08]),
+        memory=base.memory,
+        weights=base.weights,
+    )
+    calibration = calibrate_frozen_source_cross_eta(
+        target,
+        _source_state(),
+        _config(eta=0.15),
+        source_center_offset=[0.5, 0.0],
+        response_fraction=0.03,
+        pulse_steps=5,
+    )
+
+    reconstructed = (
+        calibration.cross_eta
+        * calibration.baseline_directional_drift
+        * calibration.pulse_steps
+        / calibration.target_radius
+    )
+    assert reconstructed == pytest.approx(0.03)
+    assert calibration.baseline_directional_drift < calibration.baseline_gradient_norm
 
 
 def test_frozen_source_response_is_translation_equivariant() -> None:

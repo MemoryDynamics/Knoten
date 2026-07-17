@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-10.
+Stand: 2026-07-17.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -78,6 +78,44 @@ A_att = A_rep (L_rep/L_att)^d.
 Diese kompensierte Normierung entfernt den globalen DC-Anteil des Kernels und
 ist eine eigene, sauber testbare Kernelhypothese. Sie ist nicht dasselbe wie ein
 signierter Depositionskernel `G=K`.
+
+## Self- and Cross-Interaction Channels
+
+The current scalar memory is non-negative and the same two-scale kernel is used
+for self-confinement and for the frozen-source cross-field. This gives every
+source the same scalar sign. In the canonical `A_rep=1`, `A_att=35`,
+`sigma_att/sigma_rep=3` slice,
+
+```text
+A_att / sigma_att^2 > A_rep / sigma_rep^2,
+```
+
+so the point-source potential has an attractive local minimum and no radial
+force-sign crossing. This is a parameter consequence, not evidence for charge
+neutrality or reciprocal two-knot attraction.
+
+A radial scalar potential is parity-even. Charge sign is a separate internal
+label; charge neutrality would remove a leading signed monopole rather than
+produce universal attraction. The minimal controlled extension is therefore a
+separate signed scalar cross-channel, for example
+
+```text
+x_i' = ... - eta_self grad Phi_i_self
+           - eta_cross s_i s_j grad Phi_j_cross,
+s_i in {-1, 0, +1}.
+```
+
+The sign convention and `K_cross` must be chosen explicitly; the labels must
+not be called electric charge until interaction tests justify that language.
+Required controls are `s_i=0`, `s_j=0`, one-label sign reversal, common-noise
+pairing, and unchanged scalar self-confinement.
+
+The self and cross kernels need not have the same resolution. For the current
+`N=100M` checkpoints, the memory radius is only order `1e-4 sigma_rep`, so
+the existing cross-kernel sees a point monopole and cannot read internal knot
+shape. A narrower or moment-coupled cross-observable is a separate model choice.
+Vector memory is reserved for orientation, phase, circulation, or polarization,
+not introduced merely to provide a scalar sign.
 
 ## Markov-Einbettung
 

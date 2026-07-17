@@ -66,6 +66,8 @@ CATEGORIES = {
         "current/memory/reference_state_checkpoints.py",
         "current/memory/synchronization/weak_probe_response.py",
         "current/memory/synchronization/frozen_source_response.py",
+        "current/memory/synchronization/frozen_source_field_audit.py",
+        "current/memory/synchronization/frozen_source_distance_ladder.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",
@@ -113,7 +115,9 @@ def run_script(category: str, script: str, extra_args: list[str]) -> int:
     if not script_path.exists():
         raise FileNotFoundError(f"Script not found: {script_path}")
     print(f"Running {script}...")
-    return subprocess.run([sys.executable, str(script_path), *extra_args], cwd=str(ROOT)).returncode
+    return subprocess.run(
+        [sys.executable, str(script_path), *extra_args], cwd=str(ROOT)
+    ).returncode
 
 
 def parse_args() -> argparse.Namespace:

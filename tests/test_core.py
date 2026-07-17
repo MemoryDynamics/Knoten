@@ -13,11 +13,13 @@ from emergenz_knoten import (
     ball_residence_statistics,
     covariance_dimension,
     double_gaussian_gradient,
+    double_gaussian_potential,
     effective_double_gaussian_parameters,
     exponential_memory_weights,
     exponential_weights,
     fit_occupancy_scaling_window,
     gaussian_gradient,
+    gaussian_potential,
     heat_trace_spectral_dimension,
     matched_local_stiffness_renormalization,
     occupancy_dimension,
@@ -101,6 +103,7 @@ def test_spectral_dimension_rejects_invalid_parameters() -> None:
         else:
             raise AssertionError(f"expected ValueError for {expected}")
 
+
 def test_shape_statistics_detects_weighted_center_and_roundness() -> None:
     points = np.array(
         [
@@ -141,6 +144,7 @@ def test_shape_statistics_reports_ambient_and_intrinsic_axis_ratios() -> None:
     assert line_stats["axis_ratio_second_first"] == 0.0
     assert plane_stats["axis_ratio_min_max"] == 0.0
     assert plane_stats["axis_ratio_intrinsic_min_max"] == 1.0
+
 
 def test_occupancy_scaling_window_skips_sample_saturation() -> None:
     scales = np.geomspace(0.001, 1.0, 10)
@@ -202,6 +206,7 @@ def test_ball_residence_statistics_counts_consecutive_inside_runs() -> None:
     assert stats["max_run_length"] == 3
     assert np.isclose(stats["inside_fraction"], 5.0 / 6.0)
 
+
 def test_exponential_weights_are_finite_memory() -> None:
     weights = exponential_weights(alpha=0.1, horizon=5)
     expected_sum = 1.0 - (1.0 - 0.1) ** 5
@@ -222,6 +227,71 @@ def test_exponential_memory_weights_scale_with_memory_mass() -> None:
     assert np.allclose(weights, 2.0 * exponential_weights(0.1, 5))
 
 
+def test_gaussian_potential_finite_difference_matches_gradient() -> None:
+    x = np.array([0.7, -0.2])
+    memory = np.array([[0.0, 0.0], [0.4, -0.5]])
+    weights = np.array([0.6, 0.3])
+    step = 1e-6
+    finite_difference = np.empty_like(x)
+    for coordinate in range(x.size):
+        offset = np.zeros_like(x)
+        offset[coordinate] = step
+        finite_difference[coordinate] = (
+            gaussian_potential(
+                x + offset,
+                memory,
+                weights,
+                sigma=1.3,
+                amplitude=2.0,
+            )
+            - gaussian_potential(
+                x - offset,
+                memory,
+                weights,
+                sigma=1.3,
+                amplitude=2.0,
+            )
+        ) / (2.0 * step)
+
+    gradient = gaussian_gradient(
+        x,
+        memory,
+        weights,
+        sigma=1.3,
+        amplitude=2.0,
+    )
+    np.testing.assert_allclose(finite_difference, gradient, rtol=1e-9, atol=1e-10)
+
+
+def test_double_gaussian_potential_and_gradient_share_attractive_sign() -> None:
+    x = np.array([1.0, 0.0, 0.0])
+    memory = np.zeros((1, 3))
+    weights = np.ones(1)
+    potential = double_gaussian_potential(
+        x,
+        memory,
+        weights,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=35.0,
+    )
+    gradient = double_gaussian_gradient(
+        x,
+        memory,
+        weights,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=35.0,
+    )
+
+    assert potential < 0.0
+    assert -gradient[0] < 0.0
+    assert gradient[1] == 0.0
+    assert gradient[2] == 0.0
+
+
 def test_gaussian_gradient_is_potential_gradient_toward_memory() -> None:
     x = np.array([1.0, 0.0])
     memory = np.array([[0.0, 0.0]])
@@ -240,7 +310,9 @@ def test_repulsive_gaussian_gradient_points_away_from_memory() -> None:
     assert grad[1] == 0.0
 
 
-def test_zero_mean_attractive_amplitude_cancels_unnormalized_gaussian_integrals() -> None:
+def test_zero_mean_attractive_amplitude_cancels_unnormalized_gaussian_integrals() -> (
+    None
+):
     amplitude = zero_mean_attractive_amplitude(
         dim=3,
         sigma_rep=1.0,
@@ -248,7 +320,7 @@ def test_zero_mean_attractive_amplitude_cancels_unnormalized_gaussian_integrals(
         amplitude_rep=1.0,
     )
 
-    assert np.isclose(amplitude, 1.0 / (1.5 ** 3))
+    assert np.isclose(amplitude, 1.0 / (1.5**3))
     assert np.isclose(1.0 * 1.0**3, amplitude * 1.5**3)
 
 
@@ -259,7 +331,7 @@ def test_matched_local_stiffness_renormalization_preserves_curvature_scale() -> 
     effective_amplitude = factor * (1.0 / effective_sigma) ** 3
     effective_stiffness = effective_amplitude / (effective_sigma**2)
 
-    assert np.isclose(factor, 2.0 ** 2.5)
+    assert np.isclose(factor, 2.0**2.5)
     assert np.isclose(effective_stiffness, raw_stiffness)
 
 
@@ -275,8 +347,8 @@ def test_effective_matched_deposition_convolves_each_gaussian_component() -> Non
 
     assert np.isclose(params["sigma_rep"], np.sqrt(2.0))
     assert np.isclose(params["sigma_att"], 3.0 * np.sqrt(2.0))
-    assert np.isclose(params["amplitude_rep"], 2.0 ** -1.5)
-    assert np.isclose(params["amplitude_att"], 0.35 * 2.0 ** -1.5)
+    assert np.isclose(params["amplitude_rep"], 2.0**-1.5)
+    assert np.isclose(params["amplitude_att"], 0.35 * 2.0**-1.5)
 
 
 def test_delta_deposition_preserves_default_double_gradient() -> None:
@@ -336,7 +408,6 @@ def test_reference_simulation_runs() -> None:
     samples = result["samples"]
     assert samples.shape == (20, 3)
     assert np.isfinite(samples).all()
-
 
 
 def test_zero_memory_mass_matches_eta_zero_for_same_seed() -> None:
@@ -415,7 +486,10 @@ def test_simulation_config_rejects_invalid_scales_and_horizon() -> None:
         ({"memory_mass": -1.0}, "memory_mass"),
         ({"deposition_kernel": "gaussian"}, "deposition_sigma"),
         ({"deposition_kernel": "delta", "deposition_sigma": 1.0}, "deposition_sigma"),
-        ({"deposition_kernel": "matched_gaussian", "deposition_sigma": 1.0}, "deposition_sigma"),
+        (
+            {"deposition_kernel": "matched_gaussian", "deposition_sigma": 1.0},
+            "deposition_sigma",
+        ),
         ({"burn_in": -1}, "burn_in"),
         ({"burn_in": 10}, "burn_in"),
         ({"epsilon": float("nan")}, "epsilon"),

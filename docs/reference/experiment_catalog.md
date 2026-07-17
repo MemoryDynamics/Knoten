@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-16.
+Stand: 2026-07-17.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -34,6 +34,8 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
 | `experiments/current/memory/synchronization/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
 | `experiments/current/memory/synchronization/frozen_source_response.py` | gepaarter lokalisierter Frozen-Source-Pilot | aktiv | geklonte `N=1e8`-Quelle; `eta_cross=0`, `eta_zero`, feste Kreuzkopplung, zwei lokale Verschiebungsskalen; Fernfeld-Symmetrieaudit |
+| `experiments/current/memory/synchronization/frozen_source_field_audit.py` | statischer Potential-/Kraftaudit | aktiv | reale Checkpoint-Felder gegen Punktmonopol; Kraftvorzeichen, Paritaetsrest, Tangentialanteil und interne Quellenaufloesung |
+| `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
@@ -639,6 +641,9 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`, Baseline gegen `eta_zero`; Shape-Dimension und Heat-Trace-`D_spec` bleiben getrennte Kanaele, Response-Rang ist der naechste Paper-II-Gate. |
 | `reports/response/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
 | `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md` | kanonische N100M-Referenzzustaende | Checksum-validierte vollstaendige Finite-Memory-Zustaende fuer `d=3/10`, Seed 1; reproduzierbare Absprungbasis fuer Frozen-Source- und spaetere Mehrknotenarme. |
+| `reports/response/frozen_source_pilot_2026-07-16.md` | Frozen-Source-Clone-Pilot | Geklonte `N=100M`-Quelle bei `1 sigma_rep`; exakte Nullkontrolle und isotroper voller Ambient-Rang, kein externer 3D-Befund. |
+| `reports/response/frozen_source_field_audit_2026-07-17.md` | Frozen-Source-Feldaudit | Der aktuelle `A_att=35`-Kern ist auf allen geprueften Radien attraktiv; reale d3/d10-Quellen sind fuer den Cross-Kernel bereits bei `5 R_mem` punktmonopolartig. |
+| `reports/response/frozen_source_distance_ladder_2026-07-17.md` | Frozen-Source-Distanzleiter | Gleiche realisierte Bare-Antwort ueber sechs Abstaende; kleine distanzabhaengige Targetdeformation, aber voller Ambient-Rang und keine Quellenstruktur-/Ladungsevidenz. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

@@ -26,9 +26,14 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
    share future noise; `eta_zero` measures the bare direct response.
 3. Frozen localized source: clone and translate a full source-knot state, then
    perturb its location while the target remains dynamic.
-4. One-way dynamic coupling: source evolves but does not read the target.
-5. Reciprocal coupling with separate memory fields.
-6. Shared memory only as a later, separately normalized model variant.
+4. Static field and distance audit: measure potential, radial drift, parity
+   residuals, kernel resolution, and target deformation before interpreting an
+   apparent attraction.
+5. Signed scalar cross-channel: separate source sign from the non-negative
+   self-confining memory and require `q=0` plus sign-reversal controls.
+6. One-way dynamic coupling: source evolves but does not read the target.
+7. Reciprocal coupling with separate memory fields.
+8. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 
@@ -71,10 +76,46 @@ At one effective `sigma_rep`, the calibrated source is thousands of target
 memory radii away. The `d=3` and `d=10` center Jacobians are correspondingly
 full ambient rank and split into one radial plus `d-1` nearly degenerate
 transverse sectors. This is an isotropic scalar far-field response, not an
-external-dimension measurement. The next gate is a radius-to-kernel distance
-ladder before independent-seed formation is scaled up.
+external-dimension measurement.
 
 Report: `reports/response/frozen_source_pilot_2026-07-16.md`.
+
+## Field Audit and Distance Ladder
+
+The 2026-07-17 static audit evaluates the complete retained `N=100M` source
+states. In the canonical `A_rep=1`, `A_att=35`, `sigma_att/sigma_rep=3` slice,
+the attractive curvature dominates already at the origin and the point-source
+force has no sign crossing. Every audited direction is inward from `5 R_mem`
+through `1 sigma_rep`.
+
+The source radius is only about `2.1e-4 sigma_rep` in `d=3` and
+`3.8e-4 sigma_rep` in `d=10`. Directional, tangential, parity-odd, and
+point-monopole residuals are at numerical scale even at `5 R_mem`. The current
+read kernel therefore does not resolve the internal source shape.
+
+The paired distance ladder calibrates every separation to the same realized
+bare displacement (`0.03 R_mem` per memory time) under common future noise.
+Center and shape Jacobians remain full ambient rank at all six distances.
+Near-field target deformation is distance dependent but remains below `0.002`;
+this is a small tidal/nonlinear target effect, not source-structure resolution
+or an external-dimension signal. These are pathwise results from one canonical
+checkpoint per dimension.
+
+Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` and
+`reports/response/frozen_source_distance_ladder_2026-07-17.md`.
+
+## Interaction-Sign Decision
+
+The implemented memory weights are non-negative. The current cross-field is
+therefore an unsigned scalar monopole and has no knot-specific charge label.
+This is parity-even, not parity-free: spatial parity and charge sign are
+different symmetries. Charge neutrality would suppress a signed monopole; it
+would not explain the universal attraction measured here.
+
+The minimal charge-like test is a separate signed scalar cross-channel while
+the established scalar self-confinement channel stays unchanged. Vector memory
+is reserved for observables that actually require orientation, phase,
+circulation, or polarization.
 
 
 ## Observables
@@ -115,5 +156,7 @@ seed states for a conventional 5% decision.
 - Do not call internal labels charge, color, or flavor until they remain stable
   under controlled interactions.
 - Do not require internal embedding dimension three.
+- Do not infer neutrality from universal attraction in an unsigned scalar
+  channel.
 - Treat seeds as basin samplers and avoid counting multiple times from one seed
   as independent evidence.

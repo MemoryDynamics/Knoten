@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-16.
+Stand: 2026-07-17.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -257,19 +257,19 @@ Naechster operativer Schritt:
 
 Aktueller naechster Schritt:
 
-- Inhaltlicher Fokus in diesem Thread: Paper-II-Dimensionsfrage methodisch
-  weiter treiben. Der gepaarte uniforme Weak-Probe-Pilot ist abgeschlossen
-  und liefert die erwartete isotrope Vollrang-Negativkontrolle. Naechstes Gate
-  ist ein lokalisierter eingefrorener Quellknoten, zuerst geklont und danach
-  aus unabhaengigen Seed-Zustaenden.
-- Keine weiteren Dimensions-Blindscans als Hauptpfad; neue Runs nur, wenn sie
-  die Messmethodik oder Response-Frage direkt entscheiden.
-- Erst danach gezielte `lambda_m`/`sigma`/Amplitudenachsen in der neuen
-  Scorecard-Sprache fortsetzen.
+- Abgeschlossen: lokalisierter Frozen-Source-Pilot, statischer Potential-/
+  Kraftaudit und realisiert kalibrierte Distanzleiter auf den kanonischen
+  `N=1e8`-Checkpoints. Der aktuelle Lesekernel sieht einen isotropen
+  Punktmonopol mit universeller Anziehung und vollem Ambient-Rang.
+- Naechstes Gate: einen getrennten signierten skalaren Kreuzkanal spezifizieren
+  und mit Null-, Vorzeichenwechsel- und Common-Noise-Kontrollen testen. Der
+  selbstkonfinierende `rho>=0`-Kanal bleibt dabei unveraendert.
+- Keine weiteren Dimensions- oder Kopplungs-Blindscans. Dynamische oder
+  reziproke Knoten folgen erst nach bestandenem Kanal-/Vorzeichengate.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Retest und uniforme Weak-Probe-Kalibrierung sind erledigt. Naechster methodischer Schritt ist der lokalisierte eingefrorene Quellknoten.
+Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Retest, uniforme Weak-Probe-Kalibrierung sowie Frozen-Source-Feld-/Distanzpruefung sind erledigt. Naechster methodischer Schritt ist der signierte skalare Kreuzkanal.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -395,37 +395,39 @@ Prioritaet:
    Finite-Memory-Naeherung (`M_stored=0.997595`), nicht der formal unendliche
    exponentielle Schwanz. Report:
    `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md`.
-5. Naechstes Interaktions-Gate: eingefrorenen Quellknoten einsetzen. Zunaechst
-   denselben Referenzzustand klonen, vollstaendig versetzen und ueber
-   kontrollierte orthogonale Lagen pruefen; danach unabhaengige
-   Seed-Zustaende derselben Basin-/Score-Klasse verwenden. Der Source-Puls ist
-   lokalisiert und wird gegen `no source`, `eta_zero` und uniformen Probe
-   kalibriert.
-6. Distanz und Kreuzkopplung ueber dimensionslose Groessen waehlen: Abstand
-   relativ zu Source-/Target-Radius und Kernelreichweite; Stoerung relativ zur
-   Radiusverschiebung pro Memory-Zeit. Erst kleine diskrete Kalibrierpunkte,
-   kein Distanz-/Kopplungs-Blindscan.
-7. Erst nach dem eingefrorenen Source-Test zwei dynamische Knoten mit getrennten
+5. Abgeschlossen: geklonter Frozen-Source-Pilot mit freiem,
+   `eta_cross=0`- und `eta_zero`-Arm. Der Response ist isotrop vollrangig,
+   nicht niedrigdimensional.
+6. Abgeschlossen: statischer Potential-/Kraftaudit und sechs-Punkt-
+   Distanzleiter von `5 R_mem` bis `1 sigma_rep`. Der aktuelle Cross-Kernel
+   loest die interne Quelle nicht auf; die Antwort ist punktmonopolartig und
+   bei `A_att=35` auf allen geprueften Skalen attraktiv.
+7. Naechstes Kanal-Gate: separate signierte skalare Cross-Variable
+   `s in {-1,0,+1}` oder aequivalente Kopplung einfuehren, ohne den
+   selbstkonfinierenden `rho>=0`-Kanal zu veraendern. Pflichtkontrollen sind
+   `s_target=0`, `s_source=0`, ein Label-Flip und like/unlike Paarung.
+8. Selbst- und Cross-Kernel als getrennte Modellobjekte behandeln. Ein
+   strukturaufloesender Cross-Kanal muss seine Reichweite gegen `R_mem`
+   begruenden und darf die Ein-Knoten-Stabilitaet nicht implizit umdefinieren.
+9. Erst nach bestandenem Kanal-Gate zwei dynamische Knoten mit getrennten
    Memory-Feldern koppeln: `no coupling`, einseitiges Lesen und reziprokes
-   Lesen. Gemeinsames Memory ist wegen Massennormierung und Identitaetsverlust
-   eine spaetere eigene Modellvariante.
-8. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
-   Wechselwirkungs-/Antwortmatrix messen. Exakt `3` wird nicht vorgegeben;
-   interessant ist ein kontrollgetrennter niedriger Rang, der bei hoeherer
-   Einbettungsdimension ueber Seeds, Lags, Probestarken und Basisrotationen
-   stabil ist.
-9. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
-10. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
+   Lesen. Gemeinsames Memory bleibt eine spaetere eigene Modellvariante.
+10. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
+    Wechselwirkungs-/Antwortmatrix messen. Exakt `3` wird nicht vorgegeben;
+    interessant ist ein kontrollgetrennter niedriger Rang ueber Seeds, Lags,
+    Probestarken und Basisrotationen.
+11. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
+12. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
     momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
     Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
-11. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+13. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
     Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt: Frozen-Source-Runner zuerst mit geklontem
-Source-/Target-Zustand implementieren und gegen freie, zero-cross-coupling-,
-`eta_zero`- und uniforme Probe kontrollieren. Mindestens sechs, vorzugsweise
-zehn unabhaengige Seedpaare sind erst fuer den anschliessenden Signifikanzlauf
-noetig.
+Naechster konkreter Schritt: einen minimalen signierten skalaren Cross-Kanal
+als kleine, getestete Modellvariante spezifizieren. Der Akzeptanztest verlangt
+exakte Nullarme, Antwortumkehr beim Label-Flip, unveraenderte Selbstentwicklung
+und ein vorab festgelegtes Cross-Kernel-Vorzeichen. Erst danach werden
+unabhaengige Seedpaare oder reziproke Dynamik skaliert.
 
 ### P2.4 Paper II / III Guardrails
 
