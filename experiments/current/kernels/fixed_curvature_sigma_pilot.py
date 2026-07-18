@@ -575,6 +575,8 @@ def write_outputs(
     summary_path: Path,
     figure_path: Path,
     elapsed_seconds: float,
+    source_git_revision: str,
+    source_git_status: str,
 ) -> None:
     aggregate = _aggregate(rows, args.q_values)
     max_sampled_radius = max(
@@ -588,8 +590,8 @@ def write_outputs(
     payload = {
         "description": "Fixed-local-curvature sigma-ratio mechanism pilot.",
         "generated_utc": _utc_now(),
-        "git_revision": _git_output(["rev-parse", "HEAD"]),
-        "git_status": _git_output(["status", "--short"]),
+        "git_revision": source_git_revision,
+        "git_status": source_git_status,
         "elapsed_seconds": elapsed_seconds,
         "parameters": {
             "steps": args.steps,
@@ -689,6 +691,8 @@ def write_outputs(
 def main() -> None:
     args = parse_args()
     _validate_args(args)
+    source_git_revision = _git_output(["rev-parse", "HEAD"])
+    source_git_status = _git_output(["status", "--short"])
     output_dir = _resolve(args.output_dir)
     report_path = _resolve(args.report)
     summary_path = _resolve(args.summary_json)
@@ -708,6 +712,8 @@ def main() -> None:
         summary_path=summary_path,
         figure_path=figure_path,
         elapsed_seconds=elapsed,
+        source_git_revision=source_git_revision,
+        source_git_status=source_git_status,
     )
     print(f"wrote {report_path}")
     print(f"wrote {summary_path}")

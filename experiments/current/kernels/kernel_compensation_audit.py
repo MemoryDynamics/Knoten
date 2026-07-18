@@ -567,6 +567,8 @@ def main() -> None:
     if any(value <= args.reference_q for value in args.compensator_scales):
         raise SystemExit("compensator scales must be broader than reference q")
 
+    source_git_revision = _git_output(["rev-parse", "HEAD"])
+    source_git_status = _git_output(["status", "--short"])
     report_path = _resolve(args.report)
     summary_path = _resolve(args.summary_json)
     figure_dir = _resolve(args.figure_dir)
@@ -628,8 +630,8 @@ def main() -> None:
     payload: dict[str, Any] = {
         "description": "Two-scale neutrality/local-curvature constraint and broad compensator audit.",
         "generated_utc": _utc_now(),
-        "git_revision": _git_output(["rev-parse", "HEAD"]),
-        "git_status": _git_output(["status", "--short"]),
+        "git_revision": source_git_revision,
+        "git_status": source_git_status,
         "parameters": {
             "dims": args.dims,
             "q_min": args.q_min,
