@@ -1,0 +1,25 @@
+{
+  "description": "Gaussian-to-local-field equation bridge.",
+  "exact_heat_max_error": 1.6653345369377348e-16,
+  "field": {
+    "coupling": 1.0,
+    "decay_rate": 1.0,
+    "diffusivity": 4.5,
+    "relaxation_time": 1.0
+  },
+  "field_correlation_length": 2.1213203435596424,
+  "generated_utc": "2026-07-18T22:05:17Z",
+  "git_revision": "cc5fde949b7f263066e49e021fc4eb2a84e5b51b",
+  "git_status": "",
+  "heat_diffusion_time": 4.5,
+  "inputs": {
+    "coupling": 1.0,
+    "decay_rate": 1.0,
+    "diffusivity": 1.0,
+    "gaussian_length": 3.0,
+    "max_dimensionless_wavenumber": 6.0
+  },
+  "stationary_max_abs_error_u_le_0p5": 0.0063919863042933844,
+  "stationary_max_abs_error_u_le_1": 0.060136006954033205,
+  "stationary_max_abs_error_u_le_3": 0.20363214739833765
+}
