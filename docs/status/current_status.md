@@ -544,8 +544,8 @@ nur die lokale Taylor-Kruemmung identifiziert, nicht die Zwei-Skalen-Geometrie.
 
 Der breite Drei-Skalen-Pilot ist abgeschlossen. Bei `sigma_comp=10` kann
 `int K=0` exakt erfuellt und zugleich die lokale Referenzkruemmung beibehalten
-werden. Der Kraftwechsel liegt bei `r/sigma_rep ~=10.91`. Im `N=1M`-Pilot,
-Seeds `1..5`, bleiben die gematchten lokalen KPIs bis `2.2e-11` relativ
+werden. Im `d=3`-Pilot liegt der Kraftwechsel bei `r/sigma_rep ~=10.91`.
+Im `N=1M`-Pilot, Seeds `1..5`, bleiben die gematchten lokalen KPIs bis `2.2e-11` relativ
 identisch; der rohe Kompensator aendert sie um hoechstens `0.238%`.
 
 Auch das nachgelagerte signierte Kanal-Gate ist als Frozen-Source-

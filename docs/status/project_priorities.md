@@ -266,9 +266,9 @@ Naechster operativer Schritt:
     `reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
 30. Abgeschlossen: breiter Drei-Skalen-Kompensator und signiertes skalares
     Frozen-Source-Kanal-Gate. Der Kompensator erfuellt `int K=0`, matched die
-    lokale q=3-Referenzkruemmung und erzeugt einen Kraftwechsel bei
-    `r/sigma_rep ~=10.91`. Im `N=1M`-Fuenf-Seed-Pilot bleiben die gematchten
-    lokalen KPIs bis `2.2e-11` relativ identisch. Auf den `N=100M`-
+    lokale q=3-Referenzkruemmung und erzeugt im `d=3`-Referenzslice einen
+    Kraftwechsel bei `r/sigma_rep ~=10.91`. Im `N=1M`-Fuenf-Seed-Pilot
+    bleiben die gematchten lokalen KPIs bis `2.2e-11` relativ identisch. Auf den `N=100M`-
     Checkpoints in `d=3/10` sind Nullarme und gleiche Labelprodukte bitgenau;
     der Produkt-Flip kehrt die Antwort um. Reports:
     `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`
