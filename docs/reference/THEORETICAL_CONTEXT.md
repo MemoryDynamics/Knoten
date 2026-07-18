@@ -104,11 +104,18 @@ seedweise nur relative KPI-Spannen bis `1.65e-8`; zugleich ist
 `R_mem/sigma_rep <=2e-4`. Der kompakte Ast sieht damit nur die lokale
 Taylor-Kruemmung und identifiziert die zwei nominalen Breiten nicht getrennt.
 Ein weiterer freier Zweiskalen-Sigma-Sweep ist in diesem Regime nicht
-informativ. Naechster Test ist genau ein breiter dreiskaliger
-Kompensationspilot. Reports:
-`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
+informativ. Der anschliessende breite Drei-Skalen-Pilot bei `q=3`,
+`L_comp/L_rep=10`, `N=1M` und Seeds `1..5` nullt das Integral exakt und
+erzeugt einen aeusseren Kraftwechsel bei `r/sigma_rep ~=10.91`. Ohne
+Kruemmungsmatching aendern sich die lokalen KPIs seedgepaart um hoechstens
+`0.238%`; mit exaktem Kruemmungsmatching um hoechstens `2.2e-11` relativ.
+Damit sind globales Nullintegral und der bestehende kompakte lokale Ast
+miteinander vertraeglich, aber noch keine physikalische Neutralitaet gezeigt.
+Reports:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`,
+`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`
 und
-`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
+`reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`.
 
 ## Self- and Cross-Interaction Channels
 
@@ -140,6 +147,16 @@ The sign convention and `K_cross` must be chosen explicitly; the labels must
 not be called electric charge until interaction tests justify that language.
 Required controls are `s_i=0`, `s_j=0`, one-label sign reversal, common-noise
 pairing, and unchanged scalar self-confinement.
+
+This minimal channel is now implemented with the compensated cross-kernel and
+tested on the checksum-validated `N=100M` checkpoints in `d=3` and `d=10`.
+Zero-label and free branches agree bitwise, equal label products produce
+identical paths, and changing `s_i s_j` reverses the pulse response. The active
+self-coupled target responds at pulse end by only about `0.00136 R_mem`,
+compared with the calibrated `eta=0` response of `0.03 R_mem`; radius
+disturbances remain below `4.5e-5`. This is an architecture result from one
+checkpoint per dimension. The labels are externally assigned and are neither
+emergent nor identified with charge.
 
 The self and cross kernels need not have the same resolution. For the current
 `N=100M` checkpoints, the memory radius is only order `1e-4 sigma_rep`, so

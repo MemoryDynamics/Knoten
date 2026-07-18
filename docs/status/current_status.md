@@ -542,26 +542,37 @@ seedweise bis auf maximal `1.65e-8` relative q-Spanne; der groesste finale
 Memory-Radius betraegt nur `2.0e-4 sigma_rep`. In diesem kompakten Ast wird also
 nur die lokale Taylor-Kruemmung identifiziert, nicht die Zwei-Skalen-Geometrie.
 
-Deshalb folgt kein freier Sigma-Sweep. Naechster Schritt ist genau ein breiter
-dreiskaliger Kompensator, dessen Amplitude das Integral analytisch nullt und
-dessen lokale sowie Fernfeldwirkung getrennt kontrolliert wird. Erst danach
-folgt der signierte Kreuzkanal. Reports:
-`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
+Der breite Drei-Skalen-Pilot ist abgeschlossen. Bei `sigma_comp=10` kann
+`int K=0` exakt erfuellt und zugleich die lokale Referenzkruemmung beibehalten
+werden. Der Kraftwechsel liegt bei `r/sigma_rep ~=10.91`. Im `N=1M`-Pilot,
+Seeds `1..5`, bleiben die gematchten lokalen KPIs bis `2.2e-11` relativ
+identisch; der rohe Kompensator aendert sie um hoechstens `0.238%`.
+
+Auch das nachgelagerte signierte Kanal-Gate ist als Frozen-Source-
+Architekturtest abgeschlossen. Auf den `N=100M`-Checkpoints in `d=3/10` sind
+Nullarme und gleiche Labelprodukte bitgenau, der Produkt-Flip kehrt die
+Antwort um, und die maximale Radiusstoerung bleibt unter `4.5e-5`. Die aktive
+Selbstkopplung reduziert die Pulsantwort von etwa `0.03 R_mem` bei `eta=0`
+auf etwa `0.00136 R_mem`. Dies ist noch keine Seed-Evidenz und kein
+Ladungsclaim. Reports:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`,
+`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`,
+`reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`
 und
-`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
+`reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 ## Naechste technische Schritte
 
-1. Abgeschlossen: Fixed-curvature-Sigma-Pilot (`q=2,3,4`, `chi=35/9`,
-   `N=1M`, Seeds `1..5`); q ist im lokal abgetasteten Ast KPI-seitig nicht
-   identifizierbar.
-2. Jetzt einen einzigen breiten dreiskaligen
-   Zero-Integral-Kompensator implementieren und lokal/Fernfeld getrennt testen.
-3. Danach den minimalen signierten skalaren Kreuzkanal spezifizieren. Pflicht-
-   kontrollen: `s_target=0`, `s_source=0`, einseitiger Vorzeichenwechsel,
-   gleiches Zukunftsrauschen und unveraenderte freie Selbstentwicklung.
+1. Abgeschlossen: Fixed-curvature-Sigma-, Drei-Skalen-Kompensations- und
+   signiertes Frozen-Source-Kanal-Gate.
+2. Mindestens sechs, bevorzugt zehn unabhaengige Referenzzustaende bilden und
+   Null-, Produkt-, Vorzeichen- und Nondestruktionskontrollen ohne Retuning
+   wiederholen.
+3. Den kompensierten Cross-Kernel mit einem festen `eta_cross` unterhalb und
+   oberhalb des Kraftwechsels testen; nicht jeden Abstand neu kalibrieren.
 4. Die Aufloesung von Selbst- und Kreuzkernel getrennt kalibrieren; der aktuelle
-   Kreuzkernel sieht gegenueber `R_mem` nur einen Punktmonopol.
-5. Erst nach diesen Gates einseitig dynamische und reziproke Zwei-Knoten-Arme
-   starten. Vektorgedaechtnis bleibt fuer Orientierung, Phase, Zirkulation oder
+   Kreuzkernel sieht gegenueber `R_mem` weiterhin nur einen Punktmonopol.
+5. Erst nach diesen Gates den Quellknoten einseitig dynamisch machen. Reziproke
+   Zwei-Knoten-Arme folgen nach Identitaets- und Bilanzdiagnostik.
+   Vektorgedaechtnis bleibt fuer Orientierung, Phase, Zirkulation oder
    Polarisation reserviert, nicht fuer ein blosses skalares Vorzeichen.

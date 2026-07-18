@@ -64,9 +64,13 @@ cross-kernel. The full Ambient-Rang response is therefore expected. The current
 `rho>=0` channel has no knot-specific sign and cannot support charge or
 neutrality claims. Moreover, the compact q=3 kernel is strongly non-neutral:
 for `q>1`, two-scale zero integral (`a=q^-d`) and local restoring curvature
-(`a>q^2`) are structurally incompatible. The fixed-chi sigma gate and one broad
-third-scale compensator therefore precede the signed scalar cross-channel;
-vector memory remains reserved for oriented observables.
+(`a>q^2`) are structurally incompatible. A broad third scale now provides
+exact integral cancellation while preserving the local compact branch. The
+minimal signed scalar cross-channel also passes its bitwise null, product and
+label-flip architecture gates on one d3 and one d10 checkpoint. This is not
+charge evidence: the labels are assigned, only the target is dynamic, and
+independent-seed validation is still missing. Vector memory remains reserved
+for oriented observables.
 
 ## Paper II: Propagation and Spacetime Kinematics
 
@@ -107,8 +111,9 @@ Synchronisation und Propagation reproduzierbar sind.
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
 | `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; Sensitivitaets- und `N=3M`-Rohsnapshot-Retest zeigen keine robuste externe Dimension | nicht isoliert claimen; nur gemeinsam mit lokalisierter relationaler Response weiterverfolgen |
 | Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
-| Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; Fixed-chi-q-Pilot zeigt zusaetzlich, dass der kompakte Ast bei `R_mem/sigma_rep<=2e-4` nur lokale Steifigkeit identifiziert | genau ein breiter dreiskaliger Zero-Integral-Kompensator, danach Kreuzkanaltest |
-| Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | nicht gestuetzt: der aktuelle `rho>=0`-Cross-Kanal ist vorzeichenlos, der `A_att=35`-Punktkern ueberall attraktiv und die Quelle unaufgeloest; bisher nur einseitiger Frozen-Source-Test | signierten skalaren Cross-Kanal mit Null-, Label-Flip- und like/unlike Kontrollen testen; danach Reziprozitaet |
+| Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; Fixed-chi-q-Pilot zeigt zusaetzlich, dass der kompakte Ast bei `R_mem/sigma_rep<=2e-4` nur lokale Steifigkeit identifiziert | breiter Drei-Skalen-Kompensator erfuellt Nullintegral und lokale Kruemmung im `N=1M`-Pilot; als Modellvariante, nicht als Neutralitaetsnachweis berichten |
+| Signierter skalarer Cross-Kanal besitzt exakte Null- und Vorzeichenarme | als Architekturtest gestuetzt: auf je einem `N=100M`-Checkpoint in `d=3/10` sind Null- und Produktarme bitgenau, der Produkt-Flip kehrt die Antwort um und Radiusstoerungen bleiben klein; Labels sind extern vergeben | mindestens 6, bevorzugt 10 unabhaengige Zustaende ohne Retuning und feste Distanzpruefung unter/ueber dem Kraftwechsel |
+| Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | erst unabhaengige Seeds, dann einseitig dynamische Quelle und zuletzt Reziprozitaet; keine Ladungssprache |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

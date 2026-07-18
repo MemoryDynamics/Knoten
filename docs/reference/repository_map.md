@@ -28,6 +28,7 @@ flowchart TD
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
     experiments --> comp_pilot["three_scale_compensation_pilot.py<br/>exact zero integral + curvature match"]
+    experiments --> signed_pilot["signed_cross_channel_pilot.py<br/>null/product/label-flip gate"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
@@ -40,9 +41,11 @@ flowchart TD
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
+    src --> signed["signed_cross_channel.py<br/>separate signed scalar cross coupling"]
     src --> continuation["_continuation.py<br/>shared Numba continuation primitives"]
     probe --> continuation
     frozen --> continuation
+    signed --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
 
@@ -147,10 +150,14 @@ flowchart LR
     paired --> probe["weak localized frozen source"]
     probe --> fieldaudit["static potential / force audit<br/>sign, parity, monopole error"]
     probe --> ladder["calibrated distance ladder<br/>target deformation / response rank"]
-    fieldaudit --> compgate["kernel compensation gate<br/>fixed chi q-slice complete; broad zero-integral term next"]
+    fieldaudit --> compgate["kernel compensation gate<br/>exact zero integral + curvature match complete"]
     ladder --> compgate
-    compgate --> channel["next: signed scalar cross-channel<br/>q=0 and sign reversal"]
-    channel --> multi["later: independent / dynamic knots"]
+    compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
+    channel --> seeds["next: 6-10 independent states<br/>no retuning"]
+    channel --> distance["next: fixed-coupling distances<br/>below / above force crossing"]
+    seeds --> multi["later: one-way dynamic source"]
+    distance --> multi
+    multi --> reciprocal["later: reciprocal knots<br/>identity + balance diagnostics"]
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
     multi --> delta
@@ -163,7 +170,7 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests, nicht die minimale Loesung fuer ein skalares Ladungsvorzeichen.
+- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests, nicht die minimale Loesung fuer ein skalares Ladungsvorzeichen.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.

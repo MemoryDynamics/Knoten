@@ -117,6 +117,30 @@ the established scalar self-confinement channel stays unchanged. Vector memory
 is reserved for observables that actually require orientation, phase,
 circulation, or polarization.
 
+## Completed Signed-Channel Architecture Gate
+
+`signed_cross_channel.py` implements an externally assigned
+`s_target*s_source` factor only in the frozen-source cross force. The cross
+potential uses the broad zero-integral, curvature-matched third scale; the
+target self-channel remains the canonical non-negative scalar memory.
+
+The 2026-07-18 pilot on the checksum-validated `N=100M` checkpoints in `d=3`
+and `d=10` gives:
+
+- bitwise identity of source-zero, target-zero, and explicit free paths;
+- bitwise identity for equal label products;
+- pulse-response reversal when the label product changes sign;
+- maximum radius disturbance below `4.5e-5`;
+- active pulse displacement about `0.00136 R_mem` versus the calibrated
+  `eta=0` displacement about `0.03 R_mem`.
+
+This validates the software and control architecture only. There is one
+checkpoint per dimension, the labels are inputs rather than emergent
+observables, and the source is frozen. The next gates are 6-10 independent
+states without retuning and fixed-coupling distances below and above the
+compensated force crossing.
+
+Report: `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 ## Observables
 

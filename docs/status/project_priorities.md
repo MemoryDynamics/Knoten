@@ -264,29 +264,35 @@ Naechster operativer Schritt:
     `reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
     und
     `reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
+30. Abgeschlossen: breiter Drei-Skalen-Kompensator und signiertes skalares
+    Frozen-Source-Kanal-Gate. Der Kompensator erfuellt `int K=0`, matched die
+    lokale q=3-Referenzkruemmung und erzeugt einen Kraftwechsel bei
+    `r/sigma_rep ~=10.91`. Im `N=1M`-Fuenf-Seed-Pilot bleiben die gematchten
+    lokalen KPIs bis `2.2e-11` relativ identisch. Auf den `N=100M`-
+    Checkpoints in `d=3/10` sind Nullarme und gleiche Labelprodukte bitgenau;
+    der Produkt-Flip kehrt die Antwort um. Reports:
+    `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`
+    und
+    `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 Aktueller naechster Schritt:
 
-- Abgeschlossen: lokalisierter Frozen-Source-Pilot, statischer Potential-/
-  Kraftaudit und realisiert kalibrierte Distanzleiter auf den kanonischen
-  `N=1e8`-Checkpoints. Der aktuelle Lesekernel sieht einen isotropen
-  Punktmonopol mit universeller Anziehung und vollem Ambient-Rang.
-- Abgeschlossenes Kompensations-Gate Teil 1: Kernelneutralitaet und lokale
-  Selbstkonfinierung sind analytisch getrennt; der Fixed-chi-q-Slice zeigt
-  numerisch, dass der kompakte Ast nur die lokale Kruemmung abtastet.
-- Jetzt genau ein dreiskaliger Zero-Integral-Pilot mit breitem positiven
-  Kompensator. Nur wenn er lokale Knotenmetriken erhaelt und das Fernfeld
-  veraendert, wird Kernelneutralitaet in die Kreuzkanalarchitektur uebernommen.
-- Anschliessend: getrennten signierten skalaren Kreuzkanal mit Null-,
-  Vorzeichenwechsel- und Common-Noise-Kontrollen testen. Der selbstkonfinierende
-  `rho>=0`-Kanal bleibt dabei unveraendert.
-- Keine weiteren Dimensions-, Sigma- oder Kopplungs-Blindscans. Dynamische oder
-  reziproke Knoten folgen erst nach bestandenem Kompensations- und
-  Kanal-/Vorzeichengate.
+- Abgeschlossen: Frozen-Source-, Kompensations- und minimales signiertes
+  Kanal-Gate. Der selbstkonfinierende `rho>=0`-Kanal bleibt unveraendert;
+  die Cross-Labels sind extern vergeben und noch keine Ladungsevidenz.
+- Naechstes Evidenz-Gate: mindestens sechs, bevorzugt zehn unabhaengige
+  Referenzzustaende bilden und Null-, Produkt-, Vorzeichen- sowie
+  Nondestruktionskontrollen ohne Retuning wiederholen.
+- Parallel nur eine vorab festgelegte Distanzpruefung mit konstantem
+  `eta_cross` unterhalb und oberhalb des Kraftwechsels; keine abstandsweise
+  Neukalibrierung.
+- Keine weiteren Dimensions-, Sigma- oder Kopplungs-Blindscans. Einseitig
+  dynamische Quellen folgen erst nach Seed- und Distanzgate; Reziprozitaet
+  erst nach Identitaets- und Bilanzdiagnostik.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; Long-Run-, D_spec-, Weak-Probe- und Frozen-Source-Pruefungen sind erledigt. Vor dem signierten skalaren Kreuzkanal liegt jetzt das kontrollierte Kernelkompensations-Gate.
+Status: Paketkern korrigiert; Long-Run-, D_spec-, Weak-Probe-, Frozen-Source-, Kernelkompensations- und signiertes Kanal-Gate sind erledigt. Naechster Engpass ist unabhaengige Seed- und feste Distanzvalidierung ohne Retuning.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall
@@ -419,32 +425,37 @@ Prioritaet:
    Distanzleiter von `5 R_mem` bis `1 sigma_rep`. Der aktuelle Cross-Kernel
    loest die interne Quelle nicht auf; die Antwort ist punktmonopolartig und
    bei `A_att=35` auf allen geprueften Skalen attraktiv.
-7. Naechstes Kanal-Gate: separate signierte skalare Cross-Variable
-   `s in {-1,0,+1}` oder aequivalente Kopplung einfuehren, ohne den
-   selbstkonfinierenden `rho>=0`-Kanal zu veraendern. Pflichtkontrollen sind
-   `s_target=0`, `s_source=0`, ein Label-Flip und like/unlike Paarung.
-8. Selbst- und Cross-Kernel als getrennte Modellobjekte behandeln. Ein
-   strukturaufloesender Cross-Kanal muss seine Reichweite gegen `R_mem`
-   begruenden und darf die Ein-Knoten-Stabilitaet nicht implizit umdefinieren.
-9. Erst nach bestandenem Kanal-Gate zwei dynamische Knoten mit getrennten
-   Memory-Feldern koppeln: `no coupling`, einseitiges Lesen und reziprokes
-   Lesen. Gemeinsames Memory bleibt eine spaetere eigene Modellvariante.
-10. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
+7. Abgeschlossen: separate signierte skalare Cross-Variable
+   `s in {-1,0,+1}` im Cross-Kanal, ohne Aenderung des selbstkonfinierenden
+   `rho>=0`-Kanals. `s_target=0`, `s_source=0` und freie Pfade sind bitgenau;
+   gleiche Produkte sind identisch, der Produkt-Flip kehrt die Antwort um.
+8. Abgeschlossen als Architekturtest: der Cross-Kanal verwendet den
+   kruemmungsgematchten Drei-Skalen-Kompensator. Die `N=100M`-Checkpoints in
+   `d=3/10` bleiben bei der schwachen Probe nondestruktiv. Nur ein Seed pro
+   Dimension bedeutet noch keine statistische Evidenz.
+9. Naechstes Gate: mindestens sechs, bevorzugt zehn unabhaengige
+   Referenzzustaende ohne Retuning; Seeds als Basin-Sampler auswerten:
+   `P(knot type | parameters, seed)`.
+10. Danach eine feste Distanzleiter unter- und oberhalb des Kraftwechsels mit
+    konstantem `eta_cross`. Selbst- und Cross-Kernel bleiben getrennte
+    Modellobjekte; Reichweite und Aufloesung sind gegen `R_mem` auszuweisen.
+11. Erst nach Seed- und Distanzgate den Quellknoten einseitig dynamisch machen.
+    Reziprokes Lesen mit getrennten Memory-Feldern folgt nach Identitaets- und
+    Bilanzdiagnostik. Gemeinsames Memory bleibt eine spaetere Modellvariante.
+12. Externen Response-Rang als Rang und Stabilitaet der lokalisierten
     Wechselwirkungs-/Antwortmatrix messen. Exakt `3` wird nicht vorgegeben;
     interessant ist ein kontrollgetrennter niedriger Rang ueber Seeds, Lags,
     Probestarken und Basisrotationen.
-11. Seeds als Basin-Sampler auswerten: `P(knot type | parameters, seed)`.
-12. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
+13. Spin-/Drehimpuls-Kandidaten erst als co-moving Zirkulation, angular
     momentum oder antisymmetrischer Formtensor im Memory-Profil messen; kein
     Standardmodell-Spin-Claim ohne reproduzierbaren Mehrknoten-/Response-Test.
-13. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
+14. Erst bei reproduzierbarer Synchronisation ueber Seeds und kleine
     Parameterstoerungen ueber Paper-III-Analogien sprechen.
 
-Naechster konkreter Schritt: einen minimalen signierten skalaren Cross-Kanal
-als kleine, getestete Modellvariante spezifizieren. Der Akzeptanztest verlangt
-exakte Nullarme, Antwortumkehr beim Label-Flip, unveraenderte Selbstentwicklung
-und ein vorab festgelegtes Cross-Kernel-Vorzeichen. Erst danach werden
-unabhaengige Seedpaare oder reziproke Dynamik skaliert.
+Naechster konkreter Schritt: unabhaengige Referenzzustaende fuer das bestehende
+signierte Kanal-Gate bilden und die feste Distanzpruefung ohne Retuning
+vorbereiten. Erst nach diesen beiden Kontrollen wird die Quelle dynamisch;
+reziproke Dynamik bleibt die darauffolgende Stufe.
 
 ### P2.4 Paper II / III Guardrails
 
