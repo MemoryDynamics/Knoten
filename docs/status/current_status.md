@@ -535,19 +535,27 @@ annaehend zero mean. Mit `q=sigma_att/sigma_rep>1` und
 Bedingungen sind im zweiskaligen Kernel strukturell disjunkt. Bei q=3 liegt
 das integrierte Attraktions-/Repulsionsverhaeltnis in d=3 bei `540..945`.
 
-Deshalb wird kein freier Sigma-Sweep gestartet. Der kontrollierte Test variiert
-nur `q in {2,3,4}` bei festem `chi=a/q^2=35/9`, `N=1M`, Seeds `1..5` und
-gemeinsamen seedgleichen `eta_zero`-Kontrollen. Danach ist genau ein breiter
-dreiskaliger Kompensator vorgesehen, dessen Amplitude das Integral analytisch
-nullt. Erst dann folgt der signierte Kreuzkanal. Audit:
-`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`.
+Der kontrollierte `N=1M`-Test mit `q in {2,3,4}` bei festem
+`chi=a/q^2=35/9`, Seeds `1..5` und gemeinsamen seedgleichen
+`eta_zero`-Kontrollen ist abgeschlossen. Alle kontinuierlichen KPIs kollabieren
+seedweise bis auf maximal `1.65e-8` relative q-Spanne; der groesste finale
+Memory-Radius betraegt nur `2.0e-4 sigma_rep`. In diesem kompakten Ast wird also
+nur die lokale Taylor-Kruemmung identifiziert, nicht die Zwei-Skalen-Geometrie.
+
+Deshalb folgt kein freier Sigma-Sweep. Naechster Schritt ist genau ein breiter
+dreiskaliger Kompensator, dessen Amplitude das Integral analytisch nullt und
+dessen lokale sowie Fernfeldwirkung getrennt kontrolliert wird. Erst danach
+folgt der signierte Kreuzkanal. Reports:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
+und
+`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
 
 ## Naechste technische Schritte
 
-1. Fixed-curvature-Sigma-Pilot (`q=2,3,4`, `chi=35/9`, `N=1M`, Seeds `1..5`)
-   ausfuehren und Memory-Radius, D_mem, Roundness, Center-Drift und KnotScore
-   gegen die gemeinsame `eta_zero`-Kontrolle auswerten.
-2. Bei bestandenem Mechanismengate einen einzigen breiten dreiskaligen
+1. Abgeschlossen: Fixed-curvature-Sigma-Pilot (`q=2,3,4`, `chi=35/9`,
+   `N=1M`, Seeds `1..5`); q ist im lokal abgetasteten Ast KPI-seitig nicht
+   identifizierbar.
+2. Jetzt einen einzigen breiten dreiskaligen
    Zero-Integral-Kompensator implementieren und lokal/Fernfeld getrennt testen.
 3. Danach den minimalen signierten skalaren Kreuzkanal spezifizieren. Pflicht-
    kontrollen: `s_target=0`, `s_source=0`, einseitiger Vorzeichenwechsel,

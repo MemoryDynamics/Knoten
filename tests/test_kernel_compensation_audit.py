@@ -78,3 +78,21 @@ def test_fixed_curvature_aggregate_keeps_seed_robust_summary() -> None:
     assert aggregate[0]["n_seeds"] == 2
     assert aggregate[0]["knot_score_median"] == pytest.approx(0.7)
     assert aggregate[0]["amplitude_att"] == pytest.approx(16.0)
+
+
+def test_paired_q_sensitivity_uses_within_seed_spans() -> None:
+    rows = [
+        {"seed": 1, "q": 2.0, "memory_radius": 1.0},
+        {"seed": 1, "q": 3.0, "memory_radius": 1.1},
+        {"seed": 1, "q": 4.0, "memory_radius": 0.9},
+        {"seed": 2, "q": 2.0, "memory_radius": 2.0},
+        {"seed": 2, "q": 3.0, "memory_radius": 2.0},
+        {"seed": 2, "q": 4.0, "memory_radius": 2.0},
+    ]
+
+    sensitivity = sigma_pilot._paired_q_sensitivity(rows, [2.0, 3.0, 4.0])
+    radius = next(item for item in sensitivity if item["metric"] == "memory_radius")
+
+    assert radius["n_seeds"] == 2
+    assert radius["max_relative_span"] == pytest.approx(0.2)
+    assert radius["median_relative_span"] == pytest.approx(0.1)

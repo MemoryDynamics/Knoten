@@ -146,7 +146,7 @@ flowchart LR
     paired --> probe["weak localized frozen source"]
     probe --> fieldaudit["static potential / force audit<br/>sign, parity, monopole error"]
     probe --> ladder["calibrated distance ladder<br/>target deformation / response rank"]
-    fieldaudit --> compgate["kernel compensation gate<br/>fixed chi q-slice + broad zero-integral term"]
+    fieldaudit --> compgate["kernel compensation gate<br/>fixed chi q-slice complete; broad zero-integral term next"]
     ladder --> compgate
     compgate --> channel["next: signed scalar cross-channel<br/>q=0 and sign reversal"]
     channel --> multi["later: independent / dynamic knots"]

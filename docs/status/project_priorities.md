@@ -255,17 +255,26 @@ Naechster operativer Schritt:
     relationaler Response-Rang. Report:
     `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
 
+29. Abgeschlossen: analytischer Kernelkompensations-Constraint und
+    Fixed-curvature-Sigma-Pilot. Fuer `q>1` sind zweiskaliges `int K=0` und
+    lokale Rueckstellung disjunkt. Bei festem `chi=35/9`, `q={2,3,4}`,
+    `N=1M`, Seeds `1..5` kollabieren die KPIs bis maximal `1.65e-8` relative
+    q-Spanne, weil `R_mem/sigma_rep <=2e-4`. Der aktuelle kompakte Ast misst
+    lokale Steifigkeit, nicht separate Kernelbreiten. Reports:
+    `reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
+    und
+    `reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
+
 Aktueller naechster Schritt:
 
 - Abgeschlossen: lokalisierter Frozen-Source-Pilot, statischer Potential-/
   Kraftaudit und realisiert kalibrierte Distanzleiter auf den kanonischen
   `N=1e8`-Checkpoints. Der aktuelle Lesekernel sieht einen isotropen
   Punktmonopol mit universeller Anziehung und vollem Ambient-Rang.
-- Eingeschobenes Gate: Kernelneutralitaet und lokale Selbstkonfinierung sauber
-  trennen. Fuer `q>1` sind `int K=0` (`a=q^-d`) und lokale Rueckstellung
-  (`a>q^2`) im zweiskaligen Kernel strukturell unvereinbar. Zuerst laeuft ein
-  `q in {2,3,4}`-Slice bei festem `chi=35/9`, `N=1M`, Seeds `1..5`.
-- Danach genau ein dreiskaliger Zero-Integral-Pilot mit breitem positiven
+- Abgeschlossenes Kompensations-Gate Teil 1: Kernelneutralitaet und lokale
+  Selbstkonfinierung sind analytisch getrennt; der Fixed-chi-q-Slice zeigt
+  numerisch, dass der kompakte Ast nur die lokale Kruemmung abtastet.
+- Jetzt genau ein dreiskaliger Zero-Integral-Pilot mit breitem positiven
   Kompensator. Nur wenn er lokale Knotenmetriken erhaelt und das Fernfeld
   veraendert, wird Kernelneutralitaet in die Kreuzkanalarchitektur uebernommen.
 - Anschliessend: getrennten signierten skalaren Kreuzkanal mit Null-,

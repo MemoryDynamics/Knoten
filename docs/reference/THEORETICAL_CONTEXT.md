@@ -98,11 +98,17 @@ A_comp = (A_att L_att^d - A_rep L_rep^d) / L_comp^d.
 ```
 
 Er nullt das Integral exakt. Sein lokaler Kruemmungsbeitrag ist
-`-A_comp/L_comp^2` und kann fuer `L_comp >> L_att` klein bleiben. Deshalb wird
-zuerst nur `q` bei festem `chi` getestet; erst danach folgt ein einzelner
-dreiskaliger Kompensationspilot. Ein unbeschraenkter Sigma-Sweep ist nicht
-angezeigt. Reportpfad:
-`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`.
+`-A_comp/L_comp^2` und kann fuer `L_comp >> L_att` klein bleiben. Der
+kontrollierte `N=1M`-Test mit `q in {2,3,4}` bei festem `chi=35/9` zeigt
+seedweise nur relative KPI-Spannen bis `1.65e-8`; zugleich ist
+`R_mem/sigma_rep <=2e-4`. Der kompakte Ast sieht damit nur die lokale
+Taylor-Kruemmung und identifiziert die zwei nominalen Breiten nicht getrennt.
+Ein weiterer freier Zweiskalen-Sigma-Sweep ist in diesem Regime nicht
+informativ. Naechster Test ist genau ein breiter dreiskaliger
+Kompensationspilot. Reports:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`
+und
+`reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`.
 
 ## Self- and Cross-Interaction Channels
 
