@@ -119,6 +119,58 @@ def zero_mean_compensator_amplitude(
     return float(-residual / sigma_comp**dim)
 
 
+def zero_mean_curvature_matched_amplitudes(
+    *,
+    dim: int,
+    sigma_rep: float,
+    sigma_att: float,
+    sigma_comp: float,
+    target_curvature: float,
+    amplitude_rep: float = 1.0,
+) -> tuple[float, float]:
+    """Return ``(A_att, A_comp)`` matching zero integral and local curvature.
+
+    The result parameterizes
+    ``K=A_rep G_rep-A_att G_att+A_comp G_comp`` in the unnormalized
+    Gaussian convention. ``sigma_comp`` must differ from ``sigma_att``;
+    the intended use is a compensator broader than both original scales.
+    """
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    for name, value in (
+        ("sigma_rep", sigma_rep),
+        ("sigma_att", sigma_att),
+        ("sigma_comp", sigma_comp),
+    ):
+        if value <= 0.0 or not np.isfinite(value):
+            raise ValueError(f"{name} must be positive")
+    if not np.isfinite(target_curvature):
+        raise ValueError("target_curvature must be finite")
+    if not np.isfinite(amplitude_rep):
+        raise ValueError("amplitude_rep must be finite")
+
+    inverse_comp_power = sigma_comp ** (-(dim + 2))
+    denominator = sigma_att**-2 - sigma_att**dim * inverse_comp_power
+    if np.isclose(denominator, 0.0, rtol=1e-12, atol=0.0):
+        raise ValueError("sigma_comp and sigma_att produce a singular constraint")
+    numerator = (
+        target_curvature
+        + amplitude_rep / sigma_rep**2
+        - amplitude_rep * sigma_rep**dim * inverse_comp_power
+    )
+    amplitude_att = numerator / denominator
+    amplitude_comp = zero_mean_compensator_amplitude(
+        dim=dim,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        sigma_comp=sigma_comp,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+    )
+    return float(amplitude_att), float(amplitude_comp)
+
+
 def matched_local_stiffness_renormalization(dim: int) -> float:
     """Return the amplitude factor preserving local Gaussian stiffness after matching."""
 
@@ -315,6 +367,52 @@ def double_gaussian_potential(
     return rep - att
 
 
+def three_scale_gaussian_potential(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    sigma_comp: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+    amplitude_comp: float = 0.0,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+) -> float:
+    """Potential ``A_rep G_rep-A_att G_att+A_comp G_comp`` after convolution."""
+
+    x_arr = np.asarray(x, dtype=float)
+    if x_arr.ndim != 1:
+        raise ValueError("x must be one-dimensional")
+    base = double_gaussian_potential(
+        x_arr,
+        memory,
+        weights,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    effective_sigma, effective_amplitude = effective_gaussian_parameters(
+        sigma=sigma_comp,
+        amplitude=amplitude_comp,
+        dim=x_arr.size,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    return base + gaussian_potential(
+        x_arr,
+        memory,
+        weights,
+        sigma=effective_sigma,
+        amplitude=effective_amplitude,
+    )
+
+
 def gaussian_gradient(
     x: Iterable[float],
     memory: Iterable[Iterable[float]],
@@ -415,3 +513,47 @@ def double_gaussian_gradient(
         amplitude=params["amplitude_att"],
     )
     return rep - att
+
+
+def three_scale_gaussian_gradient(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    sigma_comp: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+    amplitude_comp: float = 0.0,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+) -> np.ndarray:
+    """Gradient of ``A_rep G_rep-A_att G_att+A_comp G_comp`` after convolution."""
+
+    x_arr = np.asarray(x, dtype=float)
+    base = double_gaussian_gradient(
+        x_arr,
+        memory,
+        weights,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    effective_sigma, effective_amplitude = effective_gaussian_parameters(
+        sigma=sigma_comp,
+        amplitude=amplitude_comp,
+        dim=x_arr.size,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    return base + gaussian_gradient(
+        x_arr,
+        memory,
+        weights,
+        sigma=effective_sigma,
+        amplitude=effective_amplitude,
+    )

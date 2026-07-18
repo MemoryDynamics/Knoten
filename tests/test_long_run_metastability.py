@@ -9,13 +9,18 @@ import numpy as np
 from emergenz_knoten import SimulationConfig, simulate_finite_memory_numba
 
 
-SCRIPT_PATH = Path(__file__).resolve().parents[1] / "experiments" / "current" / "dynamics" / "long_run_metastability.py"
+SCRIPT_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "experiments"
+    / "current"
+    / "dynamics"
+    / "long_run_metastability.py"
+)
 SPEC = importlib.util.spec_from_file_location("long_run_metastability", SCRIPT_PATH)
 assert SPEC is not None
 long_run_metastability = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(long_run_metastability)
-
 
 
 def test_trace_targets_support_fixed_and_log_schedules() -> None:
@@ -52,6 +57,7 @@ def test_trace_targets_support_fixed_and_log_schedules() -> None:
     assert hybrid[-4:].tolist() == [70, 80, 90, 100]
     assert np.all(hybrid[:-4] < 70)
 
+
 def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     cfg = SimulationConfig(steps=100, eta=0.15, amplitude_att=0.35)
 
@@ -62,7 +68,9 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     m0_zero = long_run_metastability._apply_condition(cfg, "m0_zero")
     alpha_one = long_run_metastability._apply_condition(cfg, "alpha_one")
     matched = long_run_metastability._apply_condition(cfg, "matched_deposition")
-    renormalized = long_run_metastability._apply_condition(cfg, "matched_deposition_renormalized")
+    renormalized = long_run_metastability._apply_condition(
+        cfg, "matched_deposition_renormalized"
+    )
     zero_mean = long_run_metastability._apply_condition(cfg, "zero_mean_two_scale")
 
     assert baseline == cfg
@@ -83,7 +91,10 @@ def test_apply_condition_keeps_baseline_and_sets_controls() -> None:
     assert renormalized.deposition_kernel == "matched_gaussian"
     assert renormalized.amplitude_rep > cfg.amplitude_rep
     assert renormalized.amplitude_att > cfg.amplitude_att
-    assert np.isclose(zero_mean.amplitude_att, cfg.amplitude_rep * (cfg.sigma_rep / cfg.sigma_att) ** cfg.dim)
+    assert np.isclose(
+        zero_mean.amplitude_att,
+        cfg.amplitude_rep * (cfg.sigma_rep / cfg.sigma_att) ** cfg.dim,
+    )
 
 
 def test_long_run_numba_matches_package_backend_for_core_modes() -> None:
@@ -125,6 +136,67 @@ def test_long_run_numba_matches_package_backend_for_core_modes() -> None:
         assert np.allclose(actual["final_x"], expected["final_x"])
         assert np.allclose(actual["memory"], expected["memory"])
         assert np.allclose(actual["weights"], expected["weights"])
+
+
+def test_three_scale_long_run_is_opt_in_and_zero_amplitude_is_exact() -> None:
+    if not long_run_metastability._NUMBA_AVAILABLE:
+        return
+
+    config = SimulationConfig(
+        steps=120,
+        dim=2,
+        epsilon=0.01,
+        eta=0.15,
+        alpha=0.1,
+        memory_mass=1.0,
+        sample_every=10,
+        max_memory=30,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=35.0,
+    )
+    trace_targets = np.empty(0, dtype=np.int64)
+    baseline = long_run_metastability.simulate_long_run(
+        config,
+        seed=123,
+        trace_targets=trace_targets,
+    )
+    explicit_zero = long_run_metastability.simulate_long_run(
+        config,
+        seed=123,
+        trace_targets=trace_targets,
+        sigma_comp=10.0,
+        amplitude_comp=0.0,
+    )
+    compensated = long_run_metastability.simulate_long_run(
+        config,
+        seed=123,
+        trace_targets=trace_targets,
+        sigma_comp=10.0,
+        amplitude_comp=0.944,
+    )
+
+    assert np.array_equal(explicit_zero["samples"], baseline["samples"])
+    assert np.array_equal(explicit_zero["final_x"], baseline["final_x"])
+    assert not np.array_equal(compensated["samples"], baseline["samples"])
+    assert compensated["effective_kernel"]["sigma_comp"] == 10.0
+    assert compensated["effective_kernel"]["amplitude_comp"] == 0.944
+
+
+def test_three_scale_long_run_requires_compensator_scale() -> None:
+    config = SimulationConfig(steps=10, dim=2, alpha=0.1, sample_every=5)
+
+    try:
+        long_run_metastability.simulate_long_run(
+            config,
+            seed=1,
+            amplitude_comp=1.0,
+        )
+    except ValueError as exc:
+        assert "sigma_comp" in str(exc)
+    else:
+        raise AssertionError("expected missing sigma_comp to fail")
 
 
 def test_stored_weight_mass_scales_with_memory_mass() -> None:
@@ -191,6 +263,7 @@ def test_dynamic_center_trace_diagnostics_reports_comoving_runs() -> None:
     assert degenerate["comoving_inside_fraction"] == 0.0
     assert degenerate["degenerate_radius_fraction"] == 1.0
 
+
 def test_dynamic_center_trace_reports_spin_proxy() -> None:
     cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
     result = {
@@ -234,10 +307,13 @@ def test_dynamic_center_trace_reports_spin_proxy() -> None:
     assert len(spin["angular_speeds"]) == 4
     assert diagnostics["trace"]["positions"][0] == [1.0, 0.0]
 
+
 def test_spin_proxy_removes_common_memory_center_translation() -> None:
     cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
     steps = np.array([10, 20, 30, 40, 50], dtype=np.int64)
-    centers = np.column_stack((np.arange(len(steps), dtype=float), np.zeros(len(steps))))
+    centers = np.column_stack(
+        (np.arange(len(steps), dtype=float), np.zeros(len(steps)))
+    )
     result = {
         "trace_steps": steps,
         "trace_centers": centers,
@@ -265,7 +341,9 @@ def test_spin_proxy_removes_common_memory_center_translation() -> None:
 def test_spin_proxy_preserves_rotation_under_common_translation() -> None:
     cfg = SimulationConfig(steps=50, dim=2, alpha=0.1, sample_every=10)
     steps = np.array([10, 20, 30, 40, 50], dtype=np.int64)
-    centers = np.column_stack((np.arange(len(steps), dtype=float), np.zeros(len(steps))))
+    centers = np.column_stack(
+        (np.arange(len(steps), dtype=float), np.zeros(len(steps)))
+    )
     orbit = np.array(
         [[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0], [1.0, 0.0]],
         dtype=float,
@@ -290,6 +368,7 @@ def test_spin_proxy_preserves_rotation_under_common_translation() -> None:
     assert spin["amplitude_median"] > 0.0
     assert spin["axis_polarization"] > 0.99
     assert spin["lab_frame_amplitude_median"] > 0.0
+
 
 def test_hybrid_trace_separates_log_trend_from_local_spin_window() -> None:
     cfg = SimulationConfig(steps=100, dim=2, alpha=0.1, sample_every=10)
@@ -317,9 +396,12 @@ def test_hybrid_trace_separates_log_trend_from_local_spin_window() -> None:
     assert diagnostics["trend"]["trace_interval_updates_max"] == 90.0
     assert diagnostics["rms_radius_median"] == 2.0
     assert diagnostics["trend"]["rms_radius_median"] == 1.0
-    assert long_run_metastability._dynamic_center_field(
-        {"dynamic_center_trace": diagnostics}, "rms_radius_median"
-    ) == 1.0
+    assert (
+        long_run_metastability._dynamic_center_field(
+            {"dynamic_center_trace": diagnostics}, "rms_radius_median"
+        )
+        == 1.0
+    )
 
 
 def test_irregular_log_trace_does_not_report_local_spin_proxy() -> None:
@@ -354,11 +436,15 @@ def test_first_lag_dephasing_is_reported_as_upper_bound() -> None:
     dephasing = long_run_metastability._first_dephasing_time(correlation, lag_times)
 
     assert np.isclose(dephasing, 0.01)
-    assert long_run_metastability._dephasing_is_first_resolved_lag(
-        correlation,
-        lag_times,
-        dephasing,
-    ) is True
+    assert (
+        long_run_metastability._dephasing_is_first_resolved_lag(
+            correlation,
+            lag_times,
+            dephasing,
+        )
+        is True
+    )
+
 
 def test_metastability_diagnostics_reports_memory_time_ratios() -> None:
     samples = np.array(
@@ -445,6 +531,7 @@ def test_run_case_reports_memory_center_residence(tmp_path: Path) -> None:
     assert "memory_spectral_dimension" in summary
     assert summary["sample_center_primary_max_run_memory_times"] is not None
     assert summary["memory_center_primary_max_run_memory_times"] is not None
+
 
 def test_force_component_diagnostics_reports_update_channels() -> None:
     cfg = SimulationConfig(

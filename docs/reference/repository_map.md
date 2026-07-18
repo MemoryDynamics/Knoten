@@ -27,6 +27,7 @@ flowchart TD
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
+    experiments --> comp_pilot["three_scale_compensation_pilot.py<br/>exact zero integral + curvature match"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]

@@ -25,6 +25,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
 | `experiments/current/kernels/kernel_compensation_audit.py` | Zero-Integral-/Kruemmungs-Constraint | aktiv | analytische q-d-Map, exakter dreiskaliger Kompensator und lokale/Fernfeld-Profile |
 | `experiments/current/kernels/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
+| `experiments/current/kernels/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |

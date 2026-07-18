@@ -13,6 +13,7 @@ from typing import Iterable
 
 import numpy as np
 
+
 def _repo_root() -> Path:
     for parent in Path(__file__).resolve().parents:
         if (parent / "pyproject.toml").exists():
@@ -30,6 +31,7 @@ from emergenz_knoten import (  # noqa: E402
     SimulationConfig,
     covariance_dimension,
     effective_double_gaussian_parameters,
+    effective_gaussian_parameters,
     exponential_memory_weights,
     fit_occupancy_scaling_window,
     gaussian_gradient,
@@ -74,7 +76,17 @@ def _parse_float_list(value: str) -> list[float]:
 
 
 def _parse_conditions(value: str) -> list[str]:
-    allowed = {"baseline", "eta_zero", "single_scale", "rep_zero", "m0_zero", "alpha_one", "matched_deposition", "matched_deposition_renormalized", "zero_mean_two_scale"}
+    allowed = {
+        "baseline",
+        "eta_zero",
+        "single_scale",
+        "rep_zero",
+        "m0_zero",
+        "alpha_one",
+        "matched_deposition",
+        "matched_deposition_renormalized",
+        "zero_mean_two_scale",
+    }
     values = [item.strip() for item in value.split(",") if item.strip()]
     unknown = sorted(set(values) - allowed)
     if unknown:
@@ -82,7 +94,6 @@ def _parse_conditions(value: str) -> list[str]:
     if not values:
         raise argparse.ArgumentTypeError("expected at least one condition")
     return values
-
 
 
 def _trace_targets(
@@ -165,7 +176,9 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
     if condition == "alpha_one":
         return replace(config, alpha=1.0)
     if condition == "matched_deposition":
-        return replace(config, deposition_kernel="matched_gaussian", deposition_sigma=0.0)
+        return replace(
+            config, deposition_kernel="matched_gaussian", deposition_sigma=0.0
+        )
     if condition == "matched_deposition_renormalized":
         factor = matched_local_stiffness_renormalization(config.dim)
         return replace(
@@ -187,6 +200,7 @@ def _apply_condition(config: SimulationConfig, condition: str) -> SimulationConf
         )
     raise ValueError(f"unknown condition: {condition}")
 
+
 @njit(cache=False)
 def _simulate_circular_numba(
     steps: int,
@@ -199,6 +213,8 @@ def _simulate_circular_numba(
     sigma_att: float,
     amplitude_rep: float,
     amplitude_att: float,
+    sigma_comp: float,
+    amplitude_comp: float,
     memory_factor: float,
     max_memory: int,
     burn_in: int,
@@ -238,6 +254,7 @@ def _simulate_circular_numba(
     n_trace = 0
     sigma_rep2 = sigma_rep * sigma_rep
     sigma_att2 = sigma_att * sigma_att
+    sigma_comp2 = sigma_comp * sigma_comp
 
     for step in range(1, steps + 1):
         grad = np.zeros(dim, np.float64)
@@ -250,7 +267,12 @@ def _simulate_circular_numba(
                     r2 += diff * diff
                 rep = amplitude_rep * np.exp(-0.5 * r2 / sigma_rep2) / sigma_rep2
                 att = amplitude_att * np.exp(-0.5 * r2 / sigma_att2) / sigma_att2
-                factor = weights[age] * (att - rep)
+                comp = 0.0
+                if amplitude_comp != 0.0:
+                    comp = (
+                        amplitude_comp * np.exp(-0.5 * r2 / sigma_comp2) / sigma_comp2
+                    )
+                factor = weights[age] * (att - rep - comp)
                 for d in range(dim):
                     grad[d] += factor * (x[d] - memory[mem_idx, d])
 
@@ -333,12 +355,15 @@ def _simulate_circular_numba(
         trace_x_distances[:n_trace],
     )
 
+
 def simulate_long_run(
     config: SimulationConfig,
     *,
     seed: int,
     trace_every: int = 0,
     trace_targets: np.ndarray | None = None,
+    sigma_comp: float | None = None,
+    amplitude_comp: float = 0.0,
 ) -> dict[str, np.ndarray]:
     validate_simulation_config(config)
     effective_kernel = effective_double_gaussian_parameters(
@@ -350,6 +375,28 @@ def simulate_long_run(
         deposition_kernel=config.deposition_kernel,
         deposition_sigma=config.deposition_sigma,
     )
+    if sigma_comp is None:
+        if amplitude_comp != 0.0:
+            raise ValueError("sigma_comp is required when amplitude_comp is non-zero")
+        effective_sigma_comp = effective_kernel["sigma_rep"]
+        effective_amplitude_comp = 0.0
+    else:
+        if sigma_comp <= 0.0 or not math.isfinite(sigma_comp):
+            raise ValueError("sigma_comp must be positive and finite")
+        if not math.isfinite(amplitude_comp):
+            raise ValueError("amplitude_comp must be finite")
+        effective_sigma_comp, effective_amplitude_comp = effective_gaussian_parameters(
+            sigma=sigma_comp,
+            amplitude=amplitude_comp,
+            dim=config.dim,
+            deposition_kernel=config.deposition_kernel,
+            deposition_sigma=config.deposition_sigma,
+        )
+        effective_kernel = {
+            **effective_kernel,
+            "sigma_comp": effective_sigma_comp,
+            "amplitude_comp": effective_amplitude_comp,
+        }
     if trace_targets is None:
         trace_targets = _trace_targets(
             steps=config.steps,
@@ -362,6 +409,8 @@ def simulate_long_run(
         trace_targets = np.asarray(trace_targets, dtype=np.int64)
 
     if not _NUMBA_AVAILABLE:
+        if effective_amplitude_comp != 0.0:
+            raise ImportError("numba is required for three-scale long-run simulation")
         result = simulate_finite_memory(config, seed=seed)
         empty_trace = np.empty((0, config.dim), dtype=float)
         return {
@@ -400,6 +449,8 @@ def simulate_long_run(
         effective_kernel["sigma_att"],
         effective_kernel["amplitude_rep"],
         effective_kernel["amplitude_att"],
+        effective_sigma_comp,
+        effective_amplitude_comp,
         config.memory_factor,
         config.max_memory,
         config.burn_in,
@@ -428,7 +479,6 @@ def simulate_long_run(
     }
 
 
-
 def _median_or_none(values: list[float]) -> float | None:
     if not values:
         return None
@@ -449,12 +499,16 @@ def _cosine_or_none(step: np.ndarray, target: np.ndarray) -> float | None:
     return float(np.dot(step, target) / (step_norm * target_norm))
 
 
-def _force_component_diagnostics(config: SimulationConfig, *, seed: int) -> dict[str, object]:
+def _force_component_diagnostics(
+    config: SimulationConfig, *, seed: int
+) -> dict[str, object]:
     """Return sampled force-component summaries for the current update sign."""
 
     rng = np.random.default_rng(seed)
     horizon = memory_horizon(config)
-    weights = exponential_memory_weights(config.alpha, horizon, memory_mass=config.memory_mass)
+    weights = exponential_memory_weights(
+        config.alpha, horizon, memory_mass=config.memory_mass
+    )
     effective = effective_double_gaussian_parameters(
         dim=config.dim,
         sigma_rep=config.sigma_rep,
@@ -540,10 +594,14 @@ def _force_component_diagnostics(config: SimulationConfig, *, seed: int) -> dict
         "net_drift_norm_median": net_median,
         "noise_norm_median": noise_median,
         "rep_to_att_norm_median_ratio": (
-            rep_median / att_median if rep_median is not None and att_median not in (None, 0.0) else None
+            rep_median / att_median
+            if rep_median is not None and att_median not in (None, 0.0)
+            else None
         ),
         "noise_to_net_drift_median_ratio": (
-            noise_median / net_median if noise_median is not None and net_median not in (None, 0.0) else None
+            noise_median / net_median
+            if noise_median is not None and net_median not in (None, 0.0)
+            else None
         ),
         "rep_step_memory_center_cos_median": _median_or_none(rep_center_cos),
         "att_step_memory_center_cos_median": _median_or_none(att_center_cos),
@@ -584,8 +642,9 @@ def _run_lengths(mask: np.ndarray) -> np.ndarray:
     return np.asarray(runs, dtype=int)
 
 
-
-def _trace_point_update_weights(steps: np.ndarray, fallback_stride: float) -> np.ndarray:
+def _trace_point_update_weights(
+    steps: np.ndarray, fallback_stride: float
+) -> np.ndarray:
     if len(steps) == 0:
         return np.empty(0, dtype=float)
     stride = float(fallback_stride) if fallback_stride > 0.0 else 1.0
@@ -647,7 +706,11 @@ def _bivector_components(rel: np.ndarray, velocity: np.ndarray) -> np.ndarray:
     for i in range(dim):
         for j in range(i + 1, dim):
             components.append(rel[:, i] * velocity[:, j] - rel[:, j] * velocity[:, i])
-    return np.stack(components, axis=1) if components else np.empty((n_points, 0), dtype=float)
+    return (
+        np.stack(components, axis=1)
+        if components
+        else np.empty((n_points, 0), dtype=float)
+    )
 
 
 def _direction_autocorrelation(
@@ -675,7 +738,11 @@ def _direction_autocorrelation(
         dots = np.sum(arr[:-lag] * arr[lag:], axis=1)
         pair_weights = sample_weights[:-lag] * sample_weights[lag:]
         total_weight = float(np.sum(pair_weights))
-        out[lag] = float(np.sum(pair_weights * dots) / total_weight) if total_weight > 0.0 else float("nan")
+        out[lag] = (
+            float(np.sum(pair_weights * dots) / total_weight)
+            if total_weight > 0.0
+            else float("nan")
+        )
     return out
 
 
@@ -692,7 +759,9 @@ def _lag_memory_times(times: np.ndarray, *, max_lag: int) -> np.ndarray:
     return out
 
 
-def _first_dephasing_time(correlation: np.ndarray, lag_times: np.ndarray) -> float | None:
+def _first_dephasing_time(
+    correlation: np.ndarray, lag_times: np.ndarray
+) -> float | None:
     if len(correlation) == 0 or len(lag_times) != len(correlation):
         return None
     threshold = math.exp(-1.0)
@@ -716,7 +785,9 @@ def _dephasing_is_first_resolved_lag(
     first_lag = lag_times[1]
     if not (math.isfinite(float(first_value)) and math.isfinite(float(first_lag))):
         return None
-    if not math.isclose(float(dephasing), float(first_lag), rel_tol=1.0e-9, abs_tol=1.0e-12):
+    if not math.isclose(
+        float(dephasing), float(first_lag), rel_tol=1.0e-9, abs_tol=1.0e-12
+    ):
         return False
     return bool(float(first_value) <= threshold)
 
@@ -760,7 +831,9 @@ def _spin_proxy_diagnostics(
     velocity = relative_displacements[valid_gap] / memory_gaps[valid_gap, None]
     rel_mid = 0.5 * (rel[:-1] + rel[1:])[valid_gap]
     radius_mid = 0.5 * (rms_radii[:-1] + rms_radii[1:])[valid_gap]
-    transition_times = 0.5 * (steps[:-1] + steps[1:])[valid_gap].astype(float) * float(alpha)
+    transition_times = (
+        0.5 * (steps[:-1] + steps[1:])[valid_gap].astype(float) * float(alpha)
+    )
 
     # This is internal circulation in the frame of the moving memory center.
     # The laboratory-frame value is retained solely to quantify removed drift.
@@ -795,7 +868,9 @@ def _spin_proxy_diagnostics(
             "direction_dephasing_is_upper_bound": None,
             "raw_spin_dephasing_memory_times": None,
             "raw_spin_dephasing_is_upper_bound": None,
-            "transition_memory_times": [_finite_float(value) for value in transition_times],
+            "transition_memory_times": [
+                _finite_float(value) for value in transition_times
+            ],
             "amplitudes": [_finite_float(value) for value in amplitude],
             "angular_speeds": [],
             "raw_spin_autocorrelation": [],
@@ -806,9 +881,13 @@ def _spin_proxy_diagnostics(
     finite_radius = np.isfinite(radius_mid) & (radius_mid > 0.0) & valid_amplitude
     angular_speed_full = np.full(amplitude.shape, np.nan, dtype=float)
     if np.any(finite_radius):
-        angular_speed_full[finite_radius] = amplitude[finite_radius] / (radius_mid[finite_radius] ** 2)
+        angular_speed_full[finite_radius] = amplitude[finite_radius] / (
+            radius_mid[finite_radius] ** 2
+        )
     angular_speed = angular_speed_full[np.isfinite(angular_speed_full)]
-    direction_ac = _direction_autocorrelation(unit, max_lag=max_lag, weights=amplitude_valid)
+    direction_ac = _direction_autocorrelation(
+        unit, max_lag=max_lag, weights=amplitude_valid
+    )
     valid_times = transition_times[valid_amplitude]
     lag_times = _lag_memory_times(valid_times, max_lag=max_lag)
     dephasing = _first_dephasing_time(direction_ac, lag_times)
@@ -820,7 +899,9 @@ def _spin_proxy_diagnostics(
     raw_spin_values = spin_components[valid_amplitude]
     raw_spin_ac_max_lag = min(max_lag, max(0, len(raw_spin_values) - 1))
     try:
-        raw_spin_ac = vector_autocorrelation(raw_spin_values, max_lag=raw_spin_ac_max_lag)
+        raw_spin_ac = vector_autocorrelation(
+            raw_spin_values, max_lag=raw_spin_ac_max_lag
+        )
     except ValueError:
         raw_spin_ac = np.empty(0, dtype=float)
     raw_spin_lag_times = _lag_memory_times(valid_times, max_lag=raw_spin_ac_max_lag)
@@ -851,7 +932,9 @@ def _spin_proxy_diagnostics(
         "amplitude_median": _finite_float(float(np.median(amplitude_valid))),
         "amplitude_q25": _finite_percentile(amplitude_valid, 25.0),
         "amplitude_q75": _finite_percentile(amplitude_valid, 75.0),
-        "amplitude_cv": _finite_float(amplitude_std / amplitude_mean) if amplitude_mean > 0.0 else None,
+        "amplitude_cv": _finite_float(amplitude_std / amplitude_mean)
+        if amplitude_mean > 0.0
+        else None,
         "angular_speed_median": _finite_percentile(angular_speed, 50.0),
         "angular_speed_q25": _finite_percentile(angular_speed, 25.0),
         "angular_speed_q75": _finite_percentile(angular_speed, 75.0),
@@ -865,7 +948,9 @@ def _spin_proxy_diagnostics(
         "amplitudes": [_finite_float(value) for value in amplitude],
         "angular_speeds": [_finite_float(value) for value in angular_speed_full],
         "direction_autocorrelation": [_finite_float(value) for value in direction_ac],
-        "direction_autocorrelation_lag_memory_times": [_finite_float(value) for value in lag_times],
+        "direction_autocorrelation_lag_memory_times": [
+            _finite_float(value) for value in lag_times
+        ],
         "direction_dephasing_memory_times": _finite_float(dephasing),
         "direction_dephasing_is_upper_bound": direction_dephasing_is_upper_bound,
         "raw_spin_autocorrelation": [_finite_float(value) for value in raw_spin_ac],
@@ -876,6 +961,7 @@ def _spin_proxy_diagnostics(
         "raw_spin_dephasing_is_upper_bound": raw_spin_dephasing_is_upper_bound,
     }
 
+
 def _dynamic_center_trace_diagnostics(
     result: dict[str, np.ndarray],
     *,
@@ -885,9 +971,15 @@ def _dynamic_center_trace_diagnostics(
     include_trace: bool = True,
     max_trace_points: int = 50_000,
 ) -> dict[str, object] | None:
-    steps = np.asarray(result.get("trace_steps", np.empty(0, dtype=np.int64)), dtype=np.int64)
-    centers = np.asarray(result.get("trace_centers", np.empty((0, config.dim))), dtype=float)
-    positions = np.asarray(result.get("trace_positions", np.empty((0, config.dim))), dtype=float)
+    steps = np.asarray(
+        result.get("trace_steps", np.empty(0, dtype=np.int64)), dtype=np.int64
+    )
+    centers = np.asarray(
+        result.get("trace_centers", np.empty((0, config.dim))), dtype=float
+    )
+    positions = np.asarray(
+        result.get("trace_positions", np.empty((0, config.dim))), dtype=float
+    )
     mean_radii = np.asarray(result.get("trace_mean_radii", np.empty(0)), dtype=float)
     rms_radii = np.asarray(result.get("trace_rms_radii", np.empty(0)), dtype=float)
     x_distances = np.asarray(result.get("trace_x_distances", np.empty(0)), dtype=float)
@@ -902,15 +994,25 @@ def _dynamic_center_trace_diagnostics(
     valid_radius = np.isfinite(rms_radii) & (rms_radii > 0.0)
     degenerate_radius = ~valid_radius
     inside = np.zeros(len(steps), dtype=bool)
-    inside[valid_radius] = x_distances[valid_radius] <= primary_radius_factor * rms_radii[valid_radius]
+    inside[valid_radius] = (
+        x_distances[valid_radius] <= primary_radius_factor * rms_radii[valid_radius]
+    )
     runs = _run_lengths(inside)
 
     if len(steps) > 1:
         gaps = np.diff(steps).astype(float)
         positive_gaps = gaps[gaps > 0.0]
-        trace_stride_updates = float(np.median(positive_gaps)) if len(positive_gaps) else float(trace_every)
-        trace_interval_updates_min = float(np.min(positive_gaps)) if len(positive_gaps) else None
-        trace_interval_updates_max = float(np.max(positive_gaps)) if len(positive_gaps) else None
+        trace_stride_updates = (
+            float(np.median(positive_gaps))
+            if len(positive_gaps)
+            else float(trace_every)
+        )
+        trace_interval_updates_min = (
+            float(np.min(positive_gaps)) if len(positive_gaps) else None
+        )
+        trace_interval_updates_max = (
+            float(np.max(positive_gaps)) if len(positive_gaps) else None
+        )
     else:
         gaps = np.empty(0, dtype=float)
         trace_stride_updates = float(trace_every)
@@ -919,10 +1021,16 @@ def _dynamic_center_trace_diagnostics(
     if trace_stride_updates <= 0.0:
         trace_stride_updates = float(config.sample_every)
     trace_stride_memory_times = trace_stride_updates * config.alpha
-    trace_point_update_weights = _trace_point_update_weights(steps, trace_stride_updates)
+    trace_point_update_weights = _trace_point_update_weights(
+        steps, trace_stride_updates
+    )
     trace_point_memory_times = trace_point_update_weights * config.alpha
     run_memory_times = _weighted_run_sums(inside, trace_point_memory_times)
-    trace_time_memory_times = float(np.sum(trace_point_memory_times)) if len(trace_point_memory_times) else 0.0
+    trace_time_memory_times = (
+        float(np.sum(trace_point_memory_times))
+        if len(trace_point_memory_times)
+        else 0.0
+    )
     if trace_time_memory_times > 0.0:
         comoving_inside_fraction_time_weighted = float(
             np.sum(trace_point_memory_times[inside]) / trace_time_memory_times
@@ -930,10 +1038,20 @@ def _dynamic_center_trace_diagnostics(
     else:
         comoving_inside_fraction_time_weighted = 0.0
 
-    center_steps = np.linalg.norm(np.diff(centers, axis=0), axis=1) if len(steps) > 1 else np.empty(0)
+    center_steps = (
+        np.linalg.norm(np.diff(centers, axis=0), axis=1)
+        if len(steps) > 1
+        else np.empty(0)
+    )
     center_path_length = float(np.sum(center_steps)) if len(center_steps) else 0.0
-    center_net_displacement = float(np.linalg.norm(centers[-1] - centers[0])) if len(steps) > 1 else 0.0
-    center_path_to_chord = center_path_length / center_net_displacement if center_net_displacement > 0.0 else None
+    center_net_displacement = (
+        float(np.linalg.norm(centers[-1] - centers[0])) if len(steps) > 1 else 0.0
+    )
+    center_path_to_chord = (
+        center_path_length / center_net_displacement
+        if center_net_displacement > 0.0
+        else None
+    )
 
     drift_per_memory_time = np.empty(0, dtype=float)
     drift_radius_fraction_per_memory_time = np.empty(0, dtype=float)
@@ -944,7 +1062,9 @@ def _dynamic_center_trace_diagnostics(
         radius_mid = 0.5 * (rms_radii[:-1] + rms_radii[1:])
         valid_radius_gap = valid_gap & np.isfinite(radius_mid) & (radius_mid > 0.0)
         drift_radius_fraction_per_memory_time = (
-            center_steps[valid_radius_gap] / radius_mid[valid_radius_gap] / memory_gaps[valid_radius_gap]
+            center_steps[valid_radius_gap]
+            / radius_mid[valid_radius_gap]
+            / memory_gaps[valid_radius_gap]
         )
 
     radius_ratio = np.full(len(steps), np.nan, dtype=float)
@@ -962,11 +1082,19 @@ def _dynamic_center_trace_diagnostics(
         "valid_radius_fraction": _finite_float(float(np.mean(valid_radius))),
         "degenerate_radius_fraction": _finite_float(float(np.mean(degenerate_radius))),
         "comoving_inside_fraction": _finite_float(float(np.mean(inside))),
-        "comoving_inside_fraction_time_weighted": _finite_float(comoving_inside_fraction_time_weighted),
+        "comoving_inside_fraction_time_weighted": _finite_float(
+            comoving_inside_fraction_time_weighted
+        ),
         "max_run_trace_points": int(runs.max()) if len(runs) else 0,
-        "mean_run_trace_points": _finite_float(float(np.mean(runs))) if len(runs) else 0.0,
-        "max_run_memory_times": _finite_float(float(run_memory_times.max())) if len(run_memory_times) else 0.0,
-        "mean_run_memory_times": _finite_float(float(np.mean(run_memory_times))) if len(run_memory_times) else 0.0,
+        "mean_run_trace_points": _finite_float(float(np.mean(runs)))
+        if len(runs)
+        else 0.0,
+        "max_run_memory_times": _finite_float(float(run_memory_times.max()))
+        if len(run_memory_times)
+        else 0.0,
+        "mean_run_memory_times": _finite_float(float(np.mean(run_memory_times)))
+        if len(run_memory_times)
+        else 0.0,
         "rms_radius_median": _finite_float(float(np.median(rms_radii))),
         "rms_radius_mean": _finite_float(float(np.mean(rms_radii))),
         "mean_radius_median": _finite_float(float(np.median(mean_radii))),
@@ -974,7 +1102,9 @@ def _dynamic_center_trace_diagnostics(
         "x_distance_to_rms_radius_median": (
             _finite_float(float(np.median(finite_ratio))) if len(finite_ratio) else None
         ),
-        "center_step_median": _finite_float(float(np.median(center_steps))) if len(center_steps) else 0.0,
+        "center_step_median": _finite_float(float(np.median(center_steps)))
+        if len(center_steps)
+        else 0.0,
         "center_drift_per_memory_time_median": (
             _finite_float(float(np.median(drift_per_memory_time)))
             if len(drift_per_memory_time)
@@ -1064,7 +1194,9 @@ def _occupancy_payload(points: np.ndarray) -> dict[str, object]:
     }
 
 
-def _spectral_dimension_payload(points: np.ndarray, *, max_points: int) -> dict[str, object]:
+def _spectral_dimension_payload(
+    points: np.ndarray, *, max_points: int
+) -> dict[str, object]:
     source_n_points = int(len(points))
     arr = np.asarray(points, dtype=float)
     if max_points == 0:
@@ -1170,7 +1302,9 @@ def _center_residence_payload(
         mean_updates = float(float(stats["mean_run_length"]) * config.sample_every)
         max_updates = float(float(stats["max_run_length"]) * config.sample_every)
         max_memory_times = max_updates / memory_persistence_updates
-        is_long_lived = bool(max_updates >= min_memory_times * memory_persistence_updates)
+        is_long_lived = bool(
+            max_updates >= min_memory_times * memory_persistence_updates
+        )
         unconstrained_best = max(unconstrained_best, max_memory_times)
         by_factor[f"{float(factor):g}"] = {
             **stats,
@@ -1258,7 +1392,9 @@ def metastability_diagnostics(
         "occupancy_dimension": occupancy["dimension"],
         "occupancy": occupancy,
         "sample_shape": sample_shape,
-        "sample_spectral": _spectral_dimension_payload(samples, max_points=spectral_points),
+        "sample_spectral": _spectral_dimension_payload(
+            samples, max_points=spectral_points
+        ),
         "center_residence": {"sample_center": sample_center_residence}
         if sample_center_residence is not None
         else {},
@@ -1285,10 +1421,21 @@ def run_case(
     trace_targets: np.ndarray | None = None,
     spectral_points: int = 1000,
     memory_snapshot_points: int = 0,
+    sigma_comp: float | None = None,
+    amplitude_comp: float = 0.0,
 ) -> dict[str, object]:
     config = _apply_condition(base_config, condition)
     started = time.perf_counter()
-    result = simulate_long_run(config, seed=seed, trace_every=trace_every, trace_targets=trace_targets)
+    if force_components and amplitude_comp != 0.0:
+        raise ValueError("force_components does not yet support a third kernel scale")
+    result = simulate_long_run(
+        config,
+        seed=seed,
+        trace_every=trace_every,
+        trace_targets=trace_targets,
+        sigma_comp=sigma_comp,
+        amplitude_comp=amplitude_comp,
+    )
     elapsed = time.perf_counter() - started
     samples = result["samples"]
     horizon = memory_horizon(config)
@@ -1337,7 +1484,9 @@ def run_case(
                 if isinstance(center_residence, dict):
                     center_residence["memory_center"] = memory_center_residence
     if force_components:
-        diagnostics["force_components"] = _force_component_diagnostics(config, seed=seed)
+        diagnostics["force_components"] = _force_component_diagnostics(
+            config, seed=seed
+        )
     payload: dict[str, object] = {
         "condition": condition,
         "seed": int(seed),
@@ -1350,7 +1499,9 @@ def run_case(
         "base_config": asdict(base_config),
         "effective_kernel": result["effective_kernel"],
         "memory_horizon": int(horizon),
-        "stored_weight_mass": _stored_weight_mass(config.alpha, horizon, config.memory_mass),
+        "stored_weight_mass": _stored_weight_mass(
+            config.alpha, horizon, config.memory_mass
+        ),
         "diagnostics": diagnostics,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1362,7 +1513,9 @@ def run_case(
     return payload
 
 
-def _center_residence_field(diagnostics: dict[str, object], key: str, field: str) -> float | None:
+def _center_residence_field(
+    diagnostics: dict[str, object], key: str, field: str
+) -> float | None:
     center_residence = diagnostics.get("center_residence")
     if not isinstance(center_residence, dict):
         return None
@@ -1375,7 +1528,9 @@ def _center_residence_field(diagnostics: dict[str, object], key: str, field: str
     return None
 
 
-def _dynamic_center_field(diagnostics: dict[str, object], field: str) -> float | int | None:
+def _dynamic_center_field(
+    diagnostics: dict[str, object], field: str
+) -> float | int | None:
     payload = diagnostics.get("dynamic_center_trace")
     if not isinstance(payload, dict):
         return None
@@ -1389,7 +1544,9 @@ def _dynamic_center_field(diagnostics: dict[str, object], field: str) -> float |
     return None
 
 
-def _dynamic_center_spin_field(diagnostics: dict[str, object], field: str) -> float | int | None:
+def _dynamic_center_spin_field(
+    diagnostics: dict[str, object], field: str
+) -> float | int | None:
     payload = diagnostics.get("dynamic_center_trace")
     if not isinstance(payload, dict):
         return None
@@ -1402,6 +1559,7 @@ def _dynamic_center_spin_field(diagnostics: dict[str, object], field: str) -> fl
     if isinstance(value, float) and math.isfinite(value):
         return value
     return None
+
 
 def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
     rows = []
@@ -1429,13 +1587,17 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
             sample_shape = {}
         memory_cloud = diagnostics.get("memory_cloud")
         memory_shape = {}
-        if isinstance(memory_cloud, dict) and isinstance(memory_cloud.get("shape"), dict):
+        if isinstance(memory_cloud, dict) and isinstance(
+            memory_cloud.get("shape"), dict
+        ):
             memory_shape = memory_cloud["shape"]
         sample_spectral = diagnostics.get("sample_spectral")
         if not isinstance(sample_spectral, dict):
             sample_spectral = {}
         memory_spectral = {}
-        if isinstance(memory_cloud, dict) and isinstance(memory_cloud.get("spectral"), dict):
+        if isinstance(memory_cloud, dict) and isinstance(
+            memory_cloud.get("spectral"), dict
+        ):
             memory_spectral = memory_cloud["spectral"]
         rows.append(
             {
@@ -1467,27 +1629,45 @@ def summarize_cases(cases: list[dict[str, object]]) -> list[dict[str, object]]:
                 "memory_center_primary_inside_fraction": _center_residence_field(
                     diagnostics, "memory_center", "primary_inside_fraction"
                 ),
-                "dynamic_center_trace_count": _dynamic_center_field(diagnostics, "n_traces"),
-                "dynamic_center_rms_radius_median": _dynamic_center_field(diagnostics, "rms_radius_median"),
+                "dynamic_center_trace_count": _dynamic_center_field(
+                    diagnostics, "n_traces"
+                ),
+                "dynamic_center_rms_radius_median": _dynamic_center_field(
+                    diagnostics, "rms_radius_median"
+                ),
                 "dynamic_center_comoving_inside_fraction": _dynamic_center_field(
                     diagnostics, "comoving_inside_fraction"
                 ),
                 "dynamic_center_comoving_inside_fraction_time_weighted": _dynamic_center_field(
                     diagnostics, "comoving_inside_fraction_time_weighted"
                 ),
-                "dynamic_center_max_run_memory_times": _dynamic_center_field(diagnostics, "max_run_memory_times"),
+                "dynamic_center_max_run_memory_times": _dynamic_center_field(
+                    diagnostics, "max_run_memory_times"
+                ),
                 "dynamic_center_drift_per_memory_time_median": _dynamic_center_field(
                     diagnostics, "center_drift_per_memory_time_median"
                 ),
                 "dynamic_center_drift_radius_fraction_per_memory_time_median": _dynamic_center_field(
                     diagnostics, "center_drift_radius_fraction_per_memory_time_median"
                 ),
-                "spin_proxy_valid_fraction": _dynamic_center_spin_field(diagnostics, "valid_fraction"),
-                "spin_proxy_amplitude_median": _dynamic_center_spin_field(diagnostics, "amplitude_median"),
-                "spin_proxy_amplitude_cv": _dynamic_center_spin_field(diagnostics, "amplitude_cv"),
-                "spin_proxy_angular_speed_median": _dynamic_center_spin_field(diagnostics, "angular_speed_median"),
-                "spin_proxy_axis_polarization": _dynamic_center_spin_field(diagnostics, "axis_polarization"),
-                "spin_proxy_signed_component_median": _dynamic_center_spin_field(diagnostics, "signed_component_median"),
+                "spin_proxy_valid_fraction": _dynamic_center_spin_field(
+                    diagnostics, "valid_fraction"
+                ),
+                "spin_proxy_amplitude_median": _dynamic_center_spin_field(
+                    diagnostics, "amplitude_median"
+                ),
+                "spin_proxy_amplitude_cv": _dynamic_center_spin_field(
+                    diagnostics, "amplitude_cv"
+                ),
+                "spin_proxy_angular_speed_median": _dynamic_center_spin_field(
+                    diagnostics, "angular_speed_median"
+                ),
+                "spin_proxy_axis_polarization": _dynamic_center_spin_field(
+                    diagnostics, "axis_polarization"
+                ),
+                "spin_proxy_signed_component_median": _dynamic_center_spin_field(
+                    diagnostics, "signed_component_median"
+                ),
                 "spin_proxy_direction_dephasing_memory_times": _dynamic_center_spin_field(
                     diagnostics, "direction_dephasing_memory_times"
                 ),
@@ -1533,7 +1713,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--eta", type=float, default=0.15)
     parser.add_argument("--alpha", type=float, default=0.01)
     parser.add_argument("--memory-mass", type=float, default=1.0)
-    parser.add_argument("--deposition-kernel", choices=sorted(DEPOSITION_KERNELS), default="delta")
+    parser.add_argument(
+        "--deposition-kernel", choices=sorted(DEPOSITION_KERNELS), default="delta"
+    )
     parser.add_argument("--deposition-sigma", type=float, default=0.0)
     parser.add_argument("--sigma-rep", type=float, default=1.0)
     parser.add_argument("--sigma-att", type=float, default=3.0)
@@ -1638,9 +1820,13 @@ def main() -> None:
     if args.deposition_kernel == "gaussian" and args.deposition_sigma <= 0.0:
         raise SystemExit("--deposition-sigma must be positive for gaussian deposition")
     if args.deposition_kernel == "matched_gaussian" and args.deposition_sigma != 0.0:
-        raise SystemExit("--deposition-sigma must be zero for matched_gaussian deposition")
+        raise SystemExit(
+            "--deposition-sigma must be zero for matched_gaussian deposition"
+        )
     if not _NUMBA_AVAILABLE and not args.allow_slow_python:
-        raise SystemExit("numba is required for long-run simulations unless --allow-slow-python is set")
+        raise SystemExit(
+            "numba is required for long-run simulations unless --allow-slow-python is set"
+        )
     if args.spectral_points < 0:
         raise SystemExit("--spectral-points must be non-negative")
     if args.memory_snapshot_points < 0:
@@ -1669,7 +1855,9 @@ def main() -> None:
         sample_every=args.sample_every,
     )
 
-    trace_window_updates = int(math.ceil(args.trace_window_memory_times / base_config.alpha))
+    trace_window_updates = int(
+        math.ceil(args.trace_window_memory_times / base_config.alpha)
+    )
     trace_targets = _trace_targets(
         steps=base_config.steps,
         burn_in=base_config.burn_in,
