@@ -47,6 +47,8 @@ CATEGORIES = {
     ],
     "kernels": [
         "current/kernels/kernel_shape_probe.py",
+        "current/kernels/kernel_compensation_audit.py",
+        "current/kernels/fixed_curvature_sigma_pilot.py",
         "propagation_speed/ballistic_kernel_probe.py",
     ],
     "knot_stability": [

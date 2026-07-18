@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -23,6 +23,8 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
 | `experiments/current/dynamics/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
 | `experiments/current/kernels/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
+| `experiments/current/kernels/kernel_compensation_audit.py` | Zero-Integral-/Kruemmungs-Constraint | aktiv | analytische q-d-Map, exakter dreiskaliger Kompensator und lokale/Fernfeld-Profile |
+| `experiments/current/kernels/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
@@ -614,9 +616,10 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/project/governance/privacy_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Privacy-Policy und Kontrollplan; lokale private Klartexte entfernt, `m0_zero` und `alpha_one` bleiben Negativkontrollen. |
 | `reports/kernels/deposition/deposition_kernel_audit_2026-07-08.md` | Deposition-Kernel-Audit | Delta ist die Baseline; finite `gaussian` und `matched_gaussian` sind jetzt als effektive Faltung implementiert. |
 | `reports/kernels/deposition/matched_deposition_kernel_pilot_2026-07-08.md` | Matched-Deposition-Pilot | Normalisiertes Gaussian-Matching trennt von `eta_zero`, ist im 100k-Pilot aber breiter als Delta; naechster Test braucht Steifigkeitsrenormierung. |
-| `reports/kernels/deposition/zero_mean_kernel_decision_2026-07-09.md` | Zero-Mean-Kernel | Kompensierter Zwei-Skalen-Kernel mit `int K=0`; erster Test bei `sigma_att/sigma_rep=1.5`. |
+| `reports/kernels/deposition/zero_mean_kernel_decision_2026-07-09.md` | Zero-Mean-Kernel, historisch | Vor korrigierter Sign-/Kruemmungsanalyse; der spaetere Constraint-Audit zeigt die Unvereinbarkeit von lokaler Rueckstellung und `int K=0` im breiten zweiskaligen Attraktionskernel. |
 | `reports/kernels/deposition/zero_mean_matched_pilot_100k_2026-07-09.md` | Zero-Mean-/Matched-Pilot | Bei `sigma_att/sigma_rep=1.5` sind Baseline, Zero-Mean und renormiertes Matching praktisch deckungsgleich. |
 | `reports/kernels/deposition/kernel_scale_ratio_and_rep_zero_controls_2026-07-09.md` | Scale-Ratio-/Rep-Zero-Kontrollen | Ratios `{1.5,2,3}` isolieren keinen Zero-Mean-Mechanismus; `rep_zero` dispergiert stark und klaert die aktuelle Vorzeichenkonvention. |
+| `reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md` | Kernelkompensations-Constraint | Exakter Nachweis: fuer `q>1` sind `a=q^-d` und lokale Rueckstellung `a>q^2` zweiskalig disjunkt; definiert Fixed-chi-Slice und breiten dritten Kompensator. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 ## Repository
 
@@ -526,22 +526,34 @@ abgeleitet werden. Der naechste wissenschaftliche Schritt ist Reconciliation:
 Parameterdefinitionen, Schaetzfenster, Sampling, historische Skripte und
 Negativkontrollen gegeneinander pruefen.
 
+## Kernelkompensations-Gate 2026-07-18
+
+Der aktuelle q=3-Referenzkernel (`A_rep=1`, `A_att=20..35`) ist nicht
+annaehend zero mean. Mit `q=sigma_att/sigma_rep>1` und
+`a=A_att/A_rep` gilt fuer unnormalisierte Gausskerne exakt
+`a_zero=q^-d`, waehrend lokale Rueckstellung `a>q^2` verlangt. Diese
+Bedingungen sind im zweiskaligen Kernel strukturell disjunkt. Bei q=3 liegt
+das integrierte Attraktions-/Repulsionsverhaeltnis in d=3 bei `540..945`.
+
+Deshalb wird kein freier Sigma-Sweep gestartet. Der kontrollierte Test variiert
+nur `q in {2,3,4}` bei festem `chi=a/q^2=35/9`, `N=1M`, Seeds `1..5` und
+gemeinsamen seedgleichen `eta_zero`-Kontrollen. Danach ist genau ein breiter
+dreiskaliger Kompensator vorgesehen, dessen Amplitude das Integral analytisch
+nullt. Erst dann folgt der signierte Kreuzkanal. Audit:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`.
+
 ## Naechste technische Schritte
 
-1. Minimalen signierten skalaren Kreuzkanal spezifizieren, getrennt vom
-   unveraenderten selbstkonfinierenden `rho>=0`-Kanal. Pflichtkontrollen:
-   `s_target=0`, `s_source=0`, einseitiger Vorzeichenwechsel, gleiches
-   Zukunftsrauschen und unveraenderte freie Selbstentwicklung.
-2. Die Vorzeichenkonvention des Kreuzkerns explizit entscheiden. Ein Label darf
-   erst dann charge-like heissen, wenn der Vorzeichenwechsel die Antwort
-   reproduzierbar umkehrt und like/unlike Paarungen getrennt getestet sind.
-3. Aufloesung von Selbst- und Kreuzkernel trennen. Der aktuelle Kreuzkernel ist
-   gegenueber `R_mem` um mehrere Tausend breiter und sieht nur einen
-   Punktmonopol; ein schmalerer oder momentengekoppelter Kanal braucht eigene
-   Stabilitaets- und Nulltests.
-4. Erst danach einseitig dynamische und reziproke Zwei-Knoten-Arme mit getrennten
-   Memory-Feldern starten. Fuer Inferenz mindestens sechs, vorzugsweise zehn
-   unabhaengige Source-/Target-Seedpaare bilden.
-5. Vektorgedaechtnis fuer Paper III getrennt halten. Es wird erst fuer
-   Orientierung, Phase, Zirkulation oder Polarisation benoetigt; Ladungsvorzeichen
-   allein rechtfertigt keinen Vektorkanal.
+1. Fixed-curvature-Sigma-Pilot (`q=2,3,4`, `chi=35/9`, `N=1M`, Seeds `1..5`)
+   ausfuehren und Memory-Radius, D_mem, Roundness, Center-Drift und KnotScore
+   gegen die gemeinsame `eta_zero`-Kontrolle auswerten.
+2. Bei bestandenem Mechanismengate einen einzigen breiten dreiskaligen
+   Zero-Integral-Kompensator implementieren und lokal/Fernfeld getrennt testen.
+3. Danach den minimalen signierten skalaren Kreuzkanal spezifizieren. Pflicht-
+   kontrollen: `s_target=0`, `s_source=0`, einseitiger Vorzeichenwechsel,
+   gleiches Zukunftsrauschen und unveraenderte freie Selbstentwicklung.
+4. Die Aufloesung von Selbst- und Kreuzkernel getrennt kalibrieren; der aktuelle
+   Kreuzkernel sieht gegenueber `R_mem` nur einen Punktmonopol.
+5. Erst nach diesen Gates einseitig dynamische und reziproke Zwei-Knoten-Arme
+   starten. Vektorgedaechtnis bleibt fuer Orientierung, Phase, Zirkulation oder
+   Polarisation reserviert, nicht fuer ein blosses skalares Vorzeichen.

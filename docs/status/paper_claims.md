@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -62,8 +62,12 @@ interpretation: with `A_att=35`, the scalar point-source field is attractive at
 all tested radii, and the stored d3/d10 clouds are unresolved by the much broader
 cross-kernel. The full Ambient-Rang response is therefore expected. The current
 `rho>=0` channel has no knot-specific sign and cannot support charge or
-neutrality claims. A signed scalar cross-channel is the minimal next test;
+neutrality claims. Moreover, the compact q=3 kernel is strongly non-neutral:
+for `q>1`, two-scale zero integral (`a=q^-d`) and local restoring curvature
+(`a>q^2`) are structurally incompatible. The fixed-chi sigma gate and one broad
+third-scale compensator therefore precede the signed scalar cross-channel;
 vector memory remains reserved for oriented observables.
+
 ## Paper II: Propagation and Spacetime Kinematics
 
 Status: Folgeprogramm.
@@ -103,6 +107,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
 | `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; Sensitivitaets- und `N=3M`-Rohsnapshot-Retest zeigen keine robuste externe Dimension | nicht isoliert claimen; nur gemeinsam mit lokalisierter relationaler Response weiterverfolgen |
 | Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
+| Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; `A_att=20..35` ist stark attraktionsdominiert | fixed-chi-q-Slice, danach breiter dreiskaliger Zero-Integral-Kompensator |
 | Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | nicht gestuetzt: der aktuelle `rho>=0`-Cross-Kanal ist vorzeichenlos, der `A_att=35`-Punktkern ueberall attraktiv und die Quelle unaufgeloest; bisher nur einseitiger Frozen-Source-Test | signierten skalaren Cross-Kanal mit Null-, Label-Flip- und like/unlike Kontrollen testen; danach Reziprozitaet |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |

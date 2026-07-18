@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -61,7 +61,7 @@ In `d=3` reduziert Matching ohne Renormierung die lokale Steifigkeit um etwa
 Faktor `5.66`. Deshalb ist der naechste faire Kerneltest nicht bloss
 `matched_deposition`, sondern eine curvature-renormalized matched condition.
 
-Zero-Mean-Zweiskalenkernel:
+Zero-Mean- und lokale-Kruemmungs-Constraint:
 
 Fuer den unnormalisierten Double-Gaussian-Kernel
 
@@ -69,15 +69,40 @@ Fuer den unnormalisierten Double-Gaussian-Kernel
 K(r) = A_rep exp(-r^2/(2 L_rep^2)) - A_att exp(-r^2/(2 L_att^2))
 ```
 
-ist `int K = 0` aequivalent zu
+setze `q=L_att/L_rep>1` und `a=A_att/A_rep`. Dann ist `int K=0`
+aequivalent zu
 
 ```text
-A_att = A_rep (L_rep/L_att)^d.
+a_zero = q^(-d).
 ```
 
-Diese kompensierte Normierung entfernt den globalen DC-Anteil des Kernels und
-ist eine eigene, sauber testbare Kernelhypothese. Sie ist nicht dasselbe wie ein
-signierter Depositionskernel `G=K`.
+Lokale einwaerts gerichtete lineare Rueckstellung um eine Punktdeposition
+verlangt dagegen
+
+```text
+chi = a/q^2 > 1, also a > q^2.
+```
+
+Fuer jedes `q>1` und `d>=1` gilt `q^(-d)<1<q^2`. Globale Neutralitaet und
+lokale Rueckstellung liegen fuer diese zweiskalige Reihenfolge deshalb in
+disjunkten Parameterregionen. Insbesondere sind die kompakten q=3-Kandidaten
+`A_att=20..35` nicht annaehend zero mean: Das integrierte Attraktions-/
+Repulsionsverhaeltnis ist `a q^d`, also in d=3 bereits `540..945`.
+Das ist ein exakter Kernel-Constraint, aber noch kein Knotensatz.
+
+Eine minimale neutrale Erweiterung ist ein dritter, breiter positiver Anteil:
+
+```text
+K_3 = A_rep G(L_rep) - A_att G(L_att) + A_comp G(L_comp),
+A_comp = (A_att L_att^d - A_rep L_rep^d) / L_comp^d.
+```
+
+Er nullt das Integral exakt. Sein lokaler Kruemmungsbeitrag ist
+`-A_comp/L_comp^2` und kann fuer `L_comp >> L_att` klein bleiben. Deshalb wird
+zuerst nur `q` bei festem `chi` getestet; erst danach folgt ein einzelner
+dreiskaliger Kompensationspilot. Ein unbeschraenkter Sigma-Sweep ist nicht
+angezeigt. Reportpfad:
+`reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md`.
 
 ## Self- and Cross-Interaction Channels
 

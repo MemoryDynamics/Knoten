@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -25,6 +25,8 @@ flowchart TD
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
+    experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
+    experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
@@ -144,8 +146,9 @@ flowchart LR
     paired --> probe["weak localized frozen source"]
     probe --> fieldaudit["static potential / force audit<br/>sign, parity, monopole error"]
     probe --> ladder["calibrated distance ladder<br/>target deformation / response rank"]
-    fieldaudit --> channel["next: signed scalar cross-channel<br/>q=0 and sign reversal"]
-    ladder --> channel
+    fieldaudit --> compgate["kernel compensation gate<br/>fixed chi q-slice + broad zero-integral term"]
+    ladder --> compgate
+    compgate --> channel["next: signed scalar cross-channel<br/>q=0 and sign reversal"]
     channel --> multi["later: independent / dynamic knots"]
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta

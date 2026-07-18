@@ -16,6 +16,60 @@ import numpy as np
 DEPOSITION_KERNELS = {"delta", "gaussian", "matched_gaussian"}
 
 
+def two_scale_integral_coefficient(
+    *,
+    dim: int,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+) -> float:
+    """Return the Gaussian-integral coefficient of ``A_rep G_rep-A_att G_att``.
+
+    The common positive factor ``(2*pi)**(dim/2)`` is omitted. Therefore a
+    zero return value is equivalent to a zero spatial integral for the
+    unnormalized Gaussian convention used by the canonical kernel.
+    """
+
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    for name, value in (("sigma_rep", sigma_rep), ("sigma_att", sigma_att)):
+        if value <= 0.0 or not np.isfinite(value):
+            raise ValueError(f"{name} must be positive")
+    for name, value in (
+        ("amplitude_rep", amplitude_rep),
+        ("amplitude_att", amplitude_att),
+    ):
+        if not np.isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    return float(amplitude_rep * sigma_rep**dim - amplitude_att * sigma_att**dim)
+
+
+def two_scale_local_curvature(
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+) -> float:
+    """Return the restoring curvature at the origin for the two-scale kernel.
+
+    For ``K=A_rep G_rep-A_att G_att`` and update ``x <- x-eta*grad K``, a
+    positive value means locally inward linear drift around a point deposit.
+    """
+
+    for name, value in (("sigma_rep", sigma_rep), ("sigma_att", sigma_att)):
+        if value <= 0.0 or not np.isfinite(value):
+            raise ValueError(f"{name} must be positive")
+    for name, value in (
+        ("amplitude_rep", amplitude_rep),
+        ("amplitude_att", amplitude_att),
+    ):
+        if not np.isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    return float(amplitude_att / sigma_att**2 - amplitude_rep / sigma_rep**2)
+
+
 def zero_mean_attractive_amplitude(
     *,
     dim: int,
@@ -34,6 +88,35 @@ def zero_mean_attractive_amplitude(
     if not np.isfinite(amplitude_rep):
         raise ValueError("amplitude_rep must be finite")
     return float(amplitude_rep) * float((sigma_rep / sigma_att) ** dim)
+
+
+def zero_mean_compensator_amplitude(
+    *,
+    dim: int,
+    sigma_rep: float,
+    sigma_att: float,
+    sigma_comp: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+) -> float:
+    """Return ``A_comp`` for ``A_rep G_rep-A_att G_att+A_comp G_comp``.
+
+    The returned amplitude is signed. It is positive when the original
+    two-scale kernel has a negative integral, as in the current compact-knot
+    candidates. A sufficiently broad compensator can cancel the monopole
+    integral while perturbing the local curvature only weakly.
+    """
+
+    if sigma_comp <= 0.0 or not np.isfinite(sigma_comp):
+        raise ValueError("sigma_comp must be positive")
+    residual = two_scale_integral_coefficient(
+        dim=dim,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+    )
+    return float(-residual / sigma_comp**dim)
 
 
 def matched_local_stiffness_renormalization(dim: int) -> float:

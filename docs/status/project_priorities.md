@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-17.
+Stand: 2026-07-18.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -261,15 +261,23 @@ Aktueller naechster Schritt:
   Kraftaudit und realisiert kalibrierte Distanzleiter auf den kanonischen
   `N=1e8`-Checkpoints. Der aktuelle Lesekernel sieht einen isotropen
   Punktmonopol mit universeller Anziehung und vollem Ambient-Rang.
-- Naechstes Gate: einen getrennten signierten skalaren Kreuzkanal spezifizieren
-  und mit Null-, Vorzeichenwechsel- und Common-Noise-Kontrollen testen. Der
-  selbstkonfinierende `rho>=0`-Kanal bleibt dabei unveraendert.
-- Keine weiteren Dimensions- oder Kopplungs-Blindscans. Dynamische oder
-  reziproke Knoten folgen erst nach bestandenem Kanal-/Vorzeichengate.
+- Eingeschobenes Gate: Kernelneutralitaet und lokale Selbstkonfinierung sauber
+  trennen. Fuer `q>1` sind `int K=0` (`a=q^-d`) und lokale Rueckstellung
+  (`a>q^2`) im zweiskaligen Kernel strukturell unvereinbar. Zuerst laeuft ein
+  `q in {2,3,4}`-Slice bei festem `chi=35/9`, `N=1M`, Seeds `1..5`.
+- Danach genau ein dreiskaliger Zero-Integral-Pilot mit breitem positiven
+  Kompensator. Nur wenn er lokale Knotenmetriken erhaelt und das Fernfeld
+  veraendert, wird Kernelneutralitaet in die Kreuzkanalarchitektur uebernommen.
+- Anschliessend: getrennten signierten skalaren Kreuzkanal mit Null-,
+  Vorzeichenwechsel- und Common-Noise-Kontrollen testen. Der selbstkonfinierende
+  `rho>=0`-Kanal bleibt dabei unveraendert.
+- Keine weiteren Dimensions-, Sigma- oder Kopplungs-Blindscans. Dynamische oder
+  reziproke Knoten folgen erst nach bestandenem Kompensations- und
+  Kanal-/Vorzeichengate.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; `N=30M`-Reanalyse, Paper-I-Synchronisierung, D_spec-Sensitivitaetsaudit, Rohsnapshot-Retest, uniforme Weak-Probe-Kalibrierung sowie Frozen-Source-Feld-/Distanzpruefung sind erledigt. Naechster methodischer Schritt ist der signierte skalare Kreuzkanal.
+Status: Paketkern korrigiert; Long-Run-, D_spec-, Weak-Probe- und Frozen-Source-Pruefungen sind erledigt. Vor dem signierten skalaren Kreuzkanal liegt jetzt das kontrollierte Kernelkompensations-Gate.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall

@@ -71,7 +71,10 @@ from .kernels import (
     gaussian_potential,
     matched_local_stiffness_renormalization,
     repulsive_gaussian_gradient,
+    two_scale_integral_coefficient,
+    two_scale_local_curvature,
     zero_mean_attractive_amplitude,
+    zero_mean_compensator_amplitude,
 )
 from .knot_score import (
     best_residence_memory_times,
@@ -201,6 +204,8 @@ __all__ = [
     "stationary_memory_mass",
     "threshold_score",
     "translate_finite_memory_state",
+    "two_scale_integral_coefficient",
+    "two_scale_local_curvature",
     "two_scale_force_crossing_radius",
     "update_vector_history",
     "vector_gaussian_field",
@@ -210,4 +215,5 @@ __all__ = [
     "vector_memory_summary_features",
     "voxel_stability_ratio",
     "zero_mean_attractive_amplitude",
+    "zero_mean_compensator_amplitude",
 ]
