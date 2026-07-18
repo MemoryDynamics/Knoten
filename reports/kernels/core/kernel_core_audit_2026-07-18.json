@@ -1,0 +1,64 @@
+{
+  "description": "Analytic narrow-core and curvature-matched attractive-only audit.",
+  "diagnostics": {
+    "current_has_repulsive_core": false,
+    "matched_curvature_error": 0.0,
+    "memory_radius_over_sigma_rep": 0.000194163,
+    "repulsive_potential_fraction_at_origin": 0.02857142857142857,
+    "repulsive_to_attractive_curvature_ratio": 0.2571428571428572
+  },
+  "dimensionless_groups": {
+    "attractive only (0, 26)": {
+      "length_scale": 3.0,
+      "local_curvature": 2.888888888888889,
+      "memory_time_updates": 100.0,
+      "noise_diffusion_per_memory_time": 5.555555555555556e-08,
+      "noise_per_update": 3.3333333333333335e-05,
+      "restoring_per_memory_time": 43.33333333333333,
+      "restoring_per_update": 0.4333333333333333
+    },
+    "current two-scale (1, 35)": {
+      "length_scale": 3.0,
+      "local_curvature": 2.888888888888889,
+      "memory_time_updates": 100.0,
+      "noise_diffusion_per_memory_time": 5.555555555555556e-08,
+      "noise_per_update": 3.3333333333333335e-05,
+      "restoring_per_memory_time": 43.33333333333333,
+      "restoring_per_update": 0.4333333333333333
+    }
+  },
+  "generated_utc": "2026-07-18T22:04:33Z",
+  "git_revision": "99d91cd11cad5791a54321941bf389c94c7ab8c0",
+  "git_status": "",
+  "inputs": {
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "figure": "figures\\draft\\kernels\\core_2026-07-18\\kernel_core_audit.png",
+    "full_radius": 12.0,
+    "lambda_value": 0.01,
+    "memory_mass": 1.0,
+    "memory_radius": 0.000194163,
+    "report": "reports\\kernels\\core\\kernel_core_audit_2026-07-18.md",
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "summary_json": "reports\\kernels\\core\\kernel_core_audit_2026-07-18.json"
+  },
+  "kernels": [
+    {
+      "amplitude_att": 35.0,
+      "amplitude_rep": 1.0,
+      "label": "current two-scale (1, 35)",
+      "sigma_att": 3.0,
+      "sigma_rep": 1.0
+    },
+    {
+      "amplitude_att": 26.0,
+      "amplitude_rep": 0.0,
+      "label": "attractive only (0, 26)",
+      "sigma_att": 3.0,
+      "sigma_rep": 1.0
+    }
+  ]
+}
