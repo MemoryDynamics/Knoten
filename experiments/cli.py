@@ -71,6 +71,7 @@ CATEGORIES = {
         "current/memory/synchronization/frozen_source_response.py",
         "current/memory/synchronization/frozen_source_field_audit.py",
         "current/memory/synchronization/frozen_source_distance_ladder.py",
+        "current/memory/synchronization/signed_cross_channel_pilot.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",

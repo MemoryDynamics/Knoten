@@ -59,6 +59,12 @@ from .frozen_source import (
     calibrate_frozen_source_cross_eta,
     paired_frozen_source_response,
 )
+from .signed_cross_channel import (
+    SignedCrossCalibration,
+    SignedCrossResponse,
+    calibrate_signed_cross_eta,
+    paired_signed_cross_response,
+)
 from .kernels import (
     DEPOSITION_KERNELS,
     double_gaussian_gradient,
@@ -136,6 +142,8 @@ __all__ = [
     "FrozenSourceCalibration",
     "PairedFrozenSourceResponse",
     "PairedProbeResponse",
+    "SignedCrossCalibration",
+    "SignedCrossResponse",
     "SimulationConfig",
     "SimulationRunner",
     "SimulationResult",
@@ -147,6 +155,7 @@ __all__ = [
     "ballistic_scaling_slope",
     "bootstrap_mean_ci",
     "calibrate_frozen_source_cross_eta",
+    "calibrate_signed_cross_eta",
     "covariance_dimension",
     "critical_eta",
     "critical_gamma",
@@ -181,6 +190,7 @@ __all__ = [
     "occupancy_dimension_value",
     "occupancy_local_slopes",
     "paired_frozen_source_response",
+    "paired_signed_cross_response",
     "paired_uniform_probe_response",
     "phase_locking_value",
     "place_finite_memory_state",
