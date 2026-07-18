@@ -1,0 +1,275 @@
+{
+  "compensation_records": [
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 4.312,
+      "compensated_curvature": 1.0497422222222224,
+      "curvature_retention": 0.8588800000000001,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 5.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 0.539,
+      "compensated_curvature": 1.2168322222222223,
+      "curvature_retention": 0.99559,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 10.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 0.019962962962962964,
+      "compensated_curvature": 1.2222000411522635,
+      "curvature_retention": 0.999981851851852,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 30.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 0.000539,
+      "compensated_curvature": 1.2222221683222223,
+      "curvature_retention": 0.9999999559,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 100.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 7.552,
+      "compensated_curvature": 2.5868088888888887,
+      "curvature_retention": 0.8954338461538461,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 5.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 0.944,
+      "compensated_curvature": 2.8794488888888887,
+      "curvature_retention": 0.9967323076923077,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 10.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 0.03496296296296296,
+      "compensated_curvature": 2.8888500411522635,
+      "curvature_retention": 0.9999865527065528,
+      "dim": 3,
+      "integral_residual": -1.1368683772161603e-13,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 30.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 0.000944,
+      "compensated_curvature": 2.888888794488889,
+      "curvature_retention": 0.9999999673230769,
+      "dim": 3,
+      "integral_residual": 0.0,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 100.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 0.1209322496,
+      "compensated_curvature": 1.2173849322382224,
+      "curvature_retention": 0.9960422172858182,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 5.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 0.0001180979,
+      "compensated_curvature": 1.2222210412432224,
+      "curvature_retention": 0.9999990337444546,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 10.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 1.999998306491219e-09,
+      "compensated_curvature": 1.22222222222,
+      "curvature_retention": 0.9999999999981818,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 30.0
+    },
+    {
+      "amplitude_att": 20.0,
+      "amplitude_comp": 1.180979e-14,
+      "compensated_curvature": 1.2222222222222223,
+      "curvature_retention": 1.0,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 1.2222222222222223,
+      "q": 3.0,
+      "sigma_comp": 100.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 0.2116315136,
+      "compensated_curvature": 2.880423628344889,
+      "curvature_retention": 0.9970697175040001,
+      "dim": 10,
+      "integral_residual": -2.3283064365386963e-10,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 5.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 0.0002066714,
+      "compensated_curvature": 2.888886822174889,
+      "curvature_retention": 0.999999284599,
+      "dim": 10,
+      "integral_residual": -2.3283064365386963e-10,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 10.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 3.499998306491219e-09,
+      "compensated_curvature": 2.888888888885,
+      "curvature_retention": 0.9999999999986539,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 30.0
+    },
+    {
+      "amplitude_att": 35.0,
+      "amplitude_comp": 2.066714e-14,
+      "compensated_curvature": 2.888888888888889,
+      "curvature_retention": 1.0,
+      "dim": 10,
+      "integral_residual": 0.0,
+      "original_curvature": 2.888888888888889,
+      "q": 3.0,
+      "sigma_comp": 100.0
+    }
+  ],
+  "description": "Two-scale neutrality/local-curvature constraint and broad compensator audit.",
+  "figures": [
+    "figures/draft/kernels/compensation_2026-07-18/two_scale_constraint_map.png",
+    "figures/draft/kernels/compensation_2026-07-18/three_scale_compensation.png",
+    "figures/draft/kernels/compensation_2026-07-18/compensated_point_field.png"
+  ],
+  "fixed_curvature_pilot": {
+    "chi": 3.888888888888889,
+    "rows": [
+      {
+        "amplitude_att": 15.555555555555555,
+        "local_curvature": 2.888888888888889,
+        "q": 2.0
+      },
+      {
+        "amplitude_att": 35.0,
+        "local_curvature": 2.888888888888889,
+        "q": 3.0
+      },
+      {
+        "amplitude_att": 62.22222222222222,
+        "local_curvature": 2.888888888888889,
+        "q": 4.0
+      }
+    ]
+  },
+  "generated_utc": "2026-07-18T05:44:10Z",
+  "git_revision": "fc7e8928ad35de3424303f557280d5cbca27505e",
+  "git_status": "",
+  "parameters": {
+    "compensator_scales": [
+      5.0,
+      10.0,
+      30.0,
+      100.0
+    ],
+    "dims": [
+      3,
+      10
+    ],
+    "q_max": 6.0,
+    "q_min": 1.05,
+    "q_points": 320,
+    "reference_a_att": [
+      20.0,
+      35.0
+    ],
+    "reference_q": 3.0
+  },
+  "reference_records": [
+    {
+      "amplitude_att": 20.0,
+      "chi": 2.2222222222222223,
+      "dim": 3,
+      "integral_coefficient": -539.0,
+      "integrated_attraction_to_repulsion": 540.0,
+      "q": 3.0,
+      "restoring_curvature": 1.2222222222222223,
+      "zero_mean_amplitude_att": 0.037037037037037035,
+      "zero_mean_chi": 0.00411522633744856
+    },
+    {
+      "amplitude_att": 35.0,
+      "chi": 3.888888888888889,
+      "dim": 3,
+      "integral_coefficient": -944.0,
+      "integrated_attraction_to_repulsion": 945.0,
+      "q": 3.0,
+      "restoring_curvature": 2.888888888888889,
+      "zero_mean_amplitude_att": 0.037037037037037035,
+      "zero_mean_chi": 0.00411522633744856
+    },
+    {
+      "amplitude_att": 20.0,
+      "chi": 2.2222222222222223,
+      "dim": 10,
+      "integral_coefficient": -1180979.0,
+      "integrated_attraction_to_repulsion": 1180980.0,
+      "q": 3.0,
+      "restoring_curvature": 1.2222222222222223,
+      "zero_mean_amplitude_att": 1.6935087808430286e-05,
+      "zero_mean_chi": 1.8816764231589208e-06
+    },
+    {
+      "amplitude_att": 35.0,
+      "chi": 3.888888888888889,
+      "dim": 10,
+      "integral_coefficient": -2066714.0,
+      "integrated_attraction_to_repulsion": 2066715.0,
+      "q": 3.0,
+      "restoring_curvature": 2.888888888888889,
+      "zero_mean_amplitude_att": 1.6935087808430286e-05,
+      "zero_mean_chi": 1.8816764231589208e-06
+    }
+  ]
+}
