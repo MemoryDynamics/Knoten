@@ -29,9 +29,14 @@ flowchart TD
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
     experiments --> comp_pilot["three_scale_compensation_pilot.py<br/>exact zero integral + curvature match"]
     experiments --> signed_pilot["signed_cross_channel_pilot.py<br/>null/product/label-flip gate"]
+    experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
+    experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
+    experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
+    src --> analytic["analytic.py<br/>dimensionless groups, modes, linear radius"]
+    src --> field["field.py<br/>heat transfer and relaxation-diffusion bridge"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> knot_score["knot_score.py<br/>scorecard helpers v0.3-v0.5"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
@@ -123,6 +128,25 @@ flowchart LR
     paper1 -.later.-> paper2["Paper II<br/>propagation / c_eff"]
     paper2 -.later.-> paper3["Paper III<br/>internal modes / synchronization"]
 ```
+
+## Kernelreduktions- und Feldschiene
+
+```mermaid
+flowchart LR
+    old["two-scale reference<br/>(A_rep,A_att)=(1,35)"] --> core["near-field audit<br/>R_mem / sigma_rep about 2e-4"]
+    core --> matched["curvature match<br/>attractive-only (0,26)"]
+    matched --> scan["A_att=0..40<br/>5 seeds, common eta=0"]
+    scan --> linear["linear memory benchmark<br/>r_next=q(1-g)r+q epsilon xi"]
+    linear --> decision["no finite-A transition<br/>A_rep not identified"]
+    decision --> nonlinear["next: fixed g<br/>target R_linear/L"]
+    decision --> mediator["later: dynamic field state<br/>different Green kernel"]
+    mediator --> augmented["augmented Markov state<br/>(x, rho, phi)"]
+```
+
+The reduced scalar trajectory identifies the product eta M0 A_att, not its
+three raw factors separately. The field branch is deliberately separate:
+the Gaussian heat-semigroup representation uses an auxiliary coordinate,
+whereas a physical relaxation-diffusion field changes the dynamics.
 
 ## Long-Run-Schiene
 

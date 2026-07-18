@@ -156,6 +156,47 @@ def local_scalar_memory_modes(lambda_value: float, g: float) -> tuple[float, flo
     return 1.0, float((1.0 - lambda_value) * (1.0 - g))
 
 
+def linear_memory_relative_rms_radius(
+    *,
+    epsilon: float,
+    lambda_value: float,
+    restoring_per_update: float,
+    dim: int,
+) -> float:
+    """Return the stationary RMS radius of the linear relative mode.
+
+    For the scalar center reduction
+
+    x[n+1] = x[n] - g * (x[n] - m[n]) + epsilon * xi[n]
+
+    and m[n+1] = (1-lambda) m[n] + lambda x[n+1], the relative coordinate
+    r=x-m obeys
+
+    r[n+1] = q * (1-g) * r[n] + q * epsilon * xi[n].
+
+    The returned Euclidean RMS radius is
+    sqrt(dim) * q * epsilon / sqrt(1 - q^2 * (1-g)^2). The formula describes
+    the ideal untruncated exponential memory and requires a stable relative
+    multiplier.
+    """
+
+    _validate_lambda(lambda_value)
+    _validate_non_negative("epsilon", epsilon)
+    if dim < 1:
+        raise ValueError("dim must be positive")
+    if not np.isfinite(restoring_per_update):
+        raise ValueError("restoring_per_update must be finite")
+
+    q = 1.0 - lambda_value
+    multiplier = q * (1.0 - restoring_per_update)
+    if abs(multiplier) >= 1.0:
+        raise ValueError("linear relative mode must satisfy abs(q * (1-g)) < 1")
+    if q == 0.0 or epsilon == 0.0:
+        return 0.0
+    variance_per_axis = q * q * epsilon * epsilon / (1.0 - multiplier * multiplier)
+    return float(np.sqrt(dim * variance_per_axis))
+
+
 def frozen_hessian_stability(
     eta: float,
     hessian_eigenvalues: Iterable[float],

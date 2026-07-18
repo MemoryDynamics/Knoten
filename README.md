@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-15.
+Stand: 2026-07-18.
 
 ## Worum es geht
 
@@ -40,12 +40,17 @@ Belastbar derzeit:
   `src/emergenz_knoten/markov/` und ist getestet.
 - Der Kernelgradient wurde korrigiert: `A_rep`/`A_att` sind jetzt wieder
   repulsiver/attraktiver Potentialkanal im Sinn der Paper-Gleichung.
-- Nach korrigierter Sign-Konvention ist `A_att=35`, `epsilon=1e-4`, `N=30M`
-  der aktuelle skalare Long-Run-Referenzkandidat. Gegen `eta_zero` trennt er
-  sich in co-moving Radius, radiusnormalisierter Center-Drift, Memory-Dimension
-  und Roundness.
-- Die Paper-I-Evidenz ist als co-moving compact memory-cloud evidence zu lesen:
-  kein fixes absolutes Zentrum, kein physikalischer Teilchenclaim.
+- Der aktuelle kleine-Radius-Ast laesst sich auf einen attraktiven
+  Ein-Kernel-Fall reduzieren: Die seed-gematchten (1,35)- und
+  (0,26)-Varianten stimmen im N=300k-Slice bis etwa 1e-8 relativ ueberein.
+- Der A_att=0..40-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
+  Fuer A_att>=5 folgt der dynamische Radius der linearen
+  Memory-Center-Vorhersage mit 0.94 Prozent medianem Fehler.
+- Die Paper-I-Evidenz ist deshalb als co-moving linear scalar relaxation-cloud
+  evidence zu lesen: kein fixes absolutes Zentrum, kein isolierter
+  nichtlinearer Knotenmechanismus und kein physikalischer Teilchenclaim.
+- D_mem nahe drei im d=3-Embedding ist im aktuellen Taylor-Regime erwartete
+  isotrope Gaussgeometrie und keine Evidenz emergenter Dreidimensionalitaet.
 - Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`; es
   gibt daher keinen kontrollgetrennten skalaren Phasen-/Photonmodus.
 - Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars,
@@ -58,11 +63,10 @@ Belastbar derzeit:
 
 Noch nicht belastbar:
 
-- ein spezifisch zweiskaliger Baseline-Knotenmechanismus, weil `single_scale`
-  historisch ebenfalls stark war;
-- eindeutige externe `d=3`-Selektion; `D_mem ~2.94` ist aktuell eine lokale
-  Memory-Cloud-Shape-Diagnostik im gewaehlten 3D-Embedding, und `D_cov ~2.5`
-  in `d=10` ist ein Reconciliation-Signal, kein Selektionssatz;
+- ein spezifisch zweiskaliger Baseline-Knotenmechanismus; die gematchte
+  attraktive Ein-Kernel-Ablation ist im aktuellen Regime numerisch gleich;
+- eindeutige externe d=3-Selektion; D_mem nahe der Ambient-Dimension ist
+  im linearen isotropen Regime zu erwarten und kein Selektionssatz;
 - stabile skalare Spin-, Phasen- oder Photonmoden;
 - harte endliche Signalgeschwindigkeit;
 - physikalische Massen, Lorentz-, Quanten- oder Standardmodellclaims.
@@ -142,13 +146,14 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 ## Naechste Prioritaeten
 
-1. Paper-I-Text und Supplement auf Evidenztabelle, Feature-Closure und die
-   defensive Memory-Shape-/A_att-Reconciliation synchronisieren.
-2. Fuer Paper II zuerst Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-
-   Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests aufbauen; keine
-   weiteren Dimensions-Blindscans als Hauptpfad.
-3. Fuer skalare Paper-I-Haertung `A_att=35`, `epsilon=1e-4`, `N=30M` als
-   aktuellen Referenzslice verwenden; weitere `lambda_m`/`sigma`/`M0`-Achsen
-   erst nach Text-Synchronisierung.
-4. Fuer Paper III/Photon-/Wellenrichtung Vektor-, Phasen- oder Velocity-Memory
-   separat testen; der bisherige skalare Befund ist Relaxations-/Shape-Evidenz.
+1. Vorhandene N=30M/300M-Daten gegen den analytischen linearen Relativradius
+   reconciliieren; keine neue rohe A_att-, eta- oder M0-Suche.
+2. Bei festem g=26/60 einen Fuenf-Seed-Slice mit gezieltem
+   R_linear/L ungefaehr 0.03, 0.1 und 0.3 rechnen. Nur kontrollierte
+   Abweichungen vom linearen Benchmark rechtfertigen einen nichtlinearen
+   Knotenclaim.
+3. Danach den vorbereiteten Relaxations-Diffusionsfeldzweig mit explizitem
+   Feldzustand und Greenkernel-Kontrollen testen, falls der skalare Slice keine
+   neue Struktur zeigt.
+4. Mehrknoten-, signierte Cross- und Vektormemory-Gates bleiben Folgearbeit.
+   Rekreuzung wird nicht als eigenes Ziel weiterverfolgt.

@@ -117,11 +117,84 @@ Reports:
 und
 `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`.
 
+## Dimensionless Attractive-Only Reduction
+
+The current core audit shows that the narrow positive Gaussian is not an
+active repulsive core in the compact small-noise branch. For the long-run
+reference (A_rep,A_att)=(1,35), sigma_rep=1 and sigma_att=3, removing A_rep
+and setting A_att=26 preserves the point-deposit restoring curvature exactly.
+The seed-matched N=300k comparison agrees across radius, shape, drift, D_cov
+and D_occ to about 1e-8 relative. This establishes dynamical equivalence only
+for the sampled regime, not for trajectories that explore the kernel scales.
+
+For the attractive-only model choose the reference length L=sigma_att and
+define
+
+    y = x/L,
+    delta = epsilon/L,
+    q = 1-lambda,
+    g = eta M0 A_att/L^2.
+
+At fixed lambda and kernel shape, the trajectory depends on eta, M0 and A_att
+through their product. These three raw parameters are therefore structurally
+non-identifiable from a one-kernel trajectory alone. In memory-time units the
+corresponding drift and diffusion controls are g/lambda and
+delta^2/(2 lambda).
+
+In the Taylor regime the normalized memory center m_n gives the relative
+coordinate r_n=x_n-m_n. The ideal untruncated scalar reduction is
+
+    r_(n+1) = q(1-g) r_n + q epsilon xi_n,
+
+with real relative eigenvalue q(1-g) and stationary Euclidean RMS radius
+
+    R_linear = sqrt(d) q epsilon / sqrt(1-q^2(1-g)^2).
+
+For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
+monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic
+radius follows R_linear with median relative error 0.94 percent and maximum
+error 3.44 percent. The raw KPIs vary smoothly; no finite-A phase transition
+is detected. The A_att=0 null is bitwise identical to eta=0.
+
+This changes the interpretation of the compact branch. It is robust evidence
+for a controlled co-moving scalar relaxation cloud, but currently little
+evidence for nonlinear metastability. In d=3 an isotropic linear Gaussian
+cloud naturally has covariance participation dimension near three. The
+observed D_mem near three is therefore not evidence that three dimensions
+emerge; the ambient-dimension results, where D_mem grows with d, are consistent
+with this guardrail.
+
+The next controlled scalar gate is not another amplitude scan. At fixed g it
+should target predicted radius fractions R_linear/L around 0.03, 0.1 and 0.3.
+For the A_att=26 reference these correspond approximately to epsilon 0.043,
+0.145 and 0.434. Only reproducible deviations from the linear benchmark can
+show that the full Gaussian shape or another nonlinear knot mechanism is
+active.
+
+A Gaussian convolution still has an exact local heat-semigroup generator in
+an auxiliary smoothing coordinate s, with s=L^2/(2D). This is a mathematical
+kernel representation, not physical update time. A physical local mediator,
+
+    tau_phi partial_t phi = D_phi Delta phi - mu_phi phi + g_phi rho,
+
+has stationary transfer g_phi/(mu_phi+D_phi k^2), agrees with the Gaussian
+only at low wave number, and has a Yukawa/Helmholtz rather than Gaussian Green
+kernel. It is therefore a genuine model extension. The field must be included
+in the augmented Markov state and its source sign fixed for attraction before
+it can replace K. A diffusive mediator also does not provide a hard finite
+propagation speed; a hyperbolic model remains a later, separately tested step.
+
+Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
+reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md and
+reports/kernels/field/field_equation_bridge_2026-07-18.md.
+
 ## Self- and Cross-Interaction Channels
 
-The current scalar memory is non-negative and the same two-scale kernel is used
-for self-confinement and for the frozen-source cross-field. This gives every
-source the same scalar sign. In the canonical `A_rep=1`, `A_att=35`,
+The current scalar memory is non-negative. The historical long-run and
+frozen-source reference used the same two-scale kernel for self-confinement and
+cross interaction, while the attractive-only reduction is now the simpler
+scalar self-baseline pending the nonlinear-radius gate. Either unsigned scalar
+choice gives every source the same sign. In the canonical `A_rep=1`, `A_att=35`,
 `sigma_att/sigma_rep=3` slice,
 
 ```text

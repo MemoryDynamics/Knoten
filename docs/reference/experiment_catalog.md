@@ -26,6 +26,9 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/kernel_compensation_audit.py` | Zero-Integral-/Kruemmungs-Constraint | aktiv | analytische q-d-Map, exakter dreiskaliger Kompensator und lokale/Fernfeld-Profile |
 | `experiments/current/kernels/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/kernels/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
+| `experiments/current/kernels/kernel_core_audit.py` | enger Kernel-Core-Audit | aktiv | logarithmischer Nahfeld-, Kraftkomponenten- und Kruemmungsvergleich; curvature-matched A_rep=0-Ablation |
+| `experiments/current/kernels/attractive_only_regime_scan.py` | dimensionsloser attraktiver Ein-Kernel-Scan | aktiv | A_att=0..40, gemeinsame eta=0-Kontrollen, lineare Relativradius-Referenz und matched (1,35)/(0,26)-Vergleich |
+| `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
@@ -609,6 +612,40 @@ Photon- oder harmonischer-Oszillator-Probe. Vor physikalischer Skalierung mit
 dimensionsloses oszillierendes oder ballistisches Regime, vermutlich mit
 Velocity-, Phasen- oder Vektormemory.
 
+## Attraktiver Ein-Kernel- und Linearitaetsgate
+
+Der N=300k-Screening-Scan verwendet d=3, epsilon=1e-4, eta=0.15,
+lambda=0.01, M0=1, Delta-Deposition, A_rep=0, A_att=0..40 und Seeds 1..5.
+Jeder aktive Seed teilt seine Rauschfolge mit der eta=0-Kontrolle. A_att=0
+ist bitgenau eta=0.
+
+Die primaere x-Achse ist g_tau=eta M0 kappa/lambda; A_att wird nur als
+sekundaere Achse gezeigt. Im Ein-Kernel-Modell ist
+g=eta M0 A_att/L^2 die identifizierbare Kopplung. A_att, eta und M0 sind
+aus der Trajektorie nicht getrennt bestimmbar.
+
+Die Rohmetriken Radius, Drift/Radius, D_mem, Roundness und Compactness Gain
+aendern sich glatt. Der groesste gerankte Schritt ist der exakte Nullarm
+A_att=0 nach 1; danach fallen die Aenderungsscores monoton ab. Es gibt keinen
+detektierten endlichen Phasenuebergang und keinen Grund fuer einen dichteren
+N=1M-Scan um KnotScore-Schwellen.
+
+Fuer A_att>=5 stimmt der gemessene dynamische Radius mit
+
+    R_linear=sqrt(d) q epsilon / sqrt(1-q^2(1-g)^2)
+
+im Median auf 0.94 Prozent, maximal 3.44 Prozent ueberein. Die
+curvature-matched Faelle (A_rep,A_att)=(1,35) und (0,26) stimmen in allen
+geprueften kontinuierlichen KPIs bis etwa 1e-8 relativ ueberein. Der naechste
+Test variiert R_linear/L bei festem g; die bisherige A_att-Grenze um 7.9
+bleibt ein historischer Befund des A_rep=1-Slices.
+
+Die Feldgleichungs-Bruecke trennt zwei Aussagen: Ein Gausskernel ist exakt ein
+Heat-Semigroup-Snapshot in einer Hilfskoordinate. Ein physisches
+Relaxations-Diffusionsfeld hat dagegen einen Helmholtz/Yukawa-Greenkernel,
+muss in den augmentierten Zustand aufgenommen werden und ist eine neue
+Modellklasse.
+
 ## Entscheidungsnotizen
 
 | Datei | Thema | Lesart |
@@ -624,6 +661,9 @@ Velocity-, Phasen- oder Vektormemory.
 | `reports/kernels/compensation/kernel_compensation_constraint_audit_2026-07-18.md` | Kernelkompensations-Constraint | Exakter Nachweis: fuer `q>1` sind `a=q^-d` und lokale Rueckstellung `a>q^2` zweiskalig disjunkt; definiert Fixed-chi-Slice und breiten dritten Kompensator. |
 | `reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md` | Fixed-curvature-Sigma-Pilot | `q={2,3,4}`, `chi=35/9`, `N=1M`, Seeds `1..5`: gepaarte KPI-Spannen maximal `1.65e-8`, da `R_mem/sigma_rep<=2e-4`; separate Breiten sind im kompakten Ast nicht identifizierbar. |
 | `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md` | Drei-Skalen-Zero-Integral-Pilot | Exaktes `int K=0`, Kraftwechsel bei `r/sigma_rep~=10.91` und lokales Kruemmungsmatching; gematchte Fuenf-Seed-KPIs stimmen bis `2.2e-11` relativ mit q=3 ueberein. |
+| `reports/kernels/core/kernel_core_audit_2026-07-18.md` | enger Core-Audit | A_rep=1 ist bei R_mem/sigma_rep ungefaehr 2e-4 kein aktiver repulsiver Kern; (0,26) ist die curvature-matched Ablation zu (1,35). |
+| `reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md` | attraktiver A_att=0..40-Scan | Glatter linearer Relaxationsast, kein endlicher Phasenuebergang; A_rep im aktuellen Regime bis etwa 1e-8 relativ nicht identifizierbar. |
+| `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |

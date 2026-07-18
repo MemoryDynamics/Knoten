@@ -9,17 +9,23 @@ markiert.
 
 ## Leitentscheidung
 
-**Paper 0 ist als mathematischer Anker ausreichend. Der naechste Engpass ist
-Paper-I-Evidenz nach Korrektur der Kernel-Vorzeichenkonvention.**
+**Paper 0 bleibt der mathematische Anker. Der aktuelle wissenschaftliche
+Engpass ist nicht mehr ein weiterer Long Run, sondern die Trennung linearer
+Memory-Relaxation von echter nichtlinearer Metastabilitaet.**
 
 Begruendung:
 
 - Die Markov-/Transferoperator-Schicht existiert initial im Paketkern und ist
   getestet.
-- Paper 0 behauptet keine robuste Knotenexistenz und braucht daher keine
-  weiteren Long-Run-Daten, um als technischer Anker nuetzlich zu sein.
-- Paper I darf robuste Knoten erst behaupten, wenn Residence, Kompaktheit,
-  Voxel-Stabilitaet und Kontrolltrennung gemeinsam tragen.
+- Die attraktive Ein-Kernel-Ablation reproduziert den bisherigen
+  kleinen-Radius-Referenzast bis etwa 1e-8 relativ.
+- Der A_att=0..40-Scan zeigt keinen endlichen Phasenuebergang; fuer A_att>=5
+  erklaert der lineare Relativmodus den dynamischen Radius auf etwa ein
+  Prozent.
+- Paper I darf deshalb kompakte co-moving Relaxationswolken berichten, aber
+  derzeit keinen isolierten nichtlinearen metastabilen Knoten.
+- Der naechste skalare Test wird ueber R_linear/L bei festem g kalibriert.
+  Erst danach folgen dynamisches Feld, Cross-Kanal oder Vektormemory.
 
 ## P0: Abgeschlossen fuer den Moment
 
@@ -53,22 +59,15 @@ Aktive Docs sind jetzt auf sieben Seiten begrenzt:
 
 ### P1.1 Long-Run-Kontrollen auswerten
 
-Status: erledigt im Kontrollreport `reports/long_runs/controls/long_run_control_report_2026-07-01.md`.
+Status: abgeschlossen und durch den Linearitaetsaudit neu eingeordnet.
 
-Ergebnis:
-
-- Die bisherigen Long-Run-Kontrollen waren reproduzierbar, gehoeren aber zur
-  `legacy-sign`-Konvention.
-- Der Kernelgradient wurde korrigiert, damit `A_rep` lokal repulsiv und
-  `A_att` breit attraktiv im Sinn von `K=A_rep G_rep-A_att G_att` wirkt.
-- Paper-I-Evidenz muss deshalb neu aufgebaut werden. Alte Reports bleiben als
-  Audit der Vorzeichenhistorie nuetzlich, nicht als Evidenz fuer das
-  korrigierte Potentialmodell.
-
-Paper-I-Lesart: offen bis zum korrigierten Retest. Der aktuelle Claim lautet
-nur: Das Modell und die Diagnostik sind definiert; die stabile Knotenexistenz
-muss unter korrigierter Sign-Konvention neu gehaertet werden.
-
+- Legacy-Sign-Laeufe bleiben nur Vorzeichen-Auditmaterial.
+- Korrigierte N=30M/300M-Laeufe zeigen reproduzierbar kompakte co-moving
+  Memory-Clouds gegen eta=0.
+- Der neue attraktive Ein-Kernel-Scan erklaert den kleinen-Radius-Ast jedoch
+  fast vollstaendig als linearen Relativmodus. Das ist eine Relaxations- und
+  Kontrolltrennung, noch keine isolierte nichtlineare Metastabilitaet.
+- Vor weiteren Long Runs werden bestehende Daten gegen R_linear reconciliiert.
 ### P1.2 Knotenkriterium v0.5 verwenden
 
 Status: Scorecard v0.5 ist das aktuelle Kandidatenkriterium; sie nutzt raw update residence und gated degenerierte Memory-Clouds.
@@ -218,12 +217,13 @@ Naechster operativer Schritt:
     `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md`.
 24. Abgeschlossen: 3D-Dimensionsclaim-Audit auf vorhandenen `A_att=35`,
     `epsilon=1e-4`, `N=30M` Case-JSONs fuer `d in {3,4,5,7,10,13,20}`.
-    Ergebnis: Paper I darf den lokalen 3D-Memory-Shape-Befund im gewaehlten
-    3D-Slice als Teaser nutzen. Ein starker ambient-unabhaengiger 3D-Claim
-    wird nicht gestuetzt, weil `D_mem`, `D_p90` und `D_p95` mit `d` wachsen.
-    Paper-II-Hebel ist `D_spec memory`, das bei grossen `d` in Richtung 3
-    laeuft. Report: `reports/dimensions/dimension_claim_audit_2026-07-15.md`.
-
+    Ergebnis der damaligen Auswertung: kein starker ambient-unabhaengiger
+    3D-Claim, weil D_mem, D_p90 und D_p95 mit d wachsen. Der spaetere
+    Linearitaetsaudit (Punkt 32) ersetzt auch die fruehere Teaser-Lesart:
+    D_mem nahe der Ambient-Dimension ist im isotropen kleinen-Radius-Regime
+    zu erwarten. D_spec memory bleibt nur ein historischer Paper-II-
+    Hypothesenhinweis. Report:
+    reports/dimensions/dimension_claim_audit_2026-07-15.md.
 25. Abgeschlossen: D_spec-Sensitivitaetsaudit. Ergebnis: Die `D_spec memory ~=3`-Spur
     ist ein Paper-II-Hypothesenhinweis, aber kein robuster Dimensionsclaim. Die
     bisherige Implementierung war als Legacy-Diagnostik zu lesen; kuenftige
@@ -275,24 +275,51 @@ Naechster operativer Schritt:
     und
     `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
+31. Abgeschlossen: enger Kernel-Core-Audit und curvature-matched Ablation.
+    Der aktuelle (1,35)-Referenzkernel besitzt im gesampelten Bereich keinen
+    aktiven repulsiven Kern. Der attraktive Ein-Kernel-Punkt (0,26) stimmt
+    seedweise ueber alle kontinuierlichen KPIs bis etwa 1e-8 relativ mit der
+    Referenz ueberein.
+32. Abgeschlossen: attraktiver A_att=0..40-Screening-Scan, N=300k, Seeds 1..5.
+    Die Rohmetriken aendern sich glatt; es gibt keinen endlichen
+    Phasenuebergang. Fuer A_att>=5 folgt der dynamische Radius der linearen
+    Memory-Vorhersage mit 0.94 Prozent medianem und 3.44 Prozent maximalem
+    relativen Fehler. D_mem nahe drei ist in diesem d=3-Slice damit primaer
+    erwartete isotrope Gaussgeometrie, keine Dimensionsselektion.
+33. Abgeschlossen: Feldgleichungs-Bruecke. Der Gausskernel ist exakt als
+    Heat-Semigroup-Snapshot in einer Hilfskoordinate darstellbar. Ein
+    physisches Relaxations-Diffusionsfeld hat einen anderen Greenkernel und
+    erweitert den Markov-Zustand; es ist keine algebraische Umbenennung.
+
 Aktueller naechster Schritt:
 
-- Abgeschlossen: Frozen-Source-, Kompensations- und minimales signiertes
-  Kanal-Gate. Der selbstkonfinierende `rho>=0`-Kanal bleibt unveraendert;
-  die Cross-Labels sind extern vergeben und noch keine Ladungsevidenz.
-- Naechstes Evidenz-Gate: mindestens sechs, bevorzugt zehn unabhaengige
-  Referenzzustaende bilden und Null-, Produkt-, Vorzeichen- sowie
-  Nondestruktionskontrollen ohne Retuning wiederholen.
-- Parallel nur eine vorab festgelegte Distanzpruefung mit konstantem
-  `eta_cross` unterhalb und oberhalb des Kraftwechsels; keine abstandsweise
-  Neukalibrierung.
-- Keine weiteren Dimensions-, Sigma- oder Kopplungs-Blindscans. Einseitig
-  dynamische Quellen folgen erst nach Seed- und Distanzgate; Reziprozitaet
-  erst nach Identitaets- und Bilanzdiagnostik.
+- Der attraktive Ein-Kernel-Ast mit L=sigma_att und
+  g=eta M0 A_att/L^2 ist die reduzierte skalare Kontrollbaseline. A_att, eta
+  und M0 werden darin nicht als getrennt identifizierte Physikparameter gelesen.
+- Kein dichter N=1M-Amplitudenscan um KnotScore-Schwellen: Der gemessene Ast
+  ist glatt und fast vollstaendig linear erklaert.
+- Naechstes Evidenz-Gate: bei festem g=26/60 die dimensionslose
+  Nichtlinearitaet R_linear/L gezielt auf etwa 0.03, 0.1 und 0.3 setzen.
+  Im aktuellen Slice entspricht das ungefaehr epsilon=0.043, 0.145 und 0.434.
+  Mehrere Seeds und eta=0 bleiben Pflicht.
+- Vor einem neuen Long Run zuerst vorhandene N=30M/300M-Daten gegen die
+  lineare Relativmodus-Formel reconciliieren. Nur systematische Abweichungen
+  rechtfertigen einen Nichtlinearitaets- oder Metastabilitaetsclaim.
+- Das dynamische Feld bleibt der naechste klar definierte Modellzweig, falls
+  der skalare Nichtlinearitaetstest keine ueberlineare Struktur liefert.
+  Feldzustand, statischer Greenkernel, Quellvorzeichen und eta=0-Kontrolle
+  muessen gemeinsam getestet werden.
+- Mehrknoten-, signierte Cross- und Vektormemory-Arme bleiben erhalten, folgen
+  aber nach diesem skalaren Identifizierbarkeitsgate. Rekreuzung wird nicht als
+  eigenes Ziel weiterverfolgt.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern korrigiert; Long-Run-, D_spec-, Weak-Probe-, Frozen-Source-, Kernelkompensations- und signiertes Kanal-Gate sind erledigt. Naechster Engpass ist unabhaengige Seed- und feste Distanzvalidierung ohne Retuning.
+Status: Paketkern und lineare Relativmodus-Referenz sind getestet. Naechster Engpass ist ein dimensionslos kalibrierter R/L-Nichtlinearitaetstest vor weiteren Cross- oder Feldkomplexitaeten.
+
+Die nummerierten Punkte 0 bis 8 darunter dokumentieren die historische
+Entwicklung. Ihre damalige Kandidatenlesart wird durch P1.3 Punkt 32
+ueberschrieben: Kompaktheit allein ist im kleinen-Radius-Ast linear erklaert.
 
 Die allgemeine Memory-Form ist jetzt technisch im Kernmodell abgebildet als
 `rho[n+1]=(1-lambda_m)rho[n]+lambda_m M0 G_sigma`. Der alte Spezialfall

@@ -6,6 +6,7 @@ from emergenz_knoten import (
     critical_eta,
     frozen_hessian_stability,
     gaussian_kernel_curvature,
+    linear_memory_relative_rms_radius,
     local_scalar_memory_modes,
     scalar_dimensionless_groups,
     stationary_deposition_weight,
@@ -68,6 +69,31 @@ def test_local_scalar_memory_modes_are_real() -> None:
     assert modes[0] == 1.0
     assert np.isclose(modes[1], -0.18)
     assert all(isinstance(mode, float) for mode in modes)
+
+
+def test_linear_memory_relative_rms_radius() -> None:
+    value = linear_memory_relative_rms_radius(
+        epsilon=1.0e-4,
+        lambda_value=0.01,
+        restoring_per_update=0.15,
+        dim=3,
+    )
+
+    assert np.isclose(value, 0.0003173915257189945)
+
+
+def test_linear_memory_relative_rms_radius_rejects_unstable_mode() -> None:
+    try:
+        linear_memory_relative_rms_radius(
+            epsilon=1.0,
+            lambda_value=0.01,
+            restoring_per_update=3.0,
+            dim=1,
+        )
+    except ValueError as exc:
+        assert "relative mode" in str(exc)
+    else:
+        raise AssertionError("expected unstable relative mode to be rejected")
 
 
 def test_frozen_hessian_stability_classification() -> None:

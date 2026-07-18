@@ -20,6 +20,10 @@ Stand: 2026-07-18.
   sowie ein ringgepufferter Finalzustands-Runner ohne Trajektorienspeicherung.
 - `kernels.py`: exponentielle Memory-Gewichte `lambda_m M0 (1-lambda_m)^k`
   sowie konsistente Gaussian-Potential- und Gradient-APIs; `exponential_weights(alpha, horizon)` bleibt der `M0=1`-Wrapper.
+- `analytic.py`: dimensionslose Skalarkontrollen, lokale Moden und getestete
+  stationaere RMS-Formel fuer den linearen Memory-Relativmodus.
+- `field.py`: exakte Gaussian/Heat-Transferidentitaet und getrennte
+  Relaxations-Diffusionsfeld-Bruecke.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   voxelbasierte Residence-Statistiken, neue Center-/Memory-Ball-Residence, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
@@ -49,9 +53,9 @@ Memory-Reprasentation ist die Markov-Einbettung.
 
 Sign-Konvention 2026-07-09: Der Kernelgradient wurde korrigiert. `gaussian_gradient`
 ist jetzt der echte Gradient eines positiven Gauss-Potentials; `A_rep` ist im
-Update `x <- x - eta grad` lokal repulsiv, `A_att` breit attraktiv. Die
-bisherigen Confinement-Reports sind `legacy-sign`-Evidenz und muessen fuer das
-korrigierte Potentialmodell neu gerechnet werden. Report:
+Update `x <- x - eta grad` lokal repulsiv, `A_att` breit attraktiv. Fruehe
+Confinement-Reports bleiben `legacy-sign`-Auditmaterial; korrigierte
+Long-Run-, Ablations- und Linearitaetstests liegen inzwischen vor. Report:
 `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md`.
 
 ## Paper-Status
@@ -60,14 +64,19 @@ korrigierte Potentialmodell neu gerechnet werden. Report:
   allgemeine Memory-Form `(1-lambda_m)rho_n + beta G_sigma`, die
   Markov-Einbettung und die kontraktive Memory-Faser. Es behauptet keine
   robuste Knotenexistenz.
-- Paper I: Minimalmodell mit synchronisierter Memory- und Markov-Sprache. Die
-  starke Knoten-Evidenz muss aus Long-Runs und Kontrollen kommen.
+- Paper I: Minimalmodell mit synchronisierter Memory- und Markov-Sprache.
+  Der aktuelle kleine-Radius-Ast traegt als linearer co-moving
+  Relaxationsbefund; nichtlineare Metastabilitaet ist noch nicht isoliert.
 - Paper II: Propagation, `c_eff` und Raumzeit-Kinematik bleiben Folgeprogramm.
 - Paper III: als Innen/Aussen- und Synchronisationsprogramm neu orientiert;
   QFT-/Standardmodellbruecken bleiben als offene Future-Work-Tuer erhalten,
   aber ohne Claim-Status.
 
 ## Aktueller Dimensions-/A_att-Befund
+
+Die folgenden A_att- und Dimensionsdaten bleiben reproduzierbare Beobachtungen,
+werden nach dem Linearitaetsaudit aber defensiver gelesen: Shape nahe der
+Ambient-Dimension ist im isotropen Relativmodus zu erwarten.
 
 A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
 `1..5` fuer `d=3` und `d=10` wurde fuer den korrigierten q=3-Skalarslice
@@ -97,9 +106,9 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   akzeptiertes Heat-Trace-Skalierungsfenster.
 - 3D-Audit 2026-07-15: `D_p90`/`D_p95` bestaetigen, dass die interne
   Memory-Varianz in hohen Einbettungen nicht auf drei Achsen kollabiert.
-  Paper-I-tauglich bleibt der lokale `d=3`-Memory-Shape-Teaser; Paper II
-  sollte jetzt relationale Response-Dimensionen statt isolierter D_spec-Claims
-  testen.
+  Der lokale d=3-Memory-Shape-Wert ist nun eine lineare
+  Ambient-Shape-Kontrolle, kein Paper-I-Teaser. Paper II braucht
+  relationale oder ambient-unabhaengige Dimensionsobservablen.
   Reports: `reports/dimensions/dimension_claim_audit_2026-07-15.md`,
   `reports/dimensions/dspec_sensitivity_2026-07-15.md`,
   `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`,
@@ -481,7 +490,7 @@ Memory-Roundness/Score-Gating teils degeneriert. Operativ: vor dem naechsten
 rechnen; `epsilon=0.03` ist nicht mehr als alternativloser Default zu lesen.
 Report: `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-07-12.md`.
 
-N30M-Referenzslice 2026-07-13: Der Bestaetigungslauf mit `epsilon=1e-4`, `A_att=20/35`, Seeds `1..5`, gegen `eta_zero` ist ausgewertet. `A_att=35` ist aktuell der staerkste skalare Referenzkandidat: dynamischer Radius `~2.09e-4` statt `~1.04e-3` in `eta_zero`, Drift/Radius `~0.044` statt `~0.320`, `D_mem ~2.94` und Roundness `~0.843`. Die Paper-I-Lesart ist co-moving compact memory-cloud evidence, kein fixes absolutes Zentrum. Der Long-Run-Trace-AR-Check findet komplexe Klassifikationen auch in `eta_zero`; damit kein isolierter skalarer Phasen-/Photonmodus. Feature-Closure zeigt den staerksten aktiven Closure-Lift in Shape-/Radius-Scalars, nicht im Spin-Scalar. Reports: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`, `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` und `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
+N30M-Referenzslice 2026-07-13: Der Bestaetigungslauf mit `epsilon=1e-4`, `A_att=20/35`, Seeds `1..5`, gegen `eta_zero` ist ausgewertet. `A_att=35` war im damaligen Score der staerkste skalare Referenzkandidat; der neue Linearitaetsaudit erklaert seinen Radius: dynamischer Radius `~2.09e-4` statt `~1.04e-3` in `eta_zero`, Drift/Radius `~0.044` statt `~0.320`, `D_mem ~2.94` und Roundness `~0.843`. Die Paper-I-Lesart ist co-moving compact memory-cloud evidence, kein fixes absolutes Zentrum. Der Long-Run-Trace-AR-Check findet komplexe Klassifikationen auch in `eta_zero`; damit kein isolierter skalarer Phasen-/Photonmodus. Feature-Closure zeigt den staerksten aktiven Closure-Lift in Shape-/Radius-Scalars, nicht im Spin-Scalar. Reports: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`, `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` und `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
 
 3D-Memory-Shape-Grenze 2026-07-13: Der `D_mem ~=2.94`-Befund wurde als lokales Memory-Shape-Observable geschaerft. Bei `A_att=35` liegen alle fuenf aktiven Seeds eng bei `D_mem=2.914..2.947` und Roundness `0.809..0.849`, waehrend die seedgleichen `eta_zero`-Kontrollen breiter und niedriger streuen (`D_mem=1.312..2.679`, Roundness `0.219..0.626`). Lesart: Paper I darf einen seed-stabilen co-moving Memory-Cloud-Befund im gewaehlten 3D-Embedding berichten. Paper II uebernimmt die offene Frage, ob daraus eine extern/macroskopisch robuste 3D-Selektion unter Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung folgt. Report: `reports/dimensions/memory_shape_boundary_2026-07-13.md`.
 
@@ -561,18 +570,70 @@ Ladungsclaim. Reports:
 und
 `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
+## Kernelreduktion und lineares Regime 2026-07-18
+
+Der enge Core-Audit zeigt: Beim bisherigen (A_rep,A_att)=(1,35)-Referenzkernel
+ist der nominell repulsive Anteil im tatsaechlich gesampelten Bereich kein
+repulsiver Kern. R_mem/sigma_rep liegt nur bei etwa 2e-4. Der attraktive
+Ein-Kernel-Fall (0,26) matched die lokale Kruemmung exakt und stimmt bei
+N=300k, Seeds 1..5, in Radius, D_mem, Roundness, Drift, D_cov und D_occ bis
+etwa 1e-8 relativ mit (1,35) ueberein.
+
+Der vollstaendige A_att=0..40-Screening-Scan ohne A_rep besitzt keine
+endliche numerische Uebergangsgrenze. A_att=0 ist bitgenau eta=0; alle
+A_att>0 liegen in diesem Slice auf einem glatten Rueckstellungsast. Mit
+L=sigma_att, q=1-lambda und g=eta M0 A_att/L^2 lautet der lineare
+Relativmodus
+
+    r_(n+1)=q(1-g)r_n+q epsilon xi_n.
+
+Sein stationaerer RMS-Radius ist
+
+    R_linear=sqrt(d) q epsilon / sqrt(1-q^2(1-g)^2).
+
+Fuer A_att>=5 betraegt der mediane relative Fehler des gemessenen dynamischen
+Radius nur 0.94 Prozent, maximal 3.44 Prozent. Beim gematchten A_att=26 sagt
+die Formel 2.071e-4 voraus; gemessen werden 2.093e-4. Der bisherige N=30M-
+Referenzwert um 2.09e-4 liegt auf derselben Vorhersage.
+
+Lesart: Der kleine-Radius-Ast ist derzeit robuste Evidenz fuer einen
+co-moving linearen skalaren Relaxationsmodus. Er ist keine Evidenz fuer einen
+nichtlinearen metastabilen Knoten oder einen endlichen Phasenuebergang.
+Insbesondere ist D_mem nahe drei in d=3 die erwartete isotrope Gaussgeometrie;
+sie staerkt keinen Claim emergenter Dreidimensionalitaet. Dies erklaert auch
+die reellen AR-Moden und den negativen Spin-/Phasenbefund.
+
+Die dimensionslose Form zeigt ausserdem, dass A_att, eta und M0 im
+attraktiven Ein-Kernel-Modell nur ueber ihr Produkt eingehen. Rohe
+Amplitudenwerte sind daher keine getrennt identifizierten
+Wechselwirkungsstaerken. Die naechste sinnvolle Achse ist R_linear/L bei
+festem g, nicht ein weiterer A_att-, eta- oder M0-Blindscan.
+
+Die Feldgleichungs-Bruecke ist implementiert und analytisch getestet. Der
+Gausskernel ist exakt ein Heat-Semigroup-Snapshot in einer
+Hilfsdiffusionskoordinate. Ein physisches Relaxations-Diffusionsfeld stimmt
+nur langwellig ueberein, hat einen Yukawa/Helmholtz-Greenkernel und muss als
+eigener Feldzustand in die Markov-Einbettung aufgenommen werden. Es ist ein
+Modellwechsel und erzeugt weiterhin keine harte endliche
+Ausbreitungsgeschwindigkeit.
+
+Reports:
+reports/kernels/core/kernel_core_audit_2026-07-18.md,
+reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md und
+reports/kernels/field/field_equation_bridge_2026-07-18.md.
+
 ## Naechste technische Schritte
 
-1. Abgeschlossen: Fixed-curvature-Sigma-, Drei-Skalen-Kompensations- und
-   signiertes Frozen-Source-Kanal-Gate.
-2. Mindestens sechs, bevorzugt zehn unabhaengige Referenzzustaende bilden und
-   Null-, Produkt-, Vorzeichen- und Nondestruktionskontrollen ohne Retuning
-   wiederholen.
-3. Den kompensierten Cross-Kernel mit einem festen `eta_cross` unterhalb und
-   oberhalb des Kraftwechsels testen; nicht jeden Abstand neu kalibrieren.
-4. Die Aufloesung von Selbst- und Kreuzkernel getrennt kalibrieren; der aktuelle
-   Kreuzkernel sieht gegenueber `R_mem` weiterhin nur einen Punktmonopol.
-5. Erst nach diesen Gates den Quellknoten einseitig dynamisch machen. Reziproke
-   Zwei-Knoten-Arme folgen nach Identitaets- und Bilanzdiagnostik.
-   Vektorgedaechtnis bleibt fuer Orientierung, Phase, Zirkulation oder
-   Polarisation reserviert, nicht fuer ein blosses skalares Vorzeichen.
+1. Die vorhandenen N=30M/300M-Slices gegen R_linear und den realen
+   Retained-Memory-Massenverlust reconciliieren; keine neuen Long Runs vor
+   dieser Restanalyse.
+2. Einen gezielten Fuenf-Seed-Nichtlinearitaetsslice bei festem g=26/60 und
+   R_linear/L ungefaehr 0.03, 0.1, 0.3 rechnen. Im aktuellen L=3-Slice sind
+   das etwa epsilon=0.043, 0.145, 0.434 plus eta=0-Kontrollen.
+3. Nur wenn Radius, Shape oder Moden reproduzierbar vom linearen Benchmark
+   abweichen, einen nichtlinearen Knotenmechanismus haerten. Andernfalls bleibt
+   Paper I bei linearer Relaxations-/Memory-Cloud-Evidenz.
+4. Danach den dynamischen Relaxations-Diffusionsfeldzweig mit explizitem
+   Feldzustand, Quellvorzeichen, Greenkernel- und eta=0-Kontrolle pilotieren.
+5. Unabhaengige Cross-Kanal-Checkpoints, feste Distanzleiter und spaetere
+   Vektormemory-Tests bleiben Folgegates. Rekreuzung ist gestrichen.

@@ -33,6 +33,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
     SimulationConfig,
+    linear_memory_relative_rms_radius,
     scalar_dimensionless_groups,
     two_scale_local_curvature,
 )
@@ -301,7 +302,19 @@ def _row(
                 if row.get("memory_radius") is not None
                 else None
             ),
+            "linear_relative_rms_radius": linear_memory_relative_rms_radius(
+                epsilon=args.epsilon,
+                lambda_value=args.alpha,
+                restoring_per_update=groups.restoring_per_update,
+                dim=args.dim,
+            ),
         }
+    )
+    row["dynamic_radius_over_linear"] = (
+        float(row["dynamic_radius"]) / float(row["linear_relative_rms_radius"])
+        if row.get("dynamic_radius") is not None
+        and float(row["linear_relative_rms_radius"]) > 0.0
+        else None
     )
     return row
 
@@ -436,6 +449,8 @@ def aggregate_rows(
         "covariance_dimension",
         "occupancy_window_dimension",
         "best_residence_memory_times",
+        "linear_relative_rms_radius",
+        "dynamic_radius_over_linear",
     ]
     aggregate: list[dict[str, Any]] = []
     for amplitude in sorted(amplitudes):
@@ -572,6 +587,23 @@ def _plot(
             linewidth=2.2,
             label="attractive-only median",
         )
+        if metric == "dynamic_radius":
+            benchmark = [
+                row
+                for row in aggregate
+                if row.get("linear_relative_rms_radius_median") is not None
+            ]
+            axis.plot(
+                [float(row["restoring_per_memory_time"]) for row in benchmark],
+                [
+                    float(row["linear_relative_rms_radius_median"])
+                    for row in benchmark
+                ],
+                color="#147d64",
+                linestyle="--",
+                linewidth=1.6,
+                label="linear memory prediction",
+            )
         control = _median(row.get(metric) for row in control_rows)
         if control is not None:
             axis.axhline(
@@ -656,6 +688,16 @@ def write_outputs(
         reference_rows,
         args.matched_amplitude_att,
     )
+    benchmark_errors = [
+        abs(float(row["dynamic_radius_over_linear_median"]) - 1.0)
+        for row in aggregate
+        if float(row["amplitude_att"]) >= 5.0
+        and row.get("dynamic_radius_over_linear_median") is not None
+    ]
+    q = 1.0 - args.alpha
+    amplitude_per_g = args.sigma_att**2 / (args.eta * args.memory_mass)
+    monotone_limit_amplitude = amplitude_per_g
+    stability_limit_amplitude = amplitude_per_g * (1.0 + 1.0 / q)
     _plot(
         args=args,
         rows=rows,
@@ -678,6 +720,14 @@ def write_outputs(
         "aggregate": aggregate,
         "change_intervals": changes,
         "matched_reference_differences": paired,
+        "linear_benchmark": {
+            "formula": "sqrt(d)*q*epsilon/sqrt(1-q^2*(1-g)^2)",
+            "minimum_amplitude": 5.0,
+            "median_relative_error": _median(benchmark_errors),
+            "max_relative_error": max(benchmark_errors) if benchmark_errors else None,
+            "monotone_limit_amplitude": monotone_limit_amplitude,
+            "relative_stability_limit_amplitude": stability_limit_amplitude,
+        },
         "acceptance": {
             "A_att_zero_matches_eta_zero_bitwise": null_exact,
             "old_local_sign_boundary_removed": True,
@@ -704,13 +754,16 @@ def write_outputs(
         "The former sign boundary near `A_att=9` is therefore absent analytically.",
         "Intervals below are ranked empirical KPI changes, not pre-labelled phase",
         "transitions.",
+        "In this normalization `g=eta M0 A_att/sigma_att^2=A_att/60`.",
+        f"The whole scan is below the monotone/alternating boundary `A_att={monotone_limit_amplitude:.3g}`",
+        f"and the linear relative-mode stability boundary `A_att={stability_limit_amplitude:.3g}`.",
         "",
         f"![Attractive-only regime scan]({_rel_from(report, figure)})",
         "",
         "## Aggregate",
         "",
-        "| A_att | kappa | g/update | g/tau_mem | score | compact gain | R_mem/L_att | D_mem | roundness | dyn R | drift/R |",
-        "| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| A_att | kappa | g/update | g/tau_mem | score | compact gain | R_mem/L_att | D_mem | roundness | dyn R | R_linear | dyn/linear | drift/R |",
+        "| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in aggregate:
         lines.append(
@@ -719,7 +772,10 @@ def write_outputs(
             f"{_fmt(row['knot_score_median'])} | {_fmt(row['memory_compactness_gain_median'])} | "
             f"{_fmt(row['memory_radius_over_length_unit_median'])} | "
             f"{_fmt(row['memory_dimension_median'])} | {_fmt(row['memory_roundness_median'])} | "
-            f"{_fmt(row['dynamic_radius_median'])} | {_fmt(row['dynamic_drift_ratio_median'])} |"
+            f"{_fmt(row['dynamic_radius_median'])} | "
+            f"{_fmt(row['linear_relative_rms_radius_median'])} | "
+            f"{_fmt(row['dynamic_radius_over_linear_median'])} | "
+            f"{_fmt(row['dynamic_drift_ratio_median'])} |"
         )
     lines.extend(
         [
@@ -764,12 +820,16 @@ def write_outputs(
             "## Decision gate",
             "",
             f"- `A_att=0` baseline is bitwise equal to shared `eta=0`: `{null_exact}`.",
-            "- Only an interval with a seed-consistent raw-KPI change, not merely a",
-            "  KnotScore threshold crossing, qualifies for a denser `N=1M` retest.",
-            "- If the curves are smooth, the correct conclusion is a continuous",
-            "  stiffness/noise response and no detected finite-A phase transition.",
+            "- For `A_att>=5`, the median relative dynamic-radius error against the",
+            f"  linear memory prediction is `{_fmt(_median(benchmark_errors))}` and the maximum is",
+            f"  `{_fmt(max(benchmark_errors) if benchmark_errors else None)}`.",
+            "- The raw KPIs change smoothly and the ranked intervals decay away from",
+            "  the exact `A_att=0` null. No finite-A phase transition is detected.",
+            "- A denser `N=1M` scan around a score threshold is therefore not justified.",
             "- The matched `A_att=26` comparison decides whether `A_rep` is",
             "  dynamically identifiable in the currently sampled Taylor regime.",
+            "- The next controlled gate should vary the predicted dimensionless",
+            "  radius `R/L` at fixed `g`, not add another raw amplitude scan.",
             "",
             "## Provenance",
             "",

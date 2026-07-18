@@ -29,14 +29,14 @@ Nicht Aufgabe von Paper 0:
 
 ## Paper I: Minimal Dynamical Foundation
 
-Status: mathematisch mit Paper 0 synchronisiert; korrigierte skalare Long-Run-Evidenz traegt als vorsichtiger co-moving Memory-Cloud-Befund.
+Status: mathematisch mit Paper 0 synchronisiert; der aktuelle kleine-Radius-Ast traegt als co-moving linearer skalarer Relaxationsbefund, noch nicht als nichtlineare Metastabilitaetsevidenz.
 
 Aktuell tragbar:
 
 - Minimalmodell mit relaxierendem Memory;
 - sichtbarer Prozess nichtmarkovsch, augmentierter Zustand markovsch;
 - interne Speicherskala `alpha^{-1}` in der normierten Konvention;
-- Knoten als metastabile Kandidaten;
+- Knotenbegriff als diagnostischer Kandidat, nicht beobachtete Metastabilitaet;
 - Relaxationsraten nur als Stabilitaets- oder mass-like proxies.
 
 Noch nicht tragbar:
@@ -46,16 +46,30 @@ Noch nicht tragbar:
 - physikalische Masse;
 - starke Dimensions- oder Raumzeitclaims.
 
-Der bisherige v0.5-Kontrollstand ist nach dem Vorzeichenfund nur noch
-`legacy-sign`-Evidenz. Der korrigierte q=3-Retest zeigt, dass die historische
-Baseline mit `A_att=0.35` repulsionsdominiert dispergiert. Die anschliessende
-Amplitudenhierarchie findet kompakte Kurzlauf-Kandidaten im Fenster
-`A_att=9..35`, mit verfeinerter Uebergangsgrenze bei `A_att ~= 7.9` (`chi ~= 0.88`), aber noch keine robuste Long-Run-Metastabilitaet.
+Der fruehere Driftumschlag bei A_att ungefaehr 7.9 gehoert ausschliesslich
+zum historischen Slice mit festem A_rep=1. Ohne A_rep besitzt jeder positive
+A_att-Wert lokale Rueckstellung; der neue A_att=0..40-Screening-Scan zeigt
+keinen endlichen Phasenuebergang.
 
-Die Kernel-Shape-Probe und der Force-Komponenten-Pilot identifizierten den
-Vorzeichenfehler. Korrigiert wurde der Gradient: `A_rep` ist jetzt lokal
-repulsiv, `A_att` breit attraktiv im Potentialmodell. Der `N=30M`, `epsilon=1e-4`-Hybrid-Trace fuer `A_att=20/35` trennt aktive Laeufe in co-moving Radius, Drift/Radius, Memory-Dimension und Roundness klar von `eta_zero`; `A_att=35` ist der aktuelle skalare Referenzkandidat. Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`, also keinen kontrollgetrennten skalaren Oszillator. Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars, nicht fuer den Spin-Scalar. Fuer Paper I bleibt daher Relaxations-/Kompaktheits-Evidenz relevant; fuer Paper III spricht der Befund eher fuer Vektor-, Phasen- oder Velocity-Memory, falls ein oszillatorischer Modus benoetigt wird.
+Der enge Kernel-Core-Audit und die seed-gematchte Ablation zeigen, dass die
+bisherige (1,35)-Referenz im gesampelten Taylor-Regime bis etwa 1e-8 relativ
+durch den attraktiven Ein-Kernel-Punkt (0,26) reproduziert wird. Fuer
+A_att>=5 folgt der dynamische Radius der exakten linearen
+Memory-Center-Vorhersage mit 0.94 Prozent medianem und 3.44 Prozent maximalem
+relativen Fehler. Der N=30M-Referenzradius liegt ebenfalls auf dieser Formel.
 
+Damit ist fuer Paper I derzeit tragbar: Das skalare Feedback erzeugt eine
+reproduzierbar kompaktere, mitbewegte Relaxationswolke als eta=0. Nicht
+tragbar ist die staerkere Aussage, dass die Daten einen nichtlinearen
+metastabilen Knoten oder einen Phasenuebergang isolieren. D_mem nahe drei im
+d=3-Embedding ist im linearen isotropen Regime erwartete Gaussgeometrie und
+keine Dimensionsselektion. Long-Run-Trace-AR, Feature-Closure und der negative
+Spinbefund sind mit diesem reellen Relativmodus konsistent.
+
+Ein dynamisches Relaxations-Diffusionsfeld bleibt eine kontrollierte
+Modellerweiterung: Sein stationaerer Greenkernel ist nicht global
+gaussfoermig, der Feldzustand muss in die Markov-Einbettung, und Diffusion
+allein liefert keine harte endliche Ausbreitungsgeschwindigkeit.
 
 The static field audit and calibrated distance ladder sharpen the interaction
 interpretation: with `A_att=35`, the scalar point-source field is attractive at
@@ -104,10 +118,10 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | korrigierte `N=30M`-Evidenz fuer co-moving kompakte Memory-Clouds bei `A_att=20/35`, staerkster Kandidat `A_att=35`; kein fixes Zentrum | Paper-I-Text auf Radius, Drift/Radius, Memory-Shape und Kontrolltrennung ausrichten |
-| Baseline/Single-scale zeigen langlebige Residence | nur `legacy-sign`-Befund | mit korrigiertem Kernel neu rechnen |
+| Knoten als metastabile Regime | nicht isoliert: der kompakte N=30M-Ast folgt im kleinen-Radius-Regime fast vollstaendig dem linearen skalaren Relativmodus; co-moving Relaxationswolke ja, nichtlineare Metastabilitaet nein | vorhandene Long Runs gegen linearen Benchmark reconciliieren; dann R/L bei festem g gezielt erhoehen |
+| Baseline/Single-scale zeigen langlebige Residence | nur Legacy-Sign-Befund; der korrigierte attraktive Ast ist stattdessen linear erklaert | nicht als aktuellen Metastabilitaetsclaim verwenden |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
-| `D_mem ~2.94` im aktuellen `A_att=35`-Slice | seed-stabile numerische Beobachtung einer lokalen, co-moving Memory-Cloud-Geometrie im gewaehlten 3D-Embedding; `D_mem` ist covariance participation der Memory-Cloud, nicht `D_occ`; keine Ableitung von externer `d=3`-Selektion | Paper I als Shape-Diagnostik mit Roundness/Radius/Drift gegen `eta_zero` berichten; Paper II klaert externe/macroskopische 3D-Selektion |
+| D_mem nahe 2.94 im aktuellen kleinen-Radius-Slice | seed-stabile Shape-Beobachtung, aber durch den isotropen linearen Relativmodus erklaert; in d=3 ist D_mem nahe drei erwartete Ambient-Gaussgeometrie, nicht 3D-Emergenz | nur als lineare Shape-Diagnostik berichten; Paper II braucht relationale oder ambient-unabhaengige Evidenz |
 | `d=10`-A_att-Transition zeigt `D_cov ~=2.52` bei hoher `D_mem` | numerische Beobachtung; spricht fuer getrennte sichtbare Sample-Geometrie und interne Memory-Shape, aber nicht fuer einen makroskopischen `d=3`-Satz | Center-Trace-Dimensionen, `D_p90`/`D_p95`, D_spec-Skalenempfindlichkeit und Response-/Zwei-Knoten-Tests |
 | `D_spec memory` naehrt sich bei hohen `d` etwa 3 | Legacy-Beobachtung und Hypothesenhinweis; Sensitivitaets- und `N=3M`-Rohsnapshot-Retest zeigen keine robuste externe Dimension | nicht isoliert claimen; nur gemeinsam mit lokalisierter relationaler Response weiterverfolgen |
 | Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
