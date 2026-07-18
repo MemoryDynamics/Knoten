@@ -294,6 +294,7 @@ def _row(
         {
             "family": family,
             "amplitude_att": float(amplitude_att),
+            "case_elapsed_seconds": float(case.get("elapsed_seconds", 0.0)),
             "local_curvature": curvature,
             "restoring_per_update": groups.restoring_per_update,
             "restoring_per_memory_time": groups.restoring_per_memory_time,
@@ -674,7 +675,7 @@ def write_outputs(
     reference_rows: list[dict[str, Any]],
     control_rows: list[dict[str, Any]],
     null_exact: bool,
-    elapsed_seconds: float,
+    invocation_elapsed_seconds: float,
 ) -> None:
     report = _resolve(args.report)
     summary = _resolve(args.summary_json)
@@ -698,6 +699,10 @@ def write_outputs(
     amplitude_per_g = args.sigma_att**2 / (args.eta * args.memory_mass)
     monotone_limit_amplitude = amplitude_per_g
     stability_limit_amplitude = amplitude_per_g * (1.0 + 1.0 / q)
+    all_case_rows = [*rows, *reference_rows, *control_rows]
+    summed_case_compute_seconds = sum(
+        float(row["case_elapsed_seconds"]) for row in all_case_rows
+    )
     _plot(
         args=args,
         rows=rows,
@@ -712,7 +717,9 @@ def write_outputs(
         "generated_utc": generated,
         "git_revision": source_git_revision,
         "git_status": source_git_status,
-        "elapsed_seconds": elapsed_seconds,
+        "invocation_elapsed_seconds": invocation_elapsed_seconds,
+        "summed_case_compute_seconds": summed_case_compute_seconds,
+        "raw_case_count": len(all_case_rows),
         "arguments": {
             key: str(value) if isinstance(value, Path) else value
             for key, value in vars(args).items()
@@ -833,7 +840,10 @@ def write_outputs(
             "",
             "## Provenance",
             "",
-            f"- Runtime: `{elapsed_seconds:.2f} s`",
+            "- Persisted case compute time "
+            f"(sum of `{len(all_case_rows)}` per-case timers): "
+            f"`{summed_case_compute_seconds:.2f} s`",
+            f"- Current report invocation: `{invocation_elapsed_seconds:.2f} s`",
             f"- Git revision: `{payload['git_revision']}`",
             f"- Git status: `{payload['git_status'] or 'clean'}`",
             "- Raw cases: `data/processed/kernel_core/` (ignored bulk data)",
@@ -860,7 +870,7 @@ def main() -> None:
         reference_rows=reference_rows,
         control_rows=control_rows,
         null_exact=null_exact,
-        elapsed_seconds=time.perf_counter() - started,
+        invocation_elapsed_seconds=time.perf_counter() - started,
     )
 
 
