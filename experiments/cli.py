@@ -50,6 +50,9 @@ CATEGORIES = {
         "current/kernels/kernel_compensation_audit.py",
         "current/kernels/fixed_curvature_sigma_pilot.py",
         "current/kernels/three_scale_compensation_pilot.py",
+        "current/kernels/kernel_core_audit.py",
+        "current/kernels/attractive_only_regime_scan.py",
+        "current/kernels/field_equation_bridge.py",
         "propagation_speed/ballistic_kernel_probe.py",
     ],
     "knot_stability": [

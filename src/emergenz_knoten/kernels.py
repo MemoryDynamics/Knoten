@@ -70,6 +70,32 @@ def two_scale_local_curvature(
     return float(amplitude_att / sigma_att**2 - amplitude_rep / sigma_rep**2)
 
 
+def attractive_amplitude_for_curvature(
+    *,
+    target_curvature: float,
+    sigma_att: float,
+    sigma_rep: float = 1.0,
+    amplitude_rep: float = 0.0,
+) -> float:
+    """Return ``A_att`` that realizes a requested two-scale curvature.
+
+    For ``K=A_rep G_rep-A_att G_att`` the restoring curvature is
+    ``A_att/sigma_att**2-A_rep/sigma_rep**2``. The helper also covers the
+    attractive-only case ``A_rep=0``.
+    """
+
+    for name, value in (("sigma_rep", sigma_rep), ("sigma_att", sigma_att)):
+        if value <= 0.0 or not np.isfinite(value):
+            raise ValueError(f"{name} must be positive")
+    for name, value in (
+        ("target_curvature", target_curvature),
+        ("amplitude_rep", amplitude_rep),
+    ):
+        if not np.isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    return float(sigma_att**2 * (target_curvature + amplitude_rep / sigma_rep**2))
+
+
 def zero_mean_attractive_amplitude(
     *,
     dim: int,

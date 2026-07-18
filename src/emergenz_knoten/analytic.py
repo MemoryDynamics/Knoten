@@ -3,9 +3,29 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from dataclasses import dataclass
 import math
 
 import numpy as np
+
+
+@dataclass(frozen=True)
+class DimensionlessScalarGroups:
+    """Dimensionless controls for one scalar-memory parameter slice.
+
+    ``restoring_per_update`` is the local linear drift multiplier. Dividing it
+    by ``lambda_value`` expresses the same restoring strength per nominal
+    memory time. ``noise_diffusion_per_memory_time`` is the continuum-scaled
+    noise level in units of ``length_scale``.
+    """
+
+    length_scale: float
+    memory_time_updates: float
+    local_curvature: float
+    restoring_per_update: float
+    restoring_per_memory_time: float
+    noise_per_update: float
+    noise_diffusion_per_memory_time: float
 
 
 def _validate_lambda(lambda_value: float, *, strict_upper: bool = False) -> None:
@@ -50,6 +70,45 @@ def stationary_memory_mass(lambda_value: float, deposition_weight: float) -> flo
     if not np.isfinite(deposition_weight) or deposition_weight < 0.0:
         raise ValueError("deposition_weight must be non-negative")
     return float(deposition_weight / lambda_value)
+
+
+def scalar_dimensionless_groups(
+    *,
+    epsilon: float,
+    eta: float,
+    lambda_value: float,
+    memory_mass: float,
+    local_curvature: float,
+    length_scale: float,
+) -> DimensionlessScalarGroups:
+    """Return dimensionless controls after choosing one reference length.
+
+    The function does not assert that ``length_scale`` is a physical length.
+    It only removes the coordinate unit. For the attractive-only pilot the
+    natural convention is ``length_scale=sigma_att``.
+    """
+
+    _validate_lambda(lambda_value)
+    _validate_positive("length_scale", length_scale)
+    _validate_non_negative("epsilon", epsilon)
+    _validate_non_negative("memory_mass", memory_mass)
+    for name, value in (("eta", eta), ("local_curvature", local_curvature)):
+        if not np.isfinite(value):
+            raise ValueError(f"{name} must be finite")
+
+    restoring_per_update = eta * memory_mass * local_curvature
+    noise_per_update = epsilon / length_scale
+    return DimensionlessScalarGroups(
+        length_scale=float(length_scale),
+        memory_time_updates=float(1.0 / lambda_value),
+        local_curvature=float(local_curvature),
+        restoring_per_update=float(restoring_per_update),
+        restoring_per_memory_time=float(restoring_per_update / lambda_value),
+        noise_per_update=float(noise_per_update),
+        noise_diffusion_per_memory_time=float(
+            noise_per_update * noise_per_update / (2.0 * lambda_value)
+        ),
+    )
 
 
 def gaussian_kernel_curvature(

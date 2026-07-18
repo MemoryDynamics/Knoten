@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
+    attractive_amplitude_for_curvature,
     three_scale_gaussian_gradient,
     three_scale_gaussian_potential,
     two_scale_integral_coefficient,
@@ -103,6 +104,29 @@ def test_fixed_curvature_path_scales_attractive_amplitude_quadratically() -> Non
             amplitude_att=float(amplitude),
         )
         assert curvature == pytest.approx(chi - 1.0)
+
+
+def test_attractive_only_amplitude_matches_current_local_curvature() -> None:
+    target = two_scale_local_curvature(
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=35.0,
+    )
+    amplitude = attractive_amplitude_for_curvature(
+        target_curvature=target,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=0.0,
+    )
+
+    assert amplitude == pytest.approx(26.0)
+    assert two_scale_local_curvature(
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=0.0,
+        amplitude_att=amplitude,
+    ) == pytest.approx(target)
 
 
 def test_kernel_constraint_helpers_validate_geometry() -> None:

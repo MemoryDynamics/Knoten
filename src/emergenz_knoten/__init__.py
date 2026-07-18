@@ -1,13 +1,23 @@
 """Core utilities for the Emergenz Knoten model."""
 
 from .analytic import (
+    DimensionlessScalarGroups,
     critical_eta,
     frozen_hessian_stability,
     gaussian_kernel_curvature,
     local_scalar_memory_modes,
+    scalar_dimensionless_groups,
     stationary_deposition_weight,
     stationary_memory_mass,
     two_scale_force_crossing_radius,
+)
+from .field import (
+    RelaxationDiffusionField,
+    gaussian_heat_time,
+    gaussian_transfer,
+    heat_transfer,
+    low_wavenumber_matched_field,
+    stationary_field_transfer,
 )
 from .checkpoints import (
     CHECKPOINT_SCHEMA_VERSION,
@@ -67,6 +77,7 @@ from .signed_cross_channel import (
 )
 from .kernels import (
     DEPOSITION_KERNELS,
+    attractive_amplitude_for_curvature,
     double_gaussian_gradient,
     double_gaussian_potential,
     effective_double_gaussian_parameters,
@@ -132,9 +143,11 @@ from .markov.validation import (
 )
 
 __all__ = [
+    "DimensionlessScalarGroups",
     "LaggedCorrelationResult",
     "ResponseRankInferenceResult",
     "ResponseRankResult",
+    "RelaxationDiffusionField",
     "CHECKPOINT_SCHEMA_VERSION",
     "DEPOSITION_KERNELS",
     "FiniteMemoryCheckpoint",
@@ -153,6 +166,7 @@ __all__ = [
     "best_residence_updates",
     "ball_residence_statistics",
     "ballistic_scaling_slope",
+    "attractive_amplitude_for_curvature",
     "bootstrap_mean_ci",
     "calibrate_frozen_source_cross_eta",
     "calibrate_signed_cross_eta",
@@ -169,14 +183,18 @@ __all__ = [
     "fit_occupancy_scaling_window",
     "frozen_hessian_stability",
     "gaussian_gradient",
+    "gaussian_heat_time",
     "gaussian_kernel_curvature",
     "gaussian_potential",
+    "gaussian_transfer",
+    "heat_transfer",
     "heat_trace_spectral_dimension",
     "infer_reproducible_response_rank",
     "lagged_cross_correlation",
     "load_finite_memory_checkpoint",
     "load_simulation_result",
     "local_scalar_memory_modes",
+    "low_wavenumber_matched_field",
     "matched_local_stiffness_renormalization",
     "mean_squared_displacement",
     "memory_centroid",
@@ -201,6 +219,7 @@ __all__ = [
     "run_simulation",
     "save_finite_memory_checkpoint",
     "save_simulation_result",
+    "scalar_dimensionless_groups",
     "score_against_control",
     "score_v0_4_against_control",
     "score_v0_5_against_control",
@@ -214,6 +233,7 @@ __all__ = [
     "simulate_vector_memory",
     "spectral_dimension",
     "stationary_deposition_weight",
+    "stationary_field_transfer",
     "stationary_memory_mass",
     "threshold_score",
     "three_scale_gaussian_gradient",
