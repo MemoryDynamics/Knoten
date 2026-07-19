@@ -48,9 +48,40 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
+| `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
+| `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | aktiv | feste Diffusionsarme `0/0.3L/1.0L`; naechstens Low-Mode-/AR-Closure |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
+## Ressourcenbegrenztes rho-Feld
+
+`spectral_rho_field_pilot.py` stellt das bestehende exponentielle skalare
+Memory auf einer periodischen 1D-Box mit `M+1` komplexen Fourierkoeffizienten
+dar. Bei `M=64` sind das 1040 Bytes pro Zustand. Die Implementierung ist gegen
+die explizite Historie, pfadweise Kontraktion, Massenkonstanz, direkten
+Gausskraftvergleich und `eta=0` getestet. Im Fuenf-Seed-Slice
+`epsilon={1e-8,1e-6,1e-4}` bleibt `R/epsilon` bis rund `2e-9` relativ konstant;
+32 bis 128 Moden liefern denselben dynamischen Radius bis etwa `1.6e-14`.
+Kleinere epsilon-Werte werden in diesem Regime nicht weiter verfolgt. Report:
+`reports/memory/spectral_rho_field_pilot_2026-07-19.md`.
+
+`relaxation_diffusion_field_pilot.py` erweitert genau eine Achse:
+
+```text
+rho_new_hat(k)=exp(-nu k^2)[(1-lambda)rho_hat(k)+lambda G_hat_x(k)].
+```
+
+`nu=0` ist bitgenau die alte Dynamik. Fuer Diffusions-RMS-Laengen pro
+Memory-Zeit `0`, `0.3L`, `1.0L`, fuenf Seeds und seedgleiche `eta=0`-Kontrollen
+steigt der aktive Medianradius glatt um Faktor `1.384`; active/control steigt
+von `0.171` auf `0.240`, und der Feedback-Schritt pro epsilon sinkt von
+`0.507` auf `0.311`. Dies ist kontrollierte Feldglaettung ohne isolierten
+neuen Modus. Report:
+`reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
+
+Naechster Einsatz ist eine Low-Mode-/AR-Feature-Closure auf denselben drei
+Armen, danach Box- und Modenzahlsensitivitaet. Kein Long Run vor einer
+kontrollgetrennten neuen Zeitskala.
 ## Referenzzustands-Checkpoints
 
 Der Checkpoint-Runner speichert nur den finalen augmentierten Zustand der

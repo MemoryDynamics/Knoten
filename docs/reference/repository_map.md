@@ -24,6 +24,8 @@ flowchart TD
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
+    experiments --> spectral_rho_exp["spectral_rho_field_pilot.py<br/>O(M) representation gate"]
+    experiments --> diffusion_exp["relaxation_diffusion_field_pilot.py<br/>mode-dependent field gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -53,6 +55,8 @@ flowchart TD
     signed --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
+    src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
+    src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
 
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
@@ -103,6 +107,9 @@ flowchart LR
     weakprobe --> response["response matrices<br/>energy rank + sign-flip rank"]
     sim --> zfeatures["augmented features z_i"]
     sim --> vfeatures["vector-memory features<br/>optional p_i summaries"]
+    sim --> rhohat["spectral rho_hat<br/>explicit compact Markov state"]
+    rhohat --> lowmodes["low-mode magnitude/phase<br/>next AR closure features"]
+    lowmodes --> lagged
 
     samples --> geom["diagnostics.py<br/>D_cov, D_occ, residence"]
     geom --> score["knot_score.py<br/>v0.5 scorecard vs eta_zero"]
@@ -142,8 +149,11 @@ flowchart LR
     longrun --> nonlinear["fixed g gate<br/>R/L = 0.03, 0.1, 0.3"]
     nonlinear --> scaleaudit["scale audit<br/>voxel residence confounded"]
     scaleaudit --> decision["scalar control baseline<br/>no metastable branch isolated"]
-    decision --> mediator["next: dynamic field state<br/>different Green kernel"]
-    mediator --> augmented["augmented Markov state<br/>(x, rho, phi)"]
+    decision --> spectral["spectral rho representation<br/>exact at nu=0; 64 modes"]
+    spectral --> epsilon_gate["epsilon 1e-8..1e-4<br/>exact linear scaling"]
+    epsilon_gate --> mediator["relaxation-diffusion extension<br/>q_k=(1-lambda) exp(-nu k^2)"]
+    mediator --> smooth["pilot: smooth weakening<br/>no new branch"]
+    smooth --> closure["next: low-mode AR closure<br/>nu=0 and eta=0 controls"]
 ```
 
 The reduced scalar trajectory identifies the product eta M0 A_att, not its
@@ -200,8 +210,7 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `vector_memory.py` bleibt ein kontrollierter Modellzweig fuer orientierte Memory-Tests, nicht die minimale Loesung fuer ein skalares Ladungsvorzeichen.
-- `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
+- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `spectral_memory_field.py` ist eine kompakte Reprasentation des alten Memory; erst `relaxation_diffusion_memory.py` aendert mit modeabhaengigem Zerfall die Dynamik.- `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.
 - `reports/` sind datierte, zitierbare Zwischenstaende.

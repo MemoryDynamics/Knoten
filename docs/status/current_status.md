@@ -24,6 +24,11 @@ Stand: 2026-07-19.
   stationaere RMS-Formel fuer den linearen Memory-Relativmodus.
 - `field.py`: exakte Gaussian/Heat-Transferidentitaet und getrennte
   Relaxations-Diffusionsfeld-Bruecke.
+- `spectral_memory_field.py`/`spectral_memory_runtime.py`: periodische 1D-
+  Fourier-Reprasentation desselben exponentiellen Memory mit gecachten O(M)-
+  Operatoren; bei 64 Moden belegt ein Feldzustand 1040 Bytes.
+- `relaxation_diffusion_memory.py`: kontrollierte modeabhaengige Felddynamik;
+  `nu=0` ist bitgenau die bisherige Memory-Dynamik.
 - `diagnostics.py`: `D_cov`, historisches `D_occ`, automatische
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   voxelbasierte Residence-Statistiken, neue Center-/Memory-Ball-Residence, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
@@ -85,6 +90,35 @@ Reports:
 `reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` und
 `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`.
 
+## Memory-Feld-Gate 2026-07-19
+
+Die spektrale `rho`-Schicht ist zunaechst nur eine Reparametrisierung des
+bestehenden exponentiellen Punktgedaechtnisses. Historienausrollung,
+pfadweise Kontraktion, Massenerhalt, direkter Gausskraftvergleich und
+`eta=0`-Replay sind getestet. Im Fuenf-Seed-Slice fuer
+`epsilon in {1e-8,1e-6,1e-4}` ist der aktive relative Radius etwa `0.174` der
+seedgleichen Kontrolle, skaliert aber mit Steigung `1.00000000008` exakt
+proportional zu epsilon. `32/64/128` Moden liefern denselben dynamischen Radius
+bis etwa `1.6e-14` relativ. Kleinere epsilon-Werte erschliessen hier keine neue
+intrinsische Laenge und werden nicht weiter gescannt.
+
+Die getrennte Relaxations-Diffusionsextension verwendet pro Mode
+`exp(-nu k^2)`. Bei einer Diffusions-RMS-Laenge pro Memory-Zeit von
+`0`, `0.3 L`, `1.0 L` steigt der aktive Medianradius von `1.199e-4` auf
+`1.660e-4`; active/control steigt glatt von `0.171` auf `0.240`, waehrend der
+Feedback-Schritt pro epsilon von `0.507` auf `0.311` sinkt. Gleichzeitig
+reduziert die Diffusion die negative Masse der trunkierten Delta-
+Rekonstruktion von `0.980` auf `8.42e-4`. Das ist ein sauberer Feldglaettungs-
+befund, aber weder Metastabilitaet noch Propagation oder ein neuer Modus.
+
+Reports:
+`reports/memory/spectral_rho_field_pilot_2026-07-19.md` und
+`reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
+
+Naechster Schritt ist eine seedgepaarte Low-Mode-/AR-Feature-Closure fuer die
+vorab festgelegten Diffusionsarme gegen `nu=0` und `eta=0`, gefolgt von Box-
+und Modenzahlsensitivitaet. Ein Long Run folgt nur bei einer neuen
+kontrollgetrennten Zeitskala.
 ## Paper-Status
 
 - Paper 0: mathematischer Anker bzw. moegliches Supplement. Es formuliert die
@@ -651,16 +685,13 @@ reports/kernels/field/field_equation_bridge_2026-07-18.md.
 
 ## Naechste technische Schritte
 
-1. Die vorhandenen N=30M/300M-Slices gegen R_linear und den realen
-   Retained-Memory-Massenverlust reconciliieren; keine neuen Long Runs vor
-   dieser Restanalyse.
-2. Einen gezielten Fuenf-Seed-Nichtlinearitaetsslice bei festem g=26/60 und
-   R_linear/L ungefaehr 0.03, 0.1, 0.3 rechnen. Im aktuellen L=3-Slice sind
-   das etwa epsilon=0.043, 0.145, 0.434 plus eta=0-Kontrollen.
-3. Nur wenn Radius, Shape oder Moden reproduzierbar vom linearen Benchmark
-   abweichen, einen nichtlinearen Knotenmechanismus haerten. Andernfalls bleibt
-   Paper I bei linearer Relaxations-/Memory-Cloud-Evidenz.
-4. Danach den dynamischen Relaxations-Diffusionsfeldzweig mit explizitem
-   Feldzustand, Quellvorzeichen, Greenkernel- und eta=0-Kontrolle pilotieren.
-5. Unabhaengige Cross-Kanal-Checkpoints, feste Distanzleiter und spaetere
-   Vektormemory-Tests bleiben Folgegates. Rekreuzung ist gestrichen.
+1. Fuer die festen Diffusionsarme `0`, `0.3 L`, `1.0 L` Low-Mode-Features
+   und seedgepaart dieselben `eta=0`-Kontrollen speichern.
+2. AR-/Feature-Closure ueber mehrere Lags testen. Ein Feldmodus zaehlt nur,
+   wenn seine Rate gegen `nu=0` und `eta=0` getrennt und lagstabil ist.
+3. Boxlaenge und Modenzahl als reine Numeriksensitivitaet pruefen. Nach dem
+   exakten linearen Befund keine kleineren epsilon-Werte mehr scannen.
+4. Nur bei einem neuen kontrollgetrennten Modus laengere N-Laeufe starten.
+   Das aktuelle Heat-Feld traegt keinen endlichen Geschwindigkeitsclaim.
+5. Unabhaengige Cross-Kanal-Checkpoints und spaetere Vektormemory-Tests bleiben
+   getrennte Folgegates.

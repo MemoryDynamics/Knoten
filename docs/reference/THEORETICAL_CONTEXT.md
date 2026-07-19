@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -117,6 +117,51 @@ Reports:
 und
 `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`.
 
+## Spektrale rho-Reprasentation und dynamische Felderweiterung
+
+Auf einer periodischen 1D-Box der Laenge `L_box` kann dasselbe skalare Memory
+mit endlich vielen Fourierkoeffizienten gespeichert werden. Fuer
+`k_m=2 pi m/L_box` lautet das normierte Update
+
+```text
+rho_hat_(n+1,m) = (1-lambda) rho_hat_(n,m)
+                  + lambda M0/L_box exp(-i k_m x_(n+1)).
+```
+
+Dies ist keine neue Physik, sondern die Galerkin-Reprasentation der bisherigen
+exponentiell gewichteten Punktspur. Sie ist weiterhin ein expliziter
+Markov-Zustand und kontrahiert bei gemeinsamem sichtbarem Pfad modeweise mit
+`1-lambda`. `K_hat(0)=0` folgt aus `int K=0`, entfernt aber nur den konstanten
+Potentialmodus. Da der sichtbare Update den Gradienten liest, ist dieser
+Nullmodus ohnehin kraftfrei; Nullintegral ist keine Energieerhaltung.
+
+Die erste echte Modellerweiterung fuegt einen Heat-Semigroup-Schritt hinzu:
+
+```text
+rho_hat_(n+1,m) = exp(-nu k_m^2)
+                  [(1-lambda) rho_hat_(n,m)
+                   + lambda M0/L_box exp(-i k_m x_(n+1))].
+```
+
+Die 1D-Diffusions-RMS-Laenge ueber eine Memory-Zeit `lambda^-1` ist
+`sqrt(2 nu/lambda)`. `nu=0` stellt das alte Modell bitgenau wieder her.
+Positive `nu` macht das Vergessen modeabhaengig und ist deshalb ein neuer
+Feldmechanismus, keine blosse Umparametrisierung. Er ist weiterhin diffusiv
+und besitzt keine harte endliche Signalgeschwindigkeit.
+
+Der Ressourcenpilot behaelt 64 positive Moden plus Nullmode, also 1040 Bytes
+pro komplexem Feldzustand. Fuer die geglaettete Kraft sind 32, 64 und 128
+Moden im getesteten Slice numerisch konvergent. Eine Delta-Deposition besitzt
+bei endlicher Fouriertrunkierung dagegen Gibbs-Loben und ist punktweise nicht
+positiv. Dies ist ein Rekonstruktionsartefakt; fuer ein echtes positives
+Bandfeld sind finite Depositionsbreite, Positivitaetsprojektion oder ein
+lokaler konservativer Diskretisierer getrennte Modellentscheidungen.
+
+Numerisch skaliert der relative Radius fuer `epsilon=1e-8..1e-4` exakt linear
+mit epsilon. Der erste kontrollierte Feldpilot zeigt bei wachsender
+Diffusionslaenge eine glatte Abschwaechung der Rueckstellung, aber keinen neuen
+Ast oder Modus. Diese Beobachtung rechtfertigt Low-Mode-/AR-Diagnostik, noch
+keinen Metastabilitaets- oder Propagationsclaim.
 ## Dimensionless Attractive-Only Reduction
 
 The current core audit shows that the narrow positive Gaussian is not an

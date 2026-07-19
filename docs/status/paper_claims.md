@@ -77,6 +77,20 @@ d=3-Embedding ist im linearen isotropen Regime erwartete Gaussgeometrie und
 keine Dimensionsselektion. Long-Run-Trace-AR, Feature-Closure und der negative
 Spinbefund sind mit diesem reellen Relativmodus konsistent.
 
+Die spektrale rho-Reprasentation haertet diese Lesart, ohne sie zu erweitern:
+Historien- und Kraftaequivalenz sind getestet, `R` skaliert fuer
+`epsilon=1e-8..1e-4` exakt proportional zu epsilon, und 32 bis 128 Moden
+liefern denselben dynamischen Radius. Dies ist ein numerischer Markov-
+Zustandsbefund, kein neues Feldgesetz. Ein punktweise rekonstruiertes
+bandbegrenztes Delta besitzt Gibbs-Loben; Positivitaet gilt fuer die
+zugrundeliegende Memory-Massendarstellung, nicht automatisch fuer jede
+trunkierte Kurve.
+
+Der erste Relaxations-Diffusionspilot fuegt modeabhaengigen Zerfall hinzu. Mit
+wachsender Diffusionslaenge wird die Rueckstellung glatt schwaecher; ein neuer
+Ast oder Modus ist nicht beobachtet. Diese Erweiterung bleibt ausserhalb des
+minimalen Paper-I-Kernclaims, kann aber als kontrollierte Future-Work-
+Methodik erwaehnt werden.
 Ein dynamisches Relaxations-Diffusionsfeld bleibt eine kontrollierte
 Modellerweiterung: Sein stationaerer Greenkernel ist nicht global
 gaussfoermig, der Feldzustand muss in die Markov-Einbettung, und Diffusion
@@ -129,6 +143,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
+| Spektrale rho-Reprasentation ist zum exponentiellen Memory aequivalent | strukturell und numerisch gestuetzt in 1D: Historie, Kontraktion, Masse und Kraft getestet; O(M)-Zustand | nur als Reprasentation claimen; periodische Box und Trunkierung offen ausweisen |
+| Relaxations-Diffusionsfeld erzeugt einen neuen langsamen Modus | offen: erster Drei-Punkt-Pilot zeigt nur glatte Abschwaechung der Rueckstellung | Low-Mode-/AR-Closure gegen nu=0 und eta=0, danach Box-/Modenzahlsensitivitaet |
 | Knoten als metastabile Regime | nicht isoliert: Long-Run-Radien folgen dem finite-memory linearen Modus; das feste-g-Gate zeigt nur eine glatte 6.2%-Korrektur ohne Shape-Umschlag. Die vorregistrierte Regel ist formal inconclusive, ihre Residence-/Score-Stuetzen sind aber skalenverzerrt bzw. nicht diskriminierend | skalares Modell als Kontrollbaseline behalten; dynamisches Feld mit eigenem Zustand, Greenkernel-, Vorzeichen- und eta=0-Kontrollen testen |
 | Baseline/Single-scale zeigen langlebige Residence | nur Legacy-Sign-Befund; der korrigierte attraktive Ast ist stattdessen linear erklaert | nicht als aktuellen Metastabilitaetsclaim verwenden |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |

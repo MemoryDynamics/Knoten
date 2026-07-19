@@ -55,10 +55,16 @@ Alternative ist auch fuer `eta=0` gesaettigt und daher nicht diskriminierend.
 
 Die aktuelle Paper-I-Lesart bleibt deshalb eng: kontrollierte co-moving
 skalare Relaxationswolke, keine isolierte nichtlineare Metastabilitaet und
-kein Dimensionsclaim. Weitere skalare Amplituden-/Epsilon-Sweeps sind nicht
-priorisiert. Der naechste Modellzweig ist das dynamische Relaxations-
-Diffusionsfeld; es erweitert den Markov-Zustand und ist nicht mit dem
-Gausskernel identisch.
+kein Dimensionsclaim. Weitere skalare Amplituden- oder kleinere-Epsilon-
+Sweeps sind nicht priorisiert.
+
+Die neue Spektralfeldschicht stellt dasselbe exponentielle rho mit 64 Moden
+und rund 1 KB Zustandspeicher dar. Der Epsilon-Slice `1e-8..1e-4` skaliert
+exakt linear. Eine getrennte Relaxations-Diffusionsextension zeigt fuer die
+vorab festgelegten Diffusionslaengen nur glatte Feldglaettung. Naechster
+Schritt ist Low-Mode-/AR-Closure gegen `nu=0` und `eta=0`; ein physischer
+Mediator, Metastabilitaet oder endliche Propagation sind damit noch nicht
+gezeigt.
 ## Nicht ueberclaimen
 
 - Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.

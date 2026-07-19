@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -24,8 +24,11 @@ Begruendung:
   Prozent.
 - Paper I darf deshalb kompakte co-moving Relaxationswolken berichten, aber
   derzeit keinen isolierten nichtlinearen metastabilen Knoten.
-- Der naechste skalare Test wird ueber R_linear/L bei festem g kalibriert.
-  Erst danach folgen dynamisches Feld, Cross-Kanal oder Vektormemory.
+- Das feste-g-Gate und die Spektralfeld-Reprasentation sind abgeschlossen.
+  Kleinere epsilon-Werte skalieren den lokalen Radius nur proportional.
+- Der aktuelle Modellzweig ist nun ein explizites Relaxations-Diffusionsfeld.
+  Der erste kontrollierte Pilot zeigt glatte Feldglaettung, aber noch keinen
+  neuen langsamen oder metastabilen Modus.
 
 ## P0: Abgeschlossen fuer den Moment
 
@@ -366,6 +369,33 @@ Prioritaet:
    danach `sigma`, danach Amplitudenverhaeltnis). `M0` bleibt vorerst
    sekundaerer Skalierungshebel, kein breiter Blindscan.
 
+### P1.5 Ressourcenbegrenztes Memory-Feld
+
+Status: Spektrale Reprasentation und erster Relaxations-Diffusionspilot abgeschlossen.
+
+- `rho_hat` speichert dasselbe exponentielle skalare Memory mit festem
+  O(M)-Zustand. Bei `M=64` benoetigt ein Feldzustand 1040 Bytes.
+- Exakte Historien-, Kontraktions-, Massen-, Kraft- und `eta=0`-Tests bestehen.
+- Der Epsilon-Slice `1e-8, 1e-6, 1e-4` ergibt `R proportional epsilon` bis
+  auf rund `2e-9` relative Streuung von `R/epsilon`. Kleinere Epsilon-Werte
+  werden in diesem lokalen Slice nicht weiter verfolgt.
+- Die Feldextension
+  `rho_new_hat(k)=exp(-nu k^2)[(1-lambda)rho_hat(k)+lambda G_hat_x(k)]`
+  besitzt `nu=0` als bitgenaue Modellkontrolle.
+- Fuer Diffusionslaengen pro Memory-Zeit von `0`, `0.3 L`, `1.0 L` waechst
+  der aktive Medianradius glatt um Faktor `1.384`; active/control steigt von
+  `0.171` auf `0.240`. Das ist Feldglaettung, kein neuer Knotenast.
+
+Naechstes Gate:
+
+1. Low-Mode-Features speichern: relative Position, Kraft, Betrag/Phase der
+   ersten Fouriermoden und Feldbreite.
+2. Fuer dieselben drei Diffusionsarme seedgepaarte AR-/Feature-Closure gegen
+   `nu=0` und `eta=0` testen; keine neue Parameterachse oeffnen.
+3. Nur bei kontrollgetrennten, lagstabilen neuen Zeitskalen folgen laengere
+   Laeufe. Zuvor reichen Box- und Modenzahlsensitivitaet als Numerikgate.
+4. Harte Propagation bleibt ausgeschlossen: ein Heat-Semigroup-Feld diffundiert
+   instantan in der Kontinuumsbeschreibung.
 ### P2.1 Transferoperator auf Long-Run-Daten
 
 Status: Long-Run-Trace-AR und Feature-Closure erledigt; noch kein geschlossener Transferoperatorbefund.
