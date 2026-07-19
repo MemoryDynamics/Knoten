@@ -49,7 +49,9 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
-| `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | aktiv | feste Diffusionsarme `0/0.3L/1.0L`; naechstens Low-Mode-/AR-Closure |
+| `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
+| `experiments/current/memory/low_mode_ar_feature_closure.py` | Low-Mode-/AR-Closure | aktiv | gepaarte Seeds, Realraumhistorie, Persistence/Shuffle, Box-/Modenzahlgate und N=1M-Bestaetigung |
+| `experiments/current/memory/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
@@ -79,9 +81,23 @@ von `0.171` auf `0.240`, und der Feedback-Schritt pro epsilon sinkt von
 neuen Modus. Report:
 `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
 
-Naechster Einsatz ist eine Low-Mode-/AR-Feature-Closure auf denselben drei
-Armen, danach Box- und Modenzahlsensitivitaet. Kein Long Run vor einer
-kontrollgetrennten neuen Zeitskala.
+Die Low-Mode-Closure ist nun ausgefuehrt. Translation-invariante Moden und
+Realraum-Stuetzstellen sind leave-one-seed-out vorhersagbar; die direkte
+Realraumhistorie, 32/64/128 Moden und matched-resolution Boxen bestehen ihre
+Darstellungsgates. Beim N=1M-Lauf bleiben die zwei gemeinsamen
+interpretierbaren aktiven Lags mit -2.9 und +9.0 Prozent innerhalb des
+10-Prozent-Gates. Der 5.8-Prozent-Unterschied der aggregierten Raten ist nur
+deskriptiv, da die vollstaendigen Lag-Gitter abweichen. Das im Kurzlauf
+explorativ ausgewaehlte Verhaeltnis 0.3 wurde fuer N=1M eingefroren.
+
+Komplexe Nebenmoden sind negativ reconciliiert: Sie treten auch fuer `eta=0`
+auf, ihre Frequenz driftet mit N um rund 55 Prozent, und Q faellt
+`0.342 -> 0.140`. Naechster Einsatz ist Mode-Identity ueber Eigenvektoren,
+Zeitsegmente und eine analytische lineare Kontrolle, nicht ein weiterer
+Diffusionssweep. Reports:
+`reports/memory/low_mode_ar_feature_closure_2026-07-19.md`,
+`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` und
+`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md`.
 ## Referenzzustands-Checkpoints
 
 Der Checkpoint-Runner speichert nur den finalen augmentierten Zustand der
@@ -713,6 +729,11 @@ Modellklasse.
 | `reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` | festes-g-R/L-Gate | Vorregistriert formal inconclusive; seed-stabile 6.2 Prozent Radiusabweichung, aber stabile Memory-Shape. |
 | `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md` | Residence-Skalenaudit | Feste Voxel sind radiusabhaengig; co-moving Residence ist fuer aktiv und eta=0 gesaettigt. Keine unabhaengige Metastabilitaetsstuetze. |
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
+| `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
+| `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
+| `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |
+| `reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; reelle Rate bleibt kontrollgetrennt, komplexe Nebenmoden bleiben in eta=0. |
+| `reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame interpretierbare aktive Lags bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |

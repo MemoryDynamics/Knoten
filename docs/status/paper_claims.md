@@ -86,11 +86,18 @@ bandbegrenztes Delta besitzt Gibbs-Loben; Positivitaet gilt fuer die
 zugrundeliegende Memory-Massendarstellung, nicht automatisch fuer jede
 trunkierte Kurve.
 
-Der erste Relaxations-Diffusionspilot fuegt modeabhaengigen Zerfall hinzu. Mit
-wachsender Diffusionslaenge wird die Rueckstellung glatt schwaecher; ein neuer
-Ast oder Modus ist nicht beobachtet. Diese Erweiterung bleibt ausserhalb des
-minimalen Paper-I-Kernclaims, kann aber als kontrollierte Future-Work-
-Methodik erwaehnt werden.
+Der Relaxations-Diffusionszweig fuegt modeabhaengigen Zerfall hinzu. Die
+Low-Mode-/AR-Analyse besteht Realraum-, Modenzahl-, Box-, Shuffle- und
+Persistence-Gates. Zwischen N=100k und N=1M bleiben zwei gemeinsame
+interpretierbare aktive Lags mit -2.9 und +9.0 Prozent innerhalb des
+10-Prozent-Gates. Der 5.8-Prozent-Aggregatunterschied ist wegen verschiedener
+Lag-Gitter nur deskriptiv. Das stuetzt eine reduzierte lineare
+Relaxationsbeschreibung, keinen neuen metastabilen Ast.
+
+Komplexe Nebenmoden sind ausdruecklich negativ: Sie treten auch fuer
+`eta=0` auf, ihre Frequenz driftet mit N um rund 55 Prozent, und ihr
+Quality-Faktor faellt. Die Erweiterung bleibt ausserhalb des minimalen
+Paper-I-Kernclaims und traegt keinen Oszillator-, Photon- oder Phasenclaim.
 Ein dynamisches Relaxations-Diffusionsfeld bleibt eine kontrollierte
 Modellerweiterung: Sein stationaerer Greenkernel ist nicht global
 gaussfoermig, der Feldzustand muss in die Markov-Einbettung, und Diffusion
@@ -144,7 +151,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
 | Spektrale rho-Reprasentation ist zum exponentiellen Memory aequivalent | strukturell und numerisch gestuetzt in 1D: Historie, Kontraktion, Masse und Kraft getestet; O(M)-Zustand | nur als Reprasentation claimen; periodische Box und Trunkierung offen ausweisen |
-| Relaxations-Diffusionsfeld erzeugt einen neuen langsamen Modus | offen: erster Drei-Punkt-Pilot zeigt nur glatte Abschwaechung der Rueckstellung | Low-Mode-/AR-Closure gegen nu=0 und eta=0, danach Box-/Modenzahlsensitivitaet |
+| Niedrige spektrale Features bilden einen praediktiven reduzierten Zustand | lokal in 1D gestuetzt: Leave-one-seed-out-Closure, direkte Realraumhistorie sowie Box-/Modenzahlkontrollen bestehen; zwei gemeinsame interpretierbare Lags bleiben zwischen N=100k und N=1M unter 10 Prozent | Eigenvektor- und Zeitsegment-Mode-Identity; nicht als exakte Markov-Closure ausgeben |
+| Relaxations-Diffusionsfeld erzeugt einen feedback-spezifischen komplexen Modus | nicht gestuetzt: komplexe Paare treten auch fuer eta=0 auf, Frequenz driftet mit N um rund 55 Prozent und Q faellt unter 0.2 | als Negativbefund behalten; vor neuer Modellstruktur lineare/Sampling-Herkunft identifizieren |
 | Knoten als metastabile Regime | nicht isoliert: Long-Run-Radien folgen dem finite-memory linearen Modus; das feste-g-Gate zeigt nur eine glatte 6.2%-Korrektur ohne Shape-Umschlag. Die vorregistrierte Regel ist formal inconclusive, ihre Residence-/Score-Stuetzen sind aber skalenverzerrt bzw. nicht diskriminierend | skalares Modell als Kontrollbaseline behalten; dynamisches Feld mit eigenem Zustand, Greenkernel-, Vorzeichen- und eta=0-Kontrollen testen |
 | Baseline/Single-scale zeigen langlebige Residence | nur Legacy-Sign-Befund; der korrigierte attraktive Ast ist stattdessen linear erklaert | nicht als aktuellen Metastabilitaetsclaim verwenden |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |

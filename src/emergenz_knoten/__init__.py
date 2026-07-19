@@ -60,6 +60,14 @@ from .spectral_memory_field import (
 )
 from .relaxation_diffusion_memory import RelaxationDiffusionMemoryOperators
 from .spectral_memory_runtime import SpectralMemoryOperators
+from .spectral_memory_trace import (
+    SpectralMemoryTrace,
+    direct_history_potential_gradient,
+    low_mode_feature_groups,
+    low_mode_feature_names,
+    omitted_history_weight,
+    simulate_spectral_memory_trace,
+)
 from .state import (
     FiniteMemoryState,
     memory_centroid,
@@ -177,6 +185,7 @@ __all__ = [
     "SpectralMemoryConfig",
     "SpectralMemoryOperators",
     "SpectralMemoryState",
+    "SpectralMemoryTrace",
     "VectorMemoryConfig",
     "best_residence_memory_times",
     "best_residence_updates",
@@ -192,6 +201,7 @@ __all__ = [
     "critical_gamma",
     "double_gaussian_gradient",
     "double_gaussian_potential",
+    "direct_history_potential_gradient",
     "effective_double_gaussian_parameters",
     "effective_gaussian_parameters",
     "exponential_memory_weights",
@@ -213,6 +223,8 @@ __all__ = [
     "load_finite_memory_checkpoint",
     "load_simulation_result",
     "local_scalar_memory_modes",
+    "low_mode_feature_groups",
+    "low_mode_feature_names",
     "low_wavenumber_matched_field",
     "matched_local_stiffness_renormalization",
     "mean_squared_displacement",
@@ -226,6 +238,7 @@ __all__ = [
     "memory_horizon",
     "occupancy_dimension_value",
     "occupancy_local_slopes",
+    "omitted_history_weight",
     "paired_frozen_source_response",
     "paired_signed_cross_response",
     "paired_uniform_probe_response",
@@ -249,6 +262,7 @@ __all__ = [
     "simulate_finite_memory",
     "simulate_finite_memory_numba",
     "simulate_final_finite_memory_state",
+    "simulate_spectral_memory_trace",
     "simulate_vector_memory",
     "spectral_dimension",
     "stationary_deposition_weight",

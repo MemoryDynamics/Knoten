@@ -24,11 +24,14 @@ Begruendung:
   Prozent.
 - Paper I darf deshalb kompakte co-moving Relaxationswolken berichten, aber
   derzeit keinen isolierten nichtlinearen metastabilen Knoten.
-- Das feste-g-Gate und die Spektralfeld-Reprasentation sind abgeschlossen.
-  Kleinere epsilon-Werte skalieren den lokalen Radius nur proportional.
-- Der aktuelle Modellzweig ist nun ein explizites Relaxations-Diffusionsfeld.
-  Der erste kontrollierte Pilot zeigt glatte Feldglaettung, aber noch keinen
-  neuen langsamen oder metastabilen Modus.
+- Das feste-g-Gate, die Spektralfeld-Reprasentation und die direkte
+  Realraum-Reconciliation sind abgeschlossen. Kleinere epsilon-Werte skalieren
+  den lokalen Radius nur proportional.
+- Low-Mode-Closure und N=1M-Bestaetigung isolieren einen kontrollgetrennten,
+  N-stabilen reellen Relaxationsmodus. Komplexe Nebenmoden sind weder
+  N-stabil noch von `eta=0` getrennt; sie tragen keinen Oszillatorclaim.
+- Der aktuelle Engpass ist daher Modenidentifikation statt weiterer Heat-
+  Feld-Long-Runs. Erst danach wird genau ein neuer Mechanismus geoeffnet.
 
 ## P0: Abgeschlossen fuer den Moment
 
@@ -308,21 +311,19 @@ Naechster operativer Schritt:
 Aktueller naechster Schritt:
 
 - Der attraktive Ein-Kernel-Ast mit L=sigma_att und
-  g=eta M0 A_att/L^2 ist die reduzierte skalare Kontrollbaseline. A_att, eta
-  und M0 werden darin nicht als getrennt identifizierte Physikparameter gelesen.
-- Kein dichter N=1M-Amplitudenscan um KnotScore-Schwellen: Der gemessene Ast
-  ist glatt und fast vollstaendig linear erklaert.
-- Der feste-g-Test und die Long-Run-Reconciliation sind abgeschlossen. Die
-  kleine glatte Nichtlinearitaet rechtfertigt weder einen weiteren skalaren
-  Sweep noch einen Metastabilitaetsclaim.
-- Das dynamische Feld ist jetzt der naechste klar definierte Modellzweig.
-  Feldzustand, statischer Greenkernel, Quellvorzeichen und eta=0-Kontrolle
-  muessen gemeinsam getestet werden.
+  g=eta M0 A_att/L^2 bleibt die reduzierte skalare Kontrollbaseline. A_att,
+  eta und M0 sind darin nicht getrennt identifizierte Physikparameter.
+- Kein weiterer dichter Amplituden-, Epsilon- oder Heat-Diffusionsscan: Die
+  beobachteten Aeste sind glatt und als Relaxation erklaert.
+- Die spektrale Rechenbasis ist gegen endliche Realraumhistorie, Modenzahl,
+  Boxlaenge, `nu=0`, `eta=0` und N geprueft.
+- Naechster autonomer Schritt: komplexe Kontrollmoden mit Eigenvektor-Matching,
+  Zeitsegmenten und analytischer linearer Zustandsraumreferenz identifizieren.
+- Erst nach diesem Negativkontroll-Audit genau einen Mechanismus oeffnen:
+  lokalen Uebertragungskanal oder orientiertes/Vektormemory.
 - Residence-/Score-Vergleiche ueber veraenderte Radius-Skalen muessen
   raumnormierte Bins verwenden oder die Voxel/R-Sensitivitaet offen ausweisen.
-- Mehrknoten-, signierte Cross- und Vektormemory-Arme bleiben erhalten, folgen
-  aber nach diesem skalaren Identifizierbarkeitsgate. Rekreuzung wird nicht als
-  eigenes Ziel weiterverfolgt.
+  Rekreuzung bleibt kein eigenes Ziel.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
@@ -371,40 +372,53 @@ Prioritaet:
 
 ### P1.5 Ressourcenbegrenztes Memory-Feld
 
-Status: Spektrale Reprasentation und erster Relaxations-Diffusionspilot abgeschlossen.
+Status: Spektrale Reprasentation, Low-Mode-Closure und N=1M-Reconciliation abgeschlossen.
 
 - `rho_hat` speichert dasselbe exponentielle skalare Memory mit festem
   O(M)-Zustand. Bei `M=64` benoetigt ein Feldzustand 1040 Bytes.
 - Exakte Historien-, Kontraktions-, Massen-, Kraft- und `eta=0`-Tests bestehen.
 - Der Epsilon-Slice `1e-8, 1e-6, 1e-4` ergibt `R proportional epsilon` bis
-  auf rund `2e-9` relative Streuung von `R/epsilon`. Kleinere Epsilon-Werte
-  werden in diesem lokalen Slice nicht weiter verfolgt.
+  auf rund `2e-9` relative Streuung von `R/epsilon`.
 - Die Feldextension
   `rho_new_hat(k)=exp(-nu k^2)[(1-lambda)rho_hat(k)+lambda G_hat_x(k)]`
   besitzt `nu=0` als bitgenaue Modellkontrolle.
 - Fuer Diffusionslaengen pro Memory-Zeit von `0`, `0.3 L`, `1.0 L` waechst
   der aktive Medianradius glatt um Faktor `1.384`; active/control steigt von
-  `0.171` auf `0.240`. Das ist Feldglaettung, kein neuer Knotenast.
+  `0.171` auf `0.240`.
+- Der Low-Mode-Trace speichert translation-invariante Fourierfeatures und
+  Realraum-Stuetzstellen. Die direkte 2000-Update-Historie begrenzt den
+  Kraftfehler wie erwartet durch den geometrischen Memory-Schwanz.
+- Das N=100k-Gate besteht Closure und Numerik. Beim N=1M-Lauf bleiben zwei
+  gemeinsame interpretierbare aktive Lags unter 10 Prozent; `eta=0` bleibt
+  stabil getrennt.
+- Komplexe Nebenmoden scheitern: Frequenz und Q driften mit N, und `eta=0`
+  zeigt dieselben Klassen. Kein Phasen-, Photon- oder Oszillatorbefund.
 
 Naechstes Gate:
 
-1. Low-Mode-Features speichern: relative Position, Kraft, Betrag/Phase der
-   ersten Fouriermoden und Feldbreite.
-2. Fuer dieselben drei Diffusionsarme seedgepaarte AR-/Feature-Closure gegen
-   `nu=0` und `eta=0` testen; keine neue Parameterachse oeffnen.
-3. Nur bei kontrollgetrennten, lagstabilen neuen Zeitskalen folgen laengere
-   Laeufe. Zuvor reichen Box- und Modenzahlsensitivitaet als Numerikgate.
-4. Harte Propagation bleibt ausgeschlossen: ein Heat-Semigroup-Feld diffundiert
-   instantan in der Kontinuumsbeschreibung.
+1. Eigenvektor-basiertes Mode-Matching und Zeitsegment-Stabilitaet auf
+   deterministisch reproduzierten Traces; keine neue Parameterachse. Kuenftig
+   kompakte AR-Matrizen bzw. Segmentstatistiken statt kompletter Traces speichern.
+2. Analytische lineare Referenz fuer die komplexen `eta=0`-Nebenmoden
+   ableiten und gegen Sampling-/Feature-Artefakte testen.
+3. Nur danach genau eine neue Modellstruktur oeffnen: lokaler
+   Uebertragungskanal oder orientiertes/Vektormemory.
+4. Direkte Realraumhistorie bleibt Validierungskanal fuer jede spektrale
+   Variante. Harte Propagation bleibt fuer das Heat-Feld ausgeschlossen.
+
 ### P2.1 Transferoperator auf Long-Run-Daten
 
-Status: Long-Run-Trace-AR und Feature-Closure erledigt; noch kein geschlossener Transferoperatorbefund.
+Status: Paket-Closure, Low-Mode-Long-Run und Kontrollen erledigt; kein oszillatorischer oder metastabiler Transferoperatorbefund.
 
-- Abgeschlossen: Block-AR auf dem `N=30M`-Endfenster. Komplexe Klassifikationen sind nicht kontrollgetrennt von `eta_zero`.
-- Abgeschlossen: Feature-Closure. Aktive Shape-/Radius-Scalars sind vorhersagbar; Spin-Scalar nicht.
-- Naechste Haertung: Memory-Summary-Features laengerer Laeufe und Feature-Closure-Kriterien speichern.
-- Lag-/Voxel-/Feature-Sensitivitaet wiederholen.
-- PCCA/HMM/PMM-Fallbacks erst dann pruefen.
+- `markov.closure` bietet getestete Leave-one-seed-out-Closure,
+  Persistence-/Shuffle-Kontrollen und lag-normalisierte AR-Spektren.
+- Der skalare Low-Mode-Zustand ist vorhersagbar; zwei gemeinsame
+  interpretierbare Lags sind zwischen N=100k und N=1M stabil und kontrollgetrennt.
+- Komplexe Paare sind weder N-stabil noch spezifisch gegen `eta_zero`.
+- Naechste Haertung ist Mode-Identity ueber Eigenvektoren und Zeitsegmente,
+  nicht ein weiterer Parametersweep.
+- PCCA/HMM/PMM erst bei einem nachgewiesenen nichtlinearen oder mehrzustandigen
+  Regime pruefen.
 
 ### P2.2 Dimensionsclaim
 

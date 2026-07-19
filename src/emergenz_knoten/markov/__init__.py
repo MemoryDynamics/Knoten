@@ -5,6 +5,13 @@ operators from sampled augmented states ``z_i``; no physical time
 reparametrization is assumed here.
 """
 
+from .closure import (
+    ARSpectrum,
+    ClosureScores,
+    analytic_field_mode_multiplier,
+    fit_ar_spectrum,
+    leave_one_series_out_closure,
+)
 from .dataset import (
     AugmentedTrajectory,
     LaggedDataset,
@@ -40,19 +47,24 @@ from .validation import (
 )
 
 __all__ = [
+    "ARSpectrum",
     "AugmentedTrajectory",
+    "ClosureScores",
     "LaggedDataset",
     "TransferOperatorEstimate",
+    "analytic_field_mode_multiplier",
     "augmented_feature_names",
     "ballistic_scaling_slope",
     "chapman_kolmogorov_error",
     "critical_eta",
     "critical_gamma",
     "estimate_transfer_operator",
+    "fit_ar_spectrum",
     "implied_relaxation_rates",
     "implied_timescales",
     "lagged_pairs",
     "leading_nontrivial_eigenvalues",
+    "leave_one_series_out_closure",
     "mean_squared_displacement",
     "memory_summary_features",
     "memory_weight_in_ball",

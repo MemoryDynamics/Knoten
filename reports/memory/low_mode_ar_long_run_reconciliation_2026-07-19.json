@@ -1,0 +1,90 @@
+{
+  "active_rate_long": 0.7714758436369639,
+  "active_rate_relative_change": 0.05803829536699512,
+  "active_rate_short": 0.7291568244884433,
+  "common_active_lag_count": 2,
+  "common_active_lag_max_abs_rate_change": 0.08964909087505157,
+  "common_active_lag_required": 2,
+  "common_active_lag_stability_pass": true,
+  "common_lag_comparisons": [
+    {
+      "condition": "active",
+      "interpretable": true,
+      "lag_memory_times": 0.2,
+      "long_closure_lift": 0.31174836112003057,
+      "long_rate_per_memory_time": 0.7326758637051721,
+      "rate_relative_change": -0.028788428078231454,
+      "short_closure_lift": 0.3032405316814031,
+      "short_rate_per_memory_time": 0.7543936716645603
+    },
+    {
+      "condition": "active",
+      "interpretable": true,
+      "lag_memory_times": 1.0,
+      "long_closure_lift": 0.10463806386207142,
+      "long_rate_per_memory_time": 0.77811728020675,
+      "rate_relative_change": 0.08964909087505157,
+      "short_closure_lift": 0.10292261125926161,
+      "short_rate_per_memory_time": 0.7140989578414428
+    },
+    {
+      "condition": "active",
+      "interpretable": false,
+      "lag_memory_times": 2.0,
+      "long_closure_lift": 0.015137014138236982,
+      "long_rate_per_memory_time": 0.8083823223585673,
+      "rate_relative_change": 0.33604092442002864,
+      "short_closure_lift": 0.01102094857131497,
+      "short_rate_per_memory_time": 0.6050580544226096
+    },
+    {
+      "condition": "eta_zero",
+      "interpretable": true,
+      "lag_memory_times": 0.2,
+      "long_closure_lift": 0.02676231585849287,
+      "long_rate_per_memory_time": 0.12281022086823738,
+      "rate_relative_change": -0.1550364084561774,
+      "short_closure_lift": 0.024959092719194054,
+      "short_rate_per_memory_time": 0.14534380190731336
+    },
+    {
+      "condition": "eta_zero",
+      "interpretable": true,
+      "lag_memory_times": 1.0,
+      "long_closure_lift": 0.2669539887017609,
+      "long_rate_per_memory_time": 0.3374043367226166,
+      "rate_relative_change": -0.09928986570107412,
+      "short_closure_lift": 0.2825492401563422,
+      "short_rate_per_memory_time": 0.3745981352649459
+    },
+    {
+      "condition": "eta_zero",
+      "interpretable": true,
+      "lag_memory_times": 2.0,
+      "long_closure_lift": 0.10050946702997798,
+      "long_rate_per_memory_time": 0.45221945844585754,
+      "rate_relative_change": -0.017973326394911338,
+      "short_closure_lift": 0.08177044919688647,
+      "short_rate_per_memory_time": 0.4604961052490848
+    }
+  ],
+  "complex_frequency_long": 0.21192057189931277,
+  "complex_frequency_relative_change": -0.5538661248058079,
+  "complex_frequency_short": 0.47501564817750835,
+  "complex_mode_n_stability_pass": false,
+  "complex_quality_long": 0.13960249133399755,
+  "complex_quality_short": 0.3415529584480074,
+  "created_utc": "2026-07-19T20:22:25.157941+00:00",
+  "description": "N=100k versus N=1M low-mode AR reconciliation.",
+  "eta_zero_rate_long": 0.2563258992272191,
+  "eta_zero_rate_short": 0.2562146382386876,
+  "long_eta_zero_complex_rows": 5,
+  "long_memory_times": 10000.0,
+  "long_steps": 1000000,
+  "real_mode_n_stability_pass": true,
+  "selected_diffusion_length_ratio": 0.3,
+  "short_eta_zero_complex_rows": 5,
+  "short_memory_times": 1000.0,
+  "short_steps": 100000,
+  "verdict": "The control-separated real relaxation rate is N-stable at all common interpretable active lags under the 10 percent criterion. The complex secondary mode fails N-stability and eta-zero specificity."
+}

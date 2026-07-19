@@ -115,10 +115,31 @@ Reports:
 `reports/memory/spectral_rho_field_pilot_2026-07-19.md` und
 `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
 
-Naechster Schritt ist eine seedgepaarte Low-Mode-/AR-Feature-Closure fuer die
-vorab festgelegten Diffusionsarme gegen `nu=0` und `eta=0`, gefolgt von Box-
-und Modenzahlsensitivitaet. Ein Long Run folgt nur bei einer neuen
-kontrollgetrennten Zeitskala.
+Die seedgepaarte Low-Mode-/AR-Closure ist abgeschlossen. Bei `N=100k`,
+Seeds 1 bis 5 und den vorab festgelegten Diffusionsarmen bestehen 8 von 10
+aktiven Low-Mode-Zeilen die Closure-Schwelle gegen Persistence und shuffled
+future. Eine direkte, auf 2000 Updates abgeschnittene Realraumhistorie
+reproduziert die spektrale Kraft bis `1.87e-9`; 32/64/128 Moden und
+matched-resolution Boxen aendern Radius/Kraft um hoechstens `5.50e-5`.
+
+Der anschliessende `N=1M`-Lauf umfasst 10,000 Memory-Zeiten. Beim
+Diffusionsverhaeltnis 0.3 bleiben die zwei gemeinsamen interpretierbaren
+aktiven Lags mit -2.9 und +9.0 Prozent innerhalb der 10-Prozent-Schranke.
+Der aggregierte Median `0.729 -> 0.771` ist deskriptiv, weil sich die
+vollstaendigen Lag-Gitter unterscheiden; die `eta=0`-Rate bleibt
+`0.2562 -> 0.2563`. Das Verhaeltnis 0.3 wurde explorativ im Kurzlauf
+gewaehlt und vor N=1M eingefroren.
+Die komplexe Nebenmode ist dagegen negativ reconciliiert: ihre gefittete
+Frequenz verschiebt sich `0.475 -> 0.212`, ihr `Q` faellt
+`0.342 -> 0.140`, und stabile komplexe Paare treten an allen geprueften
+Lags auch fuer `eta=0` auf. Das ist ein kontrollgetrennter reeller
+Relaxationsbefund, kein Oszillator.
+
+Reports:
+`reports/memory/low_mode_ar_feature_closure_2026-07-19.md`,
+`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` und
+`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md`.
+
 ## Paper-Status
 
 - Paper 0: mathematischer Anker bzw. moegliches Supplement. Es formuliert die
@@ -685,13 +706,17 @@ reports/kernels/field/field_equation_bridge_2026-07-18.md.
 
 ## Naechste technische Schritte
 
-1. Fuer die festen Diffusionsarme `0`, `0.3 L`, `1.0 L` Low-Mode-Features
-   und seedgepaart dieselben `eta=0`-Kontrollen speichern.
-2. AR-/Feature-Closure ueber mehrere Lags testen. Ein Feldmodus zaehlt nur,
-   wenn seine Rate gegen `nu=0` und `eta=0` getrennt und lagstabil ist.
-3. Boxlaenge und Modenzahl als reine Numeriksensitivitaet pruefen. Nach dem
-   exakten linearen Befund keine kleineren epsilon-Werte mehr scannen.
-4. Nur bei einem neuen kontrollgetrennten Modus laengere N-Laeufe starten.
-   Das aktuelle Heat-Feld traegt keinen endlichen Geschwindigkeitsclaim.
-5. Unabhaengige Cross-Kanal-Checkpoints und spaetere Vektormemory-Tests bleiben
-   getrennte Folgegates.
+1. Keine weiteren skalaren Heat-Feld-Long-Runs ohne neue Modellhypothese:
+   Realraum-, Aufloesungs-, Closure- und N-Gates sind abgeschlossen.
+2. Die komplexen `eta=0`-Nebenmoden analytisch bzw. als lineares
+   Zustandsraum-/Samplingphaenomen identifizieren. Eigenvektor-basiertes
+   Mode-Matching und Zeitsegment-Stabilitaet muessen vor jedem Phasenclaim
+   bestehen.
+3. Niedrige Spektralmoden bleiben Rechenbasis; direkte endliche
+   Realraumhistorien laufen bei kuenftigen Modellvarianten als Referenzkontrolle
+   mit.
+4. Erst danach genau einen neuen Mechanismus oeffnen: lokaler Mediator mit
+   expliziter Uebertragung oder orientiertes/Vektormemory. Beide brauchen
+   `eta=0`, `nu=0`/Fallback und randomized-channel controls.
+5. Das aktuelle Heat-Feld bleibt diffusiv und traegt keinen endlichen
+   Geschwindigkeits-, Photon-, Spin- oder Metastabilitaetsclaim.

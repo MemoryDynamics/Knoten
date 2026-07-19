@@ -160,8 +160,31 @@ lokaler konservativer Diskretisierer getrennte Modellentscheidungen.
 Numerisch skaliert der relative Radius fuer `epsilon=1e-8..1e-4` exakt linear
 mit epsilon. Der erste kontrollierte Feldpilot zeigt bei wachsender
 Diffusionslaenge eine glatte Abschwaechung der Rueckstellung, aber keinen neuen
-Ast oder Modus. Diese Beobachtung rechtfertigt Low-Mode-/AR-Diagnostik, noch
-keinen Metastabilitaets- oder Propagationsclaim.
+Ast oder Modus. Dieser Pilot motivierte die nachfolgende Low-Mode-/AR-
+Diagnostik; fuer sich allein traegt er keinen Metastabilitaets- oder
+Propagationsclaim.
+Die Diagnostik verwendet einen translationsinvarianten reduzierten Zustand
+aus relativer Position, aktueller Kraft, phasenausgerichteten niedrigen
+Fourierkoeffizienten und symmetrischen/antisymmetrischen Realraum-Stuetzstellen.
+Die Realraumwerte sind keine zweite Dynamik, sondern eine Rekonstruktion
+derselben `rho_hat`. Zusaetzlich wird die Kraft direkt aus den letzten 2000
+Positionen mit ihrem exponentiellen Gewicht berechnet. Der beobachtete maximale
+Fehler `1.87e-9` entspricht der Ordnung des ausgelassenen Schwanzes
+`(1-lambda)^2000`.
+
+Leave-one-seed-out-AR-Modelle schlagen shuffled futures und in den
+interpretierbaren Lags auch Persistence. Zwischen 1000 und 10,000 Memory-
+Zeiten bleiben die beiden gemeinsamen interpretierbaren aktiven Lags mit
+Rateaenderungen von -2.9 und +9.0 Prozent innerhalb des 10-Prozent-Gates.
+Der ueber alle, leicht verschiedenen Lag-Gitter gebildete Median aendert sich
+deskriptiv um 5.8 Prozent. Das Diffusionsverhaeltnis 0.3 wurde im Kurzlauf
+explorativ gewaehlt und vor N=1M eingefroren; es ist kein optimiertes `nu`.
+Komplexe Nebenmoden erfuellen diese Identifikation nicht: Sie treten auch fuer
+`eta=0` auf, ihre Frequenz verschiebt sich mit N um rund 55 Prozent, und ihr
+Quality-Faktor faellt unter 0.2. Der Feldzweig besitzt damit einen
+reproduzierbaren reduzierten Relaxationsmodus, aber keinen nachgewiesenen
+internen Phasen- oder Wellenmodus.
+
 ## Dimensionless Attractive-Only Reduction
 
 The current core audit shows that the narrow positive Gaussian is not an

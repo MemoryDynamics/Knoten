@@ -58,13 +58,16 @@ skalare Relaxationswolke, keine isolierte nichtlineare Metastabilitaet und
 kein Dimensionsclaim. Weitere skalare Amplituden- oder kleinere-Epsilon-
 Sweeps sind nicht priorisiert.
 
-Die neue Spektralfeldschicht stellt dasselbe exponentielle rho mit 64 Moden
-und rund 1 KB Zustandspeicher dar. Der Epsilon-Slice `1e-8..1e-4` skaliert
-exakt linear. Eine getrennte Relaxations-Diffusionsextension zeigt fuer die
-vorab festgelegten Diffusionslaengen nur glatte Feldglaettung. Naechster
-Schritt ist Low-Mode-/AR-Closure gegen `nu=0` und `eta=0`; ein physischer
-Mediator, Metastabilitaet oder endliche Propagation sind damit noch nicht
-gezeigt.
+Die Spektralfeldschicht stellt dasselbe exponentielle rho mit 64 Moden und
+rund 1 KB Zustandspeicher dar; eine endliche Realraumhistorie validiert die
+Kraft bis zum erwarteten Memory-Tail. Low-Mode-/AR-Closure, Box-/Modenzahlgate
+und ein N=1M-Lauf stuetzen eine kontrollgetrennte reelle Relaxationsrate.
+Komplexe Nebenmoden sind nicht `eta=0`-spezifisch und driften mit N; damit
+kein Oszillator-, Photon-, Metastabilitaets- oder Propagationsbefund.
+Naechster Schritt ist Mode-Identity auf deterministisch reproduzierbaren
+Traces und spaeter persistierten AR-Matrizen, nicht ein weiterer Diffusions-
+oder Epsilon-Sweep.
+
 ## Nicht ueberclaimen
 
 - Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.

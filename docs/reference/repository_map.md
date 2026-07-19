@@ -26,6 +26,8 @@ flowchart TD
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
     experiments --> spectral_rho_exp["spectral_rho_field_pilot.py<br/>O(M) representation gate"]
     experiments --> diffusion_exp["relaxation_diffusion_field_pilot.py<br/>mode-dependent field gate"]
+    experiments --> low_mode_exp["low_mode_ar_feature_closure.py<br/>real-space + AR control gate"]
+    experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -57,7 +59,9 @@ flowchart TD
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
+    src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
 
+    markov --> closure_api["closure.py<br/>cross-seed AR skill + normalized modes"]
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
     markov --> transition["transition.py<br/>labels, counts, transition matrices"]
@@ -108,8 +112,12 @@ flowchart LR
     sim --> zfeatures["augmented features z_i"]
     sim --> vfeatures["vector-memory features<br/>optional p_i summaries"]
     sim --> rhohat["spectral rho_hat<br/>explicit compact Markov state"]
-    rhohat --> lowmodes["low-mode magnitude/phase<br/>next AR closure features"]
-    lowmodes --> lagged
+    rhohat --> tracecore["Numba trace<br/>paired noise + final rho_hat"]
+    tracecore --> lowmodes["phase-aligned low modes"]
+    tracecore --> realhistory["finite real-history force<br/>tail-bounded reference"]
+    lowmodes --> closure["cross-seed AR closure<br/>persistence + shuffled controls"]
+    realhistory --> closure
+    closure --> lagged
 
     samples --> geom["diagnostics.py<br/>D_cov, D_occ, residence"]
     geom --> score["knot_score.py<br/>v0.5 scorecard vs eta_zero"]
@@ -153,7 +161,11 @@ flowchart LR
     spectral --> epsilon_gate["epsilon 1e-8..1e-4<br/>exact linear scaling"]
     epsilon_gate --> mediator["relaxation-diffusion extension<br/>q_k=(1-lambda) exp(-nu k^2)"]
     mediator --> smooth["pilot: smooth weakening<br/>no new branch"]
-    smooth --> closure["next: low-mode AR closure<br/>nu=0 and eta=0 controls"]
+    smooth --> closure["low-mode AR closure<br/>real-space / nu=0 / eta=0 gates pass"]
+    closure --> longmode["N=1M / 10,000 memory times"]
+    longmode --> realmode["real rate N-stable<br/>control separated"]
+    longmode --> complexfail["complex side modes<br/>N-drift + eta=0"]
+    complexfail --> identity["next: eigenvector + segment<br/>mode identity audit"]
 ```
 
 The reduced scalar trajectory identifies the product eta M0 A_att, not its
@@ -210,7 +222,15 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Leseregeln
 
-- `src/emergenz_knoten` ist der belastbare Codekern; `kernels.py`, `state.py`, `checkpoints.py`, `weak_probe.py`, `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py` bilden den getesteten externen Response-Pfad. `spectral_memory_field.py` ist eine kompakte Reprasentation des alten Memory; erst `relaxation_diffusion_memory.py` aendert mit modeabhaengigem Zerfall die Dynamik.- `experiments/` sind Entry-Points, nicht automatisch stabile API; `knot_score_report.py` und `vector_memory_pilot.py` erzeugen reviewbare Reports aus Rohdaten bzw. Kurzpiloten.
+- `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
+  Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
+  `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py`.
+- `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
+  Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem
+  Zerfall die Dynamik; `spectral_memory_trace.py` validiert niedrige Moden
+  gegen eine endliche Realraumhistorie.
+- `experiments/` sind Entry-Points, nicht automatisch stabile API. Reports
+  werden erst nach Kontroll- und Reproduzierbarkeitspruefung Evidenz.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.
 - `reports/` sind datierte, zitierbare Zwischenstaende.
