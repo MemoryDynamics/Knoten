@@ -230,13 +230,18 @@ def load_records(source_root: Path) -> tuple[list[dict[str, Any]], list[str]]:
             ]
             if not rows:
                 continue
+            key_amplitude = (
+                float(config["amplitude_att"]) if condition == "baseline" else 0.0
+            )
             key = (
                 int(config["steps"]),
                 int(config["dim"]),
-                float(config["amplitude_att"]),
+                key_amplitude,
                 condition,
             )
             if key in seen_keys:
+                if condition == "eta_zero":
+                    continue
                 raise ValueError(f"duplicate reconciliation slice: {key}")
             seen_keys.add(key)
             measured = [float(row["dynamic_center_rms_radius_median"]) for row in rows]
@@ -374,6 +379,8 @@ def write_outputs(
     report = _resolve(args.report)
     summary_json = _resolve(args.summary_json)
     figure = _resolve(args.figure)
+    source_git_revision = _git_output(["rev-parse", "HEAD"])
+    source_git_status = _git_output(["status", "--short"])
     _plot(records, figure)
     baseline_errors = [
         float(row["retained_relative_error"])
@@ -385,12 +392,17 @@ def write_outputs(
         for row in records
         if row["condition"] == "baseline"
     ]
+    control_errors = [
+        float(row["retained_relative_error"])
+        for row in records
+        if row["condition"] == "eta_zero"
+    ]
     generated = _utc_now()
     payload = {
         "description": "Long-run finite-memory linear radius reconciliation.",
         "generated_utc": generated,
-        "git_revision": _git_output(["rev-parse", "HEAD"]),
-        "git_status": _git_output(["status", "--short"]),
+        "git_revision": source_git_revision,
+        "git_status": source_git_status,
         "sources": sources,
         "records": records,
         "baseline_error_summary": {
@@ -399,6 +411,11 @@ def write_outputs(
             "max_retained_relative_error": max(baseline_errors),
             "median_nominal_relative_error": _median(baseline_nominal_errors),
             "max_nominal_relative_error": max(baseline_nominal_errors),
+        },
+        "eta_zero_error_summary": {
+            "n_slices": len(control_errors),
+            "median_retained_relative_error": _median(control_errors),
+            "max_retained_relative_error": max(control_errors),
         },
         "excluded_historical_slice": {
             "steps": 300_000_000,
@@ -468,6 +485,7 @@ def write_outputs(
             f"{_fmt(row['retained_relative_error'])} |"
         )
     summary = payload["baseline_error_summary"]
+    control_summary = payload["eta_zero_error_summary"]
     lines.extend(
         [
             "",
@@ -478,6 +496,14 @@ def write_outputs(
             f"and the maximum is `{_fmt(summary['max_retained_relative_error'])}`.",
             "The retained-mass correction is reported explicitly, although it is",
             "small for the stored horizons used here.",
+            "",
+            "The eta-zero controls have a median relative error of",
+            f"`{_fmt(control_summary['median_retained_relative_error'])}` and a",
+            f"maximum of `{_fmt(control_summary['max_retained_relative_error'])}`.",
+            "The formula is therefore an accurate active-branch benchmark, not an",
+            "exact implementation identity for every trace estimator and finite",
+            "memory condition. The next gate must also test seed-paired scaling",
+            "ratios rather than relying on absolute radius error alone.",
             "",
             "The old `N=300M`, `d=3`, `epsilon=0.03` campaign is not included in",
             "the numerical radius test: its committed report has no compatible",
