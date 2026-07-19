@@ -534,15 +534,19 @@ def _plot_metrics(
 
     ax = axes[1, 1]
     convergence = payload["mode_convergence"]
+    relative_error_units = [
+        (row["radius_relative_to_highest_mode"] - 1.0) * 1e14
+        for row in convergence
+    ]
     ax.plot(
         [row["n_modes"] for row in convergence],
-        [row["radius_relative_to_highest_mode"] for row in convergence],
+        relative_error_units,
         "o-",
     )
-    ax.axhline(1.0, color="0.35", linestyle=":")
+    ax.axhline(0.0, color="0.35", linestyle=":")
     ax.set(
         xlabel="retained positive Fourier modes",
-        ylabel="radius / highest-mode radius",
+        ylabel=r"relative radius difference ($10^{-14}$)",
     )
     ax.set_xscale("log", base=2)
     ax.set_xticks([row["n_modes"] for row in convergence])

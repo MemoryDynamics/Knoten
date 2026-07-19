@@ -72,6 +72,7 @@ CATEGORIES = {
         "current/markov/feature_closure_report.py",
     ],
     "memory": [
+        "current/memory/relaxation_diffusion_field_pilot.py",
         "current/memory/spectral_rho_field_pilot.py",
         "current/memory/vector_memory_pilot.py",
         "current/memory/reference_state_checkpoints.py",

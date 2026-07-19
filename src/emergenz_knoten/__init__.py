@@ -58,6 +58,7 @@ from .spectral_memory_field import (
     initialize_state as initialize_spectral_memory_state,
     zero_mean_attractive_kernel,
 )
+from .relaxation_diffusion_memory import RelaxationDiffusionMemoryOperators
 from .spectral_memory_runtime import SpectralMemoryOperators
 from .state import (
     FiniteMemoryState,
@@ -158,6 +159,7 @@ __all__ = [
     "ResponseRankInferenceResult",
     "ResponseRankResult",
     "RelaxationDiffusionField",
+    "RelaxationDiffusionMemoryOperators",
     "CHECKPOINT_SCHEMA_VERSION",
     "DEPOSITION_KERNELS",
     "FiniteMemoryCheckpoint",
