@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -39,23 +39,26 @@ Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
 Der v0.5-Knotenscore ist die aktuelle Scorecard, dokumentiert im Experiment-Katalog. Die alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
-Der neue Kernel-Core-Audit reduziert den aktuellen kleinen-Radius-Ast auf
-einen attraktiven Ein-Kernel-Fall: (A_rep,A_att)=(1,35) und (0,26) sind im
-gesampelten Taylor-Regime bis etwa 1e-8 relativ ununterscheidbar. Der
-A_att=0..40-Screening-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
-Fuer A_att>=5 folgt der dynamische Radius der linearen Memory-Center-Formel
-mit weniger als einem Prozent medianem Fehler.
+Der Kernel-Familienvergleich macht die Reduktion explizit: fuer den q=3-
+Zweiskalenkernel gilt bei gleicher lokaler Kruemmung exakt
+`A_eff=A_att-9`. Auf dieser Achse kollabieren Ein- und Zweiskalen-Kurven bis
+auf numerisches Rauschen. Die alte Grenze bei `A_att~=7.9` gehoert zum
+rauschstaerkeren historischen Zweiskalen-Slice und darf nicht als neue
+Ein-Kernel-Schwelle um sechs gelesen werden.
 
-Die aktuelle Paper-I-Lesart ist deshalb enger: kontrollierte co-moving
-skalare Relaxationswolke, noch keine nichtlineare Metastabilitaetsevidenz.
-D_mem nahe drei in d=3 ist in diesem Regime erwartete isotrope
-Gaussgeometrie und kein Dimensionsclaim. Die alte Grenze bei A_att ungefaehr
-7.9 bleibt ein historischer Befund des A_rep=1-Slices.
+Die vorhandenen `N=30M/300M`-Radien und das vorregistrierte feste-`g`-Gate
+bestaetigen den linearen Kern mit einer kleinen glatten Korrektur: bei
+`R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber der linearen
+Skalierung, ohne relevante Aenderung von `D_mem` oder Roundness. Residence
+und KnotScore sind ueber diese Radiusachse skalenempfindlich; die co-moving
+Alternative ist auch fuer `eta=0` gesaettigt und daher nicht diskriminierend.
 
-Die naechste skalare Achse wird dimensionslos ueber R_linear/L bei festem
-g=eta M0 A_att/L^2 definiert. Ein dynamisches Relaxations-Diffusionsfeld ist
-als separater Modellzweig vorbereitet; es erweitert den Markov-Zustand und
-ist nicht mit dem Gausskernel identisch.
+Die aktuelle Paper-I-Lesart bleibt deshalb eng: kontrollierte co-moving
+skalare Relaxationswolke, keine isolierte nichtlineare Metastabilitaet und
+kein Dimensionsclaim. Weitere skalare Amplituden-/Epsilon-Sweeps sind nicht
+priorisiert. Der naechste Modellzweig ist das dynamische Relaxations-
+Diffusionsfeld; es erweitert den Markov-Zustand und ist nicht mit dem
+Gausskernel identisch.
 ## Nicht ueberclaimen
 
 - Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.

@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -28,6 +28,10 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/kernels/kernel_core_audit.py` | enger Kernel-Core-Audit | aktiv | logarithmischer Nahfeld-, Kraftkomponenten- und Kruemmungsvergleich; curvature-matched A_rep=0-Ablation |
 | `experiments/current/kernels/attractive_only_regime_scan.py` | dimensionsloser attraktiver Ein-Kernel-Scan | aktiv | A_att=0..40, gemeinsame eta=0-Kontrollen, lineare Relativradius-Referenz und matched (1,35)/(0,26)-Vergleich |
+| `experiments/current/kernels/kernel_family_comparison.py` | Ein-/Zweiskalen-Familienvergleich | abgeschlossen | Rohamplituden- und `A_eff=A_att-9`-Achse, seedweise KPI-Kollapspruefung |
+| `experiments/current/dynamics/linear_long_run_reconciliation.py` | finite-memory Long-Run-Radiuscheck | abgeschlossen | vorhandene N=30M/300M-Slices gegen gespeicherte-Masse-Relativmodus pruefen |
+| `experiments/current/kernels/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
+| `experiments/current/kernels/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
 | `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
@@ -637,8 +641,18 @@ Fuer A_att>=5 stimmt der gemessene dynamische Radius mit
 im Median auf 0.94 Prozent, maximal 3.44 Prozent ueberein. Die
 curvature-matched Faelle (A_rep,A_att)=(1,35) und (0,26) stimmen in allen
 geprueften kontinuierlichen KPIs bis etwa 1e-8 relativ ueberein. Der naechste
-Test variiert R_linear/L bei festem g; die bisherige A_att-Grenze um 7.9
-bleibt ein historischer Befund des A_rep=1-Slices.
+Der Familienvergleich zeigt fuer q=3 exakt `A_eff=A_att-9`; nach dieser
+Reparametrisierung kollabieren die Kurven. Die bisherige A_att-Grenze um 7.9
+bleibt ein historischer Befund des rauschstaerkeren A_rep=1-Slices.
+
+Die Reconciliation von neun aktiven N=30M/300M-Slices ergibt 0.76 Prozent
+medianen und 1.16 Prozent maximalen finite-memory Radiusfehler. Im
+vorregistrierten festen-g-Gate waechst der Radius von R/L=0.03 nach 0.3 in
+allen fuenf Seeds 6.2 Prozent ueber die lineare Skalierung hinaus; D_mem und
+Roundness bleiben stabil. Die Composite-Regel bleibt formal `inconclusive`.
+Der post-hoc Skalenaudit zeigt, dass feste Voxel Residence und KnotScore
+veraendern, waehrend co-moving Residence auch fuer eta=0 gesaettigt ist.
+Lesart: schwache glatte Kernelkorrektur, kein isolierter metastabiler Ast.
 
 Die Feldgleichungs-Bruecke trennt zwei Aussagen: Ein Gausskernel ist exakt ein
 Heat-Semigroup-Snapshot in einer Hilfskoordinate. Ein physisches
@@ -663,6 +677,10 @@ Modellklasse.
 | `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md` | Drei-Skalen-Zero-Integral-Pilot | Exaktes `int K=0`, Kraftwechsel bei `r/sigma_rep~=10.91` und lokales Kruemmungsmatching; gematchte Fuenf-Seed-KPIs stimmen bis `2.2e-11` relativ mit q=3 ueberein. |
 | `reports/kernels/core/kernel_core_audit_2026-07-18.md` | enger Core-Audit | A_rep=1 ist bei R_mem/sigma_rep ungefaehr 2e-4 kein aktiver repulsiver Kern; (0,26) ist die curvature-matched Ablation zu (1,35). |
 | `reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md` | attraktiver A_att=0..40-Scan | Glatter linearer Relaxationsast, kein endlicher Phasenuebergang; A_rep im aktuellen Regime bis etwa 1e-8 relativ nicht identifizierbar. |
+| `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md` | Kernel-Familienvergleich | Rohachsen sind exakt um neun Amplitudeneinheiten verschoben; auf A_eff kollabieren die seedweisen KPIs bis maximal 6.4e-6 relativ. |
+| `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md` | Long-Run-Linearitaet | Neun aktive N=30M/300M-Slices liegen maximal 1.16 Prozent vom finite-memory Radius entfernt; eta=0 zeigt die Grenze des Absolutbenchmarks. |
+| `reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` | festes-g-R/L-Gate | Vorregistriert formal inconclusive; seed-stabile 6.2 Prozent Radiusabweichung, aber stabile Memory-Shape. |
+| `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md` | Residence-Skalenaudit | Feste Voxel sind radiusabhaengig; co-moving Residence ist fuer aktiv und eta=0 gesaettigt. Keine unabhaengige Metastabilitaetsstuetze. |
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |

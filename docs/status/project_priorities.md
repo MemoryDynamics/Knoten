@@ -290,6 +290,17 @@ Naechster operativer Schritt:
     Heat-Semigroup-Snapshot in einer Hilfskoordinate darstellbar. Ein
     physisches Relaxations-Diffusionsfeld hat einen anderen Greenkernel und
     erweitert den Markov-Zustand; es ist keine algebraische Umbenennung.
+34. Abgeschlossen: Kernel-Familienvergleich, Long-Run-Reconciliation und
+    festes-g-R/L-Gate. Bei q=3 gilt fuer curvature-matched Ein- und
+    Zweiskalenkernel exakt `A_eff=A_att-9`; die seedweisen KPIs kollabieren
+    bis auf numerisches Rauschen. Neun aktive N=30M/300M-Slices folgen dem
+    finite-memory linearen Radius mit maximal 1.16 Prozent Fehler. Das
+    vorregistrierte R/L-Gate ist formal `inconclusive`: der Radius waechst
+    seed-stabil 6.2 Prozent ueberlinear, waehrend D_mem und Roundness stabil
+    bleiben. Eine post-hoc Skalenpruefung zeigt, dass feste Voxel den
+    Residence-/KnotScore-Befund verzerren; co-moving Residence ist dagegen
+    auch fuer eta=0 gesaettigt und nicht diskriminierend. Kein metastabiler
+    Skalarast ist damit isoliert.
 
 Aktueller naechster Schritt:
 
@@ -298,24 +309,21 @@ Aktueller naechster Schritt:
   und M0 werden darin nicht als getrennt identifizierte Physikparameter gelesen.
 - Kein dichter N=1M-Amplitudenscan um KnotScore-Schwellen: Der gemessene Ast
   ist glatt und fast vollstaendig linear erklaert.
-- Naechstes Evidenz-Gate: bei festem g=26/60 die dimensionslose
-  Nichtlinearitaet R_linear/L gezielt auf etwa 0.03, 0.1 und 0.3 setzen.
-  Im aktuellen Slice entspricht das ungefaehr epsilon=0.043, 0.145 und 0.434.
-  Mehrere Seeds und eta=0 bleiben Pflicht.
-- Vor einem neuen Long Run zuerst vorhandene N=30M/300M-Daten gegen die
-  lineare Relativmodus-Formel reconciliieren. Nur systematische Abweichungen
-  rechtfertigen einen Nichtlinearitaets- oder Metastabilitaetsclaim.
-- Das dynamische Feld bleibt der naechste klar definierte Modellzweig, falls
-  der skalare Nichtlinearitaetstest keine ueberlineare Struktur liefert.
+- Der feste-g-Test und die Long-Run-Reconciliation sind abgeschlossen. Die
+  kleine glatte Nichtlinearitaet rechtfertigt weder einen weiteren skalaren
+  Sweep noch einen Metastabilitaetsclaim.
+- Das dynamische Feld ist jetzt der naechste klar definierte Modellzweig.
   Feldzustand, statischer Greenkernel, Quellvorzeichen und eta=0-Kontrolle
   muessen gemeinsam getestet werden.
+- Residence-/Score-Vergleiche ueber veraenderte Radius-Skalen muessen
+  raumnormierte Bins verwenden oder die Voxel/R-Sensitivitaet offen ausweisen.
 - Mehrknoten-, signierte Cross- und Vektormemory-Arme bleiben erhalten, folgen
   aber nach diesem skalaren Identifizierbarkeitsgate. Rekreuzung wird nicht als
   eigenes Ziel weiterverfolgt.
 
 ### P1.4 Alpha/M0 und lokale Moden klaeren
 
-Status: Paketkern und lineare Relativmodus-Referenz sind getestet. Naechster Engpass ist ein dimensionslos kalibrierter R/L-Nichtlinearitaetstest vor weiteren Cross- oder Feldkomplexitaeten.
+Status: Paketkern, Long-Run-Reconciliation und dimensionsloses R/L-Gate sind getestet. Der Skalarast bleibt Kontrollbaseline; naechster Engpass ist ein minimaler dynamischer Feldzustand mit statischem Greenkernel-, Quellvorzeichen- und eta=0-Gate.
 
 Die nummerierten Punkte 0 bis 8 darunter dokumentieren die historische
 Entwicklung. Ihre damalige Kandidatenlesart wird durch P1.3 Punkt 32

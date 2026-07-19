@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -136,17 +136,23 @@ flowchart LR
     old["two-scale reference<br/>(A_rep,A_att)=(1,35)"] --> core["near-field audit<br/>R_mem / sigma_rep about 2e-4"]
     core --> matched["curvature match<br/>attractive-only (0,26)"]
     matched --> scan["A_att=0..40<br/>5 seeds, common eta=0"]
-    scan --> linear["linear memory benchmark<br/>r_next=q(1-g)r+q epsilon xi"]
-    linear --> decision["no finite-A transition<br/>A_rep not identified"]
-    decision --> nonlinear["next: fixed g<br/>target R_linear/L"]
-    decision --> mediator["later: dynamic field state<br/>different Green kernel"]
+    scan --> family["family match<br/>A_eff = A_att - 9"]
+    family --> linear["linear memory benchmark<br/>r_next=q(1-g)r+q epsilon xi"]
+    linear --> longrun["N=30M/300M reconciliation<br/>max error 1.16 percent"]
+    longrun --> nonlinear["fixed g gate<br/>R/L = 0.03, 0.1, 0.3"]
+    nonlinear --> scaleaudit["scale audit<br/>voxel residence confounded"]
+    scaleaudit --> decision["scalar control baseline<br/>no metastable branch isolated"]
+    decision --> mediator["next: dynamic field state<br/>different Green kernel"]
     mediator --> augmented["augmented Markov state<br/>(x, rho, phi)"]
 ```
 
 The reduced scalar trajectory identifies the product eta M0 A_att, not its
-three raw factors separately. The field branch is deliberately separate:
-the Gaussian heat-semigroup representation uses an auxiliary coordinate,
-whereas a physical relaxation-diffusion field changes the dynamics.
+three raw factors separately. The matched kernel families and fixed-g gate
+now close the scalar identification branch as a controlled relaxation
+baseline with only a weak smooth finite-kernel correction. The field branch
+is deliberately separate: the Gaussian heat-semigroup representation uses
+an auxiliary coordinate, whereas a physical relaxation-diffusion field
+changes the dynamics.
 
 ## Long-Run-Schiene
 

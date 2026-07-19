@@ -123,9 +123,15 @@ The current core audit shows that the narrow positive Gaussian is not an
 active repulsive core in the compact small-noise branch. For the long-run
 reference (A_rep,A_att)=(1,35), sigma_rep=1 and sigma_att=3, removing A_rep
 and setting A_att=26 preserves the point-deposit restoring curvature exactly.
-The seed-matched N=300k comparison agrees across radius, shape, drift, D_cov
-and D_occ to about 1e-8 relative. This establishes dynamical equivalence only
-for the sampled regime, not for trajectories that explore the kernel scales.
+The full seed-matched family comparison makes the mapping explicit. For
+`sigma_rep=1`, `sigma_att=3`, and `A_rep=1`, local-curvature matching gives
+exactly `A_eff=A_att-9`. Across 45 seed-matched pairs with `A_eff>=1`, the six
+reported KPIs differ by at most `6.4e-6` relative and their effective-axis
+curves collapse. This establishes dynamical equivalence only for the sampled
+regime, not for trajectories that explore the kernel scales. The historical
+drift flip near raw `A_att=7.9` used `epsilon=0.03` and a different force-
+direction observable; it is not a universal attractive-only threshold near
+six.
 
 For the attractive-only model choose the reference length L=sigma_att and
 define
@@ -164,12 +170,17 @@ observed D_mem near three is therefore not evidence that three dimensions
 emerge; the ambient-dimension results, where D_mem grows with d, are consistent
 with this guardrail.
 
-The next controlled scalar gate is not another amplitude scan. At fixed g it
-should target predicted radius fractions R_linear/L around 0.03, 0.1 and 0.3.
-For the A_att=26 reference these correspond approximately to epsilon 0.043,
-0.145 and 0.434. Only reproducible deviations from the linear benchmark can
-show that the full Gaussian shape or another nonlinear knot mechanism is
-active.
+The controlled fixed-g gate has now targeted `R_linear/L={0.03,0.1,0.3}` for
+`A_att=26`, using `epsilon={0.0434,0.1447,0.4341}`, five paired seeds and
+eta-zero controls. The measured endpoint radius grows `6.2%` more than the
+linear prediction in the same direction for all seeds. This is comparable to
+the `4.4%` loss of local Gaussian curvature at `R/L=0.3`; D_mem changes only
+`0.0059` and roundness only `0.0106` in median. The pre-registered composite
+rule remains `inconclusive` because KnotScore and fixed-voxel residence change.
+A separate scale audit shows that those voxels range from `5.56 R` to `0.56 R`
+at their finest scale, while co-moving residence is saturated for active and
+eta-zero paths alike. The defensible reading is a weak smooth finite-kernel
+correction without an isolated shape transition or metastable scalar branch.
 
 A Gaussian convolution still has an exact local heat-semigroup generator in
 an auxiliary smoothing coordinate s, with s=L^2/(2D). This is a mathematical
@@ -185,8 +196,12 @@ it can replace K. A diffusive mediator also does not provide a hard finite
 propagation speed; a hyperbolic model remains a later, separately tested step.
 
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
-reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md and
-reports/kernels/field/field_equation_bridge_2026-07-18.md.
+reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
+reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,
+reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md,
+reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md,
+reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md
+and reports/kernels/field/field_equation_bridge_2026-07-18.md.
 
 ## Self- and Cross-Interaction Channels
 

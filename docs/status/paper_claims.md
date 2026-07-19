@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -56,7 +56,18 @@ bisherige (1,35)-Referenz im gesampelten Taylor-Regime bis etwa 1e-8 relativ
 durch den attraktiven Ein-Kernel-Punkt (0,26) reproduziert wird. Fuer
 A_att>=5 folgt der dynamische Radius der exakten linearen
 Memory-Center-Vorhersage mit 0.94 Prozent medianem und 3.44 Prozent maximalem
-relativen Fehler. Der N=30M-Referenzradius liegt ebenfalls auf dieser Formel.
+relativen Fehler. Die erweiterte Reconciliation ueber neun aktive
+`N=30M/300M`-Slices reduziert den maximalen finite-memory Radiusfehler auf
+`1.16%`. Der direkte Familienvergleich zeigt bei q=3 die exakte
+Reparametrisierung `A_eff=A_att-9`; auf dieser Achse kollabieren Ein- und
+Zweiskalen-KPIs numerisch.
+
+Das feste-g-Gate bis `R_linear/L=0.3` findet eine seed-stabile `6.2%`-
+Superlinearitaet, aber keine relevante D_mem- oder Roundness-Aenderung. Seine
+vorregistrierte Composite-Regel bleibt formal `inconclusive`. Die nachgelagerte
+Skalenpruefung zeigt, dass feste Voxel Residence und KnotScore ueber die
+veraenderte Radiusachse verzerren; co-moving Residence ist fuer aktive und
+eta-zero-Pfade gesaettigt und deshalb nicht diskriminierend.
 
 Damit ist fuer Paper I derzeit tragbar: Das skalare Feedback erzeugt eine
 reproduzierbar kompaktere, mitbewegte Relaxationswolke als eta=0. Nicht
@@ -118,7 +129,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Sichtbarer Prozess ist nichtmarkovsch | strukturell gut | in Paper 0/I konsistent halten |
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
-| Knoten als metastabile Regime | nicht isoliert: der kompakte N=30M-Ast folgt im kleinen-Radius-Regime fast vollstaendig dem linearen skalaren Relativmodus; co-moving Relaxationswolke ja, nichtlineare Metastabilitaet nein | vorhandene Long Runs gegen linearen Benchmark reconciliieren; dann R/L bei festem g gezielt erhoehen |
+| Knoten als metastabile Regime | nicht isoliert: Long-Run-Radien folgen dem finite-memory linearen Modus; das feste-g-Gate zeigt nur eine glatte 6.2%-Korrektur ohne Shape-Umschlag. Die vorregistrierte Regel ist formal inconclusive, ihre Residence-/Score-Stuetzen sind aber skalenverzerrt bzw. nicht diskriminierend | skalares Modell als Kontrollbaseline behalten; dynamisches Feld mit eigenem Zustand, Greenkernel-, Vorzeichen- und eta=0-Kontrollen testen |
 | Baseline/Single-scale zeigen langlebige Residence | nur Legacy-Sign-Befund; der korrigierte attraktive Ast ist stattdessen linear erklaert | nicht als aktuellen Metastabilitaetsclaim verwenden |
 | `D_occ ~ 2.8` im Archiv | numerische Beobachtung | Seed- und Fitfenster-Reproduktion |
 | D_mem nahe 2.94 im aktuellen kleinen-Radius-Slice | seed-stabile Shape-Beobachtung, aber durch den isotropen linearen Relativmodus erklaert; in d=3 ist D_mem nahe drei erwartete Ambient-Gaussgeometrie, nicht 3D-Emergenz | nur als lineare Shape-Diagnostik berichten; Paper II braucht relationale oder ambient-unabhaengige Evidenz |

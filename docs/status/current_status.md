@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-18.
+Stand: 2026-07-19.
 
 ## Repository
 
@@ -57,6 +57,33 @@ Update `x <- x - eta grad` lokal repulsiv, `A_att` breit attraktiv. Fruehe
 Confinement-Reports bleiben `legacy-sign`-Auditmaterial; korrigierte
 Long-Run-, Ablations- und Linearitaetstests liegen inzwischen vor. Report:
 `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md`.
+
+## Aktueller Skalarbefund
+
+Der direkte Vergleich von attraktivem Ein-Kernel und zweiskaligem q=3-Kernel
+ist abgeschlossen. Bei `A_rep=1`, `sigma_rep=1`, `sigma_att=3` gilt fuer
+lokal curvature-matched Kurven exakt `A_eff=A_att-9`; nach dieser
+Reparametrisierung stimmen sechs seedweise KPIs bis hoechstens `6.4e-6`
+relativ ueberein. Die alte Driftgrenze um `7.9` aus dem rauschstaerkeren
+Zweiskalen-Slice ist keine universelle Ein-Kernel-Schwelle bei sechs.
+
+Neun vorhandene aktive `N=30M/300M`-Slices folgen dem endlichen-Memory-
+Relativmodus mit `0.76%` medianem und `1.16%` maximalem Radiusfehler. Im
+vorregistrierten festen-`g`-Test ueber `R_linear/L={0.03,0.1,0.3}` waechst
+der Radius in allen fuenf Seeds glatt etwa `6.2%` staerker als linear; `D_mem`
+und Roundness bleiben stabil. Die formale Entscheidung bleibt
+`inconclusive`, weil KnotScore und feste-Voxel-Residence sinken. Die getrennte
+Skalenpruefung zeigt jedoch: feste Voxel aendern ihre relative Groesse stark,
+waehrend co-moving Residence auch fuer `eta=0` gesaettigt und damit nicht
+diskriminierend ist. Das traegt eine schwache glatte Kernelkorrektur, keinen
+isolierten metastabilen Skalarast. Naechster Modellzweig ist das dynamische
+Relaxations-Diffusionsfeld mit eigenem Zustand und Kontrollen.
+
+Reports:
+`reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`,
+`reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`,
+`reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` und
+`reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`.
 
 ## Paper-Status
 
