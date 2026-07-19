@@ -552,6 +552,8 @@ def write_outputs(
     summary_json = _resolve(args.summary_json)
     figure_raw = _resolve(args.figure_raw)
     figure_effective = _resolve(args.figure_effective)
+    source_git_revision = _git_output(["rev-parse", "HEAD"])
+    source_git_status = _git_output(["status", "--short"])
     source = json.loads(_resolve(args.single_summary).read_text(encoding="utf-8"))
     single_full = source["aggregate"]
     for row in single_full:
@@ -587,8 +589,8 @@ def write_outputs(
     payload = {
         "description": "Matched attractive-only and two-scale kernel comparison.",
         "generated_utc": generated,
-        "git_revision": _git_output(["rev-parse", "HEAD"]),
-        "git_status": _git_output(["status", "--short"]),
+        "git_revision": source_git_revision,
+        "git_status": source_git_status,
         "arguments": {
             key: str(value) if isinstance(value, Path) else value
             for key, value in vars(args).items()
@@ -682,8 +684,12 @@ def write_outputs(
             "## Threshold reading",
             "",
             f"The first sampled `KnotScore >= {args.score_threshold:g}` crossing is",
-            f"`{single_crossing}` for the attractive-only curve and",
-            f"`{two_crossing}` for the two-scale support points. This is a",
+            f"raw `A_att={single_crossing['amplitude_att']:g}` "
+            f"(`A_eff={single_crossing['effective_amplitude']:g}`) for the "
+            "attractive-only curve and",
+            f"raw `A_att={two_crossing['amplitude_att']:g}` "
+            f"(`A_eff={two_crossing['effective_amplitude']:g}`) for the two-scale "
+            "support points. This is a",
             "descriptive score crossing, not a phase transition or force-sign",
             "boundary.",
             "",
