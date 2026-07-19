@@ -50,6 +50,15 @@ from .spectral import (
     SpectralDimensionResult,
     heat_trace_spectral_dimension,
 )
+from .spectral_memory_field import (
+    GaussianKernelMode,
+    SpectralMemoryConfig,
+    SpectralMemoryState,
+    advance_state as advance_spectral_memory_state,
+    initialize_state as initialize_spectral_memory_state,
+    zero_mean_attractive_kernel,
+)
+from .spectral_memory_runtime import SpectralMemoryOperators
 from .state import (
     FiniteMemoryState,
     memory_centroid,
@@ -154,6 +163,7 @@ __all__ = [
     "FiniteMemoryCheckpoint",
     "FiniteMemoryState",
     "FrozenSourceCalibration",
+    "GaussianKernelMode",
     "PairedFrozenSourceResponse",
     "PairedProbeResponse",
     "SignedCrossCalibration",
@@ -162,11 +172,15 @@ __all__ = [
     "SimulationRunner",
     "SimulationResult",
     "SpectralDimensionResult",
+    "SpectralMemoryConfig",
+    "SpectralMemoryOperators",
+    "SpectralMemoryState",
     "VectorMemoryConfig",
     "best_residence_memory_times",
     "best_residence_updates",
     "ball_residence_statistics",
     "ballistic_scaling_slope",
+    "advance_spectral_memory_state",
     "attractive_amplitude_for_curvature",
     "bootstrap_mean_ci",
     "calibrate_frozen_source_cross_eta",
@@ -191,6 +205,7 @@ __all__ = [
     "heat_transfer",
     "heat_trace_spectral_dimension",
     "infer_reproducible_response_rank",
+    "initialize_spectral_memory_state",
     "lagged_cross_correlation",
     "linear_memory_relative_rms_radius",
     "load_finite_memory_checkpoint",
@@ -252,6 +267,7 @@ __all__ = [
     "vector_memory_summary_features",
     "voxel_stability_ratio",
     "zero_mean_attractive_amplitude",
+    "zero_mean_attractive_kernel",
     "zero_mean_compensator_amplitude",
     "zero_mean_curvature_matched_amplitudes",
 ]
