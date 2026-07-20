@@ -11,7 +11,9 @@
     ]
   },
   "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
-  "created_utc": "2026-07-20T06:28:56.937247+00:00",
+  "checkpoint_age_memory_times_alpha_n": 1000000.0,
+  "checkpoint_update_index": 100000000,
+  "created_utc": "2026-07-20T09:23:25.022209+00:00",
   "description": "One-way dynamic scalar-source continuation with paired controls.",
   "formation_seed": 1,
   "gate": {
@@ -24,19 +26,31 @@
     "launch_specific_source_displacement_radii_median": 0.0,
     "launch_specific_target_readout_pass": false,
     "launch_specific_target_response_radii_median": 0.0,
-    "nondestructive_source_pass": true,
-    "nondestructive_target_pass": true,
     "relational_phase_candidate_pass": false,
+    "source_max_radius_factor_median": 1.0,
+    "source_shape_bounded_coherent_pass": true,
+    "source_shape_bounded_pass": true,
+    "source_shape_coherent_pass": true,
+    "source_shape_spectrum_distance_median": 0.0,
+    "source_stationarity_radius_drift_median": 0.009950659256005467,
+    "source_stationarity_spectrum_drift_median": 0.006319263485189575,
+    "stationary_source_shape_pass": true,
+    "target_shape_bounded_coherent_pass": true,
+    "target_shape_bounded_pass": true,
+    "target_shape_coherent_pass": true,
     "zero_cross_identity_pass": true,
     "zero_cross_max_abs_error": 0.0
   },
-  "git_revision": "12316921fafd1afabe4e8a26f4521e4aeb45b5f0",
+  "git_revision": "ed5fc1312ec8d6a62c51601b25daa540b84cb4c1",
   "git_status": "",
   "launch": {
     "source_launch_axis": 1,
+    "source_launch_delay_memory_times": 50.0,
     "source_launch_memory_times": 10.0,
     "source_launch_sigma_rep": 0.0
   },
+  "memory_time_updates_approx": 100.0,
+  "memory_time_updates_exact_efold": 99.49916247342216,
   "model": {
     "alpha": 0.01,
     "dim": 3,
@@ -56,6 +70,7 @@
     "sample_every": 20,
     "separation_sigma_rep": 1.0,
     "source_launch_axis": 1,
+    "source_launch_delay_memory_times": 50.0,
     "source_launch_memory_times": 10.0,
     "source_launch_sigma_rep": 0.0,
     "steps": 20000
@@ -111,7 +126,39 @@
       "source_displacement_radii": 2.131712403133352,
       "source_launch_axis": 1,
       "source_launch_sigma_rep": 0.0,
-      "source_launch_steps": 1000
+      "source_launch_start_step": 5000,
+      "source_launch_steps": 1000,
+      "source_shape_response": {
+        "max_radius_factor": 1.0,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 0.0,
+        "shape_spectrum_distance_q95": 0.0,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      },
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.029966533080940227,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.009950659256005467,
+        "shape_spectrum_total_variation": 0.005040840316974438,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      },
+      "target_shape_response": {
+        "max_radius_factor": 1.0001778724478867,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 5.720474861295455e-05,
+        "shape_spectrum_distance_q95": 0.00012342161976718058,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      }
     },
     {
       "continuation_seed": 2,
@@ -163,7 +210,39 @@
       "source_displacement_radii": 2.5465126559580056,
       "source_launch_axis": 1,
       "source_launch_sigma_rep": 0.0,
-      "source_launch_steps": 1000
+      "source_launch_start_step": 5000,
+      "source_launch_steps": 1000,
+      "source_shape_response": {
+        "max_radius_factor": 1.0,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 0.0,
+        "shape_spectrum_distance_q95": 0.0,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      },
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.05095841839149912,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.029265263177555734,
+        "shape_spectrum_total_variation": 0.006411613217479267,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      },
+      "target_shape_response": {
+        "max_radius_factor": 1.000150786443108,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 5.349796319095712e-05,
+        "shape_spectrum_distance_q95": 0.00011176883204173926,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      }
     },
     {
       "continuation_seed": 3,
@@ -215,7 +294,39 @@
       "source_displacement_radii": 1.6464351986897847,
       "source_launch_axis": 1,
       "source_launch_sigma_rep": 0.0,
-      "source_launch_steps": 1000
+      "source_launch_start_step": 5000,
+      "source_launch_steps": 1000,
+      "source_shape_response": {
+        "max_radius_factor": 1.0,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 0.0,
+        "shape_spectrum_distance_q95": 0.0,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      },
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.03860280720132554,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.011133523189866157,
+        "shape_spectrum_total_variation": 0.005192758758562704,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      },
+      "target_shape_response": {
+        "max_radius_factor": 1.0001519498429394,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 5.14727617600963e-05,
+        "shape_spectrum_distance_q95": 0.0001259425270991807,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      }
     },
     {
       "continuation_seed": 4,
@@ -267,7 +378,39 @@
       "source_displacement_radii": 4.4683958756982785,
       "source_launch_axis": 1,
       "source_launch_sigma_rep": 0.0,
-      "source_launch_steps": 1000
+      "source_launch_start_step": 5000,
+      "source_launch_steps": 1000,
+      "source_shape_response": {
+        "max_radius_factor": 1.0,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 0.0,
+        "shape_spectrum_distance_q95": 0.0,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      },
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.04080935480508094,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.0019702368728784503,
+        "shape_spectrum_total_variation": 0.006319263485189575,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      },
+      "target_shape_response": {
+        "max_radius_factor": 1.0001516783964972,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 5.385941514624015e-05,
+        "shape_spectrum_distance_q95": 0.00011866584386861778,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      }
     },
     {
       "continuation_seed": 5,
@@ -319,7 +462,39 @@
       "source_displacement_radii": 3.3076805737251123,
       "source_launch_axis": 1,
       "source_launch_sigma_rep": 0.0,
-      "source_launch_steps": 1000
+      "source_launch_start_step": 5000,
+      "source_launch_steps": 1000,
+      "source_shape_response": {
+        "max_radius_factor": 1.0,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 0.0,
+        "shape_spectrum_distance_q95": 0.0,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      },
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.03154736150580174,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.00715913834136328,
+        "shape_spectrum_total_variation": 0.007838402274125467,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      },
+      "target_shape_response": {
+        "max_radius_factor": 1.0001665431571625,
+        "radius_factor_limit": 2.0,
+        "shape_bounded_coherent_pass": true,
+        "shape_bounded_pass": true,
+        "shape_coherent_pass": true,
+        "shape_spectrum_distance_median": 4.772842599648497e-05,
+        "shape_spectrum_distance_q95": 0.00011262017656635259,
+        "spectrum_median_limit": 0.1,
+        "spectrum_q95_limit": 0.25
+      }
     }
   ]
 }
