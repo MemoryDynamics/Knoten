@@ -33,7 +33,7 @@ Begruendung:
   "N-stabiler reeller Modus" war zu stark.
 - Komplexe Nebenmoden sind weder von `eta=0` getrennt noch segmentstabil und
   tragen keinen Oszillatorclaim.
-- Der aktuelle Engpass ist ein zerstoerungsarmer dynamischer Quellmechanismus,
+- Der aktuelle Engpass ist ein shape-bounded/coherent dynamischer Quellmechanismus,
 
 ## P0: Abgeschlossen fuer den Moment
 
