@@ -76,6 +76,14 @@ Mechanismusschritt ist deshalb shape-bounded/coherent Source-Transport oder
 ein lokaler/retardierter Feldkanal. Reziproke Kopplung bleibt bis dahin
 gesperrt.
 
+Ein anschliessender Interaction-Age-Audit bis N=101M trennt die Kanaele
+weiter: Die Zentrumantwort akkumuliert ueber +1M Updates nahezu linear,
+waehrend Radius und rotationsinvariantes Shape-Spektrum mit der freien
+Kontrolle uebereinstimmen. Es gibt damit in diesem skalaren Fernkanal keinen
+Befund eines langsam entstehenden neuen Knotentyps. Ein Langperiodentest
+waere ein eigener dichter Spektraltest, keine Begruendung fuer weitere sparse
+Endpunkte.
+
 ## Nicht ueberclaimen
 
 - Keine eindeutige `d=3`-Selektion aus den bisherigen Daten.

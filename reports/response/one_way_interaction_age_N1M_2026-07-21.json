@@ -1,0 +1,1080 @@
+{
+  "aggregate": [
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.0001108803635097,
+        "q25": 1.0001050518267394,
+        "q75": 1.000119884440563
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 0.9999990575276323,
+        "q25": 0.9999964130206498,
+        "q75": 1.0000042396173203
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 5.53019205640215e-05,
+        "q25": 5.316018220644092e-05,
+        "q75": 6.705273366564013e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.00012765226801066953,
+        "q25": 0.00011205940832173521,
+        "q75": 0.0001367469979334067
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 79.56195076292266,
+        "q25": 55.485912377698455,
+        "q75": 82.4270268312308
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 0.12225863945691562,
+        "q25": 0.12225188283588395,
+        "q75": 0.1222589237198553
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": -4.420597157661632e-06,
+        "q25": -1.2331017988920223e-05,
+        "q75": 1.1620012829727244e-05
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 2.4753609003239265e-05,
+        "q25": 2.01053437960431e-05,
+        "q75": 3.1028138245918756e-05
+      },
+      "dynamic_roundness": {
+        "median": 0.8293423031467956,
+        "q25": 0.8262189204754982,
+        "q75": 0.8358069775763789
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.932513682831513,
+        "q25": 2.927796692800296,
+        "q75": 2.93635710624725
+      },
+      "evaluation_update": 20000,
+      "free_roundness": {
+        "median": 0.8295876548023425,
+        "q25": 0.826421469745658,
+        "q75": 0.8357715459744652
+      },
+      "free_shape_dimension": {
+        "median": 2.932689631758154,
+        "q25": 2.9277902230254487,
+        "q75": 2.9362536850609833
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 1.000195456308784,
+        "q25": 0.9998621815376895,
+        "q75": 1.000258855447139
+      }
+    },
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.000097864602262,
+        "q25": 1.0000974653924017,
+        "q75": 1.0001268067928408
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 0.9999997103001045,
+        "q25": 0.9999919555180382,
+        "q75": 1.000000591346848
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 5.624125271919134e-05,
+        "q25": 4.7367547295368295e-05,
+        "q75": 5.8719960862790854e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.00010941567959865117,
+        "q25": 0.00010460177047938996,
+        "q75": 0.00011638368725268578
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 103.65730274767867,
+        "q25": 67.30748224936595,
+        "q75": 108.31865901949152
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 0.3307928687140382,
+        "q25": 0.33074746214935236,
+        "q75": 0.33084048453476056
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": -2.903246764773826e-06,
+        "q25": -3.0771198717971515e-06,
+        "q75": 1.2503942304231686e-05
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 0.00012210693900021065,
+        "q25": 0.00011171363027089225,
+        "q75": 0.00012534736020936705
+      },
+      "dynamic_roundness": {
+        "median": 0.8289058639610528,
+        "q25": 0.8189338180841506,
+        "q75": 0.8292028608964248
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.9314108643522063,
+        "q25": 2.920630616148896,
+        "q75": 2.9314473444971196
+      },
+      "evaluation_update": 50000,
+      "free_roundness": {
+        "median": 0.828904276287361,
+        "q25": 0.8189628040968041,
+        "q75": 0.829205041625242
+      },
+      "free_shape_dimension": {
+        "median": 2.931382794821458,
+        "q25": 2.9207468069642015,
+        "q75": 2.93146320674429
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 1.0005383177409344,
+        "q25": 1.0004560895171266,
+        "q75": 1.0006103679528557
+      }
+    },
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.000112743747656,
+        "q25": 1.00009397508742,
+        "q75": 1.0001172192670071
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 0.999995706325307,
+        "q25": 0.9999694633408889,
+        "q75": 1.0000031881566829
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 6.160413014871802e-05,
+        "q25": 5.7703511584294986e-05,
+        "q75": 6.272598059553491e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.00012007871065790032,
+        "q25": 0.00010907081661275518,
+        "q75": 0.00013131633784900778
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 187.1446963053323,
+        "q25": 127.53533055302483,
+        "q75": 342.3062444957378
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 0.6784452662833067,
+        "q25": 0.678108798488258,
+        "q75": 0.6784649907862005
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": -1.1389798132199758e-05,
+        "q25": -2.0757802074999887e-05,
+        "q75": 8.008454513763752e-06
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 0.00027139331491725556,
+        "q25": 0.00017997482124235405,
+        "q75": 0.00041319057825389216
+      },
+      "dynamic_roundness": {
+        "median": 0.8321780837321285,
+        "q25": 0.8242001907769619,
+        "q75": 0.8350208135146004
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.9292496773704984,
+        "q25": 2.922634960426352,
+        "q75": 2.9341446253965255
+      },
+      "evaluation_update": 100000,
+      "free_roundness": {
+        "median": 0.8320823291532431,
+        "q25": 0.8240863543709704,
+        "q75": 0.8349316195919657
+      },
+      "free_shape_dimension": {
+        "median": 2.9292194839176102,
+        "q25": 2.92253613634495,
+        "q75": 2.934345081892777
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 1.0005128274253723,
+        "q25": 0.9992327468155382,
+        "q75": 1.0008152876017318
+      }
+    },
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.0001114604242713,
+        "q25": 1.0001056131299706,
+        "q75": 1.0001356240603478
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 0.9999901375226861,
+        "q25": 0.999986599003084,
+        "q75": 0.9999934396146266
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 4.4073558867957496e-05,
+        "q25": 4.403848444099745e-05,
+        "q75": 5.2791356319289995e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.0001057543332478816,
+        "q25": 0.0001017715948438441,
+        "q75": 0.00011566370982739603
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 298.50348391922245,
+        "q25": 278.1039785246339,
+        "q75": 329.08519899871845
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 1.3731618926894062,
+        "q25": 1.3725243344539924,
+        "q75": 1.3736852269116737
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": 3.7529117125068012e-06,
+        "q25": -2.1225675535863076e-05,
+        "q75": 7.102222213006826e-06
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 0.0005174838047853516,
+        "q25": 0.0004814392967774022,
+        "q75": 0.0010651381399628557
+      },
+      "dynamic_roundness": {
+        "median": 0.8217186680748738,
+        "q25": 0.8168161619809412,
+        "q75": 0.8243124135617111
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.9233440521115943,
+        "q25": 2.913712490517141,
+        "q75": 2.929368312514542
+      },
+      "evaluation_update": 200000,
+      "free_roundness": {
+        "median": 0.8217035411826477,
+        "q25": 0.8167315327032316,
+        "q75": 0.8244595165268531
+      },
+      "free_shape_dimension": {
+        "median": 2.923271166765762,
+        "q25": 2.9137949699491115,
+        "q75": 2.9294947299410103
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 0.9996500771951128,
+        "q25": 0.99913291099172,
+        "q75": 1.0011271256021057
+      }
+    },
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.0001160510490847,
+        "q25": 1.0001029338987237,
+        "q75": 1.0001340333118607
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 1.0000163228825016,
+        "q25": 1.0000006278557068,
+        "q75": 1.0000241726592858
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 5.558455404622298e-05,
+        "q25": 5.0556803376983206e-05,
+        "q75": 5.6328263084284846e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.00011529459335168912,
+        "q25": 0.00011379041736688242,
+        "q75": 0.0001277502479644698
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 395.6668311509209,
+        "q25": 383.85190893008627,
+        "q75": 409.270090936134
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 3.4592103754624883,
+        "q25": 3.4579299222723594,
+        "q75": 3.4593983386284113
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": -7.97813187203289e-06,
+        "q25": -1.4976132296506961e-05,
+        "q75": -9.684782407148873e-07
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 0.006655308475938303,
+        "q25": 0.004817595171520098,
+        "q75": 0.006813397535591499
+      },
+      "dynamic_roundness": {
+        "median": 0.8142666091813904,
+        "q25": 0.8104030351662055,
+        "q75": 0.8241855914676782
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.913052570931446,
+        "q25": 2.912382750585212,
+        "q75": 2.91925190671022
+      },
+      "evaluation_update": 500000,
+      "free_roundness": {
+        "median": 0.8141675890588248,
+        "q25": 0.8105025712612727,
+        "q75": 0.824031844901715
+      },
+      "free_shape_dimension": {
+        "median": 2.913090744977828,
+        "q25": 2.9124440861676297,
+        "q75": 2.9192131964145096
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 0.9995076371388592,
+        "q25": 0.9987031005439776,
+        "q75": 1.0017448331038423
+      }
+    },
+    {
+      "dynamic_free_max_radius_factor": {
+        "median": 1.0001190180764414,
+        "q25": 1.0001050002624232,
+        "q75": 1.0001203085951342
+      },
+      "dynamic_free_radius_ratio": {
+        "median": 0.9999946716188997,
+        "q25": 0.9999909236628941,
+        "q75": 1.0000028279126116
+      },
+      "dynamic_free_shape_spectrum_median": {
+        "median": 4.914855991630662e-05,
+        "q25": 4.880432854259542e-05,
+        "q75": 5.4468700668053316e-05
+      },
+      "dynamic_free_shape_spectrum_q95": {
+        "median": 0.00011036357437650683,
+        "q25": 0.0001021939672624594,
+        "q75": 0.00011468080958079161
+      },
+      "dynamic_minus_eta_zero_center_radii": {
+        "median": 641.5317986237453,
+        "q25": 488.21554009262246,
+        "q75": 833.9928188239687
+      },
+      "dynamic_minus_free_center_radii": {
+        "median": 6.9311596244824685,
+        "q25": 6.929373010130043,
+        "q75": 6.94137927262948
+      },
+      "dynamic_minus_free_shape_dimension": {
+        "median": 1.1168808682349152e-05,
+        "q25": 9.473292199135841e-06,
+        "q75": 1.1371621476907734e-05
+      },
+      "dynamic_minus_frozen_center_radii": {
+        "median": 0.018965604104313406,
+        "q25": 0.015661655948520176,
+        "q75": 0.019144343431341727
+      },
+      "dynamic_roundness": {
+        "median": 0.8327965942055657,
+        "q25": 0.82440369881571,
+        "q75": 0.8371698755841328
+      },
+      "dynamic_shape_dimension": {
+        "median": 2.926253931993902,
+        "q25": 2.9260783033863467,
+        "q75": 2.9357858416866067
+      },
+      "evaluation_update": 1000000,
+      "free_roundness": {
+        "median": 0.8327932984504631,
+        "q25": 0.824391619709509,
+        "q75": 0.8372858021364596
+      },
+      "free_shape_dimension": {
+        "median": 2.92623763689211,
+        "q25": 2.926165945756525,
+        "q75": 2.9357713829723173
+      },
+      "target_source_separation_sigma_rep": {
+        "median": 1.0002495276851318,
+        "q25": 0.9987476750839461,
+        "q75": 1.0017587330765048
+      }
+    }
+  ],
+  "calibration": {
+    "cross_eta": 2.0715793129698226e-08,
+    "initial_target_radius": 0.00021165345794842206,
+    "response_fraction_per_memory": 0.03,
+    "source_center_offset": [
+      1.0,
+      0.0,
+      0.0
+    ]
+  },
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_update_index": 100000000,
+  "created_utc": "2026-07-20T22:38:28.010269+00:00",
+  "description": "One-way sustained-field interaction-age audit.",
+  "final_update_index": 101000000,
+  "formation_seed": 1,
+  "gate": {
+    "final_dynamic_free_radius_ratio_median": 0.9999946716188997,
+    "final_dynamic_free_shape_spectrum_median": 4.914855991630662e-05,
+    "final_dynamic_minus_free_center_radii_median": 6.9311596244824685,
+    "final_dynamic_minus_free_shape_dimension_median": 1.1168808682349152e-05,
+    "interaction_modified_shape_count": 0,
+    "interaction_modified_shape_pass": false,
+    "late_shape_plateau_count": 5,
+    "late_shape_plateau_pass": true,
+    "per_seed_late_deltas": [
+      {
+        "continuation_seed": 1,
+        "dimension_delta": 0.03742726357267534,
+        "modified_shape_pass": false,
+        "plateau_pass": true,
+        "radius_log_delta": 5.751893251180349e-06,
+        "spectrum_delta": 7.179703167978224e-06
+      },
+      {
+        "continuation_seed": 2,
+        "dimension_delta": 0.03187196046679652,
+        "modified_shape_pass": false,
+        "plateau_pass": true,
+        "radius_log_delta": 9.70423380578563e-06,
+        "spectrum_delta": 1.658599141396433e-05
+      },
+      {
+        "continuation_seed": 3,
+        "dimension_delta": 0.0068263966761268335,
+        "modified_shape_pass": false,
+        "plateau_pass": true,
+        "radius_log_delta": 2.6602709371588722e-05,
+        "spectrum_delta": 2.5525837859363687e-05
+      },
+      {
+        "continuation_seed": 4,
+        "dimension_delta": 0.027735752076060827,
+        "modified_shape_pass": false,
+        "plateau_pass": true,
+        "radius_log_delta": 3.326675819934215e-05,
+        "spectrum_delta": 3.91189729107011e-06
+      },
+      {
+        "continuation_seed": 5,
+        "dimension_delta": 0.013871181408690259,
+        "modified_shape_pass": false,
+        "plateau_pass": true,
+        "radius_log_delta": 4.039007787343194e-06,
+        "spectrum_delta": 6.780225503627557e-06
+      }
+    ],
+    "required_seed_count": 4,
+    "stable_interaction_modified_shape_candidate": false,
+    "stationary_source_count": 5,
+    "stationary_source_pass": true
+  },
+  "git_revision": "ae79460be245529226cba25783b68b8d966e1560",
+  "git_status": "",
+  "model": {
+    "alpha": 0.01,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15
+  },
+  "parameters": {
+    "continuation_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "evaluation_updates": [
+      20000,
+      50000,
+      100000,
+      200000,
+      500000,
+      1000000
+    ],
+    "min_seed_fraction": 0.8,
+    "modified_dimension_min": 0.1,
+    "modified_radius_log_min": 0.1,
+    "modified_spectrum_min": 0.05,
+    "plateau_dimension_limit": 0.05,
+    "plateau_radius_log_limit": 0.05,
+    "plateau_spectrum_limit": 0.02,
+    "response_fraction_per_memory": 0.03,
+    "sample_every": 200,
+    "separation_sigma_rep": 1.0,
+    "steps": 1000000,
+    "window_memory_times": 50.0
+  },
+  "rows": [
+    {
+      "checkpoints": [
+        {
+          "dynamic_free_max_radius_factor": 1.0001108803635097,
+          "dynamic_free_radius_ratio": 1.0000160163277296,
+          "dynamic_free_shape_spectrum_median": 5.316018220644092e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00014263921952622482,
+          "dynamic_minus_eta_zero_center_radii": 79.56195076292266,
+          "dynamic_minus_free_center_radii": 0.1222589237198553,
+          "dynamic_minus_free_shape_dimension": 1.1620012829727244e-05,
+          "dynamic_minus_frozen_center_radii": 1.414344153260058e-05,
+          "dynamic_roundness": 0.8381936905279835,
+          "dynamic_shape_dimension": 2.93635710624725,
+          "evaluation_update": 20000,
+          "free_roundness": 0.838079221075346,
+          "free_shape_dimension": 2.9362536850609833,
+          "target_source_separation_sigma_rep": 0.9998621815376895
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001307630907312,
+          "dynamic_free_radius_ratio": 0.9999919555180382,
+          "dynamic_free_shape_spectrum_median": 4.7367547295368295e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010460177047938996,
+          "dynamic_minus_eta_zero_center_radii": 67.30748224936595,
+          "dynamic_minus_free_center_radii": 0.33074746214935236,
+          "dynamic_minus_free_shape_dimension": -1.7890318687374673e-05,
+          "dynamic_minus_frozen_center_radii": 9.930804452102918e-05,
+          "dynamic_roundness": 0.8189338180841506,
+          "dynamic_shape_dimension": 2.920630616148896,
+          "evaluation_update": 50000,
+          "free_roundness": 0.8189628040968041,
+          "free_shape_dimension": 2.9207468069642015,
+          "target_source_separation_sigma_rep": 1.0005383177409344
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001172192670071,
+          "dynamic_free_radius_ratio": 0.9999617943737781,
+          "dynamic_free_shape_spectrum_median": 4.6958550655201714e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00013777845825359004,
+          "dynamic_minus_eta_zero_center_radii": 127.53533055302483,
+          "dynamic_minus_free_center_radii": 0.6784452662833067,
+          "dynamic_minus_free_shape_dimension": 8.008454513763752e-06,
+          "dynamic_minus_frozen_center_radii": 0.00027139331491725556,
+          "dynamic_roundness": 0.8242001907769619,
+          "dynamic_shape_dimension": 2.922634960426352,
+          "evaluation_update": 100000,
+          "free_roundness": 0.8240863543709704,
+          "free_shape_dimension": 2.92253613634495,
+          "target_source_separation_sigma_rep": 1.0009195282717764
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001056131299706,
+          "dynamic_free_radius_ratio": 0.9999812858881331,
+          "dynamic_free_shape_spectrum_median": 5.2791356319289995e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00013794796335012127,
+          "dynamic_minus_eta_zero_center_radii": 298.50348391922245,
+          "dynamic_minus_free_center_radii": 1.3736852269116737,
+          "dynamic_minus_free_shape_dimension": -2.505901638016894e-05,
+          "dynamic_minus_frozen_center_radii": 0.0010651381399628557,
+          "dynamic_roundness": 0.8217186680748738,
+          "dynamic_shape_dimension": 2.913712490517141,
+          "evaluation_update": 200000,
+          "free_roundness": 0.8217035411826477,
+          "free_shape_dimension": 2.9137949699491115,
+          "target_source_separation_sigma_rep": 1.0011747429091793
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001160510490847,
+          "dynamic_free_radius_ratio": 1.0000163228825016,
+          "dynamic_free_shape_spectrum_median": 5.6328263084284846e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011379041736688242,
+          "dynamic_minus_eta_zero_center_radii": 383.85190893008627,
+          "dynamic_minus_free_center_radii": 3.461861310428775,
+          "dynamic_minus_free_shape_dimension": -2.4800729745866334e-05,
+          "dynamic_minus_frozen_center_radii": 0.006813397535591499,
+          "dynamic_roundness": 0.8485833325938815,
+          "dynamic_shape_dimension": 2.939716624401726,
+          "evaluation_update": 500000,
+          "free_roundness": 0.8485717977240789,
+          "free_shape_dimension": 2.9396601010475782,
+          "target_source_separation_sigma_rep": 0.9995076371388592
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001190180764414,
+          "dynamic_free_radius_ratio": 1.0000220748861828,
+          "dynamic_free_shape_spectrum_median": 4.914855991630662e-05,
+          "dynamic_free_shape_spectrum_q95": 8.351665033608512e-05,
+          "dynamic_minus_eta_zero_center_radii": 488.21554009262246,
+          "dynamic_minus_free_center_radii": 6.9311596244824685,
+          "dynamic_minus_free_shape_dimension": -3.431522544339316e-06,
+          "dynamic_minus_frozen_center_radii": 0.015661655948520176,
+          "dynamic_roundness": 0.809495616954755,
+          "dynamic_shape_dimension": 2.9022893608290508,
+          "evaluation_update": 1000000,
+          "free_roundness": 0.8093304225843285,
+          "free_shape_dimension": 2.9022240649517967,
+          "target_source_separation_sigma_rep": 1.0002495276851318
+        }
+      ],
+      "continuation_seed": 1,
+      "runtime_seconds": 238.3811988,
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.026777845116846576,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.012105053312553737,
+        "shape_spectrum_total_variation": 0.007665721599121739,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      }
+    },
+    {
+      "checkpoints": [
+        {
+          "dynamic_free_max_radius_factor": 1.000119884440563,
+          "dynamic_free_radius_ratio": 0.9999964130206498,
+          "dynamic_free_shape_spectrum_median": 7.71909068669474e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010818537744891608,
+          "dynamic_minus_eta_zero_center_radii": 34.837640824793645,
+          "dynamic_minus_free_center_radii": 0.12225863945691562,
+          "dynamic_minus_free_shape_dimension": 1.5975956776159705e-05,
+          "dynamic_minus_frozen_center_radii": 2.4753609003239265e-05,
+          "dynamic_roundness": 0.8358069775763789,
+          "dynamic_shape_dimension": 2.938765963332076,
+          "evaluation_update": 20000,
+          "free_roundness": 0.8357715459744652,
+          "free_shape_dimension": 2.938738610147313,
+          "target_source_separation_sigma_rep": 1.000258855447139
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0000974653924017,
+          "dynamic_free_radius_ratio": 0.999978200601736,
+          "dynamic_free_shape_spectrum_median": 5.8719960862790854e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011638368725268578,
+          "dynamic_minus_eta_zero_center_radii": 50.92645084776337,
+          "dynamic_minus_free_center_radii": 0.33084048453476056,
+          "dynamic_minus_free_shape_dimension": 4.401477699778056e-05,
+          "dynamic_minus_frozen_center_radii": 0.00011171363027089225,
+          "dynamic_roundness": 0.8388212673951486,
+          "dynamic_shape_dimension": 2.9389656447233308,
+          "evaluation_update": 50000,
+          "free_roundness": 0.8387341506914765,
+          "free_shape_dimension": 2.9390162550671195,
+          "target_source_separation_sigma_rep": 1.0006103679528557
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0000886631572619,
+          "dynamic_free_radius_ratio": 1.0000124277108962,
+          "dynamic_free_shape_spectrum_median": 5.7703511584294986e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010907081661275518,
+          "dynamic_minus_eta_zero_center_radii": 78.71203073607431,
+          "dynamic_minus_free_center_radii": 0.678555575679531,
+          "dynamic_minus_free_shape_dimension": -1.1389798132199758e-05,
+          "dynamic_minus_frozen_center_radii": 0.00041319057825389216,
+          "dynamic_roundness": 0.8361364794972956,
+          "dynamic_shape_dimension": 2.9341446253965255,
+          "evaluation_update": 100000,
+          "free_roundness": 0.8362058238122544,
+          "free_shape_dimension": 2.934345081892777,
+          "target_source_separation_sigma_rep": 1.0005128274253723
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0000998930216038,
+          "dynamic_free_radius_ratio": 0.9999950284700776,
+          "dynamic_free_shape_spectrum_median": 3.353506741474166e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010060614597232616,
+          "dynamic_minus_eta_zero_center_radii": 158.26282860501564,
+          "dynamic_minus_free_center_radii": 1.3731618926894062,
+          "dynamic_minus_free_shape_dimension": 3.7529117125068012e-06,
+          "dynamic_minus_frozen_center_radii": 0.0004814392967774022,
+          "dynamic_roundness": 0.8059390779670513,
+          "dynamic_shape_dimension": 2.9116525984644204,
+          "evaluation_update": 200000,
+          "free_roundness": 0.8058443701660418,
+          "free_shape_dimension": 2.911648845552708,
+          "target_source_separation_sigma_rep": 0.9996500771951128
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001029338987237,
+          "dynamic_free_radius_ratio": 1.0000006278557068,
+          "dynamic_free_shape_spectrum_median": 3.8987554682790027e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00012927580067724758,
+          "dynamic_minus_eta_zero_center_radii": 262.86809793247295,
+          "dynamic_minus_free_center_radii": 3.4593983386284113,
+          "dynamic_minus_free_shape_dimension": 2.3816615199567792e-05,
+          "dynamic_minus_frozen_center_radii": 0.003545301092401977,
+          "dynamic_roundness": 0.8241855914676782,
+          "dynamic_shape_dimension": 2.913052570931446,
+          "evaluation_update": 500000,
+          "free_roundness": 0.824031844901715,
+          "free_shape_dimension": 2.913090744977828,
+          "target_source_separation_sigma_rep": 1.0017448331038423
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001203085951342,
+          "dynamic_free_radius_ratio": 0.9999909236628941,
+          "dynamic_free_shape_spectrum_median": 5.5573546096754356e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011468080958079161,
+          "dynamic_minus_eta_zero_center_radii": 833.9928188239687,
+          "dynamic_minus_free_center_radii": 6.944514612061113,
+          "dynamic_minus_free_shape_dimension": 1.1371621476907734e-05,
+          "dynamic_minus_frozen_center_radii": 0.008661568145489976,
+          "dynamic_roundness": 0.8447617516626913,
+          "dynamic_shape_dimension": 2.9449245313982426,
+          "evaluation_update": 1000000,
+          "free_roundness": 0.8445395051841843,
+          "free_shape_dimension": 2.944989675355793,
+          "target_source_separation_sigma_rep": 1.0035266011930362
+        }
+      ],
+      "continuation_seed": 2,
+      "runtime_seconds": 234.73873700000013,
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.04872034429429356,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.020923537513961588,
+        "shape_spectrum_total_variation": 0.009534834328835562,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      }
+    },
+    {
+      "checkpoints": [
+        {
+          "dynamic_free_max_radius_factor": 1.0001050518267394,
+          "dynamic_free_radius_ratio": 1.0000042396173203,
+          "dynamic_free_shape_spectrum_median": 4.7359879997987964e-05,
+          "dynamic_free_shape_spectrum_q95": 0.0001367469979334067,
+          "dynamic_minus_eta_zero_center_radii": 82.4270268312308,
+          "dynamic_minus_free_center_radii": 0.12231148906758779,
+          "dynamic_minus_free_shape_dimension": -3.4152661783082294e-05,
+          "dynamic_minus_frozen_center_radii": 3.1028138245918756e-05,
+          "dynamic_roundness": 0.8226311473245711,
+          "dynamic_shape_dimension": 2.927796692800296,
+          "evaluation_update": 20000,
+          "free_roundness": 0.8228268359955124,
+          "free_shape_dimension": 2.9277902230254487,
+          "target_source_separation_sigma_rep": 1.000522870684124
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001268067928408,
+          "dynamic_free_radius_ratio": 0.9999997103001045,
+          "dynamic_free_shape_spectrum_median": 6.172621228289765e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010941567959865117,
+          "dynamic_minus_eta_zero_center_radii": 108.31865901949152,
+          "dynamic_minus_free_center_radii": 0.3309038408465604,
+          "dynamic_minus_free_shape_dimension": -2.903246764773826e-06,
+          "dynamic_minus_frozen_center_radii": 0.00012210693900021065,
+          "dynamic_roundness": 0.8179820101583656,
+          "dynamic_shape_dimension": 2.915953846416555,
+          "evaluation_update": 50000,
+          "free_roundness": 0.8178381933032541,
+          "free_shape_dimension": 2.9158151530534933,
+          "target_source_separation_sigma_rep": 1.0007820099680151
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.00009397508742,
+          "dynamic_free_radius_ratio": 0.9999694633408889,
+          "dynamic_free_shape_spectrum_median": 6.272598059553491e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010636570228929608,
+          "dynamic_minus_eta_zero_center_radii": 342.3062444957378,
+          "dynamic_minus_free_center_radii": 0.678108798488258,
+          "dynamic_minus_free_shape_dimension": -2.0757802074999887e-05,
+          "dynamic_minus_frozen_center_radii": 0.00015999789703671975,
+          "dynamic_roundness": 0.8321780837321285,
+          "dynamic_shape_dimension": 2.9292496773704984,
+          "evaluation_update": 100000,
+          "free_roundness": 0.8320823291532431,
+          "free_shape_dimension": 2.9292194839176102,
+          "target_source_separation_sigma_rep": 0.9992327468155382
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001114604242713,
+          "dynamic_free_radius_ratio": 0.9999934396146266,
+          "dynamic_free_shape_spectrum_median": 4.403848444099745e-05,
+          "dynamic_free_shape_spectrum_q95": 0.0001057543332478816,
+          "dynamic_minus_eta_zero_center_radii": 795.0093377583439,
+          "dynamic_minus_free_center_radii": 1.3725243344539924,
+          "dynamic_minus_free_shape_dimension": 9.93288461392794e-06,
+          "dynamic_minus_frozen_center_radii": 0.0005174838047853516,
+          "dynamic_roundness": 0.8354805242060542,
+          "dynamic_shape_dimension": 2.9345035438863936,
+          "evaluation_update": 200000,
+          "free_roundness": 0.8355604622471023,
+          "free_shape_dimension": 2.9345626024161855,
+          "target_source_separation_sigma_rep": 0.99913291099172
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001340333118607,
+          "dynamic_free_radius_ratio": 1.0000294310510696,
+          "dynamic_free_shape_spectrum_median": 6.567243949034962e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011529459335168912,
+          "dynamic_minus_eta_zero_center_radii": 478.85982371529946,
+          "dynamic_minus_free_center_radii": 3.4592103754624883,
+          "dynamic_minus_free_shape_dimension": -7.97813187203289e-06,
+          "dynamic_minus_frozen_center_radii": 0.006655308475938303,
+          "dynamic_roundness": 0.8142666091813904,
+          "dynamic_shape_dimension": 2.91925190671022,
+          "evaluation_update": 500000,
+          "free_roundness": 0.8141675890588248,
+          "free_shape_dimension": 2.9192131964145096,
+          "target_source_separation_sigma_rep": 1.0021177953899056
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.000194582028295,
+          "dynamic_free_radius_ratio": 1.0000028279126116,
+          "dynamic_free_shape_spectrum_median": 4.0146601630985934e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011036357437650683,
+          "dynamic_minus_eta_zero_center_radii": 947.7369188757515,
+          "dynamic_minus_free_center_radii": 6.94137927262948,
+          "dynamic_minus_free_shape_dimension": 1.1168808682349152e-05,
+          "dynamic_minus_frozen_center_radii": 0.019376811422200622,
+          "dynamic_roundness": 0.82440369881571,
+          "dynamic_shape_dimension": 2.9260783033863467,
+          "evaluation_update": 1000000,
+          "free_roundness": 0.824391619709509,
+          "free_shape_dimension": 2.92623763689211,
+          "target_source_separation_sigma_rep": 1.0017587330765048
+        }
+      ],
+      "continuation_seed": 3,
+      "runtime_seconds": 130.64728439999976,
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.039046124792317664,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.029520506233345567,
+        "shape_spectrum_total_variation": 0.025044346452288424,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      }
+    },
+    {
+      "checkpoints": [
+        {
+          "dynamic_free_max_radius_factor": 1.0000851707501623,
+          "dynamic_free_radius_ratio": 0.9999990575276323,
+          "dynamic_free_shape_spectrum_median": 5.53019205640215e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00012765226801066953,
+          "dynamic_minus_eta_zero_center_radii": 87.53071315550285,
+          "dynamic_minus_free_center_radii": 0.12225188283588395,
+          "dynamic_minus_free_shape_dimension": -1.2331017988920223e-05,
+          "dynamic_minus_frozen_center_radii": 5.268308217910423e-05,
+          "dynamic_roundness": 0.8293423031467956,
+          "dynamic_shape_dimension": 2.932513682831513,
+          "evaluation_update": 20000,
+          "free_roundness": 0.8295876548023425,
+          "free_shape_dimension": 2.932689631758154,
+          "target_source_separation_sigma_rep": 0.9995274446388901
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.000097864602262,
+          "dynamic_free_radius_ratio": 1.0000042257108437,
+          "dynamic_free_shape_spectrum_median": 4.170637667155752e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00012454404147272383,
+          "dynamic_minus_eta_zero_center_radii": 191.1759871415145,
+          "dynamic_minus_free_center_radii": 0.33058938456045356,
+          "dynamic_minus_free_shape_dimension": -3.0771198717971515e-06,
+          "dynamic_minus_frozen_center_radii": 0.0003578327559223242,
+          "dynamic_roundness": 0.8289058639610528,
+          "dynamic_shape_dimension": 2.9314108643522063,
+          "evaluation_update": 50000,
+          "free_roundness": 0.828904276287361,
+          "free_shape_dimension": 2.931382794821458,
+          "target_source_separation_sigma_rep": 0.9990560522995566
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001631814741718,
+          "dynamic_free_radius_ratio": 0.999995706325307,
+          "dynamic_free_shape_spectrum_median": 6.451733013729255e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00012007871065790032,
+          "dynamic_minus_eta_zero_center_radii": 363.0622830951776,
+          "dynamic_minus_free_center_radii": 0.6775816064505173,
+          "dynamic_minus_free_shape_dimension": -5.2996793205473125e-05,
+          "dynamic_minus_frozen_center_radii": 0.001053536642435371,
+          "dynamic_roundness": 0.8073168782988139,
+          "dynamic_shape_dimension": 2.908120810763258,
+          "evaluation_update": 100000,
+          "free_roundness": 0.8074546394769454,
+          "free_shape_dimension": 2.908209624833979,
+          "target_source_separation_sigma_rep": 0.9989955861397847
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.000138245194068,
+          "dynamic_free_radius_ratio": 0.999986599003084,
+          "dynamic_free_shape_spectrum_median": 4.4073558867957496e-05,
+          "dynamic_free_shape_spectrum_q95": 0.0001017715948438441,
+          "dynamic_minus_eta_zero_center_radii": 278.1039785246339,
+          "dynamic_minus_free_center_radii": 1.3715817547369802,
+          "dynamic_minus_free_shape_dimension": -2.1225675535863076e-05,
+          "dynamic_minus_frozen_center_radii": 0.0023048817971751544,
+          "dynamic_roundness": 0.8168161619809412,
+          "dynamic_shape_dimension": 2.9233440521115943,
+          "evaluation_update": 200000,
+          "free_roundness": 0.8167315327032316,
+          "free_shape_dimension": 2.923271166765762,
+          "target_source_separation_sigma_rep": 0.9983834809614994
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.000089516207805,
+          "dynamic_free_radius_ratio": 1.0000241726592858,
+          "dynamic_free_shape_spectrum_median": 5.0556803376983206e-05,
+          "dynamic_free_shape_spectrum_q95": 0.0001277502479644698,
+          "dynamic_minus_eta_zero_center_radii": 395.6668311509209,
+          "dynamic_minus_free_center_radii": 3.4508301406144324,
+          "dynamic_minus_free_shape_dimension": -1.4976132296506961e-05,
+          "dynamic_minus_frozen_center_radii": 0.008376773941098347,
+          "dynamic_roundness": 0.8104030351662055,
+          "dynamic_shape_dimension": 2.908050089610546,
+          "evaluation_update": 500000,
+          "free_roundness": 0.8105025712612727,
+          "free_shape_dimension": 2.9081731376020254,
+          "target_source_separation_sigma_rep": 0.9974324072489745
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001050002624232,
+          "dynamic_free_radius_ratio": 0.9999909056502863,
+          "dynamic_free_shape_spectrum_median": 5.4468700668053316e-05,
+          "dynamic_free_shape_spectrum_q95": 0.0001021939672624594,
+          "dynamic_minus_eta_zero_center_radii": 641.5317986237453,
+          "dynamic_minus_free_center_radii": 6.916496107966211,
+          "dynamic_minus_free_shape_dimension": 9.473292199135841e-06,
+          "dynamic_minus_frozen_center_radii": 0.018965604104313406,
+          "dynamic_roundness": 0.8327965942055657,
+          "dynamic_shape_dimension": 2.9357858416866067,
+          "evaluation_update": 1000000,
+          "free_roundness": 0.8327932984504631,
+          "free_shape_dimension": 2.9357713829723173,
+          "target_source_separation_sigma_rep": 0.9963304955498362
+        }
+      ],
+      "continuation_seed": 4,
+      "runtime_seconds": 162.82723750000014,
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.039831708023522136,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.00042057379315973975,
+        "shape_spectrum_total_variation": 0.010675957433773892,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      }
+    },
+    {
+      "checkpoints": [
+        {
+          "dynamic_free_max_radius_factor": 1.0001210629012778,
+          "dynamic_free_radius_ratio": 0.9999811682094482,
+          "dynamic_free_shape_spectrum_median": 6.705273366564013e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011205940832173521,
+          "dynamic_minus_eta_zero_center_radii": 55.485912377698455,
+          "dynamic_minus_free_center_radii": 0.12224892359128453,
+          "dynamic_minus_free_shape_dimension": -4.420597157661632e-06,
+          "dynamic_minus_frozen_center_radii": 2.01053437960431e-05,
+          "dynamic_roundness": 0.8262189204754982,
+          "dynamic_shape_dimension": 2.927330744072374,
+          "evaluation_update": 20000,
+          "free_roundness": 0.826421469745658,
+          "free_shape_dimension": 2.9274761253217334,
+          "target_source_separation_sigma_rep": 1.000195456308784
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0000950486974967,
+          "dynamic_free_radius_ratio": 1.000000591346848,
+          "dynamic_free_shape_spectrum_median": 5.624125271919134e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010185893669568121,
+          "dynamic_minus_eta_zero_center_radii": 103.65730274767867,
+          "dynamic_minus_free_center_radii": 0.3307928687140382,
+          "dynamic_minus_free_shape_dimension": 1.2503942304231686e-05,
+          "dynamic_minus_frozen_center_radii": 0.00012534736020936705,
+          "dynamic_roundness": 0.8292028608964248,
+          "dynamic_shape_dimension": 2.9314473444971196,
+          "evaluation_update": 50000,
+          "free_roundness": 0.829205041625242,
+          "free_shape_dimension": 2.93146320674429,
+          "target_source_separation_sigma_rep": 1.0004560895171266
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.000112743747656,
+          "dynamic_free_radius_ratio": 1.0000031881566829,
+          "dynamic_free_shape_spectrum_median": 6.160413014871802e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00013131633784900778,
+          "dynamic_minus_eta_zero_center_radii": 187.1446963053323,
+          "dynamic_minus_free_center_radii": 0.6784649907862005,
+          "dynamic_minus_free_shape_dimension": 3.7980363526202154e-05,
+          "dynamic_minus_frozen_center_radii": 0.00017997482124235405,
+          "dynamic_roundness": 0.8350208135146004,
+          "dynamic_shape_dimension": 2.937189698556541,
+          "evaluation_update": 100000,
+          "free_roundness": 0.8349316195919657,
+          "free_shape_dimension": 2.9371246985164547,
+          "target_source_separation_sigma_rep": 1.0008152876017318
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001356240603478,
+          "dynamic_free_radius_ratio": 0.9999901375226861,
+          "dynamic_free_shape_spectrum_median": 5.332089709578214e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00011566370982739603,
+          "dynamic_minus_eta_zero_center_radii": 329.08519899871845,
+          "dynamic_minus_free_center_radii": 1.373893119775959,
+          "dynamic_minus_free_shape_dimension": 7.102222213006826e-06,
+          "dynamic_minus_frozen_center_radii": 0.0003329861420734004,
+          "dynamic_roundness": 0.8243124135617111,
+          "dynamic_shape_dimension": 2.929368312514542,
+          "evaluation_update": 200000,
+          "free_roundness": 0.8244595165268531,
+          "free_shape_dimension": 2.9294947299410103,
+          "target_source_separation_sigma_rep": 1.0011271256021057
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0001341067864826,
+          "dynamic_free_radius_ratio": 0.9999906326407904,
+          "dynamic_free_shape_spectrum_median": 5.558455404622298e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00010965336645351593,
+          "dynamic_minus_eta_zero_center_radii": 409.270090936134,
+          "dynamic_minus_free_center_radii": 3.4579299222723594,
+          "dynamic_minus_free_shape_dimension": -9.684782407148873e-07,
+          "dynamic_minus_frozen_center_radii": 0.004817595171520098,
+          "dynamic_roundness": 0.8058550689968974,
+          "dynamic_shape_dimension": 2.912382750585212,
+          "evaluation_update": 500000,
+          "free_roundness": 0.8058164442109744,
+          "free_shape_dimension": 2.9124440861676297,
+          "target_source_separation_sigma_rep": 0.9987031005439776
+        },
+        {
+          "dynamic_free_max_radius_factor": 1.0000979382507968,
+          "dynamic_free_radius_ratio": 0.9999946716188997,
+          "dynamic_free_shape_spectrum_median": 4.880432854259542e-05,
+          "dynamic_free_shape_spectrum_q95": 0.00012144571230090771,
+          "dynamic_minus_eta_zero_center_radii": 247.25792523108717,
+          "dynamic_minus_free_center_radii": 6.929373010130043,
+          "dynamic_minus_free_shape_dimension": 2.1194910226451924e-05,
+          "dynamic_minus_frozen_center_radii": 0.019144343431341727,
+          "dynamic_roundness": 0.8371698755841328,
+          "dynamic_shape_dimension": 2.926253931993902,
+          "evaluation_update": 1000000,
+          "free_roundness": 0.8372858021364596,
+          "free_shape_dimension": 2.926165945756525,
+          "target_source_separation_sigma_rep": 0.9987476750839461
+        }
+      ],
+      "continuation_seed": 5,
+      "runtime_seconds": 139.33472949999987,
+      "source_stationarity": {
+        "radius_coefficient_of_variation": 0.02905468409111974,
+        "radius_cv_limit": 0.15,
+        "radius_drift_limit": 0.1,
+        "radius_relative_drift": 0.020953121503810457,
+        "shape_spectrum_total_variation": 0.011394165266483403,
+        "spectrum_drift_limit": 0.1,
+        "stationary_shape_pass": true
+      }
+    }
+  ],
+  "runtime_seconds": 907.1156901999998,
+  "window_updates": 5000
+}

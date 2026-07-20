@@ -86,3 +86,32 @@ def test_gate_requires_seed_robust_plateau_and_modification() -> None:
     assert pass_gate["stable_interaction_modified_shape_candidate"]
     assert not fail_gate["late_shape_plateau_pass"]
     assert not fail_gate["stable_interaction_modified_shape_candidate"]
+
+
+def test_center_trend_recovers_linear_response() -> None:
+    payload = {
+        "aggregate": [
+            {
+                "evaluation_update": update,
+                "dynamic_minus_free_center_radii": {
+                    "median": 2.0e-5 * update + 0.25,
+                    "q25": 0.0,
+                    "q75": 0.0,
+                },
+            }
+            for update in (20_000, 50_000, 100_000, 200_000)
+        ],
+        "parameters": {"separation_sigma_rep": 2.0},
+        "calibration": {
+            "source_center_offset": [4.0, 0.0, 0.0],
+            "initial_target_radius": 0.5,
+        },
+    }
+
+    trend = audit._center_trend(payload)
+
+    np.testing.assert_allclose(trend["slope_radii_per_update"], 2.0e-5)
+    np.testing.assert_allclose(trend["intercept_radii"], 0.25)
+    np.testing.assert_allclose(trend["r_squared"], 1.0)
+    np.testing.assert_allclose(trend["kernel_width_radii"], 4.0)
+    np.testing.assert_allclose(trend["linear_updates_per_kernel_width"], 200_000)

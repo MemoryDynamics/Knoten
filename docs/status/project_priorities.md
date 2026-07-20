@@ -330,6 +330,14 @@ Naechster operativer Schritt:
     q95-Shape-Spektralgate. Die Targetantwort bleibt mit 2.332e-4 Radien
     sub-threshold. Kein Orbit-, Phasen- oder Propagationsbefund;
     Reziprozitaet bleibt gesperrt.
+37. Abgeschlossen: One-Way-Interaction-Age-Audit vom reifen N=100M-
+    Checkpoint bis N=101M. Alle fuenf Fortsetzungen erreichen ein spaetes
+    Shape-Plateau, aber keine zeigt eine kontrollgetrennte Formmodifikation.
+    Die Zentrumantwort waechst nahezu exakt linear auf median 6.931 Radien,
+    waehrend Radiusverhaeltnis, Shape-Dimension und Shape-Spektrum praktisch
+    mit der freien Kontrolle uebereinstimmen. Weitere sparse Endpunkte im
+    selben skalaren Fernkanal sind deshalb nicht priorisiert.
+
 
 Aktueller naechster Schritt:
 
@@ -340,11 +348,14 @@ Aktueller naechster Schritt:
   beobachteten Aeste sind glatt und als Relaxation erklaert.
 - Mode-Identity ist abgeschlossen. Tragbar ist reduzierte Vorhersagbarkeit,
   nicht die Identitaet eines einzelnen reellen oder komplexen Eigenmodus.
-- Naechster Mechanismusschritt: shape-bounded/coherent Quelltransport
-  formulieren und falsifizieren. Ein Punkt-Drive erzeugt zwar beschraenkte
-  Translation, aber keine durchgehend kohaerente Shape-Antwort; er ist kein
-  Ersatz fuer kontrollierte Ganzzustands-Translation oder lokale
-  Felduebertragung.
+- Naechster Mechanismusschritt: einen lokalen, orientierten oder
+  momentengekoppelten Kanal formulieren und falsifizieren. Der dauerhafte
+  skalare Fernkanal erzeugt bis +1M eine lineare Translation, aber keine
+  kontrollgetrennte Formdynamik.
+- Perioden groesser als 1e5 Updates sind durch sechs Altersfenster nicht
+  allgemein ausgeschlossen. Diese Restfrage braucht einen regelmaessig
+  gesampelten gepaarten Differenztrace mit vorregistriertem Spektraltest,
+  nicht bloss einen weiteren langen Endpunkt.
 - Das Gate verlangt gepaarte unlaunched Kontrollen, stationaere Ausgangsform,
   beschraenkte und kohaerente, nicht notwendig starre Source-Shape, eine
   targetseitige Response oberhalb des Rausch-/Frozen-Niveaus und

@@ -465,6 +465,31 @@ def _series(payload: dict[str, Any], metric: str) -> tuple[np.ndarray, ...]:
     return x, median, q25, q75
 
 
+def _center_trend(payload: dict[str, Any]) -> dict[str, float]:
+    x, center, _, _ = _series(payload, "dynamic_minus_free_center_radii")
+    slope, intercept = np.polyfit(x, center, 1)
+    fitted = slope * x + intercept
+    residual = float(np.sum((center - fitted) ** 2))
+    total = float(np.sum((center - np.mean(center)) ** 2))
+    r_squared = 1.0 - residual / total if total > 0.0 else float("nan")
+    source_offset = np.asarray(
+        payload["calibration"]["source_center_offset"], dtype=float
+    )
+    sigma_rep = (
+        float(np.linalg.norm(source_offset))
+        / payload["parameters"]["separation_sigma_rep"]
+    )
+    kernel_width_radii = sigma_rep / payload["calibration"]["initial_target_radius"]
+    return {
+        "slope_radii_per_update": float(slope),
+        "intercept_radii": float(intercept),
+        "r_squared": r_squared,
+        "updates_per_radius": float(1.0 / slope),
+        "kernel_width_radii": float(kernel_width_radii),
+        "linear_updates_per_kernel_width": float(kernel_width_radii / slope),
+    }
+
+
 def _plot(payload: dict[str, Any], output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     fig, axes = plt.subplots(2, 2, figsize=(11.5, 8.0), sharex=True)
@@ -513,6 +538,8 @@ def _plot(payload: dict[str, Any], output: Path) -> None:
 
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
+    trend = _center_trend(payload)
+    final_aggregate = payload["aggregate"][-1]
     lines = [
         "# One-Way Interaction-Age Audit",
         "",
@@ -547,12 +574,21 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"{gate['stable_interaction_modified_shape_candidate']}.",
         f"- Final dynamic-free centre response: "
         f"{gate['final_dynamic_minus_free_center_radii_median']:.4g} R.",
+        f"- Final dynamic-frozen centre difference: "
+        f"{final_aggregate['dynamic_minus_frozen_center_radii']['median']:.5f} "
+        "R.",
         f"- Final dynamic/free radius ratio: "
         f"{gate['final_dynamic_free_radius_ratio_median']:.5f}.",
         f"- Final shape-dimension difference: "
         f"{gate['final_dynamic_minus_free_shape_dimension_median']:.5f}.",
         f"- Final spectral-shape distance: "
         f"{gate['final_dynamic_free_shape_spectrum_median']:.5f}.",
+        f"- Centre-response OLS slope: "
+        f"{trend['slope_radii_per_update']:.6g} R/update "
+        f"(R^2={trend['r_squared']:.8f}).",
+        f"- Linear scale estimate: one R per "
+        f"{trend['updates_per_radius']:,.0f} updates; one kernel width after "
+        f"about {trend['linear_updates_per_kernel_width']:,.0f} updates.",
         "",
         f"![Interaction-age audit]({_relative(report, figure)})",
         "",
@@ -583,6 +619,12 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "- If the last two ages do not plateau, extend N before changing parameters.",
             "- If they plateau without a control-separated shape, longer waiting under",
             "  this same channel is not the next priority.",
+            "- The six age windows test slow monotone adaptation. They do not exclude",
+            "  every breathing or orbital period above 1e5 updates; that question needs",
+            "  a regularly sampled paired difference trace and a registered spectral",
+            "  test rather than another sparse endpoint extension.",
+            "- The kernel-width time is a linear scale extrapolation, not a prediction",
+            "  that the measured slope or knot identity persists to that age.",
             "",
             f"Runtime: {payload['runtime_seconds']:.1f} seconds.",
             f"Git revision: {payload['git_revision']}.",

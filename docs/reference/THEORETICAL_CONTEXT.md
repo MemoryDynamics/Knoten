@@ -346,6 +346,14 @@ is not yet identifiable: the next mechanism must transport a source with
 bounded coherent shape dynamics, or introduce a local/retarded field channel
 whose delay is itself measurable.
 
+A sustained one-way age audit from N=100 million to N=101 million sharpens
+this negative result. Across five future-noise continuations, the target
+centre response accumulates almost linearly while radius and rotation-
+invariant shape remain indistinguishable from the paired free control. This
+supports scalar far-field translation, not a slowly forming interaction-
+specific knot type. Sparse age windows do not exclude every long-period mode;
+that residual question requires a regularly sampled paired spectral test.
+
 Vector memory is reserved for orientation, phase, circulation, or polarization,
 not introduced merely to provide a scalar sign.
 

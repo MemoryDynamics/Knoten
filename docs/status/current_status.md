@@ -272,6 +272,15 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   zu einem bestandenen One-Way-Readout-/Kohaerenzgate zurueckgestellt.
   Reports: reports/response/one_way_dynamic_source_pilot_2026-07-20.md und
   reports/response/one_way_launched_source_pilot_2026-07-20.md.
+- Interaction-Age-Audit 2026-07-21: Derselbe reife N=100M-Checkpoint wurde
+  ueber fuenf Future-Noise-Seeds bis N=101M unter einer dauerhaften
+  autonomen One-Way-Quelle fortgesetzt. Alle Seeds plateauieren in der Form,
+  aber 0/5 bestehen das Gate fuer eine kontrollgetrennte Formmodifikation.
+  Die mediane Zentrumantwort erreicht 6.931 Radien und ist nahezu linear;
+  das Radiusverhaeltnis bleibt 0.999995 und die Shape-Spektraldistanz
+  4.91e-5. Das stuetzt Fernfeldtranslation ohne neuen Knotentyp. Sparse
+  Altersfenster schliessen lange Oszillationsperioden nicht allgemein aus.
+  Report: `reports/response/one_way_interaction_age_N1M_2026-07-21.md`.
 
 ## Long-Run-Status
 
