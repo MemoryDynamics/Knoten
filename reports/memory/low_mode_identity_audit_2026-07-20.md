@@ -1,6 +1,6 @@
 # Low-Mode Eigenvector and Segment Identity Audit
 
-Date: 2026-07-20T05:29:06.695742+00:00.
+Date: 2026-07-20T06:28:57.280328+00:00.
 
 ## Question
 
@@ -61,8 +61,5 @@ keeps it classified as a fitting, sampling, or representation mode.
 
     python experiments/current/memory/low_mode_identity_audit.py
 
-Git revision: 4c136fc6630e4cb5868d6f87c41754511650d709.
-Git status at generation: M src/emergenz_knoten/markov/__init__.py
- M src/emergenz_knoten/markov/closure.py
- M tests/test_markov_closure.py
-?? experiments/current/memory/low_mode_identity_audit.py.
+Git revision: 12316921fafd1afabe4e8a26f4521e4aeb45b5f0.
+Git status at generation: clean.

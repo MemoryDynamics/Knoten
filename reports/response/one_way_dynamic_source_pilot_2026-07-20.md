@@ -1,6 +1,6 @@
 # One-Way Dynamic Scalar-Source Pilot
 
-Date: 2026-07-20T06:24:48.536703+00:00.
+Date: 2026-07-20T06:28:56.937247+00:00.
 
 ## Question
 
@@ -57,31 +57,5 @@ and no-cross controls?
 
     python experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py
 
-Git revision: 4c136fc6630e4cb5868d6f87c41754511650d709.
-Git status at generation: M docs/index.md
- M docs/reference/THEORETICAL_CONTEXT.md
- M docs/reference/experiment_catalog.md
- M docs/reference/repository_map.md
- M docs/status/current_status.md
- M docs/status/paper_claims.md
- M docs/status/project_priorities.md
- M experiments/cli.py
- M experiments/current/memory/synchronization/README.md
- M src/emergenz_knoten/__init__.py
- M src/emergenz_knoten/markov/__init__.py
- M src/emergenz_knoten/markov/closure.py
- M tests/test_markov_closure.py
-?? experiments/current/memory/low_mode_identity_audit.py
-?? experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py
-?? figures/draft/memory/low_mode_identity_audit_2026-07-20.png
-?? figures/draft/response/one_way_dynamic_source_pilot_2026-07-20.png
-?? figures/draft/response/one_way_launched_source_pilot_2026-07-20.png
-?? reports/memory/low_mode_identity_audit_2026-07-20.json
-?? reports/memory/low_mode_identity_audit_2026-07-20.md
-?? reports/response/one_way_dynamic_source_pilot_2026-07-20.json
-?? reports/response/one_way_dynamic_source_pilot_2026-07-20.md
-?? reports/response/one_way_launched_source_pilot_2026-07-20.json
-?? reports/response/one_way_launched_source_pilot_2026-07-20.md
-?? src/emergenz_knoten/coupled_nodes.py
-?? tests/test_coupled_nodes.py
-?? tests/test_mode_and_source_gates.py.
+Git revision: 12316921fafd1afabe4e8a26f4521e4aeb45b5f0.
+Git status at generation: clean.

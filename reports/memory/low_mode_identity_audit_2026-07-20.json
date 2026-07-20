@@ -8,7 +8,7 @@
     "mode_3_real",
     "mode_3_imag"
   ],
-  "created_utc": "2026-07-20T05:29:06.695742+00:00",
+  "created_utc": "2026-07-20T06:28:57.280328+00:00",
   "description": "Eigenvector and time-segment identity audit for scalar low modes.",
   "gate": {
     "complex_control_separation_pass": false,
@@ -42,8 +42,8 @@
     "oscillatory_mode_supported": false,
     "real_mode_identity_pass": false
   },
-  "git_revision": "4c136fc6630e4cb5868d6f87c41754511650d709",
-  "git_status": "M src/emergenz_knoten/markov/__init__.py\n M src/emergenz_knoten/markov/closure.py\n M tests/test_markov_closure.py\n?? experiments/current/memory/low_mode_identity_audit.py",
+  "git_revision": "12316921fafd1afabe4e8a26f4521e4aeb45b5f0",
+  "git_status": "",
   "parameters": {
     "amplitude_att": 26.0,
     "box_length": 80.0,

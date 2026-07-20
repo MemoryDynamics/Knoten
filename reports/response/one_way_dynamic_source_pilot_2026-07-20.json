@@ -11,7 +11,7 @@
     ]
   },
   "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
-  "created_utc": "2026-07-20T06:24:48.536703+00:00",
+  "created_utc": "2026-07-20T06:28:56.937247+00:00",
   "description": "One-way dynamic scalar-source continuation with paired controls.",
   "formation_seed": 1,
   "gate": {
@@ -30,8 +30,8 @@
     "zero_cross_identity_pass": true,
     "zero_cross_max_abs_error": 0.0
   },
-  "git_revision": "4c136fc6630e4cb5868d6f87c41754511650d709",
-  "git_status": "M docs/index.md\n M docs/reference/THEORETICAL_CONTEXT.md\n M docs/reference/experiment_catalog.md\n M docs/reference/repository_map.md\n M docs/status/current_status.md\n M docs/status/paper_claims.md\n M docs/status/project_priorities.md\n M experiments/cli.py\n M experiments/current/memory/synchronization/README.md\n M src/emergenz_knoten/__init__.py\n M src/emergenz_knoten/markov/__init__.py\n M src/emergenz_knoten/markov/closure.py\n M tests/test_markov_closure.py\n?? experiments/current/memory/low_mode_identity_audit.py\n?? experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py\n?? figures/draft/memory/low_mode_identity_audit_2026-07-20.png\n?? figures/draft/response/one_way_dynamic_source_pilot_2026-07-20.png\n?? figures/draft/response/one_way_launched_source_pilot_2026-07-20.png\n?? reports/memory/low_mode_identity_audit_2026-07-20.json\n?? reports/memory/low_mode_identity_audit_2026-07-20.md\n?? reports/response/one_way_dynamic_source_pilot_2026-07-20.json\n?? reports/response/one_way_dynamic_source_pilot_2026-07-20.md\n?? reports/response/one_way_launched_source_pilot_2026-07-20.json\n?? reports/response/one_way_launched_source_pilot_2026-07-20.md\n?? src/emergenz_knoten/coupled_nodes.py\n?? tests/test_coupled_nodes.py\n?? tests/test_mode_and_source_gates.py",
+  "git_revision": "12316921fafd1afabe4e8a26f4521e4aeb45b5f0",
+  "git_status": "",
   "launch": {
     "source_launch_axis": 1,
     "source_launch_memory_times": 10.0,
