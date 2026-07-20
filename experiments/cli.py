@@ -85,6 +85,7 @@ CATEGORIES = {
         "current/memory/synchronization/frozen_source_distance_ladder.py",
         "current/memory/synchronization/signed_cross_channel_pilot.py",
         "current/memory/synchronization/one_way_dynamic_source_pilot.py",
+        "current/memory/synchronization/one_way_interaction_age_audit.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",
