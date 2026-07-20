@@ -33,7 +33,7 @@ Stand: 2026-07-20.
   Occupancy-Fitfenster (`D_win`), geometrische `spectral_dimension`,
   voxelbasierte Residence-Statistiken, neue Center-/Memory-Ball-Residence, Shape-/Center-Cloud-Metriken und Bootstrap-CI.
 - `experiments.py`: Runner und NPZ/JSON-Serialisierung.
-- `knot_score.py`: Scorecard-Helfer v0.3-v0.5 fuer Residence, Kompaktheit, Voxelstabilitaet, interne Dimension und Memory-Cloud-Form.
+- `knot_score.py`: Scorecard-Helfer v0.3-v0.6; v0.6 ergaenzt Stationaritaets- und rotationsinvariante Shape-Kohaerenzdiagnostik.
 - `vector_memory.py`: erster orientierter Memory-Kanal mit `eta_vector=0`/`vector_mass=0`-Rueckfallkontrollen, Sample-Features und 2D-Transverse-Pilotmodus.
 - `state.py`: unveraenderlicher vollstaendiger Finite-Memory-Zustand sowie
   gemeinsame Translation und orthogonale Platzierung von Position und Memory.
@@ -47,7 +47,7 @@ Stand: 2026-07-20.
   Null-Kreuzkopplungskontrolle; Kreuzkopplung kann auf die anfaengliche
   Richtungsdrift oder die realisierte Common-Noise-Bare-Antwort kalibriert werden.
 - `coupled_nodes.py`: einseitig dynamische Source mit frozen/free/eta-zero-
-  Targetkontrollen, optionalem externem Source-Drive und relationalen radialen,
+  Targetkontrollen, Source-Drive, Shape-Tensoren und relationalen radialen,
   tangentialen sowie antisymmetrischen Drehimpulsobservablen; gemeinsames
   Target-Rauschen isoliert die Kreuzantwort.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
@@ -248,20 +248,30 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Kreuzkanal und kein Neutralitaets-, Ladungs-, Reziprozitaets- oder 3D-Claim.
   Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` und
   `reports/response/frozen_source_distance_ladder_2026-07-17.md`.
-- One-Way-Source-Pilot 2026-07-20: Eine autonom fortgesetzte Quelle aus dem
-  d=3-`N=100M`-Checkpoint bewegt sich in 200 Memory-Zeiten nur etwa
-  `1.6..4.5` interne Knotenradien; eine Kernelbreite entspricht etwa
-  4724 Radien. Dynamic-vs.-frozen Targetantwort bleibt bei
-  `2.1e-5..6.8e-5` Radien, und Winkelkohaerenz/Dephasierung unterscheiden
-  sich nicht von der freien Kontrolle.
-- Ein gepaarter externer Launch von `0.1 sigma_rep` ueber zehn Memory-Zeiten
-  verursacht seedunabhaengig `10.944` Radien zusaetzliche Source-Verschiebung,
-  aber nur `3.137e-4` Target-Radien Response. Gleichzeitig veraendert sich
-  der Source-Radius gegenueber der identischen unlaunched Fortsetzung um
-  `46..59` Prozent. Das Launchprotokoll bewegt daher keinen intakten Knoten.
-  Reziproke Kopplung bleibt bis zu einem zerstoerungsarmen One-Way-Mechanismus
-  zurueckgestellt. Reports: `reports/response/one_way_dynamic_source_pilot_2026-07-20.md`
-  und `reports/response/one_way_launched_source_pilot_2026-07-20.md`.
+- One-Way-Source-Pilot mit v0.6-Gate 2026-07-20: Die Source stammt aus
+  dem d=3-Checkpoint bei N=100M. Bei alpha=0.01 entsprechen 200 Code-
+  Memory-Zeiten 20,000 Updates; der Checkpoint selbst ist 1,000,000 solche
+  Memory-Zeiten alt. Dieses Alter ist kein Stationaritaetsbeweis. Deshalb
+  prueft ein ungestoertes 50-Memory-Time-Vorlauffenster Radius-CV,
+  Halbfenster-Radiusdrift und das rotationsinvariante normierte
+  Shape-Eigenwertspektrum. Alle fuenf Fortsetzungen bestehen dieses
+  vorlaeufige Source-Eligibility-Gate; die mediane Radiusdrift liegt bei
+  0.00995 und die mediane Spektraldrift bei 0.00632.
+- Die autonome Quelle bewegt sich in 200 Memory-Zeiten nur 1.6..4.5 interne
+  Radien bei sigma_rep/R ~=4724. Dynamic-vs.-frozen Targetantwort bleibt bei
+  2.1e-5..6.8e-5 Radien; Winkelkohaerenz und Dephasierung trennen sich nicht
+  von der freien Kontrolle.
+- Ein nach 50 Memory-Zeiten gestarteter Launch von 0.1 sigma_rep ueber zehn
+  Memory-Zeiten erzeugt 10.944 Radien zusaetzliche Source-Verschiebung, aber
+  nur 2.332e-4 Target-Radien Response. Die Source bleibt radiusbeschraenkt
+  (maximaler gepaarter Radiusfaktor 1.55..1.61), aber nur zwei von fuenf Seeds
+  bestehen das vorregistrierte q95-Shape-Spektralgate; die Abweichung ist
+  transient, da die mediane Spektraldistanz praktisch null bleibt. Korrekte
+  Lesart: beschraenkte, aber nicht durchgehend formkohaerente Translation,
+  nicht Zerstoerung und nicht Formerhaltung. Reziproke Kopplung bleibt bis
+  zu einem bestandenen One-Way-Readout-/Kohaerenzgate zurueckgestellt.
+  Reports: reports/response/one_way_dynamic_source_pilot_2026-07-20.md und
+  reports/response/one_way_launched_source_pilot_2026-07-20.md.
 
 ## Long-Run-Status
 

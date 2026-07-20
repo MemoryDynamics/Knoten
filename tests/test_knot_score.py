@@ -275,7 +275,7 @@ def test_score_v0_6_requires_stationary_shape_eligibility() -> None:
         stationarity_diagnostics={"stationary_shape_pass": False},
     )
 
-    assert eligible["eligible_knot_pass"]
+    assert eligible["stationarity_eligible_pass"]
     assert eligible["score"] == pytest.approx(1.0)
-    assert not ineligible["eligible_knot_pass"]
-    assert ineligible["score"] == pytest.approx(7.0 / 8.0)
+    assert not ineligible["stationarity_eligible_pass"]
+    assert ineligible["score"] == pytest.approx(1.0)

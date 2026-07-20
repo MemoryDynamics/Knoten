@@ -44,7 +44,7 @@ flowchart TD
     src --> analytic["analytic.py<br/>dimensionless groups, modes, linear radius"]
     src --> field["field.py<br/>heat transfer and relaxation-diffusion bridge"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
-    src --> knot_score["knot_score.py<br/>scorecard helpers v0.3-v0.5"]
+    src --> knot_score["knot_score.py<br/>scorecards v0.3-v0.6 + shape gates"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
@@ -52,7 +52,7 @@ flowchart TD
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
-    src --> coupled["coupled_nodes.py<br/>one-way source + relational observables"]
+    src --> coupled["coupled_nodes.py<br/>one-way source + relational/shape observables"]
     src --> signed["signed_cross_channel.py<br/>separate signed scalar cross coupling"]
     src --> continuation["_continuation.py<br/>shared Numba continuation primitives"]
     probe --> continuation
@@ -124,7 +124,7 @@ flowchart LR
     closure --> lagged
 
     samples --> geom["diagnostics.py<br/>D_cov, D_occ, residence"]
-    geom --> score["knot_score.py<br/>v0.5 scorecard vs eta_zero"]
+    geom --> score["knot_score.py<br/>v0.5 evidence + v0.6 stationarity eligibility"]
     zfeatures --> lagged["markov.dataset<br/>(z_i, z_i+ell)"]
     vfeatures --> lagged
     steps --> lagged
@@ -210,7 +210,7 @@ flowchart LR
     ladder --> compgate
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
     channel --> seeds["later: 6-10 independent states<br/>no retuning"]
-    channel --> one_way["one-way dynamic source complete<br/>dynamic / frozen / free / eta-zero"]
+    channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]
     one_way --> launch["paired point launch<br/>source deforms; target sub-threshold"]
     launch --> transport["next: coherent whole-state or<br/>local / retarded transport"]
     transport -.gate.-> reciprocal["later: reciprocal knots<br/>identity + balance diagnostics"]

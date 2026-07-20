@@ -331,13 +331,20 @@ antisymmetric tensor `r wedge v`; amplitude without control-separated
 orientation persistence is not an orbit or spin.
 
 For the current scalar checkpoint, autonomous source motion is tiny on the
-cross-kernel scale. An imposed point launch shifts the source relative to its
-unlaunched control but strongly changes its memory radius and produces only a
-sub-threshold target response. This demonstrates why a point force on `x`
-is not equivalent to coherent translation of `(x,rho)`. Reciprocal coupling
-is therefore not yet identifiable: the next mechanism must first transport a
-source without destroying its internal state, or introduce a local/retarded
-field channel whose delay is itself measurable.
+cross-kernel scale. At alpha=0.01 the 200-memory-time continuation contains
+20,000 updates and begins from N=100 million, but age alone is not treated as
+stationarity evidence. A 50-memory-time pre-launch window now tests radius and
+the trace-normalized shape-tensor eigenvalue spectrum; all five future-noise
+continuations pass the provisional eligibility gate.
+
+An imposed point launch shifts the source relative to its unlaunched control
+and remains radius-bounded by a factor below two, but three of five seeds fail
+the q95 spectral-shape coherence threshold. The target response remains
+sub-threshold. Thus the result is bounded but not continuously shape-coherent,
+not literal destruction and not rigid shape preservation. Reciprocal coupling
+is not yet identifiable: the next mechanism must transport a source with
+bounded coherent shape dynamics, or introduce a local/retarded field channel
+whose delay is itself measurable.
 
 Vector memory is reserved for orientation, phase, circulation, or polarization,
 not introduced merely to provide a scalar sign.

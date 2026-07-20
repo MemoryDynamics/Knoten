@@ -76,9 +76,13 @@ Status: abgeschlossen und durch den Linearitaetsaudit neu eingeordnet.
   fast vollstaendig als linearen Relativmodus. Das ist eine Relaxations- und
   Kontrolltrennung, noch keine isolierte nichtlineare Metastabilitaet.
 - Vor weiteren Long Runs werden bestehende Daten gegen R_linear reconciliiert.
-### P1.2 Knotenkriterium v0.5 verwenden
+### P1.2 Knotenkriterium v0.6 verwenden
 
-Status: Scorecard v0.5 ist das aktuelle Kandidatenkriterium; sie nutzt raw update residence und gated degenerierte Memory-Clouds.
+Status: Historische Long-Run-Scores bleiben v0.5. v0.6 behaelt deren sieben
+Evidenzkomponenten unveraendert und fuegt fuer neue Checkpoints ein
+Stationaritaets-Zulassungsgate hinzu. Shape-bounded/coherent Response bleibt
+eine getrennte Transportdiagnostik und wird nicht in den KnotScore
+hineingemittelt.
 
 Mit Knotenscore ist zunaechst kein magischer einzelner Zahlenwert gemeint,
 sondern ein reproduzierbares Scorecard-Kriterium. Es soll verhindern, dass ein
@@ -96,7 +100,10 @@ Akzeptanz fuer einen Paper-I-Befund:
 - Der Center-of-knot, z.B. Memory-Schwerpunkt, dominanter Residence-Voxel oder
   geglaettetes externes Antwortzentrum, driftet deutlich langsamer als die rohe
   Trajektorie.
-- Shape-/Radius-Metriken bleiben ueber mehrere Memory-Zeiten begrenzt.
+- Vor einer Stoerung bestehen Radius und normiertes Shape-Eigenwertspektrum ein
+  explizites Stationaritaetsfenster; hohes N allein genuegt nicht.
+- Unter Stoerung darf der Knoten rotieren und begrenzt atmen, muss aber
+  radiusbeschraenkt und spektral kohaerent bleiben.
 - Seed-Robustheit wird als Median/IQR ueber Seeds berichtet, nicht als bester
   Seed.
 - Git-Revision, Seeds, Burn-in, Sampling und Runtime sind dokumentiert.
@@ -314,13 +321,15 @@ Naechster operativer Schritt:
     identische Feature-Subraeume, verfehlt aber Match-/Ratenstabilitaetsgates;
     der komplexe Kandidat ueberlappt mit eta=0 zu mehr als 0.9999.
     Report: `reports/memory/low_mode_identity_audit_2026-07-20.md`.
-36. Abgeschlossen: autonome und extern angeschobene One-Way-Source gegen
-    frozen/free/eta-zero und gepaarte unlaunched Kontrolle. Die autonome Quelle
-    bewegt sich nur wenige interne Radien gegenueber `sigma_rep/R ~=4724`.
-    Der 0.1-sigma-Launch verschiebt sie zusaetzlich um 10.944 Radien, erzeugt
-    aber 46-59 Prozent zusaetzliche Radiusverformung und nur
-    `3.137e-4` Target-Radien Response. Kein Orbit-/Phasen- oder
-    Propagationsbefund; Reziprozitaet bleibt gesperrt.
+36. Abgeschlossen und mit v0.6 nachgemessen: autonome und extern angeschobene
+    One-Way-Source gegen frozen/free/eta-zero und gepaarte unlaunched Kontrolle.
+    Der N100M-Checkpoint besteht ueber alle fuenf Fortsetzungen das
+    50-Memory-Time-Stationaritaetsgate. Der 0.1-sigma-Launch verschiebt die
+    Source zusaetzlich um 10.944 Radien und bleibt radiusbeschraenkt
+    (Faktor 1.55..1.61), verfehlt aber in drei von fuenf Seeds das
+    q95-Shape-Spektralgate. Die Targetantwort bleibt mit 2.332e-4 Radien
+    sub-threshold. Kein Orbit-, Phasen- oder Propagationsbefund;
+    Reziprozitaet bleibt gesperrt.
 
 Aktueller naechster Schritt:
 
@@ -331,12 +340,14 @@ Aktueller naechster Schritt:
   beobachteten Aeste sind glatt und als Relaxation erklaert.
 - Mode-Identity ist abgeschlossen. Tragbar ist reduzierte Vorhersagbarkeit,
   nicht die Identitaet eines einzelnen reellen oder komplexen Eigenmodus.
-- Naechster Mechanismusschritt: einen zerstoerungsarmen Quelltransport
-  formulieren und falsifizieren. Ein Punkt-Drive verschiebt x gegen sein
-  eigenes Memory und deformiert den Knoten; er ist kein brauchbarer Ersatz
-  fuer koharente Ganzzustands-Translation oder lokale Felduebertragung.
-- Das Gate verlangt gepaarte unlaunched Kontrollen, erhaltene Source-Shape,
-  eine targetseitige Response oberhalb des Rausch-/Frozen-Niveaus und
+- Naechster Mechanismusschritt: shape-bounded/coherent Quelltransport
+  formulieren und falsifizieren. Ein Punkt-Drive erzeugt zwar beschraenkte
+  Translation, aber keine durchgehend kohaerente Shape-Antwort; er ist kein
+  Ersatz fuer kontrollierte Ganzzustands-Translation oder lokale
+  Felduebertragung.
+- Das Gate verlangt gepaarte unlaunched Kontrollen, stationaere Ausgangsform,
+  beschraenkte und kohaerente, nicht notwendig starre Source-Shape, eine
+  targetseitige Response oberhalb des Rausch-/Frozen-Niveaus und
   Zeitverzoegerung bei lokaler Kopplung.
 - Reziproke Kopplung und orientiertes/Vektormemory erst nach Bestehen dieses
   One-Way-Gates; sonst waere ihre Interpretation nicht identifizierbar.

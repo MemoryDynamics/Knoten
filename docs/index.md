@@ -37,7 +37,7 @@ Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
 soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
 Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
-Der v0.5-Knotenscore ist die aktuelle Scorecard, dokumentiert im Experiment-Katalog. Die alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
+Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
 Der Kernel-Familienvergleich macht die Reduktion explizit: fuer den q=3-
 Zweiskalenkernel gilt bei gleicher lokaler Kruemmung exakt
@@ -67,10 +67,12 @@ reellen Modus; komplexe aktive und `eta=0`-Subraeume sind praktisch
 identisch. Damit kein Oszillator-, Photon-, Metastabilitaets- oder
 Propagationsbefund.
 
-Der erste One-Way-Quelltest ist ebenfalls negativ, aber richtungsweisend:
-Autonome Source-Bewegung ist klein auf Kernel-Skala; ein externer Punkt-Drive
-verformt die Source stark und erzeugt nur eine sub-threshold Targetantwort.
-Naechster Mechanismusschritt ist daher zerstoerungsarmer Source-Transport oder
+Der erste One-Way-Quelltest bleibt ebenfalls negativ, ist nun aber methodisch
+schaerfer: Der N100M-Checkpoint besteht ein explizites Vorlauf-
+Stationaritaetsgate. Ein externer Punkt-Drive bewegt die Source
+radiusbeschraenkt, aber nicht in allen Seeds durchgehend spektral
+formkohaerent, und erzeugt nur eine sub-threshold Targetantwort. Naechster
+Mechanismusschritt ist deshalb shape-bounded/coherent Source-Transport oder
 ein lokaler/retardierter Feldkanal. Reziproke Kopplung bleibt bis dahin
 gesperrt.
 

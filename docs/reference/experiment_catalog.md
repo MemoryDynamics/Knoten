@@ -47,7 +47,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/frozen_source_field_audit.py` | statischer Potential-/Kraftaudit | aktiv | reale Checkpoint-Felder gegen Punktmonopol; Kraftvorzeichen, Paritaetsrest, Tangentialanteil und interne Quellenaufloesung |
 | `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
-| `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | autonome und extern angeschobene Quelle gegen frozen/free/eta-zero/unlaunched; relationale Orbit-/Phasengates |
+| `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
 | `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
@@ -445,7 +445,9 @@ unter den gewaehlten Observablen von der no-feedback-Kontrolle. Er bedeutet
 nicht automatisch stabile Teilchen, physikalische Masse oder einen
 zweiskaligen Mechanismus.
 
-Aktuelle produktive Variante ist v0.5:
+Die sieben numerischen Evidenzkomponenten stammen weiterhin aus v0.5.
+Fuer neu erzeugte zeitaufgeloeste Checkpoints ist v0.6 das aktuelle
+Zulassungsprotokoll:
 
 | Komponente | Messgroesse | Schwellen |
 | --- | --- | --- |
@@ -461,6 +463,27 @@ v0.5 unterscheidet sich von v0.4 vor allem dadurch, dass Residence in rohen
 Updates verglichen wird und Memory-Kompaktheit nur bei nichtdegenerierter
 Memory-Cloud zaehlt. Das verhindert, dass `alpha_one` oder `M0=0` durch
 Skalierungsartefakte wie Knoten aussehen.
+v0.6 veraendert den numerischen v0.5-Score nicht. Es fuegt davor ein
+Stationaritaetsgate ein, weil ein grosses Updatealter N allein keine
+stationaere Knotenform beweist. Im ungestoerten Vorlauffenster werden der
+Memory-Radius R und
+
+    p_n = eig(S_n) / trace(S_n)
+
+aus dem Memory-Shape-Tensor S_n gemessen. Der Checkpoint ist vorlaeufig
+stationaritaetsgeeignet, wenn alle drei Bedingungen gelten:
+
+1. relative Medianradiusdrift zwischen Fensterhaelften hoechstens 0.10,
+2. Radius-Variationskoeffizient hoechstens 0.15,
+3. Total-Variation der medianen normierten Eigenwertspektren hoechstens 0.10.
+
+Die Schwellen sind vorregistrierte Pilottoleranzen, keine Naturkonstanten.
+Rotation aendert p_n nicht und wird daher nicht als Formverlust gewertet.
+Fuer Transport kommt eine getrennte gepaarte Diagnose hinzu:
+symmetrischer Radiusfaktor hoechstens 2, mediane Spektraldistanz hoechstens
+0.10 und q95 hoechstens 0.25. Damit sind kontrollierte Rotation und begrenztes
+Atmen erlaubt; starre shape preservation wird nicht verlangt.
+
 Score-Hygiene: Der Knotenscore bleibt ein metastabilitaetsbezogener Score. Fuer
 andere Fragen sind separate, benannte Scorecards sinnvoll, z.B. `ModeScore`
 fuer lag-stabile komplexe Slow-Modes, `PropagationScore` fuer ballistische oder
@@ -563,13 +586,13 @@ Aktuell enthalten oder direkt verwandt:
 | Memory-Kompaktheit | in v0.5 | eigentliche Knotenform eher ueber Memory-Cloud als rohen Pfad |
 | Memory-Rundheit | in v0.5 | anisotrope oder degenerierte Memory-Clouds abwerten |
 | Memory-Formdimension | in v0.5 | covariance participation dimension der Memory-Cloud |
+| Shape-Stationaritaet | Eligibility-Gate in v0.6 | Vorlauf-Radius und normiertes Eigenwertspektrum; hohes N allein reicht nicht |
 
 Weitere sinnvolle KnotScore-Kandidaten:
 
 | KPI | Quelle | Warum relevant |
 | --- | --- | --- |
 | Center-Drift | Memory-Schwerpunkt, Residence-Voxel oder geglaettetes Antwortzentrum | Knoten sollten langsamer driften als die rohe Trajektorie |
-| Radius-Stabilitaet | Blockweise Memory-/Sample-Radien | stabiler Knoten statt transienter Kollaps/Explosion |
 | Survival/Hazard | Residence-Verteilung statt nur Maximum | trennt langlebige Tails von einzelnen Ausreissern |
 | Force-Balance | `rep/att`, net-cos, Noise/Drift-Verhaeltnis | Mechanismus-KPI fuer korrigierte Kernel statt nur Geometrie |
 | Hessian-/OU-Stabilitaet | lokale Hessian-Eigenwerte um Memory-Zentrum | verbindet Score mit Relaxations-/Stabilitaetsskala |
@@ -766,7 +789,7 @@ Modellklasse.
 | `reports/response/frozen_source_distance_ladder_2026-07-17.md` | Frozen-Source-Distanzleiter | Gleiche realisierte Bare-Antwort ueber sechs Abstaende; kleine distanzabhaengige Targetdeformation, aber voller Ambient-Rang und keine Quellenstruktur-/Ladungsevidenz. |
 | `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md` | Signierter Cross-Channel-Pilot | Je ein `N=100M`-Checkpoint in `d=3/10`: bitgenaue Null-/Produktkontrollen, Antwortumkehr beim Labelprodukt-Flip, aktive Abschirmung gegen `eta_zero` und geringe Radiusstoerung; Architektur-, kein Ladungsbefund. |
 | `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` | autonome One-Way-Quelle | Source bewegt sich nur wenige interne Radien gegenueber der Kernelbreite; Target-Dynamic-vs.-Frozen bleibt sub-threshold, Phase wie freie Kontrolle. |
-| `reports/response/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch | 10.944 Radien Zusatzverschiebung, 46-59 Prozent Source-Radiusverformung und 3.137e-4 Target-Radien Response; kein intakter Transport. |
+| `reports/response/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch mit v0.6 | N100M-Source besteht das Vorlaufgate; 10.944 Radien Zusatzverschiebung, Radiusfaktor 1.55..1.61, Shape-q95 in 3/5 Seeds ueber Gate und 2.332e-4 Target-Radien Response; beschraenkt, aber nicht durchgehend formkohaerent. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

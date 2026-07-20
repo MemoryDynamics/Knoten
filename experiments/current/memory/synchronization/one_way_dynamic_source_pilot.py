@@ -752,6 +752,10 @@ def _plot(
 
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
+    source_q95_max = max(
+        float(row["source_shape_response"]["shape_spectrum_distance_q95"])
+        for row in payload["rows"]
+    )
     lines = [
         "# One-Way Dynamic Scalar-Source Pilot",
         "",
@@ -811,8 +815,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"- Source shape bounded/coherent versus paired unlaunched path: "
         f"{gate['source_shape_bounded_coherent_pass']} "
         f"(median max radius factor {gate['source_max_radius_factor_median']:.3f}; "
-        f"median spectral distance "
-        f"{gate['source_shape_spectrum_distance_median']:.3e}).",
+        f"maximum q95 spectral distance {source_q95_max:.3f}; "
+        f"limit 0.250).",
         f"- Target shape bounded/coherent versus its paired control: "
         f"{gate['target_shape_bounded_coherent_pass']}.",
         f"- Median dynamic angular coherence: "
@@ -830,8 +834,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "| continuation seed | source stationary | source displacement / R | "
         "launch source / R | launch target / R | source max radius factor | "
-        "source spectrum distance |",
-        "|---:|:---:|---:|---:|---:|---:|---:|",
+        "source spectrum median | source spectrum q95 |",
+        "|---:|:---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in payload["rows"]:
         stationarity = row["source_stationarity"]
@@ -843,7 +847,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             f"{row['launch_specific_source_displacement_radii']:.3f} | "
             f"{row['launch_specific_target_response_radii']:.3e} | "
             f"{shape['max_radius_factor']:.3f} | "
-            f"{shape['shape_spectrum_distance_median']:.3e} |"
+            f"{shape['shape_spectrum_distance_median']:.3e} | "
+            f"{shape['shape_spectrum_distance_q95']:.3f} |"
         )
     lines.extend(
         [

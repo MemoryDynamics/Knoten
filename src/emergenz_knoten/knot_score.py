@@ -534,8 +534,8 @@ def score_v0_6_against_control(
     """KnotScore v0.6: v0.5 evidence plus checkpoint eligibility.
 
     Stationarity is an eligibility gate, not evidence of interaction response.
-    The numerical score retains the seven v0.5 components and adds a binary
-    stationarity component; consumers must also inspect eligible_knot_pass.
+    The numerical score retains the seven v0.5 components unchanged; consumers
+    must additionally inspect stationarity_eligible_pass.
     """
 
     score: dict[str, Any] = score_v0_5_against_control(
@@ -546,7 +546,9 @@ def score_v0_6_against_control(
     stationary = bool(stationarity_diagnostics.get("stationary_shape_pass", False))
     score["score_v0_5"] = score_v0_5
     score["stationarity_score"] = 1.0 if stationary else 0.0
-    score["score"] = (7.0 * score_v0_5 + score["stationarity_score"]) / 8.0
+    score["score"] = score_v0_5
     score["stationary_shape_pass"] = stationary
-    score["eligible_knot_pass"] = bool(stationary and score["memory_shape_valid"])
+    score["stationarity_eligible_pass"] = bool(
+        stationary and score["memory_shape_valid"]
+    )
     return score
