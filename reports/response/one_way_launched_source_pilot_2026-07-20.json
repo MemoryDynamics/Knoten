@@ -13,7 +13,7 @@
   "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
   "checkpoint_age_memory_times_alpha_n": 1000000.0,
   "checkpoint_update_index": 100000000,
-  "created_utc": "2026-07-20T09:26:56.501328+00:00",
+  "created_utc": "2026-07-20T09:41:07.185041+00:00",
   "description": "One-way dynamic scalar-source continuation with paired controls.",
   "formation_seed": 1,
   "gate": {
@@ -41,7 +41,7 @@
     "zero_cross_identity_pass": true,
     "zero_cross_max_abs_error": 0.0
   },
-  "git_revision": "e3f053bc69e130fc081d6d69edfa24de5e52f28c",
+  "git_revision": "ff759b51cc1da4cd000611d0ba59e7326609162a",
   "git_status": "",
   "launch": {
     "source_launch_axis": 1,

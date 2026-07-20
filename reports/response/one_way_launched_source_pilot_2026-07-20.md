@@ -1,6 +1,6 @@
 # One-Way Dynamic Scalar-Source Pilot
 
-Date: 2026-07-20T09:26:56.501328+00:00.
+Date: 2026-07-20T09:41:07.185041+00:00.
 
 ## Question
 
@@ -35,7 +35,7 @@ and no-cross controls?
 - Dynamic-versus-frozen source readout above 0.1 target radius: False.
 - Launch-specific source displacement: 10.944 knot radii.
 - Launch-specific target readout above 0.1 target radius: False (2.332e-04 radii).
-- Source shape bounded/coherent versus paired unlaunched path: False (median max radius factor 1.590; median spectral distance 8.882e-16).
+- Source shape bounded/coherent versus paired unlaunched path: False (median max radius factor 1.590; maximum q95 spectral distance 0.273; limit 0.250).
 - Target shape bounded/coherent versus its paired control: True.
 - Median dynamic angular coherence: 0.097 (free 0.097).
 - Median tangential fraction: 0.877.
@@ -46,13 +46,13 @@ and no-cross controls?
 
 ## Seed rows
 
-| continuation seed | source stationary | source displacement / R | launch source / R | launch target / R | source max radius factor | source spectrum distance |
-|---:|:---:|---:|---:|---:|---:|---:|
-| 1 | True | 9.939 | 10.944 | 2.332e-04 | 1.569 | 8.882e-16 |
-| 2 | True | 8.673 | 10.944 | 2.332e-04 | 1.590 | 1.527e-15 |
-| 3 | True | 11.520 | 10.944 | 2.332e-04 | 1.612 | 3.331e-16 |
-| 4 | True | 7.809 | 10.944 | 2.332e-04 | 1.593 | 6.661e-16 |
-| 5 | True | 8.954 | 10.944 | 2.332e-04 | 1.548 | 1.255e-14 |
+| continuation seed | source stationary | source displacement / R | launch source / R | launch target / R | source max radius factor | source spectrum median | source spectrum q95 |
+|---:|:---:|---:|---:|---:|---:|---:|---:|
+| 1 | True | 9.939 | 10.944 | 2.332e-04 | 1.569 | 8.882e-16 | 0.254 |
+| 2 | True | 8.673 | 10.944 | 2.332e-04 | 1.590 | 1.527e-15 | 0.243 |
+| 3 | True | 11.520 | 10.944 | 2.332e-04 | 1.612 | 3.331e-16 | 0.215 |
+| 4 | True | 7.809 | 10.944 | 2.332e-04 | 1.593 | 6.661e-16 | 0.273 |
+| 5 | True | 8.954 | 10.944 | 2.332e-04 | 1.548 | 1.255e-14 | 0.252 |
 
 ## Interpretation limits
 
@@ -71,5 +71,5 @@ and no-cross controls?
 
     python experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py
 
-Git revision: e3f053bc69e130fc081d6d69edfa24de5e52f28c.
+Git revision: ff759b51cc1da4cd000611d0ba59e7326609162a.
 Git status at generation: clean.
