@@ -88,15 +88,15 @@ trunkierte Kurve.
 
 Der Relaxations-Diffusionszweig fuegt modeabhaengigen Zerfall hinzu. Die
 Low-Mode-/AR-Analyse besteht Realraum-, Modenzahl-, Box-, Shuffle- und
-Persistence-Gates. Zwischen N=100k und N=1M bleiben zwei gemeinsame
-interpretierbare aktive Lags mit -2.9 und +9.0 Prozent innerhalb des
-10-Prozent-Gates. Der 5.8-Prozent-Aggregatunterschied ist wegen verschiedener
-Lag-Gitter nur deskriptiv. Das stuetzt eine reduzierte lineare
-Relaxationsbeschreibung, keinen neuen metastabilen Ast.
+Persistence-Gates. Zwischen N=100k und N=1M bleiben zwei aggregierte aktive
+Raten innerhalb des 10-Prozent-Gates. Das stuetzt eine reduzierte lineare
+Vorhersagebeschreibung, keinen neuen metastabilen Ast und noch keinen
+identifizierten einzelnen Modus.
 
-Komplexe Nebenmoden sind ausdruecklich negativ: Sie treten auch fuer
-`eta=0` auf, ihre Frequenz driftet mit N um rund 55 Prozent, und ihr
-Quality-Faktor faellt. Die Erweiterung bleibt ausserhalb des minimalen
+Der Eigenvektor-/Zeitsegment-Audit verfehlt das strikte Realmodus-Gate:
+Match-Anteile 0.72/0.80 und relative Raten-MAD 0.233/0.278 bei 0.2/1.0
+Memory-Zeiten. Komplexe aktive und `eta=0`-Subraeume ueberlappen zugleich
+mit mehr als 0.9999. Die Erweiterung bleibt ausserhalb des minimalen
 Paper-I-Kernclaims und traegt keinen Oszillator-, Photon- oder Phasenclaim.
 Ein dynamisches Relaxations-Diffusionsfeld bleibt eine kontrollierte
 Modellerweiterung: Sein stationaerer Greenkernel ist nicht global
@@ -151,7 +151,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Augmentierter Zustand ist markovsch | strukturell gut | Markov-Kern/Operator sauber zitieren |
 | Memory-Faser kontrahiert pfadweise | beweisbar | Normannahmen klar nennen |
 | Spektrale rho-Reprasentation ist zum exponentiellen Memory aequivalent | strukturell und numerisch gestuetzt in 1D: Historie, Kontraktion, Masse und Kraft getestet; O(M)-Zustand | nur als Reprasentation claimen; periodische Box und Trunkierung offen ausweisen |
-| Niedrige spektrale Features bilden einen praediktiven reduzierten Zustand | lokal in 1D gestuetzt: Leave-one-seed-out-Closure, direkte Realraumhistorie sowie Box-/Modenzahlkontrollen bestehen; zwei gemeinsame interpretierbare Lags bleiben zwischen N=100k und N=1M unter 10 Prozent | Eigenvektor- und Zeitsegment-Mode-Identity; nicht als exakte Markov-Closure ausgeben |
+| Niedrige spektrale Features bilden einen praediktiven reduzierten Zustand | lokal in 1D gestuetzt: Closure und Numerikkontrollen bestehen; zwei aggregierte Raten sind N-stabil, aber der Eigenvektor-/Segmentaudit isoliert keinen stabilen einzelnen reellen Modus | als reduzierte Vorhersagebeschreibung, nicht als exakte Markov-Closure oder physikalische Mode-Identity ausgeben |
 | Relaxations-Diffusionsfeld erzeugt einen feedback-spezifischen komplexen Modus | nicht gestuetzt: komplexe Paare treten auch fuer eta=0 auf, Frequenz driftet mit N um rund 55 Prozent und Q faellt unter 0.2 | als Negativbefund behalten; vor neuer Modellstruktur lineare/Sampling-Herkunft identifizieren |
 | Knoten als metastabile Regime | nicht isoliert: Long-Run-Radien folgen dem finite-memory linearen Modus; das feste-g-Gate zeigt nur eine glatte 6.2%-Korrektur ohne Shape-Umschlag. Die vorregistrierte Regel ist formal inconclusive, ihre Residence-/Score-Stuetzen sind aber skalenverzerrt bzw. nicht diskriminierend | skalares Modell als Kontrollbaseline behalten; dynamisches Feld mit eigenem Zustand, Greenkernel-, Vorzeichen- und eta=0-Kontrollen testen |
 | Baseline/Single-scale zeigen langlebige Residence | nur Legacy-Sign-Befund; der korrigierte attraktive Ast ist stattdessen linear erklaert | nicht als aktuellen Metastabilitaetsclaim verwenden |
@@ -162,7 +162,8 @@ Synchronisation und Propagation reproduzierbar sind.
 | Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
 | Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; Fixed-chi-q-Pilot zeigt zusaetzlich, dass der kompakte Ast bei `R_mem/sigma_rep<=2e-4` nur lokale Steifigkeit identifiziert | breiter Drei-Skalen-Kompensator erfuellt Nullintegral und lokale Kruemmung im `N=1M`-Pilot; als Modellvariante, nicht als Neutralitaetsnachweis berichten |
 | Signierter skalarer Cross-Kanal besitzt exakte Null- und Vorzeichenarme | als Architekturtest gestuetzt: auf je einem `N=100M`-Checkpoint in `d=3/10` sind Null- und Produktarme bitgenau, der Produkt-Flip kehrt die Antwort um und Radiusstoerungen bleiben klein; Labels sind extern vergeben | mindestens 6, bevorzugt 10 unabhaengige Zustaende ohne Retuning und feste Distanzpruefung unter/ueber dem Kraftwechsel |
-| Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | erst unabhaengige Seeds, dann einseitig dynamische Quelle und zuletzt Reziprozitaet; keine Ladungssprache |
+| Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | unabhaengige Formationszustaende und zerstoerungsarmer One-Way-Transport vor Reziprozitaet; keine Ladungssprache |
+| Extern angeschobene skalare Quelle uebertraegt einen koharenten Modus | fuer den getesteten Punkt-Drive nicht gestuetzt: 10.944 Source-Radien Zusatzverschiebung, 46-59 Prozent Radiusverformung und nur 3.137e-4 Target-Radien Response; Phase wie freie Kontrolle | lokalen/retardierten oder orientierten Transportmechanismus mit gepaarter unlaunched Kontrolle testen; keine Reziprozitaet vorher |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

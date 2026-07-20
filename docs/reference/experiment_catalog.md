@@ -47,11 +47,13 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/frozen_source_field_audit.py` | statischer Potential-/Kraftaudit | aktiv | reale Checkpoint-Felder gegen Punktmonopol; Kraftvorzeichen, Paritaetsrest, Tangentialanteil und interne Quellenaufloesung |
 | `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
+| `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | autonome und extern angeschobene Quelle gegen frozen/free/eta-zero/unlaunched; relationale Orbit-/Phasengates |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
 | `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
 | `experiments/current/memory/low_mode_ar_feature_closure.py` | Low-Mode-/AR-Closure | aktiv | gepaarte Seeds, Realraumhistorie, Persistence/Shuffle, Box-/Modenzahlgate und N=1M-Bestaetigung |
 | `experiments/current/memory/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
+| `experiments/current/memory/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
@@ -732,8 +734,9 @@ Modellklasse.
 | `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
 | `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
 | `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |
-| `reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; reelle Rate bleibt kontrollgetrennt, komplexe Nebenmoden bleiben in eta=0. |
-| `reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame interpretierbare aktive Lags bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
+| `reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; aggregierte reelle Rate bleibt von eta=0 getrennt, komplexe Nebenmoden bleiben in eta=0. |
+| `reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame aggregierte aktive Raten bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
+| `reports/memory/low_mode_identity_audit_2026-07-20.md` | Mode-Identity-Audit | Reelle Kandidaten verfehlen Match-/Ratenstabilitaetsgate; komplexe aktive und eta-zero Subraeume ueberlappen >0.9999. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |
@@ -762,6 +765,8 @@ Modellklasse.
 | `reports/response/frozen_source_field_audit_2026-07-17.md` | Frozen-Source-Feldaudit | Der aktuelle `A_att=35`-Kern ist auf allen geprueften Radien attraktiv; reale d3/d10-Quellen sind fuer den Cross-Kernel bereits bei `5 R_mem` punktmonopolartig. |
 | `reports/response/frozen_source_distance_ladder_2026-07-17.md` | Frozen-Source-Distanzleiter | Gleiche realisierte Bare-Antwort ueber sechs Abstaende; kleine distanzabhaengige Targetdeformation, aber voller Ambient-Rang und keine Quellenstruktur-/Ladungsevidenz. |
 | `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md` | Signierter Cross-Channel-Pilot | Je ein `N=100M`-Checkpoint in `d=3/10`: bitgenaue Null-/Produktkontrollen, Antwortumkehr beim Labelprodukt-Flip, aktive Abschirmung gegen `eta_zero` und geringe Radiusstoerung; Architektur-, kein Ladungsbefund. |
+| `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` | autonome One-Way-Quelle | Source bewegt sich nur wenige interne Radien gegenueber der Kernelbreite; Target-Dynamic-vs.-Frozen bleibt sub-threshold, Phase wie freie Kontrolle. |
+| `reports/response/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch | 10.944 Radien Zusatzverschiebung, 46-59 Prozent Source-Radiusverformung und 3.137e-4 Target-Radien Response; kein intakter Transport. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
@@ -830,8 +835,10 @@ Aktiver gestufter Pfad:
 | --- | --- | --- |
 | Vollstaendiger Zustand | erledigt | gemeinsame Translation/Rotation von `x` und Memory, Kraft-/Form-Invarianz |
 | Uniformer Weak Probe | erledigt; isotrope Vollrang-Negativkontrolle | paired response, Nullpfad, `eta_zero`, Signflip-Rang, Linearitaet |
-| Eingefrorener Quellknoten | naechstes Gate | lokalisierte Antwort, Lag, Rang, Subraum- und Orientierungsstabilitaet |
-| Getrennte dynamische Memories | spaeter | one-way/reciprocal response, identity retention, cross-correlation |
+| Eingefrorener Quellknoten | erledigt; Punktmonopol und voller Ambient-Rang | lokalisierte Antwort, Distanzleiter, Null-/Vorzeichenarme |
+| Einseitig dynamische Source | aktuelles negatives Gate | gepaarte unlaunched Source, Identity-Retention, Target-Readout, relationale Orientierung |
+| Zerstoerungsarmer Source-Transport | naechstes Mechanismusgate | koharente Ganzzustandsbewegung oder lokaler/retardierter Feldkanal |
+| Reziproke getrennte Memories | gesperrt bis One-Way-Gate besteht | Balance, Identitaet, Cross-Korrelation, Verhedderungs-/Kollisionskontrolle |
 | Gemeinsames Memory | eigene Modellvariante | Massennormierung, Identitaetsverlust, kollektive Moden |
 
 Guardrail: Diese Stufe behauptet keine Quantenfeldtheorie. Uniforme Vollrang-

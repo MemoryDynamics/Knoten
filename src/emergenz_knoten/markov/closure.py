@@ -33,6 +33,7 @@ class ARSpectrum:
     lag_updates: int
     matrix: np.ndarray
     eigenvalues: np.ndarray
+    feature_eigenvectors: np.ndarray
     rates_per_update: np.ndarray
     angular_frequencies_per_update: np.ndarray
     residual_rms: float
@@ -139,6 +140,58 @@ def leave_one_series_out_closure(
     )
 
 
+def _normalized_feature_eigenvectors(
+    coefficient: np.ndarray,
+    feature_scale: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    eigenvalues, standardized = np.linalg.eig(coefficient.T)
+    physical = np.asarray(
+        feature_scale[:, None] * standardized,
+        dtype=np.complex128,
+    )
+    for column in range(physical.shape[1]):
+        norm = float(np.linalg.norm(physical[:, column]))
+        if norm > 0.0:
+            physical[:, column] /= norm
+        pivot = int(np.argmax(np.abs(physical[:, column])))
+        pivot_value = physical[pivot, column]
+        if abs(pivot_value) > 0.0:
+            physical[:, column] *= np.exp(-1j * np.angle(pivot_value))
+    return eigenvalues, physical
+
+
+def mode_subspace_overlap(
+    reference: np.ndarray,
+    candidate: np.ndarray,
+    *,
+    imaginary_tolerance: float = 1e-10,
+) -> float:
+    """Compare real invariant subspaces represented by two mode vectors."""
+
+    vectors = [np.asarray(value, dtype=np.complex128) for value in (reference, candidate)]
+    if any(value.ndim != 1 for value in vectors):
+        raise ValueError("mode vectors must be one-dimensional")
+    if vectors[0].shape != vectors[1].shape or vectors[0].size < 1:
+        raise ValueError("mode vectors must have equal non-zero shape")
+    if not all(np.isfinite(value).all() for value in vectors):
+        raise ValueError("mode vectors must be finite")
+    if not math.isfinite(imaginary_tolerance) or imaginary_tolerance < 0.0:
+        raise ValueError("imaginary_tolerance must be non-negative and finite")
+
+    bases = []
+    for value in vectors:
+        columns = [value.real]
+        if float(np.linalg.norm(value.imag)) > imaginary_tolerance:
+            columns.append(value.imag)
+        basis, triangular = np.linalg.qr(np.column_stack(columns))
+        rank = int(np.sum(np.abs(np.diag(triangular)) > 1e-12))
+        bases.append(basis[:, :rank])
+    if bases[0].shape[1] != bases[1].shape[1] or bases[0].shape[1] == 0:
+        return 0.0
+    singular_values = np.linalg.svd(bases[0].T @ bases[1], compute_uv=False)
+    return float(np.clip(np.min(singular_values), 0.0, 1.0))
+
+
 def fit_ar_spectrum(
     series: Sequence[np.ndarray],
     *,
@@ -173,7 +226,7 @@ def fit_ar_spectrum(
     x, y = _lagged_xy(standardized, lag)
     coefficient = _fit_ridge(x, y, ridge)
     residual = y - x @ coefficient
-    eigenvalues = np.linalg.eigvals(coefficient)
+    eigenvalues, feature_eigenvectors = _normalized_feature_eigenvectors(coefficient, scale)
     modulus = np.abs(eigenvalues)
     rates = np.full(modulus.shape, np.inf, dtype=float)
     positive = modulus > 0.0
@@ -185,6 +238,7 @@ def fit_ar_spectrum(
         lag_updates=int(lag_updates),
         matrix=np.asarray(coefficient, dtype=float),
         eigenvalues=np.asarray(eigenvalues[order], dtype=np.complex128),
+        feature_eigenvectors=np.asarray(feature_eigenvectors[:, order], dtype=np.complex128),
         rates_per_update=np.asarray(rates[order], dtype=float),
         angular_frequencies_per_update=np.asarray(
             frequencies[order],

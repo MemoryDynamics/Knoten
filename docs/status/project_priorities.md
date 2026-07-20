@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-19.
+Stand: 2026-07-20.
 
 Diese Seite ist die aktive Arbeitsliste. Sie ersetzt die alte Action Matrix
 und den Hardening Plan: Was Codex autonom ziehen kann, steht hier direkt als
@@ -27,11 +27,13 @@ Begruendung:
 - Das feste-g-Gate, die Spektralfeld-Reprasentation und die direkte
   Realraum-Reconciliation sind abgeschlossen. Kleinere epsilon-Werte skalieren
   den lokalen Radius nur proportional.
-- Low-Mode-Closure und N=1M-Bestaetigung isolieren einen kontrollgetrennten,
-  N-stabilen reellen Relaxationsmodus. Komplexe Nebenmoden sind weder
-  N-stabil noch von `eta=0` getrennt; sie tragen keinen Oszillatorclaim.
-- Der aktuelle Engpass ist daher Modenidentifikation statt weiterer Heat-
-  Feld-Long-Runs. Erst danach wird genau ein neuer Mechanismus geoeffnet.
+- Low-Mode-Closure und N=1M-Bestaetigung stuetzen eine praediktive reduzierte
+  Relaxationsbeschreibung. Der Eigenvektor-/Segmentaudit isoliert jedoch
+  keinen stabilen einzelnen reellen Modus; die fruehere Formulierung
+  "N-stabiler reeller Modus" war zu stark.
+- Komplexe Nebenmoden sind weder von `eta=0` getrennt noch segmentstabil und
+  tragen keinen Oszillatorclaim.
+- Der aktuelle Engpass ist ein zerstoerungsarmer dynamischer Quellmechanismus,
 
 ## P0: Abgeschlossen fuer den Moment
 
@@ -307,6 +309,18 @@ Naechster operativer Schritt:
     Residence-/KnotScore-Befund verzerren; co-moving Residence ist dagegen
     auch fuer eta=0 gesaettigt und nicht diskriminierend. Kein metastabiler
     Skalarast ist damit isoliert.
+35. Abgeschlossen: Eigenvektor- und Zeitsegment-Mode-Identity auf fuenf Seeds
+    und fuenf Segmenten. Der aktive reelle Kandidat erreicht zwar nahezu
+    identische Feature-Subraeume, verfehlt aber Match-/Ratenstabilitaetsgates;
+    der komplexe Kandidat ueberlappt mit eta=0 zu mehr als 0.9999.
+    Report: `reports/memory/low_mode_identity_audit_2026-07-20.md`.
+36. Abgeschlossen: autonome und extern angeschobene One-Way-Source gegen
+    frozen/free/eta-zero und gepaarte unlaunched Kontrolle. Die autonome Quelle
+    bewegt sich nur wenige interne Radien gegenueber `sigma_rep/R ~=4724`.
+    Der 0.1-sigma-Launch verschiebt sie zusaetzlich um 10.944 Radien, erzeugt
+    aber 46-59 Prozent zusaetzliche Radiusverformung und nur
+    `3.137e-4` Target-Radien Response. Kein Orbit-/Phasen- oder
+    Propagationsbefund; Reziprozitaet bleibt gesperrt.
 
 Aktueller naechster Schritt:
 
@@ -315,12 +329,17 @@ Aktueller naechster Schritt:
   eta und M0 sind darin nicht getrennt identifizierte Physikparameter.
 - Kein weiterer dichter Amplituden-, Epsilon- oder Heat-Diffusionsscan: Die
   beobachteten Aeste sind glatt und als Relaxation erklaert.
-- Die spektrale Rechenbasis ist gegen endliche Realraumhistorie, Modenzahl,
-  Boxlaenge, `nu=0`, `eta=0` und N geprueft.
-- Naechster autonomer Schritt: komplexe Kontrollmoden mit Eigenvektor-Matching,
-  Zeitsegmenten und analytischer linearer Zustandsraumreferenz identifizieren.
-- Erst nach diesem Negativkontroll-Audit genau einen Mechanismus oeffnen:
-  lokalen Uebertragungskanal oder orientiertes/Vektormemory.
+- Mode-Identity ist abgeschlossen. Tragbar ist reduzierte Vorhersagbarkeit,
+  nicht die Identitaet eines einzelnen reellen oder komplexen Eigenmodus.
+- Naechster Mechanismusschritt: einen zerstoerungsarmen Quelltransport
+  formulieren und falsifizieren. Ein Punkt-Drive verschiebt x gegen sein
+  eigenes Memory und deformiert den Knoten; er ist kein brauchbarer Ersatz
+  fuer koharente Ganzzustands-Translation oder lokale Felduebertragung.
+- Das Gate verlangt gepaarte unlaunched Kontrollen, erhaltene Source-Shape,
+  eine targetseitige Response oberhalb des Rausch-/Frozen-Niveaus und
+  Zeitverzoegerung bei lokaler Kopplung.
+- Reziproke Kopplung und orientiertes/Vektormemory erst nach Bestehen dieses
+  One-Way-Gates; sonst waere ihre Interpretation nicht identifizierbar.
 - Residence-/Score-Vergleiche ueber veraenderte Radius-Skalen muessen
   raumnormierte Bins verwenden oder die Voxel/R-Sensitivitaet offen ausweisen.
   Rekreuzung bleibt kein eigenes Ziel.
@@ -372,7 +391,7 @@ Prioritaet:
 
 ### P1.5 Ressourcenbegrenztes Memory-Feld
 
-Status: Spektrale Reprasentation, Low-Mode-Closure und N=1M-Reconciliation abgeschlossen.
+Status: Spektrale Reprasentation, Closure, N-Reconciliation und Mode-Identity-Audit abgeschlossen.
 
 - `rho_hat` speichert dasselbe exponentielle skalare Memory mit festem
   O(M)-Zustand. Bei `M=64` benoetigt ein Feldzustand 1040 Bytes.
@@ -388,35 +407,38 @@ Status: Spektrale Reprasentation, Low-Mode-Closure und N=1M-Reconciliation abges
 - Der Low-Mode-Trace speichert translation-invariante Fourierfeatures und
   Realraum-Stuetzstellen. Die direkte 2000-Update-Historie begrenzt den
   Kraftfehler wie erwartet durch den geometrischen Memory-Schwanz.
-- Das N=100k-Gate besteht Closure und Numerik. Beim N=1M-Lauf bleiben zwei
-  gemeinsame interpretierbare aktive Lags unter 10 Prozent; `eta=0` bleibt
-  stabil getrennt.
-- Komplexe Nebenmoden scheitern: Frequenz und Q driften mit N, und `eta=0`
-  zeigt dieselben Klassen. Kein Phasen-, Photon- oder Oszillatorbefund.
+- Das N=100k-Gate besteht Closure und Numerik. Die N-Reconciliation stuetzt
+  zwei aggregierte aktive Raten, aber nicht die Identitaet eines einzelnen
+  segmentstabilen Eigenmodus.
+- Der Mode-Identity-Audit verfehlt das strikte Realmodus-Gate: Match-Anteile
+  0.72/0.80 und relative Raten-MAD 0.233/0.278 bei 0.2/1.0 Memory-Zeiten.
+- Komplexe Feature-Subraeume ueberlappen zwischen aktiv und `eta=0` mit
+  mehr als 0.9999. Kein Phasen-, Photon- oder Oszillatorbefund.
 
 Naechstes Gate:
 
-1. Eigenvektor-basiertes Mode-Matching und Zeitsegment-Stabilitaet auf
-   deterministisch reproduzierten Traces; keine neue Parameterachse. Kuenftig
-   kompakte AR-Matrizen bzw. Segmentstatistiken statt kompletter Traces speichern.
-2. Analytische lineare Referenz fuer die komplexen `eta=0`-Nebenmoden
+1. Analytische lineare Referenz fuer die komplexen `eta=0`-Nebenmoden
    ableiten und gegen Sampling-/Feature-Artefakte testen.
-3. Nur danach genau eine neue Modellstruktur oeffnen: lokaler
-   Uebertragungskanal oder orientiertes/Vektormemory.
-4. Direkte Realraumhistorie bleibt Validierungskanal fuer jede spektrale
+2. Kuenftig kompakte AR-Matrizen und Segmentstatistiken statt kompletter
+   reproduzierter Traces persistieren.
+3. Direkte Realraumhistorie bleibt Validierungskanal fuer jede spektrale
    Variante. Harte Propagation bleibt fuer das Heat-Feld ausgeschlossen.
+4. Der getrennte One-Way-Quelltest priorisiert nun einen lokalen oder
+   orientierten Transportmechanismus; keine weitere Heat-Parameterachse.
 
 ### P2.1 Transferoperator auf Long-Run-Daten
 
-Status: Paket-Closure, Low-Mode-Long-Run und Kontrollen erledigt; kein oszillatorischer oder metastabiler Transferoperatorbefund.
+Status: Paket-Closure, Low-Mode-Long-Run, Kontrollen und Mode-Identity erledigt; kein oszillatorischer oder metastabiler Transferoperatorbefund.
 
 - `markov.closure` bietet getestete Leave-one-seed-out-Closure,
-  Persistence-/Shuffle-Kontrollen und lag-normalisierte AR-Spektren.
-- Der skalare Low-Mode-Zustand ist vorhersagbar; zwei gemeinsame
-  interpretierbare Lags sind zwischen N=100k und N=1M stabil und kontrollgetrennt.
-- Komplexe Paare sind weder N-stabil noch spezifisch gegen `eta_zero`.
-- Naechste Haertung ist Mode-Identity ueber Eigenvektoren und Zeitsegmente,
-  nicht ein weiterer Parametersweep.
+  Persistence-/Shuffle-Kontrollen, lag-normalisierte AR-Spektren und
+  Feature-Eigenvektor-Subraumvergleiche.
+- Der skalare Low-Mode-Zustand ist vorhersagbar, aber die segmentweisen Fits
+  isolieren keinen stabilen einzelnen reellen Eigenmodus.
+- Komplexe Paare sind nicht spezifisch gegen `eta_zero`; ihre aktiven und
+  eta-null Feature-Subraeume sind praktisch identisch.
+- Naechste Haertung ist die analytische Herkunft der Nullkontrollmoden und
+  persistierte Fit-Provenienz, nicht ein weiterer Parametersweep.
 - PCCA/HMM/PMM erst bei einem nachgewiesenen nichtlinearen oder mehrzustandigen
   Regime pruefen.
 

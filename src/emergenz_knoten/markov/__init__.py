@@ -11,6 +11,7 @@ from .closure import (
     analytic_field_mode_multiplier,
     fit_ar_spectrum,
     leave_one_series_out_closure,
+    mode_subspace_overlap,
 )
 from .dataset import (
     AugmentedTrajectory,
@@ -60,6 +61,7 @@ __all__ = [
     "critical_gamma",
     "estimate_transfer_operator",
     "fit_ar_spectrum",
+    "mode_subspace_overlap",
     "implied_relaxation_rates",
     "implied_timescales",
     "lagged_pairs",

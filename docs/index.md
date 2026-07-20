@@ -61,12 +61,18 @@ Sweeps sind nicht priorisiert.
 Die Spektralfeldschicht stellt dasselbe exponentielle rho mit 64 Moden und
 rund 1 KB Zustandspeicher dar; eine endliche Realraumhistorie validiert die
 Kraft bis zum erwarteten Memory-Tail. Low-Mode-/AR-Closure, Box-/Modenzahlgate
-und ein N=1M-Lauf stuetzen eine kontrollgetrennte reelle Relaxationsrate.
-Komplexe Nebenmoden sind nicht `eta=0`-spezifisch und driften mit N; damit
-kein Oszillator-, Photon-, Metastabilitaets- oder Propagationsbefund.
-Naechster Schritt ist Mode-Identity auf deterministisch reproduzierbaren
-Traces und spaeter persistierten AR-Matrizen, nicht ein weiterer Diffusions-
-oder Epsilon-Sweep.
+und ein N=1M-Lauf stuetzen eine reduzierte Vorhersagebeschreibung. Der
+Eigenvektor-/Zeitsegmentaudit isoliert jedoch keinen stabilen einzelnen
+reellen Modus; komplexe aktive und `eta=0`-Subraeume sind praktisch
+identisch. Damit kein Oszillator-, Photon-, Metastabilitaets- oder
+Propagationsbefund.
+
+Der erste One-Way-Quelltest ist ebenfalls negativ, aber richtungsweisend:
+Autonome Source-Bewegung ist klein auf Kernel-Skala; ein externer Punkt-Drive
+verformt die Source stark und erzeugt nur eine sub-threshold Targetantwort.
+Naechster Mechanismusschritt ist daher zerstoerungsarmer Source-Transport oder
+ein lokaler/retardierter Feldkanal. Reziproke Kopplung bleibt bis dahin
+gesperrt.
 
 ## Nicht ueberclaimen
 

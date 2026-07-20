@@ -73,6 +73,7 @@ CATEGORIES = {
     ],
     "memory": [
         "current/memory/low_mode_ar_feature_closure.py",
+        "current/memory/low_mode_identity_audit.py",
         "current/memory/reconcile_low_mode_ar_runs.py",
         "current/memory/relaxation_diffusion_field_pilot.py",
         "current/memory/spectral_rho_field_pilot.py",
@@ -83,6 +84,7 @@ CATEGORIES = {
         "current/memory/synchronization/frozen_source_field_audit.py",
         "current/memory/synchronization/frozen_source_distance_ladder.py",
         "current/memory/synchronization/signed_cross_channel_pilot.py",
+        "current/memory/synchronization/one_way_dynamic_source_pilot.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",

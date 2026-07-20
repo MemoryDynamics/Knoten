@@ -1,0 +1,325 @@
+{
+  "calibration": {
+    "cross_eta": 2.0715793129698226e-08,
+    "initial_target_radius": 0.00021165345794842206,
+    "pulse_steps_reference": 100,
+    "response_fraction_per_memory": 0.03,
+    "source_center_offset": [
+      1.0,
+      0.0,
+      0.0
+    ]
+  },
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "created_utc": "2026-07-20T06:24:48.536703+00:00",
+  "description": "One-way dynamic scalar-source continuation with paired controls.",
+  "formation_seed": 1,
+  "gate": {
+    "dynamic_angular_orientation_coherence_median": 0.04248944853645328,
+    "dynamic_dephasing_memory_times_median": 0.2,
+    "dynamic_source_readout_pass": false,
+    "dynamic_tangential_fraction_median": 0.8649960030726104,
+    "free_angular_orientation_coherence_median": 0.04248960241340407,
+    "interaction_readout_pass": false,
+    "launch_specific_source_displacement_radii_median": 0.0,
+    "launch_specific_target_readout_pass": false,
+    "launch_specific_target_response_radii_median": 0.0,
+    "nondestructive_source_pass": true,
+    "nondestructive_target_pass": true,
+    "relational_phase_candidate_pass": false,
+    "zero_cross_identity_pass": true,
+    "zero_cross_max_abs_error": 0.0
+  },
+  "git_revision": "4c136fc6630e4cb5868d6f87c41754511650d709",
+  "git_status": "M docs/index.md\n M docs/reference/THEORETICAL_CONTEXT.md\n M docs/reference/experiment_catalog.md\n M docs/reference/repository_map.md\n M docs/status/current_status.md\n M docs/status/paper_claims.md\n M docs/status/project_priorities.md\n M experiments/cli.py\n M experiments/current/memory/synchronization/README.md\n M src/emergenz_knoten/__init__.py\n M src/emergenz_knoten/markov/__init__.py\n M src/emergenz_knoten/markov/closure.py\n M tests/test_markov_closure.py\n?? experiments/current/memory/low_mode_identity_audit.py\n?? experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py\n?? figures/draft/memory/low_mode_identity_audit_2026-07-20.png\n?? figures/draft/response/one_way_dynamic_source_pilot_2026-07-20.png\n?? figures/draft/response/one_way_launched_source_pilot_2026-07-20.png\n?? reports/memory/low_mode_identity_audit_2026-07-20.json\n?? reports/memory/low_mode_identity_audit_2026-07-20.md\n?? reports/response/one_way_dynamic_source_pilot_2026-07-20.json\n?? reports/response/one_way_dynamic_source_pilot_2026-07-20.md\n?? reports/response/one_way_launched_source_pilot_2026-07-20.json\n?? reports/response/one_way_launched_source_pilot_2026-07-20.md\n?? src/emergenz_knoten/coupled_nodes.py\n?? tests/test_coupled_nodes.py\n?? tests/test_mode_and_source_gates.py",
+  "launch": {
+    "source_launch_axis": 1,
+    "source_launch_memory_times": 10.0,
+    "source_launch_sigma_rep": 0.0
+  },
+  "model": {
+    "alpha": 0.01,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15
+  },
+  "parameters": {
+    "continuation_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "max_ac_memory_times": 50.0,
+    "response_fraction_per_memory": 0.03,
+    "sample_every": 20,
+    "separation_sigma_rep": 1.0,
+    "source_launch_axis": 1,
+    "source_launch_memory_times": 10.0,
+    "source_launch_sigma_rep": 0.0,
+    "steps": 20000
+  },
+  "rows": [
+    {
+      "continuation_seed": 1,
+      "dynamic_minus_free_final_radii": 0.1389320687357781,
+      "dynamic_minus_frozen_final_radii": 2.067899048267711e-05,
+      "dynamic_separation_final": 0.9997381548176512,
+      "dynamic_separation_initial": 0.9999999999999974,
+      "dynamic_separation_ratio": 0.9997381548176537,
+      "launch_specific_source_displacement_radii": 0.0,
+      "launch_specific_target_response_radii": 0.0,
+      "max_active_target_radius_disturbance": 0.00016320868516472853,
+      "max_eta_zero_radius_disturbance": 8.09160797609534,
+      "max_launch_specific_source_radius_effect": 0.0,
+      "max_source_radius_disturbance": 0.11168907732864675,
+      "orbital_metrics": {
+        "dynamic_source": {
+          "angular_momentum_norm_median": 8.040045451170608e-07,
+          "angular_orientation_coherence": 0.04248944853645328,
+          "angular_speed_median_per_memory_time": 8.040167291351121e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8711165110158683
+        },
+        "eta_zero_dynamic": {
+          "angular_momentum_norm_median": 8.83007715919807e-06,
+          "angular_orientation_coherence": 0.08122388588709191,
+          "angular_speed_median_per_memory_time": 0.0008848173669036894,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 1.2000000000000002,
+          "tangential_fraction_median": 0.8806596085604325
+        },
+        "free": {
+          "angular_momentum_norm_median": 8.040142118035092e-07,
+          "angular_orientation_coherence": 0.04248960241340407,
+          "angular_speed_median_per_memory_time": 8.04007040034552e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8719756648697061
+        },
+        "frozen_source": {
+          "angular_momentum_norm_median": 5.849849310862752e-07,
+          "angular_orientation_coherence": 0.026661588494799885,
+          "angular_speed_median_per_memory_time": 5.850627096123193e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8649222851860998
+        }
+      },
+      "source_displacement_radii": 2.131712403133352,
+      "source_launch_axis": 1,
+      "source_launch_sigma_rep": 0.0,
+      "source_launch_steps": 1000
+    },
+    {
+      "continuation_seed": 2,
+      "dynamic_minus_free_final_radii": 0.13894025667993543,
+      "dynamic_minus_frozen_final_radii": 2.1374642529024465e-05,
+      "dynamic_separation_final": 1.0003599899615903,
+      "dynamic_separation_initial": 0.9999999999999974,
+      "dynamic_separation_ratio": 1.000359989961593,
+      "launch_specific_source_displacement_radii": 0.0,
+      "launch_specific_target_response_radii": 0.0,
+      "max_active_target_radius_disturbance": 0.00015108510760342142,
+      "max_eta_zero_radius_disturbance": 8.216040641344943,
+      "max_launch_specific_source_radius_effect": 0.0,
+      "max_source_radius_disturbance": 0.15720952742949357,
+      "orbital_metrics": {
+        "dynamic_source": {
+          "angular_momentum_norm_median": 8.28260419253412e-07,
+          "angular_orientation_coherence": 0.024356737221437663,
+          "angular_speed_median_per_memory_time": 8.283822478694314e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.863347792221554
+        },
+        "eta_zero_dynamic": {
+          "angular_momentum_norm_median": 8.675196895391849e-06,
+          "angular_orientation_coherence": 0.017618842917204176,
+          "angular_speed_median_per_memory_time": 0.0008637549255212803,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 1.0,
+          "tangential_fraction_median": 0.869569115330682
+        },
+        "free": {
+          "angular_momentum_norm_median": 8.282741317373358e-07,
+          "angular_orientation_coherence": 0.024357188123324127,
+          "angular_speed_median_per_memory_time": 8.283687084191142e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8633666927424415
+        },
+        "frozen_source": {
+          "angular_momentum_norm_median": 5.869265699969316e-07,
+          "angular_orientation_coherence": 0.005951923409540322,
+          "angular_speed_median_per_memory_time": 5.867855310929889e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.876749568539016
+        }
+      },
+      "source_displacement_radii": 2.5465126559580056,
+      "source_launch_axis": 1,
+      "source_launch_sigma_rep": 0.0,
+      "source_launch_steps": 1000
+    },
+    {
+      "continuation_seed": 3,
+      "dynamic_minus_free_final_radii": 0.1389967585180104,
+      "dynamic_minus_frozen_final_radii": 3.874012019516981e-05,
+      "dynamic_separation_final": 1.0004805231789744,
+      "dynamic_separation_initial": 0.9999999999999974,
+      "dynamic_separation_ratio": 1.000480523178977,
+      "launch_specific_source_displacement_radii": 0.0,
+      "launch_specific_target_response_radii": 0.0,
+      "max_active_target_radius_disturbance": 0.0001676806198867009,
+      "max_eta_zero_radius_disturbance": 8.693265585806667,
+      "max_launch_specific_source_radius_effect": 0.0,
+      "max_source_radius_disturbance": 0.1442023815724035,
+      "orbital_metrics": {
+        "dynamic_source": {
+          "angular_momentum_norm_median": 8.193881595582386e-07,
+          "angular_orientation_coherence": 0.02614873111894889,
+          "angular_speed_median_per_memory_time": 8.184657977499906e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8814513783227635
+        },
+        "eta_zero_dynamic": {
+          "angular_momentum_norm_median": 8.551338028325315e-06,
+          "angular_orientation_coherence": 0.09218781554834701,
+          "angular_speed_median_per_memory_time": 0.0008378689043817971,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 1.4000000000000001,
+          "tangential_fraction_median": 0.8480495507126802
+        },
+        "free": {
+          "angular_momentum_norm_median": 8.194067322077609e-07,
+          "angular_orientation_coherence": 0.02614885712292208,
+          "angular_speed_median_per_memory_time": 8.18447262998706e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.880964718098792
+        },
+        "frozen_source": {
+          "angular_momentum_norm_median": 5.812424745202242e-07,
+          "angular_orientation_coherence": 0.03287257805443219,
+          "angular_speed_median_per_memory_time": 5.809855313360347e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8687380208791708
+        }
+      },
+      "source_displacement_radii": 1.6464351986897847,
+      "source_launch_axis": 1,
+      "source_launch_sigma_rep": 0.0,
+      "source_launch_steps": 1000
+    },
+    {
+      "continuation_seed": 4,
+      "dynamic_minus_free_final_radii": 0.13891891068769263,
+      "dynamic_minus_frozen_final_radii": 6.823281173586848e-05,
+      "dynamic_separation_final": 0.999539358889799,
+      "dynamic_separation_initial": 0.9999999999999974,
+      "dynamic_separation_ratio": 0.9995393588898015,
+      "launch_specific_source_displacement_radii": 0.0,
+      "launch_specific_target_response_radii": 0.0,
+      "max_active_target_radius_disturbance": 0.00015121221496328108,
+      "max_eta_zero_radius_disturbance": 8.163921391461294,
+      "max_launch_specific_source_radius_effect": 0.0,
+      "max_source_radius_disturbance": 0.1350869115681722,
+      "orbital_metrics": {
+        "dynamic_source": {
+          "angular_momentum_norm_median": 7.974941495257197e-07,
+          "angular_orientation_coherence": 0.07942766073722334,
+          "angular_speed_median_per_memory_time": 7.980666709926372e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8649960030726104
+        },
+        "eta_zero_dynamic": {
+          "angular_momentum_norm_median": 7.436136471489302e-06,
+          "angular_orientation_coherence": 0.1760197431282943,
+          "angular_speed_median_per_memory_time": 0.0007391819766664773,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 1.2000000000000002,
+          "tangential_fraction_median": 0.8169530607118138
+        },
+        "free": {
+          "angular_momentum_norm_median": 7.975139655237479e-07,
+          "angular_orientation_coherence": 0.07942781128667528,
+          "angular_speed_median_per_memory_time": 7.980543828282851e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.865122304956855
+        },
+        "frozen_source": {
+          "angular_momentum_norm_median": 5.683310364524329e-07,
+          "angular_orientation_coherence": 0.0553347538756516,
+          "angular_speed_median_per_memory_time": 5.681540124952436e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8603289132726444
+        }
+      },
+      "source_displacement_radii": 4.4683958756982785,
+      "source_launch_axis": 1,
+      "source_launch_sigma_rep": 0.0,
+      "source_launch_steps": 1000
+    },
+    {
+      "continuation_seed": 5,
+      "dynamic_minus_free_final_radii": 0.13892926491723853,
+      "dynamic_minus_frozen_final_radii": 3.0532074389368334e-05,
+      "dynamic_separation_final": 1.0003434300182736,
+      "dynamic_separation_initial": 0.9999999999999974,
+      "dynamic_separation_ratio": 1.0003434300182763,
+      "launch_specific_source_displacement_radii": 0.0,
+      "launch_specific_target_response_radii": 0.0,
+      "max_active_target_radius_disturbance": 0.00015725355889717463,
+      "max_eta_zero_radius_disturbance": 9.0448587232728,
+      "max_launch_specific_source_radius_effect": 0.0,
+      "max_source_radius_disturbance": 0.13791881453199883,
+      "orbital_metrics": {
+        "dynamic_source": {
+          "angular_momentum_norm_median": 8.028372381190756e-07,
+          "angular_orientation_coherence": 0.053884605792453334,
+          "angular_speed_median_per_memory_time": 8.028579624468274e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8628513121692272
+        },
+        "eta_zero_dynamic": {
+          "angular_momentum_norm_median": 7.486328091227442e-06,
+          "angular_orientation_coherence": 0.07919835190373914,
+          "angular_speed_median_per_memory_time": 0.0007557076349223524,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 1.0,
+          "tangential_fraction_median": 0.8407881100250529
+        },
+        "free": {
+          "angular_momentum_norm_median": 8.028462276807621e-07,
+          "angular_orientation_coherence": 0.053884800757223704,
+          "angular_speed_median_per_memory_time": 8.028490107711022e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8627575742883394
+        },
+        "frozen_source": {
+          "angular_momentum_norm_median": 5.722486199889993e-07,
+          "angular_orientation_coherence": 0.024291955108183428,
+          "angular_speed_median_per_memory_time": 5.724205059900984e-05,
+          "dephasing_censored": false,
+          "dephasing_memory_times": 0.2,
+          "tangential_fraction_median": 0.8586047983866767
+        }
+      },
+      "source_displacement_radii": 3.3076805737251123,
+      "source_launch_axis": 1,
+      "source_launch_sigma_rep": 0.0,
+      "source_launch_steps": 1000
+    }
+  ]
+}

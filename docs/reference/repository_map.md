@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-19.
+Stand: 2026-07-20.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -20,7 +20,7 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft/result figures"]
 
-    experiments --> sync_exp["synchronization/<br/>weak probe, frozen field audit, distance ladder"]
+    experiments --> sync_exp["synchronization/<br/>frozen, signed and one-way source gates"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
@@ -28,11 +28,13 @@ flowchart TD
     experiments --> diffusion_exp["relaxation_diffusion_field_pilot.py<br/>mode-dependent field gate"]
     experiments --> low_mode_exp["low_mode_ar_feature_closure.py<br/>real-space + AR control gate"]
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
+    experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
     experiments --> comp_pilot["three_scale_compensation_pilot.py<br/>exact zero integral + curvature match"]
     experiments --> signed_pilot["signed_cross_channel_pilot.py<br/>null/product/label-flip gate"]
+    experiments --> one_way_exp["one_way_dynamic_source_pilot.py<br/>paired moving-source controls"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
@@ -50,10 +52,12 @@ flowchart TD
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
+    src --> coupled["coupled_nodes.py<br/>one-way source + relational observables"]
     src --> signed["signed_cross_channel.py<br/>separate signed scalar cross coupling"]
     src --> continuation["_continuation.py<br/>shared Numba continuation primitives"]
     probe --> continuation
     frozen --> continuation
+    coupled --> continuation
     signed --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
@@ -61,7 +65,7 @@ flowchart TD
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
 
-    markov --> closure_api["closure.py<br/>cross-seed AR skill + normalized modes"]
+    markov --> closure_api["closure.py<br/>AR skill + physical feature eigenspaces"]
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
     markov --> transition["transition.py<br/>labels, counts, transition matrices"]
@@ -163,9 +167,9 @@ flowchart LR
     mediator --> smooth["pilot: smooth weakening<br/>no new branch"]
     smooth --> closure["low-mode AR closure<br/>real-space / nu=0 / eta=0 gates pass"]
     closure --> longmode["N=1M / 10,000 memory times"]
-    longmode --> realmode["real rate N-stable<br/>control separated"]
-    longmode --> complexfail["complex side modes<br/>N-drift + eta=0"]
-    complexfail --> identity["next: eigenvector + segment<br/>mode identity audit"]
+    longmode --> realmode["aggregate real rates<br/>N gate passes"]
+    longmode --> complexfail["complex side modes<br/>eta=0 subspace overlap"]
+    complexfail --> identity["mode identity complete<br/>no stable single eigenmode"]
 ```
 
 The reduced scalar trajectory identifies the product eta M0 A_att, not its
@@ -205,14 +209,16 @@ flowchart LR
     fieldaudit --> compgate["kernel compensation gate<br/>exact zero integral + curvature match complete"]
     ladder --> compgate
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
-    channel --> seeds["next: 6-10 independent states<br/>no retuning"]
-    channel --> distance["next: fixed-coupling distances<br/>below / above force crossing"]
-    seeds --> multi["later: one-way dynamic source"]
-    distance --> multi
-    multi --> reciprocal["later: reciprocal knots<br/>identity + balance diagnostics"]
+    channel --> seeds["later: 6-10 independent states<br/>no retuning"]
+    channel --> one_way["one-way dynamic source complete<br/>dynamic / frozen / free / eta-zero"]
+    one_way --> launch["paired point launch<br/>source deforms; target sub-threshold"]
+    launch --> transport["next: coherent whole-state or<br/>local / retarded transport"]
+    transport -.gate.-> reciprocal["later: reciprocal knots<br/>identity + balance diagnostics"]
+    seeds -.formation gate.-> reciprocal
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
-    multi --> delta
+    one_way --> delta
+    launch --> delta
 ```
 
 The checkpoint is complete for the implemented finite-memory approximation.
@@ -224,7 +230,8 @@ array. Independent seeds remain necessary for inferential claims.
 
 - `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
   Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
-  `frozen_source.py`, `signed_cross_channel.py` und `synchronization.py`.
+  `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py` und
+  `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem
   Zerfall die Dynamik; `spectral_memory_trace.py` validiert niedrige Moden

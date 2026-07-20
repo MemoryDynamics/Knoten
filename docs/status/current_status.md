@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-19.
+Stand: 2026-07-20.
 
 ## Repository
 
@@ -46,6 +46,10 @@ Stand: 2026-07-19.
   Selbst-/Kreuzkopplung, gepaarten Quelllagen, freiem Pfad und exakter
   Null-Kreuzkopplungskontrolle; Kreuzkopplung kann auf die anfaengliche
   Richtungsdrift oder die realisierte Common-Noise-Bare-Antwort kalibriert werden.
+- `coupled_nodes.py`: einseitig dynamische Source mit frozen/free/eta-zero-
+  Targetkontrollen, optionalem externem Source-Drive und relationalen radialen,
+  tangentialen sowie antisymmetrischen Drehimpulsobservablen; gemeinsames
+  Target-Rauschen isoliert die Kreuzantwort.
 - `markov/`: additive Markov-/Transferoperator-Schicht mit reduzierten
   augmentierten Features, Lagged Datasets, Transition Counts,
   row-stochastic operators, implied timescales, CK-Fehlern und slow-mode
@@ -123,22 +127,29 @@ reproduziert die spektrale Kraft bis `1.87e-9`; 32/64/128 Moden und
 matched-resolution Boxen aendern Radius/Kraft um hoechstens `5.50e-5`.
 
 Der anschliessende `N=1M`-Lauf umfasst 10,000 Memory-Zeiten. Beim
-Diffusionsverhaeltnis 0.3 bleiben die zwei gemeinsamen interpretierbaren
-aktiven Lags mit -2.9 und +9.0 Prozent innerhalb der 10-Prozent-Schranke.
-Der aggregierte Median `0.729 -> 0.771` ist deskriptiv, weil sich die
-vollstaendigen Lag-Gitter unterscheiden; die `eta=0`-Rate bleibt
-`0.2562 -> 0.2563`. Das Verhaeltnis 0.3 wurde explorativ im Kurzlauf
-gewaehlt und vor N=1M eingefroren.
-Die komplexe Nebenmode ist dagegen negativ reconciliiert: ihre gefittete
-Frequenz verschiebt sich `0.475 -> 0.212`, ihr `Q` faellt
-`0.342 -> 0.140`, und stabile komplexe Paare treten an allen geprueften
-Lags auch fuer `eta=0` auf. Das ist ein kontrollgetrennter reeller
-Relaxationsbefund, kein Oszillator.
+Diffusionsverhaeltnis 0.3 bleiben zwei aggregierte aktive Raten zwischen
+N=100k und N=1M innerhalb der vorregistrierten 10-Prozent-Schranke. Das
+stuetzt eine reduzierte lineare Vorhersagebeschreibung, identifiziert aber
+noch keinen einzelnen physikalischen Modus.
+
+Der nachgeschobene Eigenvektor-/Zeitsegment-Audit korrigiert die staerkere
+Lesart: Der aktive reelle Kandidat erreicht bei 0.2/1.0 Memory-Zeiten
+Match-Anteile von 0.72/0.80 und relative Raten-MAD von 0.233/0.278; damit
+scheitert das strikte Mode-Identity-Gate. Die nahezu eins betragenden
+Subraumueberlappungen allein genuegen nicht, weil Kandidaten fehlen oder ihre
+Raten segmentweise driften.
+
+Komplexe Nebenmoden sind noch deutlicher negativ: Die aktiven und
+`eta=0`-Referenzsubraeume ueberlappen bei beiden Lags mit mehr als 0.9999;
+im `nu=0`-Arm fehlt im Audit ein komplexer Referenzmodus. Das ist Evidenz
+fuer einen Fit-/Sampling-/Repraesentationsmodus, nicht fuer einen
+Oszillator.
 
 Reports:
 `reports/memory/low_mode_ar_feature_closure_2026-07-19.md`,
-`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` und
-`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md`.
+`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md`,
+`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` und
+`reports/memory/low_mode_identity_audit_2026-07-20.md`.
 
 ## Paper-Status
 
@@ -237,6 +248,20 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Kreuzkanal und kein Neutralitaets-, Ladungs-, Reziprozitaets- oder 3D-Claim.
   Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` und
   `reports/response/frozen_source_distance_ladder_2026-07-17.md`.
+- One-Way-Source-Pilot 2026-07-20: Eine autonom fortgesetzte Quelle aus dem
+  d=3-`N=100M`-Checkpoint bewegt sich in 200 Memory-Zeiten nur etwa
+  `1.6..4.5` interne Knotenradien; eine Kernelbreite entspricht etwa
+  4724 Radien. Dynamic-vs.-frozen Targetantwort bleibt bei
+  `2.1e-5..6.8e-5` Radien, und Winkelkohaerenz/Dephasierung unterscheiden
+  sich nicht von der freien Kontrolle.
+- Ein gepaarter externer Launch von `0.1 sigma_rep` ueber zehn Memory-Zeiten
+  verursacht seedunabhaengig `10.944` Radien zusaetzliche Source-Verschiebung,
+  aber nur `3.137e-4` Target-Radien Response. Gleichzeitig veraendert sich
+  der Source-Radius gegenueber der identischen unlaunched Fortsetzung um
+  `46..59` Prozent. Das Launchprotokoll bewegt daher keinen intakten Knoten.
+  Reziproke Kopplung bleibt bis zu einem zerstoerungsarmen One-Way-Mechanismus
+  zurueckgestellt. Reports: `reports/response/one_way_dynamic_source_pilot_2026-07-20.md`
+  und `reports/response/one_way_launched_source_pilot_2026-07-20.md`.
 
 ## Long-Run-Status
 

@@ -174,16 +174,19 @@ Fehler `1.87e-9` entspricht der Ordnung des ausgelassenen Schwanzes
 
 Leave-one-seed-out-AR-Modelle schlagen shuffled futures und in den
 interpretierbaren Lags auch Persistence. Zwischen 1000 und 10,000 Memory-
-Zeiten bleiben die beiden gemeinsamen interpretierbaren aktiven Lags mit
-Rateaenderungen von -2.9 und +9.0 Prozent innerhalb des 10-Prozent-Gates.
-Der ueber alle, leicht verschiedenen Lag-Gitter gebildete Median aendert sich
-deskriptiv um 5.8 Prozent. Das Diffusionsverhaeltnis 0.3 wurde im Kurzlauf
-explorativ gewaehlt und vor N=1M eingefroren; es ist kein optimiertes `nu`.
-Komplexe Nebenmoden erfuellen diese Identifikation nicht: Sie treten auch fuer
-`eta=0` auf, ihre Frequenz verschiebt sich mit N um rund 55 Prozent, und ihr
-Quality-Faktor faellt unter 0.2. Der Feldzweig besitzt damit einen
-reproduzierbaren reduzierten Relaxationsmodus, aber keinen nachgewiesenen
-internen Phasen- oder Wellenmodus.
+Zeiten bleiben zwei aggregierte aktive Raten innerhalb des 10-Prozent-Gates.
+Das stuetzt Vorhersagbarkeit des reduzierten Zustands, aber noch nicht die
+Identitaet eines einzelnen dynamischen Eigenmodus.
+
+Der Eigenvektor-/Segmentaudit verwendet reproduzierbar gesetzte stochastische
+Seeds, nicht eine deterministische Modellgleichung. So koennen dieselben
+Traces ohne Archivierungsartefakt in nichtueberlappende Zeitsegmente zerlegt
+und Feature-Subraeume verglichen werden. Der aktive reelle Kandidat scheitert
+dem kombinierten Match-/Ratenstabilitaetsgate. Komplexe aktive und `eta=0`-
+Referenzsubraeume ueberlappen bei 0.2 und 1.0 Memory-Zeiten mit mehr als
+0.9999. Der Feldzweig besitzt damit eine reproduzierbare reduzierte
+Relaxationsbeschreibung, aber keinen identifizierten internen Phasen-,
+Wellen- oder einzelnen Relaxationseigenmodus.
 
 ## Dimensionless Attractive-Only Reduction
 
@@ -318,6 +321,24 @@ The self and cross kernels need not have the same resolution. For the current
 `N=100M` checkpoints, the memory radius is only order `1e-4 sigma_rep`, so
 the existing cross-kernel sees a point monopole and cannot read internal knot
 shape. A narrower or moment-coupled cross-observable is a separate model choice.
+
+A one-way dynamic-source test is the necessary intermediate step between a
+frozen source and reciprocal coupling. It keeps the source autonomous while
+four target paths share the same future noise: dynamic source, frozen source,
+free target, and an eta-zero target. Relative centre velocity is decomposed
+into radial and tangential parts, and orientation is measured by the
+antisymmetric tensor `r wedge v`; amplitude without control-separated
+orientation persistence is not an orbit or spin.
+
+For the current scalar checkpoint, autonomous source motion is tiny on the
+cross-kernel scale. An imposed point launch shifts the source relative to its
+unlaunched control but strongly changes its memory radius and produces only a
+sub-threshold target response. This demonstrates why a point force on `x`
+is not equivalent to coherent translation of `(x,rho)`. Reciprocal coupling
+is therefore not yet identifiable: the next mechanism must first transport a
+source without destroying its internal state, or introduce a local/retarded
+field channel whose delay is itself measurable.
+
 Vector memory is reserved for orientation, phase, circulation, or polarization,
 not introduced merely to provide a scalar sign.
 

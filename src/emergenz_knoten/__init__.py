@@ -35,6 +35,12 @@ from .core import (
     simulate_final_finite_memory_state,
     validate_simulation_config,
 )
+from .coupled_nodes import (
+    OneWayCoupledResponse,
+    RelativeOrbitalObservables,
+    one_way_coupled_response,
+    relative_orbital_observables,
+)
 from .diagnostics import (
     ball_residence_statistics,
     bootstrap_mean_ci,
@@ -175,6 +181,8 @@ __all__ = [
     "FrozenSourceCalibration",
     "GaussianKernelMode",
     "PairedFrozenSourceResponse",
+    "OneWayCoupledResponse",
+    "RelativeOrbitalObservables",
     "PairedProbeResponse",
     "SignedCrossCalibration",
     "SignedCrossResponse",
@@ -237,12 +245,14 @@ __all__ = [
     "occupancy_dimension",
     "memory_horizon",
     "occupancy_dimension_value",
+    "one_way_coupled_response",
     "occupancy_local_slopes",
     "omitted_history_weight",
     "paired_frozen_source_response",
     "paired_signed_cross_response",
     "paired_uniform_probe_response",
     "phase_locking_value",
+    "relative_orbital_observables",
     "place_finite_memory_state",
     "radius_from_shape",
     "repulsive_gaussian_gradient",

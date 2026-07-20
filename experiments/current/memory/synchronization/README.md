@@ -6,7 +6,9 @@ The package diagnostics live in `src/emergenz_knoten/synchronization.py`.
 Complete retained-memory states and rigid placement are implemented in
 `src/emergenz_knoten/state.py`; paired weak pulses live in
 `src/emergenz_knoten/weak_probe.py`, and localized fixed-source continuation
-lives in `src/emergenz_knoten/frozen_source.py`.
+lives in `src/emergenz_knoten/frozen_source.py`. One-way dynamic-source
+continuation and relational orbital observables live in
+`src/emergenz_knoten/coupled_nodes.py`.
 
 ## Core Question
 
@@ -32,8 +34,10 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 5. Signed scalar cross-channel: separate source sign from the non-negative
    self-confining memory and require `q=0` plus sign-reversal controls.
 6. One-way dynamic coupling: source evolves but does not read the target.
-7. Reciprocal coupling with separate memory fields.
-8. Shared memory only as a later, separately normalized model variant.
+7. Nondestructive source transport: preserve source shape against a paired
+   unlaunched continuation before interpreting target response.
+8. Reciprocal coupling with separate memory fields only after step 7 passes.
+9. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 
@@ -141,6 +145,30 @@ states without retuning and fixed-coupling distances below and above the
 compensated force crossing.
 
 Report: `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
+
+## One-Way Dynamic-Source Gate
+
+`one_way_dynamic_source_pilot.py` continues one autonomous source and four
+common-target-noise paths: dynamic source, frozen source, free target, and
+eta-zero target. Relative velocity is decomposed into radial and tangential
+components; the antisymmetric tensor `r wedge v` measures orientation without
+assuming three dimensions.
+
+The autonomous source moves only `1.6..4.5` internal radii in 200 memory
+times, while one `sigma_rep` is about 4724 radii. Dynamic-minus-frozen target
+motion remains `2.1e-5..6.8e-5` radii, and angular coherence and dephasing do
+not separate from the free control.
+
+A paired point launch of `0.1 sigma_rep` over ten memory times produces
+`10.944` radii of additional source-centre displacement, but only
+`3.137e-4` radii of target response. Its source radius differs from the
+identical unlaunched continuation by `46..59%`. The imposed drive therefore
+does not transport an intact knot. Reciprocal coupling is deferred until a
+one-way source can move without losing shape.
+
+Reports: `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` and
+`reports/response/one_way_launched_source_pilot_2026-07-20.md`.
+
 
 ## Observables
 

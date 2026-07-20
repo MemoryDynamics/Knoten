@@ -1,0 +1,2914 @@
+{
+  "active_feature_names": [
+    "relative_x",
+    "force",
+    "mode_1_real",
+    "mode_2_real",
+    "mode_2_imag",
+    "mode_3_real",
+    "mode_3_imag"
+  ],
+  "created_utc": "2026-07-20T05:29:06.695742+00:00",
+  "description": "Eigenvector and time-segment identity audit for scalar low modes.",
+  "gate": {
+    "complex_control_separation_pass": false,
+    "complex_segment_identity_pass": false,
+    "control_reference_overlaps": [
+      {
+        "control_arm": "eta_zero_nu03",
+        "control_reference_present": true,
+        "lag_memory_times": 0.2,
+        "reference_subspace_overlap": 0.9999486758576437
+      },
+      {
+        "control_arm": "active_nu0",
+        "control_reference_present": false,
+        "lag_memory_times": 0.2,
+        "reference_subspace_overlap": 0.0
+      },
+      {
+        "control_arm": "eta_zero_nu03",
+        "control_reference_present": true,
+        "lag_memory_times": 1.0,
+        "reference_subspace_overlap": 0.9999574494724579
+      },
+      {
+        "control_arm": "active_nu0",
+        "control_reference_present": false,
+        "lag_memory_times": 1.0,
+        "reference_subspace_overlap": 0.0
+      }
+    ],
+    "oscillatory_mode_supported": false,
+    "real_mode_identity_pass": false
+  },
+  "git_revision": "4c136fc6630e4cb5868d6f87c41754511650d709",
+  "git_status": "M src/emergenz_knoten/markov/__init__.py\n M src/emergenz_knoten/markov/closure.py\n M tests/test_markov_closure.py\n?? experiments/current/memory/low_mode_identity_audit.py",
+  "parameters": {
+    "amplitude_att": 26.0,
+    "box_length": 80.0,
+    "burn_in": 15000,
+    "diffusion_length_ratio": 0.3,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "lags": [
+      1,
+      5
+    ],
+    "lambda_value": 0.01,
+    "memory_mass": 1.0,
+    "n_low_modes": 3,
+    "n_modes": 64,
+    "ridge": 1e-06,
+    "sample_every": 20,
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "segments": 5,
+    "sigma_att": 3.0,
+    "sigma_comp": 10.0,
+    "steps": 300000
+  },
+  "rows": [
+    {
+      "arm": "active_nu03",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "match_fraction": 0.72,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997651119607828,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.0517763793796857,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999920346050085,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8327590220578893,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999852082671212,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.6592079634919696,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9994939717161985,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.1606170206584223,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998335161410563,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8642540035467212,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999470048308237,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.1075467424838565,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999985838143058,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.0246299157217384,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9995725566548681,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.413936828277447,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999465362563633,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.1396901364033405,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999803001668708,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.0321320273943777,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999786996426492,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.21042531285681,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999956714194592,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.3003975457337977,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998829947857889,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.8736920742533822,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999364688035736,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.1221200099569557,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997876613586184,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.5271732481132405,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999476514409125,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.3366504273276858,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998513820970198,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.6180978658808057,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999994940079432,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.7909738263305393,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999467705435935,
+      "overlap_min": 0.9994939717161985,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 1.7250908949112544,
+      "rate_relative_mad": 0.23275286868781667,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.8431035451603012,
+        "real": 0.8431035451603012
+      },
+      "reference_feature_loadings": {
+        "force": 0.932035389004362,
+        "mode_1_real": 2.3458609151897277e-08,
+        "mode_2_imag": 0.00026041050676962744,
+        "mode_2_real": 1.781615491101388e-08,
+        "mode_3_imag": 0.0009500074402462822,
+        "mode_3_real": 2.1422129142472018e-07,
+        "relative_x": 0.36236592460615286
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          4.437702696889962e-17,
+          1.1414141558362502e-16,
+          -2.8728510610319804e-24,
+          -2.1818497084886546e-24,
+          3.189108935797644e-20,
+          2.623454188524959e-23,
+          1.16342357086378e-19
+        ],
+        "magnitude": [
+          0.36236592460615286,
+          0.932035389004362,
+          2.3458609151897277e-08,
+          1.781615491101388e-08,
+          0.00026041050676962744,
+          2.1422129142472018e-07,
+          0.0009500074402462822
+        ],
+        "real": [
+          0.36236592460615286,
+          0.932035389004362,
+          -2.3458609151897277e-08,
+          -1.781615491101388e-08,
+          0.00026041050676962744,
+          2.1422129142472018e-07,
+          0.0009500074402462822
+        ]
+      }
+    },
+    {
+      "arm": "active_nu03",
+      "frequency_median_per_memory_time": 0.4299080656678408,
+      "frequency_relative_mad": 0.3344778465332692,
+      "kind": "complex",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.5161406260598278,
+          "overlap": 0.9999517517651316,
+          "present": true,
+          "quality_factor": 0.39029636980874743,
+          "rate_per_memory_time": 0.6612162781743863,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.5630619922372309,
+          "overlap": 0.9999467968384689,
+          "present": true,
+          "quality_factor": 0.4194087103656102,
+          "rate_per_memory_time": 0.6712569127932442,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.32002701822760193,
+          "overlap": 0.9999125305937747,
+          "present": true,
+          "quality_factor": 0.15731160318114112,
+          "rate_per_memory_time": 1.0171755031289629,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.09638164183192313,
+          "overlap": 0.9995384996110999,
+          "present": true,
+          "quality_factor": 0.04934697342329207,
+          "rate_per_memory_time": 0.9765709540600763,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.8183349940520817,
+          "overlap": 0.9999218956754774,
+          "present": true,
+          "quality_factor": 0.30677812683554173,
+          "rate_per_memory_time": 1.3337570746867107,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.4299080656678408,
+          "overlap": 0.9999799839965894,
+          "present": true,
+          "quality_factor": 0.24176662195077386,
+          "rate_per_memory_time": 0.8890972256612297,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.9876992839542882,
+          "overlap": 0.9999493008910457,
+          "present": true,
+          "quality_factor": 0.37991862393006554,
+          "rate_per_memory_time": 1.299882687688537,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.17971178804196178,
+          "overlap": 0.999834241407869,
+          "present": true,
+          "quality_factor": 0.05403612342513218,
+          "rate_per_memory_time": 1.662885646219191,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.32133506435178505,
+          "overlap": 0.9998998054909686,
+          "present": true,
+          "quality_factor": 0.17278533601085286,
+          "rate_per_memory_time": 0.9298678689133711,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.4476288602332483,
+          "overlap": 0.9998189148662405,
+          "present": true,
+          "quality_factor": 0.16375418225343388,
+          "rate_per_memory_time": 1.3667707721213382,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.5786068903529418,
+          "overlap": 0.9999934937917008,
+          "present": true,
+          "quality_factor": 0.37078007048321415,
+          "rate_per_memory_time": 0.7802561901437692,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.27887040618466236,
+          "overlap": 0.9998451322922532,
+          "present": true,
+          "quality_factor": 0.06820013388429995,
+          "rate_per_memory_time": 2.0445004305839043,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.380527539535826,
+          "overlap": 0.9998447888295405,
+          "present": true,
+          "quality_factor": 0.19156639527453428,
+          "rate_per_memory_time": 0.9932001356252776,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.49352745354291877,
+          "overlap": 0.9998237159570249,
+          "present": true,
+          "quality_factor": 0.16226414446229118,
+          "rate_per_memory_time": 1.520753260612083,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.832498216698693,
+          "overlap": 0.9999083113070683,
+          "present": true,
+          "quality_factor": 0.29687058816568485,
+          "rate_per_memory_time": 1.4021230965360434,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.375590664447997,
+          "overlap": 0.999981666276136,
+          "present": true,
+          "quality_factor": 0.22752592756973677,
+          "rate_per_memory_time": 0.82537992144407,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.788358551710738,
+          "overlap": 0.9999409958473815,
+          "present": true,
+          "quality_factor": 0.40134394516073724,
+          "rate_per_memory_time": 0.9821483059810487,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.22067570360179015,
+          "overlap": 0.99996170052396,
+          "present": true,
+          "quality_factor": 0.16349315912208046,
+          "rate_per_memory_time": 0.6748774835190855,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.20157558114476354,
+          "overlap": 0.999907587856027,
+          "present": true,
+          "quality_factor": 0.16303853912220945,
+          "rate_per_memory_time": 0.6181838423909936,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.5207995341829542,
+          "overlap": 0.9998957764439327,
+          "present": true,
+          "quality_factor": 0.1900470706111244,
+          "rate_per_memory_time": 1.3701856400844443,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.41613775131665337,
+          "overlap": 0.9998343513834577,
+          "present": true,
+          "quality_factor": 0.10662492771672293,
+          "rate_per_memory_time": 1.9514093009386717,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.4903495991562946,
+          "overlap": 0.9997418985420115,
+          "present": true,
+          "quality_factor": 0.24774166582433846,
+          "rate_per_memory_time": 0.9896389400723123,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.253831408072027,
+          "overlap": 0.9999990618582648,
+          "present": true,
+          "quality_factor": 0.1291467578261079,
+          "rate_per_memory_time": 0.9827246627971995,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.791845345572279,
+          "overlap": 0.9997700425434725,
+          "present": true,
+          "quality_factor": 0.2924484750398017,
+          "rate_per_memory_time": 1.353820267765989,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.2861133416559781,
+          "overlap": 0.9999978326311695,
+          "present": true,
+          "quality_factor": 0.20321095479304704,
+          "rate_per_memory_time": 0.7039810967557336,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999083113070683,
+      "overlap_min": 0.9995384996110999,
+      "quality_factor_median": 0.19156639527453428,
+      "rate_median_per_memory_time": 0.9896389400723123,
+      "rate_relative_mad": 0.3180568627687866,
+      "reference_eigenvalue": {
+        "imag": 0.026091712371185315,
+        "modulus": 0.8445344567637204,
+        "real": 0.8441313115900462
+      },
+      "reference_feature_loadings": {
+        "force": 0.9257090963901349,
+        "mode_1_real": 1.6536689481930116e-07,
+        "mode_2_imag": 0.00016871220550281508,
+        "mode_2_real": 6.555564169675404e-07,
+        "mode_3_imag": 0.0006407777693243304,
+        "mode_3_real": 1.4529572594239872e-06,
+        "relative_x": 0.3782356802286554
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          0.009564039347586475,
+          -5.776107652124975e-17,
+          -9.567891398617641e-08,
+          -3.6428206986749696e-07,
+          -0.00010965341627689905,
+          -7.539898672736131e-07,
+          -0.0004325586788013337
+        ],
+        "magnitude": [
+          0.3782356802286554,
+          0.9257090963901349,
+          1.6536689481930116e-07,
+          6.555564169675403e-07,
+          0.00016871220550281508,
+          1.4529572594239872e-06,
+          0.0006407777693243304
+        ],
+        "real": [
+          0.378114743099752,
+          0.9257090963901349,
+          1.3487681535610066e-07,
+          5.45025494266435e-07,
+          -0.0001282183161035474,
+          1.2420080828084748e-06,
+          -0.0004727463792076142
+        ]
+      }
+    },
+    {
+      "arm": "active_nu03",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "match_fraction": 0.8,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.99845857465705,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.4601869569106987,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999821847921555,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8988507949048712,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997642265448651,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.598752510376901,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999998959045622,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.4332477138599993,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9996175381750879,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.6344635712399196,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999980024900598,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8503154358745357,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999692600305,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.7788466627196167,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9996190063807713,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.46811279148407137,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999904883317,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.457623663118976,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999041706336,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.147147735529379,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999657174024426,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.1524609929713057,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999996411493303,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.5828305345639722,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998878955974528,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0803565665612664,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999976540912546,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.926590738027396,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999945267637336,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.3661949320251847,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999508932619,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5275079607145908,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999303850067,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.2081540531693493,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999995350946583,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.7351700547351043,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999883250191726,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5009835948484279,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999834592415,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.9997074729940594,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999965025189188,
+      "overlap_min": 0.99845857465705,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 1.5215087457373353,
+      "rate_relative_mad": 0.2780904723147148,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.25772377800940255,
+        "real": 0.25772377800940255
+      },
+      "reference_feature_loadings": {
+        "force": 0.9275610514962477,
+        "mode_1_real": 5.986600724988968e-07,
+        "mode_2_imag": 3.7765420997835546e-05,
+        "mode_2_real": 2.4544571302455376e-06,
+        "mode_3_imag": 0.00014879049629991172,
+        "mode_3_real": 5.760219723280596e-06,
+        "relative_x": 0.37367161003048316
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          4.576157411560692e-17,
+          1.135934672728633e-16,
+          7.331471415630963e-23,
+          3.005843068199596e-22,
+          4.624930194345154e-21,
+          7.054234646501034e-22,
+          1.82215805037233e-20
+        ],
+        "magnitude": [
+          0.37367161003048316,
+          0.9275610514962477,
+          5.986600724988968e-07,
+          2.4544571302455376e-06,
+          3.7765420997835546e-05,
+          5.760219723280596e-06,
+          0.00014879049629991172
+        ],
+        "real": [
+          0.37367161003048316,
+          0.9275610514962477,
+          5.986600724988968e-07,
+          2.4544571302455376e-06,
+          3.7765420997835546e-05,
+          5.760219723280596e-06,
+          0.00014879049629991172
+        ]
+      }
+    },
+    {
+      "arm": "active_nu03",
+      "frequency_median_per_memory_time": 0.5314607070820204,
+      "frequency_relative_mad": 0.38339652354842735,
+      "kind": "complex",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.24610538983538552,
+          "overlap": 0.9761083079297698,
+          "present": true,
+          "quality_factor": 0.17011463594295273,
+          "rate_per_memory_time": 0.7233516048493205,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.5610970763837264,
+          "overlap": 0.9999650594724392,
+          "present": true,
+          "quality_factor": 0.49406741564600143,
+          "rate_per_memory_time": 0.567834528866959,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.2976575669996275,
+          "overlap": 0.9999748216152421,
+          "present": true,
+          "quality_factor": 0.22296960284800452,
+          "rate_per_memory_time": 0.667484632877372,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.6954158129521497,
+          "overlap": 0.9999740338132838,
+          "present": true,
+          "quality_factor": 0.26404788182799066,
+          "rate_per_memory_time": 1.3168365679319596,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.8235766453298848,
+          "overlap": 0.9999502881891115,
+          "present": true,
+          "quality_factor": 0.3570008446573368,
+          "rate_per_memory_time": 1.1534659618528151,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.5117638404401507,
+          "overlap": 0.9999620372374571,
+          "present": true,
+          "quality_factor": 0.3374699391848189,
+          "rate_per_memory_time": 0.7582361879051366,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.8794465446345527,
+          "overlap": 0.9999723026980162,
+          "present": true,
+          "quality_factor": 0.3561063116026836,
+          "rate_per_memory_time": 1.234808982571155,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.4908050381852385,
+          "overlap": 0.9999611869479977,
+          "present": true,
+          "quality_factor": 0.4307619111026084,
+          "rate_per_memory_time": 0.5696940996117084,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.02573365416343449,
+          "overlap": 0.999997512546694,
+          "present": true,
+          "quality_factor": 0.016585433501284816,
+          "rate_per_memory_time": 0.7757908215495541,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.7479568192334518,
+          "overlap": 0.9999412411870976,
+          "present": true,
+          "quality_factor": 0.366662654021125,
+          "rate_per_memory_time": 1.0199522790646123,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.5314607070820204,
+          "overlap": 0.9999974160419306,
+          "present": true,
+          "quality_factor": 0.45399723393821295,
+          "rate_per_memory_time": 0.5853127148725645,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.21314893491952072,
+          "overlap": 0.9999780130588389,
+          "present": true,
+          "quality_factor": 0.22037609061557636,
+          "rate_per_memory_time": 0.4836026774141695,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.6808948386912052,
+          "overlap": 0.9999843032410054,
+          "present": true,
+          "quality_factor": 0.31811104317285416,
+          "rate_per_memory_time": 1.0702156578720574,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.32741101963220837,
+          "overlap": 0.999962041207972,
+          "present": true,
+          "quality_factor": 0.28505544652709985,
+          "rate_per_memory_time": 0.5742935692356291,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.654159652582433,
+          "overlap": 0.9999212603781431,
+          "present": true,
+          "quality_factor": 0.1909552280232236,
+          "rate_per_memory_time": 1.7128613323508364,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.36127191521662755,
+          "overlap": 0.999973103874596,
+          "present": true,
+          "quality_factor": 0.2569308667087291,
+          "rate_per_memory_time": 0.7030527702733848,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.17135882703648087,
+          "overlap": 0.9998546318835504,
+          "present": true,
+          "quality_factor": 0.1211023319169873,
+          "rate_per_memory_time": 0.7074959842802332,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.6171379943424933,
+          "overlap": 0.9999863756542979,
+          "present": true,
+          "quality_factor": 0.2956874821173837,
+          "rate_per_memory_time": 1.043564627631917,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.7655521818361906,
+          "overlap": 0.999972390849089,
+          "present": true,
+          "quality_factor": 0.3201263613125969,
+          "rate_per_memory_time": 1.1957031259425779,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.3277005195841847,
+          "overlap": 0.9999980809675667,
+          "present": true,
+          "quality_factor": 0.11842418538308694,
+          "rate_per_memory_time": 1.383587814111264,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.638818672900721,
+          "overlap": 0.9999688913308171,
+          "present": true,
+          "quality_factor": 0.32148706375960123,
+          "rate_per_memory_time": 0.993537135569491,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.02423268876195565,
+          "overlap": 0.9999470051534306,
+          "present": true,
+          "quality_factor": 0.01655638684345445,
+          "rate_per_memory_time": 0.731822981399351,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.8237748680676859,
+          "overlap": 0.9999922163546346,
+          "present": true,
+          "quality_factor": 0.3537903495398712,
+          "rate_per_memory_time": 1.164213310423902,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.4532263726014143,
+          "overlap": 0.9998584829567794,
+          "present": true,
+          "quality_factor": 0.3921425656736078,
+          "rate_per_memory_time": 0.5778846933166756,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.637390918918632,
+          "overlap": 0.999981469866154,
+          "present": true,
+          "quality_factor": 0.4262127516685431,
+          "rate_per_memory_time": 0.7477379740791024,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999723026980162,
+      "overlap_min": 0.9761083079297698,
+      "quality_factor_median": 0.31811104317285416,
+      "rate_median_per_memory_time": 0.7582361879051366,
+      "rate_relative_mad": 0.2511112791440639,
+      "reference_eigenvalue": {
+        "imag": 0.11054327351925802,
+        "modulus": 0.48130026855841945,
+        "real": 0.46843370202628803
+      },
+      "reference_feature_loadings": {
+        "force": 0.9251425910579543,
+        "mode_1_real": 1.967448365049314e-07,
+        "mode_2_imag": 0.0002960884581291453,
+        "mode_2_real": 7.76320019368668e-07,
+        "mode_3_imag": 0.0011408118484900365,
+        "mode_3_real": 1.7075525317246109e-06,
+        "relative_x": 0.3796179620183548
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          0.021863532078146047,
+          -4.3441556235577786e-17,
+          -1.347121024962271e-07,
+          -5.234542855977911e-07,
+          -0.00025538171034996564,
+          -1.1225180784674747e-06,
+          -0.0009960008358603834
+        ],
+        "magnitude": [
+          0.3796179620183548,
+          0.9251425910579543,
+          1.9674483650493137e-07,
+          7.76320019368668e-07,
+          0.0002960884581291453,
+          1.7075525317246109e-06,
+          0.0011408118484900365
+        ],
+        "real": [
+          0.37898784024297794,
+          0.9251425910579543,
+          1.4339170175570894e-07,
+          5.73296069550346e-07,
+          -0.00014982842539391813,
+          1.286735719607106e-06,
+          -0.0005562679288082961
+        ]
+      }
+    },
+    {
+      "arm": "eta_zero_nu03",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998718997748847,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3961187674912566,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997116639664345,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.36255798053396987,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999984703984085,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3995075049908879,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997904281204282,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3416186838536814,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9966459409271198,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.0801192120834493,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998320318117463,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3982348179652802,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998903606443031,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.31081856708479133,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9960344216361623,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4848372286980858,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997161402852138,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3702639900814961,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998694754750937,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3036190979396097,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999998527081471,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5029160100586668,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9979227017759346,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 3.2524522479160476,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9990439026409286,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4043624131452814,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998075369987949,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3441581759836871,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999773572237277,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.40136054580580044,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9770054698024049,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5129945751821282,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999825373692435,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.39262790222317984,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998904827930859,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.44173733198908155,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9947742004339125,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.9844301895003063,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9996497628012593,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5033783017040563,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998474186742213,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.38434212973999504,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999505664889285,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.2599100311775363,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999351280778586,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.26293670167896127,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998784825986088,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3957784794255197,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9996282379342861,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4227786742984998,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9998075369987949,
+      "overlap_min": 0.9770054698024049,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 0.3982348179652802,
+      "rate_relative_mad": 0.13579084384908743,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.9740881780934254,
+        "real": 0.9740881780934254
+      },
+      "reference_feature_loadings": {
+        "force": 0.9117666518882545,
+        "mode_1_real": 3.701469694458116e-05,
+        "mode_2_imag": 0.0004959789885436001,
+        "mode_2_real": 0.00014476864773601734,
+        "mode_3_imag": 0.0019323947283626081,
+        "mode_3_real": 0.00031394143280744844,
+        "relative_x": 0.41070362972911123
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          5.029668855459558e-17,
+          1.1165921118042498e-16,
+          -4.532993013459063e-21,
+          -1.7729046106680435e-20,
+          -6.073990807642616e-20,
+          -3.844673708073756e-20,
+          -2.366501018778487e-19
+        ],
+        "magnitude": [
+          0.41070362972911123,
+          0.9117666518882545,
+          3.701469694458116e-05,
+          0.00014476864773601734,
+          0.0004959789885436001,
+          0.00031394143280744844,
+          0.0019323947283626081
+        ],
+        "real": [
+          0.41070362972911123,
+          0.9117666518882545,
+          -3.701469694458116e-05,
+          -0.00014476864773601734,
+          -0.0004959789885436001,
+          -0.00031394143280744844,
+          -0.0019323947283626081
+        ]
+      }
+    },
+    {
+      "arm": "eta_zero_nu03",
+      "frequency_median_per_memory_time": 1.0402786593897786,
+      "frequency_relative_mad": 0.0351767483846644,
+      "kind": "complex",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 1.0477915628151544,
+          "overlap": 0.9999655453389702,
+          "present": true,
+          "quality_factor": 1.0900965790075319,
+          "rate_per_memory_time": 0.4805957485753723,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 1.0290139125958437,
+          "overlap": 0.9999720737539975,
+          "present": true,
+          "quality_factor": 1.0265410963842396,
+          "rate_per_memory_time": 0.5012044409231711,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.6610907992344377,
+          "overlap": 0.999953773709397,
+          "present": true,
+          "quality_factor": 0.36510281866814587,
+          "rate_per_memory_time": 0.9053488023538449,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 1.0314498284519509,
+          "overlap": 0.9999593813683553,
+          "present": true,
+          "quality_factor": 1.0906345520952678,
+          "rate_per_memory_time": 0.4728668399833773,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 1.0384614912953312,
+          "overlap": 0.999963108496242,
+          "present": true,
+          "quality_factor": 1.099297035454955,
+          "rate_per_memory_time": 0.47232979704414174,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 1.1007200729570235,
+          "overlap": 0.9999614237803626,
+          "present": true,
+          "quality_factor": 1.071519030374052,
+          "rate_per_memory_time": 0.5136260027844666,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 1.1472437398097663,
+          "overlap": 0.9999404936751782,
+          "present": true,
+          "quality_factor": 1.171213733466151,
+          "rate_per_memory_time": 0.48976702843747977,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 1.011857269713883,
+          "overlap": 0.9999370467010857,
+          "present": true,
+          "quality_factor": 1.0100548800733224,
+          "rate_per_memory_time": 0.5008922236187947,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 1.0219872980448512,
+          "overlap": 0.9999212362305935,
+          "present": true,
+          "quality_factor": 0.976342754867453,
+          "rate_per_memory_time": 0.5233752659861725,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 1.0978114031525381,
+          "overlap": 0.9999339540088392,
+          "present": true,
+          "quality_factor": 1.1624937729806957,
+          "rate_per_memory_time": 0.47217947685762285,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 1.0036850387384884,
+          "overlap": 0.9999929146084103,
+          "present": true,
+          "quality_factor": 1.0476718454471738,
+          "rate_per_memory_time": 0.47900735478392537,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 1.0784500055717225,
+          "overlap": 0.9999748552314572,
+          "present": true,
+          "quality_factor": 1.180238682113064,
+          "rate_per_memory_time": 0.45687792728539367,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 1.0693280263436762,
+          "overlap": 0.9999792114140389,
+          "present": true,
+          "quality_factor": 1.0494307731664194,
+          "rate_per_memory_time": 0.509480021782295,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.976995125803886,
+          "overlap": 0.9999606698000144,
+          "present": true,
+          "quality_factor": 0.845122689687297,
+          "rate_per_memory_time": 0.5780196992257911,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.9547743394111096,
+          "overlap": 0.999954718366194,
+          "present": true,
+          "quality_factor": 1.0131230882206046,
+          "rate_per_memory_time": 0.4712035242864835,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.9412242097156619,
+          "overlap": 0.9999310305515552,
+          "present": true,
+          "quality_factor": 0.9156077511817228,
+          "rate_per_memory_time": 0.5139887733043311,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 1.1113384130037718,
+          "overlap": 0.9999432035181398,
+          "present": true,
+          "quality_factor": 1.1554128274956015,
+          "rate_per_memory_time": 0.4809269840861285,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.9882302398765835,
+          "overlap": 0.9999632428679964,
+          "present": true,
+          "quality_factor": 1.001815784404867,
+          "rate_per_memory_time": 0.4932195395901283,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 1.075596318575436,
+          "overlap": 0.9999652077500488,
+          "present": true,
+          "quality_factor": 1.0731080297040538,
+          "rate_per_memory_time": 0.5011593841451678,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 1.0445536145042735,
+          "overlap": 0.9999683567830377,
+          "present": true,
+          "quality_factor": 1.1488156994817238,
+          "rate_per_memory_time": 0.45462192716182104,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 1.0475582941453214,
+          "overlap": 0.9999273256089886,
+          "present": true,
+          "quality_factor": 1.0938952794990553,
+          "rate_per_memory_time": 0.47882019137382437,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 1.0503268665773464,
+          "overlap": 0.9999537321429692,
+          "present": true,
+          "quality_factor": 0.9709574281380043,
+          "rate_per_memory_time": 0.5408717396557479,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.9678394265666096,
+          "overlap": 0.9999506803228423,
+          "present": true,
+          "quality_factor": 0.8637782606579959,
+          "rate_per_memory_time": 0.5602360412667388,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 1.0402786593897786,
+          "overlap": 0.9999994632381489,
+          "present": true,
+          "quality_factor": 1.0610353765938387,
+          "rate_per_memory_time": 0.49021864979153956,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 1.0938677701443573,
+          "overlap": 0.9999916904415079,
+          "present": true,
+          "quality_factor": 1.237796776087631,
+          "rate_per_memory_time": 0.441860809171681,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999606698000144,
+      "overlap_min": 0.9999212362305935,
+      "quality_factor_median": 1.0610353765938387,
+      "rate_median_per_memory_time": 0.49021864979153956,
+      "rate_relative_mad": 0.03679821839007489,
+      "reference_eigenvalue": {
+        "imag": 0.213329953630284,
+        "modulus": 0.9418524277999476,
+        "real": 0.9173746926075279
+      },
+      "reference_feature_loadings": {
+        "force": 0.921339336557027,
+        "mode_1_real": 3.655326439602728e-05,
+        "mode_2_imag": 0.00031495340335656915,
+        "mode_2_real": 0.000144623220697404,
+        "mode_3_imag": 0.0012382740128622604,
+        "mode_3_real": 0.00031958397384346124,
+        "relative_x": 0.3887570835477431
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          -0.025896930479627763,
+          4.6778683875238284e-17,
+          -2.4189831582843057e-05,
+          -9.474455266165955e-05,
+          0.00027759188046335353,
+          -0.0002058226155758415,
+          0.0010867864571210712
+        ],
+        "magnitude": [
+          0.3887570835477431,
+          0.921339336557027,
+          3.655326439602728e-05,
+          0.000144623220697404,
+          0.0003149534033565691,
+          0.00031958397384346124,
+          0.0012382740128622604
+        ],
+        "real": [
+          0.3878935665878982,
+          0.921339336557027,
+          2.740425488860378e-05,
+          0.00010926731307134834,
+          -0.0001487897650603192,
+          0.0002444810161446027,
+          -0.0005934793404561235
+        ]
+      }
+    },
+    {
+      "arm": "eta_zero_nu03",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "match_fraction": 0.92,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999665517052774,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.5957467584094789,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999595473778468,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.38340697340976265,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9973532259872897,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4056599521885401,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999568502779474,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.43171828321847294,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999574872227134,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.3556066565966503,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9938782505429995,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.4015719783822598,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.8886103795624314,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.45421130671075527,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998829977105824,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.49360409418750834,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997109587028037,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.35789925871414136,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999966619329383,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4958295280261189,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9973982368356151,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.937447993443353,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9964290261114574,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4663861072260188,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9998747582967646,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.37629913435574136,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997297143353905,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4232949777117443,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9986928477461134,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.565098626883873,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9992718370578779,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.42241222826846764,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "overlap": 0.0,
+          "present": false,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9947348064181631,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.08584352341846,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9997530484979311,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4665536045625926,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999962042657511,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.4953813520248493,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999737711807798,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.2541972438127312,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999956761566042,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.26139778473996494,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999178919913415,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.37714480844922527,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999991678109921,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.7553071660206852,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9997297143353905,
+      "overlap_min": 0.8886103795624314,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 0.45421130671075527,
+      "rate_relative_mad": 0.1696710256281807,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.7078806516140593,
+        "real": 0.7078806516140593
+      },
+      "reference_feature_loadings": {
+        "force": 0.91004129904328,
+        "mode_1_real": 3.40417045827753e-05,
+        "mode_2_imag": 0.0005761924593003495,
+        "mode_2_real": 0.00013229177440712928,
+        "mode_3_imag": 0.0022345419889665493,
+        "mode_3_real": 0.0002838818840832432,
+        "relative_x": 0.414511048840792
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          5.0762962917408807e-17,
+          1.1144791639652522e-16,
+          -4.168906455481555e-21,
+          -1.620106980812146e-20,
+          -7.056322509750146e-20,
+          -3.4765504067846374e-20,
+          -2.7365246943482446e-19
+        ],
+        "magnitude": [
+          0.414511048840792,
+          0.91004129904328,
+          3.40417045827753e-05,
+          0.00013229177440712928,
+          0.0005761924593003495,
+          0.0002838818840832432,
+          0.0022345419889665493
+        ],
+        "real": [
+          0.414511048840792,
+          0.91004129904328,
+          -3.40417045827753e-05,
+          -0.00013229177440712928,
+          -0.0005761924593003495,
+          -0.0002838818840832432,
+          -0.0022345419889665493
+        ]
+      }
+    },
+    {
+      "arm": "eta_zero_nu03",
+      "frequency_median_per_memory_time": 0.4183281207032,
+      "frequency_relative_mad": 0.1767675174197153,
+      "kind": "complex",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.39167438880076844,
+          "overlap": 0.9999998004135957,
+          "present": true,
+          "quality_factor": 0.38377777123968493,
+          "rate_per_memory_time": 0.5102880079994937,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.09248226074353162,
+          "overlap": 0.9999808743429772,
+          "present": true,
+          "quality_factor": 0.08361316290426397,
+          "rate_per_memory_time": 0.5530364928870269,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.6855234277798495,
+          "overlap": 0.9999427831395287,
+          "present": true,
+          "quality_factor": 0.5176457804420131,
+          "rate_per_memory_time": 0.6621549461820081,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.3636374825565497,
+          "overlap": 0.9999980556481911,
+          "present": true,
+          "quality_factor": 0.40080598159103037,
+          "rate_per_memory_time": 0.4536328039729629,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.9530900048126938,
+          "overlap": 0.9999030261104325,
+          "present": true,
+          "quality_factor": 0.6320947231604279,
+          "rate_per_memory_time": 0.7539139071176806,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.622207588450724,
+          "overlap": 0.999937804348044,
+          "present": true,
+          "quality_factor": 0.41490877359699674,
+          "rate_per_memory_time": 0.7498125227102064,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.07305695334215492,
+          "overlap": 0.9999993279127889,
+          "present": true,
+          "quality_factor": 0.10068221155395989,
+          "rate_per_memory_time": 0.3628096374452432,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.47919805578138985,
+          "overlap": 0.9999885956310577,
+          "present": true,
+          "quality_factor": 0.7330692634838424,
+          "rate_per_memory_time": 0.3268436419664128,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.8100569687373422,
+          "overlap": 0.9998605683727649,
+          "present": true,
+          "quality_factor": 0.45119556663156235,
+          "rate_per_memory_time": 0.8976783335715034,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.34438129733964035,
+          "overlap": 0.9999994137727666,
+          "present": true,
+          "quality_factor": 0.35939796182973405,
+          "rate_per_memory_time": 0.47910858423675773,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.5305249633193037,
+          "overlap": 0.9999825537374966,
+          "present": true,
+          "quality_factor": 0.6783943002055111,
+          "rate_per_memory_time": 0.39101519806297586,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.15506894042067862,
+          "overlap": 0.9999981664609464,
+          "present": true,
+          "quality_factor": 0.21784951232351352,
+          "rate_per_memory_time": 0.3559083946683256,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.38924663425152933,
+          "overlap": 0.9999976207567844,
+          "present": true,
+          "quality_factor": 0.4091280831005191,
+          "rate_per_memory_time": 0.4757026593013109,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.4183281207032,
+          "overlap": 0.9999920282527105,
+          "present": true,
+          "quality_factor": 0.5273791562795366,
+          "rate_per_memory_time": 0.3966104042244948,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.36776418760599666,
+          "overlap": 0.9999945342915882,
+          "present": true,
+          "quality_factor": 0.48334299420422383,
+          "rate_per_memory_time": 0.3804381071163386,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.475206464497679,
+          "overlap": 0.9999918115597634,
+          "present": true,
+          "quality_factor": 0.5766550255567949,
+          "rate_per_memory_time": 0.41203704419192283,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.4228242892440645,
+          "overlap": 0.9999924872446913,
+          "present": true,
+          "quality_factor": 0.558852683163024,
+          "rate_per_memory_time": 0.3782967336319664,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.6424887514316361,
+          "overlap": 0.999960318588146,
+          "present": true,
+          "quality_factor": 0.5372404386939819,
+          "rate_per_memory_time": 0.5979527090268095,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.1744999786144698,
+          "overlap": 0.999999610646741,
+          "present": true,
+          "quality_factor": 0.2222975969595659,
+          "rate_per_memory_time": 0.3924918240259023,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.5349146879455428,
+          "overlap": 0.9999892652706158,
+          "present": true,
+          "quality_factor": 0.4410055342893532,
+          "rate_per_memory_time": 0.6064716271730206,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.3917785850574109,
+          "overlap": 0.9999990599676837,
+          "present": true,
+          "quality_factor": 0.46853406351902305,
+          "rate_per_memory_time": 0.4180897565001741,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.3761178554961805,
+          "overlap": 0.9999985772486051,
+          "present": true,
+          "quality_factor": 0.37461749048980303,
+          "rate_per_memory_time": 0.5020025293058471,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.3723566195462059,
+          "overlap": 0.9999992129747914,
+          "present": true,
+          "quality_factor": 0.3330285281950143,
+          "rate_per_memory_time": 0.5590461297179952,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.4204227888744417,
+          "overlap": 0.9999981981226457,
+          "present": true,
+          "quality_factor": 0.4296223328216259,
+          "rate_per_memory_time": 0.4892934523599315,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.5569233414871321,
+          "overlap": 0.9999584844347993,
+          "present": true,
+          "quality_factor": 0.3937813413891169,
+          "rate_per_memory_time": 0.7071479561760211,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999924872446913,
+      "overlap_min": 0.9998605683727649,
+      "quality_factor_median": 0.4296223328216259,
+      "rate_median_per_memory_time": 0.47910858423675773,
+      "rate_relative_mad": 0.18386935461429632,
+      "reference_eigenvalue": {
+        "imag": 0.20263425384157055,
+        "modulus": 0.5817723955021912,
+        "real": 0.5453425339531366
+      },
+      "reference_feature_loadings": {
+        "force": 0.9061761655069228,
+        "mode_1_real": 2.7616423431091516e-07,
+        "mode_2_imag": 0.0008077283681874817,
+        "mode_2_real": 1.0916999697426713e-06,
+        "mode_3_imag": 0.003138168317288367,
+        "mode_3_real": 2.408726759119311e-06,
+        "relative_x": 0.42288799525949644
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          -0.038980242146742776,
+          2.482086864764226e-17,
+          4.5114640816635835e-08,
+          1.8798715619361835e-07,
+          0.000543371136697678,
+          4.4896232328014453e-07,
+          0.002081986834069535
+        ],
+        "magnitude": [
+          0.42288799525949644,
+          0.9061761655069228,
+          2.7616423431091516e-07,
+          1.0916999697426716e-06,
+          0.0008077283681874817,
+          2.408726759119311e-06,
+          0.003138168317288367
+        ],
+        "real": [
+          0.42108763607683514,
+          0.9061761655069228,
+          2.724543145125802e-07,
+          1.075392790120143e-06,
+          -0.0005976394603594088,
+          2.3665158846651154e-06,
+          -0.0023480696774997147
+        ]
+      }
+    },
+    {
+      "arm": "active_nu0",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999909281189,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.5399791187688259,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999863221473,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.9958281070875763,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854299365,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 7.225010081782752,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999853929762,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.7431518360639182,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854738626,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8313695107407002,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999992032732,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.8700105865340163,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854246986,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 6.493777121664405,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999884350511,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.8805359447913402,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999859677328,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.019698506983405,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854105008,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 7.384848710164396,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854185896,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 6.810643107460539,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999865974977,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.9265526931275926,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999859193685,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.9428351882513796,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854414453,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.489700059782358,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854409841,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 6.2981810253996375,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999864009269,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 7.702579283124264,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999985434268,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 6.887703687326313,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999865920228,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0038030387190446,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999865548146,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 0.936161696157769,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999997174033,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0624277072675024,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854281991,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 7.708049818538814,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999898332599,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0764812716811698,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854531185,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.679121806105527,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999854275468,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 6.665597046160501,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999856521801,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.6870572034914721,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.9999999856521801,
+      "overlap_min": 0.9999999853929762,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 1.679121806105527,
+      "rate_relative_mad": 0.4424694547151069,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.8250660347817438,
+        "real": 0.8250660347817438
+      },
+      "reference_feature_loadings": {
+        "force": 0.9421540555314872,
+        "mode_1_real": 1.7248332639106284e-05,
+        "mode_2_imag": 1.4533612195424475e-11,
+        "mode_2_real": 6.899376823269189e-05,
+        "mode_3_imag": 3.354841176154795e-11,
+        "mode_3_real": 0.0001552360149491321,
+        "relative_x": 0.33518011052224733
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          4.104772494889263e-17,
+          1.1538059484103334e-16,
+          -2.112311535711033e-21,
+          -8.449299742728046e-21,
+          1.779854165517552e-27,
+          -1.901092888198453e-20,
+          4.108495508025712e-27
+        ],
+        "magnitude": [
+          0.33518011052224733,
+          0.9421540555314872,
+          1.7248332639106284e-05,
+          6.899376823269189e-05,
+          1.4533612195424475e-11,
+          0.0001552360149491321,
+          3.354841176154795e-11
+        ],
+        "real": [
+          0.33518011052224733,
+          0.9421540555314872,
+          -1.7248332639106284e-05,
+          -6.899376823269189e-05,
+          1.4533612195424475e-11,
+          -0.0001552360149491321,
+          3.354841176154795e-11
+        ]
+      }
+    },
+    {
+      "arm": "active_nu0",
+      "kind": "complex",
+      "lag_memory_times": 0.2,
+      "lag_samples": 1,
+      "lag_updates": 20,
+      "matches": [],
+      "reference_present": false
+    },
+    {
+      "arm": "active_nu0",
+      "frequency_median_per_memory_time": 0.0,
+      "frequency_relative_mad": NaN,
+      "kind": "real",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "match_fraction": 1.0,
+      "matches": [
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999998267,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.9868901356228856,
+          "seed_index": 0,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999996165,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.040597297624959,
+          "seed_index": 0,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999993869,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.148364535577757,
+          "seed_index": 0,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999989831,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.16536535841931,
+          "seed_index": 0,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999999998871,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.143229256952191,
+          "seed_index": 0,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999999999992,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.081109148978508,
+          "seed_index": 1,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999999999276,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.8945702288578312,
+          "seed_index": 1,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999997934,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.2963638475229096,
+          "seed_index": 1,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999999132,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.1349087011794015,
+          "seed_index": 1,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999995131,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.196851894519754,
+          "seed_index": 1,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999990934,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.090887573013827,
+          "seed_index": 2,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999999999966,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0955308423511443,
+          "seed_index": 2,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999988787,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.029028249070087,
+          "seed_index": 2,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999990596,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.125281787134478,
+          "seed_index": 2,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.999999999999874,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.9380557557435272,
+          "seed_index": 2,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999989259,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.4567672008382133,
+          "seed_index": 3,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999991641,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.012545875804565,
+          "seed_index": 3,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999992624,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.2850417593143835,
+          "seed_index": 3,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999991697,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.4223925235047257,
+          "seed_index": 3,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999992881,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.178569530188248,
+          "seed_index": 3,
+          "segment_index": 4
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999993213,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.0803231349617126,
+          "seed_index": 4,
+          "segment_index": 0
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999991137,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.403792786950354,
+          "seed_index": 4,
+          "segment_index": 1
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999990766,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 1.2182134658627506,
+          "seed_index": 4,
+          "segment_index": 2
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999991381,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.025415967618753,
+          "seed_index": 4,
+          "segment_index": 3
+        },
+        {
+          "frequency_per_memory_time": 0.0,
+          "overlap": 0.9999999999999998,
+          "present": true,
+          "quality_factor": 0.0,
+          "rate_per_memory_time": 2.0850440179398366,
+          "seed_index": 4,
+          "segment_index": 4
+        }
+      ],
+      "overlap_median": 0.999999999999276,
+      "overlap_min": 0.999999999998871,
+      "quality_factor_median": 0.0,
+      "rate_median_per_memory_time": 2.040597297624959,
+      "rate_relative_mad": 0.0676136505345147,
+      "reference_eigenvalue": {
+        "imag": 0.0,
+        "modulus": 0.3956675886503818,
+        "real": 0.3956675886503818
+      },
+      "reference_feature_loadings": {
+        "force": 0.9421540682130221,
+        "mode_1_real": 1.33231625471979e-07,
+        "mode_2_imag": 1.4909980008290208e-12,
+        "mode_2_real": 5.328628198229976e-07,
+        "mode_3_imag": 2.8760250310935085e-12,
+        "mode_3_real": 1.1993703641387694e-06,
+        "relative_x": 0.3351801183660986
+      },
+      "reference_present": true,
+      "reference_vector": {
+        "imag": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "magnitude": [
+          0.3351801183660986,
+          0.9421540682130221,
+          1.33231625471979e-07,
+          5.328628198229976e-07,
+          1.4909980008290208e-12,
+          1.1993703641387694e-06,
+          2.8760250310935085e-12
+        ],
+        "real": [
+          0.3351801183660986,
+          0.9421540682130221,
+          -1.33231625471979e-07,
+          -5.328628198229976e-07,
+          1.4909980008290208e-12,
+          -1.1993703641387694e-06,
+          2.8760250310935085e-12
+        ]
+      }
+    },
+    {
+      "arm": "active_nu0",
+      "kind": "complex",
+      "lag_memory_times": 1.0,
+      "lag_samples": 5,
+      "lag_updates": 100,
+      "matches": [],
+      "reference_present": false
+    }
+  ]
+}
