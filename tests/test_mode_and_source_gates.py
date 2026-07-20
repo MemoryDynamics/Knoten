@@ -74,7 +74,7 @@ def test_mode_gate_rejects_control_aligned_complex_subspace() -> None:
     assert not gate["oscillatory_mode_supported"]
 
 
-def test_source_gate_rejects_destructive_subthreshold_launch() -> None:
+def test_source_gate_rejects_unbounded_subthreshold_launch() -> None:
     orbital = {
         "angular_orientation_coherence": 0.8,
         "tangential_fraction_median": 0.9,
@@ -91,8 +91,21 @@ def test_source_gate_rejects_destructive_subthreshold_launch() -> None:
             "dynamic_minus_frozen_final_radii": 0.2,
             "launch_specific_source_displacement_radii": 10.0,
             "launch_specific_target_response_radii": 1e-3,
-            "max_active_target_radius_disturbance": 0.01,
-            "max_launch_specific_source_radius_effect": 0.5,
+            "source_stationarity": {
+                "stationary_shape_pass": True,
+                "radius_relative_drift": 0.01,
+                "shape_spectrum_total_variation": 0.01,
+            },
+            "source_shape_response": {
+                "shape_bounded_pass": False,
+                "shape_coherent_pass": True,
+                "max_radius_factor": 2.1,
+                "shape_spectrum_distance_median": 0.01,
+            },
+            "target_shape_response": {
+                "shape_bounded_pass": True,
+                "shape_coherent_pass": True,
+            },
             "orbital_metrics": {
                 "dynamic_source": orbital,
                 "free": free,
@@ -105,7 +118,7 @@ def test_source_gate_rejects_destructive_subthreshold_launch() -> None:
 
     assert gate["dynamic_source_readout_pass"]
     assert not gate["launch_specific_target_readout_pass"]
-    assert gate["nondestructive_target_pass"]
-    assert not gate["nondestructive_source_pass"]
+    assert gate["stationary_source_shape_pass"]
+    assert gate["target_shape_bounded_coherent_pass"]
+    assert not gate["source_shape_bounded_coherent_pass"]
     assert not gate["relational_phase_candidate_pass"]
-

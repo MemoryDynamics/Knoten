@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 import math
 from typing import Any
+import numpy as np
 
 
 def _as_finite(value: Any) -> float | None:
@@ -214,13 +215,19 @@ def score_against_control(
     one-dimensional internal support in single-knot diagnostics.
     """
 
-    case_residence = best_residence_value(case_diagnostics, residence_field=residence_field)
-    control_residence = best_residence_value(control_diagnostics, residence_field=residence_field)
+    case_residence = best_residence_value(
+        case_diagnostics, residence_field=residence_field
+    )
+    control_residence = best_residence_value(
+        control_diagnostics, residence_field=residence_field
+    )
     case_radius = mean_centered_radius(case_diagnostics)
     control_radius = mean_centered_radius(control_diagnostics)
     residence_gain = _ratio(case_residence, control_residence)
     compactness_gain = _ratio(control_radius, case_radius)
-    voxel_stability = voxel_stability_ratio(case_diagnostics, residence_field=residence_field)
+    voxel_stability = voxel_stability_ratio(
+        case_diagnostics, residence_field=residence_field
+    )
     internal_dimension = occupancy_dimension_value(case_diagnostics)
     shape_roundness = shape_roundness_value(case_diagnostics)
 
@@ -383,4 +390,163 @@ def score_v0_5_against_control(
     ]
     score["score"] = sum(components) / 7.0
     score["memory_shape_valid"] = memory_shape_valid
+    return score
+
+
+def normalized_shape_spectra(shape_tensors: Any) -> np.ndarray:
+    """Return rotation-invariant, trace-normalized shape eigenvalues."""
+
+    tensors = np.asarray(shape_tensors, dtype=float)
+    if (
+        tensors.ndim != 3
+        or tensors.shape[1] != tensors.shape[2]
+        or tensors.shape[0] < 1
+        or not np.isfinite(tensors).all()
+    ):
+        raise ValueError("shape_tensors must be finite with shape (samples, dim, dim)")
+    eigenvalues = np.linalg.eigvalsh(tensors)
+    eigenvalues = np.maximum(eigenvalues, 0.0)
+    traces = np.sum(eigenvalues, axis=1, keepdims=True)
+    if np.any(traces <= 0.0):
+        raise ValueError("shape tensors must have positive trace")
+    return eigenvalues / traces
+
+
+def shape_stationarity_diagnostics(
+    radii: Any,
+    shape_tensors: Any,
+    *,
+    radius_drift_limit: float = 0.10,
+    radius_cv_limit: float = 0.15,
+    spectrum_drift_limit: float = 0.10,
+) -> dict[str, float | bool]:
+    """Assess whether a pre-interaction shape trace is statistically bounded.
+
+    The first and second halves are compared. Eigenvalue spectra make the test
+    invariant under rigid rotations, so coherent orientation dynamics are not
+    mistaken for shape loss.
+    """
+
+    radius = np.asarray(radii, dtype=float)
+    spectra = normalized_shape_spectra(shape_tensors)
+    if (
+        radius.ndim != 1
+        or radius.shape[0] != spectra.shape[0]
+        or radius.size < 4
+        or not np.isfinite(radius).all()
+        or np.any(radius <= 0.0)
+    ):
+        raise ValueError("radii must be positive and match at least four shape samples")
+    if min(radius_drift_limit, radius_cv_limit, spectrum_drift_limit) <= 0.0:
+        raise ValueError("stationarity limits must be positive")
+
+    midpoint = radius.size // 2
+    early_radius = float(np.median(radius[:midpoint]))
+    late_radius = float(np.median(radius[midpoint:]))
+    radius_relative_drift = abs(late_radius / early_radius - 1.0)
+    radius_cv = float(np.std(radius) / np.mean(radius))
+    early_spectrum = np.median(spectra[:midpoint], axis=0)
+    late_spectrum = np.median(spectra[midpoint:], axis=0)
+    spectrum_total_variation = float(
+        0.5 * np.sum(np.abs(late_spectrum - early_spectrum))
+    )
+    stationarity_pass = bool(
+        radius_relative_drift <= radius_drift_limit
+        and radius_cv <= radius_cv_limit
+        and spectrum_total_variation <= spectrum_drift_limit
+    )
+    return {
+        "radius_relative_drift": radius_relative_drift,
+        "radius_coefficient_of_variation": radius_cv,
+        "shape_spectrum_total_variation": spectrum_total_variation,
+        "radius_drift_limit": radius_drift_limit,
+        "radius_cv_limit": radius_cv_limit,
+        "spectrum_drift_limit": spectrum_drift_limit,
+        "stationary_shape_pass": stationarity_pass,
+    }
+
+
+def paired_shape_coherence_diagnostics(
+    case_radii: Any,
+    control_radii: Any,
+    case_shape_tensors: Any,
+    control_shape_tensors: Any,
+    *,
+    radius_factor_limit: float = 2.0,
+    spectrum_median_limit: float = 0.10,
+    spectrum_q95_limit: float = 0.25,
+) -> dict[str, float | bool]:
+    """Compare driven and paired-control shapes without demanding rigidity."""
+
+    case_radius = np.asarray(case_radii, dtype=float)
+    control_radius = np.asarray(control_radii, dtype=float)
+    case_spectra = normalized_shape_spectra(case_shape_tensors)
+    control_spectra = normalized_shape_spectra(control_shape_tensors)
+    if (
+        case_radius.ndim != 1
+        or case_radius.shape != control_radius.shape
+        or case_radius.shape[0] != case_spectra.shape[0]
+        or case_spectra.shape != control_spectra.shape
+        or not np.isfinite(case_radius).all()
+        or not np.isfinite(control_radius).all()
+        or np.any(case_radius <= 0.0)
+        or np.any(control_radius <= 0.0)
+    ):
+        raise ValueError("paired radii and shape tensors must be finite and compatible")
+    if radius_factor_limit <= 1.0:
+        raise ValueError("radius_factor_limit must exceed one")
+    if min(spectrum_median_limit, spectrum_q95_limit) <= 0.0:
+        raise ValueError("spectrum limits must be positive")
+
+    radius_ratio = case_radius / control_radius
+    max_radius_factor = float(
+        np.max(np.maximum(radius_ratio, np.reciprocal(radius_ratio)))
+    )
+    spectrum_distance = 0.5 * np.sum(
+        np.abs(case_spectra - control_spectra),
+        axis=1,
+    )
+    spectrum_median = float(np.median(spectrum_distance))
+    spectrum_q95 = float(np.quantile(spectrum_distance, 0.95))
+    bounded_pass = bool(max_radius_factor <= radius_factor_limit)
+    coherent_pass = bool(
+        spectrum_median <= spectrum_median_limit and spectrum_q95 <= spectrum_q95_limit
+    )
+    return {
+        "max_radius_factor": max_radius_factor,
+        "shape_spectrum_distance_median": spectrum_median,
+        "shape_spectrum_distance_q95": spectrum_q95,
+        "radius_factor_limit": radius_factor_limit,
+        "spectrum_median_limit": spectrum_median_limit,
+        "spectrum_q95_limit": spectrum_q95_limit,
+        "shape_bounded_pass": bounded_pass,
+        "shape_coherent_pass": coherent_pass,
+        "shape_bounded_coherent_pass": bounded_pass and coherent_pass,
+    }
+
+
+def score_v0_6_against_control(
+    case_diagnostics: Mapping[str, Any],
+    control_diagnostics: Mapping[str, Any],
+    *,
+    stationarity_diagnostics: Mapping[str, Any],
+) -> dict[str, Any]:
+    """KnotScore v0.6: v0.5 evidence plus checkpoint eligibility.
+
+    Stationarity is an eligibility gate, not evidence of interaction response.
+    The numerical score retains the seven v0.5 components and adds a binary
+    stationarity component; consumers must also inspect eligible_knot_pass.
+    """
+
+    score: dict[str, Any] = score_v0_5_against_control(
+        case_diagnostics,
+        control_diagnostics,
+    )
+    score_v0_5 = float(score["score"])
+    stationary = bool(stationarity_diagnostics.get("stationary_shape_pass", False))
+    score["score_v0_5"] = score_v0_5
+    score["stationarity_score"] = 1.0 if stationary else 0.0
+    score["score"] = (7.0 * score_v0_5 + score["stationarity_score"]) / 8.0
+    score["stationary_shape_pass"] = stationary
+    score["eligible_knot_pass"] = bool(stationary and score["memory_shape_valid"])
     return score

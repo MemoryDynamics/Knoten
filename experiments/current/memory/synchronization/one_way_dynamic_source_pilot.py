@@ -34,6 +34,8 @@ from emergenz_knoten import (  # noqa: E402
     load_finite_memory_checkpoint,
     memory_shape_tensor,
     one_way_coupled_response,
+    paired_shape_coherence_diagnostics,
+    shape_stationarity_diagnostics,
     relative_orbital_observables,
 )
 
@@ -59,10 +61,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     parser.add_argument("--steps", type=int, default=20_000)
     parser.add_argument("--sample-every", type=int, default=20)
-    parser.add_argument("--continuation-seeds", type=_parse_int_list, default=[1, 2, 3, 4, 5])
+    parser.add_argument(
+        "--continuation-seeds", type=_parse_int_list, default=[1, 2, 3, 4, 5]
+    )
     parser.add_argument("--separation-sigma-rep", type=float, default=1.0)
     parser.add_argument("--source-launch-sigma-rep", type=float, default=0.0)
     parser.add_argument("--source-launch-memory-times", type=float, default=10.0)
+    parser.add_argument(
+        "--source-launch-delay-memory-times",
+        type=float,
+        default=50.0,
+    )
     parser.add_argument("--source-launch-axis", type=int, default=1)
     parser.add_argument("--response-fraction-per-memory", type=float, default=0.03)
     parser.add_argument("--max-ac-memory-times", type=float, default=50.0)
@@ -97,6 +106,8 @@ def _validate_args(args: argparse.Namespace) -> None:
         raise SystemExit("source-launch-sigma-rep must be non-negative")
     if args.source_launch_memory_times <= 0.0:
         raise SystemExit("source-launch-memory-times must be positive")
+    if args.source_launch_delay_memory_times <= 0.0:
+        raise SystemExit("source-launch-delay-memory-times must be positive")
     if args.source_launch_axis < 0:
         raise SystemExit("source-launch-axis must be non-negative")
     if args.response_fraction_per_memory <= 0.0:
@@ -183,9 +194,7 @@ def _orbital_metrics(
         out=np.zeros_like(speed),
         where=speed > 0.0,
     )
-    midpoint = 0.5 * (
-        orbital.relative_centers[1:] + orbital.relative_centers[:-1]
-    )
+    midpoint = 0.5 * (orbital.relative_centers[1:] + orbital.relative_centers[:-1])
     radius2 = np.sum(midpoint * midpoint, axis=1)
     angular_speed = np.divide(
         orbital.angular_momentum_norms,
@@ -210,9 +219,7 @@ def _orbital_metrics(
         "angular_momentum_norm_median": float(np.median(norms)),
         "angular_orientation_coherence": coherence,
         "tangential_fraction_median": float(np.median(tangential_fraction)),
-        "angular_speed_median_per_memory_time": float(
-            np.median(angular_speed) / alpha
-        ),
+        "angular_speed_median_per_memory_time": float(np.median(angular_speed) / alpha),
         "dephasing_memory_times": dephasing_memory_times,
         "dephasing_censored": censored,
     }
@@ -228,6 +235,7 @@ def _run_seed(
     *,
     checkpoint: Any,
     continuation_seed: int,
+    source_launch_delay_memory_times: float,
     source_launch_sigma_rep: float,
     source_launch_memory_times: float,
     source_launch_axis: int,
@@ -247,17 +255,17 @@ def _run_seed(
     sample_steps = np.arange(0, steps + 1, sample_every, dtype=int)
     if source_launch_axis >= config.dim:
         raise ValueError("source launch axis must be smaller than dimension")
-    launch_steps = min(
-        steps,
-        max(1, round(source_launch_memory_times / config.alpha)),
-    )
+    launch_start_step = round(source_launch_delay_memory_times / config.alpha)
+    launch_steps = max(1, round(source_launch_memory_times / config.alpha))
+    launch_stop_step = launch_start_step + launch_steps
+    if launch_stop_step > steps:
+        raise ValueError("launch delay plus duration must fit within the continuation")
     source_drive = np.zeros((steps, config.dim), dtype=float)
     if source_launch_sigma_rep > 0.0:
-        source_drive[:launch_steps, source_launch_axis] = (
-            source_launch_sigma_rep
-            * config.sigma_rep
-            / launch_steps
-        )
+        source_drive[
+            launch_start_step:launch_stop_step,
+            source_launch_axis,
+        ] = source_launch_sigma_rep * config.sigma_rep / launch_steps
     response = one_way_coupled_response(
         checkpoint.state,
         checkpoint.state,
@@ -313,6 +321,32 @@ def _run_seed(
     frozen = condition_index["frozen_source"]
     free = condition_index["free"]
     eta_zero = condition_index["eta_zero_dynamic"]
+    prelaunch = response.sample_steps <= launch_start_step
+    if np.count_nonzero(prelaunch) < 4:
+        raise ValueError("launch delay must contain at least four shape samples")
+    source_stationarity = shape_stationarity_diagnostics(
+        launch_control.source_radius_ratios[prelaunch],
+        launch_control.source_shape_tensors[prelaunch],
+    )
+    response_window = response.sample_steps >= launch_start_step
+    source_shape_response = paired_shape_coherence_diagnostics(
+        response.source_radius_ratios[response_window],
+        launch_control.source_radius_ratios[response_window],
+        response.source_shape_tensors[response_window],
+        launch_control.source_shape_tensors[response_window],
+    )
+    if source_launch_sigma_rep > 0.0:
+        target_control_radii = launch_control.target_radius_ratios[:, dynamic]
+        target_control_tensors = launch_control.target_shape_tensors[:, dynamic]
+    else:
+        target_control_radii = response.target_radius_ratios[:, free]
+        target_control_tensors = response.target_shape_tensors[:, free]
+    target_shape_response = paired_shape_coherence_diagnostics(
+        response.target_radius_ratios[response_window, dynamic],
+        target_control_radii[response_window],
+        response.target_shape_tensors[response_window, dynamic],
+        target_control_tensors[response_window],
+    )
     source_displacement = float(
         np.linalg.norm(
             response.source_memory_centers[-1] - response.source_memory_centers[0]
@@ -335,10 +369,7 @@ def _run_seed(
     )
     launch_source_radius_effect = float(
         np.max(
-            np.abs(
-                response.source_radius_ratios
-                - launch_control.source_radius_ratios
-            )
+            np.abs(response.source_radius_ratios - launch_control.source_radius_ratios)
         )
     )
     dynamic_frozen = float(
@@ -356,8 +387,7 @@ def _run_seed(
         / initial_radius
     )
     dynamic_separation = np.linalg.norm(
-        response.target_memory_centers[:, dynamic]
-        - response.source_memory_centers,
+        response.target_memory_centers[:, dynamic] - response.source_memory_centers,
         axis=1,
     )
     active_radius_disturbance = float(
@@ -387,6 +417,7 @@ def _run_seed(
             dynamic_separation[-1] / dynamic_separation[0]
         ),
         "source_launch_steps": launch_steps,
+        "source_launch_start_step": launch_start_step,
         "source_launch_axis": source_launch_axis,
         "source_launch_sigma_rep": source_launch_sigma_rep,
         "launch_specific_source_displacement_radii": launch_source_displacement,
@@ -397,10 +428,14 @@ def _run_seed(
         ),
         "max_active_target_radius_disturbance": active_radius_disturbance,
         "max_eta_zero_radius_disturbance": eta_zero_radius_disturbance,
+        "source_stationarity": source_stationarity,
+        "source_shape_response": source_shape_response,
+        "target_shape_response": target_shape_response,
         "orbital_metrics": orbital_metrics,
     }
     trace = {
         "sample_steps": response.sample_steps,
+        "source_radius_ratios": response.source_radius_ratios,
         "source_centers": response.source_memory_centers,
         "target_centers": response.target_memory_centers,
         "target_radius_ratios": response.target_radius_ratios,
@@ -408,9 +443,7 @@ def _run_seed(
         "dynamic_angular_momentum_norm": orbital_traces["dynamic_source"][
             "angular_momentum_norm"
         ],
-        "free_angular_momentum_norm": orbital_traces["free"][
-            "angular_momentum_norm"
-        ],
+        "free_angular_momentum_norm": orbital_traces["free"]["angular_momentum_norm"],
     }
     return row, trace
 
@@ -484,16 +517,29 @@ def _gate(rows: list[dict[str, Any]], null_error: float) -> dict[str, Any]:
     interaction_readout = (
         launch_specific_readout if launch_active else dynamic_source_readout
     )
-    nondestructive = bool(
-        max(float(row["max_active_target_radius_disturbance"]) for row in rows) < 0.1
+
+    stationary_source = all(
+        bool(row["source_stationarity"]["stationary_shape_pass"]) for row in rows
     )
-    source_nondestructive = bool(
-        max(float(row["max_launch_specific_source_radius_effect"]) for row in rows) < 0.1
+    bounded_source = all(
+        bool(row["source_shape_response"]["shape_bounded_pass"]) for row in rows
     )
+    coherent_source = all(
+        bool(row["source_shape_response"]["shape_coherent_pass"]) for row in rows
+    )
+    bounded_target = all(
+        bool(row["target_shape_response"]["shape_bounded_pass"]) for row in rows
+    )
+    coherent_target = all(
+        bool(row["target_shape_response"]["shape_coherent_pass"]) for row in rows
+    )
+    source_shape_gate = bounded_source and coherent_source
+    target_shape_gate = bounded_target and coherent_target
     phase_candidate = bool(
         interaction_readout
-        and nondestructive
-        and source_nondestructive
+        and stationary_source
+        and source_shape_gate
+        and target_shape_gate
         and coherence >= 0.5
         and coherence >= free_coherence + 0.2
         and tangential >= 0.5
@@ -507,17 +553,50 @@ def _gate(rows: list[dict[str, Any]], null_error: float) -> dict[str, Any]:
         "launch_specific_target_response_radii_median": launch_target_response,
         "launch_specific_source_displacement_radii_median": launch_source_displacement,
         "interaction_readout_pass": interaction_readout,
-        "nondestructive_target_pass": nondestructive,
+        "stationary_source_shape_pass": stationary_source,
+        "source_shape_bounded_pass": bounded_source,
+        "source_shape_coherent_pass": coherent_source,
+        "source_shape_bounded_coherent_pass": source_shape_gate,
+        "target_shape_bounded_pass": bounded_target,
+        "target_shape_coherent_pass": coherent_target,
+        "target_shape_bounded_coherent_pass": target_shape_gate,
+        "source_max_radius_factor_median": float(
+            np.median(
+                [row["source_shape_response"]["max_radius_factor"] for row in rows]
+            )
+        ),
+        "source_shape_spectrum_distance_median": float(
+            np.median(
+                [
+                    row["source_shape_response"]["shape_spectrum_distance_median"]
+                    for row in rows
+                ]
+            )
+        ),
+        "source_stationarity_radius_drift_median": float(
+            np.median(
+                [row["source_stationarity"]["radius_relative_drift"] for row in rows]
+            )
+        ),
+        "source_stationarity_spectrum_drift_median": float(
+            np.median(
+                [
+                    row["source_stationarity"]["shape_spectrum_total_variation"]
+                    for row in rows
+                ]
+            )
+        ),
         "dynamic_angular_orientation_coherence_median": coherence,
         "free_angular_orientation_coherence_median": free_coherence,
         "dynamic_tangential_fraction_median": tangential,
         "dynamic_dephasing_memory_times_median": dephasing,
         "relational_phase_candidate_pass": phase_candidate,
-        "nondestructive_source_pass": source_nondestructive,
     }
 
 
-def run_pilot(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, np.ndarray]]]:
+def run_pilot(
+    args: argparse.Namespace,
+) -> tuple[dict[str, Any], list[dict[str, np.ndarray]]]:
     checkpoint = load_finite_memory_checkpoint(_resolve(args.checkpoint))
     git_revision = _git_output(["rev-parse", "HEAD"])
     git_status = _git_output(["status", "--short"])
@@ -539,6 +618,7 @@ def run_pilot(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, 
         row, trace = _run_seed(
             checkpoint=checkpoint,
             continuation_seed=seed,
+            source_launch_delay_memory_times=args.source_launch_delay_memory_times,
             source_launch_sigma_rep=args.source_launch_sigma_rep,
             source_launch_memory_times=args.source_launch_memory_times,
             source_launch_axis=args.source_launch_axis,
@@ -562,6 +642,10 @@ def run_pilot(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, 
         "git_status": git_status,
         "checkpoint": str(args.checkpoint).replace("\\", "/"),
         "formation_seed": checkpoint.formation_seed,
+        "checkpoint_update_index": checkpoint.update_index,
+        "checkpoint_age_memory_times_alpha_n": (checkpoint.update_index * config.alpha),
+        "memory_time_updates_approx": 1.0 / config.alpha,
+        "memory_time_updates_exact_efold": -1.0 / math.log1p(-config.alpha),
         "model": {
             "dim": config.dim,
             "alpha": config.alpha,
@@ -582,6 +666,7 @@ def run_pilot(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, 
         },
         "launch": {
             "source_launch_sigma_rep": args.source_launch_sigma_rep,
+            "source_launch_delay_memory_times": (args.source_launch_delay_memory_times),
             "source_launch_memory_times": args.source_launch_memory_times,
             "source_launch_axis": args.source_launch_axis,
         },
@@ -591,7 +676,9 @@ def run_pilot(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, 
     return payload, traces
 
 
-def _plot(payload: dict[str, Any], traces: list[dict[str, np.ndarray]], output: Path) -> None:
+def _plot(
+    payload: dict[str, Any], traces: list[dict[str, np.ndarray]], output: Path
+) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     alpha = float(payload["model"]["alpha"])
     fig = plt.figure(figsize=(12.0, 8.4))
@@ -647,7 +734,11 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, np.ndarray]], output: 
         gate["dynamic_tangential_fraction_median"],
         gate["dynamic_dephasing_memory_times_median"] / 10.0,
     ]
-    axis_kpi.bar(np.arange(len(labels)), values, color=["#0072B2", "#009E73", "#CC79A7", "#E69F00"])
+    axis_kpi.bar(
+        np.arange(len(labels)),
+        values,
+        color=["#0072B2", "#009E73", "#CC79A7", "#E69F00"],
+    )
     axis_kpi.axhline(0.5, color="#666666", linewidth=1)
     axis_kpi.set_xticks(np.arange(len(labels)), labels, rotation=25, ha="right")
     axis_kpi.set_ylabel("registered KPI")
@@ -672,12 +763,29 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "translation or coherent orbital mode in a second knot beyond frozen-source",
         "and no-cross controls?",
         "",
+        "## Time scales and source eligibility",
+        "",
+        f"- alpha={payload['model']['alpha']:.4g}: one code memory time is "
+        f"alpha^-1={payload['memory_time_updates_approx']:.3f} updates; the exact "
+        f"e-folding time is {payload['memory_time_updates_exact_efold']:.3f} updates.",
+        f"- The {payload['parameters']['steps']:,}-update continuation spans "
+        f"{payload['parameters']['steps'] * payload['model']['alpha']:.1f} code "
+        "memory times.",
+        f"- The checkpoint is at N={payload['checkpoint_update_index']:,}, or "
+        f"{payload['checkpoint_age_memory_times_alpha_n']:,.0f} code memory times.",
+        "- Checkpoint age alone is not a stationarity proof. Source radius and the",
+        "  rotation-invariant normalized shape spectrum are therefore tested during",
+        f"  a {payload['launch']['source_launch_delay_memory_times']:.1f}-memory-time "
+        "pre-launch window.",
+        "",
         "## Design",
         "",
-        "- One N=100M d=3 checkpoint is cloned into target and source.",
+        "- One mature d=3 checkpoint is cloned into target and source.",
         "- The source evolves under self-memory and independent future noise.",
         f"- External source launch: {payload['launch']['source_launch_sigma_rep']:.3g} "
-        f"sigma_rep over {payload['launch']['source_launch_memory_times']:.3g} memory times.",
+        f"sigma_rep over {payload['launch']['source_launch_memory_times']:.3g} memory "
+        f"times, after {payload['launch']['source_launch_delay_memory_times']:.3g} "
+        "memory times.",
         "- The launch is an imposed probe, not emergent source propulsion.",
         "- The source does not read the target.",
         "- Dynamic-source, frozen-source, free, and eta=0 target paths share target noise.",
@@ -688,6 +796,11 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         f"- Exact cross=0 identity: {gate['zero_cross_identity_pass']} "
         f"(max error {gate['zero_cross_max_abs_error']:.3e}).",
+        f"- Stationary source shape before launch: "
+        f"{gate['stationary_source_shape_pass']} "
+        f"(median radius drift {gate['source_stationarity_radius_drift_median']:.3e}; "
+        f"shape-spectrum drift "
+        f"{gate['source_stationarity_spectrum_drift_median']:.3e}).",
         f"- Dynamic-versus-frozen source readout above 0.1 target radius: "
         f"{gate['dynamic_source_readout_pass']}.",
         f"- Launch-specific source displacement: "
@@ -695,10 +808,13 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"- Launch-specific target readout above 0.1 target radius: "
         f"{gate['launch_specific_target_readout_pass']} "
         f"({gate['launch_specific_target_response_radii_median']:.3e} radii).",
-        f"- Target radius disturbance below 10 percent: "
-        f"{gate['nondestructive_target_pass']}.",
-        f"- Additional source-radius disturbance versus the paired unlaunched path "
-        f"below 10 percent: {gate['nondestructive_source_pass']}.",
+        f"- Source shape bounded/coherent versus paired unlaunched path: "
+        f"{gate['source_shape_bounded_coherent_pass']} "
+        f"(median max radius factor {gate['source_max_radius_factor_median']:.3f}; "
+        f"median spectral distance "
+        f"{gate['source_shape_spectrum_distance_median']:.3e}).",
+        f"- Target shape bounded/coherent versus its paired control: "
+        f"{gate['target_shape_bounded_coherent_pass']}.",
         f"- Median dynamic angular coherence: "
         f"{gate['dynamic_angular_orientation_coherence_median']:.3f} "
         f"(free {gate['free_angular_orientation_coherence_median']:.3f}).",
@@ -712,25 +828,32 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Seed rows",
         "",
-        "| continuation seed | source displacement / R | launch source / R | "
-        "launch target / R | dynamic-frozen / R | max source radius effect | "
-        "max target radius disturbance |",
-        "|---:|---:|---:|---:|---:|---:|---:|",
+        "| continuation seed | source stationary | source displacement / R | "
+        "launch source / R | launch target / R | source max radius factor | "
+        "source spectrum distance |",
+        "|---:|:---:|---:|---:|---:|---:|---:|",
     ]
     for row in payload["rows"]:
+        stationarity = row["source_stationarity"]
+        shape = row["source_shape_response"]
         lines.append(
-            f"| {row['continuation_seed']} | {row['source_displacement_radii']:.3f} | "
+            f"| {row['continuation_seed']} | "
+            f"{stationarity['stationary_shape_pass']} | "
+            f"{row['source_displacement_radii']:.3f} | "
             f"{row['launch_specific_source_displacement_radii']:.3f} | "
             f"{row['launch_specific_target_response_radii']:.3e} | "
-            f"{row['dynamic_minus_frozen_final_radii']:.3f} | "
-            f"{row['max_launch_specific_source_radius_effect']:.3e} | "
-            f"{row['max_active_target_radius_disturbance']:.3e} |"
+            f"{shape['max_radius_factor']:.3f} | "
+            f"{shape['shape_spectrum_distance_median']:.3e} |"
         )
     lines.extend(
         [
             "",
             "## Interpretation limits",
             "",
+            "- Shape-bounded/coherent permits rotation and bounded breathing. It does",
+            "  not require rigid or pointwise shape preservation.",
+            "- The v0.6 stationarity thresholds are preregistered pilot tolerances, not",
+            "  universal physical constants; negative controls must still calibrate them.",
             "- This is an instantaneous unsigned scalar cross-channel.",
             "- A moving-source response is not finite-speed propagation.",
             "- Continuation seeds from one checkpoint are not independent knot types.",
@@ -770,4 +893,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

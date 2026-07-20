@@ -66,6 +66,9 @@ def test_zero_cross_keeps_all_self_feedback_target_paths_identical() -> None:
         response.target_positions[:, dynamic],
         response.target_positions[:, free],
     )
+    assert response.source_shape_tensors.shape == (4, 2, 2)
+    assert response.target_shape_tensors.shape == (4, 4, 2, 2)
+    assert np.all(np.linalg.eigvalsh(response.source_shape_tensors) >= -1e-14)
     np.testing.assert_array_equal(
         response.target_positions[:, frozen],
         response.target_positions[:, free],
@@ -78,6 +81,8 @@ def test_zero_cross_keeps_all_self_feedback_target_paths_identical() -> None:
         response.source_positions[-1],
         response.source_positions[0],
     )
+
+
 def test_source_drive_moves_only_source_when_cross_coupling_is_zero() -> None:
     steps = 10
     noise = np.zeros((steps, 2))
@@ -109,7 +114,6 @@ def test_source_drive_moves_only_source_when_cross_coupling_is_zero() -> None:
     assert driven.source_positions[-1, 1] > baseline.source_positions[-1, 1]
 
 
-
 def test_moving_source_separates_dynamic_from_frozen_target() -> None:
     target_noise = np.zeros((20, 2))
     source_noise = np.zeros((20, 2))
@@ -126,14 +130,19 @@ def test_moving_source_separates_dynamic_from_frozen_target() -> None:
     )
 
     dynamic, frozen, free, _eta_zero = range(4)
-    assert np.linalg.norm(
-        response.target_positions[-1, dynamic]
-        - response.target_positions[-1, frozen]
-    ) > 0.0
-    assert np.linalg.norm(
-        response.target_positions[-1, dynamic]
-        - response.target_positions[-1, free]
-    ) > 0.0
+    assert (
+        np.linalg.norm(
+            response.target_positions[-1, dynamic]
+            - response.target_positions[-1, frozen]
+        )
+        > 0.0
+    )
+    assert (
+        np.linalg.norm(
+            response.target_positions[-1, dynamic] - response.target_positions[-1, free]
+        )
+        > 0.0
+    )
 
 
 def test_one_way_response_is_translation_equivariant() -> None:
@@ -165,6 +174,11 @@ def test_one_way_response_is_translation_equivariant() -> None:
         original.source_positions + shift,
         atol=1e-12,
     )
+    np.testing.assert_allclose(
+        translated.source_shape_tensors,
+        original.source_shape_tensors,
+        atol=1e-12,
+    )
 
 
 def test_relative_orbital_observables_recover_circular_motion() -> None:
@@ -182,4 +196,3 @@ def test_relative_orbital_observables_recover_circular_motion() -> None:
         rtol=1e-12,
         atol=1e-12,
     )
-

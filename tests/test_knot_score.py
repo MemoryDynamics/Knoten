@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import pytest
+import numpy as np
+
 
 from emergenz_knoten.knot_score import (
     best_residence_memory_times,
@@ -8,10 +10,13 @@ from emergenz_knoten.knot_score import (
     memory_mean_radius,
     memory_roundness_value,
     memory_shape_dimension_value,
+    paired_shape_coherence_diagnostics,
+    shape_stationarity_diagnostics,
     occupancy_dimension_value,
     score_against_control,
     score_v0_4_against_control,
     score_v0_5_against_control,
+    score_v0_6_against_control,
     shape_roundness_value,
     threshold_score,
     voxel_stability_ratio,
@@ -183,3 +188,94 @@ def test_score_v0_4_adds_memory_cloud_components() -> None:
     assert score["memory_roundness_score"] == pytest.approx(1.0)
     assert score["memory_dimension_score"] == pytest.approx(1.0)
     assert score["score"] == pytest.approx(1.0)
+
+
+def test_shape_stationarity_allows_rotation_but_rejects_shape_drift() -> None:
+    angles = np.linspace(0.0, np.pi / 2.0, 12)
+    base = np.diag([0.8, 0.15, 0.05])
+    tensors = []
+    for angle in angles:
+        rotation = np.array(
+            [
+                [np.cos(angle), -np.sin(angle), 0.0],
+                [np.sin(angle), np.cos(angle), 0.0],
+                [0.0, 0.0, 1.0],
+            ]
+        )
+        tensors.append(rotation @ base @ rotation.T)
+    radii = np.ones(len(tensors))
+
+    stationary = shape_stationarity_diagnostics(radii, np.asarray(tensors))
+    drifting = shape_stationarity_diagnostics(
+        np.linspace(1.0, 2.0, len(tensors)),
+        np.asarray(tensors),
+    )
+
+    assert stationary["stationary_shape_pass"]
+    assert stationary["shape_spectrum_total_variation"] == pytest.approx(0.0)
+    assert not drifting["stationary_shape_pass"]
+
+
+def test_paired_shape_coherence_allows_rotation_and_bounded_breathing() -> None:
+    control = np.repeat(np.diag([0.7, 0.2, 0.1])[None, :, :], 10, axis=0)
+    rotation = np.array(
+        [
+            [0.0, -1.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 0.0, 1.0],
+        ]
+    )
+    case = np.asarray([1.2 * rotation @ tensor @ rotation.T for tensor in control])
+    coherent = paired_shape_coherence_diagnostics(
+        np.full(10, np.sqrt(1.2)),
+        np.ones(10),
+        case,
+        control,
+    )
+    deformed = case.copy()
+    deformed[:, :, :] = np.diag([0.98, 0.01, 0.01])
+    incoherent = paired_shape_coherence_diagnostics(
+        np.full(10, np.sqrt(1.2)),
+        np.ones(10),
+        deformed,
+        control,
+    )
+
+    assert coherent["shape_bounded_coherent_pass"]
+    assert coherent["shape_spectrum_distance_median"] == pytest.approx(0.0)
+    assert not incoherent["shape_coherent_pass"]
+
+
+def test_score_v0_6_requires_stationary_shape_eligibility() -> None:
+    case = _diagnostics(
+        radius=4.0,
+        residences=[30.0, 60.0, 90.0],
+        residence_updates=[30.0, 60.0, 90.0],
+        memory_radius=2.0,
+        memory_roundness=0.6,
+        memory_dimension=2.4,
+    )
+    control = _diagnostics(
+        radius=40.0,
+        residences=[10.0, 20.0, 30.0],
+        residence_updates=[10.0, 20.0, 30.0],
+        memory_radius=10.0,
+        memory_roundness=0.3,
+        memory_dimension=1.5,
+    )
+
+    eligible = score_v0_6_against_control(
+        case,
+        control,
+        stationarity_diagnostics={"stationary_shape_pass": True},
+    )
+    ineligible = score_v0_6_against_control(
+        case,
+        control,
+        stationarity_diagnostics={"stationary_shape_pass": False},
+    )
+
+    assert eligible["eligible_knot_pass"]
+    assert eligible["score"] == pytest.approx(1.0)
+    assert not ineligible["eligible_knot_pass"]
+    assert ineligible["score"] == pytest.approx(7.0 / 8.0)

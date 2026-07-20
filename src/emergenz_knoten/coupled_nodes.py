@@ -51,9 +51,11 @@ class OneWayCoupledResponse:
     target_conditions: tuple[str, ...]
     source_positions: np.ndarray
     source_memory_centers: np.ndarray
+    source_shape_tensors: np.ndarray
     source_radius_ratios: np.ndarray
     target_positions: np.ndarray
     target_memory_centers: np.ndarray
+    target_shape_tensors: np.ndarray
     target_radius_ratios: np.ndarray
     source_center_offset: np.ndarray
     cross_eta: float
@@ -113,9 +115,11 @@ def _one_way_batch(
 
     source_positions = np.empty((n_samples, dim), np.float64)
     source_centers = np.empty((n_samples, dim), np.float64)
+    source_tensors = np.empty((n_samples, dim, dim), np.float64)
     source_radii = np.empty(n_samples, np.float64)
     target_positions = np.empty((n_samples, n_paths, dim), np.float64)
     target_centers = np.empty((n_samples, n_paths, dim), np.float64)
+    target_tensors = np.empty((n_samples, n_paths, dim, dim), np.float64)
     target_radii = np.empty((n_samples, n_paths), np.float64)
 
     target_mass = np.sum(target_weights)
@@ -202,7 +206,7 @@ def _one_way_batch(
             source_history[source_head] = source_x
 
         while sample_index < n_samples and sample_steps[sample_index] == step:
-            source_position, source_center, _source_tensor, source_radius = (
+            source_position, source_center, source_tensor, source_radius = (
                 path_observables(
                     source_x,
                     source_history,
@@ -214,8 +218,9 @@ def _one_way_batch(
             source_positions[sample_index] = source_position
             source_centers[sample_index] = source_center
             source_radii[sample_index] = source_radius
+            source_tensors[sample_index] = source_tensor
             for path in range(n_paths):
-                position, center, _tensor, radius = path_observables(
+                position, center, tensor, radius = path_observables(
                     target_x[path],
                     target_history[path],
                     target_heads[path],
@@ -224,15 +229,18 @@ def _one_way_batch(
                 )
                 target_positions[sample_index, path] = position
                 target_centers[sample_index, path] = center
+                target_tensors[sample_index, path] = tensor
                 target_radii[sample_index, path] = radius
             sample_index += 1
 
     return (
         source_positions,
         source_centers,
+        source_tensors,
         source_radii,
         target_positions,
         target_centers,
+        target_tensors,
         target_radii,
     )
 
@@ -255,7 +263,9 @@ def _validated_noise(
 ) -> np.ndarray:
     values = np.asarray(noise, dtype=float)
     if values.shape != (n_steps, dim) or not np.isfinite(values).all():
-        raise ValueError(f"{name} must have shape (max(sample_steps), dim) and be finite")
+        raise ValueError(
+            f"{name} must have shape (max(sample_steps), dim) and be finite"
+        )
     return values
 
 
@@ -287,7 +297,9 @@ def one_way_coupled_response(
 
     offset = np.asarray(source_center_offset, dtype=float)
     if offset.shape != (target_state.dim,) or not np.isfinite(offset).all():
-        raise ValueError("source_center_offset must be a finite dimension-matched vector")
+        raise ValueError(
+            "source_center_offset must be a finite dimension-matched vector"
+        )
     if float(np.linalg.norm(offset)) <= 0.0:
         raise ValueError("source_center_offset must be non-zero")
     placed_source = place_finite_memory_state(
@@ -339,9 +351,11 @@ def one_way_coupled_response(
     (
         source_positions,
         source_centers,
+        source_tensors,
         source_radii,
         target_positions,
         target_centers,
+        target_tensors,
         target_radii,
     ) = _one_way_batch(
         target_state.x,
@@ -377,9 +391,11 @@ def one_way_coupled_response(
         target_conditions=TARGET_CONDITIONS,
         source_positions=source_positions,
         source_memory_centers=source_centers,
+        source_shape_tensors=source_tensors,
         source_radius_ratios=source_radii / source_initial_radius,
         target_positions=target_positions,
         target_memory_centers=target_centers,
+        target_shape_tensors=target_tensors,
         target_radius_ratios=target_radii / target_initial_radius,
         source_center_offset=offset,
         cross_eta=float(cross_eta),
@@ -424,7 +440,9 @@ def relative_orbital_observables(
 
     dim = target.shape[1]
     tensors = np.empty((len(velocities), dim, dim), dtype=float)
-    for index, (position, velocity) in enumerate(zip(midpoint, velocities, strict=True)):
+    for index, (position, velocity) in enumerate(
+        zip(midpoint, velocities, strict=True)
+    ):
         tensors[index] = np.outer(position, velocity) - np.outer(velocity, position)
     norms = np.linalg.norm(tensors, axis=(1, 2)) / np.sqrt(2.0)
     return RelativeOrbitalObservables(
@@ -435,4 +453,3 @@ def relative_orbital_observables(
         angular_momentum_tensors=tensors,
         angular_momentum_norms=norms,
     )
-
