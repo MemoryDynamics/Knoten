@@ -14,9 +14,11 @@ from .core import (
 )
 from .kernels import double_gaussian_gradient, exponential_memory_weights
 from .markov.features import augmented_feature_names, memory_summary_features
+from .state import FiniteMemoryState
 
 
 VectorForceMode = Literal["alignment", "transverse_2d"]
+HistoryCurrentMode = Literal["displacement", "unit"]
 
 
 @dataclass(frozen=True)
@@ -49,7 +51,8 @@ def _validate_vector_config(config: VectorMemoryConfig) -> None:
     if not np.isfinite(config.sigma_vector) or config.sigma_vector <= 0.0:
         raise ValueError("sigma_vector must be positive")
     if config.vector_memory_factor is not None and (
-        not np.isfinite(config.vector_memory_factor) or config.vector_memory_factor <= 0.0
+        not np.isfinite(config.vector_memory_factor)
+        or config.vector_memory_factor <= 0.0
     ):
         raise ValueError("vector_memory_factor must be positive")
     if config.max_vector_memory is not None and config.max_vector_memory < 1:
@@ -61,7 +64,11 @@ def _validate_vector_config(config: VectorMemoryConfig) -> None:
 
 
 def _lambda_vector(config: VectorMemoryConfig) -> float:
-    return config.scalar.alpha if config.lambda_vector is None else float(config.lambda_vector)
+    return (
+        config.scalar.alpha
+        if config.lambda_vector is None
+        else float(config.lambda_vector)
+    )
 
 
 def _vector_horizon(config: VectorMemoryConfig) -> int:
@@ -83,6 +90,27 @@ def normalize_orientation(displacement: np.ndarray) -> np.ndarray:
     if norm == 0.0:
         return np.zeros_like(disp)
     return disp / norm
+
+
+def oriented_history_from_state(
+    state: FiniteMemoryState,
+    *,
+    mode: HistoryCurrentMode = "displacement",
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Derive ordered current deposits from a retained scalar history."""
+
+    if state.n_memory < 2:
+        raise ValueError("oriented history requires at least two memory points")
+    if mode not in ("displacement", "unit"):
+        raise ValueError("unknown history current mode")
+    positions = state.memory[:-1].copy()
+    currents = (state.memory[:-1] - state.memory[1:]).copy()
+    if mode == "unit":
+        norms = np.linalg.norm(currents, axis=1)
+        nonzero = norms > 0.0
+        currents[nonzero] /= norms[nonzero, None]
+        currents[~nonzero] = 0.0
+    return positions, currents, state.weights[:-1].copy()
 
 
 def update_vector_history(
@@ -138,6 +166,86 @@ def vector_gaussian_field(
     r2 = np.einsum("ij,ij->i", dx, dx)
     kernel = np.exp(-0.5 * r2 / (sigma * sigma))
     return np.sum((w * kernel)[:, None] * orient, axis=0)
+
+
+def antisymmetric_current_tensor(
+    positions: np.ndarray,
+    currents: np.ndarray,
+    weights: np.ndarray,
+    *,
+    origin: np.ndarray,
+) -> np.ndarray:
+    """Return the weighted bivector current about a supplied origin."""
+
+    pos = np.asarray(positions, dtype=float)
+    current = np.asarray(currents, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    center = np.asarray(origin, dtype=float)
+    if pos.ndim != 2 or current.shape != pos.shape:
+        raise ValueError("positions and currents must have shape (n_memory, dim)")
+    if w.shape != (pos.shape[0],):
+        raise ValueError("weights must match positions length")
+    if center.shape != (pos.shape[1],):
+        raise ValueError("origin must match current dimension")
+    radial = pos - center[None, :]
+    wedges = (
+        radial[:, :, None] * current[:, None, :]
+        - current[:, :, None] * radial[:, None, :]
+    )
+    return np.sum(w[:, None, None] * wedges, axis=0)
+
+
+def antisymmetric_current_coherence(
+    positions: np.ndarray,
+    currents: np.ndarray,
+    weights: np.ndarray,
+    *,
+    origin: np.ndarray,
+) -> float:
+    """Return coherent bivector norm divided by absolute bivector current."""
+
+    pos = np.asarray(positions, dtype=float)
+    current = np.asarray(currents, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    radial = pos - np.asarray(origin, dtype=float)[None, :]
+    wedges = (
+        radial[:, :, None] * current[:, None, :]
+        - current[:, :, None] * radial[:, None, :]
+    )
+    absolute = float(np.sum(w * np.linalg.norm(wedges, axis=(1, 2))))
+    if absolute == 0.0:
+        return 0.0
+    tensor = antisymmetric_current_tensor(pos, current, w, origin=origin)
+    return float(np.linalg.norm(tensor) / absolute)
+
+
+def vector_field_coherence(
+    x: np.ndarray,
+    positions: np.ndarray,
+    currents: np.ndarray,
+    weights: np.ndarray,
+    *,
+    sigma: float,
+) -> float:
+    """Return local directed current divided by local absolute current."""
+
+    field = vector_gaussian_field(
+        x,
+        positions,
+        currents,
+        weights,
+        sigma=sigma,
+    )
+    dx = np.asarray(x, dtype=float)[None, :] - np.asarray(positions, dtype=float)
+    kernel = np.exp(-0.5 * np.einsum("ij,ij->i", dx, dx) / (sigma * sigma))
+    absolute_current = float(
+        np.sum(
+            np.asarray(weights, dtype=float) * kernel * np.linalg.norm(currents, axis=1)
+        )
+    )
+    if absolute_current == 0.0:
+        return 0.0
+    return float(np.linalg.norm(field) / absolute_current)
 
 
 def vector_memory_feature_names(dim: int) -> list[str]:
@@ -199,6 +307,7 @@ def vector_memory_summary_features(
         dtype=float,
     )
     return np.concatenate([field, mean_orientation, tail])
+
 
 def vector_memory_force(
     x: np.ndarray,
@@ -338,7 +447,10 @@ def simulate_vector_memory(
         "sample_steps": np.asarray(sample_steps, dtype=int),
         "augmented_features": np.asarray(features, dtype=float),
         "feature_names": np.asarray(
-            [*augmented_feature_names(scalar.dim), *vector_memory_feature_names(scalar.dim)],
+            [
+                *augmented_feature_names(scalar.dim),
+                *vector_memory_feature_names(scalar.dim),
+            ],
             dtype=str,
         ),
         "final_x": x.copy(),

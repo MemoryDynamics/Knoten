@@ -9,11 +9,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import (  # noqa: E402
+    FiniteMemoryState,
     SimulationConfig,
     VectorMemoryConfig,
+    antisymmetric_current_coherence,
+    antisymmetric_current_tensor,
     normalize_orientation,
+    oriented_history_from_state,
     simulate_finite_memory,
     simulate_vector_memory,
+    vector_field_coherence,
     vector_gaussian_field,
     vector_memory_force,
 )
@@ -94,6 +99,73 @@ def test_vector_orientations_are_unit_or_zero() -> None:
 def test_normalize_orientation_handles_zero_displacement() -> None:
     assert np.allclose(normalize_orientation(np.zeros(3)), np.zeros(3))
     assert np.allclose(normalize_orientation(np.array([3.0, 4.0])), [0.6, 0.8])
+
+
+def test_scalar_history_yields_displacement_and_unit_currents() -> None:
+    state = FiniteMemoryState(
+        x=np.array([3.0, 0.0]),
+        memory=np.array([[3.0, 0.0], [1.0, 0.0], [0.0, 0.0]]),
+        weights=np.array([0.5, 0.3, 0.2]),
+    )
+
+    positions, displacement, weights = oriented_history_from_state(state)
+    _, unit, _ = oriented_history_from_state(state, mode="unit")
+
+    np.testing.assert_array_equal(positions, state.memory[:-1])
+    np.testing.assert_array_equal(displacement, [[2.0, 0.0], [1.0, 0.0]])
+    np.testing.assert_array_equal(unit, [[1.0, 0.0], [1.0, 0.0]])
+    np.testing.assert_array_equal(weights, state.weights[:-1])
+    assert np.isclose(
+        vector_field_coherence(
+            np.zeros(2), positions, displacement, weights, sigma=10.0
+        ),
+        1.0,
+    )
+
+
+def test_antisymmetric_current_detects_coherent_circulation() -> None:
+    positions = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])
+    tangent = np.array([[0.0, 1.0], [-1.0, 0.0], [0.0, -1.0], [1.0, 0.0]])
+    weights = np.ones(4)
+
+    tensor = antisymmetric_current_tensor(
+        positions, tangent, weights, origin=np.zeros(2)
+    )
+
+    np.testing.assert_allclose(tensor + tensor.T, 0.0)
+    assert tensor[0, 1] > 0.0
+    assert np.isclose(
+        antisymmetric_current_coherence(
+            positions, tangent, weights, origin=np.zeros(2)
+        ),
+        1.0,
+    )
+    assert (
+        antisymmetric_current_coherence(
+            positions,
+            tangent * np.array([[1.0], [-1.0], [1.0], [-1.0]]),
+            weights,
+            origin=np.zeros(2),
+        )
+        == 0.0
+    )
+
+
+def test_vector_field_coherence_detects_cancellation_and_zero_current() -> None:
+    positions = np.zeros((2, 2))
+    weights = np.ones(2)
+    cancelling = np.array([[1.0, 0.0], [-1.0, 0.0]])
+
+    assert (
+        vector_field_coherence(np.zeros(2), positions, cancelling, weights, sigma=1.0)
+        == 0.0
+    )
+    assert (
+        vector_field_coherence(
+            np.zeros(2), positions, np.zeros((2, 2)), weights, sigma=1.0
+        )
+        == 0.0
+    )
 
 
 def test_vector_gaussian_field_and_transverse_force() -> None:

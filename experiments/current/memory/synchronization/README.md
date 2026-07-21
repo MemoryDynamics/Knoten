@@ -34,13 +34,16 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 5. Independent scalar cross-readout: separate the autonomous self-kernel from
    spatial cross-resolution and compare rigid source orientations with a point
    monopole at matched centre response.
-6. Signed scalar cross-channel: separate source sign from the non-negative
+6. Ordered-history current audit: derive polar displacement/unit currents and
+   antisymmetric circulation from adjacent retained points; compare both with
+   an independent-sign null before adding a new state.
+7. Signed scalar cross-channel: separate source sign from the non-negative
    self-confining memory and require `q=0` plus sign-reversal controls.
-7. One-way dynamic coupling: source evolves but does not read the target.
-8. Nondestructive source transport: preserve source shape against a paired
+8. One-way dynamic coupling: source evolves but does not read the target.
+9. Nondestructive source transport: preserve source shape against a paired
    unlaunched continuation before interpreting target response.
-9. Reciprocal coupling with separate memory fields only after step 8 passes.
-10. Shared memory only as a later, separately normalized model variant.
+10. Reciprocal coupling with separate memory fields only after step 9 passes.
+11. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 

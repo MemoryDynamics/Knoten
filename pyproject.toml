@@ -33,6 +33,9 @@ include-package-data = true
 where = ["src"]
 include = ["emergenz_knoten*"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
 [tool.ruff.lint.per-file-ignores]
 "experiments/current/**/*.py" = ["E402"]
 "tests/**/*.py" = ["E402"]

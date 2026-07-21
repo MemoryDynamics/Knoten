@@ -49,6 +49,14 @@ oder retardierter skalarer Mediator bleibt fuer eine spaetere, getrennte
 Lokalitaets- oder Laufzeitfrage zurueckgestellt; der vorliegende Test bewertet
 nur seinen moeglichen skalaren Formpayload.
 
+Vor einer neuen Zustandsdynamik wird noch falsifiziert, ob die bereits
+geordnete skalare Historie als polarer Verschiebungsstrom oder antisymmetrische
+Zirkulation genuegt. Primaer sind beide Koharenzen bei `sigma/R_mem=2.5` gegen
+eine konditionale 99%-Random-Sign-Null sowie ihre Richtungsstabilitaet zu
+`sigma/R_mem=5`. So wird ein Ringstrom nicht wegen verschwindendem Nettostrom
+verworfen. Gemeinsames Fail waehlt einen eigenstaendigen orientierten Zustand;
+Pass nur den jeweiligen abgeleiteten Cross-Kanal.
+
 Pflichtfelder vor Implementierung:
 
 1. Mechanismushypothese und konkurrierendes Nullmodell.

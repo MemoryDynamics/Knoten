@@ -20,7 +20,7 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft, paper, external + README-Index"]
 
-    experiments --> sync_exp["synchronization/<br/>frozen, signed and one-way source gates"]
+    experiments --> sync_exp["synchronization/<br/>frozen, cross-readout, current and one-way gates"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
@@ -60,7 +60,7 @@ flowchart TD
     coupled --> continuation
     signed --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
-    src --> vector_memory["vector_memory.py<br/>oriented memory channel and vector features"]
+    src --> vector_memory["vector_memory.py<br/>oriented history/current, bivector and vector features"]
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
