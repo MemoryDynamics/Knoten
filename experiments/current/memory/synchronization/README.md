@@ -146,6 +146,26 @@ for other independently formed knots.
 
 Report: `reports/response/scalar_cross_readout_resolution_2026-07-21.md`.
 
+## Ordered-History Current Audit
+
+Before adding a new state, the retained scalar history was tested as both a
+polar adjacent-point current and an antisymmetric circulation bivector. The
+conditional null independently flips current signs while preserving positions,
+magnitudes, memory weights, read kernel, and checkpoint.
+
+At the primary `sigma/R_mem=2.5`, polar coherence reaches only `0.474` and
+`0.168` of the 99% sign-null threshold in `d=3/10`. Bivector coherence reaches
+`0.626` and `0.743`. Directions remain stable toward `sigma/R_mem=5`, but
+neither amplitude is null-separated. This is negative pipeline evidence from
+one checkpoint per embedding, not a general no-go theorem.
+
+Decision: the scalar history is not simply relabelled as a coherent vector
+source. The next gate uses an independently evolving oriented state, at least
+six formations, common future noise, channel-off and randomized-deposit
+controls, and a relational angular/transverse primary observable.
+
+Report: `reports/response/oriented_history_current_audit_2026-07-21.md`.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

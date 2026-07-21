@@ -71,6 +71,7 @@ wichtig:
 4. `reports/memory/low_mode_identity_audit_2026-07-20.md`
 5. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
 6. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
+7. `reports/response/oriented_history_current_audit_2026-07-21.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -94,12 +95,13 @@ Der skalare Fernkanal ist als Negativ-/Baseline-Modell ausreichend gehaertet.
 Weitere Amplituden-, kleinere-Epsilon- oder reine Alters-Scans sind ohne neue
 diskriminierende Hypothese nicht priorisiert.
 
-Das vorgeschaltete statische Cross-Readout-Gate trennt jetzt Selbstkernel und
-Cross-Aufloesung. Es scheitert in `d=3/10` am vorregistrierten 1%-Formsignal,
-auch am Distanzrand von 1.25 kombinierten Memory-Radien. Damit wird als genau
-ein neuer Mechanismus **orientiertes Vektor-/Strommemory mit relationalem
-Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator bleibt fuer eine
-spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
+Das statische Cross-Readout-Gate scheitert in `d=3/10` am vorregistrierten
+1%-Formsignal. Auch die anschliessende kostenlose Umdeutung der geordneten
+skalaren Historie besteht weder als polarer Strom noch als antisymmetrische
+Zirkulation die konditionale 99%-Random-Sign-Null. Damit wird als genau ein
+neuer Mechanismus ein **eigenstaendig evolvierender orientierter Zustand mit
+relationalem Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator
+bleibt fuer eine spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
 
 Vor dessen dynamischer Implementierung sind Nullmodell, primaere Observable,
 mindestens sechs unabhaengige Formationszustaende, Akzeptanzschwelle und

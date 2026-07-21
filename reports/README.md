@@ -85,10 +85,15 @@ identifizierten physikalischen Moden.
   - **negative + pipeline-only:** Selbst- und Cross-Kernel sind getrennt und
     kalibriert; der 1%-Orientierungsschwellenwert wird in `d=3/10` vor der
     Distanzgrenze nicht erreicht.
+- [Geordneter History-Current-Audit](response/oriented_history_current_audit_2026-07-21.md)
+  - **negative + pipeline-only:** Weder polarer Verschiebungsstrom noch
+    antisymmetrische Zirkulation ueberschreiten in `d=3/10` die konditionale
+    99%-Random-Sign-Null; je ein Checkpoint pro Einbettung.
 
 Entscheidung: Reziproke Kopplung bleibt gesperrt. Als naechster Mechanismus
-wird orientiertes Vektor-/Strommemory vorregistriert. Ein lokaler/retardierter
-Skalarmediator bleibt fuer eine getrennte Lokalitaetsfrage zurueckgestellt.
+wird ein eigenstaendig evolvierender orientierter Zustand vorregistriert. Ein
+lokaler/retardierter Skalarmediator bleibt fuer eine getrennte
+Lokalitaetsfrage zurueckgestellt.
 
 ### 5. Governance und Kuration
 

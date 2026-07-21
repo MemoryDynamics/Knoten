@@ -23,6 +23,10 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   Mode-Identity-Gate.
 - `draft/response/one_way_interaction_age_N3M_2026-07-21.png`: Translation
   ohne kontrollgetrennte Shape-Dynamik.
+- `draft/response/scalar_cross_readout_resolution_2026-07-21.png`: negatives
+  statisches Skalar-Shape-Readout-Gate.
+- `draft/response/oriented_history_current_audit_2026-07-21.png`: negatives
+  Polar-/Bivektor-Gate gegen konditionale Vorzeichen-Nullen.
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in
 `reports/README.md`.

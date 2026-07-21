@@ -49,13 +49,19 @@ oder retardierter skalarer Mediator bleibt fuer eine spaetere, getrennte
 Lokalitaets- oder Laufzeitfrage zurueckgestellt; der vorliegende Test bewertet
 nur seinen moeglichen skalaren Formpayload.
 
-Vor einer neuen Zustandsdynamik wird noch falsifiziert, ob die bereits
-geordnete skalare Historie als polarer Verschiebungsstrom oder antisymmetrische
-Zirkulation genuegt. Primaer sind beide Koharenzen bei `sigma/R_mem=2.5` gegen
-eine konditionale 99%-Random-Sign-Null sowie ihre Richtungsstabilitaet zu
-`sigma/R_mem=5`. So wird ein Ringstrom nicht wegen verschwindendem Nettostrom
-verworfen. Gemeinsames Fail waehlt einen eigenstaendigen orientierten Zustand;
-Pass nur den jeweiligen abgeleiteten Cross-Kanal.
+Der vorgeschaltete History-Current-Audit scheitert ebenfalls in beiden
+Einbettungen. Bei `sigma/R_mem=2.5` liegen polarer Strom in `d=3/10` nur bei
+`0.474/0.168` und antisymmetrische Zirkulation bei `0.626/0.743` ihrer
+jeweiligen konditionalen 99%-Random-Sign-Schwelle. Die Richtungen sind zur
+groeberen Skala stabil, aber die Koharenzamplituden sind nicht von der Null
+getrennt. Das ist erneut pathweise Evidenz aus je einem Checkpoint: Die
+vorhandene geordnete Historie kann unter diesen Observablen nicht einfach als
+kohaerente orientierte Quelle umbenannt werden.
+
+Als genau ein neuer Mechanismus ist damit ein **eigenstaendig evolvierender
+orientierter Zustand** ausgewaehlt. Sein erster One-Way-Test bleibt an die
+folgenden Pflichtfelder gebunden; ein lokaler/retardierter Skalarmediator wird
+nicht parallel geoeffnet.
 
 Pflichtfelder vor Implementierung:
 
