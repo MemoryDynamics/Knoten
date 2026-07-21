@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-07-16.
+Stand: 2026-07-21.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -45,20 +45,21 @@ python experiments/current/memory/synchronization/weak_probe_response.py
 
 ## Aktueller Schwerpunkt
 
-Der skalare `A_att=35`, `epsilon=1e-4`-Referenzknoten ist der Startzustand fuer
-das externe Response-Programm. Die uniforme Weak-Probe-Kalibrierung auf
-vollstaendigen `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaenden ist erledigt:
+Der skalare `A_att=35`, `epsilon=1e-4`-Zustand ist inzwischen als lineare
+co-moving Relaxationsbaseline eingeordnet. Weak Probe, Frozen Source,
+signierter Architekturtest und One-Way-Interaction-Age-Audit sind ausgefuehrt.
+Der Fernkanal akkumuliert Zentrumtranslation, isoliert aber keine
+kontrollgetrennte Formmodifikation oder Oszillation.
 
-- direkter `eta_zero`-Pfad reproduziert die Identitaetsantwort;
-- Probe-Fraktionen `0.03` und `0.10` Memory-Radien sind linear und
-  nichtdestruktiv;
-- Memory-Zentrumantwort ist isotrop vollrangig (`3` bzw. `10`);
-- Formantwort besitzt keinen reproduzierbaren Seed-Rang.
+Neue Experimente muessen deshalb vorab zwischen zwei Mechanismen entscheiden:
 
-Das ist die uniforme Vollrang-Negativkontrolle. Der naechste Entry-Point wird
-einen lokalisierten eingefrorenen Quellknoten testen, zuerst als geklonten und
-danach als unabhaengigen Seed-Zustand. Gemeinsames Memory ist keine Abkuerzung,
-sondern eine spaetere eigene Modellvariante.
+- lokaler bzw. retardierter Mediator mit explizitem Feldzustand; oder
+- orientiertes Vektormemory mit relationalem Readout.
+
+Reine Laufzeitverlaengerung, kleinere Epsilon-Werte oder neue Amplitudensweeps
+des alten Skalarpfads sind ohne falsifizierbare Zusatzhypothese nicht aktiv.
+Der aktuelle Entscheidungsstand und die kanonischen Reports stehen in
+`docs/status/project_priorities.md` und `reports/README.md`.
 
 ## Kontext
 

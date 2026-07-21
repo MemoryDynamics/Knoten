@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-19.
+Stand: 2026-07-21.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -163,7 +163,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; Fixed-chi-q-Pilot zeigt zusaetzlich, dass der kompakte Ast bei `R_mem/sigma_rep<=2e-4` nur lokale Steifigkeit identifiziert | breiter Drei-Skalen-Kompensator erfuellt Nullintegral und lokale Kruemmung im `N=1M`-Pilot; als Modellvariante, nicht als Neutralitaetsnachweis berichten |
 | Signierter skalarer Cross-Kanal besitzt exakte Null- und Vorzeichenarme | als Architekturtest gestuetzt: auf je einem `N=100M`-Checkpoint in `d=3/10` sind Null- und Produktarme bitgenau, der Produkt-Flip kehrt die Antwort um und Radiusstoerungen bleiben klein; Labels sind extern vergeben | mindestens 6, bevorzugt 10 unabhaengige Zustaende ohne Retuning und feste Distanzpruefung unter/ueber dem Kraftwechsel |
 | Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | unabhaengige Formationszustaende und shape-bounded/coherent One-Way-Transport vor Reziprozitaet; keine Ladungssprache |
-| Extern angeschobene skalare Quelle uebertraegt einen koharenten Modus | fuer den getesteten Punkt-Drive nicht gestuetzt: 10.944 Source-Radien Zusatzverschiebung, 46-59 Prozent Radiusverformung und nur 3.137e-4 Target-Radien Response; Phase wie freie Kontrolle | lokalen/retardierten oder orientierten Transportmechanismus mit gepaarter unlaunched Kontrolle testen; keine Reziprozitaet vorher |
+| Extern bewegte skalare Quelle erzeugt kontrollgetrennte Formdynamik | nicht gestuetzt: der Launch ist nicht durchgehend formkohaerent; bis N=103M waechst die Zentrumantwort nahezu linear auf 20.844 Radien, aber 0/5 Seeds bestehen das Formmodifikationsgate und die Shape-Halbwelle folgt der freien Kontrolle | mechanistisch anderen lokalen/retardierten oder orientierten Kanal vorregistrieren; keine Reziprozitaet vorher |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |

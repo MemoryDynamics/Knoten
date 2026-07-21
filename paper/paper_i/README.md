@@ -1,6 +1,6 @@
 # Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
 
-Stand: 2026-07-15.
+Stand: 2026-07-21.
 
 ## Rolle
 
@@ -31,10 +31,10 @@ Die aktuelle Fassung ist auf folgende Lesart geschaerft:
 - `alpha^{-1}` als interne Speicherpersistenzskala in dieser normierten Konvention;
 - Knoten als operational messbare metastabile Strukturen;
 - aktueller numerischer Paper-I-Kern: co-moving kompakte Memory-Clouds im
-  korrigierten scalar reference slice, getrennt von `eta_zero` ueber Radius,
-  Drift/Radius, `D_mem` und Roundness;
-- `D_mem ~=2.94` im gewaehlten 3D-Embedding nur als lokaler
-  Memory-Shape-Teaser; keine makroskopische `d=3`-Selektion in Paper I;
+  korrigierten scalar reference slice, deren Radius durch den linearen
+  Finite-Memory-Relativmodus erklaert wird;
+- `D_mem ~=2.94` im gewaehlten 3D-Embedding als erwartete isotrope
+  Ambient-Shape-Diagnostik und nicht als Dimensionsselektion;
 - Massenbezug nur als spaetere Kalibrierungsfrage; aktuell nur Relaxations-/Konfinierungsproxy;
 - klare Trennung von Definition, numerical observation und conjecture.
 
@@ -61,7 +61,7 @@ Aktiv im Paper verwendet:
   angepasst.
 - `fig_memory_weights.pdf`: Speichergewichte und Persistenzskala
   `alpha^{-1}`.
-- `fig3_knot_trajectory.pdf`: representative metastabile Knotenbildung.
+- `fig3_knot_trajectory.pdf`: historische illustrative Kompakttrajektorie; keine eigenstaendige Metastabilitaetsevidenz.
 - `fig_relaxation_diagnostic.pdf`: operationaler Relaxationsfit fuer
   `Gamma_rel`.
 
@@ -117,5 +117,5 @@ Weltmodell-Claims liegen, sondern auf:
 5. Ist Paper 0 als separates mathematisches Einordnungspaper bzw. Supplement sinnvoll?
 6. Ist die Long-Run-Evidenz defensiv genug als co-moving Memory-Cloud-Befund
    formuliert, ohne feste Zentren, Spin, Photon- oder Teilchenclaims?
-7. Ist der `D_mem ~=2.94`-Befund klar als lokaler 3D-Embedding-Teaser und
-   nicht als makroskopischer Dimensionssatz abgegrenzt?
+7. Ist `D_mem ~=2.94` klar als erwartete Shape-Diagnostik des gewaehlten
+   3D-Embeddings und nicht als Dimensionsselektion abgegrenzt?

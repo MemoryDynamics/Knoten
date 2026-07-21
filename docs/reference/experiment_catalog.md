@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-19.
+Stand: 2026-07-21.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -541,7 +541,7 @@ Knotenform-Kriterium.
 Lesart: v0.4 macht den Memory-Cloud-Knotenbegriff expliziter und trennt die
 aktiven Bedingungen klar von `eta_zero`. Es isoliert aber weiterhin keinen
 notwendigen zweiskaligen Baseline-Mechanismus, weil `single_scale` fast gleich
-stark bleibt. Die spaetere `rep_zero`-Kontrolle zeigt, dass dieser Fall tatsaechlich dispersiv ist; naechster Schritt sind direkte Kraftkomponenten statt ein weiterer reiner Parametersweep.
+stark bleibt. Die spaetere `rep_zero`-Kontrolle und der Linearitaetsaudit ersetzen diese Zwischenlesart: direkte Kraftkomponenten und gematchte Ablationen isolieren keinen notwendigen Zweiskalenmechanismus.
 
 15-Seed-Erweiterung vom 2026-07-07:
 
@@ -769,20 +769,20 @@ Modellklasse.
 | `reports/kernels/mode_probes/ar_mode_probe_corrected_candidates_2026-07-09.md` | AR-Modenprobe | Langsame Moden auf korrigierten Kandidaten bleiben reell; keine stabile komplexe Slow-Mode-Evidenz im skalaren Memory-Modell. |
 | `reports/kernels/corrected_sign/transition_boundary_corrected_sign_q3_2026-07-09.md` | Transition Boundary | Zehn Seeds lokalisieren die korrigierte Driftgrenze bei `A_att ~= 7.9`, `chi ~= 0.88`. |
 | `reports/long_runs/m0_axis/m0_axis_knot_score_pilot_2026-07-10.md` | M0-Achsenpilot | Bei `A_att=8` macht hoeheres `M0` die Laeufe kompakter, traegt im 100k-Pilot aber noch keinen starken v0.5-KnotScore. |
-| `reports/long_runs/scalar_hardening/scalar_hardening_q3_1M_2026-07-10.md` | Scalar-Haertung q=3 1M | `A_att=20` und `35` tragen hohe v0.5-Kompaktheit/Memory-Shape-Scores; Residence-Skalierung bleibt der naechste Engpass. |
+| `reports/long_runs/scalar_hardening/scalar_hardening_q3_1M_2026-07-10.md` | Scalar-Haertung q=3 1M | Historischer Zwischenstand mit hohen v0.5-Kompaktheit/Memory-Shape-Scores; spaeter durch die lineare Radiusreconciliation enger eingeordnet. |
 | `reports/long_runs/scalar_hardening/scalar_n_scaling_q3_2026-07-10.md` | Scalar-N-Skalierung q=3 | `A_att=20/35`, `N=100k..3M`, `burn_in=0`; kompakte Memory-Clouds bilden schnell, Residence bleibt Engpass. |
 | `reports/long_runs/scalar_hardening/n_dependence_recheck_2026-07-16.md` | N-Abhaengigkeits-Recheck | `N=100k..3M`, `N=200k`-Rohsnapshot-Pilot und `N=30M`-Referenz in einer Grafik; `N=200k` ist nur Pipelinecheck, Memory-Shape bleibt qualitativ konsistent. |
 | `reports/long_runs/long_3e8/long_run_3e8_launch_2026-07-10.md` | 3e8-Launch | Hintergrundlaeufe fuer `A_att=20/35`, Seeds `1..5`, `N=300M`, mit Center-/Memory-Ball-Residence gestartet. |
 | `reports/long_runs/long_3e8/long_run_3e8_results_2026-07-11.md` | 3e8-Resultate | v0.5-Score und Voxel-Residence tragen bei `A_att=20/35`; fixe finale Memory-Center-Residence zeigt Drift/Rezentering und motiviert dynamische Center-Diagnostik. |
-| `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | `A_att=35`, `epsilon=1e-4` ist der aktuelle scalar long-run reference candidate; Spin-Proxy bleibt negativ. |
+| `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | Historischer Skalar-Referenzslice; Spin-Proxy negativ und Radius spaeter als linearer Finite-Memory-Modus erklaert. |
 | `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md` | Paper-I-Evidenztabelle | Co-moving Radius, Drift/Radius, Memory-Dimension und Roundness trennen `A_att=35` klar von `eta_zero`; keine Spin-/Photon-/Masseclaims. |
-| `reports/dimensions/memory_shape_boundary_2026-07-13.md` | 3D-Memory-Shape-Grenze | `D_mem ~=2.94` bei `A_att=35` ist seed-stabile lokale Memory-Cloud-Shape im 3D-Embedding; externe/macroskopische `d=3`-Selektion bleibt Paper-II-Frage. |
+| `reports/dimensions/memory_shape_boundary_2026-07-13.md` | 3D-Memory-Shape-Grenze | Historische Shape-Beobachtung; `D_mem ~=2.94` wird im linearen isotropen 3D-Regime als erwartete Ambient-Geometrie gelesen, nicht als Selektionshinweis. |
 | `reports/dimensions/ambient_memory_shape_sweep_launch_2026-07-13.md` | Ambient-Dimension-Launch | Paper-II-Brueckentest fuer `d=4,5,7,10,13,20`; aggregiert `D_mem`, ungewichtete Sample-/Memory-`D_spec`, Roundness, Radius und Drift gegen `eta_zero`. |
 | `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md` | A_att-Transition d3/d10 | `D_cov` und `D_mem` trennen sich im d10-kompakt-Ast; `beta=0`/`M0=0`-Referenz ist verlinkt; Paper-II-Reconciliation, kein Selektionsclaim. |
-| `reports/dimensions/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | Paper I bekommt einen lokalen 3D-Memory-Shape-Teaser; starker ambient-unabhaengiger 3D-Claim wird durch `D_mem`/`D_p90`/`D_p95` nicht gestuetzt; `D_spec memory` bleibt Paper-II-Hebel. |
-| `reports/dimensions/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; symmetrische Heat-Kernel- und kNN-Surrogate stuetzen keinen robusten `D_spec ~=3`-Claim; naechster Schritt ist Rohwolken-Snapshot plus relationaler Response-Rang. |
+| `reports/dimensions/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | `D_mem`/`D_p90`/`D_p95` stuetzen keinen ambient-unabhaengigen 3D-Claim; auch die fruehere Teaser-Lesart ist durch den Linearitaetsaudit ersetzt. |
+| `reports/dimensions/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; spaetere Rohsnapshots und Response-Rang-Kontrollen bestaetigen keinen robusten externen `D_spec ~=3`-Claim. |
 | `reports/dimensions/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
-| `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`, Baseline gegen `eta_zero`; Shape-Dimension und Heat-Trace-`D_spec` bleiben getrennte Kanaele, Response-Rang ist der naechste Paper-II-Gate. |
+| `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`; Shape- und Heat-Trace-Dimension bleiben getrennt, der spaetere Response-Rang ist isotrop voll ambient-rangig. |
 | `reports/response/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
 | `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md` | kanonische N100M-Referenzzustaende | Checksum-validierte vollstaendige Finite-Memory-Zustaende fuer `d=3/10`, Seed 1; reproduzierbare Absprungbasis fuer Frozen-Source- und spaetere Mehrknotenarme. |
 | `reports/response/frozen_source_pilot_2026-07-16.md` | Frozen-Source-Clone-Pilot | Geklonte `N=100M`-Quelle bei `1 sigma_rep`; exakte Nullkontrolle und isotroper voller Ambient-Rang, kein externer 3D-Befund. |

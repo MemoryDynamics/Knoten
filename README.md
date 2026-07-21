@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-18.
+Stand: 2026-07-21.
 
 ## Worum es geht
 
@@ -60,6 +60,10 @@ Belastbar derzeit:
   die `beta=0`-Referenz ist als `M0=0`/`m0_zero` dokumentiert.
 - Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
   Deposition; `memory_mass=M0` ist als eigene Memory-Skala abgebildet.
+- Der One-Way-Interaction-Age-Audit bis `N=103M` zeigt nahezu lineare
+  Zentrumtranslation auf `20.844` interne Radien, aber `0/5`
+  kontrollgetrennte Formmodifikationen. Die scheinbare Shape-Halbwelle folgt
+  der freien Kontrolle und ist kein Oszillations- oder neuer Knotenbefund.
 
 Noch nicht belastbar:
 
@@ -121,6 +125,8 @@ python -m mkdocs build --strict
 - [Repository Map](docs/reference/repository_map.md)
 - [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
 - [Paper-Claims](docs/status/paper_claims.md)
+- [Kuratierter Report-Index](reports/README.md)
+- [Abbildungs-Index](figures/README.md)
 
 ## Experiment Entry Points
 
@@ -146,14 +152,13 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 ## Naechste Prioritaeten
 
-1. Vorhandene N=30M/300M-Daten gegen den analytischen linearen Relativradius
-   reconciliieren; keine neue rohe A_att-, eta- oder M0-Suche.
-2. Bei festem g=26/60 einen Fuenf-Seed-Slice mit gezieltem
-   R_linear/L ungefaehr 0.03, 0.1 und 0.3 rechnen. Nur kontrollierte
-   Abweichungen vom linearen Benchmark rechtfertigen einen nichtlinearen
-   Knotenclaim.
-3. Danach den vorbereiteten Relaxations-Diffusionsfeldzweig mit explizitem
-   Feldzustand und Greenkernel-Kontrollen testen, falls der skalare Slice keine
-   neue Struktur zeigt.
-4. Mehrknoten-, signierte Cross- und Vektormemory-Gates bleiben Folgearbeit.
-   Rekreuzung wird nicht als eigenes Ziel weiterverfolgt.
+1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
+   historische Metastabilitaets- und Dimensionsformulierungen entfernen.
+2. Genau einen neuen Transportmechanismus vorregistrieren: lokaler bzw.
+   retardierter Mediator oder orientiertes Vektormemory, nicht beide zugleich.
+3. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein One-Way-Kanal
+   Source-Eligibility, Shape-Boundedness und kontrollgetrennten Readout besteht.
+4. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
+   phaenomen testen, bevor weitere Modensuchen laufen.
+5. Die kanonische Evidenzschiene in `reports/README.md` pflegen; neue Reports
+   nur bei geaenderter Entscheidung in die Frontdoor aufnehmen.

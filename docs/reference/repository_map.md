@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-20.
+Stand: 2026-07-21.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -16,9 +16,9 @@ flowchart TD
     root --> tests["tests<br/>kleine deterministische Tests"]
     root --> docs["docs<br/>7 aktive Dokumente + Rohmaterial"]
     root --> paper["paper<br/>Paper 0, I, II, III und Kindle-PDFs"]
-    root --> reports["reports<br/>datierte Reviews und Analyseberichte"]
+    root --> reports["reports<br/>datierte Evidenz + README-Index"]
     root --> data["data/processed<br/>generated outputs, ignored by default"]
-    root --> figures["figures<br/>draft/result figures"]
+    root --> figures["figures<br/>draft, paper, external + README-Index"]
 
     experiments --> sync_exp["synchronization/<br/>frozen, signed and one-way source gates"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
@@ -240,7 +240,7 @@ array. Independent seeds remain necessary for inferential claims.
   werden erst nach Kontroll- und Reproduzierbarkeitspruefung Evidenz.
 - `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.
-- `reports/` sind datierte, zitierbare Zwischenstaende.
+- `reports/` sind datierte Zwischenstaende; `reports/README.md` markiert die aktuelle Evidenzschiene und den Status jedes Gate-Typs.
 - `data/processed/` und `results/` bleiben generiert und werden nur nach
   Review ueber Reports zusammengefasst. Einzelne getrackte JSONs unter
   `data/processed/` sind kuratierte Snapshots oder Test-/Report-Fixtures, nicht
@@ -256,5 +256,5 @@ array. Independent seeds remain necessary for inferential claims.
 - Generierte Rohdaten unter `data/processed/` bleiben standardmaessig ignoriert.
   Nur reviewed JSON-Zusammenfassungen, Reports und Figuren werden gezielt
   committed; fuer neue Snapshots ist ein explizites `git add -f` erforderlich.
-- Top-level Buildprodukte wie `site/`, `results/`, Caches und lokale Venvs
+- Top-level Buildprodukte wie `site/`, `results/`, `tmp/`, Caches und lokale Venvs
   duerfen nicht als Projektstand gelesen werden.
