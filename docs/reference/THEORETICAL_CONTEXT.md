@@ -49,6 +49,23 @@ Deposition-Konventionen:
 - `matched_gaussian`: normierte Gauss-Deposition mit derselben Breite wie die
   jeweilige Lesekomponente, gerechnet als effektiver Faltungskernel.
 
+Write-/Read-Faktorisierung: Fuer homogene lineare Faltung gilt nach Ausrollen
+
+```text
+Phi_n = K * rho_n
+      = initial term + beta sum_j q^j (K * G)(.-x_{n-j}),
+W_eff = K * G.
+```
+
+Die sichtbare skalare Dynamik identifiziert daher nur `W_eff`, nicht `K`
+und `G` getrennt. Weil Faltung kommutativ ist, erzeugt ein blosses Vertauschen
+bei festem `W_eff` keine neue sichtbare Physik. Es ist auch semantisch
+problematisch: Der attraktive/repulsive `K` ist vorzeichenbehaftet und weder
+ein normierter noch ein nichtnegativer Depositionskernel. Die aktuelle
+Delta-Deposition ist die maximal aufloesende Occupancy-Darstellung; die
+fehlende Strukturantwort stammt im One-Way-Test vom breiten Cross-Lesekernel,
+nicht von einer Glaettung beim Schreiben.
+
 Fuer normierte Gauss-Deposition gilt bei `s=L`:
 
 ```text
@@ -346,13 +363,15 @@ is not yet identifiable: the next mechanism must transport a source with
 bounded coherent shape dynamics, or introduce a local/retarded field channel
 whose delay is itself measurable.
 
-A sustained one-way age audit from N=100 million to N=101 million sharpens
+A sustained one-way age audit from N=100 million to N=103 million sharpens
 this negative result. Across five future-noise continuations, the target
 centre response accumulates almost linearly while radius and rotation-
-invariant shape remain indistinguishable from the paired free control. This
-supports scalar far-field translation, not a slowly forming interaction-
-specific knot type. Sparse age windows do not exclude every long-period mode;
-that residual question requires a regularly sampled paired spectral test.
+invariant shape remain indistinguishable from the paired free control. The
+apparent absolute shape reversal is shared with that control: dynamic and
+free shape dimensions correlate at 0.999953, and the paired-difference span
+is only 0.142 percent of the absolute dynamic span. This supports scalar
+far-field translation, not a slowly forming interaction-specific knot type
+or a cross-induced half oscillation.
 
 Vector memory is reserved for orientation, phase, circulation, or polarization,
 not introduced merely to provide a scalar sign.

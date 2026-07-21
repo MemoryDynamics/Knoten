@@ -115,3 +115,28 @@ def test_center_trend_recovers_linear_response() -> None:
     np.testing.assert_allclose(trend["r_squared"], 1.0)
     np.testing.assert_allclose(trend["kernel_width_radii"], 4.0)
     np.testing.assert_allclose(trend["linear_updates_per_kernel_width"], 200_000)
+
+
+def test_shape_control_diagnostics_separate_shared_shape_motion() -> None:
+    dynamic = np.asarray([2.8, 2.6, 2.9, 2.7])
+    free = dynamic + np.asarray([1e-4, -1e-4, 2e-4, -2e-4])
+    payload = {
+        "aggregate": [
+            {
+                "evaluation_update": index,
+                "dynamic_shape_dimension": {"median": d, "q25": d, "q75": d},
+                "free_shape_dimension": {"median": f, "q25": f, "q75": f},
+                "dynamic_minus_free_shape_dimension": {
+                    "median": d - f,
+                    "q25": d - f,
+                    "q75": d - f,
+                },
+            }
+            for index, (d, f) in enumerate(zip(dynamic, free, strict=True), start=1)
+        ]
+    }
+
+    diagnostics = audit._shape_control_diagnostics(payload)
+
+    assert diagnostics["dynamic_free_correlation"] > 0.999
+    assert diagnostics["paired_to_dynamic_span_ratio"] < 0.01

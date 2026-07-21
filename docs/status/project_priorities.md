@@ -337,6 +337,12 @@ Naechster operativer Schritt:
     waehrend Radiusverhaeltnis, Shape-Dimension und Shape-Spektrum praktisch
     mit der freien Kontrolle uebereinstimmen. Weitere sparse Endpunkte im
     selben skalaren Fernkanal sind deshalb nicht priorisiert.
+38. Abgeschlossen: Erweiterung bis N=103M mit 20 Altersfenstern. Die
+    scheinbare Shape-Halbwelle ist zwischen dynamic und free fast identisch
+    (Korrelation 0.999953); der gepaarte Differenzspan betraegt nur 0.142
+    Prozent des absoluten Shape-Spans. Die Zentrumantwort erreicht 20.844
+    Radien bei R^2=0.99999991, waehrend 0/5 Seeds eine Formmodifikation
+    zeigen. Kein wechselwirkungsinduzierter Oszillationsbefund.
 
 
 Aktueller naechster Schritt:
@@ -348,14 +354,15 @@ Aktueller naechster Schritt:
   beobachteten Aeste sind glatt und als Relaxation erklaert.
 - Mode-Identity ist abgeschlossen. Tragbar ist reduzierte Vorhersagbarkeit,
   nicht die Identitaet eines einzelnen reellen oder komplexen Eigenmodus.
-- Naechster Mechanismusschritt: einen lokalen, orientierten oder
-  momentengekoppelten Kanal formulieren und falsifizieren. Der dauerhafte
-  skalare Fernkanal erzeugt bis +1M eine lineare Translation, aber keine
+- Naechster Mechanismusschritt: zuerst einen schmaleren skalaren Cross-
+  Readout als reine Aufloesungsprobe falsifizieren; danach Dipol-/Current-
+  oder Shape-Tensor-Kopplung nur mit eigenen Null- und Aufloesungskontrollen.
+  Der breite skalare Fernkanal erzeugt bis +3M lineare Translation, aber keine
   kontrollgetrennte Formdynamik.
-- Perioden groesser als 1e5 Updates sind durch sechs Altersfenster nicht
-  allgemein ausgeschlossen. Diese Restfrage braucht einen regelmaessig
-  gesampelten gepaarten Differenztrace mit vorregistriertem Spektraltest,
-  nicht bloss einen weiteren langen Endpunkt.
+- Die sichtbare Shape-Halbwelle ist kontrollgemeinsam, nicht cross-induziert.
+  Ein dichter Spektraltrace bleibt nur fuer Moden zwischen den Altersfenstern
+  offen und ist nachrangig, solange das gepaarte Differenzsignal keinen
+  Kandidaten zeigt.
 - Das Gate verlangt gepaarte unlaunched Kontrollen, stationaere Ausgangsform,
   beschraenkte und kohaerente, nicht notwendig starre Source-Shape, eine
   targetseitige Response oberhalb des Rausch-/Frozen-Niveaus und

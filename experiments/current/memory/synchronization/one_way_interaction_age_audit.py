@@ -57,7 +57,7 @@ def _parse_int_list(value: str) -> list[int]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Audit target adaptation up to one million continuation updates."
+        description="Audit target adaptation across a registered continuation horizon."
     )
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     parser.add_argument("--steps", type=int, default=1_000_000)
@@ -490,9 +490,25 @@ def _center_trend(payload: dict[str, Any]) -> dict[str, float]:
     }
 
 
+def _shape_control_diagnostics(payload: dict[str, Any]) -> dict[str, float]:
+    _, dynamic, _, _ = _series(payload, "dynamic_shape_dimension")
+    _, free, _, _ = _series(payload, "free_shape_dimension")
+    _, difference, _, _ = _series(payload, "dynamic_minus_free_shape_dimension")
+    dynamic_span = float(np.ptp(dynamic))
+    difference_span = float(np.ptp(difference))
+    return {
+        "dynamic_free_correlation": float(np.corrcoef(dynamic, free)[0, 1]),
+        "dynamic_span": dynamic_span,
+        "paired_difference_span": difference_span,
+        "paired_to_dynamic_span_ratio": (
+            difference_span / dynamic_span if dynamic_span > 0.0 else float("nan")
+        ),
+    }
+
+
 def _plot(payload: dict[str, Any], output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(2, 2, figsize=(11.5, 8.0), sharex=True)
+    fig, axes = plt.subplots(2, 3, figsize=(14.5, 8.0), sharex=True)
     panels = (
         (
             axes[0, 0],
@@ -502,18 +518,24 @@ def _plot(payload: dict[str, Any], output: Path) -> None:
         ),
         (
             axes[0, 1],
+            "dynamic_minus_frozen_center_radii",
+            "dynamic - frozen centre / R",
+            None,
+        ),
+        (
+            axes[0, 2],
             "dynamic_free_radius_ratio",
             "dynamic/free radius",
             1.0,
         ),
         (
-            axes[1, 0],
-            "dynamic_shape_dimension",
-            "dynamic shape dimension",
-            None,
+            axes[1, 1],
+            "dynamic_minus_free_shape_dimension",
+            "dynamic - free shape dimension",
+            0.0,
         ),
         (
-            axes[1, 1],
+            axes[1, 2],
             "dynamic_free_shape_spectrum_median",
             "dynamic/free spectral distance",
             0.05,
@@ -528,8 +550,16 @@ def _plot(payload: dict[str, Any], output: Path) -> None:
         axis.set_xscale("log")
         axis.set_ylabel(ylabel)
         axis.grid(alpha=0.25)
-    axes[1, 0].set_xlabel("continuation updates")
-    axes[1, 1].set_xlabel("continuation updates")
+    x, dynamic, _, _ = _series(payload, "dynamic_shape_dimension")
+    _, free, _, _ = _series(payload, "free_shape_dimension")
+    axes[1, 0].plot(x, dynamic, marker="o", color="#0072B2", label="dynamic")
+    axes[1, 0].plot(x, free, marker="s", color="#D55E00", label="free")
+    axes[1, 0].set_xscale("log")
+    axes[1, 0].set_ylabel("shape dimension")
+    axes[1, 0].grid(alpha=0.25)
+    axes[1, 0].legend()
+    for axis in axes[1]:
+        axis.set_xlabel("continuation updates")
     fig.suptitle("Sustained one-way interaction age: median and seed IQR")
     fig.tight_layout()
     fig.savefig(output, dpi=180)
@@ -539,6 +569,7 @@ def _plot(payload: dict[str, Any], output: Path) -> None:
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
     trend = _center_trend(payload)
+    shape_control = _shape_control_diagnostics(payload)
     final_aggregate = payload["aggregate"][-1]
     lines = [
         "# One-Way Interaction-Age Audit",
@@ -589,6 +620,10 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"- Linear scale estimate: one R per "
         f"{trend['updates_per_radius']:,.0f} updates; one kernel width after "
         f"about {trend['linear_updates_per_kernel_width']:,.0f} updates.",
+        f"- Dynamic/free shape-dimension correlation across ages: "
+        f"{shape_control['dynamic_free_correlation']:.6f}.",
+        f"- Paired/absolute shape-span ratio: "
+        f"{shape_control['paired_to_dynamic_span_ratio']:.6f}.",
         "",
         f"![Interaction-age audit]({_relative(report, figure)})",
         "",
@@ -619,10 +654,11 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "- If the last two ages do not plateau, extend N before changing parameters.",
             "- If they plateau without a control-separated shape, longer waiting under",
             "  this same channel is not the next priority.",
-            "- The six age windows test slow monotone adaptation. They do not exclude",
-            "  every breathing or orbital period above 1e5 updates; that question needs",
-            "  a regularly sampled paired difference trace and a registered spectral",
-            "  test rather than another sparse endpoint extension.",
+            "- The apparent absolute shape reversal is shared with the paired free",
+            "  control; it is not evidence of an interaction-induced half oscillation.",
+            f"- The {len(payload['aggregate'])} age windows do not exclude oscillations",
+            "  between windows or in unmeasured observables. Such a claim would need a",
+            "  regularly sampled paired difference trace and a registered spectral test.",
             "- The kernel-width time is a linear scale extrapolation, not a prediction",
             "  that the measured slope or knot identity persists to that age.",
             "",

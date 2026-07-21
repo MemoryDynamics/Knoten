@@ -281,6 +281,14 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   4.91e-5. Das stuetzt Fernfeldtranslation ohne neuen Knotentyp. Sparse
   Altersfenster schliessen lange Oszillationsperioden nicht allgemein aus.
   Report: `reports/response/one_way_interaction_age_N1M_2026-07-21.md`.
+- Der erweiterte Audit bis N=103M verwendet 20 Altersfenster. Die
+  Zentrumantwort steigt nahezu linear auf 20.844 Radien; erneut bestehen
+  5/5 Seeds das spaete Shape-Plateau und 0/5 das Formmodifikationsgate.
+  Die scheinbare Shape-Halbwelle ist mit der freien Kontrolle korreliert
+  (0.999953); der gepaarte Differenzspan ist nur 0.142 Prozent des absoluten
+  dynamischen Shape-Spans. Damit kein wechselwirkungsinduzierter
+  Oszillationsbefund. Report:
+  `reports/response/one_way_interaction_age_N3M_2026-07-21.md`.
 
 ## Long-Run-Status
 
