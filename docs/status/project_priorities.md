@@ -39,6 +39,14 @@ kanonischen Reports dieselbe Claim-Grenze verwenden.
 Entscheidungspunkt: lokaler/retardierter Mediator **oder** orientiertes
 Vektormemory. Nicht beide gleichzeitig oeffnen.
 
+Unmittelbares Vor-Gate: den autonomen Selbstkernel vom skalaren Cross-Readout
+trennen und auf vollstaendigen `N=100M`-Checkpoints pruefen, ob starre
+Quellorientierungen vor Ueberlappung vom Punktmonopol unterscheidbar werden.
+Primaer sind 1% Orientierungs-Driftspanne bei mindestens 1.25 kombinierten
+Memory-Radien und die dazu kalibrierte Verschiebung pro Memory-Zeit. Kein
+Bestehen bedeutet: keine weitere direkte skalare Readout-Verengung; dann wird
+ein orientierter Memory-/Stromkanal vor einem skalaren Formtransport getestet.
+
 Pflichtfelder vor Implementierung:
 
 1. Mechanismushypothese und konkurrierendes Nullmodell.

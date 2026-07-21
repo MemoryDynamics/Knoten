@@ -31,13 +31,16 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 4. Static field and distance audit: measure potential, radial drift, parity
    residuals, kernel resolution, and target deformation before interpreting an
    apparent attraction.
-5. Signed scalar cross-channel: separate source sign from the non-negative
+5. Independent scalar cross-readout: separate the autonomous self-kernel from
+   spatial cross-resolution and compare rigid source orientations with a point
+   monopole at matched centre response.
+6. Signed scalar cross-channel: separate source sign from the non-negative
    self-confining memory and require `q=0` plus sign-reversal controls.
-6. One-way dynamic coupling: source evolves but does not read the target.
-7. Nondestructive source transport: preserve source shape against a paired
+7. One-way dynamic coupling: source evolves but does not read the target.
+8. Nondestructive source transport: preserve source shape against a paired
    unlaunched continuation before interpreting target response.
-8. Reciprocal coupling with separate memory fields only after step 7 passes.
-9. Shared memory only as a later, separately normalized model variant.
+9. Reciprocal coupling with separate memory fields only after step 8 passes.
+10. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 
@@ -107,6 +110,22 @@ checkpoint per dimension.
 
 Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` and
 `reports/response/frozen_source_distance_ladder_2026-07-17.md`.
+
+## Independent Cross-Readout Gate
+
+The package now distinguishes the source self-kernel from an explicit
+`ScalarReadoutKernel`. Omitting it is exactly backward compatible. Supplying a
+different cross-readout changes only the target response; the autonomous source
+path is unchanged. Every resolution is calibrated to the same bare centre
+response, so readout width is not confounded with force magnitude.
+
+The preregistered static ladder rotates the complete `N=100M` source along its
+principal axes and compares its drift field with a point monopole. The primary
+shape signal is the largest orientation-dependent drift difference divided by
+the point drift. A 1% exploratory threshold and a minimum centre separation of
+1.25 combined memory radii decide whether a scalar shape signal exists before
+opening a local/retarded mediator or oriented-memory branch. This is a
+pipeline gate from one checkpoint per dimension, not interaction evidence.
 
 ## Interaction-Sign Decision
 

@@ -8,12 +8,59 @@ convolution of Gaussian write/read kernels.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Iterable
 
 import numpy as np
 
 
 DEPOSITION_KERNELS = {"delta", "gaussian", "matched_gaussian"}
+
+
+@dataclass(frozen=True)
+class ScalarReadoutKernel:
+    """Two-scale scalar kernel used to read a deposited memory field."""
+
+    sigma_rep: float
+    sigma_att: float
+    amplitude_rep: float
+    amplitude_att: float
+
+
+def validate_scalar_readout_kernel(readout: ScalarReadoutKernel) -> None:
+    """Validate a scalar readout independently from trajectory parameters."""
+
+    for name in ("sigma_rep", "sigma_att"):
+        value = getattr(readout, name)
+        if not np.isfinite(value) or value <= 0.0:
+            raise ValueError(f"{name} must be positive and finite")
+    for name in ("amplitude_rep", "amplitude_att"):
+        if not np.isfinite(getattr(readout, name)):
+            raise ValueError(f"{name} must be finite")
+
+
+def resolve_scalar_readout_kernel(
+    readout: ScalarReadoutKernel | None,
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float,
+    amplitude_att: float,
+) -> ScalarReadoutKernel:
+    """Return an explicit readout, defaulting to the supplied self-kernel."""
+
+    resolved = (
+        ScalarReadoutKernel(
+            sigma_rep=float(sigma_rep),
+            sigma_att=float(sigma_att),
+            amplitude_rep=float(amplitude_rep),
+            amplitude_att=float(amplitude_att),
+        )
+        if readout is None
+        else readout
+    )
+    validate_scalar_readout_kernel(resolved)
+    return resolved
 
 
 def two_scale_integral_coefficient(

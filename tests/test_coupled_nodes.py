@@ -4,6 +4,7 @@ import numpy as np
 
 from emergenz_knoten import (
     FiniteMemoryState,
+    ScalarReadoutKernel,
     SimulationConfig,
     one_way_coupled_response,
     relative_orbital_observables,
@@ -143,6 +144,52 @@ def test_moving_source_separates_dynamic_from_frozen_target() -> None:
         )
         > 0.0
     )
+
+
+def test_explicit_matching_cross_readout_is_backward_compatible() -> None:
+    noise = np.arange(20, dtype=float).reshape(10, 2) / 100.0
+    kwargs = {
+        "source_center_offset": [1.0, 0.0],
+        "target_noise": noise,
+        "source_noise": noise[::-1].copy(),
+        "sample_steps": [0, 1, 5, 10],
+        "cross_eta": 1e-3,
+    }
+    baseline = one_way_coupled_response(_state(), _state(), _config(), **kwargs)
+    readout = ScalarReadoutKernel(1.0, 3.0, 1.0, 20.0)
+    explicit = one_way_coupled_response(
+        _state(),
+        _state(),
+        _config(),
+        cross_readout=readout,
+        **kwargs,
+    )
+
+    np.testing.assert_array_equal(explicit.target_positions, baseline.target_positions)
+    np.testing.assert_array_equal(explicit.source_positions, baseline.source_positions)
+    assert explicit.cross_readout == readout
+
+
+def test_cross_readout_changes_target_without_changing_autonomous_source() -> None:
+    noise = np.arange(20, dtype=float).reshape(10, 2) / 100.0
+    kwargs = {
+        "source_center_offset": [1.0, 0.0],
+        "target_noise": noise,
+        "source_noise": noise[::-1].copy(),
+        "sample_steps": [0, 1, 5, 10],
+        "cross_eta": 1e-3,
+    }
+    broad = one_way_coupled_response(_state(), _state(), _config(), **kwargs)
+    narrow = one_way_coupled_response(
+        _state(),
+        _state(),
+        _config(),
+        cross_readout=ScalarReadoutKernel(0.3, 0.9, 1.0, 20.0),
+        **kwargs,
+    )
+
+    np.testing.assert_array_equal(narrow.source_positions, broad.source_positions)
+    assert not np.array_equal(narrow.target_positions, broad.target_positions)
 
 
 def test_one_way_response_is_translation_equivariant() -> None:

@@ -13,7 +13,12 @@ from ._continuation import (
     symmetric_tensor_vector,
 )
 from .core import SimulationConfig, validate_simulation_config
-from .kernels import double_gaussian_gradient, effective_double_gaussian_parameters
+from .kernels import (
+    ScalarReadoutKernel,
+    double_gaussian_gradient,
+    effective_double_gaussian_parameters,
+    resolve_scalar_readout_kernel,
+)
 from .state import (
     FiniteMemoryState,
     memory_centroid,
@@ -43,6 +48,7 @@ class FrozenSourceCalibration:
     baseline_gradient_norm: float
     baseline_directional_drift: float
     cross_eta: float
+    cross_readout: ScalarReadoutKernel
 
 
 @dataclass(frozen=True)
@@ -54,6 +60,7 @@ class PairedFrozenSourceResponse:
     source_center_offset: np.ndarray
     perturbation: float
     cross_eta: float
+    cross_readout: ScalarReadoutKernel
     pulse_steps: int
     baseline_source_center: np.ndarray
     source_centers: np.ndarray
@@ -151,15 +158,16 @@ def _source_gradient(
     source_memory: np.ndarray,
     source_state: FiniteMemoryState,
     source_config: SimulationConfig,
+    cross_readout: ScalarReadoutKernel,
 ) -> np.ndarray:
     return double_gaussian_gradient(
         target_state.x,
         source_memory,
         source_state.weights,
-        sigma_rep=source_config.sigma_rep,
-        sigma_att=source_config.sigma_att,
-        amplitude_rep=source_config.amplitude_rep,
-        amplitude_att=source_config.amplitude_att,
+        sigma_rep=cross_readout.sigma_rep,
+        sigma_att=cross_readout.sigma_att,
+        amplitude_rep=cross_readout.amplitude_rep,
+        amplitude_att=cross_readout.amplitude_att,
         deposition_kernel=source_config.deposition_kernel,
         deposition_sigma=source_config.deposition_sigma,
     )
@@ -170,6 +178,7 @@ def _source_gradient_norm(
     source_memory: np.ndarray,
     source_state: FiniteMemoryState,
     source_config: SimulationConfig,
+    cross_readout: ScalarReadoutKernel,
 ) -> float:
     return float(
         np.linalg.norm(
@@ -178,6 +187,7 @@ def _source_gradient_norm(
                 source_memory,
                 source_state,
                 source_config,
+                cross_readout,
             )
         )
     )
@@ -189,12 +199,14 @@ def _initial_gradient_norms(
     baseline_source_memory: np.ndarray,
     source_memories: np.ndarray,
     source_config: SimulationConfig,
+    cross_readout: ScalarReadoutKernel,
 ) -> tuple[float, np.ndarray]:
     baseline_norm = _source_gradient_norm(
         target_state,
         baseline_source_memory,
         source_state,
         source_config,
+        cross_readout,
     )
     norms = np.empty(source_memories.shape[:2], dtype=float)
     for probe_index in range(source_memories.shape[0]):
@@ -204,6 +216,7 @@ def _initial_gradient_norms(
                 source_memories[probe_index, branch],
                 source_state,
                 source_config,
+                cross_readout,
             )
     return baseline_norm, norms
 
@@ -217,6 +230,7 @@ def calibrate_frozen_source_cross_eta(
     response_fraction: float,
     pulse_steps: int,
     source_config: SimulationConfig | None = None,
+    cross_readout: ScalarReadoutKernel | None = None,
     source_rotation: Iterable[Iterable[float]] | None = None,
 ) -> FrozenSourceCalibration:
     """Calibrate cross-coupling from the unperturbed initial source force.
@@ -235,6 +249,13 @@ def calibrate_frozen_source_cross_eta(
         raise ValueError("target, source, and configs must share one dimension")
     if source_cfg.dim != target_state.dim:
         raise ValueError("source_config dimension must match the states")
+    cross_kernel = resolve_scalar_readout_kernel(
+        cross_readout,
+        sigma_rep=source_cfg.sigma_rep,
+        sigma_att=source_cfg.sigma_att,
+        amplitude_rep=source_cfg.amplitude_rep,
+        amplitude_att=source_cfg.amplitude_att,
+    )
     if not np.isfinite(response_fraction) or response_fraction <= 0.0:
         raise ValueError("response_fraction must be positive and finite")
     if isinstance(pulse_steps, bool) or not isinstance(pulse_steps, (int, np.integer)):
@@ -254,6 +275,7 @@ def calibrate_frozen_source_cross_eta(
         baseline_source.memory,
         source_state,
         source_cfg,
+        cross_kernel,
     )
     gradient_norm = float(np.linalg.norm(gradient))
     if gradient_norm <= np.finfo(float).eps:
@@ -282,6 +304,7 @@ def calibrate_frozen_source_cross_eta(
         baseline_gradient_norm=gradient_norm,
         baseline_directional_drift=directional_drift,
         cross_eta=float(cross_eta),
+        cross_readout=cross_kernel,
     )
 
 
@@ -449,6 +472,7 @@ def paired_frozen_source_response(
     cross_eta: float,
     pulse_steps: int,
     source_config: SimulationConfig | None = None,
+    cross_readout: ScalarReadoutKernel | None = None,
     source_rotation: Iterable[Iterable[float]] | None = None,
 ) -> PairedFrozenSourceResponse:
     """Differentiate target response under local translations of one source.
@@ -466,6 +490,13 @@ def paired_frozen_source_response(
         raise ValueError("target, source, and configs must share one dimension")
     if source_cfg.dim != target_state.dim:
         raise ValueError("source_config dimension must match the states")
+    cross_kernel = resolve_scalar_readout_kernel(
+        cross_readout,
+        sigma_rep=source_cfg.sigma_rep,
+        sigma_att=source_cfg.sigma_att,
+        amplitude_rep=source_cfg.amplitude_rep,
+        amplitude_att=source_cfg.amplitude_att,
+    )
     if not np.isfinite(perturbation) or perturbation <= 0.0:
         raise ValueError("perturbation must be positive and finite")
     if not np.isfinite(cross_eta) or cross_eta < 0.0:
@@ -510,6 +541,7 @@ def paired_frozen_source_response(
         baseline_source_memory,
         source_memories,
         source_cfg,
+        cross_kernel,
     )
     target_effective = effective_double_gaussian_parameters(
         dim=target_config.dim,
@@ -520,12 +552,12 @@ def paired_frozen_source_response(
         deposition_kernel=target_config.deposition_kernel,
         deposition_sigma=target_config.deposition_sigma,
     )
-    source_effective = effective_double_gaussian_parameters(
+    cross_effective = effective_double_gaussian_parameters(
         dim=source_cfg.dim,
-        sigma_rep=source_cfg.sigma_rep,
-        sigma_att=source_cfg.sigma_att,
-        amplitude_rep=source_cfg.amplitude_rep,
-        amplitude_att=source_cfg.amplitude_att,
+        sigma_rep=cross_kernel.sigma_rep,
+        sigma_att=cross_kernel.sigma_att,
+        amplitude_rep=cross_kernel.amplitude_rep,
+        amplitude_att=cross_kernel.amplitude_att,
         deposition_kernel=source_cfg.deposition_kernel,
         deposition_sigma=source_cfg.deposition_sigma,
     )
@@ -557,10 +589,10 @@ def paired_frozen_source_response(
         float(target_effective["sigma_att"]),
         float(target_effective["amplitude_rep"]),
         float(target_effective["amplitude_att"]),
-        float(source_effective["sigma_rep"]),
-        float(source_effective["sigma_att"]),
-        float(source_effective["amplitude_rep"]),
-        float(source_effective["amplitude_att"]),
+        float(cross_effective["sigma_rep"]),
+        float(cross_effective["sigma_att"]),
+        float(cross_effective["amplitude_rep"]),
+        float(cross_effective["amplitude_att"]),
         float(cross_eta),
         int(pulse_steps),
     )
@@ -620,6 +652,7 @@ def paired_frozen_source_response(
         source_center_offset=offset,
         perturbation=float(perturbation),
         cross_eta=float(cross_eta),
+        cross_readout=cross_kernel,
         pulse_steps=int(pulse_steps),
         baseline_source_center=baseline_source_center,
         source_centers=source_centers,

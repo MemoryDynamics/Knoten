@@ -3,6 +3,7 @@ import pytest
 
 from emergenz_knoten import (
     FiniteMemoryState,
+    ScalarReadoutKernel,
     SimulationConfig,
     calibrate_frozen_source_cross_eta,
     paired_frozen_source_response,
@@ -133,6 +134,33 @@ def test_cross_eta_calibration_matches_requested_baseline_fraction() -> None:
     assert reconstructed == pytest.approx(0.03)
     np.testing.assert_array_equal(calibration.source_center_offset, [1.0, 0.0])
     assert calibration.cross_eta > 0.0
+
+
+def test_cross_eta_calibration_accepts_independent_readout_resolution() -> None:
+    readout = ScalarReadoutKernel(
+        sigma_rep=0.25,
+        sigma_att=0.75,
+        amplitude_rep=1.0,
+        amplitude_att=20.0,
+    )
+    calibration = calibrate_frozen_source_cross_eta(
+        _target_state(),
+        _source_state(),
+        _config(eta=0.15),
+        source_center_offset=[1.0, 0.0],
+        response_fraction=0.03,
+        pulse_steps=5,
+        cross_readout=readout,
+    )
+
+    reconstructed = (
+        calibration.cross_eta
+        * calibration.baseline_directional_drift
+        * calibration.pulse_steps
+        / calibration.target_radius
+    )
+    assert reconstructed == pytest.approx(0.03)
+    assert calibration.cross_readout == readout
 
 
 def test_cross_eta_uses_source_axis_projection_for_off_center_visible_state() -> None:

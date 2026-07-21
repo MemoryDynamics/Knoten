@@ -9,7 +9,11 @@ import numpy as np
 
 from ._continuation import path_gradient, path_observables
 from .core import SimulationConfig, validate_simulation_config
-from .kernels import effective_double_gaussian_parameters
+from .kernels import (
+    ScalarReadoutKernel,
+    effective_double_gaussian_parameters,
+    resolve_scalar_readout_kernel,
+)
 from .state import FiniteMemoryState, memory_centroid, place_finite_memory_state
 
 try:
@@ -59,6 +63,7 @@ class OneWayCoupledResponse:
     target_radius_ratios: np.ndarray
     source_center_offset: np.ndarray
     cross_eta: float
+    cross_readout: ScalarReadoutKernel
 
 
 @njit(cache=True)
@@ -93,6 +98,10 @@ def _one_way_batch(
     source_sigma_att2: float,
     source_amplitude_rep: float,
     source_amplitude_att: float,
+    cross_sigma_rep2: float,
+    cross_sigma_att2: float,
+    cross_amplitude_rep: float,
+    cross_amplitude_att: float,
     cross_eta: float,
 ):
     n_paths = 4
@@ -162,10 +171,10 @@ def _one_way_batch(
                         source_head,
                         source_weights,
                         1.0,
-                        source_sigma_rep2,
-                        source_sigma_att2,
-                        source_amplitude_rep,
-                        source_amplitude_att,
+                        cross_sigma_rep2,
+                        cross_sigma_att2,
+                        cross_amplitude_rep,
+                        cross_amplitude_att,
                     )
                 elif path == frozen_path:
                     target_cross_gradients[path] = path_gradient(
@@ -174,10 +183,10 @@ def _one_way_batch(
                         0,
                         source_weights,
                         1.0,
-                        source_sigma_rep2,
-                        source_sigma_att2,
-                        source_amplitude_rep,
-                        source_amplitude_att,
+                        cross_sigma_rep2,
+                        cross_sigma_att2,
+                        cross_amplitude_rep,
+                        cross_amplitude_att,
                     )
 
             for path in range(n_paths):
@@ -281,6 +290,7 @@ def one_way_coupled_response(
     sample_steps: Iterable[int],
     cross_eta: float,
     source_config: SimulationConfig | None = None,
+    cross_readout: ScalarReadoutKernel | None = None,
     source_rotation: Iterable[Iterable[float]] | None = None,
 ) -> OneWayCoupledResponse:
     """Evolve a source autonomously while paired target paths read its field."""
@@ -292,6 +302,13 @@ def one_way_coupled_response(
         raise ValueError("target, source, and target_config must share one dimension")
     if source_cfg.dim != target_state.dim:
         raise ValueError("source_config dimension must match the states")
+    cross_kernel = resolve_scalar_readout_kernel(
+        cross_readout,
+        sigma_rep=source_cfg.sigma_rep,
+        sigma_att=source_cfg.sigma_att,
+        amplitude_rep=source_cfg.amplitude_rep,
+        amplitude_att=source_cfg.amplitude_att,
+    )
     if not np.isfinite(cross_eta) or cross_eta < 0.0:
         raise ValueError("cross_eta must be non-negative and finite")
 
@@ -348,6 +365,15 @@ def one_way_coupled_response(
         deposition_kernel=source_cfg.deposition_kernel,
         deposition_sigma=source_cfg.deposition_sigma,
     )
+    cross_effective = effective_double_gaussian_parameters(
+        dim=source_cfg.dim,
+        sigma_rep=cross_kernel.sigma_rep,
+        sigma_att=cross_kernel.sigma_att,
+        amplitude_rep=cross_kernel.amplitude_rep,
+        amplitude_att=cross_kernel.amplitude_att,
+        deposition_kernel=source_cfg.deposition_kernel,
+        deposition_sigma=source_cfg.deposition_sigma,
+    )
     (
         source_positions,
         source_centers,
@@ -380,6 +406,10 @@ def one_way_coupled_response(
         float(source_effective["sigma_att"]) ** 2,
         float(source_effective["amplitude_rep"]),
         float(source_effective["amplitude_att"]),
+        float(cross_effective["sigma_rep"]) ** 2,
+        float(cross_effective["sigma_att"]) ** 2,
+        float(cross_effective["amplitude_rep"]),
+        float(cross_effective["amplitude_att"]),
         float(cross_eta),
     )
     target_initial_radius = float(target_radii[0, 0])
@@ -399,6 +429,7 @@ def one_way_coupled_response(
         target_radius_ratios=target_radii / target_initial_radius,
         source_center_offset=offset,
         cross_eta=float(cross_eta),
+        cross_readout=cross_kernel,
     )
 
 
