@@ -70,6 +70,20 @@ def test_resolution_ratio_parser_is_explicit_and_unique() -> None:
         resolution.parse_resolution_ratios("3,3")
 
 
+def test_gate_classification_requires_consistent_embeddings() -> None:
+    negative = [{"shape_onset_ratio": None}, {"shape_onset_ratio": None}]
+    positive = [{"shape_onset_ratio": 3.0}, {"shape_onset_ratio": 2.5}]
+    mixed = [{"shape_onset_ratio": 3.0}, {"shape_onset_ratio": None}]
+
+    assert resolution.classify_resolution_gate(negative)["status"] == "fail"
+    assert (
+        resolution.classify_resolution_gate(negative)["selected_next_mechanism"]
+        == "oriented_memory_or_current"
+    )
+    assert resolution.classify_resolution_gate(positive)["status"] == "pass"
+    assert resolution.classify_resolution_gate(mixed)["status"] == "inconclusive"
+
+
 def test_principal_rotations_align_each_axis_with_radial_axis() -> None:
     state = _anisotropic_state()
     _, eigenvectors = np.linalg.eigh(memory_shape_tensor(state))

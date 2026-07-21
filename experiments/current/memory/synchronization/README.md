@@ -127,6 +127,22 @@ the point drift. A 1% exploratory threshold and a minimum centre separation of
 opening a local/retarded mediator or oriented-memory branch. This is a
 pipeline gate from one checkpoint per dimension, not interaction evidence.
 
+The clean 2026-07-21 run fails that gate in both audited embeddings. At the
+closest eligible separation (`sigma_rep/R_mem=2.5`), orientation spread is
+`1.96e-3` in `d=3` and `4.32e-4` in `d=10`; the corresponding calibrated
+orientation-dependent displacements are `5.98e-5` and `1.52e-5 R_mem` per
+memory time. The original self-readout remains pointlike at `2.15e-10` and
+`3.01e-10`. No finite-source or orientation onset reaches 1% before the
+chosen distinctness boundary.
+
+Decision: the next relational-shape mechanism is an oriented memory/current
+channel, not another direct scalar readout narrowing. A local or retarded
+scalar mediator remains deferred for a separate locality or propagation-time
+question. This pathwise result does not rule out scalar near-field structure
+for other independently formed knots.
+
+Report: `reports/response/scalar_cross_readout_resolution_2026-07-21.md`.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

@@ -81,9 +81,14 @@ identifizierten physikalischen Moden.
 - [Interaction-Age bis N103M](response/one_way_interaction_age_N3M_2026-07-21.md)
   - **negative:** lineare Zentrumtranslation, `0/5` kontrollgetrennte
     Formmodifikation und keine wechselwirkungsinduzierte Oszillation.
+- [Skalarer Cross-Readout-Aufloesungstest](response/scalar_cross_readout_resolution_2026-07-21.md)
+  - **negative + pipeline-only:** Selbst- und Cross-Kernel sind getrennt und
+    kalibriert; der 1%-Orientierungsschwellenwert wird in `d=3/10` vor der
+    Distanzgrenze nicht erreicht.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Der naechste Test braucht
-einen mechanistisch anderen lokalen/retardierten oder orientierten Kanal.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Als naechster Mechanismus
+wird orientiertes Vektor-/Strommemory vorregistriert. Ein lokaler/retardierter
+Skalarmediator bleibt fuer eine getrennte Lokalitaetsfrage zurueckgestellt.
 
 ### 5. Governance und Kuration
 

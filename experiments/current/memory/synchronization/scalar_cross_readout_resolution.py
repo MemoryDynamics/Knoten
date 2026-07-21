@@ -348,6 +348,42 @@ def summarize_cases(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return summaries
 
 
+def classify_resolution_gate(summaries: list[dict[str, Any]]) -> dict[str, str]:
+    """Select one next mechanism from the preregistered pathwise gate."""
+
+    if not summaries:
+        raise ValueError("at least one case summary is required")
+    passed = [
+        summary for summary in summaries if summary["shape_onset_ratio"] is not None
+    ]
+    if len(passed) == len(summaries):
+        return {
+            "status": "pass",
+            "selected_next_mechanism": "local_or_retarded_scalar_mediator",
+            "summary": (
+                "Every audited embedding crosses the static orientation threshold "
+                "before the distinctness boundary."
+            ),
+        }
+    if not passed:
+        return {
+            "status": "fail",
+            "selected_next_mechanism": "oriented_memory_or_current",
+            "summary": (
+                "No audited embedding crosses the static orientation threshold "
+                "before the distinctness boundary."
+            ),
+        }
+    return {
+        "status": "inconclusive",
+        "selected_next_mechanism": "none_pending_independent_states",
+        "summary": (
+            "The static orientation threshold is embedding-dependent; no mechanism "
+            "is selected from this pathwise gate."
+        ),
+    }
+
+
 def make_figure(rows: list[dict[str, Any]], path: Path, threshold: float) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     dims = sorted({int(row["dim"]) for row in rows})
@@ -414,6 +450,18 @@ def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) 
         f"orientations divided by point drift. Threshold: {payload['shape_threshold']:.1%};",
         f"minimum centre distinctness: {payload['minimum_distinctness']:.2f} times the",
         "sum of target and source memory radii.",
+        "",
+        "## Decision",
+        "",
+        f"Gate status: **{payload['decision']['status']}**.",
+        "",
+        payload["decision"]["summary"],
+        "",
+        "Selected next mechanism: "
+        f"**{payload['decision']['selected_next_mechanism']}**.",
+        "This selection concerns relational orientation/shape transport. A local",
+        "or retarded scalar mediator remains a later option for locality and",
+        "propagation-time tests; this gate does not test those properties.",
         "",
         "## Results",
         "",
@@ -516,6 +564,7 @@ def main() -> None:
     summary_path = _resolve(args.summary_json)
     figure_path = _resolve(args.figure)
     make_figure(rows, figure_path, args.shape_threshold)
+    case_summaries = summarize_cases(rows)
     payload = {
         "schema": "emergenz-knoten.scalar-cross-readout-resolution",
         "schema_version": 1,
@@ -529,7 +578,8 @@ def main() -> None:
         "shape_threshold": float(args.shape_threshold),
         "minimum_distinctness": float(args.minimum_distinctness),
         "rows": rows,
-        "case_summaries": summarize_cases(rows),
+        "case_summaries": case_summaries,
+        "decision": classify_resolution_gate(case_summaries),
         "summary_json": summary_path,
         "figure": figure_path,
     }

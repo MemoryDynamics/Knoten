@@ -36,16 +36,18 @@ kanonischen Reports dieselbe Claim-Grenze verwenden.
 
 ## P1: Genau ein neues Transportgate vorregistrieren
 
-Entscheidungspunkt: lokaler/retardierter Mediator **oder** orientiertes
-Vektormemory. Nicht beide gleichzeitig oeffnen.
+Entscheidung: Das vorgeschaltete Cross-Readout-Gate scheitert in `d=3` und
+`d=10`. Selbst bei `sigma_rep/R_mem=2.5` und 1.25 kombinierten Memory-Radien
+bleibt die Orientierungs-Driftspanne mit `1.96e-3` bzw. `4.32e-4` unter 1%; die
+kalibrierte orientierungsabhaengige Verschiebung betraegt nur `5.98e-5` bzw.
+`1.52e-5 R_mem` pro Memory-Zeit. Das ist ein pathweises negatives Gate aus je
+einem Checkpoint, kein allgemeiner Unmoeglichkeitssatz fuer skalare Felder.
 
-Unmittelbares Vor-Gate: den autonomen Selbstkernel vom skalaren Cross-Readout
-trennen und auf vollstaendigen `N=100M`-Checkpoints pruefen, ob starre
-Quellorientierungen vor Ueberlappung vom Punktmonopol unterscheidbar werden.
-Primaer sind 1% Orientierungs-Driftspanne bei mindestens 1.25 kombinierten
-Memory-Radien und die dazu kalibrierte Verschiebung pro Memory-Zeit. Kein
-Bestehen bedeutet: keine weitere direkte skalare Readout-Verengung; dann wird
-ein orientierter Memory-/Stromkanal vor einem skalaren Formtransport getestet.
+Als genau ein neuer Mechanismus wird daher **orientiertes Vektor-/Strommemory**
+geoeffnet. Weitere direkte skalare Readout-Verengung ist beendet. Ein lokaler
+oder retardierter skalarer Mediator bleibt fuer eine spaetere, getrennte
+Lokalitaets- oder Laufzeitfrage zurueckgestellt; der vorliegende Test bewertet
+nur seinen moeglichen skalaren Formpayload.
 
 Pflichtfelder vor Implementierung:
 

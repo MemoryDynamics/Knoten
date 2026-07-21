@@ -70,6 +70,7 @@ wichtig:
 3. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
 4. `reports/memory/low_mode_identity_audit_2026-07-20.md`
 5. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
+6. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -93,14 +94,17 @@ Der skalare Fernkanal ist als Negativ-/Baseline-Modell ausreichend gehaertet.
 Weitere Amplituden-, kleinere-Epsilon- oder reine Alters-Scans sind ohne neue
 diskriminierende Hypothese nicht priorisiert.
 
-Genau ein neuer Mechanismus darf als Naechstes geoeffnet werden:
+Das vorgeschaltete statische Cross-Readout-Gate trennt jetzt Selbstkernel und
+Cross-Aufloesung. Es scheitert in `d=3/10` am vorregistrierten 1%-Formsignal,
+auch am Distanzrand von 1.25 kombinierten Memory-Radien. Damit wird als genau
+ein neuer Mechanismus **orientiertes Vektor-/Strommemory mit relationalem
+Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator bleibt fuer eine
+spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
 
-1. lokaler/retardierter Mediator mit explizitem Feldzustand; oder
-2. orientiertes/Vektormemory mit relationalem Readout.
-
-Vor Implementierung sind Nullmodell, primaere Observable, Seedzahl,
-Akzeptanzschwelle und Stopregel festzulegen. Ein positiver Einzelplot oder ein
-bester Seed genuegt nicht.
+Vor dessen dynamischer Implementierung sind Nullmodell, primaere Observable,
+mindestens sechs unabhaengige Formationszustaende, Akzeptanzschwelle und
+Stopregel festzulegen. Ein positiver Einzelplot oder ein bester Seed genuegt
+nicht.
 
 ## Paper-Status
 
