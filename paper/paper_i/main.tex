@@ -11,20 +11,34 @@
 
 \begin{document}
 
-\title{Minimal Point-Valued Stochastic Dynamics with Relaxing Memory: Markov Embedding and Metastable Structures}
+\title{Self-Interacting Stochastic Dynamics with Exponential Memory: Markov Embedding, Effective Scaling, and a Linear Memory-Cloud Baseline}
 
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{28 February 2026} % explicit date for submissions/arXiv
+\date{26 July 2026}
 
 \begin{abstract}
-We propose a minimal point-valued stochastic dynamics on an abstract continuous state space $\Omega$ in which a visible trajectory $x_n$ is coupled to an explicit, exponentially relaxing memory density $\rho_n$.
-The marginal process $\{x_n\}$ is generally non-Markovian, while the augmented state $z_n=(x_n,\rho_n)$ is Markov by construction.
-The memory update is history-compressing, yielding an intrinsic arrow of \emph{update order}.
-Coarse-graining over the internal persistence scale $n\gg\alpha^{-1}$ motivates an effective parameter $t=\alpha n$ and, when a separation of scales is present, an approximate continuum SDE/Fokker--Planck description.
-In regimes where such candidates occur, we define trajectory-based, coordinate-robust diagnostics (persistence/relaxation rates, dimensionless stability measures, and metastable residence-time statistics) to identify and compare localized memory-cloud structures induced by the endogenous memory coupling.
-Calibration to spacetime units, physical energy or mass scales, relativistic dynamics, or Standard-Model-like structures is outside the scope of the present paper.
+We study a point-valued stochastic process on a continuous state space in which
+a visible trajectory is coupled to a self-generated memory density with
+exponential forgetting.
+The visible trajectory is generally non-Markovian, whereas the augmented state
+consisting of position and memory field is Markov.
+The memory recursion compresses ordered histories and supplies an internal
+persistence scale; a formal continuum description is available under an
+explicit small-step scaling.
+For the normalized memory update we derive an exact recursion for the memory
+centroid and, after local linearization of the self-induced force, an
+autoregressive relative mode with an explicit stationary radius.
+Across nine active long-run slices, spanning $d=3$ to $20$ and run lengths up
+to $3\times10^8$ updates, measured co-moving radii agree with the finite-memory
+linear prediction to a median relative error of $0.76\%$ and a maximum of
+$1.15\%$.
+Matched one- and two-scale kernels also collapse when parametrized by local
+restoring curvature.
+Thus the current scalar evidence establishes a reproducible co-moving
+relaxation cloud, but does not isolate a nonlinear metastable state, a phase
+transition, or a dimension-selection mechanism.
 \end{abstract}
 
 \maketitle
@@ -33,74 +47,76 @@ Calibration to spacetime units, physical energy or mass scales, relativistic dyn
 \section{Introduction}
 %-------------------------------------------------
 
-Several programs in fundamental physics investigate whether structures such as spacetime, locality, fields, or quantum states could be effective rather than primitive.
-Examples include asymptotic safety \cite{Weinberg1979,Reuter1998,NiedermaierReuter2006,Percacci2017}, causal sets \cite{Bombelli1987,Sorkin2003}, loop-based formulations \cite{Rovelli2004,AshtekarLewandowski2004}, and string theory \cite{Polchinski1998}; broader emergence arguments also motivate asking which structures must be postulated and which can be reconstructed operationally \cite{Anderson1972,Laughlin2000}.
+Self-interacting stochastic processes describe motion whose future drift is
+shaped by its own past.
+Reinforced processes, true self-avoiding or self-repelling motion, Brownian
+polymers, and self-interacting diffusions provide established examples
+\cite{Pemantle2007,AmitParisiPeliti1983,TothWerner1998,
+DurrettRogers1992,PelitiPietronero1987}.
+In the framework of Bena\"im, Ledoux, and Raimond, the interaction is driven by
+a normalized occupation measure; for symmetric interactions, Bena\"im and
+Raimond proved convergence toward critical points of a nonlinear free-energy
+functional \cite{BenAImRaimond2002,BenaimRaimond2005}.
+Herrmann and Roynette studied a different self-attracting diffusion driven by
+an unnormalized integral over the full past and proved convergence or
+boundedness in specific one-dimensional cases
+\cite{HerrmannRoynette2003}.
+These models retain cumulative rather than exponentially discounted history.
 
-The present paper does not attempt such a reconstruction.
-It isolates a smaller mathematical question: what follows from a point-valued stochastic update coupled to a self-generated memory that relaxes?
-Concretely, we assume a sequence of non-trivial update events defining a trajectory in an abstract state space, together with an explicit memory variable that compresses the ordered past.
+The closest recent comparison is the aging-kernel model of Mili\v{s}i\'c,
+Meunier, and Roux, which treats weighted linear interactions with the past and
+includes an explicitly solvable exponential-memory case
+\cite{MilisicMeunierRoux2026}.
+More broadly, exponential kernels admit Markovian embeddings in generalized
+Langevin and other memory equations by introducing auxiliary state variables
+\cite{Mori1965,Zwanzig2001,JaganathanValani2025,
+WisniewskiLuczkaSpiechowicz2024}.
 
-Related ideas appear in digital-physics approaches \cite{Wolfram2002,tHooft2016} and in history-dependent random-walk models \cite{Nelson1966,Pemantle2007,BenAImRaimond2002}.
-Closest in spirit are self-interacting walks biased by their visitation history, such as the true (myopic) self-avoiding walk (TSAW) \cite{AmitParisiPeliti1983,TothWerner1998} and the self-repelling Brownian polymer (SRBP) \cite{DurrettRogers1992}; see also \cite{PelitiPietronero1987}.
-Recent work on self-interacting diffusions continues to analyze processes whose drift depends on occupation-type memory variables \cite{HolbachRaimond2026}.
+This paper does not claim that exponential memory or state augmentation is a
+new general principle.
+Its contribution is the specific combination of a discrete point process, a
+deposited spatial memory field, and a potentially nonlinear self-interaction,
+together with a discriminating linear center-relative null model for the
+observed localized regime.
+That null model materially changes the numerical interpretation: compact
+co-moving scalar memory clouds are reproducible, but their measured radius is
+almost completely explained by a real linear finite-memory mode.
 
-The second relevant strand is the use of Markovian embeddings for systems with memory.
-For finite memory, the basic mechanism is elementary: one enlarges the state until the retained past is part of the present state.
-Related embedding ideas also appear in generalized Langevin and nonlocal-memory equations, where auxiliary variables or spectral representations turn nonlocal memory terms into local evolution in an extended space \cite{NoeNuske2013,NoeWuPrinzPlattner2013,JaganathanValani2025,WisniewskiLuczkaSpiechowicz2024}.
-
-Our model shares with self-interacting processes the idea of a trajectory coupled to a self-generated field, but differs structurally: the memory is an explicit, exponentially relaxing distribution updated by Eq.~(\ref{eq:memorydistribution}).
-Consequently, the visible coordinate $x_n$ alone is generally non-Markovian, since its next update depends on the retained memory field, whereas the augmented state $z_n=(x_n,\rho_n)$ is Markov by construction.
-This Markov embedding is the main mathematical anchor of the present paper.
-The same memory update is information-losing at the level of histories and thereby induces an intrinsic arrow of \emph{update order} in the update dynamics; that is, in general the full ordered past cannot be reconstructed from the present state.
-(We intentionally distinguish this update-order arrow from any thermodynamic or relativistic notion of physical time, which is not assumed here.)
-Memory and trajectory are generated jointly as the minimal departure from trivial dynamics, rather than being encoded in external boundary conditions.
-
-By contrast, TSAW/SRBP-type formulations are typically written directly in terms of the full occupation history (or local time) without explicit forgetting \cite{AmitParisiPeliti1983,TothWerner1998,DurrettRogers1992,PelitiPietronero1987}.
-The broader placement of this construction within self-interacting diffusions, self-repelling polymers, Markovian embeddings of memory processes, and positive-operator formulations of stochastic maps is a natural subject for a separate mathematical note; the present paper keeps only the model definition and operational diagnostics needed for the minimal construction.
-
-\paragraph{Roadmap (conceptual to operational).}
-We first give a brief heuristic motivation (without a formal proof) for why locally linear, metric-like coarse-grained language can be useful once one assumes directed, comparable update steps (Sec.~\ref{sec:minimalist_motivation}); readers primarily interested in the model and diagnostics may skip directly to Sec.~\ref{sec:MinDynModel}.
-In Sec.~\ref{sec:MinDynModel} we specify the minimal generator---a point-valued stochastic update on $\Omega$ coupled to a relaxing memory distribution.
-Sec.~\ref{sec:EffectiveTime} introduces an effective coarse-grained time parametrization and discusses when a continuum description is useful.
-Subsequent sections analyze memory-induced irreversibility and then develop operational diagnostics (metastability, persistence/relaxation rates, and dimensionless stability measures) for localized metastable candidates.
-
-A small reference implementation accompanies this work in the project repository and includes a relaxing-memory simulator, diagnostic functions, tests, and a reproducible reference runner.
-
-%-------------------------------------------------
-\subsection{Minimalist motivation: from directed updates to effective coordinates}\label{sec:minimalist_motivation}
-%-------------------------------------------------
-
-Our starting point is deliberately weak: we assume only (i) distinguishable events and (ii) a directed update order between them.
-To compare elementary updates, we further assume that minimal transitions can be assigned increments $\Delta$ in some comparison set $\mathcal{S}$ and that concatenation of transitions induces an associative composition law.
-
-The purpose of this subsection is to justify why it is reasonable to work with continuum notions later on.
-Under mild regularity and coarse-graining assumptions---continuity, refinement invariance, and a central-limit-type scaling of fluctuations---a consistent composition law can linearize locally and yield a tangent-space-like description.
-If fluctuations are approximately isotropic at the coarse-grained scale, the covariance further induces an effective inner product.
-In short: differentiability and metric structure are treated as \emph{effective} notions arising from stable large-scale behavior, not as fundamental axioms.
-
-In the present paper we therefore work directly with a concrete minimal dynamics on a continuous state space $\Omega$.
-The coarse-grained coordinate and metric language serves only as a consistency target and an interpretive guide for diagnostics extracted from trajectories.
-
-%-------------------------------------------------
+The remainder of the paper defines the augmented process and its operator
+representation, separates update order from physical time, derives the linear
+null model, tests it against the current long-run data and matched controls,
+and states the additional diagnostics required before using metastability or
+``dynamical knot'' language.
+The construction assumes neither physical spacetime nor calibrated energy,
+mass, relativistic, quantum, or particle-physics structure.
 \section{Minimal Dynamical Model}\label{sec:MinDynModel}
 %-------------------------------------------------
 
 In this section we define the minimal dynamical framework underlying the present paper.
 No assumptions about spacetime, physical geometry, quantum mechanics, physical fields, or conserved quantities are made at this stage.
 
-\subsection{Background structure and invariances}\label{sec:background_invariances}
+\subsection{Background structure and regularity}\label{sec:background_invariances}
 
-The model is formulated on a continuous state space $\Omega$ equipped with a reference measure $dx$ and a choice of local coordinates sufficient to define integrals and derivatives.
-In practice one may take $\Omega\subseteq\mathbb{R}^d$ with the Lebesgue measure and the Euclidean inner product.
-This background structure is a minimal mathematical scaffold for writing the generator and the diagnostics; it is not assumed to be a fundamental physical spacetime metric.
+For the discrete model we take $\Omega\subseteq\mathbb{R}^d$ with Lebesgue
+measure and a specified boundary or extension convention.
+The deposition kernel satisfies $G_\sigma\in L^1(\Omega)$,
+$G_\sigma\geq0$, $\int G_\sigma=1$, and has zero first moment.
+The interaction kernel $K(x,y)$ is measurable and continuously
+differentiable in $x$, with $\nabla_xK(x,\cdot)$ integrable against the finite
+memory measures reached by the process.
+These assumptions suffice for the discrete expressions below; the formal
+continuum approximation additionally requires local Lipschitz and growth
+bounds on the induced drift, and the Hessian discussion requires two
+$x$-derivatives near the linearization point.
 
-Two distinct notions of ``invariance'' are relevant.
-First, once the extended state is defined in Eq.~(\ref{eq:augmented_state}), the resulting process is Markov by construction, and the update order $n\mapsto n+1$ is dynamically meaningful because the relaxing memory state compresses the ordered past.
-Second, many of the observables we use are designed to be operational and robust under benign reparametrizations of $\Omega$ (e.g., translations, rotations, and global rescalings in the chosen coordinate chart), in the sense that they depend on coarse-grained residence statistics and relaxation rates rather than on absolute coordinate values.
-
-Quantities that explicitly use $\nabla$ (e.g., drifts of the form $-\nabla\Phi[\rho]$ and Hessian-based OU linearizations) depend on the chosen coordinate/inner-product structure and should be interpreted as part of the effective description.
-Accordingly, whenever we invoke ``isotropy'' or compare rates across runs, we do so at the level of dimensionless ratios or fit parameters extracted from trajectory data, not by assuming a preferred physical metric on $\Omega$.
-
+The Euclidean coordinates and inner product define gradients, isotropic noise,
+and covariance diagnostics.
+They are part of the mathematical model and are not identified with physical
+space.
+Translation, rotation, and scale comparisons below refer to this supplied
+coordinate scaffold.
+Quantities involving $\nabla$ or a Hessian are therefore coordinate-dependent
+unless combined into an explicitly normalized diagnostic.
 \subsection{State and update index}
 
 We consider a single generative process producing a sequence of states indexed by an integer update parameter $n\in\mathbb{N}$.
@@ -270,13 +286,12 @@ The state sequence in Eq.~(\ref{eq:augmented_state})
 \[
 z_0 \rightarrow z_1 \rightarrow z_2 \rightarrow \dots
 \]
-acquires an intrinsic, irreversible ordering without assuming spacetime or calibrated physical time.
+is represented by a forward history-compressing semigroup without assuming spacetime or calibrated physical time.
 
 \subsection{Role of the memory rate}
 
 Figure~\ref{fig:memory_weights} makes the role of $\alpha$ explicit: it controls how long past updates remain dynamically active.
-Small $\alpha$ produces long memory and extended correlations; larger $\alpha$ suppresses older contributions more quickly and favors more transient structures.
-The qualitative consequences of this persistence scale become visible in the knot trajectories of Fig.~\ref{fig:3d_knot_trajectory}.
+Small $\alpha$ produces long memory and extended correlations, while larger $\alpha$ suppresses older contributions more quickly.
 
 \begin{figure}[tbp]
     \centering
@@ -347,225 +362,222 @@ Formally, one may write the coarse-grained dynamics as a stochastic differential
 D \sim \frac{\varepsilon^2}{2\alpha},
 \end{equation}
 where $W_t$ is a standard Wiener process \cite{Oksendal2003,Risken1996} and $\eta/\alpha$ is the effective drift coupling in the chosen coarse-grained parametrization. We emphasize that the potential is induced by the memory field, $\Phi[\rho](x):=\int K(x,y)\rho(y)\,dy$, and is therefore slowly time-dependent in general.
-In metastable knot regimes it may be treated as quasi-stationary on intermediate time scales. The precise numerical prefactor depends on conventions and on how the discrete-to-continuum limit is taken.
+In a quasi-stationary localized regime it may be frozen on intermediate relaxation scales. The precise numerical prefactor depends on conventions and on how the discrete-to-continuum limit is taken.
 
 Unless stated otherwise, SDEs are interpreted in the It\^o sense.
 
 
 \paragraph{Temporal direction and limits}
-Because the memory update compresses the ordered past, the coarse-grained parameter $t$ inherits a preferred direction: reversing $t$ does not correspond to a valid evolution of the discrete process.
+Because the memory state compresses ordered histories, $t$ follows the direction of the forward Markov semigroup. Algebraically recovering one preceding memory field from adjacent states neither reconstructs the full history nor reverses the noise realization.
 Moreover, $t$ is useful only when memory relaxation provides a separation of scales.
 For $\alpha\to 1$ memory becomes too short-lived for a controlled continuum description, while for $\alpha\to 0$ memory persists over arbitrarily long sequences and the coarse-graining becomes ambiguous.
 
-In the regimes where a continuum description is meaningful, the next question is whether the dynamics self-organizes into metastable regions $\mathcal{K}\subset\Omega$.
-We identify such ``dynamical knots'' operationally via the memory/visitation measure $M_n(\mathcal{K})$ and characterize their stability by an associated relaxation rate $\Gamma_{\mathrm{rel}}$.
+Before asking whether nonlinear metastability occurs, one must determine what localization is already implied by the linear center-memory feedback.
+The next section derives and tests that null model before stating stronger diagnostics.
 
 %-------------------------------------------------
-\section{Dynamical Knots and Relaxation Scales}
-%-------------------------------------------------
+\section{Linear Baseline and Metastability Criteria}
 
-Having established an effective notion of time, we now turn to memory-induced localized structures and their relaxation-based stability diagnostics.
+The same memory feedback that can suggest localization also generates a simple
+linear center-relative mode.
+This mode is the necessary null hypothesis for every stronger claim in the
+current scalar model.
 
-\subsection{Dynamical knots}
+\subsection{Exact memory-centroid recursion}
 
-As illustrated in Fig.~\ref{fig:3d_knot_trajectory}, the trajectory generated by the update rules may organize into localized regions of repeated visitation.
-These regions are not imposed externally, but arise dynamically through the interplay of
-stochastic motion and memory-induced drift.
-
-We refer to such regions as \emph{dynamical knots}.
-A dynamical knot is characterized by an enhanced local memory density Eq.~(\ref{eq:memorydistribution}) and a corresponding self-consistent modification of the trajectory dynamics.
-Importantly, a knot is not an object or a fixed point, but a metastable dynamical pattern.
-Operationally, a knot may be identified by a metastable region $\mathcal{K}\subset\Omega$ with coarse-grained visitation measure (equivalently, memory weight)
+In the normalized convention $\lambda_{\mathrm m}=\beta=\alpha$, assume the
+deposition kernel is centered and $\rho_n$ has unit mass.
+Define
 \begin{equation}
-M_n(\mathcal{K}) := \int_{\mathcal{K}}\rho_n(x)\,dx
+m_n:=\int_\Omega y\,\rho_n(y)\,dy .
+\label{eq:memory_centroid_full}
 \end{equation}
-Persistence means that $M_n(\mathcal{K})$ remains above a chosen threshold over update intervals $\Delta n \gg \alpha^{-1}$.
+Taking the first moment of Eq.~(\ref{eq:memorydistribution}) gives the exact
+identity
+\begin{equation}
+m_{n+1}=(1-\alpha)m_n+\alpha x_{n+1}.
+\label{eq:center_recursion_full}
+\end{equation}
+Thus the memory center is an exponentially weighted center of the visible
+history; it is not an independently fixed attractor.
 
-Here $M_n$ is a region-level observable, while the induced potential $\Phi_n(x)=\int K(x,y)\rho_n(y)\,dy$ is a field on $\Omega$.
-Intuitively, elevated $M_n(\mathcal{K})$ means that $\rho_n$ carries substantial weight near $\mathcal{K}$; through the convolution with $K$, this can generate a locally restoring drift $-\nabla\Phi_n$ that stabilizes the knot.
+Suppose the trajectory samples a region in which the center-relative force is
+well approximated by
+\begin{equation}
+-\eta\nabla\Phi_n(x_n)\simeq-g(x_n-m_n),
+\label{eq:linear_force_full}
+\end{equation}
+with scalar restoring strength $g$.
+For a smooth translation-invariant kernel, $g$ combines the local curvature,
+the retained memory mass, and $\eta$.
+Writing $r_n=x_n-m_n$, Eqs.~(\ref{eq:trajectory}) and
+(\ref{eq:center_recursion_full}) imply
+\begin{equation}
+r_{n+1}=(1-\alpha)(1-g)r_n
+ +(1-\alpha)\varepsilon\xi_n .
+\label{eq:relative_mode_full}
+\end{equation}
+The corresponding two-state linearization has a translation eigenvalue one
+and a real relative eigenvalue $(1-\alpha)(1-g)$.
+No oscillatory mode is generated by this minimal scalar reduction.
 
-This trajectory-level definition is deliberately minimal, but it has a direct operator-theoretic refinement.
-Once augmented features along the trajectory are recorded, a chosen lag and a coarse partition or basis on $\Sigma$ define an estimated transfer operator.
-Candidate knots can then be tested as metastable or almost-invariant sets, equivalently as slowly decaying modes separated by a spectral gap \cite{FroylandLloydSantitissadeekorn2010,NoeNuske2013}.
-The present paper uses residence weights and relaxation fits as the minimal diagnostic version of this criterion; a full transfer-operator/MSM analysis is left to subsequent work.
+When $|(1-\alpha)(1-g)|<1$, the stationary Euclidean root-mean-square radius
+of the relative mode is
+\begin{equation}
+R_{\mathrm{lin}}
+=\frac{\sqrt{d}(1-\alpha)\varepsilon}
+{\sqrt{1-(1-\alpha)^2(1-g)^2}}.
+\label{eq:linear_radius_full}
+\end{equation}
+The implemented finite-history benchmark uses the retained mass
+\begin{equation}
+M_{\mathrm{stored}}=1-(1-\alpha)^H
+\end{equation}
+inside $g$, where $H$ is the stored history depth.
+Equation~(\ref{eq:linear_radius_full}) predicts compact motion relative to the
+moving memory center without invoking nonlinear metastability.
+
+\subsection{Numerical test of the null model}\label{sec:numerical_status}
+
+The current numerical evidence consists of nine active long-run slices with
+five seeds per slice.
+Runs have $N=3\times10^7$ updates, with one $N=3\times10^8$ check, and span
+ambient dimensions $d=3,4,5,7,10,13,$ and $20$.
+Across these slices the median relative radius error against
+Eq.~(\ref{eq:linear_radius_full}) is $0.76\%$ and the maximum is $1.15\%$.
+The comparison is shown in Fig.~\ref{fig:linear_reconciliation_full}.
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.88\linewidth]{fig3_knot_trajectory.pdf}
-    \caption{
-    Organization of a trajectory into multiple knot-like regions in state space.
-    The continuous line shows the full trajectory, while discrete points indicate sampled positions
-    contributing to the memory distribution.
-    Color denotes the update index $n$.
-    Shown is a representative run illustrating metastable clustering in one parameter regime.
-    }
-    \label{fig:3d_knot_trajectory}
+    \includegraphics[width=\linewidth]{../../figures/draft/scalar_hardening/linear_reconciliation_2026-07-19/linear_long_run_reconciliation.png}
+    \caption{Measured co-moving root-mean-square radii compared with the
+    finite-memory linear prediction. Active slices remain close to the
+    diagonal across run length and ambient dimension. The $\eta=0$ controls
+    are displayed separately because the active-force prediction is not an
+    exact identity for their finite-window trace estimator.}
+    \label{fig:linear_reconciliation_full}
 \end{figure}
 
-In such regimes, the coarse-grained dynamics typically exhibits two distinct time scales: the memory persistence scale of order $\alpha^{-1}$ and a (potentially larger) knot relaxation scale $\tau_{\mathrm{rel}}$ characterizing return to the metastable region after perturbations.
-Operationally, $\tau_{\mathrm{rel}}$ is defined with respect to the coarse-grained parameter $t$ (Sec.~\ref{sec:EffectiveTime}), e.g., by an exponential decay law of an in-knot autocorrelation $C(t)\propto e^{-t/\tau_{\mathrm{rel}}}$.
-This motivates using a relaxation rate (and its dimensionless variant) as an operational descriptor of knot stability.
+A matched kernel-family control sharpens this result.
+For the earlier two-scale kernel, local curvature depends on the effective
+amplitude $A_{\mathrm{eff}}=A_{\mathrm{att}}-9$ in the reference
+normalization.
+An attractive-only kernel at the same $A_{\mathrm{eff}}$ reproduces the
+measured scalar radius, memory dimension, roundness, and center drift to
+relative differences below $6.4\times10^{-6}$ over the matched support.
+The compact branch therefore identifies local restoring curvature, not the
+repulsive component of the two-scale kernel.
 
-\subsection{Numerical status and claim boundary}\label{sec:numerical_status}
+A preregistered fixed-$g$ test increased the predicted scale to
+$R_{\mathrm{lin}}/L=0.3$.
+Its endpoint radius is $6.2\%$ above the linear prediction, but the memory
+shape changes only smoothly and no separate branch is resolved.
+Fixed-voxel residence changes with the deliberately varied radius, while a
+co-moving residence statistic is saturated for both active and $\eta=0$
+paths.
+The formal composite decision is therefore inconclusive and does not support a
+metastable-transition claim.
 
-The numerical role of this paper is diagnostic rather than theorem-proving.
-In the current corrected-sign scalar reference slice, five-seed runs of length $N=3\times10^7$ show a co-moving compact memory-cloud regime separated from the matched $\eta=0$ control.
-For the strongest current slice ($A_{\mathrm{att}}=35$ in the two-scale kernel convention used by the implementation), the median co-moving radius is approximately $2.1\times10^{-4}$, compared with about $10^{-3}$ in the $\eta=0$ control, and the radius-normalized center drift is about $0.044$, compared with about $0.320$ in the control.
-The weighted memory cloud in the chosen three-dimensional embedding has covariance participation dimension $D_{\mathrm{mem}}\simeq2.94$ and roundness about $0.84$, compared with $D_{\mathrm{mem}}\simeq1.90$ and roundness about $0.45$ in the corresponding control.
-These numbers support the limited statement that scalar memory feedback can generate seed-stable, co-moving compact memory-cloud candidates in this parameter slice.
+The covariance participation dimension $D_{\mathrm{mem}}$ approaches the
+supplied dimension for an isotropic cloud.
+A value near three in a three-dimensional embedding is consequently an
+expected shape check in this linear regime, not a dimension-selection result.
+We do not use it as primary evidence.
 
-This should not be read as a dimension-selection result.
-Here $D_{\mathrm{mem}}$ is a memory-cloud shape diagnostic in the chosen coordinate scaffold, not a proof that physical space has three dimensions.
-Ambient-dimension audits in the repository indicate that strict memory-variance diagnostics such as $D_{\mathrm{mem}}$ and the number of axes required to capture 90--95\% of memory variance grow with the supplied embedding dimension.
-At the same time, spectral/coarse memory diagnostics show near-three-dimensional behavior in some high-dimensional runs.
-We therefore treat the local three-dimensional memory shape as a diagnostic in the chosen embedding and as motivation for later tests of external/coarse dimensionality, not as a conclusion of the present minimal model.
+\subsection{Terminology and discriminating tests}
 
-\subsection{Attractors of the effective dynamics}
+We call the state established above a \emph{co-moving localized memory cloud}.
+The project term \emph{dynamical knot} is reserved for a stronger result: a
+nonlinear metastable regime that remains after comparison with
+Eq.~(\ref{eq:relative_mode_full}), matched $\eta=0$ controls, and scale-aware
+measurement choices.
+The historical illustrative knot trajectory is therefore not used as evidence
+in the revised paper.
 
-In the continuum description, the influence of memory may be summarized by an effective potential $\Phi[\rho](x)$ induced by the memory field.
-In a frozen-memory approximation, dynamical knots can be represented locally by regions where the gradient of this potential vanishes,
+For a region $\mathcal K\subset\Omega$, retained memory weight
 \begin{equation}
-\nabla \Phi[\rho](x_\star) = 0,
+M_n(\mathcal K)=\int_{\mathcal K}\rho_n(x)\,dx
 \end{equation}
-and small perturbations are suppressed. In the presence of stochastic forcing, knots are typically metastable (noise-broadened) attractor regimes rather than strictly stable fixed points.
+can contribute to such a test, but only if $\mathcal K$ is defined without a
+fixed-bin scale bias and the same statistic does not saturate under the null.
+Residence time, memory weight, and shape must be tested jointly across seeds
+and controls.
 
-In this approximation, the Hessian of the memory potential defined in Eq.~(\ref{eq:memorypotential}) determines the local relaxation rates.
-Linearizing the continuum drift corresponding to Eq.~(\ref{eq:trajectory}) around such a point $x_\star$ yields an OU-type approximation,
+A more direct metastability test estimates a lagged transfer operator on
+features of the augmented state.
+Almost-invariant sets or nontrivial slow modes should be stable under changes
+of lag, basis or partition, terminal-row handling, and sample size
+\cite{FroylandLloydSantitissadeekorn2010,NoeNuske2013,
+NoeWuPrinzPlattner2013}.
+For a non-unit eigenvalue $\mu_i(\tau)$, the implied rate is
 \begin{equation}
-\mathrm{d}x = -\gamma H (x - x_\star)\,\mathrm{d}t + \sqrt{2D}\,\mathrm{d}W_t,
+\Gamma_i(\tau)=-\frac{1}{\tau}\log|\mu_i(\tau)|.
+\label{eq:implied_rate_full}
 \end{equation}
-where $H$ denotes the Hessian of the memory potential evaluated at $x_\star$, and
+A slow eigenvalue is meaningful only if it is separated from finite-sample and
+projection artifacts and from the corresponding control spectrum.
+
+\subsection{Local relaxation diagnostics}
+
+For a quasi-stationary memory field, let $x_\star$ satisfy
+$\nabla\Phi[\rho](x_\star)=0$ and let $H$ be the Hessian of the memory
+potential there.
+The formal continuum approximation from Eq.~(\ref{eq:coarse_sde}) gives
 \begin{equation}
-\gamma := \frac{\eta}{\alpha}
+dX_t=-\frac{\eta}{\alpha}H(X_t-x_\star)\,dt
+     +\sqrt{2D}\,dW_t .
+\label{eq:ou_full}
 \end{equation}
-collects the effective coupling to the memory-induced drift in the continuum description.
-
-\paragraph{Remark (stability condition and time dependence).}
-Strictly, $x_\star$ is a fixed point only for a \emph{frozen} memory field (i.e., if $\rho$ is quasi-stationary on the relaxation time scale).
-Local stability in the linearized (OU) approximation requires the symmetric part of $H$ to be positive definite (so that the drift is restoring) in the directions of interest; otherwise $x_\star$ is unstable or saddle-like and does not define a metastable knot.
-
-This form describes a relaxation process toward the attractor, with characteristic decay
-rates determined by the eigenvalues of $H$ \cite{Strogatz2018}.
-If $\lambda$ denotes a characteristic restoring eigenvalue of $H$, the associated relaxation rate scales as
+Local restoring behavior requires the symmetric part of $H$ to be positive in
+the directions considered.
+If $\lambda_H$ is a characteristic eigenvalue, the frozen-memory rate scales
+as
 \begin{equation}
-\Gamma_{\mathrm{rel}} \sim \frac{\eta}{\alpha}\,\lambda.
+\Gamma_{\mathrm{rel}}\sim\frac{\eta}{\alpha}\lambda_H .
 \end{equation}
+This is a local approximation to the broader spectral diagnostic in
+Eq.~(\ref{eq:implied_rate_full}), not an independent proof of a metastable
+state.
 
-\subsection{Relaxation scale as confinement diagnostic}
-
-The stability of a dynamical knot is governed by the rate at which perturbations decay.
-We therefore characterize a knot by a relaxation or confinement scale, rather than by introducing an inertial parameter.
-
-Concretely, in the coarse-grained (Markovian) regime one may define a characteristic relaxation time $\tau_{\mathrm{rel}}$ from linear response, e.g., from the decay of the autocorrelation of $x(t)$ within a metastable region.
-Locally, $\tau_{\mathrm{rel}}$ can be obtained from the spectral gap of the linearized Fokker--Planck generator around the knot.
-Globally, the same diagnostic is naturally phrased in terms of slow eigenvalues of a lagged transfer operator.
-Figure~\ref{fig:relaxation_diagnostic} shows the corresponding trajectory-level diagnostic.
-It is then natural to work with the associated relaxation rate
+A dimensionless comparison with diffusion on the deposition scale is
 \begin{equation}
-\Gamma_{\mathrm{rel}} := \frac{1}{\tau_{\mathrm{rel}}},
+\widehat\Gamma=\frac{\sigma^2}{D}\Gamma_{\mathrm{rel}}.
 \end{equation}
-with more strongly confined knots corresponding to larger $\Gamma_{\mathrm{rel}}$ (faster relaxation against fluctuations).
-In a transfer-operator description at lag $\tau$, a slow eigenvalue $\mu_i(\tau)$ gives the rate
-\begin{equation}
-\Gamma_i(\tau) := -\frac{1}{\tau}\log|\mu_i(\tau)|,
-\end{equation}
-with small $\Gamma_i$ corresponding to slowly relaxing modes.
-The local Hessian formula above is therefore best read as a quasi-stationary, local approximation to this broader spectral diagnostic.
-
-For coordinate-scaling robustness, one may report a dimensionless version using the intrinsic coarse-graining scales $\sigma$ and $D$ of the continuum description,
-\begin{equation}
-\widehat{\Gamma} := \frac{\sigma^2}{D}\,\Gamma_{\mathrm{rel}}.
-\end{equation}
-In knot regimes where a quasi-stationary linearization is valid, one expects $\Gamma_{\mathrm{rel}}$ to track the Hessian eigenvalue scale of the local attractor, up to convention-dependent numerical factors.
-Moreover, under a uniform rescaling of coordinates $x\mapsto a x$ (with corresponding rescalings of the coarse-graining width $\sigma$), the dimensionless quantity $\widehat{\Gamma}$ should remain approximately invariant.
-A sharper identification with a physical energy or mass scale requires (and is deferred to later work) a geometric calibration and an operational mapping to physical units.
-
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.58\linewidth]{fig_relaxation_diagnostic.pdf}
-    \caption{
-    Operational extraction of a knot relaxation rate from an in-knot autocorrelation.
-    The decay of a coarse-grained observable $C(t)$ over the intrinsic parameter $t=\alpha n$ defines $\tau_{\mathrm{rel}}$ and hence $\Gamma_{\mathrm{rel}}=1/\tau_{\mathrm{rel}}$.
-    The figure is schematic: the diagnostic is the fitted relaxation scale, not the specific numerical value.
-    }
-    \label{fig:relaxation_diagnostic}
-\end{figure}
-
-\paragraph{Terminology (possible mass interpretation).}
-No physical mass is introduced in this paper.
-The quantity defined here is a coarse-grained, quasi-time-independent property of a metastable attractor regime, quantified by how rapidly perturbations relax back into the knot.
-If later calibrated work uses mass-like language for this scale, that terminology should be understood as closer to ``stiffness'' or ``confinement strength'' than to Newtonian inertia; a mapping to conventional energy/mass units requires an additional calibration.
-
-\subsection{Metastability and transitions}
-
-Not all knots are permanently stable.
-Depending on the memory rate $\alpha$ and the strength of stochastic fluctuations, knots
-may be metastable and decay over long but finite times \cite{Kramers1940,FreidlinWentzell2012}.
-Transitions between different knot configurations correspond to qualitative changes in
-the organization of the trajectory.
-
-Such transitions are evident in Fig.~\ref{fig:3d_knot_trajectory}, where the trajectory
-moves between distinct regions of enhanced memory feedback.
-These processes provide a minimal setting for studying transition-like events in effective dynamics at larger scales.
-
-\subsection{Dimensionless diagnostics and effective scales}
-
-The minimal dynamical model introduced in Sec.~\ref{sec:MinDynModel} is defined in terms of three parameters, $\varepsilon$, $\eta$, and $\alpha$, which characterize stochastic fluctuations, memory-induced drift, and memory relaxation, respectively.
-We now summarize the effective scales and, crucially, dimensionless combinations that serve as operational diagnostics within the coarse-grained description.
-A calibration of these scales to familiar physical constants and units is deferred to later work.
-
-\subsection{Diffusion and relaxation scales}
-
-As fixed by the coarse-grained SDE in Eq.~(\ref{eq:coarse_sde}), the stochastic contribution is summarized by the effective diffusion constant $D$, up to convention-dependent numerical factors.
-Together with the knot relaxation rate $\Gamma_{\mathrm{rel}}$, the pair $(D,\Gamma_{\mathrm{rel}})$ forms a minimal set of effective scales that organize the metastable regimes analyzed here.
-
-The dimensionless diagnostic $\widehat{\Gamma}$ compares relaxation to diffusion on the coarse-graining scale and is approximately invariant under uniform coordinate rescalings $x\mapsto a x$ (with corresponding rescaling of $\sigma$).
-
-A useful control ratio may then be defined as $R:=\Gamma_{\mathrm{rel}}/\Delta\Gamma$, where $\Delta\Gamma$ denotes the fluctuation-induced uncertainty of the relaxation estimate across windows or realizations.
-Here, $R$ is only an operational drift-to-fluctuation diagnostic; a fuller phase-level interpretation is deferred to later work.
-
-\subsection{Diffusive relaxation scale}
-
-The local linearization links the operational relaxation diagnostic of Fig.~\ref{fig:relaxation_diagnostic} to the Hessian eigenvalue scale of the effective attractor dynamics.
-
-Since no metric is assumed on $\Omega$, the numerical value of $\lambda$ depends on the coordinate scaling of the state space. In practice, the kernel width $\sigma$ provides a natural reference scale, allowing one to form a dimensionless curvature measure $\tilde{\lambda} := \sigma^2\lambda$.
-
-To summarize relaxation and stochastic broadening without introducing additional postulates in the present paper, one may form the product
-\begin{equation}
-Q_{\mathrm{rel}} \;:=\; 2D\,\Gamma_{\mathrm{rel}},
-\end{equation}
-which is controlled by the same two coarse-grained quantities that already appear in the OU approximation and in the dimensionless stability measure $\widehat{\Gamma}$.
-A later calibration may determine whether a suitably normalized version of $Q_{\mathrm{rel}}$ can be interpreted as an energy-like scale; that identification is not assumed here.
-
-In this formulation, no mass parameter is introduced; the operational proxy is a measure of the stability of an attractor against stochastic perturbations.
-More strongly confined structures correspond, operationally, to steeper memory-induced potentials and/or stronger memory coupling, and thus faster relaxation.
-
-%-------------------------------------------------
+It is approximately invariant under uniform coordinate rescaling when
+$\sigma$ and $D$ are transformed consistently.
+Neither $\Gamma_{\mathrm{rel}}$ nor $\widehat\Gamma$ is a physical mass.
+Such an interpretation would require a separate operational calibration that
+is absent from this paper.
 \section{Discussion and Outlook}
 %-------------------------------------------------
 
-We introduced a minimal self-interacting point-valued stochastic dynamics with exponentially relaxing memory.
-The visible coordinate is generally non-Markovian, while the augmented state $(x_n,\rho_n)$ gives a natural Markov embedding.
-The history-compressing memory update induces an intrinsic arrow of \emph{update order} without assuming thermodynamic irreversibility, physical time, or spacetime structure.
-Coarse-graining on the memory-persistence scale yields an effective integration parameter $t=\alpha n$ and, when a separation of scales is present, a useful continuum SDE/FP approximation.
+We have specified a self-interacting stochastic process with an explicit
+exponentially relaxing spatial memory field.
+The visible coordinate is generally non-Markovian, while position plus the
+full memory field form a Markov state.
+The memory recursion supplies a finite persistence scale and a transparent
+history compression; a continuum SDE is available only as a stated scaling
+approximation.
 
-Within this effective regime, the dynamics can self-organize into localized, long-lived metastable structures (``dynamical knots'').
-Their stability can be quantified operationally via relaxation rates, dimensionless stability measures, and residence-time statistics extracted directly from trajectories.
-Interpreting such stability scales as confinement proxies is natural at the level of the effective description, while any identification with physical units, mass scales, or relativistic structure is deferred to later work.
+The principal numerical conclusion is narrower and more informative than the
+earlier knot interpretation.
+The corrected scalar reference branch is a reproducible co-moving relaxation
+cloud whose radius follows the exact linear center-relative prediction across
+all nine tested long-run slices.
+Kernel-family matching shows that the same branch identifies local restoring
+curvature rather than a specifically two-scale mechanism.
+The largest controlled departure found so far is a smooth $6.2\%$ radius
+correction without a resolved shape or residence transition.
+Accordingly, nonlinear metastability remains unestablished.
 
-Several limitations and open directions remain.
-The continuum description is used here as an effective approximation rather than as a proven scaling limit; a rigorous convergence analysis, including conditions on $(G_\sigma,K)$ and parameter scalings, is left for future work.
-A small NumPy reference implementation, tests, and a reproducible reference runner provide a concrete basis for verifying the numerical diagnostics reported in this draft.
-Finally, extending the framework to multiple coupled generators and exploring whether consistent universal scales can be defined are natural next steps.
-From the algebraic viewpoint, a later stage can also ask which transformations preserve the transition kernel or its metastable sets.
-Such stabilizer or equivariance structures would be the appropriate place to look for effective symmetry algebras; they are not assumed in the present minimal model.
-
-\begin{acknowledgments}
-The author thanks colleagues for valuable feedback and discussion.
-\end{acknowledgments}
-
-% Use a BibTeX style that avoids RevTeX's journal abbreviation list warnings (jnrlst)
-\bibliographystyle{unsrtnat}
+This result provides a baseline that future extensions must falsify rather
+than merely fit.
+A stronger claim requires a scale-aware almost-invariant set, a reproducible
+nonlinear bifurcation, or a relational response absent from matched linear and
+no-feedback controls.
+The present model does not establish dimension selection, physical spacetime,
+a hard signal speed, quantum dynamics, particle structure, or calibrated mass.
+\bibliographystyle{apsrev4-2}
 \bibliography{references}
 
 \end{document}

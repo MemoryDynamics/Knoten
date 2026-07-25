@@ -1,121 +1,94 @@
-# Paper I - Minimal Point-Valued Stochastic Dynamics with Relaxing Memory
+# Paper I - Self-Interacting Stochastic Dynamics with Exponential Memory
 
-Stand: 2026-07-21.
+Stand: 2026-07-26.
 
 ## Rolle
 
-Paper I ist die aktuelle eigenstaendige Minimalmodell-Fassung. Es definiert
-einen exponentiell relaxierenden Speicherzustand, den sichtbaren
-nichtmarkovschen Prozess `x_n`, die Markov-Einbettung
-`z_n = (x_n, rho_n)`, interne Zeitskalen, metastabile Knoten und
-Relaxationsproxies, ohne bereits Raumzeit, Quantenmechanik oder
-Standardmodell-Claims vorauszusetzen.
+Paper I ist die eigenstaendige Modell- und Evidenzfassung. Es definiert den
+sichtbaren nichtmarkovschen Prozess `x_n`, die Markov-Einbettung
+`z_n = (x_n, rho_n)` und die exponentielle Memory-Dynamik. Der aktuelle
+publikationsrelevante Befund ist eine lineare co-moving Relaxationswolke, nicht
+ein isolierter nichtlinearer Knoten.
 
-Es gibt bewusst zwei Varianten:
+Es gibt zwei synchronisierte Varianten:
 
-- `main.tex`: rigorose Langfassung mit ausfuehrlicher Begriffsarbeit und
-  defensiver Argumentation.
-- `main_compact.tex`: kompakte Review-/Publikationsvariante mit gleicher
-  Kernkonstruktion, weniger Absicherungstext und strafferem roten Faden.
+- `main.tex`: ausfuehrliche Fassung mit Regularitaets-, Operator-, Skalierungs-
+  und Diagnostikdiskussion.
+- `main_compact.tex`: kompakte Publikationsfassung mit derselben Modell- und
+  Evidenzlinie.
 
-## Aktueller Fokus
+## Hauptresultat
 
-Die aktuelle Fassung ist auf folgende Lesart geschaerft:
+Aus der exakten Memory-Center-Rekursion
 
-- `x_n` als sichtbarer nichtmarkovscher Prozess;
-- `z_n = (x_n, rho_n)` bzw. `z_n = (x_n, history_n)` als
-  Markov-Einbettung;
-- Markov-/Koopman-Operatoren und Vorwaerts-Halbgruppen als algebraische
-  Beschreibung der augmentierten Dynamik;
-- allgemeine Memory-Form `(1-lambda_m) rho_n + beta G_sigma` mit normierter Arbeitskonvention `lambda_m=beta=alpha`;
-- `alpha^{-1}` als interne Speicherpersistenzskala in dieser normierten Konvention;
-- Knoten als operational messbare metastabile Strukturen;
-- aktueller numerischer Paper-I-Kern: co-moving kompakte Memory-Clouds im
-  korrigierten scalar reference slice, deren Radius durch den linearen
-  Finite-Memory-Relativmodus erklaert wird;
-- `D_mem ~=2.94` im gewaehlten 3D-Embedding als erwartete isotrope
-  Ambient-Shape-Diagnostik und nicht als Dimensionsselektion;
-- Massenbezug nur als spaetere Kalibrierungsfrage; aktuell nur Relaxations-/Konfinierungsproxy;
-- klare Trennung von Definition, numerical observation und conjecture.
+```text
+m[n+1] = (1-alpha) m[n] + alpha x[n+1]
+```
 
-## Dateien
+folgt im lokal linearen Skalarregime fuer `r_n = x_n - m_n` ein reeller
+AR(1)-Relativmodus. Seine stationaere RMS-Radiusvorhersage wird mit der
+tatsaechlich gespeicherten finite-memory Masse ausgewertet.
 
-- `main.tex`: LaTeX-Hauptdatei der rigorosen Langfassung.
-- `main_compact.tex`: kompakte Variante fuer schnelle Sichtung und moegliche
-  Publikationsfassung.
-- `references.bib`: Bibliographie.
-- `main.pdf`: kompilierte Langfassung.
-- `main_compact.pdf`: kompilierte Kurzfassung, falls gebaut.
-- `generate_figures.py`: erzeugt die Paper-I-spezifischen Modell- und
-  Diagnostikfiguren.
-- Private Begleitnotizen und Anschreiben werden nicht im oeffentlichen Repo
-  getrackt. Fuer externe Sichtung nur sanitisierte Reports verwenden.
-- `archiv/`: fruehere Versionen.
-- `fig*.pdf`: lokal kopierte Figuren fuer reproduzierbare Builds.
+Ueber neun aktive Long-Run-Slices mit je fuenf Seeds, `d=3..20` und
+Lauflaengen bis `N=300M` betraegt der mediane relative Radiusfehler `0.76%`,
+der maximale `1.15%`. Gematchte Ein- und Zweiskalenkernel kollabieren auf der
+lokalen Kruemmungsachse. Ein feste-g-Nichtlinearitaetsgate zeigt bei
+`R_linear/L=0.3` eine glatte `6.2%`-Radiuskorrektur, aber keinen Shape- oder
+Residence-Umschlag; seine vorregistrierte Gesamtentscheidung bleibt
+`inconclusive`.
 
-Aktiv im Paper verwendet:
+Daraus folgt:
 
-- `fig_markov_embedding.pdf`: sichtbarer nichtmarkovscher Prozess vs.
-  Markov-Einbettung. Diese PDF ist auf die aktuelle `z_n`-Notation
-  aktualisiert; der Generator selbst wurde in dieser Runde bewusst nicht
-  angepasst.
-- `fig_memory_weights.pdf`: Speichergewichte und Persistenzskala
-  `alpha^{-1}`.
-- `fig3_knot_trajectory.pdf`: historische illustrative Kompakttrajektorie; keine eigenstaendige Metastabilitaetsevidenz.
-- `fig_relaxation_diagnostic.pdf`: operationaler Relaxationsfit fuer
-  `Gamma_rel`.
+- gestuetzt: reproduzierbare kompakte, mitbewegte skalare Relaxationswolke;
+- nicht isoliert: nichtlinearer metastabiler Zustand oder Phasenuebergang;
+- nicht informativ fuer Dimensionsselektion: `D_mem` nahe drei im
+  dreidimensionalen isotropen Embedding.
 
-Die kompakte Variante verwendet nur die Knotentrajektorie als Abbildung.
-Markov-Einbettung und Relaxationsdiagnostik werden dort direkt ueber Gleichungen
-und Text gefuehrt. Die Speichergewichte und die Markov-Embedding-Grafik bleiben
-in der Langfassung als ergaenzende Anschauung.
+`Dynamical knot` bleibt als Projektbegriff fuer einen kuenftigen Befund
+reserviert, der die lineare Nullhypothese, `eta=0`-Kontrollen und skalenbewusste
+Metastabilitaetsdiagnostik uebersteht.
 
-Die frueheren Alpha/Gamma-Schemafiguren bleiben lokal erhalten, sind aber in
-Paper I bewusst nicht mehr Teil der Hauptargumentation.
+## Literaturpositionierung
 
-## Verwandte Projektstellen
+Die Einleitung grenzt die Arbeit jetzt konkret ab gegen:
 
-- `docs/reference/THEORETICAL_CONTEXT.md`
-- `docs/status/current_status.md`
+- Benaim, Ledoux und Raimond: normalisierte kumulative Besetzungsmasse;
+- Benaim und Raimond (2005): symmetrische Wechselwirkung und
+  Free-Energy-Konvergenz;
+- Herrmann und Roynette (2003): ungewichtete Vollhistorie, nicht
+  exponentielles Memory;
+- Milisic, Meunier und Roux (2026): Aging-Kernel mit linearen
+  Wechselwirkungen und explizitem Exponentialfall.
+
+Die Neuheit wird nicht mehr mit exponentiellem Memory oder Zustandserweiterung
+allein begruendet, sondern mit dem konkreten diskreten Feldmodell und dem
+kontrollierten linearen Nulltest.
+
+## Abbildungen
+
+Aktiv verwendet:
+
+- `fig_markov_embedding.pdf` in der Langfassung;
+- `fig_memory_weights.pdf` in der Langfassung;
+- `figures/draft/scalar_hardening/linear_reconciliation_2026-07-19/linear_long_run_reconciliation.png`
+  in beiden Fassungen.
+
+Die historische `fig3_knot_trajectory.pdf` bleibt im Ordner erhalten, wird aber
+nicht mehr als Paper-Evidenz verwendet. Die schematische
+`fig_relaxation_diagnostic.pdf` ist ebenfalls nicht mehr Teil der zentralen
+Argumentation.
+
+## Zentrale Evidenz
+
+- `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`
+- `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`
+- `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
 - `docs/status/paper_claims.md`
-- `reports/project/papers/paper1_source_audit_2026-06-01.md`
-- `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`
-- `reports/dimensions/memory_shape_boundary_2026-07-13.md`
-- `reports/dimensions/dimension_claim_audit_2026-07-15.md`
-- `reports/dimensions/reproduction/dimension_claim_seed_audit_2026-06-13.md`
-- `experiments/current/reference/reference_experiment.py`
-- `src/emergenz_knoten/`
 
 ## Build
 
-Bevorzugt mit LaTeX-Toolchain im Paper-Ordner:
-
 ```powershell
+cd paper/paper_i
 latexmk -xelatex main.tex
-```
-
-Wenn `latexmk` nicht verfuegbar ist, kann direkt mit `xelatex` und `bibtex`
-gebaut werden.
-
-Kompakte Variante:
-
-```powershell
 latexmk -xelatex main_compact.tex
 ```
-
-## Aktueller Reviewfokus
-
-Fuer eine erste externe Sichtung sollte der Fokus nicht auf spaeteren
-Weltmodell-Claims liegen, sondern auf:
-
-1. Traegt die Minimalmodell-Definition?
-2. Ist die Non-Markov/Markov-Embedding-Sprache mathematisch sauber?
-3. Ist die neue `z_n`-/Operatornotation konsistent mit `G_sigma` als
-   Kernelbreite?
-4. Sind `t = alpha n`, Knoten und Relaxations-/Konfinierungsproxies defensiv genug
-   formuliert?
-5. Ist Paper 0 als separates mathematisches Einordnungspaper bzw. Supplement sinnvoll?
-6. Ist die Long-Run-Evidenz defensiv genug als co-moving Memory-Cloud-Befund
-   formuliert, ohne feste Zentren, Spin, Photon- oder Teilchenclaims?
-7. Ist `D_mem ~=2.94` klar als erwartete Shape-Diagnostik des gewaehlten
-   3D-Embeddings und nicht als Dimensionsselektion abgegrenzt?

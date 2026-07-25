@@ -2,7 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage{bm}
-\usepackage{microtype}
+\usepackage[nopatch=footnote]{microtype}
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{url}
@@ -20,89 +20,66 @@
 \begin{document}
 
 \title{Self-Interacting Dynamics with Exponential Memory:\\
-Markovian Embedding, Contractive Memory Fibres, and Metastability}
+Markovian Embedding, Contractive Memory Fibres, and Metastability Diagnostics}
 
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{29 June 2026}
+\date{26 July 2026}
 
 \begin{abstract}
-We formulate a minimal class of self-interacting stochastic processes in which
-a visible state $x_n$ is coupled to an explicit memory field $\rho_n$ with
-exponential forgetting. The manuscript is intended as a technical anchor or
-supplementary mathematical note, not as standalone numerical evidence for
-robust knot formation. The visible trajectory is generally non-Markovian:
-the next-step law depends on the retained memory field, not on $x_n$ alone.
-The augmented state $z_n=(x_n,\rho_n)$, however, is a time-homogeneous Markov
-process. We derive the exact exponential memory expansion, prove pathwise
-contraction of the affine memory fibre along a common visible trajectory, and
-represent the dynamics by a Markov kernel and its positive unital observable
-operator. We also describe the associated random skew-product structure and a
-formal continuum approximation. Metastable ``knots'' are treated operationally
-as long-lived regions or slow modes diagnosed by residence times, retained
-memory weight, autocorrelation, local Ornstein--Uhlenbeck linearization, and
-finite-rank transfer-operator estimates. Claims about spacetime emergence,
-Lorentz kinematics, quantum dynamics, Standard-Model structure, physical
-masses, or fundamental constants are outside the scope of this anchor paper
-and are listed only as future-work directions.
+This technical note specifies the mathematical structure used by a companion
+numerical study of self-interacting stochastic dynamics with exponential
+forgetting.
+A visible state $x_n$ is coupled to a deposited memory field $\rho_n$.
+The visible trajectory is generally non-Markovian, while
+$z_n=(x_n,\rho_n)$ is a time-homogeneous Markov process.
+We derive the exact exponential-memory expansion, prove contraction of the
+affine memory fibre along a common visible path, distinguish one-step
+invertibility from loss of the ordered history, and state a formal continuum
+scaling.
+We also formulate control-aware metastability diagnostics without asserting
+that the current scalar model has isolated a nonlinear metastable state.
+The note is intended as a technical appendix or companion reference, not as a
+standalone novelty claim or numerical phase study.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-Self-interacting stochastic processes provide a natural mathematical language
-for systems whose future evolution is shaped by their own past. Reinforced
-random walks, self-interacting diffusions, true self-avoiding walks, and
-self-repelling Brownian polymers all instantiate the general pattern
-\[
-\begin{gathered}
-\text{trajectory}\longrightarrow \text{occupation history}\\
-\longrightarrow \text{self-induced drift}.
-\end{gathered}
-\]
-Classical examples include self-interacting diffusions
-\cite{BenAImRaimond2002}, reinforced random processes
-\cite{Pemantle2007}, Brownian polymers \cite{DurrettRogers1992}, true
-self-repelling motion \cite{TothWerner1998}, and true self-avoiding walks
-\cite{AmitParisiPeliti1983,PelitiPietronero1987}.
+Self-interacting stochastic processes couple a trajectory back to a summary of
+its past.
+Classical examples include reinforced processes, Brownian polymers, true
+self-avoiding or self-repelling motion, and self-interacting diffusions
+\cite{Pemantle2007,DurrettRogers1992,AmitParisiPeliti1983,
+TothWerner1998,PelitiPietronero1987}.
+Bena\"im, Ledoux, and Raimond use a normalized cumulative occupation measure;
+for symmetric interactions, Bena\"im and Raimond prove convergence toward the
+critical set of a nonlinear free-energy functional
+\cite{BenAImRaimond2002,BenaimRaimond2005}.
+Herrmann and Roynette study an unnormalized interaction with the full past and
+establish convergence or boundedness in particular one-dimensional
+self-attracting cases \cite{HerrmannRoynette2003}.
 
-The present paper isolates a particularly simple variant: the retained history
-is not the full local time or a Cesaro-averaged empirical measure, but an
-explicit exponentially relaxing field. This produces a finite effective
-memory scale and a direct Markovian embedding. The construction is also close
-in spirit to Markovian embeddings of memory equations, such as auxiliary
-variable treatments of generalized Langevin dynamics
-\cite{Mori1965,Zwanzig2001,JaganathanValani2025}; the difference is that the
-memory variable here is a self-induced spatial field generating the drift.
+Those results do not directly transfer to the model below because its history
+is exponentially discounted and represented by a deposited spatial field.
+The closest current comparison is the aging-kernel model of Mili\v{s}i\'c,
+Meunier, and Roux, which treats weighted linear interactions with past
+positions and includes an explicitly solvable exponential-memory case
+\cite{MilisicMeunierRoux2026}.
+Generalized Langevin and Mori--Zwanzig constructions provide the broader
+principle that memory equations can become local after the state is augmented
+\cite{Mori1965,Zwanzig2001,JaganathanValani2025}.
 
-The purpose of this paper is deliberately narrow. It is best read as a
-technical anchor for Paper I, or as supplementary material if Paper I becomes
-the primary narrative paper. We do not attempt to derive
-spacetime, relativistic kinematics, quantum mechanics, particle spectra, or
-physical masses. Instead, we establish the model's mathematical anchor:
-\[
-\begin{gathered}
-\text{define the model}\\
-\Longrightarrow\ \text{prove the Markov embedding}\\
-\Longrightarrow\ \text{make metastability measurable}.
-\end{gathered}
-\]
-The result is a conservative framework in which later emergence claims can be
-posed as separate conjectures or companion papers rather than as assumptions
-inside the anchor model.
-
-For repository-level orientation, the downstream tracks are explicitly
-separated: the propagation and spacetime-kinematics programme is maintained as
-Paper II at
-\url{https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_ii},
-while the quantum and Standard-Model programme is kept as a planned Paper III
-roadmap at
-\url{https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_iii}.
-These links are pointers to companion workstreams only; no statement in this
-paper depends on them as evidence.
-
+The claims of this note are consequently structural and modest.
+The specific object is a discrete point process coupled to a nonlinear
+potential generated by a deposited memory field.
+For this object we make the normalized and finite-measure conventions
+explicit, prove the direct Markov and contraction statements, and specify what
+would count as metastability beyond a linear relaxation cloud.
+We do not prove ergodicity, a spectral gap, a nonlinear bifurcation, or the
+existence of a separate knot phase.
 \section{Discrete Model}
 
 Let $\Omega\subseteq\mathbb{R}^d$ be an effective state space with reference
@@ -116,14 +93,18 @@ let $K$ be an interaction kernel for which the convolution
 is differentiable in the regimes considered below.
 
 \begin{assumption}[Baseline regularity]
-For the structural statements in Sections \ref{sec:memory}--\ref{sec:markov},
-it is enough that $G_\sigma$ is a normalized nonnegative density and that the
-update equations are well-defined. We either take $\Omega=\mathbb{R}^d$ or
-impose boundary/extension conventions under which $x_{n+1}\in\Omega$ and the
-kernel deposition has the stated total mass. For continuum approximations one
-should assume enough smoothness and growth control on $K$ and $\nabla K$ to
-make the drift locally Lipschitz or otherwise well posed in the chosen function
-space.
+Let $\Omega\subseteq\mathbb{R}^d$ be Borel and equip it with a boundary or
+extension convention that keeps $x_{n+1}$ in $\Omega$.
+Assume $G_\sigma\in L^1(\Omega)$, $G_\sigma\geq0$, and
+$m_G=\int_\Omega G_\sigma<\infty$.
+The noise law is a Borel probability measure with finite second moment.
+For every finite memory measure reached by the recursion,
+$K(x,y)$ is measurable in $(x,y)$, continuously differentiable in $x$, and
+$\nabla_xK(x,\cdot)$ is integrable against that measure; the resulting drift
+is Borel measurable.
+For the formal continuum and Hessian approximations we additionally require
+local Lipschitz and growth bounds on the drift and the corresponding second
+$x$-derivatives of $K$ near the linearization region.
 \end{assumption}
 
 The discrete process is
@@ -159,10 +140,10 @@ nonnegative. The choice $\beta=\lambda_{\mathrm m}$ is therefore a useful
 density normalization, not a structural requirement; an overall memory scale
 can often be absorbed into $K$ or $\eta$.
 
-The project terminology calls long-lived localized feedback regimes
-``knots.'' In this paper the word has only an operational meaning: a knot is a
-metastable region or slow mode of the augmented dynamics, not a fundamental
-particle and not an exact fixed point.
+The project term ``knot'' is reserved for a nonlinear metastable regime that
+survives comparison with the linear center-relative mode and matched controls.
+Compact motion around a moving memory center alone is called a localized
+memory cloud and does not meet that criterion.
 
 \section{Exponential Memory and Contractive Fibres}
 \label{sec:memory}
@@ -305,35 +286,7 @@ the present augmented state does not generally encode the full ordered
 history, and the stochastic dynamics defines a forward Markov semigroup rather
 than a reversible group action.
 
-\section{Random Skew-Product Structure}
-
-For each noise realization, write the update as
-\begin{align}
-x_{n+1}&=F_{\rho_n}(x_n,\xi_n),\\
-\rho_{n+1}&=T_{x_{n+1}}(\rho_n),
-\end{align}
-where
-\[
-T_x(\rho)=(1-\lambda_{\mathrm m})\rho+\beta G_\sigma(\cdot-x).
-\]
-Equivalently, define the one-step augmented map
-\[
-\mathcal{F}_\xi(x,\rho)
-=\left(F_\rho(x,\xi),\,T_{F_\rho(x,\xi)}(\rho)\right).
-\]
-Thus the system is a self-coupled random affine skew product with an
-exponentially contractive memory fibre along fixed visible paths. For a noise
-sequence $\omega=(\xi_0,\xi_1,\ldots)$ one obtains the random cocycle
-\[
-\varphi(n,\omega,z_0)
-=\mathcal{F}_{\xi_{n-1}(\omega)}\circ\cdots\circ
-\mathcal{F}_{\xi_0(\omega)}(z_0),
-\]
-in the standard sense of random dynamical systems
-\cite{Arnold1998}. This viewpoint is useful for discussing random attractors,
-path dependence, bifurcations, and metastability under noise, but the present
-paper uses it only as structural orientation.
-
+% Skew-product terminology is omitted because no result below uses it.
 \section{Formal Continuum Approximation}
 
 Let $t=\lambda_{\mathrm m} n$ and consider a joint scaling
@@ -457,49 +410,40 @@ handling, and sampling checks.}
 \label{fig:transferspectrum}
 \end{figure}
 
-\section{Reproducible Numerical Pipeline}
-
-The repository includes a minimal Paper-0 pipeline with the following steps:
-\begin{enumerate}
-\item run the finite-memory simulation over grids of noise, coupling, memory,
-kernel scales, kernel amplitudes, and dimension;
-\item record reduced augmented-state features
-$\psi(z_n)=(x_n,\text{summary}(\rho_n))$ at fixed sampling intervals;
-\item compute residence statistics, covariance/occupancy diagnostics, and
-autocorrelation functions;
-\item estimate a finite transition matrix on augmented features at sample lag $\ell$;
-\item report leading eigenvalues and implied rates
-$-\tau_\ell^{-1}\log|\lambda_i(\tau_\ell)|$;
-\item validate candidate metastable sets against residence statistics and
-autocorrelation decay.
-\end{enumerate}
-The reduced representation of $\rho_n$ is intentionally labelled as a
-projection. It is a numerical approximation to the augmented state, not an
-exact replacement for the field. The point is to make metastability testable
-without storing a full field at every update.
-
+% Numerical implementation details are maintained with the companion study.
 \section{Relation to Existing Literature}
 
-The closest mathematical family is self-interacting diffusion, where the drift
-depends on occupation-type memory variables \cite{BenAImRaimond2002}. The
-main difference is the explicit exponential forgetting in
-Eq.~\eqref{eq:rhoupdate}. Reinforced random walks \cite{Pemantle2007}, true
-self-avoiding walks \cite{AmitParisiPeliti1983}, self-repelling motion
-\cite{TothWerner1998}, and Brownian polymers \cite{DurrettRogers1992} share
-the feedback pattern but often emphasize repulsion or full/local-time memory.
+The normalized occupation measure of Bena\"im, Ledoux, and Raimond weights the
+past cumulatively as $t^{-1}\int_0^t\delta_{X_s}\,ds$.
+Their convergence and free-energy results, including the symmetric-interaction
+theory of Bena\"im and Raimond, therefore concern a different time dependence
+from Eq.~\eqref{eq:rhoupdate}
+\cite{BenAImRaimond2002,BenaimRaimond2005}.
+Herrmann and Roynette use the unnormalized full-history drift
+$\int_0^t\Phi(X_t-X_s)\,ds$ and prove strong localization statements for
+specific one-dimensional interactions \cite{HerrmannRoynette2003}.
+This is an important nearby localization result, but it is not an
+exponential-memory model.
 
-Generalized Langevin theory and Mori--Zwanzig style embeddings
-\cite{Mori1965,Zwanzig2001} provide the broader idea that nonlocal memory can
-be made local by adding variables. In the present model the added variable is
-not an auxiliary friction coordinate but the self-induced memory field itself.
+Mili\v{s}i\'c, Meunier, and Roux introduce an aging kernel for linear
+self-interaction and analyze general convolution weights as well as a
+particular exponential case \cite{MilisicMeunierRoux2026}.
+This is the closest temporal-memory comparison found in the present review.
+The model here differs by using a deposited spatial density and allowing a
+nonlinear kernel-induced force, but the general ideas of aging and exponential
+state closure are shared.
+Accordingly, novelty cannot rest on exponential forgetting or Markov
+augmentation alone.
 
-Metastability is naturally formulated through transfer operators, Markov-state
-models, and Koopman approximations
-\cite{NoeNuske2013,NoeWuPrinzPlattner2013,WilliamsKevrekidisRowley2015,KlusEtAl2018}.
-Large-deviation and noise-induced transition theory
-\cite{FreidlinWentzell2012,Kramers1940} provides a separate asymptotic
-language for rare transitions once a small-noise regime has been specified.
-
+Mori--Zwanzig and generalized Langevin methods provide the broader embedding
+principle \cite{Mori1965,Zwanzig2001,JaganathanValani2025}.
+Transfer operators and Markov-state models provide standard diagnostics for
+slow processes and almost-invariant sets
+\cite{NoeNuske2013,NoeWuPrinzPlattner2013,
+WilliamsKevrekidisRowley2015,KlusEtAl2018}.
+The value of the present note is the explicit specification and separation of
+these ingredients for the companion scalar model, not a new general embedding
+theorem.
 \section{Open Mathematical Problems}
 
 The structural results above do not settle the main hard questions. The
@@ -520,43 +464,27 @@ two-scale attractive-repulsive kernels;
 reduced memory features.
 \end{itemize}
 
-\section{Boundaries and Future Work}
+\section{Boundaries}
 
-The following statements are not claims of this paper:
-\begin{itemize}
-\item that dimension $d=3$ is selected by the model;
-\item that exponential memory alone implies a hard finite signal speed;
-\item that Lorentz invariance follows from the present equations;
-\item that quantum mechanics, $\hbar$, $c$, spin, gauge symmetry, or
-Standard-Model structure emerges here;
-\item that metastable knots are real particles;
-\item that relaxation rates are calibrated physical masses.
-\end{itemize}
-These questions may be posed later as falsifiable companion programs. A hard
-finite propagation bound, for example, would require additional assumptions
-such as finite interaction range, local multi-step transmission, and no direct
-long-range coupling term. Dimension-selection claims require controlled
-parameter sweeps, normalized kernel scaling, multiple seeds, and negative
-controls.
-
-The current Paper II companion draft at
-\url{https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_ii}
-should therefore be read as a separate propagation and spacetime-kinematics
-programme rather than as an implication of the present model. The Paper III
-roadmap at
-\url{https://github.com/MemoryDynamics/Knoten/tree/main/paper/paper_iii}
-is intentionally only a future-program placeholder for quantum and
-Standard-Model questions.
-
+The structural results do not imply a nonlinear knot phase, dimension
+selection, a hard finite signal speed, Lorentz invariance, quantum dynamics,
+particle structure, or calibrated masses.
+A finite propagation bound would additionally require local transfer and the
+absence of direct long-range response.
+Dimension-selection claims require ambient-dimension controls and a diagnostic
+that does not simply reproduce isotropic covariance rank.
+Relaxation rates remain model diagnostics unless an independent physical
+calibration is supplied.
 \section{Conclusion}
 
 The model defines a self-interacting stochastic process with exponential
 forgetting and a field-mediated self-potential. The visible trajectory is
 generally non-Markovian, but the explicit memory field yields a Markovian
 augmented dynamics. The memory fibre is affine and pathwise contractive for a
-common visible trajectory, while feedback through the self-induced potential
-can support nontrivial metastable regimes. This is the mathematical anchor
-needed before stronger emergence claims can be formulated and tested.
+common visible trajectory. These structural facts make localization and
+metastability testable, but they do not prove a nonlinear metastable regime.
+The note supplies the mathematical reference needed to formulate and falsify
+such a claim in the companion numerical study.
 
 \bibliographystyle{apsrev4-2}
 \bibliography{references}
