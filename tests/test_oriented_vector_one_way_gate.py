@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import asdict
+import hashlib
 import importlib.util
+import json
 from pathlib import Path
 
 import numpy as np
@@ -122,3 +125,48 @@ def test_classify_case_requires_persistent_advantage_over_one_step_control() -> 
     assert memory_gain == pytest.approx(1.0)
     assert gates["persistent_memory"] is False
     assert passed is False
+
+
+def test_snapshot_loader_records_exact_input_hash(tmp_path: Path) -> None:
+    config = gate.SimulationConfig(
+        steps=10,
+        dim=2,
+        epsilon=0.01,
+        eta=0.15,
+        alpha=0.2,
+        memory_mass=1.0,
+        deposition_kernel="delta",
+        deposition_sigma=0.0,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=35.0,
+        memory_factor=1.0,
+        max_memory=2,
+        burn_in=0,
+        sample_every=1,
+    )
+    payload = {
+        "condition": "baseline",
+        "seed": 7,
+        "config": asdict(config),
+        "diagnostics": {
+            "memory_cloud": {
+                "snapshot": {
+                    "points": [[0.0, 0.0], [-0.1, 0.0]],
+                    "weights": [0.2, 0.16],
+                }
+            }
+        },
+        "git_revision": "formation-revision",
+        "git_status": "",
+    }
+    raw = json.dumps(payload, sort_keys=True).encode("utf-8")
+    path = tmp_path / "case.json"
+    path.write_bytes(raw)
+
+    loaded = gate.load_snapshot_case(path)
+
+    assert loaded["case_sha256"] == hashlib.sha256(raw).hexdigest()
+    assert loaded["config"] == config
+    assert loaded["state"].memory.shape == (2, 2)

@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 from datetime import UTC, datetime
 import glob
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -182,7 +184,8 @@ def discover_cases(patterns: list[str], seeds: list[int]) -> list[Path]:
 
 
 def load_snapshot_case(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    raw = path.read_bytes()
+    payload = json.loads(raw.decode("utf-8"))
     if payload.get("condition") != "baseline":
         raise ValueError(f"{path} is not a baseline case")
     config = SimulationConfig(**payload["config"])
@@ -196,6 +199,7 @@ def load_snapshot_case(path: Path) -> dict[str, Any]:
     state = FiniteMemoryState(x=points[0], memory=points, weights=weights)
     return {
         "path": path,
+        "case_sha256": hashlib.sha256(raw).hexdigest(),
         "seed": int(payload["seed"]),
         "config": config,
         "state": state,
@@ -436,6 +440,7 @@ def run_case(
     return {
         "seed": case["seed"],
         "case_path": _relative(case["path"]),
+        "case_sha256": case["case_sha256"],
         "formation_revision": case["formation_revision"],
         "formation_updates": case["formation_updates"],
         "formation_git_status": case["formation_git_status"],
@@ -657,6 +662,17 @@ def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) 
             "",
             "## Reproducibility",
             "",
+            f"- Formation config: `{json.dumps(payload['formation_config'], sort_keys=True)}`",
+            "Input cases:",
+        ]
+    )
+    for row in payload["rows"]:
+        lines.append(
+            f"- Input seed {row['seed']}: `{row['case_path']}`, "
+            f"SHA-256 `{row['case_sha256']}`"
+        )
+    lines.extend(
+        [
             f"- Analysis revision: {payload['git_revision']}",
             f"- Worktree at start: `{payload['git_status_at_start'] or 'clean'}`",
             f"- Summary: {_relative(payload['summary_json'])}",
@@ -772,6 +788,7 @@ def main() -> None:
         "command": ["python", *os.sys.argv],
         "case_globs": patterns,
         "formation_updates": int(first_config.steps),
+        "formation_config": asdict(first_config),
         "dim": int(first_config.dim),
         "memory_times": float(args.memory_times),
         "n_steps": n_steps,
