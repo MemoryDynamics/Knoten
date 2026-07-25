@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -54,8 +54,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 - Ein lokaler oder retardierter Mediator koennte einen diskriminierenden
   Transportkanal erzeugen.
-- Orientiertes/Vektormemory koennte relationale Observablen tragen, muss sich
-  aber gegen Nullkraft- und Randomized-Channel-Kontrollen trennen.
+- Ein separat relaxierendes orientiertes Memory koennte relationale
+  Observablen tragen. Das vorregistrierte One-Way-Gate prueft es gegen
+  channel-off, globalen Flip, depositweise Random-Sign-Nullen und einen
+  Ein-Schritt-Kanal; ein positives Ergebnis waere noch keine Emergenzevidenz.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
 
@@ -81,6 +83,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
 
 - `src/emergenz_knoten/`: kanonischer Paketkern.
 - `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
+- `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
+  mit gepaarten One-Way-Kontrollen.
 - `experiments/current/`: reproduzierbare aktive Entry-Points.
 - `experiments/archive/`: historische oder nichtkanonische Skripte.
 - `data/processed/`: standardmaessig ignorierte Bulk-Outputs; nur reviewed
@@ -103,10 +107,12 @@ neuer Mechanismus ein **eigenstaendig evolvierender orientierter Zustand mit
 relationalem Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator
 bleibt fuer eine spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
 
-Vor dessen dynamischer Implementierung sind Nullmodell, primaere Observable,
-mindestens sechs unabhaengige Formationszustaende, Akzeptanzschwelle und
-Stopregel festzulegen. Ein positiver Einzelplot oder ein bester Seed genuegt
-nicht.
+Die Implementierung und Stopregel sind nun vor dem kanonischen Lauf fixiert:
+sechs unabhaengige `d=3`, `N=3M`-Formationen, 20 Vektormemory-Zeiten,
+gemeinsames Zukunftsrauschen, channel-off, globaler Flip, 16 Random-Sign-Nullen
+und eine Ein-Schritt-Kontrolle. Gesamtpass verlangt mindestens 5/6 Seeds sowie
+feste Nulltrennungs-, Transversalitaets- und Shape-Bounds. Ein positiver
+Einzelplot oder ein bester Seed genuegt nicht.
 
 ## Paper-Status
 

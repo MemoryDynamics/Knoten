@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -48,6 +48,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
 | `experiments/current/memory/synchronization/scalar_cross_readout_resolution.py` | statischer Cross-Readout-Aufloesungstest | aktiv | getrennte Selbst-/Cross-Kernel; starre Hauptachsenorientierungen gegen Punktmonopol bei fester kalibrierter Zentrumantwort |
 | `experiments/current/memory/synchronization/oriented_history_current_audit.py` | geordneter History-Current-Audit | abgeschlossen | negatives Polar-/Bivektor-Gate gegen Random-Sign-Null; waehlt eigenstaendig evolvierenden orientierten Zustand |
+| `experiments/current/memory/synchronization/oriented_vector_one_way_gate.py` | passiver eigenstaendiger Vektormemory-Kanal | vorregistriert | sechs `d=3`, `N=3M`-Formationen; channel-off, globaler Flip, 16 Random-Sign-Nullen und Ein-Schritt-Kontrolle; feste 5/6-Stopregel |
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
 | `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
 | `experiments/current/memory/synchronization/one_way_interaction_age_audit.py` | N-Abhaengigkeit einer dauerhaften One-Way-Wechselwirkung | aktiv | common-prefix Auswertung bei `+20k..+3M`; Target-Radius, Shape-Spektrum und Kontrollabstand vor einem laengeren oder reziproken Lauf |

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -59,22 +59,32 @@ vorhandene geordnete Historie kann unter diesen Observablen nicht einfach als
 kohaerente orientierte Quelle umbenannt werden.
 
 Als genau ein neuer Mechanismus ist damit ein **eigenstaendig evolvierender
-orientierter Zustand** ausgewaehlt. Sein erster One-Way-Test bleibt an die
-folgenden Pflichtfelder gebunden; ein lokaler/retardierter Skalarmediator wird
-nicht parallel geoeffnet.
+orientierter Zustand** ausgewaehlt und vorregistriert. Der passive Zusatzkanal
+mittelt die normierte Source-Schrittrichtung linear mit
+`kappa=lambda_v=alpha=0.01`; er wirkt nur einseitig auf ein skalares
+Target, waehrend die skalare Source autonom bleibt. Persistenz wird damit
+explizit hinzugefuegt und nicht als emergent beansprucht. Ein lokaler/retardierter Skalarmediator wird nicht parallel
+geroeffnet.
 
-Pflichtfelder vor Implementierung:
+Festes Gate vor dem kanonischen Lauf:
 
-1. Mechanismushypothese und konkurrierendes Nullmodell.
-2. Primaere relationale Observable; Zentrumtranslation allein reicht nicht.
-3. Mindestens sechs unabhaengige Formations- oder Checkpointzustaende fuer
-   inferentielle Aussagen.
-4. Gemeinsames Zukunftsrauschen, ungeprobter Pfad und deaktivierter Kanal.
-5. Schwellen fuer Source-Eligibility, Shape-Boundedness, Readout und
-   Seed-Reproduzierbarkeit.
-6. Stopregel, die auch ein negatives Ergebnis beendet.
+1. Sechs unabhaengige `d=3`, `N=3M`-Formationen, je 20 Vektormemory-Zeiten.
+2. Gleiche Source-/Target-Zukunftsrauschpfade fuer aktiven Kanal, globalen
+   Vorzeichenflip, exakten Kanal-aus-Pfad und 16 depositweise Random-Sign-Nullen.
+3. Ein `lambda_v=kappa=1`-Arm prueft, ob persistentes Memory die konditionale
+   Nulltrennung gegenueber einem Ein-Schritt-Kanal um mindestens Faktor 1.25
+   verbessert.
+4. Pro Seed gelten vorab: `active/random-q95 >= 2`, `active/R_mem >= 1e-3`,
+   Flip-Kosinus `<= -0.9`, Tangentialanteil `>= 0.5`, Target-Radius und
+   Shape-Tensor jeweils `<= 0.1` relative Aenderung sowie Source-Radius
+   `<= 0.5` und Source-Shapespektrum `<= 0.25` Drift.
+5. Gesamtpass nur bei mindestens 5/6 Seeds. Fail beendet oder reformuliert
+   genau diesen orientierten Zustand; keine seedweise Nachkalibrierung.
 
-Reziproke Kopplung bleibt gesperrt, bis ein One-Way-Kanal dieses Gate besteht.
+Reziproke Kopplung bleibt gesperrt, bis dieses One-Way-Gate besteht. Selbst ein
+Pass waere nur Evidenz fuer einen konstruierten relationalen Kanal; als
+naechstes waere Lokalitaet/Retardierung zu testen, nicht Photon-, Spin- oder
+Teilchensprache.
 
 ## P2: Scheinmoden analytisch einordnen
 

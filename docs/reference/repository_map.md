@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -20,7 +20,7 @@ flowchart TD
     root --> data["data/processed<br/>generated outputs, ignored by default"]
     root --> figures["figures<br/>draft, paper, external + README-Index"]
 
-    experiments --> sync_exp["synchronization/<br/>frozen, cross-readout, current and one-way gates"]
+    experiments --> sync_exp["synchronization/<br/>scalar, current, oriented and one-way gates"]
     experiments --> score_exp["knot_score_report.py<br/>reviewed scorecard reports"]
     experiments --> trace_exp["dynamic_center_trace_report.py<br/>co-moving trace and spin-proxy plots"]
     experiments --> vector_exp["vector_memory_pilot.py<br/>2D oriented-memory AR pilot"]
@@ -29,6 +29,7 @@ flowchart TD
     experiments --> low_mode_exp["low_mode_ar_feature_closure.py<br/>real-space + AR control gate"]
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
+    experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>six-seed passive vector gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -61,6 +62,8 @@ flowchart TD
     signed --> continuation
     src --> sync["synchronization.py<br/>lag response; exact sign-flip rank"]
     src --> vector_memory["vector_memory.py<br/>oriented history/current, bivector and vector features"]
+    src --> oriented_source["oriented_source.py<br/>persistent passive vector fibre + paired controls"]
+    oriented_source --> continuation
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
@@ -109,6 +112,8 @@ flowchart LR
     sim --> memory["memory buffer / weights"]
     memory --> fullstate["FiniteMemoryState<br/>x + complete retained memory"]
     fullstate --> checkpoint["versioned checkpoint<br/>config + N + seed + checksums"]
+    fullstate --> orientedstate["OrientedMemoryState<br/>passive low-pass direction fibre"]
+    orientedstate --> orientedgate["one-way active / flip / off / random-sign<br/>plus one-step control"]
     checkpoint --> reload["validated reload<br/>fresh common future noise"]
     reload --> rigid["rigid placement<br/>translation / orthogonal rotation"]
     rigid --> weakprobe["paired weak probe<br/>+delta / -delta / unprobed / eta_zero"]
@@ -140,6 +145,7 @@ flowchart LR
     validation --> reports
     meta --> reports
     response --> reports
+    orientedgate --> reports
 
     reports --> privacy["privacy_and_control_plan<br/>public sanitized policy"]
     reports --> paper0["Paper 0<br/>technical anchor"]
@@ -208,6 +214,10 @@ flowchart LR
     probe --> ladder["calibrated distance ladder<br/>target deformation / response rank"]
     fieldaudit --> compgate["kernel compensation gate<br/>exact zero integral + curvature match complete"]
     ladder --> compgate
+    ladder --> crossreadout["independent scalar readout<br/>shape gate fails"]
+    crossreadout --> historycurrent["ordered-history current<br/>random-sign gate fails"]
+    historycurrent --> orientedgate2["independent oriented state<br/>six-seed one-way gate"]
+    orientedgate2 -.pass.-> transport
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
     channel --> seeds["later: 6-10 independent states<br/>no retuning"]
     channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]
@@ -230,7 +240,8 @@ array. Independent seeds remain necessary for inferential claims.
 
 - `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
   Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
-  `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py` und
+  `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py`,
+  `oriented_source.py` und
   `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem

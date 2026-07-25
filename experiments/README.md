@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -15,6 +15,7 @@ python experiments/current/anchors/anchor_paper_pipeline.py
 python experiments/current/dynamics/long_run_metastability.py --help
 python experiments/current/markov/knot_score_report.py
 python experiments/current/memory/synchronization/weak_probe_response.py
+python experiments/current/memory/synchronization/oriented_vector_one_way_gate.py --help
 ```
 
 ## Struktur
@@ -51,10 +52,11 @@ signierter Architekturtest und One-Way-Interaction-Age-Audit sind ausgefuehrt.
 Der Fernkanal akkumuliert Zentrumtranslation, isoliert aber keine
 kontrollgetrennte Formmodifikation oder Oszillation.
 
-Neue Experimente muessen deshalb vorab zwischen zwei Mechanismen entscheiden:
-
-- lokaler bzw. retardierter Mediator mit explizitem Feldzustand; oder
-- orientiertes Vektormemory mit relationalem Readout.
+Als genau ein naechster Mechanismus ist ein separat relaxierender passiver
+Vektormemory-Kanal mit relationalem Readout vorregistriert. Sein Sechs-Seed-
+One-Way-Gate vergleicht persistenten Kanal, Ein-Schritt-Memory, channel-off,
+globalen Flip und depositweise Random-Sign-Nullen. Ein lokaler bzw. retardierter
+Mediator bleibt bis zu dieser Entscheidung ein getrennter Folgeast.
 
 Reine Laufzeitverlaengerung, kleinere Epsilon-Werte oder neue Amplitudensweeps
 des alten Skalarpfads sind ohne falsifizierbare Zusatzhypothese nicht aktiv.

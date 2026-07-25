@@ -8,7 +8,9 @@ Complete retained-memory states and rigid placement are implemented in
 `src/emergenz_knoten/weak_probe.py`, and localized fixed-source continuation
 lives in `src/emergenz_knoten/frozen_source.py`. One-way dynamic-source
 continuation and relational orbital observables live in
-`src/emergenz_knoten/coupled_nodes.py`.
+`src/emergenz_knoten/coupled_nodes.py`. The separately relaxing
+passive vector source and its paired one-way controls live in
+`src/emergenz_knoten/oriented_source.py`.
 
 ## Core Question
 
@@ -37,13 +39,16 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 6. Ordered-history current audit: derive polar displacement/unit currents and
    antisymmetric circulation from adjacent retained points; compare both with
    an independent-sign null before adding a new state.
-7. Signed scalar cross-channel: separate source sign from the non-negative
+7. Independent oriented state: low-pass the source step direction in a separate
+   vector-memory fibre and test it against depositwise sign randomization plus
+   a one-step-memory control.
+8. Signed scalar cross-channel: separate source sign from the non-negative
    self-confining memory and require `q=0` plus sign-reversal controls.
-8. One-way dynamic coupling: source evolves but does not read the target.
-9. Nondestructive source transport: preserve source shape against a paired
-   unlaunched continuation before interpreting target response.
-10. Reciprocal coupling with separate memory fields only after step 9 passes.
-11. Shared memory only as a later, separately normalized model variant.
+9. One-way dynamic coupling: source evolves but does not read the target.
+10. Nondestructive source transport: preserve source shape against a paired
+    unlaunched continuation before interpreting target response.
+11. Reciprocal coupling with separate memory fields only after step 10 passes.
+12. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 
@@ -165,6 +170,38 @@ six formations, common future noise, channel-off and randomized-deposit
 controls, and a relational angular/transverse primary observable.
 
 Report: `reports/response/oriented_history_current_audit_2026-07-21.md`.
+
+## Preregistered Independent-Oriented-State Gate
+
+`oriented_source.py` adds one passively generated state without changing the
+scalar source trajectory:
+
+```text
+u[n+1] = (1-kappa) u[n] + kappa normalize(x[n+1]-x[n])
+p[n+1] = (1-lambda_v) p[n] + lambda_v M_v u[n+1] G_v
+x_T[n+1] = F_scalar(x_T[n], rho_T[n], xi_T[n]) + eta_v p[n](x_T[n])
+```
+
+The primary arm fixes `kappa=lambda_v=alpha=0.01`, `M_v=1`,
+`sigma_v/R_mem=2.5`, source separation `2.5 R_mem`, and 20 vector-memory times.
+Six independent `d=3`, `N=3M` formation states are continued with common
+future source and target noise. Coupling is calibrated once per realized
+formation, before continuation, to `0.03 R_mem` per persistent memory time.
+
+Paired controls are an exact channel-off path, global vector-sign reversal,
+16 depositwise random-sign paths, and a `kappa=lambda_v=1` one-step arm with
+the same coupling and future noise. The primary statistic is active response
+divided by the conditional random-sign q95. A seed passes only when that ratio
+is at least 2, the persistent/one-step ratio is at least 1.25, response exceeds
+`1e-3 R_mem`, sign reversal and transverse-fraction gates pass, and source and
+target remain within the preregistered shape bounds. Overall pass requires 5/6
+seeds.
+
+This is a mechanism gate, not an emergence claim. The orientation lifetime is
+inserted by construction. A pass can justify a localized or retarded transport
+test; a fail stops or reformulates this exact state. No reciprocal coupling,
+AR mode fit, photon, spin, charge, or particle interpretation is part of this
+run.
 
 ## Interaction-Sign Decision
 
