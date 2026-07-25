@@ -52,11 +52,12 @@ signierter Architekturtest und One-Way-Interaction-Age-Audit sind ausgefuehrt.
 Der Fernkanal akkumuliert Zentrumtranslation, isoliert aber keine
 kontrollgetrennte Formmodifikation oder Oszillation.
 
-Als genau ein naechster Mechanismus ist ein separat relaxierender passiver
-Vektormemory-Kanal mit relationalem Readout vorregistriert. Sein Sechs-Seed-
-One-Way-Gate vergleicht persistenten Kanal, Ein-Schritt-Memory, channel-off,
-globalen Flip und depositweise Random-Sign-Nullen. Ein lokaler bzw. retardierter
-Mediator bleibt bis zu dieser Entscheidung ein getrennter Folgeast.
+Der separat relaxierende passive Vektormemory-Kanal besteht sein
+vorregistriertes Sechs-Seed-One-Way-Gate. Die relevante Trennung ist der
+`3.50..8.05`-fache Gewinn gegen einen Ein-Schritt-Kanal; Orientierung,
+Persistenz und instantanes Readout sind dennoch konstruiert. Vor einem lokalen
+oder retardierten Mediator folgt deshalb eine feste-Kopplung-Replikation mit
+verschiedenen Source/Target-Seeds, 64 Random-Sign-Kontrollen und Distanzleiter.
 
 Reine Laufzeitverlaengerung, kleinere Epsilon-Werte oder neue Amplitudensweeps
 des alten Skalarpfads sind ohne falsifizierbare Zusatzhypothese nicht aktiv.

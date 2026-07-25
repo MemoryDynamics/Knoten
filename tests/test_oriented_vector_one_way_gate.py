@@ -170,3 +170,55 @@ def test_snapshot_loader_records_exact_input_hash(tmp_path: Path) -> None:
     assert loaded["case_sha256"] == hashlib.sha256(raw).hexdigest()
     assert loaded["config"] == config
     assert loaded["state"].memory.shape == (2, 2)
+
+
+def test_pass_report_states_constructed_channel_limits(tmp_path: Path) -> None:
+    persistent = _persistent_metrics()
+    persistent.update(
+        {
+            "random_threshold_r": 0.001,
+            "flip_magnitude_ratio": 1.0,
+        }
+    )
+    payload = {
+        "decision": {
+            "status": "pass",
+            "passing_seeds": 1,
+            "seed_count": 1,
+            "selected_next_step": "fixed_coupling_independent_pair_distance_validation",
+        },
+        "generated_utc": "2026-07-25T00:00:00+00:00",
+        "formation_updates": 3_000_000,
+        "memory_times": 20.0,
+        "randomizations": 16,
+        "random_quantile": 0.95,
+        "minimum_passing_seeds": 1,
+        "rows": [
+            {
+                "seed": 1,
+                "persistent": persistent,
+                "one_step": {"null_separation": 1.5},
+                "memory_gain": 2.0,
+                "case_pass": True,
+                "case_path": "data/case.json",
+                "case_sha256": "a" * 64,
+            }
+        ],
+        "thresholds": _thresholds(),
+        "formation_config": {"dim": 3},
+        "git_revision": "revision",
+        "git_status_at_start": "",
+        "summary_json": tmp_path / "summary.json",
+        "command": ["python", "gate.py"],
+    }
+
+    report = gate.build_report(
+        payload,
+        tmp_path / "report.md",
+        tmp_path / "figure.png",
+    )
+
+    assert "Source and target are clones" in report
+    assert "eta_v" in report and "normalized statewise" in report
+    assert "fixed_coupling_independent_pair_distance_validation" in report
+    assert "No wave, spin, photon" in report

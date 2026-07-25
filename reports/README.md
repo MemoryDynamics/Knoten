@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -89,11 +89,20 @@ identifizierten physikalischen Moden.
   - **negative + pipeline-only:** Weder polarer Verschiebungsstrom noch
     antisymmetrische Zirkulation ueberschreiten in `d=3/10` die konditionale
     99%-Random-Sign-Null; je ein Checkpoint pro Einbettung.
+- [Eigenstaendiger orientierter One-Way-Kanal](response/oriented_vector_one_way_gate_2026-07-25.md)
+  - **supported, model-conditional:** Das vorregistrierte Gate besteht in 6/6
+    `d=3`-Formationsseeds. Persistent/random-q95 liegt bei `5.76..11.64`, der
+    Ein-Schritt-Arm bei `1.40..2.04`, entsprechend einem Persistenzgewinn von
+    `3.50..8.05`; Flip, Transversalitaet und Shape-Bounds bestehen.
+  - Die Orientierung, ihr Zerfall und das instantane direkte Readout sind
+    Modellinputs. Die stateweise Antwortnormalisierung und geklonten
+    Source/Target-Zustaende erlauben noch keinen Propagations-, Wellen- oder
+    Teilchenclaim.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Als naechster Mechanismus
-wird ein eigenstaendig evolvierender orientierter Zustand vorregistriert. Ein
-lokaler/retardierter Skalarmediator bleibt fuer eine getrennte
-Lokalitaetsfrage zurueckgestellt.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Als naechstes folgt eine
+feste-Kopplung-Replikation mit unabhaengigen Source/Target-Paarungen,
+vergroesserter Random-Sign-Null und einer vorgegebenen Distanzleiter. Erst ein
+Bestehen rechtfertigt einen lokalen/retardierten orientierten Feldzustand.
 
 ### 5. Governance und Kuration
 

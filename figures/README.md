@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-07-21.
+Stand: 2026-07-25.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -27,6 +27,10 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   statisches Skalar-Shape-Readout-Gate.
 - `draft/response/oriented_history_current_audit_2026-07-21.png`: negatives
   Polar-/Bivektor-Gate gegen konditionale Vorzeichen-Nullen.
+- `draft/response/oriented_vector_one_way_gate_2026-07-25.png`: 6/6-
+  Pass des konstruierten persistenten Vektorkanals gegen Random-Sign- und
+  Ein-Schritt-Kontrollen; keine Propagations- oder Teilchenevidenz.
+
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in
 `reports/README.md`.

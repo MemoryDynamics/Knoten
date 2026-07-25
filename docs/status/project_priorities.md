@@ -34,7 +34,7 @@ Zu entfernen oder klar als historische Hypothese zu markieren:
 Fertig, wenn `paper/paper_i`, `docs/status/paper_claims.md` und die
 kanonischen Reports dieselbe Claim-Grenze verwenden.
 
-## P1: Genau ein neues Transportgate vorregistrieren
+## P1: Orientierten Kanal mit fester Kopplung replizieren
 
 Entscheidung: Das vorgeschaltete Cross-Readout-Gate scheitert in `d=3` und
 `d=10`. Selbst bei `sigma_rep/R_mem=2.5` und 1.25 kombinierten Memory-Radien
@@ -63,8 +63,8 @@ orientierter Zustand** ausgewaehlt und vorregistriert. Der passive Zusatzkanal
 mittelt die normierte Source-Schrittrichtung linear mit
 `kappa=lambda_v=alpha=0.01`; er wirkt nur einseitig auf ein skalares
 Target, waehrend die skalare Source autonom bleibt. Persistenz wird damit
-explizit hinzugefuegt und nicht als emergent beansprucht. Ein lokaler/retardierter Skalarmediator wird nicht parallel
-geroeffnet.
+explizit hinzugefuegt und nicht als emergent beansprucht. Ein lokaler/
+retardierter Skalarmediator wird nicht parallel geoeffnet.
 
 Festes Gate vor dem kanonischen Lauf:
 
@@ -81,10 +81,29 @@ Festes Gate vor dem kanonischen Lauf:
 5. Gesamtpass nur bei mindestens 5/6 Seeds. Fail beendet oder reformuliert
    genau diesen orientierten Zustand; keine seedweise Nachkalibrierung.
 
-Reziproke Kopplung bleibt gesperrt, bis dieses One-Way-Gate besteht. Selbst ein
-Pass waere nur Evidenz fuer einen konstruierten relationalen Kanal; als
-naechstes waere Lokalitaet/Retardierung zu testen, nicht Photon-, Spin- oder
-Teilchensprache.
+Ergebnis: Das Gate besteht in 6/6 Seeds. Persistent/random-q95 liegt bei
+`5.76..11.64`, der Ein-Schritt-Arm bei `1.40..2.04`; der Persistenzgewinn
+betraegt `3.50..8.05`. Flip, Tangentialanteil und alle Shape-Bounds bestehen.
+Die aktive Verschiebung bleibt mit `0.0040..0.0076 R_mem` klein. Damit traegt
+der eingefuehrte Zustand einen kontrollgetrennten relationalen Kanal, aber
+Persistenz und instantanes direktes Vektorreadout sind weiterhin Modellinputs.
+
+Naechstes diskriminierendes Gate, ohne neuen Parametersweep:
+
+1. Ein globales `eta_v=5.079e-6`, abgeleitet als Median der sechs
+   vorab normalisierten Kopplungen, wird fuer alle Folgefaelle festgehalten.
+2. Source und Target stammen aus verschiedenen Formationsseeds in einer festen
+   zyklischen Paarung statt aus demselben geklonten Zustand.
+3. Mit `R_pair=(R_source+R_target)/2`, `sigma_v=2.5 R_source` und der
+   Distanzleiter `2.5, 5, 10 R_pair` werden feste Nahantwort, raeumliche
+   Abschwaechung und ein praktischer Fernnullarm geprueft.
+4. 64 Random-Sign-Pfade, channel-off, globaler Flip und Ein-Schritt-Memory
+   verwenden weiter gemeinsames Zukunftsrauschen.
+5. Nur ein seed-reproduzierbarer Nahpass plus monotone Distanzabschwaechung
+   oeffnet danach einen lokalen/retardierten orientierten Feldzustand.
+
+Reziproke Kopplung bleibt bis dahin gesperrt. Auch dieser Pass rechtfertigt
+keine Photon-, Spin-, Ladungs- oder Teilchensprache.
 
 ## P2: Scheinmoden analytisch einordnen
 

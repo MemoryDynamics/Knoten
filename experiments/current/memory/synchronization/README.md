@@ -171,7 +171,7 @@ controls, and a relational angular/transverse primary observable.
 
 Report: `reports/response/oriented_history_current_audit_2026-07-21.md`.
 
-## Preregistered Independent-Oriented-State Gate
+## Independent-Oriented-State Gate
 
 `oriented_source.py` adds one passively generated state without changing the
 scalar source trajectory:
@@ -197,11 +197,24 @@ is at least 2, the persistent/one-step ratio is at least 1.25, response exceeds
 target remain within the preregistered shape bounds. Overall pass requires 5/6
 seeds.
 
-This is a mechanism gate, not an emergence claim. The orientation lifetime is
-inserted by construction. A pass can justify a localized or retarded transport
-test; a fail stops or reformulates this exact state. No reciprocal coupling,
-AR mode fit, photon, spin, charge, or particle interpretation is part of this
-run.
+The clean run at revision `4847040` passes in all six seeds. The persistent
+active/random-q95 separation spans `5.76..11.64`, versus `1.40..2.04` for the
+one-step arm; their ratio spans `3.50..8.05`. Active displacement is only
+`0.0040..0.0076 R_mem`, global sign reversal is antiparallel to numerical
+precision, and the tangential fraction is `0.584..0.953`. Relative target
+radius/tensor disturbances stay below `2.6e-4`/`7.0e-4`; the autonomous source
+radius and normalized shape-spectrum drifts remain below `0.129` and `0.132`.
+
+This is a successful constructed-mechanism gate, not an emergence claim. The
+orientation lifetime and instantaneous direct vector readout are inserted by
+construction. The response was normalized by the same predefined formula for
+each realized formation, and source/target are cloned within each seed. The
+next test therefore fixes one global `eta_v`, pairs different formation seeds,
+uses a larger randomized null, and applies a fixed distance ladder before any
+local/retarded field extension. No reciprocal coupling, AR mode fit, photon,
+spin, charge, or particle interpretation follows.
+
+Report: `reports/response/oriented_vector_one_way_gate_2026-07-25.md`.
 
 ## Interaction-Sign Decision
 

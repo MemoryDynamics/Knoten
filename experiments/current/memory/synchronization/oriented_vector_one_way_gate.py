@@ -567,6 +567,24 @@ def _fmt(value: float) -> str:
 
 def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) -> str:
     decision = payload["decision"]
+    if decision["status"] == "pass":
+        interpretation = [
+            "This pass establishes only that the deliberately introduced",
+            "persistent orientation state carries a controlled relational signal",
+            "more coherently than its randomized and one-step controls.",
+            "Source and target are clones within each formation seed, and eta_v",
+            "is normalized statewise by a predefined formula. Persistence and the",
+            "instantaneous direct vector readout are model inputs, not discoveries.",
+            "The next gate therefore fixes one global coupling, pairs different",
+            "formation seeds, and tests a distance ladder before any retarded field.",
+            "No wave, spin, photon, charge, particle, or propagation claim follows.",
+        ]
+    else:
+        interpretation = [
+            "This fail stops the tested vector-state formulation. Coupling",
+            "amplitudes must not be retuned seed by seed after observing the",
+            "outcome; a different state requires a new preregistered mechanism.",
+        ]
     lines = [
         "# Oriented vector one-way gate",
         "",
@@ -647,14 +665,7 @@ def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) 
             "",
             "## Interpretation boundary",
             "",
-            "A pass would establish only that the deliberately introduced",
-            "persistent orientation state carries a controlled relational signal",
-            "more coherently than its randomized and one-step controls. Persistence",
-            "is part of the model increment, not an emergent discovery. It would",
-            "justify a longer locality/retardation test, not physical wave language.",
-            "",
-            "A fail stops this exact vector-state formulation; coupling amplitudes",
-            "must not be retuned seed by seed after observing the outcome.",
+            *interpretation,
             "",
             "## Figure",
             "",
@@ -771,7 +782,7 @@ def main() -> None:
         "passing_seeds": passing,
         "seed_count": len(rows),
         "selected_next_step": (
-            "localized_or_retarded_oriented_transport_validation"
+            "fixed_coupling_independent_pair_distance_validation"
             if status == "pass"
             else "stop_or_reformulate_oriented_state"
         ),

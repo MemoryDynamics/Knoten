@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Spektrales Memory-Feld | Fourier-`rho` reproduziert das exponentielle Memory; Relaxations-Diffusion glaettet kontrolliert. | kompakte Reprasentation bzw. explizite Modellerweiterung | Eigenvektor-/Segmentgate isoliert keinen stabilen physikalischen Modus |
-| Externe skalare Antwort | Weak-Probe und Frozen-Source sind isotrop vollrangig. Der One-Way-Audit bis `N=103M` zeigt nahezu lineare Zentrumtranslation. | skalarer Fernfeld-Translationskanal | `0/5` Seeds zeigen kontrollgetrennte Formmodifikation; keine Oszillation, Ladung oder neuer Knotentyp |
+| Externe Antwort | Der skalare Ast liefert Translation ohne Formsignal; ein separat eingefuehrter persistenter Vektorkanal besteht sein One-Way-Gate in 6/6 Seeds. | kontrollgetrennter relationaler Kanal im erweiterten Modell | Persistenz und instantanes Readout sind Inputs; feste Kopplung, unabhaengige Paare und Lokalitaet fehlen |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -37,6 +37,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
   sehr kleiner Shape-Aenderung.
+- Der konstruierte persistente Vektorkanal trennt sich in 6/6 Seeds von
+  Random-Sign- und Ein-Schritt-Kontrollen, bei kleinen Shape-Stoerungen.
+
 
 ### Nicht gestuetzt oder widerlegt
 
@@ -52,12 +55,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 ### Offene Hypothesen
 
-- Ein lokaler oder retardierter Mediator koennte einen diskriminierenden
-  Transportkanal erzeugen.
-- Ein separat relaxierendes orientiertes Memory koennte relationale
-  Observablen tragen. Das vorregistrierte One-Way-Gate prueft es gegen
-  channel-off, globalen Flip, depositweise Random-Sign-Nullen und einen
-  Ein-Schritt-Kanal; ein positives Ergebnis waere noch keine Emergenzevidenz.
+- Der bestandene orientierte Kanal koennte als Ausgangspunkt fuer einen
+  lokalen oder retardierten Mediator dienen. Zuvor muss er bei global fester
+  Kopplung, unabhaengigen Source/Target-Paaren und ueber Distanz bestehen.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
 
@@ -74,6 +74,7 @@ wichtig:
 5. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
 6. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
 7. `reports/response/oriented_history_current_audit_2026-07-21.md`
+8. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -107,12 +108,16 @@ neuer Mechanismus ein **eigenstaendig evolvierender orientierter Zustand mit
 relationalem Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator
 bleibt fuer eine spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
 
-Die Implementierung und Stopregel sind nun vor dem kanonischen Lauf fixiert:
-sechs unabhaengige `d=3`, `N=3M`-Formationen, 20 Vektormemory-Zeiten,
-gemeinsames Zukunftsrauschen, channel-off, globaler Flip, 16 Random-Sign-Nullen
-und eine Ein-Schritt-Kontrolle. Gesamtpass verlangt mindestens 5/6 Seeds sowie
-feste Nulltrennungs-, Transversalitaets- und Shape-Bounds. Ein positiver
-Einzelplot oder ein bester Seed genuegt nicht.
+Das vorregistrierte orientierte One-Way-Gate besteht in 6/6 Formationsseeds.
+Die relevante Trennung ist persistent/random-q95 `5.76..11.64` gegen
+Ein-Schritt/random-q95 `1.40..2.04`, nicht die per Formel normalisierte rohe
+Auslenkung. Dies stuetzt den konstruierten Zusatzkanal, nicht seine Emergenz.
+
+Vor einer Feld- oder Reziprozitaetserweiterung folgt ein feste-Kopplung-Gate:
+zyklisch verschiedene Source/Target-Seeds, `eta_v=5.079e-6`, 64
+Random-Sign-Kontrollen und die Distanzleiter `2.5, 5, 10 R_pair` mit
+`R_pair=(R_source+R_target)/2`. Scheitert
+diese Replikation, wird der aktuelle Kanal nicht durch Retuning gerettet.
 
 ## Paper-Status
 

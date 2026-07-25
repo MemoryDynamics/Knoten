@@ -29,7 +29,7 @@ flowchart TD
     experiments --> low_mode_exp["low_mode_ar_feature_closure.py<br/>real-space + AR control gate"]
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
-    experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>six-seed passive vector gate"]
+    experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -216,8 +216,9 @@ flowchart LR
     ladder --> compgate
     ladder --> crossreadout["independent scalar readout<br/>shape gate fails"]
     crossreadout --> historycurrent["ordered-history current<br/>random-sign gate fails"]
-    historycurrent --> orientedgate2["independent oriented state<br/>six-seed one-way gate"]
-    orientedgate2 -.pass.-> transport
+    historycurrent --> orientedgate2["independent oriented state<br/>6/6 one-way gate pass"]
+    orientedgate2 --> fixedpair["fixed eta_v + independent pairs<br/>64 nulls + distance ladder"]
+    fixedpair -.pass.-> transport
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
     channel --> seeds["later: 6-10 independent states<br/>no retuning"]
     channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]
