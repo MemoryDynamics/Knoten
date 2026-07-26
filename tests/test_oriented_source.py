@@ -8,6 +8,7 @@ from emergenz_knoten import (
     SimulationConfig,
     initialize_oriented_memory_state,
     one_way_oriented_response,
+    oriented_response_metrics,
     place_oriented_memory_state,
     translate_finite_memory_state,
     update_persistent_orientation,
@@ -308,3 +309,27 @@ def test_one_step_control_shares_exact_scalar_source_and_off_target() -> None:
         persistent_response.target_memory_centers[:, channel_off],
         one_step_response.target_memory_centers[:, channel_off],
     )
+
+
+def test_oriented_response_metrics_preserve_paired_control_geometry() -> None:
+    scalar = _state()
+    source = OrientedMemoryState(
+        scalar_state=scalar,
+        orientations=np.tile(np.array([0.0, 0.5]), (scalar.n_memory, 1)),
+        weights=np.array([0.4, 0.2, 0.1, 0.05, 0.025]),
+        carrier_orientation=np.array([0.0, 0.5]),
+        orientation_relaxation=0.2,
+    )
+    response = _response(source, vector_eta=0.02)
+
+    metrics = oriented_response_metrics(
+        response,
+        radius=1.0,
+        radial_direction=np.array([-1.0, 0.0]),
+        random_quantile=0.95,
+    )
+
+    assert metrics["active_response_r"] > 0.0
+    assert metrics["flip_cosine"] < -0.99
+    assert metrics["tangential_fraction"] > 0.99
+    assert metrics["target_radius_max_change"] >= 0.0

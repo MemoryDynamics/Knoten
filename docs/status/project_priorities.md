@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-25.
+Stand: 2026-07-26.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -99,8 +99,16 @@ Naechstes diskriminierendes Gate, ohne neuen Parametersweep:
    Abschwaechung und ein praktischer Fernnullarm geprueft.
 4. 64 Random-Sign-Pfade, channel-off, globaler Flip und Ein-Schritt-Memory
    verwenden weiter gemeinsames Zukunftsrauschen.
-5. Nur ein seed-reproduzierbarer Nahpass plus monotone Distanzabschwaechung
-   oeffnet danach einen lokalen/retardierten orientierten Feldzustand.
+5. Der Nahpass verwendet die bisherigen Gates `active/random-q95 >= 2`,
+   `active/R_target >= 1e-3`, Persistenzgewinn `>= 1.25`, Flip-Kosinus
+   `<= -0.9` mit Magnitudenverhaeltnis `0.5..2` sowie dieselben Source-/
+   Target-Shape-Bounds. Der Tangentialanteil wird nur berichtet: Bei
+   unabhaengiger Formation ist die Source-Orientierung nicht an die
+   willkuerliche Paarachse gebunden.
+6. Distanzpass: Antwort nicht zunehmend mit 10% numerischer Toleranz und
+   `response(10 R_pair)/response(2.5 R_pair) <= 0.1`. Gesamtpass nur bei
+   mindestens 5/6 zyklischen Paaren. Nur dann wird ein lokaler/retardierter
+   orientierter Feldzustand geoeffnet.
 
 Reziproke Kopplung bleibt bis dahin gesperrt. Auch dieser Pass rechtfertigt
 keine Photon-, Spin-, Ladungs- oder Teilchensprache.
@@ -120,6 +128,13 @@ Naechster diskriminierender Test:
 
 Pass: aktive Moden trennen sich seed- und segmentstabil von der Nullreferenz.
 Fail: dieselbe Modenfamilie entsteht im linearen oder `eta=0`-Modell.
+
+Ein spaeterer positiver Modentest muss keine permanente globale Sinusmode
+fordern. Fuer ueberwiegend chaotische gekoppelte Dynamik ist ModeScore v0.2
+ereignisbasiert: vorab segmentierte Bursts, Duty-Cycle, Dauer/Survival,
+Within-event Frequenz/Q und Phasenkontinuitaet sowie Kontroll-/Surrogatabstand.
+Diese Modenmetriken bleiben strikt getrennt vom KnotScore, der die statistisch
+gebundene Identitaet und Shape-Huelle bewertet.
 
 ## P3: Interaktionsbefunde ueber unabhaengige Zustaende haerten
 

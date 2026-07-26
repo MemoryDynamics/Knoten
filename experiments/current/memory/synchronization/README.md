@@ -42,13 +42,15 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 7. Independent oriented state: low-pass the source step direction in a separate
    vector-memory fibre and test it against depositwise sign randomization plus
    a one-step-memory control.
-8. Signed scalar cross-channel: separate source sign from the non-negative
+8. Fixed-coupling independent pairs: cycle source/target formation seeds,
+   prohibit pairwise calibration, and require a controlled distance decay.
+9. Signed scalar cross-channel: separate source sign from the non-negative
    self-confining memory and require `q=0` plus sign-reversal controls.
-9. One-way dynamic coupling: source evolves but does not read the target.
-10. Nondestructive source transport: preserve source shape against a paired
+10. One-way dynamic coupling: source evolves but does not read the target.
+11. Nondestructive source transport: preserve source shape against a paired
     unlaunched continuation before interpreting target response.
-11. Reciprocal coupling with separate memory fields only after step 10 passes.
-12. Shared memory only as a later, separately normalized model variant.
+12. Reciprocal coupling with separate memory fields only after step 11 passes.
+13. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
 
@@ -215,6 +217,23 @@ local/retarded field extension. No reciprocal coupling, AR mode fit, photon,
 spin, charge, or particle interpretation follows.
 
 Report: `reports/response/oriented_vector_one_way_gate_2026-07-25.md`.
+
+## Fixed-Coupling Independent-Pair Gate
+
+The follow-up freezes `eta_v=5.079e-6` for every case and pairs the six
+formation seeds cyclically (`1<-2`, ..., `6<-1`). It uses
+`R_pair=(R_source+R_target)/2`, the fixed width rule
+`sigma_v=2.5 R_source`, and distances `2.5, 5, 10 R_pair`. The 64 random-sign
+paths, channel-off, global flip, and one-step arm share future noise and sign
+realizations across distances.
+
+The near gate retains response, random-null, persistence, flip, and shape
+thresholds. Tangential fraction is diagnostic rather than a gate because an
+independently formed source orientation has no required angle to the arbitrary
+pair axis. The distance gate allows 10% monotonic tolerance and requires the
+far/near response ratio to be at most 0.1; at least 5/6 pairs must pass.
+No pairwise retuning is permitted. A pass opens only a local/retarded mediator
+test, not reciprocal coupling or a QFT/particle interpretation.
 
 ## Interaction-Sign Decision
 

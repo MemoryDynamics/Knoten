@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-25.
+Stand: 2026-07-26.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -49,6 +49,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/scalar_cross_readout_resolution.py` | statischer Cross-Readout-Aufloesungstest | aktiv | getrennte Selbst-/Cross-Kernel; starre Hauptachsenorientierungen gegen Punktmonopol bei fester kalibrierter Zentrumantwort |
 | `experiments/current/memory/synchronization/oriented_history_current_audit.py` | geordneter History-Current-Audit | abgeschlossen | negatives Polar-/Bivektor-Gate gegen Random-Sign-Null; waehlt eigenstaendig evolvierenden orientierten Zustand |
 | `experiments/current/memory/synchronization/oriented_vector_one_way_gate.py` | passiver eigenstaendiger Vektormemory-Kanal | abgeschlossen | 6/6 Pass gegen channel-off, globalen Flip, 16 Random-Sign-Nullen und Ein-Schritt-Kontrolle; konstruiertes Mechanismusgate, kein Physikclaim |
+| `experiments/current/memory/synchronization/oriented_vector_fixed_pair_distance_gate.py` | feste Kopplung ueber unabhaengige Vektormemory-Paare | vorregistriert | zyklische Source/Target-Seeds, globales `eta_v`, 64 Random-Sign-Nullen und `2.5,5,10 R_pair`-Abschwaechung vor einem lokalen/retardierten Mediator |
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
 | `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
 | `experiments/current/memory/synchronization/one_way_interaction_age_audit.py` | N-Abhaengigkeit einer dauerhaften One-Way-Wechselwirkung | aktiv | common-prefix Auswertung bei `+20k..+3M`; Target-Radius, Shape-Spektrum und Kontrollabstand vor einem laengeren oder reziproken Lauf |
@@ -592,6 +593,21 @@ Aktuell enthalten oder direkt verwandt:
 | Memory-Formdimension | in v0.5 | covariance participation dimension der Memory-Cloud |
 | Shape-Stationaritaet | Eligibility-Gate in v0.6 | Vorlauf-Radius und normiertes Eigenwertspektrum; hohes N allein reicht nicht |
 
+KnotScore v0.6 bewertet eine statistisch gebundene Identitaet, keine starre
+Geometrie. Das normierte Eigenwertspektrum ist rotationsinvariant; begrenztes
+Atmen und kohaerente Rotation sind daher zulaessig. Ein Knoten muss weder
+gaussfoermig noch ringfoermig sein und auch keine permanente harmonische Mode
+tragen. Dauerhafte oder intermittierende Atmungs-/Rotationssignale werden
+getrennt im ModeScore geprueft.
+
+Die aktuelle Halbfenster-/CV-Pruefung kann seltene Formverluste oder
+Regimewechsel uebersehen. Vor einer KnotScore-v0.7-Aenderung werden deshalb
+zunaechst nur auditierende Huellenmetriken protokolliert: Radius-Quantilfaktor,
+Anteil und maximale Dauer von Shapespektrum-Ausreissern sowie Rueckkehrzeit in
+die vorab definierte Huelle. Diese Groessen werden erst nach Kalibrierung gegen
+Nullkontrollen zu Gates; sie werden nicht post hoc in laufende Scores
+eingerechnet.
+
 Weitere sinnvolle KnotScore-Kandidaten:
 
 | KPI | Quelle | Warum relevant |
@@ -637,6 +653,44 @@ Ein ModeScore sollte nicht Residence bewerten, sondern die Modenfrage:
 Ein Peak in `D_spec` waere nicht automatisch Mode-Evidenz. Er waere ein
 Geometrie-/Skalenhinweis. Fuer ModeScore zaehlt ein reproduzierbarer Peak in
 Frequenz, Eigenphase oder Autokorrelation staerker.
+
+#### ModeScore v0.2: intermittierende statt permanente Moden
+
+Falls gekoppelte Knotendynamik ueberwiegend chaotisch ist und nur zeitweise
+harmonisch wirkende Atmungs- oder Rotationsabschnitte erzeugt, ist ein einziges
+AR-Modell ueber den gesamten Trace zu streng und zugleich artefaktanfaellig.
+Die primaere Einheit ist dann ein vorab definiertes Modenereignis:
+
+| KPI | Rolle |
+| --- | --- |
+| Event-Duty-Cycle und Ereignisrate | wie oft eine kontrollgetrennte Mode aktiv ist |
+| Burst-Dauer / Survival | Persistenz innerhalb eines Ereignisses statt globale Dauerperiodizitaet |
+| Within-event Frequenz und Q | Frequenzkonzentration nur im aktiven Segment |
+| Within-event Phasenkontinuitaet | kohaerente Phase innerhalb, nicht zwingend zwischen Bursts |
+| Frequenzverteilung ueber Fenster/Seeds | wiederkehrende Modenfamilie statt Best-Window |
+| Event-triggered Average | typische Form-, Radius- oder Orientierungsantwort um den Modenbeginn |
+| Kontroll- und Surrogatabstand | gegen channel-off, `eta_v=0`, Random-Sign sowie Block-/Phasenshuffle |
+| Multiple-testing Korrektur | Schutz vor zufaelligen Peaks bei vielen Fenstern/Frequenzen |
+
+Schwellen und Frequenzbaender muessen vor der Parametersuche feststehen. Eine
+einzelne schoene Periode, das beste Zeitfenster oder ein Peak ohne
+Surrogatabstand zaehlt nicht als positive Mode-Evidenz.
+
+### Gemeinsames Feldgesetz statt knotenspezifischer Kernel
+
+Dass verschiedene Knoten dasselbe Potentialgesetz erfahren, ist eine
+Universality-/Interaction-Frage und keine KnotScore-Komponente. Dafuer muessen
+mindestens Kopplung, Kernelregel und Zustandsupdate ueber unabhaengige
+Formationszustaende fest bleiben. Unterschiedliche Knoten duerfen verschiedene
+interne Zustaende oder Multipolmomente derselben Dynamik tragen; der Kernel
+darf aber nicht pro Knotentyp nachjustiert werden.
+
+Eine Taylorentwicklung eines effektiven Potentials um einen Zustand liefert
+lokale Kruemmungen und nichtlineare Antwortkoeffizienten. Sie bestimmt weder den
+fundamentalen Kernel noch begruendet sie bereits eine Quantenfeldtheorie. Vor
+QFT-Sprache stehen deshalb feste-Kopplungs-, Distanz-, Reziprozitaets-,
+Retardierungs- und Mehrknotenkontrollen sowie eine konsistente
+Erhaltungs-/Bilanzstruktur.
 
 ### PropagationScore: gerichtete Ausbreitung und Antwort
 

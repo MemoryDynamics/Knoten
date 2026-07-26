@@ -49,6 +49,7 @@ from .oriented_source import (
     place_oriented_memory_state,
     update_persistent_orientation,
 )
+from .oriented_diagnostics import oriented_response_metrics
 from .diagnostics import (
     ball_residence_statistics,
     bootstrap_mean_ci,
@@ -272,6 +273,7 @@ __all__ = [
     "occupancy_dimension_value",
     "one_way_coupled_response",
     "one_way_oriented_response",
+    "oriented_response_metrics",
     "occupancy_local_slopes",
     "omitted_history_weight",
     "paired_frozen_source_response",
