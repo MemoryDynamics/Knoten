@@ -235,6 +235,22 @@ far/near response ratio to be at most 0.1; at least 5/6 pairs must pass.
 No pairwise retuning is permitted. A pass opens only a local/retarded mediator
 test, not reciprocal coupling or a QFT/particle interpretation.
 
+The clean run at revision `3df1c94` passes all six cyclic pairs. Near active
+response is `0.00177..0.00777 R_target`, active/random-q95 is `3.16..11.70`,
+and persistence gain over the one-step arm is `2.25..8.64`. Far/near response
+is `9.36e-4..2.80e-3`; flip and all source/target shape bounds pass. One pair
+has tangential fraction `0.341`, confirming why angle to the arbitrary pair
+axis is not a universal gate.
+
+This result removes clone-specific and pairwise-coupling calibration as the
+immediate explanations for the controlled response. It does not validate
+locality: the instantaneous Gaussian readout already imposes the measured
+distance decay, and `sigma_v=2.5 R_source` remains a state-scaled rule. The
+next gate must compare a local relaxation-diffusion mediator (`t~r^2`) with a
+damped wave/telegraph mediator (`t~r`) on held-out pairs and distances.
+
+Report: `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

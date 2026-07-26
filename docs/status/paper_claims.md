@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-21.
+Stand: 2026-07-26.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -141,7 +141,11 @@ Status: offene Future-Work-Tuer, aber ohne Claim-Status.
 Der Weg ueber QFT-artige kollektive Moden und spaeter moegliche
 Standardmodellstrukturen bleibt ausdruecklich offen. Er wird erst belastbar,
 wenn metastabile Regime, Relaxationsskalen, Mehrknoten-Wechselwirkungen,
-Synchronisation und Propagation reproduzierbar sind.
+Synchronisation und Propagation reproduzierbar sind. Zeitweilige harmonische
+Bursts in sonst chaotischer Dynamik waeren dabei zulaessige Mode-Kandidaten,
+muessen aber ereignisbasiert gegen Channel-off-, Random-Sign- und
+Zeitshuffle-Surrogate bestehen; einzelne visuell harmonische Fenster reichen
+nicht.
 
 ## Claim-Register
 
@@ -162,6 +166,7 @@ Synchronisation und Propagation reproduzierbar sind.
 | Uniformer externer Weak Probe liefert niedrigen Response-Rang | widerlegt fuer den aktuellen Skalarslice: Memory-Zentrumantwort ist isotrop vollrangig (`3` in `d=3`, `10` in `d=10`); Formantwort nicht seed-reproduzierbar | als Vollrang-Negativkontrolle berichten |
 | Zweiskaliger q=3-Kernel ist zugleich lokal konfinierend und global neutral | analytisch widerlegt fuer `q>1`: `int K=0` verlangt `a=q^-d`, lokale Rueckstellung `a>q^2`; Fixed-chi-q-Pilot zeigt zusaetzlich, dass der kompakte Ast bei `R_mem/sigma_rep<=2e-4` nur lokale Steifigkeit identifiziert | breiter Drei-Skalen-Kompensator erfuellt Nullintegral und lokale Kruemmung im `N=1M`-Pilot; als Modellvariante, nicht als Neutralitaetsnachweis berichten |
 | Signierter skalarer Cross-Kanal besitzt exakte Null- und Vorzeichenarme | als Architekturtest gestuetzt: auf je einem `N=100M`-Checkpoint in `d=3/10` sind Null- und Produktarme bitgenau, der Produkt-Flip kehrt die Antwort um und Radiusstoerungen bleiben klein; Labels sind extern vergeben | mindestens 6, bevorzugt 10 unabhaengige Zustaende ohne Retuning und feste Distanzpruefung unter/ueber dem Kraftwechsel |
+| Persistenter orientierter One-Way-Kanal generalisiert ueber unabhaengige Zustaende | modellbedingt gestuetzt: 6/6 zyklische Paare bestehen bei einem globalen `eta_v` Nah-, Random-Sign-, Persistenz-, Flip-, Shape- und Distanzgate | instantanes Gauss-Readout und `sigma_v=2.5 R_source` sind Inputs; als Naechstes lokales Diffusions- gegen Wave-/Telegraph-Mediatorgesetz auf Holdout-Paaren testen |
 | Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | unabhaengige Formationszustaende und shape-bounded/coherent One-Way-Transport vor Reziprozitaet; keine Ladungssprache |
 | Extern bewegte skalare Quelle erzeugt kontrollgetrennte Formdynamik | nicht gestuetzt: der Launch ist nicht durchgehend formkohaerent; bis N=103M waechst die Zentrumantwort nahezu linear auf 20.844 Radien, aber 0/5 Seeds bestehen das Formmodifikationsgate und die Shape-Halbwelle folgt der freien Kontrolle | mechanistisch anderen lokalen/retardierten oder orientierten Kanal vorregistrieren; keine Reziprozitaet vorher |
 | Eindeutige `d=3`-Selektion | conjecture/offen; seeded d-alpha-N-Scan stuetzt kein stabiles Plateau | nicht behaupten |

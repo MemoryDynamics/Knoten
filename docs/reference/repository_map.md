@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-25.
+Stand: 2026-07-26.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -30,6 +30,7 @@ flowchart TD
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
+    experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -114,6 +115,7 @@ flowchart LR
     fullstate --> checkpoint["versioned checkpoint<br/>config + N + seed + checksums"]
     fullstate --> orientedstate["OrientedMemoryState<br/>passive low-pass direction fibre"]
     orientedstate --> orientedgate["one-way active / flip / off / random-sign<br/>plus one-step control"]
+    orientedgate --> orienteddiag["oriented_diagnostics.py<br/>paired response / shape / distance KPIs"]
     checkpoint --> reload["validated reload<br/>fresh common future noise"]
     reload --> rigid["rigid placement<br/>translation / orthogonal rotation"]
     rigid --> weakprobe["paired weak probe<br/>+delta / -delta / unprobed / eta_zero"]
@@ -217,8 +219,9 @@ flowchart LR
     ladder --> crossreadout["independent scalar readout<br/>shape gate fails"]
     crossreadout --> historycurrent["ordered-history current<br/>random-sign gate fails"]
     historycurrent --> orientedgate2["independent oriented state<br/>6/6 one-way gate pass"]
-    orientedgate2 --> fixedpair["fixed eta_v + independent pairs<br/>64 nulls + distance ladder"]
-    fixedpair -.pass.-> transport
+    orientedgate2 --> fixedpair["fixed eta_v + independent pairs<br/>6/6 distance-gate pass"]
+    fixedpair --> mediatorgate["next: local mediator holdout<br/>diffusion t~r^2 vs telegraph t~r"]
+    mediatorgate -.pass.-> transport
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
     channel --> seeds["later: 6-10 independent states<br/>no retuning"]
     channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]

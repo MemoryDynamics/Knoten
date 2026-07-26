@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-21.
+Stand: 2026-07-26.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -433,6 +433,8 @@ diese Theorie:
 | `validation.py` | implied rates, timescales, CK-Fehler, Autokorrelation |
 | `metastability.py` | slow modes und einfache spectral gaps |
 | `vector_memory.py` | orientierte Memory-Features und kontrollierte Vektor-Pilotdynamik |
+| `oriented_source.py` | passiv evolvierender orientierter Source-State mit One-Way-Kontrollen |
+| `oriented_diagnostics.py` | gepaarte Response-, Shape-, Random-Sign- und Distanzmetriken |
 | `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 
 Begriffliche Hygiene:
@@ -481,6 +483,17 @@ physikalischen Massen.
   muss sich gegen diesen Fallback und gegen reine `eta_s=eta_v=0`-
   Rauschkontrollen durchsetzen. Die erste `eta_s=eta_v=0`-Kontrolle zeigt
   bereits komplexe AR-Paare, also ist Komplexitaet allein kein Modenclaim.
+- Der spaeter eingefuehrte persistente orientierte One-Way-Kanal besteht sein
+  feste-Kopplungs-/Distanzgate in 6/6 unabhaengigen Paaren. Das zeigt, dass der
+  kontrollgetrennte Response nicht nur aus geklonten Zustaenden oder
+  seedweisem `eta_v`-Retuning stammt. Persistenz, instantanes Gauss-Readout und
+  `sigma_v=2.5 R_source` sind jedoch gesetzt; insbesondere ist der gemessene
+  Distanzabfall keine emergente Propagation.
+- Knotenkriterium und Modenkriterium bleiben getrennt: Ein statistisch
+  shape-gebundener Knoten darf begrenzt atmen oder rotieren. Zeitweilige
+  harmonische Bursts in chaotischer Dynamik brauchen einen ereignisbasierten
+  ModeScore mit Survival, Within-event Frequenz/Phase und Surrogatabstand,
+  nicht eine nachtraeglich ausgewaehlte schoene Periode.
 - Komplexe AR-Eigenwerte einer reduzierten Feature-Projektion sind noch keine
   Schroedinger-Gleichung. Fuer eine quantenartige Lesart braucht es eine
   stabile Phasenstruktur, Norm-/Wahrscheinlichkeitserhaltung bzw. eine

@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-21.
+Stand: 2026-07-26.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -83,6 +83,20 @@ Kontrolle nahezu identisch (Korrelation 0.999953); der gepaarte Differenzspan
 betraegt nur 0.142 Prozent des absoluten Shape-Spans. Es gibt damit in diesem
 skalaren Fernkanal keinen Befund eines langsam entstehenden neuen Knotentyps
 oder einer wechselwirkungsinduzierten Oszillation.
+
+Der daraufhin als eigener Mechanismus eingefuehrte persistente orientierte
+One-Way-Kanal besteht zuerst das geklonte Gate und danach bei einem einzigen
+globalen `eta_v=5.079e-6` auch das feste-Kopplungs-/Distanzgate in 6/6
+zyklisch unabhaengigen Paaren. Die Nahantwort ist gegen 64 Random-Sign-Pfade
+und Ein-Schritt-Memory getrennt; Flip und Shape-Huelle bestehen. Das haertet
+den konstruierten relationalen Kanal gegen seedweises Retuning.
+
+Die wissenschaftliche Grenze bleibt wesentlich: Das Readout ist instantan,
+die Gauss-Abschwaechung ist eingebaut und `sigma_v=2.5 R_source` eine gesetzte
+Breitenregel. Als naechstes wird daher ein lokales Mediatorgesetz auf einem
+Kalibrationspaar fixiert und auf Holdout-Paaren getestet: Relaxations-Diffusion
+mit `t~r^2` gegen einen gedaempften Wave-/Telegraph-Zustand mit `t~r`.
+Reziprozitaet und QFT-Sprache bleiben bis dahin gesperrt.
 
 ## Nicht ueberclaimen
 

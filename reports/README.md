@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-25.
+Stand: 2026-07-26.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -98,11 +98,20 @@ identifizierten physikalischen Moden.
     Modellinputs. Die stateweise Antwortnormalisierung und geklonten
     Source/Target-Zustaende erlauben noch keinen Propagations-, Wellen- oder
     Teilchenclaim.
+- [Feste-Kopplung-/Distanzgate](response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md)
+  - **supported, model-conditional:** 6/6 zyklisch verschiedene Source/Target-
+    Paare bestehen bei globalem `eta_v=5.079e-6` Nahantwort, Random-Sign-Null,
+    Persistenz, Flip, Shape-Huelle und Distanzgate. Fern/Nah liegt bei
+    `9.36e-4..2.80e-3`.
+  - Das instantane Gauss-Readout und `sigma_v=2.5 R_source` sind gesetzt und
+    erzeugen den Distanzabfall. Der Befund ist keine emergente Lokalitaets-,
+    Propagations-, QFT- oder Teilchenevidenz.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Als naechstes folgt eine
-feste-Kopplung-Replikation mit unabhaengigen Source/Target-Paarungen,
-vergroesserter Random-Sign-Null und einer vorgegebenen Distanzleiter. Erst ein
-Bestehen rechtfertigt einen lokalen/retardierten orientierten Feldzustand.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Das feste-Kopplung-Gate ist
+bestanden; als naechstes folgt der kontrollierte Holdout-Vergleich eines
+lokalen Relaxations-Diffusionsmediators (`t~r^2`) mit einem gedaempften
+Wave-/Telegraph-Zustand (`t~r`). Erst kontrollgetrennte, distanzskalierende
+Lags rechtfertigen eine reziproke Mehrknotenprobe.
 
 ### 5. Governance und Kuration
 

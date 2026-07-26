@@ -110,8 +110,27 @@ Naechstes diskriminierendes Gate, ohne neuen Parametersweep:
    mindestens 5/6 zyklischen Paaren. Nur dann wird ein lokaler/retardierter
    orientierter Feldzustand geoeffnet.
 
-Reziproke Kopplung bleibt bis dahin gesperrt. Auch dieser Pass rechtfertigt
-keine Photon-, Spin-, Ladungs- oder Teilchensprache.
+Ergebnis: Das feste-Kopplungs-Gate besteht in 6/6 zyklisch unabhaengigen
+Paaren. Nahantwort `0.00177..0.00777 R_target`, Random-Sign-Trennung
+`3.16..11.70`, Persistenzgewinn `2.25..8.64` und Fern/Nah-Verhaeltnis
+`9.36e-4..2.80e-3`; Flip und alle Shape-Bounds bestehen. Ein Paar besitzt nur
+`0.341` Tangentialanteil und bestaetigt damit, dass die willkuerliche Paarachse
+kein universelles Transversalitaetsgate sein darf.
+
+Das ist eine Generalisierungs- und Pipeline-Evidenz fuer den konstruierten
+instantanen Gauss-Readout. Die beobachtete Abschwaechung ist durch dessen
+Kernelregel erwartet und keine emergente Lokalitaets-, Propagations- oder
+QFT-Evidenz. Reziproke Kopplung bleibt gesperrt.
+
+Naechstes Gate: ein gemeinsames lokales Mediatorgesetz wird auf genau einem
+Kalibrationspaar im Nahfeld an die bestehende Antwortskala angepasst und dann
+ohne Retuning auf die uebrigen Paare/Distanzen angewendet. Ein kontrollierter
+Source-Puls vergleicht zwei vorab getrennte Hypothesen: Relaxations-Diffusion
+mit Lag-Skalierung `t ~ r^2` gegen einen gedaempften Wave-/Telegraph-Zustand mit
+`t ~ r`. Primaer sind Kontrollabstand, monotoner Onset-/Peak-Lag, Out-of-sample
+Skalengesetz und Shape-Huelle. Erst ein reproduzierbarer Holdout-Pass oeffnet
+eine reziproke Mehrknotenprobe; auch er waere noch kein Photon-, Spin-,
+Ladungs-, Teilchen- oder QFT-Claim.
 
 ## P2: Scheinmoden analytisch einordnen
 

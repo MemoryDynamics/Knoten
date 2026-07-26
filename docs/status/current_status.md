@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-25.
+Stand: 2026-07-26.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Spektrales Memory-Feld | Fourier-`rho` reproduziert das exponentielle Memory; Relaxations-Diffusion glaettet kontrolliert. | kompakte Reprasentation bzw. explizite Modellerweiterung | Eigenvektor-/Segmentgate isoliert keinen stabilen physikalischen Modus |
-| Externe Antwort | Der skalare Ast liefert Translation ohne Formsignal; ein separat eingefuehrter persistenter Vektorkanal besteht sein One-Way-Gate in 6/6 Seeds. | kontrollgetrennter relationaler Kanal im erweiterten Modell | Persistenz und instantanes Readout sind Inputs; feste Kopplung, unabhaengige Paare und Lokalitaet fehlen |
+| Externe Antwort | Der skalare Ast liefert Translation ohne Formsignal; der separat eingefuehrte persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 unabhaengigen Paaren. | kontrollgetrennter relationaler Kanal unter einer globalen Kopplung im erweiterten Modell | Persistenz, instantanes Gauss-Readout und Breitenregel sind Inputs; Lokalitaet, Retardierung und Reziprozitaet fehlen |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -37,8 +37,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
   sehr kleiner Shape-Aenderung.
-- Der konstruierte persistente Vektorkanal trennt sich in 6/6 Seeds von
-  Random-Sign- und Ein-Schritt-Kontrollen, bei kleinen Shape-Stoerungen.
+- Der konstruierte persistente Vektorkanal trennt sich zuerst in 6/6 Seeds und
+  danach bei globalem `eta_v` in 6/6 unabhaengigen Paaren von Random-Sign- und
+  Ein-Schritt-Kontrollen, bei kleinen Shape-Stoerungen.
 
 
 ### Nicht gestuetzt oder widerlegt
@@ -56,8 +57,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 ### Offene Hypothesen
 
 - Der bestandene orientierte Kanal koennte als Ausgangspunkt fuer einen
-  lokalen oder retardierten Mediator dienen. Zuvor muss er bei global fester
-  Kopplung, unabhaengigen Source/Target-Paaren und ueber Distanz bestehen.
+  lokalen oder retardierten Mediator dienen. Naechstes Gate ist die
+  Out-of-sample-Lagskalierung eines gemeinsamen Diffusions- bzw.
+  Wave-/Telegraph-Zustands ueber unabhaengige Paare und Distanzen.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
 
@@ -75,6 +77,7 @@ wichtig:
 6. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
 7. `reports/response/oriented_history_current_audit_2026-07-21.md`
 8. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
+9. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -86,6 +89,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
 - `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
 - `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
   mit gepaarten One-Way-Kontrollen.
+- `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-
+  und Distanzmetriken fuer den konstruierten orientierten Kanal.
 - `experiments/current/`: reproduzierbare aktive Entry-Points.
 - `experiments/archive/`: historische oder nichtkanonische Skripte.
 - `data/processed/`: standardmaessig ignorierte Bulk-Outputs; nur reviewed
@@ -113,11 +118,18 @@ Die relevante Trennung ist persistent/random-q95 `5.76..11.64` gegen
 Ein-Schritt/random-q95 `1.40..2.04`, nicht die per Formel normalisierte rohe
 Auslenkung. Dies stuetzt den konstruierten Zusatzkanal, nicht seine Emergenz.
 
-Vor einer Feld- oder Reziprozitaetserweiterung folgt ein feste-Kopplung-Gate:
-zyklisch verschiedene Source/Target-Seeds, `eta_v=5.079e-6`, 64
-Random-Sign-Kontrollen und die Distanzleiter `2.5, 5, 10 R_pair` mit
-`R_pair=(R_source+R_target)/2`. Scheitert
-diese Replikation, wird der aktuelle Kanal nicht durch Retuning gerettet.
+Das feste-Kopplung-Gate besteht ebenfalls in 6/6 zyklisch verschiedenen
+Source/Target-Paaren. Random-Sign-Trennung `3.16..11.70`, Persistenzgewinn
+`2.25..8.64` und Fern/Nah `9.36e-4..2.80e-3`; alle Flip- und Shape-Gates
+bestehen. Dies haertet den konstruierten Kanal gegen stateweises Retuning. Der
+Gauss-Readout erzwingt jedoch bereits raeumliche Abschwaechung und ist
+instantan; daraus folgt weder emergente Lokalitaet noch Propagation.
+
+Vor einer Reziprozitaetserweiterung folgt deshalb ein Holdout-Test eines
+lokalen Mediatorgesetzes: Source-Puls, gemeinsame feste Koeffizienten und
+Lag-Skalierung `t~r^2` (Relaxations-Diffusion) gegen `t~r`
+(Wave-/Telegraph-Zustand). Reziprozitaet bleibt bis zu einem kontrollgetrennten
+Out-of-sample-Pass gesperrt.
 
 ## Paper-Status
 
