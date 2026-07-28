@@ -708,7 +708,7 @@ def main() -> None:
                 ),
             }
             if pair_index == 0:
-                row["trace_values"] = trace.values[:, index]
+                row["trace_values"] = trace.values[sample_steps, index]
             transport_rows.append(row)
 
         calibration_row, calibration_target, calibration_source = pair_cases[0]
@@ -799,13 +799,18 @@ def main() -> None:
                 gates = _response_gates(metrics, thresholds)
                 responses.append(float(metrics["active_response_r"]))
                 lags.append(float(transport_rows[trace_index][lag_metric]))
+                stored_metrics = {
+                    key: value
+                    for key, value in metrics.items()
+                    if key != "trace_active_response_r"
+                }
                 distance_rows.append(
                     {
                         "distance_ratio_pair_radius": float(ratio),
                         "distance_r0": float(
                             all_distances[trace_index] / calibration_radius
                         ),
-                        "target_metrics": metrics,
+                        "target_metrics": stored_metrics,
                         "gates": gates,
                     }
                 )
@@ -946,7 +951,7 @@ def main() -> None:
         "horizon_memory_times": float(args.horizon_memory_times),
         "n_steps": n_steps,
         "pulse_steps": pulse_steps,
-        "trace_times_memory": np.arange(n_steps + 1) * lambda_vector,
+        "trace_times_memory": sample_steps * lambda_vector,
         "correlation_length": correlation_length,
         "relaxation_memory_times": float(args.relaxation_memory_times),
         "primary_grid": asdict(primary_grid),
