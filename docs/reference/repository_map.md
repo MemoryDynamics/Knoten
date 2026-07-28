@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-26.
+Stand: 2026-07-28.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -31,6 +31,7 @@ flowchart TD
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
+    experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>fixed-calibration local transport gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -65,6 +66,9 @@ flowchart TD
     src --> vector_memory["vector_memory.py<br/>oriented history/current, bivector and vector features"]
     src --> oriented_source["oriented_source.py<br/>persistent passive vector fibre + paired controls"]
     oriented_source --> continuation
+    src --> local_mediator["local_mediator.py<br/>1D local diffusion + telegraph states"]
+    src --> external_field["external_field_response.py<br/>paired active / flip / off target paths"]
+    external_field --> continuation
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
@@ -245,7 +249,7 @@ array. Independent seeds remain necessary for inferential claims.
 - `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
   Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
   `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py`,
-  `oriented_source.py` und
+  `oriented_source.py`, `local_mediator.py`, `external_field_response.py` und
   `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem

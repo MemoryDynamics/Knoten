@@ -20,6 +20,11 @@ from .field import (
     low_wavenumber_matched_field,
     stationary_field_transfer,
 )
+from .external_field_response import (
+    PairedExternalFieldResponse,
+    external_field_response_metrics,
+    paired_external_field_response,
+)
 from .checkpoints import (
     CHECKPOINT_SCHEMA_VERSION,
     FiniteMemoryCheckpoint,
@@ -74,6 +79,15 @@ from .spectral_memory_field import (
     zero_mean_attractive_kernel,
 )
 from .relaxation_diffusion_memory import RelaxationDiffusionMemoryOperators
+from .local_mediator import (
+    LocalMediatorGrid,
+    LocalMediatorTrace,
+    RelaxationDiffusionMediator,
+    TelegraphMediator,
+    rectangular_source,
+    simulate_relaxation_diffusion_mediator,
+    simulate_telegraph_mediator,
+)
 from .spectral_memory_runtime import SpectralMemoryOperators
 from .spectral_memory_trace import (
     SpectralMemoryTrace,
@@ -194,6 +208,7 @@ __all__ = [
     "ResponseRankResult",
     "RelaxationDiffusionField",
     "RelaxationDiffusionMemoryOperators",
+    "RelaxationDiffusionMediator",
     "CHECKPOINT_SCHEMA_VERSION",
     "DEPOSITION_KERNELS",
     "FiniteMemoryCheckpoint",
@@ -201,6 +216,7 @@ __all__ = [
     "FrozenSourceCalibration",
     "GaussianKernelMode",
     "PairedFrozenSourceResponse",
+    "PairedExternalFieldResponse",
     "OneWayCoupledResponse",
     "OrientedMemoryState",
     "OrientedOneWayResponse",
@@ -217,6 +233,9 @@ __all__ = [
     "SpectralMemoryOperators",
     "SpectralMemoryState",
     "SpectralMemoryTrace",
+    "LocalMediatorGrid",
+    "LocalMediatorTrace",
+    "TelegraphMediator",
     "VectorMemoryConfig",
     "antisymmetric_current_coherence",
     "antisymmetric_current_tensor",
@@ -237,6 +256,7 @@ __all__ = [
     "direct_history_potential_gradient",
     "effective_double_gaussian_parameters",
     "effective_gaussian_parameters",
+    "external_field_response_metrics",
     "exponential_memory_weights",
     "exponential_weights",
     "finite_memory_checkpoint_manifest",
@@ -277,10 +297,12 @@ __all__ = [
     "occupancy_local_slopes",
     "omitted_history_weight",
     "paired_frozen_source_response",
+    "paired_external_field_response",
     "paired_signed_cross_response",
     "paired_uniform_probe_response",
     "phase_locking_value",
     "relative_orbital_observables",
+    "rectangular_source",
     "oriented_history_from_state",
     "place_finite_memory_state",
     "place_oriented_memory_state",
@@ -309,6 +331,8 @@ __all__ = [
     "simulate_final_finite_memory_state",
     "simulate_spectral_memory_trace",
     "simulate_vector_memory",
+    "simulate_relaxation_diffusion_mediator",
+    "simulate_telegraph_mediator",
     "spectral_dimension",
     "stationary_deposition_weight",
     "stationary_field_transfer",

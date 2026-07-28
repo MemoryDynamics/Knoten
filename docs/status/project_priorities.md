@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-26.
+Stand: 2026-07-28.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -124,13 +124,42 @@ QFT-Evidenz. Reziproke Kopplung bleibt gesperrt.
 
 Naechstes Gate: ein gemeinsames lokales Mediatorgesetz wird auf genau einem
 Kalibrationspaar im Nahfeld an die bestehende Antwortskala angepasst und dann
-ohne Retuning auf die uebrigen Paare/Distanzen angewendet. Ein kontrollierter
-Source-Puls vergleicht zwei vorab getrennte Hypothesen: Relaxations-Diffusion
-mit Lag-Skalierung `t ~ r^2` gegen einen gedaempften Wave-/Telegraph-Zustand mit
-`t ~ r`. Primaer sind Kontrollabstand, monotoner Onset-/Peak-Lag, Out-of-sample
-Skalengesetz und Shape-Huelle. Erst ein reproduzierbarer Holdout-Pass oeffnet
-eine reziproke Mehrknotenprobe; auch er waere noch kein Photon-, Spin-,
-Ladungs-, Teilchen- oder QFT-Claim.
+ohne Retuning auf die uebrigen Paare/Distanzen angewendet. Implementiert werden
+zwei getrennte lokale Markov-Erweiterungen auf der Source-Target-Achse:
+
+```text
+d_t a = D d_xx a - mu a + s
+d_tt a + 2 gamma d_t a + omega_0^2 a = c^2 d_xx a + s.
+```
+
+Beide erhalten dieselbe am Kalibrationspaar fixierte Korrelationslaenge und
+nominale Relaxationszeit. Die Source pulst eine Memory-Zeit; Target-Aktiv,
+globaler Flip und Kanal-aus teilen Zukunftsrauschen. Primaer sind ein
+Kalibrations-/Linearitaetscheck, Aufloesungsstabilitaet, monotone Lags,
+Out-of-sample-Vorhersage und Shape-Huelle. Vier von fuenf vollstaendigen
+Holdout-Paaren muessen ohne Retuning bestehen.
+
+Wichtige Korrektur: Fuer Relaxations-Diffusion gilt `t_peak ~ r^2` nur im
+schwach gedaempften Nahbereich. Aus
+`G(r,t) ~ t^-1/2 exp[-r^2/(4Dt)-mu t]` folgt fuer einen kurzen Puls
+
+```text
+t_peak ~= [sqrt(1 + 4 mu r^2/D) - 1]/(4 mu) + T_pulse/2,
+```
+
+mit linearem Fernbereichs-Crossover. Der Telegraph-Arm wird dagegen am
+Finite-Front-Onset `t_onset ~= r/c` geprueft. Das Experiment kann nur
+Architekturkompatibilitaet vergleichen, nicht die physikalische Regel
+entdecken, weil beide Transportgesetze Modellinputs sind. Auch ein Pass oeffnet
+zunaechst nur eine dynamische One-Way-Source-Diskrimination, nicht sofort
+Reziprozitaet.
+
+Die 1D-Achse ist eine ressourcensparende relationale Kanalnaeherung und keine
+Dimensionsselektion. Ein Feld kann in jedem vorgegebenen `d` existieren. Ein
+spaeterer `d=3`-Test muss eine unveraenderte Mediatorregel und dieselben
+absoluten dimensionslosen Parameter ueber mehrere Ambient-Dimensionen halten
+und einen reproduzierbaren externen Response-/Modenrang nahe drei samt
+Unterdrueckung weiterer Richtungen zeigen.
 
 ## P2: Scheinmoden analytisch einordnen
 

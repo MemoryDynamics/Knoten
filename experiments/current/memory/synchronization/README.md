@@ -246,10 +246,52 @@ This result removes clone-specific and pairwise-coupling calibration as the
 immediate explanations for the controlled response. It does not validate
 locality: the instantaneous Gaussian readout already imposes the measured
 distance decay, and `sigma_v=2.5 R_source` remains a state-scaled rule. The
-next gate must compare a local relaxation-diffusion mediator (`t~r^2`) with a
-damped wave/telegraph mediator (`t~r`) on held-out pairs and distances.
+next gate compares the full relaxation-diffusion peak law with the finite-front
+onset of a damped wave/telegraph mediator on held-out pairs and distances.
 
 Report: `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`.
+
+## Preregistered Local-Mediator Gate
+
+`local_mediator.py` now supplies two explicit local finite-difference Markov
+extensions on the source-target axis. `external_field_response.py` applies a
+prescribed time-dependent field to active, global-sign-flip, and exact
+channel-off target branches under common future noise. The axis is a
+resource-light relational transport channel, not an ambient-dimension model.
+
+The first independent pair and nearest distance fix one absolute length
+`R0`, one common correlation length `5 R0`, one nominal relaxation time of ten
+memory times, and one coupling per mediator law. The remaining pair-distance
+cases are holdouts; no pair-radius renormalization or coupling retuning is
+allowed. A one-memory-time rectangular source pulse is observed for fifty
+memory times. A factor-two spatial refinement with four mediator substeps per
+target update is the resolution control.
+
+The earlier shorthand `t_peak~r^2` requires correction once relaxation is
+nonzero. For
+
+```text
+G(r,t) ~ t^(-1/2) exp[-r^2/(4Dt)-mu t]
+```
+
+the short-pulse peak is tested against
+
+```text
+t_peak ~= [sqrt(1 + 4 mu r^2/D) - 1]/(4 mu) + T_pulse/2,
+```
+
+which crosses from quadratic near-field to linear far-field behavior. The
+telegraph arm instead tests its relative-threshold onset against `r/c`.
+Passing either arm establishes only implementation and knot-envelope
+compatibility: the corresponding transport behavior is inserted by the model.
+A dynamic autonomous source waveform is needed before the laws can be
+empirically discriminated, and reciprocal coupling stays closed.
+
+Introducing a field does not select three dimensions. The current knot states
+remain in the supplied `d=3` embedding while the mediator uses one relational
+axis. A later dimension gate must freeze one law across several ambient `d` and
+test whether a control-separated external response or slow-mode rank converges
+to three while extra directions are suppressed.
 
 ## Interaction-Sign Decision
 

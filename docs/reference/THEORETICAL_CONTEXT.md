@@ -283,6 +283,26 @@ in the augmented Markov state and its source sign fixed for attraction before
 it can replace K. A diffusive mediator also does not provide a hard finite
 propagation speed; a hyperbolic model remains a later, separately tested step.
 
+For the one-dimensional impulse Green function of the relaxation-diffusion
+law,
+
+```text
+G(r,t) proportional to t^(-1/2) exp[-r^2/(4 D_phi t)-mu_phi t],
+```
+
+the peak solves
+
+```text
+t_peak = [sqrt(1 + 4 mu_phi r^2/D_phi) - 1]/(4 mu_phi).
+```
+
+Thus `t_peak proportional to r^2` is only the weak-decay/near-field limit.
+At large `r/sqrt(D_phi/mu_phi)`, even the diffusive peak crosses toward linear
+distance scaling while the field still has instantaneous continuum support.
+Peak-lag scaling alone therefore cannot establish a finite causal front. A
+Telegraph model must instead be tested through its onset/front and resolution
+behavior, not merely by fitting a linear peak lag.
+
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
 reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
 reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,
@@ -435,6 +455,8 @@ diese Theorie:
 | `vector_memory.py` | orientierte Memory-Features und kontrollierte Vektor-Pilotdynamik |
 | `oriented_source.py` | passiv evolvierender orientierter Source-State mit One-Way-Kontrollen |
 | `oriented_diagnostics.py` | gepaarte Response-, Shape-, Random-Sign- und Distanzmetriken |
+| `local_mediator.py` | lokale 1D Relaxations-Diffusions- und Telegraph-Zustaende fuer Transporttests |
+| `external_field_response.py` | gepaarte Target-Fortsetzung fuer Aktiv-/Flip-/Kanal-aus-Felder |
 | `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 
 Begriffliche Hygiene:

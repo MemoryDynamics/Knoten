@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-26.
+Stand: 2026-07-28.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -57,9 +57,13 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 ### Offene Hypothesen
 
 - Der bestandene orientierte Kanal koennte als Ausgangspunkt fuer einen
-  lokalen oder retardierten Mediator dienen. Naechstes Gate ist die
-  Out-of-sample-Lagskalierung eines gemeinsamen Diffusions- bzw.
-  Wave-/Telegraph-Zustands ueber unabhaengige Paare und Distanzen.
+  lokalen oder retardierten Mediator dienen. Das vorregistrierte Gate haelt
+  eine Kalibrationslaenge und je einen globalen Kopplungswert fest und testet
+  lokale Relaxations-Diffusion bzw. Telegraph-Dynamik auf Holdout-Paaren.
+- Felder selektieren nicht automatisch drei Dimensionen. Eine spaetere
+  Dimensionshypothese braucht dieselbe eingefrorene Regel ueber mehrere
+  Ambient-Dimensionen und einen kontrollgetrennten effektiven Response- oder
+  Modenrang; eine 3D-Feldsimulation waere nur eine 3D-Annahme.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
 
@@ -126,10 +130,12 @@ Gauss-Readout erzwingt jedoch bereits raeumliche Abschwaechung und ist
 instantan; daraus folgt weder emergente Lokalitaet noch Propagation.
 
 Vor einer Reziprozitaetserweiterung folgt deshalb ein Holdout-Test eines
-lokalen Mediatorgesetzes: Source-Puls, gemeinsame feste Koeffizienten und
-Lag-Skalierung `t~r^2` (Relaxations-Diffusion) gegen `t~r`
-(Wave-/Telegraph-Zustand). Reziprozitaet bleibt bis zu einem kontrollgetrennten
-Out-of-sample-Pass gesperrt.
+lokalen Mediatorgesetzes: Source-Puls, gemeinsame feste Koeffizienten und die
+volle Relaxations-Diffusions-Peakkurve gegen den linearen Finite-Front-Onset
+des Wave-/Telegraph-Zustands. Ein pauschales `r^2`-Gate waere bei endlichem
+Zerfall falsch, weil der diffusive Peak im Fernbereich selbst gegen lineare
+Distanzskalierung uebergeht. Reziprozitaet bleibt mindestens bis zu einem
+kontrollgetrennten dynamischen One-Way-Pass gesperrt.
 
 ## Paper-Status
 
