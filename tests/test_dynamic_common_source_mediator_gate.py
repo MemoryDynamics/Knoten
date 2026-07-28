@@ -144,6 +144,7 @@ def test_report_keeps_physical_law_and_dimension_claims_closed(
         "source_reference": "reports/source.json",
         "git_revision": "abc",
         "git_status_at_start": "",
+        "runtime_seconds": 1.25,
         "command": ["python", "gate.py"],
     }
 

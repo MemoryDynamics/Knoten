@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 from typing import Any
 
 import matplotlib
@@ -553,6 +554,7 @@ def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) 
             f"- source reference: `{payload['source_reference']}`",
             f"- analysis revision: `{payload['git_revision']}`",
             f"- worktree at start: `{payload['git_status_at_start'] or 'clean'}`",
+            f"- runtime: `{_fmt(payload['runtime_seconds'])} s`",
             f"- command: `{' '.join(payload['command'])}`",
             "",
         ]
@@ -561,6 +563,7 @@ def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) 
 
 
 def main() -> None:
+    started = time.perf_counter()
     args = parse_args()
     git_status = _git_output(["status", "--short"])
     if git_status not in ("", "unavailable") and not args.allow_dirty:
@@ -1085,6 +1088,7 @@ def main() -> None:
         "figure": figure_path,
     }
     make_figure(payload, figure_path)
+    payload["runtime_seconds"] = time.perf_counter() - started
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     summary_path.write_text(
         json.dumps(_jsonable(payload), indent=2, sort_keys=True) + chr(10),
