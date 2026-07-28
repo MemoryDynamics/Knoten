@@ -52,8 +52,7 @@ def parse_args() -> argparse.Namespace:
         "--identifiability-summary",
         type=Path,
         default=Path(
-            "reports/response/"
-            "oriented_source_mediator_identifiability_2026-07-28.json"
+            "reports/response/oriented_source_mediator_identifiability_2026-07-28.json"
         ),
     )
     parser.add_argument("--burn-memory-times", type=float, default=20.0)
@@ -92,8 +91,7 @@ def parse_args() -> argparse.Namespace:
         "--figure",
         type=Path,
         default=Path(
-            "figures/draft/response/"
-            "dynamic_common_source_mediator_gate_2026-07-28.png"
+            "figures/draft/response/dynamic_common_source_mediator_gate_2026-07-28.png"
         ),
     )
     return parser.parse_args()
@@ -191,9 +189,7 @@ def relative_trace_separation(first: np.ndarray, second: np.ndarray) -> float:
     def vector_rms(values: np.ndarray) -> float:
         return float(np.sqrt(np.mean(np.sum(np.square(values), axis=1))))
 
-    denominator = np.sqrt(
-        0.5 * (vector_rms(left) ** 2 + vector_rms(right) ** 2)
-    )
+    denominator = np.sqrt(0.5 * (vector_rms(left) ** 2 + vector_rms(right) ** 2))
     if denominator <= np.finfo(float).tiny:
         return 0.0
     return vector_rms(left - right) / denominator
@@ -211,8 +207,7 @@ def response_gates(
             <= thresholds["response_rms_max_r"]
         ),
         "sign_flip": bool(
-            metrics["odd_symmetry_relative_rms"]
-            <= thresholds["odd_symmetry_max"]
+            metrics["odd_symmetry_relative_rms"] <= thresholds["odd_symmetry_max"]
             and thresholds["flip_rms_min"]
             <= metrics["flip_response_rms_ratio"]
             <= thresholds["flip_rms_max"]
@@ -234,9 +229,7 @@ def attenuation_gates(
     values = np.asarray(responses, dtype=float)
     if values.ndim != 1 or values.size < 2 or np.any(values <= 0.0):
         raise ValueError("responses must be a positive distance sequence")
-    monotone = bool(
-        np.all(values[1:] <= values[:-1] * (1.0 + float(tolerance)))
-    )
+    monotone = bool(np.all(values[1:] <= values[:-1] * (1.0 + float(tolerance))))
     ratio = float(values[-1] / values[0])
     return {
         "response_monotone": monotone,
@@ -273,22 +266,21 @@ def make_figure(payload: dict[str, Any], path: Path) -> None:
     fig, axes = plt.subplots(2, 2, figsize=(11.2, 8.0), constrained_layout=True)
 
     source_times = np.asarray(plot["source_times_memory"], dtype=float)
+    positive_time = source_times > 0.0
     axes[0, 0].semilogy(
-        source_times,
-        np.maximum(plot["persistent_source_norm"], tiny),
+        source_times[positive_time],
+        np.maximum(np.asarray(plot["persistent_source_norm"])[positive_time], tiny),
         color="#1f567d",
         label="persistent carrier",
     )
     axes[0, 0].semilogy(
-        source_times,
-        np.maximum(plot["one_step_source_norm"], tiny),
+        source_times[positive_time],
+        np.maximum(np.asarray(plot["one_step_source_norm"])[positive_time], tiny),
         color="#c65333",
         linestyle="--",
         label="unit one-step direction",
     )
-    axes[0, 0].axvline(
-        payload["burn_memory_times"], color="#444444", linestyle=":"
-    )
+    axes[0, 0].axvline(payload["burn_memory_times"], color="#444444", linestyle=":")
     axes[0, 0].set_xlabel("memory times")
     axes[0, 0].set_ylabel("source-vector norm")
     axes[0, 0].set_title("Calibration-pair autonomous input")
@@ -390,9 +382,7 @@ def make_figure(payload: dict[str, Any], path: Path) -> None:
     plt.close(fig)
 
 
-def build_report(
-    payload: dict[str, Any], report_path: Path, figure_path: Path
-) -> str:
+def build_report(payload: dict[str, Any], report_path: Path, figure_path: Path) -> str:
     decision = payload["decision"]
     lines = [
         "# Dynamic Common-Source Mediator Gate",
@@ -456,6 +446,31 @@ def build_report(
             f"{_fmt(item['target_radius_change_max'])} | "
             f"{_fmt(item['target_shape_change_max'])} |"
         )
+    lines.append("")
+    if all(decision.get("model_pass_status", {}).values()):
+        lines.extend(
+            [
+                "Both model rows pass the preregistered response, sign-flip, "
+                "source/target shape and attenuation gates. Any overall failure "
+                "therefore occurs at the separate cross-model discrimination gate.",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "## Separation by distance",
+            "",
+            "| distance/R_pair | passing pairs | minimum | median | maximum |",
+            "| ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for item in payload["separation_summary"]:
+        lines.append(
+            f"| {_fmt(item['distance_ratio_pair_radius'])} | "
+            f"{item['passing_pairs']}/{item['pair_count']} | "
+            f"{_fmt(item['minimum'])} | {_fmt(item['median'])} | "
+            f"{_fmt(item['maximum'])} |"
+        )
     lines.extend(
         [
             "",
@@ -474,6 +489,21 @@ def build_report(
             f"{_fmt(min(item['persistent'] for item in row['model_separation']))} | "
             f"{_fmt(min(item['one_step'] for item in row['model_separation']))} | "
             f"{'pass' if row['pair_pass'] else 'fail'} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Source-drive scale",
+            "",
+            "| target<-source | persistent RMS | unit one-step RMS |",
+            "| --- | ---: | ---: |",
+        ]
+    )
+    for row in payload["rows"]:
+        lines.append(
+            f"| {row['target_seed']}<-{row['source_seed']} | "
+            f"{_fmt(row['source_input_rms']['persistent'])} | "
+            f"{_fmt(row['source_input_rms']['one_step'])} |"
         )
     lines.extend(
         [
@@ -550,19 +580,13 @@ def main() -> None:
         "target_shape_max_change": float(args.target_shape_max_change),
         "source_radius_max_change": float(args.source_radius_max_change),
         "source_spectrum_max_drift": float(args.source_spectrum_max_drift),
-        "response_monotonic_tolerance": float(
-            args.response_monotonic_tolerance
-        ),
+        "response_monotonic_tolerance": float(args.response_monotonic_tolerance),
         "far_near_max_ratio": float(args.far_near_max_ratio),
         "model_trace_separation_min": float(args.model_trace_separation_min),
     }
     if any(not np.isfinite(value) or value < 0.0 for value in thresholds.values()):
         raise ValueError("thresholds must be finite and non-negative")
-    if not (
-        0.0
-        < thresholds["response_rms_min_r"]
-        < thresholds["response_rms_max_r"]
-    ):
+    if not (0.0 < thresholds["response_rms_min_r"] < thresholds["response_rms_max_r"]):
         raise ValueError("response RMS bounds must be positive and ordered")
 
     ident_path = _resolve(args.identifiability_summary)
@@ -577,17 +601,13 @@ def main() -> None:
     reference_path = _resolve(Path(identifiability["source_reference"]))
     reference = json.loads(reference_path.read_text(encoding="utf-8"))
     reference_rows = reference["rows"]
-    pair_templates = mediator_summary["models"]["relaxation_diffusion"][
-        "pair_rows"
-    ]
+    pair_templates = mediator_summary["models"]["relaxation_diffusion"]["pair_rows"]
     if len(reference_rows) != 6 or len(pair_templates) != 6:
         raise ValueError("exactly six inherited source-target pairs are required")
 
     cases: dict[tuple[int, str], dict[str, Any]] = {}
     pair_cases = []
-    for reference_row, template in zip(
-        reference_rows, pair_templates, strict=True
-    ):
+    for reference_row, template in zip(reference_rows, pair_templates, strict=True):
         target_key = (
             int(reference_row["target_seed"]),
             reference_row["target_case_sha256"],
@@ -646,15 +666,11 @@ def main() -> None:
     analysis_updates = int(round(args.analysis_memory_times / lambda_vector))
     if not np.isclose(burn_updates * lambda_vector, args.burn_memory_times):
         raise ValueError("burn interval must resolve to whole updates")
-    if not np.isclose(
-        analysis_updates * lambda_vector, args.analysis_memory_times
-    ):
+    if not np.isclose(analysis_updates * lambda_vector, args.analysis_memory_times):
         raise ValueError("analysis interval must resolve to whole updates")
     total_updates = burn_updates + analysis_updates
     source_sample_steps = np.arange(total_updates + 1, dtype=int)
-    target_sample_steps = _sample_steps(
-        total_updates, args.sample_every, burn_updates
-    )
+    target_sample_steps = _sample_steps(total_updates, args.sample_every, burn_updates)
 
     grid = LocalMediatorGrid(**mediator_summary["primary_grid"])
     if not np.isclose(grid.time_step, lambda_vector, rtol=0.0, atol=1e-15):
@@ -691,9 +707,7 @@ def main() -> None:
             source["state"],
             lambda_vector=lambda_vector,
             vector_mass=float(identifiability["vector_mass"]),
-            orientation_relaxation=float(
-                identifiability["orientation_relaxation"]
-            ),
+            orientation_relaxation=float(identifiability["orientation_relaxation"]),
         )
         source_rng = np.random.default_rng(
             source_noise_seed + 100_003 * int(source["seed"])
@@ -701,9 +715,7 @@ def main() -> None:
         source_trace = autonomous_oriented_source_trace(
             source_state,
             first_config,
-            source_noise=source_rng.normal(
-                size=(total_updates, first_config.dim)
-            ),
+            source_noise=source_rng.normal(size=(total_updates, first_config.dim)),
             sample_steps=source_sample_steps,
         )
         persistent_input = source_trace.carrier_orientations[1:]
@@ -719,25 +731,17 @@ def main() -> None:
         source_input_rms = {
             "persistent": float(
                 np.sqrt(
-                    np.mean(
-                        np.sum(
-                            np.square(persistent_input[analysis_slice]), axis=1
-                        )
-                    )
+                    np.mean(np.sum(np.square(persistent_input[analysis_slice]), axis=1))
                 )
             ),
             "one_step": float(
                 np.sqrt(
-                    np.mean(
-                        np.sum(np.square(one_step_input[analysis_slice]), axis=1)
-                    )
+                    np.mean(np.sum(np.square(one_step_input[analysis_slice]), axis=1))
                 )
             ),
         }
         source_spectra = normalized_shape_spectra(source_trace.shape_tensors)
-        source_radius_change = float(
-            np.max(np.abs(source_trace.radius_ratios - 1.0))
-        )
+        source_radius_change = float(np.max(np.abs(source_trace.radius_ratios - 1.0)))
         source_spectrum_drift = float(
             np.max(np.linalg.norm(source_spectra - source_spectra[0], axis=1))
         )
@@ -746,8 +750,7 @@ def main() -> None:
                 source_radius_change <= thresholds["source_radius_max_change"]
             ),
             "shape_bounded": bool(
-                source_spectrum_drift
-                <= thresholds["source_spectrum_max_drift"]
+                source_spectrum_drift <= thresholds["source_spectrum_max_drift"]
             ),
         }
 
@@ -758,9 +761,7 @@ def main() -> None:
                 + 100_003 * int(source["seed"])
             )
         )
-        target_noise = target_rng.normal(
-            size=(total_updates, first_config.dim)
-        )
+        target_noise = target_rng.normal(size=(total_updates, first_config.dim))
         target_radius = float(reference_row["target_radius"])
         model_rows: dict[str, Any] = {}
         trace_store: dict[str, dict[str, list[np.ndarray]]] = {}
@@ -793,9 +794,7 @@ def main() -> None:
                 for input_name in ("persistent", "one_step"):
                     forcing = (
                         couplings[model]
-                        * mediator_traces[input_name].values[
-                            1:, distance_index, :
-                        ]
+                        * mediator_traces[input_name].values[1:, distance_index, :]
                     )
                     response = paired_external_field_response(
                         target["state"],
@@ -902,9 +901,7 @@ def main() -> None:
             padded_one_step = np.vstack(
                 (np.zeros((1, first_config.dim)), one_step_input)
             )
-            analysis_steps = target_sample_steps[
-                target_sample_steps >= burn_updates
-            ]
+            analysis_steps = target_sample_steps[target_sample_steps >= burn_updates]
             plot_data = {
                 "source_times_memory": target_sample_steps * lambda_vector,
                 "persistent_source_norm": np.linalg.norm(
@@ -913,9 +910,7 @@ def main() -> None:
                 "one_step_source_norm": np.linalg.norm(
                     padded_one_step[target_sample_steps], axis=1
                 ),
-                "target_times_memory": (
-                    np.asarray(analysis_steps) - burn_updates
-                )
+                "target_times_memory": (np.asarray(analysis_steps) - burn_updates)
                 * lambda_vector,
                 "target_response": {
                     model: {
@@ -933,9 +928,7 @@ def main() -> None:
     model_pass_status = {}
     for model in mediators:
         model_distances = [
-            distance
-            for row in rows
-            for distance in row["models"][model]["distances"]
+            distance for row in rows for distance in row["models"][model]["distances"]
         ]
         persistent = [distance["persistent"] for distance in model_distances]
         passing = sum(bool(row["models"][model]["pair_pass"]) for row in rows)
@@ -960,9 +953,26 @@ def main() -> None:
         }
         model_pass_status[model] = bool(passing >= args.minimum_passing_pairs)
     separation_passing_pairs = sum(
-        all(item["persistent_gate"] for item in row["model_separation"])
-        for row in rows
+        all(item["persistent_gate"] for item in row["model_separation"]) for row in rows
     )
+    separation_summary = []
+    for distance_index, ratio in enumerate(distance_ratios):
+        values = np.asarray(
+            [row["model_separation"][distance_index]["persistent"] for row in rows],
+            dtype=float,
+        )
+        separation_summary.append(
+            {
+                "distance_ratio_pair_radius": float(ratio),
+                "passing_pairs": int(
+                    np.count_nonzero(values >= thresholds["model_trace_separation_min"])
+                ),
+                "pair_count": len(rows),
+                "minimum": float(np.min(values)),
+                "median": float(np.median(values)),
+                "maximum": float(np.max(values)),
+            }
+        )
     overall_passing_pairs = sum(bool(row["pair_pass"]) for row in rows)
     if all(model_pass_status.values()) and (
         separation_passing_pairs >= args.minimum_passing_pairs
@@ -982,9 +992,7 @@ def main() -> None:
             ),
         }
     elif sum(model_pass_status.values()) == 1:
-        survivor = next(
-            model for model, passed in model_pass_status.items() if passed
-        )
+        survivor = next(model for model, passed in model_pass_status.items() if passed)
         decision = {
             "status": "single_dynamic_architecture_survives_not_physical_selection",
             "model_pass_status": model_pass_status,
@@ -999,9 +1007,29 @@ def main() -> None:
                 "it does not establish the survivor as a physical field law."
             ),
         }
+    elif all(model_pass_status.values()):
+        decision = {
+            "status": "dynamic_common_source_gate_fail",
+            "failed_stage": "cross_model_separation",
+            "model_pass_status": model_pass_status,
+            "separation_passing_pairs": int(separation_passing_pairs),
+            "overall_passing_pairs": int(overall_passing_pairs),
+            "pair_count": len(rows),
+            "selected_next_step": "stop_or_reformulate_mediator_discrimination",
+            "interpretation": (
+                "Both fixed mediator branches satisfy the response, oddness, "
+                "source/target shape, and attenuation gates for all pairs. The "
+                f"preregistered cross-model separation criterion holds for only "
+                f"{separation_passing_pairs}/{len(rows)} pairs rather than the "
+                f"required {args.minimum_passing_pairs}/{len(rows)}. The present "
+                "autonomous-source response therefore does not robustly "
+                "distinguish the two inserted transport laws."
+            ),
+        }
     else:
         decision = {
             "status": "dynamic_common_source_gate_fail",
+            "failed_stage": "response_or_shape_or_attenuation",
             "model_pass_status": model_pass_status,
             "separation_passing_pairs": int(separation_passing_pairs),
             "overall_passing_pairs": int(overall_passing_pairs),
@@ -1050,6 +1078,7 @@ def main() -> None:
         "minimum_passing_pairs": int(args.minimum_passing_pairs),
         "rows": rows,
         "model_summary": model_summary,
+        "separation_summary": separation_summary,
         "decision": decision,
         "plot_data": plot_data,
         "summary_json": summary_path,

@@ -119,15 +119,24 @@ def test_report_keeps_physical_law_and_dimension_claims_closed(
             {
                 "target_seed": 1,
                 "source_seed": 2,
+                "source_input_rms": {"persistent": 0.03, "one_step": 1.0},
                 "source_gates": {"shape": True},
                 "models": {
                     "relaxation_diffusion": model_row,
                     "telegraph": model_row,
                 },
-                "model_separation": [
-                    {"persistent": 1.0, "one_step": 1.0}
-                ],
+                "model_separation": [{"persistent": 1.0, "one_step": 1.0}],
                 "pair_pass": True,
+            }
+        ],
+        "separation_summary": [
+            {
+                "distance_ratio_pair_radius": 2.5,
+                "passing_pairs": 1,
+                "pair_count": 1,
+                "minimum": 1.0,
+                "median": 1.0,
+                "maximum": 1.0,
             }
         ],
         "identifiability_summary": "reports/ident.json",
@@ -138,9 +147,7 @@ def test_report_keeps_physical_law_and_dimension_claims_closed(
         "command": ["python", "gate.py"],
     }
 
-    report = gate.build_report(
-        payload, tmp_path / "report.md", tmp_path / "figure.png"
-    )
+    report = gate.build_report(payload, tmp_path / "report.md", tmp_path / "figure.png")
 
     assert "not discovery of a physical field law" in report
     assert "neither selects three dimensions" in report
