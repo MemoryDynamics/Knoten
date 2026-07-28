@@ -34,6 +34,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
 | `experiments/current/kernels/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
 | `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
+| `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | vorregistriert | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
