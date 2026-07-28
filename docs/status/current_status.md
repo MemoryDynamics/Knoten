@@ -82,6 +82,7 @@ wichtig:
 7. `reports/response/oriented_history_current_audit_2026-07-21.md`
 8. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
 9. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
+10. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -95,6 +96,10 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
   mit gepaarten One-Way-Kontrollen.
 - `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-
   und Distanzmetriken fuer den konstruierten orientierten Kanal.
+- `src/emergenz_knoten/local_mediator.py`: lokale 1D
+  Relaxations-Diffusions- und Telegraph-Zustaende.
+- `src/emergenz_knoten/external_field_response.py`: gepaarte zeitabhaengige
+  Aktiv-/Flip-/Kanal-aus-Targetfortsetzung.
 - `experiments/current/`: reproduzierbare aktive Entry-Points.
 - `experiments/archive/`: historische oder nichtkanonische Skripte.
 - `data/processed/`: standardmaessig ignorierte Bulk-Outputs; nur reviewed
@@ -129,13 +134,19 @@ bestehen. Dies haertet den konstruierten Kanal gegen stateweises Retuning. Der
 Gauss-Readout erzwingt jedoch bereits raeumliche Abschwaechung und ist
 instantan; daraus folgt weder emergente Lokalitaet noch Propagation.
 
-Vor einer Reziprozitaetserweiterung folgt deshalb ein Holdout-Test eines
-lokalen Mediatorgesetzes: Source-Puls, gemeinsame feste Koeffizienten und die
-volle Relaxations-Diffusions-Peakkurve gegen den linearen Finite-Front-Onset
-des Wave-/Telegraph-Zustands. Ein pauschales `r^2`-Gate waere bei endlichem
-Zerfall falsch, weil der diffusive Peak im Fernbereich selbst gegen lineare
-Distanzskalierung uebergeht. Reziprozitaet bleibt mindestens bis zu einem
-kontrollgetrennten dynamischen One-Way-Pass gesperrt.
+Der lokale Mediator-Holdout besteht als Architekturtest fuer beide eingesetzten
+Regeln. Relaxations-Diffusion erreicht maximal `9.09%` Lag-Vorhersagefehler und
+`0.31%` Aufloesungsdrift, Telegraph `7.88%` bzw. `4.91%`; beide bestehen
+`5/5` Holdout-Paare bei Shape-Stoerungen unter `3.72e-4`. Das Ergebnis ist
+**mechanism underdetermined**, weil die jeweilige Skalierung in der
+Feldgleichung steckt. Es ist keine Propagationsgesetz-Entdeckung.
+
+Vor einem dynamischen One-Way-Lauf folgt deshalb ein Identifizierbarkeitsaudit:
+Traegt die autonome orientierte Source kontrollgetrennte Spektralleistung in
+Baendern, in denen sich diffusive und Telegraph-Transferfunktion in Betrag
+oder Phase ausreichend unterscheiden? Ohne solchen Inputkontrast kann ein
+weiterer Lauf die Mechanismen nicht entscheiden. Reziprozitaet und ein
+`d=3`-Claim bleiben gesperrt.
 
 ## Paper-Status
 
@@ -144,7 +155,8 @@ kontrollgetrennten dynamischen One-Way-Pass gesperrt.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
 - **Paper II:** Propagation und Raumzeitkinematik bleiben gesperrt, bis ein
-  lokaler, kontrollgetrennter Transportkanal besteht.
+  lokaler Transportkanal nicht nur konstruiert, sondern gegen eine unabhaengige
+  Source-Observable identifiziert ist.
 - **Paper III:** offene spekulative Tuer ohne Claim-Status.
 
 ## Reproduzierbarkeitsregeln

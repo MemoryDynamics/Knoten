@@ -251,7 +251,7 @@ onset of a damped wave/telegraph mediator on held-out pairs and distances.
 
 Report: `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`.
 
-## Preregistered Local-Mediator Gate
+## Local-Mediator Gate Result
 
 `local_mediator.py` now supplies two explicit local finite-difference Markov
 extensions on the source-target axis. `external_field_response.py` applies a
@@ -286,6 +286,22 @@ Passing either arm establishes only implementation and knot-envelope
 compatibility: the corresponding transport behavior is inserted by the model.
 A dynamic autonomous source waveform is needed before the laws can be
 empirically discriminated, and reciprocal coupling stays closed.
+
+The clean run at revision `64c2826` passes both inserted architectures. The
+relaxation-diffusion arm has median/maximum holdout lag errors of
+`1.12%/9.09%` and maximum primary/fine resolution drift `0.31%`; the
+telegraph arm has `5.55%/7.88%` and `4.91%`. Both pass all five complete
+holdout pairs. Across all target cases, final response is
+`8.37e-4..8.96e-3 R_target`; paired shape and radius changes remain below
+`3.72e-4` and `1.31e-4`.
+
+Decision: **architecture pass, mechanism underdetermined**. A next dynamic
+run is conditional on an identifiability audit: the autonomous oriented source
+must have controlled spectral power in bands where the analytic diffusive and
+telegraph transfer functions differ measurably. Otherwise both simulations
+would merely replay behavior inserted by construction.
+
+Report: `reports/response/local_oriented_mediator_gate_2026-07-28.md`.
 
 Introducing a field does not select three dimensions. The current knot states
 remain in the supplied `d=3` embedding while the mediator uses one relational

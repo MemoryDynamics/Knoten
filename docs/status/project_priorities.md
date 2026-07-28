@@ -161,6 +161,33 @@ absoluten dimensionslosen Parameter ueber mehrere Ambient-Dimensionen halten
 und einen reproduzierbaren externen Response-/Modenrang nahe drei samt
 Unterdrueckung weiterer Richtungen zeigen.
 
+Ergebnis auf sauberem Commit `64c2826`: Beide konstruierten Regeln bestehen
+ihre eigenen Architektur- und Holdout-Gates. Relaxations-Diffusion erreicht
+`1.12%` medianen und `9.09%` maximalen Lag-Vorhersagefehler bei `0.31%`
+maximaler Primaer/Fine-Aufloesungsdrift; Telegraph `5.55%`, `7.88%` und
+`4.91%`. Jeweils `5/5` vollstaendige Holdout-Paare bestehen. Die finalen
+Targetantworten liegen ueber alle Faelle bei `8.37e-4..8.96e-3 R_target`;
+Shape- und Radiusstoerungen bleiben unter `3.72e-4` bzw. `1.31e-4`.
+
+Entscheidung: **architecture pass, mechanism underdetermined**. Die Skalierung
+ist in der jeweiligen Feldgleichung eingesetzt; der Lauf entdeckt keine der
+beiden Regeln. Reziprozitaet und ein `d=3`-Claim bleiben gesperrt.
+
+Naechster diskriminierender Schritt ohne Parametersweep:
+
+1. analytische Transferfunktionen
+   `H_D(k,omega)=1/(D k^2+mu-i omega)` und
+   `H_T(k,omega)=1/(c^2 k^2+omega_0^2-omega^2-2 i gamma omega)` vergleichen;
+2. auf autonomen orientierten Source-Traces pruefen, ob kontrollgetrennte
+   Leistung in Frequenzbaendern liegt, in denen Betrag oder Phase der beiden
+   Kandidaten praktisch unterscheidbar sind;
+3. Frequenzband, Spektralschaetzer und Mindestkontrast vorab fixieren;
+4. nur bei bestandenem Identifizierbarkeitsgate denselben dynamischen
+   One-Way-Source-Trace ohne Retuning durch beide Mediatoren schicken.
+
+Fail bedeutet: Die aktuellen Source-Daten koennen die Mediatorfamilien nicht
+identifizieren; dann kein weiterer Lauf nur zur Erzeugung erwartbarer Kurven.
+
 ## P2: Scheinmoden analytisch einordnen
 
 Die komplexen AR-Nebenmoden ueberlappen fuer aktiv und `eta=0` praktisch

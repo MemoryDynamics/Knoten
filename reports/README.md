@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-26.
+Stand: 2026-07-28.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -106,12 +106,19 @@ identifizierten physikalischen Moden.
   - Das instantane Gauss-Readout und `sigma_v=2.5 R_source` sind gesetzt und
     erzeugen den Distanzabfall. Der Befund ist keine emergente Lokalitaets-,
     Propagations-, QFT- oder Teilchenevidenz.
+- [Lokales Mediator-Holdout-Gate](response/local_oriented_mediator_gate_2026-07-28.md)
+  - **pipeline-only, mechanism underdetermined:** Relaxations-Diffusion und
+    Telegraph bestehen je `5/5` Holdout-Paare, die vorab festgelegten Lag- und
+    Aufloesungsgates sowie Shape-/Flip-Kontrollen.
+  - Die Transportgesetze sind Modellinputs. Der Pass validiert lokale
+    Markov-Erweiterungen und feste Kopplung, entdeckt aber weder ein
+    Propagationsgesetz noch endliche Kausalgeschwindigkeit oder `d=3`.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Das feste-Kopplung-Gate ist
-bestanden; als naechstes folgt der kontrollierte Holdout-Vergleich eines
-lokalen Relaxations-Diffusionsmediators (`t~r^2`) mit einem gedaempften
-Wave-/Telegraph-Zustand (`t~r`). Erst kontrollgetrennte, distanzskalierende
-Lags rechtfertigen eine reziproke Mehrknotenprobe.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Vor einem dynamischen
+One-Way-Lauf wird geprueft, ob autonome Source-Traces ueberhaupt
+kontrollgetrennte Spektralleistung in den zwischen beiden Transferfunktionen
+unterscheidbaren Frequenzbaendern tragen. Ohne Identifizierbarkeit kein
+weiterer konstruktiver Propagationslauf.
 
 ### 5. Governance und Kuration
 

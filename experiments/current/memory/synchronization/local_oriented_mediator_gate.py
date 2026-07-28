@@ -506,8 +506,9 @@ def build_report(
             "pipeline, and compatibility with the current scalar knot envelope. "
             "It does not discover a propagation law: diffusion or finite-front "
             "transport was inserted in the corresponding update rule. The two "
-            "constructed outputs can be discriminated physically only by an "
-            "independent source waveform or observable not used to define them.",
+            "constructed transfer functions can be distinguished only if an "
+            "independent source waveform excites their differing frequency bands. "
+            "Choosing a physical law still needs an external criterion or data.",
             "",
             "No reciprocal interaction, photon, spin, charge, particle, Lorentz, "
             "QFT, or finite-signal-speed claim follows. A finite-difference "
@@ -898,7 +899,7 @@ def main() -> None:
         decision = {
             "status": "architecture_pass_mechanism_underdetermined",
             "passing_models": passing_models,
-            "selected_next_step": "dynamic_source_waveform_discrimination",
+            "selected_next_step": "autonomous_source_spectrum_identifiability_audit",
             "interpretation": (
                 "Both inserted mediator laws pass their own implementation and "
                 "fixed-coupling knot-envelope gates. The current experiment cannot "
@@ -909,7 +910,7 @@ def main() -> None:
         decision = {
             "status": "single_architecture_pass",
             "passing_models": passing_models,
-            "selected_next_step": "dynamic_source_waveform_discrimination",
+            "selected_next_step": "autonomous_source_spectrum_identifiability_audit",
             "interpretation": (
                 "Only one inserted mediator law remains compatible with the fixed "
                 "numerical and knot-envelope gates. This is an architecture result, "
