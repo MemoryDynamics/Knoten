@@ -62,6 +62,12 @@ relativen Fehler. Die erweiterte Reconciliation ueber neun aktive
 Reparametrisierung `A_eff=A_att-9`; auf dieser Achse kollabieren Ein- und
 Zweiskalen-KPIs numerisch.
 
+Der analytische LoG-/Taylor-Audit zeigt, dass dieselbe lokale Kruemmung mit
+einem exakt zero-mean, abklingenden Kernel vereinbar ist. Er waehlt aber keine
+Amplitude aus: `A_eff=26` ist die exakte Reparametrisierung der gesetzten
+`(1,35)`-Referenz. `27=3^3` und `36=27+9` erfordern eine zusaetzliche, von den
+Daten nicht gestuetzte Identifikation; sie sind kein Paper-I-Befund.
+
 Das feste-g-Gate bis `R_linear/L=0.3` findet eine seed-stabile `6.2%`-
 Superlinearitaet, aber keine relevante D_mem- oder Roundness-Aenderung. Seine
 vorregistrierte Composite-Regel bleibt formal `inconclusive`. Die nachgelagerte

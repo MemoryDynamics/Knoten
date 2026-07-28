@@ -17,6 +17,8 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
 ## Aktuelle Entscheidungsgrafiken
 
 - `draft/kernels/core_2026-07-19/`: gematchter Kernel-Familienvergleich.
+- `draft/kernels/core_2026-07-28/`: curvature-matched LoG-/Taylor-Vergleich
+  mit lokaler Kraft und kumuliertem Kernelintegral.
 - `draft/kernels/nonlinearity_2026-07-19/`: feste-`g`-Nichtlinearitaets- und
   Skalenpruefung.
 - `draft/memory/low_mode_identity_audit_2026-07-20.png`: negatives

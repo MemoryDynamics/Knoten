@@ -25,6 +25,9 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
 - [Kernel-Familienvergleich](kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md)
   - **supported:** Ein- und Zweiskalenkernel kollabieren bei gematchter lokaler
     Kruemmung auf `A_eff=A_att-9`.
+- [LoG-/Taylor-Kernel-Audit](kernels/core/log_taylor_kernel_audit_2026-07-28.md)
+  - **structural:** ein curvature-matched LoG ist exakt zero mean; er erklaert
+    weder die bisherige Amplitude noch selektiert er `27`, `36` oder `d=3`.
 - [Long-Run-Reconciliation](long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md)
   - **supported:** neun aktive `N=30M/300M`-Slices folgen dem linearen
     Finite-Memory-Radius bis maximal `1.16%` relativ.

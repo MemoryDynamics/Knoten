@@ -134,6 +134,30 @@ Reports:
 und
 `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`.
 
+Eine einparametrige abklingende Zero-Mean-Vervollstaendigung derselben lokalen
+Taylor-Kruemmung ist der Laplacian-of-Gaussian-Kernel. Mit `u=r/L` gilt
+
+```text
+K_LoG(r) = B (u^2-d) exp(-u^2/2),
+B = kappa L^2/(d+2).
+```
+
+Er besitzt exakt `int K_LoG dx=0` und `Hess K_LoG(0)=kappa I`. Fuer die
+bisherige q=3-Referenz in d=3 ist `kappa=26/9` und bei `L=3` daher
+`A_eff=kappa L^2=26`, `B=26/5=5.2` und die zentrale Tiefe `d B=15.6`.
+Diese amplitudenartigen Zahlen haengen von der LoG-Normierung ab. Der
+Volumenfaktor `q^d=27` und der rohe Wert `36=27+q^2` entstehen nur, wenn man
+zusaetzlich und bislang unbegruendet `A_eff=q^d` setzt; die zweiskalige
+Zero-Mean-Bedingung selbst verlangt umgekehrt `A_att=q^-d=1/27`.
+
+Bei gleicher linearer Kruemmung unterscheiden sich die dimensionslosen ersten
+nichtlinearen Kraftkoeffizienten bereits: `(1,35)` liefert `-23/26`, der
+gematchte Ein-Kernel `1/2` und LoG in d=3 `7/10`. Der kompakte Ast liegt jedoch
+bei `R_mem/L=6.47e-5` und kann diese Terme nicht identifizieren. LoG ist daher
+eine feste analytische Nullfamilie, keine Herleitung der bisherigen Amplituden
+und derzeit kein Anlass fuer einen weiteren blinden Lauf. Report:
+`reports/kernels/core/log_taylor_kernel_audit_2026-07-28.md`.
+
 ## Spektrale rho-Reprasentation und dynamische Felderweiterung
 
 Auf einer periodischen 1D-Box der Laenge `L_box` kann dasselbe skalare Memory

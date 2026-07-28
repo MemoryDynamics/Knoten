@@ -29,6 +29,7 @@ Zu entfernen oder klar als historische Hypothese zu markieren:
 - isolierte nichtlineare Metastabilitaet;
 - `D_mem ~=3` als Dimensionsselektion;
 - Spin-, Photon-, Ladungs-, Neutralitaets- oder Teilchensprache;
+- exakte ganzzahlige Kernelamplituden aus geometrischer Numerologie;
 - Relaxationsrate als physikalische Masse.
 
 Fertig, wenn `paper/paper_i`, `docs/status/paper_claims.md` und die
@@ -336,6 +337,8 @@ Ein Arbeitszweig wird beendet oder neu formuliert, wenn eines gilt:
 
 - reziproke Mehrknotenkopplung;
 - weitere reine Skalar-Amplituden- oder Epsilon-Sweeps;
+- dynamische LoG-Vergleichslaeufe, solange der beobachtete Ast nur
+  `R_mem/L << 1` und damit dieselbe lineare Kruemmung abtastet;
 - eindeutige externe `d=3`-Selektion;
 - harte endliche Signalgeschwindigkeit aus direkter Fernkopplung;
 - Lorentz-, Quanten- und Standardmodellableitungen;
@@ -344,7 +347,8 @@ Ein Arbeitszweig wird beendet oder neu formuliert, wenn eines gilt:
 ## Abgeschlossene Evidenzbloecke
 
 1. **Kernel und Skalarast:** Signkorrektur, matched Ablation, lineare
-   Reconciliation und feste-`g`-Skalenpruefung.
+   Reconciliation, feste-`g`-Skalenpruefung und analytischer LoG-/Taylor-Audit
+   als zero-mean Nullfamilie ohne Amplitudenselektion.
 2. **Dimension:** Ambient-Sweeps, D_spec-Sensitivitaet und Rohsnapshot-Retest;
    kein robuster externer 3D-Claim.
 3. **Memory-Feld:** spektrale Reprasentation, Relaxations-Diffusion,

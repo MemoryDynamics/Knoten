@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-21.
+Stand: 2026-07-28.
 
 ## Worum es geht
 
@@ -43,6 +43,9 @@ Belastbar derzeit:
 - Der aktuelle kleine-Radius-Ast laesst sich auf einen attraktiven
   Ein-Kernel-Fall reduzieren: Die seed-gematchten (1,35)- und
   (0,26)-Varianten stimmen im N=300k-Slice bis etwa 1e-8 relativ ueberein.
+- Ein curvature-matched Laplacian-of-Gaussian liefert eine abklingende,
+  exakt zero-mean Nullfamilie. Er bestaetigt `A_eff=26` als
+  Reparametrisierung, selektiert aber weder `27`, `36` noch `d=3`.
 - Der A_att=0..40-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
   Fuer A_att>=5 folgt der dynamische Radius der linearen
   Memory-Center-Vorhersage mit 0.94 Prozent medianem Fehler.
@@ -69,6 +72,8 @@ Noch nicht belastbar:
 
 - ein spezifisch zweiskaliger Baseline-Knotenmechanismus; die gematchte
   attraktive Ein-Kernel-Ablation ist im aktuellen Regime numerisch gleich;
+- ein exakter ganzzahliger Amplitudenwert; insbesondere ist `36=27+9`
+  derzeit eine unbelegte Zusatzhypothese und kein Scanbefund;
 - eindeutige externe d=3-Selektion; D_mem nahe der Ambient-Dimension ist
   im linearen isotropen Regime zu erwarten und kein Selektionssatz;
 - stabile skalare Spin-, Phasen- oder Photonmoden;

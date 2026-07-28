@@ -28,6 +28,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   finite-memory Zustand vollstaendig und checksum-validiert.
 - Die spektrale `rho`-Darstellung ist fuer die getestete periodische
   1D-Reprasentation numerisch mit der direkten Historie reconciliiert.
+- Ein auf die bestehende lokale Kruemmung gematchter LoG-Kernel ist analytisch
+  abklingend und exakt zero mean. Das ist eine verfuegbare Nullfamilie, keine
+  Evidenz fuer Neutralitaet oder eine bestimmte Amplitude.
 
 ### Numerisch gestuetzt
 
@@ -54,6 +57,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
+- Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
+  folgt `A_eff=26` aus der aktuellen Parametrisierung; `27=3^3` und der daraus
+  hypothetisch gebildete Rohwert `36` sind nicht dynamisch hergeleitet.
 - Komplexe AR-Moden sind nicht von `eta=0` getrennt und nicht segmentstabil;
   sie sind keine Oszillations- oder Photonenevidenz.
 - `D_mem` nahe drei im 3D-Embedding ist keine Dimensionsselektion.

@@ -44,6 +44,17 @@ def test_log_matches_curvature_and_has_zero_total_integral() -> None:
     assert totals["log"] == 0.0
 
 
+def test_plotted_log_profile_integrates_to_zero_numerically() -> None:
+    metrics = audit.build_metrics(_args())
+    u = np.linspace(0.0, 10.0, 50_001)
+    potential = audit.kernel_profiles(u, metrics)["log"]["potential"]
+    normalized = potential / (metrics.local_curvature * metrics.sigma_att**2)
+
+    radial_integral = np.trapezoid(u ** (metrics.dimension - 1) * normalized, u)
+
+    assert radial_integral == pytest.approx(0.0, abs=1.0e-12)
+
+
 def test_27_and_36_are_a_separate_unproved_identification() -> None:
     metrics = audit.build_metrics(_args())
 

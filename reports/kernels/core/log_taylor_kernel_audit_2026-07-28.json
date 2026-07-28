@@ -1,0 +1,52 @@
+{
+  "claims": {
+    "current_and_matched_one_scale_share_local_curvature": true,
+    "integer_36_requires_extra_effective_equals_volume_hypothesis": true,
+    "log_derives_current_amplitudes": false,
+    "log_is_exactly_zero_mean": true
+  },
+  "description": "Analytic curvature-matched comparison of the current Gaussian families and a zero-mean Laplacian-of-Gaussian completion.",
+  "dimensionless_force_cubic_coefficients": {
+    "attractive_only": 0.5,
+    "log": 0.7,
+    "two_scale": -0.8846153846153847
+  },
+  "dimensionless_total_radial_integrals": {
+    "attractive_only": -1.2533141373155003,
+    "log": 0.0,
+    "two_scale": -1.685368298612297
+  },
+  "generated_utc": "2026-07-28T21:28:11Z",
+  "git_revision": "97e559f15d3f447bb73a8e1829fee667e6f8263c",
+  "git_status": "",
+  "inputs": {
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "dimension": 3,
+    "figure": "figures\\draft\\kernels\\core_2026-07-28\\log_taylor_kernel_audit.png",
+    "max_radius_over_l": 5.0,
+    "memory_radius": 0.000194163,
+    "report": "reports\\kernels\\core\\log_taylor_kernel_audit_2026-07-28.md",
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "summary_json": "reports\\kernels\\core\\log_taylor_kernel_audit_2026-07-28.json"
+  },
+  "metrics": {
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "dimension": 3,
+    "effective_amplitude": 26.0,
+    "local_curvature": 2.888888888888889,
+    "log_central_depth": 15.600000000000001,
+    "log_laplacian_amplitude": 46.800000000000004,
+    "log_polynomial_amplitude": 5.2,
+    "matched_attractive_amplitude": 26.0,
+    "raw_amplitude_if_effective_equals_volume_ratio": 36.0,
+    "sampled_radius_over_reference_scale": 6.472099999999999e-05,
+    "scale_ratio": 3.0,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "two_scale_zero_mean_attractive_amplitude": 0.037037037037037035,
+    "volume_ratio": 27.0
+  }
+}
