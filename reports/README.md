@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-28.
+Stand: 2026-07-29.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -51,6 +51,12 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 
 ### 3. Memory-Feld und reduzierte Moden
 
+- [Lokaler Feldoperator-Audit](kernels/field/local_field_operator_audit_2026-07-29.md)
+  - **structural:** Eine eingeschraenkte lokale Ableitungsentwicklung matcht
+    den Gauss-Transfer bis `k^4`, realisiert Zero Mean mit `s0=0` und zeigt
+    die Finite-k-Schwelle sowie die vollrangige `H I_d`-Null exakt.
+  - `a2<0`, nichtlineare Saettigung, Quantisierung und `d=3` sind neue
+    Annahmen bzw. offene Mechanismen, keine Auditresultate.
 - [Spektrale rho-Reprasentation](memory/spectral_rho_field_pilot_2026-07-19.md)
   - **structural + pipeline-only:** Historie, Masse, Kontraktion und Kraft sind fuer
     die getestete 1D-Reprasentation reconciliiert.

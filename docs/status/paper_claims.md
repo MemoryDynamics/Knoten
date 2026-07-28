@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-26.
+Stand: 2026-07-29.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -67,6 +67,14 @@ einem exakt zero-mean, abklingenden Kernel vereinbar ist. Er waehlt aber keine
 Amplitude aus: `A_eff=26` ist die exakte Reparametrisierung der gesetzten
 `(1,35)`-Referenz. `27=3^3` und `36=27+9` erfordern eine zusaetzliche, von den
 Daten nicht gestuetzte Identifikation; sie sind kein Paper-I-Befund.
+
+Der lokale Feldoperator-Audit formuliert eine eingeschraenkte systematische
+Alternative zur freien Kernelwahl. Der Gauss-Transfer wird durch positive
+`k^2/k^4`-Operatoren bis vierter Ordnung gematcht; `s0=0` setzt den Nullmodus
+exakt auf null. Ein negatives `k^2` mit `k^4`-Stabilisierung waere dagegen
+eine neue endliche-Wellenzahl-Instabilitaet und ist nicht aus dem Random Walk
+abgeleitet. Dieser klassische Musterbildungsansatz gehoert nicht zum
+Paper-I-Kernclaim und liefert weder Quantisierung noch `d=3`.
 
 Das feste-g-Gate bis `R_linear/L=0.3` findet eine seed-stabile `6.2%`-
 Superlinearitaet, aber keine relevante D_mem- oder Roundness-Aenderung. Seine
@@ -176,6 +184,7 @@ nicht.
 | Lokale Relaxations-Diffusions- und Telegraph-Mediatoren sind mit dem Kanal kompatibel | pipeline-only: beide eingesetzten Regeln bestehen ihre Lag-, Aufloesungs- und 5/5 Holdout-Gates bei einer globalen Kopplung pro Gesetz | keine Auswahl eines Propagationsgesetzes; der nachgeschaltete dynamische Modellselektionsversuch ist negativ |
 | Autonome orientierte Sources koennen die beiden Mediatorregeln spektral unterscheiden | pipeline-only gestuetzt: 6/6 Sources bestehen alle drei Distanzen; minimaler gewichteter komplexer Kontrast 1.064 und Segmentdrift maximal 0.1568 | beide Regeln unterscheiden sich fast im gesamten angeregten Band; persistent/Ein-Schritt-Kontrast 0.951..1.008 stuetzt keine Persistenzspezifitaet und waehlt kein physikalisches Gesetz |
 | Dynamische autonome Source waehlt eine lokale Mediatorregel | negatives Diskriminationsgate: beide Regeln bestehen 6/6 Response-, Oddness-, Shape- und Distanzgates, aber nur 4/6 statt 5/6 Paare bestehen den relativen Traceabstand gleichzeitig an allen drei Distanzen | nicht retunen; ohne unabhaengige Zieltrajektorie oder neuen Mechanismus keine Feldgesetz-Auswahl und keine Reziprozitaet |
+| Lokale skalare Operatorentwicklung selektiert einen physischen Kernel | nicht gestuetzt: sie systematisiert die Gauss-/Zero-Mean-Nullfamilien und lokalisiert `a2<0` als erste neue Finite-k-Annahme; komponentenweises `H I_d` bleibt vollrangig | genau einen festen Finite-k-Piloten gegen positive-`a2`-, cubic-off-, source-off- und eta-zero-Kontrollen vorregistrieren; ein Pass waere nur klassische Musterbildung |
 | Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | unabhaengige Formationszustaende und shape-bounded/coherent One-Way-Transport vor Reziprozitaet; keine Ladungssprache |
 | Extern bewegte skalare Quelle erzeugt kontrollgetrennte Formdynamik | nicht gestuetzt: der Launch ist nicht durchgehend formkohaerent; bis N=103M waechst die Zentrumantwort nahezu linear auf 20.844 Radien, aber 0/5 Seeds bestehen das Formmodifikationsgate und die Shape-Halbwelle folgt der freien Kontrolle | mechanistisch anderen lokalen/retardierten oder orientierten Kanal vorregistrieren; keine Reziprozitaet vorher |
 | Eindeutige `d=3`-Selektion | nicht gestuetzt; seeded d-alpha-N-Scan zeigt kein stabiles Plateau, und der aktuelle komponentenweise Mediator besitzt den rang-erhaltenden Ambient-Transfer `H I_d` | nicht behaupten; vor cross-d-Rechenlaeufen erst einen falsifizierbaren Mechanismus fuer die Unterdrueckung zusaetzlicher Richtungen formulieren |

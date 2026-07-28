@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-28.
+Stand: 2026-07-29.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -14,7 +14,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. | kontrollierte co-moving Relaxationswolke | kein isolierter nichtlinearer Knoten und kein Phasenuebergang |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
-| Spektrales Memory-Feld | Fourier-`rho` reproduziert das exponentielle Memory; Relaxations-Diffusion glaettet kontrolliert. | kompakte Reprasentation bzw. explizite Modellerweiterung | Eigenvektor-/Segmentgate isoliert keinen stabilen physikalischen Modus |
+| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. Eine lokale skalare Ableitungsentwicklung reproduziert den Gausskern bis `k^4` und macht Zero-Mean- sowie Stabilitaetsbedingungen explizit. | kompakte Reprasentation und analytisch kontrollierte Modellfamilien | das Vorzeichen des `k^2`-Terms, Nichtlinearitaeten und ein Rangreduktionsmechanismus sind nicht hergeleitet |
 | Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
@@ -31,6 +31,11 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 - Ein auf die bestehende lokale Kruemmung gematchter LoG-Kernel ist analytisch
   abklingend und exakt zero mean. Das ist eine verfuegbare Nullfamilie, keine
   Evidenz fuer Neutralitaet oder eine bestimmte Amplitude.
+- Die eingeschraenkte lokale skalare Feldentwicklung
+  `tau d_t phi=-(c0-c2 Delta+c4 Delta^2)phi+(s0-s2 Delta)rho+...`
+  besitzt den stationaeren Transfer
+  `H(k)=(s0+s2 k^2)/(c0+c2 k^2+c4 k^4)`. Sie matcht den normierten
+  Gausskernel bis `k^4`; `s0=0` erzwingt exakt `H(0)=0`.
 
 ### Numerisch gestuetzt
 
@@ -71,6 +76,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Ambient-Dimension drei selektieren: Seine Ambient-Transfermatrix ist
   proportional zu `I_d` und erhaelt ohne weiteren Mechanismus den Rang einer
   vollrangigen Source.
+- Der vorhandene Random Walk bestimmt weder einen negativen `k^2`-Term noch
+  quadratische/kubische Feldnichtlinearitaeten. Eine endliche-Wellenzahl-
+  Instabilitaet, diskrete Aeste oder Quantisierung sind daher nicht aus den
+  bisherigen Annahmen abgeleitet.
 
 ### Offene Hypothesen
 
@@ -84,6 +93,11 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Modenrang; eine 3D-Feldsimulation waere nur eine 3D-Annahme.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
+- Ein negativer dimensionsloser `k^2`-Koeffizient in
+  `P(u)=1+a2 u^2+u^4` waere ein klarer neuer Musterbildungsmechanismus. Erst
+  ein vorregistrierter Pilot mit positiver-`a2`-, cubic-off-, source-off- und
+  eta-zero-Kontrolle darf pruefen, ob daraus robuste endliche Wellenzahlen
+  statt bloss eingesetzter klassischer Musterbildung entstehen.
 
 ## Kanonische Evidenzschiene
 
@@ -103,6 +117,7 @@ wichtig:
 10. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
 11. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
 12. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
+13. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -194,6 +209,14 @@ Komponente mit demselben skalaren Filter. Er besitzt keinen Mechanismus, der
 bei `d>3` gerade drei Richtungen aktiv laesst. Ein cross-`d`-Test wird erst
 sinnvoll, nachdem eine solche rangreduzierende Dynamik explizit formuliert und
 vor dem Lauf falsifizierbar gemacht wurde.
+
+Der analytische lokale Feldoperator-Audit schliesst diese Rang-Null nun als
+getestete Paketfunktion ab. Zugleich trennt er die bisherige Gauss-/LoG-
+Nullfamilie von einem moeglichen neuen Mechanismus: Erst `a2<0` in
+`1+a2 u^2+u^4` erzeugt ein bevorzugtes endliches Wellenzahlband. Der
+kritische Wert `a2=-2`, eine positive nichtlineare Saettigung und eine
+komponentenuebergreifende Ordnung sind jedoch zusaetzliche Annahmen. Deshalb
+folgt weder Quantisierung noch `d=3` aus diesem Audit.
 
 ## Paper-Status
 

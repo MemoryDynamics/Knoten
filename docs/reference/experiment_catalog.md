@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-26.
+Stand: 2026-07-29.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -34,7 +34,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
 | `experiments/current/kernels/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
 | `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
-| `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | vorregistriert | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
+| `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | abgeschlossen | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
@@ -818,6 +818,7 @@ Modellklasse.
 | `reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` | festes-g-R/L-Gate | Vorregistriert formal inconclusive; seed-stabile 6.2 Prozent Radiusabweichung, aber stabile Memory-Shape. |
 | `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md` | Residence-Skalenaudit | Feste Voxel sind radiusabhaengig; co-moving Residence ist fuer aktiv und eta=0 gesaettigt. Keine unabhaengige Metastabilitaetsstuetze. |
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
+| `reports/kernels/field/local_field_operator_audit_2026-07-29.md` | Lokaler Feldoperator-Audit | Eingeschraenkte Ableitungsbasis; Gaussian-k4-Match, `s0=0`-Zero-Mean, Finite-k-Schwelle bei `a2=-2` und exakte `H I_d`-Ambient-Rang-Null. Keine Quantisierungs- oder d=3-Evidenz. |
 | `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
 | `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
 | `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |

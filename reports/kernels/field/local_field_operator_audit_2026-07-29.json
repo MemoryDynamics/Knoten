@@ -1,0 +1,161 @@
+{
+  "ambient_rank_null": {
+    "input_rank": 10,
+    "normalized_transfer_singular_values": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "output_rank": 10,
+    "response_at_u_1": [
+      0.6153846153846154,
+      0.0
+    ],
+    "transfer_is_scalar_identity": true,
+    "transfer_shape": [
+      10,
+      10
+    ]
+  },
+  "cases": {
+    "compensated_source": {
+      "biharmonic_coefficient": 10.125,
+      "cubic_saturation": 0.0,
+      "gradient_coefficient": 4.5,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 0.0,
+      "source_laplacian_coefficient": 9.0
+    },
+    "finite_k_critical": {
+      "biharmonic_coefficient": 81.0,
+      "cubic_saturation": 0.0,
+      "gradient_coefficient": -18.0,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 1.0,
+      "source_laplacian_coefficient": 0.0
+    },
+    "finite_k_stable": {
+      "biharmonic_coefficient": 81.0,
+      "cubic_saturation": 0.0,
+      "gradient_coefficient": -16.2,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 1.0,
+      "source_laplacian_coefficient": 0.0
+    },
+    "finite_k_unstable": {
+      "biharmonic_coefficient": 81.0,
+      "cubic_saturation": 1.0,
+      "gradient_coefficient": -19.8,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 1.0,
+      "source_laplacian_coefficient": 0.0
+    },
+    "gaussian_k4_match": {
+      "biharmonic_coefficient": 10.125,
+      "cubic_saturation": 0.0,
+      "gradient_coefficient": 4.5,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 1.0,
+      "source_laplacian_coefficient": 0.0
+    },
+    "relaxation_diffusion": {
+      "biharmonic_coefficient": 0.0,
+      "cubic_saturation": 0.0,
+      "gradient_coefficient": 4.5,
+      "mass_coefficient": 1.0,
+      "quadratic_nonlinearity": 0.0,
+      "relaxation_time": 1.0,
+      "source_coefficient": 1.0,
+      "source_laplacian_coefficient": 0.0
+    }
+  },
+  "claims": {
+    "componentwise_isotropic_field_selects_rank_three": false,
+    "finite_k_instability_is_already_derived": false,
+    "finite_k_instability_is_minimal_open_mechanism": true,
+    "gaussian_fixes_low_k_coefficients_through_k4": true,
+    "inherited_symmetries_forbid_quadratic_field_term": false,
+    "quantization_established": false,
+    "random_walk_alone_selects_field_operator": false
+  },
+  "compensated_source": {
+    "zero_mean": true,
+    "zero_mode_response": 0.0
+  },
+  "description": "Fixed analytic audit of the lowest even-derivative local scalar field family allowed by the current model assumptions.",
+  "gaussian_matching": {
+    "exact_series": "1 - u^2/2 + u^4/8 + O(u^6)",
+    "k4_denominator": "1 + u^2/2 + u^4/8",
+    "k4_max_abs_error_u_le_0p5": 0.00026171810505970505,
+    "k4_max_abs_error_u_le_1": 0.008853955671981995,
+    "rd_denominator": "1 + u^2/2",
+    "rd_max_abs_error_u_le_0p5": 0.0063919863042933844,
+    "rd_max_abs_error_u_le_1": 0.060136006954033205
+  },
+  "generated_utc": "2026-07-28T22:15:40Z",
+  "git_revision": "4ff7afc5320af2fd6ad262610cdd42fd0db530bf",
+  "git_status": "",
+  "inputs": {
+    "ambient_dimension": 10,
+    "gaussian_length": 3.0,
+    "max_dimensionless_wavenumber": 3.0
+  },
+  "operator_equation": "tau d_t phi = -c0 phi + c2 Delta phi - c4 Delta^2 phi - v phi^2 - u phi^3 + s0 rho - s2 Delta rho",
+  "outputs": {
+    "figure": "figures\\draft\\kernels\\field_2026-07-29\\local_field_operator_audit.png",
+    "report": "reports\\kernels\\field\\local_field_operator_audit_2026-07-29.md",
+    "summary_json": "reports\\kernels\\field\\local_field_operator_audit_2026-07-29.json"
+  },
+  "stability": {
+    "finite_k_critical": {
+      "classification": "critical_finite_wavenumber",
+      "finite_wavenumber_preference": true,
+      "high_wavenumber_stable": true,
+      "minimum_denominator": 0.0,
+      "preferred_wavenumber": 0.3333333333333333,
+      "stable": false
+    },
+    "finite_k_stable": {
+      "classification": "stable_finite_wavenumber_minimum",
+      "finite_wavenumber_preference": true,
+      "high_wavenumber_stable": true,
+      "minimum_denominator": 0.19000000000000006,
+      "preferred_wavenumber": 0.31622776601683794,
+      "stable": true
+    },
+    "finite_k_unstable": {
+      "classification": "finite_wavenumber_instability",
+      "finite_wavenumber_preference": true,
+      "high_wavenumber_stable": true,
+      "minimum_denominator": -0.20999999999999996,
+      "preferred_wavenumber": 0.34960294939005054,
+      "stable": false
+    },
+    "gaussian_k4_match": {
+      "classification": "stable_monotone",
+      "finite_wavenumber_preference": false,
+      "high_wavenumber_stable": true,
+      "minimum_denominator": 1.0,
+      "preferred_wavenumber": 0.0,
+      "stable": true
+    }
+  },
+  "stationary_transfer": "(s0+s2 k^2)/(c0+c2 k^2+c4 k^4)"
+}

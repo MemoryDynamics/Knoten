@@ -196,8 +196,8 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     )
     return {
         "description": (
-            "Fixed analytic audit of the lowest even-derivative local scalar "
-            "field family allowed by the current model assumptions."
+            "Fixed analytic audit of a restricted even-derivative local "
+            "scalar field family compatible with the current assumptions."
         ),
         "inputs": {
             "gaussian_length": length,

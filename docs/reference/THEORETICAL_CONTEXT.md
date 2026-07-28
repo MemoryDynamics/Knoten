@@ -158,6 +158,38 @@ eine feste analytische Nullfamilie, keine Herleitung der bisherigen Amplituden
 und derzeit kein Anlass fuer einen weiteren blinden Lauf. Report:
 `reports/kernels/core/log_taylor_kernel_audit_2026-07-28.md`.
 
+## Lokale Feldoperatorentwicklung statt freier Kernelwahl
+
+Unter Translation, `O(d)`-Isotropie, raeumlicher Paritaet und einem lokalen
+skalaren Markov-Feld kann die lineare Antwort systematisch in Potenzen von
+`-Delta` entwickelt werden. Eine bewusst eingeschraenkte Trunkierung lautet
+
+```text
+tau d_t phi = -c0 phi + c2 Delta phi - c4 Delta^2 phi
+              - v phi^2 - u phi^3 + s0 rho - s2 Delta rho,
+H(k,0) = (s0+s2 k^2)/(c0+c2 k^2+c4 k^4).
+```
+
+Dies ist keine vollstaendige EFT-Basis. Hoehere Quellderivate, gemischte
+Feld-Gradient-Nichtlinearitaeten und komponentenuebergreifende Felder bleiben
+ausgeschlossen, bis eine Observable sie verlangt. Raeumliche Paritaet
+verbietet `phi^2` nicht; `v=0` waere eine zusaetzliche interne
+Vorzeichensymmetrie.
+
+Fuer `u=Lk` wird der normierte Gauss-Transfer bis vierter Ordnung durch
+`1/(1+u^2/2+u^4/8)` reproduziert. Ein derivativer Quellkanal `s0=0` erzwingt
+`H(0)=0` und damit Zero Mean. Beides sind analytische Nullfamilien, keine vom
+Random Walk ausgewaehlten Koeffizienten.
+
+Der erste neue lineare Musterbildungsmechanismus erscheint in
+`P(u)=1+a2 u^2+u^4`. Fuer `a2<0` liegt das Minimum bei
+`u*=sqrt(-a2/2)`; bei `a2=-2` wird es kritisch und fuer `a2<-2` linear
+instabil. Ein positiver kubischer Term kann die Amplitude saettigen, garantiert
+aber weder lokalisierte Knoten noch diskrete Aeste oder Quantisierung. Der
+Audit zeigt ausserdem erneut: komponentenweiser Transfer `H I_d` erhaelt den
+Ambient-Rang und kann kein `d=3` selektieren. Report:
+`reports/kernels/field/local_field_operator_audit_2026-07-29.md`.
+
 ## Spektrale rho-Reprasentation und dynamische Felderweiterung
 
 Auf einer periodischen 1D-Box der Laenge `L_box` kann dasselbe skalare Memory

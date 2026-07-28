@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-26.
+Stand: 2026-07-29.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -101,6 +101,19 @@ Median `0.991` jedoch nahezu gleich. Das oeffnet nur einen dynamischen
 Common-Source-Holdout und ist keine Evidenz fuer Vektorpersistenz oder ein
 physikalisches Feldgesetz. Reziprozitaet, `d=3`-Selektion und QFT-Sprache
 bleiben gesperrt.
+
+Der dynamische Common-Source-Holdout ist inzwischen negativ abgeschlossen:
+Beide lokalen Regeln bestehen die Response-/Shape-Gates, trennen sich aber nur
+in 4/6 statt 5/6 Paaren robust. Die anschliessende analytische Rang-Null zeigt
+fuer den komponentenweisen Transfer exakt `T=H I_d`; er kann aus einem
+vollrangigen Source-Raum keine drei Richtungen selektieren.
+
+Der lokale Feldoperator-Audit ersetzt freie Kernelwahl durch eine
+eingeschraenkte Ableitungsentwicklung. Die bisherige Gaussantwort wird bis
+`k^4` als Nullfamilie reproduziert, und `s0=0` setzt den Nullmodus exakt auf
+null. Eine bevorzugte endliche Wellenzahl verlangt dagegen die neue Annahme
+`a2<0` in `1+a2 u^2+u^4`. Ein spaeterer positiver Pilot waere klassische
+Musterbildung, noch keine Quantisierung, QFT- oder `d=3`-Evidenz.
 
 ## Nicht ueberclaimen
 

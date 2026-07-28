@@ -154,14 +154,17 @@ class LocalScalarFieldExpansion:
             minimum = c0
             finite_preference = False
 
-        stable = minimum > 0.0
+        scale = max(1.0, abs(c0), abs(minimum))
+        tolerance = 32.0 * np.finfo(float).eps * scale
+        stable = minimum > tolerance
+        critical = abs(minimum) <= tolerance
         if stable and finite_preference:
             classification = "stable_finite_wavenumber_minimum"
         elif stable:
             classification = "stable_monotone"
-        elif minimum == 0.0 and finite_preference:
+        elif critical and finite_preference:
             classification = "critical_finite_wavenumber"
-        elif minimum == 0.0:
+        elif critical:
             classification = "critical_zero_mode"
         elif finite_preference:
             classification = "finite_wavenumber_instability"
@@ -169,7 +172,7 @@ class LocalScalarFieldExpansion:
             classification = "zero_mode_instability"
         return FieldLinearStability(
             stable=stable,
-            high_wavenumber_stable=True,
+            high_wavenumber_stable=(c4 > 0.0 or c2 > 0.0 or c0 > 0.0),
             finite_wavenumber_preference=finite_preference,
             preferred_wavenumber=preferred,
             minimum_denominator=float(minimum),
@@ -311,7 +314,7 @@ def propagate_isotropic_ambient_covariance(
     source_covariance: np.ndarray,
     response: complex | float,
 ) -> np.ndarray:
-    """Propagate covariance through ``H I_d`` without changing its rank."""
+    """Propagate covariance through ``H I_d``; nonzero ``H`` preserves rank."""
 
     covariance = np.asarray(source_covariance, dtype=np.complex128)
     if covariance.ndim != 2 or covariance.shape[0] != covariance.shape[1]:

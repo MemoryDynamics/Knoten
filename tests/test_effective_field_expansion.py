@@ -81,6 +81,17 @@ def test_stability_classifies_finite_wavenumber_threshold() -> None:
     assert unstable.minimum_denominator == pytest.approx(-0.21)
 
 
+def test_stability_treats_roundoff_at_threshold_as_critical() -> None:
+    critical = LocalScalarFieldExpansion(
+        mass_coefficient=1.0,
+        gradient_coefficient=-2.0 - 1e-15,
+        biharmonic_coefficient=1.0,
+    ).linear_stability()
+
+    assert critical.classification == "critical_finite_wavenumber"
+    assert not critical.stable
+
+
 def test_quadratic_field_term_is_allowed_without_internal_sign_symmetry() -> None:
     field = LocalScalarFieldExpansion(
         mass_coefficient=1.0,
@@ -145,3 +156,11 @@ def test_componentwise_isotropic_transfer_preserves_full_rank() -> None:
     assert np.linalg.matrix_rank(source_covariance) == 10
     assert np.linalg.matrix_rank(propagated) == 10
     np.testing.assert_allclose(propagated, abs(response) ** 2 * source_covariance)
+
+
+def test_zero_isotropic_response_collapses_covariance_rank() -> None:
+    source_covariance = np.eye(4)
+
+    propagated = propagate_isotropic_ambient_covariance(source_covariance, 0.0)
+
+    assert np.linalg.matrix_rank(propagated) == 0

@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-28.
+Stand: 2026-07-29.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -43,11 +43,12 @@ flowchart TD
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
+    experiments --> field_operator["local_field_operator_audit.py<br/>k4 / zero-mean / finite-k / rank null"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
     src --> analytic["analytic.py<br/>dimensionless groups, modes, linear radius"]
-    src --> field["field.py<br/>heat transfer and relaxation-diffusion bridge"]
+    src --> field["field.py<br/>heat transfer + local operator expansion"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> knot_score["knot_score.py<br/>scorecards v0.3-v0.6 + shape gates"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
@@ -181,6 +182,9 @@ flowchart LR
     longrun --> nonlinear["fixed g gate<br/>R/L = 0.03, 0.1, 0.3"]
     nonlinear --> scaleaudit["scale audit<br/>voxel residence confounded"]
     scaleaudit --> decision["scalar control baseline<br/>no metastable branch isolated"]
+    decision --> lognull["LoG null family<br/>zero mean, curvature matched"]
+    lognull --> operator["local operator audit<br/>Gaussian k4 + H I_d rank null"]
+    operator -.new assumption.-> finitek["finite-k candidate<br/>a2 negative, k4 stabilized"]
     decision --> spectral["spectral rho representation<br/>exact at nu=0; 64 modes"]
     spectral --> epsilon_gate["epsilon 1e-8..1e-4<br/>exact linear scaling"]
     epsilon_gate --> mediator["relaxation-diffusion extension<br/>q_k=(1-lambda) exp(-nu k^2)"]
@@ -199,6 +203,11 @@ baseline with only a weak smooth finite-kernel correction. The field branch
 is deliberately separate: the Gaussian heat-semigroup representation uses
 an auxiliary coordinate, whereas a physical relaxation-diffusion field
 changes the dynamics.
+
+The local operator audit now makes this separation explicit: the Gaussian
+low-k response fixes a positive `k^2/k^4` null family, while a preferred
+finite wave number requires the additional sign choice `a2<0`. Independent
+component transfer remains `H I_d` and therefore cannot select rank three.
 
 ## Long-Run-Schiene
 

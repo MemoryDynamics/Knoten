@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-28.
+Stand: 2026-07-29.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -35,7 +35,7 @@ Zu entfernen oder klar als historische Hypothese zu markieren:
 Fertig, wenn `paper/paper_i`, `docs/status/paper_claims.md` und die
 kanonischen Reports dieselbe Claim-Grenze verwenden.
 
-## P1: Orientierten Kanal mit fester Kopplung replizieren
+## P1: Orientierter Kanal und lokales Feldgesetz
 
 Entscheidung: Das vorgeschaltete Cross-Readout-Gate scheitert in `d=3` und
 `d=10`. Selbst bei `sigma_rep/R_mem=2.5` und 1.25 kombinierten Memory-Radien
@@ -259,16 +259,24 @@ eine aehnlich grosse Targetantwort. Das stuetzt eine spektrale Tiefpasslesart,
 nicht die physikalische Auswahl eines Feldgesetzes oder die Notwendigkeit des
 persistenten Kanals.
 
-Naechster Schritt ist **keine weitere Mediatorparametersuche**, sondern die
-analytische Response-Rang-Null des aktuellen Vektorkanals. Weil jede Ambient-
-Komponente unabhaengig durch denselben skalaren Transfer `H(r,omega)` laeuft,
-ist die Ambient-Transfermatrix `H I_d` und erhaelt den Rang einer vollrangigen
-Source-Kovarianz. Diese Architektur kann daher nicht von selbst drei aus mehr
-als drei angebotenen Richtungen auswaehlen. Vor einem cross-`d`-Lauf muss ein
-expliziter, falsifizierbarer Mechanismus benannt werden, der zusaetzliche
-Richtungen dynamisch unterdruecken kann; erst dann werden Eigenwertluecke nach
-Rang drei, Seedstabilitaet und unveraenderte dimensionslose Parameter
-vorregistriert.
+Die analytische Response-Rang-Null ist abgeschlossen und im Paket getestet.
+Jede Ambient-Komponente laeuft unabhaengig durch denselben skalaren Transfer,
+also `T=H I_d`; im festen `d=10`-Audit bleiben Eingangs- und Ausgangsrang zehn
+und es entsteht keine Luecke nach Komponente drei. Ein cross-`d`-Lauf bleibt
+gesperrt, solange kein expliziter komponentenuebergreifender Ordnungsparameter
+oder anderer falsifizierbarer Unterdrueckungsmechanismus existiert.
+
+Der lokale Feldoperator-Audit ersetzt zugleich einen freien radialen Kernel
+durch die eingeschraenkte Antwortfamilie
+`H(k)=(s0+s2 k^2)/(c0+c2 k^2+c4 k^4)`. Die positive `k^2/k^4`-Familie ist
+die analytische Gauss-Null. Genau ein neuer Mechanismus darf als naechstes
+dynamisch geoeffnet werden: `a2<0` in `P(u)=1+a2 u^2+u^4`, also ein
+endliches-Wellenzahl-Minimum mit UV-Stabilisierung. Vor einem Lauf werden eine
+feste dimensionslose Koeffizientenwahl, `v=0` als ausdrueckliche
+Vorzeichensymmetrie sowie positive-`a2`-, cubic-off-, source-off- und eta-zero-
+Kontrollen registriert. Primaere Observablen sind Feldpeak und Peakbreite,
+Ast-/Gap-Persistenz, Source-Field-Closure und Shape-Bounds. Ein Pass waere
+klassische Musterbildung, noch keine Quantisierung oder QFT-Evidenz.
 
 ## P2: Scheinmoden analytisch einordnen
 
@@ -348,7 +356,8 @@ Ein Arbeitszweig wird beendet oder neu formuliert, wenn eines gilt:
 
 1. **Kernel und Skalarast:** Signkorrektur, matched Ablation, lineare
    Reconciliation, feste-`g`-Skalenpruefung und analytischer LoG-/Taylor-Audit
-   als zero-mean Nullfamilie ohne Amplitudenselektion.
+   als zero-mean Nullfamilie ohne Amplitudenselektion; lokaler
+   Feldoperator-Audit mit Gaussian-`k^4`-Match und Finite-k-Stabilitaetsgrenze.
 2. **Dimension:** Ambient-Sweeps, D_spec-Sensitivitaet und Rohsnapshot-Retest;
    kein robuster externer 3D-Claim.
 3. **Memory-Feld:** spektrale Reprasentation, Relaxations-Diffusion,

@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-28.
+Stand: 2026-07-29.
 
 ## Worum es geht
 
@@ -46,6 +46,11 @@ Belastbar derzeit:
 - Ein curvature-matched Laplacian-of-Gaussian liefert eine abklingende,
   exakt zero-mean Nullfamilie. Er bestaetigt `A_eff=26` als
   Reparametrisierung, selektiert aber weder `27`, `36` noch `d=3`.
+- Der lokale Feldoperator-Audit ersetzt freie Kernelwahl durch eine
+  kontrollierte Ableitungsentwicklung. Der Gausskern fixiert nur die
+  langwelligen `k^2`-/`k^4`-Nullterme; ein negativer `k^2`-Koeffizient mit
+  `k^4`-Stabilisierung waere ein neuer endlicher-Wellenzahl-Mechanismus, kein
+  bereits hergeleitetes Resultat.
 - Der A_att=0..40-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
   Fuer A_att>=5 folgt der dynamische Radius der linearen
   Memory-Center-Vorhersage mit 0.94 Prozent medianem Fehler.
@@ -159,9 +164,10 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Das negative dynamische Mediator-Diskriminationsgate nicht retunen; zuerst
-   die rang-erhaltende Null `H I_d` des komponentenweisen Kanals und die
-   Mindestanforderung an einen echten Dimensionsreduktionsmechanismus haerten.
+2. Das negative dynamische Mediator-Diskriminationsgate nicht retunen. Falls
+   der Feldzweig fortgesetzt wird, genau einen festen Finite-k-Mechanismus
+   gegen positive-`a2`-, cubic-off-, source-off- und eta-zero-Kontrollen
+   pruefen; die rang-erhaltende Null `H I_d` ist abgeschlossen.
 3. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
    phaenomen testen, bevor weitere Modensuchen laufen.
 4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
