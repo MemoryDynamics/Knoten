@@ -99,7 +99,7 @@
     "zero_mean": true,
     "zero_mode_response": 0.0
   },
-  "description": "Fixed analytic audit of the lowest even-derivative local scalar field family allowed by the current model assumptions.",
+  "description": "Fixed analytic audit of a restricted even-derivative local scalar field family compatible with the current assumptions.",
   "gaussian_matching": {
     "exact_series": "1 - u^2/2 + u^4/8 + O(u^6)",
     "k4_denominator": "1 + u^2/2 + u^4/8",
@@ -109,8 +109,8 @@
     "rd_max_abs_error_u_le_0p5": 0.0063919863042933844,
     "rd_max_abs_error_u_le_1": 0.060136006954033205
   },
-  "generated_utc": "2026-07-28T22:15:40Z",
-  "git_revision": "4ff7afc5320af2fd6ad262610cdd42fd0db530bf",
+  "generated_utc": "2026-07-28T22:23:12Z",
+  "git_revision": "0d9aa63be7727770ce6527366df68dbcf8cec41b",
   "git_status": "",
   "inputs": {
     "ambient_dimension": 10,

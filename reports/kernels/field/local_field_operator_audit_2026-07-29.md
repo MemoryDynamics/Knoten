@@ -1,6 +1,6 @@
 # Local Field Operator Audit
 
-Date: 2026-07-28T22:15:40Z.
+Date: 2026-07-28T22:23:12Z.
 
 ## Question
 
@@ -110,6 +110,6 @@ transition rules are demonstrated.
 
 ## Provenance
 
-- Git revision: `4ff7afc5320af2fd6ad262610cdd42fd0db530bf`
+- Git revision: `0d9aa63be7727770ce6527366df68dbcf8cec41b`
 - Git status before generation: `clean`
 - Script: `experiments/current/kernels/local_field_operator_audit.py`
