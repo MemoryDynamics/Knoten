@@ -202,6 +202,25 @@ Ein Pass zeigt lediglich prinzipielle Input-Identifizierbarkeit. Er waehlt
 weder ein physikalisches Feldgesetz noch den persistenten Kanal und selektiert
 keine drei Dimensionen.
 
+Ergebnis auf sauberem Commit `3619401`: **6/6 Sources bestehen**. Der kleinste
+sourcegewichtete komplexe Kontrast ist `1.064`, der kleinste unterscheidbare
+Output-Leistungsanteil `0.9969`, der kleinste uebertragene Leistungsanteil
+`0.0322` und die groesste Zwei-Segment-Drift `0.1568`. Source-Radius und
+Shape-Spektrum bleiben innerhalb der vorab gesetzten Huelle.
+
+Die wichtige Negativabgrenzung: Persistenter/Ein-Schritt-Transferkontrast liegt
+nur bei `0.951..1.008`, Median `0.991`. Die persistente Orientierung verlagert
+Leistung in tiefe Frequenzen, ist fuer die reine Unterscheidbarkeit der beiden
+bewusst verschiedenen Regeln aber nicht spezifisch erforderlich. Entscheidung:
+**source eligible, mechanism and memory specificity underdetermined**.
+
+Naechster Schritt ist genau ein dynamisches Common-Source-Holdout mit den
+bereits kalibrierten Kopplungen. Es muss persistenten und Ein-Schritt-Input,
+channel-off, globalen Flip, Target-Response und Source-/Target-Shape gemeinsam
+berichten. Es darf nur Architekturunterschiede oder einen Shape-/Response-Fail
+feststellen: Ohne unabhaengige beobachtete Target-Daten kann auch dieser Lauf
+kein physikalisches Mediatorgesetz auswaehlen.
+
 ## P2: Scheinmoden analytisch einordnen
 
 Die komplexen AR-Nebenmoden ueberlappen fuer aktiv und `eta=0` praktisch

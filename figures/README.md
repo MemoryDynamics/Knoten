@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-07-25.
+Stand: 2026-07-28.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -30,6 +30,12 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
 - `draft/response/oriented_vector_one_way_gate_2026-07-25.png`: 6/6-
   Pass des konstruierten persistenten Vektorkanals gegen Random-Sign- und
   Ein-Schritt-Kontrollen; keine Propagations- oder Teilchenevidenz.
+- `draft/response/local_oriented_mediator_gate_2026-07-28.png`: beide
+  eingesetzten lokalen Mediatorarchitekturen bestehen ihre Holdout-Gates;
+  die Transportregel bleibt Modellinput.
+- `draft/response/oriented_source_mediator_identifiability_2026-07-28.png`:
+  6/6 autonome Sources sind spektral geeignet, die beiden Regeln zu trennen;
+  nahezu gleicher Ein-Schritt-Kontrast zeigt keine Persistenzspezifitaet.
 
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in

@@ -94,11 +94,13 @@ den konstruierten relationalen Kanal gegen seedweises Retuning.
 Die nachgeschaltete lokale Mediatorpruefung besteht fuer beide eingesetzten
 Regeln je 5/5 Holdout-Paare. Das ist ein Architekturpass, keine Auswahl:
 Relaxations-Diffusion und Telegraph erzeugen jeweils das Verhalten, das ihre
-Gleichung vorgibt. Vor einem dynamischen Source-Target-Lauf prueft deshalb ein
-vorregistriertes Spektralgate, ob sechs autonome Source-Traces an allen 18
-geerbten Abstaenden ueberhaupt Frequenzleistung tragen, auf der sich die
-DC-normalisierten komplexen Transferantworten unterscheiden. Reziprozitaet,
-`d=3`-Selektion und QFT-Sprache bleiben gesperrt.
+Gleichung vorgibt. Das nachfolgende Spektralgate besteht mit 6/6 autonomen
+Sources an allen 18 geerbten Abstaenden. Die Regeln sind breitbandig
+unterscheidbar; der persistente und Ein-Schritt-Transferkontrast ist mit
+Median `0.991` jedoch nahezu gleich. Das oeffnet nur einen dynamischen
+Common-Source-Holdout und ist keine Evidenz fuer Vektorpersistenz oder ein
+physikalisches Feldgesetz. Reziprozitaet, `d=3`-Selektion und QFT-Sprache
+bleiben gesperrt.
 
 ## Nicht ueberclaimen
 

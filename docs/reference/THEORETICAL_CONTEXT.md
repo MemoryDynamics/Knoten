@@ -347,6 +347,15 @@ ambient dimensions, followed by reproducible convergence of an external
 response or slow-mode rank to three and suppression of the additional
 directions. Running the field on a 3D grid would assume that conclusion.
 
+The canonical six-source audit passes its preregistered eligibility thresholds:
+minimum weighted complex contrast `1.064`, minimum distinguishable output-power
+fraction `0.9969`, and maximum two-segment drift `0.1568`. This high separation
+is not a coherent-mode result. The two deliberately different transfer rules
+separate over nearly all powered frequencies, and persistent/one-step contrast
+ratios span only `0.951..1.008` (median `0.991`). Thus the source can expose
+different model predictions, but the audit neither validates persistent vector
+memory nor selects a mediator law.
+
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
 reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
 reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,

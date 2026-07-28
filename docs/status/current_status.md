@@ -40,6 +40,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 - Der konstruierte persistente Vektorkanal trennt sich zuerst in 6/6 Seeds und
   danach bei globalem `eta_v` in 6/6 unabhaengigen Paaren von Random-Sign- und
   Ein-Schritt-Kontrollen, bei kleinen Shape-Stoerungen.
+- Die autonomen orientierten Sources bestehen in 6/6 Faellen das vorregistrierte
+  Spektral-Identifizierbarkeitsgate fuer beide lokalen Mediatorregeln. Der
+  Transferkontrast ist jedoch fuer persistenten und Ein-Schritt-Input nahezu
+  gleich; dies stuetzt keine spezifische Vektorpersistenz.
 
 
 ### Nicht gestuetzt oder widerlegt
@@ -84,6 +88,7 @@ wichtig:
 8. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
 9. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
 10. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
+11. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -151,13 +156,14 @@ oder Phase ausreichend unterscheiden? Ohne solchen Inputkontrast kann ein
 weiterer Lauf die Mechanismen nicht entscheiden. Reziprozitaet und ein
 `d=3`-Claim bleiben gesperrt.
 
-Das Audit ist ohne neuen Sweep vorregistriert: sechs geerbte Sources, 20
-Memory-Zeiten Burn-in, zwei Hann-Segmente zu je 8192 Updates, exakte diskrete
-Impulsantworten an allen 18 geerbten Abstaenden und nur eine DC-Normierung pro
-Gesetz/Distanz. Primaer sind sourcegewichteter komplexer Transferkontrast,
-unterscheidbarer Output-Leistungsanteil, Segmentstabilitaet und die bestehende
-Source-Shape-Huelle. Ein Pass oeffnet nur ein dynamisches Holdout-
-Vorhersagegate; er waehlt weder das Feldgesetz noch Vektormemory oder `d=3`.
+Das Audit besteht mit 6/6 Sources. Minimaler sourcegewichteter komplexer
+Transferkontrast `1.064`, unterscheidbarer Output-Leistungsanteil mindestens
+`0.9969` und Segmentdrift maximal `0.1568`. Persistenter/Ein-Schritt-Kontrast
+liegt aber nur bei `0.951..1.008` (Median `0.991`). Das zeigt, dass die autonome
+Quelle die bewusst verschiedenen Regeln unterscheiden kann, nicht dass
+Persistenz noetig oder eines der Gesetze physikalisch ist. Geoeffnet ist nur
+ein dynamisches Common-Source-Holdout mit festen Kopplungen und beiden
+Inputarmen; Reziprozitaet und `d=3` bleiben gesperrt.
 
 ## Paper-Status
 

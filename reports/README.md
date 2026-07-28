@@ -113,12 +113,21 @@ identifizierten physikalischen Moden.
   - Die Transportgesetze sind Modellinputs. Der Pass validiert lokale
     Markov-Erweiterungen und feste Kopplung, entdeckt aber weder ein
     Propagationsgesetz noch endliche Kausalgeschwindigkeit oder `d=3`.
+- [Autonome Source-/Mediator-Identifizierbarkeit](response/oriented_source_mediator_identifiability_2026-07-28.md)
+  - **pipeline-only, source eligible:** 6/6 geerbte Sources bestehen das
+    vorregistrierte Zwei-Segment-Gate an allen 18 Distanzen. Minimaler
+    sourcegewichteter komplexer Kontrast `1.064`, unterscheidbarer
+    Output-Leistungsanteil mindestens `0.9969`, Segmentdrift maximal `0.1568`.
+  - Persistenter/Ein-Schritt-Kontrast liegt jedoch nur bei `0.951..1.008`
+    (Median `0.991`). Der Pass zeigt Breitband-Identifizierbarkeit der bewusst
+    verschiedenen Regeln, nicht spezifische Evidenz fuer Vektorpersistenz,
+    ein physikalisches Feldgesetz oder `d=3`.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Vor einem dynamischen
-One-Way-Lauf wird geprueft, ob autonome Source-Traces ueberhaupt
-kontrollgetrennte Spektralleistung in den zwischen beiden Transferfunktionen
-unterscheidbaren Frequenzbaendern tragen. Ohne Identifizierbarkeit kein
-weiterer konstruktiver Propagationslauf.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Das bestandene Source-Gate
+oeffnet genau einen dynamischen Common-Source-Holdout mit den bereits
+kalibrierten Kopplungen. Persistenter und Ein-Schritt-Input muessen gemeinsam
+berichtet werden; ein Lauf ohne unabhaengiges Zielkriterium darf die
+Mediatorregeln nicht als physikalisch selektiert ausgeben.
 
 ### 5. Governance und Kuration
 

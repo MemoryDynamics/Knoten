@@ -873,7 +873,7 @@ def main() -> None:
     )
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
-        build_report(payload, report_path, figure_path) + chr(10),
+        build_report(payload, report_path, figure_path),
         encoding="utf-8",
     )
     print(f"wrote {_relative(report_path)}", flush=True)

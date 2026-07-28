@@ -32,7 +32,7 @@ flowchart TD
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>both architectures pass; mechanism open"]
-    experiments --> mediator_id_exp["oriented_source_mediator_identifiability.py<br/>preregistered source-spectrum stop gate"]
+    experiments --> mediator_id_exp["oriented_source_mediator_identifiability.py<br/>6/6 eligible; persistence nonspecific"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]

@@ -331,6 +331,15 @@ predictions. It does not choose diffusion, Telegraph transport, persistent
 memory, or a physical field law. A fail stops the dynamic comparison instead
 of opening a source or mediator parameter sweep.
 
+Canonical result at clean revision `3619401`: all six sources pass at every
+inherited distance. Minimum weighted complex contrast is `1.064`, minimum
+distinguishable output-power fraction `0.9969`, and maximum segment drift
+`0.1568`. Persistent/one-step contrast is only `0.951..1.008` (median `0.991`).
+The persistent state shifts power toward low frequencies but is not specifically
+needed to distinguish these two deliberately different transfer rules.
+
+Report: `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

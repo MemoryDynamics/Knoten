@@ -154,9 +154,9 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Vor dem dynamischen Vergleich der bereits implementierten lokalen
-   Relaxations-Diffusions- und Telegraph-Regeln die autonome Source-
-   Spektralidentifizierbarkeit ohne Retuning pruefen.
+2. Nach bestandenem Source-Spektralgate genau einen dynamischen Common-Source-
+   Holdout der lokalen Relaxations-Diffusions- und Telegraph-Regeln mit festen
+   Kopplungen sowie persistentem und Ein-Schritt-Input durchfuehren.
 3. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
    Source-Eligibility, Shape-Boundedness und kontrollgetrennten Readout besteht.
 4. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
