@@ -155,9 +155,9 @@ class LocalScalarFieldExpansion:
             finite_preference = False
 
         scale = max(1.0, abs(c0), abs(minimum))
-        tolerance = 32.0 * np.finfo(float).eps * scale
-        stable = minimum > tolerance
-        critical = abs(minimum) <= tolerance
+        tolerance = float(32.0 * np.finfo(float).eps * scale)
+        stable = bool(minimum > tolerance)
+        critical = bool(abs(minimum) <= tolerance)
         if stable and finite_preference:
             classification = "stable_finite_wavenumber_minimum"
         elif stable:

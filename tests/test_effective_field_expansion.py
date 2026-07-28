@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from dataclasses import asdict
+import json
+
 import numpy as np
 import pytest
 
@@ -90,6 +93,7 @@ def test_stability_treats_roundoff_at_threshold_as_critical() -> None:
 
     assert critical.classification == "critical_finite_wavenumber"
     assert not critical.stable
+    json.dumps(asdict(critical))
 
 
 def test_quadratic_field_term_is_allowed_without_internal_sign_symmetry() -> None:
