@@ -416,7 +416,6 @@ def make_figure(payload: dict[str, Any], path: Path) -> None:
     axes[1, 1].set_ylabel("median paired shape change")
     axes[1, 1].set_title("Target shape envelope")
     axes[1, 1].legend(fontsize=8)
-    fig.suptitle("Local mediator architecture gate", fontsize=14)
     fig.savefig(path, dpi=180)
     plt.close(fig)
 
