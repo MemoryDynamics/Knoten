@@ -27,6 +27,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/kernels/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
 | `experiments/current/kernels/kernel_core_audit.py` | enger Kernel-Core-Audit | aktiv | logarithmischer Nahfeld-, Kraftkomponenten- und Kruemmungsvergleich; curvature-matched A_rep=0-Ablation |
+| `experiments/current/kernels/log_taylor_kernel_audit.py` | LoG-/Taylor-Kernel-Audit | vorregistriert | fester analytischer Vergleich von `(1,35)`, `(0,26)` und zero-mean LoG bei gleicher lokaler Kruemmung; keine Amplitudensuche |
 | `experiments/current/kernels/attractive_only_regime_scan.py` | dimensionsloser attraktiver Ein-Kernel-Scan | aktiv | A_att=0..40, gemeinsame eta=0-Kontrollen, lineare Relativradius-Referenz und matched (1,35)/(0,26)-Vergleich |
 | `experiments/current/kernels/kernel_family_comparison.py` | Ein-/Zweiskalen-Familienvergleich | abgeschlossen | Rohamplituden- und `A_eff=A_att-9`-Achse, seedweise KPI-Kollapspruefung |
 | `experiments/current/dynamics/linear_long_run_reconciliation.py` | finite-memory Long-Run-Radiuscheck | abgeschlossen | vorhandene N=30M/300M-Slices gegen gespeicherte-Masse-Relativmodus pruefen |

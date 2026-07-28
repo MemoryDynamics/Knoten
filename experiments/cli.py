@@ -52,6 +52,7 @@ CATEGORIES = {
         "current/kernels/fixed_curvature_sigma_pilot.py",
         "current/kernels/three_scale_compensation_pilot.py",
         "current/kernels/kernel_core_audit.py",
+        "current/kernels/log_taylor_kernel_audit.py",
         "current/kernels/attractive_only_regime_scan.py",
         "current/kernels/kernel_family_comparison.py",
         "current/kernels/fixed_g_nonlinearity_slice.py",
