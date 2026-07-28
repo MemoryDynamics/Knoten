@@ -131,6 +131,66 @@ class LocalMediatorTrace:
         object.__setattr__(self, "source_values", source)
 
 
+def relaxation_diffusion_frequency_response(
+    wavenumber: np.ndarray | float,
+    angular_frequency: np.ndarray | float,
+    mediator: RelaxationDiffusionMediator,
+    *,
+    normalize_static: bool = False,
+) -> np.ndarray:
+    """Return ``1/(D*k^2 + mu - i*omega)`` on broadcast inputs."""
+
+    k, omega = np.broadcast_arrays(
+        np.asarray(wavenumber, dtype=float),
+        np.asarray(angular_frequency, dtype=float),
+    )
+    if not np.isfinite(k).all() or not np.isfinite(omega).all():
+        raise ValueError("wavenumber and angular_frequency must be finite")
+    static_denominator = mediator.diffusivity * np.square(k) + mediator.decay_rate
+    denominator = static_denominator - 1j * omega
+    if np.any(np.abs(denominator) == 0.0):
+        raise ValueError("frequency response is singular at the requested mode")
+    response = 1.0 / denominator
+    if normalize_static:
+        if np.any(static_denominator == 0.0):
+            raise ValueError("cannot normalize a zero static denominator")
+        response = static_denominator * response
+    return np.asarray(response, dtype=np.complex128)
+
+
+def telegraph_frequency_response(
+    wavenumber: np.ndarray | float,
+    angular_frequency: np.ndarray | float,
+    mediator: TelegraphMediator,
+    *,
+    normalize_static: bool = False,
+) -> np.ndarray:
+    """Return the damped-wave response on broadcast mode/frequency inputs."""
+
+    k, omega = np.broadcast_arrays(
+        np.asarray(wavenumber, dtype=float),
+        np.asarray(angular_frequency, dtype=float),
+    )
+    if not np.isfinite(k).all() or not np.isfinite(omega).all():
+        raise ValueError("wavenumber and angular_frequency must be finite")
+    static_denominator = (
+        mediator.wave_speed**2 * np.square(k) + mediator.natural_frequency**2
+    )
+    denominator = (
+        static_denominator
+        - np.square(omega)
+        - 2j * mediator.damping_rate * omega
+    )
+    if np.any(np.abs(denominator) == 0.0):
+        raise ValueError("frequency response is singular at the requested mode")
+    response = 1.0 / denominator
+    if normalize_static:
+        if np.any(static_denominator == 0.0):
+            raise ValueError("cannot normalize a zero static denominator")
+        response = static_denominator * response
+    return np.asarray(response, dtype=np.complex128)
+
+
 def rectangular_source(
     n_steps: int,
     *,

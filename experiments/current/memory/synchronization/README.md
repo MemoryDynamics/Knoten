@@ -309,6 +309,28 @@ axis. A later dimension gate must freeze one law across several ambient `d` and
 test whether a control-separated external response or slow-mode rank converges
 to three while extra directions are suppressed.
 
+## Autonomous-Source Identifiability Preregistration
+
+`oriented_source_mediator_identifiability.py` is the stop gate before another
+constructed propagation run. It continues each of the six inherited source
+states autonomously after a 20-memory-time burn-in and estimates vector power
+from two non-overlapping Hann-windowed segments of 8192 updates. The persistent
+carrier is primary; unit one-step direction is a diagnostic comparator only.
+
+The comparison uses exact discrete impulse responses from the already frozen
+mediator grids at all 18 inherited distances. Each model-distance response is
+normalized to unit finite-horizon DC gain, so no amplitude coupling is fitted.
+Eligibility requires at every distance source-weighted complex transfer
+contrast at least `0.25`, at least `0.20` of output power in frequency bins
+with contrast at least `0.25`, transmitted power fraction at least `0.01`, and
+two-segment contrast drift at most `0.25`. Carrier RMS and the established
+source radius/shape bounds must also pass; overall pass requires 5/6 sources.
+
+A pass means only that a common autonomous input can expose different model
+predictions. It does not choose diffusion, Telegraph transport, persistent
+memory, or a physical field law. A fail stops the dynamic comparison instead
+of opening a source or mediator parameter sweep.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

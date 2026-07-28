@@ -320,6 +320,33 @@ H_T(k,omega) = 1/(c^2 k^2 + omega_0^2 - omega^2 - 2 i gamma omega)
 differ sufficiently in magnitude or phase. Without such source bandwidth, a
 dynamic comparison cannot identify the mechanisms.
 
+The preregistered identifiability audit does not assign an arbitrary
+`k=1/r`. It computes the exact discrete finite-grid impulse response of both
+frozen update laws at every inherited source-target distance, Fourier-
+transforms those readouts, and normalizes each model-distance pair only by its
+finite-horizon DC gain. For source-segment power `S_j(omega)` and normalized
+complex responses `H_D`, `H_T`, its primary contrast is
+
+```text
+C_j^2 = sum_omega S_j |H_D-H_T|^2
+        / sum_omega S_j (|H_D|^2+|H_T|^2)/2.
+```
+
+This is an input-eligibility statistic, not a likelihood ratio and not a
+field-law estimator. A broadband stochastic source may make two deliberately
+different transfer rules easy to distinguish even when no coherent mode is
+present. The persistent carrier and normalized one-step direction are therefore
+reported side by side; similar contrast would not validate the added
+persistent state.
+
+Nor does a field create a dimension-selection mechanism by itself. A local
+field can be evolved in any supplied dimension, and the current mediator is a
+one-dimensional relational channel. Evidence for three-dimensional selection
+would require the same law and absolute dimensionless parameters across
+ambient dimensions, followed by reproducible convergence of an external
+response or slow-mode rank to three and suppression of the additional
+directions. Running the field on a 3D grid would assume that conclusion.
+
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
 reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
 reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,
@@ -473,6 +500,7 @@ diese Theorie:
 | `oriented_source.py` | passiv evolvierender orientierter Source-State mit One-Way-Kontrollen |
 | `oriented_diagnostics.py` | gepaarte Response-, Shape-, Random-Sign- und Distanzmetriken |
 | `local_mediator.py` | lokale 1D Relaxations-Diffusions- und Telegraph-Zustaende fuer Transporttests |
+| `mediator_identifiability.py` | segmentierte Vektorleistung und sourcegewichteter komplexer Transferkontrast |
 | `external_field_response.py` | gepaarte Target-Fortsetzung fuer Aktiv-/Flip-/Kanal-aus-Felder |
 | `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 

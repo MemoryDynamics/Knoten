@@ -7,9 +7,11 @@ from emergenz_knoten import (
     LocalMediatorGrid,
     RelaxationDiffusionMediator,
     TelegraphMediator,
+    relaxation_diffusion_frequency_response,
     rectangular_source,
     simulate_relaxation_diffusion_mediator,
     simulate_telegraph_mediator,
+    telegraph_frequency_response,
 )
 
 
@@ -134,3 +136,48 @@ def test_unstable_relaxation_diffusion_step_is_rejected() -> None:
             source_values=np.ones(2),
             readout_positions=[0.5],
         )
+
+
+def test_normalized_frequency_responses_equal_one_at_zero_frequency() -> None:
+    wavenumber = np.array([0.0, 0.5, 1.0])
+    diffusion = relaxation_diffusion_frequency_response(
+        wavenumber,
+        0.0,
+        RelaxationDiffusionMediator(diffusivity=2.0, decay_rate=0.1),
+        normalize_static=True,
+    )
+    telegraph = telegraph_frequency_response(
+        wavenumber,
+        0.0,
+        TelegraphMediator(
+            wave_speed=1.0,
+            damping_rate=0.1,
+            natural_frequency=0.1,
+        ),
+        normalize_static=True,
+    )
+
+    np.testing.assert_allclose(diffusion, 1.0)
+    np.testing.assert_allclose(telegraph, 1.0)
+
+
+def test_diffusive_and_telegraph_transfer_functions_separate_off_dc() -> None:
+    angular_frequency = np.linspace(0.0, 1.0, 50)
+    diffusion = relaxation_diffusion_frequency_response(
+        0.2,
+        angular_frequency,
+        RelaxationDiffusionMediator(diffusivity=2.0, decay_rate=0.1),
+        normalize_static=True,
+    )
+    telegraph = telegraph_frequency_response(
+        0.2,
+        angular_frequency,
+        TelegraphMediator(
+            wave_speed=1.0,
+            damping_rate=0.1,
+            natural_frequency=0.1,
+        ),
+        normalize_static=True,
+    )
+
+    assert np.max(np.abs(diffusion[1:] - telegraph[1:])) > 0.1

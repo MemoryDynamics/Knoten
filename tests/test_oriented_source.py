@@ -6,10 +6,12 @@ from emergenz_knoten import (
     FiniteMemoryState,
     OrientedMemoryState,
     SimulationConfig,
+    autonomous_oriented_source_trace,
     initialize_oriented_memory_state,
     one_way_oriented_response,
     oriented_response_metrics,
     place_oriented_memory_state,
+    memory_centroid,
     translate_finite_memory_state,
     update_persistent_orientation,
 )
@@ -239,6 +241,58 @@ def test_target_readout_does_not_change_autonomous_source() -> None:
     np.testing.assert_array_equal(
         active.source_carrier_orientations,
         off.source_carrier_orientations,
+    )
+
+
+def test_source_only_trace_matches_one_way_source_bitwise() -> None:
+    scalar = _state()
+    source = initialize_oriented_memory_state(
+        scalar,
+        lambda_vector=0.2,
+        orientation_relaxation=0.2,
+    )
+    steps = np.array([0, 1, 5, 10])
+    target_noise = np.arange(20, dtype=float).reshape(10, 2) / 100.0
+    source_noise = target_noise[::-1].copy()
+    full = one_way_oriented_response(
+        scalar,
+        source,
+        _config(),
+        source_center_offset=[1.0, 0.0],
+        target_noise=target_noise,
+        source_noise=source_noise,
+        sample_steps=steps,
+        vector_eta=0.0,
+        vector_sigma=1.0,
+        randomization_count=1,
+    )
+    placed = place_oriented_memory_state(
+        source,
+        memory_centroid(scalar) + np.array([1.0, 0.0]),
+    )
+    source_only = autonomous_oriented_source_trace(
+        placed,
+        _config(),
+        source_noise=source_noise,
+        sample_steps=steps,
+    )
+
+    np.testing.assert_array_equal(source_only.positions, full.source_positions)
+    np.testing.assert_array_equal(
+        source_only.memory_centers,
+        full.source_memory_centers,
+    )
+    np.testing.assert_array_equal(
+        source_only.shape_tensors,
+        full.source_shape_tensors,
+    )
+    np.testing.assert_array_equal(
+        source_only.radius_ratios,
+        full.source_radius_ratios,
+    )
+    np.testing.assert_array_equal(
+        source_only.carrier_orientations,
+        full.source_carrier_orientations,
     )
 
 

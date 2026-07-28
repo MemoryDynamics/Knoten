@@ -175,18 +175,32 @@ beiden Regeln. Reziprozitaet und ein `d=3`-Claim bleiben gesperrt.
 
 Naechster diskriminierender Schritt ohne Parametersweep:
 
-1. analytische Transferfunktionen
-   `H_D(k,omega)=1/(D k^2+mu-i omega)` und
-   `H_T(k,omega)=1/(c^2 k^2+omega_0^2-omega^2-2 i gamma omega)` vergleichen;
-2. auf autonomen orientierten Source-Traces pruefen, ob kontrollgetrennte
-   Leistung in Frequenzbaendern liegt, in denen Betrag oder Phase der beiden
-   Kandidaten praktisch unterscheidbar sind;
-3. Frequenzband, Spektralschaetzer und Mindestkontrast vorab fixieren;
-4. nur bei bestandenem Identifizierbarkeitsgate denselben dynamischen
-   One-Way-Source-Trace ohne Retuning durch beide Mediatoren schicken.
+1. Die sechs geerbten Source-Zustaende laufen nach 20 Memory-Zeiten Burn-in
+   autonom ueber zwei nicht ueberlappende Segmente zu je 8192 Updates. Ein
+   komponentensummiertes Hann-Periodogramm liefert die Nicht-DC-Leistung.
+2. Statt eines frei gewaehlten Wellenvektors werden die exakten diskreten
+   Impulsantworten beider bereits fixierten Mediatorgitter an allen 18
+   geerbten Pair-Distanzen Fourier-transformiert. Pro Gesetz und Distanz wird
+   nur der endliche DC-Gain auf eins normiert; keine Kopplung wird neu
+   kalibriert.
+3. Primaerer Source-Kanal ist die persistente Carrier-Orientierung. Die
+   normierte Ein-Schritt-Richtung wird nur als diagnostischer Vergleich
+   berichtet und ist kein Nullgate fuer die bereits eingefuehrte Persistenz.
+4. Vorab gelten pro Pair und an allen drei Distanzen: komplexer
+   Einzel-Frequenz-Kontrast `>=0.25`, sourcegewichteter Gesamtkontrast
+   `>=0.25`, unterscheidbarer Output-Leistungsanteil `>=0.20`, uebertragener
+   Leistungsanteil `>=0.01` und relative Segmentdrift des Kontrasts `<=0.25`.
+   Source-Carrier-RMS muss `>=1e-3`, Radiusdrift `<=0.5` und normierte
+   Shape-Spektrumdrift `<=0.25` sein.
+5. Gesamtpass nur bei mindestens 5/6 Sources. Nur dann darf derselbe
+   autonome Source-Trace ohne Retuning durch beide Mediatoren in ein
+   dynamisches Holdout-Vorhersagegate eingehen.
 
 Fail bedeutet: Die aktuellen Source-Daten koennen die Mediatorfamilien nicht
 identifizieren; dann kein weiterer Lauf nur zur Erzeugung erwartbarer Kurven.
+Ein Pass zeigt lediglich prinzipielle Input-Identifizierbarkeit. Er waehlt
+weder ein physikalisches Feldgesetz noch den persistenten Kanal und selektiert
+keine drei Dimensionen.
 
 ## P2: Scheinmoden analytisch einordnen
 

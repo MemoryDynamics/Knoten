@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Spektrales Memory-Feld | Fourier-`rho` reproduziert das exponentielle Memory; Relaxations-Diffusion glaettet kontrolliert. | kompakte Reprasentation bzw. explizite Modellerweiterung | Eigenvektor-/Segmentgate isoliert keinen stabilen physikalischen Modus |
-| Externe Antwort | Der skalare Ast liefert Translation ohne Formsignal; der separat eingefuehrte persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 unabhaengigen Paaren. | kontrollgetrennter relationaler Kanal unter einer globalen Kopplung im erweiterten Modell | Persistenz, instantanes Gauss-Readout und Breitenregel sind Inputs; Lokalitaet, Retardierung und Reziprozitaet fehlen |
+| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; Relaxations-Diffusion und Telegraph bestehen danach je 5/5 lokale Mediator-Holdouts. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | beide Transportgesetze, Persistenz und Source-Readout sind Inputs; der Mechanismus ist nicht identifiziert und Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -56,10 +56,11 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 ### Offene Hypothesen
 
-- Der bestandene orientierte Kanal koennte als Ausgangspunkt fuer einen
-  lokalen oder retardierten Mediator dienen. Das vorregistrierte Gate haelt
-  eine Kalibrationslaenge und je einen globalen Kopplungswert fest und testet
-  lokale Relaxations-Diffusion bzw. Telegraph-Dynamik auf Holdout-Paaren.
+- Beide eingesetzten lokalen Mediatorregeln sind architektonisch mit dem
+  orientierten Kanal und den Holdout-Knoten kompatibel. Ob autonome
+  Source-Traces sie ueberhaupt spektral unterscheiden koennen, wird vor einem
+  dynamischen Vorhersagelauf mit festen DC-normalisierten Impulsantworten
+  auditiert.
 - Felder selektieren nicht automatisch drei Dimensionen. Eine spaetere
   Dimensionshypothese braucht dieselbe eingefrorene Regel ueber mehrere
   Ambient-Dimensionen und einen kontrollgetrennten effektiven Response- oder
@@ -98,6 +99,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
   und Distanzmetriken fuer den konstruierten orientierten Kanal.
 - `src/emergenz_knoten/local_mediator.py`: lokale 1D
   Relaxations-Diffusions- und Telegraph-Zustaende.
+- `src/emergenz_knoten/mediator_identifiability.py`: segmentierte
+  Source-Spektren und sourcegewichteter komplexer Transferkontrast.
 - `src/emergenz_knoten/external_field_response.py`: gepaarte zeitabhaengige
   Aktiv-/Flip-/Kanal-aus-Targetfortsetzung.
 - `experiments/current/`: reproduzierbare aktive Entry-Points.
@@ -147,6 +150,14 @@ Baendern, in denen sich diffusive und Telegraph-Transferfunktion in Betrag
 oder Phase ausreichend unterscheiden? Ohne solchen Inputkontrast kann ein
 weiterer Lauf die Mechanismen nicht entscheiden. Reziprozitaet und ein
 `d=3`-Claim bleiben gesperrt.
+
+Das Audit ist ohne neuen Sweep vorregistriert: sechs geerbte Sources, 20
+Memory-Zeiten Burn-in, zwei Hann-Segmente zu je 8192 Updates, exakte diskrete
+Impulsantworten an allen 18 geerbten Abstaenden und nur eine DC-Normierung pro
+Gesetz/Distanz. Primaer sind sourcegewichteter komplexer Transferkontrast,
+unterscheidbarer Output-Leistungsanteil, Segmentstabilitaet und die bestehende
+Source-Shape-Huelle. Ein Pass oeffnet nur ein dynamisches Holdout-
+Vorhersagegate; er waehlt weder das Feldgesetz noch Vektormemory oder `d=3`.
 
 ## Paper-Status
 

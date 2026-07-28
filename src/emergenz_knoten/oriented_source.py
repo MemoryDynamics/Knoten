@@ -89,6 +89,18 @@ class OrientedOneWayResponse:
     randomization_count: int
 
 
+@dataclass(frozen=True)
+class OrientedSourceTrace:
+    """Autonomous scalar source and its persistent carrier orientation."""
+
+    sample_steps: np.ndarray
+    positions: np.ndarray
+    memory_centers: np.ndarray
+    shape_tensors: np.ndarray
+    radius_ratios: np.ndarray
+    carrier_orientations: np.ndarray
+
+
 def update_persistent_orientation(
     previous: np.ndarray,
     displacement: np.ndarray,
@@ -215,6 +227,92 @@ def _copy_ring(values: np.ndarray, n_paths: int) -> np.ndarray:
     for path in range(n_paths):
         result[path] = values
     return result
+
+
+@njit(cache=True)
+def _autonomous_oriented_source_batch(
+    source_x_initial: np.ndarray,
+    source_memory_initial: np.ndarray,
+    source_weights: np.ndarray,
+    carrier_orientation_initial: np.ndarray,
+    source_noise: np.ndarray,
+    sample_steps: np.ndarray,
+    source_epsilon: float,
+    source_eta: float,
+    source_sigma_rep2: float,
+    source_sigma_att2: float,
+    source_amplitude_rep: float,
+    source_amplitude_att: float,
+    orientation_relaxation: float,
+):
+    dim = source_x_initial.shape[0]
+    n_memory = source_memory_initial.shape[0]
+    n_samples = sample_steps.shape[0]
+    source_x = source_x_initial.copy()
+    source_history = source_memory_initial.copy()
+    carrier = carrier_orientation_initial.copy()
+    source_head = 0
+    source_mass = np.sum(source_weights)
+    positions = np.empty((n_samples, dim), np.float64)
+    centers = np.empty((n_samples, dim), np.float64)
+    tensors = np.empty((n_samples, dim, dim), np.float64)
+    radii = np.empty(n_samples, np.float64)
+    carriers = np.empty((n_samples, dim), np.float64)
+    sample_index = 0
+    n_steps = int(sample_steps[-1])
+    for step in range(n_steps + 1):
+        if step > 0:
+            source_gradient = path_gradient(
+                source_x,
+                source_history,
+                source_head,
+                source_weights,
+                source_eta,
+                source_sigma_rep2,
+                source_sigma_att2,
+                source_amplitude_rep,
+                source_amplitude_att,
+            )
+            previous_source = source_x.copy()
+            for coord in range(dim):
+                source_x[coord] = (
+                    source_x[coord]
+                    + source_epsilon * source_noise[step - 1, coord]
+                    - source_eta * source_gradient[coord]
+                )
+            displacement_norm = 0.0
+            for coord in range(dim):
+                delta = source_x[coord] - previous_source[coord]
+                displacement_norm += delta * delta
+            displacement_norm = np.sqrt(displacement_norm)
+            for coord in range(dim):
+                drive = 0.0
+                if displacement_norm > 0.0:
+                    drive = (
+                        source_x[coord] - previous_source[coord]
+                    ) / displacement_norm
+                carrier[coord] = (1.0 - orientation_relaxation) * carrier[
+                    coord
+                ] + orientation_relaxation * drive
+            source_head = (source_head - 1) % n_memory
+            source_history[source_head] = source_x
+
+        while sample_index < n_samples and sample_steps[sample_index] == step:
+            position, center, tensor, radius = path_observables(
+                source_x,
+                source_history,
+                source_head,
+                source_weights,
+                source_mass,
+            )
+            positions[sample_index] = position
+            centers[sample_index] = center
+            tensors[sample_index] = tensor
+            radii[sample_index] = radius
+            carriers[sample_index] = carrier
+            sample_index += 1
+
+    return positions, centers, tensors, radii, carriers
 
 
 @njit(cache=True)
@@ -440,6 +538,62 @@ def _validated_noise(
     if values.shape != (n_steps, dim) or not np.isfinite(values).all():
         raise ValueError(f"{name} must have shape (max(sample_steps), dim)")
     return values
+
+
+def autonomous_oriented_source_trace(
+    source_state: OrientedMemoryState,
+    config: SimulationConfig,
+    *,
+    source_noise: Iterable[Iterable[float]],
+    sample_steps: Iterable[int],
+) -> OrientedSourceTrace:
+    """Evolve only the autonomous source represented in a one-way response."""
+
+    validate_simulation_config(config)
+    if source_state.dim != config.dim:
+        raise ValueError("source state and config dimensions must match")
+    steps = _validated_steps(sample_steps)
+    noise = _validated_noise(
+        source_noise,
+        n_steps=int(steps[-1]),
+        dim=config.dim,
+        name="source_noise",
+    )
+    effective = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
+    result = _autonomous_oriented_source_batch(
+        source_state.scalar_state.x,
+        source_state.scalar_state.memory,
+        source_state.scalar_state.weights,
+        source_state.carrier_orientation,
+        noise,
+        steps,
+        float(config.epsilon),
+        float(config.eta),
+        float(effective["sigma_rep"]) ** 2,
+        float(effective["sigma_att"]) ** 2,
+        float(effective["amplitude_rep"]),
+        float(effective["amplitude_att"]),
+        float(source_state.orientation_relaxation),
+    )
+    initial_radius = float(result[3][0])
+    if initial_radius <= 0.0:
+        raise ValueError("source memory radius must be positive")
+    return OrientedSourceTrace(
+        sample_steps=steps,
+        positions=result[0],
+        memory_centers=result[1],
+        shape_tensors=result[2],
+        radius_ratios=result[3] / initial_radius,
+        carrier_orientations=result[4],
+    )
 
 
 def one_way_oriented_response(

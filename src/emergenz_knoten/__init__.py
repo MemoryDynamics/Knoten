@@ -49,6 +49,8 @@ from .coupled_nodes import (
 from .oriented_source import (
     OrientedMemoryState,
     OrientedOneWayResponse,
+    OrientedSourceTrace,
+    autonomous_oriented_source_trace,
     initialize_oriented_memory_state,
     one_way_oriented_response,
     place_oriented_memory_state,
@@ -79,14 +81,20 @@ from .spectral_memory_field import (
     zero_mean_attractive_kernel,
 )
 from .relaxation_diffusion_memory import RelaxationDiffusionMemoryOperators
+from .mediator_identifiability import (
+    transfer_identifiability_metrics,
+    vector_segment_power,
+)
 from .local_mediator import (
     LocalMediatorGrid,
     LocalMediatorTrace,
     RelaxationDiffusionMediator,
     TelegraphMediator,
+    relaxation_diffusion_frequency_response,
     rectangular_source,
     simulate_relaxation_diffusion_mediator,
     simulate_telegraph_mediator,
+    telegraph_frequency_response,
 )
 from .spectral_memory_runtime import SpectralMemoryOperators
 from .spectral_memory_trace import (
@@ -220,6 +228,7 @@ __all__ = [
     "OneWayCoupledResponse",
     "OrientedMemoryState",
     "OrientedOneWayResponse",
+    "OrientedSourceTrace",
     "RelativeOrbitalObservables",
     "PairedProbeResponse",
     "SignedCrossCalibration",
@@ -245,6 +254,7 @@ __all__ = [
     "ballistic_scaling_slope",
     "advance_spectral_memory_state",
     "attractive_amplitude_for_curvature",
+    "autonomous_oriented_source_trace",
     "bootstrap_mean_ci",
     "calibrate_frozen_source_cross_eta",
     "calibrate_signed_cross_eta",
@@ -302,6 +312,7 @@ __all__ = [
     "paired_uniform_probe_response",
     "phase_locking_value",
     "relative_orbital_observables",
+    "relaxation_diffusion_frequency_response",
     "rectangular_source",
     "oriented_history_from_state",
     "place_finite_memory_state",
@@ -333,11 +344,13 @@ __all__ = [
     "simulate_vector_memory",
     "simulate_relaxation_diffusion_mediator",
     "simulate_telegraph_mediator",
+    "telegraph_frequency_response",
     "spectral_dimension",
     "stationary_deposition_weight",
     "stationary_field_transfer",
     "stationary_memory_mass",
     "threshold_score",
+    "transfer_identifiability_metrics",
     "three_scale_gaussian_gradient",
     "three_scale_gaussian_potential",
     "translate_finite_memory_state",
@@ -347,6 +360,7 @@ __all__ = [
     "update_persistent_orientation",
     "update_vector_history",
     "vector_field_coherence",
+    "vector_segment_power",
     "vector_gaussian_field",
     "vector_memory_feature_names",
     "validate_scalar_readout_kernel",

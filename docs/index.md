@@ -91,12 +91,14 @@ zyklisch unabhaengigen Paaren. Die Nahantwort ist gegen 64 Random-Sign-Pfade
 und Ein-Schritt-Memory getrennt; Flip und Shape-Huelle bestehen. Das haertet
 den konstruierten relationalen Kanal gegen seedweises Retuning.
 
-Die wissenschaftliche Grenze bleibt wesentlich: Das Readout ist instantan,
-die Gauss-Abschwaechung ist eingebaut und `sigma_v=2.5 R_source` eine gesetzte
-Breitenregel. Als naechstes wird daher ein lokales Mediatorgesetz auf einem
-Kalibrationspaar fixiert und auf Holdout-Paaren getestet: Relaxations-Diffusion
-mit `t~r^2` gegen einen gedaempften Wave-/Telegraph-Zustand mit `t~r`.
-Reziprozitaet und QFT-Sprache bleiben bis dahin gesperrt.
+Die nachgeschaltete lokale Mediatorpruefung besteht fuer beide eingesetzten
+Regeln je 5/5 Holdout-Paare. Das ist ein Architekturpass, keine Auswahl:
+Relaxations-Diffusion und Telegraph erzeugen jeweils das Verhalten, das ihre
+Gleichung vorgibt. Vor einem dynamischen Source-Target-Lauf prueft deshalb ein
+vorregistriertes Spektralgate, ob sechs autonome Source-Traces an allen 18
+geerbten Abstaenden ueberhaupt Frequenzleistung tragen, auf der sich die
+DC-normalisierten komplexen Transferantworten unterscheiden. Reziprozitaet,
+`d=3`-Selektion und QFT-Sprache bleiben gesperrt.
 
 ## Nicht ueberclaimen
 

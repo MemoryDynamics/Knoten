@@ -154,9 +154,10 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Genau einen neuen Transportmechanismus vorregistrieren: lokaler bzw.
-   retardierter Mediator oder orientiertes Vektormemory, nicht beide zugleich.
-3. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein One-Way-Kanal
+2. Vor dem dynamischen Vergleich der bereits implementierten lokalen
+   Relaxations-Diffusions- und Telegraph-Regeln die autonome Source-
+   Spektralidentifizierbarkeit ohne Retuning pruefen.
+3. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
    Source-Eligibility, Shape-Boundedness und kontrollgetrennten Readout besteht.
 4. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
    phaenomen testen, bevor weitere Modensuchen laufen.

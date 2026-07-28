@@ -32,6 +32,7 @@ flowchart TD
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>both architectures pass; mechanism open"]
+    experiments --> mediator_id_exp["oriented_source_mediator_identifiability.py<br/>preregistered source-spectrum stop gate"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -67,6 +68,7 @@ flowchart TD
     src --> oriented_source["oriented_source.py<br/>persistent passive vector fibre + paired controls"]
     oriented_source --> continuation
     src --> local_mediator["local_mediator.py<br/>1D local diffusion + telegraph states"]
+    src --> mediator_id["mediator_identifiability.py<br/>segment power + complex transfer contrast"]
     src --> external_field["external_field_response.py<br/>paired active / flip / off target paths"]
     external_field --> continuation
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
@@ -120,6 +122,10 @@ flowchart LR
     fullstate --> orientedstate["OrientedMemoryState<br/>passive low-pass direction fibre"]
     orientedstate --> orientedgate["one-way active / flip / off / random-sign<br/>plus one-step control"]
     orientedgate --> orienteddiag["oriented_diagnostics.py<br/>paired response / shape / distance KPIs"]
+    orientedstate --> source_trace["autonomous source trace<br/>persistent + one-step comparator"]
+    source_trace --> source_power["two Hann segments<br/>vector non-DC power"]
+    source_power --> identifiability["source-weighted complex<br/>transfer contrast"]
+    local_transfer["frozen local mediator rules<br/>discrete impulse responses"] --> identifiability
     checkpoint --> reload["validated reload<br/>fresh common future noise"]
     reload --> rigid["rigid placement<br/>translation / orthogonal rotation"]
     rigid --> weakprobe["paired weak probe<br/>+delta / -delta / unprobed / eta_zero"]
@@ -152,6 +158,7 @@ flowchart LR
     meta --> reports
     response --> reports
     orientedgate --> reports
+    identifiability --> reports
 
     reports --> privacy["privacy_and_control_plan<br/>public sanitized policy"]
     reports --> paper0["Paper 0<br/>technical anchor"]
