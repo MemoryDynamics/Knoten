@@ -382,13 +382,50 @@ Response magnitude, oddness, source/target shape bounds, distance attenuation
 and `Delta_DT` can falsify an architecture. They cannot select a physical law
 without an independently observed target response.
 
+The canonical dynamic gate is negative at the preregistered discrimination
+stage. Both mediator branches pass response magnitude, oddness, shape and
+attenuation for all six cyclic source-target pairs. The requirement that
+`Delta_DT >= 0.25` at every distance holds for only four of six pairs, rather
+than five. At the nearest distance `2.5 R_pair`, the minimum separation is
+`0.1874`; at `5` and `10 R_pair`, all six pairs pass. This does not reject the
+numerical viability of either inserted architecture. It rejects the stronger
+claim that the present autonomous-source/target observable robustly selects
+between them without retuning.
+
+The same construction gives a structural null for ambient dimension
+selection. For either component-wise vector mediator, Fourier transformation
+in time and evaluation at a relational readout position `r` gives
+
+```text
+a_hat(r,omega) = H(r,omega) I_d s_hat(omega).
+```
+
+Consequently its ambient spectral covariance is
+
+```text
+S_a(r,omega) = |H(r,omega)|^2 S_s(omega),
+rank S_a = rank S_s                         when H != 0.
+```
+
+Thus a full-rank isotropic source remains full-rank in the supplied ambient
+space. The rule is `O(d)`-equivariant and contains neither a preferred
+three-dimensional subspace nor a rank-three instability. A nonlinear target
+may distort or transiently reduce an observed covariance rank, but the current
+law gives no reason for that rank to be exactly three, seed-stable and
+ambient-independent. Field formation and three-dimensional selection could
+coincide only in a future model whose cross-component dynamics actually
+suppresses additional directions; a field alone is insufficient.
+
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
 reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
 reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,
 reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md,
 reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md,
-reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md
-and reports/kernels/field/field_equation_bridge_2026-07-18.md.
+reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md,
+reports/kernels/field/field_equation_bridge_2026-07-18.md,
+reports/response/local_oriented_mediator_gate_2026-07-28.md,
+reports/response/oriented_source_mediator_identifiability_2026-07-28.md and
+reports/response/dynamic_common_source_mediator_gate_2026-07-28.md.
 
 ## Self- and Cross-Interaction Channels
 

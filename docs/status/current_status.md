@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Spektrales Memory-Feld | Fourier-`rho` reproduziert das exponentielle Memory; Relaxations-Diffusion glaettet kontrolliert. | kompakte Reprasentation bzw. explizite Modellerweiterung | Eigenvektor-/Segmentgate isoliert keinen stabilen physikalischen Modus |
-| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; Relaxations-Diffusion und Telegraph bestehen danach je 5/5 lokale Mediator-Holdouts. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | beide Transportgesetze, Persistenz und Source-Readout sind Inputs; der Mechanismus ist nicht identifiziert und Reziprozitaet fehlt |
+| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -44,6 +44,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Spektral-Identifizierbarkeitsgate fuer beide lokalen Mediatorregeln. Der
   Transferkontrast ist jedoch fuer persistenten und Ein-Schritt-Input nahezu
   gleich; dies stuetzt keine spezifische Vektorpersistenz.
+- Unter identischer autonomer Source bestehen beide Mediatorregeln in 6/6
+  Paaren Messbarkeit, Oddness, Shape-Huelle und Distanzabfall. Die verlangte
+  robuste Diffusion-/Telegraph-Trennung besteht nur in 4/6 Paaren; der
+  dynamische Modellselektionsversuch ist damit negativ.
 
 
 ### Nicht gestuetzt oder widerlegt
@@ -57,14 +61,17 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Neutralitaetsstruktur.
 - Direkte Fernkopplung und diffusive Felder liefern keine harte endliche
   Signalgeschwindigkeit.
+- Der aktuelle komponentenweise Vektormediator kann keine eindeutige
+  Ambient-Dimension drei selektieren: Seine Ambient-Transfermatrix ist
+  proportional zu `I_d` und erhaelt ohne weiteren Mechanismus den Rang einer
+  vollrangigen Source.
 
 ### Offene Hypothesen
 
-- Beide eingesetzten lokalen Mediatorregeln sind architektonisch mit dem
-  orientierten Kanal und den Holdout-Knoten kompatibel. Ob autonome
-  Source-Traces sie ueberhaupt spektral unterscheiden koennen, wird vor einem
-  dynamischen Vorhersagelauf mit festen DC-normalisierten Impulsantworten
-  auditiert.
+- Ein spaeteres physikalisches Mediatorgesetz braucht ein unabhaengiges
+  Targetkriterium oder eine weitere falsifizierbare Mechanismusannahme. Ein
+  weiterer Fit derselben Kopplungen an dieselben Zielantworten waere nicht
+  identifizierend.
 - Felder selektieren nicht automatisch drei Dimensionen. Eine spaetere
   Dimensionshypothese braucht dieselbe eingefrorene Regel ueber mehrere
   Ambient-Dimensionen und einen kontrollgetrennten effektiven Response- oder
@@ -89,6 +96,7 @@ wichtig:
 9. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
 10. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
 11. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
+12. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -149,7 +157,8 @@ Regeln. Relaxations-Diffusion erreicht maximal `9.09%` Lag-Vorhersagefehler und
 **mechanism underdetermined**, weil die jeweilige Skalierung in der
 Feldgleichung steckt. Es ist keine Propagationsgesetz-Entdeckung.
 
-Vor einem dynamischen One-Way-Lauf folgt deshalb ein Identifizierbarkeitsaudit:
+Vor dem dynamischen One-Way-Lauf wurde deshalb ein Identifizierbarkeitsaudit
+gesetzt:
 Traegt die autonome orientierte Source kontrollgetrennte Spektralleistung in
 Baendern, in denen sich diffusive und Telegraph-Transferfunktion in Betrag
 oder Phase ausreichend unterscheiden? Ohne solchen Inputkontrast kann ein
@@ -161,17 +170,24 @@ Transferkontrast `1.064`, unterscheidbarer Output-Leistungsanteil mindestens
 `0.9969` und Segmentdrift maximal `0.1568`. Persistenter/Ein-Schritt-Kontrast
 liegt aber nur bei `0.951..1.008` (Median `0.991`). Das zeigt, dass die autonome
 Quelle die bewusst verschiedenen Regeln unterscheiden kann, nicht dass
-Persistenz noetig oder eines der Gesetze physikalisch ist. Geoeffnet ist nur
-ein dynamisches Common-Source-Holdout mit festen Kopplungen und beiden
-Inputarmen; Reziprozitaet und `d=3` bleiben gesperrt.
+Persistenz noetig oder eines der Gesetze physikalisch ist. Dieser Pass oeffnete
+genau den inzwischen abgeschlossenen dynamischen Common-Source-Holdout mit
+festen Kopplungen und beiden Inputarmen.
 
-Dieses Gate ist nun vorregistriert: 20 Memory-Zeiten Einschwingen plus 50
-Memory-Zeiten Auswertung, dieselben sechs Paare und drei Distanzen, unveraenderte
-pulse-kalibrierte Kopplungen. Primaer sind persistente Target-RMS-Antwort in
-`[1e-4,0.1] R_target`, pfadweise Flip-Oddness, Source-/Target-Shape-Huelle,
-Fern/Nah `<=0.5` und relativer Diffusion-/Telegraph-Traceabstand `>=0.25`.
-Der Ein-Schritt-Arm wird mit derselben Kopplung berichtet, aber nicht
-amplitudenangepasst oder als primaeres Gate verwendet.
+Das dynamische Common-Source-Gate ist abgeschlossen und negativ. Beide
+Mediatorregeln bestehen fuer alle 6/6 Paare Response-, Oddness-, Shape- und
+Distanzgates. Die relative Trace-Trennung besteht jedoch nur in 4/6 Paaren
+ueber alle drei Distanzen statt der geforderten 5/6. Im Nahfeld bestehen 4/6,
+bei `5` und `10 R_pair` jeweils 6/6 Paare. Ohne unabhaengige Zieltrajektorie
+waehlt dieser Befund weder ein Transportgesetz noch Persistenz; Kopplungs-
+Retuning ist durch die Stopregel ausgeschlossen.
+
+Die Dimensionsfrage ist damit nicht zeitgleich geloest. Der aktuelle
+komponentenweise Kanal ist `O(d)`-aequivariant und uebertraegt jede Ambient-
+Komponente mit demselben skalaren Filter. Er besitzt keinen Mechanismus, der
+bei `d>3` gerade drei Richtungen aktiv laesst. Ein cross-`d`-Test wird erst
+sinnvoll, nachdem eine solche rangreduzierende Dynamik explizit formuliert und
+vor dem Lauf falsifizierbar gemacht wurde.
 
 ## Paper-Status
 
@@ -179,9 +195,10 @@ amplitudenangepasst oder als primaeres Gate verwendet.
   Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
-- **Paper II:** Propagation und Raumzeitkinematik bleiben gesperrt, bis ein
-  lokaler Transportkanal nicht nur konstruiert, sondern gegen eine unabhaengige
-  Source-Observable identifiziert ist.
+- **Paper II:** Zwei lokale Transportarchitekturen sind konstruiert, aber das
+  dynamische Modellselektionsgate ist negativ. Propagationsgesetz,
+  Raumzeitkinematik und `d=3` bleiben gesperrt, bis unabhaengige Evidenz bzw.
+  ein echter Dimensionsreduktionsmechanismus vorliegt.
 - **Paper III:** offene spekulative Tuer ohne Claim-Status.
 
 ## Reproduzierbarkeitsregeln

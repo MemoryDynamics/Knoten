@@ -243,6 +243,32 @@ feststellen. Ohne unabhaengige beobachtete Target-Daten kann auch ein
 Ein-Modell-Pass kein physikalisches Mediatorgesetz auswaehlen; Reziprozitaet
 bleibt gesperrt.
 
+Ergebnis auf sauberem Commit `b5b754e`: **dynamisches Diskriminationsgate
+negativ**. Beide Regeln bestehen in 6/6 Paaren Response-Fenster, pfadweise
+Oddness, Source-/Target-Shape und Distanzabschwachung. Relaxations-Diffusion
+liefert `0.0043..0.0552 R_target`, Telegraph `0.0032..0.0454 R_target`; die
+maximale Target-Shape-Aenderung bleibt `0.0015`. Die vorregistrierte
+Modelltrennung besteht jedoch nur in 4/6 statt 5/6 Paaren, weil zwei Quellen
+im Nahfeld unter `Delta_DT=0.25` bleiben. Bei `5` und `10 R_pair` bestehen
+jeweils 6/6 Paare. Der Zweig wird nicht durch Kopplungsretuning gerettet.
+
+Die persistente Source hat nur `0.0279..0.0311` RMS gegenueber der normierten
+Ein-Schritt-Richtung `1`, erzeugt nach den stark filternden Mediatoren aber
+eine aehnlich grosse Targetantwort. Das stuetzt eine spektrale Tiefpasslesart,
+nicht die physikalische Auswahl eines Feldgesetzes oder die Notwendigkeit des
+persistenten Kanals.
+
+Naechster Schritt ist **keine weitere Mediatorparametersuche**, sondern die
+analytische Response-Rang-Null des aktuellen Vektorkanals. Weil jede Ambient-
+Komponente unabhaengig durch denselben skalaren Transfer `H(r,omega)` laeuft,
+ist die Ambient-Transfermatrix `H I_d` und erhaelt den Rang einer vollrangigen
+Source-Kovarianz. Diese Architektur kann daher nicht von selbst drei aus mehr
+als drei angebotenen Richtungen auswaehlen. Vor einem cross-`d`-Lauf muss ein
+expliziter, falsifizierbarer Mechanismus benannt werden, der zusaetzliche
+Richtungen dynamisch unterdruecken kann; erst dann werden Eigenwertluecke nach
+Rang drei, Seedstabilitaet und unveraenderte dimensionslose Parameter
+vorregistriert.
+
 ## P2: Scheinmoden analytisch einordnen
 
 Die komplexen AR-Nebenmoden ueberlappen fuer aktiv und `eta=0` praktisch

@@ -122,12 +122,21 @@ identifizierten physikalischen Moden.
     (Median `0.991`). Der Pass zeigt Breitband-Identifizierbarkeit der bewusst
     verschiedenen Regeln, nicht spezifische Evidenz fuer Vektorpersistenz,
     ein physikalisches Feldgesetz oder `d=3`.
+- [Dynamisches Common-Source-Mediator-Gate](response/dynamic_common_source_mediator_gate_2026-07-28.md)
+  - **negative, mechanism underdetermined:** Beide Regeln bestehen in 6/6
+    Paaren Response-Fenster, Oddness, Source-/Target-Shape und
+    Distanzabschwachung. Die vorregistrierte relative Trace-Trennung besteht
+    jedoch nur fuer 4/6 statt 5/6 Paare gleichzeitig an allen drei Distanzen.
+  - Im Nahfeld bestehen 4/6 Paare (`Delta_DT` Minimum `0.1874`), bei `5` und
+    `10 R_pair` jeweils 6/6. Das Resultat rechtfertigt weder Retuning noch die
+    Auswahl eines physikalischen Transportgesetzes; Reziprozitaet und `d=3`
+    bleiben gesperrt.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Das bestandene Source-Gate
-oeffnet genau einen dynamischen Common-Source-Holdout mit den bereits
-kalibrierten Kopplungen. Persistenter und Ein-Schritt-Input muessen gemeinsam
-berichtet werden; ein Lauf ohne unabhaengiges Zielkriterium darf die
-Mediatorregeln nicht als physikalisch selektiert ausgeben.
+Entscheidung: Reziproke Kopplung bleibt gesperrt. Der dynamische Holdout ist
+abgeschlossen und waehlt keine der beiden eingesetzten Regeln. Weitere
+Kopplungsanpassung an dieselben Zielantworten waere nicht identifizierend. Der
+komponentenweise Vektormediator besitzt ausserdem nur den Ambient-Transfer
+`H I_d` und damit keinen Mechanismus fuer eine eindeutige Rang-drei-Selektion.
 
 ### 5. Governance und Kuration
 

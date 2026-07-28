@@ -36,6 +36,11 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
 - `draft/response/oriented_source_mediator_identifiability_2026-07-28.png`:
   6/6 autonome Sources sind spektral geeignet, die beiden Regeln zu trennen;
   nahezu gleicher Ein-Schritt-Kontrast zeigt keine Persistenzspezifitaet.
+- `draft/response/dynamic_common_source_mediator_gate_2026-07-28.png`:
+  Beide lokale Regeln erzeugen messbare, shape-bounded und abschwaechende
+  Antworten, aber nur 4/6 Paare bestehen die vorregistrierte Modelltrennung
+  gleichzeitig an allen drei Distanzen; negatives Diskriminationsgate, keine
+  Feldgesetz-Auswahl.
 
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in

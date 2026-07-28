@@ -230,3 +230,31 @@ def test_vector_mediator_matches_independent_scalar_channels(model: str) -> None
 
     np.testing.assert_array_equal(vector.values[:, :, 0], scalar.values)
     np.testing.assert_allclose(vector.values[:, :, 1], -2.0 * scalar.values)
+
+
+@pytest.mark.parametrize("model", ["diffusion", "telegraph"])
+def test_vector_mediator_does_not_mix_ambient_components(model: str) -> None:
+    grid = _grid()
+    pulse = rectangular_source(100, pulse_steps=10)
+    source = np.column_stack((pulse, np.zeros_like(pulse), np.zeros_like(pulse)))
+    if model == "diffusion":
+        vector = simulate_vector_relaxation_diffusion_mediator(
+            grid,
+            RelaxationDiffusionMediator(diffusivity=1.0, decay_rate=0.1),
+            source_values=source,
+            readout_positions=[1.0, 2.0],
+        )
+    else:
+        vector = simulate_vector_telegraph_mediator(
+            grid,
+            TelegraphMediator(
+                wave_speed=1.0,
+                damping_rate=0.1,
+                natural_frequency=0.1,
+            ),
+            source_values=source,
+            readout_positions=[1.0, 2.0],
+        )
+
+    assert np.any(vector.values[:, :, 0] != 0.0)
+    np.testing.assert_array_equal(vector.values[:, :, 1:], 0.0)

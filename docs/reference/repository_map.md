@@ -232,8 +232,11 @@ flowchart LR
     crossreadout --> historycurrent["ordered-history current<br/>random-sign gate fails"]
     historycurrent --> orientedgate2["independent oriented state<br/>6/6 one-way gate pass"]
     orientedgate2 --> fixedpair["fixed eta_v + independent pairs<br/>6/6 distance-gate pass"]
-    fixedpair --> mediatorgate["next: local mediator holdout<br/>diffusion t~r^2 vs telegraph t~r"]
-    mediatorgate -.pass.-> transport
+    fixedpair --> mediatorgate["local mediator holdout<br/>both inserted rules pass"]
+    mediatorgate --> sourceid["autonomous-source identifiability<br/>6/6 source eligibility pass"]
+    sourceid --> dynamicgate["dynamic common-source holdout<br/>model separation only 4/6: fail"]
+    dynamicgate --> ranknull["ambient rank null<br/>component-wise transfer H I_d"]
+    ranknull -.new symmetry-breaking mechanism required.-> transport
     compgate --> channel["signed scalar cross-channel complete<br/>exact nulls + product reversal"]
     channel --> seeds["later: 6-10 independent states<br/>no retuning"]
     channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]

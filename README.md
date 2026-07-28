@@ -154,12 +154,13 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Nach bestandenem Source-Spektralgate genau einen dynamischen Common-Source-
-   Holdout der lokalen Relaxations-Diffusions- und Telegraph-Regeln mit festen
-   Kopplungen sowie persistentem und Ein-Schritt-Input durchfuehren.
-3. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
-   Source-Eligibility, Shape-Boundedness und kontrollgetrennten Readout besteht.
-4. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
+2. Das negative dynamische Mediator-Diskriminationsgate nicht retunen; zuerst
+   die rang-erhaltende Null `H I_d` des komponentenweisen Kanals und die
+   Mindestanforderung an einen echten Dimensionsreduktionsmechanismus haerten.
+3. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
    phaenomen testen, bevor weitere Modensuchen laufen.
+4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
+   Source-Eligibility, Shape-Boundedness und einen unabhaengig
+   kontrollgetrennten Readout besteht.
 5. Die kanonische Evidenzschiene in `reports/README.md` pflegen; neue Reports
    nur bei geaenderter Entscheidung in die Frontdoor aufnehmen.

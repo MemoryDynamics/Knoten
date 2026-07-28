@@ -340,7 +340,7 @@ needed to distinguish these two deliberately different transfer rules.
 
 Report: `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`.
 
-## Dynamic Common-Source Gate Preregistration
+## Dynamic Common-Source Gate
 
 `dynamic_common_source_mediator_gate.py` uses the eligibility pass without
 opening another coupling or source sweep. Each ambient source-vector component
@@ -360,6 +360,21 @@ At least 5/6 pairs are required.
 The gate can reject dynamic architectures. Without an independent measured
 target trajectory, it cannot promote a surviving architecture to a physical
 field law or open reciprocal coupling.
+
+Canonical result: both rules pass response, oddness, source/target shape and
+attenuation in all 6/6 pairs. The stricter cross-model trace-separation gate
+is passed at all three distances by only 4/6 pairs, below the preregistered
+5/6. The nearest distance is limiting; all six pairs separate at `5` and
+`10 R_pair`.
+The result is therefore negative for robust mechanism discrimination, not a
+failure of either numerical field implementation. No coupling is retuned.
+
+Because the implementation applies the same scalar transfer independently to
+every ambient component, its component-space transfer is `H I_d`. It preserves
+the rank of a full-rank source covariance wherever `H` is nonzero and therefore
+cannot by itself select three directions from a larger supplied ambient space.
+
+Report: `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`.
 
 ## Interaction-Sign Decision
 
