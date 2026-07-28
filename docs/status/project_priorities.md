@@ -215,11 +215,33 @@ bewusst verschiedenen Regeln aber nicht spezifisch erforderlich. Entscheidung:
 **source eligible, mechanism and memory specificity underdetermined**.
 
 Naechster Schritt ist genau ein dynamisches Common-Source-Holdout mit den
-bereits kalibrierten Kopplungen. Es muss persistenten und Ein-Schritt-Input,
-channel-off, globalen Flip, Target-Response und Source-/Target-Shape gemeinsam
-berichten. Es darf nur Architekturunterschiede oder einen Shape-/Response-Fail
-feststellen: Ohne unabhaengige beobachtete Target-Daten kann auch dieser Lauf
-kein physikalisches Mediatorgesetz auswaehlen.
+bereits kalibrierten Kopplungen. Vorregistrierte Regel:
+
+1. dieselben sechs Paare und `2.5, 5, 10 R_pair`; 20 Memory-Zeiten gemeinsames
+   Einschwingen von autonomer Source, Mediator und Target, danach 50
+   Memory-Zeiten Auswertung bei Sampling alle 10 Updates;
+2. Gitter, Mediatorparameter, Laengeneinheit und pulse-kalibrierte Kopplungen
+   bleiben unveraendert. Die Vektorkomponenten treiben unabhaengige Kanaele
+   desselben relationalen 1D-Mediators;
+3. persistenter Carrier ist primaer. Ein-Schritt-Richtung, channel-off und
+   globaler Flip laufen mit identischem Target-Zukunftsrauschen; der
+   Ein-Schritt-Arm wird nicht nachtraeglich amplitude-gematcht und ist kein
+   primaeres Gate;
+4. pro Modell und Distanz muss die persistente Target-RMS-Antwort in
+   `[1e-4, 0.1] R_target` liegen. Die Obergrenze haelt die feste Paarachse in
+   ihrer linearen Geometriehuelle. Pfadweiser gerader Flip-Rest `<=0.1`,
+   Flip-RMS-Verhaeltnis `0.9..1.1`, Target-Radius- und Shape-Aenderung je
+   `<=0.1`; Source-Radius `<=0.5` und Shape-Spektrumdrift `<=0.25`;
+5. pro Modell darf die RMS-Antwort mit 25% Toleranz nicht mit Distanz wachsen,
+   Fern/Nah muss `<=0.5` sein. Der persistente Response-Trace beider Modelle
+   muss an jeder Distanz relativ mindestens `0.25` getrennt sein;
+6. Modell- und Separation-Pass jeweils erst bei mindestens 5/6 Paaren. Ein
+   Fail stoppt oder reformuliert die lokale Erweiterung ohne Retuning.
+
+Der Lauf darf nur Architekturunterschiede oder einen Shape-/Response-Fail
+feststellen. Ohne unabhaengige beobachtete Target-Daten kann auch ein
+Ein-Modell-Pass kein physikalisches Mediatorgesetz auswaehlen; Reziprozitaet
+bleibt gesperrt.
 
 ## P2: Scheinmoden analytisch einordnen
 

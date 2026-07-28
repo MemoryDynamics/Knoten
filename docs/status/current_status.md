@@ -165,6 +165,14 @@ Persistenz noetig oder eines der Gesetze physikalisch ist. Geoeffnet ist nur
 ein dynamisches Common-Source-Holdout mit festen Kopplungen und beiden
 Inputarmen; Reziprozitaet und `d=3` bleiben gesperrt.
 
+Dieses Gate ist nun vorregistriert: 20 Memory-Zeiten Einschwingen plus 50
+Memory-Zeiten Auswertung, dieselben sechs Paare und drei Distanzen, unveraenderte
+pulse-kalibrierte Kopplungen. Primaer sind persistente Target-RMS-Antwort in
+`[1e-4,0.1] R_target`, pfadweise Flip-Oddness, Source-/Target-Shape-Huelle,
+Fern/Nah `<=0.5` und relativer Diffusion-/Telegraph-Traceabstand `>=0.25`.
+Der Ein-Schritt-Arm wird mit derselben Kopplung berichtet, aber nicht
+amplitudenangepasst oder als primaeres Gate verwendet.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste

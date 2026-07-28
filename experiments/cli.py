@@ -89,6 +89,7 @@ CATEGORIES = {
         "current/memory/synchronization/oriented_vector_fixed_pair_distance_gate.py",
         "current/memory/synchronization/local_oriented_mediator_gate.py",
         "current/memory/synchronization/oriented_source_mediator_identifiability.py",
+        "current/memory/synchronization/dynamic_common_source_mediator_gate.py",
         "current/memory/synchronization/signed_cross_channel_pilot.py",
         "current/memory/synchronization/one_way_dynamic_source_pilot.py",
         "current/memory/synchronization/one_way_interaction_age_audit.py",

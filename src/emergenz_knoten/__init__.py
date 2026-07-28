@@ -22,6 +22,7 @@ from .field import (
 )
 from .external_field_response import (
     PairedExternalFieldResponse,
+    dynamic_external_field_response_metrics,
     external_field_response_metrics,
     paired_external_field_response,
 )
@@ -88,12 +89,15 @@ from .mediator_identifiability import (
 from .local_mediator import (
     LocalMediatorGrid,
     LocalMediatorTrace,
+    LocalVectorMediatorTrace,
     RelaxationDiffusionMediator,
     TelegraphMediator,
     relaxation_diffusion_frequency_response,
     rectangular_source,
     simulate_relaxation_diffusion_mediator,
     simulate_telegraph_mediator,
+    simulate_vector_relaxation_diffusion_mediator,
+    simulate_vector_telegraph_mediator,
     telegraph_frequency_response,
 )
 from .spectral_memory_runtime import SpectralMemoryOperators
@@ -244,6 +248,7 @@ __all__ = [
     "SpectralMemoryTrace",
     "LocalMediatorGrid",
     "LocalMediatorTrace",
+    "LocalVectorMediatorTrace",
     "TelegraphMediator",
     "VectorMemoryConfig",
     "antisymmetric_current_coherence",
@@ -263,6 +268,7 @@ __all__ = [
     "critical_gamma",
     "double_gaussian_gradient",
     "double_gaussian_potential",
+    "dynamic_external_field_response_metrics",
     "direct_history_potential_gradient",
     "effective_double_gaussian_parameters",
     "effective_gaussian_parameters",
@@ -344,6 +350,8 @@ __all__ = [
     "simulate_vector_memory",
     "simulate_relaxation_diffusion_mediator",
     "simulate_telegraph_mediator",
+    "simulate_vector_relaxation_diffusion_mediator",
+    "simulate_vector_telegraph_mediator",
     "telegraph_frequency_response",
     "spectral_dimension",
     "stationary_deposition_weight",

@@ -131,6 +131,45 @@ class LocalMediatorTrace:
         object.__setattr__(self, "source_values", source)
 
 
+@dataclass(frozen=True)
+class LocalVectorMediatorTrace:
+    """Independent ambient-vector channels on one relational spatial grid."""
+
+    model: str
+    times: np.ndarray
+    readout_positions: np.ndarray
+    values: np.ndarray
+    source_values: np.ndarray
+
+    def __post_init__(self) -> None:
+        times = np.asarray(self.times, dtype=float).copy()
+        positions = np.asarray(self.readout_positions, dtype=float).copy()
+        values = np.asarray(self.values, dtype=float).copy()
+        source = np.asarray(self.source_values, dtype=float).copy()
+        if times.ndim != 1 or times.size < 2 or not np.isfinite(times).all():
+            raise ValueError("times must be a finite one-dimensional sequence")
+        if positions.ndim != 1 or positions.size < 1:
+            raise ValueError("readout_positions must be one-dimensional")
+        if source.ndim != 2 or source.shape[0] != times.size - 1:
+            raise ValueError("source_values must have shape (updates, dimension)")
+        if values.shape != (times.size, positions.size, source.shape[1]):
+            raise ValueError(
+                "values must have shape (times, readout_positions, dimension)"
+            )
+        if source.shape[1] < 1:
+            raise ValueError("source dimension must be positive")
+        if not np.isfinite(positions).all() or not np.isfinite(values).all():
+            raise ValueError("mediator trace values must be finite")
+        if not np.isfinite(source).all():
+            raise ValueError("source_values must be finite")
+        for array in (times, positions, values, source):
+            array.setflags(write=False)
+        object.__setattr__(self, "times", times)
+        object.__setattr__(self, "readout_positions", positions)
+        object.__setattr__(self, "values", values)
+        object.__setattr__(self, "source_values", source)
+
+
 def relaxation_diffusion_frequency_response(
     wavenumber: np.ndarray | float,
     angular_frequency: np.ndarray | float,
@@ -340,5 +379,75 @@ def simulate_telegraph_mediator(
         times=times,
         readout_positions=positions,
         values=values,
+        source_values=source,
+    )
+
+
+def _vector_source(values: Iterable[Iterable[float]]) -> np.ndarray:
+    source = np.asarray(list(values), dtype=float)
+    if (
+        source.ndim != 2
+        or source.shape[0] < 1
+        or source.shape[1] < 1
+        or not np.isfinite(source).all()
+    ):
+        raise ValueError("source_values must have finite shape (updates, dimension)")
+    return source
+
+
+def simulate_vector_relaxation_diffusion_mediator(
+    grid: LocalMediatorGrid,
+    mediator: RelaxationDiffusionMediator,
+    *,
+    source_values: Iterable[Iterable[float]],
+    readout_positions: Iterable[float],
+) -> LocalVectorMediatorTrace:
+    """Propagate independent vector components through one diffusive channel."""
+
+    source = _vector_source(source_values)
+    positions = np.asarray(list(readout_positions), dtype=float)
+    traces = [
+        simulate_relaxation_diffusion_mediator(
+            grid,
+            mediator,
+            source_values=source[:, component],
+            readout_positions=positions,
+        )
+        for component in range(source.shape[1])
+    ]
+    return LocalVectorMediatorTrace(
+        model="relaxation_diffusion",
+        times=traces[0].times,
+        readout_positions=positions,
+        values=np.stack([trace.values for trace in traces], axis=-1),
+        source_values=source,
+    )
+
+
+def simulate_vector_telegraph_mediator(
+    grid: LocalMediatorGrid,
+    mediator: TelegraphMediator,
+    *,
+    source_values: Iterable[Iterable[float]],
+    readout_positions: Iterable[float],
+) -> LocalVectorMediatorTrace:
+    """Propagate independent vector components through one telegraph channel."""
+
+    source = _vector_source(source_values)
+    positions = np.asarray(list(readout_positions), dtype=float)
+    traces = [
+        simulate_telegraph_mediator(
+            grid,
+            mediator,
+            source_values=source[:, component],
+            readout_positions=positions,
+        )
+        for component in range(source.shape[1])
+    ]
+    return LocalVectorMediatorTrace(
+        model="telegraph",
+        times=traces[0].times,
+        readout_positions=positions,
+        values=np.stack([trace.values for trace in traces], axis=-1),
         source_values=source,
     )

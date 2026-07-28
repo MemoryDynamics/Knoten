@@ -33,6 +33,7 @@ flowchart TD
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>both architectures pass; mechanism open"]
     experiments --> mediator_id_exp["oriented_source_mediator_identifiability.py<br/>6/6 eligible; persistence nonspecific"]
+    experiments --> dynamic_mediator_exp["dynamic_common_source_mediator_gate.py<br/>fixed-coupling response holdout"]
     experiments --> checkpoint_exp["reference_state_checkpoints.py<br/>clean-revision z_N formation"]
     experiments --> kernel_audit["kernel_compensation_audit.py<br/>zero-integral / curvature constraints"]
     experiments --> sigma_pilot["fixed_curvature_sigma_pilot.py<br/>one-axis q test at fixed chi"]
@@ -67,7 +68,7 @@ flowchart TD
     src --> vector_memory["vector_memory.py<br/>oriented history/current, bivector and vector features"]
     src --> oriented_source["oriented_source.py<br/>persistent passive vector fibre + paired controls"]
     oriented_source --> continuation
-    src --> local_mediator["local_mediator.py<br/>1D local diffusion + telegraph states"]
+    src --> local_mediator["local_mediator.py<br/>scalar/vector 1D diffusion + telegraph states"]
     src --> mediator_id["mediator_identifiability.py<br/>segment power + complex transfer contrast"]
     src --> external_field["external_field_response.py<br/>paired active / flip / off target paths"]
     external_field --> continuation

@@ -11,6 +11,8 @@ from emergenz_knoten import (
     rectangular_source,
     simulate_relaxation_diffusion_mediator,
     simulate_telegraph_mediator,
+    simulate_vector_relaxation_diffusion_mediator,
+    simulate_vector_telegraph_mediator,
     telegraph_frequency_response,
 )
 
@@ -181,3 +183,50 @@ def test_diffusive_and_telegraph_transfer_functions_separate_off_dc() -> None:
     )
 
     assert np.max(np.abs(diffusion[1:] - telegraph[1:])) > 0.1
+
+
+@pytest.mark.parametrize("model", ["diffusion", "telegraph"])
+def test_vector_mediator_matches_independent_scalar_channels(model: str) -> None:
+    grid = _grid()
+    source = np.column_stack(
+        (
+            rectangular_source(100, pulse_steps=10),
+            -2.0 * rectangular_source(100, pulse_steps=10),
+        )
+    )
+    distances = [1.0, 2.0]
+    if model == "diffusion":
+        parameters = RelaxationDiffusionMediator(diffusivity=1.0, decay_rate=0.1)
+        vector = simulate_vector_relaxation_diffusion_mediator(
+            grid,
+            parameters,
+            source_values=source,
+            readout_positions=distances,
+        )
+        scalar = simulate_relaxation_diffusion_mediator(
+            grid,
+            parameters,
+            source_values=source[:, 0],
+            readout_positions=distances,
+        )
+    else:
+        parameters = TelegraphMediator(
+            wave_speed=1.0,
+            damping_rate=0.1,
+            natural_frequency=0.1,
+        )
+        vector = simulate_vector_telegraph_mediator(
+            grid,
+            parameters,
+            source_values=source,
+            readout_positions=distances,
+        )
+        scalar = simulate_telegraph_mediator(
+            grid,
+            parameters,
+            source_values=source[:, 0],
+            readout_positions=distances,
+        )
+
+    np.testing.assert_array_equal(vector.values[:, :, 0], scalar.values)
+    np.testing.assert_allclose(vector.values[:, :, 1], -2.0 * scalar.values)

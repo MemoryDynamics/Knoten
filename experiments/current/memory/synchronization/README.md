@@ -340,6 +340,27 @@ needed to distinguish these two deliberately different transfer rules.
 
 Report: `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`.
 
+## Dynamic Common-Source Gate Preregistration
+
+`dynamic_common_source_mediator_gate.py` uses the eligibility pass without
+opening another coupling or source sweep. Each ambient source-vector component
+drives an independent copy of the same relational 1D mediator. The six cyclic
+pairs, three distances, mediator grids and pulse-calibrated couplings are
+inherited unchanged.
+
+Source, mediator and target evolve for 20 memory times before a 50-memory-time
+analysis window. Persistent and unit one-step inputs are run with common target
+noise; the one-step amplitude is deliberately not matched after seeing data.
+Active, global flip and exact off branches define RMS response, pathwise odd
+residual and paired radius/shape disturbance. Persistent response must remain
+between `1e-4` and `0.1 R_target`, far/near at most `0.5`, and the two model
+response traces must differ by at least `0.25` relative RMS at every distance.
+At least 5/6 pairs are required.
+
+The gate can reject dynamic architectures. Without an independent measured
+target trajectory, it cannot promote a surviving architecture to a physical
+field law or open reciprocal coupling.
+
 ## Interaction-Sign Decision
 
 The implemented memory weights are non-negative. The current cross-field is

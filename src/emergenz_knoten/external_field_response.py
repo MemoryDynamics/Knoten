@@ -248,3 +248,67 @@ def external_field_response_metrics(
         ),
         "trace_active_response_r": active_norm / radius,
     }
+
+
+def dynamic_external_field_response_metrics(
+    response: PairedExternalFieldResponse,
+    *,
+    radius: float,
+    analysis_start_step: int,
+) -> dict[str, np.ndarray | float]:
+    """Measure a dynamic paired response after a fixed settling interval."""
+
+    if not np.isfinite(radius) or radius <= 0.0:
+        raise ValueError("radius must be positive")
+    if isinstance(analysis_start_step, bool) or not isinstance(
+        analysis_start_step, (int, np.integer)
+    ):
+        raise ValueError("analysis_start_step must be an integer")
+    mask = response.sample_steps >= int(analysis_start_step)
+    if np.count_nonzero(mask) < 2:
+        raise ValueError("analysis window must contain at least two samples")
+
+    centers = np.asarray(response.target_memory_centers, dtype=float)
+    active = centers[:, 0] - centers[:, 2]
+    flipped = centers[:, 1] - centers[:, 2]
+    active_analysis = active[mask]
+    flipped_analysis = flipped[mask]
+
+    def vector_rms(values: np.ndarray) -> float:
+        return float(np.sqrt(np.mean(np.sum(np.square(values), axis=1))))
+
+    active_rms = vector_rms(active_analysis)
+    flipped_rms = vector_rms(flipped_analysis)
+    odd_signal = active_analysis - flipped_analysis
+    even_residual = active_analysis + flipped_analysis
+    tiny = np.finfo(float).tiny
+
+    active_radius = response.target_radius_ratios[:, 0]
+    off_radius = response.target_radius_ratios[:, 2]
+    radius_ratio = np.divide(
+        active_radius,
+        off_radius,
+        out=np.ones_like(active_radius),
+        where=np.abs(off_radius) > tiny,
+    )
+    active_tensors = response.target_shape_tensors[:, 0]
+    off_tensors = response.target_shape_tensors[:, 2]
+    tensor_scale = np.maximum(np.trace(off_tensors, axis1=1, axis2=2), tiny)
+    active_norm = np.linalg.norm(active_analysis, axis=1)
+    return {
+        "active_response_rms_r": active_rms / radius,
+        "active_response_peak_r": float(np.max(active_norm)) / radius,
+        "active_response_final_r": float(active_norm[-1]) / radius,
+        "odd_symmetry_relative_rms": vector_rms(even_residual)
+        / max(vector_rms(odd_signal), tiny),
+        "flip_response_rms_ratio": flipped_rms / max(active_rms, tiny),
+        "target_radius_max_change": float(np.max(np.abs(radius_ratio - 1.0))),
+        "target_shape_max_change": float(
+            np.max(
+                np.linalg.norm(active_tensors - off_tensors, axis=(1, 2))
+                / tensor_scale
+            )
+        ),
+        "analysis_sample_steps": response.sample_steps[mask],
+        "trace_active_response_vector_r": active_analysis / radius,
+    }

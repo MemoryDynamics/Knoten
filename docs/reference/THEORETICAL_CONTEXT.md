@@ -356,6 +356,32 @@ ratios span only `0.951..1.008` (median `0.991`). Thus the source can expose
 different model predictions, but the audit neither validates persistent vector
 memory nor selects a mediator law.
 
+The opened dynamic holdout drives each ambient vector component through an
+independent copy of the same relational mediator. This does not add spatial
+dimensions to the transport grid; it is the linear vector extension of the
+scalar channel. With paired active, sign-flipped and off target centers
+`c_+(t), c_-(t), c_0(t)`, the primary post-settling response is
+
+```text
+R_rms = sqrt(mean_t ||c_+(t)-c_0(t)||^2) / R_target,
+E_odd = rms[(c_+-c_0)+(c_--c_0)]
+        / rms[(c_+-c_0)-(c_--c_0)].
+```
+
+This replaces an endpoint cosine, which becomes ill-conditioned when a
+zero-mean source happens to end near zero response. The dynamic separation of
+two model response traces `y_D,y_T` is
+
+```text
+Delta_DT = rms(y_D-y_T)
+           / sqrt((rms(y_D)^2+rms(y_T)^2)/2).
+```
+
+The pulse-calibrated couplings, grid and mediator parameters remain fixed.
+Response magnitude, oddness, source/target shape bounds, distance attenuation
+and `Delta_DT` can falsify an architecture. They cannot select a physical law
+without an independently observed target response.
+
 Reports: reports/kernels/core/kernel_core_audit_2026-07-18.md,
 reports/kernels/core/attractive_only_regime_scan_d3_N300k_2026-07-18.md,
 reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md,
@@ -510,7 +536,7 @@ diese Theorie:
 | `oriented_diagnostics.py` | gepaarte Response-, Shape-, Random-Sign- und Distanzmetriken |
 | `local_mediator.py` | lokale 1D Relaxations-Diffusions- und Telegraph-Zustaende fuer Transporttests |
 | `mediator_identifiability.py` | segmentierte Vektorleistung und sourcegewichteter komplexer Transferkontrast |
-| `external_field_response.py` | gepaarte Target-Fortsetzung fuer Aktiv-/Flip-/Kanal-aus-Felder |
+| `external_field_response.py` | gepaarte Target-Fortsetzung sowie Endpunkt- und dynamische RMS-/Oddness-Metriken fuer Aktiv-/Flip-/Kanal-aus-Felder |
 | `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 
 Begriffliche Hygiene:

@@ -5,6 +5,7 @@ import numpy as np
 from emergenz_knoten import (
     FiniteMemoryState,
     SimulationConfig,
+    dynamic_external_field_response_metrics,
     external_field_response_metrics,
     paired_external_field_response,
 )
@@ -91,3 +92,27 @@ def test_external_field_sign_flip_reverses_the_paired_response() -> None:
         ),
         atol=1e-15,
     )
+
+
+def test_dynamic_metrics_measure_rms_and_pathwise_odd_symmetry() -> None:
+    forcing = np.zeros((10, 2))
+    forcing[2:8, 0] = 0.01
+    response = paired_external_field_response(
+        _state(),
+        _config(),
+        applied_displacements=forcing,
+        noise=np.zeros_like(forcing),
+        sample_steps=np.arange(11),
+    )
+
+    metrics = dynamic_external_field_response_metrics(
+        response,
+        radius=0.1,
+        analysis_start_step=2,
+    )
+
+    assert metrics["active_response_rms_r"] > 0.0
+    assert metrics["active_response_peak_r"] >= metrics["active_response_rms_r"]
+    assert metrics["odd_symmetry_relative_rms"] < 1e-12
+    assert np.isclose(metrics["flip_response_rms_ratio"], 1.0)
+    assert metrics["trace_active_response_vector_r"].shape == (9, 2)
