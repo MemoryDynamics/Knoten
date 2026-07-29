@@ -278,19 +278,32 @@ Kontrollen registriert. Primaere Observablen sind Feldpeak und Peakbreite,
 Ast-/Gap-Persistenz, Source-Field-Closure und Shape-Bounds. Ein Pass waere
 klassische Musterbildung, noch keine Quantisierung oder QFT-Evidenz.
 
-Vorgeschaltetes Gate: Die fuer lineare homogene Faltung exakte
-Reparametrisierung wird als Mehrseed-Nulltest ausgefuehrt. Verglichen werden
+Abgeschlossenes Gate: Die fuer lineare homogene Faltung exakte
+Reparametrisierung wurde in drei Seeds und je 10,000 Updates bei identischem
+Rauschen geprueft. Fuer
 `rho'=q rho+beta G_x, phi=K*rho` und
-`phi'=q phi+beta(K*G)_x` mit Dirac-Identitaetsreadout bei identischem Rauschen.
-Ein raeumlich konstantes `K=1` ist eine getrennte Null: Es behaelt nur den
-Nullmodus und erzeugt keine Kraft. Der Pass darf nur die Zustandsbedeutung von
-Occupancy-Memory zu signiertem Potentialmemory aendern, nicht als neue Physik
-gewertet werden.
+`phi'=q phi+beta(K*G)_x` mit Dirac-Identitaetsreadout betragen die maximalen
+Pfad-, relativen Feld- und Gradientenfehler `7.11e-15`, `2.25e-15` und
+`1.43e-14`. Ein raeumlich konstantes `K=1` ist die getrennte kraftfreie Null.
+Der Pass aendert nur die Zustandsbedeutung von Occupancy-Memory zu signiertem
+Potentialmemory; er ist keine neue Physik.
 
-Erst danach folgt genau ein aktives skalares Delta-Quellfeld. Seine
-Eigenentwicklung muss im Update selbst liegen; ein breiter Depositkernel darf
-die Zielskala nicht bereits einschreiben. Die spaetere Vektorenergie mit
-gerichteter Quelle und optionaler Chiralitaet bleibt bis zum skalaren
+Naechstes Gate: genau ein aktives skalares Delta-Quellfeld. Seine
+Eigenentwicklung liegt im Update selbst; ein breiter Depositkernel darf die
+Zielskala nicht bereits einschreiben. Die dimensionslosen Arme werden vor dem
+Lauf festgehalten:
+
+1. Gaussian-null: `P(u)=1+u^2/2+u^4/8`, linear;
+2. stable-finite-k: `P(u)=1-1.8u^2+u^4`, linear und noch stabil;
+3. active-finite-k: `P(u)=1-2.2u^2+u^4` mit positiver kubischer Saettigung;
+4. cubic-off, source-off und eta-zero als mechanistische Kontrollen.
+
+Vor dem wissenschaftlichen Lauf muss ein Zeit-/Gitter-Konvergenztest die
+numerische Stabilitaet und die Nullantworten sichern. Primaere Endpunkte sind
+Feldpeak und Peakbreite, Amplitudenbeschraenktheit, Source-Field-Closure und
+sichtbare Shape-Bounds. Ein Pass waere nur Evidenz fuer klassische
+Finite-Wellenzahl-Musterbildung. Die spaetere Vektorenergie mit gerichteter
+Quelle und optionaler Chiralitaet bleibt bis zu diesem skalaren
 Mechanismusgate gesperrt.
 
 ## P2: Scheinmoden analytisch einordnen

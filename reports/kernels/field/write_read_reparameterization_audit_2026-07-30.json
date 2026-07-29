@@ -1,0 +1,71 @@
+{
+  "claims": {
+    "collapse_adds_field_self_dynamics": false,
+    "collapse_changes_visible_dynamics": false,
+    "collapsed_field_is_nonnegative_density": false,
+    "constant_kernel_is_identity": false,
+    "dirac_readout_is_identity": true
+  },
+  "constant_kernel_gradient": 0.0,
+  "equations": {
+    "collapsed": "phi'=q phi+beta (K*G)_x; read=delta",
+    "induction": "phi_n=K*rho_n",
+    "separate": "rho'=q rho+beta G_x; phi=K*rho"
+  },
+  "generated_utc": "2026-07-29T23:40:03Z",
+  "git_revision": "d7b5e412778461b63ab48ce946e31ef3ec7c285c",
+  "git_status": "M  README.md\nM  docs/index.md\nM  docs/reference/THEORETICAL_CONTEXT.md\nM  docs/reference/experiment_catalog.md\nM  docs/status/current_status.md\nM  docs/status/paper_claims.md\nM  docs/status/project_priorities.md\nMM experiments/current/kernels/write_read_reparameterization_audit.py\nM  figures/README.md\nA  figures/draft/kernels/field_2026-07-30/write_read_reparameterization_audit.png\nM  reports/README.md\nA  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.json\nA  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md",
+  "maximum_errors": {
+    "gradient": 1.4266691127085007e-14,
+    "path": 7.105427357601002e-15,
+    "relative_field": 2.254640398490715e-15
+  },
+  "outputs": {
+    "figure": "figures\\draft\\kernels\\field_2026-07-30\\write_read_reparameterization_audit.png",
+    "report": "reports\\kernels\\field\\write_read_reparameterization_audit_2026-07-30.md",
+    "summary_json": "reports\\kernels\\field\\write_read_reparameterization_audit_2026-07-30.json"
+  },
+  "parameters": {
+    "amplitude_att": 26.0,
+    "box_length": 80.0,
+    "deposition_sigma": 0.0,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "lambda_value": 0.01,
+    "memory_mass": 1.0,
+    "n_modes": 64,
+    "sample_every": 20,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "sigma_att": 3.0,
+    "sigma_comp": 10.0,
+    "steps": 10000,
+    "tolerance": 1e-10
+  },
+  "passed": true,
+  "question": "Does moving the linear read kernel into deposition preserve the visible path and stored potential field under common noise?",
+  "runs": [
+    {
+      "max_gradient_error": 1.3550141911289337e-14,
+      "max_path_error": 7.105427357601002e-15,
+      "max_relative_field_error": 1.9320804695442505e-15,
+      "seed": 1
+    },
+    {
+      "max_gradient_error": 1.4266691127085007e-14,
+      "max_path_error": 7.105427357601002e-15,
+      "max_relative_field_error": 1.5252797187415433e-15,
+      "seed": 2
+    },
+    {
+      "max_gradient_error": 1.3826227218249193e-14,
+      "max_path_error": 7.105427357601002e-15,
+      "max_relative_field_error": 2.254640398490715e-15,
+      "seed": 3
+    }
+  ],
+  "status": "structural"
+}

@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -21,6 +21,8 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   mit lokaler Kraft und kumuliertem Kernelintegral.
 - `draft/kernels/field_2026-07-29/`: Gaussian-`k^2/k^4`-Transfer,
   Finite-k-Stabilitaetsgrenze und `H I_d`-Ambient-Rang-Null.
+- `draft/kernels/field_2026-07-30/`: Pfad-, Feld- und Gradientengleichheit
+  der Write-/Read-Reparametrisierung sowie kraftfreie konstante-Kernel-Null.
 - `draft/kernels/nonlinearity_2026-07-19/`: feste-`g`-Nichtlinearitaets- und
   Skalenpruefung.
 - `draft/memory/low_mode_identity_audit_2026-07-20.png`: negatives

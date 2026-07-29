@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -14,7 +14,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. | kontrollierte co-moving Relaxationswolke | kein isolierter nichtlinearer Knoten und kein Phasenuebergang |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
-| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. Eine lokale skalare Ableitungsentwicklung reproduziert den Gausskern bis `k^4` und macht Zero-Mean- sowie Stabilitaetsbedingungen explizit. | kompakte Reprasentation und analytisch kontrollierte Modellfamilien | das Vorzeichen des `k^2`-Terms, Nichtlinearitaeten und ein Rangreduktionsmechanismus sind nicht hergeleitet |
+| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` mit Dirac-Readout ist linear exakt und numerisch bis `1.5e-14` bestaetigt. Eine lokale skalare Ableitungsentwicklung reproduziert den Gausskern bis `k^4`. | kompakte Reprasentation, identifizierte Write-/Read-Faktorisierung und analytisch kontrollierte Modellfamilien | die Reparametrisierung ist keine Felddynamik; Vorzeichen des `k^2`-Terms, Nichtlinearitaeten und Rangreduktion sind nicht hergeleitet |
 | Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
@@ -28,6 +28,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   finite-memory Zustand vollstaendig und checksum-validiert.
 - Die spektrale `rho`-Darstellung ist fuer die getestete periodische
   1D-Reprasentation numerisch mit der direkten Historie reconciliiert.
+- Die lineare Write-/Read-Reparametrisierung `phi=K*rho` ist analytisch exakt
+  und im Drei-Seed-Audit fuer Pfad, Feld und Gradient bis `1.5e-14`
+  bestaetigt. Dirac-Faltung ist der Identitaetsreadout; ein konstantes `K=1`
+  erzeugt exakt keinen Gradienten.
 - Ein auf die bestehende lokale Kruemmung gematchter LoG-Kernel ist analytisch
   abklingend und exakt zero mean. Das ist eine verfuegbare Nullfamilie, keine
   Evidenz fuer Neutralitaet oder eine bestimmte Amplitude.
@@ -118,6 +122,7 @@ wichtig:
 11. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
 12. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
 13. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
+14. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren

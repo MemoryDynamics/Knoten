@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -57,6 +57,12 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     die Finite-k-Schwelle sowie die vollrangige `H I_d`-Null exakt.
   - `a2<0`, nichtlineare Saettigung, Quantisierung und `d=3` sind neue
     Annahmen bzw. offene Mechanismen, keine Auditresultate.
+- [Write-/Read-Reparametrisierung](kernels/field/write_read_reparameterization_audit_2026-07-30.md)
+  - **structural:** Drei Seeds bestaetigen `phi=K*rho` mit
+    Dirac-Identitaetsreadout fuer Pfad, Feld und Gradient bis maximal
+    `1.43e-14`; ein konstantes `K=1` ist exakt kraftfrei.
+  - Die Umformung macht aus nichtnegativem Occupancy-Memory ein signiertes
+    Potentialmemory. Sie erzeugt keine selbstdynamische Feldgleichung.
 - [Spektrale rho-Reprasentation](memory/spectral_rho_field_pilot_2026-07-19.md)
   - **structural + pipeline-only:** Historie, Masse, Kontraktion und Kraft sind fuer
     die getestete 1D-Reprasentation reconciliiert.

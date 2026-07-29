@@ -51,6 +51,11 @@ Belastbar derzeit:
   langwelligen `k^2`-/`k^4`-Nullterme; ein negativer `k^2`-Koeffizient mit
   `k^4`-Stabilisierung waere ein neuer endlicher-Wellenzahl-Mechanismus, kein
   bereits hergeleitetes Resultat.
+- Der Write-/Read-Audit bestaetigt die exakte lineare Reparametrisierung
+  `phi=K*rho` in drei Seeds: Pfad-, Feld- und Gradientenfehler bleiben unter
+  `1.5e-14`. Ein Dirac-Readout ist die Identitaet; ein konstantes `K=1` ist
+  kraftfrei. Die Umformung vereinfacht den Zustand, erzeugt aber keine neue
+  Felddynamik.
 - Der A_att=0..40-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
   Fuer A_att>=5 folgt der dynamische Radius der linearen
   Memory-Center-Vorhersage mit 0.94 Prozent medianem Fehler.
@@ -164,9 +169,9 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Zuerst die exakte Write-/Read-Reparametrisierung `phi=K*rho` gegen den
-   bisherigen getrennten Pfad pruefen. Danach genau ein aktives skalares
-   Delta-Quellfeld gegen lineare, source-off- und eta-zero-Kontrollen oeffnen.
+2. Nach bestandenem Write-/Read-Nulltest genau ein aktives skalares
+   Delta-Quellfeld gegen Gaussian-null-, stable-finite-k-, cubic-off-,
+   source-off- und eta-zero-Kontrollen oeffnen.
 3. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
    phaenomen testen, bevor weitere Modensuchen laufen.
 4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal

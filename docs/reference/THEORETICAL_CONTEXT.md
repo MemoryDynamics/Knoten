@@ -243,6 +243,19 @@ Vektor- oder komplexen Feldes auftreten. Das oeffnet Methoden aus String- und
 Defekttheorie, liefert aber weder Quantisierung noch drei Raumdimensionen als
 Abkuerzung.
 
+Die naechste mathematische Analogie ist daher vorerst nicht die fundamentale
+Stringquantisierung, sondern ein feldtheoretischer Linienfehler wie der
+[Nielsen-Olesen-Vortex](https://www.infomall.org/sites/dsc/jpac/QCDRef/1970s/Vortex-line%20models%20for%20dual%20strings%20-%20Nielsen%2C%20Olesen%20-%201973.pdf).
+Polyakovs Weltflaechenformulierung setzt zusaetzliche Symmetrien voraus und
+liefert fuer den bosonischen String die kritische Dimension 26, nicht drei
+([Polyakov 1981](https://www.sciencedirect.com/science/article/pii/0370269381907437)).
+Auch Stringfeldtheorie, etwa in Wittens kubischer offener Theorie, beginnt mit
+einem bereits quantisierten Stringzustandsraum
+([Witten 1986](https://inspirehep.net/literature/220076)). Sie kann spaeter
+Methoden fuer Defekte, Moden und Wechselwirkungen liefern, ersetzt aber nicht
+den hier noch fehlenden Nachweis von Feldordnung, Quantisierung oder
+Dimensionsselektion.
+
 ## Spektrale rho-Reprasentation und dynamische Felderweiterung
 
 Auf einer periodischen 1D-Box der Laenge `L_box` kann dasselbe skalare Memory

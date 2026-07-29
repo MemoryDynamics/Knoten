@@ -297,21 +297,22 @@ def _plot(args: argparse.Namespace, payload: dict[str, Any], output: Path) -> No
     config = _config(args)
     fig, axes = plt.subplots(2, 2, figsize=(12.6, 8.4))
     colors = plt.get_cmap("tab10")
-    floor = np.finfo(float).tiny
+    floor = 1e-18
+    initial_x = 0.37 * config.box_length
 
     for index, run in enumerate(payload["runs"]):
         color = colors(index)
         steps = np.asarray(run["sample_steps"])
         axes[0, 0].plot(
             steps,
-            run["memory_x"],
+            np.asarray(run["memory_x"]) - initial_x,
             color=color,
             linewidth=1.7,
             label=f"seed {run['seed']}: separate",
         )
         axes[0, 0].plot(
             steps,
-            run["collapsed_x"],
+            np.asarray(run["collapsed_x"]) - initial_x,
             color=color,
             linewidth=1.0,
             linestyle="--",
@@ -345,7 +346,7 @@ def _plot(args: argparse.Namespace, payload: dict[str, Any], output: Path) -> No
         label="new write |K_hat G_hat| / max",
     )
 
-    axes[0, 0].set(title="Visible path overlay", xlabel="update n", ylabel="periodic x")
+    axes[0, 0].set(title="Visible path overlay", xlabel="update n", ylabel="periodic x - x0")
     axes[0, 1].set(title="Path disagreement", xlabel="update n", ylabel="periodic |delta x|")
     axes[1, 0].set(title="Stored-field identity", xlabel="update n", ylabel="relative ||phi-K rho||")
     axes[1, 1].set(title="Write/read factorization", xlabel="wavenumber k", ylabel="transfer magnitude")
@@ -400,7 +401,20 @@ def write_outputs(args: argparse.Namespace) -> None:
     _plot(args, payload, figure)
     report.parent.mkdir(parents=True, exist_ok=True)
     summary.parent.mkdir(parents=True, exist_ok=True)
-    summary.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    compact_payload = {key: value for key, value in payload.items() if key != "runs"}
+    compact_payload["runs"] = [
+        {
+            "seed": run["seed"],
+            "max_path_error": run["max_path_error"],
+            "max_relative_field_error": run["max_relative_field_error"],
+            "max_gradient_error": run["max_gradient_error"],
+        }
+        for run in payload["runs"]
+    ]
+    summary.write_text(
+        json.dumps(compact_payload, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
 
     errors = payload["maximum_errors"]
     lines = [

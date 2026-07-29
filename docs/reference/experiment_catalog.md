@@ -35,7 +35,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
 | `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
 | `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | abgeschlossen | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
-| `experiments/current/kernels/write_read_reparameterization_audit.py` | Write-/Read-Faktorisierung | vorregistriert | drei Seeds, identisches Rauschen, Pfad-/Feld-/Gradientengleichheit; trennt Dirac-Identitaet von konstantem kraftfreiem Kernel |
+| `experiments/current/kernels/write_read_reparameterization_audit.py` | Write-/Read-Faktorisierung | abgeschlossen | drei Seeds und je 10,000 Updates; Pfad-/Feld-/Gradientengleichheit bis `1.43e-14`; trennt Dirac-Identitaet von konstantem kraftfreiem Kernel |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
@@ -820,6 +820,7 @@ Modellklasse.
 | `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md` | Residence-Skalenaudit | Feste Voxel sind radiusabhaengig; co-moving Residence ist fuer aktiv und eta=0 gesaettigt. Keine unabhaengige Metastabilitaetsstuetze. |
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
 | `reports/kernels/field/local_field_operator_audit_2026-07-29.md` | Lokaler Feldoperator-Audit | Eingeschraenkte Ableitungsbasis; Gaussian-k4-Match, `s0=0`-Zero-Mean, Finite-k-Schwelle bei `a2=-2` und exakte `H I_d`-Ambient-Rang-Null. Keine Quantisierungs- oder d=3-Evidenz. |
+| `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md` | Write-/Read-Reparametrisierung | Exakte lineare Faktorisierung in drei Seeds numerisch bestaetigt; maximale Pfad-, relative Feld- und Gradientenfehler `7.11e-15`, `2.25e-15`, `1.43e-14`. Keine neue Felddynamik. |
 | `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
 | `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
 | `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |
