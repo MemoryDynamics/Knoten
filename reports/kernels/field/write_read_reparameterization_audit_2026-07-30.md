@@ -1,6 +1,6 @@
 # Write/Read Reparameterization Audit
 
-Date: 2026-07-29T23:40:03Z.
+Date: 2026-07-29T23:41:30Z.
 
 ## Question
 
@@ -60,18 +60,6 @@ nor dimension selection.
 
 ## Provenance
 
-- Git revision: `d7b5e412778461b63ab48ce946e31ef3ec7c285c`
-- Git status before generation: `M  README.md
-M  docs/index.md
-M  docs/reference/THEORETICAL_CONTEXT.md
-M  docs/reference/experiment_catalog.md
-M  docs/status/current_status.md
-M  docs/status/paper_claims.md
-M  docs/status/project_priorities.md
-MM experiments/current/kernels/write_read_reparameterization_audit.py
-M  figures/README.md
-A  figures/draft/kernels/field_2026-07-30/write_read_reparameterization_audit.png
-M  reports/README.md
-A  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.json
-A  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
+- Git revision: `44f8c3fa9d1828082923f493751b18d7228c4e5f`
+- Git status before generation: `clean`
 - Script: `experiments/current/kernels/write_read_reparameterization_audit.py`

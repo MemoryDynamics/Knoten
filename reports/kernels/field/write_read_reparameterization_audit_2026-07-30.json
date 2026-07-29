@@ -12,9 +12,9 @@
     "induction": "phi_n=K*rho_n",
     "separate": "rho'=q rho+beta G_x; phi=K*rho"
   },
-  "generated_utc": "2026-07-29T23:40:03Z",
-  "git_revision": "d7b5e412778461b63ab48ce946e31ef3ec7c285c",
-  "git_status": "M  README.md\nM  docs/index.md\nM  docs/reference/THEORETICAL_CONTEXT.md\nM  docs/reference/experiment_catalog.md\nM  docs/status/current_status.md\nM  docs/status/paper_claims.md\nM  docs/status/project_priorities.md\nMM experiments/current/kernels/write_read_reparameterization_audit.py\nM  figures/README.md\nA  figures/draft/kernels/field_2026-07-30/write_read_reparameterization_audit.png\nM  reports/README.md\nA  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.json\nA  reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md",
+  "generated_utc": "2026-07-29T23:41:30Z",
+  "git_revision": "44f8c3fa9d1828082923f493751b18d7228c4e5f",
+  "git_status": "",
   "maximum_errors": {
     "gradient": 1.4266691127085007e-14,
     "path": 7.105427357601002e-15,
