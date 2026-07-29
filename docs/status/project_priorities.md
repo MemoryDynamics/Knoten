@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -277,6 +277,21 @@ Vorzeichensymmetrie sowie positive-`a2`-, cubic-off-, source-off- und eta-zero-
 Kontrollen registriert. Primaere Observablen sind Feldpeak und Peakbreite,
 Ast-/Gap-Persistenz, Source-Field-Closure und Shape-Bounds. Ein Pass waere
 klassische Musterbildung, noch keine Quantisierung oder QFT-Evidenz.
+
+Vorgeschaltetes Gate: Die fuer lineare homogene Faltung exakte
+Reparametrisierung wird als Mehrseed-Nulltest ausgefuehrt. Verglichen werden
+`rho'=q rho+beta G_x, phi=K*rho` und
+`phi'=q phi+beta(K*G)_x` mit Dirac-Identitaetsreadout bei identischem Rauschen.
+Ein raeumlich konstantes `K=1` ist eine getrennte Null: Es behaelt nur den
+Nullmodus und erzeugt keine Kraft. Der Pass darf nur die Zustandsbedeutung von
+Occupancy-Memory zu signiertem Potentialmemory aendern, nicht als neue Physik
+gewertet werden.
+
+Erst danach folgt genau ein aktives skalares Delta-Quellfeld. Seine
+Eigenentwicklung muss im Update selbst liegen; ein breiter Depositkernel darf
+die Zielskala nicht bereits einschreiben. Die spaetere Vektorenergie mit
+gerichteter Quelle und optionaler Chiralitaet bleibt bis zum skalaren
+Mechanismusgate gesperrt.
 
 ## P2: Scheinmoden analytisch einordnen
 

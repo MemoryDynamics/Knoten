@@ -59,6 +59,7 @@ CATEGORIES = {
         "current/kernels/fixed_g_scale_reconciliation.py",
         "current/kernels/field_equation_bridge.py",
         "current/kernels/local_field_operator_audit.py",
+        "current/kernels/write_read_reparameterization_audit.py",
         "propagation_speed/ballistic_kernel_probe.py",
     ],
     "knot_stability": [

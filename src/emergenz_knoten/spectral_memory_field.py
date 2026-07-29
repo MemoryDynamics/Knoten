@@ -79,6 +79,28 @@ class SpectralMemoryState:
         object.__setattr__(self, "rho_coefficients", coefficients)
 
 
+@dataclass(frozen=True)
+class CollapsedPotentialState:
+    """Visible coordinate plus the signed field ``phi_hat=K_hat*rho_hat``."""
+
+    x: float
+    phi_coefficients: np.ndarray
+    update_index: int = 0
+
+    def __post_init__(self) -> None:
+        if not np.isfinite(self.x):
+            raise ValueError("x must be finite")
+        if self.update_index < 0:
+            raise ValueError("update_index must be non-negative")
+        coefficients = np.asarray(self.phi_coefficients, dtype=np.complex128).copy()
+        if coefficients.ndim != 1 or coefficients.size < 2:
+            raise ValueError("phi_coefficients must be a one-dimensional array")
+        if not np.isfinite(coefficients).all():
+            raise ValueError("phi_coefficients must be finite")
+        coefficients.setflags(write=False)
+        object.__setattr__(self, "phi_coefficients", coefficients)
+
+
 def wavenumbers(config: SpectralMemoryConfig) -> np.ndarray:
     """Return non-negative retained periodic wavenumbers."""
 
@@ -221,6 +243,75 @@ def potential_coefficients(
     return transfer * rho
 
 
+def collapse_memory_to_potential(
+    config: SpectralMemoryConfig,
+    rho_coefficients: np.ndarray,
+) -> np.ndarray:
+    """Move the read kernel into the stored field: ``phi_hat=K_hat*rho_hat``."""
+
+    return potential_coefficients(config, rho_coefficients)
+
+
+def collapsed_deposition_coefficients(
+    config: SpectralMemoryConfig,
+    x: float,
+) -> np.ndarray:
+    """Return the effective write ``K_hat*G_hat*exp(-ikx)``."""
+
+    return collapse_memory_to_potential(config, deposition_coefficients(config, x))
+
+
+def initialize_collapsed_potential_state(
+    config: SpectralMemoryConfig,
+    *,
+    x: float = 0.0,
+) -> CollapsedPotentialState:
+    """Initialize the representation with identity readout ``K_read=delta``."""
+
+    wrapped = wrap_periodic(x, config.box_length)
+    return CollapsedPotentialState(
+        x=wrapped,
+        phi_coefficients=collapsed_deposition_coefficients(config, wrapped),
+    )
+
+
+def update_collapsed_potential(
+    config: SpectralMemoryConfig,
+    phi_coefficients: np.ndarray,
+    *,
+    deposited_at: float,
+) -> np.ndarray:
+    """Update the signed potential memory after moving ``K`` into deposition."""
+
+    phi = np.asarray(phi_coefficients, dtype=np.complex128)
+    if phi.shape != (config.n_modes + 1,):
+        raise ValueError("phi coefficient shape does not match config")
+    return np.asarray(
+        (1.0 - config.lambda_value) * phi
+        + config.lambda_value
+        * collapsed_deposition_coefficients(config, deposited_at),
+        dtype=np.complex128,
+    )
+
+
+def collapsed_potential_gradient(
+    config: SpectralMemoryConfig,
+    phi_coefficients: np.ndarray,
+    *,
+    x: float,
+) -> float:
+    """Read ``d_x phi`` directly; this is convolution with ``delta``."""
+
+    phi = np.asarray(phi_coefficients, dtype=np.complex128)
+    if phi.shape != (config.n_modes + 1,):
+        raise ValueError("phi coefficient shape does not match config")
+    if not np.isfinite(phi).all():
+        raise ValueError("phi coefficients must be finite")
+    k = wavenumbers(config)
+    phases = np.exp(1j * k[1:] * wrap_periodic(x, config.box_length))
+    return float(2.0 * np.real(np.sum(1j * k[1:] * phi[1:] * phases)))
+
+
 def potential_gradient(
     config: SpectralMemoryConfig,
     rho_coefficients: np.ndarray,
@@ -280,6 +371,44 @@ def advance_state(
     return SpectralMemoryState(
         x=x_new,
         rho_coefficients=rho_new,
+        update_index=state.update_index + 1,
+    )
+
+
+def advance_collapsed_potential_state(
+    state: CollapsedPotentialState,
+    config: SpectralMemoryConfig,
+    *,
+    epsilon: float,
+    eta: float,
+    noise: float,
+) -> CollapsedPotentialState:
+    """Advance the exactly reparameterized signed-potential memory."""
+
+    if state.phi_coefficients.shape != (config.n_modes + 1,):
+        raise ValueError("state coefficient shape does not match config")
+    for name, value in (("epsilon", epsilon), ("eta", eta)):
+        if not np.isfinite(value) or value < 0.0:
+            raise ValueError(f"{name} must be non-negative and finite")
+    if not np.isfinite(noise):
+        raise ValueError("noise must be finite")
+    gradient = collapsed_potential_gradient(
+        config,
+        state.phi_coefficients,
+        x=state.x,
+    )
+    x_new = wrap_periodic(
+        state.x + float(epsilon) * float(noise) - float(eta) * gradient,
+        config.box_length,
+    )
+    phi_new = update_collapsed_potential(
+        config,
+        state.phi_coefficients,
+        deposited_at=x_new,
+    )
+    return CollapsedPotentialState(
+        x=x_new,
+        phi_coefficients=phi_new,
         update_index=state.update_index + 1,
     )
 

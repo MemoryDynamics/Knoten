@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-26.
+Stand: 2026-07-30.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -65,6 +65,22 @@ ein normierter noch ein nichtnegativer Depositionskernel. Die aktuelle
 Delta-Deposition ist die maximal aufloesende Occupancy-Darstellung; die
 fehlende Strukturantwort stammt im One-Way-Test vom breiten Cross-Lesekernel,
 nicht von einer Glaettung beim Schreiben.
+
+Praezise kann man jedoch den gesamten Readkernel in einen signierten
+Feldzustand verschieben:
+
+```text
+phi_n = K*rho_n,
+phi_(n+1) = q phi_n + beta (K*G)(.-x_(n+1)).
+```
+
+Der Readoperator ist dann die Faltungsidentitaet `delta`, sodass `Phi=phi`.
+Die konstante Funktion `K=1` ist nicht die Identitaet: Sie liefert nur
+`Phi=int rho`, daher `grad Phi=0`. Die kollabierte Darstellung ist bei
+linearem translationsinvariantem `K` exakt aequivalent, aber `phi` ist im
+Allgemeinen signiert und keine nichtnegative Occupancy-Dichte. Eigene
+Felddynamik entsteht erst, wenn der Update von `phi` weitere lokale Operatoren
+oder Nichtlinearitaeten enthaelt.
 
 Fuer normierte Gauss-Deposition gilt bei `s=L`:
 
@@ -189,6 +205,43 @@ aber weder lokalisierte Knoten noch diskrete Aeste oder Quantisierung. Der
 Audit zeigt ausserdem erneut: komponentenweiser Transfer `H I_d` erhaelt den
 Ambient-Rang und kann kein `d=3` selektieren. Report:
 `reports/kernels/field/local_field_operator_audit_2026-07-29.md`.
+
+### Spaetere Vektor- und Chiralitaetsschiene
+
+Eine moegliche lokale Vektorenergie lautet als Future-Work-Ansatz
+
+```text
+F[m;J] = int [
+  a/2 |m|^2
+  + b_L/2 (div m)^2
+  + b_T/2 |grad wedge m|^2
+  + c/2 |Delta m|^2
+  + u/4 |m|^4
+  - J dot m
+  + chi m dot (curl m)
+  + ...
+] dx.
+```
+
+`-J dot m` ist eine gerichtete Trajektorienquelle. Bei festem `J` bricht sie
+`m -> -m`, waehrend die gemeinsame Transformation `(m,J)->(-m,-J)` erhalten
+bleiben kann. Fuer einen einzelnen isotropen Vektor bestehen lokale
+potentialartige Invarianten ohne Ableitungen aus Funktionen von `|m|^2`;
+Ableitungsinvarianten sind deutlich zahlreicher.
+
+`chi=0` ist die paritaetssymmetrische Null. Der Term
+`m dot (curl m)` ist jedoch in dieser Form spezifisch fuer einen orientierten
+dreidimensionalen Raum. Dimensionsallgemein ist `grad wedge m` eine
+antisymmetrische Zweiform; eine chirale Kontraktion braucht zusaetzliche
+Dimensions- und Orientierungsstruktur. Der Chiralitaetsterm darf deshalb
+nicht in einen Test eingehen, der erst `d=3` selektieren soll.
+
+Eine gespeicherte Punkttrajektorie ist zunaechst eine diskrete Weltlinie, kein
+dynamischer String mit Weltflaeche, Spannung und Reparametrisierungsinvarianz.
+Stringartige Linienfehler koennten spaeter als topologische Defekte eines
+Vektor- oder komplexen Feldes auftreten. Das oeffnet Methoden aus String- und
+Defekttheorie, liefert aber weder Quantisierung noch drei Raumdimensionen als
+Abkuerzung.
 
 ## Spektrale rho-Reprasentation und dynamische Felderweiterung
 

@@ -5,11 +5,15 @@ import math
 import numpy as np
 
 from emergenz_knoten.spectral_memory_field import (
+    advance_collapsed_potential_state,
     SpectralMemoryConfig,
     SpectralMemoryState,
     advance_state,
+    collapse_memory_to_potential,
+    collapsed_potential_gradient,
     deposition_coefficients,
     explicit_history_coefficients,
+    initialize_collapsed_potential_state,
     initialize_state,
     kernel_integral_coefficient,
     kernel_transfer,
@@ -163,3 +167,57 @@ def test_state_owns_immutable_coefficient_copy() -> None:
 
     assert state.rho_coefficients[0] == 1.0
     assert not state.rho_coefficients.flags.writeable
+
+
+def test_moving_read_kernel_into_deposition_preserves_visible_path() -> None:
+    config = SpectralMemoryConfig(
+        box_length=80.0,
+        n_modes=64,
+        lambda_value=0.03,
+        deposition_sigma=0.2,
+        kernel=zero_mean_attractive_kernel(
+            amplitude_att=8.0,
+            sigma_att=3.0,
+            sigma_comp=10.0,
+        ),
+    )
+    memory_state = initialize_state(config, x=27.0)
+    potential_state = initialize_collapsed_potential_state(config, x=27.0)
+    noise = np.random.default_rng(17).normal(size=2_000)
+
+    for value in noise:
+        memory_state = advance_state(
+            memory_state,
+            config,
+            epsilon=1e-4,
+            eta=0.15,
+            noise=float(value),
+        )
+        potential_state = advance_collapsed_potential_state(
+            potential_state,
+            config,
+            epsilon=1e-4,
+            eta=0.15,
+            noise=float(value),
+        )
+
+    assert math.isclose(
+        memory_state.x,
+        potential_state.x,
+        rel_tol=0.0,
+        abs_tol=2e-12,
+    )
+    np.testing.assert_allclose(
+        potential_state.phi_coefficients,
+        collapse_memory_to_potential(config, memory_state.rho_coefficients),
+        rtol=2e-12,
+        atol=2e-12,
+    )
+
+
+def test_spatially_constant_kernel_has_zero_gradient() -> None:
+    config = SpectralMemoryConfig(n_modes=12)
+    constant_field = np.zeros(config.n_modes + 1, dtype=np.complex128)
+    constant_field[0] = 123.0
+
+    assert collapsed_potential_gradient(config, constant_field, x=17.0) == 0.0

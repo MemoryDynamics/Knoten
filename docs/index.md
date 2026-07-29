@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
@@ -114,6 +114,13 @@ eingeschraenkte Ableitungsentwicklung. Die bisherige Gaussantwort wird bis
 null. Eine bevorzugte endliche Wellenzahl verlangt dagegen die neue Annahme
 `a2<0` in `1+a2 u^2+u^4`. Ein spaeterer positiver Pilot waere klassische
 Musterbildung, noch keine Quantisierung, QFT- oder `d=3`-Evidenz.
+
+Vor diesem Pilot wird die lineare Write-/Read-Faktorisierung geschlossen:
+`rho` mit nachgeschaltetem `K` und das signierte Potentialmemory `phi=K*rho`
+mit Dirac-Readout muessen dieselbe sichtbare Trajektorie liefern. Erst ein
+zusaetzlicher lokaler Operator im `phi`-Update macht das Feld selbst-dynamisch.
+Vektor-, Chiralitaets- und stringartige Defektmodelle bleiben nach diesem
+skalaren Gate gesperrte Paper-III-Kandidaten.
 
 ## Nicht ueberclaimen
 

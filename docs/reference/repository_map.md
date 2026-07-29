@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -44,6 +44,7 @@ flowchart TD
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
     experiments --> field_operator["local_field_operator_audit.py<br/>k4 / zero-mean / finite-k / rank null"]
+    experiments --> write_read["write_read_reparameterization_audit.py<br/>K*rho vs signed potential memory"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
@@ -186,6 +187,8 @@ flowchart LR
     lognull --> operator["local operator audit<br/>Gaussian k4 + H I_d rank null"]
     operator -.new assumption.-> finitek["finite-k candidate<br/>a2 negative, k4 stabilized"]
     decision --> spectral["spectral rho representation<br/>exact at nu=0; 64 modes"]
+    spectral --> factorization["write/read identity gate<br/>phi = K rho; read = delta"]
+    factorization -.new dynamics.-> activefield["active scalar field<br/>delta source + local operator"]
     spectral --> epsilon_gate["epsilon 1e-8..1e-4<br/>exact linear scaling"]
     epsilon_gate --> mediator["relaxation-diffusion extension<br/>q_k=(1-lambda) exp(-nu k^2)"]
     mediator --> smooth["pilot: smooth weakening<br/>no new branch"]

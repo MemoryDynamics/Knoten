@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-29.
+Stand: 2026-07-30.
 
 ## Worum es geht
 
@@ -164,10 +164,9 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
    historische Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Das negative dynamische Mediator-Diskriminationsgate nicht retunen. Falls
-   der Feldzweig fortgesetzt wird, genau einen festen Finite-k-Mechanismus
-   gegen positive-`a2`-, cubic-off-, source-off- und eta-zero-Kontrollen
-   pruefen; die rang-erhaltende Null `H I_d` ist abgeschlossen.
+2. Zuerst die exakte Write-/Read-Reparametrisierung `phi=K*rho` gegen den
+   bisherigen getrennten Pfad pruefen. Danach genau ein aktives skalares
+   Delta-Quellfeld gegen lineare, source-off- und eta-zero-Kontrollen oeffnen.
 3. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
    phaenomen testen, bevor weitere Modensuchen laufen.
 4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
