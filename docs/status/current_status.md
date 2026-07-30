@@ -11,7 +11,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Bereich | Evidenz | Belastbare Lesart | Grenze |
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
-| Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. | kontrollierte co-moving Relaxationswolke | kein isolierter nichtlinearer Knoten und kein Phasenuebergang |
+| Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` mit Dirac-Readout ist linear exakt und numerisch bis `1.5e-14` bestaetigt. Eine lokale skalare Ableitungsentwicklung reproduziert den Gausskern bis `k^4`. | kompakte Reprasentation, identifizierte Write-/Read-Faktorisierung und analytisch kontrollierte Modellfamilien | die Reparametrisierung ist keine Felddynamik; Vorzeichen des `k^2`-Terms, Nichtlinearitaeten und Rangreduktion sind nicht hergeleitet |
@@ -45,6 +45,11 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 - Der aktuelle kleine-Radius-Ast ist kompakter als `eta=0`, wird aber fast
   vollstaendig durch den linearen Memory-Center-Relativmodus erklaert.
+- Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
+  ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
+  Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
+  der Messgrenzen, nicht deren erste Entstehungszeit; zeitaufgeloeste
+  Shape-Fenster fehlen in den Legacy-Traces.
 - Die dynamische Relaxations-Diffusion veraendert Radius und Kraft glatt und
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
@@ -111,18 +116,19 @@ wichtig:
 
 1. `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`
 2. `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`
-3. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
-4. `reports/memory/low_mode_identity_audit_2026-07-20.md`
-5. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
-6. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
-7. `reports/response/oriented_history_current_audit_2026-07-21.md`
-8. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
-9. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
-10. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
-11. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
-12. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
-13. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
-14. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
+3. `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md`
+4. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
+5. `reports/memory/low_mode_identity_audit_2026-07-20.md`
+6. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
+7. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
+8. `reports/response/oriented_history_current_audit_2026-07-21.md`
+9. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
+10. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
+11. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
+12. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
+13. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
+14. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
+15. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -132,6 +138,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
 
 - `src/emergenz_knoten/`: kanonischer Paketkern.
 - `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
+- `src/emergenz_knoten/stability.py`: Checkpoint-, Holdout- und lokale
+  Stationaritaetsgates fuer lange Formationslaeufe.
 - `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
   mit gepaarten One-Way-Kontrollen.
 - `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-

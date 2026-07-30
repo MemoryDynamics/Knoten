@@ -133,6 +133,12 @@ from .state import (
     place_finite_memory_state,
     translate_finite_memory_state,
 )
+from .stability import (
+    checkpoint_stability_diagnostics,
+    local_radius_stationarity_diagnostics,
+    local_shape_stationarity_diagnostics,
+    normalized_shape_eigenvalues,
+)
 from .experiments import (
     SimulationResult,
     SimulationRunner,
@@ -289,6 +295,7 @@ __all__ = [
     "collapsed_potential_gradient",
     "covariance_dimension",
     "critical_eta",
+    "checkpoint_stability_diagnostics",
     "critical_gamma",
     "double_gaussian_gradient",
     "double_gaussian_potential",
@@ -324,6 +331,8 @@ __all__ = [
     "local_scalar_operator_denominator",
     "local_scalar_source_multiplier",
     "local_scalar_stationary_transfer",
+    "local_radius_stationarity_diagnostics",
+    "local_shape_stationarity_diagnostics",
     "low_mode_feature_groups",
     "low_mode_feature_names",
     "low_wavenumber_matched_field",
@@ -363,6 +372,7 @@ __all__ = [
     "response_rank",
     "run_simulation",
     "normalized_shape_spectra",
+    "normalized_shape_eigenvalues",
     "paired_shape_coherence_diagnostics",
     "save_finite_memory_checkpoint",
     "save_simulation_result",

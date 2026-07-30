@@ -11,6 +11,7 @@ Hardening und Long-Run-Metastabilitaet.
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
 | `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
+| `experiments/current/dynamics/stability_gate_audit.py` | Checkpoint-/Holdout-Stabilitaet | aktiv | vier Alterscheckpoints, spaeter Holdout und lokale Radiusfenster; retrospektive Methodik, keine Formationszeit |
 | `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
 | `experiments/current/dynamics/paper_i_evidence_table.py` | Paper-I-Evidenztabelle aus Long-Run-Summaries | aktiv | konservative Claim-Tabelle fuer co-moving scalar-knot Evidenz |
 | `experiments/current/dynamics/aatt_transition_report.py` | A_att-Uebergang `d=3` vs. `d=10` | aktiv | Dimensions-Reconciliation, beta=0/M0=0-Referenzverweis und KPI-Kurven ueber `A_att` |
@@ -160,6 +161,15 @@ Hinweis: Alle numerischen Long-Run-Abschnitte bis zum Force-Komponenten-Pilot
 vom 2026-07-09 sind `legacy-sign`-Auditmaterial. Korrigierte Evidenz beginnt
 mit `reports/kernels/corrected_sign/corrected_sign_q3_pilot_2026-07-09.md` und
 `reports/kernels/corrected_sign/amplitude_hierarchy_corrected_sign_q3_2026-07-09.md`.
+
+Stabilitaetsprotokoll 2026-07-30: Der kanonische `d=10`, `A_att=35`-Slice
+verwendet `N={1M,3M,10M,30M}` als vier Alterscheckpoints und `N=300M` als
+separaten Holdout. Alle 5 Seeds bestehen Radiusbereich `<=10%`, Radius-CV
+`<=15%`, absoluten Radiustrend pro Dekade `<=5%`, normalisierte
+Shape-Spektrum-TV `<=10%` und vier lokale Radiusfenster plus Holdout. Der
+Befund ist retrospektiv-provisorisch: Legacy-Traces enthalten lokal keinen
+zeitaufgeloesten Shape-Tensor und bestimmen nicht die erste Formationszeit.
+Report: `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md`.
 
 Kanonischer Start:
 

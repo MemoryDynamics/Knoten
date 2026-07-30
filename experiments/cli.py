@@ -28,6 +28,7 @@ CATEGORIES = {
         "current/dynamics/dspec_raw_snapshot_report.py",
         "current/dynamics/n_dependence_recheck_report.py",
         "current/dynamics/long_run_metastability.py",
+        "current/dynamics/stability_gate_audit.py",
         "current/dynamics/linear_long_run_reconciliation.py",
         "current/dynamics/dynamic_center_trace_report.py",
         "current/dynamics/paper_i_evidence_table.py",

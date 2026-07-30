@@ -45,6 +45,7 @@ flowchart TD
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
     experiments --> field_operator["local_field_operator_audit.py<br/>k4 / zero-mean / finite-k / rank null"]
     experiments --> write_read["write_read_reparameterization_audit.py<br/>K*rho vs signed potential memory"]
+    experiments --> stability_audit["stability_gate_audit.py<br/>4 checkpoints + late holdout"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]
@@ -52,6 +53,7 @@ flowchart TD
     src --> field["field.py<br/>heat transfer + local operator expansion"]
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> knot_score["knot_score.py<br/>scorecards v0.3-v0.6 + shape gates"]
+    src --> stability["stability.py<br/>age, local-window and holdout gates"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
@@ -219,8 +221,12 @@ flowchart TD
     plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_run_metastability.py"]
     runner --> local["data/processed/long_run_metastability<br/>ignored bulk JSON outputs"]
     local --> trace_review["dynamic_center_trace_report.py<br/>log-trend radius/drift + local spin figures"]
+    local --> stability_gate["stability_gate_audit.py<br/>4 age checkpoints + 1 late holdout"]
+    stability_gate --> candidate["provisional candidate<br/>radius + endpoint shape"]
+    candidate --> future["future runs<br/>local radius + shape windows"]
     local --> review["manual review<br/>residence, controls, runtime"]
     trace_review --> report["reports/<br/>committed result report"]
+    stability_gate --> report
     review --> report["reports/<br/>committed result report"]
     report --> paper1["Paper I evidence table"]
 ```

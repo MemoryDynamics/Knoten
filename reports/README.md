@@ -31,6 +31,11 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
 - [Long-Run-Reconciliation](long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md)
   - **supported:** neun aktive `N=30M/300M`-Slices folgen dem linearen
     Finite-Memory-Radius bis maximal `1.16%` relativ.
+- [Checkpoint-/Holdout-Stabilitaetsgate](long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md)
+  - **supported, method-conditional:** 5/5 `d=10`, `A_att=35`-Seeds bestehen
+    vier Alterscheckpoints bis `N=30M`, lokale Radiusfenster und den
+    `N=300M`-Holdout. Keine erste Formationszeit, keine zeitaufgeloeste
+    Shape-Stationaritaet und kein Teilchenclaim.
 - [Feste-g-Skalenpruefung](kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md)
   - **inconclusive:** kleine Superlinearitaet, aber kein Shape-Umschlag;
     Residence- und Score-Metriken sind auf dieser Radiusachse nicht

@@ -35,6 +35,27 @@ Zu entfernen oder klar als historische Hypothese zu markieren:
 Fertig, wenn `paper/paper_i`, `docs/status/paper_claims.md` und die
 kanonischen Reports dieselbe Claim-Grenze verwenden.
 
+Long-Run-Zulassungsprotokoll: Der retrospektive `d=10`, `A_att=35`-Audit
+besteht fuer 5/5 Seeds. Vier Alterscheckpoints `N={1M,3M,10M,30M}` liegen bei
+Radiusbereich, Radius-CV, Trend pro Dekade und rotationsinvariantem
+Shape-Spektrum innerhalb der fixierten Grenzen; ein unangetasteter
+`N=300M`-Holdout bestaetigt alle Seeds. Das macht `N=30M` zum ersten mit den
+vorhandenen Daten pruefbaren Kandidaten, nicht zur nachgewiesenen
+Formationszeit.
+
+Fuer neue Formationslaeufe gilt verbindlich:
+
+1. resumierbare Zustaende auf `N0*{1,3,10,30,100,...}` speichern;
+2. vier Checkpoints ueber mindestens eine Dekade vor einer Kandidatur;
+3. Radiusbereich `<=10%`, Radius-CV `<=15%`, Radiustrend pro Dekade `<=5%`
+   und normalisierte Shape-Spektrum-TV `<=10%`;
+4. ein mindestens dreimal spaeterer Holdout;
+5. in jedem Checkpoint vier lokale Radius-/Shape-Fenster plus ein Holdout.
+
+Legacy-Traces besitzen lokal nur Radius, keinen zeitaufgeloesten Shape-Tensor.
+Ihr 5/5-Pass bleibt daher `retrospective provisional`; automatisches Stoppen
+wird erst mit neu erzeugten Shape-Fenstern zulaessig.
+
 ## P1: Orientierter Kanal und lokales Feldgesetz
 
 Entscheidung: Das vorgeschaltete Cross-Readout-Gate scheitert in `d=3` und

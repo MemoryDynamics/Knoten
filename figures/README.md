@@ -25,6 +25,8 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   der Write-/Read-Reparametrisierung sowie kraftfreie konstante-Kernel-Null.
 - `draft/kernels/nonlinearity_2026-07-19/`: feste-`g`-Nichtlinearitaets- und
   Skalenpruefung.
+- `draft/long_runs/stability_2026-07-30/`: vier Alterscheckpoints,
+  Radius-/Shape-Gates und separater `N=300M`-Holdout fuer 5 Seeds.
 - `draft/memory/low_mode_identity_audit_2026-07-20.png`: negatives
   Mode-Identity-Gate.
 - `draft/response/one_way_interaction_age_N3M_2026-07-21.png`: Translation

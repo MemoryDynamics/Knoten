@@ -1,0 +1,504 @@
+{
+  "aggregate": {
+    "all_seeds_provisional_pass": true,
+    "checkpoint_pass_count": 5,
+    "local_radius_pass_count": 5,
+    "provisional_pass_count": 5,
+    "seed_count": 5
+  },
+  "checkpoint_protocol": {
+    "candidate_update": 30000000,
+    "holdout_checkpoints": 1,
+    "holdout_update": 300000000,
+    "local_holdout_windows": 1,
+    "local_training_windows": 4,
+    "local_window_memory_times": 20.0,
+    "minimum_holdout_factor": 3.0,
+    "minimum_training_span_decades": 1.0,
+    "radius_cv_limit": 0.15,
+    "radius_range_limit": 0.1,
+    "radius_trend_per_decade_limit": 0.05,
+    "shape_spectrum_tv_limit": 0.1,
+    "training_checkpoints": 4,
+    "training_updates": [
+      1000000,
+      3000000,
+      10000000,
+      30000000
+    ]
+  },
+  "claim_boundaries": {
+    "automatic_early_stopping_validated": false,
+    "first_formation_time_identified": false,
+    "physical_knot_or_particle_stability_established": false,
+    "retrospective_N30M_candidate_confirmed_at_N300M": true,
+    "time_resolved_shape_stationarity_measured": false
+  },
+  "configuration": {
+    "alpha": 0.01,
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "dim": 10,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "memory_mass": 1.0,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0
+  },
+  "generated_utc": "2026-07-30T20:46:31Z",
+  "git_revision": "21da33e9105df27753a4476fe4ee7897486b3dea",
+  "git_status": "M README.md\n M docs/reference/experiment_catalog.md\n M docs/reference/repository_map.md\n M docs/status/current_status.md\n M docs/status/paper_claims.md\n M docs/status/project_priorities.md\n M experiments/cli.py\n M figures/README.md\n M reports/README.md\n M src/emergenz_knoten/__init__.py\n?? experiments/current/dynamics/stability_gate_audit.py\n?? figures/draft/long_runs/\n?? reports/long_runs/stability/\n?? src/emergenz_knoten/stability.py\n?? tests/test_stability.py\n?? tests/test_stability_gate_audit.py",
+  "outputs": {
+    "figure": "figures\\draft\\long_runs\\stability_2026-07-30\\checkpoint_stability_gate_d10_A35.png",
+    "report": "reports\\long_runs\\stability\\checkpoint_stability_gate_d10_A35_2026-07-30.md",
+    "summary_json": "reports\\long_runs\\stability\\checkpoint_stability_gate_d10_A35_2026-07-30.json"
+  },
+  "question": "Do four age checkpoints through N=30M predict a stable radius and rotation-invariant memory shape at an untouched N=300M holdout?",
+  "rows": [
+    {
+      "checkpoint_effective_dimensions": [
+        9.186068687966227,
+        8.933425996279427,
+        9.200791554269008,
+        8.84701896008133,
+        9.109451061840026
+      ],
+      "checkpoint_gate": {
+        "candidate_update": 30000000,
+        "checkpoint_stability_pass": true,
+        "holdout_factor": 10.0,
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.004304230050113267,
+        "holdout_separation_pass": true,
+        "holdout_shape_pass": true,
+        "holdout_shape_spectrum_tv": 0.0122886554571832,
+        "holdout_update": 300000000,
+        "minimum_holdout_factor": 3.0,
+        "minimum_training_span_decades": 1.0,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "radius_trend_per_decade_limit": 0.05,
+        "spectrum_tv_limit": 0.1,
+        "training_checkpoint_count": 4,
+        "training_radius_cv": 0.014896463226160537,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.041887503910928325,
+        "training_radius_trend_pass": true,
+        "training_radius_trend_per_decade": 0.023142076756238642,
+        "training_shape_pass": true,
+        "training_shape_spectrum_tv_max": 0.027806654745321235,
+        "training_span_decades": 1.4771212547196624,
+        "training_span_pass": true
+      },
+      "checkpoint_radii": [
+        0.00037100419476660717,
+        0.0003793290833313212,
+        0.0003761222669553008,
+        0.0003865446344258642,
+        0.00037609985694165985
+      ],
+      "checkpoint_updates": [
+        1000000,
+        3000000,
+        10000000,
+        30000000,
+        300000000
+      ],
+      "local_radius_gate": {
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.001729089083197799,
+        "holdout_window_count": 1,
+        "local_radius_stationarity_pass": true,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "training_radius_cv_max": 0.026752712999887428,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.014174081822482476,
+        "training_window_count": 4,
+        "window_median_radii": [
+          0.0003794564327853297,
+          0.0003814617722579055,
+          0.00038235605964022677,
+          0.0003770122570605714,
+          0.000381116950202391
+        ],
+        "window_radius_cvs": [
+          0.020327448061052425,
+          0.017299734129364915,
+          0.02187398156484494,
+          0.026752712999887428,
+          0.016473637217088694
+        ],
+        "window_sample_counts": [
+          2000,
+          2000,
+          2000,
+          2000,
+          2000
+        ],
+        "window_updates": 2000
+      },
+      "provisional_stability_pass": true,
+      "seed": 1
+    },
+    {
+      "checkpoint_effective_dimensions": [
+        9.207426675294736,
+        9.040524204083525,
+        9.0021628552099,
+        8.998882008874673,
+        9.26848541344512
+      ],
+      "checkpoint_gate": {
+        "candidate_update": 30000000,
+        "checkpoint_stability_pass": true,
+        "holdout_factor": 10.0,
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.012988964722395746,
+        "holdout_separation_pass": true,
+        "holdout_shape_pass": true,
+        "holdout_shape_spectrum_tv": 0.020463593003582352,
+        "holdout_update": 300000000,
+        "minimum_holdout_factor": 3.0,
+        "minimum_training_span_decades": 1.0,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "radius_trend_per_decade_limit": 0.05,
+        "spectrum_tv_limit": 0.1,
+        "training_checkpoint_count": 4,
+        "training_radius_cv": 0.017686151635404167,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.03903022645683407,
+        "training_radius_trend_pass": true,
+        "training_radius_trend_per_decade": 0.016329155443307375,
+        "training_shape_pass": true,
+        "training_shape_spectrum_tv_max": 0.018208839801048843,
+        "training_span_decades": 1.4771212547196624,
+        "training_span_pass": true
+      },
+      "checkpoint_radii": [
+        0.0003700293160026511,
+        0.00038266740290344764,
+        0.0003705771809162216,
+        0.000384471644001902,
+        0.00038151422557311927
+      ],
+      "checkpoint_updates": [
+        1000000,
+        3000000,
+        10000000,
+        30000000,
+        300000000
+      ],
+      "local_radius_gate": {
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.0033946051959963253,
+        "holdout_window_count": 1,
+        "local_radius_stationarity_pass": true,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "training_radius_cv_max": 0.021258082191488104,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.004718118832920615,
+        "training_window_count": 4,
+        "window_median_radii": [
+          0.00038047356785459076,
+          0.0003792676131905777,
+          0.00037883248037605735,
+          0.0003806198570362416,
+          0.00038116010120297836
+        ],
+        "window_radius_cvs": [
+          0.020985422096557477,
+          0.02051023313354812,
+          0.021258082191488104,
+          0.0210717430733473,
+          0.02057643001439777
+        ],
+        "window_sample_counts": [
+          2000,
+          2000,
+          2000,
+          2000,
+          2000
+        ],
+        "window_updates": 2000
+      },
+      "provisional_stability_pass": true,
+      "seed": 2
+    },
+    {
+      "checkpoint_effective_dimensions": [
+        9.090777402375002,
+        8.875215844238536,
+        9.329250365348003,
+        8.857421550855854,
+        9.332506276174636
+      ],
+      "checkpoint_gate": {
+        "candidate_update": 30000000,
+        "checkpoint_stability_pass": true,
+        "holdout_factor": 10.0,
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.021395437547870766,
+        "holdout_separation_pass": true,
+        "holdout_shape_pass": true,
+        "holdout_shape_spectrum_tv": 0.031177644743959416,
+        "holdout_update": 300000000,
+        "minimum_holdout_factor": 3.0,
+        "minimum_training_span_decades": 1.0,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "radius_trend_per_decade_limit": 0.05,
+        "spectrum_tv_limit": 0.1,
+        "training_checkpoint_count": 4,
+        "training_radius_cv": 0.017847032403558786,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.048043717070354264,
+        "training_radius_trend_pass": true,
+        "training_radius_trend_per_decade": 0.015847674777966,
+        "training_shape_pass": true,
+        "training_shape_spectrum_tv_max": 0.027339483139807295,
+        "training_span_decades": 1.4771212547196624,
+        "training_span_pass": true
+      },
+      "checkpoint_radii": [
+        0.0003954605973270292,
+        0.00038070486061590807,
+        0.00037733215789173254,
+        0.00038647433653527126,
+        0.0003753825312752528
+      ],
+      "checkpoint_updates": [
+        1000000,
+        3000000,
+        10000000,
+        30000000,
+        300000000
+      ],
+      "local_radius_gate": {
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.02256783740651458,
+        "holdout_window_count": 1,
+        "local_radius_stationarity_pass": true,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "training_radius_cv_max": 0.022764469757281976,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.030128337828822183,
+        "training_window_count": 4,
+        "window_median_radii": [
+          0.00038370330049453073,
+          0.0003812298896173443,
+          0.0003847365661672214,
+          0.0003734841107061687,
+          0.00037383515112529185
+        ],
+        "window_radius_cvs": [
+          0.022764469757281976,
+          0.020036381038661448,
+          0.020362256789554462,
+          0.0210909238101746,
+          0.01813729949351528
+        ],
+        "window_sample_counts": [
+          2000,
+          2000,
+          2000,
+          2000,
+          2000
+        ],
+        "window_updates": 2000
+      },
+      "provisional_stability_pass": true,
+      "seed": 3
+    },
+    {
+      "checkpoint_effective_dimensions": [
+        9.007769867875497,
+        9.046029635382096,
+        9.02945168306165,
+        9.258879594295173,
+        9.233410114581625
+      ],
+      "checkpoint_gate": {
+        "candidate_update": 30000000,
+        "checkpoint_stability_pass": true,
+        "holdout_factor": 10.0,
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.00907792928589024,
+        "holdout_separation_pass": true,
+        "holdout_shape_pass": true,
+        "holdout_shape_spectrum_tv": 0.021725464809460096,
+        "holdout_update": 300000000,
+        "minimum_holdout_factor": 3.0,
+        "minimum_training_span_decades": 1.0,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "radius_trend_per_decade_limit": 0.05,
+        "spectrum_tv_limit": 0.1,
+        "training_checkpoint_count": 4,
+        "training_radius_cv": 0.009850834787486494,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.025206435727765264,
+        "training_radius_trend_pass": true,
+        "training_radius_trend_per_decade": 0.01149078754444048,
+        "training_shape_pass": true,
+        "training_shape_spectrum_tv_max": 0.022400553763855083,
+        "training_span_decades": 1.4771212547196624,
+        "training_span_pass": true
+      },
+      "checkpoint_radii": [
+        0.000386010205888804,
+        0.0003765194915254177,
+        0.0003806921594620838,
+        0.00037727381569489744,
+        0.0003824233683402835
+      ],
+      "checkpoint_updates": [
+        1000000,
+        3000000,
+        10000000,
+        30000000,
+        300000000
+      ],
+      "local_radius_gate": {
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.00012050372799765618,
+        "holdout_window_count": 1,
+        "local_radius_stationarity_pass": true,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "training_radius_cv_max": 0.021494179004759913,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.013299041719897042,
+        "training_window_count": 4,
+        "window_median_radii": [
+          0.00038241865019832724,
+          0.00038361475780510177,
+          0.00037858000650428246,
+          0.0003818065752031497,
+          0.0003821586586950838
+        ],
+        "window_radius_cvs": [
+          0.02096900550322549,
+          0.021494179004759913,
+          0.018621847976219297,
+          0.017730180596109705,
+          0.016704160844639413
+        ],
+        "window_sample_counts": [
+          2000,
+          2000,
+          2000,
+          2000,
+          2000
+        ],
+        "window_updates": 2000
+      },
+      "provisional_stability_pass": true,
+      "seed": 4
+    },
+    {
+      "checkpoint_effective_dimensions": [
+        8.750481512400686,
+        8.972749797065674,
+        9.219383273199382,
+        9.204087186098166,
+        8.984535359246822
+      ],
+      "checkpoint_gate": {
+        "candidate_update": 30000000,
+        "checkpoint_stability_pass": true,
+        "holdout_factor": 10.0,
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.011698002189005186,
+        "holdout_separation_pass": true,
+        "holdout_shape_pass": true,
+        "holdout_shape_spectrum_tv": 0.02716548710655722,
+        "holdout_update": 300000000,
+        "minimum_holdout_factor": 3.0,
+        "minimum_training_span_decades": 1.0,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "radius_trend_per_decade_limit": 0.05,
+        "spectrum_tv_limit": 0.1,
+        "training_checkpoint_count": 4,
+        "training_radius_cv": 0.01357593831219562,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.032256023476532114,
+        "training_radius_trend_pass": true,
+        "training_radius_trend_per_decade": 0.006132200898666986,
+        "training_shape_pass": true,
+        "training_shape_spectrum_tv_max": 0.026542698081501254,
+        "training_span_decades": 1.4771212547196624,
+        "training_span_pass": true
+      },
+      "checkpoint_radii": [
+        0.00038720816391695477,
+        0.0003761828374757847,
+        0.00038831699991287205,
+        0.00037901003483984265,
+        0.00038759071046155503
+      ],
+      "checkpoint_updates": [
+        1000000,
+        3000000,
+        10000000,
+        30000000,
+        300000000
+      ],
+      "local_radius_gate": {
+        "holdout_radius_pass": true,
+        "holdout_radius_relative_change": 0.002815540320794341,
+        "holdout_window_count": 1,
+        "local_radius_stationarity_pass": true,
+        "radius_cv_limit": 0.15,
+        "radius_range_limit": 0.1,
+        "training_radius_cv_max": 0.022211138252817883,
+        "training_radius_cv_pass": true,
+        "training_radius_range_pass": true,
+        "training_radius_relative_range": 0.007493976134301361,
+        "training_window_count": 4,
+        "window_median_radii": [
+          0.00037723282850924463,
+          0.00037955681608436076,
+          0.00038005980232316795,
+          0.0003795439001946431,
+          0.0003784817188023882
+        ],
+        "window_radius_cvs": [
+          0.02085931060002945,
+          0.022211138252817883,
+          0.020991886611707453,
+          0.020887122250379243,
+          0.021579600793124484
+        ],
+        "window_sample_counts": [
+          2000,
+          2000,
+          2000,
+          2000,
+          2000
+        ],
+        "window_updates": 2000
+      },
+      "provisional_stability_pass": true,
+      "seed": 5
+    }
+  ],
+  "status": "supported_method_conditional"
+}

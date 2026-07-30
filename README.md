@@ -62,6 +62,11 @@ Belastbar derzeit:
 - Die Paper-I-Evidenz ist deshalb als co-moving linear scalar relaxation-cloud
   evidence zu lesen: kein fixes absolutes Zentrum, kein isolierter
   nichtlinearer Knotenmechanismus und kein physikalischer Teilchenclaim.
+- Ein retrospektives Stabilitaetsgate fuer den kanonischen `d=10`,
+  `A_att=35`-Slice besteht bei 5/5 Seeds: vier Alterscheckpoints bis `N=30M`
+  sagen Radius und rotationsinvariante Endshape am `N=300M`-Holdout korrekt
+  innerhalb der vorab fixierten Grenzen voraus. Das lokalisiert weder die
+  erste Formationszeit noch prueft es langsame zeitaufgeloeste Shape-Zyklen.
 - D_mem nahe drei im d=3-Embedding ist im aktuellen Taylor-Regime erwartete
   isotrope Gaussgeometrie und keine Evidenz emergenter Dreidimensionalitaet.
 - Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`; es
@@ -167,8 +172,9 @@ python experiments/current/dynamics/long_run_metastability.py --steps 10000000 -
 
 ## Naechste Prioritaeten
 
-1. Paper I auf die lineare co-moving Relaxationslesart synchronisieren;
-   historische Metastabilitaets- und Dimensionsformulierungen entfernen.
+1. Paper I auf die lineare co-moving Relaxationslesart und das neue
+   Checkpoint-/Holdout-Stabilitaetsprotokoll synchronisieren; historische
+   Metastabilitaets- und Dimensionsformulierungen entfernen.
 2. Nach bestandenem Write-/Read-Nulltest genau ein aktives skalares
    Delta-Quellfeld gegen Gaussian-null-, stable-finite-k-, cubic-off-,
    source-off- und eta-zero-Kontrollen oeffnen.
