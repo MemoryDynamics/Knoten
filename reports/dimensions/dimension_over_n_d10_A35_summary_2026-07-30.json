@@ -39,9 +39,9 @@
       10000
     ]
   },
-  "generated_utc": "2026-07-30T21:34:44Z",
-  "git_revision": "3f11e39ca8d44e63c70cec9a295a5b7cecf0d7ec",
-  "git_status": "M experiments/cli.py\n?? experiments/current/dynamics/dimension_over_n_reproduction.py\n?? figures/draft/dimensions/dimension_over_n_2026-07-30/\n?? reports/dimensions/dimension_over_n_d10_A35_2026-07-30.md\n?? reports/dimensions/dimension_over_n_d10_A35_summary_2026-07-30.json\n?? tests/test_dimension_over_n_reproduction.py",
+  "generated_utc": "2026-07-30T21:37:33Z",
+  "git_revision": "fe488b7c9ac6cb89c7ca88a51d4fb8f6584eeadb",
+  "git_status": "",
   "matched_seeds": [
     1,
     2,

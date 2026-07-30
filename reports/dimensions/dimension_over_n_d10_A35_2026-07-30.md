@@ -1,6 +1,6 @@
 # Dimension Diagnostics over N: d=10, A_att=35
 
-Date: 2026-07-30T21:34:44Z.
+Date: 2026-07-30T21:37:33Z.
 
 ## Question
 
@@ -62,11 +62,6 @@ the same sampling ambiguity.
 
 ## Provenance
 
-- Git revision: `3f11e39ca8d44e63c70cec9a295a5b7cecf0d7ec`
-- Git status before generation: `M experiments/cli.py
-?? experiments/current/dynamics/dimension_over_n_reproduction.py
-?? figures/draft/dimensions/dimension_over_n_2026-07-30/
-?? reports/dimensions/dimension_over_n_d10_A35_2026-07-30.md
-?? reports/dimensions/dimension_over_n_d10_A35_summary_2026-07-30.json
-?? tests/test_dimension_over_n_reproduction.py`
+- Git revision: `fe488b7c9ac6cb89c7ca88a51d4fb8f6584eeadb`
+- Git status before generation: `clean`
 - Script: `experiments/current/dynamics/dimension_over_n_reproduction.py`
