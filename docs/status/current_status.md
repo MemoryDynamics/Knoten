@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -14,7 +14,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
-| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` mit Dirac-Readout ist linear exakt und numerisch bis `1.5e-14` bestaetigt. Eine lokale skalare Ableitungsentwicklung reproduziert den Gausskern bis `k^4`. | kompakte Reprasentation, identifizierte Write-/Read-Faktorisierung und analytisch kontrollierte Modellfamilien | die Reparametrisierung ist keine Felddynamik; Vorzeichen des `k^2`-Terms, Nichtlinearitaeten und Rangreduktion sind nicht hergeleitet |
+| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot besteht Zeit-, Gitter-, source-off- und cubic-off-Gates und bildet einen beschraenkten Peak bei `k=1`. | kompakte Reprasentation plus numerisch kontrollierte klassische Finite-k-Musterbildung | `a2<0` und kubische Saettigung sind Modellannahmen; `eta=0` bildet dasselbe Muster, daher keine feedback-spezifische Knoten-, Quantisierungs- oder Rangreduktionsaussage |
 | Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
@@ -54,6 +54,14 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   gematchte Seeds `D_mem=8.857..9.268` im vorgegebenen `d=10`. `D_cov`
   schwankt; der spaete `D_occ`/`D_win`-Rueckgang ist mit zehnfach groberem
   Sampling konfundiert. Daraus folgt weder ein Plateaugesetz noch 3D-Selektion.
+- Das aktive skalare Delta-Quellfeld besteht den vorregistrierten
+  Mechanismus-Piloten in drei Seeds: `dt=0.05` gegen `0.025` und `N_x=256`
+  gegen `512` stimmen in niedrigen Moden bis `6.12e-7` bzw. `7.50e-11`
+  relativ ueberein. Der aktive Arm saettigt bei `k=1`, cubic-off erreicht den
+  Sicherheitsstopp und source-off bleibt exakt null. `eta=0` bildet nahezu
+  dasselbe Feld, daher ist nur klassische Musterbildung gestuetzt. Explorativ
+  verschiebt das aktive Readout die Source-Field-Phase von etwa null auf pi
+  und die Quelle um etwa eine halbe Wellenlaenge, bevor sie spaet pinnt.
 - Die dynamische Relaxations-Diffusion veraendert Radius und Kraft glatt und
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
@@ -106,11 +114,12 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Modenrang; eine 3D-Feldsimulation waere nur eine 3D-Annahme.
 - Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
   Identitaet und Form unter Transport besteht.
-- Ein negativer dimensionsloser `k^2`-Koeffizient in
-  `P(u)=1+a2 u^2+u^4` waere ein klarer neuer Musterbildungsmechanismus. Erst
-  ein vorregistrierter Pilot mit positiver-`a2`-, cubic-off-, source-off- und
-  eta-zero-Kontrolle darf pruefen, ob daraus robuste endliche Wellenzahlen
-  statt bloss eingesetzter klassischer Musterbildung entstehen.
+- Der angenommene negative dimensionslose `k^2`-Koeffizient in
+  `P(u)=1+a2 u^2+u^4` erzeugt mit kubischer Saettigung numerisch robuste
+  endliche Wellenzahlen. Weil derselbe Ast fuer `eta=0` entsteht, braucht ein
+  naechster Feldtest eine vorab definierte feedback-spezifische Observable
+  oder unabhaengige Source-/Target-Dynamik; weitere Koeffizientensuche waere
+  nicht identifizierend.
 
 ## Kanonische Evidenzschiene
 
@@ -133,6 +142,7 @@ wichtig:
 13. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
 14. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
 15. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
+16. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -144,6 +154,11 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
 - `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
 - `src/emergenz_knoten/stability.py`: Checkpoint-, Holdout- und lokale
   Stationaritaetsgates fuer lange Formationslaeufe.
+- `src/emergenz_knoten/measurement_stability.py`: separates
+  Messkonvergenzgate fuer cadence- und estimatorabhaengige
+  Occupancy-Dimensionen.
+- `src/emergenz_knoten/active_scalar_field.py`: reelles periodisches
+  ETD1-Delta-Quellfeld mit kubischer 1/2-Dealiasing-Regel.
 - `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
   mit gepaarten One-Way-Kontrollen.
 - `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-
@@ -234,6 +249,15 @@ Nullfamilie von einem moeglichen neuen Mechanismus: Erst `a2<0` in
 kritische Wert `a2=-2`, eine positive nichtlineare Saettigung und eine
 komponentenuebergreifende Ordnung sind jedoch zusaetzliche Annahmen. Deshalb
 folgt weder Quantisierung noch `d=3` aus diesem Audit.
+
+Der anschliessende aktive Delta-Quellfeld-Pilot besteht das numerische und
+klassische Finite-k-Mechanismusgate. Die kubisch gesaettigte Instabilitaet ist
+beschraenkt, waehrend cubic-off divergiert und source-off exakt null bleibt.
+Da `eta=0` dieselbe Feldordnung traegt, ist dies noch kein gekoppelter Knoten.
+Die beobachtete feedback-spezifische Phasenrelokation ist explorativ und kein
+Oszillations- oder Metastabilitaetsgate. Der naechste globale Arbeitsschritt bleibt daher die analytische
+Nullreferenz fuer die bestehenden AR-Scheinmoden; der Feldzweig wird nicht
+mit einem freien Koeffizientensweep erweitert.
 
 ## Paper-Status
 

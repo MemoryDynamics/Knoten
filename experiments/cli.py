@@ -62,6 +62,7 @@ CATEGORIES = {
         "current/kernels/field_equation_bridge.py",
         "current/kernels/local_field_operator_audit.py",
         "current/kernels/write_read_reparameterization_audit.py",
+        "current/kernels/active_scalar_delta_field_pilot.py",
         "propagation_speed/ballistic_kernel_probe.py",
     ],
     "knot_stability": [

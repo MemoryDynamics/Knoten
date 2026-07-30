@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -55,6 +55,16 @@ Fuer neue Formationslaeufe gilt verbindlich:
 Legacy-Traces besitzen lokal nur Radius, keinen zeitaufgeloesten Shape-Tensor.
 Ihr 5/5-Pass bleibt daher `retrospective provisional`; automatisches Stoppen
 wird erst mit neu erzeugten Shape-Fenstern zulaessig.
+
+`D_occ` und das automatische `D_win` sind kumulative, cadence- und
+estimatorabhaengige Messungen und duerfen nicht in dieses intrinsische
+Radius-/Shape-Gate gemischt werden. Das separate Messkonvergenzgate verlangt
+vier vergleichbare Checkpoints, mindestens eine N-Dekade, festen Sampler und
+Estimator sowie einen mindestens dreimal spaeteren Holdout. Der vorhandene
+Sechs-Endpunkt-Satz ist nicht auswertbar: Trainingsbereich und Trend verfehlen
+die 10%/5%-Grenzen, fruehe `D_win`-Fits sind ungueltig und bei `N=300M`
+wechseln Cadence und Codeversion. Ein neuer Long Run muss deshalb dieselbe
+Revision und feste Online-/Samplingdefinition durchgehend verwenden.
 
 ## P1: Orientierter Kanal und lokales Feldgesetz
 
@@ -309,23 +319,24 @@ Pfad-, relativen Feld- und Gradientenfehler `7.11e-15`, `2.25e-15` und
 Der Pass aendert nur die Zustandsbedeutung von Occupancy-Memory zu signiertem
 Potentialmemory; er ist keine neue Physik.
 
-Naechstes Gate: genau ein aktives skalares Delta-Quellfeld. Seine
-Eigenentwicklung liegt im Update selbst; ein breiter Depositkernel darf die
-Zielskala nicht bereits einschreiben. Die dimensionslosen Arme werden vor dem
-Lauf festgehalten:
+Abgeschlossenes Gate: Das aktive skalare Delta-Quellfeld wurde ohne breiten
+Depositkernel in drei Seeds gegen die registrierten Gaussian-null-,
+stable-finite-k-, cubic-off-, source-off- und eta-zero-Arme gerechnet.
+`dt=0.05` gegen `0.025` und `N_x=256` gegen `512` stimmen in den niedrigen
+Moden bis `6.12e-7` bzw. `7.50e-11` relativ ueberein; der stationaere
+Gleichungsrest ist `4.38e-5`. Der aktive Arm saettigt bei `k=1`, cubic-off
+trifft den Amplitudenstopp und source-off bleibt exakt null. Damit besteht das
+Gate fuer klassische Finite-Wellenzahl-Musterbildung.
 
-1. Gaussian-null: `P(u)=1+u^2/2+u^4/8`, linear;
-2. stable-finite-k: `P(u)=1-1.8u^2+u^4`, linear und noch stabil;
-3. active-finite-k: `P(u)=1-2.2u^2+u^4` mit positiver kubischer Saettigung;
-4. cubic-off, source-off und eta-zero als mechanistische Kontrollen.
-
-Vor dem wissenschaftlichen Lauf muss ein Zeit-/Gitter-Konvergenztest die
-numerische Stabilitaet und die Nullantworten sichern. Primaere Endpunkte sind
-Feldpeak und Peakbreite, Amplitudenbeschraenktheit, Source-Field-Closure und
-sichtbare Shape-Bounds. Ein Pass waere nur Evidenz fuer klassische
-Finite-Wellenzahl-Musterbildung. Die spaetere Vektorenergie mit gerichteter
-Quelle und optionaler Chiralitaet bleibt bis zu diesem skalaren
-Mechanismusgate gesperrt.
+Stopregel: `eta=0` bildet nahezu dasselbe Feld. Die Feldordnung ist daher
+nicht feedback-spezifisch und noch kein multidimensionaler oder metastabiler
+Knoten. Der explorative Wechsel des Source-Field-Phasenlags von etwa null auf
+pi mit anschliessendem Pinning ist ein Folgehinweis, kein registrierter Pass.
+Es folgt kein freier `a2/u/s`-Sweep und die Vektor-/Chiralitaetsenergie
+wird nicht allein durch diesen Pass geoeffnet. Ein spaeterer Feldtest braucht
+zuerst eine unabhaengige Source-/Target-Regel oder eine vorregistrierte
+Observable, die Trajektorie-Feld-Rueckkopplung von der eta-zero-Musterbildung
+trennt. Die naechste globale Prioritaet ist P2.
 
 ## P2: Scheinmoden analytisch einordnen
 

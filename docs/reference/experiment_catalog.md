@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -18,7 +18,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/dimension_claim_audit.py` | 3D-Dimensionsclaim-Audit | aktiv | Claim-Leiter, `D_p90`/`D_p95`, low-pass Center-Trace-Dimensionen und Paper-II-Reconciliation |
 | `experiments/current/dynamics/dspec_sensitivity_report.py` | D_spec-Sensitivitaet | aktiv | Legacy-D_spec, symmetrische Heat-Kernel-Skalen, kNN-Skalen und Kovarianz-Surrogate fuer Paper-II-Guardrail |
 | `experiments/current/dynamics/dspec_raw_snapshot_report.py` | Rohsnapshot-D_spec | aktiv | Heat-Trace-/Scale-Audit auf echten `memory_cloud.snapshot`-Punkten; Pilot-Gate vor Response-Rang |
-| `experiments/current/dynamics/dimension_over_n_reproduction.py` | Dimensionen ueber N | abgeschlossen | drei gematchte Seeds an sechs Endpunkten; D_win-Validitaet und Sampling-Cadence als Guardrails |
+| `experiments/current/dynamics/dimension_over_n_reproduction.py` | Dimensionen ueber N | abgeschlossen | drei gematchte Seeds an sechs Endpunkten; separates D_occ/D_win-Messkonvergenzgate markiert den gemischten Cadence-/Revisionssatz als nicht auswertbar |
 | `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
@@ -38,6 +38,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
 | `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | abgeschlossen | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
 | `experiments/current/kernels/write_read_reparameterization_audit.py` | Write-/Read-Faktorisierung | abgeschlossen | drei Seeds und je 10,000 Updates; Pfad-/Feld-/Gradientengleichheit bis `1.43e-14`; trennt Dirac-Identitaet von konstantem kraftfreiem Kernel |
+| `experiments/current/kernels/active_scalar_delta_field_pilot.py` | aktives lokales Delta-Quellfeld | abgeschlossen | drei Seeds, Gaussian-/stable-finite-k-/active-, cubic-off-, source-off- und eta-zero-Arme plus Zeit-/Gitterkonvergenz; klassischer Mechanismuspass, nicht feedback-spezifisch |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
@@ -832,6 +833,7 @@ Modellklasse.
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |
 | `reports/kernels/field/local_field_operator_audit_2026-07-29.md` | Lokaler Feldoperator-Audit | Eingeschraenkte Ableitungsbasis; Gaussian-k4-Match, `s0=0`-Zero-Mean, Finite-k-Schwelle bei `a2=-2` und exakte `H I_d`-Ambient-Rang-Null. Keine Quantisierungs- oder d=3-Evidenz. |
 | `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md` | Write-/Read-Reparametrisierung | Exakte lineare Faktorisierung in drei Seeds numerisch bestaetigt; maximale Pfad-, relative Feld- und Gradientenfehler `7.11e-15`, `2.25e-15`, `1.43e-14`. Keine neue Felddynamik. |
+| `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md` | aktives Delta-Quellfeld | Zeit-/Gitterfehler `6.12e-7`/`7.50e-11`; beschraenkte aktive `k=1`-Mode, cubic-off-Divergenz und exakte source-off-Null. Eta-zero bildet dasselbe Muster, daher nur klassische Finite-k-Musterbildung. |
 | `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
 | `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
 | `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |

@@ -12,6 +12,16 @@ from .analytic import (
     stationary_memory_mass,
     two_scale_force_crossing_radius,
 )
+from .active_scalar_field import (
+    ActiveScalarFieldConfig,
+    ActiveScalarFieldTrace,
+    scalar_field_linear_rate,
+    scalar_field_preferred_wavenumber,
+    scalar_field_wavenumbers,
+    simulate_active_scalar_delta_field,
+    spectral_delta_coefficients,
+)
+from .measurement_stability import occupancy_measurement_convergence_diagnostics
 from .field import (
     FieldLinearStability,
     LocalScalarFieldExpansion,
@@ -237,6 +247,8 @@ from .markov.validation import (
 )
 
 __all__ = [
+    "ActiveScalarFieldConfig",
+    "ActiveScalarFieldTrace",
     "DimensionlessScalarGroups",
     "LaggedCorrelationResult",
     "ResponseRankInferenceResult",
@@ -351,6 +363,7 @@ __all__ = [
     "one_way_oriented_response",
     "oriented_response_metrics",
     "occupancy_local_slopes",
+    "occupancy_measurement_convergence_diagnostics",
     "omitted_history_weight",
     "paired_frozen_source_response",
     "paired_external_field_response",
@@ -377,6 +390,9 @@ __all__ = [
     "save_finite_memory_checkpoint",
     "save_simulation_result",
     "scalar_dimensionless_groups",
+    "scalar_field_linear_rate",
+    "scalar_field_preferred_wavenumber",
+    "scalar_field_wavenumbers",
     "score_against_control",
     "score_v0_4_against_control",
     "score_v0_5_against_control",
@@ -389,6 +405,7 @@ __all__ = [
     "simulate_finite_memory",
     "simulate_finite_memory_numba",
     "simulate_final_finite_memory_state",
+    "simulate_active_scalar_delta_field",
     "simulate_spectral_memory_trace",
     "simulate_vector_memory",
     "simulate_relaxation_diffusion_mediator",
@@ -396,6 +413,7 @@ __all__ = [
     "simulate_vector_relaxation_diffusion_mediator",
     "simulate_vector_telegraph_mediator",
     "telegraph_frequency_response",
+    "spectral_delta_coefficients",
     "spectral_dimension",
     "stationary_deposition_weight",
     "stationary_field_transfer",

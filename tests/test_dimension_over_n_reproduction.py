@@ -98,3 +98,16 @@ def test_payload_summary_excludes_invalid_window_fit(tmp_path: Path) -> None:
 
     assert result["summary"][0]["D_win"]["median"] == 1.5
     assert result["summary"][0]["D_win_valid_count"] == 1
+    assert (
+        result["measurement_convergence"]["D_occ"]["reason"]
+        == "insufficient_checkpoints"
+    )
+    assert not result["measurement_convergence"]["D_occ"][
+        "measurement_convergence_evaluable"
+    ]
+    report = MODULE.render_report(
+        result,
+        generated="2026-07-31T00:00:00Z",
+        figure_link="figure.png",
+    )
+    assert "only 1 of 5 required checkpoints exist" in report

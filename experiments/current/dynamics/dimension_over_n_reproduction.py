@@ -9,6 +9,7 @@ import math
 import os
 from pathlib import Path
 import subprocess
+import sys
 from typing import Any
 
 import matplotlib
@@ -26,6 +27,12 @@ def _repo_root() -> Path:
 
 
 ROOT = _repo_root()
+sys.path.insert(0, str(ROOT / "src"))
+
+from emergenz_knoten.measurement_stability import (  # noqa: E402
+    occupancy_measurement_convergence_diagnostics,
+)
+
 
 CHECKPOINTS = {
     200_000: "raw_memory_snapshot_pilot_Aatt35_N200k_d10_seed1-3_2026-07-15",
@@ -188,6 +195,23 @@ def _quantiles(values: list[float | None]) -> dict[str, float | None]:
     }
 
 
+def _insufficient_measurement_gate(
+    checkpoint_count: int,
+    *,
+    required_checkpoint_count: int = 5,
+) -> dict[str, Any]:
+    return {
+        "reason": "insufficient_checkpoints",
+        "checkpoint_count": int(checkpoint_count),
+        "required_checkpoint_count": int(required_checkpoint_count),
+        "measurement_convergence_evaluable": False,
+        "occupancy_measurement_convergence_pass": False,
+        "training_dimension_relative_range": None,
+        "training_dimension_trend_per_decade": None,
+        "holdout_dimension_relative_change": None,
+    }
+
+
 def build_payload(args: argparse.Namespace) -> dict[str, Any]:
     data_root = _resolve(args.data_root)
     rows: list[dict[str, Any]] = []
@@ -213,6 +237,9 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
             "sample_every": int(group[0]["sample_every"]),
             "sample_count": int(group[0]["sample_count"]),
             "D_win_valid_count": sum(bool(row["D_win_valid"]) for row in group),
+            "source_git_revisions": sorted(
+                {str(row["source_git_revision"]) for row in group}
+            ),
         }
         for metric in ("D_cov", "D_occ", "D_win", "D_mem"):
             values = [row[metric] for row in group]
@@ -229,6 +256,30 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         dtype=float,
     )
     sample_cadences = sorted({int(item["sample_every"]) for item in summary})
+    estimator_labels = ["+".join(item["source_git_revisions"]) for item in summary]
+    if len(summary) >= 5:
+        d_occ_gate = occupancy_measurement_convergence_diagnostics(
+            [item["steps"] for item in summary],
+            [item["D_occ"]["median"] for item in summary],
+            [item["D_occ"]["median"] is not None for item in summary],
+            [item["sample_every"] for item in summary],
+            estimator_labels,
+        )
+        d_win_gate = occupancy_measurement_convergence_diagnostics(
+            [item["steps"] for item in summary],
+            [
+                item["D_win"]["median"]
+                if item["D_win"]["median"] is not None
+                else np.nan
+                for item in summary
+            ],
+            [item["D_win_valid_count"] == item["seed_count"] for item in summary],
+            [item["sample_every"] for item in summary],
+            estimator_labels,
+        )
+    else:
+        d_occ_gate = _insufficient_measurement_gate(len(summary))
+        d_win_gate = _insufficient_measurement_gate(len(summary))
     return {
         "question": (
             "How do four existing dimension diagnostics vary with N for the "
@@ -240,6 +291,10 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "checkpoints": sorted(CHECKPOINTS),
         "rows": rows,
         "summary": summary,
+        "measurement_convergence": {
+            "D_occ": d_occ_gate,
+            "D_win": d_win_gate,
+        },
         "diagnostics": {
             "D_mem_median_min": float(np.min(memory_medians)),
             "D_mem_median_max": float(np.max(memory_medians)),
@@ -255,6 +310,7 @@ def build_payload(args: argparse.Namespace) -> dict[str, Any]:
         "claim_boundaries": {
             "ambient_independent_dimension_selection": False,
             "D_occ_N_only_dependence_established": False,
+            "occupancy_measurement_convergence_established": False,
             "continuous_same_revision_trajectory": False,
             "D_mem_endpoint_shape_reproduced": True,
         },
@@ -372,6 +428,41 @@ def _fmt(value: float | None, digits: int = 3) -> str:
     return "n/a" if value is None else f"{value:.{digits}f}"
 
 
+def _measurement_protocol_lines(
+    d_occ_gate: dict[str, Any],
+    d_win_gate: dict[str, Any],
+) -> list[str]:
+    reasons: list[str] = []
+    insufficient = [
+        gate
+        for gate in (d_occ_gate, d_win_gate)
+        if gate.get("reason") == "insufficient_checkpoints"
+    ]
+    if insufficient:
+        available = min(int(gate["checkpoint_count"]) for gate in insufficient)
+        required = max(int(gate["required_checkpoint_count"]) for gate in insufficient)
+        reasons.append(f"only {available} of {required} required checkpoints exist")
+    if any(
+        gate.get("sampling_cadence_pass") is False for gate in (d_occ_gate, d_win_gate)
+    ):
+        reasons.append("sampling cadence changes")
+    if any(
+        gate.get("estimator_identity_pass") is False
+        for gate in (d_occ_gate, d_win_gate)
+    ):
+        reasons.append("endpoint files span multiple code revisions")
+    if d_win_gate.get("fit_validity_pass") is False:
+        reasons.append("D_win lacks fully valid fit windows")
+    if not reasons:
+        reasons.append("one or more strict protocol requirements are unmet")
+    joined = "; ".join(reasons)
+    return [
+        f"- At least one gate is non-evaluable: {joined}.",
+        "- This does not erase a visible settling trend. It means that trend",
+        "  cannot yet certify measurement convergence for the stability gate.",
+    ]
+
+
 def render_report(
     payload: dict[str, Any],
     *,
@@ -425,6 +516,9 @@ def render_report(
         )
 
     diagnostics = payload["diagnostics"]
+    measurement = payload.get("measurement_convergence", {})
+    d_occ_gate = measurement.get("D_occ", {})
+    d_win_gate = measurement.get("D_win", {})
     lines.extend(
         [
             "",
@@ -442,6 +536,20 @@ def render_report(
             "  assigned to N alone from these files.",
             "- The earliest automatic occupancy fits are invalid. They are shown",
             "  for auditability but must not be interpreted as measured plateaus.",
+            "",
+            "## Occupancy measurement-convergence gate",
+            "",
+            f"- raw D_occ evaluable/pass: "
+            f"`{d_occ_gate.get('measurement_convergence_evaluable', False)}/"
+            f"{d_occ_gate.get('occupancy_measurement_convergence_pass', False)}`;",
+            f"  training relative range: "
+            f"`{_fmt(d_occ_gate.get('training_dimension_relative_range'))}`;",
+            f"  trend per decade: "
+            f"`{_fmt(d_occ_gate.get('training_dimension_trend_per_decade'))}`.",
+            f"- automatic D_win evaluable/pass: "
+            f"`{d_win_gate.get('measurement_convergence_evaluable', False)}/"
+            f"{d_win_gate.get('occupancy_measurement_convergence_pass', False)}`.",
+            *_measurement_protocol_lines(d_occ_gate, d_win_gate),
             "",
             "## Decision",
             "",
@@ -461,8 +569,8 @@ def render_report(
             "",
             "## Provenance",
             "",
-            f"- Git revision: `{payload['git_revision']}`",
-            f"- Git status before generation: `{payload['git_status'] or 'clean'}`",
+            f"- Git revision: `{payload.get('git_revision', 'unavailable')}`",
+            f"- Git status before generation: `{payload.get('git_status', '') or 'clean'}`",
             "- Script: `experiments/current/dynamics/dimension_over_n_reproduction.py`",
             "",
         ]

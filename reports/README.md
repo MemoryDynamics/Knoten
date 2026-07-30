@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -50,10 +50,11 @@ weitere reine Amplituden- oder Epsilon-Suche ohne neue Mechanismushypothese.
 - [D_spec-Sensitivitaet](dimensions/dspec_sensitivity_2026-07-15.md)
 - [Rohsnapshot-Retest](dimensions/dspec_raw_snapshot_retest_2026-07-16.md)
 - [Dimensionen ueber N](dimensions/dimension_over_n_d10_A35_2026-07-30.md)
-  - **reproduced with sampling caveat:** `D_mem` bleibt fuer drei gematchte
-    Seeds bei `8.857..9.268`; `D_cov` ist nichtmonoton. Der `D_occ`/`D_win`-
-    Rueckgang bei `N=300M` faellt mit zehnfach groberem Sampling zusammen und
-    ist keine belastbare N-Abhaengigkeit.
+  - **reproduced, measurement convergence not evaluable:** `D_mem` bleibt fuer
+    drei gematchte Seeds bei `8.857..9.268`; `D_cov` ist nichtmonoton. Das neue
+    D_occ/D_win-Gate scheitert bereits an Trainingsrange/-trend und ist wegen
+    Cadence-/Revisionswechsel sowie fruehen ungueltigen D_win-Fits nicht
+    auswertbar. Der sichtbare Trend ist keine zertifizierte N-Abhaengigkeit.
 
 Entscheidung: Shape-, Sample- und Heat-Trace-Dimension sind getrennte
 Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
@@ -73,6 +74,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     `1.43e-14`; ein konstantes `K=1` ist exakt kraftfrei.
   - Die Umformung macht aus nichtnegativem Occupancy-Memory ein signiertes
     Potentialmemory. Sie erzeugt keine selbstdynamische Feldgleichung.
+- [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
+  - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
+    Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds
+    einen beschraenkten Peak bei `k=1`.
+  - `eta=0` traegt nahezu dasselbe Feld. Der Pass gilt fuer klassische
+    Finite-k-Musterbildung, nicht fuer einen feedback-spezifischen Knoten,
+    Quantisierung, QFT oder `d=3`.
 - [Spektrale rho-Reprasentation](memory/spectral_rho_field_pilot_2026-07-19.md)
   - **structural + pipeline-only:** Historie, Masse, Kontraktion und Kraft sind fuer
     die getestete 1D-Reprasentation reconciliiert.

@@ -1,6 +1,6 @@
 # Dimension Diagnostics over N: d=10, A_att=35
 
-Date: 2026-07-30T21:37:33Z.
+Date: 2026-07-30T23:02:29Z.
 
 ## Question
 
@@ -44,6 +44,16 @@ How do four existing dimension diagnostics vary with N for the matched d=10, A_a
 - The earliest automatic occupancy fits are invalid. They are shown
   for auditability but must not be interpreted as measured plateaus.
 
+## Occupancy measurement-convergence gate
+
+- raw D_occ evaluable/pass: `False/False`;
+  training relative range: `2.576`;
+  trend per decade: `1.299`.
+- automatic D_win evaluable/pass: `False/False`.
+- At least one gate is non-evaluable: sampling cadence changes; endpoint files span multiple code revisions; D_win lacks fully valid fit windows.
+- This does not erase a visible settling trend. It means that trend
+  cannot yet certify measurement convergence for the stability gate.
+
 ## Decision
 
 The earlier qualitative dimension-over-N plot is reproduced, now with
@@ -62,6 +72,27 @@ the same sampling ambiguity.
 
 ## Provenance
 
-- Git revision: `fe488b7c9ac6cb89c7ca88a51d4fb8f6584eeadb`
-- Git status before generation: `clean`
+- Git revision: `a63e52a6f93db4d90e307114186a10e686348b65`
+- Git status before generation: `M docs/reference/experiment_catalog.md
+ M docs/reference/repository_map.md
+ M docs/status/current_status.md
+ M docs/status/paper_claims.md
+ M docs/status/project_priorities.md
+ M experiments/cli.py
+ M experiments/current/dynamics/dimension_over_n_reproduction.py
+ M figures/README.md
+ M reports/README.md
+ M reports/dimensions/dimension_over_n_d10_A35_2026-07-30.md
+ M reports/dimensions/dimension_over_n_d10_A35_summary_2026-07-30.json
+ M src/emergenz_knoten/__init__.py
+ M tests/test_dimension_over_n_reproduction.py
+?? experiments/current/kernels/active_scalar_delta_field_pilot.py
+?? figures/draft/kernels/field_2026-07-31/
+?? reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.json
+?? reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md
+?? src/emergenz_knoten/active_scalar_field.py
+?? src/emergenz_knoten/measurement_stability.py
+?? tests/test_active_scalar_delta_field_pilot.py
+?? tests/test_active_scalar_field.py
+?? tests/test_measurement_stability.py`
 - Script: `experiments/current/dynamics/dimension_over_n_reproduction.py`

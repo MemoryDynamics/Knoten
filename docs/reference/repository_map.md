@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -44,6 +44,7 @@ flowchart TD
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
     experiments --> field_operator["local_field_operator_audit.py<br/>k4 / zero-mean / finite-k / rank null"]
+    experiments --> active_field_exp["active_scalar_delta_field_pilot.py<br/>ETD1 + six control arms"]
     experiments --> write_read["write_read_reparameterization_audit.py<br/>K*rho vs signed potential memory"]
     experiments --> stability_audit["stability_gate_audit.py<br/>4 checkpoints + late holdout"]
     experiments --> dimension_n["dimension_over_n_reproduction.py<br/>D_cov / D_occ / D_win / D_mem"]
@@ -55,6 +56,8 @@ flowchart TD
     src --> diagnostics["diagnostics.py<br/>D_cov, D_occ, residence, geometry spectrum"]
     src --> knot_score["knot_score.py<br/>scorecards v0.3-v0.6 + shape gates"]
     src --> stability["stability.py<br/>age, local-window and holdout gates"]
+    src --> measurement_stability["measurement_stability.py<br/>D_occ cadence / estimator convergence"]
+    src --> active_field["active_scalar_field.py<br/>real spectral delta-source field"]
     src --> experiments_api["experiments.py<br/>runner and serialization"]
     src --> markov["markov/<br/>augmented-state operator layer"]
     src --> anchor["anchor.py<br/>Paper-0 compatibility facade"]
@@ -191,7 +194,7 @@ flowchart LR
     operator -.new assumption.-> finitek["finite-k candidate<br/>a2 negative, k4 stabilized"]
     decision --> spectral["spectral rho representation<br/>exact at nu=0; 64 modes"]
     spectral --> factorization["write/read identity gate<br/>phi = K rho; read = delta"]
-    factorization -.new dynamics.-> activefield["active scalar field<br/>delta source + local operator"]
+    factorization -.new dynamics.-> activefield["active scalar field gate<br/>classical finite-k pass; eta-zero nonspecific"]
     spectral --> epsilon_gate["epsilon 1e-8..1e-4<br/>exact linear scaling"]
     epsilon_gate --> mediator["relaxation-diffusion extension<br/>q_k=(1-lambda) exp(-nu k^2)"]
     mediator --> smooth["pilot: smooth weakening<br/>no new branch"]
@@ -214,6 +217,9 @@ The local operator audit now makes this separation explicit: the Gaussian
 low-k response fixes a positive `k^2/k^4` null family, while a preferred
 finite wave number requires the additional sign choice `a2<0`. Independent
 component transfer remains `H I_d` and therefore cannot select rank three.
+The active delta-source implementation passes its numerical, cubic-off and
+source-off gates, but eta-zero carries the same field pattern. It is therefore
+a classical mechanism candidate, not yet a feedback-specific knot.
 
 ## Long-Run-Schiene
 

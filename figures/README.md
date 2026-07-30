@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-07-30.
+Stand: 2026-07-31.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -23,6 +23,9 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   Finite-k-Stabilitaetsgrenze und `H I_d`-Ambient-Rang-Null.
 - `draft/kernels/field_2026-07-30/`: Pfad-, Feld- und Gradientengleichheit
   der Write-/Read-Reparametrisierung sowie kraftfreie konstante-Kernel-Null.
+- `draft/kernels/field_2026-07-31/`: aktiver Delta-Quellfeld-Pilot mit
+  Operatoren, Amplituden-/Kontrolltraces, dominanter Wellenzahl und finalen
+  source-zentrierten Profilen; klassischer Mechanismuspass, kein Knotenclaim.
 - `draft/kernels/nonlinearity_2026-07-19/`: feste-`g`-Nichtlinearitaets- und
   Skalenpruefung.
 - `draft/long_runs/stability_2026-07-30/`: vier Alterscheckpoints,
