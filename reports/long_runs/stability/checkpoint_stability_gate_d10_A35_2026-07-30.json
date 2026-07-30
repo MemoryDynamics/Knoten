@@ -49,9 +49,9 @@
     "sigma_att": 3.0,
     "sigma_rep": 1.0
   },
-  "generated_utc": "2026-07-30T20:46:31Z",
-  "git_revision": "21da33e9105df27753a4476fe4ee7897486b3dea",
-  "git_status": "M README.md\n M docs/reference/experiment_catalog.md\n M docs/reference/repository_map.md\n M docs/status/current_status.md\n M docs/status/paper_claims.md\n M docs/status/project_priorities.md\n M experiments/cli.py\n M figures/README.md\n M reports/README.md\n M src/emergenz_knoten/__init__.py\n?? experiments/current/dynamics/stability_gate_audit.py\n?? figures/draft/long_runs/\n?? reports/long_runs/stability/\n?? src/emergenz_knoten/stability.py\n?? tests/test_stability.py\n?? tests/test_stability_gate_audit.py",
+  "generated_utc": "2026-07-30T20:49:32Z",
+  "git_revision": "737ef47c4aa74921bb41431f7a5d845f2a0d62ce",
+  "git_status": "",
   "outputs": {
     "figure": "figures\\draft\\long_runs\\stability_2026-07-30\\checkpoint_stability_gate_d10_A35.png",
     "report": "reports\\long_runs\\stability\\checkpoint_stability_gate_d10_A35_2026-07-30.md",

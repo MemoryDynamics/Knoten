@@ -1,6 +1,6 @@
 # Checkpoint Stability Gate: d=10, A_att=35
 
-Date: 2026-07-30T20:46:31Z.
+Date: 2026-07-30T20:49:32Z.
 
 ## Question
 
@@ -73,21 +73,6 @@ an automatic stopping rule and is not evidence for a physical particle.
 
 ## Provenance
 
-- Git revision: `21da33e9105df27753a4476fe4ee7897486b3dea`
-- Git status before generation: `M README.md
- M docs/reference/experiment_catalog.md
- M docs/reference/repository_map.md
- M docs/status/current_status.md
- M docs/status/paper_claims.md
- M docs/status/project_priorities.md
- M experiments/cli.py
- M figures/README.md
- M reports/README.md
- M src/emergenz_knoten/__init__.py
-?? experiments/current/dynamics/stability_gate_audit.py
-?? figures/draft/long_runs/
-?? reports/long_runs/stability/
-?? src/emergenz_knoten/stability.py
-?? tests/test_stability.py
-?? tests/test_stability_gate_audit.py`
+- Git revision: `737ef47c4aa74921bb41431f7a5d845f2a0d62ce`
+- Git status before generation: `clean`
 - Script: `experiments/current/dynamics/stability_gate_audit.py`
