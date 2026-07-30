@@ -27,6 +27,9 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   Skalenpruefung.
 - `draft/long_runs/stability_2026-07-30/`: vier Alterscheckpoints,
   Radius-/Shape-Gates und separater `N=300M`-Holdout fuer 5 Seeds.
+- `draft/dimensions/dimension_over_n_2026-07-30/`: `D_cov`, `D_occ`,
+  gueltiges automatisches `D_win` und `D_mem` ueber sechs N-Endpunkte;
+  markiert den zehnfachen Sampling-Cadence-Wechsel bei `N=300M`.
 - `draft/memory/low_mode_identity_audit_2026-07-20.png`: negatives
   Mode-Identity-Gate.
 - `draft/response/one_way_interaction_age_N3M_2026-07-21.png`: Translation

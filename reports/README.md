@@ -49,6 +49,11 @@ weitere reine Amplituden- oder Epsilon-Suche ohne neue Mechanismushypothese.
 - [Dimensionsclaim-Audit](dimensions/dimension_claim_audit_2026-07-15.md)
 - [D_spec-Sensitivitaet](dimensions/dspec_sensitivity_2026-07-15.md)
 - [Rohsnapshot-Retest](dimensions/dspec_raw_snapshot_retest_2026-07-16.md)
+- [Dimensionen ueber N](dimensions/dimension_over_n_d10_A35_2026-07-30.md)
+  - **reproduced with sampling caveat:** `D_mem` bleibt fuer drei gematchte
+    Seeds bei `8.857..9.268`; `D_cov` ist nichtmonoton. Der `D_occ`/`D_win`-
+    Rueckgang bei `N=300M` faellt mit zehnfach groberem Sampling zusammen und
+    ist keine belastbare N-Abhaengigkeit.
 
 Entscheidung: Shape-, Sample- und Heat-Trace-Dimension sind getrennte
 Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige

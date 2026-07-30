@@ -46,6 +46,7 @@ flowchart TD
     experiments --> field_operator["local_field_operator_audit.py<br/>k4 / zero-mean / finite-k / rank null"]
     experiments --> write_read["write_read_reparameterization_audit.py<br/>K*rho vs signed potential memory"]
     experiments --> stability_audit["stability_gate_audit.py<br/>4 checkpoints + late holdout"]
+    experiments --> dimension_n["dimension_over_n_reproduction.py<br/>D_cov / D_occ / D_win / D_mem"]
 
     src --> core["core.py<br/>SimulationConfig, finite memory simulation"]
     src --> kernels["kernels.py<br/>Memory weights, Gaussian potentials and gradients"]

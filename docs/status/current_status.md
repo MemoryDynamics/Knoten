@@ -50,6 +50,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
   der Messgrenzen, nicht deren erste Entstehungszeit; zeitaufgeloeste
   Shape-Fenster fehlen in den Legacy-Traces.
+- Die dichtere Dimensionsreproduktion ueber sechs N-Endpunkte zeigt fuer drei
+  gematchte Seeds `D_mem=8.857..9.268` im vorgegebenen `d=10`. `D_cov`
+  schwankt; der spaete `D_occ`/`D_win`-Rueckgang ist mit zehnfach groberem
+  Sampling konfundiert. Daraus folgt weder ein Plateaugesetz noch 3D-Selektion.
 - Die dynamische Relaxations-Diffusion veraendert Radius und Kraft glatt und
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
