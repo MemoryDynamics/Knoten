@@ -40,6 +40,22 @@ class ARSpectrum:
     n_pairs: int
 
 
+@dataclass(frozen=True)
+class EtaZeroRawModeNull:
+    """Exact conditional linear null for one unaligned scalar-memory mode.
+
+    The state ordering is ``(Re p_k, Im p_k, Re r_k, Im r_k)``, where
+    ``p_k=exp(-i k.X_n)`` and ``r_k`` is the corresponding normalized raw
+    memory coefficient. Gaussian visible increments and ``eta=0`` make this
+    span invariant under conditional expectation.
+    """
+
+    lag_updates: int
+    phase_multiplier: float
+    memory_multiplier: float
+    transition: np.ndarray
+
+
 def _lagged_xy(series: Sequence[np.ndarray], lag: int) -> tuple[np.ndarray, np.ndarray]:
     x_parts = [np.asarray(values, dtype=float)[:-lag] for values in series]
     y_parts = [np.asarray(values, dtype=float)[lag:] for values in series]
@@ -168,7 +184,9 @@ def mode_subspace_overlap(
 ) -> float:
     """Compare real invariant subspaces represented by two mode vectors."""
 
-    vectors = [np.asarray(value, dtype=np.complex128) for value in (reference, candidate)]
+    vectors = [
+        np.asarray(value, dtype=np.complex128) for value in (reference, candidate)
+    ]
     if any(value.ndim != 1 for value in vectors):
         raise ValueError("mode vectors must be one-dimensional")
     if vectors[0].shape != vectors[1].shape or vectors[0].size < 1:
@@ -226,7 +244,9 @@ def fit_ar_spectrum(
     x, y = _lagged_xy(standardized, lag)
     coefficient = _fit_ridge(x, y, ridge)
     residual = y - x @ coefficient
-    eigenvalues, feature_eigenvectors = _normalized_feature_eigenvectors(coefficient, scale)
+    eigenvalues, feature_eigenvectors = _normalized_feature_eigenvectors(
+        coefficient, scale
+    )
     modulus = np.abs(eigenvalues)
     rates = np.full(modulus.shape, np.inf, dtype=float)
     positive = modulus > 0.0
@@ -238,7 +258,9 @@ def fit_ar_spectrum(
         lag_updates=int(lag_updates),
         matrix=np.asarray(coefficient, dtype=float),
         eigenvalues=np.asarray(eigenvalues[order], dtype=np.complex128),
-        feature_eigenvectors=np.asarray(feature_eigenvectors[:, order], dtype=np.complex128),
+        feature_eigenvectors=np.asarray(
+            feature_eigenvectors[:, order], dtype=np.complex128
+        ),
         rates_per_update=np.asarray(rates[order], dtype=float),
         angular_frequencies_per_update=np.asarray(
             frequencies[order],
@@ -266,7 +288,66 @@ def analytic_field_mode_multiplier(
         or not math.isfinite(wavenumber)
     ):
         raise ValueError("invalid field-mode parameters")
-    one_step = (1.0 - config_lambda) * math.exp(
-        -diffusion_per_update * wavenumber**2
-    )
+    one_step = (1.0 - config_lambda) * math.exp(-diffusion_per_update * wavenumber**2)
     return float(one_step**lag_updates)
+
+
+def eta_zero_raw_mode_null(
+    config_lambda: float,
+    diffusion_per_update: float,
+    wavenumber: float,
+    epsilon: float,
+    lag_updates: int,
+    *,
+    deposition_smoothing: float = 1.0,
+) -> EtaZeroRawModeNull:
+    """Return the exact eta-zero conditional map for one raw Fourier mode.
+
+    For centered unit-variance Gaussian increments,
+    ``E[p_(n+1) | p_n] = a_k p_n`` with
+    ``a_k=exp(-epsilon^2 k^2/2)``. Forgetting plus heat diffusion gives
+    ``q_k=(1-lambda) exp(-nu k^2)``. The resulting real transition has only
+    the real eigenvalues ``a_k`` and ``q_k``, each repeated twice. Taking a
+    sampling lag raises this one-step matrix to ``lag_updates`` and therefore
+    cannot create an oscillatory eigenpair.
+
+    This statement applies to raw, unaligned modes. Moving-center alignment,
+    nonlinear feature construction, finite samples, and regularized AR fits
+    can produce apparent complex pairs after projection.
+    """
+
+    if (
+        not 0.0 < config_lambda <= 1.0
+        or not math.isfinite(config_lambda)
+        or not math.isfinite(diffusion_per_update)
+        or diffusion_per_update < 0.0
+        or not math.isfinite(wavenumber)
+        or not math.isfinite(epsilon)
+        or epsilon < 0.0
+        or lag_updates < 1
+        or not math.isfinite(deposition_smoothing)
+        or deposition_smoothing < 0.0
+    ):
+        raise ValueError("invalid eta-zero raw-mode parameters")
+
+    phase = math.exp(-0.5 * epsilon**2 * wavenumber**2)
+    heat = math.exp(-diffusion_per_update * wavenumber**2)
+    memory = (1.0 - config_lambda) * heat
+    source = config_lambda * deposition_smoothing * heat * phase
+    one_step = np.asarray(
+        [
+            [phase, 0.0, 0.0, 0.0],
+            [0.0, phase, 0.0, 0.0],
+            [source, 0.0, memory, 0.0],
+            [0.0, source, 0.0, memory],
+        ],
+        dtype=float,
+    )
+    transition = np.linalg.matrix_power(one_step, int(lag_updates))
+    transition.setflags(write=False)
+    return EtaZeroRawModeNull(
+        lag_updates=int(lag_updates),
+        phase_multiplier=float(phase**lag_updates),
+        memory_multiplier=float(memory**lag_updates),
+        transition=transition,
+    )

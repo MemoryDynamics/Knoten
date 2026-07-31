@@ -31,6 +31,57 @@ Ausgerollt ergibt das eine exponentiell gewichtete Vergangenheit. Die
 charakteristische Speicherpersistenz liegt in der normierten Konvention bei
 `alpha^{-1}` Updates.
 
+### Wie das skalare Gedaechtnis wirkt
+
+Im urspruenglichen Modell besitzt `rho` keine eigenstaendige raeumliche
+Selbstwechselwirkung. Direkt wirken nur Vergessen, neue Deposition und, in der
+spektralen Erweiterung, eine lineare Glaettung:
+
+```text
+rho_n -> q rho_n + beta G(.-x_(n+1))
+rho_hat_k -> exp(-nu k^2)[q rho_hat_k + beta G_hat_k exp(-i k x_(n+1))].
+```
+
+Die nichttriviale Formrueckkopplung ist daher durch `x` vermittelt:
+
+```text
+rho_n -> grad(K*rho_n)(x_n) -> x_(n+1) -> neue Deposition -> rho_(n+1).
+```
+
+Ohne Readout-Rueckkopplung (`eta=0`) bleibt ein getriebener linearer
+Memory-Filter. Fuer eine rohe Fouriermode
+`p_k=exp(-i k x_n)` gilt bei zentrierten Gauss-Inkrementen exakt
+
+```text
+E[p_(n+1) | p_n] = a_k p_n,
+a_k = exp(-epsilon^2 k^2/2),
+q_k = (1-lambda) exp(-nu k^2).
+```
+
+Der gemeinsame reelle Zustandsblock aus Real-/Imaginaerteil von `p_k` und
+`rho_hat_k` hat nur die reellen Eigenwerte `a_k` und `q_k`, jeweils doppelt.
+Subsampling potenziert diesen Block und erzeugt keine komplexe Mode. Komplexe
+AR-Paare in mitbewegten, phasenausgerichteten Features koennen dagegen durch
+die nichtlineare Koordinatenwahl, Projektion und endliche Fits entstehen. Der
+N=1M-Nullaudit findet weder gepoolt noch seedweise komplexe Rohmoden; nur
+`27/375` kurze, schlecht konditionierte Segmentfits lecken sehr kleine
+Komplexanteile. Report:
+`reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md`.
+
+Die verfuegbaren Observablen muessen nach ihrer Abhaengigkeit getrennt werden:
+
+| Ebene | Beispiele | Aussage |
+| --- | --- | --- |
+| direkt aus `rho` | Gesamtmasse, Schwerpunkt, Kovarianz-/Shape-Tensor, Radius, Anisotropie, Participation-Dimension, Fourierleistung/-phase, Autokorrelation | Zustand und Relaxation des Gedaechtnisses |
+| Readout aus `rho` | `Phi=K*rho`, Kraft `-grad Phi(x)`, lokale Hessian-/OU-Skala | Wirkung des gespeicherten Feldes am sichtbaren Zustand |
+| pfadvermittelt | Residence, `D_occ`, `D_cov`, Center-Drift, Drehimpuls- und Spin-Proxies | Eigenschaften der von `rho` beeinflussten Trajektorie; nicht intrinsisch `rho` |
+| aktives Feld | Spektrum, Peakbreite, Feldenergie, PDE-Rest, Source-Field-Phase, Saettigung | zusaetzliche Observablen erst nach Einfuehrung eigener Felddynamik |
+
+Damit lautet die knappe Antwort: Im Minimalmodell wirkt die Form von `rho`
+auf sich selbst nur ueber `x`; Massenrelaxation und optionale lineare Glaettung
+sind direkte, aber nicht selbstorganisierende `rho`-Dynamik. Erst die aktive
+Felderweiterung fuegt echte Feld-auf-Feld-Terme hinzu.
+
 Implementationskonvention fuer den korrigierten Double-Gaussian-Kernel:
 Der Paketkern berechnet jetzt den echten Potentialgradienten von
 `K = A_rep G_rep - A_att G_att` und integriert

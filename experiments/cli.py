@@ -80,6 +80,7 @@ CATEGORIES = {
     "memory": [
         "current/memory/low_mode_ar_feature_closure.py",
         "current/memory/low_mode_identity_audit.py",
+        "current/memory/eta_zero_raw_mode_null_audit.py",
         "current/memory/reconcile_low_mode_ar_runs.py",
         "current/memory/relaxation_diffusion_field_pilot.py",
         "current/memory/spectral_rho_field_pilot.py",

@@ -15,8 +15,10 @@ from emergenz_knoten.spectral_memory_field import (
 )
 from emergenz_knoten.spectral_memory_trace import (
     direct_history_potential_gradient,
+    eta_zero_raw_mode_feature_names,
     low_mode_feature_groups,
     omitted_history_weight,
+    simulate_eta_zero_raw_mode_trace,
     simulate_spectral_memory_trace,
 )
 
@@ -60,11 +62,7 @@ def test_fast_trace_matches_stepwise_runtime() -> None:
                 operators.gradient(rho, x=x),
             ]
             for mode in range(1, 4):
-                aligned = (
-                    rho[mode]
-                    * np.exp(1j * operators.k[mode] * center)
-                    / base
-                )
+                aligned = rho[mode] * np.exp(1j * operators.k[mode] * center) / base
                 row.extend((aligned.real, aligned.imag))
             for offset in offsets:
                 plus = base + 2.0 * np.real(
@@ -87,9 +85,7 @@ def test_fast_trace_matches_stepwise_runtime() -> None:
                         )
                     )
                 )
-                row.extend(
-                    (0.5 * (plus + minus) / base, 0.5 * (plus - minus) / base)
-                )
+                row.extend((0.5 * (plus + minus) / base, 0.5 * (plus - minus) / base))
             expected_rows.append(row)
 
     np.testing.assert_allclose(trace.values, expected_rows, rtol=2e-12, atol=2e-12)
@@ -207,3 +203,58 @@ def test_direct_history_includes_initial_field_at_zero_updates() -> None:
     )
 
     assert math.isclose(direct, spectral, rel_tol=2e-10, abs_tol=2e-10)
+
+
+def test_eta_zero_raw_mode_trace_matches_direct_mode_recurrence() -> None:
+    config = SpectralMemoryConfig(
+        box_length=20.0,
+        n_modes=8,
+        lambda_value=0.07,
+        deposition_sigma=0.3,
+    )
+    noise = np.asarray([0.5, -0.25, 1.0, -0.75, 0.2])
+    nu = 0.012
+    epsilon = 0.04
+    trace = simulate_eta_zero_raw_mode_trace(
+        config,
+        noise=noise,
+        diffusion_per_update=nu,
+        epsilon=epsilon,
+        burn_in=0,
+        sample_every=1,
+        n_low_modes=2,
+    )
+
+    k = 2.0 * np.pi * np.arange(1, 3) / config.box_length
+    smoothing = np.exp(-0.5 * config.deposition_sigma**2 * k**2)
+    heat = np.exp(-nu * k**2)
+    x = 0.5 * config.box_length
+    rho = smoothing * np.exp(-1j * k * x)
+    expected: list[list[float]] = []
+    for increment in noise:
+        x = (x + epsilon * increment) % config.box_length
+        phase = np.exp(-1j * k * x)
+        rho = heat * (
+            (1.0 - config.lambda_value) * rho + config.lambda_value * smoothing * phase
+        )
+        row: list[float] = []
+        for phase_mode, rho_mode in zip(phase, rho, strict=True):
+            row.extend(
+                (
+                    phase_mode.real,
+                    phase_mode.imag,
+                    rho_mode.real,
+                    rho_mode.imag,
+                )
+            )
+        expected.append(row)
+
+    assert trace.feature_names == eta_zero_raw_mode_feature_names(2)
+    np.testing.assert_allclose(trace.values, expected, rtol=2e-14, atol=2e-14)
+    np.testing.assert_allclose(
+        trace.final_normalized_rho_modes,
+        rho,
+        rtol=2e-14,
+        atol=2e-14,
+    )
+    assert trace.final_x == pytest.approx(x)

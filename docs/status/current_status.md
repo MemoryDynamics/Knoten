@@ -14,7 +14,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
-| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot besteht Zeit-, Gitter-, source-off- und cubic-off-Gates und bildet einen beschraenkten Peak bei `k=1`. | kompakte Reprasentation plus numerisch kontrollierte klassische Finite-k-Musterbildung | `a2<0` und kubische Saettigung sind Modellannahmen; `eta=0` bildet dasselbe Muster, daher keine feedback-spezifische Knoten-, Quantisierungs- oder Rangreduktionsaussage |
+| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
 | Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
@@ -64,6 +64,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   und die Quelle um etwa eine halbe Wellenlaenge, bevor sie spaet pinnt.
 - Die dynamische Relaxations-Diffusion veraendert Radius und Kraft glatt und
   aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
+- Der exakte `eta=0`-Rohmodenblock besitzt nur reelle Multiplikatoren. Bei
+  derselben N=1M-Kadenz bleiben gepoolte (`0/15`) und vollstaendige seedweise
+  (`0/75`) Rohfits reell; `27/375` kurze Segmentfits zeigen nur kleine
+  konditionierungsbedingte Leckpaare bis `7.25e-4` Frequenz pro Memory-Zeit.
 - Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
   sehr kleiner Shape-Aenderung.
 - Der konstruierte persistente Vektorkanal trennt sich zuerst in 6/6 Seeds und
@@ -86,8 +90,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 - Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
   folgt `A_eff=26` aus der aktuellen Parametrisierung; `27=3^3` und der daraus
   hypothetisch gebildete Rohwert `36` sind nicht dynamisch hergeleitet.
-- Komplexe AR-Moden sind nicht von `eta=0` getrennt und nicht segmentstabil;
-  sie sind keine Oszillations- oder Photonenevidenz.
+- Komplexe ausgerichtete AR-Moden sind nicht von `eta=0` getrennt und nicht
+  segmentstabil. Die exakte rohe Memory-Null ist reell; damit sind die
+  bestehenden Paare Darstellungs-/Fitmoden und keine Oszillations- oder
+  Photonenevidenz.
 - `D_mem` nahe drei im 3D-Embedding ist keine Dimensionsselektion.
 - Der positive skalare Memory-Kanal besitzt keine interne Ladungs- oder
   Neutralitaetsstruktur.
@@ -132,17 +138,18 @@ wichtig:
 3. `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md`
 4. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
 5. `reports/memory/low_mode_identity_audit_2026-07-20.md`
-6. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
-7. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
-8. `reports/response/oriented_history_current_audit_2026-07-21.md`
-9. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
-10. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
-11. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
-12. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
-13. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
-14. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
-15. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
-16. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
+6. `reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md`
+7. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
+8. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
+9. `reports/response/oriented_history_current_audit_2026-07-21.md`
+10. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
+11. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
+12. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
+13. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
+14. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
+15. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
+16. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
+17. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -255,9 +262,14 @@ klassische Finite-k-Mechanismusgate. Die kubisch gesaettigte Instabilitaet ist
 beschraenkt, waehrend cubic-off divergiert und source-off exakt null bleibt.
 Da `eta=0` dieselbe Feldordnung traegt, ist dies noch kein gekoppelter Knoten.
 Die beobachtete feedback-spezifische Phasenrelokation ist explorativ und kein
-Oszillations- oder Metastabilitaetsgate. Der naechste globale Arbeitsschritt bleibt daher die analytische
-Nullreferenz fuer die bestehenden AR-Scheinmoden; der Feldzweig wird nicht
-mit einem freien Koeffizientensweep erweitert.
+Oszillations- oder Metastabilitaetsgate. Die analytische Nullreferenz fuer die
+AR-Scheinmoden ist nun abgeschlossen:
+Der rohe `eta=0`-Operator ist reell, volle N=1M-Fits bleiben reell und die
+ausgerichteten komplexen Paare sind nicht kontrollgetrennt. Der Feldzweig wird
+daher nicht mit einem freien Koeffizientensweep erweitert. Die naechste
+inhaltliche Prioritaet ist P3 nur fuer einen vorab identifizierenden
+Interaktionstest; parallel bleibt die Long-Run-Geometrieschiene mit
+eingefrorener Messmethodik erhalten.
 
 ## Paper-Status
 

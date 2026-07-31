@@ -66,6 +66,15 @@ die 10%/5%-Grenzen, fruehe `D_win`-Fits sind ungueltig und bei `N=300M`
 wechseln Cadence und Codeversion. Ein neuer Long Run muss deshalb dieselbe
 Revision und feste Online-/Samplingdefinition durchgehend verwenden.
 
+Die investierte Long-Run-Evidenz bleibt erhalten: `N=30M/300M`-Slices,
+Parameter-Heatmaps und einzelne `D_occ`-nahe-drei-Punkte sind dokumentierte
+Beobachtungen und Kandidatenkarten. Das neue Messkonvergenzgate verwirft diese
+Daten nicht; es begrenzt nur die zulaessige Aussage. Heatmap-Punkte aus
+wechselnden Revisionen, Cadences oder Fitfenstern duerfen weder als
+N-unabhaengiges Plateau noch als Dimensionsselektion zusammengezogen werden.
+Der naechste teure Lauf ist erst nach einer eingefrorenen
+Online-Observable-/Checkpoint-Spezifikation zulaessig.
+
 ## P1: Orientierter Kanal und lokales Feldgesetz
 
 Entscheidung: Das vorgeschaltete Cross-Readout-Gate scheitert in `d=3` und
@@ -336,30 +345,39 @@ Es folgt kein freier `a2/u/s`-Sweep und die Vektor-/Chiralitaetsenergie
 wird nicht allein durch diesen Pass geoeffnet. Ein spaeterer Feldtest braucht
 zuerst eine unabhaengige Source-/Target-Regel oder eine vorregistrierte
 Observable, die Trajektorie-Feld-Rueckkopplung von der eta-zero-Musterbildung
-trennt. Die naechste globale Prioritaet ist P2.
+trennt. Diese Stopregel bleibt bestehen; der anschliessende P2-Nullaudit ist
+inzwischen abgeschlossen.
 
 ## P2: Scheinmoden analytisch einordnen
 
-Die komplexen AR-Nebenmoden ueberlappen fuer aktiv und `eta=0` praktisch
-vollstaendig und driften zwischen Zeitsegmenten. Die Arbeitsannahme ist daher
-ein lineares Sampling-/Projektionsphaenomen, nicht ein physikalischer Modus.
+**Abgeschlossen, negatives Modengate.** Fuer rohe ungerichtete Fouriermoden
+schliesst der `eta=0`-Prozess unter Gauss-Inkrementen exakt in einem reellen
+Viererblock. Seine Eigenwerte sind der sichtbare Phasenmultiplikator
+`exp(-epsilon^2 k^2/2)` und der Memory-Multiplikator
+`(1-lambda)exp(-nu k^2)`, jeweils doppelt. Keine Sampling-Cadence kann daraus
+durch Potenzieren eine komplexe Eigenmode erzeugen.
 
-Naechster diskriminierender Test:
+Der N=1M-Audit verwendet dieselben fuenf Seeds, `sample_every=20`, dieselben
+Lags und dieselbe Diffusionsskala wie der archivierte Closure-Lauf:
 
-- lineares Zustandsraummodell oder analytische Nullreferenz fuer dieselbe
-  Sampling-Cadence ableiten;
-- Eigenvektor-, Rate- und Segment-Matching gegen diese Referenz pruefen;
-- keine weitere Parametersuche, bevor die Nullherkunft verstanden ist.
+- analytischer Rohoperator: keine komplexen Eigenwerte;
+- gepoolte Rohfits: `0/15` komplex;
+- vollstaendige seedweise Rohfits: `0/75` komplex;
+- kurze Segmentfits: `27/375` kleine Leckpaare bei maximal
+  `7.25e-4` Frequenz pro Memory-Zeit und hoher Konditionszahl;
+- ausgerichtete aktive und `eta=0`-Subraeume ueberlappen weiterhin `>0.9999`
+  und bestehen weder Kontrolltrennung noch Segmentidentitaet.
 
-Pass: aktive Moden trennen sich seed- und segmentstabil von der Nullreferenz.
-Fail: dieselbe Modenfamilie entsteht im linearen oder `eta=0`-Modell.
+Damit greift die vorregistrierte Fail-Regel. Die vorhandenen komplexen
+Nebenmoden werden als Darstellungs-/Fitmoden klassifiziert, nicht als
+physikalische Oszillation, Photon-, Spin- oder Phasenmodus. Der Nullaudit
+veraendert die geometrische Long-Run-Evidenz nicht.
 
 Ein spaeterer positiver Modentest muss keine permanente globale Sinusmode
-fordern. Fuer ueberwiegend chaotische gekoppelte Dynamik ist ModeScore v0.2
+fordern. Fuer ueberwiegend chaotische gekoppelte Dynamik bleibt ModeScore v0.2
 ereignisbasiert: vorab segmentierte Bursts, Duty-Cycle, Dauer/Survival,
 Within-event Frequenz/Q und Phasenkontinuitaet sowie Kontroll-/Surrogatabstand.
-Diese Modenmetriken bleiben strikt getrennt vom KnotScore, der die statistisch
-gebundene Identitaet und Shape-Huelle bewertet.
+Er wird erst auf einen neuen, kontrollgetrennten Mechanismus angewandt.
 
 ## P3: Interaktionsbefunde ueber unabhaengige Zustaende haerten
 
@@ -421,7 +439,8 @@ Ein Arbeitszweig wird beendet oder neu formuliert, wenn eines gilt:
 2. **Dimension:** Ambient-Sweeps, D_spec-Sensitivitaet und Rohsnapshot-Retest;
    kein robuster externer 3D-Claim.
 3. **Memory-Feld:** spektrale Reprasentation, Relaxations-Diffusion,
-   Realraum-/Aufloesungskontrollen und negativer Mode-Identity-Audit.
+   Realraum-/Aufloesungskontrollen, negativer Mode-Identity-Audit und exakte
+   `eta=0`-Rohmoden-Nullreferenz bei archivierter N=1M-Kadenz.
 4. **Externe Antwort:** Weak Probe, Frozen Source, signierter Architekturtest
    sowie One-Way-Source- und Interaction-Age-Gates.
 5. **Repository-Hardening:** Paketkern, Checkpoints, Tests, CI und kuratierte

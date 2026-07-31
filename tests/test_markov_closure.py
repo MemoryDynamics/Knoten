@@ -7,6 +7,7 @@ import pytest
 
 from emergenz_knoten.markov.closure import (
     analytic_field_mode_multiplier,
+    eta_zero_raw_mode_null,
     fit_ar_spectrum,
     leave_one_series_out_closure,
     mode_subspace_overlap,
@@ -144,6 +145,50 @@ def test_zero_ridge_uses_least_squares_for_singular_features() -> None:
 def test_analytic_field_multiplier_rejects_nonfinite_diffusion() -> None:
     with pytest.raises(ValueError, match="invalid field-mode"):
         analytic_field_mode_multiplier(0.01, math.nan, 0.5, 20)
+
+
+def test_eta_zero_raw_mode_null_has_only_real_expected_multipliers() -> None:
+    result = eta_zero_raw_mode_null(
+        0.01,
+        0.00405,
+        2.0 * math.pi / 80.0,
+        1e-4,
+        20,
+    )
+    eigenvalues = np.linalg.eigvals(result.transition)
+
+    np.testing.assert_allclose(
+        np.sort(eigenvalues),
+        np.sort(
+            [
+                result.phase_multiplier,
+                result.phase_multiplier,
+                result.memory_multiplier,
+                result.memory_multiplier,
+            ]
+        ),
+        rtol=2e-14,
+        atol=2e-14,
+    )
+    assert np.isrealobj(result.transition)
+    assert result.phase_multiplier > result.memory_multiplier > 0.0
+
+
+def test_eta_zero_raw_mode_null_matches_iterated_one_step_map() -> None:
+    one_step = eta_zero_raw_mode_null(0.04, 0.01, 0.3, 0.2, 1)
+    lagged = eta_zero_raw_mode_null(0.04, 0.01, 0.3, 0.2, 7)
+
+    np.testing.assert_allclose(
+        lagged.transition,
+        np.linalg.matrix_power(one_step.transition, 7),
+        rtol=2e-15,
+        atol=2e-15,
+    )
+
+
+def test_eta_zero_raw_mode_null_rejects_invalid_parameters() -> None:
+    with pytest.raises(ValueError, match="eta-zero raw-mode"):
+        eta_zero_raw_mode_null(0.01, 0.0, 0.5, math.nan, 20)
 
 
 def test_closure_rejects_nonfinite_ridge() -> None:

@@ -90,6 +90,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 - [Mode-Identity-Audit](memory/low_mode_identity_audit_2026-07-20.md)
   - **negative:** weder ein stabiler einzelner Realmodus noch ein
     feedback-spezifischer komplexer Modus besteht das Segment-/Kontrollgate.
+- [Eta-zero-Rohmoden-Null](memory/eta_zero_raw_mode_null_audit_2026-07-31.md)
+  - **structural + negative:** Der rohe Fourier-Zustandsblock besitzt exakt
+    nur reelle Multiplikatoren. Bei archivierter N=1M-Kadenz bleiben gepoolte
+    und seedweise Fits reell; kleine Segmentleckage erreicht maximal
+    `7.25e-4` Frequenz pro Memory-Zeit.
+  - Die ausgerichteten komplexen AR-Paare werden damit als Darstellungs- und
+    Fitmoden klassifiziert, nicht als physikalische Oszillation.
 
 Entscheidung: Niedrige Moden sind nuetzliche Rechenfeatures, derzeit keine
 identifizierten physikalischen Moden.

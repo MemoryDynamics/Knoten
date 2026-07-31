@@ -29,6 +29,35 @@ class SpectralMemoryTrace:
     update_count: int
 
 
+@dataclass(frozen=True)
+class EtaZeroRawModeTrace:
+    """Raw visible-phase and memory modes for the exact eta-zero null."""
+
+    values: np.ndarray
+    feature_names: tuple[str, ...]
+    final_x: float
+    final_normalized_rho_modes: np.ndarray
+    update_count: int
+
+
+def eta_zero_raw_mode_feature_names(n_low_modes: int) -> tuple[str, ...]:
+    """Names for unaligned visible-phase and normalized raw memory modes."""
+
+    if n_low_modes < 1:
+        raise ValueError("n_low_modes must be positive")
+    names: list[str] = []
+    for mode in range(1, n_low_modes + 1):
+        names.extend(
+            (
+                f"phase_{mode}_real",
+                f"phase_{mode}_imag",
+                f"rho_{mode}_real",
+                f"rho_{mode}_imag",
+            )
+        )
+    return tuple(names)
+
+
 def low_mode_feature_names(
     n_low_modes: int,
     real_offsets: Sequence[float],
@@ -81,6 +110,96 @@ def _gradient_numba(
 
 
 @njit(cache=True)
+def _simulate_eta_zero_raw_modes_numba(
+    noise: np.ndarray,
+    box_length: float,
+    lambda_value: float,
+    epsilon: float,
+    burn_in: int,
+    sample_every: int,
+    k: np.ndarray,
+    smoothing: np.ndarray,
+    heat_transfer: np.ndarray,
+) -> tuple[np.ndarray, float, np.ndarray]:
+    steps = noise.size
+    n_samples = steps // sample_every - burn_in // sample_every
+    trace = np.empty((n_samples, 4 * k.size), dtype=np.float64)
+
+    x = 0.5 * box_length
+    rho = smoothing * np.exp(-1j * k * x)
+    q = 1.0 - lambda_value
+    sample_index = 0
+    for update_index in range(1, steps + 1):
+        x = (x + epsilon * noise[update_index - 1]) % box_length
+        phase = np.exp(-1j * k * x)
+        rho = heat_transfer * (q * rho + lambda_value * smoothing * phase)
+
+        if update_index > burn_in and update_index % sample_every == 0:
+            column = 0
+            for mode_index in range(k.size):
+                trace[sample_index, column] = phase[mode_index].real
+                trace[sample_index, column + 1] = phase[mode_index].imag
+                trace[sample_index, column + 2] = rho[mode_index].real
+                trace[sample_index, column + 3] = rho[mode_index].imag
+                column += 4
+            sample_index += 1
+    return trace, x, rho
+
+
+def simulate_eta_zero_raw_mode_trace(
+    config: SpectralMemoryConfig,
+    *,
+    noise: np.ndarray,
+    diffusion_per_update: float,
+    epsilon: float,
+    burn_in: int,
+    sample_every: int,
+    n_low_modes: int = 3,
+) -> EtaZeroRawModeTrace:
+    """Simulate raw modes for the exact Gaussian eta-zero closure null."""
+
+    noise_values = np.asarray(noise, dtype=np.float64)
+    if (
+        noise_values.ndim != 1
+        or noise_values.size < 1
+        or not np.isfinite(noise_values).all()
+    ):
+        raise ValueError("noise must be a non-empty finite one-dimensional array")
+    if not math.isfinite(diffusion_per_update) or diffusion_per_update < 0.0:
+        raise ValueError("diffusion_per_update must be non-negative and finite")
+    if not math.isfinite(epsilon) or epsilon < 0.0:
+        raise ValueError("epsilon must be non-negative and finite")
+    if burn_in < 0 or burn_in >= noise_values.size:
+        raise ValueError("burn_in must satisfy 0 <= burn_in < number of updates")
+    if sample_every < 1:
+        raise ValueError("sample_every must be positive")
+    if n_low_modes < 1 or n_low_modes > config.n_modes:
+        raise ValueError("n_low_modes must lie between one and config.n_modes")
+
+    retained_k = wavenumbers(config)[1 : n_low_modes + 1]
+    smoothing = np.exp(-0.5 * config.deposition_sigma**2 * retained_k**2)
+    heat = np.exp(-float(diffusion_per_update) * retained_k**2)
+    values, final_x, final_rho = _simulate_eta_zero_raw_modes_numba(
+        noise_values,
+        float(config.box_length),
+        float(config.lambda_value),
+        float(epsilon),
+        int(burn_in),
+        int(sample_every),
+        retained_k,
+        smoothing,
+        heat,
+    )
+    return EtaZeroRawModeTrace(
+        values=np.asarray(values, dtype=float),
+        feature_names=eta_zero_raw_mode_feature_names(n_low_modes),
+        final_x=float(final_x),
+        final_normalized_rho_modes=np.asarray(final_rho, dtype=np.complex128),
+        update_count=int(noise_values.size),
+    )
+
+
+@njit(cache=True)
 def _simulate_trace_numba(
     noise: np.ndarray,
     box_length: float,
@@ -119,18 +238,14 @@ def _simulate_trace_numba(
         x = (x + epsilon * noise[update_index - 1] - eta * gradient) % box_length
         for mode in range(k.size):
             deposited = base * smoothing[mode] * np.exp(-1j * k[mode] * x)
-            rho[mode] = heat_transfer[mode] * (
-                q * rho[mode] + lambda_value * deposited
-            )
+            rho[mode] = heat_transfer[mode] * (q * rho[mode] + lambda_value * deposited)
         rho[0] = base + 0.0j
         if history_capacity > 0:
             history_ring[(update_index - 1) % history_capacity] = x
 
         if update_index > burn_in and update_index % sample_every == 0:
             center = (-np.angle(rho[1]) / k[1]) % box_length
-            trace[sample_index, 0] = _periodic_displacement_numba(
-                x, center, box_length
-            )
+            trace[sample_index, 0] = _periodic_displacement_numba(x, center, box_length)
             trace[sample_index, 1] = _gradient_numba(rho, k, transfer, x)
             column = 2
             for mode in range(1, n_low_modes + 1):
@@ -142,14 +257,20 @@ def _simulate_trace_numba(
                 plus = rho[0].real
                 minus = rho[0].real
                 for mode in range(1, rho.size):
-                    plus += 2.0 * (
-                        rho[mode]
-                        * np.exp(1j * k[mode] * ((center + offset) % box_length))
-                    ).real
-                    minus += 2.0 * (
-                        rho[mode]
-                        * np.exp(1j * k[mode] * ((center - offset) % box_length))
-                    ).real
+                    plus += (
+                        2.0
+                        * (
+                            rho[mode]
+                            * np.exp(1j * k[mode] * ((center + offset) % box_length))
+                        ).real
+                    )
+                    minus += (
+                        2.0
+                        * (
+                            rho[mode]
+                            * np.exp(1j * k[mode] * ((center - offset) % box_length))
+                        ).real
+                    )
                 trace[sample_index, column] = 0.5 * (plus + minus) / base
                 trace[sample_index, column + 1] = 0.5 * (plus - minus) / base
                 column += 2

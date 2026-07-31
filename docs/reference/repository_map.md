@@ -29,6 +29,7 @@ flowchart TD
     experiments --> low_mode_exp["low_mode_ar_feature_closure.py<br/>real-space + AR control gate"]
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
+    experiments --> raw_null_exp["eta_zero_raw_mode_null_audit.py<br/>exact real null + cadence fit audit"]
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>both architectures pass; mechanism open"]
@@ -82,9 +83,10 @@ flowchart TD
     external_field --> continuation
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
-    src --> spectral_trace["spectral_memory_trace.py<br/>Numba traces + real-history audit"]
+    src --> spectral_trace["spectral_memory_trace.py<br/>aligned and raw eta-zero Numba traces"]
+    spectral_trace --> raw_null_exp
 
-    markov --> closure_api["closure.py<br/>AR skill + physical feature eigenspaces"]
+    markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]
     markov --> dataset["dataset.py<br/>z_i samples and lagged pairs"]
     markov --> transition["transition.py<br/>labels, counts, transition matrices"]
@@ -144,8 +146,10 @@ flowchart LR
     sim --> rhohat["spectral rho_hat<br/>explicit compact Markov state"]
     rhohat --> tracecore["Numba trace<br/>paired noise + final rho_hat"]
     tracecore --> lowmodes["phase-aligned low modes"]
+    tracecore --> rawmodes["raw p_k + rho_hat_k<br/>exact eta-zero closure state"]
     tracecore --> realhistory["finite real-history force<br/>tail-bounded reference"]
     lowmodes --> closure["cross-seed AR closure<br/>persistence + shuffled controls"]
+    rawmodes --> closure
     realhistory --> closure
     closure --> lagged
 

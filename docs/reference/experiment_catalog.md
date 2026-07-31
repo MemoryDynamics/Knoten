@@ -68,6 +68,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/low_mode_ar_feature_closure.py` | Low-Mode-/AR-Closure | aktiv | gepaarte Seeds, Realraumhistorie, Persistence/Shuffle, Box-/Modenzahlgate und N=1M-Bestaetigung |
 | `experiments/current/memory/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
 | `experiments/current/memory/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
+| `experiments/current/memory/eta_zero_raw_mode_null_audit.py` | exakte rohe `eta=0`-Modenreferenz | abgeschlossen, negativ | N=1M-Kadenz; reeller Fourier-Zustandsblock, Rohfit-/Segmentleckage gegen archivierte ausgerichtete AR-Paare |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
@@ -840,6 +841,7 @@ Modellklasse.
 | `reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; aggregierte reelle Rate bleibt von eta=0 getrennt, komplexe Nebenmoden bleiben in eta=0. |
 | `reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame aggregierte aktive Raten bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
 | `reports/memory/low_mode_identity_audit_2026-07-20.md` | Mode-Identity-Audit | Reelle Kandidaten verfehlen Match-/Ratenstabilitaetsgate; komplexe aktive und eta-zero Subraeume ueberlappen >0.9999. |
+| `reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md` | exakte Rohmoden-Null | Roher `eta=0`-Operator sowie gepoolte und seedweise N=1M-Fits bleiben reell; nur kleine Segmentleckage, daher bestehende komplexe Paare als Darstellungs-/Fitmoden klassifiziert. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |
