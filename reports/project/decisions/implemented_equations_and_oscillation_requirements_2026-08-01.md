@@ -1,423 +1,521 @@
 # Implemented equations and oscillator requirements
 
-Status: 2026-08-01. This is a code-level equation ledger and a scientific
-decision note. It distinguishes the canonical model from exact
-reparameterizations, optional pilot extensions, diagnostics, and unimplemented
-hypotheses.
+Status: 2026-08-04. This is a code-level equation ledger and scientific
+decision note. Display equations use GitHub-rendered LaTeX.
 
 ## Executive decision
 
-1. The implemented canonical scalar model contains no demonstrated mechanism
-   that selects rank three independently of the supplied ambient dimension.
-2. Its minimal local scalar-memory reduction has only real multipliers. It can
-   relax monotonically or with alternating signs, but it has no robust harmonic
-   mode.
-3. Rotation alone would not derive three dimensions. In any ambient dimension
-   `d >= 2`, an elementary rotation acts in a two-dimensional plane. A possible
-   route to effective rank three is a selected rotation plane plus one
-   independent propagation axis, together with suppression of all remaining
-   directions. That mechanism is not implemented or evidenced yet.
-4. Fixed input parameters do not change or select themselves during a long
-   run. Long runs can select an attractor branch and estimate effective
-   observables conditional on the inputs. Parameter self-selection requires an
-   additional adaptation, constraint, conservation, or coarse-graining law.
+1. The mathematical augmented state is $z_n=(x_n,\rho_n)$. A finite point
+   history is only one implementation of the truncated field.
+2. The local one-node scalar reduction has only real multipliers. This is a
+   local null result, not a global impossibility theorem for the full nonlinear
+   finite-memory dynamics.
+3. A reciprocal second node creates a new relative feedback channel. Together
+   with two lagging memory centers it can, in principle, produce a complex mode
+   pair. Reciprocal coupling alone does not guarantee oscillation.
+4. For the synchronous local reciprocal reduction, a complex cross-gain window
+   exists only for weak self gain
 
-## 1. Canonical scalar finite-memory model
+   $$
+   g<\frac{\lambda}{1+\lambda}.
+   $$
 
-Let
+   The current compact-knot baseline is far outside this window. Instantaneous
+   reciprocal coupling is therefore a useful null test; a delayed mediator,
+   inertia, oriented coupling, or a nonlinear bifurcation may still be needed.
+5. Fixed input parameters cannot select themselves during a long run. Long
+   runs select states or attractor branches and estimate effective observables
+   conditional on those inputs.
 
-```text
-q = 1 - lambda,                 0 < lambda <= 1,
-beta = lambda M0.
-```
+## 1. Canonical scalar model
 
-For a normalized deposition kernel `G_sigma`, the untruncated field equation is
+Define
 
-```text
-rho_(n+1)(x) = q rho_n(x) + beta G_sigma(x - x_(n+1)).        (1)
-```
+$$
+q=1-\lambda,
+\qquad 0<\lambda\leq 1.
+$$
 
-The more general form uses independent `beta`. Its stationary total memory
-mass is `beta/lambda`. The canonical package instead takes `M0` as input and
-therefore uses `beta=lambda M0`. This is a parametrization, not a new physical
-law.
+The general memory update is
 
-Rolling out (1) gives
+$$
+\rho_{n+1}(x)
+=q\rho_n(x)+\beta G_\sigma(x-x_{n+1}). \tag{1}
+$$
 
-```text
-rho_n = q^n rho_0
-        + lambda M0 sum_(j=0)^(n-1) q^j G_sigma(.-x_(n-j)).   (2)
-```
+For normalized $G_\sigma$, the stationary memory mass is
 
-The production backend stores the recent deposits directly. With
+$$
+M_0=\frac{\beta}{\lambda}.
+$$
 
-```text
-H = min(max_memory, max(1, floor(memory_factor/lambda))),
-w_j = lambda M0 q^j,
-```
+The canonical package uses $M_0$ as input and hence
 
-it evaluates the truncated effective potential
+$$
+\beta=\lambda M_0. \tag{2}
+$$
 
-```text
-Phi_n(x) = sum_(j=0)^(H-1) w_j W(x-x_(n-j)),
-W = K * G_sigma,                                               (3)
-```
+Rolling out the memory recurrence gives
 
-over the available retained history. The visible update is
+$$
+\rho_n
+=q^n\rho_0
++\lambda M_0\sum_{j=0}^{n-1}
+q^jG_\sigma(\,\cdot-x_{n-j}). \tag{3}
+$$
 
-```text
-x_(n+1) = x_n + epsilon xi_n - eta grad Phi_n(x_n),
-xi_n ~ N(0,I_d).                                               (4)
-```
+The memory-induced potential and visible update are
 
-The scalar read kernel is
+$$
+\Phi_n(x)=(K*\rho_n)(x), \tag{4}
+$$
 
-```text
-K(r) = A_rep exp(-|r|^2/(2 sigma_rep^2))
-       - A_att exp(-|r|^2/(2 sigma_att^2)).                    (5)
-```
+$$
+x_{n+1}
+=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),
+\qquad \xi_n\sim\mathcal N(0,I_d). \tag{5}
+$$
 
-For Gaussian deposition, the code uses the exact Gaussian convolution in
-`W`; for delta deposition, `W=K`. The attractive-only branch is `A_rep=0`.
-The update sign in (4), together with (5), is the canonical corrected sign
-convention.
+The canonical scalar read kernel is
 
-The augmented finite state
+$$
+K(r)
+=A_{\mathrm{rep}}
+\exp\!\left(-\frac{\lVert r\rVert^2}{2\sigma_{\mathrm{rep}}^2}\right)
+-A_{\mathrm{att}}
+\exp\!\left(-\frac{\lVert r\rVert^2}{2\sigma_{\mathrm{att}}^2}\right).
+\tag{6}
+$$
 
-```text
-z_n = (x_n,h_n),
-h_n = (x_n, x_(n-1), ..., x_(n-H+1)).                         (6)
-```
+For Gaussian deposition the code evaluates the exact effective convolution
+$W=K*G_\sigma$. For delta deposition, $W=K$.
 
-is Markov for fixed parameters and independent noise increments. The visible
-coordinate alone is generally non-Markovian. The finite-history backend is an
-explicit truncation of (1), not the exact infinite-memory field.
+## 2. Augmented state and finite-history backend
 
-## 2. Exact spectral representation and reparameterization
+The paper-level Markov state is
 
-The resource-bounded spectral pilot is one-dimensional and periodic. For
-`k_m=2 pi m/L`, it stores
+$$
+z_n=(x_n,\rho_n). \tag{7}
+$$
 
-```text
-rho_hat_(n+1,m)
-  = q rho_hat_(n,m)
-    + lambda (M0/L) exp(-sigma_G^2 k_m^2/2) exp(-i k_m x_(n+1)).   (7)
-```
+The visible coordinate $x_n$ alone is generally non-Markovian. The augmented
+state is Markov for fixed parameters and independent noise increments.
 
-The potential and visible update are
+The production backend truncates the exponential history at
 
-```text
-Phi_hat_(n,m) = K_hat_m rho_hat_(n,m),
-x_(n+1) = [x_n + epsilon xi_n - eta d_x Phi_n(x_n)] mod L.     (8)
-```
+$$
+H=min\!\left(
+H_{\max},
+\max\!\left(1,\left\lfloor\frac{f_{\mathrm{mem}}}{\lambda}\right\rfloor\right)
+\right),
+\qquad
+w_j=\lambda M_0q^j. \tag{8}
+$$
 
-Moving the read kernel into the stored field is exact for this linear,
-homogeneous convolution:
+It evaluates
 
-```text
-phi_hat_n = K_hat rho_hat_n,
-phi_hat_(n+1) = q phi_hat_n + lambda K_hat G_hat_(x_(n+1)),
-x_(n+1) = [x_n + epsilon xi_n - eta d_x phi_n(x_n)] mod L.     (9)
-```
+$$
+\Phi_n^{(H)}(x)
+=\sum_{j=0}^{H-1}w_jW(x-x_{n-j}). \tag{9}
+$$
 
-Equation (9) changes the state interpretation from nonnegative occupancy
-memory to a signed potential memory. It does not make the field self-dynamic.
+The actual ring buffer stores
 
-The optional relaxation-diffusion extension adds
+$$
+r_n^{(H)}=(x_n,x_{n-1},\ldots,x_{n-H+1}). \tag{10}
+$$
 
-```text
-rho_hat_(n+1,m)
-  = exp(-nu k_m^2)
-    [q rho_hat_(n,m) + lambda G_hat_m(x_(n+1))].                (10)
-```
+If the current coordinate is already written separately, a nonredundant
+history notation is
 
-Positive `nu` is new dynamics; `nu=0` recovers (7).
+$$
+z_n^{(H)}=(x_n,h_n^-),
+\qquad
+h_n^-=(x_{n-1},\ldots,x_{n-H+1}). \tag{11}
+$$
 
-## 3. Implemented optional vector-memory pilot
+Thus the previous notation $z_n=(x_n,h_n)$ with $h_n$ starting again at $x_n$
+was redundant and inappropriate as the main state definition.
 
-The vector-memory pilot writes the normalized step direction
+In the canonical model, memory has no direct spatial self-dynamics. It relaxes,
+receives trajectory deposits, and acts back on the trajectory. Direct memory
+evolution appears only in separate extension modules below.
 
-```text
-u_(n+1) = (x_(n+1)-x_n)/|x_(n+1)-x_n|                         (11)
-```
+## 3. Spectral representation
 
-when the displacement is nonzero. Its local readout is
+The one-dimensional periodic spectral pilot uses
 
-```text
-V_n(x) = sum_j lambda_v M_v (1-lambda_v)^j
-                 exp(-|x-y_(n-j)|^2/(2 sigma_v^2)) u_(n-j).   (12)
-```
+$$
+k_m=\frac{2\pi m}{L}
+$$
+
+and updates
+
+$$
+\widehat\rho_{n+1,m}
+=q\widehat\rho_{n,m}
++\lambda\frac{M_0}{L}
+\exp\!\left(-\frac{\sigma_G^2k_m^2}{2}\right)
+e^{-ik_mx_{n+1}}. \tag{12}
+$$
+
+The potential coefficients are
+
+$$
+\widehat\Phi_{n,m}=\widehat K_m\widehat\rho_{n,m}. \tag{13}
+$$
+
+Moving the read kernel into the stored field is an exact reparameterization:
+
+$$
+\widehat\phi_n=\widehat K\widehat\rho_n,
+$$
+
+$$
+\widehat\phi_{n+1}
+=q\widehat\phi_n
++\lambda\widehat K\widehat G_{x_{n+1}}. \tag{14}
+$$
+
+This changes occupancy memory into signed potential memory. It does not create
+a self-dynamic field.
+
+The optional relaxation-diffusion extension is
+
+$$
+\widehat\rho_{n+1,m}
+=e^{-\nu k_m^2}
+\left(q\widehat\rho_{n,m}
++\lambda\widehat G_m(x_{n+1})\right). \tag{15}
+$$
+
+Positive $\nu$ is additional dynamics; $\nu=0$ recovers exponential memory.
+
+## 4. Optional vector and interaction pilots
+
+The vector-memory pilot deposits the normalized step direction
+
+$$
+u_{n+1}
+=\frac{x_{n+1}-x_n}{\lVert x_{n+1}-x_n\rVert} \tag{16}
+$$
+
+for nonzero displacement. Its local readout is
+
+$$
+V_n(x)
+=\sum_j\lambda_vM_v(1-\lambda_v)^j
+\exp\!\left(-\frac{\lVert x-y_{n-j}\rVert^2}{2\sigma_v^2}\right)
+u_{n-j}. \tag{17}
+$$
 
 The optional trajectory coupling is
 
-```text
-x_(n+1) = x_n + epsilon xi_n - eta grad Phi_n(x_n)
-          + eta_v V_n(x_n)                                   (13a)
-```
+$$
+x_{n+1}
+=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n)
++\eta_vV_n(x_n). \tag{18}
+$$
 
-for alignment, or
+The explicitly two-dimensional transverse pilot replaces $V_n$ by $JV_n$,
+where
 
-```text
-x_(n+1) = ... + eta_v J V_n(x_n),
-J(v_1,v_2)=(-v_2,v_1),                                       (13b)
-```
+$$
+J(v_1,v_2)=(-v_2,v_1).
+$$
 
-for the explicitly two-dimensional transverse pilot. Equation (13b) assumes
-a selected plane; it cannot demonstrate emergent `d=3`.
+This assumes a selected plane and cannot establish emergent $d=3$.
 
-A separate one-way oriented-source pilot low-pass filters the carrier:
+The implemented scalar one-way source/target pilot is
 
-```text
-p_(n+1) = (1-lambda_p) p_n + lambda_p u_(n+1).                (14)
-```
+$$
+x^S_{n+1}
+=x^S_n+\varepsilon_S\xi^S_n
+-\eta_S\nabla\Phi^S_n(x^S_n)+d_n, \tag{19}
+$$
 
-The orientation law, its relaxation, and the one-way readout are inserted
-model ingredients. They are not generated by the canonical scalar dynamics.
+$$
+x^T_{n+1}
+=x^T_n+\varepsilon_T\xi^T_n
+-\eta_T\nabla\Phi^T_n(x^T_n)
+-\eta_\times\nabla\Phi^S_n(x^T_n). \tag{20}
+$$
 
-The implemented scalar one-way source/target pilot uses
+The source does not read the target. This is not reciprocal interaction. The
+signed cross-channel additionally multiplies the last term by externally
+supplied labels $q_Sq_T\in\{-1,0,+1\}$; these are not emergent charges.
 
-```text
-x^S_(n+1) = x^S_n + epsilon_S xi^S_n
-             - eta_S grad Phi^S_n(x^S_n) + drive_n,
-x^T_(n+1) = x^T_n + epsilon_T xi^T_n
-             - eta_T grad Phi^T_n(x^T_n)
-             - eta_cross grad Phi^S_n(x^T_n).                 (14b)
-```
+## 5. Active field and mediator pilots
 
-The source does not read the target, so this is not reciprocal interaction.
-The signed cross-channel multiplies the last term by the externally supplied
-label product `q_S q_T` with labels in `{-1,0,+1}`. Those labels are test
-inputs, not emergent charges. Prescribed external-field tests add a supplied
-displacement `+/- f_n` or exactly zero to otherwise paired target paths.
+The one-dimensional periodic active scalar field integrates
 
-## 4. Implemented field and mediator pilots
+$$
+\partial_t\phi
+=-\left[1+a_2(-\partial_x^2)+a_4\partial_x^4\right]\phi
+-u\phi^3+s\,\delta_L(x-X_t), \tag{21}
+$$
 
-### Active scalar field
+$$
+dX_t=-\eta\,\partial_x\phi(X_t)\,dt+\varepsilon\,dW_t. \tag{22}
+$$
 
-The one-dimensional periodic active-field pilot integrates
+Its linear growth rate is real:
 
-```text
-d_t phi = -[1 + a2(-d_x^2) + a4(d_x^4)] phi
-           - u phi^3 + s delta_L(x-X_t),
-dX_t = -eta d_x phi(X_t) dt + epsilon dW_t.                   (15)
-```
+$$
+\sigma(k)=-(1+a_2k^2+a_4k^4). \tag{23}
+$$
 
-Equivalently, the linear growth rate is
+For $a_2<0$, the preferred wavenumber is
 
-```text
-sigma(k) = -(1 + a2 k^2 + a4 k^4).                            (16)
-```
+$$
+k_*=\sqrt{-\frac{a_2}{2a_4}}.
+$$
 
-For `a2<0`, the preferred linear wavenumber is
-`k_* = sqrt(-a2/(2a4))`. The cubic term can saturate a finite-`k` spatial
-pattern. All linear rates in (16) are real, so this first-order scalar field
-does not by itself supply a temporal harmonic mode. The existing `eta=0`
-control forms nearly the same field pattern, hence the current pass is not
-feedback-specific.
+This can select a spatial pattern but does not itself provide a temporal phase.
+The existing $\eta=0$ control forms nearly the same field pattern.
 
-### Local mediator controls
+The local relaxation-diffusion mediator is
 
-The relaxation-diffusion control is
+$$
+\partial_ta=D\partial_x^2a-\mu a+s. \tag{24}
+$$
 
-```text
-d_t a = D d_xx a - mu a + s.                                  (17)
-```
+The telegraph mediator is
 
-The telegraph control is
+$$
+\partial_t^2a+2\gamma\partial_ta+\omega_0^2a
+=c^2\partial_x^2a+s. \tag{25}
+$$
 
-```text
-d_tt a + 2 gamma d_t a + omega_0^2 a = c^2 d_xx a + s.        (18)
-```
+A Fourier mode is underdamped when
 
-For one Fourier mode, (18) is underdamped exactly when
+$$
+\gamma^2<\omega_0^2+c^2k^2. \tag{26}
+$$
 
-```text
-gamma^2 < omega_0^2 + c^2 k^2.                                (19)
-```
+The telegraph pilot can therefore carry damped oscillations, but only because
+the second-order transport law was supplied as a model input.
 
-Thus the telegraph pilot can carry damped oscillations, but only because a
-second-order wave law and its coefficients were supplied. It is currently a
-transport architecture control, not a law derived from memory dynamics.
+## 6. One-node local mode null
 
-## 5. What is not implemented
+For local restoring gain $g=\eta\kappa$, the minimal scalar center reduction is
 
-The proposed vector-field functional
+$$
+x_{n+1}=(1-g)x_n+gm_n, \tag{27}
+$$
 
-```text
-F[m;J] = integral [a|m|^2/2 + b_L(div m)^2/2
-                   + b_T|grad wedge m|^2/2 + c|Delta m|^2/2
-                   + u|m|^4/4 - J dot m
-                   + chi m dot curl m + ...] dx               (20)
-```
-
-is theoretical future work. In particular, `m dot curl m` in this form already
-uses oriented three-dimensional structure; it cannot be used as evidence that
-the model selected three dimensions.
-
-No currently unified production equation couples (1)-(5), (15), a vector
-functional such as (20), and a reciprocal multi-node mediator.
-
-## 6. Why the minimal scalar reduction has no harmonic mode
-
-For a local scalar memory center `m_n` and restoring gain `g=eta kappa`, the
-minimal reduction is
-
-```text
-x_(n+1) = (1-g)x_n + g m_n,
-m_(n+1) = lambda x_(n+1) + q m_n.                              (21)
-```
+$$
+m_{n+1}=\lambda x_{n+1}+qm_n. \tag{28}
+$$
 
 Its multipliers are
 
-```text
-mu_1 = 1,
-mu_2 = q(1-g).                                                 (22)
-```
+$$
+\mu_1=1,
+\qquad
+\mu_2=q(1-g). \tag{29}
+$$
 
-Both are real. The relative mode is stable when
+The relative mode is stable when
 
-```text
-|q(1-g)| < 1.                                                  (23)
-```
+$$
+\lvert q(1-g)\rvert<1. \tag{30}
+$$
 
-It is monotone for `q(1-g)>0` and sign-alternating for `q(1-g)<0`. The latter
-is a discrete overshoot or near-period-two response, not a harmonic phase.
+It relaxes monotonically for $q(1-g)>0$ and alternates for $q(1-g)<0$.
+Alternation is not a harmonic phase.
 
-With frozen memory and Hessian eigenvalue `h_i`, the multiplier is
-`1-eta h_i`; local stability requires
+For a frozen-memory Hessian eigenvalue $h_i$, the local multiplier is
+$1-\eta h_i$, and stability requires
 
-```text
-0 < eta h_i < 2.                                               (24)
-```
+$$
+0<\eta h_i<2. \tag{31}
+$$
 
-Again this gives monotone or alternating real relaxation.
+A genuine damped discrete oscillator requires
 
-A genuine damped oscillator requires a conjugate pair
+$$
+\mu_\pm=re^{\pm i\theta},
+\qquad
+0<r<1,
+\qquad
+\theta\notin\{0,\pi\}. \tag{32}
+$$
 
-```text
-mu_+/- = r exp(+/- i theta),  0 < r < 1,  theta not in {0,pi}. (25)
-```
+Equations (27)-(31) are not a global impossibility theorem for the full
+finite-history nonlinear system. Delayed nonlinear feedback could still
+produce a limit cycle or complex modes. Existing fitted candidates failed the
+raw-mode, segment-identity, or $\eta=0$ controls.
 
-For a persistent neutral oscillation, `r=1`; with noise, a stationary
-quasi-cycle normally needs a damped focus plus continuing stochastic drive.
+## 7. Reciprocal two-node local mode test
 
-Equations (21)-(24) are not a global impossibility theorem for the complete
-finite-history nonlinear system. Its augmented state has many dimensions, and
-delayed nonlinear feedback could in principle support a limit cycle or complex
-modes. No general parameter inequality for such a branch has been derived,
-however, and the fitted complex candidates observed so far failed the raw-mode,
-segment-identity, or `eta=0` control gates.
+Let two nodes read both their own and the other node's lagging memory center:
 
-## 7. Minimal mechanisms that could create complex modes
+$$
+x'_i=x_i-g(x_i-m_i)-c(x_i-m_j),
+\qquad i\neq j, \tag{33}
+$$
 
-These are hypotheses to test, not current results:
+$$
+m'_i=qm_i+\lambda x'_i. \tag{34}
+$$
 
-1. **Momentum/inertia.** Add a second state per active direction. For the
-   simple discrete update
+Here $g=\eta\kappa_{\rm self}$ and
+$c=\eta_\times\kappa_\times$ are dimensionless gains per update. This is a
+synchronous local reduction, not yet the full nonlinear reciprocal simulator.
 
-   ```text
-   v_(n+1) = (1-gamma)v_n - kappa r_n,
-   r_(n+1) = r_n + v_(n+1),                                   (26)
-   ```
+For common variables $x_+=(x_1+x_2)/2$ and $m_+=(m_1+m_2)/2$, the multipliers
+remain real:
 
-   the linear block has determinant `1-gamma` and trace
-   `2-gamma-kappa`. It has a stable complex pair when
+$$
+\mu_+^{(1)}=1,
+\qquad
+\mu_+^{(2)}=q(1-g-c). \tag{35}
+$$
 
-   ```text
-   0 < gamma < 1,
-   (2-gamma-kappa)^2 < 4(1-gamma).                             (27)
-   ```
+For relative variables $x_-=(x_1-x_2)/2$ and $m_-=(m_1-m_2)/2$, the update
+matrix is
 
-2. **Oriented antisymmetric coupling.** A two-component block
-   `A=a I+b J`, `J^2=-I`, has multipliers `a +/- ib`. It oscillates when
-   `b != 0` and is stable when `a^2+b^2<1`. The origin of `J` must be derived
-   or independently justified; inserting a 3D curl would presuppose the
-   desired dimension.
-3. **Retarded reciprocal coupling.** A delay or local mediator can provide the
-   phase lag needed for a Hopf-type instability. It needs independent source
-   and target states and controls that remove direct instantaneous readout.
-4. **Coupled field components.** At least two fields with a non-symmetric or
-   antisymmetric kinetic block can have complex modes. Multiple scalar fields
-   with only symmetric gradient relaxation need not do so.
+$$
+A_-=
+\begin{pmatrix}
+1-g-c & g-c\\
+\lambda(1-g-c) & q+\lambda(g-c)
+\end{pmatrix}. \tag{36}
+$$
 
-Non-normal transients, metastable switching, moving-center alignment, cadence
-aliasing, and finite-window AR leakage can all look oscillatory without
-satisfying (25). Existing raw-mode controls already demonstrate this risk.
+Its trace and determinant are
 
-## 8. Rotation and a falsifiable rank-three mechanism
+$$
+T=2-\lambda-qg-(1+\lambda)c, \tag{37}
+$$
 
-Rotation does not generally produce three dimensions:
+$$
+D=q(1-g-c). \tag{38}
+$$
 
-- an elementary rotation in `R^d` occupies a two-plane;
-- a single circular orbit is rank two;
-- in `d>3`, additional rotation planes and axis wandering are possible;
-- an antisymmetric generator has even rank, so pure rotation does not
-  naturally select rank three.
+The relative multipliers are
 
-A concrete, dimension-independent hypothesis is instead:
+$$
+\mu_-^{\pm}
+=\frac{T\pm\sqrt{T^2-4D}}{2}. \tag{39}
+$$
 
-```text
-effective space = one coherent rotation plane
-                  + one independent propagation/normal axis.                (28)
-```
+A stable oscillatory relative mode requires
 
-For ambient `d in {4,5,7,10,...}`, a future registered test would require:
+$$
+T^2<4D,
+\qquad
+0<D<1. \tag{40}
+$$
 
-1. one persistent bivector plane with control-separated coherence;
-2. one propagation axis linearly independent of that plane;
+Minimizing the discriminant over positive cross gain gives the exact necessary
+condition for any complex window:
+
+$$
+g<\frac{\lambda}{1+\lambda}. \tag{41}
+$$
+
+For the compact two-scale baseline
+
+$$
+\lambda=0.01,
+\quad
+g=\eta M_0\left(
+\frac{A_{\rm att}}{\sigma_{\rm att}^2}
+-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}
+\right)
+=0.15\left(\frac{35}{9}-1\right)
+\approx0.433, \tag{42}
+$$
+
+whereas
+
+$$
+\frac{\lambda}{1+\lambda}\approx0.00990. \tag{43}
+$$
+
+Thus the synchronous local return channel cannot generate a complex mode at
+this baseline for any positive $c$. This result does not exclude nonlinear,
+finite-separation, retarded, or oriented reciprocal dynamics.
+
+## 8. What could still generate oscillations?
+
+The remaining discriminating mechanisms are:
+
+1. **Retarded reciprocal coupling.** The memory or mediator must provide enough
+   phase lag to cross a Hopf-type boundary.
+2. **Momentum or inertia.** For
+
+   $$
+   v_{n+1}=(1-\gamma)v_n-\kappa r_n,
+   \qquad
+   r_{n+1}=r_n+v_{n+1}, \tag{44}
+   $$
+
+   a stable complex pair exists when
+
+   $$
+   0<\gamma<1,
+   \qquad
+   (2-\gamma-\kappa)^2<4(1-\gamma). \tag{45}
+   $$
+
+3. **Oriented antisymmetric coupling.** A block $A=aI+bJ$ with $J^2=-I$ has
+   eigenvalues $a\pm ib$ and is stable for $a^2+b^2<1$.
+4. **A nonlinear reciprocal bifurcation.** The full kernels may leave the local
+   regime and create a limit cycle not present in (33)-(34). This must be shown
+   against the local prediction, not inferred from a spectral peak alone.
+
+Moving-center errors, cadence aliasing, finite-window AR leakage, non-normal
+transients, and metastable switching can all resemble oscillations without a
+stable complex mode.
+
+## 9. Rotation and effective rank three
+
+An elementary rotation in $\mathbb R^d$ occupies a two-plane. Pure rotation
+therefore does not select three dimensions. A falsifiable route is
+
+$$
+\text{one coherent rotation plane}
++\text{one independent propagation axis}
+\longrightarrow \text{effective rank }3. \tag{46}
+$$
+
+A future cross-ambient-dimension test must demonstrate:
+
+1. one persistent, control-separated bivector plane;
+2. one independent propagation or normal axis;
 3. a stable eigengap after the third response direction;
-4. the same rank-three result across seeds, ambient dimensions, windows, and
-   at least one held-out parameter slice;
-5. failure of rank three when the antisymmetric or delayed coupling is turned
-   off.
+4. the same rank across seeds, ambient dimensions, windows, and a held-out
+   parameter slice;
+5. loss of rank three when the phase-producing mechanism is disabled.
 
-Without items 1-5, rotation is not a `d=3` explanation.
+## 10. Parameter self-selection and next test
 
-## 9. Can long runs select the parameters?
+The current parameter tuple
 
-Not in the current equations. The tuple
+$$
+\Theta=(\varepsilon,\eta,\lambda,M_0,K,G,\ldots) \tag{47}
+$$
 
-```text
-Theta = (epsilon, eta, lambda, M0, K, G, ...)
-```
+is fixed before a run. A long run samples $P_\Theta$ and may select an attractor
+branch. It cannot update $\Theta$ without an additional law.
 
-is fixed before simulation. A long run samples `P_Theta`, estimates an
-invariant or metastable distribution, and may choose among coexisting
-attractors through its initial condition and noise. That is state or branch
-selection, not parameter selection.
+Parameter self-selection would require slow coupling dynamics, a conserved
+resource, a constrained variational principle, population selection, or a
+coarse-graining flow. Such a mechanism must be specified before looking for a
+preferred value.
 
-Self-selection would require at least one additional layer:
+The next simulation should use mature stored knot states and four paired arms:
 
-- promote selected couplings to slow state variables with explicit update
-  laws;
-- derive amplitudes and length scales from a conserved resource or constrained
-  variational problem;
-- define a population/selection dynamics over nodes;
-- derive scale-dependent effective couplings through coarse-graining and test
-  convergence to a fixed point.
+1. channel off;
+2. existing one-way cross-readout;
+3. instantaneous reciprocal cross-readout;
+4. reciprocal readout through one fixed local mediator.
 
-Each option still has inputs. The scientific target is not "no parameters",
-but universality: broad microscopic inputs should flow to the same small set of
-dimensionless effective observables. Adding adaptive laws merely to force a
-desired frequency, dimension, or amplitude would be parameter fitting in
-disguise.
-
-## 10. Recommended next discriminating test
-
-Do not launch another ungated scalar long run merely to search for oscillatory
-plots. First define one minimal oscillator extension analytically, with the
-canonical scalar model as the null. The lowest-assumption candidate is (26),
-because it introduces one
-missing state variable without assuming three-dimensional handedness.
-
-Pre-register:
-
-- the complex-mode region (27);
-- `gamma=0`/`kappa=0` and canonical-scalar controls;
-- frequency and damping from direct state-space fits, not only FFT peaks;
-- segment identity, cadence stability, and surrogate separation;
-- a cross-ambient-dimension rank test only after the oscillator gate passes.
-
-Keep the existing long-run geometry data frozen as an independent baseline.
-It remains valuable for scalar relaxation and shape diagnostics, but it cannot
-answer a question whose required state variable is absent from the model.
+The instantaneous reciprocal arm is the linear null predicted by
+Equations (33)-(43). Primary observables are the relative center coordinate,
+complex state-space multipliers, damping and frequency, phase continuity,
+shape bounds, and separation from common-noise controls. Only a
+control-separated, cadence-stable mode justifies a longer nonlinear run.
