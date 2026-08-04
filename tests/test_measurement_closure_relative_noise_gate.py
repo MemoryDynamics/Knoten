@@ -57,6 +57,10 @@ def test_registered_defaults_freeze_closure_and_noise_ladders(monkeypatch) -> No
     assert args.noise_correlations == "0,0.9,0.99"
     assert args.delay_depths == "1,2,5,10,20"
     assert args.mode_depths == "5,10,20"
+    assert args.hankel_depths == ""
+    assert args.hankel_ranks == ""
+    assert args.hankel_conditions == ""
+    assert args.hankel_material_change == 0.02
     assert args.closure_stride_updates == 50
     assert args.train_fraction == 0.6
 
@@ -67,13 +71,8 @@ def test_mode_match_requires_depth_stability() -> None:
         damping_max_per_memory_time=1.0,
         mode_relative_range_max=0.25,
     )
-    stable = [
-        _fit([0.97 * np.exp(0.2j), 0.97 * np.exp(-0.2j)])
-        for _ in range(3)
-    ]
-    shifted = stable[:2] + [
-        _fit([0.80 * np.exp(0.8j), 0.80 * np.exp(-0.8j)])
-    ]
+    stable = [_fit([0.97 * np.exp(0.2j), 0.97 * np.exp(-0.2j)]) for _ in range(3)]
+    shifted = stable[:2] + [_fit([0.80 * np.exp(0.8j), 0.80 * np.exp(-0.8j)])]
 
     assert MODULE._consistent_mode(stable, args, 0.5)["pass"]
     assert not MODULE._consistent_mode(shifted, args, 0.5)["pass"]

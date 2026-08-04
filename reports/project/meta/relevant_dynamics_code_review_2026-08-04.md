@@ -206,10 +206,11 @@ Beide Reviewtests liefen auf dem sauberen Commit `b296d66`:
 
 ## Naechste zwei Tests
 
-1. **Reduced-Rank-/Hankel-Audit:** Numerischen Rang und Singularwertspektrum
-   der bereits festgelegten sichtbaren und Feld-/Impuls-Delayzustaende
-   vorregistrieren. Ein Pol muss ueber feste Rangstufen, Zeitsegmente und die
-   Einweg-Mediatorkontrolle stabil bleiben. Kein Ridge-Retuning.
+1. **Langhorizont-/Hankel-Audit:** Der vorregistrierte Lauf verwendet
+   identische Train-/Testzielzeiten, feste Raenge `{2,4,8,16,32}` und
+   1000..12500 Updates Historie. Primaer sind rank-robuste Aenderung gegen
+   Persistenz und numerischer Hankel-Rang; gespeicherte DMD-Pole bleiben bis
+   zum separaten Segment-/Kontroll-Identity-Audit nicht interpretierbar.
 2. **Quelllokale Regel erst danach:** Emission und Readout ohne
    zielabhaengigen momentanen Cross-Gradienten formulieren und das reduzierte
    lineare Spektrum vor einer Vollsimulation bestimmen.

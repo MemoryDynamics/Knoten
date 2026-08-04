@@ -436,12 +436,16 @@ Prioritaetsfolge:
    Bindung wird staerker (mittlerer Endabstand `0.946R -> 0.299R -> 0.0946R`),
    die Closure-Kurven bleiben jedoch nahezu gleich und kein
    kontrollgetrennter Modus erscheint.
-9. **Naechstes Messgate, Reduced-Rank statt Parameter:** Feld plus Impuls
-   verbessern den Holdout-Fehler nur um `-1.94%..+0.20%`, erzeugen aber
-   `kappa=1.55e16..1.93e16` und 33/36 scheinbar passende komplexe Segmente.
-   Das ist nicht identifizierbar. Vorab definierter numerischer Hankel-Rang,
-   Rank-Sensitivitaet und die Einweg-Mediatorkontrolle muessen entscheiden,
-   ob irgendein Pol ueber die redundante Delaybasis hinaus stabil bleibt.
+9. **Aktives Messgate, Langhorizont vor Polinterpretation:** Die kurze
+   Delayleiter zeigt einen kleinen Anstieg von RMSE/Persistenz, variiert aber
+   zugleich Regressorzahl und Trainingsfenster. Der vorregistrierte Lauf haelt
+   alle Train-/Testzielzeiten konstant und testet bei 50-Update-Cadence die
+   Tiefen `{20,50,100,150,200,250}` beziehungsweise 1000..12500 Updates mit
+   festen Hankelraengen `{2,4,8,16,32}`. Seeds `1,2,3`,
+   `rho={0,0.9,0.99}`, reziprok und Einweg-Kontrolle bleiben fix; ein
+   materieller Trend verlangt `|Delta RMSE/Persistenz|>=0.02` und mindestens
+   80% Vorzeichenkonsistenz. Feld plus Impuls werden separat berichtet.
+   Gespeicherte reduzierte DMD-Pole sind in diesem Schritt nicht claimfaehig.
    Kein Ridge-, Gain-, Lambda-, Epsilon- oder Kernel-Retuning.
 10. **P3.2c erst danach, keine Gain-Suche:** Vor einer weiteren
     Mechanismussimulation wird eine rein quelllokale Emissions-/Readout-Regel

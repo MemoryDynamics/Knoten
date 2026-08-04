@@ -7,6 +7,7 @@ from emergenz_knoten.reciprocal_diagnostics import (
     correlated_pair_noise,
     fit_isotropic_relative_mode,
     fit_panel_delay_mode,
+    fit_panel_hankel_audit,
     relative_mode_phase_coherence,
 )
 
@@ -92,8 +93,9 @@ def test_fit_recovers_real_transition_and_lag_power() -> None:
     assert fitted.is_stable
 
 
-
-def test_correlated_pair_noise_preserves_marginals_and_controls_relative_noise() -> None:
+def test_correlated_pair_noise_preserves_marginals_and_controls_relative_noise() -> (
+    None
+):
     rng = np.random.default_rng(20260804)
     common = rng.standard_normal((100_000, 3))
     relative = rng.standard_normal((100_000, 3))
@@ -163,6 +165,57 @@ def test_full_ambient_fit_detects_rotation_hidden_by_isotropic_panels() -> None:
     )
     assert ambient.stable_complex_eigenvalues.size == 2
     assert ambient.test_residual_ratio < 1e-8
+
+
+def test_hankel_audit_uses_common_target_windows_and_recovers_ar2_mode() -> None:
+    radius = 0.985
+    angle = 0.2
+    values = np.empty((900, 4, 1), dtype=float)
+    values[0, :, 0] = [1.0, -0.4, 0.7, -1.2]
+    values[1, :, 0] = [0.2, 0.8, -0.6, -0.3]
+    for index in range(2, values.shape[0]):
+        values[index] = (
+            2.0 * radius * np.cos(angle) * values[index - 1]
+            - radius**2 * values[index - 2]
+        )
+
+    shallow = fit_panel_hankel_audit(
+        values,
+        delay_depth=2,
+        common_max_depth=40,
+        retained_ranks=(2,),
+    )
+    deep = fit_panel_hankel_audit(
+        values,
+        delay_depth=40,
+        common_max_depth=40,
+        retained_ranks=(2,),
+    )
+
+    assert shallow.train_transitions == deep.train_transitions
+    assert shallow.test_transitions == deep.test_transitions
+    expected = radius * np.exp(1j * np.array([-angle, angle]))
+    for audit in (shallow, deep):
+        np.testing.assert_allclose(
+            np.sort_complex(audit.rank_fits[0].eigenvalues),
+            np.sort_complex(expected),
+            atol=1e-9,
+        )
+        assert audit.rank_fits[0].test_residual_ratio < 1e-8
+
+
+def test_hankel_audit_rejects_rank_beyond_data_support() -> None:
+    rng = np.random.default_rng(8)
+    values = rng.standard_normal((80, 2, 1))
+
+    with pytest.raises(ValueError, match="exceeds numerical rank"):
+        fit_panel_hankel_audit(
+            values,
+            delay_depth=10,
+            common_max_depth=40,
+            retained_ranks=(16,),
+        )
+
 
 def test_fit_rejects_incompatible_traces() -> None:
     with pytest.raises(ValueError, match="shape"):

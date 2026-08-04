@@ -554,6 +554,27 @@ control-separated mode.
 Report:
 `reports/response/measurement_closure_relative_noise_gate_2026-08-04.md`.
 
+### Registered long-horizon follow-up
+
+The short ladder changes both predictor count and available training targets.
+Its slight increase in held-out RMSE/persistence therefore cannot be
+extrapolated as physical persistence. The registered follow-up uses the same
+fixed P3.2 model with `N=150000`, seeds `1,2,3`, `rho={0,0.9,0.99}`, 100
+memory-times burn-in, and unchanged 50-update cadence. Delay depths
+`{20,50,100,150,200,250}` span 1000..12500 updates. Every depth predicts the
+same train and holdout target times.
+
+Visible and field/momentum-augmented states are fitted at fixed truncated
+Hankel ranks `{2,4,8,16,32}` in retarded reciprocal and one-way-control arms.
+A material trend requires median terminal-minus-initial RMSE/persistence of at
+least `0.02` in magnitude and 80% path/rank sign agreement. This stage tests
+long-history predictive benefit and rank growth only. Reduced DMD poles are
+stored but cannot pass a mode gate until they are stable across ranks, depths,
+time segments, and the one-way control.
+
+Preregistration:
+`reports/project/meta/long_horizon_hankel_preregistration_2026-08-04.md`.
+
 ## Observables
 
 A target knot provides:

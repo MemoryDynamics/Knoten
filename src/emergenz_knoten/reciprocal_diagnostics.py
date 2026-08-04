@@ -76,6 +76,40 @@ class PanelDelayModeFit:
         return values[(np.abs(values.imag) > 1e-8) & (np.abs(values) < 1.0)]
 
 
+@dataclass(frozen=True)
+class ReducedRankHankelFit:
+    """One fixed-rank fit within a common-window delay embedding."""
+
+    retained_rank: int
+    eigenvalues: np.ndarray
+    retained_condition: float
+    train_score_rmse: float
+    test_score_rmse: float
+    test_persistence_rmse: float
+    test_residual_ratio: float
+
+    @property
+    def stable_complex_eigenvalues(self) -> np.ndarray:
+        values = self.eigenvalues
+        return values[(np.abs(values.imag) > 1e-8) & (np.abs(values) < 1.0)]
+
+
+@dataclass(frozen=True)
+class PanelHankelAudit:
+    """Reduced-rank delay audit with common train and test target times."""
+
+    delay_depth: int
+    common_max_depth: int
+    singular_values: np.ndarray
+    stable_rank: float
+    entropy_rank: float
+    numerical_rank_1e6: int
+    numerical_rank_1e8: int
+    rank_fits: tuple[ReducedRankHankelFit, ...]
+    train_transitions: int
+    test_transitions: int
+
+
 def correlated_pair_noise(
     common_noise: np.ndarray,
     relative_noise: np.ndarray,
@@ -176,9 +210,9 @@ def fit_panel_delay_mode(
     standardized_predictors = (
         predictors - predictor_means[None, :, :]
     ) / predictor_scales[None, None, :]
-    standardized_responses = (
-        responses - response_means[None, :, :]
-    ) / feature_scales[None, None, :]
+    standardized_responses = (responses - response_means[None, :, :]) / feature_scales[
+        None, None, :
+    ]
     train_predictors = standardized_predictors[:n_train].reshape(
         -1, delay_depth * n_features
     )
@@ -196,9 +230,7 @@ def fit_panel_delay_mode(
     train_prediction = train_predictors @ coefficients
     test_prediction = test_predictors @ coefficients
     score_slice = slice(0, scored)
-    train_residual = (
-        train_responses[:, score_slice] - train_prediction[:, score_slice]
-    )
+    train_residual = train_responses[:, score_slice] - train_prediction[:, score_slice]
     test_residual = test_responses[:, score_slice] - test_prediction[:, score_slice]
     raw_test_current = predictors[n_train:, :, :scored]
     persistence = (
@@ -216,9 +248,7 @@ def fit_panel_delay_mode(
     transition = np.zeros((companion_size, companion_size), dtype=float)
     transition[:n_features] = coefficients.T
     if delay_depth > 1:
-        transition[n_features:, :-n_features] = np.eye(
-            (delay_depth - 1) * n_features
-        )
+        transition[n_features:, :-n_features] = np.eye((delay_depth - 1) * n_features)
     return PanelDelayModeFit(
         transition=transition,
         coefficients=np.asarray(coefficients, dtype=float),
@@ -230,13 +260,198 @@ def fit_panel_delay_mode(
         train_score_rmse=train_rmse,
         test_score_rmse=test_rmse,
         test_persistence_rmse=persistence_rmse,
-        test_residual_ratio=test_rmse
-        / max(persistence_rmse, np.finfo(float).tiny),
+        test_residual_ratio=test_rmse / max(persistence_rmse, np.finfo(float).tiny),
         delay_depth=int(delay_depth),
         score_features=scored,
         train_transitions=n_train * values.shape[1],
         test_transitions=n_test * values.shape[1],
     )
+
+
+def fit_panel_hankel_audit(
+    observations: np.ndarray,
+    *,
+    delay_depth: int,
+    retained_ranks: tuple[int, ...],
+    common_max_depth: int | None = None,
+    train_fraction: float = 0.6,
+    score_features: int | None = None,
+) -> PanelHankelAudit:
+    """Fit fixed-rank Hankel/DMD models on common chronological windows.
+
+    ``delay_depth`` controls the history represented in each Hankel row.
+    ``common_max_depth`` fixes the first response time for every depth in a
+    ladder, preventing shallower fits from receiving extra training targets.
+    The returned DMD eigenvalues are empirical reduced-state poles; they are
+    interpretable only when stable across ranks, depths, segments, and controls.
+    """
+
+    values = np.asarray(observations, dtype=float)
+    if (
+        values.ndim != 3
+        or values.shape[0] < 8
+        or values.shape[1] < 1
+        or values.shape[2] < 1
+        or not np.isfinite(values).all()
+    ):
+        raise ValueError(
+            "observations must be finite with shape (time, panel, feature)"
+        )
+    if (
+        isinstance(delay_depth, bool)
+        or not isinstance(delay_depth, (int, np.integer))
+        or delay_depth < 1
+    ):
+        raise ValueError("delay_depth must be a positive integer")
+    maximum = delay_depth if common_max_depth is None else common_max_depth
+    if (
+        isinstance(maximum, bool)
+        or not isinstance(maximum, (int, np.integer))
+        or maximum < delay_depth
+    ):
+        raise ValueError("common_max_depth must be an integer >= delay_depth")
+    ranks = tuple(int(rank) for rank in retained_ranks)
+    if (
+        not ranks
+        or any(rank < 1 for rank in ranks)
+        or tuple(sorted(set(ranks))) != ranks
+    ):
+        raise ValueError("retained_ranks must be unique increasing positive integers")
+    if not 0.5 <= train_fraction < 1.0:
+        raise ValueError("train_fraction must lie in [0.5, 1)")
+
+    n_features = values.shape[2]
+    scored = n_features if score_features is None else int(score_features)
+    if scored < 1 or scored > n_features:
+        raise ValueError("score_features must select leading observation features")
+    split_target = int(math.floor(train_fraction * (values.shape[0] - 1)))
+    response_indices = np.arange(maximum, values.shape[0])
+    train_mask = response_indices <= split_target
+    test_mask = ~train_mask
+    if np.count_nonzero(train_mask) < 3 or np.count_nonzero(test_mask) < 3:
+        raise ValueError("common delay window leaves too few train or test targets")
+
+    predictors = np.concatenate(
+        [
+            values[maximum - 1 - lag : values.shape[0] - 1 - lag]
+            for lag in range(delay_depth)
+        ],
+        axis=2,
+    )
+    next_states = np.concatenate(
+        [values[maximum - lag : values.shape[0] - lag] for lag in range(delay_depth)],
+        axis=2,
+    )
+    responses = values[maximum:]
+    predictor_means = np.mean(predictors[train_mask], axis=0)
+    response_means = np.mean(responses[train_mask], axis=0)
+    scale_training = values[: split_target + 1]
+    scale_means = np.mean(scale_training, axis=0)
+    centered_training = scale_training - scale_means[None, :, :]
+    feature_scales = np.sqrt(
+        np.mean(centered_training * centered_training, axis=(0, 1))
+    )
+    minimum_scale = np.finfo(float).eps * max(
+        1.0, float(np.max(np.abs(values[: split_target + 1])))
+    )
+    if np.any(feature_scales <= minimum_scale):
+        raise ValueError("every fitted feature must vary on the training window")
+    predictor_scales = np.tile(feature_scales, delay_depth)
+
+    standardized_predictors = (
+        predictors - predictor_means[None, :, :]
+    ) / predictor_scales[None, None, :]
+    standardized_next = (next_states - predictor_means[None, :, :]) / predictor_scales[
+        None, None, :
+    ]
+    standardized_responses = (responses - response_means[None, :, :]) / feature_scales[
+        None, None, :
+    ]
+    train_predictors = standardized_predictors[train_mask].reshape(
+        -1, delay_depth * n_features
+    )
+    test_predictors = standardized_predictors[test_mask].reshape(
+        -1, delay_depth * n_features
+    )
+    train_next = standardized_next[train_mask].reshape(-1, delay_depth * n_features)
+    train_responses = standardized_responses[train_mask].reshape(-1, n_features)
+    test_responses = standardized_responses[test_mask].reshape(-1, n_features)
+
+    left, singular_values, right_t = np.linalg.svd(
+        train_predictors, full_matrices=False
+    )
+    if singular_values.size == 0 or singular_values[0] <= 0.0:
+        raise ValueError("training Hankel matrix has no non-zero singular value")
+    tolerance = np.finfo(float).eps * max(train_predictors.shape) * singular_values[0]
+    available_rank = int(np.count_nonzero(singular_values > tolerance))
+    if ranks[-1] > available_rank:
+        raise ValueError(
+            f"retained rank {ranks[-1]} exceeds numerical rank {available_rank}"
+        )
+
+    power = singular_values * singular_values
+    probabilities = power / np.sum(power)
+    positive = probabilities > 0.0
+    entropy_rank = float(
+        np.exp(-np.sum(probabilities[positive] * np.log(probabilities[positive])))
+    )
+    stable_rank = float(np.sum(power) / power[0])
+    raw_test_current = predictors[test_mask, :, :scored]
+    persistence = (
+        raw_test_current - response_means[None, :, :scored]
+    ) / feature_scales[None, None, :scored]
+    persistence = persistence.reshape(-1, scored)
+    persistence_residual = test_responses[:, :scored] - persistence
+    persistence_rmse = float(np.sqrt(np.mean(persistence_residual**2)))
+
+    rank_fits = []
+    for rank in ranks:
+        left_rank = left[:, :rank]
+        right_rank = right_t[:rank].T
+        inverse_singular = 1.0 / singular_values[:rank]
+        coefficients = (
+            (right_rank * inverse_singular[None, :]) @ left_rank.T @ train_responses
+        )
+        train_prediction = train_predictors @ coefficients
+        test_prediction = test_predictors @ coefficients
+        train_residual = train_responses[:, :scored] - train_prediction[:, :scored]
+        test_residual = test_responses[:, :scored] - test_prediction[:, :scored]
+        reduced_transition = (
+            right_rank.T @ train_next.T @ left_rank @ np.diag(inverse_singular)
+        )
+        train_rmse = float(np.sqrt(np.mean(train_residual**2)))
+        test_rmse = float(np.sqrt(np.mean(test_residual**2)))
+        rank_fits.append(
+            ReducedRankHankelFit(
+                retained_rank=rank,
+                eigenvalues=np.asarray(
+                    np.linalg.eigvals(reduced_transition), dtype=np.complex128
+                ),
+                retained_condition=float(
+                    singular_values[0] / singular_values[rank - 1]
+                ),
+                train_score_rmse=train_rmse,
+                test_score_rmse=test_rmse,
+                test_persistence_rmse=persistence_rmse,
+                test_residual_ratio=test_rmse
+                / max(persistence_rmse, np.finfo(float).tiny),
+            )
+        )
+
+    relative_singular = singular_values / singular_values[0]
+    return PanelHankelAudit(
+        delay_depth=int(delay_depth),
+        common_max_depth=int(maximum),
+        singular_values=np.asarray(singular_values, dtype=float),
+        stable_rank=stable_rank,
+        entropy_rank=entropy_rank,
+        numerical_rank_1e6=int(np.count_nonzero(relative_singular >= 1e-6)),
+        numerical_rank_1e8=int(np.count_nonzero(relative_singular >= 1e-8)),
+        rank_fits=tuple(rank_fits),
+        train_transitions=int(np.count_nonzero(train_mask) * values.shape[1]),
+        test_transitions=int(np.count_nonzero(test_mask) * values.shape[1]),
+    )
+
 
 def fit_isotropic_relative_mode(
     relative_positions: np.ndarray,

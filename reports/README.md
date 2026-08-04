@@ -210,6 +210,10 @@ identifizierten physikalischen Moden.
   - Feste Knotenmarginalen und `rho={0,0.9,0.99}` bestaetigen die erwartete
     relative Rauschleiter. Kleinere relative Diffusion bindet staerker, legt
     aber keinen kontrollgetrennten Modus frei.
+- [Vorregistrierung des Langhorizont-/Hankel-Audits](project/meta/long_horizon_hankel_preregistration_2026-08-04.md)
+  - **preregistered:** gemeinsame Train-/Testzielzeiten, feste Raenge
+    `{2,4,8,16,32}` und 1000..12500 Updates Historie testen den sichtbaren
+    Delaytrend gegen Einweg-Kontrolle ohne Parameter-Retuning.
 
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen

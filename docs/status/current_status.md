@@ -297,9 +297,20 @@ Endabstand sinkt entsprechend von `0.946R` auf `0.299R` und `0.0946R`;
 die Closure-Kurven bleiben nahezu unveraendert. Das ist staerkere Bindung bei
 kleinerer relativer Diffusion, kein Rausch-Unmasking einer Oszillation.
 
-Als naechstes folgt ein vorregistrierter Reduced-Rank-/Hankel-Audit derselben
-Messvariablen gegen die Einweg-Mediatorkontrolle. Erst danach kommt P3.2c mit
-einer quelllokalen Emissions-/Readout-Regel. Keines dieser Gates wertet das
+Der beobachtete leichte Anstieg von RMSE/Persistenz ueber die kurze Delayleiter
+ist noch kein physikalischer Persistenztrend: tiefere OLS-Fits verlieren dort
+Trainingsziele und gewinnen Regressoren. Der nun vorregistrierte
+Langhorizont-Audit haelt deshalb alle Trainings- und Testzielzeiten konstant,
+verwendet feste Hankelraenge `{2,4,8,16,32}` und erweitert bei unveraenderter
+50-Update-Cadence auf 1000..12500 Updates Historie. Drei Seeds und
+`rho={0,0.9,0.99}` werden reziprok gegen den Einweg-Mediator verglichen; weder
+Gain noch Lambda, Epsilon oder Kernel werden veraendert.
+
+Dieser Schritt entscheidet nur ueber rank-robusten zusaetzlichen
+Vorhersagenutzen und numerischen Rang. Gespeicherte reduzierte DMD-Pole sind
+noch kein Modenbefund; dafuer bleibt anschliessend Identitaet ueber Rang,
+Delaytiefe, Zeitsegmente und Kontrolle erforderlich. Erst danach kommt P3.2c
+mit einer quelllokalen Emissions-/Readout-Regel. Keines dieser Gates wertet das
 negative registrierte P3.2-AR(1)-Primaergate rueckwirkend um. Die
 Long-Run-Geometrieschiene bleibt mit eingefrorener Messmethodik erhalten.
 
