@@ -418,14 +418,35 @@ Prioritaetsfolge:
    Endabstand `0.58..1.21R` ist groesser als direkt `0.31..0.88R`:
    Verzoegerung schwaecht oder verschiebt die Bindung, erzeugt im registrierten
    `(x_-,m_-)`-AR(1)-Readout aber keine Rotation.
-6. **P3.2a als Naechstes, keine Gain-Suche:** Vor einer weiteren
-   Vollsimulation wird eine rein quelllokale Emissions-/Readout-Regel
-   formuliert und ihr reduziertes lineares Spektrum samt Observability
-   berechnet. Der aktuelle Eingang ist noch der zielabhaengige momentane
-   Cross-Gradient; nur Transport/Filter sind lokal. Ein zusaetzlicher
-   lag-erweiterter Diagnosefit darf explorativ pruefen, ob der primaere
-   AR(1)-Readout einen sichtbaren hoehergeordneten Modus verdeckt.
-7. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+6. **Review-Hardening abgeschlossen:** Der isotrope Modenfit vermischte
+   koordinatenspezifische Gleichlagen. Der korrigierte Fixed-Effects-Fit
+   rekonstruiert ein synthetisches komplexes Gegenbeispiel bis `1e-12`.
+   Saubere unveraenderte Nachlaeufe bleiben dennoch bei `0/60` (P3.1) und
+   `0/80` (P3.2) nichtreellen Fits. Das staerkt den registrierten
+   AR(1)-Messnullbefund, nicht einen Nullsatz fuer das augmentierte System.
+7. **P3.2a als Naechstes, Mess-Closure vor Parametern:** Der Telegraph-Zustand
+   enthaelt verborgene Feld-/Impulsvariablen; `(x_-,m_-)` ist nach Projektion
+   nicht notwendig AR(1)-Markovsch. Exponierte reduzierte Mediatorobservablen
+   oder ein synthetisch validierter Delay-/Hankel-Fit muessen die Observability
+   pruefen. Ein separater `2d x 2d`-Fit testet ambienten Rotationsanteil statt
+   ihn mit der sichtbaren/Memory-Phase gleichzusetzen.
+8. **P3.2b gezielte Rauschfalsifikation, kein Epsilon-Sweep:** Bei festen
+   Einzelknoten-Marginalen wird nur die Korrelation der beiden Rauschstreams
+   `rho={0,0.9,0.99}` variiert. Damit sinkt der relative RMS-Schritt von
+   `0.579R` auf `0.183R` und `0.0579R`, ohne den Einzelknoten erneut nur
+   proportional zu skalieren. Zunaechst drei Zukunftsseeds; Bestaetigung erst
+   bei einem kontrollgetrennten Effekt.
+9. **P3.2c danach, keine Gain-Suche:** Vor einer weiteren Mechanismussimulation
+   wird eine rein quelllokale Emissions-/Readout-Regel formuliert und ihr
+   reduziertes lineares Spektrum samt Observability berechnet. Der aktuelle
+   Eingang ist noch der zielabhaengige momentane Cross-Gradient; nur
+   Transport/Filter sind lokal.
+10. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+    `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
+    `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
+    `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
+    Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
+11. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
    Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern

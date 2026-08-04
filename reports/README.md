@@ -202,10 +202,20 @@ identifizierten physikalischen Moden.
     Transportfilter ist lokal; keine quelllokale Feldtheorie oder physische
     Signalgeschwindigkeit ist gezeigt.
 
+- [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
+  - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
+    `2 x 2`-Fits ist behoben. Saubere Reproduktionen bleiben bei `0/60` und
+    `0/80` nichtreellen Segmentfits; der Befund gilt nur fuer den registrierten
+    AR(1)-Readout, nicht fuer den verborgenen augmentierten Telegraph-Zustand.
+  - Ein roher Epsilon-/Lambda-Sweep ist verworfen. Naechste Gates sind
+    Mess-Closure und eine Rauschkorrelationsvariation bei festen
+    Einzelknoten-Marginalen.
+
 Entscheidung: Direkter und fest retardierter Skalararm bestaetigen die
 Realmoden-Null bei kontrollierter Bindung/Relaxation. Weitere Gain-Suche ist
-nicht priorisiert. Vor einer neuen Vollsimulation braucht P3.2a eine
-quelllokale Emissions-/Readout-Regel und eine analytische Observability-Pruefung.
+nicht priorisiert. P3.2a prueft zuerst die Mess-Closure des verborgenen
+Mediatorzustands; danach folgt die relative Rauschfalsifikation bei festen
+Einzelknoten-Marginalen. Erst dann kommt eine quelllokale Emissionsregel.
 P3.3 bleibt gesperrt. Der komponentenweise Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden
@@ -215,6 +225,7 @@ eingesetzten Transportgesetze.
 
 - [Privacy and Control Plan](project/governance/privacy_and_control_plan_2026-07-08.md)
 - [Repository-Cleanup 2026-07-09](project/meta/repository_cleanup_2026-07-09.md)
+- [Dynamik-/Moden-Code-Review 2026-08-04](project/meta/relevant_dynamics_code_review_2026-08-04.md)
 - [Repository-Kuration 2026-07-21](project/meta/repository_curation_2026-07-21.md)
 
 ## Historische Bereiche

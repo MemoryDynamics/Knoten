@@ -711,7 +711,7 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Meaning of complex",
         "",
-        "A fitted real 2 x 2 relative-state matrix has a complex mode when its",
+        "A coordinate-fixed-effects real 2 x 2 relative-state matrix has a complex mode when its",
         "eigenvalues are a non-real conjugate pair. Such a matrix is real-similar",
         "to `a E + b J`, with `J=[[0,-1],[1,0]]`; it need not have that literal",
         "entry pattern in the measured `(x_-, m_-)` coordinates. This rotation is",
@@ -728,8 +728,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"epsilon={payload['config']['epsilon']:.4g};",
         f"- registered finite-horizon cross gain c={parameters['cross_gain']:.4g}, "
         f"giving cross_eta={derived['cross_eta']:.7g};",
-        f"- {len(payload['rows'])} future-noise seeds, each shared across channel-off, "
-        "one-way, and reciprocal conditions;",
+        f"- {len(payload['rows'])} node-specific future-noise seed pairs, each "
+        "shared across channel-off, one-way, and reciprocal conditions;",
         f"- {parameters['updates']:,} updates = "
         f"{derived['continuation_memory_times']:.1f} memory times; the first "
         f"{derived['analysis_start_memory_times']:.1f} memory times are excluded from "

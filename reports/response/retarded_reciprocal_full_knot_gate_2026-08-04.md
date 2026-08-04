@@ -1,6 +1,6 @@
 # P3.2 retarded reciprocal full-knot gate
 
-Date: 2026-08-04T12:44:01+00:00.
+Date: 2026-08-04T14:06:37+00:00.
 
 ## Question
 
@@ -17,7 +17,7 @@ through one preregistered local Telegraph channel?
 - the finite grid axis and target readout position remain fixed during each continuation; no moving-grid phase is introduced;
 - the mediator input is still the target-specific instantaneous cross-gradient; only its transport/filter state is local, so this is not a fully local source-field theory;
 - the discrete DC readout is solved exactly and normalized to unity (raw gain 28649.14); no knot-response calibration or cross-gain retuning is performed;
-- 5 common-noise future seeds, 50,000 updates = 500.0 memory times, first 100.0 excluded.
+- 5 condition-common, node-specific future-noise seeds, 50,000 updates = 500.0 memory times, first 100.0 excluded.
 
 The arms are channel-off, the exact instantaneous reciprocal P3.1 control,
 retarded one-way, and retarded reciprocal. Unit tests require the direct
@@ -25,12 +25,12 @@ control to be bitwise identical to the existing P3.1 implementation.
 
 ## Preregistered gate
 
-The primary observable remains the fitted 2 x 2 `(x_-, m_-)` map. Complex
+The primary observable remains the coordinate-fixed-effects 2 x 2 `(x_-, m_-)` map. Complex
 internal Telegraph poles are inserted by construction and cannot establish
 a knot mode. A seed needs stable non-real fits in at least
 3/4 segments, frequency at least 0.05 per memory time, phase coherence at least 0.5, and registered fit/identity/shape bounds. The candidate needs 4/5 reciprocal seeds and at most 1 in every control.
 
-The direct local prediction remains real: discriminant 0.208318, multipliers [{'imag': 0.0, 'real': 0.9991252883200965}, {'imag': 0.0, 'real': 0.5427064606658762}].
+The direct local prediction remains real: discriminant 0.208318, multipliers [{'real': 0.9991252883200965, 'imag': 0.0}, {'real': 0.5427064606658762, 'imag': 0.0}].
 
 ## Result
 
@@ -44,7 +44,7 @@ Classification: **retarded channel operational; complex-mode null**.
 - raw non-real segment fits: 0/80;
 - final distance/R, direct: 0.3145..0.8797;
 - final distance/R, retarded reciprocal: 0.5841..1.213;
-  the delay weakens or postpones binding but does not create an observable rotation.
+  the delay weakens or postpones binding but does not create rotation in the registered AR(1) readout.
 
 ![P3.2 retarded reciprocal gate](../../figures/draft/response/retarded_reciprocal_full_knot_gate_2026-08-04.png)
 
@@ -76,8 +76,8 @@ test pathwise robustness, not basin-to-basin reproducibility.
 ## Reproducibility
 
 - checkpoint: `data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz`;
-- git revision: `9b9b4906d8decad20c274d44594f49d260d0a6b0`;
+- git revision: `9b6bd5eeedd8ad969afd307539b61bf9c0d63693`;
 - git status at start: `clean`;
-- runtime: `167.661 s`;
+- runtime: `162.886 s`;
 - command: `python experiments/current/memory/synchronization/retarded_reciprocal_full_knot_gate.py`;
 - machine-readable summary: [retarded_reciprocal_full_knot_gate_2026-08-04.json](retarded_reciprocal_full_knot_gate_2026-08-04.json).

@@ -10,7 +10,7 @@ despite the registered local reduction predicting a real mode?
 
 ## Meaning of complex
 
-A fitted real 2 x 2 relative-state matrix has a complex mode when its
+A coordinate-fixed-effects real 2 x 2 relative-state matrix has a complex mode when its
 eigenvalues are a non-real conjugate pair. Such a matrix is real-similar
 to `a E + b J`, with `J=[[0,-1],[1,0]]`; it need not have that literal
 entry pattern in the measured `(x_-, m_-)` coordinates. This rotation is
@@ -23,7 +23,7 @@ in relative state space, not evidence for spatial rotation or d=3.
 - initial centre distance `2.5 R_pair`;
 - lambda=0.01, eta=0.15, epsilon=0.0001;
 - registered finite-horizon cross gain c=0.02, giving cross_eta=0.006939767;
-- 5 future-noise seeds, each shared across channel-off, one-way, and reciprocal conditions;
+- 5 node-specific future-noise seed pairs, each shared across channel-off, one-way, and reciprocal conditions;
 - 50,000 updates = 500.0 memory times; the first 100.0 memory times are excluded from four segment fits.
 
 - runtime 137.56 s, or 1817.4 continuation updates/s.
