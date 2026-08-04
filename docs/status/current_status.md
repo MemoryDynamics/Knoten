@@ -297,22 +297,22 @@ Endabstand sinkt entsprechend von `0.946R` auf `0.299R` und `0.0946R`;
 die Closure-Kurven bleiben nahezu unveraendert. Das ist staerkere Bindung bei
 kleinerer relativer Diffusion, kein Rausch-Unmasking einer Oszillation.
 
-Der beobachtete leichte Anstieg von RMSE/Persistenz ueber die kurze Delayleiter
-ist noch kein physikalischer Persistenztrend: tiefere OLS-Fits verlieren dort
-Trainingsziele und gewinnen Regressoren. Der nun vorregistrierte
-Langhorizont-Audit haelt deshalb alle Trainings- und Testzielzeiten konstant,
-verwendet feste Hankelraenge `{2,4,8,16,32}` und erweitert bei unveraenderter
-50-Update-Cadence auf 1000..12500 Updates Historie. Drei Seeds und
-`rho={0,0.9,0.99}` werden reziprok gegen den Einweg-Mediator verglichen; weder
-Gain noch Lambda, Epsilon oder Kernel werden veraendert.
+Der gemeinsame-Fenster-Langhorizont-Audit ist abgeschlossen. Bei festen
+Hankelraengen `{2,4,8,16,32}` verschlechtern sich alle 45
+Seed-/Rausch-/Rangpfade von 1000 auf 12500 Updates Historie; der mediane Anstieg
+von RMSE/Persistenz betraegt `+0.1203`. Der sichtbare Stable-/Entropy-Rank
+waechst zugleich von median `1.67/6.62` auf `5.87/49.4`, ohne Plateau. Das
+augmentierte Feld-/Impulsmemory kehrt den Trend nicht um.
 
-Dieser Schritt entscheidet nur ueber rank-robusten zusaetzlichen
-Vorhersagenutzen und numerischen Rang. Gespeicherte reduzierte DMD-Pole sind
-noch kein Modenbefund; dafuer bleibt anschliessend Identitaet ueber Rang,
-Delaytiefe, Zeitsegmente und Kontrolle erforderlich. Erst danach kommt P3.2c
-mit einer quelllokalen Emissions-/Readout-Regel. Keines dieser Gates wertet das
-negative registrierte P3.2-AR(1)-Primaergate rueckwirkend um. Die
-Long-Run-Geometrieschiene bleibt mit eingefrorener Messmethodik erhalten.
+Bei Rang 16/32 bleibt der terminale Unterschied reziprok minus Einweg innerhalb
+`-0.00366..+0.00244`; die hochrangige Verschlechterung ist daher nicht vom
+Einweg-Mediator getrennt. Gestuetzt ist fixed-rank Informationsverduennung bei
+wachsender stochastischer Historie, nicht eine laengere physikalische
+Persistenzskala. Die gespeicherten DMD-Pole duerfen nur noch billig auf
+Rang-/Tiefen-/Kontrollidentitaet vorgescreent werden. Nur ein Ueberlebender
+rechtfertigt einen neuen Segmentlauf; sonst wird P3.2 geschlossen und P3.2c
+mit einer quelllokalen Emissions-/Readout-Regel geoeffnet. Das negative
+registrierte P3.2-AR(1)-Primaergate bleibt unveraendert.
 
 ## Paper-Status
 

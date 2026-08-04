@@ -211,9 +211,11 @@ identifizierten physikalischen Moden.
     relative Rauschleiter. Kleinere relative Diffusion bindet staerker, legt
     aber keinen kontrollgetrennten Modus frei.
 - [Vorregistrierung des Langhorizont-/Hankel-Audits](project/meta/long_horizon_hankel_preregistration_2026-08-04.md)
-  - **preregistered:** gemeinsame Train-/Testzielzeiten, feste Raenge
-    `{2,4,8,16,32}` und 1000..12500 Updates Historie testen den sichtbaren
-    Delaytrend gegen Einweg-Kontrolle ohne Parameter-Retuning.
+- [Langhorizont-/Hankel-Ergebnis](response/long_horizon_hankel_gate_2026-08-04.md)
+  - **negative long-history closure trend:** Alle 45 festen
+    Seed-/Rausch-/Rangdeltas sind positiv; median `+0.1203` von 1000 auf 12500
+    Updates. Der effektive Rang waechst ohne Plateau, Feld/Impuls hilft nicht,
+    und Rang 16/32 ist nicht von der Einweg-Kontrolle getrennt.
 
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
@@ -227,8 +229,10 @@ identifizierten physikalischen Moden.
 Entscheidung: Direkter und fest retardierter Skalararm zeigen kontrollierte
 Bindung/Relaxation. Der sichtbare Delayzustand bleibt ohne komplexen Modenpass;
 das augmentierte Spektrum ist nicht identifizierbar. Weitere Gain-Suche ist
-nicht priorisiert. Vor der quelllokalen Emissionsregel folgt ein fester
-Reduced-Rank-/Hankel-Audit. P3.3 bleibt gesperrt. Der komponentenweise
+nicht priorisiert. Der feste Langhorizont-/Hankel-Audit zeigt
+Informationsverduennung statt zusaetzlicher Closure. Vor der quelllokalen
+Emissionsregel folgt nur noch ein billiger Pole-Prescreen auf den bestehenden
+Daten; P3.3 bleibt gesperrt. Der komponentenweise
 Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden

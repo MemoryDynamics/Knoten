@@ -575,6 +575,19 @@ time segments, and the one-way control.
 Preregistration:
 `reports/project/meta/long_horizon_hankel_preregistration_2026-08-04.md`.
 
+The canonical clean-start result classifies **longer history as degrading
+held-out prediction**. All 45 seed/rho/rank deltas from 1000 to 12500 updates
+are positive; their median is `+0.1203`. Median visible stable/entropy rank
+grows from `1.67/6.62` to `5.87/49.4` instead of plateauing. At retained ranks
+16 and 32, the terminal reciprocal-minus-one-way ratio difference remains
+within `-0.00366..+0.00244`. Field/momentum augmentation does not reverse the
+degradation. This supports fixed-rank information dilution under accumulating
+stochastic history, not a longer physical persistence scale or oscillatory
+closure.
+
+Result:
+`reports/response/long_horizon_hankel_gate_2026-08-04.md`.
+
 ## Observables
 
 A target knot provides:

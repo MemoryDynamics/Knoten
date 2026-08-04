@@ -436,28 +436,30 @@ Prioritaetsfolge:
    Bindung wird staerker (mittlerer Endabstand `0.946R -> 0.299R -> 0.0946R`),
    die Closure-Kurven bleiben jedoch nahezu gleich und kein
    kontrollgetrennter Modus erscheint.
-9. **Aktives Messgate, Langhorizont vor Polinterpretation:** Die kurze
-   Delayleiter zeigt einen kleinen Anstieg von RMSE/Persistenz, variiert aber
-   zugleich Regressorzahl und Trainingsfenster. Der vorregistrierte Lauf haelt
-   alle Train-/Testzielzeiten konstant und testet bei 50-Update-Cadence die
-   Tiefen `{20,50,100,150,200,250}` beziehungsweise 1000..12500 Updates mit
-   festen Hankelraengen `{2,4,8,16,32}`. Seeds `1,2,3`,
-   `rho={0,0.9,0.99}`, reziprok und Einweg-Kontrolle bleiben fix; ein
-   materieller Trend verlangt `|Delta RMSE/Persistenz|>=0.02` und mindestens
-   80% Vorzeichenkonsistenz. Feld plus Impuls werden separat berichtet.
-   Gespeicherte reduzierte DMD-Pole sind in diesem Schritt nicht claimfaehig.
-   Kein Ridge-, Gain-, Lambda-, Epsilon- oder Kernel-Retuning.
-10. **P3.2c erst danach, keine Gain-Suche:** Vor einer weiteren
-    Mechanismussimulation wird eine rein quelllokale Emissions-/Readout-Regel
-    formuliert und ihr reduziertes lineares Spektrum samt Observability
-    berechnet. Der aktuelle Eingang ist noch der zielabhaengige momentane
-    Cross-Gradient; nur Transport/Filter sind lokal.
-11. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+9. **P3.2-Langhorizont abgeschlossen, negativer Closure-Trend:** Bei
+   identischen Train-/Testzielen verschlechtern sich alle 45
+   Seed-/Rausch-/Rangpfade von 1000 auf 12500 Updates; medianes
+   `Delta RMSE/Persistenz=+0.1203`. Sichtbarer Stable-/Entropy-Rank waechst
+   `1.67/6.62 -> 5.87/49.4` ohne Plateau. Feld/Impuls kehrt den Trend nicht
+   um. Bei Rang 16/32 liegt reziprok minus Einweg terminal nur in
+   `-0.00366..+0.00244`. Das stuetzt Informationsverduennung bei wachsender
+   stochastischer Historie, keine laengere physikalische Persistenz.
+10. **Naechster billiger Stoptest, keine Simulation:** Die bereits
+    gespeicherten reduzierten DMD-Pole werden auf Identitaet ueber feste
+    Raenge, Delaytiefen und Einweg-Kontrolle geprueft. Nur ein
+    kontrollgetrennter Kandidat rechtfertigt einen neuen Zeitsegmentlauf.
+    Andernfalls wird P3.2 geschlossen.
+11. **P3.2c danach, keine Gain-Suche:** Eine rein quelllokale
+    Emissions-/Readout-Regel wird formuliert und ihr reduziertes lineares
+    Spektrum samt Observability vor jeder Vollsimulation berechnet. Der
+    aktuelle Eingang bleibt zielabhaengiger momentaner Cross-Gradient; nur
+    Transport/Filter sind lokal.
+12. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
     `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
-12. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+13. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

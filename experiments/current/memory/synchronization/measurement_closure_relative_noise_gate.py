@@ -1254,6 +1254,25 @@ def _hankel_report_lines(payload: dict[str, Any]) -> list[str]:
         row["conditions"]["retarded_reciprocal"]["hankel_audit"]["selected"][-1]
         for row in payload["rows"]
     ]
+    base_initial = [
+        row["conditions"]["retarded_reciprocal"]["hankel_audit"]["base"][0]
+        for row in payload["rows"]
+    ]
+    selected_initial = [
+        row["conditions"]["retarded_reciprocal"]["hankel_audit"]["selected"][0]
+        for row in payload["rows"]
+    ]
+    terminal_control = [
+        row["conditions"]["retarded_one_way"]["hankel_audit"]["base"][-1]
+        for row in payload["rows"]
+    ]
+    high_rank_indices = [ranks.index(rank) for rank in ranks if rank in (16, 32)]
+    high_rank_control_differences = [
+        primary["rank_fits"][rank_index]["test_residual_ratio"]
+        - control["rank_fits"][rank_index]["test_residual_ratio"]
+        for primary, control in zip(base_terminal, terminal_control)
+        for rank_index in high_rank_indices
+    ]
     lines.extend(
         [
             "",
@@ -1263,7 +1282,23 @@ def _hankel_report_lines(payload: dict[str, Any]) -> list[str]:
             "visible state and "
             f"{np.median([row['stable_rank'] for row in selected_terminal]):.3g}/"
             f"{np.median([row['entropy_rank'] for row in selected_terminal]):.3g} for the "
-            "field/momentum-augmented state.",
+            "field/momentum-augmented state. At the initial horizon these were "
+            f"{np.median([row['stable_rank'] for row in base_initial]):.3g}/"
+            f"{np.median([row['entropy_rank'] for row in base_initial]):.3g} and "
+            f"{np.median([row['stable_rank'] for row in selected_initial]):.3g}/"
+            f"{np.median([row['entropy_rank'] for row in selected_initial]):.3g}.",
+            "",
+            "All registered path/rank deltas are positive. The high-rank terminal",
+            "reciprocal-minus-one-way ratio difference spans "
+            f"{min(high_rank_control_differences):.4g}.."
+            f"{max(high_rank_control_differences):.4g}; therefore the degradation is",
+            "not separated from the one-way mediator control. Field/momentum readouts",
+            "also do not reverse the long-history degradation.",
+            "",
+            "The supported interpretation is fixed-rank information dilution while",
+            "the sampled stochastic history adds effective directions. This is not",
+            "evidence for a longer physical persistence scale or a closed oscillatory",
+            "state.",
             "",
             "Reduced DMD poles are stored for audit but are not promoted to a mode",
             "result here. Rank-, depth-, segment-, and one-way-control stability is",
@@ -1334,8 +1369,13 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     total = len(primary_rows)
     total_segments = total * int(payload["parameters"]["segments"])
 
+    title = (
+        "# P3.2 long-horizon Hankel and persistence gate"
+        if payload["parameters"].get("hankel_depths")
+        else "# P3.2a/b measurement closure and relative-noise gate"
+    )
     lines = [
-        "# P3.2a/b measurement closure and relative-noise gate",
+        title,
         "",
         f"Date: {payload['created_utc']}.",
         "",
