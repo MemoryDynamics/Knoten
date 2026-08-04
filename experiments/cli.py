@@ -103,6 +103,7 @@ CATEGORIES = {
         "current/memory/synchronization/one_way_interaction_age_audit.py",
         "current/memory/synchronization/reciprocal_full_knot_gate.py",
         "current/memory/synchronization/retarded_reciprocal_full_knot_gate.py",
+        "current/memory/synchronization/measurement_closure_relative_noise_gate.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",

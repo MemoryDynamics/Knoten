@@ -503,6 +503,42 @@ rotation in this formation basin.
 
 Report: `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`.
 
+
+## Measurement-Closure and Relative-Noise Gate (P3.2a/b)
+
+`measurement_closure_relative_noise_gate.py` keeps the P3.2 checkpoint,
+kernel, `lambda`, `epsilon`, gain, distance, and Telegraph mediator fixed.
+It changes measurement and excitation only:
+
+- target field and conjugate-momentum readouts augment `(x_-,m_-)`;
+- one panel transition is shared across ambient coordinates with
+  coordinate-specific fixed effects;
+- closure samples are spaced by 50 updates, or 0.5 memory times;
+- delay depths are `1,2,5,10,20`, with a chronological 60/40 train/test
+  split and one common held-out target window across all depths;
+- only held-out prediction of `(x_-,m_-)` is scored against persistence;
+- the pure `(x_-,m_-)` delay ladder, the readout-augmented ladder, and a
+  separate full `2d x 2d` ambient AR(1) fit remain distinct diagnostics.
+
+Predictive closure requires at least 10% improvement over persistence and a
+depth-10/20 residual change no larger than 10%. Spectral identifiability is a
+separate gate because a predictive high-dimensional delay fit can remain too
+ill-conditioned for eigenvalue interpretation. A complex candidate must be
+stable across depths `5,10,20` and at least three of four time segments.
+
+The relative-noise ladder uses `rho={0,0.9,0.99}` for three future seeds:
+
+```text
+xi_1 = sqrt((1+rho)/2) xi_c + sqrt((1-rho)/2) xi_r
+xi_2 = sqrt((1+rho)/2) xi_c - sqrt((1-rho)/2) xi_r
+```
+
+Each node therefore retains unit innovation variance while the relative
+half-noise scales as `sqrt(1-rho)`. Channel-off, instantaneous reciprocal,
+and retarded one-way remain controls. A passed readout-delay gate is only
+empirical predictive closure at this cadence and horizon: the full mediator
+grid remains hidden, and no exact Markov, spin, dimension, or particle claim
+follows.
 ## Observables
 
 A target knot provides:

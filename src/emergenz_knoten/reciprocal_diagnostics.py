@@ -44,6 +44,200 @@ class IsotropicRelativeModeFit:
         return float(-math.log(radius))
 
 
+@dataclass(frozen=True)
+class PanelDelayModeFit:
+    """Time-split panel VAR fit represented as a companion transition.
+
+    Ambient coordinates are panels with a shared transition and separate
+    training-window means. Features are standardized on the training window.
+    The held-out score is evaluated only on the requested leading observables,
+    so adding delayed state cannot improve the score through trivial shifts.
+    """
+
+    transition: np.ndarray
+    coefficients: np.ndarray
+    predictor_means: np.ndarray
+    response_means: np.ndarray
+    feature_scales: np.ndarray
+    eigenvalues: np.ndarray
+    design_condition: float
+    train_score_rmse: float
+    test_score_rmse: float
+    test_persistence_rmse: float
+    test_residual_ratio: float
+    delay_depth: int
+    score_features: int
+    train_transitions: int
+    test_transitions: int
+
+    @property
+    def stable_complex_eigenvalues(self) -> np.ndarray:
+        values = self.eigenvalues
+        return values[(np.abs(values.imag) > 1e-8) & (np.abs(values) < 1.0)]
+
+
+def correlated_pair_noise(
+    common_noise: np.ndarray,
+    relative_noise: np.ndarray,
+    correlation: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Mix independent innovations into equal-variance correlated node noise."""
+
+    common = np.asarray(common_noise, dtype=float)
+    relative = np.asarray(relative_noise, dtype=float)
+    rho = float(correlation)
+    if (
+        common.shape != relative.shape
+        or common.ndim != 2
+        or not np.isfinite(common).all()
+        or not np.isfinite(relative).all()
+    ):
+        raise ValueError("noise bases must be finite arrays of equal shape (time, dim)")
+    if not math.isfinite(rho) or rho < -1.0 or rho > 1.0:
+        raise ValueError("correlation must lie in [-1, 1]")
+    common_scale = math.sqrt(0.5 * (1.0 + rho))
+    relative_scale = math.sqrt(0.5 * (1.0 - rho))
+    first = common_scale * common + relative_scale * relative
+    second = common_scale * common - relative_scale * relative
+    return first, second
+
+
+def fit_panel_delay_mode(
+    observations: np.ndarray,
+    *,
+    delay_depth: int = 1,
+    train_fraction: float = 0.6,
+    score_features: int | None = None,
+) -> PanelDelayModeFit:
+    """Fit a panel VAR with a chronological held-out prediction score.
+
+    Observations have shape (time, panel, feature). The predictor stacks the
+    current observation followed by delay_depth - 1 past observations. Its
+    companion spectrum is an empirical delay-state spectrum, not proof that
+    the selected observables form an exact Markov state.
+    """
+
+    values = np.asarray(observations, dtype=float)
+    if (
+        values.ndim != 3
+        or values.shape[0] < 8
+        or values.shape[1] < 1
+        or values.shape[2] < 1
+        or not np.isfinite(values).all()
+    ):
+        raise ValueError(
+            "observations must be finite with shape (time, panel, feature)"
+        )
+    if (
+        isinstance(delay_depth, bool)
+        or not isinstance(delay_depth, (int, np.integer))
+        or delay_depth < 1
+    ):
+        raise ValueError("delay_depth must be a positive integer")
+    if not 0.5 <= train_fraction < 1.0:
+        raise ValueError("train_fraction must lie in [0.5, 1)")
+    n_features = values.shape[2]
+    scored = n_features if score_features is None else int(score_features)
+    if scored < 1 or scored > n_features:
+        raise ValueError("score_features must select leading observation features")
+
+    n_transitions = values.shape[0] - delay_depth
+    if n_transitions < 6:
+        raise ValueError("trace is too short for the requested delay depth")
+    split_target = int(math.floor(train_fraction * (values.shape[0] - 1)))
+    n_train = split_target - delay_depth + 1
+    n_test = n_transitions - n_train
+    if n_train < 3 or n_test < 3:
+        raise ValueError("chronological split leaves too few transitions")
+
+    predictors = np.concatenate(
+        [
+            values[delay_depth - 1 - lag : values.shape[0] - 1 - lag]
+            for lag in range(delay_depth)
+        ],
+        axis=2,
+    )
+    responses = values[delay_depth:]
+    predictor_means = np.mean(predictors[:n_train], axis=0)
+    response_means = np.mean(responses[:n_train], axis=0)
+    scale_training = values[: split_target + 1]
+    scale_means = np.mean(scale_training, axis=0)
+    centered_training = scale_training - scale_means[None, :, :]
+    feature_scales = np.sqrt(
+        np.mean(centered_training * centered_training, axis=(0, 1))
+    )
+    minimum_scale = np.finfo(float).eps * max(
+        1.0, float(np.max(np.abs(values[: n_train + delay_depth])))
+    )
+    if np.any(feature_scales <= minimum_scale):
+        raise ValueError("every fitted feature must vary on the training window")
+    predictor_scales = np.tile(feature_scales, delay_depth)
+
+    standardized_predictors = (
+        predictors - predictor_means[None, :, :]
+    ) / predictor_scales[None, None, :]
+    standardized_responses = (
+        responses - response_means[None, :, :]
+    ) / feature_scales[None, None, :]
+    train_predictors = standardized_predictors[:n_train].reshape(
+        -1, delay_depth * n_features
+    )
+    train_responses = standardized_responses[:n_train].reshape(-1, n_features)
+    test_predictors = standardized_predictors[n_train:].reshape(
+        -1, delay_depth * n_features
+    )
+    test_responses = standardized_responses[n_train:].reshape(-1, n_features)
+
+    coefficients, _, _, _ = np.linalg.lstsq(
+        train_predictors,
+        train_responses,
+        rcond=None,
+    )
+    train_prediction = train_predictors @ coefficients
+    test_prediction = test_predictors @ coefficients
+    score_slice = slice(0, scored)
+    train_residual = (
+        train_responses[:, score_slice] - train_prediction[:, score_slice]
+    )
+    test_residual = test_responses[:, score_slice] - test_prediction[:, score_slice]
+    raw_test_current = predictors[n_train:, :, :scored]
+    persistence = (
+        raw_test_current - response_means[None, :, :scored]
+    ) / feature_scales[None, None, :scored]
+    persistence = persistence.reshape(-1, scored)
+    persistence_residual = test_responses[:, score_slice] - persistence
+    train_rmse = float(np.sqrt(np.mean(train_residual * train_residual)))
+    test_rmse = float(np.sqrt(np.mean(test_residual * test_residual)))
+    persistence_rmse = float(
+        np.sqrt(np.mean(persistence_residual * persistence_residual))
+    )
+
+    companion_size = delay_depth * n_features
+    transition = np.zeros((companion_size, companion_size), dtype=float)
+    transition[:n_features] = coefficients.T
+    if delay_depth > 1:
+        transition[n_features:, :-n_features] = np.eye(
+            (delay_depth - 1) * n_features
+        )
+    return PanelDelayModeFit(
+        transition=transition,
+        coefficients=np.asarray(coefficients, dtype=float),
+        predictor_means=np.asarray(predictor_means, dtype=float),
+        response_means=np.asarray(response_means, dtype=float),
+        feature_scales=np.asarray(feature_scales, dtype=float),
+        eigenvalues=np.asarray(np.linalg.eigvals(transition), dtype=np.complex128),
+        design_condition=float(np.linalg.cond(train_predictors)),
+        train_score_rmse=train_rmse,
+        test_score_rmse=test_rmse,
+        test_persistence_rmse=persistence_rmse,
+        test_residual_ratio=test_rmse
+        / max(persistence_rmse, np.finfo(float).tiny),
+        delay_depth=int(delay_depth),
+        score_features=scored,
+        train_transitions=n_train * values.shape[1],
+        test_transitions=n_test * values.shape[1],
+    )
+
 def fit_isotropic_relative_mode(
     relative_positions: np.ndarray,
     relative_memory_centers: np.ndarray,

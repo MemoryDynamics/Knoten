@@ -1,0 +1,843 @@
+"""P3.2a/b: measurement-closure and relative-noise falsification gate."""
+
+from __future__ import annotations
+
+import argparse
+from dataclasses import asdict
+from datetime import UTC, datetime
+from itertools import product
+import json
+import math
+import os
+from pathlib import Path
+import subprocess
+import time
+from typing import Any
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+
+from emergenz_knoten import (
+    LocalMediatorGrid,
+    TelegraphMediator,
+    load_finite_memory_checkpoint,
+    memory_shape_tensor,
+)
+from emergenz_knoten.kernels import (
+    effective_double_gaussian_parameters,
+    two_scale_local_curvature,
+)
+from emergenz_knoten.reciprocal_diagnostics import (
+    PanelDelayModeFit,
+    correlated_pair_noise,
+    fit_panel_delay_mode,
+)
+from emergenz_knoten.retarded_reciprocal import (
+    RETARDED_RECIPROCAL_CONDITIONS,
+    retarded_reciprocal_pair_response,
+)
+
+
+def _repo_root() -> Path:
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "pyproject.toml").exists():
+            return parent
+    raise RuntimeError("repository root not found")
+
+
+ROOT = _repo_root()
+DEFAULT_CHECKPOINT = Path(
+    "data/processed/reference_states/"
+    "scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/"
+    "scalar_Aatt35_d3_seed1_N100000000.npz"
+)
+RETARDED = ("retarded_one_way", "retarded_reciprocal")
+COLORS = {
+    "channel_off": "#666666",
+    "instantaneous_reciprocal": "#D55E00",
+    "retarded_one_way": "#0072B2",
+    "retarded_reciprocal": "#009E73",
+}
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
+    parser.add_argument("--future-seeds", default="1,2,3")
+    parser.add_argument("--noise-correlations", default="0,0.9,0.99")
+    parser.add_argument("--updates", type=int, default=50_000)
+    parser.add_argument("--closure-stride-updates", type=int, default=50)
+    parser.add_argument("--delay-depths", default="1,2,5,10,20")
+    parser.add_argument("--mode-depths", default="5,10,20")
+    parser.add_argument("--train-fraction", type=float, default=0.6)
+    parser.add_argument("--distance-ratio", type=float, default=2.5)
+    parser.add_argument("--cross-gain", type=float, default=0.02)
+    parser.add_argument("--correlation-length-r", type=float, default=5.0)
+    parser.add_argument("--relaxation-memory-times", type=float, default=10.0)
+    parser.add_argument("--grid-spacing-r", type=float, default=0.25)
+    parser.add_argument("--grid-points-left", type=int, default=120)
+    parser.add_argument("--grid-points-right", type=int, default=180)
+    parser.add_argument("--analysis-burn-memory-times", type=float, default=100.0)
+    parser.add_argument("--segments", type=int, default=4)
+    parser.add_argument("--min-mode-segments", type=int, default=3)
+    parser.add_argument("--min-candidate-seeds", type=int, default=2)
+    parser.add_argument("--max-control-candidate-seeds", type=int, default=1)
+    parser.add_argument("--prediction-ratio-max", type=float, default=0.9)
+    parser.add_argument("--delay-plateau-relative-max", type=float, default=0.1)
+    parser.add_argument("--fit-condition-max", type=float, default=1e8)
+    parser.add_argument("--frequency-min-per-memory-time", type=float, default=0.05)
+    parser.add_argument("--damping-max-per-memory-time", type=float, default=1.0)
+    parser.add_argument("--mode-relative-range-max", type=float, default=0.25)
+    parser.add_argument("--noise-seed-offset", type=int, default=20_260_804)
+    parser.add_argument("--allow-dirty", action="store_true")
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=Path(
+            "reports/response/measurement_closure_relative_noise_gate_2026-08-04.md"
+        ),
+    )
+    parser.add_argument(
+        "--summary-json",
+        type=Path,
+        default=Path(
+            "reports/response/measurement_closure_relative_noise_gate_2026-08-04.json"
+        ),
+    )
+    parser.add_argument(
+        "--figure",
+        type=Path,
+        default=Path(
+            "figures/draft/response/"
+            "measurement_closure_relative_noise_gate_2026-08-04.png"
+        ),
+    )
+    return parser.parse_args()
+
+
+def _resolve(path: Path) -> Path:
+    return path if path.is_absolute() else ROOT / path
+
+
+def _relative(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _relative_from(source: Path, target: Path) -> str:
+    return Path(os.path.relpath(target.resolve(), source.resolve().parent)).as_posix()
+
+
+def _git(arguments: list[str]) -> str:
+    try:
+        return subprocess.run(
+            ["git", *arguments],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unavailable"
+
+
+def _jsonable(value: Any) -> Any:
+    if isinstance(value, np.ndarray):
+        return _jsonable(value.tolist())
+    if isinstance(value, np.integer):
+        return int(value)
+    if isinstance(value, np.floating):
+        number = float(value)
+        return number if np.isfinite(number) else None
+    if isinstance(value, (complex, np.complexfloating)):
+        return {"real": float(value.real), "imag": float(value.imag)}
+    if isinstance(value, Path):
+        return _relative(value)
+    if isinstance(value, dict):
+        return {str(key): _jsonable(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_jsonable(item) for item in value]
+    return value
+
+
+def _integers(text: str, name: str) -> list[int]:
+    values = [int(part.strip()) for part in text.split(",") if part.strip()]
+    if not values or len(values) != len(set(values)) or any(value < 0 for value in values):
+        raise ValueError(f"{name} must contain unique non-negative integers")
+    return values
+
+
+def _correlations(text: str) -> list[float]:
+    values = [float(part.strip()) for part in text.split(",") if part.strip()]
+    if (
+        not values
+        or len(values) != len(set(values))
+        or any(value < 0.0 or value >= 1.0 for value in values)
+    ):
+        raise ValueError("correlations must be unique values in [0, 1)")
+    return values
+
+
+def _rotation(dim: int) -> np.ndarray:
+    result = np.roll(np.eye(dim), shift=1, axis=0) if dim > 1 else np.eye(1)
+    if np.linalg.det(result) < 0.0:
+        result[[0, 1]] = result[[1, 0]]
+    return result
+
+
+def _fit_row(fit: PanelDelayModeFit) -> dict[str, Any]:
+    return {
+        "delay_depth": fit.delay_depth,
+        "eigenvalues": fit.eigenvalues,
+        "design_condition": fit.design_condition,
+        "test_score_rmse": fit.test_score_rmse,
+        "test_persistence_rmse": fit.test_persistence_rmse,
+        "test_residual_ratio": fit.test_residual_ratio,
+    }
+
+
+def _candidate_modes(
+    fit: PanelDelayModeFit,
+    args: argparse.Namespace,
+    sample_interval: float,
+) -> list[dict[str, float]]:
+    rows = []
+    for value in fit.eigenvalues:
+        if value.imag <= 1e-8 or not 0.0 < abs(value) < 1.0:
+            continue
+        frequency = float(abs(np.angle(value)) / sample_interval)
+        damping = float(-math.log(abs(value)) / sample_interval)
+        if (
+            frequency >= args.frequency_min_per_memory_time
+            and damping <= args.damping_max_per_memory_time
+        ):
+            rows.append({"frequency": frequency, "damping": damping})
+    return rows
+
+
+def _mode_spreads(
+    rows: tuple[dict[str, float], ...],
+    floor: float,
+) -> tuple[float, float]:
+    frequencies = [row["frequency"] for row in rows]
+    dampings = [row["damping"] for row in rows]
+    frequency = (max(frequencies) - min(frequencies)) / max(
+        float(np.median(frequencies)), floor
+    )
+    damping = (max(dampings) - min(dampings)) / max(
+        float(np.median(dampings)), floor
+    )
+    return float(frequency), float(damping)
+
+
+def _consistent_mode(
+    fits: list[PanelDelayModeFit],
+    args: argparse.Namespace,
+    sample_interval: float,
+) -> dict[str, Any]:
+    candidates = [
+        _candidate_modes(fit, args, sample_interval) for fit in fits
+    ]
+    if any(not rows for rows in candidates):
+        return {"pass": False}
+    ranked = []
+    for combination in product(*candidates):
+        frequency, damping = _mode_spreads(
+            combination, args.frequency_min_per_memory_time
+        )
+        ranked.append((max(frequency, damping), frequency, damping, combination))
+    _, frequency, damping, selected = min(ranked, key=lambda item: item[0])
+    return {
+        "pass": bool(
+            frequency <= args.mode_relative_range_max
+            and damping <= args.mode_relative_range_max
+        ),
+        "frequency_relative_range": frequency,
+        "damping_relative_range": damping,
+        "frequency": float(np.median([row["frequency"] for row in selected])),
+        "damping": float(np.median([row["damping"] for row in selected])),
+    }
+
+
+def _mode_identity(
+    state: np.ndarray,
+    depths: list[int],
+    args: argparse.Namespace,
+    sample_interval: float,
+    score_features: int,
+) -> dict[str, Any]:
+    boundaries = np.rint(
+        np.linspace(0, state.shape[0], args.segments + 1)
+    ).astype(int)
+    rows = []
+    for segment in range(args.segments):
+        subset = state[boundaries[segment] : boundaries[segment + 1]]
+        fits = [
+            fit_panel_delay_mode(
+                subset,
+                delay_depth=depth,
+                train_fraction=args.train_fraction,
+                score_features=score_features,
+            )
+            for depth in depths
+        ]
+        row = _consistent_mode(fits, args, sample_interval)
+        row["segment"] = segment + 1
+        rows.append(row)
+    passed = [row for row in rows if row["pass"]]
+    if len(passed) >= args.min_mode_segments:
+        frequency, damping = _mode_spreads(
+            tuple(
+                {"frequency": row["frequency"], "damping": row["damping"]}
+                for row in passed
+            ),
+            args.frequency_min_per_memory_time,
+        )
+    else:
+        frequency = damping = math.inf
+    return {
+        "segments": rows,
+        "matching_segments": len(passed),
+        "frequency_relative_range": frequency,
+        "damping_relative_range": damping,
+        "identity_pass": bool(
+            len(passed) >= args.min_mode_segments
+            and frequency <= args.mode_relative_range_max
+            and damping <= args.mode_relative_range_max
+        ),
+    }
+
+
+def _closure(
+    state: np.ndarray,
+    depths: list[int],
+    mode_depths: list[int],
+    args: argparse.Namespace,
+    sample_interval: float,
+) -> dict[str, Any]:
+    fits = [
+        fit_panel_delay_mode(
+            state,
+            delay_depth=depth,
+            train_fraction=args.train_fraction,
+            score_features=2,
+        )
+        for depth in depths
+    ]
+    terminal, penultimate = fits[-1], fits[-2]
+    plateau = abs(terminal.test_score_rmse - penultimate.test_score_rmse) / max(
+        penultimate.test_score_rmse, np.finfo(float).tiny
+    )
+    closure_pass = bool(
+        terminal.test_residual_ratio <= args.prediction_ratio_max
+        and plateau <= args.delay_plateau_relative_max
+    )
+    identifiable = bool(terminal.design_condition <= args.fit_condition_max)
+    identity = _mode_identity(
+        state,
+        mode_depths,
+        args,
+        sample_interval,
+        score_features=2,
+    )
+    return {
+        "fits": [_fit_row(fit) for fit in fits],
+        "terminal_prediction_ratio": terminal.test_residual_ratio,
+        "terminal_delay_plateau_change": plateau,
+        "terminal_design_condition": terminal.design_condition,
+        "closure_pass": closure_pass,
+        "spectral_identifiability_pass": identifiable,
+        "mode_identity": identity,
+        "complex_candidate_pass": bool(
+            closure_pass and identifiable and identity["identity_pass"]
+        ),
+    }
+
+
+def _measured_states(
+    response: Any,
+    condition: int,
+    start: int,
+    stride: int,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    positions = 0.5 * (
+        response.positions[start::stride, condition, 1]
+        - response.positions[start::stride, condition, 0]
+    )
+    centers = 0.5 * (
+        response.memory_centers[start::stride, condition, 1]
+        - response.memory_centers[start::stride, condition, 0]
+    )
+    ambient = np.concatenate((positions, centers), axis=1)[:, None, :]
+    base = np.stack((positions, centers), axis=-1)
+    if response.conditions[condition] not in RETARDED:
+        return base, base, ambient
+    field = 0.5 * (
+        response.mediator_readouts[start::stride, condition, 0]
+        - response.mediator_readouts[start::stride, condition, 1]
+    )
+    momentum = 0.5 * (
+        response.mediator_momentum_readouts[start::stride, condition, 0]
+        - response.mediator_momentum_readouts[start::stride, condition, 1]
+    )
+    selected = np.stack((positions, centers, field, momentum), axis=-1)
+    return base, selected, ambient
+
+
+def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    checkpoint_path = _resolve(args.checkpoint)
+    checkpoint = load_finite_memory_checkpoint(checkpoint_path)
+    config = checkpoint.config
+    seeds = _integers(args.future_seeds, "future seeds")
+    correlations = _correlations(args.noise_correlations)
+    depths = _integers(args.delay_depths, "delay depths")
+    mode_depths = _integers(args.mode_depths, "mode depths")
+    if correlations != sorted(correlations):
+        raise SystemExit("noise correlations must be sorted")
+    if any(depth < 1 for depth in depths + mode_depths):
+        raise SystemExit("delay and mode depths must be positive")
+    if depths != sorted(depths) or depths[-2:] != [10, 20]:
+        raise SystemExit("registered delay ladder must end with 10,20")
+    if not set(mode_depths).issubset(depths):
+        raise SystemExit("mode depths must belong to delay ladder")
+    if args.updates % args.closure_stride_updates:
+        raise SystemExit("updates must be divisible by closure stride")
+    if not args.allow_dirty and _git(["status", "--porcelain"]):
+        raise SystemExit("working tree is dirty; commit first or pass --allow-dirty")
+
+    radius = float(np.sqrt(np.trace(memory_shape_tensor(checkpoint.state))))
+    separation = np.zeros(config.dim)
+    separation[0] = args.distance_ratio * radius
+    effective = effective_double_gaussian_parameters(
+        dim=config.dim,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
+    curvature = two_scale_local_curvature(**effective)
+    if curvature <= 0.0:
+        raise SystemExit(
+            "registered positive cross gain requires positive curvature"
+        )
+    memory_mass = float(np.sum(checkpoint.state.weights))
+    cross_eta = args.cross_gain / (memory_mass * curvature)
+    relaxation = args.relaxation_memory_times
+    grid = LocalMediatorGrid(
+        spacing=args.grid_spacing_r * radius,
+        time_step=config.alpha,
+        points_left=args.grid_points_left,
+        points_right=args.grid_points_right,
+    )
+    mediator = TelegraphMediator(
+        wave_speed=args.correlation_length_r * radius / relaxation,
+        damping_rate=1.0 / relaxation,
+        natural_frequency=1.0 / relaxation,
+    )
+    sample_steps = np.arange(args.updates + 1)
+    burn_updates = int(round(args.analysis_burn_memory_times / config.alpha))
+    start_index = int(np.searchsorted(sample_steps, burn_updates))
+    sample_interval = config.alpha * args.closure_stride_updates
+    closure_samples = sample_steps[start_index:: args.closure_stride_updates].size
+    if closure_samples // args.segments <= max(mode_depths) + 10:
+        raise SystemExit(
+            "post-burn segments are too short for registered delays"
+        )
+    rows: list[dict[str, Any]] = []
+    traces: list[dict[str, Any]] = []
+    started = time.perf_counter()
+    static_gain = source_normalization = 0.0
+
+    for seed in seeds:
+        rng = np.random.default_rng(args.noise_seed_offset + seed)
+        common_base = rng.standard_normal((args.updates, config.dim))
+        relative_base = rng.standard_normal((args.updates, config.dim))
+        for correlation in correlations:
+            first_noise, second_noise = correlated_pair_noise(
+                common_base, relative_base, correlation
+            )
+            response = retarded_reciprocal_pair_response(
+                checkpoint.state,
+                checkpoint.state,
+                config,
+                initial_center_separation=separation,
+                first_noise=first_noise,
+                second_noise=second_noise,
+                sample_steps=sample_steps,
+                cross_eta=cross_eta,
+                mediator_grid=grid,
+                mediator=mediator,
+                mediator_readout_position=float(np.linalg.norm(separation)),
+                second_rotation=_rotation(config.dim),
+            )
+            static_gain = response.static_readout_gain
+            source_normalization = response.source_normalization
+            conditions = {}
+            for index, name in enumerate(response.conditions):
+                base, selected, ambient = _measured_states(
+                    response, index, start_index, args.closure_stride_updates
+                )
+                base_closure = _closure(
+                    base, depths, mode_depths, args, sample_interval
+                )
+                closure = _closure(
+                    selected, depths, mode_depths, args, sample_interval
+                )
+                ambient_fit = fit_panel_delay_mode(
+                    ambient,
+                    train_fraction=args.train_fraction,
+                    score_features=2 * config.dim,
+                )
+                conditions[name] = {
+                    "feature_count": selected.shape[2],
+                    "base_closure": base_closure,
+                    "readout_gain_vs_base": float(
+                        1.0
+                        - closure["fits"][0]["test_score_rmse"]
+                        / max(
+                            base_closure["fits"][0]["test_score_rmse"],
+                            np.finfo(float).tiny,
+                        )
+                    ),
+                    "selected_gain_vs_base_delay": float(
+                        1.0
+                        - closure["fits"][-1]["test_score_rmse"]
+                        / max(
+                            base_closure["fits"][-1]["test_score_rmse"],
+                            np.finfo(float).tiny,
+                        )
+                    ),
+                    "terminal_delay_gain_vs_readout": float(
+                        1.0
+                        - closure["fits"][-1]["test_score_rmse"]
+                        / max(
+                            closure["fits"][0]["test_score_rmse"],
+                            np.finfo(float).tiny,
+                        )
+                    ),
+                    "closure": closure,
+                    "ambient_full_ar1": _fit_row(ambient_fit),
+                    "ambient_complex": bool(
+                        ambient_fit.stable_complex_eigenvalues.size
+                    ),
+                    "final_distance_r": float(
+                        np.linalg.norm(
+                            response.memory_centers[-1, index, 1]
+                            - response.memory_centers[-1, index, 0]
+                        )
+                        / radius
+                    ),
+                    "max_radius_ratio": float(
+                        np.max(response.radius_ratios[:, index])
+                    ),
+                }
+            node_rms = (
+                config.epsilon
+                * np.sqrt(np.mean(np.sum(first_noise * first_noise, axis=1)))
+                / radius
+            )
+            relative_rms = (
+                0.5
+                * config.epsilon
+                * np.sqrt(
+                    np.mean(np.sum((second_noise - first_noise) ** 2, axis=1))
+                )
+                / radius
+            )
+            row = {
+                "future_seed": seed,
+                "noise_correlation": correlation,
+                "noise": {
+                    "first_variance": float(np.var(first_noise)),
+                    "second_variance": float(np.var(second_noise)),
+                    "empirical_correlation": float(
+                        np.corrcoef(first_noise.ravel(), second_noise.ravel())[0, 1]
+                    ),
+                    "node_noise_rms_r": float(node_rms),
+                    "relative_half_noise_rms_r": float(relative_rms),
+                },
+                "conditions": conditions,
+            }
+            rows.append(row)
+            traces.append(
+                {
+                    "future_seed": seed,
+                    "noise_correlation": correlation,
+                    "prediction_ratios": [
+                        fit["test_residual_ratio"]
+                        for fit in conditions["retarded_reciprocal"]["closure"]["fits"]
+                    ],
+                    "relative_noise_r": relative_rms,
+                    "node_noise_r": node_rms,
+                }
+            )
+
+    def counts(field: str) -> dict[str, dict[str, int]]:
+        return {
+            str(correlation): {
+                name: sum(
+                    row["noise_correlation"] == correlation
+                    and row["conditions"][name]["closure"][field]
+                    for row in rows
+                )
+                for name in RETARDED_RECIPROCAL_CONDITIONS
+            }
+            for correlation in correlations
+        }
+
+    closure_counts = counts("closure_pass")
+    identifiable_counts = counts("spectral_identifiability_pass")
+    candidate_counts = counts("complex_candidate_pass")
+    low, high = str(correlations[0]), str(correlations[-1])
+    controls_bounded = all(
+        candidate_counts[str(correlation)][name]
+        <= args.max_control_candidate_seeds
+        for correlation in correlations
+        for name in RETARDED_RECIPROCAL_CONDITIONS[:-1]
+    )
+    noise_unmasking = bool(
+        candidate_counts[high]["retarded_reciprocal"] >= args.min_candidate_seeds
+        and candidate_counts[low]["retarded_reciprocal"]
+        <= args.max_control_candidate_seeds
+        and controls_bounded
+    )
+    closure_high = bool(
+        closure_counts[high]["retarded_reciprocal"] >= args.min_candidate_seeds
+    )
+    identifiable_high = bool(
+        identifiable_counts[high]["retarded_reciprocal"]
+        >= args.min_candidate_seeds
+    )
+    no_primary_candidates = all(
+        candidate_counts[str(correlation)]["retarded_reciprocal"] == 0
+        for correlation in correlations
+    )
+    if noise_unmasking:
+        classification = "control-separated relative-noise unmasking candidate"
+    elif closure_high and identifiable_high and no_primary_candidates:
+        classification = "predictive closure; identifiable complex-mode null"
+    elif closure_high:
+        classification = "predictive closure candidate; spectrum non-identifiable"
+    else:
+        classification = "inconclusive measurement closure or mode identity"
+
+    runtime = time.perf_counter() - started
+    payload = {
+        "schema": "emergenz-knoten.measurement-closure-relative-noise-gate",
+        "schema_version": 1,
+        "created_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+        "git_revision": _git(["rev-parse", "HEAD"]),
+        "git_status": _git(["status", "--porcelain"]),
+        "checkpoint": _relative(checkpoint_path),
+        "checkpoint_update_index": checkpoint.update_index,
+        "formation_seed": checkpoint.formation_seed,
+        "config": asdict(config),
+        "parameters": vars(args),
+        "runtime_seconds": runtime,
+        "derived": {
+            "initial_radius": radius,
+            "cross_eta": cross_eta,
+            "closure_sample_interval_memory_times": sample_interval,
+            "static_readout_gain": static_gain,
+            "source_normalization": source_normalization,
+            "expected_node_noise_rms_r": (
+                config.epsilon * math.sqrt(config.dim) / radius
+            ),
+            "expected_relative_half_noise_rms_r": {
+                str(correlation): (
+                    config.epsilon
+                    * math.sqrt(0.5 * config.dim * (1.0 - correlation))
+                    / radius
+                )
+                for correlation in correlations
+            },
+        },
+        "mediator_grid": asdict(grid),
+        "mediator": asdict(mediator),
+        "thresholds": {
+            "prediction_ratio_max": args.prediction_ratio_max,
+            "delay_plateau_relative_max": args.delay_plateau_relative_max,
+            "fit_condition_max": args.fit_condition_max,
+            "min_mode_segments": args.min_mode_segments,
+            "mode_relative_range_max": args.mode_relative_range_max,
+        },
+        "rows": rows,
+        "gate": {
+            "closure_seed_counts": closure_counts,
+            "spectrally_identifiable_seed_counts": identifiable_counts,
+            "complex_candidate_seed_counts": candidate_counts,
+            "controls_bounded_pass": controls_bounded,
+            "high_correlation_closure_sufficient": closure_high,
+            "high_correlation_spectral_identifiability_sufficient": (
+                identifiable_high
+            ),
+            "relative_noise_unmasking_candidate_pass": noise_unmasking,
+            "classification": classification,
+        },
+    }
+    return _jsonable(payload), traces
+
+
+def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    correlations = _correlations(payload["parameters"]["noise_correlations"])
+    depths = _integers(payload["parameters"]["delay_depths"], "delay depths")
+    fig, axes = plt.subplots(1, 3, figsize=(14.0, 4.3))
+    for correlation in correlations:
+        selected = [
+            trace
+            for trace in traces
+            if trace["noise_correlation"] == correlation
+        ]
+        for trace in selected:
+            axes[0].plot(depths, trace["prediction_ratios"], alpha=0.25)
+        axes[0].plot(
+            depths,
+            np.median(
+                [trace["prediction_ratios"] for trace in selected], axis=0
+            ),
+            marker="o",
+            label=f"rho={correlation:g}",
+        )
+    axes[0].axhline(
+        payload["thresholds"]["prediction_ratio_max"], color="#999999"
+    )
+    axes[0].set_xscale("log")
+    axes[0].set(xlabel="delay depth", ylabel="held-out RMSE / persistence")
+    axes[0].legend()
+    for trace in traces:
+        axes[1].scatter(
+            trace["noise_correlation"],
+            trace["node_noise_r"],
+            color="#0072B2",
+        )
+        axes[1].scatter(
+            trace["noise_correlation"],
+            trace["relative_noise_r"],
+            color="#D55E00",
+        )
+    axes[1].set(
+        xlabel="rho", ylabel="RMS step / R", title="fixed node marginals"
+    )
+    width = 0.18
+    for index, name in enumerate(RETARDED_RECIPROCAL_CONDITIONS):
+        values = [
+            payload["gate"]["complex_candidate_seed_counts"][str(correlation)][
+                name
+            ]
+            for correlation in correlations
+        ]
+        axes[2].bar(
+            np.arange(len(correlations)) + (index - 1.5) * width,
+            values,
+            width,
+            color=COLORS[name],
+            label=name,
+        )
+    axes[2].set_xticks(
+        np.arange(len(correlations)), [str(value) for value in correlations]
+    )
+    axes[2].set(xlabel="rho", ylabel="candidate seeds")
+    axes[2].legend(fontsize=7)
+    for axis in axes:
+        axis.grid(alpha=0.25)
+    fig.suptitle("P3.2a/b measurement closure and relative noise")
+    fig.tight_layout()
+    fig.savefig(output, dpi=180)
+    plt.close(fig)
+
+
+def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
+    gate = payload["gate"]
+    lines = [
+        "# P3.2a/b measurement closure and relative-noise gate",
+        "",
+        f"Date: {payload['created_utc']}.",
+        "",
+        "## Design",
+        "",
+        "The fixed P3.2 mechanism is unchanged. Field and momentum target readouts",
+        "augment x-minus and m-minus; a registered delay ladder is fitted with a",
+        "chronological 60/40 split. Only held-out x-minus and m-minus prediction",
+        "is scored. The complete mediator grid remains hidden.",
+        "",
+        "Node-noise marginals remain fixed while rho = 0, 0.9, 0.99 changes only",
+        "the relative noise. No epsilon, lambda, gain, or kernel sweep is used.",
+        "",
+        "## Result",
+        "",
+        f"Classification: **{gate['classification']}**.",
+        "",
+        f"- high-rho closure sufficient: {gate['high_correlation_closure_sufficient']};",
+        "- high-rho spectral identifiability sufficient: "
+        f"{gate['high_correlation_spectral_identifiability_sufficient']};",
+        f"- controls bounded: {gate['controls_bounded_pass']};",
+        f"- noise-unmasking candidate: {gate['relative_noise_unmasking_candidate_pass']}.",
+        "",
+        f"![Gate summary]({_relative_from(report, figure)})",
+        "",
+        "| seed | rho | prediction/persistence | plateau change | "
+        "matching segments | candidate | relative noise/R |",
+        "| ---: | ---: | ---: | ---: | ---: | :---: | ---: |",
+    ]
+    for row in payload["rows"]:
+        primary = row["conditions"]["retarded_reciprocal"]["closure"]
+        lines.append(
+            f"| {row['future_seed']} | {row['noise_correlation']:.2g} | "
+            f"{primary['terminal_prediction_ratio']:.4g} | "
+            f"{primary['terminal_delay_plateau_change']:.4g} | "
+            f"{primary['mode_identity']['matching_segments']} | "
+            f"{primary['complex_candidate_pass']} | "
+            f"{row['noise']['relative_half_noise_rms_r']:.4g} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Boundary",
+            "",
+            "Passed predictive closure is cadence- and horizon-specific, not an exact",
+            "Markov theorem. A failed closure makes a spectral null inconclusive.",
+            "A pole shared with the one-way control is a mediator pole, not a reciprocal",
+            "knot mode. No spin, d=3 selection, particle, photon, or QFT claim follows.",
+            "All paths continue one formation checkpoint.",
+            "",
+            "## Reproducibility",
+            "",
+            f"- checkpoint: {payload['checkpoint']};",
+            f"- git revision: {payload['git_revision']};",
+            f"- git status: {'clean' if not payload['git_status'] else payload['git_status']};",
+            f"- runtime: {payload['runtime_seconds']:.3f} s;",
+            "- command: python experiments/current/memory/synchronization/"
+            "measurement_closure_relative_noise_gate.py;",
+            "- [machine-readable summary]"
+            f"({_relative_from(report, _resolve(Path(payload['parameters']['summary_json'])))}).",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
+def main() -> None:
+    args = parse_args()
+    payload, traces = run_gate(args)
+    report = _resolve(args.report)
+    summary = _resolve(args.summary_json)
+    figure = _resolve(args.figure)
+    summary.parent.mkdir(parents=True, exist_ok=True)
+    summary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    _plot(payload, traces, figure)
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(_report(payload, report, figure), encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

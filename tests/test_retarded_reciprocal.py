@@ -152,6 +152,14 @@ def test_retarded_readout_has_a_finite_grid_delay() -> None:
         0.0,
     )
     assert np.count_nonzero(response.mediator_readouts[4:, one_way, 0]) > 0
+    np.testing.assert_array_equal(
+        response.mediator_momentum_readouts[:4, one_way, 0],
+        0.0,
+    )
+    assert (
+        np.count_nonzero(response.mediator_momentum_readouts[4:, one_way, 0])
+        > 0
+    )
 
 
 def test_retarded_one_way_leaves_source_on_channel_off_path() -> None:

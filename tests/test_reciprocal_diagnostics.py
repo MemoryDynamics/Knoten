@@ -4,7 +4,9 @@ import numpy as np
 import pytest
 
 from emergenz_knoten.reciprocal_diagnostics import (
+    correlated_pair_noise,
     fit_isotropic_relative_mode,
+    fit_panel_delay_mode,
     relative_mode_phase_coherence,
 )
 
@@ -89,6 +91,78 @@ def test_fit_recovers_real_transition_and_lag_power() -> None:
     assert not fitted.is_complex
     assert fitted.is_stable
 
+
+
+def test_correlated_pair_noise_preserves_marginals_and_controls_relative_noise() -> None:
+    rng = np.random.default_rng(20260804)
+    common = rng.standard_normal((100_000, 3))
+    relative = rng.standard_normal((100_000, 3))
+
+    for rho in (0.0, 0.9, 0.99):
+        first, second = correlated_pair_noise(common, relative, rho)
+
+        np.testing.assert_allclose(
+            0.5 * (first - second),
+            np.sqrt(0.5 * (1.0 - rho)) * relative,
+            atol=1e-14,
+        )
+        assert np.var(first) == pytest.approx(1.0, abs=0.015)
+        assert np.var(second) == pytest.approx(1.0, abs=0.015)
+        assert np.corrcoef(first.ravel(), second.ravel())[0, 1] == pytest.approx(
+            rho, abs=0.015
+        )
+
+
+def test_delay_fit_recovers_hidden_scalar_oscillator_at_depth_two() -> None:
+    radius = 0.985
+    angle = 0.2
+    first_coefficient = 2.0 * radius * np.cos(angle)
+    second_coefficient = -(radius**2)
+    values = np.empty((800, 4, 1), dtype=float)
+    values[0, :, 0] = [1.0, -0.4, 0.7, -1.2]
+    values[1, :, 0] = [0.2, 0.8, -0.6, -0.3]
+    for index in range(2, values.shape[0]):
+        values[index] = (
+            first_coefficient * values[index - 1]
+            + second_coefficient * values[index - 2]
+        )
+
+    depth_one = fit_panel_delay_mode(values, delay_depth=1)
+    depth_two = fit_panel_delay_mode(values, delay_depth=2)
+
+    assert not np.any(np.abs(depth_one.eigenvalues.imag) > 1e-8)
+    expected = radius * np.exp(1j * np.array([-angle, angle]))
+    np.testing.assert_allclose(
+        np.sort_complex(depth_two.eigenvalues),
+        np.sort_complex(expected),
+        atol=1e-10,
+    )
+    assert depth_one.test_transitions == depth_two.test_transitions
+    assert depth_two.test_residual_ratio < 1e-8
+
+
+def test_full_ambient_fit_detects_rotation_hidden_by_isotropic_panels() -> None:
+    radius = 0.98
+    angle = 0.15
+    matrix = radius * np.array(
+        [[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]]
+    )
+    state = np.empty((500, 2), dtype=float)
+    state[0] = [1.0, 0.2]
+    for index in range(1, state.shape[0]):
+        state[index] = matrix @ state[index - 1]
+
+    isotropic_panels = fit_panel_delay_mode(state[:, :, None], delay_depth=1)
+    ambient = fit_panel_delay_mode(state[:, None, :], delay_depth=1)
+
+    assert not np.any(np.abs(isotropic_panels.eigenvalues.imag) > 1e-8)
+    np.testing.assert_allclose(
+        np.sort_complex(ambient.eigenvalues),
+        np.sort_complex(np.linalg.eigvals(matrix)),
+        atol=1e-10,
+    )
+    assert ambient.stable_complex_eigenvalues.size == 2
+    assert ambient.test_residual_ratio < 1e-8
 
 def test_fit_rejects_incompatible_traces() -> None:
     with pytest.raises(ValueError, match="shape"):

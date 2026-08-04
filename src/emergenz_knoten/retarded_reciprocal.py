@@ -53,6 +53,7 @@ class RetardedReciprocalPairResponse:
     shape_tensors: np.ndarray
     radius_ratios: np.ndarray
     mediator_readouts: np.ndarray
+    mediator_momentum_readouts: np.ndarray
     mediator_inputs: np.ndarray
     initial_center_separation: np.ndarray
     cross_eta: float
@@ -235,12 +236,14 @@ def _retarded_pair_batch(
     momenta = np.zeros_like(fields)
     current_inputs = np.zeros((n_conditions, 2, dim), np.float64)
     current_readouts = np.zeros((n_conditions, 2, dim), np.float64)
+    current_momentum_readouts = np.zeros((n_conditions, 2, dim), np.float64)
 
     positions = np.empty((n_samples, n_conditions, 2, dim), np.float64)
     centers = np.empty((n_samples, n_conditions, 2, dim), np.float64)
     tensors = np.empty((n_samples, n_conditions, 2, dim, dim), np.float64)
     radii = np.empty((n_samples, n_conditions, 2), np.float64)
     readouts = np.empty((n_samples, n_conditions, 2, dim), np.float64)
+    momentum_readouts = np.empty((n_samples, n_conditions, 2, dim), np.float64)
     inputs = np.empty((n_samples, n_conditions, 2, dim), np.float64)
     masses = np.array((np.sum(first_weights), np.sum(second_weights)))
     sample_index = 0
@@ -251,6 +254,7 @@ def _retarded_pair_batch(
             self_gradients = np.empty((n_conditions, 2, dim), np.float64)
             current_inputs[:] = 0.0
             current_readouts[:] = 0.0
+            current_momentum_readouts[:] = 0.0
             for condition in range(n_conditions):
                 self_gradients[condition, 0] = path_gradient(
                     positions_now[condition, 0],
@@ -323,6 +327,9 @@ def _retarded_pair_batch(
                     current_readouts[condition, direction] = _field_readout(
                         updated_field, target_left_index, target_fraction
                     )
+                    current_momentum_readouts[condition, direction] = _field_readout(
+                        updated_momentum, target_left_index, target_fraction
+                    )
 
             for condition in range(n_conditions):
                 for coord in range(dim):
@@ -363,10 +370,11 @@ def _retarded_pair_batch(
                     tensors[sample_index, condition, node] = tensor
                     radii[sample_index, condition, node] = radius
             readouts[sample_index] = current_readouts
+            momentum_readouts[sample_index] = current_momentum_readouts
             inputs[sample_index] = current_inputs
             sample_index += 1
 
-    return positions, centers, tensors, radii, readouts, inputs
+    return positions, centers, tensors, radii, readouts, momentum_readouts, inputs
 
 
 def _validated_steps(sample_steps: Iterable[int]) -> np.ndarray:
@@ -508,7 +516,7 @@ def retarded_reciprocal_pair_response(
     )
     source_normalization = 1.0 / static_gain
 
-    positions, centers, tensors, radii, readouts, inputs = _retarded_pair_batch(
+    positions, centers, tensors, radii, readouts, momentum_readouts, inputs = _retarded_pair_batch(
         placed_first.x,
         placed_first.memory,
         placed_first.weights,
@@ -557,6 +565,7 @@ def retarded_reciprocal_pair_response(
         shape_tensors=tensors,
         radius_ratios=radii / initial_radii[None, :, :],
         mediator_readouts=readouts,
+        mediator_momentum_readouts=momentum_readouts,
         mediator_inputs=inputs,
         initial_center_separation=separation,
         cross_eta=float(cross_eta),

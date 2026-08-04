@@ -282,11 +282,13 @@ daher nicht mit einem freien Koeffizientensweep erweitert. P3.1 und P3.2 sind
 nun abgeschlossen: Direkte und Telegraph-retardierte skalare Reziprozitaet
 sind aktiv, formschonend und bindend, liefern in den registrierten
 `(x_-,m_-)`-Fits aber ausschliesslich reelle Moden. P3.3 bleibt gesperrt.
-Als P3.2a wird vor weiteren Vollsimulationen eine quelllokale Emissions-/
-Readout-Regel analytisch formuliert und auf sichtbare Moden geprueft; ein
-explorativer lag-erweiterter Fit darf die AR(1)-Projektionsgrenze auditieren,
-ohne das negative Primaergate umzuwerten. Die Long-Run-Geometrieschiene bleibt
-mit eingefrorener Messmethodik erhalten.
+Als P3.2a wird zuerst die Mess-Closure der AR(1)-Projektion mit exponiertem
+Feld-/Impulsreadout, vorregistrierter Delay-Leiter und separatem ambientem
+Rotationsfit geprueft. P3.2b variiert danach nur die Korrelation der beiden
+Knotenrauschpfade bei festen Einzelknoten-Marginalen. Erst P3.2c formuliert
+eine quelllokale Emissions-/Readout-Regel analytisch. Keines dieser Gates darf
+das negative registrierte P3.2-AR(1)-Primaergate rueckwirkend umwerten. Die
+Long-Run-Geometrieschiene bleibt mit eingefrorener Messmethodik erhalten.
 
 ## Paper-Status
 
