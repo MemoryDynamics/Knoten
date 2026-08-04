@@ -539,6 +539,21 @@ and retarded one-way remain controls. A passed readout-delay gate is only
 empirical predictive closure at this cadence and horizon: the full mediator
 grid remains hidden, and no exact Markov, spin, dimension, or particle claim
 follows.
+
+
+The canonical three-seed result is **predictive closure with a
+non-identifiable augmented spectrum**. The visible delay state is
+well-conditioned (`kappa=46.8..81.0`) and has no depth-stable matching
+segments. Adding field and momentum changes held-out error by only
+`-1.94%..+0.20%`, while its delay matrix has
+`kappa=1.55e16..1.93e16`. Complex poles matched in 33/36 augmented
+segments therefore remain inserted-mediator/rank-deficiency artefacts, not
+knot modes. Lower relative noise tightens reciprocal binding but reveals no
+control-separated mode.
+
+Report:
+`reports/response/measurement_closure_relative_noise_gate_2026-08-04.md`.
+
 ## Observables
 
 A target knot provides:

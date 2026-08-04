@@ -424,31 +424,37 @@ Prioritaetsfolge:
    Saubere unveraenderte Nachlaeufe bleiben dennoch bei `0/60` (P3.1) und
    `0/80` (P3.2) nichtreellen Fits. Das staerkt den registrierten
    AR(1)-Messnullbefund, nicht einen Nullsatz fuer das augmentierte System.
-7. **P3.2a als Naechstes, Mess-Closure vor Parametern:** Der Telegraph-Zustand
-   enthaelt verborgene Feld-/Impulsvariablen; `(x_-,m_-)` ist nach Projektion
-   nicht notwendig AR(1)-Markovsch. Exponierte reduzierte Mediatorobservablen
-   oder ein synthetisch validierter Delay-/Hankel-Fit muessen die Observability
-   pruefen. Ein separater `2d x 2d`-Fit testet ambienten Rotationsanteil statt
-   ihn mit der sichtbaren/Memory-Phase gleichzusetzen.
-8. **P3.2b gezielte Rauschfalsifikation, kein Epsilon-Sweep:** Bei festen
-   Einzelknoten-Marginalen wird nur die Korrelation der beiden Rauschstreams
-   `rho={0,0.9,0.99}` variiert. Damit sinkt der relative RMS-Schritt von
-   `0.579R` auf `0.183R` und `0.0579R`, ohne den Einzelknoten erneut nur
-   proportional zu skalieren. Zunaechst drei Zukunftsseeds; Bestaetigung erst
-   bei einem kontrollgetrennten Effekt.
-9. **P3.2c danach, keine Gain-Suche:** Vor einer weiteren Mechanismussimulation
-   wird eine rein quelllokale Emissions-/Readout-Regel formuliert und ihr
-   reduziertes lineares Spektrum samt Observability berechnet. Der aktuelle
-   Eingang ist noch der zielabhaengige momentane Cross-Gradient; nur
-   Transport/Filter sind lokal.
-10. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+7. **P3.2a abgeschlossen, sichtbare Closure statt augmentiertem Modenclaim:**
+   Die gemeinsame Holdout-Leiter bei `0.5` Memory-Zeiten rekonstruiert einen
+   synthetischen Hidden-Oszillator und trennt ambienten Rotationsfit. Der
+   sichtbare `(x_-,m_-)`-Delayzustand besteht 9/9 Closure- und
+   Identifizierbarkeitsgates (`kappa=46.8..81.0`) ohne ein einziges
+   tiefenstabiles Segmentmatching.
+8. **P3.2b abgeschlossen, kein Rausch-Unmasking:** Bei festen
+   Einzelknoten-Marginalen senkt `rho={0,0.9,0.99}` den gemessenen relativen
+   RMS-Schritt von etwa `0.579R` auf `0.183R` und `0.0579R`. Die reziproke
+   Bindung wird staerker (mittlerer Endabstand `0.946R -> 0.299R -> 0.0946R`),
+   die Closure-Kurven bleiben jedoch nahezu gleich und kein
+   kontrollgetrennter Modus erscheint.
+9. **Naechstes Messgate, Reduced-Rank statt Parameter:** Feld plus Impuls
+   verbessern den Holdout-Fehler nur um `-1.94%..+0.20%`, erzeugen aber
+   `kappa=1.55e16..1.93e16` und 33/36 scheinbar passende komplexe Segmente.
+   Das ist nicht identifizierbar. Vorab definierter numerischer Hankel-Rang,
+   Rank-Sensitivitaet und die Einweg-Mediatorkontrolle muessen entscheiden,
+   ob irgendein Pol ueber die redundante Delaybasis hinaus stabil bleibt.
+   Kein Ridge-, Gain-, Lambda-, Epsilon- oder Kernel-Retuning.
+10. **P3.2c erst danach, keine Gain-Suche:** Vor einer weiteren
+    Mechanismussimulation wird eine rein quelllokale Emissions-/Readout-Regel
+    formuliert und ihr reduziertes lineares Spektrum samt Observability
+    berechnet. Der aktuelle Eingang ist noch der zielabhaengige momentane
+    Cross-Gradient; nur Transport/Filter sind lokal.
+11. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
     `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
-11. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
-   Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
-
+12. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+    Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

@@ -185,20 +185,36 @@ Screen ist die Einschraenkung explizit zu erhalten.
 - Die `lambda=1`-Randbedingung des analytischen Fensterhelfers ist korrigiert:
   Determinante und Minimaldiskriminante erlauben dort kein nichtreelles Paar.
 
+## P3.2a/b-Nachlauf
+
+Beide Reviewtests liefen auf dem sauberen Commit `b296d66`:
+
+1. **Projektionsgrenze teilweise aufgeloest:** Der sichtbare
+   `(x_-,m_-)`-Delayzustand ist in 9/9 retardiert reziproken Fortsetzungen
+   praediktiv geschlossen und spektral konditioniert
+   (`kappa=46.8..81.0`), ohne tiefenstabiles Segmentmatching. Das stuetzt
+   den sichtbaren Delay-Nullbefund.
+2. **Augmentierter Zustand weiter offen:** Feld plus Impuls verbessern den
+   Holdout nur um `-1.94%..+0.20%`, waehrend die Delaymatrix
+   `kappa=1.55e16..1.93e16` erreicht. Die 33/36 komplex passenden Segmente
+   sind damit nicht identifizierbar und kein Gegenbeweis zum Nullbefund.
+3. **Relative Noise getestet:** Die Knotenmarginalen bleiben fest, die
+   relative RMS-Leiter stimmt numerisch. Sinkende relative Diffusion bindet
+   staerker, erzeugt aber keinen kontrollgetrennten Modus.
+4. **Ambientfit negativ:** Er ist komplex in 9/9 reziproken, aber bereits 6/9
+   Kanal-aus-Pfaden und deshalb nicht kontrollgetrennt.
+
 ## Naechste zwei Tests
 
-1. **Mess-Closure vor Parametern:** denselben P3.2-Datensatz mit
-   koordinatenspezifischen Fixed Effects, einem synthetisch validierten
-   Delay-/Hankel-Zustand und getrenntem ambienten Rotationsfit auswerten.
-   Feld und Impuls muessen entweder als reduzierte Observablen exponiert oder
-   ueber eine registrierte Lagordnung rekonstruierbar sein.
-2. **Relative-Noise-Falsifikation:** bei unveraendertem `lambda=0.01`, `g`,
-   `c`, Epsilon und Checkpoint `rho={0,0.9,0.99}` fuer drei Zukunftsseeds
-   screenen. Falls die Variation schlecht angeregt wird, einen kleinen festen
-   antisymmetrischen Impuls statt eines weiteren Epsilon-Sweeps verwenden.
+1. **Reduced-Rank-/Hankel-Audit:** Numerischen Rang und Singularwertspektrum
+   der bereits festgelegten sichtbaren und Feld-/Impuls-Delayzustaende
+   vorregistrieren. Ein Pol muss ueber feste Rangstufen, Zeitsegmente und die
+   Einweg-Mediatorkontrolle stabil bleiben. Kein Ridge-Retuning.
+2. **Quelllokale Regel erst danach:** Emission und Readout ohne
+   zielabhaengigen momentanen Cross-Gradienten formulieren und das reduzierte
+   lineare Spektrum vor einer Vollsimulation bestimmen.
 
-Erst wenn beide Tests den Readout als ausreichend beobachtbar zeigen, ist eine
-Lambda-Kampagne sinnvoll. Dann muessen fuer jedes Lambda neue kompatible
-Formationszustaende erzeugt werden; Tailfehler, `g`, `c` und entweder
-`D=epsilon^2/(2 lambda)` oder der diskrete Rauschschritt sind vorab als
-Invarianten festzulegen. Beides gleichzeitig konstant zu nennen waere falsch.
+Eine Lambda-Kampagne bleibt gesperrt. Fuer jedes Lambda waeren neue kompatible
+Formationszustaende, ein fester Tailfehler sowie eine vorab deklarierte
+Invariante fuer `D=epsilon^2/(2 lambda)` oder den diskreten Rauschschritt
+noetig; beides kann nicht gleichzeitig konstant genannt werden.

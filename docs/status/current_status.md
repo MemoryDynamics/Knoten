@@ -282,12 +282,25 @@ daher nicht mit einem freien Koeffizientensweep erweitert. P3.1 und P3.2 sind
 nun abgeschlossen: Direkte und Telegraph-retardierte skalare Reziprozitaet
 sind aktiv, formschonend und bindend, liefern in den registrierten
 `(x_-,m_-)`-Fits aber ausschliesslich reelle Moden. P3.3 bleibt gesperrt.
-Als P3.2a wird zuerst die Mess-Closure der AR(1)-Projektion mit exponiertem
-Feld-/Impulsreadout, vorregistrierter Delay-Leiter und separatem ambientem
-Rotationsfit geprueft. P3.2b variiert danach nur die Korrelation der beiden
-Knotenrauschpfade bei festen Einzelknoten-Marginalen. Erst P3.2c formuliert
-eine quelllokale Emissions-/Readout-Regel analytisch. Keines dieser Gates darf
-das negative registrierte P3.2-AR(1)-Primaergate rueckwirkend umwerten. Die
+P3.2a/b ist nun abgeschlossen. Der sichtbare `(x_-,m_-)`-Delayzustand
+besteht bei allen neun Seed-/Rauschkorrelationspaaren das Holdout-Closure- und
+Identifizierbarkeitsgate mit `kappa=46.8..81.0`, aber ohne ein einziges
+tiefenstabiles Segmentmatching. Feld- und Impulsreadouts liefern nur
+`-1.94%..+0.20%` zusaetzlichen Holdout-Gewinn und machen die augmentierte
+Delaymatrix mit `kappa=1.55e16..1.93e16` spektral nicht identifizierbar.
+Ihre 33/36 scheinbar passenden komplexen Segmente sind deshalb kein Modenpass.
+
+Die Variation `rho={0,0.9,0.99}` haelt die Einzelknoten-Rauschleistung bei
+etwa `0.818R` und senkt den relativen RMS-Schritt wie vorhergesagt auf etwa
+`0.579R`, `0.183R` und `0.0579R`. Der mittlere retardiert reziproke
+Endabstand sinkt entsprechend von `0.946R` auf `0.299R` und `0.0946R`;
+die Closure-Kurven bleiben nahezu unveraendert. Das ist staerkere Bindung bei
+kleinerer relativer Diffusion, kein Rausch-Unmasking einer Oszillation.
+
+Als naechstes folgt ein vorregistrierter Reduced-Rank-/Hankel-Audit derselben
+Messvariablen gegen die Einweg-Mediatorkontrolle. Erst danach kommt P3.2c mit
+einer quelllokalen Emissions-/Readout-Regel. Keines dieser Gates wertet das
+negative registrierte P3.2-AR(1)-Primaergate rueckwirkend um. Die
 Long-Run-Geometrieschiene bleibt mit eingefrorener Messmethodik erhalten.
 
 ## Paper-Status

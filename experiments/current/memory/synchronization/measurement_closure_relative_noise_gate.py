@@ -689,7 +689,8 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -
     output.parent.mkdir(parents=True, exist_ok=True)
     correlations = _correlations(payload["parameters"]["noise_correlations"])
     depths = _integers(payload["parameters"]["delay_depths"], "delay depths")
-    fig, axes = plt.subplots(1, 3, figsize=(14.0, 4.3))
+    fig, axes = plt.subplots(2, 2, figsize=(12.0, 8.4))
+
     for correlation in correlations:
         selected = [
             trace
@@ -697,35 +698,66 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -
             if trace["noise_correlation"] == correlation
         ]
         for trace in selected:
-            axes[0].plot(depths, trace["prediction_ratios"], alpha=0.25)
-        axes[0].plot(
+            axes[0, 0].plot(depths, trace["prediction_ratios"], alpha=0.22)
+        axes[0, 0].plot(
             depths,
             np.median(
                 [trace["prediction_ratios"] for trace in selected], axis=0
             ),
             marker="o",
+            linewidth=1.8,
             label=f"rho={correlation:g}",
         )
-    axes[0].axhline(
-        payload["thresholds"]["prediction_ratio_max"], color="#999999"
+    axes[0, 0].axhline(
+        payload["thresholds"]["prediction_ratio_max"],
+        color="#999999",
+        linestyle="--",
     )
-    axes[0].set_xscale("log")
-    axes[0].set(xlabel="delay depth", ylabel="held-out RMSE / persistence")
-    axes[0].legend()
+    axes[0, 0].set_xscale("log")
+    axes[0, 0].set(
+        xlabel="delay depth",
+        ylabel="held-out RMSE / persistence",
+        title="augmented predictive closure",
+    )
+    axes[0, 0].legend()
+
     for trace in traces:
-        axes[1].scatter(
+        axes[0, 1].scatter(
             trace["noise_correlation"],
             trace["node_noise_r"],
             color="#0072B2",
+            alpha=0.35,
         )
-        axes[1].scatter(
+        axes[0, 1].scatter(
             trace["noise_correlation"],
             trace["relative_noise_r"],
             color="#D55E00",
+            alpha=0.35,
         )
-    axes[1].set(
-        xlabel="rho", ylabel="RMS step / R", title="fixed node marginals"
+    axes[0, 1].axhline(
+        payload["derived"]["expected_node_noise_rms_r"],
+        color="#0072B2",
+        label="node marginal",
     )
+    axes[0, 1].plot(
+        correlations,
+        [
+            payload["derived"]["expected_relative_half_noise_rms_r"][
+                str(correlation)
+            ]
+            for correlation in correlations
+        ],
+        color="#D55E00",
+        marker="o",
+        label="relative half-noise",
+    )
+    axes[0, 1].set(
+        xlabel="rho",
+        ylabel="RMS step / R",
+        title="fixed marginals, reduced relative noise",
+    )
+    axes[0, 1].legend()
+
     width = 0.18
     for index, name in enumerate(RETARDED_RECIPROCAL_CONDITIONS):
         values = [
@@ -734,28 +766,124 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -
             ]
             for correlation in correlations
         ]
-        axes[2].bar(
+        axes[1, 0].bar(
             np.arange(len(correlations)) + (index - 1.5) * width,
             values,
             width,
             color=COLORS[name],
             label=name,
         )
-    axes[2].set_xticks(
+    axes[1, 0].set_xticks(
         np.arange(len(correlations)), [str(value) for value in correlations]
     )
-    axes[2].set(xlabel="rho", ylabel="candidate seeds")
-    axes[2].legend(fontsize=7)
-    for axis in axes:
+    axes[1, 0].set(
+        xlabel="rho",
+        ylabel="candidate seeds",
+        title="registered augmented mode gate",
+    )
+    axes[1, 0].legend(fontsize=7)
+
+    for name in RETARDED_RECIPROCAL_CONDITIONS:
+        for correlation in correlations:
+            values = [
+                row["conditions"][name]["final_distance_r"]
+                for row in payload["rows"]
+                if row["noise_correlation"] == correlation
+            ]
+            axes[1, 1].scatter(
+                [correlation] * len(values),
+                values,
+                color=COLORS[name],
+                alpha=0.35,
+            )
+            axes[1, 1].plot(
+                correlation,
+                np.median(values),
+                marker="D",
+                color=COLORS[name],
+            )
+        axes[1, 1].plot([], [], color=COLORS[name], label=name)
+    axes[1, 1].set(
+        xlabel="rho",
+        ylabel="final memory-centre distance / R",
+        title="binding response",
+    )
+    axes[1, 1].set_yscale("log")
+    axes[1, 1].legend(fontsize=7)
+
+    for axis in axes.ravel():
         axis.grid(alpha=0.25)
     fig.suptitle("P3.2a/b measurement closure and relative noise")
     fig.tight_layout()
     fig.savefig(output, dpi=180)
     plt.close(fig)
 
-
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
+    primary_rows = [
+        row["conditions"]["retarded_reciprocal"] for row in payload["rows"]
+    ]
+    base_rows = [row["base_closure"] for row in primary_rows]
+    selected_rows = [row["closure"] for row in primary_rows]
+    correlations = _correlations(payload["parameters"]["noise_correlations"])
+
+    def value_range(values: list[float]) -> tuple[float, float]:
+        return float(min(values)), float(max(values))
+
+    base_conditions = value_range(
+        [row["terminal_design_condition"] for row in base_rows]
+    )
+    selected_conditions = value_range(
+        [row["terminal_design_condition"] for row in selected_rows]
+    )
+    selected_gains = value_range(
+        [row["selected_gain_vs_base_delay"] for row in primary_rows]
+    )
+    observed_node_noise = value_range(
+        [row["noise"]["node_noise_rms_r"] for row in payload["rows"]]
+    )
+    observed_relative_noise = {
+        correlation: value_range(
+            [
+                row["noise"]["relative_half_noise_rms_r"]
+                for row in payload["rows"]
+                if row["noise_correlation"] == correlation
+            ]
+        )
+        for correlation in correlations
+    }
+    mean_distances = {
+        correlation: float(
+            np.mean(
+                [
+                    row["conditions"]["retarded_reciprocal"]["final_distance_r"]
+                    for row in payload["rows"]
+                    if row["noise_correlation"] == correlation
+                ]
+            )
+        )
+        for correlation in correlations
+    }
+    base_matching = sum(
+        row["mode_identity"]["matching_segments"] for row in base_rows
+    )
+    selected_matching = sum(
+        row["mode_identity"]["matching_segments"] for row in selected_rows
+    )
+    base_identifiable = sum(row["spectral_identifiability_pass"] for row in base_rows)
+    selected_identifiable = sum(
+        row["spectral_identifiability_pass"] for row in selected_rows
+    )
+    base_candidates = sum(row["complex_candidate_pass"] for row in base_rows)
+    selected_candidates = sum(row["complex_candidate_pass"] for row in selected_rows)
+    ambient_primary = sum(row["ambient_complex"] for row in primary_rows)
+    ambient_off = sum(
+        row["conditions"]["channel_off"]["ambient_complex"]
+        for row in payload["rows"]
+    )
+    total = len(primary_rows)
+    total_segments = total * int(payload["parameters"]["segments"])
+
     lines = [
         "# P3.2a/b measurement closure and relative-noise gate",
         "",
@@ -763,56 +891,114 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Design",
         "",
-        "The fixed P3.2 mechanism is unchanged. Field and momentum target readouts",
-        "augment x-minus and m-minus; a registered delay ladder is fitted with a",
-        "chronological 60/40 split. Only held-out x-minus and m-minus prediction",
-        "is scored. The complete mediator grid remains hidden.",
+        "The fixed P3.2 checkpoint, kernel, lambda, epsilon, gain, distance, and",
+        "Telegraph mediator are unchanged. The visible (x-minus,m-minus) delay",
+        "ladder and the field/momentum-augmented ladder use depths 1,2,5,10,20",
+        "at 0.5-memory-time cadence with one common chronological 60/40 holdout.",
+        "Only held-out visible/memory prediction is scored against persistence.",
         "",
         "Node-noise marginals remain fixed while rho = 0, 0.9, 0.99 changes only",
-        "the relative noise. No epsilon, lambda, gain, or kernel sweep is used.",
+        "relative noise. Channel-off, instantaneous reciprocal, and retarded",
+        "one-way remain controls. All paths continue one formation checkpoint.",
         "",
-        "## Result",
+        "## Registered result",
         "",
         f"Classification: **{gate['classification']}**.",
         "",
-        f"- high-rho closure sufficient: {gate['high_correlation_closure_sufficient']};",
-        "- high-rho spectral identifiability sufficient: "
-        f"{gate['high_correlation_spectral_identifiability_sufficient']};",
+        f"- augmented predictive closure: {sum(row['closure_pass'] for row in selected_rows)}/{total};",
+        f"- augmented spectral identifiability: {selected_identifiable}/{total};",
+        f"- augmented complex candidates: {selected_candidates}/{total};",
         f"- controls bounded: {gate['controls_bounded_pass']};",
-        f"- noise-unmasking candidate: {gate['relative_noise_unmasking_candidate_pass']}.",
+        f"- relative-noise unmasking candidate: {gate['relative_noise_unmasking_candidate_pass']}.",
         "",
-        f"![Gate summary]({_relative_from(report, figure)})",
+        "The registered augmented spectrum is therefore inconclusive, not a",
+        "complex-mode null: its terminal design matrices are rank-deficient or",
+        f"near-rank-deficient (condition {selected_conditions[0]:.3e}..{selected_conditions[1]:.3e}).",
         "",
-        "| seed | rho | prediction/persistence | plateau change | "
-        "matching segments | candidate | relative noise/R |",
-        "| ---: | ---: | ---: | ---: | ---: | :---: | ---: |",
+        "## Reconciliation",
+        "",
+        "The visible delay layer is substantially better identified:",
+        "",
+        f"- visible predictive closure: {sum(row['closure_pass'] for row in base_rows)}/{total};",
+        f"- visible spectral identifiability: {base_identifiable}/{total}, condition {base_conditions[0]:.3g}..{base_conditions[1]:.3g};",
+        f"- visible depth-stable matching segments: {base_matching}/{total_segments};",
+        f"- visible complex candidates: {base_candidates}/{total}.",
+        "",
+        "Adding target field and momentum readouts does not improve held-out",
+        f"prediction relative to the visible delay ladder: gain {100*selected_gains[0]:.3g}%..{100*selected_gains[1]:.3g}%.",
+        f"The augmented fits nevertheless match complex poles in {selected_matching}/{total_segments}",
+        "segments. Because these poles occur with severe rank deficiency and the",
+        "inserted Telegraph channel already contains complex internal poles,",
+        "they are not identifiable knot modes.",
+        "",
+        "The separate full ambient AR(1) fit is also not control-separated:",
+        f"complex in {ambient_primary}/{total} retarded-reciprocal paths and {ambient_off}/{total}",
+        "channel-off paths. It supplies no ambient-rotation candidate.",
+        "",
+        "## Relative noise",
+        "",
+        f"The observed node RMS remains {observed_node_noise[0]:.4g}..{observed_node_noise[1]:.4g} R",
+        f"around the expected {payload['derived']['expected_node_noise_rms_r']:.4g} R.",
     ]
-    for row in payload["rows"]:
-        primary = row["conditions"]["retarded_reciprocal"]["closure"]
+    for correlation in correlations:
+        expected = payload["derived"]["expected_relative_half_noise_rms_r"][
+            str(correlation)
+        ]
+        observed = observed_relative_noise[correlation]
         lines.append(
-            f"| {row['future_seed']} | {row['noise_correlation']:.2g} | "
-            f"{primary['terminal_prediction_ratio']:.4g} | "
-            f"{primary['terminal_delay_plateau_change']:.4g} | "
-            f"{primary['mode_identity']['matching_segments']} | "
-            f"{primary['complex_candidate_pass']} | "
-            f"{row['noise']['relative_half_noise_rms_r']:.4g} |"
+            f"- rho={correlation:g}: relative RMS {observed[0]:.4g}..{observed[1]:.4g} R "
+            f"(expected {expected:.4g} R), mean final reciprocal distance "
+            f"{mean_distances[correlation]:.4g} R;"
         )
     lines.extend(
         [
             "",
-            "## Boundary",
+            "Lower relative diffusion strengthens binding but leaves the closure",
+            "curves nearly unchanged. This is not evidence for an unmasked",
+            "oscillation.",
             "",
-            "Passed predictive closure is cadence- and horizon-specific, not an exact",
-            "Markov theorem. A failed closure makes a spectral null inconclusive.",
-            "A pole shared with the one-way control is a mediator pole, not a reciprocal",
-            "knot mode. No spin, d=3 selection, particle, photon, or QFT claim follows.",
-            "All paths continue one formation checkpoint.",
+            f"![Gate summary]({_relative_from(report, figure)})",
+            "",
+            "| seed | rho | visible ratio | augmented ratio | augmented gain | condition | matching segments | relative noise/R | final distance/R |",
+            "| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+    for row in payload["rows"]:
+        primary = row["conditions"]["retarded_reciprocal"]
+        closure = primary["closure"]
+        lines.append(
+            f"| {row['future_seed']} | {row['noise_correlation']:.2g} | "
+            f"{primary['base_closure']['terminal_prediction_ratio']:.4g} | "
+            f"{closure['terminal_prediction_ratio']:.4g} | "
+            f"{100*primary['selected_gain_vs_base_delay']:.3g}% | "
+            f"{closure['terminal_design_condition']:.3e} | "
+            f"{closure['mode_identity']['matching_segments']} | "
+            f"{row['noise']['relative_half_noise_rms_r']:.4g} | "
+            f"{primary['final_distance_r']:.4g} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Boundary and decision",
+            "",
+            "A passed predictive gate is cadence- and horizon-specific, not an exact",
+            "Markov theorem. The complete mediator grid remains hidden. The current",
+            "data support a well-conditioned visible delay-state null at the",
+            "registered cadence, but not an augmented-system null.",
+            "",
+            "The next measurement step is a preregistered reduced-rank/Hankel audit",
+            "of the already chosen observables, not a gain, lambda, epsilon, or",
+            "kernel sweep. Any retained pole must remain stable across rank and",
+            "time segments and separate from the one-way mediator control.",
+            "",
+            "No spin, d=3 selection, particle, photon, Lorentz, QFT, or",
+            "Standard-Model claim follows.",
             "",
             "## Reproducibility",
             "",
             f"- checkpoint: {payload['checkpoint']};",
             f"- git revision: {payload['git_revision']};",
-            f"- git status: {'clean' if not payload['git_status'] else payload['git_status']};",
+            f"- git status at start: {'clean' if not payload['git_status'] else payload['git_status']};",
             f"- runtime: {payload['runtime_seconds']:.3f} s;",
             "- command: python experiments/current/memory/synchronization/"
             "measurement_closure_relative_noise_gate.py;",
@@ -821,7 +1007,6 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         ]
     )
     return "\n".join(lines) + "\n"
-
 
 def main() -> None:
     args = parse_args()

@@ -202,21 +202,30 @@ identifizierten physikalischen Moden.
     Transportfilter ist lokal; keine quelllokale Feldtheorie oder physische
     Signalgeschwindigkeit ist gezeigt.
 
+- [Mess-Closure und relative Rauschfalsifikation](response/measurement_closure_relative_noise_gate_2026-08-04.md)
+  - **predictive closure, augmented spectrum non-identifiable:** Der sichtbare
+    Delayzustand ist in 9/9 Faellen gut konditioniert und ohne stabiles
+    komplexes Segmentmatching. Feld plus Impuls bringen hoechstens `0.20%`
+    Holdout-Gewinn, aber Konditionszahlen um `1e16`.
+  - Feste Knotenmarginalen und `rho={0,0.9,0.99}` bestaetigen die erwartete
+    relative Rauschleiter. Kleinere relative Diffusion bindet staerker, legt
+    aber keinen kontrollgetrennten Modus frei.
+
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
     `2 x 2`-Fits ist behoben. Saubere Reproduktionen bleiben bei `0/60` und
     `0/80` nichtreellen Segmentfits; der Befund gilt nur fuer den registrierten
     AR(1)-Readout, nicht fuer den verborgenen augmentierten Telegraph-Zustand.
-  - Ein roher Epsilon-/Lambda-Sweep ist verworfen. Naechste Gates sind
-    Mess-Closure und eine Rauschkorrelationsvariation bei festen
-    Einzelknoten-Marginalen.
+  - P3.2a/b bestaetigt sichtbare Delay-Closure ohne Modenpass und verwirft
+    Rausch-Unmasking. Das augmentierte Feld-/Impulsspektrum bleibt wegen
+    Rangdefizienz unbestimmt; naechster Schritt ist Reduced-Rank, kein Sweep.
 
-Entscheidung: Direkter und fest retardierter Skalararm bestaetigen die
-Realmoden-Null bei kontrollierter Bindung/Relaxation. Weitere Gain-Suche ist
-nicht priorisiert. P3.2a prueft zuerst die Mess-Closure des verborgenen
-Mediatorzustands; danach folgt die relative Rauschfalsifikation bei festen
-Einzelknoten-Marginalen. Erst dann kommt eine quelllokale Emissionsregel.
-P3.3 bleibt gesperrt. Der komponentenweise Vektormediator besitzt weiterhin
+Entscheidung: Direkter und fest retardierter Skalararm zeigen kontrollierte
+Bindung/Relaxation. Der sichtbare Delayzustand bleibt ohne komplexen Modenpass;
+das augmentierte Spektrum ist nicht identifizierbar. Weitere Gain-Suche ist
+nicht priorisiert. Vor der quelllokalen Emissionsregel folgt ein fester
+Reduced-Rank-/Hankel-Audit. P3.3 bleibt gesperrt. Der komponentenweise
+Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden
 eingesetzten Transportgesetze.
