@@ -1,0 +1,2900 @@
+{
+  "analytic_relative_mode": {
+    "determinant": 0.5422317489859727,
+    "discriminant": 0.20831814623725275,
+    "is_complex": false,
+    "is_stable": true,
+    "multipliers": [
+      {
+        "imag": 0.0,
+        "real": 0.9991252883200965
+      },
+      {
+        "imag": 0.0,
+        "real": 0.5427064606658762
+      }
+    ],
+    "trace": 1.5418317489859727
+  },
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_update_index": 100000000,
+  "config": {
+    "alpha": 0.01,
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "burn_in": 0,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "memory_mass": 1.0,
+    "sample_every": 100000000,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "steps": 100000000
+  },
+  "created_utc": "2026-08-04T11:23:20+00:00",
+  "derived": {
+    "analysis_start_memory_times": 100.0,
+    "analysis_start_updates": 10000,
+    "continuation_memory_times": 500.0,
+    "cross_eta": 0.006939767127498097,
+    "effective_local_curvature": 2.888888888888889,
+    "finite_horizon_self_gain": 0.43229116264043155,
+    "initial_center_separation": [
+      0.0005291336448710552,
+      0.0,
+      0.0
+    ],
+    "initial_radius": 0.00021165345794842206,
+    "registered_cross_gain": 0.02,
+    "retained_memory_mass": 0.9975949907086882,
+    "second_state_rotation": [
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "formation_seed": 1,
+  "gate": {
+    "candidate_seed_counts": {
+      "channel_off": 0,
+      "one_way": 0,
+      "reciprocal": 0
+    },
+    "classification": "registered real-mode null confirmed",
+    "controls_bounded_pass": true,
+    "operational_reconciliation_pass": true,
+    "reciprocal_complex_candidate_pass": false,
+    "response_seed_counts": {
+      "one_way": 5,
+      "reciprocal": 5
+    },
+    "shape_seed_counts": {
+      "one_way": 5,
+      "reciprocal": 5
+    },
+    "zero_cross_identity_pass": true,
+    "zero_cross_max_abs_error": 0.0
+  },
+  "git_revision": "9d53668303161901bb80525fcf0dc123b7d40334",
+  "git_status": "",
+  "parameters": {
+    "allow_dirty": false,
+    "analysis_burn_memory_times": 100.0,
+    "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+    "cross_gain": 0.02,
+    "distance_ratio": 2.5,
+    "figure": "figures/draft/response/reciprocal_full_knot_gate_2026-08-04.png",
+    "fit_condition_max": 100000000.0,
+    "fit_residual_ratio_max": 0.8,
+    "frequency_min_per_memory_time": 0.05,
+    "future_seeds": "1,2,3,4,5",
+    "max_control_complex_seeds": 1,
+    "min_complex_seeds": 4,
+    "min_complex_segments": 3,
+    "mode_relative_range_max": 0.25,
+    "noise_seed_offset": 20260804,
+    "phase_coherence_min": 0.5,
+    "radius_factor_limit": 1.1,
+    "report": "reports/response/reciprocal_full_knot_gate_2026-08-04.md",
+    "response_min_r": 0.001,
+    "sample_every": 1,
+    "segments": 4,
+    "shape_spectrum_median_limit": 0.05,
+    "shape_spectrum_q95_limit": 0.1,
+    "summary_json": "reports/response/reciprocal_full_knot_gate_2026-08-04.json",
+    "updates": 50000
+  },
+  "rows": [
+    {
+      "conditions": {
+        "channel_off": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 5.2582542908982015,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.02759922722597351,
+              "design_condition": 2.4576219231320766,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5605871896082313
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9997240458101039
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.6186122822701801e-07,
+                -1.780434916231826e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.5509996429895069,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5661057129175431,
+                  0.4216630693074185
+                ],
+                [
+                  0.005674988045177742,
+                  0.994205522500792
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.019953721671345674,
+              "design_condition": 2.5429156452568717,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5645059403840719
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9998004826895129
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                7.512548463348921e-07,
+                7.473681487536136e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.5093789192080495,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5701072956148984,
+                  0.42108898066407346
+                ],
+                [
+                  0.005715808989528058,
+                  0.9941991274586864
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.003190010024424076,
+              "design_condition": 4.043023996109012,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5568656545084182
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999681004085585
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -8.039905439682319e-07,
+                -8.216755179049303e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.29605217045364507,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5624868445677464,
+                  0.436069722110069
+                ],
+                [
+                  0.005639385542695598,
+                  0.9943469103492303
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": -0.0029233255965229812,
+              "design_condition": 5.933139672780349,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5670201203962607
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.000029233683261
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.1479278576728923e-06,
+                1.180263614145394e-08
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.19918065980011937,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5727782393040571,
+                  0.4284469215554632
+                ],
+                [
+                  0.005742046226352101,
+                  0.9942711147754646
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [],
+          "response_rms_r": 0.0,
+          "shape_bounded_coherent_pass": true
+        },
+        "one_way": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 1.4210819671999286,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.06864979247189512,
+              "design_condition": 2.583743502760667,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5511404390244661
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993137376610686
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -5.074125989305874e-07,
+                -5.001448327109e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6757421086027997,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5563359512945268,
+                  0.41267637800853646
+                ],
+                [
+                  0.0055770008827211,
+                  0.9941182253910077
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.03950284684415437,
+              "design_condition": 2.4996416023100974,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5548765996423197
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.999605049545031
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.6171600079267205e-07,
+                2.5188606661742533e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.63972157272111,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5602701333445003,
+                  0.42185528476460626
+                ],
+                [
+                  0.0056170155089900805,
+                  0.9942115158428505
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.06326839901447275,
+              "design_condition": 2.484647447184628,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5474081595884348
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993675161121682
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.0292480231170587e-06,
+                -1.0193364036406734e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6531594644179278,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5525999570176957,
+                  0.4186686397226242
+                ],
+                [
+                  0.0055402445865556,
+                  0.9941757186829073
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.05059801040645709,
+              "design_condition": 2.47955264701319,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5579863349283457
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994941478822812
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.2629481632158313e-06,
+                1.254426871022564e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6376869717018727,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.563348638662802,
+                  0.41412248338000657
+                ],
+                [
+                  0.005647470945710232,
+                  0.9941318441478249
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0,
+              "shape_spectrum_distance_q95": 0.0,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0338470065421457,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0033376343982303713,
+              "shape_spectrum_distance_q95": 0.00873969774661057,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 1.5936717336588222,
+          "shape_bounded_coherent_pass": true
+        },
+        "reciprocal": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.8797078309980052,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.13878209704138061,
+              "design_condition": 3.2521442883226976,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.541576792694785
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9986131416077623
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -5.38722521797309e-07,
+                -5.29482597539311e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7568602903920143,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5462949057234522,
+                  0.38969706425477335
+                ],
+                [
+                  0.00547627569612453,
+                  0.9938950285790952
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.06738661524786878,
+              "design_condition": 2.693556083523564,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5448164745619235
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993263608443257
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.1827325082120802e-07,
+                2.1220955346977515e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6967335761152688,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5499578897408324,
+                  0.41903979049494244
+                ],
+                [
+                  0.005513533393871003,
+                  0.9941849456654168
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.11776562560632862,
+              "design_condition": 2.993787373597076,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5377266076172572
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9988230369089354
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -9.723337019109189e-07,
+                -9.58064951492264e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7408704393986006,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5425277323469948,
+                  0.40276799192322893
+                ],
+                [
+                  0.0054391876085651296,
+                  0.9940219121791978
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.10463984958589986,
+              "design_condition": 2.9660712397395077,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5481716693512996
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.998954148788138
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.336094305463658e-06,
+                1.317866994615926e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7302913296906761,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5531376101043582,
+                  0.39925991773928465
+                ],
+                [
+                  0.005545005695470311,
+                  0.9939882080350794
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0315464426258243,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0027323902563255176,
+              "shape_spectrum_distance_q95": 0.006978233127303973,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0300111466113384,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.00272640294197167,
+              "shape_spectrum_distance_q95": 0.006883237119147609,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 1.2183484729608784,
+          "shape_bounded_coherent_pass": true
+        }
+      },
+      "future_seed": 1
+    },
+    {
+      "conditions": {
+        "channel_off": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 8.121551504047336,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.007505594661221765,
+              "design_condition": 5.649861937428073,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5597638472301559
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999249468700149
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.3193087017262964e-06,
+                1.3475612855781954e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.20938476019527655,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5653899145731628,
+                  0.43132738785750874
+                ],
+                [
+                  0.00566790661437286,
+                  0.994298879527008
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": -4.216244437369143e-05,
+              "design_condition": 4.646998851159095,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5650167412260029
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.0000004216245326
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.25392153481525e-07,
+                8.763712613132739e-10
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.2552780268543891,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5707380855836366,
+                  0.4292304879134137
+                ],
+                [
+                  0.005721768871058529,
+                  0.9942790772668989
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.004211475426804402,
+              "design_condition": 5.2673651082361275,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5673557193196677
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999578861325458
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                9.022600944722176e-07,
+                9.09479593610811e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.22376212747074223,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5730766162007991,
+                  0.42510473581892544
+                ],
+                [
+                  0.0057448047974844605,
+                  0.9942369892514143
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.00876406985578251,
+              "design_condition": 4.020631937199428,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5558132951191519
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.999912363141776
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.1788780253659333e-06,
+                2.19392702276275e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.29709221262532487,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5613926841074205,
+                  0.4347222660714169
+                ],
+                [
+                  0.005628126413799554,
+                  0.9943329741535074
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [],
+          "response_rms_r": 0.0,
+          "shape_bounded_coherent_pass": true
+        },
+        "one_way": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.5591663096844492,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.031241866882729147,
+              "design_condition": 2.4359746115156757,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5502639003809295
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9996876301288031
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.477607036267102e-07,
+                2.3354139542787434e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.5867633713841455,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5556601623621419,
+                  0.43015901952445873
+                ],
+                [
+                  0.005570238991087807,
+                  0.9942913681475908
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.0392274304688831,
+              "design_condition": 2.440820693644246,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5554364781452411
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9996078026248167
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.0615238333999277e-07,
+                9.91536458804155e-10
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6109532847740708,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5608375851726152,
+                  0.42150131723106565
+                ],
+                [
+                  0.00562239027021686,
+                  0.9942066955974427
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.06568511772963544,
+              "design_condition": 2.5525692434549936,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5581475987451335
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993433645022125
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.3187077068315643e-07,
+                3.237754135569079e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6642357905392083,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5634271627035846,
+                  0.40747823647692055
+                ],
+                [
+                  0.005648025494120531,
+                  0.9940638005437614
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.053718406840839616,
+              "design_condition": 2.5045004866533724,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.546542332569762
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994629601891212
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                4.781258885982395e-07,
+                4.731659149670615e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6540157376288334,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.551777304979325,
+                  0.4236768822532747
+                ],
+                [
+                  0.005531625989872587,
+                  0.9942279877795582
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0,
+              "shape_spectrum_distance_q95": 0.0,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0354927048106366,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0035279459182729067,
+              "shape_spectrum_distance_q95": 0.009270440795881102,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 4.3158940714213045,
+          "shape_bounded_coherent_pass": true
+        },
+        "reciprocal": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.31582783684803273,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.06752393099103385,
+              "design_condition": 2.6611900969245186,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5401103323122933
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993249886128488
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.9684600070903377e-07,
+                2.8468305769489128e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6947758278054748,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5452073559275343,
+                  0.42351414698678097
+                ],
+                [
+                  0.005465338795321674,
+                  0.9942279649976077
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.07578744448186159,
+              "design_condition": 2.686562489082155,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5454978227654786
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9992424126694817
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.0468553590737618e-07,
+                1.025866693211012e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6976450962177129,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5505990708081996,
+                  0.4146333623079611
+                ],
+                [
+                  0.005519673951971604,
+                  0.9941411646267607
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.1307769102394836,
+              "design_condition": 3.1834941690841383,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5488789096048245
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9986930856549687
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.2803368415798507e-07,
+                3.1879334201617834e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7476686278851818,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5537072652637243,
+                  0.3870911335236189
+                ],
+                [
+                  0.005550501207450483,
+                  0.993864729996069
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.09538901654248855,
+              "design_condition": 2.8625890589580734,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5365723259037338
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.999046564643175
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                4.3570135002483325e-07,
+                4.31931108790462e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7269056721651727,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5414845853927531,
+                  0.41405936764354945
+                ],
+                [
+                  0.0054283596750364154,
+                  0.9941343051541557
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0333134170030978,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.002833378163512784,
+              "shape_spectrum_distance_q95": 0.007258443779402865,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0321947136909555,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.002866552554423557,
+              "shape_spectrum_distance_q95": 0.007086784610012387,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 3.138183507585681,
+          "shape_bounded_coherent_pass": true
+        }
+      },
+      "future_seed": 2
+    },
+    {
+      "conditions": {
+        "channel_off": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 3.4258364644183397,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": -0.002255078623918572,
+              "design_condition": 5.004131914025269,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5625060684737032
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.00002255104051
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -3.3426499709486546e-07,
+                -3.5026175430240497e-09
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.2374825789442311,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5682140691009532,
+                  0.43272349569682267
+                ],
+                [
+                  0.0056959307970874075,
+                  0.99431455041326
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.0028716513634068313,
+              "design_condition": 6.985978222072118,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5724527548674325
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999712838986811
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.493137303265615e-07,
+                3.569829484514691e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.1677259701642711,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5782330973102879,
+                  0.4205429821480451
+                ],
+                [
+                  0.005796770468640433,
+                  0.9941909414558256
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.003448481314123793,
+              "design_condition": 5.4578258354936455,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5645974281268649
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999655157814531
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.0999897118286104e-07,
+                3.1303877847093514e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.2164336401332925,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5702947288161815,
+                  0.4281940013336967
+                ],
+                [
+                  0.005716949941222435,
+                  0.9942682150921365
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.004471897884528732,
+              "design_condition": 4.711538222416825,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5604992528686625
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999552820210333
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -7.47806566628026e-07,
+                -7.726007286537639e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.25208503242060265,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5661494704212199,
+                  0.4318743185795343
+                ],
+                [
+                  0.005675487301871751,
+                  0.994305064468476
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [],
+          "response_rms_r": 0.0,
+          "shape_bounded_coherent_pass": true
+        },
+        "one_way": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.7210864941842049,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.05288159516458328,
+              "design_condition": 2.5625919541336137,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5532629223445
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994713238468659
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -2.313214202463752e-07,
+                -2.3590210321217905e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6644261762215757,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5585648323967763,
+                  0.41750293473434835
+                ],
+                [
+                  0.005599114077175373,
+                  0.9941694137945896
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.07313349548688738,
+              "design_condition": 2.5542533346933487,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5635062614979558
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9992689324053586
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.7612478364586755e-07,
+                2.839538991415453e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6642061898586233,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5687934107342925,
+                  0.3991503677606157
+                ],
+                [
+                  0.005702082496964565,
+                  0.9939817831690221
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.054499934231129116,
+              "design_condition": 2.5336221602270665,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5554095208852379
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994551491428543
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.172885067078155e-07,
+                2.168552910811154e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6569809817637814,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.560724633025414,
+                  0.41486224924060777
+                ],
+                [
+                  0.0056209064496709924,
+                  0.9941400370026782
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.048963341235331304,
+              "design_condition": 2.425273335867366,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5512663494048118
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9995104864385241
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -9.065990985361861e-07,
+                -9.086366220371222e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6141968109199247,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5565740343716178,
+                  0.42136402668732553
+                ],
+                [
+                  0.005579420641027833,
+                  0.9942028014717182
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0,
+              "shape_spectrum_distance_q95": 0.0,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0310612352028241,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0031788695400030986,
+              "shape_spectrum_distance_q95": 0.008346914611726597,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 2.5886480211869585,
+          "shape_bounded_coherent_pass": true
+        },
+        "reciprocal": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.3921204954626567,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.08780884346647204,
+              "design_condition": 2.840838042402015,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5435929643194439
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9991222969721695
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -2.4525508340960906e-07,
+                -2.4905491487033017e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.719301651988603,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5486091917734154,
+                  0.41094433564358424
+                ],
+                [
+                  0.005499227050137285,
+                  0.9941060695181981
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.13591797878362136,
+              "design_condition": 3.0793627641514925,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5539985203707315
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9986417434786692
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.3675366097437835e-07,
+                3.3985281690694683e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7390159519378064,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5588430648255014,
+                  0.3803134270616831
+                ],
+                [
+                  0.005602285110850802,
+                  0.9937971990238993
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.09636627422002739,
+              "design_condition": 2.9193301034437646,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5454442251225156
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9990368014316258
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                2.180796151890509e-07,
+                2.1578141013422235e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7268268523891495,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5504314785233791,
+                  0.40548258689514605
+                ],
+                [
+                  0.005517643653827688,
+                  0.9940495480307623
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.10873005365641807,
+              "design_condition": 2.8987662159934966,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5415541862238795
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9989132903604839
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -9.990203064364319e-07,
+                -9.914026755073499e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7296083518464487,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5464388596970847,
+                  0.40348414512164177
+                ],
+                [
+                  0.0054777613333451035,
+                  0.9940286168872787
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0317201494608466,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.002647617601736374,
+              "shape_spectrum_distance_q95": 0.006575409368272805,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.026828417059642,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0026558179823573946,
+              "shape_spectrum_distance_q95": 0.006558393902944923,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 1.8797742102227826,
+          "shape_bounded_coherent_pass": true
+        }
+      },
+      "future_seed": 3
+    },
+    {
+      "conditions": {
+        "channel_off": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 2.783277818401042,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.0029882579401594293,
+              "design_condition": 4.7326911000300464,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.562379018597303
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999701178670782
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.524115841092233e-07,
+                1.3563219296330083e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.25072865974471875,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5680569932104539,
+                  0.4306076745112108
+                ],
+                [
+                  0.005695188223644029,
+                  0.9942921432539273
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.017194144909936294,
+              "design_condition": 2.654527967776348,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5582661456491297
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9998280733319844
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -3.510646582809238e-08,
+                -7.037443129056988e-10
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.4767539249483577,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5638217812653139,
+                  0.4285465295641429
+                ],
+                [
+                  0.005652343253251018,
+                  0.9942724377158002
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": -0.003381398326025689,
+              "design_condition": 4.823286005350717,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5618273966993633
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.0000338145549594
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.1043753321046516e-07,
+                -1.127024620906135e-09
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.24685132949166655,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5675353165648992,
+                  0.4338979983723849
+                ],
+                [
+                  0.005689509464787178,
+                  0.9943258946894236
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.02324748205079227,
+              "design_condition": 3.3497329308167982,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5655195888348369
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9997675521996693
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.3900350118973783e-06,
+                -1.4093212505114487e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.35463898805495825,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5711139344025492,
+                  0.4188399000548472
+                ],
+                [
+                  0.005725425076486641,
+                  0.994173206631957
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [],
+          "response_rms_r": 0.0,
+          "shape_bounded_coherent_pass": true
+        },
+        "one_way": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.5323064266203817,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.03877120448825251,
+              "design_condition": 2.4298655341057045,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5526793250578784
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9996123631057198
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.2660884521975464e-07,
+                -1.411830148337947e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6005498550766976,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5580571997249096,
+                  0.42443291139359307
+                ],
+                [
+                  0.005594826092645753,
+                  0.9942344884386886
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.05155252319681159,
+              "design_condition": 2.4950324260876053,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5485341237812921
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994846076283324
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.008841000980351e-06,
+                -9.995607212798138e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.648849138308975,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5537999060068581,
+                  0.4227252654787153
+                ],
+                [
+                  0.005551782142350429,
+                  0.9942188254027663
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.04495262290454038,
+              "design_condition": 2.4523920571473212,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.552397994642682
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.999550574792732
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.9590714170041458e-07,
+                -1.7728792051802946e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6256101031103416,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5577386803893863,
+                  0.42201390176446457
+                ],
+                [
+                  0.00559123402641213,
+                  0.9942098890460276
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.05071412111144288,
+              "design_condition": 2.4670495867385105,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5562467573909344
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9994929873632535
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -4.364657674659884e-07,
+                -4.328071481455198e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6342599998507845,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.561591879191369,
+                  0.4157512985485868
+                ],
+                [
+                  0.005629891639293231,
+                  0.994147865562819
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0,
+              "shape_spectrum_distance_q95": 0.0,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0343882214816384,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0034177611292133675,
+              "shape_spectrum_distance_q95": 0.008400948125533547,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 2.0706693597341466,
+          "shape_bounded_coherent_pass": true
+        },
+        "reciprocal": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.3144627910304473,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.068608700755621,
+              "design_condition": 2.6127747559181986,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5427505828785664
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993141482963187
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.158856486140136e-07,
+                -1.2435074364026434e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.685887340679886,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5478666218493295,
+                  0.42050099475118974
+                ],
+                [
+                  0.005492550950858196,
+                  0.9941981093255554
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.10450557218371294,
+              "design_condition": 2.9673642678276626,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5390153732616075
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9989554901587187
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.0209077045492575e-06,
+                -1.0097697930334113e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7358737540835997,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5438988441381707,
+                  0.4075708680592666
+                ],
+                [
+                  0.005452440427377901,
+                  0.9940720192821555
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.09647132297635998,
+              "design_condition": 2.8624208116107024,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5427640684543382
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9990357519564418
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -2.2713440867349474e-07,
+                -2.1283290405424974e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7234280610000734,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5477272864801359,
+                  0.40794492615923283
+                ],
+                [
+                  0.005490795858489958,
+                  0.9940725339306441
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.09536497135517855,
+              "design_condition": 2.8301031049527716,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5466023480668979
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9990468048658216
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -4.2097924537100537e-07,
+                -4.172733770689846e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7178621060981089,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5516065107676078,
+                  0.4049155910783961
+                ],
+                [
+                  0.005529705646941771,
+                  0.9940426421651117
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0315521299336097,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0028766502333625876,
+              "shape_spectrum_distance_q95": 0.007206891629807477,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.028327317245424,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.002759571257341553,
+              "shape_spectrum_distance_q95": 0.006660166661564326,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 1.5157472137719643,
+          "shape_bounded_coherent_pass": true
+        }
+      },
+      "future_seed": 4
+    },
+    {
+      "conditions": {
+        "channel_off": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 9.213836282479532,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.0007610492269049399,
+              "design_condition": 5.995701888020916,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5554696299282436
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999923895366907
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                5.06566195641856e-07,
+                5.085172006516394e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.19857377834221168,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5610901141837735,
+                  0.43855300924547097
+                ],
+                [
+                  0.005624960441114113,
+                  0.9943719052811607
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.006165687519871652,
+              "design_condition": 6.127033631045209,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5568058726807411
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9999383450255473
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.9026019172438272e-06,
+                1.9343352954006958e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.1935516238309129,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5624098019066284,
+                  0.43486945889921014
+                ],
+                [
+                  0.0056381954165060505,
+                  0.9943344157996601
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": -0.0001454630148179797,
+              "design_condition": 5.131048948664529,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5650665048077124
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.0000014546312062
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -2.6833475976525533e-08,
+                -5.134157126675774e-10
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.2307514144239499,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5707892319216613,
+                  0.42925165426167095
+                ],
+                [
+                  0.0057222014176348136,
+                  0.9942787275172571
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": -0.0026163602667669855,
+              "design_condition": 6.620019992577604,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5669204446364752
+                },
+                {
+                  "imag": 0.0,
+                  "real": 1.0000261639449377
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -6.841714141253346e-07,
+                -7.199020304578599e-09
+              ],
+              "is_complex": false,
+              "is_stable": false,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.17837719788527628,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5726755676762763,
+                  0.42842834883514136
+                ],
+                [
+                  0.0057406454762984884,
+                  0.9942710409051366
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [],
+          "response_rms_r": 0.0,
+          "shape_bounded_coherent_pass": true
+        },
+        "one_way": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 1.167973295077292,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.08319529125687304,
+              "design_condition": 2.7512118841130326,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5464023845325774
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9991683930643035
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                9.569312046078717e-07,
+                9.24389043264963e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7070706621850706,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5514706374105418,
+                  0.4104317843565731
+                ],
+                [
+                  0.005528434992205853,
+                  0.9941001401863391
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.067625464151727,
+              "design_condition": 2.6561636285826413,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5476408727226058
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993239739671174
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.2649624101151096e-06,
+                1.2399894677036735e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.689699021041349,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5528076871658744,
+                  0.4163012145346308
+                ],
+                [
+                  0.005541820968209995,
+                  0.9941571595238489
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.11158912976662594,
+              "design_condition": 2.92550676311076,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5564055530343626
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9988847310775053
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                3.7232744754366127e-07,
+                3.5805232244857813e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7230877195380302,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5614089192081868,
+                  0.3889136593948143
+                ],
+                [
+                  0.005628117259700538,
+                  0.9938813649036811
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.06614179212490634,
+              "design_condition": 2.6742852473234415,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5581172861820386
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9993388007673667
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.900977954542763e-07,
+                -1.8958987126368565e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.6854605124294229,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.5633916427845075,
+                  0.40714240847673383
+                ],
+                [
+                  0.0056475098716370405,
+                  0.9940644441648978
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0,
+              "shape_spectrum_distance_q95": 0.0,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.0319817439354324,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0032089484945238556,
+              "shape_spectrum_distance_q95": 0.008365406970026704,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 4.897377536942408,
+          "shape_bounded_coherent_pass": true
+        },
+        "reciprocal": {
+          "candidate_pass": false,
+          "channel_detected": true,
+          "final_pair_distance_r": 0.8413767903584682,
+          "mode_segments": [
+            {
+              "damping_per_memory_time": 0.10842944623356322,
+              "design_condition": 3.0047707481084425,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5362448287255476
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.998916293172496
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                5.478137469558341e-07,
+                5.299846921760998e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7411183585778245,
+              "sample_end": 20000,
+              "sample_start": 10000,
+              "segment": 1,
+              "transition": [
+                [
+                  0.5410810754439332,
+                  0.40820841800141255
+                ],
+                [
+                  0.00542419992253443,
+                  0.9940800464541103
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.11308194162308786,
+              "design_condition": 3.0562909121114146,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5379248036143668
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9988698197191069
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.0804747326371089e-06,
+                1.062585497455326e-08
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7443705459977318,
+              "sample_end": 30000,
+              "sample_start": 20000,
+              "segment": 2,
+              "transition": [
+                [
+                  0.5427512433451236,
+                  0.4046041548047369
+                ],
+                [
+                  0.005440944668524299,
+                  0.9940433799883501
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.17404926246589014,
+              "design_condition": 3.5303724449196334,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5467020755261484
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9982610211542616
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                1.3174677956010426e-07,
+                1.2387689590730732e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7689096183070863,
+              "sample_end": 40000,
+              "sample_start": 30000,
+              "segment": 3,
+              "transition": [
+                [
+                  0.5512707868007259,
+                  0.36952838370798
+                ],
+                [
+                  0.005526420738848842,
+                  0.993692309879684
+                ]
+              ]
+            },
+            {
+              "damping_per_memory_time": 0.11991504446233166,
+              "design_condition": 3.1557822825996547,
+              "eigenvalues": [
+                {
+                  "imag": 0.0,
+                  "real": 0.5483229064947148
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9988015682489685
+                }
+              ],
+              "frequency_per_memory_time": 0.0,
+              "intercept": [
+                -1.7929854915672508e-07,
+                -1.770282618056343e-09
+              ],
+              "is_complex": false,
+              "is_stable": true,
+              "meaningful_complex": false,
+              "phase_coherence": 0.0,
+              "residual_ratio": 0.7450396860633304,
+              "sample_end": 50000,
+              "sample_start": 40000,
+              "segment": 4,
+              "transition": [
+                [
+                  0.553205019004513,
+                  0.392304492293745
+                ],
+                [
+                  0.005545316278867329,
+                  0.9939194557391703
+                ]
+              ]
+            }
+          ],
+          "mode_summary": {
+            "damping_relative_range": Infinity,
+            "frequency_relative_range": Infinity,
+            "meaningful_complex_segments": 0,
+            "median_damping_per_memory_time": 0.0,
+            "median_frequency_per_memory_time": 0.0,
+            "median_phase_coherence": 0.0,
+            "segment_identity_pass": false
+          },
+          "node_shape_metrics": [
+            {
+              "max_radius_factor": 1.0262041210867303,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0026600194893730555,
+              "shape_spectrum_distance_q95": 0.0064843285904828685,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            },
+            {
+              "max_radius_factor": 1.026967443169661,
+              "radius_factor_limit": 1.1,
+              "shape_bounded_coherent_pass": true,
+              "shape_bounded_pass": true,
+              "shape_coherent_pass": true,
+              "shape_spectrum_distance_median": 0.0027068471815098194,
+              "shape_spectrum_distance_q95": 0.006431624097072056,
+              "spectrum_median_limit": 0.05,
+              "spectrum_q95_limit": 0.1
+            }
+          ],
+          "response_rms_r": 3.5435615018013706,
+          "shape_bounded_coherent_pass": true
+        }
+      },
+      "future_seed": 5
+    }
+  ],
+  "schema": "emergenz-knoten.reciprocal-full-knot-gate",
+  "schema_version": 1,
+  "thresholds": {
+    "fit_condition_max": 100000000.0,
+    "fit_residual_ratio_max": 0.8,
+    "frequency_min_per_memory_time": 0.05,
+    "min_complex_segments": 3,
+    "mode_relative_range_max": 0.25,
+    "phase_coherence_min": 0.5,
+    "radius_factor_limit": 1.1,
+    "response_min_r": 0.001,
+    "shape_spectrum_median_limit": 0.05,
+    "shape_spectrum_q95_limit": 0.1
+  }
+}
