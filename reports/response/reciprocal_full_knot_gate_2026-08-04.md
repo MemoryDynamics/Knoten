@@ -1,6 +1,6 @@
 # P3.1 reciprocal full-knot reconciliation gate
 
-Date: 2026-08-04T11:23:20+00:00.
+Date: 2026-08-04T11:45:41+00:00.
 
 ## Question
 
@@ -25,6 +25,8 @@ in relative state space, not evidence for spatial rotation or d=3.
 - registered finite-horizon cross gain c=0.02, giving cross_eta=0.006939767;
 - 5 future-noise seeds, each shared across channel-off, one-way, and reciprocal conditions;
 - 50,000 updates = 500.0 memory times; the first 100.0 memory times are excluded from four segment fits.
+
+- runtime 115.11 s, or 2171.9 continuation updates/s.
 
 The future-noise seeds are repeated continuations of one formation basin.
 They test pathwise robustness but are not independent knot formations.
@@ -75,5 +77,6 @@ Classification: **registered real-mode null confirmed**.
     python experiments/current/memory/synchronization/reciprocal_full_knot_gate.py
 
 Checkpoint: `data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz`.
-Git revision: `9d53668303161901bb80525fcf0dc123b7d40334`.
+Git revision: `ddb27b0049f4d995c4045436fab79ac51100fe59`.
+Machine-readable summary: [reciprocal_full_knot_gate_2026-08-04.json](reciprocal_full_knot_gate_2026-08-04.json)
 Git status at generation: `clean`.

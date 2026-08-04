@@ -36,7 +36,8 @@
     "sigma_rep": 1.0,
     "steps": 100000000
   },
-  "created_utc": "2026-08-04T11:23:20+00:00",
+  "continuation_updates_per_second": 2171.902251047694,
+  "created_utc": "2026-08-04T11:45:41+00:00",
   "derived": {
     "analysis_start_memory_times": 100.0,
     "analysis_start_updates": 10000,
@@ -92,7 +93,7 @@
     "zero_cross_identity_pass": true,
     "zero_cross_max_abs_error": 0.0
   },
-  "git_revision": "9d53668303161901bb80525fcf0dc123b7d40334",
+  "git_revision": "ddb27b0049f4d995c4045436fab79ac51100fe59",
   "git_status": "",
   "parameters": {
     "allow_dirty": false,
@@ -2883,6 +2884,7 @@
       "future_seed": 5
     }
   ],
+  "runtime_seconds": 115.10646939999424,
   "schema": "emergenz-knoten.reciprocal-full-knot-gate",
   "schema_version": 1,
   "thresholds": {
