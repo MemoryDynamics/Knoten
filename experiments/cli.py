@@ -28,6 +28,7 @@ CATEGORIES = {
         "current/dynamics/dspec_raw_snapshot_report.py",
         "current/dynamics/n_dependence_recheck_report.py",
         "current/dynamics/dimension_over_n_reproduction.py",
+        "current/dynamics/reciprocal_mode_regime_map.py",
         "current/dynamics/long_run_metastability.py",
         "current/dynamics/stability_gate_audit.py",
         "current/dynamics/linear_long_run_reconciliation.py",

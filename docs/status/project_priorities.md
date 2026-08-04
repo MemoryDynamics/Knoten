@@ -381,6 +381,29 @@ Er wird erst auf einen neuen, kontrollgetrennten Mechanismus angewandt.
 
 ## P3: Interaktionsbefunde ueber unabhaengige Zustaende haerten
 
+**Aktualisiert am 2026-08-04:** Der reziproke Zwei-Knoten-Zweig ist jetzt
+analytisch vorregistriert. Fuer die synchrone lokale Skalarreduktion existiert
+ein stabiles komplexes Cross-Gain-Fenster nur bei
+`g < lambda/(1+lambda)`, mit `c > g` innerhalb des Fensters. Die kompakte
+Baseline besitzt `g=0.4333` bei `lambda=0.01` und liegt damit weit ausserhalb
+der Schwelle `0.009901`. `g+c>1` erzeugt einen negativen Determinanten und
+somit reelle Eigenwerte mit entgegengesetztem Vorzeichen, nicht automatisch
+Instabilitaet und keinen harmonischen Modus.
+
+Prioritaetsfolge:
+
+1. **P3.0 abgeschlossen:** Common-/Relative-Mode-Herleitung, exakter
+   Vier-Zustands-Matrixabgleich und Regimekarte.
+2. **P3.1 als Naechstes:** gepaarter kurzer Vollknotenlauf aus reifen
+   Checkpoints mit Channel-off, One-way und synchron reziprok. Der direkte
+   reziproke Arm ist Null- und Nichtlinearitaets-Reconciliation, kein
+   erwarteter Positivarm.
+3. **P3.2 nur danach:** derselbe reziproke Kanal ueber einen festen lokalen
+   Mediator. Kein Cross-Gain-Retuning nach negativem P3.1.
+4. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+   Eine komplexe Rotation in `(x_-,m_-)` ist Zustandsraumdynamik und noch keine
+   raeumliche `d=3`-Selektion.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
@@ -421,7 +444,7 @@ Ein Arbeitszweig wird beendet oder neu formuliert, wenn eines gilt:
 
 ## Bewusst zurueckgestellt
 
-- reziproke Mehrknotenkopplung;
+- ungeregistrierte oder frei retunete reziproke Mehrknotenkopplung;
 - weitere reine Skalar-Amplituden- oder Epsilon-Sweeps;
 - dynamische LoG-Vergleichslaeufe, solange der beobachtete Ast nur
   `R_mem/L << 1` und damit dieselbe lineare Kruemmung abtastet;

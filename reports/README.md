@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -103,6 +103,15 @@ identifizierten physikalischen Moden.
 
 ### 4. Referenzzustaende und externe Antwort
 
+- [Reziprokes lokales Modengate](response/reciprocal_local_mode_gate_2026-08-04.md)
+  - **structural:** Common-/Relative-Mode-Zerlegung und voller
+    Vier-Zustands-Matrixabgleich ergeben ein stabiles komplexes Fenster nur
+    fuer `g < lambda/(1+lambda)`; innerhalb des Fensters ist `c > g`
+    notwendig. Die kompakte Baseline `g=0.4333`, `lambda=0.01` liegt weit
+    ausserhalb der Schwelle `0.009901`.
+  - Die komplexe Mode rotiert im Zustandsraum `(x_-,m_-)`, nicht automatisch
+    im ambienten Raum. Der Befund ist kein Ladungs-, Flavor- oder
+    `d=3`-Resultat.
 - [N100M-Referenzzustaende](reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md)
   - **supported:** checksum-validierte Absprungbasis der implementierten
     finite-memory Approximation.
@@ -172,11 +181,14 @@ identifizierten physikalischen Moden.
     Auswahl eines physikalischen Transportgesetzes; Reziprozitaet und `d=3`
     bleiben gesperrt.
 
-Entscheidung: Reziproke Kopplung bleibt gesperrt. Der dynamische Holdout ist
-abgeschlossen und waehlt keine der beiden eingesetzten Regeln. Weitere
-Kopplungsanpassung an dieselben Zielantworten waere nicht identifizierend. Der
-komponentenweise Vektormediator besitzt ausserdem nur den Ambient-Transfer
-`H I_d` und damit keinen Mechanismus fuer eine eindeutige Rang-drei-Selektion.
+Entscheidung: Reziproke Kopplung ist nicht mehr pauschal gesperrt, sondern
+analytisch vorregistriert. Der synchrone direkte Arm folgt als erwartete
+Realmoden-Null und Nichtlinearitaets-Reconciliation; erst danach folgt ein
+fester retardierter Arm. Freies Retuning bleibt gesperrt. Der komponentenweise
+Vektormediator besitzt weiterhin nur den Ambient-Transfer `H I_d` und damit
+keinen Mechanismus fuer eine eindeutige Rang-drei-Selektion. Der negative
+dynamische Holdout waehlt nach wie vor keines der beiden eingesetzten
+Transportgesetze.
 
 ### 5. Governance und Kuration
 

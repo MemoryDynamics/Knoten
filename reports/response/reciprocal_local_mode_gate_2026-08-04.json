@@ -1,0 +1,36 @@
+{
+  "generated_at_utc": "2026-08-04T06:30:53.173571+00:00",
+  "git_revision": "9190152c553ad3975ccc44559645e35d031ed41e",
+  "git_status_porcelain": "?? experiments/current/dynamics/reciprocal_mode_regime_map.py\n?? figures/draft/response/reciprocal_mode_regime_lambda001_2026-08-04.png\n?? reports/response/reciprocal_local_mode_gate_2026-08-04.json\n?? reports/response/reciprocal_local_mode_gate_2026-08-04.md\n?? src/emergenz_knoten/reciprocal_regimes.py\n?? tests/test_reciprocal_regimes.py",
+  "lambda_value": 0.01,
+  "complex_window_self_gain_threshold": 0.009900990099009901,
+  "baseline": {
+    "eta": 0.15,
+    "memory_mass": 1.0,
+    "local_curvature": 2.888888888888889,
+    "self_gain": 0.4333333333333333,
+    "stable_complex_cross_gain_interval": null
+  },
+  "weak_self_gain_witness": {
+    "self_gain": 0.0,
+    "stable_complex_cross_gain_interval": [
+      0.0017228756406854665,
+      0.05689882811384847
+    ],
+    "cross_gain": 0.02,
+    "relative_multipliers": [
+      [
+        0.9849,
+        0.013114495796637047
+      ],
+      [
+        0.9849,
+        -0.013114495796637047
+      ]
+    ],
+    "angular_frequency_per_update": 0.013314773879786542,
+    "damping_rate_per_update": 0.01512652158551052
+  },
+  "decision": "instantaneous_reciprocal_baseline_is_a_real_mode_null",
+  "next_gate": "paired_off_one_way_reciprocal_and_retarded_reciprocal"
+}
