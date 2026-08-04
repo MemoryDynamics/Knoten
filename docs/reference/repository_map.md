@@ -42,6 +42,7 @@ flowchart TD
     experiments --> signed_pilot["signed_cross_channel_pilot.py<br/>null/product/label-flip gate"]
     experiments --> one_way_exp["one_way_dynamic_source_pilot.py<br/>paired moving-source controls"]
     experiments --> reciprocal_exp["reciprocal_full_knot_gate.py<br/>direct binding; complex-mode null"]
+    experiments --> retarded_reciprocal_exp["retarded_reciprocal_full_knot_gate.py<br/>fixed Telegraph P3.2 gate"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]

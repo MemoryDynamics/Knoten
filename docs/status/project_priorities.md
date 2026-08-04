@@ -407,10 +407,20 @@ Prioritaetsfolge:
    `2.78..9.21 R` diffundiert. Das ist keine Oszillation, kein Orbit und noch
    keine basin-uebergreifende Aussage, weil alle fuenf Fortsetzungen aus
    einem Formationscheckpoint stammen.
-4. **P3.2 als Naechstes:** derselbe reziproke Kanal ueber genau einen festen
+4. **P3.2 implementiert und preregistriert; kanonischer Lauf als Naechstes:** derselbe reziproke Kanal ueber genau einen festen
    lokalen retardierten Mediator. `c`, Laengenskalen und Kontrollen werden
    vor dem Lauf aus P3.1 und der bestehenden Mediatorarchitektur fixiert;
    kein Cross-Gain-Retuning nach dem negativen direkten Arm.
+   Festgelegt sind Telegraph statt Relaxations-Diffusion, `lambda=0.01`,
+   `c=0.02`, `L=5R`, Relaxation `10` Memory-Zeiten, Rasterweite `0.25R`
+   und der feste Readout bei `2.5R`. Der diskrete DC-Readout wird analytisch
+   auf Einheitsgain normiert; es gibt keine Kalibrierung an der Knotenantwort.
+   Primaer bleibt der beobachtbare 2-x-2-Fit in `(x_-,m_-)`, denn komplexe
+   interne Telegraph-Pole sind eingesetzt und zaehlen nicht als Knotenmodus.
+   Kontrollen: Kanal-aus, bitidentischer direkter P3.1-Arm, retardiert einseitig.
+   Claim-Grenze: Der Eingang bleibt der zielabhaengige momentane Cross-Gradient;
+   nur Transport/Filter sind lokal. Eine rein quelllokale Feldemission wird
+   damit noch nicht getestet.
 5. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
    Eine komplexe Rotation in `(x_-,m_-)` ist Zustandsraumdynamik und noch keine
    raeumliche `d=3`-Selektion.

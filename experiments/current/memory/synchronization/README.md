@@ -466,6 +466,32 @@ independent mature formations remain necessary for a basin-level claim.
 
 Report: `reports/response/reciprocal_full_knot_gate_2026-08-04.md`.
 
+## Retarded Reciprocal Full-Knot Gate (P3.2)
+
+`retarded_reciprocal_full_knot_gate.py` inserts exactly one previously tested
+local mediator into the P3.1 cross-readout: the Telegraph field/momentum law.
+The choice is fixed before the result because it has an explicit local
+propagation state; the parabolic relaxation-diffusion alternative has
+instantaneous continuum tails. This is a model-selection convention for the
+test, not evidence that the Telegraph law is physical.
+
+The P3.1 gain remains `c=0.02`. In inherited dimensionless units the channel
+uses correlation length `5R`, relaxation time `10` memory times, grid spacing
+`0.25R`, and fixed readout distance `2.5R`. Its finite-grid stationary readout
+is solved and normalized to unity, so no response matching or gain retuning is
+performed. Channel-off, the exact instantaneous reciprocal P3.1 arm, and a
+retarded one-way arm are common-noise controls.
+
+The mediator input is nevertheless the target-specific instantaneous
+cross-gradient evaluated from the current source memory. The experiment makes
+only the inserted transport/filter state local; it is not yet a fully local
+source-emission field theory.
+The primary gate is still the observable relative `(x_-,m_-)` fit across four
+post-transient segments and five future-noise continuations. Complex internal
+Telegraph poles are present by construction and do not count. The fixed
+one-dimensional relation axis carries vectors in supplied `d=3`; it does not
+select dimension or prove a continuum causal speed.
+
 ## Observables
 
 A target knot provides:
