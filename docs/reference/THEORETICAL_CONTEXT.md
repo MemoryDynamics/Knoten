@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-07-30.
+Stand: 2026-08-04.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -682,6 +682,38 @@ is only 0.142 percent of the absolute dynamic span. This supports scalar
 far-field translation, not a slowly forming interaction-specific knot type
 or a cross-induced half oscillation.
 
+For two synchronously and reciprocally coupled scalar memories, the local
+relative-coordinate reduction is
+
+```text
+A_- = [[1-g-c,           g-c],
+       [lambda(1-g-c), q+lambda(g-c)]],  q=1-lambda.
+```
+
+A real 2 x 2 matrix with a non-real conjugate eigenpair is real-similar to
+`a E+b J`, `J=[[0,-1],[1,0]]`; `A_-` need not literally have this entry form
+in the physical `(x_-,m_-)` coordinates. Its trace and determinant are
+
+```text
+T = 2-lambda-q g-(1+lambda)c,
+D = q(1-g-c).
+```
+
+A stable complex cross-gain interval exists only for
+`g < lambda/(1+lambda)` and requires `c>g` inside that interval. At
+`lambda=0.01`, the compact baseline has finite-horizon `g=0.432291`, far
+above the `0.009901` threshold. Increasing lambda would enlarge the analytic
+existence region, but that is a new memory-timescale experiment, not an
+explanation of the fixed-lambda result.
+
+The registered complete-state reconciliation at `c=0.02` agrees with this
+prediction: all 60 post-transient off/one-way/reciprocal segment fits are
+real. The reciprocal channel remains dynamically relevant, holding the final
+centre separation to `0.31..0.88 R` versus `2.78..9.21 R` without the channel,
+while preserving the registered shape envelope in 5/5 continuations. The
+supported mechanism is direct binding/relaxation in one formation basin, not
+a complex oscillator. A retarded reciprocal mediator is a distinct next
+hypothesis because its phase lag changes the state-space operator.
 Vector memory is reserved for orientation, phase, circulation, or polarization,
 not introduced merely to provide a scalar sign.
 

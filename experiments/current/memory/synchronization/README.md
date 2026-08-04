@@ -10,7 +10,10 @@ lives in `src/emergenz_knoten/frozen_source.py`. One-way dynamic-source
 continuation and relational orbital observables live in
 `src/emergenz_knoten/coupled_nodes.py`. The separately relaxing
 passive vector source and its paired one-way controls live in
-`src/emergenz_knoten/oriented_source.py`.
+`src/emergenz_knoten/oriented_source.py`. Synchronous off/one-way/reciprocal
+full-knot continuations live in `src/emergenz_knoten/reciprocal_nodes.py`;
+their constrained real 2 x 2 relative-state fit is implemented in
+`src/emergenz_knoten/reciprocal_diagnostics.py`.
 
 ## Core Question
 
@@ -49,7 +52,8 @@ cloud have an occupancy dimension near three. Exact rank three is not assumed.
 10. One-way dynamic coupling: source evolves but does not read the target.
 11. Nondestructive source transport: preserve source shape against a paired
     unlaunched continuation before interpreting target response.
-12. Reciprocal coupling with separate memory fields only after step 11 passes.
+12. Direct reciprocal coupling: compare off, one-way and synchronous arms
+    under common node-specific future noise before opening retardation.
 13. Shared memory only as a later, separately normalized model variant.
 
 ## Completed Uniform Calibration
@@ -431,12 +435,36 @@ A paired point launch of `0.1 sigma_rep` over ten memory times produces
 `10.944` radii of additional source-centre displacement, but only
 `3.137e-4` radii of target response. Its source radius differs from the
 identical unlaunched continuation by `46..59%`. The imposed drive therefore
-does not transport an intact knot. Reciprocal coupling is deferred until a
-one-way source can move without losing shape.
+does not transport an intact knot. This blocks a positive source-transport
+interpretation. A later direct reciprocal arm is opened only as an analytically
+registered real-mode null and nonlinear reconciliation test.
 
 Reports: `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` and
 `reports/response/one_way_launched_source_pilot_2026-07-20.md`.
 
+
+## Direct Reciprocal Full-Knot Gate
+
+`reciprocal_full_knot_gate.py` tests the analytic local-mode prediction on the
+complete `d=3`, `N=100M` finite-memory checkpoint. Two rigid copies start at
+`2.5 R_pair`; five independent future-noise pairs are shared across
+channel-off, one-way and synchronously reciprocal conditions. The registered
+finite-horizon cross gain is `c=0.02` (`cross_eta=0.006939767`) and is not
+calibrated per future seed.
+
+After a 100-memory-time exclusion, four non-overlapping segments per arm fit
+one isotropic real 2 x 2 map to `(x_-,m_-)`. All 60 segment fits are real.
+Thus `0/5` seeds in every arm pass the complex-mode identity gate. This is not
+a threshold artifact: there are no raw non-real segment pairs to filter.
+
+The channel is nevertheless active and nondestructive under the registered
+shape bounds. Reciprocal response and shape gates pass 5/5; final reciprocal
+centre separation is `0.31..0.88 R`, versus `2.78..9.21 R` for channel-off.
+The supported reading is direct scalar binding/relaxation, not oscillation,
+orbit, spin or dimension selection. The five paths share one formation basin;
+independent mature formations remain necessary for a basin-level claim.
+
+Report: `reports/response/reciprocal_full_knot_gate_2026-08-04.md`.
 
 ## Observables
 

@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -62,6 +62,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
 | `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
 | `experiments/current/memory/synchronization/one_way_interaction_age_audit.py` | N-Abhaengigkeit einer dauerhaften One-Way-Wechselwirkung | aktiv | common-prefix Auswertung bei `+20k..+3M`; Target-Radius, Shape-Spektrum und Kontrollabstand vor einem laengeren oder reziproken Lauf |
+| `experiments/current/memory/synchronization/reciprocal_full_knot_gate.py` | synchron reziproker Vollknotenabgleich | abgeschlossen, negatives Modengate | `N=100M`, fuenf common-noise Fortsetzungen, fester Gain; direkte Bindung/Relaxation ohne komplexe Segmentmode |
 | `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
 | `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
 | `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
@@ -877,6 +878,7 @@ Modellklasse.
 | `reports/response/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch mit v0.6 | N100M-Source besteht das Vorlaufgate; 10.944 Radien Zusatzverschiebung, Radiusfaktor 1.55..1.61, Shape-q95 in 3/5 Seeds ueber Gate und 2.332e-4 Target-Radien Response; beschraenkt, aber nicht durchgehend formkohaerent. |
 | `reports/response/one_way_interaction_age_N1M_2026-07-21.md` | One-Way-Interaction-Age bis N101M | Fuenf gepaarte Fortsetzungen: 5/5 spaetes Shape-Plateau, 0/5 kontrollgetrennte Formmodifikation; lineare Zentrumtranslation ohne Evidenz fuer einen neuen Knotentyp. |
 | `reports/response/one_way_interaction_age_N3M_2026-07-21.md` | One-Way-Interaction-Age bis N103M | 20 Altersfenster: scheinbare Shape-Halbwelle ist mit freier Kontrolle korreliert (0.999953), gepaarter Differenzspan nur 0.142 Prozent; weiterhin 0/5 Formmodifikation. |
+| `reports/response/reciprocal_full_knot_gate_2026-08-04.md` | P3.1 direkter reziproker Vollknoten | Alle 60 Segmentfits reell; Kanal-aus exakt und reziproke Response/Shape 5/5. Endabstand `0.31..0.88 R` statt `2.78..9.21 R`; Bindung/Relaxation, keine komplexe Mode. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |

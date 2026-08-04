@@ -112,6 +112,14 @@ identifizierten physikalischen Moden.
   - Die komplexe Mode rotiert im Zustandsraum `(x_-,m_-)`, nicht automatisch
     im ambienten Raum. Der Befund ist kein Ladungs-, Flavor- oder
     `d=3`-Resultat.
+- [Reziprokes Vollknoten-Gate](response/reciprocal_full_knot_gate_2026-08-04.md)
+  - **negative fuer komplexe Mode, supported fuer direkte Bindung:** Alle 60
+    post-transienten 2x2-Segmentfits aus Channel-off, One-way und reziprok
+    bleiben reell; kein Arm besitzt einen Kandidatenseed.
+  - **Kontrolliert:** Kanal-aus ist bitgenau, reziproke Response und
+    Shape-Huelle bestehen 5/5. Der Endabstand ist reziprok `0.31..0.88 R`
+    gegen `2.78..9.21 R` ohne Kanal. Die fuenf Zukunftsrauschpfade stammen
+    jedoch aus nur einem `N=100M`-Formationscheckpoint.
 - [N100M-Referenzzustaende](reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md)
   - **supported:** checksum-validierte Absprungbasis der implementierten
     finite-memory Approximation.
@@ -181,10 +189,10 @@ identifizierten physikalischen Moden.
     Auswahl eines physikalischen Transportgesetzes; Reziprozitaet und `d=3`
     bleiben gesperrt.
 
-Entscheidung: Reziproke Kopplung ist nicht mehr pauschal gesperrt, sondern
-analytisch vorregistriert. Der synchrone direkte Arm folgt als erwartete
-Realmoden-Null und Nichtlinearitaets-Reconciliation; erst danach folgt ein
-fester retardierter Arm. Freies Retuning bleibt gesperrt. Der komponentenweise
+Entscheidung: Der direkte synchrone Arm bestaetigt die registrierte
+Realmoden-Null, zeigt aber kontrollierte reziproke Bindung/Relaxation. Als
+naechstes folgt genau ein fester retardierter Arm ohne Cross-Gain-Retuning.
+Der komponentenweise
 Vektormediator besitzt weiterhin nur den Ambient-Transfer `H I_d` und damit
 keinen Mechanismus fuer eine eindeutige Rang-drei-Selektion. Der negative
 dynamische Holdout waehlt nach wie vor keines der beiden eingesetzten

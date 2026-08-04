@@ -10,6 +10,7 @@ import math
 import os
 from pathlib import Path
 import subprocess
+import time
 from typing import Any
 
 import matplotlib
@@ -328,6 +329,7 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
     if not args.allow_dirty and _git(["status", "--porcelain"]):
         raise SystemExit("working tree is dirty; commit first or pass --allow-dirty")
 
+    started_at = time.perf_counter()
     initial_radius = float(np.sqrt(np.trace(memory_shape_tensor(checkpoint.state))))
     separation = np.zeros(config.dim)
     separation[0] = args.distance_ratio * initial_radius
@@ -522,6 +524,7 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
     else:
         classification = "inconclusive: channel or shape gate failed"
 
+    runtime_seconds = time.perf_counter() - started_at
     payload = {
         "schema": "emergenz-knoten.reciprocal-full-knot-gate",
         "schema_version": 1,
@@ -533,6 +536,8 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
         "formation_seed": checkpoint.formation_seed,
         "config": asdict(config),
         "parameters": vars(args),
+        "runtime_seconds": runtime_seconds,
+        "continuation_updates_per_second": len(seeds) * args.updates / runtime_seconds,
         "derived": {
             "initial_radius": initial_radius,
             "initial_center_separation": separation,
@@ -729,6 +734,9 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"{derived['analysis_start_memory_times']:.1f} memory times are excluded from "
         f"four segment fits.",
         "",
+        f"- runtime {payload['runtime_seconds']:.2f} s, or "
+        f"{payload['continuation_updates_per_second']:.1f} continuation updates/s.",
+        "",
         "The future-noise seeds are repeated continuations of one formation basin.",
         "They test pathwise robustness but are not independent knot formations.",
         "",
@@ -810,6 +818,9 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "",
             f"Checkpoint: `{payload['checkpoint']}`.",
             f"Git revision: `{payload['git_revision']}`.",
+            f"Machine-readable summary: "
+            f"[{Path(parameters['summary_json']).name}]"
+            f"({_relative_from(report, _resolve(Path(parameters['summary_json'])))})",
             f"Git status at generation: `{payload['git_status'] or 'clean'}`.",
             "",
         ]

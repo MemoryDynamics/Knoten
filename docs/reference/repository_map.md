@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -41,6 +41,7 @@ flowchart TD
     experiments --> comp_pilot["three_scale_compensation_pilot.py<br/>exact zero integral + curvature match"]
     experiments --> signed_pilot["signed_cross_channel_pilot.py<br/>null/product/label-flip gate"]
     experiments --> one_way_exp["one_way_dynamic_source_pilot.py<br/>paired moving-source controls"]
+    experiments --> reciprocal_exp["reciprocal_full_knot_gate.py<br/>direct binding; complex-mode null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
@@ -67,6 +68,8 @@ flowchart TD
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
     src --> coupled["coupled_nodes.py<br/>one-way source + relational/shape observables"]
+    src --> reciprocal_nodes["reciprocal_nodes.py<br/>off / one-way / synchronous reciprocal"]
+    src --> reciprocal_diag["reciprocal_diagnostics.py<br/>isotropic 2x2 mode + phase coherence"]
     src --> signed["signed_cross_channel.py<br/>separate signed scalar cross coupling"]
     src --> continuation["_continuation.py<br/>shared Numba continuation primitives"]
     probe --> continuation
@@ -271,8 +274,9 @@ flowchart LR
     channel --> one_way["one-way source v0.6<br/>pre-launch stationarity + paired shape gate"]
     one_way --> launch["paired point launch<br/>source deforms; target sub-threshold"]
     launch --> transport["next: coherent whole-state or<br/>local / retarded transport"]
-    transport -.gate.-> reciprocal["later: reciprocal knots<br/>identity + balance diagnostics"]
-    seeds -.formation gate.-> reciprocal
+    transport --> reciprocal["direct synchronous reciprocal<br/>binding pass; complex-mode null"]
+    reciprocal --> retarded["next: one fixed retarded return<br/>no gain retuning"]
+    seeds -.independent formation holdout.-> retarded
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
     one_way --> delta

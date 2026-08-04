@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -394,13 +394,24 @@ Prioritaetsfolge:
 
 1. **P3.0 abgeschlossen:** Common-/Relative-Mode-Herleitung, exakter
    Vier-Zustands-Matrixabgleich und Regimekarte.
-2. **P3.1 als Naechstes:** gepaarter kurzer Vollknotenlauf aus reifen
-   Checkpoints mit Channel-off, One-way und synchron reziprok. Der direkte
-   reziproke Arm ist Null- und Nichtlinearitaets-Reconciliation, kein
-   erwarteter Positivarm.
-3. **P3.2 nur danach:** derselbe reziproke Kanal ueber einen festen lokalen
-   Mediator. Kein Cross-Gain-Retuning nach negativem P3.1.
-4. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+2. **P3.1 abgeschlossen, negatives Modengate:** Zwei Kopien des sauberen
+   `d=3`, `N=100M`-Checkpoints laufen fuer fuenf gemeinsame
+   Zukunftsrauschpfade je 500 Memory-Zeiten als Channel-off, One-way und
+   synchron reziprok. Bei festem `c=0.02` sind alle 60 post-transienten
+   Segmentfits reell; `0/5` Seeds bestehen in jedem Arm das komplexe
+   Segment-/Phasengate. Kanal-aus ist bitgenau, Response und Shape-Huelle
+   bestehen im reziproken Arm 5/5.
+3. **Belastbare P3.1-Lesart:** Direkte synchrone skalare Reziprozitaet bindet
+   bzw. relaxiert die Zentren in diesem Ast. Nach 500 Memory-Zeiten liegt der
+   reziproke Abstand bei `0.31..0.88 R`, waehrend Channel-off auf
+   `2.78..9.21 R` diffundiert. Das ist keine Oszillation, kein Orbit und noch
+   keine basin-uebergreifende Aussage, weil alle fuenf Fortsetzungen aus
+   einem Formationscheckpoint stammen.
+4. **P3.2 als Naechstes:** derselbe reziproke Kanal ueber genau einen festen
+   lokalen retardierten Mediator. `c`, Laengenskalen und Kontrollen werden
+   vor dem Lauf aus P3.1 und der bestehenden Mediatorarchitektur fixiert;
+   kein Cross-Gain-Retuning nach dem negativen direkten Arm.
+5. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
    Eine komplexe Rotation in `(x_-,m_-)` ist Zustandsraumdynamik und noch keine
    raeumliche `d=3`-Selektion.
 

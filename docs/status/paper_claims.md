@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -194,6 +194,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Dynamische autonome Source waehlt eine lokale Mediatorregel | negatives Diskriminationsgate: beide Regeln bestehen 6/6 Response-, Oddness-, Shape- und Distanzgates, aber nur 4/6 statt 5/6 Paare bestehen den relativen Traceabstand gleichzeitig an allen drei Distanzen | nicht retunen; ohne unabhaengige Zieltrajektorie oder neuen Mechanismus keine Feldgesetz-Auswahl und keine Reziprozitaet |
 | Aktives lokales Delta-Quellfeld selektiert einen physischen Kernel oder Knoten | nur modellbedingt fuer klassische Musterbildung gestuetzt: der feste Finite-k-Pilot besteht Zeit-/Gitter-, cubic-off- und source-off-Gates und saettigt bei `k=1`; `eta=0` bildet nahezu dasselbe Feld und `H I_d` bleibt vollrangig | keine Koeffizientensuche; erst eine unabhaengige Source-/Target-Regel oder feedback-spezifische Observable vorregistrieren. Kein Kernel-, Knoten-, Quantisierungs- oder d=3-Claim |
 | Geklonte Knoten ziehen sich wegen Neutralitaet oder Ladung an | weiterhin nicht gestuetzt: der alte `rho>=0`-Cross-Kanal war vorzeichenlos; der neue signierte Kanal zeigt nur kontrollierte Labelmechanik an einer eingefrorenen Quelle | unabhaengige Formationszustaende und shape-bounded/coherent One-Way-Transport vor Reziprozitaet; keine Ladungssprache |
+| Direkte synchrone reziproke Skalar-Kopplung erzeugt einen komplexen Modus | negatives Modengate: bei festem `c=0.02` bleiben alle 60 post-transienten Vollknoten-Segmentfits reell; Response und Shape-Huelle bestehen reziprok 5/5, der Endabstand sinkt auf `0.31..0.88 R` gegen `2.78..9.21 R` channel-off | als direkte Bindung/Relaxation in einem Formationsbecken berichten; keine Oszillation, kein Orbit, keine Ladung. Naechster Test ist ein fester retardierter Rueckkanal ohne Gain-Retuning |
 | Extern bewegte skalare Quelle erzeugt kontrollgetrennte Formdynamik | nicht gestuetzt: der Launch ist nicht durchgehend formkohaerent; bis N=103M waechst die Zentrumantwort nahezu linear auf 20.844 Radien, aber 0/5 Seeds bestehen das Formmodifikationsgate und die Shape-Halbwelle folgt der freien Kontrolle | mechanistisch anderen lokalen/retardierten oder orientierten Kanal vorregistrieren; keine Reziprozitaet vorher |
 | Eindeutige `d=3`-Selektion | nicht gestuetzt; seeded d-alpha-N-Scan zeigt kein stabiles Plateau, und der aktuelle komponentenweise Mediator besitzt den rang-erhaltenden Ambient-Transfer `H I_d` | nicht behaupten; vor cross-d-Rechenlaeufen erst einen falsifizierbaren Mechanismus fuer die Unterdrueckung zusaetzlicher Richtungen formulieren |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |

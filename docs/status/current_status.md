@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-07-31.
+Stand: 2026-08-04.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
-| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren; beide lokalen Mediatoren bestehen ihre Response-/Shape-Gates, aber das dynamische Common-Source-Gate trennt sie nur in 4/6 Paaren robust. | kontrollierter relationaler Kanal und zwei lauffaehige lokale Markov-Erweiterungen | negatives Modellselektionsgate; Transportgesetze, Persistenz und Source-Readout sind Inputs, Reziprozitaet fehlt |
+| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren. Der direkte synchrone Skalararm bindet die Vollknotenzentren formschonend, aber alle 60 Segmentfits bleiben reell. | kontrollierter relationaler Kanal plus direkte reziproke Bindung/Relaxation | ein Formationsbecken; kein komplexer Modus, Transportgesetz, Spin-, Ladungs- oder Teilchenclaim |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -267,9 +267,11 @@ AR-Scheinmoden ist nun abgeschlossen:
 Der rohe `eta=0`-Operator ist reell, volle N=1M-Fits bleiben reell und die
 ausgerichteten komplexen Paare sind nicht kontrollgetrennt. Der Feldzweig wird
 daher nicht mit einem freien Koeffizientensweep erweitert. Die naechste
-inhaltliche Prioritaet ist P3 nur fuer einen vorab identifizierenden
-Interaktionstest; parallel bleibt die Long-Run-Geometrieschiene mit
-eingefrorener Messmethodik erhalten.
+inhaltliche Prioritaet P3.1 ist nun ebenfalls abgeschlossen: Der direkte
+synchrone Arm bestaetigt den analytisch erwarteten Realmodus und zeigt zugleich
+kontrollierte reziproke Bindung. P3.2 testet als neue Hypothese genau einen
+festen retardierten Rueckkanal ohne Cross-Gain-Retuning; parallel bleibt die
+Long-Run-Geometrieschiene mit eingefrorener Messmethodik erhalten.
 
 ## Paper-Status
 
