@@ -706,16 +706,22 @@ above the `0.009901` threshold. Increasing lambda would enlarge the analytic
 existence region, but that is a new memory-timescale experiment, not an
 explanation of the fixed-lambda result.
 
-The registered complete-state reconciliation at `c=0.02` agrees with this
-prediction: all 60 post-transient off/one-way/reciprocal segment fits are
-real. The reciprocal channel remains dynamically relevant, holding the final
-centre separation to `0.31..0.88 R` versus `2.78..9.21 R` without the channel,
-while preserving the registered shape envelope in 5/5 continuations. The
-supported mechanism is direct binding/relaxation in one formation basin, not
-a complex oscillator. A retarded reciprocal mediator is a distinct next
-hypothesis because its phase lag changes the state-space operator.
-Vector memory is reserved for orientation, phase, circulation, or polarization,
-not introduced merely to provide a scalar sign.
+The registered direct complete-state reconciliation at `c=0.02` agrees with
+this prediction: all 60 post-transient segment fits are real. The channel is
+dynamically relevant, holding final centre separation to `0.31..0.88 R`
+versus `2.78..9.21 R` without it, while preserving shape in 5/5 paths.
+
+A second preregistered reconciliation passes the same cross-readout through a
+fixed, statically unit-normalized Telegraph field/momentum filter. The
+mediator, response, and shape gates pass 5/5, but all 80 raw segment fits are
+again real. Retarded reciprocal separation `0.58..1.21 R` is larger than the
+direct result, supporting delayed or weakened binding rather than an
+observable `(x_-,m_-)` rotation. This remains one formation basin.
+
+The filter input is still a target-specific instantaneous cross-gradient;
+only the transport update is local. A source-local field law therefore remains
+open. Vector memory is reserved for orientation, phase, circulation, or
+polarization, not introduced merely to provide a scalar sign.
 
 ## Markov-Einbettung
 

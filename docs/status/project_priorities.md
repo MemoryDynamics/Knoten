@@ -407,23 +407,26 @@ Prioritaetsfolge:
    `2.78..9.21 R` diffundiert. Das ist keine Oszillation, kein Orbit und noch
    keine basin-uebergreifende Aussage, weil alle fuenf Fortsetzungen aus
    einem Formationscheckpoint stammen.
-4. **P3.2 implementiert und preregistriert; kanonischer Lauf als Naechstes:** derselbe reziproke Kanal ueber genau einen festen
-   lokalen retardierten Mediator. `c`, Laengenskalen und Kontrollen werden
-   vor dem Lauf aus P3.1 und der bestehenden Mediatorarchitektur fixiert;
-   kein Cross-Gain-Retuning nach dem negativen direkten Arm.
-   Festgelegt sind Telegraph statt Relaxations-Diffusion, `lambda=0.01`,
-   `c=0.02`, `L=5R`, Relaxation `10` Memory-Zeiten, Rasterweite `0.25R`
-   und der feste Readout bei `2.5R`. Der diskrete DC-Readout wird analytisch
-   auf Einheitsgain normiert; es gibt keine Kalibrierung an der Knotenantwort.
-   Primaer bleibt der beobachtbare 2-x-2-Fit in `(x_-,m_-)`, denn komplexe
-   interne Telegraph-Pole sind eingesetzt und zaehlen nicht als Knotenmodus.
-   Kontrollen: Kanal-aus, bitidentischer direkter P3.1-Arm, retardiert einseitig.
-   Claim-Grenze: Der Eingang bleibt der zielabhaengige momentane Cross-Gradient;
-   nur Transport/Filter sind lokal. Eine rein quelllokale Feldemission wird
-   damit noch nicht getestet.
-5. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
-   Eine komplexe Rotation in `(x_-,m_-)` ist Zustandsraumdynamik und noch keine
-   raeumliche `d=3`-Selektion.
+4. **P3.2 abgeschlossen, negatives Modengate:** Der auf Einheits-DC-Gain
+   normierte Telegraph-Filter verwendet unveraendert `lambda=0.01`, `c=0.02`,
+   `L=5R`, Relaxation `10` Memory-Zeiten, Rasterweite `0.25R` und festen
+   Readout bei `2.5R`. Kanal-aus, der bitidentische direkte P3.1-Arm und
+   retardiert einseitig sind Common-Noise-Kontrollen.
+5. **Belastbare P3.2-Lesart:** Mediator, Response und Shape-Huelle bestehen
+   jeweils 5/5. Trotzdem sind alle 80 rohen Segmentfits reell und 0/5 Seeds
+   bestehen in jedem Arm das komplexe Gate. Der retardiert reziproke
+   Endabstand `0.58..1.21R` ist groesser als direkt `0.31..0.88R`:
+   Verzoegerung schwaecht oder verschiebt die Bindung, erzeugt im registrierten
+   `(x_-,m_-)`-AR(1)-Readout aber keine Rotation.
+6. **P3.2a als Naechstes, keine Gain-Suche:** Vor einer weiteren
+   Vollsimulation wird eine rein quelllokale Emissions-/Readout-Regel
+   formuliert und ihr reduziertes lineares Spektrum samt Observability
+   berechnet. Der aktuelle Eingang ist noch der zielabhaengige momentane
+   Cross-Gradient; nur Transport/Filter sind lokal. Ein zusaetzlicher
+   lag-erweiterter Diagnosefit darf explorativ pruefen, ob der primaere
+   AR(1)-Readout einen sichtbaren hoehergeordneten Modus verdeckt.
+7. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+   Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

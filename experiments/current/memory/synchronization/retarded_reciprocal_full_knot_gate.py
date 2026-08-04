@@ -752,6 +752,30 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -
 
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
+    raw_complex_total = sum(
+        bool(segment["is_complex"])
+        for row in payload["rows"]
+        for condition in RETARDED_RECIPROCAL_CONDITIONS
+        for segment in row["conditions"][condition]["mode_segments"]
+    )
+    segment_total = (
+        len(payload["rows"])
+        * len(RETARDED_RECIPROCAL_CONDITIONS)
+        * int(payload["parameters"]["segments"])
+    )
+    final_ranges = {
+        condition: (
+            min(
+                row["conditions"][condition]["final_pair_distance_r"]
+                for row in payload["rows"]
+            ),
+            max(
+                row["conditions"][condition]["final_pair_distance_r"]
+                for row in payload["rows"]
+            ),
+        )
+        for condition in ("instantaneous_reciprocal", "retarded_reciprocal")
+    }
     derived = payload["derived"]
     parameters = payload["parameters"]
     direct = payload["direct_analytic_relative_mode"]
@@ -804,6 +828,10 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"- retarded reciprocal response detected: {gate['response_seed_counts']['retarded_reciprocal']}/{len(payload['rows'])};",
         f"- retarded reciprocal shape bounded/coherent: {gate['shape_seed_counts']['retarded_reciprocal']}/{len(payload['rows'])};",
         f"- control-separated complex candidate: {gate['retarded_reciprocal_complex_candidate_pass']}.",
+        f"- raw non-real segment fits: {raw_complex_total}/{segment_total};",
+        f"- final distance/R, direct: {final_ranges['instantaneous_reciprocal'][0]:.4g}..{final_ranges['instantaneous_reciprocal'][1]:.4g};",
+        f"- final distance/R, retarded reciprocal: {final_ranges['retarded_reciprocal'][0]:.4g}..{final_ranges['retarded_reciprocal'][1]:.4g};",
+        "  the delay weakens or postpones binding but does not create an observable rotation.",
         "",
         f"![P3.2 retarded reciprocal gate]({_relative_from(report, figure)})",
         "",
@@ -831,14 +859,14 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "## Interpretation boundary",
             "",
             "This is a mechanism test of one inserted retarded channel, not discovery",
-            "of a field law. The relation axis is one-dimensional and fixed, while it",
-            "carries vectors in a supplied d=3 ambient state. A local finite-difference",
-            "Its input remains a target-specific cross-gradient evaluated from the",
-            "current source memory. Only the inserted transport/filter update is local;",
-            "a source-local emission field has not been derived.",
-            "stencil has a numerical grid cone; this does not prove a continuum causal",
-            "speed. No spatial rotation, d=3 selection, spin, charge, photon, particle,",
-            "Lorentz, QFT, or Standard-Model claim follows.",
+            "of a field law. Its input remains a target-specific cross-gradient from",
+            "the current source memory. Only the transport/filter update is local; a",
+            "source-local emission field has not been derived.",
+            "",
+            "The fixed one-dimensional relation axis carries vectors in a supplied",
+            "d=3 ambient state. Its finite-difference stencil has a numerical grid",
+            "cone; this proves no continuum causal speed. No spatial rotation, d=3",
+            "selection, spin, charge, photon, particle, Lorentz, QFT, or Standard-Model claim follows.",
             "",
             f"The {len(payload['rows'])} future-noise paths all continue one formation checkpoint. They",
             "test pathwise robustness, not basin-to-basin reproducibility.",

@@ -189,14 +189,27 @@ identifizierten physikalischen Moden.
     Auswahl eines physikalischen Transportgesetzes; Reziprozitaet und `d=3`
     bleiben gesperrt.
 
-Entscheidung: Der direkte synchrone Arm bestaetigt die registrierte
-Realmoden-Null, zeigt aber kontrollierte reziproke Bindung/Relaxation. Als
-naechstes folgt genau ein fester retardierter Arm ohne Cross-Gain-Retuning.
-Der komponentenweise
-Vektormediator besitzt weiterhin nur den Ambient-Transfer `H I_d` und damit
-keinen Mechanismus fuer eine eindeutige Rang-drei-Selektion. Der negative
-dynamische Holdout waehlt nach wie vor keines der beiden eingesetzten
-Transportgesetze.
+- [Direktes reziprokes Vollknotengate](response/reciprocal_full_knot_gate_2026-08-04.md)
+  - **negative mode gate, active binding:** Alle 60 rohen Segmentfits bleiben
+    reell; Response und Shape-Huelle bestehen 5/5. Der direkte Endabstand liegt
+    bei `0.31..0.88R` gegen Kanal-aus `2.78..9.21R`.
+- [Retardiertes reziprokes Vollknotengate](response/retarded_reciprocal_full_knot_gate_2026-08-04.md)
+  - **negative mode gate, operational channel:** Der feste DC-gematchte
+    Telegraph-Arm besteht Mediator, Response und Shape 5/5, aber alle 80 rohen
+    Segmentfits sind reell. Retardiert reziprok endet bei `0.58..1.21R` und
+    bindet damit im Beobachtungsfenster schwaecher oder spaeter als direkt.
+  - Der Eingang bleibt ein zielabhaengiger momentaner Cross-Gradient. Nur der
+    Transportfilter ist lokal; keine quelllokale Feldtheorie oder physische
+    Signalgeschwindigkeit ist gezeigt.
+
+Entscheidung: Direkter und fest retardierter Skalararm bestaetigen die
+Realmoden-Null bei kontrollierter Bindung/Relaxation. Weitere Gain-Suche ist
+nicht priorisiert. Vor einer neuen Vollsimulation braucht P3.2a eine
+quelllokale Emissions-/Readout-Regel und eine analytische Observability-Pruefung.
+P3.3 bleibt gesperrt. Der komponentenweise Vektormediator besitzt weiterhin
+nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
+Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden
+eingesetzten Transportgesetze.
 
 ### 5. Governance und Kuration
 

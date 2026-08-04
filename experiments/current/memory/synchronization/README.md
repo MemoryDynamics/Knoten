@@ -486,11 +486,22 @@ The mediator input is nevertheless the target-specific instantaneous
 cross-gradient evaluated from the current source memory. The experiment makes
 only the inserted transport/filter state local; it is not yet a fully local
 source-emission field theory.
+
 The primary gate is still the observable relative `(x_-,m_-)` fit across four
 post-transient segments and five future-noise continuations. Complex internal
 Telegraph poles are present by construction and do not count. The fixed
 one-dimensional relation axis carries vectors in supplied `d=3`; it does not
 select dimension or prove a continuum causal speed.
+
+The canonical five-seed, 500-memory-time run is operational but negative for
+the primary mode hypothesis. Mediator response, knot response, and the shape
+envelope pass 5/5. All 80 raw segment fits across off, direct reciprocal,
+retarded one-way, and retarded reciprocal arms are real. Final separation is
+`0.58..1.21R` with retardation versus `0.31..0.88R` directly. Thus the fixed
+delay weakens or postpones binding but does not create an observable AR(1)
+rotation in this formation basin.
+
+Report: `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`.
 
 ## Observables
 

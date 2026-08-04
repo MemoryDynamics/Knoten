@@ -15,7 +15,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
-| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren. Der direkte synchrone Skalararm bindet die Vollknotenzentren formschonend, aber alle 60 Segmentfits bleiben reell. | kontrollierter relationaler Kanal plus direkte reziproke Bindung/Relaxation | ein Formationsbecken; kein komplexer Modus, Transportgesetz, Spin-, Ladungs- oder Teilchenclaim |
+| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren. Direkte und Telegraph-retardierte skalare Reziprozitaet sind aktiv und formschonend, aber alle 60 direkten und 80 P3.2-Segmentfits bleiben reell. | kontrollierter relationaler Kanal plus direkte/verzoegerte Bindung und Relaxation | ein Formationsbecken; der Telegraph-Eingang bleibt zielabhaengig; kein komplexer Modus, lokales Feldgesetz, Spin-, Ladungs- oder Teilchenclaim |
 | Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
 
 ## Evidenz, Inferenz und Hypothese
@@ -81,6 +81,13 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Paaren Messbarkeit, Oddness, Shape-Huelle und Distanzabfall. Die verlangte
   robuste Diffusion-/Telegraph-Trennung besteht nur in 4/6 Paaren; der
   dynamische Modellselektionsversuch ist damit negativ.
+- Der feste P3.2-Telegraph-Filter besteht Mediator-, Response- und Shape-Gates
+  in 5/5 Common-Noise-Fortsetzungen. Alle 80 rohen Segmentfits in Kanal-aus,
+  direkt reziprok, retardiert einseitig und retardiert reziprok bleiben exakt
+  reell. Der retardierte Endabstand `0.58..1.21R` gegen direkt `0.31..0.88R`
+  stuetzt verzoegerte oder geschwaechte Bindung, keine beobachtbare Rotation.
+  Da der Eingang weiterhin ein zielabhaengiger Cross-Gradient ist, ist dies
+  noch keine rein quelllokale Feldtheorie.
 
 
 ### Nicht gestuetzt oder widerlegt
@@ -118,8 +125,9 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Dimensionshypothese braucht dieselbe eingefrorene Regel ueber mehrere
   Ambient-Dimensionen und einen kontrollgetrennten effektiven Response- oder
   Modenrang; eine 3D-Feldsimulation waere nur eine 3D-Annahme.
-- Reziproke Mehrknotendynamik ist erst sinnvoll, wenn ein One-Way-Kanal
-  Identitaet und Form unter Transport besteht.
+- Weitere reziproke Vollsimulationen sind erst sinnvoll, wenn eine quelllokale
+  Emissions-/Readout-Regel analytisch definiert und ihr sichtbarer Modus vorab
+  von den eingesetzten internen Mediatorpolen getrennt ist.
 - Der angenommene negative dimensionslose `k^2`-Koeffizient in
   `P(u)=1+a2 u^2+u^4` erzeugt mit kubischer Saettigung numerisch robuste
   endliche Wellenzahlen. Weil derselbe Ast fuer `eta=0` entsteht, braucht ein
@@ -150,6 +158,8 @@ wichtig:
 15. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
 16. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
 17. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
+18. `reports/response/reciprocal_full_knot_gate_2026-08-04.md`
+19. `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -174,6 +184,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
   Relaxations-Diffusions- und Telegraph-Zustaende.
 - `src/emergenz_knoten/mediator_identifiability.py`: segmentierte
   Source-Spektren und sourcegewichteter komplexer Transferkontrast.
+- `src/emergenz_knoten/retarded_reciprocal.py`: direkte und statisch normierte
+  Telegraph-retardierte Vollknotenarme mit festen Common-Noise-Kontrollen.
 - `src/emergenz_knoten/external_field_response.py`: gepaarte zeitabhaengige
   Aktiv-/Flip-/Kanal-aus-Targetfortsetzung.
 - `experiments/current/`: reproduzierbare aktive Entry-Points.
@@ -266,12 +278,15 @@ Oszillations- oder Metastabilitaetsgate. Die analytische Nullreferenz fuer die
 AR-Scheinmoden ist nun abgeschlossen:
 Der rohe `eta=0`-Operator ist reell, volle N=1M-Fits bleiben reell und die
 ausgerichteten komplexen Paare sind nicht kontrollgetrennt. Der Feldzweig wird
-daher nicht mit einem freien Koeffizientensweep erweitert. Die naechste
-inhaltliche Prioritaet P3.1 ist nun ebenfalls abgeschlossen: Der direkte
-synchrone Arm bestaetigt den analytisch erwarteten Realmodus und zeigt zugleich
-kontrollierte reziproke Bindung. P3.2 testet als neue Hypothese genau einen
-festen retardierten Rueckkanal ohne Cross-Gain-Retuning; parallel bleibt die
-Long-Run-Geometrieschiene mit eingefrorener Messmethodik erhalten.
+daher nicht mit einem freien Koeffizientensweep erweitert. P3.1 und P3.2 sind
+nun abgeschlossen: Direkte und Telegraph-retardierte skalare Reziprozitaet
+sind aktiv, formschonend und bindend, liefern in den registrierten
+`(x_-,m_-)`-Fits aber ausschliesslich reelle Moden. P3.3 bleibt gesperrt.
+Als P3.2a wird vor weiteren Vollsimulationen eine quelllokale Emissions-/
+Readout-Regel analytisch formuliert und auf sichtbare Moden geprueft; ein
+explorativer lag-erweiterter Fit darf die AR(1)-Projektionsgrenze auditieren,
+ohne das negative Primaergate umzuwerten. Die Long-Run-Geometrieschiene bleibt
+mit eingefrorener Messmethodik erhalten.
 
 ## Paper-Status
 
@@ -279,10 +294,11 @@ Long-Run-Geometrieschiene mit eingefrorener Messmethodik erhalten.
   Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
-- **Paper II:** Zwei lokale Transportarchitekturen sind konstruiert, aber das
-  dynamische Modellselektionsgate ist negativ. Propagationsgesetz,
-  Raumzeitkinematik und `d=3` bleiben gesperrt, bis unabhaengige Evidenz bzw.
-  ein echter Dimensionsreduktionsmechanismus vorliegt.
+- **Paper II:** Zwei lokale Transportarchitekturen sind konstruiert; sowohl das
+  dynamische Modellselektionsgate als auch das feste reziproke Telegraph-
+  Modengate sind negativ. Propagationsgesetz, Raumzeitkinematik und `d=3`
+  bleiben gesperrt, bis unabhaengige Evidenz, eine quelllokale Feldregel und
+  ein echter Dimensionsreduktionsmechanismus vorliegen.
 - **Paper III:** offene spekulative Tuer ohne Claim-Status.
 
 ## Reproduzierbarkeitsregeln
