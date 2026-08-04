@@ -437,8 +437,9 @@ Prioritaetsfolge:
    die Closure-Kurven bleiben jedoch nahezu gleich und kein
    kontrollgetrennter Modus erscheint.
 9. **P3.2-Langhorizont abgeschlossen, negativer Closure-Trend:** Bei
-   identischen Train-/Testzielen verschlechtern sich alle 45
-   Seed-/Rausch-/Rangpfade von 1000 auf 12500 Updates; medianes
+   identischen Train-/Testzielen verschlechtern sich alle 45 gepaarten
+   Designzellen aus drei unabhaengigen Seeds, drei skalierten
+   Rauschkorrelationen und fuenf verschachtelten Raengen von 1000 auf 12500 Updates; medianes
    `Delta RMSE/Persistenz=+0.1203`. Sichtbarer Stable-/Entropy-Rank waechst
    `1.67/6.62 -> 5.87/49.4` ohne Plateau. Feld/Impuls kehrt den Trend nicht
    um. Bei Rang 16/32 liegt reziprok minus Einweg terminal nur in

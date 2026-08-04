@@ -675,27 +675,44 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
     hankel_gate = None
     if hankel_depths:
         primary_deltas = []
+        deltas_by_seed = {seed: [] for seed in seeds}
         for row in rows:
             audits = row["conditions"]["retarded_reciprocal"]["hankel_audit"]["base"]
             for rank_index in range(len(hankel_ranks)):
-                primary_deltas.append(
+                delta = (
                     audits[-1]["rank_fits"][rank_index]["test_residual_ratio"]
                     - audits[0]["rank_fits"][rank_index]["test_residual_ratio"]
                 )
+                primary_deltas.append(delta)
+                deltas_by_seed[row["future_seed"]].append(delta)
+        seed_median_deltas = np.asarray(
+            [np.median(deltas_by_seed[seed]) for seed in seeds], dtype=float
+        )
         median_delta = float(np.median(primary_deltas))
         positive_fraction = float(np.mean(np.asarray(primary_deltas) > 0.0))
         negative_fraction = float(np.mean(np.asarray(primary_deltas) < 0.0))
-        if median_delta >= args.hankel_material_change and positive_fraction >= 0.8:
+        positive_seed_fraction = float(np.mean(seed_median_deltas > 0.0))
+        negative_seed_fraction = float(np.mean(seed_median_deltas < 0.0))
+        if (
+            median_delta >= args.hankel_material_change
+            and positive_seed_fraction >= 0.8
+        ):
             trend_classification = "longer history degrades held-out prediction"
-        elif median_delta <= -args.hankel_material_change and negative_fraction >= 0.8:
+        elif (
+            median_delta <= -args.hankel_material_change
+            and negative_seed_fraction >= 0.8
+        ):
             trend_classification = "longer history improves held-out prediction"
         else:
-            trend_classification = "no rank-robust material long-history trend"
+            trend_classification = "no seed-robust material long-history trend"
         hankel_gate = {
             "classification": trend_classification,
             "median_terminal_minus_initial_ratio": median_delta,
-            "positive_delta_fraction": positive_fraction,
-            "negative_delta_fraction": negative_fraction,
+            "positive_design_cell_fraction": positive_fraction,
+            "negative_design_cell_fraction": negative_fraction,
+            "seed_median_deltas": seed_median_deltas,
+            "positive_seed_fraction": positive_seed_fraction,
+            "negative_seed_fraction": negative_seed_fraction,
             "material_change_threshold": args.hankel_material_change,
             "maximum_horizon_updates": (
                 hankel_depths[-1] * args.closure_stride_updates
@@ -815,7 +832,7 @@ def _plot_hankel(payload: dict[str, Any], output: Path) -> None:
     stride = int(payload["parameters"]["closure_stride_updates"])
     horizons = np.asarray(depths) * stride
     rank_colors = plt.cm.viridis(np.linspace(0.12, 0.88, len(ranks)))
-    fig, axes = plt.subplots(2, 2, figsize=(12.0, 8.4))
+    fig, axes = plt.subplots(2, 3, figsize=(16.0, 8.4))
 
     for axis, correlation in zip(axes[0], (correlations[0], correlations[-1])):
         selected_rows = [
@@ -843,129 +860,37 @@ def _plot_hankel(payload: dict[str, Any], output: Path) -> None:
         axis.set(
             xlabel="history horizon [updates]",
             ylabel="held-out RMSE / persistence",
-            title=f"reciprocal visible state, rho={correlation:g}",
+            title=f"standardized visible score, noise corr.={correlation:g}",
         )
 
-    terminal_index = -1
-    for condition, linestyle in (
-        ("retarded_one_way", "--"),
-        ("retarded_reciprocal", "-"),
-    ):
-        for correlation, marker in (
-            (correlations[0], "o"),
-            (correlations[-1], "s"),
-        ):
-            values = []
-            for rank_index in range(len(ranks)):
-                values.append(
-                    np.median(
-                        [
-                            row["conditions"][condition]["hankel_audit"]["base"][
-                                terminal_index
-                            ]["rank_fits"][rank_index]["test_residual_ratio"]
-                            for row in payload["rows"]
-                            if row["noise_correlation"] == correlation
-                        ]
-                    )
-                )
-            axes[1, 0].plot(
-                ranks,
-                values,
-                marker=marker,
-                linestyle=linestyle,
-                label=f"{condition}, rho={correlation:g}",
-            )
-    axes[1, 0].axhline(1.0, color="#777777", linestyle=":")
-    axes[1, 0].set(
-        xlabel="retained rank",
-        ylabel="held-out RMSE / persistence",
-        title=f"control separation at {horizons[-1]:g} updates",
-    )
-
-    for layer, color in (("base", "#0072B2"), ("selected", "#D55E00")):
-        stable = []
-        entropy = []
-        for depth_index in range(len(depths)):
-            audits = [
-                row["conditions"]["retarded_reciprocal"]["hankel_audit"][layer][
-                    depth_index
-                ]
+    for condition in ("retarded_one_way", "retarded_reciprocal"):
+        medians = []
+        for correlation in correlations:
+            values = [
+                row["conditions"][condition]["final_distance_r"]
                 for row in payload["rows"]
+                if row["noise_correlation"] == correlation
             ]
-            stable.append(np.median([audit["stable_rank"] for audit in audits]))
-            entropy.append(np.median([audit["entropy_rank"] for audit in audits]))
-        axes[1, 1].plot(
-            horizons,
-            stable,
-            color=color,
-            marker="o",
-            label=f"{layer} stable rank",
-        )
-        axes[1, 1].plot(
-            horizons,
-            entropy,
-            color=color,
-            marker="s",
-            linestyle="--",
-            label=f"{layer} entropy rank",
-        )
-    axes[1, 1].set_xscale("log")
-    axes[1, 1].set_yscale("log")
-    axes[1, 1].set(
-        xlabel="history horizon [updates]",
-        ylabel="effective rank",
-        title="Hankel rank growth",
-    )
-
-    axes[0, 0].legend(fontsize=8)
-    axes[1, 0].legend(fontsize=7)
-    axes[1, 1].legend(fontsize=8)
-    for axis in axes.ravel():
-        axis.grid(alpha=0.25)
-    fig.suptitle("P3.2 long-horizon persistence / reduced-rank audit")
-    fig.tight_layout()
-    fig.savefig(output, dpi=180)
-    plt.close(fig)
-
-
-def _plot_hankel(payload: dict[str, Any], output: Path) -> None:
-    output.parent.mkdir(parents=True, exist_ok=True)
-    correlations = _correlations(payload["parameters"]["noise_correlations"])
-    depths = _integers(payload["parameters"]["hankel_depths"], "Hankel depths")
-    ranks = _integers(payload["parameters"]["hankel_ranks"], "Hankel ranks")
-    stride = int(payload["parameters"]["closure_stride_updates"])
-    horizons = np.asarray(depths) * stride
-    rank_colors = plt.cm.viridis(np.linspace(0.12, 0.88, len(ranks)))
-    fig, axes = plt.subplots(2, 2, figsize=(12.0, 8.4))
-
-    for axis, correlation in zip(axes[0], (correlations[0], correlations[-1])):
-        selected_rows = [
-            row for row in payload["rows"] if row["noise_correlation"] == correlation
-        ]
-        for rank_index, (rank, color) in enumerate(zip(ranks, rank_colors)):
-            values = [
-                [
-                    audit["rank_fits"][rank_index]["test_residual_ratio"]
-                    for audit in row["conditions"]["retarded_reciprocal"][
-                        "hankel_audit"
-                    ]["base"]
-                ]
-                for row in selected_rows
-            ]
-            axis.plot(
-                horizons,
-                np.median(values, axis=0),
-                marker="o",
-                color=color,
-                label=f"rank {rank}",
+            axes[0, 2].scatter(
+                [correlation] * len(values),
+                values,
+                color=COLORS[condition],
+                alpha=0.35,
             )
-        axis.axhline(1.0, color="#777777", linestyle="--", linewidth=1.0)
-        axis.set_xscale("log")
-        axis.set(
-            xlabel="history horizon [updates]",
-            ylabel="held-out RMSE / persistence",
-            title=f"reciprocal visible state, rho={correlation:g}",
+            medians.append(float(np.median(values)))
+        axes[0, 2].plot(
+            correlations,
+            medians,
+            color=COLORS[condition],
+            marker="D",
+            label=condition,
         )
+    axes[0, 2].set_yscale("log")
+    axes[0, 2].set(
+        xlabel="node-noise correlation",
+        ylabel="final memory-centre distance / R",
+        title="raw binding amplitude",
+    )
 
     for condition, linestyle in (
         ("retarded_one_way", "--"),
@@ -993,7 +918,7 @@ def _plot_hankel(payload: dict[str, Any], output: Path) -> None:
                 values,
                 marker=marker,
                 linestyle=linestyle,
-                label=f"{condition}, rho={correlation:g}",
+                label=f"{condition}, corr.={correlation:g}",
             )
     axes[1, 0].axhline(1.0, color="#777777", linestyle=":")
     axes[1, 0].set(
@@ -1037,12 +962,52 @@ def _plot_hankel(payload: dict[str, Any], output: Path) -> None:
         title="Hankel rank growth",
     )
 
+    seeds = sorted({int(row["future_seed"]) for row in payload["rows"]})
+    low = correlations[0]
+    expected = np.sqrt((1.0 - np.asarray(correlations)) / (1.0 - low))
+    for seed in seeds:
+        seed_rows = {
+            row["noise_correlation"]: row
+            for row in payload["rows"]
+            if row["future_seed"] == seed
+        }
+        distances = np.asarray(
+            [
+                seed_rows[correlation]["conditions"]["retarded_reciprocal"][
+                    "final_distance_r"
+                ]
+                for correlation in correlations
+            ]
+        )
+        axes[1, 2].plot(
+            correlations,
+            distances / distances[0],
+            color="#777777",
+            alpha=0.4,
+            marker="o",
+        )
+    axes[1, 2].plot(
+        correlations,
+        expected,
+        color="#D55E00",
+        linewidth=2.0,
+        marker="s",
+        label=r"expected $\sqrt{(1-\rho)/(1-\rho_0)}$",
+    )
+    axes[1, 2].set(
+        xlabel="node-noise correlation",
+        ylabel="paired distance / distance at corr.=0",
+        title="unstandardized scale audit",
+    )
+
     axes[0, 0].legend(fontsize=8)
+    axes[0, 2].legend(fontsize=7)
     axes[1, 0].legend(fontsize=7)
     axes[1, 1].legend(fontsize=8)
+    axes[1, 2].legend(fontsize=8)
     for axis in axes.ravel():
         axis.grid(alpha=0.25)
-    fig.suptitle("P3.2 long-horizon persistence / reduced-rank audit")
+    fig.suptitle("P3.2 long-horizon audit: standardized shape versus raw amplitude")
     fig.tight_layout()
     fig.savefig(output, dpi=180)
     plt.close(fig)
@@ -1197,8 +1162,8 @@ def _hankel_report_lines(payload: dict[str, Any]) -> list[str]:
         "",
         f"The median terminal-minus-initial prediction ratio is "
         f"{gate['median_terminal_minus_initial_ratio']:.4g}; the fractions of",
-        f"positive/negative pathwise changes are {gate['positive_delta_fraction']:.3g}/"
-        f"{gate['negative_delta_fraction']:.3g}. A material change required an",
+        f"positive/negative pathwise changes are {gate.get('positive_design_cell_fraction', gate.get('positive_delta_fraction')):.3g}/"
+        f"{gate.get('negative_design_cell_fraction', gate.get('negative_delta_fraction')):.3g}. A material change required an",
         f"absolute ratio shift of at least {gate['material_change_threshold']:.3g}",
         "with at least 80% sign agreement.",
         "",
@@ -1273,6 +1238,53 @@ def _hankel_report_lines(payload: dict[str, Any]) -> list[str]:
         for primary, control in zip(base_terminal, terminal_control)
         for rank_index in high_rank_indices
     ]
+    low_correlation = correlations[0]
+    high_correlation = correlations[-1]
+    paired_scale_rows = []
+    standardized_differences = []
+    seed_median_deltas = []
+    for seed in sorted({int(row["future_seed"]) for row in payload["rows"]}):
+        by_correlation = {
+            row["noise_correlation"]: row
+            for row in payload["rows"]
+            if row["future_seed"] == seed
+        }
+        low_row = by_correlation[low_correlation]
+        high_row = by_correlation[high_correlation]
+        paired_scale_rows.append(
+            (
+                high_row["noise"]["relative_half_noise_rms_r"]
+                / low_row["noise"]["relative_half_noise_rms_r"],
+                high_row["conditions"]["retarded_reciprocal"]["final_distance_r"]
+                / low_row["conditions"]["retarded_reciprocal"]["final_distance_r"],
+            )
+        )
+        seed_deltas = []
+        for correlation in correlations:
+            audits = by_correlation[correlation]["conditions"]["retarded_reciprocal"][
+                "hankel_audit"
+            ]["base"]
+            seed_deltas.extend(
+                audits[-1]["rank_fits"][rank_index]["test_residual_ratio"]
+                - audits[0]["rank_fits"][rank_index]["test_residual_ratio"]
+                for rank_index in range(len(ranks))
+            )
+        seed_median_deltas.append(float(np.median(seed_deltas)))
+        low_audits = low_row["conditions"]["retarded_reciprocal"]["hankel_audit"][
+            "base"
+        ]
+        high_audits = high_row["conditions"]["retarded_reciprocal"]["hankel_audit"][
+            "base"
+        ]
+        standardized_differences.extend(
+            abs(
+                low_audit["rank_fits"][rank_index]["test_residual_ratio"]
+                - high_audit["rank_fits"][rank_index]["test_residual_ratio"]
+            )
+            for low_audit, high_audit in zip(low_audits, high_audits)
+            for rank_index in range(len(ranks))
+        )
+    expected_scale = math.sqrt((1.0 - high_correlation) / (1.0 - low_correlation))
     lines.extend(
         [
             "",
@@ -1288,12 +1300,30 @@ def _hankel_report_lines(payload: dict[str, Any]) -> list[str]:
             f"{np.median([row['stable_rank'] for row in selected_initial]):.3g}/"
             f"{np.median([row['entropy_rank'] for row in selected_initial]):.3g}.",
             "",
-            "All registered path/rank deltas are positive. The high-rank terminal",
-            "reciprocal-minus-one-way ratio difference spans "
+            "All 45 paired design-cell deltas are positive: three independent",
+            "future-noise seeds times three rescalings of the same innovations times",
+            "five nested retained ranks. These are robustness cells, not 45",
+            "independent realizations. The three seed-level median deltas are also",
+            f"positive ({min(seed_median_deltas):.4g}..{max(seed_median_deltas):.4g}).",
+            "The high-rank terminal reciprocal-minus-one-way ratio difference spans "
             f"{min(high_rank_control_differences):.4g}.."
             f"{max(high_rank_control_differences):.4g}; therefore the degradation is",
             "not separated from the one-way mediator control. Field/momentum readouts",
             "also do not reverse the long-history degradation.",
+            "",
+            "The apparent noise-correlation collapse is expected for this",
+            "standardized score. The same common and relative innovations are reused",
+            "within each seed; changing the correlation rescales relative forcing by",
+            "sqrt(1-rho). From the lowest to highest correlation the expected",
+            f"amplitude factor is {expected_scale:.4g}; measured relative-noise factors",
+            f"span {min(row[0] for row in paired_scale_rows):.4g}.."
+            f"{max(row[0] for row in paired_scale_rows):.4g}, and final-distance factors",
+            f"span {min(row[1] for row in paired_scale_rows):.4g}.."
+            f"{max(row[1] for row in paired_scale_rows):.4g}. The maximum absolute",
+            "difference between paired standardized reciprocal curves is",
+            f"{max(standardized_differences):.4g}. Correlation therefore changes raw",
+            "amplitude while normalized linear prediction geometry remains nearly",
+            "scale-invariant.",
             "",
             "The supported interpretation is fixed-rank information dilution while",
             "the sampled stochastic history adds effective directions. This is not",
@@ -1387,7 +1417,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "at 0.5-memory-time cadence with one common chronological 60/40 holdout.",
         "Only held-out visible/memory prediction is scored against persistence.",
         "",
-        "Node-noise marginals remain fixed while rho = 0, 0.9, 0.99 changes only",
+        "Node-noise marginals remain fixed while node-noise correlation rho =",
+        "0, 0.9, 0.99 changes only",
         "relative noise. Channel-off, instantaneous reciprocal, and retarded",
         "one-way remain controls. All paths continue one formation checkpoint.",
         "",
@@ -1476,7 +1507,10 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         ]
     else:
         next_measurement = [
-            *next_measurement,
+            "The next measurement step is a preregistered reduced-rank/Hankel audit",
+            "of the already chosen observables, not a gain, lambda, epsilon, or",
+            "kernel sweep. Any retained pole must remain stable across rank and",
+            "time segments and separate from the one-way mediator control.",
         ]
     lines.extend(
         [

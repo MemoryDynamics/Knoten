@@ -217,6 +217,38 @@ def test_hankel_audit_rejects_rank_beyond_data_support() -> None:
         )
 
 
+def test_hankel_audit_standardized_scores_are_scale_invariant() -> None:
+    rng = np.random.default_rng(20260804)
+    values = rng.standard_normal((500, 3, 2))
+
+    reference = fit_panel_hankel_audit(
+        values,
+        delay_depth=20,
+        common_max_depth=40,
+        retained_ranks=(2, 4, 8),
+    )
+    rescaled = fit_panel_hankel_audit(
+        0.1 * values,
+        delay_depth=20,
+        common_max_depth=40,
+        retained_ranks=(2, 4, 8),
+    )
+
+    np.testing.assert_allclose(reference.singular_values, rescaled.singular_values)
+    assert reference.stable_rank == pytest.approx(rescaled.stable_rank)
+    assert reference.entropy_rank == pytest.approx(rescaled.entropy_rank)
+    for expected, actual in zip(reference.rank_fits, rescaled.rank_fits):
+        assert expected.test_score_rmse == pytest.approx(actual.test_score_rmse)
+        assert expected.test_persistence_rmse == pytest.approx(
+            actual.test_persistence_rmse
+        )
+        assert expected.test_residual_ratio == pytest.approx(actual.test_residual_ratio)
+        np.testing.assert_allclose(
+            np.sort_complex(expected.eigenvalues),
+            np.sort_complex(actual.eigenvalues),
+        )
+
+
 def test_fit_rejects_incompatible_traces() -> None:
     with pytest.raises(ValueError, match="shape"):
         fit_isotropic_relative_mode(np.zeros((10, 2)), np.zeros((10, 3)))

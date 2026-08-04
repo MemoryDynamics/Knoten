@@ -298,8 +298,9 @@ die Closure-Kurven bleiben nahezu unveraendert. Das ist staerkere Bindung bei
 kleinerer relativer Diffusion, kein Rausch-Unmasking einer Oszillation.
 
 Der gemeinsame-Fenster-Langhorizont-Audit ist abgeschlossen. Bei festen
-Hankelraengen `{2,4,8,16,32}` verschlechtern sich alle 45
-Seed-/Rausch-/Rangpfade von 1000 auf 12500 Updates Historie; der mediane Anstieg
+Hankelraengen `{2,4,8,16,32}` verschlechtern sich alle 45 gepaarten
+Designzellen aus drei unabhaengigen Seeds, drei skalierten
+Rauschkorrelationen und fuenf verschachtelten Raengen von 1000 auf 12500 Updates Historie; der mediane Anstieg
 von RMSE/Persistenz betraegt `+0.1203`. Der sichtbare Stable-/Entropy-Rank
 waechst zugleich von median `1.67/6.62` auf `5.87/49.4`, ohne Plateau. Das
 augmentierte Feld-/Impulsmemory kehrt den Trend nicht um.

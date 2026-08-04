@@ -10,7 +10,8 @@ ladder and the field/momentum-augmented ladder use depths 1,2,5,10,20
 at 0.5-memory-time cadence with one common chronological 60/40 holdout.
 Only held-out visible/memory prediction is scored against persistence.
 
-Node-noise marginals remain fixed while rho = 0, 0.9, 0.99 changes only
+Node-noise marginals remain fixed while node-noise correlation rho =
+0, 0.9, 0.99 changes only
 relative noise. Channel-off, instantaneous reciprocal, and retarded
 one-way remain controls. All paths continue one formation checkpoint.
 
@@ -109,10 +110,26 @@ with at least 80% sign agreement.
 
 At the terminal horizon, median stable/entropy ranks are 5.87/49.4 for the visible state and 5.03/29 for the field/momentum-augmented state. At the initial horizon these were 1.67/6.62 and 2/6.33.
 
-All registered path/rank deltas are positive. The high-rank terminal
-reciprocal-minus-one-way ratio difference spans -0.00366..0.002435; therefore the degradation is
+All 45 paired design-cell deltas are positive: three independent
+future-noise seeds times three rescalings of the same innovations times
+five nested retained ranks. These are robustness cells, not 45
+independent realizations. The three seed-level median deltas are also
+positive (0.1106..0.1344).
+The high-rank terminal reciprocal-minus-one-way ratio difference spans -0.00366..0.002435; therefore the degradation is
 not separated from the one-way mediator control. Field/momentum readouts
 also do not reverse the long-history degradation.
+
+The apparent noise-correlation collapse is expected for this
+standardized score. The same common and relative innovations are reused
+within each seed; changing the correlation rescales relative forcing by
+sqrt(1-rho). From the lowest to highest correlation the expected
+amplitude factor is 0.1; measured relative-noise factors
+span 0.1..0.1, and final-distance factors
+span 0.1..0.1. The maximum absolute
+difference between paired standardized reciprocal curves is
+0.01232. Correlation therefore changes raw
+amplitude while normalized linear prediction geometry remains nearly
+scale-invariant.
 
 The supported interpretation is fixed-rank information dilution while
 the sampled stochastic history adds effective directions. This is not

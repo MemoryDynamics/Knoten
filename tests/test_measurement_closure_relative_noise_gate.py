@@ -97,3 +97,18 @@ def test_main_persists_summary_before_plot_failure(tmp_path, monkeypatch) -> Non
 
     assert json.loads(args.summary_json.read_text(encoding="utf-8")) == payload
     assert not args.report.exists()
+
+
+def test_non_hankel_report_keeps_registered_next_step() -> None:
+    summary = (
+        MODULE.ROOT
+        / "reports/response/measurement_closure_relative_noise_gate_2026-08-04.json"
+    )
+    payload = json.loads(summary.read_text(encoding="utf-8"))
+
+    report = MODULE._report(payload, summary.with_suffix(".md"), Path("figure.png"))
+
+    assert (
+        "The next measurement step is a preregistered reduced-rank/Hankel audit"
+        in report
+    )
