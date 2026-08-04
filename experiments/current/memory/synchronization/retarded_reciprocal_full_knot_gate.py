@@ -892,13 +892,13 @@ def main() -> None:
     report = _resolve(args.report)
     summary = _resolve(args.summary_json)
     figure = _resolve(args.figure)
-    _plot(payload, traces, figure)
-    report.parent.mkdir(parents=True, exist_ok=True)
     summary.parent.mkdir(parents=True, exist_ok=True)
-    report.write_text(_report(payload, report, figure), encoding="utf-8")
     summary.write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+    _plot(payload, traces, figure)
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(_report(payload, report, figure), encoding="utf-8")
     print(json.dumps(payload["gate"], indent=2, sort_keys=True))
 
 

@@ -80,12 +80,7 @@ def reciprocal_scalar_memory_modes(
 
     q = 1.0 - lambda_value
     common_relative = q * (1.0 - self_gain - cross_gain)
-    trace = (
-        2.0
-        - lambda_value
-        - q * self_gain
-        - (1.0 + lambda_value) * cross_gain
-    )
+    trace = 2.0 - lambda_value - q * self_gain - (1.0 + lambda_value) * cross_gain
     determinant = common_relative
     discriminant = trace * trace - 4.0 * determinant
     root = cmath.sqrt(discriminant)
@@ -110,7 +105,9 @@ def reciprocal_complex_window_exists(
     r"""Return whether some positive cross gain can yield a complex pair.
 
     Minimizing the relative discriminant over the cross gain gives the exact
-    condition ``g < lambda/(1+lambda)``. This only establishes that a complex
+    condition ``g < lambda/(1+lambda)`` for ``0 < lambda < 1``. At
+    ``lambda=1`` the determinant vanishes and the minimum discriminant is
+    zero, so no non-real pair exists. This only establishes that a complex
     window exists; stability must still be checked at the selected cross gain.
     """
 
@@ -118,4 +115,4 @@ def reciprocal_complex_window_exists(
         raise ValueError("lambda_value must lie in (0, 1]")
     if not math.isfinite(self_gain):
         raise ValueError("self_gain must be finite")
-    return bool(self_gain < lambda_value / (1.0 + lambda_value))
+    return bool(lambda_value < 1.0 and self_gain < lambda_value / (1.0 + lambda_value))

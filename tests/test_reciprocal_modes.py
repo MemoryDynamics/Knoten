@@ -57,6 +57,17 @@ def test_exact_window_threshold(lambda_value: float) -> None:
     )
 
 
+def test_lambda_one_has_no_nonreal_window() -> None:
+    assert not reciprocal_complex_window_exists(1.0, self_gain=0.0)
+    result = reciprocal_scalar_memory_modes(
+        1.0,
+        self_gain=0.0,
+        cross_gain=0.5,
+    )
+    assert result.relative_discriminant == pytest.approx(0.0)
+    assert not result.relative_is_complex
+
+
 @pytest.mark.parametrize(
     ("lambda_value", "self_gain", "cross_gain"),
     [(0.0, 0.0, 0.0), (1.1, 0.0, 0.0), (0.1, np.nan, 0.0), (0.1, 0.0, np.inf)],

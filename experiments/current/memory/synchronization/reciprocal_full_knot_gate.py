@@ -95,9 +95,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--figure",
         type=Path,
-        default=Path(
-            "figures/draft/response/reciprocal_full_knot_gate_2026-08-04.png"
-        ),
+        default=Path("figures/draft/response/reciprocal_full_knot_gate_2026-08-04.png"),
     )
     return parser.parse_args()
 
@@ -153,7 +151,11 @@ def _jsonable(value: Any) -> Any:
 
 def parse_seeds(text: str) -> list[int]:
     values = [int(part.strip()) for part in text.split(",") if part.strip()]
-    if not values or len(values) != len(set(values)) or any(value < 0 for value in values):
+    if (
+        not values
+        or len(values) != len(set(values))
+        or any(value < 0 for value in values)
+    ):
         raise ValueError("future seeds must be unique non-negative integers")
     return values
 
@@ -346,7 +348,9 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
     curvature = two_scale_local_curvature(**effective)
     retained_mass = float(np.sum(checkpoint.state.weights))
     if curvature <= 0.0:
-        raise SystemExit("registered positive cross gain requires positive local curvature")
+        raise SystemExit(
+            "registered positive cross gain requires positive local curvature"
+        )
     cross_eta = args.cross_gain / (retained_mass * curvature)
     self_gain = config.eta * retained_mass * curvature
     analytic = reciprocal_scalar_memory_modes(
@@ -509,8 +513,7 @@ def run_gate(args: argparse.Namespace) -> tuple[dict[str, Any], list[dict[str, A
         and candidate_counts["one_way"] <= args.max_control_complex_seeds
     )
     reciprocal_candidate = bool(
-        candidate_counts["reciprocal"] >= args.min_complex_seeds
-        and controls_bounded
+        candidate_counts["reciprocal"] >= args.min_complex_seeds and controls_bounded
     )
     operational = bool(
         zero_cross_error == 0.0
@@ -657,9 +660,7 @@ def _plot(payload: dict[str, Any], traces: list[dict[str, Any]], output: Path) -
     width = 0.24
     for condition_index, condition in enumerate(conditions):
         counts = [
-            row["conditions"][condition]["mode_summary"][
-                "meaningful_complex_segments"
-            ]
+            row["conditions"][condition]["mode_summary"]["meaningful_complex_segments"]
             for row in payload["rows"]
         ]
         axes[1, 1].bar(
@@ -834,11 +835,13 @@ def main() -> None:
     report = _resolve(args.report)
     summary = _resolve(args.summary_json)
     figure = _resolve(args.figure)
+    summary.parent.mkdir(parents=True, exist_ok=True)
+    summary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     _plot(payload, traces, figure)
     report.parent.mkdir(parents=True, exist_ok=True)
-    summary.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(_report(payload, report, figure), encoding="utf-8")
-    summary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(payload["gate"], indent=2, sort_keys=True))
 
 

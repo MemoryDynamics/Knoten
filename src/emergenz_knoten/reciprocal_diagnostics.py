@@ -55,7 +55,8 @@ def fit_isotropic_relative_mode(
     Each ambient coordinate supplies another realization of
     ``(x_-, m_-)``. The fit includes an affine intercept but constrains the
     same transition matrix across coordinates, as required by an isotropic
-    local reduction.
+    local reduction. Each coordinate has its own intercept because a fixed
+    separation vector gives different coordinate-wise equilibria.
     """
 
     positions = np.asarray(relative_positions, dtype=float)
@@ -75,20 +76,29 @@ def fit_isotropic_relative_mode(
         raise ValueError("relative traces are too short for the requested lag")
 
     state = np.stack((positions, centers), axis=-1)
-    predictors = state[:-lag].reshape(-1, 2)
-    responses = state[lag:].reshape(-1, 2)
-    predictor_mean = np.mean(predictors, axis=0)
-    response_mean = np.mean(responses, axis=0)
-    centered_predictors = predictors - predictor_mean
-    centered_responses = responses - response_mean
+    predictors_by_coordinate = state[:-lag]
+    responses_by_coordinate = state[lag:]
+    predictor_mean = np.mean(predictors_by_coordinate, axis=0)
+    response_mean = np.mean(responses_by_coordinate, axis=0)
+    centered_predictors = (
+        predictors_by_coordinate - predictor_mean[None, :, :]
+    ).reshape(-1, 2)
+    centered_responses = (responses_by_coordinate - response_mean[None, :, :]).reshape(
+        -1, 2
+    )
     coefficients, _, _, _ = np.linalg.lstsq(
         centered_predictors,
         centered_responses,
         rcond=None,
     )
     transition = coefficients.T
-    intercept = response_mean - transition @ predictor_mean
-    residual = responses - (predictors @ transition.T + intercept)
+    intercept = response_mean - predictor_mean @ transition.T
+    predictors = predictors_by_coordinate.reshape(-1, 2)
+    responses = responses_by_coordinate.reshape(-1, 2)
+    repeated_intercept = np.broadcast_to(
+        intercept[None, :, :], responses_by_coordinate.shape
+    ).reshape(-1, 2)
+    residual = responses - (predictors @ transition.T + repeated_intercept)
     response_scale = float(np.sqrt(np.mean(centered_responses * centered_responses)))
     residual_scale = float(np.sqrt(np.mean(residual * residual)))
     residual_ratio = residual_scale / max(response_scale, np.finfo(float).tiny)
@@ -134,10 +144,17 @@ def relative_mode_phase_coherence(
         return 0.0
     index = int(candidates[0])
     state = np.stack((positions, centers), axis=-1)
-    equilibrium, _, _, _ = np.linalg.lstsq(
-        np.eye(2) - fit.transition, fit.intercept, rcond=None
-    )
-    state = state - equilibrium[None, None, :]
+    intercept = np.asarray(fit.intercept, dtype=float)
+    if intercept.shape == (2,):
+        intercept = np.broadcast_to(intercept, (positions.shape[1], 2))
+    if intercept.shape != (positions.shape[1], 2):
+        raise ValueError("fit intercepts must match the ambient dimension")
+    equilibrium = np.linalg.lstsq(
+        np.eye(2) - fit.transition,
+        intercept.T,
+        rcond=None,
+    )[0].T
+    state = state - equilibrium[None, :, :]
     modal = np.einsum("tds,s->td", state, left_vectors[:, index])
     earlier = modal[:-lag]
     later = modal[lag:]

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +63,35 @@ def test_mode_gate_accepts_a_stable_repeated_complex_mode() -> None:
     assert len(rows) == 4
     assert summary["meaningful_complex_segments"] == 4
     assert summary["segment_identity_pass"]
+
+
+def test_main_persists_summary_before_plot_failure(tmp_path, monkeypatch) -> None:
+    report = tmp_path / "report.md"
+    summary = tmp_path / "summary.json"
+    figure = tmp_path / "figure.png"
+    args = SimpleNamespace(
+        report=report,
+        summary_json=summary,
+        figure=figure,
+    )
+    payload = {
+        "gate": {"classification": "test"},
+        "value": 17,
+    }
+
+    monkeypatch.setattr(MODULE, "parse_args", lambda: args)
+    monkeypatch.setattr(MODULE, "run_gate", lambda _args: (payload, []))
+
+    def fail_plot(*_args) -> None:
+        raise PermissionError("plot destination is unavailable")
+
+    monkeypatch.setattr(MODULE, "_plot", fail_plot)
+
+    with pytest.raises(PermissionError, match="plot destination"):
+        MODULE.main()
+
+    assert json.loads(summary.read_text(encoding="utf-8")) == payload
+    assert not report.exists()
 
 
 def test_registered_mediator_defaults_match_inherited_architecture(monkeypatch) -> None:
