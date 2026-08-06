@@ -599,9 +599,13 @@ correlation, and fewer than 6/12 matches in the retarded one-way arm.
 Seeds 1 and 2 contain a recurring pole near `omega=0.103` per memory time, but
 the same pole matches 6..8/12 one-way cells. Seed 3 reaches only 9/12 reciprocal
 cells. Four cross-correlation candidates survive identity matching and zero
-survive the control gate. P3.2 therefore closes without a new 500,000-update
-confirmation. Such a run remains the minimum confirmation horizon for a later
-mechanism that first passes its stored-data or analytic control gate.
+survive the control gate. P3.2 therefore closed without authorizing a 500,000-update confirmation. A
+later user-requested two-path accumulation control was nevertheless run. It
+found large off-subtracted path divergence in the reciprocal arm, but nearly
+the same divergence in the one-way control; the registered accumulation and
+complex-mode gates both fail. This does not reopen P3.2. A 500,000-update run
+remains the minimum confirmation horizon for a later mechanism that first
+passes its stored-data or analytic control gate.
 
 Preregistration and result:
 `reports/project/meta/hankel_pole_identity_preregistration_2026-08-04.md` and

@@ -371,6 +371,8 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         f"- reciprocal late-minus-early deltas: {gate['reciprocal_late_minus_early_r']};",
         f"- one-way late-minus-early deltas: {gate['one_way_late_minus_early_r']}.",
         "",
+        "The large off-subtracted path differences are not reciprocal-specific: the one-way control accumulates nearly the same changes in both future-noise paths. Meanwhile, the actual late pair-distance medians remain bounded near one knot radius in both retarded arms. The supported reading is sensitive path divergence after a persistent perturbation, not a control-separated reciprocal accumulation law.",
+        "",
         f"![P3.2 500k accumulation control]({(Path('../..') / figure.relative_to(ROOT)).as_posix()})",
         "",
         "## Fixed-window diagnostics",

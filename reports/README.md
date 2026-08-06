@@ -223,6 +223,12 @@ identifizierten physikalischen Moden.
     erreicht nur 9/12 reziprok. Vier korrelationsuebergreifende Kandidaten,
     null Ueberlebende des Kontrollgates.
 
+- [P3.2-Code-/Artefaktreview](project/meta/p32_relevant_code_review_2026-08-06.md)
+- [Vorregistrierung der 500k-Akkumulationskontrolle](project/meta/p32_accumulation_control_preregistration_2026-08-06.md)
+- [P3.2-500k-Akkumulationskontrolle](response/p32_accumulation_control_N500k_2026-08-06.md)
+  - **kein kontrollgetrennter Akkumulationseffekt:** Die reziproken
+    late-minus-early Abweichungen `19.14R/10.51R` werden durch die
+    Einwegkontrolle `19.03R/10.31R` erklaert; beide Shapes bleiben gueltig.
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
     `2 x 2`-Fits ist behoben. Saubere Reproduktionen bleiben bei `0/60` und
@@ -235,8 +241,10 @@ identifizierten physikalischen Moden.
 Entscheidung: Direkter und fest retardierter Skalararm zeigen kontrollierte
 Bindung/Relaxation. Der sichtbare Delayzustand bleibt ohne komplexen Modenpass;
 das augmentierte Spektrum ist nicht identifizierbar. Weitere Gain-Suche ist
-nicht priorisiert. Langhorizont und Pol-Identity sind negativ; P3.2 ist ohne
-500k-Bestaetigungslauf geschlossen. P3.2c erzwingt nun echte Source-Lokalitaet,
+nicht priorisiert. Langhorizont und Pol-Identity sind negativ. Ein spaeter
+ausgefuehrter 500k-Akkumulationskontrolllauf bleibt ebenfalls negativ, weil
+der Einwegarm dieselbe sensitive Pfaddivergenz zeigt. P3.2 bleibt geschlossen.
+P3.2c erzwingt nun echte Source-Lokalitaet,
 bleibt aber ebenfalls negativ: Der Offset laedt nur `3.54e-5` normiertes
 Knot-Residuum in den stabilen Telegraphpol, der Schrittstrom noch weniger.
 Aktiv ist P3.2d, ein gespeichertes Shape-Multipol-Eligibility-Gate ohne neue

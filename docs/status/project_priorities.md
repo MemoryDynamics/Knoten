@@ -449,8 +449,9 @@ Prioritaetsfolge:
     rang-/tiefenstabilen Kandidaten nahe `omega=0.103`, doch derselbe Pol trifft
     im Einwegarm noch `6..8/12` Zellen; Seed 3 erreicht reziprok nur `9/12`.
     Vier korrelationsuebergreifende Kandidaten, null kontrollgetrennte
-    Ueberlebende. P3.2 ist geschlossen; kein 500k-Bestaetigungslauf desselben
-    Mechanismus.
+    Ueberlebende. P3.2 ist geschlossen. Ein spaeter auf Nutzerwunsch
+    ausgefuehrter 500k-Akkumulationskontrolllauf aendert diese Entscheidung
+    nicht: Die grossen Pfaddifferenzen treten im Einwegarm nahezu gleich auf.
 11. **P3.2c abgeschlossen, source-lokaler Modus null:** Die exakte
     finite-grid Telegraphregel ist mit emitterlokalem `d=x-m` stabil und
     besitzt einen Pol bei `omega=0.08294` pro Memory-Time. Sein normiertes
@@ -464,12 +465,18 @@ Prioritaetsfolge:
     Seed-/Segmentpersistenz und Kontrolltrennung geprueft. Erst ein Pass erlaubt
     eine Tensor-Mediatorregel. Bei Misserfolg wird der skalare Fernmoduspfad
     geschlossen und Vektormemory als explizite Modellerweiterung formuliert.
-13. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+13. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
+    Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
+    shape-gueltig. Die kontrollsubtrahierte Pfaddifferenz waechst stark, aber
+    nahezu identisch im Einwegarm (`19.14R` vs. `19.03R` und `10.51R` vs.
+    `10.31R`). Das ist sensitive Pfaddivergenz nach persistenter Stoerung,
+    keine kontrollgetrennte reziproke Akkumulation.
+14. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
     `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
-14. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+15. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
