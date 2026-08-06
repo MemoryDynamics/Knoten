@@ -1,6 +1,6 @@
 # P3.2d shape-multipole source eligibility
 
-Date: 2026-08-06T21:12:21+00:00.
+Date: 2026-08-06T21:26:37+00:00.
 
 ## Result
 
@@ -8,8 +8,6 @@ Classification: **no control-separated autonomous scalar shape-multipole source*
 
 - `shape`: baseline 0/5, eta-zero 2/5, shape-bounded 5/5, cross-seed frequency range inf; pass=False.
 - `shape_rate`: baseline 0/5, eta-zero 0/5, shape-bounded 5/5, cross-seed frequency range inf; pass=False.
-
-All baseline `shape` peaks lie near the lower frequency boundary (`0.0586..0.0684` cycles per memory time), but their segment-frequency ranges are `0.333..1.143`, above the registered `0.25` limit. The eta-zero control has still stronger low-frequency prominence and yields two single-path candidates. The `shape_rate` source has no baseline candidate. The supported reading is colored slow shape fluctuation or memory drift, not a persistent knot-specific shape mode.
 
 ![P3.2d shape multipole](../../figures/draft/response/p32d_shape_multipole_gate_2026-08-06.png)
 
@@ -48,8 +46,8 @@ The five future-noise paths still branch from one formation state. They are not 
 
 - preregistration: `reports/project/meta/p32d_shape_multipole_preregistration_2026-08-06.md`;
 - checkpoint: `data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz` at N=100000000;
-- git revision: `d3da0a3e94bd7cd659acb496309bb0f854e3e67c`;
+- git revision: `380b33008d742d46e3b365bb0dfbb2e0d20753ad`;
 - git status at start: `clean`;
-- runtime: `52.460 s`;
+- runtime: `51.454 s`;
 - command: `python experiments/current/memory/synchronization/shape_multipole_eligibility_gate.py`;
 - machine-readable summary: `reports/response/p32d_shape_multipole_gate_2026-08-06.json`.
