@@ -515,6 +515,10 @@ def _plot(payload: dict[str, Any], output: Path) -> None:
     plt.close(fig)
 
 
+def _format_metric(value: float | None, spec: str = ".4g") -> str:
+    return "inf" if value is None else format(float(value), spec)
+
+
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     gate = payload["gate"]
     lines = [
@@ -551,7 +555,7 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
                 item = row["conditions"][condition]["sources"][source]
                 full = item["full"]
                 lines.append(
-                    f"| {row['future_seed']} | {condition} | {source} | {full['peak_frequency_cycles_per_memory_time']:.5g} | {full['peak_to_background']:.4g} | {item['shuffle_peak_ratio_q99']:.4g} | {full['peak_band_power_fraction']:.4g} | {item['passing_segment_count']}/4 | {item['segment_frequency_relative_range']:.4g} | {item['candidate_pass']} |"
+                    f"| {row['future_seed']} | {condition} | {source} | {full['peak_frequency_cycles_per_memory_time']:.5g} | {full['peak_to_background']:.4g} | {item['shuffle_peak_ratio_q99']:.4g} | {full['peak_band_power_fraction']:.4g} | {item['passing_segment_count']}/4 | {_format_metric(item['segment_frequency_relative_range'])} | {item['candidate_pass']} |"
                 )
     lines.extend(
         [

@@ -82,3 +82,7 @@ def test_registered_defaults_freeze_p32d_design(monkeypatch: pytest.MonkeyPatch)
     assert args.shuffle_count == 64
     assert args.min_baseline_seeds == 4
     assert args.max_control_seeds == 1
+
+def test_report_metric_formats_nonfinite_json_value() -> None:
+    assert GATE._format_metric(None) == "inf"
+    assert GATE._format_metric(0.125, ".3g") == "0.125"
