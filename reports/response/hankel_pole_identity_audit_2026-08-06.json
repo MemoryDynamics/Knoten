@@ -1,0 +1,995 @@
+{
+  "classification": "no control-separated pole identity",
+  "control_separated_cross_correlation_candidate_count": 0,
+  "correlations": [
+    {
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "control_separated": false,
+          "control_separated_seed_count": 0,
+          "damping_relative_range": 0.04507153705668084,
+          "frequency_relative_range": 0.04165098340955787,
+          "median_damping": 0.005082051408864896,
+          "median_frequency": 0.10101110994430243,
+          "seeds": [
+            1,
+            2
+          ]
+        },
+        {
+          "control_separated": false,
+          "control_separated_seed_count": 0,
+          "damping_relative_range": 0.07135475274389115,
+          "frequency_relative_range": 0.008301999744514212,
+          "median_damping": 0.005739131801045154,
+          "median_frequency": 0.10354452930445372,
+          "seeds": [
+            1,
+            2
+          ]
+        }
+      ],
+      "control_separated_candidate_count": 0,
+      "noise_correlation": 0.0
+    },
+    {
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "control_separated": false,
+          "control_separated_seed_count": 0,
+          "damping_relative_range": 0.0372815030643792,
+          "frequency_relative_range": 0.04138218471281944,
+          "median_damping": 0.0049353209110933145,
+          "median_frequency": 0.10098524857449143,
+          "seeds": [
+            1,
+            2
+          ]
+        },
+        {
+          "control_separated": false,
+          "control_separated_seed_count": 0,
+          "damping_relative_range": 0.053893328397034354,
+          "frequency_relative_range": 0.006026854185647878,
+          "median_damping": 0.005350616544409693,
+          "median_frequency": 0.10338629072889025,
+          "seeds": [
+            1,
+            2
+          ]
+        }
+      ],
+      "control_separated_candidate_count": 0,
+      "noise_correlation": 0.9
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "control_separated": false,
+          "control_separated_seed_count": 0,
+          "damping_relative_range": 0.027570968135719656,
+          "frequency_relative_range": 0.010545314733880115,
+          "median_damping": 0.004929860189650054,
+          "median_frequency": 0.10339083304306407,
+          "seeds": [
+            1,
+            2
+          ]
+        }
+      ],
+      "control_separated_candidate_count": 0,
+      "noise_correlation": 0.99
+    }
+  ],
+  "created_utc": "2026-08-06T19:43:43+00:00",
+  "cross_correlation_candidate_count": 4,
+  "pass": false,
+  "registered": {
+    "control_matching_cells_max": 5,
+    "depths": [
+      100,
+      150,
+      200,
+      250
+    ],
+    "matching_cells_required": 10,
+    "ranks": [
+      8,
+      16,
+      32
+    ],
+    "relative_tolerance": 0.25
+  },
+  "rows": [
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.003375441664722253,
+        "anchor_frequency": 0.10458442971200338,
+        "control_identity_pass": false,
+        "control_matching_cells": 7,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.007262419411566886,
+            "damping_error": 0.07773955493689265,
+            "depth": 100,
+            "frequency": 0.12167742400914458,
+            "frequency_error": 0.16343727593304838,
+            "rank": 8
+          },
+          {
+            "damping": 0.001746117551377983,
+            "damping_error": 0.032586482266885396,
+            "depth": 150,
+            "frequency": 0.09824281007280776,
+            "frequency_error": 0.06063636486481485,
+            "rank": 8
+          },
+          {
+            "damping": 0.011696066695819827,
+            "damping_error": 0.16641250062195148,
+            "depth": 150,
+            "frequency": 0.09439384369458569,
+            "frequency_error": 0.09743884482116269,
+            "rank": 16
+          },
+          {
+            "damping": 0.011974778182333586,
+            "damping_error": 0.17198673035222664,
+            "depth": 150,
+            "frequency": 0.10004118911410964,
+            "frequency_error": 0.04344088895837141,
+            "rank": 32
+          },
+          {
+            "damping": 0.001672358560012485,
+            "damping_error": 0.03406166209419535,
+            "depth": 200,
+            "frequency": 0.11623801259319065,
+            "frequency_error": 0.11142751280738461,
+            "rank": 8
+          },
+          {
+            "damping": 0.004535084300173496,
+            "damping_error": 0.02319285270902487,
+            "depth": 200,
+            "frequency": 0.12059959314705368,
+            "frequency_error": 0.15313143150612032,
+            "rank": 16
+          },
+          {
+            "damping": 0.007925138037131602,
+            "damping_error": 0.09099392744818698,
+            "depth": 200,
+            "frequency": 0.10153062046664245,
+            "frequency_error": 0.02919946356996235,
+            "rank": 32
+          },
+          {
+            "damping": 0.0006510735844532942,
+            "damping_error": 0.05448736160537917,
+            "depth": 250,
+            "frequency": 0.1028314492892265,
+            "frequency_error": 0.016761390080761617,
+            "rank": 8
+          },
+          {
+            "damping": 0.00203675285584943,
+            "damping_error": 0.02677377617745645,
+            "depth": 250,
+            "frequency": 0.10339798266384953,
+            "frequency_error": 0.011344394681129844,
+            "rank": 16
+          },
+          {
+            "damping": 0.003375441664722253,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.10458442971200338,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 10,
+        "median_damping": 0.003955262982447874,
+        "median_error": 0.10121072012778579,
+        "median_frequency": 0.10311471597653801
+      },
+      "future_seed": 1,
+      "identity_track_count": 1,
+      "noise_correlation": 0.0
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.003445628103120145,
+        "anchor_frequency": 0.10456775595333613,
+        "control_identity_pass": false,
+        "control_matching_cells": 7,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.007265937923981822,
+            "damping_error": 0.07640619641723354,
+            "depth": 100,
+            "frequency": 0.12165629738448647,
+            "frequency_error": 0.16342075313135898,
+            "rank": 8
+          },
+          {
+            "damping": 0.0017813189821869703,
+            "damping_error": 0.03328618241866349,
+            "depth": 150,
+            "frequency": 0.09821970483718241,
+            "frequency_error": 0.0607075389375915,
+            "rank": 8
+          },
+          {
+            "damping": 0.01175534021088616,
+            "damping_error": 0.1661942421553203,
+            "depth": 150,
+            "frequency": 0.09433797122793047,
+            "frequency_error": 0.09782924604378762,
+            "rank": 16
+          },
+          {
+            "damping": 0.01204062523934832,
+            "damping_error": 0.1718999427245635,
+            "depth": 150,
+            "frequency": 0.10000368048176027,
+            "frequency_error": 0.043647063379772665,
+            "rank": 32
+          },
+          {
+            "damping": 0.001709514713921979,
+            "damping_error": 0.03472226778396332,
+            "depth": 200,
+            "frequency": 0.11623844268409941,
+            "frequency_error": 0.11160884753012566,
+            "rank": 8
+          },
+          {
+            "damping": 0.004560938565847525,
+            "damping_error": 0.022306209254547595,
+            "depth": 200,
+            "frequency": 0.1205996155903604,
+            "frequency_error": 0.15331551768385057,
+            "rank": 16
+          },
+          {
+            "damping": 0.008063036504603152,
+            "damping_error": 0.09234816802966013,
+            "depth": 200,
+            "frequency": 0.10149463186254833,
+            "frequency_error": 0.029388830837674292,
+            "rank": 32
+          },
+          {
+            "damping": 0.000703121190516634,
+            "damping_error": 0.05485013825207022,
+            "depth": 250,
+            "frequency": 0.1027774922382242,
+            "frequency_error": 0.017120609491809713,
+            "rank": 8
+          },
+          {
+            "damping": 0.0020972099329550735,
+            "damping_error": 0.026968363403301426,
+            "depth": 250,
+            "frequency": 0.10337199512053825,
+            "frequency_error": 0.011435272966281216,
+            "rank": 16
+          },
+          {
+            "damping": 0.003445628103120145,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.10456775595333613,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 10,
+        "median_damping": 0.004003283334483835,
+        "median_error": 0.1019785077798929,
+        "median_frequency": 0.10307474367938123
+      },
+      "future_seed": 1,
+      "identity_track_count": 1,
+      "noise_correlation": 0.9
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.003777068367503136,
+        "anchor_frequency": 0.10443958630392611,
+        "control_identity_pass": false,
+        "control_matching_cells": 7,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.007329689011966344,
+            "damping_error": 0.07105241288926416,
+            "depth": 100,
+            "frequency": 0.12158295139717315,
+            "frequency_error": 0.16414623707296883,
+            "rank": 8
+          },
+          {
+            "damping": 0.0019207549389867597,
+            "damping_error": 0.037126268570327525,
+            "depth": 150,
+            "frequency": 0.09813598154992902,
+            "frequency_error": 0.06035646996583445,
+            "rank": 8
+          },
+          {
+            "damping": 0.01266617793607397,
+            "damping_error": 0.1777821913714167,
+            "depth": 150,
+            "frequency": 0.09376437182114927,
+            "frequency_error": 0.10221425477223985,
+            "rank": 16
+          },
+          {
+            "damping": 0.01221232981760536,
+            "damping_error": 0.16870522900204443,
+            "depth": 150,
+            "frequency": 0.09986608160604939,
+            "frequency_error": 0.04379091166224577,
+            "rank": 32
+          },
+          {
+            "damping": 0.0018636197401257627,
+            "damping_error": 0.038268972547547464,
+            "depth": 200,
+            "frequency": 0.11620184063464918,
+            "frequency_error": 0.11262256723704492,
+            "rank": 8
+          },
+          {
+            "damping": 0.0047041036050109895,
+            "damping_error": 0.018540704750157067,
+            "depth": 200,
+            "frequency": 0.12055486331557244,
+            "frequency_error": 0.15430238266886476,
+            "rank": 16
+          },
+          {
+            "damping": 0.013087413501671214,
+            "damping_error": 0.18620690268336154,
+            "depth": 200,
+            "frequency": 0.10117559044701731,
+            "frequency_error": 0.031252477843126986,
+            "rank": 32
+          },
+          {
+            "damping": 0.0009459841842382101,
+            "damping_error": 0.05662168366529852,
+            "depth": 250,
+            "frequency": 0.10247979863226948,
+            "frequency_error": 0.01876479734373432,
+            "rank": 8
+          },
+          {
+            "damping": 0.0023868257537672066,
+            "damping_error": 0.02780485227471859,
+            "depth": 250,
+            "frequency": 0.10321157857882148,
+            "frequency_error": 0.011758067688348061,
+            "rank": 16
+          },
+          {
+            "damping": 0.003777068367503136,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.10443958630392611,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 10,
+        "median_damping": 0.004240585986257063,
+        "median_error": 0.13346247495295482,
+        "median_frequency": 0.10284568860554548
+      },
+      "future_seed": 1,
+      "identity_track_count": 1,
+      "noise_correlation": 0.99
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.006631422872635161,
+        "anchor_frequency": 0.12437069132016211,
+        "control_identity_pass": false,
+        "control_matching_cells": 7,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.011273250437315632,
+            "damping_error": 0.09283655129360942,
+            "depth": 100,
+            "frequency": 0.09704077624316683,
+            "frequency_error": 0.2197456232404551,
+            "rank": 8
+          },
+          {
+            "damping": 0.015143575685928811,
+            "damping_error": 0.170243056265873,
+            "depth": 100,
+            "frequency": 0.11852170705384796,
+            "frequency_error": 0.04702863837314665,
+            "rank": 16
+          },
+          {
+            "damping": 0.0020636645335186925,
+            "damping_error": 0.09135516678232936,
+            "depth": 150,
+            "frequency": 0.09789082391418377,
+            "frequency_error": 0.21291083232634253,
+            "rank": 8
+          },
+          {
+            "damping": 0.014085865815716131,
+            "damping_error": 0.1490888588616194,
+            "depth": 150,
+            "frequency": 0.10117353890203092,
+            "frequency_error": 0.18651622960280703,
+            "rank": 16
+          },
+          {
+            "damping": 0.01590878575148038,
+            "damping_error": 0.18554725757690438,
+            "depth": 150,
+            "frequency": 0.09992418390994992,
+            "frequency_error": 0.19656164286552527,
+            "rank": 32
+          },
+          {
+            "damping": 0.0010754828735155667,
+            "damping_error": 0.11111879998239187,
+            "depth": 200,
+            "frequency": 0.12275676734346505,
+            "frequency_error": 0.012976722727562917,
+            "rank": 8
+          },
+          {
+            "damping": 0.007523000619642432,
+            "damping_error": 0.017831554940145426,
+            "depth": 200,
+            "frequency": 0.10420551243774241,
+            "frequency_error": 0.16213770839714436,
+            "rank": 16
+          },
+          {
+            "damping": 0.011779775746034525,
+            "damping_error": 0.10296705746798727,
+            "depth": 200,
+            "frequency": 0.11899927265092103,
+            "frequency_error": 0.043188781956784904,
+            "rank": 32
+          },
+          {
+            "damping": 0.0004013525765709955,
+            "damping_error": 0.1246014059212833,
+            "depth": 250,
+            "frequency": 0.10363405919423758,
+            "frequency_error": 0.16673246651450307,
+            "rank": 8
+          },
+          {
+            "damping": 0.002079888995125895,
+            "damping_error": 0.0910306775501853,
+            "depth": 250,
+            "frequency": 0.10397434263236943,
+            "frequency_error": 0.16399642448949034,
+            "rank": 16
+          },
+          {
+            "damping": 0.006631422872635161,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.12437069132016211,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 11,
+        "median_damping": 0.007523000619642432,
+        "median_error": 0.16673246651450307,
+        "median_frequency": 0.10397434263236943
+      },
+      "future_seed": 2,
+      "identity_track_count": 2,
+      "noise_correlation": 0.0
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.006593812984643369,
+        "anchor_frequency": 0.12430116967344026,
+        "control_identity_pass": false,
+        "control_matching_cells": 8,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.011403526488898048,
+            "damping_error": 0.09619427008509357,
+            "depth": 100,
+            "frequency": 0.0970459615413888,
+            "frequency_error": 0.21926751134889086,
+            "rank": 8
+          },
+          {
+            "damping": 0.015389715087757884,
+            "damping_error": 0.17591804206229028,
+            "depth": 100,
+            "frequency": 0.11864488300129634,
+            "frequency_error": 0.04550469385769998,
+            "rank": 16
+          },
+          {
+            "damping": 0.002101027307509724,
+            "damping_error": 0.0898557135426729,
+            "depth": 150,
+            "frequency": 0.09779547224051255,
+            "frequency_error": 0.21323771532128433,
+            "rank": 8
+          },
+          {
+            "damping": 0.014902367001509039,
+            "damping_error": 0.16617108033731343,
+            "depth": 150,
+            "frequency": 0.10140636616691003,
+            "frequency_error": 0.1841881582182909,
+            "rank": 16
+          },
+          {
+            "damping": 0.01735467323461136,
+            "damping_error": 0.2152172049993598,
+            "depth": 150,
+            "frequency": 0.09999603469869071,
+            "frequency_error": 0.19553424186275287,
+            "rank": 32
+          },
+          {
+            "damping": 0.0010253497167258963,
+            "damping_error": 0.11136926535834944,
+            "depth": 200,
+            "frequency": 0.12276123062181944,
+            "frequency_error": 0.012388773618675492,
+            "rank": 8
+          },
+          {
+            "damping": 0.006697949754335552,
+            "damping_error": 0.0020827353938436717,
+            "depth": 200,
+            "frequency": 0.10369783777839925,
+            "frequency_error": 0.16575332274965213,
+            "rank": 16
+          },
+          {
+            "damping": 0.011749561381777263,
+            "damping_error": 0.10311496794267788,
+            "depth": 200,
+            "frequency": 0.11904540812339333,
+            "frequency_error": 0.042282478627149615,
+            "rank": 32
+          },
+          {
+            "damping": 0.0003523527498117157,
+            "damping_error": 0.12482920469663306,
+            "depth": 250,
+            "frequency": 0.10358053911763704,
+            "frequency_error": 0.16669698772939748,
+            "rank": 8
+          },
+          {
+            "damping": 0.002061601512206671,
+            "damping_error": 0.09064422944873395,
+            "depth": 250,
+            "frequency": 0.10390654586566603,
+            "frequency_error": 0.1640742710736696,
+            "rank": 16
+          },
+          {
+            "damping": 0.006593812984643369,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.12430116967344026,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 11,
+        "median_damping": 0.006697949754335552,
+        "median_error": 0.16669698772939748,
+        "median_frequency": 0.10369783777839925
+      },
+      "future_seed": 2,
+      "identity_track_count": 2,
+      "noise_correlation": 0.9
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.006628859018810487,
+        "anchor_frequency": 0.12389860090542378,
+        "control_identity_pass": false,
+        "control_matching_cells": 6,
+        "identity_pass": true,
+        "matches": [
+          {
+            "damping": 0.012084789135128808,
+            "damping_error": 0.10911860232636642,
+            "depth": 100,
+            "frequency": 0.09715786920312992,
+            "frequency_error": 0.2158275517792651,
+            "rank": 8
+          },
+          {
+            "damping": 0.01684192677307582,
+            "damping_error": 0.20426135508530663,
+            "depth": 100,
+            "frequency": 0.11917474092864312,
+            "frequency_error": 0.03812682259734752,
+            "rank": 16
+          },
+          {
+            "damping": 0.0022543396133255012,
+            "damping_error": 0.08749038810969972,
+            "depth": 150,
+            "frequency": 0.09748977013364851,
+            "frequency_error": 0.21314874081535487,
+            "rank": 8
+          },
+          {
+            "damping": 0.018869892233083326,
+            "damping_error": 0.24482066428545676,
+            "depth": 150,
+            "frequency": 0.10427503672599933,
+            "frequency_error": 0.15838406597023488,
+            "rank": 16
+          },
+          {
+            "damping": 0.0009158300393630874,
+            "damping_error": 0.11426057958894797,
+            "depth": 200,
+            "frequency": 0.12273857831477997,
+            "frequency_error": 0.009362677077599083,
+            "rank": 8
+          },
+          {
+            "damping": 0.004609409767275605,
+            "damping_error": 0.040388985030697634,
+            "depth": 200,
+            "frequency": 0.10242734760054015,
+            "frequency_error": 0.17329697952984474,
+            "rank": 16
+          },
+          {
+            "damping": 0.011842526373889328,
+            "damping_error": 0.10427334710157682,
+            "depth": 200,
+            "frequency": 0.1191062387120268,
+            "frequency_error": 0.03867971194489238,
+            "rank": 32
+          },
+          {
+            "damping": 0.0002906674144509121,
+            "damping_error": 0.12676383208719147,
+            "depth": 250,
+            "frequency": 0.10329708207903265,
+            "frequency_error": 0.1662772515253582,
+            "rank": 8
+          },
+          {
+            "damping": 0.0021520126431814096,
+            "damping_error": 0.08953692751258155,
+            "depth": 250,
+            "frequency": 0.10359691823516594,
+            "frequency_error": 0.16385723908016392,
+            "rank": 16
+          },
+          {
+            "damping": 0.006628859018810487,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.12389860090542378,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 10,
+        "median_damping": 0.005619134393043046,
+        "median_error": 0.16978711552760145,
+        "median_frequency": 0.10393597748058264
+      },
+      "future_seed": 2,
+      "identity_track_count": 1,
+      "noise_correlation": 0.99
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.006081840486412406,
+        "anchor_frequency": 0.14157892301750322,
+        "control_identity_pass": false,
+        "control_matching_cells": 9,
+        "identity_pass": false,
+        "matches": [
+          {
+            "damping": 0.010247783830014612,
+            "damping_error": 0.08331886687204412,
+            "depth": 100,
+            "frequency": 0.12030385696571523,
+            "frequency_error": 0.15027000911115687,
+            "rank": 8
+          },
+          {
+            "damping": 0.0038722313415610063,
+            "damping_error": 0.04419218289702799,
+            "depth": 150,
+            "frequency": 0.15544655677495275,
+            "frequency_error": 0.09794984636050029,
+            "rank": 8
+          },
+          {
+            "damping": 0.016664300006066623,
+            "damping_error": 0.21164919039308436,
+            "depth": 150,
+            "frequency": 0.14446847659509923,
+            "frequency_error": 0.02040948974614522,
+            "rank": 16
+          },
+          {
+            "damping": 0.0012290465898073554,
+            "damping_error": 0.09705587793210099,
+            "depth": 200,
+            "frequency": 0.12209914664017087,
+            "frequency_error": 0.13758952224070875,
+            "rank": 8
+          },
+          {
+            "damping": 0.006474428171784303,
+            "damping_error": 0.007851753707437941,
+            "depth": 200,
+            "frequency": 0.12112198172013239,
+            "frequency_error": 0.14449143178495405,
+            "rank": 16
+          },
+          {
+            "damping": 0.009326478960761908,
+            "damping_error": 0.06489276948699005,
+            "depth": 200,
+            "frequency": 0.14578815125910352,
+            "frequency_error": 0.02973061351144706,
+            "rank": 32
+          },
+          {
+            "damping": 0.0008896424493358365,
+            "damping_error": 0.10384396074153139,
+            "depth": 250,
+            "frequency": 0.13703438445607635,
+            "frequency_error": 0.03209897677258803,
+            "rank": 8
+          },
+          {
+            "damping": 0.0029652485730429167,
+            "damping_error": 0.06233183826738978,
+            "depth": 250,
+            "frequency": 0.13914134596702704,
+            "frequency_error": 0.017217089934882614,
+            "rank": 16
+          },
+          {
+            "damping": 0.006081840486412406,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.14157892301750322,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 9,
+        "median_damping": 0.006081840486412406,
+        "median_error": 0.10384396074153139,
+        "median_frequency": 0.13914134596702704
+      },
+      "future_seed": 3,
+      "identity_track_count": 0,
+      "noise_correlation": 0.0
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.006006461769810771,
+        "anchor_frequency": 0.14158841607239714,
+        "control_identity_pass": false,
+        "control_matching_cells": 9,
+        "identity_pass": false,
+        "matches": [
+          {
+            "damping": 0.010215798501816142,
+            "damping_error": 0.08418673464010742,
+            "depth": 100,
+            "frequency": 0.1202795750835797,
+            "frequency_error": 0.15049847706412495,
+            "rank": 8
+          },
+          {
+            "damping": 0.0038633092007888006,
+            "damping_error": 0.0428630513804394,
+            "depth": 150,
+            "frequency": 0.1554676618703426,
+            "frequency_error": 0.09802529177845115,
+            "rank": 8
+          },
+          {
+            "damping": 0.016671917733375563,
+            "damping_error": 0.2133091192712958,
+            "depth": 150,
+            "frequency": 0.14453030447037993,
+            "frequency_error": 0.02077774778184212,
+            "rank": 16
+          },
+          {
+            "damping": 0.0012122071701069763,
+            "damping_error": 0.0958850919940759,
+            "depth": 200,
+            "frequency": 0.12208587326886136,
+            "frequency_error": 0.13774109029910833,
+            "rank": 8
+          },
+          {
+            "damping": 0.006436887848684328,
+            "damping_error": 0.008608521577471145,
+            "depth": 200,
+            "frequency": 0.12113330601307744,
+            "frequency_error": 0.14446881056187938,
+            "rank": 16
+          },
+          {
+            "damping": 0.00927509517568475,
+            "damping_error": 0.06537266811747958,
+            "depth": 200,
+            "frequency": 0.1458671707665389,
+            "frequency_error": 0.030219666359951016,
+            "rank": 32
+          },
+          {
+            "damping": 0.0008759280285531002,
+            "damping_error": 0.10261067482515342,
+            "depth": 250,
+            "frequency": 0.1370501861650891,
+            "frequency_error": 0.03205226835073532,
+            "rank": 8
+          },
+          {
+            "damping": 0.0029159315048176396,
+            "damping_error": 0.061810605299862625,
+            "depth": 250,
+            "frequency": 0.13916597853281906,
+            "frequency_error": 0.017109009386328842,
+            "rank": 16
+          },
+          {
+            "damping": 0.006006461769810771,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.14158841607239714,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 9,
+        "median_damping": 0.006006461769810771,
+        "median_error": 0.10261067482515342,
+        "median_frequency": 0.13916597853281906
+      },
+      "future_seed": 3,
+      "identity_track_count": 0,
+      "noise_correlation": 0.9
+    },
+    {
+      "anchor_count": 15,
+      "best_track": {
+        "anchor_damping": 0.005863399938890623,
+        "anchor_frequency": 0.1415038537033898,
+        "control_identity_pass": false,
+        "control_matching_cells": 8,
+        "identity_pass": false,
+        "matches": [
+          {
+            "damping": 0.010230991096169886,
+            "damping_error": 0.08735182314558526,
+            "depth": 100,
+            "frequency": 0.12014677286359651,
+            "frequency_error": 0.15092932298904357,
+            "rank": 8
+          },
+          {
+            "damping": 0.003868935047029735,
+            "damping_error": 0.03988929783721776,
+            "depth": 150,
+            "frequency": 0.1555090491368795,
+            "frequency_error": 0.09897395065187672,
+            "rank": 8
+          },
+          {
+            "damping": 0.01687999934116739,
+            "damping_error": 0.2203319880455353,
+            "depth": 150,
+            "frequency": 0.14453403615431792,
+            "frequency_error": 0.021414133761189082,
+            "rank": 16
+          },
+          {
+            "damping": 0.0011925435917642514,
+            "damping_error": 0.09341712694252743,
+            "depth": 200,
+            "frequency": 0.12201217443880165,
+            "frequency_error": 0.1377466320136073,
+            "rank": 8
+          },
+          {
+            "damping": 0.006554781949966134,
+            "damping_error": 0.013827640221510222,
+            "depth": 200,
+            "frequency": 0.12094928578323941,
+            "frequency_error": 0.1452580080485681,
+            "rank": 16
+          },
+          {
+            "damping": 0.009261052484663466,
+            "damping_error": 0.06795305091545685,
+            "depth": 200,
+            "frequency": 0.146001686603606,
+            "frequency_error": 0.03178593926950018,
+            "rank": 32
+          },
+          {
+            "damping": 0.0008473307075587804,
+            "damping_error": 0.10032138462663685,
+            "depth": 250,
+            "frequency": 0.13694760951585422,
+            "frequency_error": 0.032198728644423046,
+            "rank": 8
+          },
+          {
+            "damping": 0.002815042934432074,
+            "damping_error": 0.06096714008917098,
+            "depth": 250,
+            "frequency": 0.13913297575369665,
+            "frequency_error": 0.01675486488631479,
+            "rank": 16
+          },
+          {
+            "damping": 0.005863399938890623,
+            "damping_error": 0.0,
+            "depth": 250,
+            "frequency": 0.1415038537033898,
+            "frequency_error": 0.0,
+            "rank": 32
+          }
+        ],
+        "matching_cells": 9,
+        "median_damping": 0.005863399938890623,
+        "median_error": 0.10032138462663685,
+        "median_frequency": 0.13913297575369665
+      },
+      "future_seed": 3,
+      "identity_track_count": 0,
+      "noise_correlation": 0.99
+    }
+  ],
+  "sample_interval_memory_times": 0.5,
+  "schema": "emergenz-knoten.hankel-pole-identity-audit",
+  "schema_version": 1,
+  "source_git_revision": "d1c7a03b207d93b9ab5330db0ffef57cc9c17515"
+}

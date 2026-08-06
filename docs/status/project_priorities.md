@@ -445,16 +445,19 @@ Prioritaetsfolge:
    um. Bei Rang 16/32 liegt reziprok minus Einweg terminal nur in
    `-0.00366..+0.00244`. Das stuetzt Informationsverduennung bei wachsender
    stochastischer Historie, keine laengere physikalische Persistenz.
-10. **Naechster billiger Stoptest, keine Simulation:** Die bereits
-    gespeicherten reduzierten DMD-Pole werden auf Identitaet ueber feste
-    Raenge, Delaytiefen und Einweg-Kontrolle geprueft. Nur ein
-    kontrollgetrennter Kandidat rechtfertigt einen neuen Zeitsegmentlauf.
-    Andernfalls wird P3.2 geschlossen.
-11. **P3.2c danach, keine Gain-Suche:** Eine rein quelllokale
+10. **Pol-Identity-Stoptest abgeschlossen, negativ:** Seeds 1/2 tragen einen
+    rang-/tiefenstabilen Kandidaten nahe `omega=0.103`, doch derselbe Pol trifft
+    im Einwegarm noch `6..8/12` Zellen; Seed 3 erreicht reziprok nur `9/12`.
+    Vier korrelationsuebergreifende Kandidaten, null kontrollgetrennte
+    Ueberlebende. P3.2 ist geschlossen; kein 500k-Bestaetigungslauf desselben
+    Mechanismus.
+11. **P3.2c jetzt aktiv, keine Gain-Suche:** Eine rein quelllokale
     Emissions-/Readout-Regel wird formuliert und ihr reduziertes lineares
     Spektrum samt Observability vor jeder Vollsimulation berechnet. Der
     aktuelle Eingang bleibt zielabhaengiger momentaner Cross-Gradient; nur
-    Transport/Filter sind lokal.
+    Transport/Filter sind lokal. Erst ein analytischer oder gespeicherter
+    Kontrollpass erlaubt einen neuen Lauf; dessen Mindesthorizont ist 500,000
+    Updates, weil fruehere Selbstverhedderung darunter nicht wiederholbar war.
 12. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da

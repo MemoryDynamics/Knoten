@@ -576,8 +576,9 @@ Preregistration:
 `reports/project/meta/long_horizon_hankel_preregistration_2026-08-04.md`.
 
 The canonical clean-start result classifies **longer history as degrading
-held-out prediction**. All 45 seed/rho/rank deltas from 1000 to 12500 updates
-are positive; their median is `+0.1203`. Median visible stable/entropy rank
+held-out prediction**. All 45 paired seed/rho/rank design-cell deltas from
+1000 to 12500 updates are positive, as are all three independent seed medians;
+the cell median is `+0.1203`. Median visible stable/entropy rank
 grows from `1.67/6.62` to `5.87/49.4` instead of plateauing. At retained ranks
 16 and 32, the terminal reciprocal-minus-one-way ratio difference remains
 within `-0.00366..+0.00244`. Field/momentum augmentation does not reverse the
@@ -587,6 +588,24 @@ closure.
 
 Result:
 `reports/response/long_horizon_hankel_gate_2026-08-04.md`.
+
+### Stored-pole identity stoptest
+
+The preregistered postprocessor tests only the well-conditioned visible-state
+poles at ranks `{8,16,32}` and depths `{100,150,200,250}`. A track needs at
+least 10/12 matching cells, two independent seeds at every paired noise
+correlation, and fewer than 6/12 matches in the retarded one-way arm.
+
+Seeds 1 and 2 contain a recurring pole near `omega=0.103` per memory time, but
+the same pole matches 6..8/12 one-way cells. Seed 3 reaches only 9/12 reciprocal
+cells. Four cross-correlation candidates survive identity matching and zero
+survive the control gate. P3.2 therefore closes without a new 500,000-update
+confirmation. Such a run remains the minimum confirmation horizon for a later
+mechanism that first passes its stored-data or analytic control gate.
+
+Preregistration and result:
+`reports/project/meta/hankel_pole_identity_preregistration_2026-08-04.md` and
+`reports/response/hankel_pole_identity_audit_2026-08-06.md`.
 
 ## Observables
 

@@ -309,11 +309,16 @@ Bei Rang 16/32 bleibt der terminale Unterschied reziprok minus Einweg innerhalb
 `-0.00366..+0.00244`; die hochrangige Verschlechterung ist daher nicht vom
 Einweg-Mediator getrennt. Gestuetzt ist fixed-rank Informationsverduennung bei
 wachsender stochastischer Historie, nicht eine laengere physikalische
-Persistenzskala. Die gespeicherten DMD-Pole duerfen nur noch billig auf
-Rang-/Tiefen-/Kontrollidentitaet vorgescreent werden. Nur ein Ueberlebender
-rechtfertigt einen neuen Segmentlauf; sonst wird P3.2 geschlossen und P3.2c
-mit einer quelllokalen Emissions-/Readout-Regel geoeffnet. Das negative
-registrierte P3.2-AR(1)-Primaergate bleibt unveraendert.
+Persistenzskala.
+
+Der vorregistrierte Pol-Identity-Stoptest ist ebenfalls negativ. Seeds 1/2
+zeigen einen Kandidaten nahe `omega=0.103` ueber 10..11/12 Rang-/Tiefenzellen,
+aber derselbe Pol liegt in 6..8/12 Einweg-Kontrollzellen. Seed 3 erreicht nur
+9/12 reziproke Zellen. Von vier korrelationsuebergreifenden Kandidaten ist
+keiner kontrollgetrennt. P3.2 ist damit ohne neuen 500k-Lauf geschlossen.
+P3.2c, die analytische Observability einer quelllokalen Emissions-/Readout-Regel,
+ist der aktive naechste Schritt. Das negative registrierte P3.2-AR(1)-Primaergate
+bleibt unveraendert.
 
 ## Paper-Status
 

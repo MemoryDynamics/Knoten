@@ -212,10 +212,16 @@ identifizierten physikalischen Moden.
     aber keinen kontrollgetrennten Modus frei.
 - [Vorregistrierung des Langhorizont-/Hankel-Audits](project/meta/long_horizon_hankel_preregistration_2026-08-04.md)
 - [Langhorizont-/Hankel-Ergebnis](response/long_horizon_hankel_gate_2026-08-04.md)
-  - **negative long-history closure trend:** Alle 45 festen
-    Seed-/Rausch-/Rangdeltas sind positiv; median `+0.1203` von 1000 auf 12500
-    Updates. Der effektive Rang waechst ohne Plateau, Feld/Impuls hilft nicht,
-    und Rang 16/32 ist nicht von der Einweg-Kontrolle getrennt.
+  - **negative long-history closure trend:** Alle 45 gepaarten Designzellen und
+    alle drei unabhaengigen Seed-Mediane sind positiv; Zellmedian `+0.1203` von
+    1000 auf 12500 Updates. Der effektive Rang waechst ohne Plateau,
+    Feld/Impuls hilft nicht, und Rang 16/32 ist nicht kontrollgetrennt.
+- [Vorregistrierung des DMD-Pol-Identity-Stoptests](project/meta/hankel_pole_identity_preregistration_2026-08-04.md)
+- [DMD-Pol-Identity-Ergebnis](response/hankel_pole_identity_audit_2026-08-06.md)
+  - **kein kontrollgetrennter Pol:** Seeds 1/2 tragen einen Kandidaten um
+    `omega=0.103`, doch 6..8/12 Einwegzellen enthalten denselben Pol; Seed 3
+    erreicht nur 9/12 reziprok. Vier korrelationsuebergreifende Kandidaten,
+    null Ueberlebende des Kontrollgates.
 
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
@@ -229,10 +235,10 @@ identifizierten physikalischen Moden.
 Entscheidung: Direkter und fest retardierter Skalararm zeigen kontrollierte
 Bindung/Relaxation. Der sichtbare Delayzustand bleibt ohne komplexen Modenpass;
 das augmentierte Spektrum ist nicht identifizierbar. Weitere Gain-Suche ist
-nicht priorisiert. Der feste Langhorizont-/Hankel-Audit zeigt
-Informationsverduennung statt zusaetzlicher Closure. Vor der quelllokalen
-Emissionsregel folgt nur noch ein billiger Pole-Prescreen auf den bestehenden
-Daten; P3.3 bleibt gesperrt. Der komponentenweise
+nicht priorisiert. Langhorizont und Pol-Identity sind negativ; P3.2 ist ohne
+500k-Bestaetigungslauf geschlossen. Aktiv ist nun P3.2c, die analytische
+Observability einer quelllokalen Emissions-/Readout-Regel. P3.3 bleibt
+gesperrt. Der komponentenweise
 Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden
