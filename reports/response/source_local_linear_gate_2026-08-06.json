@@ -1,8 +1,8 @@
 {
   "schema": "source-local-linear-gate-v1",
-  "created_utc": "2026-08-06T20:01:48.126552+00:00",
-  "git_revision": "9781727a5654515174d21fac0182aacfed63bf40",
-  "git_status": "?? experiments/current/memory/synchronization/source_local_linear_gate.py\n?? src/emergenz_knoten/source_local_linear.py\n?? src/emergenz_knoten/source_local_modal.py\n?? tests/test_source_local_linear.py\n?? tests/test_source_local_modal.py",
+  "created_utc": "2026-08-06T20:14:40.903961+00:00",
+  "git_revision": "35a4f0feb67beb6a5b03205b1b939cc0b5f86e66",
+  "git_status": "",
   "parameters": {
     "lambda_value": 0.01,
     "self_gain": 0.43229116264043155,

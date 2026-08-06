@@ -1,6 +1,6 @@
 # P3.2c source-local linear emission gate
 
-Date: 2026-08-06T20:01:48.126552+00:00.
+Date: 2026-08-06T20:14:40.903961+00:00.
 
 ## Question
 
@@ -10,7 +10,7 @@ Can a strictly emitter-local scalar signal, transported by the fixed Telegraph c
 
 The translation-free knot coordinate is `d_n=x_n-m_n`, with `d_(n+1)=q(1-g)d_n` when uncoupled. The primary emitter writes `s_n=d_n`; the secondary current writes `s_n=d_n/q-d_(n-1)`. The constant mass source is the zero-dynamics control. None of these source terms contains target position, target memory, pair distance, or an instantaneous cross-gradient.
 
-The exact P3.2 finite-grid Telegraph update and its DC normalization are retained. Reductions keep complete real Telegraph blocks of source/readout-ranked Dirichlet spatial modes, so truncation does not split temporal conjugate pairs.
+The exact P3.2 finite-grid Telegraph update and its DC normalization are retained. The positive update sign is the reporting primary; the negative sign is a symmetry control, and both are evaluated. Reductions keep complete real Telegraph blocks of source/readout-ranked Dirichlet spatial modes, so truncation does not split temporal conjugate pairs.
 
 ## Registered gate
 
@@ -60,7 +60,7 @@ Supported: source locality can be enforced, the inherited channel is stable, and
 
 ## Reproducibility
 
-- git revision at execution: `9781727a5654515174d21fac0182aacfed63bf40`;
+- git revision at execution: `35a4f0feb67beb6a5b03205b1b939cc0b5f86e66`;
 - preregistration: `reports/project/meta/source_local_linear_gate_preregistration_2026-08-06.md`;
 - command: `python experiments/current/memory/synchronization/source_local_linear_gate.py`;
 - machine-readable summary: `reports/response/source_local_linear_gate_2026-08-06.json`.
