@@ -105,6 +105,7 @@ CATEGORIES = {
         "current/memory/synchronization/retarded_reciprocal_full_knot_gate.py",
         "current/memory/synchronization/measurement_closure_relative_noise_gate.py",
         "current/memory/synchronization/hankel_pole_identity_cli.py",
+        "current/memory/synchronization/source_local_linear_gate.py",
     ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",

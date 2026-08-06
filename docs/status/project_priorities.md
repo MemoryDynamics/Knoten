@@ -451,19 +451,25 @@ Prioritaetsfolge:
     Vier korrelationsuebergreifende Kandidaten, null kontrollgetrennte
     Ueberlebende. P3.2 ist geschlossen; kein 500k-Bestaetigungslauf desselben
     Mechanismus.
-11. **P3.2c jetzt aktiv, keine Gain-Suche:** Eine rein quelllokale
-    Emissions-/Readout-Regel wird formuliert und ihr reduziertes lineares
-    Spektrum samt Observability vor jeder Vollsimulation berechnet. Der
-    aktuelle Eingang bleibt zielabhaengiger momentaner Cross-Gradient; nur
-    Transport/Filter sind lokal. Erst ein analytischer oder gespeicherter
-    Kontrollpass erlaubt einen neuen Lauf; dessen Mindesthorizont ist 500,000
-    Updates, weil fruehere Selbstverhedderung darunter nicht wiederholbar war.
-12. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+11. **P3.2c abgeschlossen, source-lokaler Modus null:** Die exakte
+    finite-grid Telegraphregel ist mit emitterlokalem `d=x-m` stabil und
+    besitzt einen Pol bei `omega=0.08294` pro Memory-Time. Sein normiertes
+    Knot-Residuum ist aber nur `3.54e-5`, der Generatorabstand zum naechsten
+    Einwegpol nur `0.00622`; der lokale Schrittstrom koppelt nochmals etwa
+    hundertfach schwaecher. Alle drei strukturerhaltenden Modenreduktionen
+    stimmen zu. Kein 500k-Lauf und keine Gain-Suche dieses Mechanismus.
+12. **P3.2d jetzt aktiv, ein Multipol statt Kandidatenliste:** Aus vorhandenen
+    reifen Traces werden nur der zentrierte spurlose Shape-Tensor und seine
+    Aenderung als emitterlokale Source auf autonome Spektralleistung,
+    Seed-/Segmentpersistenz und Kontrolltrennung geprueft. Erst ein Pass erlaubt
+    eine Tensor-Mediatorregel. Bei Misserfolg wird der skalare Fernmoduspfad
+    geschlossen und Vektormemory als explizite Modellerweiterung formuliert.
+13. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
     `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
-13. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+14. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

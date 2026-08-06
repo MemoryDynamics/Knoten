@@ -236,9 +236,11 @@ Entscheidung: Direkter und fest retardierter Skalararm zeigen kontrollierte
 Bindung/Relaxation. Der sichtbare Delayzustand bleibt ohne komplexen Modenpass;
 das augmentierte Spektrum ist nicht identifizierbar. Weitere Gain-Suche ist
 nicht priorisiert. Langhorizont und Pol-Identity sind negativ; P3.2 ist ohne
-500k-Bestaetigungslauf geschlossen. Aktiv ist nun P3.2c, die analytische
-Observability einer quelllokalen Emissions-/Readout-Regel. P3.3 bleibt
-gesperrt. Der komponentenweise
+500k-Bestaetigungslauf geschlossen. P3.2c erzwingt nun echte Source-Lokalitaet,
+bleibt aber ebenfalls negativ: Der Offset laedt nur `3.54e-5` normiertes
+Knot-Residuum in den stabilen Telegraphpol, der Schrittstrom noch weniger.
+Aktiv ist P3.2d, ein gespeichertes Shape-Multipol-Eligibility-Gate ohne neue
+Simulation. P3.3 bleibt gesperrt. Der komponentenweise
 Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden

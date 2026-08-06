@@ -316,9 +316,14 @@ zeigen einen Kandidaten nahe `omega=0.103` ueber 10..11/12 Rang-/Tiefenzellen,
 aber derselbe Pol liegt in 6..8/12 Einweg-Kontrollzellen. Seed 3 erreicht nur
 9/12 reziproke Zellen. Von vier korrelationsuebergreifenden Kandidaten ist
 keiner kontrollgetrennt. P3.2 ist damit ohne neuen 500k-Lauf geschlossen.
-P3.2c, die analytische Observability einer quelllokalen Emissions-/Readout-Regel,
-ist der aktive naechste Schritt. Das negative registrierte P3.2-AR(1)-Primaergate
-bleibt unveraendert.
+P3.2c ist ebenfalls negativ abgeschlossen. Ein strikt emitterlokaler Offset
+`d=x-m` laedt den stabilen Telegraphpol nur mit normiertem Knot-Residuum
+`3.54e-5`; sein Generator verschiebt sich gegenueber dem Einwegkanal nur um
+`0.00622` relativ. Der Schrittstrom ist noch schwacher, beide Vorzeichen und
+die Modenordnungen 8/16/32 stimmen mit der exakten Rechnung ueberein. Deshalb
+kein 500k-Bestaetigungslauf. Aktiv ist P3.2d: ein gespeichertes
+Source-Eligibility-Gate fuer den zentrierten spurlosen Shape-Tensor und seine
+Aenderung, bevor Tensor- oder Vektormemory eingefuehrt wird.
 
 ## Paper-Status
 

@@ -43,6 +43,7 @@ flowchart TD
     experiments --> one_way_exp["one_way_dynamic_source_pilot.py<br/>paired moving-source controls"]
     experiments --> reciprocal_exp["reciprocal_full_knot_gate.py<br/>direct binding; complex-mode null"]
     experiments --> retarded_reciprocal_exp["retarded_reciprocal_full_knot_gate.py<br/>operational channel; complex-mode null"]
+    experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
     experiments --> field_bridge["field_equation_bridge.py<br/>Gaussian heat map vs local mediator"]
@@ -82,6 +83,8 @@ flowchart TD
     src --> oriented_source["oriented_source.py<br/>persistent passive vector fibre + paired controls"]
     oriented_source --> continuation
     src --> local_mediator["local_mediator.py<br/>scalar/vector 1D diffusion + telegraph states"]
+    src --> source_local_linear["source_local_linear.py<br/>exact source-local reciprocal spectrum"]
+    src --> source_local_modal["source_local_modal.py<br/>structure-preserving channel reductions"]
     src --> mediator_id["mediator_identifiability.py<br/>segment power + complex transfer contrast"]
     src --> external_field["external_field_response.py<br/>paired active / flip / off target paths"]
     external_field --> continuation
@@ -277,6 +280,8 @@ flowchart LR
     launch --> transport["next: coherent whole-state or<br/>local / retarded transport"]
     transport --> reciprocal["direct synchronous reciprocal<br/>binding pass; complex-mode null"]
     reciprocal --> retarded["next: one fixed retarded return<br/>no gain retuning"]
+    retarded --> source_local["emitter-only offset/current<br/>stable channel; knot-loading null"]
+    source_local --> shape_source["next: one stored shape multipole<br/>before tensor/vector extension"]
     seeds -.independent formation holdout.-> retarded
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
@@ -294,7 +299,8 @@ array. Independent seeds remain necessary for inferential claims.
 - `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
   Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
   `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py`,
-  `oriented_source.py`, `local_mediator.py`, `external_field_response.py` und
+  `oriented_source.py`, `local_mediator.py`, `source_local_linear.py`,
+  `source_local_modal.py`, `external_field_response.py` und
   `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem

@@ -718,10 +718,18 @@ again real. Retarded reciprocal separation `0.58..1.21 R` is larger than the
 direct result, supporting delayed or weakened binding rather than an
 observable `(x_-,m_-)` rotation. This remains one formation basin.
 
-The filter input is still a target-specific instantaneous cross-gradient;
-only the transport update is local. A source-local field law therefore remains
-open. Vector memory is reserved for orientation, phase, circulation, or
-polarization, not introduced merely to provide a scalar sign.
+The filter input in P3.2 is still a target-specific instantaneous cross-gradient;
+only the transport update is local. P3.2c therefore replaces it by emitter-only
+signals. For `s=d=x-m`, the exact finite-grid channel is stable and contains a
+complex pole near `omega=0.08294` per memory time, but its normalized
+knot-to-knot residue is only `3.54e-5` and its relative generator shift from the
+nearest one-way pole only `0.00622`. Three structure-preserving modal
+reductions agree; the local step current loads the pole about one hundred times
+less. This closes that scalar source-local offset/current mechanism without a
+500k confirmation. The next stored-data test is one centered traceless shape
+multipole, not a gain search. Vector memory remains reserved for orientation,
+phase, circulation, or polarization, not introduced merely to provide a scalar
+sign.
 
 ## Markov-Einbettung
 

@@ -607,6 +607,28 @@ Preregistration and result:
 `reports/project/meta/hankel_pole_identity_preregistration_2026-08-04.md` and
 `reports/response/hankel_pole_identity_audit_2026-08-06.md`.
 
+### Source-local linear emission gate (P3.2c)
+
+The preregistered linear stoptest removes the hidden target dependence from the
+P3.2 source. It emits only quantities available at the source: constant memory
+mass as a dynamic null, the translation-invariant offset `d=x-m`, and the local
+step current `d/q-d_previous`. The target only reads the fixed Telegraph field
+at its endpoint. The positive update sign is the reporting primary; the opposite sign is a
+symmetry control. Both fail by wide margins, so the conclusion is sign-invariant.
+
+The exact 598-state finite-grid channel and source/readout-ranked Dirichlet
+reductions of orders 8, 16, and 32 are stable. The primary offset has a complex
+pole near `omega=0.08294` per memory time, but normalized knot residue is only
+`3.54e-5` and relative generator shift from the nearest one-way channel pole is
+only `0.00622`, versus registered thresholds of `0.1`. Current emission is
+about two orders of magnitude weaker. Thus this is an inserted channel pole,
+not a materially loaded reciprocal knot mode. No 500,000-update confirmation
+is authorized for this mechanism.
+
+Preregistration and result:
+`reports/project/meta/source_local_linear_gate_preregistration_2026-08-06.md`
+and `reports/response/source_local_linear_gate_2026-08-06.md`.
+
 ## Observables
 
 A target knot provides:
