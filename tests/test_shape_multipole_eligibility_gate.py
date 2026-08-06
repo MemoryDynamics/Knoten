@@ -86,3 +86,31 @@ def test_registered_defaults_freeze_p32d_design(monkeypatch: pytest.MonkeyPatch)
 def test_report_metric_formats_nonfinite_json_value() -> None:
     assert GATE._format_metric(None) == "inf"
     assert GATE._format_metric(0.125, ".3g") == "0.125"
+
+def test_compact_summary_removes_only_reproducible_plot_arrays() -> None:
+    spectral = {
+        "full": {"peak_to_background": 7.0, "frequencies": [0.1], "power_spectrum": [2.0]},
+        "segments": [
+            {"segment": 1, "frequencies": [0.1], "power_spectrum": [1.0]}
+        ],
+    }
+    payload = {
+        "rows": [
+            {
+                "conditions": {
+                    condition: {"sources": {source: spectral for source in GATE.SOURCES}}
+                    for condition in GATE.CONDITIONS
+                }
+            }
+        ],
+        "plot_traces": [{"times": [0.0]}],
+    }
+
+    compact = GATE.compact_summary(payload)
+
+    assert "plot_traces" not in compact
+    assert compact["spectral_arrays"].startswith("not persisted")
+    kept = compact["rows"][0]["conditions"]["baseline"]["sources"]["shape"]
+    assert kept["full"] == {"peak_to_background": 7.0}
+    assert kept["segments"] == [{"segment": 1}]
+    assert "plot_traces" in payload

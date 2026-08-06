@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 from dataclasses import asdict, replace
 from datetime import UTC, datetime
 import json
@@ -261,6 +262,26 @@ def analyze_source(
         "segment_frequency_relative_range": frequency_range,
         "candidate_pass": candidate,
     }
+
+
+def compact_summary(payload: dict[str, Any]) -> dict[str, Any]:
+    """Drop reproducible plotting arrays from the machine-readable evidence."""
+
+    summary = deepcopy(payload)
+    summary.pop("plot_traces", None)
+    for row in summary["rows"]:
+        for condition in CONDITIONS:
+            for source in SOURCES:
+                metrics = row["conditions"][condition]["sources"][source]
+                metrics["full"].pop("frequencies", None)
+                metrics["full"].pop("power_spectrum", None)
+                for segment in metrics["segments"]:
+                    segment.pop("frequencies", None)
+                    segment.pop("power_spectrum", None)
+    summary["spectral_arrays"] = (
+        "not persisted; deterministically reproducible from checkpoint and git revision"
+    )
+    return summary
 
 
 def _jsonable(value: Any) -> Any:
@@ -588,7 +609,10 @@ def main() -> None:
     report = _resolve(args.report)
     figure = _resolve(args.figure)
     summary.parent.mkdir(parents=True, exist_ok=True)
-    summary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    summary.write_text(
+        json.dumps(compact_summary(payload), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     _plot(payload, figure)
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(_report(payload, report, figure), encoding="utf-8")
