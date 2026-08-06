@@ -21,6 +21,7 @@ from .active_scalar_field import (
     simulate_active_scalar_delta_field,
     spectral_delta_coefficients,
 )
+from .autonomous_trace import AutonomousKnotTrace, autonomous_knot_trace
 from .measurement_stability import occupancy_measurement_convergence_diagnostics
 from .field import (
     FieldLinearStability,
@@ -249,6 +250,7 @@ from .markov.validation import (
 __all__ = [
     "ActiveScalarFieldConfig",
     "ActiveScalarFieldTrace",
+    "AutonomousKnotTrace",
     "DimensionlessScalarGroups",
     "LaggedCorrelationResult",
     "ResponseRankInferenceResult",
@@ -298,6 +300,7 @@ __all__ = [
     "advance_spectral_memory_state",
     "advance_collapsed_potential_state",
     "attractive_amplitude_for_curvature",
+    "autonomous_knot_trace",
     "autonomous_oriented_source_trace",
     "bootstrap_mean_ci",
     "calibrate_frozen_source_cross_eta",
