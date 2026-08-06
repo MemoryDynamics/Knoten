@@ -281,7 +281,8 @@ flowchart LR
     transport --> reciprocal["direct synchronous reciprocal<br/>binding pass; complex-mode null"]
     reciprocal --> retarded["next: one fixed retarded return<br/>no gain retuning"]
     retarded --> source_local["emitter-only offset/current<br/>stable channel; knot-loading null"]
-    source_local --> shape_source["next: one stored shape multipole<br/>before tensor/vector extension"]
+    source_local --> shape_source["autonomous shape multipole<br/>segment/control gate null"]
+    shape_source --> vector_form["next: formal vector-memory extension<br/>equations + null limits before run"]
     seeds -.independent formation holdout.-> retarded
     free --> delta["control-subtracted changes<br/>geometry, response rank, stability"]
     probe --> delta
@@ -300,8 +301,8 @@ array. Independent seeds remain necessary for inferential claims.
   Pfad liegt in `state.py`, `checkpoints.py`, `weak_probe.py`,
   `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py`,
   `oriented_source.py`, `local_mediator.py`, `source_local_linear.py`,
-  `source_local_modal.py`, `external_field_response.py` und
-  `synchronization.py`.
+  `source_local_modal.py`, `external_field_response.py`,
+  `autonomous_trace.py` und `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem
   Zerfall die Dynamik; `spectral_memory_trace.py` validiert niedrige Moden

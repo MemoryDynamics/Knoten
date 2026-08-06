@@ -726,10 +726,15 @@ knot-to-knot residue is only `3.54e-5` and its relative generator shift from the
 nearest one-way pole only `0.00622`. Three structure-preserving modal
 reductions agree; the local step current loads the pole about one hundred times
 less. This closes that scalar source-local offset/current mechanism without a
-500k confirmation. The next stored-data test is one centered traceless shape
-multipole, not a gain search. Vector memory remains reserved for orientation,
-phase, circulation, or polarization, not introduced merely to provide a scalar
-sign.
+500k confirmation. The subsequent preregistered shape-multipole gate required a
+minimal autonomous checkpoint continuation because the old traces had not
+persisted the full tensor. All five baseline paths remained shape-bounded, but
+neither the centered traceless tensor (`0/5`) nor its rate (`0/5`) produced a
+segment-stable source candidate. The low-frequency tensor peak was stronger in
+the `eta=0` control, which produced `2/5` single-path candidates. No tensor
+mediator is authorized. Vector memory remains reserved for orientation, phase,
+circulation, or polarization and must be formulated as an explicit model
+extension with its own null limits before another mechanism run.
 
 ## Markov-Einbettung
 

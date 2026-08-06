@@ -633,6 +633,26 @@ Preregistration and result:
 `reports/project/meta/source_local_linear_gate_preregistration_2026-08-06.md`
 and `reports/response/source_local_linear_gate_2026-08-06.md`.
 
+### Autonomous shape-multipole eligibility (P3.2d)
+
+The older traces did not persist the full time-dependent shape tensor, so the
+registered stored-data question required one minimal autonomous reproduction
+from the mature `d=3`, `N=100M` checkpoint. No interaction channel or mediator
+was inserted. Five paired future-noise paths compare the scalar baseline with
+`eta=0`; a one-memory-time block-shuffle supplies a second null.
+
+All five baseline paths remain shape-bounded. The normalized centered
+traceless tensor `Q` has strong low-frequency power near the lower analysis
+boundary, but its peak frequency fails segment identity in every baseline
+path. The same low-frequency structure is stronger under `eta=0`, where two
+single paths pass. The rate `Delta Q/Delta tau` passes in no baseline path.
+Thus neither source passes the registered seed/segment/control gate, and no
+tensor mediator is authorized.
+
+Preregistration and result:
+`reports/project/meta/p32d_shape_multipole_preregistration_2026-08-06.md` and
+`reports/response/p32d_shape_multipole_gate_2026-08-06.md`.
+
 ## Observables
 
 A target knot provides:

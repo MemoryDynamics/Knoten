@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-04.
+Stand: 2026-08-06.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -459,24 +459,32 @@ Prioritaetsfolge:
     Einwegpol nur `0.00622`; der lokale Schrittstrom koppelt nochmals etwa
     hundertfach schwaecher. Alle drei strukturerhaltenden Modenreduktionen
     stimmen zu. Kein 500k-Lauf und keine Gain-Suche dieses Mechanismus.
-12. **P3.2d jetzt aktiv, ein Multipol statt Kandidatenliste:** Aus vorhandenen
-    reifen Traces werden nur der zentrierte spurlose Shape-Tensor und seine
-    Aenderung als emitterlokale Source auf autonome Spektralleistung,
-    Seed-/Segmentpersistenz und Kontrolltrennung geprueft. Erst ein Pass erlaubt
-    eine Tensor-Mediatorregel. Bei Misserfolg wird der skalare Fernmoduspfad
-    geschlossen und Vektormemory als explizite Modellerweiterung formuliert.
-13. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
+12. **P3.2d abgeschlossen, Shape-Multipol null:** Die alten Traces enthielten
+    keinen vollstaendigen zeitabhaengigen Shape-Tensor; deshalb wurde eine
+    minimale autonome Reproduktion vom reifen Checkpoint vorregistriert. Alle
+    fuenf Baseline-Pfade bleiben shape-begrenzt. `Q` zeigt starke Leistung nahe
+    dem unteren Bandrand, aber keine Segmentidentitaet (`0/5` Kandidaten); im
+    `eta=0`-Arm ist derselbe Niederfrequenzcharakter staerker (`2/5`).
+    `Delta Q/Delta tau` liefert `0/5` Baseline-Kandidaten. Keine
+    Tensor-Mediatorregel wird autorisiert.
+13. **Naechster Mechanismusschritt: Vektormemory erst formal haerten:** Die
+    skalaren Fernquellen Offset, Strom und Shape-Multipol sind geschlossen.
+    Vor einer neuen Simulation werden Zustandsraum, Updategleichung,
+    Symmetrien, Nullgrenzen, Parameteridentifizierbarkeit und ein
+    source-lokales Eligibility-Gate der bereits pilotierten orientierten
+    Memory-Faser festgelegt. Kein Photon-, Spin- oder Ladungsclaim.
+14. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
     Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
     shape-gueltig. Die kontrollsubtrahierte Pfaddifferenz waechst stark, aber
     nahezu identisch im Einwegarm (`19.14R` vs. `19.03R` und `10.51R` vs.
     `10.31R`). Das ist sensitive Pfaddivergenz nach persistenter Stoerung,
     keine kontrollgetrennte reziproke Akkumulation.
-14. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
+15. **Kein Lambda-Sweep im bestehenden Checkpoint:** Die Gewichte im
     `FiniteMemoryState` kodieren Lambda bereits. Bei aktuellem `g=0.4323` und
     `c=0.02` kann zudem kein Lambda den direkten Modus komplex machen, da
     `c>g` notwendig ist. Eine spaetere Lambda-Kampagne braucht neue kompatible
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
-15. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
+16. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

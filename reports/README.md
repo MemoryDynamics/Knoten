@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-04.
+Stand: 2026-08-06.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -229,6 +229,12 @@ identifizierten physikalischen Moden.
   - **kein kontrollgetrennter Akkumulationseffekt:** Die reziproken
     late-minus-early Abweichungen `19.14R/10.51R` werden durch die
     Einwegkontrolle `19.03R/10.31R` erklaert; beide Shapes bleiben gueltig.
+
+- [P3.2d-Vorregistrierung: Shape-Multipol](project/meta/p32d_shape_multipole_preregistration_2026-08-06.md)
+- [P3.2d-Ergebnis: Shape-Multipol](response/p32d_shape_multipole_gate_2026-08-06.md)
+  - **kein kontrollgetrennter autonomer Shape-Modus:** `Q` und
+    `Delta Q/Delta tau` bestehen in `0/5` Baseline-Pfaden; der langsame
+    `Q`-Peak ist segmentinstabil und in `eta=0` staerker.
 - [Review der relevanten Dynamik- und Modenmodule](project/meta/relevant_dynamics_code_review_2026-08-04.md)
   - **correctness + method boundary:** Ein Fixed-Effects-Fehler des isotropen
     `2 x 2`-Fits ist behoben. Saubere Reproduktionen bleiben bei `0/60` und
@@ -247,8 +253,11 @@ der Einwegarm dieselbe sensitive Pfaddivergenz zeigt. P3.2 bleibt geschlossen.
 P3.2c erzwingt nun echte Source-Lokalitaet,
 bleibt aber ebenfalls negativ: Der Offset laedt nur `3.54e-5` normiertes
 Knot-Residuum in den stabilen Telegraphpol, der Schrittstrom noch weniger.
-Aktiv ist P3.2d, ein gespeichertes Shape-Multipol-Eligibility-Gate ohne neue
-Simulation. P3.3 bleibt gesperrt. Der komponentenweise
+P3.2d ist ebenfalls negativ: Der autonome spurlose Shape-Tensor hat keinen
+segmentstabilen, gegen `eta=0` getrennten Modus; seine Aenderung ebenfalls
+nicht. Eine Tensor-Mediatorregel ist nicht autorisiert. Als naechstes wird die
+explizite Vektormemory-Erweiterung formal gehaertet, bevor neue
+Mechanismussimulationen beginnen. P3.3 bleibt gesperrt. Der komponentenweise
 Vektormediator besitzt weiterhin
 nur den Ambient-Transfer `H I_d` und keinen Mechanismus fuer eindeutige
 Rang-drei-Selektion; der negative dynamische Holdout waehlt keines der beiden

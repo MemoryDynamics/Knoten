@@ -535,7 +535,7 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         item = gate["source_gates"][source]
         lines.extend(
             [
-                f"- `{source}`: baseline {item['baseline_candidate_count']}/5, eta-zero {item['eta_zero_candidate_count']}/5, shape-bounded {item['baseline_shape_bounded_count']}/5, cross-seed frequency range {item['baseline_frequency_relative_range']}; pass={item['candidate_pass']}.",
+                f"- `{source}`: baseline {item['baseline_candidate_count']}/5, eta-zero {item['eta_zero_candidate_count']}/5, shape-bounded {item['baseline_shape_bounded_count']}/5, cross-seed frequency range {_format_metric(item['baseline_frequency_relative_range'])}; pass={item['candidate_pass']}.",
             ]
         )
     lines.extend(

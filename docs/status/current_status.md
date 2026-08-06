@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-04.
+Stand: 2026-08-06.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -325,9 +325,14 @@ P3.2c ist ebenfalls negativ abgeschlossen. Ein strikt emitterlokaler Offset
 `3.54e-5`; sein Generator verschiebt sich gegenueber dem Einwegkanal nur um
 `0.00622` relativ. Der Schrittstrom ist noch schwacher, beide Vorzeichen und
 die Modenordnungen 8/16/32 stimmen mit der exakten Rechnung ueberein. Deshalb
-kein 500k-Bestaetigungslauf. Aktiv ist P3.2d: ein gespeichertes
-Source-Eligibility-Gate fuer den zentrierten spurlosen Shape-Tensor und seine
-Aenderung, bevor Tensor- oder Vektormemory eingefuehrt wird.
+kein 500k-Bestaetigungslauf. P3.2d ist nun ebenfalls negativ abgeschlossen.
+Da die alten Traces den vollen Shape-Tensor nicht speicherten, wurde die
+minimale autonome Reproduktion vorregistriert: `Q` hat zwar starke
+Niederfrequenzleistung, aber `0/5` Baseline-Pfade bestehen die
+Segmentidentitaet; `eta=0` ist staerker und liefert `2/5` Einzelkandidaten.
+`Delta Q/Delta tau` bleibt bei `0/5`. Eine Tensor-Mediatorregel ist damit nicht
+autorisiert. Naechster Schritt ist die formale Haertung einer expliziten
+Vektormemory-Erweiterung vor jeder neuen Mechanismussimulation.
 
 ## Paper-Status
 
