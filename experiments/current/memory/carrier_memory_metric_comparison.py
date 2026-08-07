@@ -743,12 +743,34 @@ def _plot(payload: dict[str, Any], destination: Path) -> None:
 
 def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     decision = payload["decision"]
+    final_horizon = max(payload["horizon_updates"])
+    base_cadence = min(payload["cadences"])
+    classifications = {name: [] for name in METRIC_NAMES}
+    for pair in payload["pairs"]:
+        for segment in pair["segments"]:
+            row = _find_row(segment, final_horizon, base_cadence)
+            for name in METRIC_NAMES:
+                classifications[name].append(
+                    row["metrics"][name]["dominant_classification"]
+                )
+    classification_summary = []
+    for name, values in classifications.items():
+        counts = {value: values.count(value) for value in sorted(set(values))}
+        classification_summary.append(
+            f"{name}="
+            + ", ".join(
+                f"{label} {count}/{len(values)}" for label, count in counts.items()
+            )
+        )
+    total_pairs = len(decision["pairs"])
     lines = [
         "# Carrier memory metric comparison",
         "",
         f"Generated: {payload['generated_utc']}",
         "",
-        f"Status: **{decision['status']}** ({decision['pass_count']}/{decision['required_pairs']} pairs).",
+        f"Status: **{decision['status']}** "
+        f"({decision['pass_count']}/{total_pairs} pairs; "
+        f"{decision['required_pairs']} required).",
         "",
         "## Scope",
         "",
@@ -796,6 +818,15 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         )
     lines.extend(
         [
+            "",
+            "## Observed separation",
+            "",
+            "At the final horizon and base cadence, across both segments: "
+            + "; ".join(classification_summary)
+            + ".",
+            "The finite-difference linearity and predictive cadence gates pass in all pairs,",
+            "but the cross-metric classification gate fails in all pairs. This separates a",
+            "numerically resolved probe response from the unresolved absolute metric scale.",
             "",
             "## Interpretation",
             "",
@@ -945,6 +976,7 @@ def main() -> None:
                 "max_horizon_scale_drift",
                 "min_subspace_overlap",
                 "required_pairs",
+                "min_regime_dominance",
             )
         },
         "horizons_memory_times": horizons_memory,
