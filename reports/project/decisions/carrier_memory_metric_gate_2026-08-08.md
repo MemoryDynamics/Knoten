@@ -141,3 +141,20 @@ null modes are reported separately. Metric-shape and supported-subspace gates
 are evaluated directly in the common carrier coordinates, not through one
 arbitrarily selected pullback. All previously fixed seeds, horizons, cadences,
 perturbations, gains, kernels and numerical tolerances remain unchanged.
+
+## Outcome
+
+The corrected clean-revision execution fails the preregistered gate in all six
+cyclic pairs. Across the 12 final segment evaluations, covariance classifies
+all as unstable, the predictive metric classifies 11 as overdamped and one as
+mixed, and the isotropic RKHS metric classifies all as complex. Finite-
+difference linearity and predictive cadence tests pass in every pair, so the
+failure is not attributable to an unresolved tangent or sampling cadence.
+Absolute metric scale, several horizon/segment checks and cross-metric
+classification do not reconcile.
+
+No nonlinear reciprocal pilot, gain retuning or lambda sweep is authorized.
+The next discriminating step is a matrix-free balanced feature test on the
+already deposited oriented full-memory state. It must demonstrate a stable
+controllable-and-observable low-rank subspace before any reduced metric or
+quadratic field energy is promoted beyond an explicit constitutive model.

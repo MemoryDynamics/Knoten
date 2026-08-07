@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-07.
+Stand: 2026-08-08.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -99,6 +99,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
   - Der Rueckkanal, das Memory-Metrik und seine relative Normierung sind neue,
     nicht identifizierte Modellteile. Der Audit beobachtet weder Oszillation
     noch Traegheit und sperrt einen freien Gain-/Metrik-Sweep.
+- [Carrier-Memory-Metrikvergleich](memory/carrier_memory_metric_comparison_2026-08-08.md)
+  - **negative metric closure:** Das vorregistrierte Gate besteht `0/6`
+    zyklische Paare. Kovarianz, Probe-Observability und isotrope RKHS-Metrik
+    ergeben bei fester Kopplung systematisch instabile, ueberdaempfte und
+    komplexe Regime statt einer gemeinsamen Klassifikation.
+  - Finite-Differenz-Linearitaet und Predictive-Cadence-Stabilitaet bestehen;
+    absolute Skala sowie teils Horizont- und Segmentform nicht. Kein
+    nichtlinearer reziproker Pilot und kein Gain-Retuning. Naechstes Gate ist
+    balancierte Vollmemory-Feature-Closure, nicht eine neue Parametersuche.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

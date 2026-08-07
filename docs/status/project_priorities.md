@@ -517,24 +517,33 @@ Prioritaetsfolge:
     verschiebt denselben Modus aus dem Fenster. Weder Oszillation noch
     Traegheit wurden simuliert oder beobachtet.
 
-    **Naechstes Gate vorregistriert:** Auf demselben reduzierten Carrier-Raum
-    `h=p in R^3` werden Kovarianz-Pseudoinverse, Probe-Observability-Gramian und
-    Gaussian-RKHS-Metrik verglichen. Die Selbst-Observability des passiven
-    Source ist exakt null; deshalb misst die Vorhersagemetrik ohne Zirkelschluss
-    die tangentielle Zukunftswirkung auf einen unabhaengigen Probe-Knoten im
-    bereits fixierten Einwegkanal. Sechs zyklische Paare, zwei nicht
-    ueberlappende Segmente, Horizonte `1,2,5,10` Memory-Zeiten, Cadences
-    `1,5,10` und zwei Stoeramplituden laufen ohne Gain-, Kernel- oder
-    Seed-Retuning. Erst bei mindestens 5/6 vollstaendigen Paarpasses darf ein
-    nichtlinearer Holdout-Pilot folgen. Der Carrier ist eine reduzierte
-    Feature-Closure, nicht das vollstaendige Feldmemory. Eine vor der
-    Ergebnisannahme erkannte Protokollkorrektur ersetzt die Klassifikation an
-    nur einem praesegmentalen Schritt durch Regimeanteile ueber alle Updates
-    des Segments. Ein Regime gilt erst ab `90%` der nicht-null transversalen
-    Moden als dominant; strukturelle longitudinale Nullmoden werden separat
-    ausgewiesen. Metrikform und Support werden direkt im gemeinsamen
-    Carrier-Raum verglichen. Der fehlerhafte Erstlauf wurde verworfen und ist
-    keine Evidenz.
+    **Drei-Metrik-Gate abgeschlossen, negativ (0/6):** Der korrigierte,
+    vor Ergebnisannahme festgelegte Segmenttest trennt numerische Messbarkeit
+    von physikalischer Closure. Finite-Differenz-Linearitaet (maximal
+    `2.18e-9`) sowie Predictive-Cadence-Skala (`0.0261..0.0748`) und -Form
+    (`2.16e-6..5.68e-6`) bestehen in allen Paaren. Am finalen Horizont ist
+    die Kovarianzmetrik in 12/12 Segmenten instabil, die Vorhersagemetrik in
+    11/12 ueberdaempft und einmal gemischt, die isotrope RKHS-Metrik in 12/12
+    komplex. Die Klassifikationen stimmen in keinem Paar ueberein; mehrere
+    Kovarianzskalen und Segmentformen sind noch horizontabhaengig. Der
+    Supportueberlapp von praktisch eins ist wegen des konstruktiven
+    transversalen Rangs nicht eigenstaendige Evidenz. Damit ist der
+    euklidische Eligibility-Pass normalisierungsabhaengig. Kein nichtlinearer
+    reziproker Pilot und kein Gain-/Lambda-Retuning.
+
+18. **P3.5 als naechstes: balancierte Vollmemory-Feature-Closure.** Auf den
+    sechs bestehenden reifen Zustaenden wird ohne neuen Formation-Long-Run
+    matrixfrei geprueft, ob das deponierte orientierte Feld einen kleinen
+    Unterraum besitzt, der zugleich durch die Trajektorie angeregt
+    (Controllability) und im fixierten unabhaengigen Probe-Readout beobachtet
+    wird (Observability). Primaer sind Hankel-Singulaerwerte, ein vorab
+    festgelegtes Spektralgap, Principal-Angle-Stabilitaet ueber Seeds,
+    Segmente, Horizonte und Cadences sowie echte Holdout-Vorhersage. Ein Pass
+    autorisiert nur einen reduzierten Carrier-plus-Feld-Zustand und dessen
+    Metriktest. Ohne stabilen Unterraum wird der adjungiert-reziproke
+    Vektorast geschlossen; ein quadratisches Feldgesetz bleibt dann eine
+    explizite konstitutive Annahme.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

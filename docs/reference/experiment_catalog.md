@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-04.
+Stand: 2026-08-08.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -76,6 +76,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
 | `experiments/current/memory/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
 | `experiments/current/memory/eta_zero_raw_mode_null_audit.py` | exakte rohe `eta=0`-Modenreferenz | abgeschlossen, negativ | N=1M-Kadenz; reeller Fourier-Zustandsblock, Rohfit-/Segmentleckage gegen archivierte ausgerichtete AR-Paare |
+| `experiments/current/memory/carrier_memory_metric_comparison.py` | Kovarianz-/Predictive-/RKHS-Metrik auf `h=p` | abgeschlossen, negativ | 0/6 zyklische Paare; lineare Tangente und Cadence stabil, aber absolute Metrikskala und Klassifikation nicht reconciliiert; oeffnet nur balancierte Vollmemory-Feature-Closure |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 

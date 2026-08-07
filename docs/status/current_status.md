@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-07.
+Stand: 2026-08-08.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -160,6 +160,8 @@ wichtig:
 17. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
 18. `reports/response/reciprocal_full_knot_gate_2026-08-04.md`
 19. `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`
+20. `reports/memory/adjoint_reciprocity_eligibility_audit_2026-08-07.md`
+21. `reports/memory/carrier_memory_metric_comparison_2026-08-08.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -171,6 +173,9 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
 - `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
 - `src/emergenz_knoten/stability.py`: Checkpoint-, Holdout- und lokale
   Stationaritaetsgates fuer lange Formationslaeufe.
+- `src/emergenz_knoten/memory_metrics.py`: PSD-Metriken, Observability-Gramian,
+  RKHS-Emission und explizite Support-/Formvergleiche fuer reduzierte
+  Memory-Features.
 - `src/emergenz_knoten/measurement_stability.py`: separates
   Messkonvergenzgate fuer cadence- und estimatorabhaengige
   Occupancy-Dimensionen.
@@ -352,8 +357,22 @@ Metrik-Kandidaten mindestens `99.83%` der Schritte in allen sechs reifen
 Snapshots im komplexen Fenster; die Seed-Median-Schrittweiten streuen nur um
 Faktor `1.045`. Das ist ein Eligibility-Pass, kein beobachteter Modus. Eine
 Reskalierung des Memory-Metriks aendert die Klassifikation, und die verwendete
-Kopplung ist nur aus einem frueheren Einweg-Gate geerbt. Vor einem nichtlinearen
-Pilot muss daher genau ein unabhaengig begruendetes Metrik festgelegt werden.
+Kopplung ist nur aus einem frueheren Einweg-Gate geerbt. Das anschliessende
+vorregistrierte Drei-Metrik-Gate ist mit `0/6` Paaren negativ: Kovarianz,
+Probe-Observability und isotrope RKHS-Geometrie klassifizieren dieselben
+Carrier-Segmente systematisch als instabil, ueberdaempft beziehungsweise
+komplex. Finite-Differenz-Linearitaet und Cadence-Stabilitaet bestehen, aber
+absolute Skala, Horizont-/Segmentstabilitaet und Klassifikation reconciliieren
+nicht. Der euklidische Eligibility-Pass ist damit normalisierungsabhaengig;
+ein nichtlinearer reziproker Pilot und Gain-Retuning bleiben gesperrt.
+
+Naechster falsifizierender Schritt ist eine matrixfreie balancierte Closure des
+bereits deponierten orientierten Vollmemorys. Nur seed-, segment-, horizon- und
+cadencestabile Moden, die sowohl deponiert als auch im unabhaengigen
+Probe-Readout beobachtet werden, duerfen den Carrier-Zustand erweitern. Ohne
+stabiles Hankel-Spektralgap und Holdout-Vorhersage wird dieser Vektorast
+beendet; eine quadratische Feldenergie waere dann ein neues konstitutives
+Postulat, kein emergenter Befund.
 
 ## Paper-Status
 

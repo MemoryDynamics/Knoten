@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-04.
+Stand: 2026-08-08.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -30,6 +30,7 @@ flowchart TD
     experiments --> reconcile_exp["reconcile_low_mode_ar_runs.py<br/>N=100k vs N=1M"]
     experiments --> identity_exp["low_mode_identity_audit.py<br/>seed + segment eigenvector matching"]
     experiments --> raw_null_exp["eta_zero_raw_mode_null_audit.py<br/>exact real null + cadence fit audit"]
+    experiments --> metric_exp["carrier_memory_metric_comparison.py<br/>0/6 carrier-only metric closure"]
     experiments --> oriented_exp["oriented_vector_one_way_gate.py<br/>6/6 constructed vector gate"]
     experiments --> fixed_pair_exp["oriented_vector_fixed_pair_distance_gate.py<br/>6/6 global-coupling pair gate"]
     experiments --> mediator_exp["local_oriented_mediator_gate.py<br/>both architectures pass; mechanism open"]
@@ -91,6 +92,7 @@ flowchart TD
     src --> spectral_rho["spectral_memory_field/runtime.py<br/>Fourier rho + cached O(M) operators"]
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>aligned and raw eta-zero Numba traces"]
+    src --> memory_metrics["memory_metrics.py<br/>covariance, predictive and RKHS metrics"]
     spectral_trace --> raw_null_exp
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
@@ -302,7 +304,7 @@ array. Independent seeds remain necessary for inferential claims.
   `frozen_source.py`, `coupled_nodes.py`, `signed_cross_channel.py`,
   `oriented_source.py`, `local_mediator.py`, `source_local_linear.py`,
   `source_local_modal.py`, `external_field_response.py`,
-  `autonomous_trace.py` und `synchronization.py`.
+  `autonomous_trace.py`, `memory_metrics.py` und `synchronization.py`.
 - `spectral_memory_field.py` ist eine kompakte Reprasentation des alten
   Memory. `relaxation_diffusion_memory.py` aendert mit modeabhaengigem
   Zerfall die Dynamik; `spectral_memory_trace.py` validiert niedrige Moden
