@@ -289,7 +289,7 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Proposed discrete closure",
         "",
-        r"\[x_{n+1}=x_n-gB^\dagger h_n,\qquad h_{n+1}=q h_n+B x_{n+1}.\]",
+        r"\[x_{n+1}=x_n-\sqrt g B^\dagger h_n,\qquad h_{n+1}=q h_n+\sqrt g B x_{n+1}.\]",
         "",
         r"For each metric singular value \(\sigma_B\),",
         "",

@@ -119,8 +119,8 @@ def reciprocal_memory_operator(
 
     The update order is
 
-    ``x_next = x - g B^dagger h``
-    ``h_next = q h + B x_next``.
+    ``x_next = x - sqrt(g) B^dagger h``
+    ``h_next = q h + sqrt(g) B x_next``.
 
     Here ``x`` is a translation-reduced visible perturbation, not necessarily
     the absolute particle position. This closure is a proposed extension and
@@ -132,6 +132,7 @@ def reciprocal_memory_operator(
         raise ValueError("forward_operator must be a finite matrix")
     q = _forgetting_factor(forgetting_factor)
     gain = _coupling(coupling)
+    root_gain = float(np.sqrt(gain))
     memory_size, visible_size = forward.shape
     adjoint = metric_adjoint(
         forward,
@@ -140,8 +141,11 @@ def reciprocal_memory_operator(
     )
     return np.block(
         [
-            [np.eye(visible_size), -gain * adjoint],
-            [forward, q * np.eye(memory_size) - gain * forward @ adjoint],
+            [np.eye(visible_size), -root_gain * adjoint],
+            [
+                root_gain * forward,
+                q * np.eye(memory_size) - gain * forward @ adjoint,
+            ],
         ]
     )
 
