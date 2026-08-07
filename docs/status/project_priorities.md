@@ -527,7 +527,14 @@ Prioritaetsfolge:
     `1,5,10` und zwei Stoeramplituden laufen ohne Gain-, Kernel- oder
     Seed-Retuning. Erst bei mindestens 5/6 vollstaendigen Paarpasses darf ein
     nichtlinearer Holdout-Pilot folgen. Der Carrier ist eine reduzierte
-    Feature-Closure, nicht das vollstaendige Feldmemory.
+    Feature-Closure, nicht das vollstaendige Feldmemory. Eine vor der
+    Ergebnisannahme erkannte Protokollkorrektur ersetzt die Klassifikation an
+    nur einem praesegmentalen Schritt durch Regimeanteile ueber alle Updates
+    des Segments. Ein Regime gilt erst ab `90%` der nicht-null transversalen
+    Moden als dominant; strukturelle longitudinale Nullmoden werden separat
+    ausgewiesen. Metrikform und Support werden direkt im gemeinsamen
+    Carrier-Raum verglichen. Der fehlerhafte Erstlauf wurde verworfen und ist
+    keine Evidenz.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

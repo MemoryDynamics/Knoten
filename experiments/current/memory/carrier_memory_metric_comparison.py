@@ -83,6 +83,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-horizon-scale-drift", type=float, default=0.25)
     parser.add_argument("--min-subspace-overlap", type=float, default=0.90)
     parser.add_argument("--required-pairs", type=int, default=5)
+    parser.add_argument("--min-regime-dominance", type=float, default=0.90)
     parser.add_argument("--allow-dirty", action="store_true")
     parser.add_argument(
         "--report",
@@ -190,7 +191,10 @@ def load_snapshot_case(path: Path) -> dict[str, Any]:
         "state": FiniteMemoryState(x=points[0], memory=points, weights=weights),
     }
 
-def perturb_carrier(state: OrientedMemoryState, perturbation: np.ndarray) -> OrientedMemoryState:
+
+def perturb_carrier(
+    state: OrientedMemoryState, perturbation: np.ndarray
+) -> OrientedMemoryState:
     """Change only the reduced carrier feature, leaving deposited history fixed."""
 
     delta = np.asarray(perturbation, dtype=float)
@@ -290,20 +294,66 @@ def _classification(value: float, q: float) -> str:
     return "unstable"
 
 
-def summarize_metric(metric: np.ndarray, forward: np.ndarray, *, gain: float, q: float) -> dict[str, Any]:
+def summarize_metric(
+    metric: np.ndarray,
+    forward_operators: np.ndarray,
+    *,
+    gain: float,
+    q: float,
+    min_dominance: float,
+) -> dict[str, Any]:
     values = np.maximum(np.linalg.eigvalsh(0.5 * (metric + metric.T)), 0.0)
-    pullback = metric_pullback(forward, metric)
-    pullback_values = np.maximum(np.linalg.eigvalsh(pullback), 0.0)
-    couplings = gain * pullback_values
+    forwards = np.asarray(forward_operators, dtype=float)
+    if forwards.ndim != 3 or forwards.shape[1:] != metric.shape:
+        raise ValueError("forward_operators must have shape (updates, dim, dim)")
+    couplings = []
+    null_count = 0
+    total_count = 0
+    fractions = {
+        name: 0 for name in ("overdamped", "complex", "alternating", "unstable")
+    }
+    for forward in forwards:
+        pullback_values = np.maximum(
+            np.linalg.eigvalsh(metric_pullback(forward, metric)), 0.0
+        )
+        for value in gain * pullback_values:
+            total_count += 1
+            classification = _classification(float(value), q)
+            if classification == "null":
+                null_count += 1
+            else:
+                couplings.append(float(value))
+                fractions[classification] += 1
+    if not couplings:
+        dominant = "null"
+        dominant_fraction = 1.0
+        normalized_fractions = {name: 0.0 for name in fractions}
+        quantiles = {name: 0.0 for name in ("min", "q10", "median", "q90", "max")}
+    else:
+        count = len(couplings)
+        normalized_fractions = {
+            name: value / count for name, value in fractions.items()
+        }
+        candidate = max(normalized_fractions, key=normalized_fractions.get)
+        dominant_fraction = float(normalized_fractions[candidate])
+        dominant = candidate if dominant_fraction >= min_dominance else "mixed"
+        coupling_values = np.asarray(couplings)
+        quantiles = {
+            "min": float(np.min(coupling_values)),
+            "q10": float(np.quantile(coupling_values, 0.1)),
+            "median": float(np.median(coupling_values)),
+            "q90": float(np.quantile(coupling_values, 0.9)),
+            "max": float(np.max(coupling_values)),
+        }
     return {
         "metric": metric,
         "metric_eigenvalues": values,
         "metric_trace": float(np.trace(metric)),
-        "pullback": pullback,
-        "pullback_eigenvalues": pullback_values,
-        "dimensionless_couplings": couplings,
-        "classifications": [_classification(float(value), q) for value in couplings],
-        "complex_count": int(sum(_classification(float(value), q) == "complex" for value in couplings)),
+        "dimensionless_coupling_quantiles": quantiles,
+        "classification_fractions": normalized_fractions,
+        "dominant_classification": dominant,
+        "dominant_fraction": dominant_fraction,
+        "null_fraction": null_count / total_count,
     }
 
 
@@ -327,8 +377,12 @@ def run_segment(
     args: argparse.Namespace,
 ) -> dict[str, Any]:
     config = target_case["config"]
-    source_radius = float(np.sqrt(np.trace(memory_shape_tensor(source_state.scalar_state))))
-    target_radius = float(np.sqrt(np.trace(memory_shape_tensor(target_state.scalar_state))))
+    source_radius = float(
+        np.sqrt(np.trace(memory_shape_tensor(source_state.scalar_state)))
+    )
+    target_radius = float(
+        np.sqrt(np.trace(memory_shape_tensor(target_state.scalar_state)))
+    )
     offset = np.zeros(config.dim)
     offset[0] = reference_geometry["offset_magnitude"]
     vector_sigma = reference_geometry["vector_sigma"]
@@ -375,9 +429,14 @@ def run_segment(
         memory_decay=1.0 - args.lambda_vector,
         kernel_sigma=vector_sigma,
     )
-    step = source_state.scalar_state.memory[0] - source_state.scalar_state.memory[1]
-    forward = normalized_direction_jacobian(
-        step, relaxation=args.orientation_relaxation
+    displacements = np.diff(source_positions, axis=0)
+    forward_operators = np.asarray(
+        [
+            normalized_direction_jacobian(
+                displacement, relaxation=args.orientation_relaxation
+            )
+            for displacement in displacements
+        ]
     )
     q = 1.0 - args.lambda_vector
     rows = []
@@ -405,7 +464,13 @@ def run_segment(
                 "kernel": kernel,
             }
             summaries = {
-                name: summarize_metric(metric, forward, gain=args.vector_eta, q=q)
+                name: summarize_metric(
+                    metric,
+                    forward_operators[:horizon],
+                    gain=args.vector_eta,
+                    q=q,
+                    min_dominance=args.min_regime_dominance,
+                )
                 for name, metric in metrics.items()
             }
             comparisons = {}
@@ -416,10 +481,10 @@ def run_segment(
             ):
                 comparisons[f"{left}_vs_{right}"] = {
                     "shape_distance": trace_normalized_distance(
-                        summaries[left]["pullback"], summaries[right]["pullback"]
+                        metrics[left], metrics[right]
                     ),
                     "subspace_overlap": supported_subspace_overlap(
-                        summaries[left]["pullback"], summaries[right]["pullback"]
+                        metrics[left], metrics[right]
                     ),
                 }
             rows.append(
@@ -489,7 +554,7 @@ def evaluate_gates(
             base = _find_row(segment, final_horizon, base_cadence)
             signatures.append(
                 tuple(
-                    tuple(base["metrics"][name]["classifications"])
+                    base["metrics"][name]["dominant_classification"]
                     for name in METRIC_NAMES
                 )
             )
@@ -512,8 +577,8 @@ def evaluate_gates(
                 cadence_shape = max(
                     cadence_shape,
                     trace_normalized_distance(
-                        np.asarray(base["metrics"]["predictive"]["pullback"]),
-                        np.asarray(coarse["metrics"]["predictive"]["pullback"]),
+                        np.asarray(base["metrics"]["predictive"]["metric"]),
+                        np.asarray(coarse["metrics"]["predictive"]["metric"]),
                     ),
                 )
             for comparison in base["comparisons"].values():
@@ -527,13 +592,21 @@ def evaluate_gates(
                 segment_shape = max(
                     segment_shape,
                     trace_normalized_distance(
-                        np.asarray(first["metrics"][name]["pullback"]),
-                        np.asarray(second["metrics"][name]["pullback"]),
+                        np.asarray(first["metrics"][name]["metric"]),
+                        np.asarray(second["metrics"][name]["metric"]),
                     ),
                 )
         classification_agreement = len(set(signatures)) == 1
         metric_signature = signatures[0]
         cross_metric_agreement = len(set(metric_signature)) == 1
+        minimum_dominance = min(
+            _find_row(segment, final_horizon, base_cadence)["metrics"][name][
+                "dominant_fraction"
+            ]
+            for segment in segments
+            for name in METRIC_NAMES
+        )
+        regime_dominance = minimum_dominance >= args.min_regime_dominance
         gates = {
             "linearity": linearity <= args.max_linearity_error,
             "cadence_scale": cadence_scale <= args.max_cadence_scale_drift,
@@ -542,6 +615,7 @@ def evaluate_gates(
             "horizon_scale": horizon_scale <= args.max_horizon_scale_drift,
             "subspace": cross_overlap >= args.min_subspace_overlap,
             "segment_classification": classification_agreement,
+            "regime_dominance": regime_dominance,
             "cross_metric_classification": cross_metric_agreement,
         }
         pair_gates.append(
@@ -556,6 +630,7 @@ def evaluate_gates(
                 "cross_metric_shape_distance": cross_shape,
                 "minimum_subspace_overlap": cross_overlap,
                 "classification_signature": metric_signature,
+                "minimum_regime_dominance": minimum_dominance,
                 "gates": gates,
                 "pass": all(gates.values()),
             }
@@ -586,13 +661,20 @@ def _plot(payload: dict[str, Any], destination: Path) -> None:
         for pair_index, pair in enumerate(payload["pairs"]):
             for segment in pair["segments"]:
                 row = _find_row(segment, final_horizon, cadence)
-                values = np.asarray(row["metrics"][metric]["dimensionless_couplings"])
-                axes[0, 0].scatter(
-                    np.full(values.size, pair_index + 1) + 0.04 * segment["segment"],
-                    np.maximum(values, np.finfo(float).tiny),
+                quantiles = row["metrics"][metric]["dimensionless_coupling_quantiles"]
+                median = max(quantiles["median"], np.finfo(float).tiny)
+                axes[0, 0].errorbar(
+                    pair_index + 1 + 0.04 * segment["segment"],
+                    median,
+                    yerr=[
+                        [median - max(quantiles["q10"], np.finfo(float).tiny)],
+                        [max(quantiles["q90"], np.finfo(float).tiny) - median],
+                    ],
+                    fmt="o",
                     color=colors[metric],
                     alpha=0.55,
-                    s=18,
+                    markersize=4,
+                    capsize=2,
                 )
         traces = []
         for horizon in payload["horizon_updates"]:
@@ -603,7 +685,11 @@ def _plot(payload: dict[str, Any], destination: Path) -> None:
                     values.append(row["metrics"][metric]["metric_trace"])
             traces.append(float(np.median(values)))
         axes[0, 1].plot(
-            payload["horizons_memory_times"], traces, "o-", color=colors[metric], label=metric
+            payload["horizons_memory_times"],
+            traces,
+            "o-",
+            color=colors[metric],
+            label=metric,
         )
     axes[0, 0].axhspan(lower, upper, color="#5a9367", alpha=0.15)
     axes[0, 0].set_yscale("log")
@@ -616,19 +702,34 @@ def _plot(payload: dict[str, Any], destination: Path) -> None:
     axes[0, 1].set_title("Horizon dependence")
     axes[0, 1].legend(frameon=False)
     gate_rows = payload["decision"]["pairs"]
-    names = ["linearity_error", "cadence_scale_drift", "segment_shape_drift", "horizon_scale_drift"]
+    names = [
+        "linearity_error",
+        "cadence_scale_drift",
+        "segment_shape_drift",
+        "horizon_scale_drift",
+    ]
     values = np.asarray([[row[name] for name in names] for row in gate_rows])
     image = axes[1, 0].imshow(values, aspect="auto", cmap="viridis")
-    axes[1, 0].set_xticks(np.arange(len(names)), ["linearity", "cadence", "segment", "horizon"], rotation=20)
-    axes[1, 0].set_yticks(np.arange(len(gate_rows)), [str(row["source_seed"]) for row in gate_rows])
+    axes[1, 0].set_xticks(
+        np.arange(len(names)),
+        ["linearity", "cadence", "segment", "horizon"],
+        rotation=20,
+    )
+    axes[1, 0].set_yticks(
+        np.arange(len(gate_rows)), [str(row["source_seed"]) for row in gate_rows]
+    )
     axes[1, 0].set_ylabel("source seed")
     axes[1, 0].set_title("Stability diagnostics")
     figure.colorbar(image, ax=axes[1, 0], fraction=0.046)
     shape = [row["cross_metric_shape_distance"] for row in gate_rows]
     overlap = [row["minimum_subspace_overlap"] for row in gate_rows]
     positions = np.arange(1, len(gate_rows) + 1)
-    axes[1, 1].bar(positions - 0.18, shape, 0.36, label="shape distance", color="#a23b3b")
-    axes[1, 1].bar(positions + 0.18, overlap, 0.36, label="subspace overlap", color="#176b87")
+    axes[1, 1].bar(
+        positions - 0.18, shape, 0.36, label="shape distance", color="#a23b3b"
+    )
+    axes[1, 1].bar(
+        positions + 0.18, overlap, 0.36, label="subspace overlap", color="#176b87"
+    )
     axes[1, 1].set_xlabel("cyclic pair")
     axes[1, 1].set_title("Cross-metric geometry")
     axes[1, 1].legend(frameon=False)
@@ -680,16 +781,17 @@ def _report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Pair decisions",
         "",
-        "| target<-source | linearity | cadence scale | segment shape | horizon scale | cross shape | subspace | metric signatures | pass |",
-        "|---|---:|---:|---:|---:|---:|---:|---|---|",
+        "| target<-source | linearity | cadence scale | segment shape | horizon scale | cross shape | subspace | min dominance | metric signatures | pass |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for row in decision["pairs"]:
-        signatures = "; ".join("/".join(item) for item in row["classification_signature"])
+        signatures = "; ".join(row["classification_signature"])
         lines.append(
             f"| {row['target_seed']}<-{row['source_seed']} | {row['linearity_error']:.3g} | "
             f"{row['cadence_scale_drift']:.3g} | {row['segment_shape_drift']:.3g} | "
             f"{row['horizon_scale_drift']:.3g} | {row['cross_metric_shape_distance']:.3g} | "
-            f"{row['minimum_subspace_overlap']:.3g} | `{signatures}` | "
+            f"{row['minimum_subspace_overlap']:.3g} | "
+            f"{row['minimum_regime_dominance']:.3g} | `{signatures}` | "
             f"{'pass' if row['pass'] else 'fail'} |"
         )
     lines.extend(
@@ -731,7 +833,9 @@ def main() -> None:
     args = parse_args()
     git_status = _git_output(["status", "--short"])
     if git_status and not args.allow_dirty:
-        raise SystemExit("refusing dirty worktree; commit preregistration or use --allow-dirty")
+        raise SystemExit(
+            "refusing dirty worktree; commit preregistration or use --allow-dirty"
+        )
     seeds = _parse_ints(args.seeds)
     if len(seeds) < 2 or len(seeds) != len(set(seeds)):
         raise ValueError("at least two unique seeds are required")
@@ -814,9 +918,7 @@ def main() -> None:
                 "segments": segments,
             }
         )
-    decision = evaluate_gates(
-        pairs, horizons=horizons, cadences=cadences, args=args
-    )
+    decision = evaluate_gates(pairs, horizons=horizons, cadences=cadences, args=args)
     payload = {
         "schema": "emergenz-knoten.carrier-memory-metric-comparison.v1",
         "generated_utc": datetime.now(UTC).isoformat(),
@@ -858,7 +960,9 @@ def main() -> None:
     report.parent.mkdir(parents=True, exist_ok=True)
     summary.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(_report(payload, report, figure), encoding="utf-8")
-    summary.write_text(json.dumps(_jsonable(payload), indent=2) + "\n", encoding="utf-8")
+    summary.write_text(
+        json.dumps(_jsonable(payload), indent=2) + "\n", encoding="utf-8"
+    )
     print(json.dumps(decision, indent=2))
 
 

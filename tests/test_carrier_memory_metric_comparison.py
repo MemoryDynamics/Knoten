@@ -47,6 +47,12 @@ def test_classification_covers_exact_mode_order() -> None:
 def test_metric_summary_preserves_forward_null_mode() -> None:
     metric = np.diag([2.0, 3.0, 4.0])
     forward = np.diag([1.0, 1.0, 0.0])
-    summary = summarize_metric(metric, forward, gain=0.1, q=0.9)
-    np.testing.assert_allclose(summary["pullback_eigenvalues"][0], 0.0)
-    assert summary["classifications"][0] == "null"
+    summary = summarize_metric(
+        metric,
+        np.stack((forward, forward)),
+        gain=0.1,
+        q=0.9,
+        min_dominance=0.9,
+    )
+    np.testing.assert_allclose(summary["null_fraction"], 1.0 / 3.0)
+    assert summary["dominant_classification"] != "null"

@@ -92,12 +92,14 @@ Per pair:
 
 1. finite-difference linearity error at most 5%;
 2. predictive metric scale drift across cadences at most 20%;
-3. predictive pullback shape drift across cadences at most 10%;
-4. maximum pullback shape drift across two segments at most 25%;
+3. predictive metric-shape drift across cadences at most 10%;
+4. maximum metric-shape drift across two segments at most 25%;
 5. metric-trace drift from five to ten memory times at most 25%;
-6. supported pullback-subspace overlap across metrics at least 0.90;
+6. supported metric-subspace overlap across metrics at least 0.90;
 7. reciprocal classifications stable across both segments;
-8. covariance, predictive and kernel metrics give the same final reciprocal
+8. at least 90% of all supported update modes in every final segment/metric
+   belong to one reciprocal regime;
+9. covariance, predictive and kernel metrics give the same final reciprocal
    classification signature.
 
 At least five of six pairs must pass. The last criterion is deliberately
@@ -117,3 +119,25 @@ enlarge the measured memory feature beyond the carrier.
 The normalized-direction Jacobian always has one longitudinal null and two
 transverse directions in d=3. High subspace overlap can therefore be structural
 and is not sufficient evidence for an emergent three-dimensional geometry.
+
+## Protocol correction before accepted execution
+
+The first execution exposed a protocol error before its output was accepted,
+committed or interpreted. It classified each segment with the single source
+step immediately before the segment start. Since
+
+\[
+B_n=\kappa(I-u_nu_n^\mathsf T)/\lVert\Delta x_n\rVert
+\]
+
+depends strongly on the instantaneous step length, this sampled neither a
+representative knot state nor a segment-level mode distribution. Those outputs
+were deleted and are not evidence.
+
+The corrected protocol evaluates \(B_n\) at every update in each segment. It
+reports regime fractions over all non-null transverse modes and assigns a
+dominant label only when its fraction is at least 0.90. Structural longitudinal
+null modes are reported separately. Metric-shape and supported-subspace gates
+are evaluated directly in the common carrier coordinates, not through one
+arbitrarily selected pullback. All previously fixed seeds, horizons, cadences,
+perturbations, gains, kernels and numerical tolerances remain unchanged.
