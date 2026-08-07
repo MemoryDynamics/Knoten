@@ -74,6 +74,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     `1.43e-14`; ein konstantes `K=1` ist exakt kraftfrei.
   - Die Umformung macht aus nichtnegativem Occupancy-Memory ein signiertes
     Potentialmemory. Sie erzeugt keine selbstdynamische Feldgleichung.
+- [Kovariante Vektorrueckkopplung und Parameter-Closure](project/decisions/covariant_vector_feedback_and_parameter_closure_2026-08-07.md)
+  - **structural:** Der parity-even lokale Ein-Vektorfeld-Gradientenfluss
+    zerfaellt in reelle longitudinale/transversale Raten. Eine endliche
+    Wellenzahl wird nur bei b_hat_L oder b_hat_T < -2 instabil ausgewaehlt;
+    Gradientendynamik allein erzeugt keine zeitliche Phase.
+  - Das passive orientierte Mikro-Update hat homogen exakt den Faktor
+    1-lambda_v und enthaelt keine raeumlichen Feldkoeffizienten. Solche Werte
+    duerfen nur als skalen- und holdout-stabile effektive Closure-Koeffizienten
+    oder als klar deklarierte neue Postulate auftreten.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

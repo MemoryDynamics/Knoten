@@ -474,10 +474,15 @@ Prioritaetsfolge:
     Random-Sign-Null (Faktor 3.42..4.49), behaelt aber keine robuste Achse;
     das Gesamtgate besteht 0/6. Der Zirkulations-Bivektor liegt in 6/6 Seeds
     unter der q99-Null (Faktor 0.54..0.76) und besteht ebenfalls 0/6.
-    Kein Lambda-/Kappa-Sweep dieses passiven Zustands. Vor einer weiteren
-    Simulation ist eine O(d)-kovariante Source-Rueckkopplungsregel mit exakten
-    Nullgrenzen analytisch festzulegen. Ladung und Flavor bleiben im aktuellen
-    Zustandsraum undefiniert; kein Photon- oder Spinclaim.
+    Kein Lambda-/Kappa-Sweep dieses passiven Zustands. Die O(d)-kovariante
+    Analyse ist abgeschlossen: parity-even Ein-Feld-Gradientenfluss hat ein
+    reelles Spektrum; eine endliche Raumskala entsteht nur fuer
+    b_hat_L oder b_hat_T < -2. Das passive Mikro-Update besitzt exakt nur den
+    homogenen Faktor 1-lambda_v und keine solchen Gradientenkoeffizienten.
+    Naechster Schritt ist daher source-konditionierte L/T-Fourier-Closure auf
+    den bestehenden sechs Traces. Erst seed-, skalen- und holdout-stabile
+    effektive Koeffizienten duerfen eine aktive Simulation autorisieren.
+    Ladung und Flavor bleiben undefiniert; kein Photon- oder Spinclaim.
 14. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
     Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
     shape-gueltig. Die kontrollsubtrahierte Pfaddifferenz waechst stark, aber

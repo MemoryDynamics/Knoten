@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-06.
+Stand: 2026-08-07.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -331,8 +331,14 @@ minimale autonome Reproduktion vorregistriert: `Q` hat zwar starke
 Niederfrequenzleistung, aber `0/5` Baseline-Pfade bestehen die
 Segmentidentitaet; `eta=0` ist staerker und liefert `2/5` Einzelkandidaten.
 `Delta Q/Delta tau` bleibt bei `0/5`. Eine Tensor-Mediatorregel ist damit nicht
-autorisiert. Naechster Schritt ist die formale Haertung einer expliziten
-Vektormemory-Erweiterung vor jeder neuen Mechanismussimulation.
+autorisiert. Die Vektormemory-Erweiterung ist inzwischen formal gehaertet:
+Das passive Source-Gate ist fuer Polarisation und Zirkulations-Bivektor 0/6
+negativ. Die anschliessende O(d)-kovariante Analyse zeigt, dass ein
+parity-even Ein-Feld-Gradientenfluss nur reelle Raten besitzt und eine
+endliche Raumskala erst bei b_hat_L oder b_hat_T < -2 selektiert. Das aktuelle
+passive Mikro-Update enthaelt diese Koeffizienten nicht. Vor jeder aktiven
+Mechanismussimulation folgt deshalb eine source-konditionierte
+Longitudinal-/Transversal-Fourier-Closure auf bestehenden Traces.
 
 ## Paper-Status
 
