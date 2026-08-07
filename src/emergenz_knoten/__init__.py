@@ -72,13 +72,19 @@ from .oriented_source import (
     OrientedMemoryState,
     OrientedOneWayResponse,
     OrientedSourceTrace,
+    advance_oriented_memory_state,
     autonomous_oriented_source_trace,
     initialize_oriented_memory_state,
     one_way_oriented_response,
     place_oriented_memory_state,
     update_persistent_orientation,
 )
-from .oriented_diagnostics import oriented_response_metrics
+from .oriented_diagnostics import (
+    OrientedMemoryMoments,
+    oriented_memory_moments,
+    oriented_response_metrics,
+    random_sign_memory_coherences,
+)
 from .diagnostics import (
     ball_residence_statistics,
     bootstrap_mean_ci,
@@ -270,6 +276,7 @@ __all__ = [
     "PairedExternalFieldResponse",
     "OneWayCoupledResponse",
     "OrientedMemoryState",
+    "OrientedMemoryMoments",
     "OrientedOneWayResponse",
     "OrientedSourceTrace",
     "RelativeOrbitalObservables",
@@ -298,6 +305,7 @@ __all__ = [
     "ball_residence_statistics",
     "ballistic_scaling_slope",
     "advance_spectral_memory_state",
+    "advance_oriented_memory_state",
     "advance_collapsed_potential_state",
     "attractive_amplitude_for_curvature",
     "autonomous_knot_trace",
@@ -365,6 +373,8 @@ __all__ = [
     "one_way_coupled_response",
     "one_way_oriented_response",
     "oriented_response_metrics",
+    "oriented_memory_moments",
+    "random_sign_memory_coherences",
     "occupancy_local_slopes",
     "occupancy_measurement_convergence_diagnostics",
     "omitted_history_weight",

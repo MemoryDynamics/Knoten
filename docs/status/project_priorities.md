@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-06.
+Stand: 2026-08-07.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -467,12 +467,15 @@ Prioritaetsfolge:
     `eta=0`-Arm ist derselbe Niederfrequenzcharakter staerker (`2/5`).
     `Delta Q/Delta tau` liefert `0/5` Baseline-Kandidaten. Keine
     Tensor-Mediatorregel wird autorisiert.
-13. **Naechster Mechanismusschritt: Vektormemory erst formal haerten:** Die
-    skalaren Fernquellen Offset, Strom und Shape-Multipol sind geschlossen.
-    Vor einer neuen Simulation werden Zustandsraum, Updategleichung,
-    Symmetrien, Nullgrenzen, Parameteridentifizierbarkeit und ein
-    source-lokales Eligibility-Gate der bereits pilotierten orientierten
-    Memory-Faser festgelegt. Kein Photon-, Spin- oder Ladungsclaim.
+13. **Vektormemory formal gehaertet; Source-Gate vorregistriert:** Der aktive
+    Zustand ist jetzt explizit z=(x,rho,p,m) bzw. seine vollstaendige
+    finite-memory Darstellung. Persistenter Traeger und alte
+    Ein-Schritt-Richtungsdeposition sind getrennte Modelle; Symmetrien,
+    Nullgrenzen, Tailfehler und die Produkt-Identifizierbarkeit von
+    eta_v*M_v*Readout sind dokumentiert und getestet. Das eingefrorene
+    Sechs-Seed-Gate entscheidet Polarisation und Zirkulations-Bivektor getrennt
+    gegen depositweise Random-Sign-Nullen. Ladung und Flavor sind im aktuellen
+    Zustandsraum undefiniert; kein Photon- oder Spinclaim.
 14. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
     Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
     shape-gueltig. Die kontrollsubtrahierte Pfaddifferenz waechst stark, aber

@@ -94,6 +94,7 @@ CATEGORIES = {
         "current/memory/synchronization/scalar_cross_readout_resolution.py",
         "current/memory/synchronization/oriented_history_current_audit.py",
         "current/memory/synchronization/oriented_vector_one_way_gate.py",
+        "current/memory/synchronization/oriented_memory_source_eligibility_gate.py",
         "current/memory/synchronization/oriented_vector_fixed_pair_distance_gate.py",
         "current/memory/synchronization/local_oriented_mediator_gate.py",
         "current/memory/synchronization/oriented_source_mediator_identifiability.py",

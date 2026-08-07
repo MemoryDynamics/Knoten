@@ -2,11 +2,163 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 
-from .oriented_source import OrientedOneWayResponse
+from .oriented_source import OrientedMemoryState, OrientedOneWayResponse
+
+
+@dataclass(frozen=True)
+class OrientedMemoryMoments:
+    """Rotation-covariant moments of every retained oriented deposit."""
+
+    total_weight: float
+    center: np.ndarray
+    rms_radius: float
+    polarization: np.ndarray
+    polarization_coherence: float
+    circulation_bivector: np.ndarray
+    circulation_coherence: float
+    orientation_power: float
+
+
+def oriented_memory_moments(state: OrientedMemoryState) -> OrientedMemoryMoments:
+    """Summarize the full retained vector fibre without selecting coordinates.
+
+    The polarization is a polar vector. The circulation bivector is an
+    antisymmetric rank-2 tensor; only in three dimensions may it be dualized to
+    an axial vector. Neither observable is a quantized spin or a charge.
+    """
+
+    positions = np.asarray(state.scalar_state.memory, dtype=float)
+    orientations = np.asarray(state.orientations, dtype=float)
+    weights = np.asarray(state.weights, dtype=float)
+    mass = float(np.sum(weights))
+    dim = state.dim
+    if mass <= 0.0:
+        return OrientedMemoryMoments(
+            total_weight=0.0,
+            center=np.zeros(dim, dtype=float),
+            rms_radius=0.0,
+            polarization=np.zeros(dim, dtype=float),
+            polarization_coherence=0.0,
+            circulation_bivector=np.zeros((dim, dim), dtype=float),
+            circulation_coherence=0.0,
+            orientation_power=0.0,
+        )
+
+    normalized = weights / mass
+    center = np.sum(normalized[:, None] * positions, axis=0)
+    radial = positions - center
+    polarization = np.sum(normalized[:, None] * orientations, axis=0)
+    absolute_polarization = float(
+        np.sum(weights * np.linalg.norm(orientations, axis=1))
+    )
+    polarization_coherence = (
+        float(
+            np.linalg.norm(np.sum(weights[:, None] * orientations, axis=0))
+            / absolute_polarization
+        )
+        if absolute_polarization > 0.0
+        else 0.0
+    )
+
+    wedges = (
+        radial[:, :, None] * orientations[:, None, :]
+        - orientations[:, :, None] * radial[:, None, :]
+    )
+    circulation = np.sum(normalized[:, None, None] * wedges, axis=0)
+    absolute_circulation = float(
+        np.sum(weights * np.linalg.norm(wedges, axis=(1, 2)))
+    )
+    circulation_coherence = (
+        float(
+            np.linalg.norm(np.sum(weights[:, None, None] * wedges, axis=0))
+            / absolute_circulation
+        )
+        if absolute_circulation > 0.0
+        else 0.0
+    )
+    rms_radius = float(
+        np.sqrt(np.sum(normalized * np.einsum("ij,ij->i", radial, radial)))
+    )
+    orientation_power = float(
+        np.sum(normalized * np.einsum("ij,ij->i", orientations, orientations))
+    )
+    return OrientedMemoryMoments(
+        total_weight=mass,
+        center=center,
+        rms_radius=rms_radius,
+        polarization=polarization,
+        polarization_coherence=polarization_coherence,
+        circulation_bivector=circulation,
+        circulation_coherence=circulation_coherence,
+        orientation_power=orientation_power,
+    )
+
+
+def random_sign_memory_coherences(
+    state: OrientedMemoryState,
+    random_signs: Any,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return polarization and circulation coherences for deposit-sign nulls."""
+
+    signs = np.asarray(random_signs, dtype=float)
+    n_memory = state.scalar_state.n_memory
+    if (
+        signs.ndim != 2
+        or signs.shape[1] != n_memory
+        or not np.isfinite(signs).all()
+        or not np.all(np.isin(signs, (-1.0, 1.0)))
+    ):
+        raise ValueError("random_signs must contain +/-1 with shape (draws, memory)")
+    weights = np.asarray(state.weights, dtype=float)
+    orientations = np.asarray(state.orientations, dtype=float)
+    mass = float(np.sum(weights))
+    if mass <= 0.0:
+        zeros = np.zeros(signs.shape[0], dtype=float)
+        return zeros, zeros.copy()
+
+    center = np.sum(
+        (weights / mass)[:, None] * state.scalar_state.memory,
+        axis=0,
+    )
+    radial = state.scalar_state.memory - center
+    weighted_orientations = weights[:, None] * orientations
+    polarization_sums = signs @ weighted_orientations
+    polarization_denominator = float(
+        np.sum(weights * np.linalg.norm(orientations, axis=1))
+    )
+    if polarization_denominator > 0.0:
+        polarization = (
+            np.linalg.norm(polarization_sums, axis=1) / polarization_denominator
+        )
+    else:
+        polarization = np.zeros(signs.shape[0], dtype=float)
+
+    wedges = (
+        radial[:, :, None] * orientations[:, None, :]
+        - orientations[:, :, None] * radial[:, None, :]
+    )
+    circulation_sums = np.einsum(
+        "rn,n,nij->rij",
+        signs,
+        weights,
+        wedges,
+    )
+    circulation_denominator = float(
+        np.sum(weights * np.linalg.norm(wedges, axis=(1, 2)))
+    )
+    if circulation_denominator > 0.0:
+        circulation = (
+            np.linalg.norm(circulation_sums, axis=(1, 2))
+            / circulation_denominator
+        )
+    else:
+        circulation = np.zeros(signs.shape[0], dtype=float)
+    return polarization, circulation
 
 
 def normalized_shape_spectra(shape_tensors: Any) -> np.ndarray:

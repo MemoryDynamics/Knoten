@@ -9,7 +9,11 @@ import numpy as np
 
 from ._continuation import path_gradient, path_observables
 from .core import SimulationConfig, validate_simulation_config
-from .kernels import effective_double_gaussian_parameters, exponential_memory_weights
+from .kernels import (
+    double_gaussian_gradient,
+    effective_double_gaussian_parameters,
+    exponential_memory_weights,
+)
 from .state import FiniteMemoryState, memory_centroid, place_finite_memory_state
 
 try:
@@ -120,6 +124,65 @@ def update_persistent_orientation(
     norm = float(np.linalg.norm(step))
     drive = np.zeros_like(step) if norm == 0.0 else step / norm
     return (1.0 - relaxation) * old + relaxation * drive
+
+
+def advance_oriented_memory_state(
+    state: OrientedMemoryState,
+    config: SimulationConfig,
+    *,
+    noise_increment: Iterable[float],
+) -> OrientedMemoryState:
+    """Advance the passive oriented-memory source by one exact discrete update.
+
+    The scalar memory drives the visible update. The oriented fibre records the
+    persistent carrier at the new position but does not yet exert a self-force.
+    Keeping this boundary explicit prevents a phenomenological target readout
+    from silently becoming a new source equation.
+    """
+
+    validate_simulation_config(config)
+    if state.dim != config.dim:
+        raise ValueError("state and config dimensions must match")
+    noise = np.asarray(noise_increment, dtype=float)
+    if noise.shape != (state.dim,) or not np.isfinite(noise).all():
+        raise ValueError("noise_increment must be finite and match state dimension")
+
+    scalar = state.scalar_state
+    gradient = double_gaussian_gradient(
+        scalar.x,
+        scalar.memory,
+        scalar.weights,
+        sigma_rep=config.sigma_rep,
+        sigma_att=config.sigma_att,
+        amplitude_rep=config.amplitude_rep,
+        amplitude_att=config.amplitude_att,
+        deposition_kernel=config.deposition_kernel,
+        deposition_sigma=config.deposition_sigma,
+    )
+    x_next = scalar.x + config.epsilon * noise - config.eta * gradient
+    carrier = update_persistent_orientation(
+        state.carrier_orientation,
+        x_next - scalar.x,
+        relaxation=state.orientation_relaxation,
+    )
+
+    memory = np.empty_like(scalar.memory)
+    memory[0] = x_next
+    memory[1:] = scalar.memory[:-1]
+    orientations = np.empty_like(state.orientations)
+    orientations[0] = carrier
+    orientations[1:] = state.orientations[:-1]
+    return OrientedMemoryState(
+        scalar_state=FiniteMemoryState(
+            x=x_next,
+            memory=memory,
+            weights=scalar.weights,
+        ),
+        orientations=orientations,
+        weights=state.weights,
+        carrier_orientation=carrier,
+        orientation_relaxation=state.orientation_relaxation,
+    )
 
 
 def initialize_oriented_memory_state(
