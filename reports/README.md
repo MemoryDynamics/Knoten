@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-06.
+Stand: 2026-08-07.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -146,6 +146,14 @@ identifizierten physikalischen Moden.
   - **negative + pipeline-only:** Weder polarer Verschiebungsstrom noch
     antisymmetrische Zirkulation ueberschreiten in `d=3/10` die konditionale
     99%-Random-Sign-Null; je ein Checkpoint pro Einbettung.
+- [Source-lokales Vollmemory-Gate](response/oriented_memory_source_eligibility_gate_2026-08-07.md)
+  - **negative:** Die Polarisation liegt in allen sechs reifen d=3-Sources
+    ueber der depositweisen q99-Random-Sign-Null (Faktor 3.42..4.49), verliert
+    aber ihre spaete Achsenidentitaet; Gesamtpass 0/6.
+  - Der antisymmetrische Zirkulations-Bivektor bleibt in allen Seeds unter
+    derselben Null (Faktor 0.54..0.76); ebenfalls 0/6. Alle Source-Shape-Bounds
+    bestehen. Passive persistente Orientierung ist damit ein gerichteter
+    Kanalinput, aber kein stabiler intrinsischer Spin-/Zirkulationskandidat.
 - [Eigenstaendiger orientierter One-Way-Kanal](response/oriented_vector_one_way_gate_2026-07-25.md)
   - **supported, model-conditional:** Das vorregistrierte Gate besteht in 6/6
     `d=3`-Formationsseeds. Persistent/random-q95 liegt bei `5.76..11.64`, der

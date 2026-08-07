@@ -467,14 +467,16 @@ Prioritaetsfolge:
     `eta=0`-Arm ist derselbe Niederfrequenzcharakter staerker (`2/5`).
     `Delta Q/Delta tau` liefert `0/5` Baseline-Kandidaten. Keine
     Tensor-Mediatorregel wird autorisiert.
-13. **Vektormemory formal gehaertet; Source-Gate vorregistriert:** Der aktive
-    Zustand ist jetzt explizit z=(x,rho,p,m) bzw. seine vollstaendige
-    finite-memory Darstellung. Persistenter Traeger und alte
-    Ein-Schritt-Richtungsdeposition sind getrennte Modelle; Symmetrien,
-    Nullgrenzen, Tailfehler und die Produkt-Identifizierbarkeit von
-    eta_v*M_v*Readout sind dokumentiert und getestet. Das eingefrorene
-    Sechs-Seed-Gate entscheidet Polarisation und Zirkulations-Bivektor getrennt
-    gegen depositweise Random-Sign-Nullen. Ladung und Flavor sind im aktuellen
+13. **Vektormemory formal gehaertet; passives Source-Gate negativ:** Der
+    Zustand z=(x,rho,p,m), seine vollstaendige finite-memory Darstellung,
+    Symmetrien, Nullgrenzen, Tailfehler und Produkt-Identifizierbarkeit sind
+    dokumentiert und getestet. Polarisation trennt sich in 6/6 Seeds von der
+    Random-Sign-Null (Faktor 3.42..4.49), behaelt aber keine robuste Achse;
+    das Gesamtgate besteht 0/6. Der Zirkulations-Bivektor liegt in 6/6 Seeds
+    unter der q99-Null (Faktor 0.54..0.76) und besteht ebenfalls 0/6.
+    Kein Lambda-/Kappa-Sweep dieses passiven Zustands. Vor einer weiteren
+    Simulation ist eine O(d)-kovariante Source-Rueckkopplungsregel mit exakten
+    Nullgrenzen analytisch festzulegen. Ladung und Flavor bleiben im aktuellen
     Zustandsraum undefiniert; kein Photon- oder Spinclaim.
 14. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
     Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
