@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-08-07T09:24:49.572257+00:00",
+  "git_revision": "94b4cdc61094cfeb6bbaeba6507744022766e480",
+  "git_status": "",
+  "parameters": {
+    "lambda_value": 0.01,
+    "forgetting_factor": 0.99,
+    "orientation_relaxation": 0.01,
+    "coupling": 5.079e-06,
+    "metric_scales": [
+      0.001,
+      1.0,
+      1000.0
+    ]
+  },
+  "complex_window": [
+    2.5125786760090427e-05,
+    3.9799748742132395
+  ],
+  "cases": [
+    {
+      "seed": 1,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed1_steps3000000.json",
+      "case_sha256": "10c8650d40d1fff01c2bc7aa6d4661f271acff35fe9395dfc101e6448d746614",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 1.746813069675944e-05,
+        "q10": 7.96677816629156e-05,
+        "median": 0.0001725422138707572,
+        "q90": 0.00027464072052379724,
+        "max": 0.000438438150031628
+      },
+      "transverse_singular_value": {
+        "min": 22.808234181442973,
+        "q10": 36.41122071997385,
+        "median": 57.95683140759109,
+        "q90": 125.52345773981509,
+        "max": 572.4711002909502
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.002642174760549286,
+        "q10": 0.006733623973550329,
+        "median": 0.017060332084277513,
+        "q90": 0.08002683981879086,
+        "max": 1.6645059330344538
+      },
+      "baseline_complex_fraction": 1.0,
+      "baseline_stable_fraction": 1.0,
+      "all_step_coupling_interval": {
+        "lower": 4.829880023831937e-08,
+        "upper": 1.2144319815837283e-05
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 2.6421747605492863e-06,
+            "q10": 6.733623973550329e-06,
+            "median": 1.7060332084277512e-05,
+            "q90": 8.002683981879085e-05,
+            "max": 0.0016645059330344539
+          },
+          "complex_fraction": 0.34223706176961605,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.002642174760549286,
+            "q10": 0.006733623973550329,
+            "median": 0.017060332084277513,
+            "q90": 0.08002683981879086,
+            "max": 1.6645059330344538
+          },
+          "complex_fraction": 1.0,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 2.642174760549286,
+            "q10": 6.733623973550329,
+            "median": 17.060332084277512,
+            "q90": 80.02683981879085,
+            "max": 1664.5059330344538
+          },
+          "complex_fraction": 0.01001669449081803,
+          "stable_fraction": 0.01001669449081803
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed2_steps3000000.json",
+      "case_sha256": "41e5def5bee92feebd204ac89ab2566ac2960af0d6933f09129251f12e361188",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 2.6237329383140313e-05,
+        "q10": 8.803262193926762e-05,
+        "median": 0.00016938985079864184,
+        "q90": 0.00026733055427119126,
+        "max": 0.0004408359112525539
+      },
+      "transverse_singular_value": {
+        "min": 22.684177365648015,
+        "q10": 37.40687327256271,
+        "median": 59.035414181262034,
+        "q90": 113.59689932259471,
+        "max": 381.1363517212937
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.0026135106940986265,
+        "q10": 0.007106913617023436,
+        "median": 0.01770122986784247,
+        "q90": 0.06554225130701537,
+        "max": 0.7378005215867585
+      },
+      "baseline_complex_fraction": 1.0,
+      "baseline_stable_fraction": 1.0,
+      "all_step_coupling_interval": {
+        "lower": 4.8828524498734456e-08,
+        "upper": 2.7398045670467897e-05
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 2.6135106940986265e-06,
+            "q10": 7.106913617023436e-06,
+            "median": 1.7701229867842472e-05,
+            "q90": 6.554225130701538e-05,
+            "max": 0.0007378005215867585
+          },
+          "complex_fraction": 0.34891485809682804,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.0026135106940986265,
+            "q10": 0.007106913617023436,
+            "median": 0.01770122986784247,
+            "q90": 0.06554225130701537,
+            "max": 0.7378005215867585
+          },
+          "complex_fraction": 1.0,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 2.6135106940986264,
+            "q10": 7.1069136170234355,
+            "median": 17.70122986784247,
+            "q90": 65.54225130701536,
+            "max": 737.8005215867585
+          },
+          "complex_fraction": 0.008347245409015025,
+          "stable_fraction": 0.008347245409015025
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed3_steps3000000.json",
+      "case_sha256": "882721c56e67ed90e3c937d54223c1bdb6e4dcb970877edf3a267e9ab9919816",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 2.0806353084309085e-05,
+        "q10": 8.99158413801604e-05,
+        "median": 0.00016981710198484245,
+        "q90": 0.000279118336893701,
+        "max": 0.0003956936059435664
+      },
+      "transverse_singular_value": {
+        "min": 25.272078825115496,
+        "q10": 35.82710191355561,
+        "median": 58.88688408363358,
+        "q90": 111.21577333301153,
+        "max": 480.6224310180243
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.00324384540019754,
+        "q10": 0.006519309792873112,
+        "median": 0.017612271129645755,
+        "q90": 0.06282226536894488,
+        "max": 1.1732384417629942
+      },
+      "baseline_complex_fraction": 1.0,
+      "baseline_stable_fraction": 1.0,
+      "all_step_coupling_interval": {
+        "lower": 3.9340306090644144e-08,
+        "upper": 1.7229483510405237e-05
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 3.24384540019754e-06,
+            "q10": 6.519309792873112e-06,
+            "median": 1.7612271129645756e-05,
+            "q90": 6.282226536894488e-05,
+            "max": 0.0011732384417629943
+          },
+          "complex_fraction": 0.34724540901502504,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.00324384540019754,
+            "q10": 0.006519309792873112,
+            "median": 0.017612271129645755,
+            "q90": 0.06282226536894488,
+            "max": 1.1732384417629942
+          },
+          "complex_fraction": 1.0,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 3.24384540019754,
+            "q10": 6.519309792873112,
+            "median": 17.612271129645755,
+            "q90": 62.82226536894488,
+            "max": 1173.2384417629942
+          },
+          "complex_fraction": 0.021702838063439065,
+          "stable_fraction": 0.021702838063439065
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed4_steps3000000.json",
+      "case_sha256": "7e7b0949b45e14413ee6901fe5e3a9a657e4a30e2b1401679d3f7e1e08b9bc6e",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 2.473339571338126e-05,
+        "q10": 8.508528636082121e-05,
+        "median": 0.00017036631705026975,
+        "q90": 0.00027654227500478073,
+        "max": 0.0004384407474348884
+      },
+      "transverse_singular_value": {
+        "min": 22.808099061287802,
+        "q10": 36.1611348058154,
+        "median": 58.69704864870275,
+        "q90": 117.5313021254221,
+        "max": 404.3116487474383
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.0026421434551879594,
+        "q10": 0.006641495484799103,
+        "median": 0.01749889973842627,
+        "q90": 0.07016061261373162,
+        "max": 0.8302535114000765
+      },
+      "baseline_complex_fraction": 1.0,
+      "baseline_stable_fraction": 1.0,
+      "all_step_coupling_interval": {
+        "lower": 4.8299372505275635e-08,
+        "upper": 2.4347132663180425e-05
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 2.6421434551879594e-06,
+            "q10": 6.641495484799103e-06,
+            "median": 1.749889973842627e-05,
+            "q90": 7.016061261373161e-05,
+            "max": 0.0008302535114000766
+          },
+          "complex_fraction": 0.335559265442404,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.0026421434551879594,
+            "q10": 0.006641495484799103,
+            "median": 0.01749889973842627,
+            "q90": 0.07016061261373162,
+            "max": 0.8302535114000765
+          },
+          "complex_fraction": 1.0,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 2.6421434551879592,
+            "q10": 6.641495484799103,
+            "median": 17.49889973842627,
+            "q90": 70.16061261373162,
+            "max": 830.2535114000765
+          },
+          "complex_fraction": 0.015025041736227046,
+          "stable_fraction": 0.015025041736227046
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed5_steps3000000.json",
+      "case_sha256": "a3f41aebf2673c3cbffc38d163f0e448d505565605a730f41bddf269382730f1",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 1.0764681828263219e-05,
+        "q10": 8.45102100498027e-05,
+        "median": 0.00016857399388742937,
+        "q90": 0.0002869268029957561,
+        "max": 0.00046111063678782455
+      },
+      "transverse_singular_value": {
+        "min": 21.686769296110167,
+        "q10": 34.852098800582446,
+        "median": 59.32113115073857,
+        "q90": 118.33507363183625,
+        "max": 928.9638244341317
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.0023887347735512474,
+        "q10": 0.006169303581781963,
+        "median": 0.017872983736494878,
+        "q90": 0.07112595256105196,
+        "max": 4.383043864717917
+      },
+      "baseline_complex_fraction": 0.998330550918197,
+      "baseline_stable_fraction": 0.998330550918197,
+      "all_step_coupling_interval": {
+        "lower": 5.342320644697622e-08,
+        "upper": 4.611930204223496e-06
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 2.3887347735512473e-06,
+            "q10": 6.169303581781964e-06,
+            "median": 1.7872983736494877e-05,
+            "q90": 7.112595256105196e-05,
+            "max": 0.004383043864717917
+          },
+          "complex_fraction": 0.34891485809682804,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.0023887347735512474,
+            "q10": 0.006169303581781963,
+            "median": 0.017872983736494878,
+            "q90": 0.07112595256105196,
+            "max": 4.383043864717917
+          },
+          "complex_fraction": 0.998330550918197,
+          "stable_fraction": 0.998330550918197
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 2.3887347735512474,
+            "q10": 6.169303581781962,
+            "median": 17.872983736494877,
+            "q90": 71.12595256105196,
+            "max": 4383.043864717916
+          },
+          "complex_fraction": 0.021702838063439065,
+          "stable_fraction": 0.021702838063439065
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "case_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed6_2026-07-22/case_baseline_seed6_steps3000000.json",
+      "case_sha256": "ecdec2a7324bba2b2047c224b15e6ec80414b29503c927b9a94f7da73b408217",
+      "ambient_dimension": 3,
+      "step_count": 599,
+      "step_norm": {
+        "min": 2.4125113686922852e-05,
+        "q10": 8.528670511532813e-05,
+        "median": 0.0001762322548776151,
+        "q90": 0.000289656873115897,
+        "max": 0.00043708592659225164
+      },
+      "transverse_singular_value": {
+        "min": 22.878796574314762,
+        "q10": 34.52363746166479,
+        "median": 56.7433016557867,
+        "q90": 117.25643114354938,
+        "max": 414.50581869881734
+      },
+      "baseline_dimensionless_coupling": {
+        "min": 0.0026585483707268058,
+        "q10": 0.006053571725256847,
+        "median": 0.0163533757943392,
+        "q90": 0.06983445346179486,
+        "max": 0.8726487595009631
+      },
+      "baseline_complex_fraction": 1.0,
+      "baseline_stable_fraction": 1.0,
+      "all_step_coupling_interval": {
+        "lower": 4.800133499907381e-08,
+        "upper": 2.31642939568136e-05
+      },
+      "raw_direction_control": {
+        "dimensionless_coupling": 5.079e-10,
+        "complex": false
+      },
+      "metric_scale_sensitivity": [
+        {
+          "memory_metric_scale": 0.001,
+          "dimensionless_coupling": {
+            "min": 2.658548370726806e-06,
+            "q10": 6.053571725256847e-06,
+            "median": 1.63533757943392e-05,
+            "q90": 6.983445346179486e-05,
+            "max": 0.0008726487595009632
+          },
+          "complex_fraction": 0.33889816360601,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1.0,
+          "dimensionless_coupling": {
+            "min": 0.0026585483707268058,
+            "q10": 0.006053571725256847,
+            "median": 0.0163533757943392,
+            "q90": 0.06983445346179486,
+            "max": 0.8726487595009631
+          },
+          "complex_fraction": 1.0,
+          "stable_fraction": 1.0
+        },
+        {
+          "memory_metric_scale": 1000.0,
+          "dimensionless_coupling": {
+            "min": 2.658548370726806,
+            "q10": 6.053571725256847,
+            "median": 16.353375794339197,
+            "q90": 69.83445346179485,
+            "max": 872.6487595009631
+          },
+          "complex_fraction": 0.021702838063439065,
+          "stable_fraction": 0.021702838063439065
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "eligibility pass; physical closure unresolved",
+    "eligibility_pass": true,
+    "seed_median_ratio": 1.0454296704585393,
+    "max_seed_median_ratio": 1.1,
+    "minimum_complex_fraction": 0.998330550918197,
+    "min_complex_fraction": 0.95,
+    "metric_identified": false,
+    "nonlinear_mode_observed": false
+  }
+}
