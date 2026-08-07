@@ -92,6 +92,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     passiven Update. Eine source-unaufgeloeste Closure waere nur eine
     effektive Beschreibung; ein aktives Feldgesetz waere ein neuer
     Mechanismus.
+- [Adjungierte Reziprozitaet: Eligibility-Audit](memory/adjoint_reciprocity_eligibility_audit_2026-08-07.md)
+  - **conditional eligibility:** Der exakte diskrete Modentest liegt unter
+    euklidischem Metrik-Kandidaten fuer mindestens 99.83% der gespeicherten
+    Schritte aller sechs reifen Sources im komplexen Fenster.
+  - Der Rueckkanal, das Memory-Metrik und seine relative Normierung sind neue,
+    nicht identifizierte Modellteile. Der Audit beobachtet weder Oszillation
+    noch Traegheit und sperrt einen freien Gain-/Metrik-Sweep.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

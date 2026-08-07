@@ -344,6 +344,17 @@ nichts aendern. Offen bleibt nur eine klar als effektiv markierte
 source-unaufgeloeste Grobkoernung; andernfalls waere ein aktives Feldgesetz ein
 neues Postulat.
 
+Als mechanistisch anderer Folgeschritt wurde eine diskrete
+adjungiert-reziproke Closure analytisch geschlossen. Ihr exaktes komplexes
+Fenster haengt nur von `g sigma_B^2` und `q` ab. Fuer den Jacobian der bereits
+implementierten normierten Richtungsdeposition liegen unter euklidischem
+Metrik-Kandidaten mindestens `99.83%` der Schritte in allen sechs reifen
+Snapshots im komplexen Fenster; die Seed-Median-Schrittweiten streuen nur um
+Faktor `1.045`. Das ist ein Eligibility-Pass, kein beobachteter Modus. Eine
+Reskalierung des Memory-Metriks aendert die Klassifikation, und die verwendete
+Kopplung ist nur aus einem frueheren Einweg-Gate geerbt. Vor einem nichtlinearen
+Pilot muss daher genau ein unabhaengig begruendetes Metrik festgelegt werden.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste

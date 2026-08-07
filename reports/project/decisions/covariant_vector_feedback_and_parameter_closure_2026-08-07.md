@@ -253,3 +253,31 @@ Implement the source-conditioned longitudinal/transverse Fourier closure on the
 existing six mature vector-memory continuations. This is a measurement task,
 not a new interaction simulation. Only a nontrivial, held-out-stable operator
 may authorize an active covariant feedback pilot.
+## Follow-up result
+
+The source-conditioned audit returned the exact passive null: after subtracting
+the source and finite tail, all six sources retain only the homogeneous factor
+\(1-\lambda_v\), with no resolved spatial coefficient. Passive long runs cannot
+open active feedback.
+
+A separate adjoint-reciprocity eligibility audit therefore treated the
+backchannel explicitly as a new closure. For
+
+\[
+x_{n+1}=x_n-\sqrt g B^\dagger h_n,
+\qquad
+h_{n+1}=q h_n+\sqrt g B x_{n+1},
+\]
+
+one metric singular mode is complex exactly when
+
+\[
+(1-\sqrt q)^2<g\sigma_B^2<(1+\sqrt q)^2.
+\]
+
+The normalized-direction source has
+\(B=\kappa(I-u u^\top)/\lVert\Delta x\rVert\). Under Euclidean metrics and an
+inherited fixed gain, at least 99.83% of retained steps in every mature source
+are conditionally eligible. However, rescaling the memory metric moves the same
+modes outside that window. The next admissible step is therefore metric closure,
+not a gain sweep or an oscillation claim.

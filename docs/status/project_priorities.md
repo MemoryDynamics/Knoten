@@ -501,6 +501,26 @@ Prioritaetsfolge:
     Formationszustaende, festen Tailfehler und vorab definierte Invarianten.
 16. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
+17. **P3.4 Adjungierte Reziprozitaet: Eligibility-Pass, Metrik offen:** Fuer die
+    diskrete Closure `x'=x-sqrt(g) B^dagger h`, `h'=q h+sqrt(g) B x'` ist ein Singulaermodus
+    exakt komplex, wenn
+    `(1-sqrt(q))^2 < g sigma_B^2 < (1+sqrt(q))^2`. Die bereits implementierte
+    normierte Richtungsdeposition besitzt lokal
+    `B=kappa(I-u u^T)/|Delta x|`: eine longitudinale Nullrichtung und `d-1`
+    entartete transversale Richtungen. In den sechs reifen `d=3`-Snapshots
+    variiert die mediane Schrittweite nur um Faktor `1.045`; unter euklidischem
+    Metrik-Kandidaten und der geerbten festen Kopplung liegen mindestens
+    `99.83%` der Schritte im komplexen Fenster. Das ist nur kinematische
+    Eligibility. Der adjungierte Rueckkanal ist neu, die Kopplung stammt aus
+    einem anderen Einweg-Gate, und eine Reskalierung des Memory-Metriks
+    verschiebt denselben Modus aus dem Fenster. Weder Oszillation noch
+    Traegheit wurden simuliert oder beobachtet.
+
+    **Naechstes Gate:** genau ein Memory-Metrik-Kandidat muss unabhaengig aus
+    einer Feldenergie oder Rauschkovarianz abgeleitet und ohne Seed-Normierung
+    vorregistriert werden. Erst danach darf ein geschlossener nichtlinearer
+    Pilot die vorhergesagten Frequenzen und Daempfungen auf Holdout-Segmenten
+    testen. Ein freier Metrik-/Gain-Sweep ist gesperrt.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
