@@ -435,7 +435,7 @@ def write_report(payload: dict[str, Any], report: Path, figure: Path) -> None:
         "",
         "## Seed results",
         "",
-        "| seed | max |q_hat-q| | max normalized residual | max |b_hat,c_hat| | pass |",
+        "| seed | max abs(q_hat-q) | max normalized residual | max abs(b_hat,c_hat) | pass |",
         "| ---: | ---: | ---: | ---: | --- |",
     ]
     for row in payload["rows"]:
@@ -472,7 +472,7 @@ def write_report(payload: dict[str, Any], report: Path, figure: Path) -> None:
             f"- Analysis revision: {payload['git_revision']}",
             f"- Worktree at start: {payload['git_status_at_start'] or 'clean'}",
             f"- Memory times: {payload['memory_times']}",
-            f"- kR values: {payload['kr_values']}",
+            f"- kR values: {list(np.asarray(payload['kr_values'], dtype=float))}",
             f"- Command: {payload['command']}",
         ]
     )

@@ -479,10 +479,15 @@ Prioritaetsfolge:
     reelles Spektrum; eine endliche Raumskala entsteht nur fuer
     b_hat_L oder b_hat_T < -2. Das passive Mikro-Update besitzt exakt nur den
     homogenen Faktor 1-lambda_v und keine solchen Gradientenkoeffizienten.
-    Naechster Schritt ist daher source-konditionierte L/T-Fourier-Closure auf
-    den bestehenden sechs Traces. Erst seed-, skalen- und holdout-stabile
-    effektive Koeffizienten duerfen eine aktive Simulation autorisieren.
-    Ladung und Flavor bleiben undefiniert; kein Photon- oder Spinclaim.
+    Die source-konditionierte L/T-Fourier-Closure bestaetigt diese exakte Null
+    in 6/6 Seeds: q- und Raumkoeffizientenfehler bleiben unter 6.6e-15 bzw.
+    1.9e-15. Laengere passive Runs koennen daher keine aktiven
+    Feldkoeffizienten selektieren. Als naechstes ist hoechstens eine
+    source-unaufgeloeste Grobkoernung ueber mehrere Blockskalen zulaessig;
+    deren Koeffizienten gelten nur bei Seed-, Skalen- und Holdout-Stabilitaet
+    als emergent-effektiv. Andernfalls muss ein aktives Feldgesetz als neues
+    Postulat deklariert werden. Ladung und Flavor bleiben undefiniert; kein
+    Photon- oder Spinclaim.
 14. **500k-Akkumulationskontrolle abgeschlossen, negativ:** Zwei
     Zukunftsrauschpfade ueber 5000 Memory-Zeiten bleiben im reziproken Arm
     shape-gueltig. Die kontrollsubtrahierte Pfaddifferenz waechst stark, aber

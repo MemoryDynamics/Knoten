@@ -336,9 +336,13 @@ Das passive Source-Gate ist fuer Polarisation und Zirkulations-Bivektor 0/6
 negativ. Die anschliessende O(d)-kovariante Analyse zeigt, dass ein
 parity-even Ein-Feld-Gradientenfluss nur reelle Raten besitzt und eine
 endliche Raumskala erst bei b_hat_L oder b_hat_T < -2 selektiert. Das aktuelle
-passive Mikro-Update enthaelt diese Koeffizienten nicht. Vor jeder aktiven
-Mechanismussimulation folgt deshalb eine source-konditionierte
-Longitudinal-/Transversal-Fourier-Closure auf bestehenden Traces.
+passive Mikro-Update enthaelt diese Koeffizienten nicht. Die
+source-konditionierte Longitudinal-/Transversal-Fourier-Closure bestaetigt den
+homogenen Faktor 1-lambda_v in 6/6 Seeds bis auf maximal 6.6e-15 und findet
+keine Raumkoeffizienten oberhalb 1.9e-15. Laengere passive Runs koennen daran
+nichts aendern. Offen bleibt nur eine klar als effektiv markierte
+source-unaufgeloeste Grobkoernung; andernfalls waere ein aktives Feldgesetz ein
+neues Postulat.
 
 ## Paper-Status
 

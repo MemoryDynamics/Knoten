@@ -83,6 +83,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     1-lambda_v und enthaelt keine raeumlichen Feldkoeffizienten. Solche Werte
     duerfen nur als skalen- und holdout-stabile effektive Closure-Koeffizienten
     oder als klar deklarierte neue Postulate auftreten.
+- [Passiver orientierter Fourier-Closure-Audit](memory/oriented_fourier_closure_audit_2026-08-07.md)
+  - **structural null confirmed:** Nach exaktem Abzug von neuer Quelle und
+    endlichem Tail bleibt in 6/6 reifen Sources nur 1-lambda_v. Der maximale
+    q-Fehler betraegt 6.6e-15, der maximale gefittete k2-/k4-Koeffizient
+    1.9e-15; longitudinal und transversal stimmen ueberein.
+  - Dies ist Evidenz gegen bereits emergente aktive Raumrueckkopplung im
+    passiven Update. Eine source-unaufgeloeste Closure waere nur eine
+    effektive Beschreibung; ein aktives Feldgesetz waere ein neuer
+    Mechanismus.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds
