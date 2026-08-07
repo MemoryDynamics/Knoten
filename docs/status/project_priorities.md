@@ -502,7 +502,8 @@ Prioritaetsfolge:
 16. **P3.3 gesperrt bis Mode-Pass:** ambient-dimensionsuebergreifender Rangtest.
     Eine komplexe Rotation waere noch keine raeumliche `d=3`-Selektion.
 17. **P3.4 Adjungierte Reziprozitaet: Eligibility-Pass, Metrik offen:** Fuer die
-    diskrete Closure `x'=x-sqrt(g) B^dagger h`, `h'=q h+sqrt(g) B x'` ist ein Singulaermodus
+    diskrete Closure `x'=x-sqrt(g) B^dagger h`, `h'=q h+sqrt(g) B x'`
+    ist ein Singulaermodus
     exakt komplex, wenn
     `(1-sqrt(q))^2 < g sigma_B^2 < (1+sqrt(q))^2`. Die bereits implementierte
     normierte Richtungsdeposition besitzt lokal
@@ -516,11 +517,17 @@ Prioritaetsfolge:
     verschiebt denselben Modus aus dem Fenster. Weder Oszillation noch
     Traegheit wurden simuliert oder beobachtet.
 
-    **Naechstes Gate:** genau ein Memory-Metrik-Kandidat muss unabhaengig aus
-    einer Feldenergie oder Rauschkovarianz abgeleitet und ohne Seed-Normierung
-    vorregistriert werden. Erst danach darf ein geschlossener nichtlinearer
-    Pilot die vorhergesagten Frequenzen und Daempfungen auf Holdout-Segmenten
-    testen. Ein freier Metrik-/Gain-Sweep ist gesperrt.
+    **Naechstes Gate vorregistriert:** Auf demselben reduzierten Carrier-Raum
+    `h=p in R^3` werden Kovarianz-Pseudoinverse, Probe-Observability-Gramian und
+    Gaussian-RKHS-Metrik verglichen. Die Selbst-Observability des passiven
+    Source ist exakt null; deshalb misst die Vorhersagemetrik ohne Zirkelschluss
+    die tangentielle Zukunftswirkung auf einen unabhaengigen Probe-Knoten im
+    bereits fixierten Einwegkanal. Sechs zyklische Paare, zwei nicht
+    ueberlappende Segmente, Horizonte `1,2,5,10` Memory-Zeiten, Cadences
+    `1,5,10` und zwei Stoeramplituden laufen ohne Gain-, Kernel- oder
+    Seed-Retuning. Erst bei mindestens 5/6 vollstaendigen Paarpasses darf ein
+    nichtlinearer Holdout-Pilot folgen. Der Carrier ist eine reduzierte
+    Feature-Closure, nicht das vollstaendige Feldmemory.
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

@@ -80,6 +80,7 @@ CATEGORIES = {
     ],
     "memory": [
         "current/memory/adjoint_reciprocity_eligibility_audit.py",
+        "current/memory/carrier_memory_metric_comparison.py",
         "current/memory/low_mode_ar_feature_closure.py",
         "current/memory/low_mode_identity_audit.py",
         "current/memory/eta_zero_raw_mode_null_audit.py",
