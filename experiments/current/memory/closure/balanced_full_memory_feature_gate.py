@@ -568,7 +568,7 @@ def write_report(payload: dict[str, Any], path: Path, figure_path: Path) -> None
             f"- passing pairs: `{result['passing_pairs']}/6`;",
             f"- geometry-specific pairs: `{result['geometry_specific_pairs']}/6`;",
             f"- common rank: `{result['common_rank']}`;",
-            f"- minimum cross-pair principal cosine: `{result['minimum_cross_pair_cosine']:.4g}`.",
+            f"- minimum cross-pair principal cosine: `{result['minimum_cross_pair_cosine']:.4g}`;",
             f"- descriptive actual-geometry rank across all pairs: `{result['descriptive_common_rank']}`;",
             f"- descriptive minimum cross-pair cosine: `{result['descriptive_minimum_cross_pair_cosine']:.4g}`;",
             f"- actual energy-fraction range: `{result['actual_energy_fraction_range'][0]:.4g}..{result['actual_energy_fraction_range'][1]:.4g}`;",
@@ -730,6 +730,9 @@ def main() -> None:
         )
 
     decision = evaluate_ensemble(pairs, args)
+    for pair in pairs:
+        retained_rank = pair["gate"]["common_rank"] or 0
+        pair["reference_modes"] = pair["reference_modes"][:, :retained_rank]
     report_path = _resolve(args.report)
     json_path = _resolve(args.summary_json)
     figure_path = _resolve(args.figure)
