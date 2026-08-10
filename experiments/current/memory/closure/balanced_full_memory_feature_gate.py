@@ -399,6 +399,32 @@ def evaluate_ensemble(
     )
     geometry_count = sum(pair["gate"]["geometry_specific"] for pair in pairs)
     geometry_specific = bool(effective and geometry_count >= args.required_pairs)
+    descriptive_ranks = [pair["gate"]["common_rank"] for pair in pairs]
+    descriptive_rank = (
+        descriptive_ranks[0]
+        if descriptive_ranks
+        and descriptive_ranks[0] is not None
+        and all(rank == descriptive_ranks[0] for rank in descriptive_ranks)
+        else None
+    )
+    descriptive_cosines: list[float] = []
+    if descriptive_rank is not None:
+        reference = pairs[0]["reference_modes"][:, :descriptive_rank]
+        descriptive_cosines = [
+            minimum_principal_cosine(
+                reference, pair["reference_modes"][:, :descriptive_rank]
+            )
+            for pair in pairs
+        ]
+    actual_rows = [row for pair in pairs for row in pair["actual"]]
+    holdout_values = [
+        row["holdout_error"] for row in actual_rows if row["holdout_error"] is not None
+    ]
+    control_cosines = [
+        pair["gate"]["controls"][name]["actual_cosine"]
+        for pair in pairs
+        for name in ("flat", "shuffled")
+    ]
     decision = (
         "geometry-specific-pass"
         if geometry_specific
@@ -414,6 +440,18 @@ def evaluate_ensemble(
         "geometry_specific_pairs": geometry_count,
         "common_rank": common_rank,
         "minimum_cross_pair_cosine": min(cross_cosines, default=0.0),
+        "descriptive_common_rank": descriptive_rank,
+        "descriptive_minimum_cross_pair_cosine": min(descriptive_cosines, default=0.0),
+        "actual_energy_fraction_range": [
+            min(row["selected_energy_fraction"] for row in actual_rows),
+            max(row["selected_energy_fraction"] for row in actual_rows),
+        ],
+        "actual_gap_ratio_range": [
+            min(row["selected_gap_ratio"] for row in actual_rows),
+            max(row["selected_gap_ratio"] for row in actual_rows),
+        ],
+        "far_holdout_error_range": [min(holdout_values), max(holdout_values)],
+        "minimum_control_actual_cosine": min(control_cosines),
     }
 
 
@@ -531,6 +569,12 @@ def write_report(payload: dict[str, Any], path: Path, figure_path: Path) -> None
             f"- geometry-specific pairs: `{result['geometry_specific_pairs']}/6`;",
             f"- common rank: `{result['common_rank']}`;",
             f"- minimum cross-pair principal cosine: `{result['minimum_cross_pair_cosine']:.4g}`.",
+            f"- descriptive actual-geometry rank across all pairs: `{result['descriptive_common_rank']}`;",
+            f"- descriptive minimum cross-pair cosine: `{result['descriptive_minimum_cross_pair_cosine']:.4g}`;",
+            f"- actual energy-fraction range: `{result['actual_energy_fraction_range'][0]:.4g}..{result['actual_energy_fraction_range'][1]:.4g}`;",
+            f"- actual gap-ratio range: `{result['actual_gap_ratio_range'][0]:.4g}..{result['actual_gap_ratio_range'][1]:.4g}`;",
+            f"- far-holdout error range: `{result['far_holdout_error_range'][0]:.4g}..{result['far_holdout_error_range'][1]:.4g}`;",
+            f"- minimum actual/control cosine: `{result['minimum_control_actual_cosine']:.4g}`.",
             "",
             "## Interpretation boundary",
             "",
@@ -538,7 +582,7 @@ def write_report(payload: dict[str, Any], path: Path, figure_path: Path) -> None
     )
     if result["decision"] == "fail":
         lines.append(
-            "The full passive memory has no preregistered stable low-rank reachable-and-observable closure. Gain, lambda and oscillation optimization remain blocked."
+            "The near readout has a highly reproducible rank-one mode, but the same mode is reproduced by both controls and fails the independent far readout. It is generic exponential delay/readout compression, not a spatially transferable knot mode. Gain, lambda and oscillation optimization remain blocked."
         )
     elif result["decision"] == "constitutive-only":
         lines.append(

@@ -6,6 +6,7 @@ import numpy as np
 
 from experiments.current.memory.closure.balanced_full_memory_feature_gate import (
     _indices,
+    evaluate_ensemble,
     evaluate_pair,
 )
 
@@ -46,3 +47,34 @@ def test_pair_gate_distinguishes_delay_equivalent_control() -> None:
     result = evaluate_pair(actual, controls, args=args)
     assert result["pass"]
     assert result["geometry_specific"]
+
+
+def test_ensemble_reports_descriptive_rank_when_holdout_gate_fails() -> None:
+    args = Namespace(required_pairs=5, minimum_cosine=0.90)
+    mode = np.array([[1.0], [0.0]])
+    row = {
+        "rank": 1,
+        "selected_energy_fraction": 0.95,
+        "selected_gap_ratio": 4.0,
+        "holdout_error": 0.7,
+    }
+    pairs = [
+        {
+            "gate": {
+                "pass": False,
+                "common_rank": 1,
+                "geometry_specific": False,
+                "controls": {
+                    "flat": {"actual_cosine": 0.99},
+                    "shuffled": {"actual_cosine": 0.98},
+                },
+            },
+            "reference_modes": mode,
+            "actual": [row],
+        }
+        for _ in range(6)
+    ]
+    result = evaluate_ensemble(pairs, args)
+    assert result["decision"] == "fail"
+    assert result["descriptive_common_rank"] == 1
+    assert result["descriptive_minimum_cross_pair_cosine"] == 1.0

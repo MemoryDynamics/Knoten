@@ -106,8 +106,16 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     komplexe Regime statt einer gemeinsamen Klassifikation.
   - Finite-Differenz-Linearitaet und Predictive-Cadence-Stabilitaet bestehen;
     absolute Skala sowie teils Horizont- und Segmentform nicht. Kein
-    nichtlinearer reziproker Pilot und kein Gain-Retuning. Naechstes Gate ist
-    balancierte Vollmemory-Feature-Closure, nicht eine neue Parametersuche.
+    nichtlinearer reziproker Pilot und kein Gain-Retuning.
+- [Balancierte Vollmemory-Feature-Closure](memory/closure/balanced_full_memory_feature_gate_2026-08-10.md)
+  - **negative, with structural compression:** Alle 72 Actual-Auswertungen
+    waehlen seed-, segment-, horizon- und cadencestabil Rang 1 mit
+    `96.6..97.8%` Energieanteil. Derselbe Modus ist jedoch mit Flat- und
+    Age-Shuffle-Kontrolle praktisch identisch; der Fern-Holdoutfehler bleibt
+    `0.501..0.862`.
+  - Das ist generische exponentielle Delay-/Readoutkompression, keine
+    knotenspezifische uebertragbare Mode. Kein Gain-/Lambda-Sweep und keine
+    Optimierung vermeintlicher komplexer Schwingungen.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

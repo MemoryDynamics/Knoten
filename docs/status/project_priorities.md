@@ -531,7 +531,7 @@ Prioritaetsfolge:
     euklidische Eligibility-Pass normalisierungsabhaengig. Kein nichtlinearer
     reziproker Pilot und kein Gain-/Lambda-Retuning.
 
-18. **P3.5 als naechstes: balancierte Vollmemory-Feature-Closure.** Auf den
+18. **P3.5 abgeschlossen, negativ: balancierte Vollmemory-Feature-Closure.** Auf den
     sechs bestehenden reifen Zustaenden wird ohne neuen Formation-Long-Run
     matrixfrei geprueft, ob das deponierte orientierte Feld einen kleinen
     Unterraum besitzt, der zugleich durch die Trajektorie angeregt
@@ -544,7 +544,7 @@ Prioritaetsfolge:
     Vektorast geschlossen; ein quadratisches Feldgesetz bleibt dann eine
     explizite konstitutive Annahme.
 
-    **Vorregistriert am 2026-08-10:** Der Test verwendet die sechs reifen
+    **Vorregistriert und ausgefuehrt am 2026-08-10:** Der Test verwendet die sechs reifen
     `d=3`-Zustaende, zwei Segmente, Horizonte 5/10 Memory-Zeiten und Cadences
     1/5/10. Feste Gates sind Rang hoechstens 8, Hankel-Gap mindestens 3,
     Energieanteil mindestens 90%, Principal-Cosinus mindestens 0.90 und
@@ -553,7 +553,25 @@ Prioritaetsfolge:
     Raum-Alters-Struktur. Ein Pass autorisiert nur einen reduzierten
     Carrier-plus-Feld-Metriktest; eine Parametersuche nach maximaler
     Schwingung bleibt bis zu dessen unabhaengiger Zeitbereichsvalidierung
-    gesperrt.
+    gesperrt. Das Ergebnis ist `0/6`: Zwar waehlen alle 72
+    Actual-Geometry-Auswertungen stabil Rang 1 bei etwa `96.6..97.8%`
+    Energieanteil und internem Principal-Cosinus ueber `0.999`, aber derselbe
+    Modus stimmt mit Flat- und Age-Shuffle-Kontrolle zu ueber `0.9999`
+    ueberein. Der unabhaengige Fernreadoutfehler liegt bei `0.501..0.862`.
+    Damit wurde ein generischer exponentieller Delay-/Readoutmodus gefunden,
+    keine knotenspezifische raeumlich uebertragbare Mode.
+
+19. **P3.6 als naechstes, nur analytisch: reversibler Feldmechanismus statt
+    Parametersuche.** Das passive orientierte Memory besitzt weder einen
+    identifizierten Rueckkanal noch eine geometriespezifische reduzierte Mode.
+    Weitere Long Runs oder Gain-/Lambda-Sweeps koennen diese fehlende Struktur
+    nicht erzeugen. Falls der Paper-III-Ast fortgesetzt wird, ist zuerst eine
+    minimale O(d)-kovariante, phasentragende Dynamik mit explizit reversiblem
+    beziehungsweise antisymmetrischem Anteil zu formulieren. Vor jeder
+    Simulation sind Dispersionsrelation, Stabilitaetsfenster, dimensionslose
+    Gruppen, passive Nullkontrolle und ein unabhaengiger Zeitbereichs-Holdout
+    festzulegen. Die neue Gleichung waere ein Postulat, bis ihre Koeffizienten
+    aus einer tieferen Dynamik oder Daten identifiziert sind.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

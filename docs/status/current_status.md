@@ -366,13 +366,18 @@ absolute Skala, Horizont-/Segmentstabilitaet und Klassifikation reconciliieren
 nicht. Der euklidische Eligibility-Pass ist damit normalisierungsabhaengig;
 ein nichtlinearer reziproker Pilot und Gain-Retuning bleiben gesperrt.
 
-Naechster falsifizierender Schritt ist eine matrixfreie balancierte Closure des
-bereits deponierten orientierten Vollmemorys. Nur seed-, segment-, horizon- und
-cadencestabile Moden, die sowohl deponiert als auch im unabhaengigen
-Probe-Readout beobachtet werden, duerfen den Carrier-Zustand erweitern. Ohne
-stabiles Hankel-Spektralgap und Holdout-Vorhersage wird dieser Vektorast
-beendet; eine quadratische Feldenergie waere dann ein neues konstitutives
-Postulat, kein emergenter Befund.
+Die anschliessende vorregistrierte balancierte Vollmemory-Closure ist `0/6`
+negativ. Alle 72 Actual-Geometry-Auswertungen waehlen zwar denselben stabilen
+Rang-1-Modus mit etwa `96.6..97.8%` Hankelenergie und internem
+Principal-Cosinus ueber `0.999`. Er ist aber zu ueber `0.9999` mit Flat- und
+Age-Shuffle-Readout identisch und rekonstruiert den unabhaengigen Fernreadout
+nur mit Fehlern `0.501..0.862`. Gestuetzt ist deshalb eine generische
+exponentielle Delay-/Readoutkompression, keine knotenspezifische raeumlich
+uebertragbare Vollmemory-Mode. Der adjungiert-reziproke Vektorast ist in seiner
+aktuellen Form geschlossen; Gain-, Lambda- und Oszillationsoptimierung bleiben
+gesperrt. Ein weiterer Paper-III-Schritt muesste zuerst einen explizit
+reversiblen beziehungsweise antisymmetrischen Feldmechanismus als neue,
+analytisch falsifizierbare Annahme formulieren.
 
 ## Paper-Status
 
