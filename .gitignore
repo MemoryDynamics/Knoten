@@ -9,6 +9,7 @@ __pycache__/
 .pytest-tmp/
 .pytest-tmp-*/
 .pytest_tmp_*/
+.tmp_pytest_*/
 .ruff_cache/
 .mypy_cache/
 .numba_cache/
