@@ -74,7 +74,7 @@ This is a negative control for low-dimensional inference from a uniform force.
 The direct field spans the supplied basis by construction. The first
 relationally meaningful rank test is therefore the localized frozen source.
 
-Report: `reports/response/weak_probe_calibration_2026-07-16.md`.
+Report: `reports/response/calibration/weak_probe_calibration_2026-07-16.md`.
 
 ## Frozen-Source Implementation
 
@@ -99,7 +99,7 @@ full ambient rank and split into one radial plus `d-1` nearly degenerate
 transverse sectors. This is an isotropic scalar far-field response, not an
 external-dimension measurement.
 
-Report: `reports/response/frozen_source_pilot_2026-07-16.md`.
+Report: `reports/response/calibration/frozen_source_pilot_2026-07-16.md`.
 
 ## Field Audit and Distance Ladder
 
@@ -122,8 +122,8 @@ this is a small tidal/nonlinear target effect, not source-structure resolution
 or an external-dimension signal. These are pathwise results from one canonical
 checkpoint per dimension.
 
-Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` and
-`reports/response/frozen_source_distance_ladder_2026-07-17.md`.
+Reports: `reports/response/calibration/frozen_source_field_audit_2026-07-17.md` and
+`reports/response/calibration/frozen_source_distance_ladder_2026-07-17.md`.
 
 ## Independent Cross-Readout Gate
 
@@ -155,7 +155,7 @@ scalar mediator remains deferred for a separate locality or propagation-time
 question. This pathwise result does not rule out scalar near-field structure
 for other independently formed knots.
 
-Report: `reports/response/scalar_cross_readout_resolution_2026-07-21.md`.
+Report: `reports/response/scalar/scalar_cross_readout_resolution_2026-07-21.md`.
 
 ## Ordered-History Current Audit
 
@@ -175,7 +175,7 @@ source. The next gate uses an independently evolving oriented state, at least
 six formations, common future noise, channel-off and randomized-deposit
 controls, and a relational angular/transverse primary observable.
 
-Report: `reports/response/oriented_history_current_audit_2026-07-21.md`.
+Report: `reports/response/one_way/oriented_history_current_audit_2026-07-21.md`.
 
 ## Independent-Oriented-State Gate
 
@@ -220,7 +220,7 @@ uses a larger randomized null, and applies a fixed distance ladder before any
 local/retarded field extension. No reciprocal coupling, AR mode fit, photon,
 spin, charge, or particle interpretation follows.
 
-Report: `reports/response/oriented_vector_one_way_gate_2026-07-25.md`.
+Report: `reports/response/oriented/oriented_vector_one_way_gate_2026-07-25.md`.
 
 ## Fixed-Coupling Independent-Pair Gate
 
@@ -253,7 +253,7 @@ distance decay, and `sigma_v=2.5 R_source` remains a state-scaled rule. The
 next gate compares the full relaxation-diffusion peak law with the finite-front
 onset of a damped wave/telegraph mediator on held-out pairs and distances.
 
-Report: `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`.
+Report: `reports/response/oriented/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`.
 
 ## Local-Mediator Gate Result
 
@@ -305,7 +305,7 @@ must have controlled spectral power in bands where the analytic diffusive and
 telegraph transfer functions differ measurably. Otherwise both simulations
 would merely replay behavior inserted by construction.
 
-Report: `reports/response/local_oriented_mediator_gate_2026-07-28.md`.
+Report: `reports/response/oriented/local_oriented_mediator_gate_2026-07-28.md`.
 
 Introducing a field does not select three dimensions. The current knot states
 remain in the supplied `d=3` embedding while the mediator uses one relational
@@ -342,7 +342,7 @@ distinguishable output-power fraction `0.9969`, and maximum segment drift
 The persistent state shifts power toward low frequencies but is not specifically
 needed to distinguish these two deliberately different transfer rules.
 
-Report: `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`.
+Report: `reports/response/oriented/oriented_source_mediator_identifiability_2026-07-28.md`.
 
 ## Dynamic Common-Source Gate
 
@@ -378,7 +378,7 @@ every ambient component, its component-space transfer is `H I_d`. It preserves
 the rank of a full-rank source covariance wherever `H` is nonzero and therefore
 cannot by itself select three directions from a larger supplied ambient space.
 
-Report: `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`.
+Report: `reports/response/oriented/dynamic_common_source_mediator_gate_2026-07-28.md`.
 
 ## Interaction-Sign Decision
 
@@ -416,7 +416,7 @@ observables, and the source is frozen. The next gates are 6-10 independent
 states without retuning and fixed-coupling distances below and above the
 compensated force crossing.
 
-Report: `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
+Report: `reports/response/scalar/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 ## One-Way Dynamic-Source Gate
 
@@ -439,8 +439,8 @@ does not transport an intact knot. This blocks a positive source-transport
 interpretation. A later direct reciprocal arm is opened only as an analytically
 registered real-mode null and nonlinear reconciliation test.
 
-Reports: `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` and
-`reports/response/one_way_launched_source_pilot_2026-07-20.md`.
+Reports: `reports/response/one_way/one_way_dynamic_source_pilot_2026-07-20.md` and
+`reports/response/one_way/one_way_launched_source_pilot_2026-07-20.md`.
 
 
 ## Direct Reciprocal Full-Knot Gate
@@ -464,7 +464,7 @@ The supported reading is direct scalar binding/relaxation, not oscillation,
 orbit, spin or dimension selection. The five paths share one formation basin;
 independent mature formations remain necessary for a basin-level claim.
 
-Report: `reports/response/reciprocal_full_knot_gate_2026-08-04.md`.
+Report: `reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.md`.
 
 ## Retarded Reciprocal Full-Knot Gate (P3.2)
 
@@ -501,7 +501,7 @@ retarded one-way, and retarded reciprocal arms are real. Final separation is
 delay weakens or postpones binding but does not create an observable AR(1)
 rotation in this formation basin.
 
-Report: `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`.
+Report: `reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.md`.
 
 
 ## Measurement-Closure and Relative-Noise Gate (P3.2a/b)
@@ -552,7 +552,7 @@ knot modes. Lower relative noise tightens reciprocal binding but reveals no
 control-separated mode.
 
 Report:
-`reports/response/measurement_closure_relative_noise_gate_2026-08-04.md`.
+`reports/response/reciprocal/measurement_closure_relative_noise_gate_2026-08-04.md`.
 
 ### Registered long-horizon follow-up
 
@@ -573,7 +573,7 @@ stored but cannot pass a mode gate until they are stable across ranks, depths,
 time segments, and the one-way control.
 
 Preregistration:
-`reports/project/meta/long_horizon_hankel_preregistration_2026-08-04.md`.
+`reports/project/meta/preregistration/long_horizon_hankel_preregistration_2026-08-04.md`.
 
 The canonical clean-start result classifies **longer history as degrading
 held-out prediction**. All 45 paired seed/rho/rank design-cell deltas from
@@ -587,7 +587,7 @@ stochastic history, not a longer physical persistence scale or oscillatory
 closure.
 
 Result:
-`reports/response/long_horizon_hankel_gate_2026-08-04.md`.
+`reports/response/reciprocal/long_horizon_hankel_gate_2026-08-04.md`.
 
 ### Stored-pole identity stoptest
 
@@ -608,8 +608,8 @@ remains the minimum confirmation horizon for a later mechanism that first
 passes its stored-data or analytic control gate.
 
 Preregistration and result:
-`reports/project/meta/hankel_pole_identity_preregistration_2026-08-04.md` and
-`reports/response/hankel_pole_identity_audit_2026-08-06.md`.
+`reports/project/meta/preregistration/hankel_pole_identity_preregistration_2026-08-04.md` and
+`reports/response/reciprocal/hankel_pole_identity_audit_2026-08-06.md`.
 
 ### Source-local linear emission gate (P3.2c)
 
@@ -630,8 +630,8 @@ not a materially loaded reciprocal knot mode. No 500,000-update confirmation
 is authorized for this mechanism.
 
 Preregistration and result:
-`reports/project/meta/source_local_linear_gate_preregistration_2026-08-06.md`
-and `reports/response/source_local_linear_gate_2026-08-06.md`.
+`reports/project/meta/preregistration/source_local_linear_gate_preregistration_2026-08-06.md`
+and `reports/response/source_local/source_local_linear_gate_2026-08-06.md`.
 
 ### Autonomous shape-multipole eligibility (P3.2d)
 
@@ -650,8 +650,8 @@ Thus neither source passes the registered seed/segment/control gate, and no
 tensor mediator is authorized.
 
 Preregistration and result:
-`reports/project/meta/p32d_shape_multipole_preregistration_2026-08-06.md` and
-`reports/response/p32d_shape_multipole_gate_2026-08-06.md`.
+`reports/project/meta/preregistration/p32d_shape_multipole_preregistration_2026-08-06.md` and
+`reports/response/source_local/p32d_shape_multipole_gate_2026-08-06.md`.
 
 ## Observables
 

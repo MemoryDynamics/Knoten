@@ -37,4 +37,4 @@ the purpose of the seed-matched regime scan.
 
 - Git revision: `99d91cd11cad5791a54321941bf389c94c7ab8c0`
 - Git status: `clean`
-- Script: `experiments/current/kernels/kernel_core_audit.py`
+- Script: `experiments/current/kernels/families/kernel_core_audit.py`

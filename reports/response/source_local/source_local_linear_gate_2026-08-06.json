@@ -1,0 +1,323 @@
+{
+  "schema": "source-local-linear-gate-v1",
+  "created_utc": "2026-08-06T20:14:40.903961+00:00",
+  "git_revision": "35a4f0feb67beb6a5b03205b1b939cc0b5f86e66",
+  "git_status": "",
+  "parameters": {
+    "lambda_value": 0.01,
+    "self_gain": 0.43229116264043155,
+    "cross_gain": 0.02,
+    "grid_spacing_r": 0.25,
+    "grid_points_left": 120,
+    "grid_points_right": 180,
+    "readout_position_r": 2.5,
+    "wave_speed_r_per_memory_time": 0.5,
+    "damping_rate": 0.1,
+    "natural_frequency": 0.1,
+    "reduction_orders": "8,16,32",
+    "frequency_min": 0.05,
+    "residue_min": 0.1,
+    "shift_ratio_min": 0.1,
+    "condition_max": 100000000.0,
+    "report": "reports/response/source_local/source_local_linear_gate_2026-08-06.md",
+    "summary_json": "reports/response/source_local/source_local_linear_gate_2026-08-06.json",
+    "figure": "figures/draft/response/source_local_linear_gate_2026-08-06.png"
+  },
+  "fixed_local_multiplier": 0.5620317489859727,
+  "source_locality": {
+    "mass": "constant M0; zero dynamic perturbation",
+    "offset": "d_n=x_n-m_n",
+    "current": "x_n-x_(n-1)=d_n/q-d_(n-1)",
+    "target_dependent_source_terms": false
+  },
+  "thresholds": {
+    "frequency_min_per_memory_time": 0.05,
+    "normalized_knot_residue_min": 0.1,
+    "one_way_generator_shift_ratio_min": 0.1,
+    "eigenvector_condition_max": 100000000.0,
+    "minimum_reduction_passes": 2
+  },
+  "rows": [
+    {
+      "emission": "offset",
+      "coupling_sign": 1,
+      "representation": "exact",
+      "order": 598,
+      "stable": true,
+      "eigenvector_condition": 68.68850953269428,
+      "multiplier": {
+        "real": 0.998999147603875,
+        "imag": 0.0008286067923896437
+      },
+      "damping_per_memory_time": 0.10010096006245796,
+      "frequency_per_memory_time": 0.08294367461268523,
+      "normalized_knot_residue": 3.5396966239238114e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006216423695956607,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": 1,
+      "representation": "modal_8",
+      "order": 8,
+      "stable": true,
+      "eigenvector_condition": 66.7656079464346,
+      "multiplier": {
+        "real": 0.9989993012479876,
+        "imag": 0.0006195555879735669
+      },
+      "damping_per_memory_time": 0.1001007476070936,
+      "frequency_per_memory_time": 0.06201761180100555,
+      "normalized_knot_residue": 3.5185175382015594e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006482433561155641,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": 1,
+      "representation": "modal_16",
+      "order": 16,
+      "stable": true,
+      "eigenvector_condition": 68.86560255697852,
+      "multiplier": {
+        "real": 0.9989991475501319,
+        "imag": 0.0008285621741225353
+      },
+      "damping_per_memory_time": 0.10010096914655409,
+      "frequency_per_memory_time": 0.08293920832340489,
+      "normalized_knot_residue": 3.57981453120489e-05,
+      "nearest_one_way_generator_distance_ratio": 0.0062509166541548835,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": 1,
+      "representation": "modal_32",
+      "order": 32,
+      "stable": true,
+      "eigenvector_condition": 68.7394099488825,
+      "multiplier": {
+        "real": 0.9989991475847346,
+        "imag": 0.0008285908312843048
+      },
+      "damping_per_memory_time": 0.10010096330359958,
+      "frequency_per_memory_time": 0.08294207690576813,
+      "normalized_knot_residue": 3.554481397343402e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006228762546191465,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": -1,
+      "representation": "exact",
+      "order": 598,
+      "stable": true,
+      "eigenvector_condition": 41.99307262364209,
+      "multiplier": {
+        "real": 0.9989991515988849,
+        "imag": 0.0008453867023534554
+      },
+      "damping_per_memory_time": 0.10009915287393228,
+      "frequency_per_memory_time": 0.08462334519538828,
+      "normalized_knot_residue": 4.1171412093012264e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006649112676373969,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": -1,
+      "representation": "modal_8",
+      "order": 8,
+      "stable": true,
+      "eigenvector_condition": 41.56668564334483,
+      "multiplier": {
+        "real": 0.9989991515493539,
+        "imag": 0.0008453494277378898
+      },
+      "damping_per_memory_time": 0.10009916098937761,
+      "frequency_per_memory_time": 0.08461961400633758,
+      "normalized_knot_residue": 4.0846924360943266e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006620768164734879,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": -1,
+      "representation": "modal_16",
+      "order": 16,
+      "stable": true,
+      "eigenvector_condition": 42.01080547488057,
+      "multiplier": {
+        "real": 0.9989991515264788,
+        "imag": 0.0008453351942146803
+      },
+      "damping_per_memory_time": 0.10009916448481485,
+      "frequency_per_memory_time": 0.08461818923098724,
+      "normalized_knot_residue": 4.0698699799833155e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006609944362231426,
+      "passes": false
+    },
+    {
+      "emission": "offset",
+      "coupling_sign": -1,
+      "representation": "modal_32",
+      "order": 32,
+      "stable": true,
+      "eigenvector_condition": 41.9952232485587,
+      "multiplier": {
+        "real": 0.9989991515725426,
+        "imag": 0.0008453680573934043
+      },
+      "damping_per_memory_time": 0.10009915709015908,
+      "frequency_per_memory_time": 0.08462147883500364,
+      "normalized_knot_residue": 4.100519524794471e-05,
+      "nearest_one_way_generator_distance_ratio": 0.006634934724185263,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": 1,
+      "representation": "exact",
+      "order": 598,
+      "stable": true,
+      "eigenvector_condition": 48.819535099338914,
+      "multiplier": {
+        "real": 0.9989991561502753,
+        "imag": 0.0008366036106484626
+      },
+      "damping_per_memory_time": 0.10009943741324256,
+      "frequency_per_memory_time": 0.08374415633142282,
+      "normalized_knot_residue": 3.510866123166013e-07,
+      "nearest_one_way_generator_distance_ratio": 5.885420572546389e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": 1,
+      "representation": "modal_8",
+      "order": 8,
+      "stable": true,
+      "eigenvector_condition": 48.81674029973349,
+      "multiplier": {
+        "real": 0.9989991561508353,
+        "imag": 0.0008366036075776204
+      },
+      "damping_per_memory_time": 0.10009943735744245,
+      "frequency_per_memory_time": 0.08374415602398422,
+      "normalized_knot_residue": 3.511174600689525e-07,
+      "nearest_one_way_generator_distance_ratio": 5.885659466986749e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": 1,
+      "representation": "modal_16",
+      "order": 16,
+      "stable": true,
+      "eigenvector_condition": 48.819111537710434,
+      "multiplier": {
+        "real": 0.9989991561510008,
+        "imag": 0.0008366036066822777
+      },
+      "damping_per_memory_time": 0.10009943734096134,
+      "frequency_per_memory_time": 0.08374415593434645,
+      "normalized_knot_residue": 3.5112553902754436e-07,
+      "nearest_one_way_generator_distance_ratio": 5.885729014629582e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": 1,
+      "representation": "modal_32",
+      "order": 32,
+      "stable": true,
+      "eigenvector_condition": 48.81922333242123,
+      "multiplier": {
+        "real": 0.9989991561505333,
+        "imag": 0.0008366036092228928
+      },
+      "damping_per_memory_time": 0.1000994373875485,
+      "frequency_per_memory_time": 0.08374415618870151,
+      "normalized_knot_residue": 3.511017788452808e-07,
+      "nearest_one_way_generator_distance_ratio": 5.885531680214401e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": -1,
+      "representation": "exact",
+      "order": 598,
+      "stable": true,
+      "eigenvector_condition": 48.626959733625746,
+      "multiplier": {
+        "real": 0.9989991421028939,
+        "imag": 0.0008367564876612778
+      },
+      "damping_per_memory_time": 0.10010083074120267,
+      "frequency_per_memory_time": 0.08375946051568023,
+      "normalized_knot_residue": 3.5157114527592325e-07,
+      "nearest_one_way_generator_distance_ratio": 5.888990137778635e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": -1,
+      "representation": "modal_8",
+      "order": 8,
+      "stable": true,
+      "eigenvector_condition": 48.62601393089622,
+      "multiplier": {
+        "real": 0.9989991421034556,
+        "imag": 0.0008367564845898371
+      },
+      "damping_per_memory_time": 0.10010083068522474,
+      "frequency_per_memory_time": 0.08375946020818156,
+      "normalized_knot_residue": 3.5154500324708e-07,
+      "nearest_one_way_generator_distance_ratio": 5.88875122501399e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": -1,
+      "representation": "modal_16",
+      "order": 16,
+      "stable": true,
+      "eigenvector_condition": 48.62632328612057,
+      "multiplier": {
+        "real": 0.9989991421036237,
+        "imag": 0.000836756483694644
+      },
+      "damping_per_memory_time": 0.10010083066847691,
+      "frequency_per_memory_time": 0.08375946011855853,
+      "normalized_knot_residue": 3.515364583959977e-07,
+      "nearest_one_way_generator_distance_ratio": 5.888681681769537e-05,
+      "passes": false
+    },
+    {
+      "emission": "current",
+      "coupling_sign": -1,
+      "representation": "modal_32",
+      "order": 32,
+      "stable": true,
+      "eigenvector_condition": 48.62645715209666,
+      "multiplier": {
+        "real": 0.998999142103151,
+        "imag": 0.000836756486243629
+      },
+      "damping_per_memory_time": 0.1001008307155753,
+      "frequency_per_memory_time": 0.08375946037375186,
+      "normalized_knot_residue": 3.5155986317232116e-07,
+      "nearest_one_way_generator_distance_ratio": 5.888879658875245e-05,
+      "passes": false
+    }
+  ],
+  "gate": {
+    "classification": "source-local channel stable; reciprocal knot-mode null",
+    "primary_exact_pass": false,
+    "primary_reduction_passes": 0,
+    "primary_pass": false,
+    "mass_dynamic_residue_zero": true,
+    "nonlinear_confirmation_allowed": false,
+    "minimum_future_confirmation_updates": 500000
+  }
+}

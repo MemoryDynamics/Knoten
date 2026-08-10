@@ -215,7 +215,7 @@ Naechster operativer Schritt:
     uebernimmt die Frage, ob lokale 3D-Memory-Cloud-Geometrie unter
     Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung
     robust bleibt. Report:
-    `reports/dimensions/memory_shape_boundary_2026-07-13.md`.
+    `reports/dimensions/ambient_memory/memory_shape_boundary_2026-07-13.md`.
 22. Leitplanke ab 2026-07-11: Ein einzelner Knoten muss in einem translations-
     invarianten Modell kein fixes absolutes Zentrum besitzen. Fuer Paper I
     zaehlen zunaechst mitbewegte Invarianten: kompakte Memory-Cloud, begrenzter
@@ -238,20 +238,20 @@ Naechster operativer Schritt:
     D_mem nahe der Ambient-Dimension ist im isotropen kleinen-Radius-Regime
     zu erwarten. D_spec memory bleibt nur ein historischer Paper-II-
     Hypothesenhinweis. Report:
-    reports/dimensions/dimension_claim_audit_2026-07-15.md.
+    reports/dimensions/claims/dimension_claim_audit_2026-07-15.md.
 25. Abgeschlossen: D_spec-Sensitivitaetsaudit. Ergebnis: Die `D_spec memory ~=3`-Spur
     ist ein Paper-II-Hypothesenhinweis, aber kein robuster Dimensionsclaim. Die
     bisherige Implementierung war als Legacy-Diagnostik zu lesen; kuenftige
     `spectral_dimension` nutzt symmetrische Kernel-Normalisierung und schreibt
     die verwendete Konvention in Long-Run-Payloads. Report:
-    `reports/dimensions/dspec_sensitivity_2026-07-15.md`.
+    `reports/dimensions/sensitivity/dspec_sensitivity_2026-07-15.md`.
 
 26. Abgeschlossen: Rohsnapshot-D_spec-Pilot. Ergebnis: `N=200k` fuer `d=3`
     und `d=10` mit Seeds 1-3 validiert den neuen `memory_cloud.snapshot`-
     Auswertepfad, ist aber noch keine Langlauf-Evidenz. Heat-Trace-`D_spec`
     reproduziert im Pilot kein robustes Nahe-3-Signal; im `d=10`-Baseline-Fall
     findet der konservative Estimator kein stabiles Skalierungsfenster. Report:
-    `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`.
+    `reports/dimensions/raw_snapshots/dspec_raw_snapshot_2026-07-15.md`.
 
 27. Abgeschlossen: N-Abhaengigkeits-Recheck. Ergebnis: Die alte
     `N=100k..3M`-Formation-Skalierung, der kurze `N=200k`-Rohsnapshot-Pilot
@@ -268,7 +268,7 @@ Naechster operativer Schritt:
     shape-hochdimensional und hat kein akzeptiertes Heat-Trace-Skalierungsfenster.
     Damit ist isoliertes `D_spec` kein belastbarer 3D-Claim; naechster Gate ist
     relationaler Response-Rang. Report:
-    `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
+    `reports/dimensions/raw_snapshots/dspec_raw_snapshot_retest_2026-07-16.md`.
 
 29. Abgeschlossen: analytischer Kernelkompensations-Constraint und
     Fixed-curvature-Sigma-Pilot. Fuer `q>1` sind zweiskaliges `int K=0` und
@@ -288,7 +288,7 @@ Naechster operativer Schritt:
     der Produkt-Flip kehrt die Antwort um. Reports:
     `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`
     und
-    `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
+    `reports/response/scalar/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 31. Abgeschlossen: enger Kernel-Core-Audit und curvature-matched Ablation.
     Der aktuelle (1,35)-Referenzkernel besitzt im gesampelten Bereich keinen
@@ -320,7 +320,7 @@ Naechster operativer Schritt:
     und fuenf Segmenten. Der aktive reelle Kandidat erreicht zwar nahezu
     identische Feature-Subraeume, verfehlt aber Match-/Ratenstabilitaetsgates;
     der komplexe Kandidat ueberlappt mit eta=0 zu mehr als 0.9999.
-    Report: `reports/memory/low_mode_identity_audit_2026-07-20.md`.
+    Report: `reports/memory/closure/low_mode_identity_audit_2026-07-20.md`.
 36. Abgeschlossen und mit v0.6 nachgemessen: autonome und extern angeschobene
     One-Way-Source gegen frozen/free/eta-zero und gepaarte unlaunched Kontrolle.
     Der N100M-Checkpoint besteht ueber alle fuenf Fortsetzungen das
@@ -536,7 +536,7 @@ Prioritaet:
    Pfad und `eta_zero` teilen jeweils dieselbe Zukunftsrauschfolge. Die
    Probestarken `0.03` und `0.10` Memory-Radien sind linear und nicht
    destruktiv. Report:
-   `reports/response/weak_probe_calibration_2026-07-16.md`.
+   `reports/response/calibration/weak_probe_calibration_2026-07-16.md`.
 3. Abgeschlossen: exakte Seed-Signflip-Inferenz neben deskriptivem
    95-Prozent-Energierang. Mit fuenf Seeds ist `p_min=1/16=0.0625`; der Pilot
    darf daher nur auf 90-Prozent-Niveau explorativ gelesen werden.

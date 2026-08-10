@@ -12,11 +12,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "retarded_reciprocal_full_knot_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "retarded_reciprocal_full_knot_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "retarded_reciprocal_full_knot_gate",

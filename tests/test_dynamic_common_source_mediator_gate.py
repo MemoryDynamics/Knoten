@@ -9,11 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "dynamic_common_source_mediator_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "mediation" / "dynamic_common_source_mediator_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "dynamic_common_source_mediator_gate", SCRIPT

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "dynamics"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "dynamics" / "long_runs"))
 sys.path.insert(0, str(ROOT / "src"))
 
 import linear_long_run_reconciliation as reconciliation  # noqa: E402

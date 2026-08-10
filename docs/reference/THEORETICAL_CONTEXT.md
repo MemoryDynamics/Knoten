@@ -66,7 +66,7 @@ die nichtlineare Koordinatenwahl, Projektion und endliche Fits entstehen. Der
 N=1M-Nullaudit findet weder gepoolt noch seedweise komplexe Rohmoden; nur
 `27/375` kurze, schlecht konditionierte Segmentfits lecken sehr kleine
 Komplexanteile. Report:
-`reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md`.
+`reports/memory/closure/eta_zero_raw_mode_null_audit_2026-07-31.md`.
 
 Die verfuegbaren Observablen muessen nach ihrer Abhaengigkeit getrennt werden:
 
@@ -596,9 +596,9 @@ reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md,
 reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md,
 reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md,
 reports/kernels/field/field_equation_bridge_2026-07-18.md,
-reports/response/local_oriented_mediator_gate_2026-07-28.md,
-reports/response/oriented_source_mediator_identifiability_2026-07-28.md and
-reports/response/dynamic_common_source_mediator_gate_2026-07-28.md.
+reports/response/oriented/local_oriented_mediator_gate_2026-07-28.md,
+reports/response/oriented/oriented_source_mediator_identifiability_2026-07-28.md and
+reports/response/oriented/dynamic_common_source_mediator_gate_2026-07-28.md.
 
 ## Self- and Cross-Interaction Channels
 

@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "families"))
 
 import log_taylor_kernel_audit as audit  # noqa: E402
 

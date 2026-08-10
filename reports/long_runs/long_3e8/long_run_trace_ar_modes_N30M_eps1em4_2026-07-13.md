@@ -33,7 +33,7 @@ lag- and block-stable complex slow mode that is absent from `eta_zero`?
 - `slow_abs_min`: `0.2`
 - `case_count`: `20`
 - `git_revision`: `27b8b2d4f9b068f7e740dcd08161d4ffa6057e2a`
-- `git_status`: `?? experiments/current/dynamics/paper_i_evidence_table.py
+- `git_status`: `?? experiments/current/dynamics/long_runs/paper_i_evidence_table.py
 ?? experiments/current/markov/long_run_trace_ar_report.py
 ?? reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md
 ?? tests/test_long_run_trace_ar_report.py

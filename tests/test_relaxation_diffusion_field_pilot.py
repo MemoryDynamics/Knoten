@@ -5,7 +5,7 @@ import math
 
 import numpy as np
 
-from experiments.current.memory import relaxation_diffusion_field_pilot as pilot
+from experiments.current.memory.representations import relaxation_diffusion_field_pilot as pilot
 
 
 def _args() -> argparse.Namespace:

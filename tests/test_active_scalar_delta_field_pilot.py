@@ -9,7 +9,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
-    ROOT / "experiments" / "current" / "kernels" / "active_scalar_delta_field_pilot.py"
+    ROOT / "experiments" / "current" / "kernels" / "field" / "active_scalar_delta_field_pilot.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "active_scalar_delta_field_pilot",

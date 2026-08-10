@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
@@ -8,10 +8,7 @@ import pytest
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "epsilon_dynamic_center_sweep.py"
+    / "experiments" / "current" / "dynamics" / "centering" / "epsilon_dynamic_center_sweep.py"
 )
 SPEC = importlib.util.spec_from_file_location("epsilon_dynamic_center_sweep", SCRIPT_PATH)
 assert SPEC is not None

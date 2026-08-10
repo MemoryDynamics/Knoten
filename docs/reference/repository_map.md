@@ -238,7 +238,7 @@ a classical mechanism candidate, not yet a feedback-specific knot.
 
 ```mermaid
 flowchart TD
-    plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_run_metastability.py"]
+    plan["project_priorities.md<br/>P1 Long-Run controls"] --> runner["experiments/current/dynamics/long_runs/long_run_metastability.py"]
     runner --> local["data/processed/long_run_metastability<br/>ignored bulk JSON outputs"]
     local --> trace_review["dynamic_center_trace_report.py<br/>log-trend radius/drift + local spin figures"]
     local --> stability_gate["stability_gate_audit.py<br/>4 age checkpoints + 1 late holdout"]

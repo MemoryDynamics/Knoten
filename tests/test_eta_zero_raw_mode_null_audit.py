@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "experiments/current/memory/eta_zero_raw_mode_null_audit.py"
+SCRIPT = ROOT / "experiments/current/memory/closure/eta_zero_raw_mode_null_audit.py"
 
 
 def _load_module():
@@ -38,9 +38,9 @@ def test_small_null_audit_classifies_complex_mode_as_unsupported() -> None:
         sigma_att=3.0,
         ridge=1e-6,
         complex_tolerance=1e-6,
-        identity_json=Path("reports/memory/low_mode_identity_audit_2026-07-20.json"),
+        identity_json=Path("reports/memory/closure/low_mode_identity_audit_2026-07-20.json"),
         closure_json=Path(
-            "reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.json"
+            "reports/memory/closure/low_mode_ar_feature_closure_long_N1M_2026-07-19.json"
         ),
         report=Path("unused.md"),
         summary_json=Path("unused.json"),

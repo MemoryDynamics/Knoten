@@ -79,4 +79,4 @@ is exact in the current unnormalized d-dimensional Gaussian convention.
 - Git revision: `0e1dff52253027c43c56917a237d4e24a58cacb3`
 - Git status at report generation: `clean`
 - Raw cases: `data/processed/kernel_compensation/` (ignored bulk data)
-- Script: `experiments/current/kernels/three_scale_compensation_pilot.py`
+- Script: `experiments/current/kernels/controls/three_scale_compensation_pilot.py`

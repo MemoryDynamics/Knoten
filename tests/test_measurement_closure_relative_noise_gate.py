@@ -14,11 +14,7 @@ from emergenz_knoten.reciprocal_diagnostics import PanelDelayModeFit
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "measurement_closure_relative_noise_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "measurement_closure_relative_noise_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "measurement_closure_relative_noise_gate",
@@ -102,7 +98,7 @@ def test_main_persists_summary_before_plot_failure(tmp_path, monkeypatch) -> Non
 def test_non_hankel_report_keeps_registered_next_step() -> None:
     summary = (
         MODULE.ROOT
-        / "reports/response/measurement_closure_relative_noise_gate_2026-08-04.json"
+        / "reports/response/reciprocal/measurement_closure_relative_noise_gate_2026-08-04.json"
     )
     payload = json.loads(summary.read_text(encoding="utf-8"))
 

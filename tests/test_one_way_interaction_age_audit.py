@@ -10,7 +10,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
-    ROOT / "experiments/current/memory/synchronization/one_way_interaction_age_audit.py"
+    ROOT / "experiments/current/memory/synchronization/one_way/one_way_interaction_age_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location("one_way_interaction_age_audit", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

@@ -1,0 +1,1200 @@
+{
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_update_index": 100000000,
+  "config": {
+    "alpha": 0.01,
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "burn_in": 0,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "memory_mass": 1.0,
+    "sample_every": 100000000,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "steps": 100000000
+  },
+  "created_utc": "2026-08-06T21:26:37+00:00",
+  "derived": {
+    "burn_samples": 1000,
+    "continuation_memory_times": 1500.0,
+    "post_burn_samples": 14001,
+    "sample_interval_memory_times": 0.1
+  },
+  "formation_seed": 1,
+  "gate": {
+    "candidate_pass": false,
+    "classification": "no control-separated autonomous scalar shape-multipole source",
+    "source_gates": {
+      "shape": {
+        "baseline_candidate_count": 0,
+        "baseline_frequency_relative_range": null,
+        "baseline_shape_bounded_count": 5,
+        "candidate_pass": false,
+        "eta_zero_candidate_count": 2
+      },
+      "shape_rate": {
+        "baseline_candidate_count": 0,
+        "baseline_frequency_relative_range": null,
+        "baseline_shape_bounded_count": 5,
+        "candidate_pass": false,
+        "eta_zero_candidate_count": 0
+      }
+    }
+  },
+  "git_revision": "380b33008d742d46e3b365bb0dfbb2e0d20753ad",
+  "git_status": "",
+  "parameters": {
+    "allow_dirty": false,
+    "burn_memory_times": 100.0,
+    "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+    "figure": "figures/draft/response/p32d_shape_multipole_gate_2026-08-06.png",
+    "frequency_max": 2.0,
+    "frequency_min": 0.05,
+    "frequency_relative_range_max": 0.25,
+    "future_seeds": "1,2,3,4,5",
+    "max_control_seeds": 1,
+    "min_baseline_seeds": 4,
+    "min_segment_passes": 3,
+    "noise_seed_offset": 20260806,
+    "peak_fraction_min": 0.1,
+    "peak_ratio_min": 5.0,
+    "radius_max": 1.2,
+    "radius_q95_max": 1.1,
+    "report": "reports/response/source_local/p32d_shape_multipole_gate_2026-08-06.md",
+    "sample_every": 10,
+    "segment_fraction_min": 0.05,
+    "segments": 4,
+    "shuffle_block_memory_times": 1.0,
+    "shuffle_count": 64,
+    "summary_json": "reports/response/source_local/p32d_shape_multipole_gate_2026-08-06.json",
+    "updates": 150000
+  },
+  "preregistration": "reports/project/meta/preregistration/p32d_shape_multipole_preregistration_2026-08-06.md",
+  "rows": [
+    {
+      "conditions": {
+        "baseline": {
+          "radius_ratio_max": 1.1386412435018531,
+          "radius_ratio_q95": 1.0548133300383034,
+          "shape_bounded_pass": true,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.17284430578551035,
+                "peak_frequency_cycles_per_memory_time": 0.068359375,
+                "peak_omega_per_memory_time": 0.4295146206079795,
+                "peak_to_background": 38.95178411985254,
+                "rms_frobenius": 0.103601320232594
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.3333333333333333,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.19464390835666429,
+                  "peak_frequency_cycles_per_memory_time": 0.09765625,
+                  "peak_omega_per_memory_time": 0.6135923151542565,
+                  "peak_to_background": 41.486732996819924,
+                  "rms_frobenius": 0.10485098942790425,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.17263505987887198,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 41.15399483119938,
+                  "rms_frobenius": 0.10280288617808504,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.23744564023016274,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 51.677222831082695,
+                  "rms_frobenius": 0.10339423716632214,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2143121853220897,
+                  "peak_frequency_cycles_per_memory_time": 0.09765625,
+                  "peak_omega_per_memory_time": 0.6135923151542565,
+                  "peak_to_background": 41.450527167042594,
+                  "rms_frobenius": 0.10234088700219872,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 12.724689372311452
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.11490710193794934,
+                "peak_frequency_cycles_per_memory_time": 1.025390625,
+                "peak_omega_per_memory_time": 6.442719309119693,
+                "peak_to_background": 1.3514012088207374,
+                "rms_frobenius": 0.43061732422399623
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.15741576704039334,
+                  "peak_frequency_cycles_per_memory_time": 1.416015625,
+                  "peak_omega_per_memory_time": 8.897088569736718,
+                  "peak_to_background": 1.8226462213912469,
+                  "rms_frobenius": 0.42958883279522425,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.1303520965190307,
+                  "peak_frequency_cycles_per_memory_time": 1.025390625,
+                  "peak_omega_per_memory_time": 6.442719309119693,
+                  "peak_to_background": 2.1010167000877473,
+                  "rms_frobenius": 0.43107295021191755,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.19110431725048957,
+                  "peak_frequency_cycles_per_memory_time": 1.572265625,
+                  "peak_omega_per_memory_time": 9.878836273983529,
+                  "peak_to_background": 1.560494792571942,
+                  "rms_frobenius": 0.4292919046678804,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.11952111045479011,
+                  "peak_frequency_cycles_per_memory_time": 1.005859375,
+                  "peak_omega_per_memory_time": 6.320000846088842,
+                  "peak_to_background": 1.7553364699268743,
+                  "rms_frobenius": 0.4325074469264506,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 1.4888263840575788
+            }
+          }
+        },
+        "eta_zero": {
+          "radius_ratio_max": 10.950239011817548,
+          "radius_ratio_q95": 7.8906549412775036,
+          "shape_bounded_pass": false,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.2637051519354661,
+                "peak_frequency_cycles_per_memory_time": 0.068359375,
+                "peak_omega_per_memory_time": 0.4295146206079795,
+                "peak_to_background": 332.2336485587032,
+                "rms_frobenius": 0.4810004022297938
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.5882352941176471,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.3178634758814982,
+                  "peak_frequency_cycles_per_memory_time": 0.09765625,
+                  "peak_omega_per_memory_time": 0.6135923151542565,
+                  "peak_to_background": 406.50825554184263,
+                  "rms_frobenius": 0.4802709088310557,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.24440281554603688,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 310.8130482715899,
+                  "rms_frobenius": 0.47010391317256633,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2295477295463102,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 359.49024935183235,
+                  "rms_frobenius": 0.48976521167530784,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2721127070626321,
+                  "peak_frequency_cycles_per_memory_time": 0.107421875,
+                  "peak_omega_per_memory_time": 0.6749515466696822,
+                  "peak_to_background": 293.6018175282549,
+                  "rms_frobenius": 0.4754661778550611,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 25.062367006577265
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.06068808201868892,
+                "peak_frequency_cycles_per_memory_time": 0.185546875,
+                "peak_omega_per_memory_time": 1.1658253987930873,
+                "peak_to_background": 4.05695513100427,
+                "rms_frobenius": 0.7173565573278085
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.06348338523445322,
+                  "peak_frequency_cycles_per_memory_time": 0.25390625,
+                  "peak_omega_per_memory_time": 1.5953400194010667,
+                  "peak_to_background": 4.67598333885579,
+                  "rms_frobenius": 0.7152922551750164,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.08481897883834653,
+                  "peak_frequency_cycles_per_memory_time": 0.29296875,
+                  "peak_omega_per_memory_time": 1.8407769454627694,
+                  "peak_to_background": 4.610049574396909,
+                  "rms_frobenius": 0.7297597345326724,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.054247252340573385,
+                  "peak_frequency_cycles_per_memory_time": 0.185546875,
+                  "peak_omega_per_memory_time": 1.1658253987930873,
+                  "peak_to_background": 3.970923150685278,
+                  "rms_frobenius": 0.7058757768409835,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.06711365581584273,
+                  "peak_frequency_cycles_per_memory_time": 0.1953125,
+                  "peak_omega_per_memory_time": 1.227184630308513,
+                  "peak_to_background": 4.699834889703921,
+                  "rms_frobenius": 0.7182898507955697,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 2.6148331516395067
+            }
+          }
+        }
+      },
+      "future_seed": 1
+    },
+    {
+      "conditions": {
+        "baseline": {
+          "radius_ratio_max": 1.1462598560564359,
+          "radius_ratio_q95": 1.05188594516731,
+          "shape_bounded_pass": true,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.129819816692686,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 40.012578323329826,
+                "rms_frobenius": 0.10325452515211195
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 1.0,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.17725612814913488,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 43.5213131606172,
+                  "rms_frobenius": 0.10337425001162764,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.18931576868249417,
+                  "peak_frequency_cycles_per_memory_time": 0.126953125,
+                  "peak_omega_per_memory_time": 0.7976700097005334,
+                  "peak_to_background": 41.559962393096924,
+                  "rms_frobenius": 0.10144027181258339,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.1807601208460833,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 56.60597008538133,
+                  "rms_frobenius": 0.10389481228448472,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.13537080810184446,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 50.224970735141426,
+                  "rms_frobenius": 0.1035504645868156,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 13.36366888587146
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.14954246576265862,
+                "peak_frequency_cycles_per_memory_time": 1.923828125,
+                "peak_omega_per_memory_time": 12.087768608538852,
+                "peak_to_background": 1.2983657127224215,
+                "rms_frobenius": 0.42787276603726526
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.15169018492782646,
+                  "peak_frequency_cycles_per_memory_time": 1.298828125,
+                  "peak_omega_per_memory_time": 8.160777791551611,
+                  "peak_to_background": 1.626168744567231,
+                  "rms_frobenius": 0.4295712439778886,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.1574796933731103,
+                  "peak_frequency_cycles_per_memory_time": 1.30859375,
+                  "peak_omega_per_memory_time": 8.222137023067036,
+                  "peak_to_background": 1.6617264331970987,
+                  "rms_frobenius": 0.4278850813263648,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.08144871479882726,
+                  "peak_frequency_cycles_per_memory_time": 0.751953125,
+                  "peak_omega_per_memory_time": 4.724660826687775,
+                  "peak_to_background": 1.7280292531025137,
+                  "rms_frobenius": 0.4268325109693775,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.10408861147873505,
+                  "peak_frequency_cycles_per_memory_time": 1.015625,
+                  "peak_omega_per_memory_time": 6.381360077604267,
+                  "peak_to_background": 1.488977052646364,
+                  "rms_frobenius": 0.4271961107796369,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 1.4691695905502764
+            }
+          }
+        },
+        "eta_zero": {
+          "radius_ratio_max": 10.965135537231772,
+          "radius_ratio_q95": 7.803080417510536,
+          "shape_bounded_pass": false,
+          "sources": {
+            "shape": {
+              "candidate_pass": true,
+              "full": {
+                "peak_band_power_fraction": 0.2764479224539424,
+                "peak_frequency_cycles_per_memory_time": 0.068359375,
+                "peak_omega_per_memory_time": 0.4295146206079795,
+                "peak_to_background": 366.77875153947303,
+                "rms_frobenius": 0.48249381103802885
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.14285714285714285,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.27157720191510054,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 400.61782666012493,
+                  "rms_frobenius": 0.4905219957191234,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.31066976002450375,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 291.00089963045014,
+                  "rms_frobenius": 0.4809076631325792,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2917137522644586,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 369.5207218056235,
+                  "rms_frobenius": 0.47137156230384036,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2828749736580753,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 337.6457787237921,
+                  "rms_frobenius": 0.47968706381799564,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 25.640921617966125
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.06851281092531625,
+                "peak_frequency_cycles_per_memory_time": 0.263671875,
+                "peak_omega_per_memory_time": 1.6566992509164924,
+                "peak_to_background": 4.28672204056589,
+                "rms_frobenius": 0.7126501751764275
+              },
+              "passing_segment_count": 3,
+              "segment_frequency_relative_range": 0.13043478260869565,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.06128060852718977,
+                  "peak_frequency_cycles_per_memory_time": 0.244140625,
+                  "peak_omega_per_memory_time": 1.533980787885641,
+                  "peak_to_background": 4.914746701485796,
+                  "rms_frobenius": 0.7051016540821048,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.07918452426244124,
+                  "peak_frequency_cycles_per_memory_time": 0.224609375,
+                  "peak_omega_per_memory_time": 1.41126232485479,
+                  "peak_to_background": 5.461671053129868,
+                  "rms_frobenius": 0.709946772638506,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.06909916926587047,
+                  "peak_frequency_cycles_per_memory_time": 0.25390625,
+                  "peak_omega_per_memory_time": 1.5953400194010667,
+                  "peak_to_background": 5.0061371485214,
+                  "rms_frobenius": 0.7232241814240793,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.07018302859686602,
+                  "peak_frequency_cycles_per_memory_time": 0.224609375,
+                  "peak_omega_per_memory_time": 1.41126232485479,
+                  "peak_to_background": 5.590122480142459,
+                  "rms_frobenius": 0.7121973754671151,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 2.611954679360456
+            }
+          }
+        }
+      },
+      "future_seed": 2
+    },
+    {
+      "conditions": {
+        "baseline": {
+          "radius_ratio_max": 1.1391585163681055,
+          "radius_ratio_q95": 1.0513825560811028,
+          "shape_bounded_pass": true,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.12905027073424502,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 40.23802999811961,
+                "rms_frobenius": 0.1035179358752659
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.625,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.21183580482594924,
+                  "peak_frequency_cycles_per_memory_time": 0.107421875,
+                  "peak_omega_per_memory_time": 0.6749515466696822,
+                  "peak_to_background": 40.127631969140424,
+                  "rms_frobenius": 0.1028782389891085,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.19771825036167084,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 44.17212262848331,
+                  "rms_frobenius": 0.10138345128764133,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.21481849285462667,
+                  "peak_frequency_cycles_per_memory_time": 0.087890625,
+                  "peak_omega_per_memory_time": 0.5522330836388308,
+                  "peak_to_background": 39.00059082837533,
+                  "rms_frobenius": 0.10415784668311344,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.11988575627557116,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 44.2504533329888,
+                  "rms_frobenius": 0.10513837102661999,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 13.10076893289831
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.08201524471880388,
+                "peak_frequency_cycles_per_memory_time": 0.7421875,
+                "peak_omega_per_memory_time": 4.663301595172349,
+                "peak_to_background": 1.2759859950328316,
+                "rms_frobenius": 0.43030688363947994
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.0969977774802288,
+                  "peak_frequency_cycles_per_memory_time": 0.859375,
+                  "peak_omega_per_memory_time": 5.399612373357457,
+                  "peak_to_background": 1.5716963575842973,
+                  "rms_frobenius": 0.428787981707368,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.1497087433640216,
+                  "peak_frequency_cycles_per_memory_time": 1.2890625,
+                  "peak_omega_per_memory_time": 8.099418560036185,
+                  "peak_to_background": 1.6978494682598329,
+                  "rms_frobenius": 0.42835920078572104,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.10145802717118886,
+                  "peak_frequency_cycles_per_memory_time": 0.80078125,
+                  "peak_omega_per_memory_time": 5.031456984264903,
+                  "peak_to_background": 2.0312493193429524,
+                  "rms_frobenius": 0.4312196675283804,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.12285307295301197,
+                  "peak_frequency_cycles_per_memory_time": 1.015625,
+                  "peak_omega_per_memory_time": 6.381360077604267,
+                  "peak_to_background": 1.7611790911766378,
+                  "rms_frobenius": 0.43284490189380126,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 1.474088657288419
+            }
+          }
+        },
+        "eta_zero": {
+          "radius_ratio_max": 10.189614251150417,
+          "radius_ratio_q95": 7.798967803448025,
+          "shape_bounded_pass": false,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.19702507508803285,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 312.27640803892496,
+                "rms_frobenius": 0.48185327429767993
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.5714285714285714,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.29446186865158147,
+                  "peak_frequency_cycles_per_memory_time": 0.09765625,
+                  "peak_omega_per_memory_time": 0.6135923151542565,
+                  "peak_to_background": 272.0162534235992,
+                  "rms_frobenius": 0.46153899921818126,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.221868862268282,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 548.7877426675738,
+                  "rms_frobenius": 0.5015814746588716,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.23288112086396198,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 410.44063878158244,
+                  "rms_frobenius": 0.4820115459027533,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.3030041033880985,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 281.38652562570275,
+                  "rms_frobenius": 0.46988466804075324,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 24.627875911001453
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.08328111062168142,
+                "peak_frequency_cycles_per_memory_time": 0.3125,
+                "peak_omega_per_memory_time": 1.9634954084936207,
+                "peak_to_background": 4.274658669247587,
+                "rms_frobenius": 0.7168166331167183
+              },
+              "passing_segment_count": 2,
+              "segment_frequency_relative_range": 0.32727272727272727,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.08566894095509812,
+                  "peak_frequency_cycles_per_memory_time": 0.302734375,
+                  "peak_omega_per_memory_time": 1.902136176978195,
+                  "peak_to_background": 4.244662003125118,
+                  "rms_frobenius": 0.7310506020218562,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.07714440527225065,
+                  "peak_frequency_cycles_per_memory_time": 0.224609375,
+                  "peak_omega_per_memory_time": 1.41126232485479,
+                  "peak_to_background": 5.680999841719404,
+                  "rms_frobenius": 0.6931930293529251,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.08624642611588407,
+                  "peak_frequency_cycles_per_memory_time": 0.3125,
+                  "peak_omega_per_memory_time": 1.9634954084936207,
+                  "peak_to_background": 5.414107893277303,
+                  "rms_frobenius": 0.7172086907367217,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.06521804862754972,
+                  "peak_frequency_cycles_per_memory_time": 0.15625,
+                  "peak_omega_per_memory_time": 0.9817477042468103,
+                  "peak_to_background": 4.5401378471826455,
+                  "rms_frobenius": 0.7252186817978977,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 2.6695836971311038
+            }
+          }
+        }
+      },
+      "future_seed": 3
+    },
+    {
+      "conditions": {
+        "baseline": {
+          "radius_ratio_max": 1.1371580736756568,
+          "radius_ratio_q95": 1.0475836820396192,
+          "shape_bounded_pass": true,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.13214284282050207,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 42.45071703982701,
+                "rms_frobenius": 0.10338456778622108
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 1.1428571428571428,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.20601547340061194,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 37.689900756946564,
+                  "rms_frobenius": 0.10373240871166901,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.1737663708669239,
+                  "peak_frequency_cycles_per_memory_time": 0.13671875,
+                  "peak_omega_per_memory_time": 0.859029241215959,
+                  "peak_to_background": 48.11948738892777,
+                  "rms_frobenius": 0.1014637810678747,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.15275988764481058,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 50.13579909752146,
+                  "rms_frobenius": 0.10221309479274421,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.13866746421572604,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 57.59741084119862,
+                  "rms_frobenius": 0.10539439016203622,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 12.695651020375056
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.0973851507502606,
+                "peak_frequency_cycles_per_memory_time": 0.810546875,
+                "peak_omega_per_memory_time": 5.092816215780329,
+                "peak_to_background": 1.3067171136706028,
+                "rms_frobenius": 0.4287564868442245
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.15726313529767547,
+                  "peak_frequency_cycles_per_memory_time": 1.904296875,
+                  "peak_omega_per_memory_time": 11.965050145508002,
+                  "peak_to_background": 1.6909973496646415,
+                  "rms_frobenius": 0.4325733255767771,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.13761486649571356,
+                  "peak_frequency_cycles_per_memory_time": 1.953125,
+                  "peak_omega_per_memory_time": 12.271846303085129,
+                  "peak_to_background": 1.6068000786223526,
+                  "rms_frobenius": 0.43041446955595597,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.13114545871745814,
+                  "peak_frequency_cycles_per_memory_time": 1.015625,
+                  "peak_omega_per_memory_time": 6.381360077604267,
+                  "peak_to_background": 1.769936526563639,
+                  "rms_frobenius": 0.4269567506122819,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.12387044951028696,
+                  "peak_frequency_cycles_per_memory_time": 1.97265625,
+                  "peak_omega_per_memory_time": 12.39456476611598,
+                  "peak_to_background": 1.582473506864678,
+                  "rms_frobenius": 0.4250397266626079,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 1.4148457373065788
+            }
+          }
+        },
+        "eta_zero": {
+          "radius_ratio_max": 10.451906023781124,
+          "radius_ratio_q95": 7.8690857038436315,
+          "shape_bounded_pass": false,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.19627141990084224,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 292.0664405309764,
+                "rms_frobenius": 0.4854871608996781
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.3333333333333333,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.1994539572811644,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 331.20075503908566,
+                  "rms_frobenius": 0.47387742786029874,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.18736953043786542,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 268.4375627072718,
+                  "rms_frobenius": 0.4867436089040731,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.3059863653333878,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 294.52767261393177,
+                  "rms_frobenius": 0.47606704036532405,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2349304562155566,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 381.63042855053305,
+                  "rms_frobenius": 0.49759072131618104,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 25.161397181293804
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.06546865126847515,
+                "peak_frequency_cycles_per_memory_time": 0.17578125,
+                "peak_omega_per_memory_time": 1.1044661672776617,
+                "peak_to_background": 3.8212434634972747,
+                "rms_frobenius": 0.7131968643024167
+              },
+              "passing_segment_count": 3,
+              "segment_frequency_relative_range": 0.6521739130434783,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.09088652080610239,
+                  "peak_frequency_cycles_per_memory_time": 0.3125,
+                  "peak_omega_per_memory_time": 1.9634954084936207,
+                  "peak_to_background": 5.297110668176726,
+                  "rms_frobenius": 0.7208839160939885,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.06732342366717192,
+                  "peak_frequency_cycles_per_memory_time": 0.25390625,
+                  "peak_omega_per_memory_time": 1.5953400194010667,
+                  "peak_to_background": 4.608382543187741,
+                  "rms_frobenius": 0.7096344160811365,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.06692911562822197,
+                  "peak_frequency_cycles_per_memory_time": 0.224609375,
+                  "peak_omega_per_memory_time": 1.41126232485479,
+                  "peak_to_background": 5.930668970196385,
+                  "rms_frobenius": 0.7186547010810813,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.07309386921925048,
+                  "peak_frequency_cycles_per_memory_time": 0.166015625,
+                  "peak_omega_per_memory_time": 1.043106935762236,
+                  "peak_to_background": 5.18760252188182,
+                  "rms_frobenius": 0.7034632779309261,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 2.534012794625602
+            }
+          }
+        }
+      },
+      "future_seed": 4
+    },
+    {
+      "conditions": {
+        "baseline": {
+          "radius_ratio_max": 1.139635990124736,
+          "radius_ratio_q95": 1.0492893106992365,
+          "shape_bounded_pass": true,
+          "sources": {
+            "shape": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.13578105852397956,
+                "peak_frequency_cycles_per_memory_time": 0.05859375,
+                "peak_omega_per_memory_time": 0.36815538909255385,
+                "peak_to_background": 40.634140045706616,
+                "rms_frobenius": 0.10289678214481722
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.375,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.21934449259350353,
+                  "peak_frequency_cycles_per_memory_time": 0.087890625,
+                  "peak_omega_per_memory_time": 0.5522330836388308,
+                  "peak_to_background": 47.14369777644035,
+                  "rms_frobenius": 0.10454469835983364,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.22575964106021554,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 44.25456946486477,
+                  "rms_frobenius": 0.10231656384579964,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.20939523205800978,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 45.530760466153346,
+                  "rms_frobenius": 0.10268652000593612,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.1399389153534409,
+                  "peak_frequency_cycles_per_memory_time": 0.05859375,
+                  "peak_omega_per_memory_time": 0.36815538909255385,
+                  "peak_to_background": 45.42340900001677,
+                  "rms_frobenius": 0.1015995248775822,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 12.617791735909405
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.15527889442287132,
+                "peak_frequency_cycles_per_memory_time": 1.455078125,
+                "peak_omega_per_memory_time": 9.142525495798422,
+                "peak_to_background": 1.2503591640668348,
+                "rms_frobenius": 0.4296342339725647
+              },
+              "passing_segment_count": 0,
+              "segment_frequency_relative_range": null,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.19465411108202016,
+                  "peak_frequency_cycles_per_memory_time": 1.728515625,
+                  "peak_omega_per_memory_time": 10.86058397823034,
+                  "peak_to_background": 1.704853940506739,
+                  "rms_frobenius": 0.42900254733755283,
+                  "segment": 1,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.08555792376034342,
+                  "peak_frequency_cycles_per_memory_time": 0.751953125,
+                  "peak_omega_per_memory_time": 4.724660826687775,
+                  "peak_to_background": 1.636315917943651,
+                  "rms_frobenius": 0.4274193712337049,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.06394050313447039,
+                  "peak_frequency_cycles_per_memory_time": 0.56640625,
+                  "peak_omega_per_memory_time": 3.5588354278946874,
+                  "peak_to_background": 1.6500937951356927,
+                  "rms_frobenius": 0.4310873509625632,
+                  "segment": 3,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.10785770494399703,
+                  "peak_frequency_cycles_per_memory_time": 0.8984375,
+                  "peak_omega_per_memory_time": 5.64504929941916,
+                  "peak_to_background": 1.9019856511829654,
+                  "rms_frobenius": 0.4310162448653231,
+                  "segment": 4,
+                  "segment_pass": false
+                }
+              ],
+              "shuffle_peak_ratio_q99": 1.447929203929488
+            }
+          }
+        },
+        "eta_zero": {
+          "radius_ratio_max": 11.249844012290309,
+          "radius_ratio_q95": 7.943388273684318,
+          "shape_bounded_pass": false,
+          "sources": {
+            "shape": {
+              "candidate_pass": true,
+              "full": {
+                "peak_band_power_fraction": 0.3402561447907334,
+                "peak_frequency_cycles_per_memory_time": 0.078125,
+                "peak_omega_per_memory_time": 0.4908738521234052,
+                "peak_to_background": 353.5705903179366,
+                "rms_frobenius": 0.48813409270116376
+              },
+              "passing_segment_count": 4,
+              "segment_frequency_relative_range": 0.125,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.33113879750273434,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 399.19679070966043,
+                  "rms_frobenius": 0.49193555303587816,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.2782968796590409,
+                  "peak_frequency_cycles_per_memory_time": 0.068359375,
+                  "peak_omega_per_memory_time": 0.4295146206079795,
+                  "peak_to_background": 355.42334550481837,
+                  "rms_frobenius": 0.47317510291103104,
+                  "segment": 2,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.32404583378113755,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 382.16446338119283,
+                  "rms_frobenius": 0.4807878895600069,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.3902447531945025,
+                  "peak_frequency_cycles_per_memory_time": 0.078125,
+                  "peak_omega_per_memory_time": 0.4908738521234052,
+                  "peak_to_background": 575.8361549955426,
+                  "rms_frobenius": 0.5004327328141341,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 26.320841785138654
+            },
+            "shape_rate": {
+              "candidate_pass": false,
+              "full": {
+                "peak_band_power_fraction": 0.06370033154401455,
+                "peak_frequency_cycles_per_memory_time": 0.244140625,
+                "peak_omega_per_memory_time": 1.533980787885641,
+                "peak_to_background": 4.349751809967947,
+                "rms_frobenius": 0.7088453437671285
+              },
+              "passing_segment_count": 3,
+              "segment_frequency_relative_range": 0.32,
+              "segments": [
+                {
+                  "peak_band_power_fraction": 0.07097121119812916,
+                  "peak_frequency_cycles_per_memory_time": 0.244140625,
+                  "peak_omega_per_memory_time": 1.533980787885641,
+                  "peak_to_background": 5.491266568739293,
+                  "rms_frobenius": 0.7021408291180697,
+                  "segment": 1,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.07897203953412148,
+                  "peak_frequency_cycles_per_memory_time": 0.3125,
+                  "peak_omega_per_memory_time": 1.9634954084936207,
+                  "peak_to_background": 4.736665199078314,
+                  "rms_frobenius": 0.7197748274798783,
+                  "segment": 2,
+                  "segment_pass": false
+                },
+                {
+                  "peak_band_power_fraction": 0.06987856454048624,
+                  "peak_frequency_cycles_per_memory_time": 0.244140625,
+                  "peak_omega_per_memory_time": 1.533980787885641,
+                  "peak_to_background": 5.686042954377733,
+                  "rms_frobenius": 0.7139058712809392,
+                  "segment": 3,
+                  "segment_pass": true
+                },
+                {
+                  "peak_band_power_fraction": 0.0709392201529013,
+                  "peak_frequency_cycles_per_memory_time": 0.166015625,
+                  "peak_omega_per_memory_time": 1.043106935762236,
+                  "peak_to_background": 5.429748252978041,
+                  "rms_frobenius": 0.6993579643542522,
+                  "segment": 4,
+                  "segment_pass": true
+                }
+              ],
+              "shuffle_peak_ratio_q99": 2.749233797558454
+            }
+          }
+        }
+      },
+      "future_seed": 5
+    }
+  ],
+  "runtime_seconds": 51.45350659999531,
+  "schema": "emergenz-knoten.p32d-shape-multipole-eligibility",
+  "schema_version": 1,
+  "spectral_arrays": "not persisted; deterministically reproducible from checkpoint and git revision"
+}

@@ -4,7 +4,7 @@ Date: 2026-06-30.
 
 ## Source
 
-- Script: `experiments/current/dynamics/long_run_metastability.py`
+- Script: `experiments/current/dynamics/long_runs/long_run_metastability.py`
 - Local output: `data/processed/long_run_metastability/2026-06-29_initial`
 - Git revision recorded by run: `c36816e`
 - Condition: `baseline`

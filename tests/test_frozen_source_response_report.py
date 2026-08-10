@@ -17,11 +17,7 @@ from emergenz_knoten import (
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "frozen_source_response.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "calibration" / "frozen_source_response.py"
 )
 SPEC = importlib.util.spec_from_file_location("frozen_source_response", SCRIPT_PATH)
 frozen_source_response = importlib.util.module_from_spec(SPEC)

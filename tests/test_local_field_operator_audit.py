@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "field"))
 
 import local_field_operator_audit as audit  # noqa: E402
 

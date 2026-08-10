@@ -9,10 +9,7 @@ import pytest
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "paper_i_evidence_table.py"
+    / "experiments" / "current" / "dynamics" / "long_runs" / "paper_i_evidence_table.py"
 )
 SPEC = importlib.util.spec_from_file_location("paper_i_evidence_table", SCRIPT_PATH)
 assert SPEC is not None

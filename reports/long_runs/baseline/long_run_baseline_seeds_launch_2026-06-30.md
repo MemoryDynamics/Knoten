@@ -23,7 +23,7 @@ parameters remain identical to the completed baseline run for seed 1.
 ## Command
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 10000000 `
   --seeds 2,3,4,5 `
   --conditions baseline `

@@ -10,11 +10,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "source_local_linear_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "mediation" / "source_local_linear_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location("source_local_linear_gate", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

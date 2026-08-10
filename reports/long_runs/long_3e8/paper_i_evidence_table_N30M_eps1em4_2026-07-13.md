@@ -13,7 +13,7 @@ not a spin/phase mode, and not a physical particle identification.
 
 - Source aggregate: `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_summary_2026-07-13.json`
 - Git revision while building this report: `27b8b2d4f9b068f7e740dcd08161d4ffa6057e2a`
-- Git status while building this report: `?? experiments/current/dynamics/paper_i_evidence_table.py
+- Git status while building this report: `?? experiments/current/dynamics/long_runs/paper_i_evidence_table.py
 ?? experiments/current/markov/long_run_trace_ar_report.py
 ?? reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md
 ?? reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md

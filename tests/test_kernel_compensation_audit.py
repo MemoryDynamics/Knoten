@@ -7,7 +7,8 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "controls"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "families"))
 sys.path.insert(0, str(ROOT / "src"))
 
 import fixed_curvature_sigma_pilot as sigma_pilot  # noqa: E402

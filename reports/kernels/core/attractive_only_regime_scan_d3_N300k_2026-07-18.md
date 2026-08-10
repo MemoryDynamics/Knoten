@@ -118,4 +118,4 @@ noise and controls.
 - Git revision: `8ef72230353a421a603f1aa8b5555ce4dcdd0df7`
 - Git status: `clean`
 - Raw cases: `data/processed/kernel_core/` (ignored bulk data)
-- Script: `experiments/current/kernels/attractive_only_regime_scan.py`
+- Script: `experiments/current/kernels/families/attractive_only_regime_scan.py`

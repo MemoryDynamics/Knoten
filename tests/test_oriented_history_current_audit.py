@@ -11,11 +11,7 @@ from emergenz_knoten import FiniteMemoryState
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "oriented_history_current_audit.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "one_way" / "oriented_history_current_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "oriented_history_current_audit", SCRIPT_PATH

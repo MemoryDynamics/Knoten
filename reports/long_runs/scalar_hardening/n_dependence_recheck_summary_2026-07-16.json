@@ -310,6 +310,6 @@
   "source_files": {
     "long_summary": "reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_summary_2026-07-13.json",
     "scalar_summary": "reports/long_runs/scalar_hardening/scalar_n_scaling_q3_summary_2026-07-10.json",
-    "snapshot_summary": "reports/dimensions/dspec_raw_snapshot_summary_2026-07-15.json"
+    "snapshot_summary": "reports/dimensions/raw_snapshots/dspec_raw_snapshot_summary_2026-07-15.json"
   }
 }

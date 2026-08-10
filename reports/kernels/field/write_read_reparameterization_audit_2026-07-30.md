@@ -62,4 +62,4 @@ nor dimension selection.
 
 - Git revision: `44f8c3fa9d1828082923f493751b18d7228c4e5f`
 - Git status before generation: `clean`
-- Script: `experiments/current/kernels/write_read_reparameterization_audit.py`
+- Script: `experiments/current/kernels/field/write_read_reparameterization_audit.py`

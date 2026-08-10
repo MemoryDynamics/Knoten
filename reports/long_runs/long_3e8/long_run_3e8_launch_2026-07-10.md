@@ -43,7 +43,7 @@ Python compute processes.
 
 Shared parameters:
 
-- script: `experiments/current/dynamics/long_run_metastability.py`
+- script: `experiments/current/dynamics/long_runs/long_run_metastability.py`
 - steps: `300000000`
 - dim: `3`
 - seeds: `1,2,3,4,5`

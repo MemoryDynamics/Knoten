@@ -12,11 +12,7 @@ from emergenz_knoten import FiniteMemoryState, SimulationConfig, memory_shape_te
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "weak_probe_response.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "calibration" / "weak_probe_response.py"
 )
 SPEC = importlib.util.spec_from_file_location("weak_probe_response", SCRIPT_PATH)
 weak_probe_response = importlib.util.module_from_spec(SPEC)

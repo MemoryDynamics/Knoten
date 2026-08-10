@@ -74,4 +74,4 @@ free knots merge or become tangled.
 
 Machine-readable summary: `reports/long_runs/scalar_hardening/n_dependence_recheck_summary_2026-07-16.json`.
 Git revision while building: `fd9127951dfb239881e9da5b39da01039cdfaba8`.
-Git status while building: `?? experiments/current/dynamics/n_dependence_recheck_report.py; ?? figures/draft/scalar_n/n_dependence_recheck_2026-07-16/; ?? reports/long_runs/scalar_hardening/n_dependence_recheck_summary_2026-07-16.json; ?? tests/test_n_dependence_recheck_report.py`.
+Git status while building: `?? experiments/current/dimensions/n_dependence_recheck_report.py; ?? figures/draft/scalar_n/n_dependence_recheck_2026-07-16/; ?? reports/long_runs/scalar_hardening/n_dependence_recheck_summary_2026-07-16.json; ?? tests/test_n_dependence_recheck_report.py`.

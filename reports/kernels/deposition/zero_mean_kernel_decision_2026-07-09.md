@@ -71,7 +71,7 @@ model and is not part of this condition.
 Run a short seed-matched pilot before any long run:
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 100000 `
   --seeds 1,2,3,4,5 `
   --conditions baseline,zero_mean_two_scale,matched_deposition_renormalized,eta_zero `

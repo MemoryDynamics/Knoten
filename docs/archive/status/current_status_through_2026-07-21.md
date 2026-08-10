@@ -116,8 +116,8 @@ Rekonstruktion von `0.980` auf `8.42e-4`. Das ist ein sauberer Feldglaettungs-
 befund, aber weder Metastabilitaet noch Propagation oder ein neuer Modus.
 
 Reports:
-`reports/memory/spectral_rho_field_pilot_2026-07-19.md` und
-`reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
+`reports/memory/representations/spectral_rho_field_pilot_2026-07-19.md` und
+`reports/memory/representations/relaxation_diffusion_field_pilot_2026-07-19.md`.
 
 Die seedgepaarte Low-Mode-/AR-Closure ist abgeschlossen. Bei `N=100k`,
 Seeds 1 bis 5 und den vorab festgelegten Diffusionsarmen bestehen 8 von 10
@@ -146,10 +146,10 @@ fuer einen Fit-/Sampling-/Repraesentationsmodus, nicht fuer einen
 Oszillator.
 
 Reports:
-`reports/memory/low_mode_ar_feature_closure_2026-07-19.md`,
-`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md`,
-`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` und
-`reports/memory/low_mode_identity_audit_2026-07-20.md`.
+`reports/memory/closure/low_mode_ar_feature_closure_2026-07-19.md`,
+`reports/memory/closure/low_mode_ar_feature_closure_long_N1M_2026-07-19.md`,
+`reports/memory/closure/low_mode_ar_long_run_reconciliation_2026-07-19.md` und
+`reports/memory/closure/low_mode_identity_audit_2026-07-20.md`.
 
 ## Paper-Status
 
@@ -202,10 +202,10 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Der lokale d=3-Memory-Shape-Wert ist nun eine lineare
   Ambient-Shape-Kontrolle, kein Paper-I-Teaser. Paper II braucht
   relationale oder ambient-unabhaengige Dimensionsobservablen.
-  Reports: `reports/dimensions/dimension_claim_audit_2026-07-15.md`,
-  `reports/dimensions/dspec_sensitivity_2026-07-15.md`,
-  `reports/dimensions/dspec_raw_snapshot_2026-07-15.md`,
-  `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md`.
+  Reports: `reports/dimensions/claims/dimension_claim_audit_2026-07-15.md`,
+  `reports/dimensions/sensitivity/dspec_sensitivity_2026-07-15.md`,
+  `reports/dimensions/raw_snapshots/dspec_raw_snapshot_2026-07-15.md`,
+  `reports/dimensions/raw_snapshots/dspec_raw_snapshot_retest_2026-07-16.md`.
 - Uniformer Weak-Probe-Pilot 2026-07-16: Vollstaendige `N=3M`-Snapshots fuer
   `d=3/10`, Seeds `1..5`, wurden fuer `0.03` und `0.10` Memory-Radien gepaart
   perturbiert. Die Bare-Position reproduziert `I_d` bis `4.7e-12`; die
@@ -213,7 +213,7 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   `10`), waehrend die Formantwort keinen seed-reproduzierbaren Signflip-Rang
   besitzt. Das ist eine uniforme Vollrang-Negativkontrolle, kein externer
   Dimensionsbefund. Report:
-  `reports/response/weak_probe_calibration_2026-07-16.md`.
+  `reports/response/calibration/weak_probe_calibration_2026-07-16.md`.
 - Referenzzustands-Checkpoints 2026-07-16: Die kanonischen
   Entwicklungszustaende fuer `N=1e8`, Seed 1 und `d=3/10` sind auf Revision
   `e8f4af2` gebildet, checksum-validiert und mit exakt reproduzierbarem
@@ -235,7 +235,7 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   `d-1` nahezu entartete transversale Kanaele (`|J_parallel/J_perp| ~=1.063`).
   Das ist die erwartete Symmetrie des isotropen skalaren Fernfeldkernels,
   keine externe 3D-Selektion. Report:
-  `reports/response/frozen_source_pilot_2026-07-16.md`.
+  `reports/response/calibration/frozen_source_pilot_2026-07-16.md`.
 
 - Frozen-Source-Feld- und Distanzpruefung 2026-07-17: Der reale
   Checkpoint-Feldverlauf stimmt von `5 R_mem` bis `1 sigma_rep` praktisch mit
@@ -246,8 +246,8 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   und `d=10` vollen Ambient-Rang. Die groesste normierte Target-Deformation
   bleibt unter `0.002`. Das ist ein vorzeichenloser skalarer, mass-like
   Kreuzkanal und kein Neutralitaets-, Ladungs-, Reziprozitaets- oder 3D-Claim.
-  Reports: `reports/response/frozen_source_field_audit_2026-07-17.md` und
-  `reports/response/frozen_source_distance_ladder_2026-07-17.md`.
+  Reports: `reports/response/calibration/frozen_source_field_audit_2026-07-17.md` und
+  `reports/response/calibration/frozen_source_distance_ladder_2026-07-17.md`.
 - One-Way-Source-Pilot mit v0.6-Gate 2026-07-20: Die Source stammt aus
   dem d=3-Checkpoint bei N=100M. Bei alpha=0.01 entsprechen 200 Code-
   Memory-Zeiten 20,000 Updates; der Checkpoint selbst ist 1,000,000 solche
@@ -270,8 +270,8 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   Lesart: beschraenkte, aber nicht durchgehend formkohaerente Translation,
   nicht Zerstoerung und nicht Formerhaltung. Reziproke Kopplung bleibt bis
   zu einem bestandenen One-Way-Readout-/Kohaerenzgate zurueckgestellt.
-  Reports: reports/response/one_way_dynamic_source_pilot_2026-07-20.md und
-  reports/response/one_way_launched_source_pilot_2026-07-20.md.
+  Reports: reports/response/one_way/one_way_dynamic_source_pilot_2026-07-20.md und
+  reports/response/one_way/one_way_launched_source_pilot_2026-07-20.md.
 - Interaction-Age-Audit 2026-07-21: Derselbe reife N=100M-Checkpoint wurde
   ueber fuenf Future-Noise-Seeds bis N=101M unter einer dauerhaften
   autonomen One-Way-Quelle fortgesetzt. Alle Seeds plateauieren in der Form,
@@ -280,7 +280,7 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   das Radiusverhaeltnis bleibt 0.999995 und die Shape-Spektraldistanz
   4.91e-5. Das stuetzt Fernfeldtranslation ohne neuen Knotentyp. Sparse
   Altersfenster schliessen lange Oszillationsperioden nicht allgemein aus.
-  Report: `reports/response/one_way_interaction_age_N1M_2026-07-21.md`.
+  Report: `reports/response/one_way/one_way_interaction_age_N1M_2026-07-21.md`.
 - Der erweiterte Audit bis N=103M verwendet 20 Altersfenster. Die
   Zentrumantwort steigt nahezu linear auf 20.844 Radien; erneut bestehen
   5/5 Seeds das spaete Shape-Plateau und 0/5 das Formmodifikationsgate.
@@ -288,7 +288,7 @@ A_att-Transition 2026-07-15: Ein gematchter `N=10M`-Vergleich ueber Seeds
   (0.999953); der gepaarte Differenzspan ist nur 0.142 Prozent des absoluten
   dynamischen Shape-Spans. Damit kein wechselwirkungsinduzierter
   Oszillationsbefund. Report:
-  `reports/response/one_way_interaction_age_N3M_2026-07-21.md`.
+  `reports/response/one_way/one_way_interaction_age_N3M_2026-07-21.md`.
 
 ## Long-Run-Status
 
@@ -417,7 +417,7 @@ gehoeren nicht in den getrackten Public-Repo-Stand. Die lokalen ignorierten
 Klartextnotizen wurden entfernt; die oeffentliche Spur ist eine sanitisierte
 Policy-/Control-Notiz. Neue Long-Run-JSONs protokollieren weiter `git_status`.
 
-Long-Run-Kontrollen 2026-07-08: `experiments/current/dynamics/long_run_metastability.py` kennt
+Long-Run-Kontrollen 2026-07-08: `experiments/current/dynamics/long_runs/long_run_metastability.py` kennt
 nun `m0_zero` (`memory_mass=0`) und `alpha_one` (`alpha=1`). `m0_zero` ist die
 saubere Null-Feld-Kontrolle, `alpha_one` ist der Ein-Schritt-Memory-Grenzfall.
 Der 100M-Lauf mit Seeds `1..10` ist abgeschlossen: `m0_zero` und `alpha_one`
@@ -575,7 +575,7 @@ Summary verwendet fuer beide den festen Ballradius-Faktor `2`; groessere
 Faktoren bleiben nur als Detaildiagnostik erhalten, damit der Residence-Wert
 nicht durch einen zu grossen Suchball trivial wird.
 
-Center-Trace-Update 2026-07-11: `experiments/current/dynamics/long_run_metastability.py`
+Center-Trace-Update 2026-07-11: `experiments/current/dynamics/long_runs/long_run_metastability.py`
 kann mit `--trace-every` eine zeitlokale Memory-Center-/Radius-Spur schreiben.
 Die neue Diagnose `dynamic_center_trace` misst co-moving Inside-Fraction,
 maximale co-moving Runs in Memory-Zeiten und Center-Drift pro Memory-Zeit.
@@ -626,9 +626,9 @@ Report: `reports/long_runs/epsilon/epsilon_dynamic_center_q3_Aatt35_N100k_2026-0
 
 N30M-Referenzslice 2026-07-13: Der Bestaetigungslauf mit `epsilon=1e-4`, `A_att=20/35`, Seeds `1..5`, gegen `eta_zero` ist ausgewertet. `A_att=35` war im damaligen Score der staerkste skalare Referenzkandidat; der neue Linearitaetsaudit erklaert seinen Radius: dynamischer Radius `~2.09e-4` statt `~1.04e-3` in `eta_zero`, Drift/Radius `~0.044` statt `~0.320`, `D_mem ~2.94` und Roundness `~0.843`. Die Paper-I-Lesart ist co-moving compact memory-cloud evidence, kein fixes absolutes Zentrum. Der Long-Run-Trace-AR-Check findet komplexe Klassifikationen auch in `eta_zero`; damit kein isolierter skalarer Phasen-/Photonmodus. Feature-Closure zeigt den staerksten aktiven Closure-Lift in Shape-/Radius-Scalars, nicht im Spin-Scalar. Reports: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`, `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` und `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
 
-3D-Memory-Shape-Grenze 2026-07-13: Der `D_mem ~=2.94`-Befund wurde als lokales Memory-Shape-Observable geschaerft. Bei `A_att=35` liegen alle fuenf aktiven Seeds eng bei `D_mem=2.914..2.947` und Roundness `0.809..0.849`, waehrend die seedgleichen `eta_zero`-Kontrollen breiter und niedriger streuen (`D_mem=1.312..2.679`, Roundness `0.219..0.626`). Lesart: Paper I darf einen seed-stabilen co-moving Memory-Cloud-Befund im gewaehlten 3D-Embedding berichten. Paper II uebernimmt die offene Frage, ob daraus eine extern/macroskopisch robuste 3D-Selektion unter Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung folgt. Report: `reports/dimensions/memory_shape_boundary_2026-07-13.md`.
+3D-Memory-Shape-Grenze 2026-07-13: Der `D_mem ~=2.94`-Befund wurde als lokales Memory-Shape-Observable geschaerft. Bei `A_att=35` liegen alle fuenf aktiven Seeds eng bei `D_mem=2.914..2.947` und Roundness `0.809..0.849`, waehrend die seedgleichen `eta_zero`-Kontrollen breiter und niedriger streuen (`D_mem=1.312..2.679`, Roundness `0.219..0.626`). Lesart: Paper I darf einen seed-stabilen co-moving Memory-Cloud-Befund im gewaehlten 3D-Embedding berichten. Paper II uebernimmt die offene Frage, ob daraus eine extern/macroskopisch robuste 3D-Selektion unter Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Beobachtung folgt. Report: `reports/dimensions/ambient_memory/memory_shape_boundary_2026-07-13.md`.
 
-Ambient-Dimension-Sweep vorbereitet 2026-07-13: Der naechste Paper-II-Brueckentest legt denselben `A_att=35`, `epsilon=1e-4`, `N=30M`-Referenzslice in `d in {4,5,7,10,13,20}` und vergleicht `baseline` gegen `eta_zero`. `long_run_metastability.py` schreibt nun ungewichtetes `D_spec` fuer Sample-Pfad und Memory-Cloud mit begrenzten `spectral_points`; der Ambient-Report aggregiert `D_mem`, `D_spec`, Roundness, Radius und Drift gemeinsam. Launch-Notiz: `reports/dimensions/ambient_memory_shape_sweep_launch_2026-07-13.md`.
+Ambient-Dimension-Sweep vorbereitet 2026-07-13: Der naechste Paper-II-Brueckentest legt denselben `A_att=35`, `epsilon=1e-4`, `N=30M`-Referenzslice in `d in {4,5,7,10,13,20}` und vergleicht `baseline` gegen `eta_zero`. `long_run_metastability.py` schreibt nun ungewichtetes `D_spec` fuer Sample-Pfad und Memory-Cloud mit begrenzten `spectral_points`; der Ambient-Report aggregiert `D_mem`, `D_spec`, Roundness, Radius und Drift gemeinsam. Launch-Notiz: `reports/dimensions/ambient_memory/ambient_memory_shape_sweep_launch_2026-07-13.md`.
 
 Entscheidungsnotiz 2026-07-07: `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md`
 fasst die aktuelle Linie zusammen. Paper I sollte den Mechanismus als
@@ -702,7 +702,7 @@ Ladungsclaim. Reports:
 `reports/kernels/compensation/fixed_curvature_sigma_pilot_d3_N1M_2026-07-18.md`,
 `reports/kernels/compensation/three_scale_zero_mean_pilot_d3_N1M_2026-07-18.md`
 und
-`reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md`.
+`reports/response/scalar/signed_scalar_cross_channel_pilot_2026-07-18.md`.
 
 ## Kernelreduktion und lineares Regime 2026-07-18
 

@@ -77,4 +77,4 @@ cubic-force differences to exceed measurement uncertainty.
 
 - Git revision: `97e559f15d3f447bb73a8e1829fee667e6f8263c`
 - Git status before generation: `clean`
-- Script: `experiments/current/kernels/log_taylor_kernel_audit.py`
+- Script: `experiments/current/kernels/families/log_taylor_kernel_audit.py`

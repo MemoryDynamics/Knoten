@@ -24,7 +24,7 @@ must come from long runs and controls.
 ## Command
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 10000000 `
   --seeds 1 `
   --conditions baseline `

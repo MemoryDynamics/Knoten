@@ -7,25 +7,25 @@ $AssetDir = Join-Path $KindleDir "_kindle_assets"
 $papers = @(
     @{
         Name = "paper_0_kindle"
-        Source = Join-Path $PaperRoot "paper_0\main.tex"
-        Graphics = "../paper_0/"
-        Bibliography = "../paper_0/references"
+        Source = Join-Path $PaperRoot "paper_0\manuscript\main.tex"
+        Graphics = "../paper_0/figures/"
+        Bibliography = "../paper_0/manuscript/references"
         FigureReplacements = @{}
     },
     @{
         Name = "paper_i_long_kindle"
-        Source = Join-Path $PaperRoot "paper_i\main.tex"
-        Graphics = "../paper_i/"
-        Bibliography = "../paper_i/references"
+        Source = Join-Path $PaperRoot "paper_i\manuscript\main.tex"
+        Graphics = "../paper_i/figures/"
+        Bibliography = "../paper_i/manuscript/references"
         FigureReplacements = @{
             "{fig_markov_embedding.pdf}" = "{_kindle_assets/paper_i_fig_markov_embedding.png}"
         }
     },
     @{
         Name = "paper_i_compact_kindle"
-        Source = Join-Path $PaperRoot "paper_i\main_compact.tex"
-        Graphics = "../paper_i/"
-        Bibliography = "../paper_i/references"
+        Source = Join-Path $PaperRoot "paper_i\manuscript\main_compact.tex"
+        Graphics = "../paper_i/figures/"
+        Bibliography = "../paper_i/manuscript/references"
         FigureReplacements = @{}
     },
     @{
@@ -95,7 +95,7 @@ function Convert-ToKindleTex {
 function New-KindleAssets {
     New-Item -ItemType Directory -Force -Path $AssetDir | Out-Null
 
-    $sourcePdf = Join-Path $PaperRoot "paper_i\fig_markov_embedding.pdf"
+    $sourcePdf = Join-Path $PaperRoot "paper_i\figures\fig_markov_embedding.pdf"
     $outputBase = Join-Path $AssetDir "paper_i_fig_markov_embedding"
     & pdftoppm -png -singlefile -r 180 $sourcePdf $outputBase
     if ($LASTEXITCODE -ne 0) { throw "pdftoppm failed for fig_markov_embedding.pdf" }

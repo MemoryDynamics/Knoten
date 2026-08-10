@@ -10,11 +10,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "oriented_source_mediator_identifiability.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "mediation" / "oriented_source_mediator_identifiability.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "oriented_source_mediator_identifiability", SCRIPT

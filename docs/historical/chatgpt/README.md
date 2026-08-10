@@ -17,7 +17,7 @@ positions that are not part of the current Paper I formulation.
 
 For the current Paper I state, use:
 
-- `paper/paper_i/main.tex` for the rigorous working version.
-- `paper/paper_i/main_compact.tex` for the compact discussion/publication
+- `paper/paper_i/manuscript/main.tex` for the rigorous working version.
+- `paper/paper_i/manuscript/main_compact.tex` for the compact discussion/publication
   variant.
-- `paper/paper_i/README.md` for the current role and file map.
+- `paper/paper_i/manuscript/README.md` for the current role and file map.

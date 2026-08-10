@@ -112,4 +112,4 @@ transition rules are demonstrated.
 
 - Git revision: `0d9aa63be7727770ce6527366df68dbcf8cec41b`
 - Git status before generation: `clean`
-- Script: `experiments/current/kernels/local_field_operator_audit.py`
+- Script: `experiments/current/kernels/field/local_field_operator_audit.py`

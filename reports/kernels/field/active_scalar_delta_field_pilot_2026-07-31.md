@@ -80,14 +80,14 @@ multidimensional knot.
  M docs/status/current_status.md
  M docs/status/paper_claims.md
  M docs/status/project_priorities.md
- M experiments/current/dynamics/dimension_over_n_reproduction.py
+ M experiments/current/dimensions/dimension_over_n_reproduction.py
  M figures/README.md
  M reports/README.md
- M reports/dimensions/dimension_over_n_d10_A35_2026-07-30.md
- M reports/dimensions/dimension_over_n_d10_A35_summary_2026-07-30.json
+ M reports/dimensions/n_scaling/dimension_over_n_d10_A35_2026-07-30.md
+ M reports/dimensions/n_scaling/dimension_over_n_d10_A35_summary_2026-07-30.json
  M src/emergenz_knoten/__init__.py
  M tests/test_dimension_over_n_reproduction.py
-?? experiments/current/kernels/active_scalar_delta_field_pilot.py
+?? experiments/current/kernels/field/active_scalar_delta_field_pilot.py
 ?? figures/draft/kernels/field_2026-07-31/
 ?? reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.json
 ?? reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md
@@ -96,5 +96,5 @@ multidimensional knot.
 ?? tests/test_active_scalar_delta_field_pilot.py
 ?? tests/test_active_scalar_field.py
 ?? tests/test_measurement_stability.py`
-- Script: `experiments/current/kernels/active_scalar_delta_field_pilot.py`
+- Script: `experiments/current/kernels/field/active_scalar_delta_field_pilot.py`
 - Machine-readable summary: [active_scalar_delta_field_pilot_2026-07-31.json](active_scalar_delta_field_pilot_2026-07-31.json)

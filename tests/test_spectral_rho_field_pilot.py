@@ -4,7 +4,7 @@ import argparse
 
 import numpy as np
 
-from experiments.current.memory import spectral_rho_field_pilot as pilot
+from experiments.current.memory.representations import spectral_rho_field_pilot as pilot
 
 
 def _args() -> argparse.Namespace:

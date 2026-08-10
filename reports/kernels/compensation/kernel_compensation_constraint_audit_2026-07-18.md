@@ -111,4 +111,4 @@ rapidly with a broad compensator.
 
 - Git revision: `fc7e8928ad35de3424303f557280d5cbca27505e`
 - Git status at generation: `clean`
-- Script: `experiments/current/kernels/kernel_compensation_audit.py`
+- Script: `experiments/current/kernels/families/kernel_compensation_audit.py`

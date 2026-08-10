@@ -14,11 +14,7 @@ from emergenz_knoten.retarded_reciprocal import retarded_reciprocal_pair_respons
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "retarded_reciprocal_full_knot_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "retarded_reciprocal_full_knot_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location("retarded_sampling_gate", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

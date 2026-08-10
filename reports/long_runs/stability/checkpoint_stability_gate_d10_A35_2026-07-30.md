@@ -75,4 +75,4 @@ an automatic stopping rule and is not evidence for a physical particle.
 
 - Git revision: `737ef47c4aa74921bb41431f7a5d845f2a0d62ce`
 - Git status before generation: `clean`
-- Script: `experiments/current/dynamics/stability_gate_audit.py`
+- Script: `experiments/current/dynamics/long_runs/stability_gate_audit.py`

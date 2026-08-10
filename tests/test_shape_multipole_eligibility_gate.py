@@ -11,11 +11,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "shape_multipole_eligibility_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "shape_multipole_eligibility_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location("shape_multipole_gate", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

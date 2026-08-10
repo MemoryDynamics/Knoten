@@ -12,11 +12,7 @@ from emergenz_knoten import FiniteMemoryState, SimulationConfig, memory_shape_te
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "scalar_cross_readout_resolution.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "calibration" / "scalar_cross_readout_resolution.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "scalar_cross_readout_resolution", SCRIPT_PATH

@@ -6,10 +6,7 @@ from pathlib import Path
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "n_dependence_recheck_report.py"
+    / "experiments" / "current" / "dimensions" / "n_dependence_recheck_report.py"
 )
 SPEC = importlib.util.spec_from_file_location("n_dependence_recheck_report", SCRIPT_PATH)
 assert SPEC is not None

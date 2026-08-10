@@ -7,10 +7,7 @@ import numpy as np
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "dspec_raw_snapshot_report.py"
+    / "experiments" / "current" / "dimensions" / "dspec_raw_snapshot_report.py"
 )
 SPEC = importlib.util.spec_from_file_location("dspec_raw_snapshot_report", SCRIPT_PATH)
 assert SPEC is not None

@@ -10,73 +10,73 @@ Hardening und Long-Run-Metastabilitaet.
 
 | Datei | Thema | Status | Naechste Nutzung |
 | --- | --- | --- | --- |
-| `experiments/current/dynamics/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
-| `experiments/current/dynamics/stability_gate_audit.py` | Checkpoint-/Holdout-Stabilitaet | aktiv | vier Alterscheckpoints, spaeter Holdout und lokale Radiusfenster; retrospektive Methodik, keine Formationszeit |
-| `experiments/current/dynamics/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
-| `experiments/current/dynamics/paper_i_evidence_table.py` | Paper-I-Evidenztabelle aus Long-Run-Summaries | aktiv | konservative Claim-Tabelle fuer co-moving scalar-knot Evidenz |
-| `experiments/current/dynamics/aatt_transition_report.py` | A_att-Uebergang `d=3` vs. `d=10` | aktiv | Dimensions-Reconciliation, beta=0/M0=0-Referenzverweis und KPI-Kurven ueber `A_att` |
-| `experiments/current/dynamics/dimension_claim_audit.py` | 3D-Dimensionsclaim-Audit | aktiv | Claim-Leiter, `D_p90`/`D_p95`, low-pass Center-Trace-Dimensionen und Paper-II-Reconciliation |
-| `experiments/current/dynamics/dspec_sensitivity_report.py` | D_spec-Sensitivitaet | aktiv | Legacy-D_spec, symmetrische Heat-Kernel-Skalen, kNN-Skalen und Kovarianz-Surrogate fuer Paper-II-Guardrail |
-| `experiments/current/dynamics/dspec_raw_snapshot_report.py` | Rohsnapshot-D_spec | aktiv | Heat-Trace-/Scale-Audit auf echten `memory_cloud.snapshot`-Punkten; Pilot-Gate vor Response-Rang |
-| `experiments/current/dynamics/dimension_over_n_reproduction.py` | Dimensionen ueber N | abgeschlossen | drei gematchte Seeds an sechs Endpunkten; separates D_occ/D_win-Messkonvergenzgate markiert den gemischten Cadence-/Revisionssatz als nicht auswertbar |
-| `experiments/current/dynamics/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
+| `experiments/current/dynamics/long_runs/long_run_metastability.py` | Long-N-Metastabilitaetsdiagnostik | aktiv | Knotenscore v0.5, Center-/Memory-Ball-Residence, dynamischer `--trace-every` Memory-Center-Trace, `m0_zero`, `alpha_one`, `matched_deposition`, `zero_mean_two_scale` und weitere Ablationen |
+| `experiments/current/dynamics/long_runs/stability_gate_audit.py` | Checkpoint-/Holdout-Stabilitaet | aktiv | vier Alterscheckpoints, spaeter Holdout und lokale Radiusfenster; retrospektive Methodik, keine Formationszeit |
+| `experiments/current/dynamics/centering/dynamic_center_trace_report.py` | Aggregation und Plots fuer dynamische Center-/Spin-Traces | aktiv | Methodikreport fuer co-moving Radius, Drift/Radius, Memory-Shape und Spin-Proxy gegen `eta_zero` |
+| `experiments/current/dynamics/long_runs/paper_i_evidence_table.py` | Paper-I-Evidenztabelle aus Long-Run-Summaries | aktiv | konservative Claim-Tabelle fuer co-moving scalar-knot Evidenz |
+| `experiments/current/dimensions/aatt_transition_report.py` | A_att-Uebergang `d=3` vs. `d=10` | aktiv | Dimensions-Reconciliation, beta=0/M0=0-Referenzverweis und KPI-Kurven ueber `A_att` |
+| `experiments/current/dimensions/dimension_claim_audit.py` | 3D-Dimensionsclaim-Audit | aktiv | Claim-Leiter, `D_p90`/`D_p95`, low-pass Center-Trace-Dimensionen und Paper-II-Reconciliation |
+| `experiments/current/dimensions/dspec_sensitivity_report.py` | D_spec-Sensitivitaet | aktiv | Legacy-D_spec, symmetrische Heat-Kernel-Skalen, kNN-Skalen und Kovarianz-Surrogate fuer Paper-II-Guardrail |
+| `experiments/current/dimensions/dspec_raw_snapshot_report.py` | Rohsnapshot-D_spec | aktiv | Heat-Trace-/Scale-Audit auf echten `memory_cloud.snapshot`-Punkten; Pilot-Gate vor Response-Rang |
+| `experiments/current/dimensions/dimension_over_n_reproduction.py` | Dimensionen ueber N | abgeschlossen | drei gematchte Seeds an sechs Endpunkten; separates D_occ/D_win-Messkonvergenzgate markiert den gemischten Cadence-/Revisionssatz als nicht auswertbar |
+| `experiments/current/dynamics/centering/epsilon_dynamic_center_sweep.py` | Epsilon-Sensitivitaet auf dynamischen Center-/Spin-Benchmarks | aktiv | kurze Schwellenfindung fuer Rauschskala vor laengeren Hybrid-Traces |
 | `experiments/current/anchors/anchor_paper_pipeline.py` | Paper-0-Smoke mit Markov-Schicht | aktiv | schneller Sanity-Check |
 | `experiments/current/anchors/anchor_sensitivity_analysis.py` | Seed-/Lag-/Voxel-/Kontroll-Sensitivitaet | aktiv | kurze Operator-Pipeline-Checks |
-| `experiments/current/dynamics/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
-| `experiments/current/dynamics/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
-| `experiments/current/kernels/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
-| `experiments/current/kernels/kernel_compensation_audit.py` | Zero-Integral-/Kruemmungs-Constraint | aktiv | analytische q-d-Map, exakter dreiskaliger Kompensator und lokale/Fernfeld-Profile |
-| `experiments/current/kernels/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
-| `experiments/current/kernels/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
-| `experiments/current/kernels/kernel_core_audit.py` | enger Kernel-Core-Audit | aktiv | logarithmischer Nahfeld-, Kraftkomponenten- und Kruemmungsvergleich; curvature-matched A_rep=0-Ablation |
-| `experiments/current/kernels/log_taylor_kernel_audit.py` | LoG-/Taylor-Kernel-Audit | abgeschlossen | fester analytischer Vergleich von `(1,35)`, `(0,26)` und zero-mean LoG bei gleicher lokaler Kruemmung; trennt exaktes `A_eff=26` von der unbelegten `27/36`-Identifikation |
-| `experiments/current/kernels/attractive_only_regime_scan.py` | dimensionsloser attraktiver Ein-Kernel-Scan | aktiv | A_att=0..40, gemeinsame eta=0-Kontrollen, lineare Relativradius-Referenz und matched (1,35)/(0,26)-Vergleich |
-| `experiments/current/kernels/kernel_family_comparison.py` | Ein-/Zweiskalen-Familienvergleich | abgeschlossen | Rohamplituden- und `A_eff=A_att-9`-Achse, seedweise KPI-Kollapspruefung |
-| `experiments/current/dynamics/linear_long_run_reconciliation.py` | finite-memory Long-Run-Radiuscheck | abgeschlossen | vorhandene N=30M/300M-Slices gegen gespeicherte-Masse-Relativmodus pruefen |
-| `experiments/current/kernels/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
-| `experiments/current/kernels/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
-| `experiments/current/kernels/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
-| `experiments/current/kernels/local_field_operator_audit.py` | lokale Feldoperator-Basis | abgeschlossen | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
-| `experiments/current/kernels/write_read_reparameterization_audit.py` | Write-/Read-Faktorisierung | abgeschlossen | drei Seeds und je 10,000 Updates; Pfad-/Feld-/Gradientengleichheit bis `1.43e-14`; trennt Dirac-Identitaet von konstantem kraftfreiem Kernel |
-| `experiments/current/kernels/active_scalar_delta_field_pilot.py` | aktives lokales Delta-Quellfeld | abgeschlossen | drei Seeds, Gaussian-/stable-finite-k-/active-, cubic-off-, source-off- und eta-zero-Arme plus Zeit-/Gitterkonvergenz; klassischer Mechanismuspass, nicht feedback-spezifisch |
+| `experiments/current/dynamics/epsilon/epsilon_step_balance.py` | Rauschen-vs-Drift-Updatebilanz | aktiv | gezielte Epsilon-/Glattheitsdiagnostik |
+| `experiments/current/dynamics/epsilon/epsilon_floor_visual_probe.py` | flexible 3D-Visualisierung der Epsilon-Floor-Faelle | aktiv | Formvergleich bei extremen Skalen |
+| `experiments/current/kernels/families/kernel_shape_probe.py` | 3D-Fuehrungskoordinatenplot fuer Kernelbreiten und Amplituden | aktiv | visuelle Shape-Diagnostik, keine Long-Run-Evidenz |
+| `experiments/current/kernels/families/kernel_compensation_audit.py` | Zero-Integral-/Kruemmungs-Constraint | aktiv | analytische q-d-Map, exakter dreiskaliger Kompensator und lokale/Fernfeld-Profile |
+| `experiments/current/kernels/controls/fixed_curvature_sigma_pilot.py` | kontrollierter Sigma-Verhaeltnis-Pilot | aktiv | `q={2,3,4}` bei festem `chi`, Seeds `1..5`, gemeinsame seedgleiche `eta_zero`-Kontrollen |
+| `experiments/current/kernels/controls/three_scale_compensation_pilot.py` | breiter Zero-Integral-Kompensator | aktiv | q=3-Referenz gegen exaktes `int K=0`, Kruemmungsmatching, statisches Fernfeld und seedgleiche `eta_zero`-Kontrollen |
+| `experiments/current/kernels/families/kernel_core_audit.py` | enger Kernel-Core-Audit | aktiv | logarithmischer Nahfeld-, Kraftkomponenten- und Kruemmungsvergleich; curvature-matched A_rep=0-Ablation |
+| `experiments/current/kernels/families/log_taylor_kernel_audit.py` | LoG-/Taylor-Kernel-Audit | abgeschlossen | fester analytischer Vergleich von `(1,35)`, `(0,26)` und zero-mean LoG bei gleicher lokaler Kruemmung; trennt exaktes `A_eff=26` von der unbelegten `27/36`-Identifikation |
+| `experiments/current/kernels/families/attractive_only_regime_scan.py` | dimensionsloser attraktiver Ein-Kernel-Scan | aktiv | A_att=0..40, gemeinsame eta=0-Kontrollen, lineare Relativradius-Referenz und matched (1,35)/(0,26)-Vergleich |
+| `experiments/current/kernels/families/kernel_family_comparison.py` | Ein-/Zweiskalen-Familienvergleich | abgeschlossen | Rohamplituden- und `A_eff=A_att-9`-Achse, seedweise KPI-Kollapspruefung |
+| `experiments/current/dynamics/long_runs/linear_long_run_reconciliation.py` | finite-memory Long-Run-Radiuscheck | abgeschlossen | vorhandene N=30M/300M-Slices gegen gespeicherte-Masse-Relativmodus pruefen |
+| `experiments/current/kernels/controls/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
+| `experiments/current/kernels/controls/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
+| `experiments/current/kernels/field/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
+| `experiments/current/kernels/field/local_field_operator_audit.py` | lokale Feldoperator-Basis | abgeschlossen | fester analytischer Gaussian-k4-, Zero-Mean-, Finite-k-Stabilitaets- und Ambient-Rang-Audit; kein Feldsweep |
+| `experiments/current/kernels/field/write_read_reparameterization_audit.py` | Write-/Read-Faktorisierung | abgeschlossen | drei Seeds und je 10,000 Updates; Pfad-/Feld-/Gradientengleichheit bis `1.43e-14`; trennt Dirac-Identitaet von konstantem kraftfreiem Kernel |
+| `experiments/current/kernels/field/active_scalar_delta_field_pilot.py` | aktives lokales Delta-Quellfeld | abgeschlossen | drei Seeds, Gaussian-/stable-finite-k-/active-, cubic-off-, source-off- und eta-zero-Arme plus Zeit-/Gitterkonvergenz; klassischer Mechanismuspass, nicht feedback-spezifisch |
 | `experiments/current/markov/knot_score_report.py` | Scorecard fuer vorhandene Long-Run-JSONs | aktiv | Knotenscore v0.5 und Paper-I-Evidenzhygiene |
 | `experiments/current/markov/long_run_trace_ar_report.py` | AR-Modendiagnostik auf gespeicherten Long-Run-Traces | aktiv | Block-Markov-/AR-Check auf reelle vs. komplexe Slow-Modes gegen `eta_zero` |
 | `experiments/current/markov/feature_closure_report.py` | Feature-Closure auf gespeicherten Long-Run-Traces | aktiv | Leave-one-seed-out AR-Skill gegen shuffled und persistence controls |
-| `experiments/current/dynamics/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
-| `experiments/current/dynamics/n_dependence_recheck_report.py` | N-Abhaengigkeits-Reconciliation | aktiv | Formation-Skalierung, `N=30M`-Referenz und Rohsnapshot-Pilot in einer Guardrail-Grafik |
+| `experiments/current/dynamics/scaling/scalar_n_scaling_report.py` | N-Skalierung korrigierter skalarer Kandidaten | aktiv | Einschwing-/Residence-Skalierung fuer `A_att=20/35` |
+| `experiments/current/dimensions/n_dependence_recheck_report.py` | N-Abhaengigkeits-Reconciliation | aktiv | Formation-Skalierung, `N=30M`-Referenz und Rohsnapshot-Pilot in einer Guardrail-Grafik |
 | `experiments/current/reference/reference_experiment.py` | kleiner Referenzlauf | aktiv | Smoke-Test |
 | `experiments/fractal_analysis/analyze_dimension_claim.py` | Audit des archivierten `D_occ`-Claims | aktiv | Claim-Register |
 | `experiments/fractal_analysis/reproduce_dimension_pilot.py` | kleine/mittlere Reproduktion | aktiv | spaetere Dimensionshaertung |
 | `experiments/fractal_analysis/plot_d_alpha_n_intensity.py` | d-alpha-N-Heatmaps aus Reproduktions-JSON | aktiv | Seed-/N-Dimensionsberichte |
-| `experiments/current/memory/synchronization/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
-| `experiments/current/memory/synchronization/frozen_source_response.py` | gepaarter lokalisierter Frozen-Source-Pilot | aktiv | geklonte `N=1e8`-Quelle; `eta_cross=0`, `eta_zero`, feste Kreuzkopplung, zwei lokale Verschiebungsskalen; Fernfeld-Symmetrieaudit |
-| `experiments/current/memory/synchronization/frozen_source_field_audit.py` | statischer Potential-/Kraftaudit | aktiv | reale Checkpoint-Felder gegen Punktmonopol; Kraftvorzeichen, Paritaetsrest, Tangentialanteil und interne Quellenaufloesung |
-| `experiments/current/memory/synchronization/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
-| `experiments/current/memory/synchronization/scalar_cross_readout_resolution.py` | statischer Cross-Readout-Aufloesungstest | aktiv | getrennte Selbst-/Cross-Kernel; starre Hauptachsenorientierungen gegen Punktmonopol bei fester kalibrierter Zentrumantwort |
-| `experiments/current/memory/synchronization/oriented_history_current_audit.py` | geordneter History-Current-Audit | abgeschlossen | negatives Polar-/Bivektor-Gate gegen Random-Sign-Null; waehlt eigenstaendig evolvierenden orientierten Zustand |
-| `experiments/current/memory/synchronization/oriented_vector_one_way_gate.py` | passiver eigenstaendiger Vektormemory-Kanal | abgeschlossen | 6/6 Pass gegen channel-off, globalen Flip, 16 Random-Sign-Nullen und Ein-Schritt-Kontrolle; konstruiertes Mechanismusgate, kein Physikclaim |
-| `experiments/current/memory/synchronization/oriented_vector_fixed_pair_distance_gate.py` | feste Kopplung ueber unabhaengige Vektormemory-Paare | abgeschlossen | 6/6 zyklische Paare bestehen Nah-, Kontroll-, Shape- und Distanzgate; Instantanreadout und Gauss-Abschwaechung bleiben Modellinputs |
-| `experiments/current/memory/synchronization/local_oriented_mediator_gate.py` | lokale orientierte Mediatorarchitekturen | abgeschlossen | Relaxations-Diffusion und Telegraph bestehen je 5/5 Holdouts; eingesetzte Transportregeln bleiben mechanistisch unbestimmt |
-| `experiments/current/memory/synchronization/oriented_source_mediator_identifiability.py` | autonome Source-/Transfer-Identifizierbarkeit | abgeschlossen | 6/6 Sources bestehen; beide Regeln sind breitbandig unterscheidbar, aber persistent/Ein-Schritt-Kontrast 0.951..1.008 zeigt keine Persistenzspezifitaet |
-| `experiments/current/memory/synchronization/dynamic_common_source_mediator_gate.py` | dynamischer Common-Source-Mediator-Holdout | abgeschlossen, negativ | beide Regeln 6/6 Response-/Shape-/Distanzpass; robuste Trace-Trennung nur 4/6 statt 5/6, daher keine Mechanismusauswahl |
-| `experiments/current/memory/synchronization/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
-| `experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
-| `experiments/current/memory/synchronization/one_way_interaction_age_audit.py` | N-Abhaengigkeit einer dauerhaften One-Way-Wechselwirkung | aktiv | common-prefix Auswertung bei `+20k..+3M`; Target-Radius, Shape-Spektrum und Kontrollabstand vor einem laengeren oder reziproken Lauf |
-| `experiments/current/memory/synchronization/reciprocal_full_knot_gate.py` | synchron reziproker Vollknotenabgleich | abgeschlossen, negatives Modengate | `N=100M`, fuenf common-noise Fortsetzungen, fester Gain; direkte Bindung/Relaxation ohne komplexe Segmentmode |
-| `experiments/current/memory/synchronization/retarded_reciprocal_full_knot_gate.py` | reziproker Vollknoten ueber festen Telegraph-Kanal | abgeschlossen, negatives Modengate | Mediator/Response/Shape 5/5, aber alle 80 rohen Segmentfits reell; retardierte Bindung schwaecher als direkt, kein komplexer beobachtbarer AR(1)-Modus |
-| `experiments/current/memory/synchronization/measurement_closure_relative_noise_gate.py` | P3.2 Mess-Closure, Relative Noise und Langhorizont-Hankel-Audit | abgeschlossen | gemeinsame Zielzeiten; alle 45 gepaarten Designzellen verschlechtern sich, drei unabhaengige Seed-Mediane stimmen im Vorzeichen ueberein, Rang waechst ohne Plateau und hochrangiger Trend ist nicht kontrollgetrennt |
-| experiments/current/memory/synchronization/hankel_pole_identity_cli.py | P3.2 gespeicherter DMD-Pol-Identity-Stoptest | abgeschlossen, negativ | vier korrelationsuebergreifende Kandidaten, aber null kontrollgetrennte Ueberlebende; Seeds 1/2 ueberlappen im Einwegarm, Seed 3 verfehlt 10/12 |
-| `experiments/current/memory/synchronization/source_local_linear_gate.py` | P3.2c source-lokales lineares Emissionsgate | abgeschlossen, negativ | exakter Telegraphkanal stabil, aber Offset-Knot-Residuum `3.54e-5` und Einweg-Polverschiebung `0.00622`; Stromsource noch schwacher, 0/3 Modenreduktionen bestehen |
-| `experiments/current/memory/synchronization/p32_accumulation_control.py` | vorregistrierte P3.2-500k-Akkumulationskontrolle | abgeschlossen, negativ | zwei Zukunftsrauschpfade und vier Arme; starke Pfaddivergenz ist im Einwegarm nahezu gleich, daher keine kontrollgetrennte reziproke Akkumulation |
-| `experiments/current/memory/synchronization/shape_multipole_eligibility_gate.py` | P3.2d autonomes Shape-Multipol-Eligibility-Gate | abgeschlossen, negativ | Baseline `Q` und `Delta Q/Delta tau` jeweils 0/5; Niederfrequenzpeak segmentinstabil und im `eta=0`-Arm staerker; kein Tensor-Mediator autorisiert |
-| `experiments/current/memory/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
-| `experiments/current/memory/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
-| `experiments/current/memory/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
-| `experiments/current/memory/low_mode_ar_feature_closure.py` | Low-Mode-/AR-Closure | aktiv | gepaarte Seeds, Realraumhistorie, Persistence/Shuffle, Box-/Modenzahlgate und N=1M-Bestaetigung |
-| `experiments/current/memory/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
-| `experiments/current/memory/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
-| `experiments/current/memory/eta_zero_raw_mode_null_audit.py` | exakte rohe `eta=0`-Modenreferenz | abgeschlossen, negativ | N=1M-Kadenz; reeller Fourier-Zustandsblock, Rohfit-/Segmentleckage gegen archivierte ausgerichtete AR-Paare |
-| `experiments/current/memory/carrier_memory_metric_comparison.py` | Kovarianz-/Predictive-/RKHS-Metrik auf `h=p` | abgeschlossen, negativ | 0/6 zyklische Paare; lineare Tangente und Cadence stabil, aber absolute Metrikskala und Klassifikation nicht reconciliiert; oeffnet nur balancierte Vollmemory-Feature-Closure |
+| `experiments/current/memory/synchronization/calibration/weak_probe_response.py` | gepaarte externe Weak-Probe-Kalibrierung | aktiv | uniforme Vollrang-Negativkontrolle; Basis fuer lokalisierten eingefrorenen Quellknoten |
+| `experiments/current/memory/synchronization/calibration/frozen_source_response.py` | gepaarter lokalisierter Frozen-Source-Pilot | aktiv | geklonte `N=1e8`-Quelle; `eta_cross=0`, `eta_zero`, feste Kreuzkopplung, zwei lokale Verschiebungsskalen; Fernfeld-Symmetrieaudit |
+| `experiments/current/memory/synchronization/calibration/frozen_source_field_audit.py` | statischer Potential-/Kraftaudit | aktiv | reale Checkpoint-Felder gegen Punktmonopol; Kraftvorzeichen, Paritaetsrest, Tangentialanteil und interne Quellenaufloesung |
+| `experiments/current/memory/synchronization/calibration/frozen_source_distance_ladder.py` | realisiert kalibrierte Frozen-Source-Distanzleiter | aktiv | sechs Abstaende in `R_mem`/`sigma_rep`; Common-Noise-Targetdeformation, Response-Rang und Linearitaetskontrolle |
+| `experiments/current/memory/synchronization/calibration/scalar_cross_readout_resolution.py` | statischer Cross-Readout-Aufloesungstest | aktiv | getrennte Selbst-/Cross-Kernel; starre Hauptachsenorientierungen gegen Punktmonopol bei fester kalibrierter Zentrumantwort |
+| `experiments/current/memory/synchronization/one_way/oriented_history_current_audit.py` | geordneter History-Current-Audit | abgeschlossen | negatives Polar-/Bivektor-Gate gegen Random-Sign-Null; waehlt eigenstaendig evolvierenden orientierten Zustand |
+| `experiments/current/memory/synchronization/one_way/oriented_vector_one_way_gate.py` | passiver eigenstaendiger Vektormemory-Kanal | abgeschlossen | 6/6 Pass gegen channel-off, globalen Flip, 16 Random-Sign-Nullen und Ein-Schritt-Kontrolle; konstruiertes Mechanismusgate, kein Physikclaim |
+| `experiments/current/memory/synchronization/one_way/oriented_vector_fixed_pair_distance_gate.py` | feste Kopplung ueber unabhaengige Vektormemory-Paare | abgeschlossen | 6/6 zyklische Paare bestehen Nah-, Kontroll-, Shape- und Distanzgate; Instantanreadout und Gauss-Abschwaechung bleiben Modellinputs |
+| `experiments/current/memory/synchronization/mediation/local_oriented_mediator_gate.py` | lokale orientierte Mediatorarchitekturen | abgeschlossen | Relaxations-Diffusion und Telegraph bestehen je 5/5 Holdouts; eingesetzte Transportregeln bleiben mechanistisch unbestimmt |
+| `experiments/current/memory/synchronization/mediation/oriented_source_mediator_identifiability.py` | autonome Source-/Transfer-Identifizierbarkeit | abgeschlossen | 6/6 Sources bestehen; beide Regeln sind breitbandig unterscheidbar, aber persistent/Ein-Schritt-Kontrast 0.951..1.008 zeigt keine Persistenzspezifitaet |
+| `experiments/current/memory/synchronization/mediation/dynamic_common_source_mediator_gate.py` | dynamischer Common-Source-Mediator-Holdout | abgeschlossen, negativ | beide Regeln 6/6 Response-/Shape-/Distanzpass; robuste Trace-Trennung nur 4/6 statt 5/6, daher keine Mechanismusauswahl |
+| `experiments/current/memory/synchronization/one_way/signed_cross_channel_pilot.py` | signierter skalarer Frozen-Source-Kanal | aktiv | kompensierter Cross-Kernel; bitgenaue Null-/Produktarme, Label-Flip, `eta_zero` und Nondestruktionskontrolle |
+| `experiments/current/memory/synchronization/one_way/one_way_dynamic_source_pilot.py` | einseitig dynamische Source mit gepaarten Kontrollen | aktiv | N100M-Checkpoint, 50-Memory-Time-Stationaritaetsfenster, Shape-Tensoren, frozen/free/eta-zero/unlaunched und relationale Phasengates |
+| `experiments/current/memory/synchronization/one_way/one_way_interaction_age_audit.py` | N-Abhaengigkeit einer dauerhaften One-Way-Wechselwirkung | aktiv | common-prefix Auswertung bei `+20k..+3M`; Target-Radius, Shape-Spektrum und Kontrollabstand vor einem laengeren oder reziproken Lauf |
+| `experiments/current/memory/synchronization/reciprocity/reciprocal_full_knot_gate.py` | synchron reziproker Vollknotenabgleich | abgeschlossen, negatives Modengate | `N=100M`, fuenf common-noise Fortsetzungen, fester Gain; direkte Bindung/Relaxation ohne komplexe Segmentmode |
+| `experiments/current/memory/synchronization/reciprocity/retarded_reciprocal_full_knot_gate.py` | reziproker Vollknoten ueber festen Telegraph-Kanal | abgeschlossen, negatives Modengate | Mediator/Response/Shape 5/5, aber alle 80 rohen Segmentfits reell; retardierte Bindung schwaecher als direkt, kein komplexer beobachtbarer AR(1)-Modus |
+| `experiments/current/memory/synchronization/reciprocity/measurement_closure_relative_noise_gate.py` | P3.2 Mess-Closure, Relative Noise und Langhorizont-Hankel-Audit | abgeschlossen | gemeinsame Zielzeiten; alle 45 gepaarten Designzellen verschlechtern sich, drei unabhaengige Seed-Mediane stimmen im Vorzeichen ueberein, Rang waechst ohne Plateau und hochrangiger Trend ist nicht kontrollgetrennt |
+| experiments/current/memory/synchronization/reciprocity/hankel_pole_identity_cli.py | P3.2 gespeicherter DMD-Pol-Identity-Stoptest | abgeschlossen, negativ | vier korrelationsuebergreifende Kandidaten, aber null kontrollgetrennte Ueberlebende; Seeds 1/2 ueberlappen im Einwegarm, Seed 3 verfehlt 10/12 |
+| `experiments/current/memory/synchronization/mediation/source_local_linear_gate.py` | P3.2c source-lokales lineares Emissionsgate | abgeschlossen, negativ | exakter Telegraphkanal stabil, aber Offset-Knot-Residuum `3.54e-5` und Einweg-Polverschiebung `0.00622`; Stromsource noch schwacher, 0/3 Modenreduktionen bestehen |
+| `experiments/current/memory/synchronization/reciprocity/p32_accumulation_control.py` | vorregistrierte P3.2-500k-Akkumulationskontrolle | abgeschlossen, negativ | zwei Zukunftsrauschpfade und vier Arme; starke Pfaddivergenz ist im Einwegarm nahezu gleich, daher keine kontrollgetrennte reziproke Akkumulation |
+| `experiments/current/memory/synchronization/reciprocity/shape_multipole_eligibility_gate.py` | P3.2d autonomes Shape-Multipol-Eligibility-Gate | abgeschlossen, negativ | Baseline `Q` und `Delta Q/Delta tau` jeweils 0/5; Niederfrequenzpeak segmentinstabil und im `eta=0`-Arm staerker; kein Tensor-Mediator autorisiert |
+| `experiments/current/memory/representations/reference_state_checkpoints.py` | vollstaendige Finite-Memory-Referenzzustaende | aktiv | saubere `N=1e8`, `d=3/10` Absprungzustande fuer gepaarte Folgearme |
+| `experiments/current/memory/representations/spectral_rho_field_pilot.py` | O(M)-Fourier-Reprasentation des exponentiellen rho | abgeschlossen | Historien-/Kraftaequivalenz, epsilon-Stoppregel und Modenzahlgate |
+| `experiments/current/memory/representations/relaxation_diffusion_field_pilot.py` | modeabhaengige Relaxations-Diffusionsfelderweiterung | abgeschlossen | feste Diffusionsarme `0/0.3L/1.0L` mit `nu=0`- und `eta=0`-Kontrollen |
+| `experiments/current/memory/closure/low_mode_ar_feature_closure.py` | Low-Mode-/AR-Closure | aktiv | gepaarte Seeds, Realraumhistorie, Persistence/Shuffle, Box-/Modenzahlgate und N=1M-Bestaetigung |
+| `experiments/current/memory/closure/reconcile_low_mode_ar_runs.py` | Short-/Long-Reconciliation | aktiv | gemeinsame Lags und vorregistrierte N-Stabilitaet fuer reelle versus komplexe Moden |
+| `experiments/current/memory/closure/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
+| `experiments/current/memory/closure/eta_zero_raw_mode_null_audit.py` | exakte rohe `eta=0`-Modenreferenz | abgeschlossen, negativ | N=1M-Kadenz; reeller Fourier-Zustandsblock, Rohfit-/Segmentleckage gegen archivierte ausgerichtete AR-Paare |
+| `experiments/current/memory/representations/carrier_memory_metric_comparison.py` | Kovarianz-/Predictive-/RKHS-Metrik auf `h=p` | abgeschlossen, negativ | 0/6 zyklische Paare; lineare Tangente und Cadence stabil, aber absolute Metrikskala und Klassifikation nicht reconciliiert; oeffnet nur balancierte Vollmemory-Feature-Closure |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 
@@ -90,7 +90,7 @@ Gausskraftvergleich und `eta=0` getestet. Im Fuenf-Seed-Slice
 `epsilon={1e-8,1e-6,1e-4}` bleibt `R/epsilon` bis rund `2e-9` relativ konstant;
 32 bis 128 Moden liefern denselben dynamischen Radius bis etwa `1.6e-14`.
 Kleinere epsilon-Werte werden in diesem Regime nicht weiter verfolgt. Report:
-`reports/memory/spectral_rho_field_pilot_2026-07-19.md`.
+`reports/memory/representations/spectral_rho_field_pilot_2026-07-19.md`.
 
 `relaxation_diffusion_field_pilot.py` erweitert genau eine Achse:
 
@@ -104,7 +104,7 @@ steigt der aktive Medianradius glatt um Faktor `1.384`; active/control steigt
 von `0.171` auf `0.240`, und der Feedback-Schritt pro epsilon sinkt von
 `0.507` auf `0.311`. Dies ist kontrollierte Feldglaettung ohne isolierten
 neuen Modus. Report:
-`reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md`.
+`reports/memory/representations/relaxation_diffusion_field_pilot_2026-07-19.md`.
 
 Die Low-Mode-Closure ist nun ausgefuehrt. Translation-invariante Moden und
 Realraum-Stuetzstellen sind leave-one-seed-out vorhersagbar; die direkte
@@ -120,9 +120,9 @@ auf, ihre Frequenz driftet mit N um rund 55 Prozent, und Q faellt
 `0.342 -> 0.140`. Naechster Einsatz ist Mode-Identity ueber Eigenvektoren,
 Zeitsegmente und eine analytische lineare Kontrolle, nicht ein weiterer
 Diffusionssweep. Reports:
-`reports/memory/low_mode_ar_feature_closure_2026-07-19.md`,
-`reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` und
-`reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md`.
+`reports/memory/closure/low_mode_ar_feature_closure_2026-07-19.md`,
+`reports/memory/closure/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` und
+`reports/memory/closure/low_mode_ar_long_run_reconciliation_2026-07-19.md`.
 ## Referenzzustands-Checkpoints
 
 Der Checkpoint-Runner speichert nur den finalen augmentierten Zustand der
@@ -138,7 +138,7 @@ pickle-freie NPZ. Folgeexperimente laden dasselbe `z_N` und verwenden fuer
 alle verglichenen Arme eine neue explizite gemeinsame Zukunftsrauschfolge.
 
 ```powershell
-python experiments/current/memory/reference_state_checkpoints.py `
+python experiments/current/memory/representations/reference_state_checkpoints.py `
   --steps 100000000 `
   --dims 3,10 `
   --seeds 1 `
@@ -185,7 +185,7 @@ Report: `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-3
 Kanonischer Start:
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 10000000 `
   --seeds 1 `
   --conditions baseline `
@@ -331,7 +331,7 @@ Knotenkriterien taugen. `eta_zero` bleibt im eigenen grossen Memory-Ball
 ebenfalls innen. Fuer Paper I sind daher dynamischer RMS-Radius,
 radiusnormalisierte Center-Drift pro Memory-Zeit und Memory-Shape die
 relevanten co-moving Metriken. Aggregation/Plots:
-`experiments/current/dynamics/dynamic_center_trace_report.py`; Report:
+`experiments/current/dynamics/centering/dynamic_center_trace_report.py`; Report:
 `reports/long_runs/long_3e8/dynamic_center_trace_q3_N3M_2026-07-12.md`.
 
 Hybrid-Trace-/Spin-Proxy-Erweiterung 2026-07-12: `--trace-points` plus
@@ -357,7 +357,7 @@ langsamere radiusnormalisierte Center-Drift, `D_mem ~=2.94` und Roundness
 `L`-Dephasierung `<=dt_mem`). Report:
 `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md`.
 
-Paper-I-Evidenztabelle 2026-07-13: `experiments/current/dynamics/paper_i_evidence_table.py` verdichtet den `N=30M`-Hybrid-Trace in eine konservative Claim-Tabelle. Fuer `A_att=35`, `epsilon=1e-4` ist der aktive Lauf im Median etwa Faktor `4.96` kompakter als `eta_zero`, und die radiusnormalisierte Center-Drift ist um etwa Faktor `7.33` getrennt. Raw Voxel-Residence bleibt eine Guardrail, aber keine Hauptakzeptanzmetrik. Report: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
+Paper-I-Evidenztabelle 2026-07-13: `experiments/current/dynamics/long_runs/paper_i_evidence_table.py` verdichtet den `N=30M`-Hybrid-Trace in eine konservative Claim-Tabelle. Fuer `A_att=35`, `epsilon=1e-4` ist der aktive Lauf im Median etwa Faktor `4.96` kompakter als `eta_zero`, und die radiusnormalisierte Center-Drift ist um etwa Faktor `7.33` getrennt. Raw Voxel-Residence bleibt eine Guardrail, aber keine Hauptakzeptanzmetrik. Report: `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md`.
 
 Long-Run-Trace-AR 2026-07-13: `experiments/current/markov/long_run_trace_ar_report.py` fittet Block-AR-Maps auf dem gleichmaessig abgetasteten Endfenster derselben `N=30M`-Laeufe. Komplexe Klassifikationen treten auch in `eta_zero` auf und sind nicht als aktiver skalarer Phasen-/Photonmodus isoliert. Fuer Paper I ist der Befund neutral bis negativ fuer Oszillationssprache, aber kompatibel mit Relaxations-/Kompaktheitsevidenz. Report: `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md`.
 
@@ -371,7 +371,7 @@ Grobkoernung von Kompaktheit/Radius/Relaxation; Phasen-Sektoren bleiben
 Vector-/Tensor-/Internal-Memory-Future-Work. Report:
 `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md`.
 
-A_att-Transition 2026-07-15: `experiments/current/dynamics/aatt_transition_report.py`
+A_att-Transition 2026-07-15: `experiments/current/dimensions/aatt_transition_report.py`
 verdichtet die `N=10M`-Runs fuer `d=3` und `d=10` zu KPI-Kurven ueber
 `A_att`. Der Report enthaelt die gematchten Punkte `A_att in {7,8,9,10,12,15}`
 plus vorhandene Referenzen bei `20` und `35` und verweist explizit auf die
@@ -843,13 +843,13 @@ Modellklasse.
 | `reports/kernels/field/local_field_operator_audit_2026-07-29.md` | Lokaler Feldoperator-Audit | Eingeschraenkte Ableitungsbasis; Gaussian-k4-Match, `s0=0`-Zero-Mean, Finite-k-Schwelle bei `a2=-2` und exakte `H I_d`-Ambient-Rang-Null. Keine Quantisierungs- oder d=3-Evidenz. |
 | `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md` | Write-/Read-Reparametrisierung | Exakte lineare Faktorisierung in drei Seeds numerisch bestaetigt; maximale Pfad-, relative Feld- und Gradientenfehler `7.11e-15`, `2.25e-15`, `1.43e-14`. Keine neue Felddynamik. |
 | `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md` | aktives Delta-Quellfeld | Zeit-/Gitterfehler `6.12e-7`/`7.50e-11`; beschraenkte aktive `k=1`-Mode, cubic-off-Divergenz und exakte source-off-Null. Eta-zero bildet dasselbe Muster, daher nur klassische Finite-k-Musterbildung. |
-| `reports/memory/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
-| `reports/memory/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
-| `reports/memory/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |
-| `reports/memory/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; aggregierte reelle Rate bleibt von eta=0 getrennt, komplexe Nebenmoden bleiben in eta=0. |
-| `reports/memory/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame aggregierte aktive Raten bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
-| `reports/memory/low_mode_identity_audit_2026-07-20.md` | Mode-Identity-Audit | Reelle Kandidaten verfehlen Match-/Ratenstabilitaetsgate; komplexe aktive und eta-zero Subraeume ueberlappen >0.9999. |
-| `reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md` | exakte Rohmoden-Null | Roher `eta=0`-Operator sowie gepoolte und seedweise N=1M-Fits bleiben reell; nur kleine Segmentleckage, daher bestehende komplexe Paare als Darstellungs-/Fitmoden klassifiziert. |
+| `reports/memory/representations/spectral_rho_field_pilot_2026-07-19.md` | spektrales rho-Gate | Exakte Historien-/Kraftkontrollen, O(M)-Zustand, lineare Epsilon-Skalierung und 32/64/128-Modenkonvergenz. |
+| `reports/memory/representations/relaxation_diffusion_field_pilot_2026-07-19.md` | Diffusionsfeld-Pilot | Glatte Feldglaettung fuer drei vorab festgelegte Laengen; kein neuer Ast. |
+| `reports/memory/closure/low_mode_ar_feature_closure_2026-07-19.md` | Low-Mode-Closure | Fuenf Seeds, Realraum-/Aufloesungsgates und Closure; komplexe Paare nicht eta-null-spezifisch. |
+| `reports/memory/closure/low_mode_ar_feature_closure_long_N1M_2026-07-19.md` | N=1M-Modenlauf | 10,000 Memory-Zeiten; aggregierte reelle Rate bleibt von eta=0 getrennt, komplexe Nebenmoden bleiben in eta=0. |
+| `reports/memory/closure/low_mode_ar_long_run_reconciliation_2026-07-19.md` | Short-/Long-Reconciliation | Zwei gemeinsame aggregierte aktive Raten bleiben unter 10 Prozent; komplexe Frequenz driftet 55 Prozent und scheitert dem Kontrollgate. |
+| `reports/memory/closure/low_mode_identity_audit_2026-07-20.md` | Mode-Identity-Audit | Reelle Kandidaten verfehlen Match-/Ratenstabilitaetsgate; komplexe aktive und eta-zero Subraeume ueberlappen >0.9999. |
+| `reports/memory/closure/eta_zero_raw_mode_null_audit_2026-07-31.md` | exakte Rohmoden-Null | Roher `eta=0`-Operator sowie gepoolte und seedweise N=1M-Fits bleiben reell; nur kleine Segmentleckage, daher bestehende komplexe Paare als Darstellungs-/Fitmoden klassifiziert. |
 | `reports/knot_scores/v0_5_controls/knot_score_v0_5_rep_zero_q3_100k_2026-07-09.md` | Rep-Zero-Scorecard | `single_scale` bleibt baseline-artig, `rep_zero` ist die harte Dispersionskontrolle. |
 | `reports/kernels/corrected_sign/force_component_q3_pilot_2026-07-09.md` | Force-Komponenten-Pilot | `legacy-sign`-Pilot, der den Vorzeichenfehler sichtbar machte. |
 | `reports/kernels/corrected_sign/kernel_sign_convention_correction_2026-07-09.md` | Sign-Konvention | Korrigiert den Kernelgradienten; bisherige Long-Run-Evidenz ist `legacy-sign` und muss neu gerechnet werden. |
@@ -865,39 +865,39 @@ Modellklasse.
 | `reports/long_runs/long_3e8/long_run_3e8_results_2026-07-11.md` | 3e8-Resultate | v0.5-Score und Voxel-Residence tragen bei `A_att=20/35`; fixe finale Memory-Center-Residence zeigt Drift/Rezentering und motiviert dynamische Center-Diagnostik. |
 | `reports/long_runs/long_3e8/dynamic_center_spin_trace_q3_N30M_eps1em4_2026-07-13.md` | N30M-Hybrid-Trace | Historischer Skalar-Referenzslice; Spin-Proxy negativ und Radius spaeter als linearer Finite-Memory-Modus erklaert. |
 | `reports/long_runs/long_3e8/paper_i_evidence_table_N30M_eps1em4_2026-07-13.md` | Paper-I-Evidenztabelle | Co-moving Radius, Drift/Radius, Memory-Dimension und Roundness trennen `A_att=35` klar von `eta_zero`; keine Spin-/Photon-/Masseclaims. |
-| `reports/dimensions/memory_shape_boundary_2026-07-13.md` | 3D-Memory-Shape-Grenze | Historische Shape-Beobachtung; `D_mem ~=2.94` wird im linearen isotropen 3D-Regime als erwartete Ambient-Geometrie gelesen, nicht als Selektionshinweis. |
-| `reports/dimensions/ambient_memory_shape_sweep_launch_2026-07-13.md` | Ambient-Dimension-Launch | Paper-II-Brueckentest fuer `d=4,5,7,10,13,20`; aggregiert `D_mem`, ungewichtete Sample-/Memory-`D_spec`, Roundness, Radius und Drift gegen `eta_zero`. |
+| `reports/dimensions/ambient_memory/memory_shape_boundary_2026-07-13.md` | 3D-Memory-Shape-Grenze | Historische Shape-Beobachtung; `D_mem ~=2.94` wird im linearen isotropen 3D-Regime als erwartete Ambient-Geometrie gelesen, nicht als Selektionshinweis. |
+| `reports/dimensions/ambient_memory/ambient_memory_shape_sweep_launch_2026-07-13.md` | Ambient-Dimension-Launch | Paper-II-Brueckentest fuer `d=4,5,7,10,13,20`; aggregiert `D_mem`, ungewichtete Sample-/Memory-`D_spec`, Roundness, Radius und Drift gegen `eta_zero`. |
 | `reports/long_runs/scalar_hardening/aatt_transition_d3_d10_2026-07-15.md` | A_att-Transition d3/d10 | `D_cov` und `D_mem` trennen sich im d10-kompakt-Ast; `beta=0`/`M0=0`-Referenz ist verlinkt; Paper-II-Reconciliation, kein Selektionsclaim. |
-| `reports/dimensions/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | `D_mem`/`D_p90`/`D_p95` stuetzen keinen ambient-unabhaengigen 3D-Claim; auch die fruehere Teaser-Lesart ist durch den Linearitaetsaudit ersetzt. |
-| `reports/dimensions/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; spaetere Rohsnapshots und Response-Rang-Kontrollen bestaetigen keinen robusten externen `D_spec ~=3`-Claim. |
-| `reports/dimensions/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
-| `reports/dimensions/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`; Shape- und Heat-Trace-Dimension bleiben getrennt, der spaetere Response-Rang ist isotrop voll ambient-rangig. |
-| `reports/response/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
+| `reports/dimensions/claims/dimension_claim_audit_2026-07-15.md` | 3D-Dimensionsclaim-Audit | `D_mem`/`D_p90`/`D_p95` stuetzen keinen ambient-unabhaengigen 3D-Claim; auch die fruehere Teaser-Lesart ist durch den Linearitaetsaudit ersetzt. |
+| `reports/dimensions/sensitivity/dspec_sensitivity_2026-07-15.md` | D_spec-Sensitivitaet | Legacy-D_spec ist skalenempfindlich; spaetere Rohsnapshots und Response-Rang-Kontrollen bestaetigen keinen robusten externen `D_spec ~=3`-Claim. |
+| `reports/dimensions/raw_snapshots/dspec_raw_snapshot_2026-07-15.md` | Rohsnapshot-D_spec-Pilot | `N=200k`-Pilot validiert den echten Snapshot-Auswertepfad; Heat-Trace-`D_spec` reproduziert noch kein robustes Nahe-3-Signal; langer Rohsnapshot-Retest bleibt Gate vor Response-Rang. |
+| `reports/dimensions/raw_snapshots/dspec_raw_snapshot_retest_2026-07-16.md` | Rohsnapshot-D_spec-Retest | `N=200k` plus `N=3M`, `d=3/10`; Shape- und Heat-Trace-Dimension bleiben getrennt, der spaetere Response-Rang ist isotrop voll ambient-rangig. |
+| `reports/response/calibration/weak_probe_calibration_2026-07-16.md` | uniforme Weak-Probe-Kalibrierung | Vollstaendige `N=3M`, `d=3/10`, Seeds `1..5` Memory-Zustaende; Zentrumantwort isotrop vollrangig, Formantwort nicht seed-reproduzierbar, Probestarken linear und nichtdestruktiv. |
 | `reports/reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md` | kanonische N100M-Referenzzustaende | Checksum-validierte vollstaendige Finite-Memory-Zustaende fuer `d=3/10`, Seed 1; reproduzierbare Absprungbasis fuer Frozen-Source- und spaetere Mehrknotenarme. |
-| `reports/response/frozen_source_pilot_2026-07-16.md` | Frozen-Source-Clone-Pilot | Geklonte `N=100M`-Quelle bei `1 sigma_rep`; exakte Nullkontrolle und isotroper voller Ambient-Rang, kein externer 3D-Befund. |
-| `reports/response/frozen_source_field_audit_2026-07-17.md` | Frozen-Source-Feldaudit | Der aktuelle `A_att=35`-Kern ist auf allen geprueften Radien attraktiv; reale d3/d10-Quellen sind fuer den Cross-Kernel bereits bei `5 R_mem` punktmonopolartig. |
-| `reports/response/frozen_source_distance_ladder_2026-07-17.md` | Frozen-Source-Distanzleiter | Gleiche realisierte Bare-Antwort ueber sechs Abstaende; kleine distanzabhaengige Targetdeformation, aber voller Ambient-Rang und keine Quellenstruktur-/Ladungsevidenz. |
-| `reports/response/scalar_cross_readout_resolution_2026-07-21.md` | Skalarer Cross-Readout-Aufloesungstest | Getrennte Selbst-/Cross-Kernel und feste Antwortkalibrierung; 1%-Orientierungsgate scheitert in `d=3/10` vor der Distanzgrenze. |
-| `reports/response/oriented_vector_one_way_gate_2026-07-25.md` | Eigenstaendiger orientierter One-Way-Kanal | 6/6 `d=3`-Seeds bestehen Nulltrennung, Ein-Schritt-Persistenzgewinn, Flip, Transversalitaet und Shape-Bounds; Orientierung und direktes Readout bleiben Modellinputs. |
-| `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md` | Feste-Kopplung-/Distanzgate | 6/6 unabhaengige zyklische Paare bestehen bei globalem `eta_v`; Fern/Nah `9.36e-4..2.80e-3`; konstruiertes instantanes Gauss-Readout, keine Lokalitaets- oder QFT-Evidenz. |
-| `reports/response/signed_scalar_cross_channel_pilot_2026-07-18.md` | Signierter Cross-Channel-Pilot | Je ein `N=100M`-Checkpoint in `d=3/10`: bitgenaue Null-/Produktkontrollen, Antwortumkehr beim Labelprodukt-Flip, aktive Abschirmung gegen `eta_zero` und geringe Radiusstoerung; Architektur-, kein Ladungsbefund. |
-| `reports/response/one_way_dynamic_source_pilot_2026-07-20.md` | autonome One-Way-Quelle | Source bewegt sich nur wenige interne Radien gegenueber der Kernelbreite; Target-Dynamic-vs.-Frozen bleibt sub-threshold, Phase wie freie Kontrolle. |
-| `reports/response/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch mit v0.6 | N100M-Source besteht das Vorlaufgate; 10.944 Radien Zusatzverschiebung, Radiusfaktor 1.55..1.61, Shape-q95 in 3/5 Seeds ueber Gate und 2.332e-4 Target-Radien Response; beschraenkt, aber nicht durchgehend formkohaerent. |
-| `reports/response/one_way_interaction_age_N1M_2026-07-21.md` | One-Way-Interaction-Age bis N101M | Fuenf gepaarte Fortsetzungen: 5/5 spaetes Shape-Plateau, 0/5 kontrollgetrennte Formmodifikation; lineare Zentrumtranslation ohne Evidenz fuer einen neuen Knotentyp. |
-| `reports/response/one_way_interaction_age_N3M_2026-07-21.md` | One-Way-Interaction-Age bis N103M | 20 Altersfenster: scheinbare Shape-Halbwelle ist mit freier Kontrolle korreliert (0.999953), gepaarter Differenzspan nur 0.142 Prozent; weiterhin 0/5 Formmodifikation. |
-| `reports/response/reciprocal_full_knot_gate_2026-08-04.md` | P3.1 direkter reziproker Vollknoten | Alle 60 Segmentfits reell; Kanal-aus exakt und reziproke Response/Shape 5/5. Endabstand `0.31..0.88 R` statt `2.78..9.21 R`; Bindung/Relaxation, keine komplexe Mode. |
-| `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md` | P3.2 fester Telegraph-Rueckkanal | Mediator/Response/Shape 5/5, aber 0/80 rohe komplexe Segmentfits; Endabstand `0.58..1.21R`, keine beobachtbare AR(1)-Rotation und noch keine quelllokale Feldtheorie. |
-| `reports/response/measurement_closure_relative_noise_gate_2026-08-04.md` | P3.2a/b Mess-Closure und relative Noise | Sichtbarer Delayzustand 9/9 identifizierbar ohne stabiles Modenmatching; Feld/Impuls bringt keinen Holdout-Gewinn und ist bei `kappa~1e16` spektral unbestimmt. `rho` verstaerkt Bindung, nicht Oszillation. |
-| `reports/response/long_horizon_hankel_gate_2026-08-04.md` | P3.2 Langhorizont-Hankel | Alle 45 gepaarten Designzellen positiv, drei unabhaengige Seed-Mediane ebenfalls; median `+0.1203`; effektiver Rang waechst, Feld/Impuls hilft nicht und Rang 16/32 trennt sich nicht vom Einwegarm. Keine laengere Persistenz- oder Modenevidenz. |
-| `reports/response/hankel_pole_identity_audit_2026-08-06.md` | P3.2 gespeicherter Pol-Identity-Audit | Kandidat omega~0.103 in Seeds 1/2, aber 6..8/12 gleiche Einwegzellen; Seed 3 nur 9/12. Vier korrelationsuebergreifende Kandidaten, null kontrollgetrennte Ueberlebende; kein neuer 500k-Lauf. |
-| `reports/response/source_local_linear_gate_2026-08-06.md` | P3.2c source-lokales lineares Gate | Exakte und reduzierte Kanaele stabil; komplexer Pol bleibt praktisch ein eingefuegter Telegraphpol, nicht knotengeladen. Kein 500k-Lauf. |
+| `reports/response/calibration/frozen_source_pilot_2026-07-16.md` | Frozen-Source-Clone-Pilot | Geklonte `N=100M`-Quelle bei `1 sigma_rep`; exakte Nullkontrolle und isotroper voller Ambient-Rang, kein externer 3D-Befund. |
+| `reports/response/calibration/frozen_source_field_audit_2026-07-17.md` | Frozen-Source-Feldaudit | Der aktuelle `A_att=35`-Kern ist auf allen geprueften Radien attraktiv; reale d3/d10-Quellen sind fuer den Cross-Kernel bereits bei `5 R_mem` punktmonopolartig. |
+| `reports/response/calibration/frozen_source_distance_ladder_2026-07-17.md` | Frozen-Source-Distanzleiter | Gleiche realisierte Bare-Antwort ueber sechs Abstaende; kleine distanzabhaengige Targetdeformation, aber voller Ambient-Rang und keine Quellenstruktur-/Ladungsevidenz. |
+| `reports/response/scalar/scalar_cross_readout_resolution_2026-07-21.md` | Skalarer Cross-Readout-Aufloesungstest | Getrennte Selbst-/Cross-Kernel und feste Antwortkalibrierung; 1%-Orientierungsgate scheitert in `d=3/10` vor der Distanzgrenze. |
+| `reports/response/oriented/oriented_vector_one_way_gate_2026-07-25.md` | Eigenstaendiger orientierter One-Way-Kanal | 6/6 `d=3`-Seeds bestehen Nulltrennung, Ein-Schritt-Persistenzgewinn, Flip, Transversalitaet und Shape-Bounds; Orientierung und direktes Readout bleiben Modellinputs. |
+| `reports/response/oriented/oriented_vector_fixed_pair_distance_gate_2026-07-26.md` | Feste-Kopplung-/Distanzgate | 6/6 unabhaengige zyklische Paare bestehen bei globalem `eta_v`; Fern/Nah `9.36e-4..2.80e-3`; konstruiertes instantanes Gauss-Readout, keine Lokalitaets- oder QFT-Evidenz. |
+| `reports/response/scalar/signed_scalar_cross_channel_pilot_2026-07-18.md` | Signierter Cross-Channel-Pilot | Je ein `N=100M`-Checkpoint in `d=3/10`: bitgenaue Null-/Produktkontrollen, Antwortumkehr beim Labelprodukt-Flip, aktive Abschirmung gegen `eta_zero` und geringe Radiusstoerung; Architektur-, kein Ladungsbefund. |
+| `reports/response/one_way/one_way_dynamic_source_pilot_2026-07-20.md` | autonome One-Way-Quelle | Source bewegt sich nur wenige interne Radien gegenueber der Kernelbreite; Target-Dynamic-vs.-Frozen bleibt sub-threshold, Phase wie freie Kontrolle. |
+| `reports/response/one_way/one_way_launched_source_pilot_2026-07-20.md` | gepaarter Source-Launch mit v0.6 | N100M-Source besteht das Vorlaufgate; 10.944 Radien Zusatzverschiebung, Radiusfaktor 1.55..1.61, Shape-q95 in 3/5 Seeds ueber Gate und 2.332e-4 Target-Radien Response; beschraenkt, aber nicht durchgehend formkohaerent. |
+| `reports/response/one_way/one_way_interaction_age_N1M_2026-07-21.md` | One-Way-Interaction-Age bis N101M | Fuenf gepaarte Fortsetzungen: 5/5 spaetes Shape-Plateau, 0/5 kontrollgetrennte Formmodifikation; lineare Zentrumtranslation ohne Evidenz fuer einen neuen Knotentyp. |
+| `reports/response/one_way/one_way_interaction_age_N3M_2026-07-21.md` | One-Way-Interaction-Age bis N103M | 20 Altersfenster: scheinbare Shape-Halbwelle ist mit freier Kontrolle korreliert (0.999953), gepaarter Differenzspan nur 0.142 Prozent; weiterhin 0/5 Formmodifikation. |
+| `reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.md` | P3.1 direkter reziproker Vollknoten | Alle 60 Segmentfits reell; Kanal-aus exakt und reziproke Response/Shape 5/5. Endabstand `0.31..0.88 R` statt `2.78..9.21 R`; Bindung/Relaxation, keine komplexe Mode. |
+| `reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.md` | P3.2 fester Telegraph-Rueckkanal | Mediator/Response/Shape 5/5, aber 0/80 rohe komplexe Segmentfits; Endabstand `0.58..1.21R`, keine beobachtbare AR(1)-Rotation und noch keine quelllokale Feldtheorie. |
+| `reports/response/reciprocal/measurement_closure_relative_noise_gate_2026-08-04.md` | P3.2a/b Mess-Closure und relative Noise | Sichtbarer Delayzustand 9/9 identifizierbar ohne stabiles Modenmatching; Feld/Impuls bringt keinen Holdout-Gewinn und ist bei `kappa~1e16` spektral unbestimmt. `rho` verstaerkt Bindung, nicht Oszillation. |
+| `reports/response/reciprocal/long_horizon_hankel_gate_2026-08-04.md` | P3.2 Langhorizont-Hankel | Alle 45 gepaarten Designzellen positiv, drei unabhaengige Seed-Mediane ebenfalls; median `+0.1203`; effektiver Rang waechst, Feld/Impuls hilft nicht und Rang 16/32 trennt sich nicht vom Einwegarm. Keine laengere Persistenz- oder Modenevidenz. |
+| `reports/response/reciprocal/hankel_pole_identity_audit_2026-08-06.md` | P3.2 gespeicherter Pol-Identity-Audit | Kandidat omega~0.103 in Seeds 1/2, aber 6..8/12 gleiche Einwegzellen; Seed 3 nur 9/12. Vier korrelationsuebergreifende Kandidaten, null kontrollgetrennte Ueberlebende; kein neuer 500k-Lauf. |
+| `reports/response/source_local/source_local_linear_gate_2026-08-06.md` | P3.2c source-lokales lineares Gate | Exakte und reduzierte Kanaele stabil; komplexer Pol bleibt praktisch ein eingefuegter Telegraphpol, nicht knotengeladen. Kein 500k-Lauf. |
 | `reports/long_runs/long_3e8/long_run_trace_ar_modes_N30M_eps1em4_2026-07-13.md` | Long-Run-Trace-AR | Komplexe AR-Klassifikationen sind nicht kontrollgetrennt; scalar model bleibt Relaxations-/Kompaktheitsbefund. |
 | `reports/long_runs/long_3e8/feature_closure_N30M_eps1em4_2026-07-13.md` | Feature-Closure | Aktive Shape-/Radius-Scalars haben den klarsten Closure-Lift; Spin-Scalar bleibt kein geschlossener Phasenkanal. |
 | `reports/vector_memory/vector_memory_minimal_design_2026-07-09.md` | Vektorgedaechtnis | Minimalanforderungen fuer einen orientierten Memory-Kanal mit Slow-Mode- und Negativkontrollen. |
 | `reports/vector_memory/vector_memory_pilot_initial_2026-07-10.md` | Vektormemory-Pilot | 2D-Transverse-Kurzpilot; komplexe AR-Moden erscheinen schon in `eta_v=0`, also noch kein isolierter Vektoreffekt. |
 | `reports/vector_memory/vector_memory_eta_s_zero_control_2026-07-10.md` | Eta-Zero-Vektorkontrolle | Selbst `eta_s=eta_v=0` zeigt komplexe AR-Paare; komplexe Projektionsmoden sind daher noch keine Schwingungsevidenz. |
 | `reports/vector_memory/vector_memory_alignment_control_2026-07-10.md` | Alignment-Vektorkontrolle | `alignment` vergroessert schwache/transitionale Radien eher; `A_att=20` bleibt kompakt und ueberwiegend real. |
-| `reports/project/meta/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
+| `reports/project/meta/operations/repository_cleanup_2026-07-09.md` | Repository-Cleanup | Aktive Docs bleiben bei sieben Seiten; lokale private Klartextnotizen wurden entfernt. |
 
 ## Reproduzierbarkeitsregeln
 

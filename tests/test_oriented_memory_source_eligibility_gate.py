@@ -9,11 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "oriented_memory_source_eligibility_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "one_way" / "oriented_memory_source_eligibility_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "oriented_memory_source_eligibility_gate",

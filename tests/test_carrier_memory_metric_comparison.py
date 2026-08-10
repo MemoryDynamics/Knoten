@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from emergenz_knoten import FiniteMemoryState, OrientedMemoryState
-from experiments.current.memory.carrier_memory_metric_comparison import (
+from experiments.current.memory.representations.carrier_memory_metric_comparison import (
     _classification,
     perturb_carrier,
     summarize_metric,

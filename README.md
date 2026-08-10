@@ -167,7 +167,7 @@ python experiments/current/reference/reference_experiment.py --seed 2 --steps 20
 Long-Run-Metastabilitaet:
 
 ```bash
-python experiments/current/dynamics/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
+python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
 ```
 
 ## Naechste Prioritaeten

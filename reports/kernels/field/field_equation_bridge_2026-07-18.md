@@ -53,4 +53,4 @@ actually tested.
 
 - Git revision: `cc5fde949b7f263066e49e021fc4eb2a84e5b51b`
 - Git status: `clean`
-- Script: `experiments/current/kernels/field_equation_bridge.py`
+- Script: `experiments/current/kernels/field/field_equation_bridge.py`

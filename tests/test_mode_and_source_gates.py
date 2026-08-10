@@ -22,11 +22,11 @@ def _load_script(name: str, relative_path: str):
 
 mode_audit = _load_script(
     "low_mode_identity_audit",
-    "experiments/current/memory/low_mode_identity_audit.py",
+    "experiments/current/memory/closure/low_mode_identity_audit.py",
 )
 source_pilot = _load_script(
     "one_way_dynamic_source_pilot",
-    "experiments/current/memory/synchronization/one_way_dynamic_source_pilot.py",
+    "experiments/current/memory/synchronization/one_way/one_way_dynamic_source_pilot.py",
 )
 
 

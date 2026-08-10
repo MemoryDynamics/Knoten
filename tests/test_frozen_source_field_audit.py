@@ -11,11 +11,7 @@ from emergenz_knoten import FiniteMemoryState, SimulationConfig, memory_shape_te
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "frozen_source_field_audit.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "calibration" / "frozen_source_field_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location("frozen_source_field_audit", SCRIPT_PATH)
 field_audit = importlib.util.module_from_spec(SPEC)

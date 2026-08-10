@@ -6,8 +6,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels"))
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "dynamics"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "controls"))
 sys.path.insert(0, str(ROOT / "src"))
 
 from emergenz_knoten import linear_memory_relative_rms_radius  # noqa: E402

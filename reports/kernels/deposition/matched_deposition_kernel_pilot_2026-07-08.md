@@ -52,7 +52,7 @@ between the Gaussian components. That remains a separate model variant.
   `matched_gaussian`.
 - `SimulationConfig.deposition_sigma` sets the finite width only for the generic
   `gaussian` mode.
-- `experiments/current/dynamics/long_run_metastability.py` now has the condition
+- `experiments/current/dynamics/long_runs/long_run_metastability.py` now has the condition
   `matched_deposition`, which maps to `deposition_kernel="matched_gaussian"`.
 - Long-run JSON payloads include `effective_kernel` so raw and convolved
   parameters are not confused.

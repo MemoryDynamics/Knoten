@@ -58,4 +58,4 @@ kernel geometry would add no independent control information.
 - Git revision: `a86509461608481fedf50c7ba2e400a6c8a8c481`
 - Git status at report generation: `clean`
 - Raw cases: `data/processed/kernel_compensation/` (ignored bulk data)
-- Script: `experiments/current/kernels/fixed_curvature_sigma_pilot.py`
+- Script: `experiments/current/kernels/controls/fixed_curvature_sigma_pilot.py`

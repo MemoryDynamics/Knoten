@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
-    ROOT / "experiments" / "current" / "dynamics" / "dimension_over_n_reproduction.py"
+    ROOT / "experiments" / "current" / "dimensions" / "dimension_over_n_reproduction.py"
 )
 SPEC = importlib.util.spec_from_file_location("dimension_over_n_reproduction", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

@@ -11,10 +11,7 @@ from emergenz_knoten import SimulationConfig, simulate_finite_memory_numba
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "long_run_metastability.py"
+    / "experiments" / "current" / "dynamics" / "long_runs" / "long_run_metastability.py"
 )
 SPEC = importlib.util.spec_from_file_location("long_run_metastability", SCRIPT_PATH)
 assert SPEC is not None

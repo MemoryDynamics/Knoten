@@ -24,7 +24,7 @@ from simple controls before any Paper-I evidence table is built.
 ## Command
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 10000000 `
   --seeds 1 `
   --conditions single_scale,eta_zero `

@@ -75,7 +75,7 @@ def test_seed_cluster_requires_control_separation() -> None:
 
 
 def test_stored_hankel_summary_has_no_control_separated_identity() -> None:
-    source = ROOT / "reports/response/long_horizon_hankel_gate_2026-08-04.json"
+    source = ROOT / "reports/response/reciprocal/long_horizon_hankel_gate_2026-08-04.json"
     result = REPORT.analyze(json.loads(source.read_text(encoding="utf-8")))
 
     assert not result["pass"]

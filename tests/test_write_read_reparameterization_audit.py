@@ -7,10 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "kernels"
-    / "write_read_reparameterization_audit.py"
+    / "experiments" / "current" / "kernels" / "field" / "write_read_reparameterization_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location("write_read_audit", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

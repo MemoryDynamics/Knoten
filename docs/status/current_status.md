@@ -145,23 +145,23 @@ wichtig:
 2. `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`
 3. `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md`
 4. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
-5. `reports/memory/low_mode_identity_audit_2026-07-20.md`
-6. `reports/memory/eta_zero_raw_mode_null_audit_2026-07-31.md`
-7. `reports/response/one_way_interaction_age_N3M_2026-07-21.md`
-8. `reports/response/scalar_cross_readout_resolution_2026-07-21.md`
-9. `reports/response/oriented_history_current_audit_2026-07-21.md`
-10. `reports/response/oriented_vector_one_way_gate_2026-07-25.md`
-11. `reports/response/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
-12. `reports/response/local_oriented_mediator_gate_2026-07-28.md`
-13. `reports/response/oriented_source_mediator_identifiability_2026-07-28.md`
-14. `reports/response/dynamic_common_source_mediator_gate_2026-07-28.md`
+5. `reports/memory/closure/low_mode_identity_audit_2026-07-20.md`
+6. `reports/memory/closure/eta_zero_raw_mode_null_audit_2026-07-31.md`
+7. `reports/response/one_way/one_way_interaction_age_N3M_2026-07-21.md`
+8. `reports/response/scalar/scalar_cross_readout_resolution_2026-07-21.md`
+9. `reports/response/one_way/oriented_history_current_audit_2026-07-21.md`
+10. `reports/response/oriented/oriented_vector_one_way_gate_2026-07-25.md`
+11. `reports/response/oriented/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
+12. `reports/response/oriented/local_oriented_mediator_gate_2026-07-28.md`
+13. `reports/response/oriented/oriented_source_mediator_identifiability_2026-07-28.md`
+14. `reports/response/oriented/dynamic_common_source_mediator_gate_2026-07-28.md`
 15. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
 16. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
 17. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
-18. `reports/response/reciprocal_full_knot_gate_2026-08-04.md`
-19. `reports/response/retarded_reciprocal_full_knot_gate_2026-08-04.md`
-20. `reports/memory/adjoint_reciprocity_eligibility_audit_2026-08-07.md`
-21. `reports/memory/carrier_memory_metric_comparison_2026-08-08.md`
+18. `reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.md`
+19. `reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.md`
+20. `reports/memory/closure/adjoint_reciprocity_eligibility_audit_2026-08-07.md`
+21. `reports/memory/representations/carrier_memory_metric_comparison_2026-08-08.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren

@@ -12,11 +12,7 @@ from emergenz_knoten import FiniteMemoryState, SimulationConfig, memory_shape_te
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "frozen_source_distance_ladder.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "calibration" / "frozen_source_distance_ladder.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "frozen_source_distance_ladder", SCRIPT_PATH

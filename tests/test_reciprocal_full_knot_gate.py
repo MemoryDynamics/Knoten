@@ -9,11 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "reciprocal_full_knot_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "reciprocal_full_knot_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location("reciprocal_full_knot_gate", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

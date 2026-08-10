@@ -6,8 +6,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels"))
-sys.path.insert(0, str(ROOT / "experiments" / "current" / "dynamics"))
+sys.path.insert(0, str(ROOT / "experiments" / "current" / "kernels" / "families"))
 sys.path.insert(0, str(ROOT / "src"))
 
 import kernel_family_comparison as comparison  # noqa: E402

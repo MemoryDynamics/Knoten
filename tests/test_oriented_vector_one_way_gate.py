@@ -14,11 +14,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "oriented_vector_one_way_gate.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "one_way" / "oriented_vector_one_way_gate.py"
 )
 SPEC = importlib.util.spec_from_file_location("oriented_vector_one_way_gate", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

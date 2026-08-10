@@ -7,11 +7,28 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
+CURRENT_CATEGORY_ROOTS = {
+    "anchors": "current/anchors",
+    "dimensions": "current/dimensions",
+    "dynamics": "current/dynamics",
+    "kernels": "current/kernels",
+    "knot_stability": "current/knot_stability",
+    "markov": "current/markov",
+    "memory": "current/memory",
+    "reference": "current/reference",
+}
+
+
+def _scripts_below(relative_dir: str) -> list[str]:
+    directory = ROOT / relative_dir
+    return sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in directory.rglob("*.py")
+        if path.name != "__init__.py"
+    )
+
+
 CATEGORIES = {
-    "anchors": [
-        "current/anchors/anchor_paper_pipeline.py",
-        "current/anchors/anchor_sensitivity_analysis.py",
-    ],
     "dimension_selection": [
         "dimension_selection/heatmaps/DimensionsHeatmap.py",
         "dimension_selection/heatmaps/DimensionsHeatmap2Opt.py",
@@ -20,25 +37,6 @@ CATEGORIES = {
         "dimension_selection/heatmaps/DimensionsHeatmapOpt.py",
         "dimension_selection/heatmaps/plotD.py",
         "dimension_selection/heatmaps/plotDgpu.py",
-    ],
-    "dynamics": [
-        "current/dynamics/aatt_transition_report.py",
-        "current/dynamics/dimension_claim_audit.py",
-        "current/dynamics/dspec_sensitivity_report.py",
-        "current/dynamics/dspec_raw_snapshot_report.py",
-        "current/dynamics/n_dependence_recheck_report.py",
-        "current/dynamics/dimension_over_n_reproduction.py",
-        "current/dynamics/reciprocal_mode_regime_map.py",
-        "current/dynamics/long_run_metastability.py",
-        "current/dynamics/stability_gate_audit.py",
-        "current/dynamics/linear_long_run_reconciliation.py",
-        "current/dynamics/dynamic_center_trace_report.py",
-        "current/dynamics/paper_i_evidence_table.py",
-        "current/dynamics/ambient_dimension_memory_shape_report.py",
-        "current/dynamics/epsilon_dynamic_center_sweep.py",
-        "current/dynamics/epsilon_step_balance.py",
-        "current/dynamics/epsilon_floor_visual_probe.py",
-        "current/dynamics/scalar_n_scaling_report.py",
     ],
     "fractal_analysis": [
         "fractal_analysis/analyze_dimension_claim.py",
@@ -49,80 +47,12 @@ CATEGORIES = {
         "fractal_analysis/archive_source/scripts/fit_n_plot.py",
         "fractal_analysis/archive_source/scripts/analyze_peaks.py",
     ],
-    "kernels": [
-        "current/kernels/kernel_shape_probe.py",
-        "current/kernels/kernel_compensation_audit.py",
-        "current/kernels/fixed_curvature_sigma_pilot.py",
-        "current/kernels/three_scale_compensation_pilot.py",
-        "current/kernels/kernel_core_audit.py",
-        "current/kernels/log_taylor_kernel_audit.py",
-        "current/kernels/attractive_only_regime_scan.py",
-        "current/kernels/kernel_family_comparison.py",
-        "current/kernels/fixed_g_nonlinearity_slice.py",
-        "current/kernels/fixed_g_scale_reconciliation.py",
-        "current/kernels/field_equation_bridge.py",
-        "current/kernels/local_field_operator_audit.py",
-        "current/kernels/write_read_reparameterization_audit.py",
-        "current/kernels/active_scalar_delta_field_pilot.py",
-        "propagation_speed/ballistic_kernel_probe.py",
-    ],
-    "knot_stability": [
-        "current/knot_stability/Knoten.py",
-        "current/knot_stability/Knoten3D.py",
-        "current/knot_stability/Knoten3D_prism.py",
-        "current/knot_stability/knot_chi_scan.py",
-    ],
-    "markov": [
-        "current/markov/ar_mode_probe.py",
-        "current/markov/knot_score_report.py",
-        "current/markov/long_run_trace_ar_report.py",
-        "current/markov/feature_closure_report.py",
-    ],
-    "memory": [
-        "current/memory/adjoint_reciprocity_eligibility_audit.py",
-        "current/memory/carrier_memory_metric_comparison.py",
-        "current/memory/low_mode_ar_feature_closure.py",
-        "current/memory/low_mode_identity_audit.py",
-        "current/memory/eta_zero_raw_mode_null_audit.py",
-        "current/memory/oriented_fourier_closure_audit.py",
-        "current/memory/reconcile_low_mode_ar_runs.py",
-        "current/memory/relaxation_diffusion_field_pilot.py",
-        "current/memory/spectral_rho_field_pilot.py",
-        "current/memory/vector_memory_pilot.py",
-        "current/memory/reference_state_checkpoints.py",
-        "current/memory/synchronization/weak_probe_response.py",
-        "current/memory/synchronization/frozen_source_response.py",
-        "current/memory/synchronization/frozen_source_field_audit.py",
-        "current/memory/synchronization/frozen_source_distance_ladder.py",
-        "current/memory/synchronization/scalar_cross_readout_resolution.py",
-        "current/memory/synchronization/oriented_history_current_audit.py",
-        "current/memory/synchronization/oriented_vector_one_way_gate.py",
-        "current/memory/synchronization/oriented_memory_source_eligibility_gate.py",
-        "current/memory/synchronization/oriented_vector_fixed_pair_distance_gate.py",
-        "current/memory/synchronization/local_oriented_mediator_gate.py",
-        "current/memory/synchronization/oriented_source_mediator_identifiability.py",
-        "current/memory/synchronization/dynamic_common_source_mediator_gate.py",
-        "current/memory/synchronization/signed_cross_channel_pilot.py",
-        "current/memory/synchronization/one_way_dynamic_source_pilot.py",
-        "current/memory/synchronization/one_way_interaction_age_audit.py",
-        "current/memory/synchronization/reciprocal_full_knot_gate.py",
-        "current/memory/synchronization/retarded_reciprocal_full_knot_gate.py",
-        "current/memory/synchronization/measurement_closure_relative_noise_gate.py",
-        "current/memory/synchronization/hankel_pole_identity_cli.py",
-        "current/memory/synchronization/source_local_linear_gate.py",
-        "current/memory/synchronization/p32_accumulation_control.py",
-        "current/memory/synchronization/shape_multipole_eligibility_gate.py",
-    ],
     "propagation_speed": [
         "propagation_speed/PaperII3D_4Plots.py",
         "propagation_speed/PaperII3D_4Plots2.py",
         "propagation_speed/PaperII3D_5Plots1.py",
         "propagation_speed/PaperII3D_5Plots2.py",
         "propagation_speed/ballistic_kernel_probe.py",
-    ],
-    "reference": [
-        "current/reference/reference_experiment.py",
-        "current/reference/demo_simulation.py",
     ],
     "archive": [
         "archive/lqg/orbit_labor.py",
@@ -134,6 +64,12 @@ CATEGORIES = {
         "archive/legacy/scripts/debug_diagnostics.py",
     ],
 }
+CATEGORIES.update(
+    {
+        category: _scripts_below(relative_dir)
+        for category, relative_dir in CURRENT_CATEGORY_ROOTS.items()
+    }
+)
 
 
 def list_categories() -> None:

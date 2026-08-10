@@ -9,10 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "oriented_fourier_closure_audit.py"
+    / "experiments" / "current" / "memory" / "closure" / "oriented_fourier_closure_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location(
     "oriented_fourier_closure_audit",

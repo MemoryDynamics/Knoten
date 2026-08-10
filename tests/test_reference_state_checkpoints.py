@@ -8,7 +8,7 @@ from emergenz_knoten import SimulationConfig, load_finite_memory_checkpoint
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "experiments" / "current" / "memory" / "reference_state_checkpoints.py"
+SCRIPT = ROOT / "experiments" / "current" / "memory" / "representations" / "reference_state_checkpoints.py"
 
 
 def load_module():

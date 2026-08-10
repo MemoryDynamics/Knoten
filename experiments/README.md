@@ -1,6 +1,6 @@
 # Experiments
 
-Stand: 2026-07-25.
+Stand: 2026-08-10.
 
 Dieses Verzeichnis enthaelt reproduzierbare Entry-Points und historische
 Explorationsskripte fuer den Emergenz-Knoten-Kern.
@@ -12,21 +12,27 @@ python experiments/cli.py --list
 python experiments/cli.py memory --list
 python experiments/current/reference/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100
 python experiments/current/anchors/anchor_paper_pipeline.py
-python experiments/current/dynamics/long_run_metastability.py --help
+python experiments/current/dynamics/long_runs/long_run_metastability.py --help
 python experiments/current/markov/knot_score_report.py
-python experiments/current/memory/synchronization/weak_probe_response.py
-python experiments/current/memory/synchronization/oriented_vector_one_way_gate.py --help
+python experiments/current/memory/synchronization/calibration/weak_probe_response.py
+python experiments/current/memory/synchronization/one_way/oriented_vector_one_way_gate.py --help
 ```
 
 ## Struktur
 
-- `current/anchors/`: Paper-0-Smokes und kurze Markov-Sensitivitaet.
-- `current/dynamics/`: Long Runs, Center-Traces, Dimension und Kernelkontrollen.
-- `current/markov/`: KnotScore, AR-Moden und Feature-Closure.
-- `current/memory/`: Vektormemory und das gestufte externe Response-Programm.
-- `current/memory/synchronization/weak_probe_response.py`: gepaarte uniforme
-  `+delta/-delta`-Kalibrierung mit Nullpfad und `eta_zero`.
-- `current/kernels/`: gezielte Kernel-Shape- und Amplitudenproben.
+- `current/anchors/` und `current/reference/`: kurze Baselines und
+  reproduzierbare Referenzlaeufe.
+- `current/dimensions/`: Claim-, Snapshot-, Sensitivitaets- und N-Audits.
+- `current/dynamics/{centering,epsilon,long_runs,scaling}/`: co-moving
+  Diagnostik, Rauschbilanz, Langlauf- und Skalierungsreconciliation.
+- `current/kernels/{families,controls,field}/`: Kernelklasse, fest
+  vorgegebene Kontrollen und separate Feldkandidaten.
+- `current/markov/` und `current/knot_stability/`: Zustandsreduktion,
+  Scorecards und geometrische Stabilitaetsproben.
+- `current/memory/{closure,representations}/`: Modenclosure und alternative
+  Memory-Darstellungen.
+- `current/memory/synchronization/{calibration,one_way,mediation,reciprocity}/`:
+  das gestufte externe Response-Programm.
 - `fractal_analysis/`: Occupancy-Dimension, historische Reproduktion und
   Dimensionsclaim-Audits.
 - `propagation_speed/`: Ballistik-, Time-of-flight- und spaetere

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from experiments.current.memory.adjoint_reciprocity_eligibility_audit import (
+from experiments.current.memory.closure.adjoint_reciprocity_eligibility_audit import (
     analyze_case,
 )
 

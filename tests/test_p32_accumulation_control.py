@@ -11,11 +11,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = (
     ROOT
-    / "experiments"
-    / "current"
-    / "memory"
-    / "synchronization"
-    / "p32_accumulation_control.py"
+    / "experiments" / "current" / "memory" / "synchronization" / "reciprocity" / "p32_accumulation_control.py"
 )
 SPEC = importlib.util.spec_from_file_location("p32_accumulation_control", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

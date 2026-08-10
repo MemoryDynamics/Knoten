@@ -54,10 +54,10 @@ encrypted, or outside the repository before clean evidence runs are launched.
 
 ## Implementation status
 
-Implemented conditions in `experiments/current/dynamics/long_run_metastability.py`:
+Implemented conditions in `experiments/current/dynamics/long_runs/long_run_metastability.py`:
 
 ```powershell
-python experiments/current/dynamics/long_run_metastability.py `
+python experiments/current/dynamics/long_runs/long_run_metastability.py `
   --steps 10000000 `
   --seeds 1,2,3,4,5 `
   --conditions baseline,m0_zero,alpha_one `

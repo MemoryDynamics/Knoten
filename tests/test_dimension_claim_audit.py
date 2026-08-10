@@ -8,10 +8,7 @@ from pathlib import Path
 
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
-    / "experiments"
-    / "current"
-    / "dynamics"
-    / "dimension_claim_audit.py"
+    / "experiments" / "current" / "dimensions" / "dimension_claim_audit.py"
 )
 SPEC = importlib.util.spec_from_file_location("dimension_claim_audit", SCRIPT_PATH)
 assert SPEC is not None

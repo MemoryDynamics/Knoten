@@ -1,0 +1,2414 @@
+{
+  "accumulation_rows": [
+    {
+      "conditions": {
+        "channel_off": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 3.098300110871638,
+              "q25_pair_distance_r": 2.072483208788779,
+              "q75_pair_distance_r": 5.397223371816995,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": 13.159787904276463,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 9.112853040341887,
+              "q25_pair_distance_r": 8.561269539652573,
+              "q75_pair_distance_r": 9.673928115253645,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": 2.8593826291075968,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 12.944228295190154,
+              "q25_pair_distance_r": 12.348047001699966,
+              "q75_pair_distance_r": 13.622196527452344,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": 0.870404206304071,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 22.204808842447164,
+              "q25_pair_distance_r": 18.648163058814845,
+              "q75_pair_distance_r": 24.852557630727276,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": 4.357630273622116,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 0.0
+        },
+        "instantaneous_reciprocal": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 2.503782569909611,
+              "median_pair_distance_r": 0.552459035050899,
+              "q25_pair_distance_r": 0.39399326070486324,
+              "q75_pair_distance_r": 0.6679260067894123,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": -0.07683877518873879,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 8.626423482743846,
+              "median_pair_distance_r": 0.5778789023850295,
+              "q25_pair_distance_r": 0.4142922880743726,
+              "q75_pair_distance_r": 0.7169793858487225,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": 0.1959900076015003,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 12.45833909347343,
+              "median_pair_distance_r": 0.5462321542229265,
+              "q25_pair_distance_r": 0.39198839216409137,
+              "q75_pair_distance_r": 0.6850057891757632,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": 0.003271989015414454,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 21.625623883358024,
+              "median_pair_distance_r": 0.5216406326803475,
+              "q25_pair_distance_r": 0.3878651690119131,
+              "q75_pair_distance_r": 0.684891601967556,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.020274071573466505,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 19.121841313448414
+        },
+        "retarded_one_way": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 2.159357747085658,
+              "median_pair_distance_r": 1.0752942381613193,
+              "q25_pair_distance_r": 0.7750455840399167,
+              "q75_pair_distance_r": 1.4072575360246222,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": 0.12946949201926758,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 8.172215291663537,
+              "median_pair_distance_r": 1.1092674130849836,
+              "q25_pair_distance_r": 0.7064824040248223,
+              "q75_pair_distance_r": 1.4150611742102848,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": 0.6205971497892774,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 12.006736599240767,
+              "median_pair_distance_r": 1.0645687376973452,
+              "q25_pair_distance_r": 0.768395691799095,
+              "q75_pair_distance_r": 1.3227603037119327,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": -0.03372030699352506,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 21.189935773823095,
+              "median_pair_distance_r": 1.0200327795361424,
+              "q25_pair_distance_r": 0.7572195510726707,
+              "q75_pair_distance_r": 1.356366135581957,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.05428159185214993,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 19.030578026737437
+        },
+        "retarded_reciprocal": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 2.0680097042099694,
+              "median_pair_distance_r": 1.019867168015494,
+              "q25_pair_distance_r": 0.7177428694981076,
+              "q75_pair_distance_r": 1.3151995634100733,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": 0.021470722736355342,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 8.402694513085383,
+              "median_pair_distance_r": 0.8482596739678903,
+              "q25_pair_distance_r": 0.5998617939693508,
+              "q75_pair_distance_r": 1.1290754988045542,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": 0.1252440224901627,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 12.054907469979089,
+              "median_pair_distance_r": 0.9351694022058451,
+              "q25_pair_distance_r": 0.6651557856507024,
+              "q75_pair_distance_r": 1.245374229813517,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": -0.05148340280568694,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 21.212987573616864,
+              "median_pair_distance_r": 0.9368941195064222,
+              "q25_pair_distance_r": 0.6781393687176154,
+              "q75_pair_distance_r": 1.2305959189274664,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.051606211553634124,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 19.144977869406894
+        }
+      },
+      "future_seed": 1,
+      "trace_sample_interval_memory_times": 4.099999999999909
+    },
+    {
+      "conditions": {
+        "channel_off": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 6.770504810886571,
+              "q25_pair_distance_r": 5.329313879994461,
+              "q75_pair_distance_r": 7.325611431001658,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": 10.36389869309743,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 7.206754341298522,
+              "q25_pair_distance_r": 6.614307892175031,
+              "q75_pair_distance_r": 7.740197273969328,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": -4.819892817134173,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 10.500270209102812,
+              "q25_pair_distance_r": 9.332679736549835,
+              "q75_pair_distance_r": 11.510046064437566,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": 2.0794806645597164,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 0.0,
+              "median_pair_distance_r": 17.00209956566036,
+              "q25_pair_distance_r": 13.160559986136473,
+              "q75_pair_distance_r": 18.234923097170448,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": 3.4567130564746162,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 0.0
+        },
+        "instantaneous_reciprocal": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 6.1803121903771885,
+              "median_pair_distance_r": 0.5699321690819911,
+              "q25_pair_distance_r": 0.4394155726851628,
+              "q75_pair_distance_r": 0.7384602384051169,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": -0.3093689219605948,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 6.76247534494231,
+              "median_pair_distance_r": 0.475180765271295,
+              "q25_pair_distance_r": 0.35689116175257357,
+              "q75_pair_distance_r": 0.6415194225964919,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": -0.36107247710865703,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 9.815178645642673,
+              "median_pair_distance_r": 0.5407922220168553,
+              "q25_pair_distance_r": 0.37609725936414784,
+              "q75_pair_distance_r": 0.713148055757097,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": -0.022368804888129337,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 16.434623391951757,
+              "median_pair_distance_r": 0.539156823482821,
+              "q25_pair_distance_r": 0.39121721708213686,
+              "q75_pair_distance_r": 0.7075880291363931,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.0034473296654494463,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 10.254311201574568
+        },
+        "retarded_one_way": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 5.556591884892608,
+              "median_pair_distance_r": 1.0976907115298367,
+              "q25_pair_distance_r": 0.8437017481450947,
+              "q75_pair_distance_r": 1.4487117314176188,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": -0.49534980427670444,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 6.392816594942441,
+              "median_pair_distance_r": 0.9144744372713912,
+              "q25_pair_distance_r": 0.7152454325931575,
+              "q75_pair_distance_r": 1.1950835654721015,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": -0.9484670119924379,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 9.393960245768042,
+              "median_pair_distance_r": 1.019083020683655,
+              "q25_pair_distance_r": 0.695903094620439,
+              "q75_pair_distance_r": 1.3613968190641546,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": -0.054961599284025546,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 15.86408969106083,
+              "median_pair_distance_r": 1.0700192413979708,
+              "q25_pair_distance_r": 0.8225694673253606,
+              "q75_pair_distance_r": 1.3909435236387329,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.004577405617649654,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 10.307497806168222
+        },
+        "retarded_reciprocal": {
+          "epochs": [
+            {
+              "end_memory_times": 500.0,
+              "median_absolute_delta_from_off_r": 5.465749160422673,
+              "median_pair_distance_r": 1.1247508524192043,
+              "q25_pair_distance_r": 0.8533119394994698,
+              "q75_pair_distance_r": 1.3714587073743816,
+              "samples": 97,
+              "slope_r_per_1000_memory_times": -0.968461888795273,
+              "start_memory_times": 100.0
+            },
+            {
+              "end_memory_times": 1000.0,
+              "median_absolute_delta_from_off_r": 6.227895277426491,
+              "median_pair_distance_r": 1.0031080357097473,
+              "q25_pair_distance_r": 0.6967168855162587,
+              "q75_pair_distance_r": 1.2934364438954455,
+              "samples": 122,
+              "slope_r_per_1000_memory_times": -0.7807270126636647,
+              "start_memory_times": 500.0
+            },
+            {
+              "end_memory_times": 2500.0,
+              "median_absolute_delta_from_off_r": 9.388409102248831,
+              "median_pair_distance_r": 1.0509959851392174,
+              "q25_pair_distance_r": 0.7813688791929232,
+              "q75_pair_distance_r": 1.3459359500234709,
+              "samples": 366,
+              "slope_r_per_1000_memory_times": 0.009560912202716817,
+              "start_memory_times": 1000.0
+            },
+            {
+              "end_memory_times": 5000.0,
+              "median_absolute_delta_from_off_r": 15.97758059098673,
+              "median_pair_distance_r": 1.0056479687427684,
+              "q25_pair_distance_r": 0.7451115141993946,
+              "q75_pair_distance_r": 1.3322194676912285,
+              "samples": 610,
+              "slope_r_per_1000_memory_times": -0.009264592318228121,
+              "start_memory_times": 2500.0
+            }
+          ],
+          "late_minus_early_absolute_delta_from_off_r": 10.511831430564056
+        }
+      },
+      "future_seed": 2,
+      "trace_sample_interval_memory_times": 4.099999999999909
+    }
+  ],
+  "accumulation_windows_memory_times": [
+    [
+      100.0,
+      500.0
+    ],
+    [
+      500.0,
+      1000.0
+    ],
+    [
+      1000.0,
+      2500.0
+    ],
+    [
+      2500.0,
+      5000.0
+    ]
+  ],
+  "base_gate": {
+    "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+    "checkpoint_update_index": 100000000,
+    "config": {
+      "alpha": 0.01,
+      "amplitude_att": 35.0,
+      "amplitude_rep": 1.0,
+      "burn_in": 0,
+      "deposition_kernel": "delta",
+      "deposition_sigma": 0.0,
+      "dim": 3,
+      "epsilon": 0.0001,
+      "eta": 0.15,
+      "max_memory": 800,
+      "memory_factor": 6.0,
+      "memory_mass": 1.0,
+      "sample_every": 100000000,
+      "sigma_att": 3.0,
+      "sigma_rep": 1.0,
+      "steps": 100000000
+    },
+    "continuation_updates_per_second": 2473.9511357783695,
+    "created_utc": "2026-08-06T20:53:28+00:00",
+    "derived": {
+      "analysis_start_memory_times": 100.0,
+      "analysis_start_updates": 10000,
+      "continuation_memory_times": 5000.0,
+      "correlation_length": 0.0010582672897421104,
+      "courant_number": 0.020000000000000004,
+      "cross_eta": 0.006939767127498097,
+      "effective_local_curvature": 2.888888888888889,
+      "finite_horizon_self_gain": 0.43229116264043155,
+      "initial_center_separation": [
+        0.0005291336448710552,
+        0.0,
+        0.0
+      ],
+      "initial_radius": 0.00021165345794842206,
+      "mediator_readout_position": 0.0005291336448710552,
+      "nominal_front_time_memory_times": 5.0,
+      "registered_cross_gain": 0.02,
+      "retained_memory_mass": 0.9975949907086882,
+      "second_state_rotation": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "source_normalization": 3.490505771716122e-05,
+      "static_readout_gain": 28649.143287574214
+    },
+    "direct_analytic_relative_mode": {
+      "discriminant": 0.20831814623725275,
+      "is_complex": false,
+      "is_stable": true,
+      "multipliers": [
+        {
+          "imag": 0.0,
+          "real": 0.9991252883200965
+        },
+        {
+          "imag": 0.0,
+          "real": 0.5427064606658762
+        }
+      ]
+    },
+    "formation_seed": 1,
+    "gate": {
+      "candidate_seed_counts": {
+        "channel_off": 0,
+        "instantaneous_reciprocal": 0,
+        "retarded_one_way": 0,
+        "retarded_reciprocal": 0
+      },
+      "classification": "retarded channel operational; complex-mode null",
+      "controls_bounded_pass": true,
+      "mediator_seed_counts": {
+        "retarded_one_way": 2,
+        "retarded_reciprocal": 2
+      },
+      "operational_reconciliation_pass": true,
+      "response_seed_counts": {
+        "instantaneous_reciprocal": 2,
+        "retarded_one_way": 2,
+        "retarded_reciprocal": 2
+      },
+      "retarded_reciprocal_complex_candidate_pass": false,
+      "shape_seed_counts": {
+        "instantaneous_reciprocal": 2,
+        "retarded_one_way": 2,
+        "retarded_reciprocal": 2
+      }
+    },
+    "git_revision": "72ae14528e7a807e9484093c1503e2ec9f3f72a9",
+    "git_status": "",
+    "mediator": {
+      "damping_rate": 0.1,
+      "natural_frequency": 0.1,
+      "wave_speed": 0.00010582672897421105
+    },
+    "mediator_grid": {
+      "points_left": 120,
+      "points_right": 180,
+      "spacing": 5.2913364487105516e-05,
+      "time_step": 0.01
+    },
+    "parameters": {
+      "allow_dirty": false,
+      "analysis_burn_memory_times": 100.0,
+      "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+      "correlation_length_r": 5.0,
+      "cross_gain": 0.02,
+      "distance_ratio": 2.5,
+      "figure": "figures/draft/response/p32_accumulation_control_N500k_2026-08-06.png",
+      "fit_condition_max": 100000000.0,
+      "fit_residual_ratio_max": 0.8,
+      "frequency_min_per_memory_time": 0.05,
+      "future_seeds": "1,2",
+      "grid_points_left": 120,
+      "grid_points_right": 180,
+      "grid_spacing_r": 0.25,
+      "max_control_complex_seeds": 0,
+      "mediator_rms_min": 1e-06,
+      "min_complex_seeds": 2,
+      "min_complex_segments": 3,
+      "mode_relative_range_max": 0.25,
+      "noise_seed_offset": 20260804,
+      "phase_coherence_min": 0.5,
+      "radius_factor_limit": 1.1,
+      "relaxation_memory_times": 10.0,
+      "report": "reports/response/reciprocal/p32_accumulation_control_N500k_2026-08-06.md",
+      "response_min_r": 0.001,
+      "sample_every": 10,
+      "segments": 4,
+      "shape_spectrum_median_limit": 0.05,
+      "shape_spectrum_q95_limit": 0.1,
+      "summary_json": "reports/response/reciprocal/p32_accumulation_control_N500k_2026-08-06.json",
+      "updates": 500000
+    },
+    "rows": [
+      {
+        "conditions": {
+          "channel_off": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 27.777582614330033,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0,
+            "mediator_readout_rms": 0.0,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.002111342017291034,
+                "design_condition": 6.617776419730539,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.014597617965246501
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9997888880855279
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -2.5729713724877035e-07,
+                    -1.82842255428568e-08
+                  ],
+                  [
+                    -1.5741369967367178e-07,
+                    -1.8196248941263708e-07
+                  ],
+                  [
+                    -8.802533931130023e-07,
+                    -1.8439491851127403e-07
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.21948090397863523,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.02810189390280851,
+                    0.9712616243571603
+                  ],
+                  [
+                    0.013510190215811792,
+                    0.986284612147966
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.0023406465760825927,
+                "design_condition": 5.264896413759893,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.00220340577255973
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9997659627333866
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    1.3932827885999963e-06,
+                    1.1732623672616347e-07
+                  ],
+                  [
+                    -1.398156011896438e-06,
+                    -3.057423397937256e-07
+                  ],
+                  [
+                    1.3120618653182647e-07,
+                    -7.692574775395797e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.27648563746939636,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.01549645770002969,
+                    0.9835275865163684
+                  ],
+                  [
+                    0.01330307946661327,
+                    0.9864729108059166
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.002057243323977984,
+                "design_condition": 5.683532835083393,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.004864044040022719
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9997942968274016
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    4.086686420892824e-06,
+                    1.3727898873227857e-07
+                  ],
+                  [
+                    -8.504675066411732e-06,
+                    -3.7826084180224775e-07
+                  ],
+                  [
+                    -1.7914795565240454e-06,
+                    2.749792953601405e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.2554535146538357,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.007927926849871923,
+                    0.988376935811474
+                  ],
+                  [
+                    0.012837132547008415,
+                    0.9870023259375071
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.0020114051608530574,
+                "design_condition": 6.588881882279266,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.003051470042418125
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9997988797113121
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    3.4890373337627834e-07,
+                    1.8663526950735577e-07
+                  ],
+                  [
+                    -3.278235996574501e-06,
+                    -4.314096391749671e-07
+                  ],
+                  [
+                    -1.1910452990941157e-06,
+                    -1.8396384374283654e-07
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.22051015914720135,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.009785453624779413,
+                    0.989191328584653
+                  ],
+                  [
+                    0.012847592182553184,
+                    0.9869619560441145
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [],
+            "response_rms_r": 0.0,
+            "shape_bounded_coherent_pass": true
+          },
+          "instantaneous_reciprocal": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 0.7731960393025603,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.00040030267787078685,
+            "mediator_readout_rms": 0.00040030267787078685,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.0892345120325808,
+                "design_condition": 2.817055738084423,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.013651491578368535
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9911162446250842
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -2.580502024985277e-07,
+                    -2.327864672405106e-08
+                  ],
+                  [
+                    2.410038394653683e-07,
+                    -5.74132811178501e-08
+                  ],
+                  [
+                    -5.281776201113349e-07,
+                    -6.508534855675414e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.865830495874696,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.024951688013493636,
+                    0.8768641660171792
+                  ],
+                  [
+                    0.012451015449698136,
+                    0.979816048189959
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.0979979540478819,
+                "design_condition": 2.9142457624039193,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0012021287121605218
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9902480661182268
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    1.1233318041479026e-06,
+                    7.358718395633684e-08
+                  ],
+                  [
+                    -2.1883869579175282e-07,
+                    -4.8265298191162774e-08
+                  ],
+                  [
+                    6.803155894258371e-07,
+                    6.900427901298126e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.8753228959723576,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.012445418001091767,
+                    0.8970368340898179
+                  ],
+                  [
+                    0.012255592660717156,
+                    0.9790047768292954
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.08648386586241502,
+                "design_condition": 2.778727320510815,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.005595399413367619
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9913889031329658
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    8.995355528070528e-07,
+                    -5.478509584639145e-10
+                  ],
+                  [
+                    -1.4864198499739644e-06,
+                    -6.738258023118187e-08
+                  ],
+                  [
+                    -1.5487616321608408e-06,
+                    3.4112020198166535e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.8629616933564154,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.005041847253750288,
+                    0.8909045619446851
+                  ],
+                  [
+                    0.011776813567853624,
+                    0.9807516564658477
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.10481085444545818,
+                "design_condition": 2.968237720149262,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.0035808921229134594
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9895736497365591
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -4.5853239494087395e-07,
+                    3.684700174296303e-08
+                  ],
+                  [
+                    -8.797239427420931e-07,
+                    1.1527119011426027e-08
+                  ],
+                  [
+                    -6.970382964963014e-07,
+                    -9.217358371421917e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.8836782767114854,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.007093656138733656,
+                    0.8870291554135225
+                  ],
+                  [
+                    0.01182320788866698,
+                    0.978899101474912
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.0303299090989901,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0026597849432959952,
+                "shape_spectrum_distance_q95": 0.006409584718618355,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.0356960963465711,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.002649080125539993,
+                "shape_spectrum_distance_q95": 0.00622603324657256,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 8.711242844140434,
+            "shape_bounded_coherent_pass": true
+          },
+          "retarded_one_way": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 1.776153475296573,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0003765980766807466,
+            "mediator_readout_rms": 0.00023828969867517436,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.024901941929930786,
+                "design_condition": 2.4952818181899867,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.015453037487222598
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9975129037685242
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -1.4689150875595693e-07,
+                    -1.366579906536267e-08
+                  ],
+                  [
+                    5.100700530400698e-07,
+                    -3.679279455550636e-08
+                  ],
+                  [
+                    -1.2322369125539103e-07,
+                    -3.632890949628901e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6501124655601886,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.02870685199585994,
+                    0.9460223454426069
+                  ],
+                  [
+                    0.013573015232565941,
+                    0.9842590892598868
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.029087287222590012,
+                "design_condition": 2.466181571734646,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.003601784425250054
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9970954975304636
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    8.873095467920347e-07,
+                    5.405050611317363e-08
+                  ],
+                  [
+                    -4.267725875992822e-08,
+                    -3.3521015561489116e-08
+                  ],
+                  [
+                    3.916024138610674e-07,
+                    4.4319284382978124e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6783458866875043,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.016720680139073598,
+                    0.9588645950429254
+                  ],
+                  [
+                    0.0134131920776996,
+                    0.98397660181664
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.023822588172054057,
+                "design_condition": 2.5046656694527547,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.003238626124793975
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9976205765093898
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    7.811155712097405e-07,
+                    -1.2550852417547972e-08
+                  ],
+                  [
+                    -1.0557786243235374e-06,
+                    -3.265787283805629e-08
+                  ],
+                  [
+                    -1.648029985229005e-06,
+                    2.8951668360826368e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6396892440340806,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.009366299359822909,
+                    0.9619861382302954
+                  ],
+                  [
+                    0.012949117485456007,
+                    0.985015651024773
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.03050578838172987,
+                "design_condition": 2.4447483501285685,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.0015629237609909863
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9969540694495935
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -5.202501484406095e-07,
+                    3.101772722319978e-08
+                  ],
+                  [
+                    -9.501239208025216e-07,
+                    7.878475232937146e-09
+                  ],
+                  [
+                    -2.1272070479159234e-07,
+                    -4.7958007363943836e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.695293704182527,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.011010860642692664,
+                    0.9577322740083202
+                  ],
+                  [
+                    0.012944157441755307,
+                    0.9843802850459099
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.0,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0,
+                "shape_spectrum_distance_q95": 0.0,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.0262671001677082,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0026999996010230454,
+                "shape_spectrum_distance_q95": 0.008435968286576584,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 12.284344156680183,
+            "shape_bounded_coherent_pass": true
+          },
+          "retarded_reciprocal": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 1.0222164233641935,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0005096116375372669,
+            "mediator_readout_rms": 0.000274697627740073,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.03295003399070573,
+                "design_condition": 2.4320851889732396,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.017099627636785297
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9967104191672029
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -1.3903945343436922e-07,
+                    -1.1880455216156224e-08
+                  ],
+                  [
+                    5.071293443794974e-07,
+                    -3.4203855078999093e-08
+                  ],
+                  [
+                    -2.316392179475909e-08,
+                    -2.426999505375316e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.7002376204756766,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.03031083595001009,
+                    0.932031747007225
+                  ],
+                  [
+                    0.013698359791597328,
+                    0.9834992108539781
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.03306548298548742,
+                "design_condition": 2.4497576672844934,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.005228729441258073
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9966989123120277
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    6.509937111897201e-07,
+                    3.095908010768161e-08
+                  ],
+                  [
+                    1.273162450331283e-07,
+                    -1.6947744655072595e-08
+                  ],
+                  [
+                    2.2812525444575861e-07,
+                    2.738717099061243e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.7033564096763152,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.01844906987686803,
+                    0.9539505138949023
+                  ],
+                  [
+                    0.013557093119297103,
+                    0.9834785718764179
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.028070445420856772,
+                "design_condition": 2.459158260127679,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -0.0017515485738206493
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9971968915236796
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    7.462759149946412e-07,
+                    -1.4531075276107535e-08
+                  ],
+                  [
+                    -8.654980361206409e-07,
+                    -2.125985443460622e-08
+                  ],
+                  [
+                    -1.7475755435121597e-06,
+                    2.1920807558815312e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6698067169919177,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.01095707364368349,
+                    0.9569008618518478
+                  ],
+                  [
+                    0.01309827356309515,
+                    0.9844882693061754
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.03553702727936906,
+                "design_condition": 2.4323948772182034,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": -8.396009332911625e-05
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9964526042004076
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -5.925045112056797e-07,
+                    2.4455917664518954e-08
+                  ],
+                  [
+                    -9.624839503640902e-07,
+                    6.700963197690846e-09
+                  ],
+                  [
+                    5.0256926818729336e-09,
+                    -2.766383329854709e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.7172397836542848,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.012525375217229314,
+                    0.9495658445611316
+                  ],
+                  [
+                    0.01306562196028814,
+                    0.9838432688898492
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.0178456349068843,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0022055023747910574,
+                "shape_spectrum_distance_q95": 0.006888185517945983,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.019013209433692,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.002178526999326885,
+                "shape_spectrum_distance_q95": 0.006732459462070184,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 8.722211932800866,
+            "shape_bounded_coherent_pass": true
+          }
+        },
+        "future_seed": 1
+      },
+      {
+        "conditions": {
+          "channel_off": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 20.194116982952767,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0,
+            "mediator_readout_rms": 0.0,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.01117244029408897,
+                "design_condition": 3.342328711708082,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0014192700819568582
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9988833798553363
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    1.0854366642975828e-06,
+                    7.14638218132389e-08
+                  ],
+                  [
+                    1.3584174980396787e-05,
+                    7.114020835460649e-07
+                  ],
+                  [
+                    1.5017903964204715e-06,
+                    8.727549781916593e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.439951850652123,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.014195587341855454,
+                    0.970247541399211
+                  ],
+                  [
+                    0.012966467939675121,
+                    0.9861070625954376
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.007241375743532931,
+                "design_condition": 3.8533771362238354,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0018360284251275338
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9992761245499848
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -3.332879040271171e-06,
+                    -2.2612234609406534e-07
+                  ],
+                  [
+                    9.22010830092107e-06,
+                    6.413222920368181e-07
+                  ],
+                  [
+                    -2.804573224622197e-06,
+                    -2.1896360135502998e-07
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.3795899882581021,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.014625459666633754,
+                    0.9763592101244716
+                  ],
+                  [
+                    0.012898041873158107,
+                    0.9864866933084786
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.0016649994608475694,
+                "design_condition": 6.939726550824354,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.001596751583437639
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.999833513914262
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -1.1157312943948778e-06,
+                    -2.826797314389902e-08
+                  ],
+                  [
+                    2.987227748630153e-06,
+                    2.3425706832582577e-07
+                  ],
+                  [
+                    -2.0487616686337e-06,
+                    -1.3169459078723328e-07
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.20924839610794546,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.014247164407265244,
+                    0.9840542480839439
+                  ],
+                  [
+                    0.012670108603330956,
+                    0.9871831010904344
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.004320495944958178,
+                "design_condition": 4.648252828075512,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.00588165590075318
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9995680437254901
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    1.212424778053194e-06,
+                    5.656961015965904e-08
+                  ],
+                  [
+                    9.175660412965138e-06,
+                    6.841518575583568e-07
+                  ],
+                  [
+                    -3.0539475777317067e-06,
+                    -1.4307250384697646e-07
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.3133526705783409,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.018749217246561697,
+                    0.9766510035087989
+                  ],
+                  [
+                    0.012922473200251685,
+                    0.9867004823796818
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [],
+            "response_rms_r": 0.0,
+            "shape_bounded_coherent_pass": true
+          },
+          "instantaneous_reciprocal": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 0.8901137761901466,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0004017336002049369,
+            "mediator_readout_rms": 0.0004017336002049369,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.09256638011665375,
+                "design_condition": 2.8492443145223056,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0006313827850737974
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.990786072774284
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -6.234963748258887e-07,
+                    -2.943915021431333e-08
+                  ],
+                  [
+                    2.1134142729976338e-06,
+                    2.860945245592058e-08
+                  ],
+                  [
+                    -2.091601912099684e-07,
+                    -1.4090821996065697e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.870438471152469,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.01144742115487784,
+                    0.8875323270780494
+                  ],
+                  [
+                    0.01193484914270178,
+                    0.97997003440448
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.08858639270210739,
+                "design_condition": 2.796457837112276,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.000733400950369556
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9911804828664528
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -2.768451832039822e-07,
+                    -1.6136089167086657e-08
+                  ],
+                  [
+                    -7.477397036750105e-08,
+                    7.914373174894202e-09
+                  ],
+                  [
+                    1.3275348503854461e-08,
+                    -2.729967039405371e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.8630331472967595,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.011505568267386865,
+                    0.8916708407046934
+                  ],
+                  [
+                    0.011835333863789276,
+                    0.9804083155494355
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.08734901216071071,
+                "design_condition": 2.7894674806623647,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0010073834575211604
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9913031371990516
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -6.422759651850199e-07,
+                    1.1136298405898609e-08
+                  ],
+                  [
+                    8.13764925483712e-07,
+                    3.791137825484476e-08
+                  ],
+                  [
+                    -9.943078729388383e-07,
+                    -3.5511110737341103e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.8644711761581438,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.01147120071551271,
+                    0.8825481681687124
+                  ],
+                  [
+                    0.01161724956971155,
+                    0.9808393199410601
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.0928690728763463,
+                "design_condition": 2.8571585679704152,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.005222942179181844
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9907560828511096
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    9.311980200502762e-07,
+                    3.5070938917512994e-08
+                  ],
+                  [
+                    1.1364195750056254e-06,
+                    2.530620090217822e-08
+                  ],
+                  [
+                    -7.391072669354248e-07,
+                    4.5664073198770526e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.870554017040258,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.01603359117429104,
+                    0.8854976714847184
+                  ],
+                  [
+                    0.011899955318333325,
+                    0.9799454338560004
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.032362980289464,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.002690811886529393,
+                "shape_spectrum_distance_q95": 0.006488231950022183,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.03038030314062,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.002721379659136991,
+                "shape_spectrum_distance_q95": 0.006564334916655104,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 6.535264662140659,
+            "shape_bounded_coherent_pass": true
+          },
+          "retarded_one_way": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 1.7612602905084447,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.00037743863040992816,
+            "mediator_readout_rms": 0.00023502466698437945,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.027878311315518607,
+                "design_condition": 2.452931228093746,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0032459409461433886
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9972160512610009
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -5.60696355567961e-07,
+                    -2.2768308368786116e-08
+                  ],
+                  [
+                    1.9569356739989974e-06,
+                    1.0971915599167665e-08
+                  ],
+                  [
+                    -1.843939252094689e-07,
+                    -1.190960229446226e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6740721651019783,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.015927972344069806,
+                    0.9504104414799693
+                  ],
+                  [
+                    0.013094054614821687,
+                    0.9845340198630743
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.02675349485994695,
+                "design_condition": 2.476381138914901,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0034207143310986954
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9973282260721081
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -1.5107688050568726e-07,
+                    -7.41720064701782e-09
+                  ],
+                  [
+                    -1.2887087907651257e-07,
+                    2.3514684690786895e-09
+                  ],
+                  [
+                    2.7360003644034865e-07,
+                    -5.056130412920155e-09
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6627062695184166,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.016108543927693435,
+                    0.9558427663715544
+                  ],
+                  [
+                    0.013024682052187894,
+                    0.9846403964755134
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.02534323565232472,
+                "design_condition": 2.476275359932158,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.003271548595330631
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.997468885121545
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -6.047945357033789e-07,
+                    1.5830755373606185e-08
+                  ],
+                  [
+                    6.088336285890475e-07,
+                    2.1477755651915957e-08
+                  ],
+                  [
+                    -9.692392987546149e-07,
+                    -3.0961188668501724e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6523062023157292,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.015623285337955043,
+                    0.9496192141211691
+                  ],
+                  [
+                    0.012770906685638751,
+                    0.9851171483789206
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.025547125838394937,
+                "design_condition": 2.477947224692446,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.0076252941850322165
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9974485479172148
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    5.742294038903997e-07,
+                    1.528858298032964e-09
+                  ],
+                  [
+                    9.93474351153062e-07,
+                    1.1799994667335137e-08
+                  ],
+                  [
+                    -8.97062701362788e-07,
+                    3.196988720661463e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6590269953889882,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.020314633267871803,
+                    0.9506442453305368
+                  ],
+                  [
+                    0.013042927081535963,
+                    0.9847592088343752
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.0,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0,
+                "shape_spectrum_distance_q95": 0.0,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.0240217711480493,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0027663587260841893,
+                "shape_spectrum_distance_q95": 0.008430072665235905,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 9.214541242103813,
+            "shape_bounded_coherent_pass": true
+          },
+          "retarded_reciprocal": {
+            "candidate_pass": false,
+            "channel_detected": true,
+            "final_pair_distance_r": 1.0448293437894078,
+            "mediator_detected": true,
+            "mediator_input_rms": 0.0005289890508915257,
+            "mediator_readout_rms": 0.00029076182655635743,
+            "mode_segments": [
+              {
+                "damping_per_memory_time": 0.028837601896376016,
+                "design_condition": 2.45206844509563,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.005989290095699817
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9971203938527313
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -4.2670704723421427e-07,
+                    -1.3526823888458317e-08
+                  ],
+                  [
+                    1.6606879959781484e-06,
+                    -1.0029603350762941e-08
+                  ],
+                  [
+                    -1.4356435637466413e-07,
+                    -9.080316108197031e-09
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.677676442896932,
+                "sample_end": 13250,
+                "sample_start": 1000,
+                "segment": 1,
+                "transition": [
+                  [
+                    0.018900312601674043,
+                    0.9481620340977222
+                  ],
+                  [
+                    0.01332031976670203,
+                    0.9842093713467571
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.026092156154405115,
+                "design_condition": 2.4919950528135817,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.005923877107321784
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.997394185428961
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -1.1738498786435498e-07,
+                    -4.827716821893536e-09
+                  ],
+                  [
+                    -1.5272430532380397e-07,
+                    5.010147061916011e-10
+                  ],
+                  [
+                    3.7045922103374355e-07,
+                    2.747540995456484e-09
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6537626472371793,
+                "sample_end": 25500,
+                "sample_start": 13250,
+                "segment": 2,
+                "transition": [
+                  [
+                    0.01885891128526236,
+                    0.9551195880864898
+                  ],
+                  [
+                    0.013252149126924852,
+                    0.9844591512510203
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.02901348524451843,
+                "design_condition": 2.445064722546398,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.005439777040828653
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.9971028563196226
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    -5.687827609543062e-07,
+                    1.8163237721578833e-08
+                  ],
+                  [
+                    4.7328354694169186e-07,
+                    1.4731092605972205e-08
+                  ],
+                  [
+                    -7.360161253962549e-07,
+                    -1.5423669170746685e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6778891179848954,
+                "sample_end": 37750,
+                "sample_start": 25500,
+                "segment": 3,
+                "transition": [
+                  [
+                    0.0179410436354404,
+                    0.9450178045781837
+                  ],
+                  [
+                    0.012952944167112313,
+                    0.9846015897250108
+                  ]
+                ]
+              },
+              {
+                "damping_per_memory_time": 0.028361804332961482,
+                "design_condition": 2.462740207022847,
+                "eigenvalues": [
+                  {
+                    "imag": 0.0,
+                    "real": 0.009630233948308198
+                  },
+                  {
+                    "imag": 0.0,
+                    "real": 0.997167837726789
+                  }
+                ],
+                "frequency_per_memory_time": 0.0,
+                "intercept": [
+                  [
+                    4.4776429640448476e-07,
+                    -6.258888651325344e-09
+                  ],
+                  [
+                    8.744962172680855e-07,
+                    3.6796881920008462e-09
+                  ],
+                  [
+                    -1.0069607503834853e-06,
+                    2.4676606223131775e-08
+                  ]
+                ],
+                "is_complex": false,
+                "is_stable": true,
+                "meaningful_complex": false,
+                "phase_coherence": 0.0,
+                "residual_ratio": 0.6738701066546163,
+                "sample_end": 50000,
+                "sample_start": 37750,
+                "segment": 4,
+                "transition": [
+                  [
+                    0.022485016633977572,
+                    0.9482412558568372
+                  ],
+                  [
+                    0.013213236373354953,
+                    0.9843130550411195
+                  ]
+                ]
+              }
+            ],
+            "mode_summary": {
+              "damping_relative_range": Infinity,
+              "frequency_relative_range": Infinity,
+              "meaningful_complex_segments": 0,
+              "median_damping_per_memory_time": 0.0,
+              "median_frequency_per_memory_time": 0.0,
+              "median_phase_coherence": 0.0,
+              "segment_identity_pass": false
+            },
+            "node_shape_metrics": [
+              {
+                "max_radius_factor": 1.026567721226641,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0023920209775442625,
+                "shape_spectrum_distance_q95": 0.007187885531173499,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              },
+              {
+                "max_radius_factor": 1.0200960298268682,
+                "radius_factor_limit": 1.1,
+                "shape_bounded_coherent_pass": true,
+                "shape_bounded_pass": true,
+                "shape_coherent_pass": true,
+                "shape_spectrum_distance_median": 0.0024362897642939696,
+                "shape_spectrum_distance_q95": 0.0073235087879680305,
+                "spectrum_median_limit": 0.05,
+                "spectrum_q95_limit": 0.1
+              }
+            ],
+            "response_rms_r": 6.550777520260427,
+            "shape_bounded_coherent_pass": true
+          }
+        },
+        "future_seed": 2
+      }
+    ],
+    "runtime_seconds": 404.2117023000028,
+    "schema": "emergenz-knoten.retarded-reciprocal-full-knot-gate",
+    "schema_version": 1,
+    "thresholds": {
+      "fit_condition_max": 100000000.0,
+      "fit_residual_ratio_max": 0.8,
+      "frequency_min_per_memory_time": 0.05,
+      "mediator_rms_min": 1e-06,
+      "min_complex_segments": 3,
+      "mode_relative_range_max": 0.25,
+      "phase_coherence_min": 0.5,
+      "radius_factor_limit": 1.1,
+      "response_min_r": 0.001,
+      "shape_spectrum_median_limit": 0.05,
+      "shape_spectrum_q95_limit": 0.1
+    }
+  },
+  "created_utc": "2026-08-06T20:53:28+00:00",
+  "gate": {
+    "accumulation_candidate": false,
+    "classification": "no control-separated P3.2 accumulation through 500k",
+    "mode_candidate": false,
+    "one_way_late_minus_early_r": [
+      19.030578026737437,
+      10.307497806168222
+    ],
+    "one_way_max_r": 0.05,
+    "reciprocal_change_signs_agree": true,
+    "reciprocal_late_minus_early_r": [
+      19.144977869406894,
+      10.511831430564056
+    ],
+    "reciprocal_threshold_r": 0.1,
+    "shape_seed_count": 2
+  },
+  "git_revision": "72ae14528e7a807e9484093c1503e2ec9f3f72a9",
+  "git_status": "",
+  "preregistration": "reports/project/meta/preregistration/p32_accumulation_control_preregistration_2026-08-06.md",
+  "schema": "emergenz-knoten.p32-accumulation-control",
+  "schema_version": 1
+}
