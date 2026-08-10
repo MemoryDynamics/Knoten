@@ -544,6 +544,17 @@ Prioritaetsfolge:
     Vektorast geschlossen; ein quadratisches Feldgesetz bleibt dann eine
     explizite konstitutive Annahme.
 
+    **Vorregistriert am 2026-08-10:** Der Test verwendet die sechs reifen
+    `d=3`-Zustaende, zwei Segmente, Horizonte 5/10 Memory-Zeiten und Cadences
+    1/5/10. Feste Gates sind Rang hoechstens 8, Hankel-Gap mindestens 3,
+    Energieanteil mindestens 90%, Principal-Cosinus mindestens 0.90 und
+    Far-Probe-Holdoutfehler hoechstens 15%. Flat-Readout und altersvertauschte
+    Raumfaktoren trennen generische Delay-Kompression von knotenspezifischer
+    Raum-Alters-Struktur. Ein Pass autorisiert nur einen reduzierten
+    Carrier-plus-Feld-Metriktest; eine Parametersuche nach maximaler
+    Schwingung bleibt bis zu dessen unabhaengiger Zeitbereichsvalidierung
+    gesperrt.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
