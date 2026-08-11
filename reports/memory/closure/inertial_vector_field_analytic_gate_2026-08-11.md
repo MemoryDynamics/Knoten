@@ -6,6 +6,10 @@ Date: 2026-08-11.
 
 The existing reactive pair placeholder is now reconciled with the spatial vector-field energy through a conjugate momentum field.
 
+**Model boundary:** this gate does not modify or simulate the canonical
+\(z_n=(x_n,\rho_n)\) knot process. The independent field state \((m,\pi)\) and
+all inertial/energy coefficients are newly supplied constitutive assumptions.
+
 ![Inertial vector-field audit](../../../figures/draft/memory/inertial_vector_field_analytic_gate_2026-08-11.png)
 
 ## Linear result
@@ -38,7 +42,7 @@ A damped oscillation is asymptotically stable exactly when \(D_q(k)>0\), \(\gamm
 
 ## Interpretation boundary
 
-The pass is structural and partly constructive: adding a conjugate momentum was designed to permit oscillation. It establishes mathematical consistency, not emergence or empirical support.
+The pass is structural and partly constructive: adding a conjugate momentum was designed to permit oscillation. It establishes mathematical consistency, not emergence or empirical support. The resulting equation is a classical damped field oscillator, not quantum mechanics.
 
 Positive field curvature and damping provide stability; the reversible exchange provides phase. Long-lived oscillation additionally requires small damping ratio. None of these coefficients is selected by the current passive memory.
 
@@ -46,7 +50,11 @@ The operator is O(d)-covariant and acts identically on ambient components. It do
 
 ## Next gate
 
-Specify one trajectory source J[x], derive the reciprocal trajectory force from the same coupling energy, and preregister discrete energy accounting plus source-off, reversible-off and first-order controls. Only then is one model-conditional knot pilot admissible.
+Do not fit oscillator parameters or start a coupled pilot. First specify a
+projection \(Y=\Psi(x,\rho)\) from the canonical state and test whether a
+second-order held-out closure beats a first-order control with stable poles
+across seeds, segments and coarse-graining. Only such an identifiability pass
+may reopen the common source/readout-energy derivation.
 
 ## Reproducibility
 

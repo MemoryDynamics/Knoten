@@ -1,10 +1,69 @@
 # Theoretical Context
 
-Stand: 2026-08-04.
+Stand: 2026-08-11.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
 Markov-Anforderungen.
+
+## Modellhierarchie und harte Begriffsgrenze
+
+Das Repository enthaelt inzwischen mehrere mathematische Modelle. Sie sind
+nicht austauschbar. Insbesondere ist der inertiale Vektorfeld-Audit keine
+weitere Schreibweise des Knotenkerns, sondern eine bislang ungekoppelte
+konstitutive Erweiterung.
+
+| Ebene | Zustand | Dynamik | wissenschaftlicher Status |
+| --- | --- | --- | --- |
+| K0: kanonischer Knotenkern | $z_n=(x_n,\rho_n)$ | stochastischer sichtbarer Update plus exponentielle Deposition | implementiertes Basismodell; Paper 0/I |
+| K0-H: endliche numerische Darstellung | $z_n^{(H)}=(x_n,h_n^-)$ mit gespeicherten Punkten und Gewichten | truncierte Auswertung desselben $\rho_n$ | Rechenbackend, keine neue Physik |
+| K1: passives orientiertes Memory | $(x_n,\rho_n,p_n,v_n)$ | Richtungstraeger und gerichtete Deposits; $x_n$ liest weiterhin nur $\rho_n$ | implementierter Diagnose-/One-Way-Pilot, kein Source-Selbstfeld |
+| K2: inertiales aktives Vektorfeld | $(m(x,t),\pi(x,t))$ | Hamilton-artiger Austausch plus Daempfung | isolierter analytischer Vorschlag; nicht im Knotensimulator |
+| K3: moegliche Kopplung | $(x,\rho,m,\pi)$ | noch nicht festgelegt | gesperrt, bis Herleitung oder Identifizierbarkeit besteht |
+
+Ab hier bezeichnet $v_n$ ausschliesslich das passive gerichtete Memory und
+$m(x,t)$ ausschliesslich den aktiven K2-Feldvorschlag. Aeltere Vektormemory-
+Notizen verwendeten fuer beide den Buchstaben $m$; diese Notation ist
+superseded. In der Implementierung heissen die K1-Groessen
+`carrier_orientation` und `orientations`. Das K2-Feld erscheint nur in
+`covariant_vector_field.py`; es ist kein Feld des `FiniteMemoryState` und
+keine Variable von `SimulationConfig`.
+
+### Variablenvertrag
+
+| Symbol | Typ | Bedeutung | Status im Produktionspfad |
+| --- | --- | --- | --- |
+| $n$ | $\mathbb N_0$ | diskreter Updateindex, keine vorausgesetzte physikalische Zeit | kanonisch |
+| $x_n\in\mathbb R^d$ | Vektor | sichtbare Position/Zustandsrepraesentant | kanonisch |
+| $\xi_n$ | Zufallsvektor | unabhaengiges zentriertes Einheitsrauschen | kanonisch |
+| $\varepsilon$ | Skalar | Rauschamplitude pro Update | kanonischer Input |
+| $\rho_n(x)\geq0$ | skalares Feld/Measure | exponentiell gewichtete Occupancy-Historie | kanonisch |
+| $\lambda_m$ | Skalar | vergessener Anteil pro Update | kanonischer Input; Codealias `alpha` |
+| $\beta$ | Skalar | neu deponierte Masse pro Update | abgeleitet als $\lambda_mM_0$ im Paket |
+| $M_0$ | Skalar | stationaere skalare Memory-Masse bei normiertem $G$ | kanonischer Input `memory_mass` |
+| $G_\sigma$ | Kernel | nichtnegative lokale Deposition in $\rho$ | kanonischer Input |
+| $K$ | Kernel | Readkernel des selbstinduzierten Potentials | kanonischer Input |
+| $\Phi_n=K*\rho_n$ | skalares Feld | von $\rho_n$ gelesene potentielle Wirkung | abgeleitet |
+| $\eta$ | Skalar | Gain der Kraft $-\nabla\Phi_n$ | kanonischer Input |
+| $h_n^-$ | endliche Punktliste | truncierte Realisierung von $\rho_n$ ohne redundantes $x_n$ | Backend |
+| $p_n$ | Vektor | tiefpassgefilterte Schrittrichtung | optionaler passiver Pilot |
+| $v_n(x)$ | Vektorfeld | gerichtete K1-Deposits | optionaler passiver Pilot |
+| $m(x,t)$ | Vektorfeld | aktiver, selbstdynamischer Feldvorschlag | nur K2-Postulat |
+| $\pi(x,t)$ | Vektorfeld | unabhaengiger konjugierter Impuls zu $m$ | nur K2-Postulat |
+| $I,\gamma,a,b_L,b_T,c,u$ | Skalare | Traegheit, Daempfung und aktive Feldenergiekoeffizienten | nur K2-Inputs; nicht aus K0 bestimmt |
+
+Ein positiver K2-Strukturtest zeigt nur, dass die neu angesetzte Gleichung
+einen klassischen gedaempften Oszillator enthalten kann. Er zeigt weder, dass
+$(m,\pi)$ aus $(x,\rho)$ emergiert, noch Quantenmechanik: Es gibt hier keinen
+Hilbertraum, keine Born-Regel, keine Kommutatoren, kein $\hbar$ und keine
+hergeleitete Quantisierung.
+
+Auch ein spaeter beobachtetes Polpaar $\mu_\pm=r e^{\pm i\theta}$ wuerde bei
+Kadenz $\Delta n$ zuerst nur
+$\Gamma=-\log(r)/\Delta n$, $\omega=\theta/\Delta n$ und damit
+$\gamma/I=2\Gamma$, $D/I=\Gamma^2+\omega^2$ bestimmen. Die absolute Skala von
+$I$, $\gamma$ und $D$ ist ohne unabhaengig normierte Response oder Energie
+nicht identifizierbar.
 
 ## Minimaler Modellkern
 
@@ -408,8 +467,9 @@ non-identifiable from a one-kernel trajectory alone. In memory-time units the
 corresponding drift and diffusion controls are g/lambda and
 delta^2/(2 lambda).
 
-In the Taylor regime the normalized memory center m_n gives the relative
-coordinate r_n=x_n-m_n. The ideal untruncated scalar reduction is
+In the Taylor regime the normalized scalar-memory center $\bar x_n^\rho$ gives
+the relative coordinate $r_n=x_n-\bar x_n^\rho$. The ideal untruncated scalar
+reduction is
 
     r_(n+1) = q(1-g) r_n + q epsilon xi_n,
 
@@ -692,7 +752,7 @@ A_- = [[1-g-c,           g-c],
 
 A real 2 x 2 matrix with a non-real conjugate eigenpair is real-similar to
 `a E+b J`, `J=[[0,-1],[1,0]]`; `A_-` need not literally have this entry form
-in the physical `(x_-,m_-)` coordinates. Its trace and determinant are
+in the physical `(x_-,xbar_-^rho)` coordinates. Its trace and determinant are
 
 ```text
 T = 2-lambda-q g-(1+lambda)c,
@@ -716,11 +776,11 @@ fixed, statically unit-normalized Telegraph field/momentum filter. The
 mediator, response, and shape gates pass 5/5, but all 80 raw segment fits are
 again real. Retarded reciprocal separation `0.58..1.21 R` is larger than the
 direct result, supporting delayed or weakened binding rather than an
-observable `(x_-,m_-)` rotation. This remains one formation basin.
+observable `(x_-,xbar_-^rho)` rotation. This remains one formation basin.
 
 The filter input in P3.2 is still a target-specific instantaneous cross-gradient;
 only the transport update is local. P3.2c therefore replaces it by emitter-only
-signals. For `s=d=x-m`, the exact finite-grid channel is stable and contains a
+signals. For `s=d=x-xbar_rho`, the exact finite-grid channel is stable and contains a
 complex pole near `omega=0.08294` per memory time, but its normalized
 knot-to-knot residue is only `3.54e-5` and its relative generator shift from the
 nearest one-way pole only `0.00622`. Three structure-preserving modal

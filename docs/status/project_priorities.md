@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-07.
+Stand: 2026-08-11.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -585,15 +585,27 @@ Prioritaetsfolge:
     Moeglichkeit, keine emergente oder beobachtete Knotenschwingung. Der
     Operator bleibt O(d)-kovariant und selektiert kein `d=3`.
 
-20. **P3.7 als naechstes: gemeinsame Source-/Readout-Energie vor einem
-    Feldpiloten.** Genau eine Kopplungsenergie
-    `H_int[x,m] = - integral J[x] dot m dx` ist festzulegen. Aus ihr muessen
-    sowohl die Feldquelle `+J[x]` als auch die reziproke Trajektorienkraft
-    `-partial_x H_int` folgen; getrennt gewaehlte Deposit-/Readout-Gains sind
-    nicht zulaessig. Vorregistriert werden diskrete Energiebilanz,
-    Source-off-, Reversible-off- und First-order-Kontrollen sowie ein
-    unabhaengiger Zeitbereichs-Holdout. Erst danach ist genau ein
-    dimensionsloser, modellkonditionaler Knotensimulationspilot zulaessig.
+20. **P3.7 als naechstes: Identifizierbarkeits-/No-go-Gate vor jeder
+    Parameterermittlung.** Der P3.6-Oszillator erweitert den Zustand um ein
+    unabhaengiges konjugiertes Feld; er ist nicht aus `z=(x,rho)` abgeleitet
+    und nicht in den Knotensimulator eingebaut. Deshalb wird zuerst eine feste
+    Projektion `Y=Psi(x,rho)` ausschliesslich aus kanonischen Variablen
+    vorregistriert. Eine zweite Ordnung darf nur weiterverfolgt werden, wenn
+    sie auf Holdout-Daten eine erste-Ordnung-Kontrolle uebertrifft, ihre Pole
+    ueber Seeds, Segmente, Cadences und Grobkoernung identisch bleiben und eine
+    unabhaengige Response vorhersagen. Die bisherigen passiven Closure-Befunde
+    liefern noch keinen solchen konjugierten Zustand. Ein Fit auf maximale
+    Schwingung, ein Gain-Sweep und ein gekoppelter Feldpilot bleiben gesperrt.
+    Selbst bei einem Pass identifiziert ein komplexes Polpaar zunaechst nur
+    `gamma/I=2 Gamma` und `D/I=Gamma^2+omega^2`; die absolute Skala benoetigt
+    eine unabhaengig normierte Response oder Energie.
+
+21. **P3.8 nur nach P3.7-Pass: gemeinsame Source-/Readout-Energie.** Genau eine
+    Kopplungsenergie `H_int[x,m] = - integral J[x] dot m dx` muss dann sowohl
+    Feldquelle als auch reziproke Trajektorienkraft liefern. Getrennt
+    eingestellte Deposit-/Readout-Gains sind nicht zulaessig. Diskrete
+    Energiebilanz, Source-off-, Reversible-off- und First-order-Kontrollen
+    werden vor einem einzigen modellkonditionalen Pilot vorregistriert.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

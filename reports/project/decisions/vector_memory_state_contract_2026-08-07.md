@@ -2,6 +2,10 @@
 
 Date: 2026-08-07.
 
+Notation amended 2026-08-11: the passive oriented field is denoted by $v_n$.
+The earlier symbol $m_n$ is superseded and is reserved for a distinct active
+field proposal.
+
 ## Decision
 
 The active vector extension is the persistent-carrier model. The older
@@ -48,7 +52,7 @@ u_{n+1}
 \end{cases}
 \]
 
-The persistent carrier and oriented memory field are
+The persistent carrier and passive oriented memory field are
 
 \[
 p_{n+1}
@@ -57,9 +61,9 @@ p_{n+1}
 \]
 
 \[
-m_{n+1}(y)
+v_{n+1}(y)
 =
-(1-\lambda_v)m_n(y)
+(1-\lambda_v)v_n(y)
 +
 \beta_v p_{n+1}G_v(y-x_{n+1}).
 \]
@@ -96,7 +100,7 @@ A general local vector readout may be written
 \[
 B_n(x)
 =
-\int L_v(x-y)m_n(y)\,dy.
+\int L_v(x-y)v_n(y)\,dy.
 \]
 
 The existing one-way tests use a Gaussian \(L_v\) and
@@ -118,7 +122,7 @@ x_{n+1}
 x_n+\varepsilon\xi_n-\eta_s\nabla\Phi[\rho_n](x_n).
 \]
 
-Thus \(m_n\) does not yet exert a source self-force. Reciprocal coupling, local
+Thus \(v_n\) does not yet exert a source self-force. Reciprocal coupling, local
 propagation and a dynamical vector-field equation are separate future model
 increments.
 
@@ -127,7 +131,7 @@ increments.
 For the field formulation the augmented state is
 
 \[
-z_n=(x_n,\rho_n,p_n,m_n).
+z_n=(x_n,\rho_n,p_n,v_n).
 \]
 
 For the implemented finite representation it is equivalently
@@ -151,9 +155,9 @@ The implemented passive state has:
 
 - translation equivariance;
 - \(O(d)\) covariance:
-  \(x\mapsto Ox+a\), \(p\mapsto Op\), \(m\mapsto Om\);
+  \(x\mapsto Ox+a\), \(p\mapsto Op\), \(v\mapsto Ov\);
 - a global vector-sign transformation:
-  \(p,m\mapsto-p,-m\), which reverses a linear vector readout;
+  \(p,v\mapsto-p,-v\), which reverses a linear vector readout;
 - exact scalar recovery for \(\eta_v=0\) or \(M_v=0\);
 - a one-step comparison model at \(\lambda_v=\kappa=1\);
 - a deposit-sign null that destroys coherent ordering while preserving

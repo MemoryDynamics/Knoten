@@ -122,8 +122,14 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     bestehen bis maximal `1.18e-13`.
   - Stabile gedaempfte Schwingungen sind mathematisch moeglich, aber durch die
     neue Impulsvariable konstruiert. Keine Parameteridentifikation, keine
-    beobachtete Knotenschwingung und keine `d=3`-Selektion. Naechstes Gate ist
-    eine gemeinsame Source-/Readout-Kopplungsenergie.
+    beobachtete Knotenschwingung und keine `d=3`-Selektion.
+- [Modellhierarchie und Parameteridentifizierbarkeit](project/decisions/model_hierarchy_and_parameter_identifiability_2026-08-11.md)
+  - **structural decision:** Der Inertial-Audit aendert den kanonischen
+    `(x,rho)`-Simulator nicht. Die neuen Koeffizienten sind aus passiven
+    Long Runs nicht als mikroskopische Konstanten identifizierbar.
+  - Naechstes Gate ist erster- gegen zweiter-Ordnung-Holdout-Closure aus einer
+    vorab fixierten Projektion kanonischer Variablen; Feldpilot und
+    Schwingungsoptimierung bleiben gesperrt.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

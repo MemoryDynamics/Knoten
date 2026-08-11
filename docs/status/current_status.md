@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-08.
+Stand: 2026-08-11.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -390,9 +390,16 @@ eine konstruktive Moeglichkeitsaussage, keine beobachtete Knotenschwingung.
 Stabilitaet stammt aus `D_q(k)>0` und `gamma>0`, Phase aus dem reversiblen
 Austausch; langlebige Oszillation benoetigt zusaetzlich kleine dimensionslose
 Daempfung. Die Koeffizienten bleiben Inputs und `d=3` wird nicht selektiert.
-Vor einem Feldpiloten muss P3.7 Feldquelle und Trajektorienreadout aus genau
-einer gemeinsamen Kopplungsenergie ableiten und deren diskrete Energiebilanz
-mit Nullkontrollen vorregistrieren.
+Der Abgleich mit dem kanonischen Paketkern zeigt eine haertere Grenze: Weder
+`m`, `pi` noch `I`, `gamma` oder die Feldenergiekoeffizienten sind Variablen
+von `z=(x,rho)` oder `SimulationConfig`. Der Oszillator ist damit ein
+klassischer konstruktiver Vergleichsmechanismus, keine aus den Knotengleichungen
+beobachtete Emergenz und keine Quantenmechanik. P3.7 ist deshalb nun ein
+Identifizierbarkeits-/No-go-Gate: Eine vorab fixierte Projektion aus `(x,rho)`
+muss auf Holdout-Daten einen seed-, segment- und grobkoernungsstabilen
+zweiter-Ordnungsschluss gegen eine erster-Ordnung-Kontrolle rechtfertigen und
+eine unabhaengige Response vorhersagen. Erst ein Pass oeffnet wieder die
+gemeinsame Source-/Readout-Energie und einen Feldpiloten.
 
 ## Paper-Status
 

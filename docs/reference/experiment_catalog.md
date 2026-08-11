@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-08.
+Stand: 2026-08-11.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -77,6 +77,8 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/closure/low_mode_identity_audit.py` | Feature-Eigenvektor- und Zeitsegmentaudit | aktiv | physische Subraumueberlappung, Match-Anteil und Raten-/Frequenzstabilitaet ueber Seeds und Segmente |
 | `experiments/current/memory/closure/eta_zero_raw_mode_null_audit.py` | exakte rohe `eta=0`-Modenreferenz | abgeschlossen, negativ | N=1M-Kadenz; reeller Fourier-Zustandsblock, Rohfit-/Segmentleckage gegen archivierte ausgerichtete AR-Paare |
 | `experiments/current/memory/representations/carrier_memory_metric_comparison.py` | Kovarianz-/Predictive-/RKHS-Metrik auf `h=p` | abgeschlossen, negativ | 0/6 zyklische Paare; lineare Tangente und Cadence stabil, aber absolute Metrikskala und Klassifikation nicht reconciliiert; oeffnet nur balancierte Vollmemory-Feature-Closure |
+| `experiments/current/memory/closure/balanced_full_memory_feature_gate.py` | balancierte Vollmemory-Closure | abgeschlossen, negativ | generischer Rang-1-Delaymodus; Flat-/Age-Shuffle-identisch und schlechter Fern-Holdout; kein knotenspezifischer konjugierter Zustand |
+| `experiments/current/memory/closure/inertial_vector_field_analytic_gate.py` | inertialer Vektorfeld-Strukturtest | abgeschlossen, konstruktiver Strukturpass | exakter klassischer Oszillator nach Einfuehrung von `(m,pi)`; keine Kopplung an den kanonischen Simulator und keine Parameteridentifikation |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
 

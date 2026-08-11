@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-08.
+Stand: 2026-08-11.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -93,7 +93,11 @@ flowchart TD
     src --> diffusion_rho["relaxation_diffusion_memory.py<br/>heat-semigroup field update"]
     src --> spectral_trace["spectral_memory_trace.py<br/>aligned and raw eta-zero Numba traces"]
     src --> memory_metrics["memory_metrics.py<br/>covariance, predictive and RKHS metrics"]
+    src --> covariant_field["covariant_vector_field.py<br/>isolierter analytischer K2-Vorschlag; nicht im Knotensimulator"]
     spectral_trace --> raw_null_exp
+
+    core --> state
+    covariant_field --> analytic_boundary["K2 nur analytisch<br/>keine Laufzeitkopplung an (x,rho)"]
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]

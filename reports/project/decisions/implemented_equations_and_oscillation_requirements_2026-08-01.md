@@ -1,6 +1,6 @@
 # Implemented equations and oscillator requirements
 
-Status: 2026-08-04. This is a code-level equation ledger and scientific
+Status: 2026-08-11. This is a code-level equation ledger and scientific
 decision note. Display equations use GitHub-rendered LaTeX.
 
 ## Executive decision
@@ -301,11 +301,11 @@ the second-order transport law was supplied as a model input.
 For local restoring gain $g=\eta\kappa$, the minimal scalar center reduction is
 
 $$
-x_{n+1}=(1-g)x_n+gm_n, \tag{27}
+x_{n+1}=(1-g)x_n+g\bar x_n^\rho, \tag{27}
 $$
 
 $$
-m_{n+1}=\lambda x_{n+1}+qm_n. \tag{28}
+\bar x_{n+1}^\rho=\lambda x_{n+1}+q\bar x_n^\rho. \tag{28}
 $$
 
 Its multipliers are
@@ -352,20 +352,20 @@ raw-mode, segment-identity, or $\eta=0$ controls.
 Let two nodes read both their own and the other node's lagging memory center:
 
 $$
-x'_i=x_i-g(x_i-m_i)-c(x_i-m_j),
+x'_i=x_i-g(x_i-\bar x_i^\rho)-c(x_i-\bar x_j^\rho),
 \qquad i\neq j, \tag{33}
 $$
 
 $$
-m'_i=qm_i+\lambda x'_i. \tag{34}
+{\bar x_i^\rho}'=q\bar x_i^\rho+\lambda x'_i. \tag{34}
 $$
 
 Here $g=\eta\kappa_{\rm self}$ and
 $c=\eta_\times\kappa_\times$ are dimensionless gains per update. This is a
 synchronous local reduction, not yet the full nonlinear reciprocal simulator.
 
-For common variables $x_+=(x_1+x_2)/2$ and $m_+=(m_1+m_2)/2$, the multipliers
-remain real:
+For common variables $x_+=(x_1+x_2)/2$ and
+$\bar x_+^\rho=(\bar x_1^\rho+\bar x_2^\rho)/2$, the multipliers remain real:
 
 $$
 \mu_+^{(1)}=1,
@@ -373,8 +373,8 @@ $$
 \mu_+^{(2)}=q(1-g-c). \tag{35}
 $$
 
-For relative variables $x_-=(x_1-x_2)/2$ and $m_-=(m_1-m_2)/2$, the update
-matrix is
+For relative variables $x_-=(x_1-x_2)/2$ and
+$\bar x_-^\rho=(\bar x_1^\rho-\bar x_2^\rho)/2$, the update matrix is
 
 $$
 A_-=
@@ -491,7 +491,7 @@ A future cross-ambient-dimension test must demonstrate:
    parameter slice;
 5. loss of rank three when the phase-producing mechanism is disabled.
 
-## 10. Parameter self-selection and next test
+## 10. Parameter self-selection
 
 The current parameter tuple
 
@@ -507,15 +507,51 @@ resource, a constrained variational principle, population selection, or a
 coarse-graining flow. Such a mechanism must be specified before looking for a
 preferred value.
 
-The next simulation should use mature stored knot states and four paired arms:
+## 11. Inertial active-field proposal: explicit model boundary
 
-1. channel off;
-2. existing one-way cross-readout;
-3. instantaneous reciprocal cross-readout;
-4. reciprocal readout through one fixed local mediator.
+The later P3.6 analytic gate introduced a separate active vector field and its
+conjugate momentum,
 
-The instantaneous reciprocal arm is the linear null predicted by
-Equations (33)-(43). Primary observables are the relative center coordinate,
-complex state-space multipliers, damping and frequency, phase continuity,
-shape bounds, and separation from common-noise controls. Only a
-control-separated, cadence-stable mode justifies a longer nonlinear run.
+$$
+\partial_t m=\frac{\pi}{I},
+\qquad
+\partial_t\pi
+=-\frac{\delta\mathcal F}{\delta m}
+-\frac{\gamma}{I}\pi+J. \tag{48}
+$$
+
+Its channel poles solve
+
+$$
+Is^2+\gamma s+D_q(k)=0. \tag{49}
+$$
+
+This equation is not an alternative notation for Equations (1)-(5). The
+variables $m$ and $\pi$, the source $J$, and the coefficients
+$I,\gamma,a,b_L,b_T,c,u$ are absent from `SimulationConfig`,
+`FiniteMemoryState`, and the canonical trajectory update. The code in
+`covariant_vector_field.py` is an isolated analytic proposal and does not
+advance a knot state.
+
+The resulting harmonic mode is therefore constructed by the independent
+conjugate state. It is a classical damped-field oscillator, not evidence of
+emergence or quantum mechanics.
+
+## 12. Current next gate
+
+No oscillator-parameter sweep or coupled field simulation is currently
+admissible. First fix a projection $Y_n=\Psi(x_n,\rho_n)$ from canonical
+variables without using the desired spectral result. A second-order closure
+
+$$
+Y_{n+1}=A_1Y_n+A_2Y_{n-1}+e_{n+1} \tag{50}
+$$
+
+must beat a first-order control on held-out futures, retain pole identity over
+seeds, time segments, cadences and coarse-graining, and predict an independent
+response. The passive Fourier, metric-reconciliation and balanced-full-memory
+results have not yet supplied such an independent conjugate state.
+
+Only a pass can justify estimating effective $I$, $\gamma$ and $D_q(k)$.
+Otherwise Equation (48) remains a declared Paper-III comparison model or its
+extra state and constants must be accepted explicitly as new primitives.

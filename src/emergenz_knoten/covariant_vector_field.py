@@ -1,4 +1,9 @@
-"""O(d)-covariant local vector-field feedback and its linear limits."""
+"""Analytic O(d)-covariant active-field proposals and their linear limits.
+
+This module is not part of the canonical ``(x, rho)`` simulation update. In
+particular, its inertial ``(m, pi)`` state and constitutive coefficients are
+proposed model increments, not variables inferred from ``FiniteMemoryState``.
+"""
 
 from __future__ import annotations
 
@@ -77,8 +82,10 @@ class InertialVectorFieldDynamics:
     ``m_dot = pi / I`` and
     ``pi_dot = -delta F / delta m - (gamma / I) pi``.
 
-    ``I`` and ``gamma`` are new constitutive coefficients. The mobility of
-    the embedded gradient-flow model is deliberately not used.
+    ``m``, ``pi``, ``I`` and ``gamma`` are absent from the canonical scalar
+    knot update. They define an isolated analytic extension; this class is not
+    wired into ``SimulationConfig`` or the finite-memory simulator. The
+    mobility of the embedded gradient-flow model is deliberately not used.
     """
 
     energy: LocalVectorFieldExpansion
