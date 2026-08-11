@@ -1,0 +1,118 @@
+{
+  "schema": "emergenz-knoten.inertial-vector-field-analytic-gate.v1",
+  "generated_utc": "2026-08-11T04:38:21.907750+00:00",
+  "git_revision": "8de8dfe69e76877351464d9afd3be73e407aa558",
+  "result": {
+    "tolerance": 1e-12,
+    "maxima": {
+      "root_error": 8.934752161915345e-16,
+      "covariance_error": 1.1798214650884148e-13,
+      "reversible_energy_error": 0.0,
+      "dissipative_energy_rate_error": 2.2842838731662596e-14
+    },
+    "negative_control": {
+      "classification": "restoring_instability",
+      "eigenvalues": [
+        {
+          "real": 0.09544511501033215,
+          "imag": 0.0
+        },
+        {
+          "real": -2.095445115010332,
+          "imag": 0.0
+        }
+      ]
+    },
+    "witnesses": [
+      {
+        "damping_ratio": 0.0,
+        "classification": "conservative_oscillation",
+        "eigenvalues": [
+          {
+            "real": 0.0,
+            "imag": 1.0
+          },
+          {
+            "real": -0.0,
+            "imag": -1.0
+          }
+        ],
+        "angular_frequency": 1.0,
+        "decay_rate": 0.0,
+        "quality_factor": "Infinity",
+        "cycles_per_e_folding": "Infinity"
+      },
+      {
+        "damping_ratio": 0.05,
+        "classification": "damped_oscillation",
+        "eigenvalues": [
+          {
+            "real": -0.05,
+            "imag": 0.998749217771909
+          },
+          {
+            "real": -0.05,
+            "imag": -0.998749217771909
+          }
+        ],
+        "angular_frequency": 0.998749217771909,
+        "decay_rate": 0.05,
+        "quality_factor": 10.0,
+        "cycles_per_e_folding": 3.179117498351263
+      },
+      {
+        "damping_ratio": 1.0,
+        "classification": "critical_damping",
+        "eigenvalues": [
+          {
+            "real": -1.0,
+            "imag": 0.0
+          },
+          {
+            "real": -1.0,
+            "imag": 0.0
+          }
+        ],
+        "angular_frequency": 0.0,
+        "decay_rate": 1.0,
+        "quality_factor": 0.5,
+        "cycles_per_e_folding": 0.0
+      },
+      {
+        "damping_ratio": 1.5,
+        "classification": "overdamped_relaxation",
+        "eigenvalues": [
+          {
+            "real": -0.3819660112501051,
+            "imag": 0.0
+          },
+          {
+            "real": -2.618033988749895,
+            "imag": 0.0
+          }
+        ],
+        "angular_frequency": 0.0,
+        "decay_rate": 1.5,
+        "quality_factor": 0.3333333333333333,
+        "cycles_per_e_folding": 0.0
+      }
+    ],
+    "dimensionless_groups": {
+      "length_scale": 0.7400828044922853,
+      "amplitude_scale": 1.0,
+      "inertial_time": 1.3038404810405297,
+      "damping_ratio": 0.1533929977694741,
+      "longitudinal_gradient_ratio": 0.7302967433402215,
+      "transverse_gradient_ratio": 2.0083160441856096
+    },
+    "gates": {
+      "root_error": true,
+      "covariance_error": true,
+      "reversible_energy_error": true,
+      "dissipative_energy_rate_error": true,
+      "negative_curvature_control": true,
+      "classification_boundaries": true
+    },
+    "decision": "structural-pass"
+  }
+}
