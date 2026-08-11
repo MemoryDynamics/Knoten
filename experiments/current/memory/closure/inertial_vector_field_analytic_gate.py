@@ -15,6 +15,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+from matplotlib.patches import Patch
 import numpy as np
 from scipy.linalg import expm
 
@@ -246,7 +247,12 @@ def run_audit() -> dict[str, Any]:
 def _jsonable(value: Any) -> Any:
     if isinstance(value, complex):
         return {"real": value.real, "imag": value.imag}
-    if isinstance(value, (np.integer, np.floating)):
+    if isinstance(value, (float, np.floating)):
+        number = float(value)
+        if not np.isfinite(number):
+            return "Infinity" if number > 0.0 else "-Infinity"
+        return number
+    if isinstance(value, np.integer):
         return value.item()
     if isinstance(value, np.ndarray):
         return value.tolist()
@@ -268,10 +274,9 @@ def write_figure(path: Path) -> None:
     regime = np.zeros_like(d_grid, dtype=int)
     regime[d_grid > 0.0] = 1
     regime[(d_grid > 0.0) & (d_grid > np.square(z_grid))] = 2
-    regime[(d_grid > 0.0) & np.isclose(d_grid, np.square(z_grid), atol=0.01)] = 3
 
     figure, axes = plt.subplots(1, 3, figsize=(14.0, 4.2))
-    cmap = ListedColormap(["#b24a4a", "#55707f", "#2f8f83", "#c69b35"])
+    cmap = ListedColormap(["#b24a4a", "#55707f", "#2f8f83"])
     axes[0].pcolormesh(denominator, damping_ratio, regime, cmap=cmap, shading="auto")
     axes[0].plot(
         denominator[denominator >= 0],
@@ -285,6 +290,16 @@ def write_figure(path: Path) -> None:
         xlabel="dimensionless D",
         ylabel="damping ratio zeta",
     )
+    axes[0].legend(
+        handles=[
+            Patch(color="#b24a4a", label="unstable D < 0"),
+            Patch(color="#2f8f83", label="damped oscillation"),
+            Patch(color="#55707f", label="overdamped"),
+            plt.Line2D([], [], color="black", label="critical damping"),
+        ],
+        fontsize=7,
+        loc="upper left",
+    )
 
     time = np.linspace(0.0, 20.0, 1000)
     for zeta in (0.0, 0.05, 1.0, 1.5):
@@ -296,7 +311,7 @@ def write_figure(path: Path) -> None:
         trace = np.asarray([(expm(operator * value) @ [1.0, 0.0])[0] for value in time])
         axes[1].plot(time, trace, label=f"zeta={zeta:g}")
     axes[1].axhline(0.0, color="black", linewidth=0.8)
-    axes[1].set(title="Exact dimensionless return", xlabel="t / tI", ylabel="m(t)")
+    axes[1].set(title="Exact dimensionless return", xlabel=r"$t/t_I$", ylabel="m(t)")
     axes[1].legend(fontsize=8)
 
     zeta = np.linspace(0.005, 0.999, 500)
@@ -408,9 +423,12 @@ def main() -> None:
     }
     serializable = _jsonable(payload)
     json_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(json.dumps(serializable, indent=2) + "\n", encoding="utf-8")
+    json_path.write_text(
+        json.dumps(serializable, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
     write_figure(figure_path)
-    write_report(serializable, report_path, figure_path, json_path)
+    write_report(payload, report_path, figure_path, json_path)
     print(json.dumps(serializable["result"]["gates"], indent=2))
     print(f"decision={serializable['result']['decision']}")
 
