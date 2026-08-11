@@ -8,6 +8,7 @@ __pycache__/
 .pytest_cache/
 .pytest-tmp/
 .pytest-tmp-*/
+.test-tmp-*/
 .pytest_tmp_*/
 .tmp_pytest_*/
 .ruff_cache/

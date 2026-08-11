@@ -1,0 +1,31 @@
+{
+  "decision": "structural-pass-with-unresolved-force-balance",
+  "gates": {
+    "stationary_innovation_zero_monopole": true,
+    "innovation_first_moment_identity": true,
+    "block_innovation_telescopes": true,
+    "dispersion_roots_match_operator": true,
+    "threshold_separates_real_and_complex": true,
+    "zero_stiffness_remains_real": true
+  },
+  "max_root_error": 0.0,
+  "telescoping_error": 8.881784197001252e-16,
+  "dimensionless_witness": {
+    "memory_relaxation": 1.0,
+    "flux_relaxation": 2.0,
+    "stiffness": 1.0,
+    "threshold": 0.5,
+    "below_classification": "stable_real",
+    "above_classification": "stable_oscillatory"
+  },
+  "claim_limits": {
+    "new_state": "the flux is absent from canonical (x,rho)",
+    "new_coefficients": [
+      "flux_relaxation",
+      "stiffness"
+    ],
+    "static_force_balance": "not supplied by the continuity law",
+    "transverse_phase": "transverse flux only relaxes in the minimal law",
+    "dimension_selection": "the O(d)-covariant law does not select d=3"
+  }
+}

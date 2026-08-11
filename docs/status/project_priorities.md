@@ -653,6 +653,21 @@ Prioritaetsfolge:
     Symmetrien, affine Gleichgewichte und identifizierbare dimensionslose
     Gruppen abgeleitet. Noch kein Simulations- oder Parametersweep.
 
+    **P3.8a bevorzugter Mechanismus, analytisch strukturell bestanden:** Statt
+    eines frei orientierten Knotenchannels wird das skalare Memory um einen
+    lokal bilanzierten Strom `j` erweitert. Fuer den longitudinalen Modus gilt
+    `(s+lambda_m)(s+gamma_j)+c_j^2 k^2=0`; komplexe Pole entstehen genau bei
+    `2 c_j k > |lambda_m-gamma_j|`. Die vorhandene Memory-Innovation hat bei
+    stationaerer Masse exakt Monopol null, ihr Dipol ist
+    `lambda_m M0 (x-xbar_rho)`, und Blockinnovationen teleskopieren. Damit ist
+    die Source aus dem kanonischen Update abgeleitet und nicht als Ladungslabel
+    gesetzt. Der Strom sowie `gamma_j,c_j` bleiben jedoch neue Modellinhalte.
+    Das Gate loest weder die negative affine Kraftbilanz noch einen
+    transversalen Spinmodus und selektiert kein `d=3`. Naechster Schritt ist
+    P3.8b: eine einzige Energie fuer Deposition/Source und Trajektorienreadout,
+    danach erneut affine Gleichgewichte beziehungsweise ein klar definiertes
+    Limit-Cycle-Gate. Noch kein Pilot und kein Parametersweep.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

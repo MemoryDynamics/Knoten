@@ -45,6 +45,7 @@ flowchart TD
     experiments --> reciprocal_exp["reciprocal_full_knot_gate.py<br/>direct binding; complex-mode null"]
     experiments --> retarded_reciprocal_exp["retarded_reciprocal_full_knot_gate.py<br/>operational channel; complex-mode null"]
     experiments --> same_law_jacobian["same_law_*_audit/gate.py<br/>Jacobian eligibility + affine no-go"]
+    experiments --> continuity_gate["continuity_constrained_memory_gate.py<br/>density-current analytic gate"]
     experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
@@ -96,10 +97,12 @@ flowchart TD
     src --> spectral_trace["spectral_memory_trace.py<br/>aligned and raw eta-zero Numba traces"]
     src --> memory_metrics["memory_metrics.py<br/>covariance, predictive and RKHS metrics"]
     src --> covariant_field["covariant_vector_field.py<br/>isolierter analytischer K2-Vorschlag; nicht im Knotensimulator"]
+    src --> continuity_memory["continuity_memory.py<br/>innovation moments + longitudinal rho/j modes"]
     spectral_trace --> raw_null_exp
 
     core --> state
     covariant_field --> analytic_boundary["K2 nur analytisch<br/>keine Laufzeitkopplung an (x,rho)"]
+    continuity_memory --> continuity_boundary["P3.8a nur analytisch<br/>force balance + common energy offen"]
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]
@@ -291,7 +294,8 @@ flowchart LR
     reciprocal --> jacobian["same-law G/C Jacobian audit<br/>fixed eta remains real"]
     jacobian --> commonscale["one common eta<br/>local complex eligibility"]
     commonscale --> affinebalance["affine balance 0/13<br/>compact two-scale no-go"]
-    affinebalance --> commonenergy["next: common source/readout energy<br/>signed/oriented source or justified geometry"]
+    affinebalance --> continuitymemory["continuity-constrained rho/j gate<br/>longitudinal phase; force balance open"]
+    continuitymemory --> commonenergy["next: common source/readout energy<br/>affine or limit-cycle gate"]
     retarded --> source_local["emitter-only offset/current<br/>stable channel; knot-loading null"]
     source_local --> shape_source["autonomous shape multipole<br/>segment/control gate null"]
     shape_source --> vector_form["next: formal vector-memory extension<br/>equations + null limits before run"]

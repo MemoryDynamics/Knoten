@@ -106,6 +106,14 @@ from .covariant_vector_field import (
     vector_field_dimensionless_groups,
     vector_gradient_flow_rates,
 )
+from .continuity_memory import (
+    ContinuityMemoryMode,
+    MemoryInnovationMoments,
+    continuity_memory_mode,
+    continuity_memory_mode_operator,
+    continuity_oscillation_threshold,
+    memory_innovation_moments,
+)
 from .reciprocal_memory import (
     ReciprocalMemoryMode,
     ReciprocalMemorySpectrum,
@@ -325,6 +333,7 @@ from .markov.validation import (
 __all__ = [
     "CompactTwoScaleSameLawCompatibility",
     "CommonGainScaleInterval",
+    "ContinuityMemoryMode",
     "ActiveScalarFieldConfig",
     "ActiveScalarFieldTrace",
     "AutonomousKnotTrace",
@@ -332,6 +341,7 @@ __all__ = [
     "DimensionlessScalarGroups",
     "LaggedCorrelationResult",
     "MetricEstimate",
+    "MemoryInnovationMoments",
     "ResponseRankInferenceResult",
     "ResponseRankResult",
     "RelaxationDiffusionField",
@@ -406,6 +416,9 @@ __all__ = [
     "checkpoint_stability_diagnostics",
     "compact_two_scale_same_law_compatibility",
     "common_gain_scale_interval",
+    "continuity_memory_mode",
+    "continuity_memory_mode_operator",
+    "continuity_oscillation_threshold",
     "critical_gamma",
     "double_gaussian_gradient",
     "double_gaussian_hessian",
@@ -478,6 +491,7 @@ __all__ = [
     "observability_gramian",
     "occupancy_dimension",
     "memory_horizon",
+    "memory_innovation_moments",
     "occupancy_dimension_value",
     "one_way_coupled_response",
     "one_way_oriented_response",

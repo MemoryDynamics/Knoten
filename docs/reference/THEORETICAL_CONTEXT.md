@@ -906,6 +906,61 @@ mediator is authorized. Vector memory remains reserved for orientation, phase,
 circulation, or polarization and must be formulated as an explicit model
 extension with its own null limits before another mechanism run.
 
+## Kontinuitaetsbeschraenktes Dichte-Strom-Memory
+
+Die am staerksten durch bestehende Struktur begruendete aktive Erweiterung ist
+kein frei gewaehlter Vektorkanal, sondern ein lokaler Memory-Strom
+$\mathbf j$. Aus dem kanonischen Update folgt zunaechst die Innovation
+
+\[
+S_n(y)=\rho_{n+1}(y)-\rho_n(y)
+=\lambda_m\left[M_0G_\sigma(y-x_{n+1})-\rho_n(y)\right].
+\]
+
+Bei $\int\rho_n=M_0$ besitzt sie kein Monopol und den ersten Moment
+
+\[
+\int yS_n(y)\,dy
+=\lambda_mM_0(x_{n+1}-\bar x_n^\rho).
+\]
+
+Zudem gilt exakt $\sum_{r=0}^{B-1}S_{n+r}=\rho_{n+B}-\rho_n$. Die Innovation
+ist daher ein zeitlicher Coboundary: Ein beschraenktes stationaeres Memory
+liefert daraus allein keine statische DC-Ladung. Endliche numerische
+Memory-Trunkierung kann einen kleinen, direkt messbaren Monopolrest erzeugen;
+dieser darf nicht als Physik interpretiert werden.
+
+Die minimale lokale aktive Erweiterung lautet im Kontinuum
+
+\[
+\partial_t\rho=-\lambda_m\rho-\nabla\cdot\mathbf j+S_x,
+\qquad
+\partial_t\mathbf j=-\gamma_j\mathbf j-c_j^2\nabla\rho.
+\]
+
+Der Strom ist damit durch lokalen Transport orientiert, nicht durch ein
+knotenspezifisches Vorzeichen oder eine vorgegebene Achse. Fuer einen
+longitudinalen Fouriermodus gilt
+
+\[
+(s+\lambda_m)(s+\gamma_j)+c_j^2k^2=0,
+\]
+
+und ein komplexes Polpaar existiert genau fuer
+
+\[
+2c_jk>|\lambda_m-\gamma_j|.
+\]
+
+Diese Erweiterung ist klassisch und O(d)-kovariant. Sie fuehrt den neuen
+Zustand $\mathbf j$ sowie die konstitutiven Parameter $\gamma_j,c_j$ ein; sie
+ist nicht aus bisherigen skalaren Long Runs identifiziert. Der minimale Strom
+traegt nur longitudinale Dichtewellen. Transversale Stroeme relaxieren, sodass
+weder Spin noch Haendigkeit folgt. Vor allem ersetzt die Kontinuitaetsgleichung
+nicht das P3.7b-Kraftbilanzgate: Eine Mode um eine driftende Geometrie ist noch
+kein Knotenorbit. Eine gemeinsame Source-/Readout-Energie und ein Affin- oder
+Limit-Cycle-Gate sind deshalb zwingend vor einer Simulation.
+
 ## Markov-Einbettung
 
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der

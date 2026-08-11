@@ -165,6 +165,7 @@ wichtig:
 22. `reports/response/reciprocal/same_law_reciprocal_jacobian_audit_2026-08-11.md`
 23. `reports/response/reciprocal/same_law_common_scale_followup_2026-08-11.md`
 24. `reports/response/reciprocal/same_law_affine_balance_gate_2026-08-11.md`
+25. `reports/memory/closure/continuity_constrained_memory_gate_2026-08-11.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -434,6 +435,18 @@ Zweigauss-Kernels verlangen entgegengesetzte
 Amplituden-Retuning. P3.8 beginnt nur als Herleitung einer gemeinsamen
 Source-/Readout-Energie mit expliziter Kraftbilanz und einem begruendeten
 internen signierten/orientierten Kanal oder getrennter Self-/Cross-Geometrie.
+
+Der erste P3.8-Mechanismus ist nun analytisch enger gefasst: Ein lokaler
+Gedaechtnisstrom `j` ergaenzt die Dichte nicht als frei orientiertes Label,
+sondern ueber eine Kontinuitaetsgleichung. Der longitudinale Fouriermodus
+erfuellt `(s+lambda_m)(s+gamma_j)+c_j^2 k^2=0` und wird oberhalb
+`k_c=|lambda_m-gamma_j|/(2 c_j)` komplex. Sechs registrierte Identitaeten
+bestehen; die Memory-Innovation ist bei stationaerer Masse monopolfrei und
+teleskopiert ueber Zeitbloecke. Entscheidung: strukturelle
+Propagationseignung, aber noch keine Knotenevidenz. `j`, `gamma_j` und `c_j`
+sind neue Annahmen; statische Kraftbilanz, transversale Phase und `d=3` bleiben
+ungeloest. Vor einem Pilot folgt eine gemeinsame Source-/Readout-Energie samt
+Affin- oder Limit-Cycle-Gate.
 
 ## Paper-Status
 

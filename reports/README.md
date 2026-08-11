@@ -130,6 +130,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
   - Naechstes Gate ist erster- gegen zweiter-Ordnung-Holdout-Closure aus einer
     vorab fixierten Projektion kanonischer Variablen; Feldpilot und
     Schwingungsoptimierung bleiben gesperrt.
+- [Kontinuitaetsbeschraenktes Memory-Gate](memory/closure/continuity_constrained_memory_gate_2026-08-11.md)
+  - **structural pass with unresolved force balance:** Die kanonische
+    Memory-Innovation ist bei stationaerer Masse monopolfrei und ihr Dipol ist
+    durch `x-xbar_rho` festgelegt. Ein lokaler Dichte-Strom-Modus besitzt die
+    exakte Schwelle `2 c_j k > |lambda_m-gamma_j|` fuer komplexe Pole.
+  - Strom, Flussrelaxation und Steifigkeit bleiben neue Annahmen; statische
+    Kraftbilanz, transversale Phase und `d=3` sind nicht geloest. Kein Pilot.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds
