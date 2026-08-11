@@ -743,12 +743,90 @@ far-field translation, not a slowly forming interaction-specific knot type
 or a cross-induced half oscillation.
 
 For two synchronously and reciprocally coupled scalar memories, the local
-relative-coordinate reduction is
+relative-coordinate reduction uses the scalar-memory centres
+$\bar x_i^\rho$ and the half-difference variables
+
+$$
+x_- = \frac{x_1-x_2}{2},
+\qquad
+\bar x_-^\rho = \frac{\bar x_1^\rho-\bar x_2^\rho}{2},
+\qquad
+Y_-=
+\begin{pmatrix}
+x_-\\
+\bar x_-^\rho
+\end{pmatrix}.
+$$
+
+Here $Y_-$ is a reduced observable constructed from the canonical two-node
+state; it is not an additional field or fit parameter. Linearizing the self
+and cross potentials gives the dimensionless gain matrices
+
+$$
+G=\eta\,\nabla_x^2(K_{\rm self}*\rho_i)(x_i),
+\qquad
+C(R)=\eta_\times\,\nabla_x^2(K_{\rm cross}*\rho_j)(x_i),
+$$
+
+where $R=\lVert\bar x_i^\rho-\bar x_j^\rho\rVert$. The retained memory mass,
+deposition/read convolution, knot shape and evaluation distance are already
+contained in these Hessians. In the isotropic commuting approximation,
+
+$$
+G\simeq gI_d,
+\qquad
+C\simeq cI_d.
+$$
+
+Thus $g$ is the local self-return gain per update and $c$ the local reciprocal
+cross-return gain per update. They are not raw kernel amplitudes. They must be
+computed from the independently specified force law or measured by a local
+response/Jacobian audit before fitting any oscillation. The matrix-valued
+relative operator is
+
+$$
+A_-(G,C,\lambda)=
+\begin{pmatrix}
+I-G-C & G-C\\
+\lambda(I-G-C) & (1-\lambda)I+\lambda(G-C)
+\end{pmatrix},
+$$
+
+For an expansion about a reference geometry $Y_{-,\ast}$, the complete local
+form is
+
+\[
+Y_{-,n+1}-Y_{-,\ast}
+=A_-(Y_{-,n}-Y_{-,\ast})+b_\ast+\zeta_{-,n}+O(\|Y_--Y_{-,\ast}\|^2),
+\]
+
+where $b_\ast=F(Y_{-,\ast})-Y_{-,\ast}$ is the affine residual drift. A
+normal-mode interpretation requires $b_\ast=0$, or an independently justified
+co-moving reference on which that residual is removed. A complex spectrum of
+$A_-$ at a nonstationary geometry is only transient local curvature.
+$A_-$ is therefore derived, not a further parameter. Its scalar isotropic form
+is
 
 ```text
 A_- = [[1-g-c,           g-c],
        [lambda(1-g-c), q+lambda(g-c)]],  q=1-lambda.
 ```
+
+The remaining quantities that affect an observed stochastic mode are:
+
+- $\lambda$: memory relaxation per update;
+- the relative-noise covariance $Q_-$; for equal amplitudes $\varepsilon$ and
+  innovation correlation $\rho_\xi$,
+  $\operatorname{Cov}(\zeta_x)=\varepsilon^2(1-\rho_\xi)I_d/2$ under the
+  half-difference convention;
+- separation $R$, orientation and knot shape through $C(R)$;
+- nonlinear Hessian variation over the sampled amplitude, which controls the
+  validity of the local operator.
+
+The eigenvalues $\mu_j(A_-)$, damping, frequency and quality factor are output
+observables. They are not independent tuning parameters. For anisotropic or
+noncommuting $G$ and $C$, the full $2d\times2d$ operator must be used instead
+of assigning one scalar pair $(g,c)$.
 
 A real 2 x 2 matrix with a non-real conjugate eigenpair is real-similar to
 `a E+b J`, `J=[[0,-1],[1,0]]`; `A_-` need not literally have this entry form
@@ -765,6 +843,38 @@ A stable complex cross-gain interval exists only for
 above the `0.009901` threshold. Increasing lambda would enlarge the analytic
 existence region, but that is a new memory-timescale experiment, not an
 explanation of the fixed-lambda result.
+
+The necessary inequality `c>g` is also a mechanism test. If one common
+source/readout law with `eta_cross=eta` gives `C(R)<=G` in every relevant
+direction, changing the common gain cannot create this complex branch. A
+cross-enhancement, self-screening, different channel geometry or delayed
+mechanism would then be an additional assumption, not a selected parameter.
+
+For the compact point-deposit limit there is a sharper same-law obstruction.
+With
+
+\[
+K(r)=A_{\rm rep}e^{-r^2/(2L_{\rm rep}^2)}
+-A_{\rm att}e^{-r^2/(2L_{\rm att}^2)},
+\qquad L_{\rm att}>L_{\rm rep},
+\]
+
+local self-confinement at the deposited point requires
+
+\[
+\frac{A_{\rm att}}{L_{\rm att}^2}
+>
+\frac{A_{\rm rep}}{L_{\rm rep}^2}.
+\]
+
+A positive radial force-zero radius exists only under the strict reverse
+inequality. At that radius the radial cross curvature is positive, but the
+self curvature at the origin is then negative. Hence one compact scalar
+two-Gaussian law cannot simultaneously provide point-like self-confinement
+and a finite pair equilibrium. Distributed/noncompact memory can invalidate
+the point approximation, but that must be demonstrated rather than assumed.
+For the current compact checkpoints the complete-state affine audit agrees
+with the point result: no tested complex-Jacobian geometry is force balanced.
 
 The registered direct complete-state reconciliation at `c=0.02` agrees with
 this prediction: all 60 post-transient segment fits are real. The channel is

@@ -162,6 +162,9 @@ wichtig:
 19. `reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.md`
 20. `reports/memory/closure/adjoint_reciprocity_eligibility_audit_2026-08-07.md`
 21. `reports/memory/representations/carrier_memory_metric_comparison_2026-08-08.md`
+22. `reports/response/reciprocal/same_law_reciprocal_jacobian_audit_2026-08-11.md`
+23. `reports/response/reciprocal/same_law_common_scale_followup_2026-08-11.md`
+24. `reports/response/reciprocal/same_law_affine_balance_gate_2026-08-11.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -400,6 +403,37 @@ muss auf Holdout-Daten einen seed-, segment- und grobkoernungsstabilen
 zweiter-Ordnungsschluss gegen eine erster-Ordnung-Kontrolle rechtfertigen und
 eine unabhaengige Response vorhersagen. Erst ein Pass oeffnet wieder die
 gemeinsame Source-/Readout-Energie und einen Feldpiloten.
+
+Der naechste kanonische Zwischenschritt nutzt zunaechst keinen K2-Feldzustand:
+Fuer zwei skalare Knoten ist
+`Y_-=(x_-,xbar_rho_-)` bereits eine feste Projektion aus `(x,rho)`. Die lokalen
+Self-/Cross-Gains sind matrixwertig
+`G=eta Hess(Phi_self)` und `C(R)=eta_cross Hess(Phi_cross)`; die bisherigen
+Skalare `g,c` sind nur ihre isotrope Naeherung. `A_-(G,C,lambda)` und seine
+Pole sind daraus abgeleitete Observablen. P3.7a misst diese Jacobians auf
+reifen Zustaenden unter derselben Self-/Cross-Regel, bevor ein Low-g-Lauf oder
+eine Frequenzanpassung zulaessig ist.
+
+Der feste Same-Law-Jacobian-Audit bleibt bei `eta=0.15` reell und formal
+`inconclusive`, weil `C-G` je nach Distanz das Vorzeichen wechselt. Der
+registrierte Common-Scale-Folgeaudit findet bei `R=sigma_rep` ein gemeinsames
+stabiles komplexes Intervall `eta=0.0009965..0.0026549`; der feste Mittelpunkt
+`0.0016266` besteht fuer alle 13 Richtungsfaelle in `d=3,10`. Dies ist nur
+lokale Kruemmungs-Eligibility. Die vollstaendige Linearisierung enthaelt auch
+den affinen Rest `b_*=F(Y_*)-Y_*`. Deshalb ist vor jedem nichtlinearen Pilot
+nun ein Kraftbilanz-Gate vorgeschaltet; bei `b_*!=0` ist der komplexe Jacobian
+ein transienter Modus entlang einer driftenden Geometrie.
+
+Dieses Gate ist negativ abgeschlossen. Alle vier lokal komplex-eligiblen
+Abstandsgruppen bestehen `0/13`; die eingefrorene Drift pro Memory-Zeit reicht
+von etwa `1.25 R_mem` bei `2.5 R_mem` bis `1300..2355 R_mem` bei
+`R=sigma_rep`. Der kompakte Punktgrenzfall erklaert das strukturell:
+Self-Rueckstellung und ein endlicher Kraftnullpunkt desselben skalaren
+Zweigauss-Kernels verlangen entgegengesetzte
+`A/L^2`-Ungleichungen. Deshalb kein `N=500k`-Pilot und kein Eta-/Lambda-/
+Amplituden-Retuning. P3.8 beginnt nur als Herleitung einer gemeinsamen
+Source-/Readout-Energie mit expliziter Kraftbilanz und einem begruendeten
+internen signierten/orientierten Kanal oder getrennter Self-/Cross-Geometrie.
 
 ## Paper-Status
 

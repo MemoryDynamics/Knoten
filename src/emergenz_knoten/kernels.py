@@ -518,6 +518,45 @@ def gaussian_gradient(
     return np.sum((w * fac)[:, None] * dx, axis=0)
 
 
+def gaussian_hessian(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma: float,
+    amplitude: float = 1.0,
+) -> np.ndarray:
+    """Weighted Hessian of ``amplitude * exp(-r^2/(2 sigma^2))``."""
+
+    x_arr = np.asarray(x, dtype=float)
+    mem = np.asarray(memory, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    if x_arr.ndim != 1:
+        raise ValueError("x must be one-dimensional")
+    if mem.ndim != 2 or mem.shape[1] != x_arr.size:
+        raise ValueError("memory must have shape (n_memory, dim)")
+    if w.ndim != 1 or mem.shape[0] != w.shape[0]:
+        raise ValueError("weights must match memory length")
+    if sigma <= 0.0 or not np.isfinite(sigma):
+        raise ValueError("sigma must be positive and finite")
+    if not np.isfinite(amplitude):
+        raise ValueError("amplitude must be finite")
+    if not np.isfinite(x_arr).all() or not np.isfinite(mem).all():
+        raise ValueError("field coordinates must be finite")
+    if not np.isfinite(w).all():
+        raise ValueError("weights must be finite")
+    if mem.shape[0] == 0:
+        return np.zeros((x_arr.size, x_arr.size), dtype=float)
+
+    sigma2 = sigma * sigma
+    dx = x_arr[None, :] - mem
+    r2 = np.einsum("ij,ij->i", dx, dx)
+    factors = w * amplitude * np.exp(-0.5 * r2 / sigma2)
+    outer = np.einsum("ni,nj->nij", dx, dx) / (sigma2 * sigma2)
+    identity = np.eye(x_arr.size, dtype=float) / sigma2
+    return np.sum(factors[:, None, None] * (outer - identity), axis=0)
+
+
 def repulsive_gaussian_gradient(
     x: Iterable[float],
     memory: Iterable[Iterable[float]],
@@ -579,6 +618,49 @@ def double_gaussian_gradient(
         amplitude=params["amplitude_rep"],
     )
     att = gaussian_gradient(
+        x_arr,
+        memory,
+        weights,
+        sigma=params["sigma_att"],
+        amplitude=params["amplitude_att"],
+    )
+    return rep - att
+
+
+def double_gaussian_hessian(
+    x: Iterable[float],
+    memory: Iterable[Iterable[float]],
+    weights: Iterable[float],
+    *,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float = 0.35,
+    deposition_kernel: str = "delta",
+    deposition_sigma: float = 0.0,
+) -> np.ndarray:
+    """Hessian of ``A_rep G_rep - A_att G_att`` after write convolution."""
+
+    x_arr = np.asarray(x, dtype=float)
+    if x_arr.ndim != 1:
+        raise ValueError("x must be one-dimensional")
+    params = effective_double_gaussian_parameters(
+        dim=x_arr.size,
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+        deposition_kernel=deposition_kernel,
+        deposition_sigma=deposition_sigma,
+    )
+    rep = gaussian_hessian(
+        x_arr,
+        memory,
+        weights,
+        sigma=params["sigma_rep"],
+        amplitude=params["amplitude_rep"],
+    )
+    att = gaussian_hessian(
         x_arr,
         memory,
         weights,

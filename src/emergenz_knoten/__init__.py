@@ -1,7 +1,9 @@
 """Core utilities for the Emergenz Knoten model."""
 
 from .analytic import (
+    CompactTwoScaleSameLawCompatibility,
     DimensionlessScalarGroups,
+    compact_two_scale_same_law_compatibility,
     critical_eta,
     frozen_hessian_stability,
     gaussian_kernel_curvature,
@@ -113,6 +115,13 @@ from .reciprocal_memory import (
     reciprocal_memory_operator,
     reciprocal_memory_spectrum,
     reciprocal_mode_eigenvalues,
+)
+from .reciprocal_parameter_closure import (
+    CommonGainScaleInterval,
+    ReciprocalMatrixModeResult,
+    common_gain_scale_interval,
+    finite_memory_gain_matrix,
+    reciprocal_relative_mode_operator,
 )
 from .coupled_nodes import (
     OneWayCoupledResponse,
@@ -238,12 +247,14 @@ from .kernels import (
     ScalarReadoutKernel,
     attractive_amplitude_for_curvature,
     double_gaussian_gradient,
+    double_gaussian_hessian,
     double_gaussian_potential,
     effective_double_gaussian_parameters,
     effective_gaussian_parameters,
     exponential_memory_weights,
     exponential_weights,
     gaussian_gradient,
+    gaussian_hessian,
     gaussian_potential,
     matched_local_stiffness_renormalization,
     repulsive_gaussian_gradient,
@@ -312,6 +323,8 @@ from .markov.validation import (
 )
 
 __all__ = [
+    "CompactTwoScaleSameLawCompatibility",
+    "CommonGainScaleInterval",
     "ActiveScalarFieldConfig",
     "ActiveScalarFieldTrace",
     "AutonomousKnotTrace",
@@ -326,6 +339,7 @@ __all__ = [
     "RelaxationDiffusionMediator",
     "ReciprocalMemoryMode",
     "ReciprocalMemorySpectrum",
+    "ReciprocalMatrixModeResult",
     "CHECKPOINT_SCHEMA_VERSION",
     "CollapsedPotentialState",
     "DEPOSITION_KERNELS",
@@ -390,8 +404,11 @@ __all__ = [
     "covariance_precision_metric",
     "critical_eta",
     "checkpoint_stability_diagnostics",
+    "compact_two_scale_same_law_compatibility",
+    "common_gain_scale_interval",
     "critical_gamma",
     "double_gaussian_gradient",
+    "double_gaussian_hessian",
     "double_gaussian_potential",
     "dynamic_external_field_response_metrics",
     "direct_history_potential_gradient",
@@ -402,9 +419,11 @@ __all__ = [
     "exponential_block_weights",
     "exponential_weights",
     "finite_memory_checkpoint_manifest",
+    "finite_memory_gain_matrix",
     "fit_occupancy_scaling_window",
     "frozen_hessian_stability",
     "gaussian_gradient",
+    "gaussian_hessian",
     "gaussian_rkhs_emission_norms",
     "gaussian_heat_time",
     "gaussian_kernel_curvature",
@@ -483,6 +502,7 @@ __all__ = [
     "reciprocal_memory_operator",
     "reciprocal_memory_spectrum",
     "reciprocal_mode_eigenvalues",
+    "reciprocal_relative_mode_operator",
     "relative_orbital_observables",
     "relaxation_diffusion_frequency_response",
     "relaxation_diffusion_local_expansion",

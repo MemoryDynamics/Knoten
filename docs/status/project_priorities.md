@@ -600,12 +600,58 @@ Prioritaetsfolge:
     `gamma/I=2 Gamma` und `D/I=Gamma^2+omega^2`; die absolute Skala benoetigt
     eine unabhaengig normierte Response oder Energie.
 
-21. **P3.8 nur nach P3.7-Pass: gemeinsame Source-/Readout-Energie.** Genau eine
+    **P3.7a jetzt: Same-law-Jacobian-Audit des kanonischen Zwei-Knoten-Astes.**
+    Fuer gespeicherte reife Zustaende werden ohne Trajektorienfit die
+    dimensionslosen Matrizen `G=eta Hess(Phi_self)` und
+    `C(R)=eta_cross Hess(Phi_cross)` bestimmt. `Y_-=(x_-,xbar_rho_-)` ist die
+    feste kanonische Projektion und `A_-(G,C,lambda)` ihr abgeleiteter
+    `2d x 2d`-Operator, kein neuer Parameter. Primaer ist die gemeinsame
+    Self-/Cross-Regel `eta_cross=eta` ueber vorab festgelegte Distanzen und
+    Eigenrichtungen. Falls `C<=G` und kein stabil komplexer Vollmatrixmodus
+    auftritt, ist ein gemeinsames Gain-Retuning als Loesung ausgeschlossen.
+    Erst ein unabhaengig vorhergesagter komplexer Bereich autorisiert einen
+    `N=500k`-Low-g-Pilot mit mindestens fuenf Formationsseeds.
+
+    **P3.7a Jacobian-Ergebnis: lokale Common-Scale-Eligibility, Pilot noch
+    gesperrt.** Beim Checkpoint-Gain `eta=0.15` bleiben alle Moden reell. Eine
+    gemeinsame Skalierung von Self und Cross ergibt jedoch bei
+    `R=sigma_rep` ein ueber `d=3`, `d=10` und alle 13 Richtungsfaelle
+    geschnittenes Intervall `eta=0.0009965..0.0026549`; der feste geometrische
+    Mittelpunkt `eta=0.0016266` besteht im Vollmatrixoperator 13/13. Die
+    Intervalle bei `2.5 R_mem` und `10 R_mem` sind wegen `c/g-1` von nur
+    `1e-7..1e-6` numerisch fragil. Das Ergebnis reduziert `g,c` auf einen
+    gemeinsamen Gain, zeigt aber weder Gain-Selbstauswahl noch eine
+    nichtlineare Schwingung.
+
+    **P3.7b jetzt: affines Kraftbilanz-Gate.** Die lokale Dynamik lautet
+    allgemein `delta Y_next=A_- delta Y+b_*+noise`. Vor einem Pilot muss daher
+    fuer dieselbe Geometrie der affine Relativdrift `b_*` verschwinden. Ein
+    stabil-komplexer Jacobian an einem Punkt mit endlicher Anziehung ist kein
+    Normalmodus. Erst wenn Jacobian- und Kraftbilanz-Gate gleichzeitig
+    bestehen, ist der `N=500k`-Pilot freigegeben.
+
+    **P3.7b abgeschlossen, negativ:** Kein zuvor komplex-eligibler Abstand
+    besteht die Kraftbilanz (`0/13` je Abstand). Bereits bei `2.5 R_mem`
+    betraegt die eingefrorene Relativdrift pro Memory-Zeit etwa `1.25 R_mem`,
+    bei `R=sigma_rep` `1300..2355 R_mem`. Im kompakten Punktgrenzfall ist dies
+    strukturell: Selbstkonfinierung verlangt
+    `A_att/L_att^2>A_rep/L_rep^2`, ein positiver Kraftnullpunkt desselben
+    Zweigauss-Kernels die umgekehrte Ungleichung. Ein gemeinsames Eta-,
+    Lambda- oder Amplituden-Retuning kann diesen Konflikt nicht loesen. Der
+    angekuendigte `N=500k`-Pilot ist gesperrt.
+
+21. **P3.8 jetzt als Mechanismusentscheidung: gemeinsame Source-/Readout-
+    Energie mit expliziter Kraftbilanz.** Genau eine
     Kopplungsenergie `H_int[x,m] = - integral J[x] dot m dx` muss dann sowohl
     Feldquelle als auch reziproke Trajektorienkraft liefern. Getrennt
     eingestellte Deposit-/Readout-Gains sind nicht zulaessig. Diskrete
     Energiebilanz, Source-off-, Reversible-off- und First-order-Kontrollen
-    werden vor einem einzigen modellkonditionalen Pilot vorregistriert.
+    werden vor einem einzigen modellkonditionalen Pilot vorregistriert. Der
+    neue Mechanismus muss zusaetzlich entweder Self- und Cross-Geometrie
+    begruendet trennen oder eine signierte/orientierte interne Source liefern;
+    andernfalls reproduziert er das P3.7b-No-go. Zuerst werden Gleichungen,
+    Symmetrien, affine Gleichgewichte und identifizierbare dimensionslose
+    Gruppen abgeleitet. Noch kein Simulations- oder Parametersweep.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

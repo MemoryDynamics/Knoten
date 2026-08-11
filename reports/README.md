@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-08.
+Stand: 2026-08-11.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -176,6 +176,22 @@ identifizierten physikalischen Moden.
     Shape-Huelle bestehen 5/5. Der Endabstand ist reziprok `0.31..0.88 R`
     gegen `2.78..9.21 R` ohne Kanal. Die fuenf Zukunftsrauschpfade stammen
     jedoch aus nur einem `N=100M`-Formationscheckpoint.
+- [Same-law-Jacobian-Audit](response/reciprocal/same_law_reciprocal_jacobian_audit_2026-08-11.md)
+  - **inconclusive at the checkpoint gain:** Bei `eta=0.15` bleiben alle
+    Vollmatrixmoden reell; `C-G` wechselt ueber die festen Distanzen das
+    Vorzeichen. Die Hessians werden direkt aus vollstaendigen reifen
+    Memory-Zustaenden berechnet, nicht aus einer Frequenzanpassung.
+- [Same-law-Common-Scale-Folgeaudit](response/reciprocal/same_law_common_scale_followup_2026-08-11.md)
+  - **conditional local eligibility:** Ein gemeinsames Self-/Cross-Eta besitzt
+    bei `R=sigma_rep` das dimensions- und richtungsuebergreifende
+    Stable-Complex-Intervall `0.0009965..0.0026549`; der feste Mittelpunkt
+    besteht 13/13 Vollmatrixfaelle. Das ist lokale Kruemmung, keine
+    stationaere oder persistente Schwingung.
+- [Same-law-Affinbilanz-Gate](response/reciprocal/same_law_affine_balance_gate_2026-08-11.md)
+  - **negative:** Kein komplex-eligibler Abstand ist kraftbilanziert (`0/13`
+    je Abstand). Im kompakten Punktgrenzfall schliessen sich
+    Self-Konfinierung und endlicher Pair-Kraftnullpunkt desselben
+    Zweigauss-Kernels analytisch aus. Kein Low-g-Pilot oder Parameter-Retuning.
 - [N100M-Referenzzustaende](reference_states/scalar_reference_checkpoints_N100M_2026-07-16.md)
   - **supported:** checksum-validierte Absprungbasis der implementierten
     finite-memory Approximation.

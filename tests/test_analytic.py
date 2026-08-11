@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
 from emergenz_knoten import (
+    compact_two_scale_same_law_compatibility,
     critical_eta,
     frozen_hessian_stability,
     gaussian_kernel_curvature,
@@ -117,3 +119,26 @@ def test_two_scale_force_crossing_radius() -> None:
 
     assert radius is not None
     assert 1.8 <= radius <= 2.1
+
+
+def test_compact_same_law_self_confinement_excludes_pair_balance() -> None:
+    baseline = compact_two_scale_same_law_compatibility(
+        amplitude_rep=1.0,
+        length_rep=1.0,
+        amplitude_att=35.0,
+        length_att=3.0,
+    )
+    balanced_pair = compact_two_scale_same_law_compatibility(
+        amplitude_rep=1.0,
+        length_rep=1.0,
+        amplitude_att=1.5,
+        length_att=3.0,
+    )
+
+    assert baseline.self_restoring
+    assert not baseline.finite_pair_balance
+    assert baseline.self_restoring_curvature == pytest.approx(26.0 / 9.0)
+    assert not baseline.jointly_compatible
+    assert not balanced_pair.self_restoring
+    assert balanced_pair.finite_pair_balance
+    assert not balanced_pair.jointly_compatible

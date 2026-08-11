@@ -28,6 +28,19 @@ class DimensionlessScalarGroups:
     noise_diffusion_per_memory_time: float
 
 
+@dataclass(frozen=True)
+class CompactTwoScaleSameLawCompatibility:
+    """Point-limit self-confinement and pair-balance diagnostics."""
+
+    repulsive_curvature_scale: float
+    attractive_curvature_scale: float
+    self_restoring_curvature: float
+    force_crossing_radius: float | None
+    self_restoring: bool
+    finite_pair_balance: bool
+    jointly_compatible: bool
+
+
 def _validate_lambda(lambda_value: float, *, strict_upper: bool = False) -> None:
     upper_ok = lambda_value < 1.0 if strict_upper else lambda_value <= 1.0
     if not np.isfinite(lambda_value) or not (0.0 < lambda_value and upper_ok):
@@ -257,3 +270,48 @@ def two_scale_force_crossing_radius(
     if radius_squared <= 0.0 or not math.isfinite(radius_squared):
         return None
     return float(math.sqrt(radius_squared))
+
+
+def compact_two_scale_same_law_compatibility(
+    *,
+    amplitude_rep: float,
+    length_rep: float,
+    amplitude_att: float,
+    length_att: float,
+) -> CompactTwoScaleSameLawCompatibility:
+    r"""Classify the compact point-limit same-law compatibility.
+
+    For ``K=A_rep G(L_rep)-A_att G(L_att)`` with ``L_att>L_rep``, local
+    self-confinement under ``x <- x-eta grad K`` requires
+    ``A_att/L_att^2 > A_rep/L_rep^2``. A positive radial force-zero requires
+    the strict opposite inequality. They therefore cannot coexist in this
+    compact two-scale point limit.
+    """
+
+    _validate_positive("amplitude_rep", amplitude_rep)
+    _validate_positive("length_rep", length_rep)
+    _validate_positive("amplitude_att", amplitude_att)
+    _validate_positive("length_att", length_att)
+    if length_att <= length_rep:
+        raise ValueError("length_att must exceed length_rep")
+
+    repulsive = amplitude_rep / (length_rep * length_rep)
+    attractive = amplitude_att / (length_att * length_att)
+    self_curvature = attractive - repulsive
+    crossing = two_scale_force_crossing_radius(
+        amplitude_rep=amplitude_rep,
+        length_rep=length_rep,
+        amplitude_att=amplitude_att,
+        length_att=length_att,
+    )
+    self_restoring = self_curvature > 0.0
+    finite_balance = crossing is not None
+    return CompactTwoScaleSameLawCompatibility(
+        repulsive_curvature_scale=float(repulsive),
+        attractive_curvature_scale=float(attractive),
+        self_restoring_curvature=float(self_curvature),
+        force_crossing_radius=crossing,
+        self_restoring=self_restoring,
+        finite_pair_balance=finite_balance,
+        jointly_compatible=bool(self_restoring and finite_balance),
+    )

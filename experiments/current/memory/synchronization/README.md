@@ -653,6 +653,33 @@ Preregistration and result:
 `reports/project/meta/preregistration/p32d_shape_multipole_preregistration_2026-08-06.md` and
 `reports/response/source_local/p32d_shape_multipole_gate_2026-08-06.md`.
 
+### Same-law Jacobian and affine-balance gates (P3.7a/b)
+
+The canonical two-node projection is
+`Y_minus=(x_minus,memory-centre-minus)`. `G` and `C(R)` are the self and cross
+Hessian gains measured from complete mature memory states; scalar `g,c` are
+only directional approximations. `A_minus(G,C,lambda)` is derived from these
+quantities and is not a new microscopic parameter.
+
+At the checkpoint coupling `eta=0.15`, all full-matrix modes are real. A
+registered common scaling of self and cross gains finds a broad local
+stable-complex interval at `R=sigma_rep`, shared by all 13 tested directions
+in `d=3` and `d=10`. The full affine gate then fails 0/13 at every eligible
+distance: the reference geometries carry large relative drift. In the compact
+point limit, local self-confinement and a positive force-zero radius of the
+same scalar two-Gaussian law require opposite `A/L^2` inequalities.
+
+Therefore no 500,000-update low-g pilot is authorized. The next admissible
+step is an analytic common source/readout energy with an explicit affine
+balance and a justified signed/oriented source or distinct geometry, not an
+eta, lambda, amplitude, or frequency sweep.
+
+Preregistrations and results:
+`reports/project/meta/preregistration/same_law_reciprocal_jacobian_audit_2026-08-11.md`,
+`reports/project/meta/preregistration/same_law_common_scale_followup_2026-08-11.md`,
+`reports/project/meta/preregistration/same_law_affine_balance_gate_2026-08-11.md`,
+and the correspondingly named reports under `reports/response/reciprocal/`.
+
 ## Observables
 
 A target knot provides:
