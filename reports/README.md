@@ -137,6 +137,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     exakte Schwelle `2 c_j k > |lambda_m-gamma_j|` fuer komplexe Pole.
   - Strom, Flussrelaxation und Steifigkeit bleiben neue Annahmen; statische
     Kraftbilanz, transversale Phase und `d=3` sind nicht geloest. Kein Pilot.
+- [Dynamischer Green-Kernel und Skalenwahl](memory/closure/dynamic_green_kernel_selection_gate_2026-08-11.md)
+  - **structural pass, model candidate:** Ein gemeinsamer gradientenfoermiger
+    Write/Readout erzeugt `K_eff` als Feldantwort, Nullmode null und eine
+    intern bestimmte Peakwellenzahl. Zwoelf analytische/numerische Gates
+    einschliesslich gainfreier Peak-Inversion bestehen.
+  - Der feste Existenzpunkt besitzt positive konstitutive Energie,
+    cutoff-robuste attraktive/repulsive Schalen und ein lineares getrenntes
+    Paarminimum bei `6.96 ell`. Drei dimensionslose Koeffizientengruppen bleiben
+    Inputs; noch keine Knotensimulation oder Parameterselbstauswahl.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

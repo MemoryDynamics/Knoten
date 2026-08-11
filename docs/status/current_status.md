@@ -166,6 +166,7 @@ wichtig:
 23. `reports/response/reciprocal/same_law_common_scale_followup_2026-08-11.md`
 24. `reports/response/reciprocal/same_law_affine_balance_gate_2026-08-11.md`
 25. `reports/memory/closure/continuity_constrained_memory_gate_2026-08-11.md`
+26. `reports/memory/closure/dynamic_green_kernel_selection_gate_2026-08-11.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -447,6 +448,23 @@ Propagationseignung, aber noch keine Knotenevidenz. `j`, `gamma_j` und `c_j`
 sind neue Annahmen; statische Kraftbilanz, transversale Phase und `d=3` bleiben
 ungeloest. Vor einem Pilot folgt eine gemeinsame Source-/Readout-Energie samt
 Affin- oder Limit-Cycle-Gate.
+
+P3.8b verbindet diesen Strom nun mit einer einzigen gradientenfoermigen
+Write-/Readout-Geometrie. Der effektive Kernel ist die dynamische
+Antwortsfunktion
+`g^2 k^2/[(-iw+lambda_m)(-iw+gamma_j)+k^2(a+b k^2+c k^4)]`, nicht mehr eine
+frei gescannte Radialfunktion. Der `k^2`-Zaehler erzwingt Nullmode null; das
+gemeinsame Gain erscheint als `g^2`. Fuenf dimensionale Koeffizienten zerfallen
+in Naturalskalen und drei dimensionslose Gruppen `delta,mu,r_gamma`. Die
+Peakgleichung bestimmt die effektive Wellenzahl ohne Zielwert. Der feste
+Existenzpunkt `(-1.9,0.3,1)` besteht zwoelf Gates: positive konstitutive Energie,
+statischer und zeitlicher Modenpass, analytisch-numerische Peakidentitaet,
+Cutoff-Robustheit und wechselnde Realraumschalen. Im linearen
+Punktquellenpotential liegt die erste Barriere bei `3.88 ell`, das erste
+getrennte Minimum bei `6.96 ell`. Das ist ein Modellkandidat, kein beobachteter
+Zwei-Knoten-Zustand. Als P3.8c folgt genau ein matched Vergleich gegen den
+bereits fixierten kompensierten statischen Aussenschalenkernel; adaptive
+Koeffizienten und freie Sweeps bleiben gesperrt.
 
 ## Paper-Status
 

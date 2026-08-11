@@ -46,6 +46,7 @@ flowchart TD
     experiments --> retarded_reciprocal_exp["retarded_reciprocal_full_knot_gate.py<br/>operational channel; complex-mode null"]
     experiments --> same_law_jacobian["same_law_*_audit/gate.py<br/>Jacobian eligibility + affine no-go"]
     experiments --> continuity_gate["continuity_constrained_memory_gate.py<br/>density-current analytic gate"]
+    experiments --> green_kernel_gate["dynamic_green_kernel_selection_gate.py<br/>response-selected shell kernel"]
     experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
@@ -102,7 +103,8 @@ flowchart TD
 
     core --> state
     covariant_field --> analytic_boundary["K2 nur analytisch<br/>keine Laufzeitkopplung an (x,rho)"]
-    continuity_memory --> continuity_boundary["P3.8a nur analytisch<br/>force balance + common energy offen"]
+    continuity_memory --> continuity_boundary["P3.8a/b analytisch<br/>dynamic Green pass; nonlinear pair open"]
+    continuity_memory --> green_kernel_gate
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]
@@ -295,7 +297,8 @@ flowchart LR
     jacobian --> commonscale["one common eta<br/>local complex eligibility"]
     commonscale --> affinebalance["affine balance 0/13<br/>compact two-scale no-go"]
     affinebalance --> continuitymemory["continuity-constrained rho/j gate<br/>longitudinal phase; force balance open"]
-    continuitymemory --> commonenergy["next: common source/readout energy<br/>affine or limit-cycle gate"]
+    continuitymemory --> commonenergy["common gradient write/read energy<br/>dynamic Green kernel pass"]
+    commonenergy --> pairdiscrimination["next: one matched two-node gate<br/>static shell vs dynamic field"]
     retarded --> source_local["emitter-only offset/current<br/>stable channel; knot-loading null"]
     source_local --> shape_source["autonomous shape multipole<br/>segment/control gate null"]
     shape_source --> vector_form["next: formal vector-memory extension<br/>equations + null limits before run"]

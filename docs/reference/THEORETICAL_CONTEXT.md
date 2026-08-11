@@ -961,6 +961,87 @@ nicht das P3.7b-Kraftbilanzgate: Eine Mode um eine driftende Geometrie ist noch
 kein Knotenorbit. Eine gemeinsame Source-/Readout-Energie und ein Affin- oder
 Limit-Cycle-Gate sind deshalb zwingend vor einer Simulation.
 
+### Dynamischer Green-Kernel und Skalenwahl
+
+Eine gemeinsame reziproke Gradienten-Kopplung kann Source und Readout ohne
+getrennte Gains festlegen. Fuer den longitudinalen konstitutiven Operator
+
+\[
+D(k)=a+b k^2+c k^4,
+\qquad a,c>0,
+\]
+
+lautet die lineare eliminierte Antwort
+
+\[
+\widehat K_{\rm eff}(k,\omega)
+=\frac{g^2k^2}
+{(-i\omega+\lambda_m)(-i\omega+\gamma_j)+k^2D(k)}.
+\]
+
+Das Quadrat $g^2$ folgt daraus, dass derselbe adjungierte Kanal schreibt und
+liest. Der Faktor $k^2$ nullt die homogene Mode exakt; ein Zero-Mean-Kernel
+wird damit zur Operatorfolge und nicht zur Balance frei gesetzter
+Gaussamplituden. Eine direkte skalare Kopplung ohne Gradienten ist die
+Nullkontrolle und besitzt diesen Faktor nicht.
+
+Mit
+
+\[
+\ell=(c/a)^{1/4},\quad
+u=k\ell,\quad
+\delta=\frac b{\sqrt{ac}},\quad
+\mu=\frac{\lambda_m\gamma_j\sqrt c}{a^{3/2}},\quad
+r_\gamma=\frac{\gamma_j}{\lambda_m}
+\]
+
+reduziert sich der statische Nenner auf
+
+\[
+P(u)=\mu+u^2+\delta u^4+u^6.
+\]
+
+Die gradientengekoppelte Antwort $u^2/P(u)$ besitzt ihr positives Maximum bei
+$y_*=u_*^2$ mit
+
+\[
+2y_*^3+\delta y_*^2-\mu=0.
+\]
+
+Damit werden effektive Wellenlaenge und Schalenradien aus der Feldantwort
+bestimmt, nicht als Zielwert eingesetzt. Dies ist Skalenwahl, aber noch keine
+Selbstauswahl der drei dimensionslosen Operatorgruppen. Eine Simulation kann
+Konstanten ohne eigene Updategleichung nicht erzeugen. Wissenschaftlich
+zulaessig ist zunaechst nur deren grobgekoernte Identifikation. Mit
+$y=u^2$ und
+$\kappa_y=-\partial_y^2\log H(y)|_{y_*}>0$ gilt gainunabhaengig
+
+\[
+\delta=
+\frac{y_*[6-\kappa_y(1+3y_*^2)]}{2(\kappa_y y_*^2-1)},
+\qquad
+\mu=2y_*^3+\delta y_*^2.
+\]
+
+Peaklage und lokale Log-Kruemmung identifizieren damit $(\delta,\mu)$ unter
+der Modellannahme; zeitliche Daempfung/Phase am selben Peak testet
+$r_\gamma$, und ein unabhaengig kalibrierter Weak-Response-Gain bestimmt die
+verbleibende Amplitude. Die Werte
+muessen ueber Seeds, Segmente, Aufloesungen und eine unabhaengige Paarantwort
+stabil bleiben.
+
+Der feste analytische Existenzpunkt
+$(\delta,\mu,r_\gamma)=(-1.9,0.3,1)$ liegt mit
+$1-\delta^2/4=0.0975>0$ noch in der positiv definiten konstitutiven Familie.
+Er waehlt $u_*=1.03869$, traegt einen stabilen komplexen zeitlichen Modus und
+liefert in der dreidimensionalen Punktquellen-Green-Funktion wechselnde,
+Fourier-Cutoff-stabile Schalen. Fuer die Konvention
+$U_{\rm pair}=-K_{\rm eff}$ liegt die erste Energiebarriere bei
+$r/\ell\simeq3.88$ und das erste getrennte lokale Minimum bei
+$r/\ell\simeq6.96$. Das zeigt nur die Existenz eines linearen Paarbeckens.
+Zugaenglichkeit, nichtlineare Knotenerhaltung, Rauschen und Mehrknotendynamik
+bleiben im naechsten kontrollierten Pilot zu testen.
+
 ## Markov-Einbettung
 
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der

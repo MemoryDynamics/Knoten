@@ -50,6 +50,39 @@ class ContinuityMemoryMode:
     classification: str
 
 
+@dataclass(frozen=True)
+class ContinuityKernelDimensionlessGroups:
+    """Natural scales and irreducible ratios of the local density-flux law."""
+
+    length_scale: float
+    denominator_scale: float
+    flux_relaxation_ratio: float
+    spectral_shape: float
+    memory_loading: float
+
+
+@dataclass(frozen=True)
+class ContinuityKernelSelection:
+    """Selected response scale and stability of a reciprocal gradient channel."""
+
+    selected_scaled_wavenumber: float
+    selected_scaled_wavelength: float
+    peak_dimensionless_transfer: float
+    constitutive_energy_positive: bool
+    statically_stable: bool
+    selected_mode_oscillatory: bool
+    minimum_dimensionless_denominator: float
+    classification: str
+
+
+@dataclass(frozen=True)
+class ContinuityKernelInference:
+    """Shape groups inferred from a gain-independent local spectral peak."""
+
+    spectral_shape: float
+    memory_loading: float
+
+
 def memory_innovation_moments(
     *,
     memory_relaxation: float,
@@ -174,3 +207,212 @@ def continuity_oscillation_threshold(
     if restoring == 0.0:
         return float("inf")
     return float(abs(relaxation - flux_decay) / (2.0 * math.sqrt(restoring)))
+
+
+def continuity_kernel_dimensionless_groups(
+    *,
+    memory_relaxation: float,
+    flux_relaxation: float,
+    local_stiffness: float,
+    gradient_stiffness: float,
+    biharmonic_stiffness: float,
+) -> ContinuityKernelDimensionlessGroups:
+    r"""Reduce the local density-flux kernel to scales and three ratios.
+
+    With ``D(k)=a+b*k**2+c*k**4``, use
+    ``ell=(c/a)**(1/4)`` and ``S=a**(3/2)/sqrt(c)``.  The dimensionless static
+    denominator is ``mu+u**2+delta*u**4+u**6`` for ``u=k*ell``.
+    """
+
+    relaxation = _finite("memory_relaxation", memory_relaxation)
+    flux_decay = _finite("flux_relaxation", flux_relaxation)
+    local = _finite("local_stiffness", local_stiffness)
+    gradient = _finite("gradient_stiffness", gradient_stiffness)
+    biharmonic = _finite("biharmonic_stiffness", biharmonic_stiffness)
+    if relaxation <= 0.0 or flux_decay <= 0.0:
+        raise ValueError("memory and flux relaxation must be positive")
+    if local <= 0.0 or biharmonic <= 0.0:
+        raise ValueError("local and biharmonic stiffness must be positive")
+    root_ac = math.sqrt(local * biharmonic)
+    denominator_scale = local ** 1.5 / math.sqrt(biharmonic)
+    return ContinuityKernelDimensionlessGroups(
+        length_scale=float((biharmonic / local) ** 0.25),
+        denominator_scale=float(denominator_scale),
+        flux_relaxation_ratio=float(flux_decay / relaxation),
+        spectral_shape=float(gradient / root_ac),
+        memory_loading=float(relaxation * flux_decay / denominator_scale),
+    )
+
+
+def dimensionless_continuity_kernel_denominator(
+    scaled_wavenumber: np.ndarray | float,
+    *,
+    spectral_shape: float,
+    memory_loading: float,
+) -> np.ndarray:
+    """Return ``mu+u**2+delta*u**4+u**6``."""
+
+    u = np.asarray(scaled_wavenumber, dtype=float)
+    if not np.isfinite(u).all() or np.any(u < 0.0):
+        raise ValueError("scaled_wavenumber must be finite and non-negative")
+    delta = _finite("spectral_shape", spectral_shape)
+    loading = _non_negative("memory_loading", memory_loading)
+    u2 = np.square(u)
+    return np.asarray(loading + u2 + delta * np.square(u2) + u2**3, dtype=float)
+
+
+def reciprocal_continuity_kernel_transfer(
+    wavenumber: np.ndarray | float,
+    *,
+    memory_relaxation: float,
+    flux_relaxation: float,
+    local_stiffness: float,
+    gradient_stiffness: float,
+    biharmonic_stiffness: float,
+    coupling: float = 1.0,
+    gradient_coupling: bool = True,
+) -> np.ndarray:
+    r"""Return the static common-energy effective kernel in Fourier space.
+
+    A single interaction coefficient enters quadratically because write and
+    readout are adjoints.  Gradient coupling contributes ``k**2`` and hence an
+    exact zero mode; direct scalar coupling contributes one.  The function
+    raises when the requested Fourier grid contains a non-positive static
+    denominator.
+    """
+
+    k = np.asarray(wavenumber, dtype=float)
+    if not np.isfinite(k).all():
+        raise ValueError("wavenumber must be finite")
+    groups = continuity_kernel_dimensionless_groups(
+        memory_relaxation=memory_relaxation,
+        flux_relaxation=flux_relaxation,
+        local_stiffness=local_stiffness,
+        gradient_stiffness=gradient_stiffness,
+        biharmonic_stiffness=biharmonic_stiffness,
+    )
+    k2 = np.square(k)
+    denominator = (
+        memory_relaxation * flux_relaxation
+        + local_stiffness * k2
+        + gradient_stiffness * np.square(k2)
+        + biharmonic_stiffness * k2**3
+    )
+    if np.any(denominator <= 0.0):
+        raise ValueError("static density-flux kernel is not positive")
+    gain = _finite("coupling", coupling)
+    numerator = k2 if gradient_coupling else np.ones_like(k2)
+    response = gain * gain * numerator / denominator
+    if groups.denominator_scale <= 0.0:  # pragma: no cover - construction guard
+        raise RuntimeError("invalid denominator scale")
+    return np.asarray(response, dtype=float)
+
+
+def continuity_kernel_selection(
+    *,
+    spectral_shape: float,
+    memory_loading: float,
+    flux_relaxation_ratio: float,
+) -> ContinuityKernelSelection:
+    r"""Select the peak of the reciprocal gradient-coupled susceptibility.
+
+    For ``H(u)=u**2/(mu+u**2+delta*u**4+u**6)``, the positive peak solves
+    ``2*y**3+delta*y**2-mu=0`` with ``y=u**2``.  No target wavelength is
+    supplied.  The constitutive stiffness ``1+delta*u**2+u**4`` is positive
+    for every mode exactly when ``delta>-2``.
+    """
+
+    delta = _finite("spectral_shape", spectral_shape)
+    loading = _finite("memory_loading", memory_loading)
+    ratio = _finite("flux_relaxation_ratio", flux_relaxation_ratio)
+    if loading <= 0.0 or ratio <= 0.0:
+        raise ValueError("memory loading and flux relaxation ratio must be positive")
+
+    roots = np.roots([2.0, delta, 0.0, -loading])
+    positive = [float(root.real) for root in roots if abs(root.imag) < 1.0e-10 and root.real > 0.0]
+    if len(positive) != 1:
+        raise RuntimeError("gradient-coupled response must have one positive peak")
+    y_peak = positive[0]
+    u_peak = float(math.sqrt(y_peak))
+    denominator_at_peak = float(
+        dimensionless_continuity_kernel_denominator(
+            u_peak,
+            spectral_shape=delta,
+            memory_loading=loading,
+        )
+    )
+    peak_transfer = float(y_peak / denominator_at_peak)
+
+    derivative_roots = np.roots([3.0, 2.0 * delta, 1.0])
+    candidates = [0.0]
+    candidates.extend(
+        float(root.real)
+        for root in derivative_roots
+        if abs(root.imag) < 1.0e-10 and root.real > 0.0
+    )
+    minimum = min(
+        float(loading + y + delta * y * y + y**3) for y in candidates
+    )
+    tolerance = 64.0 * np.finfo(float).eps * max(1.0, loading, abs(minimum))
+    stable = bool(minimum > tolerance)
+    constitutive_positive = bool(delta > -2.0 + tolerance)
+    stiffness_at_peak = float(y_peak * (1.0 + delta * y_peak + y_peak**2))
+    mismatch = float((1.0 - ratio) ** 2 / ratio)
+    oscillatory = bool(stiffness_at_peak > 0.0 and 4.0 * stiffness_at_peak / loading > mismatch)
+
+    if not stable:
+        classification = "static_instability"
+    elif not constitutive_positive:
+        classification = "stable_response_with_indefinite_constitutive_energy"
+    elif oscillatory:
+        classification = "stable_selected_oscillatory_mode"
+    else:
+        classification = "stable_selected_real_mode"
+    return ContinuityKernelSelection(
+        selected_scaled_wavenumber=u_peak,
+        selected_scaled_wavelength=float(2.0 * math.pi / u_peak),
+        peak_dimensionless_transfer=peak_transfer,
+        constitutive_energy_positive=constitutive_positive,
+        statically_stable=stable,
+        selected_mode_oscillatory=oscillatory,
+        minimum_dimensionless_denominator=minimum,
+        classification=classification,
+    )
+
+
+def infer_continuity_kernel_groups_from_peak(
+    *,
+    selected_scaled_wavenumber: float,
+    log_transfer_curvature_y: float,
+) -> ContinuityKernelInference:
+    r"""Infer ``delta`` and ``mu`` from peak position and log curvature.
+
+    The curvature is the second derivative of ``log H`` with respect to
+    ``y=u**2`` at the maximum of
+    ``H(y)=y/(mu+y+delta*y**2+y**3)``.  It is independent of an unknown
+    multiplicative response gain.  This is an effective-parameter estimator,
+    not a microscopic law that generates the coefficients.
+    """
+
+    u_peak = _finite("selected_scaled_wavenumber", selected_scaled_wavenumber)
+    curvature = _finite("log_transfer_curvature_y", log_transfer_curvature_y)
+    if u_peak <= 0.0:
+        raise ValueError("selected_scaled_wavenumber must be positive")
+    if curvature >= 0.0:
+        raise ValueError("log_transfer_curvature_y must be negative at a peak")
+    y_peak = u_peak * u_peak
+    sharpness = -curvature
+    denominator = 2.0 * (sharpness * y_peak * y_peak - 1.0)
+    tolerance = 64.0 * np.finfo(float).eps * max(1.0, abs(denominator))
+    if abs(denominator) <= tolerance:
+        raise ValueError("peak position and curvature do not identify spectral shape")
+    delta = y_peak * (
+        6.0 - sharpness * (1.0 + 3.0 * y_peak * y_peak)
+    ) / denominator
+    loading = 2.0 * y_peak**3 + delta * y_peak**2
+    if loading <= 0.0:
+        raise ValueError("inferred memory loading is not positive")
+    return ContinuityKernelInference(
+        spectral_shape=float(delta),
+        memory_loading=float(loading),
+    )

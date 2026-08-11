@@ -668,6 +668,33 @@ Prioritaetsfolge:
     danach erneut affine Gleichgewichte beziehungsweise ein klar definiertes
     Limit-Cycle-Gate. Noch kein Pilot und kein Parametersweep.
 
+    **P3.8b dynamischer Green-Kernel, analytisch bestanden:** Fuer den lokalen
+    konstitutiven Operator `D(k)=a+b k^2+c k^4` und einen gemeinsamen
+    gradientenfoermigen Write/Readout folgt
+    `K_eff(k,w)=g^2 k^2 / [(-iw+lambda_m)(-iw+gamma_j)+k^2 D(k)]`.
+    Damit ist `K_eff(0,w)=0` exakt und die Quelle-/Readoutamplitude tritt nur
+    als `g^2` auf. Nach Naturalskalierung bleiben
+    `delta=b/sqrt(a c)`, `mu=lambda_m gamma_j sqrt(c)/a^(3/2)` und
+    `r_gamma=gamma_j/lambda_m`. Die Antwort waehlt ihre Wellenzahl ueber
+    `2 y_*^3+delta y_*^2-mu=0`, `y_*=u_*^2`, ohne Zielwellenzahl oder
+    Amplitudensweep. Ein fester, nicht gefitteter Existenzpunkt
+    `(delta,mu,r_gamma)=(-1.9,0.3,1)` besitzt positive konstitutive Energie,
+    einen stabilen komplexen selektierten Modus, cutoff-robuste wechselnde
+    Realraumschalen und ein erstes getrenntes lineares Paarminimum bei
+    `r/ell=6.96` hinter einer Barriere bei `3.88`. Dies ist ein linearer
+    Punktquellenbefund, keine Knotensimulation und keine Parameterherleitung.
+
+    **P3.8c jetzt: genau ein matched Zwei-Knoten-Diskriminationstest.** Reife
+    eingefrorene Zustaende werden bei vorab aus den beiden Modellen bestimmten
+    Abstaenden eingesetzt. Arm A ist der bestehende statische kompensierte
+    Aussenschalenkernel, Arm B der feste dynamische Green-Kanal. Cross-off,
+    Flux-/reversible-off und direkter nicht-gradienter Sourcekanal sind die
+    Kontrollen. Primaer sind Vorzeichen der Center-Beschleunigung,
+    beschraenkte Separation, Shape-Bounds, Energie-/Arbeitsbilanz und
+    Vorhersage der Schalenradien. Kein Parameter- oder Kernel-Sweep. Erst wenn
+    effektive `delta,mu,r_gamma` ueber Seeds und Grobkoernungen stabil
+    identifizierbar sind, duerfen sie als datenbestimmte Parameter gelten.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
