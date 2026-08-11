@@ -379,6 +379,21 @@ gesperrt. Ein weiterer Paper-III-Schritt muesste zuerst einen explizit
 reversiblen beziehungsweise antisymmetrischen Feldmechanismus als neue,
 analytisch falsifizierbare Annahme formulieren.
 
+Diese neue Annahme ist nun als P3.6 analytisch geschlossen. Ein konjugiertes
+Impulsfeld erweitert die lokale Vektorfeldenergie zu
+`m_dot=pi/I`, `pi_dot=-delta F/delta m-(gamma/I)pi`. Fuer jeden
+longitudinalen/transversalen Modus gilt
+`I s^2+gamma s+D_q(k)=0`. Exakte Wurzeln, O(d)-Kovarianz, reversible
+Energieerhaltung, dissipative Energierate und negative-Kruemmungs-Kontrolle
+bestehen bis maximal `1.18e-13`; Entscheidung: struktureller Pass. Das ist
+eine konstruktive Moeglichkeitsaussage, keine beobachtete Knotenschwingung.
+Stabilitaet stammt aus `D_q(k)>0` und `gamma>0`, Phase aus dem reversiblen
+Austausch; langlebige Oszillation benoetigt zusaetzlich kleine dimensionslose
+Daempfung. Die Koeffizienten bleiben Inputs und `d=3` wird nicht selektiert.
+Vor einem Feldpiloten muss P3.7 Feldquelle und Trajektorienreadout aus genau
+einer gemeinsamen Kopplungsenergie ableiten und deren diskrete Energiebilanz
+mit Nullkontrollen vorregistrieren.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste

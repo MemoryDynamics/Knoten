@@ -116,6 +116,14 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
   - Das ist generische exponentielle Delay-/Readoutkompression, keine
     knotenspezifische uebertragbare Mode. Kein Gain-/Lambda-Sweep und keine
     Optimierung vermeintlicher komplexer Schwingungen.
+- [Inertial-reversibler Vektorfeld-Audit](memory/closure/inertial_vector_field_analytic_gate_2026-08-11.md)
+  - **structural pass, constructive:** Das konjugierte Feldpaar liefert exakt
+    `I s^2+gamma s+D_q(k)=0`; Wurzeln, O(d)-Kovarianz und Energiebilanz
+    bestehen bis maximal `1.18e-13`.
+  - Stabile gedaempfte Schwingungen sind mathematisch moeglich, aber durch die
+    neue Impulsvariable konstruiert. Keine Parameteridentifikation, keine
+    beobachtete Knotenschwingung und keine `d=3`-Selektion. Naechstes Gate ist
+    eine gemeinsame Source-/Readout-Kopplungsenergie.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds

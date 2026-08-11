@@ -275,7 +275,7 @@ def write_figure(path: Path) -> None:
     regime[d_grid > 0.0] = 1
     regime[(d_grid > 0.0) & (d_grid > np.square(z_grid))] = 2
 
-    figure, axes = plt.subplots(1, 3, figsize=(14.0, 4.2))
+    figure, axes = plt.subplots(1, 3, figsize=(14.0, 4.2), constrained_layout=True)
     cmap = ListedColormap(["#b24a4a", "#55707f", "#2f8f83"])
     axes[0].pcolormesh(denominator, damping_ratio, regime, cmap=cmap, shading="auto")
     axes[0].plot(
@@ -325,9 +325,8 @@ def write_figure(path: Path) -> None:
     )
     for axis in axes:
         axis.grid(alpha=0.2)
-    figure.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(path, dpi=180)
+    figure.savefig(path, dpi=180, bbox_inches="tight")
     plt.close(figure)
 
 

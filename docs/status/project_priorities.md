@@ -561,7 +561,7 @@ Prioritaetsfolge:
     Damit wurde ein generischer exponentieller Delay-/Readoutmodus gefunden,
     keine knotenspezifische raeumlich uebertragbare Mode.
 
-19. **P3.6 als naechstes, nur analytisch: reversibler Feldmechanismus statt
+19. **P3.6 abgeschlossen, struktureller Pass: reversibler Feldmechanismus statt
     Parametersuche.** Das passive orientierte Memory besitzt weder einen
     identifizierten Rueckkanal noch eine geometriespezifische reduzierte Mode.
     Weitere Long Runs oder Gain-/Lambda-Sweeps koennen diese fehlende Struktur
@@ -572,6 +572,28 @@ Prioritaetsfolge:
     Gruppen, passive Nullkontrolle und ein unabhaengiger Zeitbereichs-Holdout
     festzulegen. Die neue Gleichung waere ein Postulat, bis ihre Koeffizienten
     aus einer tieferen Dynamik oder Daten identifiziert sind.
+
+    **Ergebnis vom 2026-08-11:** Der fruehere reaktive `2 x 2`-Platzhalter ist
+    nun mit der raeumlichen Vektorfeldenergie ueber ein konjugiertes
+    Impulsfeld verbunden. Fuer jeden L/T-Modus gilt exakt
+    `I s^2 + gamma s + D_q(k) = 0`. Alle sechs registrierten Identitaeten
+    bestehen; der groesste Kovarianzfehler ist `1.18e-13`. Stabile gedaempfte
+    Schwingung erfordert `D_q(k)>0`, `gamma>0` und
+    `4 I D_q(k)>gamma^2`. Die Negativkontrolle bestaetigt, dass negative
+    Kruemmung trotz positiver Daempfung einen positiven Eigenwert behaelt.
+    Der Pass ist konstruktiv-strukturell: Er zeigt mathematische
+    Moeglichkeit, keine emergente oder beobachtete Knotenschwingung. Der
+    Operator bleibt O(d)-kovariant und selektiert kein `d=3`.
+
+20. **P3.7 als naechstes: gemeinsame Source-/Readout-Energie vor einem
+    Feldpiloten.** Genau eine Kopplungsenergie
+    `H_int[x,m] = - integral J[x] dot m dx` ist festzulegen. Aus ihr muessen
+    sowohl die Feldquelle `+J[x]` als auch die reziproke Trajektorienkraft
+    `-partial_x H_int` folgen; getrennt gewaehlte Deposit-/Readout-Gains sind
+    nicht zulaessig. Vorregistriert werden diskrete Energiebilanz,
+    Source-off-, Reversible-off- und First-order-Kontrollen sowie ein
+    unabhaengiger Zeitbereichs-Holdout. Erst danach ist genau ein
+    dimensionsloser, modellkonditionaler Knotensimulationspilot zulaessig.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
