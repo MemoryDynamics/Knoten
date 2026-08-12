@@ -908,9 +908,11 @@ extension with its own null limits before another mechanism run.
 
 ## Kontinuitaetsbeschraenktes Dichte-Strom-Memory
 
-Die am staerksten durch bestehende Struktur begruendete aktive Erweiterung ist
-kein frei gewaehlter Vektorkanal, sondern ein lokaler Memory-Strom
-$\mathbf j$. Aus dem kanonischen Update folgt zunaechst die Innovation
+Ein durch bestehende Struktur begruendeter aktiver Erweiterungskandidat ist
+kein frei gewaehltes Knotenlabel, sondern ein lokaler Memory-Strom
+$\mathbf j$. Der bestehende skalare Datensatz selektiert diesen Kandidaten
+jedoch nicht gegen andere Erweiterungen. Aus dem kanonischen Update folgt
+zunaechst die Innovation
 
 \[
 S_n(y)=\rho_{n+1}(y)-\rho_n(y)
@@ -961,10 +963,31 @@ nicht das P3.7b-Kraftbilanzgate: Eine Mode um eine driftende Geometrie ist noch
 kein Knotenorbit. Eine gemeinsame Source-/Readout-Energie und ein Affin- oder
 Limit-Cycle-Gate sind deshalb zwingend vor einer Simulation.
 
-### Dynamischer Green-Kernel und Skalenwahl
+### Separater Gradientenmediator und Skalenwahl
 
-Eine gemeinsame reziproke Gradienten-Kopplung kann Source und Readout ohne
-getrennte Gains festlegen. Fuer den longitudinalen konstitutiven Operator
+Die rigorose Nachpruefung trennt diesen Ansatz von der vorherigen
+Dichte-Strom-Gleichung. Der folgende `k^2`-Kanal entsteht nicht durch additive
+Deposition in das kanonische $\rho$ und auch nicht automatisch aus dem
+P3.8a-Strom $\mathbf j$. Er erfordert einen neuen longitudinalen Vektormediator
+$\mathbf m$ mit konjugierter Geschwindigkeit $\mathbf p$:
+
+\[
+\partial_t\mathbf m=\mathbf p,
+\qquad
+\partial_t\mathbf p=-(\lambda_m+\gamma_p)\mathbf p
+-[\lambda_m\gamma_p+(-\Delta)D(-\Delta)]\mathbf m
++g\nabla q.
+\]
+
+Hier ist $q$ eine skalare Quelldichte. Die einzige Kopplungsenergie
+
+\[
+H_{\rm int}[\mathbf m,q]
+=-g\int \mathbf m(x)\cdot\nabla q(x)\,dx
+\]
+
+liefert sowohl die Gradientenquelle als auch das adjungierte reziproke
+Readout. Fuer den longitudinalen konstitutiven Operator
 
 \[
 D(k)=a+b k^2+c k^4,
@@ -976,7 +999,7 @@ lautet die lineare eliminierte Antwort
 \[
 \widehat K_{\rm eff}(k,\omega)
 =\frac{g^2k^2}
-{(-i\omega+\lambda_m)(-i\omega+\gamma_j)+k^2D(k)}.
+{(-i\omega+\lambda_m)(-i\omega+\gamma_p)+k^2D(k)}.
 \]
 
 Das Quadrat $g^2$ folgt daraus, dass derselbe adjungierte Kanal schreibt und
@@ -991,8 +1014,8 @@ Mit
 \ell=(c/a)^{1/4},\quad
 u=k\ell,\quad
 \delta=\frac b{\sqrt{ac}},\quad
-\mu=\frac{\lambda_m\gamma_j\sqrt c}{a^{3/2}},\quad
-r_\gamma=\frac{\gamma_j}{\lambda_m}
+\mu=\frac{\lambda_m\gamma_p\sqrt c}{a^{3/2}},\quad
+r_\gamma=\frac{\max(\lambda_m,\gamma_p)}{\min(\lambda_m,\gamma_p)}\geq1
 \]
 
 reduziert sich der statische Nenner auf
@@ -1023,7 +1046,10 @@ $\kappa_y=-\partial_y^2\log H(y)|_{y_*}>0$ gilt gainunabhaengig
 \mu=2y_*^3+\delta y_*^2.
 \]
 
-Peaklage und lokale Log-Kruemmung identifizieren damit $(\delta,\mu)$ unter
+Da die beiden Zerfallsraten nur ueber Summe und Produkt eingehen, sind ihre
+Namen vertauschbar; $r_\gamma$ bezeichnet deshalb das kanonische groessere-
+zu-kleinerem-Verhaeltnis. Peaklage und lokale Log-Kruemmung identifizieren
+damit $(\delta,\mu)$ unter
 der Modellannahme; zeitliche Daempfung/Phase am selben Peak testet
 $r_\gamma$, und ein unabhaengig kalibrierter Weak-Response-Gain bestimmt die
 verbleibende Amplitude. Die Werte
@@ -1033,14 +1059,39 @@ stabil bleiben.
 Der feste analytische Existenzpunkt
 $(\delta,\mu,r_\gamma)=(-1.9,0.3,1)$ liegt mit
 $1-\delta^2/4=0.0975>0$ noch in der positiv definiten konstitutiven Familie.
-Er waehlt $u_*=1.03869$, traegt einen stabilen komplexen zeitlichen Modus und
-liefert in der dreidimensionalen Punktquellen-Green-Funktion wechselnde,
-Fourier-Cutoff-stabile Schalen. Fuer die Konvention
-$U_{\rm pair}=-K_{\rm eff}$ liegt die erste Energiebarriere bei
-$r/\ell\simeq3.88$ und das erste getrennte lokale Minimum bei
-$r/\ell\simeq6.96$. Das zeigt nur die Existenz eines linearen Paarbeckens.
-Zugaenglichkeit, nichtlineare Knotenerhaltung, Rauschen und Mehrknotendynamik
-bleiben im naechsten kontrollierten Pilot zu testen.
+Er waehlt $u_*=1.03869$ und traegt einen stabilen komplexen zeitlichen Modus.
+Die dreidimensionale Fourier-Inversion wird exakt als Summe dreier
+Yukawa-Residuen berechnet und stimmt am festen Witness bis $1.81\times10^{-15}$
+mit einer unabhaengigen unendlichen oszillatorischen Quadratur ueberein. Fuer
+die Konvention $U_{\rm pair}=-K_{\rm eff}$ liegt die erste Energiebarriere bei
+$r/\ell=3.91920$ und das erste getrennte lokale Minimum bei
+$r/\ell=6.99092$.
+
+Der nachfolgende quasistatische P3.8c-Test setzt zwei starre Kopien des
+vollstaendigen `d=3`, Seed-1, `N=100M`-Memoryzustands ein. Bei $R=5\ell$
+prognostiziert der bisherige kompensierte statische Kernel eine einwaertige,
+der Gradientenmediator eine auswaertige Kraft. Die komplette Memory-Wolke
+reproduziert die beiden Gradientenmediator-Radien innerhalb der erwarteten
+Punktgrenze und erfuellt Action/Reaction sowie $F=-\partial_R E$. Das ist ein
+Diskriminierbarkeitstest, keine Mechanismusselektion: $R_{\rm mem}/\ell$ ist
+nur $2.12\times10^{-4}$, $\ell=\sigma_{\rm rep}$ wurde gesetzt, nur ein
+Formationsseed wurde verwendet und kein Zustand fortgeschrieben.
+Die primaere Paarenergie ist eine reziproke Memory-Dichte-zu-Memory-Dichte-
+Kopplung und damit eine neue Cross-Architektur. Ein separat aus dem
+kanonischen Sichtpunkt-zu-Fremdmemory-Readout energiesymmetrisierter Vergleich
+behaelt bei $R=5\ell$ dieselben Kraftvorzeichen. Das ist wegen der extremen
+Kompaktheit erwartbar und keine Gleichsetzung beider Regeln. Der gemeinsame
+Amplitudenversatz von $0.2411\%$ wird durch die endliche Tail-Masse erklaert:
+Im Punktlimit skalieren die beiden Definitionen wie $M_H^2$ beziehungsweise
+$M_H$ mit $M_H=0.997595$.
+
+Vor einer dynamischen Fortsetzung muss eine diskrete `(m,p)`-Regel dieselbe
+Energie reproduzieren. Bei bewegter Quelle enthaelt die Bilanz neben
+Mediator-Daempfung explizite Source-Arbeit. Zeitschritt-Konvergenz, Cross-off,
+Action/Reaction und eine erster-Ordnung-Kontrolle sind daher Pflicht. Ein
+reiner `reversible-off`-Vergleich ist im statischen Gate nicht diskriminierend,
+weil verschiedene Zeitordnungen dieselbe Gleichgewichtssuszeptibilitaet haben
+koennen. Weder P3.8b noch P3.8c selektiert `d=3`, Ladung, Spin oder QFT.
 
 ## Markov-Einbettung
 

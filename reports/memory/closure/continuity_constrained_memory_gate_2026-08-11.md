@@ -70,10 +70,11 @@ Maximum root error: `0.000e+00`. Telescoping error:
 
 ## Decision
 
-This is the preferred **P3.8a analytic extension** because it introduces no
+This is a **P3.8a analytic extension candidate** because it introduces no
 external sign, handedness, node species, boundary, or separate cross geometry.
 It supplies a falsifiable propagation/phase threshold and a compulsory
-first-order null control (`c_j=0`).
+first-order null control (`c_j=0`). It is not selected over other extensions by
+the existing scalar data.
 
 It does **not** yet authorize a coupled simulation:
 
@@ -84,14 +85,17 @@ It does **not** yet authorize a coupled simulation:
 4. a common source/readout energy must still make deposition and trajectory
    backreaction reciprocal without independently tuned gains.
 
-The next calculation is therefore an energy-consistent density-current
-coupling and its affine equilibrium/limit-cycle gate. Only a simultaneous
-force-balance and stable-mode pass permits one short pilot. A kernel, gain,
-lambda, or noise sweep remains blocked.
+The subsequent P3.8b review found that the tested `k^2` response requires an
+independent longitudinal vector mediator with an adjoint gradient source and
+readout. It does **not** follow from additive deposition into this scalar
+density-current state. P3.8a and P3.8b therefore remain separate model
+candidates despite sharing a longitudinal pole polynomial. Only a derivation
+of a reciprocal source/readout energy for this density-current architecture
+could reconnect them. A kernel, gain, lambda, or noise sweep remains blocked.
 
 ## Reproducibility
 
 - Script: `experiments/current/memory/closure/continuity_constrained_memory_gate.py`
 - Package: `src/emergenz_knoten/continuity_memory.py`
-- Git revision before generated changes: `4835da6762dabdb19a34e85faaf32a2c9a7b40d9`
-- Generated: `2026-08-11T20:34:49.404910+00:00`
+- Git revision before generated changes: `bd31965aeec8aa9ef04a8b78d1eef5bb8e794c59`
+- Generated: `2026-08-12T03:50:23.875151+00:00`

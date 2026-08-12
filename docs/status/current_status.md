@@ -437,7 +437,7 @@ Amplituden-Retuning. P3.8 beginnt nur als Herleitung einer gemeinsamen
 Source-/Readout-Energie mit expliziter Kraftbilanz und einem begruendeten
 internen signierten/orientierten Kanal oder getrennter Self-/Cross-Geometrie.
 
-Der erste P3.8-Mechanismus ist nun analytisch enger gefasst: Ein lokaler
+Der erste P3.8-Kandidat ist analytisch enger gefasst: Ein lokaler
 Gedaechtnisstrom `j` ergaenzt die Dichte nicht als frei orientiertes Label,
 sondern ueber eine Kontinuitaetsgleichung. Der longitudinale Fouriermodus
 erfuellt `(s+lambda_m)(s+gamma_j)+c_j^2 k^2=0` und wird oberhalb
@@ -446,25 +446,45 @@ bestehen; die Memory-Innovation ist bei stationaerer Masse monopolfrei und
 teleskopiert ueber Zeitbloecke. Entscheidung: strukturelle
 Propagationseignung, aber noch keine Knotenevidenz. `j`, `gamma_j` und `c_j`
 sind neue Annahmen; statische Kraftbilanz, transversale Phase und `d=3` bleiben
-ungeloest. Vor einem Pilot folgt eine gemeinsame Source-/Readout-Energie samt
-Affin- oder Limit-Cycle-Gate.
+ungeloest. Der bestehende skalare Datensatz selektiert diese Erweiterung nicht.
 
-P3.8b verbindet diesen Strom nun mit einer einzigen gradientenfoermigen
-Write-/Readout-Geometrie. Der effektive Kernel ist die dynamische
-Antwortsfunktion
-`g^2 k^2/[(-iw+lambda_m)(-iw+gamma_j)+k^2(a+b k^2+c k^4)]`, nicht mehr eine
+**Reviewkorrektur:** P3.8b verbindet diesen Strom nicht automatisch weiter.
+Der dort benoetigte `k^2`-Zaehler folgt nur aus einem eigenstaendigen
+longitudinalen Vektormediator `(m,p)` mit der gemeinsamen Kopplungsenergie
+`H_int=-g integral m dot grad(q) dx`. Dabei ist `q` die skalare Quelldichte;
+`m` ist weder das kanonische `rho` noch der P3.8a-Strom `j`. P3.8a und P3.8b
+teilen ein longitudinales Polpolynom, bleiben aber verschiedene
+Modellarchitekturen. Fuer den P3.8b-Kandidaten ist die Antwortsfunktion
+`g^2 k^2/[(-iw+lambda_m)(-iw+gamma_p)+k^2(a+b k^2+c k^4)]`, nicht mehr eine
 frei gescannte Radialfunktion. Der `k^2`-Zaehler erzwingt Nullmode null; das
 gemeinsame Gain erscheint als `g^2`. Fuenf dimensionale Koeffizienten zerfallen
-in Naturalskalen und drei dimensionslose Gruppen `delta,mu,r_gamma`. Die
+in Naturalskalen und drei dimensionslose Gruppen `delta,mu,r_gamma`. Wegen der
+Vertauschungssymmetrie der Zerfallsraten ist `r_gamma>=1` als groessere durch
+kleinere Rate definiert. Die
 Peakgleichung bestimmt die effektive Wellenzahl ohne Zielwert. Der feste
-Existenzpunkt `(-1.9,0.3,1)` besteht zwoelf Gates: positive konstitutive Energie,
-statischer und zeitlicher Modenpass, analytisch-numerische Peakidentitaet,
-Cutoff-Robustheit und wechselnde Realraumschalen. Im linearen
-Punktquellenpotential liegt die erste Barriere bei `3.88 ell`, das erste
-getrennte Minimum bei `6.96 ell`. Das ist ein Modellkandidat, kein beobachteter
-Zwei-Knoten-Zustand. Als P3.8c folgt genau ein matched Vergleich gegen den
-bereits fixierten kompensierten statischen Aussenschalenkernel; adaptive
-Koeffizienten und freie Sweeps bleiben gesperrt.
+Existenzpunkt `(-1.9,0.3,1)` besteht zwoelf Gates. Die 3D-Inversion erfolgt
+jetzt exakt ueber Residuen und stimmt mit unabhaengiger unendlicher
+Fourierquadratur bis `1.81e-15` ueberein. Die korrigierte erste Barriere liegt
+bei `3.91920 ell`, das erste getrennte Minimum bei `6.99092 ell`.
+
+P3.8c ist quasistatisch abgeschlossen. Zwei starre Kopien des vollstaendigen
+`d=3`, Seed-1, `N=100M`-Gedaechtniszustands wurden ohne Zustandsfortschreibung,
+Gain-Fit oder Sweep verglichen. Bei dem festen, modellabgeleiteten `R=5 ell`
+sagt der statische kompensierte Arm eine Kraft von `-4.78375`, der Gradientenmediator
+`+0.00648732` voraus; alle Orientierungen behalten die entgegengesetzten
+Vorzeichen. Der Gradientenarm besitzt fuer die komplette Memory-Wolke eine
+instabile Barriere bei `3.91920 ell` und ein stabiles quasistatisches Minimum
+bei `6.99092 ell`. Das ist ein **Diskriminierbarkeits- und Implementierungspass**,
+keine Mechanismusselektion: der Zustand ist mit `R_mem=2.12e-4 ell` praktisch
+punktfoermig, `ell=sigma_rep=1` ist gesetzt, nur ein Formationsseed wurde
+verwendet, und weder Mediator- noch Knotendynamik wurde simuliert.
+Die primaere reziproke Paarenergie koppelt zwei Memory-Dichten und ist damit
+ein neuer Cross-Channel, nicht das kanonische Sichtpunkt-Readout. Eine separat
+energiesymmetrisierte Sichtpunkt-zu-Fremdmemory-Kontrolle behaelt wegen der
+Punktartigkeit dieselben Diskriminatorvorzeichen; beide Regeln sind dennoch
+nicht identisch. Ihr gemeinsamer Amplitudenversatz von `0.2411%` entspricht
+bis auf `1.05e-8` dem Unterschied zwischen den Punktgrenzen `M_H` und `M_H^2` bei
+der endlichen gespeicherten Masse `M_H=0.997595`.
 
 ## Paper-Status
 
@@ -472,11 +492,11 @@ Koeffizienten und freie Sweeps bleiben gesperrt.
   Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
-- **Paper II:** Zwei lokale Transportarchitekturen sind konstruiert; sowohl das
-  dynamische Modellselektionsgate als auch das feste reziproke Telegraph-
-  Modengate sind negativ. Propagationsgesetz, Raumzeitkinematik und `d=3`
-  bleiben gesperrt, bis unabhaengige Evidenz, eine quelllokale Feldregel und
-  ein echter Dimensionsreduktionsmechanismus vorliegen.
+- **Paper II:** P3.8b liefert einen analytischen Gradientenmediator-Kandidaten
+  und P3.8c einen quasistatischen Diskriminator, aber noch keinen dynamischen
+  Zwei-Knoten-Pass. Propagationsgesetz, Raumzeitkinematik und `d=3` bleiben
+  gesperrt, bis unabhaengige Evidenz und ein echter Dimensionsreduktions-
+  mechanismus vorliegen.
 - **Paper III:** offene spekulative Tuer ohne Claim-Status.
 
 ## Reproduzierbarkeitsregeln

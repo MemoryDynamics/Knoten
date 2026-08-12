@@ -1,8 +1,8 @@
 {
-  "decision": "structural-pass-dynamic-kernel-candidate",
+  "decision": "structural-pass-adjoint-gradient-mediator-candidate",
   "gates": {
     "dimensionless_reduction_exact": true,
-    "constitutive_energy_positive": true,
+    "constitutive_operator_positive": true,
     "static_denominator_positive": true,
     "selected_mode_oscillatory": true,
     "analytic_peak_matches_grid": true,
@@ -11,14 +11,14 @@
     "direct_channel_nonzero_mode_control": true,
     "common_gain_sign_invariant": true,
     "real_space_sign_changing_shells": true,
-    "shell_signs_cutoff_robust": true,
+    "exact_residues_match_infinite_fourier_quadrature": true,
     "finite_separation_energy_minimum_exists": true
   },
   "witness_is_not_parameter_fit": true,
   "dimensionless_groups": {
     "length_scale": 1.0,
     "denominator_scale": 1.0,
-    "flux_relaxation_ratio": 1.0,
+    "decay_rate_ratio": 1.0,
     "spectral_shape": -1.9,
     "memory_loading": 0.29999999999999993
   },
@@ -26,7 +26,7 @@
     "selected_scaled_wavenumber": 1.038686808734512,
     "selected_scaled_wavelength": 6.049162513996619,
     "peak_dimensionless_transfer": 2.5498742855333605,
-    "constitutive_energy_positive": true,
+    "constitutive_operator_positive": true,
     "statically_stable": true,
     "selected_mode_oscillatory": true,
     "minimum_dimensionless_denominator": 0.29999999999999993,
@@ -40,26 +40,29 @@
   "constitutive_minimum": 0.09750000000000003,
   "numerical_peak": 1.0387,
   "zero_crossings": [
-    2.852167978085586,
-    5.873642371696291,
-    8.79723445614555,
-    11.777233330362654,
-    14.72471988282137
+    2.851955322575796,
+    5.873540177118118,
+    8.79720304273143,
+    11.777085860532713,
+    14.72458149154159,
+    17.690699997004597
   ],
-  "cutoff_relative_spread": 7.158719550431837e-07,
+  "inverse_transform_max_error": 1.8041124150158794e-15,
   "first_pair_barrier": {
-    "radius": 3.8811977715877433,
-    "kernel": -0.00981107616959601,
+    "radius": 3.9192003714445898,
+    "kernel": -0.009820372673149865,
     "kind": "kernel_minimum_pair_energy_barrier"
   },
   "first_finite_pair_minimum": {
-    "radius": 6.962813370473537,
-    "kernel": 0.002388771409838086,
+    "radius": 6.990916302867424,
+    "kernel": 0.002390010132043374,
     "kind": "kernel_maximum_pair_energy_minimum"
   },
   "claim_limits": {
     "coefficient_selection": "delta, mu and gamma/lambda remain inputs",
-    "kernel_selection": "K_eff is derived from the field response",
+    "state_boundary": "vector mediator m is not canonical occupancy rho",
+    "source_geometry": "k^2 requires the new adjoint gradient coupling",
+    "kernel_selection": "K_eff is derived from the proposed mediator response",
     "pair_result": "linear point-source energy landscape only",
     "nonlinear_nodes": "not simulated",
     "dimension_selection": "not supplied"

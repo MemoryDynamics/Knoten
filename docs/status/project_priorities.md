@@ -653,7 +653,7 @@ Prioritaetsfolge:
     Symmetrien, affine Gleichgewichte und identifizierbare dimensionslose
     Gruppen abgeleitet. Noch kein Simulations- oder Parametersweep.
 
-    **P3.8a bevorzugter Mechanismus, analytisch strukturell bestanden:** Statt
+    **P3.8a analytischer Kandidat, strukturell bestanden:** Statt
     eines frei orientierten Knotenchannels wird das skalare Memory um einen
     lokal bilanzierten Strom `j` erweitert. Fuer den longitudinalen Modus gilt
     `(s+lambda_m)(s+gamma_j)+c_j^2 k^2=0`; komplexe Pole entstehen genau bei
@@ -663,37 +663,56 @@ Prioritaetsfolge:
     die Source aus dem kanonischen Update abgeleitet und nicht als Ladungslabel
     gesetzt. Der Strom sowie `gamma_j,c_j` bleiben jedoch neue Modellinhalte.
     Das Gate loest weder die negative affine Kraftbilanz noch einen
-    transversalen Spinmodus und selektiert kein `d=3`. Naechster Schritt ist
-    P3.8b: eine einzige Energie fuer Deposition/Source und Trajektorienreadout,
-    danach erneut affine Gleichgewichte beziehungsweise ein klar definiertes
-    Limit-Cycle-Gate. Noch kein Pilot und kein Parametersweep.
+    transversalen Spinmodus und selektiert kein `d=3`. Der bestehende skalare
+    Datensatz waehlt diesen Kandidaten nicht aus.
 
-    **P3.8b dynamischer Green-Kernel, analytisch bestanden:** Fuer den lokalen
+    **P3.8b nach Review: separater Gradientenmediator, analytisch bestanden.**
+    Der `k^2`-Zaehler folgt nicht aus dem P3.8a-Dichte-Strom-Memory. Er verlangt
+    einen eigenstaendigen longitudinalen Zustand `(m,p)` und die gemeinsame
+    Energie `H_int=-g integral m dot grad(q) dx`; `q` ist die skalare Quelle,
+    `m` weder `rho` noch `j`. Fuer den lokalen
     konstitutiven Operator `D(k)=a+b k^2+c k^4` und einen gemeinsamen
     gradientenfoermigen Write/Readout folgt
-    `K_eff(k,w)=g^2 k^2 / [(-iw+lambda_m)(-iw+gamma_j)+k^2 D(k)]`.
+    `K_eff(k,w)=g^2 k^2 / [(-iw+lambda_m)(-iw+gamma_p)+k^2 D(k)]`.
     Damit ist `K_eff(0,w)=0` exakt und die Quelle-/Readoutamplitude tritt nur
     als `g^2` auf. Nach Naturalskalierung bleiben
-    `delta=b/sqrt(a c)`, `mu=lambda_m gamma_j sqrt(c)/a^(3/2)` und
-    `r_gamma=gamma_j/lambda_m`. Die Antwort waehlt ihre Wellenzahl ueber
+    `delta=b/sqrt(a c)`, `mu=lambda_m gamma_p sqrt(c)/a^(3/2)` und das
+    vertauschungsinvariante `r_gamma=max(lambda_m,gamma_p)/min(...)>=1`. Die
+    Antwort waehlt ihre Wellenzahl ueber
     `2 y_*^3+delta y_*^2-mu=0`, `y_*=u_*^2`, ohne Zielwellenzahl oder
     Amplitudensweep. Ein fester, nicht gefitteter Existenzpunkt
     `(delta,mu,r_gamma)=(-1.9,0.3,1)` besitzt positive konstitutive Energie,
-    einen stabilen komplexen selektierten Modus, cutoff-robuste wechselnde
-    Realraumschalen und ein erstes getrenntes lineares Paarminimum bei
-    `r/ell=6.96` hinter einer Barriere bei `3.88`. Dies ist ein linearer
-    Punktquellenbefund, keine Knotensimulation und keine Parameterherleitung.
+    einen stabilen komplexen selektierten Modus und wechselnde
+    Realraumschalen. Die exakte Residueninversion ist gegen unendliche
+    Fourierquadratur verifiziert; das erste getrennte lineare Paarminimum liegt
+    bei `r/ell=6.99092` hinter einer Barriere bei `3.91920`. Dies ist ein
+    linearer Punktquellenbefund, keine Knotensimulation und keine
+    Parameterherleitung.
 
-    **P3.8c jetzt: genau ein matched Zwei-Knoten-Diskriminationstest.** Reife
-    eingefrorene Zustaende werden bei vorab aus den beiden Modellen bestimmten
-    Abstaenden eingesetzt. Arm A ist der bestehende statische kompensierte
-    Aussenschalenkernel, Arm B der feste dynamische Green-Kanal. Cross-off,
-    Flux-/reversible-off und direkter nicht-gradienter Sourcekanal sind die
-    Kontrollen. Primaer sind Vorzeichen der Center-Beschleunigung,
-    beschraenkte Separation, Shape-Bounds, Energie-/Arbeitsbilanz und
-    Vorhersage der Schalenradien. Kein Parameter- oder Kernel-Sweep. Erst wenn
-    effektive `delta,mu,r_gamma` ueber Seeds und Grobkoernungen stabil
-    identifizierbar sind, duerfen sie als datenbestimmte Parameter gelten.
+    **P3.8c quasistatische Diskrimination abgeschlossen, konditionaler Pass.**
+    Zwei starre vollstaendige `d=3`, Seed-1, `N=100M`-Memory-Wolken wurden ohne
+    Dynamik, Gain-Fit oder Sweep getestet. Bei `R=5 ell` sagen statischer
+    kompensierter Arm und Gradientenmediator robuste entgegengesetzte
+    Kraftvorzeichen voraus. Die Vollmemory-Wolke reproduziert Barriere und
+    stabiles Minimum des Gradientenarms mit quadratischer Punktgrenz-
+    konvergenz. Wegen `R_mem/ell=2.12e-4`, einem Seed und gesetztem
+    `ell=sigma_rep=1` ist dies Mechanismus-Diskriminierbarkeit, keine Auswahl
+    und kein dynamisch stabiler Knoten.
+    Die primaere Paarenergie ist eine neue reziproke Memory-Memory-
+    Cross-Geometrie; eine separat energiesymmetrisierte kanonische
+    Sichtpunkt-Memory-Kontrolle behaelt nur wegen der kompakten Punktgrenze
+    dieselben Vorzeichen. Diese Architekturwahl bleibt im dynamischen Gate
+    explizit offen.
+
+22. **P3.8d jetzt: diskretes Energie-/Arbeitsgate vor jeder Dynamik.** Zuerst
+    wird eine zeitdiskrete `(m,p)`-Fortschreibung mit derselben
+    Kopplungsenergie hergeleitet. Vorregistriert werden Source-work,
+    Mediator-Daempfung, Action/Reaction, Zeitschritt-Konvergenz, Cross-off und
+    eine erster-Ordnung-Kontrolle. Ein statisches `reversible-off` ist keine
+    Nullkontrolle, weil erster und zweiter Ordnung dieselbe Gleichgewichts-
+    suszeptibilitaet besitzen koennen. Erst nach bestandenem Gate ist genau ein
+    kurzer dynamischer Zwei-Knoten-Pilot bei den bereits bestimmten Radien
+    erlaubt; kein Koeffizienten-, Gain- oder Kernel-Sweep.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-11.
+Stand: 2026-08-12.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -138,14 +138,22 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
   - Strom, Flussrelaxation und Steifigkeit bleiben neue Annahmen; statische
     Kraftbilanz, transversale Phase und `d=3` sind nicht geloest. Kein Pilot.
 - [Dynamischer Green-Kernel und Skalenwahl](memory/closure/dynamic_green_kernel_selection_gate_2026-08-11.md)
-  - **structural pass, model candidate:** Ein gemeinsamer gradientenfoermiger
-    Write/Readout erzeugt `K_eff` als Feldantwort, Nullmode null und eine
-    intern bestimmte Peakwellenzahl. Zwoelf analytische/numerische Gates
-    einschliesslich gainfreier Peak-Inversion bestehen.
-  - Der feste Existenzpunkt besitzt positive konstitutive Energie,
-    cutoff-robuste attraktive/repulsive Schalen und ein lineares getrenntes
-    Paarminimum bei `6.96 ell`. Drei dimensionslose Koeffizientengruppen bleiben
-    Inputs; noch keine Knotensimulation oder Parameterselbstauswahl.
+  - **structural pass after correction, model candidate:** Der `k^2`-Kanal
+    gehoert zu einem separaten adjungierten Gradientenmediator `(m,p)`, nicht
+    zum kanonischen `rho` oder automatisch zum P3.8a-Strom. Eine gemeinsame
+    Energie erzeugt Source und Readout.
+  - Exakte Residueninversion und unabhaengige unendliche Quadratur stimmen bis
+    `1.81e-15` ueberein; Barriere `3.91920 ell`, lineares Paarminimum
+    `6.99092 ell`. Drei dimensionslose Gruppen bleiben Inputs.
+- [Quasistatische Zwei-Knoten-Diskrimination](response/reciprocal/quasistatic_two_knot_discrimination_2026-08-12.md)
+  - **conditional discriminability pass:** Zwei komplette starre N100M-
+    Memory-Wolken liefern bei `R=5 ell` entgegengesetzte Kraftvorzeichen fuer
+    statischen kompensierten Kernel und Gradientenmediator.
+  - **Kein Dynamikpass:** nur ein nahezu punktfoermiger d3-Formationsseed,
+    gesetztes Skalenmatching, kein Gain-Fit, keine Zustandsfortschreibung und
+    keine Auswahl zwischen den Architekturen. Memory-Memory- und symmetrisierter
+    Sichtpunkt-Memory-Cross-Readout behalten dieselben Vorzeichen, bleiben aber
+    verschiedene Regeln; ihr `0.2411%`-Offset ist der endliche Tail-Masseneffekt.
 - [Aktives skalares Delta-Quellfeld](kernels/field/active_scalar_delta_field_pilot_2026-07-31.md)
   - **supported, model-conditional:** Zeit-/Gitter-, cubic-off- und source-off-
     Gates bestehen; der kubisch gesaettigte aktive Arm bildet in drei Seeds
@@ -364,6 +372,7 @@ eingesetzten Transportgesetze.
 - [Privacy and Control Plan](project/governance/privacy_and_control_plan_2026-07-08.md)
 - [Repository-Cleanup 2026-07-09](project/meta/operations/repository_cleanup_2026-07-09.md)
 - [Dynamik-/Moden-Code-Review 2026-08-04](project/meta/reviews/relevant_dynamics_code_review_2026-08-04.md)
+- [P3.8 Physik-/Code-Review 2026-08-12](project/meta/reviews/p38_rigorous_review_2026-08-12.md)
 - [Repository-Kuration 2026-07-21](project/meta/operations/repository_curation_2026-07-21.md)
 
 ## Historische Bereiche

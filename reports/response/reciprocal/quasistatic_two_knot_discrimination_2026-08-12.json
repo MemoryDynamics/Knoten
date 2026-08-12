@@ -1,0 +1,1026 @@
+{
+  "schema": "emergenz-knoten.quasistatic-two-knot-discrimination.v1",
+  "decision": "quasistatic-discrimination-pass-pointlike-full-memory",
+  "gates": {
+    "checkpoint_schema_and_checksum_valid": true,
+    "static_compensated_integral_zero": true,
+    "gradient_mediator_zero_mode_zero": true,
+    "direct_source_zero_mode_nonzero_control": true,
+    "cross_off_energy_and_force_exactly_zero": true,
+    "common_radius_force_sign_discriminates_for_all_orientations": true,
+    "canonical_readout_symmetrization_preserves_discriminator_signs": true,
+    "readout_amplitude_offset_matches_finite_tail_mass": true,
+    "static_arm_has_one_full_memory_unstable_radius": true,
+    "gradient_arm_has_full_memory_barrier_then_stable_minimum": true,
+    "force_is_negative_pair_energy_gradient": true,
+    "action_reaction_exact": true,
+    "full_memory_root_residuals_resolved": true,
+    "point_limit_converges_at_second_order": true
+  },
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_update_index": 100000000,
+  "formation_seed": 1,
+  "memory_weight_mass": 0.9975949907086882,
+  "memory_rms_radius": 0.00021165345794842206,
+  "fixed_discrimination_radius": 5.0,
+  "fixed_radii": [
+    2.8,
+    5.0,
+    6.990916302867424,
+    8.0,
+    10.913073624192032,
+    12.0
+  ],
+  "static_parameters": {
+    "sigma_rep": 1.0,
+    "sigma_att": 3.0,
+    "sigma_comp": 10.0,
+    "amplitude_rep": 1.0,
+    "amplitude_att": 35.0,
+    "amplitude_comp": 0.944
+  },
+  "gradient_mediator_parameters": {
+    "spectral_shape": -1.9,
+    "memory_loading": 0.3,
+    "decay_rate_ratio": 1.0
+  },
+  "zero_modes": {
+    "static_integral_coefficient": 0.0,
+    "gradient_mediator": [
+      0.0,
+      0.0
+    ],
+    "direct_source_control": [
+      3.333333333333334,
+      0.0
+    ]
+  },
+  "cross_off": {
+    "energy": 0.0,
+    "force_on_first": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "force_on_second": [
+      -0.0,
+      -0.0,
+      -0.0
+    ]
+  },
+  "force_at_discrimination_radius": {
+    "static_compensated": -4.783749467065966,
+    "gradient_mediator": 0.006487315816489315,
+    "direct_source_control": 0.002773096461273388
+  },
+  "canonical_readout_comparison_at_discrimination_radius": {
+    "static_compensated": {
+      "memory_memory_force": -4.783749467065966,
+      "reciprocal_visible_memory_force": -4.795282170048441,
+      "relative_difference": 0.0024108083129924145
+    },
+    "gradient_mediator": {
+      "memory_memory_force": 0.006487315816489315,
+      "reciprocal_visible_memory_force": 0.006502955522631552,
+      "relative_difference": 0.002410813128980786
+    },
+    "direct_source_control": {
+      "memory_memory_force": 0.002773096461273388,
+      "reciprocal_visible_memory_force": 0.0027797818915311703,
+      "relative_difference": 0.002410817781186156
+    }
+  },
+  "finite_tail_mass_relative_difference": 0.002410807305280649,
+  "maximum_readout_mass_residual": 1.0475905507217192e-08,
+  "roots": {
+    "static_compensated": {
+      "stationary_points": [
+        {
+          "point_radius": 10.913073624192032,
+          "full_memory_radii": {
+            "identity": 10.913073639132037,
+            "cyclic_rotation": 10.913073636290058,
+            "reflection_control": 10.913073639132042
+          },
+          "point_stability": "unstable",
+          "full_memory_stabilities": {
+            "identity": "unstable",
+            "cyclic_rotation": "unstable",
+            "reflection_control": "unstable"
+          },
+          "maximum_relative_shift": 1.3690011295082277e-09,
+          "orientation_relative_spread": 2.604201642397217e-10,
+          "maximum_root_residual_ratio": 3.1556335357928608e-12
+        }
+      ]
+    },
+    "gradient_mediator": {
+      "stationary_points": [
+        {
+          "point_radius": 3.9192003714445964,
+          "full_memory_radii": {
+            "identity": 3.91920038189973,
+            "cyclic_rotation": 3.9192003786338554,
+            "reflection_control": 3.9192003818997203
+          },
+          "point_stability": "unstable",
+          "full_memory_stabilities": {
+            "identity": "unstable",
+            "cyclic_rotation": "unstable",
+            "reflection_control": "unstable"
+          },
+          "maximum_relative_shift": 2.6676701002328743e-09,
+          "orientation_relative_spread": 8.333012789029008e-10,
+          "maximum_root_residual_ratio": 6.481949474919968e-12
+        },
+        {
+          "point_radius": 6.990916302867425,
+          "full_memory_radii": {
+            "identity": 6.990916312996499,
+            "cyclic_rotation": 6.990916310528788,
+            "reflection_control": 6.990916312996491
+          },
+          "point_stability": "stable",
+          "full_memory_stabilities": {
+            "identity": "stable",
+            "cyclic_rotation": "stable",
+            "reflection_control": "stable"
+          },
+          "maximum_relative_shift": 1.4488908219246775e-09,
+          "orientation_relative_spread": 3.529882581442123e-10,
+          "maximum_root_residual_ratio": 5.169653533056749e-12
+        }
+      ]
+    },
+    "direct_source_control": {
+      "stationary_points": [
+        {
+          "point_radius": 4.529287333475867,
+          "full_memory_radii": {
+            "identity": 4.529287345882767,
+            "cyclic_rotation": 4.529287342555404,
+            "reflection_control": 4.529287345882759
+          },
+          "point_stability": "unstable",
+          "full_memory_stabilities": {
+            "identity": "unstable",
+            "cyclic_rotation": "unstable",
+            "reflection_control": "unstable"
+          },
+          "maximum_relative_shift": 2.739260858119395e-09,
+          "orientation_relative_spread": 7.346328525472151e-10,
+          "maximum_root_residual_ratio": 5.860342091496813e-12
+        },
+        {
+          "point_radius": 7.405438991999027,
+          "full_memory_radii": {
+            "identity": 7.405439000881051,
+            "cyclic_rotation": 7.4054389986529605,
+            "reflection_control": 7.405439000881042
+          },
+          "point_stability": "stable",
+          "full_memory_stabilities": {
+            "identity": "stable",
+            "cyclic_rotation": "stable",
+            "reflection_control": "stable"
+          },
+          "maximum_relative_shift": 1.199391962417201e-09,
+          "orientation_relative_spread": 3.0087218371739233e-10,
+          "maximum_root_residual_ratio": 2.515094191527285e-12
+        }
+      ]
+    }
+  },
+  "fixed_force_rows": [
+    {
+      "model": "static_compensated",
+      "radius": 2.8,
+      "orientation": "identity",
+      "full_memory_force": -6.929655146578184,
+      "point_force": -6.929655199086972,
+      "point_relative_error": 7.577402759571457e-09,
+      "energy_gradient_force": -6.92965514677013,
+      "force_energy_relative_error": 2.7699215988792506e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 2.8,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -6.929655149578187,
+      "point_force": -6.929655199086972,
+      "point_relative_error": 7.14448036638346e-09,
+      "energy_gradient_force": -6.929655149612301,
+      "force_energy_relative_error": 4.922906578427747e-12,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 2.8,
+      "orientation": "reflection_control",
+      "full_memory_force": -6.929655146578159,
+      "point_force": -6.929655199086972,
+      "point_relative_error": 7.57740634834969e-09,
+      "energy_gradient_force": -6.929655146592494,
+      "force_energy_relative_error": 2.068674326601814e-12,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 5.0,
+      "orientation": "identity",
+      "full_memory_force": -4.783749467065966,
+      "point_force": -4.783749484082998,
+      "point_relative_error": 3.557258231101972e-09,
+      "energy_gradient_force": -4.7837494669522584,
+      "force_energy_relative_error": 2.376948596662392e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 5.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -4.783749466024496,
+      "point_force": -4.783749484082998,
+      "point_relative_error": 3.774968214620106e-09,
+      "energy_gradient_force": -4.783749465753218,
+      "force_energy_relative_error": 5.670826054176549e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 5.0,
+      "orientation": "reflection_control",
+      "full_memory_force": -4.783749467066087,
+      "point_force": -4.783749484082998,
+      "point_relative_error": 3.5572327948946824e-09,
+      "energy_gradient_force": -4.783749466863441,
+      "force_energy_relative_error": 4.236149690403112e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 6.990916302867424,
+      "orientation": "identity",
+      "full_memory_force": -1.7395318909996391,
+      "point_force": -1.739531888458364,
+      "point_relative_error": 1.4608960072207656e-09,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 6.990916302867424,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -1.7395318892934575,
+      "point_force": -1.739531888458364,
+      "point_relative_error": 4.800679742680506e-10,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 6.990916302867424,
+      "orientation": "reflection_control",
+      "full_memory_force": -1.7395318909995638,
+      "point_force": -1.739531888458364,
+      "point_relative_error": 1.460852735164893e-09,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 8.0,
+      "orientation": "identity",
+      "full_memory_force": -0.8298596112657524,
+      "point_force": -0.8298596072285594,
+      "point_relative_error": 4.8649107368793866e-09,
+      "energy_gradient_force": -0.8298596112454869,
+      "force_energy_relative_error": 2.442034255539342e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 8.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -0.8298596100100211,
+      "point_force": -0.8298596072285594,
+      "point_relative_error": 3.3517255115894284e-09,
+      "energy_gradient_force": -0.8298596099826082,
+      "force_energy_relative_error": 3.303311721315862e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 8.0,
+      "orientation": "reflection_control",
+      "full_memory_force": -0.8298596112657401,
+      "point_force": -0.8298596072285594,
+      "point_relative_error": 4.864896020591035e-09,
+      "energy_gradient_force": -0.8298596112454869,
+      "force_energy_relative_error": 2.440562626711431e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 10.913073624192032,
+      "orientation": "identity",
+      "full_memory_force": -9.317779457119516e-10,
+      "point_force": -2.0716673490997504e-17,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 10.913073624192032,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -7.545294270210816e-10,
+      "point_force": -2.0716673490997504e-17,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 10.913073624192032,
+      "orientation": "reflection_control",
+      "full_memory_force": -9.317782690753554e-10,
+      "point_force": -2.0716673490997504e-17,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 12.0,
+      "orientation": "identity",
+      "full_memory_force": 0.03929468037498591,
+      "point_force": 0.03929468073259274,
+      "point_relative_error": 9.100642284593922e-09,
+      "energy_gradient_force": 0.03929468037067174,
+      "force_energy_relative_error": 1.0979010486823728e-10,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 12.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.03929468043625303,
+      "point_force": 0.03929468073259274,
+      "point_relative_error": 7.541471369424964e-09,
+      "energy_gradient_force": 0.03929468042895845,
+      "force_energy_relative_error": 1.8563789104368377e-10,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "static_compensated",
+      "radius": 12.0,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.03929468037498462,
+      "point_force": 0.03929468073259274,
+      "point_relative_error": 9.100675129606074e-09,
+      "energy_gradient_force": 0.03929468037067174,
+      "force_energy_relative_error": 1.097572598557911e-10,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 2.8,
+      "orientation": "identity",
+      "full_memory_force": -0.021740231958750907,
+      "point_force": -0.021740232194075264,
+      "point_relative_error": 1.0824371843046606e-08,
+      "energy_gradient_force": -0.021740231958991635,
+      "force_energy_relative_error": 1.1072907465540541e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 2.8,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -0.02174023191626482,
+      "point_force": -0.021740232194075264,
+      "point_relative_error": 1.2778632827265531e-08,
+      "energy_gradient_force": -0.02174023191650175,
+      "force_energy_relative_error": 1.0898319884804122e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 2.8,
+      "orientation": "reflection_control",
+      "full_memory_force": -0.02174023195875309,
+      "point_force": -0.021740232194075264,
+      "point_relative_error": 1.0824271463155844e-08,
+      "energy_gradient_force": -0.021740231958991635,
+      "force_energy_relative_error": 1.0972527573693239e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 5.0,
+      "orientation": "identity",
+      "full_memory_force": 0.006487315816489315,
+      "point_force": 0.006487315959719998,
+      "point_relative_error": 2.2078573678150014e-08,
+      "energy_gradient_force": 0.006487315816093227,
+      "force_energy_relative_error": 6.105571052045001e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 5.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.006487315836541607,
+      "point_force": 0.006487315959719998,
+      "point_relative_error": 1.898757388464358e-08,
+      "energy_gradient_force": 0.00648731583621602,
+      "force_energy_relative_error": 5.018834527631754e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 5.0,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.006487315816489003,
+      "point_force": 0.006487315959719998,
+      "point_relative_error": 2.2078621810571438e-08,
+      "energy_gradient_force": 0.006487315816049859,
+      "force_energy_relative_error": 6.769263677650295e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 6.990916302867424,
+      "orientation": "identity",
+      "full_memory_force": 3.1358595058497746e-11,
+      "point_force": -1.1243996383223518e-19,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 6.990916302867424,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 2.3718808185566926e-11,
+      "point_force": -1.1243996383223518e-19,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 6.990916302867424,
+      "orientation": "reflection_control",
+      "full_memory_force": 3.135856981222512e-11,
+      "point_force": -1.1243996383223518e-19,
+      "point_relative_error": null,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 8.0,
+      "orientation": "identity",
+      "full_memory_force": -0.0016973930470898823,
+      "point_force": -0.0016973930864964749,
+      "point_relative_error": 2.321594973250263e-08,
+      "energy_gradient_force": -0.0016973930469835715,
+      "force_energy_relative_error": 6.263180686643472e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 8.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -0.0016973930530576188,
+      "point_force": -0.0016973930864964749,
+      "point_relative_error": 1.9700125052826e-08,
+      "energy_gradient_force": -0.0016973930529358414,
+      "force_energy_relative_error": 7.174376668607914e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 8.0,
+      "orientation": "reflection_control",
+      "full_memory_force": -0.0016973930470898712,
+      "point_force": -0.0016973930864964749,
+      "point_relative_error": 2.321595624770659e-08,
+      "energy_gradient_force": -0.0016973930469835715,
+      "force_energy_relative_error": 6.262529166232357e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 10.913073624192032,
+      "orientation": "identity",
+      "full_memory_force": 0.0005440399295024797,
+      "point_force": 0.0005440399425023994,
+      "point_relative_error": 2.389515677341368e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 10.913073624192032,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.0005440399315197766,
+      "point_force": 0.0005440399425023994,
+      "point_relative_error": 2.0187162631460653e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 10.913073624192032,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.0005440399295024573,
+      "point_force": 0.0005440399425023994,
+      "point_relative_error": 2.389519802587185e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 12.0,
+      "orientation": "identity",
+      "full_memory_force": 0.00037143099516532754,
+      "point_force": 0.00037143099924722453,
+      "point_relative_error": 1.0989650816226447e-08,
+      "energy_gradient_force": 0.000371430995147273,
+      "force_energy_relative_error": 4.8608135810155933e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 12.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.0003714309955454706,
+      "point_force": 0.00037143099924722453,
+      "point_relative_error": 9.966195383299424e-09,
+      "energy_gradient_force": 0.000371430995528099,
+      "force_energy_relative_error": 4.6769465976143496e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 12.0,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.0003714309951653292,
+      "point_force": 0.00037143099924722453,
+      "point_relative_error": 1.0989646291796955e-08,
+      "energy_gradient_force": 0.000371430995147273,
+      "force_energy_relative_error": 4.8612660239697747e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 2.8,
+      "orientation": "identity",
+      "full_memory_force": -0.023926286280646136,
+      "point_force": -0.02392628659710215,
+      "point_relative_error": 1.3226290376769185e-08,
+      "energy_gradient_force": -0.023926286280701033,
+      "force_energy_relative_error": 2.2944245703957015e-12,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 2.8,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -0.023926286269283902,
+      "point_force": -0.02392628659710215,
+      "point_relative_error": 1.3701175354183694e-08,
+      "energy_gradient_force": -0.023926286269338595,
+      "force_energy_relative_error": 2.2858692374956967e-12,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 2.8,
+      "orientation": "reflection_control",
+      "full_memory_force": -0.02392628628064689,
+      "point_force": -0.02392628659710215,
+      "point_relative_error": 1.3226258910541214e-08,
+      "energy_gradient_force": -0.023926286280614297,
+      "force_energy_relative_error": 1.3621831772954557e-12,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 5.0,
+      "orientation": "identity",
+      "full_memory_force": 0.002773096461273388,
+      "point_force": 0.002773096573454429,
+      "point_relative_error": 4.045334807526415e-08,
+      "energy_gradient_force": 0.002773096461055474,
+      "force_energy_relative_error": 7.858155364298641e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 5.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.00277309648254518,
+      "point_force": 0.002773096573454429,
+      "point_relative_error": 3.2782575893321217e-08,
+      "energy_gradient_force": 0.0027730964823058364,
+      "force_energy_relative_error": 8.630918636075315e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 5.0,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.0027730964612736305,
+      "point_force": 0.002773096573454429,
+      "point_relative_error": 4.0453260654000824e-08,
+      "energy_gradient_force": 0.002773096461055474,
+      "force_energy_relative_error": 7.866897490983891e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 6.990916302867424,
+      "orientation": "identity",
+      "full_memory_force": 0.0010091431291052138,
+      "point_force": 0.001009143126937399,
+      "point_relative_error": 2.1481737307259973e-09,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 6.990916302867424,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.0010091431260932824,
+      "point_force": 0.001009143126937399,
+      "point_relative_error": 8.364687205595094e-10,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 6.990916302867424,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.0010091431291051778,
+      "point_force": 0.001009143126937399,
+      "point_relative_error": 2.148138061343562e-09,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 8.0,
+      "orientation": "identity",
+      "full_memory_force": -0.0009564521814842149,
+      "point_force": -0.000956452210502137,
+      "point_relative_error": 3.033912385027493e-08,
+      "energy_gradient_force": -0.000956452181409377,
+      "force_energy_relative_error": 7.824533600981185e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 8.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": -0.000956452186585815,
+      "point_force": -0.000956452210502137,
+      "point_relative_error": 2.500524508884115e-08,
+      "energy_gradient_force": -0.0009564521865159692,
+      "force_energy_relative_error": 7.302594192803484e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 8.0,
+      "orientation": "reflection_control",
+      "full_memory_force": -0.0009564521814842214,
+      "point_force": -0.000956452210502137,
+      "point_relative_error": 3.0339117048876e-08,
+      "energy_gradient_force": -0.000956452181409377,
+      "force_energy_relative_error": 7.825213740894119e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 10.913073624192032,
+      "orientation": "identity",
+      "full_memory_force": 0.00024066677100101352,
+      "point_force": 0.00024066678029729453,
+      "point_relative_error": 3.8627188145935485e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 10.913073624192032,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.00024066677263002374,
+      "point_force": 0.00024066678029729453,
+      "point_relative_error": 3.185845084290992e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 10.913073624192032,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.00024066677100102767,
+      "point_force": 0.00024066678029729453,
+      "point_relative_error": 3.862712935577619e-08,
+      "energy_gradient_force": null,
+      "force_energy_relative_error": null,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 12.0,
+      "orientation": "identity",
+      "full_memory_force": 0.00035654108761570656,
+      "point_force": 0.0003565410937481394,
+      "point_relative_error": 1.7199792504903656e-08,
+      "energy_gradient_force": 0.0003565410875969231,
+      "force_energy_relative_error": 5.268250428939388e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 12.0,
+      "orientation": "cyclic_rotation",
+      "full_memory_force": 0.00035654108843001677,
+      "point_force": 0.0003565410937481394,
+      "point_relative_error": 1.491587566590704e-08,
+      "energy_gradient_force": 0.0003565410884121076,
+      "force_energy_relative_error": 5.023033060404927e-11,
+      "action_reaction_absolute_error": 0.0
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 12.0,
+      "orientation": "reflection_control",
+      "full_memory_force": 0.00035654108761570553,
+      "point_force": 0.0003565410937481394,
+      "point_relative_error": 1.719979539374896e-08,
+      "energy_gradient_force": 0.00035654108759556783,
+      "force_energy_relative_error": 5.64807277496945e-11,
+      "action_reaction_absolute_error": 0.0
+    }
+  ],
+  "maximum_force_energy_relative_error": 1.8563789104368377e-10,
+  "maximum_action_reaction_absolute_error": 0.0,
+  "maximum_root_shift_ratio": 2.739260858119395e-09,
+  "maximum_orientation_spread_ratio": 8.333012789029008e-10,
+  "maximum_root_residual_ratio": 6.481949474919968e-12,
+  "squared_compactness_ratio": 2.91645850240508e-09,
+  "point_limit_rows": [
+    {
+      "model": "static_compensated",
+      "radius": 2.8,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        7.577402759571457e-09,
+        1.8943356939266697e-09,
+        4.735837632683534e-10
+      ],
+      "observed_orders": [
+        2.00001142063706,
+        2.000000488063427
+      ]
+    },
+    {
+      "model": "static_compensated",
+      "radius": 5.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        3.557258231101972e-09,
+        8.892999365979452e-10,
+        2.2230372542149603e-10
+      ],
+      "observed_orders": [
+        2.0000237194742394,
+        2.0001379571800486
+      ]
+    },
+    {
+      "model": "static_compensated",
+      "radius": 8.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        4.8649107368793866e-09,
+        1.2162042384968146e-09,
+        3.040452065549731e-10
+      ],
+      "observed_orders": [
+        2.000027811695804,
+        2.000027772556494
+      ]
+    },
+    {
+      "model": "static_compensated",
+      "radius": 12.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        9.100642284593922e-09,
+        2.2751603945623938e-09,
+        5.687451133349777e-10
+      ],
+      "observed_orders": [
+        2.000000111974462,
+        2.0001141064939048
+      ]
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 2.8,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        1.0824371843046606e-08,
+        2.706087853994554e-09,
+        6.765275889217694e-10
+      ],
+      "observed_orders": [
+        2.000002722565198,
+        1.9999880037356512
+      ]
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 5.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        2.2078573678150014e-08,
+        5.519655887171664e-09,
+        1.3799152085287442e-09
+      ],
+      "observed_orders": [
+        1.9999967412797723,
+        1.9999987069977672
+      ]
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 8.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        2.321594973250263e-08,
+        5.80397887393614e-09,
+        1.450992259313913e-09
+      ],
+      "observed_orders": [
+        2.0000021275561877,
+        2.000002445105762
+      ]
+    },
+    {
+      "model": "gradient_mediator",
+      "radius": 12.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        1.0989650816226447e-08,
+        2.7474601011042774e-09,
+        6.868571440117924e-10
+      ],
+      "observed_orders": [
+        1.9999751115310413,
+        2.000016553945394
+      ]
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 2.8,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        1.3226290376769185e-08,
+        3.3066097156409633e-09,
+        8.266398496693352e-10
+      ],
+      "observed_orders": [
+        1.9999838035827857,
+        2.000021953781202
+      ]
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 5.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        4.045334807526415e-08,
+        1.0113334946666235e-08,
+        2.5283258390390136e-09
+      ],
+      "observed_orders": [
+        2.0000002955978373,
+        2.000004506480187
+      ]
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 8.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        3.033912385027493e-08,
+        7.584744716780301e-09,
+        1.8961555445607573e-09
+      ],
+      "observed_orders": [
+        2.0000068942985205,
+        2.000023308255548
+      ]
+    },
+    {
+      "model": "direct_source_control",
+      "radius": 12.0,
+      "scales": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "relative_errors": [
+        1.7199792504903656e-08,
+        4.299924293252167e-09,
+        1.0749933128944556e-09
+      ],
+      "observed_orders": [
+        2.0000079963309587,
+        1.9999835737732303
+      ]
+    }
+  ],
+  "minimum_point_limit_order": 1.9999751115310413,
+  "maximum_point_limit_order": 2.0001379571800486,
+  "claim_limits": {
+    "dynamics": "no state is advanced; mediator equilibration is not simulated",
+    "shape": "rigid frozen clouds cannot test shape evolution",
+    "gain": "force amplitudes are not compared across model families",
+    "selection": "no observed target response selects either law",
+    "generality": "one tracked d=3 formation seed; point-limit validation only",
+    "dimension": "the 3D inverse transform is supplied, not selected",
+    "scale_matching": "ell=sigma_rep=1 is imposed, not inferred",
+    "cross_readout": "memory-memory energy is the primary reciprocal source-density law; a symmetrized visible-memory readout is a separate comparison"
+  }
+}
