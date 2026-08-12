@@ -1,4 +1,4 @@
-"""Audit scale selection by a reciprocal continuity-field Green kernel."""
+"""Audit scale selection by an energy-reciprocal gradient mediator."""
 
 from __future__ import annotations
 
@@ -15,13 +15,16 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import quad
+from scipy.optimize import brentq
 
 from emergenz_knoten import (
-    continuity_kernel_dimensionless_groups,
-    continuity_kernel_selection,
-    dimensionless_continuity_kernel_denominator,
-    infer_continuity_kernel_groups_from_peak,
-    reciprocal_continuity_kernel_transfer,
+    dimensionless_gradient_mediator_denominator,
+    gradient_mediator_dimensionless_groups,
+    gradient_mediator_selection,
+    gradient_mediator_transfer,
+    infer_gradient_mediator_groups_from_peak,
+    radial_gradient_mediator_green_3d,
+    radial_gradient_mediator_green_derivative_3d,
 )
 
 
@@ -35,7 +38,7 @@ def _repo_root() -> Path:
 ROOT = _repo_root()
 SPECTRAL_SHAPE = -1.9
 MEMORY_LOADING = 0.3
-FLUX_RATIO = 1.0
+DECAY_RATIO = 1.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -86,8 +89,8 @@ def _git_output(arguments: list[str]) -> str:
 def _witness_parameters() -> dict[str, float]:
     relaxation = float(np.sqrt(MEMORY_LOADING))
     return {
-        "memory_relaxation": relaxation,
-        "flux_relaxation": relaxation,
+        "memory_decay": relaxation,
+        "conjugate_decay": relaxation,
         "local_stiffness": 1.0,
         "gradient_stiffness": SPECTRAL_SHAPE,
         "biharmonic_stiffness": 1.0,
@@ -96,7 +99,7 @@ def _witness_parameters() -> dict[str, float]:
 
 def _dimensionless_gradient_transfer(wavenumber: float) -> float:
     denominator = float(
-        dimensionless_continuity_kernel_denominator(
+        dimensionless_gradient_mediator_denominator(
             wavenumber,
             spectral_shape=SPECTRAL_SHAPE,
             memory_loading=MEMORY_LOADING,
@@ -105,57 +108,69 @@ def _dimensionless_gradient_transfer(wavenumber: float) -> float:
     return float(wavenumber * wavenumber / denominator)
 
 
-def radial_green_kernel_3d(
-    radii: np.ndarray, *, max_wavenumber: float = 120.0
-) -> np.ndarray:
-    r"""Invert the dimensionless isotropic gradient transfer in three dimensions."""
+def _quadrature_green_3d(radii: np.ndarray) -> np.ndarray:
+    """Independently invert the spectrum using infinite oscillatory quadrature."""
 
     values = []
     for radius in np.asarray(radii, dtype=float):
         if radius <= 0.0:
-            integral = quad(
-                lambda value: value * value * _dimensionless_gradient_transfer(value),
-                0.0,
-                max_wavenumber,
-                limit=600,
-            )[0]
-            values.append(integral / (2.0 * np.pi**2))
-            continue
+            raise ValueError("quadrature probes must have positive radii")
         integral = quad(
-            lambda value: value
-            * np.sin(value * radius)
-            * _dimensionless_gradient_transfer(value),
+            lambda value: value * _dimensionless_gradient_transfer(value),
             0.0,
-            max_wavenumber,
-            limit=600,
+            np.inf,
+            weight="sin",
+            wvar=float(radius),
+            epsabs=1.0e-11,
+            epsrel=1.0e-11,
+            limit=500,
+            limlst=500,
         )[0]
         values.append(integral / (2.0 * np.pi**2 * radius))
     return np.asarray(values, dtype=float)
 
 
-def _crossing_positions(x: np.ndarray, values: np.ndarray) -> list[float]:
+def _root_positions(function, *, minimum: float = 0.05, maximum: float = 20.0) -> list[float]:
+    grid = np.linspace(minimum, maximum, 5000)
+    values = np.asarray(function(grid), dtype=float)
     indices = np.flatnonzero(np.signbit(values[:-1]) != np.signbit(values[1:]))
-    positions = []
-    for index in indices:
-        left_x = float(x[index])
-        right_x = float(x[index + 1])
-        left_y = float(values[index])
-        right_y = float(values[index + 1])
-        fraction = -left_y / (right_y - left_y)
-        positions.append(left_x + fraction * (right_x - left_x))
-    return positions
+    return [
+        float(brentq(lambda radius: float(function(radius)), grid[index], grid[index + 1]))
+        for index in indices
+    ]
 
 
-def _extrema(x: np.ndarray, values: np.ndarray) -> list[dict[str, float | str]]:
-    derivative = np.gradient(values, x)
-    indices = np.flatnonzero(np.signbit(derivative[:-1]) != np.signbit(derivative[1:]))
+def _extrema() -> list[dict[str, float | str]]:
+    def derivative(radius):
+        return radial_gradient_mediator_green_derivative_3d(
+            radius,
+            spectral_shape=SPECTRAL_SHAPE,
+            memory_loading=MEMORY_LOADING,
+        )
+
+    roots = _root_positions(derivative)
     extrema = []
-    for index in indices:
-        kind = "kernel_maximum_pair_energy_minimum" if values[index] > 0.0 else "kernel_minimum_pair_energy_barrier"
+    for radius in roots:
+        step = 1.0e-5 * max(1.0, radius)
+        derivative_left = float(derivative(radius - step))
+        derivative_right = float(derivative(radius + step))
+        value = float(
+            radial_gradient_mediator_green_3d(
+                radius,
+                spectral_shape=SPECTRAL_SHAPE,
+                memory_loading=MEMORY_LOADING,
+            )
+        )
+        if derivative_left > 0.0 and derivative_right < 0.0:
+            kind = "kernel_maximum_pair_energy_minimum"
+        elif derivative_left < 0.0 and derivative_right > 0.0:
+            kind = "kernel_minimum_pair_energy_barrier"
+        else:
+            raise RuntimeError("Green-kernel extremum could not be classified")
         extrema.append(
             {
-                "radius": float(x[index]),
-                "kernel": float(values[index]),
+                "radius": radius,
+                "kernel": value,
                 "kind": kind,
             }
         )
@@ -164,17 +179,17 @@ def _extrema(x: np.ndarray, values: np.ndarray) -> list[dict[str, float | str]]:
 
 def run_audit() -> dict[str, Any]:
     parameters = _witness_parameters()
-    groups = continuity_kernel_dimensionless_groups(**parameters)
-    selection = continuity_kernel_selection(
+    groups = gradient_mediator_dimensionless_groups(**parameters)
+    selection = gradient_mediator_selection(
         spectral_shape=groups.spectral_shape,
         memory_loading=groups.memory_loading,
-        flux_relaxation_ratio=groups.flux_relaxation_ratio,
+        decay_rate_ratio=groups.decay_rate_ratio,
     )
     y_peak = selection.selected_scaled_wavenumber**2
     curvature_step = 1.0e-4 * y_peak
     curvature_y = y_peak + curvature_step * np.array([-1.0, 0.0, 1.0])
     curvature_u = np.sqrt(curvature_y)
-    curvature_denominator = dimensionless_continuity_kernel_denominator(
+    curvature_denominator = dimensionless_gradient_mediator_denominator(
         curvature_u,
         spectral_shape=groups.spectral_shape,
         memory_loading=groups.memory_loading,
@@ -188,36 +203,40 @@ def run_audit() -> dict[str, Any]:
         )
         / curvature_step**2
     )
-    inferred = infer_continuity_kernel_groups_from_peak(
+    inferred = infer_gradient_mediator_groups_from_peak(
         selected_scaled_wavenumber=selection.selected_scaled_wavenumber,
         log_transfer_curvature_y=log_curvature_y,
     )
 
     u = np.linspace(0.0, 4.0, 40001)
-    transfer = reciprocal_continuity_kernel_transfer(
+    transfer = gradient_mediator_transfer(
         u,
         coupling=1.0,
-        gradient_coupling=True,
+        coupling_geometry="gradient_vector",
         **parameters,
-    )
+    ).real
     numerical_peak = float(u[int(np.argmax(transfer))])
-    direct = reciprocal_continuity_kernel_transfer(
+    direct = gradient_mediator_transfer(
         np.array([0.0, numerical_peak]),
         coupling=1.0,
-        gradient_coupling=False,
+        coupling_geometry="direct_scalar",
         **parameters,
     )
-    positive = reciprocal_continuity_kernel_transfer(
+    positive = gradient_mediator_transfer(
         u[::100], coupling=0.7, **parameters
     )
-    negative = reciprocal_continuity_kernel_transfer(
+    negative = gradient_mediator_transfer(
         u[::100], coupling=-0.7, **parameters
     )
 
-    radii = np.linspace(0.05, 15.0, 360)
-    kernel = radial_green_kernel_3d(radii)
-    zeros = _crossing_positions(radii, kernel)
-    extrema = _extrema(radii, kernel)
+    zeros = _root_positions(
+        lambda radius: radial_gradient_mediator_green_3d(
+            radius,
+            spectral_shape=SPECTRAL_SHAPE,
+            memory_loading=MEMORY_LOADING,
+        )
+    )
+    extrema = _extrema()
     finite_pair_minima = [
         item
         for item in extrema
@@ -231,34 +250,23 @@ def run_audit() -> dict[str, Any]:
     )
     first_pair_minimum = finite_pair_minima[0]
 
-    cutoff_probe_radii = np.array([1.0, 4.0, 5.0, 7.0])
-    cutoff_probes = {
-        str(cutoff): radial_green_kernel_3d(
-            cutoff_probe_radii, max_wavenumber=float(cutoff)
-        )
-        for cutoff in (80, 120, 160)
-    }
-    cutoff_signatures = [
-        tuple(np.sign(values).astype(int).tolist()) for values in cutoff_probes.values()
-    ]
-    cutoff_relative_spread = float(
-        np.max(
-            np.ptp(np.stack(list(cutoff_probes.values())), axis=0)
-            / np.maximum(
-                np.max(np.abs(np.stack(list(cutoff_probes.values()))), axis=0),
-                1.0e-12,
-            )
-        )
+    quadrature_probe_radii = np.array([0.2, 1.0, 4.0, 7.0, 10.0])
+    residue_probes = radial_gradient_mediator_green_3d(
+        quadrature_probe_radii,
+        spectral_shape=SPECTRAL_SHAPE,
+        memory_loading=MEMORY_LOADING,
     )
+    quadrature_probes = _quadrature_green_3d(quadrature_probe_radii)
+    inverse_transform_max_error = float(np.max(np.abs(residue_probes - quadrature_probes)))
 
     constitutive_minimum = 1.0 - SPECTRAL_SHAPE**2 / 4.0
     gates = {
         "dimensionless_reduction_exact": bool(
             np.isclose(groups.spectral_shape, SPECTRAL_SHAPE)
             and np.isclose(groups.memory_loading, MEMORY_LOADING)
-            and np.isclose(groups.flux_relaxation_ratio, FLUX_RATIO)
+            and np.isclose(groups.decay_rate_ratio, DECAY_RATIO)
         ),
-        "constitutive_energy_positive": constitutive_minimum > 0.0,
+        "constitutive_operator_positive": constitutive_minimum > 0.0,
         "static_denominator_positive": selection.statically_stable,
         "selected_mode_oscillatory": selection.selected_mode_oscillatory,
         "analytic_peak_matches_grid": abs(
@@ -275,13 +283,13 @@ def run_audit() -> dict[str, Any]:
         "direct_channel_nonzero_mode_control": bool(direct[0] > 0.0),
         "common_gain_sign_invariant": bool(np.allclose(positive, negative)),
         "real_space_sign_changing_shells": len(zeros) >= 3,
-        "shell_signs_cutoff_robust": bool(
-            len(set(cutoff_signatures)) == 1 and cutoff_relative_spread < 5.0e-3
+        "exact_residues_match_infinite_fourier_quadrature": (
+            inverse_transform_max_error < 2.0e-10
         ),
         "finite_separation_energy_minimum_exists": len(finite_pair_minima) >= 1,
     }
     return {
-        "decision": "structural-pass-dynamic-kernel-candidate",
+        "decision": "structural-pass-adjoint-gradient-mediator-candidate",
         "gates": gates,
         "witness_is_not_parameter_fit": True,
         "dimensionless_groups": groups.__dict__,
@@ -293,12 +301,14 @@ def run_audit() -> dict[str, Any]:
         "constitutive_minimum": constitutive_minimum,
         "numerical_peak": numerical_peak,
         "zero_crossings": zeros,
-        "cutoff_relative_spread": cutoff_relative_spread,
+        "inverse_transform_max_error": inverse_transform_max_error,
         "first_pair_barrier": first_barrier,
         "first_finite_pair_minimum": first_pair_minimum,
         "claim_limits": {
             "coefficient_selection": "delta, mu and gamma/lambda remain inputs",
-            "kernel_selection": "K_eff is derived from the field response",
+            "state_boundary": "vector mediator m is not canonical occupancy rho",
+            "source_geometry": "k^2 requires the new adjoint gradient coupling",
+            "kernel_selection": "K_eff is derived from the proposed mediator response",
             "pair_result": "linear point-source energy landscape only",
             "nonlinear_nodes": "not simulated",
             "dimension_selection": "not supplied",
@@ -311,12 +321,20 @@ def _write_figure(path: Path, result: dict[str, Any]) -> None:
     selection = result["selection"]
     u = np.linspace(0.0, 1.8, 1000)
     constitutive = 1.0 + SPECTRAL_SHAPE * np.square(u) + u**4
-    transfer = reciprocal_continuity_kernel_transfer(u, **parameters)
+    transfer = gradient_mediator_transfer(u, **parameters).real
 
     radii = np.linspace(0.05, 15.0, 360)
-    kernel = radial_green_kernel_3d(radii)
+    kernel = radial_gradient_mediator_green_3d(
+        radii,
+        spectral_shape=SPECTRAL_SHAPE,
+        memory_loading=MEMORY_LOADING,
+    )
     pair_energy = -kernel
-    pair_force = np.gradient(kernel, radii)
+    pair_force = radial_gradient_mediator_green_derivative_3d(
+        radii,
+        spectral_shape=SPECTRAL_SHAPE,
+        memory_loading=MEMORY_LOADING,
+    )
 
     fig, axes = plt.subplots(1, 3, figsize=(15.0, 4.35), constrained_layout=True)
     axes[0].plot(u, constitutive, color="#555f6b", label=r"$D(u)$")
@@ -335,7 +353,7 @@ def _write_figure(path: Path, result: dict[str, Any]) -> None:
     axes[1].plot(radii, pair_energy, color="#a33f32", label=r"$U_{pair}=-K_{eff}$")
     axes[1].axhline(0.0, color="#555f6b", linewidth=0.8)
     axes[1].set(xlabel=r"scaled distance $r/\ell$", ylabel="response")
-    axes[1].set_title("Attractive and repulsive shells")
+    axes[1].set_title("Sign-changing response shells")
     axes[1].legend(frameon=False)
 
     axes[2].plot(radii, pair_force, color="#6b4c8a")
@@ -348,7 +366,7 @@ def _write_figure(path: Path, result: dict[str, Any]) -> None:
     axes[2].set_title("First separated pair basin")
     axes[2].legend(frameon=False)
 
-    fig.suptitle("Dynamic Green kernel: selected scale without an amplitude sweep")
+    fig.suptitle("Adjoint-gradient mediator: selected scale without an amplitude sweep")
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=180)
     plt.close(fig)
@@ -360,7 +378,7 @@ def _write_report(path: Path, result: dict[str, Any], figure: Path) -> None:
         for name, passed in result["gates"].items()
     )
     selection = result["selection"]
-    report = rf"""# Dynamic Green-kernel selection gate
+    report = rf"""# Adjoint-gradient mediator Green-kernel gate
 
 Date: 2026-08-11. Status: **structural pass, model candidate only**.
 
@@ -374,10 +392,39 @@ separation on the other. The earlier compensated three-scale pilot already
 constructed an outer repulsive shell at about `10.91 sigma_rep`, but did not
 test reciprocal two-node dynamics.
 
-Can the shell shape and its scale instead arise as the response of the
-continuity-constrained memory field, with one common write/read coupling?
+Can the shell shape and its scale instead arise as the response of one
+longitudinal vector mediator, with a common adjoint source/readout coupling?
 
-## Common-energy response
+## Review correction: state and source placement
+
+The canonical memory remains the non-negative occupancy \(\rho\) in
+\(z=(x,\rho)\). The following longitudinal vector mediator \(\mathbf m\) and
+its conjugate velocity \(\mathbf p\) are a proposed Markov-state extension,
+not a relabeling of \(\rho\):
+
+\[
+\partial_t\mathbf m=\mathbf p,
+\qquad
+\partial_t\mathbf p=-(\lambda_m+\gamma_p)\mathbf p
+-\left[\lambda_m\gamma_p+(-\Delta)D(-\Delta)\right]\mathbf m
++g\nabla q.
+\]
+
+Here \(q\) is a scalar source density. A point witness uses \(q=G_x\); the
+frozen-node follow-up uses its complete retained occupancy. The single
+interaction energy is
+
+\[
+H_{{\rm int}}[\mathbf m,q]=-g\int\mathbf m(y)\cdot\nabla q(y)\,dy.
+\]
+
+It supplies both the vector source \(g\nabla q\) and its adjoint reciprocal
+readout. This explicit source placement is required for the \(k^2\) numerator.
+Additive deposition directly into canonical \(\rho\) does not produce that
+numerator. The earlier wording that attached the response directly to the
+canonical continuity-memory law was therefore too strong.
+
+## Reciprocal response
 
 Let the longitudinal constitutive stiffness be
 
@@ -391,11 +438,11 @@ For reciprocal gradient coupling, eliminating the linear memory field gives
 \[
 \widehat K_{{\rm eff}}(k,\omega)
 =\frac{{g^2 k^2}}
-{{(-i\omega+\lambda_m)(-i\omega+\gamma_j)+k^2D(k)}}.
+{{(-i\omega+\lambda_m)(-i\omega+\gamma_p)+k^2D(k)}}.
 \]
 
-The same `g` writes and reads the field, hence `g^2`; independent source and
-readout amplitudes are absent. The gradient pair supplies
+The same `g` writes and reads the mediator, hence `g^2`; independent source and
+readout amplitudes are absent. The adjoint gradient pair supplies
 `K_eff(0,omega)=0`, so the spatial integral vanishes without balancing raw
 Gaussian amplitudes.
 
@@ -405,8 +452,8 @@ With
 \ell=(c/a)^{{1/4}},\quad
 u=k\ell,\quad
 \delta=\frac b{{\sqrt{{ac}}}},\quad
-\mu=\frac{{\lambda_m\gamma_j\sqrt c}}{{a^{{3/2}}}},\quad
-r_\gamma=\frac{{\gamma_j}}{{\lambda_m}},
+\mu=\frac{{\lambda_m\gamma_p\sqrt c}}{{a^{{3/2}}}},\quad
+r_\gamma=\frac{{\max(\lambda_m,\gamma_p)}}{{\min(\lambda_m,\gamma_p)}}\geq1,
 \]
 
 the static denominator is
@@ -414,6 +461,10 @@ the static denominator is
 \[
 P(u)=\mu+u^2+\delta u^4+u^6.
 \]
+
+The two decay rates enter only through their sum and product, so exchanging
+their labels leaves the response unchanged. `r_gamma` is therefore the
+canonical larger-to-smaller ratio; the individual labels are not identifiable.
 
 Thus five dimensional coefficients reduce to a length/rate normalization and
 three dimensionless shape groups. The response-selected scale is not supplied:
@@ -427,8 +478,8 @@ for `y_*=u_*^2` it solves
 
 The fixed witness `delta=-1.9`, `mu=0.3`, `r_gamma=1` is an analytic existence
 point, not a fit to knot data. Its constitutive minimum is
-`{result['constitutive_minimum']:.6g}>0`, so no anti-diffusive or indefinite
-quadratic energy was used.
+`{result['constitutive_minimum']:.6g}>0`, so the fixed-source quadratic
+mediator energy is positive.
 
 - selected `u_*={selection['selected_scaled_wavenumber']:.6g}`;
 - selected wavelength `2 pi/u_*={selection['selected_scaled_wavelength']:.6g}`;
@@ -446,9 +497,9 @@ quadratic energy was used.
 
 ## What is and is not self-selected
 
-Selected by the field response: effective kernel shape, zero integral,
-preferred wavelength, shell positions and the linear point-source pair
-landscape.
+Selected conditional on the proposed field coefficients and source geometry:
+effective response shape, zero integral, preferred wavelength, shell positions
+and the linear point-source pair landscape.
 
 Not selected: `delta`, `mu`, `r_gamma`, the absolute length/time units and the
 overall coupling. A simulation cannot determine constants that do not have an
@@ -470,35 +521,43 @@ Consequently:
 
 1. peak position and local log curvature estimate `delta,mu` jointly;
 2. temporal damping and frequency at the same peak estimate
-   `gamma_j/lambda_m` and test the dispersion relation;
+   the unordered decay-rate ratio and test the dispersion relation;
 3. a calibrated weak response fixes the remaining gain;
 4. estimates must agree across seeds, blocks, resolutions and independent
    pair response before they are called effective parameters.
 
 ## Decision and next test
 
-P3.8b passes as an analytic candidate. It gives a single-law route to local
-attraction, outer repulsive shells, a finite separated linear pair basin and
-phase-bearing temporal modes. It does not establish nonlinear knot formation,
-basin accessibility, stability under noise, parameter universality, or `d=3`.
+P3.8b passes after review as an analytic **adjoint-gradient mediator
+candidate**. It gives
+a common-energy route to a zero-mode-free, sign-changing quasistatic response,
+a finite separated point-source basin and phase-bearing temporal modes. It is
+not obtained from canonical scalar deposition alone. It does not establish
+nonlinear knot formation, basin accessibility, stability under noise,
+parameter universality, or `d=3`.
 
 Next, and only next, run one matched two-node pilot using mature frozen states:
 
 - arm A: the already fixed compensated static outer-shell kernel;
 - arm B: this fixed dynamic Green field;
-- controls: cross-off, reversible/flux-off and direct non-gradient source;
+- controls: cross-off and direct non-gradient source in the static gate;
 - fixed separations below the barrier, in the outward-force interval, at the
   predicted finite minimum and beyond it;
-- primary outcomes: signed centre acceleration, bounded separation, source
-  and target shape bounds, energy/work balance and agreement with the
-  independently predicted shell radii.
+- primary static outcomes: signed full-memory centre force and agreement with
+  independently predicted shell radii. Shape cannot change in this frozen gate.
+
+Reversible/current-off is not a valid static null because first- and
+second-order realizations share the same equilibrium susceptibility. Bounded
+separation, shape evolution and energy/work balance require a later dynamic
+mediator implementation with a separately preregistered time discretization
+and gain/mobility; they are not inferred from this quasistatic response.
 
 No kernel-amplitude sweep or adaptive coefficient law is authorized.
 
 ## Reproducibility
 
 - Script: `experiments/current/memory/closure/dynamic_green_kernel_selection_gate.py`
-- Package: `src/emergenz_knoten/continuity_memory.py`
+- Package: `src/emergenz_knoten/gradient_mediator.py`
 - Git revision before generated changes: `{_git_output(['rev-parse', 'HEAD'])}`
 - Generated: `{datetime.now(UTC).isoformat()}`
 """

@@ -299,10 +299,11 @@ Maximum root error: `{result['max_root_error']:.3e}`. Telescoping error:
 
 ## Decision
 
-This is the preferred **P3.8a analytic extension** because it introduces no
+This is a **P3.8a analytic extension candidate** because it introduces no
 external sign, handedness, node species, boundary, or separate cross geometry.
 It supplies a falsifiable propagation/phase threshold and a compulsory
-first-order null control (`c_j=0`).
+first-order null control (`c_j=0`). It is not selected over other extensions by
+the existing scalar data.
 
 It does **not** yet authorize a coupled simulation:
 
@@ -313,10 +314,13 @@ It does **not** yet authorize a coupled simulation:
 4. a common source/readout energy must still make deposition and trajectory
    backreaction reciprocal without independently tuned gains.
 
-The next calculation is therefore an energy-consistent density-current
-coupling and its affine equilibrium/limit-cycle gate. Only a simultaneous
-force-balance and stable-mode pass permits one short pilot. A kernel, gain,
-lambda, or noise sweep remains blocked.
+The subsequent P3.8b review found that the tested `k^2` response requires an
+independent longitudinal vector mediator with an adjoint gradient source and
+readout. It does **not** follow from additive deposition into this scalar
+density-current state. P3.8a and P3.8b therefore remain separate model
+candidates despite sharing a longitudinal pole polynomial. Only a derivation
+of a reciprocal source/readout energy for this density-current architecture
+could reconnect them. A kernel, gain, lambda, or noise sweep remains blocked.
 
 ## Reproducibility
 
