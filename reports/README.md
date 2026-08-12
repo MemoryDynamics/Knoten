@@ -62,6 +62,16 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 
 ### 3. Memory-Feld und reduzierte Moden
 
+- [P3.8d dynamisches Zwei-Knoten-Mediatorgate](response/reciprocal/dynamic_two_knot_mediator_gate_2026-08-12.md)
+  - **conditional dynamic existence pass:** Eine gemeinsame Energie liefert
+    `(m,p,R)`-Dynamik mit geschlossener Source-work-/Daempfungsbilanz,
+    Cross-off und zweiter Zeitschrittordnung. Zwei feste Starts erreichen das
+    quasistatische Basin nahe `6.99 ell`; die erster-Ordnung-Kontrolle erreicht
+    nahezu dieselbe Separation.
+  - **nicht emergent:** Mediator, Koeffizienten, `nu=1` und Skalen sind gesetzt;
+    Punktquench-Transienten sind UV- und Initialisierungs-sensitiv. Keine Ableitung aus `z=(x,rho)`,
+    kein Orbit, Spin, Teilchen- oder Dimensionsclaim.
+
 - [Lokaler Feldoperator-Audit](kernels/field/local_field_operator_audit_2026-07-29.md)
   - **structural:** Eine eingeschraenkte lokale Ableitungsentwicklung matcht
     den Gauss-Transfer bis `k^4`, realisiert Zero Mean mit `s0=0` und zeigt

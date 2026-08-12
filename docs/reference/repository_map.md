@@ -48,6 +48,7 @@ flowchart TD
     experiments --> continuity_gate["continuity_constrained_memory_gate.py<br/>density-current analytic gate"]
     experiments --> green_kernel_gate["dynamic_green_kernel_selection_gate.py<br/>separate adjoint-gradient mediator"]
     experiments --> quasistatic_pair_gate["quasistatic_two_knot_discrimination.py<br/>frozen full-memory discriminator"]
+    experiments --> dynamic_pair_gate["dynamic_two_knot_mediator_gate.py<br/>P3.8d energy + dynamic controls"]
     experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
@@ -101,6 +102,7 @@ flowchart TD
     src --> covariant_field["covariant_vector_field.py<br/>isolierter analytischer K2-Vorschlag; nicht im Knotensimulator"]
     src --> continuity_memory["continuity_memory.py<br/>innovation moments + longitudinal rho/j modes"]
     src --> gradient_mediator["gradient_mediator.py<br/>independent longitudinal m/p response"]
+    src --> dynamic_gradient_mediator["dynamic_gradient_mediator.py<br/>modal m/p/R split dynamics + ledger"]
     src --> quasistatic_pair["quasistatic_pair.py<br/>memory-memory + symmetric visible-memory pairs"]
     spectral_trace --> raw_null_exp
 
@@ -109,6 +111,8 @@ flowchart TD
     continuity_memory --> continuity_boundary["P3.8a analytic candidate<br/>rho/j; not selected by scalar data"]
     gradient_mediator --> mediator_boundary["P3.8b analytic candidate<br/>new m/p state; not canonical rho"]
     gradient_mediator --> green_kernel_gate
+    gradient_mediator --> dynamic_gradient_mediator
+    dynamic_gradient_mediator --> dynamic_pair_gate
     quasistatic_pair --> quasistatic_pair_gate
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]

@@ -1093,6 +1093,81 @@ reiner `reversible-off`-Vergleich ist im statischen Gate nicht diskriminierend,
 weil verschiedene Zeitordnungen dieselbe Gleichgewichtssuszeptibilitaet haben
 koennen. Weder P3.8b noch P3.8c selektiert `d=3`, Ladung, Spin oder QFT.
 
+### Diskrete dynamische Realisierung des Gradientenmediators
+
+P3.8d untersucht eine konkrete, aber weiterhin zusaetzliche Dynamik. Zwei
+identische skalare Punktquellen liegen symmetrisch bei `+-R/2`. Nach einer
+isotropen 3D-Fourierquadratur werden der longitudinale Feldzustand und seine
+konjugierte Geschwindigkeit durch reelle Moden `m,p` repraesentiert. Mit der
+Quellladung `B(R)` und einer positiven diagonalen Rueckstellmatrix `A` gilt
+
+\[
+\dot{\mathbf m}=\mathbf p,
+\qquad
+\dot{\mathbf p}=-\Gamma\mathbf p-A\mathbf m+B(R),
+\qquad
+\dot R=\nu\,\partial_R B(R)\cdot\mathbf m.
+\]
+
+Die gemeinsame Energie ist
+
+\[
+E(R,\mathbf m,\mathbf p)
+=\frac12\|\mathbf p\|^2
++\frac12\mathbf m^T A\mathbf m
+-B(R)\cdot\mathbf m,
+\]
+
+und besitzt die exakte kontinuierliche Bilanz
+
+\[
+\dot E
+=-\Gamma\|\mathbf p\|^2
+-\frac{\dot R^2}{\nu}
+\le 0.
+\]
+
+Damit wird dem sichtbaren Zentrum keine inertiale Masse hinzugefuegt; `R`
+bleibt overdamped. Die diskrete Implementierung splittet symmetrisch in
+Source-/Feld-/Source-Schritte. Bei fester Quelle wird der gedaempfte lineare
+Feldschritt analytisch ausgewertet. Fuer den Source-Schritt wird der skalare
+diskrete Gradient
+
+\[
+\overline{\partial_R B}
+=\frac{B(R_{n+1})-B(R_n)}{R_{n+1}-R_n}
+\]
+
+verwendet. Dadurch ist die diskrete Source-work-Bilanz bis zur nichtlinearen
+Loesetoleranz exakt. Ein erster-Ordnung-Kontrollarm
+
+\[
+\Gamma\dot{\mathbf m}=-A\mathbf m+B(R)
+\]
+
+hat dieselbe statische Suszeptibilitaet `A^-1`, aber keinen reversiblen
+konjugierten Zustand. Das ist die passende dynamische Kontrolle; ein rein
+statischer Vergleich kann die Zeitordnungen nicht unterscheiden.
+
+Am festen Existenzpunkt und ohne Parametersweep konvergieren die Starts
+`R/ell=5` und `8` in beiden Zeitordnungen zum getrennten Basin nahe
+`R/ell=6.99`. Die zweiter-Ordnung-Moden besitzen einen kurzen gedaempften
+Overshoot; das Separationsergebnis bleibt jedoch nahe an der erster-Ordnung-
+Kontrolle. Die fruehe Kraftantwort eines abrupt eingeschalteten Punktquellen-
+feldes ist UV-Cutoff-sensitiv. Startet das Feld stattdessen bereits im
+statischen Gleichgewicht des Anfangsabstands, bleibt das getrennte Basin
+erhalten, aber die Kraftvorzeichenwechsel verschwinden. Das Ringing ist daher
+kein initialisierungsunabhaengiger Paarmodus. Die Lyapunov-Bilanz verbietet fuer diese
+autonome gedaempfte Reduktion einen nichtabklingenden Limit-Cycle.
+
+P3.8d ist deshalb ein Konsistenz- und Existenzresultat fuer einen konstruierten
+Mediator, keine Herleitung aus dem kanonischen `z=(x,rho)`. Insbesondere sind
+`delta`, `mu`, `r_gamma`, `nu`, die Skalenidentifikation und der Zustand
+`(m,p)` noch nicht durch die Knotendaten geschlossen. Eine belastbare
+Fortsetzung muss diese Groessen auf kanonischen Daten und unabhaengigen
+Response-Holdouts identifizieren oder den Kandidaten verwerfen; ein
+Koeffizientensweep wuerde nur seine Einstellbarkeit demonstrieren.
+
 ## Markov-Einbettung
 
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der

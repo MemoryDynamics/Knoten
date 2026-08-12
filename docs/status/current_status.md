@@ -486,15 +486,41 @@ nicht identisch. Ihr gemeinsamer Amplitudenversatz von `0.2411%` entspricht
 bis auf `1.05e-8` dem Unterschied zwischen den Punktgrenzen `M_H` und `M_H^2` bei
 der endlichen gespeicherten Masse `M_H=0.997595`.
 
+P3.8d ist als konditionaler dynamischer Existenztest abgeschlossen. Die neue
+longitudinale Feldvariable `(m,p)` wird zusammen mit einer symmetrischen
+kollinearen Quellseparation `R` aus derselben Kopplungsenergie fortgeschrieben:
+`m_dot=p`, `p_dot=-Gamma p-A m+B(R)` und
+`R_dot=nu B_R(R) dot m`. Daraus folgt
+`E_dot=-Gamma |p|^2-|R_dot|^2/nu<=0`. Der diskrete Source-Schritt schliesst
+Source-work ueber einen diskreten Gradienten; der Feldschritt ist bei fester
+Quelle exakt. Damping-Quadratur, Cross-off, statische Suszeptibilitaet der
+erster-Ordnung-Kontrolle und Zeitschrittordnung bestehen. Bei den festen
+Starts `R/ell=5,8` laufen zweiter und erster Ordnung von beiden Seiten in das
+bereits vorhergesagte Minimum nahe `6.99`; die reversiblen Quenches zeigen
+kurze Kraftvorzeichenwechsel, die erster-Ordnung-Kontrolle nicht. Bei bereits
+statisch aequilibriertem Anfangsfeld verschwinden diese Vorzeichenwechsel;
+das Ringing ist damit Initialisierungs- und Quench-abhaengig.
+
+Dies ist **kein** Emergenzresultat des skalaren `z=(x,rho)`-Modells. Der
+Mediator, `delta,mu,r_gamma`, der Mobilitaetsquotient `nu=1` und die
+Skalenzuordnung bleiben Eingaben. Der Pilot ist kollinear und punktfoermig;
+Knotenform und kanonisches Memory werden nicht entwickelt. Fruehe
+Kraftamplituden sind zudem merklich UV-Cutoff-abhaengig. Die Lyapunov-Bilanz
+schliesst in dieser autonomen gedaempften Reduktion einen persistenten
+Limit-Cycle aus. P3.8d zeigt daher einen konsistent konstruierbaren
+Zusatzmechanismus, waehlt ihn aber gegenueber der erster-Ordnung-Realisierung
+nicht aus.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste
   Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
-- **Paper II:** P3.8b liefert einen analytischen Gradientenmediator-Kandidaten
-  und P3.8c einen quasistatischen Diskriminator, aber noch keinen dynamischen
-  Zwei-Knoten-Pass. Propagationsgesetz, Raumzeitkinematik und `d=3` bleiben
+- **Paper II:** P3.8b-d liefern einen analytischen Gradientenmediator-Kandidaten,
+  einen quasistatischen Diskriminator und einen konditionalen dynamischen
+  Existenzpass. Sie leiten den Zusatzmechanismus nicht aus `z=(x,rho)` her.
+  Propagationsgesetz, Raumzeitkinematik und `d=3` bleiben
   gesperrt, bis unabhaengige Evidenz und ein echter Dimensionsreduktions-
   mechanismus vorliegen.
 - **Paper III:** offene spekulative Tuer ohne Claim-Status.

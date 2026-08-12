@@ -704,15 +704,27 @@ Prioritaetsfolge:
     dieselben Vorzeichen. Diese Architekturwahl bleibt im dynamischen Gate
     explizit offen.
 
-22. **P3.8d jetzt: diskretes Energie-/Arbeitsgate vor jeder Dynamik.** Zuerst
-    wird eine zeitdiskrete `(m,p)`-Fortschreibung mit derselben
-    Kopplungsenergie hergeleitet. Vorregistriert werden Source-work,
-    Mediator-Daempfung, Action/Reaction, Zeitschritt-Konvergenz, Cross-off und
-    eine erster-Ordnung-Kontrolle. Ein statisches `reversible-off` ist keine
-    Nullkontrolle, weil erster und zweiter Ordnung dieselbe Gleichgewichts-
-    suszeptibilitaet besitzen koennen. Erst nach bestandenem Gate ist genau ein
-    kurzer dynamischer Zwei-Knoten-Pilot bei den bereits bestimmten Radien
-    erlaubt; kein Koeffizienten-, Gain- oder Kernel-Sweep.
+22. **P3.8d abgeschlossen: konditionaler dynamischer Existenzpass.** Eine
+    zeitdiskrete `(m,p,R)`-Fortschreibung aus einer gemeinsamen Energie
+    besteht Source-work-, Daempfungs-, Cross-off- und Zeitschrittgates. Der
+    erster-Ordnung-Arm besitzt dieselbe statische Suszeptibilitaet, aber keinen
+    reversiblen Overshoot. Beide Zeitordnungen erreichen bei `R0=5,8` dasselbe
+    getrennte Basin nahe `6.99 ell`; die reversible Separationskurve ist nur
+    schwach verschieden. Fruehe Krafttransienten sind UV-Cutoff- und
+    Initialisierungs-sensitiv; bei statisch aequilibriertem Feld verschwindet
+    das Ringing.
+    Der Mediator, seine Koeffizienten und `nu=1` sind gesetzt; der Test ist
+    punktfoermig, kollinear und entwickelt weder Knotenform noch `rho`.
+
+23. **P3.8e jetzt: Mechanismus-Closure statt Parametersweep.** Auf vorhandenen
+    kanonischen Langlauf-/Checkpoint-Daten ist zu testen, ob ein gemeinsamer
+    niedrigrangiger latenter Zustand die Source-Innovation und unabhaengige
+    schwache Response-Holdouts zugleich vorhersagt. Primaere Nullhypothese:
+    die aus `z=(x,rho)` konstruierten Features identifizieren weder die
+    P3.8d-Dispersion noch eine vom erster-Ordnung-Modell unterscheidbare
+    reversible Komponente. Nur seed-, Block-, Horizon- und Aufloesungsstabile
+    Koeffizienten duerfen als effektive Closure gelten. Kein `delta`-, `mu`-,
+    `nu`-, Gain-, Kernel- oder Noise-Sweep vor diesem Gate.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

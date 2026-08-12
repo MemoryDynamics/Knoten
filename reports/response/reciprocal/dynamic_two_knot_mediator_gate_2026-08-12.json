@@ -1,0 +1,247 @@
+{
+  "decision": "p38d-conditional-dynamic-existence-pass",
+  "gates": {
+    "static_modal_quadrature_preserves_registered_force_signs": true,
+    "static_modal_barrier_and_minimum_match_green_inversion": true,
+    "homogeneous_damping_matches_independent_time_quadrature": true,
+    "cross_off_is_exact": true,
+    "first_and_second_order_share_static_susceptibility": true,
+    "second_order_selected_mode_overshoots": true,
+    "first_order_selected_mode_is_monotone": true,
+    "split_scheme_has_second_order_step_convergence": true,
+    "dynamic_energy_balance_closes": true,
+    "second_order_pilots_enter_common_static_basin": true,
+    "pilot_final_separation_is_time_step_stable": true,
+    "static_basin_is_uv_stable": true,
+    "second_order_pilot_differs_from_first_order_control": true,
+    "second_order_quench_has_nonzero_force_reversal": true,
+    "equilibrium_initialized_controls_enter_same_basin": true,
+    "force_reversal_is_quench_dependent": true
+  },
+  "fixed_scope": {
+    "spectral_shape": -1.9,
+    "memory_loading": 0.3,
+    "decay_rate_ratio": 1.0,
+    "relative_mobility": 1.0,
+    "initial_separations": [
+      5.0,
+      8.0
+    ],
+    "pilot_duration": 1500.0,
+    "pilot_time_step": 0.5,
+    "quadrature": {
+      "n_wavenumber": 64,
+      "n_direction": 64,
+      "k_max": 16.0
+    }
+  },
+  "static_validation": {
+    "radii": [
+      2.8,
+      5.0,
+      8.0,
+      12.0
+    ],
+    "modal_forces": [
+      -0.021846302099773243,
+      0.006516702489032732,
+      -0.0018042308309238757,
+      0.0004360480351131334
+    ],
+    "exact_green_forces": [
+      -0.021845181569311825,
+      0.006518633001362283,
+      -0.0017055871270369991,
+      0.00037322405513395563
+    ],
+    "maximum_absolute_error": 9.864370388687656e-05,
+    "modal_barrier": 3.920212125629648,
+    "modal_minimum": 6.994348881874181
+  },
+  "damping_validation": {
+    "energy_loss": 0.03701301923623496,
+    "time_quadrature": 0.03701301923623495,
+    "absolute_residual": 1.3877787807814457e-17
+  },
+  "time_step_validation": {
+    "time_steps": [
+      0.25,
+      0.125,
+      0.0625
+    ],
+    "reference_time_step": 0.03125,
+    "duration": 50.0,
+    "errors_against_reference": [
+      0.002636092377963944,
+      0.0007273205492470927,
+      0.00020821106300864567
+    ],
+    "observed_orders": [
+      1.8577376853825684,
+      1.80454461156161
+    ]
+  },
+  "dynamic_control": {
+    "selected_wavenumber": 1.038686808734512,
+    "selected_restoring": 0.42310724601601946,
+    "second_order_angular_frequency": 0.35086642189873274,
+    "second_order_period": 17.907627846454464,
+    "second_order_peak_response": 1.0074153066935785,
+    "first_order_peak_response": 0.9999998048880211,
+    "static_force_difference": 0.0
+  },
+  "pilots": [
+    {
+      "dynamic_order": "second",
+      "initialization": "zero_field",
+      "initial_separation": 5.0,
+      "final_separation": 6.9792204086656495,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 1.339206523454095e-15,
+      "maximum_source_work_residual": 8.575886718429834e-16,
+      "cumulative_source_dissipation": 0.007096159734578825,
+      "cumulative_mediator_dissipation": 0.12108566936374186,
+      "nonzero_force_sign_changes": 1
+    },
+    {
+      "dynamic_order": "second",
+      "initialization": "zero_field",
+      "initial_separation": 8.0,
+      "final_separation": 7.015975933706361,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 5.158628775079008e-16,
+      "maximum_source_work_residual": 9.102639567668339e-18,
+      "cumulative_source_dissipation": 0.001063740349095124,
+      "cumulative_mediator_dissipation": 0.12711772735922613,
+      "nonzero_force_sign_changes": 2
+    },
+    {
+      "dynamic_order": "first",
+      "initialization": "zero_field",
+      "initial_separation": 5.0,
+      "final_separation": 6.978953960997399,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 1.0283352674163998e-15,
+      "maximum_source_work_residual": 6.396962224253927e-16,
+      "cumulative_source_dissipation": 0.007039524132463491,
+      "cumulative_mediator_dissipation": 0.12114229233614178,
+      "nonzero_force_sign_changes": 0
+    },
+    {
+      "dynamic_order": "first",
+      "initialization": "zero_field",
+      "initial_separation": 8.0,
+      "final_separation": 7.016379787870826,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 4.909464372174601e-16,
+      "maximum_source_work_residual": 4.2836573725018104e-18,
+      "cumulative_source_dissipation": 0.0010553830868948342,
+      "cumulative_mediator_dissipation": 0.12712605780791061,
+      "nonzero_force_sign_changes": 0
+    }
+  ],
+  "equilibrium_initialized_controls": [
+    {
+      "dynamic_order": "second",
+      "initialization": "static_equilibrium",
+      "initial_separation": 5.0,
+      "final_separation": 6.979298934444093,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 1.259043325325948e-15,
+      "maximum_source_work_residual": 7.438118182359968e-16,
+      "cumulative_source_dissipation": 0.007101281901647963,
+      "cumulative_mediator_dissipation": 0.0003968494137021883,
+      "nonzero_force_sign_changes": 0
+    },
+    {
+      "dynamic_order": "second",
+      "initialization": "static_equilibrium",
+      "initial_separation": 8.0,
+      "final_separation": 7.015849126244295,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 4.799458085732317e-16,
+      "maximum_source_work_residual": 4.542320058769592e-18,
+      "cumulative_source_dissipation": 0.0010621297014308353,
+      "cumulative_mediator_dissipation": 5.49206523174639e-05,
+      "nonzero_force_sign_changes": 0
+    },
+    {
+      "dynamic_order": "first",
+      "initialization": "static_equilibrium",
+      "initial_separation": 5.0,
+      "final_separation": 6.979029702919799,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 1.0021314561601408e-15,
+      "maximum_source_work_residual": 7.226343004887448e-16,
+      "cumulative_source_dissipation": 0.007071206647448187,
+      "cumulative_mediator_dissipation": 0.0004269119703937396,
+      "nonzero_force_sign_changes": 0
+    },
+    {
+      "dynamic_order": "first",
+      "initialization": "static_equilibrium",
+      "initial_separation": 8.0,
+      "final_separation": 7.016251145884191,
+      "maximum_energy_increase": 0.0,
+      "maximum_balance_residual": 5.48025022917612e-16,
+      "maximum_source_work_residual": 4.398642095091582e-18,
+      "cumulative_source_dissipation": 0.00105764675565667,
+      "cumulative_mediator_dissipation": 5.9377060496773604e-05,
+      "nonzero_force_sign_changes": 0
+    }
+  ],
+  "refined_second_order_final": {
+    "5.0": 6.980473742205617,
+    "8.0": 7.0142461552323185
+  },
+  "uv_probe": {
+    "duration": 50.0,
+    "time_step": 0.25,
+    "results": {
+      "16.0": {
+        "n_quadrature": 64,
+        "modal_barrier": 3.920212125629648,
+        "modal_minimum": 6.994348881874181,
+        "final_separation": 5.2998308021566,
+        "minimum_force": -0.0017469114266060607,
+        "maximum_force": 0.0066354762100207625
+      },
+      "20.0": {
+        "n_quadrature": 80,
+        "modal_barrier": 3.9194165774088097,
+        "modal_minimum": 6.993764333515397,
+        "final_separation": 5.294921030118162,
+        "minimum_force": -0.0012972852951823057,
+        "maximum_force": 0.006427450418507612
+      },
+      "24.0": {
+        "n_quadrature": 96,
+        "modal_barrier": 3.91930841039185,
+        "modal_minimum": 6.990576995155978,
+        "final_separation": 5.293259162634352,
+        "minimum_force": -0.0014718189707752733,
+        "maximum_force": 0.0064582837963708326
+      },
+      "28.0": {
+        "n_quadrature": 112,
+        "modal_barrier": 3.919120384725335,
+        "modal_minimum": 6.991287214896295,
+        "final_separation": 5.291644220608407,
+        "minimum_force": -0.0014676160294107947,
+        "maximum_force": 0.006448991900209194
+      }
+    },
+    "interpretation": "final separation converges faster than the early force extrema; point-source quench amplitudes remain cutoff-sensitive"
+  },
+  "claim_limits": {
+    "model_status": "new longitudinal mediator candidate, not canonical rho",
+    "source_status": "point-source quadrature; mature checkpoint shape is not evolved",
+    "mobility": "relative_mobility=1 is fixed for an existence witness, not inferred",
+    "coefficients": "delta, mu, damping ratio and absolute scales remain inputs",
+    "geometry": "collinear symmetric separation only; no orbit or transverse mode",
+    "first_order_control": "field kinetic coefficient is set to the same Gamma for a timing convention; this does not exhaust first-order null models",
+    "initialization": "zero-field quench and static-equilibrium controls bracket two protocols; neither is derived from knot formation",
+    "physics": "no charge, spin, particle, QFT or dimension-selection claim"
+  },
+  "trace_storage": "full traces are generated in memory for the figure but are not tracked in this reviewed summary"
+}
