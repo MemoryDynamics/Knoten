@@ -1168,6 +1168,100 @@ Fortsetzung muss diese Groessen auf kanonischen Daten und unabhaengigen
 Response-Holdouts identifizieren oder den Kandidaten verwerfen; ein
 Koeffizientensweep wuerde nur seine Einstellbarkeit demonstrieren.
 
+### Was ein emergentes `(m,p)` rigoros bedeuten wuerde
+
+Eine zulaessige Grobkoernung fuegt nicht zuerst `p` hinzu und sucht danach
+passende Schwingungen. Sie beginnt mit einer vorab festgelegten Observable
+`Y=Psi(x,rho)` und dem Markov-/Koopman-Operator `U` des kanonischen Zustands.
+Eine Projektion auf `Y` liefert lokal eine exakte verallgemeinerte
+Langevin-/Memory-Gleichung. In einer linearen resolved/unresolved-Zerlegung
+
+\[
+\begin{pmatrix}Y_{n+1}\\W_{n+1}\end{pmatrix}
+=
+\begin{pmatrix}A&B\\C&D\end{pmatrix}
+\begin{pmatrix}Y_n\\W_n\end{pmatrix}
+\]
+
+ist die eliminierte Gleichung
+
+\[
+Y_{n+1}
+=AY_n
++\sum_{j=0}^{n-1}BD^jC\,Y_{n-1-j}
++BD^nW_0.
+\]
+
+Der Kernel `K_j=BD^jC` wird damit aus der kanonischen Dynamik abgeleitet. Erst
+wenn seine unabhaengig gemessene Input-Output-Antwort eine minimale
+zweidimensionale, passive und reziproke Realisierung **pro registrierter
+Raum-/Symmetriemode** verlangt, darf diese in Koordinaten `(m,p)` geschrieben
+werden. Eine solche Realisierung ist nur bis
+auf invertierbare Zustandswechsel eindeutig. Physikalisch invariant sind
+Pole, Nullstellen, Residuen und die vollstaendige Transferfunktion; `m`, `p`
+und ihre gemeinsame Normierung sind es nicht.
+
+Fuer stochastische Einzelpfade kommt ein orthogonaler Fluktuations-/
+Innovationsterm hinzu. Nur bei einer passenden Conditional-Expectation-
+Konstruktion ist er eine Martingaldifferenz; fuer eine generische
+Mori-Zwanzig-Projektion gilt das nicht automatisch. Die Blockelimination ist
+fuer den vollstaendig zerlegten linearisierten Conditional-Mean-Operator
+exakt; sie behauptet kein endliches deterministisches AR-Gesetz fuer jede
+Trajektorie. Ebenso kann eine Projektion keinen kausalen Cross-Kanal erzeugen,
+der im kanonischen Uebergangskern fehlt.
+Einzelknoten-K0-Daten koennen daher hoechstens einen internen effektiven Modus
+selektieren. Der P3.8d-Mediator zwischen Quellen benoetigt vor der Projektion
+eine registrierte gemeinsame Feld-/Mehrquellendynamik oder bleibt eine
+explizite Modellerweiterung.
+
+`p` ist daher zunaechst nur der zweite, fuer Zukunftsvorhersage notwendige
+Zustand neben `m`, nicht der Impuls des sichtbaren `x`. Erst die folgende
+robuste reversible Struktur erlaubt die staerkere Bezeichnung als Phasen- oder
+konjugierte Koordinate. Diese verlangt zusaetzlich eine positive gemeinsame
+Speichermetrik, ein darin reproduzierbares reversibles Generatorstueck,
+adjungierte Source-/Readout-Kopplung und eine geschlossene Energiebilanz auf
+Holdout-Antworten. Das Passivitaetsgate muss leistungskonjugierte Ports wie
+Kraft und Geschwindigkeit verwenden; Kraft und Auslenkung allein genuegen
+nicht. Rang-2, komplexe Fitpole oder ein Lyapunov-Fit allein reichen nicht.
+
+Auch zwei verschiedene reelle Relaxationspole besitzen Minimalordnung zwei
+und koennen in Begleitform geschrieben werden. Das begruendet noch keinen
+konjugierten Impuls. Erst ein ueber die zulaessigen Speichermetriken robuster
+reversibler Kopplungsanteil rechtfertigt diese Deutung; ein stabiles komplexes
+Polpaar weist zusaetzlich ein unterdaempftes Regime nach.
+
+Bei `r` aufgeloesten Raumoden besitzt ein erster-Ordnung-Feld mindestens `r`,
+ein `(m,p)`-Feld typischerweise `2r` Zustaende. Ein globaler Rang-2-Fit waere
+daher noch keine Feld- oder Dispersionsidentifikation. Der fruehere uniforme
+Weak-Probe prueft ausserdem die homogene `k=0`-Antwort. Diese wird im P3.8b/d-
+Gradientenkanal durch den `k^2`-Zaehler exakt genullt. Fuer die
+Mechanismus-Closure sind vorregistrierte lokalisierte oder zero-mean
+Finite-`k`-Impulse erforderlich. Fuer das P3.8d-Polynom mit den drei
+Raumkoeffizienten `a,b,c` braucht es mindestens drei Trainingskanaele und
+einen unangetasteten Dispersions-Holdout. Ist das Produkt der Zerfallsraten
+nicht unabhaengig festgelegt, kommt mindestens ein weiterer Kanal hinzu.
+
+Langzeitdaten pruefen in diesem Schritt, ob Suszeptibilitaet, Pole und
+Residuen mit dem Formationsalter ein Plateau erreichen. Das autonome P3.8d-
+System selbst kann durch laengere Laufzeit keine zweite Zeitordnung
+selektieren: Seine Lyapunov-Bilanz fuehrt erster- und zweiter-Ordnung-Arme zu
+denselben stationaeren Gleichungen. Der derzeitige Quotient
+`R_mem/ell=2.12e-4` bedeutet zudem, dass Fernantworten fast nur die
+Punkt-/Monopolgrenze sehen. Aehnliche Kernel- und Knotenpotentiale sind dort
+eine plausible Grobkoernungshypothese, aber noch keine Evidenz fuer denselben
+inneren Mechanismus.
+
+Unterschiedliche transiente Basinwahl durch Ueberschreiten einer Separatrix
+bleibt bei zweiter Ordnung moeglich und kann mit einer festen
+Anfangszustandsleiter getestet werden. Auch ein positiver Befund waere jedoch
+eine Folge des angenommenen `(m,p)`-Kanals, nicht dessen Herleitung.
+
+Eine echte Parameterselbstkonsistenz waere ein Fixpunkt zwischen gemessenen
+Knotenobservablen `theta`, ihrer schwachen Suszeptibilitaet und der daraus
+minimal realisierten effektiven Dynamik. Ohne einen aus `z=(x,rho)` folgenden
+Rueckkanal bleibt dies eine offline bestimmte effektive Closure und keine
+spontane mikroskopische Parameterauswahl.
+
 ## Markov-Einbettung
 
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der

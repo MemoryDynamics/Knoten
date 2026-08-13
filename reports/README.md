@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-12.
+Stand: 2026-08-13.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -140,6 +140,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
   - Naechstes Gate ist erster- gegen zweiter-Ordnung-Holdout-Closure aus einer
     vorab fixierten Projektion kanonischer Variablen; Feldpilot und
     Schwingungsoptimierung bleiben gesperrt.
+  - [P3.8e-Emergenzreview](project/meta/reviews/p38e_emergent_state_review_2026-08-13.md):
+    modale Finite-`k`-Minimalrealisierung, power-konjugierte Passivitaet und
+    Altersstationaritaet sind die festen Gates. Ein laengerer P3.8d-Lauf,
+    globaler Rang 2 oder der uniforme `k=0`-Probe koennen `(m,p)` nicht
+    selektieren.
 - [Kontinuitaetsbeschraenktes Memory-Gate](memory/closure/continuity_constrained_memory_gate_2026-08-11.md)
   - **structural pass with unresolved force balance:** Die kanonische
     Memory-Innovation ist bei stationaerer Masse monopolfrei und ihr Dipol ist

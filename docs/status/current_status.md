@@ -511,6 +511,39 @@ Limit-Cycle aus. P3.8d zeigt daher einen konsistent konstruierbaren
 Zusatzmechanismus, waehlt ihn aber gegenueber der erster-Ordnung-Realisierung
 nicht aus.
 
+P3.8e ist deshalb als **Mechanismus-Closure** festgelegt. Eine feste
+Observable `Y=Psi(x,rho)` und gepaarte schwache Finite-`k`-Impulse muessen
+zuerst die nichtparametrische kanonische Impulsantwort bestimmen. Pro
+registrierter Raum-/Symmetriemode werden danach erste Ordnung,
+unbeschraenkte zweite Ordnung, passiv-reziproke zweite Ordnung und ein
+nichtparametrischer Delay-Kernel auf gemeinsamen Holdouts verglichen. Bei `r`
+aufgeloesten Moden ist dies mindestens ein Vergleich von `r` gegen `2r`
+Zustaende; ein globaler Rang-2-Fit waere keine Feldidentifikation. Der
+uniforme Weak-Probe bleibt Pipelinekontrolle, weil der P3.8b/d-
+Gradientenkanal die homogene `k=0`-Mode exakt nullt.
+Fuer die drei P3.8d-Raumkoeffizienten werden mindestens drei
+Finite-`k`-Trainingskanaele und ein unangetasteter Dispersions-Holdout
+benoetigt; ohne unabhaengig fixiertes Zerfallsratenprodukt kommt ein weiterer
+Kanal hinzu.
+
+Ein effektives `(m,p)` ist nur zulaessig, wenn zweite Ordnung aus
+Input-Output-Minimalitaet folgt, kontinuierliche Pole und Residuen ueber
+Seeds, Cadences, Horizonte, Aufloesungen und Formationsalter stabil bleiben
+und ein leistungskonjugiertes Write-/Read-Paar eine gemeinsame positive
+Speichermetrik besitzt. Die Zustandskoordinaten selbst sind nur bis auf
+Aehnlichkeitstransformation bestimmt; invariant sind Transferfunktion, Pole,
+Nullstellen und Residuen. Einzelknoten-K0-Daten koennen nur einen internen
+Modus selektieren. Ein Cross-Mediator benoetigt bereits eine registrierte
+gemeinsame Mehrquellen-/Felddynamik im Ausgangsmodell oder bleibt explizite
+Erweiterung.
+
+Langzeitlaeufe dienen fuer P3.8e der Altersstationaritaet der gemessenen
+Suszeptibilitaet. Ein laengerer Lauf des konstruierten P3.8d-Mediators kann
+wegen seiner Lyapunov-Bilanz weder `(m,p)` noch die zweite Zeitordnung
+selektieren. Der aktuelle Punktgrenzquotient `R_mem/ell=2.12e-4` macht
+aehnliche Kernel- und Knotenpotentiale zu einer plausiblen
+Grobkoernungshypothese, aber nicht zu einer inneren Mechanismusevidenz.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste

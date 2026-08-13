@@ -1,6 +1,6 @@
 # Model hierarchy and inertial-parameter identifiability
 
-Date: 2026-08-11.
+Date: 2026-08-11; P3.8e mechanism-closure addendum: 2026-08-13.
 
 ## Decision
 
@@ -156,6 +156,157 @@ indistinguishable from flat and age-shuffled controls. Current evidence
 therefore does not supply a defensible \(\Psi\) with an independent conjugate
 state.
 
+## Rigorous route from canonical memory to an effective `(m,p)`
+
+The admissible claim is not that a new microscopic momentum has appeared.
+It is that the canonical Markov process admits, for a preregistered observable
+and response experiment, a minimal effective realization with two predictive
+states.
+
+Let \(U\) be the Markov/Koopman operator of \(z=(x,\rho)\), let
+\(Y=\Psi(z)\) be fixed without inspecting the desired spectrum, and let
+\(P\) be the linear \(L^2\) projection onto the resolved observables under a
+mature quasi-stationary ensemble. For the local linear response, decompose the
+resolved and unresolved action as
+
+\[
+\begin{pmatrix}Y_{n+1}\\W_{n+1}\end{pmatrix}
+=
+\begin{pmatrix}A&B\\C&D\end{pmatrix}
+\begin{pmatrix}Y_n\\W_n\end{pmatrix}.
+\]
+
+Eliminating \(W\) gives the exact finite-time projected relation
+
+\[
+Y_{n+1}
+=AY_n
++\sum_{j=0}^{n-1}BD^jC\,Y_{n-1-j}
++BD^nW_0.
+\]
+
+Thus the reduced memory kernel \(K_j=BD^jC\) is an output of the canonical
+dynamics and the chosen projection. It must be estimated before selecting a
+mechanical ansatz. The corresponding nonlinear statement is the
+Mori-Zwanzig generalized Langevin equation; the block formula above is the
+local linear-response version needed by the present project.
+For realized stochastic paths an orthogonal fluctuating-force/innovation term
+must additionally be retained. It is a martingale difference only for an
+appropriate conditional-expectation construction, not for a generic
+Mori-Zwanzig projection. The displayed identity is exact for the linearized
+conditional-mean operator with a complete resolved/unresolved decomposition;
+it is not a claim that a finite deterministic AR model exactly describes the
+canonical sample paths.
+
+A projection also cannot create a causal cross-channel absent from the
+canonical transition kernel. Single-knot `K0` data can at most select an
+effective internal mode. Identifying the P3.8d source-to-source mediator
+requires a preregistered canonical shared-field or multi-source transition law
+before projection. Without such a law, `(m,p)` remains an explicit extension
+even if it is a useful realization of a separately measured response.
+
+Only if the independently measured source-to-readout transfer function has a
+stable second-order minimal realization in one preregistered spatial or
+symmetry mode, and a first-order realization fails on holdout responses, may
+that modal state be written in oscillator coordinates. For one mode these
+coordinates can be chosen as
+
+\[
+\dot m=p,
+\qquad
+\dot p=-2\Gamma p-\Omega^2m+b\,u.
+\]
+
+Minimal state coordinates are unique only up to an invertible similarity
+transformation. Therefore \(m\), \(p\), their separate norms and their common
+energy scale are not observables. Poles, zeros, residues and the complete
+input-output map are invariant. Calling the second coordinate `p` is justified
+only after all of the following hold:
+
+1. the second-order modal realization is selected by a Hankel/realization-rank
+   gap and out-of-sample prediction, not by a harmonic fit;
+2. the inferred continuous poles agree across sampling cadences, horizons,
+   seeds, time segments and spatial resolutions;
+3. after fixing power-conjugate ports, for example generalized force and
+   generalized velocity rather than force and displacement, one positive
+   storage metric makes the fitted write/read pair passive and reciprocal on
+   independent responses;
+4. the reversible part in the resulting port-Hamiltonian decomposition is
+   nonzero and reproducible over the admissible storage metrics, while the
+   dissipative part accounts for measured damping;
+5. the same realization predicts a withheld force, phase and pair response
+   without gain or timescale retuning.
+
+Under those gates, `m` denotes the resolved field-like coordinate and `p` its
+additional predictive state. Only a storage-metric-robust reversible coupling
+licenses the stronger name phase or conjugate coordinate. It is still not the
+momentum of the visible point \(x\), and it is not evidence of quantization.
+Two distinct real relaxation poles can also have minimal order two and be
+written in companion form. They do not by themselves establish a conjugate
+momentum. The passive reciprocal realization must contain a storage-metric-
+robust reversible coupling. A stable complex pair additionally identifies an
+underdamped regime, but complex poles are not required for second-order
+minimality.
+
+For a field this comparison is modal, not globally rank one versus rank two.
+If \(r\) independently observable spatial modes are retained, a first-order
+field has at least \(r\) states and an `(m,p)` field generically has \(2r\).
+Several fixed finite-wavenumber channels are therefore required to establish
+the P3.8d dispersion; one global rank-two fit would show only one coarse mode.
+The previous spatially uniform weak probe is a pipeline control, not an
+identification input for the gradient mediator: its \(k=0\) response is
+annihilated by the registered \(k^2\) numerator. P3.8e needs a fixed localized
+or zero-mean finite-\(k\) perturbation and a separate withheld readout.
+
+### Long-time and self-consistency boundary
+
+Running the already constructed P3.8d system for longer cannot select this
+state. Its strict Lyapunov balance and the matched static susceptibility imply
+that first- and second-order arms approach the same stationary equations.
+Longer autonomous runs can test numerical convergence, basin stability or,
+after a separately justified noise law, escape statistics. They cannot derive
+the dynamic order. Inertia can in principle carry the second-order arm across
+a separatrix and thereby change basin capture for some initial states. A
+registered basin map could test that consequence, but it would still test an
+assumed `(m,p)` mechanism rather than establish its emergence.
+
+Long-time canonical data are useful for a different question: whether the
+identified transfer function becomes independent of knot age. Let \(\theta\)
+contain measured knot observables such as memory radius, covariance shape,
+local restoring spectrum and relaxation time. The non-circular closure is
+
+\[
+\theta
+\longmapsto \chi_\theta(k,\omega)
+\longmapsto \vartheta(\theta)
+\longmapsto \mathcal C(\theta,\vartheta),
+\]
+
+where \(\chi_\theta\) is a measured weak-response susceptibility,
+\(\vartheta\) is its minimal passive realization, and \(\mathcal C\) is the
+coarse evolution of the knot observables. Self-selected effective parameters
+require a stable fixed point of the composite map
+
+\[
+\mathcal F(\theta):=\mathcal C(\theta,\vartheta(\theta)),
+\qquad
+\theta_*=\mathcal F(\theta_*),
+\qquad
+\rho(D\mathcal F(\theta_*))<1.
+\]
+
+This fixed-point test treats apparent parameters as state-dependent response
+coefficients. If the inferred mediator is not fed back by the canonical
+transition law, it remains an offline effective closure rather than a
+spontaneously selected microscopic mechanism.
+
+The current mature checkpoint has \(R_{\rm mem}/\ell\simeq2.12\times10^{-4}\).
+Its far response is consequently dominated by the point/monopole limit, so a
+similar knot and kernel potential is expected for many inequivalent internal
+models. Internal feedback requires either probes with \(kR_{\rm mem}=O(1)\)
+or preregistered mature knots of at least two resolved sizes. More elapsed
+updates alone do not remove this scale-separation ambiguity.
+
 ## Consequence for the next step
 
 P3.7 is changed from a coupled-field simulation to an identifiability/no-go
@@ -166,6 +317,34 @@ gate:
 3. require pole identity across seeds, segments and coarse-graining;
 4. require prediction of an independent response;
 5. reject parameter estimation if these gates fail.
+
+The first implementation must estimate a nonparametric finite-\(k\) weak
+impulse response before fitting P3.8d. For each registered mode it then
+compares four fixed candidates on common holdouts: first order, unconstrained
+second order, passive reciprocal second order, and a nonparametric delay
+kernel. Formation-age windows test coefficient stationarity; they are not
+separate tuning datasets. The passivity test uses the power-conjugate response
+channel; the displacement susceptibility remains a separate prediction
+target. The P3.8d spatial polynomial contains the three coefficients
+\(a,b,c\). At least four fixed finite-\(k\) channels are therefore required:
+no fewer than three training channels and at least one untouched dispersion
+holdout. If the decay-rate product is not independently fixed, one additional
+channel is required.
+
+## Method anchors
+
+- Mori's projection formalism derives generalized Langevin dynamics and
+  linear response from selected observables:
+  <https://doi.org/10.1143/PTP.33.423>.
+- Lin, Tian, Anghel and Livescu give a data-driven Mori-Zwanzig/Koopman
+  operator construction with explicit Markov, memory and orthogonal terms:
+  <https://arxiv.org/abs/2101.05873>.
+- Juang and Pappa's eigensystem realization algorithm obtains minimum-order
+  modal realizations from impulse-response Hankel matrices and supplies mode
+  accuracy indicators: <https://ntrs.nasa.gov/citations/19850064186>.
+- Discrete/continuous positive-real state-space inequalities provide the
+  passivity/storage test; they do not themselves select model order:
+  <https://arxiv.org/abs/2008.04635>.
 
 Only a pass may motivate deriving effective \(\gamma/I\) and \(D_q(k)/I\).
 Absolute \(I,\gamma,D_q\) require an independent response normalization.

@@ -716,15 +716,46 @@ Prioritaetsfolge:
     Der Mediator, seine Koeffizienten und `nu=1` sind gesetzt; der Test ist
     punktfoermig, kollinear und entwickelt weder Knotenform noch `rho`.
 
-23. **P3.8e jetzt: Mechanismus-Closure statt Parametersweep.** Auf vorhandenen
-    kanonischen Langlauf-/Checkpoint-Daten ist zu testen, ob ein gemeinsamer
-    niedrigrangiger latenter Zustand die Source-Innovation und unabhaengige
-    schwache Response-Holdouts zugleich vorhersagt. Primaere Nullhypothese:
-    die aus `z=(x,rho)` konstruierten Features identifizieren weder die
-    P3.8d-Dispersion noch eine vom erster-Ordnung-Modell unterscheidbare
-    reversible Komponente. Nur seed-, Block-, Horizon- und Aufloesungsstabile
-    Koeffizienten duerfen als effektive Closure gelten. Kein `delta`-, `mu`-,
-    `nu`-, Gain-, Kernel- oder Noise-Sweep vor diesem Gate.
+23. **P3.8e jetzt: Mechanismus-Closure statt Parametersweep.** Die Reihenfolge
+    ist fest:
+
+    1. eine kanonische Projektion `Y=Psi(x,rho)`, Source und unabhaengiges
+       Readout ohne Kenntnis des Zielpols registrieren;
+    2. auf reifen Checkpoints gepaarte schwache `+/-`-Finite-`k`-Stoerungen
+       mit common random numbers auswerten und zuerst eine nichtparametrische
+       kausale Impulsantwort bestimmen; der uniforme `k=0`-Probe bleibt nur
+       Pipelinekontrolle;
+    3. pro registrierter Raum-/Symmetriemode auf denselben Train-/Holdout-
+       Fenstern erste Ordnung, unbeschraenkte zweite Ordnung, passiv-reziproke
+       zweite Ordnung und einen nichtparametrischen Delay-Kernel vergleichen;
+    4. nur bei Holdout-Vorteil und stabilem Hankelrang Pole, Residuen,
+       Speicher-/Energiemetrik und ein leistungskonjugiertes, adjungiertes
+       Write-/Read-Paar testen;
+    5. die kontinuierlichen Pole ueber Seeds, Cadences, Horizonte,
+       Aufloesungen und Formationsalter versoehnen;
+    6. erst danach ohne Retuning P3.8c/d-Kraft-, Phasen- und Basin-Holdouts
+       vorhersagen.
+
+    Mindestens vier feste endliche Wellenzahlkanaele sind erforderlich: drei
+    fuer die P3.8d-Raumkoeffizienten und mindestens einer als unangetasteter
+    Dispersions-Holdout. Ist das Zerfallsratenprodukt nicht unabhaengig
+    festgelegt, wird ein fuenfter Kanal benoetigt. Fuer `r` aufgeloeste Moden
+    lautet der Ordnungsvergleich `r` gegen typischerweise `2r`, nicht global
+    Rang 1 gegen Rang 2.
+
+    Primaere Nullhypothese: die aus `z=(x,rho)` konstruierten Features
+    identifizieren weder die P3.8d-Dispersion noch eine vom erster-Ordnung-
+    Modell unterscheidbare reversible Komponente. `(m,p)` gilt nur dann als
+    emergente effektive Closure, wenn ein zweizustaendiges minimales
+    Input-Output-Modell diese Null verwirft und eine positive gemeinsame
+    Speichermetrik besitzt. Die Zustandsnamen bleiben bis dahin
+    koordinatenabhaengig.
+
+    Langzeitdaten werden fuer Altersstationaritaet der gemessenen
+    Suszeptibilitaet verwendet, nicht als laengerer Lauf des bereits
+    postulierten P3.8d-Mediators. Aehnliche Kernel- und Knotenpotentiale im
+    aktuellen Punktgrenzfall sind kein Closure-Gate. Kein `delta`-, `mu`-,
+    `nu`-, Gain-, Kernel- oder Noise-Sweep vor diesem Test.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
