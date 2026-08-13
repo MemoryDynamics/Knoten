@@ -748,7 +748,7 @@ def analyze(
             eta_final.append(
                 np.max(
                     np.abs(
-                        records[(case.label, "eta_zero", primary, axis)]["features"][-1]
+                        records[(case.label, "eta_zero", primary, axis)]["modes"][-1]
                     )
                 )
             )
@@ -865,6 +865,10 @@ def analyze(
         )
 
     temporal_passes = sum(row["pass"] for row in rows)
+    informative_holdout_channels = sum(
+        row["memory_signal"]["pass"] and row["visible_signal"]["pass"]
+        for row in rows
+    )
     controls_pass = all(control_gates.values())
     temporal_candidate = controls_pass and temporal_passes >= 4
     age_passes = sum(row["pass"] for row in age_comparisons)
@@ -889,8 +893,16 @@ def analyze(
         "age_passes": age_passes,
         "age_reconciliation": age_reconciliation,
         "temporal_passes": temporal_passes,
+        "informative_holdout_channels": informative_holdout_channels,
         "temporal_candidate": temporal_candidate,
         "decision": decision,
+        "scientific_classification": (
+            "null-not-rejected-memory-holdout-limited"
+            if informative_holdout_channels < 4
+            else "null-not-rejected"
+            if not temporal_candidate
+            else "conditional-second-order-candidate"
+        ),
         "historical_p38e_status": "superseded-methodologically-inconclusive",
         "review_findings_addressed": {
             "damped_ar2_redundancy": True,
@@ -973,6 +985,7 @@ def plot_results(payload: dict[str, Any], path: Path) -> None:
             )
         axes[0, 0].bar(x + offset * width, values, width=width, label=label)
     axes[0, 0].axhline(1.0, color="black", linestyle="--", linewidth=1)
+    axes[0, 0].set_yscale("log")
     axes[0, 0].set_title("Held-out visible readout")
     axes[0, 0].set_ylabel("recursive RMSE / zero")
     axes[0, 0].legend(fontsize=8, ncol=2)
@@ -1045,12 +1058,15 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "## Verdict",
         "",
         f"Decision: **`{analysis['decision']}`**.",
+        f"Scientific classification: **`{analysis['scientific_classification']}`**.",
         "",
         "The historical P3.8e decision is superseded as",
         "`superseded-methodologically-inconclusive`. Its raw simulation was not",
         "shown to be wrong; its temporal identification did not implement all review",
         "requirements consistently. This reconciliation does not select an emergent",
         "`(m,p)` state unless at least four of five channels pass every corrected gate.",
+        "The result is not a scalar-memory no-go: only 0/5 channels retain both",
+        "memory and visible signal under the fixed holdout-energy criterion.",
         "",
         "## Why AR(2) and 'damped AR(2)' were identical",
         "",
@@ -1074,6 +1090,8 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "- coefficients are learned from real/imaginary memory Fourier readouts; the",
         "  visible relative coordinate is scored without contributing to the fit;",
         "- rank-two Hankel energy/gap and 4/5 seed replication are decision gates;",
+        "- the Hankel matrix now stacks all panel readouts into one output vector;",
+        "  only chronological shifts form columns, preventing residue-induced rank;",
         "- the `N=3M` and `N=100M` age pair uses the same future-noise realization;",
         "- the weighted Gram matrix tests whether nominal `kR` inputs are independent.",
         "- full cross-`k` responses remain archived; diagonal leakage is a separate",
@@ -1126,6 +1144,7 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         [
             "",
             f"Complete temporal channels: **{analysis['temporal_passes']}/5**; required: at least 4/5.",
+            f"Channels with informative memory and visible holdout: **{analysis['informative_holdout_channels']}/5**.",
             "The eta-zero AR(2)/AR(1) ratio is diagnostic only. The passive finite",
             "memory shift can itself have multi-lag structure; feedback specificity",
             "instead requires a predictive visible response, which is identically zero",
@@ -1146,6 +1165,9 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "Seed 1 at `N=3M` and `N=100M` now shares the identical future-noise",
             "array. This remains one paired seed, not population evidence.",
             f"Age-consistent channels relative to the five-seed formation spread: **{analysis['age_passes']}/5**.",
+            "The formation-seed pole spread is large (`0.368..0.470` at maximum),",
+            "so 5/5 age passes mean only that the paired age shift is not the dominant",
+            "source of variation; they do not establish a formation-age invariant pole.",
             "",
             "| kR | age pole distance | max seed pole distance | N100M/N3M norm | seed norm range | pass |",
             "|---:|---:|---:|---:|---:|:---:|",
