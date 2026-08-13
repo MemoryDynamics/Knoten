@@ -145,6 +145,17 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Altersstationaritaet sind die festen Gates. Ein laengerer P3.8d-Lauf,
     globaler Rang 2 oder der uniforme `k=0`-Probe koennen `(m,p)` nicht
     selektieren.
+- [P3.8e kanonisches Finite-k-Gate](memory/closure/emergent_modal_state_gate_2026-08-13.md)
+  - **canonical null not rejected:** Alle technischen Interventionsgates
+    bestehen, aber 0/5 `kR_mem`-Kanaele bestehen den vorregistrierten
+    zweite-Ordnungs-Holdout; P3.8d bleibt eine konstruierte Erweiterung.
+  - [Vorregistrierung](project/meta/preregistration/p38e_finite_k_mechanism_closure_2026-08-13.md):
+    Intervention, Projektion, Null, Holdouts und Schwellen wurden vor dem
+    Fuenf-Seed-Lauf in Revision `2ecc081` fixiert.
+  - [Rigoroses Ergebnis-/Codereview](project/meta/reviews/p38e_finite_k_gate_review_2026-08-13.md):
+    Das Primaerholdout liegt nach dem Signalhorizont. Signalfensterchecks und
+    Hankelraenge retten den Claim nicht; ein kanonischer Deposition-Write-Port
+    bleibt als letzter skalarer Falsifikationstest offen.
 - [Kontinuitaetsbeschraenktes Memory-Gate](memory/closure/continuity_constrained_memory_gate_2026-08-11.md)
   - **structural pass with unresolved force balance:** Die kanonische
     Memory-Innovation ist bei stationaerer Masse monopolfrei und ihr Dipol ist

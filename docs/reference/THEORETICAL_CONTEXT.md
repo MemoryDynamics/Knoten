@@ -1251,6 +1251,51 @@ Punkt-/Monopolgrenze sehen. Aehnliche Kernel- und Knotenpotentiale sind dort
 eine plausible Grobkoernungshypothese, aber noch keine Evidenz fuer denselben
 inneren Mechanismus.
 
+### P3.8e: kanonische Finite-`k`-Antwort
+
+Das vorregistrierte P3.8e-Gate stoert den vollstaendigen reifen
+Finite-Memory-Zustand longitudinal bei
+
+\[
+kR_{\rm mem}\in\{0.5,1,2,4,8\}.
+\]
+
+Die gepaarten Profile erfuellen `f_k(r_0)=0`, haben verschwindende gewichtete
+Translation und Einheits-RMS. Damit bleiben sichtbarer Zustand, Memory-Masse,
+Altersgewichte und Memory-Zentrum bei der Intervention unveraendert. Die
+anschliessende Fortsetzung verwendet ausschliesslich den kanonischen
+`(x,rho)`-Uebergang und common random numbers. Das feste Readout besteht aus
+der longitudinalen Relativkoordinate `x-xbar_rho` sowie Real- und Imaginaerteil
+der zentrierten skalaren Fouriermode. Primaer ausgewertet wird die aktive
+Antwort minus `eta=0`.
+
+Alle technischen Kontrollen bestehen ueber fuenf Seeds, drei Richtungen und
+zwei Stoerstaerken. Trotzdem besteht kein `kR_mem`-Kanal gleichzeitig den
+vorregistrierten AR(2)-Vorteil gegen AR(1), den Delay-Nullvergleich, die
+stabile unterdaempfte Realisierung und die weiteren notwendigen Bedingungen.
+Die Entscheidung lautet `canonical-null-not-rejected` (`0/5`, gefordert
+`>=4/5`). Einzelne komplexe AR-Wurzeln sind vorhanden, besitzen aber keinen
+robusten rekursiven Holdout-Vorteil und sind deshalb keine Phasenmode.
+
+Der primaere Holdout liegt ueberwiegend nach dem Signal: Die 1-Prozent-Antwort
+endet bei 445--555 Updates, der gespeicherte Horizont bei 600 und der
+vorregistrierte Holdout beginnt bei 1200. Das begrenzt die Schaerfe des
+Negativresultats. Nachtraegliche, nicht umklassifizierende Fensterchecks bis
+600 und 800 Updates erreichen weiterhin hoechstens einen konkurrenzfaehigen
+unterdaempften Kanal. Die scale-balanced Hankel-Spektren besitzen
+Entropieraenge `5.48..18.32` statt einer robusten zweizustaendigen Struktur;
+Seed-1-Pole sind zudem zwischen `N=3M` und `N=100M` nicht identisch.
+
+Die Intervention ist eine gueltige State-Suszeptibilitaetsmessung, aber kein
+durch die sichtbare Trajektorie erzeugter kanonischer Write-Port. Daher bleibt
+genau ein skalarer Source-Test offen: Ein zero-net sichtbarer Dipolpuls muss
+ueber die bestehende Deposition schreiben und auf einem vor dem Lauf innerhalb
+des 600-Update-Signalhorizonts fixierten Fenster gegen erste Ordnung und
+Delay-Null bestehen. Ohne diesen Pass ist `(m,p)` keine emergente Closure des
+skalaren Modells. Orientiertes/current Memory oder ein gemeinsames
+Mehrquellenfeld waeren danach explizite neue Zustandsannahmen, keine
+Reparametrisierung von `rho`.
+
 Unterschiedliche transiente Basinwahl durch Ueberschreiten einer Separatrix
 bleibt bei zweiter Ordnung moeglich und kann mit einer festen
 Anfangszustandsleiter getestet werden. Auch ein positiver Befund waere jedoch
@@ -1324,6 +1369,8 @@ diese Theorie:
 | `local_mediator.py` | lokale 1D Relaxations-Diffusions- und Telegraph-Zustaende fuer Transporttests |
 | `mediator_identifiability.py` | segmentierte Vektorleistung und sourcegewichteter komplexer Transferkontrast |
 | `external_field_response.py` | gepaarte Target-Fortsetzung sowie Endpunkt- und dynamische RMS-/Oddness-Metriken fuer Aktiv-/Flip-/Kanal-aus-Felder |
+| `finite_k_response.py` | zentrumserhaltende Finite-`k`-Stoerungen vollstaendiger skalarer Memory-Zustaende und zentrierte Fourier-Readouts |
+| `impulse_identification.py` | gemeinsame rekursive AR-, gedaempfte zweite-Ordnungs- und Block-Hankel-Holdoutdiagnostik |
 | `knot_score.py` | Scorecard-Helfer fuer Residence-, Kompaktheits- und Memory-Cloud-Evidenz |
 
 Begriffliche Hygiene:

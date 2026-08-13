@@ -331,6 +331,25 @@ no fewer than three training channels and at least one untouched dispersion
 holdout. If the decay-rate product is not independently fixed, one additional
 channel is required.
 
+## P3.8e outcome addendum (2026-08-13)
+
+The registered finite-`k` state-susceptibility gate does not reject the
+canonical null. Its uniform, `eta=0`, strength-linearity and shape-boundedness
+controls pass, but zero of five wavenumber channels passes the complete
+second-order requirement. Complex fitted roots occur in some channels without
+the required recursive holdout advantage. The nonparametric Hankel spectra
+also fail to isolate one second state per mode.
+
+The primary holdout begins after the finite-memory response has almost
+vanished, so this is not a universal scalar-memory no-go theorem. Fixed
+signal-window sensitivities still fail the 4/5 criterion. In addition, the
+intervention initializes a valid memory-state deformation rather than writing
+through the trajectory-deposition map. The only admissible scalar follow-up
+is therefore a preregistered zero-net visible pulse through the canonical
+write port with an independent force/memory readout. Failure there closes the
+scalar route to `(m,p)`; an oriented/current memory or shared multi-source
+field must then be declared a new model state.
+
 ## Method anchors
 
 - Mori's projection formalism derives generalized Langevin dynamics and

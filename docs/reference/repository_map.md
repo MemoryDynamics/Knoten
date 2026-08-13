@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-12.
+Stand: 2026-08-13.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -49,6 +49,7 @@ flowchart TD
     experiments --> green_kernel_gate["dynamic_green_kernel_selection_gate.py<br/>separate adjoint-gradient mediator"]
     experiments --> quasistatic_pair_gate["quasistatic_two_knot_discrimination.py<br/>frozen full-memory discriminator"]
     experiments --> dynamic_pair_gate["dynamic_two_knot_mediator_gate.py<br/>P3.8d energy + dynamic controls"]
+    experiments --> emergent_mode_gate["emergent_modal_state_gate.py<br/>P3.8e finite-k order null"]
     experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
@@ -74,6 +75,8 @@ flowchart TD
     src --> state["state.py<br/>complete memory state; rigid placement"]
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
+    src --> finite_k["finite_k_response.py<br/>zero-centroid modal state impulses"]
+    src --> impulse_id["impulse_identification.py<br/>recursive AR / damped / Hankel gates"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
     src --> coupled["coupled_nodes.py<br/>one-way source + relational/shape observables"]
     src --> reciprocal_nodes["reciprocal_nodes.py<br/>off / one-way / synchronous reciprocal"]
@@ -114,6 +117,10 @@ flowchart TD
     gradient_mediator --> dynamic_gradient_mediator
     dynamic_gradient_mediator --> dynamic_pair_gate
     quasistatic_pair --> quasistatic_pair_gate
+    finite_k --> emergent_mode_gate
+    impulse_id --> emergent_mode_gate
+    emergent_mode_gate --> p38e_null["0/5 temporal pass<br/>canonical null not rejected"]
+    p38e_null -.last scalar check.-> write_port["P3.8f zero-net deposition pulse"]
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]

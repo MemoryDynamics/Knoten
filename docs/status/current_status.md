@@ -537,6 +537,33 @@ Modus selektieren. Ein Cross-Mediator benoetigt bereits eine registrierte
 gemeinsame Mehrquellen-/Felddynamik im Ausgangsmodell oder bleibt explizite
 Erweiterung.
 
+Das vorregistrierte P3.8e-Gate ist inzwischen ausgefuehrt. Fuenf
+Formationsseeds, drei Richtungen, fuenf `kR_mem`-Kanaele, zwei
+Stoerungsstaerken und `eta=0` bestehen alle technischen Interventionsgates,
+aber **0/5** Wellenzahlkanaele bestehen den vollstaendigen zeitlichen
+zweite-Ordnungs-Test. Die Uniformkontrolle weicht nur `2.95e-13` von der
+Identitaet ab, der passive Memory-Arm erlischt spaet exakt, die
+Staerkenlinearitaet liegt bei `0.001/0.001` und die maximale Radiusstoerung bei
+`0.006`. Der mediane Cross-`k`-Diagonalanteil betraegt `0.921`.
+
+Der Befund ist `canonical-null-not-rejected`, kein universeller No-go-Satz.
+Das 1-Prozent-Signal endet nach etwa 445--555 Updates und damit vor dem
+vorregistrierten Holdoutbeginn bei 1200. Signalfenster-Sensitivitaeten bis 600
+und 800 Updates liefern weiterhin hoechstens einen konkurrenzfaehigen
+unterdaempften Kanal statt der geforderten vier. Hankel-Entropieraenge von
+`5.48` bis `18.32` und nicht altersstabile Fitpole sprechen ebenfalls gegen
+eine einfache `(m,p)`-Minimalrealisierung. Komplexe Einzel-Fitwurzeln ohne
+Holdout-Vorteil werden nicht als Oszillation gewertet.
+
+Offen bleibt der kanonische Write-Port: P3.8e initialisiert eine gueltige
+zero-centroid Memory-Deformation, erzeugt sie aber nicht durch die
+Trajektorie-zu-Deposition-Abbildung. P3.8f darf deshalb genau einen
+zero-net sichtbaren Dipolpuls mit unabhaengigem Readout pruefen. Erst ein Pass
+dieses Source-/Read-Gates wuerde Speicher-/Passivitaetsdiagnostik freigeben;
+ein weiterer Fail schliesst die skalare `(m,p)`-Route und verschiebt
+orientiertes Memory oder ein gemeinsames Mehrquellenfeld in eine offen
+deklarierte Modellerweiterung.
+
 Langzeitlaeufe dienen fuer P3.8e der Altersstationaritaet der gemessenen
 Suszeptibilitaet. Ein laengerer Lauf des konstruierten P3.8d-Mediators kann
 wegen seiner Lyapunov-Bilanz weder `(m,p)` noch die zweite Zeitordnung

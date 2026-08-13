@@ -91,6 +91,14 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--responses-npz",
+        type=Path,
+        default=Path(
+            "reports/memory/closure/"
+            "emergent_modal_state_gate_2026-08-13.responses.npz"
+        ),
+    )
+    parser.add_argument(
         "--figure",
         type=Path,
         default=Path(
@@ -648,6 +656,29 @@ def _pole_text(values: list[dict[str, float]]) -> str:
     )
 
 
+def write_response_archive(payload: dict[str, Any], path: Path) -> dict[str, Any]:
+    """Store lossless nonparametric panels outside the readable JSON summary."""
+
+    responses = payload["analysis"]["aggregate_responses"]
+    arrays = {
+        "sample_steps": np.asarray(payload["sample_steps"], dtype=np.int64),
+        "kr_values": np.asarray(payload["registration"]["kr_values"], dtype=float),
+    }
+    response_keys = {}
+    for index, kr in enumerate(payload["registration"]["kr_values"]):
+        key = f"response_{index}"
+        arrays[key] = np.asarray(responses[str(float(kr))], dtype=float)
+        response_keys[str(float(kr))] = key
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(path, **arrays)
+    return {
+        "path": _relative(path),
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "response_keys": response_keys,
+        "array_shapes": {key: list(value.shape) for key, value in arrays.items()},
+    }
+
+
 def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
     analysis = payload["analysis"]
     controls = analysis["controls"]
@@ -784,6 +815,7 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             f"- Git status at execution: `{payload['git_status'] or 'clean'}`.",
             f"- Command: `{payload['command']}`.",
             f"- Machine-readable summary: [{Path(payload['summary_json']).name}]({_relative_from(report, _resolve(Path(payload['summary_json'])))})",
+            f"- Lossless response archive: [{Path(payload['response_archive']['path']).name}]({_relative_from(report, _resolve(Path(payload['response_archive']['path'])))}) (`{payload['response_archive']['sha256']}`).",
             "- Source checkpoints and SHA-256 digests are recorded in the JSON summary.",
         ]
     )
@@ -846,11 +878,22 @@ def main() -> None:
         "analysis": analysis,
         "summary_json": _relative(args.summary_json),
     }
-    serializable = _jsonable(payload)
     figure = _resolve(args.figure)
     summary = _resolve(args.summary_json)
+    responses = _resolve(args.responses_npz)
     report = _resolve(args.report)
-    plot_results(serializable, figure)
+    plot_results(_jsonable(payload), figure)
+    response_archive = write_response_archive(payload, responses)
+    summary_payload = {
+        **payload,
+        "analysis": {
+            key: value
+            for key, value in payload["analysis"].items()
+            if key != "aggregate_responses"
+        },
+        "response_archive": response_archive,
+    }
+    serializable = _jsonable(summary_payload)
     summary.parent.mkdir(parents=True, exist_ok=True)
     summary.write_text(
         json.dumps(serializable, indent=2, sort_keys=True) + "\n",

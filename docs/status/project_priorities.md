@@ -716,46 +716,54 @@ Prioritaetsfolge:
     Der Mediator, seine Koeffizienten und `nu=1` sind gesetzt; der Test ist
     punktfoermig, kollinear und entwickelt weder Knotenform noch `rho`.
 
-23. **P3.8e jetzt: Mechanismus-Closure statt Parametersweep.** Die Reihenfolge
-    ist fest:
+23. **P3.8e abgeschlossen: kanonische Null nicht verworfen.** Auf den reifen
+    `d=3`, `A_att=35`-Checkpoints wurden fuenf `kR_mem`-Kanaele, zwei
+    Stoerstaerken, drei Richtungen, fuenf Formationsseeds, `eta=0` und der
+    Seed-1-Altersvergleich `N=3M` gegen `N=100M` vorregistriert ausgewertet.
+    Alle Interventionskontrollen bestehen: Uniform-Identitaetsfehler
+    `2.95e-13`, exakte spaete `eta=0`-Extinktion, Staerkenlinearitaet
+    `0.001/0.001` und maximale Radiusstoerung `0.006`. Dennoch besteht kein
+    einziger Kanal das vollstaendige zweite-Ordnungs-Gate; gefordert waren
+    mindestens vier von fuenf.
 
-    1. eine kanonische Projektion `Y=Psi(x,rho)`, Source und unabhaengiges
-       Readout ohne Kenntnis des Zielpols registrieren;
-    2. auf reifen Checkpoints gepaarte schwache `+/-`-Finite-`k`-Stoerungen
-       mit common random numbers auswerten und zuerst eine nichtparametrische
-       kausale Impulsantwort bestimmen; der uniforme `k=0`-Probe bleibt nur
-       Pipelinekontrolle;
-    3. pro registrierter Raum-/Symmetriemode auf denselben Train-/Holdout-
-       Fenstern erste Ordnung, unbeschraenkte zweite Ordnung, passiv-reziproke
-       zweite Ordnung und einen nichtparametrischen Delay-Kernel vergleichen;
-    4. nur bei Holdout-Vorteil und stabilem Hankelrang Pole, Residuen,
-       Speicher-/Energiemetrik und ein leistungskonjugiertes, adjungiertes
-       Write-/Read-Paar testen;
-    5. die kontinuierlichen Pole ueber Seeds, Cadences, Horizonte,
-       Aufloesungen und Formationsalter versoehnen;
-    6. erst danach ohne Retuning P3.8c/d-Kraft-, Phasen- und Basin-Holdouts
-       vorhersagen.
+    Die Negativaussage bleibt bewusst begrenzt. Das 1-Prozent-Signal endet
+    bereits nach 445--555 Updates, der Memory-Horizont nach 600, waehrend der
+    vorregistrierte Holdout bei 1200 beginnt. Post-hoc Signalfenster bis 600
+    bzw. 800 Updates retten den Claim nicht: hoechstens ein unterdaempfter
+    Kanal wird konkurrenzfaehig. Die Hankel-Entropieraenge `5.48..18.32` sind
+    zudem nicht mit einer einfachen zweizustaendigen Closure vereinbar.
+    Komplexe AR-Wurzeln ohne Holdout-Vorteil sind kein Phasenmodus.
 
-    Mindestens vier feste endliche Wellenzahlkanaele sind erforderlich: drei
-    fuer die P3.8d-Raumkoeffizienten und mindestens einer als unangetasteter
-    Dispersions-Holdout. Ist das Zerfallsratenprodukt nicht unabhaengig
-    festgelegt, wird ein fuenfter Kanal benoetigt. Fuer `r` aufgeloeste Moden
-    lautet der Ordnungsvergleich `r` gegen typischerweise `2r`, nicht global
-    Rang 1 gegen Rang 2.
+    Die Intervention ist eine gueltige massen- und zentrumserhaltende
+    Stoerung des vollstaendigen Memory-Zustands. Sie wurde jedoch nicht durch
+    den kanonischen Trajektorie-zu-Deposition-Port geschrieben. P3.8e misst
+    damit primaer Read-/Zustandssuszeptibilitaet und schliesst weder einen
+    universellen skalaren No-go-Satz noch ein adjungiertes Write-/Read-Paar.
+    P3.8d bleibt eine konstruierte Erweiterung; seine Parameter werden nicht
+    auf dieses negative Ergebnis hin nachjustiert.
 
-    Primaere Nullhypothese: die aus `z=(x,rho)` konstruierten Features
-    identifizieren weder die P3.8d-Dispersion noch eine vom erster-Ordnung-
-    Modell unterscheidbare reversible Komponente. `(m,p)` gilt nur dann als
-    emergente effektive Closure, wenn ein zweizustaendiges minimales
-    Input-Output-Modell diese Null verwirft und eine positive gemeinsame
-    Speichermetrik besitzt. Die Zustandsnamen bleiben bis dahin
-    koordinatenabhaengig.
+24. **P3.8f als letzter skalarer Closure-Test: kanonischer Write-Port.** Vor
+    einer orientierten oder gemeinsamen Felderweiterung wird genau ein
+    weiterer diskriminierender Test zugelassen:
 
-    Langzeitdaten werden fuer Altersstationaritaet der gemessenen
-    Suszeptibilitaet verwendet, nicht als laengerer Lauf des bereits
-    postulierten P3.8d-Mediators. Aehnliche Kernel- und Knotenpotentiale im
-    aktuellen Punktgrenzfall sind kein Closure-Gate. Kein `delta`-, `mu`-,
-    `nu`-, Gain-, Kernel- oder Noise-Sweep vor diesem Test.
+    1. ein gepaarter schwacher sichtbarer `+delta/-delta`-Dipolpuls mit
+       verschwindender direkter Nettotranslation schreibt ausschliesslich
+       ueber die vorhandene Trajektorie-zu-`rho`-Deposition;
+    2. dieselben festen `kR_mem`-Readouts und ein unabhaengiger sichtbarer
+       Kraft-/Relativkoordinaten-Readout werden ohne Zielpol verwendet;
+    3. `eta=0`, zwei Staerken, fuenf Seeds und common random numbers bleiben
+       Pflicht; Train und Holdout liegen vorab innerhalb des bekannten
+       600-Update-Signalhorizonts, die spaete Extinktion ist ein separates
+       Kontrollfenster;
+    4. erster Ordnung, zweiter Ordnung und Delay-Null werden wieder auf
+       rekursivem Holdout verglichen; keine Kernel-, Gain-, Noise- oder
+       P3.8d-Parametersuche.
+
+    Scheitert auch dieser kanonische Source-Port-Test, wird der skalare Weg zu
+    `(m,p)` geschlossen. Ein orientiertes/current Memory oder ein gemeinsames
+    Mehrquellenfeld ist dann offen als neue Modellannahme zu deklarieren und
+    muss erst ueber balancierte Kontrollier-/Beobachtbarkeit, reziproke
+    Leistungsports und eine positive Speichermetrik bestehen.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

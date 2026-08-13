@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-07-31.
+Stand: 2026-08-13.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -55,6 +55,10 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   Antworten, aber nur 4/6 Paare bestehen die vorregistrierte Modelltrennung
   gleichzeitig an allen drei Distanzen; negatives Diskriminationsgate, keine
   Feldgesetz-Auswahl.
+- `draft/memory/emergent_modal_state_gate_2026-08-13.png`: P3.8e-
+  Finite-`k`-Antwort, rekursiver Ordnungs-Holdout und Hankel-Spektrum; alle
+  Interventionskontrollen bestehen, aber 0/5 Kanaele selektieren eine
+  reversible zweite Zeitordnung.
 
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in

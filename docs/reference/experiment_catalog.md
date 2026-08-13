@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-11.
+Stand: 2026-08-13.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -71,6 +71,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/closure/dynamic_green_kernel_selection_gate.py` | separater adjungierter Gradientenmediator `(m,p)` | abgeschlossen, struktureller Modellkandidat | zwoelf Gates; nicht kanonisches rho oder P3.8a-j; exakte Residueninversion, `u*=1.0387`, Barriere `3.91920 ell`, lineares Minimum `6.99092 ell`; keine Knotensimulation oder Koeffizientenselektion |
 | `experiments/current/memory/synchronization/reciprocity/quasistatic_two_knot_discrimination.py` | P3.8c starre Vollmemory-Paardiskrimination | abgeschlossen, konditionaler Pass | ein d3-Seed bei N100M; entgegengesetzte Kraftvorzeichen bei `R=5 ell`, Action/Reaction und zweiter-Ordnung-Punktgrenze; keine Dynamik, kein Gain-Fit, keine Mechanismusselektion |
 | `experiments/current/memory/synchronization/reciprocity/dynamic_two_knot_mediator_gate.py` | P3.8d diskrete `(m,p,R)`-Energie- und Zwei-Quellen-Dynamik | abgeschlossen, konditionaler Existenzpass | Source-work/Damping/Cross-off/Zeitschritt bestanden; `R0=5,8` erreichen Basin nahe `6.99`; Punktquellen, gesetztes `nu=1`, UV-sensitive Fruehtransienten, keine Closure aus `z=(x,rho)` |
+| `experiments/current/memory/closure/emergent_modal_state_gate.py` | P3.8e kanonische Finite-`k`-Mechanismus-Closure | abgeschlossen, Null nicht verworfen | fuenf Seeds, fuenf `kR_mem`, zwei Staerken, `eta=0` und N=100M-Alterscheck; alle Interventionskontrollen, aber 0/5 zweite-Ordnungs-Gates; kanonischer Write-Port bleibt offen |
 | `experiments/current/memory/synchronization/reciprocity/measurement_closure_relative_noise_gate.py` | P3.2 Mess-Closure, Relative Noise und Langhorizont-Hankel-Audit | abgeschlossen | gemeinsame Zielzeiten; alle 45 gepaarten Designzellen verschlechtern sich, drei unabhaengige Seed-Mediane stimmen im Vorzeichen ueberein, Rang waechst ohne Plateau und hochrangiger Trend ist nicht kontrollgetrennt |
 | experiments/current/memory/synchronization/reciprocity/hankel_pole_identity_cli.py | P3.2 gespeicherter DMD-Pol-Identity-Stoptest | abgeschlossen, negativ | vier korrelationsuebergreifende Kandidaten, aber null kontrollgetrennte Ueberlebende; Seeds 1/2 ueberlappen im Einwegarm, Seed 3 verfehlt 10/12 |
 | `experiments/current/memory/synchronization/mediation/source_local_linear_gate.py` | P3.2c source-lokales lineares Emissionsgate | abgeschlossen, negativ | exakter Telegraphkanal stabil, aber Offset-Knot-Residuum `3.54e-5` und Einweg-Polverschiebung `0.00622`; Stromsource noch schwacher, 0/3 Modenreduktionen bestehen |
