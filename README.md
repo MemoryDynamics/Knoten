@@ -172,14 +172,16 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. Paper I auf die lineare co-moving Relaxationslesart und das neue
+1. P3.8f als letzten skalaren Closure-Test vorregistrieren: zero-net
+   sichtbarer Puls durch den kanonischen Deposition-Port, gewichtete
+   Orthogonalisierung bzw. Rangreduktion der Inputbasis und blockierte
+   Signalfenster-Validierung ohne Parametertuning.
+2. Paper I auf die lineare co-moving Relaxationslesart und das neue
    Checkpoint-/Holdout-Stabilitaetsprotokoll synchronisieren; historische
    Metastabilitaets- und Dimensionsformulierungen entfernen.
-2. Nach bestandenem Write-/Read-Nulltest genau ein aktives skalares
-   Delta-Quellfeld gegen Gaussian-null-, stable-finite-k-, cubic-off-,
-   source-off- und eta-zero-Kontrollen oeffnen.
-3. Komplexe `eta=0`-Nebenmoden analytisch als lineares Sampling-/Projektions-
-   phaenomen testen, bevor weitere Modensuchen laufen.
+3. Keine weitere AR-/Kernel-/Noise-Suche zur Erzeugung komplexer Pole. Bei
+   negativem P3.8f orientiertes/current Memory oder ein gemeinsames
+   Mehrquellenfeld offen als neue Modellannahme pruefen.
 4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
    Source-Eligibility, Shape-Boundedness und einen unabhaengig
    kontrollgetrennten Readout besteht.

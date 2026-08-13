@@ -1,5 +1,14 @@
 # P3.8e canonical finite-k mechanism-closure gate
 
+> **Post-review correction (2026-08-13):** This historical model-order
+> decision is `superseded-methodologically-inconclusive`. The free and
+> "damped" AR(2) fits were not independent, and the panel-Hankel layout could
+> inflate temporal rank through differing residues. The paired raw response
+> remains audit evidence. Use the
+> [technical reconciliation](emergent_modal_state_reconciliation_2026-08-13.md)
+> and its [review](../../project/meta/reviews/p38e_identification_reconciliation_review_2026-08-13.md)
+> for current conclusions.
+
 Date: 2026-08-13.
 
 ## Verdict

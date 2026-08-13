@@ -515,8 +515,10 @@ P3.8e ist deshalb als **Mechanismus-Closure** festgelegt. Eine feste
 Observable `Y=Psi(x,rho)` und gepaarte schwache Finite-`k`-Impulse muessen
 zuerst die nichtparametrische kanonische Impulsantwort bestimmen. Pro
 registrierter Raum-/Symmetriemode werden danach erste Ordnung,
-unbeschraenkte zweite Ordnung, passiv-reziproke zweite Ordnung und ein
-nichtparametrischer Delay-Kernel auf gemeinsamen Holdouts verglichen. Bei `r`
+unbeschraenkte zweite Ordnung, eine echte ungedaempfte Nebenhypothese und ein
+nichtparametrischer Delay-Kernel auf gemeinsamen Holdouts verglichen. Die
+kontinuierlich gedaempfte Form ist nur eine Interpretation stabiler
+AR(2)-Pole, kein unabhaengiges Modell. Bei `r`
 aufgeloesten Moden ist dies mindestens ein Vergleich von `r` gegen `2r`
 Zustaende; ein globaler Rang-2-Fit waere keine Feldidentifikation. Der
 uniforme Weak-Probe bleibt Pipelinekontrolle, weil der P3.8b/d-
@@ -537,29 +539,31 @@ Modus selektieren. Ein Cross-Mediator benoetigt bereits eine registrierte
 gemeinsame Mehrquellen-/Felddynamik im Ausgangsmodell oder bleibt explizite
 Erweiterung.
 
-Das vorregistrierte P3.8e-Gate ist inzwischen ausgefuehrt. Fuenf
-Formationsseeds, drei Richtungen, fuenf `kR_mem`-Kanaele, zwei
-Stoerungsstaerken und `eta=0` bestehen alle technischen Interventionsgates,
-aber **0/5** Wellenzahlkanaele bestehen den vollstaendigen zeitlichen
-zweite-Ordnungs-Test. Die Uniformkontrolle weicht nur `2.95e-13` von der
-Identitaet ab, der passive Memory-Arm erlischt spaet exakt, die
-Staerkenlinearitaet liegt bei `0.001/0.001` und die maximale Radiusstoerung bei
-`0.006`. Der mediane Cross-`k`-Diagonalanteil betraegt `0.921`.
+Das historische P3.8e-Ergebnis ist nach erneutem Codeaudit
+`superseded-methodologically-inconclusive`. Freie und "gedaempfte" AR(2)
+waren keine unabhaengigen Modelle; ausserdem konnte die alte Panel-Hankel-
+Anordnung durch verschiedene Seed-/Richtungsresiduen Rang erzeugen. Die
+korrigierte Revision `e4f56b8` trennt active und `eta=0`, verwendet gemeinsame
+Zielzeiten, lernt Pole nur aus Memory-Fourierreadouts und prueft die sichtbare
+Relativkoordinate unabhaengig. Alle technischen Kontrollen bestehen weiterhin,
+einschliesslich vollstaendiger Cross-`k`-Linearitaet und Extinktion.
 
-Der Befund ist `canonical-null-not-rejected`, kein universeller No-go-Satz.
-Das 1-Prozent-Signal endet nach etwa 445--555 Updates und damit vor dem
-vorregistrierten Holdoutbeginn bei 1200. Signalfenster-Sensitivitaeten bis 600
-und 800 Updates liefern weiterhin hoechstens einen konkurrenzfaehigen
-unterdaempften Kanal statt der geforderten vier. Hankel-Entropieraenge von
-`5.48` bis `18.32` und nicht altersstabile Fitpole sprechen ebenfalls gegen
-eine einfache `(m,p)`-Minimalrealisierung. Komplexe Einzel-Fitwurzeln ohne
-Holdout-Vorteil werden nicht als Oszillation gewertet.
+Auch korrigiert bestehen **0/5** Kanaele. Alle gepoolten aktiven AR(2)-Pole
+sind reell; AR(2) verbessert weder Memory- noch sichtbares Holdout und die
+echte ungedaempfte Nebenhypothese ist deutlich schlechter. Der korrigierte
+Hankeloperator liefert `s3/s2=0.557..0.695`, also keine isolierte Rang-2-
+Struktur. Zugleich liegen nur `0.2%..0.8%` der skalenbalancierten Memory-Energie
+im Holdout. Die Eingangsprofile sind stark kollinear (medianer Gram-
+Konditionswert `15867`, maximale Off-Diagonale `0.9964`). Der Status ist daher
+`null-not-rejected-memory-holdout-limited`, kein universeller No-go-Satz.
 
 Offen bleibt der kanonische Write-Port: P3.8e initialisiert eine gueltige
 zero-centroid Memory-Deformation, erzeugt sie aber nicht durch die
 Trajektorie-zu-Deposition-Abbildung. P3.8f darf deshalb genau einen
-zero-net sichtbaren Dipolpuls mit unabhaengigem Readout pruefen. Erst ein Pass
-dieses Source-/Read-Gates wuerde Speicher-/Passivitaetsdiagnostik freigeben;
+zero-net sichtbaren Dipolpuls mit unabhaengigem Readout und einer gewichtet
+orthogonalisierten oder rangreduzierten Eingangsbasis pruefen. Blockierte
+Signalfenster werden vorab fixiert. Erst ein Pass dieses Source-/Read-Gates
+wuerde Speicher-/Passivitaetsdiagnostik freigeben;
 ein weiterer Fail schliesst die skalare `(m,p)`-Route und verschiebt
 orientiertes Memory oder ein gemeinsames Mehrquellenfeld in eine offen
 deklarierte Modellerweiterung.

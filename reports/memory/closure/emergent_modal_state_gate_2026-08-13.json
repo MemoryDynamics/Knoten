@@ -1,4 +1,13 @@
 {
+  "post_review_correction": {
+    "current_report": "reports/memory/closure/emergent_modal_state_reconciliation_2026-08-13.json",
+    "current_review": "reports/project/meta/reviews/p38e_identification_reconciliation_review_2026-08-13.md",
+    "findings": [
+      "free and damped AR(2) were not independent models",
+      "panel-specific Hankel columns could inflate temporal rank"
+    ],
+    "status": "superseded-methodologically-inconclusive"
+  },
   "analysis": {
     "active_specificity": [
       1.4241615149997762,

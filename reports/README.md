@@ -145,17 +145,24 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Altersstationaritaet sind die festen Gates. Ein laengerer P3.8d-Lauf,
     globaler Rang 2 oder der uniforme `k=0`-Probe koennen `(m,p)` nicht
     selektieren.
-- [P3.8e kanonisches Finite-k-Gate](memory/closure/emergent_modal_state_gate_2026-08-13.md)
-  - **canonical null not rejected:** Alle technischen Interventionsgates
-    bestehen, aber 0/5 `kR_mem`-Kanaele bestehen den vorregistrierten
-    zweite-Ordnungs-Holdout; P3.8d bleibt eine konstruierte Erweiterung.
+- [P3.8e technische Reconciliation](memory/closure/emergent_modal_state_reconciliation_2026-08-13.md)
+  - **null not rejected, memory-holdout-limited:** Die historische
+    Identifikation ist superseded: freies/gedaempftes AR(2) war redundant und
+    der Panel-Hankel-Aufbau konnte Rang aufblasen. Korrigiert bestehen 0/5
+    `kR_mem`-Kanaele; alle gepoolten Pole sind reell, AR(2) verbessert das
+    Holdout nicht und ein isolierter Hankel-Rang 2 fehlt.
+  - **Grenze:** Das Memory-Holdout traegt nur `0.2%..0.8%` Energie und die
+    Inputprofile sind stark kollinear. Dies ist kein skalares No-go.
+  - [Korrekturprotokoll](project/meta/preregistration/p38e_identification_reconciliation_protocol_2026-08-13.md)
+    und [Referee-/Codereview](project/meta/reviews/p38e_identification_reconciliation_review_2026-08-13.md).
+  - [Historisches P3.8e-Gate](memory/closure/emergent_modal_state_gate_2026-08-13.md):
+    Rohantwort bleibt Auditmaterial, Modellordnungsentscheidung ist
+    `superseded-methodologically-inconclusive`.
   - [Vorregistrierung](project/meta/preregistration/p38e_finite_k_mechanism_closure_2026-08-13.md):
     Intervention, Projektion, Null, Holdouts und Schwellen wurden vor dem
     Fuenf-Seed-Lauf in Revision `2ecc081` fixiert.
   - [Rigoroses Ergebnis-/Codereview](project/meta/reviews/p38e_finite_k_gate_review_2026-08-13.md):
-    Das Primaerholdout liegt nach dem Signalhorizont. Signalfensterchecks und
-    Hankelraenge retten den Claim nicht; ein kanonischer Deposition-Write-Port
-    bleibt als letzter skalarer Falsifikationstest offen.
+    historisches Review mit sichtbarem Korrektur-Addendum.
 - [Kontinuitaetsbeschraenktes Memory-Gate](memory/closure/continuity_constrained_memory_gate_2026-08-11.md)
   - **structural pass with unresolved force balance:** Die kanonische
     Memory-Innovation ist bei stationaerer Masse monopolfrei und ihr Dipol ist

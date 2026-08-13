@@ -1266,32 +1266,39 @@ Altersgewichte und Memory-Zentrum bei der Intervention unveraendert. Die
 anschliessende Fortsetzung verwendet ausschliesslich den kanonischen
 `(x,rho)`-Uebergang und common random numbers. Das feste Readout besteht aus
 der longitudinalen Relativkoordinate `x-xbar_rho` sowie Real- und Imaginaerteil
-der zentrierten skalaren Fouriermode. Primaer ausgewertet wird die aktive
-Antwort minus `eta=0`.
+der zentrierten skalaren Fouriermode.
 
-Alle technischen Kontrollen bestehen ueber fuenf Seeds, drei Richtungen und
-zwei Stoerstaerken. Trotzdem besteht kein `kR_mem`-Kanal gleichzeitig den
-vorregistrierten AR(2)-Vorteil gegen AR(1), den Delay-Nullvergleich, die
-stabile unterdaempfte Realisierung und die weiteren notwendigen Bedingungen.
-Die Entscheidung lautet `canonical-null-not-rejected` (`0/5`, gefordert
-`>=4/5`). Einzelne komplexe AR-Wurzeln sind vorhanden, besitzen aber keinen
-robusten rekursiven Holdout-Vorteil und sind deshalb keine Phasenmode.
+Der erste Auswerter bildete active minus `eta=0`, mischte Memory und sichtbares
+Readout im Fit und verglich freie mit "gedaempften" AR(2)-Modellen. Letztere
+sind fuer stabile komplexe Pole exakt dieselbe Modellklasse. Zusaetzlich
+ordnete die alte Hankelmatrix Seeds/Richtungen als separate Spaltenfamilien an,
+sodass unterschiedliche Residuen kuenstlich Rang erzeugen konnten. Dieses
+historische Ergebnis ist deshalb `superseded-methodologically-inconclusive`.
 
-Der primaere Holdout liegt ueberwiegend nach dem Signal: Die 1-Prozent-Antwort
-endet bei 445--555 Updates, der gespeicherte Horizont bei 600 und der
-vorregistrierte Holdout beginnt bei 1200. Das begrenzt die Schaerfe des
-Negativresultats. Nachtraegliche, nicht umklassifizierende Fensterchecks bis
-600 und 800 Updates erreichen weiterhin hoechstens einen konkurrenzfaehigen
-unterdaempften Kanal. Die scale-balanced Hankel-Spektren besitzen
-Entropieraenge `5.48..18.32` statt einer robusten zweizustaendigen Struktur;
-Seed-1-Pole sind zudem zwischen `N=3M` und `N=100M` nicht identisch.
+Die technische Reconciliation trennt active und `eta=0`, verwendet fuer alle
+Ordnungen dieselben Zielzeiten, lernt Koeffizienten nur aus Real-/Imaginaerteil
+der Memorymode und haelt die sichtbare Relativkoordinate als Readout zurueck.
+Alle Panelreadouts bilden nun gemeinsam den Hankel-Ausgabevektor; nur
+Zeitverschiebungen bilden Spalten. Die echte ungedaempfte Nebenhypothese hat
+`a_2=-1`; Daempfung und Frequenz werden nur aus freien AR(2)-Polen interpretiert.
+
+Alle technischen Kontrollen bestehen weiterhin, aber korrigiert besteht kein
+`kR_mem`-Kanal das vollstaendige Gate (`0/5`, gefordert `>=4/5`). Alle
+gepoolten aktiven AR(2)-Pole sind reell, AR(2) liefert keinen Holdout-Vorteil,
+und der ungedaempfte Oszillator ist deutlich schlechter. Die korrigierten
+Hankel-Spektren besitzen `s3/s2=0.557..0.695` statt einer isolierten Rang-2-
+Struktur. Das Memory-Holdout enthaelt allerdings nur `0.2%..0.8%` seiner
+skalenbalancierten Energie. Ausserdem sind die fuenf Eingangsprofile mit
+medianer Gram-Kondition `15867` stark kollinear. Die korrekte Einordnung ist
+deshalb `null-not-rejected-memory-holdout-limited`, nicht skalares No-go.
 
 Die Intervention ist eine gueltige State-Suszeptibilitaetsmessung, aber kein
 durch die sichtbare Trajektorie erzeugter kanonischer Write-Port. Daher bleibt
 genau ein skalarer Source-Test offen: Ein zero-net sichtbarer Dipolpuls muss
-ueber die bestehende Deposition schreiben und auf einem vor dem Lauf innerhalb
-des 600-Update-Signalhorizonts fixierten Fenster gegen erste Ordnung und
-Delay-Null bestehen. Ohne diesen Pass ist `(m,p)` keine emergente Closure des
+ueber die bestehende Deposition schreiben. Seine Eingangsbasis wird vorher
+gewichtet orthogonalisiert oder auf den identifizierbaren Rang reduziert;
+blockierte Signalfenster werden vor dem Lauf fixiert. Erst dann wird gegen
+erste Ordnung und Delay-Null getestet. Ohne diesen Pass ist `(m,p)` keine emergente Closure des
 skalaren Modells. Orientiertes/current Memory oder ein gemeinsames
 Mehrquellenfeld waeren danach explizite neue Zustandsannahmen, keine
 Reparametrisierung von `rho`.

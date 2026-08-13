@@ -716,23 +716,31 @@ Prioritaetsfolge:
     Der Mediator, seine Koeffizienten und `nu=1` sind gesetzt; der Test ist
     punktfoermig, kollinear und entwickelt weder Knotenform noch `rho`.
 
-23. **P3.8e abgeschlossen: kanonische Null nicht verworfen.** Auf den reifen
-    `d=3`, `A_att=35`-Checkpoints wurden fuenf `kR_mem`-Kanaele, zwei
-    Stoerstaerken, drei Richtungen, fuenf Formationsseeds, `eta=0` und der
-    Seed-1-Altersvergleich `N=3M` gegen `N=100M` vorregistriert ausgewertet.
-    Alle Interventionskontrollen bestehen: Uniform-Identitaetsfehler
-    `2.95e-13`, exakte spaete `eta=0`-Extinktion, Staerkenlinearitaet
-    `0.001/0.001` und maximale Radiusstoerung `0.006`. Dennoch besteht kein
-    einziger Kanal das vollstaendige zweite-Ordnungs-Gate; gefordert waren
-    mindestens vier von fuenf.
+23. **P3.8e technisch reconciliert: Null nicht verworfen.** Das historische
+    Ergebnis ist `superseded-methodologically-inconclusive`: freie und
+    "gedaempfte" AR(2) waren fuer die berichteten stabilen komplexen Pole
+    dieselbe Parametrisierung, und die alte Panel-Hankel-Matrix konnte durch
+    unterschiedliche Residuen kuenstlich Rang erzeugen. Der korrigierte Lauf
+    aus Revision `e4f56b8` trennt active und `eta=0`, lernt Pole nur aus den
+    Memory-Readouts, haelt die sichtbare Relativkoordinate zurueck, verwendet
+    gemeinsame Zielzeiten und baut die Hankel-Spalten nur aus Zeitshifts.
 
-    Die Negativaussage bleibt bewusst begrenzt. Das 1-Prozent-Signal endet
-    bereits nach 445--555 Updates, der Memory-Horizont nach 600, waehrend der
-    vorregistrierte Holdout bei 1200 beginnt. Post-hoc Signalfenster bis 600
-    bzw. 800 Updates retten den Claim nicht: hoechstens ein unterdaempfter
-    Kanal wird konkurrenzfaehig. Die Hankel-Entropieraenge `5.48..18.32` sind
-    zudem nicht mit einer einfachen zweizustaendigen Closure vereinbar.
-    Komplexe AR-Wurzeln ohne Holdout-Vorteil sind kein Phasenmodus.
+    Alle Interventionskontrollen bestehen weiterhin: Uniformfehler
+    `2.95e-13`, vollstaendige spaete `eta=0`-Extinktion, diagonale und volle
+    Cross-`k`-Linearitaet `0.001/0.001`, maximale Radiusstoerung `0.006`.
+    Trotzdem besteht kein Kanal das korrigierte zweite-Ordnungs-Gate. Alle
+    gepoolten aktiven AR(2)-Pole sind reell; AR(2) verbessert weder Memory-
+    noch sichtbares Holdout, und die echte ungedaempfte Nebenhypothese ist
+    deutlich schlechter. Die korrigierten Hankel-Spektren haben zwar
+    `0.875..0.988` Energie in den ersten zwei Singulaerwerten, aber
+    `s3/s2=0.557..0.695` und damit keine isolierte Rang-2-Struktur.
+
+    Die Negativaussage bleibt begrenzt: Das Memory-Holdout enthaelt nur
+    `0.2%..0.8%` der skalenbalancierten Energie. Zudem sind die fuenf
+    Eingangsprofile stark kollinear (medianer Gram-Konditionswert `15867`,
+    maximale Off-Diagonale `0.9964`). Der Altersvergleich besteht nur relativ
+    zur bereits grossen Seed-Streuung. Der belastbare Status lautet daher
+    `null-not-rejected-memory-holdout-limited`, nicht skalares No-go.
 
     Die Intervention ist eine gueltige massen- und zentrumserhaltende
     Stoerung des vollstaendigen Memory-Zustands. Sie wurde jedoch nicht durch
@@ -752,11 +760,11 @@ Prioritaetsfolge:
     2. dieselben festen `kR_mem`-Readouts und ein unabhaengiger sichtbarer
        Kraft-/Relativkoordinaten-Readout werden ohne Zielpol verwendet;
     3. `eta=0`, zwei Staerken, fuenf Seeds und common random numbers bleiben
-       Pflicht; Train und Holdout liegen vorab innerhalb des bekannten
-       600-Update-Signalhorizonts, die spaete Extinktion ist ein separates
-       Kontrollfenster;
+       Pflicht; die Eingangsprofile werden gewichtet orthogonalisiert oder auf
+       ihren empirisch identifizierbaren Rang reduziert;
     4. erster Ordnung, zweiter Ordnung und Delay-Null werden wieder auf
-       rekursivem Holdout verglichen; keine Kernel-, Gain-, Noise- oder
+       vorab fixierten blockierten Signalfenstern verglichen; die spaete
+       Extinktion bleibt separat. Keine Kernel-, Gain-, Noise- oder
        P3.8d-Parametersuche.
 
     Scheitert auch dieser kanonische Source-Port-Test, wird der skalare Weg zu

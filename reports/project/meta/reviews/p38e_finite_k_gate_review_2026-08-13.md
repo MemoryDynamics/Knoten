@@ -1,5 +1,12 @@
 # P3.8e finite-k gate review
 
+> **Review correction (2026-08-13):** The conclusion below that no
+> result-changing implementation defect was found is withdrawn. A later audit
+> identified a redundant free/damped AR(2) comparison and a panel-Hankel
+> layout that inflated rank through differing residues. This review remains a
+> historical record; the current assessment is the
+> [identification reconciliation review](p38e_identification_reconciliation_review_2026-08-13.md).
+
 Date: 2026-08-13. Reviewed artifacts: the preregistration, package modules,
 tests, executable gate, machine-readable output, report and figure generated
 from clean revision `2ecc081aa5e361e2af5452584d664044056e3e42`.

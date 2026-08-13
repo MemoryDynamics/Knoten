@@ -333,22 +333,29 @@ channel is required.
 
 ## P3.8e outcome addendum (2026-08-13)
 
-The registered finite-`k` state-susceptibility gate does not reject the
-canonical null. Its uniform, `eta=0`, strength-linearity and shape-boundedness
-controls pass, but zero of five wavenumber channels passes the complete
-second-order requirement. Complex fitted roots occur in some channels without
-the required recursive holdout advantage. The nonparametric Hankel spectra
-also fail to isolate one second state per mode.
+The historical finite-`k` identification is
+`superseded-methodologically-inconclusive`. Free and "damped" AR(2) were the
+same model for the reported stable conjugate poles, active-minus-`eta=0` could
+itself create second-order behavior, and the old panel-Hankel layout could
+inflate rank through differing residues.
 
-The primary holdout begins after the finite-memory response has almost
-vanished, so this is not a universal scalar-memory no-go theorem. Fixed
-signal-window sensitivities still fail the 4/5 criterion. In addition, the
+The corrected analysis fits active and `eta=0` separately, withholds the
+visible readout, uses common target windows, and stacks all panel readouts into
+one Hankel output vector. Technical controls pass, but zero of five channels
+passes the complete requirement. All pooled active AR(2) poles are real,
+AR(2) has no recursive holdout advantage, and `s3/s2=0.557..0.695` does not
+isolate rank two. The genuinely undamped reference is distinctly worse.
+
+This remains holdout-limited rather than a universal scalar-memory no-go:
+only `0.2%..0.8%` of scale-balanced memory energy lies in holdout, and the
+five input profiles have median Gram condition `15867`. In addition, the
 intervention initializes a valid memory-state deformation rather than writing
 through the trajectory-deposition map. The only admissible scalar follow-up
 is therefore a preregistered zero-net visible pulse through the canonical
-write port with an independent force/memory readout. Failure there closes the
-scalar route to `(m,p)`; an oriented/current memory or shared multi-source
-field must then be declared a new model state.
+write port, using a weighted-orthogonalized or explicitly rank-reduced input
+basis and blocked signal-window validation. Failure there closes the scalar
+route to `(m,p)`; an oriented/current memory or shared multi-source field must
+then be declared a new model state.
 
 ## Method anchors
 

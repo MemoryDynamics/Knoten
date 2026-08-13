@@ -1,5 +1,10 @@
 # P3.8e finite-k mechanism-closure preregistration
 
+> **Post-review status:** This document records the original preregistration
+> and is not retroactively changed. Its temporal identification contained
+> defects documented by the later
+> [technical correction protocol](p38e_identification_reconciliation_protocol_2026-08-13.md).
+
 Date: 2026-08-13. This document fixes the first executable P3.8e gate before
 the canonical response data are generated.
 
