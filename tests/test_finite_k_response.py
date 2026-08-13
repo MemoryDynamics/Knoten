@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from emergenz_knoten import (
+    double_gaussian_gradient,
     FiniteMemoryState,
     SimulationConfig,
     longitudinal_memory_mode_profiles,
@@ -125,4 +126,52 @@ def test_finite_k_response_is_translation_equivariant() -> None:
         translated.centered_mode_matrices,
         original.centered_mode_matrices,
         atol=1e-10,
+    )
+
+
+def test_one_step_response_matches_public_kernel_central_difference() -> None:
+    state = _state()
+    config = _config(eta=0.15)
+    direction = np.array([0.0, 1.0])
+    kr_values = [0.5, 2.0]
+    fraction = 0.005
+    profiles, _, radius = longitudinal_memory_mode_profiles(
+        state,
+        direction=direction,
+        kr_values=kr_values,
+    )
+    amplitude = fraction * radius
+    expected = []
+    for profile in profiles:
+        displacement = amplitude * profile[:, None] * direction[None, :]
+        branch_positions = []
+        for sign in (1.0, -1.0):
+            gradient = double_gaussian_gradient(
+                state.x,
+                state.memory + sign * displacement,
+                state.weights,
+                sigma_rep=config.sigma_rep,
+                sigma_att=config.sigma_att,
+                amplitude_rep=config.amplitude_rep,
+                amplitude_att=config.amplitude_att,
+                deposition_kernel=config.deposition_kernel,
+                deposition_sigma=config.deposition_sigma,
+            )
+            branch_positions.append(state.x - config.eta * gradient)
+        expected.append((branch_positions[0] - branch_positions[1]) / (2.0 * amplitude))
+
+    response = paired_finite_k_memory_response(
+        state,
+        config,
+        direction=direction,
+        kr_values=kr_values,
+        perturbation_fraction=fraction,
+        noise=np.zeros((1, state.dim)),
+        sample_steps=[0, 1],
+    )
+
+    np.testing.assert_allclose(
+        response.position_matrices[1],
+        np.column_stack(expected),
+        atol=1e-12,
     )

@@ -6,7 +6,6 @@ from dataclasses import dataclass
 import math
 
 import numpy as np
-from scipy.optimize import least_squares
 
 
 @dataclass(frozen=True)
@@ -38,13 +37,107 @@ class SharedRecurrenceFit:
 
 
 @dataclass(frozen=True)
-class DampedSecondOrderFit:
-    """Second-order recurrence restricted to a damped continuous oscillator."""
+class HeldOutReadoutRecurrenceFit:
+    """Shared recurrence learned on one observable and scored on another."""
+
+    order: int
+    coefficients: np.ndarray
+    poles: np.ndarray
+    fit_train_one_step_rmse: float
+    fit_test_rollout_rmse: float
+    fit_test_zero_rmse: float
+    readout_test_one_step_rmse: float
+    readout_test_rollout_rmse: float
+    readout_test_zero_rmse: float
+    fit_channels: int
+    readout_channels: int
+    train_targets: int
+    test_targets: int
+
+    @property
+    def stable(self) -> bool:
+        return bool(np.max(np.abs(self.poles)) < 1.0)
+
+    @property
+    def readout_rollout_ratio_to_zero(self) -> float:
+        return self.readout_test_rollout_rmse / max(
+            self.readout_test_zero_rmse,
+            np.finfo(float).tiny,
+        )
+
+
+@dataclass(frozen=True)
+class ContinuousSecondOrderInterpretation:
+    """Continuous-time interpretation of one real discrete AR(2) map.
+
+    A stable real AR(2) with positive pole product already is the exact sample
+    map of a damped second-order scalar equation. This object interprets the
+    fitted coefficients; it is not an independently fitted model.
+    """
 
     coefficients: np.ndarray
     poles: np.ndarray
     damping_rate: float
     natural_frequency: float
+    angular_frequency: float
+    classification: str
+    embeddable: bool
+
+    @property
+    def stable(self) -> bool:
+        return bool(np.max(np.abs(self.poles)) < 1.0)
+
+    @property
+    def underdamped(self) -> bool:
+        return self.classification == "underdamped"
+
+
+@dataclass(frozen=True)
+class ConservativeOscillatorFit:
+    """Undamped one-parameter AR(2) null with unit-modulus poles."""
+
+    coefficient: float
+    coefficients: np.ndarray
+    poles: np.ndarray
+    angular_frequency: float
+    train_one_step_rmse: float
+    test_one_step_rmse: float
+    test_rollout_rmse: float
+    test_zero_rmse: float
+    test_persistence_rmse: float
+    active_channels: int
+    train_targets: int
+    test_targets: int
+
+    @property
+    def stable(self) -> bool:
+        return bool(np.max(np.abs(self.poles)) <= 1.0 + 1e-12)
+
+    @property
+    def rollout_ratio_to_zero(self) -> float:
+        return self.test_rollout_rmse / max(
+            self.test_zero_rmse,
+            np.finfo(float).tiny,
+        )
+
+
+@dataclass(frozen=True)
+class DampedSecondOrderFit:
+    """Compatibility view of AR(2) as a damped continuous equation.
+
+    This is deliberately not a distinct fitted model. If the free AR(2) has
+    a real stable continuous embedding, all prediction errors and coefficients
+    are exactly those of that AR(2); only continuous-rate labels are added.
+    """
+
+    coefficients: np.ndarray
+    poles: np.ndarray
+    damping_rate: float
+    natural_frequency: float
+    angular_frequency: float
+    classification: str
+    embeddable: bool
+    equivalent_to_unconstrained: bool
     train_one_step_rmse: float
     test_one_step_rmse: float
     test_rollout_rmse: float
@@ -60,7 +153,7 @@ class DampedSecondOrderFit:
 
     @property
     def underdamped(self) -> bool:
-        return bool(self.natural_frequency > self.damping_rate)
+        return self.classification == "underdamped"
 
     @property
     def rollout_ratio_to_zero(self) -> float:
@@ -255,24 +348,169 @@ def fit_shared_recurrence(
     )
 
 
-def _damped_coefficients(
-    log_rates: np.ndarray,
-    sample_interval: float,
-) -> tuple[np.ndarray, float, float]:
-    damping = float(np.exp(log_rates[0]))
-    frequency = float(np.exp(log_rates[1]))
-    interval = float(sample_interval)
-    difference = damping * damping - frequency * frequency
-    envelope = math.exp(-damping * interval)
-    if difference >= 0.0:
-        argument = min(math.sqrt(difference) * interval, 700.0)
-        coefficient_1 = 2.0 * envelope * math.cosh(argument)
+def fit_recurrence_with_held_out_readout(
+    fit_response: np.ndarray,
+    readout_response: np.ndarray,
+    *,
+    order: int,
+    train_fraction: float = 0.6,
+    start_index: int = 1,
+    relative_channel_floor: float = 1e-6,
+) -> HeldOutReadoutRecurrenceFit:
+    """Learn shared poles from ``fit_response`` and score a held-out readout.
+
+    Both arrays must use the same time and panel axes. Scaling and inactive
+    channel filtering are learned separately on their common training window;
+    no readout value contributes to the recurrence coefficients.
+    """
+
+    fit_values = _validate_response(fit_response)
+    readout_values = _validate_response(readout_response)
+    if fit_values.shape[:2] != readout_values.shape[:2]:
+        raise ValueError("fit and readout responses must share time and panel axes")
+    prepared_fit = _prepare_recurrence(
+        fit_values,
+        order=order,
+        train_fraction=train_fraction,
+        start_index=start_index,
+        relative_channel_floor=relative_channel_floor,
+    )
+    prepared_readout = _prepare_recurrence(
+        readout_values,
+        order=order,
+        train_fraction=train_fraction,
+        start_index=start_index,
+        relative_channel_floor=relative_channel_floor,
+    )
+    if not np.array_equal(prepared_fit.target_times, prepared_readout.target_times):
+        raise RuntimeError("fit and readout target windows differ")
+    design = prepared_fit.predictors[prepared_fit.train_mask].reshape(-1, order)
+    target = prepared_fit.targets[prepared_fit.train_mask].reshape(-1)
+    coefficients, _, _, _ = np.linalg.lstsq(design, target, rcond=None)
+    fit_metrics = _recurrence_metrics(prepared_fit, coefficients)
+    readout_metrics = _recurrence_metrics(prepared_readout, coefficients)
+    poles = np.roots(np.concatenate(([1.0], -coefficients)))
+    return HeldOutReadoutRecurrenceFit(
+        order=int(order),
+        coefficients=np.asarray(coefficients, dtype=float),
+        poles=np.asarray(poles, dtype=np.complex128),
+        fit_train_one_step_rmse=fit_metrics[0],
+        fit_test_rollout_rmse=fit_metrics[2],
+        fit_test_zero_rmse=fit_metrics[3],
+        readout_test_one_step_rmse=readout_metrics[1],
+        readout_test_rollout_rmse=readout_metrics[2],
+        readout_test_zero_rmse=readout_metrics[3],
+        fit_channels=int(prepared_fit.values.shape[1]),
+        readout_channels=int(prepared_readout.values.shape[1]),
+        train_targets=int(np.count_nonzero(prepared_fit.train_mask)),
+        test_targets=int(np.count_nonzero(prepared_fit.test_mask)),
+    )
+
+
+def fit_conservative_recurrence_with_held_out_readout(
+    fit_response: np.ndarray,
+    readout_response: np.ndarray,
+    *,
+    train_fraction: float = 0.6,
+    start_index: int = 2,
+    relative_channel_floor: float = 1e-6,
+) -> HeldOutReadoutRecurrenceFit:
+    """Fit an undamped AR(2) on one observable and score another."""
+
+    fit_values = _validate_response(fit_response)
+    readout_values = _validate_response(readout_response)
+    if fit_values.shape[:2] != readout_values.shape[:2]:
+        raise ValueError("fit and readout responses must share time and panel axes")
+    prepared_fit = _prepare_recurrence(
+        fit_values,
+        order=2,
+        train_fraction=train_fraction,
+        start_index=start_index,
+        relative_channel_floor=relative_channel_floor,
+    )
+    prepared_readout = _prepare_recurrence(
+        readout_values,
+        order=2,
+        train_fraction=train_fraction,
+        start_index=start_index,
+        relative_channel_floor=relative_channel_floor,
+    )
+    design = prepared_fit.predictors[prepared_fit.train_mask].reshape(-1, 2)
+    target = prepared_fit.targets[prepared_fit.train_mask].reshape(-1)
+    adjusted_target = target + design[:, 1]
+    denominator = float(np.dot(design[:, 0], design[:, 0]))
+    if denominator <= np.finfo(float).tiny:
+        raise ValueError("leading lag has no training variation")
+    coefficient = float(np.dot(design[:, 0], adjusted_target) / denominator)
+    coefficients = np.asarray([np.clip(coefficient, -2.0, 2.0), -1.0])
+    fit_metrics = _recurrence_metrics(prepared_fit, coefficients)
+    readout_metrics = _recurrence_metrics(prepared_readout, coefficients)
+    poles = np.roots(np.concatenate(([1.0], -coefficients)))
+    return HeldOutReadoutRecurrenceFit(
+        order=2,
+        coefficients=coefficients,
+        poles=np.asarray(poles, dtype=np.complex128),
+        fit_train_one_step_rmse=fit_metrics[0],
+        fit_test_rollout_rmse=fit_metrics[2],
+        fit_test_zero_rmse=fit_metrics[3],
+        readout_test_one_step_rmse=readout_metrics[1],
+        readout_test_rollout_rmse=readout_metrics[2],
+        readout_test_zero_rmse=readout_metrics[3],
+        fit_channels=int(prepared_fit.values.shape[1]),
+        readout_channels=int(prepared_readout.values.shape[1]),
+        train_targets=int(np.count_nonzero(prepared_fit.train_mask)),
+        test_targets=int(np.count_nonzero(prepared_fit.test_mask)),
+    )
+
+
+def interpret_continuous_second_order(
+    coefficients: np.ndarray,
+    *,
+    sample_interval: float = 1.0,
+) -> ContinuousSecondOrderInterpretation:
+    """Map a fitted AR(2) to continuous poles without refitting the data."""
+
+    if not np.isfinite(sample_interval) or sample_interval <= 0.0:
+        raise ValueError("sample_interval must be positive and finite")
+    values = np.asarray(coefficients, dtype=float)
+    if values.shape != (2,) or not np.isfinite(values).all():
+        raise ValueError("coefficients must be two finite AR coefficients")
+    poles = np.asarray(
+        np.roots(np.concatenate(([1.0], -values))),
+        dtype=np.complex128,
+    )
+    tolerance = 1e-10
+    if abs(poles[0] - np.conjugate(poles[1])) <= tolerance:
+        continuous = np.log(poles.astype(np.complex128)) / float(sample_interval)
+        damping = float(-np.mean(continuous.real))
+        angular = float(np.max(np.abs(continuous.imag)))
+        natural = float(math.hypot(damping, angular))
+        classification = "underdamped" if angular > tolerance else "real_repeated"
+        embeddable = bool(damping >= -tolerance)
+    elif np.all(np.abs(poles.imag) <= tolerance) and np.all(poles.real > 0.0):
+        rates = np.log(poles.real) / float(sample_interval)
+        damping = float(-0.5 * np.sum(rates))
+        discriminant = float((0.5 * (rates[0] - rates[1])) ** 2)
+        natural_squared = damping * damping - discriminant
+        natural = float(math.sqrt(max(natural_squared, 0.0)))
+        angular = 0.0
+        classification = "overdamped" if abs(rates[0] - rates[1]) > tolerance else "critical"
+        embeddable = bool(damping >= -tolerance and natural_squared >= -tolerance)
     else:
-        coefficient_1 = 2.0 * envelope * math.cos(
-            math.sqrt(-difference) * interval
-        )
-    coefficient_2 = -(envelope * envelope)
-    return np.asarray([coefficient_1, coefficient_2]), damping, frequency
+        damping = math.nan
+        natural = math.nan
+        angular = math.nan
+        classification = "not_real_continuous_embedding"
+        embeddable = False
+    return ContinuousSecondOrderInterpretation(
+        coefficients=values,
+        poles=poles,
+        damping_rate=damping,
+        natural_frequency=natural,
+        angular_frequency=angular,
+        classification=classification,
+        embeddable=embeddable,
+    )
 
 
 def fit_damped_second_order_recurrence(
@@ -283,12 +521,52 @@ def fit_damped_second_order_recurrence(
     start_index: int = 2,
     relative_channel_floor: float = 1e-6,
 ) -> DampedSecondOrderFit:
-    """Fit the necessary damped-oscillator subset of stable AR(2) maps.
+    """Compatibility helper: fit free AR(2), then interpret it continuously.
 
-    This restriction supplies a passive reciprocal *temporal* candidate. It
-    does not establish collocated power ports or a positive storage metric;
-    those remain separate gates if this model wins on holdout.
+    This function is retained so historical P3.8e artifacts remain executable.
+    It must not be counted as a separate model comparison against AR(2).
     """
+
+    fit = fit_shared_recurrence(
+        response,
+        order=2,
+        train_fraction=train_fraction,
+        start_index=start_index,
+        relative_channel_floor=relative_channel_floor,
+    )
+    interpretation = interpret_continuous_second_order(
+        fit.coefficients,
+        sample_interval=sample_interval,
+    )
+    return DampedSecondOrderFit(
+        coefficients=fit.coefficients,
+        poles=fit.poles,
+        damping_rate=interpretation.damping_rate,
+        natural_frequency=interpretation.natural_frequency,
+        angular_frequency=interpretation.angular_frequency,
+        classification=interpretation.classification,
+        embeddable=interpretation.embeddable,
+        equivalent_to_unconstrained=True,
+        train_one_step_rmse=fit.train_one_step_rmse,
+        test_one_step_rmse=fit.test_one_step_rmse,
+        test_rollout_rmse=fit.test_rollout_rmse,
+        test_zero_rmse=fit.test_zero_rmse,
+        test_persistence_rmse=fit.test_persistence_rmse,
+        active_channels=fit.active_channels,
+        train_targets=fit.train_targets,
+        test_targets=fit.test_targets,
+    )
+
+
+def fit_conservative_second_order_recurrence(
+    response: np.ndarray,
+    *,
+    sample_interval: float = 1.0,
+    train_fraction: float = 0.6,
+    start_index: int = 2,
+    relative_channel_floor: float = 1e-6,
+) -> ConservativeOscillatorFit:
+    """Fit the distinct undamped null ``y[n]=a y[n-1]-y[n-2]``."""
 
     if not np.isfinite(sample_interval) or sample_interval <= 0.0:
         raise ValueError("sample_interval must be positive and finite")
@@ -301,41 +579,24 @@ def fit_damped_second_order_recurrence(
     )
     design = prepared.predictors[prepared.train_mask].reshape(-1, 2)
     target = prepared.targets[prepared.train_mask].reshape(-1)
-
-    def residual(log_rates: np.ndarray) -> np.ndarray:
-        coefficients, _, _ = _damped_coefficients(log_rates, sample_interval)
-        return design @ coefficients - target
-
-    inverse_interval = 1.0 / float(sample_interval)
-    starts = (
-        (0.01 * inverse_interval, 0.1 * inverse_interval),
-        (0.1 * inverse_interval, 0.1 * inverse_interval),
-        (0.1 * inverse_interval, 1.0 * inverse_interval),
-        (1.0 * inverse_interval, 0.1 * inverse_interval),
-        (1.0 * inverse_interval, 1.0 * inverse_interval),
-    )
-    best = None
-    for damping, frequency in starts:
-        candidate = least_squares(
-            residual,
-            np.log([damping, frequency]),
-            bounds=(-30.0, 30.0),
-        )
-        if best is None or candidate.cost < best.cost:
-            best = candidate
-    if best is None:  # pragma: no cover
-        raise RuntimeError("damped recurrence optimization did not run")
-    coefficients, damping, frequency = _damped_coefficients(
-        best.x,
-        sample_interval,
-    )
+    adjusted_target = target + design[:, 1]
+    denominator = float(np.dot(design[:, 0], design[:, 0]))
+    if denominator <= np.finfo(float).tiny:
+        raise ValueError("leading lag has no training variation")
+    coefficient = float(np.dot(design[:, 0], adjusted_target) / denominator)
+    coefficient = float(np.clip(coefficient, -2.0, 2.0))
+    coefficients = np.asarray([coefficient, -1.0], dtype=float)
     metrics = _recurrence_metrics(prepared, coefficients)
-    poles = np.roots(np.concatenate(([1.0], -coefficients)))
-    return DampedSecondOrderFit(
+    poles = np.asarray(
+        np.roots(np.concatenate(([1.0], -coefficients))),
+        dtype=np.complex128,
+    )
+    angular = float(math.acos(np.clip(0.5 * coefficient, -1.0, 1.0)))
+    return ConservativeOscillatorFit(
+        coefficient=coefficient,
         coefficients=coefficients,
-        poles=np.asarray(poles, dtype=np.complex128),
-        damping_rate=damping,
-        natural_frequency=frequency,
+        poles=poles,
+        angular_frequency=angular / float(sample_interval),
         train_one_step_rmse=metrics[0],
         test_one_step_rmse=metrics[1],
         test_rollout_rmse=metrics[2],
@@ -371,26 +632,23 @@ def impulse_hankel_spectrum(
     if stop > values.shape[0]:
         raise ValueError("response is too short for requested Hankel blocks")
 
-    scales = np.sqrt(np.mean(values[:stop] * values[:stop], axis=0))
+    flattened = values.reshape(values.shape[0], -1)
+    scales = np.sqrt(np.mean(flattened[:stop] * flattened[:stop], axis=0))
     maximum = float(np.max(scales))
     floor = max(
         relative_channel_floor * maximum,
-        np.finfo(float).eps * max(1.0, float(np.max(np.abs(values[:stop])))),
+        np.finfo(float).eps * max(1.0, float(np.max(np.abs(flattened[:stop])))),
     )
     active = scales > floor
     if not np.any(active):
         raise ValueError("no response channel clears the registered signal floor")
+    standardized = flattened[:, active] / scales[active][None, :]
     columns = []
-    for panel in range(values.shape[1]):
-        channel_mask = active[panel]
-        if not np.any(channel_mask):
-            continue
-        panel_values = values[:, panel, channel_mask] / scales[panel, channel_mask]
-        for column in range(block_columns):
-            block = panel_values[
-                start_index + column : start_index + column + block_rows
-            ]
-            columns.append(block.reshape(-1))
+    for column in range(block_columns):
+        block = standardized[
+            start_index + column : start_index + column + block_rows
+        ]
+        columns.append(block.reshape(-1))
     hankel = np.column_stack(columns)
     singular = np.linalg.svd(hankel, compute_uv=False)
     if singular.size == 0 or singular[0] <= 0.0:
