@@ -35,6 +35,7 @@ def _args() -> argparse.Namespace:
         perturbation_fractions="0.005,0.01",
         extinction_updates=800,
         sample_every=5,
+        delay_order=8,
     )
 
 
@@ -72,6 +73,48 @@ def test_rank_two_gate_checks_energy_and_third_singular_value() -> None:
 
     assert rank_two["rank_two_pass"]
     assert not higher_rank["rank_two_pass"]
+
+
+def test_second_state_gate_does_not_require_complex_poles() -> None:
+    first = SimpleNamespace(
+        fit_test_rollout_rmse=1.0,
+        readout_test_rollout_rmse=1.0,
+    )
+    second = SimpleNamespace(
+        fit_test_rollout_rmse=0.7,
+        readout_test_rollout_rmse=0.7,
+        stable=True,
+    )
+    delay = SimpleNamespace(
+        fit_test_rollout_rmse=0.68,
+        readout_test_rollout_rmse=0.68,
+    )
+    interpretation = SimpleNamespace(
+        stable=True,
+        embeddable=True,
+        underdamped=False,
+    )
+    fits = {
+        "models": {"1": first, "2": second, "8": delay},
+        "continuous_interpretation": interpretation,
+        "rank_two_pass": True,
+    }
+    signal = {"pass": True}
+
+    state_checks = reconciliation._second_state_checks(
+        fits,
+        signal,
+        signal,
+        _args(),
+    )
+    oscillation_checks = reconciliation._oscillation_checks(
+        fits,
+        second_state_selected=all(state_checks.values()),
+    )
+
+    assert all(state_checks.values())
+    assert oscillation_checks["second_state_selected"]
+    assert not oscillation_checks["stable_underdamped_poles"]
 
 
 def test_archive_retains_diagonal_features_and_full_cross_modes(tmp_path: Path) -> None:

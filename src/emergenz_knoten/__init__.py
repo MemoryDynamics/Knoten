@@ -182,6 +182,7 @@ from .impulse_identification import (
     HeldOutReadoutRecurrenceFit,
     ImpulseHankelSpectrum,
     SharedRecurrenceFit,
+    WeightedInputBasis,
     fit_conservative_recurrence_with_held_out_readout,
     fit_conservative_second_order_recurrence,
     fit_damped_second_order_recurrence,
@@ -189,7 +190,9 @@ from .impulse_identification import (
     fit_shared_recurrence,
     impulse_hankel_spectrum,
     interpret_continuous_second_order,
+    weighted_orthogonal_input_basis,
 )
+from .evidence_gates import EvidenceGate, GateStatus, evaluate_evidence_gate
 from .quasistatic_pair import (
     RigidPairInteraction,
     VisibleMemoryReciprocalInteraction,
@@ -456,6 +459,7 @@ __all__ = [
     "SimulationRunner",
     "SimulationResult",
     "SharedRecurrenceFit",
+    "WeightedInputBasis",
     "ScalarReadoutKernel",
     "SpectralDimensionResult",
     "SpectralMemoryConfig",
@@ -541,6 +545,10 @@ __all__ = [
     "instantaneous_radial_force",
     "impulse_hankel_spectrum",
     "interpret_continuous_second_order",
+    "weighted_orthogonal_input_basis",
+    "EvidenceGate",
+    "GateStatus",
+    "evaluate_evidence_gate",
     "initialize_oriented_memory_state",
     "initialize_collapsed_potential_state",
     "initialize_spectral_memory_state",

@@ -10,6 +10,7 @@ from emergenz_knoten import (
     fit_shared_recurrence,
     impulse_hankel_spectrum,
     interpret_continuous_second_order,
+    weighted_orthogonal_input_basis,
 )
 
 
@@ -137,3 +138,52 @@ def test_hankel_spectrum_keeps_a_common_layout_with_quiet_panel_channels() -> No
 
     assert spectrum.active_channels == 4
     assert spectrum.numerical_rank_1e6 == 1
+
+
+def test_weighted_input_basis_discards_nearly_collinear_null_direction() -> None:
+    profile_matrix = np.array(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+            [1.0, 1.0 + 1e-5],
+        ]
+    )
+    gram = profile_matrix @ profile_matrix.T
+    grams = np.stack((gram, 1.1 * gram, 0.9 * gram))
+
+    basis = weighted_orthogonal_input_basis(
+        grams,
+        relative_eigenvalue_floor=1e-3,
+    )
+
+    assert basis.retained_rank == 2
+    assert basis.mean_supported_rank == 2
+    assert basis.coefficients.shape == (3, 2)
+    np.testing.assert_allclose(basis.transformed_mean_gram, np.eye(2), atol=1e-12)
+
+
+def test_weighted_input_basis_rejects_indefinite_mean_gram() -> None:
+    grams = np.array([[[1.0, 2.0], [2.0, 1.0]]])
+
+    with np.testing.assert_raises_regex(ValueError, "positive semidefinite"):
+        weighted_orthogonal_input_basis(grams)
+
+
+def test_weighted_input_basis_requires_support_in_each_repeated_sample() -> None:
+    grams = np.array(
+        [
+            [[1.0, 0.0], [0.0, 1e-4]],
+            [[1.0, 0.0], [0.0, 1.0]],
+        ]
+    )
+
+    basis = weighted_orthogonal_input_basis(
+        grams,
+        relative_eigenvalue_floor=1e-2,
+        max_sample_condition=100.0,
+    )
+
+    assert basis.mean_supported_rank == 2
+    assert basis.retained_rank == 1
+    assert basis.prefix_max_sample_conditions[0] == 1.0
+    assert basis.prefix_max_sample_conditions[1] > 100.0

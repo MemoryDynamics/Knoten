@@ -178,6 +178,121 @@ class ImpulseHankelSpectrum:
 
 
 @dataclass(frozen=True)
+class WeightedInputBasis:
+    """Common orthonormal basis inferred from weighted input-profile Gramians."""
+
+    mean_gram: np.ndarray
+    eigenvalues: np.ndarray
+    relative_eigenvalues: np.ndarray
+    coefficients: np.ndarray
+    transformed_mean_gram: np.ndarray
+    sample_condition_numbers: np.ndarray
+    prefix_max_sample_conditions: np.ndarray
+    mean_supported_rank: int
+    retained_rank: int
+    relative_eigenvalue_floor: float
+    max_sample_condition: float
+
+
+def weighted_orthogonal_input_basis(
+    grams: np.ndarray,
+    *,
+    relative_eigenvalue_floor: float = 1e-2,
+    max_sample_condition: float = 100.0,
+) -> WeightedInputBasis:
+    """Whiten the empirically supported span of several profile Gramians.
+
+    Rows of ``grams`` may represent seeds, axes, or other repeated states. The
+    eigensystem is computed from their arithmetic mean, which remains positive
+    semidefinite. Directions below the fixed relative floor are discarded
+    instead of being amplified by an unstable inverse.
+    """
+
+    values = np.asarray(grams, dtype=float)
+    if (
+        values.ndim != 3
+        or values.shape[0] < 1
+        or values.shape[1] < 1
+        or values.shape[1] != values.shape[2]
+        or not np.isfinite(values).all()
+    ):
+        raise ValueError("grams must be finite with shape (samples, modes, modes)")
+    if (
+        not np.isfinite(relative_eigenvalue_floor)
+        or not 0.0 < relative_eigenvalue_floor < 1.0
+    ):
+        raise ValueError("relative_eigenvalue_floor must lie in (0, 1)")
+    if not np.isfinite(max_sample_condition) or max_sample_condition < 1.0:
+        raise ValueError("max_sample_condition must be finite and at least one")
+    if not np.allclose(values, np.swapaxes(values, 1, 2), atol=1e-10, rtol=1e-10):
+        raise ValueError("profile Gramians must be symmetric")
+
+    sample_eigenvalues = np.linalg.eigvalsh(values)
+    sample_scale = max(float(np.max(np.abs(sample_eigenvalues))), 1.0)
+    if float(np.min(sample_eigenvalues)) < -1e-10 * sample_scale:
+        raise ValueError("each profile Gramian must be positive semidefinite")
+
+    mean_gram = np.mean(values, axis=0)
+    mean_gram = 0.5 * (mean_gram + mean_gram.T)
+    eigenvalues, eigenvectors = np.linalg.eigh(mean_gram)
+    order = np.argsort(eigenvalues)[::-1]
+    eigenvalues = eigenvalues[order]
+    eigenvectors = eigenvectors[:, order]
+    scale = max(float(eigenvalues[0]), np.finfo(float).tiny)
+    tolerance = max(
+        np.finfo(float).eps * values.shape[1] * scale,
+        1e-12 * scale,
+    )
+    if float(eigenvalues[-1]) < -tolerance:
+        raise ValueError("mean profile Gramian is not positive semidefinite")
+    eigenvalues = np.maximum(eigenvalues, 0.0)
+    relative = eigenvalues / scale
+    mean_supported_rank = int(np.count_nonzero(relative >= relative_eigenvalue_floor))
+    if mean_supported_rank < 1:
+        raise ValueError("no input direction clears the relative eigenvalue floor")
+
+    prefix_conditions = []
+    robust_rank = 0
+    for rank in range(1, mean_supported_rank + 1):
+        prefix = eigenvectors[:, :rank] / np.sqrt(eigenvalues[:rank])[None, :]
+        transformed_samples = np.asarray(
+            [prefix.T @ gram @ prefix for gram in values]
+        )
+        conditions = np.asarray(
+            [np.linalg.cond(sample) for sample in transformed_samples],
+            dtype=float,
+        )
+        maximum = float(np.max(conditions))
+        prefix_conditions.append(maximum)
+        if robust_rank == rank - 1 and maximum <= max_sample_condition:
+            robust_rank = rank
+    if robust_rank < 1:
+        raise ValueError("no common input direction satisfies the sample condition gate")
+
+    coefficients = eigenvectors[:, :robust_rank] / np.sqrt(
+        eigenvalues[:robust_rank]
+    )[None, :]
+    transformed = coefficients.T @ mean_gram @ coefficients
+    sample_conditions = np.asarray(
+        [np.linalg.cond(coefficients.T @ gram @ coefficients) for gram in values],
+        dtype=float,
+    )
+    return WeightedInputBasis(
+        mean_gram=mean_gram,
+        eigenvalues=eigenvalues,
+        relative_eigenvalues=relative,
+        coefficients=coefficients,
+        transformed_mean_gram=transformed,
+        sample_condition_numbers=sample_conditions,
+        prefix_max_sample_conditions=np.asarray(prefix_conditions, dtype=float),
+        mean_supported_rank=mean_supported_rank,
+        retained_rank=robust_rank,
+        relative_eigenvalue_floor=float(relative_eigenvalue_floor),
+        max_sample_condition=float(max_sample_condition),
+    )
+
+
+@dataclass(frozen=True)
 class _PreparedRecurrence:
     values: np.ndarray
     scales: np.ndarray

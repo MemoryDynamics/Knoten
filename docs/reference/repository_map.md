@@ -122,7 +122,9 @@ flowchart TD
     finite_k --> emergent_mode_gate
     impulse_id --> emergent_mode_gate
     emergent_mode_gate --> p38e_null["0/5 temporal pass<br/>canonical null not rejected"]
-    p38e_null -.last scalar check.-> write_port["P3.8f zero-net deposition pulse"]
+    p38e_null --> split_gates["G0 validity -> G1 identifiability<br/>G2 second state -> G3 phase"]
+    split_gates -.last scalar check.-> write_port["P3.8f zero-net deposition pulse"]
+    write_port -.conditional.-> pair_gate["G4 one-way two-node transfer"]
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]
     markov --> features["features.py<br/>memory-summary features"]

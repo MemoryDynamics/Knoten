@@ -773,6 +773,22 @@ Prioritaetsfolge:
     muss erst ueber balancierte Kontrollier-/Beobachtbarkeit, reziproke
     Leistungsports und eine positive Speichermetrik bestehen.
 
+    **Ausfuehrungsreihenfolge aktualisiert:** Das fruehere Composite-Gate ist
+    jetzt in `G0` experimentelle Gueltigkeit, `G1` Identifizierbarkeit, `G2`
+    zweiter Zustand und `G3` komplexe Phase getrennt. `G1`-Mangel ergibt
+    `inconclusive`; nachgelagerte Gates sind dann `blocked`. Die vorhandenen
+    Profile besitzen nach Mittelwert-Support formal Rang 5, aber nur robusten
+    gemeinsamen Rang 4 bei relativer Eigenwertschwelle `1e-2` und maximaler
+    Sample-Kondition `100`; die instabile fuenfte Richtung wird nicht
+    invertiert. G2 verlangt keine komplexen Pole. Erst G3 tut dies.
+
+    P3.8f wird zunaechst lokal und seedweise shardbar implementiert. Ein
+    manueller GitHub-Actions-Worker folgt erst nach einem kuratierten,
+    versionierten Fuenf-State-Bundle und einem Aggregate-Manifest. Die
+    wissenschaftlichen Gates bleiben sequentiell; nur die Seed-Simulationen
+    duerfen parallel laufen. Protokoll:
+    `reports/project/meta/preregistration/p38f_split_gate_execution_protocol_2026-08-14.md`.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

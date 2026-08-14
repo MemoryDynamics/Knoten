@@ -1303,6 +1303,24 @@ skalaren Modells. Orientiertes/current Memory oder ein gemeinsames
 Mehrquellenfeld waeren danach explizite neue Zustandsannahmen, keine
 Reparametrisierung von `rho`.
 
+Die Auswertung verwendet ab P3.8f eine Abhaengigkeitshierarchie statt eines
+Composite-Booleans. Experimentelle Gueltigkeit (`G0`) und Input-Output-
+Identifizierbarkeit (`G1`) gehen der physikalischen Modellordnungsfrage voraus.
+Ein nichtinformatives Holdout ist `inconclusive`; es darf nicht als Scheitern
+eines zweiten Zustands verbucht werden. `G2` selektiert eine stabile effektive
+zweite Ordnung und erlaubt ausdruecklich zwei reelle, ueberdaempfte Pole. Erst
+`G3` fragt nach einem komplexen Polpaar und damit nach einem Phasenmodus.
+Source-Target-Transfer und Dispersion sind nachgelagerte Zwei-Knoten-Gates.
+
+Fuer die vorhandenen fuenf `kR_mem`-Profile zeigt eine Mittelwert-Gramian zwar
+fuenf Richtungen oberhalb `1e-2` des groessten Eigenwerts. Eine Whitening-Basis
+mit allen fuenf Richtungen erreicht in einzelnen Seed-/Achsenfaellen jedoch
+eine Kondition von etwa `5.2e3`. Der groesste gemeinsame Prefix mit maximaler
+Sample-Kondition `100` hat Rang 4 und bleibt unter `31`. Diese robuste
+Rangreduktion ersetzt weder ein Signalgate noch eine Zustandsidentifikation;
+sie verhindert nur die Verstaerkung einer nahezu unidentifizierbaren
+Eingangsrichtung.
+
 Unterschiedliche transiente Basinwahl durch Ueberschreiten einer Separatrix
 bleibt bei zweiter Ordnung moeglich und kann mit einer festen
 Anfangszustandsleiter getestet werden. Auch ein positiver Befund waere jedoch

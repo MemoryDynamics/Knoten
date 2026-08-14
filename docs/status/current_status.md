@@ -568,6 +568,16 @@ ein weiterer Fail schliesst die skalare `(m,p)`-Route und verschiebt
 orientiertes Memory oder ein gemeinsames Mehrquellenfeld in eine offen
 deklarierte Modellerweiterung.
 
+Die Entscheidung ist jetzt maschinenlesbar in getrennte Gates zerlegt. Im
+retrospektiven P3.8e-Audit besteht `experimental-validity`; `input-output-
+identifiability` bleibt wegen des Memory-Holdouts `inconclusive`. Deshalb sind
+`second-state-selection` und `oscillatory-phase-mode` `blocked`, nicht als
+physikalische Fails gewertet. Die Gram-Eingangsfamilie besitzt robusten
+gemeinsamen Rang 4; eine fuenfte nur im Mittel sichtbare Richtung wird wegen
+Sample-Kondition bis etwa `5.2e3` verworfen. P3.8f prueft zuerst G2 ohne
+Komplexpolpflicht und nur danach G3. Ein Zwei-Knoten-Transfer ist ein eigener
+nachgelagerter Zweig.
+
 Langzeitlaeufe dienen fuer P3.8e der Altersstationaritaet der gemessenen
 Suszeptibilitaet. Ein laengerer Lauf des konstruierten P3.8d-Mediators kann
 wegen seiner Lyapunov-Bilanz weder `(m,p)` noch die zweite Zeitordnung

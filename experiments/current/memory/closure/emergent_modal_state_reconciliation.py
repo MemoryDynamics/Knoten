@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from emergenz_knoten import (
+    GateStatus,
     FiniteMemoryState,
     SimulationConfig,
     fit_conservative_recurrence_with_held_out_readout,
@@ -33,6 +34,8 @@ from emergenz_knoten import (
     longitudinal_memory_mode_profiles,
     paired_finite_k_memory_response,
     paired_uniform_probe_response,
+    evaluate_evidence_gate,
+    weighted_orthogonal_input_basis,
 )
 
 
@@ -483,6 +486,54 @@ def _fit_control_models(values: np.ndarray, args: argparse.Namespace) -> dict[st
     return {"models": shared, "conservative": conservative}
 
 
+def _second_state_checks(
+    fits: dict[str, Any],
+    memory_signal: dict[str, Any],
+    visible_signal: dict[str, Any],
+    args: argparse.Namespace,
+) -> dict[str, bool]:
+    """Return order-selection checks without imposing oscillatory poles."""
+
+    first = fits["models"]["1"]
+    second = fits["models"]["2"]
+    delay = fits["models"][str(args.delay_order)]
+    return {
+        "memory_ar2_advantage": bool(
+            second.fit_test_rollout_rmse <= 0.8 * first.fit_test_rollout_rmse
+        ),
+        "heldout_visible_ar2_advantage": bool(
+            second.readout_test_rollout_rmse
+            <= 0.8 * first.readout_test_rollout_rmse
+        ),
+        "closes_delay_memory": bool(
+            second.fit_test_rollout_rmse <= 1.1 * delay.fit_test_rollout_rmse
+        ),
+        "closes_delay_visible": bool(
+            second.readout_test_rollout_rmse
+            <= 1.1 * delay.readout_test_rollout_rmse
+        ),
+        "stable_second_order": bool(second.stable),
+        "rank_two_hankel": bool(fits["rank_two_pass"]),
+        "memory_signal_in_holdout": bool(memory_signal["pass"]),
+        "visible_signal_in_holdout": bool(visible_signal["pass"]),
+    }
+
+
+def _oscillation_checks(
+    fits: dict[str, Any],
+    *,
+    second_state_selected: bool,
+) -> dict[str, bool]:
+    interpretation = fits["continuous_interpretation"]
+    return {
+        "second_state_selected": bool(second_state_selected),
+        "continuous_embedding": bool(interpretation.embeddable),
+        "stable_underdamped_poles": bool(
+            interpretation.stable and interpretation.underdamped
+        ),
+    }
+
+
 def _seed_rows(
     records: dict[tuple[str, str, float, int], dict[str, Any]],
     cases: list[CanonicalCase],
@@ -513,34 +564,36 @@ def _seed_rows(
         visible_signal = _balanced_signal_diagnostics(
             values[:, :, :1], sample_steps, args
         )
-        fit_advantage = second.fit_test_rollout_rmse <= 0.8 * first.fit_test_rollout_rmse
-        readout_advantage = (
-            second.readout_test_rollout_rmse
-            <= 0.8 * first.readout_test_rollout_rmse
+        state_checks = _second_state_checks(
+            fits,
+            memory_signal,
+            visible_signal,
+            args,
         )
-        passed = bool(
-            fit_advantage
-            and readout_advantage
-            and second.fit_test_rollout_rmse <= 1.1 * delay.fit_test_rollout_rmse
-            and second.readout_test_rollout_rmse
-            <= 1.1 * delay.readout_test_rollout_rmse
-            and second.stable
-            and interpretation.underdamped
-            and fits["rank_two_pass"]
-            and memory_signal["pass"]
-            and visible_signal["pass"]
+        state_pass = all(state_checks.values())
+        oscillation_checks = _oscillation_checks(
+            fits,
+            second_state_selected=state_pass,
         )
+        oscillation_pass = all(oscillation_checks.values())
         rows.append(
             {
                 "seed": case.seed,
                 "first_order": first,
                 "second_order": second,
                 "continuous_interpretation": interpretation,
-                "fit_advantage": fit_advantage,
-                "readout_advantage": readout_advantage,
+                "delay_order": delay,
+                "fit_advantage": state_checks["memory_ar2_advantage"],
+                "readout_advantage": state_checks[
+                    "heldout_visible_ar2_advantage"
+                ],
                 "memory_signal": memory_signal,
                 "visible_signal": visible_signal,
-                "pass": passed,
+                "second_state_checks": state_checks,
+                "second_state_pass": state_pass,
+                "oscillation_checks": oscillation_checks,
+                "oscillation_pass": oscillation_pass,
+                "pass": oscillation_pass,
             }
         )
     return rows
@@ -611,12 +664,8 @@ def analyze(
         control_values = control[analysis_mask, :, k_index]
         active_fit = _fit_active_models(active_values, args)
         control_fit = _fit_control_models(control_values, args)
-        first = active_fit["models"]["1"]
-        second = active_fit["models"]["2"]
-        delay = active_fit["models"][str(args.delay_order)]
         control_first = control_fit["models"]["1"]
         control_second = control_fit["models"]["2"]
-        interpretation = active_fit["continuous_interpretation"]
         memory_signal = _balanced_signal_diagnostics(
             active_values[:, :, 1:], sample_steps[analysis_mask], args
         )
@@ -632,29 +681,29 @@ def analyze(
             sample_steps=sample_steps[analysis_mask],
             args=args,
         )
-        seed_passes = sum(row["pass"] for row in seed_rows)
+        seed_state_passes = sum(row["second_state_pass"] for row in seed_rows)
+        seed_oscillation_passes = sum(row["oscillation_pass"] for row in seed_rows)
+        state_gates = _second_state_checks(
+            active_fit,
+            memory_signal,
+            visible_signal,
+            args,
+        )
+        state_gates["seed_reproducibility"] = seed_state_passes >= 4
+        second_state_pass = all(state_gates.values())
+        oscillation_gates = _oscillation_checks(
+            active_fit,
+            second_state_selected=second_state_pass,
+        )
+        oscillation_gates["seed_reproducibility"] = (
+            seed_oscillation_passes >= 4
+        )
+        oscillation_pass = all(oscillation_gates.values())
         gates = {
-            "memory_ar2_advantage": (
-                second.fit_test_rollout_rmse <= 0.8 * first.fit_test_rollout_rmse
-            ),
-            "heldout_visible_ar2_advantage": (
-                second.readout_test_rollout_rmse
-                <= 0.8 * first.readout_test_rollout_rmse
-            ),
-            "closes_delay_memory": (
-                second.fit_test_rollout_rmse <= 1.1 * delay.fit_test_rollout_rmse
-            ),
-            "closes_delay_visible": (
-                second.readout_test_rollout_rmse
-                <= 1.1 * delay.readout_test_rollout_rmse
-            ),
-            "stable_underdamped": bool(
-                second.stable and interpretation.embeddable and interpretation.underdamped
-            ),
-            "rank_two_hankel": bool(active_fit["rank_two_pass"]),
-            "memory_signal_in_holdout": bool(memory_signal["pass"]),
-            "visible_signal_in_holdout": bool(visible_signal["pass"]),
-            "seed_reproducibility": seed_passes >= 4,
+            **state_gates,
+            "stable_underdamped": oscillation_gates[
+                "stable_underdamped_poles"
+            ],
         }
         rows.append(
             {
@@ -662,7 +711,9 @@ def analyze(
                 "active": active_fit,
                 "eta_zero": control_fit,
                 "seed_rows": seed_rows,
-                "seed_passes": seed_passes,
+                "seed_state_passes": seed_state_passes,
+                "seed_oscillation_passes": seed_oscillation_passes,
+                "seed_passes": seed_oscillation_passes,
                 "memory_signal": memory_signal,
                 "visible_signal": visible_signal,
                 "eta_zero_ar2_over_ar1": _ratio(
@@ -670,7 +721,11 @@ def analyze(
                     control_first.test_rollout_rmse,
                 ),
                 "gates": gates,
-                "pass": all(gates.values()),
+                "second_state_gates": state_gates,
+                "second_state_pass": second_state_pass,
+                "oscillation_gates": oscillation_gates,
+                "oscillation_pass": oscillation_pass,
+                "pass": oscillation_pass,
             }
         )
 
@@ -712,8 +767,23 @@ def analyze(
         [value for row in case_rows if row["update_index"] == cases[0].update_index for value in row["profile_conditions"]]
     )
     off_diagonal = grams - np.eye(kr_values.size)[None, :, :]
+    input_basis = weighted_orthogonal_input_basis(
+        grams,
+        relative_eigenvalue_floor=1e-2,
+    )
     spatial_input = {
         "median_gram": np.median(grams, axis=0),
+        "mean_gram": input_basis.mean_gram,
+        "gram_eigenvalues": input_basis.eigenvalues,
+        "relative_gram_eigenvalues": input_basis.relative_eigenvalues,
+        "basis_coefficients": input_basis.coefficients,
+        "orthogonalized_mean_gram": input_basis.transformed_mean_gram,
+        "sample_condition_numbers": input_basis.sample_condition_numbers,
+        "prefix_max_sample_conditions": input_basis.prefix_max_sample_conditions,
+        "mean_supported_rank": input_basis.mean_supported_rank,
+        "retained_rank": input_basis.retained_rank,
+        "relative_eigenvalue_floor": input_basis.relative_eigenvalue_floor,
+        "max_sample_condition": input_basis.max_sample_condition,
         "condition_min": float(np.min(conditions)),
         "condition_median": float(np.median(conditions)),
         "condition_max": float(np.max(conditions)),
@@ -721,6 +791,12 @@ def analyze(
         "independent_mode_gate": bool(
             np.median(conditions) <= 100.0
             and np.max(np.abs(off_diagonal)) <= 0.95
+        ),
+        "rank_reduced_second_state_eligibility": bool(
+            input_basis.retained_rank >= 2
+        ),
+        "rank_reduced_dispersion_eligibility": bool(
+            input_basis.retained_rank >= 4
         ),
     }
 
@@ -864,7 +940,9 @@ def analyze(
             }
         )
 
-    temporal_passes = sum(row["pass"] for row in rows)
+    second_state_passes = sum(row["second_state_pass"] for row in rows)
+    oscillation_passes = sum(row["oscillation_pass"] for row in rows)
+    temporal_passes = oscillation_passes
     informative_holdout_channels = sum(
         row["memory_signal"]["pass"] and row["visible_signal"]["pass"]
         for row in rows
@@ -883,6 +961,55 @@ def analyze(
         decision = "second-order-candidate-spatial-modes-unresolved"
     else:
         decision = "second-order-candidate"
+
+    validity_gate = evaluate_evidence_gate(
+        "experimental-validity",
+        {name: bool(value) for name, value in control_gates.items()},
+    )
+    identifiability_gate = evaluate_evidence_gate(
+        "input-output-identifiability",
+        {
+            "informative_holdout_channels": informative_holdout_channels >= 4,
+            "rank_reduced_input_span": bool(
+                spatial_input["rank_reduced_second_state_eligibility"]
+            ),
+        },
+        prerequisites=(validity_gate,),
+        failed_status=GateStatus.INCONCLUSIVE,
+    )
+    second_state_gate = evaluate_evidence_gate(
+        "second-state-selection",
+        {
+            "four_of_five_temporal_channels": second_state_passes >= 4,
+            "formation_age_reconciliation": age_reconciliation,
+        },
+        prerequisites=(identifiability_gate,),
+    )
+    oscillation_gate = evaluate_evidence_gate(
+        "oscillatory-phase-mode",
+        {
+            "four_of_five_oscillatory_channels": oscillation_passes >= 4,
+            "formation_age_reconciliation": age_reconciliation,
+        },
+        prerequisites=(second_state_gate,),
+    )
+    channel_gate = evaluate_evidence_gate("two-node-transfer-channel", None)
+    dispersion_gate = evaluate_evidence_gate(
+        "multi-mode-dispersion",
+        None,
+        prerequisites=(channel_gate,),
+    )
+    gate_hierarchy = {
+        gate.name: gate
+        for gate in (
+            validity_gate,
+            identifiability_gate,
+            second_state_gate,
+            oscillation_gate,
+            channel_gate,
+            dispersion_gate,
+        )
+    }
     return {
         "rows": rows,
         "controls": controls,
@@ -892,9 +1019,12 @@ def analyze(
         "age_comparisons": age_comparisons,
         "age_passes": age_passes,
         "age_reconciliation": age_reconciliation,
+        "second_state_passes": second_state_passes,
+        "oscillation_passes": oscillation_passes,
         "temporal_passes": temporal_passes,
         "informative_holdout_channels": informative_holdout_channels,
         "temporal_candidate": temporal_candidate,
+        "gate_hierarchy": gate_hierarchy,
         "decision": decision,
         "scientific_classification": (
             "null-not-rejected-memory-holdout-limited"
@@ -1057,7 +1187,7 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "",
         "## Verdict",
         "",
-        f"Decision: **`{analysis['decision']}`**.",
+        f"Historical composite decision: **`{analysis['decision']}`**.",
         f"Scientific classification: **`{analysis['scientific_classification']}`**.",
         "",
         "The historical P3.8e decision is superseded as",
@@ -1068,57 +1198,84 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
         "The result is not a scalar-memory no-go: only 0/5 channels retain both",
         "memory and visible signal under the fixed holdout-energy criterion.",
         "",
-        "## Why AR(2) and 'damped AR(2)' were identical",
+        "## Split evidence gates",
         "",
-        "For an underdamped continuous equation sampled every `Delta`,",
+        "This is a retrospective decomposition of the registered composite gate,",
+        "not a post-hoc replacement decision. A failed adequacy check is reported as",
+        "`inconclusive`; downstream physical claims are then `blocked` rather than",
+        "silently counted as failures.",
         "",
-        r"\[a_1=2e^{-\gamma\Delta}\cos(\omega_d\Delta),\qquad a_2=-e^{-2\gamma\Delta}.\]",
-        "",
-        "Every stable conjugate-pole real AR(2) has this representation. The old",
-        "'damped' fit therefore reparameterized the same two free coefficients and",
-        "was not an independent model. The corrected table compares free AR(2) with",
-        "the genuinely different undamped constraint `a2=-1`; damping/frequency are",
-        "now labels inferred from free poles, not a second fit or pass criterion.",
-        "",
-        "## Review corrections executed",
-        "",
-        "- active and `eta=0` responses are fitted separately; their difference is",
-        "  not treated as a transfer function;",
-        "- every order uses targets starting at sample 8 and the same 60/40 split;",
-        "- the analysis ends at the known 600-update memory horizon, placing held-out",
-        "  targets inside the signal-bearing transient; update 800 is extinction-only;",
-        "- coefficients are learned from real/imaginary memory Fourier readouts; the",
-        "  visible relative coordinate is scored without contributing to the fit;",
-        "- rank-two Hankel energy/gap and 4/5 seed replication are decision gates;",
-        "- the Hankel matrix now stacks all panel readouts into one output vector;",
-        "  only chronological shifts form columns, preventing residue-induced rank;",
-        "- the `N=3M` and `N=100M` age pair uses the same future-noise realization;",
-        "- the weighted Gram matrix tests whether nominal `kR` inputs are independent.",
-        "- full cross-`k` responses remain archived; diagonal leakage is a separate",
-        "  diagnostic rather than being silently discarded.",
-        "",
-        "## Numerical controls",
-        "",
-        "| diagnostic | value | pass |",
-        "|---|---:|:---:|",
-        f"| uniform identity error | {controls['uniform_identity_error']:.3e} | {'yes' if analysis['control_gates']['uniform_identity'] else 'no'} |",
-        f"| eta-zero extinction at update 800 | {controls['eta_zero_extinction']:.3e} | {'yes' if analysis['control_gates']['eta_zero_extinction'] else 'no'} |",
-        f"| active strength linearity, median / max | {controls['active_linearity_median']:.3f} / {controls['active_linearity_max']:.3f} | {'yes' if analysis['control_gates']['active_linearity'] else 'no'} |",
-        f"| active full-mode linearity, median / max | {controls['active_full_mode_linearity_median']:.3f} / {controls['active_full_mode_linearity_max']:.3f} | {'yes' if analysis['control_gates']['active_linearity'] else 'no'} |",
-        f"| eta-zero strength linearity, median / max | {controls['eta_zero_linearity_median']:.3f} / {controls['eta_zero_linearity_max']:.3f} | {'yes' if analysis['control_gates']['eta_zero_linearity'] else 'no'} |",
-        f"| eta-zero full-mode linearity, median / max | {controls['eta_zero_full_mode_linearity_median']:.3f} / {controls['eta_zero_full_mode_linearity_max']:.3f} | {'yes' if analysis['control_gates']['eta_zero_linearity'] else 'no'} |",
-        f"| maximum radius-ratio disturbance | {controls['radius_change_max']:.3f} | {'yes' if analysis['control_gates']['shape_bounded'] else 'no'} |",
-        f"| active / feedback cross-k diagonal fraction | {controls['active_cross_k_diagonal_fraction_median']:.3f} / {controls['feedback_cross_k_diagonal_fraction_median']:.3f} | diagnostic |",
-        "",
-        "## Corrected temporal comparison",
-        "",
-        "Ratios are recursive held-out visible RMSE divided by its zero null. AR(2)",
-        "coefficients are fitted only on memory readouts. `eta0 AR2/AR1` uses the",
-        "memory-fit rollout because its visible response is exactly zero.",
-        "",
-        "| kR | AR(1) | AR(2) | undamped | AR(8) | eta0 AR2/AR1 | mem holdout E | vis holdout E | rank-2 energy | s3/s2 | seed pass | poles | gate |",
-        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|:---:|",
+        "| gate | status | failed checks | blocked by |",
+        "|---|---|---|---|",
     ]
+    for gate in analysis["gate_hierarchy"].values():
+        failed = ", ".join(gate["failed_checks"]) or "-"
+        blocked = ", ".join(gate["blocked_by"]) or "-"
+        lines.append(
+            f"| `{gate['name']}` | **`{gate['status']}`** | "
+            f"{failed} | {blocked} |"
+        )
+    lines.extend(
+        [
+            "",
+            f"Diagnostic second-state channels before hierarchy blocking: **{analysis['second_state_passes']}/5**.",
+            f"Diagnostic oscillatory channels: **{analysis['oscillation_passes']}/5**.",
+            "The present experiment is therefore measurement-limited before either",
+            "physical claim can be decided. P3.8f must first repair the canonical write",
+            "port and holdout support; it must not weaken the pole criterion.",
+            "",
+            "## Why AR(2) and 'damped AR(2)' were identical",
+            "",
+            "For an underdamped continuous equation sampled every `Delta`,",
+            "",
+            r"\[a_1=2e^{-\gamma\Delta}\cos(\omega_d\Delta),\qquad a_2=-e^{-2\gamma\Delta}.\]",
+            "",
+            "Every stable conjugate-pole real AR(2) has this representation. The old",
+            "'damped' fit therefore reparameterized the same two free coefficients and",
+            "was not an independent model. The corrected table compares free AR(2) with",
+            "the genuinely different undamped constraint `a2=-1`; damping/frequency are",
+            "now labels inferred from free poles, not a second fit or pass criterion.",
+            "",
+            "## Review corrections executed",
+            "",
+            "- active and `eta=0` responses are fitted separately; their difference is",
+            "  not treated as a transfer function;",
+            "- every order uses targets starting at sample 8 and the same 60/40 split;",
+            "- the analysis ends at the known 600-update memory horizon, placing held-out",
+            "  targets inside the signal-bearing transient; update 800 is extinction-only;",
+            "- coefficients are learned from real/imaginary memory Fourier readouts; the",
+            "  visible relative coordinate is scored without contributing to the fit;",
+            "- rank-two Hankel energy/gap and 4/5 seed replication are decision gates;",
+            "- the Hankel matrix now stacks all panel readouts into one output vector;",
+            "  only chronological shifts form columns, preventing residue-induced rank;",
+            "- the `N=3M` and `N=100M` age pair uses the same future-noise realization;",
+            "- the weighted Gram matrix tests whether nominal `kR` inputs are independent;",
+            "- full cross-`k` responses remain archived; diagonal leakage is a separate",
+            "  diagnostic rather than being silently discarded.",
+            "",
+            "## Numerical controls",
+            "",
+            "| diagnostic | value | pass |",
+            "|---|---:|:---:|",
+            f"| uniform identity error | {controls['uniform_identity_error']:.3e} | {'yes' if analysis['control_gates']['uniform_identity'] else 'no'} |",
+            f"| eta-zero extinction at update 800 | {controls['eta_zero_extinction']:.3e} | {'yes' if analysis['control_gates']['eta_zero_extinction'] else 'no'} |",
+            f"| active strength linearity, median / max | {controls['active_linearity_median']:.3f} / {controls['active_linearity_max']:.3f} | {'yes' if analysis['control_gates']['active_linearity'] else 'no'} |",
+            f"| active full-mode linearity, median / max | {controls['active_full_mode_linearity_median']:.3f} / {controls['active_full_mode_linearity_max']:.3f} | {'yes' if analysis['control_gates']['active_linearity'] else 'no'} |",
+            f"| eta-zero strength linearity, median / max | {controls['eta_zero_linearity_median']:.3f} / {controls['eta_zero_linearity_max']:.3f} | {'yes' if analysis['control_gates']['eta_zero_linearity'] else 'no'} |",
+            f"| eta-zero full-mode linearity, median / max | {controls['eta_zero_full_mode_linearity_median']:.3f} / {controls['eta_zero_full_mode_linearity_max']:.3f} | {'yes' if analysis['control_gates']['eta_zero_linearity'] else 'no'} |",
+            f"| maximum radius-ratio disturbance | {controls['radius_change_max']:.3f} | {'yes' if analysis['control_gates']['shape_bounded'] else 'no'} |",
+            f"| active / feedback cross-k diagonal fraction | {controls['active_cross_k_diagonal_fraction_median']:.3f} / {controls['feedback_cross_k_diagonal_fraction_median']:.3f} | diagnostic |",
+            "",
+            "## Corrected temporal comparison",
+            "",
+            "Ratios are recursive held-out visible RMSE divided by its zero null. AR(2)",
+            "coefficients are fitted only on memory readouts. `eta0 AR2/AR1` uses the",
+            "memory-fit rollout because its visible response is exactly zero.",
+            "",
+            "| kR | AR(1) | AR(2) | undamped | AR(8) | eta0 AR2/AR1 | mem holdout E | vis holdout E | rank-2 energy | s3/s2 | state seeds | osc seeds | poles | state | osc |",
+            "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|:---:|:---:|",
+        ]
+    )
     for row in analysis["rows"]:
         active = row["active"]
         first = active["models"]["1"]
@@ -1137,13 +1294,17 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             f"{row['memory_signal']['holdout_energy_fraction']:.3f} | "
             f"{row['visible_signal']['holdout_energy_fraction']:.3f} | "
             f"{active['rank_two_energy']:.3f} | {active['third_to_second_ratio']:.3f} | "
-            f"{row['seed_passes']}/5 | {_pole_text(second['poles'])} | "
-            f"{'pass' if row['pass'] else 'fail'} |"
+            f"{row['seed_state_passes']}/5 | "
+            f"{row['seed_oscillation_passes']}/5 | "
+            f"{_pole_text(second['poles'])} | "
+            f"{'pass' if row['second_state_pass'] else 'fail'} | "
+            f"{'pass' if row['oscillation_pass'] else 'fail'} |"
         )
     lines.extend(
         [
             "",
-            f"Complete temporal channels: **{analysis['temporal_passes']}/5**; required: at least 4/5.",
+            f"Second-state channels: **{analysis['second_state_passes']}/5**; diagnostic requirement: at least 4/5.",
+            f"Oscillatory channels: **{analysis['oscillation_passes']}/5**; diagnostic requirement: at least 4/5.",
             f"Channels with informative memory and visible holdout: **{analysis['informative_holdout_channels']}/5**.",
             "The eta-zero AR(2)/AR(1) ratio is diagnostic only. The passive finite",
             "memory shift can itself have multi-lag structure; feedback specificity",
@@ -1155,6 +1316,10 @@ def build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             f"Weighted profile condition number min/median/max: `{spatial['condition_min']:.1f}` / `{spatial['condition_median']:.1f}` / `{spatial['condition_max']:.1f}`.",
             f"Maximum absolute off-diagonal Gram entry: `{spatial['max_abs_off_diagonal']:.4f}`.",
             f"Independent-mode gate: **{'pass' if spatial['independent_mode_gate'] else 'fail'}**.",
+            f"Robust rank after the eigenvalue and per-sample condition gates: **{spatial['retained_rank']}**.",
+            f"Mean-supported rank before the per-sample condition gate: **{spatial['mean_supported_rank']}**.",
+            f"Maximum transformed condition at retained rank: `{max(spatial['sample_condition_numbers']):.1f}`.",
+            f"Relative Gram eigenvalues: `{', '.join(f'{value:.3g}' for value in spatial['relative_gram_eigenvalues'])}`.",
             "",
             "A failed Gram gate does not invalidate each state perturbation, but it",
             "blocks treating the five responses as independent spatial modes or fitting",
@@ -1254,7 +1419,7 @@ def main() -> None:
     archive_path = _resolve(args.responses_npz)
     response_archive = write_archive(records, case_rows, archive_path, args)
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_utc": datetime.now(UTC).isoformat(),
         "git_revision": _git_output(["rev-parse", "HEAD"]),
         "git_status": status,
@@ -1279,6 +1444,7 @@ def main() -> None:
             "holdout_energy_fraction_threshold": 0.05,
             "support_fraction_of_peak": 0.01,
             "profile_condition_threshold": 100.0,
+            "profile_relative_eigenvalue_floor": 1e-2,
             "required_age_passes": 4,
         },
         "cases": case_rows,
@@ -1302,6 +1468,10 @@ def main() -> None:
         json.dumps(
             {
                 "decision": analysis["decision"],
+                "gate_statuses": {
+                    name: gate.status
+                    for name, gate in analysis["gate_hierarchy"].items()
+                },
                 "temporal_passes": analysis["temporal_passes"],
                 "report": _relative(report),
             },
