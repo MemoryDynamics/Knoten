@@ -614,8 +614,69 @@
       "uniform_identity_error": 2.948752353404416e-13
     },
     "decision": "second-order-not-selected",
+    "gate_hierarchy": {
+      "experimental-validity": {
+        "blocked_by": [],
+        "failed_checks": [],
+        "name": "experimental-validity",
+        "passed_checks": [
+          "uniform_identity",
+          "eta_zero_extinction",
+          "active_linearity",
+          "eta_zero_linearity",
+          "shape_bounded"
+        ],
+        "status": "pass"
+      },
+      "input-output-identifiability": {
+        "blocked_by": [],
+        "failed_checks": [
+          "informative_holdout_channels"
+        ],
+        "name": "input-output-identifiability",
+        "passed_checks": [
+          "rank_reduced_input_span"
+        ],
+        "status": "inconclusive"
+      },
+      "multi-mode-dispersion": {
+        "blocked_by": [
+          "two-node-transfer-channel"
+        ],
+        "failed_checks": [],
+        "name": "multi-mode-dispersion",
+        "passed_checks": [],
+        "status": "blocked"
+      },
+      "oscillatory-phase-mode": {
+        "blocked_by": [
+          "second-state-selection"
+        ],
+        "failed_checks": [],
+        "name": "oscillatory-phase-mode",
+        "passed_checks": [],
+        "status": "blocked"
+      },
+      "second-state-selection": {
+        "blocked_by": [
+          "input-output-identifiability"
+        ],
+        "failed_checks": [],
+        "name": "second-state-selection",
+        "passed_checks": [],
+        "status": "blocked"
+      },
+      "two-node-transfer-channel": {
+        "blocked_by": [],
+        "failed_checks": [],
+        "name": "two-node-transfer-channel",
+        "passed_checks": [],
+        "status": "not-run"
+      }
+    },
     "historical_p38e_status": "superseded-methodologically-inconclusive",
     "informative_holdout_channels": 0,
+    "oscillation_passes": 0,
     "review_findings_addressed": {
       "active_and_eta_zero_fitted_separately": true,
       "age_shift_compared_with_seed_spread": true,
@@ -973,6 +1034,7 @@
           "memory_signal_in_holdout": false,
           "rank_two_hankel": false,
           "seed_reproducibility": false,
+          "stable_second_order": true,
           "stable_underdamped": false,
           "visible_signal_in_holdout": true
         },
@@ -983,7 +1045,27 @@
           "pass": false,
           "support_updates": 515
         },
+        "oscillation_gates": {
+          "continuous_embedding": true,
+          "second_state_selected": false,
+          "seed_reproducibility": false,
+          "stable_underdamped_poles": false
+        },
+        "oscillation_pass": false,
         "pass": false,
+        "second_state_gates": {
+          "closes_delay_memory": true,
+          "closes_delay_visible": true,
+          "heldout_visible_ar2_advantage": false,
+          "memory_ar2_advantage": false,
+          "memory_signal_in_holdout": false,
+          "rank_two_hankel": false,
+          "seed_reproducibility": false,
+          "stable_second_order": true,
+          "visible_signal_in_holdout": true
+        },
+        "second_state_pass": false,
+        "seed_oscillation_passes": 0,
         "seed_passes": 0,
         "seed_rows": [
           {
@@ -1007,6 +1089,63 @@
                   "real": 0.30709949716758783
                 }
               ]
+            },
+            "delay_order": {
+              "coefficients": [
+                1.2338527813521873,
+                -0.10733651796667482,
+                -0.24577414628542943,
+                0.12242743371898496,
+                -0.038267865254134156,
+                -0.18467023544468905,
+                0.19419194594804245,
+                -0.01635651757623216
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.028024770454741704,
+              "fit_test_zero_rmse": 0.10710297932886781,
+              "fit_train_one_step_rmse": 0.14545117099944296,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.32953069801514523,
+                  "real": -0.6663725762987646
+                },
+                {
+                  "imag": -0.32953069801514523,
+                  "real": -0.6663725762987646
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9455791781141191
+                },
+                {
+                  "imag": 0.3544389776075913,
+                  "real": 0.718315636373938
+                },
+                {
+                  "imag": -0.3544389776075913,
+                  "real": 0.718315636373938
+                },
+                {
+                  "imag": 0.7248451480779178,
+                  "real": 0.04595366602930137
+                },
+                {
+                  "imag": -0.7248451480779178,
+                  "real": 0.04595366602930137
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.0924801510291183
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.2795546818190604,
+              "readout_test_rollout_rmse": 0.8879559268867794,
+              "readout_test_zero_rmse": 0.8477388262029705,
+              "test_targets": 48,
+              "train_targets": 65
             },
             "first_order": {
               "coefficients": [
@@ -1037,6 +1176,12 @@
               "pass": false,
               "support_updates": 515
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1066,6 +1211,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": true,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 1,
             "visible_signal": {
               "holdout_energy_fraction": 0.34825705966727666,
@@ -1096,6 +1252,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                0.9304828224344169,
+                0.04930584482593152,
+                -0.13646043371973876,
+                0.20790279269100534,
+                -0.11636074814607193,
+                0.06836838622209342,
+                -0.04801839150269735,
+                0.0019540553793943906
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.019826849413035752,
+              "fit_test_zero_rmse": 0.05479607290413502,
+              "fit_train_one_step_rmse": 0.1070044620456923,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": -0.7562928967633007
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9568017995978425
+                },
+                {
+                  "imag": 0.5011344309367788,
+                  "real": -0.20624652673337554
+                },
+                {
+                  "imag": -0.5011344309367788,
+                  "real": -0.20624652673337554
+                },
+                {
+                  "imag": 0.5426211903179419,
+                  "real": 0.25216091341925984
+                },
+                {
+                  "imag": -0.5426211903179419,
+                  "real": 0.25216091341925984
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.5949785038899155
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.04316664233818935
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.2360266805172067,
+              "readout_test_rollout_rmse": 1.0962383579446244,
+              "readout_test_zero_rmse": 1.009245769386792,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9569497455398723
@@ -1125,6 +1338,12 @@
               "pass": false,
               "support_updates": 495
             },
+            "oscillation_checks": {
+              "continuous_embedding": false,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1154,6 +1373,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 2,
             "visible_signal": {
               "holdout_energy_fraction": 0.42405982637824924,
@@ -1184,6 +1414,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1162050489603135,
+                -0.2284363136290666,
+                0.2191033014402616,
+                -0.2885877077858997,
+                0.09386358684148577,
+                -0.029103256363266654,
+                0.12219503643954158,
+                -0.050019237464186794
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.023528783764117,
+              "fit_test_zero_rmse": 0.039756361686229764,
+              "fit_train_one_step_rmse": 0.1345032591387451,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.397147748374285,
+                  "real": -0.552256849130184
+                },
+                {
+                  "imag": -0.397147748374285,
+                  "real": -0.552256849130184
+                },
+                {
+                  "imag": 0.6805349601913558,
+                  "real": -0.1598426114661409
+                },
+                {
+                  "imag": -0.6805349601913558,
+                  "real": -0.1598426114661409
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9541497269878607
+                },
+                {
+                  "imag": 0.44146476065700346,
+                  "real": 0.5702267768861733
+                },
+                {
+                  "imag": -0.44146476065700346,
+                  "real": 0.5702267768861733
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.44580068939275713
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3705716288861907,
+              "readout_test_rollout_rmse": 0.968383018620785,
+              "readout_test_zero_rmse": 0.9008287403786067,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9524418826205838
@@ -1213,6 +1500,12 @@
               "pass": false,
               "support_updates": 475
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1242,6 +1535,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 3,
             "visible_signal": {
               "holdout_energy_fraction": 0.3843931957999455,
@@ -1272,6 +1576,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.111728347335097,
+                -0.15950043490531698,
+                -0.22498088176943024,
+                0.2091679035881595,
+                0.148507135091252,
+                -0.21988751756703717,
+                0.06808901081737599,
+                0.008093891945879034
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.02278303162516271,
+              "fit_test_zero_rmse": 0.08485419391455355,
+              "fit_train_one_step_rmse": 0.1428277863036868,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3526301328334391,
+                  "real": -0.62262948755337
+                },
+                {
+                  "imag": -0.3526301328334391,
+                  "real": -0.62262948755337
+                },
+                {
+                  "imag": 0.7092807577117095,
+                  "real": 0.2427509895515666
+                },
+                {
+                  "imag": -0.7092807577117095,
+                  "real": 0.2427509895515666
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9410182737046064
+                },
+                {
+                  "imag": 0.26142030473570776,
+                  "real": 0.5106461372243827
+                },
+                {
+                  "imag": -0.26142030473570776,
+                  "real": 0.5106461372243827
+                },
+                {
+                  "imag": 0.0,
+                  "real": -0.09082520481466694
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.1759906755345864,
+              "readout_test_rollout_rmse": 0.8710947665216893,
+              "readout_test_zero_rmse": 0.8362830633723407,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9397892767373046
@@ -1301,6 +1662,12 @@
               "pass": false,
               "support_updates": 510
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1330,6 +1697,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": false,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 4,
             "visible_signal": {
               "holdout_energy_fraction": 0.3304880453570718,
@@ -1360,6 +1738,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.304341234709059,
+                -0.4979841819562927,
+                0.30291373349795325,
+                -0.33926868821536116,
+                0.2544545166042059,
+                -0.09332929731631943,
+                0.12195530893879988,
+                -0.0943033570388416
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.01601637748965864,
+              "fit_test_zero_rmse": 0.09487630219805337,
+              "fit_train_one_step_rmse": 0.1445260778527102,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.4353706773638569,
+                  "real": -0.5536462829528388
+                },
+                {
+                  "imag": -0.4353706773638569,
+                  "real": -0.5536462829528388
+                },
+                {
+                  "imag": 0.6648434244856088,
+                  "real": -0.14903136850452725
+                },
+                {
+                  "imag": -0.6648434244856088,
+                  "real": -0.14903136850452725
+                },
+                {
+                  "imag": 0.5693780825693517,
+                  "real": 0.5163239803183484
+                },
+                {
+                  "imag": -0.5693780825693517,
+                  "real": 0.5163239803183484
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9384075331046114
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.7386410438824834
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.4322228099601932,
+              "readout_test_rollout_rmse": 1.093219978899407,
+              "readout_test_zero_rmse": 0.9087379871326865,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9513767080061752
@@ -1389,6 +1824,12 @@
               "pass": false,
               "support_updates": 520
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1418,6 +1859,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": true,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 5,
             "visible_signal": {
               "holdout_energy_fraction": 0.3768567178870764,
@@ -1427,6 +1879,7 @@
             }
           }
         ],
+        "seed_state_passes": 0,
         "visible_signal": {
           "holdout_energy_fraction": 0.3742977943230753,
           "holdout_start_update": 365,
@@ -1776,6 +2229,7 @@
           "memory_signal_in_holdout": false,
           "rank_two_hankel": false,
           "seed_reproducibility": false,
+          "stable_second_order": true,
           "stable_underdamped": false,
           "visible_signal_in_holdout": true
         },
@@ -1786,7 +2240,27 @@
           "pass": false,
           "support_updates": 495
         },
+        "oscillation_gates": {
+          "continuous_embedding": true,
+          "second_state_selected": false,
+          "seed_reproducibility": false,
+          "stable_underdamped_poles": false
+        },
+        "oscillation_pass": false,
         "pass": false,
+        "second_state_gates": {
+          "closes_delay_memory": true,
+          "closes_delay_visible": true,
+          "heldout_visible_ar2_advantage": false,
+          "memory_ar2_advantage": false,
+          "memory_signal_in_holdout": false,
+          "rank_two_hankel": false,
+          "seed_reproducibility": false,
+          "stable_second_order": true,
+          "visible_signal_in_holdout": true
+        },
+        "second_state_pass": false,
+        "seed_oscillation_passes": 0,
         "seed_passes": 0,
         "seed_rows": [
           {
@@ -1810,6 +2284,63 @@
                   "real": 0.44382733159553517
                 }
               ]
+            },
+            "delay_order": {
+              "coefficients": [
+                1.380204951457086,
+                -0.2442226946691869,
+                -0.3570528209602496,
+                0.1937120314748588,
+                -0.03367883854642913,
+                -0.1501779291233215,
+                0.2541969847395588,
+                -0.0841555996560599
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.013463225754567007,
+              "fit_test_zero_rmse": 0.07611139677201703,
+              "fit_train_one_step_rmse": 0.12801688754389542,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.32286961169681233,
+                  "real": -0.6988056740864317
+                },
+                {
+                  "imag": -0.32286961169681233,
+                  "real": -0.6988056740864317
+                },
+                {
+                  "imag": 0.7119035070016886,
+                  "real": 0.005378639542158586
+                },
+                {
+                  "imag": -0.7119035070016886,
+                  "real": 0.005378639542158586
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9406379346842039
+                },
+                {
+                  "imag": 0.43063886012005104,
+                  "real": 0.6863402849247984
+                },
+                {
+                  "imag": -0.43063886012005104,
+                  "real": 0.6863402849247984
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.45374051601183224
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3820378866035459,
+              "readout_test_rollout_rmse": 0.8345788237579879,
+              "readout_test_zero_rmse": 0.8099092315912918,
+              "test_targets": 48,
+              "train_targets": 65
             },
             "first_order": {
               "coefficients": [
@@ -1840,6 +2371,12 @@
               "pass": false,
               "support_updates": 500
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1869,6 +2406,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": true,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 1,
             "visible_signal": {
               "holdout_energy_fraction": 0.32708566251426363,
@@ -1899,6 +2447,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                0.9848241454089399,
+                0.10855671912560019,
+                -0.1788250679178399,
+                0.2464076475221247,
+                -0.2488350349292281,
+                0.0684660435631666,
+                -0.08760080821866387,
+                0.07009447650258721
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.01714020211579745,
+              "fit_test_zero_rmse": 0.07323929228581925,
+              "fit_train_one_step_rmse": 0.10822085532519286,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": -0.8524356492381608
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9532531346671774
+                },
+                {
+                  "imag": 0.22584643705148125,
+                  "real": 0.6594904388875136
+                },
+                {
+                  "imag": -0.22584643705148125,
+                  "real": 0.6594904388875136
+                },
+                {
+                  "imag": 0.6874917836051011,
+                  "real": 0.1124393234580065
+                },
+                {
+                  "imag": -0.6874917836051011,
+                  "real": 0.1124393234580065
+                },
+                {
+                  "imag": 0.5068955959207505,
+                  "real": -0.3299264323555572
+                },
+                {
+                  "imag": -0.5068955959207505,
+                  "real": -0.3299264323555572
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3235067913903702,
+              "readout_test_rollout_rmse": 1.2192307688185773,
+              "readout_test_zero_rmse": 1.0224676899268526,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9573121482938207
@@ -1928,6 +2533,12 @@
               "pass": false,
               "support_updates": 520
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -1957,6 +2568,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": false,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 2,
             "visible_signal": {
               "holdout_energy_fraction": 0.42655562542070213,
@@ -1987,6 +2609,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.0562757491963666,
+                -0.14950124203053972,
+                0.20261759503935106,
+                -0.2918521343663805,
+                0.07593282952516628,
+                -0.04052932526180291,
+                0.13388668008507168,
+                -0.03371339470361178
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.01724216319148491,
+              "fit_test_zero_rmse": 0.03015525860153972,
+              "fit_train_one_step_rmse": 0.09089935218970102,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.40728940498138844,
+                  "real": -0.558897526384972
+                },
+                {
+                  "imag": -0.40728940498138844,
+                  "real": -0.558897526384972
+                },
+                {
+                  "imag": 0.6777765309733877,
+                  "real": -0.14693933258959205
+                },
+                {
+                  "imag": -0.6777765309733877,
+                  "real": -0.14693933258959205
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9567970128433726
+                },
+                {
+                  "imag": 0.42286718432759807,
+                  "real": 0.6194117615266055
+                },
+                {
+                  "imag": -0.42286718432759807,
+                  "real": 0.6194117615266055
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.2723289312489082
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3527884875394023,
+              "readout_test_rollout_rmse": 0.9833073399751776,
+              "readout_test_zero_rmse": 0.9358659286033376,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9541058860598516
@@ -2016,6 +2695,12 @@
               "pass": false,
               "support_updates": 460
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2045,6 +2730,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 3,
             "visible_signal": {
               "holdout_energy_fraction": 0.39559468579010243,
@@ -2075,6 +2771,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1238968754820355,
+                -0.18125258416137122,
+                -0.2241316856002969,
+                0.24079855790477922,
+                0.11612589608823838,
+                -0.21236865470131766,
+                0.08840743901151127,
+                -0.008465347055517436
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.02012151262309645,
+              "fit_test_zero_rmse": 0.07635691100771982,
+              "fit_train_one_step_rmse": 0.12915280772516108,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3380009815006434,
+                  "real": -0.6378774905353989
+                },
+                {
+                  "imag": -0.3380009815006434,
+                  "real": -0.6378774905353989
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9418072606642477
+                },
+                {
+                  "imag": 0.6928696664882811,
+                  "real": 0.2314213419294165
+                },
+                {
+                  "imag": -0.6928696664882811,
+                  "real": 0.2314213419294165
+                },
+                {
+                  "imag": 0.23018342920710916,
+                  "real": 0.4294223876601461
+                },
+                {
+                  "imag": -0.23018342920710916,
+                  "real": 0.4294223876601461
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.1361571367094602
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.245802607664897,
+              "readout_test_rollout_rmse": 0.912542551301637,
+              "readout_test_zero_rmse": 0.8753199675240418,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9412787972641524
@@ -2104,6 +2857,12 @@
               "pass": false,
               "support_updates": 500
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2133,6 +2892,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": false,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 4,
             "visible_signal": {
               "holdout_energy_fraction": 0.3520055939533983,
@@ -2163,6 +2933,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1463302532038406,
+                -0.15799461940121315,
+                -0.06855421866595837,
+                0.014465232305229843,
+                0.26195882990355857,
+                0.0007429833519731893,
+                -0.2622049520295245,
+                0.04425558133279961
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.007248103867714262,
+              "fit_test_zero_rmse": 0.029426096271892264,
+              "fit_train_one_step_rmse": 0.04495406547421858,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": -0.6898063213864959
+                },
+                {
+                  "imag": 0.6057270841256366,
+                  "real": -0.4722752207856414
+                },
+                {
+                  "imag": -0.6057270841256366,
+                  "real": -0.4722752207856414
+                },
+                {
+                  "imag": 0.7731631536599289,
+                  "real": 0.3899454828986224
+                },
+                {
+                  "imag": -0.7731631536599289,
+                  "real": 0.3899454828986224
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9506273386252029
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.8760130870406667
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.17415562469850346
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.4478028567917942,
+              "readout_test_rollout_rmse": 1.7482941852341352,
+              "readout_test_zero_rmse": 0.9818758115648997,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9569810363996911
@@ -2192,6 +3019,12 @@
               "pass": false,
               "support_updates": 445
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2221,6 +3054,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": false,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": true,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 5,
             "visible_signal": {
               "holdout_energy_fraction": 0.41259324616246373,
@@ -2230,6 +3074,7 @@
             }
           }
         ],
+        "seed_state_passes": 0,
         "visible_signal": {
           "holdout_energy_fraction": 0.38516269232123757,
           "holdout_start_update": 365,
@@ -2579,6 +3424,7 @@
           "memory_signal_in_holdout": false,
           "rank_two_hankel": false,
           "seed_reproducibility": false,
+          "stable_second_order": true,
           "stable_underdamped": false,
           "visible_signal_in_holdout": true
         },
@@ -2589,7 +3435,27 @@
           "pass": false,
           "support_updates": 455
         },
+        "oscillation_gates": {
+          "continuous_embedding": true,
+          "second_state_selected": false,
+          "seed_reproducibility": false,
+          "stable_underdamped_poles": false
+        },
+        "oscillation_pass": false,
         "pass": false,
+        "second_state_gates": {
+          "closes_delay_memory": true,
+          "closes_delay_visible": true,
+          "heldout_visible_ar2_advantage": false,
+          "memory_ar2_advantage": false,
+          "memory_signal_in_holdout": false,
+          "rank_two_hankel": false,
+          "seed_reproducibility": false,
+          "stable_second_order": true,
+          "visible_signal_in_holdout": true
+        },
+        "second_state_pass": false,
+        "seed_oscillation_passes": 0,
         "seed_passes": 0,
         "seed_rows": [
           {
@@ -2613,6 +3479,63 @@
                   "real": 0.3871147711239136
                 }
               ]
+            },
+            "delay_order": {
+              "coefficients": [
+                1.3027186256063084,
+                -0.25109705248486647,
+                -0.1280602414184842,
+                0.08477478754696288,
+                -0.05696958120756593,
+                -0.18026272389114528,
+                0.19241819827370177,
+                -0.003392343673704959
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.008942896005595329,
+              "fit_test_zero_rmse": 0.024406452045650187,
+              "fit_train_one_step_rmse": 0.038652304389990164,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3411783712628776,
+                  "real": -0.6310570586660811
+                },
+                {
+                  "imag": -0.3411783712628776,
+                  "real": -0.6310570586660811
+                },
+                {
+                  "imag": 0.7483183293485643,
+                  "real": 0.05386627276048607
+                },
+                {
+                  "imag": -0.7483183293485643,
+                  "real": 0.05386627276048607
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9492603203738567
+                },
+                {
+                  "imag": 0.36465700297105236,
+                  "real": 0.7449534404315721
+                },
+                {
+                  "imag": -0.36465700297105236,
+                  "real": 0.7449534404315721
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.0179329961804934
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.5168065337153676,
+              "readout_test_rollout_rmse": 1.1017651132280952,
+              "readout_test_zero_rmse": 0.9919663315307434,
+              "test_targets": 48,
+              "train_targets": 65
             },
             "first_order": {
               "coefficients": [
@@ -2643,6 +3566,12 @@
               "pass": false,
               "support_updates": 420
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2672,6 +3601,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 1,
             "visible_signal": {
               "holdout_energy_fraction": 0.425288504703446,
@@ -2702,6 +3642,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                0.9276764474265179,
+                0.05637656678915417,
+                -0.14807675944924376,
+                0.23254969835432146,
+                -0.1485772032295537,
+                0.07995664526616574,
+                -0.04597770829940348,
+                -0.002778264874439707
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.00730500011303504,
+              "fit_test_zero_rmse": 0.022456661576452028,
+              "fit_train_one_step_rmse": 0.040591011267176964,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": -0.776064427328858
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9484570245602051
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.6297686344088546
+                },
+                {
+                  "imag": 0.5302752862759359,
+                  "real": 0.2636815824224671
+                },
+                {
+                  "imag": -0.5302752862759359,
+                  "real": 0.2636815824224671
+                },
+                {
+                  "imag": 0.5315303023970415,
+                  "real": -0.17359554427543764
+                },
+                {
+                  "imag": -0.5315303023970415,
+                  "real": -0.17359554427543764
+                },
+                {
+                  "imag": 0.0,
+                  "real": -0.05465686050774414
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3650723826804132,
+              "readout_test_rollout_rmse": 1.244854128678487,
+              "readout_test_zero_rmse": 1.0778330368514417,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9485794522638149
@@ -2731,6 +3728,12 @@
               "pass": false,
               "support_updates": 420
             },
+            "oscillation_checks": {
+              "continuous_embedding": false,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2760,6 +3763,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 2,
             "visible_signal": {
               "holdout_energy_fraction": 0.45160642644495436,
@@ -2790,6 +3804,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1241147122637585,
+                -0.20573270360148108,
+                0.10675822320470864,
+                -0.19249815135355433,
+                0.1022188840969389,
+                -0.04059499278791255,
+                0.0747923978181361,
+                -0.018541411575296818
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.008472714381140462,
+              "fit_test_zero_rmse": 0.03014796277262289,
+              "fit_train_one_step_rmse": 0.04522105920164094,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3849480854441733,
+                  "real": -0.5194410078193565
+                },
+                {
+                  "imag": -0.3849480854441733,
+                  "real": -0.5194410078193565
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9495600456473859
+                },
+                {
+                  "imag": 0.5870549540562224,
+                  "real": -0.09402329298493148
+                },
+                {
+                  "imag": -0.5870549540562224,
+                  "real": -0.09402329298493148
+                },
+                {
+                  "imag": 0.4079001247222901,
+                  "real": 0.5645171255526036
+                },
+                {
+                  "imag": -0.4079001247222901,
+                  "real": 0.5645171255526036
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.27244901711974306
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3941608905453058,
+              "readout_test_rollout_rmse": 0.9872402452148026,
+              "readout_test_zero_rmse": 0.9907709863286388,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.949486065369348
@@ -2819,6 +3890,12 @@
               "pass": false,
               "support_updates": 450
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2848,6 +3925,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 3,
             "visible_signal": {
               "holdout_energy_fraction": 0.4192900705572525,
@@ -2878,6 +3966,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1081224595213426,
+                -0.1354946199823263,
+                -0.25445747499735655,
+                0.19522049140643177,
+                0.18505060361576384,
+                -0.23392049482914698,
+                0.06103224498086609,
+                0.01981380687100609
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.008991913207221609,
+              "fit_test_zero_rmse": 0.04177560474873685,
+              "fit_train_one_step_rmse": 0.07079896614715923,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9477038734538243
+                },
+                {
+                  "imag": 0.7147565866443172,
+                  "real": 0.254158894045425
+                },
+                {
+                  "imag": -0.7147565866443172,
+                  "real": 0.254158894045425
+                },
+                {
+                  "imag": 0.296673223106652,
+                  "real": 0.5408251196034579
+                },
+                {
+                  "imag": -0.296673223106652,
+                  "real": 0.5408251196034579
+                },
+                {
+                  "imag": 0.36632275668462194,
+                  "real": -0.6234808873715826
+                },
+                {
+                  "imag": -0.36632275668462194,
+                  "real": -0.6234808873715826
+                },
+                {
+                  "imag": 0.0,
+                  "real": -0.18258766648708374
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.4064008638911913,
+              "readout_test_rollout_rmse": 1.0289975967467522,
+              "readout_test_zero_rmse": 0.9912483446459036,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9470783799273956
@@ -2907,6 +4052,12 @@
               "pass": false,
               "support_updates": 470
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -2936,6 +4087,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 4,
             "visible_signal": {
               "holdout_energy_fraction": 0.4130849594767724,
@@ -2966,6 +4128,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1921728928410458,
+                -0.4495639405931167,
+                0.4880397447798326,
+                -0.48354872948651584,
+                0.2782107666123309,
+                -0.10142564667359358,
+                0.07973149509408306,
+                -0.04335278009318497
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.009152220739727674,
+              "fit_test_zero_rmse": 0.03990503796084743,
+              "fit_train_one_step_rmse": 0.046853941870890634,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.5100230653034558,
+                  "real": -0.4513336579906357
+                },
+                {
+                  "imag": -0.5100230653034558,
+                  "real": -0.4513336579906357
+                },
+                {
+                  "imag": 0.5809167683669377,
+                  "real": -0.18759140836895297
+                },
+                {
+                  "imag": -0.5809167683669377,
+                  "real": -0.18759140836895297
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9531110649749834
+                },
+                {
+                  "imag": 0.47538042036747696,
+                  "real": 0.45386242981845926
+                },
+                {
+                  "imag": -0.47538042036747696,
+                  "real": 0.45386242981845926
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.6091871009483225
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.5744936100541032,
+              "readout_test_rollout_rmse": 1.2925089936330278,
+              "readout_test_zero_rmse": 0.9327114229150155,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9520764799650185
@@ -2995,6 +4214,12 @@
               "pass": false,
               "support_updates": 470
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3024,6 +4249,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 5,
             "visible_signal": {
               "holdout_energy_fraction": 0.3943773315075533,
@@ -3033,6 +4269,7 @@
             }
           }
         ],
+        "seed_state_passes": 0,
         "visible_signal": {
           "holdout_energy_fraction": 0.42160096710350264,
           "holdout_start_update": 365,
@@ -3382,6 +4619,7 @@
           "memory_signal_in_holdout": false,
           "rank_two_hankel": false,
           "seed_reproducibility": false,
+          "stable_second_order": true,
           "stable_underdamped": false,
           "visible_signal_in_holdout": true
         },
@@ -3392,7 +4630,27 @@
           "pass": false,
           "support_updates": 470
         },
+        "oscillation_gates": {
+          "continuous_embedding": true,
+          "second_state_selected": false,
+          "seed_reproducibility": false,
+          "stable_underdamped_poles": false
+        },
+        "oscillation_pass": false,
         "pass": false,
+        "second_state_gates": {
+          "closes_delay_memory": true,
+          "closes_delay_visible": true,
+          "heldout_visible_ar2_advantage": false,
+          "memory_ar2_advantage": false,
+          "memory_signal_in_holdout": false,
+          "rank_two_hankel": false,
+          "seed_reproducibility": false,
+          "stable_second_order": true,
+          "visible_signal_in_holdout": true
+        },
+        "second_state_pass": false,
+        "seed_oscillation_passes": 0,
         "seed_passes": 0,
         "seed_rows": [
           {
@@ -3416,6 +4674,63 @@
                   "real": 0.33661844652531414
                 }
               ]
+            },
+            "delay_order": {
+              "coefficients": [
+                1.2593719918497892,
+                -0.1283277017702522,
+                -0.31855007881672626,
+                0.15439956685505413,
+                -0.02435549036368896,
+                -0.17175490251883369,
+                0.21485515115182474,
+                -0.0474215587899304
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.0182829645212497,
+              "fit_test_zero_rmse": 0.06411951408223783,
+              "fit_train_one_step_rmse": 0.12646653657588328,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.32473228324717274,
+                  "real": -0.6890604685330544
+                },
+                {
+                  "imag": -0.32473228324717274,
+                  "real": -0.6890604685330544
+                },
+                {
+                  "imag": 0.7066833653374128,
+                  "real": 0.026108559509622264
+                },
+                {
+                  "imag": -0.7066833653374128,
+                  "real": 0.026108559509622264
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9155733837991978
+                },
+                {
+                  "imag": 0.379929272107233,
+                  "real": 0.6914817233174055
+                },
+                {
+                  "imag": -0.379929272107233,
+                  "real": 0.6914817233174055
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.28673897946264476
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.450006877157336,
+              "readout_test_rollout_rmse": 1.0603063791152498,
+              "readout_test_zero_rmse": 0.98064586760491,
+              "test_targets": 48,
+              "train_targets": 65
             },
             "first_order": {
               "coefficients": [
@@ -3446,6 +4761,12 @@
               "pass": false,
               "support_updates": 485
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3475,6 +4796,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": false,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 1,
             "visible_signal": {
               "holdout_energy_fraction": 0.41034982125262986,
@@ -3505,6 +4837,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                0.907023717324887,
+                0.0009635473779239338,
+                -0.04011309459900808,
+                0.04315240713448247,
+                0.08442425098729227,
+                -0.003202353718030352,
+                0.01888006072556635,
+                -0.05877819509328763
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.016284433757287584,
+              "fit_test_zero_rmse": 0.03137333927130548,
+              "fit_train_one_step_rmse": 0.10913983874533723,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9548213184761051
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.6890257269818927
+                },
+                {
+                  "imag": 0.6224735767824907,
+                  "real": 0.39590857817330055
+                },
+                {
+                  "imag": -0.6224735767824907,
+                  "real": 0.39590857817330055
+                },
+                {
+                  "imag": 0.28913034104927826,
+                  "real": -0.5931626506900634
+                },
+                {
+                  "imag": -0.28913034104927826,
+                  "real": -0.5931626506900634
+                },
+                {
+                  "imag": 0.589678970066902,
+                  "real": -0.17115759154979104
+                },
+                {
+                  "imag": -0.589678970066902,
+                  "real": -0.17115759154979104
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.3573547378758124,
+              "readout_test_rollout_rmse": 1.1523445423748748,
+              "readout_test_zero_rmse": 1.0556778311856088,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9534410490429849
@@ -3534,6 +4923,12 @@
               "pass": false,
               "support_updates": 455
             },
+            "oscillation_checks": {
+              "continuous_embedding": false,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3563,6 +4958,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 2,
             "visible_signal": {
               "holdout_energy_fraction": 0.4410858135942312,
@@ -3593,6 +4999,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1819016043095754,
+                -0.32667232362438076,
+                0.2343709537795835,
+                -0.2770390576532584,
+                0.1195325788612798,
+                -0.01956059514347333,
+                0.09314352132602768,
+                -0.05318425449522331
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.00940349460907666,
+              "fit_test_zero_rmse": 0.027302134759783925,
+              "fit_train_one_step_rmse": 0.06984714793786556,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3860398753347662,
+                  "real": -0.525999614250813
+                },
+                {
+                  "imag": -0.3860398753347662,
+                  "real": -0.525999614250813
+                },
+                {
+                  "imag": 0.661961290892522,
+                  "real": -0.1644500965064407
+                },
+                {
+                  "imag": -0.661961290892522,
+                  "real": -0.1644500965064407
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9462074399903732
+                },
+                {
+                  "imag": 0.4777389429266787,
+                  "real": 0.5290113968754988
+                },
+                {
+                  "imag": -0.4777389429266787,
+                  "real": 0.5290113968754988
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.5585707920827091
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.521278852360078,
+              "readout_test_rollout_rmse": 1.086361886110846,
+              "readout_test_zero_rmse": 1.0588773536350458,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9470945912041921
@@ -3622,6 +5085,12 @@
               "pass": false,
               "support_updates": 440
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3651,6 +5120,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 3,
             "visible_signal": {
               "holdout_energy_fraction": 0.4553971070565671,
@@ -3681,6 +5161,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.0339629401165304,
+                -0.052736575329706104,
+                -0.16243811648084136,
+                0.04350012165161833,
+                0.2618741645124552,
+                -0.21120349713829015,
+                -0.09213575322981951,
+                0.12529970986192251
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.009138834668186591,
+              "fit_test_zero_rmse": 0.03693058517728768,
+              "fit_train_one_step_rmse": 0.06856828278487458,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.5201466439659158,
+                  "real": -0.5640354390124735
+                },
+                {
+                  "imag": -0.5201466439659158,
+                  "real": -0.5640354390124735
+                },
+                {
+                  "imag": 0.0,
+                  "real": -0.6189229146587463
+                },
+                {
+                  "imag": 0.7801078657951444,
+                  "real": 0.2552215589312114
+                },
+                {
+                  "imag": -0.7801078657951444,
+                  "real": 0.2552215589312114
+                },
+                {
+                  "imag": 0.3186417267595772,
+                  "real": 0.659465193602826
+                },
+                {
+                  "imag": -0.3186417267595772,
+                  "real": 0.659465193602826
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9515832277321494
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.4394958897111287,
+              "readout_test_rollout_rmse": 1.167906425789408,
+              "readout_test_zero_rmse": 1.010782470213409,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.951454162360708
@@ -3710,6 +5247,12 @@
               "pass": false,
               "support_updates": 460
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3739,6 +5282,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 4,
             "visible_signal": {
               "holdout_energy_fraction": 0.4311212486118812,
@@ -3769,6 +5323,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.279237305298396,
+                -0.4040898466245082,
+                0.06215708941071685,
+                -0.047614006204131726,
+                0.2068374873134326,
+                -0.053974915244230384,
+                -0.0632911499380712,
+                -0.02166630442219683
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.013469788140770293,
+              "fit_test_zero_rmse": 0.0336846430011269,
+              "fit_train_one_step_rmse": 0.10902444787903098,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9051788443023746
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.8440370275523755
+                },
+                {
+                  "imag": 0.6855517666811303,
+                  "real": 0.41057009787610865
+                },
+                {
+                  "imag": -0.6855517666811303,
+                  "real": 0.41057009787610865
+                },
+                {
+                  "imag": 0.4616069883077563,
+                  "real": -0.36232483455643055
+                },
+                {
+                  "imag": -0.4616069883077563,
+                  "real": -0.36232483455643055
+                },
+                {
+                  "imag": 0.2207851669737633,
+                  "real": -0.2832345465978552
+                },
+                {
+                  "imag": -0.2207851669737633,
+                  "real": -0.2832345465978552
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.529277300612072,
+              "readout_test_rollout_rmse": 1.236607852258053,
+              "readout_test_zero_rmse": 0.9547799017905926,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9424763481447465
@@ -3798,6 +5409,12 @@
               "pass": false,
               "support_updates": 465
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -3827,6 +5444,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": true,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 5,
             "visible_signal": {
               "holdout_energy_fraction": 0.408583782620356,
@@ -3836,6 +5464,7 @@
             }
           }
         ],
+        "seed_state_passes": 0,
         "visible_signal": {
           "holdout_energy_fraction": 0.4299466333362572,
           "holdout_start_update": 365,
@@ -4185,6 +5814,7 @@
           "memory_signal_in_holdout": false,
           "rank_two_hankel": false,
           "seed_reproducibility": false,
+          "stable_second_order": true,
           "stable_underdamped": false,
           "visible_signal_in_holdout": true
         },
@@ -4195,7 +5825,27 @@
           "pass": false,
           "support_updates": 450
         },
+        "oscillation_gates": {
+          "continuous_embedding": true,
+          "second_state_selected": false,
+          "seed_reproducibility": false,
+          "stable_underdamped_poles": false
+        },
+        "oscillation_pass": false,
         "pass": false,
+        "second_state_gates": {
+          "closes_delay_memory": true,
+          "closes_delay_visible": true,
+          "heldout_visible_ar2_advantage": false,
+          "memory_ar2_advantage": false,
+          "memory_signal_in_holdout": false,
+          "rank_two_hankel": false,
+          "seed_reproducibility": false,
+          "stable_second_order": true,
+          "visible_signal_in_holdout": true
+        },
+        "second_state_pass": false,
+        "seed_oscillation_passes": 0,
         "seed_passes": 0,
         "seed_rows": [
           {
@@ -4219,6 +5869,63 @@
                   "real": 0.3554854639914787
                 }
               ]
+            },
+            "delay_order": {
+              "coefficients": [
+                1.2641718129287627,
+                -0.15172810766803985,
+                -0.31475710697114506,
+                0.17675599253645818,
+                -0.034897484519960484,
+                -0.17162442347432397,
+                0.20788548863261735,
+                -0.045512666769775764
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.021858344870683544,
+              "fit_test_zero_rmse": 0.027472536894148098,
+              "fit_train_one_step_rmse": 0.15963640338561477,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.3193038728949198,
+                  "real": -0.6848301850765282
+                },
+                {
+                  "imag": -0.3193038728949198,
+                  "real": -0.6848301850765282
+                },
+                {
+                  "imag": 0.7077688011200344,
+                  "real": 0.035519206137700016
+                },
+                {
+                  "imag": -0.7077688011200344,
+                  "real": 0.035519206137700016
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9021250460873164
+                },
+                {
+                  "imag": 0.37323481127853375,
+                  "real": 0.6861299662273347
+                },
+                {
+                  "imag": -0.37323481127853375,
+                  "real": 0.6861299662273347
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.2884087922644322
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.674403138243973,
+              "readout_test_rollout_rmse": 1.0906988103512016,
+              "readout_test_zero_rmse": 0.9236692202405861,
+              "test_targets": 48,
+              "train_targets": 65
             },
             "first_order": {
               "coefficients": [
@@ -4249,6 +5956,12 @@
               "pass": false,
               "support_updates": 445
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -4278,6 +5991,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 1,
             "visible_signal": {
               "holdout_energy_fraction": 0.37556843680576074,
@@ -4308,6 +6032,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                0.8595599379763718,
+                0.0592008607869465,
+                -0.10023306564198944,
+                0.13615076247872557,
+                -0.009728318133852124,
+                0.05455407348025014,
+                -0.02084772513165305,
+                -0.04279980320370337
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.0224355115646093,
+              "fit_test_zero_rmse": 0.03266715125048336,
+              "fit_train_one_step_rmse": 0.15946383224452368,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9386851264016856
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.6909659901434814
+                },
+                {
+                  "imag": 0.6193032105129737,
+                  "real": 0.3721032894296844
+                },
+                {
+                  "imag": -0.6193032105129737,
+                  "real": 0.3721032894296844
+                },
+                {
+                  "imag": 0.5873679109654828,
+                  "real": -0.19538714929923454
+                },
+                {
+                  "imag": -0.5873679109654828,
+                  "real": -0.19538714929923454
+                },
+                {
+                  "imag": 0.11972922001180199,
+                  "real": -0.5617617294148465
+                },
+                {
+                  "imag": -0.11972922001180199,
+                  "real": -0.5617617294148465
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.1779971296030252,
+              "readout_test_rollout_rmse": 1.0273625702785674,
+              "readout_test_zero_rmse": 0.9008281159025184,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9371599781857644
@@ -4337,6 +6118,12 @@
               "pass": false,
               "support_updates": 460
             },
+            "oscillation_checks": {
+              "continuous_embedding": false,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -4366,6 +6153,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 2,
             "visible_signal": {
               "holdout_energy_fraction": 0.36633031493294893,
@@ -4396,6 +6194,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1268041408251903,
+                -0.21760697548868724,
+                0.07485241110116743,
+                -0.145767412488309,
+                0.09644517980648848,
+                -0.045933867302784696,
+                0.05119569656414269,
+                -0.009131584084933184
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.019644724338650246,
+              "fit_test_zero_rmse": 0.03798074309709907,
+              "fit_train_one_step_rmse": 0.18451219070768926,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9247245549913126
+                },
+                {
+                  "imag": 0.3765192642037906,
+                  "real": -0.49481671216754364
+                },
+                {
+                  "imag": -0.3765192642037906,
+                  "real": -0.49481671216754364
+                },
+                {
+                  "imag": 0.37361918559613216,
+                  "real": 0.5397667908624757
+                },
+                {
+                  "imag": -0.37361918559613216,
+                  "real": 0.5397667908624757
+                },
+                {
+                  "imag": 0.5367716666599316,
+                  "real": -0.046017079456785855
+                },
+                {
+                  "imag": -0.5367716666599316,
+                  "real": -0.046017079456785855
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.204213587357587
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.7886492810209298,
+              "readout_test_rollout_rmse": 1.0666863788317331,
+              "readout_test_zero_rmse": 1.0458776882035505,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9297855090005858
@@ -4425,6 +6280,12 @@
               "pass": false,
               "support_updates": 465
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -4454,6 +6315,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 3,
             "visible_signal": {
               "holdout_energy_fraction": 0.4476507810120061,
@@ -4484,6 +6356,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.088681929480476,
+                -0.14691481466612327,
+                -0.21385017851519328,
+                0.1937034634670611,
+                0.16414575842779644,
+                -0.24755685880118644,
+                0.05979226720219663,
+                0.03808532317671168
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.01350868106953311,
+              "fit_test_zero_rmse": 0.03140461775358965,
+              "fit_train_one_step_rmse": 0.1368999616211193,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.7526528999405813,
+                  "real": 0.22886911330893633
+                },
+                {
+                  "imag": -0.7526528999405813,
+                  "real": 0.22886911330893633
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.9416579268915775
+                },
+                {
+                  "imag": 0.32386509509360645,
+                  "real": 0.5936115762167984
+                },
+                {
+                  "imag": -0.32386509509360645,
+                  "real": 0.5936115762167984
+                },
+                {
+                  "imag": 0.37634314228455085,
+                  "real": -0.6098015353416226
+                },
+                {
+                  "imag": -0.37634314228455085,
+                  "real": -0.6098015353416226
+                },
+                {
+                  "imag": 0.0,
+                  "real": -0.27833430577932633
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 1.5375275777619253,
+              "readout_test_rollout_rmse": 1.0708685162037908,
+              "readout_test_zero_rmse": 0.9818041755812326,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.9366273202547636
@@ -4513,6 +6442,12 @@
               "pass": false,
               "support_updates": 450
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -4542,6 +6477,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 4,
             "visible_signal": {
               "holdout_energy_fraction": 0.4092762513040756,
@@ -4572,6 +6518,63 @@
                 }
               ]
             },
+            "delay_order": {
+              "coefficients": [
+                1.1344728899803327,
+                -0.4357234559133102,
+                0.5292877524610806,
+                -0.4916869437421558,
+                0.2823296123081016,
+                -0.10686427568592449,
+                0.047807714301695614,
+                -0.028308864821583957
+              ],
+              "fit_channels": 6,
+              "fit_test_rollout_rmse": 0.014227199751628523,
+              "fit_test_zero_rmse": 0.04134102221763408,
+              "fit_train_one_step_rmse": 0.18119573687870957,
+              "order": 8,
+              "poles": [
+                {
+                  "imag": 0.0,
+                  "real": 0.9130130862521835
+                },
+                {
+                  "imag": 0.0,
+                  "real": 0.6530869055196715
+                },
+                {
+                  "imag": 0.46829479646115024,
+                  "real": 0.38124844401317526
+                },
+                {
+                  "imag": -0.46829479646115024,
+                  "real": 0.38124844401317526
+                },
+                {
+                  "imag": 0.5764163969220265,
+                  "real": -0.42142854572870814
+                },
+                {
+                  "imag": -0.5764163969220265,
+                  "real": -0.42142854572870814
+                },
+                {
+                  "imag": 0.4738252973754225,
+                  "real": -0.1756334491802276
+                },
+                {
+                  "imag": -0.4738252973754225,
+                  "real": -0.1756334491802276
+                }
+              ],
+              "readout_channels": 3,
+              "readout_test_one_step_rmse": 2.1146134377418457,
+              "readout_test_rollout_rmse": 1.1247931489355925,
+              "readout_test_zero_rmse": 1.0278668763167162,
+              "test_targets": 48,
+              "train_targets": 65
+            },
             "first_order": {
               "coefficients": [
                 0.917470582392621
@@ -4601,6 +6604,12 @@
               "pass": false,
               "support_updates": 440
             },
+            "oscillation_checks": {
+              "continuous_embedding": true,
+              "second_state_selected": false,
+              "stable_underdamped_poles": false
+            },
+            "oscillation_pass": false,
             "pass": false,
             "readout_advantage": false,
             "second_order": {
@@ -4630,6 +6639,17 @@
               "test_targets": 48,
               "train_targets": 65
             },
+            "second_state_checks": {
+              "closes_delay_memory": true,
+              "closes_delay_visible": true,
+              "heldout_visible_ar2_advantage": false,
+              "memory_ar2_advantage": false,
+              "memory_signal_in_holdout": false,
+              "rank_two_hankel": false,
+              "stable_second_order": true,
+              "visible_signal_in_holdout": true
+            },
+            "second_state_pass": false,
             "seed": 5,
             "visible_signal": {
               "holdout_energy_fraction": 0.43194886860010007,
@@ -4639,6 +6659,7 @@
             }
           }
         ],
+        "seed_state_passes": 0,
         "visible_signal": {
           "holdout_energy_fraction": 0.40736000435193015,
           "holdout_start_update": 365,
@@ -4648,12 +6669,91 @@
       }
     ],
     "scientific_classification": "null-not-rejected-memory-holdout-limited",
+    "second_state_passes": 0,
     "spatial_input": {
+      "basis_coefficients": [
+        [
+          0.3807845576411352,
+          0.17549879316379882,
+          -0.08202579047893481,
+          0.6650509756922843
+        ],
+        [
+          0.40846190687626877,
+          0.1520569281394232,
+          -0.06555527233625348,
+          0.1708214870238556
+        ],
+        [
+          0.32692785735606306,
+          -0.20097821699319987,
+          0.1030209391326253,
+          -1.0859896214742026
+        ],
+        [
+          0.07354499604611027,
+          -0.8423666453314871,
+          0.37202239010012755,
+          0.4361936297154276
+        ],
+        [
+          -0.0032885847252413945,
+          0.3890621020277194,
+          0.9213125002427037,
+          0.016666934517883186
+        ]
+      ],
       "condition_max": 165244.70417086367,
       "condition_median": 15867.090289932243,
       "condition_min": 28.190454667483575,
+      "gram_eigenvalues": [
+        2.3577147785885604,
+        1.046830743895935,
+        0.9912213278319605,
+        0.5430683304748802,
+        0.061164819208664
+      ],
       "independent_mode_gate": false,
       "max_abs_off_diagonal": 0.9964106856571823,
+      "max_sample_condition": 100.0,
+      "mean_gram": [
+        [
+          1.0000000000000002,
+          0.9043901554414197,
+          0.44086097045729417,
+          0.04688262561269926,
+          -0.0030952333493335406
+        ],
+        [
+          0.9043901554414197,
+          0.9999999999999999,
+          0.6367458152644503,
+          0.027509489987656725,
+          -0.0011651773383059428
+        ],
+        [
+          0.44086097045729417,
+          0.6367458152644503,
+          1.0,
+          0.21623535072774722,
+          -0.0037389747022389527
+        ],
+        [
+          0.04688262561269926,
+          0.027509489987656725,
+          0.21623535072774722,
+          0.9999999999999999,
+          -0.021592733159142
+        ],
+        [
+          -0.0030952333493335406,
+          -0.0011651773383059428,
+          -0.0037389747022389527,
+          -0.021592733159142,
+          1.0000000000000002
+        ]
+      ],
+      "mean_supported_rank": 5,
       "median_gram": [
         [
           1.0,
@@ -4690,6 +6790,67 @@
           -0.01564758862018619,
           1.0000000000000002
         ]
+      ],
+      "orthogonalized_mean_gram": [
+        [
+          0.9999999999999997,
+          -6.183376959824091e-18,
+          6.649700222573769e-19,
+          2.789565773362104e-16
+        ],
+        [
+          -1.3270204213118316e-17,
+          0.9999999999999991,
+          6.744956934991487e-17,
+          3.2473121976871124e-16
+        ],
+        [
+          1.6536651444892384e-17,
+          5.720597592328414e-17,
+          0.9999999999999998,
+          -5.163181234206038e-17
+        ],
+        [
+          2.2965594580040417e-16,
+          3.172853832685194e-16,
+          -5.730890308094006e-17,
+          1.0
+        ]
+      ],
+      "prefix_max_sample_conditions": [
+        1.0,
+        4.984465332226971,
+        6.134708400124313,
+        30.50399927763996,
+        5186.127524572219
+      ],
+      "rank_reduced_dispersion_eligibility": true,
+      "rank_reduced_second_state_eligibility": true,
+      "relative_eigenvalue_floor": 0.01,
+      "relative_gram_eigenvalues": [
+        1.0,
+        0.44400228280480025,
+        0.4204161321096492,
+        0.2303367376778232,
+        0.025942416684209848
+      ],
+      "retained_rank": 4,
+      "sample_condition_numbers": [
+        20.03633530912083,
+        1.7090813663335418,
+        3.9026665450944855,
+        3.1047210824241906,
+        4.673521732976395,
+        12.68674425910365,
+        7.556088268243954,
+        3.0719853469465326,
+        2.321956723018625,
+        5.506672010940887,
+        18.427802462782154,
+        16.38956290281136,
+        18.714767466380575,
+        5.8331781785284385,
+        30.50399927763996
       ]
     },
     "temporal_candidate": false,
@@ -5574,10 +7735,10 @@
     }
   ],
   "command": "python experiments/current/memory/closure/emergent_modal_state_reconciliation.py",
-  "generated_utc": "2026-08-13T20:23:56.393680+00:00",
-  "git_revision": "e4f56b821f4a7adb00a3d6e6d106cf0234fe2dcc",
+  "generated_utc": "2026-08-14T20:14:55.666593+00:00",
+  "git_revision": "da8e99f23b58b4e9332a4006988aa0835e3d32bc",
   "git_status": "",
-  "protocol_revision": "e4f56b821f4a7adb00a3d6e6d106cf0234fe2dcc",
+  "protocol_revision": "da8e99f23b58b4e9332a4006988aa0835e3d32bc",
   "registration": {
     "analysis_updates": 600,
     "common_start_index": 8,
@@ -5597,6 +7758,7 @@
       0.01
     ],
     "profile_condition_threshold": 100.0,
+    "profile_relative_eigenvalue_floor": 0.01,
     "rank_two_energy_threshold": 0.9,
     "required_age_passes": 4,
     "required_channel_passes": 4,
@@ -6635,6 +8797,6 @@
     },
     "sha256": "d9b988cbe2e4ff84144572d6de122628f60d46f628f022c997a51df6c911753c"
   },
-  "schema_version": 1,
+  "schema_version": 2,
   "summary_json": "reports/memory/closure/emergent_modal_state_reconciliation_2026-08-13.json"
 }
