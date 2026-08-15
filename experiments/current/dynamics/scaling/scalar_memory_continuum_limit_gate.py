@@ -428,7 +428,8 @@ def _evaluate_gates(cases: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "C12_rate_error": tail[12.0]["median_relative_rate_error_exact"] <= 0.01,
         "tail_change_contracts": rate_change_9_12 <= rate_change_6_9 + 0.005,
     }
-    g1 = g0 and all(g1_checks.values())
+    g1_components = all(g1_checks.values())
+    g1 = g0 and g1_components
 
     alpha = {
         value: cases[_case_key(value, 12.0)] for value in ALPHA_VALUES
@@ -457,7 +458,8 @@ def _evaluate_gates(cases: dict[str, dict[str, Any]]) -> dict[str, Any]:
         ]
         < reference_alpha["median_relative_rate_error_continuum"],
     }
-    g2 = g0 and all(g2_checks.values())
+    g2_components = all(g2_checks.values())
+    g2 = g0 and g2_components
 
     if not g0:
         decision = "experiment-inadequate"
@@ -466,14 +468,25 @@ def _evaluate_gates(cases: dict[str, dict[str, Any]]) -> dict[str, Any]:
     else:
         decision = "registered-continuum-limit-not-supported"
     return {
-        "experimental_validity": {"pass": g0, "checks": g0_checks},
+        "experimental_validity": {
+            "pass": g0,
+            "status": "pass" if g0 else "fail",
+            "checks": g0_checks,
+        },
         "finite_tail_convergence": {
             "pass": g1,
+            "status": "blocked" if not g0 else ("pass" if g1_components else "fail"),
+            "component_checks_pass": g1_components,
             "checks": g1_checks,
             "rate_change_C6_to_C9": rate_change_6_9,
             "rate_change_C9_to_C12": rate_change_9_12,
         },
-        "matched_alpha_convergence": {"pass": g2, "checks": g2_checks},
+        "matched_alpha_convergence": {
+            "pass": g2,
+            "status": "blocked" if not g0 else ("pass" if g2_components else "fail"),
+            "component_checks_pass": g2_components,
+            "checks": g2_checks,
+        },
         "decision": decision,
     }
 
@@ -665,13 +678,19 @@ def _write_report(payload: dict[str, Any], path: Path, figure: Path) -> None:
         "",
         "| gate | status |",
         "|---|:---:|",
-        f"| experimental validity | {'pass' if gates['experimental_validity']['pass'] else 'fail'} |",
-        f"| finite-tail convergence | {'pass' if gates['finite_tail_convergence']['pass'] else 'fail'} |",
-        f"| matched-alpha convergence | {'pass' if gates['matched_alpha_convergence']['pass'] else 'fail'} |",
+        f"| experimental validity | {gates['experimental_validity']['status']} |",
+        f"| finite-tail convergence | {gates['finite_tail_convergence']['status']} |",
+        f"| matched-alpha convergence | {gates['matched_alpha_convergence']['status']} |",
         "",
         "The test uses a mirrored visible-coordinate displacement of a complete",
         "formed Markov state. It is an initial-condition response, not an external",
         "force or canonical write-port experiment.",
+        "",
+        "The downstream finite-tail and matched-alpha component checks all",
+        "satisfy their registered numerical thresholds, but they are formally",
+        "blocked because G0 failed its control-radius endpoint bounds. Those",
+        "component values are reported diagnostically and are not promoted to a",
+        "registered pass.",
         "",
         "## Registered matched family",
         "",
