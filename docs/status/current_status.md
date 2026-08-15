@@ -557,26 +557,29 @@ im Holdout. Die Eingangsprofile sind stark kollinear (medianer Gram-
 Konditionswert `15867`, maximale Off-Diagonale `0.9964`). Der Status ist daher
 `null-not-rejected-memory-holdout-limited`, kein universeller No-go-Satz.
 
-Offen bleibt der kanonische Write-Port: P3.8e initialisiert eine gueltige
-zero-centroid Memory-Deformation, erzeugt sie aber nicht durch die
-Trajektorie-zu-Deposition-Abbildung. P3.8f darf deshalb genau einen
-zero-net sichtbaren Dipolpuls mit unabhaengigem Readout und einer gewichtet
-orthogonalisierten oder rangreduzierten Eingangsbasis pruefen. Blockierte
-Signalfenster werden vorab fixiert. Erst ein Pass dieses Source-/Read-Gates
-wuerde Speicher-/Passivitaetsdiagnostik freigeben;
-ein weiterer Fail schliesst die skalare `(m,p)`-Route und verschiebt
-orientiertes Memory oder ein gemeinsames Mehrquellenfeld in eine offen
-deklarierte Modellerweiterung.
+Der kanonische Write-Port P3.8f-a ist inzwischen ausgefuehrt. Ein zero-net
+sichtbarer Nachbarpuls schreibt in 5/5 reife N=3M-Zustaende kontrolliert ueber
+die unveraenderte Trajektorie-zu-Deposition-Abbildung; alle G0-Kontrollen
+bestehen. Die `kR_mem`-Moden sind dabei Ausgaenge, keine orthogonalisierten
+Eingaenge. Nach Abzug der globalen Translationsnullmode faellt die relative
+Positions-/Selbstkraftantwort jedoch schon nach etwa `0.12 tau_mem` unter die
+Schwelle von `1e-3` ihres Peak-RMS. Memory-Holdouts bestehen 3/3,
+unabhaengige Readout-
+Holdouts 0/3 in allen fuenf Seeds. G1 ist daher `inconclusive`; G2 und G3
+bleiben `blocked`. Dies ist weder ein zweiter-Zustand-Fail noch ein skalarer
+No-go-Satz.
 
-Die Entscheidung ist jetzt maschinenlesbar in getrennte Gates zerlegt. Im
-retrospektiven P3.8e-Audit besteht `experimental-validity`; `input-output-
-identifiability` bleibt wegen des Memory-Holdouts `inconclusive`. Deshalb sind
-`second-state-selection` und `oscillatory-phase-mode` `blocked`, nicht als
-physikalische Fails gewertet. Die Gram-Eingangsfamilie besitzt robusten
-gemeinsamen Rang 4; eine fuenfte nur im Mittel sichtbare Richtung wird wegen
-Sample-Kondition bis etwa `5.2e3` verworfen. P3.8f prueft zuerst G2 ohne
-Komplexpolpflicht und nur danach G3. Ein Zwei-Knoten-Transfer ist ein eigener
-nachgelagerter Zweig.
+Als einzige Port-Reparatur wird ein vorregistrierter zero-net Puls mit einem
+Rueckkick nach genau einer intrinsischen Memory-Zeit vorbereitet. Er aendert
+weder Kernel noch Gain oder Noise und verwendet den Nachbarpuls als feste
+Negativkontrolle. Erst ein G1-Pass darf Modellordnung testen; ein erneutes
+G1-`inconclusive` schliesst diese kanonische skalare `(m,p)`-Route.
+
+Die Entscheidung ist maschinenlesbar in getrennte Gates zerlegt. P3.8f-a
+liefert `G0=pass`, `G1=inconclusive`, `G2/G3=blocked`. Der robuste Rang 4 der
+alten P3.8e-Gramfamilie beschreibt direkte Memory-Deformationen und ist kein
+P3.8f-Inputrang. Ein Zwei-Knoten-Transfer bleibt ein eigener nachgelagerter
+Zweig und darf die fehlende Single-Node-Identifizierbarkeit nicht retten.
 
 Langzeitlaeufe dienen fuer P3.8e der Altersstationaritaet der gemessenen
 Suszeptibilitaet. Ein laengerer Lauf des konstruierten P3.8d-Mediators kann

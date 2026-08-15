@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-13.
+Stand: 2026-08-15.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -163,6 +163,20 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Fuenf-Seed-Lauf in Revision `2ecc081` fixiert.
   - [Rigoroses Ergebnis-/Codereview](project/meta/reviews/p38e_finite_k_gate_review_2026-08-13.md):
     historisches Review mit sichtbarem Korrektur-Addendum.
+- [P3.8f-a kanonischer Trajektorien-Write-Port](memory/closure/p38f_canonical_write_gate_2026-08-15.md)
+  - **G0 pass, G1 inconclusive:** Zwei Staerken, drei Achsen und fuenf reife
+    N=3M-Formation-Seeds bestehen alle Zero-net-, `eta=0`-, Linearitaets-,
+    Spiegel- und Shape-Kontrollen.
+  - Nach Entfernung der globalen Translationsnullmode bleibt die relative
+    Positions-/Selbstkraftantwort nur etwa `0.12 tau_mem` ueber `1e-3` ihres
+    Peak-RMS; alle drei Holdouts liegen bei rund `8e-8` des
+    fruehen Signals. Memory-Holdouts bestehen, Readout-Holdouts 0/3.
+  - **Grenze:** G2/G3 sind blockiert, nicht negativ. Keine Parameter-, Pol-,
+    Impuls- oder Phasenidentifikation. Eine einzige memory-time-separierte
+    Port-Reparatur wird vor einem weiteren Lauf separat vorregistriert.
+  - [Code-/Ergebnisreview](project/meta/reviews/p38f_canonical_write_gate_review_2026-08-15.md):
+    dokumentiert die korrigierte Translationsnullmode, den harten
+    Memory-Horizon-Ausschlag und die verbleibenden Stopregeln.
 - [Kontinuitaetsbeschraenktes Memory-Gate](memory/closure/continuity_constrained_memory_gate_2026-08-11.md)
   - **structural pass with unresolved force balance:** Die kanonische
     Memory-Innovation ist bei stationaerer Masse monopolfrei und ihr Dipol ist

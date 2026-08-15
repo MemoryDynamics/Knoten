@@ -136,6 +136,7 @@ def test_seed_shards_round_trip_and_aggregate_out_of_order(tmp_path: Path) -> No
 
     shard, arrays = p38f._load_shard(paths[0])
     baseline = p38f._seed_diagnostics(shard, arrays)
+    assert baseline["metrics"]["relative_force_lifetime_memory_times"] >= 0.0
     shifted = {name: values.copy() for name, values in arrays.items()}
     for record in shard["records"]:
         if record["condition"] != "active":

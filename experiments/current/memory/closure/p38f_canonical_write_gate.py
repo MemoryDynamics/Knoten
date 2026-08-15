@@ -384,6 +384,26 @@ def _signal_folds(
     }
 
 
+def _relative_lifetime(
+    envelope: np.ndarray,
+    sample_steps: np.ndarray,
+    registration: dict[str, Any],
+) -> float:
+    values = np.asarray(envelope, dtype=float)
+    peak = float(np.max(values))
+    if not np.isfinite(peak) or peak <= 0.0:
+        return 0.0
+    pulse_end = int(registration["pulse_updates"])
+    supported = (sample_steps >= pulse_end) & (
+        values >= float(registration["signal_relative_floor"]) * peak
+    )
+    if not np.any(supported):
+        return 0.0
+    return float(
+        np.max(sample_steps[supported]) / int(registration["tau_updates"])
+    )
+
+
 def _seed_diagnostics(
     shard: dict[str, Any],
     arrays: dict[str, np.ndarray],
@@ -493,6 +513,8 @@ def _seed_diagnostics(
     visible = np.concatenate(visible_values, axis=1)
     memory_signal = _signal_folds(memory, steps, registration)
     visible_signal = _signal_folds(visible, steps, registration)
+    memory_envelope = np.sqrt(np.mean(np.abs(memory) ** 2, axis=1))
+    visible_envelope = np.sqrt(np.mean(visible**2, axis=1))
     required_folds = int(registration["required_informative_folds"])
     g0_checks = {
         "zero_net_kick": max(net_kicks) <= 1e-14,
@@ -528,9 +550,14 @@ def _seed_diagnostics(
             "net_kick_max": max(net_kicks),
             "eta_zero_return_max": max(eta_return),
             "eta_zero_extinction_max": max(eta_extinction),
+            "relative_force_lifetime_memory_times": _relative_lifetime(
+                visible_envelope,
+                steps,
+                registration,
+            ),
         },
-        "plot_memory_envelope": np.sqrt(np.mean(np.abs(memory) ** 2, axis=1)),
-        "plot_visible_envelope": np.sqrt(np.mean(visible**2, axis=1)),
+        "plot_memory_envelope": memory_envelope,
+        "plot_visible_envelope": visible_envelope,
     }
 
 
@@ -646,7 +673,7 @@ def _plot(payload: dict[str, Any], path: Path) -> None:
         strict=True,
     ):
         axis.set_yscale("log")
-        axis.set_ylim(1e-8, 2.0)
+        axis.set_ylim(1e-12, 2.0)
         axis.set_xlabel(r"updates / $\tau_{mem}$")
         axis.set_ylabel("normalized RMS")
         axis.set_title(title)
@@ -688,7 +715,7 @@ def _plot(payload: dict[str, Any], path: Path) -> None:
     axes[1, 1].set_yticks(np.arange(5), [str(row["seed"]) for row in rows])
     axes[1, 1].set_xlabel("blocked holdout fold")
     axes[1, 1].set_ylabel("formation seed")
-    axes[1, 1].set_title("min(memory, visible) log10 signal ratio")
+    axes[1, 1].set_title("min(memory, relative/force) log10 signal ratio")
     fig.colorbar(display, ax=axes[1, 1], fraction=0.046, pad=0.04)
     fig.suptitle(f"P3.8f canonical write port: {payload['decision']}", fontsize=13)
     fig.tight_layout()
@@ -731,22 +758,39 @@ def _build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "",
             "## Seed controls and signal support",
             "",
-            "| seed | G0 | G1 | linearity max | even max | shape max | eta0 return | eta0 extinction | memory folds | relative/force folds |",
+            "| seed | G0 | G1 | linearity max | even max | shape max | response lifetime / tau | memory folds | relative/force folds | max relative/force holdout |",
             "|---:|:---:|:---:|---:|---:|---:|---:|---:|---:|---:|",
         ]
     )
     for row in payload["seed_rows"]:
         metrics = row["metrics"]
+        visible_ratios = [
+            fold["relative_to_reference"]
+            for fold in row["visible_signal"]["folds"].values()
+        ]
         lines.append(
             f"| {row['seed']} | {'pass' if row['g0_pass'] else 'fail'} | "
             f"{'pass' if row['g1_pass'] else 'inconclusive'} | "
             f"{metrics['linearity_max']:.3e} | {metrics['even_leakage_max']:.3e} | "
-            f"{metrics['shape_change_max']:.3e} | {metrics['eta_zero_return_max']:.3e} | "
-            f"{metrics['eta_zero_extinction_max']:.3e} | "
-            f"{row['memory_signal']['passes']}/3 | {row['visible_signal']['passes']}/3 |"
+            f"{metrics['shape_change_max']:.3e} | "
+            f"{metrics['relative_force_lifetime_memory_times']:.3f} | "
+            f"{row['memory_signal']['passes']}/3 | "
+            f"{row['visible_signal']['passes']}/3 | {max(visible_ratios):.3e} |"
         )
     lines.extend(
         [
+            "",
+            "The response lifetime is descriptive, not an extra gate: it is the last",
+            "sample at or above the registered `1e-3` fraction of the full",
+            "relative-position/force envelope peak.",
+            "",
+            "## Readout audit",
+            "",
+            "The laboratory position contains a global translation-neutral mode.",
+            "It is excluded from G1. The independent readout is the co-moving",
+            "coordinate `x-m_rho` together with the self-force. An uncommitted draft",
+            "that used absolute position was discarded before this evidence artifact",
+            "was generated.",
             "",
             "## Figure",
             "",
@@ -755,8 +799,9 @@ def _build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "## Interpretation boundary",
             "",
             "G0 establishes only a valid weak canonical intervention. G1 establishes",
-            "only that memory and an independent relative-position/force readout remain measurable",
-            "in fixed chronological holdouts. Neither gate identifies `(m,p)`, complex",
+            "only whether memory and an independent relative-position/force readout remain",
+            "measurable in fixed chronological holdouts. Neither gate identifies `(m,p)`,",
+            "complex",
             "poles, momentum, phase, energy, a second knot or a field law.",
             "",
             "## Provenance",

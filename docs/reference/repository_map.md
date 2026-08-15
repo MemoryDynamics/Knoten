@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-13.
+Stand: 2026-08-15.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -51,6 +51,8 @@ flowchart TD
     experiments --> dynamic_pair_gate["dynamic_two_knot_mediator_gate.py<br/>P3.8d energy + dynamic controls"]
     experiments --> emergent_mode_gate["emergent_modal_state_gate.py<br/>historical P3.8e; superseded identification"]
     experiments --> emergent_mode_reconciliation["emergent_modal_state_reconciliation.py<br/>corrected poles / holdout / Hankel / input Gram"]
+    experiments --> p38f_bundle["curate_p38f_state_bundle.py<br/>five complete hash-checked N3M states"]
+    experiments --> p38f_write["p38f_canonical_write_gate.py<br/>seed shards + split G0/G1 aggregation"]
     experiments --> source_local_exp["source_local_linear_gate.py<br/>strict source locality; knot-loading null"]
     experiments --> core_audit["kernel_core_audit.py<br/>near-field force and matched ablation"]
     experiments --> att_scan["attractive_only_regime_scan.py<br/>dimensionless A-axis + linear benchmark"]
@@ -78,6 +80,7 @@ flowchart TD
     src --> checkpoints["checkpoints.py<br/>versioned z_N + checksums"]
     src --> probe["weak_probe.py<br/>paired pulse + null path"]
     src --> finite_k["finite_k_response.py<br/>zero-centroid modal state impulses"]
+    src --> canonical_write["canonical_write_port.py<br/>mirrored zero-net trajectory write"]
     src --> impulse_id["impulse_identification.py<br/>recursive AR / damped / Hankel gates"]
     src --> frozen["frozen_source.py<br/>localized fixed field + paired controls"]
     src --> coupled["coupled_nodes.py<br/>one-way source + relational/shape observables"]
@@ -120,10 +123,15 @@ flowchart TD
     dynamic_gradient_mediator --> dynamic_pair_gate
     quasistatic_pair --> quasistatic_pair_gate
     finite_k --> emergent_mode_gate
+    checkpoints --> p38f_bundle
+    canonical_write --> p38f_write
+    p38f_bundle --> p38f_write
     impulse_id --> emergent_mode_gate
     emergent_mode_gate --> p38e_null["0/5 temporal pass<br/>canonical null not rejected"]
     p38e_null --> split_gates["G0 validity -> G1 identifiability<br/>G2 second state -> G3 phase"]
     split_gates -.last scalar check.-> write_port["P3.8f zero-net deposition pulse"]
+    write_port --> write_result["G0 5/5 pass<br/>G1 0/5 inconclusive after translation removal"]
+    write_result -.one preregistered repair.-> delayed_write["return kick after one memory time"]
     write_port -.conditional.-> pair_gate["G4 one-way two-node transfer"]
 
     markov --> closure_api["closure.py<br/>AR skill, eigenspaces + exact eta-zero null"]

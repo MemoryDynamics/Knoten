@@ -760,33 +760,45 @@ Prioritaetsfolge:
     2. dieselben festen `kR_mem`-Readouts und ein unabhaengiger sichtbarer
        Kraft-/Relativkoordinaten-Readout werden ohne Zielpol verwendet;
     3. `eta=0`, zwei Staerken, fuenf Seeds und common random numbers bleiben
-       Pflicht; die Eingangsprofile werden gewichtet orthogonalisiert oder auf
-       ihren empirisch identifizierbaren Rang reduziert;
-    4. erster Ordnung, zweiter Ordnung und Delay-Null werden wieder auf
-       vorab fixierten blockierten Signalfenstern verglichen; die spaete
-       Extinktion bleibt separat. Keine Kernel-, Gain-, Noise- oder
-       P3.8d-Parametersuche.
+       Pflicht. Es gibt pro Achse genau einen bekannten Trajektorieninput;
+       Memory-Zentrum und `kR_mem`-Moden sind Outputs, keine frei waehlbaren
+       Eingangsprofile;
+    4. nur nach einem informativen Write-/Read-Gate werden erste, zweite und
+       achte Ordnung auf vorab fixierten blockierten Signalfenstern verglichen.
+       Keine Kernel-, Gain-, Noise- oder P3.8d-Parametersuche.
 
-    Scheitert auch dieser kanonische Source-Port-Test, wird der skalare Weg zu
-    `(m,p)` geschlossen. Ein orientiertes/current Memory oder ein gemeinsames
-    Mehrquellenfeld ist dann offen als neue Modellannahme zu deklarieren und
-    muss erst ueber balancierte Kontrollier-/Beobachtbarkeit, reziproke
-    Leistungsports und eine positive Speichermetrik bestehen.
+    **Ergebnis P3.8f-a:** Der benachbarte `(+delta,-delta)`-Puls besteht alle
+    G0-Kontrollen in 5/5 reifen N=3M-Zustaenden. Nach Entfernung der globalen
+    Translationsnullmode bleibt das Memory-Signal in 3/3 Holdouts messbar, die
+    relative Positions-/Selbstkraftantwort aber nur fuer etwa
+    `0.12 tau_mem` oberhalb von `1e-3` ihres Peak-RMS; ihre
+    Holdout-Verhaeltnisse liegen bei rund `8e-8`. G1 ist
+    daher `0/5 inconclusive`, G2 und G3 sind `blocked`. Die fruehere
+    Auswertung mit absoluter Position war durch eine bleibende Translation
+    kontaminiert und wurde vor Ergebnis-Commit korrigiert.
+
+    **Naechster diskriminierender Schritt:** kein G2-Fit und kein Parameter-
+    Sweep. Zulaessig ist genau eine vorregistrierte Port-Reparatur, bei der
+    der ebenfalls zero-net Rueckkick nach einer bereits intrinsisch gegebenen
+    Memory-Zeit erfolgt. Der bisherige Nachbarpuls bleibt Negativkontrolle.
+    Besteht auch dieser dimensionslose Write-Test G1 nicht, wird die kanonische
+    skalare Route zu `(m,p)` geschlossen. Ein orientiertes/current Memory oder
+    ein gemeinsames Mehrquellenfeld ist dann offen als neue Modellannahme zu
+    deklarieren.
 
     **Ausfuehrungsreihenfolge aktualisiert:** Das fruehere Composite-Gate ist
     jetzt in `G0` experimentelle Gueltigkeit, `G1` Identifizierbarkeit, `G2`
     zweiter Zustand und `G3` komplexe Phase getrennt. `G1`-Mangel ergibt
     `inconclusive`; nachgelagerte Gates sind dann `blocked`. Die vorhandenen
-    Profile besitzen nach Mittelwert-Support formal Rang 5, aber nur robusten
-    gemeinsamen Rang 4 bei relativer Eigenwertschwelle `1e-2` und maximaler
-    Sample-Kondition `100`; die instabile fuenfte Richtung wird nicht
+    alten direkten P3.8e-Profile besitzen robusten gemeinsamen Rang 4. Dieser
+    Rang gehoert nicht zum kanonischen P3.8f-Eingang und wird dort nicht
     invertiert. G2 verlangt keine komplexen Pole. Erst G3 tut dies.
 
-    P3.8f wird zunaechst lokal und seedweise shardbar implementiert. Ein
-    manueller GitHub-Actions-Worker folgt erst nach einem kuratierten,
-    versionierten Fuenf-State-Bundle und einem Aggregate-Manifest. Die
-    wissenschaftlichen Gates bleiben sequentiell; nur die Seed-Simulationen
-    duerfen parallel laufen. Protokoll:
+    P3.8f ist lokal seedweise shardbar implementiert. Das kuratierte
+    versionierte Fuenf-State-Bundle, hashgepruefte NPZ/JSON-Shards und ein
+    Aggregate-Manifest liegen vor; ein GitHub-Worker ist fuer den kurzen Lauf
+    weiterhin nicht erforderlich. Die wissenschaftlichen Gates bleiben
+    sequentiell; nur Seed-Simulationen duerfen parallel laufen. Protokoll:
     `reports/project/meta/preregistration/p38f_split_gate_execution_protocol_2026-08-14.md`.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern

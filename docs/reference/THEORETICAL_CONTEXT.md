@@ -1292,16 +1292,31 @@ skalenbalancierten Energie. Ausserdem sind die fuenf Eingangsprofile mit
 medianer Gram-Kondition `15867` stark kollinear. Die korrekte Einordnung ist
 deshalb `null-not-rejected-memory-holdout-limited`, nicht skalares No-go.
 
-Die Intervention ist eine gueltige State-Suszeptibilitaetsmessung, aber kein
-durch die sichtbare Trajektorie erzeugter kanonischer Write-Port. Daher bleibt
-genau ein skalarer Source-Test offen: Ein zero-net sichtbarer Dipolpuls muss
-ueber die bestehende Deposition schreiben. Seine Eingangsbasis wird vorher
-gewichtet orthogonalisiert oder auf den identifizierbaren Rang reduziert;
-blockierte Signalfenster werden vor dem Lauf fixiert. Erst dann wird gegen
-erste Ordnung und Delay-Null getestet. Ohne diesen Pass ist `(m,p)` keine emergente Closure des
-skalaren Modells. Orientiertes/current Memory oder ein gemeinsames
-Mehrquellenfeld waeren danach explizite neue Zustandsannahmen, keine
-Reparametrisierung von `rho`.
+P3.8e ist eine gueltige State-Suszeptibilitaetsmessung, aber kein durch die
+sichtbare Trajektorie erzeugter kanonischer Write-Port. P3.8f-a schliesst genau
+diese technische Luecke mit einem gespiegelt gepaarten zero-net
+`(+delta,-delta)`-Puls. Pro ambienter Achse existiert ein bekannter Input; das
+Memory-Zentrum und die zentrierten Kanaele bei `kR={0.5,1,2,4,8}` sind
+Outputs. Der P3.8e-Gramrang darf deshalb nicht als P3.8f-Kontrollierbarkeitsrang
+interpretiert werden.
+
+Alle schwachen Interventionskontrollen bestehen in 5/5 reifen N=3M-
+Zustaenden. Die absolute Positionsantwort enthaelt jedoch eine globale
+Translationsnullmode und ist kein interner Knotenzustand. Mit dem korrekten
+Readout `x-m_rho` plus Selbstkraft bleibt die relative Antwort nur etwa
+`0.12 tau_mem` oberhalb von `1e-3` ihres Peak-RMS; in den
+Holdouts erreicht sie nur rund `8e-8` ihres fruehen RMS. Das Memory-Signal
+selbst bleibt messbar. Somit gilt `G0=pass`, `G1=inconclusive` und
+`G2/G3=blocked`. Es wurde weder eine zweite Ordnung verworfen noch `(m,p)`
+identifiziert.
+
+Eine einzige mechanistisch begruendete Port-Reparatur bleibt offen: derselbe
+zero-net Rueckkick nach genau einer durch `lambda_m` gegebenen Memory-Zeit
+statt im direkt folgenden Update. Diese Aenderung staerkt die Deposition ohne
+Kernel-, Gain- oder Noise-Retuning. Erst ein informativer G1-Pass erlaubt den
+Vergleich effektiver Modellordnungen. Andernfalls ist `(m,p)` keine emergente
+Closure des kanonischen skalaren Modells; orientiertes/current Memory oder ein
+gemeinsames Mehrquellenfeld waeren explizite neue Zustandsannahmen.
 
 Die Auswertung verwendet ab P3.8f eine Abhaengigkeitshierarchie statt eines
 Composite-Booleans. Experimentelle Gueltigkeit (`G0`) und Input-Output-
@@ -1312,14 +1327,16 @@ zweite Ordnung und erlaubt ausdruecklich zwei reelle, ueberdaempfte Pole. Erst
 `G3` fragt nach einem komplexen Polpaar und damit nach einem Phasenmodus.
 Source-Target-Transfer und Dispersion sind nachgelagerte Zwei-Knoten-Gates.
 
-Fuer die vorhandenen fuenf `kR_mem`-Profile zeigt eine Mittelwert-Gramian zwar
+Fuer die alten fuenf direkt geschriebenen P3.8e-Profile zeigt eine
+Mittelwert-Gramian zwar
 fuenf Richtungen oberhalb `1e-2` des groessten Eigenwerts. Eine Whitening-Basis
 mit allen fuenf Richtungen erreicht in einzelnen Seed-/Achsenfaellen jedoch
 eine Kondition von etwa `5.2e3`. Der groesste gemeinsame Prefix mit maximaler
 Sample-Kondition `100` hat Rang 4 und bleibt unter `31`. Diese robuste
 Rangreduktion ersetzt weder ein Signalgate noch eine Zustandsidentifikation;
 sie verhindert nur die Verstaerkung einer nahezu unidentifizierbaren
-Eingangsrichtung.
+Eingangsrichtung. Diese Diagnose gilt nicht fuer den einzelnen kanonischen
+Trajektorieninput von P3.8f.
 
 Unterschiedliche transiente Basinwahl durch Ueberschreiten einer Separatrix
 bleibt bei zweiter Ordnung moeglich und kann mit einer festen
