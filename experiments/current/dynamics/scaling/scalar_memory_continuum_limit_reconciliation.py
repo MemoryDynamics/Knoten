@@ -248,7 +248,7 @@ def _write_report(payload: dict[str, Any], path: Path, figure: Path) -> None:
             "",
             "## Registered matched family",
             "",
-            "| alpha | C | H | tail mass | exact rate | observed rate | exact response error | continuum response error |",
+            "| alpha | C | H | tail mass | exact-response fitted rate | observed rate | exact response error | continuum response error |",
             "|---:|---:|---:|---:|---:|---:|---:|---:|",
         ]
     )
@@ -259,7 +259,7 @@ def _write_report(payload: dict[str, Any], path: Path, figure: Path) -> None:
             "| "
             f"{case.alpha:.6f} | {case.tail_extent:.6f} | {case.horizon} | "
             f"{_fmt(finite['tail_mass_fraction'])} | "
-            f"{_fmt(finite['finite_relative_rate'])} | "
+            f"{_fmt(row['median_reference_fitted_rate'])} | "
             f"{_fmt(row['median_fitted_rate'])} | "
             f"{_fmt(row['median_normalized_rms_error_exact'])} | "
             f"{_fmt(row['median_normalized_rms_error_continuum'])} |"
