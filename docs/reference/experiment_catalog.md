@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-15.
+Stand: 2026-08-16.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -35,6 +35,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/long_runs/linear_long_run_reconciliation.py` | finite-memory Long-Run-Radiuscheck | abgeschlossen | vorhandene N=30M/300M-Slices gegen gespeicherte-Masse-Relativmodus pruefen |
 | `experiments/current/dynamics/scaling/scalar_memory_continuum_limit_gate.py` | registrierter skalarer Finite-Tail-/Alpha-Grenztest | abgeschlossen, formal inadäquat | Seed-1--5-Erstlauf; G1/G2-Komponenten bestehen diagnostisch, bleiben aber durch den nicht interventionsspezifischen zeitversetzten Radius-G0 blockiert |
 | `experiments/current/dynamics/scaling/scalar_memory_continuum_limit_reconciliation.py` | prospektive Kontinuumsgrenz-Reconciliation | abgeschlossen, lokaler konditionaler Pass | neue Seeds 6--10, simultane Branch-vs-Control-Radien, unveraenderte Tail-/Alpha-/Holdout-Gates; kontrollierter Relaxationsgrenzwert, kein Masse- oder Impulsclaim |
+| `experiments/current/dynamics/scaling/scalar_memory_force_work_port_gate.py` | prospektiver skalarer Force-/Work-Port | abgeschlossen, overdamped Pass / endliche Traegheit negativ | neue Seeds 11--15; G0/G1/G2O pass, alle vier G2I-Komponenten fail; direkter Feedthrough, divergierende Impulsarbeit und diffusive Kurzzeit-MSD |
 | `experiments/current/kernels/controls/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
 | `experiments/current/kernels/controls/fixed_g_scale_reconciliation.py` | Residence-/Score-Skalenaudit | abgeschlossen | feste Voxel gegen co-moving Residence trennen; post-hoc Lesart ohne Umklassifizierung |
 | `experiments/current/kernels/field/field_equation_bridge.py` | Feldgleichungs-Bruecke | aktiv | exakter Gaussian/Heat-Semigroup-Check gegen nur langwellig gematchtes Relaxations-Diffusionsfeld |
@@ -854,6 +855,7 @@ Modellklasse.
 | `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md` | Long-Run-Linearitaet | Neun aktive N=30M/300M-Slices liegen maximal 1.16 Prozent vom finite-memory Radius entfernt; eta=0 zeigt die Grenze des Absolutbenchmarks. |
 | `reports/dynamics/limits/scalar_memory_continuum_limit_gate_2026-08-15.md` | registrierter Grenztest, Erstlauf | Formal `experiment-inadequate`: der zeitversetzte Kontrollradius verfehlt G0; G1/G2-Komponenten bleiben trotz bestandener numerischer Schwellen blockiert. |
 | `reports/dynamics/limits/scalar_memory_continuum_limit_reconciliation_2026-08-15.md` | prospektive Grenztest-Reconciliation | Alle korrigierten Gates bestehen mit Seeds 6--10; Branch/Control-Radien `0.999606..1.000398`, Finite-H-Fehler etwa `1e-5`, Holdout-Kontinuumsfehler `0.003006`. Nur scaling-konditionale reelle Relaxation, keine emergente Masse. |
+| `reports/dynamics/limits/scalar_memory_force_work_port_gate_2026-08-16.md` | skalarer Force-/Work-Port | G0, G1 und G2O bestehen; G2I scheitert in allen vier Komponenten. Holdout: Feedthrough 1, post-pulse Geschwindigkeit/J -3.990101, alpha W/J^2 1, MSD-Slope 0.959048. Negative finite-inertial Signatur nur fuer den kanonischen additiven Port. |
 | `reports/kernels/nonlinearity/fixed_g_RL_d3_N300k_A26_2026-07-19.md` | festes-g-R/L-Gate | Vorregistriert formal inconclusive; seed-stabile 6.2 Prozent Radiusabweichung, aber stabile Memory-Shape. |
 | `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md` | Residence-Skalenaudit | Feste Voxel sind radiusabhaengig; co-moving Residence ist fuer aktiv und eta=0 gesaettigt. Keine unabhaengige Metastabilitaetsstuetze. |
 | `reports/kernels/field/field_equation_bridge_2026-07-18.md` | Feldgleichungs-Bruecke | Exakte Heat-Hilfsdarstellung des Gausskerns; physisches Relaxations-Diffusionsfeld nur low-k-gematcht und eigener Markov-Zustand. |

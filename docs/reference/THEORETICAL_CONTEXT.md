@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-08-11.
+Stand: 2026-08-16.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -476,6 +476,70 @@ reduction is
 with real relative eigenvalue q(1-g) and stationary Euclidean RMS radius
 
     R_linear = sqrt(d) q epsilon / sqrt(1-q^2(1-g)^2).
+
+For the matched small-step family
+$g=\chi\alpha$, $\epsilon^2=2D\alpha$ and $t=\alpha n$, the local
+untruncated limit with the independently normalized additive generalized-force
+port is
+
+\[
+dx=(-\chi r+f)\,dt+\sqrt{2D}\,dW,\qquad
+dc=r\,dt,\qquad
+dr=-(1+\chi)r\,dt+f\,dt+\sqrt{2D}\,dW.
+\]
+
+The deterministic force-to-visible-velocity transfer is
+
+\[
+{\dot X(s)\over F(s)}={s+1\over s+1+\chi}.
+\]
+
+Eliminating the center therefore gives
+
+\[
+\ddot x+(1+\chi)\dot x=\dot f+f,
+\]
+
+not a Newtonian equation $m\ddot x+\gamma\dot x=f$. The force derivative is
+the port-level signature of unit high-frequency feedthrough. For a one-native-
+step impulse of fixed area $J$, this architecture predicts
+
+\[
+\Delta x/J=1,\qquad
+\alpha W/J^2=1,\qquad
+(x_2-x_1)/(\alpha J)\longrightarrow-\chi.
+\]
+
+The storage $U=\chi r^2/2$ satisfies
+
+\[
+\dot U=f\dot x-\dot x^2-\chi\dot c^2.
+\]
+
+The stationary visible short-time MSD remains
+$2Dt+O(t^2)$ rather than the ballistic $t^2$ law of a regular finite-mass
+position with finite velocity variance.
+
+The prospectively registered force/work gate at $\chi=4$ passed port
+validity, exact finite-H response closure and every overdamped-memory
+component on new formation seeds 11--15. At the
+$\alpha=0.0025$ holdout it measured feedthrough $1.000000$, first post-pulse
+velocity per impulse $-3.990101$, $\alpha W/J^2=1.000000$, and visible-MSD
+slope $0.959048$. All four preregistered positive finite-inertial components
+failed. The defensible conclusion is therefore negative for finite positive
+mass under this canonical additive port.
+
+Post hoc, the low-frequency expansion
+
+\[
+{s+1\over s+5}={1\over5}+{4\over25}s+O(s^2)
+\]
+
+could match $1/(ms+\gamma)$ through first order only with
+$\gamma=5$ and $m=-4$, not a positive passive mass. This does not exclude a
+separately derived momentum state. Adding such a state and applying force to
+it would be a genuine model extension and would insert, rather than establish,
+inertia unless its closure and coefficients were independently derived.
 
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic

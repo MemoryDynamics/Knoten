@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-15.
+Stand: 2026-08-16.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -44,6 +44,16 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
   - **Grenze:** bestaetigt ist eine konstruierte reelle Relaxationsgrenze bei
     festem `chi`, `D` und `alpha H`, keine emergente Masse, kein Impuls und
     keine unterdaempfte Mode. Siehe [kritisches Review](project/meta/reviews/scalar_memory_continuum_limit_review_2026-08-15.md).
+- [Skalarer Force-/Work-Port](dynamics/limits/scalar_memory_force_work_port_gate_2026-08-16.md)
+  - **supported overdamped, negative finite-inertial signature:** Der
+    prospektive Port besteht G0, G1 und alle vier G2O-Komponenten; alle vier
+    G2I-Komponenten scheitern. Am Holdout sind Feedthrough \(1.000000\),
+    post-pulse Geschwindigkeit pro Impuls \(-3.990101\),
+    \(\alpha W/J^2=1.000000\) und die Kurzzeit-MSD-Steigung \(0.959048\).
+  - **Grenze:** Der direkte additive Kraftport testet eine dimensionslose
+    lokale skalare Reduktion. Er verwirft positive endliche Traegheitsmasse
+    fuer diesen Port, nicht jeden moeglichen erweiterten Impulszustand. Siehe
+    [kritisches Review](project/meta/reviews/scalar_memory_force_work_port_review_2026-08-16.md).
 - [Checkpoint-/Holdout-Stabilitaetsgate](long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md)
   - **supported, method-conditional:** 5/5 `d=10`, `A_att=35`-Seeds bestehen
     vier Alterscheckpoints bis `N=30M`, lokale Radiusfenster und den
@@ -55,9 +65,12 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     diskriminierend.
 
 Entscheidung: Das skalare Modell bleibt eine kontrollierte lineare Baseline
-mit scaling-konditionalem Kontinuumsgrenzwert. Ein Masse-/Traegheitsclaim
-braucht statt weiterer reiner Alpha-Verfeinerung einen unabhaengig normierten
-Kraft-/Arbeitsport sowie einen ballistisch-vs.-diffusiven Falsifikationstest.
+mit scaling-konditionalem Kontinuumsgrenzwert. Der nun unabhaengig normierte
+Kraft-/Arbeitsport und der ballistisch-vs.-diffusive Falsifikationstest
+selektieren overdamped Memory und verwerfen regulaere positive endliche Masse
+fuer diesen Port. Ein neuer Massekandidat braucht einen separat abgeleiteten
+Impulszustand, fehlenden Hochfrequenz-Feedthrough und eine positive passive
+Arbeitsbilanz; ein lediglich eingesetztes Momentum waere nicht emergent.
 
 ### 2. Dimension
 
