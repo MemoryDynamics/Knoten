@@ -658,6 +658,7 @@ def _write_figure(payload: dict[str, Any], path: Path) -> None:
     axes[1, 1].set_xticklabels(
         [f"{alpha:g}" for alpha in ALPHA_VALUES], rotation=25, ha="right"
     )
+    axes[1, 1].tick_params(axis="x", which="minor", labelbottom=False)
     axes[1, 1].legend(fontsize=8)
 
     for axis in axes.flat:
