@@ -279,12 +279,35 @@ def _run_case_seed(
         np.sqrt(np.mean(strength_residual * strength_residual))
         / np.sqrt(np.mean(exact * exact))
     )
+    memory_radii = np.asarray(response.memory_radii, dtype=float)
+    control_radii = memory_radii[:, 0]
+    radii_are_valid = bool(
+        np.isfinite(memory_radii).all()
+        and np.all(memory_radii > 0.0)
+        and np.all(control_radii > 0.0)
+    )
+    if radii_are_valid:
+        branch_control_ratios = memory_radii[:, 1:] / control_radii[:, None]
+        minimum_branch_control_ratio = float(np.min(branch_control_ratios))
+        maximum_branch_control_ratio = float(np.max(branch_control_ratios))
+    else:
+        minimum_branch_control_ratio = None
+        maximum_branch_control_ratio = None
     return {
         "seed": int(seed),
         "initial_control_radius": response.initial_control_radius,
         "final_control_radius": response.final_control_radius,
         "control_radius_ratio": response.final_control_radius
         / response.initial_control_radius,
+        "all_memory_radii_positive_finite": radii_are_valid,
+        "minimum_memory_radius": float(np.nanmin(memory_radii)),
+        "maximum_memory_radius": float(np.nanmax(memory_radii)),
+        "minimum_simultaneous_branch_control_radius_ratio": (
+            minimum_branch_control_ratio
+        ),
+        "maximum_simultaneous_branch_control_radius_ratio": (
+            maximum_branch_control_ratio
+        ),
         "strength_nonlinearity_rms": strength_rms,
         "strength_nonlinearity_maximum": float(np.max(np.abs(strength_residual))),
         "analytic_maximum_recurrence_residual": float(
@@ -364,6 +387,33 @@ def _aggregate_case(case: Any, seeds: list[dict[str, Any]]) -> dict[str, Any]:
         ),
         "maximum_control_radius_ratio": max(
             seed["control_radius_ratio"] for seed in seeds
+        ),
+        "all_memory_radii_positive_finite": all(
+            seed["all_memory_radii_positive_finite"] for seed in seeds
+        ),
+        "minimum_memory_radius": min(
+            seed["minimum_memory_radius"] for seed in seeds
+        ),
+        "maximum_memory_radius": max(
+            seed["maximum_memory_radius"] for seed in seeds
+        ),
+        "minimum_simultaneous_branch_control_radius_ratio": min(
+            (
+                seed["minimum_simultaneous_branch_control_radius_ratio"]
+                for seed in seeds
+                if seed["minimum_simultaneous_branch_control_radius_ratio"]
+                is not None
+            ),
+            default=None,
+        ),
+        "maximum_simultaneous_branch_control_radius_ratio": max(
+            (
+                seed["maximum_simultaneous_branch_control_radius_ratio"]
+                for seed in seeds
+                if seed["maximum_simultaneous_branch_control_radius_ratio"]
+                is not None
+            ),
+            default=None,
         ),
         "maximum_analytic_recurrence_residual": max(
             seed["analytic_maximum_recurrence_residual"] for seed in seeds

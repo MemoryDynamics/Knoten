@@ -55,6 +55,7 @@ class PairedContinuumResponse:
     relative_responses: np.ndarray
     drift_responses: np.ndarray
     relative_even_leakage: np.ndarray
+    memory_radii: np.ndarray
     initial_control_radius: float
     final_control_radius: float
 
@@ -401,11 +402,16 @@ def _paired_response(
     base_center, initial_radius = _weighted_center_and_radius(
         initial_history, initial_head, weights, mass
     )
+    base_second_moment = initial_radius * initial_radius
+    for coord in range(dim):
+        base_second_moment += base_center[coord] * base_center[coord]
+    second_moments = np.empty(n_paths, np.float64)
     for path in range(n_paths):
         xs[path] = initial_x
         histories[path] = initial_history
         heads[path] = initial_head
         centers[path] = base_center
+        second_moments[path] = base_second_moment
     for offset in range(n_offsets):
         plus = 1 + 2 * offset
         minus = plus + 1
@@ -416,7 +422,9 @@ def _paired_response(
 
     relative = np.empty((n_steps + 1, n_paths, dim), np.float64)
     drifts = np.empty((n_steps, n_paths, dim), np.float64)
+    radii = np.empty((n_steps + 1, n_paths), np.float64)
     for path in range(n_paths):
+        radii[0, path] = initial_radius
         for coord in range(dim):
             relative[0, path, coord] = xs[path, coord] - centers[path, coord]
 
@@ -435,16 +443,30 @@ def _paired_response(
             )
             oldest_index = (heads[path] + horizon - 1) % horizon
             oldest = histories[path, oldest_index].copy()
+            oldest_norm2 = 0.0
             for coord in range(dim):
+                oldest_norm2 += oldest[coord] * oldest[coord]
                 drift = -eta * gradient[coord]
                 drifts[step, path, coord] = drift
                 xs[path, coord] += epsilon * noise[step, coord] + drift
+            x_norm2 = 0.0
             for coord in range(dim):
+                x_norm2 += xs[path, coord] * xs[path, coord]
                 centers[path, coord] = (
                     q * centers[path, coord]
                     + deposition_fraction * xs[path, coord]
                     - deposition_fraction * tail * oldest[coord]
                 )
+            second_moments[path] = (
+                q * second_moments[path]
+                + deposition_fraction * x_norm2
+                - deposition_fraction * tail * oldest_norm2
+            )
+            center_norm2 = 0.0
+            for coord in range(dim):
+                center_norm2 += centers[path, coord] * centers[path, coord]
+            radius2 = second_moments[path] - center_norm2
+            radii[step + 1, path] = np.sqrt(max(radius2, 0.0))
             heads[path] = (heads[path] - 1) % horizon
             histories[path, heads[path]] = xs[path]
             for coord in range(dim):
@@ -452,10 +474,7 @@ def _paired_response(
                     xs[path, coord] - centers[path, coord]
                 )
 
-    _, final_radius = _weighted_center_and_radius(
-        histories[0], heads[0], weights, mass
-    )
-    return relative, drifts, initial_radius, final_radius
+    return relative, drifts, radii
 
 
 def simulate_matched_continuum_response(
@@ -517,7 +536,7 @@ def simulate_matched_continuum_response(
     )
     if filled != case.horizon:
         raise RuntimeError("formation did not fill the finite memory horizon")
-    relative, drifts, initial_radius, final_radius = _paired_response(
+    relative, drifts, memory_radii = _paired_response(
         initial_x,
         initial_history,
         initial_head,
@@ -560,6 +579,7 @@ def simulate_matched_continuum_response(
         relative_responses=response_values,
         drift_responses=drift_values,
         relative_even_leakage=even_values,
-        initial_control_radius=float(initial_radius),
-        final_control_radius=float(final_radius),
+        memory_radii=memory_radii,
+        initial_control_radius=float(memory_radii[0, 0]),
+        final_control_radius=float(memory_radii[-1, 0]),
     )

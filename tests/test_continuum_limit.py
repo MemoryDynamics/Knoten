@@ -86,6 +86,21 @@ def test_mirrored_local_response_matches_linear_reference() -> None:
         atol=2.0e-12,
     )
     np.testing.assert_allclose(response.relative_even_leakage, 0.0, atol=2.0e-12)
+    assert response.memory_radii.shape == (11, 5)
+    np.testing.assert_allclose(response.memory_radii[0], 0.0, atol=0.0)
+    assert response.initial_control_radius == response.memory_radii[0, 0]
+    assert response.final_control_radius == response.memory_radii[-1, 0]
+
+    deposition = case.centroid_deposition_fraction
+    delta = response.offset_amplitudes[0]
+    normalized_relative = response.relative_responses[0, 1, 0]
+    first_displaced_x = delta * normalized_relative / (1.0 - deposition)
+    expected_first_radius = abs(first_displaced_x) * np.sqrt(
+        deposition * (1.0 - deposition)
+    )
+    np.testing.assert_allclose(
+        response.memory_radii[1, 1], expected_first_radius, rtol=1.0e-12
+    )
 
 
 def test_registered_gate_cases_are_unique_and_rate_fit_is_predictive() -> None:
