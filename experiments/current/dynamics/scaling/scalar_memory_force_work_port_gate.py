@@ -72,6 +72,9 @@ MSD_SEED = 20_260_816
 MSD_PATHS = 65_536
 MSD_STEPS = 16
 MSD_FIT_START = 2
+FIRST_PROSPECTIVE_EXECUTION_REVISION = (
+    "e6a034b5ad08b862b041e60311c2cb92501178a2"
+)
 
 DIM = 3
 CHI = 4.0
@@ -731,12 +734,22 @@ def run_gate(*, seeds: Iterable[int] = FORMATION_SEEDS) -> dict[str, Any]:
             "dynamic_path_updates": total_updates,
             "dynamic_path_updates_per_second": total_updates / elapsed,
         },
+        "posthoc_transfer_expansion": {
+            "velocity_over_force_dc_mobility": 1.0 / (1.0 + CHI),
+            "linear_laplace_coefficient": CHI / (1.0 + CHI) ** 2,
+            "matched_free_inertial_damping": 1.0 + CHI,
+            "matched_free_inertial_mass": -CHI,
+            "gate_role": "none; analytic interpretation only",
+        },
         "claim_limits": {
             "force_units": "dimensionless generalized force; no SI map",
             "mass_scope": "finite inertial reading of this canonical port only",
             "extended_states": "not ruled out",
             "port_dependence": "force placement is part of the tested architecture",
         },
+        "first_prospective_execution_revision": (
+            FIRST_PROSPECTIVE_EXECUTION_REVISION
+        ),
     }
 
 
@@ -812,6 +825,11 @@ def _write_figure(payload: dict[str, Any], path: Path) -> None:
     )
     axes[1, 0].axhline(1.0, color="black", linestyle=":")
     axes[1, 0].invert_xaxis()
+    axes[1, 0].set_xticks(ALPHA_VALUES)
+    axes[1, 0].set_xticklabels(
+        [f"{alpha:g}" for alpha in ALPHA_VALUES], rotation=25, ha="right"
+    )
+    axes[1, 0].tick_params(axis="x", which="minor", labelbottom=False)
     axes[1, 0].set_title("High-frequency overdamped signatures")
     axes[1, 0].set_xlabel("alpha (decreasing to the right)")
     axes[1, 0].set_ylabel("normalized coefficient")
@@ -837,6 +855,10 @@ def _write_figure(payload: dict[str, Any], path: Path) -> None:
         label="slope 2",
     )
     axes[1, 1].set_title(f"Visible MSD: slope={msd['simulated_slope']:.3f}")
+    msd_ticks = (0.005, 0.01, 0.02, 0.04)
+    axes[1, 1].set_xticks(msd_ticks)
+    axes[1, 1].set_xticklabels([f"{value:g}" for value in msd_ticks])
+    axes[1, 1].tick_params(axis="x", which="minor", labelbottom=False)
     axes[1, 1].set_xlabel("time")
     axes[1, 1].set_ylabel("MSD")
     axes[1, 1].legend(fontsize=8)
@@ -945,11 +967,17 @@ def _write_report(
             "coarse graining, or the absence of an explicitly added or separately",
             "derived momentum field. Force placement is part of the tested model.",
             "",
+            "Post-hoc analytic check (not a gate): expanding the measured",
+            "overdamped transfer gives `(s+1)/(s+5)=1/5+(4/25)s+...`.",
+            "Matching a free inertial mobility `1/(gamma+m s)` at low frequency",
+            "would require `gamma=5` and `m=-4`, not a positive passive mass.",
+            "",
             "## Provenance",
             "",
             f"- Protocol: [{PREREGISTRATION.name}]({continuum_gate._relative(path, continuum_gate._resolve(PREREGISTRATION))}).",
             f"- Preceding continuum review: [{CONTINUUM_REVIEW.name}]({continuum_gate._relative(path, continuum_gate._resolve(CONTINUUM_REVIEW))}).",
             f"- Simulation revision: `{payload['simulation_revision']}`.",
+            f"- First prospective seed-11--15 execution revision: `{FIRST_PROSPECTIVE_EXECUTION_REVISION}`.",
             f"- Git status at execution: `{payload['git_status'] or 'clean'}`.",
             f"- Formation seeds: `{','.join(str(seed) for seed in FORMATION_SEEDS)}`; Brownian-coarsened common noise.",
             f"- Formation: `{FORMATION_TIME:g}` memory times; response: `{RESPONSE_TIME:g}` memory times at native cadence.",
