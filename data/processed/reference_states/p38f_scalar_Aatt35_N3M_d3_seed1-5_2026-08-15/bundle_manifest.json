@@ -1,0 +1,358 @@
+{
+  "curation_revision": "7b0e3de3454bd69663c31c8e6b66da1101a1cc9b",
+  "entries": [
+    {
+      "checkpoint": "scalar_Aatt35_d3_seed1_N3000000.npz",
+      "checkpoint_bytes": 19890,
+      "checkpoint_manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "987764f5982da98ce633000354ef26ca2c224deec1ccfba87453d7bbef9a4d24",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "42fab5ec774daa391df4fbcf645d2dc087217220c51592194be708bca0e68270",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "16179883955ce9373a1b23d2319e6b1e41072f20637287b3b225baa36a707206",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 1000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 3000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T04:38:24Z",
+        "formation_seed": 1,
+        "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+        "git_revision": "6f05e9d",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 3000000
+      },
+      "checkpoint_sha256": "98b4845622f71b1f7c365aabc0d9b0f8483ba9ca0dc5ecad605b5dabfd275926",
+      "seed": 1,
+      "source_elapsed_seconds": 97.7739075999998,
+      "source_git_status": "",
+      "source_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed1_steps3000000.json",
+      "source_sha256": "10c8650d40d1fff01c2bc7aa6d4661f271acff35fe9395dfc101e6448d746614",
+      "source_started_utc": "2026-07-16T04:36:47Z"
+    },
+    {
+      "checkpoint": "scalar_Aatt35_d3_seed2_N3000000.npz",
+      "checkpoint_bytes": 19836,
+      "checkpoint_manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "3b72c122df3d295a2d0fb7d28cc1a120c9896351d45ef590f14fb9c088762d49",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "42fab5ec774daa391df4fbcf645d2dc087217220c51592194be708bca0e68270",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "cfb4bdf3ef28ad2a083a0b86cd7ab1f6be2fb238e42de9226d7bbec0ebe95471",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 1000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 3000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T04:39:56Z",
+        "formation_seed": 2,
+        "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+        "git_revision": "6f05e9d",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 3000000
+      },
+      "checkpoint_sha256": "2a2108f939cab9b848a4a54509f19ac6cafe2b34f1322749e4570cfea68c55f3",
+      "seed": 2,
+      "source_elapsed_seconds": 94.44171899999492,
+      "source_git_status": "",
+      "source_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed2_steps3000000.json",
+      "source_sha256": "41e5def5bee92feebd204ac89ab2566ac2960af0d6933f09129251f12e361188",
+      "source_started_utc": "2026-07-16T04:38:22Z"
+    },
+    {
+      "checkpoint": "scalar_Aatt35_d3_seed3_N3000000.npz",
+      "checkpoint_bytes": 19604,
+      "checkpoint_manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "ea6e70c5c383786f7faccbf1eed6ecc7dda8d7f6f5f59971fa992ec5e45f3e7b",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "42fab5ec774daa391df4fbcf645d2dc087217220c51592194be708bca0e68270",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "8c7388f621f56fdbd9b1b746d240a891810c99f625c387b6b869ad255efbad4d",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 1000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 3000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T04:41:34Z",
+        "formation_seed": 3,
+        "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+        "git_revision": "6f05e9d",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 3000000
+      },
+      "checkpoint_sha256": "9f628af1cbb4cd75dc39be92be686572929e497baa1e45840ef1393db95793de",
+      "seed": 3,
+      "source_elapsed_seconds": 95.93468749997555,
+      "source_git_status": "",
+      "source_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed3_steps3000000.json",
+      "source_sha256": "882721c56e67ed90e3c937d54223c1bdb6e4dcb970877edf3a267e9ab9919816",
+      "source_started_utc": "2026-07-16T04:39:59Z"
+    },
+    {
+      "checkpoint": "scalar_Aatt35_d3_seed4_N3000000.npz",
+      "checkpoint_bytes": 19707,
+      "checkpoint_manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "2f363c4d610f3a94da00e7c296e46fcd8a38d1b592985c02cff01c4466f4bcde",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "42fab5ec774daa391df4fbcf645d2dc087217220c51592194be708bca0e68270",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "2fd861e5516400e7f59ce3ab0607f33c8b50461d798e8836d69cf725a7f8a373",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 1000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 3000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T04:43:08Z",
+        "formation_seed": 4,
+        "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+        "git_revision": "6f05e9d",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 3000000
+      },
+      "checkpoint_sha256": "afe6437292babe296907b7d30c4d56af40a44d826d0fd6a155942e66f5e9efed",
+      "seed": 4,
+      "source_elapsed_seconds": 94.89145669998834,
+      "source_git_status": "",
+      "source_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed4_steps3000000.json",
+      "source_sha256": "7e7b0949b45e14413ee6901fe5e3a9a657e4a30e2b1401679d3f7e1e08b9bc6e",
+      "source_started_utc": "2026-07-16T04:41:34Z"
+    },
+    {
+      "checkpoint": "scalar_Aatt35_d3_seed5_N3000000.npz",
+      "checkpoint_bytes": 19909,
+      "checkpoint_manifest": {
+        "arrays": {
+          "memory": {
+            "dtype": "<f8",
+            "sha256": "13182b604d5afb362cda33f831337f77a3ab66a7a531504829642ef505b947d9",
+            "shape": [
+              600,
+              3
+            ]
+          },
+          "weights": {
+            "dtype": "<f8",
+            "sha256": "42fab5ec774daa391df4fbcf645d2dc087217220c51592194be708bca0e68270",
+            "shape": [
+              600
+            ]
+          },
+          "x": {
+            "dtype": "<f8",
+            "sha256": "f099d0d005c2cf45e487c1d150a10df1e79300a543f1055e33b793ea5cc62ed0",
+            "shape": [
+              3
+            ]
+          }
+        },
+        "config": {
+          "alpha": 0.01,
+          "amplitude_att": 35.0,
+          "amplitude_rep": 1.0,
+          "burn_in": 0,
+          "deposition_kernel": "delta",
+          "deposition_sigma": 0.0,
+          "dim": 3,
+          "epsilon": 0.0001,
+          "eta": 0.15,
+          "max_memory": 800,
+          "memory_factor": 6.0,
+          "memory_mass": 1.0,
+          "sample_every": 1000,
+          "sigma_att": 3.0,
+          "sigma_rep": 1.0,
+          "steps": 3000000
+        },
+        "continuation_noise_policy": "fresh explicit common-noise stream per paired continuation experiment",
+        "created_utc": "2026-07-16T04:44:43Z",
+        "formation_seed": 5,
+        "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+        "git_revision": "6f05e9d",
+        "memory_order": "youngest_first",
+        "model": "scalar_finite_memory",
+        "schema": "emergenz-knoten.finite-memory-state",
+        "schema_version": 1,
+        "update_index": 3000000
+      },
+      "checkpoint_sha256": "1fc4a65cd88a0f099388730952d8b80fb89a52c93a05f0fb83eaa7cd138d75fe",
+      "seed": 5,
+      "source_elapsed_seconds": 94.36103450000519,
+      "source_git_status": "",
+      "source_path": "data/processed/long_run_metastability/raw_memory_snapshot_retest_Aatt35_N3M_d3_seed1-5_2026-07-16/case_baseline_seed5_steps3000000.json",
+      "source_sha256": "a3f41aebf2673c3cbffc38d163f0e448d505565605a730f41bddf269382730f1",
+      "source_started_utc": "2026-07-16T04:43:09Z"
+    }
+  ],
+  "expected_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "generator": "experiments/current/memory/representations/curate_p38f_state_bundle.py",
+  "schema": "emergenz-knoten.p38f-state-bundle",
+  "schema_version": 1,
+  "shared_config": {
+    "alpha": 0.01,
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "burn_in": 0,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "memory_mass": 1.0,
+    "sample_every": 1000,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "steps": 3000000
+  }
+}
