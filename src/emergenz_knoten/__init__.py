@@ -84,6 +84,10 @@ from .checkpoints import (
     load_finite_memory_checkpoint,
     save_finite_memory_checkpoint,
 )
+from .canonical_write_port import (
+    PairedCanonicalWriteResponse,
+    paired_canonical_write_response,
+)
 from .core import (
     SimulationConfig,
     memory_horizon,
@@ -453,6 +457,7 @@ __all__ = [
     "OrientedSourceTrace",
     "RelativeOrbitalObservables",
     "PairedProbeResponse",
+    "PairedCanonicalWriteResponse",
     "SignedCrossCalibration",
     "SignedCrossResponse",
     "SimulationConfig",
@@ -615,6 +620,7 @@ __all__ = [
     "paired_frozen_source_response",
     "paired_external_field_response",
     "paired_finite_k_memory_response",
+    "paired_canonical_write_response",
     "paired_signed_cross_response",
     "paired_uniform_probe_response",
     "passive_delay_observability",

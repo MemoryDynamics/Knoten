@@ -47,37 +47,42 @@ The fixed strengths remain
 \delta/R_{\rm mem}\in\{0.005,0.01\}.
 \]
 
-Five independent mature formation seeds, `eta=0`, write-off, mirror-swap and
-common-noise controls are mandatory. Kernel, gain, noise and P3.8d parameters
-are not searched.
+Five independent mature formation seeds, `eta=0`, zero-strength, mirror-paired
+and common-noise controls are mandatory. The no-kick control is the write-off
+arm: it receives the same continuation noise but no intervention. Kernel,
+gain, noise and P3.8d parameters are not searched.
 
 ## G0: experimental validity
 
 G0 checks implementation and perturbative validity, not model order:
 
-* uniform-port identity error at most `1e-10`;
+* the two registered kicks sum to zero within `1e-14`;
+* after the second kick, the `eta=0` visible arms return to the no-kick
+  control within `1e-10`;
 * eta-zero extinction residual at most `1e-8` on the extinction window;
 * paired-strength nonlinearity at most `0.1` median and `0.25` maximum;
+* the no-kick control radius stays above `1e-12` of its initial value, so the
+  relative shape test remains defined;
 * memory-radius change at most `0.1`;
-* mirror swap changes the sign of the odd response but not its norm beyond
-  numerical tolerance;
-* write-off and zero-strength arms remain at their registered nulls.
+* the mirrored even leakage is at most `0.1` median and `0.25` maximum;
+* the common no-kick arm is used as the zero-strength/write-off reference.
 
 A G0 failure is `fail` for the experiment and blocks every physical gate.
 
 ## G1: input-output identifiability
 
-The weighted input-profile Gramians are averaged only to construct a common
-basis. Eigenmodes below `1e-2` of the leading mean eigenvalue are discarded.
-The largest retained prefix must additionally have transformed condition
-number at most `100` in every seed/axis sample. At least two robust directions
-are required for the second-state test; four are required before a three-term
-spatial law plus one held-out mode can be fitted.
+P3.8f has one prescribed input per ambient axis: the two-update trajectory
+pulse above. The memory centre and the centred Fourier channels at
 
-The current P3.8e profiles have mean-supported rank five but robust common rank
-four: the fifth prefix reaches condition number about `5.2e3`, whereas the
-fourth remains below `31`. This is a diagnostic of the existing data and does
-not pre-decide P3.8f.
+\[
+kR\in\{0.5,1,2,4,8\}
+\]
+
+are outputs, not independently adjustable input profiles. The P3.8e
+input-profile Gramian therefore cannot be reused as a controllability rank for
+P3.8f. Its robust rank-four result remains a diagnostic of the older direct
+memory intervention only. In P3.8f, observability and output-channel rank are
+tested at G2 after G1 establishes a measurable canonical write/read path.
 
 Responses are recorded at the finest cadence and downsampled only during
 analysis. With `tau_mem=1/lambda_m`, the rolling chronological folds are fixed
@@ -90,19 +95,24 @@ as:
 | C | `[0.1,4.0] tau_mem` | `(4.0,5.0] tau_mem` |
 
 The interval `(6,8] tau_mem` is extinction-only and is not moved into a fit to
-rescue signal loss. A fold is informative only when its active memory and
-independent visible/force readouts exceed the corresponding write-off and
-time-shuffled null envelope. At least two folds in at least four of five seeds
-must be informative. Otherwise G1 is `inconclusive`, not evidence against a
-second state.
+rescue signal loss. A response channel is active only if its early normalized
+RMS exceeds `1e-8`. A fold is informative only when both the active memory
+output and the independent visible/force output retain at least `1e-3` of
+their respective early response RMS. The mirrored no-kick arm supplies the
+numerical null. Time-shuffled controls are reserved for the G2 prediction
+statistic because shuffling cannot null an amplitude envelope. At least two
+folds in at least four of five seeds must be informative. Otherwise G1 is
+`inconclusive`, not evidence against a second state.
 
 ## G2: second-state selection
 
 G2 asks only whether a two-state temporal realization is selected. Complex
 poles are not required.
 
-The retained orthogonal inputs and the memory readouts form the fit channels.
-The relative visible coordinate and self-force remain independent readouts.
+The known trajectory pulse and the retained memory-output channels form the
+fit data. The relative visible coordinate and self-force remain independent
+readouts. Output channels with inadequate numerical support are discarded by
+a seedwise training-fold criterion fixed before their holdout values are read.
 Orders one, two and eight use identical target times and rolling folds. For
 each seed and fold define
 
