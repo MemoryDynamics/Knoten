@@ -24,6 +24,14 @@ from .active_scalar_field import (
     spectral_delta_coefficients,
 )
 from .autonomous_trace import AutonomousKnotTrace, autonomous_knot_trace
+from .continuum_limit import (
+    PairedContinuumResponse,
+    ScalarContinuumCase,
+    aggregate_standard_normal_increments,
+    finite_h_linear_response,
+    matched_scalar_continuum_case,
+    simulate_matched_continuum_response,
+)
 from .balanced_memory import (
     BalancedMemorySpectrum,
     balanced_hankel_spectrum,
