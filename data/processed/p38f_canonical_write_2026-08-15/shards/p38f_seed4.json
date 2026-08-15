@@ -1,0 +1,792 @@
+{
+  "archive": "data/processed/p38f_canonical_write_2026-08-15/shards/p38f_seed4.npz",
+  "archive_sha256": "53f5bba5bfe68584ff96c4b2c8f8d0c7b8d78339abdcd4032245bd323976cc7a",
+  "array_shapes": {
+    "active_f0_a0__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f0_a0__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f0_a0__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f0_a0__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f0_a0__control_positions": [
+      801,
+      3
+    ],
+    "active_f0_a0__control_radius_ratios": [
+      801
+    ],
+    "active_f0_a0__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a0__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f0_a0__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f0_a0__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a0__position_response": [
+      801,
+      3
+    ],
+    "active_f0_a0__self_drift_response": [
+      801,
+      3
+    ],
+    "active_f0_a1__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f0_a1__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f0_a1__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f0_a1__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f0_a1__control_positions": [
+      801,
+      3
+    ],
+    "active_f0_a1__control_radius_ratios": [
+      801
+    ],
+    "active_f0_a1__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a1__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f0_a1__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f0_a1__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a1__position_response": [
+      801,
+      3
+    ],
+    "active_f0_a1__self_drift_response": [
+      801,
+      3
+    ],
+    "active_f0_a2__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f0_a2__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f0_a2__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f0_a2__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f0_a2__control_positions": [
+      801,
+      3
+    ],
+    "active_f0_a2__control_radius_ratios": [
+      801
+    ],
+    "active_f0_a2__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a2__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f0_a2__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f0_a2__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f0_a2__position_response": [
+      801,
+      3
+    ],
+    "active_f0_a2__self_drift_response": [
+      801,
+      3
+    ],
+    "active_f1_a0__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f1_a0__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f1_a0__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f1_a0__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f1_a0__control_positions": [
+      801,
+      3
+    ],
+    "active_f1_a0__control_radius_ratios": [
+      801
+    ],
+    "active_f1_a0__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a0__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f1_a0__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f1_a0__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a0__position_response": [
+      801,
+      3
+    ],
+    "active_f1_a0__self_drift_response": [
+      801,
+      3
+    ],
+    "active_f1_a1__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f1_a1__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f1_a1__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f1_a1__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f1_a1__control_positions": [
+      801,
+      3
+    ],
+    "active_f1_a1__control_radius_ratios": [
+      801
+    ],
+    "active_f1_a1__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a1__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f1_a1__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f1_a1__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a1__position_response": [
+      801,
+      3
+    ],
+    "active_f1_a1__self_drift_response": [
+      801,
+      3
+    ],
+    "active_f1_a2__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "active_f1_a2__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "active_f1_a2__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "active_f1_a2__centered_mode_response": [
+      801,
+      5
+    ],
+    "active_f1_a2__control_positions": [
+      801,
+      3
+    ],
+    "active_f1_a2__control_radius_ratios": [
+      801
+    ],
+    "active_f1_a2__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a2__memory_center_response": [
+      801,
+      3
+    ],
+    "active_f1_a2__plus_kicks": [
+      2,
+      3
+    ],
+    "active_f1_a2__position_even_leakage": [
+      801,
+      3
+    ],
+    "active_f1_a2__position_response": [
+      801,
+      3
+    ],
+    "active_f1_a2__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f0_a0__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f0_a0__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a0__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a0__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f0_a0__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f0_a0__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a0__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f0_a1__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f0_a1__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a1__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a1__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f0_a1__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f0_a1__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a1__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f0_a2__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f0_a2__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a2__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f0_a2__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f0_a2__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f0_a2__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f0_a2__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f1_a0__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f1_a0__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a0__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a0__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f1_a0__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f1_a0__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a0__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f1_a1__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f1_a1__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a1__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a1__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f1_a1__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f1_a1__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a1__self_drift_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__branch_positions": [
+      801,
+      2,
+      3
+    ],
+    "eta_zero_f1_a2__branch_radius_ratios": [
+      801,
+      2
+    ],
+    "eta_zero_f1_a2__centered_mode_even_leakage": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a2__centered_mode_response": [
+      801,
+      5
+    ],
+    "eta_zero_f1_a2__control_positions": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__control_radius_ratios": [
+      801
+    ],
+    "eta_zero_f1_a2__memory_center_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__memory_center_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__plus_kicks": [
+      2,
+      3
+    ],
+    "eta_zero_f1_a2__position_even_leakage": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__position_response": [
+      801,
+      3
+    ],
+    "eta_zero_f1_a2__self_drift_response": [
+      801,
+      3
+    ],
+    "kr_values": [
+      5
+    ],
+    "perturbation_fractions": [
+      2
+    ],
+    "sample_steps": [
+      801
+    ]
+  },
+  "bundle_manifest": "data/processed/reference_states/p38f_scalar_Aatt35_N3M_d3_seed1-5_2026-08-15/bundle_manifest.json",
+  "bundle_manifest_sha256": "505bd05c7518a62c8f3b3dbeaae20c7ff7b03c876b6e373c01e86ac6b39a2579",
+  "checkpoint": "data/processed/reference_states/p38f_scalar_Aatt35_N3M_d3_seed1-5_2026-08-15/scalar_Aatt35_d3_seed4_N3000000.npz",
+  "checkpoint_sha256": "afe6437292babe296907b7d30c4d56af40a44d826d0fd6a155942e66f5e9efed",
+  "config": {
+    "alpha": 0.01,
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "burn_in": 0,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "dim": 3,
+    "epsilon": 0.0001,
+    "eta": 0.15,
+    "max_memory": 800,
+    "memory_factor": 6.0,
+    "memory_mass": 1.0,
+    "sample_every": 1000,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "steps": 3000000
+  },
+  "formation_revision": "6f05e9d",
+  "formation_seed": 4,
+  "formation_update_index": 3000000,
+  "generated_utc": "2026-08-15T04:42:56.864495+00:00",
+  "records": [
+    {
+      "axis": 0,
+      "condition": "active",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "active_f0_a0"
+    },
+    {
+      "axis": 0,
+      "condition": "active",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "active_f1_a0"
+    },
+    {
+      "axis": 0,
+      "condition": "eta_zero",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "eta_zero_f0_a0"
+    },
+    {
+      "axis": 0,
+      "condition": "eta_zero",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "eta_zero_f1_a0"
+    },
+    {
+      "axis": 1,
+      "condition": "active",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "active_f0_a1"
+    },
+    {
+      "axis": 1,
+      "condition": "active",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "active_f1_a1"
+    },
+    {
+      "axis": 1,
+      "condition": "eta_zero",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "eta_zero_f0_a1"
+    },
+    {
+      "axis": 1,
+      "condition": "eta_zero",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "eta_zero_f1_a1"
+    },
+    {
+      "axis": 2,
+      "condition": "active",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "active_f0_a2"
+    },
+    {
+      "axis": 2,
+      "condition": "active",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "active_f1_a2"
+    },
+    {
+      "axis": 2,
+      "condition": "eta_zero",
+      "fraction": 0.005,
+      "fraction_index": 0,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 1.0808985095799612e-06,
+      "prefix": "eta_zero_f0_a2"
+    },
+    {
+      "axis": 2,
+      "condition": "eta_zero",
+      "fraction": 0.01,
+      "fraction_index": 1,
+      "memory_radius": 0.00021617970191599225,
+      "perturbation_amplitude": 2.1617970191599224e-06,
+      "prefix": "eta_zero_f1_a2"
+    }
+  ],
+  "registration": {
+    "absolute_response_floor": 1e-08,
+    "analysis_updates": 800,
+    "dim": 3,
+    "folds_memory_times": {
+      "A": {
+        "fit": [
+          0.1,
+          2.0
+        ],
+        "holdout": [
+          2.0,
+          3.0
+        ]
+      },
+      "B": {
+        "fit": [
+          0.1,
+          3.0
+        ],
+        "holdout": [
+          3.0,
+          4.0
+        ]
+      },
+      "C": {
+        "fit": [
+          0.1,
+          4.0
+        ],
+        "holdout": [
+          4.0,
+          5.0
+        ]
+      }
+    },
+    "formation_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "kr_values": [
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "noise_seed": 20260815,
+    "perturbation_fractions": [
+      0.005,
+      0.01
+    ],
+    "pulse_updates": 2,
+    "required_informative_folds": 2,
+    "required_seed_passes": 4,
+    "sample_every": 1,
+    "signal_relative_floor": 0.001,
+    "tau_updates": 100
+  },
+  "schema": "emergenz-knoten.p38f-canonical-write-shard",
+  "schema_version": 1,
+  "simulation_revision": "31e11e7dffdec8e8720136f1dc3b7da314b6aa57"
+}
