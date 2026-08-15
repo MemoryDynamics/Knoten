@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import time
 from typing import Any
 
 import numpy as np
@@ -48,6 +49,9 @@ ORIGINAL_REPORT = Path(
 RECONCILIATION_SEEDS = (6, 7, 8, 9, 10)
 LOCAL_RADIUS_LIMIT = 0.02
 RADIUS_RATIO_BOUNDS = (0.95, 1.05)
+FIRST_PROSPECTIVE_EXECUTION_REVISION = (
+    "2c660d85bb3cc3b607f7aa5bc5282845c4911a35"
+)
 
 
 def _median(values: list[float]) -> float:
@@ -165,7 +169,17 @@ def _evaluate_reconciliation_gates(
 def run_reconciliation() -> dict[str, Any]:
     """Run the unchanged physical gates with prospective seeds and corrected G0."""
 
+    started = time.perf_counter()
     payload = original.run_audit(seeds=RECONCILIATION_SEEDS)
+    elapsed = time.perf_counter() - started
+    response_paths = 1 + 2 * len(original.OFFSET_FRACTIONS)
+    updates_per_seed = sum(
+        original._integer_steps(original.FORMATION_TIME, case.alpha)
+        + response_paths
+        * original._integer_steps(original.RESPONSE_TIME, case.alpha)
+        for case in original.registered_cases()
+    )
+    total_path_updates = len(RECONCILIATION_SEEDS) * updates_per_seed
     payload["schema"] = "emergenz-knoten.scalar-memory-continuum-reconciliation"
     payload["schema_version"] = 1
     payload["preregistration"] = PREREGISTRATION.as_posix()
@@ -181,6 +195,14 @@ def run_reconciliation() -> dict[str, Any]:
         "changed": "G0 radius comparator and prospective seeds only",
         "unchanged": "model, matched axes, G1, G2, holdout and thresholds",
         "original_decision_preserved": "experiment-inadequate",
+        "first_prospective_execution_revision": (
+            FIRST_PROSPECTIVE_EXECUTION_REVISION
+        ),
+    }
+    payload["runtime"] = {
+        "simulation_and_aggregation_seconds": elapsed,
+        "dynamic_path_updates": total_path_updates,
+        "dynamic_path_updates_per_second": total_path_updates / elapsed,
     }
     return payload
 
@@ -194,7 +216,9 @@ def _fmt(value: float | None) -> str:
     return f"{number:.6f}"
 
 
-def _write_report(payload: dict[str, Any], path: Path, figure: Path) -> None:
+def _write_report(
+    payload: dict[str, Any], path: Path, figure: Path, summary: Path
+) -> None:
     cases = payload["cases"]
     gates = payload["gates"]
     validity = gates["corrected_experimental_validity"]
@@ -292,8 +316,12 @@ def _write_report(payload: dict[str, Any], path: Path, figure: Path) -> None:
             f"- Reconciliation protocol: [{PREREGISTRATION.name}]({original._relative(path, original._resolve(PREREGISTRATION))}).",
             f"- Original audit: [{ORIGINAL_REPORT.name}]({original._relative(path, original._resolve(ORIGINAL_REPORT))}).",
             f"- Simulation revision: `{payload['simulation_revision']}`.",
+            f"- First prospective seed-6--10 execution revision: `{FIRST_PROSPECTIVE_EXECUTION_REVISION}`.",
             f"- Git status at execution: `{payload['git_status'] or 'clean'}`.",
             "- Five prospective formation seeds and Brownian-coarsened common noise.",
+            f"- Formation: `{original.FORMATION_TIME:g}` memory times; response: `{original.RESPONSE_TIME:g}` memory times sampled at native cadence.",
+            f"- Runtime: `{payload['runtime']['simulation_and_aggregation_seconds']:.3f} s` for `{payload['runtime']['dynamic_path_updates']}` dynamic path updates (`{payload['runtime']['dynamic_path_updates_per_second']:.1f}/s`).",
+            f"- Machine-readable summary: [{summary.name}]({original._relative(path, summary)}).",
         ]
     )
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -316,7 +344,7 @@ def main() -> None:
     figure = original._resolve(args.figure)
     original._write_json(summary, payload)
     original._write_figure(payload, figure)
-    _write_report(payload, report, figure)
+    _write_report(payload, report, figure, summary)
     print(json.dumps({"decision": payload["decision"], "report": str(report)}))
 
 

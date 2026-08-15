@@ -31,6 +31,19 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
 - [Long-Run-Reconciliation](long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md)
   - **supported:** neun aktive `N=30M/300M`-Slices folgen dem linearen
     Finite-Memory-Radius bis maximal `1.16%` relativ.
+- [Skalarer Memory-Kontinuumsgrenztest](dynamics/limits/scalar_memory_continuum_limit_reconciliation_2026-08-15.md)
+  - **supported, local and scaling-conditional:** Die prospektive Seed-6--10-
+    Reconciliation besteht Validitaet, Finite-Tail und gematchte
+    Alpha-Konvergenz. Der RMS-Kontinuumsfehler sinkt von `0.046095` bei
+    `alpha=0.04` auf `0.003006` beim Holdout `alpha=0.0025`; die simulierte
+    Antwort liegt etwa `1e-5` von der exakten Finite-H-Referenz entfernt.
+  - Der [registrierte Erstlauf](dynamics/limits/scalar_memory_continuum_limit_gate_2026-08-15.md)
+    bleibt formal `experiment-inadequate`: sein zeitversetzter Kontrollradius
+    war kein interventionsspezifisches G0-Kriterium. Die Reconciliation aendert
+    diese historische Entscheidung nicht rueckwirkend.
+  - **Grenze:** bestaetigt ist eine konstruierte reelle Relaxationsgrenze bei
+    festem `chi`, `D` und `alpha H`, keine emergente Masse, kein Impuls und
+    keine unterdaempfte Mode. Siehe [kritisches Review](project/meta/reviews/scalar_memory_continuum_limit_review_2026-08-15.md).
 - [Checkpoint-/Holdout-Stabilitaetsgate](long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md)
   - **supported, method-conditional:** 5/5 `d=10`, `A_att=35`-Seeds bestehen
     vier Alterscheckpoints bis `N=30M`, lokale Radiusfenster und den
@@ -41,8 +54,10 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     Residence- und Score-Metriken sind auf dieser Radiusachse nicht
     diskriminierend.
 
-Entscheidung: Das skalare Modell bleibt kontrollierte lineare Baseline. Keine
-weitere reine Amplituden- oder Epsilon-Suche ohne neue Mechanismushypothese.
+Entscheidung: Das skalare Modell bleibt eine kontrollierte lineare Baseline
+mit scaling-konditionalem Kontinuumsgrenzwert. Ein Masse-/Traegheitsclaim
+braucht statt weiterer reiner Alpha-Verfeinerung einen unabhaengig normierten
+Kraft-/Arbeitsport sowie einen ballistisch-vs.-diffusiven Falsifikationstest.
 
 ### 2. Dimension
 
