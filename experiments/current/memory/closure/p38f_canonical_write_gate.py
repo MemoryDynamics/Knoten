@@ -356,6 +356,8 @@ def _signal_folds(
         return {
             "active_channels": 0,
             "reference_rms": maximum,
+            "active_scale_min": 0.0,
+            "active_scale_max": maximum,
             "folds": empty_folds,
             "passes": 0,
         }
@@ -375,6 +377,8 @@ def _signal_folds(
     return {
         "active_channels": int(np.count_nonzero(active)),
         "reference_rms": reference_rms,
+        "active_scale_min": float(np.min(scales[active])),
+        "active_scale_max": float(np.max(scales[active])),
         "folds": fold_rows,
         "passes": int(passes),
     }
@@ -479,7 +483,8 @@ def _seed_diagnostics(
                 )
                 visible_values.extend(
                     (
-                        small["position_response"],
+                        small["position_response"]
+                        - small["memory_center_response"],
                         small["self_drift_response"],
                     )
                 )
@@ -529,7 +534,11 @@ def _seed_diagnostics(
     }
 
 
-def aggregate_shards(shard_paths: list[Path]) -> dict[str, Any]:
+def aggregate_shards(
+    shard_paths: list[Path],
+    *,
+    analysis_revision: str = "unavailable",
+) -> dict[str, Any]:
     """Validate all registered shards and evaluate only G0 and G1."""
 
     loaded = [
@@ -592,6 +601,7 @@ def aggregate_shards(shard_paths: list[Path]) -> dict[str, Any]:
         "schema_version": AGGREGATE_SCHEMA_VERSION,
         "generated_utc": datetime.now(UTC).isoformat(),
         "simulation_revision": first["simulation_revision"],
+        "analysis_revision": analysis_revision,
         "bundle_manifest": first["bundle_manifest"],
         "bundle_manifest_sha256": first["bundle_manifest_sha256"],
         "registration": first["registration"],
@@ -632,7 +642,7 @@ def _plot(payload: dict[str, Any], path: Path) -> None:
         axes[0, 1].plot(time, visible / max(float(np.max(visible)), 1e-300), label=f"seed {row['seed']}")
     for axis, title in zip(
         axes[0],
-        ("Memory response envelope", "Visible/force response envelope"),
+        ("Memory response envelope", "Relative-position/force response envelope"),
         strict=True,
     ):
         axis.set_yscale("log")
@@ -721,7 +731,7 @@ def _build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "",
             "## Seed controls and signal support",
             "",
-            "| seed | G0 | G1 | linearity max | even max | shape max | eta0 return | eta0 extinction | memory folds | visible folds |",
+            "| seed | G0 | G1 | linearity max | even max | shape max | eta0 return | eta0 extinction | memory folds | relative/force folds |",
             "|---:|:---:|:---:|---:|---:|---:|---:|---:|---:|---:|",
         ]
     )
@@ -745,13 +755,14 @@ def _build_report(payload: dict[str, Any], report: Path, figure: Path) -> str:
             "## Interpretation boundary",
             "",
             "G0 establishes only a valid weak canonical intervention. G1 establishes",
-            "only that memory and an independent visible/force readout remain measurable",
+            "only that memory and an independent relative-position/force readout remain measurable",
             "in fixed chronological holdouts. Neither gate identifies `(m,p)`, complex",
             "poles, momentum, phase, energy, a second knot or a field law.",
             "",
             "## Provenance",
             "",
             f"- Simulation revision: `{payload['simulation_revision']}`.",
+            f"- Analysis revision: `{payload['analysis_revision']}`.",
             f"- State bundle: `{payload['bundle_manifest']}` (`{payload['bundle_manifest_sha256']}`).",
         ]
     )
@@ -832,7 +843,7 @@ def main() -> None:
 
     shard_dir = _resolve(args.shard_dir)
     paths = [shard_dir / f"p38f_seed{seed}.json" for seed in REGISTERED_SEEDS]
-    payload = aggregate_shards(paths)
+    payload = aggregate_shards(paths, analysis_revision=revision)
     serializable = _jsonable(payload)
     summary = _resolve(args.summary)
     report = _resolve(args.report)

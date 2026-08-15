@@ -115,9 +115,13 @@ def test_seed_shards_round_trip_and_aggregate_out_of_order(tmp_path: Path) -> No
         for seed in p38f.REGISTERED_SEEDS
     ]
 
-    payload = p38f.aggregate_shards(list(reversed(paths)))
+    payload = p38f.aggregate_shards(
+        list(reversed(paths)),
+        analysis_revision="analysis-revision",
+    )
 
     assert payload["schema"] == p38f.AGGREGATE_SCHEMA
+    assert payload["analysis_revision"] == "analysis-revision"
     assert [row["seed"] for row in payload["seed_rows"]] == p38f.REGISTERED_SEEDS
     assert [row["seed"] for row in payload["shards"]] == p38f.REGISTERED_SEEDS
     assert [Path(row["manifest"]).name for row in payload["shards"]] == [
@@ -129,6 +133,23 @@ def test_seed_shards_round_trip_and_aggregate_out_of_order(tmp_path: Path) -> No
         "not-run",
         "blocked",
     }
+
+    shard, arrays = p38f._load_shard(paths[0])
+    baseline = p38f._seed_diagnostics(shard, arrays)
+    shifted = {name: values.copy() for name, values in arrays.items()}
+    for record in shard["records"]:
+        if record["condition"] != "active":
+            continue
+        prefix = record["prefix"]
+        offset = np.linspace(0.0, 0.2, shifted["sample_steps"].size)[:, None]
+        shifted[f"{prefix}__position_response"] += offset
+        shifted[f"{prefix}__memory_center_response"] += offset
+    translated = p38f._seed_diagnostics(shard, shifted)
+    np.testing.assert_allclose(
+        translated["plot_visible_envelope"],
+        baseline["plot_visible_envelope"],
+        atol=1e-15,
+    )
 
 
 def test_seed_shard_rejects_tampered_archive(tmp_path: Path) -> None:
