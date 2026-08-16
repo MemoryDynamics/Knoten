@@ -838,6 +838,7 @@ Modellklasse.
 
 | Datei | Thema | Lesart |
 | --- | --- | --- |
+| `reports/project/decisions/s1_phase_mass_falsification_program_2026-08-16.md` | S1-Phase und Masse-Falsifikation | Programm-Charter, noch keine Praeregistrierung und kein Resultat. Kandidat und Discovery-Provenienz muessen zuerst eingefroren werden; danach getrennte Gates fuer rohe S1-Topologie, autonome Phase, externe Kopplung sowie Port-, Skalen-, Impuls- und Symmetrieclosure. |
 | `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |
 | `reports/project/decisions/alpha_memory_mass_decision_2026-07-08.md` | Alpha, M0 und Ballistikschwelle | `beta=lambda_m M0`; Alpha-Scans kontrolliert ueber `lambda_m`, `M0`, Tail-Cutoff und `eta/eta_c`; Photon-Track erst nach komplexen/coarse-grained Moden. |
 | `reports/project/governance/privacy_and_control_plan_2026-07-08.md` | Privacy und M0/Alpha-One-Kontrollen | Privacy-Policy und Kontrollplan; lokale private Klartexte entfernt, `m0_zero` und `alpha_one` bleiben Negativkontrollen. |

@@ -106,6 +106,16 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 
 ### 3. Memory-Feld und reduzierte Moden
 
+- [S1-Phasen- und Masse-Falsifikationsprogramm](project/decisions/s1_phase_mass_falsification_program_2026-08-16.md)
+  - **program charter; no candidate result:** Ein moeglicher neuer
+    Oszillationssatz wird erst nach vollstaendiger Parameter- und
+    Discovery-Provenienz als `P0` eingefroren. Im Repository liegt noch kein
+    eindeutiges neues Tupel. Alte komplex-eligible oder quench-ringing Punkte
+    sind als konfirmatorische Kandidaten gesperrt.
+  - Der \(S^1\)-Ast trennt rohe Topologie, out-of-sample Kreiskoordinate,
+    autonome Phase und externe Phasenkopplung. A--F pruefen davon unabhaengig
+    Port, Skalen, Komposition/Impuls, Transfer und Symmetrien. Vor dem
+    Candidate-Freeze wird keine neue Zielsimulation ausgefuehrt.
 - [P3.8d dynamisches Zwei-Knoten-Mediatorgate](response/reciprocal/dynamic_two_knot_mediator_gate_2026-08-12.md)
   - **conditional dynamic existence pass:** Eine gemeinsame Energie liefert
     `(m,p,R)`-Dynamik mit geschlossener Source-work-/Daempfungsbilanz,

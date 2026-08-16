@@ -801,6 +801,29 @@ Prioritaetsfolge:
     sequentiell; nur Seed-Simulationen duerfen parallel laufen. Protokoll:
     `reports/project/meta/preregistration/p38f_split_gate_execution_protocol_2026-08-14.md`.
 
+25. **Separater S1-/Masse-Falsifikationsast, vorerst nur Charter.** Ein
+    moeglicher Parametersatz fuer knoteninterne Oszillation und externe
+    Wechselwirkung wird nicht in P3.8f hineingedeutet. Vor jedem neuen
+    Ziellauf muss `P0` das vollstaendige Parametertupel, Architekturlevel,
+    Code-/State-Hashes, alle betrachteten Discovery-Daten und eine Regel fuer
+    neue konfirmatorische Seeds einfrieren. Im Repository liegt derzeit kein
+    eindeutiger neuer Satz vor.
+
+    Der Topologieast definiert zuerst das behauptete Objekt: deterministischer
+    Orbit, stochastischer Dichte-Ridge, Delay-Rekonstruktion oder kollektiver
+    Zwei-Knoten-Orbit. Eine Winkeltransformation, Hilbert-Phase oder
+    candidate-getunter Delay ist vor einem persistenten `H1`-Pass verboten.
+    Danach folgen out-of-sample Kreiskoordinate, autonome force-off-Dynamik und
+    erst zuletzt externe Phasenkopplung. Ein periodischer externer Drive darf
+    sein eigenes `S1` nicht als knoteninterne Topologie einschleusen.
+
+    Parallel dazu bleiben die Referee-Gates A--F logisch getrennt: physischer
+    Port, unabhaengige `tau/mu/M0`-Skalierung, Zwei-Knoten-Komposition und
+    Gesamtimpuls, ungesehene Kraftprofile sowie Symmetrie-/Open-System-Audit.
+    Ein `S1`-Pass erzeugt keine Masse; ein Masse-Fail widerlegt keine robuste
+    interne Phase. Charter:
+    `reports/project/decisions/s1_phase_mass_falsification_program_2026-08-16.md`.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
