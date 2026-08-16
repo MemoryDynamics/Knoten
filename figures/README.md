@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-08-13.
+Stand: 2026-08-16.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -59,6 +59,11 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
   Finite-`k`-Antwort, rekursiver Ordnungs-Holdout und Hankel-Spektrum; alle
   Interventionskontrollen bestehen, aber 0/5 Kanaele selektieren eine
   reversible zweite Zeitordnung.
+- `draft/topology/s1_control_pipeline_2026-08-16.png`: reine
+  Methodentrainings-Kontrollen fuer volle H0/H1-Vietoris--Rips-Persistenz;
+  Kreis/Hopf, Zwei-Generator-Torus und negative/rivalisierende Geometrien
+  einschliesslich eines endlichen 12-Zyklus. Keine Kandidatendaten, kein
+  Topologie-Cutoff und keine S1-Evidenz fuer das Knotenmodell.
 
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in

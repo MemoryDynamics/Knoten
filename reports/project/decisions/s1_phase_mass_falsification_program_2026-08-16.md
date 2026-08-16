@@ -7,6 +7,11 @@ yet an executable preregistration. The candidate parameter tuple, its discovery
 provenance and the exact confirmatory seeds are not yet present in the
 repository. No candidate simulation is authorized by this document.
 
+The second-pass findings and their resolutions are recorded in the
+[referee review](../meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md).
+The first authorized methods-only artifact is the
+[candidate-independent synthetic topology control](../../topology/s1_control_pipeline_2026-08-16.md).
+
 ## Executive decision
 
 A parameter set with knot-internal oscillation and externally measurable
@@ -33,20 +38,28 @@ flowchart TD
     P0["P0 candidate and discovery freeze"] --> A["A physical port derivation"]
     P0 --> D0["D0 raw observable and claimed topological object"]
     D0 --> D1["D1 measurement adequacy"]
+    D0 --> F0["F0 coordinate and topology symmetries"]
     D1 --> D2["D2 persistent S1 evidence"]
     D2 --> D3["D3 out-of-sample circular coordinate"]
     D3 --> D4["D4 autonomous phase dynamics"]
     D4 --> D5["D5 external phase interaction"]
     A --> B["B independent scale and mass tests"]
     B --> E["E unseen-force transfer"]
-    A --> F["F symmetry and open-system audit"]
+    A --> F1["F1 mechanical and open-system symmetries"]
+    B --> F1
     B --> C["C composition and momentum"]
-    D4 --> C
+    D4 -. optional phase-exchange subarm .-> C
 ```
 
 Scientific decisions are sequential. Method-development controls and
 simulation shards may be parallelized, but downstream target data remain
 sealed until their upstream gate is frozen and passed.
+
+Before P0, only a dependency-pinned generic topology adapter and synthetic
+positive/negative pipeline controls may be implemented. They may not contain a
+candidate-shaped observable, metric, delay, filtration threshold or decision
+cutoff. This permits infrastructure work without weakening the candidate
+freeze.
 
 ## Existing-candidate quarantine
 
@@ -169,6 +182,11 @@ laboratory translations and must state how ambient rotations and reflections
 act. Center, relative coordinate, shape modes and field modes remain distinct
 components rather than being pooled with arbitrary scales.
 
+The metric, component weights and any whitening are part of the observable
+contract. They must follow declared physical units, an architecture-derived
+energy metric or a control-only rule fixed before target labels are opened.
+Candidate covariance may not be whitened or rescaled to maximize a hole.
+
 Before D2 passes, the target pipeline may not apply:
 
 - `atan2`, modulo \(2\pi\), a circular mean or an imposed angular coordinate;
@@ -198,7 +216,12 @@ checks are:
 5. local intrinsic dimension, neighbor count and condition number are adequate
    for the registered topology estimator;
 6. external-drive-off and mechanism-off traces are recorded at identical
-   cadence and duration.
+   cadence and duration;
+7. temporal thinning at fixed multiples of the autocorrelation time leaves the
+   decision unchanged and prevents dense oversampling from acting as sample
+   size;
+8. the formation seed is the replication unit. Segments and cadence variants
+   are repeated measures within a seed, not independent replicates.
 
 Failure is `topology-measurement-inconclusive`. It cannot be rescued by a
 candidate-specific projection, shorter window or stronger coupling.
@@ -206,7 +229,11 @@ candidate-specific projection, shorter window or stronger coupling.
 ### D2: topology gate
 
 The topology implementation is calibrated and frozen on positive and negative
-controls before confirmatory labels are opened.
+controls before confirmatory labels are opened. Control realizations are split
+into method-training and untouched method-validation sets; a control used to
+choose a metric or threshold cannot also certify its false-positive rate. The
+coefficient field, filtration convention and treatment of essential classes
+are fixed in the executable protocol.
 
 Positive pipeline controls:
 
@@ -219,11 +246,17 @@ Negative or rival controls matched as closely as possible to the candidate:
 - stationary OU and fitted real-pole AR controls with matched covariance and
   autocorrelation;
 - a stable complex linear focus producing a damped transient spiral;
-- phase-randomized and block-shuffled surrogates preserving spectrum or local
-  amplitude statistics;
+- phase-randomized surrogates preserving the registered spectrum and
+  amplitude distribution;
 - amplitude-only breathing and metastable switching controls;
 - drive-only, source-off, cross-off and mechanism-off arms;
-- cadence aliases and the same trace with temporal order destroyed.
+- cadence aliases.
+
+For topology of a raw state-space point cloud, a pure permutation of sample
+order leaves the cloud and therefore its persistent homology unchanged; this
+is a required invariance check, not a negative control. Time or block
+shuffling is a negative control only when it is applied before a registered
+delay embedding or when D3/D4 tests temporal phase dynamics.
 
 On untouched candidate traces, compute local dimension/boundary diagnostics
 and persistent homology/cohomology in the fixed metric. A seed-segment passes
@@ -231,7 +264,8 @@ only if:
 
 1. there is one connected recurrent component after the preregistered
    transient rule;
-2. the local geometry is compatible with one intrinsic direction and no
+2. at the preregistered mesoscale between sampling noise and loop diameter,
+   the ridge geometry is compatible with one intrinsic direction and no
    persistent boundary endpoints;
 3. exactly one dominant \(H^1\) class exceeds the null envelope fixed from
    controls;
@@ -243,9 +277,10 @@ only if:
    controls.
 
 The aggregate requirement is the same classification in both stationary
-segments of at least four of five new seeds. Threshold values and the distance
-metric are committed after control calibration but before target labels are
-opened.
+segments of at least four of five new seeds. Seedwise block resampling
+quantifies uncertainty without treating points or segments as independent.
+Threshold values, familywise multiplicity handling and the distance metric are
+committed after control calibration but before target labels are opened.
 
 A D2 pass supports `persistent-S1-like-output-manifold`. It does not yet show
 directed phase motion, autonomy or physical mass.
@@ -263,6 +298,11 @@ The map is then evaluated without refit on withheld times, seeds, cadences and
 the sealed parameter holdout. Coordinates from different folds may differ by
 one constant phase and orientation, but their transition maps must have degree
 \(+1\) or \(-1\), not folding or seed-dependent winding number.
+
+The out-of-sample extension rule is itself preregistered. Neighbor,
+kernel/harmonic or barycentric interpolation parameters are learned only on
+the training cloud and applied unchanged to held-out points. Recomputing a new
+cohomology class separately on every holdout is not out-of-sample prediction.
 
 Required checks include:
 
@@ -388,6 +428,13 @@ common scaling law across all cells and reserve at least one joint
 \((\tau,\mu,M_0)\) cell. Seedwise mass estimates are secondary; the primary
 decision is held-out scaling against the filter and material alternatives.
 
+Changing \(\tau\), \(\mu\) or \(M_0\) may also move the system across a
+formation or oscillation boundary. The executable protocol therefore separates
+two estimands: weak response around state-matched frozen checkpoints, and
+independently re-formed stationary states at each parameter cell. A lost knot
+or lost D4 phase is reported as a regime change, not silently removed from the
+mass regression.
+
 ## C: composition and momentum
 
 C is more discriminating than another one-knot pulse. Use two independently
@@ -401,9 +448,13 @@ P=M_1\dot c_1+M_2\dot c_2.
 \]
 
 With no external input, equal and opposite internal forces must conserve total
-momentum after including any mediator or memory-field momentum required by the
-architecture. Energy transfer between center, internal phase, shape and field
-must close in the same ledger.
+momentum after including any mediator, memory-field and declared bath impulse
+required by the architecture. If damping defines an open medium, the paired
+knot momentum need not be constant by itself. The primary balance is then
+change of knot-plus-field momentum equals the registered bath impulse. A
+common-noise cross-off arm must remove background drag before attributing a
+residual to internal nonreciprocity. Energy transfer between center, internal
+phase, shape, field and bath must close in the same ledger.
 
 Controls include cross-off, label swap, unequal \(M_1/M_2\), common
 translation, common boost, source/target swap, large separation and
@@ -436,6 +487,11 @@ does not repair a failed A, B or C gate and does not alone distinguish a
 self-sustained oscillator from a driven linear resonance.
 
 ## F: symmetry and open-system boundary
+
+F is cross-cutting rather than one terminal gate. F0 applies coordinate
+symmetries to D0--D3 without requiring a physical force port. F1 applies
+mechanical symmetries and the open-system ledger after A/B. Failure is scoped
+to the affected claim instead of blocking an unrelated topology result.
 
 Run the same frozen decision under transformations that should not change the
 claim:
@@ -492,6 +548,7 @@ canonical test.
 | D2+D3 | out-of-sample circular phase coordinate |
 | D2+D3+D4 | autonomous internal or explicitly collective phase oscillator |
 | plus D5 | phase-dependent external interaction or synchronization |
+| D2+D3+D5 with D4 fail | driven circular response or phase susceptibility, not an autonomous internal oscillator |
 | A+B+E | physically calibrated effective center impedance over unseen inputs |
 | A+B+C+E and relevant F | additive effective inertial mass in the declared open-system architecture |
 | validated continuous-time periodic orbit plus transverse stability, or a certified invariant circle of the discrete map | computer-assisted/analytic \(S^1\) claim for the declared deterministic law |
@@ -505,8 +562,10 @@ effective-mechanics result only if A--C and E/F close.
 
 ## Next checkpoint
 
-The immediate next artifact is the completed P0 candidate manifest, not a
-simulation. Once it exists:
+Generic topology infrastructure may now be implemented only against synthetic
+and architecture-independent controls. The immediate candidate-specific
+artifact remains the completed P0 manifest, not a target simulation. Once it
+exists:
 
 1. decide whether the primary topological object is a continuous-time orbit,
    discrete invariant circle, stochastic ridge, delay reconstruction or

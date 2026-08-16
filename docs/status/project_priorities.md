@@ -801,7 +801,8 @@ Prioritaetsfolge:
     sequentiell; nur Seed-Simulationen duerfen parallel laufen. Protokoll:
     `reports/project/meta/preregistration/p38f_split_gate_execution_protocol_2026-08-14.md`.
 
-25. **Separater S1-/Masse-Falsifikationsast, vorerst nur Charter.** Ein
+25. **Separater S1-/Masse-Falsifikationsast; Charter plus reine
+    Methodenkontrollen.** Ein
     moeglicher Parametersatz fuer knoteninterne Oszillation und externe
     Wechselwirkung wird nicht in P3.8f hineingedeutet. Vor jedem neuen
     Ziellauf muss `P0` das vollstaendige Parametertupel, Architekturlevel,
@@ -823,6 +824,14 @@ Prioritaetsfolge:
     Ein `S1`-Pass erzeugt keine Masse; ein Masse-Fail widerlegt keine robuste
     interne Phase. Charter:
     `reports/project/decisions/s1_phase_mass_falsification_program_2026-08-16.md`.
+
+    Der zweite Referee-Pass korrigiert den diskreten Periodenorbit-/`S1`-
+    Fehlschluss, den Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die
+    offene Impulsbilanz. Gestartet ist nur ein dependency-gepinnter
+    synthetischer Method-Training-Split. Sein endlicher 12-Zyklus traegt trotz
+    nichtkreisfoermiger Invariantmengentopologie eine lange `H1`-Klasse und
+    demonstriert damit die notwendige Trennung von Geometrie und Dynamik. Der
+    Validation-Split bleibt ungeoeffnet; P0 blockiert weiterhin Zielruns.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

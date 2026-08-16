@@ -16,6 +16,7 @@ CURRENT_CATEGORY_ROOTS = {
     "markov": "current/markov",
     "memory": "current/memory",
     "reference": "current/reference",
+    "topology": "current/topology",
 }
 
 

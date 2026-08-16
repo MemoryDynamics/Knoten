@@ -112,10 +112,19 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Discovery-Provenienz als `P0` eingefroren. Im Repository liegt noch kein
     eindeutiges neues Tupel. Alte komplex-eligible oder quench-ringing Punkte
     sind als konfirmatorische Kandidaten gesperrt.
+  - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
+    korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
+    Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.
+  - Die [synthetische Topologiekontrolle](topology/s1_control_pipeline_2026-08-16.md)
+    ist der einzige gestartete Ast: Kreis/Hopf, Torus, Disk, Intervall,
+    Dampfspirale und endlicher 12-Zyklus ohne Kandidatendaten oder Cutoff. Der
+    12-Zyklus erzeugt absichtlich eine lange \(H^1\)-Klasse und falsifiziert
+    damit einen naiven Persistent-Homology-gleich-Phase-Schluss.
   - Der \(S^1\)-Ast trennt rohe Topologie, out-of-sample Kreiskoordinate,
     autonome Phase und externe Phasenkopplung. A--F pruefen davon unabhaengig
     Port, Skalen, Komposition/Impuls, Transfer und Symmetrien. Vor dem
-    Candidate-Freeze wird keine neue Zielsimulation ausgefuehrt.
+    Candidate-Freeze wird keine neue Zielsimulation ausgefuehrt; der separate
+    Method-Validation-Split bleibt bis zur Freeze-Regel ungeoeffnet.
 - [P3.8d dynamisches Zwei-Knoten-Mediatorgate](response/reciprocal/dynamic_two_knot_mediator_gate_2026-08-12.md)
   - **conditional dynamic existence pass:** Eine gemeinsame Energie liefert
     `(m,p,R)`-Dynamik mit geschlossener Source-work-/Daempfungsbilanz,
