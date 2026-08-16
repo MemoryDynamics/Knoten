@@ -112,6 +112,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Discovery-Provenienz als `P0` eingefroren. Im Repository liegt noch kein
     eindeutiges neues Tupel. Alte komplex-eligible oder quench-ringing Punkte
     sind als konfirmatorische Kandidaten gesperrt.
+  - Der [ausgefuehrte P0-Audit](project/meta/preregistration/s1_candidate_p0_audit_2026-08-16.md)
+    findet keinen eindeutigen neuen Kandidaten- oder Discovery-Datensatz und
+    endet mit 27 Manifestdefekten. Der maschinenlesbare Validator blockiert
+    deshalb D0, D1 und jeden Ziellauf; dies ist ein Provenienz-Fail, kein
+    negatives Topologieergebnis.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.

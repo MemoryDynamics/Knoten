@@ -1,0 +1,49 @@
+{
+  "architecture_level": null,
+  "audit_context": {
+    "eligible_new_candidate_records_found": 0,
+    "ineligible_or_quarantined_record_classes_reviewed": 7,
+    "repository_revision_audited": "9f7fb20115ac042a3cfd59c930654780bb934bef",
+    "repository_worktree_at_audit_start": "clean",
+    "search_scope": [
+      "all local and remote-tracking branches",
+      "git history and reflog through 2026-08-16",
+      "reports, docs, experiments/current, and data/processed metadata",
+      "candidate, phase, oscillation, complex-mode, and discovery-provenance terms"
+    ]
+  },
+  "candidate_claim": null,
+  "candidate_id": null,
+  "code_revision": null,
+  "confirmatory_design": {
+    "new_seeds_disjoint_from_discovery": null,
+    "seed_generation_rule": null,
+    "target_data_opened": false,
+    "untouched_parameter_holdout": null
+  },
+  "discovery_provenance": {
+    "artifacts_and_hashes": null,
+    "forcing_and_external_system": null,
+    "observables_inspected": null,
+    "parameter_cells_or_optimizers_inspected": null,
+    "run_lengths_and_cadence": null,
+    "seeds": null,
+    "selection_rule": null
+  },
+  "full_parameter_tuple": {
+    "coupling": null,
+    "external_system": null,
+    "horizon_and_boundary": null,
+    "initialization": null,
+    "integration": null,
+    "kernel": null,
+    "memory": null,
+    "noise": null
+  },
+  "initial_state_source_and_hashes": null,
+  "manifest_status": "incomplete-no-candidate-selected",
+  "quarantined_predecessor_relation": null,
+  "schema_version": "1.0",
+  "time_law": null,
+  "working_tree_status": null
+}

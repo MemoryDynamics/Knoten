@@ -11,6 +11,10 @@ The second-pass findings and their resolutions are recorded in the
 [referee review](../meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md).
 The first authorized methods-only artifact is the
 [candidate-independent synthetic topology control](../../topology/s1_control_pipeline_2026-08-16.md).
+The subsequent repository-wide
+[P0 audit](../meta/preregistration/s1_candidate_p0_audit_2026-08-16.md)
+returns `P0-fail-no-eligible-candidate-record`; D0/D1 and target simulation
+therefore remain blocked.
 
 ## Executive decision
 

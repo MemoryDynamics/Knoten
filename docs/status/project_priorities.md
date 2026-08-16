@@ -833,6 +833,13 @@ Prioritaetsfolge:
     demonstriert damit die notwendige Trennung von Geometrie und Dynamik. Der
     Validation-Split bleibt ungeoeffnet; P0 blockiert weiterhin Zielruns.
 
+    Der inzwischen ausgefuehrte repositoryweite P0-Audit bestaetigt diese
+    Blockade formal: kein eindeutiger neuer Kandidaten-/Discovery-Datensatz,
+    27 akkumulierte Manifestdefekte und `target_data_opened=false`. Ein
+    getesteter Validator prueft Vollparameter, State-/Artefakthashes,
+    Discovery-Selektion und Confirmatory-Seals. D0/D1 wurden folgerichtig
+    nicht geoeffnet; dies ist kein negatives Topologieergebnis.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

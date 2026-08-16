@@ -588,6 +588,16 @@ selektieren. Der aktuelle Punktgrenzquotient `R_mem/ell=2.12e-4` macht
 aehnliche Kernel- und Knotenpotentiale zu einer plausiblen
 Grobkoernungshypothese, aber nicht zu einer inneren Mechanismusevidenz.
 
+Der separate S1-/Masse-Ast hat seinen ersten P0-Provenienzgate inzwischen
+ausgefuehrt. Ein Audit aller Branches, der Historie und maschinenlesbarer
+Projektmetadaten findet keinen eindeutigen neuen Oszillationskandidaten mit
+vollstaendigem Parametertupel und Discovery-Ledger. Der ausfuehrbare
+Manifestvalidator meldet 27 Defekte; `target_data_opened=false` bleibt
+versiegelt. Entscheidung: `P0-fail-no-eligible-candidate-record`. D0, D1 und
+jeder Ziellauf bleiben blockiert. Dies ist kein negativer S1-Befund, sondern
+verhindert die post-hoc Rekonstruktion eines Kandidaten aus lokalen komplexen
+Eligibility-, AR- oder Quenchresultaten.
+
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement; keine robuste

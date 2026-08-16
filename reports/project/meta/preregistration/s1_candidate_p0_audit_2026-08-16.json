@@ -1,0 +1,151 @@
+{
+  "decision": "fail",
+  "downstream": {
+    "D0": "blocked",
+    "D1": "blocked",
+    "target_simulation": "sealed"
+  },
+  "gate": "P0-candidate-and-discovery-freeze",
+  "generated_at": "2026-08-16T06:33:36.4177174Z",
+  "issue_count": 27,
+  "issues": [
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "candidate_id"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "candidate_claim"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "architecture_level"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "time_law"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "code_revision"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "working_tree_status"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "quarantined_predecessor_relation"
+    },
+    {
+      "code": "manifest-not-frozen",
+      "message": "P0 can pass only an explicitly frozen manifest",
+      "path": "manifest_status"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.noise"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.memory"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.kernel"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.coupling"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.integration"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.horizon_and_boundary"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.external_system"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "full_parameter_tuple.initialization"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "at least one reproducible initial-state record is required",
+      "path": "initial_state_source_and_hashes"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.seeds"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.run_lengths_and_cadence"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.forcing_and_external_system"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.observables_inspected"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.parameter_cells_or_optimizers_inspected"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.selection_rule"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "discovery_provenance.artifacts_and_hashes"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "confirmatory_design.seed_generation_rule"
+    },
+    {
+      "code": "missing-or-placeholder",
+      "message": "required value is absent, empty, or a placeholder",
+      "path": "confirmatory_design.untouched_parameter_holdout"
+    },
+    {
+      "code": "confirmatory-seeds-not-sealed",
+      "message": "new confirmatory seeds must be explicitly disjoint",
+      "path": "confirmatory_design.new_seeds_disjoint_from_discovery"
+    }
+  ],
+  "manifest_path": "reports/project/meta/preregistration/s1_candidate_p0_manifest_2026-08-16.json",
+  "manifest_sha256": "b4a3b02177512664da799fc97daa6348e4a5a61a772a7d2786ec4f85eb9c531e",
+  "schema_version": "1.0"
+}
