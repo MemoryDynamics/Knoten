@@ -639,6 +639,19 @@ question is only whether the identified filter coefficient scales as
 \(m_{\rm filter}=\tau/\mu\); physical mass, material COM and additive momentum
 remain unestablished.
 
+The preregistered B-star intervention now answers that narrow question. With
+fixed update time, eta, physical-force impulses and center readout, a
+\(2^3\) panel gives training exponents
+\((\beta_\tau,\beta_\mu,\beta_{M_0})\simeq(1,-1,0)\) for both a
+state-matched checkpoint estimand and independently reformed states. At the
+unseen joint corner \((2,0.5,2)\), the inferred coefficient is 3.99997
+against the filter prediction 4. The \(M_0\) intervention is active: it
+changes damping strongly while leaving the inertial coefficient unchanged.
+Because the weak paired response measures the local derivative of the same
+declared architecture, this is an implementation and system-identification
+pass, not independent evidence for material mass. Physical Gate B remains
+blocked.
+
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic
 radius follows R_linear with median relative error 0.94 percent and maximum

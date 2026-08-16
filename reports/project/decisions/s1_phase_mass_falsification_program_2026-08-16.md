@@ -607,3 +607,9 @@ external interaction as a new actuator architecture and restart its P0/A
 chain, or to preregister a clearly nonphysical filter-scaling robustness study.
 The latter may test \(m_{\rm filter}=\tau/\mu\), but it cannot count as B in
 the physical-mass claim ladder.
+
+Post-charter execution update: that separately preregistered B-star study has
+now passed its common training law and unseen joint factorial corner for both
+state-matched and independently reformed states. This closes only the
+nonphysical filter-scaling question. It does not revise the failed physical
+Gate-A port selection, open physical B/C/E/F1, or supply an S1 candidate.

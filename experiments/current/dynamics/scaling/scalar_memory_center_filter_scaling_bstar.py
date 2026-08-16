@@ -1344,6 +1344,10 @@ def render_report(payload: dict[str, Any]) -> str:
             f"- nonlinear finite-H embedding: {gates['embedding_pass']};",
             f"- held-out scaling: {gates['scaling_pass']}.",
             "",
+            "## Registered visualization",
+            "",
+            "![B-star mass scaling](../../../figures/draft/dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.png)",
+            "",
             "## Claim boundary",
             "",
             "A pass shows that the registered local nonlinear finite-memory",
@@ -1388,7 +1392,7 @@ def render_figure(payload: dict[str, Any], output: Path) -> None:
         )
         axes[1].plot(
             np.arange(len(rows)),
-            observed / expected,
+            1.0e6 * (observed / expected - 1.0),
             marker="o",
             color=colors[estimand],
             label=labels[estimand],
@@ -1399,16 +1403,20 @@ def render_figure(payload: dict[str, Any], output: Path) -> None:
     axes[0].set_yscale("log")
     axes[0].set_xlim(limits)
     axes[0].set_ylim(limits)
+    axes[0].set_xticks([0.25, 1.0, 4.0], labels=["0.25", "1", "4"])
+    axes[0].set_yticks([0.25, 1.0, 4.0], labels=["0.25", "1", "4"])
+    axes[0].minorticks_off()
     axes[0].set_xlabel("registered tau / mu")
     axes[0].set_ylabel("inferred filter mass")
     axes[0].legend(frameon=False)
-    axes[0].set_title("Joint holdout is open marker")
-    axes[1].axhline(1.0, color="black", linewidth=1.0, linestyle="--")
+    axes[0].set_title("Joint holdout: open marker")
+    axes[1].axhline(0.0, color="black", linewidth=1.0, linestyle="--")
     axes[1].axvline(len(rows) - 1.5, color="#6b7280", linewidth=1.0)
+    axes[1].set_xticks(np.arange(len(rows)))
     axes[1].set_xlabel("training cells, then holdout")
-    axes[1].set_ylabel("inferred / filter prediction")
+    axes[1].set_ylabel("relative mass error (ppm)")
     axes[1].legend(frameon=False)
-    axes[1].set_title("No M0 factor in inertial coefficient")
+    axes[1].set_title("Residual after tau / mu scaling")
     figure.tight_layout()
     output.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output, dpi=180)

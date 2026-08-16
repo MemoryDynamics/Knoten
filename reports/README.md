@@ -136,11 +136,16 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     realisierbaren effektiven Filter-Port. Nur B-star-Systemidentifikation ist
     geoeffnet; physisches B und der S1-Ast bleiben versiegelt.
   - Das [B-star-Skalierungsprotokoll](project/meta/preregistration/scalar_memory_center_filter_scaling_bstar_protocol_2026-08-16.md)
-    friert vor jedem Zielwert ein festes eta, feste Kraftimpulse, den
-    unveraenderten Center-Readout, ein 2^3-Panel in tau/mu/M0 und eine
-    gemeinsame Holdout-Ecke ein. State-matched und zellweise neu formierte
-    Zustaende werden getrennt ausgewertet. Seeds 21--25, der P0-Transfer-
-    Holdout und der gesamte S1-Zielast bleiben versiegelt.
+    wurde vom sauberen prospektiven Commit ausgefuehrt. Der
+    [Ergebnisbericht](dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.md)
+    besteht Trainingsgesetz und gemeinsame Holdout-Ecke fuer state-matched
+    und neu formierte Zustaende: tau-Exponent 1, mu-Exponent -1,
+    M0-Exponent 0 und Holdout-Masse 3.99997 statt 4. Der
+    [kritische Review](project/meta/reviews/scalar_memory_center_filter_scaling_bstar_review_2026-08-16.md)
+    ordnet die fast exakte Uebereinstimmung als lokalen Implementations- und
+    Skalierungstest ein, nicht als unabhaengige Materieentdeckung. Seeds
+    21--25, der P0-Transfer-Holdout und der S1-Zielast bleiben versiegelt;
+    physisches B bleibt blockiert.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.

@@ -861,6 +861,16 @@ Prioritaetsfolge:
     `m_filter=tau/mu` geoeffnet; physisches B/C/E/F1 und S1-D0--D5 bleiben
     versiegelt.
 
+    Dieser B-star-Ast ist nun prospektiv ausgefuehrt und besteht. Beide
+    Estimanden liefern tau-Exponent 1, mu-Exponent -1 und M0-Exponent 0; die
+    gemeinsame Holdout-Ecke ergibt 3.99997 gegen die Vorhersage 4. Zugleich
+    aendert M0 die diskrete Daempfung deutlich, die Intervention ist also
+    nicht wirkungslos. Die fast perfekte lokale Ableitung bestaetigt die
+    implementierte Filterarchitektur, nicht materielle Masse. Weitere
+    B-star-Zellen koennen den fehlenden mikroskopischen Port nicht
+    identifizieren; dafuer waere eine neue Aktuatorarchitektur mit frischem
+    P0/A-Vertrag erforderlich.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.
