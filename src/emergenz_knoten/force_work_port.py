@@ -44,6 +44,8 @@ class PairedForceWorkResponse:
     memory_radii: np.ndarray
     branch_cumulative_work: np.ndarray
     paired_even_cumulative_work: np.ndarray
+    branch_center_cumulative_work: np.ndarray
+    paired_even_center_cumulative_work: np.ndarray
     control_positions: np.ndarray
     control_centers: np.ndarray
     control_relative: np.ndarray
@@ -53,6 +55,18 @@ class PairedForceWorkResponse:
 @dataclass(frozen=True)
 class StationaryVisibleMSD:
     """Monte Carlo and reference MSDs for the stationary local scalar mode."""
+
+    sample_times: np.ndarray
+    simulated_msd: np.ndarray
+    exact_discrete_msd: np.ndarray
+    continuum_msd: np.ndarray
+    n_paths: int
+    seed: int
+
+
+@dataclass(frozen=True)
+class StationaryCenterMSD:
+    """Monte Carlo and reference MSDs for the local scalar-memory center."""
 
     sample_times: np.ndarray
     simulated_msd: np.ndarray
@@ -102,6 +116,7 @@ def _paired_force_work_batch(
         base_second_moment += base_center[coord] * base_center[coord]
     second_moments = np.empty(n_paths, np.float64)
     cumulative_work = np.zeros(n_paths, np.float64)
+    cumulative_center_work = np.zeros(n_paths, np.float64)
     for path in range(n_paths):
         xs[path] = initial_x
         histories[path] = initial_history
@@ -114,9 +129,11 @@ def _paired_force_work_batch(
     relative = np.empty((n_steps + 1, n_paths, dim), np.float64)
     radii = np.empty((n_steps + 1, n_paths), np.float64)
     work_trace = np.empty((n_steps + 1, n_paths), np.float64)
+    center_work_trace = np.empty((n_steps + 1, n_paths), np.float64)
     for path in range(n_paths):
         radii[0, path] = initial_radius
         work_trace[0, path] = 0.0
+        center_work_trace[0, path] = 0.0
         for coord in range(dim):
             positions[0, path, coord] = xs[path, coord]
             center_trace[0, path, coord] = centers[path, coord]
@@ -163,13 +180,22 @@ def _paired_force_work_batch(
             cumulative_work[path] += work_increment
 
             x_norm2 = 0.0
+            center_work_increment = 0.0
             for coord in range(dim):
                 x_norm2 += xs[path, coord] * xs[path, coord]
-                centers[path, coord] = (
-                    q * centers[path, coord]
+                old_center_value = centers[path, coord]
+                new_center_value = (
+                    q * old_center_value
                     + deposition_fraction * xs[path, coord]
                     - deposition_fraction * tail * oldest[coord]
                 )
+                centers[path, coord] = new_center_value
+                center_work_increment += (
+                    force_scalar
+                    * axis[coord]
+                    * (new_center_value - old_center_value)
+                )
+            cumulative_center_work[path] += center_work_increment
             second_moments[path] = (
                 q * second_moments[path]
                 + deposition_fraction * x_norm2
@@ -184,6 +210,7 @@ def _paired_force_work_batch(
             heads[path] = (heads[path] - 1) % horizon
             histories[path, heads[path]] = xs[path]
             work_trace[step + 1, path] = cumulative_work[path]
+            center_work_trace[step + 1, path] = cumulative_center_work[path]
             for coord in range(dim):
                 positions[step + 1, path, coord] = xs[path, coord]
                 center_trace[step + 1, path, coord] = centers[path, coord]
@@ -191,7 +218,14 @@ def _paired_force_work_batch(
                     xs[path, coord] - centers[path, coord]
                 )
 
-    return positions, center_trace, relative, radii, work_trace
+    return (
+        positions,
+        center_trace,
+        relative,
+        radii,
+        work_trace,
+        center_work_trace,
+    )
 
 
 def simulate_matched_force_work_response(
@@ -262,7 +296,14 @@ def simulate_matched_force_work_response(
     if filled != case.horizon:
         raise RuntimeError("formation did not fill the finite memory horizon")
 
-    positions, centers, relative, radii, work = _paired_force_work_batch(
+    (
+        positions,
+        centers,
+        relative,
+        radii,
+        work,
+        center_work,
+    ) = _paired_force_work_batch(
         initial_x,
         initial_history,
         initial_head,
@@ -289,6 +330,10 @@ def simulate_matched_force_work_response(
     relative_even = np.empty_like(position_response)
     branch_work = np.empty((fractions.size, 2, n_steps + 1), dtype=float)
     paired_work = np.empty((fractions.size, n_steps + 1), dtype=float)
+    branch_center_work = np.empty(
+        (fractions.size, 2, n_steps + 1), dtype=float
+    )
+    paired_center_work = np.empty((fractions.size, n_steps + 1), dtype=float)
     for impulse_index, impulse in enumerate(impulses):
         plus = 2 + 2 * impulse_index
         minus = plus + 1
@@ -311,6 +356,11 @@ def simulate_matched_force_work_response(
         branch_work[impulse_index, 0] = work[:, plus]
         branch_work[impulse_index, 1] = work[:, minus]
         paired_work[impulse_index] = 0.5 * (work[:, plus] + work[:, minus])
+        branch_center_work[impulse_index, 0] = center_work[:, plus]
+        branch_center_work[impulse_index, 1] = center_work[:, minus]
+        paired_center_work[impulse_index] = 0.5 * (
+            center_work[:, plus] + center_work[:, minus]
+        )
 
     off_residual = max(
         float(np.max(np.abs(positions[:, 0] - positions[:, 1]))),
@@ -318,6 +368,7 @@ def simulate_matched_force_work_response(
         float(np.max(np.abs(relative[:, 0] - relative[:, 1]))),
         float(np.max(np.abs(radii[:, 0] - radii[:, 1]))),
         float(np.max(np.abs(work[:, :2]))),
+        float(np.max(np.abs(center_work[:, :2]))),
     )
     return PairedForceWorkResponse(
         sample_times=case.alpha * np.arange(n_steps + 1, dtype=float),
@@ -333,6 +384,8 @@ def simulate_matched_force_work_response(
         memory_radii=radii,
         branch_cumulative_work=branch_work,
         paired_even_cumulative_work=paired_work,
+        branch_center_cumulative_work=branch_center_work,
+        paired_even_center_cumulative_work=paired_center_work,
         control_positions=positions[:, 0],
         control_centers=centers[:, 0],
         control_relative=relative[:, 0],
@@ -362,6 +415,9 @@ def finite_h_force_work_response(
     cumulative_x_dissipation = np.empty(n_steps + 1, dtype=float)
     cumulative_center_dissipation = np.empty(n_steps + 1, dtype=float)
     storage = np.empty(n_steps + 1, dtype=float)
+    center_port_cumulative_work = np.empty(n_steps + 1, dtype=float)
+    center_port_cumulative_dissipation = np.empty(n_steps + 1, dtype=float)
+    center_port_kinetic_storage = np.empty(n_steps + 1, dtype=float)
     positions[0] = x
     centers[0] = center
     relative[0] = x - center
@@ -369,8 +425,12 @@ def finite_h_force_work_response(
     cumulative_x_dissipation[0] = 0.0
     cumulative_center_dissipation[0] = 0.0
     storage[0] = 0.0
+    center_port_cumulative_work[0] = 0.0
+    center_port_cumulative_dissipation[0] = 0.0
+    center_port_kinetic_storage[0] = 0.0
 
     for step in range(n_steps):
+        relative_old = x - center
         displacement = case.alpha * force[step]
         x_next = (1.0 - case.restoring_per_update) * x
         x_next += case.restoring_per_update * center + displacement
@@ -391,6 +451,7 @@ def finite_h_force_work_response(
         positions[step + 1] = x
         centers[step + 1] = center
         relative[step + 1] = x - center
+        relative_new = relative[step + 1]
         cumulative_work[step + 1] = (
             cumulative_work[step] + force[step] * delta_x
         )
@@ -408,9 +469,20 @@ def finite_h_force_work_response(
         storage[step + 1] = (
             0.5
             * case.restoring_per_memory_time
-            * relative[step + 1]
-            * relative[step + 1]
+            * relative_new
+            * relative_new
         )
+        center_port_cumulative_work[step + 1] = (
+            center_port_cumulative_work[step] + force[step] * delta_center
+        )
+        center_port_cumulative_dissipation[step + 1] = (
+            center_port_cumulative_dissipation[step]
+            + case.continuum_relative_rate
+            * case.alpha
+            * 0.5
+            * (relative_old * relative_old + relative_new * relative_new)
+        )
+        center_port_kinetic_storage[step + 1] = 0.5 * relative_new * relative_new
 
     trace = (
         1.0
@@ -440,6 +512,12 @@ def finite_h_force_work_response(
         + cumulative_x_dissipation
         + cumulative_center_dissipation
     )
+    center_port_ledger_residual = (
+        center_port_kinetic_storage
+        - center_port_kinetic_storage[0]
+        - center_port_cumulative_work
+        + center_port_cumulative_dissipation
+    )
     return {
         "sample_times": case.alpha * np.arange(n_steps + 1, dtype=float),
         "positions": positions,
@@ -450,6 +528,10 @@ def finite_h_force_work_response(
         "cumulative_center_dissipation": cumulative_center_dissipation,
         "storage": storage,
         "ledger_residual": ledger_residual,
+        "center_port_cumulative_work": center_port_cumulative_work,
+        "center_port_cumulative_dissipation": center_port_cumulative_dissipation,
+        "center_port_kinetic_storage": center_port_kinetic_storage,
+        "center_port_ledger_residual": center_port_ledger_residual,
         "maximum_recurrence_residual": float(maximum_residual),
     }
 
@@ -482,6 +564,151 @@ def continuum_unit_impulse_response(
     center[mask] = (1.0 - decay) / rate
     relative[mask] = decay
     return {"positions": position, "centers": center, "relative": relative}
+
+
+def continuum_rectangular_force_response(
+    case: ScalarContinuumCase,
+    *,
+    sample_times: Iterable[float],
+    pulse_width: float,
+) -> dict[str, np.ndarray]:
+    """Return the local continuum response to a unit-area rectangular force."""
+
+    times = np.asarray(list(sample_times), dtype=float)
+    width = _positive_finite("pulse_width", pulse_width)
+    if (
+        times.ndim != 1
+        or times.size < 2
+        or not np.isfinite(times).all()
+        or np.any(times < 0.0)
+        or not np.all(np.diff(times) > 0.0)
+    ):
+        raise ValueError("sample_times must be finite and strictly increasing")
+
+    gamma = case.continuum_relative_rate
+    relative = np.empty_like(times)
+    center = np.empty_like(times)
+    inside = times <= width + 1.0e-14
+    inside_times = np.minimum(times[inside], width)
+    inside_decay = np.exp(-gamma * inside_times)
+    relative[inside] = (1.0 - inside_decay) / (gamma * width)
+    center[inside] = (
+        inside_times / gamma
+        - (1.0 - inside_decay) / gamma**2
+    ) / width
+
+    z = gamma * width
+    end_relative = (1.0 - math.exp(-z)) / z
+    end_center = width * (z - 1.0 + math.exp(-z)) / z**2
+    after = ~inside
+    shifted = times[after] - width
+    after_decay = np.exp(-gamma * shifted)
+    relative[after] = end_relative * after_decay
+    center[after] = (
+        end_center + end_relative * (1.0 - after_decay) / gamma
+    )
+
+    center_work = np.empty_like(times)
+    center_work[inside] = center[inside] / width
+    center_work[after] = end_center / width
+    kinetic = 0.5 * relative * relative
+    dissipation = center_work - kinetic
+    return {
+        "positions": center + relative,
+        "centers": center,
+        "relative": relative,
+        "center_cumulative_work": center_work,
+        "center_kinetic_storage": kinetic,
+        "center_cumulative_dissipation": dissipation,
+    }
+
+
+def stationary_center_msd(
+    case: ScalarContinuumCase,
+    *,
+    dim: int,
+    n_paths: int,
+    n_steps: int,
+    seed: int,
+) -> StationaryCenterMSD:
+    """Simulate stationary local center increments and exact references."""
+
+    if isinstance(dim, bool) or not isinstance(dim, (int, np.integer)) or dim < 1:
+        raise ValueError("dim must be a positive integer")
+    if (
+        isinstance(n_paths, bool)
+        or not isinstance(n_paths, (int, np.integer))
+        or n_paths < 1
+    ):
+        raise ValueError("n_paths must be a positive integer")
+    if (
+        isinstance(n_steps, bool)
+        or not isinstance(n_steps, (int, np.integer))
+        or n_steps < 2
+    ):
+        raise ValueError("n_steps must be an integer at least two")
+    if case.q <= 0.0:
+        raise ValueError("stationary center MSD requires alpha below one")
+
+    rng = np.random.default_rng(int(seed))
+    relative_variance = (
+        (case.q * case.epsilon) ** 2
+        / (1.0 - case.untruncated_relative_root**2)
+    )
+    relative = rng.standard_normal((int(n_paths), int(dim))) * math.sqrt(
+        relative_variance
+    )
+    center = np.zeros_like(relative)
+    simulated = np.zeros(int(n_steps) + 1, dtype=float)
+    for step in range(int(n_steps)):
+        noise = rng.standard_normal(relative.shape)
+        relative = (
+            case.untruncated_relative_root * relative
+            + case.q * case.epsilon * noise
+        )
+        center += case.alpha * relative / case.q
+        simulated[step + 1] = float(np.mean(np.sum(center * center, axis=1)))
+
+    covariance = np.array(
+        [[0.0, 0.0], [0.0, relative_variance]], dtype=float
+    )
+    transition = np.array(
+        [
+            [
+                1.0,
+                case.alpha * case.untruncated_relative_root / case.q,
+            ],
+            [0.0, case.untruncated_relative_root],
+        ],
+        dtype=float,
+    )
+    noise_vector = np.array(
+        [case.alpha * case.epsilon, case.q * case.epsilon], dtype=float
+    )
+    exact_discrete = np.zeros(int(n_steps) + 1, dtype=float)
+    for step in range(int(n_steps)):
+        covariance = (
+            transition @ covariance @ transition.T
+            + np.outer(noise_vector, noise_vector)
+        )
+        exact_discrete[step + 1] = int(dim) * covariance[0, 0]
+
+    times = case.alpha * np.arange(int(n_steps) + 1, dtype=float)
+    gamma = case.continuum_relative_rate
+    continuum_per_dim = (
+        2.0
+        * case.diffusion_per_memory_time
+        / gamma**3
+        * (gamma * times - 1.0 + np.exp(-gamma * times))
+    )
+    return StationaryCenterMSD(
+        sample_times=times,
+        simulated_msd=simulated,
+        exact_discrete_msd=exact_discrete,
+        continuum_msd=int(dim) * continuum_per_dim,
+        n_paths=int(n_paths),
+        seed=int(seed),
+    )
 
 
 def stationary_visible_msd(

@@ -3,10 +3,12 @@ from __future__ import annotations
 import numpy as np
 
 from emergenz_knoten import (
+    continuum_rectangular_force_response,
     continuum_unit_impulse_response,
     finite_h_force_work_response,
     matched_scalar_continuum_case,
     simulate_matched_force_work_response,
+    stationary_center_msd,
     stationary_visible_msd,
 )
 from experiments.current.dynamics.scaling.scalar_memory_force_work_port_gate import (
@@ -96,6 +98,106 @@ def test_nonlinear_force_port_matches_local_reference_and_has_exact_off_clone() 
         / np.square(response.impulse_amplitudes)
     )
     np.testing.assert_allclose(normalized_work, 1.0, rtol=1.0e-12)
+    for impulse_index, impulse in enumerate(response.impulse_amplitudes):
+        derived = np.concatenate(
+            (
+                [0.0],
+                impulse
+                * impulse
+                * np.cumsum(
+                    force
+                    * np.diff(
+                        response.center_responses[impulse_index, :, 0]
+                    )
+                ),
+            )
+        )
+        np.testing.assert_allclose(
+            response.paired_even_center_cumulative_work[impulse_index],
+            derived,
+            rtol=1.0e-12,
+            atol=1.0e-18,
+        )
+
+
+def test_resolved_center_port_matches_positive_inertial_reference() -> None:
+    case = matched_scalar_continuum_case(
+        alpha=0.0025,
+        tail_extent=12.0,
+        restoring_per_memory_time=4.0,
+        diffusion_per_memory_time=1.0e-4,
+        dim=1,
+    )
+    pulse_width = 0.2
+    force = np.zeros(round(1.4 / case.alpha), dtype=float)
+    pulse_steps = round(pulse_width / case.alpha)
+    force[:pulse_steps] = 1.0 / pulse_width
+    exact = finite_h_force_work_response(
+        case, normalized_force_profile=force
+    )
+    continuum = continuum_rectangular_force_response(
+        case,
+        sample_times=exact["sample_times"],
+        pulse_width=pulse_width,
+    )
+
+    center = np.asarray(exact["centers"])
+    relative = np.asarray(exact["relative"])
+    center_work = np.asarray(exact["center_port_cumulative_work"])
+    assert np.isclose(center_work[-1], np.sum(force * np.diff(center)))
+    assert np.isclose(case.alpha * np.sum(force), 1.0)
+    assert 0.0 < center[pulse_steps] < 0.1
+    assert 0.6 < relative[pulse_steps] < 0.7
+    assert 0.35 < center_work[-1] < 0.4
+    assert (
+        abs(float(exact["center_port_ledger_residual"][-1]))
+        / center_work[-1]
+        < 0.02
+    )
+    np.testing.assert_allclose(
+        center,
+        continuum["centers"],
+        rtol=0.0,
+        atol=1.3e-3,
+    )
+
+
+def test_stationary_center_msd_is_ballistic_and_matches_covariance() -> None:
+    case = matched_scalar_continuum_case(
+        alpha=0.0025,
+        tail_extent=12.0,
+        restoring_per_memory_time=4.0,
+        diffusion_per_memory_time=1.0e-4,
+        dim=3,
+    )
+    result = stationary_center_msd(
+        case, dim=3, n_paths=32768, n_steps=16, seed=20260817
+    )
+    fit = slice(2, 17)
+    discrete_error = np.sqrt(
+        np.mean(
+            np.square(
+                result.simulated_msd[fit] - result.exact_discrete_msd[fit]
+            )
+        )
+        / np.mean(np.square(result.exact_discrete_msd[fit]))
+    )
+    continuum_error = np.sqrt(
+        np.mean(
+            np.square(
+                result.exact_discrete_msd[fit] - result.continuum_msd[fit]
+            )
+        )
+        / np.mean(np.square(result.continuum_msd[fit]))
+    )
+    slope = np.polyfit(
+        np.log(result.sample_times[fit]),
+        np.log(result.simulated_msd[fit]),
+        1,
+    )[0]
+    assert discrete_error < 0.03
+    assert continuum_error < 0.02
+    assert 1.9 <= slope <= 2.1
 
 
 def test_stationary_visible_msd_is_diffusive_and_matches_discrete_covariance() -> None:
