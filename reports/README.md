@@ -55,17 +55,19 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     fuer diesen Port, nicht jeden moeglichen erweiterten Impulszustand. Siehe
     [kritisches Review](project/meta/reviews/scalar_memory_force_work_port_review_2026-08-16.md).
 - [Skalarer Center-Inertial-Port](dynamics/limits/scalar_memory_center_inertial_port_gate_2026-08-16.md)
-  - **supported positive effective center inertia, local and port-conditional:**
-    Der prospektive Seed-16--20-Lauf besteht G0, G1 und alle elf
-    Center-Inertial-Komponenten; alle vier overdamped-Center-Komponenten
-    scheitern. Am Holdout sind \(m=0.996239\), \(\gamma=5.002630\) und die
-    Center-MSD-Steigung \(1.972302\).
+  - **structural inertial representation plus supported local embedding;
+    physical mass unresolved:** Der prospektive Seed-16--20-Lauf besteht G0,
+    G1 und alle elf Center-Inertial-Komponenten; alle vier
+    overdamped-Center-Komponenten scheitern. Am Holdout sind
+    \(m=0.996239\), \(\gamma=5.002630\) und die Center-MSD-Steigung
+    \(1.972302\). Diese Diagnosen sind konsistente Folgen desselben
+    OU-Transfers, keine elf unabhaengigen Massebelege.
   - **Reconciliation:** Der sichtbare Ausgang \(x=c+r\) bleibt overdamped.
     Der reine normalisierte Memory-Center besitzt dagegen unter \(f\,dc\)
     positive Speicherbilanz, Null-Feedthrough und ballistische Kurzzeit-MSD.
     Das ist eine effektive Readout-/Port-Aussage, kein SI-Masse- oder
-    Teilchenclaim. Siehe
-    [kritisches Review](project/meta/reviews/scalar_memory_center_inertial_port_review_2026-08-16.md).
+    Teilchenclaim. Siehe [Ergebnisreview](project/meta/reviews/scalar_memory_center_inertial_port_review_2026-08-16.md)
+    und [Referee-Audit](project/meta/reviews/scalar_memory_center_mass_referee_audit_2026-08-16.md).
 - [Checkpoint-/Holdout-Stabilitaetsgate](long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md)
   - **supported, method-conditional:** 5/5 `d=10`, `A_att=35`-Seeds bestehen
     vier Alterscheckpoints bis `N=30M`, lokale Radiusfenster und den
@@ -77,13 +79,14 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     diskriminierend.
 
 Entscheidung: Das skalare Modell bleibt eine kontrollierte lineare Baseline
-mit scaling-konditionalem Kontinuumsgrenzwert. Masse ist hier
-input/output-abhaengig: Der sichtbare \(x\)-Port selektiert overdamped Memory,
-waehrend der bereits aus dem Memory abgeleitete Center \(c\) unter dem neuen
-\(f\,dc\)-Port eine positive effektive Inertialdarstellung besitzt. Zulaessig
-ist damit ein lokaler mathematischer Existenzclaim fuer den Center, nicht die
-Behauptung einer eindeutig selektierten physischen Knotenposition oder
-physikalischen Masse.
+mit scaling-konditionalem Kontinuumsgrenzwert. Die Portwahl entscheidet die
+mechanische Realisierung: Der sichtbare \(x\)-Port selektiert overdamped
+Memory, waehrend der aus dem Memory abgeleitete Center \(c\) unter
+\(f\,dc\) eine positive passive Inertialdarstellung besitzt. Der
+Beschleunigungskoeffizient folgt dabei aus Memory-Zeitskala und normiertem
+Inputgain. Zulaessig ist ein lokaler mathematischer Existenz- und
+Einbettungsclaim, nicht die Behauptung einer eindeutig selektierten physischen
+Knotenposition oder emergierten physikalischen Masse.
 
 ### 2. Dimension
 

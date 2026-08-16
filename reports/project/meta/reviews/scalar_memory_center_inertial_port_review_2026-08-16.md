@@ -6,6 +6,11 @@ Status: kritisches Ergebnisreview des prospektiv registrierten
 Center-Force-/Work-Gates. Alle nachfolgend als post hoc bezeichneten
 Diagnosen veraendern keine Gateentscheidung.
 
+Ein nachgelagerter [Referee-Audit](scalar_memory_center_mass_referee_audit_2026-08-16.md)
+trennt die passive Inertialdarstellung noch schaerfer von einem physischen
+Masseclaim. Insbesondere sind die Einheitsmasse, die Phase-/COM-Semantik und
+die physische Konjugation von \(f\,dc\) nicht aus dem Gate hergeleitet.
+
 ## Kurzurteil
 
 Der neue Input/Output-Port entscheidet die registrierten Alternativen
@@ -259,16 +264,17 @@ nicht nachtraeglich die bereits analytisch vorhandene Center-Gleichung.
 
 ### Evidenz
 
-Der normalisierte skalare Memory-Center realisiert unter dem prospektiv
+Der normalisierte skalare Memory-Center besitzt unter dem prospektiv
 definierten Port \((f,\dot c)\) eine positive, passive und numerisch
-geschlossene effektive Inertialdynamik im lokalen Kontinuumsgrenzwert.
+geschlossene Inertialdarstellung im lokalen Kontinuumsgrenzwert.
 
 ### Inferenz
 
-Das bestehende skalare Memory enthaelt eine inertial lesbare
+Das bestehende skalare Memory enthaelt eine inertial realisierbare
 coarse-grained Koordinate, ohne dass ein separater Momentumzustand eingefuehrt
-wurde. Diese Aussage ist staerker als die blosse formale zweite Differenz von
-\(x\), aber schwaecher als ein physikalischer Masseclaim.
+wurde. Positive Speicherbilanz und Null-Feedthrough machen diese Aussage
+staerker als eine beliebige formale zweite Differenz; die Gleichung bleibt
+jedoch eine Zustandselimination und kein physikalischer Masseclaim.
 
 ### Nicht gezeigt
 

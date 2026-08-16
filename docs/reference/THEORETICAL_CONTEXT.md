@@ -580,13 +580,41 @@ readout. More generally, for \(y_a=c+a r\),
 \]
 
 so the pure center \(a=0\) is the only affine readout in this family with no
-high-frequency feedthrough. The mass value one is nevertheless fixed by the
-dimensionless force normalization, and no physical principle yet establishes
-that \(c\), rather than \(x\), is the observable coordinate conjugate to an
-external force. The smallest width contains only 20 native steps; its work is
-5.4 percent above the finite-width continuum reference. The result therefore
-supports a local effective center inertia, not an SI mass or a uniform
-impulse double limit.
+high-frequency feedthrough. This is a useful realization criterion, but it is
+post hoc and unique only within the stated affine family. In dimensional
+variables,
+
+\[
+\tau\dot c=x-c,
+\qquad
+\dot x=-\kappa(x-c)+\mu F+\sigma\xi
+\]
+
+implies
+
+\[
+{\tau\over\mu}\ddot c
++{1+\kappa\tau\over\mu}\dot c
+=F+{\sigma\over\mu}\xi.
+\]
+
+Thus the apparent mass is \(m_{\rm eff}=\tau/\mu\). Its registered value one
+comes from the dimensionless choices \(\tau=\mu=1\), not from spontaneous
+parameter selection. Moreover, \(c\) is currently the centroid of an
+occupancy-history field with source and decay, not yet the center of a
+materially conserved mass. The canonical variable contract defines
+\(x\in\mathbb R^d\) as a visible position/state representative, not as a
+periodic phase. A phase/center-of-mass reading and physical work \(F\,dc\)
+therefore require separate operational derivations.
+
+The smallest width contains only 20 native steps; its work is 5.4 percent
+above the finite-width continuum reference. Also, \(\alpha H=12\) is fixed,
+so \(H\to\infty\) along the alpha ladder is not independently the
+untruncated-memory limit. The result supports a local passive center-inertial
+representation and its nonlinear finite-\(H\) embedding, not an SI mass, a
+material center of mass or a uniform multiple limit. The dedicated
+[referee audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_center_mass_referee_audit_2026-08-16.md)
+records the claim boundary and the required falsification tests.
 
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic

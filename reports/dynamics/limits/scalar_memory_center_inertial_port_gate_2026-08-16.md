@@ -73,6 +73,7 @@ microscopic principle selecting f dc as physical work.
 ## Provenance
 
 - Protocol: [scalar_memory_center_inertial_port_protocol_2026-08-16.md](../../project/meta/preregistration/scalar_memory_center_inertial_port_protocol_2026-08-16.md).
+- Referee-level claim audit: [scalar_memory_center_mass_referee_audit_2026-08-16.md](../../project/meta/reviews/scalar_memory_center_mass_referee_audit_2026-08-16.md).
 - Preceding visible-port result: [scalar_memory_force_work_port_gate_2026-08-16.md](scalar_memory_force_work_port_gate_2026-08-16.md).
 - Simulation revision: f2bfa4b402a52a5082dc4cd5644f5e7822eac064.
 - Git status at execution: clean.
