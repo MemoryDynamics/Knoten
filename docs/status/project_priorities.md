@@ -851,6 +851,16 @@ Prioritaetsfolge:
     Center-Port gueltig, waehrend Center-Arbeit und die nachgelagerten
     Massegates B/C/E/F1 gestoppt sind.
 
+    Der prospektiv eingefrorene A2-Folgetest schliesst inzwischen die engere
+    finite-H-Frage fuer einen **neu deklarierten effektiven Wrapper**: alle
+    fuenf Tail-Zellen bestehen eine globale Small-Gain-/Positive-Real-Schranke
+    mit mindestens 89-facher registrierter Sicherheitsmarge; der dichte
+    Frequenzgrid bleibt nichtentscheidend. Das repariert weder die fehlende
+    mikroskopische Portauswahl noch macht es den History-Centroid materiell.
+    Daher ist ausschliesslich ein B-star-Systemidentifikationstest von
+    `m_filter=tau/mu` geoeffnet; physisches B/C/E/F1 und S1-D0--D5 bleiben
+    versiegelt.
+
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive
 skalare Fernkanal zeigt Translation ohne kontrollgetrennte Formdynamik.

@@ -127,10 +127,14 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     mikroskopischen Aktuator- und finite-H-Grenzvertrag bleibt nur der
     mathematische passive Center-Port; physische B/C/E/F1 sind gestoppt.
   - Das [finite-H-A2-Protokoll](project/meta/preregistration/scalar_memory_center_finite_h_port_a2_protocol_2026-08-16.md)
-    prueft als naechstes per globaler Small-Gain-/Positive-Real-Schranke, ob
-    der exakte Tailterm einen reziproken effektiven Center-Port zulaesst. Die
-    Frequenzgrid-Auswertung ist nur Sanitycheck; Holdout und neue Seeds bleiben
-    versiegelt.
+    wurde aus einem sauberen prospektiven Commit ausgefuehrt. Der
+    [A2-Ergebnisbericht](dynamics/limits/scalar_memory_center_finite_h_port_a2_2026-08-16.md)
+    besteht alle fuenf globalen Small-Gain-/Positive-Real-Zellen; der
+    Frequenzgrid ist nur Sanitycheck. Der
+    [kritische A2-Review](project/meta/reviews/scalar_memory_center_finite_h_port_a2_review_2026-08-16.md)
+    bestaetigt die Tail-Algebra, begrenzt den Pass aber auf einen reziprok
+    realisierbaren effektiven Filter-Port. Nur B-star-Systemidentifikation ist
+    geoeffnet; physisches B und der S1-Ast bleiben versiegelt.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.

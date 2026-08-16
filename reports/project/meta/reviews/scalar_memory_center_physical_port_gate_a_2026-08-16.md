@@ -187,6 +187,24 @@ hypothesis, not evidence that closes the current port.
 The machine-readable decision is recorded in
 [the Gate-A JSON](scalar_memory_center_physical_port_gate_a_2026-08-16.json).
 
+## Prospective A2 follow-up
+
+The subsequently frozen and executed
+[finite-H A2 certificate](../../../dynamics/limits/scalar_memory_center_finite_h_port_a2_2026-08-16.md)
+passes all registered cells. Its global Small-Gain/Positive-Real bound shows
+that the exact retiring-history term admits a passive input/output
+realization, and a newly declared discrete-gradient interaction closes a
+reciprocal effective boundary ledger. The
+[critical review](scalar_memory_center_finite_h_port_a2_review_2026-08-16.md)
+checks the pole cancellation, the removable \(z=1\) singularity and the
+claim boundary independently.
+
+This narrows, but does not reverse, the Gate-A decision. A2 constructs a new
+effective wrapper; it does not find that wrapper in the frozen microscopic
+K0 contract or select it over the conditional \(x\)-work hypothesis. Thus the
+finite-\(H\) mathematical objection is closed, while microscopic physical
+port selection remains open.
+
 ## Stop-rule consequences
 
 - The strongest surviving statement is a positive passive

@@ -627,6 +627,18 @@ mathematical passive center port therefore survives, while physical mass
 gates remain blocked. This center result has no bearing on S1: the independent
 topology P0 still has no candidate.
 
+A prospective finite-H follow-up now sharpens that boundary. For the five
+registered matched-tail cells, the exact normalized FIFO transfer from the
+effective input to center velocity is globally strictly positive real. A
+Small-Gain bound includes the retiring-history term, and a discrete-gradient
+interaction can close equal-and-opposite work with an external coordinate.
+This establishes a reciprocal **effective filter wrapper**, not a natural K0
+microscopic actuator: the same native additive input remains compatible with
+the conditional ledger \(F\,dx=F\,dc+F\,dr\). Accordingly the next authorized
+question is only whether the identified filter coefficient scales as
+\(m_{\rm filter}=\tau/\mu\); physical mass, material COM and additive momentum
+remain unestablished.
+
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic
 radius follows R_linear with median relative error 0.94 percent and maximum
