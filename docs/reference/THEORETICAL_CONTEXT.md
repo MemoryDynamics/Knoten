@@ -527,7 +527,8 @@ $\alpha=0.0025$ holdout it measured feedthrough $1.000000$, first post-pulse
 velocity per impulse $-3.990101$, $\alpha W/J^2=1.000000$, and visible-MSD
 slope $0.959048$. All four preregistered positive finite-inertial components
 failed. The defensible conclusion is therefore negative for finite positive
-mass under this canonical additive port.
+mass when the visible coordinate \(x\) is the output of this canonical
+additive port.
 
 Post hoc, the low-frequency expansion
 
@@ -540,6 +541,52 @@ $\gamma=5$ and $m=-4$, not a positive passive mass. This does not exclude a
 separately derived momentum state. Adding such a state and applying force to
 it would be a genuine model extension and would insert, rather than establish,
 inertia unless its closure and coefficients were independently derived.
+
+The same augmented state has a distinct center output. Since
+
+\[
+\dot c=r,\qquad \dot r=-5r+f+\sqrt{2D}\,\xi,
+\]
+
+the center obeys
+
+\[
+\ddot c+5\dot c=f+\sqrt{2D}\,\xi,
+\qquad
+{\dot C(s)\over F(s)}={1\over s+5}.
+\]
+
+With the prospectively fixed center work \(W_c=\int f\,dc\), the positive
+storage \(E=|r|^2/2\) satisfies
+
+\[
+\dot E=f\cdot\dot c-5|\dot c|^2.
+\]
+
+The separate seed-16--20 center-port gate passed validity, finite-H and
+continuum closure and every registered positive-inertial component. At the
+\(\alpha=0.0025\) holdout it inferred \(m=0.996239\) and
+\(\gamma=5.002630\); the center-MSD slope was 1.972302. The resolved
+pulse-width ladder reduced \(\Delta c/J\) to 0.024288 while retaining a
+positive first force-off velocity of 0.878808 and finite
+\(W_c/J^2=0.485756\).
+
+This is an output reconciliation, not a reversal: \(x=c+r=c+\dot c\) remains
+the overdamped mixed readout, whereas \(c\) is a positive effective inertial
+readout. More generally, for \(y_a=c+a r\),
+
+\[
+{\dot Y_a(s)\over F(s)}={1+a s\over s+5},
+\]
+
+so the pure center \(a=0\) is the only affine readout in this family with no
+high-frequency feedthrough. The mass value one is nevertheless fixed by the
+dimensionless force normalization, and no physical principle yet establishes
+that \(c\), rather than \(x\), is the observable coordinate conjugate to an
+external force. The smallest width contains only 20 native steps; its work is
+5.4 percent above the finite-width continuum reference. The result therefore
+supports a local effective center inertia, not an SI mass or a uniform
+impulse double limit.
 
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic

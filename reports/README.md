@@ -54,6 +54,18 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     lokale skalare Reduktion. Er verwirft positive endliche Traegheitsmasse
     fuer diesen Port, nicht jeden moeglichen erweiterten Impulszustand. Siehe
     [kritisches Review](project/meta/reviews/scalar_memory_force_work_port_review_2026-08-16.md).
+- [Skalarer Center-Inertial-Port](dynamics/limits/scalar_memory_center_inertial_port_gate_2026-08-16.md)
+  - **supported positive effective center inertia, local and port-conditional:**
+    Der prospektive Seed-16--20-Lauf besteht G0, G1 und alle elf
+    Center-Inertial-Komponenten; alle vier overdamped-Center-Komponenten
+    scheitern. Am Holdout sind \(m=0.996239\), \(\gamma=5.002630\) und die
+    Center-MSD-Steigung \(1.972302\).
+  - **Reconciliation:** Der sichtbare Ausgang \(x=c+r\) bleibt overdamped.
+    Der reine normalisierte Memory-Center besitzt dagegen unter \(f\,dc\)
+    positive Speicherbilanz, Null-Feedthrough und ballistische Kurzzeit-MSD.
+    Das ist eine effektive Readout-/Port-Aussage, kein SI-Masse- oder
+    Teilchenclaim. Siehe
+    [kritisches Review](project/meta/reviews/scalar_memory_center_inertial_port_review_2026-08-16.md).
 - [Checkpoint-/Holdout-Stabilitaetsgate](long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md)
   - **supported, method-conditional:** 5/5 `d=10`, `A_att=35`-Seeds bestehen
     vier Alterscheckpoints bis `N=30M`, lokale Radiusfenster und den
@@ -65,12 +77,13 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     diskriminierend.
 
 Entscheidung: Das skalare Modell bleibt eine kontrollierte lineare Baseline
-mit scaling-konditionalem Kontinuumsgrenzwert. Der nun unabhaengig normierte
-Kraft-/Arbeitsport und der ballistisch-vs.-diffusive Falsifikationstest
-selektieren overdamped Memory und verwerfen regulaere positive endliche Masse
-fuer diesen Port. Ein neuer Massekandidat braucht einen separat abgeleiteten
-Impulszustand, fehlenden Hochfrequenz-Feedthrough und eine positive passive
-Arbeitsbilanz; ein lediglich eingesetztes Momentum waere nicht emergent.
+mit scaling-konditionalem Kontinuumsgrenzwert. Masse ist hier
+input/output-abhaengig: Der sichtbare \(x\)-Port selektiert overdamped Memory,
+waehrend der bereits aus dem Memory abgeleitete Center \(c\) unter dem neuen
+\(f\,dc\)-Port eine positive effektive Inertialdarstellung besitzt. Zulaessig
+ist damit ein lokaler mathematischer Existenzclaim fuer den Center, nicht die
+Behauptung einer eindeutig selektierten physischen Knotenposition oder
+physikalischen Masse.
 
 ### 2. Dimension
 
