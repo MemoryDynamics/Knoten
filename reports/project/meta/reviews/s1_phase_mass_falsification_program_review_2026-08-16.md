@@ -8,10 +8,17 @@ Reviewed artifact:
 ## Verdict
 
 The revised charter is suitable as a scientific program charter and as the
-boundary for candidate-independent method development. It is not yet an
-executable preregistration. Candidate runs remain blocked because P0 lacks the
-complete parameter tuple, discovery provenance, initial-state hashes,
-candidate observable, target metric and confirmatory seed rule.
+boundary for candidate-independent method development. The **S1 branch** is
+not yet an executable preregistration. S1 candidate runs remain blocked
+because its P0 lacks the complete parameter tuple, discovery provenance,
+initial-state hashes, candidate observable, target metric and confirmatory
+seed rule.
+
+Claim-scoped execution after this review does not change that verdict. The
+independent normalized memory-center candidate now passes a mechanics P0 and
+opens only A; it does not open D0. Gate A subsequently retains mathematical
+center passivity but fails to derive physical \(F_c\,dc\) from the additive
+\(x\)-input, so downstream physical-mass gates remain blocked.
 
 This distinction is substantive. Starting A--F against an incompletely frozen
 candidate would convert confirmatory gates into post-selection diagnostics.

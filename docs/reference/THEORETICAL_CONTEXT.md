@@ -616,6 +616,17 @@ material center of mass or a uniform multiple limit. The dedicated
 [referee audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_center_mass_referee_audit_2026-08-16.md)
 records the claim boundary and the required falsification tests.
 
+The subsequent claim-scoped program now makes that boundary executable. The
+center candidate passes its provenance freeze, but physical-port Gate A
+cannot identify the existing actuator. An \(x\)-conjugate hypothesis gives
+\(F\,dx=F\,dc+F\,dr\), whereas an effective
+\(U_{\rm ext}(c,Q)\) transforms to the same additive \(x\)-state equation.
+The frozen contract contains neither a reciprocal actuator nor the exact
+finite-history boundary-work rule needed to choose between them. The
+mathematical passive center port therefore survives, while physical mass
+gates remain blocked. This center result has no bearing on S1: the independent
+topology P0 still has no candidate.
+
 For the A_att=0..40 screening slice, g=A_att/60. The entire scan is below the
 monotone/alternating boundary A_att=60. For A_att>=5 the measured dynamic
 radius follows R_linear with median relative error 0.94 percent and maximum

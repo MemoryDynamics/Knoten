@@ -12,8 +12,22 @@
       "candidate, phase, oscillation, complex-mode, and discovery-provenance terms"
     ]
   },
+  "branch_contract": {
+    "requested_entry_gates": [
+      "D0"
+    ],
+    "scope_statement": "This manifest can authorize only the S1 topology branch; center mechanics requires a distinct candidate manifest.",
+    "sealed_out_of_scope_gates": [
+      "A",
+      "B",
+      "C",
+      "E",
+      "F1"
+    ]
+  },
   "candidate_claim": null,
   "candidate_id": null,
+  "claim_scope": "s1-topology",
   "code_revision": null,
   "confirmatory_design": {
     "new_seeds_disjoint_from_discovery": null,
@@ -40,10 +54,11 @@
     "memory": null,
     "noise": null
   },
+  "hash_policy": "sha256-canonical-lf-text-v1",
   "initial_state_source_and_hashes": null,
   "manifest_status": "incomplete-no-candidate-selected",
   "quarantined_predecessor_relation": null,
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "time_law": null,
   "working_tree_status": null
 }

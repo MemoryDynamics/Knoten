@@ -1,0 +1,41 @@
+{
+  "candidate_id": "scalar-memory-center-effective-mechanics-v1",
+  "claim_scope": "center-effective-mechanics",
+  "decision": "physical-center-port-not-identified-mathematical-port-retained",
+  "downstream": {
+    "B_physical_mass": "blocked-by-A",
+    "C_composition_and_momentum": "blocked-by-A",
+    "D0_through_D5": "sealed-no-s1-candidate",
+    "E_physical_work": "blocked-by-A",
+    "F1_mechanical_mass_claim": "blocked-by-A",
+    "new_target_simulation": "not-authorized"
+  },
+  "evaluated_components": {
+    "A0_microscopic_input_recipient": {
+      "decision": "pass",
+      "result": "The registered additive input enters the current visible x update."
+    },
+    "A1_competing_x_work_ledger": {
+      "decision": "conditional-pass",
+      "result": "If the actuator is independently declared x-conjugate, x=c+r gives f dx=f dc+f dr with a generally nonzero residual. Input location alone does not select this supply."
+    },
+    "A2_effective_center_interaction": {
+      "decision": "conditional-pass",
+      "result": "An effective U_ext(c,Q) with F=-partial_c U transforms under x=c+tau*dc/dt to the same continuum x equation with additive mu*F."
+    },
+    "A3_mathematical_center_passivity": {
+      "decision": "pass",
+      "result": "The reduced center realization has positive storage S=|r|^2/(2 mu tau) and supply F dot dc/dt."
+    },
+    "A4_microscopic_selection_and_finite_h_boundary": {
+      "decision": "fail",
+      "result": "The frozen K0 external-system contract contains no actuator coordinate, reciprocal interaction, or finite-H boundary-work rule that chooses the center hypothesis over the x hypothesis."
+    }
+  },
+  "generated_at": "2026-08-16T10:45:00+02:00",
+  "new_response_data_opened": false,
+  "p0_manifest": "reports/project/meta/preregistration/scalar_memory_center_mechanics_p0_manifest_2026-08-16.json",
+  "p0_manifest_hash_policy": "sha256-canonical-lf-text-v1",
+  "p0_manifest_sha256": "d61e36fa480b7f8d575548ad3753b25ae8819260f6458bc20a7c616dcc77f18c",
+  "schema_version": "1.0"
+}

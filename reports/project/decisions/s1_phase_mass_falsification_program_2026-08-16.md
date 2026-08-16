@@ -2,19 +2,26 @@
 
 Date: 2026-08-16.
 
-Status: scientific program charter and preregistration scaffold. This is not
-yet an executable preregistration. The candidate parameter tuple, its discovery
-provenance and the exact confirmatory seeds are not yet present in the
-repository. No candidate simulation is authorized by this document.
+Status: scientific program charter with claim-scoped P0 execution. The S1
+branch is not yet an executable preregistration because it has no candidate.
+The independent center-effective-mechanics branch has a frozen candidate, but
+its physical-port Gate A did not identify a microscopic port; no downstream
+physical-mass simulation is authorized.
 
 The second-pass findings and their resolutions are recorded in the
 [referee review](../meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md).
 The first authorized methods-only artifact is the
 [candidate-independent synthetic topology control](../../topology/s1_control_pipeline_2026-08-16.md).
-The subsequent repository-wide
-[P0 audit](../meta/preregistration/s1_candidate_p0_audit_2026-08-16.md)
-returns `P0-fail-no-eligible-candidate-record`; D0/D1 and target simulation
-therefore remain blocked.
+The repository-wide
+[S1 P0 audit](../meta/preregistration/s1_candidate_p0_audit_2026-08-16.md)
+returns `P0-fail-no-eligible-candidate-record`; D0/D1 and S1 target simulation
+therefore remain blocked. Separately, the
+[center-mechanics P0 audit](../meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
+passes and authorizes only A. Its subsequent
+[Gate-A audit](../meta/reviews/scalar_memory_center_physical_port_gate_a_2026-08-16.md)
+retains the mathematical center port but cannot identify physical work
+conjugacy from the existing additive \(x\)-input: conditional \(x\)- and
+center-coupled realizations both produce that state-equation term.
 
 ## Executive decision
 
@@ -39,8 +46,8 @@ The publication-grade order is therefore:
 
 ```mermaid
 flowchart TD
-    P0["P0 candidate and discovery freeze"] --> A["A physical port derivation"]
-    P0 --> D0["D0 raw observable and claimed topological object"]
+    P0M["P0-M center-mechanics candidate freeze"] --> A["A physical port derivation"]
+    P0S["P0-S S1 candidate freeze"] --> D0["D0 raw observable and claimed topological object"]
     D0 --> D1["D1 measurement adequacy"]
     D0 --> F0["F0 coordinate and topology symmetries"]
     D1 --> D2["D2 persistent S1 evidence"]
@@ -59,7 +66,7 @@ Scientific decisions are sequential. Method-development controls and
 simulation shards may be parallelized, but downstream target data remain
 sealed until their upstream gate is frozen and passed.
 
-Before P0, only a dependency-pinned generic topology adapter and synthetic
+Before the S1 P0, only a dependency-pinned generic topology adapter and synthetic
 positive/negative pipeline controls may be implemented. They may not contain a
 candidate-shaped observable, metric, delay, filtration threshold or decision
 cutoff. This permits infrastructure work without weakening the candidate
@@ -89,13 +96,20 @@ If the new candidate is one of these points under a materially new architecture
 or observable, that difference must be named explicitly. Otherwise its old
 negative or conditional controls remain applicable.
 
-## P0: candidate and discovery freeze
+## P0: claim-scoped candidate and discovery freeze
 
-Before implementation of any \(S^1\) or A--F target statistic, create one
-immutable candidate manifest. It must contain at least:
+P0 is evaluated per claim branch, not once for the entire program. A mechanics
+candidate can open A without opening D0, and an S1 candidate can open D0
+without establishing a physical port. A joint candidate would require two
+separately passing manifests or an explicitly audited union of both contracts.
+
+Before implementation of any target statistic in a branch, create one
+immutable candidate manifest for that branch. It must contain at least:
 
 ```yaml
 candidate_id: pending
+claim_scope: pending  # s1-topology or center-effective-mechanics
+branch_contract: pending
 architecture_level: pending  # K0, K1, K2, K3, or an explicitly new level
 time_law: pending  # native discrete map, continuous model, or validated limit
 code_revision: pending
@@ -112,6 +126,11 @@ all_discovery_artifacts_and_hashes: pending
 confirmatory_seed_generation_rule: pending
 untouched_parameter_holdout: pending
 ```
+
+The current records demonstrate both outcomes. The K0 normalized center has a
+complete mechanics manifest and passes P0-M with zero defects. The S1 draft
+manifest remains incomplete with 27 defects and no candidate, so P0-S fails.
+Neither result can be transferred to the other branch.
 
 The full tuple includes noise, memory, kernel, coupling, integration, horizon,
 boundary, external-drive and initialization parameters. Recording only the
@@ -520,7 +539,8 @@ symmetry and conservation law.
 
 The following rules apply without exception:
 
-1. no complete P0 manifest: no confirmatory target run;
+1. no complete claim-scoped P0 manifest: no confirmatory target run in that
+   claim branch;
 2. D1 inconclusive: repair measurement only, without changing candidate
    dynamics or searching for a favorable projection;
 3. D2 fail: no `phase`, `winding` or \(S^1\) claim from that observable;
@@ -566,10 +586,10 @@ effective-mechanics result only if A--C and E/F close.
 
 ## Next checkpoint
 
-Generic topology infrastructure may now be implemented only against synthetic
-and architecture-independent controls. The immediate candidate-specific
-artifact remains the completed P0 manifest, not a target simulation. Once it
-exists:
+For S1, generic topology infrastructure may still be implemented only against
+synthetic and architecture-independent controls. Its immediate
+candidate-specific artifact remains a completed S1 P0 manifest, not a target
+simulation. Once it exists:
 
 1. decide whether the primary topological object is a continuous-time orbit,
    discrete invariant circle, stochastic ridge, delay reconstruction or
@@ -580,3 +600,10 @@ exists:
 4. commit exact thresholds, seeds and sealed holdouts in an executable
    preregistration;
 5. only then open the confirmatory candidate run.
+
+For center mechanics, P0-M is complete but A has stopped the physical branch.
+The next admissible action is either to specify a genuinely center-conjugate
+external interaction as a new actuator architecture and restart its P0/A
+chain, or to preregister a clearly nonphysical filter-scaling robustness study.
+The latter may test \(m_{\rm filter}=\tau/\mu\), but it cannot count as B in
+the physical-mass claim ladder.

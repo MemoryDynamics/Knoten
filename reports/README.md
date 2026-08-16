@@ -107,7 +107,7 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 ### 3. Memory-Feld und reduzierte Moden
 
 - [S1-Phasen- und Masse-Falsifikationsprogramm](project/decisions/s1_phase_mass_falsification_program_2026-08-16.md)
-  - **program charter; no candidate result:** Ein moeglicher neuer
+  - **program charter; no S1 candidate result:** Ein moeglicher neuer
     Oszillationssatz wird erst nach vollstaendiger Parameter- und
     Discovery-Provenienz als `P0` eingefroren. Im Repository liegt noch kein
     eindeutiges neues Tupel. Alte komplex-eligible oder quench-ringing Punkte
@@ -117,6 +117,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     endet mit 27 Manifestdefekten. Der maschinenlesbare Validator blockiert
     deshalb D0, D1 und jeden Ziellauf; dies ist ein Provenienz-Fail, kein
     negatives Topologieergebnis.
+  - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
+    besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
+    bleiben als `sealed-no-s1-candidate` geschlossen.
+  - [Gate A](project/meta/reviews/scalar_memory_center_physical_port_gate_a_2026-08-16.md)
+    identifiziert aus dem vorhandenen additiven \(x\)-Input keinen eindeutigen
+    physischen Port. Ein \(x\)-Port hat \(f\,dx=f\,dc+f\,dr\), aber ein
+    effektives \(U_{\rm ext}(c,Q)\) erzeugt dieselbe Zustandsgleichung. Ohne
+    mikroskopischen Aktuator- und finite-H-Grenzvertrag bleibt nur der
+    mathematische passive Center-Port; physische B/C/E/F1 sind gestoppt.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.

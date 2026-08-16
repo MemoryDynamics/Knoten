@@ -1,0 +1,27 @@
+{
+  "claim_scope": "center-effective-mechanics",
+  "decision": "pass",
+  "downstream": {
+    "A": "authorized",
+    "B": "blocked-until-A-pass",
+    "C": "blocked-until-B-pass",
+    "D0": "sealed-no-s1-candidate",
+    "D1": "sealed-no-s1-candidate",
+    "D2": "sealed-no-s1-candidate",
+    "D3": "sealed-no-s1-candidate",
+    "D4": "sealed-no-s1-candidate",
+    "D5": "sealed-no-s1-candidate",
+    "E": "blocked-until-B-pass",
+    "F0": "sealed-no-s1-candidate",
+    "F1": "blocked-until-A-and-B-pass",
+    "target_simulation": "sealed-until-A-pass"
+  },
+  "gate": "P0-candidate-and-discovery-freeze",
+  "generated_at": "2026-08-16T10:30:00+02:00",
+  "hash_policy": "sha256-canonical-lf-text-v1",
+  "issue_count": 0,
+  "issues": [],
+  "manifest_path": "reports/project/meta/preregistration/scalar_memory_center_mechanics_p0_manifest_2026-08-16.json",
+  "manifest_sha256": "d61e36fa480b7f8d575548ad3753b25ae8819260f6458bc20a7c616dcc77f18c",
+  "schema_version": "1.1"
+}

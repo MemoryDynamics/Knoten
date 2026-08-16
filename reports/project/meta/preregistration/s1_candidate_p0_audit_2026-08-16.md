@@ -6,6 +6,9 @@ Decision: **`P0-fail-no-eligible-candidate-record`**.
 
 Consequences: D0, D1 and every candidate target simulation remain blocked.
 This is a provenance failure before topology, not a negative topology result.
+It applies only to the `s1-topology` claim scope. The distinct normalized
+memory-center candidate is assessed by a separate mechanics P0 and cannot
+serve as the missing S1 candidate.
 
 ## Scope and evidence
 
@@ -65,10 +68,13 @@ returns 27 independent completeness defects:
 | confirmatory seed rule, untouched parameter holdout and explicit seed disjointness | 3 |
 
 `target_data_opened=false` is the one confirmatory seal already satisfied.
+The claim-scoped branch contract is also valid: it requests only D0 and seals
+the mechanics gates, so it adds no defect and cannot be opened by a center
+result.
 The validator accumulates all defects instead of stopping at the first one,
 checks full commits plus SHA-256 formats and contents of repository-relative
-artifacts, rejects dirty discovery trees and requires a distinct untouched
-validation design.
+artifacts, canonicalizes text line endings before hashing, rejects dirty
+discovery trees and requires a distinct untouched validation design.
 
 Reproduction:
 

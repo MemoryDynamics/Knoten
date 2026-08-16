@@ -1,0 +1,273 @@
+{
+  "architecture_level": "K0",
+  "branch_contract": {
+    "requested_entry_gates": [
+      "A"
+    ],
+    "scope_statement": "This candidate concerns only the passive effective mechanics of the normalized scalar memory center. It neither claims nor authorizes S1 topology, phase, winding, or an internal oscillator.",
+    "sealed_out_of_scope_gates": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "F0"
+    ]
+  },
+  "candidate_claim": "In the registered local matched-alpha regime of canonical scalar memory, the normalized finite-H memory center c is a positive passive effective-inertial output under the explicitly mathematical port (f, dc/dt). Physical work conjugacy, SI calibration, material mass scaling, and additive momentum remain unclaimed pending A, B, C, E, and F1.",
+  "candidate_id": "scalar-memory-center-effective-mechanics-v1",
+  "claim_scope": "center-effective-mechanics",
+  "code_revision": "f2bfa4b402a52a5082dc4cd5644f5e7822eac064",
+  "confirmatory_design": {
+    "new_seeds_disjoint_from_discovery": true,
+    "seed_generation_rule": {
+      "formation_seeds": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "msd_seed": 20260818,
+      "response_noise_seed": 20260818,
+      "rule": "Use the next five positive integer formation seeds after the discovery range 1 through 20 and the next YYYYMMDD integer after the 20260817 center run for response and MSD noise; do not replace failed seeds."
+    },
+    "target_data_opened": false,
+    "untouched_parameter_holdout": {
+      "alpha": 0.003125,
+      "force_profile": "resolved unit-area rectangle",
+      "horizon": 4800,
+      "impulse_fractions": [
+        0.005,
+        0.01
+      ],
+      "memory_mass": 1.0,
+      "pulse_width": 0.2,
+      "tail_extent": 15.0
+    }
+  },
+  "discovery_provenance": {
+    "artifacts_and_hashes": [
+      {
+        "path": "reports/dynamics/limits/scalar_memory_continuum_limit_gate_2026-08-15.json",
+        "sha256": "226404d5366ed38c96e14184bf649a322524aee9dd992be5b19434b15b2af4cc"
+      },
+      {
+        "path": "reports/dynamics/limits/scalar_memory_continuum_limit_reconciliation_2026-08-15.json",
+        "sha256": "76d5f20ef3075779ba076190e6b91dec90aa1270709e05964de68f3d045995ed"
+      },
+      {
+        "path": "reports/dynamics/limits/scalar_memory_force_work_port_gate_2026-08-16.json",
+        "sha256": "7ce1a4c0f5b5668ca1fabf4ac89da93b7aeb3bb4fad3896b2de186a88ce8d5f8"
+      },
+      {
+        "path": "reports/dynamics/limits/scalar_memory_center_inertial_port_gate_2026-08-16.json",
+        "sha256": "81bc7e1bb91e9ec974cd16046cce0d90253e0d29e55824ce75f18b4a7c3c2262"
+      },
+      {
+        "path": "reports/project/meta/preregistration/scalar_memory_center_inertial_port_protocol_2026-08-16.md",
+        "sha256": "af25399667ad4d8f73da3c199dbe2696161fb10b72544b14719215da3474da97"
+      },
+      {
+        "path": "reports/project/meta/reviews/scalar_memory_center_inertial_port_review_2026-08-16.md",
+        "sha256": "c92f0fe13d344ecead38080aac527dc55ed8e73f2fbcc837124b3f379ac29683"
+      },
+      {
+        "path": "reports/project/meta/reviews/scalar_memory_center_mass_referee_audit_2026-08-16.md",
+        "sha256": "24fdb7c6993e934d68b1e8bdfe3eff91390122518d4c08e1b0909aa93247431e"
+      }
+    ],
+    "forcing_and_external_system": {
+      "center_run": "Mirrored weak resolved rectangular inputs were added to the x update along coordinate e1; c was the candidate output and both f dx and f dc ledgers were inspected.",
+      "continuum_runs": "Mirrored visible-coordinate offsets and force-off controls were used to establish the matched local scalar-memory regime.",
+      "visible_port_run": "A native one-step input added to x tested the visible output x and rejected a global positive-mass interpretation of that readout."
+    },
+    "observables_inspected": [
+      "visible state x",
+      "normalized finite-H memory center c",
+      "relative state r=x-c",
+      "finite-H memory radius and simultaneous control radius",
+      "visible and center displacement and velocity responses",
+      "f dx and f dc cumulative work ledgers",
+      "relative-state storage and dissipation residuals",
+      "short-time x and center MSD",
+      "inferred dimensionless mass and damping"
+    ],
+    "parameter_cells_or_optimizers_inspected": {
+      "alpha": [
+        0.04,
+        0.02,
+        0.01,
+        0.005,
+        0.0025
+      ],
+      "center_pulse_widths": [
+        0.4,
+        0.2,
+        0.1,
+        0.05
+      ],
+      "continuum_tail_extents": [
+        6.0,
+        9.0,
+        12.0
+      ],
+      "impulse_or_offset_fractions": [
+        0.005,
+        0.01
+      ],
+      "optimizer": "No optimizer or candidate parameter search was used; fixed registered ladders were inspected.",
+      "single_values": {
+        "chi": 4.0,
+        "diffusion": 0.0001,
+        "memory_mass": 1.0
+      }
+    },
+    "run_lengths_and_cadence": {
+      "center_free_response_memory_times": 1.2,
+      "formation_memory_times": 20.0,
+      "msd_native_steps": 16,
+      "native_cadence": "Every update was retained for force-response and work diagnostics.",
+      "visible_free_response_memory_times": 1.2
+    },
+    "seeds": {
+      "center_formation": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "center_msd": 20260817,
+      "center_response_noise": 20260817,
+      "continuum_formation": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "continuum_response_noise": 20260815,
+      "visible_formation": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "visible_msd": 20260816,
+      "visible_response_noise": 20260816
+    },
+    "selection_rule": "After the visible x-port failed, algebraic elimination of the already-defined normalized memory centroid selected c, with r=x-c as its candidate velocity. The center protocol was committed before seeds 16 through 20 were run. Those results and every earlier scalar continuum and visible-port result are now discovery evidence only. The later affine-readout uniqueness observation was post hoc and did not select this candidate."
+  },
+  "full_parameter_tuple": {
+    "coupling": {
+      "cross_coupling": 0.0,
+      "eta_rule": "eta(alpha)=chi*alpha/[M0*(1-(1-alpha)^H)*(A_att/sigma_att^2-A_rep/sigma_rep^2)]",
+      "force_axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "force_update": "x_next = x - eta*grad(V_H) + alpha*f*e1 + epsilon*xi",
+      "input_mobility": 1.0,
+      "restoring_per_memory_time_chi": 4.0
+    },
+    "external_system": {
+      "free_response_time": 1.2,
+      "impulse_fractions_of_continuum_radius": [
+        0.005,
+        0.01
+      ],
+      "main_pulse_width": 0.2,
+      "output": "normalized finite-H memory center c",
+      "pulse_width_ladder": [
+        0.4,
+        0.2,
+        0.1,
+        0.05
+      ],
+      "registered_supply": "sum_n f_n dot (c_{n+1}-c_n)",
+      "resolved_profile": "unit-area rectangle"
+    },
+    "horizon_and_boundary": {
+      "horizon_rule": "H=ceil(12/alpha)",
+      "horizons": [
+        300,
+        600,
+        1200,
+        2400,
+        4800
+      ],
+      "memory_boundary": "finite causal ring buffer with discarded exponential tail",
+      "spatial_boundary": "unbounded Euclidean R^3",
+      "tail_extent": 12.0
+    },
+    "initialization": {
+      "branching": "After formation, control and mirrored forced paths clone the same x, history, and ring head and share response noise.",
+      "formation_duration_memory_times": 20.0,
+      "formation_start": "x=0, zero-valued unfilled H-by-3 history, head=0, filled=0",
+      "state_source": "Procedural _form_state implementation at the frozen code revision; no hand-selected checkpoint is loaded."
+    },
+    "integration": {
+      "alpha_values": [
+        0.04,
+        0.02,
+        0.01,
+        0.005,
+        0.0025
+      ],
+      "brownian_coupling": "Exact aggregation of standard-normal increments from alpha=0.0025 to coarser registered alpha values.",
+      "law": "native discrete scalar-memory update",
+      "time_unit": "one exponential memory time"
+    },
+    "kernel": {
+      "amplitude_att": 35.0,
+      "amplitude_rep": 1.0,
+      "family": "difference of isotropic Gaussian potentials",
+      "local_curvature": 2.888888888888889,
+      "sigma_att": 3.0,
+      "sigma_rep": 1.0
+    },
+    "memory": {
+      "center": "c=sum_age w_age*x_age/sum_age w_age",
+      "deposition_weight": "M0*alpha",
+      "memory_mass_M0": 1.0,
+      "q": "1-alpha",
+      "stored_mass": "M0*(1-q^H)",
+      "weights": "w_age=M0*alpha*q^age for age 0 through H-1"
+    },
+    "noise": {
+      "diffusion_per_memory_time_D": 0.0001,
+      "epsilon_rule": "epsilon(alpha)=sqrt(2*D*alpha)",
+      "formation_noise": "independent standard-normal increments by formation seed",
+      "response_noise": "common noise across force-off and mirrored branches"
+    }
+  },
+  "hash_policy": "sha256-canonical-lf-text-v1",
+  "initial_state_source_and_hashes": [
+    {
+      "sha256": "2329ab4826a2c5155d2824277f6ab188d154049e94b2827f762dcb5b2c028fd2",
+      "source": "experiments/current/dynamics/scaling/scalar_memory_center_inertial_port_gate.py"
+    },
+    {
+      "sha256": "32432b40ee10660a8d80e404e0419ecbd27a5385dc2ebf102a02660714bf7fe6",
+      "source": "src/emergenz_knoten/force_work_port.py"
+    },
+    {
+      "sha256": "42ed59291046396d9596449f99dacd7885998e151beefe1365b9c57afc7096a1",
+      "source": "src/emergenz_knoten/continuum_limit.py"
+    }
+  ],
+  "manifest_status": "frozen",
+  "quarantined_predecessor_relation": "This is the same K0 normalized-center candidate as the prospective center-port gate, not a reconstructed S1 oscillator. Seeds 1 through 20 and all opened center-port outputs are quarantined as discovery. The earlier negative x-port result remains valid for x and is not reclassified.",
+  "schema_version": "1.1",
+  "time_law": "native-discrete-map",
+  "working_tree_status": "clean"
+}

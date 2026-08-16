@@ -801,14 +801,14 @@ Prioritaetsfolge:
     sequentiell; nur Seed-Simulationen duerfen parallel laufen. Protokoll:
     `reports/project/meta/preregistration/p38f_split_gate_execution_protocol_2026-08-14.md`.
 
-25. **Separater S1-/Masse-Falsifikationsast; Charter plus reine
+25. **Claim-getrennter S1-/Masse-Falsifikationsast; Center bis A, S1 nur
     Methodenkontrollen.** Ein
     moeglicher Parametersatz fuer knoteninterne Oszillation und externe
     Wechselwirkung wird nicht in P3.8f hineingedeutet. Vor jedem neuen
-    Ziellauf muss `P0` das vollstaendige Parametertupel, Architekturlevel,
+    S1-Ziellauf muss `P0-S` das vollstaendige Parametertupel, Architekturlevel,
     Code-/State-Hashes, alle betrachteten Discovery-Daten und eine Regel fuer
     neue konfirmatorische Seeds einfrieren. Im Repository liegt derzeit kein
-    eindeutiger neuer Satz vor.
+    eindeutiger neuer S1-Satz vor.
 
     Der Topologieast definiert zuerst das behauptete Objekt: deterministischer
     Orbit, stochastischer Dichte-Ridge, Delay-Rekonstruktion oder kollektiver
@@ -831,14 +831,25 @@ Prioritaetsfolge:
     synthetischer Method-Training-Split. Sein endlicher 12-Zyklus traegt trotz
     nichtkreisfoermiger Invariantmengentopologie eine lange `H1`-Klasse und
     demonstriert damit die notwendige Trennung von Geometrie und Dynamik. Der
-    Validation-Split bleibt ungeoeffnet; P0 blockiert weiterhin Zielruns.
+    Validation-Split bleibt ungeoeffnet; P0-S blockiert weiterhin S1-Zielruns.
 
-    Der inzwischen ausgefuehrte repositoryweite P0-Audit bestaetigt diese
-    Blockade formal: kein eindeutiger neuer Kandidaten-/Discovery-Datensatz,
+    Der inzwischen ausgefuehrte repositoryweite S1-P0-Audit bestaetigt diese
+    Blockade formal: kein eindeutiger neuer S1-Kandidaten-/Discovery-Datensatz,
     27 akkumulierte Manifestdefekte und `target_data_opened=false`. Ein
     getesteter Validator prueft Vollparameter, State-/Artefakthashes,
     Discovery-Selektion und Confirmatory-Seals. D0/D1 wurden folgerichtig
     nicht geoeffnet; dies ist kein negatives Topologieergebnis.
+
+    Der davon getrennte K0-Memory-Center besteht P0-M mit null Defekten. Alle
+    frueheren Centerdaten und Seeds 1--20 sind Discovery, neue Seeds 21--25
+    und eine Transferzelle bleiben versiegelt; der Pass oeffnet nur A und
+    versiegelt D0--D5 explizit. Gate A identifiziert den implementierten
+    Inputempfaenger als `x`, aber nicht den physischen Port: ein x-konjugierter
+    Port hat den Rest `f dr`, waehrend ein effektives `U_ext(c,Q)` zur selben
+    additiven x-Gleichung transformiert. Ohne reziproken mikroskopischen
+    Aktuator und finite-H-Grenzledger bleibt der mathematische passive
+    Center-Port gueltig, waehrend Center-Arbeit und die nachgelagerten
+    Massegates B/C/E/F1 gestoppt sind.
 
 Der signierte skalare Kanal besteht Architekturtests, verwendet aber extern
 vergebene Labels und bislang zu wenige unabhaengige Zustaende. Der positive

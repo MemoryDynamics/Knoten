@@ -1,7 +1,8 @@
-"""Validate the provenance freeze required before S1 candidate analysis.
+"""Validate a claim-scoped candidate and discovery provenance freeze.
 
 The gate checks completeness and internal auditability only.  It does not
-choose a candidate, infer missing values, or inspect D0/D1 target topology.
+choose a candidate, infer missing values, or inspect target data.  A passing
+manifest opens only the entry gate belonging to its declared claim scope.
 """
 
 from __future__ import annotations
@@ -41,6 +42,21 @@ PLACEHOLDERS = {
 }
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+HASH_POLICY = "sha256-canonical-lf-text-v1"
+CANONICAL_TEXT_SUFFIXES = {
+    ".cfg",
+    ".csv",
+    ".ini",
+    ".json",
+    ".md",
+    ".py",
+    ".rst",
+    ".toml",
+    ".tsv",
+    ".txt",
+    ".yaml",
+    ".yml",
+}
 
 FULL_PARAMETER_COMPONENTS = (
     "noise",
@@ -65,6 +81,24 @@ CONFIRMATORY_FIELDS = (
     "seed_generation_rule",
     "untouched_parameter_holdout",
 )
+CLAIM_BRANCH_CONTRACTS = {
+    "s1-topology": {
+        "requested_entry_gates": {"D0"},
+        "sealed_out_of_scope_gates": {"A", "B", "C", "E", "F1"},
+    },
+    "center-effective-mechanics": {
+        "requested_entry_gates": {"A"},
+        "sealed_out_of_scope_gates": {
+            "D0",
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "F0",
+        },
+    },
+}
 
 
 @dataclass(frozen=True)
@@ -199,6 +233,8 @@ def audit_manifest(
         "manifest_status",
         "candidate_id",
         "candidate_claim",
+        "claim_scope",
+        "hash_policy",
         "architecture_level",
         "time_law",
         "code_revision",
@@ -207,12 +243,20 @@ def audit_manifest(
     ):
         _add_missing_if_needed(issues, manifest, field, "")
 
-    if manifest.get("schema_version") != "1.0":
+    if manifest.get("schema_version") != "1.1":
         issues.append(
             AuditIssue(
                 code="unsupported-schema",
                 path="schema_version",
-                message="the executable P0 gate currently accepts schema_version 1.0",
+                message="the claim-scoped P0 gate requires schema_version 1.1",
+            )
+        )
+    if manifest.get("hash_policy") != HASH_POLICY:
+        issues.append(
+            AuditIssue(
+                code="unsupported-hash-policy",
+                path="hash_policy",
+                message=f"hash_policy must be {HASH_POLICY}",
             )
         )
     if manifest.get("manifest_status") != "frozen":
@@ -223,6 +267,58 @@ def audit_manifest(
                 message="P0 can pass only an explicitly frozen manifest",
             )
         )
+
+    claim_scope = manifest.get("claim_scope")
+    if _is_concrete(claim_scope) and claim_scope not in CLAIM_BRANCH_CONTRACTS:
+        issues.append(
+            AuditIssue(
+                code="invalid-claim-scope",
+                path="claim_scope",
+                message=(
+                    "claim_scope must be s1-topology or center-effective-mechanics"
+                ),
+            )
+        )
+
+    branch_contract = manifest.get("branch_contract")
+    if not isinstance(branch_contract, dict):
+        issues.append(
+            AuditIssue(
+                code="missing-object",
+                path="branch_contract",
+                message="branch_contract must be an object",
+            )
+        )
+    else:
+        for field in (
+            "requested_entry_gates",
+            "sealed_out_of_scope_gates",
+            "scope_statement",
+        ):
+            _add_missing_if_needed(issues, branch_contract, field, "branch_contract")
+        expected = CLAIM_BRANCH_CONTRACTS.get(claim_scope)
+        if expected is not None:
+            for field in ("requested_entry_gates", "sealed_out_of_scope_gates"):
+                actual = branch_contract.get(field)
+                string_list = isinstance(actual, list) and all(
+                    isinstance(item, str) for item in actual
+                )
+                actual_set = set(actual) if string_list else set()
+                if (
+                    not string_list
+                    or len(actual) != len(actual_set)
+                    or actual_set != expected[field]
+                ):
+                    issues.append(
+                        AuditIssue(
+                            code="branch-scope-mismatch",
+                            path=f"branch_contract.{field}",
+                            message=(
+                                f"{field} must be a duplicate-free list containing exactly "
+                                f"{sorted(expected[field])} for {claim_scope}"
+                            ),
+                        )
+                    )
 
     architecture = manifest.get("architecture_level")
     if _is_concrete(architecture) and not (
@@ -376,7 +472,10 @@ def load_manifest(path: Path) -> dict[str, Any]:
 
 
 def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    payload = path.read_bytes()
+    if path.suffix.lower() in CANONICAL_TEXT_SUFFIXES:
+        payload = payload.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def build_audit_record(
@@ -385,20 +484,111 @@ def build_audit_record(
     *,
     generated_at: str,
 ) -> dict[str, Any]:
+    manifest = load_manifest(manifest_path)
+    scope = manifest.get("claim_scope")
+    passed = not issues
+    downstream = _downstream_for_scope(scope, passed=passed)
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "gate": "P0-candidate-and-discovery-freeze",
-        "decision": "pass" if not issues else "fail",
-        "downstream": {
-            "D0": "authorized" if not issues else "blocked",
-            "D1": "blocked-until-D0-pass" if not issues else "blocked",
-            "target_simulation": "sealed" if issues else "eligible-after-D0-contract",
-        },
+        "hash_policy": HASH_POLICY,
+        "claim_scope": scope,
+        "decision": "pass" if passed else "fail",
+        "downstream": downstream,
         "generated_at": generated_at,
         "manifest_path": manifest_path.relative_to(PROJECT_ROOT).as_posix(),
         "manifest_sha256": _sha256(manifest_path),
         "issue_count": len(issues),
         "issues": [asdict(issue) for issue in issues],
+    }
+
+
+def _downstream_for_scope(scope: Any, *, passed: bool) -> dict[str, str]:
+    """Return an explicit branch seal; P0 never authorizes both claims."""
+
+    if scope == "center-effective-mechanics":
+        if passed:
+            return {
+                "A": "authorized",
+                "B": "blocked-until-A-pass",
+                "C": "blocked-until-B-pass",
+                "E": "blocked-until-B-pass",
+                "F1": "blocked-until-A-and-B-pass",
+                "D0": "sealed-no-s1-candidate",
+                "D1": "sealed-no-s1-candidate",
+                "D2": "sealed-no-s1-candidate",
+                "D3": "sealed-no-s1-candidate",
+                "D4": "sealed-no-s1-candidate",
+                "D5": "sealed-no-s1-candidate",
+                "F0": "sealed-no-s1-candidate",
+                "target_simulation": "sealed-until-A-pass",
+            }
+        return {
+            "A": "blocked-by-P0",
+            "B": "blocked-by-P0",
+            "C": "blocked-by-P0",
+            "E": "blocked-by-P0",
+            "F1": "blocked-by-P0",
+            "D0": "sealed-no-s1-candidate",
+            "D1": "sealed-no-s1-candidate",
+            "D2": "sealed-no-s1-candidate",
+            "D3": "sealed-no-s1-candidate",
+            "D4": "sealed-no-s1-candidate",
+            "D5": "sealed-no-s1-candidate",
+            "F0": "sealed-no-s1-candidate",
+            "target_simulation": "sealed",
+        }
+
+    if scope == "s1-topology":
+        if passed:
+            return {
+                "D0": "authorized",
+                "D1": "blocked-until-D0-pass",
+                "D2": "blocked-until-D1-pass",
+                "D3": "blocked-until-D2-pass",
+                "D4": "blocked-until-D3-pass",
+                "D5": "blocked-until-D4-pass",
+                "F0": "blocked-until-D0-pass",
+                "A": "sealed-out-of-scope",
+                "B": "sealed-out-of-scope",
+                "C": "sealed-out-of-scope",
+                "E": "sealed-out-of-scope",
+                "F1": "sealed-out-of-scope",
+                "target_simulation": "eligible-after-D0-contract",
+            }
+        return {
+            "D0": "blocked-by-P0",
+            "D1": "blocked-by-P0",
+            "D2": "blocked-by-P0",
+            "D3": "blocked-by-P0",
+            "D4": "blocked-by-P0",
+            "D5": "blocked-by-P0",
+            "F0": "blocked-by-P0",
+            "A": "sealed-out-of-scope",
+            "B": "sealed-out-of-scope",
+            "C": "sealed-out-of-scope",
+            "E": "sealed-out-of-scope",
+            "F1": "sealed-out-of-scope",
+            "target_simulation": "sealed",
+        }
+
+    return {
+        gate: "blocked-invalid-claim-scope"
+        for gate in (
+            "A",
+            "B",
+            "C",
+            "D0",
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "E",
+            "F0",
+            "F1",
+            "target_simulation",
+        )
     }
 
 

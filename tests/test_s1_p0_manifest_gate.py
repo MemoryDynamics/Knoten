@@ -14,10 +14,17 @@ from experiments.current.topology.s1_p0_manifest_gate import (
 def complete_manifest():
     digest = "b" * 64
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "manifest_status": "frozen",
         "candidate_id": "candidate-example-001",
         "candidate_claim": "stationary internal recurrent mode",
+        "claim_scope": "s1-topology",
+        "hash_policy": "sha256-canonical-lf-text-v1",
+        "branch_contract": {
+            "requested_entry_gates": ["D0"],
+            "sealed_out_of_scope_gates": ["A", "B", "C", "E", "F1"],
+            "scope_statement": "topology only; mechanics is a separate claim",
+        },
         "architecture_level": "K1",
         "time_law": "native-discrete-map",
         "code_revision": "a" * 40,
@@ -97,6 +104,24 @@ def test_unknown_full_commit_is_rejected_when_repository_check_is_enabled():
     }
 
 
+def test_claim_scope_cannot_open_the_other_branch():
+    manifest = complete_manifest()
+    manifest["claim_scope"] = "center-effective-mechanics"
+
+    issues = audit_manifest(manifest)
+
+    assert "branch-scope-mismatch" in {issue.code for issue in issues}
+
+
+def test_malformed_branch_gate_list_is_reported_instead_of_crashing():
+    manifest = complete_manifest()
+    manifest["branch_contract"]["requested_entry_gates"] = [{"gate": "D0"}]
+
+    issues = audit_manifest(manifest)
+
+    assert "branch-scope-mismatch" in {issue.code for issue in issues}
+
+
 def test_repository_artifact_content_must_match_declared_hash(tmp_path):
     state_path = tmp_path / "state.bin"
     discovery_path = tmp_path / "discovery.json"
@@ -124,6 +149,31 @@ def test_repository_artifact_content_must_match_declared_hash(tmp_path):
     assert mismatch_paths == {"discovery_provenance.artifacts_and_hashes[0].sha256"}
 
 
+def test_text_artifact_hashes_are_invariant_to_crlf_checkout(tmp_path):
+    state_path = tmp_path / "state.txt"
+    discovery_path = tmp_path / "discovery.json"
+    state_path.write_bytes(b"state\r\n")
+    discovery_path.write_bytes(b'{"result": true}\r\n')
+
+    manifest = complete_manifest()
+    manifest["initial_state_source_and_hashes"] = [
+        {
+            "source": state_path.name,
+            "sha256": hashlib.sha256(b"state\n").hexdigest(),
+        }
+    ]
+    manifest["discovery_provenance"]["artifacts_and_hashes"] = [
+        {
+            "path": discovery_path.name,
+            "sha256": hashlib.sha256(b'{"result": true}\n').hexdigest(),
+        }
+    ]
+
+    issues = audit_manifest(manifest, repository_root=tmp_path)
+
+    assert not {issue for issue in issues if "hash-mismatch" in issue.code}
+
+
 def test_audit_record_blocks_d0_and_d1_on_any_issue():
     manifest_path = (
         PROJECT_ROOT / "reports/project/meta/preregistration/"
@@ -137,9 +187,32 @@ def test_audit_record_blocks_d0_and_d1_on_any_issue():
     )
 
     assert record["decision"] == "fail"
+    assert record["issue_count"] == 27
     assert record["issue_count"] == len(issues)
-    assert record["downstream"]["D0"] == "blocked"
-    assert record["downstream"]["D1"] == "blocked"
+    assert record["downstream"]["D0"] == "blocked-by-P0"
+    assert record["downstream"]["D1"] == "blocked-by-P0"
+    assert record["downstream"]["A"] == "sealed-out-of-scope"
+
+
+def test_frozen_center_manifest_passes_and_only_authorizes_gate_a():
+    manifest_path = (
+        PROJECT_ROOT / "reports/project/meta/preregistration/"
+        "scalar_memory_center_mechanics_p0_manifest_2026-08-16.json"
+    )
+    issues = audit_manifest(load_manifest(manifest_path), repository_root=PROJECT_ROOT)
+    record = build_audit_record(
+        manifest_path,
+        issues,
+        generated_at="2026-08-16T10:30:00+02:00",
+    )
+
+    assert issues == []
+    assert record["decision"] == "pass"
+    assert record["downstream"]["A"] == "authorized"
+    assert record["downstream"]["B"] == "blocked-until-A-pass"
+    assert record["downstream"]["D0"] == "sealed-no-s1-candidate"
+    assert record["downstream"]["D5"] == "sealed-no-s1-candidate"
+    assert record["downstream"]["target_simulation"] == "sealed-until-A-pass"
 
 
 def test_manifest_root_must_be_an_object(tmp_path):

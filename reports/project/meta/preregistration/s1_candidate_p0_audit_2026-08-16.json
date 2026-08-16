@@ -1,12 +1,24 @@
 {
+  "claim_scope": "s1-topology",
   "decision": "fail",
   "downstream": {
-    "D0": "blocked",
-    "D1": "blocked",
+    "A": "sealed-out-of-scope",
+    "B": "sealed-out-of-scope",
+    "C": "sealed-out-of-scope",
+    "D0": "blocked-by-P0",
+    "D1": "blocked-by-P0",
+    "D2": "blocked-by-P0",
+    "D3": "blocked-by-P0",
+    "D4": "blocked-by-P0",
+    "D5": "blocked-by-P0",
+    "E": "sealed-out-of-scope",
+    "F0": "blocked-by-P0",
+    "F1": "sealed-out-of-scope",
     "target_simulation": "sealed"
   },
   "gate": "P0-candidate-and-discovery-freeze",
   "generated_at": "2026-08-16T06:33:36.4177174Z",
+  "hash_policy": "sha256-canonical-lf-text-v1",
   "issue_count": 27,
   "issues": [
     {
@@ -146,6 +158,6 @@
     }
   ],
   "manifest_path": "reports/project/meta/preregistration/s1_candidate_p0_manifest_2026-08-16.json",
-  "manifest_sha256": "b4a3b02177512664da799fc97daa6348e4a5a61a772a7d2786ec4f85eb9c531e",
-  "schema_version": "1.0"
+  "manifest_sha256": "bc729e1ad54280e4946f7aa8f48cbc44c6ca72c4204fc540d965c87cf1836725",
+  "schema_version": "1.1"
 }
