@@ -126,6 +126,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     effektives \(U_{\rm ext}(c,Q)\) erzeugt dieselbe Zustandsgleichung. Ohne
     mikroskopischen Aktuator- und finite-H-Grenzvertrag bleibt nur der
     mathematische passive Center-Port; physische B/C/E/F1 sind gestoppt.
+  - Das [finite-H-A2-Protokoll](project/meta/preregistration/scalar_memory_center_finite_h_port_a2_protocol_2026-08-16.md)
+    prueft als naechstes per globaler Small-Gain-/Positive-Real-Schranke, ob
+    der exakte Tailterm einen reziproken effektiven Center-Port zulaesst. Die
+    Frequenzgrid-Auswertung ist nur Sanitycheck; Holdout und neue Seeds bleiben
+    versiegelt.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.
