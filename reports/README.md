@@ -135,6 +135,12 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     bestaetigt die Tail-Algebra, begrenzt den Pass aber auf einen reziprok
     realisierbaren effektiven Filter-Port. Nur B-star-Systemidentifikation ist
     geoeffnet; physisches B und der S1-Ast bleiben versiegelt.
+  - Das [B-star-Skalierungsprotokoll](project/meta/preregistration/scalar_memory_center_filter_scaling_bstar_protocol_2026-08-16.md)
+    friert vor jedem Zielwert ein festes eta, feste Kraftimpulse, den
+    unveraenderten Center-Readout, ein 2^3-Panel in tau/mu/M0 und eine
+    gemeinsame Holdout-Ecke ein. State-matched und zellweise neu formierte
+    Zustaende werden getrennt ausgewertet. Seeds 21--25, der P0-Transfer-
+    Holdout und der gesamte S1-Zielast bleiben versiegelt.
   - Der [zweite Referee-Pass](project/meta/reviews/s1_phase_mass_falsification_program_review_2026-08-16.md)
     korrigiert insbesondere den diskreten Periodenorbit-/\(S^1\)-Fehlschluss,
     Raw-cloud-Shuffle-Nulltest, Pseudoreplikation und die offene Impulsbilanz.
