@@ -4,10 +4,12 @@ Stand: 2026-08-20.
 
 Diese Seite ist eine Notationsbrücke zwischen dem kanonischen Knotenkern,
 der lokalen Center-Reduktion und möglichen Rotationsarchitekturen. Sie führt
-keine neue Physik ein. Die Gleichungen bis einschließlich des linearen
-No-go-Satzes sind algebraische Aussagen innerhalb der jeweils genannten
-Näherung. Die Rotations- und Aktuatorabschnitte sind Vorschläge für
-Falsifikationstests, keine positiven Resultate.
+keine neue Physik ein. Die Center-Gleichungen und der lineare No-go-Satz sind
+algebraische Aussagen innerhalb der jeweils genannten Näherung. Für den
+vollen nichtlinearen K0-H-Kern liegt inzwischen zusätzlich ein prospektiv
+gefundener und lokal numerisch stabiler räumlicher Rotating-wave-Kandidat
+vor. Dieser positive Befund ist weder eine interne Phase nach dem
+\(SO(2)\)-Quotienten noch ein Masse- oder Arbeitsresultat.
 
 ## 1. Ausgangspunkt: die Größen des Knotenkerns
 
@@ -432,26 +434,113 @@ e^{-r^2/(2\sigma_{\rm rep}^2)}
 e^{-r^2/(2\sigma_{\rm att}^2)}.
 \]
 
+Für die analytische und numerische Prüfung ist die Aufspaltung in radiale
+und tangentiale Summen am transparentesten:
+
+\[
+A_H(R,\theta)
+=\sum_{j=1}^{H-1}w_j\varphi(r_j)(1-\cos j\theta),
+\qquad
+S_H(R,\theta)
+=\sum_{j=1}^{H-1}w_j\varphi(r_j)\sin j\theta,
+\]
+
+\[
+r_j=2R\left|\sin\frac{j\theta}{2}\right|,
+\qquad
+w_j=\alpha M_0(1-\alpha)^j.
+\]
+
+Die komplexe Gleichung ist exakt äquivalent zu
+
+\[
+\boxed{
+1-\cos\theta=\eta A_H,
+\qquad
+\sin\theta=-\eta S_H
+}.
+\]
+
+Für \(\eta>0\) und \(0<\theta<\pi\) sind daher
+\(A_H>0\) und \(S_H<0\) notwendig. Außerdem müssen die zwei unabhängig
+bestimmten Gains
+
+\[
+\eta_R=\frac{1-\cos\theta}{A_H},
+\qquad
+\eta_T=-\frac{\sin\theta}{S_H}
+\]
+
+übereinstimmen. Das ist der diskriminierende Zweikomponententest; ein bloßes
+Minimum eines Radiusfehlers genügt nicht.
+
 Dieser Test bleibt vollständig bei
 \(\alpha,\eta,H,M_0,A_{\rm rep},A_{\rm att},
 \sigma_{\rm rep},\sigma_{\rm att}\). \(N\) wird erst für die anschließende
 Stabilitätsmessung gebraucht.
 
+### 7.1.1 Prospektives Resultat vom 20. August 2026
+
+Die vorab fixierte Discovery verwendete \(d=2\), Delta-Deposition,
+\(\varepsilon=0\), \(M_0=A_{\rm rep}=\sigma_{\rm rep}=1\),
+\(\sigma_{\rm att}=3\), \(C=12\) und getrennte Mechanismus- und
+Kontrollamplituden. Ohne Nachjustieren der nativen Parameter ergab die erste
+registrierte finite-\(H\)-Verfeinerung
+
+\[
+\alpha=0.01,\quad H=1200,\quad\eta=0.15,\quad A_{\rm att}=3.5,
+\]
+
+\[
+\boxed{
+R=0.946517504804225,
+\qquad
+\theta=0.015770381717135
+}.
+\]
+
+Dabei sind
+\(\eta_R=0.149999999999945\), \(\eta_T=0.15\) und die komplexe
+finite-\(H\)-Residualnorm \(4.53\,10^{-17}\). Ein unabhängiger Aufruf des
+produktiven Double-Gaussian-Kernels auf der expliziten 1200-Punkte-Historie
+ergibt \(7.98\,10^{-17}\) Ein-Schritt-Fehler. Die drei registrierten
+Kontrollen \(A_{\rm att}=0,9,35\) lieferten in der vorab festgelegten Suchbox
+keine zulässige radiale Nullstelle.
+
+Im vollständigen \(2400\)-dimensionalen mitrotierenden FIFO-Zustand stimmen
+zwei eingefrorene Arnoldi-Panels für den führenden transversalen
+Ein-Schritt-Multiplikator überein:
+
+\[
+\lambda_\perp
+=0.992858455252-0.020023536920i,
+\qquad
+|\lambda_\perp|=0.993060347711<1.
+\]
+
+Radiale, tangentiale und volle Historienstörungen der registrierten Größe
+kehren innerhalb von 5000 Updates bis zum Gleitkommafloor zurück. Das ist ein
+**lokaler numerischer Stabilitätspass** für die vorbereitete relative
+Gleichgewichtslösung. ARPACK ist keine vollständige Spektraleinschließung;
+Formation, Basin-Größe, Rauschen, \(H\)-Robustheit und der versiegelte
+\(A_{\rm att}=7\)-Holdout bleiben offen.
+
 Wegen der Spiegelsymmetrie gehört zu einer Lösung mit \(+\theta\) immer eine
 gespiegelte Lösung mit \(-\theta\). Das Modell wählt damit keine Händigkeit
 vorab; eine beobachtete Wahl müsste spontan und seedabhängig erfolgen.
 
-Eine Nullstelle beweist nur Existenz. Stabilität verlangt danach den
-Jacobian-/Floquet-Test der vollständigen finite-\(H\)-Map im mitrotierenden
-System. Symmetriebedingte neutrale Richtungen für Translation und globale
-Phase müssen vor dem Transversaltest herausquotientiert werden. Erst wenn
-alle übrigen Multiplikatoren strikt im Einheitskreis liegen, ist
-asymptotisch stabiles relatives Kreiseln belegt.
+Eine Gleitkomma-Nullstelle belegt zunächst nur numerische Existenz. Der
+ausgeführte Jacobian-Test prüft die vollständige finite-\(H\)-Map im
+mitrotierenden System und kalibriert die symmetriebedingten Richtungen für
+Translation und globale Rotation. Weil nur die führenden 24 beziehungsweise
+36 Ritzpaare und keine zertifizierte Einschließung aller Eigenwerte vorliegen,
+bleibt die mathematisch strenge Formulierung „lokal numerisch stabil“.
 
-Auch ein solcher Pass wäre zunächst ein dynamisches \(S^1\)-Resultat. Das
-native Schreiben und Vergessen ist ein offener Source-/Sink-Prozess; ohne
-dessen Arbeitsbilanz wäre der Kreis noch kein konservatives Kreisel- oder
-Massengesetz.
+Der Pass ist zunächst ein dynamisches, durch räumliche Symmetrie erzeugtes
+\(S^1\)-Resultat. Nach ambientem \(SO(2)\)-Quotienten ist diese Gruppenbahn
+ein Punkt. Das native Schreiben und Vergessen ist zudem ein offener
+Source-/Sink-Prozess; ohne dessen Arbeitsbilanz ist der Kreis kein
+konservatives Kreisel- oder Massengesetz.
 
 ### 7.2 Zweite Wahl: explizites zweikomponentiges Rotationsgedächtnis
 
@@ -530,18 +619,21 @@ Option 2 oder 3 notwendig.
 
 ## 9. Empfohlene Reihenfolge der nächsten Gates
 
-1. Algebra-Gate: numerische Identität von Summen- und Quotientenform von
-   \(B_H\), inklusive \(z=1\), zufälliger \(\alpha,H\) und hoher \(H\).
-2. No-go-Gate: Spektrum des lokalen positiven Centerabschlusses gegen den
-   obigen Einheitskreisbeweis; keine Parametersuche.
-3. Native-Rotation-Gate: Nullstellen der exakten Rotating-wave-Gleichung in
-   einer vorab festgelegten Box der bestehenden Kernelparameter.
-4. Stabilitäts-Gate: vollständige finite-\(H\)-Floquet-Multiplikatoren,
-   anschließend deterministische Rückkehr nach radialer und tangentialer
-   Störung.
-5. Erst danach: unabhängige verrauschte Trajektorien, Kreiskoordinate,
-   Winding, Persistenz und externe Phasenkopplung.
-6. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
+1. **Erledigt, strukturell:** Algebra von \(B_H\) und lokaler
+   Einheitskreis-No-go-Satz.
+2. **Erledigt, numerisch:** prospektive Nullstellensuche, unabhängiger
+   Produktionskernel-Check, P0/D0 und lokales Voll-FIFO-Stabilitätsgate.
+3. **Als Nächstes:** Multipräzisions- oder Intervallzertifikat der Nullstelle
+   und vollständige Spektraleinschließung.
+4. Danach eine vorab fixierte
+   \((\alpha,H,\eta)\)-Leiter bei gematchtem
+   \(H\alpha=C\) und \(\eta/\alpha\), ohne Amplituden-Retuning.
+5. Erst bei bestandenem Robustheitsgate: deterministische Formation aus
+   nichtkreisförmigen Historien, dann unabhängige verrauschte Trajektorien.
+6. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
+   **interne** Phase erst sinnvoll, wenn eine Observable den ambienten
+   \(SO(2)\)-Quotienten überlebt.
+7. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
    Arbeitsledger für den Center-Port.
 
 Damit bleiben zwei Behauptungen getrennt: Ein stabiler interner

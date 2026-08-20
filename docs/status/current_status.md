@@ -1,17 +1,18 @@
 # Aktueller Stand
 
-Stand: 2026-08-11.
+Stand: 2026-08-20.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
 `docs/archive/status/current_status_through_2026-07-21.md`.
 
-## Sieben-Punkte-Ueberblick
+## Acht-Punkte-Ueberblick
 
 | Bereich | Evidenz | Belastbare Lesart | Grenze |
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
+| Native Rotation | Eine prospektive finite-H-Suche findet im rauschfreien d=2-K0-H bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 einen Kreis mit Residual 4.53e-17. Der volle 2400-dimensionale Quellenstabilitaetstest ergibt lokal \(|\lambda_\perp|=0.99306035\) und Rueckkehr dreier kleiner Stoerungen. | lokal numerisch stabiler vorbereiteter raeumlicher Rotating-wave-Attraktor | keine Spektraleinschliessung, generische Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -45,6 +46,14 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 - Der aktuelle kleine-Radius-Ast ist kompakter als `eta=0`, wird aber fast
   vollstaendig durch den linearen Memory-Center-Relativmodus erklaert.
+- Ein getrennt prospektierter rauschfreier \(d=2\)-K0-H-Parametersatz
+  besitzt eine finite-\(H\)-Rotating-wave-Nullstelle mit Residual
+  \(4.53\,10^{-17}\). Im vollständigen 2400-dimensionalen mitrotierenden
+  Zustand stimmen zwei Arnoldi-Panels für den führenden transversalen
+  Multiplikator \(|\lambda|=0.99306035\) bis \(3.1\,10^{-13}\) überein;
+  drei registrierte Störungen kontrahieren über 5000 Updates. Das stützt
+  lokale numerische Quellenstabilität, nicht vollständige spektrale
+  Zertifizierung oder Formation.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
@@ -92,6 +101,10 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 
 ### Nicht gestuetzt oder widerlegt
 
+- Der neue Rotating-wave-Kreis ist die räumliche \(SO(2)\)-Gruppenbahn eines
+  relativen Gleichgewichts. Nach Quotientieren der ambienten Rotation bleibt
+  ein Punkt; eine zusätzliche interne \(S^1\)-Phase, ein konservativer
+  Kreisel, Arbeit oder Masse folgen daraus nicht.
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
 - Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
@@ -588,15 +601,21 @@ selektieren. Der aktuelle Punktgrenzquotient `R_mem/ell=2.12e-4` macht
 aehnliche Kernel- und Knotenpotentiale zu einer plausiblen
 Grobkoernungshypothese, aber nicht zu einer inneren Mechanismusevidenz.
 
-Der separate S1-/Masse-Ast hat seinen ersten P0-Provenienzgate inzwischen
-ausgefuehrt. Ein Audit aller Branches, der Historie und maschinenlesbarer
-Projektmetadaten findet keinen eindeutigen neuen Oszillationskandidaten mit
-vollstaendigem Parametertupel und Discovery-Ledger. Der ausfuehrbare
-Manifestvalidator meldet 27 Defekte; `target_data_opened=false` bleibt
-versiegelt. Entscheidung: `P0-fail-no-eligible-candidate-record`. D0, D1 und
-jeder Ziellauf bleiben blockiert. Dies ist kein negativer S1-Befund, sondern
-verhindert die post-hoc Rekonstruktion eines Kandidaten aus lokalen komplexen
-Eligibility-, AR- oder Quenchresultaten.
+Der erste breite S1-/Masse-P0-Audit bleibt historisch unveraendert:
+Er fand in den damaligen Branches keinen neuen Oszillationskandidaten mit
+vollstaendigem Parametertupel und Discovery-Ledger und meldete 27 Defekte.
+Damit wurde die post-hoc Rekonstruktion aus komplexen Eligibility-, AR- oder
+Quenchresultaten zu Recht blockiert.
+
+Ein spaeterer, davon unabhaengiger Rotating-wave-Ast begann stattdessen mit
+einer prospektiv eingefrorenen analytischen Gleichung, Suchbox und
+Negativkontrollen. Seine erste finite-H-Verfeinerung liefert bei
+`alpha=0.01`, `H=1200`, `eta=0.15`, `A_att=3.5` einen
+Gleitkomma-Nullpunkt. Der neue kandidatspezifische P0 besteht mit null
+Defekten. D0 besteht fuer die translationsreduzierte raeumliche
+SO(2)-Gruppenbahn, nicht fuer eine interne Phase nach Rotationsquotient. Das
+anschliessende Voll-FIFO-Stabilitaetsgate besteht lokal numerisch. D1--D5,
+Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben geschlossen.
 
 ## Paper-Status
 

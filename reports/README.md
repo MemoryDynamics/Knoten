@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-16.
+Stand: 2026-08-20.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -78,15 +78,18 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
     Residence- und Score-Metriken sind auf dieser Radiusachse nicht
     diskriminierend.
 
-Entscheidung: Das skalare Modell bleibt eine kontrollierte lineare Baseline
-mit scaling-konditionalem Kontinuumsgrenzwert. Die Portwahl entscheidet die
-mechanische Realisierung: Der sichtbare \(x\)-Port selektiert overdamped
-Memory, waehrend der aus dem Memory abgeleitete Center \(c\) unter
-\(f\,dc\) eine positive passive Inertialdarstellung besitzt. Der
-Beschleunigungskoeffizient folgt dabei aus Memory-Zeitskala und normiertem
-Inputgain. Zulaessig ist ein lokaler mathematischer Existenz- und
-Einbettungsclaim, nicht die Behauptung einer eindeutig selektierten physischen
-Knotenposition oder emergierten physikalischen Masse.
+Entscheidung: Der bisherige kompakte Ast bleibt eine kontrollierte lineare
+Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
+unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
+Parameterpunkt \(A_{\rm att}=3.5\) nun einen lokal numerisch stabilen
+raeumlichen Rotating-wave-Kandidaten. Das ist kein Beleg fuer generische
+Formation, Robustheit oder eine interne Phase nach \(SO(2)\)-Reduktion. Die
+Portwahl entscheidet weiterhin die mechanische Realisierung: Der sichtbare
+\(x\)-Port selektiert overdamped Memory, waehrend der aus dem Memory
+abgeleitete Center \(c\) unter \(f\,dc\) eine positive passive
+Inertialdarstellung besitzt. Zulaessig sind lokale mathematische Existenz-,
+Stabilitaets- und Einbettungsclaims, nicht die Behauptung einer eindeutig
+selektierten physischen Knotenposition oder emergierten physikalischen Masse.
 
 ### 2. Dimension
 
@@ -107,16 +110,43 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
 ### 3. Memory-Feld und reduzierte Moden
 
 - [S1-Phasen- und Masse-Falsifikationsprogramm](project/decisions/s1_phase_mass_falsification_program_2026-08-16.md)
-  - **program charter; no S1 candidate result:** Ein moeglicher neuer
+  - **program charter; historischer Eintrittsstand:** Ein moeglicher neuer
     Oszillationssatz wird erst nach vollstaendiger Parameter- und
-    Discovery-Provenienz als `P0` eingefroren. Im Repository liegt noch kein
-    eindeutiges neues Tupel. Alte komplex-eligible oder quench-ringing Punkte
-    sind als konfirmatorische Kandidaten gesperrt.
+    Discovery-Provenienz als `P0` eingefroren. Zum Zeitpunkt dieses Audits lag
+    noch kein eindeutiges neues Tupel vor. Alte komplex-eligible oder
+    quench-ringing Punkte bleiben als konfirmatorische Kandidaten gesperrt.
   - Der [ausgefuehrte P0-Audit](project/meta/preregistration/s1_candidate_p0_audit_2026-08-16.md)
     findet keinen eindeutigen neuen Kandidaten- oder Discovery-Datensatz und
     endet mit 27 Manifestdefekten. Der maschinenlesbare Validator blockiert
     deshalb D0, D1 und jeden Ziellauf; dies ist ein Provenienz-Fail, kein
-    negatives Topologieergebnis.
+    negatives Topologieergebnis. Dieser historische Audit wird nicht
+    rueckwirkend umgedeutet.
+  - Die neue
+    [prospektive Rotating-wave-Discovery](dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.md)
+    startet stattdessen aus einer vorab eingefrorenen analytischen
+    Selbstkonsistenzgleichung und getrennten Kontrollen. Sie findet bei
+    \(\alpha=0.01,H=1200,\eta=0.15,A_{\rm att}=3.5\)
+    \(R=0.9465175\), \(\theta=0.01577038\) mit Residual
+    \(4.53\,10^{-17}\); \(A_{\rm att}=0,9,35\) liefern in der registrierten
+    Box keine zulaessige radiale Nullstelle. Das
+    [Discovery-Review](project/meta/reviews/scalar_memory_rotating_wave_discovery_review_2026-08-20.md)
+    begrenzt dies auf numerische Existenz.
+  - Der kandidatspezifische
+    [P0-Audit](project/meta/preregistration/scalar_memory_rotating_wave_p0_audit_2026-08-20.md)
+    besteht mit null Defekten. Der
+    [D0-Vertrag](project/meta/preregistration/scalar_memory_rotating_wave_d0_contract_2026-08-20.md)
+    identifiziert exakt eine translationsreduzierte raeumliche
+    \(SO(2)\)-Gruppenbahn. Nach Quotientieren der ambienten Rotation ist sie
+    ein Punkt, keine nachgewiesene interne \(S^1\)-Phase.
+  - Das prospektive
+    [Voll-FIFO-Stabilitaetsgate](dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.md)
+    besteht numerisch. Zwei Arnoldi-Panels stimmen fuer den fuehrenden
+    transversalen Multiplikator
+    \(|\lambda|=0.99306035\) ueberein; drei registrierte Stoerungen kehren
+    ueber 5000 Updates zum Gleitkommafloor zurueck. Das
+    [kritische Stabilitaetsreview](project/meta/reviews/scalar_memory_rotating_wave_stability_review_2026-08-20.md)
+    fordert weiterhin Spektraleinschliessung, Horizon-/Alpha-Robustheit,
+    Formation und Rauschen; Masse und Center-Arbeit bleiben getrennt.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.
@@ -139,9 +169,9 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     schreibt \(B_H\) zuerst als normierte endliche geometrische Reihe aus,
     fuehrt \(q,M_H,g_H\) auf \(\alpha,\eta,H,M_0\) und die Kernelkruemmung
     zurueck und trennt \(H\) explizit von der blossen Laufzeit \(N\).
-    Zusaetzlich dokumentiert sie den lokalen Rotations-No-go-Satz, eine
-    quellennahe finite-\(H\)-Rotating-wave-Gleichung und die offene
-    mikroskopische Center-Aktuatorfrage.
+    Zusaetzlich dokumentiert sie den lokalen Rotations-No-go-Satz, die exakten
+    radialen/tangentialen finite-\(H\)-Bedingungen, den aktuellen lokalen
+    Stabilitaetspass und die offene mikroskopische Center-Aktuatorfrage.
   - Das [B-star-Skalierungsprotokoll](project/meta/preregistration/scalar_memory_center_filter_scaling_bstar_protocol_2026-08-16.md)
     wurde vom sauberen prospektiven Commit ausgefuehrt. Der
     [Ergebnisbericht](dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.md)
