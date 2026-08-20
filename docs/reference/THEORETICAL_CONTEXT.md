@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-08-16.
+Stand: 2026-08-20.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -438,6 +438,13 @@ Relaxationsbeschreibung, aber keinen identifizierten internen Phasen-,
 Wellen- oder einzelnen Relaxationseigenmodus.
 
 ## Dimensionless Attractive-Only Reduction
+
+Eine [lesbare Notationsbrücke für \(B_H\), den Center-Transfer, die
+finite-\(H\)-Grenze und Rotationskandidaten](scalar_memory_center_filter.md)
+leitet die folgenden Abkürzungen direkt aus
+\(\alpha,\eta,H,M_0\) und den Kernelparametern her. Sie trennt insbesondere
+die Gedächtnistiefe \(H\) von der Laufzeit \(N\) und markiert, wo die
+Gleichung zweiter Ordnung exakt beziehungsweise nur reduziert gilt.
 
 The current core audit shows that the narrow positive Gaussian is not an
 active repulsive core in the compact small-noise branch. For the long-run

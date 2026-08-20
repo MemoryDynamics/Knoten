@@ -135,6 +135,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     bestaetigt die Tail-Algebra, begrenzt den Pass aber auf einen reziprok
     realisierbaren effektiven Filter-Port. Nur B-star-Systemidentifikation ist
     geoeffnet; physisches B und der S1-Ast bleiben versiegelt.
+  - Die [lesbare Center-Filter-Notationsbruecke](../docs/reference/scalar_memory_center_filter.md)
+    schreibt \(B_H\) zuerst als normierte endliche geometrische Reihe aus,
+    fuehrt \(q,M_H,g_H\) auf \(\alpha,\eta,H,M_0\) und die Kernelkruemmung
+    zurueck und trennt \(H\) explizit von der blossen Laufzeit \(N\).
+    Zusaetzlich dokumentiert sie den lokalen Rotations-No-go-Satz, eine
+    quellennahe finite-\(H\)-Rotating-wave-Gleichung und die offene
+    mikroskopische Center-Aktuatorfrage.
   - Das [B-star-Skalierungsprotokoll](project/meta/preregistration/scalar_memory_center_filter_scaling_bstar_protocol_2026-08-16.md)
     wurde vom sauberen prospektiven Commit ausgefuehrt. Der
     [Ergebnisbericht](dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.md)

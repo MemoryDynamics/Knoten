@@ -11,6 +11,77 @@ from experiments.current.dynamics.scaling.scalar_memory_center_finite_h_port_a2 
 )
 
 
+@pytest.mark.parametrize(
+    ("alpha", "horizon", "omega"),
+    [
+        (0.4, 1, 0.0),
+        (0.1, 17, 0.37),
+        (0.01, 1200, 1.4),
+        (0.0025, 4800, math.pi),
+    ],
+)
+def test_finite_memory_filter_is_normalized_geometric_sum(
+    alpha, horizon, omega
+):
+    q = 1.0 - alpha
+    z = np.exp(1j * omega)
+    ages = np.arange(horizon, dtype=float)
+    normalized_weights = alpha * q**ages / (1.0 - q**horizon)
+
+    direct_sum = np.sum(normalized_weights * z ** (-ages))
+    closed_form = (
+        alpha
+        / (1.0 - q**horizon)
+        * (1.0 - q**horizon * z ** (-horizon))
+        / (1.0 - q / z)
+    )
+
+    np.testing.assert_allclose(np.sum(normalized_weights), 1.0, atol=2.0e-15)
+    np.testing.assert_allclose(direct_sum, closed_form, atol=2.0e-14)
+
+
+def test_finite_memory_center_recurrence_keeps_retirement_term():
+    alpha = 0.07
+    q = 1.0 - alpha
+    horizon = 23
+    ages = np.arange(horizon)
+    weights = alpha * q**ages / (1.0 - q**horizon)
+    positions = np.random.default_rng(20260820).normal(size=horizon + 31)
+
+    for n in range(horizon - 1, positions.size - 1):
+        center = np.sum(weights * positions[n - ages])
+        center_next = np.sum(weights * positions[n + 1 - ages])
+        recurrence = (
+            q * center
+            + alpha / (1.0 - q**horizon) * positions[n + 1]
+            - alpha * q**horizon / (1.0 - q**horizon) * positions[n - horizon + 1]
+        )
+        np.testing.assert_allclose(center_next, recurrence, atol=1.0e-14)
+
+
+def test_untruncated_center_elimination_is_exactly_second_order():
+    alpha = 0.03
+    q = 1.0 - alpha
+    gain = 0.12
+    relative_root = q * (1.0 - gain)
+    forces = np.random.default_rng(20260820).normal(size=200)
+    x = 0.0
+    center = 0.0
+    previous_center = 0.0
+
+    for force in forces:
+        x_next = (1.0 - gain) * x + gain * center + alpha * force
+        center_next = q * center + alpha * x_next
+        residual = (
+            center_next
+            - center
+            - relative_root * (center - previous_center)
+            - alpha**2 * force
+        )
+        assert abs(residual) < 2.0e-15
+        previous_center, center, x = center, center_next, x_next
+
+
 def test_truncated_geometric_mean_age_matches_direct_sum():
     q = 0.8
     horizon = 7

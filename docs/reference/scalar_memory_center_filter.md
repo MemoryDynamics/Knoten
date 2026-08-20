@@ -1,0 +1,549 @@
+# Skalares Gedächtnis, Center-Filter und Rotation
+
+Stand: 2026-08-20.
+
+Diese Seite ist eine Notationsbrücke zwischen dem kanonischen Knotenkern,
+der lokalen Center-Reduktion und möglichen Rotationsarchitekturen. Sie führt
+keine neue Physik ein. Die Gleichungen bis einschließlich des linearen
+No-go-Satzes sind algebraische Aussagen innerhalb der jeweils genannten
+Näherung. Die Rotations- und Aktuatorabschnitte sind Vorschläge für
+Falsifikationstests, keine positiven Resultate.
+
+## 1. Ausgangspunkt: die Größen des Knotenkerns
+
+Der kanonische skalare Update lautet
+
+\[
+x_{n+1}
+=x_n+\varepsilon\xi_n-\eta\nabla(K*\rho_n)(x_n),
+\]
+
+\[
+\rho_{n+1}(y)
+=q\,\rho_n(y)+\beta G_\sigma(y-x_{n+1}),
+\qquad
+q=1-\alpha,
+\qquad
+\beta=\alpha M_0.
+\]
+
+Dabei ist \(n\) nur der Updateindex. Eine physikalische Zeit entsteht erst
+durch einen zusätzlich festgelegten Zeitschritt. Im normierten Paper-I-Fall
+gilt \(M_0=1\) und damit \(\beta=\alpha\).
+
+| Größe | Bedeutung | Wovon sie abhängt |
+| --- | --- | --- |
+| \(\alpha=\lambda_m\) | pro Update vergessener Anteil | Basismodellparameter |
+| \(q=1-\alpha\) | pro Update erhaltener Anteil | nur \(\alpha\) |
+| \(\beta=\alpha M_0\) | neu deponierte Masse | \(\alpha,M_0\) |
+| \(H\) | Zahl der explizit gespeicherten Altersklassen | Backend oder Versuchsdesign |
+| \(N\) | insgesamt simulierte Updates | Beobachtungsdesign, nicht Filterdynamik |
+| \(M_H=M_0(1-q^H)\) | im gefüllten FIFO gespeicherte Masse | \(\alpha,H,M_0\) |
+| \(\kappa_K\) | lokale rückstellende Krümmung des effektiven Readkernels | Kernelamplituden, -breiten und Deposition |
+| \(g_H=\eta M_H\kappa_K\) | lokale Rückstellung pro Update | \(\eta,\alpha,H,M_0,\kappa_K\) |
+| \(B_H(z)\) | normierter Center-Filter | nur \(\alpha,H,z\) |
+
+Im Produktionsbackend wird \(H\) aus der endlichen Speichervorgabe als
+
+\[
+H
+=\min\!\left(
+H_{\max},
+\max\!\left[1,\left\lfloor\frac{C_{\rm mem}}{\alpha}\right\rfloor\right]
+\right)
+\]
+
+gebildet. Die registrierten Kontinuum- und A2-Leitern verwenden stattdessen
+\(H=\lceil C/\alpha\rceil\). Dieser Rundungsunterschied von höchstens einer
+Altersklasse muss in exakten Reproduktionen angegeben werden.
+\(C_{\rm mem}\) und \(H_{\max}\) heißen im Code memory_factor und
+max_memory; sie sind Backendvorgaben, keine neuen dynamischen Felder.
+
+Insbesondere ist
+
+\[
+B_H=B_H(\alpha,H;z),
+\]
+
+nicht \(B_H(\eta,N;z)\). Der Kraftgain \(\eta\) tritt erst über \(g_H\) in
+die geschlossene Center-Dynamik ein. \(N\) ändert weder \(B_H\) noch \(g_H\);
+es bestimmt nur, wie lange diese Dynamik beobachtet wird. Außerdem ist der
+Filter \(B_H\) nicht mit dem physischen Projekt-Gate B zu verwechseln.
+
+Für Delta-Deposition und den aktuellen Double-Gaussian-Readkernel ist
+
+\[
+\kappa_K
+=\frac{A_{\rm att}}{\sigma_{\rm att}^2}
+-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}.
+\]
+
+Bei geglätteter Deposition muss stattdessen die Krümmung des effektiven
+Kernels \(K*G_\sigma\) eingesetzt werden.
+
+## 2. \(B_H(z)\) ist exakt eine endliche geometrische Reihe
+
+Im vollständig gefüllten endlichen Gedächtnis trägt Alter \(j\) die rohe
+Masse
+
+\[
+w_j=\alpha M_0q^j,
+\qquad j=0,\ldots,H-1.
+\]
+
+Daraus folgen
+
+\[
+M_H=\sum_{j=0}^{H-1}w_j
+=M_0(1-q^H)
+\]
+
+und die normierten Centergewichte
+
+\[
+\bar w_j=\frac{w_j}{M_H}
+=\frac{\alpha q^j}{1-q^H},
+\qquad
+\sum_{j=0}^{H-1}\bar w_j=1.
+\]
+
+Der Gedächtnisschwerpunkt ist damit schlicht
+
+\[
+c_n=\sum_{j=0}^{H-1}\bar w_j x_{n-j}.
+\]
+
+Die lesbarste Form des Filters ist daher die Polynomsumme
+
+\[
+\boxed{
+B_H(z)
+=\sum_{j=0}^{H-1}\bar w_jz^{-j}
+=\frac{\alpha}{1-q^H}
+\sum_{j=0}^{H-1}(qz^{-1})^j
+}.
+\]
+
+Erst danach sollte die kompakte Quotientenform stehen:
+
+\[
+B_H(z)
+=\frac{\alpha}{1-q^H}
+\frac{1-q^Hz^{-H}}{1-qz^{-1}}.
+\]
+
+Beide Formen sind exakt identisch. Die Summenform zeigt unmittelbar die
+Gewichte, Positivität und Normierung \(B_H(1)=1\). Sie vermeidet außerdem
+scheinbare Singularitäten der Quotientenform, die als endliches Polynom
+immer hebbar sind.
+
+Im Zeitbereich ist derselbe Filter
+
+\[
+c_{n+1}
+=q c_n
++\frac{\alpha}{1-q^H}x_{n+1}
+-\frac{\alpha q^H}{1-q^H}x_{n-H+1}.
+\]
+
+Der letzte Term ist die exakt aus dem FIFO ausscheidende Altersklasse. Wird
+er weggelassen, ist das keine exakte finite-\(H\)-Dynamik mehr.
+
+## 3. Die drei verschiedenen Grenzübergänge
+
+Die folgenden Grenzoperationen dürfen nicht vertauscht oder sprachlich
+zusammengezogen werden:
+
+1. Bei festem \(\alpha>0\) und \(H\to\infty\) gilt \(q^H\to0\) und
+
+   \[
+   B_\infty(z)
+   =\sum_{j=0}^{\infty}\alpha q^jz^{-j}
+   =\frac{\alpha}{1-qz^{-1}}
+   =\frac{\alpha z}{z-q}.
+   \]
+
+2. Im Kontinuumslimes \(\alpha\to0\) mit \(H=\lceil C/\alpha\rceil\)
+   bleibt die physische Gedächtnislänge \(C=\alpha H\) fest und
+   \(q^H\to e^{-C}\). Das ist bei endlichem \(C\) gerade nicht derselbe
+   Grenzübergang wie \(q^H\to0\).
+
+3. \(N\to\infty\) verlängert nur Laufzeit und Statistik. Der Filter bleibt
+   bei festen \(\alpha,H\) unverändert.
+
+Für \(n<H\) kommt zusätzlich die Initialisierung eines noch nicht gefüllten
+Gedächtnisses hinzu. Alle obigen stationären finite-\(H\)-Formeln beziehen
+sich auf den gefüllten FIFO oder eine äquivalent vorbereitete Historie.
+
+## 4. Lokale Center-Dynamik ohne Symbolsprung
+
+In einer kompakten Wolke kann der native Readout lokal als
+
+\[
+-\eta\nabla(K*\rho_n)(x_n)
+\simeq-g_H(x_n-c_n)
+\]
+
+geschrieben werden. Mit dem für Gate A2 gewählten normierten
+Center-Input \(f_n\) lautet der deterministische lineare Update
+
+\[
+x_{n+1}
+=(1-g_H)x_n+g_Hc_n+\alpha f_n.
+\]
+
+Das langsame Center-Tempo ist
+
+\[
+v^c_n=\frac{c_{n+1}-c_n}{\alpha}.
+\]
+
+Um eine Kollision mit dem Depositionskernel \(G_\sigma\) zu vermeiden, ist
+für den Transfer die Bezeichnung \(T_{f\to v^c,H}\) informativer. Sie ist
+identisch mit dem historischen A2-Symbol \(G_H\):
+
+\[
+\boxed{
+T_{f\to v^c,H}(z)
+\equiv G_H^{\rm(A2)}(z)
+=
+\frac{(z-1)B_H(z)}
+{(z-1)+g_H[1-B_H(z)]}
+}.
+\]
+
+Der scheinbare Quotient \(0/0\) bei \(z=1\) ist hebbar. Mit dem normierten
+mittleren Alter
+
+\[
+\bar j_H
+=\sum_{j=0}^{H-1}j\bar w_j
+=\frac{q}{\alpha}-\frac{Hq^H}{1-q^H}
+\]
+
+lautet der exakte DC-Wert
+
+\[
+T_{f\to v^c,H}(1)
+=\frac{1}{1+g_H\bar j_H}.
+\]
+
+Die bisherige Nennerform
+
+\[
+z-(1-g_H)-g_HB_H(z)
+\]
+
+ist algebraisch dieselbe Gleichung. Die neue Form zeigt deutlicher:
+\(z-1\) ist die diskrete Differenz, und \(g_H[1-B_H]\) ist die
+Rückkopplung über den Gedächtnislag.
+
+Vollständig in den Grundgrößen ausgeschrieben ist
+
+\[
+T_{f\to v^c,H}(z)
+=
+\frac{(z-1)\displaystyle
+\sum_{j=0}^{H-1}
+\frac{\alpha(1-\alpha)^j}{1-(1-\alpha)^H}z^{-j}}
+{(z-1)+
+\eta M_0[1-(1-\alpha)^H]\kappa_K
+\left[
+1-\displaystyle\sum_{j=0}^{H-1}
+\frac{\alpha(1-\alpha)^j}{1-(1-\alpha)^H}z^{-j}
+\right]}.
+\]
+
+Diese lange Form ist kein neues Modell. Sie löst nur die Abkürzungen
+\(q\), \(M_H\), \(g_H\) und \(B_H\) wieder auf.
+
+## 5. Wo die diskrete Gleichung zweiter Ordnung wirklich gilt
+
+Im untruncierten exponentiellen Filter, also bei festem \(\alpha\) und
+\(H=\infty\), verschwindet der FIFO-Randterm. Setze
+
+\[
+g_\infty=\eta M_0\kappa_K,
+\qquad
+a=q(1-g_\infty).
+\]
+
+Dann folgt nach Eliminieren von \(x_n\) exakt
+
+\[
+c_{n+1}-c_n
+=a(c_n-c_{n-1})+\alpha^2 f_n.
+\]
+
+Äquivalent:
+
+\[
+\boxed{
+\frac{c_{n+1}-2c_n+c_{n-1}}{\alpha^2}
++
+\frac{1-a}{\alpha}
+\frac{c_n-c_{n-1}}{\alpha}
+=f_n
+}.
+\]
+
+Das ist die gesuchte diskrete Gleichung zweiter Ordnung. Für die
+small-step-Familie \(g_\infty=\chi\alpha\) und \(t=\alpha n\) gilt
+
+\[
+\frac{1-a}{\alpha}
+=1+\chi-\chi\alpha
+\longrightarrow 1+\chi,
+\]
+
+also formal
+
+\[
+\ddot c+(1+\chi)\dot c=f.
+\]
+
+Die Eins vor \(\ddot c\) ist eine Folge der gewählten Zeit- und
+Inputnormierung. In dimensionalen Variablen
+
+\[
+\tau\dot c=x-c,
+\qquad
+\dot x=-\kappa(x-c)+\mu F
+\]
+
+lautet die eliminierte Gleichung
+
+\[
+\frac{\tau}{\mu}\ddot c
++
+\frac{1+\kappa\tau}{\mu}\dot c
+=F.
+\]
+
+Damit ist \(m_{\rm filter}=\tau/\mu>0\) eine exakt identifizierbare
+Filterträgheit. Ohne mikroskopisch ausgewählten \(F\,dc\)-Port ist sie noch
+keine Materialmasse.
+
+Für endliches \(H\) ist die exakte Dynamik wegen des ausscheidenden
+Historienpunkts dagegen eine Delay-/FIFO-Gleichung höherer Ordnung. Eine
+zweite Ordnung ist dort nur Grenzmodell oder reduzierte Approximation; der
+exakte finite-\(H\)-Transfer bleibt \(T_{f\to v^c,H}\).
+
+## 6. Warum Vergessen allein keinen Kreis erzeugt
+
+Ein skalares zweidimensionales Gedächtnis hat unter reinem Vergessen den
+Operator \(qI\). Er kontrahiert beide Komponenten gleich und besitzt nur den
+reellen Eigenwert \(q\). Die räumliche Dimension zwei fügt daher noch keine
+Rotation hinzu.
+
+Selbst wenn eine externe Rotation \(\mathcal R(\theta)\) angesetzt wird,
+
+\[
+p_{n+1}=q\mathcal R(\theta)p_n,
+\]
+
+sind die Eigenwerte zwar \(qe^{\pm i\theta}\), aber
+\(\lVert p_n\rVert=q^n\lVert p_0\rVert\). Für \(0<q<1\) entsteht eine
+gedämpfte Spirale, kein stabiler Kreis. Vergessen kann einen Phasenlag
+bereitstellen; die Rotation und die Energiezufuhr müssen aus anderen Termen
+kommen.
+
+### Linearer No-go-Satz für den passiven Centerabschluss
+
+Für positive normierte Gewichte gilt auf dem Einheitskreis
+
+\[
+|B_H(e^{i\omega})|
+\leq\sum_j\bar w_j=1.
+\]
+
+Eine autonome harmonische Mode des lokalen Centerabschlusses müsste
+
+\[
+e^{i\omega}-(1-g_H)
+=g_HB_H(e^{i\omega})
+\]
+
+erfüllen. Für \(0<g_H<1\) und \(\omega\neq0\) ist jedoch
+
+\[
+\left|e^{i\omega}-(1-g_H)\right|^2
+=g_H^2+2(1-g_H)(1-\cos\omega)
+>g_H^2,
+\]
+
+während die rechte Seite höchstens den Betrag \(g_H\) hat. Das ist ein
+Widerspruch. Im lokalen passiven Centerabschluss kann daher keine
+nichttriviale Einheitskreismode und kein linearer Hopf- beziehungsweise
+Neimark-Sacker-Übergang auftreten.
+
+Der Satz gilt nicht automatisch für die volle nichtlineare
+Double-Gaussian-Historie, für signierte effektive Rückkopplung oder für einen
+weit entfernten, nicht durch eine lokale Bifurkation erzeugten Zyklus. Genau
+diese Lücke macht einen direkten Rotating-wave-Test sinnvoll.
+
+## 7. Quellennahe Kandidaten für stabiles Kreiseln
+
+### 7.1 Erste Wahl: Rotating wave im unveränderten zweidimensionalen K0-H
+
+Die wissenschaftlich stärkste Variante führt zunächst keinen neuen
+Rotationszustand ein. Identifiziere \(\mathbb R^2\) mit \(\mathbb C\) und
+setze im rauschfreien nativen Modell
+
+\[
+x_n=R e^{in\theta},
+\qquad R>0,\quad 0<\theta<\pi.
+\]
+
+Sei \(W_{\rm eff}=K*G_\sigma\) der effektive radialsymmetrische Readkernel und
+
+\[
+\varphi(r)=\frac{W_{\rm eff}'(r)}{r}.
+\]
+
+Am Ursprung ist \(\varphi(0)\) als stetiger Grenzwert zu verstehen; der
+\(j=0\)-Summand verschwindet ohnehin durch \(1-e^{-ij\theta}=0\).
+
+Mit den ursprünglichen rohen Gewichten \(w_j=\alpha M_0q^j\) reduziert sich
+der vollständige Update auf eine einzige komplexe
+Selbstkonsistenzgleichung:
+
+\[
+\boxed{
+e^{i\theta}-1
++
+\eta\sum_{j=0}^{H-1}
+\alpha M_0q^j
+\varphi\!\left(2R\left|\sin\frac{j\theta}{2}\right|\right)
+(1-e^{-ij\theta})
+=0
+}.
+\]
+
+Real- und Imaginärteil sind zwei Gleichungen für \(R\) und \(\theta\). Für
+Delta-Deposition ist beim Double-Gaussian-Kernel
+
+\[
+\varphi(r)
+=-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}
+e^{-r^2/(2\sigma_{\rm rep}^2)}
++
+\frac{A_{\rm att}}{\sigma_{\rm att}^2}
+e^{-r^2/(2\sigma_{\rm att}^2)}.
+\]
+
+Dieser Test bleibt vollständig bei
+\(\alpha,\eta,H,M_0,A_{\rm rep},A_{\rm att},
+\sigma_{\rm rep},\sigma_{\rm att}\). \(N\) wird erst für die anschließende
+Stabilitätsmessung gebraucht.
+
+Wegen der Spiegelsymmetrie gehört zu einer Lösung mit \(+\theta\) immer eine
+gespiegelte Lösung mit \(-\theta\). Das Modell wählt damit keine Händigkeit
+vorab; eine beobachtete Wahl müsste spontan und seedabhängig erfolgen.
+
+Eine Nullstelle beweist nur Existenz. Stabilität verlangt danach den
+Jacobian-/Floquet-Test der vollständigen finite-\(H\)-Map im mitrotierenden
+System. Symmetriebedingte neutrale Richtungen für Translation und globale
+Phase müssen vor dem Transversaltest herausquotientiert werden. Erst wenn
+alle übrigen Multiplikatoren strikt im Einheitskreis liegen, ist
+asymptotisch stabiles relatives Kreiseln belegt.
+
+Auch ein solcher Pass wäre zunächst ein dynamisches \(S^1\)-Resultat. Das
+native Schreiben und Vergessen ist ein offener Source-/Sink-Prozess; ohne
+dessen Arbeitsbilanz wäre der Kreis noch kein konservatives Kreisel- oder
+Massengesetz.
+
+### 7.2 Zweite Wahl: explizites zweikomponentiges Rotationsgedächtnis
+
+Falls der native Rotating-wave-Test negativ ausfällt, ist eine minimale
+Erweiterung ein interner Quadraturzustand \(p_n\in\mathbb R^2\). Eine
+synthetische Positivkontrolle wäre
+
+\[
+p_{n+1}
+=\mathcal R(\theta)
+\left[(1+s)p_n-b\lVert p_n\rVert^2p_n\right].
+\]
+
+Für \(0<s<1\) und \(b>0\) besitzt sie nahe
+\(\lVert p\rVert=\sqrt{s/b}\) einen gesättigten Kreis. Diese Gleichung setzt
+Rotation, linearen Gain und Sättigung ausdrücklich ein; sie darf deshalb
+nur als Positivkontrolle oder klar bezeichnete neue Architektur gelten.
+Eine Emergenzbehauptung wäre erst zulässig, wenn diese Terme aus einem
+eingefrorenen Read-/Write-Mechanismus des Gedächtnisses abgeleitet werden.
+
+Ein bloßes skalares Gedächtnis in einem zweidimensionalen Ortsraum und ein
+echtes zweikomponentiges internes Gedächtnis sind somit nicht dasselbe.
+
+## 8. Center-konjugierte Aktuatorarchitektur
+
+Auf effektiver Ebene ist die sauberste Architektur bereits sichtbar. Eine
+Wechselwirkung
+
+\[
+U_{\rm int}(c_H-Q)
+\]
+
+definiert mit einem diskreten Gradienten gleiche und entgegengesetzte
+Center- und Außenkräfte. Der Input wird im lokalen Zustandsupdate mit der
+registrierten Skalierung \(+\alpha f_n\) eingebracht, der Arbeitsoutput ist
+\(\Delta c_n\). Für die fünf registrierten A2-Zellen erlaubt die
+finite-\(H\)-Positive-Real-Zertifizierung diese passive effektive
+Realisierung.
+
+Sie löst aber noch nicht das mikroskopische Selektionsproblem. Für
+
+\[
+c_H=\sum_{j=0}^{H-1}\bar w_jy_j
+\]
+
+lautet die virtuelle Arbeit
+
+\[
+\delta c_H=\sum_j\bar w_j\delta y_j,
+\qquad
+F_j=\bar w_jF_c,
+\qquad
+\sum_jF_j\cdot\delta y_j=F_c\cdot\delta c_H.
+\]
+
+Im bestehenden K0-H sind die \(y_j\) gespeicherte vergangene Positionen,
+keine aktuierbaren materiellen Freiheitsgrade. Die adjungierte
+Kraftverteilung ist dort daher eine mathematische Realisierung, keine
+naturgegebene Mikromechanik.
+
+Es gibt drei sauber getrennte Optionen:
+
+1. Den Center-Port als effektiven passiven Wrapper verwenden und nur
+   Filterträgheit beanspruchen.
+2. Die Historieneinträge zu dynamischen Trägern machen und Deposition,
+   Alterung, Ausscheiden, Gegenkraft und Randarbeit explizit bilanzieren.
+   Das ist eine neue Architektur und kann zugleich explizite Masse
+   einführen.
+3. Einen physisch motivierten Source-/Write-Aktuator herleiten und zeigen,
+   dass sein diskretes Arbeitsfunktional nach Elimination tatsächlich
+   \(F_c\Delta c\), nicht \(F\Delta x\), ergibt.
+
+Für eine Publikation ist Option 1 bereits mathematisch sauber, aber
+ontologisch schmal. Für eine Behauptung emergenter physischer Masse ist
+Option 2 oder 3 notwendig.
+
+## 9. Empfohlene Reihenfolge der nächsten Gates
+
+1. Algebra-Gate: numerische Identität von Summen- und Quotientenform von
+   \(B_H\), inklusive \(z=1\), zufälliger \(\alpha,H\) und hoher \(H\).
+2. No-go-Gate: Spektrum des lokalen positiven Centerabschlusses gegen den
+   obigen Einheitskreisbeweis; keine Parametersuche.
+3. Native-Rotation-Gate: Nullstellen der exakten Rotating-wave-Gleichung in
+   einer vorab festgelegten Box der bestehenden Kernelparameter.
+4. Stabilitäts-Gate: vollständige finite-\(H\)-Floquet-Multiplikatoren,
+   anschließend deterministische Rückkehr nach radialer und tangentialer
+   Störung.
+5. Erst danach: unabhängige verrauschte Trajektorien, Kreiskoordinate,
+   Winding, Persistenz und externe Phasenkopplung.
+6. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
+   Arbeitsledger für den Center-Port.
+
+Damit bleiben zwei Behauptungen getrennt: Ein stabiler interner
+\(S^1\)-Zyklus würde noch keine physische Masse beweisen; eine positive
+Center-Filterträgheit beweist noch keinen \(S^1\)-Zyklus.
