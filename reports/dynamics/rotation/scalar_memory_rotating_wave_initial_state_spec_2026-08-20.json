@@ -1,0 +1,53 @@
+{
+  "schema": "emergenz-knoten.scalar-memory-rotating-wave-initial-state",
+  "schema_version": 1,
+  "candidate_id": "k0h-rw-aatt3p5-alpha1e-2-h1200-eta0p15-v1",
+  "discovery_revision": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+  "architecture_level": "K0",
+  "time_law": "native-discrete-map",
+  "state_dimension": 2,
+  "history_order": "memory[0] is x_n and memory[j] is x_(n-j)",
+  "state_formula": {
+    "visible_state_at_n0": [
+      0.946517504804225,
+      0.0
+    ],
+    "memory_point_j": [
+      "R*cos(-j*theta)",
+      "R*sin(-j*theta)"
+    ],
+    "memory_weight_j": "alpha*M0*(1-alpha)^j",
+    "age_range": "j=0,...,H-1"
+  },
+  "parameters": {
+    "alpha": 0.01,
+    "q": 0.99,
+    "horizon": 1200,
+    "memory_mass": 1.0,
+    "eta": 0.15,
+    "epsilon": 0.0,
+    "sigma_rep": 1.0,
+    "sigma_att": 3.0,
+    "amplitude_rep": 1.0,
+    "amplitude_att": 3.5,
+    "deposition_kernel": "delta",
+    "deposition_sigma": 0.0,
+    "external_force": 0.0,
+    "boundary": "unbounded-Euclidean-plane"
+  },
+  "rotating_wave": {
+    "radius": 0.946517504804225,
+    "theta_per_update": 0.015770381717135,
+    "angular_frequency_per_memory_time": 1.5770381717135,
+    "period_updates": 398.416818303943,
+    "period_memory_times": 3.984168183039,
+    "turns_retained": 3.011921045674
+  },
+  "independent_native_update_check": {
+    "implementation": "emergenz_knoten.kernels.double_gaussian_gradient",
+    "residual_x": 0.0,
+    "residual_y": -7.979727989493313e-17,
+    "residual_norm": 7.979727989493313e-17
+  },
+  "claim_boundary": "This formula specifies one prepared rotating history. It does not assert stability, basin formation, topology, physical work, or mass."
+}
