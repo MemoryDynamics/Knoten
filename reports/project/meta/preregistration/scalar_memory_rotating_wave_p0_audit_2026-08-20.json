@@ -1,0 +1,27 @@
+{
+  "claim_scope": "s1-topology",
+  "decision": "pass",
+  "downstream": {
+    "A": "sealed-out-of-scope",
+    "B": "sealed-out-of-scope",
+    "C": "sealed-out-of-scope",
+    "D0": "authorized",
+    "D1": "blocked-until-D0-pass",
+    "D2": "blocked-until-D1-pass",
+    "D3": "blocked-until-D2-pass",
+    "D4": "blocked-until-D3-pass",
+    "D5": "blocked-until-D4-pass",
+    "E": "sealed-out-of-scope",
+    "F0": "blocked-until-D0-pass",
+    "F1": "sealed-out-of-scope",
+    "target_simulation": "eligible-after-D0-contract"
+  },
+  "gate": "P0-candidate-and-discovery-freeze",
+  "generated_at": "2026-08-20T21:32:31.143983+00:00",
+  "hash_policy": "sha256-canonical-lf-text-v1",
+  "issue_count": 0,
+  "issues": [],
+  "manifest_path": "reports/project/meta/preregistration/scalar_memory_rotating_wave_p0_manifest_2026-08-20.json",
+  "manifest_sha256": "3d89d2fe390c24765b23a834ad682b626f5ce3025b44f508afb1509b7fd6efb1",
+  "schema_version": "1.1"
+}

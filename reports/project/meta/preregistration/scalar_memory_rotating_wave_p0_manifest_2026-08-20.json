@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.1",
+  "manifest_status": "frozen",
+  "candidate_id": "k0h-rw-aatt3p5-alpha1e-2-h1200-eta0p15-v1",
+  "candidate_claim": "Prepared native K0-H rotating relative equilibrium; D0 must determine whether its rotation-group phase is an eligible S1 observable.",
+  "claim_scope": "s1-topology",
+  "hash_policy": "sha256-canonical-lf-text-v1",
+  "architecture_level": "K0",
+  "time_law": "native-discrete-map",
+  "code_revision": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+  "working_tree_status": "clean",
+  "quarantined_predecessor_relation": "The candidate uses the old A_att=3.5 amplitude only through a new exact d=2 noiseless rotating-history construction. Historical d=3 stochastic A_att=3.5 runs remain discovery-only negative formation context and are not confirmation.",
+  "branch_contract": {
+    "requested_entry_gates": [
+      "D0"
+    ],
+    "sealed_out_of_scope_gates": [
+      "A",
+      "B",
+      "C",
+      "E",
+      "F1"
+    ],
+    "scope_statement": "This manifest may authorize only D0 for a rotating-wave topology candidate. Center mechanics, physical work and mass remain under their separate candidate and gates."
+  },
+  "full_parameter_tuple": {
+    "noise": {
+      "epsilon": 0.0,
+      "law": "deterministic-no-noise"
+    },
+    "memory": {
+      "alpha": 0.01,
+      "q": 0.99,
+      "memory_mass_M0": 1.0,
+      "deposition_weight_beta": 0.01,
+      "deposition_kernel": "delta",
+      "deposition_sigma": 0.0
+    },
+    "kernel": {
+      "potential_convention": "K=A_rep*G(sigma_rep)-A_att*G(sigma_att)",
+      "sigma_rep": 1.0,
+      "sigma_att": 3.0,
+      "amplitude_rep": 1.0,
+      "amplitude_att": 3.5,
+      "force_crossing_radius": 1.45775122016478
+    },
+    "coupling": {
+      "eta": 0.15,
+      "interaction": "native scalar self-read only",
+      "oriented_or_vector_channel": "absent"
+    },
+    "integration": {
+      "update": "native explicit discrete map",
+      "dimension": 2,
+      "update_index_step": 1,
+      "radius": 0.946517504804225,
+      "theta_per_update": 0.015770381717135,
+      "angular_frequency_per_memory_time": 1.5770381717135
+    },
+    "horizon_and_boundary": {
+      "horizon_H": 1200,
+      "tail_extent_alpha_H": 12.0,
+      "tail_fraction_q_to_H": 5.784069691292562e-06,
+      "fifo_rule": "memory[0] is current and oldest point retires after H ages",
+      "spatial_boundary": "unbounded-Euclidean-plane"
+    },
+    "external_system": {
+      "external_force": 0.0,
+      "external_drive": "absent",
+      "second_knot": "absent"
+    },
+    "initialization": {
+      "type": "exact-prepared-circular-history",
+      "visible_state": "[R,0]",
+      "memory_point_j": "[R*cos(-j*theta),R*sin(-j*theta)] for j=0,...,H-1",
+      "memory_weight_j": "alpha*M0*q^j",
+      "source": "reports/dynamics/rotation/scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json"
+    }
+  },
+  "initial_state_source_and_hashes": [
+    {
+      "source": "reports/dynamics/rotation/scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json",
+      "sha256": "4ab3f657cfa68bcd38d73c0722cd718a94e413b33fc46c17bb995b3637808dd2"
+    }
+  ],
+  "discovery_provenance": {
+    "seeds": "none-deterministic-equation-discovery",
+    "run_lengths_and_cadence": "No trajectory. Continuum panel used 161 registered Omega values, 241 registered radius brackets, and 256/512 point quadrature; finite refinement evaluated one H=1200 one-step residual.",
+    "forcing_and_external_system": "No force, drive, external clock, or second knot.",
+    "observables_inspected": [
+      "continuum radial balance integral",
+      "continuum tangential balance integral",
+      "required eta over alpha",
+      "finite-H complex one-step residual",
+      "independent native-kernel one-step residual"
+    ],
+    "parameter_cells_or_optimizers_inspected": "A_att in {3.5,5.5,6.5,7.5,8.0,8.5} plus controls {0,9,35}; C=12; Omega 161-point geometric grid on [0.05,8]; R 241-point geometric bracket grid on [0.05,6]; Brent radial roots; at most 20 registered bounded least-squares finite refinements, of which one was needed.",
+    "selection_rule": "Order admissible continuum roots by absolute log distance of required eta/alpha from the pre-existing value 15, then increasing A_att, Omega, and R; accept the first finite root at fixed alpha=0.01, H=1200, eta=0.15 with residual norm at most 1e-11 and A_H>0>S_H.",
+    "artifacts_and_hashes": [
+      {
+        "source": "reports/project/meta/preregistration/scalar_memory_rotating_wave_discovery_protocol_2026-08-20.md",
+        "sha256": "5be40e4a0ce36ab3dadb93aa4db8f5208bc8a9e1ef08798bccd0102fcb5dec1f"
+      },
+      {
+        "source": "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_discovery.py",
+        "sha256": "6ec90e945229af5221e1b86f1b0dd806f3087c6a054f5684d2949f75531e0f63"
+      },
+      {
+        "source": "src/emergenz_knoten/rotating_wave.py",
+        "sha256": "ba62c26ea718274066527bac974e0057fb902c8840b071759140b29ff18c7798"
+      },
+      {
+        "source": "tests/test_rotating_wave.py",
+        "sha256": "e7642d953ba63116e01db84738b18fe8e905f3fc8e1fca5e34a9b6892011340e"
+      },
+      {
+        "source": "reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.json",
+        "sha256": "f9c6409fccd9b3e02c83497428a24ad2d5dfb78d2134bfe4314baaec9e13e830"
+      },
+      {
+        "source": "reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.md",
+        "sha256": "9745242d404f85915e7b8c1cee2f618e9311a836f9efd765bd83b2299f00ab0f"
+      },
+      {
+        "source": "reports/dynamics/rotation/scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json",
+        "sha256": "4ab3f657cfa68bcd38d73c0722cd718a94e413b33fc46c17bb995b3637808dd2"
+      },
+      {
+        "source": "reports/project/meta/reviews/scalar_memory_rotating_wave_discovery_review_2026-08-20.md",
+        "sha256": "93c45b5bbdf711b42d42bee05a3114c40d4934c8fdbc784d94ebb812b02bb8a8"
+      }
+    ]
+  },
+  "confirmatory_design": {
+    "new_seeds_disjoint_from_discovery": true,
+    "seed_generation_rule": "Deterministic residual and spectral gates use no seed. If a later noise gate is authorized after deterministic stability, use exactly formation seeds 101 through 105; discovery used no random seed.",
+    "target_data_opened": false,
+    "untouched_parameter_holdout": {
+      "amplitude_att": 7.0,
+      "all_other_native_parameters": "same scaling contract, with any exact orbit re-solved only after the holdout gate opens",
+      "status": "sealed"
+    }
+  }
+}
