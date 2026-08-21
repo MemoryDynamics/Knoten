@@ -42,7 +42,12 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
    - `foundation-audit-portability-reconciliation-pass-scoped` nach einem
      zweiten, separat eingefrorenen Portabilitaetsprotokoll;
    - alle A--E-Gates aus sauberem Commit neu gerechnet; aktuelle
-     reviewertragende Abschlussentscheidung.
+     reviewertragende Foundation-Entscheidung.
+10. `scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.{md,json}`
+    - `l5-existence-scaling-pass` aus dem vorab publizierten Protokoll- und
+      getrennten sauberen Ausfuehrungs-Commit;
+    - sechster lokaler Krawczyk-Root, unabhaengiger finite-Summen-Replay und
+      alle signierten First-order-Skalierungsgates ohne Retuning bestanden.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -57,16 +62,21 @@ Kontinuums-Reconciliation bytegenau. Ein sauberer Arbeitsbaum und die
 vollstaendige Historie werden separat verlangt. Alte Artefakte duerfen deshalb
 nicht still editiert werden.
 
-Der abschliessende Referee-Text ist
+Der Foundation-Referee-Text ist
 `reports/project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md`.
-Er empfiehlt die Main-line-Aufnahme unter der engen Formulierung
-„vorbereitete raeumliche Schleifenbasis“.
+Das nachgelagerte L5-Urteil steht in
+`reports/project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md`.
+Beide empfehlen nur die enge Formulierung „vorbereitete raeumliche
+Schleifenbasis“; das L5-Review markiert den fehlenden zweiten Intervallbackend
+ausdruecklich.
 
 ## Aktuelle Lesart
 
-Belastbar sind fuenf lokal existenzzertifizierte finite-Summen-Rootzellen mit
-numerisch reconciliertem First-order-Kontinuumsast. Nur der Anchor besitzt
-lokale numerische Stabilitaetsevidenz. Der Kreis ist eine ambiente
+Belastbar sind sechs lokal existenzzertifizierte finite-Summen-Rootzellen mit
+numerisch reconciliertem First-order-Kontinuumsast. Die Zertifikate bleiben
+auf den `mpmath.iv`-Trust-Base konditional; ein unabhaengiger Intervallbackend
+fehlt. Nur der Anchor besitzt lokale numerische Stabilitaetsevidenz. Der Kreis
+ist eine ambiente
 \(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein Punkt. Formation,
 Nicht-Anchor-Stabilitaet, internes S1, Arbeit, Traegheit und Masse bleiben
 offen.

@@ -12,7 +12,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
-| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Vier weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Ein unabhaengiger 70-stelliger Foundation-Audit reproduziert alle fuenf Summen, den Fixed-gain-Kontinuumsroot R_inf=0.9431133067695436, Omega_inf=1.5855700777177887 und alle First-order-Grenzgates. Am 2400-dimensionalen Quellenmodell liefert der registrierte Arnoldi-/Perturbationstest lokal \(|\lambda_\perp|=0.99306035\). | fuenf kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokal numerisch stabiler vorbereiteter Anchor | Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine globale Eindeutigkeit, Formation, Nicht-Anchor-Stabilitaet, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Am 2400-dimensionalen Anchor-Quellenmodell liefert der registrierte Arnoldi-/Perturbationstest lokal \(|\lambda_\perp|=0.99306035\). | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokal numerisch stabiler vorbereiteter Anchor | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine globale Eindeutigkeit, Formation, Nicht-Anchor-Stabilitaet, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -82,6 +82,15 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Git-Blobs und prueft die vollstaendige Historie; der gesamte Audit wurde
   erneut gerechnet und besteht. Auch dabei blieb jede wissenschaftliche
   Schwelle unveraendert.
+- Der danach separat eingefrorene L5-Existenz-/Skalierungstest oeffnet erstmals
+  \((\alpha,H,\eta)=(0.00125,9600,0.01875)\). Beide Krawczyk-Panels und
+  Boxen, der 70-stellige direkte Summen-Replay und alle signierten
+  First-order-Gates bestehen. Der L5-Root liegt bei
+  \((R,\Omega)=(0.9435346582358031\ldots,1.5845158635282613\ldots)\);
+  L1--L5-Steigungen sind 1.0074/1.0086. Das erweitert den Ast auf sechs
+  lokal existenzzertifizierte Zellen, nicht auf sechs nachgewiesen stabile
+  Schleifen. Beide Intervallpanels verwenden weiterhin denselben
+  `mpmath.iv`-Backend; eine unabhaengige formale Verifikation fehlt.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
@@ -214,6 +223,7 @@ wichtig:
 30. `reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.md`
 31. `reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md`
 32. `reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md`
+33. `reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -655,19 +665,21 @@ Negativkontrollen. Seine erste finite-H-Verfeinerung liefert bei
 `alpha=0.01`, `H=1200`, `eta=0.15`, `A_att=3.5` einen
 Gleitkomma-Nullpunkt. Der kandidatspezifische P0 besteht mit null Defekten;
 D0 klassifiziert die translationsreduzierte raeumliche SO(2)-Gruppenbahn,
-nicht eine interne Phase nach Rotationsquotient. Inzwischen sind der Anchor
-und vier gematchte Zellen lokal intervallzertifiziert. Fixed-gain-
+nicht eine interne Phase nach Rotationsquotient. Bis zum Foundation-Stand
+waren der Anchor und vier gematchte Zellen lokal intervallzertifiziert. Fixed-gain-
 Reconciliation und unabhaengiger Foundation-Audit bestaetigen den
-First-order-Kontinuumsast. Das Voll-FIFO-Stabilitaetsgate besteht nur am
-Anchor lokal numerisch. Als naechster sequentieller Schritt ist L5 bei
-`alpha=0.00125`, `H=9600`, `eta=0.01875` priorisiert, aber noch versiegelt.
+First-order-Kontinuumsast. Der prospektive L5-Test erweitert ihn ohne
+Retuning auf sechs lokal existenzzertifizierte Zellen und besteht die
+signierten First-order-Diskriminatoren. Das Voll-FIFO-Stabilitaetsgate besteht
+weiterhin nur am Anchor lokal numerisch. Als naechster sequentieller Schritt
+ist genau eine vorab ausgewaehlte Nicht-Anchor-Stabilitaetszelle priorisiert.
 D1--D5, Formation, Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben
 geschlossen.
 
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement. Der native
-  Rotating-wave-Befund kann als getrennte technische Notiz ueber fuenf lokal
+  Rotating-wave-Befund kann als getrennte technische Notiz ueber sechs lokal
   existenzzertifizierte vorbereitete Schleifen dienen; keine stabile Familie,
   Formation oder robuste materielle Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;

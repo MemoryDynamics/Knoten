@@ -82,9 +82,11 @@ Entscheidung: Der bisherige kompakte Ast bleibt eine kontrollierte lineare
 Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
 unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
 Parameterpunkt \(A_{\rm att}=3.5\) nun eine lokal existenzzertifizierte
-Folge aus fuenf finite-Summen-Rootzellen und einen lokal numerisch stabilen
-vorbereiteten Anchor. Ein unabhaengiger Foundation-Audit reproduziert alle fuenf Roots,
-den Fixed-gain-Kontinuumsroot und die First-order-Skalierung. Das ist kein
+Folge aus sechs finite-Summen-Rootzellen und einen lokal numerisch stabilen
+vorbereiteten Anchor. Ein unabhaengiger Foundation-Audit reproduziert die
+historischen fuenf Roots, den Fixed-gain-Kontinuumsroot und die First-order-
+Skalierung; der danach prospektierte L5-Holdout besteht die Krawczyk-,
+direkten Summen- und signierten Skalierungsgates ohne Retuning. Das ist kein
 Beleg fuer generische Formation, Nicht-Anchor-Stabilitaet, Robustheit oder
 eine interne Phase nach \(SO(2)\)-Reduktion. Die
 Portwahl entscheidet weiterhin die mechanische Realisierung: Der sichtbare
@@ -178,6 +180,18 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Der [abschliessende kritische Review](project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md)
     empfiehlt Main-line-Aufnahme als Basis fuer vorbereitete Schleifen, nicht
     als Nachweis einer stabilen Familie, Formation oder Masse.
+  - Der anschliessend separat
+    [vorregistrierte L5-Test](project/meta/preregistration/scalar_memory_rotating_wave_l5_existence_scaling_protocol_2026-08-21.md)
+    besteht bei
+    \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) beide lokalen
+    [Krawczyk-Panels, den direkten Summen-Replay und alle signierten
+    First-order-Gates](dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md).
+    Die L5/L4-Fehlerquotienten sind 0.4993/0.4992. Das
+    [kritische L5-Review](project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md)
+    akzeptiert damit sechs lokale Rootzellen, markiert aber `mpmath.iv` als
+    noch nicht durch einen zweiten Intervallbackend verifiziert. Als naechstes
+    ist genau eine prospektive Nicht-Anchor-Stabilitaetszelle erlaubt;
+    Formation, Topologie, Mechanik und Interaktionen bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

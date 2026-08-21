@@ -39,11 +39,13 @@ Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
 soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
 Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
-Ein davon getrennter nativer `d=2`-Ast besitzt inzwischen fuenf lokal
+Ein davon getrennter nativer `d=2`-Ast besitzt inzwischen sechs lokal
 existenzzertifizierte finite-H-Kreisroots bei gematchtem `H*alpha=12` und
 `eta/alpha=15`. Ein unabhaengiger Foundation-Audit reproduziert die Summen,
-den Fixed-gain-Kontinuumsroot und die First-order-Skalierung. Nur der Anchor
-ist lokal numerisch stabilitaetsgeprueft. Die belastbare Lesart ist daher
+den Fixed-gain-Kontinuumsroot und die First-order-Skalierung; der prospektive
+L5-Holdout besteht zusaetzlich die direkten Summen- und signierten
+Skalierungsgates. Nur der Anchor ist lokal numerisch stabilitaetsgeprueft,
+und beide Intervallpanels teilen denselben `mpmath.iv`-Backend. Die belastbare Lesart ist daher
 „vorbereitete raeumliche Schleifenfamilie“, nicht Formation, internes S1,
 Arbeit oder Masse.
 

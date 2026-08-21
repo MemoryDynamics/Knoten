@@ -17,6 +17,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 4 | `scalar_memory_rotating_wave_refinement_ladder.py` | fuenf gematchte und lokal zertifizierte Zellen L0--L4 | Roots Pass; historisches Target-Gate Fail |
 | 5 | `scalar_memory_rotating_wave_continuum_reconciliation.py` | korrekt bei festem \(\eta/\alpha=15\) definierter Kontinuumsroot und Wiederanwendung der alten Skalierungsgates | Reconciliation-Pass |
 | 6 | `scalar_memory_rotating_wave_foundation_audit.py` | kanonischer Git-Blob-/Vollhistoriencheck, unabhaengige finite-Summen-Replays, zwei Multipraezisions-Kontinuumspanels und Skalierungs-Replay | portability-scoped Reconciliation-Pass |
+| 7 | `scalar_memory_rotating_wave_l5_existence_scaling.py` | prospektiver sechster Root bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zwei Krawczyk-Panels, direkter Summen-Replay und signierte First-order-Gates | scoped L5-Pass |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -45,12 +46,27 @@ Protokoll autorisierte ausschliesslich die Hashdomaene `HEAD:path`,
 `fetch-depth: 0` und Regressionstests. Der aktuelle Voll-Re-Run besteht alle
 A--E-Gates ohne Aenderung eines wissenschaftlichen Inputs oder Schwellenwerts.
 
+## L5-Gate reproduzieren
+
+Der L5-Runner verlangt ebenfalls einen sauberen Arbeitsbaum und vollstaendige
+Historie. Er prueft die drei kanonischen Input-Blobs und den separat
+publizierten Protokoll-Commit, bevor die Zielzelle geoeffnet wird:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling.py
+```
+
+Die lange Zielrechnung gehoert nicht in CI. CI prueft den Runner mit
+synthetischen First-order-/Branch-Crossing-Falsifikatoren, off-target
+Summenvergleich, Provenienz, Lint und Dokumentationsbau. Beide Zielpanels
+verwenden `mpmath.iv` 1.3.0; sie sind keine unabhaengigen Intervallbackends.
+
 ## Claim-Grenze
 
 Die Programme etablieren:
 
 - eine exakte algebraische Kreisreduktion des nativen Updates;
-- fuenf lokal eindeutige finite-H-Roots auf einem gematchten Ast;
+- sechs lokal eindeutige finite-H-Roots auf einem gematchten Ast;
 - einen unabhaengig reproduzierten numerischen Kontinuumsroot;
 - lokale numerische Stabilitaetsevidenz am Anchor.
 
@@ -62,15 +78,11 @@ Sie etablieren nicht:
 - internes S1 nach ambientem \(SO(2)\)-Quotient;
 - Arbeit, Traegheit oder Masse.
 
-## Versiegelter naechster Schritt
+## Naechster Schritt
 
-L5 mit
-
-```text
-alpha=0.00125, H=9600, eta=0.01875
-```
-
-ist dokumentiert, aber noch nicht implementiert oder ausgewertet. Vor dem
-Lauf wird ein neues Protokoll mit Astkorridor, Intervallboxen,
-Dezimalskalierung und First-order-Entscheidungsregel committed und gepusht.
-Der Amplituden-Holdout `A_att=7` bleibt versiegelt.
+Nach dem scoped L5-Pass darf genau eine Nicht-Anchor-Stabilitaetszelle
+prospektiert werden. Zellwahl, Arnoldi-Panels, Stoerungsrichtungen, Lauflaenge
+und Stopregeln muessen vor jedem neuen Spektralwert committed werden. Ein
+zweiter outward-rounded Intervallbackend ist separates
+Publikations-Hardening. Formation, Topologie, Mechanik, Interaktionen und der
+Amplituden-Holdout `A_att=7` bleiben versiegelt.

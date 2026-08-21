@@ -1,7 +1,9 @@
 from decimal import Decimal
 import json
+import subprocess
 from typing import Any
 
+import mpmath
 from mpmath import mp
 import pytest
 
@@ -165,3 +167,45 @@ def test_inconclusive_report_never_renders_positive_claim():
 
     assert "No positive existence or scaling claim is authorized" in report
     assert "## L5 interval panels" not in report
+
+
+def test_committed_l5_result_retains_every_registered_pass():
+    payload = json.loads((l5.ROOT / l5.DEFAULT_SUMMARY).read_text(encoding="utf-8"))
+
+    assert payload["decision"] == "l5-existence-scaling-pass"
+    assert payload["execution_revision"] == "a8787cdefd12b86e13928613790708883e2c55e1"
+    assert payload["protocol_revision"] == l5.PROTOCOL_REVISION
+    assert payload["git_status_at_start"] == ""
+    assert payload["exception"] is None
+    assert payload["provenance"]["pass"]
+    assert payload["l5_cell"]["pass"]
+    assert payload["l5_cell"]["cross_precision"]["pass"]
+    assert all(panel["pass"] for panel in payload["l5_cell"]["panels"])
+    assert all(
+        box["pass"]
+        for panel in payload["l5_cell"]["panels"]
+        for box in (panel["outer"], panel["inner"])
+    )
+    assert payload["independent_replay"]["pass"]
+    assert payload["scaling"]["pass"]
+    assert payload["scaling"]["radius"]["pass"]
+    assert payload["scaling"]["omega"]["pass"]
+
+
+def test_l5_protocol_is_unchanged_since_its_public_freeze():
+    result = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--quiet",
+            l5.PROTOCOL_REVISION,
+            "HEAD",
+            "--",
+            l5.PROTOCOL.as_posix(),
+        ],
+        cwd=l5.ROOT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert mpmath.__version__ == "1.3.0"

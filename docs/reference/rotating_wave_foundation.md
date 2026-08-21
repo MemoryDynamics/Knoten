@@ -8,9 +8,10 @@ Reviewergebnis lautet:
 
 > Die vorhandene Kette ist eine solide mathematische und numerische Basis fuer
 > vorbereitete raeumliche Schleifen. Exakte lokale finite-H-Existenz ist in
-> fuenf Zellen zertifiziert. Stabilitaet ist bislang nur am Anchor lokal
-> numerisch gestuetzt. Formation, internes S1, Arbeit, Traegheit und Masse sind
-> nicht nachgewiesen.
+> sechs Zellen computerassistiert unter der `mpmath.iv`-Vertrauensbasis
+> zertifiziert. Stabilitaet ist bislang nur am Anchor lokal numerisch
+> gestuetzt. Formation, internes S1, Arbeit, Traegheit und Masse sind nicht
+> nachgewiesen.
 
 Der Name *Schleife* ist hier praeziser als *Knoten*: Das nachgewiesene Objekt
 ist eine kreisfoermige raeumliche relative Gleichgewichtsbahn. Es ist weder
@@ -184,6 +185,7 @@ identifiziert werden.
 | Historische Leiter | formal `certified-roots-nonconvergent`, weil der eingefrorene Guide Gain 15.016345 statt 15 hatte | darf nicht rueckwirkend umbenannt werden |
 | Fixed-gain-Reconciliation | alle urspruenglichen Skalierungsgates gegen den korrekt bei 15 definierten Kontinuumsroot bestehen | all-alpha-Theorem, Kontinuumsintervall |
 | Foundation-Audit | alle fuenf finite Summen und der Kontinuumsroot unabhaengig in Multipraezision reproduziert | neue Holdout-Replikation oder Stabilitaetsbeweis |
+| L5-Holdout | sechster lokaler Root; beide Krawczyk-Panels, direkter 70-dps-Summen-Replay und signierte First-order-Gates bestehen | zweiter Intervallbackend, Nicht-Anchor-Stabilitaet, Formation |
 
 Der unabhaengige Audit findet
 
@@ -222,6 +224,20 @@ Regressionstests. Der erneute A--E-Vollaudit aus Commit `0bc74ac` besteht.
 Kein Inputartefakt, Parameter oder wissenschaftlicher Schwellenwert wurde
 geaendert.
 
+Der danach getrennt prospektierte L5-Holdout bei
+\((\alpha,H,\eta)=(0.00125,9600,0.01875)\) findet
+
+\[
+(R_5,\Omega_5)=
+(0.943534658235803109\ldots,1.584515863528261309\ldots).
+\]
+
+Die signierten L5/L4-Fehlerquotienten sind 0.49930 und 0.49918; die
+target-unabhaengigen Differenzquotienten sind 0.49790 und 0.49753. Beide
+Intervallpanels verwenden jedoch denselben `mpmath.iv`-Backend. Die Aussage
+bleibt deshalb ein lokaler computerassistierter Beweis unter dieser
+Vertrauensbasis, kein formal oder zweitimplementiert verifiziertes Theorem.
+
 ## 5. Was „stabil“ derzeit bedeutet
 
 Der Anchor ist ein Fixpunkt der mitrotierenden \(2400\)-dimensionalen
@@ -234,11 +250,12 @@ Eigenwerte intervallartig einschliesst. Zudem wurde nur ein winziger lokaler
 Stoerungsradius getestet. Deshalb sind die zulaessigen Formulierungen:
 
 - „lokal numerisch stabiler vorbereiteter Anchor“;
-- „fuenf lokal existenzzertifizierte Schleifenzellen“.
+- „sechs lokal existenzzertifizierte Schleifenzellen unter der deklarierten
+  Intervall-Vertrauensbasis“.
 
 Nicht zulaessig sind derzeit:
 
-- „fuenf stabile Knoten“;
+- „sechs stabile Knoten“;
 - „spontan entstehende Schleife“;
 - „robustes Attraktorbecken“.
 
@@ -262,19 +279,16 @@ Traegheitsmasse.
 
 ## 7. Naechstes erlaubtes Gate
 
-Nach Integration dieses Reviews ist genau eine weitere Skalenzelle
-priorisiert:
+L5 bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) ist inzwischen als
+reiner Existenz-/Skalierungstest abgeschlossen. Das naechste sequentielle Gate
+ist genau eine Nicht-Anchor-Stabilitaetszelle. Ihre Auswahl, zwei
+Arnoldi-Panels, Stoerungsrichtungen, Lauflaenge und Stopregeln muessen vor
+Einsicht in ein neues Spektrum eingefroren werden. Erst nach einem solchen
+lokalen numerischen Pass kommen Formation, Basin und Rauschen.
 
-\[
-\boxed{(\alpha,H,\eta)=(0.00125,9600,0.01875)}.
-\]
-
-Sie erhaelt vor Ausfuehrung ein eigenes Protokoll und wird zunaechst nur auf
-lokale finite-Summen-Existenz, Astkorridor, exakte Dezimalskalierung und
-First-order-Diskrimination geprueft. Ein positives Existenzresultat darf nicht
-automatisch als Stabilitaetspass gelesen werden. Nicht-Anchor-Stabilitaet ist
-das naechste sequentielle Gate; erst danach kommen Formation, Basin und
-Rauschen.
+Ein zweiter outward-rounded Intervallbackend ist parallel als
+Publikations-Hardening sinnvoll. Er ersetzt weder Nicht-Anchor-Stabilitaet
+noch einen vollstaendigen Spektralbeweis.
 
 Der \(A_{\rm att}=7\)-Holdout bleibt versiegelt. Topologie- und Massegates
 bleiben logisch getrennt.
@@ -285,5 +299,7 @@ bleiben logisch getrennt.
   [Experiment-Ledger auf GitHub](https://github.com/MemoryDynamics/Knoten/blob/main/experiments/current/dynamics/rotation/README.md).
 - Reports, historische Entscheidungen und Reviews stehen im
   [Evidenz-Ledger auf GitHub](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/README.md).
-- Der maschinenlesbare Abschluss ist der
+- Der maschinenlesbare Foundation-Abschluss ist der
   [Foundation-Audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.json).
+- Der aktuelle sequentielle Abschluss ist der
+  [L5-Existenz-/Skalierungstest](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.json).
