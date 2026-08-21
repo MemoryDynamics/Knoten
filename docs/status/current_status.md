@@ -76,7 +76,12 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   Der initiale Audit-Fail bleibt erhalten: Er war durch einen unzulaessigen
   strikten Binaervergleich der vorregistrierten Dezimalidentitaet
   \(\eta/\alpha=15\) verursacht. Keine wissenschaftliche Schwelle wurde fuer
-  den Re-Run geaendert.
+  den Re-Run geaendert. Ein zweiter Remote-CI-Fund zeigte anschliessend
+  CRLF-abhaengige Arbeitsbaumhashes und einen zu flachen Checkout. Nach
+  separat eingefrorener Portabilitaetskorrektur hasht Gate A die kanonischen
+  Git-Blobs und prueft die vollstaendige Historie; der gesamte Audit wurde
+  erneut gerechnet und besteht. Auch dabei blieb jede wissenschaftliche
+  Schwelle unveraendert.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb

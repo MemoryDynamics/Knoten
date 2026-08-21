@@ -166,6 +166,23 @@ again from clean revision
 passed. No scientific threshold changed. This is an acceptable transparent
 pipeline reconciliation, not a retroactive pass.
 
+The first Linux CI evaluation then exposed a second provenance-only defect.
+Six expected SHA-256 values described Windows CRLF working-tree bytes rather
+than the canonical LF Git blobs, while the default one-commit checkout made
+valid historical revisions appear absent. Thus the local numerical pass was
+real, but its Gate A was not portable and could not be the final repository
+decision.
+
+A second protocol was committed before implementation. It authorized only
+exact `HEAD:path` Git-blob hashing, the six corresponding canonical hashes,
+full checkout history and regression assertions. No input artifact or
+scientific setting changed. The complete audit then reran from clean revision
+`0bc74acf432f6a2f24cf5e78411441fc8dfa2555`; all A--E gates passed with
+decision
+`foundation-audit-portability-reconciliation-pass-scoped`. This correction
+strengthens rather than relaxes provenance: the immutable object is now the
+one actually versioned and distributed by Git.
+
 ## 8. Main-line and publication recommendation
 
 Main-line integration is scientifically justified with the claim boundaries

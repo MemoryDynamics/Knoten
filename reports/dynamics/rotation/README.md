@@ -32,10 +32,17 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
      Kontrollen bestanden bereits;
    - der positive Markdown-Absatz wurde im alten Renderer faelschlich ohne
      Entscheidungsbedingung ausgegeben; die JSON-Failentscheidung ist autoritativ.
-8. `scalar_memory_rotating_wave_foundation_audit_2026-08-21.{md,json}`
-   - `foundation-audit-reconciliation-pass-scoped` nach separat eingefrorener
-     exakter Dezimalkorrektur und vollstaendigem Re-Run;
-   - aktuelle reviewertragende Abschlussentscheidung.
+8. Versionierter Zwischenstand in Commit
+   `68e926e93452242b9444d0fdbaacad51b8947dd9`
+   - lokaler `foundation-audit-reconciliation-pass-scoped` nach exakter
+     Dezimalkorrektur und vollstaendigem Re-Run;
+   - nicht der aktuelle Abschluss: Linux-CI zeigte danach sechs
+     arbeitsbaumabhaengige CRLF-Hashes und fehlende Historie im Shallow-Clone.
+9. `scalar_memory_rotating_wave_foundation_audit_2026-08-21.{md,json}`
+   - `foundation-audit-portability-reconciliation-pass-scoped` nach einem
+     zweiten, separat eingefrorenen Portabilitaetsprotokoll;
+   - alle A--E-Gates aus sauberem Commit neu gerechnet; aktuelle
+     reviewertragende Abschlussentscheidung.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -44,9 +51,11 @@ Die unveraenderlichen P0-/D0-, Gate- und Reviewdateien liegen unter:
 - `reports/project/meta/preregistration/scalar_memory_rotating_wave_*`;
 - `reports/project/meta/reviews/scalar_memory_rotating_wave_*`.
 
-Der Foundation-Audit hasht Discovery, Initial State, P0, D0, Stabilitaet,
-Intervallzertifikat, Leiter und Kontinuums-Reconciliation bytegenau. Alte
-Artefakte duerfen deshalb nicht still editiert werden.
+Der Foundation-Audit hasht die kanonischen `HEAD:path`-Git-Blobs von
+Discovery, Initial State, P0, D0, Stabilitaet, Intervallzertifikat, Leiter und
+Kontinuums-Reconciliation bytegenau. Ein sauberer Arbeitsbaum und die
+vollstaendige Historie werden separat verlangt. Alte Artefakte duerfen deshalb
+nicht still editiert werden.
 
 Der abschliessende Referee-Text ist
 `reports/project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md`.

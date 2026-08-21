@@ -211,6 +211,17 @@ Dezimal-Kreuzprodukte und wiederholte alle Gates. Das positive Urteil beruht
 auf diesem vollstaendigen Re-Run, nicht auf einer nachtraeglich geaenderten
 Schwelle.
 
+Die erste GitHub-Linux-Pruefung entdeckte danach einen zweiten reinen
+Provenienzdefekt: Sechs erwartete SHA-256-Werte beschrieben die
+CRLF-Arbeitsbaumdarstellung, nicht die kanonischen LF-Git-Blobs; ein
+Shallow-Checkout mit nur einem Commit konnte ausserdem aeltere, gueltige
+Ausfuehrungsrevisionen nicht sehen. Ein zweites, wiederum vor der
+Implementierung eingefrorenes Protokoll beschraenkte die Korrektur auf die
+Hashdomaene `git-head-blob`, vollstaendige Checkout-Historie und zugehoerige
+Regressionstests. Der erneute A--E-Vollaudit aus Commit `0bc74ac` besteht.
+Kein Inputartefakt, Parameter oder wissenschaftlicher Schwellenwert wurde
+geaendert.
+
 ## 5. Was „stabil“ derzeit bedeutet
 
 Der Anchor ist ein Fixpunkt der mitrotierenden \(2400\)-dimensionalen

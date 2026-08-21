@@ -82,8 +82,8 @@ Entscheidung: Der bisherige kompakte Ast bleibt eine kontrollierte lineare
 Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
 unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
 Parameterpunkt \(A_{\rm att}=3.5\) nun eine lokal existenzzertifizierte
-finite-Summen-Rootfamilie und einen lokal numerisch stabilen vorbereiteten
-Anchor. Ein unabhaengiger Foundation-Audit reproduziert alle fuenf Roots,
+Folge aus fuenf finite-Summen-Rootzellen und einen lokal numerisch stabilen
+vorbereiteten Anchor. Ein unabhaengiger Foundation-Audit reproduziert alle fuenf Roots,
 den Fixed-gain-Kontinuumsroot und die First-order-Skalierung. Das ist kein
 Beleg fuer generische Formation, Nicht-Anchor-Stabilitaet, Robustheit oder
 eine interne Phase nach \(SO(2)\)-Reduktion. Die
@@ -169,8 +169,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Tanh--Sinh und Gauss--Legendre und wiederholt die First-order-Gates. Sein
     initialer binaerer Decimal-Vergleichsfehler bleibt im
     [historischen Pipeline-Fail](dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_initial_implementation_fail_2026-08-21.md)
-    sichtbar; nur der vollstaendige prospektiv korrigierte Re-Run traegt das
-    scoped positive Urteil. Das kompakte
+    sichtbar. Ein zweites
+    [Portabilitaetsprotokoll](project/meta/preregistration/scalar_memory_rotating_wave_foundation_portability_reconciliation_protocol_2026-08-21.md)
+    friert nach dem Linux-CI-Fund die kanonische Git-Blob-Hashdomaene und
+    Vollhistorienpruefung ein. Nur der danach erneut vollstaendig gerechnete
+    A--E-Re-Run traegt das scoped positive Urteil. Das kompakte
     [Rotations-Ledger](dynamics/rotation/README.md) ordnet alle Artefakte.
     Der [abschliessende kritische Review](project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md)
     empfiehlt Main-line-Aufnahme als Basis fuer vorbereitete Schleifen, nicht

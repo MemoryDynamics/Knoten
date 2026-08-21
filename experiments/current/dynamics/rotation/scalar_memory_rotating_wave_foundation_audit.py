@@ -959,12 +959,26 @@ def render_report(payload: dict[str, Any]) -> str:
         f"| {name} | {'pass' if passed else 'fail'} |"
         for name, passed in payload["gates"].items()
     )
+    if payload["gates"].get("A_provenance_parameter_closure", False):
+        lines.extend(
+            [
+                "",
+                "All nine immutable canonical Git-blob hashes match, and every recorded",
+                "execution revision exists in the ancestry of this audit.",
+                "",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "",
+                "Canonical Git-blob hashes or recorded revision ancestry did not",
+                "pass. Gate A and the machine-readable rows are authoritative.",
+                "",
+            ]
+        )
     lines.extend(
         [
-            "",
-            "All nine immutable canonical Git-blob hashes match, and every recorded",
-            "execution revision exists in the ancestry of this audit.",
-            "",
             "## Independent finite-sum replay",
             "",
             "| cell | alpha | H | eta | max residual | max gain error | result |",

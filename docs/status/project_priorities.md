@@ -30,8 +30,10 @@ Programmaeste und heben diese sequentiellen Abhaengigkeiten nicht auf.
    ein Ruff-F401-Fehler durch neun fehlende `__all__`-Eintraege, nicht ein
    Rotationsfehler. Die Root-API besitzt nun einen allgemeinen
    Regressionscheck. Der Foundation-Audit besteht nach dokumentierter
-   Decimal-Pipeline-Reconciliation alle A--E-Gates; der initiale Fail bleibt
-   sichtbar.
+   Decimal- und anschliessender Portabilitaets-Reconciliation alle A--E-Gates.
+   Gate A hasht kanonische Git-Blobs und CI checkt die vollstaendige Historie
+   aus; der initiale Implementierungs-Fail und der nichtportable lokale
+   Zwischenpass bleiben sichtbar.
 2. **L5-Existenz und Skalierung -- als Naechstes.** Vor dem Lauf genau die
    Zelle
    \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) mit unveraendertem

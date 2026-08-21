@@ -1,11 +1,11 @@
 # Critical foundation audit: native scalar-memory rotating waves
 
-Generated: 2026-08-21T16:10:00.003655+00:00.
+Generated: 2026-08-21T16:43:28.888342+00:00.
 
-Decision: **foundation-audit-reconciliation-pass-scoped**.
+Decision: **foundation-audit-portability-reconciliation-pass-scoped**.
 
 The audit ran from clean prospective revision
-`8e1cf13083d343cdebb0d7d315d34a017164c827`.
+`0bc74acf432f6a2f24cf5e78411441fc8dfa2555`.
 
 ## Composite gates
 
@@ -17,7 +17,7 @@ The audit ran from clean prospective revision
 | D_independent_continuum_replay | pass |
 | E_scaling_replay | pass |
 
-All nine immutable input hashes match, and every recorded
+All nine immutable canonical Git-blob hashes match, and every recorded
 execution revision exists in the ancestry of this audit.
 
 ## Independent finite-sum replay

@@ -160,4 +160,6 @@ def test_failed_report_does_not_render_positive_reviewer_verdict():
     report = audit.render_report(payload)
 
     assert "suitable as a **scoped" not in report
+    assert "All nine immutable canonical Git-blob hashes match" not in report
+    assert "Gate A and the machine-readable rows are authoritative" in report
     assert "No positive foundation verdict is authorized" in report
