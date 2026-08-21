@@ -8,6 +8,7 @@ import math
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
+from scipy.special import roots_legendre
 
 
 @dataclass(frozen=True)
@@ -27,6 +28,16 @@ class FiniteRotatingWaveBalance:
     tangential_eta: float
     compatibility_residual: float
     admissible_positive_eta: bool
+
+
+@dataclass(frozen=True)
+class ContinuumRotatingWaveBalance:
+    """Fixed-gain continuum balance and its analytic two-variable Jacobian."""
+
+    components: RotatingWaveComponents
+    residual: tuple[float, float]
+    jacobian: tuple[tuple[float, float], tuple[float, float]]
+    required_eta_per_alpha: float
 
 
 def _positive_finite(name: str, value: float) -> float:
@@ -242,10 +253,20 @@ def finite_h_rotating_wave_residual(
 
 
 @lru_cache(maxsize=None)
-def _legendre_rule(order: int) -> tuple[np.ndarray, np.ndarray]:
+def _legendre_rule(
+    order: int,
+    backend: str = "numpy",
+) -> tuple[np.ndarray, np.ndarray]:
     if isinstance(order, bool) or not isinstance(order, int) or order < 16:
         raise ValueError("quadrature_order must be an integer of at least 16")
-    nodes, weights = leggauss(order)
+    if backend == "numpy":
+        nodes, weights = leggauss(order)
+    elif backend == "scipy":
+        nodes, weights = roots_legendre(order)
+    else:
+        raise ValueError("quadrature_backend must be 'numpy' or 'scipy'")
+    nodes = np.asarray(nodes, dtype=float)
+    weights = np.asarray(weights, dtype=float)
     nodes.setflags(write=False)
     weights.setflags(write=False)
     return nodes, weights
@@ -262,6 +283,7 @@ def continuum_rotating_wave_components(
     amplitude_rep: float = 1.0,
     amplitude_att: float,
     quadrature_order: int = 512,
+    quadrature_backend: str = "numpy",
 ) -> RotatingWaveComponents:
     """Return the matched small-step continuum radial and tangential integrals."""
 
@@ -275,7 +297,7 @@ def continuum_rotating_wave_components(
         amplitude_rep=amplitude_rep,
         amplitude_att=amplitude_att,
     )
-    nodes, weights = _legendre_rule(quadrature_order)
+    nodes, weights = _legendre_rule(quadrature_order, quadrature_backend)
     times = 0.5 * extent * (nodes + 1.0)
     integration_weights = 0.5 * extent * weights
     phases = omega * times
@@ -298,6 +320,113 @@ def continuum_rotating_wave_components(
     )
 
 
+def continuum_rotating_wave_balance(
+    *,
+    radius: float,
+    angular_frequency: float,
+    eta_per_alpha: float,
+    tail_extent: float,
+    memory_mass: float,
+    sigma_rep: float,
+    sigma_att: float,
+    amplitude_rep: float = 1.0,
+    amplitude_att: float,
+    quadrature_order: int = 512,
+    quadrature_backend: str = "numpy",
+) -> ContinuumRotatingWaveBalance:
+    r"""Return the fixed-gain continuum equations and analytic Jacobian.
+
+    With ``u(t)=1-cos(Omega*t)`` and ``q(t)=R**2*u(t)``, the chord obeys
+    ``r(t)**2=2*q(t)``.  This avoids the removable absolute-value cusp in
+    ``2*R*abs(sin(Omega*t/2))``.  The two equations are
+
+    ``F_R = I_R`` and ``F_T = Omega + eta_hat*I_T``.
+
+    They are the leading small-step limits of the two native finite-memory
+    update components; no oscillator or inertial term is introduced.
+    """
+
+    orbit_radius = _positive_finite("radius", radius)
+    omega = _positive_finite("angular_frequency", angular_frequency)
+    gain_rate = _positive_finite("eta_per_alpha", eta_per_alpha)
+    extent = _positive_finite("tail_extent", tail_extent)
+    mass = _positive_finite("memory_mass", memory_mass)
+    rep_sigma, att_sigma, rep_amplitude, att_amplitude = _kernel_parameters(
+        sigma_rep=sigma_rep,
+        sigma_att=sigma_att,
+        amplitude_rep=amplitude_rep,
+        amplitude_att=amplitude_att,
+    )
+    nodes, weights = _legendre_rule(quadrature_order, quadrature_backend)
+    times = 0.5 * extent * (nodes + 1.0)
+    integration_weights = 0.5 * extent * weights
+    phases = omega * times
+    phase_sine = np.sin(phases)
+    phase_cosine = np.cos(phases)
+    radial_chord_factor = 1.0 - phase_cosine
+    q = orbit_radius**2 * radial_chord_factor
+
+    rep_exponential = np.exp(-q / rep_sigma**2)
+    att_exponential = np.exp(-q / att_sigma**2)
+    gradient_factor = (
+        -rep_amplitude / rep_sigma**2 * rep_exponential
+        + att_amplitude / att_sigma**2 * att_exponential
+    )
+    gradient_factor_q = (
+        rep_amplitude / rep_sigma**4 * rep_exponential
+        - att_amplitude / att_sigma**4 * att_exponential
+    )
+    gradient_factor_radius = (
+        gradient_factor_q * 2.0 * orbit_radius * radial_chord_factor
+    )
+    gradient_factor_omega = (
+        gradient_factor_q * orbit_radius**2 * times * phase_sine
+    )
+    memory_weights = mass * np.exp(-times) * integration_weights
+
+    radial = np.sum(memory_weights * gradient_factor * radial_chord_factor)
+    tangential = np.sum(memory_weights * gradient_factor * phase_sine)
+    radial_radius = np.sum(
+        memory_weights * gradient_factor_radius * radial_chord_factor
+    )
+    radial_omega = np.sum(
+        memory_weights
+        * (
+            gradient_factor_omega * radial_chord_factor
+            + gradient_factor * times * phase_sine
+        )
+    )
+    tangential_radius = np.sum(
+        memory_weights * gradient_factor_radius * phase_sine
+    )
+    tangential_omega = np.sum(
+        memory_weights
+        * (
+            gradient_factor_omega * phase_sine
+            + gradient_factor * times * phase_cosine
+        )
+    )
+    required_gain_rate = -omega / tangential if tangential != 0.0 else math.inf
+    return ContinuumRotatingWaveBalance(
+        components=RotatingWaveComponents(
+            radial=float(radial),
+            tangential=float(tangential),
+        ),
+        residual=(
+            float(radial),
+            float(omega + gain_rate * tangential),
+        ),
+        jacobian=(
+            (float(radial_radius), float(radial_omega)),
+            (
+                float(gain_rate * tangential_radius),
+                float(1.0 + gain_rate * tangential_omega),
+            ),
+        ),
+        required_eta_per_alpha=float(required_gain_rate),
+    )
+
+
 def continuum_required_eta_per_alpha(
     *,
     radius: float,
@@ -309,6 +438,7 @@ def continuum_required_eta_per_alpha(
     amplitude_rep: float = 1.0,
     amplitude_att: float,
     quadrature_order: int = 512,
+    quadrature_backend: str = "numpy",
 ) -> float:
     """Return eta/alpha required by tangential balance in the continuum limit."""
 
@@ -322,6 +452,7 @@ def continuum_required_eta_per_alpha(
         amplitude_rep=amplitude_rep,
         amplitude_att=amplitude_att,
         quadrature_order=quadrature_order,
+        quadrature_backend=quadrature_backend,
     )
     if components.tangential >= 0.0:
         return math.nan

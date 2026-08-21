@@ -8,6 +8,7 @@ from emergenz_knoten.kernels import (
     exponential_memory_weights,
 )
 from emergenz_knoten.rotating_wave import (
+    continuum_rotating_wave_balance,
     continuum_rotating_wave_components,
     double_gaussian_force_crossing_radius,
     double_gaussian_gradient_factor,
@@ -172,6 +173,111 @@ def test_finite_sums_converge_to_registered_continuum_integrals():
 
     assert finite.radial == pytest.approx(continuum.radial, rel=4.0e-3)
     assert finite.tangential == pytest.approx(continuum.tangential, rel=4.0e-3)
+
+
+def test_fixed_gain_continuum_balance_matches_component_definition():
+    parameters = {
+        "radius": 0.87,
+        "angular_frequency": 1.31,
+        "eta_per_alpha": 13.0,
+        "tail_extent": 7.0,
+        "memory_mass": 1.2,
+        "sigma_rep": 1.0,
+        "sigma_att": 3.0,
+        "amplitude_rep": 1.0,
+        "amplitude_att": 3.5,
+        "quadrature_order": 256,
+        "quadrature_backend": "numpy",
+    }
+    balance = continuum_rotating_wave_balance(**parameters)
+    component_parameters = dict(parameters)
+    eta_rate = component_parameters.pop("eta_per_alpha")
+    components = continuum_rotating_wave_components(**component_parameters)
+
+    assert balance.components.radial == pytest.approx(components.radial, abs=3.0e-16)
+    assert balance.components.tangential == pytest.approx(
+        components.tangential,
+        abs=3.0e-16,
+    )
+    assert balance.residual[0] == pytest.approx(components.radial, abs=3.0e-16)
+    assert balance.residual[1] == pytest.approx(
+        parameters["angular_frequency"] + eta_rate * components.tangential,
+        abs=0.0,
+    )
+    assert balance.required_eta_per_alpha == pytest.approx(
+        -parameters["angular_frequency"] / components.tangential,
+        abs=0.0,
+    )
+
+
+def test_fixed_gain_continuum_analytic_jacobian_matches_centered_difference():
+    parameters = {
+        "radius": 0.91,
+        "angular_frequency": 1.43,
+        "eta_per_alpha": 15.0,
+        "tail_extent": 8.0,
+        "memory_mass": 1.0,
+        "sigma_rep": 1.0,
+        "sigma_att": 3.0,
+        "amplitude_rep": 1.0,
+        "amplitude_att": 3.5,
+        "quadrature_order": 256,
+        "quadrature_backend": "numpy",
+    }
+    analytic = np.asarray(
+        continuum_rotating_wave_balance(**parameters).jacobian,
+        dtype=float,
+    )
+    centered = np.empty((2, 2), dtype=float)
+    for column, name in enumerate(("radius", "angular_frequency")):
+        step = 2.0e-6
+        lower = dict(parameters)
+        upper = dict(parameters)
+        lower[name] -= step
+        upper[name] += step
+        lower_residual = np.asarray(
+            continuum_rotating_wave_balance(**lower).residual,
+            dtype=float,
+        )
+        upper_residual = np.asarray(
+            continuum_rotating_wave_balance(**upper).residual,
+            dtype=float,
+        )
+        centered[:, column] = (upper_residual - lower_residual) / (2.0 * step)
+
+    assert analytic == pytest.approx(centered, rel=3.0e-9, abs=3.0e-10)
+
+
+def test_independent_continuum_quadrature_backends_agree():
+    parameters = {
+        "radius": 1.07,
+        "angular_frequency": 0.93,
+        "eta_per_alpha": 11.0,
+        "tail_extent": 6.0,
+        "memory_mass": 1.0,
+        "sigma_rep": 1.0,
+        "sigma_att": 3.0,
+        "amplitude_rep": 1.0,
+        "amplitude_att": 4.0,
+        "quadrature_order": 256,
+    }
+    numpy_balance = continuum_rotating_wave_balance(
+        **parameters,
+        quadrature_backend="numpy",
+    )
+    scipy_balance = continuum_rotating_wave_balance(
+        **parameters,
+        quadrature_backend="scipy",
+    )
+
+    assert numpy_balance.residual == pytest.approx(
+        scipy_balance.residual,
+        abs=4.0e-14,
+    )
+    assert np.asarray(numpy_balance.jacobian) == pytest.approx(
+        np.asarray(scipy_balance.jacobian),
+        abs=3.0e-13,
+    )
 
 
 def test_eta_compatibility_is_exact_elimination_of_two_residual_components():
