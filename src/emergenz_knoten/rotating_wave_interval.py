@@ -164,6 +164,12 @@ def refine_rotating_wave_root(
         current_radius = mp.mpf(radius)
         current_theta = mp.mpf(theta)
         corrections: list[dict[str, str]] = []
+        iterates = [
+            {
+                "radius": mp.nstr(current_radius, precision_dps - 8),
+                "theta": mp.nstr(current_theta, precision_dps - 8),
+            }
+        ]
         for _ in range(iterations):
             values, jacobian, _ = _balance_and_jacobian(
                 mp,
@@ -191,6 +197,12 @@ def refine_rotating_wave_root(
                     "theta": mp.nstr(theta_correction, precision_dps - 8),
                 }
             )
+            iterates.append(
+                {
+                    "radius": mp.nstr(current_radius, precision_dps - 8),
+                    "theta": mp.nstr(current_theta, precision_dps - 8),
+                }
+            )
 
         values, jacobian, components = _balance_and_jacobian(
             mp,
@@ -208,6 +220,7 @@ def refine_rotating_wave_root(
             ],
             "components": [mp.nstr(value, digits) for value in components],
             "corrections": corrections,
+            "iterates": iterates,
         }
 
 
