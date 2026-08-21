@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-08-04.
+Stand: 2026-08-21.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -26,6 +26,24 @@ Nicht Aufgabe von Paper 0:
 - endliche Signalgeschwindigkeit;
 - Lorentz-, Quanten- oder Standardmodell-Ableitung;
 - physikalische Massen.
+
+### Separater mathematischer Schleifenbefund
+
+Als technischer Spin-off ist inzwischen enger tragbar:
+
+- die exakte Kreisreduktion des unveraenderten rauschfreien `d=2`-K0-H-
+  Updates auf zwei finite Summen;
+- ein lokaler Krawczyk-Existenz-/Eindeutigkeitsbeweis fuer den Anchor und vier
+  weitere gematchte Zellen bei `H*alpha=12`, `eta/alpha=15`;
+- ein unabhaengig reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
+  First-order-Skalierung;
+- lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor.
+
+Das kann eine eigenstaendige mathematische Notiz oder ein Supplement tragen.
+Nicht tragbar sind globale Eindeutigkeit, Stabilitaet der gesamten Familie,
+spontane Formation, internes S1 nach `SO(2)`-Quotient, Arbeit oder Masse. Der
+Foundation-Audit ist die reviewertragende Quelle; der erste Leiter-Fail und
+der initiale Audit-Pipeline-Fail bleiben historisch sichtbar.
 
 ## Paper I: Minimal Dynamical Foundation
 

@@ -1,6 +1,6 @@
 # Skalares Gedächtnis, Center-Filter und Rotation
 
-Stand: 2026-08-20.
+Stand: 2026-08-21.
 
 Diese Seite ist eine Notationsbrücke zwischen dem kanonischen Knotenkern,
 der lokalen Center-Reduktion und möglichen Rotationsarchitekturen. Sie führt
@@ -592,32 +592,37 @@ werden. Mit
 \[
 u(t)=1-\cos(\Omega t),
 \qquad
-q(t)=R^2u(t),
+\chi(t)=R^2u(t),
 \qquad
-r(t)^2=2q(t)
+r(t)^2=2\chi(t)
 \]
 
 lautet der Double-Gaussian-Faktor ohne Betrags- oder Wurzelstelle
 
 \[
-\varphi(q)
+\varphi(\chi)
 =-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}
-e^{-q/\sigma_{\rm rep}^2}
+e^{-\chi/\sigma_{\rm rep}^2}
 +\frac{A_{\rm att}}{\sigma_{\rm att}^2}
-e^{-q/\sigma_{\rm att}^2}.
+e^{-\chi/\sigma_{\rm att}^2}.
 \]
+
+Damit bleibt \(q=1-\alpha\) im aktuellen Referenztext eindeutig der
+Vergessensfaktor. Das historische Reconciliation-Protokoll verwendete fuer
+dieselbe Hilfsgroesse noch den Namen \(q(t)\); seine eingefrorene Notation
+wird aus Provenienzgruenden nicht rueckwirkend geaendert.
 
 Bei \(C=12\) sind die zwei Grenzgleichungen
 
 \[
 I_R(R,\Omega)
-=M_0\int_0^C e^{-t}\varphi(q(t))u(t)\,dt=0,
+=M_0\int_0^C e^{-t}\varphi(\chi(t))u(t)\,dt=0,
 \]
 
 \[
 \Omega+15I_T(R,\Omega)=0,
 \qquad
-I_T=M_0\int_0^C e^{-t}\varphi(q(t))\sin(\Omega t)\,dt.
+I_T=M_0\int_0^C e^{-t}\varphi(\chi(t))\sin(\Omega t)\,dt.
 \]
 
 Drei vorab fixierte Gauss--Legendre-Panels ergeben
@@ -636,6 +641,20 @@ Die Panelspannen betragen \(4.77\,10^{-15}\) in \(R\) und
 Zellen alle ursprünglichen Skalierungsgates: Die Log-Log-Steigungen sind
 \(1.0094\) und \(1.0110\), die feinsten Anchor-Fehlerquotienten etwa
 \(0.248\) und die relativen Richardson-Fehler \(0.00562\) und \(0.00662\).
+
+Ein spaeter eingefrorener Foundation-Audit implementiert die Summen und
+Integrale nochmals unabhaengig in `mpmath`. Tanh--Sinh und Gauss--Legendre
+liefern uebereinstimmend
+
+\[
+R_\infty=0.943113306769543632\ldots,
+\qquad
+\Omega_\infty=1.585570077717788707\ldots,
+\]
+
+und alle fuenf finite-Summen-Residualreplays liegen unter
+\(8\,10^{-72}\). Das reduziert Implementations- und Rundungsrisiko, ersetzt
+aber weiterhin keinen Intervallbeweis fuer die Kontinuumsintegrale.
 
 Der erste Leiterlauf behält dennoch formal die Entscheidung
 `certified-roots-nonconvergent`: Sein eingefrorener Discovery-Guide gehörte
@@ -731,17 +750,20 @@ Option 2 oder 3 notwendig.
    Einheitskreis-No-go-Satz.
 2. **Erledigt, numerisch:** prospektive Nullstellensuche, unabhängiger
    Produktionskernel-Check, P0/D0 und lokales Voll-FIFO-Stabilitätsgate.
-3. **Als Nächstes:** Multipräzisions- oder Intervallzertifikat der Nullstelle
-   und vollständige Spektraleinschließung.
-4. Danach eine vorab fixierte
-   \((\alpha,H,\eta)\)-Leiter bei gematchtem
-   \(H\alpha=C\) und \(\eta/\alpha\), ohne Amplituden-Retuning.
-5. Erst bei bestandenem Robustheitsgate: deterministische Formation aus
+3. **Erledigt, mathematisch:** lokales Intervallzertifikat des Anchors und
+   vier weiterer gematchter finite-\(H\)-Zellen.
+4. **Erledigt, numerisch:** Fixed-gain-Kontinuums-Reconciliation und
+   unabhaengiger Foundation-Audit. Offen bleiben ein Kontinuums-
+   Intervalleinschluss und ein vollstaendiger Spektralbeweis.
+5. **Als Nächstes:** genau eine prospektiv eingefrorene L5-Zelle
+   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zunaechst nur als
+   Existenz-/Skalierungstest.
+6. Erst bei bestandenem Nicht-Anchor-Stabilitaetsgate: deterministische Formation aus
    nichtkreisförmigen Historien, dann unabhängige verrauschte Trajektorien.
-6. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
+7. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
    **interne** Phase erst sinnvoll, wenn eine Observable den ambienten
    \(SO(2)\)-Quotienten überlebt.
-7. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
+8. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
    Arbeitsledger für den Center-Port.
 
 Damit bleiben zwei Behauptungen getrennt: Ein stabiler interner

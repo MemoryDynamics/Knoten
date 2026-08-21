@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-11.
+Stand: 2026-08-21.
 
 Diese Seite ist die aktive Arbeitsliste. Sie enthaelt hoechstens fuenf
 parallele Gates. Das fruehere Arbeitsprotokoll mit abgeschlossenen Einzelschritten
@@ -13,6 +13,47 @@ Der aktuelle skalare Ast ist eine gut kontrollierte lineare Baseline, aber kein
 isolierter nichtlinearer Knotenmechanismus. Neue Rechenzeit ist nur gerechtfertigt,
 wenn ein Test zwischen konkurrierenden Mechanismen unterscheiden oder eine
 bestehende Interpretation falsifizieren kann.
+
+Der getrennte native Rotating-wave-Ast hat diese Schwelle inzwischen fuer
+**vorbereitete raeumliche Schleifen** erreicht: fuenf finite-H-Roots sind lokal
+existenzzertifiziert, der Fixed-gain-Kontinuumsast ist unabhaengig reproduziert
+und der Anchor ist lokal numerisch stabil. Das macht ihn nicht zu einem
+internen S1, materiellen Knoten oder Masseobjekt.
+
+## Massgebliche aktive Reihenfolge
+
+Diese Liste ist fuer den Schleifenast autoritativ. Die laengeren P0--P3.8-
+Abschnitte darunter dokumentieren parallele beziehungsweise historische
+Programmaeste und heben diese sequentiellen Abhaengigkeiten nicht auf.
+
+1. **Foundation und CI -- abgeschlossen.** Der historische main-CI-Fehler war
+   ein Ruff-F401-Fehler durch neun fehlende `__all__`-Eintraege, nicht ein
+   Rotationsfehler. Die Root-API besitzt nun einen allgemeinen
+   Regressionscheck. Der Foundation-Audit besteht nach dokumentierter
+   Decimal-Pipeline-Reconciliation alle A--E-Gates; der initiale Fail bleibt
+   sichtbar.
+2. **L5-Existenz und Skalierung -- als Naechstes.** Vor dem Lauf genau die
+   Zelle
+   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) mit unveraendertem
+   \(H\alpha=12\), \(\eta/\alpha=15\) und unveraendertem Kernel einfrieren.
+   Primaer sind lokaler Krawczyk-Einschluss, Astkorridor, exakte
+   Dezimalskalierung und eine vorab definierte First-order-Diskrimination.
+   Kein Amplituden-Retuning und kein gleichzeitiges Stabilitaetsclaim.
+3. **Nicht-Anchor-Stabilitaet -- nur nach L5-Existenzpass.** Genau eine
+   zertifizierte Nicht-Anchor-Zelle und zwei feste Arnoldi-Panels plus
+   registrierte Stoerungen vorab waehlen. Ein negativer oder unvollstaendiger
+   Spektralbefund stoppt Formation und Rauschen. Ein Pass bleibt lokal
+   numerisch, solange keine vollstaendige Spektraleinschliessung vorliegt.
+4. **Formation und Basin -- nur nach Nicht-Anchor-Stabilitaet.** Feste
+   nichtkreisfoermige Historienfamilien, chirality-symmetrische Seeds und eine
+   vorbereitete-Bahn-Positivkontrolle vorregistrieren. Erst Basin-Evidenz
+   autorisiert unabhaengige Rauschzellen. Der \(A_{\rm att}=7\)-Holdout bleibt
+   bis dahin versiegelt.
+5. **Interne Topologie und Mechanik getrennt halten.** Persistent Homology der
+   ambienten Kreisbahn ist kein interner S1-Test. Ein Topologieast darf erst
+   eine quotientierte Observable oeffnen. Center-Aktuator, Arbeit und Masse
+   bleiben ein separater Architekturast mit mikroskopischer Reziprozitaet und
+   Ledger; ein Schleifenpass kann ihn nicht ersetzen.
 
 ## P0: Paper-I-Claim-Synchronisation
 

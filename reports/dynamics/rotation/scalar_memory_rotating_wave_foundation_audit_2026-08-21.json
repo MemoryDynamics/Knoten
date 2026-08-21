@@ -1,0 +1,571 @@
+{
+  "claim_boundary": {
+    "established_if_pass": "an exact prepared-circle reduction, five locally unique finite-H roots, independent fixed-gain continuum/scaling replay, and anchor-local numerical stability",
+    "not_established": "global uniqueness, complete spectral stability, generic formation, basin size, noise robustness, chirality selection, internal S1 after SO2 quotient, work, inertia, mass, or a material knot"
+  },
+  "continuum_replay": {
+    "cross_panel": {
+      "omega_difference": "0.0",
+      "pass": true,
+      "radius_difference": "0.0"
+    },
+    "panels": [
+      {
+        "gates": {
+          "branch_corridor": true,
+          "jacobian_determinant": true,
+          "negative_tangential_integral": true,
+          "positive_geometry": true,
+          "published_target": true,
+          "required_gain": true,
+          "residual": true
+        },
+        "iterates": [
+          {
+            "iteration": 0,
+            "jacobian_determinant": "0.575096030164648292356099274196",
+            "omega": "1.5868166272376472",
+            "radius": "0.9430108292781663",
+            "residual": [
+              "-6.46915747840701896617076993669e-14",
+              "0.00172723885601908365491083426983"
+            ],
+            "residual_maximum": "0.0017272388560190836549"
+          },
+          {
+            "iteration": 1,
+            "jacobian_determinant": "0.57460190457105203322418172092",
+            "omega": "1.585570204382236263671429816416081302074264004431211390587914537974275",
+            "radius": "0.9431131762590541237871707211742683440566842262066467640473590426888872",
+            "residual": [
+              "-0.0000000498033127466746941462766479042",
+              "-0.000000228286405416599691231030549168"
+            ],
+            "residual_maximum": "2.2828640541659969123e-7"
+          },
+          {
+            "iteration": 2,
+            "jacobian_determinant": "0.574601604396142124897255524369",
+            "omega": "1.585570077717837233580814396068076688991367491217459655657069530907214",
+            "radius": "0.9431133067695162191736794922809103609634143937624603314809686724674674",
+            "residual": [
+              "-9.7126174284102521349354132219e-15",
+              "-1.1511705472107758921209148228e-14"
+            ],
+            "residual_maximum": "1.1511705472107758921e-14"
+          },
+          {
+            "iteration": 3,
+            "jacobian_determinant": "0.574601604396074123963081292099",
+            "omega": "1.585570077717788706778975151613326082561040437006295240941078447132355",
+            "radius": "0.9431133067695436321754560906742330347334927246417598077827152459130297",
+            "residual": [
+              "-5.47451734426368029732741854859e-28",
+              "-4.01732597737678759697980280925e-28"
+            ],
+            "residual_maximum": "5.4745173442636802973e-28"
+          },
+          {
+            "iteration": 4,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149250373509651549023",
+            "radius": "0.9431133067695436321754560922340476968548404654598893816090563115771358",
+            "residual": [
+              "-1.82311485144414963804189094183e-54",
+              "-1.30095412500159934589109670645e-54"
+            ],
+            "residual_maximum": "1.823114851444149638e-54"
+          },
+          {
+            "iteration": 5,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+            "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+            "residual": [
+              "-2.95442529213727705261720566322e-73",
+              "-1.81113581576534247350182385818e-71"
+            ],
+            "residual_maximum": "1.8111358157653424735e-71"
+          },
+          {
+            "iteration": 6,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+            "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+            "residual": [
+              "3.22783861372058403694605960612e-73",
+              "1.81113581576534247350182385818e-71"
+            ],
+            "residual_maximum": "1.8111358157653424735e-71"
+          }
+        ],
+        "jacobian_determinant": "0.574601604396074123963081288195",
+        "maximum_degree": 10,
+        "method": "tanh-sinh",
+        "name": "mp-ts-70",
+        "newton_iterations": 6,
+        "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+        "pass": true,
+        "precision_dps": 70,
+        "published_omega_difference": "1.4965222675590121155e-14",
+        "published_radius_difference": "3.2162118519736463657e-15",
+        "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+        "required_eta_per_alpha": "15.0",
+        "residual": [
+          "3.22783861372058403694605960612e-73",
+          "1.81113581576534247350182385818e-71"
+        ],
+        "residual_maximum": "1.8111358157653424735e-71",
+        "tangential_integral": "-0.10570467184785258045193167658"
+      },
+      {
+        "gates": {
+          "branch_corridor": true,
+          "jacobian_determinant": true,
+          "negative_tangential_integral": true,
+          "positive_geometry": true,
+          "published_target": true,
+          "required_gain": true,
+          "residual": true
+        },
+        "iterates": [
+          {
+            "iteration": 0,
+            "jacobian_determinant": "0.575096030164648292356099274196",
+            "omega": "1.5868166272376472",
+            "radius": "0.9430108292781663",
+            "residual": [
+              "-6.46915747840701896617076993669e-14",
+              "0.00172723885601908365491083426983"
+            ],
+            "residual_maximum": "0.0017272388560190836549"
+          },
+          {
+            "iteration": 1,
+            "jacobian_determinant": "0.57460190457105203322418172092",
+            "omega": "1.585570204382236263671429816416081302074264004431211390587914537974275",
+            "radius": "0.9431131762590541237871707211742683440566842262066467640473590426888872",
+            "residual": [
+              "-0.0000000498033127466746941462766479042",
+              "-0.000000228286405416599691231030549168"
+            ],
+            "residual_maximum": "2.2828640541659969123e-7"
+          },
+          {
+            "iteration": 2,
+            "jacobian_determinant": "0.574601604396142124897255524369",
+            "omega": "1.585570077717837233580814396068076688991367491217459655657069530907214",
+            "radius": "0.9431133067695162191736794922809103609634143937624603314809686724674674",
+            "residual": [
+              "-9.7126174284102521349354132219e-15",
+              "-1.1511705472107758921209148228e-14"
+            ],
+            "residual_maximum": "1.1511705472107758921e-14"
+          },
+          {
+            "iteration": 3,
+            "jacobian_determinant": "0.574601604396074123963081292099",
+            "omega": "1.585570077717788706778975151613326082561040437006295240941078447132355",
+            "radius": "0.9431133067695436321754560906742330347334927246417598077827152459130297",
+            "residual": [
+              "-5.47451734426368029732741854859e-28",
+              "-4.01732597737678759697980280925e-28"
+            ],
+            "residual_maximum": "5.4745173442636802973e-28"
+          },
+          {
+            "iteration": 4,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149250373509651549023",
+            "radius": "0.9431133067695436321754560922340476968548404654598893816090563115771358",
+            "residual": [
+              "-1.82311485144414963804197241997e-54",
+              "-1.30095412500159934589109670645e-54"
+            ],
+            "residual_maximum": "1.823114851444149638e-54"
+          },
+          {
+            "iteration": 5,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+            "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+            "residual": [
+              "-2.95524575219940008285124847219e-73",
+              "-1.81113581576534247350182385818e-71"
+            ],
+            "residual_maximum": "1.8111358157653424735e-71"
+          },
+          {
+            "iteration": 6,
+            "jacobian_determinant": "0.574601604396074123963081288195",
+            "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+            "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+            "residual": [
+              "3.22701552107396837061479536686e-73",
+              "1.81113581576534247350182385818e-71"
+            ],
+            "residual_maximum": "1.8111358157653424735e-71"
+          }
+        ],
+        "jacobian_determinant": "0.574601604396074123963081288195",
+        "maximum_degree": 10,
+        "method": "gauss-legendre",
+        "name": "mp-gl-70",
+        "newton_iterations": 6,
+        "omega": "1.585570077717788706778975148699744358665285143773149240644121542575246",
+        "pass": true,
+        "precision_dps": 70,
+        "published_omega_difference": "1.4965222675590121155e-14",
+        "published_radius_difference": "3.2162118519736463657e-15",
+        "radius": "0.9431133067695436321754560922340476968548404654598893868057171376405795",
+        "required_eta_per_alpha": "15.0",
+        "residual": [
+          "3.22701552107396837061479536686e-73",
+          "1.81113581576534247350182385818e-71"
+        ],
+        "residual_maximum": "1.8111358157653424735e-71",
+        "tangential_integral": "-0.10570467184785258045193167658"
+      }
+    ],
+    "pass": true
+  },
+  "decision": "foundation-audit-reconciliation-pass-scoped",
+  "exception": null,
+  "execution_revision": "8e1cf13083d343cdebb0d7d315d34a017164c827",
+  "finite_ladder_replay": {
+    "pass": true,
+    "precision_dps": 70,
+    "rows": [
+      {
+        "alpha": "0.04",
+        "cell": "L0",
+        "eta": "0.6",
+        "gain_error_maximum": "1.0504587731438986346e-69",
+        "gates": {
+          "gain": true,
+          "gain_scaling": true,
+          "physical_signs": true,
+          "residual": true,
+          "tail_scaling": true
+        },
+        "horizon": 300,
+        "pass": true,
+        "radial_eta": "0.6",
+        "radial_residual": "3.3605059081583502926e-72",
+        "radial_sum": "0.0032024581344457713935",
+        "radius": "0.957217612116731289993662252564",
+        "residual_maximum": "6.2257793666933647527e-72",
+        "tangential_eta": "0.6",
+        "tangential_residual": "-6.2257793666933647527e-72",
+        "tangential_sum": "-0.10326957301184939741",
+        "theta": "0.0620014603125892925234055934004"
+      },
+      {
+        "alpha": "0.02",
+        "cell": "L1",
+        "eta": "0.3",
+        "gain_error_maximum": "4.3014475624426883746e-70",
+        "gates": {
+          "gain": true,
+          "gain_scaling": true,
+          "physical_signs": true,
+          "residual": true,
+          "tail_scaling": true
+        },
+        "horizon": 600,
+        "pass": true,
+        "radial_eta": "0.3",
+        "radial_residual": "7.0747492803333690371e-73",
+        "radial_sum": "0.0016395278331183439251",
+        "radius": "0.950000295780880498003674332957",
+        "residual_maximum": "1.6979398272800085689e-72",
+        "tangential_eta": "0.3",
+        "tangential_residual": "1.6979398272800085689e-72",
+        "tangential_sum": "-0.10453467129429700896",
+        "theta": "0.0313655440251762669562599357376"
+      },
+      {
+        "alpha": "0.01",
+        "cell": "L2",
+        "eta": "0.15",
+        "gain_error_maximum": "1.9605545205659832276e-69",
+        "gates": {
+          "gain": true,
+          "gain_scaling": true,
+          "physical_signs": true,
+          "residual": true,
+          "tail_scaling": true
+        },
+        "horizon": 1200,
+        "pass": true,
+        "radial_eta": "0.15",
+        "radial_residual": "1.6249814753265707007e-72",
+        "radial_sum": "0.00082899928344877567024",
+        "radius": "0.946517504804223960990626662735",
+        "residual_maximum": "3.9618595969866866608e-72",
+        "tangential_eta": "0.15",
+        "tangential_residual": "-3.9618595969866866608e-72",
+        "tangential_sum": "-0.10513152019972435628",
+        "theta": "0.0157703817171349919012689641413"
+      },
+      {
+        "alpha": "0.005",
+        "cell": "L3",
+        "eta": "0.075",
+        "gain_error_maximum": "5.5749024329026948012e-69",
+        "gates": {
+          "gain": true,
+          "gain_scaling": true,
+          "physical_signs": true,
+          "residual": true,
+          "tail_scaling": true
+        },
+        "horizon": 2400,
+        "pass": true,
+        "radial_eta": "0.075",
+        "radial_residual": "-2.3230602519719648487e-72",
+        "radial_sum": "0.00041676646534707305693",
+        "radius": "0.944805811705743656419366118423",
+        "residual_maximum": "2.9713946977400149956e-72",
+        "tangential_eta": "0.075",
+        "tangential_residual": "2.9713946977400149956e-72",
+        "tangential_sum": "-0.10542105441973459803",
+        "theta": "0.00790666146243552374938496703031"
+      },
+      {
+        "alpha": "0.0025",
+        "cell": "L4",
+        "eta": "0.0375",
+        "gain_error_maximum": "3.7173562618583654269e-69",
+        "gates": {
+          "gain": true,
+          "gain_scaling": true,
+          "physical_signs": true,
+          "residual": true,
+          "tail_scaling": true
+        },
+        "horizon": 4800,
+        "pass": true,
+        "radial_eta": "0.0375",
+        "radial_residual": "-7.7670245517097397183e-73",
+        "radial_sum": "0.00020894470862570011806",
+        "radius": "0.94395718836201762196279672889",
+        "residual_maximum": "7.7670245517097397183e-73",
+        "tangential_eta": "0.0375",
+        "tangential_residual": "1.4149498560666738074e-73",
+        "tangential_sum": "-0.10556360232333590786",
+        "theta": "0.00395864542635568690027841584141"
+      }
+    ]
+  },
+  "gates": {
+    "A_provenance_parameter_closure": true,
+    "B_independent_finite_sum_replay": true,
+    "C_certificate_and_stability_semantics": true,
+    "D_independent_continuum_replay": true,
+    "E_scaling_replay": true
+  },
+  "generated_utc": "2026-08-21T16:10:00.003655+00:00",
+  "git_status_at_start": "",
+  "input_hashes": {
+    "pass": true,
+    "rows": [
+      {
+        "expected_sha256": "ab47cb3168561e4d9d9535981bda598bfa9815c3c593f65b6fd28d1874c561cb",
+        "observed_sha256": "ab47cb3168561e4d9d9535981bda598bfa9815c3c593f65b6fd28d1874c561cb",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.json"
+      },
+      {
+        "expected_sha256": "4ab3f657cfa68bcd38d73c0722cd718a94e413b33fc46c17bb995b3637808dd2",
+        "observed_sha256": "4ab3f657cfa68bcd38d73c0722cd718a94e413b33fc46c17bb995b3637808dd2",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json"
+      },
+      {
+        "expected_sha256": "3d89d2fe390c24765b23a834ad682b626f5ce3025b44f508afb1509b7fd6efb1",
+        "observed_sha256": "3d89d2fe390c24765b23a834ad682b626f5ce3025b44f508afb1509b7fd6efb1",
+        "pass": true,
+        "path": "reports/project/meta/preregistration/scalar_memory_rotating_wave_p0_manifest_2026-08-20.json"
+      },
+      {
+        "expected_sha256": "5ddde8005dd261bbd2aa8bd72906a7395f53d8bb666fb1ce5e9bb5686cdcde4c",
+        "observed_sha256": "5ddde8005dd261bbd2aa8bd72906a7395f53d8bb666fb1ce5e9bb5686cdcde4c",
+        "pass": true,
+        "path": "reports/project/meta/preregistration/scalar_memory_rotating_wave_p0_audit_2026-08-20.json"
+      },
+      {
+        "expected_sha256": "4ad70cd38efb87e97509fe253987a6ac0a6dce9555cc37457eaba54a5f822bb2",
+        "observed_sha256": "4ad70cd38efb87e97509fe253987a6ac0a6dce9555cc37457eaba54a5f822bb2",
+        "pass": true,
+        "path": "reports/project/meta/preregistration/scalar_memory_rotating_wave_d0_contract_2026-08-20.md"
+      },
+      {
+        "expected_sha256": "8b168d702d335dc5833f63c44cd2aa9b7c762a7ad6ac3ce36b87553a62114930",
+        "observed_sha256": "8b168d702d335dc5833f63c44cd2aa9b7c762a7ad6ac3ce36b87553a62114930",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.json"
+      },
+      {
+        "expected_sha256": "77558d09f5114a549384916fc15c2dc6113b1c6eb4a2f77f6a3646d6ff2df20c",
+        "observed_sha256": "77558d09f5114a549384916fc15c2dc6113b1c6eb4a2f77f6a3646d6ff2df20c",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.json"
+      },
+      {
+        "expected_sha256": "9e76e34911261b263278004281822e2b4d36025181e1b9b9daf899aa28770301",
+        "observed_sha256": "9e76e34911261b263278004281822e2b4d36025181e1b9b9daf899aa28770301",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.json"
+      },
+      {
+        "expected_sha256": "8457536836b3fe1f4dc6d83fc74f57b39447978bd62574e5eedbb40294f4cd10",
+        "observed_sha256": "8457536836b3fe1f4dc6d83fc74f57b39447978bd62574e5eedbb40294f4cd10",
+        "pass": true,
+        "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.json"
+      }
+    ]
+  },
+  "parameter_and_semantics": {
+    "evidence_semantics": {
+      "continuum_reconciliation_preserves_history": true,
+      "discovery_decision": true,
+      "historical_ladder_preserved": true,
+      "interval_semantics": true,
+      "sealed_controls_preserved": true,
+      "stability_decision": true,
+      "stability_registered_controls": true
+    },
+    "interval_semantics": {
+      "all_controls": true,
+      "all_panels": true,
+      "cross_panel": true,
+      "decision": true
+    },
+    "parameter_checks": {
+      "alpha": true,
+      "candidate_id": true,
+      "dimension": true,
+      "discovery_accepted": true,
+      "eta": true,
+      "horizon": true,
+      "kernel": true,
+      "memory_mass": true,
+      "noise_off": true,
+      "p0_frozen_clean_zero_defect": true,
+      "q": true
+    },
+    "pass": true,
+    "stability_classification": "anchor-local-numerical",
+    "topology_classification": "ambient-SO2-group-orbit"
+  },
+  "protocol": "reports/project/meta/preregistration/scalar_memory_rotating_wave_foundation_audit_reconciliation_protocol_2026-08-21.md",
+  "revisions": {
+    "pass": true,
+    "rows": [
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+        "stage": "discovery"
+      },
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+        "stage": "p0_manifest"
+      },
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+        "stage": "stability"
+      },
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "8ce6c00713cbac24ebaec337bd339f1944dbcc35",
+        "stage": "interval"
+      },
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "b03ff433776ced084f8bf3d56b54b8fe7b1e5ef2",
+        "stage": "ladder"
+      },
+      {
+        "exists_and_is_ancestor": true,
+        "revision": "996cac2eec9bb4d9c4945e3fbb4d55fd44362375",
+        "stage": "continuum"
+      }
+    ]
+  },
+  "scaling_replay": {
+    "gates": {
+      "omega_error_monotone": true,
+      "omega_fine_to_anchor": true,
+      "omega_richardson": true,
+      "omega_slope": true,
+      "positive_errors": true,
+      "radius_error_monotone": true,
+      "radius_fine_to_anchor": true,
+      "radius_richardson": true,
+      "radius_slope": true
+    },
+    "omega_fine_to_anchor_error_ratio": "0.24753052535414248085",
+    "omega_richardson_relative_error": "0.0066152905857065712239",
+    "omega_slope": "1.0110236196645777891",
+    "pass": true,
+    "radius_fine_to_anchor_error_ratio": "0.2478943891856263528",
+    "radius_richardson_relative_error": "0.005618976991953785288",
+    "radius_slope": "1.0094437581936545869",
+    "rows": [
+      {
+        "alpha": "0.04",
+        "cell": "L0",
+        "omega": "1.55003650781473231308513983501",
+        "omega_error": "0.035533569903056393694",
+        "radius": "0.957217612116731289993662252564",
+        "radius_error": "0.014104305347187657818"
+      },
+      {
+        "alpha": "0.02",
+        "cell": "L1",
+        "omega": "1.56827720125881334781299678688",
+        "omega_error": "0.017292876458975358966",
+        "radius": "0.950000295780880498003674332957",
+        "radius_error": "0.0068869890113368658282"
+      },
+      {
+        "alpha": "0.01",
+        "cell": "L2",
+        "omega": "1.57703817171349919012689641413",
+        "omega_error": "0.0085319060042895166521",
+        "radius": "0.946517504804223960990626662735",
+        "radius_error": "0.0034041980346803288152"
+      },
+      {
+        "alpha": "0.005",
+        "cell": "L3",
+        "omega": "1.58133229248710474987699340606",
+        "omega_error": "0.004237785230683956902",
+        "radius": "0.944805811705743656419366118423",
+        "radius_error": "0.0016925049362000242439"
+      },
+      {
+        "alpha": "0.0025",
+        "cell": "L4",
+        "omega": "1.58345817054227476011136633656",
+        "omega_error": "0.0021119071755139466676",
+        "radius": "0.94395718836201762196279672889",
+        "radius_error": "0.00084388159247398978734"
+      }
+    ],
+    "target_omega": "1.585570077717788706778975148699744358665",
+    "target_radius": "0.9431133067695436321754560922340476968548"
+  },
+  "schema": "emergenz-knoten.scalar-memory-rotating-wave-foundation-audit",
+  "schema_version": 2,
+  "sealed_next_cell": {
+    "alpha": "0.00125",
+    "eta": "0.01875",
+    "horizon": 9600,
+    "status": "sealed-not-evaluated-by-foundation-audit"
+  },
+  "stored_reconciliation_pass": true
+}

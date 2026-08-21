@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-07-30.
+Stand: 2026-08-21.
 
 ## Worum es geht
 
@@ -31,7 +31,8 @@ Aktuelle Rollen:
 - Der Paketkern liegt unter `src/emergenz_knoten`.
 - Die wichtigsten Entry-Points liegen unter `experiments/`.
 - Tests liegen unter `tests/`.
-- Die aktive Dokumentation ist auf sieben kuratierte Dokumente reduziert.
+- Die aktive Dokumentation besitzt kuratierte Frontdoors fuer Status,
+  Prioritaeten, Theorie, Centerfilter und native Rotating waves.
 
 Belastbar derzeit:
 
@@ -82,6 +83,13 @@ Belastbar derzeit:
   Zentrumtranslation auf `20.844` interne Radien, aber `0/5`
   kontrollgetrennte Formmodifikationen. Die scheinbare Shape-Halbwelle folgt
   der freien Kontrolle und ist kein Oszillations- oder neuer Knotenbefund.
+- Ein davon getrennter rauschfreier `d=2`-Ast besitzt fuenf lokal
+  Krawczyk-zertifizierte finite-H-Rotating-wave-Roots bei
+  `H*alpha=12`, `eta/alpha=15`. Ein unabhaengiger Foundation-Audit
+  reproduziert alle fuenf Summen und den Fixed-gain-Kontinuumsroot; nur der
+  Anchor besitzt lokale numerische Stabilitaetsevidenz. Das ist eine Basis
+  fuer vorbereitete raeumliche Schleifen, nicht fuer Formation, internes S1,
+  Arbeit oder Masse.
 
 Noch nicht belastbar:
 
@@ -142,6 +150,8 @@ python -m mkdocs build --strict
 - [Aktueller Stand](docs/status/current_status.md)
 - [Prioritaeten](docs/status/project_priorities.md)
 - [Theoretical Context](docs/reference/THEORETICAL_CONTEXT.md)
+- [Center-Filter und Rotation](docs/reference/scalar_memory_center_filter.md)
+- [Native Rotating Waves](docs/reference/rotating_wave_foundation.md)
 - [Repository Map](docs/reference/repository_map.md)
 - [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
 - [Paper-Claims](docs/status/paper_claims.md)
@@ -172,18 +182,14 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. P3.8f als letzten skalaren Closure-Test vorregistrieren: zero-net
-   sichtbarer Puls durch den kanonischen Deposition-Port, gewichtete
-   Orthogonalisierung bzw. Rangreduktion der Inputbasis und blockierte
-   Signalfenster-Validierung ohne Parametertuning.
-2. Paper I auf die lineare co-moving Relaxationslesart und das neue
-   Checkpoint-/Holdout-Stabilitaetsprotokoll synchronisieren; historische
-   Metastabilitaets- und Dimensionsformulierungen entfernen.
-3. Keine weitere AR-/Kernel-/Noise-Suche zur Erzeugung komplexer Pole. Bei
-   negativem P3.8f orientiertes/current Memory oder ein gemeinsames
-   Mehrquellenfeld offen als neue Modellannahme pruefen.
-4. Reziproke Mehrknotenkopplung erst oeffnen, wenn ein dynamischer One-Way-Kanal
-   Source-Eligibility, Shape-Boundedness und einen unabhaengig
-   kontrollgetrennten Readout besteht.
-5. Die kanonische Evidenzschiene in `reports/README.md` pflegen; neue Reports
-   nur bei geaenderter Entscheidung in die Frontdoor aufnehmen.
+1. Die versiegelte L5-Rotating-wave-Zelle
+   `(alpha,H,eta)=(0.00125,9600,0.01875)` prospektiv als reinen
+   Existenz-/Skalierungstest einfrieren und erst dann ausfuehren.
+2. Nur nach L5-Existenzpass genau eine Nicht-Anchor-Stabilitaetszelle
+   vorregistrieren; kein Stability-by-continuation-Claim.
+3. Formation/Basin erst nach diesem Stabilitaetsgate, Rauschen erst nach
+   Formation. `A_att=7` bleibt Holdout.
+4. Internes S1 nach ambientem `SO(2)`-Quotient und Center-Aktuator/Arbeit/Masse
+   als getrennte Programme behandeln.
+5. Paper-I- und P3.8f-Kuration ohne neue AR-/Kernel-/Noise-Suche fortsetzen;
+   die massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

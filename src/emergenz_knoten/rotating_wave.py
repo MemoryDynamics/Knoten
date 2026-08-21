@@ -336,9 +336,10 @@ def continuum_rotating_wave_balance(
 ) -> ContinuumRotatingWaveBalance:
     r"""Return the fixed-gain continuum equations and analytic Jacobian.
 
-    With ``u(t)=1-cos(Omega*t)`` and ``q(t)=R**2*u(t)``, the chord obeys
-    ``r(t)**2=2*q(t)``.  This avoids the removable absolute-value cusp in
-    ``2*R*abs(sin(Omega*t/2))``.  The two equations are
+    With ``u(t)=1-cos(Omega*t)`` and ``chi(t)=R**2*u(t)``, the chord obeys
+    ``r(t)**2=2*chi(t)``.  The symbol ``q=1-alpha`` remains reserved for the
+    forgetting factor.  This form avoids the removable absolute-value cusp
+    in ``2*R*abs(sin(Omega*t/2))``.  The two equations are
 
     ``F_R = I_R`` and ``F_T = Omega + eta_hat*I_T``.
 
@@ -364,23 +365,29 @@ def continuum_rotating_wave_balance(
     phase_sine = np.sin(phases)
     phase_cosine = np.cos(phases)
     radial_chord_factor = 1.0 - phase_cosine
-    q = orbit_radius**2 * radial_chord_factor
+    chord_half_squared = orbit_radius**2 * radial_chord_factor
 
-    rep_exponential = np.exp(-q / rep_sigma**2)
-    att_exponential = np.exp(-q / att_sigma**2)
+    rep_exponential = np.exp(-chord_half_squared / rep_sigma**2)
+    att_exponential = np.exp(-chord_half_squared / att_sigma**2)
     gradient_factor = (
         -rep_amplitude / rep_sigma**2 * rep_exponential
         + att_amplitude / att_sigma**2 * att_exponential
     )
-    gradient_factor_q = (
+    gradient_factor_chord_half_squared = (
         rep_amplitude / rep_sigma**4 * rep_exponential
         - att_amplitude / att_sigma**4 * att_exponential
     )
     gradient_factor_radius = (
-        gradient_factor_q * 2.0 * orbit_radius * radial_chord_factor
+        gradient_factor_chord_half_squared
+        * 2.0
+        * orbit_radius
+        * radial_chord_factor
     )
     gradient_factor_omega = (
-        gradient_factor_q * orbit_radius**2 * times * phase_sine
+        gradient_factor_chord_half_squared
+        * orbit_radius**2
+        * times
+        * phase_sine
     )
     memory_weights = mass * np.exp(-times) * integration_weights
 

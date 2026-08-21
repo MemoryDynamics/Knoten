@@ -1,9 +1,9 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-07-30.
+Stand: 2026-08-21.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
-bewusst klein gehalten: aktive Orientierung laeuft ueber sieben Dokumente.
+bewusst klein gehalten: aktive Orientierung laeuft ueber neun Dokumente.
 Historische Chatverlaeufe, alte Paper-Artefakte und Rohnotizen bleiben im
 Repository, gelten aber nicht als kuratierte Quelle.
 
@@ -16,15 +16,17 @@ eine explizite Memory-Reprasentation ist die Markov-Einbettung. Metastabile
 Knoten sollen ueber Residence-Zeiten, Operator-Moden und Kontrollen messbar
 werden, nicht ueber Einzelbilder.
 
-## Die sieben aktiven Dokumente
+## Die neun aktiven Dokumente
 
 1. [Aktueller Stand](status/current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
 2. [Prioritaeten](status/project_priorities.md) - Was als Naechstes zu tun ist.
 3. [Theoretical Context](reference/THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
-4. [Repository Map](reference/repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
-5. [Experiment-Katalog](reference/experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
-6. [Paper-Claims](status/paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
-7. Diese Startseite.
+4. [Center-Filter und Rotation](reference/scalar_memory_center_filter.md) - lesbare \(B_H\)-Algebra, Grundgroessen und Rotationsbruecke.
+5. [Native Rotating Waves](reference/rotating_wave_foundation.md) - exakte Kreisgleichung, Evidenzleiter und Reviewergrenzen.
+6. [Repository Map](reference/repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
+7. [Experiment-Katalog](reference/experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
+8. [Paper-Claims](status/paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
+9. Diese Startseite.
 
 Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
 `hardening_plan`, `markov_architecture`, `markov_requirements`,
@@ -36,6 +38,14 @@ Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
 Paper 0 bleibt der mathematische Anker bzw. ein moegliches Supplement. Paper I
 soll weiterhin den belastbaren Minimalmechanismus tragen, aber die numerische
 Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
+
+Ein davon getrennter nativer `d=2`-Ast besitzt inzwischen fuenf lokal
+existenzzertifizierte finite-H-Kreisroots bei gematchtem `H*alpha=12` und
+`eta/alpha=15`. Ein unabhaengiger Foundation-Audit reproduziert die Summen,
+den Fixed-gain-Kontinuumsroot und die First-order-Skalierung. Nur der Anchor
+ist lokal numerisch stabilitaetsgeprueft. Die belastbare Lesart ist daher
+„vorbereitete raeumliche Schleifenfamilie“, nicht Formation, internes S1,
+Arbeit oder Masse.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

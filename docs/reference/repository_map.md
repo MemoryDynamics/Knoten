@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-15.
+Stand: 2026-08-21.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -14,7 +14,7 @@ flowchart TD
     root --> src["src/emergenz_knoten<br/>kanonischer Paketkern"]
     root --> experiments["experiments<br/>reproduzierbare Entry-Points"]
     root --> tests["tests<br/>kleine deterministische Tests"]
-    root --> docs["docs<br/>7 aktive Dokumente + Rohmaterial"]
+    root --> docs["docs<br/>9 aktive Dokumente + Rohmaterial"]
     root --> paper["paper<br/>Paper 0, I, II, III und Kindle-PDFs"]
     root --> reports["reports<br/>datierte Evidenz + README-Index"]
     root --> data["data/processed<br/>generated outputs, ignored by default"]
@@ -343,6 +343,33 @@ It deliberately does not contain the preceding `1e8` positions or a PRNG state:
 the Markov branch comparison supplies a fresh explicit common future-noise
 array. Independent seeds remain necessary for inferential claims.
 
+## Native Rotating-wave-Schiene
+
+```mermaid
+flowchart LR
+    equations["rotating_wave.py<br/>finite-H + continuum balance"]
+    discovery["discovery<br/>candidate + controls"]
+    p0d0["P0 / D0<br/>provenance + SO(2) object"]
+    stability["rotating_wave_stability.py<br/>anchor local numerical"]
+    interval["rotating_wave_interval.py<br/>Krawczyk certificates"]
+    ladder["L0--L4<br/>five local roots"]
+    reconcile["fixed-gain continuum<br/>historical target preserved"]
+    audit["foundation audit<br/>independent sums + quadratures"]
+    frontdoor["rotating_wave_foundation.md<br/>claims + next gates"]
+    l5["sealed L5<br/>alpha=.00125, H=9600"]
+
+    equations --> discovery --> p0d0
+    p0d0 --> stability
+    p0d0 --> interval --> ladder --> reconcile --> audit --> frontdoor
+    stability --> audit
+    frontdoor -.prospective protocol first.-> l5
+```
+
+Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
+`experiments/current/dynamics/rotation/`. Das kompakte Artefaktledger liegt
+in `reports/dynamics/rotation/README.md`. Der Pfeil zu L5 ist gestrichelt,
+weil weder Protokoll noch Ergebnis dieser Zelle bereits existieren.
+
 ## Leseregeln
 
 - `src/emergenz_knoten` ist der belastbare Codekern. Der externe Response-
@@ -358,7 +385,7 @@ array. Independent seeds remain necessary for inferential claims.
   gegen eine endliche Realraumhistorie.
 - `experiments/` sind Entry-Points, nicht automatisch stabile API. Reports
   werden erst nach Kontroll- und Reproduzierbarkeitspruefung Evidenz.
-- `docs/` enthaelt nur sieben aktive Arbeitsdokumente; historische Unterordner
+- `docs/` enthaelt nur neun aktive Arbeitsdokumente; historische Unterordner
   sind Rohmaterial.
 - `reports/` sind datierte Zwischenstaende; `reports/README.md` markiert die aktuelle Evidenzschiene und den Status jedes Gate-Typs.
 - `data/processed/` und `results/` bleiben generiert und werden nur nach
@@ -368,7 +395,7 @@ array. Independent seeds remain necessary for inferential claims.
 
 ## Aufraeumregeln
 
-- Die sieben MkDocs-Seiten sind die aktive Steuerzentrale. Neue Arbeitsnotizen
+- Die neun MkDocs-Seiten sind die aktive Steuerzentrale. Neue Arbeitsnotizen
   sollen zuerst dort einsortiert werden, bevor neue Dokumente entstehen.
 - `docs/archive/emergente_raumzeit`, `docs/historical/chatgpt/topics`, `paper/*/archiv`
   und `experiments/archive/legacy` sind Rohmaterial oder historische Referenz, keine

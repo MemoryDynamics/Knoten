@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-20.
+Stand: 2026-08-21.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -81,9 +81,12 @@ zu einem aktuellen Claim. Die aktive Entscheidungsschiene steht unten.
 Entscheidung: Der bisherige kompakte Ast bleibt eine kontrollierte lineare
 Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
 unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
-Parameterpunkt \(A_{\rm att}=3.5\) nun einen lokal numerisch stabilen
-raeumlichen Rotating-wave-Kandidaten. Das ist kein Beleg fuer generische
-Formation, Robustheit oder eine interne Phase nach \(SO(2)\)-Reduktion. Die
+Parameterpunkt \(A_{\rm att}=3.5\) nun eine lokal existenzzertifizierte
+finite-Summen-Rootfamilie und einen lokal numerisch stabilen vorbereiteten
+Anchor. Ein unabhaengiger Foundation-Audit reproduziert alle fuenf Roots,
+den Fixed-gain-Kontinuumsroot und die First-order-Skalierung. Das ist kein
+Beleg fuer generische Formation, Nicht-Anchor-Stabilitaet, Robustheit oder
+eine interne Phase nach \(SO(2)\)-Reduktion. Die
 Portwahl entscheidet weiterhin die mechanische Realisierung: Der sichtbare
 \(x\)-Port selektiert overdamped Memory, waehrend der aus dem Memory
 abgeleitete Center \(c\) unter \(f\,dc\) eine positive passive
@@ -147,6 +150,31 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     [kritische Stabilitaetsreview](project/meta/reviews/scalar_memory_rotating_wave_stability_review_2026-08-20.md)
     fordert weiterhin Spektraleinschliessung, Horizon-/Alpha-Robustheit,
     Formation und Rauschen; Masse und Center-Arbeit bleiben getrennt.
+  - Das lokale
+    [Anchor-Intervallzertifikat](dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.md)
+    und die
+    [fuenfzellige Refinement-Leiter](dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.md)
+    zertifizieren lokal eindeutige finite-Summen-Roots bei
+    \(H\alpha=12\) und \(\eta/\alpha=15\). Der Leiterentscheid bleibt formal
+    `certified-roots-nonconvergent`, weil sein vorab fixierter Guide zu Gain
+    15.016345 statt 15 gehoerte.
+  - Die anschliessende
+    [Fixed-gain-Reconciliation](dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md)
+    besteht alle unveraenderten Skalierungsgates gegen den korrekt bei Gain 15
+    definierten Kontinuumsroot, ohne den historischen Fail umzubenennen.
+  - Der reviewertragende
+    [Foundation-Audit](dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md)
+    reproduziert alle fuenf finite Summen mit Residuen unter
+    \(8\times10^{-72}\), bestimmt den Kontinuumsroot unabhaengig mit
+    Tanh--Sinh und Gauss--Legendre und wiederholt die First-order-Gates. Sein
+    initialer binaerer Decimal-Vergleichsfehler bleibt im
+    [historischen Pipeline-Fail](dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_initial_implementation_fail_2026-08-21.md)
+    sichtbar; nur der vollstaendige prospektiv korrigierte Re-Run traegt das
+    scoped positive Urteil. Das kompakte
+    [Rotations-Ledger](dynamics/rotation/README.md) ordnet alle Artefakte.
+    Der [abschliessende kritische Review](project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md)
+    empfiehlt Main-line-Aufnahme als Basis fuer vorbereitete Schleifen, nicht
+    als Nachweis einer stabilen Familie, Formation oder Masse.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

@@ -12,6 +12,7 @@ nav:
   - Prioritaeten: status/project_priorities.md
   - Theorie: reference/THEORETICAL_CONTEXT.md
   - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
+  - Native Rotating Waves: reference/rotating_wave_foundation.md
   - Repository Map: reference/repository_map.md
   - Experimente: reference/experiment_catalog.md
   - Paper-Claims: status/paper_claims.md

@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-20.
+Stand: 2026-08-21.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -44,6 +44,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate.py` | Intervallzertifikat des finite-H-Anchor-Roots | abgeschlossen, lokaler Existenz-/Eindeutigkeitspass | zwei Multipraezisionspanels, analytischer Jacobian und strikte Krawczyk-Einschluesse fuer die exakte finite Summe; lokale registrierte Box, kein globaler Root- oder Stabilitaetsbeweis |
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder.py` | gematchte finite-H-Rootleiter | abgeschlossen, fuenf Roots zertifiziert / formaler Target-Fail | fuenf Zellen bei H alpha=12 und eta/alpha=15 bestehen alle lokalen Zertifikate; historische Entscheidung `certified-roots-nonconvergent`, weil der eingefrorene Kontinuumsguide zu Gain 15.016345 statt 15 gehoerte |
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation.py` | prospektive Fixed-gain-Kontinuums-Reconciliation | abgeschlossen, Reconciliation-Pass | drei vorab fixierte Quadraturpanels loesen die nativen Grenzgleichungen bei eta/alpha=15; alle unveraenderten Skalierungsgates der vorhandenen Leiter bestehen, ohne den historischen Target-Fail umzubenennen |
+| `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit.py` | kritischer Foundation-Audit der gesamten Rotating-wave-Kette | abgeschlossen, scoped Reconciliation-Pass | neun Inputhashes und sechs Revisionen, unabhaengige 70-stellige finite-Summen-Replays aller fuenf Zellen, Tanh--Sinh-/Gauss--Legendre-Kontinuum und unabhaengiges Skalierungs-Replay; bewahrt den initialen Decimal-Pipeline-Fail und begrenzt Stabilitaet auf den Anchor |
 | `experiments/current/topology/s1_control_pipeline.py` | kandidatenunabhaengige H0/H1-Methodenkontrollen | Methodentraining aktiv, keine Kandidatenanalyse | volle Vietoris--Rips-Persistenz auf Kreis/Hopf, Torus, Disk, Intervall, Dampfspirale und endlichem 12-Zyklus; eigener ungeoeffneter Validation-Seed, kein Cutoff und kein S1-/Phasenclaim |
 | `experiments/current/topology/s1_p0_manifest_gate.py` | claim-spezifischer P0-Kandidaten-/Discovery-Freeze | S1 fail mit 27 Defekten; Center-Mechanik pass mit 0 Defekten | validiert Vollparameter, plattformstabile kanonische Text-/rohe Binaerhashes, Discovery und Confirmatory-Seals; oeffnet je Manifest nur D0 oder A. Der Center-Pass versiegelt D0--D5 explizit, der S1-Fail versiegelt den Ziellauf. |
 | `experiments/current/kernels/controls/fixed_g_nonlinearity_slice.py` | vorregistriertes festes-g-R/L-Gate | abgeschlossen | `R_linear/L={0.03,0.1,0.3}`, fuenf Seeds, eta=0, unveraenderte Composite-Entscheidungsregel |
