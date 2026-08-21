@@ -840,6 +840,16 @@ Prioritaetsfolge:
     Discovery-Selektion und Confirmatory-Seals. D0/D1 wurden folgerichtig
     nicht geoeffnet; dies ist kein negatives Topologieergebnis.
 
+    Der danach getrennt untersuchte native d=2-Rotating-wave-Kandidat ist
+    inzwischen deutlich staerker als eine visuelle Kreisbahn: Der Anchor und
+    vier gematchte finite-H-Zellen besitzen lokale Krawczyk-Rootzertifikate.
+    Eine prospektive Fixed-gain-Reconciliation zeigt First-order-Annaeherung
+    an den nativen Kontinuumsroot bei exakt eta/alpha=15. Dieser Erfolg
+    repariert den frueheren Kontinuums-Targetfehler, aber nicht P0-S: D0
+    identifiziert die Bahn als ambiente SO(2)-Gruppenbahn, die nach Quotient
+    zum Punkt kollabiert. Sie ist daher kein neuer knoteninterner S1-Kandidat
+    und oeffnet weder Topologie- noch Massegates.
+
     Der davon getrennte K0-Memory-Center besteht P0-M mit null Defekten. Alle
     frueheren Centerdaten und Seeds 1--20 sind Discovery, neue Seeds 21--25
     und eine Transferzelle bleiben versiegelt; der Pass oeffnet nur A und

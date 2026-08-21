@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-20.
+Stand: 2026-08-21.
 
 Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
 und historische Zwischenlesarten stehen in den datierten Reports und in
@@ -12,7 +12,7 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
-| Native Rotation | Eine prospektive finite-H-Suche findet im rauschfreien d=2-K0-H bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 einen Kreis mit Residual 4.53e-17. Der volle 2400-dimensionale Quellenstabilitaetstest ergibt lokal \(|\lambda_\perp|=0.99306035\) und Rueckkehr dreier kleiner Stoerungen. | lokal numerisch stabiler vorbereiteter raeumlicher Rotating-wave-Attraktor | keine Spektraleinschliessung, generische Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Vier weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert und bestehen nach prospektiver Zielkorrektur alle urspruenglichen First-order-Grenzgates gegen R_inf=0.9431133068, Omega_inf=1.5855700777. Am Anchor ergibt der volle 2400-dimensionale Quellenstabilitaetstest lokal \(|\lambda_\perp|=0.99306035\). | computerassistierte lokale finite-Summen-Rootfamilie; numerisch konsistenter Kontinuumsast und lokal stabiler vorbereiteter Anchor | Kontinuumsroot nicht intervallzertifiziert; keine globale Eindeutigkeit, Formation, Nicht-Anchor-Stabilitaet, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -47,13 +47,25 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 - Der aktuelle kleine-Radius-Ast ist kompakter als `eta=0`, wird aber fast
   vollstaendig durch den linearen Memory-Center-Relativmodus erklaert.
 - Ein getrennt prospektierter rauschfreier \(d=2\)-K0-H-Parametersatz
-  besitzt eine finite-\(H\)-Rotating-wave-Nullstelle mit Residual
-  \(4.53\,10^{-17}\). Im vollständigen 2400-dimensionalen mitrotierenden
+  besitzt eine lokal existenz- und eindeutigkeitszertifizierte
+  finite-\(H\)-Rotating-wave-Nullstelle. Im vollständigen 2400-dimensionalen mitrotierenden
   Zustand stimmen zwei Arnoldi-Panels für den führenden transversalen
   Multiplikator \(|\lambda|=0.99306035\) bis \(3.1\,10^{-13}\) überein;
   drei registrierte Störungen kontrahieren über 5000 Updates. Das stützt
   lokale numerische Quellenstabilität, nicht vollständige spektrale
   Zertifizierung oder Formation.
+- Vier weitere, ohne Kernel-Retuning gematchte Zellen mit
+  \(H\alpha=12\) und \(\eta/\alpha=15\) besitzen ebenfalls lokale
+  Krawczyk-Zertifikate. Der erste Leiterlauf bleibt formal
+  `certified-roots-nonconvergent`, weil sein eingefrorener Guide zu
+  \(\widehat\eta=15.016345\ldots\) gehörte. Eine danach prospektiv
+  eingefrorene Reconciliation löst die Kontinuumsgleichungen bei exakt 15
+  mit drei Quadraturpanels und findet
+  \((R_\infty,\Omega_\infty)=(0.9431133068,1.5855700777)\). Gegen diesen
+  Zielwert bestehen alle ursprünglichen Skalierungsgates; die Steigungen
+  sind 1.0094/1.0110 und die Richardson-Relativfehler 0.00562/0.00662.
+  Das ist eine numerische First-order-Reconciliation derselben offen
+  gelegten Leiter, keine neue Holdout-Replikation oder Konvergenztheorem.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb

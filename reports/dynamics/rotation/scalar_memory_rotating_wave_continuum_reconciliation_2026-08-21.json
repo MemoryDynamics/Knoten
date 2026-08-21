@@ -1,0 +1,979 @@
+{
+  "all_panels_pass": true,
+  "claim_boundary": {
+    "established_if_pass": "a numerically quadrature-converged fixed-gain continuum root and consistency of the frozen five-cell ladder with the original first-order scaling gates against that corrected target",
+    "not_established": "an interval theorem for the continuum integral, an all-alpha convergence theorem, non-anchor stability, formation, noise robustness, internal S1, work, inertia, or mass"
+  },
+  "continuum_pass": true,
+  "decision": "fixed-gain-continuum-reconciliation-pass",
+  "exception": null,
+  "execution_revision": "996cac2eec9bb4d9c4945e3fbb4d55fd44362375",
+  "generated_utc": "2026-08-21T03:20:06.692392+00:00",
+  "git_status_at_start": "",
+  "historical_ladder_decision": "certified-roots-nonconvergent",
+  "inputs_pass": true,
+  "ladder_integrity": {
+    "gates": {
+      "all_cell_flags": true,
+      "all_cells_certified": true,
+      "anchor_overlap": true,
+      "execution_revision_preserved": true,
+      "historical_decision_preserved": true,
+      "registered_cells_preserved": true
+    },
+    "pass": true
+  },
+  "panel_agreement": {
+    "gates": {
+      "omega_range": true,
+      "radius_range": true
+    },
+    "omega_range": 4.1522341120980855e-14,
+    "pass": true,
+    "radius_range": 4.773959005888173e-15
+  },
+  "panels": [
+    {
+      "component_crosscheck_maximum": 3.876022766635678e-18,
+      "components": {
+        "radial": -1.6181717424346154e-17,
+        "tangential": -0.10570467184785208
+      },
+      "gates": {
+        "all_values_finite": true,
+        "branch_corridor": true,
+        "component_crosscheck": true,
+        "jacobian_condition": true,
+        "negative_tangential_integral": true,
+        "positive_geometry": true,
+        "required_gain": true,
+        "residual": true
+      },
+      "iterations": [
+        {
+          "iteration": 0,
+          "jacobian": [
+            [
+              0.41500504307084335,
+              0.03407712957319506
+            ],
+            [
+              3.3617615024844376,
+              1.6617995949539708
+            ]
+          ],
+          "jacobian_condition_number": 24.714375142660195,
+          "jacobian_determinant": 0.5750960301646416,
+          "newton_step": [
+            -0.00010234698088714833,
+            0.0012464228554187465
+          ],
+          "omega": 1.5868166272376472,
+          "radius": 0.9430108292781663,
+          "residual": [
+            -6.414538496722633e-14,
+            0.0017272388560343188
+          ],
+          "residual_maximum": 0.0017272388560343188
+        },
+        {
+          "iteration": 1,
+          "jacobian": [
+            [
+              0.4147327587603327,
+              0.034134699870987044
+            ],
+            [
+              3.3624159999502035,
+              1.6622197089792219
+            ]
+          ],
+          "jacobian_condition_number": 24.745416791871275,
+          "jacobian_determinant": 0.574601904571045,
+          "newton_step": [
+            -1.3051046207567229e-07,
+            1.2666439863861225e-07
+          ],
+          "omega": 1.5855702043822284,
+          "radius": 0.9431131762590534,
+          "residual": [
+            -4.980331275186126e-08,
+            -2.2828640600103256e-07
+          ],
+          "residual_maximum": 2.2828640600103256e-07
+        },
+        {
+          "iteration": 2,
+          "jacobian": [
+            [
+              0.41473263328063725,
+              0.03413472394106232
+            ],
+            [
+              3.3624157810967126,
+              1.6622196652474706
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376628,
+          "jacobian_determinant": 0.5746016043961352,
+          "newton_step": [
+            -2.733881762307199e-14,
+            4.862308108601147e-14
+          ],
+          "omega": 1.5855700777178297,
+          "radius": 0.9431133067695155,
+          "residual": [
+            -9.67856437356085e-15,
+            -1.1102230246251565e-14
+          ],
+          "residual_maximum": 1.1102230246251565e-14
+        },
+        {
+          "iteration": 3,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "newton_step": [
+            -3.362005514901162e-17,
+            -6.557496774316284e-17
+          ],
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 4,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "newton_step": [
+            -3.362005514901162e-17,
+            -6.557496774316284e-17
+          ],
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 5,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "newton_step": [
+            -3.362005514901162e-17,
+            -6.557496774316284e-17
+          ],
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 6,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "newton_step": [
+            -3.362005514901162e-17,
+            -6.557496774316284e-17
+          ],
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 7,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "newton_step": [
+            -3.362005514901162e-17,
+            -6.557496774316284e-17
+          ],
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 8,
+          "jacobian": [
+            [
+              0.4147326332806076,
+              0.034134723941068104
+            ],
+            [
+              3.3624157810966833,
+              1.6622196652474703
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763768762,
+          "jacobian_determinant": 0.5746016043960672,
+          "omega": 1.585570077717781,
+          "radius": 0.9431133067695429,
+          "residual": [
+            -1.6181717424346154e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        }
+      ],
+      "jacobian": [
+        [
+          0.4147326332806076,
+          0.034134723941068104
+        ],
+        [
+          3.3624157810966833,
+          1.6622196652474703
+        ]
+      ],
+      "maximum_jacobian_condition_number": 24.745426763768762,
+      "name": "numpy-256",
+      "omega": 1.585570077717781,
+      "pass": true,
+      "quadrature_backend": "numpy",
+      "quadrature_order": 256,
+      "radius": 0.9431133067695429,
+      "required_eta_per_alpha": 14.999999999999998,
+      "residual": [
+        -1.6181717424346154e-17,
+        -2.220446049250313e-16
+      ],
+      "residual_maximum": 2.220446049250313e-16
+    },
+    {
+      "component_crosscheck_maximum": 1.7401444868392346e-17,
+      "components": {
+        "radial": -1.6046192152785466e-17,
+        "tangential": -0.10570467184785083
+      },
+      "gates": {
+        "all_values_finite": true,
+        "branch_corridor": true,
+        "component_crosscheck": true,
+        "jacobian_condition": true,
+        "negative_tangential_integral": true,
+        "positive_geometry": true,
+        "required_gain": true,
+        "residual": true
+      },
+      "iterations": [
+        {
+          "iteration": 0,
+          "jacobian": [
+            [
+              0.41500504307084285,
+              0.03407712957319526
+            ],
+            [
+              3.361761502484451,
+              1.661799594953998
+            ]
+          ],
+          "jacobian_condition_number": 24.71437514266008,
+          "jacobian_determinant": 0.575096030164651,
+          "newton_step": [
+            -0.00010234698088942356,
+            0.001246422855437493
+          ],
+          "omega": 1.5868166272376472,
+          "radius": 0.9430108292781663,
+          "residual": [
+            -6.445050656361806e-14,
+            0.0017272388560578555
+          ],
+          "residual_maximum": 0.0017272388560578555
+        },
+        {
+          "iteration": 1,
+          "jacobian": [
+            [
+              0.41473275876032745,
+              0.03413469987098821
+            ],
+            [
+              3.3624159999502243,
+              1.6622197089792548
+            ]
+          ],
+          "jacobian_condition_number": 24.745416791871655,
+          "jacobian_determinant": 0.5746019045710454,
+          "newton_step": [
+            -1.3051046213497047e-07,
+            1.2666439889214567e-07
+          ],
+          "omega": 1.5855702043822097,
+          "radius": 0.9431131762590557,
+          "residual": [
+            -4.980331276779903e-08,
+            -2.2828640577898796e-07
+          ],
+          "residual_maximum": 2.2828640577898796e-07
+        },
+        {
+          "iteration": 2,
+          "jacobian": [
+            [
+              0.41473263328063203,
+              0.03413472394106349
+            ],
+            [
+              3.3624157810967352,
+              1.6622196652475034
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763766798,
+          "jacobian_determinant": 0.5746016043961353,
+          "newton_step": [
+            -2.7379024124435186e-14,
+            4.8570829490114986e-14
+          ],
+          "omega": 1.5855700777178108,
+          "radius": 0.9431133067695178,
+          "residual": [
+            -9.697022915547415e-15,
+            -1.1324274851176597e-14
+          ],
+          "residual_maximum": 1.1324274851176597e-14
+        },
+        {
+          "iteration": 3,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "newton_step": [
+            -3.322800477915112e-17,
+            -6.636802559114865e-17
+          ],
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 4,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "newton_step": [
+            -3.322800477915112e-17,
+            -6.636802559114865e-17
+          ],
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 5,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "newton_step": [
+            -3.322800477915112e-17,
+            -6.636802559114865e-17
+          ],
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 6,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "newton_step": [
+            -3.322800477915112e-17,
+            -6.636802559114865e-17
+          ],
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 7,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "newton_step": [
+            -3.322800477915112e-17,
+            -6.636802559114865e-17
+          ],
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        },
+        {
+          "iteration": 8,
+          "jacobian": [
+            [
+              0.4147326332806024,
+              0.034134723941069284
+            ],
+            [
+              3.3624157810967055,
+              1.6622196652475032
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763769217,
+          "jacobian_determinant": 0.5746016043960676,
+          "omega": 1.5855700777177621,
+          "radius": 0.9431133067695452,
+          "residual": [
+            -1.6046192152785466e-17,
+            -2.220446049250313e-16
+          ],
+          "residual_maximum": 2.220446049250313e-16
+        }
+      ],
+      "jacobian": [
+        [
+          0.4147326332806024,
+          0.034134723941069284
+        ],
+        [
+          3.3624157810967055,
+          1.6622196652475032
+        ]
+      ],
+      "maximum_jacobian_condition_number": 24.745426763769217,
+      "name": "numpy-512",
+      "omega": 1.5855700777177621,
+      "pass": true,
+      "quadrature_backend": "numpy",
+      "quadrature_order": 512,
+      "radius": 0.9431133067695452,
+      "required_eta_per_alpha": 14.999999999999996,
+      "residual": [
+        -1.6046192152785466e-17,
+        -2.220446049250313e-16
+      ],
+      "residual_maximum": 2.220446049250313e-16
+    },
+    {
+      "component_crosscheck_maximum": 1.3931997916438732e-17,
+      "components": {
+        "radial": -1.1628068299907035e-17,
+        "tangential": -0.10570467184785358
+      },
+      "gates": {
+        "all_values_finite": true,
+        "branch_corridor": true,
+        "component_crosscheck": true,
+        "jacobian_condition": true,
+        "negative_tangential_integral": true,
+        "positive_geometry": true,
+        "required_gain": true,
+        "residual": true
+      },
+      "iterations": [
+        {
+          "iteration": 0,
+          "jacobian": [
+            [
+              0.41500504307085,
+              0.034077129573196335
+            ],
+            [
+              3.361761502484491,
+              1.661799594953974
+            ]
+          ],
+          "jacobian_condition_number": 24.714375142660444,
+          "jacobian_determinant": 0.5750960301646478,
+          "newton_step": [
+            -0.00010234698088465151,
+            0.0012464228553957918
+          ],
+          "omega": 1.5868166272376472,
+          "radius": 0.9430108292781663,
+          "residual": [
+            -6.38905161415293e-14,
+            0.0017272388560045648
+          ],
+          "residual_maximum": 0.0017272388560045648
+        },
+        {
+          "iteration": 1,
+          "jacobian": [
+            [
+              0.41473275876034477,
+              0.034134699870987203
+            ],
+            [
+              3.3624159999502465,
+              1.6622197089792174
+            ]
+          ],
+          "jacobian_condition_number": 24.745416791871037,
+          "jacobian_determinant": 0.5746019045710614,
+          "newton_step": [
+            -1.3051046207938915e-07,
+            1.2666439891330096e-07
+          ],
+          "omega": 1.5855702043822513,
+          "radius": 0.9431131762590509,
+          "residual": [
+            -4.98033127440279e-08,
+            -2.2828640555694335e-07
+          ],
+          "residual_maximum": 2.2828640555694335e-07
+        },
+        {
+          "iteration": 2,
+          "jacobian": [
+            [
+              0.4147326332806494,
+              0.034134723941062435
+            ],
+            [
+              3.362415781096756,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.745426763766186,
+          "jacobian_determinant": 0.5746016043961515,
+          "newton_step": [
+            -2.7436655528803357e-14,
+            4.868740899376792e-14
+          ],
+          "omega": 1.5855700777178523,
+          "radius": 0.943113306769513,
+          "residual": [
+            -9.716945130466836e-15,
+            -1.1324274851176597e-14
+          ],
+          "residual_maximum": 1.1324274851176597e-14
+        },
+        {
+          "iteration": 3,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "newton_step": [
+            -3.363792173406937e-17,
+            6.804436335741024e-17
+          ],
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        },
+        {
+          "iteration": 4,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "newton_step": [
+            -3.363792173406937e-17,
+            6.804436335741024e-17
+          ],
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        },
+        {
+          "iteration": 5,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "newton_step": [
+            -3.363792173406937e-17,
+            6.804436335741024e-17
+          ],
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        },
+        {
+          "iteration": 6,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "newton_step": [
+            -3.363792173406937e-17,
+            6.804436335741024e-17
+          ],
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        },
+        {
+          "iteration": 7,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "newton_step": [
+            -3.363792173406937e-17,
+            6.804436335741024e-17
+          ],
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        },
+        {
+          "iteration": 8,
+          "jacobian": [
+            [
+              0.4147326332806196,
+              0.03413472394106825
+            ],
+            [
+              3.362415781096726,
+              1.662219665247466
+            ]
+          ],
+          "jacobian_condition_number": 24.74542676376857,
+          "jacobian_determinant": 0.5746016043960833,
+          "omega": 1.5855700777178037,
+          "radius": 0.9431133067695404,
+          "residual": [
+            -1.1628068299907035e-17,
+            0.0
+          ],
+          "residual_maximum": 1.1628068299907035e-17
+        }
+      ],
+      "jacobian": [
+        [
+          0.4147326332806196,
+          0.03413472394106825
+        ],
+        [
+          3.362415781096726,
+          1.662219665247466
+        ]
+      ],
+      "maximum_jacobian_condition_number": 24.74542676376857,
+      "name": "scipy-1024",
+      "omega": 1.5855700777178037,
+      "pass": true,
+      "quadrature_backend": "scipy",
+      "quadrature_order": 1024,
+      "radius": 0.9431133067695404,
+      "required_eta_per_alpha": 15.0,
+      "residual": [
+        -1.1628068299907035e-17,
+        0.0
+      ],
+      "residual_maximum": 1.1628068299907035e-17
+    }
+  ],
+  "protocol": "reports/project/meta/preregistration/scalar_memory_rotating_wave_continuum_reconciliation_protocol_2026-08-21.md",
+  "registration": {
+    "amplitude_att": 3.5,
+    "amplitude_rep": 1.0,
+    "eta_per_alpha": 15.0,
+    "memory_mass": 1.0,
+    "newton_iterations": 8,
+    "old_guide_omega_start": 1.5868166272376472,
+    "old_guide_radius_start": 0.9430108292781663,
+    "omega_corridor": 0.05,
+    "panel_range_maximum": 5e-11,
+    "panels": [
+      {
+        "name": "numpy-256",
+        "quadrature_backend": "numpy",
+        "quadrature_order": 256
+      },
+      {
+        "name": "numpy-512",
+        "quadrature_backend": "numpy",
+        "quadrature_order": 512
+      },
+      {
+        "name": "scipy-1024",
+        "quadrature_backend": "scipy",
+        "quadrature_order": 1024
+      }
+    ],
+    "radius_corridor": 0.05,
+    "residual_maximum": 1e-12,
+    "sealed_amplitude_holdout": 7.0,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0,
+    "tail_extent": 12.0
+  },
+  "scaling": {
+    "gates": {
+      "omega_error_monotone": true,
+      "omega_fine_to_anchor": true,
+      "omega_richardson": true,
+      "omega_slope": true,
+      "positive_errors": true,
+      "radius_error_monotone": true,
+      "radius_fine_to_anchor": true,
+      "radius_richardson": true,
+      "radius_slope": true
+    },
+    "omega_fine_to_anchor_error_ratio": 0.2475305253554586,
+    "omega_richardson": 1.5855840485974448,
+    "omega_richardson_relative_error": 0.006615290578606381,
+    "omega_slope": 1.0110236196616333,
+    "omega_successive_difference_ratios": [
+      0.4802981027855972,
+      0.4901421361726955,
+      0.4950671318415332
+    ],
+    "pass": true,
+    "radius_fine_to_anchor_error_ratio": 0.24789438918632917,
+    "radius_richardson": 0.9431085650182915,
+    "radius_richardson_relative_error": 0.005618976988172074,
+    "radius_slope": 1.0094437581920903,
+    "radius_successive_difference_ratios": [
+      0.48256038873569157,
+      0.4914716702647136,
+      0.4957800814173292
+    ],
+    "rows": [
+      {
+        "alpha": 0.04,
+        "omega": 1.5500365078147322,
+        "omega_error": 0.03553356990307144,
+        "radius": 0.9572176121167313,
+        "radius_error": 0.01410430534719087
+      },
+      {
+        "alpha": 0.02,
+        "omega": 1.5682772012588133,
+        "omega_error": 0.01729287645899036,
+        "radius": 0.9500002957808805,
+        "radius_error": 0.0068869890113401055
+      },
+      {
+        "alpha": 0.01,
+        "omega": 1.5770381717134991,
+        "omega_error": 0.008531906004304535,
+        "radius": 0.9465175048042239,
+        "radius_error": 0.0034041980346835032
+      },
+      {
+        "alpha": 0.005,
+        "omega": 1.5813322924871047,
+        "omega_error": 0.004237785230698954,
+        "radius": 0.9448058117057436,
+        "radius_error": 0.0016925049362032096
+      },
+      {
+        "alpha": 0.0025,
+        "omega": 1.5834581705422748,
+        "omega_error": 0.002111907175528893,
+        "radius": 0.9439571883620176,
+        "radius_error": 0.0008438815924771692
+      }
+    ],
+    "target_omega": 1.5855700777178037,
+    "target_radius": 0.9431133067695404
+  },
+  "schema": "emergenz-knoten.scalar-memory-rotating-wave-continuum-reconciliation",
+  "schema_version": 1,
+  "source_audit": {
+    "gates": {
+      "gain_mismatch_is_material": true,
+      "registered_gain_reproduced": true,
+      "registered_omega_reproduced": true,
+      "registered_radius_reproduced": true
+    },
+    "observed": {
+      "omega": 1.5868166272376472,
+      "radius": 0.9430108292781663,
+      "required_eta_per_alpha": 15.016345187237246
+    },
+    "pass": true
+  },
+  "sources": {
+    "discovery": "reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.json",
+    "ladder": "reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.json"
+  }
+}

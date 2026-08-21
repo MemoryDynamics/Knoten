@@ -536,11 +536,119 @@ Translation und globale Rotation. Weil nur die führenden 24 beziehungsweise
 36 Ritzpaare und keine zertifizierte Einschließung aller Eigenwerte vorliegen,
 bleibt die mathematisch strenge Formulierung „lokal numerisch stabil“.
 
-Der Pass ist zunächst ein dynamisches, durch räumliche Symmetrie erzeugtes
-\(S^1\)-Resultat. Nach ambientem \(SO(2)\)-Quotienten ist diese Gruppenbahn
-ein Punkt. Das native Schreiben und Vergessen ist zudem ein offener
+Der Pass liefert zunächst eine dynamische, durch räumliche Symmetrie erzeugte
+\(SO(2)\)-Gruppenbahn mit Kreistopologie. Nach ambientem
+\(SO(2)\)-Quotienten ist diese Gruppenbahn ein Punkt. Das native Schreiben
+und Vergessen ist zudem ein offener
 Source-/Sink-Prozess; ohne dessen Arbeitsbilanz ist der Kreis kein
 konservatives Kreisel- oder Massengesetz.
+
+### 7.1.2 Lokale Existenzzertifikate und gematchter Grenzast
+
+Die spätere Prüfung ersetzt die bloße Gleitkomma-Nullstelle durch eine
+computerassistierte lokale Aussage. Für die exakte finite Summe werden die
+beiden nativen Gleichungen
+
+\[
+F_R(R,\theta)=\cos\theta-1+\eta A_H(R,\theta)=0,
+\]
+
+\[
+F_T(R,\theta)=\sin\theta+\eta S_H(R,\theta)=0
+\]
+
+direkt mit analytischer Jacobi-Matrix und gerichteter Intervallarithmetik
+ausgewertet. Ein Krawczyk-Einschluss zertifiziert in der registrierten lokalen
+Box genau eine Nullstelle mit
+
+\[
+R=0.94651750480422396099\ldots,
+\qquad
+\theta=0.01577038171713499190\ldots .
+\]
+
+Unter der unveränderten Skalierung
+
+\[
+H\alpha=12,
+\qquad
+\frac{\eta}{\alpha}=15
+\]
+
+besitzen auch die vier zusätzlichen Zellen
+
+\[
+(\alpha,H)\in
+\{(0.04,300),(0.02,600),(0.005,2400),(0.0025,4800)\}
+\]
+
+lokal eindeutige finite-\(H\)-Nullstellen auf demselben vorregistrierten
+Ast. Die zugehörigen Radien und skalierten Frequenzen nähern sich beim
+Halbieren von \(\alpha\) mit Differenzquotienten gegen \(1/2\).
+
+Der passende Kontinuumsgrenzwert muss bei genau demselben Gain definiert
+werden. Mit
+
+\[
+u(t)=1-\cos(\Omega t),
+\qquad
+q(t)=R^2u(t),
+\qquad
+r(t)^2=2q(t)
+\]
+
+lautet der Double-Gaussian-Faktor ohne Betrags- oder Wurzelstelle
+
+\[
+\varphi(q)
+=-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}
+e^{-q/\sigma_{\rm rep}^2}
++\frac{A_{\rm att}}{\sigma_{\rm att}^2}
+e^{-q/\sigma_{\rm att}^2}.
+\]
+
+Bei \(C=12\) sind die zwei Grenzgleichungen
+
+\[
+I_R(R,\Omega)
+=M_0\int_0^C e^{-t}\varphi(q(t))u(t)\,dt=0,
+\]
+
+\[
+\Omega+15I_T(R,\Omega)=0,
+\qquad
+I_T=M_0\int_0^C e^{-t}\varphi(q(t))\sin(\Omega t)\,dt.
+\]
+
+Drei vorab fixierte Gauss--Legendre-Panels ergeben
+
+\[
+\boxed{
+R_\infty=0.9431133067695404,
+\qquad
+\Omega_\infty=1.5855700777178037
+}.
+\]
+
+Die Panelspannen betragen \(4.77\,10^{-15}\) in \(R\) und
+\(4.15\,10^{-14}\) in \(\Omega\). Gegen diesen korrekt bei
+\(\eta/\alpha=15\) definierten Zielwert bestehen die fünf zertifizierten
+Zellen alle ursprünglichen Skalierungsgates: Die Log-Log-Steigungen sind
+\(1.0094\) und \(1.0110\), die feinsten Anchor-Fehlerquotienten etwa
+\(0.248\) und die relativen Richardson-Fehler \(0.00562\) und \(0.00662\).
+
+Der erste Leiterlauf behält dennoch formal die Entscheidung
+`certified-roots-nonconvergent`: Sein eingefrorener Discovery-Guide gehörte
+nachweislich zu \(\widehat\eta=15.016345187237246\), nicht zu 15. Die
+anschließende prospektive Reconciliation korrigiert diesen Zieldefinitionsfehler,
+ohne das historische Ergebnis umzubenennen.
+
+Damit ist \(x_n=Re^{in\theta}\) hier mehr als ein harmonischer Ansatz: Die
+Reduktion ist algebraisch exakt, und fünf lokale finite-Summen-Nullstellen
+sind computerassistiert zertifiziert. Der Kontinuumsroot bleibt hingegen ein
+hochgenaues numerisches Quadraturresultat ohne Intervalleinschluss. Weder
+globale Eindeutigkeit noch Formation, nichtlokale Stabilität, internes
+\(S^1\), Arbeit, Trägheit oder Masse folgen daraus.
 
 ### 7.2 Zweite Wahl: explizites zweikomponentiges Rotationsgedächtnis
 
