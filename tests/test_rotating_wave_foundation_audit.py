@@ -14,7 +14,13 @@ def test_frozen_foundation_input_hashes_match_repository():
     result = audit.input_hash_audit()
 
     assert result["pass"]
+    assert result["hash_domain"] == "git-head-blob"
     assert len(result["rows"]) == 9
+    assert {row["hash_domain"] for row in result["rows"]} == {"git-head-blob"}
+    assert all(
+        row["observed_sha256"] == row["expected_sha256"]
+        for row in result["rows"]
+    )
 
 
 def test_independent_finite_sum_matches_project_residual_off_target():
@@ -132,7 +138,7 @@ def test_scaling_replay_accepts_exact_first_order_family():
 def test_failed_report_does_not_render_positive_reviewer_verdict():
     payload = {
         "generated_utc": "2026-08-21T00:00:00+00:00",
-        "decision": "foundation-audit-reconciliation-fail",
+        "decision": "foundation-audit-portability-reconciliation-fail",
         "execution_revision": "deadbeef",
         "exception": None,
         "gates": {"synthetic_gate": False},

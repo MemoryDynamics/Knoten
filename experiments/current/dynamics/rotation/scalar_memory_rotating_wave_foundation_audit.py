@@ -26,7 +26,7 @@ def _repo_root() -> Path:
 ROOT = _repo_root()
 PROTOCOL = Path(
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_foundation_audit_reconciliation_protocol_"
+    "scalar_memory_rotating_wave_foundation_portability_reconciliation_protocol_"
     "2026-08-21.md"
 )
 DEFAULT_REPORT = Path(
@@ -76,20 +76,20 @@ CONTINUUM_RECONCILIATION = Path(
 )
 
 EXPECTED_HASHES = {
-    DISCOVERY: "ab47cb3168561e4d9d9535981bda598bfa9815c3c593f65b6fd28d1874c561cb",
+    DISCOVERY: "f9c6409fccd9b3e02c83497428a24ad2d5dfb78d2134bfe4314baaec9e13e830",
     INITIAL_STATE: "4ab3f657cfa68bcd38d73c0722cd718a94e413b33fc46c17bb995b3637808dd2",
     P0_MANIFEST: "3d89d2fe390c24765b23a834ad682b626f5ce3025b44f508afb1509b7fd6efb1",
-    P0_AUDIT: "5ddde8005dd261bbd2aa8bd72906a7395f53d8bb666fb1ce5e9bb5686cdcde4c",
+    P0_AUDIT: "1ab03eddb4d19d41c14abb3d5e289a6b607e558ebc6d66bc2624c99c70d4329e",
     D0_CONTRACT: "4ad70cd38efb87e97509fe253987a6ac0a6dce9555cc37457eaba54a5f822bb2",
-    STABILITY: "8b168d702d335dc5833f63c44cd2aa9b7c762a7ad6ac3ce36b87553a62114930",
+    STABILITY: "43b0d7f5e5ba81dc35d4a2e9d138d3663a3d98b67bcb09ed2d4572d5a01eb86f",
     INTERVAL_CERTIFICATE: (
-        "77558d09f5114a549384916fc15c2dc6113b1c6eb4a2f77f6a3646d6ff2df20c"
+        "63dc4158c0d8a9543230b656b7602feef76a48a2a75fbe6a6e001cb81082a840"
     ),
     REFINEMENT_LADDER: (
-        "9e76e34911261b263278004281822e2b4d36025181e1b9b9daf899aa28770301"
+        "1ba774daf0bf3395c1d0a356a31c8f5aab17eca76de7b32029f49b456cefb279"
     ),
     CONTINUUM_RECONCILIATION: (
-        "8457536836b3fe1f4dc6d83fc74f57b39447978bd62574e5eedbb40294f4cd10"
+        "8008f3846678e8920c1193468e1cacd078ff2c45b2903fbc4ac130431bd68658"
     ),
 }
 
@@ -139,12 +139,15 @@ def _git_output(arguments: list[str]) -> str:
     return result.stdout.strip()
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with (ROOT / path).open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+def _git_blob_sha256(path: Path) -> str:
+    """Hash the exact versioned ``HEAD:path`` blob, independent of checkout EOL."""
+    result = subprocess.run(
+        ["git", "cat-file", "blob", f"HEAD:{path.as_posix()}"],
+        cwd=ROOT,
+        capture_output=True,
+        check=True,
+    )
+    return hashlib.sha256(result.stdout).hexdigest()
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -154,16 +157,21 @@ def _load_json(path: Path) -> dict[str, Any]:
 def input_hash_audit() -> dict[str, Any]:
     rows = []
     for path, expected in EXPECTED_HASHES.items():
-        observed = _sha256(path)
+        observed = _git_blob_sha256(path)
         rows.append(
             {
                 "path": path.as_posix(),
+                "hash_domain": "git-head-blob",
                 "expected_sha256": expected,
                 "observed_sha256": observed,
                 "pass": observed == expected,
             }
         )
-    return {"rows": rows, "pass": all(row["pass"] for row in rows)}
+    return {
+        "hash_domain": "git-head-blob",
+        "rows": rows,
+        "pass": all(row["pass"] for row in rows),
+    }
 
 
 def _revision_is_ancestor(revision: str) -> bool:
@@ -860,9 +868,9 @@ def run_audit() -> dict[str, Any]:
             ),
         }
         decision = (
-            "foundation-audit-reconciliation-pass-scoped"
+            "foundation-audit-portability-reconciliation-pass-scoped"
             if all(gates.values())
-            else "foundation-audit-reconciliation-fail"
+            else "foundation-audit-portability-reconciliation-fail"
         )
         exception = None
     except Exception as error:  # pragma: no cover - result-path safeguard
@@ -874,12 +882,12 @@ def run_audit() -> dict[str, Any]:
         scaling = None
         stored_reconciliation_pass = False
         gates = {}
-        decision = "foundation-audit-reconciliation-inconclusive"
+        decision = "foundation-audit-portability-reconciliation-inconclusive"
         exception = f"{type(error).__name__}: {error}"
 
     return {
         "schema": "emergenz-knoten.scalar-memory-rotating-wave-foundation-audit",
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_utc": datetime.now(UTC).isoformat(),
         "execution_revision": execution_revision,
         "git_status_at_start": start_status,
@@ -954,7 +962,7 @@ def render_report(payload: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "All nine immutable input hashes match, and every recorded",
+            "All nine immutable canonical Git-blob hashes match, and every recorded",
             "execution revision exists in the ancestry of this audit.",
             "",
             "## Independent finite-sum replay",
@@ -1017,7 +1025,10 @@ def render_report(payload: dict[str, Any]) -> str:
         ]
     )
     lines.extend(["", "## Reviewer verdict", ""])
-    if payload["decision"] == "foundation-audit-reconciliation-pass-scoped":
+    if (
+        payload["decision"]
+        == "foundation-audit-portability-reconciliation-pass-scoped"
+    ):
         lines.extend(
             [
                 "The evidence chain is suitable as a **scoped mathematical and",
