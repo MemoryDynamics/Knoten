@@ -663,9 +663,11 @@ anschließende prospektive Reconciliation korrigiert diesen Zieldefinitionsfehle
 ohne das historische Ergebnis umzubenennen.
 
 Damit ist \(x_n=Re^{in\theta}\) hier mehr als ein harmonischer Ansatz: Die
-Reduktion ist algebraisch exakt, und fünf lokale finite-Summen-Nullstellen
-sind computerassistiert zertifiziert. Der Kontinuumsroot bleibt hingegen ein
-hochgenaues numerisches Quadraturresultat ohne Intervalleinschluss. Weder
+Reduktion ist algebraisch exakt, und sechs lokale finite-Summen-Nullstellen
+sind computerassistiert zertifiziert. Die sechste, separat prospektierte
+L5-Zelle besteht zusaetzlich den direkten 70-stelligen Summen-Replay und alle
+signierten First-order-Gates ohne Retuning. Der Kontinuumsroot bleibt hingegen
+ein hochgenaues numerisches Quadraturresultat ohne Intervalleinschluss. Weder
 globale Eindeutigkeit noch Formation, nichtlokale Stabilität, internes
 \(S^1\), Arbeit, Trägheit oder Masse folgen daraus.
 
@@ -750,20 +752,24 @@ Option 2 oder 3 notwendig.
    Einheitskreis-No-go-Satz.
 2. **Erledigt, numerisch:** prospektive Nullstellensuche, unabhängiger
    Produktionskernel-Check, P0/D0 und lokales Voll-FIFO-Stabilitätsgate.
-3. **Erledigt, mathematisch:** lokales Intervallzertifikat des Anchors und
-   vier weiterer gematchter finite-\(H\)-Zellen.
+3. **Erledigt, mathematisch:** lokale Intervallzertifikate des Anchors und
+   fuenf weiterer gematchter finite-\(H\)-Zellen. Beide Panels verwenden
+   denselben `mpmath.iv`-Backend; ein zweiter Intervallchecker fehlt.
 4. **Erledigt, numerisch:** Fixed-gain-Kontinuums-Reconciliation und
    unabhaengiger Foundation-Audit. Offen bleiben ein Kontinuums-
    Intervalleinschluss und ein vollstaendiger Spektralbeweis.
-5. **Als Nächstes:** genau eine prospektiv eingefrorene L5-Zelle
-   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zunaechst nur als
-   Existenz-/Skalierungstest.
-6. Erst bei bestandenem Nicht-Anchor-Stabilitaetsgate: deterministische Formation aus
+5. **Erledigt, prospektiv:** L5 bei
+   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) besteht das lokale
+   Existenzgate, den direkten Summen-Replay und die vorab fixierte
+   First-order-Diskrimination.
+6. **Als Nächstes:** genau eine zertifizierte Nicht-Anchor-Zelle mit vorab
+   fixierten Arnoldi-Panels, Stoerungen und Stopregeln.
+7. Erst bei bestandenem Nicht-Anchor-Stabilitaetsgate: deterministische Formation aus
    nichtkreisförmigen Historien, dann unabhängige verrauschte Trajektorien.
-7. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
+8. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
    **interne** Phase erst sinnvoll, wenn eine Observable den ambienten
    \(SO(2)\)-Quotienten überlebt.
-8. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
+9. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
    Arbeitsledger für den Center-Port.
 
 Damit bleiben zwei Behauptungen getrennt: Ein stabiler interner

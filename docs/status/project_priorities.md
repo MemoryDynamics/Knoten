@@ -15,7 +15,7 @@ wenn ein Test zwischen konkurrierenden Mechanismen unterscheiden oder eine
 bestehende Interpretation falsifizieren kann.
 
 Der getrennte native Rotating-wave-Ast hat diese Schwelle inzwischen fuer
-**vorbereitete raeumliche Schleifen** erreicht: fuenf finite-H-Roots sind lokal
+**vorbereitete raeumliche Schleifen** erreicht: sechs finite-H-Roots sind lokal
 existenzzertifiziert, der Fixed-gain-Kontinuumsast ist unabhaengig reproduziert
 und der Anchor ist lokal numerisch stabil. Das macht ihn nicht zu einem
 internen S1, materiellen Knoten oder Masseobjekt.
@@ -34,18 +34,22 @@ Programmaeste und heben diese sequentiellen Abhaengigkeiten nicht auf.
    Gate A hasht kanonische Git-Blobs und CI checkt die vollstaendige Historie
    aus; der initiale Implementierungs-Fail und der nichtportable lokale
    Zwischenpass bleiben sichtbar.
-2. **L5-Existenz und Skalierung -- als Naechstes.** Vor dem Lauf genau die
-   Zelle
-   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) mit unveraendertem
-   \(H\alpha=12\), \(\eta/\alpha=15\) und unveraendertem Kernel einfrieren.
-   Primaer sind lokaler Krawczyk-Einschluss, Astkorridor, exakte
-   Dezimalskalierung und eine vorab definierte First-order-Diskrimination.
-   Kein Amplituden-Retuning und kein gleichzeitiges Stabilitaetsclaim.
-3. **Nicht-Anchor-Stabilitaet -- nur nach L5-Existenzpass.** Genau eine
-   zertifizierte Nicht-Anchor-Zelle und zwei feste Arnoldi-Panels plus
-   registrierte Stoerungen vorab waehlen. Ein negativer oder unvollstaendiger
+2. **L5-Existenz und Skalierung -- abgeschlossen.** Die separat eingefrorene
+   Zelle \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) besteht beide
+   80/120-dps-Krawczyk-Panels, den unabhaengigen finite-Summen-Replay und alle
+   vorregistrierten First-order-Diskriminatoren ohne Retuning. Die L1--L5-
+   Steigungen sind 1.0074/1.0086; die signierten L5/L4-Fehlerquotienten sind
+   0.4993/0.4992. Das ist ein lokaler computerassistierter Pass unter der
+   `mpmath.iv`-Vertrauensbasis, kein formal oder zweitimplementiert
+   verifiziertes Intervalltheorem und kein Stabilitaetsclaim.
+3. **Nicht-Anchor-Stabilitaet -- als Naechstes.** Genau eine zertifizierte
+   Nicht-Anchor-Zelle muss vor Einsicht in ein neues Spektrum ausgewaehlt
+   werden; zwei feste Arnoldi-Panels, registrierte Stoerungen, Lauflaenge und
+   Stopregeln sind vorab einzufrieren. Ein negativer oder unvollstaendiger
    Spektralbefund stoppt Formation und Rauschen. Ein Pass bleibt lokal
    numerisch, solange keine vollstaendige Spektraleinschliessung vorliegt.
+   Ein zweiter outward-rounded Intervallbackend ist parallel als
+   Publikations-Hardening sinnvoll, ersetzt dieses Stabilitaetsgate aber nicht.
 4. **Formation und Basin -- nur nach Nicht-Anchor-Stabilitaet.** Feste
    nichtkreisfoermige Historienfamilien, chirality-symmetrische Seeds und eine
    vorbereitete-Bahn-Positivkontrolle vorregistrieren. Erst Basin-Evidenz

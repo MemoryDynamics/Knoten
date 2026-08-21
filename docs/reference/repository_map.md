@@ -355,20 +355,23 @@ flowchart LR
     ladder["L0--L4<br/>five local roots"]
     reconcile["fixed-gain continuum<br/>historical target preserved"]
     audit["foundation audit<br/>independent sums + quadratures"]
+    l5["L5 pass<br/>sixth local root + scaling"]
     frontdoor["rotating_wave_foundation.md<br/>claims + next gates"]
-    l5["sealed L5<br/>alpha=.00125, H=9600"]
+    nonanchor["next: one non-anchor stability cell<br/>protocol before spectrum"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
-    p0d0 --> interval --> ladder --> reconcile --> audit --> frontdoor
+    p0d0 --> interval --> ladder --> reconcile --> audit --> l5 --> frontdoor
     stability --> audit
-    frontdoor -.prospective protocol first.-> l5
+    frontdoor -.prospective protocol first.-> nonanchor
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
 `experiments/current/dynamics/rotation/`. Das kompakte Artefaktledger liegt
-in `reports/dynamics/rotation/README.md`. Der Pfeil zu L5 ist gestrichelt,
-weil weder Protokoll noch Ergebnis dieser Zelle bereits existieren.
+in `reports/dynamics/rotation/README.md`. Der durchgezogene L5-Pfeil markiert
+den scoped Existenz-/Skalierungspass. Nur der Pfeil zur Nicht-Anchor-
+Stabilitaet bleibt gestrichelt, weil Zellwahl und Protokoll noch nicht
+eingefroren sind.
 
 ## Leseregeln
 
