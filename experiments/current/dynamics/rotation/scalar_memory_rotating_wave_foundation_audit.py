@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Callable
 from datetime import UTC, datetime
+from decimal import Decimal
 import hashlib
 import json
 import math
@@ -25,7 +26,8 @@ def _repo_root() -> Path:
 ROOT = _repo_root()
 PROTOCOL = Path(
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_foundation_audit_protocol_2026-08-21.md"
+    "scalar_memory_rotating_wave_foundation_audit_reconciliation_protocol_"
+    "2026-08-21.md"
 )
 DEFAULT_REPORT = Path(
     "reports/dynamics/rotation/"
@@ -419,6 +421,16 @@ def independent_finite_balance(
     return radial_residual, tangential_residual, radial_sum, tangential_sum
 
 
+def exact_decimal_scaling(*, alpha: Any, horizon: int, eta: Any) -> tuple[bool, bool]:
+    """Check the registered products in exact base-ten arithmetic."""
+
+    decimal_alpha = Decimal(str(alpha))
+    decimal_eta = Decimal(str(eta))
+    tail_scaling = decimal_alpha * Decimal(horizon) == Decimal("12")
+    gain_scaling = decimal_eta == Decimal("15") * decimal_alpha
+    return tail_scaling, gain_scaling
+
+
 def finite_ladder_replay(ladder: dict[str, Any]) -> dict[str, Any]:
     rows = []
     with mp.workdps(MP_DPS):
@@ -444,12 +456,15 @@ def finite_ladder_replay(ladder: dict[str, Any]) -> dict[str, Any]:
             radial_eta = (1 - mp.cos(theta)) / radial_sum
             tangential_eta = -mp.sin(theta) / tangential_sum
             gain_error = max(abs(radial_eta - eta), abs(tangential_eta - eta))
+            tail_scaling, gain_scaling = exact_decimal_scaling(
+                alpha=cell["alpha"], horizon=cell["horizon"], eta=cell["eta"]
+            )
             gates = {
                 "residual": residual_maximum <= FINITE_RESIDUAL_MAXIMUM,
                 "physical_signs": radial_sum > 0 and tangential_sum < 0,
                 "gain": gain_error <= FINITE_GAIN_ERROR_MAXIMUM,
-                "tail_scaling": alpha * cell["horizon"] == 12,
-                "gain_scaling": eta / alpha == 15,
+                "tail_scaling": tail_scaling,
+                "gain_scaling": gain_scaling,
             }
             rows.append(
                 {
@@ -845,9 +860,9 @@ def run_audit() -> dict[str, Any]:
             ),
         }
         decision = (
-            "foundation-audit-pass-scoped"
+            "foundation-audit-reconciliation-pass-scoped"
             if all(gates.values())
-            else "foundation-audit-fail"
+            else "foundation-audit-reconciliation-fail"
         )
         exception = None
     except Exception as error:  # pragma: no cover - result-path safeguard
@@ -859,12 +874,12 @@ def run_audit() -> dict[str, Any]:
         scaling = None
         stored_reconciliation_pass = False
         gates = {}
-        decision = "foundation-audit-inconclusive"
+        decision = "foundation-audit-reconciliation-inconclusive"
         exception = f"{type(error).__name__}: {error}"
 
     return {
         "schema": "emergenz-knoten.scalar-memory-rotating-wave-foundation-audit",
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_utc": datetime.now(UTC).isoformat(),
         "execution_revision": execution_revision,
         "git_status_at_start": start_status,
@@ -999,20 +1014,36 @@ def render_report(payload: dict[str, Any]) -> str:
             f"Richardson relative errors: R=`{_fmt(scaling['radius_richardson_relative_error'])}`, "
             f"Omega=`{_fmt(scaling['omega_richardson_relative_error'])}`.",
             "",
-            "## Reviewer verdict",
-            "",
-            "The evidence chain is suitable as a **scoped mathematical and",
-            "numerical foundation for prepared spatial loops**. Exact local",
-            "finite-H existence is certified in five cells, and the fixed-gain",
-            "continuum/scaling result survives a separate multiprecision",
-            "implementation.",
-            "",
-            "The word *stable* remains narrower: only the anchor has strong",
-            "local numerical spectral and perturbative evidence, without a",
-            "complete spectral enclosure. No generic history has formed a",
-            "loop. D0 identifies the circle as an ambient SO(2) group orbit",
-            "that becomes a point in the symmetry quotient, not an internal",
-            "S1. No work, inertia or mass claim follows.",
+        ]
+    )
+    lines.extend(["", "## Reviewer verdict", ""])
+    if payload["decision"] == "foundation-audit-reconciliation-pass-scoped":
+        lines.extend(
+            [
+                "The evidence chain is suitable as a **scoped mathematical and",
+                "numerical foundation for prepared spatial loops**. Exact local",
+                "finite-H existence is certified in five cells, and the fixed-gain",
+                "continuum/scaling result survives a separate multiprecision",
+                "implementation.",
+                "",
+                "The word *stable* remains narrower: only the anchor has strong",
+                "local numerical spectral and perturbative evidence, without a",
+                "complete spectral enclosure. No generic history has formed a",
+                "loop. D0 identifies the circle as an ambient SO(2) group orbit",
+                "that becomes a point in the symmetry quotient, not an internal",
+                "S1. No work, inertia or mass claim follows.",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "No positive foundation verdict is authorized because the",
+                "composite reconciliation did not pass. The machine-readable",
+                "decision and individual gates are authoritative.",
+            ]
+        )
+    lines.extend(
+        [
             "",
             "The next refinement cell remains sealed and was not evaluated by",
             "this audit.",

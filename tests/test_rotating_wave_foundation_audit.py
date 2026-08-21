@@ -38,6 +38,16 @@ def test_independent_finite_sum_matches_project_residual_off_target():
     assert float(tangential) == pytest.approx(expected.imag, abs=2.0e-15)
 
 
+@pytest.mark.parametrize(
+    ("alpha", "horizon", "eta"),
+    [values[1:] for values in audit.EXPECTED_LADDER_CELLS],
+)
+def test_registered_scalings_use_exact_decimal_arithmetic(alpha, horizon, eta):
+    assert audit.exact_decimal_scaling(
+        alpha=alpha, horizon=horizon, eta=eta
+    ) == (True, True)
+
+
 def test_independent_continuum_balance_and_jacobian_match_off_target():
     parameters = {
         "radius": 0.71,
@@ -117,3 +127,31 @@ def test_scaling_replay_accepts_exact_first_order_family():
     assert result["pass"]
     assert float(result["radius_slope"]) == pytest.approx(1.0, abs=1.0e-12)
     assert float(result["omega_slope"]) == pytest.approx(1.0, abs=1.0e-12)
+
+
+def test_failed_report_does_not_render_positive_reviewer_verdict():
+    payload = {
+        "generated_utc": "2026-08-21T00:00:00+00:00",
+        "decision": "foundation-audit-reconciliation-fail",
+        "execution_revision": "deadbeef",
+        "exception": None,
+        "gates": {"synthetic_gate": False},
+        "finite_ladder_replay": {"rows": []},
+        "continuum_replay": {
+            "panels": [],
+            "cross_panel": {"radius_difference": "0", "omega_difference": "0"},
+        },
+        "scaling_replay": {
+            "radius_slope": "1",
+            "omega_slope": "1",
+            "radius_fine_to_anchor_error_ratio": "0.25",
+            "omega_fine_to_anchor_error_ratio": "0.25",
+            "radius_richardson_relative_error": "0.01",
+            "omega_richardson_relative_error": "0.01",
+        },
+    }
+
+    report = audit.render_report(payload)
+
+    assert "suitable as a **scoped" not in report
+    assert "No positive foundation verdict is authorized" in report
