@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber neun Dokumente.
@@ -19,7 +19,7 @@ werden, nicht ueber Einzelbilder.
 ## Die neun aktiven Dokumente
 
 1. [Aktueller Stand](status/current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
-2. [Prioritaeten](status/project_priorities.md) - Was als Naechstes zu tun ist.
+2. [Prioritaeten](status/project_priorities.md) - Die einzige prospektive Gate-Folge.
 3. [Theoretical Context](reference/THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
 4. [Center-Filter und Rotation](reference/scalar_memory_center_filter.md) - lesbare \(B_H\)-Algebra, Grundgroessen und Rotationsbruecke.
 5. [Native Rotating Waves](reference/rotating_wave_foundation.md) - exakte Kreisgleichung, Evidenzleiter und Reviewergrenzen.
@@ -48,6 +48,18 @@ Skalierungsgates. Nur der Anchor ist lokal numerisch stabilitaetsgeprueft,
 und beide Intervallpanels teilen denselben `mpmath.iv`-Backend. Die belastbare Lesart ist daher
 „vorbereitete raeumliche Schleifenfamilie“, nicht Formation, internes S1,
 Arbeit oder Masse.
+
+Der getrennte Center-Ast besitzt zugleich eine exakte \(B_H\)-Reduktion,
+einen passiven effektiven finite-\(H\)-Port und die eng getestete
+Filtertraegheit \(m_{\rm filter}=\tau/\mu\). Er identifiziert aber weder einen
+materiellen Schwerpunkt noch den mikroskopischen Aktuator fuer physische
+Arbeit. Gemeinsame Modellherkunft ist deshalb noch keine gemeinsame Evidenz.
+
+Die Programme werden nun ueber eine einzige falsifizierbare Kette gefuehrt:
+Nach genau einem Nicht-Anchor-Stabilitaetsgate prueft ein prospektiver
+Loop--Center-Test beide Reduktionen erstmals am selben eingefrorenen
+Kandidaten. Erst dessen Pass fuehrt die Arbeitsroute methodisch zusammen;
+Formation, reziproke Mechanik und Interaktionen bleiben nachgelagert.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

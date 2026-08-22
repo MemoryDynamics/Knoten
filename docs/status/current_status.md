@@ -1,18 +1,23 @@
 # Aktueller Stand
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
-Diese Seite ist die kurze wissenschaftliche Frontdoor. Details, Laufprotokolle
-und historische Zwischenlesarten stehen in den datierten Reports und in
-`docs/archive/status/current_status_through_2026-07-21.md`.
+Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
+historische Zwischenlesarten stehen in den datierten Reports sowie im
+[Statusarchiv bis 2026-07-21](../archive/status/current_status_through_2026-07-21.md).
+Die bis 2026-08-21 in der Prioritaetenliste mitgefuehrten Status- und
+Arbeitsbloecke sind zusaetzlich im
+[Prioritaetenarchiv](../archive/status/project_priorities_through_2026-08-21.md)
+vollstaendig erhalten.
 
-## Acht-Punkte-Ueberblick
+## Neun-Punkte-Ueberblick
 
 | Bereich | Evidenz | Belastbare Lesart | Grenze |
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Am 2400-dimensionalen Anchor-Quellenmodell liefert der registrierte Arnoldi-/Perturbationstest lokal \(|\lambda_\perp|=0.99306035\). | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokal numerisch stabiler vorbereiteter Anchor | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine globale Eindeutigkeit, Formation, Nicht-Anchor-Stabilitaet, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 besteht fuenf globale Small-Gain-/Positive-Real-Zellen; B-star reproduziert die Skalierung \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) einschliesslich des registrierten gemeinsamen Holdouts. | passiver effektiver Center-Port und identifizierte Filtertraegheit unter dem gewaehlten Portvertrag | Gate A identifiziert keinen eindeutigen mikroskopischen Aktuator; \(c_H\) ist der Schwerpunkt eines Source-/Sink-Memory, nicht nachgewiesen konservierter Materie; keine physikalische Arbeit oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -36,6 +41,11 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
 - Ein auf die bestehende lokale Kruemmung gematchter LoG-Kernel ist analytisch
   abklingend und exakt zero mean. Das ist eine verfuegbare Nullfamilie, keine
   Evidenz fuer Neutralitaet oder eine bestimmte Amplitude.
+- Der normierte finite-\(H\)-Center ist exakt der Filter \(c_H=B_Hx\) mit
+  \(B_H\) als endlicher geometrischer Reihe. Im untrunkierten lokalen
+  Grenzmodell ergibt die Elimination von \(x-c\) eine freie gedaempfte zweite
+  Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Das ist ein Strukturresultat unter
+  dem gewaehlten Port, kein harmonischer Oszillator oder Materialmassensatz.
 - Die eingeschraenkte lokale skalare Feldentwicklung
   `tau d_t phi=-(c0-c2 Delta+c4 Delta^2)phi+(s0-s2 Delta)rho+...`
   besitzt den stationaeren Transfer
@@ -91,6 +101,14 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   lokal existenzzertifizierte Zellen, nicht auf sechs nachgewiesen stabile
   Schleifen. Beide Intervallpanels verwenden weiterhin denselben
   `mpmath.iv`-Backend; eine unabhaengige formale Verifikation fehlt.
+- Der prospektive finite-\(H\)-A2-Test besteht alle fuenf registrierten
+  Small-Gain-/Positive-Real-Zellen und stuetzt damit einen reziprok
+  realisierbaren effektiven Center-Filter-Port. B-star identifiziert in der
+  nichtlinearen Ringpufferimplementierung die Skalierung
+  \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) und besteht die gemeinsame
+  Holdout-Ecke mit etwa \(6.6\,10^{-6}\) maximalem Relativfehler. Weil Port
+  und Wrapper konstruiert sind, ist dies keine unabhaengige Entdeckung
+  physischer Masse.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
@@ -185,6 +203,29 @@ und historische Zwischenlesarten stehen in den datierten Reports und in
   oder unabhaengige Source-/Target-Dynamik; weitere Koeffizientensuche waere
   nicht identifizierend.
 
+## Status der Zusammenfuehrung
+
+**Evidenz:** Schleifen- und Center-Mechanik-Ast stammen aus derselben nativen
+finite-memory Modellfamilie, wurden aber in getrennten Protokollen und bislang
+nicht gemeinsam am selben dynamischen Kandidaten getestet. Der Schleifenast
+traegt sechs lokale Existenzzertifikate und nur am Anchor lokale numerische
+Stabilitaet. Der Center-Ast traegt einen passiven effektiven Filter-Port und
+eine identifizierte Filtertraegheit, aber keinen ausgewaehlten physischen
+Aktuator.
+
+**Inferenz:** Nach einem prospektiven Nicht-Anchor-Stabilitaetspass ist ein
+gemeinsamer Loop--Center-Kompatibilitaetstest gerechtfertigt. Die gemeinsame
+Modellherkunft allein beweist seine Antwort nicht.
+
+**Hypothese:** Derselbe stabile Relativzustand koennte eine phasenuniforme
+Centerantwort tragen und spaeter ueber eine mikroskopisch reziproke
+Read-/Write-Architektur als interaktionsfaehiges Objekt dienen.
+
+Bis zum Kompatibilitaetspass bleiben die Evidenzclaims getrennt. Die einzige
+aktive Abhaengigkeitskette steht in den
+[Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
+konkurrierende Aufgabenreihenfolge.
+
 ## Kanonische Evidenzschiene
 
 Der kuratierte Einstieg in die mehr als 100 Markdown-Reports liegt in
@@ -217,13 +258,16 @@ wichtig:
 24. `reports/response/reciprocal/same_law_affine_balance_gate_2026-08-11.md`
 25. `reports/memory/closure/continuity_constrained_memory_gate_2026-08-11.md`
 26. `reports/memory/closure/dynamic_green_kernel_selection_gate_2026-08-11.md`
-27. `reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.md`
-28. `reports/dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.md`
-29. `reports/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.md`
-30. `reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.md`
-31. `reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md`
-32. `reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md`
-33. `reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md`
+27. `reports/dynamics/limits/scalar_memory_center_inertial_port_gate_2026-08-16.md`
+28. `reports/dynamics/limits/scalar_memory_center_finite_h_port_a2_2026-08-16.md`
+29. `reports/dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.md`
+30. `reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.md`
+31. `reports/dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.md`
+32. `reports/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.md`
+33. `reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.md`
+34. `reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md`
+35. `reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md`
+36. `reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -251,6 +295,8 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
   FIFO-Map, analytischer Sparse-Jacobian und Symmetriequotient.
 - `experiments/current/dynamics/rotation/README.md`: sequentielle
   Rotationspipeline; `reports/dynamics/rotation/README.md`: Artefaktledger.
+- `experiments/current/dynamics/scaling/scalar_memory_center_*.py`:
+  effektiver Center-Port, finite-H-A2-Zertifikat und B-star-Skalierung.
 - `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
   mit gepaarten One-Way-Kontrollen.
 - `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-
@@ -674,7 +720,8 @@ signierten First-order-Diskriminatoren. Das Voll-FIFO-Stabilitaetsgate besteht
 weiterhin nur am Anchor lokal numerisch. Als naechster sequentieller Schritt
 ist genau eine vorab ausgewaehlte Nicht-Anchor-Stabilitaetszelle priorisiert.
 D1--D5, Formation, Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben
-geschlossen.
+geschlossen. Der anschliessende gemeinsame Loop--Center-Test ist als
+prospektives Kompatibilitaetsgate vorgesehen, aber noch nicht ausgefuehrt.
 
 ## Paper-Status
 
