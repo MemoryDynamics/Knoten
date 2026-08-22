@@ -1,6 +1,6 @@
 # Skalares Gedächtnis, Center-Filter und Rotation
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Diese Seite ist eine Notationsbrücke zwischen dem kanonischen Knotenkern,
 der lokalen Center-Reduktion und möglichen Rotationsarchitekturen. Sie führt
@@ -746,32 +746,31 @@ Für eine Publikation ist Option 1 bereits mathematisch sauber, aber
 ontologisch schmal. Für eine Behauptung emergenter physischer Masse ist
 Option 2 oder 3 notwendig.
 
-## 9. Empfohlene Reihenfolge der nächsten Gates
+## 9. Anschluss an die kanonische Gate-Folge
 
-1. **Erledigt, strukturell:** Algebra von \(B_H\) und lokaler
-   Einheitskreis-No-go-Satz.
-2. **Erledigt, numerisch:** prospektive Nullstellensuche, unabhängiger
-   Produktionskernel-Check, P0/D0 und lokales Voll-FIFO-Stabilitätsgate.
-3. **Erledigt, mathematisch:** lokale Intervallzertifikate des Anchors und
-   fuenf weiterer gematchter finite-\(H\)-Zellen. Beide Panels verwenden
-   denselben `mpmath.iv`-Backend; ein zweiter Intervallchecker fehlt.
-4. **Erledigt, numerisch:** Fixed-gain-Kontinuums-Reconciliation und
-   unabhaengiger Foundation-Audit. Offen bleiben ein Kontinuums-
-   Intervalleinschluss und ein vollstaendiger Spektralbeweis.
-5. **Erledigt, prospektiv:** L5 bei
-   \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) besteht das lokale
-   Existenzgate, den direkten Summen-Replay und die vorab fixierte
-   First-order-Diskrimination.
-6. **Als Nächstes:** genau eine zertifizierte Nicht-Anchor-Zelle mit vorab
-   fixierten Arnoldi-Panels, Stoerungen und Stopregeln.
-7. Erst bei bestandenem Nicht-Anchor-Stabilitaetsgate: deterministische Formation aus
-   nichtkreisförmigen Historien, dann unabhängige verrauschte Trajektorien.
-8. Datengetriebene Kreiskoordinate, Winding und Phasenkopplung sind für eine
-   **interne** Phase erst sinnvoll, wenn eine Observable den ambienten
-   \(SO(2)\)-Quotienten überlebt.
-9. Parallel, aber logisch getrennt: mikroskopischer Aktuator- und
-   Arbeitsledger für den Center-Port.
+Diese Referenz definiert Algebra und Claim-Grenzen, aber keine eigene laufende
+Prioritaetenliste. Der aktuelle Befund steht im
+[Projektstatus](../status/current_status.md), die einzige prospektive
+Abhaengigkeitskette in den
+[Projektprioritaeten](../status/project_priorities.md).
 
-Damit bleiben zwei Behauptungen getrennt: Ein stabiler interner
-\(S^1\)-Zyklus würde noch keine physische Masse beweisen; eine positive
-Center-Filterträgheit beweist noch keinen \(S^1\)-Zyklus.
+Fuer diese Kette liefert die Center-Reduktion drei unveraenderliche
+Anforderungen:
+
+1. Das Loop--Center-Kompatibilitaetsgate muss \(c_H\),
+   \(r=x-c_H\), den exakten finite-\(H\)-Filter \(B_H\) und fuer die
+   Antwort den daraus mit unabhaengig fixiertem \(g_H\) aufgebauten Transfer
+   \(T_{f\to v^c,H}\) am selben eingefrorenen Schleifenkandidaten verwenden.
+   Neu gefittete Pole oder Koeffizienten waeren keine Bestaetigung der
+   Reduktion.
+2. Der effektive passive Wrapper ist eine Positivkontrolle. Ein physischer
+   Masseclaim erfordert weiterhin dynamische Memory-Traeger oder einen
+   hergeleiteten Source-/Write-Aktuator samt Gegenkraft, Randarbeit und
+   Source-/Sink-Ledger.
+3. Eine interne Kreiskoordinate muss den ambienten \(SO(2)\)-Quotienten
+   ueberleben. Sie ist weder Voraussetzung fuer die effektive
+   Center-Filtertraegheit noch deren Konsequenz.
+
+Damit bleiben die Claims auch nach einer methodischen Zusammenfuehrung
+getrennt: Kompatible Loop-/Center-Koordinaten sind noch keine physische Masse,
+und ein positiver Filterkoeffizient ist noch kein interner \(S^1\)-Zyklus.

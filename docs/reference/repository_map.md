@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -356,22 +356,33 @@ flowchart LR
     reconcile["fixed-gain continuum<br/>historical target preserved"]
     audit["foundation audit<br/>independent sums + quadratures"]
     l5["L5 pass<br/>sixth local root + scaling"]
-    frontdoor["rotating_wave_foundation.md<br/>claims + next gates"]
-    nonanchor["next: one non-anchor stability cell<br/>protocol before spectrum"]
+    frontdoor["rotating_wave_foundation.md<br/>evidence + claim boundary"]
+    center["scalar_memory_center_filter.md<br/>B_H + effective center port"]
+    nonanchor["P1: one non-anchor stability cell<br/>protocol before spectrum"]
+    bridge["P2: Loop--Center compatibility<br/>same frozen candidate"]
+    formation["P3: formation + basin<br/>declared histories"]
+    mechanics["P4: reciprocal mechanics<br/>microscopic work ledger"]
+    interaction["P5: controlled<br/>two-loop interaction"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
     p0d0 --> interval --> ladder --> reconcile --> audit --> l5 --> frontdoor
     stability --> audit
     frontdoor -.prospective protocol first.-> nonanchor
+    nonanchor -.pass required.-> bridge
+    center -.independent input.-> bridge
+    bridge -.pass required.-> formation
+    formation -.pass required.-> mechanics
+    mechanics -.pass required.-> interaction
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
 `experiments/current/dynamics/rotation/`. Das kompakte Artefaktledger liegt
 in `reports/dynamics/rotation/README.md`. Der durchgezogene L5-Pfeil markiert
-den scoped Existenz-/Skalierungspass. Nur der Pfeil zur Nicht-Anchor-
-Stabilitaet bleibt gestrichelt, weil Zellwahl und Protokoll noch nicht
-eingefroren sind.
+den scoped Existenz-/Skalierungspass. Alle gestrichelten Pfeile sind
+prospektive Abhaengigkeiten, keine Ergebnisse. P2 ist der einzige vorgesehene
+Zusammenfuehrungspunkt der bisher getrennten Schleifen- und Center-Evidenz;
+ohne P1- und P2-Pass bleiben Formation, Mechanik und Interaktion geschlossen.
 
 ## Leseregeln
 

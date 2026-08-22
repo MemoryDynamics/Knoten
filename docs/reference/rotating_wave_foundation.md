@@ -1,6 +1,6 @@
 # Native Rotating Waves: Gleichungen, Evidenz und Grenzen
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Diese Seite ist die kanonische Frontdoor fuer den positiven raeumlichen
 Schleifenast des unveraenderten skalaren K0-H-Modells. Das kritische
@@ -277,21 +277,23 @@ Source-/Sink-Prozess. Ohne einen mikroskopisch reziproken Aktuator und
 Arbeitsledger folgt aus der Bahn weder konservatives Kreiseln noch
 Traegheitsmasse.
 
-## 7. Naechstes erlaubtes Gate
+## 7. Anschluss an die kanonische Gate-Folge
 
-L5 bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\) ist inzwischen als
-reiner Existenz-/Skalierungstest abgeschlossen. Das naechste sequentielle Gate
-ist genau eine Nicht-Anchor-Stabilitaetszelle. Ihre Auswahl, zwei
-Arnoldi-Panels, Stoerungsrichtungen, Lauflaenge und Stopregeln muessen vor
-Einsicht in ein neues Spektrum eingefroren werden. Erst nach einem solchen
-lokalen numerischen Pass kommen Formation, Basin und Rauschen.
+Diese Foundation-Seite haelt Resultat und Claim-Grenze fest, aber keine
+konkurrierende Prioritaetenliste. Der Status steht unter
+[Aktueller Stand](../status/current_status.md), die einzige prospektive Folge
+unter [Projektprioritaeten](../status/project_priorities.md).
 
-Ein zweiter outward-rounded Intervallbackend ist parallel als
-Publikations-Hardening sinnvoll. Er ersetzt weder Nicht-Anchor-Stabilitaet
-noch einen vollstaendigen Spektralbeweis.
+Fuer den Schleifenast bleiben folgende Abhaengigkeiten zwingend:
 
-Der \(A_{\rm att}=7\)-Holdout bleibt versiegelt. Topologie- und Massegates
-bleiben logisch getrennt.
+- Genau eine Nicht-Anchor-Zelle wird samt Arnoldi-Panels, Stoerungen,
+  Lauflaenge und Stopregeln vor Einsicht in ihr Spektrum eingefroren.
+- Formation, Basin und Rauschen duerfen einen negativen oder unvollstaendigen
+  Stabilitaetsbefund nicht ueberspringen.
+- Ein zweiter outward-rounded Intervallbackend haertet Existenzclaims, ersetzt
+  aber weder Stabilitaet noch einen vollstaendigen Spektralbeweis.
+- Der \(A_{\rm att}=7\)-Holdout bleibt bis zum Formationstor versiegelt;
+  ambiente Topologie und Center-Mechanik koennen kein Schleifengate ersetzen.
 
 ## 8. Reproduzierbarer Einstieg
 

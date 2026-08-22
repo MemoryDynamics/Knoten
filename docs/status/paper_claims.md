@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -48,6 +48,24 @@ Quellen. Ein zweiter Intervallbackend und Nicht-Anchor-Stabilitaet fehlen. Der
 erste Leiter-Fail und der initiale Audit-Pipeline-Fail sowie der anschliessend
 von Linux-CI falsifizierte nichtportable lokale Zwischenpass bleiben
 historisch sichtbar.
+
+### Gate-zu-Claim-Leiter
+
+Neue Paper-Sprache wird nicht aus der gemeinsamen Modellidee, sondern nur aus
+der kanonischen Gate-Folge in den
+[Projektprioritaeten](project_priorities.md) freigeschaltet:
+
+| Freigabe | Nach einem dokumentierten Pass zusaetzlich tragbar | Weiterhin gesperrt |
+| --- | --- | --- |
+| P1 Nicht-Anchor-Stabilitaet | lokale numerische Stabilitaetsevidenz an genau einer deklarierten zweiten Skala | vollstaendige Spektralstabilitaet und stabile Familie |
+| P2 Loop--Center-Kompatibilitaet | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten und effektive Kleinsignalantwort unter dem deklarierten Port | mikroskopischer Aktuator, physische Arbeit oder Masse |
+| P3 Formation/Basin | Formation aus den vorregistrierten Historienfamilien und Basin-Evidenz fuer das getestete Ensemble | globale oder generische Formation und ungetestete Rauschrobustheit |
+| P4 reziproke Single-Loop-Mechanik | geschlossene Gegenkraft-/Arbeitsbilanz der konkret hergeleiteten Mikromechanik; ein effektiver Traegheitskoeffizient, falls aus der Antwort identifiziert | physische Masse, solange ein operationaler Massensatz, Portkalibrierung oder geschlossenes Gesamtledger fehlt oder der Massenterm explizit eingesetzt wurde |
+| P5 Zwei-Loop-Interaktion | kontrollierte reziproke Wechselwirkung zweier einzeln zugelassener Schleifen im getesteten Distanz- und Parameterbereich | Ladung, intrinsischer Spin, universelles Kraftgesetz, Feldtheorie oder Quantisierung |
+
+Ein spaeterer Pass wirkt nicht rueckwirkend: Protokoll, Ergebnis und kritisches
+Review muessen dieselbe enge Formulierung tragen, bevor ein Manuskriptclaim
+hochgestuft wird. Ein `inconclusive` schaltet keine neue Sprache frei.
 
 ## Paper I: Minimal Dynamical Foundation
 
@@ -221,6 +239,8 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Eindeutige `d=3`-Selektion | nicht gestuetzt; seeded d-alpha-N-Scan zeigt kein stabiles Plateau, und der aktuelle komponentenweise Mediator besitzt den rang-erhaltenden Ambient-Transfer `H I_d` | nicht behaupten; vor cross-d-Rechenlaeufen erst einen falsifizierbaren Mechanismus fuer die Unterdrueckung zusaetzlicher Richtungen formulieren |
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
+| Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | ungetestete Kompatibilitaetshypothese; die beiden Befunde stammen aus getrennten Protokollen | erst P1-Nicht-Anchor-Stabilitaet, dann derselbe eingefrorene Kandidat im prospektiven P2-Loop--Center-Gate ohne Retuning |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 
