@@ -1,4 +1,5 @@
 from decimal import Decimal
+import json
 import subprocess
 
 from experiments.current.dynamics.rotation import (
@@ -62,3 +63,46 @@ def test_unrelated_implementation_controls_pass_before_l3_is_opened():
         controls[name]["pass"]
         for name in ("finite_difference", "production_kernel", "d0_quotient")
     )
+
+
+def test_committed_l3_result_retains_every_registered_pass():
+    payload = json.loads((l3.ROOT / l3.DEFAULT_SUMMARY).read_text(encoding="utf-8"))
+
+    assert payload["decision"] == "numerically-stable-source-pass"
+    assert (
+        payload["provenance"]["execution_revision"]
+        == "8719f70273c29f7dbb2bcbab56610a0a706982c3"
+    )
+    assert payload["provenance"]["git_status_at_start"] == ""
+    assert payload["provenance"]["pass"]
+    assert all(
+        row["pass"]
+        for row in payload["provenance"]["dependency_blobs"].values()
+    )
+    assert payload["environment"]["numpy"] == "2.3.5"
+    assert payload["environment"]["scipy"] == "1.17.1"
+    assert payload["full_map_controls"]
+    assert payload["implementation_controls"]["pass"]
+    assert payload["analytic_symmetry_checks"]["pass"]
+    assert payload["jacobian_shape"] == [4800, 4800]
+    assert payload["jacobian_nonzero_entries"] == 19_196
+    assert [panel["returned_eigenpairs"] for panel in payload["spectral_panels"]] == [
+        32,
+        48,
+    ]
+    assert all(panel["panel_pass"] for panel in payload["spectral_panels"])
+    assert payload["panel_agreement"]["pass"]
+    assert len(payload["continuations"]) == 7
+    assert all(
+        row["final_step"] == l3.THRESHOLDS.continuation_steps
+        for row in payload["continuations"]
+    )
+    assert all(payload["gates"][name] for name in (
+        "spectral_controls",
+        "continuation_registration_complete",
+        "stable_spectrum",
+        "registered_perturbation_contraction",
+        "exact_control_pass",
+    ))
+    assert not payload["gates"]["unstable_spectrum"]
+    assert not payload["gates"]["registered_perturbation_growth"]
