@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 ## Worum es geht
 
@@ -83,13 +83,15 @@ Belastbar derzeit:
   Zentrumtranslation auf `20.844` interne Radien, aber `0/5`
   kontrollgetrennte Formmodifikationen. Die scheinbare Shape-Halbwelle folgt
   der freien Kontrolle und ist kein Oszillations- oder neuer Knotenbefund.
-- Ein davon getrennter rauschfreier `d=2`-Ast besitzt fuenf lokal
+- Ein davon getrennter rauschfreier `d=2`-Ast besitzt sechs lokal
   Krawczyk-zertifizierte finite-H-Rotating-wave-Roots bei
   `H*alpha=12`, `eta/alpha=15`. Ein unabhaengiger Foundation-Audit
-  reproduziert alle fuenf Summen und den Fixed-gain-Kontinuumsroot; nur der
-  Anchor besitzt lokale numerische Stabilitaetsevidenz. Das ist eine Basis
-  fuer vorbereitete raeumliche Schleifen, nicht fuer Formation, internes S1,
-  Arbeit oder Masse.
+  reproduziert die historischen fuenf Summen und den
+  Fixed-gain-Kontinuumsroot; ein prospektiver L5-Holdout liefert die sechste
+  Zelle. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in
+  getrennt registrierten Voll-FIFO-Panels. Das ist eine Basis fuer
+  vorbereitete raeumliche Schleifen, nicht fuer eine stabile Familie,
+  Formation, internes S1, Arbeit oder Masse.
 
 Noch nicht belastbar:
 
@@ -182,14 +184,15 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. Die versiegelte L5-Rotating-wave-Zelle
-   `(alpha,H,eta)=(0.00125,9600,0.01875)` prospektiv als reinen
-   Existenz-/Skalierungstest einfrieren und erst dann ausfuehren.
-2. Nur nach L5-Existenzpass genau eine Nicht-Anchor-Stabilitaetszelle
-   vorregistrieren; kein Stability-by-continuation-Claim.
-3. Formation/Basin erst nach diesem Stabilitaetsgate, Rauschen erst nach
-   Formation. `A_att=7` bleibt Holdout.
-4. Internes S1 nach ambientem `SO(2)`-Quotient und Center-Aktuator/Arbeit/Masse
-   als getrennte Programme behandeln.
-5. Paper-I- und P3.8f-Kuration ohne neue AR-/Kernel-/Noise-Suche fortsetzen;
-   die massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.
+1. P2 als prospektiven Loop--Center-Kompatibilitaetstest am in P1 gehaltenen
+   L3-Kandidaten `(alpha,H,eta)=(0.005,2400,0.075)` einfrieren; kein
+   Kernel-/Gain-Retuning und keine neue Antwort vor dem Protokollcommit.
+2. Formation/Basin erst nach P2, Rauschen erst nach Formation. `A_att=7`
+   bleibt Holdout.
+3. Einen mikroskopisch reziproken Aktuator und geschlossenes Arbeitsledger
+   erst nach der effektiven P2-Kompatibilitaet pruefen.
+4. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
+   getrennte Programme behandeln.
+5. Publikations-Hardening mit zweitem Intervallbackend und staerkerer
+   Spektralkontrolle darf parallel laufen, ersetzt aber kein Gate. Die
+   massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

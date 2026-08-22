@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -82,13 +82,16 @@ Entscheidung: Der bisherige kompakte Ast bleibt eine kontrollierte lineare
 Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
 unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
 Parameterpunkt \(A_{\rm att}=3.5\) nun eine lokal existenzzertifizierte
-Folge aus sechs finite-Summen-Rootzellen und einen lokal numerisch stabilen
-vorbereiteten Anchor. Ein unabhaengiger Foundation-Audit reproduziert die
+Folge aus sechs finite-Summen-Rootzellen und lokale numerische
+Stabilitaetsevidenz am vorbereiteten Anchor sowie an L3. Ein unabhaengiger
+Foundation-Audit reproduziert die
 historischen fuenf Roots, den Fixed-gain-Kontinuumsroot und die First-order-
 Skalierung; der danach prospektierte L5-Holdout besteht die Krawczyk-,
-direkten Summen- und signierten Skalierungsgates ohne Retuning. Das ist kein
-Beleg fuer generische Formation, Nicht-Anchor-Stabilitaet, Robustheit oder
-eine interne Phase nach \(SO(2)\)-Reduktion. Die
+direkten Summen- und signierten Skalierungsgates ohne Retuning. Der getrennt
+eingefrorene L3-Test besteht seine zwei Arnoldi- und sechs gespiegelten
+Perturbationspanels. Das ist kein Beleg fuer generische Formation,
+Stabilitaet der ganzen Leiter, Robustheit oder eine interne Phase nach
+\(SO(2)\)-Reduktion. Die
 Portwahl entscheidet weiterhin die mechanische Realisierung: Der sichtbare
 \(x\)-Port selektiert overdamped Memory, waehrend der aus dem Memory
 abgeleitete Center \(c\) unter \(f\,dc\) eine positive passive
@@ -189,9 +192,18 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Die L5/L4-Fehlerquotienten sind 0.4993/0.4992. Das
     [kritische L5-Review](project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md)
     akzeptiert damit sechs lokale Rootzellen, markiert aber `mpmath.iv` als
-    noch nicht durch einen zweiten Intervallbackend verifiziert. Als naechstes
-    ist genau eine prospektive Nicht-Anchor-Stabilitaetszelle erlaubt;
-    Formation, Topologie, Mechanik und Interaktionen bleiben geschlossen.
+    noch nicht durch einen zweiten Intervallbackend verifiziert.
+  - Das danach separat
+    [eingefrorene P1-L3-Protokoll](project/meta/preregistration/scalar_memory_rotating_wave_l3_stability_protocol_2026-08-22.md)
+    und sein
+    [Ergebnis](dynamics/rotation/scalar_memory_rotating_wave_l3_stability_2026-08-22.md)
+    liefern `numerically-stable-source-pass`: beide Arnoldi-Panels stimmen bei
+    \(|\lambda_\perp|=0.99649340\) ueberein, und alle sechs gespiegelten
+    Stoerungsarme kontrahieren. Das
+    [kritische Review](project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md)
+    haelt nur lokale numerische Stabilitaet an dieser zweiten Skala aufrecht.
+    P2 darf nun die Loop--Center-Kompatibilitaet prospektieren; Formation,
+    Topologie, Mechanik und Interaktionen bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

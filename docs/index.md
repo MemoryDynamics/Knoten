@@ -44,10 +44,13 @@ existenzzertifizierte finite-H-Kreisroots bei gematchtem `H*alpha=12` und
 `eta/alpha=15`. Ein unabhaengiger Foundation-Audit reproduziert die Summen,
 den Fixed-gain-Kontinuumsroot und die First-order-Skalierung; der prospektive
 L5-Holdout besteht zusaetzlich die direkten Summen- und signierten
-Skalierungsgates. Nur der Anchor ist lokal numerisch stabilitaetsgeprueft,
-und beide Intervallpanels teilen denselben `mpmath.iv`-Backend. Die belastbare Lesart ist daher
-„vorbereitete raeumliche Schleifenfamilie“, nicht Formation, internes S1,
-Arbeit oder Masse.
+Skalierungsgates. Der anschliessend prospektierte P1-Test stuetzt lokale
+numerische Stabilitaet am Anchor und an L3 mit
+\(|\lambda_\perp|=0.99306035\) beziehungsweise 0.99649340. Beide
+Intervallpanels teilen denselben `mpmath.iv`-Backend, und ARPACK schliesst das
+volle Spektrum nicht ein. Die belastbare Lesart ist daher „vorbereitete
+raeumliche Schleifenfamilie mit zwei lokal getesteten Skalen“, nicht
+Formation, internes S1, Arbeit oder Masse.
 
 Der getrennte Center-Ast besitzt zugleich eine exakte \(B_H\)-Reduktion,
 einen passiven effektiven finite-\(H\)-Port und die eng getestete
@@ -56,10 +59,10 @@ materiellen Schwerpunkt noch den mikroskopischen Aktuator fuer physische
 Arbeit. Gemeinsame Modellherkunft ist deshalb noch keine gemeinsame Evidenz.
 
 Die Programme werden nun ueber eine einzige falsifizierbare Kette gefuehrt:
-Nach genau einem Nicht-Anchor-Stabilitaetsgate prueft ein prospektiver
-Loop--Center-Test beide Reduktionen erstmals am selben eingefrorenen
-Kandidaten. Erst dessen Pass fuehrt die Arbeitsroute methodisch zusammen;
-Formation, reziproke Mechanik und Interaktionen bleiben nachgelagert.
+Nach dem kritisch gehaltenen P1-Pass prueft P2 beide Reduktionen erstmals am
+selben eingefrorenen L3-Kandidaten. Erst ein P2-Pass fuehrt die Arbeitsroute
+methodisch zusammen; Formation, reziproke Mechanik und Interaktionen bleiben
+nachgelagert.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

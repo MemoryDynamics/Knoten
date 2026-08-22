@@ -18,7 +18,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 5 | `scalar_memory_rotating_wave_continuum_reconciliation.py` | korrekt bei festem \(\eta/\alpha=15\) definierter Kontinuumsroot und Wiederanwendung der alten Skalierungsgates | Reconciliation-Pass |
 | 6 | `scalar_memory_rotating_wave_foundation_audit.py` | kanonischer Git-Blob-/Vollhistoriencheck, unabhaengige finite-Summen-Replays, zwei Multipraezisions-Kontinuumspanels und Skalierungs-Replay | portability-scoped Reconciliation-Pass |
 | 7 | `scalar_memory_rotating_wave_l5_existence_scaling.py` | prospektiver sechster Root bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zwei Krawczyk-Panels, direkter Summen-Replay und signierte First-order-Gates | scoped L5-Pass |
-| 8 | `scalar_memory_rotating_wave_l3_stability_gate.py` | prospektiv gewaehlte L3-Zelle, zwei getrennte Arnoldi-Panels und sieben registrierte Voll-FIFO-Fortsetzungen | Protokoll eingefroren; noch nicht ausgefuehrt |
+| 8 | `scalar_memory_rotating_wave_l3_stability_gate.py` | prospektiv gewaehlte L3-Zelle, zwei getrennte Arnoldi-Panels und sieben registrierte Voll-FIFO-Fortsetzungen | lokaler numerischer Pass; kritisch gehalten |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -69,30 +69,35 @@ Die Programme etablieren:
 - eine exakte algebraische Kreisreduktion des nativen Updates;
 - sechs lokal eindeutige finite-H-Roots auf einem gematchten Ast;
 - einen unabhaengig reproduzierten numerischen Kontinuumsroot;
-- lokale numerische Stabilitaetsevidenz am Anchor.
+- lokale numerische Stabilitaetsevidenz am Anchor und an L3.
 
 Sie etablieren nicht:
 
 - globale Rooteindeutigkeit oder ein all-alpha-Theorem;
-- Nicht-Anchor-Stabilitaet oder vollstaendige Spektraleinschliessung;
+- Stabilitaet der uebrigen Nicht-Anchor-Zellen oder vollstaendige
+  Spektraleinschliessung;
 - Formation, Basin, Rauschrobustheit oder Haendigkeitsselektion;
 - internes S1 nach ambientem \(SO(2)\)-Quotient;
 - Arbeit, Traegheit oder Masse.
 
 ## Naechster Schritt
 
-L3 bei \((\alpha,H,\eta)=(0.005,2400,0.075)\) ist vor Einsicht in ein neues
+L3 bei \((\alpha,H,\eta)=(0.005,2400,0.075)\) wurde vor Einsicht in ein neues
 Spektrum als kleinste zertifizierte Zelle in der feineren Kontinuumsrichtung
-ausgewaehlt. Protokoll, zwei unterschiedliche deterministische Arnoldi-Starts,
-gespiegelte Stoerungen, 50 Memory-Zeiten und Stopregeln sind im separaten
-Freeze-Commit festgelegt. Der lange Lauf darf nur aus einem danach
-committeten sauberen Implementierungsstand starten:
+ausgewaehlt. Der Lauf aus sauberem Implementierungscommit besteht beide
+Arnoldi-Panels mit \(|\lambda_\perp|=0.99649340\); alle sechs gespiegelten
+Stoerungsarme kontrahieren ueber 50 Memory-Zeiten. Das separate kritische
+Review haelt nur lokale numerische Stabilitaet an dieser zweiten Skala
+aufrecht.
+
+Reproduktion des eingefrorenen Laufs:
 
 ```bash
 python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_gate.py
 ```
 
 Ein zweiter outward-rounded Intervallbackend bleibt separates
-Publikations-Hardening. P2, Formation, Topologie, Mechanik, Interaktionen und
-der Amplituden-Holdout `A_att=7` bleiben bis zu Lauf und kritischem Review
+Publikations-Hardening. Als naechstes darf P2 die Loop--Center-Kompatibilitaet
+am selben L3-Kandidaten ohne Retuning prospektieren. Formation, Topologie,
+Mechanik, Interaktionen und der Amplituden-Holdout `A_att=7` bleiben
 versiegelt.

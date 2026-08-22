@@ -9,9 +9,9 @@ Reviewergebnis lautet:
 > Die vorhandene Kette ist eine solide mathematische und numerische Basis fuer
 > vorbereitete raeumliche Schleifen. Exakte lokale finite-H-Existenz ist in
 > sechs Zellen computerassistiert unter der `mpmath.iv`-Vertrauensbasis
-> zertifiziert. Stabilitaet ist bislang nur am Anchor lokal numerisch
-> gestuetzt. Formation, internes S1, Arbeit, Traegheit und Masse sind nicht
-> nachgewiesen.
+> zertifiziert. Am Anchor und an der prospektiv gewaehlten feineren L3-Zelle
+> besteht lokale numerische Stabilitaetsevidenz. Formation, internes S1,
+> Arbeit, Traegheit und Masse sind nicht nachgewiesen.
 
 Der Name *Schleife* ist hier praeziser als *Knoten*: Das nachgewiesene Objekt
 ist eine kreisfoermige raeumliche relative Gleichgewichtsbahn. Es ist weder
@@ -186,6 +186,7 @@ identifiziert werden.
 | Fixed-gain-Reconciliation | alle urspruenglichen Skalierungsgates gegen den korrekt bei 15 definierten Kontinuumsroot bestehen | all-alpha-Theorem, Kontinuumsintervall |
 | Foundation-Audit | alle fuenf finite Summen und der Kontinuumsroot unabhaengig in Multipraezision reproduziert | neue Holdout-Replikation oder Stabilitaetsbeweis |
 | L5-Holdout | sechster lokaler Root; beide Krawczyk-Panels, direkter 70-dps-Summen-Replay und signierte First-order-Gates bestehen | zweiter Intervallbackend, Nicht-Anchor-Stabilitaet, Formation |
+| P1 L3-Stabilitaet | zwei getrennte Arnoldi-Panels: \(|\lambda_\perp|=0.9964933977\); sechs gespiegelte Stoerungsarme kontrahieren ueber 50 Memory-Zeiten | vollstaendige Spektraleinschliessung, stabile Leiter, Basin |
 
 Der unabhaengige Audit findet
 
@@ -238,18 +239,38 @@ Intervallpanels verwenden jedoch denselben `mpmath.iv`-Backend. Die Aussage
 bleibt deshalb ein lokaler computerassistierter Beweis unter dieser
 Vertrauensbasis, kein formal oder zweitimplementiert verifiziertes Theorem.
 
+Der danach separat eingefrorene P1-Test verwendet die bereits zertifizierte
+L3-Zelle bei
+\((\alpha,H,\eta)=(0.005,2400,0.075)\). Beide Arnoldi-Panels finden den
+fuehrenden transversalen Multiplikator
+
+\[
+|\lambda_{\perp,3}|=0.996493397718,
+\qquad
+-\frac{\log|\lambda_{\perp,3}|}{\alpha}=0.702553.
+\]
+
+Alle sechs gespiegelten nichttrivialen Stoerungsarme laufen 10000 Updates
+ohne Stop und enden bei hoechstens \(5.48\times10^{-6}\) ihres
+Anfangsabstands. Das kritische Review haelt den lokalen numerischen Pass
+aufrecht, begrenzt ihn aber wegen des unvollstaendigen ARPACK-Spektrums und
+des kleinen Stoerungspanels auf genau diese vorbereitete Zelle.
+
 ## 5. Was „stabil“ derzeit bedeutet
 
-Der Anchor ist ein Fixpunkt der mitrotierenden \(2400\)-dimensionalen
-Voll-FIFO-Map bis zum numerischen Floor. Die zwei berechneten Gruppen von 24
-und 36 groessten Ritzwerten stimmen beim fuehrenden transversalen Paar sehr
-gut ueberein. Das ist starke lokale numerische Evidenz.
+Anchor und L3 sind Fixpunkte ihrer mitrotierenden 2400- beziehungsweise
+4800-dimensionalen Voll-FIFO-Maps bis zum numerischen Floor. Am Anchor stimmen
+die Gruppen von 24 und 36, an L3 die Gruppen von 32 und 48 groessten
+Ritzwerten beim jeweiligen fuehrenden transversalen Paar sehr gut ueberein.
+Das ist starke lokale numerische Evidenz an zwei vorbereiteten Skalen.
 
 Es ist dennoch kein vollstaendiger Beweis, weil ARPACK nicht alle 2400
-Eigenwerte intervallartig einschliesst. Zudem wurde nur ein winziger lokaler
-Stoerungsradius getestet. Deshalb sind die zulaessigen Formulierungen:
+beziehungsweise 4800 Eigenwerte intervallartig einschliesst. Zudem wurde nur
+ein winziger lokaler Stoerungsradius getestet. Deshalb sind die zulaessigen
+Formulierungen:
 
-- „lokal numerisch stabiler vorbereiteter Anchor“;
+- „lokal numerisch stabile vorbereitete relative Gleichgewichte am Anchor und
+  an der deklarierten L3-Zelle“;
 - „sechs lokal existenzzertifizierte Schleifenzellen unter der deklarierten
   Intervall-Vertrauensbasis“.
 
@@ -286,8 +307,9 @@ unter [Projektprioritaeten](../status/project_priorities.md).
 
 Fuer den Schleifenast bleiben folgende Abhaengigkeiten zwingend:
 
-- Genau eine Nicht-Anchor-Zelle wird samt Arnoldi-Panels, Stoerungen,
-  Lauflaenge und Stopregeln vor Einsicht in ihr Spektrum eingefroren.
+- Der gehaltene L3-Pass schliesst P1. P2 muss die Loop--Center-Observablen,
+  Probe, Kontrollen und Stops am selben L3-Kandidaten vor jeder neuen Antwort
+  einfrieren und darf Kernel oder Gain nicht retunen.
 - Formation, Basin und Rauschen duerfen einen negativen oder unvollstaendigen
   Stabilitaetsbefund nicht ueberspringen.
 - Ein zweiter outward-rounded Intervallbackend haertet Existenzclaims, ersetzt
@@ -303,5 +325,7 @@ Fuer den Schleifenast bleiben folgende Abhaengigkeiten zwingend:
   [Evidenz-Ledger auf GitHub](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/README.md).
 - Der maschinenlesbare Foundation-Abschluss ist der
   [Foundation-Audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.json).
-- Der aktuelle sequentielle Abschluss ist der
-  [L5-Existenz-/Skalierungstest](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.json).
+- Der aktuelle sequentielle Abschluss ist das
+  [L3-Stabilitaetsergebnis](https://github.com/MemoryDynamics/Knoten/blob/main/reports/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_2026-08-22.json)
+  mit seinem
+  [kritischen Review](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md).

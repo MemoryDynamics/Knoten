@@ -16,7 +16,7 @@ vollstaendig erhalten.
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
-| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Am 2400-dimensionalen Anchor-Quellenmodell liefert der registrierte Arnoldi-/Perturbationstest lokal \(|\lambda_\perp|=0.99306035\). | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokal numerisch stabiler vorbereiteter Anchor | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine globale Eindeutigkeit, Formation, Nicht-Anchor-Stabilitaet, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an der vorab gewaehlten L3-Zelle \(|\lambda_\perp|=0.99649340\); beide lokalen Perturbationspanels kontrahieren. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokale numerische Stabilitaetsevidenz an zwei vorbereiteten Skalen | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine Stabilitaet der gesamten Leiter, globale Eindeutigkeit, Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 besteht fuenf globale Small-Gain-/Positive-Real-Zellen; B-star reproduziert die Skalierung \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) einschliesslich des registrierten gemeinsamen Holdouts. | passiver effektiver Center-Port und identifizierte Filtertraegheit unter dem gewaehlten Portvertrag | Gate A identifiziert keinen eindeutigen mikroskopischen Aktuator; \(c_H\) ist der Schwerpunkt eines Source-/Sink-Memory, nicht nachgewiesen konservierter Materie; keine physikalische Arbeit oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
@@ -101,6 +101,16 @@ vollstaendig erhalten.
   lokal existenzzertifizierte Zellen, nicht auf sechs nachgewiesen stabile
   Schleifen. Beide Intervallpanels verwenden weiterhin denselben
   `mpmath.iv`-Backend; eine unabhaengige formale Verifikation fehlt.
+- Der anschliessend prospektierte P1-Test waehlt L3 ausschliesslich nach
+  Leiterposition und Zustandskosten. Im 4800-dimensionalen Voll-FIFO-Zustand
+  konvergieren die eingefrorenen 32/48-ARPACK-Panels zum fuehrenden
+  transversalen Multiplikator
+  \(|\lambda_\perp|=0.996493397718\); die komplexen Schaetzungen unterscheiden
+  sich um \(7.85\times10^{-13}\). Alle sechs gespiegelten Stoerungsarme
+  kontrahieren ueber 10000 Updates, bei maximalem transientem Faktor 1.002631.
+  Das kritische Review haelt den lokalen Pass aufrecht, aber ARPACK schliesst
+  das volle Spektrum nicht ein und die uebrigen vier Nicht-Anchor-Zellen sind
+  nicht stabilitaetsgeprueft.
 - Der prospektive finite-\(H\)-A2-Test besteht alle fuenf registrierten
   Small-Gain-/Positive-Real-Zellen und stuetzt damit einen reziprok
   realisierbaren effektiven Center-Filter-Port. B-star identifiziert in der
@@ -208,14 +218,14 @@ vollstaendig erhalten.
 **Evidenz:** Schleifen- und Center-Mechanik-Ast stammen aus derselben nativen
 finite-memory Modellfamilie, wurden aber in getrennten Protokollen und bislang
 nicht gemeinsam am selben dynamischen Kandidaten getestet. Der Schleifenast
-traegt sechs lokale Existenzzertifikate und nur am Anchor lokale numerische
-Stabilitaet. Der Center-Ast traegt einen passiven effektiven Filter-Port und
-eine identifizierte Filtertraegheit, aber keinen ausgewaehlten physischen
-Aktuator.
+traegt sechs lokale Existenzzertifikate und am Anchor sowie an L3 lokale
+numerische Stabilitaetsevidenz. Der Center-Ast traegt einen passiven
+effektiven Filter-Port und eine identifizierte Filtertraegheit, aber keinen
+ausgewaehlten physischen Aktuator.
 
-**Inferenz:** Nach einem prospektiven Nicht-Anchor-Stabilitaetspass ist ein
-gemeinsamer Loop--Center-Kompatibilitaetstest gerechtfertigt. Die gemeinsame
-Modellherkunft allein beweist seine Antwort nicht.
+**Inferenz:** Der prospektive und kritisch gehaltene L3-Pass rechtfertigt nun
+einen gemeinsamen Loop--Center-Kompatibilitaetstest an genau diesem Kandidaten.
+Die gemeinsame Modellherkunft allein beweist seine Antwort nicht.
 
 **Hypothese:** Derselbe stabile Relativzustand koennte eine phasenuniforme
 Centerantwort tragen und spaeter ueber eine mikroskopisch reziproke
@@ -716,18 +726,21 @@ waren der Anchor und vier gematchte Zellen lokal intervallzertifiziert. Fixed-ga
 Reconciliation und unabhaengiger Foundation-Audit bestaetigen den
 First-order-Kontinuumsast. Der prospektive L5-Test erweitert ihn ohne
 Retuning auf sechs lokal existenzzertifizierte Zellen und besteht die
-signierten First-order-Diskriminatoren. Das Voll-FIFO-Stabilitaetsgate besteht
-weiterhin nur am Anchor lokal numerisch. Als naechster sequentieller Schritt
-ist genau eine vorab ausgewaehlte Nicht-Anchor-Stabilitaetszelle priorisiert.
-D1--D5, Formation, Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben
-geschlossen. Der anschliessende gemeinsame Loop--Center-Test ist als
-prospektives Kompatibilitaetsgate vorgesehen, aber noch nicht ausgefuehrt.
+signierten First-order-Diskriminatoren. Das separat eingefrorene P1-Gate
+besteht danach an L3 mit zwei konvergierten Arnoldi-Panels,
+\(|\lambda_\perp|=0.99649340\), und sechs kontrahierenden gespiegelten
+Stoerungsarmen. Das kritische Review haelt nur lokale numerische Stabilitaet
+an dieser zweiten Skala aufrecht, keine stabile Leiter. D1--D5, Formation,
+Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben geschlossen. Als
+naechster sequentieller Schritt ist der gemeinsame Loop--Center-Test als
+prospektives P2-Kompatibilitaetsgate zugelassen, aber noch nicht ausgefuehrt.
 
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement. Der native
   Rotating-wave-Befund kann als getrennte technische Notiz ueber sechs lokal
-  existenzzertifizierte vorbereitete Schleifen dienen; keine stabile Familie,
+  existenzzertifizierte vorbereitete Schleifen und lokale numerische
+  Stabilitaetsevidenz an Anchor und L3 dienen; keine stabile Familie,
   Formation oder robuste materielle Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
