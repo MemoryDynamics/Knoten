@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -18,6 +18,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 5 | `scalar_memory_rotating_wave_continuum_reconciliation.py` | korrekt bei festem \(\eta/\alpha=15\) definierter Kontinuumsroot und Wiederanwendung der alten Skalierungsgates | Reconciliation-Pass |
 | 6 | `scalar_memory_rotating_wave_foundation_audit.py` | kanonischer Git-Blob-/Vollhistoriencheck, unabhaengige finite-Summen-Replays, zwei Multipraezisions-Kontinuumspanels und Skalierungs-Replay | portability-scoped Reconciliation-Pass |
 | 7 | `scalar_memory_rotating_wave_l5_existence_scaling.py` | prospektiver sechster Root bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zwei Krawczyk-Panels, direkter Summen-Replay und signierte First-order-Gates | scoped L5-Pass |
+| 8 | `scalar_memory_rotating_wave_l3_stability_gate.py` | prospektiv gewaehlte L3-Zelle, zwei getrennte Arnoldi-Panels und sieben registrierte Voll-FIFO-Fortsetzungen | Protokoll eingefroren; noch nicht ausgefuehrt |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -80,9 +81,18 @@ Sie etablieren nicht:
 
 ## Naechster Schritt
 
-Nach dem scoped L5-Pass darf genau eine Nicht-Anchor-Stabilitaetszelle
-prospektiert werden. Zellwahl, Arnoldi-Panels, Stoerungsrichtungen, Lauflaenge
-und Stopregeln muessen vor jedem neuen Spektralwert committed werden. Ein
-zweiter outward-rounded Intervallbackend ist separates
-Publikations-Hardening. Formation, Topologie, Mechanik, Interaktionen und der
-Amplituden-Holdout `A_att=7` bleiben versiegelt.
+L3 bei \((\alpha,H,\eta)=(0.005,2400,0.075)\) ist vor Einsicht in ein neues
+Spektrum als kleinste zertifizierte Zelle in der feineren Kontinuumsrichtung
+ausgewaehlt. Protokoll, zwei unterschiedliche deterministische Arnoldi-Starts,
+gespiegelte Stoerungen, 50 Memory-Zeiten und Stopregeln sind im separaten
+Freeze-Commit festgelegt. Der lange Lauf darf nur aus einem danach
+committeten sauberen Implementierungsstand starten:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_gate.py
+```
+
+Ein zweiter outward-rounded Intervallbackend bleibt separates
+Publikations-Hardening. P2, Formation, Topologie, Mechanik, Interaktionen und
+der Amplituden-Holdout `A_att=7` bleiben bis zu Lauf und kritischem Review
+versiegelt.
