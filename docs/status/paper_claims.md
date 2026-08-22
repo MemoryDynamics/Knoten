@@ -38,16 +38,17 @@ Als technischer Spin-off ist inzwischen enger tragbar:
   gematchte Zellen bei `H*alpha=12`, `eta/alpha=15`;
 - ein unabhaengig reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
   First-order-Skalierung;
-- lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor.
+- lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
+  prospektiv gewaehlten feineren L3-Zelle.
 
 Das kann eine eigenstaendige mathematische Notiz oder ein Supplement tragen.
 Nicht tragbar sind globale Eindeutigkeit, Stabilitaet der gesamten Familie,
 spontane Formation, internes S1 nach `SO(2)`-Quotient, Arbeit oder Masse. Der
-Foundation-Audit und prospektives L5-Review sind die reviewertragenden
-Quellen. Ein zweiter Intervallbackend und Nicht-Anchor-Stabilitaet fehlen. Der
-erste Leiter-Fail und der initiale Audit-Pipeline-Fail sowie der anschliessend
-von Linux-CI falsifizierte nichtportable lokale Zwischenpass bleiben
-historisch sichtbar.
+Foundation-Audit, prospektives L5-Review und das separate kritische L3-Review
+sind die reviewertragenden Quellen. Ein zweiter Intervallbackend und eine
+vollstaendige Spektraleinschliessung fehlen. Der erste Leiter-Fail und der
+initiale Audit-Pipeline-Fail sowie der anschliessend von Linux-CI falsifizierte
+nichtportable lokale Zwischenpass bleiben historisch sichtbar.
 
 ### Gate-zu-Claim-Leiter
 
@@ -57,7 +58,7 @@ der kanonischen Gate-Folge in den
 
 | Freigabe | Nach einem dokumentierten Pass zusaetzlich tragbar | Weiterhin gesperrt |
 | --- | --- | --- |
-| P1 Nicht-Anchor-Stabilitaet | lokale numerische Stabilitaetsevidenz an genau einer deklarierten zweiten Skala | vollstaendige Spektralstabilitaet und stabile Familie |
+| P1 Nicht-Anchor-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle als zweiter getesteter Skala | vollstaendige Spektralstabilitaet und stabile Familie |
 | P2 Loop--Center-Kompatibilitaet | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten und effektive Kleinsignalantwort unter dem deklarierten Port | mikroskopischer Aktuator, physische Arbeit oder Masse |
 | P3 Formation/Basin | Formation aus den vorregistrierten Historienfamilien und Basin-Evidenz fuer das getestete Ensemble | globale oder generische Formation und ungetestete Rauschrobustheit |
 | P4 reziproke Single-Loop-Mechanik | geschlossene Gegenkraft-/Arbeitsbilanz der konkret hergeleiteten Mikromechanik; ein effektiver Traegheitskoeffizient, falls aus der Antwort identifiziert | physische Masse, solange ein operationaler Massensatz, Portkalibrierung oder geschlossenes Gesamtledger fehlt oder der Massenterm explizit eingesetzt wurde |
@@ -240,7 +241,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
-| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | ungetestete Kompatibilitaetshypothese; die beiden Befunde stammen aus getrennten Protokollen | erst P1-Nicht-Anchor-Stabilitaet, dann derselbe eingefrorene Kandidat im prospektiven P2-Loop--Center-Gate ohne Retuning |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | ungetestete Kompatibilitaetshypothese; P1 laesst L3 als lokal numerisch stabilen gemeinsamen Testkandidaten zu, prueft aber keine Centerantwort | derselbe eingefrorene L3-Kandidat im prospektiven P2-Loop--Center-Gate ohne Retuning |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 

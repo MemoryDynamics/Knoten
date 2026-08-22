@@ -1,6 +1,6 @@
 # Evidenz-Ledger: native rotating waves
 
-Stand: 2026-08-21.
+Stand: 2026-08-22.
 
 Dieses Verzeichnis ist das kanonische Artefaktledger des raeumlichen
 Schleifenasts. Markdown-Dateien sind lesbare Reviews oder Reports; JSON-Dateien
@@ -48,6 +48,14 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       getrennten sauberen Ausfuehrungs-Commit;
     - sechster lokaler Krawczyk-Root, unabhaengiger finite-Summen-Replay und
       alle signierten First-order-Skalierungsgates ohne Retuning bestanden.
+11. `scalar_memory_rotating_wave_l3_stability_2026-08-22.{md,json}`
+    - `numerically-stable-source-pass` aus separat publiziertem Freeze- und
+      Implementierungscommit;
+    - zwei unterschiedliche Arnoldi-Panels stimmen bei
+      \(|\lambda_\perp|=0.99649340\) ueberein, und sechs gespiegelte
+      Stoerungsarme kontrahieren ueber 10000 Updates;
+    - lokale numerische L3-Evidenz, keine vollstaendige Spektraleinschliessung
+      oder stabile Familie.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -66,17 +74,19 @@ Der Foundation-Referee-Text ist
 `reports/project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md`.
 Das nachgelagerte L5-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md`.
-Beide empfehlen nur die enge Formulierung „vorbereitete raeumliche
-Schleifenbasis“; das L5-Review markiert den fehlenden zweiten Intervallbackend
-ausdruecklich.
+Das anschliessende P1-Urteil steht in
+`reports/project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md`.
+Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
+Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
+Skalen“; der fehlende zweite Intervallbackend und die unvollstaendige
+Spektraleinschliessung bleiben ausdruecklich markiert.
 
 ## Aktuelle Lesart
 
 Belastbar sind sechs lokal existenzzertifizierte finite-Summen-Rootzellen mit
 numerisch reconciliertem First-order-Kontinuumsast. Die Zertifikate bleiben
 auf den `mpmath.iv`-Trust-Base konditional; ein unabhaengiger Intervallbackend
-fehlt. Nur der Anchor besitzt lokale numerische Stabilitaetsevidenz. Der Kreis
-ist eine ambiente
-\(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein Punkt. Formation,
-Nicht-Anchor-Stabilitaet, internes S1, Arbeit, Traegheit und Masse bleiben
-offen.
+fehlt. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in ihren
+registrierten Panels; daraus folgt keine stabile sechs-zellige Familie. Der
+Kreis ist eine ambiente \(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein
+Punkt. Formation, internes S1, Arbeit, Traegheit und Masse bleiben offen.

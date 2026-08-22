@@ -358,7 +358,7 @@ flowchart LR
     l5["L5 pass<br/>sixth local root + scaling"]
     frontdoor["rotating_wave_foundation.md<br/>evidence + claim boundary"]
     center["scalar_memory_center_filter.md<br/>B_H + effective center port"]
-    nonanchor["P1: one non-anchor stability cell<br/>protocol before spectrum"]
+    nonanchor["P1 L3 pass<br/>second local numerical scale"]
     bridge["P2: Loop--Center compatibility<br/>same frozen candidate"]
     formation["P3: formation + basin<br/>declared histories"]
     mechanics["P4: reciprocal mechanics<br/>microscopic work ledger"]
@@ -368,8 +368,8 @@ flowchart LR
     p0d0 --> stability
     p0d0 --> interval --> ladder --> reconcile --> audit --> l5 --> frontdoor
     stability --> audit
-    frontdoor -.prospective protocol first.-> nonanchor
-    nonanchor -.pass required.-> bridge
+    frontdoor --> nonanchor
+    nonanchor -.next prospective gate.-> bridge
     center -.independent input.-> bridge
     bridge -.pass required.-> formation
     formation -.pass required.-> mechanics
@@ -378,11 +378,12 @@ flowchart LR
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
 `experiments/current/dynamics/rotation/`. Das kompakte Artefaktledger liegt
-in `reports/dynamics/rotation/README.md`. Der durchgezogene L5-Pfeil markiert
-den scoped Existenz-/Skalierungspass. Alle gestrichelten Pfeile sind
-prospektive Abhaengigkeiten, keine Ergebnisse. P2 ist der einzige vorgesehene
+in `reports/dynamics/rotation/README.md`. Die durchgezogenen L5- und P1-Pfeile
+markieren den scoped Existenz-/Skalierungs- beziehungsweise lokalen
+Nicht-Anchor-Stabilitaetspass. Alle gestrichelten Pfeile sind prospektive
+Abhaengigkeiten, keine Ergebnisse. P2 ist der einzige vorgesehene
 Zusammenfuehrungspunkt der bisher getrennten Schleifen- und Center-Evidenz;
-ohne P1- und P2-Pass bleiben Formation, Mechanik und Interaktion geschlossen.
+ohne P2-Pass bleiben Formation, Mechanik und Interaktion geschlossen.
 
 ## Leseregeln
 

@@ -27,38 +27,21 @@ Bis dahin gelten zwei strikte Grenzen:
 - Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
   Formation.
 
-Die Zusammenfuehrung ist nach P1 erstmals testbar und bei einem P2-Pass
-methodisch erreicht. Sie ist kein vorweggenommener Befund.
+Die Eintrittsbedingung fuer die Zusammenfuehrung ist durch den kritisch
+gehaltenen P1-Pass an L3 erfuellt und im
+[aktuellen Status](current_status.md) dokumentiert. Methodisch erreicht ist
+die Zusammenfuehrung erst bei einem P2-Pass; sie ist kein vorweggenommener
+Befund.
 
 ```mermaid
 flowchart LR
-    p1["P1 Nicht-Anchor-<br/>Stabilitaet"]
     p2["P2 Loop--Center-<br/>Kompatibilitaet"]
     p3["P3 Formation<br/>und Basin"]
     p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
     p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
 
-    p1 --> p2 --> p3 --> p4 --> p5
+    p2 --> p3 --> p4 --> p5
 ```
-
-## P1: Eine Nicht-Anchor-Zelle auf Stabilitaet falsifizieren
-
-**Frage:** Ist die lokale Quellenstabilitaet eine Besonderheit des Anchors,
-oder ueberlebt sie an wenigstens einer vorab gewaehlten zweiten Skala?
-
-Vor Einsicht in ein neues Spektrum werden in einem eigenen Protokoll
-eingefroren:
-
-- genau eine bereits existenzzertifizierte Nicht-Anchor-Zelle;
-- zwei vorab getrennte Arnoldi-Panels samt Toleranzen;
-- Behandlung der neutralen ambienten `SO(2)`-Richtung;
-- Stoerungsrichtungen, Amplituden, Lauflaenge und primaere Metrik;
-- `pass`, `fail` und `inconclusive` einschliesslich harter Stopregeln.
-
-Ein Pass erlaubt nur die Aussage „lokale numerische Stabilitaetsevidenz an
-einer deklarierten Nicht-Anchor-Skala“. Er beweist weder ein vollstaendig
-eingeschlossenes Spektrum noch Stabilitaet der ganzen Leiter. `fail` oder
-`inconclusive` blockiert P2--P5 und oeffnet kein Retuning.
 
 ## P2: Prospektive Loop--Center-Kompatibilitaetsbruecke
 
@@ -66,9 +49,9 @@ eingeschlossenes Spektrum noch Stabilitaet der ganzen Leiter. `fail` oder
 Zustand eine konsistente gemeinsame Reduktion, oder sind sie nur getrennt
 passende Beschreibungen?
 
-Der Test verwendet ohne Kernel- oder Gain-Retuning dieselbe in P1 gepruefte
-Zelle. Vor dem Lauf werden mindestens folgende Groessen und Kontrollen
-festgelegt:
+Der Test verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte
+L3-Zelle bei \((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf werden
+mindestens folgende Groessen und Kontrollen festgelegt:
 
 - \(c_H\) aus der nativen endlichen Historie und \(r_n=x_n-c_{H,n}\);
 - die vorhergesagte Center-Antwort aus
@@ -100,7 +83,7 @@ Erforderlich sind:
 
 - feste nichtkreisfoermige Historienfamilien und unabhaengige Holdouts;
 - chirality-symmetrische Seeds sowie eine vorbereitete-Bahn-Positivkontrolle;
-- unveraenderte Modellparameter aus P1/P2;
+- unveraenderte Modellparameter der zugelassenen L3-Zelle und aus P2;
 - vorab definierte Eintritts-, Verweil- und Abbruchkriterien im quotientierten
   Relativzustand.
 
@@ -143,7 +126,7 @@ Quantisierung folgen daraus nicht.
 
 ## Paralleles Publikations-Hardening
 
-Diese Arbeiten duerfen P1--P5 begleiten, sind aber kein Ersatz fuer sie:
+Diese Arbeiten duerfen P2--P5 begleiten, sind aber kein Ersatz fuer sie:
 
 - mindestens einen Root mit einem unabhaengigen outward-rounded
   Intervallbackend reproduzieren;
