@@ -72,15 +72,15 @@ Gedaechtnisfeld oder eine endliche Memory-Reprasentation.
 
 Sichtbarer Update:
 
-```text
-x_{n+1} = x_n + epsilon xi_n - eta grad (K * rho_n)(x_n)
-```
+$$
+x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla(K\ast\rho_n)(x_n).
+$$
 
 Allgemeines Memory-Update:
 
-```text
-rho_{n+1}(x) = (1 - lambda_m) rho_n(x) + beta G_sigma(x - x_{n+1})
-```
+$$
+\rho_{n+1}(x)=(1-\lambda_m)\rho_n(x)+\beta G_\sigma(x-x_{n+1}).
+$$
 
 mit `0 < lambda_m < 1` und `beta >= 0`. Die oft verwendete Paper-I-Konvention
 ist der normierte Spezialfall `lambda_m = beta = alpha`. Dann bleibt die
@@ -96,26 +96,30 @@ Im urspruenglichen Modell besitzt `rho` keine eigenstaendige raeumliche
 Selbstwechselwirkung. Direkt wirken nur Vergessen, neue Deposition und, in der
 spektralen Erweiterung, eine lineare Glaettung:
 
-```text
-rho_n -> q rho_n + beta G(.-x_(n+1))
-rho_hat_k -> exp(-nu k^2)[q rho_hat_k + beta G_hat_k exp(-i k x_(n+1))].
-```
+$$
+\begin{aligned}
+\rho_n &\to q\rho_n+\beta G(\mathord{\cdot}-x_{n+1}),\\
+\hat\rho_k &\to e^{-\nu k^2}
+\left[q\hat\rho_k+\beta\hat G_k e^{-i k x_{n+1}}\right].
+\end{aligned}
+$$
 
 Die nichttriviale Formrueckkopplung ist daher durch `x` vermittelt:
 
-```text
-rho_n -> grad(K*rho_n)(x_n) -> x_(n+1) -> neue Deposition -> rho_(n+1).
-```
+$$
+\rho_n\to\nabla(K\ast\rho_n)(x_n)\to x_{n+1}
+\xrightarrow{\text{neue Deposition}}\rho_{n+1}.
+$$
 
 Ohne Readout-Rueckkopplung (`eta=0`) bleibt ein getriebener linearer
 Memory-Filter. Fuer eine rohe Fouriermode
 `p_k=exp(-i k x_n)` gilt bei zentrierten Gauss-Inkrementen exakt
 
-```text
-E[p_(n+1) | p_n] = a_k p_n,
-a_k = exp(-epsilon^2 k^2/2),
-q_k = (1-lambda) exp(-nu k^2).
-```
+$$
+\mathbb E[p_{n+1}\mid p_n]=a_kp_n,\qquad
+a_k=e^{-\varepsilon^2k^2/2},\qquad
+q_k=(1-\lambda)e^{-\nu k^2}.
+$$
 
 Der gemeinsame reelle Zustandsblock aus Real-/Imaginaerteil von `p_k` und
 `rho_hat_k` hat nur die reellen Eigenwerte `a_k` und `q_k`, jeweils doppelt.
@@ -161,11 +165,13 @@ Deposition-Konventionen:
 
 Write-/Read-Faktorisierung: Fuer homogene lineare Faltung gilt nach Ausrollen
 
-```text
-Phi_n = K * rho_n
-      = initial term + beta sum_j q^j (K * G)(.-x_{n-j}),
-W_eff = K * G.
-```
+$$
+\begin{aligned}
+\Phi_n&=K\ast\rho_n\\
+&=\text{initial term}+\beta\sum_j q^j(K\ast G)(\mathord{\cdot}-x_{n-j}),\\
+W_{\rm eff}&=K\ast G.
+\end{aligned}
+$$
 
 Die sichtbare skalare Dynamik identifiziert daher nur `W_eff`, nicht `K`
 und `G` getrennt. Weil Faltung kommutativ ist, erzeugt ein blosses Vertauschen
@@ -179,10 +185,10 @@ nicht von einer Glaettung beim Schreiben.
 Praezise kann man jedoch den gesamten Readkernel in einen signierten
 Feldzustand verschieben:
 
-```text
-phi_n = K*rho_n,
-phi_(n+1) = q phi_n + beta (K*G)(.-x_(n+1)).
-```
+$$
+\phi_n=K\ast\rho_n,\qquad
+\phi_{n+1}=q\phi_n+\beta(K\ast G)(\mathord{\cdot}-x_{n+1}).
+$$
 
 Der Readoperator ist dann die Faltungsidentitaet `delta`, sodass `Phi=phi`.
 Die konstante Funktion `K=1` ist nicht die Identitaet: Sie liefert nur
@@ -194,11 +200,11 @@ oder Nichtlinearitaeten enthaelt.
 
 Fuer normierte Gauss-Deposition gilt bei `s=L`:
 
-```text
-L_eff = sqrt(2) L,
-A_eff = A 2^{-d/2},
-(A_eff/L_eff^2)/(A/L^2) = 2^{-(d/2+1)}.
-```
+$$
+L_{\rm eff}=\sqrt{2}L,\qquad
+A_{\rm eff}=A2^{-d/2},\qquad
+\frac{A_{\rm eff}/L_{\rm eff}^2}{A/L^2}=2^{-(d/2+1)}.
+$$
 
 In `d=3` reduziert Matching ohne Renormierung die lokale Steifigkeit um etwa
 Faktor `5.66`. Deshalb ist der naechste faire Kerneltest nicht bloss
@@ -208,23 +214,24 @@ Zero-Mean- und lokale-Kruemmungs-Constraint:
 
 Fuer den unnormalisierten Double-Gaussian-Kernel
 
-```text
-K(r) = A_rep exp(-r^2/(2 L_rep^2)) - A_att exp(-r^2/(2 L_att^2))
-```
+$$
+K(r)=A_{\rm rep}e^{-r^2/(2L_{\rm rep}^2)}
+-A_{\rm att}e^{-r^2/(2L_{\rm att}^2)}.
+$$
 
 setze `q=L_att/L_rep>1` und `a=A_att/A_rep`. Dann ist `int K=0`
 aequivalent zu
 
-```text
-a_zero = q^(-d).
-```
+$$
+a_{\rm zero}=q^{-d}.
+$$
 
 Lokale einwaerts gerichtete lineare Rueckstellung um eine Punktdeposition
 verlangt dagegen
 
-```text
-chi = a/q^2 > 1, also a > q^2.
-```
+$$
+\chi=\frac{a}{q^2}>1,\qquad \text{also }a>q^2.
+$$
 
 Fuer jedes `q>1` und `d>=1` gilt `q^(-d)<1<q^2`. Globale Neutralitaet und
 lokale Rueckstellung liegen fuer diese zweiskalige Reihenfolge deshalb in
@@ -235,10 +242,12 @@ Das ist ein exakter Kernel-Constraint, aber noch kein Knotensatz.
 
 Eine minimale neutrale Erweiterung ist ein dritter, breiter positiver Anteil:
 
-```text
-K_3 = A_rep G(L_rep) - A_att G(L_att) + A_comp G(L_comp),
-A_comp = (A_att L_att^d - A_rep L_rep^d) / L_comp^d.
-```
+$$
+K_3=A_{\rm rep}G(L_{\rm rep})-A_{\rm att}G(L_{\rm att})
++A_{\rm comp}G(L_{\rm comp}),\qquad
+A_{\rm comp}=\frac{A_{\rm att}L_{\rm att}^d-A_{\rm rep}L_{\rm rep}^d}
+{L_{\rm comp}^d}.
+$$
 
 Er nullt das Integral exakt. Sein lokaler Kruemmungsbeitrag ist
 `-A_comp/L_comp^2` und kann fuer `L_comp >> L_att` klein bleiben. Der
@@ -263,10 +272,10 @@ und
 Eine einparametrige abklingende Zero-Mean-Vervollstaendigung derselben lokalen
 Taylor-Kruemmung ist der Laplacian-of-Gaussian-Kernel. Mit `u=r/L` gilt
 
-```text
-K_LoG(r) = B (u^2-d) exp(-u^2/2),
-B = kappa L^2/(d+2).
-```
+$$
+K_{\rm LoG}(r)=B(u^2-d)e^{-u^2/2},\qquad
+B=\frac{\kappa L^2}{d+2}.
+$$
 
 Er besitzt exakt `int K_LoG dx=0` und `Hess K_LoG(0)=kappa I`. Fuer die
 bisherige q=3-Referenz in d=3 ist `kappa=26/9` und bei `L=3` daher
@@ -290,11 +299,13 @@ Unter Translation, `O(d)`-Isotropie, raeumlicher Paritaet und einem lokalen
 skalaren Markov-Feld kann die lineare Antwort systematisch in Potenzen von
 `-Delta` entwickelt werden. Eine bewusst eingeschraenkte Trunkierung lautet
 
-```text
-tau d_t phi = -c0 phi + c2 Delta phi - c4 Delta^2 phi
-              - v phi^2 - u phi^3 + s0 rho - s2 Delta rho,
-H(k,0) = (s0+s2 k^2)/(c0+c2 k^2+c4 k^4).
-```
+$$
+\begin{aligned}
+\tau\partial_t\phi&=-c_0\phi+c_2\Delta\phi-c_4\Delta^2\phi
+-v\phi^2-u\phi^3+s_0\rho-s_2\Delta\rho,\\
+H(k,0)&=\frac{s_0+s_2k^2}{c_0+c_2k^2+c_4k^4}.
+\end{aligned}
+$$
 
 Dies ist keine vollstaendige EFT-Basis. Hoehere Quellderivate, gemischte
 Feld-Gradient-Nichtlinearitaeten und komponentenuebergreifende Felder bleiben
@@ -320,18 +331,18 @@ Ambient-Rang und kann kein `d=3` selektieren. Report:
 
 Eine moegliche lokale Vektorenergie lautet als Future-Work-Ansatz
 
-```text
-F[m;J] = int [
-  a/2 |m|^2
-  + b_L/2 (div m)^2
-  + b_T/2 |grad wedge m|^2
-  + c/2 |Delta m|^2
-  + u/4 |m|^4
-  - J dot m
-  + chi m dot (curl m)
-  + ...
-] dx.
-```
+$$
+\mathcal F[m;J]=\int\left[
+\frac{a}{2}|m|^2
++\frac{b_L}{2}(\nabla\mathbin{\cdot}m)^2
++\frac{b_T}{2}|\nabla\mathbin{\wedge}m|^2
++\frac{c}{2}|\Delta m|^2
++\frac{u}{4}|m|^4
+-J\mathbin{\cdot}m
++\chi m\mathbin{\cdot}(\nabla\mathbin{\times}m)
++\cdots
+\right]\,dx.
+$$
 
 `-J dot m` ist eine gerichtete Trajektorienquelle. Bei festem `J` bricht sie
 `m -> -m`, waehrend die gemeinsame Transformation `(m,J)->(-m,-J)` erhalten
@@ -372,10 +383,10 @@ Auf einer periodischen 1D-Box der Laenge `L_box` kann dasselbe skalare Memory
 mit endlich vielen Fourierkoeffizienten gespeichert werden. Fuer
 `k_m=2 pi m/L_box` lautet das normierte Update
 
-```text
-rho_hat_(n+1,m) = (1-lambda) rho_hat_(n,m)
-                  + lambda M0/L_box exp(-i k_m x_(n+1)).
-```
+$$
+\hat\rho_{n+1,m}=(1-\lambda)\hat\rho_{n,m}
++\frac{\lambda M_0}{L_{\rm box}}e^{-i k_m x_{n+1}}.
+$$
 
 Dies ist keine neue Physik, sondern die Galerkin-Reprasentation der bisherigen
 exponentiell gewichteten Punktspur. Sie ist weiterhin ein expliziter
@@ -386,11 +397,11 @@ Nullmodus ohnehin kraftfrei; Nullintegral ist keine Energieerhaltung.
 
 Die erste echte Modellerweiterung fuegt einen Heat-Semigroup-Schritt hinzu:
 
-```text
-rho_hat_(n+1,m) = exp(-nu k_m^2)
-                  [(1-lambda) rho_hat_(n,m)
-                   + lambda M0/L_box exp(-i k_m x_(n+1))].
-```
+$$
+\hat\rho_{n+1,m}=e^{-\nu k_m^2}
+\left[(1-\lambda)\hat\rho_{n,m}
++\frac{\lambda M_0}{L_{\rm box}}e^{-i k_m x_{n+1}}\right].
+$$
 
 Die 1D-Diffusions-RMS-Laenge ueber eine Memory-Zeit `lambda^-1` ist
 `sqrt(2 nu/lambda)`. `nu=0` stellt das alte Modell bitgenau wieder her.
@@ -701,15 +712,16 @@ propagation speed; a hyperbolic model remains a later, separately tested step.
 For the one-dimensional impulse Green function of the relaxation-diffusion
 law,
 
-```text
-G(r,t) proportional to t^(-1/2) exp[-r^2/(4 D_phi t)-mu_phi t],
-```
+$$
+G(r,t)\propto t^{-1/2}\exp\left[-\frac{r^2}{4D_\phi t}-\mu_\phi t\right].
+$$
 
 the peak solves
 
-```text
-t_peak = [sqrt(1 + 4 mu_phi r^2/D_phi) - 1]/(4 mu_phi).
-```
+$$
+t_{\rm peak}=
+\frac{\sqrt{1+4\mu_\phi r^2/D_\phi}-1}{4\mu_\phi}.
+$$
 
 Thus `t_peak proportional to r^2` is only the weak-decay/near-field limit.
 At large `r/sqrt(D_phi/mu_phi)`, even the diffusive peak crosses toward linear
@@ -727,10 +739,12 @@ the corresponding equation. It neither selects a physical mediator nor three
 dimensions. The next useful question is input identifiability: whether an
 autonomous oriented source has controlled spectral power where
 
-```text
-H_D(k,omega) = 1/(D k^2 + mu - i omega)
-H_T(k,omega) = 1/(c^2 k^2 + omega_0^2 - omega^2 - 2 i gamma omega)
-```
+$$
+\begin{aligned}
+H_D(k,\omega)&=\frac{1}{Dk^2+\mu-i\omega},\\
+H_T(k,\omega)&=\frac{1}{c^2k^2+\omega_0^2-\omega^2-2i\gamma\omega}.
+\end{aligned}
+$$
 
 differ sufficiently in magnitude or phase. Without such source bandwidth, a
 dynamic comparison cannot identify the mechanisms.
@@ -742,10 +756,11 @@ transforms those readouts, and normalizes each model-distance pair only by its
 finite-horizon DC gain. For source-segment power `S_j(omega)` and normalized
 complex responses `H_D`, `H_T`, its primary contrast is
 
-```text
-C_j^2 = sum_omega S_j |H_D-H_T|^2
-        / sum_omega S_j (|H_D|^2+|H_T|^2)/2.
-```
+$$
+C_j^2=
+\frac{\sum_\omega S_j|H_D-H_T|^2}
+{\sum_\omega S_j\left(|H_D|^2+|H_T|^2\right)/2}.
+$$
 
 This is an input-eligibility statistic, not a likelihood ratio and not a
 field-law estimator. A broadband stochastic source may make two deliberately
@@ -777,20 +792,25 @@ dimensions to the transport grid; it is the linear vector extension of the
 scalar channel. With paired active, sign-flipped and off target centers
 `c_+(t), c_-(t), c_0(t)`, the primary post-settling response is
 
-```text
-R_rms = sqrt(mean_t ||c_+(t)-c_0(t)||^2) / R_target,
-E_odd = rms[(c_+-c_0)+(c_--c_0)]
-        / rms[(c_+-c_0)-(c_--c_0)].
-```
+$$
+\begin{aligned}
+R_{\rm rms}&=\frac{\sqrt{\operatorname{mean}_t
+\lVert c_+(t)-c_0(t)\rVert^2}}{R_{\rm target}},\\
+E_{\rm odd}&=
+\frac{\operatorname{rms}[(c_+-c_0)+(c_--c_0)]}
+{\operatorname{rms}[(c_+-c_0)-(c_--c_0)]}.
+\end{aligned}
+$$
 
 This replaces an endpoint cosine, which becomes ill-conditioned when a
 zero-mean source happens to end near zero response. The dynamic separation of
 two model response traces `y_D,y_T` is
 
-```text
-Delta_DT = rms(y_D-y_T)
-           / sqrt((rms(y_D)^2+rms(y_T)^2)/2).
-```
+$$
+\Delta_{DT}=
+\frac{\operatorname{rms}(y_D-y_T)}
+{\sqrt{\left(\operatorname{rms}(y_D)^2+\operatorname{rms}(y_T)^2\right)/2}}.
+$$
 
 The pulse-calibrated couplings, grid and mediator parameters remain fixed.
 Response magnitude, oddness, source/target shape bounds, distance attenuation
@@ -811,16 +831,16 @@ The same construction gives a structural null for ambient dimension
 selection. For either component-wise vector mediator, Fourier transformation
 in time and evaluation at a relational readout position `r` gives
 
-```text
-a_hat(r,omega) = H(r,omega) I_d s_hat(omega).
-```
+$$
+\hat a(r,\omega)=H(r,\omega)I_d\hat s(\omega).
+$$
 
 Consequently its ambient spectral covariance is
 
-```text
-S_a(r,omega) = |H(r,omega)|^2 S_s(omega),
-rank S_a = rank S_s                         when H != 0.
-```
+$$
+S_a(r,\omega)=|H(r,\omega)|^2S_s(\omega),\qquad
+\operatorname{rank}S_a=\operatorname{rank}S_s\quad\text{when }H\ne0.
+$$
 
 Thus a full-rank isotropic source remains full-rank in the supplied ambient
 space. The rule is `O(d)`-equivariant and contains neither a preferred
@@ -851,9 +871,10 @@ scalar self-baseline pending the nonlinear-radius gate. Either unsigned scalar
 choice gives every source the same sign. In the canonical `A_rep=1`, `A_att=35`,
 `sigma_att/sigma_rep=3` slice,
 
-```text
-A_att / sigma_att^2 > A_rep / sigma_rep^2,
-```
+$$
+\frac{A_{\rm att}}{\sigma_{\rm att}^2}>
+\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}.
+$$
 
 so the point-source potential has an attractive local minimum and no radial
 force-sign crossing. This is a parameter consequence, not evidence for charge
@@ -864,11 +885,11 @@ label; charge neutrality would remove a leading signed monopole rather than
 produce universal attraction. The minimal controlled extension is therefore a
 separate signed scalar cross-channel, for example
 
-```text
-x_i' = ... - eta_self grad Phi_i_self
-           - eta_cross s_i s_j grad Phi_j_cross,
-s_i in {-1, 0, +1}.
-```
+$$
+x_i'=\cdots-\eta_{\rm self}\nabla\Phi_{i,\rm self}
+-\eta_{\rm cross}s_is_j\nabla\Phi_{j,\rm cross},\qquad
+s_i\in\{-1,0,+1\}.
+$$
 
 The sign convention and `K_cross` must be chosen explicitly; the labels must
 not be called electric charge until interaction tests justify that language.
@@ -989,10 +1010,14 @@ $A_-$ at a nonstationary geometry is only transient local curvature.
 $A_-$ is therefore derived, not a further parameter. Its scalar isotropic form
 is
 
-```text
-A_- = [[1-g-c,           g-c],
-       [lambda(1-g-c), q+lambda(g-c)]],  q=1-lambda.
-```
+$$
+A_-=
+\begin{pmatrix}
+1-g-c & g-c\\
+\lambda(1-g-c) & q+\lambda(g-c)
+\end{pmatrix},
+\qquad q=1-\lambda.
+$$
 
 The remaining quantities that affect an observed stochastic mode are:
 
@@ -1014,10 +1039,10 @@ A real 2 x 2 matrix with a non-real conjugate eigenpair is real-similar to
 `a E+b J`, `J=[[0,-1],[1,0]]`; `A_-` need not literally have this entry form
 in the physical `(x_-,xbar_-^rho)` coordinates. Its trace and determinant are
 
-```text
-T = 2-lambda-q g-(1+lambda)c,
-D = q(1-g-c).
-```
+$$
+T=2-\lambda-qg-(1+\lambda)c,\qquad
+D=q(1-g-c).
+$$
 
 A stable complex cross-gain interval exists only for
 `g < lambda/(1+lambda)` and requires `c>g` inside that interval. At
@@ -1536,22 +1561,22 @@ spontane mikroskopische Parameterauswahl.
 Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch, weil der
 naechste Schritt vom gespeicherten Feld abhaengt. Der augmentierte Zustand
 
-```text
-z_n = (x_n, rho_n)
-```
+$$
+z_n=(x_n,\rho_n).
+$$
 
 bzw. eine konkrete Memory-Reprasentation ist dagegen die natuerliche
 Markov-Einbettung. Formal gibt es einen Uebergangskern
 
-```text
-P(z, A) = Prob(z_{n+1} in A | z_n = z)
-```
+$$
+P(z,A)=\Pr(z_{n+1}\in A\mid z_n=z).
+$$
 
 und einen positiven, unitalen Operator auf Observablen
 
-```text
-(U f)(z) = E[f(z_{n+1}) | z_n = z].
-```
+$$
+(Uf)(z)=\mathbb E[f(z_{n+1})\mid z_n=z].
+$$
 
 Die Iterationen bilden eine vorwaertsgerichtete Halbgruppe. Das ist im
 stochastischen Fall im Allgemeinen kein deterministischer Algebra-
@@ -1567,9 +1592,9 @@ nicht kodiert.
 
 Fuer denselben sichtbaren Pfad gilt
 
-```text
-rho_{n+1} - rho'_{n+1} = (1 - lambda_m)(rho_n - rho'_n).
-```
+$$
+\rho_{n+1}-\rho'_{n+1}=(1-\lambda_m)(\rho_n-\rho'_n).
+$$
 
 Damit kontrahiert die Memory-Faser pfadweise exponentiell. Die volle Dynamik
 kann trotzdem komplex sein, weil `rho_n` auf die sichtbare Bewegung

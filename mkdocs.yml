@@ -25,6 +25,12 @@ not_in_nav: |
 markdown_extensions:
   - admonition
   - fenced_code
+  - pymdownx.arithmatex:
+      generic: true
   - tables
   - toc:
       permalink: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js

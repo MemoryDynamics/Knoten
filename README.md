@@ -146,6 +146,13 @@ python -m pip install -r docs/requirements.txt
 python -m mkdocs build --strict
 ```
 
+Neue Formeln in Markdown werden inline als `$...$` und als abgesetzte Formel
+zwischen je einer eigenen `$$`-Zeile geschrieben. Fuer bestehende Quellen
+bleiben `\(...\)`, `\[...\]` und LaTeX-Umgebungen unterstuetzt. Mathematische
+Ausdruecke gehoeren nicht in Codebloecke; diese bleiben bewusst woertlich.
+`python -m pytest tests/test_markdown_math.py -q` prueft die Delimiter aller
+versionierten Markdown-Dateien.
+
 ## Aktive Dokumentation
 
 - [Startseite](docs/index.md)
