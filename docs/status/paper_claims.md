@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-08-22.
+Stand: 2026-08-25.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -241,7 +241,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
-| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | ungetestete Kompatibilitaetshypothese; P1 laesst L3 als lokal numerisch stabilen gemeinsamen Testkandidaten zu, prueft aber keine Centerantwort | derselbe eingefrorene L3-Kandidat im prospektiven P2-Loop--Center-Gate ohne Retuning |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | nicht gestuetzt: Der prospektive P2-Lauf bestaetigt zwar die lokale volle FIFO-Tangentenantwort bis maximal \(7.5\times10^{-9}\) relativ und einen quadratischen Restterm, scheitert aber formal in allen Armen an der absoluten Tail-Slope-Grenze. Zudem ist der skalare Ursprungsgain bei L3 negativ und damit ausserhalb der A2/B-star-Klasse | nur als starke lokale matrixwertige Kleinsignaldiagnostik berichten; keine mechanische Objekt-, skalare Filtermassen- oder Portidentifikation. P3 bleibt geschlossen; ein sign-sensitives Long-Recovery-Audit waere outcome-informierte Reconciliation |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 

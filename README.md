@@ -191,11 +191,11 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. P2 als prospektiven Loop--Center-Kompatibilitaetstest am in P1 gehaltenen
-   L3-Kandidaten `(alpha,H,eta)=(0.005,2400,0.075)` einfrieren; kein
-   Kernel-/Gain-Retuning und keine neue Antwort vor dem Protokollcommit.
-2. Formation/Basin erst nach P2, Rauschen erst nach Formation. `A_att=7`
-   bleibt Holdout.
+1. P2-R als outcome-informierten, sign-sensitiven Long-Recovery-Test am
+   unveraenderten L3-Kandidaten prospektieren. Der historische P2-Fail bleibt
+   unveraendert; keine neue Antwort vor dem P2-R-Protokollcommit.
+2. Formation/Basin erst nach einem kritisch gehaltenen P2-R-Pass, Rauschen
+   erst nach Formation. `A_att=7` bleibt Holdout.
 3. Einen mikroskopisch reziproken Aktuator und geschlossenes Arbeitsledger
    erst nach der effektiven P2-Kompatibilitaet pruefen.
 4. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als

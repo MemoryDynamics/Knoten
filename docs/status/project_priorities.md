@@ -27,63 +27,54 @@ Bis dahin gelten zwei strikte Grenzen:
 - Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
   Formation.
 
-Die Eintrittsbedingung fuer die Zusammenfuehrung ist durch den kritisch
-gehaltenen P1-Pass an L3 erfuellt und im
-[aktuellen Status](current_status.md) dokumentiert. Methodisch erreicht ist
-die Zusammenfuehrung erst bei einem P2-Pass; sie ist kein vorweggenommener
-Befund.
+Der erste prospektive P2-Versuch ist im
+[aktuellen Status](current_status.md) dokumentiert und bleibt formal `fail`.
+Er oeffnet P3 nicht. Die aktive Aufgabe ist deshalb eine eng begrenzte,
+outcome-informierte Recovery-Reconciliation ohne Parameter- oder
+Schwellenretuning des historischen Laufs.
 
 ```mermaid
 flowchart LR
-    p2["P2 Loop--Center-<br/>Kompatibilitaet"]
+    p2r["P2-R sign-sensitive<br/>Long-Recovery"]
     p3["P3 Formation<br/>und Basin"]
     p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
     p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
 
-    p2 --> p3 --> p4 --> p5
+    p2r --> p3 --> p4 --> p5
 ```
 
-## P2: Prospektive lokale Loop--Center-Kompatibilitaetsbruecke
+## P2-R: Sign-sensitive Long-Recovery-Reconciliation
 
-**Frage:** Bilden raeumliche Schleife und Center-Filter am selben nativen
-Zustand eine konsistente gemeinsame Reduktion, oder sind sie nur getrennt
-passende Beschreibungen?
+**Frage:** Ist der formale P2-Tail-Fail eine weiterhin konvergierende
+Rueckkehr, die vom absoluten Flatness-Kriterium verworfen wurde, oder geht die
+relative Schleife spaet in Plateau, Oszillation oder outward drift ueber?
 
-Das [Linearisierungs-Audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md)
-trennt zwei moegliche Bruecken. Der fruehere skalare Ursprungsschluss
-\(-g_H(x-c_H)\) ist fuer L3 analytisch nicht zulaessig: Aus den eingefrorenen
-Parametern folgen \(g_H=-0.045833\ldots\) und der instabile skalare Pol
-\(q(1-g_H)=1.040604\ldots\). Dieser Befund darf nicht durch einen an die
-Zielantwort gefitteten positiven Gain repariert werden. Lokal passend ist
-stattdessen der vollstaendige, matrixwertige Tangentialoperator des
-endlichradigen nichtlinearen Kreises.
+Vor einem neuen Lauf ist ein eigener Vertrag zu veroeffentlichen. Er muss den
+historischen P2-Fail und seine outcome-informierte Herkunft explizit nennen.
+Unveraendert bleiben Kandidat, Kernel, \((\alpha,H,\eta)\), beide
+Probeprofile, Richtungen, Vorzeichen und Amplituden. Neu festgelegt werden nur
+eine laengere probe-off Erholung und sign-sensitive Observablen:
 
-Der [prospektive P2-Vertrag](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/preregistration/scalar_memory_loop_center_p2_protocol_2026-08-25.md)
-verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte L3-Zelle bei
-\((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf sind festgelegt:
+- signed D0-Steigungen in mindestens zwei nichtueberlappenden spaeten
+  Fenstern statt des Betrags allein;
+- logarithmische Abklingrate und monotonie-resistente Envelope;
+- eine feste absolute Final-/Peak-Grenze und eine late-growth Stopregel;
+- vollstaendiger Replay der alten Linearitaets-, Restterm- und
+  Wellenformkontrollen, ohne sie neu zu fitten;
+- `probe-off` und exakte Reproduktion des historischen 2400-Update-
+  Checkpoints vor Oeffnung der zusaetzlichen Zeitspanne.
 
-- \(c_H\) aus der nativen endlichen Historie und \(r_n=x_n-c_{H,n}\);
-- die vorhergesagte Center-Antwort aus dem analytischen vollen FIFO-Jacobian
-  \(J_*\) und dem exakten linearen Readout \(B_H\), ohne neu gefittete Pole,
-  Gains oder Koeffizienten;
-- zwei feste zero-net Probeprofile, drei Amplituden, `probe-off`,
-  Vorzeichenflip, radiale/tangentiale Richtung und vier feste Bahnphasen;
-- Schleifenobservablen im Relativzustand: Radius, Winkelinkrement,
-  Transversalabstand und saekularer Drift;
-- Centerobservablen: Kovarianz unter Rotation/Translation, Tangentenfehler,
-  Amplitudenkollaps und quadratische Resttermskalierung.
+Der alte absolute-Slope-Fail wird weder geloescht noch umbenannt. Ein P2-R-Pass
+zeigt nur, dass die bereits gesehene lokale Matrixantwort in der verlaengerten
+Beobachtung zur vorbereiteten Schleife zurueckkehrt. Er bleibt eine
+outcome-informierte Reconciliation, keine unabhaengige Bestaetigung. Erst ein
+kritisch gehaltener P2-R-Pass darf P3 oeffnen; `fail` oder `inconclusive`
+stoppen die sequentielle Schleifenfolge.
 
-Falsifiziert wird die lokale Matrixbruecke insbesondere durch fehlende
-Phasenkovarianz, eine nicht gegen die Tangentenantwort konvergierende
-Kleinsignalantwort, einen nichtquadratischen oder zu grossen Restterm,
-Wellenformabhaengigkeit ausserhalb der registrierten Grenzen oder anhaltende
-Relativdrift. Die Arbeitsbilanz ist bewusst kein P2-Kriterium: Gate A hat den
-mikroskopisch konjugierten Port nicht identifiziert.
-
-Ein Pass zeigt nur die lokale matrixwertige Antwort einer vorbereiteten
-Schleife unter dem bereits deklarierten **effektiven** Port. Er uebertraegt
-die skalare B-star-Filtermasse nicht auf L3, identifiziert keinen
-mikroskopischen Aktuator und keine physikalische Masse.
+P2-R darf weder einen positiven skalaren \(g_H\) nachfitten noch die
+B-star-Filtermasse auf L3 uebertragen. Arbeitsbilanz, mikroskopischer Aktuator
+und physikalische Masse bleiben P4 beziehungsweise dem getrennten
+Masseprogramm vorbehalten.
 
 ## P3: Formation und begrenztes Basin
 
@@ -95,7 +86,7 @@ Erforderlich sind:
 
 - feste nichtkreisfoermige Historienfamilien und unabhaengige Holdouts;
 - chirality-symmetrische Seeds sowie eine vorbereitete-Bahn-Positivkontrolle;
-- unveraenderte Modellparameter der zugelassenen L3-Zelle und aus P2;
+- unveraenderte Modellparameter der zugelassenen L3-Zelle und aus P2-R;
 - vorab definierte Eintritts-, Verweil- und Abbruchkriterien im quotientierten
   Relativzustand.
 

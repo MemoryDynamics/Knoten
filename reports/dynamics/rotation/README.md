@@ -1,6 +1,6 @@
 # Evidenz-Ledger: native rotating waves
 
-Stand: 2026-08-22.
+Stand: 2026-08-25.
 
 Dieses Verzeichnis ist das kanonische Artefaktledger des raeumlichen
 Schleifenasts. Markdown-Dateien sind lesbare Reviews oder Reports; JSON-Dateien
@@ -56,6 +56,14 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       Stoerungsarme kontrahieren ueber 10000 Updates;
     - lokale numerische L3-Evidenz, keine vollstaendige Spektraleinschliessung
       oder stabile Familie.
+12. `scalar_memory_loop_center_p2_2026-08-25.{md,json}`
+    - `loop-center-matrix-local-fail` aus separat publiziertem Audit-, Freeze-
+      und Implementierungscommit;
+    - alle Kontrollen, Tangentenfehler, quadratischen Resttermgates und
+      Amplitudenkollapse bestehen mit grosser Marge;
+    - alle acht Response-Zeilen verfehlen ausschliesslich die absolute
+      Tail-Slope-Grenze, obwohl die gespeicherten Tail-Samples post hoc
+      monoton fallen; P3 bleibt geschlossen.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -76,10 +84,15 @@ Das nachgelagerte L5-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md`.
 Das anschliessende P1-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md`.
+Das P2-Linearisierungs-Audit und der Review des formalen Tail-Fails stehen in
+`reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md`
+beziehungsweise
+`reports/project/meta/reviews/scalar_memory_loop_center_p2_review_2026-08-25.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
-Skalen“; der fehlende zweite Intervallbackend und die unvollstaendige
-Spektraleinschliessung bleiben ausdruecklich markiert.
+Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz, aber keinen
+formalen Kompatibilitaetspass hinzu; der fehlende zweite Intervallbackend und
+die unvollstaendige Spektraleinschliessung bleiben ausdruecklich markiert.
 
 ## Aktuelle Lesart
 
@@ -89,4 +102,6 @@ auf den `mpmath.iv`-Trust-Base konditional; ein unabhaengiger Intervallbackend
 fehlt. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in ihren
 registrierten Panels; daraus folgt keine stabile sechs-zellige Familie. Der
 Kreis ist eine ambiente \(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein
-Punkt. Formation, internes S1, Arbeit, Traegheit und Masse bleiben offen.
+Punkt. Der lokale Loop--Center-Tangentenvergleich ist numerisch stark, aber
+sein registriertes Tail-Gate formal fehlgeschlagen. Formation, internes S1,
+Arbeit, Traegheit und Masse bleiben offen.
