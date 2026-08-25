@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-22.
+Stand: 2026-08-25.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
 Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
@@ -43,35 +43,47 @@ flowchart LR
     p2 --> p3 --> p4 --> p5
 ```
 
-## P2: Prospektive Loop--Center-Kompatibilitaetsbruecke
+## P2: Prospektive lokale Loop--Center-Kompatibilitaetsbruecke
 
 **Frage:** Bilden raeumliche Schleife und Center-Filter am selben nativen
 Zustand eine konsistente gemeinsame Reduktion, oder sind sie nur getrennt
 passende Beschreibungen?
 
-Der Test verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte
-L3-Zelle bei \((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf werden
-mindestens folgende Groessen und Kontrollen festgelegt:
+Das [Linearisierungs-Audit](../../reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md)
+trennt zwei moegliche Bruecken. Der fruehere skalare Ursprungsschluss
+\(-g_H(x-c_H)\) ist fuer L3 analytisch nicht zulaessig: Aus den eingefrorenen
+Parametern folgen \(g_H=-0.045833\ldots\) und der instabile skalare Pol
+\(q(1-g_H)=1.040604\ldots\). Dieser Befund darf nicht durch einen an die
+Zielantwort gefitteten positiven Gain repariert werden. Lokal passend ist
+stattdessen der vollstaendige, matrixwertige Tangentialoperator des
+endlichradigen nichtlinearen Kreises.
+
+Der [prospektive P2-Vertrag](../../reports/project/meta/preregistration/scalar_memory_loop_center_p2_protocol_2026-08-25.md)
+verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte L3-Zelle bei
+\((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf sind festgelegt:
 
 - \(c_H\) aus der nativen endlichen Historie und \(r_n=x_n-c_{H,n}\);
-- die vorhergesagte Center-Antwort aus
-  \(T_{f\to v^c,H}(z)\), aufgebaut aus dem exakten \(B_H(z)\) und dem
-  unabhaengig fixierten \(g_H\), ohne neu gefittete Pole oder Koeffizienten;
-- ein kleiner center-konjugierter zero-net Probe-Puls, `probe-off`,
-  Vorzeichenflip und mehrere vorab festgelegte Bahnphasen;
+- die vorhergesagte Center-Antwort aus dem analytischen vollen FIFO-Jacobian
+  \(J_*\) und dem exakten linearen Readout \(B_H\), ohne neu gefittete Pole,
+  Gains oder Koeffizienten;
+- zwei feste zero-net Probeprofile, drei Amplituden, `probe-off`,
+  Vorzeichenflip, radiale/tangentiale Richtung und vier feste Bahnphasen;
 - Schleifenobservablen im Relativzustand: Radius, Winkelinkrement,
   Transversalabstand und saekularer Drift;
-- Centerobservablen: Kovarianz unter Rotation/Translation, Linearitaet,
-  Phasenuniformitaet und geschlossene effektive Arbeitsbilanz.
+- Centerobservablen: Kovarianz unter Rotation/Translation, Tangentenfehler,
+  Amplitudenkollaps und quadratische Resttermskalierung.
 
-Falsifiziert wird die Bruecke insbesondere durch phasenabhaengige
-Transferkoeffizienten ausserhalb der registrierten Numerikgrenzen, nichtlineare
-Antwort im deklarierten Kleinsignalbereich, anhaltende Relativdrift oder eine
-Bilanz, die sich nicht in Center- und Quellenarbeit schliessen laesst.
+Falsifiziert wird die lokale Matrixbruecke insbesondere durch fehlende
+Phasenkovarianz, eine nicht gegen die Tangentenantwort konvergierende
+Kleinsignalantwort, einen nichtquadratischen oder zu grossen Restterm,
+Wellenformabhaengigkeit ausserhalb der registrierten Grenzen oder anhaltende
+Relativdrift. Die Arbeitsbilanz ist bewusst kein P2-Kriterium: Gate A hat den
+mikroskopisch konjugierten Port nicht identifiziert.
 
-Ein Pass zeigt nur die Kompatibilitaet einer vorbereiteten Schleife mit einem
-**effektiven** Center-Port. Er identifiziert noch keinen mikroskopischen
-Aktuator und keine physikalische Masse.
+Ein Pass zeigt nur die lokale matrixwertige Antwort einer vorbereiteten
+Schleife unter dem bereits deklarierten **effektiven** Port. Er uebertraegt
+die skalare B-star-Filtermasse nicht auf L3, identifiziert keinen
+mikroskopischen Aktuator und keine physikalische Masse.
 
 ## P3: Formation und begrenztes Basin
 

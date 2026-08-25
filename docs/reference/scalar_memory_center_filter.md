@@ -11,6 +11,13 @@ gefundener und lokal numerisch stabiler räumlicher Rotating-wave-Kandidat
 vor. Dieser positive Befund ist weder eine interne Phase nach dem
 \(SO(2)\)-Quotienten noch ein Masse- oder Arbeitsresultat.
 
+Eine entscheidende Trennung ist dabei: \(B_H\) ist als gewichteter Readout
+der Historie exakt linear. Die Kraftkopplung des Double-Gaussian-Kerns ist es
+nicht. Am endlichradigen Kreis ist ihre korrekte lokale lineare Beschreibung
+der vollstaendige FIFO-Jacobian mit altersabhaengigen
+\(2\times2\)-Hessianbloecken, nicht automatisch der skalare Ursprungsschluss
+\(-g_H(x-c_H)\).
+
 ## 1. Ausgangspunkt: die Größen des Knotenkerns
 
 Der kanonische skalare Update lautet
@@ -758,11 +765,12 @@ Fuer diese Kette liefert die Center-Reduktion drei unveraenderliche
 Anforderungen:
 
 1. Das Loop--Center-Kompatibilitaetsgate muss \(c_H\),
-   \(r=x-c_H\), den exakten finite-\(H\)-Filter \(B_H\) und fuer die
-   Antwort den daraus mit unabhaengig fixiertem \(g_H\) aufgebauten Transfer
-   \(T_{f\to v^c,H}\) am selben eingefrorenen Schleifenkandidaten verwenden.
-   Neu gefittete Pole oder Koeffizienten waeren keine Bestaetigung der
-   Reduktion.
+   \(r=x-c_H\) und den exakten finite-\(H\)-Readout \(B_H\) am selben
+   eingefrorenen Schleifenkandidaten verwenden. Der skalare Ursprungstransfer
+   mit \(g_H\) ist fuer L3 wegen \(g_H<0\) nicht zulaessig. Die lokale
+   Antwort muss daher aus dem unabhaengig konstruierten vollen FIFO-Jacobian
+   vorhergesagt werden; neu gefittete Pole, Gains oder Koeffizienten waeren
+   keine Bestaetigung der Reduktion.
 2. Der effektive passive Wrapper ist eine Positivkontrolle. Ein physischer
    Masseclaim erfordert weiterhin dynamische Memory-Traeger oder einen
    hergeleiteten Source-/Write-Aktuator samt Gegenkraft, Randarbeit und
