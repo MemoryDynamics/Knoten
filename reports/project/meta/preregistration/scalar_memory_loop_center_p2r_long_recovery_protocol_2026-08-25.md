@@ -80,7 +80,8 @@ tolerances after inspection.
 
 Let $D_n^\pm$ be the established D0 proper-rotation/translation quotient
 distance of each forced branch from its simultaneous probe-off clone. For each
-branch define its full-run peak $D_{\max}^\pm$ and evaluate three disjoint
+branch define the already observed P2 checkpoint peak
+$D_{\max,2400}^\pm=\max_{n\le2400}D_n^\pm$ and evaluate three disjoint
 400-update windows:
 
 $$
@@ -93,7 +94,7 @@ $$
 
 For each branch and window the runner records:
 
-1. the signed least-squares slope of $D_n/D_{\max}$ per memory time;
+1. the signed least-squares slope of $D_n/D_{\max,2400}$ per memory time;
 2. the log-distance decay rate
    $-d\log D/dt_{\rm memory}$;
 3. the largest ten-update sampled increase
@@ -111,10 +112,12 @@ Every plus and minus branch must satisfy all of the following:
 - signed normalized slope strictly below zero in $W_1,W_2,W_3$;
 - log-distance decay rate in $[0.2,1.5]$ per memory time in every window;
 - maximum sampled ten-update increase at most `0.01` in every window;
-- final distance at update 4400 at most $5\times10^{-4}$ of the branch peak;
-- every distance in $W_3$ at least $10^{-8}$ of the branch peak, otherwise
-  the sign/rate test is numerically `inconclusive`;
-- no point after the drive exceeds `1.25` times the branch peak.
+- final distance at update 4400 at most $5\times10^{-4}$ of the branch's P2
+  checkpoint peak;
+- every distance in $W_3$ at least $10^{-8}$ of the branch's P2 checkpoint
+  peak, otherwise the sign/rate test is numerically `inconclusive`;
+- no point after the P2 checkpoint exceeds `1.25` times the branch's P2
+  checkpoint peak.
 
 The log-rate interval is centered broadly around the pre-P2 P1 transverse
 rate 0.702553 and is not fitted to the P2 tail. The final-ratio ceiling demands
