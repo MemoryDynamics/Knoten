@@ -49,7 +49,7 @@ flowchart LR
 Zustand eine konsistente gemeinsame Reduktion, oder sind sie nur getrennt
 passende Beschreibungen?
 
-Das [Linearisierungs-Audit](../../reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md)
+Das [Linearisierungs-Audit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md)
 trennt zwei moegliche Bruecken. Der fruehere skalare Ursprungsschluss
 \(-g_H(x-c_H)\) ist fuer L3 analytisch nicht zulaessig: Aus den eingefrorenen
 Parametern folgen \(g_H=-0.045833\ldots\) und der instabile skalare Pol
@@ -58,7 +58,7 @@ Zielantwort gefitteten positiven Gain repariert werden. Lokal passend ist
 stattdessen der vollstaendige, matrixwertige Tangentialoperator des
 endlichradigen nichtlinearen Kreises.
 
-Der [prospektive P2-Vertrag](../../reports/project/meta/preregistration/scalar_memory_loop_center_p2_protocol_2026-08-25.md)
+Der [prospektive P2-Vertrag](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/preregistration/scalar_memory_loop_center_p2_protocol_2026-08-25.md)
 verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte L3-Zelle bei
 \((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf sind festgelegt:
 
