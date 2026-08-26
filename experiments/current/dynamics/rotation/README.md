@@ -21,6 +21,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 8 | `scalar_memory_rotating_wave_l3_stability_gate.py` | prospektiv gewaehlte L3-Zelle, zwei getrennte Arnoldi-Panels und sieben registrierte Voll-FIFO-Fortsetzungen | lokaler numerischer Pass; kritisch gehalten |
 | 9 | `scalar_memory_loop_center_p2_gate.py` | voller matrixwertiger FIFO-Tangentenvergleich, drei Amplituden, zwei Richtungen und unabhaengige zero-net Wellenform am unveraenderten L3-Kandidaten | formaler P2-Fail nur an der absoluten Tail-Slope-Grenze; alle Linearitaets- und Resttermgates positiv |
 | 10 | `scalar_memory_loop_center_p2r_long_recovery.py` | outcome-informierte, vor weiterer Zielantwort eingefrorene Verlaengerung derselben 16 Arme bis 20 Recovery-Memory-Zeiten | P2-R-Pass in allen 48 neuen sign-sensitiven Fenstern; historischer P2-Fail unveraendert |
+| 11 | `scalar_memory_rotating_wave_p3_formation_basin.py` | drei target-informierte und zwei target-blinde nichtkreisfoermige Historienfamilien in beiden Chiralitaeten, vorbereitete Positiv- sowie eta=0-/achirale Negativkontrollen | reviewed P3-Full-Pass als finite-ensemble attraction; keine generische/spontane Formation |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -71,14 +72,17 @@ Die Programme etablieren:
 - eine exakte algebraische Kreisreduktion des nativen Updates;
 - sechs lokal eindeutige finite-H-Roots auf einem gematchten Ast;
 - einen unabhaengig reproduzierten numerischen Kontinuumsroot;
-- lokale numerische Stabilitaetsevidenz am Anchor und an L3.
+- lokale numerische Stabilitaetsevidenz am Anchor und an L3;
+- finite-ensemble attraction fuer die zehn registrierten nichtkreisfoermigen
+  P3-Arme am unveraenderten L3-Kandidaten.
 
 Sie etablieren nicht:
 
 - globale Rooteindeutigkeit oder ein all-alpha-Theorem;
 - Stabilitaet der uebrigen Nicht-Anchor-Zellen oder vollstaendige
   Spektraleinschliessung;
-- Formation, Basin, Rauschrobustheit oder Haendigkeitsselektion;
+- einen offenen Basin-Ball, generische/spontane Formation,
+  Rauschrobustheit oder Haendigkeitsselektion aus symmetrischen Daten;
 - internes S1 nach ambientem \(SO(2)\)-Quotient;
 - Arbeit, Traegheit oder Masse.
 
@@ -117,6 +121,17 @@ python experiments/current/dynamics/rotation/scalar_memory_loop_center_p2r_long_
 P2-R reproduziert alle 120 alten Entscheidungsmetriken exakt und besteht alle
 48 neuen sign-sensitiven Fenster durch 20 Memory-Zeiten. Das kritische Review
 haelt dies als outcome-informierte Reconciliation, nicht als unabhaengige
-Replikation. Geoeffnet ist damit nur die Vorregistrierung von P3
-Formation/Basin am unveraenderten L3-Kandidaten. Topologie, Mechanik,
-Interaktionen und der Amplituden-Holdout `A_att=7` bleiben versiegelt.
+Replikation. Dieser historische Befund oeffnete nur die Vorregistrierung von
+P3 Formation/Basin am unveraenderten L3-Kandidaten.
+
+Reproduktion des eingefrorenen P3-Laufs:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin.py
+```
+
+Alle zehn nichtkreisfoermigen Arme erreichen und halten den L3-Zielorbit; der
+reviewed Claim bleibt finite-ensemble attraction aus fuenf Geometrien mit
+gesetzter Chiralitaet. Als naechstes darf nur P4 fuer eine mikroskopisch
+reziproke Single-Loop-Architektur mit geschlossenem Arbeitsledger
+vorregistriert werden. Topologie, Interaktionen und Masse bleiben versiegelt.

@@ -16,8 +16,8 @@ vollstaendig erhalten.
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
-| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an der vorab gewaehlten L3-Zelle \(|\lambda_\perp|=0.99649340\); beide lokalen Perturbationspanels kontrahieren. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokale numerische Stabilitaetsevidenz an zwei vorbereiteten Skalen | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine Stabilitaet der gesamten Leiter, globale Eindeutigkeit, Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
-| Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. Keine Uebertragung der skalaren Filtermasse, keine Formation; P3 ist nur fuer Formation/Basin geoeffnet |
+| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
 | Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 besteht fuenf globale Small-Gain-/Positive-Real-Zellen; B-star reproduziert die Skalierung \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) einschliesslich des registrierten gemeinsamen Holdouts. | passiver effektiver Center-Port und identifizierte Filtertraegheit unter dem gewaehlten Portvertrag | Gate A identifiziert keinen eindeutigen mikroskopischen Aktuator; \(c_H\) ist der Schwerpunkt eines Source-/Sink-Memory, nicht nachgewiesen konservierter Materie; keine physikalische Arbeit oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
@@ -237,23 +237,29 @@ alten Metriken und alle acht 2400-Update-Checkpoints exakt. Alle 48 neuen,
 disjunkten spaeten Fenster besitzen negative signierte Steigungen und
 aufgeloeste logarithmische Abklingraten von 0.636--0.777 pro Memory-Zeit; die
 End-/Checkpoint-Peak-Verhaeltnisse liegen bei
-\(3.53\times10^{-6}\)--\(4.41\times10^{-6}\).
+\(3.53\times10^{-6}\)--\(4.41\times10^{-6}\). Im nachgelagerten, separat
+eingefrorenen P3-Test erreichen alle sechs target-informierten und alle vier
+target-blinden nichtkreisfoermigen Arme den L3-Zielorbit. Der spaeteste
+Eintritt erfolgt nach 9.4 Memory-Zeiten; alle Arme verweilen danach bis
+Memory-Zeit 60 im registrierten D0-Tube.
 
 **Inferenz:** Die Daten stuetzen eine lokale anisotrope Matrixkopplung von
-Loop und Center und eine fortgesetzte Rueckkehr der schwach gestoerten,
-vorbereiteten L3-Schleife, aber keine Uebertragung der frueheren skalaren
-Filtertraegheit. Die Fensterabhaengigkeit der Rate ist mit einer Mischung von
-Delaymoden vereinbar; sie identifiziert weder einen einzelnen Pol noch eine
-skalare Masse.
+Loop und Center sowie finite-ensemble attraction aus fuenf nichtkreisfoermigen
+Historiengeometrien in beiden vorgegebenen Chiralitaeten. Die aufgeloesten
+P3-Annaeherungsraten 0.689--0.731 pro Memory-Zeit sind mit P1 vereinbar, aber
+identifizieren weder einen einzelnen Pol noch eine skalare Masse. Die zwei
+target-blinden Geometrien enthalten kein \(R_3\) oder \(\theta_3\), bleiben
+jedoch modellinformierte, chiral vorbereitete Delayhistorien.
 
-**Hypothese:** Die lokal rueckkehrende Schleife besitzt ein begrenztes
-Formationsbecken ausserhalb der exakt vorbereiteten Kreisgeschichte. Das ist
-nun durch feste nichtkreisfoermige Historien und Holdouts zu falsifizieren;
-P2-R selbst testet weder Formation noch Basin.
+**Hypothese:** Der effektive Center-Port laesst sich durch genau eine
+mikroskopisch explizite Read-/Write-Architektur mit Gegenkraft und geschlossenem
+Source-/Sink-Arbeitsledger realisieren, ohne einen Massenterm einzusetzen. Das
+ist P4; P3 liefert dafuer keine mechanische Evidenz.
 
-Das kritische P2-R-Review haelt den Reconciliation-Pass aufrecht, ohne den
-historischen P2-Fail umzubenennen. Damit ist P3 ausschliesslich fuer
-Formation/Basin am unveraenderten L3-Kandidaten geoeffnet. Die einzige aktive
+Das kritische P3-Review haelt den Full-Pass als finite-ensemble attraction
+aufrecht. Es oeffnet ausschliesslich die P4-Preregistrierung fuer reziproke
+Single-Loop-Mechanik; Rauschen kann nur in einem getrennten Protokoll folgen.
+Die einzige aktive
 Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
@@ -758,16 +764,21 @@ anschliessende gemeinsame Loop--Center-Test sagt die lokale Antwort mit dem
 vollen FIFO-Jacobian sehr genau voraus, verfehlt aber formal seine absolute
 Tail-Slope-Grenze. Der historische P2-Fail bleibt bestehen. Die separat
 vorregistrierte P2-R-Verlaengerung zeigt danach in allen 48 neuen Fenstern
-weitere aufgeloeste Rueckkehr bis 20 Memory-Zeiten und oeffnet nach
-kritischem Review nur P3 Formation/Basin.
+weitere aufgeloeste Rueckkehr bis 20 Memory-Zeiten. P3 erweitert dies ohne
+Retuning auf fuenf nichtkreisfoermige Historiengeometrien in beiden
+Chiralitaeten. Alle zehn Arme erreichen den L3-Zielorbit, einschliesslich vier
+target-blinder Arme; das Review begrenzt den Befund auf finite-ensemble
+attraction und oeffnet nur P4.
 
 ## Paper-Status
 
 - **Paper 0:** mathematischer Anker oder Supplement. Der native
   Rotating-wave-Befund kann als getrennte technische Notiz ueber sechs lokal
   existenzzertifizierte vorbereitete Schleifen und lokale numerische
-  Stabilitaetsevidenz an Anchor und L3 dienen; keine stabile Familie,
-  Formation oder robuste materielle Knotenexistenz behaupten.
+  Stabilitaetsevidenz an Anchor und L3 sowie finite-ensemble attraction aus
+  den zehn registrierten nichtkreisfoermigen P3-Armen dienen; keine stabile
+  Familie, generische/spontane Formation oder robuste materielle
+  Knotenexistenz behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
   nichtlineare Metastabilitaet und Teilchensprache vermeiden.
 - **Paper II:** P3.8b-d liefern einen analytischen Gradientenmediator-Kandidaten,
