@@ -293,8 +293,8 @@ Die vorhandenen Arme sind fuer diese Lesart Discovery-Daten. Weil die alten
 Antwort zudem startphasenkonditioniert. P4-R-phi braucht eine neue
 Vorregistrierung mit numerisch aufgeloestem Residuum und einem gleichmaessigen
 Holdout aus bisher ungeoeffneten Startphasen. Nur dessen reviewed Chiral-Pass
-oeffnet einen Anchor-Skalenholdout; P5, Spin, Impuls und Masse bleiben
-geschlossen.
+zusammen mit einem kompatiblen Referee-/Source-Readiness-Audit oeffnet einen
+Anchor-Skalenholdout; P5, Spin, Impuls und Masse bleiben geschlossen.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht und

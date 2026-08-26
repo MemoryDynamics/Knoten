@@ -364,6 +364,7 @@ flowchart LR
     formation["P3 pass<br/>finite-ensemble attraction"]
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
     p4rphi["P4-R-phi prospective<br/>metrology + phase holdout"]
+    referee["prospective source<br/>referee audit"]
     p4rs["P4-R-S prospective<br/>anchor scale holdout"]
     interaction["P5 closed<br/>two-loop interaction"]
 
@@ -376,7 +377,8 @@ flowchart LR
     center -.independent input.-> bridge
     bridge --> p2r --> formation --> mechanics
     mechanics -.new protocol required.-> p4rphi
-    p4rphi -.reviewed chiral pass required.-> p4rs
+    p4rphi --> referee
+    referee -.chiral pass + compatible audit.-> p4rs
     p4rs -.reviewed full pass required.-> interaction
 ```
 
@@ -386,8 +388,9 @@ in `reports/dynamics/rotation/README.md`. Die durchgezogenen Pfeile markieren
 die historische Gatefolge samt unveraendertem P2- und P4-Fail; sie bedeuten
 nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
 reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
-P4-Fail schliesst P5. Die gestrichelte P4-R-phi/P4-R-S-Folge ist prospektiv
-und darf den historischen P4-Befund nicht umbenennen.
+P4-Fail schliesst P5. P4-R-phi erhaelt vor jedem P4-R-S-Protokoll zusaetzlich
+ein Gate-Review und das vorregistrierte Source-Referee-Audit. Die prospektive
+Folge darf den historischen P4-Befund nicht umbenennen.
 
 ## Leseregeln
 

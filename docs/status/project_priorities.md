@@ -40,11 +40,13 @@ Masse und Zwei-Loop-Interaktion bleiben geschlossen.
 flowchart LR
     p4["P4 formal fail<br/>24/24 Querantwort"]
     p4rphi["P4-R-phi Messhaertung +<br/>neue Startphasen"]
+    referee["Gate-Review +<br/>Source-Referee-Audit"]
     p4rs["P4-R-S<br/>Anchor-Skalenholdout"]
     p5["P5 Zwei-Loop-Interaktion<br/>geschlossen"]
 
     p4 --> p4rphi
-    p4rphi -. nur reviewed Chiral-Pass .-> p4rs
+    p4rphi --> referee
+    referee -. Chiral-Pass + kompatibles Source-Urteil .-> p4rs
     p4rs -. nur reviewed Full-Pass .-> p5
 ```
 
@@ -76,16 +78,18 @@ Wiederholung von P4. Vor neuem Targetzugriff muss ein eigenes Protokoll:
   Claim-Grenzen beibehalten, soweit der neue Diskriminator keine vorab
   begruendete Aenderung verlangt.
 
-Ein P4-R-phi-Pass oeffnet nicht P5, sondern nur einen separat
-vorregistrierten Anchor-Skalenholdout P4-R-S. Erst dessen reviewed Full-Pass
-kann die Single-Loop-Mechanik weitertragen.
+Jedes P4-R-phi-Ergebnis erhaelt ein Gate-Review und danach das separat
+vorregistrierte Referee-/Source-Readiness-Audit. Ein P4-R-phi-Pass allein
+oeffnet nichts. Nur ein upheld Chiral-Pass zusammen mit einem kompatiblen
+Source-Urteil oeffnet den Anchor-Skalenholdout P4-R-S. Erst dessen reviewed
+Full-Pass kann die Single-Loop-Mechanik weitertragen.
 Ein explizit eingesetzter Massenterm oder eine zweite Zeitordnung bleibt
 untersagt; beides darf nur aus einer unabhaengig identifizierten
 Transferantwort folgen.
 
 ## P5: Kontrollierte Zwei-Loop-Interaktion
 
-**Status: geschlossen. Frage erst nach P4-R-phi und P4-R-S:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
+**Status: geschlossen. Frage erst nach P4-R-phi, Referee-Audit und P4-R-S:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
 ueber die in P4 gepruefte Architektur reziprok Impuls und Arbeit aus?
 
 Das Protokoll muss mindestens Single-Loop-, `channel-off`-, Vorzeichen-/

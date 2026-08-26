@@ -146,5 +146,5 @@ zwar den Ledger der explizit konstruierten Source-/Write-Architektur, besteht
 aber das Gesamtgate nicht. Seine robuste chirality-odd Querantwort ist nur eine
 neue, startphasenkonditionierte Matrixsuszeptibilitaets-Hypothese. Der erste
 prospektive Nachtest ist P4-R-phi mit acht neuen History-Phasen; selbst ein
-reviewed Chiral-Pass oeffnet nur einen Anchor-Skalenholdout. P5 bleibt
-geschlossen.
+reviewed Chiral-Pass braucht danach ein kompatibles Referee-/Source-Audit und
+oeffnet nur einen Anchor-Skalenholdout. P5 bleibt geschlossen.
