@@ -191,13 +191,12 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. P3 Formation/Basin am unveraenderten L3-Kandidaten mit festen
-   nichtkreisfoermigen Historien, Chiralitaetskontrollen und Holdouts
-   vorregistrieren. Der historische P2-Fail bleibt trotz P2-R-Pass bestehen.
-2. Rauschen erst nach einem Formationspass pruefen; `A_att=7` bleibt bis dahin
-   versiegelter Holdout.
-3. Einen mikroskopisch reziproken Aktuator und geschlossenes Arbeitsledger
-   erst nach P3 pruefen.
+1. P4 mit genau einer mikroskopisch reziproken Single-Loop-Aktuatorarchitektur
+   und geschlossenem Source-/Sink-Arbeitsledger herleiten und vorregistrieren.
+2. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
+   Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
+3. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt
+   prospektiert werden, ersetzen aber nicht die primaere P4-Folge.
 4. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
    getrennte Programme behandeln.
 5. Publikations-Hardening mit zweitem Intervallbackend und staerkerer

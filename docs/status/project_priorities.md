@@ -27,41 +27,20 @@ Bis dahin gelten zwei strikte Grenzen:
 - Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
   Formation.
 
-Der erste prospektive P2-Versuch bleibt formal `fail`. Die separat
-vorregistrierte P2-R-Verlaengerung wurde nach kritischem Review als enge,
-outcome-informierte Recovery-Reconciliation gehalten; sie aendert den alten
-Entscheid nicht. Dieser abgeschlossene Befund steht im
-[aktuellen Status](current_status.md). Er oeffnet jetzt ausschliesslich P3
-Formation/Basin, nicht Mechanik oder Masse.
+Der erste prospektive P2-Versuch bleibt formal `fail`; die outcome-informierte
+P2-R-Reconciliation benennt ihn nicht um. P3 besteht danach ohne Retuning fuer
+alle zehn registrierten nichtkreisfoermigen Arme und wird im
+[aktuellen Status](current_status.md) eng als finite-ensemble attraction
+gefuehrt. Die aktive Aufgabe ist nun ausschliesslich P4, nicht Masse oder
+Interaktion.
 
 ```mermaid
 flowchart LR
-    p3["P3 Formation<br/>und Basin"]
     p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
     p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
 
-    p3 --> p4 --> p5
+    p4 --> p5
 ```
-
-## P3: Formation und begrenztes Basin
-
-**Frage:** Wird die gepruefte Schleife aus vorab deklarierten,
-nichtkreisfoermigen Historien erreicht, oder existiert sie nur bei
-vorbereiteter Kreisgeschichte?
-
-Erforderlich sind:
-
-- feste nichtkreisfoermige Historienfamilien und unabhaengige Holdouts;
-- chirality-symmetrische Seeds sowie eine vorbereitete-Bahn-Positivkontrolle;
-- unveraenderte Modellparameter der zugelassenen L3-Zelle; P2-R hat keine
-  Parameter nachjustiert;
-- vorab definierte Eintritts-, Verweil- und Abbruchkriterien im quotientierten
-  Relativzustand.
-
-Ein Pass ist Basin-Evidenz fuer genau das getestete Ensemble, keine globale
-Formation oder generische Rauschrobustheit. Erst danach duerfen getrennte
-Rauschzellen geoeffnet werden. Der bestehende \(A_{\rm att}=7\)-Holdout bleibt
-bis dahin versiegelt.
 
 ## P4: Mikroskopisch reziproke Single-Loop-Mechanik
 
@@ -97,7 +76,7 @@ Quantisierung folgen daraus nicht.
 
 ## Paralleles Publikations-Hardening
 
-Diese Arbeiten duerfen P3--P5 begleiten, sind aber kein Ersatz fuer sie:
+Diese Arbeiten duerfen P4--P5 begleiten, sind aber kein Ersatz fuer sie:
 
 - mindestens einen Root mit einem unabhaengigen outward-rounded
   Intervallbackend reproduzieren;

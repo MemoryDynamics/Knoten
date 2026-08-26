@@ -70,6 +70,13 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
     - exakter Replay aller 120 alten P2-Metriken und acht Checkpoints;
     - alle 48 neuen Fenster zeigen aufgeloeste Rueckkehr bis 20 Memory-Zeiten;
       outcome-informierte Reconciliation, keine Umbenennung des P2-Fails.
+14. `scalar_memory_rotating_wave_p3_formation_basin_2026-08-26.{md,json}`
+    - `p3-formation-basin-pass` aus separatem Protokoll-, Implementierungs- und
+      Ergebniscommit;
+    - alle sechs target-informierten und vier target-blinden Arme treten bis
+      9.4 Memory-Zeiten ein und verweilen bis Memory-Zeit 60;
+    - eta=0 kollabiert, der achirale Arm bleibt exakt kollinear; reviewed nur
+      als finite-ensemble attraction, nicht generische Formation.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -96,12 +103,16 @@ beziehungsweise
 `reports/project/meta/reviews/scalar_memory_loop_center_p2_review_2026-08-25.md`.
 Das nachgelagerte P2-R-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_loop_center_p2r_long_recovery_review_2026-08-25.md`.
+Das P3-Urteil steht in
+`reports/project/meta/reviews/scalar_memory_rotating_wave_p3_formation_basin_review_2026-08-26.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
 bleibt formal gescheitert; P2-R belegt nur die fortgesetzte Rueckkehr derselben
-vorbereiteten Kleinsignalarme. Der fehlende zweite Intervallbackend und die
-unvollstaendige Spektraleinschliessung bleiben ausdruecklich markiert.
+vorbereiteten Kleinsignalarme. P3 erweitert die getestete Attraktion auf zehn
+nichtkreisfoermige Arme, bleibt aber ein endliches deterministisches Ensemble.
+Der fehlende zweite Intervallbackend und die unvollstaendige
+Spektraleinschliessung bleiben ausdruecklich markiert.
 
 ## Aktuelle Lesart
 
@@ -114,5 +125,6 @@ Kreis ist eine ambiente \(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein
 Punkt. Der lokale Loop--Center-Tangentenvergleich ist numerisch stark, aber
 sein registriertes Tail-Gate formal fehlgeschlagen. Die outcome-informierte
 P2-R-Verlaengerung zeigt danach aufgeloeste Rueckkehr in allen 48 neuen
-Fenstern durch 20 Memory-Zeiten und oeffnet nur P3 Formation/Basin. Internes
-S1, Arbeit, Traegheit und Masse bleiben offen.
+Fenstern durch 20 Memory-Zeiten. P3 besteht fuer fuenf nichtkreisfoermige
+Geometrien in beiden gesetzten Chiralitaeten und oeffnet nur P4. Internes S1,
+Arbeit, Traegheit und Masse bleiben offen.

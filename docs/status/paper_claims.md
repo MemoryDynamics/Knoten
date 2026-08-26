@@ -42,14 +42,18 @@ Als technischer Spin-off ist inzwischen enger tragbar:
   prospektiv gewaehlten feineren L3-Zelle;
 - eine lokale matrixwertige Loop--Center-Kleinsignalantwort am vorbereiteten
   L3-Kreis und, in einer outcome-informierten prospektiven Verlaengerung,
-  aufgeloeste Rueckkehr aller signierten Arme durch 20 Memory-Zeiten.
+  aufgeloeste Rueckkehr aller signierten Arme durch 20 Memory-Zeiten;
+- finite-ensemble attraction am unveraenderten L3-Kandidaten fuer sechs
+  target-informierte und vier target-blinde nichtkreisfoermige P3-Arme durch
+  60 Memory-Zeiten.
 
 Das kann eine eigenstaendige mathematische Notiz oder ein Supplement tragen.
 Nicht tragbar sind globale Eindeutigkeit, Stabilitaet der gesamten Familie,
-spontane Formation, internes S1 nach `SO(2)`-Quotient, ein skalares
+ein offener Basin-Ball, generische oder spontane Formation, internes S1 nach
+`SO(2)`-Quotient, ein skalares
 Traegheitsgesetz, Arbeit oder Masse. Der
 Foundation-Audit, prospektives L5-Review sowie die separaten kritischen L3-,
-P2- und P2-R-Reviews sind die reviewertragenden Quellen. Ein zweiter
+P2-, P2-R- und P3-Reviews sind die reviewertragenden Quellen. Ein zweiter
 Intervallbackend und eine
 vollstaendige Spektraleinschliessung fehlen. Der erste Leiter-Fail und der
 initiale Audit-Pipeline-Fail sowie der anschliessend von Linux-CI falsifizierte
@@ -65,7 +69,7 @@ der kanonischen Gate-Folge in den
 | --- | --- | --- |
 | P1 Nicht-Anchor-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle als zweiter getesteter Skala | vollstaendige Spektralstabilitaet und stabile Familie |
 | P2 Loop--Center plus P2-R-Reconciliation | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten, matrixwertige effektive Kleinsignalantwort und aufgeloeste Rueckkehr unter dem deklarierten schwachen Port | unabhaengige Replikation, skalares Massengesetz, mikroskopischer Aktuator, physische Arbeit oder Masse |
-| P3 Formation/Basin | Formation aus den vorregistrierten Historienfamilien und Basin-Evidenz fuer das getestete Ensemble | globale oder generische Formation und ungetestete Rauschrobustheit |
+| P3 Formation/Basin -- reviewed Pass | finite-ensemble attraction fuer fuenf registrierte nichtkreisfoermige Historiengeometrien in beiden gesetzten Chiralitaeten; zwei Geometrien verwenden weder Zielradius noch Zielwinkel | offener Basin-Ball oder -Volumen, generische/spontane Formation, Chiralitaetsselektion aus symmetrischen Daten und Rauschrobustheit |
 | P4 reziproke Single-Loop-Mechanik | geschlossene Gegenkraft-/Arbeitsbilanz der konkret hergeleiteten Mikromechanik; ein effektiver Traegheitskoeffizient, falls aus der Antwort identifiziert | physische Masse, solange ein operationaler Massensatz, Portkalibrierung oder geschlossenes Gesamtledger fehlt oder der Massenterm explizit eingesetzt wurde |
 | P5 Zwei-Loop-Interaktion | kontrollierte reziproke Wechselwirkung zweier einzeln zugelassener Schleifen im getesteten Distanz- und Parameterbereich | Ladung, intrinsischer Spin, universelles Kraftgesetz, Feldtheorie oder Quantisierung |
 
@@ -246,7 +250,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
-| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | nicht gestuetzt: Der prospektive P2-Lauf bestaetigt zwar die lokale volle FIFO-Tangentenantwort bis maximal \(7.5\times10^{-9}\) relativ und einen quadratischen Restterm, scheitert aber formal in allen Armen an der absoluten Tail-Slope-Grenze. Zudem ist der skalare Ursprungsgain bei L3 negativ und damit ausserhalb der A2/B-star-Klasse | nur als starke lokale matrixwertige Kleinsignaldiagnostik berichten; keine mechanische Objekt-, skalare Filtermassen- oder Portidentifikation. P3 bleibt geschlossen; ein sign-sensitives Long-Recovery-Audit waere outcome-informierte Reconciliation |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | nicht gestuetzt: Der prospektive P2-Lauf bestaetigt zwar die lokale volle FIFO-Tangentenantwort bis maximal \(7.5\times10^{-9}\) relativ und einen quadratischen Restterm, scheitert aber formal in allen Armen an der absoluten Tail-Slope-Grenze. P2-R zeigt danach weitere aufgeloeste Rueckkehr, und P3 finite-ensemble attraction aus zehn nichtkreisfoermigen Armen. Der skalare Ursprungsgain bei L3 bleibt jedoch negativ und ausserhalb der A2/B-star-Klasse; kein Lauf enthaelt Gegenkraft oder geschlossenes Arbeitsledger | nur als lokale matrixwertige Kleinsignal-, Rueckkehr- und getrennte Formationsevidenz berichten; keine mechanische Objekt-, skalare Filtermassen- oder Portidentifikation. Nur P4 fuer eine mikroskopisch reziproke Architektur vorregistrieren |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 
