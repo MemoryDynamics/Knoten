@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 from dataclasses import replace
+import hashlib
 import math
 
 import numpy as np
@@ -68,6 +69,24 @@ def test_frozen_p4r_protocol_charter_and_dependencies_are_unchanged() -> None:
         == expected
         for path, expected in p4r.EXPECTED_PREIMPLEMENTATION_BLOBS.items()
     )
+    assert (
+        p4r._canonical_lf_sha256(p4r.ROOT / p4r.P4_RESULT)
+        == p4r.EXPECTED_P4_SHA256
+    )
+
+
+def test_p4r_canonical_hash_is_independent_of_checkout_line_endings(
+    tmp_path,
+) -> None:
+    canonical = b'{\n  "decision": "historical"\n}\n'
+    lf_path = tmp_path / "lf.json"
+    crlf_path = tmp_path / "crlf.json"
+    lf_path.write_bytes(canonical)
+    crlf_path.write_bytes(canonical.replace(b"\n", b"\r\n"))
+    expected = hashlib.sha256(canonical).hexdigest()
+
+    assert p4r._canonical_lf_sha256(lf_path) == expected
+    assert p4r._canonical_lf_sha256(crlf_path) == expected
 
 
 def _decision_arms() -> list[dict[str, object]]:

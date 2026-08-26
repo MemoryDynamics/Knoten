@@ -9,6 +9,15 @@ P4-R result, does not inspect a registered P4-R trajectory and does not alter
 the historical P4 decision `p4-source-write-architecture-fail`. At the time
 of this review, neither registered P4-R output path exists.
 
+Amendment after the first launch preflight: the initial invocation stopped in
+`_verify_provenance()` before constructing or advancing any registered arm.
+The runner had compared the protocol's explicitly canonical-LF P4 JSON hash
+to checkout-native bytes; Git's Windows checkout had CRLF line endings. The
+frozen Git blob and parsed P4 decision were unchanged. The preflight now
+canonicalizes CRLF and bare CR to LF before hashing, and a regression test
+requires LF and CRLF copies to produce the same frozen digest. No target JSON,
+report or partial trajectory was produced by the aborted invocation.
+
 ## 1. Frozen basis and scope
 
 The implementation is downstream of, and checks at runtime, the following
@@ -27,7 +36,7 @@ prospective freezes:
 The target runner refuses to start unless the worktree is clean, its current
 revision is fully synchronized with the configured upstream, both freeze
 commits are ancestors, every frozen dependency blob matches and the
-historical P4 JSON retains both its hash and formal decision.
+historical P4 JSON retains both its canonical-LF hash and formal decision.
 
 ## 2. Native-equation preservation
 
@@ -138,10 +147,10 @@ blobs and refuses an unpushed revision.
 
 | path | reviewed blob |
 | --- | --- |
-| `experiments/current/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_gate.py` | `d4e89d5f72a6cb07bed42f83a3b52d0fce742351` |
+| `experiments/current/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_gate.py` | `27a3a40dde60b797b58da576b5849ab10b47079f` |
 | `src/emergenz_knoten/orbit_center_actuator.py` | `63d31bc47291f76c65a5633f14436ccd2105fe9a` |
 | `tests/test_orbit_center_actuator.py` | `7e770cd9dc6a4d410c0593dc909512eb27945abb` |
-| `tests/test_rotating_wave_p4r_phase_metrology.py` | `7ef573cbfafc1bf196e5ae5944853c4c1cb67f07` |
+| `tests/test_rotating_wave_p4r_phase_metrology.py` | `c1fb1fd0181ab75e53786c179da59a279b077000` |
 
 ## 6. Pre-target verification
 
@@ -151,8 +160,8 @@ synthetic small-H or synthetic response records.
 
 | verification | result |
 | --- | --- |
-| focused source/write, historical P4 and P4-R tests | 26 passed |
-| complete repository test suite | 796 passed |
+| focused source/write, historical P4 and P4-R tests | 27 passed |
+| complete repository test suite | 797 passed |
 | exact CI Ruff scope (`src`, `tests`, `experiments/current`, `experiments/cli.py`) | passed |
 | strict MkDocs build | passed |
 | default P4-R JSON before target | absent |

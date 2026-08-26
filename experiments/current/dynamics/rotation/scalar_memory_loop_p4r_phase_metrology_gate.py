@@ -182,12 +182,9 @@ def _git_blob(path: str, *, revision: str = "HEAD") -> str:
     return _git_output(["rev-parse", f"{revision}:{path}"])
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+def _canonical_lf_sha256(path: Path) -> str:
+    content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(content).hexdigest()
 
 
 def _verify_provenance() -> dict[str, Any]:
@@ -213,7 +210,7 @@ def _verify_provenance() -> dict[str, Any]:
     }
     if preimplementation != EXPECTED_PREIMPLEMENTATION_BLOBS:
         raise RuntimeError("preimplementation source blob does not match protocol")
-    if _sha256(ROOT / P4_RESULT) != EXPECTED_P4_SHA256:
+    if _canonical_lf_sha256(ROOT / P4_RESULT) != EXPECTED_P4_SHA256:
         raise RuntimeError("authoritative P4 JSON hash changed")
     p4_result = json.loads((ROOT / P4_RESULT).read_text(encoding="utf-8"))
     if p4_result.get("decision") != "p4-source-write-architecture-fail":
