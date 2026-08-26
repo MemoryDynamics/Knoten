@@ -31,40 +31,57 @@ Der erste prospektive P2-Versuch bleibt formal `fail`; die outcome-informierte
 P2-R-Reconciliation benennt ihn nicht um. P3 besteht danach ohne Retuning fuer
 alle zehn registrierten nichtkreisfoermigen Arme und wird im
 [aktuellen Status](current_status.md) eng als finite-ensemble attraction
-gefuehrt. Die aktive Aufgabe ist nun ausschliesslich P4, nicht Masse oder
-Interaktion.
+gefuehrt. Der eingefrorene P4-Lauf endet formal als
+`p4-source-write-architecture-fail`. Sein exakter Arbeitsledger ist
+aufgeloest, aber die vorregistrierte Gesamtmechanik besteht nicht. P5,
+Masse und Zwei-Loop-Interaktion bleiben geschlossen.
 
 ```mermaid
 flowchart LR
-    p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
-    p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
+    p4["P4 formal fail<br/>24/24 Querantwort"]
+    p4r["P4-R Messhaertung +<br/>chiraler Matrix-Holdout"]
+    p5["P5 Zwei-Loop-Interaktion<br/>geschlossen"]
 
-    p4 --> p5
+    p4 --> p4r
+    p4r -. nur reviewed Full-Pass .-> p5
 ```
 
-## P4: Mikroskopisch reziproke Single-Loop-Mechanik
+## P4: abgeschlossenes Primaergate
 
-**Frage:** Laesst sich der effektive Center-Port durch eine eingefrorene
-Read-/Write-Mikromechanik mit Gegenkraft und vollstaendigem Arbeitsledger
-realisieren, ohne die gesuchte Traegheit in die Gleichungen einzusetzen?
+Der historische P4-Lauf bleibt formal `p4-source-write-architecture-fail`.
+Er darf weder umbenannt noch mit nachtraeglich gelockerten Toleranzen neu
+bewertet werden. Belastbar sind der exakte finite-H-Write-/Age-Ledger und die
+vollstaendige schwache Antworttafel. Nicht bestanden sind die registrierte
+Gesamtmechanik und insbesondere die Geradeausantwort: Center und Aktuator
+zeigen in allen 24 Armen eine chirality-odd Querkomponente von etwa
+`0.15..0.21 delta` statt hoechstens `0.05 delta`.
 
-Vor einer Simulation wird genau eine Architektur gewaehlt und hergeleitet:
+## Primaere Folge: P4-R-Messhaertung und Matrixdiskriminator
 
-- dynamische Memory-Traeger mit Deposition, Alterung, Ausscheiden, Randarbeit
-  und Gegenkraft; oder
-- ein Source-/Write-Aktuator, dessen Elimination nachweislich
-  \(F_c\,\Delta c\) statt nur \(F\,\Delta x\) liefert.
+P4-R ist eine neue outcome-informierte Reconciliation, keine Rettung oder
+Wiederholung von P4. Vor neuem Targetzugriff muss ein eigenes Protokoll:
 
-Der effektive \(B_H\)-Wrapper dient als Positivkontrolle, nicht als
-Emergenznachweis. Ein explizit eingesetzter Massenterm, ein offenes
-Source-/Sink-Ledger oder fehlende actio-reactio-Reziprozitaet sperrt jeden
-physischen Masseclaim. Eine zweite Zeitordnung darf nur aus der gemessenen
-Transferantwort abgeleitet, nicht als harmonischer Oszillator angenommen
-werden.
+- das algebraisch identische Single-Slot-Residuum oder eine explizite
+  Rundungsenvelope anstelle einer cancellation-dominierten Differenz zweier
+  2400-Term-Summen registrieren;
+- die vorhandenen P4-Arme ausschliesslich als Discovery-Daten fuer eine
+  chirality-odd \(2\times2\)-Suszeptibilitaet behandeln;
+- neue Richtungs- oder Skalendaten als unangetasteten Holdout reservieren und
+  den skalaren gegen einen longitudinal-plus-antisymmetrischen Antwortsatz
+  entscheiden;
+- unveraendertes natives L3, Source-/Write-Gleichungen, \(k\), Laufzeit und
+  Claim-Grenzen beibehalten, soweit der neue Diskriminator keine vorab
+  begruendete Aenderung verlangt.
+
+Ein Messhaertungs-Pass allein oeffnet P5 nicht. Nur ein reviewed dynamischer
+Full-Pass eines neuen Protokolls kann die Single-Loop-Mechanik weitertragen.
+Ein explizit eingesetzter Massenterm oder eine zweite Zeitordnung bleibt
+untersagt; beides darf nur aus einer unabhaengig identifizierten
+Transferantwort folgen.
 
 ## P5: Kontrollierte Zwei-Loop-Interaktion
 
-**Frage:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
+**Status: geschlossen. Frage erst nach P4-R-Full-Pass:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
 ueber die in P4 gepruefte Architektur reziprok Impuls und Arbeit aus?
 
 Das Protokoll muss mindestens Single-Loop-, `channel-off`-, Vorzeichen-/

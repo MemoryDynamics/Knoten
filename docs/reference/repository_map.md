@@ -359,31 +359,33 @@ flowchart LR
     frontdoor["rotating_wave_foundation.md<br/>evidence + claim boundary"]
     center["scalar_memory_center_filter.md<br/>B_H + effective center port"]
     nonanchor["P1 L3 pass<br/>second local numerical scale"]
-    bridge["P2: Loop--Center compatibility<br/>same frozen candidate"]
-    formation["P3: formation + basin<br/>declared histories"]
-    mechanics["P4: reciprocal mechanics<br/>microscopic work ledger"]
-    interaction["P5: controlled<br/>two-loop interaction"]
+    bridge["P2 formal fail<br/>strong local matrix response"]
+    p2r["P2-R pass<br/>resolved long recovery"]
+    formation["P3 pass<br/>finite-ensemble attraction"]
+    mechanics["P4 formal fail<br/>ledger pass + transverse response"]
+    p4r["P4-R prospective<br/>metrology + matrix holdout"]
+    interaction["P5 closed<br/>two-loop interaction"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
     p0d0 --> interval --> ladder --> reconcile --> audit --> l5 --> frontdoor
     stability --> audit
     frontdoor --> nonanchor
-    nonanchor -.next prospective gate.-> bridge
+    nonanchor --> bridge
     center -.independent input.-> bridge
-    bridge -.pass required.-> formation
-    formation -.pass required.-> mechanics
-    mechanics -.pass required.-> interaction
+    bridge --> p2r --> formation --> mechanics
+    mechanics -.new protocol required.-> p4r
+    p4r -.reviewed full pass required.-> interaction
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
 `experiments/current/dynamics/rotation/`. Das kompakte Artefaktledger liegt
-in `reports/dynamics/rotation/README.md`. Die durchgezogenen L5- und P1-Pfeile
-markieren den scoped Existenz-/Skalierungs- beziehungsweise lokalen
-Nicht-Anchor-Stabilitaetspass. Alle gestrichelten Pfeile sind prospektive
-Abhaengigkeiten, keine Ergebnisse. P2 ist der einzige vorgesehene
-Zusammenfuehrungspunkt der bisher getrennten Schleifen- und Center-Evidenz;
-ohne P2-Pass bleiben Formation, Mechanik und Interaktion geschlossen.
+in `reports/dynamics/rotation/README.md`. Die durchgezogenen Pfeile markieren
+die historische Gatefolge samt unveraendertem P2- und P4-Fail; sie bedeuten
+nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
+reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
+P4-Fail schliesst P5. Die gestrichelte P4-R-Folge ist prospektiv und darf den
+historischen P4-Befund nicht umbenennen.
 
 ## Leseregeln
 

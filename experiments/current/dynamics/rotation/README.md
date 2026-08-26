@@ -132,6 +132,21 @@ python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_p3_form
 
 Alle zehn nichtkreisfoermigen Arme erreichen und halten den L3-Zielorbit; der
 reviewed Claim bleibt finite-ensemble attraction aus fuenf Geometrien mit
-gesetzter Chiralitaet. Als naechstes darf nur P4 fuer eine mikroskopisch
-reziproke Single-Loop-Architektur mit geschlossenem Arbeitsledger
-vorregistriert werden. Topologie, Interaktionen und Masse bleiben versiegelt.
+gesetzter Chiralitaet. Dieser historische Pass oeffnete nur P4 fuer eine
+mikroskopisch reziproke Single-Loop-Architektur mit geschlossenem
+Arbeitsledger.
+
+Reproduktion des eingefrorenen P4-Laufs erfordert den im Ergebnis genannten
+Execution-Commit und einen sauberen Arbeitsbaum:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_loop_p4_source_write_gate.py
+```
+
+Der unveraenderliche Befund ist `p4-source-write-architecture-fail`. Der
+finite-H-Write-/Age-Ledger schliesst, aber zwei cancellation-dominierte
+Direktresiduen verfehlen ihre unter-binary64 skalierte Grenze und alle 24 Arme
+zeigen eine zu grosse chirality-odd Querantwort. Das Review oeffnet nur die
+Prospektierung einer getrennten P4-R-Messhaertung mit frischem
+Matrixantwort-Holdout. P5, Topologie, Spin, Impuls und Masse bleiben
+versiegelt.

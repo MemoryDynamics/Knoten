@@ -77,6 +77,15 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       9.4 Memory-Zeiten ein und verweilen bis Memory-Zeit 60;
     - eta=0 kollabiert, der achirale Arm bleibt exakt kollinear; reviewed nur
       als finite-ensemble attraction, nicht generische Formation.
+15. `scalar_memory_loop_p4_source_write_2026-08-26.{md,json}`
+    - unveraenderlicher `p4-source-write-architecture-fail` aus getrenntem
+      Architektur-, Freeze-, Implementierungs- und Ergebniscommit;
+    - der exakte Write-/Age-/Interaktionsledger besteht, waehrend zwei direkt
+      subtrahierte Readout-Residuen in allen Armen an einer unter-binary64
+      skalierten Grenze scheitern;
+    - alle 24 Arme verfehlen unabhaengig die Orthogonalgrenze mit einer
+      spiegelkonsistenten chirality-odd Querantwort. Kein P5-, Spin-, Impuls-
+      oder Masseclaim.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -105,6 +114,11 @@ Das nachgelagerte P2-R-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_loop_center_p2r_long_recovery_review_2026-08-25.md`.
 Das P3-Urteil steht in
 `reports/project/meta/reviews/scalar_memory_rotating_wave_p3_formation_basin_review_2026-08-26.md`.
+Das P4-Architekturaudit, Freeze und kritische Ergebnisurteil stehen in
+`reports/project/meta/reviews/scalar_memory_loop_p4_actuator_architecture_audit_2026-08-26.md`,
+`reports/project/meta/preregistration/scalar_memory_loop_p4_source_write_protocol_2026-08-26.md`
+beziehungsweise
+`reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
@@ -127,4 +141,7 @@ sein registriertes Tail-Gate formal fehlgeschlagen. Die outcome-informierte
 P2-R-Verlaengerung zeigt danach aufgeloeste Rueckkehr in allen 48 neuen
 Fenstern durch 20 Memory-Zeiten. P3 besteht fuer fuenf nichtkreisfoermige
 Geometrien in beiden gesetzten Chiralitaeten und oeffnet nur P4. Internes S1,
-Arbeit, Traegheit und Masse bleiben offen.
+Arbeit, Traegheit und Masse bleiben offen. Der nachgelagerte P4-Lauf schliesst
+zwar den Ledger der explizit konstruierten Source-/Write-Architektur, besteht
+aber das Gesamtgate nicht. Seine robuste chirality-odd Querantwort ist nur eine
+neue Matrixsuszeptibilitaets-Hypothese; P5 bleibt geschlossen.

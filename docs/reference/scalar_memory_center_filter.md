@@ -753,6 +753,19 @@ Für eine Publikation ist Option 1 bereits mathematisch sauber, aber
 ontologisch schmal. Für eine Behauptung emergenter physischer Masse ist
 Option 2 oder 3 notwendig.
 
+**P4-Ergebniskorrektur.** Der inzwischen ausgefuehrte Option-3-Test musste
+fuer die rotierende L3-Schleife raw \(c_H\) durch den exakt aus demselben
+\(B_H\) konstruierten chirality-konditionierten Orbit-Center \(C_s\)
+ersetzen: raw \(c_H\) traegt auf dem Zielorbit die rotierende Amplitude
+`0.505881`, also etwa `0.5354 R_3`. Der Source-/Write-/Age-Ledger von
+\(C_s\) schliesst numerisch,
+waehrend ein per fiat eingesetztes \(F\,dc_H\) deutlich nicht schliesst. Das
+registrierte P4-Gesamtgate bleibt dennoch formal gescheitert. Insbesondere
+zeigt die volle nichtlineare Antwort in allen 24 Armen eine grosse
+chirality-odd Querkomponente statt der vorregistrierten nahezu skalaren
+Geradeausbewegung. Damit ist Option 3 als konkrete Algebra demonstriert, aber
+nicht als physisch zugelassene Gesamtmechanik oder Masse identifiziert.
+
 ## 9. Anschluss an die kanonische Gate-Folge
 
 Diese Referenz definiert Algebra und Claim-Grenzen, aber keine eigene laufende
@@ -773,8 +786,9 @@ Anforderungen:
    keine Bestaetigung der Reduktion.
 2. Der effektive passive Wrapper ist eine Positivkontrolle. Ein physischer
    Masseclaim erfordert weiterhin dynamische Memory-Traeger oder einen
-   hergeleiteten Source-/Write-Aktuator samt Gegenkraft, Randarbeit und
-   Source-/Sink-Ledger.
+   hergeleiteten und prospektiv bestandenen Source-/Write-Aktuator samt
+   Gegenkraft, Randarbeit und Source-/Sink-Ledger. Der formal gescheiterte
+   P4-Lauf erfuellt diese Freigabe nicht.
 3. Eine interne Kreiskoordinate muss den ambienten \(SO(2)\)-Quotienten
    ueberleben. Sie ist weder Voraussetzung fuer die effektive
    Center-Filtertraegheit noch deren Konsequenz.
