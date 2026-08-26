@@ -30,6 +30,7 @@ class SourceWriteStep:
     """One reciprocal source/write transition and its exact work ledger."""
 
     history: np.ndarray
+    provisional_history: np.ndarray
     actuator: np.ndarray
     center_before: complex
     center_provisional: complex
@@ -41,6 +42,9 @@ class SourceWriteStep:
     center_force: complex
     external_force: complex
     write_force: complex
+    history_increment: complex
+    actuator_increment: complex
+    center_prescribed_increment: complex
     total_slot_force: complex
     interaction_before: float
     interaction_after: float
@@ -60,6 +64,32 @@ class SourceWriteStep:
     coupling_displacement_residual: complex
     write_mobility_dissipation: float
     external_mobility_dissipation: float
+
+
+@dataclass(frozen=True)
+class SourceWriteRoundingMetrology:
+    """Cancellation-safe identities and binary64 forward envelopes."""
+
+    epsilon64: float
+    gamma_4: float
+    gamma_8: float
+    gamma_8h: float
+    center_local_increment: complex
+    center_local_residual: complex
+    coupling_local_residual: complex
+    center_full_residual: complex
+    coupling_full_residual: complex
+    actuator_full_residual: complex
+    weighted_sum_after_upper: float
+    weighted_sum_provisional_upper: float
+    history_insertion_bound: float
+    actuator_insertion_bound: float
+    center_local_bound: float
+    coupling_local_bound: float
+    center_full_envelope: float
+    coupling_full_envelope: float
+    actuator_full_envelope: float
+    normal_operands: bool
 
 
 def _validate_chirality(chirality: int) -> int:
@@ -203,6 +233,222 @@ def adjoint_slot_forces(
     return np.column_stack((slot.real, slot.imag))
 
 
+def _rounding_gamma(operation_count: int, *, epsilon64: float) -> float:
+    count = int(operation_count)
+    if count < 1:
+        raise ValueError("operation_count must be positive")
+    product = count * epsilon64
+    if not product < 1.0:
+        raise ValueError("rounding gamma is undefined for n * epsilon >= 1")
+    return product / (1.0 - product)
+
+
+def _normal_or_zero(values: np.ndarray) -> bool:
+    array = np.asarray(values, dtype=float)
+    absolute = np.abs(array)
+    return bool(
+        np.isfinite(array).all()
+        and np.all((absolute == 0.0) | (absolute >= np.finfo(float).tiny))
+    )
+
+
+def _complex_normal_or_zero(value: complex) -> bool:
+    number = complex(value)
+    return _normal_or_zero(np.asarray([number.real, number.imag]))
+
+
+def _weighted_sum_upper(
+    history: np.ndarray,
+    *,
+    readout: OrbitCenterReadout,
+    gamma_8h: float,
+) -> tuple[float, bool]:
+    state = np.asarray(history, dtype=float)
+    if state.shape != (readout.horizon, 2):
+        raise ValueError("history does not match the readout")
+    coefficient_magnitudes = np.abs(readout.coefficients)
+    history_magnitudes = np.hypot(
+        state[:, 0],
+        state[:, 1],
+    )
+    terms = coefficient_magnitudes * history_magnitudes
+    summed = math.fsum(terms)
+    scaled = (1.0 + gamma_8h) * summed
+    upper = math.nextafter(scaled, math.inf)
+    normal_operands = bool(
+        _normal_or_zero(coefficient_magnitudes)
+        and _normal_or_zero(history_magnitudes)
+        and _normal_or_zero(terms)
+        and _normal_or_zero(np.asarray([summed, scaled, upper]))
+    )
+    return upper, normal_operands
+
+
+def source_write_rounding_metrology(
+    step: SourceWriteStep,
+    *,
+    readout: OrbitCenterReadout,
+) -> SourceWriteRoundingMetrology:
+    """Evaluate the prospective P4-R local and full-dot metrology."""
+
+    if step.history.shape != (readout.horizon, 2):
+        raise ValueError("advanced history does not match the readout")
+    if step.provisional_history.shape != (readout.horizon, 2):
+        raise ValueError("provisional history does not match the readout")
+
+    epsilon64 = float(np.finfo(float).eps)
+    gamma_4 = _rounding_gamma(4, epsilon64=epsilon64)
+    gamma_8 = _rounding_gamma(8, epsilon64=epsilon64)
+    gamma_8h = _rounding_gamma(
+        8 * readout.horizon,
+        epsilon64=epsilon64,
+    )
+
+    write_coefficient = complex(readout.coefficients[0])
+    center_local_increment = write_coefficient * step.history_increment
+    center_local_residual = (
+        center_local_increment - step.center_prescribed_increment
+    )
+    coupling_local_residual = (
+        center_local_increment + step.actuator_increment
+    )
+
+    provisional_zero = complex(
+        float(step.provisional_history[0, 0]),
+        float(step.provisional_history[0, 1]),
+    )
+    history_insertion_bound = gamma_4 * (
+        abs(provisional_zero) + abs(step.history_increment)
+    )
+    actuator_insertion_bound = gamma_4 * (
+        abs(step.actuator_before) + abs(step.actuator_increment)
+    )
+    center_local_bound = abs(center_local_residual) + gamma_8 * (
+        abs(write_coefficient) * abs(step.history_increment)
+        + abs(step.center_prescribed_increment)
+    )
+    coupling_local_bound = abs(coupling_local_residual) + gamma_8 * (
+        abs(write_coefficient) * abs(step.history_increment)
+        + abs(step.actuator_increment)
+    )
+    weighted_after, weighted_after_normal = _weighted_sum_upper(
+        step.history,
+        readout=readout,
+        gamma_8h=gamma_8h,
+    )
+    weighted_provisional, weighted_provisional_normal = _weighted_sum_upper(
+        step.provisional_history,
+        readout=readout,
+        gamma_8h=gamma_8h,
+    )
+    dot_bound = gamma_8h * (weighted_after + weighted_provisional)
+    center_full_envelope = math.nextafter(
+        dot_bound
+        + abs(write_coefficient) * history_insertion_bound
+        + center_local_bound
+        + gamma_8
+        * (
+            abs(step.center_after)
+            + abs(step.center_provisional)
+            + abs(step.center_prescribed_increment)
+        ),
+        math.inf,
+    )
+    coupling_full_envelope = math.nextafter(
+        dot_bound
+        + abs(write_coefficient) * history_insertion_bound
+        + actuator_insertion_bound
+        + coupling_local_bound
+        + gamma_8
+        * (
+            abs(step.center_after)
+            + abs(step.center_provisional)
+            + abs(step.actuator_after)
+            + abs(step.actuator_before)
+        ),
+        math.inf,
+    )
+    actuator_full_envelope = math.nextafter(
+        actuator_insertion_bound
+        + gamma_8
+        * (
+            abs(step.actuator_after)
+            + abs(step.actuator_before)
+            + abs(step.actuator_increment)
+        ),
+        math.inf,
+    )
+
+    normal_operands = bool(
+        _normal_or_zero(step.history)
+        and _normal_or_zero(step.provisional_history)
+        and weighted_after_normal
+        and weighted_provisional_normal
+        and _normal_or_zero(
+            np.column_stack(
+                (readout.coefficients.real, readout.coefficients.imag)
+            )
+        )
+        and _normal_or_zero(
+            np.asarray(
+                [
+                    epsilon64,
+                    gamma_4,
+                    gamma_8,
+                    gamma_8h,
+                    history_insertion_bound,
+                    actuator_insertion_bound,
+                    center_local_bound,
+                    coupling_local_bound,
+                    center_full_envelope,
+                    coupling_full_envelope,
+                    actuator_full_envelope,
+                ]
+            )
+        )
+        and all(
+            _complex_normal_or_zero(value)
+            for value in (
+                step.history_increment,
+                step.actuator_increment,
+                step.center_prescribed_increment,
+                center_local_increment,
+                center_local_residual,
+                coupling_local_residual,
+                step.center_actuation_residual,
+                step.coupling_displacement_residual,
+                step.actuator_update_residual,
+                step.center_after,
+                step.center_provisional,
+                step.actuator_after,
+                step.actuator_before,
+            )
+        )
+    )
+    return SourceWriteRoundingMetrology(
+        epsilon64=epsilon64,
+        gamma_4=gamma_4,
+        gamma_8=gamma_8,
+        gamma_8h=gamma_8h,
+        center_local_increment=center_local_increment,
+        center_local_residual=center_local_residual,
+        coupling_local_residual=coupling_local_residual,
+        center_full_residual=step.center_actuation_residual,
+        coupling_full_residual=step.coupling_displacement_residual,
+        actuator_full_residual=step.actuator_update_residual,
+        weighted_sum_after_upper=weighted_after,
+        weighted_sum_provisional_upper=weighted_provisional,
+        history_insertion_bound=history_insertion_bound,
+        actuator_insertion_bound=actuator_insertion_bound,
+        center_local_bound=center_local_bound,
+        coupling_local_bound=coupling_local_bound,
+        center_full_envelope=center_full_envelope,
+        coupling_full_envelope=coupling_full_envelope,
+        actuator_full_envelope=actuator_full_envelope,
+        normal_operands=normal_operands,
+    )
+
+
 def reciprocal_source_write_step(
     history: np.ndarray,
     actuator: np.ndarray,
@@ -257,9 +503,18 @@ def reciprocal_source_write_step(
     write_force = readout.coefficients[0].conjugate() * center_force
 
     advanced = provisional.copy()
+    history_increment_vector = candidate.alpha * complex_to_vector(write_force)
+    history_increment = complex(
+        float(history_increment_vector[0]),
+        float(history_increment_vector[1]),
+    )
     if stiffness != 0.0:
-        advanced[0] += candidate.alpha * complex_to_vector(write_force)
-    q_after = q_before + candidate.alpha * mobility * external_force
+        advanced[0] += history_increment_vector
+    actuator_increment = candidate.alpha * mobility * external_force
+    center_prescribed_increment = (
+        candidate.alpha * readout.write_gain * center_force
+    )
+    q_after = q_before + actuator_increment
     advanced_values = _complex_history(advanced)
     center_after = complex(np.dot(readout.coefficients, advanced_values))
     raw_center_after = complex(np.dot(readout.weights, advanced_values))
@@ -292,15 +547,16 @@ def reciprocal_source_write_step(
     center_actuation_residual = (
         center_after
         - center_provisional
-        - candidate.alpha * readout.write_gain * center_force
+        - center_prescribed_increment
     )
     actuator_update_residual = (
         q_after
         - q_before
-        - candidate.alpha * mobility * external_force
+        - actuator_increment
     )
     return SourceWriteStep(
         history=advanced,
+        provisional_history=provisional,
         actuator=complex_to_vector(q_after),
         center_before=center_before,
         center_provisional=center_provisional,
@@ -312,6 +568,9 @@ def reciprocal_source_write_step(
         center_force=center_force,
         external_force=external_force,
         write_force=write_force,
+        history_increment=history_increment,
+        actuator_increment=actuator_increment,
+        center_prescribed_increment=center_prescribed_increment,
         total_slot_force=total_slot_force,
         interaction_before=float(interaction_before),
         interaction_after=float(interaction_after),

@@ -363,7 +363,7 @@ flowchart LR
     p2r["P2-R pass<br/>resolved long recovery"]
     formation["P3 pass<br/>finite-ensemble attraction"]
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
-    p4rphi["P4-R-phi prospective<br/>metrology + phase holdout"]
+    p4rphi["P4-R-phi prospective runner<br/>target unopened"]
     referee["prospective source<br/>referee audit"]
     p4rs["P4-R-S prospective<br/>anchor scale holdout"]
     interaction["P5 closed<br/>two-loop interaction"]
@@ -390,7 +390,8 @@ nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
 reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
 P4-Fail schliesst P5. P4-R-phi erhaelt vor jedem P4-R-S-Protokoll zusaetzlich
 ein Gate-Review und das vorregistrierte Source-Referee-Audit. Die prospektive
-Folge darf den historischen P4-Befund nicht umbenennen.
+Folge darf den historischen P4-Befund nicht umbenennen. Der implementierte
+P4-R-phi-Runner ist ohne registriertes Ergebnis noch keine Evidenz.
 
 ## Leseregeln
 

@@ -152,3 +152,12 @@ frischen Holdout aus acht vorbereiteten History-Phasen. Ein reviewed
 Chiral-Pass braucht zusaetzlich das vorregistrierte Referee-/Source-Audit und
 wuerde erst dann nur einen separaten Anchor-Skalenholdout oeffnen. P5,
 Topologie, Spin, Impuls und Masse bleiben versiegelt.
+
+Der prospektive P4-R-phi-Runner ist
+`scalar_memory_loop_p4r_phase_metrology_gate.py`. Er implementiert die
+eingefrorene Reihenfolge aus 16 phase-spezifischen channel-off- und 32 aktiven
+Armen, lokale Increment-Metrologie, konservative binary64-Envelopes,
+80-stellige Checkpoint-Replays sowie Spiegel- und Halbdrehungskovarianz. Vor
+dem ersten registrierten Lauf muessen Implementierung und synthetische Tests
+in einem sauberen, gepushten Commit stehen; dieser Eintrag dokumentiert daher
+keinen P4-R-Befund.

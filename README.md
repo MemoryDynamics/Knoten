@@ -194,8 +194,9 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 1. Den formalen P4-Fail unveraendert halten: Der exakte Write-/Age-Ledger
    besteht, aber die registrierte Gesamtmechanik und die Geradeausantwort
    bestehen nicht; P5 bleibt geschlossen.
-2. P4-R-phi separat vorregistrieren: cancellation-sichere Residualmetrologie
-   und einen frischen, gleichmaessigen Startphasen-Holdout fuer die
+2. Das separat vorregistrierte P4-R-phi aus einem sauberen gepushten
+   Implementierungsstand ausfuehren: cancellation-sichere Residualmetrologie
+   und ein frischer, gleichmaessiger Startphasen-Holdout fuer die
    outcome-informierte chirality-odd \(2\times2\)-Antwortshypothese. Nur ein
    reviewed Pass zusammen mit einem kompatiblen Referee-/Source-Audit oeffnet
    danach einen Anchor-Skalenholdout, nicht P5.

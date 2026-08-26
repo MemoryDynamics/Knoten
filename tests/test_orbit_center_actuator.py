@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import math
 
 import numpy as np
@@ -13,6 +14,7 @@ from emergenz_knoten.orbit_center_actuator import (
     orbit_center,
     real_inner,
     reciprocal_source_write_step,
+    source_write_rounding_metrology,
 )
 from emergenz_knoten.rotating_wave_formation import target_history
 from emergenz_knoten.rotating_wave_stability import native_fifo_step, rotation_matrix
@@ -162,6 +164,55 @@ def test_source_write_step_closes_full_ledger_and_exposes_age_term() -> None:
     assert abs(result.coupling_displacement_residual) < 1e-12
     assert result.write_mobility_dissipation >= 0.0
     assert result.external_mobility_dissipation >= 0.0
+
+
+def test_source_write_rounding_metrology_resolves_local_identities() -> None:
+    candidate = _small_candidate()
+    readout = candidate_orbit_center_readout(candidate, chirality=1)
+    result = reciprocal_source_write_step(
+        _small_history(),
+        np.asarray([0.7, -0.4]),
+        candidate=candidate,
+        readout=readout,
+        coupling_strength=0.25,
+    )
+    observed = source_write_rounding_metrology(result, readout=readout)
+
+    assert observed.epsilon64 == np.finfo(float).eps
+    assert observed.gamma_4 < observed.gamma_8 < observed.gamma_8h
+    assert observed.normal_operands is True
+    assert abs(observed.center_local_residual) < 1e-15
+    assert abs(observed.coupling_local_residual) < 1e-15
+    assert abs(observed.center_full_residual) <= observed.center_full_envelope
+    assert (
+        abs(observed.coupling_full_residual)
+        <= observed.coupling_full_envelope
+    )
+    assert (
+        abs(observed.actuator_full_residual)
+        <= observed.actuator_full_envelope
+    )
+    assert observed.weighted_sum_after_upper > 0.0
+    assert observed.weighted_sum_provisional_upper > 0.0
+
+
+def test_source_write_rounding_metrology_rejects_corruption_and_subnormal() -> None:
+    candidate = _small_candidate()
+    readout = candidate_orbit_center_readout(candidate, chirality=1)
+    result = reciprocal_source_write_step(
+        _small_history(),
+        np.asarray([0.7, -0.4]),
+        candidate=candidate,
+        readout=readout,
+        coupling_strength=0.25,
+    )
+    corrupted = replace(result, center_actuation_residual=1.0e-8 + 0.0j)
+    observed = source_write_rounding_metrology(corrupted, readout=readout)
+    assert abs(observed.center_full_residual) > observed.center_full_envelope
+
+    subnormal = replace(result, history_increment=1.0e-320 + 0.0j)
+    observed = source_write_rounding_metrology(subnormal, readout=readout)
+    assert observed.normal_operands is False
 
 
 def test_channel_off_step_is_bitwise_native() -> None:
