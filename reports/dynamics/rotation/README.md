@@ -1,6 +1,6 @@
 # Evidenz-Ledger: native rotating waves
 
-Stand: 2026-08-25.
+Stand: 2026-08-26.
 
 Dieses Verzeichnis ist das kanonische Artefaktledger des raeumlichen
 Schleifenasts. Markdown-Dateien sind lesbare Reviews oder Reports; JSON-Dateien
@@ -63,7 +63,13 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       Amplitudenkollapse bestehen mit grosser Marge;
     - alle acht Response-Zeilen verfehlen ausschliesslich die absolute
       Tail-Slope-Grenze, obwohl die gespeicherten Tail-Samples post hoc
-      monoton fallen; P3 bleibt geschlossen.
+      monoton fallen; P3 bleibt in diesem historischen Lauf geschlossen.
+13. `scalar_memory_loop_center_p2r_long_recovery_2026-08-25.{md,json}`
+    - `p2r-sign-sensitive-long-recovery-pass` aus dem separat publizierten und
+      vor weiterem Targetzugriff korrigierten Freeze;
+    - exakter Replay aller 120 alten P2-Metriken und acht Checkpoints;
+    - alle 48 neuen Fenster zeigen aufgeloeste Rueckkehr bis 20 Memory-Zeiten;
+      outcome-informierte Reconciliation, keine Umbenennung des P2-Fails.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -88,11 +94,14 @@ Das P2-Linearisierungs-Audit und der Review des formalen Tail-Fails stehen in
 `reports/project/meta/reviews/scalar_memory_loop_center_linearization_audit_2026-08-25.md`
 beziehungsweise
 `reports/project/meta/reviews/scalar_memory_loop_center_p2_review_2026-08-25.md`.
+Das nachgelagerte P2-R-Urteil steht in
+`reports/project/meta/reviews/scalar_memory_loop_center_p2r_long_recovery_review_2026-08-25.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
-Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz, aber keinen
-formalen Kompatibilitaetspass hinzu; der fehlende zweite Intervallbackend und
-die unvollstaendige Spektraleinschliessung bleiben ausdruecklich markiert.
+Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
+bleibt formal gescheitert; P2-R belegt nur die fortgesetzte Rueckkehr derselben
+vorbereiteten Kleinsignalarme. Der fehlende zweite Intervallbackend und die
+unvollstaendige Spektraleinschliessung bleiben ausdruecklich markiert.
 
 ## Aktuelle Lesart
 
@@ -103,5 +112,7 @@ fehlt. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in ihren
 registrierten Panels; daraus folgt keine stabile sechs-zellige Familie. Der
 Kreis ist eine ambiente \(SO(2)\)-Gruppenbahn und nach Symmetriereduktion ein
 Punkt. Der lokale Loop--Center-Tangentenvergleich ist numerisch stark, aber
-sein registriertes Tail-Gate formal fehlgeschlagen. Formation, internes S1,
-Arbeit, Traegheit und Masse bleiben offen.
+sein registriertes Tail-Gate formal fehlgeschlagen. Die outcome-informierte
+P2-R-Verlaengerung zeigt danach aufgeloeste Rueckkehr in allen 48 neuen
+Fenstern durch 20 Memory-Zeiten und oeffnet nur P3 Formation/Basin. Internes
+S1, Arbeit, Traegheit und Masse bleiben offen.

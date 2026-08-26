@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-25.
+Stand: 2026-08-26.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
 Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
@@ -27,54 +27,21 @@ Bis dahin gelten zwei strikte Grenzen:
 - Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
   Formation.
 
-Der erste prospektive P2-Versuch ist im
-[aktuellen Status](current_status.md) dokumentiert und bleibt formal `fail`.
-Er oeffnet P3 nicht. Die aktive Aufgabe ist deshalb eine eng begrenzte,
-outcome-informierte Recovery-Reconciliation ohne Parameter- oder
-Schwellenretuning des historischen Laufs.
+Der erste prospektive P2-Versuch bleibt formal `fail`. Die separat
+vorregistrierte P2-R-Verlaengerung wurde nach kritischem Review als enge,
+outcome-informierte Recovery-Reconciliation gehalten; sie aendert den alten
+Entscheid nicht. Dieser abgeschlossene Befund steht im
+[aktuellen Status](current_status.md). Er oeffnet jetzt ausschliesslich P3
+Formation/Basin, nicht Mechanik oder Masse.
 
 ```mermaid
 flowchart LR
-    p2r["P2-R sign-sensitive<br/>Long-Recovery"]
     p3["P3 Formation<br/>und Basin"]
     p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
     p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
 
-    p2r --> p3 --> p4 --> p5
+    p3 --> p4 --> p5
 ```
-
-## P2-R: Sign-sensitive Long-Recovery-Reconciliation
-
-**Frage:** Ist der formale P2-Tail-Fail eine weiterhin konvergierende
-Rueckkehr, die vom absoluten Flatness-Kriterium verworfen wurde, oder geht die
-relative Schleife spaet in Plateau, Oszillation oder outward drift ueber?
-
-Vor einem neuen Lauf ist ein eigener Vertrag zu veroeffentlichen. Er muss den
-historischen P2-Fail und seine outcome-informierte Herkunft explizit nennen.
-Unveraendert bleiben Kandidat, Kernel, \((\alpha,H,\eta)\), beide
-Probeprofile, Richtungen, Vorzeichen und Amplituden. Neu festgelegt werden nur
-eine laengere probe-off Erholung und sign-sensitive Observablen:
-
-- signed D0-Steigungen in mindestens zwei nichtueberlappenden spaeten
-  Fenstern statt des Betrags allein;
-- logarithmische Abklingrate und monotonie-resistente Envelope;
-- eine feste absolute Final-/Peak-Grenze und eine late-growth Stopregel;
-- vollstaendiger Replay der alten Linearitaets-, Restterm- und
-  Wellenformkontrollen, ohne sie neu zu fitten;
-- `probe-off` und exakte Reproduktion des historischen 2400-Update-
-  Checkpoints vor Oeffnung der zusaetzlichen Zeitspanne.
-
-Der alte absolute-Slope-Fail wird weder geloescht noch umbenannt. Ein P2-R-Pass
-zeigt nur, dass die bereits gesehene lokale Matrixantwort in der verlaengerten
-Beobachtung zur vorbereiteten Schleife zurueckkehrt. Er bleibt eine
-outcome-informierte Reconciliation, keine unabhaengige Bestaetigung. Erst ein
-kritisch gehaltener P2-R-Pass darf P3 oeffnen; `fail` oder `inconclusive`
-stoppen die sequentielle Schleifenfolge.
-
-P2-R darf weder einen positiven skalaren \(g_H\) nachfitten noch die
-B-star-Filtermasse auf L3 uebertragen. Arbeitsbilanz, mikroskopischer Aktuator
-und physikalische Masse bleiben P4 beziehungsweise dem getrennten
-Masseprogramm vorbehalten.
 
 ## P3: Formation und begrenztes Basin
 
@@ -86,7 +53,8 @@ Erforderlich sind:
 
 - feste nichtkreisfoermige Historienfamilien und unabhaengige Holdouts;
 - chirality-symmetrische Seeds sowie eine vorbereitete-Bahn-Positivkontrolle;
-- unveraenderte Modellparameter der zugelassenen L3-Zelle und aus P2-R;
+- unveraenderte Modellparameter der zugelassenen L3-Zelle; P2-R hat keine
+  Parameter nachjustiert;
 - vorab definierte Eintritts-, Verweil- und Abbruchkriterien im quotientierten
   Relativzustand.
 
@@ -129,7 +97,7 @@ Quantisierung folgen daraus nicht.
 
 ## Paralleles Publikations-Hardening
 
-Diese Arbeiten duerfen P2--P5 begleiten, sind aber kein Ersatz fuer sie:
+Diese Arbeiten duerfen P3--P5 begleiten, sind aber kein Ersatz fuer sie:
 
 - mindestens einen Root mit einem unabhaengigen outward-rounded
   Intervallbackend reproduzieren;
