@@ -68,8 +68,9 @@ Die Programme werden ueber eine einzige falsifizierbare Kette gefuehrt. P2
 bleibt formal gescheitert, P2-R haelt nur die lange Rueckkehr aufrecht, P3
 besteht scoped, und P4 bleibt formal
 `p4-source-write-architecture-fail`. Die aktive Folge ist ausschliesslich eine
-neue P4-R-Messhaertung mit vorregistriertem Matrixantwort-Holdout. P5,
-Interaktion, Spin, Impuls und Masse bleiben geschlossen.
+neue P4-R-phi-Messhaertung mit vorregistriertem Startphasen-Holdout. Nur ein
+reviewed Chiral-Pass oeffnet danach einen separaten Anchor-Skalenholdout;
+P5, Interaktion, Spin, Impuls und Masse bleiben geschlossen.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

@@ -55,7 +55,7 @@ scope, strict documentation build and all 784 tests.
 
 ## 2. Coordinate construction and complex convention
 
-For chirality (s\in\{+1,-1\}), the implementation evaluates the finite sum
+For chirality $s\in\{+1,-1\}$, the implementation evaluates the finite sum
 
 \[
 \beta_s=B_H(e^{is\theta_3}),\qquad
@@ -63,35 +63,35 @@ C_s=\sum_{j=0}^{H-1}a_{s,j}h_j
 \]
 
 directly from the normalized finite-memory weights. Complex multiplication by
-(a) represents the real planar matrix (M(a)), so the Euclidean adjoint is
-multiplication by (a^*). Consequently the slot force is
+$a$ represents the real planar matrix $M(a)$, so the Euclidean adjoint is
+multiplication by $a^*$. Consequently the slot force is
 
 \[
 f_j=a_{s,j}^*F,
 \]
 
 and the implementation's real inner product is
-(u\cdot v=\operatorname{Re}(u^*v)). This convention is internally
+$u\cdot v=\operatorname{Re}(u^*v)$. This convention is internally
 consistent: the unrelated-history virtual-work error is
-(2.08\times10^{-17}), while total generalized-force balance is below
-(1.76\times10^{-16}) of the registered force scale in every target arm.
+$2.08\times10^{-17}$, while total generalized-force balance is below
+$1.76\times10^{-16}$ of the registered force scale in every target arm.
 
 The coefficient sum, notch and chirality-conjugacy controls are at most
-(9.16\times10^{-16}). Correct-chirality target centers are below
-(9.49\times10^{-16}), whereas the wrong-chirality amplitude remains large.
+$9.16\times10^{-16}$. Correct-chirality target centers are below
+$9.49\times10^{-16}$, whereas the wrong-chirality amplitude remains large.
 Reflection maps the two chiralities exactly in the stored response panel.
 There is no sign correction or post-result coefficient estimate.
 
-The raw normalized memory center (c_H) was not substituted for (C_s).
+The raw normalized memory center $c_H$ was not substituted for $C_s$.
 Its rotating target amplitude is `0.5058810073761263`, while the notched
-coordinate is zero to rounding precision. Treating (F\,dc_H) as work leaves
+coordinate is zero to rounding precision. Treating $F\,dc_H$ as work leaves
 a per-step rival-ledger residual as large as `14.9784` initial interaction
 energies; it cannot close the declared interaction ledger.
 
 ## 3. Source/write algebra and exact work ledger
 
 The active transition first evaluates the unchanged nonlinear native L3 map
-(\widetilde h=\mathcal T_{\rm L3}(h)), then modifies only the visible write
+$\widetilde h=\mathcal T_{\rm L3}(h)$, then modifies only the visible write
 slot by
 
 \[
@@ -99,7 +99,7 @@ h'_0=\widetilde h_0+\alpha a_0^*F.
 \]
 
 The external coordinate moves with the matched positive mobility
-(\nu=|a_0|^2), and the force is the exact closed solution of the implicit
+$\nu=|a_0|^2$, and the force is the exact closed solution of the implicit
 midpoint discrete-gradient equation. No second difference, velocity,
 momentum or mass coefficient appears in either update.
 
@@ -109,15 +109,15 @@ The exact finite-history identity is
 F\cdot(C'-C)=W_{\rm write}+W_{\rm age},
 \]
 
-not (F\cdot\Delta h_0) or (F\cdot\Delta c_H) by definition. The target
+not $F\cdot\Delta h_0$ or $F\cdot\Delta c_H$ by definition. The target
 results are:
 
 | registered quantity | observed range or maximum | limit | result |
 | --- | ---: | ---: | :---: |
-| per-step write/age split / (U_0) | `1.997e-12 .. 9.595e-12` | `5e-11` | pass |
-| per-step total interaction ledger / (U_0) | `1.997e-12 .. 9.596e-12` | `5e-11` | pass |
-| cumulative write/age split / (U_0) | `3.730e-12` maximum | `5e-9` | pass |
-| cumulative total ledger / (U_0) | `3.727e-12` maximum | `5e-9` | pass |
+| per-step write/age split / $U_0$ | `1.997e-12 .. 9.595e-12` | `5e-11` | pass |
+| per-step total interaction ledger / $U_0$ | `1.997e-12 .. 9.596e-12` | `5e-11` | pass |
+| cumulative write/age split / $U_0$ | `3.730e-12` maximum | `5e-9` | pass |
+| cumulative total ledger / $U_0$ | `3.727e-12` maximum | `5e-9` | pass |
 | force balance / initial force | `1.755e-16` maximum | `5e-12` | pass |
 | midpoint-force residual / initial force | `2.922e-13` maximum | `5e-12` | pass |
 | actuator update / initial coupling displacement | `1.149e-13` maximum | `5e-12` | pass |
@@ -160,7 +160,7 @@ but the amplitude-normalized registered limits are
 
 They are therefore 50--278 times too tight for the observed binary64
 subtraction. For scale, the target weighted absolute sum is `1.71335`; a
-conservative (\gamma_{4H}\sum_j|a_jh_j|) dot-product bound is
+conservative $\gamma_{4H}\sum_j|a_jh_j|$ dot-product bound is
 `3.65e-12`, far above both the observed residual and the registered absolute
 limit. The failures are at ordinary machine-rounding magnitude and do not
 contradict the exact single-slot algebra.
@@ -182,24 +182,31 @@ response bounds:
 
 | dynamic observable | observed range | limit | result |
 | --- | ---: | ---: | :---: |
-| center orthogonal displacement / (\delta) | `0.20716 .. 0.20969` | `0.05` | fail 24/24 |
-| actuator orthogonal displacement / (\delta) | `0.15164 .. 0.15587` | `0.05` | fail 24/24 |
-| final separation / (\delta) | `0.08153 .. 0.08437` | `0.10` | pass |
-| final interaction energy / (U_0) | `0.006647 .. 0.007118` | `0.01` | pass |
-| center longitudinal projection / (\delta) | `0.22428 .. 0.25755` | `[0.20,0.80]` | pass |
-| actuator longitudinal projection / (\delta) | `0.28780 .. 0.31879` | `[0.20,0.80]` | pass |
-| maximum own-chirality D0 / (R_3) | `2.46e-5 .. 1.373e-4` | `0.01` | pass |
-| late own-chirality D0 / (R_3) | `3.19e-6 .. 1.489e-5` | `0.002` | pass |
-| late opposite-chirality D0 / (R_3) | `1.113418 .. 1.113420` | at least `0.5` | pass |
-| maximum center signal / (\delta) | `0.3053 .. 0.3321` | at least `0.25` | pass |
+| center orthogonal displacement / $\delta$ | `0.20716 .. 0.20969` | `0.05` | fail 24/24 |
+| actuator orthogonal displacement / $\delta$ | `0.15164 .. 0.15587` | `0.05` | fail 24/24 |
+| final separation / $\delta$ | `0.08153 .. 0.08437` | `0.10` | pass |
+| final interaction energy / $U_0$ | `0.006647 .. 0.007118` | `0.01` | pass |
+| center longitudinal projection / $\delta$ | `0.22428 .. 0.25755` | `[0.20,0.80]` | pass |
+| actuator longitudinal projection / $\delta$ | `0.28780 .. 0.31879` | `[0.20,0.80]` | pass |
+| maximum own-chirality D0 / $R_3$ | `2.46e-5 .. 1.373e-4` | `0.01` | pass |
+| late own-chirality D0 / $R_3$ | `3.19e-6 .. 1.489e-5` | `0.002` | pass |
+| late opposite-chirality D0 / $R_3$ | `1.113418 .. 1.113420` | at least `0.5` | pass |
+| maximum center signal / $\delta$ | `0.3053 .. 0.3321` | at least `0.25` | pass |
 
 Phase, even/odd response, three-amplitude collapse and mirror equivariance all
 pass. The maximum even/odd ratio is `2.97e-5`, the maximum amplitude-collapse
 error is `1.49e-5`, and the stored mirror error is zero. The deflection changes
-sign with chirality: for the positive-chirality (+x) arm at
-(\delta/R_3=10^{-3}), the final normalized center is approximately
-(0.2243-0.2072i); the negative-chirality mirror is
-(0.2243+0.2072i). The (y) arms rotate covariantly.
+sign with chirality: for the positive-chirality $+x$ arm at
+$\delta/R_3=10^{-3}$, the final normalized center is approximately
+$0.2243-0.2072i$; the negative-chirality mirror is
+$0.2243+0.2072i$. The $y$ arms retain the same chirality-odd transverse
+sign, but their longitudinal coefficients differ from the $x$ arms by about
+10--15 percent. This comparison is not itself a covariance test: the dynamic
+arms rotate the actuator direction while retaining the same prepared-history
+phase. A common proper rotation of **both** history and actuator was checked
+only as a static construction control. The target panel therefore samples two
+force-to-orbit start phases; it does not establish a phase-averaged isotropic
+mobility.
 
 This coherent sign change and amplitude collapse argue against random error,
 large-amplitude nonlinearity or quotient-shape damage. They support only the
@@ -248,7 +255,7 @@ operational straight-line single-loop mechanics it asked for. The transverse
 response is compatible with a chirality-conditioned matrix susceptibility
 while the loop remains close to its quotient target.
 
-**Hypothesis:** a full (2\times2) longitudinal/antisymmetric response model,
+**Hypothesis:** a full $2\times2$ longitudinal/antisymmetric response model,
 rather than a scalar center mobility, may describe the weak coupled loop.
 This is outcome-informed and requires a new falsification contract and a
 fresh holdout before it can become evidence.
@@ -265,10 +272,10 @@ fresh holdout before it can become evidence.
 5. A separately named P4-R may be designed only as outcome-informed
    reconciliation. It must first separate numerical metrology from dynamics:
    certify the algebraic single-slot residual against an explicit rounding
-   envelope, predeclare a matrix-valued chirality-odd response observable,
-   and reserve genuinely new direction/scale data as holdout. Existing P4
-   arms are discovery data for that tensor and cannot serve as its independent
-   confirmation.
+   envelope, predeclare a phase-averaged matrix-valued chirality-odd response
+   observable, and reserve genuinely new initial phases as its first holdout.
+   A cross-scale holdout may follow only after that phase test. Existing P4
+   arms are discovery data and cannot serve as independent confirmation.
 
 Until such a prospective holdout passes, the strongest accurate statement is:
 

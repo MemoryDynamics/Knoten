@@ -288,14 +288,18 @@ wechselt mit der Chiralitaet das Vorzeichen.
 **Neue Hypothese, noch keine Evidenzfreigabe:** Die schwache gekoppelte
 Antwort koennte statt eines skalaren Abschlusses eine chirality-odd
 longitudinal-plus-antisymmetrische \(2\times2\)-Suszeptibilitaet besitzen.
-Die vorhandenen Arme sind fuer diese Lesart Discovery-Daten. P4-R braucht
-eine neue Vorregistrierung mit numerisch aufgeloestem Residuum und frischem
-Holdout; P5, Spin, Impuls und Masse bleiben geschlossen.
+Die vorhandenen Arme sind fuer diese Lesart Discovery-Daten. Weil die alten
+\(x/y\)-Arme nur den Aktuator, nicht zugleich die History rotierten, ist die
+Antwort zudem startphasenkonditioniert. P4-R-phi braucht eine neue
+Vorregistrierung mit numerisch aufgeloestem Residuum und einem gleichmaessigen
+Holdout aus bisher ungeoeffneten Startphasen. Nur dessen reviewed Chiral-Pass
+oeffnet einen Anchor-Skalenholdout; P5, Spin, Impuls und Masse bleiben
+geschlossen.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht und
-oeffnet ausschliesslich die Prospektierung von P4-R-Messhaertung plus
-Matrixdiskriminator. Die einzige aktive
+oeffnet ausschliesslich die Prospektierung von P4-R-phi-Messhaertung plus
+Phasendiskriminator. Die einzige aktive
 Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.

@@ -765,6 +765,10 @@ zeigt die volle nichtlineare Antwort in allen 24 Armen eine grosse
 chirality-odd Querkomponente statt der vorregistrierten nahezu skalaren
 Geradeausbewegung. Damit ist Option 3 als konkrete Algebra demonstriert, aber
 nicht als physisch zugelassene Gesamtmechanik oder Masse identifiziert.
+Die alten $x/y$-Arme rotierten nur den Aktuator bei festgehaltener
+History-Phase; sie belegen daher noch keine diskret phasengemittelte isotrope
+oder antisymmetrische Suszeptibilitaet. P4-R-phi darf diese neue Hypothese nur
+mit ungeoeffneten History-Phasen und aufgeloester Residualmetrologie testen.
 
 ## 9. Anschluss an die kanonische Gate-Folge
 

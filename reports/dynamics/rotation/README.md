@@ -144,4 +144,7 @@ Geometrien in beiden gesetzten Chiralitaeten und oeffnet nur P4. Internes S1,
 Arbeit, Traegheit und Masse bleiben offen. Der nachgelagerte P4-Lauf schliesst
 zwar den Ledger der explizit konstruierten Source-/Write-Architektur, besteht
 aber das Gesamtgate nicht. Seine robuste chirality-odd Querantwort ist nur eine
-neue Matrixsuszeptibilitaets-Hypothese; P5 bleibt geschlossen.
+neue, startphasenkonditionierte Matrixsuszeptibilitaets-Hypothese. Der erste
+prospektive Nachtest ist P4-R-phi mit acht neuen History-Phasen; selbst ein
+reviewed Chiral-Pass oeffnet nur einen Anchor-Skalenholdout. P5 bleibt
+geschlossen.

@@ -194,10 +194,10 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 1. Den formalen P4-Fail unveraendert halten: Der exakte Write-/Age-Ledger
    besteht, aber die registrierte Gesamtmechanik und die Geradeausantwort
    bestehen nicht; P5 bleibt geschlossen.
-2. P4-R separat vorregistrieren: cancellation-sichere Residualmetrologie und
-   einen frischen Holdout fuer die outcome-informierte chirality-odd
-   \(2\times2\)-Antwortshypothese, ohne Masse oder zweite Zeitordnung
-   einzusetzen.
+2. P4-R-phi separat vorregistrieren: cancellation-sichere Residualmetrologie
+   und einen frischen, gleichmaessigen Startphasen-Holdout fuer die
+   outcome-informierte chirality-odd \(2\times2\)-Antwortshypothese. Nur ein
+   reviewed Pass oeffnet danach einen Anchor-Skalenholdout, nicht P5.
 3. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
    Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
 4. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt

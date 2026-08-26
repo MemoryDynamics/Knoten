@@ -147,6 +147,7 @@ Der unveraenderliche Befund ist `p4-source-write-architecture-fail`. Der
 finite-H-Write-/Age-Ledger schliesst, aber zwei cancellation-dominierte
 Direktresiduen verfehlen ihre unter-binary64 skalierte Grenze und alle 24 Arme
 zeigen eine zu grosse chirality-odd Querantwort. Das Review oeffnet nur die
-Prospektierung einer getrennten P4-R-Messhaertung mit frischem
-Matrixantwort-Holdout. P5, Topologie, Spin, Impuls und Masse bleiben
-versiegelt.
+Prospektierung von P4-R-phi: cancellation-sichere Metrologie und einen
+frischen Holdout aus acht vorbereiteten History-Phasen. Ein reviewed
+Chiral-Pass wuerde nur einen separaten Anchor-Skalenholdout oeffnen. P5,
+Topologie, Spin, Impuls und Masse bleiben versiegelt.

@@ -363,7 +363,8 @@ flowchart LR
     p2r["P2-R pass<br/>resolved long recovery"]
     formation["P3 pass<br/>finite-ensemble attraction"]
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
-    p4r["P4-R prospective<br/>metrology + matrix holdout"]
+    p4rphi["P4-R-phi prospective<br/>metrology + phase holdout"]
+    p4rs["P4-R-S prospective<br/>anchor scale holdout"]
     interaction["P5 closed<br/>two-loop interaction"]
 
     equations --> discovery --> p0d0
@@ -374,8 +375,9 @@ flowchart LR
     nonanchor --> bridge
     center -.independent input.-> bridge
     bridge --> p2r --> formation --> mechanics
-    mechanics -.new protocol required.-> p4r
-    p4r -.reviewed full pass required.-> interaction
+    mechanics -.new protocol required.-> p4rphi
+    p4rphi -.reviewed chiral pass required.-> p4rs
+    p4rs -.reviewed full pass required.-> interaction
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
@@ -384,8 +386,8 @@ in `reports/dynamics/rotation/README.md`. Die durchgezogenen Pfeile markieren
 die historische Gatefolge samt unveraendertem P2- und P4-Fail; sie bedeuten
 nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
 reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
-P4-Fail schliesst P5. Die gestrichelte P4-R-Folge ist prospektiv und darf den
-historischen P4-Befund nicht umbenennen.
+P4-Fail schliesst P5. Die gestrichelte P4-R-phi/P4-R-S-Folge ist prospektiv
+und darf den historischen P4-Befund nicht umbenennen.
 
 ## Leseregeln
 
