@@ -173,3 +173,17 @@ def test_ideal_cayley_reference_is_exact_and_non_decisional() -> None:
     assert rival["trace"][0]["center"] == [0.0, 0.0]
     assert rival["trace"][0]["actuator"] == [initial.real, initial.imag]
     assert rival["final_separation_ratio"] == expected_factor**4000
+
+
+def test_failed_report_does_not_activate_conditional_claim_boundary() -> None:
+    payload = {
+        "decision": "p4-source-write-architecture-fail",
+        "claim_boundary": {"established_if_full_pass": "conditional claim"},
+    }
+    lines = p4._claim_boundary_lines(payload)
+    assert lines[0] == "Conditional full-pass boundary not activated."
+    assert "would have established" in lines[1]
+
+    payload["decision"] = "p4-source-write-mechanics-pass"
+    lines = p4._claim_boundary_lines(payload)
+    assert lines == ["Established by this full pass: conditional claim."]

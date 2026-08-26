@@ -49,20 +49,27 @@ numerische Stabilitaet am Anchor und an L3 mit
 \(|\lambda_\perp|=0.99306035\) beziehungsweise 0.99649340. Beide
 Intervallpanels teilen denselben `mpmath.iv`-Backend, und ARPACK schliesst das
 volle Spektrum nicht ein. Die belastbare Lesart ist daher „vorbereitete
-raeumliche Schleifenfamilie mit zwei lokal getesteten Skalen“, nicht
-Formation, internes S1, Arbeit oder Masse.
+raeumliche Schleifenbasis mit zwei lokal getesteten Skalen“. Der spaetere P3-
+Pass erweitert dies eng auf finite-ensemble attraction aus fuenf
+nichtkreisfoermigen Geometrien in beiden gesetzten Chiralitaeten, nicht auf
+generische Formation, internes S1, Arbeit oder Masse.
 
 Der getrennte Center-Ast besitzt zugleich eine exakte \(B_H\)-Reduktion,
 einen passiven effektiven finite-\(H\)-Port und die eng getestete
 Filtertraegheit \(m_{\rm filter}=\tau/\mu\). Er identifiziert aber weder einen
 materiellen Schwerpunkt noch den mikroskopischen Aktuator fuer physische
-Arbeit. Gemeinsame Modellherkunft ist deshalb noch keine gemeinsame Evidenz.
+Arbeit. P4 konstruiert danach erstmals einen expliziten Source-/Write-Port mit
+geschlossenem finite-H-Age-Ledger, besteht aber sein Gesamtgate nicht: Alle 24
+Arme zeigen eine vorregistriert zu grosse chirality-odd Querantwort. Gemeinsame
+Modellherkunft und ein algebraischer Ledger sind deshalb noch keine
+mechanische Objektevidenz.
 
-Die Programme werden nun ueber eine einzige falsifizierbare Kette gefuehrt:
-Nach dem kritisch gehaltenen P1-Pass prueft P2 beide Reduktionen erstmals am
-selben eingefrorenen L3-Kandidaten. Erst ein P2-Pass fuehrt die Arbeitsroute
-methodisch zusammen; Formation, reziproke Mechanik und Interaktionen bleiben
-nachgelagert.
+Die Programme werden ueber eine einzige falsifizierbare Kette gefuehrt. P2
+bleibt formal gescheitert, P2-R haelt nur die lange Rueckkehr aufrecht, P3
+besteht scoped, und P4 bleibt formal
+`p4-source-write-architecture-fail`. Die aktive Folge ist ausschliesslich eine
+neue P4-R-Messhaertung mit vorregistriertem Matrixantwort-Holdout. P5,
+Interaktion, Spin, Impuls und Masse bleiben geschlossen.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

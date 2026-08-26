@@ -18,7 +18,7 @@ vollstaendig erhalten.
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
-| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 besteht fuenf globale Small-Gain-/Positive-Real-Zellen; B-star reproduziert die Skalierung \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) einschliesslich des registrierten gemeinsamen Holdouts. | passiver effektiver Center-Port und identifizierte Filtertraegheit unter dem gewaehlten Portvertrag | Gate A identifiziert keinen eindeutigen mikroskopischen Aktuator; \(c_H\) ist der Schwerpunkt eines Source-/Sink-Memory, nicht nachgewiesen konservierter Materie; keine physikalische Arbeit oder Masse |
+| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. Der spaetere P4-Source-/Write-Port schliesst seinen exakten Write-/Age-Arbeitsledger, endet aber formal als `p4-source-write-architecture-fail`; alle 24 Arme zeigen eine vorregistriert zu grosse chirality-odd Querantwort. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag und ein algebraisch geschlossener Ledger der explizit konstruierten P4-Portarchitektur | P4 besteht die Gesamtmechanik nicht; die direkte Residualnorm liegt unter dem binary64-Messboden und die Querantwort falsifiziert die skalare Geradeaushypothese. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, physikalische Arbeit oder Masse identifiziert |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -131,6 +131,16 @@ vollstaendig erhalten.
   Holdout-Ecke mit etwa \(6.6\,10^{-6}\) maximalem Relativfehler. Weil Port
   und Wrapper konstruiert sind, ist dies keine unabhaengige Entdeckung
   physischer Masse.
+- Der eingefrorene P4-Source-/Write-Lauf verwendet die volle nichtlineare
+  L3-FIFO-Map in 24 schwachen Armen. Der exakte finite-H-Arbeitsledger liegt
+  pro Schritt maximal bei `9.60e-12` seiner Anfangsenergieskala und besteht;
+  channel-off, D0, Phase, Even/Odd, drei Amplituden und Spiegelung bestehen
+  ebenfalls. Die Entscheidung bleibt dennoch formal
+  `p4-source-write-architecture-fail`: Zwei cancellation-dominierte
+  Direktresiduen verfehlen eine unter-binary64 skalierte Grenze, und alle
+  Arme ueberschreiten substanziell die registrierte Orthogonalgrenze. Das
+  stuetzt nur den deklarierten Ledger und eine neue zu testende
+  matrixwertige Antwortshypothese, keinen Mechanikpass.
 - Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
   ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
   Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
@@ -182,6 +192,10 @@ vollstaendig erhalten.
   relativen Gleichgewichts. Nach Quotientieren der ambienten Rotation bleibt
   ein Punkt; eine zusätzliche interne \(S^1\)-Phase, ein konservativer
   Kreisel, Arbeit oder Masse folgen daraus nicht.
+- P4 etabliert keine reziproke Single-Loop-Gesamtmechanik: Der formale Fail
+  bleibt bestehen, P5 ist geschlossen, und die chirality-odd Querantwort darf
+  ohne frischen Holdout weder als Spin noch als gyroskopische Masse gedeutet
+  werden.
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
 - Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
@@ -251,15 +265,37 @@ identifizieren weder einen einzelnen Pol noch eine skalare Masse. Die zwei
 target-blinden Geometrien enthalten kein \(R_3\) oder \(\theta_3\), bleiben
 jedoch modellinformierte, chiral vorbereitete Delayhistorien.
 
-**Hypothese:** Der effektive Center-Port laesst sich durch genau eine
-mikroskopisch explizite Read-/Write-Architektur mit Gegenkraft und geschlossenem
-Source-/Sink-Arbeitsledger realisieren, ohne einen Massenterm einzusetzen. Das
-ist P4; P3 liefert dafuer keine mechanische Evidenz.
+**P4-Evidenz:** Die anschliessend eingefrorene Source-/Write-Architektur nutzt
+den exakten chirality-konditionierten Orbit-Center \(C_s\), nicht das raw
+\(c_H\). Alle 24 schwachen Arme sowie beide channel-off-Kontrollen sind
+vollstaendig. Write-/Age-Split, Interaktionsledger, Gegenkraft, Midpoint-
+Kraft und positive Mobilitaeten bestehen. Der bewusst falsche raw-\(c_H\)-
+Ledger verfehlt die Bilanz um bis zu `14.9784` Anfangsenergien, der ohne
+Age-Term um bis zu `19.99`.
 
-Das kritische P3-Review haelt den Full-Pass als finite-ensemble attraction
-aufrecht. Es oeffnet ausschliesslich die P4-Preregistrierung fuer reziproke
-Single-Loop-Mechanik; Rauschen kann nur in einem getrennten Protokoll folgen.
-Die einzige aktive
+**P4-Grenze:** Die unveraenderliche Entscheidung ist dennoch
+`p4-source-write-architecture-fail`. Zwei algebraisch redundante direkte
+Readout-Residuen liegen absolut nur bei `2.36e-16..3.28e-16`, werden aber gegen
+eine cancellation-unaufgeloeste Grenze von `1.18e-18..4.72e-18` normiert.
+Das ist ein Messdesignfehler und keine aufgeloeste Nichtreziprozitaet; der
+formale Fail bleibt trotzdem bestehen. Unabhaengig davon falsifizieren alle
+24 Arme die registrierte Geradeausantwort: Center und Aktuator erreichen
+Querkomponenten von `0.207..0.210 delta` beziehungsweise
+`0.152..0.156 delta` bei maximal erlaubten `0.05 delta`. D0, Phase,
+Amplitudenkollapse und Spiegelkontrollen bestehen, und die Querkomponente
+wechselt mit der Chiralitaet das Vorzeichen.
+
+**Neue Hypothese, noch keine Evidenzfreigabe:** Die schwache gekoppelte
+Antwort koennte statt eines skalaren Abschlusses eine chirality-odd
+longitudinal-plus-antisymmetrische \(2\times2\)-Suszeptibilitaet besitzen.
+Die vorhandenen Arme sind fuer diese Lesart Discovery-Daten. P4-R braucht
+eine neue Vorregistrierung mit numerisch aufgeloestem Residuum und frischem
+Holdout; P5, Spin, Impuls und Masse bleiben geschlossen.
+
+Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
+aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht und
+oeffnet ausschliesslich die Prospektierung von P4-R-Messhaertung plus
+Matrixdiskriminator. Die einzige aktive
 Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
@@ -306,6 +342,12 @@ wichtig:
 34. `reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md`
 35. `reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md`
 36. `reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md`
+37. `reports/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_2026-08-22.md`
+38. `reports/dynamics/rotation/scalar_memory_loop_center_p2_2026-08-25.md`
+39. `reports/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery_2026-08-25.md`
+40. `reports/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin_2026-08-26.md`
+41. `reports/dynamics/rotation/scalar_memory_loop_p4_source_write_2026-08-26.md`
+42. `reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md`
 
 Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
 Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
@@ -331,6 +373,9 @@ die Historie, tragen aber keine aktuellen Kernelclaims.
   Krawczyk-Einschluesse der finite-Summen-Roots.
 - `src/emergenz_knoten/rotating_wave_stability.py`: volle mitrotierende
   FIFO-Map, analytischer Sparse-Jacobian und Symmetriequotient.
+- `src/emergenz_knoten/orbit_center_actuator.py`: exakter endlicher
+  Orbit-Center-Notch, adjungierte Slotkraefte und der reziproke
+  Source-/Write-Schritt samt vollstaendigem Age-Ledger.
 - `experiments/current/dynamics/rotation/README.md`: sequentielle
   Rotationspipeline; `reports/dynamics/rotation/README.md`: Artefaktledger.
 - `experiments/current/dynamics/scaling/scalar_memory_center_*.py`:

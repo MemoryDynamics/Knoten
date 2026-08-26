@@ -191,14 +191,19 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. P4 mit genau einer mikroskopisch reziproken Single-Loop-Aktuatorarchitektur
-   und geschlossenem Source-/Sink-Arbeitsledger herleiten und vorregistrieren.
-2. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
+1. Den formalen P4-Fail unveraendert halten: Der exakte Write-/Age-Ledger
+   besteht, aber die registrierte Gesamtmechanik und die Geradeausantwort
+   bestehen nicht; P5 bleibt geschlossen.
+2. P4-R separat vorregistrieren: cancellation-sichere Residualmetrologie und
+   einen frischen Holdout fuer die outcome-informierte chirality-odd
+   \(2\times2\)-Antwortshypothese, ohne Masse oder zweite Zeitordnung
+   einzusetzen.
+3. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
    Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
-3. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt
+4. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt
    prospektiert werden, ersetzen aber nicht die primaere P4-Folge.
-4. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
+5. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
    getrennte Programme behandeln.
-5. Publikations-Hardening mit zweitem Intervallbackend und staerkerer
+6. Publikations-Hardening mit zweitem Intervallbackend und staerkerer
    Spektralkontrolle darf parallel laufen, ersetzt aber kein Gate. Die
    massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

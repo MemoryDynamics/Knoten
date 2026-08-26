@@ -1330,6 +1330,16 @@ def _maximum(rows: list[dict[str, Any]], key: str) -> float | None:
     return max(values) if values else None
 
 
+def _claim_boundary_lines(payload: dict[str, Any]) -> list[str]:
+    claim = payload["claim_boundary"]["established_if_full_pass"]
+    if payload["decision"] == "p4-source-write-mechanics-pass":
+        return ["Established by this full pass: " + claim + "."]
+    return [
+        "Conditional full-pass boundary not activated.",
+        "A full pass would have established only: " + claim + ".",
+    ]
+
+
 def render_report(payload: dict[str, Any], *, summary_sha256: str) -> str:
     """Render a compact human-readable record of the frozen decision."""
 
@@ -1470,7 +1480,7 @@ def render_report(payload: dict[str, Any], *, summary_sha256: str) -> str:
             "",
             "## Interpretation boundary",
             "",
-            payload["claim_boundary"]["established_if_full_pass"] + ".",
+            *_claim_boundary_lines(payload),
             "",
             "Not established: " + payload["claim_boundary"]["not_established"] + ".",
             "",
