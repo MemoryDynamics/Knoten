@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-08-22.
+Stand: 2026-08-26.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -39,13 +39,18 @@ Als technischer Spin-off ist inzwischen enger tragbar:
 - ein unabhaengig reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
   First-order-Skalierung;
 - lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
-  prospektiv gewaehlten feineren L3-Zelle.
+  prospektiv gewaehlten feineren L3-Zelle;
+- eine lokale matrixwertige Loop--Center-Kleinsignalantwort am vorbereiteten
+  L3-Kreis und, in einer outcome-informierten prospektiven Verlaengerung,
+  aufgeloeste Rueckkehr aller signierten Arme durch 20 Memory-Zeiten.
 
 Das kann eine eigenstaendige mathematische Notiz oder ein Supplement tragen.
 Nicht tragbar sind globale Eindeutigkeit, Stabilitaet der gesamten Familie,
-spontane Formation, internes S1 nach `SO(2)`-Quotient, Arbeit oder Masse. Der
-Foundation-Audit, prospektives L5-Review und das separate kritische L3-Review
-sind die reviewertragenden Quellen. Ein zweiter Intervallbackend und eine
+spontane Formation, internes S1 nach `SO(2)`-Quotient, ein skalares
+Traegheitsgesetz, Arbeit oder Masse. Der
+Foundation-Audit, prospektives L5-Review sowie die separaten kritischen L3-,
+P2- und P2-R-Reviews sind die reviewertragenden Quellen. Ein zweiter
+Intervallbackend und eine
 vollstaendige Spektraleinschliessung fehlen. Der erste Leiter-Fail und der
 initiale Audit-Pipeline-Fail sowie der anschliessend von Linux-CI falsifizierte
 nichtportable lokale Zwischenpass bleiben historisch sichtbar.
@@ -59,7 +64,7 @@ der kanonischen Gate-Folge in den
 | Freigabe | Nach einem dokumentierten Pass zusaetzlich tragbar | Weiterhin gesperrt |
 | --- | --- | --- |
 | P1 Nicht-Anchor-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle als zweiter getesteter Skala | vollstaendige Spektralstabilitaet und stabile Familie |
-| P2 Loop--Center-Kompatibilitaet | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten und effektive Kleinsignalantwort unter dem deklarierten Port | mikroskopischer Aktuator, physische Arbeit oder Masse |
+| P2 Loop--Center plus P2-R-Reconciliation | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten, matrixwertige effektive Kleinsignalantwort und aufgeloeste Rueckkehr unter dem deklarierten schwachen Port | unabhaengige Replikation, skalares Massengesetz, mikroskopischer Aktuator, physische Arbeit oder Masse |
 | P3 Formation/Basin | Formation aus den vorregistrierten Historienfamilien und Basin-Evidenz fuer das getestete Ensemble | globale oder generische Formation und ungetestete Rauschrobustheit |
 | P4 reziproke Single-Loop-Mechanik | geschlossene Gegenkraft-/Arbeitsbilanz der konkret hergeleiteten Mikromechanik; ein effektiver Traegheitskoeffizient, falls aus der Antwort identifiziert | physische Masse, solange ein operationaler Massensatz, Portkalibrierung oder geschlossenes Gesamtledger fehlt oder der Massenterm explizit eingesetzt wurde |
 | P5 Zwei-Loop-Interaktion | kontrollierte reziproke Wechselwirkung zweier einzeln zugelassener Schleifen im getesteten Distanz- und Parameterbereich | Ladung, intrinsischer Spin, universelles Kraftgesetz, Feldtheorie oder Quantisierung |
@@ -241,7 +246,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
-| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | ungetestete Kompatibilitaetshypothese; P1 laesst L3 als lokal numerisch stabilen gemeinsamen Testkandidaten zu, prueft aber keine Centerantwort | derselbe eingefrorene L3-Kandidat im prospektiven P2-Loop--Center-Gate ohne Retuning |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | nicht gestuetzt: Der prospektive P2-Lauf bestaetigt zwar die lokale volle FIFO-Tangentenantwort bis maximal \(7.5\times10^{-9}\) relativ und einen quadratischen Restterm, scheitert aber formal in allen Armen an der absoluten Tail-Slope-Grenze. Zudem ist der skalare Ursprungsgain bei L3 negativ und damit ausserhalb der A2/B-star-Klasse | nur als starke lokale matrixwertige Kleinsignaldiagnostik berichten; keine mechanische Objekt-, skalare Filtermassen- oder Portidentifikation. P3 bleibt geschlossen; ein sign-sensitives Long-Recovery-Audit waere outcome-informierte Reconciliation |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 

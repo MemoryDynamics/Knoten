@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-22.
+Stand: 2026-08-26.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
 Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
@@ -27,51 +27,21 @@ Bis dahin gelten zwei strikte Grenzen:
 - Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
   Formation.
 
-Die Eintrittsbedingung fuer die Zusammenfuehrung ist durch den kritisch
-gehaltenen P1-Pass an L3 erfuellt und im
-[aktuellen Status](current_status.md) dokumentiert. Methodisch erreicht ist
-die Zusammenfuehrung erst bei einem P2-Pass; sie ist kein vorweggenommener
-Befund.
+Der erste prospektive P2-Versuch bleibt formal `fail`. Die separat
+vorregistrierte P2-R-Verlaengerung wurde nach kritischem Review als enge,
+outcome-informierte Recovery-Reconciliation gehalten; sie aendert den alten
+Entscheid nicht. Dieser abgeschlossene Befund steht im
+[aktuellen Status](current_status.md). Er oeffnet jetzt ausschliesslich P3
+Formation/Basin, nicht Mechanik oder Masse.
 
 ```mermaid
 flowchart LR
-    p2["P2 Loop--Center-<br/>Kompatibilitaet"]
     p3["P3 Formation<br/>und Basin"]
     p4["P4 Reziproke<br/>Single-Loop-Mechanik"]
     p5["P5 Kontrollierte<br/>Zwei-Loop-Interaktion"]
 
-    p2 --> p3 --> p4 --> p5
+    p3 --> p4 --> p5
 ```
-
-## P2: Prospektive Loop--Center-Kompatibilitaetsbruecke
-
-**Frage:** Bilden raeumliche Schleife und Center-Filter am selben nativen
-Zustand eine konsistente gemeinsame Reduktion, oder sind sie nur getrennt
-passende Beschreibungen?
-
-Der Test verwendet ohne Kernel- oder Gain-Retuning die in P1 gepruefte
-L3-Zelle bei \((\alpha,H,\eta)=(0.005,2400,0.075)\). Vor dem Lauf werden
-mindestens folgende Groessen und Kontrollen festgelegt:
-
-- \(c_H\) aus der nativen endlichen Historie und \(r_n=x_n-c_{H,n}\);
-- die vorhergesagte Center-Antwort aus
-  \(T_{f\to v^c,H}(z)\), aufgebaut aus dem exakten \(B_H(z)\) und dem
-  unabhaengig fixierten \(g_H\), ohne neu gefittete Pole oder Koeffizienten;
-- ein kleiner center-konjugierter zero-net Probe-Puls, `probe-off`,
-  Vorzeichenflip und mehrere vorab festgelegte Bahnphasen;
-- Schleifenobservablen im Relativzustand: Radius, Winkelinkrement,
-  Transversalabstand und saekularer Drift;
-- Centerobservablen: Kovarianz unter Rotation/Translation, Linearitaet,
-  Phasenuniformitaet und geschlossene effektive Arbeitsbilanz.
-
-Falsifiziert wird die Bruecke insbesondere durch phasenabhaengige
-Transferkoeffizienten ausserhalb der registrierten Numerikgrenzen, nichtlineare
-Antwort im deklarierten Kleinsignalbereich, anhaltende Relativdrift oder eine
-Bilanz, die sich nicht in Center- und Quellenarbeit schliessen laesst.
-
-Ein Pass zeigt nur die Kompatibilitaet einer vorbereiteten Schleife mit einem
-**effektiven** Center-Port. Er identifiziert noch keinen mikroskopischen
-Aktuator und keine physikalische Masse.
 
 ## P3: Formation und begrenztes Basin
 
@@ -83,7 +53,8 @@ Erforderlich sind:
 
 - feste nichtkreisfoermige Historienfamilien und unabhaengige Holdouts;
 - chirality-symmetrische Seeds sowie eine vorbereitete-Bahn-Positivkontrolle;
-- unveraenderte Modellparameter der zugelassenen L3-Zelle und aus P2;
+- unveraenderte Modellparameter der zugelassenen L3-Zelle; P2-R hat keine
+  Parameter nachjustiert;
 - vorab definierte Eintritts-, Verweil- und Abbruchkriterien im quotientierten
   Relativzustand.
 
@@ -126,7 +97,7 @@ Quantisierung folgen daraus nicht.
 
 ## Paralleles Publikations-Hardening
 
-Diese Arbeiten duerfen P2--P5 begleiten, sind aber kein Ersatz fuer sie:
+Diese Arbeiten duerfen P3--P5 begleiten, sind aber kein Ersatz fuer sie:
 
 - mindestens einen Root mit einem unabhaengigen outward-rounded
   Intervallbackend reproduzieren;

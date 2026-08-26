@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-22.
+Stand: 2026-08-26.
 
 Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
 historische Zwischenlesarten stehen in den datierten Reports sowie im
@@ -10,13 +10,14 @@ Arbeitsbloecke sind zusaetzlich im
 [Prioritaetenarchiv](../archive/status/project_priorities_through_2026-08-21.md)
 vollstaendig erhalten.
 
-## Neun-Punkte-Ueberblick
+## Zehn-Punkte-Ueberblick
 
 | Bereich | Evidenz | Belastbare Lesart | Grenze |
 | --- | --- | --- | --- |
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an der vorab gewaehlten L3-Zelle \(|\lambda_\perp|=0.99649340\); beide lokalen Perturbationspanels kontrahieren. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; numerisch konsistenter Kontinuumsast und lokale numerische Stabilitaetsevidenz an zwei vorbereiteten Skalen | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine Stabilitaet der gesamten Leiter, globale Eindeutigkeit, Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. Keine Uebertragung der skalaren Filtermasse, keine Formation; P3 ist nur fuer Formation/Basin geoeffnet |
 | Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 besteht fuenf globale Small-Gain-/Positive-Real-Zellen; B-star reproduziert die Skalierung \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) einschliesslich des registrierten gemeinsamen Holdouts. | passiver effektiver Center-Port und identifizierte Filtertraegheit unter dem gewaehlten Portvertrag | Gate A identifiziert keinen eindeutigen mikroskopischen Aktuator; \(c_H\) ist der Schwerpunkt eines Source-/Sink-Memory, nicht nachgewiesen konservierter Materie; keine physikalische Arbeit oder Masse |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
@@ -111,6 +112,17 @@ vollstaendig erhalten.
   Das kritische Review haelt den lokalen Pass aufrecht, aber ARPACK schliesst
   das volle Spektrum nicht ein und die uebrigen vier Nicht-Anchor-Zellen sind
   nicht stabilitaetsgeprueft.
+- Das danach vor Einsicht eingefrorene P2-Gate trennt den exakten linearen
+  Center-Readout vom lokal linearisierten Kraftfeedback. Der skalare
+  Ursprungsschluss ist fuer L3 mit \(g_H=-0.045833\ldots\) analytisch
+  unzulaessig. Im vollen matrixwertigen Tangentenvergleich bleiben die
+  groessten Zustands-/Centerfehler unter \(7.5\times10^{-9}\), der
+  single-sign Restterm unter \(7.4\times10^{-5}\) relativ und seine beiden
+  Skalierungsexponenten bei 1.99999/1.99997. Der registrierte Gesamtentscheid
+  ist dennoch `loop-center-matrix-local-fail`, weil die absolute D0-Endsteigung
+  in allen Armen etwa 0.005--0.006 pro Memory-Zeit statt hoechstens 0.001
+  betraegt. Die publizierten Tail-Samples fallen ausnahmslos; dieser
+  post-hoc Befund darf den formalen Fail nicht umbenennen.
 - Der prospektive finite-\(H\)-A2-Test besteht alle fuenf registrierten
   Small-Gain-/Positive-Real-Zellen und stuetzt damit einen reziprok
   realisierbaren effektiven Center-Filter-Port. B-star identifiziert in der
@@ -215,24 +227,34 @@ vollstaendig erhalten.
 
 ## Status der Zusammenfuehrung
 
-**Evidenz:** Schleifen- und Center-Mechanik-Ast stammen aus derselben nativen
-finite-memory Modellfamilie, wurden aber in getrennten Protokollen und bislang
-nicht gemeinsam am selben dynamischen Kandidaten getestet. Der Schleifenast
-traegt sechs lokale Existenzzertifikate und am Anchor sowie an L3 lokale
-numerische Stabilitaetsevidenz. Der Center-Ast traegt einen passiven
-effektiven Filter-Port und eine identifizierte Filtertraegheit, aber keinen
-ausgewaehlten physischen Aktuator.
+**Evidenz:** Der gemeinsame L3-Test wurde prospektiv ausgefuehrt. \(B_H\) ist
+der exakte lineare Readout, waehrend der volle FIFO-Jacobian die lokale
+nichtlineare Antwort im registrierten Fenster mit grosser Marge beschreibt.
+Der positive skalare Centerabschluss gilt am L3-Ursprung nicht. Das formale
+P2-Gate scheitert ausschliesslich an der absoluten Tail-Slope-Grenze. Die vor
+weiterem Targetzugriff eingefrorene P2-R-Verlaengerung reproduziert alle 120
+alten Metriken und alle acht 2400-Update-Checkpoints exakt. Alle 48 neuen,
+disjunkten spaeten Fenster besitzen negative signierte Steigungen und
+aufgeloeste logarithmische Abklingraten von 0.636--0.777 pro Memory-Zeit; die
+End-/Checkpoint-Peak-Verhaeltnisse liegen bei
+\(3.53\times10^{-6}\)--\(4.41\times10^{-6}\).
 
-**Inferenz:** Der prospektive und kritisch gehaltene L3-Pass rechtfertigt nun
-einen gemeinsamen Loop--Center-Kompatibilitaetstest an genau diesem Kandidaten.
-Die gemeinsame Modellherkunft allein beweist seine Antwort nicht.
+**Inferenz:** Die Daten stuetzen eine lokale anisotrope Matrixkopplung von
+Loop und Center und eine fortgesetzte Rueckkehr der schwach gestoerten,
+vorbereiteten L3-Schleife, aber keine Uebertragung der frueheren skalaren
+Filtertraegheit. Die Fensterabhaengigkeit der Rate ist mit einer Mischung von
+Delaymoden vereinbar; sie identifiziert weder einen einzelnen Pol noch eine
+skalare Masse.
 
-**Hypothese:** Derselbe stabile Relativzustand koennte eine phasenuniforme
-Centerantwort tragen und spaeter ueber eine mikroskopisch reziproke
-Read-/Write-Architektur als interaktionsfaehiges Objekt dienen.
+**Hypothese:** Die lokal rueckkehrende Schleife besitzt ein begrenztes
+Formationsbecken ausserhalb der exakt vorbereiteten Kreisgeschichte. Das ist
+nun durch feste nichtkreisfoermige Historien und Holdouts zu falsifizieren;
+P2-R selbst testet weder Formation noch Basin.
 
-Bis zum Kompatibilitaetspass bleiben die Evidenzclaims getrennt. Die einzige
-aktive Abhaengigkeitskette steht in den
+Das kritische P2-R-Review haelt den Reconciliation-Pass aufrecht, ohne den
+historischen P2-Fail umzubenennen. Damit ist P3 ausschliesslich fuer
+Formation/Basin am unveraenderten L3-Kandidaten geoeffnet. Die einzige aktive
+Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
 
@@ -731,9 +753,13 @@ besteht danach an L3 mit zwei konvergierten Arnoldi-Panels,
 \(|\lambda_\perp|=0.99649340\), und sechs kontrahierenden gespiegelten
 Stoerungsarmen. Das kritische Review haelt nur lokale numerische Stabilitaet
 an dieser zweiten Skala aufrecht, keine stabile Leiter. D1--D5, Formation,
-Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben geschlossen. Als
-naechster sequentieller Schritt ist der gemeinsame Loop--Center-Test als
-prospektives P2-Kompatibilitaetsgate zugelassen, aber noch nicht ausgefuehrt.
+Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben geschlossen. Der
+anschliessende gemeinsame Loop--Center-Test sagt die lokale Antwort mit dem
+vollen FIFO-Jacobian sehr genau voraus, verfehlt aber formal seine absolute
+Tail-Slope-Grenze. Der historische P2-Fail bleibt bestehen. Die separat
+vorregistrierte P2-R-Verlaengerung zeigt danach in allen 48 neuen Fenstern
+weitere aufgeloeste Rueckkehr bis 20 Memory-Zeiten und oeffnet nach
+kritischem Review nur P3 Formation/Basin.
 
 ## Paper-Status
 

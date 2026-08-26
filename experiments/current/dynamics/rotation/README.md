@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-08-22.
+Stand: 2026-08-26.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -19,6 +19,8 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 6 | `scalar_memory_rotating_wave_foundation_audit.py` | kanonischer Git-Blob-/Vollhistoriencheck, unabhaengige finite-Summen-Replays, zwei Multipraezisions-Kontinuumspanels und Skalierungs-Replay | portability-scoped Reconciliation-Pass |
 | 7 | `scalar_memory_rotating_wave_l5_existence_scaling.py` | prospektiver sechster Root bei \((\alpha,H,\eta)=(0.00125,9600,0.01875)\), zwei Krawczyk-Panels, direkter Summen-Replay und signierte First-order-Gates | scoped L5-Pass |
 | 8 | `scalar_memory_rotating_wave_l3_stability_gate.py` | prospektiv gewaehlte L3-Zelle, zwei getrennte Arnoldi-Panels und sieben registrierte Voll-FIFO-Fortsetzungen | lokaler numerischer Pass; kritisch gehalten |
+| 9 | `scalar_memory_loop_center_p2_gate.py` | voller matrixwertiger FIFO-Tangentenvergleich, drei Amplituden, zwei Richtungen und unabhaengige zero-net Wellenform am unveraenderten L3-Kandidaten | formaler P2-Fail nur an der absoluten Tail-Slope-Grenze; alle Linearitaets- und Resttermgates positiv |
+| 10 | `scalar_memory_loop_center_p2r_long_recovery.py` | outcome-informierte, vor weiterer Zielantwort eingefrorene Verlaengerung derselben 16 Arme bis 20 Recovery-Memory-Zeiten | P2-R-Pass in allen 48 neuen sign-sensitiven Fenstern; historischer P2-Fail unveraendert |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -96,8 +98,25 @@ Reproduktion des eingefrorenen Laufs:
 python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_gate.py
 ```
 
-Ein zweiter outward-rounded Intervallbackend bleibt separates
-Publikations-Hardening. Als naechstes darf P2 die Loop--Center-Kompatibilitaet
-am selben L3-Kandidaten ohne Retuning prospektieren. Formation, Topologie,
-Mechanik, Interaktionen und der Amplituden-Holdout `A_att=7` bleiben
-versiegelt.
+Reproduktion des eingefrorenen P2-Laufs:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_loop_center_p2_gate.py
+```
+
+Der P2-Lauf bleibt formal `loop-center-matrix-local-fail`: Die Antwort folgt
+dem vollen Tangentenmodell sehr genau und klingt post hoc monoton ab, ist im
+registrierten Endfenster aber nicht flach genug.
+
+Reproduktion der eingefrorenen P2-R-Verlaengerung:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery.py
+```
+
+P2-R reproduziert alle 120 alten Entscheidungsmetriken exakt und besteht alle
+48 neuen sign-sensitiven Fenster durch 20 Memory-Zeiten. Das kritische Review
+haelt dies als outcome-informierte Reconciliation, nicht als unabhaengige
+Replikation. Geoeffnet ist damit nur die Vorregistrierung von P3
+Formation/Basin am unveraenderten L3-Kandidaten. Topologie, Mechanik,
+Interaktionen und der Amplituden-Holdout `A_att=7` bleiben versiegelt.
