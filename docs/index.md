@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-08-22.
+Stand: 2026-08-27.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber neun Dokumente.
@@ -41,7 +41,7 @@ Evidenz wird nach der Kernelgradient-Korrektur neu aufgebaut.
 
 Ein davon getrennter nativer `d=2`-Ast besitzt inzwischen sechs lokal
 existenzzertifizierte finite-H-Kreisroots bei gematchtem `H*alpha=12` und
-`eta/alpha=15`. Ein unabhaengiger Foundation-Audit reproduziert die Summen,
+`eta/alpha=15`. Ein separat implementierter Foundation-Audit reproduziert die Summen,
 den Fixed-gain-Kontinuumsroot und die First-order-Skalierung; der prospektive
 L5-Holdout besteht zusaetzlich die direkten Summen- und signierten
 Skalierungsgates. Der anschliessend prospektierte P1-Test stuetzt lokale
@@ -52,7 +52,7 @@ volle Spektrum nicht ein. Die belastbare Lesart ist daher „vorbereitete
 raeumliche Schleifenbasis mit zwei lokal getesteten Skalen“. Der spaetere P3-
 Pass erweitert dies eng auf finite-ensemble attraction aus fuenf
 nichtkreisfoermigen Geometrien in beiden gesetzten Chiralitaeten, nicht auf
-generische Formation, internes S1, Arbeit oder Masse.
+generische Formation, internes S1, physische Arbeit oder Masse.
 
 Der getrennte Center-Ast besitzt zugleich eine exakte \(B_H\)-Reduktion,
 einen passiven effektiven finite-\(H\)-Port und die eng getestete
@@ -62,16 +62,25 @@ Arbeit. P4 konstruiert danach erstmals einen expliziten Source-/Write-Port mit
 geschlossenem finite-H-Age-Ledger, besteht aber sein Gesamtgate nicht: Alle 24
 Arme zeigen eine vorregistriert zu grosse chirality-odd Querantwort. Gemeinsame
 Modellherkunft und ein algebraischer Ledger sind deshalb noch keine
-mechanische Objektevidenz.
+mechanische Objektevidenz. Der frische P4-R-phi-Holdout bestaetigt diese
+Querantwort in der registrierten diskreten Acht-Phasen-Quadratur mit
+`B_C=0.2084215772`, `B_Q=0.1537530855` und 8/8 positivem Phasensupport.
+Vier Phasenpaare sind spiegelverschieden; dies sind keine Replikationen und
+kein kontinuierlicher Phasen-, Spin-, Traegheits- oder Massebefund.
 
 Die Programme werden ueber eine einzige falsifizierbare Kette gefuehrt. P2
 bleibt formal gescheitert, P2-R haelt nur die lange Rueckkehr aufrecht, P3
 besteht scoped, und P4 bleibt formal
-`p4-source-write-architecture-fail`. Die aktive Folge ist ausschliesslich eine
-neue P4-R-phi-Messhaertung mit vorregistriertem Startphasen-Holdout. Nur ein
-reviewed Chiral-Pass zusammen mit einem kompatiblen Referee-/Source-Audit
-oeffnet danach einen separaten Anchor-Skalenholdout; P5, Interaktion, Spin,
-Impuls und Masse bleiben geschlossen.
+`p4-source-write-architecture-fail`. P4-R-phi besteht separat und sein
+kritisches Review haelt den engen diskreten Port-/Ledger-/Antwortbefund
+aufrecht. Das interne Source-Referee-Audit reproduziert alle
+wissenschaftlichen Felder in zwei NumPy/SciPy-Stacks exakt, urteilt wegen
+eines einzelnen `mpmath.iv`-Intervallbackends, fehlendem vollstaendigem
+Hash-Lock und fehlender Citation/Release aber nur
+`referee-source-ready-with-major-claim-restrictions`. Die aktive Folge ist
+jetzt ausschliesslich ein frisch zu schreibendes P4-R-S-Anchor-Protokoll. P5,
+Interaktion, Spin, Impuls, Traegheit und Masse bleiben bis zu dessen reviewed
+Full-Pass geschlossen.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-08-27",
+  "repository": "https://github.com/MemoryDynamics/Knoten",
+  "canonical_hash_rule": "SHA-256 of the Git/LF byte stream; checkout CRLF is canonicalized to LF before hashing",
+  "claims": [
+    {
+      "claim_id": "RW-REDUCTION-01",
+      "exact_wording": "Fuer eine vorbereitete Kreisgeschichte reduziert der unveraenderte rauschfreie d=2-K0-H-Update exakt auf zwei reelle finite Summen; am registrierten Anchor existiert ein Gleitkomma-Nullpunkt dieser reduzierten Gleichungen.",
+      "evidence_class": [
+        "algebraic theorem for the reduction",
+        "numerical witness for the root"
+      ],
+      "protocol": {
+        "commit": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+        "blob": "2a536885a84a6ee8a85ae2e41da5baa690f53af1",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/ed98a8872fec3478f3c0c996dec22fd88e1c1bb9/reports/project/meta/preregistration/scalar_memory_rotating_wave_discovery_protocol_2026-08-20.md"
+      },
+      "raw_result": {
+        "commit": "bf71e6004af888a17ff04316a93ac32aefdd2129",
+        "blob": "4d2cbd50bd61b050747af5d51752f684b42adb56",
+        "canonical_lf_sha256": "f9c6409fccd9b3e02c83497428a24ad2d5dfb78d2134bfe4314baaec9e13e830",
+        "decision": "finite-h-rotating-wave-candidate-found",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/bf71e6004af888a17ff04316a93ac32aefdd2129/reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.json"
+      },
+      "critical_review": {
+        "commit": "bf71e6004af888a17ff04316a93ac32aefdd2129",
+        "blob": "af61151082b2d810fbb3f4f7c1a7591c962770e1",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/bf71e6004af888a17ff04316a93ac32aefdd2129/reports/project/meta/reviews/scalar_memory_rotating_wave_discovery_review_2026-08-20.md"
+      },
+      "code": [
+        {
+          "commit": "ed98a8872fec3478f3c0c996dec22fd88e1c1bb9",
+          "blob": "624418a6af0cdb88d01ddede4a943acd0ec334ff",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/ed98a8872fec3478f3c0c996dec22fd88e1c1bb9/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_discovery.py"
+        },
+        {
+          "commit": "68e926e93452242b9444d0fdbaacad51b8947dd9",
+          "blob": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/68e926e93452242b9444d0fdbaacad51b8947dd9/src/emergenz_knoten/rotating_wave.py"
+        }
+      ],
+      "scope": "one prepared noiseless d=2 candidate with alpha=0.01, H=1200, eta=0.15, A_att=3.5 and the registered search box and controls",
+      "excluded_claims": [
+        "interval-certified root from this discovery artifact alone",
+        "stability",
+        "formation",
+        "internal phase",
+        "mass"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "surfaces": [
+          "README.md",
+          "docs/status/current_status.md",
+          "docs/status/paper_claims.md",
+          "reports/dynamics/rotation/README.md"
+        ]
+      }
+    },
+    {
+      "claim_id": "RW-EXISTENCE-02",
+      "exact_wording": "Anchor und fuenf gematchte Zellen bei H alpha=12 und eta/alpha=15 besitzen in ihren jeweils registrierten Boxen lokal eindeutige reduzierte finite-H-Roots, konditional auf die mpmath.iv-1.3.0-Vertrauensbasis.",
+      "evidence_class": "conditional computer-assisted certificate",
+      "protocol": {
+        "commit": "0add69c9898802f192984975786147429586fd8c",
+        "blob": "0545af5af7602c99661a4b8be568b47d5a9bb49c",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/0add69c9898802f192984975786147429586fd8c/reports/project/meta/preregistration/scalar_memory_rotating_wave_l5_existence_scaling_protocol_2026-08-21.md"
+      },
+      "raw_result": {
+        "commit": "61c5d7ed552d69adaf2d1f4633a0621027845186",
+        "blob": "3b8b56f56969033220b45a97672e01be4c7215f3",
+        "canonical_lf_sha256": "12478c7ffe916491c9ec544865be6af94d590232993490925764a3b344faa353",
+        "decision": "l5-existence-scaling-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/61c5d7ed552d69adaf2d1f4633a0621027845186/reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.json"
+      },
+      "critical_review": {
+        "commit": "61c5d7ed552d69adaf2d1f4633a0621027845186",
+        "blob": "06ef7c67260c3f6e9039f15106e6de600a31ef43",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/61c5d7ed552d69adaf2d1f4633a0621027845186/reports/project/meta/reviews/scalar_memory_rotating_wave_l5_existence_scaling_review_2026-08-21.md"
+      },
+      "code": [
+        {
+          "commit": "a8787cdefd12b86e13928613790708883e2c55e1",
+          "blob": "fa335e07db98cb9d7fc3ceacbd8ba2bc72c7eda3",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/a8787cdefd12b86e13928613790708883e2c55e1/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling.py"
+        },
+        {
+          "commit": "b03ff433776ced084f8bf3d56b54b8fe7b1e5ef2",
+          "blob": "58ce9b0862f980c17c691c4555557e8e363468a4",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/b03ff433776ced084f8bf3d56b54b8fe7b1e5ef2/src/emergenz_knoten/rotating_wave_interval.py"
+        }
+      ],
+      "scope": "six local boxes from alpha=0.01, H=1200 to alpha=0.00125, H=9600 with H alpha=12, eta/alpha=15; 80/120-dps panels and registered sign/gain controls",
+      "excluded_claims": [
+        "global uniqueness",
+        "all-alpha theorem",
+        "independent or formal verification",
+        "stable family",
+        "continuum interval certificate"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "restriction_propagated": "all existence wording is explicitly conditional on mpmath.iv 1.3.0"
+      }
+    },
+    {
+      "claim_id": "RW-SCALING-03",
+      "exact_wording": "Die fuenf historischen finite-H-Roots und der L5-Holdout sind numerisch mit einer First-order-Familie vereinbar, die bei festem eta/alpha=15 gegen den separat berechneten Fixed-gain-Kontinuumsroot konvergiert.",
+      "evidence_class": "numerical evidence from a prospectively executed post-result reconciliation and holdout",
+      "protocol": {
+        "commit": "996cac2eec9bb4d9c4945e3fbb4d55fd44362375",
+        "blob": "fcad92d3108021a6438ad2c5e61940c4b63d9978",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/996cac2eec9bb4d9c4945e3fbb4d55fd44362375/reports/project/meta/preregistration/scalar_memory_rotating_wave_continuum_reconciliation_protocol_2026-08-21.md"
+      },
+      "raw_result": {
+        "commit": "b7f2e758a42681d0fd574c83d3ab895905e11565",
+        "blob": "98312246cd6e4889543d950ba5a532c16a2bf87d",
+        "canonical_lf_sha256": "8008f3846678e8920c1193468e1cacd078ff2c45b2903fbc4ac130431bd68658",
+        "decision": "fixed-gain-continuum-reconciliation-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/b7f2e758a42681d0fd574c83d3ab895905e11565/reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.json"
+      },
+      "critical_review": {
+        "commit": "b7f2e758a42681d0fd574c83d3ab895905e11565",
+        "blob": "c1cbad735e268673144ed377b8ed3c6e509f4413",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/b7f2e758a42681d0fd574c83d3ab895905e11565/reports/project/meta/reviews/scalar_memory_rotating_wave_continuum_reconciliation_review_2026-08-21.md"
+      },
+      "code": [
+        {
+          "commit": "996cac2eec9bb4d9c4945e3fbb4d55fd44362375",
+          "blob": "b1a9ac4c52ead908721bba51d3e4b8f83f3fca7f",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/996cac2eec9bb4d9c4945e3fbb4d55fd44362375/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation.py"
+        }
+      ],
+      "scope": "fixed H alpha=12 and eta/alpha=15, the registered quadrature panels, five historical cells plus the independently registered L5 cell",
+      "excluded_claims": [
+        "interval certificate for the continuum root",
+        "proof of convergence",
+        "uniform error bound",
+        "independent finite-alpha replication"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "historical_fail_preserved": "certified-roots-nonconvergent remains the decision of the mismatched-guide ladder"
+      }
+    },
+    {
+      "claim_id": "RW-STABILITY-ANCHOR-04",
+      "exact_wording": "Der vorbereitete Anchor besitzt im registrierten Voll-FIFO-Panel lokale numerische transversale Stabilitaetsevidenz.",
+      "evidence_class": "local numerical evidence",
+      "protocol": {
+        "commit": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+        "blob": "7da64920b0c7c72e793ab64db8c1e02b0bbbc75f",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c/reports/project/meta/preregistration/scalar_memory_rotating_wave_stability_protocol_2026-08-20.md"
+      },
+      "raw_result": {
+        "commit": "9f0460c072e30f454c82bb2ae35f92aad5300898",
+        "blob": "1c9d5746c9553d9cb8031b58258e6d613f1633d9",
+        "canonical_lf_sha256": "43b0d7f5e5ba81dc35d4a2e9d138d3663a3d98b67bcb09ed2d4572d5a01eb86f",
+        "decision": "numerically-stable-source-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/9f0460c072e30f454c82bb2ae35f92aad5300898/reports/dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.json"
+      },
+      "critical_review": {
+        "commit": "9f0460c072e30f454c82bb2ae35f92aad5300898",
+        "blob": "c17d816ababd133c4551e157c7cd7d334c4713a6",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/9f0460c072e30f454c82bb2ae35f92aad5300898/reports/project/meta/reviews/scalar_memory_rotating_wave_stability_review_2026-08-20.md"
+      },
+      "code": [
+        {
+          "commit": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+          "blob": "684d1334079b542b8e310fd13c514e491b02d92d",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_stability_gate.py"
+        },
+        {
+          "commit": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+          "blob": "9defb5a6876371202e1ba57cea030c997b9c6edd",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c/src/emergenz_knoten/rotating_wave_stability.py"
+        }
+      ],
+      "scope": "one prepared Anchor relative equilibrium, two Arnoldi panels and three perturbation continuations over 5000 updates",
+      "excluded_claims": [
+        "complete spectrum enclosure",
+        "global or nonlinear stability theorem",
+        "formation",
+        "noise robustness",
+        "family stability"
+      ],
+      "status_consistency": {
+        "consistent": true
+      }
+    },
+    {
+      "claim_id": "RW-STABILITY-L3-05",
+      "exact_wording": "Der vorbereitete L3-Kandidat besitzt im registrierten Voll-FIFO-Panel lokale numerische transversale Stabilitaetsevidenz; zusammen mit dem Anchor sind damit zwei Skalen getestet, nicht eine stabile Leiter.",
+      "evidence_class": "local numerical evidence",
+      "protocol": {
+        "commit": "d10d5321754a67a0672f6fdda78f5b55a2527d44",
+        "blob": "548ff395b21e16c894bc11e536023f19c0cc64cd",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/d10d5321754a67a0672f6fdda78f5b55a2527d44/reports/project/meta/preregistration/scalar_memory_rotating_wave_l3_stability_protocol_2026-08-22.md"
+      },
+      "raw_result": {
+        "commit": "aa32c75ce777fcfac04956f6b736d82b0c0b8622",
+        "blob": "18821ed0235e5e915424f61c665be86d569d58cc",
+        "canonical_lf_sha256": "83eaf3bcb1524f702c60bca2cc72b23a097e0c65fb20ae974fc0ac58d1eca241",
+        "decision": "numerically-stable-source-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/aa32c75ce777fcfac04956f6b736d82b0c0b8622/reports/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_2026-08-22.json"
+      },
+      "critical_review": {
+        "commit": "aa32c75ce777fcfac04956f6b736d82b0c0b8622",
+        "blob": "8fa25608f165789662ca1fb92d2507791dc143ea",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/aa32c75ce777fcfac04956f6b736d82b0c0b8622/reports/project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md"
+      },
+      "code": [
+        {
+          "commit": "8719f70273c29f7dbb2bcbab56610a0a706982c3",
+          "blob": "77edba8309f9003bc7886e33361e2a5bde5122f3",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/8719f70273c29f7dbb2bcbab56610a0a706982c3/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_gate.py"
+        },
+        {
+          "commit": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+          "blob": "9defb5a6876371202e1ba57cea030c997b9c6edd",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c/src/emergenz_knoten/rotating_wave_stability.py"
+        }
+      ],
+      "scope": "L3 at alpha=0.005, H=2400, eta=0.075; 32/48 Ritz panels and six mirrored perturbation arms over 10000 updates",
+      "excluded_claims": [
+        "complete spectral enclosure",
+        "six-cell stable family",
+        "formation",
+        "mechanics",
+        "mass"
+      ],
+      "status_consistency": {
+        "consistent": true
+      }
+    },
+    {
+      "claim_id": "RW-TOPOLOGY-D0-06",
+      "exact_wording": "Die translationsreduzierte vorbereitete Kreisloesung bildet eine ambiente SO(2)-Gruppenbahn; nach Quotientierung dieser Raumrotation kollabiert sie zu einem Punkt, sodass ein internes S1 nicht etabliert ist.",
+      "evidence_class": [
+        "structural group-action result",
+        "negative topology claim"
+      ],
+      "protocol": {
+        "commit": "b93ada5c5820037ba35e4651c5088d97a57b65e2",
+        "blob": "ba6ad54932511f8fddeb398afb604dce781edea5",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/b93ada5c5820037ba35e4651c5088d97a57b65e2/reports/project/meta/preregistration/scalar_memory_rotating_wave_d0_contract_2026-08-20.md"
+      },
+      "raw_result": {
+        "commit": "11d27eaa432366a88a255e1a37f967436bce8b96",
+        "blob": "e7d204545beaae61ea6edc5340aba271bdbb2b6f",
+        "canonical_lf_sha256": "1ab03eddb4d19d41c14abb3d5e289a6b607e558ebc6d66bc2624c99c70d4329e",
+        "decision": "pass",
+        "role": "zero-defect candidate provenance audit; the D0 conclusion itself is structural rather than estimated from this JSON",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/11d27eaa432366a88a255e1a37f967436bce8b96/reports/project/meta/preregistration/scalar_memory_rotating_wave_p0_audit_2026-08-20.json"
+      },
+      "critical_review": {
+        "commit": "a6f512bf5577622b3f935bdc5f73671cf87c379a",
+        "blob": "293513a9d05345fd87222ad3e2819a9134c73ca8",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/a6f512bf5577622b3f935bdc5f73671cf87c379a/reports/project/meta/reviews/scalar_memory_rotating_wave_foundation_review_2026-08-21.md"
+      },
+      "code": [
+        {
+          "commit": "0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c",
+          "blob": "9defb5a6876371202e1ba57cea030c997b9c6edd",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/0d9fe68c4a3bddf0e1869a20f9aa9ff2989aaa6c/src/emergenz_knoten/rotating_wave_stability.py"
+        }
+      ],
+      "scope": "the prepared rotating relative equilibrium under common translations and ambient planar rotations",
+      "excluded_claims": [
+        "internal phase after SO(2) quotient",
+        "persistent-homology proof of an internal circle",
+        "torus topology",
+        "spin"
+      ],
+      "status_consistency": {
+        "consistent": true
+      }
+    },
+    {
+      "claim_id": "LOOP-CENTER-P2-07",
+      "exact_wording": "Am vorbereiteten L3-Kreis sagt der volle FIFO-Jacobian die registrierte schwache nichtlineare Loop--Center-Antwort lokal voraus; das historische P2-Gesamtgate bleibt wegen seiner absoluten Tail-Slope-Grenze formal loop-center-matrix-local-fail.",
+      "evidence_class": [
+        "local numerical evidence",
+        "negative registered composite result"
+      ],
+      "protocol": {
+        "commit": "60aa3d12f891008eb579dcf56e96cf8fbb3fa54d",
+        "blob": "13b7c65557f911d74a47846fa3ba5b59368661d6",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/60aa3d12f891008eb579dcf56e96cf8fbb3fa54d/reports/project/meta/preregistration/scalar_memory_loop_center_p2_protocol_2026-08-25.md"
+      },
+      "raw_result": {
+        "commit": "30abc4452bc0f174bc19252b7fb4089e30d427b2",
+        "blob": "69cca249c5fb919f9c95b8e24cc230646f6a49c8",
+        "canonical_lf_sha256": "255907e5b9abba9324f18fac7a6734f2aefc1f0b6a2a0dc773ceb3590af4a199",
+        "decision": "loop-center-matrix-local-fail",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/30abc4452bc0f174bc19252b7fb4089e30d427b2/reports/dynamics/rotation/scalar_memory_loop_center_p2_2026-08-25.json"
+      },
+      "critical_review": {
+        "commit": "384cc0dca6a2dccfa407e27462b6774784ee5a7e",
+        "blob": "7404931c683ff740a0bce8bcd85d6a49b0acd91e",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/384cc0dca6a2dccfa407e27462b6774784ee5a7e/reports/project/meta/reviews/scalar_memory_loop_center_p2_review_2026-08-25.md"
+      },
+      "code": [
+        {
+          "commit": "ba07277c64e25b5f51576827ad8d3727852ac592",
+          "blob": "542c0112a63dfefcee62b7e2238238017f26db72",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/ba07277c64e25b5f51576827ad8d3727852ac592/experiments/current/dynamics/rotation/scalar_memory_loop_center_p2_gate.py"
+        },
+        {
+          "commit": "ba07277c64e25b5f51576827ad8d3727852ac592",
+          "blob": "a8b8a002be3a3e4d75f8bd6b00989f1dafe61e0b",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/ba07277c64e25b5f51576827ad8d3727852ac592/src/emergenz_knoten/loop_center_response.py"
+        }
+      ],
+      "scope": "one prepared L3 loop, registered weak amplitudes, directions, waveforms and ten-memory-time recovery",
+      "excluded_claims": [
+        "P2 pass",
+        "scalar positive mass law",
+        "independent replication",
+        "formation",
+        "physical actuator"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "historical_fail_preserved": true
+      }
+    },
+    {
+      "claim_id": "LOOP-CENTER-P2R-08",
+      "exact_wording": "Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert den P2-Fail und zeigt fuer alle 48 neuen signierten Spaetfenster aufgeloeste Rueckkehr bis 20 Memory-Zeiten.",
+      "evidence_class": "outcome-informed numerical reconciliation",
+      "protocol": {
+        "commit": "76145d7bd8ede06d5ae4f3a4166a452794a9e3ae",
+        "blob": "9422397d04b7c64bcb6e98451f967b98de4020ab",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/76145d7bd8ede06d5ae4f3a4166a452794a9e3ae/reports/project/meta/preregistration/scalar_memory_loop_center_p2r_long_recovery_protocol_2026-08-25.md"
+      },
+      "raw_result": {
+        "commit": "b9dd5603cd613cd6632c6c2c544efaafba871a1e",
+        "blob": "d6ac2d4bb522e73e69af03a0d1548e7c893c2e84",
+        "canonical_lf_sha256": "fe88c5a7c453e8bbf987f33ee2576964215108e5cfd5ae2bff1bb5e27e288140",
+        "decision": "p2r-sign-sensitive-long-recovery-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/b9dd5603cd613cd6632c6c2c544efaafba871a1e/reports/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery_2026-08-25.json"
+      },
+      "critical_review": {
+        "commit": "83d7c9a4f9020ec566e54a609b734a18baf5423e",
+        "blob": "240fbebe3419547670fce40a871387e6674e378a",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/83d7c9a4f9020ec566e54a609b734a18baf5423e/reports/project/meta/reviews/scalar_memory_loop_center_p2r_long_recovery_review_2026-08-25.md"
+      },
+      "code": [
+        {
+          "commit": "d5bedacd99f63fbe977943a16df92d8ff1f6f919",
+          "blob": "f8c087693b8d0cedfacc25566f633633929d45e6",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/d5bedacd99f63fbe977943a16df92d8ff1f6f919/experiments/current/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery.py"
+        }
+      ],
+      "scope": "the same prepared P2 L3 arms continued through 20 memory times, with 48 preregistered late windows",
+      "excluded_claims": [
+        "renaming P2 as a pass",
+        "blind or independent replication",
+        "unique decay pole",
+        "scalar mass",
+        "formation"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "outcome_informed_label_present": true
+      }
+    },
+    {
+      "claim_id": "RW-FORMATION-P3-09",
+      "exact_wording": "Am unveraenderten L3-Kandidaten besteht finite-ensemble attraction fuer zehn registrierte nichtkreisfoermige Arme aus fuenf Geometrien in beiden gesetzten Chiralitaeten; vier Arme verwenden weder Zielradius noch Zielwinkel in ihrer Konstruktion.",
+      "evidence_class": "finite deterministic numerical evidence",
+      "protocol": {
+        "commit": "0fd79b3636fe09c377a51200414e46bdf9eb6a9f",
+        "blob": "33f0826d1a727fb7812ed30ae95b9453e5b2dab8",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/0fd79b3636fe09c377a51200414e46bdf9eb6a9f/reports/project/meta/preregistration/scalar_memory_rotating_wave_p3_formation_basin_protocol_2026-08-26.md"
+      },
+      "raw_result": {
+        "commit": "7b25f17fbb1eb62b3b1f45c82ecf6907307fb076",
+        "blob": "35b46192c2c4dc7ace3751d321a4e25bd3a80096",
+        "canonical_lf_sha256": "30e211924c377ce45f3741544a62ccd3d182699c0a2a79fd80f62325eca52c39",
+        "decision": "p3-formation-basin-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/7b25f17fbb1eb62b3b1f45c82ecf6907307fb076/reports/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin_2026-08-26.json"
+      },
+      "critical_review": {
+        "commit": "813d09b86e324cf0c78e6e645a19fe7a745e57f2",
+        "blob": "5897be4ba6c4011eb7afbd32f6f3cacf538600ca",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/813d09b86e324cf0c78e6e645a19fe7a745e57f2/reports/project/meta/reviews/scalar_memory_rotating_wave_p3_formation_basin_review_2026-08-26.md"
+      },
+      "code": [
+        {
+          "commit": "1463234052c8fc76ed310fd0be4a864ea7ce01e8",
+          "blob": "40c293c01fd003bca46abd6b18968dfc8af7bc81",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/1463234052c8fc76ed310fd0be4a864ea7ce01e8/experiments/current/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin.py"
+        },
+        {
+          "commit": "1463234052c8fc76ed310fd0be4a864ea7ce01e8",
+          "blob": "38f16f11a790a64470bab3a34505825cf815e7f0",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/1463234052c8fc76ed310fd0be4a864ea7ce01e8/src/emergenz_knoten/rotating_wave_formation.py"
+        }
+      ],
+      "scope": "five deterministic history geometries in each prescribed chirality through 60 memory times, including target-informed and target-blind constructors plus negative controls",
+      "excluded_claims": [
+        "open basin ball or volume",
+        "generic or spontaneous formation",
+        "chirality selection from symmetric data",
+        "noise robustness",
+        "independent replication",
+        "mechanics or mass"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "replication_unit_not_inflated": true
+      }
+    },
+    {
+      "claim_id": "LOOP-PORT-P4-10",
+      "exact_wording": "Der explizit konstruierte chirality-konditionierte Source-/Write-Port schliesst in allen 24 P4-Armen seinen finite-H-Write-/Age-/Interaktionsledger, waehrend das registrierte Gesamtgate p4-source-write-architecture-fail bleibt und die skalare Geradeausantwort falsifiziert wird.",
+      "evidence_class": [
+        "exact algebraic ledger identity",
+        "numerical ledger evidence",
+        "negative registered composite result"
+      ],
+      "protocol": {
+        "commit": "15ccd714ba595c92ae5d0aff936977f78977f632",
+        "blob": "fb1f41c66fad0e6df9c7dc8a226517940deab939",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/15ccd714ba595c92ae5d0aff936977f78977f632/reports/project/meta/preregistration/scalar_memory_loop_p4_source_write_protocol_2026-08-26.md"
+      },
+      "raw_result": {
+        "commit": "c4eff90dfe1fc63c2b605043a5334b3073f5bc4b",
+        "blob": "41ddfb5ec2d4c907607995523775072ad12544f7",
+        "canonical_lf_sha256": "ea0651e206451e5f87ec08ab3f66ec68df2c04bee2d1b9d67219736058a275cc",
+        "decision": "p4-source-write-architecture-fail",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/c4eff90dfe1fc63c2b605043a5334b3073f5bc4b/reports/dynamics/rotation/scalar_memory_loop_p4_source_write_2026-08-26.json"
+      },
+      "critical_review": {
+        "commit": "0bf9b3020f26acfaf5273c1efab5dcc52d596239",
+        "blob": "4412f6050896a33a275ad10e1d1c0e524bcfba3f",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/0bf9b3020f26acfaf5273c1efab5dcc52d596239/reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md"
+      },
+      "code": [
+        {
+          "commit": "d339ee1924ab2a931c74803ee5a58213b73afbcd",
+          "blob": "3e3aef0e48006f6ffb58948d1c4c30d22b020dd6",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/d339ee1924ab2a931c74803ee5a58213b73afbcd/experiments/current/dynamics/rotation/scalar_memory_loop_p4_source_write_gate.py"
+        },
+        {
+          "commit": "d339ee1924ab2a931c74803ee5a58213b73afbcd",
+          "blob": "d8de95f4f46adc43c37d6d1affdc73be14f70ec3",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/d339ee1924ab2a931c74803ee5a58213b73afbcd/src/emergenz_knoten/orbit_center_actuator.py"
+        }
+      ],
+      "scope": "prepared L3 loop, k=0.25, matched first-order mobilities, 24 active arms, 4000 updates, two chiralities, three amplitudes, two directions and channel-off/construction controls",
+      "excluded_claims": [
+        "P4 mechanics pass",
+        "natural or unique microscopic port",
+        "material center of mass",
+        "conserved momentum",
+        "intrinsic spin",
+        "physical work or mass",
+        "P5 authorization"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "historical_fail_preserved": true
+      }
+    },
+    {
+      "claim_id": "LOOP-PORT-P4R-11",
+      "exact_wording": "Am vorbereiteten L3-Kandidaten mit unveraendertem P4-Port besteht fuer die registrierte Acht-Phasen-Quadratur eine spiegel- und halbdrehungskovariante chirality-odd Querantwort mit diskreten Mittelwerten B_C=0.2084215772 und B_Q=0.1537530855; lokale Metrologie, Rundungsenvelopes und der finite-H-Ledger bestehen.",
+      "evidence_class": "prospective deterministic holdout evidence with internal adversarial recomputation",
+      "protocol": {
+        "commit": "cb863d4a88c1072637116a0296ab9fc20356a675",
+        "blob": "b81fa535c1921c2f11f83e5585bf38b05e0a08d5",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/cb863d4a88c1072637116a0296ab9fc20356a675/reports/project/meta/preregistration/scalar_memory_loop_p4r_phase_metrology_protocol_2026-08-26.md"
+      },
+      "raw_result": {
+        "commit": "0beaf80f713851ab74bef85a24b8323f42f38108",
+        "blob": "2a668a4c70820bceb0ff84fa1932878d9130aabf",
+        "canonical_lf_sha256": "807cf915d1602d87a779e7bf587387559b1b19d7de60dc43c6e1e220b73682c8",
+        "decision": "p4r-phase-averaged-chiral-response-pass",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/0beaf80f713851ab74bef85a24b8323f42f38108/reports/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.json"
+      },
+      "critical_review": {
+        "commit": "b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5",
+        "blob": "1d25e9db083d91fdfd521f44e0951a1ddd9e2c37",
+        "url": "https://github.com/MemoryDynamics/Knoten/blob/b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5/reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md"
+      },
+      "code": [
+        {
+          "commit": "59dc8875cf991e3d7472db1496c9ae8ffae16ca8",
+          "blob": "27a3a40dde60b797b58da576b5849ab10b47079f",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/59dc8875cf991e3d7472db1496c9ae8ffae16ca8/experiments/current/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_gate.py"
+        },
+        {
+          "commit": "a5c7c6d5c0e2611e2ed523ce3da8416620b36d8e",
+          "blob": "63d31bc47291f76c65a5633f14436ccd2105fe9a",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/a5c7c6d5c0e2611e2ed523ce3da8416620b36d8e/src/emergenz_knoten/orbit_center_actuator.py"
+        },
+        {
+          "commit": "d60f6eec93c8cb05c4ea104b76d652a1471b6bab",
+          "blob": "3419412799e3ea29dfb5eae42e4f5e6d12e8a2ab",
+          "role": "independent standard-library result recomputation",
+          "url": "https://github.com/MemoryDynamics/Knoten/blob/d60f6eec93c8cb05c4ea104b76d652a1471b6bab/experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py"
+        }
+      ],
+      "scope": "one prepared L3 candidate; k=0.25; delta/R=0.0015; eight deterministic start phases, four mirror-distinct pairs, two chiralities and two signs; 32 active plus 16 channel-off arms over 4000 updates",
+      "excluded_claims": [
+        "continuous phase integral",
+        "eight or 32 independent replications",
+        "phase-independent scalar mobility",
+        "P4 relabeling",
+        "internal S1 or torus",
+        "spin or angular momentum",
+        "inertia or mass",
+        "two-loop interaction or P5 authorization"
+      ],
+      "status_consistency": {
+        "consistent": true,
+        "surfaces": [
+          "README.md",
+          "docs/index.md",
+          "docs/status/current_status.md",
+          "docs/status/paper_claims.md",
+          "docs/status/project_priorities.md",
+          "reports/README.md",
+          "reports/dynamics/rotation/README.md",
+          "experiments/current/dynamics/rotation/README.md",
+          "docs/reference/repository_map.md",
+          "docs/reference/experiment_catalog.md"
+        ]
+      }
+    }
+  ],
+  "ledger_summary": {
+    "claim_count": 11,
+    "complete_rows": 11,
+    "promoted_claim_contradicting_stored_decision": false,
+    "untraced_promoted_claims_found": false,
+    "global_restrictions": [
+      "all Krawczyk existence wording is conditional on mpmath.iv 1.3.0",
+      "all stability wording is local numerical evidence",
+      "P2 and P4 formal failures remain failures",
+      "P2-R is outcome-informed",
+      "P3 is a finite deterministic ensemble",
+      "P4-R is one discrete eight-node quadrature with four mirror-distinct pairs",
+      "no current result establishes internal S1, spin, momentum, inertia, physical work or mass"
+    ]
+  }
+}

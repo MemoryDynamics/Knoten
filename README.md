@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-08-22.
+Stand: 2026-08-27.
 
 ## Worum es geht
 
@@ -85,13 +85,22 @@ Belastbar derzeit:
   der freien Kontrolle und ist kein Oszillations- oder neuer Knotenbefund.
 - Ein davon getrennter rauschfreier `d=2`-Ast besitzt sechs lokal
   Krawczyk-zertifizierte finite-H-Rotating-wave-Roots bei
-  `H*alpha=12`, `eta/alpha=15`. Ein unabhaengiger Foundation-Audit
+  `H*alpha=12`, `eta/alpha=15`, konditional auf `mpmath.iv` 1.3.0;
+  ein zweiter Intervallbackend fehlt. Ein separat implementierter Foundation-Audit
   reproduziert die historischen fuenf Summen und den
   Fixed-gain-Kontinuumsroot; ein prospektiver L5-Holdout liefert die sechste
   Zelle. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in
   getrennt registrierten Voll-FIFO-Panels. Das ist eine Basis fuer
   vorbereitete raeumliche Schleifen, nicht fuer eine stabile Familie,
-  Formation, internes S1, Arbeit oder Masse.
+  generische Formation, internes S1 oder Masse. P3 zeigt zusaetzlich
+  finite-ensemble attraction fuer zehn nichtkreisfoermige L3-Arme. Der
+  spaetere P4-Lauf bleibt formal gescheitert, obwohl sein expliziter
+  Source-/Write-Port den kompletten finite-H-Write-/Age-Ledger schliesst.
+  Der prospektive P4-R-phi-Holdout besteht danach seine lokale Metrologie
+  und die diskrete Acht-Phasen-Klassifikation mit
+  `B_C=0.2084215772`, `B_Q=0.1537530855` und 8/8 positivem
+  Phasensupport. Das sind vier spiegelverschiedene Phasenpaare, keine 32
+  Replikationen und kein Spin-, Impuls-, Traegheits- oder Massebefund.
 
 Noch nicht belastbar:
 
@@ -164,6 +173,7 @@ versionierten Markdown-Dateien.
 - [Repository Map](docs/reference/repository_map.md)
 - [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
 - [Paper-Claims](docs/status/paper_claims.md)
+- [P4 Publication-Source-Referee-Audit](reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md)
 - [Kuratierter Report-Index](reports/README.md)
 - [Abbildungs-Index](figures/README.md)
 
@@ -191,15 +201,16 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. Den formalen P4-Fail unveraendert halten: Der exakte Write-/Age-Ledger
-   besteht, aber die registrierte Gesamtmechanik und die Geradeausantwort
-   bestehen nicht; P5 bleibt geschlossen.
-2. Das separat vorregistrierte P4-R-phi aus einem sauberen gepushten
-   Implementierungsstand ausfuehren: cancellation-sichere Residualmetrologie
-   und ein frischer, gleichmaessiger Startphasen-Holdout fuer die
-   outcome-informierte chirality-odd \(2\times2\)-Antwortshypothese. Nur ein
-   reviewed Pass zusammen mit einem kompatiblen Referee-/Source-Audit oeffnet
-   danach einen Anchor-Skalenholdout, nicht P5.
+1. Den formalen P4-Fail unveraendert halten. Der nachgelagerte P4-R-phi-Lauf
+   besteht zwar die diskrete chiral-response-Klassifikation und sein
+   Gate-Review, benennt P4 aber nicht um.
+2. Das interne Source-Referee-Audit liefert
+   `referee-source-ready-with-major-claim-restrictions`: beide getesteten
+   NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-Felder
+   exakt, aber zweiter Intervallbackend, vollstaendiger Hash-Lock sowie
+   `CITATION.cff`/Release fehlen. Als naechstes darf daher ein frisches
+   P4-R-S-Anchor-Skalenprotokoll geschrieben, noch kein Target geoeffnet
+   werden. P5 bleibt bis zu einem reviewed P4-R-S-Full-Pass geschlossen.
 3. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
    Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
 4. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt
@@ -207,5 +218,6 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 5. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
    getrennte Programme behandeln.
 6. Publikations-Hardening mit zweitem Intervallbackend und staerkerer
-   Spektralkontrolle darf parallel laufen, ersetzt aber kein Gate. Die
+   Spektralkontrolle, einem sauberen Hash-Lock und einer zitierbaren Release
+   darf parallel laufen, ersetzt aber kein Gate. Die
    massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

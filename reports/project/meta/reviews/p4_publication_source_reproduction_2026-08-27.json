@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "audit": "P4 publication-source clean-checkout reproduction",
+  "audit_date": "2026-08-27",
+  "audited_object": {
+    "result_commit": "0beaf80f713851ab74bef85a24b8323f42f38108",
+    "result_json_blob": "2a668a4c70820bceb0ff84fa1932878d9130aabf",
+    "result_json_canonical_lf_sha256": "807cf915d1602d87a779e7bf587387559b1b19d7de60dc43c6e1e220b73682c8",
+    "result_decision": "p4r-phase-averaged-chiral-response-pass",
+    "review_commit": "b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5",
+    "review_verdict": "p4r-phase-averaged-chiral-response-pass-upheld",
+    "execution_revision": "59dc8875cf991e3d7472db1496c9ae8ffae16ca8",
+    "immutable_result_url": "https://github.com/MemoryDynamics/Knoten/blob/0beaf80f713851ab74bef85a24b8323f42f38108/reports/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.json",
+    "immutable_review_url": "https://github.com/MemoryDynamics/Knoten/blob/b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5/reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md"
+  },
+  "clean_checkout": {
+    "revision": "b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5",
+    "commit_url": "https://github.com/MemoryDynamics/Knoten/commit/b2e8fff8b779ac2b1b4ef6f40be8668fe0c4e5d5",
+    "origin": "https://github.com/MemoryDynamics/Knoten.git",
+    "upstream_ahead": 0,
+    "upstream_behind": 0,
+    "status_before_checks": "clean",
+    "operating_system": "Windows 11 10.0.26200",
+    "architecture": "AMD64",
+    "python": "3.12.13"
+  },
+  "predeclared_replay_comparison": {
+    "decision_and_booleans": "exact",
+    "integer_counts_and_arm_identities": "exact",
+    "canonical_json_scientific_blocks": "exact after JSON parsing",
+    "absolute_floating_tolerance": 5e-13,
+    "relative_floating_tolerance": 5e-12,
+    "observed_maximum_scientific_difference": 0.0,
+    "bytewise_identity_expected": false,
+    "reason_bytewise_identity_not_expected": "generated_at_utc, elapsed_seconds and replay revision are intentionally regenerated; runtime metadata also differs in the repository-pinned environment"
+  },
+  "environments": [
+    {
+      "environment_id": "execution-stack-replay",
+      "purpose": "match the package versions recorded by the original P4-R target",
+      "imported_versions": {
+        "python": "3.12.13",
+        "numpy": "2.4.6",
+        "scipy": "1.18.0",
+        "mpmath": "1.3.0"
+      },
+      "blas": {
+        "implementation": "OpenBLAS",
+        "version": "0.3.31.188.0",
+        "architecture": "Haswell",
+        "threading_layer": "pthreads",
+        "threads_at_inventory": 8
+      },
+      "installed_package_manifest": [
+        "colorama==0.4.6",
+        "contourpy==1.3.3",
+        "cycler==0.12.1",
+        "Cython==3.2.9",
+        "Deprecated==1.3.1",
+        "fonttools==4.63.0",
+        "hopcroftkarp==1.2.5",
+        "iniconfig==2.3.0",
+        "joblib==1.5.3",
+        "kiwisolver==1.5.0",
+        "llvmlite==0.48.0",
+        "matplotlib==3.11.1",
+        "mpmath==1.3.0",
+        "narwhals==2.24.0",
+        "numba==0.66.0",
+        "numpy==2.4.6",
+        "numpy==2.5.2 [stale duplicate metadata; imported code reports 2.4.6]",
+        "packaging==26.2",
+        "packaging==26.3 [duplicate metadata]",
+        "pandas==3.0.5",
+        "persim==0.3.8",
+        "pillow==12.3.0",
+        "pluggy==1.6.0",
+        "Pygments==2.20.0",
+        "pyparsing==3.3.2",
+        "pytest==9.0.3",
+        "python-dateutil==2.9.0.post0",
+        "ripser==0.6.15",
+        "ruff==0.15.21",
+        "scikit-learn==1.9.0",
+        "scipy==1.18.0",
+        "six==1.17.0",
+        "threadpoolctl==3.6.0",
+        "tzdata==2026.3",
+        "wrapt==2.3.0"
+      ],
+      "metadata_manifest_consistent": false,
+      "checks": {
+        "ruff_exact_ci_scope": "pass",
+        "full_tests": "797 passed",
+        "strict_mkdocs": "pass",
+        "registered_anchor_krawczyk": "interval-certified-unique-root-pass",
+        "krawczyk_precision_panels": [
+          {
+            "dps": 80,
+            "pass": true
+          },
+          {
+            "dps": 120,
+            "pass": true
+          }
+        ]
+      },
+      "p4r_replay": {
+        "elapsed_seconds": 215.387667800067,
+        "raw_json_sha256": "ade4ea6bde74218bcc4a18c9e5ea7f74708a3669f2a6ae1d76eaae8da9a14ab6",
+        "canonical_lf_json_sha256": "f1ef61f2941d7d5ba523575e10a0652b9624f4ea64292e527784c16a9ba1fa39",
+        "exact_scientific_top_level_blocks": true,
+        "runtime_block_equal_to_original": true,
+        "different_top_level_fields": [
+          "elapsed_seconds",
+          "generated_at_utc",
+          "provenance"
+        ],
+        "decision_equal": true,
+        "all_gate_booleans_equal": true,
+        "all_arm_identities_equal": true,
+        "all_decisive_floats_equal": true
+      }
+    },
+    {
+      "environment_id": "repository-pinned-replay",
+      "purpose": "fresh installation from requirements.txt, requirements-dev.txt and docs/requirements.txt",
+      "imported_versions": {
+        "python": "3.12.13",
+        "numpy": "2.3.5",
+        "scipy": "1.17.1",
+        "mpmath": "1.3.0"
+      },
+      "blas": {
+        "implementation": "OpenBLAS",
+        "version": "0.3.30",
+        "architecture": "Haswell",
+        "threading_layer": "pthreads",
+        "threads_at_inventory": 8
+      },
+      "installed_package_manifest": [
+        "click==8.5.0",
+        "colorama==0.4.6",
+        "contourpy==1.3.3",
+        "cycler==0.12.1",
+        "Cython==3.3.0",
+        "Deprecated==1.3.1",
+        "fonttools==4.63.0",
+        "ghp-import==2.1.0",
+        "hopcroftkarp==1.2.5",
+        "iniconfig==2.3.0",
+        "Jinja2==3.1.6",
+        "joblib==1.5.3",
+        "kiwisolver==1.5.0",
+        "llvmlite==0.46.0",
+        "Markdown==3.10.3",
+        "MarkupSafe==3.0.3",
+        "matplotlib==3.10.8",
+        "mergedeep==1.3.4",
+        "mkdocs==1.6.1",
+        "mkdocs-get-deps==0.2.2",
+        "mpmath==1.3.0",
+        "narwhals==2.25.0",
+        "numba==0.63.1",
+        "numpy==2.3.5",
+        "packaging==26.3",
+        "pandas==3.0.3",
+        "pathspec==1.1.1",
+        "persim==0.3.8",
+        "pillow==12.3.0",
+        "platformdirs==4.11.4",
+        "pluggy==1.6.0",
+        "Pygments==2.21.0",
+        "pymdown-extensions==10.21.3",
+        "pyparsing==3.3.2",
+        "pytest==9.0.3",
+        "python-dateutil==2.9.0.post0",
+        "PyYAML==6.0.3",
+        "pyyaml_env_tag==1.1",
+        "ripser==0.6.15",
+        "ruff==0.15.21",
+        "scikit-learn==1.9.0",
+        "scipy==1.17.1",
+        "six==1.17.0",
+        "threadpoolctl==3.6.0",
+        "tzdata==2026.3",
+        "watchdog==6.0.0",
+        "wrapt==2.3.0"
+      ],
+      "metadata_manifest_consistent": true,
+      "checks": {
+        "ruff_exact_ci_scope": "pass",
+        "full_tests": "797 passed",
+        "strict_mkdocs": "pass",
+        "registered_anchor_krawczyk": "interval-certified-unique-root-pass",
+        "krawczyk_precision_panels": [
+          {
+            "dps": 80,
+            "pass": true
+          },
+          {
+            "dps": 120,
+            "pass": true
+          }
+        ]
+      },
+      "p4r_replay": {
+        "elapsed_seconds": 228.50300499983132,
+        "raw_json_sha256": "c92a4561c7be42592c3ef357e432a1a549d52700674d657e8645f93c57b2adc4",
+        "canonical_lf_json_sha256": "664e670b9e58cea45547b4e1664026c0e6872cf3fbddfdd944d08af71d05da61",
+        "exact_scientific_top_level_blocks": true,
+        "runtime_block_equal_to_original": false,
+        "different_top_level_fields": [
+          "elapsed_seconds",
+          "generated_at_utc",
+          "provenance",
+          "runtime"
+        ],
+        "decision_equal": true,
+        "all_gate_booleans_equal": true,
+        "all_arm_identities_equal": true,
+        "all_decisive_floats_equal": true
+      }
+    }
+  ],
+  "documentation_environment_used_with_execution_stack": {
+    "installed_package_manifest": [
+      "click==8.4.1",
+      "click==8.4.2 [duplicate metadata]",
+      "colorama==0.4.6",
+      "ghp-import==2.1.0",
+      "Jinja2==3.1.6",
+      "Markdown==3.10.2",
+      "Markdown==3.10.3 [duplicate metadata]",
+      "MarkupSafe==3.0.3",
+      "mergedeep==1.3.4",
+      "mkdocs==1.6.1",
+      "mkdocs-get-deps==0.2.2",
+      "packaging==26.2",
+      "packaging==26.3 [duplicate metadata]",
+      "pathspec==1.1.1",
+      "platformdirs==4.10.0",
+      "platformdirs==4.11.4 [duplicate metadata]",
+      "pymdown-extensions==10.21.3",
+      "python-dateutil==2.9.0.post0",
+      "PyYAML==6.0.3",
+      "pyyaml_env_tag==1.1",
+      "six==1.17.0",
+      "watchdog==6.0.0"
+    ],
+    "metadata_manifest_consistent": false,
+    "strict_mkdocs": "pass"
+  },
+  "independent_result_recomputation": {
+    "auditor_commit": "d60f6eec93c8cb05c4ea104b76d652a1471b6bab",
+    "auditor_blob": "3419412799e3ea29dfb5eae42e4f5e6d12e8a2ab",
+    "auditor_url": "https://github.com/MemoryDynamics/Knoten/blob/d60f6eec93c8cb05c4ea104b76d652a1471b6bab/experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py",
+    "output_blob": "6207fc422d4e7f865dc77daeaff9889f66812f80",
+    "output_canonical_lf_sha256": "28d7e6d624c0234aeb3d5b730c566389abfc0b49fea45ec0771fc528230ea7e5",
+    "decision": "p4r-independent-audit-agrees",
+    "recomputed_target_decision": "p4r-phase-averaged-chiral-response-pass",
+    "differences": [],
+    "third_party_numeric_packages_imported": false,
+    "target_runner_imported": false,
+    "shared_raw_simulation": true,
+    "focused_tests": "10 passed",
+    "full_suite_after_auditor_and_source_audit": "814 passed",
+    "unavailable_raw_fields": [
+      "per-update full histories",
+      "per-update raw ledger terms",
+      "channel-off bitwise histories",
+      "per-update subnormal operands"
+    ]
+  },
+  "continuous_integration": {
+    "all_commits_from_design_through_gate_review": "success",
+    "latest_review_run_url": "https://github.com/MemoryDynamics/Knoten/actions/runs/33018391498",
+    "audit_commit_ci": "pending until audit artifacts are committed and pushed"
+  },
+  "reproduction_commands": [
+    "python -m pip install -r requirements.txt -r requirements-dev.txt -r docs/requirements.txt",
+    "python -m ruff check src tests experiments/current experiments/cli.py",
+    "python -m pytest tests -q",
+    "python -m mkdocs build --strict",
+    "python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_gate.py --summary <absolute-temporary-json> --report <absolute-temporary-markdown>",
+    "python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py --output <absolute-temporary-json>"
+  ],
+  "realistic_runtime": {
+    "p4r_target_minutes": "3.4 to 3.9 on the audited Windows AMD64 host",
+    "full_test_suite_minutes": "2.0 to 2.8 after adding the independent auditor and source-audit tests",
+    "anchor_krawczyk_seconds": "approximately 10 to 15 per environment"
+  },
+  "conclusion": {
+    "scientific_decision_invariant_across_environments": true,
+    "full_source_ready": false,
+    "restrictions": [
+      "the execution stack is not a clean hash-locked environment and contains stale duplicate distribution metadata",
+      "the repository pins direct dependencies but has no complete cross-platform wheel/hash lock",
+      "all promoted Krawczyk inclusions still rely on mpmath.iv 1.3.0 rather than a second validated interval backend",
+      "the audit is internal and shares the original simulation data"
+    ]
+  }
+}

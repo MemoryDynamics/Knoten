@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-08-26.
+Stand: 2026-08-27.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -22,6 +22,9 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 9 | `scalar_memory_loop_center_p2_gate.py` | voller matrixwertiger FIFO-Tangentenvergleich, drei Amplituden, zwei Richtungen und unabhaengige zero-net Wellenform am unveraenderten L3-Kandidaten | formaler P2-Fail nur an der absoluten Tail-Slope-Grenze; alle Linearitaets- und Resttermgates positiv |
 | 10 | `scalar_memory_loop_center_p2r_long_recovery.py` | outcome-informierte, vor weiterer Zielantwort eingefrorene Verlaengerung derselben 16 Arme bis 20 Recovery-Memory-Zeiten | P2-R-Pass in allen 48 neuen sign-sensitiven Fenstern; historischer P2-Fail unveraendert |
 | 11 | `scalar_memory_rotating_wave_p3_formation_basin.py` | drei target-informierte und zwei target-blinde nichtkreisfoermige Historienfamilien in beiden Chiralitaeten, vorbereitete Positiv- sowie eta=0-/achirale Negativkontrollen | reviewed P3-Full-Pass als finite-ensemble attraction; keine generische/spontane Formation |
+| 12 | `scalar_memory_loop_p4_source_write_gate.py` | expliziter chirality-konditionierter Orbit-Center-Port, reziproker First-order-Aktuator und kompletter finite-H-Write-/Age-Ledger | formaler `p4-source-write-architecture-fail`; Ledger Pass, skalare Geradeausantwort falsifiziert |
+| 13 | `scalar_memory_loop_p4r_phase_metrology_gate.py` | frischer Acht-Phasen-Holdout, cancellation-sichere lokale Identitaeten, Full-dot-Envelopes und diskrete Chiral-Klassifikation | reviewed `p4r-phase-averaged-chiral-response-pass`; vier spiegelverschiedene Phasenpaare, kein kontinuierlicher Phasenclaim |
+| 14 | `scalar_memory_loop_p4r_result_audit.py` | Standardbibliothek-Neuberechnung des gespeicherten Roh-JSON ohne Target-Runner oder numerische Drittanbieterpakete | `p4r-independent-audit-agrees`; gemeinsame Simulation, keine externe Replikation |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -146,18 +149,30 @@ python experiments/current/dynamics/rotation/scalar_memory_loop_p4_source_write_
 Der unveraenderliche Befund ist `p4-source-write-architecture-fail`. Der
 finite-H-Write-/Age-Ledger schliesst, aber zwei cancellation-dominierte
 Direktresiduen verfehlen ihre unter-binary64 skalierte Grenze und alle 24 Arme
-zeigen eine zu grosse chirality-odd Querantwort. Das Review oeffnet nur die
-Prospektierung von P4-R-phi: cancellation-sichere Metrologie und einen
-frischen Holdout aus acht vorbereiteten History-Phasen. Ein reviewed
-Chiral-Pass braucht zusaetzlich das vorregistrierte Referee-/Source-Audit und
-wuerde erst dann nur einen separaten Anchor-Skalenholdout oeffnen. P5,
-Topologie, Spin, Impuls und Masse bleiben versiegelt.
+zeigen eine zu grosse chirality-odd Querantwort. Der spaetere P4-R-Pass
+benennt diesen historischen Fail nicht um.
 
-Der prospektive P4-R-phi-Runner ist
+Der P4-R-phi-Runner ist
 `scalar_memory_loop_p4r_phase_metrology_gate.py`. Er implementiert die
 eingefrorene Reihenfolge aus 16 phase-spezifischen channel-off- und 32 aktiven
 Armen, lokale Increment-Metrologie, konservative binary64-Envelopes,
-80-stellige Checkpoint-Replays sowie Spiegel- und Halbdrehungskovarianz. Vor
-dem ersten registrierten Lauf muessen Implementierung und synthetische Tests
-in einem sauberen, gepushten Commit stehen; dieser Eintrag dokumentiert daher
-keinen P4-R-Befund.
+80-stellige Checkpoint-Replays sowie Spiegel- und Halbdrehungskovarianz. Der
+unveraenderliche Befund ist `p4r-phase-averaged-chiral-response-pass` mit
+`B_C=0.2084215772`, `B_Q=0.1537530855` und 8/8 positivem Phasensupport.
+Die 32 Arme sind Kontrollen innerhalb einer diskreten Acht-Knoten-Quadratur,
+keine Replikationen; vier Phasenpaare sind spiegelverschieden.
+
+Der getrennte Auditor kann das gespeicherte Ergebnis ohne Target-Import neu
+klassifizieren:
+
+```bash
+python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py --output <absolute-temporary-json>
+```
+
+Das Gate-Review und das interne Source-Referee-Audit halten nur den engen
+diskreten Port-/Ledger-/Antwortbefund aufrecht. Das Source-Urteil lautet wegen
+eines einzelnen Intervallbackends, fehlendem vollstaendigem Hash-Lock und
+fehlender Citation/Release
+`referee-source-ready-with-major-claim-restrictions`. Als naechstes darf ein
+frisches P4-R-S-Anchor-Protokoll geschrieben werden. P5, Topologie, Spin,
+Impuls, Traegheit und Masse bleiben versiegelt.

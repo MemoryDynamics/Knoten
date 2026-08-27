@@ -1,6 +1,6 @@
 # Evidenz-Ledger: native rotating waves
 
-Stand: 2026-08-26.
+Stand: 2026-08-27.
 
 Dieses Verzeichnis ist das kanonische Artefaktledger des raeumlichen
 Schleifenasts. Markdown-Dateien sind lesbare Reviews oder Reports; JSON-Dateien
@@ -86,6 +86,24 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
     - alle 24 Arme verfehlen unabhaengig die Orthogonalgrenze mit einer
       spiegelkonsistenten chirality-odd Querantwort. Kein P5-, Spin-, Impuls-
       oder Masseclaim.
+16. `scalar_memory_loop_p4r_phase_metrology_2026-08-26.{md,json}`
+    - `p4r-phase-averaged-chiral-response-pass` aus getrenntem Design-,
+      Protokoll-, Implementierungs- und unveraendertem Ergebniscommit;
+    - alle 16 channel-off- und 32 aktiven Arme, 96 exakten 80-stelligen
+      Checkpoints, lokalen Identitaeten, Full-dot-Envelopes und Ledgergates
+      bestehen;
+    - die diskreten Mittel sind `B_C=0.2084215772` und
+      `B_Q=0.1537530855` mit 8/8 positivem Phasensupport. Die acht Knoten
+      bilden vier spiegelverschiedene Paare und keine Replikationen.
+17. `p4_publication_source_referee_audit_2026-08-27.md` mit drei
+    maschinenlesbaren Begleitartefakten unter `reports/project/meta/reviews/`
+    - `referee-source-ready-with-major-claim-restrictions`;
+    - zwei NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-
+      JSON-Bloecke exakt, und ein separat implementierter
+      Standardbibliothek-Auditor stimmt zu;
+    - zweiter Intervallbackend, vollstaendiger Wheel-/Hash-Lock sowie
+      Citation/Release fehlen. Das oeffnet nur die Prospektierung von P4-R-S,
+      nicht P5.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -119,6 +137,12 @@ Das P4-Architekturaudit, Freeze und kritische Ergebnisurteil stehen in
 `reports/project/meta/preregistration/scalar_memory_loop_p4_source_write_protocol_2026-08-26.md`
 beziehungsweise
 `reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md`.
+P4-R-Design, Freeze, Ergebnisreview und Source-Referee-Audit stehen in
+`reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_design_audit_2026-08-26.md`,
+`reports/project/meta/preregistration/scalar_memory_loop_p4r_phase_metrology_protocol_2026-08-26.md`,
+`reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md`
+beziehungsweise
+`reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
@@ -143,8 +167,10 @@ Fenstern durch 20 Memory-Zeiten. P3 besteht fuer fuenf nichtkreisfoermige
 Geometrien in beiden gesetzten Chiralitaeten und oeffnet nur P4. Internes S1,
 Arbeit, Traegheit und Masse bleiben offen. Der nachgelagerte P4-Lauf schliesst
 zwar den Ledger der explizit konstruierten Source-/Write-Architektur, besteht
-aber das Gesamtgate nicht. Seine robuste chirality-odd Querantwort ist nur eine
-neue, startphasenkonditionierte Matrixsuszeptibilitaets-Hypothese. Der erste
-prospektive Nachtest ist P4-R-phi mit acht neuen History-Phasen; selbst ein
-reviewed Chiral-Pass braucht danach ein kompatibles Referee-/Source-Audit und
-oeffnet nur einen Anchor-Skalenholdout. P5 bleibt geschlossen.
+aber das Gesamtgate nicht. Der nachgelagerte P4-R-phi-Holdout bestaetigt die
+chirality-odd Querantwort fuer die registrierte diskrete Acht-Phasen-
+Quadratur; Gate-Review und internes Source-Referee-Audit halten diesen engen
+Befund aufrecht. Das ist kein kontinuierliches Phasenintegral, keine
+Replikationsserie und kein Spin-/Masseclaim. Als naechstes darf nur ein
+frisches P4-R-S-Anchor-Skalenprotokoll geschrieben werden. P5 bleibt bis zu
+dessen reviewed Full-Pass geschlossen.

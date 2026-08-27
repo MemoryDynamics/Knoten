@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-08-26.
+Stand: 2026-08-27.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -36,7 +36,7 @@ Als technischer Spin-off ist inzwischen enger tragbar:
 - ein lokaler computerassistierter Krawczyk-Existenz-/Eindeutigkeitsbeweis
   unter der `mpmath.iv`-Vertrauensbasis fuer den Anchor und fuenf weitere
   gematchte Zellen bei `H*alpha=12`, `eta/alpha=15`;
-- ein unabhaengig reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
+- ein separat hochpraezise reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
   First-order-Skalierung;
 - lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
   prospektiv gewaehlten feineren L3-Zelle;
@@ -45,17 +45,27 @@ Als technischer Spin-off ist inzwischen enger tragbar:
   aufgeloeste Rueckkehr aller signierten Arme durch 20 Memory-Zeiten;
 - finite-ensemble attraction am unveraenderten L3-Kandidaten fuer sechs
   target-informierte und vier target-blinde nichtkreisfoermige P3-Arme durch
-  60 Memory-Zeiten.
+  60 Memory-Zeiten;
+- den vollstaendigen finite-H-Write-/Age-/Interaktionsledger des explizit
+  konstruierten chirality-konditionierten L3-Ports und, getrennt vom formal
+  gescheiterten P4-Gesamtgate, eine prospektiv bestaetigte chirality-odd
+  Querantwort in der diskreten P4-R-Acht-Phasen-Quadratur mit
+  \(B_C=0.2084215772\), \(B_Q=0.1537530855\) und 8/8 positivem
+  Phasensupport.
 
 Das kann eine eigenstaendige mathematische Notiz oder ein Supplement tragen.
 Nicht tragbar sind globale Eindeutigkeit, Stabilitaet der gesamten Familie,
 ein offener Basin-Ball, generische oder spontane Formation, internes S1 nach
-`SO(2)`-Quotient, ein skalares
-Traegheitsgesetz, Arbeit oder Masse. Der
+`SO(2)`-Quotient, ein kontinuierliches Phasenintegral, ein skalares
+Traegheitsgesetz, physische Arbeit oder Masse. Der
 Foundation-Audit, prospektives L5-Review sowie die separaten kritischen L3-,
 P2-, P2-R- und P3-Reviews sind die reviewertragenden Quellen. Ein zweiter
 Intervallbackend und eine
-vollstaendige Spektraleinschliessung fehlen. Der erste Leiter-Fail und der
+vollstaendige Spektraleinschliessung fehlen. Das interne Source-Referee-Audit
+urteilt deshalb nur
+`referee-source-ready-with-major-claim-restrictions`: zusaetzlich fehlen ein
+vollstaendiger Wheel-/Hash-Lock und eine zitierbare Release mit
+`CITATION.cff`. Der erste Leiter-Fail und der
 initiale Audit-Pipeline-Fail sowie der anschliessend von Linux-CI falsifizierte
 nichtportable lokale Zwischenpass bleiben historisch sichtbar.
 
@@ -70,7 +80,8 @@ der kanonischen Gate-Folge in den
 | P1 Nicht-Anchor-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle als zweiter getesteter Skala | vollstaendige Spektralstabilitaet und stabile Familie |
 | P2 Loop--Center plus P2-R-Reconciliation | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten, matrixwertige effektive Kleinsignalantwort und aufgeloeste Rueckkehr unter dem deklarierten schwachen Port | unabhaengige Replikation, skalares Massengesetz, mikroskopischer Aktuator, physische Arbeit oder Masse |
 | P3 Formation/Basin -- reviewed Pass | finite-ensemble attraction fuer fuenf registrierte nichtkreisfoermige Historiengeometrien in beiden gesetzten Chiralitaeten; zwei Geometrien verwenden weder Zielradius noch Zielwinkel | offener Basin-Ball oder -Volumen, generische/spontane Formation, Chiralitaetsselektion aus symmetrischen Daten und Rauschrobustheit |
-| P4 reziproke Single-Loop-Mechanik -- reviewed Fail | kein neuer Mechanikclaim: nur als negativer/diagnostischer Befund berichten, dass der explizit konstruierte Source-/Write-Port seinen finite-H-Write-/Age-Ledger schliesst, waehrend das registrierte Gesamtgate formal scheitert und 24/24 Arme eine chirality-odd Querantwort oberhalb der Grenze zeigen | operationaler Single-Loop-Mechanikpass, P5, skalares Massengesetz, materieller Schwerpunkt, konservierter Impuls, intrinsischer Spin oder physische Masse; die post hoc Matrixsuszeptibilitaet bleibt bis zu einem frischen P4-R-phi-Startphasenholdout Hypothese. Selbst dessen Pass braucht Gate-Review und kompatibles Source-Audit vor einem Anchor-Skalenholdout |
+| P4 reziproke Single-Loop-Mechanik -- reviewed Fail | kein neuer Mechanikclaim: nur als negativer/diagnostischer Befund berichten, dass der explizit konstruierte Source-/Write-Port seinen finite-H-Write-/Age-Ledger schliesst, waehrend das registrierte Gesamtgate formal scheitert und 24/24 Arme eine chirality-odd Querantwort oberhalb der Grenze zeigen | operationaler Single-Loop-Mechanikpass, P5, skalares Massengesetz, materieller Schwerpunkt, konservierter Impuls, intrinsischer Spin oder physische Masse; der spaetere P4-R-Pass benennt diesen Fail nicht um |
+| P4-R-phi diskrete Phasenantwort -- reviewed Pass plus eingeschraenktes Source-Urteil | am vorbereiteten L3-Kreis schliessen lokale Metrologie, Rundungsenvelopes und kompletter Ledger; die diskrete Acht-Phasen-Quadratur besitzt positive chirality-odd Mittelwerte fuer Center und Aktuator und reproduziert in beiden auditierten NumPy/SciPy-Stacks alle wissenschaftlichen JSON-Felder exakt | kein kontinuierliches Phasenintegral, keine 8/32 Replikationen, keine phase-unabhaengige skalare Mobilitaet, kein P4-Pass, internes S1, Torus, Spin, Impuls, Traegheit, Masse oder P5. Vier Phasenpaare sind spiegelverschieden; der Port ist explizit konstruiert. Naechster zulaessiger Schritt ist nur ein frisch vorregistrierter P4-R-S-Anchor-Holdout |
 | P5 Zwei-Loop-Interaktion | kontrollierte reziproke Wechselwirkung zweier einzeln zugelassener Schleifen im getesteten Distanz- und Parameterbereich | Ladung, intrinsischer Spin, universelles Kraftgesetz, Feldtheorie oder Quantisierung |
 
 Ein spaeterer Pass wirkt nicht rueckwirkend: Protokoll, Ergebnis und kritisches
@@ -250,7 +261,7 @@ werden, weil sie diese orientierte Dimension bereits voraussetzt.
 | Endliche Propagation | conjecture/offen | lokale Kopplung und Response-Tests |
 | Lorentz-Kinematik | conjecture/offen | erst nach Propagation |
 | Center-Filter besitzt einen positiven effektiven Traegheitskoeffizienten | strukturell und numerisch eng gestuetzt unter dem gewaehlten Portvertrag: untrunkiert gilt \(m_{\rm filter}=\tau/\mu\); A2 besteht fuenf finite-H-Positive-Real-Zellen und B-star die registrierte Skalierung samt Holdout | als Filtertraegheit berichten; keine Materialmasse, solange Center, mikroskopischer Aktuator und physische Arbeit nicht identifiziert sind |
-| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | weiterhin nicht gestuetzt: P2/P2-R liefern lokale Matrixantwort und Rueckkehr, P3 finite-ensemble attraction. P4 fuegt erstmals eine explizite Gegenkraft und einen geschlossenen Write-/Age-Ledger hinzu, endet aber formal `p4-source-write-architecture-fail`; alle 24 Arme falsifizieren die registrierte skalare Geradeausantwort durch eine chirality-odd Querkomponente | nur die getrennten lokalen, Formation- und expliziten Ledgerbefunde berichten. Kein mechanisches Objekt, skalares Filtermassengesetz, Impuls oder physische Portidentifikation. P4-R-phi darf nur numerische Metrologie und die outcome-informierte diskrete Acht-Phasen-Antwort mit frischem Startphasenholdout pruefen; danach sind Gate-Review und Source-Audit vor jedem Anchor-Skalenholdout erforderlich |
+| Vorbereitete Schleife und Center-Port bilden gemeinsam ein mechanisches Objekt | weiterhin nicht gestuetzt: P2/P2-R liefern lokale Matrixantwort und Rueckkehr, P3 finite-ensemble attraction. P4 fuegt eine explizite Gegenkraft und einen geschlossenen Write-/Age-Ledger hinzu, endet aber formal `p4-source-write-architecture-fail`. P4-R bestaetigt danach fuer eine frische diskrete Acht-Phasen-Quadratur die chirality-odd Querantwort des gleichen expliziten Ports; Gate-Review und eingeschraenktes Source-Audit halten nur diesen engen Befund aufrecht | Ledger und diskrete Portantwort berichten, aber kein mechanisches Objekt, skalares Filtermassengesetz, Impuls, Spin, Traegheit oder physische Portidentifikation. Vier spiegelverschiedene Phasenpaare sind keine Replikationen. Erst ein frisch eingefrorener P4-R-S-Anchor-Holdout darf Skalenuebertragbarkeit pruefen; P5 bleibt geschlossen |
 | Relaxationsrate als Masse | conjecture/offen | nur mass-like proxy sagen |
 | Standardmodellbezug | offene Paper-III-Tuer, spekulativ | erst nach stabilen Knoten, QFT-artigen kollektiven Moden und Mehrknoten-Tests |
 

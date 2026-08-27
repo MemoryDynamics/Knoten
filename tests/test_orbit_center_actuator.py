@@ -215,6 +215,41 @@ def test_source_write_rounding_metrology_rejects_corruption_and_subnormal() -> N
     assert observed.normal_operands is False
 
 
+def test_full_dot_reordering_stays_inside_envelope_and_not_local_gate() -> None:
+    candidate = _small_candidate()
+    readout = candidate_orbit_center_readout(candidate, chirality=1)
+    result = reciprocal_source_write_step(
+        _small_history(),
+        np.asarray([0.7, -0.4]),
+        candidate=candidate,
+        readout=readout,
+        coupling_strength=0.25,
+    )
+    metrology = source_write_rounding_metrology(result, readout=readout)
+    after = result.history[:, 0] + 1j * result.history[:, 1]
+    provisional = (
+        result.provisional_history[:, 0]
+        + 1j * result.provisional_history[:, 1]
+    )
+    after_terms = list(readout.coefficients * after)
+    provisional_terms = list(readout.coefficients * provisional)
+    forward = (
+        sum(after_terms)
+        - sum(provisional_terms)
+        - result.center_prescribed_increment
+    )
+    reverse = (
+        sum(reversed(after_terms))
+        - sum(reversed(provisional_terms))
+        - result.center_prescribed_increment
+    )
+
+    assert np.isfinite([forward.real, forward.imag, reverse.real, reverse.imag]).all()
+    assert abs(forward) <= metrology.center_full_envelope
+    assert abs(reverse) <= metrology.center_full_envelope
+    assert abs(metrology.center_local_residual) < 1e-15
+
+
 def test_channel_off_step_is_bitwise_native() -> None:
     candidate = _small_candidate()
     history = _small_history()

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-26.
+Stand: 2026-08-27.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
 Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
@@ -34,19 +34,23 @@ alle zehn registrierten nichtkreisfoermigen Arme und wird im
 gefuehrt. Der eingefrorene P4-Lauf endet formal als
 `p4-source-write-architecture-fail`. Sein exakter Arbeitsledger ist
 aufgeloest, aber die vorregistrierte Gesamtmechanik besteht nicht. P5,
-Masse und Zwei-Loop-Interaktion bleiben geschlossen.
+Masse und Zwei-Loop-Interaktion bleiben geschlossen. Der nachgelagerte
+P4-R-phi-Holdout besteht seine diskrete Chiral-Klassifikation; das kritische
+Review haelt den engen Befund aufrecht. Das interne Source-Referee-Audit
+urteilt `referee-source-ready-with-major-claim-restrictions` und oeffnet nach
+propagierter Claim-Sprache genau die Prospektierung von P4-R-S am Anchor.
 
 ```mermaid
 flowchart LR
     p4["P4 formal fail<br/>24/24 Querantwort"]
-    p4rphi["P4-R-phi Messhaertung +<br/>neue Startphasen"]
-    referee["Gate-Review +<br/>Source-Referee-Audit"]
-    p4rs["P4-R-S<br/>Anchor-Skalenholdout"]
+    p4rphi["P4-R-phi reviewed Pass<br/>diskrete Acht-Phasen-Antwort"]
+    referee["Source-Referee<br/>restricted pass"]
+    p4rs["P4-R-S naechstes Gate<br/>Anchor-Skalenholdout"]
     p5["P5 Zwei-Loop-Interaktion<br/>geschlossen"]
 
     p4 --> p4rphi
     p4rphi --> referee
-    referee -. Chiral-Pass + kompatibles Source-Urteil .-> p4rs
+    referee --> p4rs
     p4rs -. nur reviewed Full-Pass .-> p5
 ```
 
@@ -60,36 +64,67 @@ Gesamtmechanik und insbesondere die Geradeausantwort: Center und Aktuator
 zeigen in allen 24 Armen eine chirality-odd Querkomponente von etwa
 `0.15..0.21 delta` statt hoechstens `0.05 delta`.
 
-## Primaere Folge: P4-R-phi-Messhaertung und Phasendiskriminator
+## Abgeschlossen: P4-R-phi-Messhaertung und Phasendiskriminator
 
-P4-R ist eine neue outcome-informierte Reconciliation, keine Rettung oder
-Wiederholung von P4. Vor neuem Targetzugriff muss ein eigenes Protokoll:
+P4-R ist eine outcome-informierte Reconciliation, keine Rettung oder
+Wiederholung von P4. Das vor Targetzugriff eingefrorene Protokoll hat:
 
-- das algebraisch identische Single-Slot-Residuum oder eine explizite
-  Rundungsenvelope anstelle einer cancellation-dominierten Differenz zweier
-  2400-Term-Summen registrieren;
+- das algebraisch identische Single-Slot-Residuum und konservative
+  Full-dot-Rundungsenvelopes anstelle einer cancellation-dominierten
+  Differenz zweier 2400-Term-Summen registriert;
 - die vorhandenen P4-Arme ausschliesslich als Discovery-Daten fuer eine
-  startphasenabhaengige chirality-odd \(2\times2\)-Suszeptibilitaet behandeln;
-- acht neue, gleichmaessig versetzte Startphasen bei einer bisher
-  ungeoeffneten Zwischenamplitude als unangetasteten Holdout reservieren und
-  die **diskret phasengemittelte** skalare gegen eine
-  longitudinal-plus-antisymmetrische Antwort entscheiden;
-- unveraendertes natives L3, Source-/Write-Gleichungen, \(k\), Laufzeit und
-  Claim-Grenzen beibehalten, soweit der neue Diskriminator keine vorab
-  begruendete Aenderung verlangt.
+  startphasenabhaengige chirality-odd \(2\times2\)-Suszeptibilitaet behandelt;
+- acht neue, gleichmaessig versetzte Startphasen bei einer ungeoeffneten
+  Zwischenamplitude als Holdout reserviert und die **diskret
+  phasengemittelte** skalare gegen eine longitudinal-plus-antisymmetrische
+  Antwort entschieden;
+- natives L3, Source-/Write-Gleichungen, \(k\), Laufzeit und Claim-Grenzen
+  unveraendert gehalten.
 
-Jedes P4-R-phi-Ergebnis erhaelt ein Gate-Review und danach das separat
-vorregistrierte Referee-/Source-Readiness-Audit. Ein P4-R-phi-Pass allein
-oeffnet nichts. Nur ein upheld Chiral-Pass zusammen mit einem kompatiblen
-Source-Urteil oeffnet den Anchor-Skalenholdout P4-R-S. Erst dessen reviewed
-Full-Pass kann die Single-Loop-Mechanik weitertragen.
-Ein explizit eingesetzter Massenterm oder eine zweite Zeitordnung bleibt
-untersagt; beides darf nur aus einer unabhaengig identifizierten
-Transferantwort folgen.
+Der unveraenderliche Lauf endet
+`p4r-phase-averaged-chiral-response-pass`: lokale Metrologie, Full-dot-
+Envelopes, Ledger, Loop-Erhalt, Spiegelung und Halbdrehung bestehen; die
+diskreten Mittel sind `B_C=0.2084215772` und `B_Q=0.1537530855` mit 8/8
+positivem Phasensupport. Das Gate-Review haelt genau diesen Befund aufrecht.
+Die 32 Arme sind keine Replikationen, sondern eine Acht-Knoten-Quadratur mit
+vier spiegelverschiedenen Phasenpaaren, gesetzten Chiralitaeten und
+Vorzeichenkontrollen.
+
+Das nachgelagerte Source-Audit reproduziert alle wissenschaftlichen Felder in
+zwei NumPy/SciPy-Stacks exakt und stimmt mit einer separat implementierten
+Standardbibliothek-Neuberechnung ueberein. Wegen nur eines Intervallbackends,
+fehlendem vollstaendigen Hash-Lock und fehlender Citation/Release lautet das
+Urteil eingeschraenkt `referee-source-ready-with-major-claim-restrictions`.
+Diese Restriktionen begrenzen Paper-Sprache, untergraben aber nicht den
+getesteten Port, Ledger oder diskreten Antwortbefund.
+
+## Primaeres naechstes Gate: P4-R-S Anchor-Skalenholdout
+
+Als naechstes darf ein **neues prospektives Protokoll** geschrieben werden;
+vor dessen separatem Freeze und Implementierungsreview bleibt der Anchor-
+Targetzugriff geschlossen. P4-R-S muss mindestens:
+
+- den bereits lokal existenzzertifizierten und numerisch stabil getesteten
+  Anchor ohne Nachfitten uebernehmen;
+- dieselben Source-/Write-Gleichungen, Notch-/Adjoint-Konventionen, positiven
+  First-order-Mobilitaeten, `k`, dimensionslosen Offset und Ledgerdefinitionen
+  verwenden oder jede unvermeidbare Skalenabbildung vorab algebraisch
+  herleiten;
+- lokale Increment-Metrologie, Full-dot-Envelopes, channel-off, omitted-age,
+  raw-center, Spiegel-/Halbdrehungs- und diskrete Phasenkontrollen erben;
+- einen vorab fixierten L3-zu-Anchor-Skalierungsvergleich und klare
+  Full-Pass/Fail/Inconclusive-Regeln besitzen;
+- P4 als historischen Fail bewahren und kontinuierliche Phase, Spin, Impuls,
+  Traegheit und Masse explizit ausschliessen.
+
+Erst ein reviewed P4-R-S-Full-Pass kann die Single-Loop-Portantwort ueber eine
+zweite Skala tragen und P5 zur Protokollierung oeffnen. Ein explizit
+eingesetzter Massenterm oder eine zweite Zeitordnung bleibt untersagt; beides
+darf nur aus einer unabhaengig identifizierten Transferantwort folgen.
 
 ## P5: Kontrollierte Zwei-Loop-Interaktion
 
-**Status: geschlossen. Frage erst nach P4-R-phi, Referee-Audit und P4-R-S:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
+**Status: geschlossen bis zu einem reviewed P4-R-S-Full-Pass:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
 ueber die in P4 gepruefte Architektur reziprok Impuls und Arbeit aus?
 
 Das Protokoll muss mindestens Single-Loop-, `channel-off`-, Vorzeichen-/
@@ -107,6 +142,8 @@ Diese Arbeiten duerfen P4--P5 begleiten, sind aber kein Ersatz fuer sie:
   Intervallbackend reproduzieren;
 - den Kontinuumsroot intervallmaessig einschliessen oder die verbleibende
   numerische Vertrauensbasis explizit begrenzen;
+- einen sauberen Wheel-/Hash-Lock, `CITATION.cff` und eine zitierbare
+  Release/Archivierung erzeugen;
 - Claim-Texte erst nach einer Gate-Entscheidung gemaess
   [Paper-Claims](paper_claims.md) aktualisieren.
 

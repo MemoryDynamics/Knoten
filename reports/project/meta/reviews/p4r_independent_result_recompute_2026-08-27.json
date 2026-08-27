@@ -1,0 +1,82 @@
+{
+  "audit": "independent P4-R raw-JSON recomputation",
+  "checks": {
+    "active_validity": true,
+    "candidate_contract": true,
+    "canonical_source_hash": true,
+    "channel_off": true,
+    "decision_recomputation": true,
+    "execution_revision": true,
+    "historical_p4_preserved": true,
+    "ledger_and_metrology": true,
+    "loop_dynamics": true,
+    "markdown_summary_agreement": true,
+    "registration": true,
+    "response_recomputation": true,
+    "stored_summary_agreement": true,
+    "threshold_contract": true,
+    "trace_shape_and_finiteness": true
+  },
+  "decision": "p4r-independent-audit-agrees",
+  "differences": [],
+  "generated_at_utc": "2026-08-27T18:24:07.161248+00:00",
+  "independence_boundary": {
+    "shared_raw_simulation": true,
+    "target_runner_imported": false,
+    "third_party_numeric_package_imported": false,
+    "unavailable_for_independent_recompute": [
+      "per-update full histories",
+      "per-update raw ledger terms",
+      "channel-off bitwise histories",
+      "per-update subnormal operands"
+    ]
+  },
+  "recomputed_decision": "p4r-phase-averaged-chiral-response-pass",
+  "recomputed_gates": {
+    "directional_fail_region": false,
+    "finite_phase_averages": true,
+    "nonlinear_loop_dynamics": true,
+    "pipeline": true,
+    "positive_chiral_region": true,
+    "positive_phase_support": true,
+    "reciprocal_ledger_and_metrology": true,
+    "registration": true,
+    "response_available": true,
+    "response_symmetry_and_odd_signal": true,
+    "scalar_region": false,
+    "valid_active_arms": true
+  },
+  "report_checks": {
+    "actuator_mean": true,
+    "center_mean": true,
+    "decision": true,
+    "source_sha256": true,
+    "support": true
+  },
+  "schema_version": 1,
+  "source": {
+    "canonical_lf_sha256": "807cf915d1602d87a779e7bf587387559b1b19d7de60dc43c6e1e220b73682c8",
+    "expected_canonical_lf_sha256": "807cf915d1602d87a779e7bf587387559b1b19d7de60dc43c6e1e220b73682c8",
+    "path": "reports/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.json"
+  },
+  "stored_decision": "p4r-phase-averaged-chiral-response-pass",
+  "summary": {
+    "active_arm_count": 32,
+    "actuator_phase_averaged_transverse_response": 0.1537530854651682,
+    "actuator_positive_phase_support": 8,
+    "center_phase_averaged_transverse_response": 0.208421577193625,
+    "center_positive_phase_support": 8,
+    "channel_off_arm_count": 16,
+    "high_precision_reference_count": 96,
+    "maximum_d0_fraction": 9.900566357423817e-05,
+    "maximum_energy_ratio": 0.007061804841588191,
+    "maximum_final_separation_ratio": 0.08403454552496963,
+    "maximum_ledger_recombination_relative_difference": 9.099846642880355e-12,
+    "samples_per_arm": 401
+  },
+  "tolerances": {
+    "absolute_recompute": 5e-13,
+    "ledger_recombination_relative": 2e-11,
+    "relative_recompute": 5e-12
+  }
+}

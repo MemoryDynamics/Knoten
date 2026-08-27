@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-22.
+Stand: 2026-08-27.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -83,7 +83,7 @@ Baseline mit scaling-konditionalem Kontinuumsgrenzwert. Daneben besitzt der
 unveraenderte rauschfreie \(d=2\)-K0-H-Kern am separat prospektierten
 Parameterpunkt \(A_{\rm att}=3.5\) nun eine lokal existenzzertifizierte
 Folge aus sechs finite-Summen-Rootzellen und lokale numerische
-Stabilitaetsevidenz am vorbereiteten Anchor sowie an L3. Ein unabhaengiger
+Stabilitaetsevidenz am vorbereiteten Anchor sowie an L3. Ein separat implementierter
 Foundation-Audit reproduziert die
 historischen fuenf Roots, den Fixed-gain-Kontinuumsroot und die First-order-
 Skalierung; der danach prospektierte L5-Holdout besteht die Krawczyk-,
@@ -202,8 +202,37 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Stoerungsarme kontrahieren. Das
     [kritische Review](project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md)
     haelt nur lokale numerische Stabilitaet an dieser zweiten Skala aufrecht.
-    P2 darf nun die Loop--Center-Kompatibilitaet prospektieren; Formation,
-    Topologie, Mechanik und Interaktionen bleiben geschlossen.
+  - Das [P2-Ergebnis](dynamics/rotation/scalar_memory_loop_center_p2_2026-08-25.md)
+    endet formal `loop-center-matrix-local-fail`, obwohl der volle
+    FIFO-Jacobian die schwache nichtlineare Antwort mit grosser Marge
+    beschreibt. Die outcome-informierte
+    [P2-R-Verlaengerung](dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery_2026-08-25.md)
+    reproduziert den Fail und zeigt in allen 48 neuen Fenstern Rueckkehr bis
+    20 Memory-Zeiten.
+  - [P3](dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin_2026-08-26.md)
+    besteht fuer zehn nichtkreisfoermige Arme aus fuenf Geometrien; das
+    [Review](project/meta/reviews/scalar_memory_rotating_wave_p3_formation_basin_review_2026-08-26.md)
+    erlaubt nur finite-ensemble attraction.
+  - [P4](dynamics/rotation/scalar_memory_loop_p4_source_write_2026-08-26.md)
+    schliesst den kompletten finite-H-Write-/Age-/Interaktionsledger des
+    expliziten Ports, bleibt aber formal
+    `p4-source-write-architecture-fail` und falsifiziert die skalare
+    Geradeausantwort.
+  - Der frische
+    [P4-R-phi-Holdout](dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.md)
+    besteht lokale Metrologie, Full-dot-Envelopes, Ledger und die diskrete
+    Acht-Phasen-Chiral-Klassifikation. Das
+    [Gate-Review](project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md)
+    haelt nur diesen engen Befund aufrecht; vier spiegelverschiedene
+    Phasenpaare sind keine Replikationen.
+  - Das
+    [Publication-Source-Referee-Audit](project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md)
+    liefert `referee-source-ready-with-major-claim-restrictions`: zwei
+    NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-Felder
+    exakt, waehrend zweiter Intervallbackend, vollstaendiger Hash-Lock und
+    Citation/Release offen bleiben. Naechstes zulaessiges Gate ist nur die
+    Prospektierung von P4-R-S am Anchor; P5, Spin, Impuls, Traegheit und Masse
+    bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-08-27",
+  "verdict": "referee-source-ready-with-major-claim-restrictions",
+  "findings": [
+    {
+      "finding_id": "SRC-MAJ-001",
+      "severity": "major",
+      "domain": "interval trust base",
+      "claim_id": "RW-EXISTENCE-02",
+      "summary": "All promoted local-existence certificates use one interval implementation.",
+      "evidence_paths": [
+        "src/emergenz_knoten/rotating_wave_interval.py",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.json",
+        "reports/project/meta/reviews/p4_publication_source_reproduction_2026-08-27.json"
+      ],
+      "reproduction_command": "python experiments/current/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate.py --summary <temporary-json> --report <temporary-markdown>",
+      "observed": "The 80- and 120-dps panels and the generic known-root regression pass in both audited environments, but both use mpmath.iv 1.3.0 and therefore share the same outward-rounding trust base.",
+      "expected": "A compatible second validated outward-rounded interval backend reproduces the promoted inclusions, or every existence statement remains explicitly conditional.",
+      "scientific_impact": "The local boxes are strong conditional computer-assisted evidence, not an independently verified or formal proof. This restriction concerns the foundation roots and does not change the reproduced P4-R port, ledger or response decision.",
+      "required_remediation": "Reproduce the six promoted local inclusions with a second validated interval backend and retain endpoint/backend metadata; until then prohibit 'formally verified' and 'independently certified'.",
+      "status": "open-claim-restriction"
+    },
+    {
+      "finding_id": "SRC-MAJ-002",
+      "severity": "major",
+      "domain": "environment reproducibility",
+      "claim_id": "LOOP-PORT-P4R-11",
+      "summary": "The repository has direct dependency pins but no complete hash-locked environment, and the original execution stack contains stale duplicate distribution metadata.",
+      "evidence_paths": [
+        "requirements.txt",
+        "requirements-dev.txt",
+        "docs/requirements.txt",
+        "reports/project/meta/reviews/p4_publication_source_reproduction_2026-08-27.json"
+      ],
+      "reproduction_command": "python -m pip install -r requirements.txt -r requirements-dev.txt -r docs/requirements.txt",
+      "observed": "The target imported NumPy 2.4.6 and SciPy 1.18.0, while the repository pins NumPy 2.3.5 and SciPy 1.17.1. The execution directory also exposes NumPy 2.4.6 and 2.5.2 dist-info plus two packaging versions. A fresh pinned installation is internally consistent.",
+      "expected": "A clean, machine-resolvable wheel/hash manifest or lock reconstructs each declared environment without stale metadata.",
+      "scientific_impact": "The precise original software installation cannot be reconstructed from repository metadata alone. Mitigation is strong: both imported stacks produced exactly equal scientific JSON blocks, arm identities, gates and decisive floating values.",
+      "required_remediation": "Publish a clean lock or hashed wheel manifest for a supported platform, recreate the execution environment from it, and rerun the clean-checkout comparison.",
+      "status": "open-reproducibility-restriction"
+    },
+    {
+      "finding_id": "SRC-MAJ-003",
+      "severity": "major",
+      "domain": "citation and release readiness",
+      "claim_id": "ALL",
+      "summary": "The repository has no CITATION.cff, release tag or archival release manifest.",
+      "evidence_paths": [
+        "LICENSE",
+        "pyproject.toml",
+        "reports/project/meta/reviews/p4_publication_source_claim_trace_2026-08-27.json"
+      ],
+      "reproduction_command": "git tag --list",
+      "observed": "The code is MIT-licensed and all audited files have immutable commit/blob/hash entries, but citation metadata and a versioned release snapshot are absent.",
+      "expected": "A citable release supplies citation instructions, an immutable tag or archive, and a manifest of code/data blobs and canonical hashes.",
+      "scientific_impact": "This does not alter any numerical decision, but prevents an unrestricted claim that the branch is already a publication-grade archival source.",
+      "required_remediation": "Add validated citation metadata, cut a versioned release after author metadata is confirmed, and archive the release (a DOI is recommended).",
+      "status": "open-publication-restriction"
+    },
+    {
+      "finding_id": "SRC-NOTE-004",
+      "severity": "note",
+      "domain": "design dependence and pseudoreplication",
+      "claim_id": "LOOP-PORT-P4R-11",
+      "summary": "The P4-R panel is one deterministic eight-node quadrature with only four mirror-distinct phase pairs.",
+      "evidence_paths": [
+        "reports/project/meta/preregistration/scalar_memory_loop_p4r_phase_metrology_protocol_2026-08-26.md",
+        "reports/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.json",
+        "reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md"
+      ],
+      "reproduction_command": "python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py --output <temporary-json>",
+      "observed": "All eight nodes and 32 signed/chiral arms pass, but signs, chiralities, mirror pairs and half-turn pairs are algebraic controls rather than independent replications. Harmonics of order 8, 16 and higher can alias the rule.",
+      "expected": "Paper wording reports a discrete phase average and never attaches binomial confidence or replication counts to the 32 arms.",
+      "scientific_impact": "The result supports the registered discrete average only; it does not establish a continuous phase integral or phase-independent mobility.",
+      "required_remediation": "Retain the restriction. A future continuous-phase or denser independently frozen panel would be new evidence, not a reinterpretation of P4-R.",
+      "status": "accepted-and-propagated"
+    },
+    {
+      "finding_id": "SRC-NOTE-005",
+      "severity": "note",
+      "domain": "historical decision integrity",
+      "claim_id": "LOOP-PORT-P4-10",
+      "summary": "P4-R does not rescue or relabel the historical P4 failure.",
+      "evidence_paths": [
+        "reports/dynamics/rotation/scalar_memory_loop_p4_source_write_2026-08-26.json",
+        "reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md",
+        "reports/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_2026-08-26.json"
+      ],
+      "reproduction_command": "python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py --output <temporary-json>",
+      "observed": "The P4-R raw JSON embeds p4-source-write-architecture-fail and unchanged_by_p4r=true. The independent auditor verifies both fields.",
+      "expected": "Status and paper wording preserve P4 as a formal failure while separately reporting the passed ledger and P4-R response.",
+      "scientific_impact": "No retrospective threshold change or semantic rescue occurred.",
+      "required_remediation": "None beyond preserving the explicit separation.",
+      "status": "accepted-and-propagated"
+    },
+    {
+      "finding_id": "SRC-NOTE-006",
+      "severity": "note",
+      "domain": "model semantics",
+      "claim_id": "LOOP-PORT-P4-10",
+      "summary": "The orbit-center port is an explicit chirality-conditioned model construction, not an emergent material ontology.",
+      "evidence_paths": [
+        "reports/project/meta/reviews/scalar_memory_loop_p4_actuator_architecture_audit_2026-08-26.md",
+        "reports/project/meta/preregistration/scalar_memory_loop_p4_source_write_protocol_2026-08-26.md",
+        "reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md"
+      ],
+      "reproduction_command": "python -m pytest tests/test_orbit_center_actuator.py tests/test_rotating_wave_p4_source_write.py -q",
+      "observed": "The finite readout, adjoint forces and age ledger are exact. The choice to actuate only the write head, the matched positive mobility and k=0.25 are declared inputs. No second difference, momentum state or mass coefficient occurs.",
+      "expected": "Claims distinguish operational port accounting from a derived physical center, work ontology, momentum law, inertia or mass.",
+      "scientific_impact": "The data can test the declared architecture but cannot establish that the port or actuator is uniquely selected by the native model.",
+      "required_remediation": "Retain the restriction; identifying an autonomous microscopic port requires a new prospective mechanism test.",
+      "status": "accepted-and-propagated"
+    },
+    {
+      "finding_id": "SRC-NOTE-007",
+      "severity": "note",
+      "domain": "independent recomputation boundary",
+      "claim_id": "LOOP-PORT-P4R-11",
+      "summary": "The independent auditor is code-path independent but shares the stored simulation and cannot reconstruct unavailable per-update histories from the result JSON alone.",
+      "evidence_paths": [
+        "experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py",
+        "reports/project/meta/reviews/p4r_independent_result_recompute_2026-08-27.json",
+        "tests/test_rotating_wave_p4r_result_audit.py"
+      ],
+      "reproduction_command": "python experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py --output <temporary-json>",
+      "observed": "The standard-library auditor imports neither the target runner nor third-party numeric packages and recomputes registration, traces, response, decision precedence and available cumulative ledger identities. Per-update full histories, raw work terms, bitwise channel-off histories and subnormal operands are not serialized.",
+      "expected": "Agreement is described as internal reproducibility, not mathematical or external independence; unavailable terms are recovered only by deterministic full replay.",
+      "scientific_impact": "The exact two-environment replay mitigates the storage granularity, but the audit is not an independent trajectory generation or external reproduction.",
+      "required_remediation": "Optional hardening: publish chunked per-update ledger/metrology data or an independently generated trajectory archive if artifact size and archival policy permit.",
+      "status": "accepted-and-disclosed"
+    },
+    {
+      "finding_id": "SRC-MIN-008",
+      "severity": "minor",
+      "domain": "hash presentation",
+      "claim_id": "ALL",
+      "summary": "Several older reviews label checkout-native CRLF digests simply as SHA-256, while Git stores LF blobs.",
+      "evidence_paths": [
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_l3_stability_review_2026-08-22.md",
+        "reports/project/meta/reviews/scalar_memory_loop_center_p2_review_2026-08-25.md",
+        "reports/project/meta/reviews/scalar_memory_loop_center_p2r_long_recovery_review_2026-08-25.md",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_p3_formation_basin_review_2026-08-26.md",
+        "reports/project/meta/reviews/p4_publication_source_claim_trace_2026-08-27.json"
+      ],
+      "reproduction_command": "canonicalize CRLF and CR to LF before SHA-256, then compare with the claim trace",
+      "observed": "The historical checkout-byte hashes reproduce on Windows, whereas the claim ledger records canonical-LF hashes that equal the public Git blob byte streams.",
+      "expected": "Cross-platform citations state the byte convention explicitly.",
+      "scientific_impact": "No content or decision mismatch exists; this is a cross-platform citation ambiguity.",
+      "required_remediation": "Use the claim ledger canonical-LF hashes for publication citations and preserve the immutable historical reviews.",
+      "status": "resolved-by-canonical-claim-ledger"
+    },
+    {
+      "finding_id": "SRC-MIN-009",
+      "severity": "minor",
+      "domain": "status synchronization",
+      "claim_id": "LOOP-PORT-P4R-11",
+      "summary": "The pre-audit frontdoor still described P4-R as prospective after its immutable result and gate review existed.",
+      "evidence_paths": [
+        "README.md",
+        "docs/index.md",
+        "docs/status/current_status.md",
+        "docs/status/paper_claims.md",
+        "docs/status/project_priorities.md",
+        "reports/README.md",
+        "reports/dynamics/rotation/README.md",
+        "experiments/current/dynamics/rotation/README.md",
+        "docs/reference/repository_map.md",
+        "docs/reference/experiment_catalog.md"
+      ],
+      "reproduction_command": "search the listed documentation surfaces for P4-R, P4-R-S and the source-audit verdict",
+      "observed": "The pages were accurate at their 2026-08-26 freeze but stale after the 2026-08-27 result.",
+      "expected": "All public status surfaces distinguish the upheld narrow P4-R pass, the restricted source verdict, the newly eligible P4-R-S protocol and the still-closed P5 gate.",
+      "scientific_impact": "Leaving the pages stale would hide both the positive narrow result and its restrictions.",
+      "required_remediation": "Update all listed surfaces in the audit artifact commit without modifying historical protocols or results.",
+      "status": "resolved-in-audit-artifact-commit"
+    },
+    {
+      "finding_id": "SRC-MIN-010",
+      "severity": "minor",
+      "domain": "P4-R provenance preflight",
+      "claim_id": "LOOP-PORT-P4R-11",
+      "summary": "The first P4-R invocation stopped on a CRLF-versus-canonical-LF hash mismatch before any target arm was evaluated.",
+      "evidence_paths": [
+        "experiments/current/dynamics/rotation/scalar_memory_loop_p4r_phase_metrology_gate.py",
+        "tests/test_rotating_wave_p4r_phase_metrology.py",
+        "reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md"
+      ],
+      "reproduction_command": "python -m pytest tests/test_rotating_wave_p4r_phase_metrology.py -q",
+      "observed": "The aborted call wrote no partial target output. Commit 59dc8875 canonicalized line endings and added a regression test before the successful clean invocation.",
+      "expected": "Provenance hashes are checkout-line-ending independent and target access begins only after provenance passes.",
+      "scientific_impact": "No target data were observed before the fix, so the holdout timing remains intact.",
+      "required_remediation": "None; retain the incident and regression test.",
+      "status": "closed-before-target-access"
+    },
+    {
+      "finding_id": "SRC-NOTE-011",
+      "severity": "note",
+      "domain": "review independence",
+      "claim_id": "ALL",
+      "summary": "This is an internal adversarial source-readiness audit, not external peer review or independent reproduction.",
+      "evidence_paths": [
+        "reports/project/meta/preregistration/p4_publication_source_referee_audit_charter_2026-08-26.md",
+        "reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md"
+      ],
+      "reproduction_command": "not applicable; this is a provenance classification",
+      "observed": "The auditor and project share repository context and may share assumptions despite separate code paths and clean checkouts.",
+      "expected": "Public wording uses 'internal adversarial source-readiness audit' and reserves 'independent reproduction' for an external implementation or team.",
+      "scientific_impact": "Confidence is increased by adversarial checks but not elevated to peer-reviewed or externally replicated evidence.",
+      "required_remediation": "Seek external reproduction and journal peer review as separate future evidence.",
+      "status": "accepted-and-disclosed"
+    }
+  ],
+  "counts": {
+    "critical_open": 0,
+    "major_open": 3,
+    "minor_open": 0,
+    "minor_resolved_or_closed": 3,
+    "notes": 5
+  },
+  "p4rs_compatibility": {
+    "eligible_after_claim_language_commit_is_pushed": true,
+    "reason": "No open restriction undermines the reproduced P4/P4-R port equations, finite-history ledger or discrete response decision; the restrictions constrain interval-proof strength, environment archiving, citation readiness and claim scope.",
+    "p5_open": false
+  }
+}

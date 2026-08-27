@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-22.
+Stand: 2026-08-27.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -363,9 +363,9 @@ flowchart LR
     p2r["P2-R pass<br/>resolved long recovery"]
     formation["P3 pass<br/>finite-ensemble attraction"]
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
-    p4rphi["P4-R-phi prospective runner<br/>target unopened"]
-    referee["prospective source<br/>referee audit"]
-    p4rs["P4-R-S prospective<br/>anchor scale holdout"]
+    p4rphi["P4-R-phi reviewed pass<br/>discrete phase response"]
+    referee["source referee<br/>restricted pass"]
+    p4rs["P4-R-S next gate<br/>anchor scale holdout"]
     interaction["P5 closed<br/>two-loop interaction"]
 
     equations --> discovery --> p0d0
@@ -376,9 +376,9 @@ flowchart LR
     nonanchor --> bridge
     center -.independent input.-> bridge
     bridge --> p2r --> formation --> mechanics
-    mechanics -.new protocol required.-> p4rphi
+    mechanics --> p4rphi
     p4rphi --> referee
-    referee -.chiral pass + compatible audit.-> p4rs
+    referee --> p4rs
     p4rs -.reviewed full pass required.-> interaction
 ```
 
@@ -388,10 +388,13 @@ in `reports/dynamics/rotation/README.md`. Die durchgezogenen Pfeile markieren
 die historische Gatefolge samt unveraendertem P2- und P4-Fail; sie bedeuten
 nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
 reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
-P4-Fail schliesst P5. P4-R-phi erhaelt vor jedem P4-R-S-Protokoll zusaetzlich
-ein Gate-Review und das vorregistrierte Source-Referee-Audit. Die prospektive
-Folge darf den historischen P4-Befund nicht umbenennen. Der implementierte
-P4-R-phi-Runner ist ohne registriertes Ergebnis noch keine Evidenz.
+P4-Fail schliesst P5. P4-R-phi besteht danach den diskreten Acht-Phasen-
+Chiraltest; Gate-Review und internes Source-Referee-Audit halten den engen
+Port-/Ledger-/Antwortbefund mit Major-Claim-Restriktionen aufrecht. Die Folge
+benennt den historischen P4-Befund nicht um. Als naechstes darf nur das
+P4-R-S-Anchor-Protokoll prospektiert werden; der Targetzugriff bleibt bis zu
+dessen Freeze geschlossen. Die acht P4-R-Phasenknoten enthalten vier
+spiegelverschiedene Paare und sind keine Replikationen.
 
 ## Leseregeln
 
