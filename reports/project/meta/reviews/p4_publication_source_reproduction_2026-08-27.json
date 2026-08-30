@@ -275,7 +275,14 @@
   "continuous_integration": {
     "all_commits_from_design_through_gate_review": "success",
     "latest_review_run_url": "https://github.com/MemoryDynamics/Knoten/actions/runs/33018391498",
-    "audit_commit_ci": "pending until audit artifacts are committed and pushed"
+    "audit_commit_ci": {
+      "commit": "bb68d9bda94353edaa9a7b98dfdcc6669dc01b3b",
+      "event": "push",
+      "observed_on": "2026-08-30",
+      "run_url": "https://github.com/MemoryDynamics/Knoten/actions/runs/33106952847",
+      "status": "success",
+      "workflow": "CI"
+    }
   },
   "reproduction_commands": [
     "python -m pip install -r requirements.txt -r requirements-dev.txt -r docs/requirements.txt",

@@ -220,6 +220,9 @@
     "notes": 5
   },
   "p4rs_compatibility": {
+    "claim_language_commit": "bb68d9bda94353edaa9a7b98dfdcc6669dc01b3b",
+    "claim_language_commit_ci": "https://github.com/MemoryDynamics/Knoten/actions/runs/33106952847",
+    "claim_language_commit_is_pushed_and_green": true,
     "eligible_after_claim_language_commit_is_pushed": true,
     "reason": "No open restriction undermines the reproduced P4/P4-R port equations, finite-history ledger or discrete response decision; the restrictions constrain interval-proof strength, environment archiving, citation readiness and claim scope.",
     "p5_open": false

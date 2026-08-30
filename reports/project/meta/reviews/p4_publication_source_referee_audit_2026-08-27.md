@@ -17,9 +17,9 @@ three open major source restrictions:
 
 These restrictions prevent an unrestricted source-ready verdict. They do not
 alter the narrow P4-R decision, and none undermines the tested port equations,
-finite-history ledger or discrete phase-response result. After the claim
-language in this audit commit is pushed, P4-R-S may be *prospectively
-specified*. P5 remains closed. No current result establishes spin, momentum,
+finite-history ledger or discrete phase-response result. The claim-language
+commit is now pushed and green, so P4-R-S may be *prospectively specified*.
+P5 remains closed. No current result establishes spin, momentum,
 inertia, a material center of mass or physical mass.
 
 ## 1. Immutable scope and review timing
@@ -613,6 +613,10 @@ commands, hashes and realistic runtimes are machine-readable in the
 reproduction JSON. CI from P4-R design through gate review is green; the
 review-stage run is
 [GitHub Actions run 33018391498](https://github.com/MemoryDynamics/Knoten/actions/runs/33018391498).
+The later audit-artifact commit
+[`bb68d9bda94353edaa9a7b98dfdcc6669dc01b3b`](https://github.com/MemoryDynamics/Knoten/commit/bb68d9bda94353edaa9a7b98dfdcc6669dc01b3b)
+also passed
+[GitHub Actions run 33106952847](https://github.com/MemoryDynamics/Knoten/actions/runs/33106952847).
 
 ## 8. Pass F — independent result recomputation
 
