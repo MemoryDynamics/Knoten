@@ -1,0 +1,183 @@
+{
+  "audit": "independent P4-R-S raw-JSON recomputation",
+  "channel_off_summary": {
+    "arm_count": 16,
+    "maximum_center_fraction": 3.2527055412039642e-15,
+    "maximum_d0_fraction": 6.0046371292924945e-15
+  },
+  "checks": {
+    "active_validity": true,
+    "all_96_high_precision_checkpoints": true,
+    "anchor_response_recomputation": true,
+    "candidate_contract": true,
+    "canonical_report_hash": true,
+    "canonical_source_hash": true,
+    "channel_off": true,
+    "construction_controls": true,
+    "cross_scale_recomputation": true,
+    "decision_recomputation": true,
+    "historical_l3_hash": true,
+    "ledger_metrology_and_rivals": true,
+    "loop_dynamics": true,
+    "markdown_summary_agreement": true,
+    "provenance": true,
+    "raw_l3_reconstruction": true,
+    "raw_registration": true,
+    "registration_controls": true,
+    "report_git_blob": true,
+    "root_and_static_gain": true,
+    "source_git_blob": true,
+    "stored_summary_agreement": true,
+    "threshold_contract": true,
+    "trace_shape_and_finiteness": true
+  },
+  "closest_threshold_contacts": {
+    "covariance_limit_fraction": 1e-11,
+    "even_to_odd_limit": 0.02,
+    "full_envelope_ratio_limit": 1.0,
+    "largest_covariance_error_fraction": 1.8629327049762565e-15,
+    "largest_even_to_odd_ratio": 2.5424379011427297e-05,
+    "largest_full_envelope_ratio": 0.024875887887747902,
+    "largest_step_ledger_fraction": 2.2419288086611635e-12,
+    "smallest_cross_scale_slack": 0.04767284945180578,
+    "smallest_positive_chiral_margin": 0.0526006589306838,
+    "step_ledger_limit": 5e-11
+  },
+  "decision": "p4rs-independent-audit-agrees",
+  "differences": [],
+  "generated_at_utc": "2026-08-30T20:17:01.743431+00:00",
+  "independence_boundary": {
+    "older_independent_audit_primitives_reused": [
+      "finite-tree validation",
+      "phase unwrapping",
+      "recursive stored/recomputed comparison"
+    ],
+    "shared_raw_simulation": true,
+    "target_runner_imported": false,
+    "third_party_numeric_package_imported": false,
+    "unavailable_for_independent_recompute": [
+      "per-update full histories between stored stride-5 samples",
+      "per-update raw ledger operands",
+      "channel-off bitwise history arrays",
+      "per-update normal/subnormal operand classifications"
+    ]
+  },
+  "provenance_checks": {
+    "clean_pushed_preflight": true,
+    "design_and_protocol_revisions": true,
+    "execution_revision": true,
+    "historical_decisions": true,
+    "implementation_blobs_at_execution": true,
+    "implementation_revision": true,
+    "readiness_review": true,
+    "result_blobs_at_freeze": true,
+    "result_commit_parent_is_execution_revision": true,
+    "source_restrictions_preserved": true
+  },
+  "recomputed_decision": "p4rs-anchor-scale-transfer-pass",
+  "recomputed_gates": {
+    "common_memory_time_grid": true,
+    "cross_scale_transfer": true,
+    "directional_fail_region": false,
+    "finite_response_means": true,
+    "nonlinear_loop_dynamics": true,
+    "pipeline": true,
+    "positive_chiral_region": true,
+    "positive_phase_support": true,
+    "reciprocal_ledger_and_metrology": true,
+    "registration": true,
+    "response_available": true,
+    "response_symmetry_and_odd_signal": true,
+    "scalar_region": false,
+    "valid_active_arms": true
+  },
+  "report_checks": {
+    "claim_boundary": true,
+    "decision": true,
+    "execution_revision": true,
+    "source_sha256": true
+  },
+  "root_audit": {
+    "differences": [],
+    "gates": {
+      "binary64_parse": true,
+      "candidate_id": true,
+      "computed_offset": true,
+      "conjugacy": true,
+      "exact_interval_membership": true,
+      "exact_refined_root": true,
+      "frozen_static_values": true,
+      "matched_eta_alpha": true,
+      "matched_h_alpha": true,
+      "positive_equal_mobility": true
+    },
+    "maximum_static_absolute_error": 5.551115123125783e-16,
+    "pass": true,
+    "recomputed_static": {
+      "beta_imag": -0.45093731944942156,
+      "beta_real": 0.29239570836065015,
+      "write_gain": 0.4020914043226346,
+      "write_imag": 0.6340870653534042,
+      "write_real": 0.004999787409710524
+    },
+    "stored_agreement": true
+  },
+  "schema_version": 1,
+  "source": {
+    "canonical_git_blob": "e4eae06ada6860455e49a08691235b9f6e818f51",
+    "canonical_lf_sha256": "daf127a55adf0eaa60325725493781a94fad3601bf52e90c38ba8c5e13ff62a7",
+    "expected_canonical_lf_sha256": "daf127a55adf0eaa60325725493781a94fad3601bf52e90c38ba8c5e13ff62a7",
+    "freeze_commit": "6817d758c6287472c57c46780b938ab8fd7935a9",
+    "path": "reports/dynamics/rotation/scalar_memory_loop_p4rs_anchor_scale_2026-08-30.json"
+  },
+  "stored_decision": "p4rs-anchor-scale-transfer-pass",
+  "summary": {
+    "active_arm_count": 32,
+    "anchor_means": {
+      "A_C": 0.2420480926516908,
+      "A_Q": 0.30333072181596193,
+      "B_C": 0.206094473684928,
+      "B_Q": 0.1526006589306838
+    },
+    "channel_off_arm_count": 16,
+    "high_precision_reference_count": 96,
+    "l3_means": {
+      "A_C": 0.24091330892887408,
+      "A_Q": 0.30329608037798805,
+      "B_C": 0.208421577193625,
+      "B_Q": 0.1537530854651682
+    },
+    "maximum_d0_fraction": 9.905314940001278e-05,
+    "maximum_energy_ratio": 0.006803378375964451,
+    "maximum_final_separation_ratio": 0.08248259438187217,
+    "maximum_ledger_recombination_relative_difference": 5.916476445659396e-12,
+    "mean_absolute_differences": {
+      "A_C": 0.0011347837228167235,
+      "A_Q": 3.4641437973881306e-05,
+      "B_C": 0.0023271035086969982,
+      "B_Q": 0.0011524265344843854
+    },
+    "positive_phase_support": {
+      "actuator": 8,
+      "center": 8
+    },
+    "profile_rms": {
+      "A_C": 0.0011560496529556834,
+      "A_Q": 0.0001837048717441759,
+      "B_C": 0.0023271505481942257,
+      "B_Q": 0.0011538948748616629
+    },
+    "samples_per_arm": 401,
+    "transient_rms": {
+      "A_C": 0.0012619246289623293,
+      "A_Q": 0.0008387954710754968,
+      "B_C": 0.0015724125618114106,
+      "B_Q": 0.0005537737554697055
+    }
+  },
+  "tolerances": {
+    "absolute_recompute": 5e-13,
+    "ledger_recombination_relative": 2e-11,
+    "relative_recompute": 5e-12
+  }
+}
