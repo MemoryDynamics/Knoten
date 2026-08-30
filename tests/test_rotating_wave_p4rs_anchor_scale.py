@@ -140,15 +140,24 @@ def test_p4rs_readiness_review_parser_is_strict() -> None:
         )
 
 
-def test_p4rs_default_outputs_are_absent_and_pair_write_refuses_reuse(
+def test_p4rs_frozen_default_outputs_and_pair_write_refuses_reuse(
     tmp_path,
 ) -> None:
-    assert not (p4rs.ROOT / p4rs.DEFAULT_SUMMARY).exists()
-    assert not (p4rs.ROOT / p4rs.DEFAULT_REPORT).exists()
-    p4rs._validate_default_output_paths(
-        p4rs.DEFAULT_SUMMARY,
-        p4rs.DEFAULT_REPORT,
+    summary_path = p4rs.ROOT / p4rs.DEFAULT_SUMMARY
+    report_path = p4rs.ROOT / p4rs.DEFAULT_REPORT
+    assert summary_path.exists()
+    assert report_path.exists()
+    assert p4rs._canonical_lf_sha256(summary_path) == (
+        "daf127a55adf0eaa60325725493781a94fad3601bf52e90c38ba8c5e13ff62a7"
     )
+    assert p4rs._canonical_lf_sha256(report_path) == (
+        "f2a76ddbd79337b7a527fcd9951b6ab6b890b0fda7137d0791531cd8094132d0"
+    )
+    with pytest.raises(RuntimeError, match="refusing to overwrite"):
+        p4rs._validate_default_output_paths(
+            p4rs.DEFAULT_SUMMARY,
+            p4rs.DEFAULT_REPORT,
+        )
     with pytest.raises(RuntimeError, match="only the registered JSON"):
         p4rs._validate_default_output_paths(
             tmp_path / "leak.json",
