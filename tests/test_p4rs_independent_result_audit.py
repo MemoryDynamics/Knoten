@@ -11,6 +11,13 @@ from experiments.current.dynamics.rotation import (
 )
 
 
+RESULT_REVIEW = (
+    audit.ROOT
+    / "reports/project/meta/reviews/"
+    "scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md"
+)
+
+
 @pytest.fixture(scope="module")
 def result_audit() -> dict[str, object]:
     return audit.run_audit()
@@ -123,3 +130,15 @@ def test_p4rs_independent_audit_output_is_atomic_and_nonoverwriting(
     assert not output.with_name(output.name + ".tmp").exists()
     with pytest.raises(RuntimeError, match="refusing existing audit output"):
         audit._atomic_write(output, "blocked")
+
+
+def test_p4rs_result_review_upholds_only_the_registered_claim() -> None:
+    text = RESULT_REVIEW.read_text(encoding="utf-8")
+    assert "Verdict: **`p4rs-result-review-upholds-scale-transfer`**." in text
+    assert audit.EXPECTED_SOURCE_SHA256 in text
+    assert audit.EXPECTED_RESULT_COMMIT in text
+    assert "p4rs-independent-audit-agrees" in text
+    assert "P5 **protocol writing is now open**" in text
+    assert "P5 implementation, target access\nand evidence remain closed" in text
+    assert "spin, inertia and mass remain hypotheses, not\nresults" in text
+    assert "32 arms are not 32 independent observations" in text
