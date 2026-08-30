@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -25,6 +25,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 12 | `scalar_memory_loop_p4_source_write_gate.py` | expliziter chirality-konditionierter Orbit-Center-Port, reziproker First-order-Aktuator und kompletter finite-H-Write-/Age-Ledger | formaler `p4-source-write-architecture-fail`; Ledger Pass, skalare Geradeausantwort falsifiziert |
 | 13 | `scalar_memory_loop_p4r_phase_metrology_gate.py` | frischer Acht-Phasen-Holdout, cancellation-sichere lokale Identitaeten, Full-dot-Envelopes und diskrete Chiral-Klassifikation | reviewed `p4r-phase-averaged-chiral-response-pass`; vier spiegelverschiedene Phasenpaare, kein kontinuierlicher Phasenclaim |
 | 14 | `scalar_memory_loop_p4r_result_audit.py` | Standardbibliothek-Neuberechnung des gespeicherten Roh-JSON ohne Target-Runner oder numerische Drittanbieterpakete | `p4r-independent-audit-agrees`; gemeinsame Simulation, keine externe Replikation |
+| 15 | `scalar_memory_loop_p4rs_anchor_scale_gate.py` (geplant) | gepaarter Anchor-Holdout bei gleicher Memory-Zeit mit geerbtem Port/Ledger und Trace-/Phasenprofil-Skalengates | Design und Protokoll eingefroren; Runner, Implementierungsreview und Targetresultat existieren noch nicht |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -173,6 +174,10 @@ Das Gate-Review und das interne Source-Referee-Audit halten nur den engen
 diskreten Port-/Ledger-/Antwortbefund aufrecht. Das Source-Urteil lautet wegen
 eines einzelnen Intervallbackends, fehlendem vollstaendigem Hash-Lock und
 fehlender Citation/Release
-`referee-source-ready-with-major-claim-restrictions`. Als naechstes darf ein
-frisches P4-R-S-Anchor-Protokoll geschrieben werden. P5, Topologie, Spin,
-Impuls, Traegheit und Masse bleiben versiegelt.
+`referee-source-ready-with-major-claim-restrictions`. P4-R-S-Design und
+Anchor-Protokoll sind nun targetfrei eingefroren. Sie paaren 2000 Anchor-
+Updates mit 4000 L3-Updates ueber `tau=alpha*n`, rekonstruieren `G=nu`
+skalenweise und verwenden `epsilon_scale=0.05` fuer komplette Transienten,
+Phasenprofile und Endmittel. Als naechstes darf nur die Implementierung samt
+Pre-target-Review folgen. P5, Topologie, Spin, Impuls, Traegheit und Masse
+bleiben versiegelt.

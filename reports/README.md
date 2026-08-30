@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -230,9 +230,13 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     liefert `referee-source-ready-with-major-claim-restrictions`: zwei
     NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-Felder
     exakt, waehrend zweiter Intervallbackend, vollstaendiger Hash-Lock und
-    Citation/Release offen bleiben. Naechstes zulaessiges Gate ist nur die
-    Prospektierung von P4-R-S am Anchor; P5, Spin, Impuls, Traegheit und Masse
-    bleiben geschlossen.
+    Citation/Release offen bleiben. Der targetfreie
+    [P4-R-S-Designaudit](project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md)
+    und das
+    [Anchor-Protokoll](project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md)
+    frieren nun Memory-Zeit-Abbildung, kandidatenspezifischen Port, 48 Arme
+    und `0.05`-Trace-/Profilgrenzen ein. Runner und Target fehlen weiterhin;
+    P5, Spin, Impuls, Traegheit und Masse bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

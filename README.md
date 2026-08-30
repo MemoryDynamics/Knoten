@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 ## Worum es geht
 
@@ -208,9 +208,11 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
    `referee-source-ready-with-major-claim-restrictions`: beide getesteten
    NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-Felder
    exakt, aber zweiter Intervallbackend, vollstaendiger Hash-Lock sowie
-   `CITATION.cff`/Release fehlen. Als naechstes darf daher ein frisches
-   P4-R-S-Anchor-Skalenprotokoll geschrieben, noch kein Target geoeffnet
-   werden. P5 bleibt bis zu einem reviewed P4-R-S-Full-Pass geschlossen.
+   `CITATION.cff`/Release fehlen. Der targetfreie P4-R-S-Designaudit und das
+   prospektive Anchor-Skalenprotokoll sind jetzt eingefroren. Als naechstes
+   darf nur die Implementierung samt Pre-target-Review vorbereitet werden;
+   kein Anchor-Target ist geoeffnet. P5 bleibt bis zu einem reviewed
+   P4-R-S-Full-Pass geschlossen.
 3. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
    Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
 4. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt

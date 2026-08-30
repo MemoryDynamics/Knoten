@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
 historische Zwischenlesarten stehen in den datierten Reports sowie im
@@ -304,15 +304,23 @@ chirality-konditionierte Modellkonstruktion. Das interne Source-Referee-Audit
 urteilt `referee-source-ready-with-major-claim-restrictions`: ein zweiter
 Intervallbackend, ein vollstaendiger Wheel-/Hash-Lock sowie
 `CITATION.cff`/Release fehlen. Keine dieser Restriktionen untergraebt den
-reproduzierten Port-/Ledger-/Antwortbefund. Damit darf als naechstes ein
-frisches P4-R-S-Anchor-Skalenprotokoll geschrieben werden; vor dessen eigenem
-Freeze darf kein Target geoeffnet werden. P5, Spin, Impuls, Traegheit und
-Masse bleiben geschlossen.
+reproduzierten Port-/Ledger-/Antwortbefund.
+
+**P4-R-S-Protokollstatus:** Der targetfreie Designaudit und das prospektive
+Anchor-Skalenprotokoll sind separat eingefroren. Sie uebernehmen den exakten
+Anchor ohne Nachfitten, bilden L3 und Anchor ueber
+`tau=alpha*n` auf 401 gemeinsame Samples bis `tau=20` ab, bauen die positive
+Mobilitaet `nu=G=|a0|^2` skalenweise aus demselben Notch auf und frieren
+`epsilon_scale=0.05` fuer komplette Transienten, finale Phasenprofile und
+Endmittel ein. Runner, Implementierungsreview und Targetresultat existieren
+noch nicht. Als naechstes darf nur die Implementierung targetfrei vorbereitet
+werden. P5, Spin, Impuls, Traegheit und Masse bleiben geschlossen.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht. P4-R,
-sein Gate-Review und der eingeschraenkte Source-Referee-Pass oeffnen nun
-ausschliesslich die Prospektierung von P4-R-S am Anchor. Die einzige aktive
+sein Gate-Review und der eingeschraenkte Source-Referee-Pass oeffneten
+ausschliesslich die nun eingefrorene P4-R-S-Prospektierung am Anchor. Die
+einzige aktive
 Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
@@ -835,8 +843,9 @@ finite-H-Write-/Age-Ledger, bleibt aber formal
 `p4-source-write-architecture-fail`. Der neue P4-R-phi-Holdout besteht lokale
 Metrologie und die diskrete chirality-odd Acht-Phasen-Antwort am selben L3-
 Port. Gate-Review und internes Source-Referee-Audit halten nur diesen engen
-Befund aufrecht und oeffnen als naechstes genau die Prospektierung von P4-R-S
-am Anchor; P5 bleibt geschlossen.
+Befund aufrecht. Der daraufhin targetfrei eingefrorene P4-R-S-Designaudit und
+das Anchor-Protokoll oeffnen als naechstes nur Implementierung und
+Targetbereitschaftsreview; P5 bleibt geschlossen.
 
 ## Paper-Status
 

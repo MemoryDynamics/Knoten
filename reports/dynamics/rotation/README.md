@@ -1,6 +1,6 @@
 # Evidenz-Ledger: native rotating waves
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Dieses Verzeichnis ist das kanonische Artefaktledger des raeumlichen
 Schleifenasts. Markdown-Dateien sind lesbare Reviews oder Reports; JSON-Dateien
@@ -102,8 +102,18 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       JSON-Bloecke exakt, und ein separat implementierter
       Standardbibliothek-Auditor stimmt zu;
     - zweiter Intervallbackend, vollstaendiger Wheel-/Hash-Lock sowie
-      Citation/Release fehlen. Das oeffnet nur die Prospektierung von P4-R-S,
-      nicht P5.
+       Citation/Release fehlen. Das oeffnet nur die Prospektierung von P4-R-S,
+       nicht P5.
+18. `scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md` und
+    `scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md` unter
+    `reports/project/meta/`
+    - targetfreier Design- und Protokoll-Freeze am bereits zertifizierten und
+      numerisch stabilen Anchor;
+    - gemeinsame Memory-Zeit mit 2000 Anchor- gegen 4000 L3-Updates,
+      skalenweise rekonstruierter Notch-/Adjoint-Mobilitaet und unveraendertem
+      kompletten Ledger;
+    - `epsilon_scale=0.05` fuer Volltraces, finale Phasenprofile und Endmittel;
+      noch kein Runner, kein Targetresultat und kein neuer Evidenzclaim.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -143,6 +153,10 @@ P4-R-Design, Freeze, Ergebnisreview und Source-Referee-Audit stehen in
 `reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md`
 beziehungsweise
 `reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md`.
+P4-R-S-Design und prospektiver Freeze stehen in
+`reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md`
+beziehungsweise
+`reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
@@ -171,6 +185,8 @@ aber das Gesamtgate nicht. Der nachgelagerte P4-R-phi-Holdout bestaetigt die
 chirality-odd Querantwort fuer die registrierte diskrete Acht-Phasen-
 Quadratur; Gate-Review und internes Source-Referee-Audit halten diesen engen
 Befund aufrecht. Das ist kein kontinuierliches Phasenintegral, keine
-Replikationsserie und kein Spin-/Masseclaim. Als naechstes darf nur ein
-frisches P4-R-S-Anchor-Skalenprotokoll geschrieben werden. P5 bleibt bis zu
-dessen reviewed Full-Pass geschlossen.
+Replikationsserie und kein Spin-/Masseclaim. Der P4-R-S-Designaudit und das
+Anchor-Skalenprotokoll sind inzwischen targetfrei eingefroren; sie liefern
+noch keine neue Evidenz. Als naechstes darf nur die Implementierung samt
+Pre-target-Review folgen. P5 bleibt bis zu einem reviewed Full-Pass
+geschlossen.

@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber neun Dokumente.
@@ -77,10 +77,13 @@ aufrecht. Das interne Source-Referee-Audit reproduziert alle
 wissenschaftlichen Felder in zwei NumPy/SciPy-Stacks exakt, urteilt wegen
 eines einzelnen `mpmath.iv`-Intervallbackends, fehlendem vollstaendigem
 Hash-Lock und fehlender Citation/Release aber nur
-`referee-source-ready-with-major-claim-restrictions`. Die aktive Folge ist
-jetzt ausschliesslich ein frisch zu schreibendes P4-R-S-Anchor-Protokoll. P5,
-Interaktion, Spin, Impuls, Traegheit und Masse bleiben bis zu dessen reviewed
-Full-Pass geschlossen.
+`referee-source-ready-with-major-claim-restrictions`. Der targetfreie
+P4-R-S-Designaudit und das prospektive P4-R-S-Anchor-Protokoll frieren nun exakt
+Anchor, Memory-Zeit-Abbildung, Port, 48 Arme sowie Trace-/Phasenprofil-
+Skalengates bei `epsilon_scale=0.05` ein. Aktiv ist nur die Implementierung
+samt Pre-target-Review; das Target bleibt versiegelt. P5, Interaktion, Spin,
+Impuls, Traegheit und Masse bleiben bis zu einem reviewed Full-Pass
+geschlossen.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -365,7 +365,7 @@ flowchart LR
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
     p4rphi["P4-R-phi reviewed pass<br/>discrete phase response"]
     referee["source referee<br/>restricted pass"]
-    p4rs["P4-R-S next gate<br/>anchor scale holdout"]
+    p4rs["P4-R-S protocol frozen<br/>implementation review next"]
     interaction["P5 closed<br/>two-loop interaction"]
 
     equations --> discovery --> p0d0
@@ -391,9 +391,12 @@ reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
 P4-Fail schliesst P5. P4-R-phi besteht danach den diskreten Acht-Phasen-
 Chiraltest; Gate-Review und internes Source-Referee-Audit halten den engen
 Port-/Ledger-/Antwortbefund mit Major-Claim-Restriktionen aufrecht. Die Folge
-benennt den historischen P4-Befund nicht um. Als naechstes darf nur das
-P4-R-S-Anchor-Protokoll prospektiert werden; der Targetzugriff bleibt bis zu
-dessen Freeze geschlossen. Die acht P4-R-Phasenknoten enthalten vier
+benennt den historischen P4-Befund nicht um. P4-R-S-Designaudit und
+Anchor-Protokoll sind nun targetfrei eingefroren: gemeinsame Memory-Zeit,
+skalenweise rekonstruierter Notch und Trace-/Phasenprofil-Grenze `0.05` sind
+vorab festgelegt. Als naechstes darf nur die Implementierung samt
+Targetbereitschaftsreview folgen; der Targetzugriff bleibt geschlossen. Die
+acht P4-R-Phasenknoten enthalten vier
 spiegelverschiedene Paare und sind keine Replikationen.
 
 ## Leseregeln

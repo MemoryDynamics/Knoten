@@ -229,7 +229,7 @@ def test_public_status_surfaces_propagate_the_restricted_result() -> None:
         ),
         "docs/reference/repository_map.md": (
             "P4-R-phi reviewed pass",
-            "P4-R-S next gate",
+            "P4-R-S protocol frozen",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (

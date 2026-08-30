@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -897,6 +897,8 @@ Modellklasse.
 | `reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md` | kritisches P4-R-Ergebnisreview | Haelt nur den diskreten chiral-response-Pass des expliziten L3-Ports aufrecht. Vier spiegelverschiedene Phasenpaare sind keine Replikationen; kein P4-Pass, kontinuierlicher Phasen-, Spin-, Impuls-, Traegheits- oder Masseclaim. |
 | `experiments/current/dynamics/rotation/scalar_memory_loop_p4r_result_audit.py` | separat implementierter P4-R-Ergebnispruefer | Standardbibliothek-only; erkennt Arm-/Threshold-/Ledger-/Response-Manipulationen und rekonstruiert das gespeicherte Ergebnis als `p4r-independent-audit-agrees`. Keine externe Replikation, da dieselbe Rohsimulation verwendet wird. |
 | `reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md` | internes adversariales Publication-Source-Audit | `referee-source-ready-with-major-claim-restrictions`: zwei Stacks reproduzieren alle wissenschaftlichen Felder exakt; offene Major-Restriktionen sind einzelner Intervallbackend, fehlender Hash-Lock und fehlende Citation/Release. Oeffnet nur P4-R-S-Protokollierung. |
+| `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md` | targetfreier P4-R-S-Skalendesign-Audit | Waehlt den vor P4-R zertifizierten/stabilen Anchor, leitet die gemeinsame Memory-Zeit `tau=alpha*n`, den kandidatenspezifischen positiven Gain und nichtretunte `0.05`-Trace-/Profilgrenzen her. Kein Anchor-Portarm wird geoeffnet. |
+| `reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md` | prospektives P4-R-S-Anchor-Protokoll | Friert 16 channel-off-/32 aktive Arme, Anchor `N=2000`/Stride 5, rohen L3-Vergleich, lokale und Full-dot-Metrologie, kompletten Ledger sowie Pass/Fail/Mismatch/Inconclusive-Praezedenz ein. Runner und Target existieren noch nicht; P5 bleibt geschlossen. |
 | `reports/project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md` | Center-Mechanik P0 | `P0-pass-center-effective-mechanics`: kompletter K0-Center-Kandidat, alle Seeds 1--20 als Discovery quarantiniert, neue Seeds und Transferzelle versiegelt; 0 Defekte, nur A autorisiert, D0--D5 ohne S1-Kandidat versiegelt. |
 | `reports/project/meta/reviews/scalar_memory_center_physical_port_gate_a_2026-08-16.md` | Center Gate A: physische Portherleitung | Physischer Center-Port nicht identifiziert, mathematischer passiver Port bleibt. Ein x-konjugierter Port hat f dx=f dc+f dr; ein effektives U_ext(c,Q) transformiert jedoch zur selben additiven x-Gleichung. Ohne mikroskopischen Aktuator und finite-H-Grenzledger bleiben B/C/E/F1 blockiert. |
 | `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |

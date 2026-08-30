@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-27.
+Stand: 2026-08-30.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
 Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
@@ -37,15 +37,16 @@ aufgeloest, aber die vorregistrierte Gesamtmechanik besteht nicht. P5,
 Masse und Zwei-Loop-Interaktion bleiben geschlossen. Der nachgelagerte
 P4-R-phi-Holdout besteht seine diskrete Chiral-Klassifikation; das kritische
 Review haelt den engen Befund aufrecht. Das interne Source-Referee-Audit
-urteilt `referee-source-ready-with-major-claim-restrictions` und oeffnet nach
-propagierter Claim-Sprache genau die Prospektierung von P4-R-S am Anchor.
+urteilt `referee-source-ready-with-major-claim-restrictions`. Der targetfreie
+P4-R-S-Designaudit und das prospektive Anchor-Protokoll sind daraufhin
+separat eingefroren; das Target bleibt geschlossen.
 
 ```mermaid
 flowchart LR
     p4["P4 formal fail<br/>24/24 Querantwort"]
     p4rphi["P4-R-phi reviewed Pass<br/>diskrete Acht-Phasen-Antwort"]
     referee["Source-Referee<br/>restricted pass"]
-    p4rs["P4-R-S naechstes Gate<br/>Anchor-Skalenholdout"]
+    p4rs["P4-R-S Protokoll gefroren<br/>Implementierungsreview als naechstes"]
     p5["P5 Zwei-Loop-Interaktion<br/>geschlossen"]
 
     p4 --> p4rphi
@@ -98,24 +99,32 @@ Urteil eingeschraenkt `referee-source-ready-with-major-claim-restrictions`.
 Diese Restriktionen begrenzen Paper-Sprache, untergraben aber nicht den
 getesteten Port, Ledger oder diskreten Antwortbefund.
 
-## Primaeres naechstes Gate: P4-R-S Anchor-Skalenholdout
+## Primaeres naechstes Gate: P4-R-S Implementierung und Pre-target-Review
 
-Als naechstes darf ein **neues prospektives Protokoll** geschrieben werden;
-vor dessen separatem Freeze und Implementierungsreview bleibt der Anchor-
-Targetzugriff geschlossen. P4-R-S muss mindestens:
+Der targetfreie Designaudit
+`reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md`
+und das prospektive Protokoll
+`reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md`
+sind eingefroren. Sie legen vor jedem Anchor-Targetzugriff fest:
 
-- den bereits lokal existenzzertifizierten und numerisch stabil getesteten
-  Anchor ohne Nachfitten uebernehmen;
-- dieselben Source-/Write-Gleichungen, Notch-/Adjoint-Konventionen, positiven
-  First-order-Mobilitaeten, `k`, dimensionslosen Offset und Ledgerdefinitionen
-  verwenden oder jede unvermeidbare Skalenabbildung vorab algebraisch
-  herleiten;
-- lokale Increment-Metrologie, Full-dot-Envelopes, channel-off, omitted-age,
-  raw-center, Spiegel-/Halbdrehungs- und diskrete Phasenkontrollen erben;
-- einen vorab fixierten L3-zu-Anchor-Skalierungsvergleich und klare
-  Full-Pass/Fail/Inconclusive-Regeln besitzen;
-- P4 als historischen Fail bewahren und kontinuierliche Phase, Spin, Impuls,
-  Traegheit und Masse explizit ausschliessen.
+- den lokal existenzzertifizierten und numerisch stabil getesteten Anchor ohne
+  Nachfitten;
+- dieselben Source-/Write-Gleichungen, kandidatenspezifisches
+  `nu=G=|a0|^2`, `k=0.25` und `delta/R=0.0015`;
+- gleiche Memory-Zeit `tau=alpha*n`: Anchor `N=2000`, Stride 5 gegen L3
+  `N=4000`, Stride 10, jeweils 401 Samples bis `tau=20`;
+- 16 channel-off- und 32 aktive Anchor-Arme sowie alle lokalen
+  Increment-, Full-dot-, Ledger-, omitted-age-, raw-center-, Spiegel-,
+  Halbdrehungs- und diskreten Phasenkontrollen;
+- `epsilon_scale=0.05` fuer die vier komponentenweisen Volltraces, vier
+  finalen Phasenprofile und vier Endmittel;
+- vollstaendige Pass/Scalar/Directional-Fail/Cross-scale-Mismatch/
+  Metrology-Fail/Inconclusive-Praezedenz bei unveraendertem P4-Fail.
+
+Als naechstes darf ausschliesslich der Runner samt synthetischen
+Falsifikatoren implementiert, in einem sauberen Commit gepusht und separat
+auf Targetbereitschaft reviewed werden. Vor diesem Review bleiben alle 48
+Anchor-Arme versiegelt.
 
 Erst ein reviewed P4-R-S-Full-Pass kann die Single-Loop-Portantwort ueber eine
 zweite Skala tragen und P5 zur Protokollierung oeffnen. Ein explizit
