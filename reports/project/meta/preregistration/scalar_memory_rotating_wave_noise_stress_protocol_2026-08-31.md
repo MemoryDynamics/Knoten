@@ -5,6 +5,12 @@ Status: **prospectively frozen after the separately committed design audit;
 no registered N0 trajectory existed when this file was written**  
 Design-freeze commit: `6b17f9562baed07f842e1cb9f3a565652371f5d4`
 
+Pre-target clarification (2026-09-01): before runner completion or any target
+execution, the D0 denominator was restored to the design-audit reference norm
+and the radius and edge-phase references were made explicit. The originally
+committed text remains visible in Git history; no threshold or target datum
+was inspected.
+
 ## 1. Registered question and claim boundary
 
 At what *numerically resolved* innovation amplitude do the prepared Anchor
@@ -144,13 +150,22 @@ update reaching that time, except the stored initial sample at zero.
 
 For a history $Y$, compute the existing normalized finite-memory weighted
 centre and compare with the matching positive-chirality target by the existing
-translation- and SO(2)-quotiented distance $D_0$. The primary denominator is
-the candidate radius $R$.
+translation- and SO(2)-quotiented distance $D_0$. In agreement with the
+design audit, its primary denominator is the target's frozen D0 norm
+$\lVert Y_*\rVert_{D0}$; `D0/R` is serialized only as secondary metrology.
+The visible-radius reference is the centre-reduced newest-slot radius of
+$Y_*$, not the uncentred parameter $R$. The signed adjacent-slot phase is the
+translation-invariant edge phase
+
+$$
+\arg\left[(Y_0-Y_1)\overline{(Y_1-Y_2)}\right].
+$$
 
 At every sample record:
 
-1. base $D_0/R$;
-2. visible newest-slot radius relative error after weighted-centre removal;
+1. base $D_0/\lVert Y_*\rVert_{D0}$ and secondary $D_0/R$;
+2. visible newest-slot radius relative error against the corresponding
+   centre-reduced target radius;
 3. wrapped adjacent-slot phase-increment error relative to positive `theta`;
 4. chirality sign retention;
 5. common-noise pair $D_0/R$ and ratio to its initial value;
@@ -185,8 +200,8 @@ A resolved nonzero arm is stable only if all conditions hold:
 | metric | threshold |
 |---|---:|
 | completes through `tau=20` | required |
-| maximum base `D0/R` | `<= 0.10` |
-| late (`15 <= tau <= 20`) RMS base `D0/R` | `<= 0.05` |
+| maximum base `D0/reference_D0_norm` | `<= 0.10` |
+| late (`15 <= tau <= 20`) RMS base `D0/reference_D0_norm` | `<= 0.05` |
 | maximum visible radius relative error | `<= 0.05` |
 | late RMS wrapped phase error | `<= 0.20 theta` |
 | sampled positive-chirality fraction | `>= 0.99` |
@@ -232,7 +247,7 @@ amplitude.
 As a secondary scaling check, regress
 
 $$
-\log(\operatorname{RMS}_{15\le\tau\le20}D_0/R)
+\log(\operatorname{RMS}_{15\le\tau\le20}D_0/\lVert Y_*\rVert_{D0})
 =a+b\log(\operatorname{RMS}d^{\rm eff}/R)
 $$
 
@@ -246,8 +261,8 @@ orbital gate.
 
 One registered multi-panel PNG contains:
 
-1. log-log `chi` versus late RMS `D0/R`, with resolution class and gate
-   threshold;
+1. log-log `chi` versus late RMS `D0/reference_D0_norm`, with resolution
+   class and gate threshold;
 2. log-log `chi` versus `r_inj` and `f_nz` (the latter may use a logarithmic
    ordinate only after zero values are shown separately);
 3. log-log `chi` versus maximum radius error and late phase RMS;
