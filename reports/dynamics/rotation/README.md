@@ -113,7 +113,19 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       skalenweise rekonstruierter Notch-/Adjoint-Mobilitaet und unveraendertem
       kompletten Ledger;
     - `epsilon_scale=0.05` fuer Volltraces, finale Phasenprofile und Endmittel;
-      noch kein Runner, kein Targetresultat und kein neuer Evidenzclaim.
+      zum Freeze-Zeitpunkt noch kein Runner, kein Targetresultat und kein
+      neuer Evidenzclaim.
+19. `scalar_memory_loop_p4rs_anchor_scale_2026-08-30.{json,md}` mit
+    Implementierungsreview, unabhaengigem Rebuild und Ergebnisreview
+    - `p4rs-anchor-scale-transfer-pass` aus dem ersten registrierten Lauf;
+    - 16/16 channel-off-, 32/32 aktive Arme und 96/96 High-precision-
+      Referenzen bestehen;
+    - maximale Anchor--L3-Abweichung `0.00232715` gegen die vorab fixierte
+      Grenze `0.05`, jeweils 8/8 positiver Center-/Aktuator-Phasensupport;
+    - ein Standardbibliothek-only Auditor rekonstruiert Entscheidung,
+      Skalierungsarrays, Ledgergates und Referenzen ohne Feldabweichung;
+    - reviewed Zwei-Zellen-Skalenpass, keine Replikation, Konvergenzordnung,
+      Interaktions-, Spin-, Traegheits- oder Masseevidenz.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -153,10 +165,14 @@ P4-R-Design, Freeze, Ergebnisreview und Source-Referee-Audit stehen in
 `reports/project/meta/reviews/scalar_memory_loop_p4r_phase_metrology_review_2026-08-27.md`
 beziehungsweise
 `reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md`.
-P4-R-S-Design und prospektiver Freeze stehen in
+P4-R-S-Design, prospektiver Freeze, Implementierungs- und Ergebnisreview
+stehen in
 `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md`
 beziehungsweise
-`reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md`.
+`reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md`,
+`reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_implementation_readiness_2026-08-30.md`
+und
+`reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
@@ -185,8 +201,11 @@ aber das Gesamtgate nicht. Der nachgelagerte P4-R-phi-Holdout bestaetigt die
 chirality-odd Querantwort fuer die registrierte diskrete Acht-Phasen-
 Quadratur; Gate-Review und internes Source-Referee-Audit halten diesen engen
 Befund aufrecht. Das ist kein kontinuierliches Phasenintegral, keine
-Replikationsserie und kein Spin-/Masseclaim. Der P4-R-S-Designaudit und das
-Anchor-Skalenprotokoll sind inzwischen targetfrei eingefroren; sie liefern
-noch keine neue Evidenz. Als naechstes darf nur die Implementierung samt
-Pre-target-Review folgen. P5 bleibt bis zu einem reviewed Full-Pass
+Replikationsserie und kein Spin-/Masseclaim. Der danach targetfrei entworfene,
+prospektiv eingefrorene und vor Targetzugriff reviewte P4-R-S-Anchor-Holdout
+ist inzwischen unveraendert ausgefuehrt: maximale Anchor--L3-Abweichung
+`0.00232715` gegen `0.05`, unabhaengiger Ergebnisrebuild ohne
+Feldabweichung. Das kritische Review haelt nur den Zwei-Zellen-Skalenpass
+aufrecht. P5-Design und prospektive Protokollierung sind damit offen;
+P5-Implementierung, Targetzugriff und Interaktionsevidenz bleiben
 geschlossen.

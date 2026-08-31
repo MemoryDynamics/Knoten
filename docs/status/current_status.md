@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-08-30.
+Stand: 2026-08-31.
 
 Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
 historische Zwischenlesarten stehen in den datierten Reports sowie im
@@ -18,7 +18,7 @@ vollstaendig erhalten.
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
-| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. Der spaetere P4-Source-/Write-Port schliesst seinen exakten Write-/Age-Arbeitsledger, endet aber formal als `p4-source-write-architecture-fail`. Der nachgelagerte P4-R-phi-Holdout besteht lokale Metrologie, Ledger und die diskrete Acht-Phasen-Klassifikation mit \(B_C=0.2084215772\), \(B_Q=0.1537530855\) und 8/8 positivem Phasensupport. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag, algebraisch geschlossener Ledger und eine reproduzierte chirality-odd Antwort des explizit konstruierten Ports am vorbereiteten L3-Kreis | P4 bleibt formal gescheitert; P4-R umfasst vier spiegelverschiedene Phasenpaare und keinen kontinuierlichen Phasenintegral- oder Replikationsbefund. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, intrinsischer Spin, physikalische Arbeit, Traegheit oder Masse identifiziert |
+| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. P4 schliesst den exakten Write-/Age-Arbeitsledger, bleibt aber formal Fail. P4-R besteht am vorbereiteten L3-Kreis die diskrete Chiral-Klassifikation. Der reviewed P4-R-S-Holdout uebertraegt denselben registrierten Antworttyp auf den Anchor; die groesste Anchor--L3-Abweichung ist `0.00232715` gegen `0.05`. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag, algebraisch geschlossener Ledger und ein reviewed diskreter Zwei-Zellen-Skalenpass des explizit konstruierten Ports | P4 bleibt formal gescheitert; zwei Zellen liefern keine Konvergenzordnung oder Replikation. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, intrinsischer Spin, physikalische Arbeit, Traegheit oder Masse identifiziert |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
 | Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
 | Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
@@ -194,9 +194,11 @@ vollstaendig erhalten.
   Kreisel, Arbeit oder Masse folgen daraus nicht.
 - P4 etabliert keine reziproke Single-Loop-Gesamtmechanik: Der formale Fail
   bleibt bestehen. P4-R-phi bestaetigt danach die chirality-odd Querantwort in
-  einer frischen diskreten Acht-Phasen-Quadratur, aber weder dieser Holdout
-  noch die Kreisgeometrie definieren Spin oder gyroskopische Masse. P5 bleibt
-  bis zu einem reviewed P4-R-S-Full-Pass geschlossen.
+  einer frischen diskreten Acht-Phasen-Quadratur. Der reviewed P4-R-S-Pass
+  traegt diese Antwort auf einen zweiten vorbereiteten Skalenpunkt, benennt
+  P4 aber ebenfalls nicht um. Weder die beiden Skalen noch die Kreisgeometrie
+  definieren Spin oder gyroskopische Masse. P5-Protokollierung ist jetzt offen;
+  P5-Implementierung, Target und Evidenz bleiben geschlossen.
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
 - Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
@@ -306,22 +308,33 @@ Intervallbackend, ein vollstaendiger Wheel-/Hash-Lock sowie
 `CITATION.cff`/Release fehlen. Keine dieser Restriktionen untergraebt den
 reproduzierten Port-/Ledger-/Antwortbefund.
 
-**P4-R-S-Protokollstatus:** Der targetfreie Designaudit und das prospektive
-Anchor-Skalenprotokoll sind separat eingefroren. Sie uebernehmen den exakten
-Anchor ohne Nachfitten, bilden L3 und Anchor ueber
-`tau=alpha*n` auf 401 gemeinsame Samples bis `tau=20` ab, bauen die positive
-Mobilitaet `nu=G=|a0|^2` skalenweise aus demselben Notch auf und frieren
-`epsilon_scale=0.05` fuer komplette Transienten, finale Phasenprofile und
-Endmittel ein. Runner, Implementierungsreview und Targetresultat existieren
-noch nicht. Als naechstes darf nur die Implementierung targetfrei vorbereitet
-werden. P5, Spin, Impuls, Traegheit und Masse bleiben geschlossen.
+**P4-R-S-Ergebnisstatus:** Designaudit, Protokoll und Implementierungsreview
+wurden vor dem ersten registrierten Lauf getrennt eingefroren. Der
+unveraenderte Lauf bildet L3 und Anchor ueber `tau=alpha*n` auf je 401
+gemeinsame Samples bis `tau=20` ab und verwendet in beiden Zellen denselben
+Notch-/Adjoint-Vertrag mit skalenweise rekonstruierter positiver Mobilitaet
+`nu=G=|a0|^2`. Alle 16 channel-off- und 32 aktiven Anchor-Arme sowie 96
+High-precision-Referenzen bestehen. Die diskreten Anchor-Mittel sind
+`A_C=0.24204809`, `B_C=0.20609447`, `A_Q=0.30333072` und
+`B_Q=0.15260066`, jeweils mit 8/8 positivem Phasensupport. Die groesste
+registrierte Anchor--L3-Abweichung ist `0.00232715` gegen die vorab fixierte
+Grenze `epsilon_scale=0.05`.
+
+Ein separat implementierter Standardbibliothek-Auditor rekonstruiert
+Entscheidung, Skalierungsarrays, Ledgergates und alle 96 Referenzen ohne
+Abweichung. Das kritische Review haelt deshalb
+`p4rs-anchor-scale-transfer-pass` aufrecht. Der Befund traegt genau die
+diskrete Antwortuebertragung zwischen zwei vorbereiteten Skalenpunkten; zwei
+Zellen liefern weder Konvergenzordnung noch unabhaengige Replikation.
+P5-Design und prospektive Protokollierung sind jetzt offen.
+P5-Implementierung, Targetzugriff und Interaktionsevidenz sowie Spin-,
+Impuls-, Traegheits- und Masseclaims bleiben geschlossen.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht. P4-R,
-sein Gate-Review und der eingeschraenkte Source-Referee-Pass oeffneten
-ausschliesslich die nun eingefrorene P4-R-S-Prospektierung am Anchor. Die
-einzige aktive
-Abhaengigkeitskette steht in den
+Source-Audit und der reviewed P4-R-S-Skalenpass oeffnen nun ausschliesslich
+den targetfreien P5-Designaudit und eine nachgelagerte prospektive
+Protokollierung. Die einzige aktive Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
 
@@ -843,9 +856,11 @@ finite-H-Write-/Age-Ledger, bleibt aber formal
 `p4-source-write-architecture-fail`. Der neue P4-R-phi-Holdout besteht lokale
 Metrologie und die diskrete chirality-odd Acht-Phasen-Antwort am selben L3-
 Port. Gate-Review und internes Source-Referee-Audit halten nur diesen engen
-Befund aufrecht. Der daraufhin targetfrei eingefrorene P4-R-S-Designaudit und
-das Anchor-Protokoll oeffnen als naechstes nur Implementierung und
-Targetbereitschaftsreview; P5 bleibt geschlossen.
+Befund aufrecht. Der danach unveraendert ausgefuehrte und separat auditierte
+P4-R-S-Anchor-Holdout besteht mit maximal `0.00232715` Anchor--L3-Abweichung
+gegen die vorab fixierte Grenze `0.05`. Das Ergebnisreview oeffnet nur
+P5-Design und prospektive Protokollierung; Implementierung, Target und
+Interaktionsevidenz bleiben geschlossen.
 
 ## Paper-Status
 
@@ -855,12 +870,15 @@ Targetbereitschaftsreview; P5 bleibt geschlossen.
   Stabilitaetsevidenz an Anchor und L3 sowie finite-ensemble attraction aus
   den zehn registrierten nichtkreisfoermigen P3-Armen dienen. Als separater
   enger Zusatz ist der explizite L3-Source-/Write-Ledger samt diskreter
-  chirality-odd P4-R-Antwort tragbar. Die lokalen Roots bleiben konditional
-  auf `mpmath.iv` 1.3.0; keine stabile Familie, generische/spontane Formation,
-  kontinuierliche Phasenantwort, robuste materielle Knotenexistenz, Spin,
-  Impuls, Traegheit oder Masse behaupten.
+  chirality-odd P4-R-Antwort und reviewed P4-R-S-Skalenholdout am Anchor
+  tragbar. Die lokalen Roots bleiben konditional auf `mpmath.iv` 1.3.0; zwei
+  Skalen sind keine Konvergenzordnung. Keine stabile Familie,
+  generische/spontane Formation, kontinuierliche Phasenantwort, robuste
+  materielle Knotenexistenz, Spin, Impuls, Traegheit oder Masse behaupten.
 - **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
-  nichtlineare Metastabilitaet und Teilchensprache vermeiden.
+  nichtlineare Metastabilitaet und Teilchensprache vermeiden. Der
+  deterministische `d=2`-Schleifen-/Portast bleibt eine getrennte technische
+  Erweiterung oder ein eng markierter Outlook, nicht Teil des Hauptclaims.
 - **Paper II:** P3.8b-d liefern einen analytischen Gradientenmediator-Kandidaten,
   einen quasistatischen Diskriminator und einen konditionalen dynamischen
   Existenzpass. Sie leiten den Zusatzmechanismus nicht aus `z=(x,rho)` her.

@@ -234,9 +234,20 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     [P4-R-S-Designaudit](project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md)
     und das
     [Anchor-Protokoll](project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md)
-    frieren nun Memory-Zeit-Abbildung, kandidatenspezifischen Port, 48 Arme
-    und `0.05`-Trace-/Profilgrenzen ein. Runner und Target fehlen weiterhin;
-    P5, Spin, Impuls, Traegheit und Masse bleiben geschlossen.
+    froren Memory-Zeit-Abbildung, kandidatenspezifischen Port, 48 Arme und
+    `0.05`-Trace-/Profilgrenzen ein. Nach getrenntem
+    [Implementierungsreview](project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_implementation_readiness_2026-08-30.md)
+    besteht der unveraenderte
+    [P4-R-S-Anchor-Lauf](dynamics/rotation/scalar_memory_loop_p4rs_anchor_scale_2026-08-30.md):
+    16/16 channel-off-, 32/32 aktive Arme und 96/96 High-precision-
+    Referenzen bestehen; die groesste Anchor--L3-Abweichung ist `0.00232715`
+    gegen `0.05`. Ein separat implementierter
+    [Auditor](project/meta/reviews/p4rs_independent_result_recompute_2026-08-30.json)
+    rekonstruiert alle registrierten Auswertungen ohne Feldabweichung. Das
+    [Ergebnisreview](project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md)
+    oeffnet nur P5-Design und prospektive Protokollierung. P5-Implementierung,
+    Target und Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims
+    bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

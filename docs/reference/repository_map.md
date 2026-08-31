@@ -365,8 +365,8 @@ flowchart LR
     mechanics["P4 formal fail<br/>ledger pass + transverse response"]
     p4rphi["P4-R-phi reviewed pass<br/>discrete phase response"]
     referee["source referee<br/>restricted pass"]
-    p4rs["P4-R-S protocol frozen<br/>implementation review next"]
-    interaction["P5 closed<br/>two-loop interaction"]
+    p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
+    interaction["P5 design/protocol open<br/>target closed"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -379,7 +379,7 @@ flowchart LR
     mechanics --> p4rphi
     p4rphi --> referee
     referee --> p4rs
-    p4rs -.reviewed full pass required.-> interaction
+    p4rs -.opens design/protocol only.-> interaction
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
@@ -388,16 +388,19 @@ in `reports/dynamics/rotation/README.md`. Die durchgezogenen Pfeile markieren
 die historische Gatefolge samt unveraendertem P2- und P4-Fail; sie bedeuten
 nicht, dass jeder Zwischenlauf bestanden hat. P2-R und P3 liefern die eng
 reviewed Rueckkehr- beziehungsweise finite-ensemble-Attraktionsevidenz. Der
-P4-Fail schliesst P5. P4-R-phi besteht danach den diskreten Acht-Phasen-
-Chiraltest; Gate-Review und internes Source-Referee-Audit halten den engen
-Port-/Ledger-/Antwortbefund mit Major-Claim-Restriktionen aufrecht. Die Folge
-benennt den historischen P4-Befund nicht um. P4-R-S-Designaudit und
-Anchor-Protokoll sind nun targetfrei eingefroren: gemeinsame Memory-Zeit,
-skalenweise rekonstruierter Notch und Trace-/Phasenprofil-Grenze `0.05` sind
-vorab festgelegt. Als naechstes darf nur die Implementierung samt
-Targetbereitschaftsreview folgen; der Targetzugriff bleibt geschlossen. Die
-acht P4-R-Phasenknoten enthalten vier
-spiegelverschiedene Paare und sind keine Replikationen.
+P4-Fail schloss den direkten P5-Pfad. P4-R-phi besteht danach den diskreten
+Acht-Phasen-Chiraltest; Gate-Review und internes Source-Referee-Audit halten
+den engen Port-/Ledger-/Antwortbefund mit Major-Claim-Restriktionen aufrecht.
+Die Folge benennt den historischen P4-Befund nicht um. Der nach targetfreiem
+Design-, Protokoll- und Implementierungsfreeze unveraendert ausgefuehrte
+P4-R-S-Anchor-Holdout uebertraegt den registrierten Antworttyp auf eine zweite
+vorbereitete Skala: maximale Anchor--L3-Abweichung `0.00232715` gegen die
+vorab fixierte Grenze `0.05`. Ein unabhaengig implementierter Auditor stimmt
+ohne Feldabweichung zu; das Ergebnisreview oeffnet ausschliesslich P5-Design
+und prospektive Protokollierung. P5-Implementierung, Targetzugriff und
+Interaktionsevidenz bleiben geschlossen. Die acht P4-R-Phasenknoten enthalten
+vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
+liefern keine Konvergenzordnung.
 
 ## Leseregeln
 

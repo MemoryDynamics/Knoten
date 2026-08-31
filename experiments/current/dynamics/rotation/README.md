@@ -175,9 +175,15 @@ diskreten Port-/Ledger-/Antwortbefund aufrecht. Das Source-Urteil lautet wegen
 eines einzelnen Intervallbackends, fehlendem vollstaendigem Hash-Lock und
 fehlender Citation/Release
 `referee-source-ready-with-major-claim-restrictions`. P4-R-S-Design und
-Anchor-Protokoll sind nun targetfrei eingefroren. Sie paaren 2000 Anchor-
-Updates mit 4000 L3-Updates ueber `tau=alpha*n`, rekonstruieren `G=nu`
-skalenweise und verwenden `epsilon_scale=0.05` fuer komplette Transienten,
-Phasenprofile und Endmittel. Als naechstes darf nur die Implementierung samt
-Pre-target-Review folgen. P5, Topologie, Spin, Impuls, Traegheit und Masse
-bleiben versiegelt.
+Anchor-Protokoll froren danach targetfrei 2000 Anchor- gegen 4000 L3-Updates
+ueber `tau=alpha*n`, skalenweise rekonstruiertes `G=nu` und
+`epsilon_scale=0.05` fuer komplette Transienten, Phasenprofile und Endmittel
+ein. Nach getrenntem Implementierungsreview wurde der erste registrierte Lauf
+unveraendert ausgefuehrt. Alle 16 channel-off-, 32 aktiven Arme und 96
+High-precision-Referenzen bestehen; die groesste Anchor--L3-Abweichung ist
+`0.00232715` gegen `0.05`. Ein separat implementierter
+Standardbibliothek-Auditor rekonstruiert die gespeicherte Entscheidung als
+`p4rs-anchor-scale-transfer-pass` ohne Feldabweichung. Das Ergebnisreview
+oeffnet nur P5-Design und prospektive Protokollierung. P5-Implementierung,
+Targetzugriff und Interaktionsevidenz sowie Topologie-, Spin-, Impuls-,
+Traegheits- und Masseclaims bleiben versiegelt.

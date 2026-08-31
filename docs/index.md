@@ -1,9 +1,9 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-08-30.
+Stand: 2026-08-31.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
-bewusst klein gehalten: aktive Orientierung laeuft ueber neun Dokumente.
+bewusst klein gehalten: aktive Orientierung laeuft ueber zehn Dokumente.
 Historische Chatverlaeufe, alte Paper-Artefakte und Rohnotizen bleiben im
 Repository, gelten aber nicht als kuratierte Quelle.
 
@@ -16,17 +16,18 @@ eine explizite Memory-Reprasentation ist die Markov-Einbettung. Metastabile
 Knoten sollen ueber Residence-Zeiten, Operator-Moden und Kontrollen messbar
 werden, nicht ueber Einzelbilder.
 
-## Die neun aktiven Dokumente
+## Die zehn aktiven Dokumente
 
 1. [Aktueller Stand](status/current_status.md) - Was ist jetzt wahr, was laeuft, was ist offen?
 2. [Prioritaeten](status/project_priorities.md) - Die einzige prospektive Gate-Folge.
-3. [Theoretical Context](reference/THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
-4. [Center-Filter und Rotation](reference/scalar_memory_center_filter.md) - lesbare \(B_H\)-Algebra, Grundgroessen und Rotationsbruecke.
-5. [Native Rotating Waves](reference/rotating_wave_foundation.md) - exakte Kreisgleichung, Evidenzleiter und Reviewergrenzen.
-6. [Repository Map](reference/repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
-7. [Experiment-Katalog](reference/experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
-8. [Paper-Claims](status/paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
-9. Diese Startseite.
+3. [P4-R-S allgemein erklaert](status/p4rs_plain_language_summary.md) - Was der Zwei-Zellen-Pass bedeutet und was nicht.
+4. [Theoretical Context](reference/THEORETICAL_CONTEXT.md) - Modellkern, Markov-Schicht, Claim-Grenzen.
+5. [Center-Filter und Rotation](reference/scalar_memory_center_filter.md) - lesbare \(B_H\)-Algebra, Grundgroessen und Rotationsbruecke.
+6. [Native Rotating Waves](reference/rotating_wave_foundation.md) - exakte Kreisgleichung, Evidenzleiter und Reviewergrenzen.
+7. [Repository Map](reference/repository_map.md) - Mermaid-Uebersicht ueber Code, Daten, Paper und Doku.
+8. [Experiment-Katalog](reference/experiment_catalog.md) - Entry-Points, Ergebnisse, Kontrollen, Reproduzierbarkeit.
+9. [Paper-Claims](status/paper_claims.md) - Claim-Register fuer Paper 0/I/II/III.
+10. Diese Startseite.
 
 Damit ersetzt diese Struktur die alten Parallelseiten `action_matrix`,
 `hardening_plan`, `markov_architecture`, `markov_requirements`,
@@ -77,13 +78,15 @@ aufrecht. Das interne Source-Referee-Audit reproduziert alle
 wissenschaftlichen Felder in zwei NumPy/SciPy-Stacks exakt, urteilt wegen
 eines einzelnen `mpmath.iv`-Intervallbackends, fehlendem vollstaendigem
 Hash-Lock und fehlender Citation/Release aber nur
-`referee-source-ready-with-major-claim-restrictions`. Der targetfreie
-P4-R-S-Designaudit und das prospektive P4-R-S-Anchor-Protokoll frieren nun exakt
-Anchor, Memory-Zeit-Abbildung, Port, 48 Arme sowie Trace-/Phasenprofil-
-Skalengates bei `epsilon_scale=0.05` ein. Aktiv ist nur die Implementierung
-samt Pre-target-Review; das Target bleibt versiegelt. P5, Interaktion, Spin,
-Impuls, Traegheit und Masse bleiben bis zu einem reviewed Full-Pass
-geschlossen.
+`referee-source-ready-with-major-claim-restrictions`. Der danach prospektiv
+eingefrorene P4-R-S-Anchor-Holdout ist inzwischen unveraendert ausgefuehrt und
+separat reviewed. Alle 16 channel-off- und 32 aktiven Anchor-Arme bestehen;
+die groesste registrierte Anchor--L3-Abweichung ist `0.00232715` bei
+`epsilon_scale=0.05`. Ein unabhaengig implementierter Standardbibliothek-
+Auditor rekonstruiert die komplette Entscheidung ohne Feldabweichung. P5 darf
+damit jetzt nur als targetfreier Designaudit und prospektives Protokoll
+beginnen; Implementierung, Interaktionsziellauf und Evidenz bleiben
+geschlossen. Spin, Impuls, Traegheit und Masse folgen nicht.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

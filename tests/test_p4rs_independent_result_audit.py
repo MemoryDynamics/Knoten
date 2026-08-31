@@ -142,3 +142,33 @@ def test_p4rs_result_review_upholds_only_the_registered_claim() -> None:
     assert "P5 implementation, target access\nand evidence remain closed" in text
     assert "spin, inertia and mass remain hypotheses, not\nresults" in text
     assert "32 arms are not 32 independent observations" in text
+
+
+def test_p4rs_frontdoors_report_reviewed_result_and_sealed_p5_target() -> None:
+    status = (audit.ROOT / "docs/status/current_status.md").read_text(
+        encoding="utf-8"
+    )
+    claims = (audit.ROOT / "docs/status/paper_claims.md").read_text(
+        encoding="utf-8"
+    )
+    priorities = (audit.ROOT / "docs/status/project_priorities.md").read_text(
+        encoding="utf-8"
+    )
+    repository_map = (audit.ROOT / "docs/reference/repository_map.md").read_text(
+        encoding="utf-8"
+    )
+    report_index = (audit.ROOT / "reports/README.md").read_text(encoding="utf-8")
+    paper_i = (audit.ROOT / "paper/paper_i/manuscript/README.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "p4rs-anchor-scale-transfer-pass" in status
+    assert "P4-R-S Anchor-Skalenholdout -- reviewed Pass" in claims
+    assert "Prioritaet 1: P5-Designaudit ohne Targetzugriff" in priorities
+    assert "P5-Implementierung, Targetzugriff und Interaktionsevidenz" in status
+    assert "P5 design/protocol open<br/>target closed" in repository_map
+    assert "Runner und Target fehlen weiterhin" not in report_index
+    assert "wird deshalb nicht in den Paper-I-\nHauptclaim eingemischt" in paper_i
+    assert "| Evidenz | P4-R-S" in paper_i
+    assert "| Inferenz |" in paper_i
+    assert "| Hypothese |" in paper_i

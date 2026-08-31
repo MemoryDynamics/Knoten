@@ -1,169 +1,150 @@
 # Projektprioritaeten
 
-Stand: 2026-08-30.
+Stand: 2026-08-31.
 
-Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Befunde und
-Grenzen stehen im [aktuellen Status](current_status.md), Paper-Sprache im
-[Claim-Register](paper_claims.md). Die fruehere gemischte Arbeits- und
-Statusliste ist im
-[Archivstand vom 2026-08-21](../archive/status/project_priorities_through_2026-08-21.md)
-vollstaendig erhalten.
+Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Abgeschlossene
+Befunde, historische Fails und Ergebnisgrenzen stehen im
+[aktuellen Status](current_status.md), erlaubte Paper-Sprache im
+[Claim-Register](paper_claims.md). Die fruehere ausfuehrliche Arbeitschronik
+bleibt im
+[Prioritaetenarchiv](../archive/status/project_priorities_through_2026-08-21.md)
+erhalten.
 
-Es gilt genau eine primaere wissenschaftliche Gate-Folge. Publikations-
-Hardening darf parallel laufen, aber weder ein gescheitertes Gate ersetzen
-noch Modellparameter veraendern.
+Es gilt eine primaere wissenschaftliche Gate-Folge. Publikations-Hardening
+und Paper-I-Konsolidierung duerfen parallel laufen, aber kein Gate ersetzen,
+keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
 
-## Gemeinsames Ziel
+## Aktiver Uebergang
 
-Die bisher getrennten Schleifen- und Center-Aeste sollen an **demselben
-eingefrorenen finite-memory Kandidaten** zusammengefuehrt werden. Dafuer reicht
-nicht, dass beide Reduktionen einzeln plausibel sind. Die gemeinsamen
-Koordinaten und ihre Antwort muessen einen prospektiven Kompatibilitaetstest
-bestehen.
-
-Bis dahin gelten zwei strikte Grenzen:
-
-- Ein Schleifenbefund beweist weder Center-Mechanik noch Masse.
-- Eine positive Center-Filtertraegheit beweist weder stabile Rotation noch
-  Formation.
-
-Der erste prospektive P2-Versuch bleibt formal `fail`; die outcome-informierte
-P2-R-Reconciliation benennt ihn nicht um. P3 besteht danach ohne Retuning fuer
-alle zehn registrierten nichtkreisfoermigen Arme und wird im
-[aktuellen Status](current_status.md) eng als finite-ensemble attraction
-gefuehrt. Der eingefrorene P4-Lauf endet formal als
-`p4-source-write-architecture-fail`. Sein exakter Arbeitsledger ist
-aufgeloest, aber die vorregistrierte Gesamtmechanik besteht nicht. P5,
-Masse und Zwei-Loop-Interaktion bleiben geschlossen. Der nachgelagerte
-P4-R-phi-Holdout besteht seine diskrete Chiral-Klassifikation; das kritische
-Review haelt den engen Befund aufrecht. Das interne Source-Referee-Audit
-urteilt `referee-source-ready-with-major-claim-restrictions`. Der targetfreie
-P4-R-S-Designaudit und das prospektive Anchor-Protokoll sind daraufhin
-separat eingefroren; das Target bleibt geschlossen.
+| abgeschlossene Voraussetzung | reviewed Status | Konsequenz |
+| --- | --- | --- |
+| P4 | `p4-source-write-architecture-fail` | historischer Fail bleibt unveraendert |
+| P4-R-phi | diskreter Chiral-Response-Pass | enger L3-Port-/Ledger-/Antwortbefund |
+| Source-Audit | restricted pass | drei Major-Restriktionen bleiben offen |
+| P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | P5-Protokollierung darf beginnen |
 
 ```mermaid
 flowchart LR
-    p4["P4 formal fail<br/>24/24 Querantwort"]
-    p4rphi["P4-R-phi reviewed Pass<br/>diskrete Acht-Phasen-Antwort"]
-    referee["Source-Referee<br/>restricted pass"]
-    p4rs["P4-R-S Protokoll gefroren<br/>Implementierungsreview als naechstes"]
-    p5["P5 Zwei-Loop-Interaktion<br/>geschlossen"]
+    p4["P4 formal fail"]
+    p4r["P4-R reviewed pass<br/>diskrete L3-Antwort"]
+    source["Source-Audit<br/>restricted pass"]
+    p4rs["P4-R-S reviewed pass<br/>Anchor/L3 kompatibel"]
+    p5d["P5 Designaudit<br/>jetzt aktiv"]
+    p5p["P5 Protokoll<br/>danach einfrieren"]
+    p5t["P5 Target<br/>weiter versiegelt"]
 
-    p4 --> p4rphi
-    p4rphi --> referee
-    referee --> p4rs
-    p4rs -. nur reviewed Full-Pass .-> p5
+    p4 --> p4r --> source --> p4rs --> p5d --> p5p -. readiness required .-> p5t
 ```
 
-## P4: abgeschlossenes Primaergate
+P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
+registrierte Anchor--L3-Abweichung betraegt `0.00232715` gegen die vorab
+fixierte Grenze `0.05`. Das ist ein starker interner Skalenholdout, aber weder
+Konvergenzordnung noch Replikation. Der ausfuehrliche Befund steht im
+[P4-R-S-Ergebnisreview](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md).
 
-Der historische P4-Lauf bleibt formal `p4-source-write-architecture-fail`.
-Er darf weder umbenannt noch mit nachtraeglich gelockerten Toleranzen neu
-bewertet werden. Belastbar sind der exakte finite-H-Write-/Age-Ledger und die
-vollstaendige schwache Antworttafel. Nicht bestanden sind die registrierte
-Gesamtmechanik und insbesondere die Geradeausantwort: Center und Aktuator
-zeigen in allen 24 Armen eine chirality-odd Querkomponente von etwa
-`0.15..0.21 delta` statt hoechstens `0.05 delta`.
+## Prioritaet 1: P5-Designaudit ohne Targetzugriff
 
-## Abgeschlossen: P4-R-phi-Messhaertung und Phasendiskriminator
+**Aktiver naechster Schritt.** Noch keine Interaktionstrajektorie ausfuehren.
 
-P4-R ist eine outcome-informierte Reconciliation, keine Rettung oder
-Wiederholung von P4. Das vor Targetzugriff eingefrorene Protokoll hat:
+Der Audit muss vor jeder Implementierung entscheiden, welche minimale
+Zwei-Loop-Frage mit dem vorhandenen Source-/Write-Port ueberhaupt
+identifizierbar ist. Mindestens festzulegen sind:
 
-- das algebraisch identische Single-Slot-Residuum und konservative
-  Full-dot-Rundungsenvelopes anstelle einer cancellation-dominierten
-  Differenz zweier 2400-Term-Summen registriert;
-- die vorhandenen P4-Arme ausschliesslich als Discovery-Daten fuer eine
-  startphasenabhaengige chirality-odd \(2\times2\)-Suszeptibilitaet behandelt;
-- acht neue, gleichmaessig versetzte Startphasen bei einer ungeoeffneten
-  Zwischenamplitude als Holdout reserviert und die **diskret
-  phasengemittelte** skalare gegen eine longitudinal-plus-antisymmetrische
-  Antwort entschieden;
-- natives L3, Source-/Write-Gleichungen, \(k\), Laufzeit und Claim-Grenzen
-  unveraendert gehalten.
+1. zwei getrennt vorbereitete und einzeln zugelassene Schleifenzustaende;
+2. eine einzige explizite gegenseitige Kopplungsarchitektur ohne Zieltracking;
+3. die Zustandsvariablen, an denen der gegenseitige Port angreift;
+4. ein vollstaendiger gemeinsamer Work-/Ledger-Vertrag;
+5. eine Observable, die Selbstantwort und echte Mutualantwort trennt;
+6. ein Parameter- und Distanzpanel, das vor jeder Zielantwort geschlossen ist;
+7. klare Null-, Fail-, Richtungsfail- und Inconclusive-Zweige.
 
-Der unveraenderliche Lauf endet
-`p4r-phase-averaged-chiral-response-pass`: lokale Metrologie, Full-dot-
-Envelopes, Ledger, Loop-Erhalt, Spiegelung und Halbdrehung bestehen; die
-diskreten Mittel sind `B_C=0.2084215772` und `B_Q=0.1537530855` mit 8/8
-positivem Phasensupport. Das Gate-Review haelt genau diesen Befund aufrecht.
-Die 32 Arme sind keine Replikationen, sondern eine Acht-Knoten-Quadratur mit
-vier spiegelverschiedenen Phasenpaaren, gesetzten Chiralitaeten und
-Vorzeichenkontrollen.
+Der Designaudit muss insbesondere die alternative Erklaerung ausschliessen,
+dass zwei unabhaengige Single-Loop-Relaxationen nur addiert werden. Ein
+sichtbarer Abstandstrend allein reicht nicht als Wechselwirkungsnachweis.
 
-Das nachgelagerte Source-Audit reproduziert alle wissenschaftlichen Felder in
-zwei NumPy/SciPy-Stacks exakt und stimmt mit einer separat implementierten
-Standardbibliothek-Neuberechnung ueberein. Wegen nur eines Intervallbackends,
-fehlendem vollstaendigen Hash-Lock und fehlender Citation/Release lautet das
-Urteil eingeschraenkt `referee-source-ready-with-major-claim-restrictions`.
-Diese Restriktionen begrenzen Paper-Sprache, untergraben aber nicht den
-getesteten Port, Ledger oder diskreten Antwortbefund.
+## Prioritaet 2: P5-Falsifikationscharter und Protokoll
 
-## Primaeres naechstes Gate: P4-R-S Implementierung und Pre-target-Review
+Nur wenn der Designaudit eine identifizierbare Frage findet, wird ein
+prospektives Protokoll geschrieben. Die minimale Kontrollmatrix umfasst:
 
-Der targetfreie Designaudit
-`reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_design_audit_2026-08-30.md`
-und das prospektive Protokoll
-`reports/project/meta/preregistration/scalar_memory_loop_p4rs_anchor_scale_protocol_2026-08-30.md`
-sind eingefroren. Sie legen vor jedem Anchor-Targetzugriff fest:
+- beide Kanaele aus;
+- nur Loop A auf Loop B;
+- nur Loop B auf Loop A;
+- beide Richtungen reziprok;
+- Vertauschung von A und B;
+- beide Chiralitaeten und registrierte Vorzeichenkontrollen;
+- mehrere vorab gewaehlte Distanzen;
+- Shape-/D0-Erhalt beider Einzelschleifen;
+- omitted-mutual-work- und falscher-Center-Rivale;
+- Abbruch bei unvollstaendiger Bildung, Kollision oder Kanalverlust.
 
-- den lokal existenzzertifizierten und numerisch stabil getesteten Anchor ohne
-  Nachfitten;
-- dieselben Source-/Write-Gleichungen, kandidatenspezifisches
-  `nu=G=|a0|^2`, `k=0.25` und `delta/R=0.0015`;
-- gleiche Memory-Zeit `tau=alpha*n`: Anchor `N=2000`, Stride 5 gegen L3
-  `N=4000`, Stride 10, jeweils 401 Samples bis `tau=20`;
-- 16 channel-off- und 32 aktive Anchor-Arme sowie alle lokalen
-  Increment-, Full-dot-, Ledger-, omitted-age-, raw-center-, Spiegel-,
-  Halbdrehungs- und diskreten Phasenkontrollen;
-- `epsilon_scale=0.05` fuer die vier komponentenweisen Volltraces, vier
-  finalen Phasenprofile und vier Endmittel;
-- vollstaendige Pass/Scalar/Directional-Fail/Cross-scale-Mismatch/
-  Metrology-Fail/Inconclusive-Praezedenz bei unveraendertem P4-Fail.
+Primaer sind gegenseitige Centerantwort, paarweise Workbilanz, Formtreue und
+ein vorregistrierter Distanzkontrast. Kreiseln, Phasenlocking, Anziehung oder
+Abstossung duerfen nicht als notwendiges Ziel eingebaut werden.
 
-Als naechstes darf ausschliesslich der Runner samt synthetischen
-Falsifikatoren implementiert, in einem sauberen Commit gepusht und separat
-auf Targetbereitschaft reviewed werden. Vor diesem Review bleiben alle 48
-Anchor-Arme versiegelt.
+Ein P5-Protokoll darf noch keine Begriffe wie Ladung, intrinsischer Spin,
+Impuls, Traegheit, Masse, universelles Kraftgesetz oder Feldquantisierung
+freischalten.
 
-Erst ein reviewed P4-R-S-Full-Pass kann die Single-Loop-Portantwort ueber eine
-zweite Skala tragen und P5 zur Protokollierung oeffnen. Ein explizit
-eingesetzter Massenterm oder eine zweite Zeitordnung bleibt untersagt; beides
-darf nur aus einer unabhaengig identifizierten Transferantwort folgen.
+## Prioritaet 3: Implementierung und Pre-target-Review
 
-## P5: Kontrollierte Zwei-Loop-Interaktion
+Erst nach getrenntem Design- und Protokoll-Freeze:
 
-**Status: geschlossen bis zu einem reviewed P4-R-S-Full-Pass:** Tauschen zwei unabhaengig erzeugte, einzeln zugelassene Schleifen
-ueber die in P4 gepruefte Architektur reziprok Impuls und Arbeit aus?
+1. Runner und synthetische Falsifikatoren implementieren;
+2. alle geerbten P4-R-S-Abhaengigkeiten und Blobs pinnen;
+3. beweisen, dass Tests keine registrierte P5-Trajektorie aufrufen;
+4. Null-, Einweg-, Reziprozitaets-, Swap- und Ledger-Korruptionen testen;
+5. Vollsuite, exakten CI-Lintumfang und strikte Dokumentation ausfuehren;
+6. Implementierungsreadiness separat committen, pushen und reviewen.
 
-Das Protokoll muss mindestens Single-Loop-, `channel-off`-, Vorzeichen-/
-Chiralitaets- und Distanzkontrollen enthalten. Primaer sind gemeinsame
-Centerbilanz, gleiche und entgegengesetzte Portarbeit, Formtreue beider
-Relativzustaende und ein vorregistriertes Distanzgesetz. Ein Pass stuetzt nur
-die getestete Interaktion; Ladung, Feldtheorie, intrinsischer Spin oder
-Quantisierung folgen daraus nicht.
+Bis dieses Review gruen ist, bleibt jedes P5-Target versiegelt. Ein
+Implementierungspass ist keine Interaktionsevidenz.
 
-## Paralleles Publikations-Hardening
+## Prioritaet 4: Paper-I-Abgrenzung und Redaktionsentscheidung
 
-Diese Arbeiten duerfen P4--P5 begleiten, sind aber kein Ersatz fuer sie:
+Paper I bleibt primaer das Minimalmodell mit Markov-Einbettung und
+kontrollierter linearer co-moving Relaxationswolke. Der deterministische
+$d=2$-Rotating-wave-/Portast ist methodisch und dynamisch ein getrennter
+Erweiterungszweig.
+
+Claim-Register, allgemeinverstaendliche Zusammenfassung und die kurze
+Evidenz/Inferenz/Hypothese-Tabelle sind jetzt getrennt vom Manuskriptkern
+gefuehrt. Eine gut lesbare Fassung steht unter
+[P4-R-S allgemein erklaert](p4rs_plain_language_summary.md).
+
+Vor jeder spaeteren Manuskriptaenderung bleibt zu entscheiden:
+
+- technische Begleitnotiz, Supplement oder eng getrennte Outlook-Sektion;
+- ob die drei offenen Source-Restriktionen vorher geschlossen werden muessen;
+- welche Rohdaten und Rebuild-Anleitung eine externe Replikation ermoeglichen.
+
+Bis zu dieser redaktionellen Entscheidung bleiben `main.tex`,
+`main_compact.tex`, Abstract und Hauptschluss unveraendert. Insbesondere wird
+keine Spin-, Traegheits- oder Massensprache uebernommen.
+
+## Prioritaet 5: Paralleles Publikations-Hardening
+
+Diese Aufgaben duerfen parallel laufen, aendern aber keinen Gate-Status:
 
 - mindestens einen Root mit einem unabhaengigen outward-rounded
   Intervallbackend reproduzieren;
-- den Kontinuumsroot intervallmaessig einschliessen oder die verbleibende
-  numerische Vertrauensbasis explizit begrenzen;
-- einen sauberen Wheel-/Hash-Lock, `CITATION.cff` und eine zitierbare
-  Release/Archivierung erzeugen;
-- Claim-Texte erst nach einer Gate-Entscheidung gemaess
-  [Paper-Claims](paper_claims.md) aktualisieren.
+- den Kontinuumsroot intervallmaessig einschliessen oder die numerische
+  Vertrauensbasis enger deklarieren;
+- einen vollstaendigen Wheel-/Hash-Lock erzeugen;
+- `CITATION.cff` und eine zitierbare Release/Archivierung vorbereiten;
+- eine externe Reproduktion der gespeicherten P4-R/P4-R-S-Auswertung
+  ermoeglichen.
 
 ## Globale Stopregeln
 
-- Kein Parameter-, Seed-, Fenster- oder Schwellen-Retuning nach Oeffnung der
-  primaeren Ausgabe.
-- `fail` bleibt `fail`; ein anderer Ast darf ihn nicht semantisch retten.
-- `inconclusive` autorisiert nur eine vorab begruendete Messhaertung, keinen
+- Kein Parameter-, Seed-, Distanz-, Fenster- oder Schwellen-Retuning nach
+  Oeffnung einer primaeren Ausgabe.
+- `fail` bleibt `fail`; ein spaeterer Ast darf ihn nicht semantisch retten.
+- `inconclusive` autorisiert nur vorab begruendete Messhaertung, keinen
   Mechanismenwechsel unter demselben Gate-Namen.
 - Ambienter Kreis, Torus oder Persistent Homology ersetzen weder interne
   Topologie noch Mechanik.
-- Jedes Gate erzeugt Protokoll, maschinenlesbares Ergebnis, Review und eine
-  explizite Claim-Grenze, bevor das naechste Gate geoeffnet wird.
+- Symmetriearme sind Kontrollen, keine Replikationen.
+- Jedes Gate erzeugt Design/Protokoll, maschinenlesbares Ergebnis, kritisches
+  Review und eine explizite Claim-Grenze, bevor das naechste Target geoeffnet
+  wird.

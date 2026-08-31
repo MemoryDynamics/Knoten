@@ -189,53 +189,56 @@ def test_reproduction_and_independent_recompute_agree_exactly() -> None:
     )
 
 
-def test_public_status_surfaces_propagate_the_restricted_result() -> None:
+def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
     required_phrases = {
-        "README.md": (VERDICT, "P4-R-S", "mpmath.iv"),
+        "README.md": (VERDICT, "P4-R-S-Anchor-Holdout", "keine Replikation"),
         "docs/index.md": (
             VERDICT,
-            "P4-R-S-Anchor-Protokoll",
-            "keine Replikationen",
+            "P4-R-S-Anchor-Holdout",
+            "0.00232715",
+            "Implementierung, Interaktionsziellauf und Evidenz bleiben",
         ),
         "docs/status/current_status.md": (
             VERDICT,
-            "P4-R-S",
-            "vier spiegelverschiedenen Phasenpaaren",
+            "p4rs-anchor-scale-transfer-pass",
+            "P5-Implementierung, Targetzugriff und Interaktionsevidenz",
         ),
         "docs/status/paper_claims.md": (
             VERDICT,
-            "P4-R-S",
-            "vier spiegelverschiedene Phasenpaare",
+            "P4-R-S Anchor-Skalenholdout -- reviewed Pass",
+            "keine Konvergenzordnung",
         ),
         "docs/status/project_priorities.md": (
-            VERDICT,
-            "Primaeres naechstes Gate: P4-R-S",
-            "P5",
+            "p4rs-anchor-scale-transfer-pass",
+            "Prioritaet 1: P5-Designaudit ohne Targetzugriff",
+            "P5 Target<br/>weiter versiegelt",
         ),
         "reports/README.md": (
             VERDICT,
-            "P4-R-S",
-            "keine Replikationen",
+            "P4-R-S-Anchor-Lauf",
+            "P5-Implementierung",
         ),
         "reports/dynamics/rotation/README.md": (
             VERDICT,
-            "P4-R-S",
-            "vier spiegelverschiedene Paare",
+            "p4rs-anchor-scale-transfer-pass",
+            "P5-Implementierung",
         ),
         "experiments/current/dynamics/rotation/README.md": (
             VERDICT,
-            "P4-R-S",
-            "vier spiegelverschiedene Phasenpaare",
+            "p4rs-anchor-scale-transfer-pass",
+            "P5-Implementierung",
         ),
         "docs/reference/repository_map.md": (
             "P4-R-phi reviewed pass",
-            "P4-R-S protocol frozen",
+            "P4-R-S reviewed pass",
+            "P5 design/protocol open",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
             VERDICT,
             "p4r-independent-audit-agrees",
-            "vier spiegelverschiedene Phasenpaare",
+            "p4rs-anchor-scale-transfer-pass",
+            "keine Konvergenzordnung",
         ),
     }
     for relative, phrases in required_phrases.items():

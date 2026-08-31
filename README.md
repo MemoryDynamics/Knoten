@@ -3,7 +3,7 @@
 Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
 Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
 
-Stand: 2026-08-30.
+Stand: 2026-08-31.
 
 ## Worum es geht
 
@@ -100,7 +100,19 @@ Belastbar derzeit:
   und die diskrete Acht-Phasen-Klassifikation mit
   `B_C=0.2084215772`, `B_Q=0.1537530855` und 8/8 positivem
   Phasensupport. Das sind vier spiegelverschiedene Phasenpaare, keine 32
-  Replikationen und kein Spin-, Impuls-, Traegheits- oder Massebefund.
+  Replikationen und kein Spin-, Impuls-, Traegheits- oder Massebefund. Der
+  nachfolgende prospektive P4-R-S-Anchor-Holdout besteht ebenfalls: Seine
+  16 channel-off- und 32 aktiven Arme schliessen alle geerbten Gates; die
+  groesste registrierte Anchor--L3-Abweichung ist `0.00232715` bei der vorab
+  fixierten Grenze `0.05`. Ein separat implementierter
+  Standardbibliothek-Auditor rekonstruiert Entscheidung und Skalierungsarrays
+  ohne Abweichung. Das ist
+  ein reviewed Zwei-Zellen-Skalenpass, keine Replikation, Konvergenzordnung,
+  Interaktion, Spin-, Traegheits- oder Masseevidenz.
+- Das vorgelagerte interne Source-Audit bleibt
+  `referee-source-ready-with-major-claim-restrictions`: zweiter
+  Intervallbackend, vollstaendiger Wheel-/Hash-Lock sowie
+  `CITATION.cff`/Release sind weiterhin offen.
 
 Noch nicht belastbar:
 
@@ -167,6 +179,7 @@ versionierten Markdown-Dateien.
 - [Startseite](docs/index.md)
 - [Aktueller Stand](docs/status/current_status.md)
 - [Prioritaeten](docs/status/project_priorities.md)
+- [P4-R-S allgemein erklaert](docs/status/p4rs_plain_language_summary.md)
 - [Theoretical Context](docs/reference/THEORETICAL_CONTEXT.md)
 - [Center-Filter und Rotation](docs/reference/scalar_memory_center_filter.md)
 - [Native Rotating Waves](docs/reference/rotating_wave_foundation.md)
@@ -174,6 +187,7 @@ versionierten Markdown-Dateien.
 - [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
 - [Paper-Claims](docs/status/paper_claims.md)
 - [P4 Publication-Source-Referee-Audit](reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md)
+- [P4-R-S-Ergebnisreview](reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md)
 - [Kuratierter Report-Index](reports/README.md)
 - [Abbildungs-Index](figures/README.md)
 
@@ -201,25 +215,16 @@ python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 
 
 ## Naechste Prioritaeten
 
-1. Den formalen P4-Fail unveraendert halten. Der nachgelagerte P4-R-phi-Lauf
-   besteht zwar die diskrete chiral-response-Klassifikation und sein
-   Gate-Review, benennt P4 aber nicht um.
-2. Das interne Source-Referee-Audit liefert
-   `referee-source-ready-with-major-claim-restrictions`: beide getesteten
-   NumPy/SciPy-Stacks reproduzieren alle wissenschaftlichen P4-R-Felder
-   exakt, aber zweiter Intervallbackend, vollstaendiger Hash-Lock sowie
-   `CITATION.cff`/Release fehlen. Der targetfreie P4-R-S-Designaudit und das
-   prospektive Anchor-Skalenprotokoll sind jetzt eingefroren. Als naechstes
-   darf nur die Implementierung samt Pre-target-Review vorbereitet werden;
-   kein Anchor-Target ist geoeffnet. P5 bleibt bis zu einem reviewed
-   P4-R-S-Full-Pass geschlossen.
-3. Den effektiven \(B_H\)-Wrapper nur als Positivkontrolle verwenden; weder
-   Masse noch zweite Zeitordnung in die Zielgleichungen einsetzen.
-4. Rauschen und `A_att=7` duerfen nach dem reviewed P3-Pass getrennt
-   prospektiert werden, ersetzen aber nicht die primaere P4-Folge.
-5. Internes S1 nach ambientem `SO(2)`-Quotient und physische Masse als
-   getrennte Programme behandeln.
-6. Publikations-Hardening mit zweitem Intervallbackend und staerkerer
-   Spektralkontrolle, einem sauberen Hash-Lock und einer zitierbaren Release
-   darf parallel laufen, ersetzt aber kein Gate. Die
+1. P5 zunaechst ausschliesslich als targetfreien Zwei-Loop-Designaudit
+   bearbeiten. Interaktionsziellaeufe bleiben versiegelt.
+2. Danach eine Falsifikationscharter mit channel-off, beiden Einwegrichtungen,
+   Reziprozitaet, Swap, Chiralitaet, Distanz, Shape/D0 und vollstaendigem
+   gegenseitigem Workledger prospektiv einfrieren.
+3. Paper I als Minimalmodell plus lineare co-moving Relaxationswolke
+   konsolidieren. Den getrennten rauschfreien Schleifenast nur eng markiert als
+   technische Erweiterung oder Outlook einordnen.
+4. Den formalen P4-Fail unveraendert halten; P4-R und P4-R-S benennen ihn nicht
+   um und tragen keine Spin-, Impuls-, Traegheits- oder Masseclaims.
+5. Publikations-Hardening mit zweitem Intervallbackend, Wheel-/Hash-Lock,
+   `CITATION.cff` und zitierbarer Release parallel fortsetzen. Die
    massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

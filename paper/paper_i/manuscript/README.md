@@ -1,6 +1,6 @@
 # Paper I - Self-Interacting Stochastic Dynamics with Exponential Memory
 
-Stand: 2026-07-26.
+Stand: 2026-08-31.
 
 ## Rolle
 
@@ -48,6 +48,32 @@ Daraus folgt:
 reserviert, der die lineare Nullhypothese, `eta=0`-Kontrollen und skalenbewusste
 Metastabilitaetsdiagnostik uebersteht.
 
+## Abgrenzung zum deterministischen Schleifenast
+
+Der reviewed P4-R-S-Befund stammt aus einem getrennten rauschfreien
+`d=2`-Rotating-wave-Ast mit vorbereitetem Kreisorbit und explizit
+konstruiertem Source-/Write-Port. Dort uebertraegt sich derselbe registrierte
+diskrete Antworttyp von L3 auf den schon zuvor existenzzertifizierten Anchor;
+die groesste Anchor--L3-Abweichung ist `0.00232715` gegen die prospektive
+Grenze `0.05`. Ein separat implementierter Auditor rekonstruiert die
+gespeicherte Entscheidung ohne Feldabweichung.
+
+Dieser Zwei-Zellen-Pass ist weder eine unabhaengige Replikation noch eine
+Konvergenzordnung und identifiziert keine physische Interaktion, keinen Spin,
+keine Traegheit und keine Masse. Er wird deshalb nicht in den Paper-I-
+Hauptclaim eingemischt. Eine spaetere Einordnung ist nur als getrennte
+technische Notiz, Supplement-Option oder eng markierter Outlook vorgesehen;
+`main.tex` und `main_compact.tex` bleiben in ihrer zentralen Evidenzlinie
+unveraendert.
+
+| Ebene | Eng tragbare Aussage | Nicht daraus ableitbar |
+| --- | --- | --- |
+| Evidenz | P4 schliesst den konstruierten Write-/Age-Ledger, scheitert aber formal am registrierten Gesamtgate. | operationaler Single-Loop-Mechanikpass |
+| Evidenz | P4-R traegt am vorbereiteten L3-Kreis eine diskrete chirality-odd Portantwort mit 8/8 Phasensupport. | kontinuierliche Phase, interne Topologie oder unabhaengige Replikation |
+| Evidenz | P4-R-S uebertraegt denselben registrierten Antworttyp auf den Anchor; maximaler Zwei-Zellen-Unterschied `0.00232715` gegen `0.05`. | Konvergenzordnung, stabile Familie oder natuerliche Portselektion |
+| Inferenz | Die explizite diskrete Portarchitektur ist an zwei vorbereiteten Skalen intern kompatibel. | mechanisches Objekt, materieller Schwerpunkt oder physische Arbeit |
+| Hypothese | Zwei getrennte Schleifen koennten ueber einen gegenseitigen Port eine nichtadditive Mutualantwort zeigen. | Interaktion, Ladung, Spin, Impuls, Traegheit oder Masse vor einem reviewed P5-Lauf |
+
 ## Literaturpositionierung
 
 Die Einleitung grenzt die Arbeit jetzt konkret ab gegen:
@@ -84,6 +110,11 @@ Argumentation.
 - `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`
 - `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
 - `docs/status/paper_claims.md`
+
+Getrennte Schleifen-/Port-Einordnung:
+
+- `docs/status/p4rs_plain_language_summary.md`
+- `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
 
 ## Build
 

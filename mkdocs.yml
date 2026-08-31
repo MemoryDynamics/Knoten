@@ -10,6 +10,7 @@ nav:
   - Start: index.md
   - Aktueller Stand: status/current_status.md
   - Prioritaeten: status/project_priorities.md
+  - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Theorie: reference/THEORETICAL_CONTEXT.md
   - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Native Rotating Waves: reference/rotating_wave_foundation.md
