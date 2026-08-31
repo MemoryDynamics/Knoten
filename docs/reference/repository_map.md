@@ -343,6 +343,46 @@ It deliberately does not contain the preceding `1e8` positions or a PRNG state:
 the Markov branch comparison supplies a fresh explicit common future-noise
 array. Independent seeds remain necessary for inferential claims.
 
+## Gemeinsamer Modellkern und Brueckenstrategie
+
+```mermaid
+flowchart LR
+    paperlaw["Paper-I transition law<br/>z=(x,rho), epsilon xi"]
+    finiteh["finite-H specialization<br/>Y=(x_n,...,x_n-H+1)"]
+    deterministic["deterministic skeleton<br/>epsilon=0"]
+    stochastic["stochastic lifting<br/>epsilon greater than 0"]
+    longrun["scalar long-run null<br/>linear relaxation cloud"]
+    loops["prepared rotating waves<br/>Anchor + L3"]
+    n0["N0 noise-resolution ladder<br/>D0 orbital stability"]
+    p5d["P5-D deterministic<br/>mutual response"]
+    p5c["P5-C common-noise<br/>paired cancellation"]
+    p5i["P5-I independent noise<br/>robustness"]
+    fields["field / mediator extensions<br/>new dynamics"]
+
+    paperlaw --> finiteh
+    paperlaw --> longrun
+    finiteh --> deterministic --> loops --> n0
+    finiteh --> stochastic --> n0
+    n0 -.reviewed bracket required.-> p5d
+    p5d -.reviewed interaction required.-> p5c
+    p5c -.reviewed common-noise pass.-> p5i
+    paperlaw -.additional law.-> fields
+```
+
+The merge is at the transition-law and state-contract level, not by declaring
+all evidence regimes equivalent. Paper I already writes
+`x_next=x+epsilon*xi-eta*grad(Phi)` and updates memory from the new position.
+The rotating-wave FIFO state is the ordered finite-H specialization of that
+law. `epsilon=0` defines its deterministic skeleton; positive epsilon is an
+explicit stochastic lifting, not a different force law.
+
+Before P5, N0 must distinguish a genuinely injected innovation from a
+binary64 perturbation that rounds away. Anchor and L3 are compared at common
+memory time using `chi=epsilon/(R sqrt(alpha))`, so that `D/R^2=chi^2/2` is
+matched. Relaxation-diffusion, Telegraph and other mediator equations remain
+separate model extensions until they are derived from or selected against the
+common transition law.
+
 ## Native Rotating-wave-Schiene
 
 ```mermaid
@@ -366,7 +406,8 @@ flowchart LR
     p4rphi["P4-R-phi reviewed pass<br/>discrete phase response"]
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
-    interaction["P5 design/protocol open<br/>target closed"]
+    noise["N0 noise stress<br/>design/protocol before target"]
+    interaction["P5 after N0<br/>target closed"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -379,7 +420,8 @@ flowchart LR
     mechanics --> p4rphi
     p4rphi --> referee
     referee --> p4rs
-    p4rs -.opens design/protocol only.-> interaction
+    p4rs --> noise
+    noise -.reviewed bracket required.-> interaction
 ```
 
 Code und Programme liegen in `src/emergenz_knoten/rotating_wave*.py` und
@@ -396,9 +438,12 @@ Design-, Protokoll- und Implementierungsfreeze unveraendert ausgefuehrte
 P4-R-S-Anchor-Holdout uebertraegt den registrierten Antworttyp auf eine zweite
 vorbereitete Skala: maximale Anchor--L3-Abweichung `0.00232715` gegen die
 vorab fixierte Grenze `0.05`. Ein unabhaengig implementierter Auditor stimmt
-ohne Feldabweichung zu; das Ergebnisreview oeffnet ausschliesslich P5-Design
-und prospektive Protokollierung. P5-Implementierung, Targetzugriff und
-Interaktionsevidenz bleiben geschlossen. Die acht P4-R-Phasenknoten enthalten
+ohne Feldabweichung zu. Das Ergebnisreview hatte ausschliesslich P5-Design und
+prospektive Protokollierung geoeffnet; vor diesen Pfad ist nun N0 eingeschoben.
+N0 prueft die Paper-I-Innovation targetfrei und trennt numerisch weggerundetes
+Rauschen von aufgeloester orbitaler Stabilitaet. P5-Implementierung,
+Targetzugriff und Interaktionsevidenz bleiben bis zum reviewten N0-Ergebnis
+geschlossen. Die acht P4-R-Phasenknoten enthalten
 vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
 liefern keine Konvergenzordnung.
 

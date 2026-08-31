@@ -116,6 +116,28 @@ Getrennte Schleifen-/Port-Einordnung:
 - `docs/status/p4rs_plain_language_summary.md`
 - `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
 
+## Geplante N0-Bruecke zum Schleifenarm
+
+Die Paper-I-Uebergangssprache bleibt der gemeinsame Modellkern:
+
+\[
+x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),\qquad
+\rho_{n+1}=(1-\lambda_m)\rho_n+\beta G_\sigma(\cdot-x_{n+1}).
+\]
+
+Der Schleifenarm verwendet davon zunaechst die deterministische
+`epsilon=0`-Spezialisierung mit endlichem geordnetem Gedächtnis. Der vor P5
+eingeschobene N0-Stresstest hebt diese Spezialisierung kontrolliert auf. Er
+vergleicht Skalen ueber
+`chi = epsilon / (R sqrt(alpha))`, entsprechend
+`D/R^2 = chi^2/2` unter der Paper-I-Konvention
+`D = epsilon^2/(2 alpha)`.
+
+Dies ist derzeit eine prospektive Bruecke, kein Paper-Ergebnis. Insbesondere
+zaehlt in binaerer 64-bit-Arithmetik weggerundete Innovation nicht als
+Rauschstabilitaet. Lang- und Kurzfassung werden erst nach eingefrorenem
+Protokoll, registriertem Lauf und unabhaengigem Ergebnisreview geaendert.
+
 ## Build
 
 ```powershell
