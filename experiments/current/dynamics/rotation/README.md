@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-08-30.
+Stand: 2026-09-01.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -25,7 +25,9 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 12 | `scalar_memory_loop_p4_source_write_gate.py` | expliziter chirality-konditionierter Orbit-Center-Port, reziproker First-order-Aktuator und kompletter finite-H-Write-/Age-Ledger | formaler `p4-source-write-architecture-fail`; Ledger Pass, skalare Geradeausantwort falsifiziert |
 | 13 | `scalar_memory_loop_p4r_phase_metrology_gate.py` | frischer Acht-Phasen-Holdout, cancellation-sichere lokale Identitaeten, Full-dot-Envelopes und diskrete Chiral-Klassifikation | reviewed `p4r-phase-averaged-chiral-response-pass`; vier spiegelverschiedene Phasenpaare, kein kontinuierlicher Phasenclaim |
 | 14 | `scalar_memory_loop_p4r_result_audit.py` | Standardbibliothek-Neuberechnung des gespeicherten Roh-JSON ohne Target-Runner oder numerische Drittanbieterpakete | `p4r-independent-audit-agrees`; gemeinsame Simulation, keine externe Replikation |
-| 15 | `scalar_memory_loop_p4rs_anchor_scale_gate.py` (geplant) | gepaarter Anchor-Holdout bei gleicher Memory-Zeit mit geerbtem Port/Ledger und Trace-/Phasenprofil-Skalengates | Design und Protokoll eingefroren; Runner, Implementierungsreview und Targetresultat existieren noch nicht |
+| 15 | `scalar_memory_loop_p4rs_anchor_scale_gate.py` | gepaarter Anchor-Holdout bei gleicher Memory-Zeit mit geerbtem Port/Ledger und Trace-/Phasenprofil-Skalengates | reviewed `p4rs-anchor-scale-transfer-pass`; zwei vorbereitete Skalen, keine Replikation oder Konvergenzordnung |
+| 16 | `scalar_memory_rotating_wave_noise_stress.py` und separater Ergebnis-Auditor | dimensionslose logarithmische N0-Klammer fuer binary64-Aufloesung und endliche orbitale Robustheit | reviewed `n0-noise-stability-window-bracketed-pass`; `chi=1e-4` besteht, `1e-3` scheitert lokal |
+| 17 | `scalar_memory_loop_p5d_mutual_center_gate.py` und separater Ergebnis-Auditor | eingefrorenes Anchor--Anchor-Panel mit linearem gegenseitigem notched-Center-/Write-Port, Einwegablationen und Closed-loop-Kontrast | Implementierung und 832-Arm-Synthetik targetfrei vorhanden; registriertes Target bis zum Readinessreview versiegelt |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -196,5 +198,7 @@ reviewte Ergebnis ist `n0-noise-stability-window-bracketed-reviewed-pass`:
 unaufgeloest bis `1e-16`, stabil von `1e-15` bis `1e-4`, Phasen-/
 Chiralitaetsfail ab `1e-3`. Der getrennte Auditor
 `scalar_memory_rotating_wave_noise_stress_result_audit.py` rekonstruiert alle
-132 Zellen ohne Gateabweichung. Damit ist P5-Design offen; ein erneuter N0-Lauf
-oder P5-Targetzugriff ist nicht freigegeben.
+132 Zellen ohne Gateabweichung. Damit sind P5-D-Design und Protokoll
+eingefroren. Pair-step, Runner, Standardbibliothek-Auditor und synthetische
+Falsifikatoren sind targetfrei implementiert; der registrierte P5-D-Lauf
+bleibt bis zu einem separat gepushten und CI-gruenen Readinessreview gesperrt.

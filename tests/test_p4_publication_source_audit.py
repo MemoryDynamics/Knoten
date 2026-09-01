@@ -221,7 +221,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             VERDICT,
             "P4-R-S-Anchor-Lauf",
             "P5-D-Designaudit",
-            "Implementierung, Target und Evidenz",
+            "targetfrei implementiert",
+            "separaten Readinessreview",
         ),
         "reports/dynamics/rotation/README.md": (
             VERDICT,
@@ -237,8 +238,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
             "N0 reviewed pass",
-            "P5 design + protocol frozen",
-            "implementation next; target closed",
+            "P5 implementation present",
+            "readiness pending; target closed",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (

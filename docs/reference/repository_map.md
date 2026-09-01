@@ -354,7 +354,7 @@ flowchart LR
     longrun["scalar long-run null<br/>linear relaxation cloud"]
     loops["prepared rotating waves<br/>Anchor + L3"]
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
-    p5d["P5-D design + protocol frozen<br/>implementation next"]
+    p5d["P5-D implementation present<br/>readiness pending; target closed"]
     p5c["P5-C common-noise<br/>paired cancellation"]
     p5i["P5-I independent noise<br/>robustness"]
     fields["field / mediator extensions<br/>new dynamics"]
@@ -382,8 +382,9 @@ time using `chi=epsilon/(R sqrt(alpha))`, so that `D/R^2=chi^2/2` is matched.
 The reviewed finite-time result is unresolved through `chi=1e-16`, stable
 from `1e-15` through `1e-4`, and phase-/chirality-failing at `1e-3` and
 `1e-2`. The target-free P5-D design and its separate protocol are now frozen;
-implementation and every target trajectory remain closed pending readiness
-review. Relaxation-diffusion, Telegraph and other mediator equations remain
+Pair-step, runner, independent result auditor and synthetic falsifiers are
+implemented without opening the target. Every registered pair trajectory
+remains closed pending readiness review. Relaxation-diffusion, Telegraph and other mediator equations remain
 separate model extensions until they are derived from or selected against the
 common transition law.
 
@@ -411,7 +412,7 @@ flowchart LR
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
     noise["N0 reviewed pass<br/>resolved finite-time bracket"]
-    interaction["P5 design + protocol frozen<br/>implementation next; target closed"]
+    interaction["P5 implementation present<br/>readiness pending; target closed"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability

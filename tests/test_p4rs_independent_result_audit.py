@@ -169,7 +169,7 @@ def test_p4rs_frontdoors_report_reviewed_result_and_sealed_p5_target() -> None:
     assert "Prioritaet 3: P5-Implementierung und Pre-target-Review" in priorities
     assert "Targetzugriff bleibt bis zu einem separaten Readinessreview" in status
     assert "N0 reviewed pass<br/>resolved finite-time bracket" in repository_map
-    assert "P5 design + protocol frozen<br/>implementation next" in repository_map
+    assert "P5 implementation present<br/>readiness pending" in repository_map
     assert "Runner und Target fehlen weiterhin" not in report_index
     assert "wird deshalb nicht in den Paper-I-\nHauptclaim eingemischt" in paper_i
     assert "| Evidenz | P4-R-S" in paper_i
