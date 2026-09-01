@@ -108,7 +108,8 @@ ist erfolgreich.
 Das getrennte
 [P5-D-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_mutual_center_protocol_2026-09-01.md)
 friert vor Implementierung 64 Basiskonfigurationen ein: zwei Distanzen, acht
-relative Phasenknoten und vier Chiralitaetspaare. Fuer jede folgen zwei
+Phasenknoten mit vier verschiedenen Relativphasen und vier
+Chiralitaetspaare. Fuer jede folgen zwei
 schwache Staerken, beide Vorzeichen, beide Einwegrichtungen und der reziproke
 Arm. Einschliesslich Channel-off sind es 832 deterministische Kontrollarme,
 keine Replikationen.

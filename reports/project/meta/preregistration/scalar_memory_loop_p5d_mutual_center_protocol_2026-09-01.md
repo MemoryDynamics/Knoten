@@ -9,6 +9,28 @@ Dieser Freeze autorisiert nur die nachgelagerte Implementierung mit
 synthetischen und statischen Preflight-Tests. Der registrierte Targetpfad
 bleibt bis zu einem separaten Implementierungsreadinessreview gesperrt.
 
+### Preimplementation-Korrektur der Phasenabbildung
+
+Beim ersten algebraischen Implementierungsreview, vor dem ersten Codecommit
+und vor jeder P5-D-Trajektorie, wurde ein Closure-Fehler in der urspruenglich
+notierten halbierten Phase gefunden. Das Panel
+`phi_A=phi_m/2`, `phi_B=-phi_m/2` ist mit acht `phi_m`-Knoten nicht unter
+Reflexion geschlossen, weil die Halbwinkel effektiv einen $4\pi$-Index
+benoetigen.
+
+Das Protokoll wird deshalb prospektiv und ohne Zielzugriff auf die unten
+verwendete direkte Abbildung
+
+$$
+\phi_A=\phi_m,\qquad\phi_B=-\phi_m
+$$
+
+korrigiert. Distanzen, Staerken, Schwellen, Armzahl und Serialisierungsordnung
+bleiben unveraendert. Das korrigierte Acht-Knoten-Panel enthaelt vier
+verschiedene Relativphasen und deren Halbdrehungs-Mates; Swap und Reflexion
+schliessen nun innerhalb desselben Panels. Der Korrekturcommit und sein CI
+muessen wie der urspruengliche Freeze vor dem Implementierungscommit liegen.
+
 ## 1. Registrierte Frage und Claim-Grenze
 
 Die einzige primaere Frage lautet:
@@ -107,21 +129,24 @@ $$
 Fuer jede Zelle gilt
 
 $$
-\phi_A={\phi_m\over2},\qquad
-\phi_B=-{\phi_m\over2}.
+\phi_A=\phi_m,\qquad
+\phi_B=-\phi_m.
 $$
 
-Damit bilden die relativen Phasen die acht odd-eighth-turn-Knoten, waehrend
-Swap und Reflexion im Panel abgeschlossen bleiben. Die Chiralitaetspaare
-werden in dieser Reihenfolge serialisiert:
+Damit bilden die relativen Phasen $2\phi_m$ vier verschiedene
+odd-quarter-turn-Knoten. Die jeweils um $\pi$ verschobenen History-Paare sind
+Halbdrehungs-Mates. Swap und Reflexion bilden Index $m$ auf $7-m$ ab und
+bleiben im Panel. Die Chiralitaetspaare werden in dieser Reihenfolge
+serialisiert:
 
 ```text
 (+1,+1), (+1,-1), (-1,+1), (-1,-1)
 ```
 
-Die acht Winkel enthalten vier spiegelverschiedene Paare. Zusammen mit den
-vier Chiralitaetspaaren sind sie algebraische Kontrollen, keine 32
-Replikationen. Es wird kein kontinuierliches Phasenintegral behauptet.
+Die acht Winkel enthalten vier verschiedene Relativphasen und vier
+Halbdrehungs-Mates. Zusammen mit den vier Chiralitaetspaaren sind sie
+algebraische Kontrollen, keine 32 Replikationen. Es wird kein kontinuierliches
+Phasenintegral behauptet.
 
 ## 5. Distanzen und Initialisierung
 
