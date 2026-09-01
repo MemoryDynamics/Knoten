@@ -23,6 +23,8 @@ keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
 | Source-Audit | restricted pass | drei Major-Restriktionen bleiben offen |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | N0 wurde prospektiv ausgefuehrt |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | P5-Design darf targetfrei beginnen |
+| P5-D Design | `p5d-mutual-center-design-identifiable`, CI gruen | Protokoll wurde getrennt eingefroren |
+| P5-D Protokoll | Commit `1342258`, CI gruen, Target weiter ungeoeffnet | Implementierung darf beginnen |
 
 ```mermaid
 flowchart LR
@@ -31,11 +33,12 @@ flowchart LR
     source["Source-Audit<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>Anchor/L3 kompatibel"]
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
-    p5d["P5 Designaudit<br/>jetzt aktiv"]
-    p5p["P5 Protokoll<br/>danach einfrieren"]
+    p5d["P5 Designaudit<br/>eingefroren"]
+    p5p["P5 Protokoll<br/>eingefroren"]
+    p5i["P5 Implementierung<br/>naechster Schritt"]
     p5t["P5 Target<br/>weiter versiegelt"]
 
-    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p -. readiness required .-> p5t
+    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i -. readiness required .-> p5t
 ```
 
 P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
@@ -85,53 +88,40 @@ Ein N0-Pass stuetzt nur eine numerisch aufgeloeste Robustheitsklammer der zwei
 vorbereiteten Zellen. Er beweist keine stochastische Formation und ist keine
 physikalische Bestimmung von $\varepsilon$.
 
-## Prioritaet 1: P5-Designaudit ohne Targetzugriff
+## Abgeschlossen: P5-Designaudit ohne Targetzugriff
 
-**Aktiver naechster Schritt.** Noch keine Interaktionstrajektorie ausfuehren.
+Der targetfreie
+[P5-D-Designaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_mutual_center_design_audit_2026-09-01.md)
+endet mit `p5d-mutual-center-design-identifiable`. Er waehlt zwei getrennte
+Anchor-Historien, den vorhandenen notched Center und seinen adjungierten
+Newest-slot-Write. Die einzige Paarenergie ist linear im quadratischen
+Centerabstand; sie besitzt weder Sollbahn noch Sollabstand.
 
-Der Audit muss vor jeder Implementierung entscheiden, welche minimale
-Zwei-Loop-Frage mit dem vorhandenen Source-/Write-Port ueberhaupt
-identifizierbar ist. Mindestens festzulegen sind:
+Der primaere Diskriminator ist ein reziproker Closed-loop-Ueberschuss gegen
+die Summe beider getrennten Einwegantworten. Ein sichtbarer Abstandstrend
+allein bleibt unzureichend. Der Design-Freeze ist Commit `f68c8f8`; sein
+[CI-Lauf 33507408346](https://github.com/MemoryDynamics/Knoten/actions/runs/33507408346)
+ist erfolgreich.
 
-1. zwei getrennt vorbereitete und einzeln zugelassene Schleifenzustaende;
-2. eine einzige explizite gegenseitige Kopplungsarchitektur ohne Zieltracking;
-3. die Zustandsvariablen, an denen der gegenseitige Port angreift;
-4. ein vollstaendiger gemeinsamer Work-/Ledger-Vertrag;
-5. eine Observable, die Selbstantwort und echte Mutualantwort trennt;
-6. ein Parameter- und Distanzpanel, das vor jeder Zielantwort geschlossen ist;
-7. klare Null-, Fail-, Richtungsfail- und Inconclusive-Zweige.
+## Abgeschlossen: P5-Falsifikationscharter und Protokoll
 
-Der Designaudit muss insbesondere die alternative Erklaerung ausschliessen,
-dass zwei unabhaengige Single-Loop-Relaxationen nur addiert werden. Ein
-sichtbarer Abstandstrend allein reicht nicht als Wechselwirkungsnachweis.
+Das getrennte
+[P5-D-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_mutual_center_protocol_2026-09-01.md)
+friert vor Implementierung 64 Basiskonfigurationen ein: zwei Distanzen, acht
+relative Phasenknoten und vier Chiralitaetspaare. Fuer jede folgen zwei
+schwache Staerken, beide Vorzeichen, beide Einwegrichtungen und der reziproke
+Arm. Einschliesslich Channel-off sind es 832 deterministische Kontrollarme,
+keine Replikationen.
 
-## Prioritaet 2: P5-Falsifikationscharter und Protokoll
-
-Nur wenn der Designaudit eine identifizierbare Frage findet, wird ein
-prospektives Protokoll geschrieben. Die minimale Kontrollmatrix umfasst:
-
-- beide Kanaele aus;
-- nur Loop A auf Loop B;
-- nur Loop B auf Loop A;
-- beide Richtungen reziprok;
-- Vertauschung von A und B;
-- beide Chiralitaeten und registrierte Vorzeichenkontrollen;
-- mehrere vorab gewaehlte Distanzen;
-- Shape-/D0-Erhalt beider Einzelschleifen;
-- omitted-mutual-work- und falscher-Center-Rivale;
-- Abbruch bei unvollstaendiger Bildung, Kollision oder Kanalverlust.
-
-Primaer sind gegenseitige Centerantwort, paarweise Workbilanz, Formtreue und
-ein vorregistrierter Distanzkontrast. Kreiseln, Phasenlocking, Anziehung oder
-Abstossung duerfen nicht als notwendiges Ziel eingebaut werden.
-
-Ein P5-Protokoll darf noch keine Begriffe wie Ladung, intrinsischer Spin,
-Impuls, Traegheit, Masse, universelles Kraftgesetz oder Feldquantisierung
-freischalten.
+Die Staerken `0.000625` und `0.00125` stammen aus der targetfreien
+Center-only-Midpoint-Referenz. Implementierung und Target duerfen sie nicht
+nachjustieren. Der Protokoll-Freeze ist Commit `1342258`; sein
+[CI-Lauf 33508068905](https://github.com/MemoryDynamics/Knoten/actions/runs/33508068905)
+ist erfolgreich.
 
 ## Prioritaet 3: P5-Implementierung und Pre-target-Review
 
-Erst nach getrenntem Design- und Protokoll-Freeze:
+**Aktiver naechster Schritt.** Erst nach gruenem Protokoll-CI:
 
 1. Runner und synthetische Falsifikatoren implementieren;
 2. alle geerbten P4-R-S-Abhaengigkeiten und Blobs pinnen;
@@ -143,27 +133,30 @@ Erst nach getrenntem Design- und Protokoll-Freeze:
 Bis dieses Review gruen ist, bleibt jedes P5-Target versiegelt. Ein
 Implementierungspass ist keine Interaktionsevidenz.
 
-## Prioritaet 4: Paper-I-Abgrenzung und Redaktionsentscheidung
+## Prioritaet 4: Paper-I-Abgrenzung und weitere Redaktionsentscheidung
 
 Paper I bleibt primaer das Minimalmodell mit Markov-Einbettung und
 kontrollierter linearer co-moving Relaxationswolke. Der deterministische
 $d=2$-Rotating-wave-/Portast ist methodisch und dynamisch ein getrennter
 Erweiterungszweig.
 
-Claim-Register, allgemeinverstaendliche Zusammenfassung und die kurze
-Evidenz/Inferenz/Hypothese-Tabelle sind jetzt getrennt vom Manuskriptkern
-gefuehrt. Eine gut lesbare Fassung steht unter
-[P4-R-S allgemein erklaert](p4rs_plain_language_summary.md).
+Die reviewed N0-Klammer ist jetzt als enge Abgrenzung in beiden
+Diskussionsfassungen aufgenommen. Sie verwendet
+`chi=epsilon/(R sqrt(alpha))`, benennt den Phasen-/Chiralitaetsfail und
+schliesst physikalische Rauschkalibrierung sowie stochastische Formation aus.
+Abstract und Hauptresultat bleiben unveraendert. Der zugehoerige
+[CI-Lauf 33506427098](https://github.com/MemoryDynamics/Knoten/actions/runs/33506427098)
+ist erfolgreich.
 
-Vor jeder spaeteren Manuskriptaenderung bleibt zu entscheiden:
+Fuer den Port-/Schleifenast bleibt vor jeder weitergehenden Manuskriptaufnahme
+zu entscheiden:
 
 - technische Begleitnotiz, Supplement oder eng getrennte Outlook-Sektion;
 - ob die drei offenen Source-Restriktionen vorher geschlossen werden muessen;
 - welche Rohdaten und Rebuild-Anleitung eine externe Replikation ermoeglichen.
 
-Bis zu dieser redaktionellen Entscheidung bleiben `main.tex`,
-`main_compact.tex`, Abstract und Hauptschluss unveraendert. Insbesondere wird
-keine Spin-, Traegheits- oder Massensprache uebernommen.
+Bis zu dieser weiteren Entscheidung bleiben Abstract und Hauptschluss frei
+von Interaktions-, Spin-, Traegheits- oder Massensprache.
 
 ## Prioritaet 5: Paralleles Publikations-Hardening
 

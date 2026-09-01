@@ -354,7 +354,7 @@ flowchart LR
     longrun["scalar long-run null<br/>linear relaxation cloud"]
     loops["prepared rotating waves<br/>Anchor + L3"]
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
-    p5d["P5-D design active<br/>deterministic mutual response"]
+    p5d["P5-D design + protocol frozen<br/>implementation next"]
     p5c["P5-C common-noise<br/>paired cancellation"]
     p5i["P5-I independent noise<br/>robustness"]
     fields["field / mediator extensions<br/>new dynamics"]
@@ -381,9 +381,11 @@ perturbation that rounds away. Anchor and L3 were compared at common memory
 time using `chi=epsilon/(R sqrt(alpha))`, so that `D/R^2=chi^2/2` is matched.
 The reviewed finite-time result is unresolved through `chi=1e-16`, stable
 from `1e-15` through `1e-4`, and phase-/chirality-failing at `1e-3` and
-`1e-2`. This opens targetfree P5-D design. Relaxation-diffusion, Telegraph and
-other mediator equations remain separate model extensions until they are
-derived from or selected against the common transition law.
+`1e-2`. The target-free P5-D design and its separate protocol are now frozen;
+implementation and every target trajectory remain closed pending readiness
+review. Relaxation-diffusion, Telegraph and other mediator equations remain
+separate model extensions until they are derived from or selected against the
+common transition law.
 
 ## Native Rotating-wave-Schiene
 
@@ -409,7 +411,7 @@ flowchart LR
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
     noise["N0 reviewed pass<br/>resolved finite-time bracket"]
-    interaction["P5 design active<br/>target closed"]
+    interaction["P5 design + protocol frozen<br/>implementation next; target closed"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -445,8 +447,11 @@ prospektive Protokollierung geoeffnet; vor diesen Pfad ist nun N0 eingeschoben.
 N0 prueft danach die Paper-I-Innovation und trennt numerisch weggerundetes
 Rauschen von aufgeloester orbitaler Stabilitaet. Das reviewte Ergebnis traegt
 eine finite-time Klammer: `chi=1e-4` besteht, `chi=1e-3` scheitert am
-Phasen-/Chiralitaetsgate. P5-Design ist damit wieder offen; P5-Implementierung,
-Targetzugriff und Interaktionsevidenz bleiben geschlossen. Die acht
+Phasen-/Chiralitaetsgate. P5-D-Design und ein getrenntes Protokoll sind nun
+targetfrei eingefroren. Sie waehlen eine lineare gegenseitige
+notched-Center-/adjungierte Write-Architektur und einen Closed-loop-Kontrast
+gegen beide Einwegantworten. Implementierung ist der naechste versiegelte
+Schritt; Targetzugriff und Interaktionsevidenz bleiben geschlossen. Die acht
 P4-R-Phasenknoten enthalten
 vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
 liefern keine Konvergenzordnung.

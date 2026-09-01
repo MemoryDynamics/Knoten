@@ -1,6 +1,6 @@
 # Emergenz Knoten Dokumentation
 
-Stand: 2026-08-31.
+Stand: 2026-09-01.
 
 Diese Dokumentation ist die kuratierte Frontdoor fuer das Projekt. Sie ist
 bewusst klein gehalten: aktive Orientierung laeuft ueber zehn Dokumente.
@@ -83,10 +83,15 @@ eingefrorene P4-R-S-Anchor-Holdout ist inzwischen unveraendert ausgefuehrt und
 separat reviewed. Alle 16 channel-off- und 32 aktiven Anchor-Arme bestehen;
 die groesste registrierte Anchor--L3-Abweichung ist `0.00232715` bei
 `epsilon_scale=0.05`. Ein unabhaengig implementierter Standardbibliothek-
-Auditor rekonstruiert die komplette Entscheidung ohne Feldabweichung. P5 darf
-damit jetzt nur als targetfreier Designaudit und prospektives Protokoll
-beginnen; Implementierung, Interaktionsziellauf und Evidenz bleiben
-geschlossen. Spin, Impuls, Traegheit und Masse folgen nicht.
+Auditor rekonstruiert die komplette Entscheidung ohne Feldabweichung. Der
+darauf folgende N0-Stress klammert ein aufgeloestes stabiles Fenster
+`chi=1e-15..1e-4` ein; `1e-3` und `1e-2` scheitern am lokalen
+Phasen-/Chiralitaetsgate. P5-D-Design und ein getrenntes prospektives
+Protokoll sind nun targetfrei eingefroren. Sie verwenden eine lineare
+gegenseitige notched-Center-/adjungierte Write-Kopplung und verlangen einen
+Closed-loop-Kontrast gegen beide Einwegantworten. Implementierung ist der
+naechste Schritt; Interaktionsziellauf und Evidenz bleiben geschlossen. Spin,
+Impuls, Traegheit und Masse folgen nicht.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

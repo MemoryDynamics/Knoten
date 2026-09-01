@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-08-30.
+Stand: 2026-09-01.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -245,9 +245,21 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     [Auditor](project/meta/reviews/p4rs_independent_result_recompute_2026-08-30.json)
     rekonstruiert alle registrierten Auswertungen ohne Feldabweichung. Das
     [Ergebnisreview](project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md)
-    oeffnet nur P5-Design und prospektive Protokollierung. P5-Implementierung,
-    Target und Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims
-    bleiben geschlossen.
+    oeffnet nur N0 und den nachgelagerten P5-Governancepfad.
+  - Der [N0-Rauschstress](dynamics/rotation/scalar_memory_rotating_wave_noise_stress_2026-08-31.md)
+    trennt unaufgeloeste binary64-Innovation bis `chi=1e-16` von einem
+    voll aufgeloesten stabilen Fenster `1e-15..1e-4`; `1e-3` und `1e-2`
+    scheitern am Phasen-/Chiralitaetsgate. Das
+    [kritische Review](project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md)
+    haelt nur diese finite-time Klammer aufrecht.
+  - Der anschliessende targetfreie
+    [P5-D-Designaudit](project/meta/reviews/scalar_memory_loop_p5d_mutual_center_design_audit_2026-09-01.md)
+    identifiziert eine lineare gegenseitige notched-Center-/adjungierte
+    Write-Architektur. Das getrennte
+    [P5-D-Protokoll](project/meta/preregistration/scalar_memory_loop_p5d_mutual_center_protocol_2026-09-01.md)
+    friert 832 deterministische Kontrollarme und den Closed-loop-Kontrast
+    gegen die Einwegsumme ein. Implementierung, Target und Evidenz sowie
+    Spin-, Impuls-, Traegheits- und Masseclaims bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.
