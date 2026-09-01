@@ -27,9 +27,10 @@ $$
 
 korrigiert. Distanzen, Staerken, Schwellen, Armzahl und Serialisierungsordnung
 bleiben unveraendert. Das korrigierte Acht-Knoten-Panel enthaelt vier
-verschiedene Relativphasen und deren Halbdrehungs-Mates; Swap und Reflexion
-schliessen nun innerhalb desselben Panels. Der Korrekturcommit und sein CI
-muessen wie der urspruengliche Freeze vor dem Implementierungscommit liegen.
+verschiedene Relativphasen und deren Halbdrehungs-Mates. Reflexion und der
+wegen der festen Centerpositionen verwendete Swap-plus-Halbdrehung schliessen
+nun innerhalb desselben Panels. Der Korrekturcommit und sein CI muessen wie
+der urspruengliche Freeze vor dem Implementierungscommit liegen.
 
 ## 1. Registrierte Frage und Claim-Grenze
 
@@ -135,9 +136,18 @@ $$
 
 Damit bilden die relativen Phasen $2\phi_m$ vier verschiedene
 odd-quarter-turn-Knoten. Die jeweils um $\pi$ verschobenen History-Paare sind
-Halbdrehungs-Mates. Swap und Reflexion bilden Index $m$ auf $7-m$ ab und
-bleiben im Panel. Die Chiralitaetspaare werden in dieser Reihenfolge
-serialisiert:
+Halbdrehungs-Mates. Reflexion an der reellen Achse bildet
+$m\mapsto7-m$ und $(s_A,s_B)\mapsto(-s_A,-s_B)$ ab. Weil A im Standardpanel
+immer links und B immer rechts startet, wird der A/B-Swap mit einer
+anschliessenden Halbdrehung verglichen; diese Abbildung ist
+
+$$
+m\mapsto(3-m)\bmod8,
+\qquad(s_A,s_B)\mapsto(s_B,s_A).
+$$
+
+Beide Abbildungen bleiben im Panel. Die Chiralitaetspaare werden in dieser
+Reihenfolge serialisiert:
 
 ```text
 (+1,+1), (+1,-1), (-1,+1), (-1,-1)
