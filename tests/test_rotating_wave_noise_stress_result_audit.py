@@ -18,13 +18,15 @@ def test_independent_audit_recomputes_registered_n0_result() -> None:
     assert result["gate_mismatches"] == []
 
 
-def test_audit_exposes_crlf_byte_hash_difference() -> None:
+def test_audit_uses_canonical_repository_blob_across_line_endings() -> None:
     result = audit.audit()
-    assert result["embedded_matches_bytes"] is False
-    assert result["embedded_matches_lf_normalized"] is True
-    assert result["integrity_finding"] == (
-        "crlf-byte-hash-mismatch-canonical-lf-hash-agrees"
-    )
+    assert result["embedded_matches_repository_blob"] is True
+    assert result["integrity_finding"] in {
+        "canonical-repository-hash-agrees",
+        "working-tree-line-ending-transform-canonical-repository-hash-agrees",
+    }
+    if not result["embedded_matches_bytes"]:
+        assert result["embedded_matches_lf_normalized"] is True
 
 
 def test_independent_resolution_thresholds_are_fail_closed() -> None:

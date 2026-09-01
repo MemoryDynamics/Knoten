@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 from typing import Any
 
 import numpy as np
@@ -115,6 +116,13 @@ def scaling_fit(
 
 def audit() -> dict[str, Any]:
     raw = RESULT.read_bytes()
+    repository_raw = subprocess.run(
+        ["git", "show", "HEAD:reports/dynamics/rotation/"
+         "scalar_memory_rotating_wave_noise_stress_2026-08-31.json"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
     payload = json.loads(raw)
     normalized = raw.replace(b"\r\n", b"\n")
     report_text = REPORT.read_text(encoding="utf-8")
@@ -122,6 +130,7 @@ def audit() -> dict[str, Any]:
     if digest_match is None:
         raise AssertionError("report does not contain a JSON digest")
     byte_digest = hashlib.sha256(raw).hexdigest()
+    repository_digest = hashlib.sha256(repository_raw).hexdigest()
     normalized_digest = hashlib.sha256(normalized).hexdigest()
     embedded_digest = digest_match.group(1)
 
@@ -176,14 +185,21 @@ def audit() -> dict[str, Any]:
         "schema": "scalar-memory-rotating-wave-noise-stress-independent-audit-v1",
         "source_revision": payload["provenance"]["revision"],
         "byte_sha256": byte_digest,
+        "repository_blob_sha256": repository_digest,
         "lf_normalized_sha256": normalized_digest,
         "embedded_sha256": embedded_digest,
         "embedded_matches_bytes": embedded_digest == byte_digest,
+        "embedded_matches_repository_blob": embedded_digest == repository_digest,
         "embedded_matches_lf_normalized": embedded_digest == normalized_digest,
         "integrity_finding": (
-            "crlf-byte-hash-mismatch-canonical-lf-hash-agrees"
-            if embedded_digest != byte_digest and embedded_digest == normalized_digest
-            else "unexpected-digest-state"
+            "canonical-repository-hash-agrees"
+            if embedded_digest == repository_digest and embedded_digest == byte_digest
+            else (
+                "working-tree-line-ending-transform-canonical-repository-hash-agrees"
+                if embedded_digest == repository_digest
+                and embedded_digest == normalized_digest
+                else "unexpected-digest-state"
+            )
         ),
         "json_valid": True,
         "png_signature_valid": figure_signature == b"\x89PNG\r\n\x1a\n",
@@ -206,6 +222,7 @@ def audit() -> dict[str, Any]:
             and grid == stored_grid
             and recomputed_decision == payload["decision"]
             and figure_signature == b"\x89PNG\r\n\x1a\n"
+            and embedded_digest == repository_digest
         ),
     }
 
