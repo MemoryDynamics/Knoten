@@ -126,7 +126,8 @@ independent replication. Each candidate runs to $\tau=\alpha n=20$.
 Serialization and execution order is candidate (`Anchor`, `L3`), increasing
 grid order, seed order, then arm (`base`, `transverse-pair`). The runner must
 execute all cells even after the first failure; a non-finite state or a
-quotient distance above `0.25 R` stops only that arm and records its step.
+quotient distance above `0.25 reference_D0_norm` stops only that arm and
+records its step.
 No seed or grid point may be dropped after inspection.
 
 ## 6. Frozen initial conditions and samples
@@ -207,7 +208,7 @@ A resolved nonzero arm is stable only if all conditions hold:
 | sampled positive-chirality fraction | `>= 0.99` |
 | maximum pair-distance / initial pair-distance | `<= 10` |
 | final pair-distance / initial pair-distance | `<= 0.1` |
-| stop threshold | never reaches `0.25 R` |
+| stop threshold | never reaches `0.25 reference_D0_norm` |
 
 Non-finiteness, missing samples or malformed registration precede all dynamic
 labels and make the run inconclusive. Any threshold equality passes.
