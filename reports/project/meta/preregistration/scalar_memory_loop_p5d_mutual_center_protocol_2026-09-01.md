@@ -32,6 +32,36 @@ wegen der festen Centerpositionen verwendete Swap-plus-Halbdrehung schliessen
 nun innerhalb desselben Panels. Der Korrekturcommit und sein CI muessen wie
 der urspruengliche Freeze vor dem Implementierungscommit liegen.
 
+### Preimplementation-Amendierung der lokalen Serialisierung
+
+Das anschliessende Speicherbudget-Review, weiterhin vor dem ersten
+Implementierungscommit und vor jeder P5-D-Trajektorie, hat eine unvereinbare
+Lesart von Abschnitt 10 offengelegt. Eine wortwoertliche JSON-Serialisierung
+aller dort genannten komplexen lokalen Groessen fuer `768 * 2000 = 1,536,000`
+aktive Updates wuerde bereits binaer mehrere hundert Megabyte und als
+menschenlesbares JSON deutlich ueber ein Gigabyte beanspruchen. Das ist mit
+den in Abschnitt 17 eingefrorenen zwei Standardartefakten und einer
+GitHub-tauglichen Source-Auditspur nicht vereinbar.
+
+Die wissenschaftlichen Berechnungen bleiben unveraendert: Force,
+Write-Force, History-Inkrement, alle Center, Arbeiten, Residuen, Envelopes und
+Mobilitaetsdissipation werden in **jedem** aktiven Update ausgewertet. Der
+Standard-JSON speichert pro Arm jedoch die vorzeichenbehafteten kumulativen
+Summen, alle entscheidungsrelevanten Maxima/Minima, Auswertungszaehler,
+Endhistory-Hashes, die 101 registrierten Dynamiksamples und die exakt 192
+rohen 80-stelligen Checkpoint-Replays. Synthetische Fixtures muessen jede
+lokale Gatefamilie vor Targetzugriff korrumpieren und ausloesen koennen.
+
+Der unabhaengige Auditor rekonstruiert die Schwellenanwendung aus diesen
+gespeicherten Reducern, nicht jede der 1,536,000 lokalen Operationen aus
+vollstaendigen Rohzustaenden. Diese Online-Reduktion ist deshalb eine
+explizite interne Source-Auditgrenze und keine unabhaengige Replikation. Eine
+externe Vollreproduktion benoetigt den gepinnten Runner und die eingefrorenen
+Eingangsblobs. Panel, Parameter, Updategleichungen, Schwellen,
+Entscheidungsordnung und Targetversiegelung werden durch diese Amendierung
+nicht geaendert. Amendierungscommit und CI muessen ebenfalls vor dem
+Implementierungscommit liegen.
+
 ## 1. Registrierte Frage und Claim-Grenze
 
 Die einzige primaere Frage lautet:
@@ -342,7 +372,8 @@ und Koeffizienten neu; sie sind keine unabhaengigen Trajektorien.
 
 ## 10. Lokale Metrologie und Workledger
 
-Fuer jeden aktiven Write werden lokal gespeichert:
+Fuer jeden aktiven Write werden lokal berechnet und in die eingefrorenen
+Online-Reducer aufgenommen:
 
 - Force, Write-Force und History-Inkrement;
 - Center vor, nach nativem Schritt und nach Write;
@@ -351,6 +382,12 @@ Fuer jeden aktiven Write werden lokal gespeichert:
 - binary64 full-dot-Huelle mit dem jeweiligen $\gamma_{8H}$;
 - Newest-slot-Mobilitaetsdissipation;
 - Write- und vollstaendige Age-Arbeit.
+
+Der Standard-JSON serialisiert davon die entscheidungsrelevanten
+Extrema/Minima, signierten kumulativen Summen, Zaehler und die registrierten
+High-precision-Checkpoints; die vollstaendigen komplexen Per-step-Vektoren
+werden nicht serialisiert. Die 101 Dynamiksamples je Arm bleiben davon
+unberuehrt.
 
 Fuer den reziproken Arm gelten primaer
 
@@ -613,9 +650,11 @@ nachweisen:
 12. dass normale Tests und Imports den Targetrunner nicht aufrufen.
 
 Der Ergebnis-Auditor darf keine Entscheidungshelper des Runners importieren.
-Er muss aus dem gespeicherten JSON Panelordnung, lokale Gates,
-Paarledger, Symmetrien, Einwegkausalitaet, Response, Distanz-, Staerke- und
-Closed-loop-Entscheidung eigenstaendig rekonstruieren.
+Er muss aus dem gespeicherten JSON Panelordnung, lokale Reducer-Gates,
+Paarledger-Schwellen, Symmetrien, Einwegkausalitaet, Response, Distanz-,
+Staerke- und Closed-loop-Entscheidung eigenstaendig rekonstruieren. Er darf
+nicht behaupten, die online reduzierten Per-step-Operationen ohne deren
+Vollserialisierung unabhaengig neu berechnet zu haben.
 
 ## 17. Ergebnisartefakte und Einmaligkeit
 
