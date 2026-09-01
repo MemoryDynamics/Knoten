@@ -116,7 +116,7 @@ Getrennte Schleifen-/Port-Einordnung:
 - `docs/status/p4rs_plain_language_summary.md`
 - `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
 
-## Geplante N0-Bruecke zum Schleifenarm
+## Reviewte N0-Bruecke zum Schleifenarm
 
 Die Paper-I-Uebergangssprache bleibt der gemeinsame Modellkern:
 
@@ -133,10 +133,17 @@ vergleicht Skalen ueber
 `D/R^2 = chi^2/2` unter der Paper-I-Konvention
 `D = epsilon^2/(2 alpha)`.
 
-Dies ist derzeit eine prospektive Bruecke, kein Paper-Ergebnis. Insbesondere
-zaehlt in binaerer 64-bit-Arithmetik weggerundete Innovation nicht als
-Rauschstabilitaet. Lang- und Kurzfassung werden erst nach eingefrorenem
-Protokoll, registriertem Lauf und unabhaengigem Ergebnisreview geaendert.
+Der prospektive Lauf und sein unabhaengiges Recompute sind nun reviewed. Bis
+`chi=1e-16` bleibt die Innovation numerisch unaufgeloest; `1e-15..1e-4`
+bestehen, `1e-3` und `1e-2` scheitern am lokalen Phasen-/Chiralitaetsgate.
+Dies ist eine finite-time Robustheitsklammer zweier vorbereiteter Zellen, kein
+physikalischer Rauschpegel. Lang- und Kurzfassung bleiben bis zu einer
+separaten Redaktionsentscheidung unveraendert.
+
+Ergebnis und enges Review:
+
+- `reports/dynamics/rotation/scalar_memory_rotating_wave_noise_stress_2026-08-31.md`
+- `reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md`
 
 ## Build
 

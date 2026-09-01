@@ -164,11 +164,11 @@ def test_p4rs_frontdoors_report_reviewed_result_and_sealed_p5_target() -> None:
 
     assert "p4rs-anchor-scale-transfer-pass" in status
     assert "P4-R-S Anchor-Skalenholdout -- reviewed Pass" in claims
-    assert "Prioritaet 1: N0-Rauschaufloesungs- und Stabilitaetsaudit" in priorities
-    assert "Nach reviewed N0" in priorities
+    assert "n0-noise-stability-window-bracketed-reviewed-pass" in priorities
+    assert "Prioritaet 1: P5-Designaudit ohne Targetzugriff" in priorities
     assert "P5-Implementierung, Targetzugriff und Interaktionsevidenz" in status
-    assert "N0 noise stress<br/>design/protocol before target" in repository_map
-    assert "P5 after N0<br/>target closed" in repository_map
+    assert "N0 reviewed pass<br/>resolved finite-time bracket" in repository_map
+    assert "P5 design active<br/>target closed" in repository_map
     assert "Runner und Target fehlen weiterhin" not in report_index
     assert "wird deshalb nicht in den Paper-I-\nHauptclaim eingemischt" in paper_i
     assert "| Evidenz | P4-R-S" in paper_i

@@ -353,8 +353,8 @@ flowchart LR
     stochastic["stochastic lifting<br/>epsilon greater than 0"]
     longrun["scalar long-run null<br/>linear relaxation cloud"]
     loops["prepared rotating waves<br/>Anchor + L3"]
-    n0["N0 noise-resolution ladder<br/>D0 orbital stability"]
-    p5d["P5-D deterministic<br/>mutual response"]
+    n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
+    p5d["P5-D design active<br/>deterministic mutual response"]
     p5c["P5-C common-noise<br/>paired cancellation"]
     p5i["P5-I independent noise<br/>robustness"]
     fields["field / mediator extensions<br/>new dynamics"]
@@ -376,12 +376,14 @@ The rotating-wave FIFO state is the ordered finite-H specialization of that
 law. `epsilon=0` defines its deterministic skeleton; positive epsilon is an
 explicit stochastic lifting, not a different force law.
 
-Before P5, N0 must distinguish a genuinely injected innovation from a
-binary64 perturbation that rounds away. Anchor and L3 are compared at common
-memory time using `chi=epsilon/(R sqrt(alpha))`, so that `D/R^2=chi^2/2` is
-matched. Relaxation-diffusion, Telegraph and other mediator equations remain
-separate model extensions until they are derived from or selected against the
-common transition law.
+N0 now distinguishes a genuinely injected innovation from a binary64
+perturbation that rounds away. Anchor and L3 were compared at common memory
+time using `chi=epsilon/(R sqrt(alpha))`, so that `D/R^2=chi^2/2` is matched.
+The reviewed finite-time result is unresolved through `chi=1e-16`, stable
+from `1e-15` through `1e-4`, and phase-/chirality-failing at `1e-3` and
+`1e-2`. This opens targetfree P5-D design. Relaxation-diffusion, Telegraph and
+other mediator equations remain separate model extensions until they are
+derived from or selected against the common transition law.
 
 ## Native Rotating-wave-Schiene
 
@@ -406,8 +408,8 @@ flowchart LR
     p4rphi["P4-R-phi reviewed pass<br/>discrete phase response"]
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
-    noise["N0 noise stress<br/>design/protocol before target"]
-    interaction["P5 after N0<br/>target closed"]
+    noise["N0 reviewed pass<br/>resolved finite-time bracket"]
+    interaction["P5 design active<br/>target closed"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -440,10 +442,12 @@ vorbereitete Skala: maximale Anchor--L3-Abweichung `0.00232715` gegen die
 vorab fixierte Grenze `0.05`. Ein unabhaengig implementierter Auditor stimmt
 ohne Feldabweichung zu. Das Ergebnisreview hatte ausschliesslich P5-Design und
 prospektive Protokollierung geoeffnet; vor diesen Pfad ist nun N0 eingeschoben.
-N0 prueft die Paper-I-Innovation targetfrei und trennt numerisch weggerundetes
-Rauschen von aufgeloester orbitaler Stabilitaet. P5-Implementierung,
-Targetzugriff und Interaktionsevidenz bleiben bis zum reviewten N0-Ergebnis
-geschlossen. Die acht P4-R-Phasenknoten enthalten
+N0 prueft danach die Paper-I-Innovation und trennt numerisch weggerundetes
+Rauschen von aufgeloester orbitaler Stabilitaet. Das reviewte Ergebnis traegt
+eine finite-time Klammer: `chi=1e-4` besteht, `chi=1e-3` scheitert am
+Phasen-/Chiralitaetsgate. P5-Design ist damit wieder offen; P5-Implementierung,
+Targetzugriff und Interaktionsevidenz bleiben geschlossen. Die acht
+P4-R-Phasenknoten enthalten
 vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
 liefern keine Konvergenzordnung.
 

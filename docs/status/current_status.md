@@ -17,6 +17,7 @@ vollstaendig erhalten.
 | Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| N0-Rauschstress | Der prospektive binary64-Scan trennt unaufgeloeste Innovation bis `chi=1e-16` von 12 voll aufgeloesten stabilen Dekadenzellen `1e-15..1e-4`; `1e-3` und `1e-2` scheitern reproduzierbar am Phasen-/Chiralitaetsgate. Ein getrennter Auditor rekonstruiert 132/132 Zellen, alle Gates, die Klammer und beide Skalierungsfits ohne Abweichung. | `n0-noise-stability-window-bracketed-reviewed-pass`: finite-time Phasenkohaerenz-Robustheitsklammer an Anchor und L3 | keine physikalische Epsilon-/Planck-Kalibrierung, keine stationaere stochastische Formation, keine Replikation oder Kontinuumsordnung; sichtbare x-y-Kreise zerfallen an der ersten Fail-Dekade nicht |
 | Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
 | Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. P4 schliesst den exakten Write-/Age-Arbeitsledger, bleibt aber formal Fail. P4-R besteht am vorbereiteten L3-Kreis die diskrete Chiral-Klassifikation. Der reviewed P4-R-S-Holdout uebertraegt denselben registrierten Antworttyp auf den Anchor; die groesste Anchor--L3-Abweichung ist `0.00232715` gegen `0.05`. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag, algebraisch geschlossener Ledger und ein reviewed diskreter Zwei-Zellen-Skalenpass des explizit konstruierten Ports | P4 bleibt formal gescheitert; zwei Zellen liefern keine Konvergenzordnung oder Replikation. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, intrinsischer Spin, physikalische Arbeit, Traegheit oder Masse identifiziert |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
@@ -196,8 +197,10 @@ vollstaendig erhalten.
   bleibt bestehen. P4-R-phi bestaetigt danach die chirality-odd Querantwort in
   einer frischen diskreten Acht-Phasen-Quadratur. Der reviewed P4-R-S-Pass
   traegt diese Antwort auf einen zweiten vorbereiteten Skalenpunkt, benennt
-  P4 aber ebenfalls nicht um. Weder die beiden Skalen noch die Kreisgeometrie
-  definieren Spin oder gyroskopische Masse. P5-Protokollierung ist jetzt offen;
+  P4 aber ebenfalls nicht um. N0 traegt danach eine reviewed finite-time
+  Rauschklammer von `chi=1e-4` bis `1e-3`, ohne physikalische Kalibrierung.
+  Weder die beiden Skalen noch die Kreisgeometrie definieren Spin oder
+  gyroskopische Masse. P5-Design und Protokollierung sind jetzt offen;
   P5-Implementierung, Target und Evidenz bleiben geschlossen.
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
@@ -332,9 +335,10 @@ Impuls-, Traegheits- und Masseclaims bleiben geschlossen.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht. P4-R,
-Source-Audit und der reviewed P4-R-S-Skalenpass oeffnen nun ausschliesslich
-den targetfreien P5-Designaudit und eine nachgelagerte prospektive
-Protokollierung. Die einzige aktive Abhaengigkeitskette steht in den
+Source-Audit, der reviewed P4-R-S-Skalenpass und die reviewed N0-Klammer
+oeffnen nun ausschliesslich den targetfreien P5-Designaudit und eine
+nachgelagerte prospektive Protokollierung. Die einzige aktive
+Abhaengigkeitskette steht in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
 

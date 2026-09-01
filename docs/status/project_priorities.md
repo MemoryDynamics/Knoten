@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-08-31.
+Stand: 2026-09-01.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Abgeschlossene
 Befunde, historische Fails und Ergebnisgrenzen stehen im
@@ -21,7 +21,8 @@ keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
 | P4 | `p4-source-write-architecture-fail` | historischer Fail bleibt unveraendert |
 | P4-R-phi | diskreter Chiral-Response-Pass | enger L3-Port-/Ledger-/Antwortbefund |
 | Source-Audit | restricted pass | drei Major-Restriktionen bleiben offen |
-| P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | N0-Rauschstress darf vor P5 eingefroren werden |
+| P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | N0 wurde prospektiv ausgefuehrt |
+| N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | P5-Design darf targetfrei beginnen |
 
 ```mermaid
 flowchart LR
@@ -29,13 +30,12 @@ flowchart LR
     p4r["P4-R reviewed pass<br/>diskrete L3-Antwort"]
     source["Source-Audit<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>Anchor/L3 kompatibel"]
-    n0d["N0 Noise-floor audit<br/>jetzt aktiv"]
-    n0p["N0 Protokoll + Readiness<br/>danach Target"]
-    p5d["P5 Designaudit<br/>danach"]
+    n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
+    p5d["P5 Designaudit<br/>jetzt aktiv"]
     p5p["P5 Protokoll<br/>danach einfrieren"]
     p5t["P5 Target<br/>weiter versiegelt"]
 
-    p4 --> p4r --> source --> p4rs --> n0d --> n0p --> p5d --> p5p -. readiness required .-> p5t
+    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p -. readiness required .-> p5t
 ```
 
 P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
@@ -44,10 +44,11 @@ fixierte Grenze `0.05`. Das ist ein starker interner Skalenholdout, aber weder
 Konvergenzordnung noch Replikation. Der ausfuehrliche Befund steht im
 [P4-R-S-Ergebnisreview](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md).
 
-## Prioritaet 1: N0-Rauschaufloesungs- und Stabilitaetsaudit
+## Abgeschlossener N0-Checkpoint
 
-**Aktiver naechster Schritt vor P5.** Noch keine neue Rausch- oder
-Interaktionstrajektorie ausfuehren.
+Der prospektiv eingefrorene, einmal ausgefuehrte und unabhaengig nachgerechnete
+N0-Lauf endet mit
+`n0-noise-stability-window-bracketed-reviewed-pass`.
 
 Der targetfreie
 [N0-Designaudit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_design_audit_2026-08-31.md)
@@ -70,38 +71,23 @@ $$
 \qquad {D\over R^2}={\chi^2\over2}
 $$
 
-verglichen. Das logarithmische Panel ist
-$\chi=10^{-22},\ldots,10^{-2}$ plus ein separates Nullgate. Primaer sind
-SO(2)-quotientierter D0-Abstand, Radius-/Phasenfehler, tatsaechlich injizierte
-binary64-Stoerung und common-noise Kontraktion; lineare `x/y`-Kreise sind nur
-Visualisierung.
+verglichen. Die Innovation ist bis `chi=1e-16` nicht voll aufgeloest. Alle
+Zellen bestehen von `1e-15` bis `1e-4`; `1e-3` und `1e-2` scheitern am
+prospektiven Phasen-/Chiralitaetsgate, nicht an einem sichtbaren Radiuszerfall.
+Das unabhaengige Recompute findet keine Aufloesungs-, Gate- oder
+Entscheidungsabweichung. Details stehen im
+[N0-Ergebnisreview](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md).
 
 Plancks Konstante setzt keine Zahl fuer $\varepsilon$, solange Laenge, Zeit
 und Wirkung des Modells nicht physikalisch kalibriert sind.
-
-## Prioritaet 2: N0-Protokoll, Implementierung und Pre-target-Review
-
-Nur nach separatem Designfreeze:
-
-1. logarithmisches Panel, drei feste Masterseeds und die Brownian-refinement-
-   Kopplung zwischen L3 und Anchor prospektiv einfrieren;
-2. Rauschschritt, D0-/Phasen-/Radiusmetriken und Log-log-Auswertung
-   implementieren;
-3. synthetisch falsifizieren, dass sub-ULP-Stoerungen als stabil fehlgedeutet,
-   Rauschinkremente in alte Slots geschrieben oder Skalen mit rohem
-   $\varepsilon$ statt gemeinsamem $D/R^2$ verglichen werden;
-4. beweisen, dass Tests keine registrierte N0-Trajektorie ausfuehren;
-5. nach Vollsuite und strikter Doku ein separates Readinessreview einfrieren;
-6. erst dann den registrierten Scan genau einmal ausfuehren und kritisch
-   reviewen.
 
 Ein N0-Pass stuetzt nur eine numerisch aufgeloeste Robustheitsklammer der zwei
 vorbereiteten Zellen. Er beweist keine stochastische Formation und ist keine
 physikalische Bestimmung von $\varepsilon$.
 
-## Prioritaet 3: P5-Designaudit ohne Targetzugriff
+## Prioritaet 1: P5-Designaudit ohne Targetzugriff
 
-**Nach reviewed N0.** Noch keine Interaktionstrajektorie ausfuehren.
+**Aktiver naechster Schritt.** Noch keine Interaktionstrajektorie ausfuehren.
 
 Der Audit muss vor jeder Implementierung entscheiden, welche minimale
 Zwei-Loop-Frage mit dem vorhandenen Source-/Write-Port ueberhaupt
@@ -119,7 +105,7 @@ Der Designaudit muss insbesondere die alternative Erklaerung ausschliessen,
 dass zwei unabhaengige Single-Loop-Relaxationen nur addiert werden. Ein
 sichtbarer Abstandstrend allein reicht nicht als Wechselwirkungsnachweis.
 
-## Prioritaet 4: P5-Falsifikationscharter und Protokoll
+## Prioritaet 2: P5-Falsifikationscharter und Protokoll
 
 Nur wenn der Designaudit eine identifizierbare Frage findet, wird ein
 prospektives Protokoll geschrieben. Die minimale Kontrollmatrix umfasst:
@@ -143,7 +129,7 @@ Ein P5-Protokoll darf noch keine Begriffe wie Ladung, intrinsischer Spin,
 Impuls, Traegheit, Masse, universelles Kraftgesetz oder Feldquantisierung
 freischalten.
 
-## Prioritaet 5: P5-Implementierung und Pre-target-Review
+## Prioritaet 3: P5-Implementierung und Pre-target-Review
 
 Erst nach getrenntem Design- und Protokoll-Freeze:
 
@@ -157,7 +143,7 @@ Erst nach getrenntem Design- und Protokoll-Freeze:
 Bis dieses Review gruen ist, bleibt jedes P5-Target versiegelt. Ein
 Implementierungspass ist keine Interaktionsevidenz.
 
-## Prioritaet 6: Paper-I-Abgrenzung und Redaktionsentscheidung
+## Prioritaet 4: Paper-I-Abgrenzung und Redaktionsentscheidung
 
 Paper I bleibt primaer das Minimalmodell mit Markov-Einbettung und
 kontrollierter linearer co-moving Relaxationswolke. Der deterministische
@@ -179,7 +165,7 @@ Bis zu dieser redaktionellen Entscheidung bleiben `main.tex`,
 `main_compact.tex`, Abstract und Hauptschluss unveraendert. Insbesondere wird
 keine Spin-, Traegheits- oder Massensprache uebernommen.
 
-## Prioritaet 7: Paralleles Publikations-Hardening
+## Prioritaet 5: Paralleles Publikations-Hardening
 
 Diese Aufgaben duerfen parallel laufen, aendern aber keinen Gate-Status:
 

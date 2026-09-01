@@ -187,3 +187,14 @@ Standardbibliothek-Auditor rekonstruiert die gespeicherte Entscheidung als
 oeffnet nur P5-Design und prospektive Protokollierung. P5-Implementierung,
 Targetzugriff und Interaktionsevidenz sowie Topologie-, Spin-, Impuls-,
 Traegheits- und Masseclaims bleiben versiegelt.
+
+Der N0-Runner `scalar_memory_rotating_wave_noise_stress.py` hebt den
+deterministischen Ast danach mit expliziter Paper-I-Innovation an. Der einmalige
+registrierte Lauf verwendet `chi=epsilon/(R sqrt(alpha))`, drei gemeinsame
+Brownian-refinement-Pfade und getrennte binary64-Aufloesungsmetrologie. Das
+reviewte Ergebnis ist `n0-noise-stability-window-bracketed-reviewed-pass`:
+unaufgeloest bis `1e-16`, stabil von `1e-15` bis `1e-4`, Phasen-/
+Chiralitaetsfail ab `1e-3`. Der getrennte Auditor
+`scalar_memory_rotating_wave_noise_stress_result_audit.py` rekonstruiert alle
+132 Zellen ohne Gateabweichung. Damit ist P5-Design offen; ein erneuter N0-Lauf
+oder P5-Targetzugriff ist nicht freigegeben.

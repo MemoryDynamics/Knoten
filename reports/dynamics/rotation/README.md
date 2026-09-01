@@ -126,6 +126,14 @@ sind die autoritativen maschinenlesbaren Entscheidungen.
       Skalierungsarrays, Ledgergates und Referenzen ohne Feldabweichung;
     - reviewed Zwei-Zellen-Skalenpass, keine Replikation, Konvergenzordnung,
       Interaktions-, Spin-, Traegheits- oder Masseevidenz.
+20. `scalar_memory_rotating_wave_noise_stress_2026-08-31.{json,md,png}`
+    - prospektiver binary64-Stresstest ueber `chi=1e-22..1e-2` plus Nullgate;
+    - `1e-22..1e-16` unaufgeloest, `1e-15..1e-4` in allen 12
+      Kandidat-/Seed-Armen stabil, `1e-3` und `1e-2` Phasen-/Chiralitaetsfail;
+    - `n0-noise-stability-window-bracketed-reviewed-pass` mit letzter stabiler
+      Dekade `1e-4` und erster Fail-Dekade `1e-3`;
+    - unabhaengiges Recompute ohne Aufloesungs-, Gate- oder
+      Entscheidungsabweichung; keine physikalische Rauschkalibrierung.
 
 ## Zugehoerige Protokolle und Reviews
 
@@ -173,6 +181,12 @@ beziehungsweise
 `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_implementation_readiness_2026-08-30.md`
 und
 `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`.
+N0-Design, Protokoll, Readiness und Ergebnisreview stehen in
+`reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_design_audit_2026-08-31.md`,
+`reports/project/meta/preregistration/scalar_memory_rotating_wave_noise_stress_protocol_2026-08-31.md`,
+`reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_implementation_readiness_2026-09-01.md`
+und
+`reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md`.
 Die Reviews erlauben nur die enge Formulierung „vorbereitete raeumliche
 Schleifenbasis mit lokaler numerischer Stabilitaetsevidenz an zwei getesteten
 Skalen“. P2 fuegt starke lokale matrixwertige Kleinsignalevidenz hinzu und
@@ -208,4 +222,8 @@ ist inzwischen unveraendert ausgefuehrt: maximale Anchor--L3-Abweichung
 Feldabweichung. Das kritische Review haelt nur den Zwei-Zellen-Skalenpass
 aufrecht. P5-Design und prospektive Protokollierung sind damit offen;
 P5-Implementierung, Targetzugriff und Interaktionsevidenz bleiben
-geschlossen.
+geschlossen. Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
+finite-time Robustheitsklammer von `chi=1e-4` bis `1e-3`; der Fail ist lokal
+phasensensitiv und im groben x-y-Kreis kaum sichtbar. Das ist weder eine
+stationaere stochastische Formation noch eine physikalische Bestimmung von
+`epsilon`.

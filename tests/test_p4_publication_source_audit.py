@@ -210,8 +210,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
         ),
         "docs/status/project_priorities.md": (
             "p4rs-anchor-scale-transfer-pass",
-            "Prioritaet 1: N0-Rauschaufloesungs- und Stabilitaetsaudit",
-            "Nach reviewed N0",
+            "n0-noise-stability-window-bracketed-reviewed-pass",
+            "Prioritaet 1: P5-Designaudit ohne Targetzugriff",
             "P5 Target<br/>weiter versiegelt",
         ),
         "reports/README.md": (
@@ -232,8 +232,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
         "docs/reference/repository_map.md": (
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
-            "N0 noise stress",
-            "P5 after N0",
+            "N0 reviewed pass",
+            "P5 design active",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
