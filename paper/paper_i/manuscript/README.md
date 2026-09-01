@@ -1,6 +1,6 @@
 # Paper I - Self-Interacting Stochastic Dynamics with Exponential Memory
 
-Stand: 2026-08-31.
+Stand: 2026-09-01.
 
 ## Rolle
 
@@ -137,8 +137,10 @@ Der prospektive Lauf und sein unabhaengiges Recompute sind nun reviewed. Bis
 `chi=1e-16` bleibt die Innovation numerisch unaufgeloest; `1e-15..1e-4`
 bestehen, `1e-3` und `1e-2` scheitern am lokalen Phasen-/Chiralitaetsgate.
 Dies ist eine finite-time Robustheitsklammer zweier vorbereiteter Zellen, kein
-physikalischer Rauschpegel. Lang- und Kurzfassung bleiben bis zu einer
-separaten Redaktionsentscheidung unveraendert.
+physikalischer Rauschpegel. Diese enge Abgrenzung steht jetzt in den
+Diskussionsabschnitten der Lang- und Kurzfassung; sie erweitert nicht den
+Paper-I-Hauptclaim. Rohes `epsilon` ist wegen der Normierung mit `R` und
+`alpha` weder zell- noch konventionsuebergreifend vergleichbar.
 
 Ergebnis und enges Review:
 
@@ -148,7 +150,7 @@ Ergebnis und enges Review:
 ## Build
 
 ```powershell
-cd paper/paper_i
+cd paper/paper_i/manuscript
 latexmk -xelatex main.tex
 latexmk -xelatex main_compact.tex
 ```
