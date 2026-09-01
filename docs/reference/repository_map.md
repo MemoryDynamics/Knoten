@@ -354,7 +354,7 @@ flowchart LR
     longrun["scalar long-run null<br/>linear relaxation cloud"]
     loops["prepared rotating waves<br/>Anchor + L3"]
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
-    p5d["P5-D implementation present<br/>readiness pending; target closed"]
+    p5d["P5-D implementation ready<br/>one clean target next"]
     p5c["P5-C common-noise<br/>paired cancellation"]
     p5i["P5-I independent noise<br/>robustness"]
     fields["field / mediator extensions<br/>new dynamics"]
@@ -383,8 +383,10 @@ The reviewed finite-time result is unresolved through `chi=1e-16`, stable
 from `1e-15` through `1e-4`, and phase-/chirality-failing at `1e-3` and
 `1e-2`. The target-free P5-D design and its separate protocol are now frozen;
 Pair-step, runner, independent result auditor and synthetic falsifiers are
-implemented without opening the target. Every registered pair trajectory
-remains closed pending readiness review. Relaxation-diffusion, Telegraph and other mediator equations remain
+implemented without opening the target. A separate readiness review covers
+all twelve pre-target requirements and authorizes exactly one clean standard
+run only after its own green CI; no pair trajectory or interaction evidence
+exists yet. Relaxation-diffusion, Telegraph and other mediator equations remain
 separate model extensions until they are derived from or selected against the
 common transition law.
 
@@ -412,7 +414,7 @@ flowchart LR
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
     noise["N0 reviewed pass<br/>resolved finite-time bracket"]
-    interaction["P5 implementation present<br/>readiness pending; target closed"]
+    interaction["P5 implementation ready<br/>one clean target next"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -451,8 +453,11 @@ eine finite-time Klammer: `chi=1e-4` besteht, `chi=1e-3` scheitert am
 Phasen-/Chiralitaetsgate. P5-D-Design und ein getrenntes Protokoll sind nun
 targetfrei eingefroren. Sie waehlen eine lineare gegenseitige
 notched-Center-/adjungierte Write-Architektur und einen Closed-loop-Kontrast
-gegen beide Einwegantworten. Implementierung ist der naechste versiegelte
-Schritt; Targetzugriff und Interaktionsevidenz bleiben geschlossen. Die acht
+gegen beide Einwegantworten. Implementierung und zwoelf Pre-target-
+Falsifikatoren sind nun CI-gruen. Das
+getrennte Readinessreview autorisiert genau einen sauberen Standardlauf erst
+nach seinem eigenen gruenen CI. Targetdaten und Interaktionsevidenz liegen
+noch nicht vor. Die acht
 P4-R-Phasenknoten enthalten
 vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
 liefern keine Konvergenzordnung.

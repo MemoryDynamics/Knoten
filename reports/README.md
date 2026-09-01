@@ -260,9 +260,12 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     friert 832 deterministische Kontrollarme und den Closed-loop-Kontrast
     gegen die Einwegsumme ein. Pair-step, Runner, getrennter
     Standardbibliothek-Auditor und synthetische Falsifikatoren sind
-    inzwischen targetfrei implementiert. Bis zum separaten Readinessreview
-    bleiben Target und Evidenz sowie Spin-, Impuls-, Traegheits- und
-    Masseclaims geschlossen.
+    inzwischen targetfrei implementiert. Das getrennte
+    [Readinessreview](project/meta/reviews/scalar_memory_loop_p5d_mutual_center_implementation_readiness_2026-09-01.md)
+    prueft alle zwoelf Pre-target-Anforderungen und urteilt
+    `p5d-implementation-ready`. Genau ein sauberer Standardlauf ist erst nach
+    gruenem Review-CI zulaessig; bis zu Rohresultat und Ergebnisreview bleiben
+    Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

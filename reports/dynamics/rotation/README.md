@@ -220,9 +220,11 @@ prospektiv eingefrorene und vor Targetzugriff reviewte P4-R-S-Anchor-Holdout
 ist inzwischen unveraendert ausgefuehrt: maximale Anchor--L3-Abweichung
 `0.00232715` gegen `0.05`, unabhaengiger Ergebnisrebuild ohne
 Feldabweichung. Das kritische Review haelt nur den Zwei-Zellen-Skalenpass
-aufrecht. P5-Design und prospektive Protokollierung sind damit offen;
-P5-Implementierung, Targetzugriff und Interaktionsevidenz bleiben
-geschlossen. Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
+aufrecht. P5-Design und prospektive Protokollierung wurden damit geoeffnet;
+die spaetere P5-D-Implementierung und ihr Readinessreview sind nun targetfrei
+eingefroren. Genau ein sauberer Standardlauf ist nach gruenem Review-CI als
+naechster Schritt zugelassen, aber Interaktionsevidenz bleibt geschlossen.
+Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
 finite-time Robustheitsklammer von `chi=1e-4` bis `1e-3`; der Fail ist lokal
 phasensensitiv und im groben x-y-Kreis kaum sichtbar. Das ist weder eine
 stationaere stochastische Formation noch eine physikalische Bestimmung von

@@ -27,7 +27,7 @@ eingefrorene Entscheidung des vorherigen Schritts voraus.
 | 14 | `scalar_memory_loop_p4r_result_audit.py` | Standardbibliothek-Neuberechnung des gespeicherten Roh-JSON ohne Target-Runner oder numerische Drittanbieterpakete | `p4r-independent-audit-agrees`; gemeinsame Simulation, keine externe Replikation |
 | 15 | `scalar_memory_loop_p4rs_anchor_scale_gate.py` | gepaarter Anchor-Holdout bei gleicher Memory-Zeit mit geerbtem Port/Ledger und Trace-/Phasenprofil-Skalengates | reviewed `p4rs-anchor-scale-transfer-pass`; zwei vorbereitete Skalen, keine Replikation oder Konvergenzordnung |
 | 16 | `scalar_memory_rotating_wave_noise_stress.py` und separater Ergebnis-Auditor | dimensionslose logarithmische N0-Klammer fuer binary64-Aufloesung und endliche orbitale Robustheit | reviewed `n0-noise-stability-window-bracketed-pass`; `chi=1e-4` besteht, `1e-3` scheitert lokal |
-| 17 | `scalar_memory_loop_p5d_mutual_center_gate.py` und separater Ergebnis-Auditor | eingefrorenes Anchor--Anchor-Panel mit linearem gegenseitigem notched-Center-/Write-Port, Einwegablationen und Closed-loop-Kontrast | Implementierung und 832-Arm-Synthetik targetfrei vorhanden; registriertes Target bis zum Readinessreview versiegelt |
+| 17 | `scalar_memory_loop_p5d_mutual_center_gate.py` und separater Ergebnis-Auditor | eingefrorenes Anchor--Anchor-Panel mit linearem gegenseitigem notched-Center-/Write-Port, Einwegablationen und Closed-loop-Kontrast | Implementierung und 832-Arm-Synthetik targetfrei CI-gruen; Readinessreview autorisiert genau einen sauberen Standardlauf nach eigenem gruenem CI |
 
 Die historische Entscheidung `certified-roots-nonconvergent` aus Stufe 4
 bleibt unveraendert. Stufe 5 erklaert den vorab sichtbaren Gain-Mismatch des
@@ -186,8 +186,9 @@ High-precision-Referenzen bestehen; die groesste Anchor--L3-Abweichung ist
 `0.00232715` gegen `0.05`. Ein separat implementierter
 Standardbibliothek-Auditor rekonstruiert die gespeicherte Entscheidung als
 `p4rs-anchor-scale-transfer-pass` ohne Feldabweichung. Das Ergebnisreview
-oeffnet nur P5-Design und prospektive Protokollierung. P5-Implementierung,
-Targetzugriff und Interaktionsevidenz sowie Topologie-, Spin-, Impuls-,
+oeffnete nur P5-Design und prospektive Protokollierung; die nachgelagerte
+Implementierung musste deshalb erneut targetfrei eingefroren und separat
+reviewed werden. Interaktionsevidenz sowie Topologie-, Spin-, Impuls-,
 Traegheits- und Masseclaims bleiben versiegelt.
 
 Der N0-Runner `scalar_memory_rotating_wave_noise_stress.py` hebt den
@@ -200,5 +201,7 @@ Chiralitaetsfail ab `1e-3`. Der getrennte Auditor
 `scalar_memory_rotating_wave_noise_stress_result_audit.py` rekonstruiert alle
 132 Zellen ohne Gateabweichung. Damit sind P5-D-Design und Protokoll
 eingefroren. Pair-step, Runner, Standardbibliothek-Auditor und synthetische
-Falsifikatoren sind targetfrei implementiert; der registrierte P5-D-Lauf
-bleibt bis zu einem separat gepushten und CI-gruenen Readinessreview gesperrt.
+Falsifikatoren sind targetfrei implementiert und CI-gruen. Das separate
+Readinessreview prueft alle zwoelf Vorbedingungen und autorisiert genau einen
+sauberen registrierten P5-D-Lauf erst nach seinem eigenen gruenen CI. Es ist
+selbst kein P5-D-Befund.

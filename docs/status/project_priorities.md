@@ -24,7 +24,9 @@ keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
 | P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | N0 wurde prospektiv ausgefuehrt |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | P5-Design darf targetfrei beginnen |
 | P5-D Design | `p5d-mutual-center-design-identifiable`, CI gruen | Protokoll wurde getrennt eingefroren |
-| P5-D Protokoll | Commit `1342258`, CI gruen, Target weiter ungeoeffnet | Implementierung darf beginnen |
+| P5-D Protokoll | korrigierter/amendierter Freeze `d7a4c5e`, CI gruen | Implementierung durfte beginnen |
+| P5-D Implementierung | Commit `88dc1d6`, 893 Tests und CI gruen | targetfreies Readinessreview durfte urteilen |
+| P5-D Readiness | `p5d-implementation-ready`, Target weiterhin ungeoeffnet | genau ein Standardziellauf erst nach gruenem CI des Reviewcommits |
 
 ```mermaid
 flowchart LR
@@ -35,10 +37,11 @@ flowchart LR
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
     p5d["P5 Designaudit<br/>eingefroren"]
     p5p["P5 Protokoll<br/>eingefroren"]
-    p5i["P5 Implementierung<br/>naechster Schritt"]
-    p5t["P5 Target<br/>weiter versiegelt"]
+    p5i["P5 Implementierung<br/>CI-gruen"]
+    p5r["P5 Readinessreview<br/>vorgelegt"]
+    p5t["P5 Target<br/>genau ein Lauf als naechstes"]
 
-    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i -. readiness required .-> p5t
+    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i --> p5r -. review CI required .-> p5t
 ```
 
 P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
@@ -120,19 +123,32 @@ nachjustieren. Der Protokoll-Freeze ist Commit `1342258`; sein
 [CI-Lauf 33508068905](https://github.com/MemoryDynamics/Knoten/actions/runs/33508068905)
 ist erfolgreich.
 
-## Prioritaet 3: P5-Implementierung und Pre-target-Review
+## Abgeschlossen: P5-Implementierung und Pre-target-Review
 
-**Aktiver naechster Schritt.** Erst nach gruenem Protokoll-CI:
+Der Implementierungscommit `88dc1d6` enthaelt Pair-step, registrierten Runner,
+Standardbibliothek-Auditor und synthetische Falsifikatoren. Sein
+[CI-Lauf 33559217777](https://github.com/MemoryDynamics/Knoten/actions/runs/33559217777)
+bestand den exakten Lintumfang, 893 Tests und den strikten Dokumentationsbau.
+Kein registrierter Paarzustand wurde dabei erzeugt.
 
-1. Runner und synthetische Falsifikatoren implementieren;
-2. alle geerbten P4-R-S-Abhaengigkeiten und Blobs pinnen;
-3. beweisen, dass Tests keine registrierte P5-Trajektorie aufrufen;
-4. Null-, Einweg-, Reziprozitaets-, Swap- und Ledger-Korruptionen testen;
-5. Vollsuite, exakten CI-Lintumfang und strikte Dokumentation ausfuehren;
-6. Implementierungsreadiness separat committen, pushen und reviewen.
+Das getrennte
+[Readinessreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_mutual_center_implementation_readiness_2026-09-01.md)
+prueft alle zwoelf Protokollanforderungen, die sechs Implementierungsblobs,
+Targetversiegelung, Atomizitaet und Auditorgrenze. Das Urteil
+`p5d-implementation-ready` ist selbst keine Interaktionsevidenz.
 
-Bis dieses Review gruen ist, bleibt jedes P5-Target versiegelt. Ein
-Implementierungspass ist keine Interaktionsevidenz.
+## Prioritaet 3: Ein einziger P5-D-Standardziellauf
+
+**Aktiver naechster Schritt nach gruenem CI des Readinesscommits.** Dann darf
+genau ein Lauf aus sauberem, exakt gepushtem HEAD die eingefrorenen 64
+Channel-off- und 768 aktiven Arme ausfuehren. Weder Staerke, Distanz, Phase,
+Chiralitaet, Schwelle noch Entscheidungsordnung duerfen angepasst werden.
+
+Der Runner muss bei einem unvollstaendigen Arm ohne Standardartefakt enden.
+Bei vollstaendigem Panel werden JSON und Markdown atomar geschrieben und als
+rohes Ergebnis unveraendert committed und gepusht, bevor der separate Auditor
+oder ein Ergebnisreview laeuft. Bis dahin existiert keine P5-Trajektorie und
+keine Interaktionsevidenz.
 
 ## Prioritaet 4: Paper-I-Abgrenzung und weitere Redaktionsentscheidung
 

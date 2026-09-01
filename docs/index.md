@@ -89,9 +89,12 @@ darauf folgende N0-Stress klammert ein aufgeloestes stabiles Fenster
 Phasen-/Chiralitaetsgate. P5-D-Design und ein getrenntes prospektives
 Protokoll sind nun targetfrei eingefroren. Sie verwenden eine lineare
 gegenseitige notched-Center-/adjungierte Write-Kopplung und verlangen einen
-Closed-loop-Kontrast gegen beide Einwegantworten. Implementierung ist der
-naechste Schritt; Interaktionsziellauf und Evidenz bleiben geschlossen. Spin,
-Impuls, Traegheit und Masse folgen nicht.
+Closed-loop-Kontrast gegen beide Einwegantworten. Implementierung,
+Standardbibliothek-Auditor und zwoelf Pre-target-Falsifikatoren sind nun
+CI-gruen; ein getrenntes Readinessreview autorisiert nach seinem eigenen
+gruenen CI genau einen sauberen Standardlauf. Noch existieren weder
+Interaktionsziellauf noch Evidenz. Spin, Impuls, Traegheit und Masse folgen
+nicht.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
