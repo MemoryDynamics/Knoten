@@ -1,0 +1,35 @@
+{
+  "all_primary_checks_pass": true,
+  "byte_sha256": "376a03fc29047b57660e7143c5fe8175cc8c0b7f786b541cc43208379a70a9c9",
+  "decision_agrees": true,
+  "embedded_matches_bytes": false,
+  "embedded_matches_lf_normalized": true,
+  "embedded_matches_repository_blob": true,
+  "embedded_sha256": "487023fe0a7bf197a400f4c8a5ef086a6ddf6d59c679ca2395a2913ee38079bc",
+  "exact_order": true,
+  "exact_result_count": true,
+  "first_higher_failing_chi": 0.001,
+  "gate_mismatches": [],
+  "grid_agrees": true,
+  "integrity_finding": "working-tree-line-ending-transform-canonical-repository-hash-agrees",
+  "json_valid": true,
+  "last_stable_chi": 0.0001,
+  "lf_normalized_sha256": "487023fe0a7bf197a400f4c8a5ef086a6ddf6d59c679ca2395a2913ee38079bc",
+  "png_signature_valid": true,
+  "recomputed_decision": "n0-noise-stability-window-bracketed",
+  "repository_blob_sha256": "487023fe0a7bf197a400f4c8a5ef086a6ddf6d59c679ca2395a2913ee38079bc",
+  "resolution_mismatches": [],
+  "scaling_slopes": {
+    "Anchor": {
+      "exploratory_next_window": 0.9983628761935438,
+      "registered_window": 0.9362604357275723
+    },
+    "L3": {
+      "exploratory_next_window": 0.992540415812228,
+      "registered_window": 0.870355435092345
+    }
+  },
+  "schema": "scalar-memory-rotating-wave-noise-stress-independent-audit-v1",
+  "source_revision": "1ea46d86588d0a2e60021439fae4d6a5ef04406e",
+  "stored_decision": "n0-noise-stability-window-bracketed"
+}
