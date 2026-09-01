@@ -196,12 +196,14 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             VERDICT,
             "P4-R-S-Anchor-Holdout",
             "0.00232715",
-            "Implementierung, Interaktionsziellauf und Evidenz bleiben",
+            "P5-D-Design und ein getrenntes prospektives",
+            "Interaktionsziellauf und Evidenz bleiben geschlossen",
         ),
         "docs/status/current_status.md": (
             VERDICT,
             "p4rs-anchor-scale-transfer-pass",
-            "P5-Implementierung, Targetzugriff und Interaktionsevidenz",
+            "Targetzugriff bleibt bis zu einem separaten Readinessreview",
+            "Interaktion, Ladung, Spin, Impuls, Traegheit und Masse",
         ),
         "docs/status/paper_claims.md": (
             VERDICT,
@@ -211,13 +213,15 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
         "docs/status/project_priorities.md": (
             "p4rs-anchor-scale-transfer-pass",
             "n0-noise-stability-window-bracketed-reviewed-pass",
-            "Prioritaet 1: P5-Designaudit ohne Targetzugriff",
+            "p5d-mutual-center-design-identifiable",
+            "Prioritaet 3: P5-Implementierung und Pre-target-Review",
             "P5 Target<br/>weiter versiegelt",
         ),
         "reports/README.md": (
             VERDICT,
             "P4-R-S-Anchor-Lauf",
-            "P5-Implementierung",
+            "P5-D-Designaudit",
+            "Implementierung, Target und Evidenz",
         ),
         "reports/dynamics/rotation/README.md": (
             VERDICT,
@@ -233,7 +237,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
             "N0 reviewed pass",
-            "P5 design active",
+            "P5 design + protocol frozen",
+            "implementation next; target closed",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
