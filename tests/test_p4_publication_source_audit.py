@@ -203,7 +203,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             VERDICT,
             "p4rs-anchor-scale-transfer-pass",
             "p5d-inconclusive",
-            "outcome-blinden Serializer-Recovery",
+            "Recovery-Autorisierung ist verbraucht",
             "Interaktion, Ladung",
             "Spin, Impuls, Traegheit und Masse",
         ),
@@ -216,7 +216,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4rs-anchor-scale-transfer-pass",
             "n0-noise-stability-window-bracketed-reviewed-pass",
             "p5d-mutual-center-design-identifiable",
-            "Prioritaet 3: Outcome-blinde Serializer-Recovery",
+            "P5-D-Recovery abgeschlossen: Pipeline geschlossen",
             "P5 first target<br/>serializer inconclusive",
         ),
         "reports/README.md": (
@@ -235,14 +235,14 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
         "experiments/current/dynamics/rotation/README.md": (
             VERDICT,
             "p4rs-anchor-scale-transfer-pass",
-            "erster Aufruf am finalen NumPy-Bool-JSON-Serializer",
+            "Recovery verbraucht und P5-D geschlossen",
         ),
         "docs/reference/repository_map.md": (
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
             "N0 reviewed pass",
-            "P5 first target inconclusive",
-            "serializer recovery active",
+            "P5-D two calls inconclusive",
+            "schema recovery exhausted",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
@@ -251,6 +251,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4rs-anchor-scale-transfer-pass",
             "keine Konvergenzordnung",
             "p5d-inconclusive",
+            "kein dritter Lauf",
         ),
     }
     for relative, phrases in required_phrases.items():

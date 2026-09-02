@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-01.
+Stand: 2026-09-02.
 
 Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
 historische Zwischenlesarten stehen in den datierten Reports sowie im
@@ -18,7 +18,7 @@ vollstaendig erhalten.
 | Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
 | Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
 | N0-Rauschstress | Der prospektive binary64-Scan trennt unaufgeloeste Innovation bis `chi=1e-16` von 12 voll aufgeloesten stabilen Dekadenzellen `1e-15..1e-4`; `1e-3` und `1e-2` scheitern reproduzierbar am Phasen-/Chiralitaetsgate. Ein getrennter Auditor rekonstruiert 132/132 Zellen, alle Gates, die Klammer und beide Skalierungsfits ohne Abweichung. | `n0-noise-stability-window-bracketed-reviewed-pass`: finite-time Phasenkohaerenz-Robustheitsklammer an Anchor und L3 | keine physikalische Epsilon-/Planck-Kalibrierung, keine stationaere stochastische Formation, keine Replikation oder Kontinuumsordnung; sichtbare x-y-Kreise zerfallen an der ersten Fail-Dekade nicht |
-| P5-D-Governance | Design, Protokoll, Implementierung und erstes Readinessreview waren getrennt CI-gruen. Der erste autorisierte Standardaufruf erreichte die finale Payload-Serialisierung, scheiterte dort aber outcome-blind an `numpy.bool_`; Standard- und temporaere Artefakte blieben aus. | `p5d-inconclusive`: keine gespeicherte oder beobachtete Entscheidung. Eine getrennte Recovery friert nur die Python-JSON-Skalarkonversion ein; vor neuem Code-/Readiness-CI bleibt der Ersatzlauf geschlossen | keine P5- oder Interaktionsevidenz; Laufzeit und fehlender Fruehstopp sind keine Gateinformation. Ein Ersatzlauf waere Fehlerwiederherstellung, keine Replikation; die explizit eingefuegte Kopplung waere selbst nach einem Pass keine spontan emergierte Kraft |
+| P5-D-Governance | Der erste autorisierte Standardaufruf scheiterte am finalen NumPy-Bool-JSON-Typ. Nach getrenntem Recovery-Freeze und gruenem Implementierungs-/Readiness-CI scheiterte auch der einzige Ersatzlauf fail-closed: Jeder Channel-off-Arm serialisiert einen garantierten `minimum_dissipation=inf`-Sentinel unter `allow_nan=False`. Beide Male blieben Standard- und temporaere Artefakte aus. | beide Aufrufe `p5d-inconclusive`: keine gespeicherte oder beobachtete Entscheidung. Der zweite Incident falsifiziert die Recovery-Readiness-Abdeckung, nicht die Interaktionshypothese. Die einzige Ersatzautorisierung ist verbraucht; P5-D ist geschlossen | keine P5- oder Interaktionsevidenz; Laufzeit und vollstaendige In-memory-Panels sind keine Gateinformation. Kein dritter Lauf, Serializerpatch oder Sentinelersatz ohne neues prospektives Governance-Protokoll |
 | Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
 | Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. P4 schliesst den exakten Write-/Age-Arbeitsledger, bleibt aber formal Fail. P4-R besteht am vorbereiteten L3-Kreis die diskrete Chiral-Klassifikation. Der reviewed P4-R-S-Holdout uebertraegt denselben registrierten Antworttyp auf den Anchor; die groesste Anchor--L3-Abweichung ist `0.00232715` gegen `0.05`. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag, algebraisch geschlossener Ledger und ein reviewed diskreter Zwei-Zellen-Skalenpass des explizit konstruierten Ports | P4 bleibt formal gescheitert; zwei Zellen liefern keine Konvergenzordnung oder Replikation. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, intrinsischer Spin, physikalische Arbeit, Traegheit oder Masse identifiziert |
 | Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
@@ -201,10 +201,11 @@ vollstaendig erhalten.
   P4 aber ebenfalls nicht um. N0 traegt danach eine reviewed finite-time
   Rauschklammer von `chi=1e-4` bis `1e-3`, ohne physikalische Kalibrierung.
   Weder die beiden Skalen noch die Kreisgeometrie definieren Spin oder
-  gyroskopische Masse. Der erste P5-D-Standardaufruf ist wegen eines
-  finalen JSON-Skalartypfehlers `p5d-inconclusive`; er erzeugte kein
-  Ergebnisartefakt. Eine outcome-blinde Recovery ist eingefroren, waehrend
-  Target und Evidenz erneut geschlossen bleiben.
+  gyroskopische Masse. Der erste P5-D-Standardaufruf und der einzige
+  Recovery-Ersatzlauf sind wegen zweier finaler JSON-Schemafehler jeweils
+  `p5d-inconclusive`; beide erzeugten kein Ergebnisartefakt oder beobachtete
+  Entscheidung. Die Recovery-Autorisierung ist verbraucht, Target und Evidenz
+  bleiben geschlossen.
 - Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
   isoliert.
 - Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
@@ -348,21 +349,25 @@ Replikationen; der kompakte Auditor prueft gespeicherte Reducer und
 Checkpoints, nicht jede nichtserialisierte lokale Operation unabhaengig neu.
 Der erste danach autorisierte Lauf erreichte `json.dumps` nach Panel,
 Response und Klassifikation, scheiterte aber an einem NumPy-Bool in der
-verschachtelten Payload. Es existieren weder Rohartefakt noch beobachtete
-Entscheidung; der Status ist `p5d-inconclusive`. Eine getrennte Recovery
-erlaubt nur die JSON-Konversion von NumPy-Skalaren und verlangt neue
-Implementierungs- und Readiness-CI vor genau einem Ersatzlauf. Ein
-Abstandstrend waere ohnehin wegen des explizit eingesetzten Kraftvorzeichens
-fuer sich trivial. Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind
-nicht gestuetzt.
+verschachtelten Payload. Eine getrennte Recovery erlaubte nur die
+JSON-Konversion von NumPy-Skalaren und bestand neue Implementierungs- und
+Readiness-CI. Der genau einmal autorisierte Ersatzlauf erreichte wiederum die
+finale Serialisierung, scheiterte dort jedoch unter `allow_nan=False` am
+garantierten Channel-off-Sentinel `minimum_dissipation=inf`. Beide Aufrufe
+erzeugten weder Rohartefakt noch beobachtete Entscheidung und sind
+`p5d-inconclusive`. Die Recovery-Autorisierung ist verbraucht und P5-D ohne
+neues prospektives Governance-Protokoll geschlossen. Ein Abstandstrend waere
+ohnehin wegen des explizit eingesetzten Kraftvorzeichens fuer sich trivial.
+Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind nicht gestuetzt.
 
 Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
 aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht. P4-R,
 Source-Audit, der reviewed P4-R-S-Skalenpass und die reviewed N0-Klammer
 haben ausschliesslich den targetfreien P5-Designaudit, Protokoll,
 Implementierung und Readinesspruefung geoeffnet. Nach dem technisch
-inconclusiven Erstaufruf fuehrt die einzige aktive Abhaengigkeitskette jetzt
-zur outcome-blinden Serializer-Recovery und steht in den
+inconclusiven Erstaufruf und dem ebenfalls inconclusiven, fail-closed
+Ersatzlauf ist die P5-D-Abhaengigkeitskette geschlossen. Der naechste
+autorisierte Schritt ist die Paper-I-Abgrenzung in den
 [Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
 konkurrierende Aufgabenreihenfolge.
 
@@ -889,9 +894,11 @@ P4-R-S-Anchor-Holdout besteht mit maximal `0.00232715` Anchor--L3-Abweichung
 gegen die vorab fixierte Grenze `0.05`. N0 klammert danach die aufgeloeste
 finite-time Rauschrobustheit ein. P5-D-Design, getrenntes Protokoll,
 Implementierung und erstes Readinessreview waren targetfrei eingefroren; der
-erste Standardaufruf scheiterte jedoch am finalen JSON-Skalartyp und bleibt
-formal inconclusive. Die eng eingefrorene Serializer-Recovery ist der naechste
-kontrollierte Schritt. Interaktionsevidenz bleibt geschlossen.
+erste Standardaufruf scheiterte jedoch am finalen JSON-Skalartyp. Die separat
+eingefrorene Recovery bestand Implementierungs- und Readiness-CI, doch ihr
+einziger Ersatzlauf scheiterte am garantierten Channel-off-`inf`-Sentinel.
+Beide Aufrufe bleiben formal inconclusive; die Recovery-Autorisierung ist
+verbraucht und Interaktionsevidenz bleibt geschlossen.
 
 ## Paper-Status
 

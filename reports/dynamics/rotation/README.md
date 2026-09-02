@@ -225,8 +225,12 @@ die spaetere P5-D-Implementierung und ihr Readinessreview wurden targetfrei
 eingefroren. Der erste autorisierte Standardaufruf erreichte die finale
 Payload-Serialisierung, scheiterte dort aber an `numpy.bool_` und erzeugte
 keine Standardartefakte oder beobachtete Entscheidung. Er ist formal
-`p5d-inconclusive`; nur eine outcome-blinde Serializer-Recovery ist offen und
-Interaktionsevidenz bleibt geschlossen.
+`p5d-inconclusive`. Die outcome-blinde Serializer-Recovery bestand danach
+Implementierungs- und Readiness-CI; ihr einziger Ersatzlauf scheiterte jedoch
+am garantierten Channel-off-`minimum_dissipation=inf` unter
+`allow_nan=False`. Auch er erzeugte keine Artefakte oder beobachtete
+Entscheidung. Beide Aufrufe sind inconclusive, die Recovery-Autorisierung ist
+verbraucht und Interaktionsevidenz bleibt geschlossen.
 Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
 finite-time Robustheitsklammer von `chi=1e-4` bis `1e-3`; der Fail ist lokal
 phasensensitiv und im groben x-y-Kreis kaum sichtbar. Das ist weder eine

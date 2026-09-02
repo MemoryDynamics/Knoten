@@ -94,9 +94,15 @@ Standardbibliothek-Auditor und zwoelf Pre-target-Falsifikatoren sind nun
 CI-gruen und wurden getrennt reviewed. Der erste autorisierte Standardaufruf
 scheiterte erst bei der finalen JSON-Serialisierung eines NumPy-Bools; er
 erzeugte weder Standardartefakte noch eine beobachtbare Entscheidung und ist
-formal `p5d-inconclusive`. Eine outcome-blinde Serializer-Recovery ist nun
-separat eingefroren. Interaktionsevidenz existiert weiterhin nicht. Spin,
-Impuls, Traegheit und Masse folgen nicht.
+formal `p5d-inconclusive`. Die separat eingefrorene Serializer-Recovery
+bestand Implementierungs- und Readiness-CI. Ihr einziger autorisierter
+Ersatzlauf scheiterte jedoch ebenfalls fail-closed: Die Produktionsstruktur
+enthaelt fuer jeden Channel-off-Arm den nicht anwendbaren Sentinel
+`minimum_dissipation=inf`, den `allow_nan=False` korrekt ablehnt. Auch dieser
+Lauf erzeugte kein Artefakt und keine beobachtbare Entscheidung. P5-D ist
+damit ohne neues prospektives Governance-Protokoll geschlossen;
+Interaktionsevidenz existiert weiterhin nicht. Spin, Impuls, Traegheit und
+Masse folgen nicht.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 

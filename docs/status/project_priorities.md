@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-01.
+Stand: 2026-09-02.
 
 Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Abgeschlossene
 Befunde, historische Fails und Ergebnisgrenzen stehen im
@@ -28,6 +28,8 @@ keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
 | P5-D Implementierung | Commit `88dc1d6`, 893 Tests und CI gruen | targetfreies Readinessreview durfte urteilen |
 | P5-D Readiness | `p5d-implementation-ready`, Review-CI gruen | erster Standardaufruf wurde ausgefuehrt |
 | P5-D Erstaufruf | `p5d-inconclusive`: NumPy-Bool am finalen JSON-Serializer, keine Artefakte/Entscheidung | nur separat eingefrorene outcome-blinde Serializer-Recovery |
+| P5-D Recovery | Implementierung `f6da955` und neues Readinessreview `6dc1b18`, beide CI-gruen | genau ein Ersatzlauf war autorisiert |
+| P5-D Ersatzlauf | `p5d-inconclusive`: garantierter Channel-off-`inf`-Sentinel unter `allow_nan=False`, keine Artefakte/Entscheidung | Recovery-Autorisierung verbraucht; P5-D geschlossen, kein dritter Lauf |
 
 ```mermaid
 flowchart LR
@@ -41,9 +43,10 @@ flowchart LR
     p5i["P5 Implementierung<br/>CI-gruen"]
     p5r["P5 Readinessreview<br/>CI-gruen"]
     p5t["P5 first target<br/>serializer inconclusive"]
-    p5x["P5 serializer recovery<br/>active; target closed"]
+    p5x["P5 serializer recovery<br/>implementation + review green"]
+    p5y["P5 replacement inconclusive<br/>non-finite schema; branch closed"]
 
-    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i --> p5r --> p5t --> p5x
+    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i --> p5r --> p5t --> p5x --> p5y
 ```
 
 P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
@@ -153,21 +156,32 @@ Der
 dokumentiert Revision, Stackgrenze, leere Pfade und Claim-Grenze. Laufzeit
 oder fehlender Fruehstopp duerfen nicht als Gateinformation gelesen werden.
 
-## Prioritaet 3: Outcome-blinde Serializer-Recovery
+## P5-D-Recovery abgeschlossen: Pipeline geschlossen
 
-**Aktiver naechster Schritt.** Das getrennte
+Das getrennte
 [Recovery-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md)
 erlaubt ausschliesslich eine fail-closed JSON-Konversion von NumPy-Bool-,
 Integer- und Float-Skalaren. Parameter, Panel, Gleichungen, Schwellen,
 Entscheidung und Ausgabepfade bleiben bitweise beziehungsweise semantisch
 unveraendert.
 
-Erst nach eigenem Protocol-CI, targetfreier Recovery-Implementierung,
-Vollsuite und neuem Readinessreview mit gruenem CI darf genau ein
-Ersatz-Standardlauf beginnen. Er ist Fehlerwiederherstellung, keine
-Replikation. Bis dahin bleiben Target und Interaktionsevidenz geschlossen.
+Recovery-Implementierung, Vollsuite und neues Readinessreview bestanden ihre
+getrennten CI-Laeufe. Der genau einmal autorisierte Ersatzlauf scheiterte
+dennoch fail-closed an einem positiven `inf`. Statische Kontrolle zeigt die
+outcome-unabhaengige Ursache: Alle 64 Channel-off-Arme behalten den
+Initialwert `minimum_dissipation=inf`, weil nur aktive Arme ihn aktualisieren,
+serialisieren ihn aber unter `allow_nan=False`.
 
-## Prioritaet 4: Paper-I-Abgrenzung und weitere Redaktionsentscheidung
+Der
+[zweite Incident-Report](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md)
+klassifiziert auch den Ersatzlauf als `p5d-inconclusive`. Er falsifiziert die
+Recovery-Readiness-Abdeckung, nicht die Interaktionshypothese. Keine Standard-
+oder temporaeren Artefakte und keine beobachtete Entscheidung existieren. Die
+einzige Recovery-Autorisierung ist verbraucht; ein dritter Targetlauf oder
+eine weitere Serializer-/Sentinelkorrektur ist ohne neues prospektives
+Governance-Protokoll nicht autorisiert.
+
+## Prioritaet 3: Paper-I-Abgrenzung und weitere Redaktionsentscheidung
 
 Paper I bleibt primaer das Minimalmodell mit Markov-Einbettung und
 kontrollierter linearer co-moving Relaxationswolke. Der deterministische
@@ -192,7 +206,7 @@ zu entscheiden:
 Bis zu dieser weiteren Entscheidung bleiben Abstract und Hauptschluss frei
 von Interaktions-, Spin-, Traegheits- oder Massensprache.
 
-## Prioritaet 5: Paralleles Publikations-Hardening
+## Prioritaet 4: Paralleles Publikations-Hardening
 
 Diese Aufgaben duerfen parallel laufen, aendern aber keinen Gate-Status:
 

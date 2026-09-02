@@ -1,6 +1,6 @@
 # Repository Map
 
-Stand: 2026-08-30.
+Stand: 2026-09-02.
 
 Diese Seite ist die visuelle Orientierung fuer das Repository. Die Diagramme
 sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente.
@@ -354,7 +354,7 @@ flowchart LR
     longrun["scalar long-run null<br/>linear relaxation cloud"]
     loops["prepared rotating waves<br/>Anchor + L3"]
     n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
-    p5d["P5-D first target inconclusive<br/>serializer recovery active"]
+    p5d["P5-D two calls inconclusive<br/>schema recovery exhausted"]
     p5c["P5-C common-noise<br/>paired cancellation"]
     p5i["P5-I independent noise<br/>robustness"]
     fields["field / mediator extensions<br/>new dynamics"]
@@ -386,11 +386,14 @@ Pair-step, runner, independent result auditor and synthetic falsifiers are
 implemented without opening the target. A separate readiness review covered
 all twelve pre-target requirements. The first authorized call later reached
 final payload serialization but left no artifact or observable decision
-because a nested NumPy boolean was not JSON-serializable. A separately frozen,
-outcome-blind serializer recovery is active; interaction evidence remains
-absent. Relaxation-diffusion, Telegraph and other mediator equations remain
-separate model extensions until they are derived from or selected against the
-common transition law.
+because a nested NumPy boolean was not JSON-serializable. A separately frozen
+recovery passed implementation and readiness CI, but its sole replacement
+call also failed at final serialization: every Channel-off record contains the
+not-applicable `minimum_dissipation=inf` sentinel rejected by
+`allow_nan=False`. Both calls are inconclusive, the recovery authorization is
+exhausted and interaction evidence remains absent. Relaxation-diffusion,
+Telegraph and other mediator equations remain separate model extensions until
+they are derived from or selected against the common transition law.
 
 ## Native Rotating-wave-Schiene
 
@@ -416,7 +419,7 @@ flowchart LR
     referee["source referee<br/>restricted pass"]
     p4rs["P4-R-S reviewed pass<br/>two-cell scale transfer"]
     noise["N0 reviewed pass<br/>resolved finite-time bracket"]
-    interaction["P5 first target inconclusive<br/>serializer recovery active"]
+    interaction["P5 two calls inconclusive<br/>schema recovery exhausted"]
 
     equations --> discovery --> p0d0
     p0d0 --> stability
@@ -459,8 +462,12 @@ gegen beide Einwegantworten. Implementierung und zwoelf Pre-target-
 Falsifikatoren wurden CI-gruen und separat reviewed. Der erste autorisierte
 Aufruf scheiterte jedoch erst am finalen JSON-Serializer fuer ein
 `numpy.bool_`; kein Rohartefakt und keine beobachtete Entscheidung existieren.
-Eine outcome-blinde Serializer-Recovery ist separat eingefroren. Targetdaten
-und Interaktionsevidenz liegen weiterhin nicht vor. Die acht
+Die separat eingefrorene Recovery bestand ihre Implementierungs- und
+Readiness-CI, doch ihr einziger Ersatzlauf scheiterte am garantierten
+Channel-off-`inf`-Sentinel unter `allow_nan=False`. Auch er erzeugte kein
+Rohartefakt und keine beobachtete Entscheidung. Die Recovery-Autorisierung ist
+verbraucht; Targetdaten und Interaktionsevidenz liegen weiterhin nicht vor.
+Die acht
 P4-R-Phasenknoten enthalten
 vier spiegelverschiedene Paare und sind keine Replikationen; zwei Zellen
 liefern keine Konvergenzordnung.

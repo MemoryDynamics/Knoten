@@ -269,9 +269,16 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     Payload-Serialisierung, schrieb wegen eines `numpy.bool_`-Fehlers aber
     weder Standardartefakt noch beobachtete Entscheidung. Das getrennte
     [Recovery-Protokoll](project/meta/preregistration/scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md)
-    friert nur die JSON-Skalarkonversion vor neuer Implementierung und neuem
-    Readinessreview ein. Evidenz sowie Spin-, Impuls-, Traegheits- und
-    Masseclaims bleiben geschlossen.
+    fror nur die JSON-Skalarkonversion ein. Implementierung und neues
+    [Recovery-Readinessreview](project/meta/reviews/scalar_memory_loop_p5d_serialization_recovery_readiness_2026-09-02.md)
+    bestanden CI; der einzige Ersatzlauf scheiterte dennoch fail-closed am
+    garantierten Channel-off-`minimum_dissipation=inf`-Sentinel unter
+    `allow_nan=False`. Der
+    [zweite Incident-Report](project/meta/reviews/scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md)
+    klassifiziert auch ihn als `p5d-inconclusive`, ohne Artefakt oder
+    beobachtete Entscheidung. Die Recovery-Autorisierung ist verbraucht;
+    Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims bleiben
+    geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

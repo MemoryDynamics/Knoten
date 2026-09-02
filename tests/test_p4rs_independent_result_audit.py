@@ -166,11 +166,11 @@ def test_p4rs_frontdoors_report_reviewed_result_and_sealed_p5_target() -> None:
     assert "P4-R-S Anchor-Skalenholdout -- reviewed Pass" in claims
     assert "n0-noise-stability-window-bracketed-reviewed-pass" in priorities
     assert "p5d-mutual-center-design-identifiable" in priorities
-    assert "Prioritaet 3: Outcome-blinde Serializer-Recovery" in priorities
+    assert "P5-D-Recovery abgeschlossen: Pipeline geschlossen" in priorities
     assert "p5d-inconclusive" in status
     assert "N0 reviewed pass<br/>resolved finite-time bracket" in repository_map
     assert (
-        "P5 first target inconclusive<br/>serializer recovery active"
+        "P5-D two calls inconclusive<br/>schema recovery exhausted"
         in repository_map
     )
     assert "Runner und Target fehlen weiterhin" not in report_index
