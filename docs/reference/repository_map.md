@@ -14,7 +14,7 @@ flowchart TD
     root --> src["src/emergenz_knoten<br/>kanonischer Paketkern"]
     root --> experiments["experiments<br/>reproduzierbare Entry-Points"]
     root --> tests["tests<br/>kleine deterministische Tests"]
-    root --> docs["docs<br/>9 aktive Dokumente + Rohmaterial"]
+    root --> docs["docs<br/>6 aktive Navigationsbereiche + Archiv"]
     root --> paper["paper<br/>Paper 0, I, II, III und Kindle-PDFs"]
     root --> reports["reports<br/>datierte Evidenz + README-Index"]
     root --> data["data/processed<br/>generated outputs, ignored by default"]
@@ -147,24 +147,24 @@ flowchart TD
 ```mermaid
 flowchart TD
     index["index.md<br/>Frontdoor"]
-    current["current_status.md<br/>Status und naechste Schritte"]
-    priorities["project_priorities.md<br/>Arbeitsreihenfolge"]
-    theory["THEORETICAL_CONTEXT.md<br/>Modell, Markov, Grenzen"]
-    map["repository_map.md<br/>Bilder fuer Code/Datenfluss"]
-    experiments_doc["experiment_catalog.md<br/>Entry-Points und Evidenz"]
-    claims["paper_claims.md<br/>Claim-Register"]
+    steering["Projektsteuerung<br/>Status, eine Prioritaetenliste, Claims"]
+    model["Modell und Gleichungen<br/>Theorie, Rueckwaertsspezifikation, Center"]
+    rotation["Rotation und Interaktion<br/>Foundation, P4-R-S"]
+    experiments_doc["Experimente<br/>Entry-Points und Evidenz"]
+    map["Repository<br/>Code- und Datenfluss"]
+    archive["Archiv<br/>historisch, nicht steuernd"]
 
-    index --> current
-    index --> priorities
-    index --> theory
-    index --> map
+    index --> steering
+    index --> model
+    index --> rotation
     index --> experiments_doc
-    index --> claims
+    index --> map
+    index -.historisch.-> archive
 
-    priorities --> experiments_doc
-    theory --> claims
+    model --> rotation
+    rotation --> experiments_doc
+    experiments_doc --> steering
     map --> experiments_doc
-    experiments_doc --> claims
 ```
 
 ## Code- und Datenfluss

@@ -210,4 +210,7 @@ Readiness-CI; ihr einziger Ersatzlauf scheiterte danach am in jedem
 Channel-off-Record garantierten `minimum_dissipation=inf` unter
 `allow_nan=False`. Auch er hinterliess keine Artefakte oder Entscheidung.
 Beide Aufrufe sind `p5d-inconclusive`, die Recovery-Autorisierung ist
-verbraucht und P5-D geschlossen.
+verbraucht und P5-D geschlossen. Ein anschliessendes targetfreies
+adversariales Code-Review bestaetigt die algebraischen Portgleichungen, findet
+aber sieben Blocker der Ergebnisstrecke. Daher bleibt der Runner
+`p5d-runner-not-ready-no-target-authorized`.

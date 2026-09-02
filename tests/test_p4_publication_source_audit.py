@@ -217,7 +217,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "n0-noise-stability-window-bracketed-reviewed-pass",
             "p5d-mutual-center-design-identifiable",
             "P5-D-Recovery abgeschlossen: Pipeline geschlossen",
-            "P5 first target<br/>serializer inconclusive",
+            "P5 first target -> serializer inconclusive",
         ),
         "reports/README.md": (
             VERDICT,
@@ -226,6 +226,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "targetfrei implementiert",
             "p5d-implementation-ready",
             "p5d-inconclusive",
+            "p5d-runner-not-ready-no-target-authorized",
         ),
         "reports/dynamics/rotation/README.md": (
             VERDICT,

@@ -1,0 +1,230 @@
+# Archiviertes Repository-README bis 2026-09-02
+
+Arbeitsrepository fuer ein minimalistisches Weltmodell aus irreversibler
+Speicherdynamik, metastabilen "Knoten" und emergenten effektiven Strukturen.
+
+Stand: 2026-08-31.
+
+## Worum es geht
+
+Das Projekt untersucht einen stochastischen Punktprozess mit relaxierendem
+Gedaechtnis. Der sichtbare Prozess `x_n` ist im Allgemeinen nichtmarkovsch,
+weil sein naechster Schritt von gespeicherter Vergangenheit abhaengt. Der
+augmentierte Zustand aus Position und Speicher, z. B. `z_n=(x_n,rho_n)` oder
+`z_n=(x_n,history_n)`, ist dagegen der natuerliche Markov-Zustand.
+
+Die Uebergangsdynamik auf `z_n` definiert einen Markov-/Koopman-Operator auf
+Observablen. Diese Sprache macht Knoten als metastabile Operatorstrukturen,
+slow modes oder fast-invariante Mengen pruefbar.
+
+Aktuelle Rollen:
+
+- Paper 0: mathematischer Anker bzw. moegliches Supplement.
+- Paper I: Minimalmodell plus kontrollierte Long-Run-Evidenz fuer scalar
+  co-moving memory-cloud candidates.
+- Paper II/III: Folgeprogramme fuer Propagation, Raumzeit, Quanten- und
+  Standardmodellfragen; derzeit keine Claim-Basis.
+
+## Aktueller Stand
+
+- `main` ist die Arbeitslinie und tracked `origin/main`.
+- Der Paketkern liegt unter `src/emergenz_knoten`.
+- Die wichtigsten Entry-Points liegen unter `experiments/`.
+- Tests liegen unter `tests/`.
+- Die aktive Dokumentation besitzt kuratierte Frontdoors fuer Status,
+  Prioritaeten, Theorie, Centerfilter und native Rotating waves.
+
+Belastbar derzeit:
+
+- Paper 0 traegt als technischer Anker.
+- Die Markov-/Transferoperator-Schicht existiert initial unter
+  `src/emergenz_knoten/markov/` und ist getestet.
+- Der Kernelgradient wurde korrigiert: `A_rep`/`A_att` sind jetzt wieder
+  repulsiver/attraktiver Potentialkanal im Sinn der Paper-Gleichung.
+- Der aktuelle kleine-Radius-Ast laesst sich auf einen attraktiven
+  Ein-Kernel-Fall reduzieren: Die seed-gematchten (1,35)- und
+  (0,26)-Varianten stimmen im N=300k-Slice bis etwa 1e-8 relativ ueberein.
+- Ein curvature-matched Laplacian-of-Gaussian liefert eine abklingende,
+  exakt zero-mean Nullfamilie. Er bestaetigt `A_eff=26` als
+  Reparametrisierung, selektiert aber weder `27`, `36` noch `d=3`.
+- Der lokale Feldoperator-Audit ersetzt freie Kernelwahl durch eine
+  kontrollierte Ableitungsentwicklung. Der Gausskern fixiert nur die
+  langwelligen `k^2`-/`k^4`-Nullterme; ein negativer `k^2`-Koeffizient mit
+  `k^4`-Stabilisierung waere ein neuer endlicher-Wellenzahl-Mechanismus, kein
+  bereits hergeleitetes Resultat.
+- Der Write-/Read-Audit bestaetigt die exakte lineare Reparametrisierung
+  `phi=K*rho` in drei Seeds: Pfad-, Feld- und Gradientenfehler bleiben unter
+  `1.5e-14`. Ein Dirac-Readout ist die Identitaet; ein konstantes `K=1` ist
+  kraftfrei. Die Umformung vereinfacht den Zustand, erzeugt aber keine neue
+  Felddynamik.
+- Der A_att=0..40-Scan ohne A_rep zeigt keinen endlichen Phasenuebergang.
+  Fuer A_att>=5 folgt der dynamische Radius der linearen
+  Memory-Center-Vorhersage mit 0.94 Prozent medianem Fehler.
+- Die Paper-I-Evidenz ist deshalb als co-moving linear scalar relaxation-cloud
+  evidence zu lesen: kein fixes absolutes Zentrum, kein isolierter
+  nichtlinearer Knotenmechanismus und kein physikalischer Teilchenclaim.
+- Ein retrospektives Stabilitaetsgate fuer den kanonischen `d=10`,
+  `A_att=35`-Slice besteht bei 5/5 Seeds: vier Alterscheckpoints bis `N=30M`
+  sagen Radius und rotationsinvariante Endshape am `N=300M`-Holdout korrekt
+  innerhalb der vorab fixierten Grenzen voraus. Das lokalisiert weder die
+  erste Formationszeit noch prueft es langsame zeitaufgeloeste Shape-Zyklen.
+- D_mem nahe drei im d=3-Embedding ist im aktuellen Taylor-Regime erwartete
+  isotrope Gaussgeometrie und keine Evidenz emergenter Dreidimensionalitaet.
+- Long-Run-Trace-AR findet komplexe Klassifikationen auch in `eta_zero`; es
+  gibt daher keinen kontrollgetrennten skalaren Phasen-/Photonmodus.
+- Feature-Closure stuetzt die skalare Grobkoernung fuer Shape-/Radius-Scalars,
+  nicht fuer den Spin-Scalar.
+- Der `A_att`-Uebergang fuer `d=3` und `d=10` zeigt eine Trennung von
+  sichtbarer Sample-Geometrie (`D_cov`) und interner Memory-Shape (`D_mem`);
+  die `beta=0`-Referenz ist als `M0=0`/`m0_zero` dokumentiert.
+- Der Code unterscheidet `delta`, `gaussian` und `matched_gaussian`
+  Deposition; `memory_mass=M0` ist als eigene Memory-Skala abgebildet.
+- Der One-Way-Interaction-Age-Audit bis `N=103M` zeigt nahezu lineare
+  Zentrumtranslation auf `20.844` interne Radien, aber `0/5`
+  kontrollgetrennte Formmodifikationen. Die scheinbare Shape-Halbwelle folgt
+  der freien Kontrolle und ist kein Oszillations- oder neuer Knotenbefund.
+- Ein davon getrennter rauschfreier `d=2`-Ast besitzt sechs lokal
+  Krawczyk-zertifizierte finite-H-Rotating-wave-Roots bei
+  `H*alpha=12`, `eta/alpha=15`, konditional auf `mpmath.iv` 1.3.0;
+  ein zweiter Intervallbackend fehlt. Ein separat implementierter Foundation-Audit
+  reproduziert die historischen fuenf Summen und den
+  Fixed-gain-Kontinuumsroot; ein prospektiver L5-Holdout liefert die sechste
+  Zelle. Anchor und L3 besitzen lokale numerische Stabilitaetsevidenz in
+  getrennt registrierten Voll-FIFO-Panels. Das ist eine Basis fuer
+  vorbereitete raeumliche Schleifen, nicht fuer eine stabile Familie,
+  generische Formation, internes S1 oder Masse. P3 zeigt zusaetzlich
+  finite-ensemble attraction fuer zehn nichtkreisfoermige L3-Arme. Der
+  spaetere P4-Lauf bleibt formal gescheitert, obwohl sein expliziter
+  Source-/Write-Port den kompletten finite-H-Write-/Age-Ledger schliesst.
+  Der prospektive P4-R-phi-Holdout besteht danach seine lokale Metrologie
+  und die diskrete Acht-Phasen-Klassifikation mit
+  `B_C=0.2084215772`, `B_Q=0.1537530855` und 8/8 positivem
+  Phasensupport. Das sind vier spiegelverschiedene Phasenpaare, keine 32
+  Replikationen und kein Spin-, Impuls-, Traegheits- oder Massebefund. Der
+  nachfolgende prospektive P4-R-S-Anchor-Holdout besteht ebenfalls: Seine
+  16 channel-off- und 32 aktiven Arme schliessen alle geerbten Gates; die
+  groesste registrierte Anchor--L3-Abweichung ist `0.00232715` bei der vorab
+  fixierten Grenze `0.05`. Ein separat implementierter
+  Standardbibliothek-Auditor rekonstruiert Entscheidung und Skalierungsarrays
+  ohne Abweichung. Das ist
+  ein reviewed Zwei-Zellen-Skalenpass, keine Replikation, Konvergenzordnung,
+  Interaktion, Spin-, Traegheits- oder Masseevidenz.
+- Das vorgelagerte interne Source-Audit bleibt
+  `referee-source-ready-with-major-claim-restrictions`: zweiter
+  Intervallbackend, vollstaendiger Wheel-/Hash-Lock sowie
+  `CITATION.cff`/Release sind weiterhin offen.
+
+Noch nicht belastbar:
+
+- ein spezifisch zweiskaliger Baseline-Knotenmechanismus; die gematchte
+  attraktive Ein-Kernel-Ablation ist im aktuellen Regime numerisch gleich;
+- ein exakter ganzzahliger Amplitudenwert; insbesondere ist `36=27+9`
+  derzeit eine unbelegte Zusatzhypothese und kein Scanbefund;
+- eindeutige externe d=3-Selektion; D_mem nahe der Ambient-Dimension ist
+  im linearen isotropen Regime zu erwarten und kein Selektionssatz;
+- stabile skalare Spin-, Phasen- oder Photonmoden;
+- harte endliche Signalgeschwindigkeit;
+- physikalische Massen, Lorentz-, Quanten- oder Standardmodellclaims.
+
+## Schnellstart
+
+```python
+from pathlib import Path
+from emergenz_knoten import SimulationConfig, run_simulation
+
+config = SimulationConfig(
+    steps=5000,
+    dim=3,
+    alpha=0.005,
+    sample_every=50,
+    max_memory=200,
+)
+result = run_simulation(config, seed=1, output_path=Path("results/simulation.npz"))
+
+print(result["samples"].shape)
+```
+
+## Installation
+
+Empfohlen in einer virtuellen Umgebung:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pip install -e .
+```
+
+Tests:
+
+```bash
+python -m pytest tests -q
+```
+
+Dokumentation:
+
+```bash
+python -m pip install -r docs/requirements.txt
+python -m mkdocs build --strict
+```
+
+Neue Formeln in Markdown werden inline als `$...$` und als abgesetzte Formel
+zwischen je einer eigenen `$$`-Zeile geschrieben. Fuer bestehende Quellen
+bleiben `\(...\)`, `\[...\]` und LaTeX-Umgebungen unterstuetzt. Mathematische
+Ausdruecke gehoeren nicht in Codebloecke; diese bleiben bewusst woertlich.
+`python -m pytest tests/test_markdown_math.py -q` prueft die Delimiter aller
+versionierten Markdown-Dateien.
+
+## Aktive Dokumentation
+
+- [Startseite](docs/index.md)
+- [Aktueller Stand](docs/status/current_status.md)
+- [Prioritaeten](docs/status/project_priorities.md)
+- [P4-R-S allgemein erklaert](docs/status/p4rs_plain_language_summary.md)
+- [Theoretical Context](docs/reference/THEORETICAL_CONTEXT.md)
+- [Center-Filter und Rotation](docs/reference/scalar_memory_center_filter.md)
+- [Native Rotating Waves](docs/reference/rotating_wave_foundation.md)
+- [Repository Map](docs/reference/repository_map.md)
+- [Experiment-Katalog](docs/reference/experiment_catalog.md) - enthaelt auch die Knotenscore-Referenz
+- [Paper-Claims](docs/status/paper_claims.md)
+- [P4 Publication-Source-Referee-Audit](reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md)
+- [P4-R-S-Ergebnisreview](reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md)
+- [Kuratierter Report-Index](reports/README.md)
+- [Abbildungs-Index](figures/README.md)
+
+## Experiment Entry Points
+
+```bash
+python experiments/cli.py --list
+python experiments/cli.py reference --list
+python experiments/cli.py reference --script current/reference/reference_experiment.py
+python experiments/cli.py dynamics --list
+python experiments/cli.py markov --list
+```
+
+Direkter Referenzlauf:
+
+```bash
+python experiments/current/reference/reference_experiment.py --seed 2 --steps 2000 --sample-every 20 --burn-in 100 --output data/processed/reference/reference_experiment.json
+```
+
+Long-Run-Metastabilitaet:
+
+```bash
+python experiments/current/dynamics/long_runs/long_run_metastability.py --steps 10000000 --seeds 1 --conditions baseline --dim 3 --alpha 0.01 --sample-every 1000 --burn-in 1000000 --max-memory 800 --output-dir data/processed/long_run_metastability/2026-06-29_initial
+```
+
+## Naechste Prioritaeten
+
+1. P5 zunaechst ausschliesslich als targetfreien Zwei-Loop-Designaudit
+   bearbeiten. Interaktionsziellaeufe bleiben versiegelt.
+2. Danach eine Falsifikationscharter mit channel-off, beiden Einwegrichtungen,
+   Reziprozitaet, Swap, Chiralitaet, Distanz, Shape/D0 und vollstaendigem
+   gegenseitigem Workledger prospektiv einfrieren.
+3. Paper I als Minimalmodell plus lineare co-moving Relaxationswolke
+   konsolidieren. Den getrennten rauschfreien Schleifenast nur eng markiert als
+   technische Erweiterung oder Outlook einordnen.
+4. Den formalen P4-Fail unveraendert halten; P4-R und P4-R-S benennen ihn nicht
+   um und tragen keine Spin-, Impuls-, Traegheits- oder Masseclaims.
+5. Publikations-Hardening mit zweitem Intervallbackend, Wheel-/Hash-Lock,
+   `CITATION.cff` und zitierbarer Release parallel fortsetzen. Die
+   massgebliche Reihenfolge steht in `docs/status/project_priorities.md`.

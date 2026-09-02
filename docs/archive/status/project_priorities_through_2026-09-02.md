@@ -1,0 +1,234 @@
+# Archivierte Projektprioritaeten bis 2026-09-02
+
+Stand: 2026-09-02.
+
+Diese Seite ist ausschliesslich die prospektive Arbeitsliste. Abgeschlossene
+Befunde, historische Fails und Ergebnisgrenzen stehen im
+[aktuellen Status](current_status.md), erlaubte Paper-Sprache im
+[Claim-Register](paper_claims.md). Die fruehere ausfuehrliche Arbeitschronik
+bleibt im
+[Prioritaetenarchiv](../archive/status/project_priorities_through_2026-08-21.md)
+erhalten.
+
+Es gilt eine primaere wissenschaftliche Gate-Folge. Publikations-Hardening
+und Paper-I-Konsolidierung duerfen parallel laufen, aber kein Gate ersetzen,
+keine Zielausgabe vorzeitig oeffnen und keine Modellparameter nachfitten.
+
+## Aktiver Uebergang
+
+| abgeschlossene Voraussetzung | reviewed Status | Konsequenz |
+| --- | --- | --- |
+| P4 | `p4-source-write-architecture-fail` | historischer Fail bleibt unveraendert |
+| P4-R-phi | diskreter Chiral-Response-Pass | enger L3-Port-/Ledger-/Antwortbefund |
+| Source-Audit | restricted pass | drei Major-Restriktionen bleiben offen |
+| P4-R-S | `p4rs-anchor-scale-transfer-pass`, Review aufrechterhalten | N0 wurde prospektiv ausgefuehrt |
+| N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | P5-Design darf targetfrei beginnen |
+| P5-D Design | `p5d-mutual-center-design-identifiable`, CI gruen | Protokoll wurde getrennt eingefroren |
+| P5-D Protokoll | korrigierter/amendierter Freeze `d7a4c5e`, CI gruen | Implementierung durfte beginnen |
+| P5-D Implementierung | Commit `88dc1d6`, 893 Tests und CI gruen | targetfreies Readinessreview durfte urteilen |
+| P5-D Readiness | `p5d-implementation-ready`, Review-CI gruen | erster Standardaufruf wurde ausgefuehrt |
+| P5-D Erstaufruf | `p5d-inconclusive`: NumPy-Bool am finalen JSON-Serializer, keine Artefakte/Entscheidung | nur separat eingefrorene outcome-blinde Serializer-Recovery |
+| P5-D Recovery | Implementierung `f6da955` und neues Readinessreview `6dc1b18`, beide CI-gruen | genau ein Ersatzlauf war autorisiert |
+| P5-D Ersatzlauf | `p5d-inconclusive`: garantierter Channel-off-`inf`-Sentinel unter `allow_nan=False`, keine Artefakte/Entscheidung | Recovery-Autorisierung verbraucht; P5-D geschlossen, kein dritter Lauf |
+
+```mermaid
+flowchart LR
+    p4["P4 formal fail"]
+    p4r["P4-R reviewed pass<br/>diskrete L3-Antwort"]
+    source["Source-Audit<br/>restricted pass"]
+    p4rs["P4-R-S reviewed pass<br/>Anchor/L3 kompatibel"]
+    n0["N0 reviewed bracket<br/>1e-4 stable / 1e-3 fail"]
+    p5d["P5 Designaudit<br/>eingefroren"]
+    p5p["P5 Protokoll<br/>eingefroren"]
+    p5i["P5 Implementierung<br/>CI-gruen"]
+    p5r["P5 Readinessreview<br/>CI-gruen"]
+    p5t["P5 first target<br/>serializer inconclusive"]
+    p5x["P5 serializer recovery<br/>implementation + review green"]
+    p5y["P5 replacement inconclusive<br/>non-finite schema; branch closed"]
+
+    p4 --> p4r --> source --> p4rs --> n0 --> p5d --> p5p --> p5i --> p5r --> p5t --> p5x --> p5y
+```
+
+P4-R-S traegt genau einen zweiten vorbereiteten Skalenpunkt. Die groesste
+registrierte Anchor--L3-Abweichung betraegt `0.00232715` gegen die vorab
+fixierte Grenze `0.05`. Das ist ein starker interner Skalenholdout, aber weder
+Konvergenzordnung noch Replikation. Der ausfuehrliche Befund steht im
+[P4-R-S-Ergebnisreview](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md).
+
+## Abgeschlossener N0-Checkpoint
+
+Der prospektiv eingefrorene, einmal ausgefuehrte und unabhaengig nachgerechnete
+N0-Lauf endet mit
+`n0-noise-stability-window-bracketed-reviewed-pass`.
+
+Der targetfreie
+[N0-Designaudit](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_design_audit_2026-08-31.md)
+bindet die Rotating-wave-Schiene an die Paper-I-Uebergangsgleichung
+
+$$
+x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n)
+$$
+
+zurueck. Er trennt drei Dinge, die nicht vermischt werden duerfen:
+
+1. exakte Deterministik bei $\varepsilon=0$;
+2. in binary64 nicht oder nur teilweise aufgeloeste Innovation;
+3. dynamisch aufgeloestes Rauschen mit oder ohne orbitale Stabilitaet.
+
+Anchor und L3 werden auf der gemeinsamen Paper-I-Achse
+
+$$
+\chi={\varepsilon\over R\sqrt\alpha},
+\qquad {D\over R^2}={\chi^2\over2}
+$$
+
+verglichen. Die Innovation ist bis `chi=1e-16` nicht voll aufgeloest. Alle
+Zellen bestehen von `1e-15` bis `1e-4`; `1e-3` und `1e-2` scheitern am
+prospektiven Phasen-/Chiralitaetsgate, nicht an einem sichtbaren Radiuszerfall.
+Das unabhaengige Recompute findet keine Aufloesungs-, Gate- oder
+Entscheidungsabweichung. Details stehen im
+[N0-Ergebnisreview](https://github.com/MemoryDynamics/Knoten/blob/main/reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md).
+
+Plancks Konstante setzt keine Zahl fuer $\varepsilon$, solange Laenge, Zeit
+und Wirkung des Modells nicht physikalisch kalibriert sind.
+
+Ein N0-Pass stuetzt nur eine numerisch aufgeloeste Robustheitsklammer der zwei
+vorbereiteten Zellen. Er beweist keine stochastische Formation und ist keine
+physikalische Bestimmung von $\varepsilon$.
+
+## Abgeschlossen: P5-Designaudit ohne Targetzugriff
+
+Der targetfreie
+[P5-D-Designaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_mutual_center_design_audit_2026-09-01.md)
+endet mit `p5d-mutual-center-design-identifiable`. Er waehlt zwei getrennte
+Anchor-Historien, den vorhandenen notched Center und seinen adjungierten
+Newest-slot-Write. Die einzige Paarenergie ist linear im quadratischen
+Centerabstand; sie besitzt weder Sollbahn noch Sollabstand.
+
+Der primaere Diskriminator ist ein reziproker Closed-loop-Ueberschuss gegen
+die Summe beider getrennten Einwegantworten. Ein sichtbarer Abstandstrend
+allein bleibt unzureichend. Der Design-Freeze ist Commit `f68c8f8`; sein
+[CI-Lauf 33507408346](https://github.com/MemoryDynamics/Knoten/actions/runs/33507408346)
+ist erfolgreich.
+
+## Abgeschlossen: P5-Falsifikationscharter und Protokoll
+
+Das getrennte
+[P5-D-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_mutual_center_protocol_2026-09-01.md)
+friert vor Implementierung 64 Basiskonfigurationen ein: zwei Distanzen, acht
+Phasenknoten mit vier verschiedenen Relativphasen und vier
+Chiralitaetspaare. Fuer jede folgen zwei
+schwache Staerken, beide Vorzeichen, beide Einwegrichtungen und der reziproke
+Arm. Einschliesslich Channel-off sind es 832 deterministische Kontrollarme,
+keine Replikationen.
+
+Die Staerken `0.000625` und `0.00125` stammen aus der targetfreien
+Center-only-Midpoint-Referenz. Implementierung und Target duerfen sie nicht
+nachjustieren. Der Protokoll-Freeze ist Commit `1342258`; sein
+[CI-Lauf 33508068905](https://github.com/MemoryDynamics/Knoten/actions/runs/33508068905)
+ist erfolgreich.
+
+## Abgeschlossen: P5-Implementierung und Pre-target-Review
+
+Der Implementierungscommit `88dc1d6` enthaelt Pair-step, registrierten Runner,
+Standardbibliothek-Auditor und synthetische Falsifikatoren. Sein
+[CI-Lauf 33559217777](https://github.com/MemoryDynamics/Knoten/actions/runs/33559217777)
+bestand den exakten Lintumfang, 893 Tests und den strikten Dokumentationsbau.
+Kein registrierter Paarzustand wurde dabei erzeugt.
+
+Das getrennte
+[Readinessreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_mutual_center_implementation_readiness_2026-09-01.md)
+prueft alle zwoelf Protokollanforderungen, die sechs Implementierungsblobs,
+Targetversiegelung, Atomizitaet und Auditorgrenze. Das Urteil
+`p5d-implementation-ready` ist selbst keine Interaktionsevidenz.
+
+## P5-D-Erstaufruf: technisch inconclusive
+
+Der einzige durch das erste Readinessreview autorisierte Lauf erreichte die
+finale Payload-Serialisierung, brach dort aber an einem verschachtelten
+`numpy.bool_` ab. Weder Standard- noch temporaere Artefakte wurden geschrieben;
+die im Speicher berechnete Entscheidung wurde nicht gedruckt oder beobachtet.
+Der formale Status ist deshalb `p5d-inconclusive`, nicht wissenschaftlicher
+Pass oder Fail.
+
+Der
+[Incident-Report](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_first_target_serialization_failure_2026-09-02.md)
+dokumentiert Revision, Stackgrenze, leere Pfade und Claim-Grenze. Laufzeit
+oder fehlender Fruehstopp duerfen nicht als Gateinformation gelesen werden.
+
+## P5-D-Recovery abgeschlossen: Pipeline geschlossen
+
+Das getrennte
+[Recovery-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md)
+erlaubt ausschliesslich eine fail-closed JSON-Konversion von NumPy-Bool-,
+Integer- und Float-Skalaren. Parameter, Panel, Gleichungen, Schwellen,
+Entscheidung und Ausgabepfade bleiben bitweise beziehungsweise semantisch
+unveraendert.
+
+Recovery-Implementierung, Vollsuite und neues Readinessreview bestanden ihre
+getrennten CI-Laeufe. Der genau einmal autorisierte Ersatzlauf scheiterte
+dennoch fail-closed an einem positiven `inf`. Statische Kontrolle zeigt die
+outcome-unabhaengige Ursache: Alle 64 Channel-off-Arme behalten den
+Initialwert `minimum_dissipation=inf`, weil nur aktive Arme ihn aktualisieren,
+serialisieren ihn aber unter `allow_nan=False`.
+
+Der
+[zweite Incident-Report](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md)
+klassifiziert auch den Ersatzlauf als `p5d-inconclusive`. Er falsifiziert die
+Recovery-Readiness-Abdeckung, nicht die Interaktionshypothese. Keine Standard-
+oder temporaeren Artefakte und keine beobachtete Entscheidung existieren. Die
+einzige Recovery-Autorisierung ist verbraucht; ein dritter Targetlauf oder
+eine weitere Serializer-/Sentinelkorrektur ist ohne neues prospektives
+Governance-Protokoll nicht autorisiert.
+
+## Prioritaet 3: Paper-I-Abgrenzung und weitere Redaktionsentscheidung
+
+Paper I bleibt primaer das Minimalmodell mit Markov-Einbettung und
+kontrollierter linearer co-moving Relaxationswolke. Der deterministische
+$d=2$-Rotating-wave-/Portast ist methodisch und dynamisch ein getrennter
+Erweiterungszweig.
+
+Die reviewed N0-Klammer ist jetzt als enge Abgrenzung in beiden
+Diskussionsfassungen aufgenommen. Sie verwendet
+`chi=epsilon/(R sqrt(alpha))`, benennt den Phasen-/Chiralitaetsfail und
+schliesst physikalische Rauschkalibrierung sowie stochastische Formation aus.
+Abstract und Hauptresultat bleiben unveraendert. Der zugehoerige
+[CI-Lauf 33506427098](https://github.com/MemoryDynamics/Knoten/actions/runs/33506427098)
+ist erfolgreich.
+
+Fuer den Port-/Schleifenast bleibt vor jeder weitergehenden Manuskriptaufnahme
+zu entscheiden:
+
+- technische Begleitnotiz, Supplement oder eng getrennte Outlook-Sektion;
+- ob die drei offenen Source-Restriktionen vorher geschlossen werden muessen;
+- welche Rohdaten und Rebuild-Anleitung eine externe Replikation ermoeglichen.
+
+Bis zu dieser weiteren Entscheidung bleiben Abstract und Hauptschluss frei
+von Interaktions-, Spin-, Traegheits- oder Massensprache.
+
+## Prioritaet 4: Paralleles Publikations-Hardening
+
+Diese Aufgaben duerfen parallel laufen, aendern aber keinen Gate-Status:
+
+- mindestens einen Root mit einem unabhaengigen outward-rounded
+  Intervallbackend reproduzieren;
+- den Kontinuumsroot intervallmaessig einschliessen oder die numerische
+  Vertrauensbasis enger deklarieren;
+- einen vollstaendigen Wheel-/Hash-Lock erzeugen;
+- `CITATION.cff` und eine zitierbare Release/Archivierung vorbereiten;
+- eine externe Reproduktion der gespeicherten P4-R/P4-R-S-Auswertung
+  ermoeglichen.
+
+## Globale Stopregeln
+
+- Kein Parameter-, Seed-, Distanz-, Fenster- oder Schwellen-Retuning nach
+  Oeffnung einer primaeren Ausgabe.
+- `fail` bleibt `fail`; ein spaeterer Ast darf ihn nicht semantisch retten.
+- `inconclusive` autorisiert nur vorab begruendete Messhaertung, keinen
+  Mechanismenwechsel unter demselben Gate-Namen.
+- Ambienter Kreis, Torus oder Persistent Homology ersetzen weder interne
+  Topologie noch Mechanik.
+- Symmetriearme sind Kontrollen, keine Replikationen.
+- Jedes Gate erzeugt Design/Protokoll, maschinenlesbares Ergebnis, kritisches
+  Review und eine explizite Claim-Grenze, bevor das naechste Target geoeffnet
+  wird.

@@ -8,17 +8,21 @@ theme:
 
 nav:
   - Start: index.md
-  - Aktueller Stand: status/current_status.md
-  - Prioritaeten: status/project_priorities.md
-  - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
-  - Theorie: reference/THEORETICAL_CONTEXT.md
-  - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
-  - Native Rotating Waves: reference/rotating_wave_foundation.md
-  - Repository Map: reference/repository_map.md
+  - Projektsteuerung:
+      - Aktueller Stand: status/current_status.md
+      - Prioritaeten: status/project_priorities.md
+      - Paper-Claims: status/paper_claims.md
+  - Modell und Gleichungen:
+      - Theorie: reference/THEORETICAL_CONTEXT.md
+      - Implementierte Gleichungen: reference/implemented_equations.md
+      - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
+  - Rotation und Interaktion:
+      - Native Rotating Waves: reference/rotating_wave_foundation.md
+      - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md
-  - Paper-Claims: status/paper_claims.md
+  - Repository: reference/repository_map.md
 
-not_in_nav: |
+exclude_docs: |
   archive/**
   historical/**
   overview/**

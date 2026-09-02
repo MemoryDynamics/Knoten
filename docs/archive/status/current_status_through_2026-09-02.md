@@ -1,0 +1,940 @@
+# Archivierter Stand bis 2026-09-02
+
+Stand: 2026-09-02.
+
+Diese Seite ist die wissenschaftliche Frontdoor. Details, Laufprotokolle und
+historische Zwischenlesarten stehen in den datierten Reports sowie im
+[Statusarchiv bis 2026-07-21](../archive/status/current_status_through_2026-07-21.md).
+Die bis 2026-08-21 in der Prioritaetenliste mitgefuehrten Status- und
+Arbeitsbloecke sind zusaetzlich im
+[Prioritaetenarchiv](../archive/status/project_priorities_through_2026-08-21.md)
+vollstaendig erhalten.
+
+## Kompaktueberblick
+
+| Bereich | Evidenz | Belastbare Lesart | Grenze |
+| --- | --- | --- | --- |
+| Modellkern | Der sichtbare Prozess ist im Allgemeinen nichtmarkovsch; Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung. | strukturelles Resultat des definierten Modells | keine Aussage ueber reale Raumzeit |
+| Skalarer kompakter Ast | Gematchter Ein- und Zweiskalenkernel kollabieren auf der Achse `A_eff=A_att-9`; Long-Run-Radien folgen dem linearen Finite-Memory-Modus bis maximal `1.16%` relativ. Ein retrospektives Checkpoint-/Holdout-Gate besteht fuer 5/5 Seeds von `N=1M..30M` gegen `N=300M`. | kontrollierte co-moving Relaxationswolke mit methodisch bestaetigter spaeter Endstationaritaet | kein isolierter nichtlinearer Knoten, kein Phasenuebergang und keine identifizierte Formationszeit |
+| Native Rotation | Der finite-H-Kreis bei alpha=0.01, H=1200, eta=0.15 und A_att=3.5 besitzt ein lokales Krawczyk-Existenz-/Eindeutigkeitszertifikat. Fuenf weitere Zellen bei festem H alpha=12 und eta/alpha=15 sind ebenfalls lokal zertifiziert. Der prospektive L5-Holdout besteht zusaetzlich den unabhaengigen Summen-Replay und die signierten First-order-Gates mit L5/L4-Fehlerquotienten 0.4993/0.4992. Registrierte Voll-FIFO-Tests liefern am Anchor \(|\lambda_\perp|=0.99306035\) und an L3 \(|\lambda_\perp|=0.99649340\). Im reviewed P3-Lauf erreichen danach alle zehn nichtkreisfoermigen L3-Arme aus fuenf Spiegelpaaren den Zielorbit; vier Arme stammen aus zwei Historien ohne \(R_3\) oder \(\theta_3\) in ihrer Konstruktion. | sechs kritisch gepruefte lokale finite-Summen-Rootzellen; lokale numerische Stabilitaet an zwei vorbereiteten Skalen und finite-ensemble attraction am unveraenderten L3-Kandidaten | `mpmath.iv` nicht durch zweiten Intervallbackend verifiziert; Kontinuumsroot und volles Spektrum nicht intervallzertifiziert; keine stabile Leiter, offener Basin-Ball, generische/spontane Formation, Rauschrobustheit, interne Phase nach SO(2)-Quotient oder Masse |
+| N0-Rauschstress | Der prospektive binary64-Scan trennt unaufgeloeste Innovation bis `chi=1e-16` von 12 voll aufgeloesten stabilen Dekadenzellen `1e-15..1e-4`; `1e-3` und `1e-2` scheitern reproduzierbar am Phasen-/Chiralitaetsgate. Ein getrennter Auditor rekonstruiert 132/132 Zellen, alle Gates, die Klammer und beide Skalierungsfits ohne Abweichung. | `n0-noise-stability-window-bracketed-reviewed-pass`: finite-time Phasenkohaerenz-Robustheitsklammer an Anchor und L3 | keine physikalische Epsilon-/Planck-Kalibrierung, keine stationaere stochastische Formation, keine Replikation oder Kontinuumsordnung; sichtbare x-y-Kreise zerfallen an der ersten Fail-Dekade nicht |
+| P5-D-Governance | Der erste autorisierte Standardaufruf scheiterte am finalen NumPy-Bool-JSON-Typ. Nach getrenntem Recovery-Freeze und gruenem Implementierungs-/Readiness-CI scheiterte auch der einzige Ersatzlauf fail-closed: Jeder Channel-off-Arm serialisiert einen garantierten `minimum_dissipation=inf`-Sentinel unter `allow_nan=False`. Beide Male blieben Standard- und temporaere Artefakte aus. | beide Aufrufe `p5d-inconclusive`: keine gespeicherte oder beobachtete Entscheidung. Der zweite Incident falsifiziert die Recovery-Readiness-Abdeckung, nicht die Interaktionshypothese. Die einzige Ersatzautorisierung ist verbraucht; P5-D ist geschlossen | keine P5- oder Interaktionsevidenz; Laufzeit und vollstaendige In-memory-Panels sind keine Gateinformation. Kein dritter Lauf, Serializerpatch oder Sentinelersatz ohne neues prospektives Governance-Protokoll |
+| Loop--Center-Bruecke | Fuer L3 ist der skalare Ursprungsgain \(g_H=-0.045833\ldots\) und damit nicht in der positiven A2/B-star-Klasse. Im prospektiven P2-Lauf sagt stattdessen der volle FIFO-Jacobian die nichtlineare Center-/Zustandsantwort bis maximal \(7.5\times10^{-9}\) relativ voraus; der single-sign Restterm skaliert quadratisch. Die outcome-informierte, separat vorregistrierte P2-R-Verlaengerung reproduziert alle 120 alten Metriken exakt und zeigt in allen 48 neuen Fenstern negative Steigungen sowie aufgeloeste Abklingraten ueber 20 Memory-Zeiten. | starke lokale matrixwertige Kleinsignal- und Rueckkehrkompatibilitaet einer vorbereiteten L3-Schleife | der historische P2-Fail an der absoluten Tail-Slope-Grenze bleibt bestehen; P2-R ist keine unabhaengige Replikation. P3 liefert getrennte Formationsevidenz, uebertraegt aber weder skalare Filtermasse noch physische Mechanik |
+| Center-Mechanik | Der normierte finite-H-Filter \(B_H\) ist eine exakte endliche geometrische Reihe. Im untrunkierten lokalen Grenzmodell folgt durch Zustandselimination eine zweite Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Gate A2 und B-star stuetzen diesen effektiven Filterabschluss. P4 schliesst den exakten Write-/Age-Arbeitsledger, bleibt aber formal Fail. P4-R besteht am vorbereiteten L3-Kreis die diskrete Chiral-Klassifikation. Der reviewed P4-R-S-Holdout uebertraegt denselben registrierten Antworttyp auf den Anchor; die groesste Anchor--L3-Abweichung ist `0.00232715` gegen `0.05`. | passiver effektiver Center-Port, Filtertraegheit unter dem gewaehlten Portvertrag, algebraisch geschlossener Ledger und ein reviewed diskreter Zwei-Zellen-Skalenpass des explizit konstruierten Ports | P4 bleibt formal gescheitert; zwei Zellen liefern keine Konvergenzordnung oder Replikation. Kein natuerlicher mikroskopischer Aktuator, konservierter materieller Schwerpunkt, intrinsischer Spin, physikalische Arbeit, Traegheit oder Masse identifiziert |
+| Nichtlinearitaetsgate | Bei `R_linear/L=0.3` liegt der Radius seed-stabil etwa `6.2%` ueber linear, ohne Shape-Umschlag. | kleine glatte Kernelkorrektur | vorregistrierte Composite-Entscheidung bleibt `inconclusive`; Residence-Metriken sind skalenempfindlich |
+| Dimension | `D_mem` folgt im linearen isotropen Regime der Ambient-Geometrie; Heat-Trace- und Shape-Dimension trennen sich. | Diagnostik der gespeicherten Wolke | keine eindeutige externe `d=3`-Selektion |
+| Feld- und Memory-Operatoren | Fourier-`rho` reproduziert das exponentielle Memory. `phi=K*rho` ist linear exakt. Der aktive Delta-Quellfeld-Pilot bildet kontrolliert einen beschraenkten Peak bei `k=1`. Der exakte `eta=0`-Rohmodenblock und alle vollstaendigen N=1M-Fits bleiben reell. | kompakte Reprasentation, klassische Finite-k-Musterbildung und analytisch klassifizierte AR-Nullmoden | `a2<0` und kubische Saettigung sind Modellannahmen; Feldmuster und komplexe ausgerichtete AR-Paare sind nicht feedback-spezifisch |
+| Externe Antwort | Der persistente Vektorkanal besteht das feste-Kopplungs-/Distanzgate in 6/6 Paaren. Direkte und Telegraph-retardierte skalare Reziprozitaet sind aktiv und formschonend, aber alle 60 direkten und 80 P3.2-Segmentfits bleiben reell. | kontrollierter relationaler Kanal plus direkte/verzoegerte Bindung und Relaxation | ein Formationsbecken; der Telegraph-Eingang bleibt zielabhaengig; kein komplexer Modus, lokales Feldgesetz, Spin-, Ladungs- oder Teilchenclaim |
+| Paper-Programm | Paper 0 traegt als mathematischer Anker; Paper I kann den linearen Relaxationsbefund berichten. | eng begrenzter Minimalmodell-Claim | Propagation, Lorentz-, Quanten- und Standardmodellbruecken bleiben Future Work |
+
+## Evidenz, Inferenz und Hypothese
+
+### Strukturell gestuetzt
+
+- Die exponentielle Memory-Dynamik ist im augmentierten Zustand markovsch.
+- Die Memory-Faser kontrahiert unter den dokumentierten Normannahmen pfadweise.
+- `state.py` und `checkpoints.py` repraesentieren den implementierten
+  finite-memory Zustand vollstaendig und checksum-validiert.
+- Die spektrale `rho`-Darstellung ist fuer die getestete periodische
+  1D-Reprasentation numerisch mit der direkten Historie reconciliiert.
+- Die lineare Write-/Read-Reparametrisierung `phi=K*rho` ist analytisch exakt
+  und im Drei-Seed-Audit fuer Pfad, Feld und Gradient bis `1.5e-14`
+  bestaetigt. Dirac-Faltung ist der Identitaetsreadout; ein konstantes `K=1`
+  erzeugt exakt keinen Gradienten.
+- Ein auf die bestehende lokale Kruemmung gematchter LoG-Kernel ist analytisch
+  abklingend und exakt zero mean. Das ist eine verfuegbare Nullfamilie, keine
+  Evidenz fuer Neutralitaet oder eine bestimmte Amplitude.
+- Der normierte finite-\(H\)-Center ist exakt der Filter \(c_H=B_Hx\) mit
+  \(B_H\) als endlicher geometrischer Reihe. Im untrunkierten lokalen
+  Grenzmodell ergibt die Elimination von \(x-c\) eine freie gedaempfte zweite
+  Ordnung mit \(m_{\rm filter}=\tau/\mu>0\). Das ist ein Strukturresultat unter
+  dem gewaehlten Port, kein harmonischer Oszillator oder Materialmassensatz.
+- Die eingeschraenkte lokale skalare Feldentwicklung
+  `tau d_t phi=-(c0-c2 Delta+c4 Delta^2)phi+(s0-s2 Delta)rho+...`
+  besitzt den stationaeren Transfer
+  `H(k)=(s0+s2 k^2)/(c0+c2 k^2+c4 k^4)`. Sie matcht den normierten
+  Gausskernel bis `k^4`; `s0=0` erzwingt exakt `H(0)=0`.
+
+### Numerisch gestuetzt
+
+- Der aktuelle kleine-Radius-Ast ist kompakter als `eta=0`, wird aber fast
+  vollstaendig durch den linearen Memory-Center-Relativmodus erklaert.
+- Ein getrennt prospektierter rauschfreier \(d=2\)-K0-H-Parametersatz
+  besitzt eine lokal existenz- und eindeutigkeitszertifizierte
+  finite-\(H\)-Rotating-wave-Nullstelle. Im vollständigen 2400-dimensionalen mitrotierenden
+  Zustand stimmen zwei Arnoldi-Panels für den führenden transversalen
+  Multiplikator \(|\lambda|=0.99306035\) bis \(3.1\,10^{-13}\) überein;
+  drei registrierte Störungen kontrahieren über 5000 Updates. Das stützt
+  lokale numerische Quellenstabilität, nicht vollständige spektrale
+  Zertifizierung oder Formation.
+- Vier weitere, ohne Kernel-Retuning gematchte Zellen mit
+  \(H\alpha=12\) und \(\eta/\alpha=15\) besitzen ebenfalls lokale
+  Krawczyk-Zertifikate. Der erste Leiterlauf bleibt formal
+  `certified-roots-nonconvergent`, weil sein eingefrorener Guide zu
+  \(\widehat\eta=15.016345\ldots\) gehörte. Eine danach prospektiv
+  eingefrorene Reconciliation löst die Kontinuumsgleichungen bei exakt 15
+  mit drei Quadraturpanels und findet
+  \((R_\infty,\Omega_\infty)=(0.9431133068,1.5855700777)\). Gegen diesen
+  Zielwert bestehen alle ursprünglichen Skalierungsgates; die Steigungen
+  sind 1.0094/1.0110 und die Richardson-Relativfehler 0.00562/0.00662.
+  Das ist eine numerische First-order-Reconciliation derselben offen
+  gelegten Leiter, keine neue Holdout-Replikation oder Konvergenztheorem.
+- Der danach eingefrorene Foundation-Audit besteht nach dokumentierter
+  Pipeline-Reconciliation alle fuenf Composite-Gates. Eine vom Projektkernel
+  unabhaengige `mpmath`-Summe reproduziert die fuenf zertifizierten Roots mit
+  Residuen unter \(8\times10^{-72}\). Tanh--Sinh und Gauss--Legendre liefern
+  beide
+  \((R_\infty,\Omega_\infty)=
+  (0.943113306769543632\ldots,1.585570077717788707\ldots)\).
+  Der initiale Audit-Fail bleibt erhalten: Er war durch einen unzulaessigen
+  strikten Binaervergleich der vorregistrierten Dezimalidentitaet
+  \(\eta/\alpha=15\) verursacht. Keine wissenschaftliche Schwelle wurde fuer
+  den Re-Run geaendert. Ein zweiter Remote-CI-Fund zeigte anschliessend
+  CRLF-abhaengige Arbeitsbaumhashes und einen zu flachen Checkout. Nach
+  separat eingefrorener Portabilitaetskorrektur hasht Gate A die kanonischen
+  Git-Blobs und prueft die vollstaendige Historie; der gesamte Audit wurde
+  erneut gerechnet und besteht. Auch dabei blieb jede wissenschaftliche
+  Schwelle unveraendert.
+- Der danach separat eingefrorene L5-Existenz-/Skalierungstest oeffnet erstmals
+  \((\alpha,H,\eta)=(0.00125,9600,0.01875)\). Beide Krawczyk-Panels und
+  Boxen, der 70-stellige direkte Summen-Replay und alle signierten
+  First-order-Gates bestehen. Der L5-Root liegt bei
+  \((R,\Omega)=(0.9435346582358031\ldots,1.5845158635282613\ldots)\);
+  L1--L5-Steigungen sind 1.0074/1.0086. Das erweitert den Ast auf sechs
+  lokal existenzzertifizierte Zellen, nicht auf sechs nachgewiesen stabile
+  Schleifen. Beide Intervallpanels verwenden weiterhin denselben
+  `mpmath.iv`-Backend; eine unabhaengige formale Verifikation fehlt.
+- Der anschliessend prospektierte P1-Test waehlt L3 ausschliesslich nach
+  Leiterposition und Zustandskosten. Im 4800-dimensionalen Voll-FIFO-Zustand
+  konvergieren die eingefrorenen 32/48-ARPACK-Panels zum fuehrenden
+  transversalen Multiplikator
+  \(|\lambda_\perp|=0.996493397718\); die komplexen Schaetzungen unterscheiden
+  sich um \(7.85\times10^{-13}\). Alle sechs gespiegelten Stoerungsarme
+  kontrahieren ueber 10000 Updates, bei maximalem transientem Faktor 1.002631.
+  Das kritische Review haelt den lokalen Pass aufrecht, aber ARPACK schliesst
+  das volle Spektrum nicht ein und die uebrigen vier Nicht-Anchor-Zellen sind
+  nicht stabilitaetsgeprueft.
+- Das danach vor Einsicht eingefrorene P2-Gate trennt den exakten linearen
+  Center-Readout vom lokal linearisierten Kraftfeedback. Der skalare
+  Ursprungsschluss ist fuer L3 mit \(g_H=-0.045833\ldots\) analytisch
+  unzulaessig. Im vollen matrixwertigen Tangentenvergleich bleiben die
+  groessten Zustands-/Centerfehler unter \(7.5\times10^{-9}\), der
+  single-sign Restterm unter \(7.4\times10^{-5}\) relativ und seine beiden
+  Skalierungsexponenten bei 1.99999/1.99997. Der registrierte Gesamtentscheid
+  ist dennoch `loop-center-matrix-local-fail`, weil die absolute D0-Endsteigung
+  in allen Armen etwa 0.005--0.006 pro Memory-Zeit statt hoechstens 0.001
+  betraegt. Die publizierten Tail-Samples fallen ausnahmslos; dieser
+  post-hoc Befund darf den formalen Fail nicht umbenennen.
+- Der prospektive finite-\(H\)-A2-Test besteht alle fuenf registrierten
+  Small-Gain-/Positive-Real-Zellen und stuetzt damit einen reziprok
+  realisierbaren effektiven Center-Filter-Port. B-star identifiziert in der
+  nichtlinearen Ringpufferimplementierung die Skalierung
+  \(m_{\rm filter}\propto\tau\mu^{-1}M_0^0\) und besteht die gemeinsame
+  Holdout-Ecke mit etwa \(6.6\,10^{-6}\) maximalem Relativfehler. Weil Port
+  und Wrapper konstruiert sind, ist dies keine unabhaengige Entdeckung
+  physischer Masse.
+- Der eingefrorene P4-Source-/Write-Lauf verwendet die volle nichtlineare
+  L3-FIFO-Map in 24 schwachen Armen. Der exakte finite-H-Arbeitsledger liegt
+  pro Schritt maximal bei `9.60e-12` seiner Anfangsenergieskala und besteht;
+  channel-off, D0, Phase, Even/Odd, drei Amplituden und Spiegelung bestehen
+  ebenfalls. Die Entscheidung bleibt dennoch formal
+  `p4-source-write-architecture-fail`: Zwei cancellation-dominierte
+  Direktresiduen verfehlen eine unter-binary64 skalierte Grenze, und alle
+  Arme ueberschreiten substanziell die registrierte Orthogonalgrenze. Das
+  stuetzt nur den deklarierten Ledger und eine neue zu testende
+  matrixwertige Antwortshypothese, keinen Mechanikpass.
+- Fuer `d=10`, `A_att=35` bestehen 5/5 Seeds ein retrospektives Altersgate
+  ueber `N={1M,3M,10M,30M}` und den separaten `N=300M`-Holdout sowie lokale
+  Radius-Endfenster. Der Befund bestaetigt spaete Endstationaritaet innerhalb
+  der Messgrenzen, nicht deren erste Entstehungszeit; zeitaufgeloeste
+  Shape-Fenster fehlen in den Legacy-Traces.
+- Die dichtere Dimensionsreproduktion ueber sechs N-Endpunkte zeigt fuer drei
+  gematchte Seeds `D_mem=8.857..9.268` im vorgegebenen `d=10`. `D_cov`
+  schwankt; der spaete `D_occ`/`D_win`-Rueckgang ist mit zehnfach groberem
+  Sampling konfundiert. Daraus folgt weder ein Plateaugesetz noch 3D-Selektion.
+- Das aktive skalare Delta-Quellfeld besteht den vorregistrierten
+  Mechanismus-Piloten in drei Seeds: `dt=0.05` gegen `0.025` und `N_x=256`
+  gegen `512` stimmen in niedrigen Moden bis `6.12e-7` bzw. `7.50e-11`
+  relativ ueberein. Der aktive Arm saettigt bei `k=1`, cubic-off erreicht den
+  Sicherheitsstopp und source-off bleibt exakt null. `eta=0` bildet nahezu
+  dasselbe Feld, daher ist nur klassische Musterbildung gestuetzt. Explorativ
+  verschiebt das aktive Readout die Source-Field-Phase von etwa null auf pi
+  und die Quelle um etwa eine halbe Wellenlaenge, bevor sie spaet pinnt.
+- Die dynamische Relaxations-Diffusion veraendert Radius und Kraft glatt und
+  aufloesungsstabil; sie liefert eine reduzierte Vorhersagebeschreibung.
+- Der exakte `eta=0`-Rohmodenblock besitzt nur reelle Multiplikatoren. Bei
+  derselben N=1M-Kadenz bleiben gepoolte (`0/15`) und vollstaendige seedweise
+  (`0/75`) Rohfits reell; `27/375` kurze Segmentfits zeigen nur kleine
+  konditionierungsbedingte Leckpaare bis `7.25e-4` Frequenz pro Memory-Zeit.
+- Der skalare Cross-Kernel erzeugt reproduzierbare Zentrumtranslation bei
+  sehr kleiner Shape-Aenderung.
+- Der konstruierte persistente Vektorkanal trennt sich zuerst in 6/6 Seeds und
+  danach bei globalem `eta_v` in 6/6 unabhaengigen Paaren von Random-Sign- und
+  Ein-Schritt-Kontrollen, bei kleinen Shape-Stoerungen.
+- Die autonomen orientierten Sources bestehen in 6/6 Faellen das vorregistrierte
+  Spektral-Identifizierbarkeitsgate fuer beide lokalen Mediatorregeln. Der
+  Transferkontrast ist jedoch fuer persistenten und Ein-Schritt-Input nahezu
+  gleich; dies stuetzt keine spezifische Vektorpersistenz.
+- Unter identischer autonomer Source bestehen beide Mediatorregeln in 6/6
+  Paaren Messbarkeit, Oddness, Shape-Huelle und Distanzabfall. Die verlangte
+  robuste Diffusion-/Telegraph-Trennung besteht nur in 4/6 Paaren; der
+  dynamische Modellselektionsversuch ist damit negativ.
+- Der feste P3.2-Telegraph-Filter besteht Mediator-, Response- und Shape-Gates
+  in 5/5 Common-Noise-Fortsetzungen. Alle 80 rohen Segmentfits in Kanal-aus,
+  direkt reziprok, retardiert einseitig und retardiert reziprok bleiben exakt
+  reell. Der retardierte Endabstand `0.58..1.21R` gegen direkt `0.31..0.88R`
+  stuetzt verzoegerte oder geschwaechte Bindung, keine beobachtbare Rotation.
+  Da der Eingang weiterhin ein zielabhaengiger Cross-Gradient ist, ist dies
+  noch keine rein quelllokale Feldtheorie.
+
+
+### Nicht gestuetzt oder widerlegt
+
+- Der neue Rotating-wave-Kreis ist die räumliche \(SO(2)\)-Gruppenbahn eines
+  relativen Gleichgewichts. Nach Quotientieren der ambienten Rotation bleibt
+  ein Punkt; eine zusätzliche interne \(S^1\)-Phase, ein konservativer
+  Kreisel, Arbeit oder Masse folgen daraus nicht.
+- P4 etabliert keine reziproke Single-Loop-Gesamtmechanik: Der formale Fail
+  bleibt bestehen. P4-R-phi bestaetigt danach die chirality-odd Querantwort in
+  einer frischen diskreten Acht-Phasen-Quadratur. Der reviewed P4-R-S-Pass
+  traegt diese Antwort auf einen zweiten vorbereiteten Skalenpunkt, benennt
+  P4 aber ebenfalls nicht um. N0 traegt danach eine reviewed finite-time
+  Rauschklammer von `chi=1e-4` bis `1e-3`, ohne physikalische Kalibrierung.
+  Weder die beiden Skalen noch die Kreisgeometrie definieren Spin oder
+  gyroskopische Masse. Der erste P5-D-Standardaufruf und der einzige
+  Recovery-Ersatzlauf sind wegen zweier finaler JSON-Schemafehler jeweils
+  `p5d-inconclusive`; beide erzeugten kein Ergebnisartefakt oder beobachtete
+  Entscheidung. Die Recovery-Autorisierung ist verbraucht, Target und Evidenz
+  bleiben geschlossen.
+- Ein spezifisch zweiskaliger nichtlinearer Knotenmechanismus ist nicht
+  isoliert.
+- Die vorhandenen Scans selektieren keinen exakten Amplitudenwert. Insbesondere
+  folgt `A_eff=26` aus der aktuellen Parametrisierung; `27=3^3` und der daraus
+  hypothetisch gebildete Rohwert `36` sind nicht dynamisch hergeleitet.
+- Komplexe ausgerichtete AR-Moden sind nicht von `eta=0` getrennt und nicht
+  segmentstabil. Die exakte rohe Memory-Null ist reell; damit sind die
+  bestehenden Paare Darstellungs-/Fitmoden und keine Oszillations- oder
+  Photonenevidenz.
+- `D_mem` nahe drei im 3D-Embedding ist keine Dimensionsselektion.
+- Der positive skalare Memory-Kanal besitzt keine interne Ladungs- oder
+  Neutralitaetsstruktur.
+- Direkte Fernkopplung und diffusive Felder liefern keine harte endliche
+  Signalgeschwindigkeit.
+- Der aktuelle komponentenweise Vektormediator kann keine eindeutige
+  Ambient-Dimension drei selektieren: Seine Ambient-Transfermatrix ist
+  proportional zu `I_d` und erhaelt ohne weiteren Mechanismus den Rang einer
+  vollrangigen Source.
+- Der vorhandene Random Walk bestimmt weder einen negativen `k^2`-Term noch
+  quadratische/kubische Feldnichtlinearitaeten. Eine endliche-Wellenzahl-
+  Instabilitaet, diskrete Aeste oder Quantisierung sind daher nicht aus den
+  bisherigen Annahmen abgeleitet.
+
+### Offene Hypothesen
+
+- Ein spaeteres physikalisches Mediatorgesetz braucht ein unabhaengiges
+  Targetkriterium oder eine weitere falsifizierbare Mechanismusannahme. Ein
+  weiterer Fit derselben Kopplungen an dieselben Zielantworten waere nicht
+  identifizierend.
+- Felder selektieren nicht automatisch drei Dimensionen. Eine spaetere
+  Dimensionshypothese braucht dieselbe eingefrorene Regel ueber mehrere
+  Ambient-Dimensionen und einen kontrollgetrennten effektiven Response- oder
+  Modenrang; eine 3D-Feldsimulation waere nur eine 3D-Annahme.
+- Weitere reziproke Vollsimulationen sind erst sinnvoll, wenn eine quelllokale
+  Emissions-/Readout-Regel analytisch definiert und ihr sichtbarer Modus vorab
+  von den eingesetzten internen Mediatorpolen getrennt ist.
+- Der angenommene negative dimensionslose `k^2`-Koeffizient in
+  `P(u)=1+a2 u^2+u^4` erzeugt mit kubischer Saettigung numerisch robuste
+  endliche Wellenzahlen. Weil derselbe Ast fuer `eta=0` entsteht, braucht ein
+  naechster Feldtest eine vorab definierte feedback-spezifische Observable
+  oder unabhaengige Source-/Target-Dynamik; weitere Koeffizientensuche waere
+  nicht identifizierend.
+
+## Status der Zusammenfuehrung
+
+**Evidenz:** Der gemeinsame L3-Test wurde prospektiv ausgefuehrt. \(B_H\) ist
+der exakte lineare Readout, waehrend der volle FIFO-Jacobian die lokale
+nichtlineare Antwort im registrierten Fenster mit grosser Marge beschreibt.
+Der positive skalare Centerabschluss gilt am L3-Ursprung nicht. Das formale
+P2-Gate scheitert ausschliesslich an der absoluten Tail-Slope-Grenze. Die vor
+weiterem Targetzugriff eingefrorene P2-R-Verlaengerung reproduziert alle 120
+alten Metriken und alle acht 2400-Update-Checkpoints exakt. Alle 48 neuen,
+disjunkten spaeten Fenster besitzen negative signierte Steigungen und
+aufgeloeste logarithmische Abklingraten von 0.636--0.777 pro Memory-Zeit; die
+End-/Checkpoint-Peak-Verhaeltnisse liegen bei
+\(3.53\times10^{-6}\)--\(4.41\times10^{-6}\). Im nachgelagerten, separat
+eingefrorenen P3-Test erreichen alle sechs target-informierten und alle vier
+target-blinden nichtkreisfoermigen Arme den L3-Zielorbit. Der spaeteste
+Eintritt erfolgt nach 9.4 Memory-Zeiten; alle Arme verweilen danach bis
+Memory-Zeit 60 im registrierten D0-Tube.
+
+**Inferenz:** Die Daten stuetzen eine lokale anisotrope Matrixkopplung von
+Loop und Center sowie finite-ensemble attraction aus fuenf nichtkreisfoermigen
+Historiengeometrien in beiden vorgegebenen Chiralitaeten. Die aufgeloesten
+P3-Annaeherungsraten 0.689--0.731 pro Memory-Zeit sind mit P1 vereinbar, aber
+identifizieren weder einen einzelnen Pol noch eine skalare Masse. Die zwei
+target-blinden Geometrien enthalten kein \(R_3\) oder \(\theta_3\), bleiben
+jedoch modellinformierte, chiral vorbereitete Delayhistorien.
+
+**P4-Evidenz:** Die anschliessend eingefrorene Source-/Write-Architektur nutzt
+den exakten chirality-konditionierten Orbit-Center \(C_s\), nicht das raw
+\(c_H\). Alle 24 schwachen Arme sowie beide channel-off-Kontrollen sind
+vollstaendig. Write-/Age-Split, Interaktionsledger, Gegenkraft, Midpoint-
+Kraft und positive Mobilitaeten bestehen. Der bewusst falsche raw-\(c_H\)-
+Ledger verfehlt die Bilanz um bis zu `14.9784` Anfangsenergien, der ohne
+Age-Term um bis zu `19.99`.
+
+**P4-Grenze:** Die unveraenderliche Entscheidung ist dennoch
+`p4-source-write-architecture-fail`. Zwei algebraisch redundante direkte
+Readout-Residuen liegen absolut nur bei `2.36e-16..3.28e-16`, werden aber gegen
+eine cancellation-unaufgeloeste Grenze von `1.18e-18..4.72e-18` normiert.
+Das ist ein Messdesignfehler und keine aufgeloeste Nichtreziprozitaet; der
+formale Fail bleibt trotzdem bestehen. Unabhaengig davon falsifizieren alle
+24 Arme die registrierte Geradeausantwort: Center und Aktuator erreichen
+Querkomponenten von `0.207..0.210 delta` beziehungsweise
+`0.152..0.156 delta` bei maximal erlaubten `0.05 delta`. D0, Phase,
+Amplitudenkollapse und Spiegelkontrollen bestehen, und die Querkomponente
+wechselt mit der Chiralitaet das Vorzeichen.
+
+**P4-R-Evidenz:** Der separat eingefrorene neue Holdout verwendet acht
+gleichmaessige History-Startphasen und die ungeoeffnete Zwischenamplitude
+`delta/R=0.0015`. Alle 16 channel-off- und 32 aktiven Arme, alle 96
+80-stelligen Checkpoints, lokalen Increment-Identitaeten, konservativen
+Full-dot-Envelopes und der komplette finite-H-Ledger bestehen. Die diskreten
+Mittel sind \(B_C=0.2084215772\) und \(B_Q=0.1537530855\), jeweils mit 8/8
+positiven Phasenknoten. Spiegelung und Halbdrehung bestehen bis etwa
+`2.4e-15 R`. Ein separat implementierter Standardbibliothek-Auditor rekonstruiert aus
+dem gespeicherten JSON dieselbe Entscheidung; zwei NumPy/SciPy-Stacks liefern
+alle wissenschaftlichen JSON-Bloecke exakt gleich.
+
+**P4-R-Grenze und Source-Urteil:** Die acht Knoten sind eine deterministische
+Quadratur mit vier spiegelverschiedenen Phasenpaaren, keine Replikationen und
+kein kontinuierliches Phasenintegral. Der Port bleibt eine explizite
+chirality-konditionierte Modellkonstruktion. Das interne Source-Referee-Audit
+urteilt `referee-source-ready-with-major-claim-restrictions`: ein zweiter
+Intervallbackend, ein vollstaendiger Wheel-/Hash-Lock sowie
+`CITATION.cff`/Release fehlen. Keine dieser Restriktionen untergraebt den
+reproduzierten Port-/Ledger-/Antwortbefund.
+
+**P4-R-S-Ergebnisstatus:** Designaudit, Protokoll und Implementierungsreview
+wurden vor dem ersten registrierten Lauf getrennt eingefroren. Der
+unveraenderte Lauf bildet L3 und Anchor ueber `tau=alpha*n` auf je 401
+gemeinsame Samples bis `tau=20` ab und verwendet in beiden Zellen denselben
+Notch-/Adjoint-Vertrag mit skalenweise rekonstruierter positiver Mobilitaet
+`nu=G=|a0|^2`. Alle 16 channel-off- und 32 aktiven Anchor-Arme sowie 96
+High-precision-Referenzen bestehen. Die diskreten Anchor-Mittel sind
+`A_C=0.24204809`, `B_C=0.20609447`, `A_Q=0.30333072` und
+`B_Q=0.15260066`, jeweils mit 8/8 positivem Phasensupport. Die groesste
+registrierte Anchor--L3-Abweichung ist `0.00232715` gegen die vorab fixierte
+Grenze `epsilon_scale=0.05`.
+
+Ein separat implementierter Standardbibliothek-Auditor rekonstruiert
+Entscheidung, Skalierungsarrays, Ledgergates und alle 96 Referenzen ohne
+Abweichung. Das kritische Review haelt deshalb
+`p4rs-anchor-scale-transfer-pass` aufrecht. Der Befund traegt genau die
+diskrete Antwortuebertragung zwischen zwei vorbereiteten Skalenpunkten; zwei
+Zellen liefern weder Konvergenzordnung noch unabhaengige Replikation.
+Der targetfreie P5-D-Designaudit endet mit
+`p5d-mutual-center-design-identifiable`. Er waehlt eine lineare gegenseitige
+notched-Center-/adjungierte Write-Kopplung zweier getrennt fortgeschriebener
+Anchor-Historien. Ein getrennt gepushter Protokoll-Freeze legt vor
+Implementierung 64 Basiskonfigurationen und 832 deterministische
+Kontrollarme fest. Primaer sind Einwegkausalitaet, reziproker gemeinsamer
+finite-H-Ledger, Swap/Reflexion, Distanz-/Staerkeskalierung, Schleifenerhalt
+und ein Closed-loop-Ueberschuss gegen die Summe beider Einwegantworten.
+
+Die Implementierung liegt als eigener Commit mit gruenem CI vor. Ein
+getrenntes Readinessreview deckt alle zwoelf Pre-target-Falsifikatoren ab und
+urteilte `p5d-implementation-ready`. Die 832 Arme sind Kontrollen, keine
+Replikationen; der kompakte Auditor prueft gespeicherte Reducer und
+Checkpoints, nicht jede nichtserialisierte lokale Operation unabhaengig neu.
+Der erste danach autorisierte Lauf erreichte `json.dumps` nach Panel,
+Response und Klassifikation, scheiterte aber an einem NumPy-Bool in der
+verschachtelten Payload. Eine getrennte Recovery erlaubte nur die
+JSON-Konversion von NumPy-Skalaren und bestand neue Implementierungs- und
+Readiness-CI. Der genau einmal autorisierte Ersatzlauf erreichte wiederum die
+finale Serialisierung, scheiterte dort jedoch unter `allow_nan=False` am
+garantierten Channel-off-Sentinel `minimum_dissipation=inf`. Beide Aufrufe
+erzeugten weder Rohartefakt noch beobachtete Entscheidung und sind
+`p5d-inconclusive`. Die Recovery-Autorisierung ist verbraucht und P5-D ohne
+neues prospektives Governance-Protokoll geschlossen. Ein Abstandstrend waere
+ohnehin wegen des explizit eingesetzten Kraftvorzeichens fuer sich trivial.
+Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind nicht gestuetzt.
+
+Das kritische P3-Review haelt dessen Full-Pass als finite-ensemble attraction
+aufrecht. Das separate P4-Review haelt den formalen P4-Fail aufrecht. P4-R,
+Source-Audit, der reviewed P4-R-S-Skalenpass und die reviewed N0-Klammer
+haben ausschliesslich den targetfreien P5-Designaudit, Protokoll,
+Implementierung und Readinesspruefung geoeffnet. Nach dem technisch
+inconclusiven Erstaufruf und dem ebenfalls inconclusiven, fail-closed
+Ersatzlauf ist die P5-D-Abhaengigkeitskette geschlossen. Der naechste
+autorisierte Schritt ist die Paper-I-Abgrenzung in den
+[Projektprioritaeten](project_priorities.md); diese Statusseite enthaelt keine
+konkurrierende Aufgabenreihenfolge.
+
+## Kanonische Evidenzschiene
+
+Der kuratierte Einstieg in die mehr als 100 Markdown-Reports liegt in
+`reports/README.md`. Fuer den aktuellen Entscheidungsstand sind besonders
+wichtig:
+
+1. `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`
+2. `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`
+3. `reports/long_runs/stability/checkpoint_stability_gate_d10_A35_2026-07-30.md`
+4. `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
+5. `reports/memory/closure/low_mode_identity_audit_2026-07-20.md`
+6. `reports/memory/closure/eta_zero_raw_mode_null_audit_2026-07-31.md`
+7. `reports/response/one_way/one_way_interaction_age_N3M_2026-07-21.md`
+8. `reports/response/scalar/scalar_cross_readout_resolution_2026-07-21.md`
+9. `reports/response/one_way/oriented_history_current_audit_2026-07-21.md`
+10. `reports/response/oriented/oriented_vector_one_way_gate_2026-07-25.md`
+11. `reports/response/oriented/oriented_vector_fixed_pair_distance_gate_2026-07-26.md`
+12. `reports/response/oriented/local_oriented_mediator_gate_2026-07-28.md`
+13. `reports/response/oriented/oriented_source_mediator_identifiability_2026-07-28.md`
+14. `reports/response/oriented/dynamic_common_source_mediator_gate_2026-07-28.md`
+15. `reports/kernels/field/local_field_operator_audit_2026-07-29.md`
+16. `reports/kernels/field/write_read_reparameterization_audit_2026-07-30.md`
+17. `reports/kernels/field/active_scalar_delta_field_pilot_2026-07-31.md`
+18. `reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.md`
+19. `reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.md`
+20. `reports/memory/closure/adjoint_reciprocity_eligibility_audit_2026-08-07.md`
+21. `reports/memory/representations/carrier_memory_metric_comparison_2026-08-08.md`
+22. `reports/response/reciprocal/same_law_reciprocal_jacobian_audit_2026-08-11.md`
+23. `reports/response/reciprocal/same_law_common_scale_followup_2026-08-11.md`
+24. `reports/response/reciprocal/same_law_affine_balance_gate_2026-08-11.md`
+25. `reports/memory/closure/continuity_constrained_memory_gate_2026-08-11.md`
+26. `reports/memory/closure/dynamic_green_kernel_selection_gate_2026-08-11.md`
+27. `reports/dynamics/limits/scalar_memory_center_inertial_port_gate_2026-08-16.md`
+28. `reports/dynamics/limits/scalar_memory_center_finite_h_port_a2_2026-08-16.md`
+29. `reports/dynamics/limits/scalar_memory_center_filter_scaling_bstar_2026-08-16.md`
+30. `reports/dynamics/rotation/scalar_memory_rotating_wave_discovery_2026-08-20.md`
+31. `reports/dynamics/rotation/scalar_memory_rotating_wave_stability_2026-08-20.md`
+32. `reports/dynamics/rotation/scalar_memory_rotating_wave_interval_certificate_2026-08-21.md`
+33. `reports/dynamics/rotation/scalar_memory_rotating_wave_refinement_ladder_2026-08-21.md`
+34. `reports/dynamics/rotation/scalar_memory_rotating_wave_continuum_reconciliation_2026-08-21.md`
+35. `reports/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit_2026-08-21.md`
+36. `reports/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling_2026-08-21.md`
+37. `reports/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_2026-08-22.md`
+38. `reports/dynamics/rotation/scalar_memory_loop_center_p2_2026-08-25.md`
+39. `reports/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery_2026-08-25.md`
+40. `reports/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin_2026-08-26.md`
+41. `reports/dynamics/rotation/scalar_memory_loop_p4_source_write_2026-08-26.md`
+42. `reports/project/meta/reviews/scalar_memory_loop_p4_source_write_review_2026-08-26.md`
+
+Diese Auswahl ist eine Entscheidungsschiene, keine Behauptung, dass andere
+Reports geloescht oder ungueltig seien. Fruehe `legacy-sign`-Reports erklaeren
+die Historie, tragen aber keine aktuellen Kernelclaims.
+
+## Aktiver Codepfad
+
+- `src/emergenz_knoten/`: kanonischer Paketkern.
+- `src/emergenz_knoten/markov/`: reduzierte Operator- und Closure-Werkzeuge.
+- `src/emergenz_knoten/stability.py`: Checkpoint-, Holdout- und lokale
+  Stationaritaetsgates fuer lange Formationslaeufe.
+- `src/emergenz_knoten/memory_metrics.py`: PSD-Metriken, Observability-Gramian,
+  RKHS-Emission und explizite Support-/Formvergleiche fuer reduzierte
+  Memory-Features.
+- `src/emergenz_knoten/measurement_stability.py`: separates
+  Messkonvergenzgate fuer cadence- und estimatorabhaengige
+  Occupancy-Dimensionen.
+- `src/emergenz_knoten/active_scalar_field.py`: reelles periodisches
+  ETD1-Delta-Quellfeld mit kubischer 1/2-Dealiasing-Regel.
+- `src/emergenz_knoten/rotating_wave.py`: native finite-H- und
+  Fixed-gain-Kontinuumsbilanzen der vorbereiteten Kreise.
+- `src/emergenz_knoten/rotating_wave_interval.py`: Multipraezisions- und
+  Krawczyk-Einschluesse der finite-Summen-Roots.
+- `src/emergenz_knoten/rotating_wave_stability.py`: volle mitrotierende
+  FIFO-Map, analytischer Sparse-Jacobian und Symmetriequotient.
+- `src/emergenz_knoten/orbit_center_actuator.py`: exakter endlicher
+  Orbit-Center-Notch, adjungierte Slotkraefte und der reziproke
+  Source-/Write-Schritt samt vollstaendigem Age-Ledger.
+- `experiments/current/dynamics/rotation/README.md`: sequentielle
+  Rotationspipeline; `reports/dynamics/rotation/README.md`: Artefaktledger.
+- `experiments/current/dynamics/scaling/scalar_memory_center_*.py`:
+  effektiver Center-Port, finite-H-A2-Zertifikat und B-star-Skalierung.
+- `src/emergenz_knoten/oriented_source.py`: passiver orientierter Zusatzstate
+  mit gepaarten One-Way-Kontrollen.
+- `src/emergenz_knoten/oriented_diagnostics.py`: gemeinsame Response-, Shape-
+  und Distanzmetriken fuer den konstruierten orientierten Kanal.
+- `src/emergenz_knoten/local_mediator.py`: lokale 1D
+  Relaxations-Diffusions- und Telegraph-Zustaende.
+- `src/emergenz_knoten/mediator_identifiability.py`: segmentierte
+  Source-Spektren und sourcegewichteter komplexer Transferkontrast.
+- `src/emergenz_knoten/retarded_reciprocal.py`: direkte und statisch normierte
+  Telegraph-retardierte Vollknotenarme mit festen Common-Noise-Kontrollen.
+- `src/emergenz_knoten/external_field_response.py`: gepaarte zeitabhaengige
+  Aktiv-/Flip-/Kanal-aus-Targetfortsetzung.
+- `experiments/current/`: reproduzierbare aktive Entry-Points.
+- `experiments/archive/`: historische oder nichtkanonische Skripte.
+- `data/processed/`: standardmaessig ignorierte Bulk-Outputs; nur reviewed
+  Snapshots werden explizit getrackt.
+- `reports/`: datierte Evidenz mit maschinenlesbaren JSON-Paaren, soweit
+  sinnvoll.
+- `figures/draft/`: Reportabbildungen, nicht automatisch Paper-Evidenz.
+
+## Aktuelle Entscheidung
+
+Der skalare Fernkanal ist als Negativ-/Baseline-Modell ausreichend gehaertet.
+Weitere Amplituden-, kleinere-Epsilon- oder reine Alters-Scans sind ohne neue
+diskriminierende Hypothese nicht priorisiert.
+
+Das statische Cross-Readout-Gate scheitert in `d=3/10` am vorregistrierten
+1%-Formsignal. Auch die anschliessende kostenlose Umdeutung der geordneten
+skalaren Historie besteht weder als polarer Strom noch als antisymmetrische
+Zirkulation die konditionale 99%-Random-Sign-Null. Damit wird als genau ein
+neuer Mechanismus ein **eigenstaendig evolvierender orientierter Zustand mit
+relationalem Readout** geoeffnet. Ein lokaler/retardierter skalarer Mediator
+bleibt fuer eine spaetere Lokalitaets- oder Laufzeitfrage zurueckgestellt.
+
+Das vorregistrierte orientierte One-Way-Gate besteht in 6/6 Formationsseeds.
+Die relevante Trennung ist persistent/random-q95 `5.76..11.64` gegen
+Ein-Schritt/random-q95 `1.40..2.04`, nicht die per Formel normalisierte rohe
+Auslenkung. Dies stuetzt den konstruierten Zusatzkanal, nicht seine Emergenz.
+
+Das feste-Kopplung-Gate besteht ebenfalls in 6/6 zyklisch verschiedenen
+Source/Target-Paaren. Random-Sign-Trennung `3.16..11.70`, Persistenzgewinn
+`2.25..8.64` und Fern/Nah `9.36e-4..2.80e-3`; alle Flip- und Shape-Gates
+bestehen. Dies haertet den konstruierten Kanal gegen stateweises Retuning. Der
+Gauss-Readout erzwingt jedoch bereits raeumliche Abschwaechung und ist
+instantan; daraus folgt weder emergente Lokalitaet noch Propagation.
+
+Der lokale Mediator-Holdout besteht als Architekturtest fuer beide eingesetzten
+Regeln. Relaxations-Diffusion erreicht maximal `9.09%` Lag-Vorhersagefehler und
+`0.31%` Aufloesungsdrift, Telegraph `7.88%` bzw. `4.91%`; beide bestehen
+`5/5` Holdout-Paare bei Shape-Stoerungen unter `3.72e-4`. Das Ergebnis ist
+**mechanism underdetermined**, weil die jeweilige Skalierung in der
+Feldgleichung steckt. Es ist keine Propagationsgesetz-Entdeckung.
+
+Vor dem dynamischen One-Way-Lauf wurde deshalb ein Identifizierbarkeitsaudit
+gesetzt:
+Traegt die autonome orientierte Source kontrollgetrennte Spektralleistung in
+Baendern, in denen sich diffusive und Telegraph-Transferfunktion in Betrag
+oder Phase ausreichend unterscheiden? Ohne solchen Inputkontrast kann ein
+weiterer Lauf die Mechanismen nicht entscheiden. Reziprozitaet und ein
+`d=3`-Claim bleiben gesperrt.
+
+Das Audit besteht mit 6/6 Sources. Minimaler sourcegewichteter komplexer
+Transferkontrast `1.064`, unterscheidbarer Output-Leistungsanteil mindestens
+`0.9969` und Segmentdrift maximal `0.1568`. Persistenter/Ein-Schritt-Kontrast
+liegt aber nur bei `0.951..1.008` (Median `0.991`). Das zeigt, dass die autonome
+Quelle die bewusst verschiedenen Regeln unterscheiden kann, nicht dass
+Persistenz noetig oder eines der Gesetze physikalisch ist. Dieser Pass oeffnete
+genau den inzwischen abgeschlossenen dynamischen Common-Source-Holdout mit
+festen Kopplungen und beiden Inputarmen.
+
+Das dynamische Common-Source-Gate ist abgeschlossen und negativ. Beide
+Mediatorregeln bestehen fuer alle 6/6 Paare Response-, Oddness-, Shape- und
+Distanzgates. Die relative Trace-Trennung besteht jedoch nur in 4/6 Paaren
+ueber alle drei Distanzen statt der geforderten 5/6. Im Nahfeld bestehen 4/6,
+bei `5` und `10 R_pair` jeweils 6/6 Paare. Ohne unabhaengige Zieltrajektorie
+waehlt dieser Befund weder ein Transportgesetz noch Persistenz; Kopplungs-
+Retuning ist durch die Stopregel ausgeschlossen.
+
+Die Dimensionsfrage ist damit nicht zeitgleich geloest. Der aktuelle
+komponentenweise Kanal ist `O(d)`-aequivariant und uebertraegt jede Ambient-
+Komponente mit demselben skalaren Filter. Er besitzt keinen Mechanismus, der
+bei `d>3` gerade drei Richtungen aktiv laesst. Ein cross-`d`-Test wird erst
+sinnvoll, nachdem eine solche rangreduzierende Dynamik explizit formuliert und
+vor dem Lauf falsifizierbar gemacht wurde.
+
+Der analytische lokale Feldoperator-Audit schliesst diese Rang-Null nun als
+getestete Paketfunktion ab. Zugleich trennt er die bisherige Gauss-/LoG-
+Nullfamilie von einem moeglichen neuen Mechanismus: Erst `a2<0` in
+`1+a2 u^2+u^4` erzeugt ein bevorzugtes endliches Wellenzahlband. Der
+kritische Wert `a2=-2`, eine positive nichtlineare Saettigung und eine
+komponentenuebergreifende Ordnung sind jedoch zusaetzliche Annahmen. Deshalb
+folgt weder Quantisierung noch `d=3` aus diesem Audit.
+
+Der anschliessende aktive Delta-Quellfeld-Pilot besteht das numerische und
+klassische Finite-k-Mechanismusgate. Die kubisch gesaettigte Instabilitaet ist
+beschraenkt, waehrend cubic-off divergiert und source-off exakt null bleibt.
+Da `eta=0` dieselbe Feldordnung traegt, ist dies noch kein gekoppelter Knoten.
+Die beobachtete feedback-spezifische Phasenrelokation ist explorativ und kein
+Oszillations- oder Metastabilitaetsgate. Die analytische Nullreferenz fuer die
+AR-Scheinmoden ist nun abgeschlossen:
+Der rohe `eta=0`-Operator ist reell, volle N=1M-Fits bleiben reell und die
+ausgerichteten komplexen Paare sind nicht kontrollgetrennt. Der Feldzweig wird
+daher nicht mit einem freien Koeffizientensweep erweitert. P3.1 und P3.2 sind
+nun abgeschlossen: Direkte und Telegraph-retardierte skalare Reziprozitaet
+sind aktiv, formschonend und bindend, liefern in den registrierten
+`(x_-,m_-)`-Fits aber ausschliesslich reelle Moden. P3.3 bleibt gesperrt.
+P3.2a/b ist nun abgeschlossen. Der sichtbare `(x_-,m_-)`-Delayzustand
+besteht bei allen neun Seed-/Rauschkorrelationspaaren das Holdout-Closure- und
+Identifizierbarkeitsgate mit `kappa=46.8..81.0`, aber ohne ein einziges
+tiefenstabiles Segmentmatching. Feld- und Impulsreadouts liefern nur
+`-1.94%..+0.20%` zusaetzlichen Holdout-Gewinn und machen die augmentierte
+Delaymatrix mit `kappa=1.55e16..1.93e16` spektral nicht identifizierbar.
+Ihre 33/36 scheinbar passenden komplexen Segmente sind deshalb kein Modenpass.
+
+Die Variation `rho={0,0.9,0.99}` haelt die Einzelknoten-Rauschleistung bei
+etwa `0.818R` und senkt den relativen RMS-Schritt wie vorhergesagt auf etwa
+`0.579R`, `0.183R` und `0.0579R`. Der mittlere retardiert reziproke
+Endabstand sinkt entsprechend von `0.946R` auf `0.299R` und `0.0946R`;
+die Closure-Kurven bleiben nahezu unveraendert. Das ist staerkere Bindung bei
+kleinerer relativer Diffusion, kein Rausch-Unmasking einer Oszillation.
+
+Der gemeinsame-Fenster-Langhorizont-Audit ist abgeschlossen. Bei festen
+Hankelraengen `{2,4,8,16,32}` verschlechtern sich alle 45 gepaarten
+Designzellen aus drei unabhaengigen Seeds, drei skalierten
+Rauschkorrelationen und fuenf verschachtelten Raengen von 1000 auf 12500 Updates Historie; der mediane Anstieg
+von RMSE/Persistenz betraegt `+0.1203`. Der sichtbare Stable-/Entropy-Rank
+waechst zugleich von median `1.67/6.62` auf `5.87/49.4`, ohne Plateau. Das
+augmentierte Feld-/Impulsmemory kehrt den Trend nicht um.
+
+Bei Rang 16/32 bleibt der terminale Unterschied reziprok minus Einweg innerhalb
+`-0.00366..+0.00244`; die hochrangige Verschlechterung ist daher nicht vom
+Einweg-Mediator getrennt. Gestuetzt ist fixed-rank Informationsverduennung bei
+wachsender stochastischer Historie, nicht eine laengere physikalische
+Persistenzskala.
+
+Der vorregistrierte Pol-Identity-Stoptest ist ebenfalls negativ. Seeds 1/2
+zeigen einen Kandidaten nahe `omega=0.103` ueber 10..11/12 Rang-/Tiefenzellen,
+aber derselbe Pol liegt in 6..8/12 Einweg-Kontrollzellen. Seed 3 erreicht nur
+9/12 reziproke Zellen. Von vier korrelationsuebergreifenden Kandidaten ist
+keiner kontrollgetrennt. P3.2 ist damit geschlossen. Ein spaeter auf
+Nutzerwunsch ausgefuehrter 500k-Akkumulationskontrolllauf zeigt bei zwei
+Zukunftsrauschpfaden zwar grosse kontrollsubtrahierte Pfadabweichungen, aber
+nahezu dieselben Werte im Einwegarm. Er liefert damit keine kontrollgetrennte
+reziproke Akkumulation und aendert die Stopentscheidung nicht.
+P3.2c ist ebenfalls negativ abgeschlossen. Ein strikt emitterlokaler Offset
+`d=x-m` laedt den stabilen Telegraphpol nur mit normiertem Knot-Residuum
+`3.54e-5`; sein Generator verschiebt sich gegenueber dem Einwegkanal nur um
+`0.00622` relativ. Der Schrittstrom ist noch schwacher, beide Vorzeichen und
+die Modenordnungen 8/16/32 stimmen mit der exakten Rechnung ueberein. Deshalb
+kein 500k-Bestaetigungslauf. P3.2d ist nun ebenfalls negativ abgeschlossen.
+Da die alten Traces den vollen Shape-Tensor nicht speicherten, wurde die
+minimale autonome Reproduktion vorregistriert: `Q` hat zwar starke
+Niederfrequenzleistung, aber `0/5` Baseline-Pfade bestehen die
+Segmentidentitaet; `eta=0` ist staerker und liefert `2/5` Einzelkandidaten.
+`Delta Q/Delta tau` bleibt bei `0/5`. Eine Tensor-Mediatorregel ist damit nicht
+autorisiert. Die Vektormemory-Erweiterung ist inzwischen formal gehaertet:
+Das passive Source-Gate ist fuer Polarisation und Zirkulations-Bivektor 0/6
+negativ. Die anschliessende O(d)-kovariante Analyse zeigt, dass ein
+parity-even Ein-Feld-Gradientenfluss nur reelle Raten besitzt und eine
+endliche Raumskala erst bei b_hat_L oder b_hat_T < -2 selektiert. Das aktuelle
+passive Mikro-Update enthaelt diese Koeffizienten nicht. Die
+source-konditionierte Longitudinal-/Transversal-Fourier-Closure bestaetigt den
+homogenen Faktor 1-lambda_v in 6/6 Seeds bis auf maximal 6.6e-15 und findet
+keine Raumkoeffizienten oberhalb 1.9e-15. Laengere passive Runs koennen daran
+nichts aendern. Offen bleibt nur eine klar als effektiv markierte
+source-unaufgeloeste Grobkoernung; andernfalls waere ein aktives Feldgesetz ein
+neues Postulat.
+
+Als mechanistisch anderer Folgeschritt wurde eine diskrete
+adjungiert-reziproke Closure analytisch geschlossen. Ihr exaktes komplexes
+Fenster haengt nur von `g sigma_B^2` und `q` ab. Fuer den Jacobian der bereits
+implementierten normierten Richtungsdeposition liegen unter euklidischem
+Metrik-Kandidaten mindestens `99.83%` der Schritte in allen sechs reifen
+Snapshots im komplexen Fenster; die Seed-Median-Schrittweiten streuen nur um
+Faktor `1.045`. Das ist ein Eligibility-Pass, kein beobachteter Modus. Eine
+Reskalierung des Memory-Metriks aendert die Klassifikation, und die verwendete
+Kopplung ist nur aus einem frueheren Einweg-Gate geerbt. Das anschliessende
+vorregistrierte Drei-Metrik-Gate ist mit `0/6` Paaren negativ: Kovarianz,
+Probe-Observability und isotrope RKHS-Geometrie klassifizieren dieselben
+Carrier-Segmente systematisch als instabil, ueberdaempft beziehungsweise
+komplex. Finite-Differenz-Linearitaet und Cadence-Stabilitaet bestehen, aber
+absolute Skala, Horizont-/Segmentstabilitaet und Klassifikation reconciliieren
+nicht. Der euklidische Eligibility-Pass ist damit normalisierungsabhaengig;
+ein nichtlinearer reziproker Pilot und Gain-Retuning bleiben gesperrt.
+
+Die anschliessende vorregistrierte balancierte Vollmemory-Closure ist `0/6`
+negativ. Alle 72 Actual-Geometry-Auswertungen waehlen zwar denselben stabilen
+Rang-1-Modus mit etwa `96.6..97.8%` Hankelenergie und internem
+Principal-Cosinus ueber `0.999`. Er ist aber zu ueber `0.9999` mit Flat- und
+Age-Shuffle-Readout identisch und rekonstruiert den unabhaengigen Fernreadout
+nur mit Fehlern `0.501..0.862`. Gestuetzt ist deshalb eine generische
+exponentielle Delay-/Readoutkompression, keine knotenspezifische raeumlich
+uebertragbare Vollmemory-Mode. Der adjungiert-reziproke Vektorast ist in seiner
+aktuellen Form geschlossen; Gain-, Lambda- und Oszillationsoptimierung bleiben
+gesperrt. Ein weiterer Paper-III-Schritt muesste zuerst einen explizit
+reversiblen beziehungsweise antisymmetrischen Feldmechanismus als neue,
+analytisch falsifizierbare Annahme formulieren.
+
+Diese neue Annahme ist nun als P3.6 analytisch geschlossen. Ein konjugiertes
+Impulsfeld erweitert die lokale Vektorfeldenergie zu
+`m_dot=pi/I`, `pi_dot=-delta F/delta m-(gamma/I)pi`. Fuer jeden
+longitudinalen/transversalen Modus gilt
+`I s^2+gamma s+D_q(k)=0`. Exakte Wurzeln, O(d)-Kovarianz, reversible
+Energieerhaltung, dissipative Energierate und negative-Kruemmungs-Kontrolle
+bestehen bis maximal `1.18e-13`; Entscheidung: struktureller Pass. Das ist
+eine konstruktive Moeglichkeitsaussage, keine beobachtete Knotenschwingung.
+Stabilitaet stammt aus `D_q(k)>0` und `gamma>0`, Phase aus dem reversiblen
+Austausch; langlebige Oszillation benoetigt zusaetzlich kleine dimensionslose
+Daempfung. Die Koeffizienten bleiben Inputs und `d=3` wird nicht selektiert.
+Der Abgleich mit dem kanonischen Paketkern zeigt eine haertere Grenze: Weder
+`m`, `pi` noch `I`, `gamma` oder die Feldenergiekoeffizienten sind Variablen
+von `z=(x,rho)` oder `SimulationConfig`. Der Oszillator ist damit ein
+klassischer konstruktiver Vergleichsmechanismus, keine aus den Knotengleichungen
+beobachtete Emergenz und keine Quantenmechanik. P3.7 ist deshalb nun ein
+Identifizierbarkeits-/No-go-Gate: Eine vorab fixierte Projektion aus `(x,rho)`
+muss auf Holdout-Daten einen seed-, segment- und grobkoernungsstabilen
+zweiter-Ordnungsschluss gegen eine erster-Ordnung-Kontrolle rechtfertigen und
+eine unabhaengige Response vorhersagen. Erst ein Pass oeffnet wieder die
+gemeinsame Source-/Readout-Energie und einen Feldpiloten.
+
+Der naechste kanonische Zwischenschritt nutzt zunaechst keinen K2-Feldzustand:
+Fuer zwei skalare Knoten ist
+`Y_-=(x_-,xbar_rho_-)` bereits eine feste Projektion aus `(x,rho)`. Die lokalen
+Self-/Cross-Gains sind matrixwertig
+`G=eta Hess(Phi_self)` und `C(R)=eta_cross Hess(Phi_cross)`; die bisherigen
+Skalare `g,c` sind nur ihre isotrope Naeherung. `A_-(G,C,lambda)` und seine
+Pole sind daraus abgeleitete Observablen. P3.7a misst diese Jacobians auf
+reifen Zustaenden unter derselben Self-/Cross-Regel, bevor ein Low-g-Lauf oder
+eine Frequenzanpassung zulaessig ist.
+
+Der feste Same-Law-Jacobian-Audit bleibt bei `eta=0.15` reell und formal
+`inconclusive`, weil `C-G` je nach Distanz das Vorzeichen wechselt. Der
+registrierte Common-Scale-Folgeaudit findet bei `R=sigma_rep` ein gemeinsames
+stabiles komplexes Intervall `eta=0.0009965..0.0026549`; der feste Mittelpunkt
+`0.0016266` besteht fuer alle 13 Richtungsfaelle in `d=3,10`. Dies ist nur
+lokale Kruemmungs-Eligibility. Die vollstaendige Linearisierung enthaelt auch
+den affinen Rest `b_*=F(Y_*)-Y_*`. Deshalb ist vor jedem nichtlinearen Pilot
+nun ein Kraftbilanz-Gate vorgeschaltet; bei `b_*!=0` ist der komplexe Jacobian
+ein transienter Modus entlang einer driftenden Geometrie.
+
+Dieses Gate ist negativ abgeschlossen. Alle vier lokal komplex-eligiblen
+Abstandsgruppen bestehen `0/13`; die eingefrorene Drift pro Memory-Zeit reicht
+von etwa `1.25 R_mem` bei `2.5 R_mem` bis `1300..2355 R_mem` bei
+`R=sigma_rep`. Der kompakte Punktgrenzfall erklaert das strukturell:
+Self-Rueckstellung und ein endlicher Kraftnullpunkt desselben skalaren
+Zweigauss-Kernels verlangen entgegengesetzte
+`A/L^2`-Ungleichungen. Deshalb kein `N=500k`-Pilot und kein Eta-/Lambda-/
+Amplituden-Retuning. P3.8 beginnt nur als Herleitung einer gemeinsamen
+Source-/Readout-Energie mit expliziter Kraftbilanz und einem begruendeten
+internen signierten/orientierten Kanal oder getrennter Self-/Cross-Geometrie.
+
+Der erste P3.8-Kandidat ist analytisch enger gefasst: Ein lokaler
+Gedaechtnisstrom `j` ergaenzt die Dichte nicht als frei orientiertes Label,
+sondern ueber eine Kontinuitaetsgleichung. Der longitudinale Fouriermodus
+erfuellt `(s+lambda_m)(s+gamma_j)+c_j^2 k^2=0` und wird oberhalb
+`k_c=|lambda_m-gamma_j|/(2 c_j)` komplex. Sechs registrierte Identitaeten
+bestehen; die Memory-Innovation ist bei stationaerer Masse monopolfrei und
+teleskopiert ueber Zeitbloecke. Entscheidung: strukturelle
+Propagationseignung, aber noch keine Knotenevidenz. `j`, `gamma_j` und `c_j`
+sind neue Annahmen; statische Kraftbilanz, transversale Phase und `d=3` bleiben
+ungeloest. Der bestehende skalare Datensatz selektiert diese Erweiterung nicht.
+
+**Reviewkorrektur:** P3.8b verbindet diesen Strom nicht automatisch weiter.
+Der dort benoetigte `k^2`-Zaehler folgt nur aus einem eigenstaendigen
+longitudinalen Vektormediator `(m,p)` mit der gemeinsamen Kopplungsenergie
+`H_int=-g integral m dot grad(q) dx`. Dabei ist `q` die skalare Quelldichte;
+`m` ist weder das kanonische `rho` noch der P3.8a-Strom `j`. P3.8a und P3.8b
+teilen ein longitudinales Polpolynom, bleiben aber verschiedene
+Modellarchitekturen. Fuer den P3.8b-Kandidaten ist die Antwortsfunktion
+`g^2 k^2/[(-iw+lambda_m)(-iw+gamma_p)+k^2(a+b k^2+c k^4)]`, nicht mehr eine
+frei gescannte Radialfunktion. Der `k^2`-Zaehler erzwingt Nullmode null; das
+gemeinsame Gain erscheint als `g^2`. Fuenf dimensionale Koeffizienten zerfallen
+in Naturalskalen und drei dimensionslose Gruppen `delta,mu,r_gamma`. Wegen der
+Vertauschungssymmetrie der Zerfallsraten ist `r_gamma>=1` als groessere durch
+kleinere Rate definiert. Die
+Peakgleichung bestimmt die effektive Wellenzahl ohne Zielwert. Der feste
+Existenzpunkt `(-1.9,0.3,1)` besteht zwoelf Gates. Die 3D-Inversion erfolgt
+jetzt exakt ueber Residuen und stimmt mit unabhaengiger unendlicher
+Fourierquadratur bis `1.81e-15` ueberein. Die korrigierte erste Barriere liegt
+bei `3.91920 ell`, das erste getrennte Minimum bei `6.99092 ell`.
+
+P3.8c ist quasistatisch abgeschlossen. Zwei starre Kopien des vollstaendigen
+`d=3`, Seed-1, `N=100M`-Gedaechtniszustands wurden ohne Zustandsfortschreibung,
+Gain-Fit oder Sweep verglichen. Bei dem festen, modellabgeleiteten `R=5 ell`
+sagt der statische kompensierte Arm eine Kraft von `-4.78375`, der Gradientenmediator
+`+0.00648732` voraus; alle Orientierungen behalten die entgegengesetzten
+Vorzeichen. Der Gradientenarm besitzt fuer die komplette Memory-Wolke eine
+instabile Barriere bei `3.91920 ell` und ein stabiles quasistatisches Minimum
+bei `6.99092 ell`. Das ist ein **Diskriminierbarkeits- und Implementierungspass**,
+keine Mechanismusselektion: der Zustand ist mit `R_mem=2.12e-4 ell` praktisch
+punktfoermig, `ell=sigma_rep=1` ist gesetzt, nur ein Formationsseed wurde
+verwendet, und weder Mediator- noch Knotendynamik wurde simuliert.
+Die primaere reziproke Paarenergie koppelt zwei Memory-Dichten und ist damit
+ein neuer Cross-Channel, nicht das kanonische Sichtpunkt-Readout. Eine separat
+energiesymmetrisierte Sichtpunkt-zu-Fremdmemory-Kontrolle behaelt wegen der
+Punktartigkeit dieselben Diskriminatorvorzeichen; beide Regeln sind dennoch
+nicht identisch. Ihr gemeinsamer Amplitudenversatz von `0.2411%` entspricht
+bis auf `1.05e-8` dem Unterschied zwischen den Punktgrenzen `M_H` und `M_H^2` bei
+der endlichen gespeicherten Masse `M_H=0.997595`.
+
+P3.8d ist als konditionaler dynamischer Existenztest abgeschlossen. Die neue
+longitudinale Feldvariable `(m,p)` wird zusammen mit einer symmetrischen
+kollinearen Quellseparation `R` aus derselben Kopplungsenergie fortgeschrieben:
+`m_dot=p`, `p_dot=-Gamma p-A m+B(R)` und
+`R_dot=nu B_R(R) dot m`. Daraus folgt
+`E_dot=-Gamma |p|^2-|R_dot|^2/nu<=0`. Der diskrete Source-Schritt schliesst
+Source-work ueber einen diskreten Gradienten; der Feldschritt ist bei fester
+Quelle exakt. Damping-Quadratur, Cross-off, statische Suszeptibilitaet der
+erster-Ordnung-Kontrolle und Zeitschrittordnung bestehen. Bei den festen
+Starts `R/ell=5,8` laufen zweiter und erster Ordnung von beiden Seiten in das
+bereits vorhergesagte Minimum nahe `6.99`; die reversiblen Quenches zeigen
+kurze Kraftvorzeichenwechsel, die erster-Ordnung-Kontrolle nicht. Bei bereits
+statisch aequilibriertem Anfangsfeld verschwinden diese Vorzeichenwechsel;
+das Ringing ist damit Initialisierungs- und Quench-abhaengig.
+
+Dies ist **kein** Emergenzresultat des skalaren `z=(x,rho)`-Modells. Der
+Mediator, `delta,mu,r_gamma`, der Mobilitaetsquotient `nu=1` und die
+Skalenzuordnung bleiben Eingaben. Der Pilot ist kollinear und punktfoermig;
+Knotenform und kanonisches Memory werden nicht entwickelt. Fruehe
+Kraftamplituden sind zudem merklich UV-Cutoff-abhaengig. Die Lyapunov-Bilanz
+schliesst in dieser autonomen gedaempften Reduktion einen persistenten
+Limit-Cycle aus. P3.8d zeigt daher einen konsistent konstruierbaren
+Zusatzmechanismus, waehlt ihn aber gegenueber der erster-Ordnung-Realisierung
+nicht aus.
+
+P3.8e ist deshalb als **Mechanismus-Closure** festgelegt. Eine feste
+Observable `Y=Psi(x,rho)` und gepaarte schwache Finite-`k`-Impulse muessen
+zuerst die nichtparametrische kanonische Impulsantwort bestimmen. Pro
+registrierter Raum-/Symmetriemode werden danach erste Ordnung,
+unbeschraenkte zweite Ordnung, eine echte ungedaempfte Nebenhypothese und ein
+nichtparametrischer Delay-Kernel auf gemeinsamen Holdouts verglichen. Die
+kontinuierlich gedaempfte Form ist nur eine Interpretation stabiler
+AR(2)-Pole, kein unabhaengiges Modell. Bei `r`
+aufgeloesten Moden ist dies mindestens ein Vergleich von `r` gegen `2r`
+Zustaende; ein globaler Rang-2-Fit waere keine Feldidentifikation. Der
+uniforme Weak-Probe bleibt Pipelinekontrolle, weil der P3.8b/d-
+Gradientenkanal die homogene `k=0`-Mode exakt nullt.
+Fuer die drei P3.8d-Raumkoeffizienten werden mindestens drei
+Finite-`k`-Trainingskanaele und ein unangetasteter Dispersions-Holdout
+benoetigt; ohne unabhaengig fixiertes Zerfallsratenprodukt kommt ein weiterer
+Kanal hinzu.
+
+Ein effektives `(m,p)` ist nur zulaessig, wenn zweite Ordnung aus
+Input-Output-Minimalitaet folgt, kontinuierliche Pole und Residuen ueber
+Seeds, Cadences, Horizonte, Aufloesungen und Formationsalter stabil bleiben
+und ein leistungskonjugiertes Write-/Read-Paar eine gemeinsame positive
+Speichermetrik besitzt. Die Zustandskoordinaten selbst sind nur bis auf
+Aehnlichkeitstransformation bestimmt; invariant sind Transferfunktion, Pole,
+Nullstellen und Residuen. Einzelknoten-K0-Daten koennen nur einen internen
+Modus selektieren. Ein Cross-Mediator benoetigt bereits eine registrierte
+gemeinsame Mehrquellen-/Felddynamik im Ausgangsmodell oder bleibt explizite
+Erweiterung.
+
+Das historische P3.8e-Ergebnis ist nach erneutem Codeaudit
+`superseded-methodologically-inconclusive`. Freie und "gedaempfte" AR(2)
+waren keine unabhaengigen Modelle; ausserdem konnte die alte Panel-Hankel-
+Anordnung durch verschiedene Seed-/Richtungsresiduen Rang erzeugen. Die
+korrigierte Revision `e4f56b8` trennt active und `eta=0`, verwendet gemeinsame
+Zielzeiten, lernt Pole nur aus Memory-Fourierreadouts und prueft die sichtbare
+Relativkoordinate unabhaengig. Alle technischen Kontrollen bestehen weiterhin,
+einschliesslich vollstaendiger Cross-`k`-Linearitaet und Extinktion.
+
+Auch korrigiert bestehen **0/5** Kanaele. Alle gepoolten aktiven AR(2)-Pole
+sind reell; AR(2) verbessert weder Memory- noch sichtbares Holdout und die
+echte ungedaempfte Nebenhypothese ist deutlich schlechter. Der korrigierte
+Hankeloperator liefert `s3/s2=0.557..0.695`, also keine isolierte Rang-2-
+Struktur. Zugleich liegen nur `0.2%..0.8%` der skalenbalancierten Memory-Energie
+im Holdout. Die Eingangsprofile sind stark kollinear (medianer Gram-
+Konditionswert `15867`, maximale Off-Diagonale `0.9964`). Der Status ist daher
+`null-not-rejected-memory-holdout-limited`, kein universeller No-go-Satz.
+
+Der kanonische Write-Port P3.8f-a ist inzwischen ausgefuehrt. Ein zero-net
+sichtbarer Nachbarpuls schreibt in 5/5 reife N=3M-Zustaende kontrolliert ueber
+die unveraenderte Trajektorie-zu-Deposition-Abbildung; alle G0-Kontrollen
+bestehen. Die `kR_mem`-Moden sind dabei Ausgaenge, keine orthogonalisierten
+Eingaenge. Nach Abzug der globalen Translationsnullmode faellt die relative
+Positions-/Selbstkraftantwort jedoch schon nach etwa `0.12 tau_mem` unter die
+Schwelle von `1e-3` ihres Peak-RMS. Memory-Holdouts bestehen 3/3,
+unabhaengige Readout-
+Holdouts 0/3 in allen fuenf Seeds. G1 ist daher `inconclusive`; G2 und G3
+bleiben `blocked`. Dies ist weder ein zweiter-Zustand-Fail noch ein skalarer
+No-go-Satz.
+
+Als einzige Port-Reparatur wird ein vorregistrierter zero-net Puls mit einem
+Rueckkick nach genau einer intrinsischen Memory-Zeit vorbereitet. Er aendert
+weder Kernel noch Gain oder Noise und verwendet den Nachbarpuls als feste
+Negativkontrolle. Erst ein G1-Pass darf Modellordnung testen; ein erneutes
+G1-`inconclusive` schliesst diese kanonische skalare `(m,p)`-Route.
+
+Die Entscheidung ist maschinenlesbar in getrennte Gates zerlegt. P3.8f-a
+liefert `G0=pass`, `G1=inconclusive`, `G2/G3=blocked`. Der robuste Rang 4 der
+alten P3.8e-Gramfamilie beschreibt direkte Memory-Deformationen und ist kein
+P3.8f-Inputrang. Ein Zwei-Knoten-Transfer bleibt ein eigener nachgelagerter
+Zweig und darf die fehlende Single-Node-Identifizierbarkeit nicht retten.
+
+Langzeitlaeufe dienen fuer P3.8e der Altersstationaritaet der gemessenen
+Suszeptibilitaet. Ein laengerer Lauf des konstruierten P3.8d-Mediators kann
+wegen seiner Lyapunov-Bilanz weder `(m,p)` noch die zweite Zeitordnung
+selektieren. Der aktuelle Punktgrenzquotient `R_mem/ell=2.12e-4` macht
+aehnliche Kernel- und Knotenpotentiale zu einer plausiblen
+Grobkoernungshypothese, aber nicht zu einer inneren Mechanismusevidenz.
+
+Der erste breite S1-/Masse-P0-Audit bleibt historisch unveraendert:
+Er fand in den damaligen Branches keinen neuen Oszillationskandidaten mit
+vollstaendigem Parametertupel und Discovery-Ledger und meldete 27 Defekte.
+Damit wurde die post-hoc Rekonstruktion aus komplexen Eligibility-, AR- oder
+Quenchresultaten zu Recht blockiert.
+
+Ein spaeterer, davon unabhaengiger Rotating-wave-Ast begann stattdessen mit
+einer prospektiv eingefrorenen analytischen Gleichung, Suchbox und
+Negativkontrollen. Seine erste finite-H-Verfeinerung liefert bei
+`alpha=0.01`, `H=1200`, `eta=0.15`, `A_att=3.5` einen
+Gleitkomma-Nullpunkt. Der kandidatspezifische P0 besteht mit null Defekten;
+D0 klassifiziert die translationsreduzierte raeumliche SO(2)-Gruppenbahn,
+nicht eine interne Phase nach Rotationsquotient. Bis zum Foundation-Stand
+waren der Anchor und vier gematchte Zellen lokal intervallzertifiziert. Fixed-gain-
+Reconciliation und separat implementierter Foundation-Audit bestaetigen den
+First-order-Kontinuumsast. Der prospektive L5-Test erweitert ihn ohne
+Retuning auf sechs lokal existenzzertifizierte Zellen und besteht die
+signierten First-order-Diskriminatoren. Das separat eingefrorene P1-Gate
+besteht danach an L3 mit zwei konvergierten Arnoldi-Panels,
+\(|\lambda_\perp|=0.99649340\), und sechs kontrahierenden gespiegelten
+Stoerungsarmen. Das kritische Review haelt nur lokale numerische Stabilitaet
+an dieser zweiten Skala aufrecht, keine stabile Leiter. D1--D5, Formation,
+Rauschen, der A_att=7-Holdout und jeder Masseclaim bleiben geschlossen. Der
+anschliessende gemeinsame Loop--Center-Test sagt die lokale Antwort mit dem
+vollen FIFO-Jacobian sehr genau voraus, verfehlt aber formal seine absolute
+Tail-Slope-Grenze. Der historische P2-Fail bleibt bestehen. Die separat
+vorregistrierte P2-R-Verlaengerung zeigt danach in allen 48 neuen Fenstern
+weitere aufgeloeste Rueckkehr bis 20 Memory-Zeiten. P3 erweitert dies ohne
+Retuning auf fuenf nichtkreisfoermige Historiengeometrien in beiden
+Chiralitaeten. Alle zehn Arme erreichen den L3-Zielorbit, einschliesslich vier
+target-blinder Arme; das Review begrenzt den Befund auf finite-ensemble
+attraction und oeffnet nur P4. P4 schliesst danach seinen expliziten
+finite-H-Write-/Age-Ledger, bleibt aber formal
+`p4-source-write-architecture-fail`. Der neue P4-R-phi-Holdout besteht lokale
+Metrologie und die diskrete chirality-odd Acht-Phasen-Antwort am selben L3-
+Port. Gate-Review und internes Source-Referee-Audit halten nur diesen engen
+Befund aufrecht. Der danach unveraendert ausgefuehrte und separat auditierte
+P4-R-S-Anchor-Holdout besteht mit maximal `0.00232715` Anchor--L3-Abweichung
+gegen die vorab fixierte Grenze `0.05`. N0 klammert danach die aufgeloeste
+finite-time Rauschrobustheit ein. P5-D-Design, getrenntes Protokoll,
+Implementierung und erstes Readinessreview waren targetfrei eingefroren; der
+erste Standardaufruf scheiterte jedoch am finalen JSON-Skalartyp. Die separat
+eingefrorene Recovery bestand Implementierungs- und Readiness-CI, doch ihr
+einziger Ersatzlauf scheiterte am garantierten Channel-off-`inf`-Sentinel.
+Beide Aufrufe bleiben formal inconclusive; die Recovery-Autorisierung ist
+verbraucht und Interaktionsevidenz bleibt geschlossen.
+
+## Paper-Status
+
+- **Paper 0:** mathematischer Anker oder Supplement. Der native
+  Rotating-wave-Befund kann als getrennte technische Notiz ueber sechs lokal
+  existenzzertifizierte vorbereitete Schleifen und lokale numerische
+  Stabilitaetsevidenz an Anchor und L3 sowie finite-ensemble attraction aus
+  den zehn registrierten nichtkreisfoermigen P3-Armen dienen. Als separater
+  enger Zusatz ist der explizite L3-Source-/Write-Ledger samt diskreter
+  chirality-odd P4-R-Antwort und reviewed P4-R-S-Skalenholdout am Anchor
+  tragbar. Die lokalen Roots bleiben konditional auf `mpmath.iv` 1.3.0; zwei
+  Skalen sind keine Konvergenzordnung. Keine stabile Familie,
+  generische/spontane Formation, kontinuierliche Phasenantwort, robuste
+  materielle Knotenexistenz, Spin, Impuls, Traegheit oder Masse behaupten.
+- **Paper I:** Minimalmodell plus linearer co-moving Relaxationsbefund;
+  nichtlineare Metastabilitaet und Teilchensprache vermeiden. Der
+  deterministische `d=2`-Schleifen-/Portast bleibt eine getrennte technische
+  Erweiterung oder ein eng markierter Outlook, nicht Teil des Hauptclaims.
+- **Paper II:** P3.8b-d liefern einen analytischen Gradientenmediator-Kandidaten,
+  einen quasistatischen Diskriminator und einen konditionalen dynamischen
+  Existenzpass. Sie leiten den Zusatzmechanismus nicht aus `z=(x,rho)` her.
+  Propagationsgesetz, Raumzeitkinematik und `d=3` bleiben
+  gesperrt, bis unabhaengige Evidenz und ein echter Dimensionsreduktions-
+  mechanismus vorliegen.
+- **Paper III:** offene spekulative Tuer ohne Claim-Status.
+
+## Reproduzierbarkeitsregeln
+
+Jeder neue Evidenzlauf braucht vor dem Start:
+
+- eine falsifizierbare Hypothese und passende Negativkontrolle;
+- feste Seeds, Lauflaenge, Burn-in, Sampling und primaere Metrik;
+- Git-Revision und sauberen Arbeitsbaum;
+- maschinenlesbare Summary und datierten Review-Report;
+- eine explizite Entscheidung `pass`, `fail`, `inconclusive` oder
+  `pipeline-only`.
+
+Lange Laeufe gehoeren nicht in CI. CI prueft Code, kleine deterministische
+Kontrollen und die Dokumentationsoberflaeche.

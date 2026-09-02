@@ -278,7 +278,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     klassifiziert auch ihn als `p5d-inconclusive`, ohne Artefakt oder
     beobachtete Entscheidung. Die Recovery-Autorisierung ist verbraucht;
     Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims bleiben
-    geschlossen.
+    geschlossen. Das anschliessende targetfreie
+    [Code-Review](project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
+    bestaetigt die Algebra des Center-Ports, findet aber sieben Blocker in
+    Governance, Produktionsschema, Endlichkeitspruefung, Ausgabesemantik und
+    CI-Bindung. Verdict: `p5d-runner-not-ready-no-target-authorized`.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.
