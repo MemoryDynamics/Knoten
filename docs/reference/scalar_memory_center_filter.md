@@ -1,6 +1,6 @@
 # Skalares Gedächtnis, Center-Filter und Rotation
 
-Stand: 2026-08-22.
+Stand: 2026-09-02.
 
 Diese Seite ist eine Notationsbrücke zwischen dem kanonischen Knotenkern,
 der lokalen Center-Reduktion und möglichen Rotationsarchitekturen. Sie führt
@@ -10,6 +10,11 @@ vollen nichtlinearen K0-H-Kern liegt inzwischen zusätzlich ein prospektiv
 gefundener und lokal numerisch stabiler räumlicher Rotating-wave-Kandidat
 vor. Dieser positive Befund ist weder eine interne Phase nach dem
 \(SO(2)\)-Quotienten noch ein Masse- oder Arbeitsresultat.
+
+Die Symbole folgen dem
+[kanonischen Modellvokabular](model_vocabulary.md): $B_H$ ist normiert,
+$c_n$ ist die Centerkoordinate, $\beta_\rho$ die Deposition und $\mu_F$ die
+Mobilitaet des deklarierten Center-Kraftports.
 
 Eine entscheidende Trennung ist dabei: \(B_H\) ist als gewichteter Readout
 der Historie exakt linear. Die Kraftkopplung des Double-Gaussian-Kerns ist es
@@ -29,22 +34,22 @@ x_{n+1}
 
 \[
 \rho_{n+1}(y)
-=q\,\rho_n(y)+\beta G_\sigma(y-x_{n+1}),
+=q\,\rho_n(y)+\beta_\rho G_\sigma(y-x_{n+1}),
 \qquad
 q=1-\alpha,
 \qquad
-\beta=\alpha M_0.
+\beta_\rho=\alpha M_0.
 \]
 
 Dabei ist \(n\) nur der Updateindex. Eine physikalische Zeit entsteht erst
 durch einen zusätzlich festgelegten Zeitschritt. Im normierten Paper-I-Fall
-gilt \(M_0=1\) und damit \(\beta=\alpha\).
+gilt \(M_0=1\) und damit \(\beta_\rho=\alpha\).
 
 | Größe | Bedeutung | Wovon sie abhängt |
 | --- | --- | --- |
 | \(\alpha=\lambda_m\) | pro Update vergessener Anteil | Basismodellparameter |
 | \(q=1-\alpha\) | pro Update erhaltener Anteil | nur \(\alpha\) |
-| \(\beta=\alpha M_0\) | neu deponierte Masse | \(\alpha,M_0\) |
+| \(\beta_\rho=\alpha M_0\) | neu deponierte Masse | \(\alpha,M_0\) |
 | \(H\) | Zahl der explizit gespeicherten Altersklassen | Backend oder Versuchsdesign |
 | \(N\) | insgesamt simulierte Updates | Beobachtungsdesign, nicht Filterdynamik |
 | \(M_H=M_0(1-q^H)\) | im gefüllten FIFO gespeicherte Masse | \(\alpha,H,M_0\) |
@@ -312,24 +317,25 @@ also formal
 \]
 
 Die Eins vor \(\ddot c\) ist eine Folge der gewählten Zeit- und
-Inputnormierung. In dimensionalen Variablen
+Inputnormierung. In dimensionalen Variablen bezeichnet $\kappa_c$ die
+Centerrelaxation und $\mu_F$ die Mobilitaet des deklarierten Kraftports:
 
 \[
 \tau\dot c=x-c,
 \qquad
-\dot x=-\kappa(x-c)+\mu F
+\dot x=-\kappa_c(x-c)+\mu_F F
 \]
 
 lautet die eliminierte Gleichung
 
 \[
-\frac{\tau}{\mu}\ddot c
+\frac{\tau}{\mu_F}\ddot c
 +
-\frac{1+\kappa\tau}{\mu}\dot c
+\frac{1+\kappa_c\tau}{\mu_F}\dot c
 =F.
 \]
 
-Damit ist \(m_{\rm filter}=\tau/\mu>0\) eine exakt identifizierbare
+Damit ist \(m_{\rm filter}=\tau/\mu_F>0\) eine exakt identifizierbare
 Filterträgheit. Ohne mikroskopisch ausgewählten \(F\,dc\)-Port ist sie noch
 keine Materialmasse.
 

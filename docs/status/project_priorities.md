@@ -17,22 +17,28 @@ autorisieren keinen weiteren P5-Ziellauf.
 
 ## Eine Reihenfolge
 
-1. **P5-D Ergebnisstrecke schliessen und spezifizieren.** Den Code-Review als
+1. **Notationsvertrag in die Remediation einfrieren.** Aktive Gleichungen auf
+   die Paper-I-Grundsprache zurueckfuehren; mehrdeutige Code-/Schemafelder nur
+   versioniert und mit Kompatibilitaetstests migrieren. Grundlage sind das
+   [Modellvokabular](../reference/model_vocabulary.md) und der targetfreie
+   Vokabularaudit. Kein Targetzugriff.
+2. **P5-D Ergebnisstrecke schliessen und spezifizieren.** Den Code-Review als
    Blockerbasis einfrieren; exakte Payload-Schemata, fail-closed
    Endlichkeitspruefung, paarweise Ausgabesemantik und einen maschinenlesbaren
    Governancezustand entwerfen. Kein Targetzugriff.
-2. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
+3. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
    fuer Off-Arme, nichtendliche NumPy-Skalare, unavailable response, zweiten
-   Rename-Fehler und Commit-/CI-Bindung schreiben; dann minimal reparieren.
-3. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
+   Rename-Fehler, Commit-/CI-Bindung und Vokabularschema schreiben; dann
+   minimal reparieren.
+4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
    Status technisch pruefen. Ein neuer Prospektivlauf benoetigt danach eine
    neue ausdrueckliche Autorisierung; die P5-D-Recovery bleibt abgeschlossen
    und die bisherige Pipeline geschlossen.
-4. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
+5. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
-5. **Zertifikats- und Release-Hardening.** Zweiten Intervallbackend,
+6. **Zertifikats- und Release-Hardening.** Zweiten Intervallbackend,
    Wheel-/Hash-Lock, `CITATION.cff` und eine zitierbare Release parallel
    abschliessen; sie ersetzen kein wissenschaftliches Gate.
 

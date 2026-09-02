@@ -122,7 +122,8 @@ Die Paper-I-Uebergangssprache bleibt der gemeinsame Modellkern:
 
 \[
 x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),\qquad
-\rho_{n+1}=(1-\lambda_m)\rho_n+\beta G_\sigma(\cdot-x_{n+1}).
+\rho_{n+1}=(1-\lambda_{\rm m})\rho_n
++\beta_\rho G_\sigma(\cdot-x_{n+1}).
 \]
 
 Der Schleifenarm verwendet davon zunaechst die deterministische

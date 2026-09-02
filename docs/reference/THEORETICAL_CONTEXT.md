@@ -6,6 +6,11 @@ Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
 Markov-Anforderungen.
 
+Symbolbedeutungen folgen dem
+[kanonischen Modellvokabular](model_vocabulary.md). Insbesondere ist
+$\beta_\rho$ die Depositionsstaerke; Schleifenfilter, Portmobilitaeten und
+numerische Rundung erhalten eigene qualifizierte Namen.
+
 ## Modellhierarchie und harte Begriffsgrenze
 
 Das Repository enthaelt inzwischen mehrere mathematische Modelle. Sie sind
@@ -39,7 +44,7 @@ keine Variable von `SimulationConfig`.
 | $\varepsilon$ | Skalar | Rauschamplitude pro Update | kanonischer Input |
 | $\rho_n(x)\geq0$ | skalares Feld/Measure | exponentiell gewichtete Occupancy-Historie | kanonisch |
 | $\lambda_m$ | Skalar | vergessener Anteil pro Update | kanonischer Input; Codealias `alpha` |
-| $\beta$ | Skalar | neu deponierte Masse pro Update | abgeleitet als $\lambda_mM_0$ im Paket |
+| $\beta_\rho$ | Skalar | neu deponierte Masse pro Update | abgeleitet als $\lambda_mM_0$ im Paket |
 | $M_0$ | Skalar | stationaere skalare Memory-Masse bei normiertem $G$ | kanonischer Input `memory_mass` |
 | $G_\sigma$ | Kernel | nichtnegative lokale Deposition in $\rho$ | kanonischer Input |
 | $K$ | Kernel | Readkernel des selbstinduzierten Potentials | kanonischer Input |
@@ -79,11 +84,11 @@ $$
 Allgemeines Memory-Update:
 
 $$
-\rho_{n+1}(x)=(1-\lambda_m)\rho_n(x)+\beta G_\sigma(x-x_{n+1}).
+\rho_{n+1}(x)=(1-\lambda_m)\rho_n(x)+\beta_\rho G_\sigma(x-x_{n+1}).
 $$
 
-mit `0 < lambda_m < 1` und `beta >= 0`. Die oft verwendete Paper-I-Konvention
-ist der normierte Spezialfall `lambda_m = beta = alpha`. Dann bleibt die
+mit `0 < lambda_m < 1` und `beta_rho >= 0`. Die oft verwendete Paper-I-Konvention
+ist der normierte Spezialfall `lambda_m = beta_rho = alpha`. Dann bleibt die
 Memory-Masse bei normiertem `G_sigma` und normiertem Anfangszustand konstant.
 
 Ausgerollt ergibt das eine exponentiell gewichtete Vergangenheit. Die
@@ -98,9 +103,9 @@ spektralen Erweiterung, eine lineare Glaettung:
 
 $$
 \begin{aligned}
-\rho_n &\to q\rho_n+\beta G(\mathord{\cdot}-x_{n+1}),\\
+\rho_n &\to q\rho_n+\beta_\rho G(\mathord{\cdot}-x_{n+1}),\\
 \hat\rho_k &\to e^{-\nu k^2}
-\left[q\hat\rho_k+\beta\hat G_k e^{-i k x_{n+1}}\right].
+\left[q\hat\rho_k+\beta_\rho\hat G_k e^{-i k x_{n+1}}\right].
 \end{aligned}
 $$
 
@@ -168,7 +173,7 @@ Write-/Read-Faktorisierung: Fuer homogene lineare Faltung gilt nach Ausrollen
 $$
 \begin{aligned}
 \Phi_n&=K\ast\rho_n\\
-&=\text{initial term}+\beta\sum_j q^j(K\ast G)(\mathord{\cdot}-x_{n-j}),\\
+&=\text{initial term}+\beta_\rho\sum_j q^j(K\ast G)(\mathord{\cdot}-x_{n-j}),\\
 W_{\rm eff}&=K\ast G.
 \end{aligned}
 $$
@@ -187,7 +192,7 @@ Feldzustand verschieben:
 
 $$
 \phi_n=K\ast\rho_n,\qquad
-\phi_{n+1}=q\phi_n+\beta(K\ast G)(\mathord{\cdot}-x_{n+1}).
+\phi_{n+1}=q\phi_n+\beta_\rho(K\ast G)(\mathord{\cdot}-x_{n+1}).
 $$
 
 Der Readoperator ist dann die Faltungsidentitaet `delta`, sodass `Phi=phi`.
@@ -605,19 +610,19 @@ variables,
 \[
 \tau\dot c=x-c,
 \qquad
-\dot x=-\kappa(x-c)+\mu F+\sigma\xi
+\dot x=-\kappa_c(x-c)+\mu_F F+\varepsilon_c\xi
 \]
 
 implies
 
 \[
-{\tau\over\mu}\ddot c
-+{1+\kappa\tau\over\mu}\dot c
-=F+{\sigma\over\mu}\xi.
+{\tau\over\mu_F}\ddot c
++{1+\kappa_c\tau\over\mu_F}\dot c
+=F+{\varepsilon_c\over\mu_F}\xi.
 \]
 
-Thus the apparent mass is \(m_{\rm eff}=\tau/\mu\). Its registered value one
-comes from the dimensionless choices \(\tau=\mu=1\), not from spontaneous
+Thus the apparent mass is \(m_{\rm eff}=\tau/\mu_F\). Its registered value one
+comes from the dimensionless choices \(\tau=\mu_F=1\), not from spontaneous
 parameter selection. Moreover, \(c\) is currently the centroid of an
 occupancy-history field with source and decay, not yet the center of a
 materially conserved mass. The canonical variable contract defines
@@ -654,13 +659,13 @@ This establishes a reciprocal **effective filter wrapper**, not a natural K0
 microscopic actuator: the same native additive input remains compatible with
 the conditional ledger \(F\,dx=F\,dc+F\,dr\). Accordingly the next authorized
 question is only whether the identified filter coefficient scales as
-\(m_{\rm filter}=\tau/\mu\); physical mass, material COM and additive momentum
+\(m_{\rm filter}=\tau/\mu_F\); physical mass, material COM and additive momentum
 remain unestablished.
 
 The preregistered B-star intervention now answers that narrow question. With
 fixed update time, eta, physical-force impulses and center readout, a
 \(2^3\) panel gives training exponents
-\((\beta_\tau,\beta_\mu,\beta_{M_0})\simeq(1,-1,0)\) for both a
+\((p_\tau,p_{\mu_F},p_{M_0})\simeq(1,-1,0)\) for both a
 state-matched checkpoint estimand and independently reformed states. At the
 unseen joint corner \((2,0.5,2)\), the inferred coefficient is 3.99997
 against the filter prediction 4. The \(M_0\) intervention is active: it

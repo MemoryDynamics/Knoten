@@ -101,7 +101,7 @@ positiven Filterkoeffizienten. Es fehlen weiterhin mindestens:
 - eine experimentell oder numerisch unabhaengige Replikation.
 
 Der bereits hergeleitete positive Koeffizient
-$m_{\rm filter}=\tau/\mu$ bleibt deshalb **Filtertraegheit unter einem
+$m_{\rm filter}=\tau/\mu_F$ bleibt deshalb **Filtertraegheit unter einem
 gewaehlten Portvertrag**, keine Materialmasse. P4-R-S aendert diese Grenze
 nicht.
 

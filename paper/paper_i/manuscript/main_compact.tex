@@ -97,13 +97,13 @@ x_{n+1}
 \label{eq:trajectory}\\
 \rho_{n+1}(x)
 &=(1-\lambda_{\mathrm m})\rho_n(x)
-+ \beta G_\sigma(x-x_{n+1}),
++ \beta_\rho G_\sigma(x-x_{n+1}),
 \label{eq:memory}\\
 \Phi_n(x)
 &=\int_\Omega K(x,y)\rho_n(y)\,dy ,
 \label{eq:potential}
 \end{align}
-where $0<\lambda_{\mathrm m}<1$, $\beta,\varepsilon,\eta\geq0$, and
+where $0<\lambda_{\mathrm m}<1$, $\beta_\rho,\varepsilon,\eta\geq0$, and
 $\xi_n$ are independent centered noise vectors with unit covariance.
 The gradient in Eq.~(\ref{eq:trajectory}) acts on the first kernel argument:
 \begin{equation}
@@ -113,12 +113,12 @@ The gradient in Eq.~(\ref{eq:trajectory}) acts on the first kernel argument:
 
 The total memory mass $M_n=\int_\Omega\rho_n(x)\,dx$ obeys
 \begin{equation}
-M_{n+1}=(1-\lambda_{\mathrm m})M_n+\beta .
+M_{n+1}=(1-\lambda_{\mathrm m})M_n+\beta_\rho .
 \end{equation}
 Thus unit mass is preserved when $M_0=1$ and
-$\beta=\lambda_{\mathrm m}$.
+$\beta_\rho=\lambda_{\mathrm m}$.
 We use this normalized convention below and write
-$\lambda_{\mathrm m}=\beta=\alpha$.
+$\lambda_{\mathrm m}=\beta_\rho=\alpha$.
 Normalization fixes the memory scale; it is not a probability interpretation
 of the dynamics.
 

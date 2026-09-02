@@ -14,6 +14,7 @@ nav:
       - Paper-Claims: status/paper_claims.md
   - Modell und Gleichungen:
       - Theorie: reference/THEORETICAL_CONTEXT.md
+      - Modellvokabular: reference/model_vocabulary.md
       - Implementierte Gleichungen: reference/implemented_equations.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:

@@ -56,7 +56,53 @@ def test_reverse_specification_names_core_code_parameters() -> None:
     text = (ROOT / "docs/reference/implemented_equations.md").read_text(
         encoding="utf-8"
     )
-    for token in ("B_H(z)", "\\alpha", "\\eta", "M_0", "$N$", "$H$"):
+    for token in (
+        "B_H(z)",
+        "W_H(z)",
+        "\\alpha",
+        "\\varepsilon",
+        "\\eta",
+        "\\sigma",
+        "M_0",
+        "$N$",
+        "$H$",
+    ):
         assert token in text
+    assert "B_H(1)=1" in text
+    assert "\\beta_s" not in text
+    assert "g=|c_0|" not in text
+    assert "F,qquad" not in text
     assert "Newton-Gleichung" in text
     assert "keine neue Modellannahme" in text
+
+
+def test_canonical_vocabulary_separates_core_filter_and_port_symbols() -> None:
+    vocabulary = (ROOT / "docs/reference/model_vocabulary.md").read_text(
+        encoding="utf-8"
+    )
+    for token in (
+        "\\beta_\\rho",
+        "B_H(1)=1",
+        "b_s=B_H",
+        "a_j^{(s)}",
+        "\\gamma_{\\rm w}",
+        "\\mu_{\\rm w}",
+        "unit_roundoff",
+        "notch_response",
+    ):
+        assert token in vocabulary
+
+    for relative in (
+        "docs/reference/implemented_equations.md",
+        "docs/reference/scalar_memory_center_filter.md",
+        "docs/reference/THEORETICAL_CONTEXT.md",
+        "paper/paper_i/manuscript/main.tex",
+        "paper/paper_i/manuscript/main_compact.tex",
+    ):
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        assert not re.search(r"\\beta(?![_A-Za-z])", text), relative
+
+    paper = (ROOT / "paper/paper_i/manuscript/main.tex").read_text(
+        encoding="utf-8"
+    )
+    assert "\\lambda_{\\mathrm m}=\\beta_\\rho=\\alpha" in paper

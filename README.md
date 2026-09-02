@@ -31,6 +31,7 @@ Prioritaetenliste.
 - [Dokumentationsstart](docs/index.md)
 - [Aktueller Stand](docs/status/current_status.md)
 - [Projektprioritaeten](docs/status/project_priorities.md)
+- [Kanonisches Modellvokabular](docs/reference/model_vocabulary.md)
 - [Implementierte Gleichungen](docs/reference/implemented_equations.md)
 - [Repository Map](docs/reference/repository_map.md)
 - [Kuratierter Report-Index](reports/README.md)

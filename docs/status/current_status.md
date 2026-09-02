@@ -30,6 +30,9 @@ einer nicht belastbaren Ergebnisstrecke. Die wichtigsten Blocker sind:
 - Die behauptete atomare Ausgabe zweier Dateien ist nicht paarweise atomar.
 - Der Renderer setzt Diagnostik auch dann voraus, wenn die Antwort als nicht
   verfuegbar registriert wurde.
+- Das Modellvokabular kollidiert zwischen Paper-I-Deposition, Centerfilter,
+  Portgroessen und Maschinenrundung; der kanonische Notationsvertrag ist
+  deshalb Teil der Remediation.
 
 Die Recovery-Autorisierung ist verbraucht. Der technische Guard bildet diesen
 Governancezustand bislang nicht ab; deshalb ist die Schliessung durch Review
@@ -57,5 +60,6 @@ negatives Interaktionsergebnis.
 ## Quellen
 
 - [Implementierte Gleichungen](../reference/implemented_equations.md)
+- [Kanonisches Modellvokabular](../reference/model_vocabulary.md)
 - [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
 - [Claim-Register](paper_claims.md)

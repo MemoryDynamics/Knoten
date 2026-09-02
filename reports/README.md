@@ -283,6 +283,11 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     bestaetigt die Algebra des Center-Ports, findet aber sieben Blocker in
     Governance, Produktionsschema, Endlichkeitspruefung, Ausgabesemantik und
     CI-Bindung. Verdict: `p5d-runner-not-ready-no-target-authorized`.
+    Der getrennte targetfreie
+    [Vokabularaudit](project/meta/reviews/model_vocabulary_remediation_audit_2026-09-02.md)
+    weist zusaetzlich Symbolkollisionen zwischen Paper-I-Deposition,
+    Centerfilter, Portgroessen und Maschinenrundung nach. Sein
+    Notationsvertrag ist blockierender Input der Remediation, kein neues Gate.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.
