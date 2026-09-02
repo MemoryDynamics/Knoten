@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import copy
 import inspect
+import json
 import math
 from pathlib import Path
 
@@ -227,6 +228,55 @@ def test_p5d_synthetic_complete_panel_passes_every_response_family(
     assert response["diagnostics"]["maximum_swap_rms_fraction"] < 1e-15
 
 
+def test_p5d_recovery_serializer_handles_full_panel_and_numpy_scalars(
+    synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
+) -> None:
+    off, active = synthetic_panel
+    payload = {
+        "panel": {"channel_off_arms": off, "active_arms": active},
+        "numpy_scalars": {
+            "boolean": np.bool_(True),
+            "signed": np.int64(-7),
+            "unsigned": np.uint64(9),
+            "floating": np.float32(0.125),
+        },
+        "python_native": {"boolean": False, "integer": 11, "floating": 0.5},
+    }
+    encoded = p5d._serialize_payload(payload)
+    decoded = json.loads(encoded)
+    assert decoded["numpy_scalars"] == {
+        "boolean": True,
+        "signed": -7,
+        "unsigned": 9,
+        "floating": 0.125,
+    }
+    assert decoded["python_native"] == {
+        "boolean": False,
+        "integer": 11,
+        "floating": 0.5,
+    }
+    assert len(decoded["panel"]["channel_off_arms"]) == 64
+    assert len(decoded["panel"]["active_arms"]) == 768
+
+
+@pytest.mark.parametrize(
+    "value",
+    (np.float64(np.nan), np.float64(np.inf), np.float64(-np.inf)),
+)
+def test_p5d_recovery_serializer_rejects_nonfinite_numpy_scalars(value) -> None:
+    with pytest.raises(ValueError, match="Out of range float"):
+        p5d._serialize_payload({"value": value})
+
+
+@pytest.mark.parametrize(
+    "value",
+    (np.asarray([1.0]), np.complex128(1.0 + 2.0j), object()),
+)
+def test_p5d_recovery_serializer_rejects_unregistered_objects(value) -> None:
+    with pytest.raises(TypeError, match="not JSON serializable"):
+        p5d._serialize_payload({"value": value})
+
+
 def test_p5d_exactly_additive_reciprocal_trace_is_rejected(
     synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
 ) -> None:
@@ -342,6 +392,22 @@ def test_p5d_target_guard_precedes_registered_panel(monkeypatch) -> None:
     monkeypatch.setattr(p5d, "_verify_provenance", sealed)
     monkeypatch.setattr(p5d, "_run_registered_panel", forbidden_panel)
     with pytest.raises(RuntimeError, match="sealed-before-readiness"):
+        p5d.run_gate()
+    assert calls == []
+
+
+def test_p5d_recovery_readiness_guard_precedes_registered_panel(
+    monkeypatch, tmp_path: Path
+) -> None:
+    calls: list[str] = []
+
+    def forbidden_panel():
+        calls.append("target")
+        raise AssertionError("registered target panel was reached")
+
+    monkeypatch.setattr(p5d, "READINESS_REVIEW", tmp_path / "absent-review.md")
+    monkeypatch.setattr(p5d, "_run_registered_panel", forbidden_panel)
+    with pytest.raises(RuntimeError, match="recovery readiness does not exist"):
         p5d.run_gate()
     assert calls == []
 

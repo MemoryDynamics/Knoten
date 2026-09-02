@@ -53,7 +53,11 @@ DESIGN_AUDIT = Path(
 )
 READINESS_REVIEW = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_loop_p5d_mutual_center_implementation_readiness_2026-09-01.md"
+    "scalar_memory_loop_p5d_serialization_recovery_readiness_2026-09-02.md"
+)
+RECOVERY_PROTOCOL = Path(
+    "reports/project/meta/preregistration/"
+    "scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md"
 )
 DEFAULT_SUMMARY = Path(
     "reports/dynamics/rotation/"
@@ -64,6 +68,8 @@ DEFAULT_REPORT = DEFAULT_SUMMARY.with_suffix(".md")
 DESIGN_FREEZE_REVISION = "f68c8f89f4d62fcfc7f440d78e4e2a6011ce6344"
 PROTOCOL_FREEZE_REVISION = "d7a4c5ec4d40f1899940161877b0ab80b7a8c0c7"
 PROTOCOL_FREEZE_BLOB = "bf3325d550ae2288d8e4012e0480077abf51032e"
+RECOVERY_PROTOCOL_REVISION = "9fdab8d534ebadfdd155bde55c3c7e509783dd53"
+RECOVERY_PROTOCOL_BLOB = "508b642b12884996ccb87f354e875053bdf36c5a"
 EXPECTED_HEAD_BLOBS = {
     DESIGN_AUDIT.as_posix(): "0f02d86bcbfacd2154d21df4a40f853174085d0b",
     "src/emergenz_knoten/orbit_center_actuator.py": (
@@ -1598,8 +1604,17 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
 def _verify_provenance() -> dict[str, Any]:
     """Fail before pair initialization unless every frozen guard is green."""
 
+    if (
+        _git_blob(RECOVERY_PROTOCOL.as_posix(), RECOVERY_PROTOCOL_REVISION)
+        != RECOVERY_PROTOCOL_BLOB
+    ):
+        raise RuntimeError("P5-D recovery protocol freeze blob mismatch")
+    if _git_blob(RECOVERY_PROTOCOL.as_posix()) != RECOVERY_PROTOCOL_BLOB:
+        raise RuntimeError("P5-D recovery protocol changed after freeze")
     if not (ROOT / READINESS_REVIEW).exists():
-        raise RuntimeError("P5-D target sealed: readiness review does not exist")
+        raise RuntimeError(
+            "P5-D replacement target sealed: recovery readiness does not exist"
+        )
     if _git_blob(PROTOCOL.as_posix(), PROTOCOL_FREEZE_REVISION) != PROTOCOL_FREEZE_BLOB:
         raise RuntimeError("P5-D protocol freeze blob mismatch")
     for path, expected in EXPECTED_HEAD_BLOBS.items():
@@ -1627,6 +1642,9 @@ def _verify_provenance() -> dict[str, Any]:
         "revision": head,
         "protocol_revision": PROTOCOL_FREEZE_REVISION,
         "protocol_blob": PROTOCOL_FREEZE_BLOB,
+        "recovery_protocol_revision": RECOVERY_PROTOCOL_REVISION,
+        "recovery_protocol_blob": RECOVERY_PROTOCOL_BLOB,
+        "first_target_status": "p5d-inconclusive-serialization-failure",
         "readiness": readiness,
         "upstream_revision": upstream,
         "clean": True,
@@ -1696,6 +1714,32 @@ def _render_report(payload: dict[str, Any], json_sha256: str) -> str:
     )
 
 
+def _json_default(value: Any) -> bool | int | float:
+    """Convert only frozen NumPy scalar families for standard JSON output."""
+
+    if isinstance(value, np.bool_):
+        return bool(value)
+    if isinstance(value, np.integer):
+        return int(value)
+    if isinstance(value, np.floating):
+        return float(value)
+    raise TypeError(
+        f"Object of type {value.__class__.__name__} is not JSON serializable"
+    )
+
+
+def _serialize_payload(payload: dict[str, Any]) -> str:
+    """Serialize the complete payload under the recovery freeze."""
+
+    return json.dumps(
+        payload,
+        allow_nan=False,
+        default=_json_default,
+        indent=2,
+        sort_keys=True,
+    ) + "\n"
+
+
 def run_gate(
     *,
     summary_path: Path = DEFAULT_SUMMARY,
@@ -1740,12 +1784,7 @@ def run_gate(
             "interaction, charge, spin, momentum, inertia or mass"
         ),
     }
-    summary_content = json.dumps(
-        payload,
-        allow_nan=False,
-        indent=2,
-        sort_keys=True,
-    ) + "\n"
+    summary_content = _serialize_payload(payload)
     digest = hashlib.sha256(summary_content.encode("utf-8")).hexdigest()
     report_content = _render_report(payload, digest)
     summary = summary_path if summary_path.is_absolute() else ROOT / summary_path
