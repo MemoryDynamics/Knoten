@@ -263,9 +263,15 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     inzwischen targetfrei implementiert. Das getrennte
     [Readinessreview](project/meta/reviews/scalar_memory_loop_p5d_mutual_center_implementation_readiness_2026-09-01.md)
     prueft alle zwoelf Pre-target-Anforderungen und urteilt
-    `p5d-implementation-ready`. Genau ein sauberer Standardlauf ist erst nach
-    gruenem Review-CI zulaessig; bis zu Rohresultat und Ergebnisreview bleiben
-    Evidenz sowie Spin-, Impuls-, Traegheits- und Masseclaims geschlossen.
+    `p5d-implementation-ready`. Der danach autorisierte Erstaufruf ist im
+    [Incident-Report](project/meta/reviews/scalar_memory_loop_p5d_first_target_serialization_failure_2026-09-02.md)
+    als `p5d-inconclusive` dokumentiert: Er erreichte die finale
+    Payload-Serialisierung, schrieb wegen eines `numpy.bool_`-Fehlers aber
+    weder Standardartefakt noch beobachtete Entscheidung. Das getrennte
+    [Recovery-Protokoll](project/meta/preregistration/scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md)
+    friert nur die JSON-Skalarkonversion vor neuer Implementierung und neuem
+    Readinessreview ein. Evidenz sowie Spin-, Impuls-, Traegheits- und
+    Masseclaims bleiben geschlossen.
   - Der getrennte [Center-Mechanik-P0](project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md)
     besteht dagegen mit null Defekten und oeffnet ausschliesslich A. D0--D5
     bleiben als `sealed-no-s1-candidate` geschlossen.

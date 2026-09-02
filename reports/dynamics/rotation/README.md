@@ -221,9 +221,12 @@ ist inzwischen unveraendert ausgefuehrt: maximale Anchor--L3-Abweichung
 `0.00232715` gegen `0.05`, unabhaengiger Ergebnisrebuild ohne
 Feldabweichung. Das kritische Review haelt nur den Zwei-Zellen-Skalenpass
 aufrecht. P5-Design und prospektive Protokollierung wurden damit geoeffnet;
-die spaetere P5-D-Implementierung und ihr Readinessreview sind nun targetfrei
-eingefroren. Genau ein sauberer Standardlauf ist nach gruenem Review-CI als
-naechster Schritt zugelassen, aber Interaktionsevidenz bleibt geschlossen.
+die spaetere P5-D-Implementierung und ihr Readinessreview wurden targetfrei
+eingefroren. Der erste autorisierte Standardaufruf erreichte die finale
+Payload-Serialisierung, scheiterte dort aber an `numpy.bool_` und erzeugte
+keine Standardartefakte oder beobachtete Entscheidung. Er ist formal
+`p5d-inconclusive`; nur eine outcome-blinde Serializer-Recovery ist offen und
+Interaktionsevidenz bleibt geschlossen.
 Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
 finite-time Robustheitsklammer von `chi=1e-4` bis `1e-3`; der Fail ist lokal
 phasensensitiv und im groben x-y-Kreis kaum sichtbar. Das ist weder eine

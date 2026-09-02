@@ -197,13 +197,13 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P4-R-S-Anchor-Holdout",
             "0.00232715",
             "P5-D-Design und ein getrenntes prospektives",
-            "Interaktionsziellauf noch Evidenz",
+            "Interaktionsevidenz existiert weiterhin nicht",
         ),
         "docs/status/current_status.md": (
             VERDICT,
             "p4rs-anchor-scale-transfer-pass",
-            "p5d-implementation-ready",
-            "Genau ein Targetlauf darf erst nach gruenem CI",
+            "p5d-inconclusive",
+            "outcome-blinden Serializer-Recovery",
             "Interaktion, Ladung",
             "Spin, Impuls, Traegheit und Masse",
         ),
@@ -216,8 +216,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4rs-anchor-scale-transfer-pass",
             "n0-noise-stability-window-bracketed-reviewed-pass",
             "p5d-mutual-center-design-identifiable",
-            "Prioritaet 3: Ein einziger P5-D-Standardziellauf",
-            "P5 Target<br/>genau ein Lauf als naechstes",
+            "Prioritaet 3: Outcome-blinde Serializer-Recovery",
+            "P5 first target<br/>serializer inconclusive",
         ),
         "reports/README.md": (
             VERDICT,
@@ -225,6 +225,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P5-D-Designaudit",
             "targetfrei implementiert",
             "p5d-implementation-ready",
+            "p5d-inconclusive",
         ),
         "reports/dynamics/rotation/README.md": (
             VERDICT,
@@ -234,14 +235,14 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
         "experiments/current/dynamics/rotation/README.md": (
             VERDICT,
             "p4rs-anchor-scale-transfer-pass",
-            "Implementierung und 832-Arm-Synthetik",
+            "erster Aufruf am finalen NumPy-Bool-JSON-Serializer",
         ),
         "docs/reference/repository_map.md": (
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
             "N0 reviewed pass",
-            "P5 implementation ready",
-            "one clean target next",
+            "P5 first target inconclusive",
+            "serializer recovery active",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
@@ -249,6 +250,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4r-independent-audit-agrees",
             "p4rs-anchor-scale-transfer-pass",
             "keine Konvergenzordnung",
+            "p5d-inconclusive",
         ),
     }
     for relative, phrases in required_phrases.items():

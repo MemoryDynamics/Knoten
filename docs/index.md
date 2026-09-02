@@ -91,10 +91,12 @@ Protokoll sind nun targetfrei eingefroren. Sie verwenden eine lineare
 gegenseitige notched-Center-/adjungierte Write-Kopplung und verlangen einen
 Closed-loop-Kontrast gegen beide Einwegantworten. Implementierung,
 Standardbibliothek-Auditor und zwoelf Pre-target-Falsifikatoren sind nun
-CI-gruen; ein getrenntes Readinessreview autorisiert nach seinem eigenen
-gruenen CI genau einen sauberen Standardlauf. Noch existieren weder
-Interaktionsziellauf noch Evidenz. Spin, Impuls, Traegheit und Masse folgen
-nicht.
+CI-gruen und wurden getrennt reviewed. Der erste autorisierte Standardaufruf
+scheiterte erst bei der finalen JSON-Serialisierung eines NumPy-Bools; er
+erzeugte weder Standardartefakte noch eine beobachtbare Entscheidung und ist
+formal `p5d-inconclusive`. Eine outcome-blinde Serializer-Recovery ist nun
+separat eingefroren. Interaktionsevidenz existiert weiterhin nicht. Spin,
+Impuls, Traegheit und Masse folgen nicht.
 
 Historische Long-Run-Evidenz bleibt mit KnotScore v0.5 ausgewiesen. Fuer neue interaktionsfaehige Checkpoints ergaenzt v0.6 ein explizites Stationaritaets-Zulassungsgate; Details stehen im Experiment-Katalog. Alte matched-/zero-mean-/rep-zero-Evidenz vor der Kernelkorrektur ist `legacy-sign`-Auditmaterial.
 
