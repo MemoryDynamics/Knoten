@@ -396,6 +396,47 @@ def test_p5d_target_guard_precedes_registered_panel(monkeypatch) -> None:
     assert calls == []
 
 
+def test_p5d_machine_governance_is_closed_and_binds_both_incidents() -> None:
+    governance = p5d._load_governance()
+    assert governance["schema"] == "scalar-memory-loop-p5d-governance-v1"
+    assert governance["state"] == "closed"
+    assert governance["target_authorized"] is False
+    assert governance["authorization"] is None
+    assert [row["attempt"] for row in governance["target_calls_recorded"]] == [1, 2]
+
+
+def test_p5d_machine_governance_seals_before_legacy_provenance_and_target(
+    monkeypatch,
+) -> None:
+    calls: list[str] = []
+
+    def forbidden_readiness(*args, **kwargs):
+        calls.append("legacy-provenance")
+        raise AssertionError("legacy provenance was reached")
+
+    def forbidden_panel():
+        calls.append("target")
+        raise AssertionError("registered target panel was reached")
+
+    monkeypatch.setattr(p5d, "_parse_readiness_review", forbidden_readiness)
+    monkeypatch.setattr(p5d, "_run_registered_panel", forbidden_panel)
+    with pytest.raises(RuntimeError, match="sealed by machine governance"):
+        p5d.run_gate()
+    assert calls == []
+
+
+def test_p5d_machine_governance_rejects_unknown_keys(
+    monkeypatch, tmp_path: Path
+) -> None:
+    malformed = json.loads((p5d.ROOT / p5d.GOVERNANCE).read_text(encoding="utf-8"))
+    malformed["prose_verdict"] = "ready"
+    path = tmp_path / "governance.json"
+    path.write_text(json.dumps(malformed), encoding="utf-8")
+    monkeypatch.setattr(p5d, "GOVERNANCE", path)
+    with pytest.raises(RuntimeError, match="invalid top-level keys"):
+        p5d._require_target_authorization()
+
+
 def test_p5d_recovery_readiness_guard_precedes_registered_panel(
     monkeypatch, tmp_path: Path
 ) -> None:
@@ -405,6 +446,7 @@ def test_p5d_recovery_readiness_guard_precedes_registered_panel(
         calls.append("target")
         raise AssertionError("registered target panel was reached")
 
+    monkeypatch.setattr(p5d, "_require_target_authorization", lambda: {})
     monkeypatch.setattr(p5d, "READINESS_REVIEW", tmp_path / "absent-review.md")
     monkeypatch.setattr(p5d, "_run_registered_panel", forbidden_panel)
     with pytest.raises(RuntimeError, match="recovery readiness does not exist"):

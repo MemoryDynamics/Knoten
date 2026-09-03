@@ -1,0 +1,22 @@
+{
+  "authorization": null,
+  "gate": "P5-D",
+  "reason": "two-inconclusive-target-calls-remediation-pending",
+  "schema": "scalar-memory-loop-p5d-governance-v1",
+  "state": "closed",
+  "target_authorized": false,
+  "target_calls_recorded": [
+    {
+      "attempt": 1,
+      "incident_blob": "e8a8de1c405c6ee0cc8994bed5983b4b4f5b3b6c",
+      "incident_path": "reports/project/meta/reviews/scalar_memory_loop_p5d_first_target_serialization_failure_2026-09-02.md",
+      "status": "p5d-inconclusive-serialization-failure"
+    },
+    {
+      "attempt": 2,
+      "incident_blob": "5710a9d02eb02f6bd27cf8c556dd8c34c4758467",
+      "incident_path": "reports/project/meta/reviews/scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md",
+      "status": "p5d-inconclusive-nonfinite-serialization-failure"
+    }
+  ]
+}

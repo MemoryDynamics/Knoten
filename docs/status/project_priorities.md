@@ -35,7 +35,9 @@ autorisieren keinen weiteren P5-Ziellauf.
 3. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
    fuer Off-Arme, nichtendliche NumPy-Skalare, unavailable response, zweiten
    Rename-Fehler, Commit-/CI-Bindung und Vokabularschema schreiben; dann
-   minimal reparieren.
+   minimal reparieren. Der erste kleine Schritt ist umgesetzt: ein getrackter
+   geschlossener Governance-Datensatz bindet beide Incidents, und der Runner
+   erzwingt ihn vor der alten Provenienzstrecke und vor jedem Targetzugriff.
 4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
    Status technisch pruefen. Ein neuer Prospektivlauf benoetigt danach eine

@@ -59,6 +59,10 @@ RECOVERY_PROTOCOL = Path(
     "reports/project/meta/preregistration/"
     "scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md"
 )
+GOVERNANCE = Path(
+    "experiments/current/dynamics/rotation/"
+    "scalar_memory_loop_p5d_governance.json"
+)
 DEFAULT_SUMMARY = Path(
     "reports/dynamics/rotation/"
     "scalar_memory_loop_p5d_mutual_center_2026-09-01.json"
@@ -114,6 +118,34 @@ IMPLEMENTATION_PATHS = (
     "tests/test_mutual_center_coupling.py",
     "tests/test_rotating_wave_p5d_mutual_center.py",
     "tests/test_rotating_wave_p5d_result_audit.py",
+)
+
+GOVERNANCE_SCHEMA = "scalar-memory-loop-p5d-governance-v1"
+GOVERNANCE_KEYS = {
+    "authorization",
+    "gate",
+    "reason",
+    "schema",
+    "state",
+    "target_authorized",
+    "target_calls_recorded",
+}
+INCIDENT_KEYS = {"attempt", "incident_blob", "incident_path", "status"}
+EXPECTED_INCIDENTS = (
+    (
+        1,
+        "reports/project/meta/reviews/"
+        "scalar_memory_loop_p5d_first_target_serialization_failure_2026-09-02.md",
+        "e8a8de1c405c6ee0cc8994bed5983b4b4f5b3b6c",
+        "p5d-inconclusive-serialization-failure",
+    ),
+    (
+        2,
+        "reports/project/meta/reviews/"
+        "scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md",
+        "5710a9d02eb02f6bd27cf8c556dd8c34c4758467",
+        "p5d-inconclusive-nonfinite-serialization-failure",
+    ),
 )
 
 CANDIDATE_ID = "k0h-rw-aatt3p5-alpha1e-2-h1200-eta0p15-v1"
@@ -1601,8 +1633,66 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
     }
 
 
+def _load_governance(path: Path | None = None) -> dict[str, Any]:
+    """Load the exact executable governance record and fail closed."""
+
+    source = ROOT / GOVERNANCE if path is None else path
+    try:
+        payload = json.loads(source.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("P5-D governance is unreadable") from error
+    if type(payload) is not dict or set(payload) != GOVERNANCE_KEYS:
+        raise RuntimeError("P5-D governance has invalid top-level keys")
+    if payload["schema"] != GOVERNANCE_SCHEMA or payload["gate"] != "P5-D":
+        raise RuntimeError("P5-D governance identity mismatch")
+    if type(payload["reason"]) is not str or not payload["reason"]:
+        raise RuntimeError("P5-D governance reason must be a nonempty string")
+    if type(payload["target_authorized"]) is not bool:
+        raise RuntimeError("P5-D governance authorization flag must be Boolean")
+    if type(payload["target_calls_recorded"]) is not list:
+        raise RuntimeError("P5-D governance incidents must be a list")
+    incidents = payload["target_calls_recorded"]
+    if len(incidents) != len(EXPECTED_INCIDENTS):
+        raise RuntimeError("P5-D governance incident count mismatch")
+    for row, expected in zip(incidents, EXPECTED_INCIDENTS, strict=True):
+        if type(row) is not dict or set(row) != INCIDENT_KEYS:
+            raise RuntimeError("P5-D governance incident keys mismatch")
+        attempt, incident_path, incident_blob, status = expected
+        if row != {
+            "attempt": attempt,
+            "incident_blob": incident_blob,
+            "incident_path": incident_path,
+            "status": status,
+        }:
+            raise RuntimeError(f"P5-D governance attempt {attempt} mismatch")
+        if _git_blob(incident_path) != incident_blob:
+            raise RuntimeError(f"P5-D governance incident {attempt} blob mismatch")
+    state = payload["state"]
+    if state not in {"closed", "authorized_once"}:
+        raise RuntimeError("P5-D governance state is unregistered")
+    if state == "closed":
+        if payload["target_authorized"] is not False:
+            raise RuntimeError("P5-D closed governance cannot authorize target")
+        if payload["authorization"] is not None:
+            raise RuntimeError("P5-D closed governance must have null authorization")
+    return payload
+
+
+def _require_target_authorization() -> dict[str, Any]:
+    """Enforce the machine record before any legacy provenance or target work."""
+
+    governance = _load_governance()
+    if governance["state"] == "closed":
+        raise RuntimeError("P5-D target sealed by machine governance")
+    if governance["target_authorized"] is not True:
+        raise RuntimeError("P5-D target is not authorized")
+    raise RuntimeError("P5-D authorized-once verification is not implemented")
+
+
 def _verify_provenance() -> dict[str, Any]:
     """Fail before pair initialization unless every frozen guard is green."""
+
+    _require_target_authorization()
 
     if (
         _git_blob(RECOVERY_PROTOCOL.as_posix(), RECOVERY_PROTOCOL_REVISION)
