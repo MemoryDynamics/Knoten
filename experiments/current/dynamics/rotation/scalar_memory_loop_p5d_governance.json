@@ -2,6 +2,7 @@
   "authorization": null,
   "gate": "P5-D",
   "reason": "two-inconclusive-target-calls-remediation-pending",
+  "result_schema_sha256": "ba9af89e5f2646db31ac0924825a643079fbfaf1d28d70d0696253f1da9cedc6",
   "schema": "scalar-memory-loop-p5d-governance-v1",
   "state": "closed",
   "target_authorized": false,

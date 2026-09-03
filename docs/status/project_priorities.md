@@ -38,10 +38,15 @@ autorisieren keinen weiteren P5-Ziellauf.
    minimal reparieren. Der erste kleine Schritt ist umgesetzt: ein getrackter
    geschlossener Governance-Datensatz bindet beide Incidents, und der Runner
    erzwingt ihn vor der alten Provenienzstrecke und vor jedem Targetzugriff.
-   Die zweite targetfreie Teilkorrektur ist umgesetzt: Der nicht anwendbare
-   Off-Arm-Sentinel ist `null`, unbekannte Typen schliessen fail-closed und
-   unavailable response rendert ohne erfundene Diagnostik. Offen bleiben das
-   exakte v2-Schema, Manifest-Publikation und CI-/Commit-Bindung.
+   Die targetfreie Implementierung ist lokal abgeschlossen: `null` besitzt
+   eine exakte Off-Arm-Semantik, unbekannte Typen schliessen fail-closed, das
+   v2-Schema registriert die Produktionsstruktur, das Publikationsmanifest
+   wird zuletzt geschrieben und die Lease bindet geschuetzte Blobs sowie
+   offizielle CI-Metadaten. Injektions- und Vollpaneltests sind gruen. Das
+   exakte Port-Nullmodell ist als Relaxation erster Ordnung festgehalten; ein
+   gekoppelter harmonischer Oszillator bleibt ein nachgelagertes
+   Diskriminationsgate und wird nicht in das eingefrorene P5-D-Estimand
+   hineindefiniert. Naechster Schritt ist ausschliesslich Schritt 4.
 4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
    Status technisch pruefen. Ein neuer Prospektivlauf benoetigt danach eine

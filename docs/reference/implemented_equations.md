@@ -231,6 +231,57 @@ gemessen. Das registrierte Panel umfasst 64 off-Arme und 768 aktive Arme.
 Die Klassifikation ist eine endliche, vorab festgelegte Entscheidung fuer
 dieses Panel; sie ist weder Ensemble-Replikation noch Kontinuumsgrenze.
 
+### 6.1 Exaktes Relaxations-Nullmodell des Ports
+
+Die reziproke Mittelpunktgleichung impliziert ohne Naeherung
+
+$$
+d^+=\frac{2d^\star-\kappa_{\rm pair}
+(\mu_{{\rm w},A}+\mu_{{\rm w},B})d^-}
+{2+\kappa_{\rm pair}(\mu_{{\rm w},A}+\mu_{{\rm w},B})}.
+$$
+
+Dies ist die genaue Ein-Schritt-Abbildung des **eingefuegten Ports**. Haelt
+man als isolierendes Nullmodell die native Centerbewegung an, also
+$d^\star=d^-$, und setzt fuer identische Zellen
+$\mu_{{\rm w},A}=\mu_{{\rm w},B}=\mu_{\rm w}$, folgt
+
+$$
+d_{n+1}=\rho_{\rm port}d_n,
+\qquad
+\rho_{\rm port}=\frac{1-\kappa_{\rm pair}\mu_{\rm w}}
+{1+\kappa_{\rm pair}\mu_{\rm w}}.
+$$
+
+Der Port allein ist damit ein Relaxationsschritt erster Ordnung, kein
+harmonischer Oszillator. Diese Aussage friert weder die FIFO-Dynamik ein noch
+behauptet sie, das Gesamtsystem habe nur einen Pol: Das endliche Gedaechtnis
+kann weitere transiente Freiheitsgrade beitragen. Der neue Regressionstest
+prueft deshalb die allgemeine exakte Abbildung fuer anziehende und
+abstossende Kopplung, nicht nur den stationaeren Spezialfall.
+
+### 6.2 Nachgelagertes Oszillator-Gate
+
+Ein gekoppelter harmonischer Oszillator ist eine zu pruefende reduzierte
+Hypothese. Fuer die Relativkoordinate waere ihre engste Form
+
+$$
+m_{\rm eff}\Delta^2d_n+\Gamma\Delta d_n
++2\kappa_{\rm pair}d_n=0,
+\qquad m_{\rm eff}>0.
+$$
+
+Das Port-Nullmodell sagt einen einzelnen reellen Relaxationsmultiplikator
+ohne intrinsisches Ueberschwingen voraus. Die Traegheitshypothese benoetigt
+dagegen einen stabilen komplex-konjugierten Polpaarbefund oder eine
+gleichwertig identifizierte zweite Zustandsdimension. Zusaetzlich muessen
+die Relativfrequenz mit $\sqrt{\kappa_{\rm pair}}$ skalieren, ein ueber
+Kopplungsstaerken konsistentes positives $m_{\rm eff}$ ergeben und der
+gemeinsame Center $c_+=(c_A+c_B)/2$ neutral bleiben. Sichtbares Kreiseln der
+internen Schleifen, FIFO-Transienten oder ein einzelnes Ueberschwingen
+reichen jeweils nicht. Dieses Gate ist nachgelagert und veraendert weder das
+eingefrorene P5-D-Panel noch dessen Entscheidungsschwellen.
+
 ## 7. Codeabbildung und Reviewgrenze
 
 | Mathematik | Kanonische Implementierung |
@@ -240,6 +291,7 @@ dieses Panel; sie ist weder Ensemble-Replikation noch Kontinuumsgrenze.
 | Center-Port, Einweg-/Reziprokkraft, Ledger | [`mutual_center_coupling.py`](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/src/emergenz_knoten/mutual_center_coupling.py) |
 | Panel, Antwort, Klassifikation, Ausgabe | [`scalar_memory_loop_p5d_mutual_center_gate.py`](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_gate.py) |
 | unabhaengige Ergebnisrekonstruktion | [`scalar_memory_loop_p5d_mutual_center_result_audit.py`](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_result_audit.py) |
+| exakter v2-Ergebnisvertrag | [`scalar_memory_loop_p5d_result_schema_v2.json`](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json) |
 
 Evidenz: Die obige Algebra spiegelt die aktuelle Implementierung. Inferenz:
 Der Port kann als kontrollierte Wechselwirkungsarchitektur untersucht werden.

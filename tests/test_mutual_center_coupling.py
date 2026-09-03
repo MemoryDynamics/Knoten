@@ -206,12 +206,26 @@ def test_reciprocal_step_is_translation_and_rotation_covariant() -> None:
         coupling=0.0125,
         mode="reciprocal",
     )
-    assert np.max(
-        np.abs(translated.loop_a.history_after - translation - baseline.loop_a.history_after)
-    ) < 2e-14
-    assert np.max(
-        np.abs(translated.loop_b.history_after - translation - baseline.loop_b.history_after)
-    ) < 2e-14
+    assert (
+        np.max(
+            np.abs(
+                translated.loop_a.history_after
+                - translation
+                - baseline.loop_a.history_after
+            )
+        )
+        < 2e-14
+    )
+    assert (
+        np.max(
+            np.abs(
+                translated.loop_b.history_after
+                - translation
+                - baseline.loop_b.history_after
+            )
+        )
+        < 2e-14
+    )
 
     angle = 0.31
     rotation = rotation_matrix(angle)
@@ -230,12 +244,24 @@ def test_reciprocal_step_is_translation_and_rotation_covariant() -> None:
         math.sin(angle),
     )
     assert abs(rotated.loop_a.center_force - expected_force) < 2e-14
-    assert np.max(
-        np.abs(rotated.loop_a.history_after - baseline.loop_a.history_after @ rotation.T)
-    ) < 2e-14
-    assert np.max(
-        np.abs(rotated.loop_b.history_after - baseline.loop_b.history_after @ rotation.T)
-    ) < 2e-14
+    assert (
+        np.max(
+            np.abs(
+                rotated.loop_a.history_after
+                - baseline.loop_a.history_after @ rotation.T
+            )
+        )
+        < 2e-14
+    )
+    assert (
+        np.max(
+            np.abs(
+                rotated.loop_b.history_after
+                - baseline.loop_b.history_after @ rotation.T
+            )
+        )
+        < 2e-14
+    )
 
 
 def test_rounding_metrology_bounds_both_full_center_residuals() -> None:
@@ -281,9 +307,7 @@ def test_midpoint_force_matches_the_frozen_closed_form(
     readout_b = candidate_orbit_center_readout(candidate, chirality=-1)
     mobility_a = candidate.alpha * readout_a.write_gain
     mobility_b = candidate.alpha * readout_b.write_gain
-    numerator = coupling * (
-        result.separation_before + result.separation_provisional
-    )
+    numerator = coupling * (result.separation_before + result.separation_provisional)
     if mode == "a_to_b":
         assert result.loop_a.center_force == 0.0j
         assert result.loop_b.center_force == pytest.approx(
@@ -295,11 +319,25 @@ def test_midpoint_force_matches_the_frozen_closed_form(
             -numerator / (2.0 + coupling * mobility_a), abs=1e-15
         )
     else:
-        expected = -numerator / (
-            2.0 + coupling * (mobility_a + mobility_b)
-        )
+        expected = -numerator / (2.0 + coupling * (mobility_a + mobility_b))
         assert result.loop_a.center_force == pytest.approx(expected, abs=1e-15)
         assert result.loop_b.center_force == pytest.approx(-expected, abs=1e-15)
+
+
+@pytest.mark.parametrize("coupling", (0.0125, -0.0125))
+def test_reciprocal_separation_is_the_exact_first_order_midpoint_map(
+    coupling: float,
+) -> None:
+    result = _pair(mode="reciprocal", coupling=coupling)
+    candidate = _candidate()
+    readout_a = candidate_orbit_center_readout(candidate, chirality=1)
+    readout_b = candidate_orbit_center_readout(candidate, chirality=-1)
+    mobility_sum = candidate.alpha * (readout_a.write_gain + readout_b.write_gain)
+    expected = (
+        2.0 * result.separation_provisional
+        - coupling * mobility_sum * result.separation_before
+    ) / (2.0 + coupling * mobility_sum)
+    assert result.separation_after == pytest.approx(expected, abs=2e-15)
 
 
 @pytest.mark.parametrize("mode", ("a_to_b", "b_to_a", "reciprocal"))

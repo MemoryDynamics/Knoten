@@ -59,10 +59,11 @@ maschinenlesbarer Governancezustand diese Schliessung ab; der Runner prueft
 ihn vor der alten Provenienzstrecke und vor jeder Arm-Auswertung. Die zweite
 targetfreie Teilkorrektur verwendet `null` fuer die nicht anwendbare
 Off-Arm-Mobilitaetsmetrik, lehnt unbekannte Typen fail-closed ab und rendert
-eine unverfuegbare Antwort ohne Diagnostikzugriff. Exaktes v2-Payloadschema,
-Manifest-Publikation und neue CI-Bindung bleiben offen. P5 bleibt bis nach
-vollstaendiger Remediation, unabhaengigem Readinessreview und einer neuen
-prospektiven Autorisierung geschlossen.
+eine unverfuegbare Antwort ohne Diagnostikzugriff. Das exakte v2-Payloadschema,
+die Manifest-zuletzt-Publikation, eine unabhaengige Manifestpruefung sowie die
+einmalige CI-/Commit-gebundene Lease sind targetfrei implementiert und lokal
+adversarial geprueft. Das unabhaengige Readinessreview und eine neue
+prospektive Autorisierung stehen noch aus; P5 bleibt deshalb geschlossen.
 
 ## Inferenz
 
@@ -74,7 +75,11 @@ Ziellaeufen folgt jedoch nichts ueber reale Wechselwirkung oder Masse.
 
 Interaktion, Ladung und Felder sowie Spin, Impuls, Traegheit und Masse bleiben
 offen. Insbesondere ist eine zweite Differenz im sichtbaren Pfad noch kein
-Nachweis einer positiven, zustandsunabhaengigen Masse.
+Nachweis einer positiven, zustandsunabhaengigen Masse. Der reziproke P5-D-Port
+besitzt bei angehaltener nativer Centerbewegung exakt ein Relaxationsmodell
+erster Ordnung. Ein gekoppelter harmonischer Oszillator ist daher ein
+nachgelagerter Falsifikator fuer eine zusaetzliche, gedaechtnisinduzierte
+Zustandsdimension und kein bereits eingebautes P5-D-Ergebnis.
 
 ## Claim-Grenze
 
@@ -90,4 +95,5 @@ negatives Interaktionsergebnis.
 - [Kanonisches Modellvokabular](../reference/model_vocabulary.md)
 - [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
 - [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
+- [P5-D v2-Ergebnisvertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json)
 - [Claim-Register](paper_claims.md)

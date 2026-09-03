@@ -1,0 +1,201 @@
+{
+  "arrays": {
+    "active_arms": {"item": "object:active_arm", "length": 768},
+    "channel_off_arms": {"item": "object:off_arm", "length": 64},
+    "excess_trace": {"item": "object:excess_sample", "length": 101},
+    "high_precision_references": {"item": "object:high_precision_reference", "maximum_length": 3},
+    "key6": {"items": ["integer", "integer", "integer", "integer", "enum:kappa_name", "integer"], "length": 6},
+    "key7": {"items": ["integer", "integer", "integer", "integer", "enum:kappa_name", "integer", "enum:active_mode"], "length": 7},
+    "number_pair": {"item": "number", "length": 2},
+    "number_range": {"item": "number", "length": 2},
+    "reference_steps": {"item": "integer", "length": 3},
+    "response_rows": {"item": "object:response_row", "length": 768},
+    "trace": {"item": "object:trace_sample", "length": 101},
+    "triplets": {"item": "object:triplet", "length": 256}
+  },
+  "constants": {
+    "claim_boundary": "explicit operational mutual-center architecture only; no spontaneous interaction, charge, spin, momentum, inertia or mass",
+    "payload_schema": "scalar-memory-loop-p5d-mutual-center-v2"
+  },
+  "enums": {
+    "active_mode": ["a_to_b", "b_to_a", "reciprocal"],
+    "decision": ["p5d-inconclusive", "p5d-ledger-or-reciprocity-fail", "p5d-loop-integrity-fail", "p5d-directional-causality-fail", "p5d-mutual-hypothesis-fail", "p5d-independent-superposition", "p5d-mutual-center-response-pass"],
+    "kappa_name": ["low", "high"],
+    "off_mode": ["off"]
+  },
+  "exact_maps": {
+    "phase_support": {
+      "allowed_keys": [
+        "d3-s11-low-+1", "d3-s11-low--1", "d3-s11-high-+1", "d3-s11-high--1",
+        "d3-s1-1-low-+1", "d3-s1-1-low--1", "d3-s1-1-high-+1", "d3-s1-1-high--1",
+        "d3-s-11-low-+1", "d3-s-11-low--1", "d3-s-11-high-+1", "d3-s-11-high--1",
+        "d3-s-1-1-low-+1", "d3-s-1-1-low--1", "d3-s-1-1-high-+1", "d3-s-1-1-high--1",
+        "d6-s11-low-+1", "d6-s11-low--1", "d6-s11-high-+1", "d6-s11-high--1",
+        "d6-s1-1-low-+1", "d6-s1-1-low--1", "d6-s1-1-high-+1", "d6-s1-1-high--1",
+        "d6-s-11-low-+1", "d6-s-11-low--1", "d6-s-11-high-+1", "d6-s-11-high--1",
+        "d6-s-1-1-low-+1", "d6-s-1-1-low--1", "d6-s-1-1-high-+1", "d6-s-1-1-high--1"
+      ],
+      "value": "integer"
+    }
+  },
+  "objects": {
+    "active_arm": {
+      "chirality_a": "integer", "chirality_b": "integer", "completed": "boolean", "coupling": "number",
+      "distance_fraction": "integer", "final_history_sha256_a": "string", "final_history_sha256_b": "string",
+      "finite": "boolean", "high_precision_references": "array:high_precision_references", "initial_distance": "number",
+      "kappa_name": "enum:kappa_name", "ledger_cumulative": "object:ledger_cumulative",
+      "ledger_evaluation_count": "integer", "ledger_gates": "object:active_ledger_gates",
+      "ledger_maxima": "object:ledger_maxima", "ledger_rival_fractions": "object:rival_numbers",
+      "ledger_rival_maxima": "object:rival_numbers", "ledger_rival_resolved": "object:rival_booleans",
+      "ledger_scales": "object:ledger_scales", "loop_gates": "object:active_loop_gates",
+      "loop_summary": "object:loop_summary", "maximum_center_response_fraction": "number",
+      "minimum_mobility_dissipation": "number", "minimum_separation": "number", "mode": "enum:active_mode",
+      "normal_metrology_operands": "boolean", "phase": "number", "phase_index": "integer",
+      "phase_metrics": "object:phase_metrics", "receiver_response_resolved": "boolean", "shape_evaluation_count": "integer",
+      "sign": "integer", "source_bitwise_native": "boolean", "stop_reason": "nullable:string", "stopped": "boolean",
+      "trace": "array:trace"
+    },
+    "active_ledger_gates": {
+      "center_full_envelope": "boolean", "center_local": "boolean", "complete_evaluation_count": "boolean",
+      "force_balance": "boolean", "high_precision_references": "boolean", "midpoint_force": "boolean",
+      "nonnegative_mobility": "boolean", "normal_operands": "boolean", "pair_ledger_cumulative": "boolean",
+      "pair_ledger_step": "boolean", "work_split_cumulative": "boolean", "work_split_step": "boolean"
+    },
+    "active_loop_gates": {
+      "center_response_bound": "boolean", "complete_shape_evaluation_count": "boolean", "late_d0": "boolean",
+      "maximum_d0": "boolean", "opposite_chirality": "boolean", "phase_a": "boolean", "phase_b": "boolean",
+      "separation": "boolean"
+    },
+    "candidate": {
+      "alpha": "number", "amplitude_att": "number", "amplitude_rep": "number", "candidate_id": "string",
+      "eta": "number", "horizon": "integer", "memory_mass": "number", "radius": "number", "sigma_att": "number",
+      "sigma_rep": "number", "theta": "number"
+    },
+    "decision_gates": {
+      "closed_loop_excess": "boolean", "directional_causality": "boolean", "ledger_and_reciprocity": "boolean",
+      "loop_integrity": "boolean", "mutual_hypothesis": "boolean", "pipeline": "boolean", "scaling": "boolean"
+    },
+    "diagnostics": {
+      "excess_low_high_range": "array:number_range", "excess_phase_support": "exact_map:phase_support",
+      "excess_response_fraction_range": "array:number_range", "low_high_range": "array:number_range",
+      "maximum_distance_error": "number", "maximum_excess_distance_error": "number",
+      "maximum_reflection_rms_fraction": "number", "maximum_sign_error": "number", "maximum_swap_rms_fraction": "number",
+      "minima": "object:minima", "phase_support": "exact_map:phase_support", "raw_distance_ratio_range": "array:number_range"
+    },
+    "excess_sample": {"excess": "array:number_pair", "longitudinal": "number", "step": "integer", "transverse": "number"},
+    "high_precision_reference": {
+      "completed_force_balance_residual": "number", "midpoint_a_residual": "number", "midpoint_b_residual": "number",
+      "pass": "boolean", "precision_dps": "integer", "relative_tolerance": "number", "update": "integer"
+    },
+    "ledger_cumulative": {"pair_ledger": "number", "work_split_a": "number", "work_split_b": "number"},
+    "ledger_maxima": {
+      "center_envelope_a": "number", "center_envelope_b": "number", "center_local_a": "number", "center_local_b": "number",
+      "force_balance": "number", "midpoint_a": "number", "midpoint_b": "number", "pair_ledger": "number",
+      "work_split_a": "number", "work_split_b": "number"
+    },
+    "ledger_scales": {"displacement": "number", "energy": "number", "force": "number"},
+    "loop_summary": {
+      "center_stationarity_fraction": "nullable:number", "late_d0_a": "number", "late_d0_b": "number",
+      "late_opposite_a": "number", "late_opposite_b": "number", "maximum_d0_a": "number", "maximum_d0_b": "number"
+    },
+    "minima": {
+      "excess_high": "number", "excess_low": "number", "one_way_high": "number", "one_way_low": "number",
+      "reciprocal_high": "number", "reciprocal_low": "number"
+    },
+    "off_arm": {
+      "chirality_a": "integer", "chirality_b": "integer", "completed": "boolean", "coupling": "number",
+      "distance_fraction": "integer", "final_history_sha256_a": "string", "final_history_sha256_b": "string",
+      "finite": "boolean", "high_precision_references": "array:high_precision_references", "initial_distance": "number",
+      "kappa_name": "null", "ledger_cumulative": "object:ledger_cumulative", "ledger_evaluation_count": "integer",
+      "ledger_gates": "object:off_ledger_gates", "ledger_maxima": "object:ledger_maxima",
+      "ledger_rival_fractions": "object:rival_numbers", "ledger_rival_maxima": "object:rival_numbers",
+      "ledger_rival_resolved": "object:rival_booleans", "ledger_scales": "object:ledger_scales",
+      "loop_gates": "object:off_loop_gates", "loop_summary": "object:loop_summary",
+      "maximum_center_response_fraction": "null", "minimum_mobility_dissipation": "null", "minimum_separation": "number",
+      "mode": "enum:off_mode", "normal_metrology_operands": "boolean", "phase": "number", "phase_index": "integer",
+      "phase_metrics": "object:phase_metrics", "receiver_response_resolved": "boolean", "shape_evaluation_count": "integer",
+      "sign": "null", "source_bitwise_native": "boolean", "stop_reason": "nullable:string", "stopped": "boolean",
+      "trace": "array:trace"
+    },
+    "off_ledger_gates": {"not_applicable_channel_off": "boolean"},
+    "off_loop_gates": {
+      "bitwise_native": "boolean", "complete_shape_evaluation_count": "boolean", "prepared_orbit": "boolean",
+      "stationary_center": "boolean"
+    },
+    "panel": {"active_arms": "array:active_arms", "channel_off_arms": "array:channel_off_arms"},
+    "payload": {
+      "candidate": "object:candidate", "claim_boundary": "const:claim_boundary", "created_utc": "string",
+      "decision": "enum:decision", "decision_gates": "object:decision_gates", "panel": "object:panel",
+      "provenance": "object:provenance", "registration": "object:registration", "response": "variant:response",
+      "schema": "const:payload_schema", "thresholds": "object:thresholds"
+    },
+    "phase_metric": {"mean_error": "number", "pass": "boolean", "rms_error": "number"},
+    "phase_metrics": {"a": "object:phase_metric", "b": "object:phase_metric"},
+    "provenance": {
+      "attempt_receipt_path": "string", "attempt_receipt_sha256": "sha256", "authorization_id": "uuid4",
+      "ci_run_id": "integer", "clean": "boolean", "governance_sha256": "sha256",
+      "implementation_revision": "sha1", "revision": "sha1", "upstream_revision": "sha1"
+    },
+    "registration": {"gates": "object:registration_gates", "pass": "boolean"},
+    "registration_gates": {
+      "active_count": "boolean", "active_order": "boolean", "active_unique": "boolean",
+      "channel_off_count": "boolean", "channel_off_order": "boolean", "channel_off_unique": "boolean",
+      "complete_trace_grids": "boolean", "finite": "boolean", "high_precision_references": "boolean"
+    },
+    "response_available": {
+      "available": "const:true", "diagnostics": "object:diagnostics", "gates": "object:response_gates",
+      "pass": "boolean", "registration": "object:registration", "rows": "array:response_rows", "triplets": "array:triplets"
+    },
+    "response_gates": {
+      "distance_normalization": "boolean", "excess_distance_normalization": "boolean", "excess_high_signal": "boolean",
+      "excess_low_signal": "boolean", "excess_phase_support": "boolean", "excess_resolved": "boolean",
+      "excess_response_fraction": "boolean", "excess_strength_scaling": "boolean", "one_way_high_signal": "boolean",
+      "one_way_low_signal": "boolean", "phase_support": "boolean", "primary_resolved": "boolean",
+      "raw_distance_scaling": "boolean", "reciprocal_high_signal": "boolean", "reciprocal_low_signal": "boolean",
+      "reflection_covariance": "boolean", "sign_symmetry": "boolean", "strength_scaling": "boolean", "swap_covariance": "boolean"
+    },
+    "response_row": {
+      "final_longitudinal": "number", "final_transverse": "number", "key": "array:key7",
+      "late_mean_longitudinal": "number", "late_rms_longitudinal": "number"
+    },
+    "response_unavailable": {"available": "const:false", "reason": "string"},
+    "rival_booleans": {
+      "flipped_force_a": "boolean", "omitted_age_a": "boolean", "omitted_age_b": "boolean",
+      "omitted_both_ages": "boolean", "one_way_without_reservoir": "boolean", "raw_center": "boolean"
+    },
+    "rival_numbers": {
+      "flipped_force_a": "number", "omitted_age_a": "number", "omitted_age_b": "number",
+      "omitted_both_ages": "number", "one_way_without_reservoir": "number", "raw_center": "number"
+    },
+    "thresholds": {
+      "active_updates": "integer", "center_local_relative": "number", "channel_off_center_fraction": "number",
+      "channel_off_d0_fraction": "number", "covariance_fraction": "number", "cumulative_ledger_relative": "number",
+      "excess_distance_difference": "number", "excess_high_minimum": "number", "excess_low_high_maximum": "number",
+      "excess_low_high_minimum": "number", "excess_low_minimum": "number", "excess_response_maximum": "number",
+      "excess_response_minimum": "number", "force_relative": "number", "late_d0_fraction": "number",
+      "late_start": "integer", "maximum_center_response_fraction": "number", "maximum_d0_fraction": "number",
+      "minimum_mobility_dissipation": "number", "minimum_separation_fraction": "number",
+      "normalized_distance_difference": "number", "one_way_high_minimum": "number", "one_way_low_minimum": "number",
+      "opposite_d0_fraction": "number", "phase_mean_error_fraction": "number", "phase_rms_error_fraction": "number",
+      "phase_start": "integer", "phase_support_minimum": "integer", "raw_distance_ratio_maximum": "number",
+      "raw_distance_ratio_minimum": "number", "reciprocal_high_minimum": "number", "reciprocal_low_minimum": "number",
+      "reference_dps": "integer", "reference_steps": "array:reference_steps", "response_low_high_maximum": "number",
+      "response_low_high_minimum": "number", "response_resolution": "number", "response_symmetry_rms": "number",
+      "sample_every": "integer", "step_ledger_relative": "number"
+    },
+    "trace_sample": {
+      "alignment_a": "number", "alignment_b": "number", "center_a": "array:number_pair", "center_b": "array:number_pair",
+      "d0_a": "number", "d0_b": "number", "opposite_d0_a": "number", "opposite_d0_b": "number",
+      "separation": "array:number_pair", "step": "integer"
+    },
+    "triplet": {
+      "final_longitudinal": "number", "key": "array:key6", "late_mean_longitudinal": "number",
+      "late_rms_longitudinal": "number", "trace": "array:excess_trace"
+    }
+  },
+  "root": "object:payload",
+  "schema": "scalar-memory-loop-p5d-result-contract-v2",
+  "variants": {
+    "response": {"discriminator": "available", "mapping": {"false": "object:response_unavailable", "true": "object:response_available"}}
+  }
+}

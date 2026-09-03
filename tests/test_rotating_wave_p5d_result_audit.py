@@ -4,6 +4,7 @@ import ast
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 from experiments.current.dynamics.rotation import (
     scalar_memory_loop_p5d_mutual_center_gate as runner,
@@ -96,10 +97,14 @@ def _payload(*, additive: bool = False) -> dict[str, object]:
                             "finite": True,
                             "source_bitwise_native": True,
                             "final_history_sha256_a": (
-                                hash_a if mode == "a_to_b" else f"active-a-{kappa}-{sign}-{mode}"
+                                hash_a
+                                if mode == "a_to_b"
+                                else f"active-a-{kappa}-{sign}-{mode}"
                             ),
                             "final_history_sha256_b": (
-                                hash_b if mode == "b_to_a" else f"active-b-{kappa}-{sign}-{mode}"
+                                hash_b
+                                if mode == "b_to_a"
+                                else f"active-b-{kappa}-{sign}-{mode}"
                             ),
                             "trace": trace,
                             "ledger_gates": {"synthetic": True},
@@ -131,8 +136,12 @@ def test_p5d_auditor_is_independent_of_target_runner_and_numeric_stack() -> None
             imports.extend(alias.name for alias in node.names)
         elif isinstance(node, ast.ImportFrom) and node.module:
             imports.append(node.module)
-    assert not any("scalar_memory_loop_p5d_mutual_center_gate" in name for name in imports)
-    assert not any(name.split(".")[0] in {"numpy", "scipy", "mpmath"} for name in imports)
+    assert not any(
+        "scalar_memory_loop_p5d_mutual_center_gate" in name for name in imports
+    )
+    assert not any(
+        name.split(".")[0] in {"numpy", "scipy", "mpmath"} for name in imports
+    )
 
 
 def test_p5d_auditor_finite_check_rejects_unknown_and_numpy_scalars() -> None:
@@ -161,9 +170,7 @@ def test_p5d_independent_auditor_identifies_exact_superposition() -> None:
 def test_p5d_independent_auditor_detects_source_contamination() -> None:
     contaminated = _payload()
     arm = next(
-        row
-        for row in contaminated["panel"]["active_arms"]
-        if row["mode"] == "a_to_b"
+        row for row in contaminated["panel"]["active_arms"] if row["mode"] == "a_to_b"
     )
     arm["final_history_sha256_a"] = "contaminated"
     contaminated["decision"] = "p5d-directional-causality-fail"
@@ -246,7 +253,9 @@ def test_p5d_independent_auditor_rejects_stored_summary_and_incomplete_panel() -
     assert result["registration_gates"]["active_count"] is False
 
 
-def test_p5d_independent_audit_output_is_atomic_and_nonoverwriting(tmp_path: Path) -> None:
+def test_p5d_independent_audit_output_is_atomic_and_nonoverwriting(
+    tmp_path: Path,
+) -> None:
     output = tmp_path / "audit.json"
     audit._atomic_write(output, '{"complete": true}\n')
     assert output.read_text(encoding="utf-8") == '{"complete": true}\n'
@@ -256,3 +265,11 @@ def test_p5d_independent_audit_output_is_atomic_and_nonoverwriting(tmp_path: Pat
         assert "refusing existing" in str(error)
     else:
         raise AssertionError("audit output overwrite was not rejected")
+
+
+def test_p5d_independent_auditor_rejects_absent_publication_manifest(
+    monkeypatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(audit, "MANIFEST", tmp_path / "absent.publication.json")
+    with pytest.raises(RuntimeError, match="manifest is absent or malformed"):
+        audit.audit()

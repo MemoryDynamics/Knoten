@@ -12,15 +12,19 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import re
 from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[4]
 RESULT = ROOT / (
-    "reports/dynamics/rotation/"
-    "scalar_memory_loop_p5d_mutual_center_2026-09-01.json"
+    "reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_2026-09-01.json"
 )
 REPORT = RESULT.with_suffix(".md")
+MANIFEST = RESULT.with_suffix(".publication.json")
+RESULT_SCHEMA = ROOT / (
+    "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json"
+)
 DEFAULT_OUTPUT = ROOT / (
     "reports/project/meta/reviews/"
     "scalar_memory_loop_p5d_mutual_center_independent_recompute_2026-09-01.json"
@@ -113,6 +117,158 @@ def _finite(value: Any) -> bool:
     return False
 
 
+def _load_result_schema(path: Path = RESULT_SCHEMA) -> dict[str, Any]:
+    try:
+        contract = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("P5-D result schema is unreadable") from error
+    expected = {
+        "arrays",
+        "constants",
+        "enums",
+        "exact_maps",
+        "objects",
+        "root",
+        "schema",
+        "variants",
+    }
+    if type(contract) is not dict or set(contract) != expected:
+        raise RuntimeError("P5-D result schema has invalid top-level keys")
+    if contract["schema"] != "scalar-memory-loop-p5d-result-contract-v2":
+        raise RuntimeError("P5-D result schema identity mismatch")
+    return contract
+
+
+def _schema_error(path: str, expected: str, value: Any) -> None:
+    raise TypeError(f"{path}: expected {expected}, observed {type(value).__name__}")
+
+
+def _validate_schema_value(
+    value: Any, specification: str, *, path: str, contract: dict[str, Any]
+) -> None:
+    if specification.startswith("nullable:"):
+        if value is None:
+            return
+        specification = specification.removeprefix("nullable:")
+    if specification == "number":
+        if type(value) not in {int, float} or not math.isfinite(float(value)):
+            _schema_error(path, "finite number", value)
+        return
+    if specification == "integer":
+        if type(value) is not int:
+            _schema_error(path, "integer", value)
+        return
+    if specification == "boolean":
+        if type(value) is not bool:
+            _schema_error(path, "Boolean", value)
+        return
+    if specification == "string":
+        if type(value) is not str:
+            _schema_error(path, "string", value)
+        return
+    if specification == "null":
+        if value is not None:
+            _schema_error(path, "null", value)
+        return
+    if specification in {"sha1", "sha256", "uuid4"}:
+        patterns = {
+            "sha1": r"[0-9a-f]{40}",
+            "sha256": r"[0-9a-f]{64}",
+            "uuid4": r"[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}",
+        }
+        if (
+            type(value) is not str
+            or re.fullmatch(patterns[specification], value) is None
+        ):
+            _schema_error(path, specification, value)
+        return
+    namespace, separator, name = specification.partition(":")
+    if not separator:
+        raise RuntimeError(f"unregistered P5-D schema specification: {specification}")
+    if namespace == "const":
+        expected = {"true": True, "false": False}.get(
+            name, contract["constants"].get(name)
+        )
+        if value != expected or type(value) is not type(expected):
+            _schema_error(path, f"constant {expected!r}", value)
+        return
+    if namespace == "enum":
+        if value not in contract["enums"][name]:
+            _schema_error(path, f"enum {name}", value)
+        return
+    if namespace == "object":
+        fields = contract["objects"][name]
+        if type(value) is not dict:
+            _schema_error(path, f"object {name}", value)
+        if set(value) != set(fields):
+            missing = sorted(set(fields) - set(value))
+            unknown = sorted(set(value) - set(fields))
+            raise TypeError(
+                f"{path}: object {name} key mismatch; missing={missing}, unknown={unknown}"
+            )
+        for key, child in fields.items():
+            _validate_schema_value(
+                value[key], child, path=f"{path}.{key}", contract=contract
+            )
+        return
+    if namespace == "array":
+        rule = contract["arrays"][name]
+        if type(value) is not list:
+            _schema_error(path, f"array {name}", value)
+        length = rule.get("length")
+        if length is not None and len(value) != length:
+            raise TypeError(
+                f"{path}: expected array length {length}, observed {len(value)}"
+            )
+        maximum = rule.get("maximum_length")
+        if maximum is not None and len(value) > maximum:
+            raise TypeError(
+                f"{path}: expected at most {maximum} items, observed {len(value)}"
+            )
+        if "items" in rule:
+            for index, child in enumerate(rule["items"]):
+                _validate_schema_value(
+                    value[index], child, path=f"{path}[{index}]", contract=contract
+                )
+        else:
+            for index, item in enumerate(value):
+                _validate_schema_value(
+                    item, rule["item"], path=f"{path}[{index}]", contract=contract
+                )
+        return
+    if namespace == "exact_map":
+        rule = contract["exact_maps"][name]
+        if type(value) is not dict:
+            _schema_error(path, f"exact map {name}", value)
+        if set(value) != set(rule["allowed_keys"]):
+            raise TypeError(f"{path}: exact map {name} key mismatch")
+        for key, item in value.items():
+            _validate_schema_value(
+                item, rule["value"], path=f"{path}.{key}", contract=contract
+            )
+        return
+    if namespace == "variant":
+        if type(value) is not dict:
+            _schema_error(path, f"variant {name}", value)
+        rule = contract["variants"][name]
+        discriminator = rule["discriminator"]
+        if discriminator not in value or type(value[discriminator]) is not bool:
+            _schema_error(
+                f"{path}.{discriminator}",
+                "Boolean discriminator",
+                value.get(discriminator),
+            )
+        branch = rule["mapping"][str(value[discriminator]).lower()]
+        _validate_schema_value(value, branch, path=path, contract=contract)
+        return
+    raise RuntimeError(f"unregistered P5-D schema namespace: {namespace}")
+
+
+def _validate_v2_payload(payload: dict[str, Any]) -> None:
+    contract = _load_result_schema()
+    _validate_schema_value(payload, contract["root"], path="$", contract=contract)
+
+
 def _rms(values: Iterable[complex | float]) -> float:
     rows = [abs(value) ** 2 for value in values]
     return math.sqrt(math.fsum(rows) / len(rows)) if rows else math.inf
@@ -149,8 +305,7 @@ def _registration(
         "channel_off_unique": len(off_keys) == len(set(off_keys)),
         "active_unique": len(active_keys) == len(set(active_keys)),
         "complete_trace_grids": all(
-            [int(sample["step"]) for sample in row.get("trace", [])]
-            == expected_steps
+            [int(sample["step"]) for sample in row.get("trace", [])] == expected_steps
             for row in traces
         ),
         "finite": _finite(traces),
@@ -192,16 +347,12 @@ def _responses(
         sign = 1.0 if float(arm["coupling"]) > 0.0 else -1.0
         trace = []
         for sample, baseline in zip(arm["trace"], control["trace"], strict=True):
-            delta = _complex(sample["separation"]) - _complex(
-                baseline["separation"]
-            )
+            delta = _complex(sample["separation"]) - _complex(baseline["separation"])
             trace.append(
                 {
                     "step": int(sample["step"]),
                     "delta": delta,
-                    "longitudinal": -sign
-                    * (delta * e0.conjugate()).real
-                    / distance,
+                    "longitudinal": -sign * (delta * e0.conjugate()).real / distance,
                 }
             )
         traces[key] = trace
@@ -228,8 +379,7 @@ def _responses(
                         {
                             "step": rec["step"],
                             "value": excess,
-                            "longitudinal": (excess * e0.conjugate()).real
-                            / distance,
+                            "longitudinal": (excess * e0.conjugate()).real / distance,
                         }
                     )
                 excess_traces[prefix] = trace
@@ -294,9 +444,7 @@ def _responses(
         reflection_errors.append(
             _rms(
                 left["delta"] - right["delta"].conjugate()
-                for left, right in zip(
-                    traces[key], traces[reflected], strict=True
-                )
+                for left, right in zip(traces[key], traces[reflected], strict=True)
             )
             / RADIUS
         )
@@ -377,7 +525,9 @@ def _responses(
                     )
 
     gates = {
-        "primary_resolved": all(abs(value) >= RESPONSE_RESOLUTION for value in finals.values()),
+        "primary_resolved": all(
+            abs(value) >= RESPONSE_RESOLUTION for value in finals.values()
+        ),
         "reciprocal_low_signal": minima["reciprocal_low"] >= 0.0025,
         "reciprocal_high_signal": minima["reciprocal_high"] >= 0.005,
         "one_way_low_signal": minima["one_way_low"] >= 0.00125,
@@ -408,7 +558,9 @@ def _responses(
     }
 
 
-def _causality(off_rows: list[dict[str, Any]], active_rows: list[dict[str, Any]]) -> bool:
+def _causality(
+    off_rows: list[dict[str, Any]], active_rows: list[dict[str, Any]]
+) -> bool:
     off = {_base_key(row): row for row in off_rows}
     checks = []
     for row in active_rows:
@@ -426,9 +578,10 @@ def _causality(off_rows: list[dict[str, Any]], active_rows: list[dict[str, Any]]
             sample[f"center_{role}"] == reference[f"center_{role}"]
             for sample, reference in zip(row["trace"], control["trace"], strict=True)
         )
-        hash_equal = row[f"final_history_sha256_{role}"] == control[
-            f"final_history_sha256_{role}"
-        ]
+        hash_equal = (
+            row[f"final_history_sha256_{role}"]
+            == control[f"final_history_sha256_{role}"]
+        )
         response = abs(
             _complex(row["trace"][-1][f"center_{receiver}"])
             - _complex(control["trace"][-1][f"center_{receiver}"])
@@ -461,9 +614,7 @@ def _recompute_arm_gates(
     if mode == "off":
         ledger = {"not_applicable_channel_off": True}
         loop = {
-            "complete_shape_evaluation_count": int(
-                row["shape_evaluation_count"]
-            )
+            "complete_shape_evaluation_count": int(row["shape_evaluation_count"])
             == ACTIVE_UPDATES + 1,
             "bitwise_native": bool(row["source_bitwise_native"]),
             "prepared_orbit": max(
@@ -484,9 +635,7 @@ def _recompute_arm_gates(
     energy_scale = float(scales["energy"])
     references = row["high_precision_references"]
     references_expected = (
-        row["kappa_name"] == "high"
-        and int(row["sign"]) == 1
-        and mode == "reciprocal"
+        row["kappa_name"] == "high" and int(row["sign"]) == 1 and mode == "reciprocal"
     )
     ledger = {
         "complete_evaluation_count": int(row["ledger_evaluation_count"])
@@ -503,8 +652,7 @@ def _recompute_arm_gates(
             float(maxima["center_envelope_b"]),
         )
         <= 1.0,
-        "force_balance": float(maxima["force_balance"]) / force_scale
-        <= 5.0e-12,
+        "force_balance": float(maxima["force_balance"]) / force_scale <= 5.0e-12,
         "midpoint_force": max(
             float(maxima["midpoint_a"]),
             float(maxima["midpoint_b"]),
@@ -517,19 +665,16 @@ def _recompute_arm_gates(
         )
         / energy_scale
         <= 5.0e-11,
-        "pair_ledger_step": float(maxima["pair_ledger"]) / energy_scale
-        <= 5.0e-11,
+        "pair_ledger_step": float(maxima["pair_ledger"]) / energy_scale <= 5.0e-11,
         "work_split_cumulative": max(
             abs(float(cumulative["work_split_a"])),
             abs(float(cumulative["work_split_b"])),
         )
         / energy_scale
         <= 5.0e-9,
-        "pair_ledger_cumulative": abs(float(cumulative["pair_ledger"]))
-        / energy_scale
+        "pair_ledger_cumulative": abs(float(cumulative["pair_ledger"])) / energy_scale
         <= 5.0e-9,
-        "nonnegative_mobility": float(row["minimum_mobility_dissipation"])
-        >= -1.0e-30,
+        "nonnegative_mobility": float(row["minimum_mobility_dissipation"]) >= -1.0e-30,
         "high_precision_references": bool(
             not references_expected
             or (
@@ -560,8 +705,7 @@ def _recompute_arm_gates(
         "phase_a": bool(phase["a"]["pass"]),
         "phase_b": bool(phase["b"]["pass"]),
         "separation": float(row["minimum_separation"]) >= 2.25 * RADIUS,
-        "center_response_bound": float(row["maximum_center_response_fraction"])
-        <= 0.10,
+        "center_response_bound": float(row["maximum_center_response_fraction"]) <= 0.10,
     }
     return ledger, loop
 
@@ -585,6 +729,8 @@ def _decision(gates: dict[str, bool]) -> str:
 
 
 def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    if payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v2":
+        _validate_v2_payload(payload)
     panel = payload["panel"]
     off = panel["channel_off_arms"]
     active = panel["active_arms"]
@@ -592,17 +738,21 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
         off,
         active,
         require_references=(
-            payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v1"
+            payload.get("schema")
+            in {
+                "scalar-memory-loop-p5d-mutual-center-v1",
+                "scalar-memory-loop-p5d-mutual-center-v2",
+            }
         ),
     )
     response = _responses(off, active) if all(registration.values()) else None
     response_gates = response["gates"] if response is not None else {}
-    strict_numeric = (
-        payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v1"
-    )
+    strict_numeric = payload.get("schema") in {
+        "scalar-memory-loop-p5d-mutual-center-v1",
+        "scalar-memory-loop-p5d-mutual-center-v2",
+    }
     rebuilt_arm_gates = [
-        _recompute_arm_gates(row, strict_numeric=strict_numeric)
-        for row in off + active
+        _recompute_arm_gates(row, strict_numeric=strict_numeric) for row in off + active
     ]
     pipeline = bool(
         all(registration.values())
@@ -611,8 +761,7 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
         and response_gates.get("primary_resolved", False)
     )
     ledger = all(
-        all(ledger_gates.values())
-        for ledger_gates, _ in rebuilt_arm_gates[len(off) :]
+        all(ledger_gates.values()) for ledger_gates, _ in rebuilt_arm_gates[len(off) :]
     )
     loop = all(all(loop_gates.values()) for _, loop_gates in rebuilt_arm_gates)
     gates = {
@@ -662,8 +811,7 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 for key, value in row["ledger_rival_maxima"].items()
             }
             rival_resolved = {
-                key: value > 5.0e-11
-                for key, value in rival_fractions.items()
+                key: value > 5.0e-11 for key, value in rival_fractions.items()
             }
             if row.get("ledger_rival_fractions") != rival_fractions:
                 differences.append(f"arm[{index}].ledger_rival_fractions")
@@ -675,7 +823,10 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
         )
     if payload.get("decision_gates") != gates:
         differences.append("decision_gates")
-    if response is not None and payload.get("response", {}).get("gates") != response_gates:
+    if (
+        response is not None
+        and payload.get("response", {}).get("gates") != response_gates
+    ):
         differences.append("response.gates")
     return {
         "schema": "scalar-memory-loop-p5d-mutual-center-independent-audit-v1",
@@ -693,9 +844,85 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _load_publication() -> tuple[dict[str, Any], bytes]:
+    try:
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError(
+            "P5-D publication manifest is absent or malformed"
+        ) from error
+    keys = {
+        "attempt_receipt_path",
+        "attempt_receipt_sha256",
+        "authorization_id",
+        "published_utc",
+        "report_path",
+        "report_sha256",
+        "result_schema",
+        "schema",
+        "summary_path",
+        "summary_sha256",
+    }
+    if type(manifest) is not dict or set(manifest) != keys:
+        raise RuntimeError("P5-D publication manifest keys mismatch")
+    if manifest["schema"] != "scalar-memory-loop-p5d-publication-v1":
+        raise RuntimeError("P5-D publication manifest identity mismatch")
+    if manifest["result_schema"] != "scalar-memory-loop-p5d-mutual-center-v2":
+        raise RuntimeError("P5-D publication result-schema mismatch")
+    expected_summary = RESULT.relative_to(ROOT).as_posix()
+    expected_report = REPORT.relative_to(ROOT).as_posix()
+    if (
+        manifest["summary_path"] != expected_summary
+        or manifest["report_path"] != expected_report
+    ):
+        raise RuntimeError("P5-D publication paths mismatch")
+    receipt_path = ROOT / manifest["attempt_receipt_path"]
+    try:
+        receipt_raw = receipt_path.read_bytes()
+        receipt = json.loads(receipt_raw)
+        raw = RESULT.read_bytes()
+        report_raw = REPORT.read_bytes()
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("P5-D publication member is absent or malformed") from error
+    receipt_keys = {
+        "authorization_id",
+        "created_utc",
+        "governance_sha256",
+        "revision",
+        "schema",
+    }
+    if type(receipt) is not dict or set(receipt) != receipt_keys:
+        raise RuntimeError("P5-D attempt receipt keys mismatch")
+    if receipt["schema"] != "scalar-memory-loop-p5d-attempt-receipt-v1":
+        raise RuntimeError("P5-D attempt receipt identity mismatch")
+    if receipt["authorization_id"] != manifest["authorization_id"]:
+        raise RuntimeError("P5-D publication authorization mismatch")
+    checks = {
+        "attempt receipt": (receipt_raw, manifest["attempt_receipt_sha256"]),
+        "summary": (raw, manifest["summary_sha256"]),
+        "report": (report_raw, manifest["report_sha256"]),
+    }
+    for label, (content, expected) in checks.items():
+        if type(expected) is not str or re.fullmatch(r"[0-9a-f]{64}", expected) is None:
+            raise RuntimeError(f"P5-D {label} digest is invalid")
+        if hashlib.sha256(content).hexdigest() != expected:
+            raise RuntimeError(f"P5-D {label} digest mismatch")
+    return manifest, raw
+
+
 def audit() -> dict[str, Any]:
-    raw = RESULT.read_bytes()
+    manifest, raw = _load_publication()
     payload = json.loads(raw)
+    if (
+        payload.get("provenance", {}).get("authorization_id")
+        != manifest["authorization_id"]
+    ):
+        raise RuntimeError("P5-D payload authorization mismatch")
+    if (
+        payload.get("provenance", {}).get("attempt_receipt_sha256")
+        != manifest["attempt_receipt_sha256"]
+    ):
+        raise RuntimeError("P5-D payload receipt mismatch")
     result = audit_payload(payload)
     result["source_sha256"] = hashlib.sha256(raw).hexdigest()
     result["source_path"] = RESULT.relative_to(ROOT).as_posix()

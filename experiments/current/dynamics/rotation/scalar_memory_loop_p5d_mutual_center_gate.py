@@ -53,27 +53,32 @@ DESIGN_AUDIT = Path(
 )
 READINESS_REVIEW = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_loop_p5d_serialization_recovery_readiness_2026-09-02.md"
+    "scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md"
 )
 RECOVERY_PROTOCOL = Path(
     "reports/project/meta/preregistration/"
-    "scalar_memory_loop_p5d_serialization_recovery_protocol_2026-09-02.md"
+    "scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md"
 )
 GOVERNANCE = Path(
-    "experiments/current/dynamics/rotation/"
-    "scalar_memory_loop_p5d_governance.json"
+    "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_governance.json"
+)
+RESULT_SCHEMA = Path(
+    "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json"
 )
 DEFAULT_SUMMARY = Path(
-    "reports/dynamics/rotation/"
-    "scalar_memory_loop_p5d_mutual_center_2026-09-01.json"
+    "reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_2026-09-01.json"
 )
 DEFAULT_REPORT = DEFAULT_SUMMARY.with_suffix(".md")
+DEFAULT_MANIFEST = DEFAULT_SUMMARY.with_suffix(".publication.json")
+ATTEMPT_RECEIPT = Path(
+    "reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_attempt_3.json"
+)
 
 DESIGN_FREEZE_REVISION = "f68c8f89f4d62fcfc7f440d78e4e2a6011ce6344"
 PROTOCOL_FREEZE_REVISION = "d7a4c5ec4d40f1899940161877b0ab80b7a8c0c7"
 PROTOCOL_FREEZE_BLOB = "bf3325d550ae2288d8e4012e0480077abf51032e"
-RECOVERY_PROTOCOL_REVISION = "9fdab8d534ebadfdd155bde55c3c7e509783dd53"
-RECOVERY_PROTOCOL_BLOB = "508b642b12884996ccb87f354e875053bdf36c5a"
+RECOVERY_PROTOCOL_REVISION = "ed21f5c33591f311cf14617f0d23fc51cddc2ff7"
+RECOVERY_PROTOCOL_BLOB = "1f94be94bdf4b2512f68b69dcc5b3958e7efe7b6"
 EXPECTED_HEAD_BLOBS = {
     DESIGN_AUDIT.as_posix(): "0f02d86bcbfacd2154d21df4a40f853174085d0b",
     "src/emergenz_knoten/orbit_center_actuator.py": (
@@ -88,8 +93,7 @@ EXPECTED_HEAD_BLOBS = {
     "src/emergenz_knoten/rotating_wave_formation.py": (
         "38f16f11a790a64470bab3a34505825cf815e7f0"
     ),
-    "reports/dynamics/rotation/"
-    "scalar_memory_loop_p4rs_anchor_scale_2026-08-30.json": (
+    "reports/dynamics/rotation/scalar_memory_loop_p4rs_anchor_scale_2026-08-30.json": (
         "e4eae06ada6860455e49a08691235b9f6e818f51"
     ),
     "reports/project/meta/reviews/"
@@ -104,18 +108,18 @@ EXPECTED_HEAD_BLOBS = {
     "scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md": (
         "5f5e374aa554eb795172110c2ddccb32dcb48de0"
     ),
-    "reports/project/meta/reviews/"
-    "p4_publication_source_referee_audit_2026-08-27.md": (
+    "reports/project/meta/reviews/p4_publication_source_referee_audit_2026-08-27.md": (
         "273acc3a86a9f3757e853236ce386f064835194c"
     ),
 }
-IMPLEMENTATION_PATHS = (
+PROTECTED_PATHS = (
     "src/emergenz_knoten/mutual_center_coupling.py",
     "experiments/current/dynamics/rotation/"
     "scalar_memory_loop_p5d_mutual_center_gate.py",
     "experiments/current/dynamics/rotation/"
     "scalar_memory_loop_p5d_mutual_center_result_audit.py",
-    "tests/test_mutual_center_coupling.py",
+    "experiments/current/dynamics/rotation/"
+    "scalar_memory_loop_p5d_result_schema_v2.json",
     "tests/test_rotating_wave_p5d_mutual_center.py",
     "tests/test_rotating_wave_p5d_result_audit.py",
 )
@@ -125,12 +129,26 @@ GOVERNANCE_KEYS = {
     "authorization",
     "gate",
     "reason",
+    "result_schema_sha256",
     "schema",
     "state",
     "target_authorized",
     "target_calls_recorded",
 }
 INCIDENT_KEYS = {"attempt", "incident_blob", "incident_path", "status"}
+AUTHORIZATION_KEYS = {
+    "attempt",
+    "authorization_id",
+    "ci",
+    "closed_governance_blob",
+    "implementation_revision",
+    "protected_blobs",
+    "readiness_review_blob",
+    "readiness_review_path",
+    "remediation_protocol_blob",
+    "schema_sha256",
+}
+CI_KEYS = {"api_url", "conclusion", "head_sha", "run_id", "status"}
 EXPECTED_INCIDENTS = (
     (
         1,
@@ -342,8 +360,7 @@ def panel_registration(
     )
     traces = channel_off_arms + active_arms
     trace_grids = all(
-        [int(sample["step"]) for sample in row.get("trace", [])]
-        == expected_steps
+        [int(sample["step"]) for sample in row.get("trace", [])] == expected_steps
         for row in traces
     )
     finite = _all_finite(traces)
@@ -438,12 +455,8 @@ def _response_trace(
         separation = _complex(sample["separation"])
         off_separation = _complex(reference["separation"])
         delta = separation - off_separation
-        delta_a = _complex(sample["center_a"]) - _complex(
-            reference["center_a"]
-        )
-        delta_b = _complex(sample["center_b"]) - _complex(
-            reference["center_b"]
-        )
+        delta_a = _complex(sample["center_a"]) - _complex(reference["center_a"])
+        delta_b = _complex(sample["center_b"]) - _complex(reference["center_b"])
         longitudinal = -sign * (delta * e0.conjugate()).real / initial_distance
         transverse = (delta * e0.conjugate()).imag / initial_distance
         rows.append(
@@ -476,18 +489,11 @@ def response_controls(
         return {
             "available": False,
             "reason": "misregistered-panel",
-            "registration": registration,
-            "rows": [],
-            "triplets": [],
-            "gates": {},
-            "pass": False,
         }
     off = {_base_key(row): row for row in channel_off_arms}
     active = {_active_key(row): row for row in active_arms}
     rows = []
-    responses: dict[
-        tuple[int, int, int, int, str, int, str], list[dict[str, Any]]
-    ] = {}
+    responses: dict[tuple[int, int, int, int, str, int, str], list[dict[str, Any]]] = {}
     for key in expected_active_keys():
         trace = _response_trace(active[key], off[key[:4]])
         responses[key] = trace
@@ -581,9 +587,7 @@ def _aggregate_response_gates(
     *,
     rows: list[dict[str, Any]],
     triplets: list[dict[str, Any]],
-    responses: dict[
-        tuple[int, int, int, int, str, int, str], list[dict[str, Any]]
-    ],
+    responses: dict[tuple[int, int, int, int, str, int, str], list[dict[str, Any]]],
 ) -> tuple[dict[str, bool], dict[str, Any]]:
     row_by_key = {tuple(row["key"]): row for row in rows}
     excess_by_key = {tuple(row["key"]): row for row in triplets}
@@ -627,12 +631,8 @@ def _aggregate_response_gates(
     for base in expected_base_keys():
         for sign in SIGNS:
             for mode in DIRECTIONS:
-                low = row_by_key[(*base, "low", sign, mode)][
-                    "final_longitudinal"
-                ]
-                high = row_by_key[(*base, "high", sign, mode)][
-                    "final_longitudinal"
-                ]
+                low = row_by_key[(*base, "low", sign, mode)]["final_longitudinal"]
+                high = row_by_key[(*base, "high", sign, mode)]["final_longitudinal"]
                 low_high.append(low / high if high != 0.0 else math.nan)
             low_x = excess_by_key[(*base, "low", sign)]["final_longitudinal"]
             high_x = excess_by_key[(*base, "high", sign)]["final_longitudinal"]
@@ -640,7 +640,9 @@ def _aggregate_response_gates(
                 "final_longitudinal"
             ]
             excess_low_high.append(low_x / high_x if high_x != 0.0 else math.nan)
-            excess_fraction.append(high_x / reciprocal if reciprocal != 0.0 else math.nan)
+            excess_fraction.append(
+                high_x / reciprocal if reciprocal != 0.0 else math.nan
+            )
 
     reflection_errors = []
     swap_errors = []
@@ -669,8 +671,7 @@ def _aggregate_response_gates(
         swap_errors.append(
             _trace_rms(
                 [
-                    _complex(a["delta_separation"])
-                    - _complex(b["delta_separation"])
+                    _complex(a["delta_separation"]) - _complex(b["delta_separation"])
                     for a, b in zip(trace, swapped_trace, strict=True)
                 ]
             )
@@ -686,17 +687,31 @@ def _aggregate_response_gates(
                 for sign in SIGNS:
                     for mode in DIRECTIONS:
                         small = row_by_key[
-                            (3, phase_index, chirality_a, chirality_b, kappa, sign, mode)
+                            (
+                                3,
+                                phase_index,
+                                chirality_a,
+                                chirality_b,
+                                kappa,
+                                sign,
+                                mode,
+                            )
                         ]["final_longitudinal"]
                         large = row_by_key[
-                            (6, phase_index, chirality_a, chirality_b, kappa, sign, mode)
+                            (
+                                6,
+                                phase_index,
+                                chirality_a,
+                                chirality_b,
+                                kappa,
+                                sign,
+                                mode,
+                            )
                         ]["final_longitudinal"]
                         scale = max(abs(small), abs(large), np.finfo(float).tiny)
                         distance_errors.append(abs(small - large) / scale)
                         raw_distance_ratios.append(
-                            (6.0 * large) / (3.0 * small)
-                            if small != 0.0
-                            else math.nan
+                            (6.0 * large) / (3.0 * small) if small != 0.0 else math.nan
                         )
                     small_x = excess_by_key[
                         (3, phase_index, chirality_a, chirality_b, kappa, sign)
@@ -746,8 +761,7 @@ def _aggregate_response_gates(
                     )
 
     primary_resolved = all(
-        abs(row["final_longitudinal"]) >= THRESHOLDS.response_resolution
-        for row in rows
+        abs(row["final_longitudinal"]) >= THRESHOLDS.response_resolution for row in rows
     )
     excess_resolved = all(
         abs(row["final_longitudinal"]) >= THRESHOLDS.response_resolution
@@ -759,8 +773,7 @@ def _aggregate_response_gates(
         >= THRESHOLDS.reciprocal_low_minimum,
         "reciprocal_high_signal": minima["reciprocal_high"]
         >= THRESHOLDS.reciprocal_high_minimum,
-        "one_way_low_signal": minima["one_way_low"]
-        >= THRESHOLDS.one_way_low_minimum,
+        "one_way_low_signal": minima["one_way_low"] >= THRESHOLDS.one_way_low_minimum,
         "one_way_high_signal": minima["one_way_high"]
         >= THRESHOLDS.one_way_high_minimum,
         "phase_support": min(support.values()) >= THRESHOLDS.phase_support_minimum,
@@ -782,8 +795,7 @@ def _aggregate_response_gates(
         "swap_covariance": max(swap_errors) <= THRESHOLDS.covariance_fraction,
         "excess_resolved": excess_resolved,
         "excess_low_signal": minima["excess_low"] >= THRESHOLDS.excess_low_minimum,
-        "excess_high_signal": minima["excess_high"]
-        >= THRESHOLDS.excess_high_minimum,
+        "excess_high_signal": minima["excess_high"] >= THRESHOLDS.excess_high_minimum,
         "excess_phase_support": min(excess_support.values())
         >= THRESHOLDS.phase_support_minimum,
         "excess_strength_scaling": _inside(
@@ -873,14 +885,8 @@ def classify_panel(
         and response.get("available", False)
         and response_gates.get("primary_resolved", False)
     )
-    ledger = all(
-        all(row.get("ledger_gates", {}).values())
-        for row in active_arms
-    )
-    loop = all(
-        all(row.get("loop_gates", {}).values())
-        for row in all_arms
-    )
+    ledger = all(all(row.get("ledger_gates", {}).values()) for row in active_arms)
+    loop = all(all(row.get("loop_gates", {}).values()) for row in all_arms)
     off_by_key = {_base_key(row): row for row in channel_off_arms}
     causality_checks = []
     for row in active_arms:
@@ -1010,7 +1016,9 @@ def _sample_loop(
     }
 
 
-def _phase_metrics(trace: list[dict[str, Any]], role: str, chirality: int) -> dict[str, Any]:
+def _phase_metrics(
+    trace: list[dict[str, Any]], role: str, chirality: int
+) -> dict[str, Any]:
     rows = [sample for sample in trace if sample["step"] >= THRESHOLDS.phase_start]
     if len(rows) < 2:
         return {"pass": False, "reason": "insufficient-phase-window"}
@@ -1027,8 +1035,7 @@ def _phase_metrics(trace: list[dict[str, Any]], role: str, chirality: int) -> di
         "rms_error": rms_error,
         "pass": bool(
             mean_error <= THRESHOLDS.phase_mean_error_fraction * CANDIDATE.theta
-            and rms_error
-            <= THRESHOLDS.phase_rms_error_fraction * CANDIDATE.theta
+            and rms_error <= THRESHOLDS.phase_rms_error_fraction * CANDIDATE.theta
         ),
     }
 
@@ -1171,12 +1178,8 @@ def _run_arm(
         if update >= THRESHOLDS.late_start:
             late_d0_a = max(late_d0_a, loop_a["own_d0_fraction"])
             late_d0_b = max(late_d0_b, loop_b["own_d0_fraction"])
-            late_opposite_a = min(
-                late_opposite_a, loop_a["opposite_d0_fraction"]
-            )
-            late_opposite_b = min(
-                late_opposite_b, loop_b["opposite_d0_fraction"]
-            )
+            late_opposite_a = min(late_opposite_a, loop_a["opposite_d0_fraction"])
+            late_opposite_b = min(late_opposite_b, loop_b["opposite_d0_fraction"])
         center_a = loop_a["center"]
         center_b = loop_b["center"]
         if store:
@@ -1205,13 +1208,9 @@ def _run_arm(
     for update in range(1, THRESHOLDS.active_updates + 1):
         ledger_violation = False
         if mode in ("off", "a_to_b"):
-            reference_a = native_fifo_step(
-                reference_a, **CANDIDATE.step_parameters()
-            )
+            reference_a = native_fifo_step(reference_a, **CANDIDATE.step_parameters())
         if mode in ("off", "b_to_a"):
-            reference_b = native_fifo_step(
-                reference_b, **CANDIDATE.step_parameters()
-            )
+            reference_b = native_fifo_step(reference_b, **CANDIDATE.step_parameters())
         step = mutual_center_step(
             state_a,
             state_b,
@@ -1224,11 +1223,13 @@ def _run_arm(
         )
         if mode in ("off", "a_to_b"):
             source_bitwise = bool(
-                source_bitwise and np.array_equal(step.loop_a.history_after, reference_a)
+                source_bitwise
+                and np.array_equal(step.loop_a.history_after, reference_a)
             )
         if mode in ("off", "b_to_a"):
             source_bitwise = bool(
-                source_bitwise and np.array_equal(step.loop_b.history_after, reference_b)
+                source_bitwise
+                and np.array_equal(step.loop_b.history_after, reference_b)
             )
         if mode != "off":
             ledger_evaluation_count += 1
@@ -1298,9 +1299,7 @@ def _run_arm(
                     update=update,
                 )
                 high_precision.append(reference)
-                ledger_violation = bool(
-                    ledger_violation or not reference["pass"]
-                )
+                ledger_violation = bool(ledger_violation or not reference["pass"])
         state_a = step.loop_a.history_after
         state_b = step.loop_b.history_after
         center_a = step.loop_a.center_after
@@ -1317,7 +1316,10 @@ def _run_arm(
             stop_reason = "nonfinite-state-or-ledger"
             break
         minimum_separation = min(minimum_separation, abs(center_a - center_b))
-        if minimum_separation < THRESHOLDS.minimum_separation_fraction * CANDIDATE.radius:
+        if (
+            minimum_separation
+            < THRESHOLDS.minimum_separation_fraction * CANDIDATE.radius
+        ):
             stop_reason = "collision-boundary"
             break
         measure(update, store=update % THRESHOLDS.sample_every == 0)
@@ -1329,8 +1331,7 @@ def _run_arm(
             break
         if (
             update >= THRESHOLDS.late_start
-            and min(late_opposite_a, late_opposite_b)
-            < THRESHOLDS.opposite_d0_fraction
+            and min(late_opposite_a, late_opposite_b) < THRESHOLDS.opposite_d0_fraction
         ):
             stop_reason = "chirality-boundary"
             break
@@ -1342,10 +1343,13 @@ def _run_arm(
     force_scale = force_scale or np.finfo(float).tiny
     displacement_scale = displacement_scale or np.finfo(float).tiny
     if mode == "off":
-        center_stationarity = max(
-            max(abs(value - initial_a) for value in internal_centers_a),
-            max(abs(value - initial_b) for value in internal_centers_b),
-        ) / CANDIDATE.radius
+        center_stationarity = (
+            max(
+                max(abs(value - initial_a) for value in internal_centers_a),
+                max(abs(value - initial_b) for value in internal_centers_b),
+            )
+            / CANDIDATE.radius
+        )
         ledger_gates = {"not_applicable_channel_off": True}
         loop_gates = {
             "complete_shape_evaluation_count": shape_evaluation_count
@@ -1392,8 +1396,7 @@ def _run_arm(
             )
             / energy_scale
             <= THRESHOLDS.cumulative_ledger_relative,
-            "pair_ledger_cumulative": abs(cumulative["pair_ledger"])
-            / energy_scale
+            "pair_ledger_cumulative": abs(cumulative["pair_ledger"]) / energy_scale
             <= THRESHOLDS.cumulative_ledger_relative,
             "nonnegative_mobility": minimum_dissipation
             >= THRESHOLDS.minimum_mobility_dissipation,
@@ -1410,8 +1413,7 @@ def _run_arm(
             == THRESHOLDS.active_updates + 1,
             "maximum_d0": max(maximum_d0_a, maximum_d0_b)
             <= THRESHOLDS.maximum_d0_fraction,
-            "late_d0": max(late_d0_a, late_d0_b)
-            <= THRESHOLDS.late_d0_fraction,
+            "late_d0": max(late_d0_a, late_d0_b) <= THRESHOLDS.late_d0_fraction,
             "opposite_chirality": min(late_opposite_a, late_opposite_b)
             >= THRESHOLDS.opposite_d0_fraction,
             "phase_a": bool(phase_a["pass"]),
@@ -1441,7 +1443,9 @@ def _run_arm(
             abs(value - reference)
             for value, reference in zip(internal_centers_b, baseline_b, strict=True)
         ]
-        maximum_center_response = max(max(response_a), max(response_b)) / initial_distance
+        maximum_center_response = (
+            max(max(response_a), max(response_b)) / initial_distance
+        )
         loop_gates["center_response_bound"] = (
             maximum_center_response <= THRESHOLDS.maximum_center_response_fraction
         )
@@ -1465,6 +1469,7 @@ def _run_arm(
         "mode": mode,
         "coupling": coupling,
         "initial_distance": initial_distance,
+        "kappa_name": None,
         "completed": completed,
         "finite": finite,
         "stopped": not completed,
@@ -1481,6 +1486,7 @@ def _run_arm(
         "ledger_rival_resolved": rival_resolved,
         "ledger_evaluation_count": ledger_evaluation_count,
         "shape_evaluation_count": shape_evaluation_count,
+        "sign": None,
         "ledger_scales": {
             "energy": energy_scale,
             "force": force_scale,
@@ -1519,6 +1525,7 @@ def _high_precision_reference(
     """Re-evaluate stored binary64 center dots and midpoint identities at 80 dps."""
 
     with mp.workdps(THRESHOLDS.reference_dps):
+
         def dot(coefficients: np.ndarray, history: np.ndarray) -> mp.mpc:
             total = mp.mpc(0)
             for coefficient, point in zip(coefficients, history, strict=True):
@@ -1637,7 +1644,7 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
         raise RuntimeError("P5-D readiness review is incomplete")
     if verdict.group(1) != "p5d-implementation-ready":
         raise RuntimeError("P5-D implementation readiness is not upheld")
-    missing = sorted(set(IMPLEMENTATION_PATHS) - set(blobs))
+    missing = sorted(set(PROTECTED_PATHS) - set(blobs))
     if missing:
         raise RuntimeError(f"P5-D readiness review lacks blobs: {missing}")
     return {
@@ -1662,6 +1669,14 @@ def _load_governance(path: Path | None = None) -> dict[str, Any]:
         raise RuntimeError("P5-D governance identity mismatch")
     if type(payload["reason"]) is not str or not payload["reason"]:
         raise RuntimeError("P5-D governance reason must be a nonempty string")
+    if (
+        type(payload["result_schema_sha256"]) is not str
+        or re.fullmatch(r"[0-9a-f]{64}", payload["result_schema_sha256"]) is None
+    ):
+        raise RuntimeError("P5-D governance result-schema digest is invalid")
+    schema_digest = hashlib.sha256((ROOT / RESULT_SCHEMA).read_bytes()).hexdigest()
+    if payload["result_schema_sha256"] != schema_digest:
+        raise RuntimeError("P5-D governance result-schema digest mismatch")
     if type(payload["target_authorized"]) is not bool:
         raise RuntimeError("P5-D governance authorization flag must be Boolean")
     if type(payload["target_calls_recorded"]) is not list:
@@ -1693,78 +1708,233 @@ def _load_governance(path: Path | None = None) -> dict[str, Any]:
     return payload
 
 
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _gh_run_metadata(run_id: int) -> dict[str, Any]:
+    process = subprocess.run(
+        ["gh", "api", f"repos/MemoryDynamics/Knoten/actions/runs/{run_id}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    payload = json.loads(process.stdout)
+    if type(payload) is not dict:
+        raise RuntimeError("P5-D CI metadata is not an object")
+    return payload
+
+
+def _create_attempt_receipt(
+    *, authorization_id: str, revision: str, governance_sha256: str
+) -> tuple[str, str]:
+    path = ROOT / ATTEMPT_RECEIPT
+    path.parent.mkdir(parents=True, exist_ok=True)
+    receipt = {
+        "authorization_id": authorization_id,
+        "created_utc": datetime.now(UTC).isoformat(),
+        "governance_sha256": governance_sha256,
+        "revision": revision,
+        "schema": "scalar-memory-loop-p5d-attempt-receipt-v1",
+    }
+    content = json.dumps(receipt, allow_nan=False, indent=2, sort_keys=True) + "\n"
+    try:
+        with path.open("x", encoding="utf-8", newline="") as stream:
+            stream.write(content)
+    except FileExistsError as error:
+        raise RuntimeError(
+            "P5-D one-shot authorization was already consumed"
+        ) from error
+    return ATTEMPT_RECEIPT.as_posix(), hashlib.sha256(
+        content.encode("utf-8")
+    ).hexdigest()
+
+
 def _require_target_authorization() -> dict[str, Any]:
-    """Enforce the machine record before any legacy provenance or target work."""
+    """Validate the one-shot lease and consume it before target work."""
 
     governance = _load_governance()
     if governance["state"] == "closed":
         raise RuntimeError("P5-D target sealed by machine governance")
     if governance["target_authorized"] is not True:
         raise RuntimeError("P5-D target is not authorized")
-    raise RuntimeError("P5-D authorized-once verification is not implemented")
-
-
-def _verify_provenance() -> dict[str, Any]:
-    """Fail before pair initialization unless every frozen guard is green."""
-
-    _require_target_authorization()
-
+    authorization = governance["authorization"]
+    if type(authorization) is not dict or set(authorization) != AUTHORIZATION_KEYS:
+        raise RuntimeError("P5-D authorization keys mismatch")
+    if type(authorization["attempt"]) is not int or authorization["attempt"] != 3:
+        raise RuntimeError("P5-D authorization attempt mismatch")
+    authorization_id = authorization["authorization_id"]
     if (
-        _git_blob(RECOVERY_PROTOCOL.as_posix(), RECOVERY_PROTOCOL_REVISION)
-        != RECOVERY_PROTOCOL_BLOB
-    ):
-        raise RuntimeError("P5-D recovery protocol freeze blob mismatch")
-    if _git_blob(RECOVERY_PROTOCOL.as_posix()) != RECOVERY_PROTOCOL_BLOB:
-        raise RuntimeError("P5-D recovery protocol changed after freeze")
-    if not (ROOT / READINESS_REVIEW).exists():
-        raise RuntimeError(
-            "P5-D replacement target sealed: recovery readiness does not exist"
+        type(authorization_id) is not str
+        or re.fullmatch(
+            r"[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}",
+            authorization_id,
         )
-    if _git_blob(PROTOCOL.as_posix(), PROTOCOL_FREEZE_REVISION) != PROTOCOL_FREEZE_BLOB:
-        raise RuntimeError("P5-D protocol freeze blob mismatch")
-    for path, expected in EXPECTED_HEAD_BLOBS.items():
-        if _git_blob(path) != expected:
-            raise RuntimeError(f"P5-D frozen dependency changed: {path}")
-    if _git_blob(PROTOCOL.as_posix()) != PROTOCOL_FREEZE_BLOB:
-        raise RuntimeError("P5-D protocol changed after its correction freeze")
-    readiness = _parse_readiness_review(
-        (ROOT / READINESS_REVIEW).read_text(encoding="utf-8")
+        is None
+    ):
+        raise RuntimeError("P5-D authorization identifier is not canonical UUIDv4")
+    implementation = authorization["implementation_revision"]
+    if (
+        type(implementation) is not str
+        or re.fullmatch(r"[0-9a-f]{40}", implementation) is None
+    ):
+        raise RuntimeError("P5-D implementation revision is invalid")
+    if authorization["remediation_protocol_blob"] != RECOVERY_PROTOCOL_BLOB:
+        raise RuntimeError("P5-D remediation protocol authorization mismatch")
+    if _git_blob(RECOVERY_PROTOCOL.as_posix()) != RECOVERY_PROTOCOL_BLOB:
+        raise RuntimeError("P5-D remediation protocol changed after freeze")
+    schema_digest = _sha256_file(ROOT / RESULT_SCHEMA)
+    if authorization["schema_sha256"] != schema_digest:
+        raise RuntimeError("P5-D authorization schema digest mismatch")
+    protected = authorization["protected_blobs"]
+    if type(protected) is not dict or set(protected) != set(PROTECTED_PATHS):
+        raise RuntimeError("P5-D protected blob table mismatch")
+    for path, expected in protected.items():
+        if type(expected) is not str or re.fullmatch(r"[0-9a-f]{40}", expected) is None:
+            raise RuntimeError(f"P5-D protected blob is invalid: {path}")
+        if _git_blob(path, implementation) != expected or _git_blob(path) != expected:
+            raise RuntimeError(f"P5-D protected blob drift: {path}")
+    closed_blob = authorization["closed_governance_blob"]
+    if _git_blob(GOVERNANCE.as_posix(), implementation) != closed_blob:
+        raise RuntimeError("P5-D closed governance blob mismatch")
+    review_path = authorization["readiness_review_path"]
+    if review_path != READINESS_REVIEW.as_posix():
+        raise RuntimeError("P5-D readiness-review path mismatch")
+    if _git_blob(review_path) != authorization["readiness_review_blob"]:
+        raise RuntimeError("P5-D readiness-review blob mismatch")
+    ci = authorization["ci"]
+    if type(ci) is not dict or set(ci) != CI_KEYS:
+        raise RuntimeError("P5-D CI authorization keys mismatch")
+    run_id = ci["run_id"]
+    if type(run_id) is not int or run_id <= 0:
+        raise RuntimeError("P5-D CI run identifier is invalid")
+    expected_url = (
+        f"https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/{run_id}"
     )
-    revision = readiness["implementation_revision"]
-    if _git("merge-base", "--is-ancestor", PROTOCOL_FREEZE_REVISION, revision) != "":
+    if ci != {
+        "api_url": expected_url,
+        "conclusion": "success",
+        "head_sha": implementation,
+        "run_id": run_id,
+        "status": "completed",
+    }:
+        raise RuntimeError("P5-D CI authorization record mismatch")
+    try:
+        remote = _gh_run_metadata(run_id)
+    except (OSError, subprocess.SubprocessError, json.JSONDecodeError) as error:
+        raise RuntimeError("P5-D official CI metadata is unavailable") from error
+    repository = remote.get("repository")
+    if not (
+        remote.get("id") == run_id
+        and type(repository) is dict
+        and repository.get("full_name") == "MemoryDynamics/Knoten"
+        and remote.get("status") == "completed"
+        and remote.get("conclusion") == "success"
+        and remote.get("head_sha") == implementation
+    ):
+        raise RuntimeError("P5-D official CI metadata mismatch")
+    if _git("merge-base", "--is-ancestor", implementation, "HEAD") != "":
         raise RuntimeError("unexpected merge-base output")
-    for path, expected in readiness["blobs"].items():
-        if _git_blob(path, revision) != expected or _git_blob(path) != expected:
-            raise RuntimeError(f"P5-D implementation blob mismatch: {path}")
+    changed_last = set(_git("diff", "--name-only", "HEAD^", "HEAD").splitlines())
+    if changed_last != {GOVERNANCE.as_posix()}:
+        raise RuntimeError("P5-D authorization commit changed more than governance")
     if _git("status", "--porcelain"):
         raise RuntimeError("P5-D target requires a clean worktree")
     upstream = _git("rev-parse", "@{upstream}")
     head = _git("rev-parse", "HEAD")
     if upstream != head:
         raise RuntimeError("P5-D target requires exact upstream synchronization")
-    _validate_default_output_paths(DEFAULT_SUMMARY, DEFAULT_REPORT)
+    _validate_default_output_paths(DEFAULT_SUMMARY, DEFAULT_REPORT, DEFAULT_MANIFEST)
+    governance_digest = _sha256_file(ROOT / GOVERNANCE)
+    receipt_path, receipt_digest = _create_attempt_receipt(
+        authorization_id=authorization_id,
+        revision=head,
+        governance_sha256=governance_digest,
+    )
     return {
-        "revision": head,
-        "protocol_revision": PROTOCOL_FREEZE_REVISION,
-        "protocol_blob": PROTOCOL_FREEZE_BLOB,
-        "recovery_protocol_revision": RECOVERY_PROTOCOL_REVISION,
-        "recovery_protocol_blob": RECOVERY_PROTOCOL_BLOB,
-        "first_target_status": "p5d-inconclusive-serialization-failure",
-        "readiness": readiness,
-        "upstream_revision": upstream,
+        "attempt_receipt_path": receipt_path,
+        "attempt_receipt_sha256": receipt_digest,
+        "authorization_id": authorization_id,
+        "ci_run_id": run_id,
         "clean": True,
+        "governance_sha256": governance_digest,
+        "implementation_revision": implementation,
+        "revision": head,
+        "upstream_revision": upstream,
     }
 
 
-def _validate_default_output_paths(summary: Path, report: Path) -> None:
+def _verify_provenance() -> dict[str, Any]:
+    """Fail closed and consume the lease before pair initialization."""
+
+    return _require_target_authorization()
+
+
+def _validate_default_output_paths(
+    summary: Path, report: Path, manifest: Path = DEFAULT_MANIFEST
+) -> None:
     summary_path = summary if summary.is_absolute() else ROOT / summary
     report_path = report if report.is_absolute() else ROOT / report
     if summary_path.resolve() != (ROOT / DEFAULT_SUMMARY).resolve():
         raise RuntimeError("P5-D permits only the registered JSON output")
     if report_path.resolve() != (ROOT / DEFAULT_REPORT).resolve():
         raise RuntimeError("P5-D permits only the registered report output")
-    if summary_path.exists() or report_path.exists():
+    manifest_path = manifest if manifest.is_absolute() else ROOT / manifest
+    if manifest_path.resolve() != (ROOT / DEFAULT_MANIFEST).resolve():
+        raise RuntimeError("P5-D permits only the registered publication manifest")
+    paths = (summary_path, report_path, manifest_path)
+    temporary = tuple(path.with_name(path.name + ".tmp") for path in paths)
+    if any(path.exists() for path in paths):
         raise RuntimeError("refusing to overwrite registered P5-D outputs")
+    if any(path.exists() for path in temporary):
+        raise RuntimeError("refusing stale registered P5-D temporary output")
+
+
+def _publication_relative(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
+def _validate_publication_manifest(manifest: dict[str, Any]) -> None:
+    keys = {
+        "attempt_receipt_path",
+        "attempt_receipt_sha256",
+        "authorization_id",
+        "published_utc",
+        "report_path",
+        "report_sha256",
+        "result_schema",
+        "schema",
+        "summary_path",
+        "summary_sha256",
+    }
+    if type(manifest) is not dict or set(manifest) != keys:
+        raise RuntimeError("P5-D publication manifest keys mismatch")
+    if manifest["schema"] != "scalar-memory-loop-p5d-publication-v1":
+        raise RuntimeError("P5-D publication manifest identity mismatch")
+    if manifest["result_schema"] != "scalar-memory-loop-p5d-mutual-center-v2":
+        raise RuntimeError("P5-D publication result-schema mismatch")
+    for key in ("attempt_receipt_sha256", "report_sha256", "summary_sha256"):
+        if (
+            type(manifest[key]) is not str
+            or re.fullmatch(r"[0-9a-f]{64}", manifest[key]) is None
+        ):
+            raise RuntimeError(f"P5-D publication digest is invalid: {key}")
+    if (
+        type(manifest["authorization_id"]) is not str
+        or re.fullmatch(
+            r"[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}",
+            manifest["authorization_id"],
+        )
+        is None
+    ):
+        raise RuntimeError("P5-D publication authorization identifier is invalid")
+    for key in ("attempt_receipt_path", "published_utc", "report_path", "summary_path"):
+        if type(manifest[key]) is not str or not manifest[key]:
+            raise RuntimeError(f"P5-D publication string is invalid: {key}")
 
 
 def _write_complete_outputs(
@@ -1773,8 +1943,12 @@ def _write_complete_outputs(
     summary_content: str,
     report_path: Path,
     report_content: str,
-) -> None:
-    paths = (summary_path, report_path)
+    manifest_path: Path,
+    authorization_id: str,
+    attempt_receipt_path: str,
+    attempt_receipt_sha256: str,
+) -> dict[str, Any]:
+    paths = (summary_path, report_path, manifest_path)
     if any(path.exists() for path in paths):
         raise RuntimeError("refusing existing P5-D output")
     temporary = tuple(path.with_name(path.name + ".tmp") for path in paths)
@@ -1782,16 +1956,53 @@ def _write_complete_outputs(
         raise RuntimeError("refusing stale P5-D temporary output")
     for path in paths:
         path.parent.mkdir(parents=True, exist_ok=True)
+    created: list[Path] = []
     try:
-        temporary[0].write_text(summary_content, encoding="utf-8")
-        temporary[1].write_text(report_content, encoding="utf-8")
+        with temporary[0].open("x", encoding="utf-8", newline="") as stream:
+            stream.write(summary_content)
+        created.append(temporary[0])
+        with temporary[1].open("x", encoding="utf-8", newline="") as stream:
+            stream.write(report_content)
+        created.append(temporary[1])
         json.loads(temporary[0].read_text(encoding="utf-8"))
         if not temporary[1].read_text(encoding="utf-8").startswith("# P5-D"):
             raise RuntimeError("P5-D report validation failed")
+        summary_digest = _sha256_file(temporary[0])
+        report_digest = _sha256_file(temporary[1])
+        manifest = {
+            "attempt_receipt_path": attempt_receipt_path,
+            "attempt_receipt_sha256": attempt_receipt_sha256,
+            "authorization_id": authorization_id,
+            "published_utc": datetime.now(UTC).isoformat(),
+            "report_path": _publication_relative(report_path),
+            "report_sha256": report_digest,
+            "result_schema": "scalar-memory-loop-p5d-mutual-center-v2",
+            "schema": "scalar-memory-loop-p5d-publication-v1",
+            "summary_path": _publication_relative(summary_path),
+            "summary_sha256": summary_digest,
+        }
+        _validate_publication_manifest(manifest)
+        manifest_content = (
+            json.dumps(manifest, allow_nan=False, indent=2, sort_keys=True) + "\n"
+        )
+        with temporary[2].open("x", encoding="utf-8", newline="") as stream:
+            stream.write(manifest_content)
+        created.append(temporary[2])
+        _validate_publication_manifest(
+            json.loads(temporary[2].read_text(encoding="utf-8"))
+        )
         temporary[0].replace(paths[0])
+        created.remove(temporary[0])
+        created.append(paths[0])
         temporary[1].replace(paths[1])
+        created.remove(temporary[1])
+        created.append(paths[1])
+        temporary[2].replace(paths[2])
+        created.remove(temporary[2])
+        created.append(paths[2])
+        return manifest
     except Exception:
-        for path in temporary:
+        for path in reversed(created):
             if path.exists():
                 path.unlink()
         raise
@@ -1819,10 +2030,8 @@ def _render_report(payload: dict[str, Any], json_sha256: str) -> str:
                 "",
                 "Maximum reflection RMS/R: "
                 f"`{diagnostics['maximum_reflection_rms_fraction']}`",
-                "Maximum swap RMS/R: "
-                f"`{diagnostics['maximum_swap_rms_fraction']}`",
-                "Closed-loop low/high range: "
-                f"`{diagnostics['excess_low_high_range']}`",
+                f"Maximum swap RMS/R: `{diagnostics['maximum_swap_rms_fraction']}`",
+                f"Closed-loop low/high range: `{diagnostics['excess_low_high_range']}`",
                 "",
             )
         )
@@ -1852,16 +2061,186 @@ def _json_default(value: Any) -> bool | int | float:
     )
 
 
+def _load_result_schema(path: Path | None = None) -> dict[str, Any]:
+    source = ROOT / RESULT_SCHEMA if path is None else path
+    try:
+        schema = json.loads(source.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("P5-D result schema is unreadable") from error
+    required = {
+        "arrays",
+        "constants",
+        "enums",
+        "exact_maps",
+        "objects",
+        "root",
+        "schema",
+        "variants",
+    }
+    if type(schema) is not dict or set(schema) != required:
+        raise RuntimeError("P5-D result schema has invalid top-level keys")
+    if schema["schema"] != "scalar-memory-loop-p5d-result-contract-v2":
+        raise RuntimeError("P5-D result schema identity mismatch")
+    return schema
+
+
+def _schema_error(path: str, expected: str, value: Any) -> None:
+    raise TypeError(f"{path}: expected {expected}, observed {type(value).__name__}")
+
+
+def _validate_schema_value(
+    value: Any,
+    specification: str,
+    *,
+    path: str,
+    contract: dict[str, Any],
+) -> None:
+    if specification.startswith("nullable:"):
+        if value is None:
+            return
+        specification = specification.removeprefix("nullable:")
+    if specification == "number":
+        if type(value) not in {int, float} or not math.isfinite(float(value)):
+            _schema_error(path, "finite number", value)
+        return
+    if specification == "integer":
+        if type(value) is not int:
+            _schema_error(path, "integer", value)
+        return
+    if specification == "boolean":
+        if type(value) is not bool:
+            _schema_error(path, "Boolean", value)
+        return
+    if specification == "string":
+        if type(value) is not str:
+            _schema_error(path, "string", value)
+        return
+    if specification == "null":
+        if value is not None:
+            _schema_error(path, "null", value)
+        return
+    if specification in {"sha1", "sha256", "uuid4"}:
+        patterns = {
+            "sha1": r"[0-9a-f]{40}",
+            "sha256": r"[0-9a-f]{64}",
+            "uuid4": r"[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}",
+        }
+        if (
+            type(value) is not str
+            or re.fullmatch(patterns[specification], value) is None
+        ):
+            _schema_error(path, specification, value)
+        return
+    namespace, separator, name = specification.partition(":")
+    if not separator:
+        raise RuntimeError(f"unregistered P5-D schema specification: {specification}")
+    if namespace == "const":
+        expected = {"true": True, "false": False}.get(
+            name, contract["constants"].get(name)
+        )
+        if value != expected or type(value) is not type(expected):
+            _schema_error(path, f"constant {expected!r}", value)
+        return
+    if namespace == "enum":
+        if value not in contract["enums"][name]:
+            _schema_error(path, f"enum {name}", value)
+        return
+    if namespace == "object":
+        fields = contract["objects"][name]
+        if type(value) is not dict:
+            _schema_error(path, f"object {name}", value)
+        if set(value) != set(fields):
+            missing = sorted(set(fields) - set(value))
+            unknown = sorted(set(value) - set(fields))
+            raise TypeError(
+                f"{path}: object {name} key mismatch; missing={missing}, unknown={unknown}"
+            )
+        for key, child in fields.items():
+            _validate_schema_value(
+                value[key], child, path=f"{path}.{key}", contract=contract
+            )
+        return
+    if namespace == "array":
+        rule = contract["arrays"][name]
+        if type(value) is not list:
+            _schema_error(path, f"array {name}", value)
+        length = rule.get("length")
+        if length is not None and len(value) != length:
+            raise TypeError(
+                f"{path}: expected array length {length}, observed {len(value)}"
+            )
+        maximum = rule.get("maximum_length")
+        if maximum is not None and len(value) > maximum:
+            raise TypeError(
+                f"{path}: expected at most {maximum} items, observed {len(value)}"
+            )
+        if "items" in rule:
+            for index, child in enumerate(rule["items"]):
+                _validate_schema_value(
+                    value[index], child, path=f"{path}[{index}]", contract=contract
+                )
+        else:
+            for index, item in enumerate(value):
+                _validate_schema_value(
+                    item, rule["item"], path=f"{path}[{index}]", contract=contract
+                )
+        return
+    if namespace == "exact_map":
+        rule = contract["exact_maps"][name]
+        if type(value) is not dict:
+            _schema_error(path, f"exact map {name}", value)
+        if set(value) != set(rule["allowed_keys"]):
+            raise TypeError(f"{path}: exact map {name} key mismatch")
+        for key, item in value.items():
+            _validate_schema_value(
+                item, rule["value"], path=f"{path}.{key}", contract=contract
+            )
+        return
+    if namespace == "variant":
+        if type(value) is not dict:
+            _schema_error(path, f"variant {name}", value)
+        rule = contract["variants"][name]
+        discriminator = rule["discriminator"]
+        if discriminator not in value or type(value[discriminator]) is not bool:
+            _schema_error(
+                f"{path}.{discriminator}",
+                "Boolean discriminator",
+                value.get(discriminator),
+            )
+        branch = rule["mapping"][str(value[discriminator]).lower()]
+        _validate_schema_value(value, branch, path=path, contract=contract)
+        return
+    raise RuntimeError(f"unregistered P5-D schema namespace: {namespace}")
+
+
+def _validate_v2_payload(
+    payload: dict[str, Any],
+    *,
+    contract: dict[str, Any] | None = None,
+) -> None:
+    schema = _load_result_schema() if contract is None else contract
+    _validate_schema_value(payload, schema["root"], path="$", contract=schema)
+
+
 def _serialize_payload(payload: dict[str, Any]) -> str:
     """Serialize the complete payload under the recovery freeze."""
 
-    return json.dumps(
-        payload,
-        allow_nan=False,
-        default=_json_default,
-        indent=2,
-        sort_keys=True,
-    ) + "\n"
+    serialized = (
+        json.dumps(
+            payload,
+            allow_nan=False,
+            default=_json_default,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    )
+    if payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v2":
+        contract = _load_result_schema()
+        _validate_v2_payload(payload, contract=contract)
+        decoded = json.loads(serialized)
+        _validate_v2_payload(decoded, contract=contract)
+    return serialized
 
 
 def run_gate(
@@ -1889,12 +2268,14 @@ def run_gate(
         active_arms=active,
         response=response,
     )
+    thresholds = asdict(THRESHOLDS)
+    thresholds["reference_steps"] = list(thresholds["reference_steps"])
     payload = {
-        "schema": "scalar-memory-loop-p5d-mutual-center-v1",
+        "schema": "scalar-memory-loop-p5d-mutual-center-v2",
         "created_utc": datetime.now(UTC).isoformat(),
         "provenance": provenance,
         "candidate": asdict(CANDIDATE),
-        "thresholds": asdict(THRESHOLDS),
+        "thresholds": thresholds,
         "panel": {
             "channel_off_arms": channel_off,
             "active_arms": active,
@@ -1918,6 +2299,10 @@ def run_gate(
         summary_content=summary_content,
         report_path=report,
         report_content=report_content,
+        manifest_path=ROOT / DEFAULT_MANIFEST,
+        authorization_id=provenance["authorization_id"],
+        attempt_receipt_path=provenance["attempt_receipt_path"],
+        attempt_receipt_sha256=provenance["attempt_receipt_sha256"],
     )
     return payload
 
@@ -1927,7 +2312,7 @@ def main() -> None:
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
-    _validate_default_output_paths(args.summary, args.report)
+    _validate_default_output_paths(args.summary, args.report, DEFAULT_MANIFEST)
     result = run_gate(summary_path=args.summary, report_path=args.report)
     print(json.dumps({"decision": result["decision"]}))
 
