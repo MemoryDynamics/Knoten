@@ -61,9 +61,11 @@ targetfreie Teilkorrektur verwendet `null` fuer die nicht anwendbare
 Off-Arm-Mobilitaetsmetrik, lehnt unbekannte Typen fail-closed ab und rendert
 eine unverfuegbare Antwort ohne Diagnostikzugriff. Das exakte v2-Payloadschema,
 die Manifest-zuletzt-Publikation, eine unabhaengige Manifestpruefung sowie die
-einmalige CI-/Commit-gebundene Lease sind targetfrei implementiert und lokal
-adversarial geprueft. Das unabhaengige Readinessreview und eine neue
-prospektive Autorisierung stehen noch aus; P5 bleibt deshalb geschlossen.
+einmalige CI-/Commit-gebundene Lease sind targetfrei implementiert und
+adversarial geprueft. Das separate Readinessreview endet nach 929 lokalen
+Tests und gruener CI fuer den exakten Implementierungscommit mit
+`p5d-runner-ready-target-still-closed`. Eine neue prospektive Autorisierung
+steht weiterhin aus; P5 bleibt deshalb geschlossen.
 
 ## Inferenz
 
@@ -96,4 +98,5 @@ negatives Interaktionsergebnis.
 - [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
 - [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
 - [P5-D v2-Ergebnisvertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json)
+- [P5-D Implementierungs-Readiness](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md)
 - [Claim-Register](paper_claims.md)

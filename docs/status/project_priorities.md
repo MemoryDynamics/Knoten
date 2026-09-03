@@ -49,9 +49,10 @@ autorisieren keinen weiteren P5-Ziellauf.
    hineindefiniert. Naechster Schritt ist ausschliesslich Schritt 4.
 4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
-   Status technisch pruefen. Ein neuer Prospektivlauf benoetigt danach eine
-   neue ausdrueckliche Autorisierung; die P5-D-Recovery bleibt abgeschlossen
-   und die bisherige Pipeline geschlossen.
+   Status technisch pruefen. Das Review ist mit
+   `p5d-runner-ready-target-still-closed` abgeschlossen. Ein neuer
+   Prospektivlauf benoetigt jetzt eine neue ausdrueckliche Autorisierung; die
+   P5-D-Recovery bleibt abgeschlossen und die bisherige Pipeline geschlossen.
 5. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
