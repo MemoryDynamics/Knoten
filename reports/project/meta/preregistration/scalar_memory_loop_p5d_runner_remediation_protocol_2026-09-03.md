@@ -2,7 +2,13 @@
 
 Date: 2026-09-03.
 
-Status: **prospectively frozen, target-free and closed**.
+Status: **prospectively amended after protocol review, target-free and
+closed**.
+
+The amendment resolves P5-PR01--P5-PR07 from the separately committed review
+at revision `5a9d01aec9604787a047486ba9d2da2bf7cff9d3`, whose CI run
+33713661926 succeeded.  No implementation file or target was touched between
+the initial freeze and this amendment.
 
 This protocol responds to the seven blocking findings P5-R01--P5-R07 in the
 target-free P5-D code review.  It authorizes specification, tests and minimal
@@ -51,6 +57,13 @@ Its existence consumes the authorization even if computation or publication
 later fails.  Offline metadata verification, a stale receipt, an unknown
 field or any mismatch must stop before this receipt and before the target.
 
+The exact receipt path for the only possible next attempt is
+`reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_attempt_3.json`.
+Authorization identifiers use lowercase canonical UUIDv4 syntax
+`[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}`.
+The fixed path, exclusive creation and UUID equality between governance and
+receipt jointly enforce one-shot use; an identifier never enters a path.
+
 ## 3. Result schema and vocabulary
 
 The corrected result is schema
@@ -62,6 +75,15 @@ objects fail closed.  Every error names the JSON path, expected type and
 observed type.  Validation runs before serialization and again after a strict
 JSON round trip.  The independent auditor implements its own equivalent
 validator without importing the runner or NumPy.
+
+The authoritative machine-readable structural contract is
+`experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json`.
+It has its own schema identifier and SHA-256 digest.  Runner and auditor load
+the same tracked bytes but implement independent validation code.  The
+contract registers every object key, array element type and fixed or bounded
+length; any explicitly variable diagnostic map registers its finite value
+type and complete allowed-key enumeration.  `additional_properties` is false
+at every object node.  The governance document pins the contract digest.
 
 Channel-off arms encode `minimum_mobility_dissipation` as JSON `null`, because
 no mobility work is evaluated.  Their ledger gate is explicitly
@@ -89,6 +111,13 @@ manifest is written and atomically renamed last.  It binds schema,
 authorization identifier, attempt-receipt digest, both relative paths, both
 SHA-256 digests and publication time.
 
+The exact manifest path is
+`reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_2026-09-01.publication.json`.
+The JSON and Markdown paths remain the two original registered paths.  The
+independent production auditor must load the manifest first, validate its
+schema and reject absent, malformed or mismatched receipt, paths and hashes
+before reading or interpreting the payload.
+
 Only a valid manifest whose hashes match both files constitutes a published
 result.  A handled failure removes this invocation's temporary and partial
 final files.  After process or host failure, partial files may remain, but no
@@ -97,20 +126,52 @@ retry.  Existing partials, temporaries or a manifest always fail closed and
 require a separately reviewed incident procedure.  The implementation must
 not claim cross-file filesystem atomicity.
 
+Cleanup ownership is exact: on entry all six final/temporary result and
+manifest paths must be absent; the call records which files it creates and a
+handled failure may unlink only that recorded set.  It may never remove a
+pre-existing file.  The attempt receipt is deliberately excluded from
+cleanup because it records consumed authorization.
+
 ## 5. Provenance trust boundary
 
 The future readiness record is data, not authority by prose.  Its protected
-blob table must cover the model kernel, runner, independent auditor,
-governance schema, exact payload-schema implementation and all P5-D tests.
-The authorization document repeats these digests and binds the successful CI
-run to the implementation commit.  A later authorization-only commit is
-allowed to change the governance document but none of the protected blobs.
+blob table contains exactly these seven minimum paths:
+
+1. `src/emergenz_knoten/mutual_center_coupling.py`;
+2. `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_gate.py`;
+3. `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_result_audit.py`;
+4. `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_governance.json`;
+5. `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json`;
+6. `tests/test_rotating_wave_p5d_mutual_center.py`;
+7. `tests/test_rotating_wave_p5d_result_audit.py`.
+
+The authorization document repeats the six non-governance implementation
+digests, the closed governance blob and the schema content digest, and binds
+the successful CI run to the implementation commit.  A later
+authorization-only commit may change exactly the governance path and no
+other protected path; the runner verifies that exact diff.  This sole
+exception replaces the closed governance object with its schema-valid
+`authorized_once` form and does not alter code or the scientific contract.
+
+The closed governance record also pins the HEAD blob of each incident report:
+`reports/project/meta/reviews/scalar_memory_loop_p5d_first_target_serialization_failure_2026-09-02.md`
+and
+`reports/project/meta/reviews/scalar_memory_loop_p5d_replacement_nonfinite_serialization_failure_2026-09-02.md`.
 
 This arrangement avoids a self-referential commit hash: CI validates the
 implementation commit; the later authorization commit names that CI and the
 exact protected blobs.  The runner verifies both the remote CI assertion and
 the local blobs.  A Markdown verdict, run number without API verification or
 branch name alone cannot authorize execution.
+
+Remote verification invokes `gh api` only for the constructed route
+`repos/MemoryDynamics/Knoten/actions/runs/{run_id}`, where `run_id` is a
+positive decimal integer.  No URL, host, owner or repository supplied by the
+governance document is followed.  The returned object must have the same
+integer `id`, `repository.full_name=MemoryDynamics/Knoten`,
+`status=completed`, `conclusion=success` and `head_sha` equal to the
+authorized implementation revision.  Command failure, malformed JSON or any
+mismatch fails before receipt creation.
 
 ## 6. Target-free falsification matrix
 

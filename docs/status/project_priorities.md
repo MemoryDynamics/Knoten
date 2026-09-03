@@ -27,9 +27,10 @@ autorisieren keinen weiteren P5-Ziellauf.
    [Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
    spezifiziert exakte Payload-Schemata, fail-closed Typ-/Endlichkeitspruefung,
    Manifest-gebundene Ausgabesemantik und einen maschinenlesbaren
-   Governancezustand. Das separate Review fordert vor Implementierung noch
-   exakt registrierte Pfade, ein getracktes Schema, einen fest konstruierten
-   CI-Endpunkt und Manifestpruefung im Auditor. Kein Targetzugriff.
+   Governancezustand. Das separate Review forderte exakt registrierte Pfade,
+   ein getracktes Schema, einen fest konstruierten CI-Endpunkt und
+   Manifestpruefung im Auditor; diese Punkte sind nun prospektiv amendiert und
+   warten auf ein eigenes Suffizienzreview. Kein Targetzugriff.
 3. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
    fuer Off-Arme, nichtendliche NumPy-Skalare, unavailable response, zweiten
    Rename-Fehler, Commit-/CI-Bindung und Vokabularschema schreiben; dann
