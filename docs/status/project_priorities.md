@@ -29,8 +29,9 @@ autorisieren keinen weiteren P5-Ziellauf.
    Manifest-gebundene Ausgabesemantik und einen maschinenlesbaren
    Governancezustand. Das separate Review forderte exakt registrierte Pfade,
    ein getracktes Schema, einen fest konstruierten CI-Endpunkt und
-   Manifestpruefung im Auditor; diese Punkte sind nun prospektiv amendiert und
-   warten auf ein eigenes Suffizienzreview. Kein Targetzugriff.
+   Manifestpruefung im Auditor; diese Punkte sind prospektiv amendiert und im
+   separaten Suffizienzreview geschlossen. Damit darf nur Schritt 3 beginnen.
+   Kein Targetzugriff.
 3. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
    fuer Off-Arme, nichtendliche NumPy-Skalare, unavailable response, zweiten
    Rename-Fehler, Commit-/CI-Bindung und Vokabularschema schreiben; dann
