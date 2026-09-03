@@ -3,6 +3,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+import numpy as np
+
 from experiments.current.dynamics.rotation import (
     scalar_memory_loop_p5d_mutual_center_gate as runner,
 )
@@ -131,6 +133,13 @@ def test_p5d_auditor_is_independent_of_target_runner_and_numeric_stack() -> None
             imports.append(node.module)
     assert not any("scalar_memory_loop_p5d_mutual_center_gate" in name for name in imports)
     assert not any(name.split(".")[0] in {"numpy", "scipy", "mpmath"} for name in imports)
+
+
+def test_p5d_auditor_finite_check_rejects_unknown_and_numpy_scalars() -> None:
+    assert audit._finite({"native": [0.125, True, None]})
+    assert not audit._finite(np.float32(np.nan))
+    assert not audit._finite(np.float32(0.125))
+    assert not audit._finite(object())
 
 
 def test_p5d_independent_auditor_reconstructs_complete_synthetic_pass() -> None:

@@ -110,7 +110,7 @@ def _finite(value: Any) -> bool:
         return all(_finite(item) for item in value.values())
     if isinstance(value, (list, tuple)):
         return all(_finite(item) for item in value)
-    return True
+    return False
 
 
 def _rms(values: Iterable[complex | float]) -> float:

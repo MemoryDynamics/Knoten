@@ -259,6 +259,38 @@ def test_p5d_recovery_serializer_handles_full_panel_and_numpy_scalars(
     assert len(decoded["panel"]["active_arms"]) == 768
 
 
+def test_p5d_channel_off_mobility_minimum_has_explicit_null_semantics() -> None:
+    encoded = p5d._serialize_payload(
+        {
+            "mode": "off",
+            "minimum_mobility_dissipation": None,
+            "ledger_gates": {"not_applicable_channel_off": True},
+        }
+    )
+    decoded = json.loads(encoded)
+    assert decoded["minimum_mobility_dissipation"] is None
+    assert p5d._all_finite(decoded)
+
+
+def test_p5d_recursive_finite_check_rejects_unknown_and_numpy_nonfinite() -> None:
+    assert p5d._all_finite(np.float32(0.125))
+    assert not p5d._all_finite(np.float32(np.nan))
+    assert not p5d._all_finite({"nested": [object()]})
+
+
+def test_p5d_unavailable_response_report_needs_no_diagnostics() -> None:
+    report = p5d._render_report(
+        {
+            "decision": "p5d-inconclusive",
+            "response": {"available": False, "reason": "misregistered-panel"},
+        },
+        "0" * 64,
+    )
+    assert "Response status: `unavailable`" in report
+    assert "Reason: `misregistered-panel`" in report
+    assert "No response diagnostics were evaluated" in report
+
+
 @pytest.mark.parametrize(
     "value",
     (np.float64(np.nan), np.float64(np.inf), np.float64(-np.inf)),

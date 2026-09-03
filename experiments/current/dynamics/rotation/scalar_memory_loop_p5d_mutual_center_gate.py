@@ -387,17 +387,29 @@ def panel_registration(
 def _all_finite(value: Any) -> bool:
     if isinstance(value, bool) or value is None or isinstance(value, str):
         return True
+    if isinstance(value, np.bool_):
+        return True
+    if isinstance(value, np.integer):
+        return True
+    if isinstance(value, np.floating):
+        return math.isfinite(float(value))
+    if isinstance(value, np.complexfloating):
+        number = complex(value)
+        return math.isfinite(number.real) and math.isfinite(number.imag)
     if isinstance(value, complex):
         return math.isfinite(value.real) and math.isfinite(value.imag)
     if isinstance(value, np.ndarray):
-        return bool(np.isfinite(value).all())
+        try:
+            return bool(np.isfinite(value).all())
+        except TypeError:
+            return False
     if isinstance(value, (int, float)):
         return math.isfinite(float(value))
     if isinstance(value, dict):
         return all(_all_finite(item) for item in value.values())
     if isinstance(value, (list, tuple)):
         return all(_all_finite(item) for item in value)
-    return True
+    return False
 
 
 def _history_sha256(history: np.ndarray) -> str:
@@ -1124,7 +1136,7 @@ def _run_arm(
         )
     }
     cumulative = {"work_split_a": 0.0, "work_split_b": 0.0, "pair_ledger": 0.0}
-    minimum_dissipation = math.inf
+    minimum_dissipation: float | None = None if mode == "off" else math.inf
     normal_operands = True
     ledger_evaluation_count = 0
     shape_evaluation_count = 0
@@ -1237,7 +1249,8 @@ def _run_arm(
                 else:
                     cumulative[name] += step.loop_b.work_split_residual
             minimum_dissipation = min(
-                minimum_dissipation, float(metrics["minimum_dissipation"])
+                float(minimum_dissipation),
+                float(metrics["minimum_dissipation"]),
             )
             normal_operands = bool(normal_operands and metrics["normal_operands"])
             if force_scale is None:
@@ -1344,6 +1357,8 @@ def _run_arm(
             <= THRESHOLDS.channel_off_center_fraction,
         }
     else:
+        if minimum_dissipation is None:
+            raise AssertionError("active P5-D arm lacks mobility metrology")
         ledger_gates = {
             "complete_evaluation_count": ledger_evaluation_count
             == THRESHOLDS.active_updates,
@@ -1783,25 +1798,44 @@ def _write_complete_outputs(
 
 
 def _render_report(payload: dict[str, Any], json_sha256: str) -> str:
-    diagnostics = payload["response"]["diagnostics"]
-    return "\n".join(
-        (
-            "# P5-D mutual-center result",
-            "",
-            f"Decision: **`{payload['decision']}`**.",
-            "",
-            f"JSON SHA256: `{json_sha256}`",
-            "",
-            "This is one deterministic control panel, not a replication series.",
-            "The coupling is explicitly inserted; no spontaneous force, charge,",
-            "spin, momentum, inertia or mass follows from this result.",
-            "",
-            f"Maximum reflection RMS/R: `{diagnostics['maximum_reflection_rms_fraction']}`",
-            f"Maximum swap RMS/R: `{diagnostics['maximum_swap_rms_fraction']}`",
-            f"Closed-loop low/high range: `{diagnostics['excess_low_high_range']}`",
-            "",
+    response = payload["response"]
+    lines = [
+        "# P5-D mutual-center result",
+        "",
+        f"Decision: **`{payload['decision']}`**.",
+        "",
+        f"JSON SHA256: `{json_sha256}`",
+        "",
+        "This is one deterministic control panel, not a replication series.",
+        "The coupling is explicitly inserted; no spontaneous force, charge,",
+        "spin, momentum, inertia or mass follows from this result.",
+        "",
+    ]
+    if response["available"]:
+        diagnostics = response["diagnostics"]
+        lines.extend(
+            (
+                "Response status: `available`.",
+                "",
+                "Maximum reflection RMS/R: "
+                f"`{diagnostics['maximum_reflection_rms_fraction']}`",
+                "Maximum swap RMS/R: "
+                f"`{diagnostics['maximum_swap_rms_fraction']}`",
+                "Closed-loop low/high range: "
+                f"`{diagnostics['excess_low_high_range']}`",
+                "",
+            )
         )
-    )
+    else:
+        lines.extend(
+            (
+                "Response status: `unavailable`.",
+                f"Reason: `{response['reason']}`.",
+                "No response diagnostics were evaluated.",
+                "",
+            )
+        )
+    return "\n".join(lines)
 
 
 def _json_default(value: Any) -> bool | int | float:

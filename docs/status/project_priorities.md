@@ -38,6 +38,10 @@ autorisieren keinen weiteren P5-Ziellauf.
    minimal reparieren. Der erste kleine Schritt ist umgesetzt: ein getrackter
    geschlossener Governance-Datensatz bindet beide Incidents, und der Runner
    erzwingt ihn vor der alten Provenienzstrecke und vor jedem Targetzugriff.
+   Die zweite targetfreie Teilkorrektur ist umgesetzt: Der nicht anwendbare
+   Off-Arm-Sentinel ist `null`, unbekannte Typen schliessen fail-closed und
+   unavailable response rendert ohne erfundene Diagnostik. Offen bleiben das
+   exakte v2-Schema, Manifest-Publikation und CI-/Commit-Bindung.
 4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
    Status technisch pruefen. Ein neuer Prospektivlauf benoetigt danach eine

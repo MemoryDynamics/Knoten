@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-02.
+Stand: 2026-09-03.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -13,16 +13,36 @@ vollstaendige vorherige Stand liegt im
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
 | Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
-| Native Rotation | sechs lokale finite-$H$-Roots; Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine generische Formation |
+| Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive` nach zwei nicht auswertbaren Zielaufrufen | keine Interaktionsevidenz |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
-## P5-D Code-Review
+## Was der Kreisnachweis genau sagt
 
-Das Review trennt eine algebraisch konsistente Center-/Port-Konstruktion von
-einer nicht belastbaren Ergebnisstrecke. Die wichtigsten Blocker sind:
+Fuer den Anchor mit
+`alpha=0.01`, `H=1200`, `eta=0.15`, `A_att=3.5` reduziert das Einsetzen von
+$x_n=R e^{in\theta}$ die unveraenderte Grundgleichung exakt auf zwei endliche
+Balancesummen. Ein prospektiver Krawczyk-Test schliesst in seinem registrierten
+lokalen Kasten genau einen Root ein. Die direkte 2400-dimensionale
+mitrotierende Voll-FIFO-Map reproduziert die vorbereitete Historie mit
+maximalem Komponentenfehler $2.46\times10^{-15}$; lokale Stoerungen
+kontrahieren numerisch. Am spaeteren L3-Kandidaten erreichen zudem zehn
+registrierte nichtkreisfoermige Arme den zugehoerigen Orbit.
+
+Das ist der fuer P5 benoetigte kandidatenbezogene Existenz- und
+Identitaetsnachweis. Es ist kein globaler Einzigkeitsbeweis: $+\theta$ und
+$-\theta$ sind Chiralitaetspartner, globale Rotationen parametrisieren
+dieselbe ambiente $SO(2)$-Gruppenbahn, und weitere entfernte Roots sind nicht
+ausgeschlossen. P5 darf deshalb einen fest registrierten Kreis als Input
+verwenden, aber nicht behaupten, die Parameter erzeugten global nur einen
+Kreis.
+
+## P5-D Code-Review und Remediation
+
+Das Review trennte eine algebraisch konsistente Center-/Port-Konstruktion von
+einer nicht belastbaren Ergebnisstrecke. Es reproduzierte folgende Blocker:
 
 - Der Provenienzguard akzeptiert den inzwischen geschlossenen Ast weiterhin.
 - Off-Arme erzeugen konstruktiv nichtendliche Sentinelwerte.
@@ -34,9 +54,15 @@ einer nicht belastbaren Ergebnisstrecke. Die wichtigsten Blocker sind:
   Portgroessen und Maschinenrundung; der kanonische Notationsvertrag ist
   deshalb Teil der Remediation.
 
-Die Recovery-Autorisierung ist verbraucht. Der technische Guard bildet diesen
-Governancezustand bislang nicht ab; deshalb ist die Schliessung durch Review
-und Prioritaeten explizit aufrechtzuerhalten.
+Die Recovery-Autorisierung ist verbraucht. Inzwischen bildet ein getrackter
+maschinenlesbarer Governancezustand diese Schliessung ab; der Runner prueft
+ihn vor der alten Provenienzstrecke und vor jeder Arm-Auswertung. Die zweite
+targetfreie Teilkorrektur verwendet `null` fuer die nicht anwendbare
+Off-Arm-Mobilitaetsmetrik, lehnt unbekannte Typen fail-closed ab und rendert
+eine unverfuegbare Antwort ohne Diagnostikzugriff. Exaktes v2-Payloadschema,
+Manifest-Publikation und neue CI-Bindung bleiben offen. P5 bleibt bis nach
+vollstaendiger Remediation, unabhaengigem Readinessreview und einer neuen
+prospektiven Autorisierung geschlossen.
 
 ## Inferenz
 
@@ -60,6 +86,7 @@ negatives Interaktionsergebnis.
 ## Quellen
 
 - [Implementierte Gleichungen](../reference/implemented_equations.md)
+- [Native Rotating Waves](../reference/rotating_wave_foundation.md)
 - [Kanonisches Modellvokabular](../reference/model_vocabulary.md)
 - [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
 - [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
