@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-02.
+Stand: 2026-09-03.
 
 Dies ist die einzige aktive Prioritaetenliste des Repositorys. Statusseiten,
 README und Reports duerfen Befunde oder Blocker nennen, aber keine zweite
@@ -22,10 +22,13 @@ autorisieren keinen weiteren P5-Ziellauf.
    versioniert und mit Kompatibilitaetstests migrieren. Grundlage sind das
    [Modellvokabular](../reference/model_vocabulary.md) und der targetfreie
    Vokabularaudit. Kein Targetzugriff.
-2. **P5-D Ergebnisstrecke schliessen und spezifizieren.** Den Code-Review als
-   Blockerbasis einfrieren; exakte Payload-Schemata, fail-closed
-   Endlichkeitspruefung, paarweise Ausgabesemantik und einen maschinenlesbaren
-   Governancezustand entwerfen. Kein Targetzugriff.
+2. **P5-D Ergebnisstrecke schliessen und spezifizieren.** Der Code-Review ist
+   als Blockerbasis eingefroren. Das neue targetfreie
+   [Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
+   spezifiziert exakte Payload-Schemata, fail-closed Typ-/Endlichkeitspruefung,
+   Manifest-gebundene Ausgabesemantik und einen maschinenlesbaren
+   Governancezustand. Vor Implementierung folgt ein separates Review. Kein
+   Targetzugriff.
 3. **Remediation getrennt implementieren und adversarial testen.** Erst Tests
    fuer Off-Arme, nichtendliche NumPy-Skalare, unavailable response, zweiten
    Rename-Fehler, Commit-/CI-Bindung und Vokabularschema schreiben; dann

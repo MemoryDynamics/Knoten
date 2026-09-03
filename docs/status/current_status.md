@@ -62,4 +62,5 @@ negatives Interaktionsergebnis.
 - [Implementierte Gleichungen](../reference/implemented_equations.md)
 - [Kanonisches Modellvokabular](../reference/model_vocabulary.md)
 - [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
+- [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
 - [Claim-Register](paper_claims.md)
