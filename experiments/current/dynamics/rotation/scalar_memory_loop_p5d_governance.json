@@ -1,11 +1,35 @@
 {
-  "authorization": null,
+  "authorization": {
+    "attempt": 3,
+    "authorization_id": "c948bdf3-01f6-43b0-aef9-d4d1a4373be1",
+    "ci": {
+      "api_url": "https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/33918599007",
+      "conclusion": "success",
+      "head_sha": "7d7f8a9eecaf72909cc937446d77e7589b48e24a",
+      "run_id": 33918599007,
+      "status": "completed"
+    },
+    "closed_governance_blob": "65169b7ad5b515731dc16c7dbd1080e97f081eec",
+    "implementation_revision": "7d7f8a9eecaf72909cc937446d77e7589b48e24a",
+    "protected_blobs": {
+      "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_gate.py": "8b16cb0246306347a7115a8f7632e4546412b7fa",
+      "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_result_audit.py": "a768b1c292b6ff0aa35aaecf7f0a6fa6951afd62",
+      "experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json": "66f77703fe4548ee490fd18e7e3b7d9b0af602ab",
+      "src/emergenz_knoten/mutual_center_coupling.py": "86a064692b33514a536b93877d4d5dcf33894c64",
+      "tests/test_rotating_wave_p5d_mutual_center.py": "2b020579abb53ec14caa8e2b3921d1eb1fb28dd9",
+      "tests/test_rotating_wave_p5d_result_audit.py": "34a0ddd3bb4a38c59b3d2a0af919da9a6183aa59"
+    },
+    "readiness_review_blob": "2b151b6749e2dfd3859bef227e36d2f528b72e39",
+    "readiness_review_path": "reports/project/meta/reviews/scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md",
+    "remediation_protocol_blob": "1f94be94bdf4b2512f68b69dcc5b3958e7efe7b6",
+    "schema_sha256": "ba9af89e5f2646db31ac0924825a643079fbfaf1d28d70d0696253f1da9cedc6"
+  },
   "gate": "P5-D",
-  "reason": "two-inconclusive-target-calls-remediation-pending",
+  "reason": "explicit-user-authorized-one-shot-attempt-3-after-reviewed-remediation",
   "result_schema_sha256": "ba9af89e5f2646db31ac0924825a643079fbfaf1d28d70d0696253f1da9cedc6",
   "schema": "scalar-memory-loop-p5d-governance-v1",
-  "state": "closed",
-  "target_authorized": false,
+  "state": "authorized_once",
+  "target_authorized": true,
   "target_calls_recorded": [
     {
       "attempt": 1,
