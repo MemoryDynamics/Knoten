@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-03.
+Stand: 2026-09-05.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive` nach zwei nicht auswertbaren Zielaufrufen | keine Interaktionsevidenz |
+| P5-D | `p5d-inconclusive` nach drei nicht auswertbaren Zielaufrufen | keine Interaktionsevidenz; Versuch 3 falsifiziert die erneute Readiness-Abdeckung |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -62,15 +62,21 @@ Off-Arm-Mobilitaetsmetrik, lehnt unbekannte Typen fail-closed ab und rendert
 eine unverfuegbare Antwort ohne Diagnostikzugriff. Das exakte v2-Payloadschema,
 die Manifest-zuletzt-Publikation, eine unabhaengige Manifestpruefung sowie die
 einmalige CI-/Commit-gebundene Lease sind targetfrei implementiert und
-adversarial geprueft. Das separate Readinessreview endet nach 929 lokalen
+adversarial geprueft. Das separate Readinessreview endete nach 929 lokalen
 Tests und gruener CI fuer den exakten Implementierungscommit mit
-`p5d-runner-ready-target-still-closed`. Eine neue prospektive Autorisierung
-steht weiterhin aus; P5 bleibt deshalb geschlossen.
+`p5d-runner-ready-target-still-closed`. Eine danach ausdruecklich und einmalig
+autorisierte dritte Ausfuehrung berechnete Panel, Response und Klassifikation,
+scheiterte jedoch vor JSON-Encoding am strikten v2-Typvertrag: Die
+Channel-off-Energieskala `numpy.finfo(float).tiny` wandelte sechs native
+Nullquotienten in `numpy.float64` um. Receipt 3 existiert, Ergebnis, Report,
+Manifest und Audit nicht. Damit ist auch dieser Lauf `p5d-inconclusive`, die
+Readiness-Abdeckung falsifiziert und die Einmalfreigabe verbraucht. P5 bleibt
+geschlossen.
 
 ## Inferenz
 
 Die Kreisloesungen sind eine geeignete Basis, um center-konjugierte Ports und
-gegenseitige Kopplung mathematisch zu untersuchen. Aus den bisherigen
+gegenseitige Kopplung mathematisch zu untersuchen. Aus den drei bisherigen
 Ziellaeufen folgt jedoch nichts ueber reale Wechselwirkung oder Masse.
 
 ## Hypothesen
@@ -99,4 +105,5 @@ negatives Interaktionsergebnis.
 - [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
 - [P5-D v2-Ergebnisvertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json)
 - [P5-D Implementierungs-Readiness](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md)
+- [P5-D Versuch-3-Incident](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_attempt3_numpy_float_schema_failure_2026-09-05.md)
 - [Claim-Register](paper_claims.md)

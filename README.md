@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-02.
+Stand: 2026-09-05.
 
 ## Wissenschaftlicher Stand
 
@@ -17,8 +17,10 @@ Stand: 2026-09-02.
   keine Replikation.
 - Das interne Source-Audit bleibt
   `referee-source-ready-with-major-claim-restrictions`.
-- P5-D bleibt nach zwei unvollstaendigen Zielaufrufen `p5d-inconclusive`.
-  Das aktuelle Code-Review haelt weitere Zielausfuehrungen geschlossen.
+- P5-D bleibt nach drei an der finalen Ergebnisstrecke gescheiterten
+  Zielaufrufen `p5d-inconclusive`. Versuch 3 verbrauchte seine Einmalfreigabe
+  und falsifizierte erneut die targetfreie Readiness-Abdeckung; weitere
+  Zielausfuehrungen sind geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

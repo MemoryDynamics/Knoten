@@ -1,0 +1,7 @@
+{
+  "authorization_id": "c948bdf3-01f6-43b0-aef9-d4d1a4373be1",
+  "created_utc": "2026-09-04T21:05:20.993401+00:00",
+  "governance_sha256": "d8ea0cccc3fbe9d7fc757dba6c3537daac2df08c13ed7111320e87dfdf5e040e",
+  "revision": "1104ebfdfceae3d9e9882c794273894352d6b1fd",
+  "schema": "scalar-memory-loop-p5d-attempt-receipt-v1"
+}

@@ -1,6 +1,6 @@
 # Emergenz Knoten
 
-Stand: 2026-09-02.
+Stand: 2026-09-05.
 
 Diese Seite ist die kurze Frontdoor. Die Navigation folgt der Projektregel:
 hoechstens sieben Eintraege je Ebene und hoechstens sieben Ebenen. Historische
@@ -27,14 +27,16 @@ Position plus vollstaendiger Memory-Zustand bilden die Markov-Einbettung.
 
 ## Aktuelle Grenze
 
-P5-D endete nach zwei Zielaufrufen jeweils vor einer auswertbaren
-Ergebnisdatei. Das aktuelle Code-Review zeigt weitere Lauf- und
-Governanceblocker. Daher gilt weiter `p5d-inconclusive`; ein weiterer Lauf ist
-nicht autorisiert. Interaktionsevidenz existiert weiterhin nicht.
+P5-D endete nach drei Zielaufrufen jeweils vor einer auswertbaren
+Ergebnisdatei. Versuch 3 berechnete zwar das eingefrorene Panel, scheiterte
+aber vor jeder Publikation an einem produktionsspezifischen `numpy.float64` im
+strikten v2-Schema. Daher gilt weiter `p5d-inconclusive`; die Einmalfreigabe
+ist verbraucht und ein weiterer Lauf nicht autorisiert. Interaktionsevidenz
+existiert weiterhin nicht.
 
 Die fruehere Formulierung „P5-D-Design und ein getrenntes prospektives
 Zielgate“ ist historisch: Design und Implementierung wurden zwar getrennt,
-aber die Ergebnisstrecke erwies sich als nicht belastbar.
+aber die Ergebnisstrecke erwies sich in drei Zielaufrufen als nicht belastbar.
 
 ## Einstieg
 

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-03.
+Stand: 2026-09-05.
 
 Dies ist die einzige aktive Prioritaetenliste des Repositorys. Statusseiten,
 README und Reports duerfen Befunde oder Blocker nennen, aber keine zweite
@@ -47,24 +47,35 @@ autorisieren keinen weiteren P5-Ziellauf.
    gekoppelter harmonischer Oszillator bleibt ein nachgelagertes
    Diskriminationsgate und wird nicht in das eingefrorene P5-D-Estimand
    hineindefiniert. Naechster Schritt ist ausschliesslich Schritt 4.
-4. **Unabhaengiges Readiness-Review.** Produktionsschema lokal vollstaendig
+4. **Unabhaengiges Readiness-Review und Versuch 3 abschliessen.** Produktionsschema lokal vollstaendig
    erzeugen und serialisieren, Ausgabeausfall injizieren und den geschlossenen
    Status technisch pruefen. Das Review ist mit
-   `p5d-runner-ready-target-still-closed` abgeschlossen. Ein neuer
-   Prospektivlauf benoetigt jetzt eine neue ausdrueckliche Autorisierung; die
-   P5-D-Recovery bleibt abgeschlossen und die bisherige Pipeline geschlossen.
-5. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
+   `p5d-runner-ready-target-still-closed` abgeschlossen. Der danach einmalig
+   autorisierte Versuch 3 scheiterte nach vollstaendiger In-memory-Auswertung
+   vor Publikation an produktionsseitigen `numpy.float64`-Nullquotienten im
+   strikten Schema. Das Receipt verbraucht die Freigabe; Ergebnis und Manifest
+   fehlen. Der Incident falsifiziert die Readiness-Abdeckung und schliesst
+   Targetzugriff erneut. Er autorisiert weder Patch noch Versuch 4.
+5. **Incident 3 reviewen und eine neue Remediation erst prospektiv entscheiden.**
+   Zuerst den Typursprung, die Testluecke und die verlorene
+   In-memory-Entscheidung dauerhaft als `p5d-inconclusive` festhalten. Falls
+   P5-D fortgesetzt werden soll, braucht jede Codeaenderung zuvor ein neues,
+   outcome-blindes Protokoll mit exakter produktionspfadnaher Off-Arm-Probe.
+   Ohne diesen separaten Freeze direkt zu Schritt 6 gehen.
+6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
-6. **Zertifikats- und Release-Hardening.** Zweiten Intervallbackend,
+7. **Zertifikats- und Release-Hardening.** Zweiten Intervallbackend,
    Wheel-/Hash-Lock, `CITATION.cff` und eine zitierbare Release parallel
    abschliessen; sie ersetzen kein wissenschaftliches Gate.
 
 ## Laufstatus
 
-**P5-D-Recovery abgeschlossen: Pipeline geschlossen.**
+**P5-D Versuch 3 technisch inconclusive: Pipeline geschlossen.**
 
-`P5 first target -> serializer inconclusive`; der autorisierte Ersatzlauf
-endete ebenfalls vor einer auswertbaren Payload an nichtendlichen Werten.
-Beide Aufrufe sind Infrastrukturereignisse, keine negativen
-Interaktionsexperimente.
+Erstaufruf und Ersatzlauf endeten vor einer auswertbaren Payload an
+NumPy-Bool beziehungsweise nichtendlichem Off-Sentinel. Der prospektiv
+autorisierte Versuch 3 endete nach vollstaendiger In-memory-Auswertung am
+strikten Typvertrag fuer sechs produktionsspezifische NumPy-Float-Nullen. Alle
+drei Aufrufe sind Infrastrukturereignisse, keine negativen
+Interaktionsexperimente. Die Attempt-3-Lease ist verbraucht.
