@@ -2,7 +2,7 @@
 
 Date: 2026-09-03.
 
-Implementation revision: `dd7471d236240ebcdecc54a089b49f33510536fc`.
+Implementation revision: `7d7f8a9eecaf72909cc937446d77e7589b48e24a`.
 
 Verdict: **`p5d-runner-ready-target-still-closed`**.
 
@@ -23,7 +23,7 @@ The protected implementation table is:
 - Blob `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_result_audit.py`: `a768b1c292b6ff0aa35aaecf7f0a6fa6951afd62`
 - Blob `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_governance.json`: `65169b7ad5b515731dc16c7dbd1080e97f081eec`
 - Blob `experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json`: `66f77703fe4548ee490fd18e7e3b7d9b0af602ab`
-- Blob `tests/test_rotating_wave_p5d_mutual_center.py`: `721ea562713b72c5865a1e7d568c16bf006e83a2`
+- Blob `tests/test_rotating_wave_p5d_mutual_center.py`: `2b020579abb53ec14caa8e2b3921d1eb1fb28dd9`
 - Blob `tests/test_rotating_wave_p5d_result_audit.py`: `34a0ddd3bb4a38c59b3d2a0af919da9a6183aa59`
 
 The v2 schema content SHA-256 is
@@ -33,7 +33,7 @@ pinned by the closed governance record.
 ## 2. Positive evidence
 
 - The local complete suite passed: 929 tests.
-- CI run [33809488432](https://github.com/MemoryDynamics/Knoten/actions/runs/33809488432)
+- CI run [33918599007](https://github.com/MemoryDynamics/Knoten/actions/runs/33918599007)
   completed successfully on the exact implementation revision. Its lint,
   tests and strict documentation steps all passed.
 - The schema validates before serialization and after a strict JSON round
@@ -82,8 +82,8 @@ restrictions remain material:
 The tracked governance state remains `closed`, `target_authorized=false` and
 `authorization=null`. Both previous calls remain recorded as infrastructure
 incidents. A prospective attempt 3 requires a new explicit decision followed
-by a governance-only authorization commit that binds this review blob and CI
-run 33809488432. Until then the runner fails before receipt creation, pair
+  by a governance-only authorization commit that binds this review blob and CI
+  run 33918599007. Until then the runner fails before receipt creation, pair
 initialization and every registered arm.
 
 Accordingly the narrow verdict is
