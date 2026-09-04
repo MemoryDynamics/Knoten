@@ -229,8 +229,13 @@ keine Standardartefakte oder beobachtete Entscheidung. Er ist formal
 Implementierungs- und Readiness-CI; ihr einziger Ersatzlauf scheiterte jedoch
 am garantierten Channel-off-`minimum_dissipation=inf` unter
 `allow_nan=False`. Auch er erzeugte keine Artefakte oder beobachtete
-Entscheidung. Beide Aufrufe sind inconclusive, die Recovery-Autorisierung ist
-verbraucht und Interaktionsevidenz bleibt geschlossen.
+Entscheidung. Eine spaetere targetfreie Runner-Remediation bestand 929 Tests,
+strikte Dokumentation und CI. Der danach einmalig autorisierte Versuch 3
+berechnete Panel, Response und Klassifikation, scheiterte aber vor jeder
+Publikation an produktionsspezifischen `numpy.float64`-Nullquotienten im
+strikten v2-Schema. Nur das Attempt-3-Receipt existiert. Alle drei Aufrufe sind
+inconclusive, die letzte Autorisierung ist verbraucht und
+Interaktionsevidenz bleibt geschlossen.
 Der nachgelagerte N0-Lauf bestaetigt zusaetzlich eine aufgeloeste
 finite-time Robustheitsklammer von `chi=1e-4` bis `1e-3`; der Fail ist lokal
 phasensensitiv und im groben x-y-Kreis kaum sichtbar. Das ist weder eine

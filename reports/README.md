@@ -283,6 +283,17 @@ Diagnostiken. Die vorhandenen Daten stuetzen keine ambient-unabhaengige
     bestaetigt die Algebra des Center-Ports, findet aber sieben Blocker in
     Governance, Produktionsschema, Endlichkeitspruefung, Ausgabesemantik und
     CI-Bindung. Verdict: `p5d-runner-not-ready-no-target-authorized`.
+    Ein neues targetfreies Runner-Remediation-Protokoll, adversariale Tests und
+    das getrennte v2-Readinessreview schlossen diese sieben Punkte formal.
+    Der danach ausdruecklich einmal autorisierte Versuch 3 hinterliess das
+    unveraenderliche [Attempt-Receipt](dynamics/rotation/scalar_memory_loop_p5d_mutual_center_attempt_3.json),
+    scheiterte aber nach In-memory-Klassifikation vor Publikation am strikten
+    Schema fuer produktionsseitige `numpy.float64`-Nullquotienten. Der
+    [dritte Incident-Report](project/meta/reviews/scalar_memory_loop_p5d_attempt3_numpy_float_schema_failure_2026-09-05.md)
+    klassifiziert auch diesen Lauf als `p5d-inconclusive` und falsifiziert die
+    erneute Readiness-Abdeckung. Ergebnis, Report, Manifest, Audit und
+    beobachtete Entscheidung fehlen; Versuch 4 und Codepatch sind nicht
+    autorisiert.
     Der getrennte targetfreie
     [Vokabularaudit](project/meta/reviews/model_vocabulary_remediation_audit_2026-09-02.md)
     weist zusaetzlich Symbolkollisionen zwischen Paper-I-Deposition,
