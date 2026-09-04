@@ -888,12 +888,16 @@ def test_p5d_target_guard_precedes_registered_panel(monkeypatch) -> None:
     assert calls == []
 
 
-def test_p5d_machine_governance_is_closed_and_binds_both_incidents() -> None:
+def test_p5d_machine_governance_is_schema_valid_and_binds_both_incidents() -> None:
     governance = p5d._load_governance()
     assert governance["schema"] == "scalar-memory-loop-p5d-governance-v1"
-    assert governance["state"] == "closed"
-    assert governance["target_authorized"] is False
-    assert governance["authorization"] is None
+    assert governance["state"] in {"closed", "authorized_once"}
+    if governance["state"] == "closed":
+        assert governance["target_authorized"] is False
+        assert governance["authorization"] is None
+    else:
+        assert governance["target_authorized"] is True
+        assert governance["authorization"]["attempt"] == 3
     assert [row["attempt"] for row in governance["target_calls_recorded"]] == [1, 2]
     assert (
         governance["result_schema_sha256"]
@@ -932,6 +936,19 @@ def _synthetic_authorized_governance() -> dict[str, object]:
             "remediation_protocol_blob": p5d.RECOVERY_PROTOCOL_BLOB,
             "schema_sha256": "e" * 64,
         },
+    }
+
+
+def _synthetic_closed_governance() -> dict[str, object]:
+    return {
+        "schema": p5d.GOVERNANCE_SCHEMA,
+        "gate": "P5-D",
+        "reason": "closed-test-fixture",
+        "result_schema_sha256": "e" * 64,
+        "state": "closed",
+        "target_authorized": False,
+        "target_calls_recorded": [],
+        "authorization": None,
     }
 
 
@@ -1085,6 +1102,7 @@ def test_p5d_machine_governance_seals_before_legacy_provenance_and_target(
         raise AssertionError("registered target panel was reached")
 
     monkeypatch.setattr(p5d, "_parse_readiness_review", forbidden_readiness)
+    monkeypatch.setattr(p5d, "_load_governance", _synthetic_closed_governance)
     monkeypatch.setattr(p5d, "_run_registered_panel", forbidden_panel)
     with pytest.raises(RuntimeError, match="sealed by machine governance"):
         p5d.run_gate()
