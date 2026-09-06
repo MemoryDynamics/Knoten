@@ -197,7 +197,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P4-R-S-Anchor-Holdout",
             "0.00232715",
             "P5-D-Design und ein getrenntes prospektives",
-            "Interaktionsevidenz existiert weiterhin nicht",
+                "Interaktionsevidenz",
+                "existiert weiterhin nicht",
         ),
         "docs/status/current_status.md": (
             VERDICT,
@@ -216,8 +217,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4rs-anchor-scale-transfer-pass",
             "n0-noise-stability-window-bracketed-reviewed-pass",
             "p5d-mutual-center-design-identifiable",
-            "P5-D-Recovery abgeschlossen: Pipeline geschlossen",
-            "P5 first target -> serializer inconclusive",
+            "P5-D Versuch 3 technisch inconclusive: Pipeline geschlossen",
+            "Attempt-3-Lease ist verbraucht",
         ),
         "reports/README.md": (
             VERDICT,
@@ -242,8 +243,8 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "P4-R-phi reviewed pass",
             "P4-R-S reviewed pass",
             "N0 reviewed pass",
-            "P5-D two calls inconclusive",
-            "schema recovery exhausted",
+            "P5-D three calls inconclusive",
+            "result pipeline closed",
             "keine Replikationen",
         ),
         "docs/reference/experiment_catalog.md": (
@@ -252,7 +253,7 @@ def test_public_status_surfaces_propagate_source_and_p4rs_boundaries() -> None:
             "p4rs-anchor-scale-transfer-pass",
             "keine Konvergenzordnung",
             "p5d-inconclusive",
-            "kein dritter Lauf",
+            "kein Versuch 4",
         ),
     }
     for relative, phrases in required_phrases.items():
