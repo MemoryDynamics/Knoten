@@ -1,6 +1,6 @@
 # Report-Index
 
-Stand: 2026-09-01.
+Stand: 2026-09-06.
 
 Dieses Verzeichnis ist das datierte Evidenzarchiv. Ein Report dokumentiert
 einen kontrollierten Zwischenstand; seine Existenz macht ihn nicht automatisch
@@ -707,6 +707,8 @@ eingesetzten Transportgesetze.
 - [Dynamik-/Moden-Code-Review 2026-08-04](project/meta/reviews/relevant_dynamics_code_review_2026-08-04.md)
 - [P3.8 Physik-/Code-Review 2026-08-12](project/meta/reviews/p38_rigorous_review_2026-08-12.md)
 - [Repository-Kuration 2026-07-21](project/meta/operations/repository_curation_2026-07-21.md)
+- [P5-D Produktionspfad-Protokoll 2026-09-06](project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
+- [P5-D Produktionspfad-Suffizienzreview 2026-09-06](project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
 
 ## Historische Bereiche
 

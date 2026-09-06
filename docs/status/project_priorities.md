@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-05.
+Stand: 2026-09-06.
 
 Dies ist die einzige aktive Prioritaetenliste des Repositorys. Statusseiten,
 README und Reports duerfen Befunde oder Blocker nennen, aber keine zweite
@@ -56,12 +56,19 @@ autorisieren keinen weiteren P5-Ziellauf.
    strikten Schema. Das Receipt verbraucht die Freigabe; Ergebnis und Manifest
    fehlen. Der Incident falsifiziert die Readiness-Abdeckung und schliesst
    Targetzugriff erneut. Er autorisiert weder Patch noch Versuch 4.
-5. **Incident 3 reviewen und eine neue Remediation erst prospektiv entscheiden.**
-   Zuerst den Typursprung, die Testluecke und die verlorene
-   In-memory-Entscheidung dauerhaft als `p5d-inconclusive` festhalten. Falls
-   P5-D fortgesetzt werden soll, braucht jede Codeaenderung zuvor ein neues,
-   outcome-blindes Protokoll mit exakter produktionspfadnaher Off-Arm-Probe.
-   Ohne diesen separaten Freeze direkt zu Schritt 6 gehen.
+5. **P5-D-Produktionspfad targetfrei beweisen.** Incident 3 ist dauerhaft als
+   `p5d-inconclusive` dokumentiert. Das neue outcome-blinde
+   [Produktionspfad-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
+   wurde nach negativem Erstreview amendiert und im separaten
+   [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
+   als `p5d-production-preflight-protocol-sufficient-target-closed` bewertet.
+   Naechster Schritt sind ausschliesslich zunaechst fehlschlagende,
+   target-gesperrte Produktionspfadtests und danach die kleinste P5-lokale
+   Typgrenzenkorrektur. Python-Standardbibliothek traegt Vertrag, Hashes und
+   Publikation; NumPy bleibt in der Numerik. Eine gemeinsame Projektbibliothek
+   setzt erst drei nachweislich semantikgleiche Pipelines voraus. Die
+   Grundgleichungen und 41 wissenschaftlichen Runner-Symbole bleiben
+   eingefroren. Kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.

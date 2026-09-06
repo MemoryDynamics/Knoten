@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-05.
+Stand: 2026-09-06.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -73,6 +73,19 @@ Manifest und Audit nicht. Damit ist auch dieser Lauf `p5d-inconclusive`, die
 Readiness-Abdeckung falsifiziert und die Einmalfreigabe verbraucht. P5 bleibt
 geschlossen.
 
+Das danach getrennt geschriebene Produktionspfad-Protokoll wurde in einem
+ersten Review wegen sechs Spezifikationsluecken abgelehnt, anschliessend
+amendiert und im separaten Suffizienzreview als
+`p5d-production-preflight-protocol-sufficient-target-closed` bewertet. Die
+Amendierung friert neben drei wissenschaftlichen Quell-Blobs 41
+wissenschaftliche Runner-Symbole per AST-Digest ein und oeffnet nur
+target-gesperrte Fehltests sowie eine minimale P5-lokale Korrektur an der
+vorhandenen Record-Grenze. Python-Standardbibliothek traegt den Datenvertrag;
+NumPy-Skalare duerfen die numerische Schicht nicht ungeprueft verlassen. Eine
+gemeinsame Projektbibliothek bleibt bis zu einem dokumentierten
+Drei-Pipelines-Semantikvergleich gesperrt. Das ist Infrastruktur-Readiness,
+keine Interaktionsevidenz und keine Autorisierung fuer Versuch 4.
+
 ## Inferenz
 
 Die Kreisloesungen sind eine geeignete Basis, um center-konjugierte Ports und
@@ -98,12 +111,12 @@ negatives Interaktionsergebnis.
 
 ## Quellen
 
-- [Implementierte Gleichungen](../reference/implemented_equations.md)
-- [Native Rotating Waves](../reference/rotating_wave_foundation.md)
-- [Kanonisches Modellvokabular](../reference/model_vocabulary.md)
-- [P5-D Code-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_code_review_2026-09-02.md)
-- [P5-D Runner-Remediation-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_runner_remediation_protocol_2026-09-03.md)
+- Modellreferenz: [Gleichungen](../reference/implemented_equations.md),
+  [Rotating Waves](../reference/rotating_wave_foundation.md) und
+  [Vokabular](../reference/model_vocabulary.md)
 - [P5-D v2-Ergebnisvertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json)
-- [P5-D Implementierungs-Readiness](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md)
 - [P5-D Versuch-3-Incident](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_attempt3_numpy_float_schema_failure_2026-09-05.md)
+- [P5-D Produktionspfad-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
+- [Negatives Protokollreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_review_2026-09-06.md)
+- [P5-D Protokoll-Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
 - [Claim-Register](paper_claims.md)
