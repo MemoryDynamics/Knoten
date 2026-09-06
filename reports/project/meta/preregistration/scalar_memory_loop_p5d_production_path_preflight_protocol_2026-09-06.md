@@ -2,7 +2,14 @@
 
 Date: 2026-09-06.
 
-Status: **prospectively frozen, target-free, implementation closed**.
+Status: **prospectively amended after protocol review, target-free,
+implementation closed**.
+
+The amendment closes P5-PF01--P5-PF06 from the separately committed review at
+revision `ed8313bec76de0c5c68ea8dae32fa8e469dc58ba`, review blob
+`501aeffbc60b39c7a95c90c66066217ec2807b0b`. Its CI run
+[34058955186](https://github.com/MemoryDynamics/Knoten/actions/runs/34058955186)
+succeeded before this amendment. No production code or target was touched.
 
 This protocol responds to the attempt-3 incident. It authorizes no code
 change and no fourth target invocation. Its first purpose is to define what a
@@ -30,6 +37,33 @@ The protected scientific implementation remains unchanged:
 | `src/emergenz_knoten/mutual_center_coupling.py` | `86a064692b33514a536b93877d4d5dcf33894c64` |
 | `src/emergenz_knoten/orbit_center_actuator.py` | `63d31bc47291f76c65a5633f14436ccd2105fe9a` |
 | `src/emergenz_knoten/rotating_wave_stability.py` | `9defb5a6876371202e1ba57cea030c997b9c6edd` |
+
+Because scientific and infrastructure code coexist in the P5 runner, the
+freeze additionally registers a standard-library AST fingerprint. Parse the
+frozen runner with `ast.parse`, select the following 41 top-level assignments,
+class and functions in source order, serialize each node using
+`ast.dump(annotate_fields=True, include_attributes=False)`, join them with one
+line feed and hash the UTF-8 bytes with SHA-256:
+
+```text
+CANDIDATE_ID RADIUS_DECIMAL THETA_DECIMAL CANDIDATE
+EXPECTED_WRITE_GAIN EXPECTED_MOBILITY PHASES DISTANCE_FRACTIONS
+CHIRALITY_PAIRS KAPPAS KAPPA_VALUES SIGNS P5DThresholds THRESHOLDS
+_pair _complex expected_base_keys expected_active_keys reflection_key
+swap_half_turn_key swap_direction _base_key _active_key panel_registration
+_all_finite _history_sha256 _trace_map _response_trace response_controls
+_aggregate_response_gates _inside _trace_rms decision_from_gates
+classify_panel _initial_pair _sample_loop _phase_metrics
+_step_ledger_metrics _run_arm _high_precision_reference
+_run_registered_panel
+```
+
+The registered digest is
+`8145b57410a87ab8dae4e5112a81db8b538f3ddf5fc66261cd6c453f654b47ac`.
+Missing, duplicated, unknown or changed registered symbols fail. The
+attribute-free AST permits comments and formatting changes but preserves
+literals, operators, call targets and control flow. In particular `_run_arm`
+and `_run_registered_panel` may not change during this remediation.
 
 Candidate, histories, equations, panel membership and ordering, coupling
 strengths, thresholds, reducers and classification precedence are frozen.
@@ -95,6 +129,18 @@ native Python `float`, `int` or `bool` when it crosses into a result record.
 After that boundary, NumPy scalars and zero-dimensional arrays are contract
 violations.
 
+Validation order is exact. A schema primitive first checks built-in type
+identity: `type(value) is float`, `type(value) is int` or
+`type(value) is bool` according to its registered branch. Boolean is never an
+integer or number. Only a value already proven to be a native float reaches
+`math.isfinite`.
+
+Every deliberate NumPy-floating to Python-float conversion must preserve the
+represented binary64 value. Tests compare `struct.pack(">d", source_as_f64)`
+with `struct.pack(">d", converted)`. Signed zero additionally uses
+`math.copysign`; float32 widening is compared with the exact binary64 value of
+the already rounded float32 source.
+
 The serializer may not silently coerce an unsupported object through a
 `default=` callback. The original record must validate before encoding; the
 decoded JSON record must validate again after a strict round trip.
@@ -140,6 +186,13 @@ after all of the following hold:
 Until then, extending the project library would freeze an unproven abstraction
 and is forbidden.
 
+The number three is a conservative review trigger, not proof of equivalence.
+A promotion proposal must name the candidate pipelines and compare accepted
+types, non-finite handling, `null`, overwrite policy, schema strictness,
+auditor independence and backward compatibility in one evidence table. If
+three identical rows cannot be established, P5 stays local and the narrow
+remediation is not blocked.
+
 ## 4. Exact defect and permitted future correction
 
 The attempt-3 defect is outcome-independent. In a Channel-off arm,
@@ -150,12 +203,14 @@ of native zero rival maxima by that NumPy scalar produces six finite
 A future implementation protocol may permit only these infrastructure
 changes:
 
-- pure claim-scoped record constructors with explicit native primitive
-  outputs;
+- a pure claim-scoped publishable-record constructor at the existing
+  `_strip_internal` boundary, with explicit native primitive outputs for the
+  complete nested arm;
 - an explicit native finite energy-scale constructor preserving the exact
   numerical value;
 - native primitive construction for every registered metric, gate and count;
-- validation of each completed arm record before it enters the panel;
+- validation of every publishable off/active arm returned by that boundary
+  before complete-payload construction;
 - validation of the original complete payload before `json.dumps`;
 - strict encoding without a NumPy-coercing `default=` callback;
 - the already required decoded-payload validation and manifest-last
@@ -181,9 +236,13 @@ without a registered trajectory:
    float32/float64, zero-dimensional arrays, signed zero, smallest normal and
    subnormal values, NaN, positive/negative infinity and unsupported objects
    each have a registered accept/reject outcome.
-4. **Exact arm-shape witnesses:** one Channel-off and one active record use the
-   same production record constructors, not hand-written dictionaries. The
-   off mobility minimum is only `null`; every active minimum is finite.
+4. **Exact arm-shape and wiring witnesses:** one Channel-off and one active
+   raw record pass through the actual `_strip_internal` boundary used by the
+   unchanged live `_run_registered_panel`; hand-written publishable
+   dictionaries are forbidden. Every nested trace, ledger, gate and summary
+   leaf is checked. A source-level AST assertion proves the frozen panel calls
+   this boundary for both returned lists. The off mobility minimum is only
+   `null`; every active minimum is finite.
 5. **Complete panel rehearsal:** 64+768 records created through those same
    constructors traverse original validation, strict encoding, round-trip
    validation, report rendering, manifest-last publication and the independent
@@ -192,8 +251,9 @@ without a registered trajectory:
    `mutual_center_step` and registered panel evaluation are trapped and remain
    at zero calls throughout every preflight test.
 7. **Mutation falsifiers:** reintroducing the NumPy energy floor at the record
-   boundary, a NumPy Boolean gate, a non-finite active metric, a stale output
-   or a serializer `default=` coercion makes the rehearsal fail.
+   boundary, bypassing `_strip_internal`, changing a scientific AST node, a
+   NumPy Boolean gate, a non-finite active metric, a stale output or a
+   serializer `default=` coercion makes the rehearsal fail.
 
 Synthetic witnesses test representation and control flow only. They are not
 P5-D data and may not be described as interaction evidence.
@@ -201,10 +261,18 @@ P5-D data and may not be described as interaction evidence.
 ## 6. Early failure and publication boundary
 
 A future authorized runner must execute a pure, target-free record canary
-before creating its one-shot receipt. After receipt creation, each real arm
-must be schema-validated immediately when its record is completed. This does
-not prevent all runtime failures, but it prevents a known record defect from
-remaining hidden until all 832 arms have run.
+before creating its one-shot receipt. The canary passes a nested raw off and
+active witness through the actual publishable-record boundary and complete
+schema without calling initialization or dynamics.
+
+The scientific AST freeze deliberately keeps `_run_arm` and
+`_run_registered_panel` byte-semantically unchanged. Therefore real arm
+records are validated at the existing `_strip_internal` return boundary,
+after the registered panel has run but before payload construction. Moving
+validation inside the scientific loops would require a separate scientific
+protocol amendment. The pre-receipt canary, exact wiring proof and mutation
+tests are the outcome-blind controls against another known producer defect;
+they are not a guarantee against every runtime failure.
 
 No per-arm scientific record, partial decision or opaque checkpoint may be
 persisted before the registered publication manifest. A validation failure
@@ -221,6 +289,14 @@ The independent auditor still reads the manifest first.
 6. commit, push and require green implementation CI;
 7. conduct a separate readiness review over exact blobs and mutation results.
 
+Future closed governance and readiness records must bind the amended protocol
+blob, this negative-review blob, attempt-3 incident and receipt blobs, the
+scientific AST symbol set and digest, runner, independent auditor, v2 schema
+and every new preflight test. Any later authorization-only commit must
+preserve those bindings and would require a fresh attempt-4 UUID plus an
+exclusive attempt-4 receipt path defined by a separate governance amendment.
+This paragraph does not authorize either artifact.
+
 Even a positive readiness review leaves P5-D closed. Attempt 4 would require
 a later governance-only authorization commit and a new explicit user decision.
 
@@ -228,11 +304,12 @@ a later governance-only authorization commit and a new explicit user decision.
 
 The work stops with no target authorization if any of the following occurs:
 
-- a scientific blob or frozen estimand changes;
+- a scientific blob, frozen estimand, registered AST symbol or digest changes;
 - the preflight cannot catch the attempt-3 producer path without target data;
-- unsupported values are silently coerced at serialization;
-- runner and auditor lose independent claim-level validation;
-- a proposed shared library lacks three semantically identical consumers;
+- the live publishable panel can bypass its registered record boundary;
+- unsupported values are silently coerced or runner and auditor lose
+  independent claim-level validation;
+- a proposed shared library lacks a three-consumer semantic evidence table;
 - any test evaluates a registered arm or writes a registered result path;
 - exact numerical equality across the producer boundary is not demonstrated.
 
