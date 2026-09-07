@@ -62,14 +62,16 @@ autorisieren keinen weiteren P5-Ziellauf.
    wurde nach negativem Erstreview amendiert und im separaten
    [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
    als `p5d-production-preflight-protocol-sufficient-target-closed` bewertet.
-   Naechster Schritt sind ausschliesslich zunaechst fehlschlagende,
-   target-gesperrte Produktionspfadtests und danach die kleinste P5-lokale
-   Typgrenzenkorrektur. Python-Standardbibliothek traegt Vertrag, Hashes und
-   Publikation; NumPy bleibt in der Numerik. Eine gemeinsame Projektbibliothek
-   setzt erst drei nachweislich semantikgleiche Pipelines voraus. Die
-   Grundgleichungen und 41 wissenschaftlichen Runner-Symbole bleiben
-   eingefroren. Nach der Infrastrukturkorrektur folgt vor jeder neuen
-   Zielautorisierung das im
+   Die zunaechst roten, target-gesperrten Tests und die kleinste P5-lokale
+   Typgrenzenkorrektur sind implementiert; das separate
+   [Readinessreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
+   endet nach 945 lokalen Tests und gruener Implementierungs-CI mit
+   `p5d-production-boundary-ready-target-closed-horizon-transfer-required`.
+   Python-Standardbibliothek traegt Vertrag, Hashes und Publikation; NumPy
+   bleibt in der Numerik. Eine gemeinsame Projektbibliothek setzt erst drei
+   nachweislich semantikgleiche Pipelines voraus. Die Grundgleichungen und 41
+   wissenschaftlichen Runner-Symbole blieben eingefroren. Naechster Schritt
+   ist ein separates prospektives Protokoll fuer das im
    [Finite-H-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
    geforderte Horizont-Transfergate: Der FIFO erzwingt keinen Kreis, aber die
    bisherige $H\alpha=12$-Leiter beweist auch keinen festen-$\alpha$-Grenzwert

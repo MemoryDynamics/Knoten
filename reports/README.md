@@ -708,7 +708,7 @@ eingesetzten Transportgesetze.
 - [P3.8 Physik-/Code-Review 2026-08-12](project/meta/reviews/p38_rigorous_review_2026-08-12.md)
 - [Finite-H Non-Tautology-/Horizont-Audit 2026-09-07](project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
 - [P5-D Produktionspfad-Protokoll 2026-09-06](project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
-- [P5-D Produktionspfad-Suffizienzreview 2026-09-06](project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
+- [P5-D Produktionsgrenzen-Readinessreview 2026-09-07](project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
 
 ## Historische Bereiche
 

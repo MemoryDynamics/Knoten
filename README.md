@@ -19,11 +19,12 @@ Stand: 2026-09-07.
   `referee-source-ready-with-major-claim-restrictions`.
 - P5-D bleibt nach drei an der finalen Ergebnisstrecke gescheiterten
   Zielaufrufen `p5d-inconclusive`. Versuch 3 verbrauchte seine Einmalfreigabe
-  und falsifizierte erneut die targetfreie Readiness-Abdeckung. Ein neues
-  Produktionspfad-Protokoll ist targetfrei als hinreichend reviewed; es
-  erlaubt nur Fehltests und eine minimale Infrastrukturkorrektur. Ein neuer
-  Audit trennt den nichttautologischen finite-$H$-Kreis von dem noch offenen
-  Horizonttransfer. Weitere Zielausfuehrungen sind geschlossen.
+  und falsifizierte die damalige targetfreie Readiness-Abdeckung. Die danach
+  neu protokollierte Produktionsgrenze ist nach 945 lokalen Tests und gruener
+  CI targetfrei repariert und reviewed; sie ist keine Interaktionsevidenz.
+  Ein separater Audit trennt den nichttautologischen finite-$H$-Kreis vom
+  offenen Horizonttransfer. Dieser Transfer ist die naechste P5-Huerde;
+  weitere Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

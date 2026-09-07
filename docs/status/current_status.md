@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive` nach drei nicht auswertbaren Zielaufrufen | keine Interaktionsevidenz; Versuch 3 falsifiziert die erneute Readiness-Abdeckung |
+| P5-D | `p5d-inconclusive`; neue Produktionsgrenze targetfrei ready | keine Interaktionsevidenz; Horizonttransfer und neue Zielautorisierung bleiben offen |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -91,8 +91,18 @@ target-gesperrte Fehltests sowie eine minimale P5-lokale Korrektur an der
 vorhandenen Record-Grenze. Python-Standardbibliothek traegt den Datenvertrag;
 NumPy-Skalare duerfen die numerische Schicht nicht ungeprueft verlassen. Eine
 gemeinsame Projektbibliothek bleibt bis zu einem dokumentierten
-Drei-Pipelines-Semantikvergleich gesperrt. Das ist Infrastruktur-Readiness,
-keine Interaktionsevidenz und keine Autorisierung fuer Versuch 4.
+Drei-Pipelines-Semantikvergleich gesperrt.
+
+Diese Korrektur ist nun targetfrei abgeschlossen. Der echte Rueckgabepfad
+konvertiert nur registrierte NumPy-Skalare werttreu in native Recordtypen und
+validiert jeden vollstaendigen Off-/Aktivarm sofort gegen das v2-Schema. Der
+reproduzierte Versuch-3-Nullquotient, ein adversariales Typenfeld, ein
+synthetisches 64+768-Vollpanel, Publikation und unabhaengiger Auditor sind
+gruen; ebenso 945 lokale Tests und CI fuer den exakten Implementierungscommit.
+Das neue Review endet mit
+`p5d-production-boundary-ready-target-closed-horizon-transfer-required`.
+Das ist Infrastruktur-Readiness, keine Interaktionsevidenz und keine
+Autorisierung fuer Versuch 4.
 
 ## Inferenz
 
@@ -128,6 +138,7 @@ negatives Interaktionsergebnis.
 - P5-D Protokollreviews:
   [negatives Erstreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_review_2026-09-06.md)
   und
-  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
+  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md), danach das
+  [Produktionsgrenzen-Readinessreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
 - [Finite-H Non-Tautology-/Horizont-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
 - [Claim-Register](paper_claims.md)
