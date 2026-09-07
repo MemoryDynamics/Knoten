@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-06.
+Stand: 2026-09-07.
 
 Dies ist die einzige aktive Prioritaetenliste des Repositorys. Statusseiten,
 README und Reports duerfen Befunde oder Blocker nennen, aber keine zweite
@@ -68,7 +68,12 @@ autorisieren keinen weiteren P5-Ziellauf.
    Publikation; NumPy bleibt in der Numerik. Eine gemeinsame Projektbibliothek
    setzt erst drei nachweislich semantikgleiche Pipelines voraus. Die
    Grundgleichungen und 41 wissenschaftlichen Runner-Symbole bleiben
-   eingefroren. Kein Versuch 4.
+   eingefroren. Nach der Infrastrukturkorrektur folgt vor jeder neuen
+   Zielautorisierung das im
+   [Finite-H-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
+   geforderte Horizont-Transfergate: Der FIFO erzwingt keinen Kreis, aber die
+   bisherige $H\alpha=12$-Leiter beweist auch keinen festen-$\alpha$-Grenzwert
+   $H\to\infty$. Kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.

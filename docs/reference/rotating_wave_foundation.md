@@ -1,6 +1,6 @@
 # Native Rotating Waves: Gleichungen, Evidenz und Grenzen
 
-Stand: 2026-08-22.
+Stand: 2026-09-07.
 
 Diese Seite ist die kanonische Frontdoor fuer den positiven raeumlichen
 Schleifenast des unveraenderten skalaren K0-H-Modells. Das kritische
@@ -16,6 +16,38 @@ Reviewergebnis lautet:
 Der Name *Schleife* ist hier praeziser als *Knoten*: Das nachgewiesene Objekt
 ist eine kreisfoermige raeumliche relative Gleichgewichtsbahn. Es ist weder
 eine topologische Verknotung noch bereits ein materielles Teilchen.
+
+## Warum H keinen Kreis einbaut
+
+Die Paper-I-Memoryrekursion vergisst mit $q=1-\alpha$ und besitzt formal eine
+unendliche exponentielle Altersspur. $H$ ist die endliche Trunkierung dieser
+Spur: Die ersten $H$ Altersklassen werden explizit gehalten, die aelteren
+Gewichte mit Gesamtmasse $M_0q^H$ werden verworfen. $H$ ist damit eine
+Backend- bzw. Versuchsdesigngroesse, kein aus der Dynamik abgeleitetes Feld.
+
+Der sogenannte Ringspeicher bezeichnet nur die zyklische Adressierung eines
+FIFO. Logisch wird
+
+\[
+(x_n,x_{n-1},\ldots,x_{n-H+1})
+\mapsto
+(x_{n+1},x_n,\ldots,x_{n-H+2});
+\]
+
+der aelteste Punkt faellt heraus und wird nicht an den juengsten gekoppelt.
+Diese Datenstruktur erzwingt daher keine raeumliche Kreisgeometrie. Dass die
+zwei radialen und tangentialen Balancen gleichzeitig verschwinden, bleibt
+eine nichttriviale Eigenschaft des Kernel-Memory-Updates.
+
+Bei $H\alpha=12$ liegt die verworfene Masse in den registrierten Zellen nahe
+$6\times10^{-6}M_0$. Das macht die Trunkierung kontrollierbar, beweist aber
+noch keinen Root- oder Stabilitaetstransfer nach $H\to\infty$. Die vorhandene
+Leiter haelt $H\alpha$ fest und prueft diesen anderen Grenzuebergang nicht.
+Der getrennte
+[Finite-H-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
+registriert deshalb den Befund
+`finite-h-loop-nontautological-horizon-transfer-open` und formuliert das
+noetige Falsifikationsgate.
 
 ## 1. Ausgangsgleichung ohne Oszillatorpostulat
 

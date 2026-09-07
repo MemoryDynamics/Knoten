@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-06.
+Stand: 2026-09-07.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -38,6 +38,14 @@ dieselbe ambiente $SO(2)$-Gruppenbahn, und weitere entfernte Roots sind nicht
 ausgeschlossen. P5 darf deshalb einen fest registrierten Kreis als Input
 verwenden, aber nicht behaupten, die Parameter erzeugten global nur einen
 Kreis.
+
+Der FIFO ist dabei nur eine endliche Alterswarteschlange und schreibt keine
+raeumliche Ringtopologie vor. Krawczyk-Balancen, der kollabierende
+$\eta=0$-Arm und zehn anziehende nichtkreisfoermige P3-Historien widerlegen
+die enge Ringspeicher-Tautologie. Offen bleibt der staerkere Transfer: Die
+registrierte Leiter haelt $H\alpha=12$ fest und zeigt nicht, dass Root und
+Stabilitaet bei festem $\alpha$ den Grenzfall $H\to\infty$ erreichen. Deshalb
+steht vor einer neuen P5-Zielautorisierung ein separates Horizontgate.
 
 ## P5-D Code-Review und Remediation
 
@@ -117,6 +125,9 @@ negatives Interaktionsergebnis.
 - [P5-D v2-Ergebnisvertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/experiments/current/dynamics/rotation/scalar_memory_loop_p5d_result_schema_v2.json)
 - [P5-D Versuch-3-Incident](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_attempt3_numpy_float_schema_failure_2026-09-05.md)
 - [P5-D Produktionspfad-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
-- [Negatives Protokollreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_review_2026-09-06.md)
-- [P5-D Protokoll-Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
+- P5-D Protokollreviews:
+  [negatives Erstreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_review_2026-09-06.md)
+  und
+  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md)
+- [Finite-H Non-Tautology-/Horizont-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
 - [Claim-Register](paper_claims.md)

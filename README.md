@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-06.
+Stand: 2026-09-07.
 
 ## Wissenschaftlicher Stand
 
@@ -21,8 +21,9 @@ Stand: 2026-09-06.
   Zielaufrufen `p5d-inconclusive`. Versuch 3 verbrauchte seine Einmalfreigabe
   und falsifizierte erneut die targetfreie Readiness-Abdeckung. Ein neues
   Produktionspfad-Protokoll ist targetfrei als hinreichend reviewed; es
-  erlaubt nur Fehltests und eine minimale Infrastrukturkorrektur. Weitere
-  Zielausfuehrungen sind geschlossen.
+  erlaubt nur Fehltests und eine minimale Infrastrukturkorrektur. Ein neuer
+  Audit trennt den nichttautologischen finite-$H$-Kreis von dem noch offenen
+  Horizonttransfer. Weitere Zielausfuehrungen sind geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

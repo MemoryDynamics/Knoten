@@ -1,6 +1,6 @@
 # Implementierte Gleichungen
 
-Stand: 2026-09-02. Gepruefte Produktionscode-Linie bis Commit `2fbdf08`.
+Stand: 2026-09-07. Gepruefte Produktionscode-Linie bis Commit `2fbdf08`.
 
 Diese Rueckwaertsspezifikation beginnt beim ausgefuehrten Code und schreibt
 ihn in lesbarer Mathematik aus. Sie ist keine neue Modellannahme. Wo eine
@@ -24,6 +24,14 @@ $$
 wobei $0<\alpha<1$ die Vergessensrate, $H$ die gespeicherte Tiefe und $M_0$
 `memory_mass` ist. $N$ bezeichnet dagegen die Zahl ausgefuehrter Updates und
 ist keine Massenskala.
+
+Die untrunkierte Paper-I-Rekursion besitzt formal alle Altersklassen
+$j\ge0$. Der finite FIFO verwirft $j\ge H$ mit der exakten stationaeren
+Restmasse $M_0q^H$. Eine zyklische Arrayadressierung aendert nur den
+Speicherzugriff: Der aelteste Slot wird verworfen und nicht an den juengsten
+gekoppelt. $H$ fuehrt daher keine raeumliche Ringtopologie ein; es bleibt aber
+eine Backend- bzw. Versuchsdesigngroesse, deren $H\to\infty$-Transfer fuer
+breite Mainline-Claims separat zu pruefen ist.
 
 Mit
 
