@@ -7,6 +7,7 @@ import inspect
 import json
 import math
 from pathlib import Path
+import struct
 
 import numpy as np
 import pytest
@@ -17,6 +18,266 @@ from emergenz_knoten.rotating_wave_stability_gate import RotatingWaveCandidate
 from experiments.current.dynamics.rotation import (
     scalar_memory_loop_p5d_mutual_center_gate as p5d,
 )
+
+
+SCIENTIFIC_SYMBOLS = (
+    "CANDIDATE_ID",
+    "RADIUS_DECIMAL",
+    "THETA_DECIMAL",
+    "CANDIDATE",
+    "EXPECTED_WRITE_GAIN",
+    "EXPECTED_MOBILITY",
+    "PHASES",
+    "DISTANCE_FRACTIONS",
+    "CHIRALITY_PAIRS",
+    "KAPPAS",
+    "KAPPA_VALUES",
+    "SIGNS",
+    "P5DThresholds",
+    "THRESHOLDS",
+    "_pair",
+    "_complex",
+    "expected_base_keys",
+    "expected_active_keys",
+    "reflection_key",
+    "swap_half_turn_key",
+    "swap_direction",
+    "_base_key",
+    "_active_key",
+    "panel_registration",
+    "_all_finite",
+    "_history_sha256",
+    "_trace_map",
+    "_response_trace",
+    "response_controls",
+    "_aggregate_response_gates",
+    "_inside",
+    "_trace_rms",
+    "decision_from_gates",
+    "classify_panel",
+    "_initial_pair",
+    "_sample_loop",
+    "_phase_metrics",
+    "_step_ledger_metrics",
+    "_run_arm",
+    "_high_precision_reference",
+    "_run_registered_panel",
+)
+SCIENTIFIC_AST_SHA256 = (
+    "8145b57410a87ab8dae4e5112a81db8b538f3ddf5fc66261cd6c453f654b47ac"
+)
+
+
+def _defined_names(node: ast.AST) -> tuple[str, ...]:
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        return (node.name,)
+    if isinstance(node, ast.Assign):
+        return tuple(target.id for target in node.targets if isinstance(target, ast.Name))
+    if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+        return (node.target.id,)
+    return ()
+
+
+def _scientific_ast_digest(source: str) -> tuple[str, dict[str, int]]:
+    tree = ast.parse(source)
+    counts = {name: 0 for name in SCIENTIFIC_SYMBOLS}
+    selected = []
+    for node in tree.body:
+        names = set(_defined_names(node)) & set(SCIENTIFIC_SYMBOLS)
+        if not names:
+            continue
+        for name in names:
+            counts[name] += 1
+        selected.append(node)
+    payload = "\n".join(
+        ast.dump(node, annotate_fields=True, include_attributes=False)
+        for node in selected
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest(), counts
+
+
+def _numpy_intermediates(value):
+    if type(value) is bool:
+        return np.bool_(value)
+    if type(value) is int:
+        return np.int64(value)
+    if type(value) is float:
+        return np.float64(value)
+    if type(value) is dict:
+        return {key: _numpy_intermediates(item) for key, item in value.items()}
+    if type(value) is list:
+        return [_numpy_intermediates(item) for item in value]
+    return value
+
+
+def test_p5d_preflight_scientific_ast_is_frozen() -> None:
+    source = Path(p5d.__file__).read_text(encoding="utf-8")
+    digest, counts = _scientific_ast_digest(source)
+    assert set(counts) == set(SCIENTIFIC_SYMBOLS)
+    assert all(count == 1 for count in counts.values())
+    assert digest == SCIENTIFIC_AST_SHA256
+    mutated = source.replace(
+        "DISTANCE_FRACTIONS = (3, 6)",
+        "DISTANCE_FRACTIONS = (3, 7)",
+        1,
+    )
+    assert _scientific_ast_digest(mutated)[0] != SCIENTIFIC_AST_SHA256
+
+
+def test_p5d_preflight_registered_panel_uses_both_record_boundaries() -> None:
+    source = inspect.getsource(p5d._run_registered_panel)
+
+    def boundary_calls(text: str) -> int:
+        return sum(
+            1
+            for node in ast.walk(ast.parse(text))
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "_strip_internal"
+        )
+
+    assert boundary_calls(source) == 2
+    bypassed = source.replace("_strip_internal(row)", "row")
+    assert boundary_calls(bypassed) == 0
+
+
+def test_p5d_preflight_record_boundary_preserves_binary_values() -> None:
+    smallest_subnormal = np.nextafter(np.float64(0.0), np.float64(1.0))
+    sources = (
+        np.float64(-0.0),
+        smallest_subnormal,
+        np.float64(np.finfo(np.float64).tiny),
+        np.float32(0.1),
+        np.float64(1.0 / 3.0),
+    )
+    published = p5d._strip_internal(
+        {
+            "boolean": np.bool_(True),
+            "integer": np.int64(-7),
+            "values": list(sources),
+            "_internal": np.float64(99.0),
+        }
+    )
+    assert set(published) == {"boolean", "integer", "values"}
+    assert type(published["boolean"]) is bool
+    assert type(published["integer"]) is int
+    assert all(type(value) is float for value in published["values"])
+    for source, converted in zip(sources, published["values"], strict=True):
+        assert struct.pack(">d", float(source)) == struct.pack(">d", converted)
+    assert math.copysign(1.0, published["values"][0]) == -1.0
+
+
+@pytest.mark.parametrize(
+    "value",
+    (
+        np.asarray(0.0),
+        np.asarray([0.0]),
+        np.float64(np.nan),
+        np.float64(np.inf),
+        np.float64(-np.inf),
+        np.complex128(1.0 + 2.0j),
+        object(),
+    ),
+)
+def test_p5d_preflight_record_boundary_rejects_unsupported_values(value) -> None:
+    with pytest.raises((TypeError, ValueError), match="publishable P5-D record"):
+        p5d._strip_internal({"value": value})
+
+
+def test_p5d_preflight_incident_path_fails_if_boundary_is_bypassed(
+    synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
+) -> None:
+    contract = p5d._load_result_schema()
+    incident_value = 0.0 / np.finfo(float).tiny
+    assert type(incident_value) is np.float64
+    raw = copy.deepcopy(synthetic_panel[0][0])
+    raw["ledger_rival_fractions"]["flipped_force_a"] = incident_value
+    with pytest.raises(TypeError, match="flipped_force_a"):
+        p5d._validate_schema_value(
+            raw,
+            "object:off_arm",
+            path="$.off[0]",
+            contract=contract,
+        )
+    published = p5d._strip_internal(raw)
+    p5d._validate_schema_value(
+        published,
+        "object:off_arm",
+        path="$.off[0]",
+        contract=contract,
+    )
+    converted = published["ledger_rival_fractions"]["flipped_force_a"]
+    assert type(converted) is float
+    assert struct.pack(">d", converted) == struct.pack(">d", 0.0)
+
+
+def test_p5d_preflight_serializer_has_no_coercing_default() -> None:
+    tree = ast.parse(inspect.getsource(p5d._serialize_payload))
+    defaults = [
+        keyword
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        for keyword in node.keywords
+        if keyword.arg == "default"
+    ]
+    assert defaults == []
+
+
+def test_p5d_preflight_original_payload_fails_before_json_encoding(
+    synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
+    monkeypatch,
+) -> None:
+    payload = _synthetic_v2_payload(synthetic_panel)
+    payload["panel"]["active_arms"][0]["coupling"] = np.float64(0.125)
+    calls = []
+
+    def forbidden_encoding(*args, **kwargs):
+        calls.append((args, kwargs))
+        raise AssertionError("JSON encoding preceded original-record validation")
+
+    monkeypatch.setattr(p5d.json, "dumps", forbidden_encoding)
+    with pytest.raises(TypeError, match=r"active_arms\[0\]\.coupling"):
+        p5d._serialize_payload(payload)
+    assert calls == []
+
+
+def test_p5d_preflight_canary_precedes_authorization(monkeypatch) -> None:
+    calls = []
+
+    class CanaryStop(RuntimeError):
+        pass
+
+    def stop_after_canary() -> None:
+        calls.append("canary")
+        raise CanaryStop
+
+    def forbidden_authorization():
+        calls.append("authorization")
+        raise AssertionError("authorization was reached before the canary")
+
+    monkeypatch.setattr(p5d, "_production_record_canary", stop_after_canary)
+    monkeypatch.setattr(p5d, "_verify_provenance", forbidden_authorization)
+    with pytest.raises(CanaryStop):
+        p5d.run_gate()
+    assert calls == ["canary"]
+
+
+def test_p5d_preflight_canary_is_target_free(monkeypatch) -> None:
+    calls = []
+
+    def forbidden(*args, **kwargs):
+        calls.append((args, kwargs))
+        raise AssertionError("P5-D target function reached by preflight")
+
+    for name in (
+        "target_history",
+        "native_fifo_step",
+        "mutual_center_step",
+        "_run_registered_panel",
+    ):
+        monkeypatch.setattr(p5d, name, forbidden)
+    p5d._production_record_canary()
+    assert calls == []
 
 
 def test_p5d_frozen_constants_panel_and_corrected_symmetry_maps() -> None:
@@ -425,7 +686,15 @@ def _synthetic_panel() -> tuple[list[dict[str, object]], list[dict[str, object]]
 
 @pytest.fixture(scope="module")
 def synthetic_panel() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
-    return _synthetic_panel()
+    off, active = _synthetic_panel()
+    raw_off = [_numpy_intermediates(row) for row in off]
+    raw_active = [_numpy_intermediates(row) for row in active]
+    for row in raw_off + raw_active:
+        row["_internal_preflight"] = np.float64(1.0)
+    return (
+        [p5d._strip_internal(row) for row in raw_off],
+        [p5d._strip_internal(row) for row in raw_active],
+    )
 
 
 def test_p5d_synthetic_complete_panel_passes_every_response_family(
@@ -452,7 +721,7 @@ def test_p5d_synthetic_complete_panel_passes_every_response_family(
     assert response["diagnostics"]["maximum_swap_rms_fraction"] < 1e-15
 
 
-def test_p5d_recovery_serializer_handles_full_panel_and_numpy_scalars(
+def test_p5d_record_boundary_handles_full_panel_and_numpy_scalars(
     synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
 ) -> None:
     off, active = synthetic_panel
@@ -466,7 +735,8 @@ def test_p5d_recovery_serializer_handles_full_panel_and_numpy_scalars(
         },
         "python_native": {"boolean": False, "integer": 11, "floating": 0.5},
     }
-    encoded = p5d._serialize_payload(payload)
+    published = p5d._strip_internal(payload)
+    encoded = p5d._serialize_payload(published)
     decoded = json.loads(encoded)
     assert decoded["numpy_scalars"] == {
         "boolean": True,

@@ -1,8 +1,8 @@
 """Execute the frozen deterministic P5-D mutual-center gate.
 
-Importing this module is target-free.  The registered panel can only be
-entered through :func:`run_gate`, whose first operation is the provenance and
-readiness guard.
+Importing this module is target-free. The registered panel can only be entered
+through :func:`run_gate`, which first runs a pure record canary and then the
+provenance and readiness guard.
 """
 
 from __future__ import annotations
@@ -1580,8 +1580,50 @@ def _high_precision_reference(
         }
 
 
+def _native_record_value(value: Any, *, path: str) -> Any:
+    """Cross the P5-D numerical/result boundary without changing values."""
+
+    if value is None or type(value) in {str, bool, int}:
+        return value
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise ValueError(f"{path}: non-finite publishable P5-D record value")
+        return value
+    if isinstance(value, np.bool_):
+        return bool(value)
+    if isinstance(value, np.integer):
+        return int(value)
+    if isinstance(value, np.floating):
+        converted = float(value)
+        if not math.isfinite(converted):
+            raise ValueError(f"{path}: non-finite publishable P5-D record value")
+        return converted
+    if type(value) is list:
+        return [
+            _native_record_value(item, path=f"{path}[{index}]")
+            for index, item in enumerate(value)
+        ]
+    if type(value) is dict:
+        converted = {}
+        for key, item in value.items():
+            if type(key) is not str:
+                raise TypeError(
+                    f"{path}: non-string publishable P5-D record key "
+                    f"{type(key).__name__}"
+                )
+            converted[key] = _native_record_value(item, path=f"{path}.{key}")
+        return converted
+    raise TypeError(
+        f"{path}: unsupported publishable P5-D record value "
+        f"{type(value).__name__}"
+    )
+
+
 def _strip_internal(row: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in row.items() if not key.startswith("_")}
+    publishable = {
+        key: value for key, value in row.items() if not key.startswith("_")
+    }
+    return _native_record_value(publishable, path="$arm")
 
 
 def _run_registered_panel() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -2047,20 +2089,6 @@ def _render_report(payload: dict[str, Any], json_sha256: str) -> str:
     return "\n".join(lines)
 
 
-def _json_default(value: Any) -> bool | int | float:
-    """Convert only frozen NumPy scalar families for standard JSON output."""
-
-    if isinstance(value, np.bool_):
-        return bool(value)
-    if isinstance(value, np.integer):
-        return int(value)
-    if isinstance(value, np.floating):
-        return float(value)
-    raise TypeError(
-        f"Object of type {value.__class__.__name__} is not JSON serializable"
-    )
-
-
 def _load_result_schema(path: Path | None = None) -> dict[str, Any]:
     source = ROOT / RESULT_SCHEMA if path is None else path
     try:
@@ -2222,22 +2250,89 @@ def _validate_v2_payload(
     _validate_schema_value(payload, schema["root"], path="$", contract=schema)
 
 
+def _schema_witness(specification: str, contract: dict[str, Any]) -> Any:
+    """Construct a target-free NumPy-intermediate witness for one schema node."""
+
+    if specification.startswith("nullable:"):
+        return None
+    if specification == "number":
+        return np.float64(0.0)
+    if specification == "integer":
+        return np.int64(0)
+    if specification == "boolean":
+        return np.bool_(True)
+    if specification == "string":
+        return "preflight"
+    if specification == "null":
+        return None
+    if specification == "sha1":
+        return "0" * 40
+    if specification == "sha256":
+        return "0" * 64
+    if specification == "uuid4":
+        return "00000000-0000-4000-8000-000000000000"
+    namespace, separator, name = specification.partition(":")
+    if not separator:
+        raise RuntimeError(f"unregistered P5-D schema witness: {specification}")
+    if namespace == "const":
+        return {"true": True, "false": False}.get(
+            name, contract["constants"].get(name)
+        )
+    if namespace == "enum":
+        return contract["enums"][name][0]
+    if namespace == "object":
+        return {
+            key: _schema_witness(child, contract)
+            for key, child in contract["objects"][name].items()
+        }
+    if namespace == "array":
+        rule = contract["arrays"][name]
+        if "items" in rule:
+            return [_schema_witness(child, contract) for child in rule["items"]]
+        length = int(rule.get("length", 1 if "maximum_length" in rule else 0))
+        return [_schema_witness(rule["item"], contract) for _ in range(length)]
+    if namespace == "exact_map":
+        rule = contract["exact_maps"][name]
+        return {
+            key: _schema_witness(rule["value"], contract)
+            for key in rule["allowed_keys"]
+        }
+    raise RuntimeError(f"unsupported P5-D schema witness namespace: {namespace}")
+
+
+def _production_record_canary() -> None:
+    """Exercise the exact arm boundary and schema without target evaluation."""
+
+    contract = _load_result_schema()
+    for object_name in ("off_arm", "active_arm"):
+        raw = _schema_witness(f"object:{object_name}", contract)
+        raw["_internal_preflight"] = np.float64(1.0)
+        publishable = _strip_internal(raw)
+        _validate_schema_value(
+            publishable,
+            f"object:{object_name}",
+            path=f"$canary.{object_name}",
+            contract=contract,
+        )
+
+
 def _serialize_payload(payload: dict[str, Any]) -> str:
     """Serialize the complete payload under the recovery freeze."""
 
+    contract = None
+    if payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v2":
+        contract = _load_result_schema()
+        _validate_v2_payload(payload, contract=contract)
     serialized = (
         json.dumps(
             payload,
             allow_nan=False,
-            default=_json_default,
             indent=2,
             sort_keys=True,
         )
         + "\n"
     )
-    if payload.get("schema") == "scalar-memory-loop-p5d-mutual-center-v2":
-        contract = _load_result_schema()
-        _validate_v2_payload(payload, contract=contract)
+    if contract is not None:
         decoded = json.loads(serialized)
         _validate_v2_payload(decoded, contract=contract)
     return serialized
@@ -2250,6 +2345,7 @@ def run_gate(
 ) -> dict[str, Any]:
     """Run the single registered panel after the sealed provenance guard."""
 
+    _production_record_canary()
     provenance = _verify_provenance()
     channel_off, active = _run_registered_panel()
     registration = panel_registration(
