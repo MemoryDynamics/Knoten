@@ -1623,7 +1623,22 @@ def _strip_internal(row: dict[str, Any]) -> dict[str, Any]:
     publishable = {
         key: value for key, value in row.items() if not key.startswith("_")
     }
-    return _native_record_value(publishable, path="$arm")
+    publishable = _native_record_value(publishable, path="$arm")
+    mode = publishable.get("mode")
+    if mode == "off":
+        specification = "object:off_arm"
+    elif mode in DIRECTIONS:
+        specification = "object:active_arm"
+    else:
+        raise TypeError(f"$arm.mode: unsupported publishable P5-D arm mode {mode!r}")
+    contract = _load_result_schema()
+    _validate_schema_value(
+        publishable,
+        specification,
+        path="$arm",
+        contract=contract,
+    )
+    return publishable
 
 
 def _run_registered_panel() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:

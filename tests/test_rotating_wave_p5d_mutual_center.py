@@ -141,7 +141,7 @@ def test_p5d_preflight_registered_panel_uses_both_record_boundaries() -> None:
     assert boundary_calls(bypassed) == 0
 
 
-def test_p5d_preflight_record_boundary_preserves_binary_values() -> None:
+def test_p5d_preflight_native_converter_preserves_binary_values() -> None:
     smallest_subnormal = np.nextafter(np.float64(0.0), np.float64(1.0))
     sources = (
         np.float64(-0.0),
@@ -150,13 +150,13 @@ def test_p5d_preflight_record_boundary_preserves_binary_values() -> None:
         np.float32(0.1),
         np.float64(1.0 / 3.0),
     )
-    published = p5d._strip_internal(
+    published = p5d._native_record_value(
         {
             "boolean": np.bool_(True),
             "integer": np.int64(-7),
             "values": list(sources),
-            "_internal": np.float64(99.0),
-        }
+        },
+        path="$test",
     )
     assert set(published) == {"boolean", "integer", "values"}
     assert type(published["boolean"]) is bool
@@ -179,9 +179,18 @@ def test_p5d_preflight_record_boundary_preserves_binary_values() -> None:
         object(),
     ),
 )
-def test_p5d_preflight_record_boundary_rejects_unsupported_values(value) -> None:
+def test_p5d_preflight_native_converter_rejects_unsupported_values(value) -> None:
     with pytest.raises((TypeError, ValueError), match="publishable P5-D record"):
-        p5d._strip_internal({"value": value})
+        p5d._native_record_value({"value": value}, path="$test")
+
+
+def test_p5d_preflight_record_boundary_rejects_invalid_arm(
+    synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
+) -> None:
+    invalid = copy.deepcopy(synthetic_panel[0][0])
+    invalid["completed"] = "yes"
+    with pytest.raises(TypeError, match=r"\$arm\.completed: expected Boolean"):
+        p5d._strip_internal(invalid)
 
 
 def test_p5d_preflight_incident_path_fails_if_boundary_is_bypassed(
@@ -721,7 +730,7 @@ def test_p5d_synthetic_complete_panel_passes_every_response_family(
     assert response["diagnostics"]["maximum_swap_rms_fraction"] < 1e-15
 
 
-def test_p5d_record_boundary_handles_full_panel_and_numpy_scalars(
+def test_p5d_native_converter_handles_full_panel_and_numpy_scalars(
     synthetic_panel: tuple[list[dict[str, object]], list[dict[str, object]]],
 ) -> None:
     off, active = synthetic_panel
@@ -735,7 +744,7 @@ def test_p5d_record_boundary_handles_full_panel_and_numpy_scalars(
         },
         "python_native": {"boolean": False, "integer": 11, "floating": 0.5},
     }
-    published = p5d._strip_internal(payload)
+    published = p5d._native_record_value(payload, path="$test")
     encoded = p5d._serialize_payload(published)
     decoded = json.loads(encoded)
     assert decoded["numpy_scalars"] == {
