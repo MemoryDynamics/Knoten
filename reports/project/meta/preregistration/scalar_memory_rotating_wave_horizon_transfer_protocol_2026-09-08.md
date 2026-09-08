@@ -2,9 +2,9 @@
 
 Datum: 2026-09-08.
 
-Status: **prospektiv amendiert nach negativem Protokollreview, vor
-Implementierung und vor jeder neuen Horizont-Trajektorie; P5-D-Target
-geschlossen**.
+Status: **prospektiv zum zweiten Mal amendiert nach negativem
+Runner-Vertragsreview, vor wissenschaftlichem Runnercode und vor jeder neuen
+Horizont-Trajektorie; P5-D-Target geschlossen**.
 
 Die Amendierung schliesst HT-P01--HT-P06 aus dem separat committed Review an
 Revision `c1ee529d969ebafed7a557e3db47eba95a38af17`, Reviewblob
@@ -12,6 +12,15 @@ Revision `c1ee529d969ebafed7a557e3db47eba95a38af17`, Reviewblob
 einem Suffizienzreview erfolgreich abgeschlossen sein. Kein numerischer
 Root, keine Horizonttrajektorie und kein P5-D-Target wurde fuer die
 Amendierung ausgewertet.
+
+Die zweite Amendierung schliesst ausschliesslich die Null- und
+Abbruchsemantik aus dem spaeteren Negativreview an Revision
+`adb5c2445a63265b96c28eee1c1cfd98a1f7017c`, Reviewblob
+`dfafe31604d24d36ce0fa8eecf7d2ceaa3902bb7`. Sie aendert keine Gleichung,
+keinen Parameter, keine numerische Schwelle, keine Gatepraezedenz und keinen
+registrierten Pfad. Auch fuer diese Amendierung wurde kein numerischer Root,
+keine Homotopie, kein Arnoldi-Panel und keine Horizonttrajektorie
+ausgewertet.
 
 Dieses Protokoll operationalisiert den Befund
 `finite-h-loop-nontautological-horizon-transfer-open`. Es darf erst nach
@@ -446,3 +455,56 @@ gewuenscht wird, ein wissenschaftlicher Inputblob driftet, der Auditor
 Runnerlogik importiert oder ein Ergebnis vor Manifestpublikation sichtbar
 wuerde. Weder ein positiver noch ein negativer Horizontbefund autorisiert
 automatisch P5-D-Versuch 4.
+
+## 8. Zweite Amendierung: ehrliche Null- und Abbruchsemantik
+
+Der konkrete Ergebnisvertrag muss neben einem vollstaendigen Pass jeden in
+den Abschnitten 3--7 registrierten fail-closed Pfad ohne erfundene Werte
+abbilden. Deshalb bleiben alle positionsgebundenen Arrays in ihrer festen
+Laenge erhalten, noch nicht oder nicht vollstaendig ausgewertete Slots sind
+jedoch exakt `null`.
+
+Es gelten folgende unveraenderliche Regeln:
+
+1. `root_panels` hat sieben Slots in der Reihenfolge der registrierten
+   Horizonte. Nach einem abhaengigen Leiterabbruch sind alle nicht mehr
+   zulaessig erreichbaren Slots `null`. Bereits unabhaengig vorhandene
+   Anchor-Evidenz darf nur als gebundener Input, nicht als neu berechnetes
+   Panel ausgegeben werden.
+2. `homotopies` hat sechs Slots in der registrierten Kantenreihenfolge. Eine
+   begonnene Homotopie hat 64 Scheibenslots. Ausgewertete Scheiben bilden ein
+   zusammenhaengendes nicht-null Praefix; nach der ersten fehlgeschlagenen
+   Scheibe sind alle spaeteren Slots `null`. Eine vollstaendige
+   `status=pass`-Homotopie besitzt genau 64 nicht-null Scheiben.
+3. Die beiden Driftzeilen und die zwei Tail-Zertifikatpanels behalten ihre
+   feste Slotzahl. Ein Slot ist `null`, wenn seine vorausgesetzten
+   Rootintervalle fehlen. Ein Drift- oder Tailpass ist dann unmoeglich.
+4. Jedes Arnoldi-Panel behaelt exakt 24 beziehungsweise 36 Eigenpaarslots.
+   Nicht zurueckgegebene Eigenpaare sind `null`; ein zurueckgegebener
+   Eigenwert ohne Vektor speichert das Eigenpaar mit `vector=null`. Nur
+   `status=complete` erlaubt ausschliesslich vollstaendige, endliche
+   Eigenpaare und kann G5 stuetzen. Nicht-null Eigenpaare muessen ein
+   zusammenhaengendes Praefix bilden.
+5. Die drei Stoerungsarme bleiben positionsgebunden; ein nicht gestarteter
+   Arm ist `null`. Jeder gestartete Arm und der exakte Arm behalten 501
+   Sampleslots fuer Schritte `0,10,...,5000`. Nach einem fruehen Stopp sind
+   alle Slots ausserhalb des berechneten Praefixes `null`; es duerfen keine
+   Werte fortgeschrieben oder erfunden werden. Ein `completed=true`-Arm
+   besitzt genau 501 nicht-null Samples und `stopped=false`.
+6. In jedem nullable Array bilden nicht-null Werte ein Praefix, ausser bei
+   den sieben Root- und sechs Homotopie-Slots: Dort darf die getrennte
+   Rueckwaertsbelastung unabhaengig von einem Vorwaertsabbruch ausgewertet
+   werden. Die erlaubten Slotabhaengigkeiten werden im Validator explizit
+   rekonstruiert; beliebige innere Null-Locher bleiben unzulaessig.
+7. Gatewerte muessen mit den vorhandenen und fehlenden Slots konsistent
+   sein. Ein fehlender vorausgesetzter Slot ergibt `inconclusive`, niemals
+   `pass` oder einen positiven Claim. Ein vollstaendiger numerischer
+   Ausschlussfalsifikator bleibt die einzige Grundlage fuer
+   `local_branch_excluded=true`.
+
+Vor wissenschaftlichem Runnercode muessen targetfreie Negativ-Witnesses
+mindestens einen Leiterabbruch, einen Homotopieabbruch, partielle
+Arnoldi-Ausgabe, fehlenden Arnoldi-Vektor und fruehen Trajektorienstopp
+validieren. Mutationen von `null` zu erfundenen Werten nach einem Stopp,
+innere Null-Locher und positive Gates trotz fehlender Voraussetzung muessen
+von Runner-Validator und unabhaengigem Auditor verworfen werden.
