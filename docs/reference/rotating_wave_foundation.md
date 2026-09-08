@@ -54,7 +54,13 @@ Erstreview und Amendierung endet das separate
 [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md)
 mit
 `rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`.
-Geoeffnet sind nur Ergebnisvertrag und zunaechst rote targetfreie Tests.
+Der danach getrennt committed RED-Vertrag wurde targetfrei implementiert und
+endet im
+[Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
+mit
+`rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
+Der wissenschaftliche Runner ist noch unvollstaendig; ein Horizontlauf ist
+nicht autorisiert.
 
 ## 1. Ausgangsgleichung ohne Oszillatorpostulat
 

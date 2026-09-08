@@ -55,7 +55,12 @@ $F_\infty$. Ein negatives Review fand sechs Luecken einschliesslich eines
 konstruktiv falschen binary64-Vergleichs; die Amendierung schliesst sie. Das
 Suffizienzurteil lautet
 `rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`.
-Nur Ergebnisvertrag und rote targetfreie Tests sind damit geoeffnet.
+Ergebnisvertrag und rote targetfreie Tests wurden danach getrennt committed;
+die kleinste Infrastruktur besteht 40 fokussierte und 985 gesamte Tests. Das
+Infrastruktururteil lautet
+`rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
+Newtonleiter, Krawczyk-Homotopie, Arnoldi- und Trajektorienrunner fehlen noch;
+ein Horizontlauf ist nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 
@@ -155,5 +160,8 @@ negatives Interaktionsergebnis.
   [amendiertes Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_transfer_protocol_2026-09-08.md),
   [negatives Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_review_2026-09-08.md)
   und
-  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md)
+  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md), danach
+  [RED-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_red_contract_review_2026-09-08.md)
+  und
+  [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
 - [Claim-Register](paper_claims.md)

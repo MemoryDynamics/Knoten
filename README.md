@@ -24,9 +24,11 @@ Stand: 2026-09-08.
   CI targetfrei repariert und reviewed; sie ist keine Interaktionsevidenz.
   Ein separater Audit trennt den nichttautologischen finite-$H$-Kreis vom
   offenen Horizonttransfer. Das Fixed-$\alpha$-Transferprotokoll ist nach
-  negativem Review amendiert und als hinreichend reviewed. Als naechstes sind
-  nur Ergebnisvertrag und rote targetfreie Tests offen; neue
-  Horizonttrajektorien und weitere P5-Zielausfuehrungen bleiben geschlossen.
+  negativem Review amendiert und als hinreichend reviewed. Ergebnisvertrag,
+  RED-Historie und targetfreie Infrastruktur sind inzwischen mit 985 Tests
+  und gruener CI geprueft. Der wissenschaftliche Horizont-Runner ist noch
+  unvollstaendig; Horizontlauf und weitere P5-Zielausfuehrungen bleiben
+  geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

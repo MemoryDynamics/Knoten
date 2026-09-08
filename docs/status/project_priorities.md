@@ -79,9 +79,14 @@ autorisieren keinen weiteren P5-Ziellauf.
    als `rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`
    bewertet. Der FIFO erzwingt keinen Kreis, aber die bisherige
    $H\alpha=12$-Leiter beweist auch keinen festen-$\alpha$-Grenzwert
-   $H\to\infty$. Naechster Schritt ist ausschliesslich der getrackte
-   Ergebnisvertrag plus zunaechst rote targetfreie Tests. Noch kein Runner,
-   keine Horizonttrajektorie und kein Versuch 4.
+   $H\to\infty$. Ergebnisvertrag und RED-Tests wurden vor der targetfreien
+   Implementierung committed. Das
+   [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
+   bindet 40 fokussierte, 985 gesamte Tests und gruene CI mit Verdict
+   `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
+   Naechster Schritt ist die targetfreie Implementierung der fehlenden
+   Newton-, Krawczyk-, Arnoldi- und Trajektorienpfade. Noch kein
+   Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
