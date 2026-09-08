@@ -2,8 +2,16 @@
 
 Datum: 2026-09-08.
 
-Status: **prospektiv vor Implementierung und vor jeder neuen
-Horizont-Trajektorie; P5-D-Target geschlossen**.
+Status: **prospektiv amendiert nach negativem Protokollreview, vor
+Implementierung und vor jeder neuen Horizont-Trajektorie; P5-D-Target
+geschlossen**.
+
+Die Amendierung schliesst HT-P01--HT-P06 aus dem separat committed Review an
+Revision `c1ee529d969ebafed7a557e3db47eba95a38af17`, Reviewblob
+`11b3f86320d976cb9d77f50d79cc69c5c48cd971`. Die zugehoerige CI muss vor
+einem Suffizienzreview erfolgreich abgeschlossen sein. Kein numerischer
+Root, keine Horizonttrajektorie und kein P5-D-Target wurde fuer die
+Amendierung ausgewertet.
 
 Dieses Protokoll operationalisiert den Befund
 `finite-h-loop-nontautological-horizon-transfer-open`. Es darf erst nach
@@ -151,16 +159,24 @@ und ihre inneren Einschlussintervalle muessen sich schneiden.
 Als Driftmetrik gilt
 
 $$
-d_{a,b}=\max\!\left(
-\frac{|R_b-R_a|}{R_{1200}},
-\frac{|\theta_b-\theta_a|}{\theta_{1200}}
-\right).
+d_{a,b}^{\rm up}=\max\!\left(
+\frac{\sup|I_R^{(b)}-I_R^{(a)}|}{R_\star},
+\frac{\sup|I_\theta^{(b)}-I_\theta^{(a)}|}{\theta_\star}
+\right),
 $$
 
-Fuer den Vorwaertspass sind
-$d_{2400,3600}\le10^{-8}$ und
-$d_{2400,3600}\le0.01d_{1800,2400}+10^{-14}$ erforderlich. Diese
-empirischen Driftgates ersetzen nicht das folgende Intervallargument.
+mit den festen positiven Normierungen
+$R_\star=0.946517504804225$ und
+$\theta_\star=0.015770381717135$. Alle Differenzen werden outward-rounded
+ueber die geschnittenen inneren 80-/120-dps-Rootintervalle ausgewertet.
+Mittelpunktwerte werden getrennt als Diagnostik gespeichert und entscheiden
+kein Gate. Fuer den Vorwaertspass sind
+$d_{2400,3600}^{\rm up}\le10^{-8}$ und
+$d_{2400,3600}^{\rm up}\le
+0.01d_{1800,2400}^{\rm up}+10^{-14}$ erforderlich. Eine Testmutation, die
+eine der beteiligten Intervallbreiten ueber die Grenze vergroessert, muss den
+Driftpass schliessen. Diese empirischen Driftgates ersetzen nicht das
+folgende Intervallargument.
 Jeder Mittelpunkt und jede Zertifikatsbox muss vollstaendig in der festen
 Domain $D$ aus Abschnitt 4 liegen; ein Verlassen von $D$ ist Branchdrift.
 
@@ -223,12 +239,44 @@ Root von $F_\infty$ und, bei streng innerem Krawczyk-Bild, genau ein Root in
 der registrierten Box zertifiziert. Die Aussage bleibt konditional auf den
 getrackten Intervallbackend.
 
-Die Werte $q^H$ werden fuer alle sieben Horizonte sowohl direkt als auch mit
-`exp(H*log1p(-alpha))` berechnet. Relative Abweichung muss unter `2e-15`
-liegen; fuer `H=3600` darf kein numerischer Unterlauf auftreten. Ein
-unabhaengiger Standardbibliothek-Auditor rekonstruiert Parameter, Tailbounds,
-Driftgates und Entscheidungen aus dem publizierten Rohrecord, ohne den
-Targetrunner oder dessen Intervallfunktionen zu importieren.
+Die Taildarstellung trennt drei Repraesentationen. Multipraezision und
+Intervalle verwenden exakt dezimal `q_dec=mp.mpf("0.99")`. Der
+Produktionspfad speichert explizit `alpha64=float("0.01")` und
+`q64=1.0-alpha64`. Fuer alle sieben Horizonte werden `q64**H` und
+`exp(H*log(q64))` verglichen; ihre Differenz darf hoechstens zwei ULP des
+direkten Ergebnisses betragen. `exp(H*log1p(-alpha64))` wird nur als
+Repraesentationsdiagnostik gespeichert. Seine Differenz zur direkten Potenz
+ist kein Physik- oder Validitaetsgate. Die exakte Dezimalpotenz, beide
+binary64-Pfade und ihre Abweichungen werden vollstaendig protokolliert; fuer
+`H=3600` darf keiner der Pfade unterlaufen oder nichtendlich werden.
+
+Ein getrackter, fail-closed Ergebnisvertrag registriert jeden Root-,
+Homotopie-, Tail-, Arnoldi-, Trajektorien-, Kontroll- und Publikationswert
+mit exaktem nativen Typ, Kardinalitaet und `null`-Semantik. Der unabhaengige
+Standardbibliothek-Auditor liest das Manifest zuerst, prueft alle
+Dateihashes, Schemafelder, Kardinalitaeten und Endlichkeiten und rekonstruiert
+Parameter, alle drei $q$-Repraesentationen, Tailbounds,
+Intervall-Driftobergrenzen
+und Entscheidungsrangfolge ohne Import des Runners.
+
+Der Vertrag besitzt exakt sieben Rootobjekte: `identity` fuer
+Schema/Version/Zeit/Revision/Protokoll/Provenienz/Parameter,
+`finite_branch` fuer Horizonte/Rootpanels/Homotopien/Drift/Lower-tail/Replay,
+`infinite_tail` fuer Konstanten/q-Repraesentationen/Bounds/Zertifikatpanels/
+Panelvergleich, `stability` fuer Rootrundung/Arnoldi/Continuation/Symmetrie/
+Gates, `controls` fuer Shift/Circular/eta-null/Mutationen, `classification`
+fuer Gates/Entscheidung/Claimgrenze und `publication` fuer Pfad und Rolle der
+drei Manifestmitglieder. Der Resultrecord enthaelt keinen selbstreferenziellen
+Hash; die drei Inhaltshashes stehen ausschliesslich im spaeter publizierten
+Manifest. Unbekannte oder fehlende Felder schliessen fail-closed;
+der konkrete JSON-Vertrag und seine zunaechst roten Tests muessen vor dem
+Runnercode committed werden.
+
+Der Auditor prueft gespeicherte Krawczyk-Inklusionen, Ritzresiduen und
+Trajektorien nur gegen den Vertrag und ihre registrierten Summary-/Hash-
+Beziehungen. Er ist kein zweiter Intervallbackend und keine unabhaengige
+Arnoldi- oder Trajektorienreproduktion. Diese Vertrauensgrenze muss im
+Ergebnisbericht und Ergebnisreview stehen.
 
 ## 5. Voll-FIFO-Stabilitaet und Speicherfalsifikatoren
 
@@ -256,6 +304,13 @@ fuehrender transversaler Panelabstand hoechstens `1e-5`, stabiler Modul
 kleiner `1-1e-4`, instabiler Modul groesser `1+1e-6`. Unkonvergierte oder
 widerspruechliche Arnoldi-Panels sind inconclusive, nicht stabil.
 
+Das primaere Panel muss exakt 24, das Konvergenzpanel exakt 36 endliche
+Eigenwerte, zugehoerige Vektoren und normalisierte Residuen speichern.
+`ArpackNoConvergence`, falsche Kardinalitaet, fehlende Vektoren oder ein
+Residuum ueber `1e-8` ergeben G5-inconclusive. Auch eine
+Instabilitaetsentscheidung setzt vollstaendige Panels, bestandene
+Symmetriepruefung und Paneluebereinstimmung voraus.
+
 Die drei geerbten transversalen Stoerungen verwenden Amplitude `1e-7 R`,
 5000 Updates, Sampling alle 10 Schritte und den rotations-/translations-
 reduzierten D0-Abstand. Sie sind exakt: ein Offset des neuesten Punkts in
@@ -282,6 +337,16 @@ Zwei Speicherfalsifikatoren sind obligatorisch:
 Beide Kontrollen testen Speichersemantik. Sie duerfen nicht als Root- oder
 Stabilitaetsevidenz gezaehlt werden.
 
+Die zyklische Kontrolle muss von der Shift-Produktion unabhaengig rechnen:
+Sie speichert einen `head`, adressiert jedes Alter modular, akkumuliert die
+gewichtete Kraft ueber diesen Indexweg und ueberschreibt den aeltesten Slot
+erst nach vollstaendigem Lesen. Vor der Kraftakkumulation darf sie keine
+Shift-Reihenfolge materialisieren und nicht `native_fifo_step` aufrufen.
+Verglichen werden SHA-256 der materialisierten Altersfolge, der neue Punkt
+und der vollstaendige Folgezustand mit
+$\|a-b\|_2/\max(1,\|a\|_2,\|b\|_2)$. Mutationen der Modulo-Richtung, der
+Read/write-Reihenfolge und des zu ueberschreibenden Slots muessen scheitern.
+
 ## 6. Gates und Entscheidungslogik
 
 Die Gates werden in dieser Reihenfolge ausgewertet:
@@ -305,18 +370,18 @@ Die finale Entscheidung wird in dieser Praezedenz vergeben:
 
 1. G0 oder G6 scheitert:
    `rotating-wave-horizon-experiment-invalid`.
-2. Ein Intervall-Ausschluss beweist, dass die registrierte Branchdomain an
-   einem Vorwaertshorizont keinen admissiblen Root enthaelt:
-   `rotating-wave-horizon-branch-loss`.
+2. Ein Intervall-Ausschluss beweist, dass die registrierte lokale
+   Branchdomain an einem Vorwaertshorizont keinen admissiblen Root enthaelt:
+   `registered-local-horizon-branch-loss`.
 3. G1F und G2F bestehen, aber G3 zeigt nichtkontrahierende Drift:
    `rotating-wave-horizon-branch-drift`.
-4. G1F--G4 bestehen und die vorregistrierte Spektrum-plus-Wachstumsbedingung
-   zeigt Instabilitaet:
+4. G0, G1F, G2F, G3, G4 und G6 bestehen und die vorregistrierte
+   Spektrum-plus-Wachstumsbedingung in G5 zeigt Instabilitaet:
    `rotating-wave-infinite-root-certified-large-h-instability`.
-5. G1F--G6 bestehen:
+5. G0, G1F, G2F, G3, G4, G5 und G6 bestehen:
    `rotating-wave-horizon-root-transfer-pass-with-large-h-stability-support`.
-6. G1F--G4 und G6 bestehen, aber G5 bleibt unentschieden oder stuetzt weder
-   Kontraktion noch Instabilitaet:
+6. G0, G1F, G2F, G3, G4 und G6 bestehen, aber G5 bleibt unentschieden oder
+   stuetzt weder Kontraktion noch Instabilitaet:
    `infinite-memory-local-root-certified-stability-open`.
 7. Jeder andere numerisch unentschiedene Fall:
    `rotating-wave-horizon-transfer-inconclusive`.
@@ -325,6 +390,13 @@ Ein Rueckwaertsfehler erhaelt zusaetzlich
 `lower-tail-stress-loss` oder `lower-tail-stress-inconclusive`, aendert aber
 allein keinen bestandenen Vorwaerts-/Unendlichkeitsbefund. G5 ohne G4 bleibt
 `finite-large-h-stability-only` und darf nicht als Horizonttransfer gelten.
+
+Nur der vollstaendige Ausgang
+`rotating-wave-horizon-root-transfer-pass-with-large-h-stability-support`
+darf ein spaeteres, getrenntes P5-D-Governancereview oeffnen. Auch dann sind
+eine neue ausdrueckliche Nutzerentscheidung, eine frische UUID, ein exklusiver
+Receiptpfad und ein Governance-only-Commit erforderlich. Alle sechs anderen
+Horizontausgaenge halten P5-D geschlossen.
 
 ## 7. Implementierung, Publikation und Stopbedingungen
 
@@ -337,8 +409,10 @@ Abhaengigkeit ist nicht autorisiert.
 
 Die registrierten Pfade sind:
 
-- Runner:
-  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py`;
+- Runner und Ergebnisvertrag:
+  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py`
+  sowie
+  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json`;
 - unabhaengiger Auditor:
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py`;
 - Tests: `tests/test_rotating_wave_horizon_transfer.py` und
@@ -354,13 +428,14 @@ JSON und Markdown werden zuerst in temporaere Dateien geschrieben und
 gehasht; das Manifest wird zuletzt atomar publiziert. Der Auditor liest das
 Manifest zuerst. Ein unvollstaendiger Satz ist kein Ergebnis.
 
-Vor einem Lauf sind mindestens targetfreie Tests fuer Formeln, analytischen
-Jacobian, Tailbounds, Krawczyk-Mutationen, Homotopieunterbrechung,
-Arnoldi-Nichtkonvergenz, Shift/Circular-Aequivalenz, `eta=0`-Kollaps,
-Entscheidungspraezedenz und Manifestfehler erforderlich. Danach folgen ein
-separates Implementierungs-Readinessreview, sauberer Commit, gruenes CI und
-erst dann genau ein registrierter Horizontlauf. P5-D bleibt waehrenddessen
-geschlossen.
+Vor einem Lauf sind mindestens targetfreie Tests fuer Formeln/analytischen
+Jacobian, die drei $q$-Repraesentationen und Tailbounds, intervallbewertete
+Drift und Krawczyk-/Homotopieunterbrechung, partielle Arnoldi-Ausgaben,
+unabhaengige Shift/Circular-Mutationen und `eta=0`-Kollaps sowie Schema,
+Auditor, Entscheidungspraezedenz und Manifestfehler erforderlich. Danach
+folgen ein separates Implementierungs-Readinessreview, sauberer Commit,
+gruenes CI und erst dann genau ein registrierter Horizontlauf. P5-D bleibt
+waehrenddessen geschlossen.
 
 Die Arbeit stoppt fuer eine Protokollamendierung, wenn eine Formel oder
 Tailnorm korrigiert werden muss, eine neue Suchbox oder adaptive Fortsetzung
