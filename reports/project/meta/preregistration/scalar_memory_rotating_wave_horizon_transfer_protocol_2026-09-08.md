@@ -422,7 +422,7 @@ Die registrierten Pfade sind:
 - Runner und Ergebnisvertrag:
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py`
   sowie
-  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json`;
+  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json`;
 - unabhaengiger Auditor:
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py`
   mit Auditoutput
