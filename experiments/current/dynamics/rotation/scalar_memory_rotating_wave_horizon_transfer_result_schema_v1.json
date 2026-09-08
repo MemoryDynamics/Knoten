@@ -22,14 +22,23 @@
     "trajectory_samples": {"item": "object:trajectory_sample", "length": 501}
   },
   "constants": {
+    "blob_anchor_interval": "fc6e816c6895e408693fbde176afdaee963c20b9",
+    "blob_anchor_stability": "1c9d5746c9553d9cb8031b58258e6d613f1633d9",
+    "blob_discovery": "4d2cbd50bd61b050747af5d51752f684b42adb56",
+    "blob_finite_h_audit": "02da3a71aded2f68f55a4babbdb96aa07d693780",
+    "blob_rotating_wave": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
+    "blob_rotating_wave_interval": "58ce9b0862f980c17c691c4555557e8e363468a4",
+    "blob_rotating_wave_stability": "9defb5a6876371202e1ba57cea030c997b9c6edd",
     "claim_boundary": "local fixed-alpha rotating-wave root transfer with numerical large-H stability support only; no global uniqueness, generic formation, infinite-dimensional stability, interaction, oscillator, spin, momentum, inertia or mass",
     "contract_version": 1,
+    "evidence_revision": "bf038d758f2dd8a367699832f194621756c39696",
     "forward_horizons": [1200, 1500, 1800, 2400, 3600],
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
     "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v1",
     "protocol_blob": "401f12d6572ecac943e0a0cc3ca19edf6236915a",
-    "protocol_revision": "f817574a5562ca6cd012752eeb414d5b5ecd555f"
+    "protocol_revision": "f817574a5562ca6cd012752eeb414d5b5ecd555f",
+    "true": true
   },
   "enums": {
     "arnoldi_status": ["complete", "arpack-no-convergence", "wrong-cardinality", "missing-vectors", "nonfinite", "residual-fail"],
@@ -188,7 +197,7 @@
     },
     "identity": {
       "created_utc": "string",
-      "evidence_revision": "sha1",
+      "evidence_revision": "const:evidence_revision",
       "parameters": "object:parameters",
       "protocol_blob": "const:protocol_blob",
       "protocol_revision": "const:protocol_revision",
@@ -242,19 +251,19 @@
       "stability": "object:stability"
     },
     "provenance": {
-      "clean": "boolean",
+      "clean": "const:true",
       "implementation_revision": "sha1",
       "input_blob_oids": "object:provenance_blobs",
       "upstream_revision": "sha1"
     },
     "provenance_blobs": {
-      "anchor_interval": "sha1",
-      "anchor_stability": "sha1",
-      "discovery": "sha1",
-      "finite_h_audit": "sha1",
-      "rotating_wave": "sha1",
-      "rotating_wave_interval": "sha1",
-      "rotating_wave_stability": "sha1"
+      "anchor_interval": "const:blob_anchor_interval",
+      "anchor_stability": "const:blob_anchor_stability",
+      "discovery": "const:blob_discovery",
+      "finite_h_audit": "const:blob_finite_h_audit",
+      "rotating_wave": "const:blob_rotating_wave",
+      "rotating_wave_interval": "const:blob_rotating_wave_interval",
+      "rotating_wave_stability": "const:blob_rotating_wave_stability"
     },
     "publication": {
       "artifacts": "array:artifact_rows",

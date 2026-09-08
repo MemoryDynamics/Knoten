@@ -210,3 +210,53 @@ def test_auditor_rejects_wrong_root_keys_and_arnoldi_cardinality(auditor) -> Non
     partial["stability"]["arnoldi"]["primary"]["eigenpairs"].pop()
     with pytest.raises((TypeError, ValueError), match="eigenpairs"):
         auditor.validate_result(partial)
+
+
+def test_auditor_accepts_a_complete_target_free_publication(auditor, tmp_path: Path) -> None:
+    payload = auditor.contract_witness()
+    result_path = tmp_path / "result.json"
+    report_path = tmp_path / "result.md"
+    manifest_path = tmp_path / "result.publication.json"
+    result_path.write_text(
+        json.dumps(payload, allow_nan=False, sort_keys=True),
+        encoding="utf-8",
+    )
+    report_path.write_text("target-free complete fixture\n", encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(_manifest(result_path, report_path), sort_keys=True),
+        encoding="utf-8",
+    )
+    result = auditor.audit_publication(
+        manifest_path=manifest_path,
+        schema_path=SCHEMA_PATH,
+    )
+    assert result["hashes_pass"] is True
+    assert result["schema_pass"] is True
+    assert result["decision"] == (
+        "rotating-wave-horizon-root-transfer-pass-with-large-h-stability-support"
+    )
+
+
+def test_auditor_rejects_a_schema_valid_reconstruction_mismatch(
+    auditor,
+    tmp_path: Path,
+) -> None:
+    payload = auditor.contract_witness()
+    payload["infinite_tail"]["q_representations"][0]["direct_power"] *= 1.0001
+    result_path = tmp_path / "result.json"
+    report_path = tmp_path / "result.md"
+    manifest_path = tmp_path / "result.publication.json"
+    result_path.write_text(
+        json.dumps(payload, allow_nan=False, sort_keys=True),
+        encoding="utf-8",
+    )
+    report_path.write_text("target-free mismatched fixture\n", encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(_manifest(result_path, report_path), sort_keys=True),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="q_representations"):
+        auditor.audit_publication(
+            manifest_path=manifest_path,
+            schema_path=SCHEMA_PATH,
+        )

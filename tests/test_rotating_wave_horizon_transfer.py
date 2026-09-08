@@ -13,6 +13,7 @@ import numpy as np
 import pytest
 
 from emergenz_knoten.rotating_wave_stability import native_fifo_step
+from emergenz_knoten.rotating_wave_stability import circular_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -200,6 +201,10 @@ def test_q_representations_compare_equal_binary64_semantics(gate) -> None:
         assert row["ulp_difference"] <= 2
         assert row["two_ulp_gate"] is True
         assert math.isfinite(row["diagnostic_exp_log1p"])
+        with localcontext() as exact_context:
+            exact_context.prec = 2 * horizon + 10
+            exact_power = format(Decimal("0.99") ** horizon, "f")
+        assert row["decimal_power"] == exact_power
         with localcontext() as context:
             context.prec = 70
             decimal_power = Decimal(row["decimal_power"])
@@ -209,22 +214,27 @@ def test_q_representations_compare_equal_binary64_semantics(gate) -> None:
 
 
 def test_tail_bounds_equal_the_registered_conservative_formulas(gate) -> None:
-    phi0 = 1.0 + 3.5 / 9.0
-    phi1 = math.exp(-0.5) * (1.0 + 3.5 / 27.0)
-    q = 0.99
-    for horizon in HORIZONS:
-        observed = gate.tail_bounds(horizon=horizon, precision_dps=80)
-        expected = {
-            "residual_bound": 2.0 * 0.15 * phi0 * q**horizon,
-            "jacobian_radius_bound": 4.0 * 0.15 * phi1 * q**horizon,
-            "jacobian_theta_bound": 0.15
-            * (phi0 + 2.0 * 1.1 * phi1)
-            * q**horizon
-            * (horizon + q / 0.01),
-        }
-        for name, value in expected.items():
-            assert float(observed[name]) >= value
-            assert float(observed[name]) <= math.nextafter(value, math.inf) * (1.0 + 2e-15)
+    with localcontext() as context:
+        context.prec = 80
+        phi0 = Decimal(1) + Decimal("3.5") / Decimal(9)
+        phi1 = (-Decimal("0.5")).exp() * (
+            Decimal(1) + Decimal("3.5") / Decimal(27)
+        )
+        q = Decimal("0.99")
+        for horizon in HORIZONS:
+            observed = gate.tail_bounds(horizon=horizon, precision_dps=80)
+            expected = {
+                "residual_bound": Decimal("0.30") * phi0 * q**horizon,
+                "jacobian_radius_bound": Decimal("0.60") * phi1 * q**horizon,
+                "jacobian_theta_bound": Decimal("0.15")
+                * (phi0 + Decimal("2.2") * phi1)
+                * q**horizon
+                * (Decimal(horizon) + q / Decimal("0.01")),
+            }
+            for name, value in expected.items():
+                outward = float(observed[name])
+                assert Decimal.from_float(outward) >= value
+                assert Decimal.from_float(math.nextafter(outward, -math.inf)) < value
 
 
 def test_interval_drift_uses_endpoint_suprema_and_width_mutation_closes_gate(gate) -> None:
@@ -246,6 +256,25 @@ def test_interval_drift_uses_endpoint_suprema_and_width_mutation_closes_gate(gat
     broad = gate.drift_gates(previous_upper=2e-7, final_upper=1.1e-8)
     assert narrow["pass"] is True
     assert broad["pass"] is False
+
+
+def test_interval_drift_preserves_sub_binary64_certificate_widths(gate) -> None:
+    first = {
+        "radius": ["0.946517504804225000000000000000", "0.946517504804225000000000000001"],
+        "theta": ["0.015770381717135000000000000000", "0.015770381717135000000000000001"],
+    }
+    second = {
+        "radius": ["0.946517504804225000000000000002", "0.946517504804225000000000000003"],
+        "theta": ["0.015770381717135000000000000002", "0.015770381717135000000000000003"],
+    }
+    upper = gate.interval_drift_upper(
+        first,
+        second,
+        radius_scale=0.946517504804225,
+        theta_scale=0.015770381717135,
+    )
+    assert upper > 0.0
+    assert upper >= 3e-30 / 0.015770381717135
 
 
 def test_homotopy_failure_is_inconclusive_without_complete_local_exclusion(gate) -> None:
@@ -295,6 +324,11 @@ def test_circular_fifo_is_independent_and_matches_shift_semantics(gate, monkeypa
         )
     )
     expected = native_fifo_step(history, **PARAMETERS)
+    control = gate.run_circular_control(history, parameters=PARAMETERS)
+    assert control["pass"] is True
+    assert control["age_hash_equal"] is True
+    assert control["new_point_relative_error"] < 5e-14
+    assert control["complete_state_relative_error"] < 5e-14
 
     def forbidden(*args, **kwargs):
         raise AssertionError("circular backend called native_fifo_step")
@@ -312,7 +346,9 @@ def test_circular_fifo_is_independent_and_matches_shift_semantics(gate, monkeypa
 )
 def test_registered_circular_fifo_mutations_are_detected(gate, mutation: str) -> None:
     ages = np.arange(17, dtype=float)
-    history = np.column_stack((0.1 * ages**2, np.sin(0.23 * ages)))
+    history = np.column_stack(
+        (0.025 * ages + 0.003 * ages**2, 0.4 * np.sin(0.09 * ages))
+    )
     record = gate.run_circular_control(history, parameters=PARAMETERS, mutation=mutation)
     assert record["pass"] is False
     assert record["mutation"] == mutation
@@ -323,6 +359,20 @@ def test_eta_zero_history_collapses_to_latest_point(gate) -> None:
     history = np.column_stack((ages / 17.0, np.cos(0.3 * ages)))
     collapsed = gate.eta_zero_collapse(history, steps=18)
     expected = np.repeat(history[[0]], 17, axis=0)
+    np.testing.assert_allclose(collapsed, expected, atol=1e-14, rtol=0.0)
+
+
+@pytest.mark.parametrize("horizon", HORIZONS)
+def test_anchor_circle_fifo_and_eta_zero_controls_cover_every_horizon(gate, horizon: int) -> None:
+    history = circular_history(
+        radius=0.946517504804225,
+        theta=0.015770381717135,
+        horizon=horizon,
+    )
+    control = gate.run_circular_control(history, parameters=PARAMETERS)
+    assert control["pass"] is True
+    collapsed = gate.eta_zero_collapse(history, steps=horizon + 1)
+    expected = np.repeat(history[[0]], horizon, axis=0)
     np.testing.assert_allclose(collapsed, expected, atol=1e-14, rtol=0.0)
 
 
@@ -376,6 +426,10 @@ def test_schema_validator_is_fail_closed_for_unknown_and_numpy_values(gate) -> N
     numpy_value["identity"]["parameters"]["alpha"] = np.float64(0.01)
     with pytest.raises((TypeError, ValueError), match="alpha"):
         gate.validate_result(numpy_value)
+    numpy_horizon = copy.deepcopy(witness)
+    numpy_horizon["finite_branch"]["horizons"][0] = np.int64(600)
+    with pytest.raises((TypeError, ValueError), match="horizons"):
+        gate.validate_result(numpy_horizon)
 
 
 def test_publication_writes_two_contents_then_hash_manifest(gate, tmp_path: Path, monkeypatch) -> None:
