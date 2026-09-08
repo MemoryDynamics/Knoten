@@ -266,9 +266,10 @@ Schema/Version/Zeit/Revision/Protokoll/Provenienz/Parameter,
 Panelvergleich, `stability` fuer Rootrundung/Arnoldi/Continuation/Symmetrie/
 Gates, `controls` fuer Shift/Circular/eta-null/Mutationen, `classification`
 fuer Gates/Entscheidung/Claimgrenze und `publication` fuer Pfad und Rolle der
-drei Manifestmitglieder. Der Resultrecord enthaelt keinen selbstreferenziellen
-Hash; die drei Inhaltshashes stehen ausschliesslich im spaeter publizierten
-Manifest. Unbekannte oder fehlende Felder schliessen fail-closed;
+beiden vor dem Manifest erzeugten Inhaltsartefakte JSON und Markdown. Der
+Resultrecord enthaelt keinen selbstreferenziellen Hash; die beiden
+Inhaltshashes stehen ausschliesslich im spaeter publizierten Manifest.
+Unbekannte oder fehlende Felder schliessen fail-closed;
 der konkrete JSON-Vertrag und seine zunaechst roten Tests muessen vor dem
 Runnercode committed werden.
 
@@ -414,7 +415,9 @@ Die registrierten Pfade sind:
   sowie
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json`;
 - unabhaengiger Auditor:
-  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py`;
+  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py`
+  mit Auditoutput
+  `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_independent_audit_2026-09-08.json`;
 - Tests: `tests/test_rotating_wave_horizon_transfer.py` und
   `tests/test_rotating_wave_horizon_transfer_result_audit.py`;
 - Ergebnis:
