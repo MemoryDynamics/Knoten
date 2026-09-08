@@ -546,8 +546,10 @@ rekonstruierbar machen.
    `sin(sqrt(2)*(k+1))+cos(sqrt(3)*(k+0.5))`. Der Konvergenzstart ist die
    normierte binary64-Auswertung
    `sin(sqrt(5)*(k+1))+cos(sqrt(7)*(k+0.5))`, jeweils fuer
-   `k=0,...,4799`. Ihre SHA-256 ueber contiguous little-endian
-   float64-Bytes werden als Vertragskonstanten gebunden und im
+   `k=0,...,4799`. Die Norm ist deterministisch
+   `sqrt(fsum(v_k*v_k))`; Division und trigonometrische Werte sind native
+   binary64. Ihre SHA-256 ueber contiguous little-endian float64-Bytes werden
+   als Vertragskonstanten gebunden und im
    Standardbibliothek-Auditor ohne NumPy rekonstruiert. Der abweichende
    allgemeine `S2`-Start aus der bestehenden Bibliothek ist fuer dieses Gate
    unzulaessig.
@@ -557,7 +559,10 @@ rekonstruierbar machen.
    Standardbibliothek-Auditor rekonstruieren radialen, tangentialen und den
    gegen drei Symmetrietangenten projizierten Voll-FIFO-Stoss aus der
    gerundeten Kreisgeschichte. Fuer den Voll-FIFO-Stoss werden zusaetzlich
-   Norm und drei Skalarprodukte gegen die Symmetrietangenten geprueft.
+   Norm und drei Skalarprodukte gegen die Symmetrietangenten geprueft. Alle
+   Normen und Skalarprodukte dieser Konstruktion verwenden ebenfalls
+   `sqrt(fsum(v_k*v_k))` beziehungsweise `fsum(a_k*b_k)` in aufsteigender
+   Komponentenreihenfolge.
 7. `rounded_root` wird exakt durch binary64-Rundung des gespeicherten
    120-dps-H=2400-Newtonroots rekonstruiert. Ein abweichender Root darf weder
    Jacobian noch Arnoldi noch Stoerungen speisen.
