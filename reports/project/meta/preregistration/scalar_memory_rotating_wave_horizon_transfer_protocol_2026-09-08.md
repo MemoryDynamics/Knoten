@@ -2,8 +2,8 @@
 
 Datum: 2026-09-08.
 
-Status: **prospektiv zum zweiten Mal amendiert nach negativem
-Runner-Vertragsreview, vor wissenschaftlichem Runnercode und vor jeder neuen
+Status: **prospektiv zum dritten Mal amendiert nach negativem
+Evidenzvertragsreview, vor wissenschaftlichem Runnercode und vor jeder neuen
 Horizont-Trajektorie; P5-D-Target geschlossen**.
 
 Die Amendierung schliesst HT-P01--HT-P06 aus dem separat committed Review an
@@ -21,6 +21,14 @@ keinen Parameter, keine numerische Schwelle, keine Gatepraezedenz und keinen
 registrierten Pfad. Auch fuer diese Amendierung wurde kein numerischer Root,
 keine Homotopie, kein Arnoldi-Panel und keine Horizonttrajektorie
 ausgewertet.
+
+Die dritte Amendierung schliesst die Nachweisvollstaendigkeit aus Revision
+`ef7707514468754837ef6a5c5648b73024be82b0`, Reviewblob
+`6963de5eef5906fd9db45754110ecf3a18d25395`. Sie fuegt keine numerische
+Methode, Schwelle oder Suchfreiheit hinzu, sondern verlangt, dass bereits
+registrierte aeussere/innere Zertifikate, Ausschlusswitnesses, Startvektoren
+und Stoerungen im Ergebnis nachpruefbar gespeichert werden. Auch fuer diese
+Amendierung wurde kein registrierter numerischer Wert ausgewertet.
 
 Dieses Protokoll operationalisiert den Befund
 `finite-h-loop-nontautological-horizon-transfer-open`. Es darf erst nach
@@ -422,7 +430,7 @@ Die registrierten Pfade sind:
 - Runner und Ergebnisvertrag:
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py`
   sowie
-  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json`;
+  `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_schema_v3.json`;
 - unabhaengiger Auditor:
   `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py`
   mit Auditoutput
@@ -508,3 +516,53 @@ Arnoldi-Ausgabe, fehlenden Arnoldi-Vektor und fruehen Trajektorienstopp
 validieren. Mutationen von `null` zu erfundenen Werten nach einem Stopp,
 innere Null-Locher und positive Gates trotz fehlender Voraussetzung muessen
 von Runner-Validator und unabhaengigem Auditor verworfen werden.
+
+## 9. Dritte Amendierung: vollstaendiger Nachweisrecord
+
+Die Nullsemantik aus Abschnitt 8 bleibt unveraendert. Der v3-Vertrag muss
+zusaetzlich jeden fuer einen positiven oder negativen Claim verwendeten
+Nachweis aus den gespeicherten primitiven Intervall- und Vektordaten
+rekonstruierbar machen.
+
+1. Jedes 80-/120-dps-Rootpanel speichert getrennt das aeussere
+   Krawczyk-Zertifikat mit Halbbreite `1e-8` und das innere mit Halbbreite
+   `1e-30`. `inner_intersection` ist exakt der outward gerundete Schnitt der
+   beiden inneren Krawczyk-Bilder. `centers_agree` wird aus den beiden
+   Newtonmittelpunkten je Koordinate gegen `1e-50` rekonstruiert.
+2. Ein `residual-excluded`-Leaf speichert beide Intervallkomponenten von
+   $F_H$ auf seiner Box; mindestens eine Komponente muss Null ausschliessen.
+   Ein `krawczyk-root`-Leaf speichert sein Krawczyk-Bild und die strikte
+   Inklusion in die Leafbox. Nicht zur Klassifikation passende oder fehlende
+   Witnessfelder sind unzulaessig.
+3. Fuer jede Homotopiescheibe werden $s$-Intervall, Box und Krawczyk-Bild als
+   Dezimalendpunkte gespeichert. Der Auditor rekonstruiert exakt
+   $[i/64,(i+1)/64]$, strikte Inklusion und die Ueberlappung aufeinander
+   folgender Krawczyk-Bilder. Das gespeicherte Boolfeld allein entscheidet
+   nichts.
+4. Der Schnitt und die Ueberlappung der beiden 120-/160-dps-
+   Tail-Krawczyk-Bilder werden ebenfalls ausschliesslich aus den gespeicherten
+   Endpunkten rekonstruiert.
+5. Der primaere Arnoldi-Start ist die normierte binary64-Auswertung
+   `sin(sqrt(2)*(k+1))+cos(sqrt(3)*(k+0.5))`. Der Konvergenzstart ist die
+   normierte binary64-Auswertung
+   `sin(sqrt(5)*(k+1))+cos(sqrt(7)*(k+0.5))`, jeweils fuer
+   `k=0,...,4799`. Ihre SHA-256 ueber contiguous little-endian
+   float64-Bytes werden als Vertragskonstanten gebunden und im
+   Standardbibliothek-Auditor ohne NumPy rekonstruiert. Der abweichende
+   allgemeine `S2`-Start aus der bestehenden Bibliothek ist fuer dieses Gate
+   unzulaessig.
+6. Jeder der drei Stoerungsarme speichert `amplitude=1e-7 R_2400`, den
+   tatsaechlich verwendeten 4800-Komponenten-float64-Vektor und dessen
+   SHA-256 ueber contiguous little-endian Bytes. Runner-Validator und
+   Standardbibliothek-Auditor rekonstruieren radialen, tangentialen und den
+   gegen drei Symmetrietangenten projizierten Voll-FIFO-Stoss aus der
+   gerundeten Kreisgeschichte. Fuer den Voll-FIFO-Stoss werden zusaetzlich
+   Norm und drei Skalarprodukte gegen die Symmetrietangenten geprueft.
+7. `rounded_root` wird exakt durch binary64-Rundung des gespeicherten
+   120-dps-H=2400-Newtonroots rekonstruiert. Ein abweichender Root darf weder
+   Jacobian noch Arnoldi noch Stoerungen speisen.
+
+Vor Runnercode muessen Mutationen fuer fehlendes aeusseres Zertifikat,
+falschen inneren Schnitt, unbelegten Residualausschluss, falsches
+Homotopie-s-Intervall, falsche Einschluesse, falschen Arnoldi-Starthash,
+falschen Stoerungshash und abweichenden gerundeten Root scheitern.
