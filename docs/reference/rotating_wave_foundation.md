@@ -1,6 +1,6 @@
 # Native Rotating Waves: Gleichungen, Evidenz und Grenzen
 
-Stand: 2026-09-07.
+Stand: 2026-09-08.
 
 Diese Seite ist die kanonische Frontdoor fuer den positiven raeumlichen
 Schleifenast des unveraenderten skalaren K0-H-Modells. Das kritische
@@ -47,7 +47,14 @@ Der getrennte
 [Finite-H-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
 registriert deshalb den Befund
 `finite-h-loop-nontautological-horizon-transfer-open` und formuliert das
-noetige Falsifikationsgate.
+noetige Falsifikationsgate. Das darauf aufgebaute
+[Fixed-alpha-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_transfer_protocol_2026-09-08.md)
+friert nun $H=(600,900,1200,1500,1800,2400,3600)$ ein. Nach negativem
+Erstreview und Amendierung endet das separate
+[Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md)
+mit
+`rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`.
+Geoeffnet sind nur Ergebnisvertrag und zunaechst rote targetfreie Tests.
 
 ## 1. Ausgangsgleichung ohne Oszillatorpostulat
 

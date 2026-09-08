@@ -70,12 +70,18 @@ autorisieren keinen weiteren P5-Ziellauf.
    Python-Standardbibliothek traegt Vertrag, Hashes und Publikation; NumPy
    bleibt in der Numerik. Eine gemeinsame Projektbibliothek setzt erst drei
    nachweislich semantikgleiche Pipelines voraus. Die Grundgleichungen und 41
-   wissenschaftlichen Runner-Symbole blieben eingefroren. Naechster Schritt
-   ist ein separates prospektives Protokoll fuer das im
+   wissenschaftlichen Runner-Symbole blieben eingefroren. Das im
    [Finite-H-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
-   geforderte Horizont-Transfergate: Der FIFO erzwingt keinen Kreis, aber die
-   bisherige $H\alpha=12$-Leiter beweist auch keinen festen-$\alpha$-Grenzwert
-   $H\to\infty$. Kein Versuch 4.
+   geforderte Horizont-Transfergate ist nun im
+   [Fixed-alpha-Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_transfer_protocol_2026-09-08.md)
+   eingefroren, nach negativem Review amendiert und im separaten
+   [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md)
+   als `rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`
+   bewertet. Der FIFO erzwingt keinen Kreis, aber die bisherige
+   $H\alpha=12$-Leiter beweist auch keinen festen-$\alpha$-Grenzwert
+   $H\to\infty$. Naechster Schritt ist ausschliesslich der getrackte
+   Ergebnisvertrag plus zunaechst rote targetfreie Tests. Noch kein Runner,
+   keine Horizonttrajektorie und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.

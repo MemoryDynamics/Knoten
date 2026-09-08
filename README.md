@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-07.
+Stand: 2026-09-08.
 
 ## Wissenschaftlicher Stand
 
@@ -23,8 +23,10 @@ Stand: 2026-09-07.
   neu protokollierte Produktionsgrenze ist nach 945 lokalen Tests und gruener
   CI targetfrei repariert und reviewed; sie ist keine Interaktionsevidenz.
   Ein separater Audit trennt den nichttautologischen finite-$H$-Kreis vom
-  offenen Horizonttransfer. Dieser Transfer ist die naechste P5-Huerde;
-  weitere Zielausfuehrungen bleiben geschlossen.
+  offenen Horizonttransfer. Das Fixed-$\alpha$-Transferprotokoll ist nach
+  negativem Review amendiert und als hinreichend reviewed. Als naechstes sind
+  nur Ergebnisvertrag und rote targetfreie Tests offen; neue
+  Horizonttrajektorien und weitere P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

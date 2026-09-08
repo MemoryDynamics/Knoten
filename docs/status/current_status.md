@@ -47,6 +47,16 @@ registrierte Leiter haelt $H\alpha=12$ fest und zeigt nicht, dass Root und
 Stabilitaet bei festem $\alpha$ den Grenzfall $H\to\infty$ erreichen. Deshalb
 steht vor einer neuen P5-Zielautorisierung ein separates Horizontgate.
 
+Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
+$\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
+die Vorwaertsleiter bis $H=3600$ von der unteren $H=900,600$-Belastung und
+fordert einen Tail-Krawczyk-Einschluss fuer den lokalen Root von
+$F_\infty$. Ein negatives Review fand sechs Luecken einschliesslich eines
+konstruktiv falschen binary64-Vergleichs; die Amendierung schliesst sie. Das
+Suffizienzurteil lautet
+`rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`.
+Nur Ergebnisvertrag und rote targetfreie Tests sind damit geoeffnet.
+
 ## P5-D Code-Review und Remediation
 
 Das Review trennte eine algebraisch konsistente Center-/Port-Konstruktion von
@@ -140,5 +150,10 @@ negatives Interaktionsergebnis.
   und
   [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_preflight_protocol_sufficiency_review_2026-09-06.md), danach das
   [Produktionsgrenzen-Readinessreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
-- [Finite-H Non-Tautology-/Horizont-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md)
+- Horizontkette:
+  [Finite-H Non-Tautology-/Horizont-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md),
+  [amendiertes Protokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_transfer_protocol_2026-09-08.md),
+  [negatives Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_review_2026-09-08.md)
+  und
+  [Suffizienzreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_protocol_sufficiency_review_2026-09-08.md)
 - [Claim-Register](paper_claims.md)
