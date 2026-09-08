@@ -1,0 +1,357 @@
+{
+  "arrays": {
+    "artifact_rows": {"item": "object:artifact", "length": 2},
+    "arnoldi_convergence_pairs": {"item": "object:eigenpair", "length": 36},
+    "arnoldi_primary_pairs": {"item": "object:eigenpair", "length": 24},
+    "certificate_panels": {"item": "object:tail_certificate_panel", "length": 2},
+    "circular_cases": {"item": "object:circular_case", "length": 9},
+    "complex_vector_4800": {"item": "array:number_pair", "length": 4800},
+    "continuation_arms": {"item": "object:continuation_arm", "length": 3},
+    "decimal_matrix_2": {"item": "array:decimal_pair", "length": 2},
+    "decimal_pair": {"item": "decimal", "length": 2},
+    "drift_rows": {"item": "object:drift_row", "length": 2},
+    "eta_zero_cases": {"item": "object:eta_zero_case", "length": 7},
+    "homotopies": {"item": "object:homotopy", "length": 6},
+    "homotopy_slabs": {"item": "object:homotopy_slab", "length": 64},
+    "mutation_rows": {"item": "object:mutation", "length": 4},
+    "number_matrix_2": {"item": "array:number_pair", "length": 2},
+    "number_pair": {"item": "number", "length": 2},
+    "q_rows": {"item": "object:q_representation", "length": 7},
+    "root_panels": {"item": "object:root_panel", "length": 7},
+    "tail_bound_rows": {"item": "object:tail_bound", "length": 7},
+    "trajectory_samples": {"item": "object:trajectory_sample", "length": 501}
+  },
+  "constants": {
+    "claim_boundary": "local fixed-alpha rotating-wave root transfer with numerical large-H stability support only; no global uniqueness, generic formation, infinite-dimensional stability, interaction, oscillator, spin, momentum, inertia or mass",
+    "contract_version": 1,
+    "forward_horizons": [1200, 1500, 1800, 2400, 3600],
+    "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
+    "lower_horizons": [900, 600],
+    "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v1",
+    "protocol_blob": "401f12d6572ecac943e0a0cc3ca19edf6236915a",
+    "protocol_revision": "f817574a5562ca6cd012752eeb414d5b5ecd555f"
+  },
+  "enums": {
+    "arnoldi_status": ["complete", "arpack-no-convergence", "wrong-cardinality", "missing-vectors", "nonfinite", "residual-fail"],
+    "artifact_role": ["result-json", "readable-report"],
+    "decision": [
+      "rotating-wave-horizon-experiment-invalid",
+      "registered-local-horizon-branch-loss",
+      "rotating-wave-horizon-branch-drift",
+      "rotating-wave-infinite-root-certified-large-h-instability",
+      "rotating-wave-horizon-root-transfer-pass-with-large-h-stability-support",
+      "infinite-memory-local-root-certified-stability-open",
+      "rotating-wave-horizon-transfer-inconclusive"
+    ],
+    "direction": ["forward", "lower-tail"],
+    "gate_state": ["pass", "fail", "inconclusive"],
+    "lower_tail_status": ["lower-tail-stress-pass", "lower-tail-stress-loss", "lower-tail-stress-inconclusive"],
+    "mutation_name": ["drift-width", "reverse-modulo", "overwrite-before-read", "wrong-oldest-slot"],
+    "precision": [80, 120, 160]
+  },
+  "objects": {
+    "arnoldi": {
+      "convergence": "object:arnoldi_panel_36",
+      "panel_agreement": "object:panel_agreement",
+      "primary": "object:arnoldi_panel_24"
+    },
+    "arnoldi_panel_24": {
+      "eigenpairs": "array:arnoldi_primary_pairs",
+      "expected_count": "integer",
+      "max_iterations": "integer",
+      "ncv": "integer",
+      "requested_count": "integer",
+      "start_sha256": "sha256",
+      "status": "enum:arnoldi_status",
+      "tolerance": "number"
+    },
+    "arnoldi_panel_36": {
+      "eigenpairs": "array:arnoldi_convergence_pairs",
+      "expected_count": "integer",
+      "max_iterations": "integer",
+      "ncv": "integer",
+      "requested_count": "integer",
+      "start_sha256": "sha256",
+      "status": "enum:arnoldi_status",
+      "tolerance": "number"
+    },
+    "artifact": {
+      "path": "path",
+      "role": "enum:artifact_role"
+    },
+    "certificate": {
+      "box": "object:root_box",
+      "interval_backend": "string",
+      "jacobian_box": "array:decimal_matrix_2",
+      "krawczyk_image": "array:decimal_pair",
+      "strict_interior": "boolean"
+    },
+    "circular_case": {
+      "age_history_sha256": "sha256",
+      "case_id": "string",
+      "complete_state_relative_error": "number",
+      "horizon": "integer",
+      "new_point_relative_error": "number",
+      "pass": "boolean"
+    },
+    "classification": {
+      "claim_boundary": "const:claim_boundary",
+      "decision": "enum:decision",
+      "finite_large_h_stability_only": "boolean",
+      "gates": "object:gates",
+      "lower_tail_status": "enum:lower_tail_status",
+      "p5_governance_review_open": "boolean",
+      "precedence_rank": "integer"
+    },
+    "continuation_arm": {
+      "completed": "boolean",
+      "final_distance": "number",
+      "final_ratio": "number",
+      "growth_factor": "number",
+      "initial_distance": "number",
+      "name": "string",
+      "samples": "array:trajectory_samples",
+      "stopped": "boolean"
+    },
+    "controls": {
+      "circular_cases": "array:circular_cases",
+      "eta_zero_cases": "array:eta_zero_cases",
+      "mutations": "array:mutation_rows",
+      "pass": "boolean"
+    },
+    "drift": {
+      "center_diagnostics": "array:drift_rows",
+      "interval_upper_bounds": "array:drift_rows",
+      "mutation_closes_pass": "boolean",
+      "pass": "boolean"
+    },
+    "drift_row": {
+      "from_horizon": "integer",
+      "radius_component": "number",
+      "theta_component": "number",
+      "to_horizon": "integer",
+      "upper_bound": "number"
+    },
+    "eigenpair": {
+      "classification": "string",
+      "eigenvalue": "array:number_pair",
+      "modulus": "number",
+      "normalized_residual": "number",
+      "rotation_overlap": "number",
+      "translation_overlap": "number",
+      "vector": "array:complex_vector_4800"
+    },
+    "eta_zero_case": {
+      "horizon": "integer",
+      "maximum_deviation": "number",
+      "pass": "boolean",
+      "steps": "integer"
+    },
+    "finite_branch": {
+      "direct_replay_pass": "boolean",
+      "drift": "object:drift",
+      "forward_horizons": "const:forward_horizons",
+      "homotopies": "array:homotopies",
+      "horizons": "const:horizons",
+      "lower_horizons": "const:lower_horizons",
+      "lower_tail_status": "enum:lower_tail_status",
+      "root_panels": "array:root_panels"
+    },
+    "gates": {
+      "G0": "enum:gate_state",
+      "G1F": "enum:gate_state",
+      "G1R": "enum:gate_state",
+      "G2F": "enum:gate_state",
+      "G2R": "enum:gate_state",
+      "G3": "enum:gate_state",
+      "G4": "enum:gate_state",
+      "G5": "enum:gate_state",
+      "G6": "enum:gate_state",
+      "local_branch_excluded": "boolean",
+      "large_h_instability_supported": "boolean"
+    },
+    "homotopy": {
+      "direction": "enum:direction",
+      "from_horizon": "integer",
+      "pass": "boolean",
+      "slabs": "array:homotopy_slabs",
+      "status": "enum:gate_state",
+      "to_horizon": "integer"
+    },
+    "homotopy_slab": {
+      "box": "object:root_box",
+      "index": "integer",
+      "krawczyk_image": "array:decimal_pair",
+      "overlaps_previous": "nullable:boolean",
+      "s_interval": "array:decimal_pair",
+      "strict_interior": "boolean"
+    },
+    "identity": {
+      "created_utc": "string",
+      "evidence_revision": "sha1",
+      "parameters": "object:parameters",
+      "protocol_blob": "const:protocol_blob",
+      "protocol_revision": "const:protocol_revision",
+      "provenance": "object:provenance",
+      "schema": "const:payload_schema",
+      "version": "const:contract_version"
+    },
+    "infinite_tail": {
+      "bounds": "array:tail_bound_rows",
+      "certificate_panels": "array:certificate_panels",
+      "constants": "object:tail_constants",
+      "panel_comparison": "object:tail_panel_comparison",
+      "q_representations": "array:q_rows"
+    },
+    "mutation": {
+      "detected": "boolean",
+      "name": "enum:mutation_name"
+    },
+    "newton_panel": {
+      "jacobian": "array:decimal_matrix_2",
+      "precision_dps": "enum:precision",
+      "radius": "decimal",
+      "residual": "array:decimal_pair",
+      "steps": "integer",
+      "theta": "decimal"
+    },
+    "panel_agreement": {
+      "leading_transverse_distance": "number",
+      "pass": "boolean",
+      "symmetry_pass": "boolean"
+    },
+    "parameters": {
+      "alpha": "number",
+      "amplitude_att": "number",
+      "amplitude_rep": "number",
+      "anchor_radius": "number",
+      "anchor_theta": "number",
+      "epsilon": "number",
+      "eta": "number",
+      "memory_mass": "number",
+      "sigma_att": "number",
+      "sigma_rep": "number"
+    },
+    "payload": {
+      "classification": "object:classification",
+      "controls": "object:controls",
+      "finite_branch": "object:finite_branch",
+      "identity": "object:identity",
+      "infinite_tail": "object:infinite_tail",
+      "publication": "object:publication",
+      "stability": "object:stability"
+    },
+    "provenance": {
+      "clean": "boolean",
+      "implementation_revision": "sha1",
+      "input_blob_oids": "object:provenance_blobs",
+      "upstream_revision": "sha1"
+    },
+    "provenance_blobs": {
+      "anchor_interval": "sha1",
+      "anchor_stability": "sha1",
+      "discovery": "sha1",
+      "finite_h_audit": "sha1",
+      "rotating_wave": "sha1",
+      "rotating_wave_interval": "sha1",
+      "rotating_wave_stability": "sha1"
+    },
+    "publication": {
+      "artifacts": "array:artifact_rows",
+      "auditor_output_path": "path",
+      "manifest_path": "path",
+      "manifest_published_last": "boolean"
+    },
+    "q_representation": {
+      "decimal_power": "decimal",
+      "diagnostic_exp_log1p": "number",
+      "diagnostic_relative_difference": "number",
+      "direct_power": "number",
+      "exp_log_power": "number",
+      "horizon": "integer",
+      "nonzero_finite": "boolean",
+      "two_ulp_gate": "boolean",
+      "ulp_difference": "integer"
+    },
+    "root_box": {
+      "radius": "array:decimal_pair",
+      "theta": "array:decimal_pair"
+    },
+    "root_panel": {
+      "certificate_120": "object:certificate",
+      "certificate_80": "object:certificate",
+      "centers_agree": "boolean",
+      "horizon": "integer",
+      "inner_intersection": "object:root_box",
+      "newton_120": "object:newton_panel",
+      "newton_80": "object:newton_panel"
+    },
+    "stability": {
+      "arnoldi": "object:arnoldi",
+      "continuation_arms": "array:continuation_arms",
+      "exact_arm": "object:exact_arm",
+      "gates": "object:stability_gates",
+      "horizon": "integer",
+      "rounded_root": "array:number_pair"
+    },
+    "stability_gates": {
+      "continuations_complete": "boolean",
+      "exact_arm": "boolean",
+      "instability_supported": "boolean",
+      "panels_complete": "boolean",
+      "panel_agreement": "boolean",
+      "perturbation_contraction": "boolean",
+      "ritz_residuals": "boolean",
+      "symmetries": "boolean"
+    },
+    "exact_arm": {
+      "completed": "boolean",
+      "maximum_distance": "number",
+      "samples": "array:trajectory_samples",
+      "stopped": "boolean"
+    },
+    "tail_bound": {
+      "horizon": "integer",
+      "jacobian_radius_bound": "decimal",
+      "jacobian_theta_bound": "decimal",
+      "residual_bound": "decimal"
+    },
+    "tail_certificate_panel": {
+      "certificate": "object:certificate",
+      "precision_dps": "enum:precision",
+      "root": "array:decimal_pair"
+    },
+    "tail_constants": {
+      "phi0_bound": "decimal",
+      "phi1_bound": "decimal",
+      "radius_maximum": "decimal"
+    },
+    "tail_panel_comparison": {
+      "intersection": "object:root_box",
+      "overlap": "boolean"
+    },
+    "trajectory_sample": {
+      "distance": "number",
+      "step": "integer"
+    }
+  },
+  "primitive_contract": {
+    "boolean": "exact native Python bool",
+    "decimal": "finite base-10 number encoded as a native string",
+    "integer": "exact native Python int excluding bool",
+    "null": "exact native Python None",
+    "number": "finite native Python int or float excluding bool",
+    "path": "repository-relative POSIX path encoded as a native string",
+    "sha1": "40 lowercase hexadecimal characters",
+    "sha256": "64 lowercase hexadecimal characters",
+    "string": "exact native Python str",
+    "uuid4": "canonical version-4 UUID string"
+  },
+  "root": "object:payload",
+  "strict": {
+    "allow_additional_fields": false,
+    "allow_nonfinite_numbers": false,
+    "allow_numpy_scalars": false,
+    "allow_self_hash_in_result": false
+  }
+}
