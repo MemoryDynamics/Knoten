@@ -1,25 +1,27 @@
 {
   "arrays": {
     "artifact_rows": {"item": "object:artifact", "length": 2},
-    "arnoldi_convergence_pairs": {"item": "object:eigenpair", "length": 36},
-    "arnoldi_primary_pairs": {"item": "object:eigenpair", "length": 24},
-    "certificate_panels": {"item": "object:tail_certificate_panel", "length": 2},
+    "arnoldi_convergence_pairs": {"item": "nullable:object:eigenpair", "length": 36},
+    "arnoldi_primary_pairs": {"item": "nullable:object:eigenpair", "length": 24},
+    "certificate_panels": {"item": "nullable:object:tail_certificate_panel", "length": 2},
     "circular_cases": {"item": "object:circular_case", "length": 9},
     "complex_vector_4800": {"item": "array:number_pair", "length": 4800},
-    "continuation_arms": {"item": "object:continuation_arm", "length": 3},
+    "continuation_arms": {"item": "nullable:object:continuation_arm", "length": 3},
     "decimal_matrix_2": {"item": "array:decimal_pair", "length": 2},
     "decimal_pair": {"item": "decimal", "length": 2},
-    "drift_rows": {"item": "object:drift_row", "length": 2},
+    "drift_rows": {"item": "nullable:object:drift_row", "length": 2},
     "eta_zero_cases": {"item": "object:eta_zero_case", "length": 7},
-    "homotopies": {"item": "object:homotopy", "length": 6},
-    "homotopy_slabs": {"item": "object:homotopy_slab", "length": 64},
+    "exclusion_attempts": {"item": "nullable:object:branch_exclusion", "length": 4},
+    "exclusion_leaves": {"item": "object:exclusion_leaf", "min_length": 1, "max_length": 1048576},
+    "homotopies": {"item": "nullable:object:homotopy", "length": 6},
+    "homotopy_slabs": {"item": "nullable:object:homotopy_slab", "length": 64},
     "mutation_rows": {"item": "object:mutation", "length": 4},
     "number_matrix_2": {"item": "array:number_pair", "length": 2},
     "number_pair": {"item": "number", "length": 2},
     "q_rows": {"item": "object:q_representation", "length": 7},
-    "root_panels": {"item": "object:root_panel", "length": 7},
+    "root_panels": {"item": "nullable:object:root_panel", "length": 7},
     "tail_bound_rows": {"item": "object:tail_bound", "length": 7},
-    "trajectory_samples": {"item": "object:trajectory_sample", "length": 501}
+    "trajectory_samples": {"item": "nullable:object:trajectory_sample", "length": 501}
   },
   "constants": {
     "blob_anchor_interval": "fc6e816c6895e408693fbde176afdaee963c20b9",
@@ -30,14 +32,14 @@
     "blob_rotating_wave_interval": "58ce9b0862f980c17c691c4555557e8e363468a4",
     "blob_rotating_wave_stability": "9defb5a6876371202e1ba57cea030c997b9c6edd",
     "claim_boundary": "local fixed-alpha rotating-wave root transfer with numerical large-H stability support only; no global uniqueness, generic formation, infinite-dimensional stability, interaction, oscillator, spin, momentum, inertia or mass",
-    "contract_version": 1,
+    "contract_version": 2,
     "evidence_revision": "bf038d758f2dd8a367699832f194621756c39696",
     "forward_horizons": [1200, 1500, 1800, 2400, 3600],
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
-    "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v1",
-    "protocol_blob": "401f12d6572ecac943e0a0cc3ca19edf6236915a",
-    "protocol_revision": "f817574a5562ca6cd012752eeb414d5b5ecd555f",
+    "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v2",
+    "protocol_blob": "4a24d536275eecc91aea0dcc670feb34152111fb",
+    "protocol_revision": "a3c244335bc520ae5b482e33c3857305060d4801",
     "true": true
   },
   "enums": {
@@ -53,6 +55,8 @@
       "rotating-wave-horizon-transfer-inconclusive"
     ],
     "direction": ["forward", "lower-tail"],
+    "exclusion_leaf_classification": ["residual-excluded", "krawczyk-root", "unresolved"],
+    "exclusion_status": ["all-residual-excluded", "other-root", "inconclusive"],
     "gate_state": ["pass", "fail", "inconclusive"],
     "lower_tail_status": ["lower-tail-stress-pass", "lower-tail-stress-loss", "lower-tail-stress-inconclusive"],
     "mutation_name": ["drift-width", "reverse-modulo", "overwrite-before-read", "wrong-oldest-slot"],
@@ -87,6 +91,14 @@
     "artifact": {
       "path": "path",
       "role": "enum:artifact_role"
+    },
+    "branch_exclusion": {
+      "from_horizon": "integer",
+      "leaves": "array:exclusion_leaves",
+      "local_domain": "object:root_box",
+      "max_depth": "integer",
+      "status": "enum:exclusion_status",
+      "to_horizon": "integer"
     },
     "certificate": {
       "box": "object:root_box",
@@ -148,7 +160,12 @@
       "normalized_residual": "number",
       "rotation_overlap": "number",
       "translation_overlap": "number",
-      "vector": "array:complex_vector_4800"
+      "vector": "nullable:array:complex_vector_4800"
+    },
+    "exclusion_leaf": {
+      "box": "object:root_box",
+      "classification": "enum:exclusion_leaf_classification",
+      "depth": "integer"
     },
     "eta_zero_case": {
       "horizon": "integer",
@@ -159,6 +176,7 @@
     "finite_branch": {
       "direct_replay_pass": "boolean",
       "drift": "object:drift",
+      "exclusions": "array:exclusion_attempts",
       "forward_horizons": "const:forward_horizons",
       "homotopies": "array:homotopies",
       "horizons": "const:horizons",
@@ -298,7 +316,7 @@
     "stability": {
       "arnoldi": "object:arnoldi",
       "continuation_arms": "array:continuation_arms",
-      "exact_arm": "object:exact_arm",
+      "exact_arm": "nullable:object:exact_arm",
       "gates": "object:stability_gates",
       "horizon": "integer",
       "rounded_root": "array:number_pair"
@@ -336,7 +354,7 @@
       "radius_maximum": "decimal"
     },
     "tail_panel_comparison": {
-      "intersection": "object:root_box",
+      "intersection": "nullable:object:root_box",
       "overlap": "boolean"
     },
     "trajectory_sample": {

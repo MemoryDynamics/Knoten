@@ -17,7 +17,7 @@ AUDITOR_PATH = ROOT / (
 )
 SCHEMA_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
 )
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
 
@@ -58,7 +58,7 @@ def _sha256(path: Path) -> str:
 
 def _manifest(result_path: Path, report_path: Path) -> dict[str, object]:
     return {
-        "schema": "scalar-memory-rotating-wave-horizon-publication-v1",
+        "schema": "scalar-memory-rotating-wave-horizon-publication-v2",
         "artifacts": [
             {
                 "role": "result-json",
@@ -260,3 +260,29 @@ def test_auditor_rejects_a_schema_valid_reconstruction_mismatch(
             manifest_path=manifest_path,
             schema_path=SCHEMA_PATH,
         )
+
+
+def test_auditor_independently_rejects_null_holes_and_false_positive_gate(
+    auditor,
+) -> None:
+    hole = auditor.contract_witness()
+    hole["stability"]["continuation_arms"][0]["samples"][2] = None
+    with pytest.raises(ValueError, match="prefix"):
+        auditor._verify_reconstructed_values(hole)
+
+    false_pass = auditor.contract_witness()
+    false_pass["finite_branch"]["root_panels"][6] = None
+    false_pass["finite_branch"]["homotopies"][3] = None
+    false_pass["finite_branch"]["drift"]["center_diagnostics"][1] = None
+    false_pass["finite_branch"]["drift"]["interval_upper_bounds"][1] = None
+    false_pass["finite_branch"]["drift"]["pass"] = False
+    false_pass["infinite_tail"]["certificate_panels"] = [None, None]
+    false_pass["infinite_tail"]["panel_comparison"]["intersection"] = None
+    false_pass["infinite_tail"]["panel_comparison"]["overlap"] = False
+    with pytest.raises(ValueError, match="G1F"):
+        auditor._verify_reconstructed_values(false_pass)
+
+    false_summary = auditor.contract_witness()
+    false_summary["controls"]["eta_zero_cases"][0]["pass"] = False
+    with pytest.raises(ValueError, match="controls.pass"):
+        auditor._verify_reconstructed_values(false_summary)

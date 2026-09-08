@@ -27,7 +27,7 @@ from emergenz_knoten.rotating_wave_stability import native_fifo_step
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
 )
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
 DECISION_PASS = (
@@ -129,9 +129,13 @@ def _validate_schema_value(
         definition = contract["arrays"][name]
         if type(value) is not list:
             raise TypeError(f"{path}: expected array:{name}")
-        if len(value) != definition["length"]:
+        if "length" in definition and len(value) != definition["length"]:
+            raise ValueError(f"{path}: array:{name} expected length {definition['length']}")
+        minimum = definition.get("min_length", 0)
+        maximum = definition.get("max_length", math.inf)
+        if not minimum <= len(value) <= maximum:
             raise ValueError(
-                f"{path}: array:{name} expected length {definition['length']}"
+                f"{path}: array:{name} expected length in [{minimum}, {maximum}]"
             )
         for index, item in enumerate(value):
             _validate_schema_value(
@@ -183,9 +187,16 @@ def validate_result(payload: dict[str, Any]) -> None:
     _verify_result_semantics(payload)
 
 
-def _witness_value(specification: str, contract: dict[str, Any]) -> Any:
+def _witness_value(
+    specification: str,
+    contract: dict[str, Any],
+    *,
+    fill_nullable: bool,
+) -> Any:
     if specification.startswith("nullable:"):
-        return None
+        if not fill_nullable:
+            return None
+        specification = specification.split(":", 1)[1]
     primitives: dict[str, Any] = {
         "boolean": False,
         "integer": 0,
@@ -207,13 +218,16 @@ def _witness_value(specification: str, contract: dict[str, Any]) -> Any:
         return copy.deepcopy(contract["enums"][name][0])
     if kind == "array":
         definition = contract["arrays"][name]
+        length = definition.get("length", definition.get("min_length", 0))
         return [
-            _witness_value(definition["item"], contract)
-            for _ in range(definition["length"])
+            _witness_value(
+                definition["item"], contract, fill_nullable=fill_nullable
+            )
+            for _ in range(length)
         ]
     if kind == "object":
         return {
-            key: _witness_value(child, contract)
+            key: _witness_value(child, contract, fill_nullable=fill_nullable)
             for key, child in contract["objects"][name].items()
         }
     raise ValueError(f"unknown witness specification {specification}")
@@ -221,7 +235,7 @@ def _witness_value(specification: str, contract: dict[str, Any]) -> Any:
 
 def contract_witness() -> dict[str, Any]:
     contract = _load_result_schema()
-    result = _witness_value(contract["root"], contract)
+    result = _witness_value(contract["root"], contract, fill_nullable=True)
     result["identity"]["parameters"] = {
         **PARAMETERS,
         "anchor_radius": 0.946517504804225,
@@ -231,6 +245,14 @@ def contract_witness() -> dict[str, Any]:
     result["publication"]["artifacts"][0]["role"] = "result-json"
     result["publication"]["artifacts"][1]["role"] = "readable-report"
     result["publication"]["manifest_published_last"] = True
+    homotopy_edges = (
+        (1200, 1500, "forward"),
+        (1500, 1800, "forward"),
+        (1800, 2400, "forward"),
+        (2400, 3600, "forward"),
+        (1200, 900, "lower-tail"),
+        (900, 600, "lower-tail"),
+    )
     for index, panel in enumerate(result["finite_branch"]["root_panels"]):
         panel["horizon"] = HORIZONS[index]
         panel["newton_80"]["precision_dps"] = 80
@@ -241,6 +263,37 @@ def contract_witness() -> dict[str, Any]:
             "radius": ["0.946517504804225", "0.946517504804225"],
             "theta": ["0.015770381717135", "0.015770381717135"],
         }
+        panel["centers_agree"] = True
+        panel["certificate_80"]["strict_interior"] = True
+        panel["certificate_120"]["strict_interior"] = True
+    for homotopy, (first, second, direction) in zip(
+        result["finite_branch"]["homotopies"],
+        homotopy_edges,
+        strict=True,
+    ):
+        homotopy.update(
+            {
+                "from_horizon": first,
+                "to_horizon": second,
+                "direction": direction,
+                "pass": True,
+                "status": "pass",
+            }
+        )
+        for index, slab in enumerate(homotopy["slabs"]):
+            slab.update(
+                {
+                    "index": index,
+                    "s_interval": [
+                        format(Decimal(index) / Decimal(64), "f"),
+                        format(Decimal(index + 1) / Decimal(64), "f"),
+                    ],
+                    "strict_interior": True,
+                    "overlaps_previous": None if index == 0 else True,
+                }
+            )
+    result["finite_branch"]["exclusions"] = [None] * 4
+    result["finite_branch"]["direct_replay_pass"] = True
     drift_rows = [
         {
             "from_horizon": 1800,
@@ -268,6 +321,14 @@ def contract_witness() -> dict[str, Any]:
         {"horizon": horizon, **tail_bounds(horizon=horizon, precision_dps=80)}
         for horizon in HORIZONS
     ]
+    for precision, panel in zip(
+        (120, 160),
+        result["infinite_tail"]["certificate_panels"],
+        strict=True,
+    ):
+        panel["precision_dps"] = precision
+        panel["certificate"]["strict_interior"] = True
+    result["infinite_tail"]["panel_comparison"]["overlap"] = True
     result["stability"]["horizon"] = 2400
     primary = result["stability"]["arnoldi"]["primary"]
     convergence = result["stability"]["arnoldi"]["convergence"]
@@ -277,6 +338,92 @@ def contract_witness() -> dict[str, Any]:
     convergence.update(
         {"expected_count": 36, "requested_count": 36, "ncv": 144, "max_iterations": 40000, "tolerance": 1e-12}
     )
+    primary["status"] = "complete"
+    convergence["status"] = "complete"
+    for panel in (primary, convergence):
+        for pair in panel["eigenpairs"]:
+            pair.update(
+                {
+                    "eigenvalue": [0.9, 0.0],
+                    "modulus": 0.9,
+                    "normalized_residual": 0.0,
+                    "translation_overlap": 0.0,
+                    "rotation_overlap": 0.0,
+                    "classification": "transverse",
+                }
+            )
+        for index, classification in enumerate(
+            ("translation", "translation", "rotation")
+        ):
+            pair = panel["eigenpairs"][index]
+            pair.update(
+                {
+                    "eigenvalue": [1.0, 0.0],
+                    "modulus": 1.0,
+                    "classification": classification,
+                }
+            )
+            pair[f"{classification}_overlap"] = 1.0
+    arm_names = ("radial", "tangential", "full-history-transverse")
+    for arm, name in zip(
+        result["stability"]["continuation_arms"], arm_names, strict=True
+    ):
+        arm.update(
+            {
+                "name": name,
+                "completed": True,
+                "stopped": False,
+                "initial_distance": 1.0,
+                "final_distance": 0.05,
+                "final_ratio": 0.05,
+                "growth_factor": 1.0,
+            }
+        )
+        for index, sample in enumerate(arm["samples"]):
+            sample.update({"step": 10 * index, "distance": 0.0})
+    exact_arm = result["stability"]["exact_arm"]
+    exact_arm.update(
+        {"completed": True, "stopped": False, "maximum_distance": 0.0}
+    )
+    for index, sample in enumerate(exact_arm["samples"]):
+        sample.update({"step": 10 * index, "distance": 0.0})
+    result["stability"]["gates"] = {
+        "continuations_complete": True,
+        "exact_arm": True,
+        "instability_supported": False,
+        "panels_complete": True,
+        "panel_agreement": True,
+        "perturbation_contraction": True,
+        "ritz_residuals": True,
+        "symmetries": True,
+    }
+    result["stability"]["arnoldi"]["panel_agreement"].update(
+        {"pass": True, "symmetry_pass": True}
+    )
+    result["controls"]["pass"] = True
+    circular_cases = (
+        ("noncircle-H17", 17),
+        ("noncircle-H257", 257),
+        *((f"anchor-H{horizon}", horizon) for horizon in HORIZONS),
+    )
+    for row, (case_id, horizon) in zip(
+        result["controls"]["circular_cases"], circular_cases, strict=True
+    ):
+        row.update({"case_id": case_id, "horizon": horizon, "pass": True})
+    for row, horizon in zip(
+        result["controls"]["eta_zero_cases"], HORIZONS, strict=True
+    ):
+        row.update({"horizon": horizon, "steps": horizon + 1, "pass": True})
+    mutation_names = (
+        "drift-width",
+        "reverse-modulo",
+        "overwrite-before-read",
+        "wrong-oldest-slot",
+    )
+    for row, name in zip(
+        result["controls"]["mutations"], mutation_names, strict=True
+    ):
+        row.update({"name": name, "detected": True})
     gates = {
         "G0": "pass",
         "G1F": "pass",
@@ -640,6 +787,260 @@ def classify_horizon(
     }
 
 
+def _nonnull_prefix_length(values: Sequence[Any], *, path: str) -> int:
+    count = 0
+    saw_null = False
+    for value in values:
+        if value is None:
+            saw_null = True
+        elif saw_null:
+            raise ValueError(f"{path}: non-null values must form a prefix")
+        else:
+            count += 1
+    return count
+
+
+def _verify_root_slots(root_panels: list[dict[str, Any] | None]) -> None:
+    for index, panel in enumerate(root_panels):
+        if panel is not None and panel["horizon"] != HORIZONS[index]:
+            raise ValueError(
+                f"$.finite_branch.root_panels[{index}]: horizon order mismatch"
+            )
+    for previous, current in ((2, 3), (3, 4), (4, 5), (5, 6)):
+        if root_panels[current] is not None and root_panels[previous] is None:
+            raise ValueError("$.finite_branch.root_panels: forward dependency gap")
+    if root_panels[1] is not None and root_panels[2] is None:
+        raise ValueError("$.finite_branch.root_panels: lower dependency gap")
+    if root_panels[0] is not None and root_panels[1] is None:
+        raise ValueError("$.finite_branch.root_panels: lower dependency gap")
+
+
+def _verify_homotopy_slots(
+    homotopies: list[dict[str, Any] | None],
+    root_panels: list[dict[str, Any] | None],
+) -> None:
+    edges = (
+        (1200, 1500, "forward", 2, 3),
+        (1500, 1800, "forward", 3, 4),
+        (1800, 2400, "forward", 4, 5),
+        (2400, 3600, "forward", 5, 6),
+        (1200, 900, "lower-tail", 2, 1),
+        (900, 600, "lower-tail", 1, 0),
+    )
+    _nonnull_prefix_length(homotopies[:4], path="$.finite_branch.homotopies[0:4]")
+    _nonnull_prefix_length(homotopies[4:], path="$.finite_branch.homotopies[4:6]")
+    for index, (homotopy, edge) in enumerate(zip(homotopies, edges, strict=True)):
+        if homotopy is None:
+            continue
+        first, second, direction, first_slot, second_slot = edge
+        if root_panels[first_slot] is None or root_panels[second_slot] is None:
+            raise ValueError(
+                f"$.finite_branch.homotopies[{index}]: missing endpoint root"
+            )
+        if (
+            homotopy["from_horizon"],
+            homotopy["to_horizon"],
+            homotopy["direction"],
+        ) != (first, second, direction):
+            raise ValueError(f"$.finite_branch.homotopies[{index}]: edge mismatch")
+        slab_count = _nonnull_prefix_length(
+            homotopy["slabs"],
+            path=f"$.finite_branch.homotopies[{index}].slabs",
+        )
+        for slab_index, slab in enumerate(homotopy["slabs"][:slab_count]):
+            if slab["index"] != slab_index:
+                raise ValueError(
+                    f"$.finite_branch.homotopies[{index}].slabs: index mismatch"
+                )
+        slab_state = evaluate_homotopy_slabs(homotopy["slabs"][:slab_count])
+        if homotopy["status"] == "pass":
+            if slab_state != "pass" or homotopy["pass"] is not True:
+                raise ValueError(
+                    f"$.finite_branch.homotopies[{index}]: false pass"
+                )
+        elif homotopy["pass"] is not False:
+            raise ValueError(
+                f"$.finite_branch.homotopies[{index}]: non-pass status mismatch"
+            )
+
+
+def _verify_exclusions(
+    exclusions: list[dict[str, Any] | None],
+    *,
+    local_branch_excluded: bool,
+) -> None:
+    edges = ((1200, 1500), (1500, 1800), (1800, 2400), (2400, 3600))
+    complete_exclusion = False
+    for index, (attempt, edge) in enumerate(zip(exclusions, edges, strict=True)):
+        if attempt is None:
+            continue
+        if (attempt["from_horizon"], attempt["to_horizon"]) != edge:
+            raise ValueError(f"$.finite_branch.exclusions[{index}]: edge mismatch")
+        if attempt["max_depth"] != 20:
+            raise ValueError(f"$.finite_branch.exclusions[{index}]: depth mismatch")
+        leaves = attempt["leaves"]
+        status = attempt["status"]
+        classifications = [leaf["classification"] for leaf in leaves]
+        if status == "all-residual-excluded":
+            if any(value != "residual-excluded" for value in classifications):
+                raise ValueError(
+                    f"$.finite_branch.exclusions[{index}]: false exclusion"
+                )
+            complete_exclusion = True
+        elif status == "other-root" and "krawczyk-root" not in classifications:
+            raise ValueError(
+                f"$.finite_branch.exclusions[{index}]: missing other root"
+            )
+    if local_branch_excluded is not complete_exclusion:
+        raise ValueError("$.classification.gates.local_branch_excluded: mismatch")
+
+
+def _verify_arnoldi_panel(
+    panel: dict[str, Any],
+    *,
+    path: str,
+    expected_count: int,
+) -> None:
+    pairs = panel["eigenpairs"]
+    count = _nonnull_prefix_length(pairs, path=f"{path}.eigenpairs")
+    missing_vector = any(
+        pair["vector"] is None for pair in pairs[:count]
+    )
+    if panel["expected_count"] != expected_count or panel["requested_count"] != expected_count:
+        raise ValueError(f"{path}: registered count mismatch")
+    if panel["status"] == "complete" and (count != expected_count or missing_vector):
+        raise ValueError(f"{path}: complete status with incomplete slots")
+    if panel["status"] == "missing-vectors" and not missing_vector:
+        raise ValueError(f"{path}: missing-vectors status without missing vector")
+    if panel["status"] == "wrong-cardinality" and count == expected_count:
+        raise ValueError(f"{path}: wrong-cardinality status with full count")
+
+
+def _verify_trajectory(
+    arm: dict[str, Any],
+    *,
+    path: str,
+) -> None:
+    samples = arm["samples"]
+    count = _nonnull_prefix_length(samples, path=f"{path}.samples")
+    for index, sample in enumerate(samples[:count]):
+        expected_step = 10 * index
+        if index < count - 1 or arm["completed"]:
+            if sample["step"] != expected_step:
+                raise ValueError(f"{path}.samples: step mismatch")
+        elif not 10 * (index - 1 if index else 0) <= sample["step"] <= expected_step:
+            raise ValueError(f"{path}.samples: stop step mismatch")
+    if arm["completed"] and (count != 501 or arm["stopped"]):
+        raise ValueError(f"{path}: complete trajectory has missing samples")
+    if arm["stopped"] and arm["completed"]:
+        raise ValueError(f"{path}: stopped trajectory marked complete")
+
+
+def _stability_evidence(payload: dict[str, Any]) -> dict[str, bool]:
+    stability = payload["stability"]
+    panels = (
+        stability["arnoldi"]["primary"],
+        stability["arnoldi"]["convergence"],
+    )
+    panels_complete = all(
+        panel["status"] == "complete"
+        and all(pair is not None and pair["vector"] is not None for pair in panel["eigenpairs"])
+        for panel in panels
+    )
+    ritz_residuals = panels_complete and all(
+        pair["normalized_residual"] <= 1e-8
+        for panel in panels
+        for pair in panel["eigenpairs"]
+    )
+    symmetries = bool(
+        panels_complete
+        and stability["arnoldi"]["panel_agreement"]["symmetry_pass"]
+    )
+    agreement = bool(
+        panels_complete and stability["arnoldi"]["panel_agreement"]["pass"]
+    )
+    arms = stability["continuation_arms"]
+    continuations_complete = all(
+        arm is not None and arm["completed"] and not arm["stopped"] for arm in arms
+    )
+    contraction = bool(
+        continuations_complete
+        and all(arm["final_ratio"] <= 0.1 for arm in arms)
+    )
+    exact = stability["exact_arm"]
+    exact_pass = bool(
+        exact is not None
+        and exact["completed"]
+        and not exact["stopped"]
+        and exact["maximum_distance"] <= 1e-10
+    )
+    transverse = [
+        pair
+        for panel in panels
+        for pair in panel["eigenpairs"]
+        if pair is not None and pair["classification"] == "transverse"
+    ]
+    stable_spectrum = bool(
+        panels_complete
+        and transverse
+        and all(pair["modulus"] < 1.0 - 1e-4 for pair in transverse)
+    )
+    primary_transverse = [
+        pair for pair in panels[0]["eigenpairs"] if pair is not None and pair["classification"] == "transverse"
+    ]
+    convergence_transverse = [
+        pair for pair in panels[1]["eigenpairs"] if pair is not None and pair["classification"] == "transverse"
+    ]
+    unstable_spectrum = bool(
+        panels_complete
+        and agreement
+        and primary_transverse
+        and convergence_transverse
+        and max(pair["modulus"] for pair in primary_transverse) > 1.0 + 1e-6
+        and max(pair["modulus"] for pair in convergence_transverse) > 1.0 + 1e-6
+    )
+    growth = any(
+        arm is not None and arm["growth_factor"] >= 100.0 for arm in arms
+    )
+    return {
+        "continuations_complete": continuations_complete,
+        "exact_arm": exact_pass,
+        "instability_supported": bool(
+            ritz_residuals and symmetries and unstable_spectrum and growth
+        ),
+        "panels_complete": panels_complete,
+        "panel_agreement": agreement,
+        "perturbation_contraction": bool(stable_spectrum and contraction),
+        "ritz_residuals": ritz_residuals,
+        "symmetries": symmetries,
+    }
+
+
+def _controls_evidence(payload: dict[str, Any]) -> bool:
+    controls = payload["controls"]
+    expected_horizons = [17, 257, *HORIZONS]
+    circular = controls["circular_cases"]
+    eta_zero = controls["eta_zero_cases"]
+    mutations = controls["mutations"]
+    return bool(
+        [row["horizon"] for row in circular] == expected_horizons
+        and all(row["pass"] for row in circular)
+        and [row["horizon"] for row in eta_zero] == list(HORIZONS)
+        and all(
+            row["steps"] == row["horizon"] + 1 and row["pass"]
+            for row in eta_zero
+        )
+        and [row["name"] for row in mutations]
+        == [
+            "drift-width",
+            "reverse-modulo",
+            "overwrite-before-read",
+            "wrong-oldest-slot",
+        ]
+        and all(row["detected"] for row in mutations)
+    )
+
+
 def _verify_result_semantics(payload: dict[str, Any]) -> None:
     expected_parameters = {
         **PARAMETERS,
@@ -649,11 +1050,9 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
     }
     if payload["identity"]["parameters"] != expected_parameters:
         raise ValueError("$.identity.parameters: registered values do not match")
-    root_horizons = [
-        panel["horizon"] for panel in payload["finite_branch"]["root_panels"]
-    ]
-    if root_horizons != list(HORIZONS):
-        raise ValueError("$.finite_branch.root_panels: horizon order mismatch")
+    root_panels = payload["finite_branch"]["root_panels"]
+    _verify_root_slots(root_panels)
+    _verify_homotopy_slots(payload["finite_branch"]["homotopies"], root_panels)
     if payload["stability"]["horizon"] != 2400:
         raise ValueError("$.stability.horizon: expected 2400")
     roles = [row["role"] for row in payload["publication"]["artifacts"]]
@@ -667,21 +1066,30 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
     ]
     if payload["infinite_tail"]["bounds"] != expected_bounds:
         raise ValueError("$.infinite_tail.bounds: reconstruction mismatch")
-    drift_rows = payload["finite_branch"]["drift"]["interval_upper_bounds"]
+    drift = payload["finite_branch"]["drift"]
+    drift_rows = drift["interval_upper_bounds"]
     root_boxes = {
         panel["horizon"]: panel["inner_intersection"]
-        for panel in payload["finite_branch"]["root_panels"]
+        for panel in root_panels
+        if panel is not None
     }
     for index, (first_horizon, second_horizon) in enumerate(
         ((1800, 2400), (2400, 3600))
     ):
+        row = drift_rows[index]
+        if first_horizon not in root_boxes or second_horizon not in root_boxes:
+            if row is not None:
+                raise ValueError(
+                    f"$.finite_branch.drift.interval_upper_bounds[{index}]: "
+                    "value without prerequisite root"
+                )
+            continue
         radius_component, theta_component = _interval_drift_components(
             root_boxes[first_horizon],
             root_boxes[second_horizon],
             radius_scale=0.946517504804225,
             theta_scale=0.015770381717135,
         )
-        row = drift_rows[index]
         expected_row = {
             "from_horizon": first_horizon,
             "to_horizon": second_horizon,
@@ -694,7 +1102,119 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
                 f"$.finite_branch.drift.interval_upper_bounds[{index}]: "
                 "reconstruction mismatch"
             )
+    if any(row is None for row in drift_rows):
+        expected_drift_pass = False
+    else:
+        expected_drift_pass = drift_gates(
+            previous_upper=drift_rows[0]["upper_bound"],
+            final_upper=drift_rows[1]["upper_bound"],
+        )["pass"]
+    if drift["pass"] is not expected_drift_pass:
+        raise ValueError("$.finite_branch.drift.pass: reconstruction mismatch")
+
     observed = payload["classification"]
+    gates = observed["gates"]
+    _verify_exclusions(
+        payload["finite_branch"]["exclusions"],
+        local_branch_excluded=gates["local_branch_excluded"],
+    )
+    _verify_arnoldi_panel(
+        payload["stability"]["arnoldi"]["primary"],
+        path="$.stability.arnoldi.primary",
+        expected_count=24,
+    )
+    _verify_arnoldi_panel(
+        payload["stability"]["arnoldi"]["convergence"],
+        path="$.stability.arnoldi.convergence",
+        expected_count=36,
+    )
+    arms = payload["stability"]["continuation_arms"]
+    _nonnull_prefix_length(arms, path="$.stability.continuation_arms")
+    for index, arm in enumerate(arms):
+        if arm is not None:
+            _verify_trajectory(
+                arm, path=f"$.stability.continuation_arms[{index}]"
+            )
+    exact_arm = payload["stability"]["exact_arm"]
+    if exact_arm is not None:
+        _verify_trajectory(exact_arm, path="$.stability.exact_arm")
+
+    stability_evidence = _stability_evidence(payload)
+    if payload["stability"]["gates"] != stability_evidence:
+        raise ValueError("$.stability.gates: reconstruction mismatch")
+    controls_evidence = _controls_evidence(payload)
+    if payload["controls"]["pass"] is not controls_evidence:
+        raise ValueError("$.controls.pass: reconstruction mismatch")
+
+    def complete_root(index: int) -> bool:
+        panel = root_panels[index]
+        return bool(
+            panel is not None
+            and panel["centers_agree"]
+            and panel["certificate_80"]["strict_interior"]
+            and panel["certificate_120"]["strict_interior"]
+        )
+
+    forward_roots_complete = all(complete_root(index) for index in range(2, 7))
+    lower_roots_complete = all(complete_root(index) for index in (2, 1, 0))
+    forward_homotopies_complete = all(
+        row is not None and row["status"] == "pass"
+        for row in payload["finite_branch"]["homotopies"][:4]
+    )
+    lower_homotopies_complete = all(
+        row is not None and row["status"] == "pass"
+        for row in payload["finite_branch"]["homotopies"][4:]
+    )
+    tail_panels = payload["infinite_tail"]["certificate_panels"]
+    tail_complete = bool(
+        all(
+            row is not None and row["certificate"]["strict_interior"]
+            for row in tail_panels
+        )
+        and payload["infinite_tail"]["panel_comparison"]["overlap"]
+    )
+    prerequisites = {
+        "G1F": forward_roots_complete,
+        "G1R": lower_roots_complete,
+        "G2F": forward_homotopies_complete,
+        "G2R": lower_homotopies_complete,
+        "G3": drift["pass"],
+        "G4": tail_complete,
+        "G5": all(
+            stability_evidence[name]
+            for name in (
+                "continuations_complete",
+                "exact_arm",
+                "panels_complete",
+                "panel_agreement",
+                "perturbation_contraction",
+                "ritz_residuals",
+                "symmetries",
+            )
+        ),
+        "G6": controls_evidence,
+    }
+    g0_complete = bool(
+        payload["finite_branch"]["direct_replay_pass"]
+        and all(
+            row["two_ulp_gate"] and row["nonzero_finite"]
+            for row in payload["infinite_tail"]["q_representations"]
+        )
+    )
+    if gates["G0"] == "pass" and not g0_complete:
+        raise ValueError("$.classification.gates.G0: false pass")
+    for gate_name, complete in prerequisites.items():
+        if gates[gate_name] == "pass" and not complete:
+            raise ValueError(f"$.classification.gates.{gate_name}: false pass")
+    if gates["large_h_instability_supported"] is not stability_evidence[
+        "instability_supported"
+    ]:
+        raise ValueError(
+            "$.classification.gates.large_h_instability_supported: mismatch"
+        )
+    expected_finite_only = bool(gates["G5"] == "pass" and gates["G4"] != "pass")
+    if observed["finite_large_h_stability_only"] is not expected_finite_only:
+        raise ValueError("$.classification.finite_large_h_stability_only: mismatch")
     expected = classify_horizon(
         observed["gates"],
         lower_tail_status=observed["lower_tail_status"],
@@ -730,7 +1250,7 @@ def publish_result(
     _atomic_write_bytes(Path(result_path), result_bytes)
     _atomic_write_bytes(Path(report_path), report_bytes)
     manifest = {
-        "schema": "scalar-memory-rotating-wave-horizon-publication-v1",
+        "schema": "scalar-memory-rotating-wave-horizon-publication-v2",
         "artifacts": [
             {
                 "role": "result-json",

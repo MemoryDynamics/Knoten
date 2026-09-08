@@ -19,7 +19,7 @@ from emergenz_knoten.rotating_wave_stability import circular_history
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
 )
 RUNNER_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
@@ -69,8 +69,10 @@ def _contract() -> dict[str, object]:
 
 
 def _referenced_name(specification: str) -> tuple[str, str] | None:
+    while specification.startswith("nullable:"):
+        specification = specification.split(":", 1)[1]
     if ":" not in specification:
-        return None
+        return "primitive_contract", specification
     namespace, name = specification.split(":", 1)
     mapping = {
         "array": "arrays",
@@ -463,3 +465,119 @@ def test_publication_writes_two_contents_then_hash_manifest(gate, tmp_path: Path
         path = tmp_path / Path(row["path"]).name
         assert hashlib.sha256(path.read_bytes()).hexdigest() == row["sha256"]
     assert "manifest_sha256" not in manifest
+
+
+def _classify_witness(gate, payload: dict[str, object], **gate_updates: object) -> None:
+    gates = payload["classification"]["gates"]
+    gates.update(gate_updates)
+    classification = gate.classify_horizon(
+        gates,
+        lower_tail_status=payload["classification"]["lower_tail_status"],
+    )
+    payload["classification"].update(classification)
+    payload["classification"]["finite_large_h_stability_only"] = bool(
+        gates["G5"] == "pass" and gates["G4"] != "pass"
+    )
+
+
+def test_v2_contract_serializes_a_dependent_root_ladder_stop(gate) -> None:
+    payload = gate.contract_witness()
+    payload["finite_branch"]["root_panels"][4:] = [None, None, None]
+    payload["finite_branch"]["homotopies"][1:4] = [None, None, None]
+    payload["finite_branch"]["drift"]["center_diagnostics"] = [None, None]
+    payload["finite_branch"]["drift"]["interval_upper_bounds"] = [None, None]
+    payload["finite_branch"]["drift"]["pass"] = False
+    payload["infinite_tail"]["certificate_panels"] = [None, None]
+    payload["infinite_tail"]["panel_comparison"]["intersection"] = None
+    payload["infinite_tail"]["panel_comparison"]["overlap"] = False
+    _classify_witness(
+        gate,
+        payload,
+        G1F="inconclusive",
+        G2F="inconclusive",
+        G3="inconclusive",
+        G4="inconclusive",
+    )
+    gate.validate_result(payload)
+
+
+def test_v2_contract_serializes_a_homotopy_prefix_stop(gate) -> None:
+    payload = gate.contract_witness()
+    homotopy = payload["finite_branch"]["homotopies"][1]
+    homotopy["slabs"][11:] = [None] * 53
+    homotopy["slabs"][10]["strict_interior"] = False
+    homotopy["pass"] = False
+    homotopy["status"] = "inconclusive"
+    payload["finite_branch"]["homotopies"][2:4] = [None, None]
+    _classify_witness(gate, payload, G2F="inconclusive")
+    gate.validate_result(payload)
+
+
+def test_v2_contract_serializes_partial_and_missing_vector_arnoldi(gate) -> None:
+    partial = gate.contract_witness()
+    panel = partial["stability"]["arnoldi"]["primary"]
+    panel["eigenpairs"][7:] = [None] * 17
+    panel["status"] = "arpack-no-convergence"
+    partial["stability"]["gates"] = gate._stability_evidence(partial)
+    _classify_witness(gate, partial, G5="inconclusive")
+    gate.validate_result(partial)
+
+    missing = gate.contract_witness()
+    missing_panel = missing["stability"]["arnoldi"]["primary"]
+    missing_panel["eigenpairs"][0]["vector"] = None
+    missing_panel["status"] = "missing-vectors"
+    missing["stability"]["gates"] = gate._stability_evidence(missing)
+    _classify_witness(gate, missing, G5="inconclusive")
+    gate.validate_result(missing)
+
+
+def test_v2_contract_serializes_early_trajectory_stop(gate) -> None:
+    payload = gate.contract_witness()
+    arm = payload["stability"]["continuation_arms"][0]
+    arm["samples"][5:] = [None] * 496
+    arm["completed"] = False
+    arm["stopped"] = True
+    payload["stability"]["gates"] = gate._stability_evidence(payload)
+    _classify_witness(gate, payload, G5="inconclusive")
+    gate.validate_result(payload)
+
+
+def test_v2_contract_rejects_null_holes_and_positive_gates_after_stop(gate) -> None:
+    hole = gate.contract_witness()
+    hole["stability"]["continuation_arms"][0]["samples"][2] = None
+    with pytest.raises(ValueError, match="prefix"):
+        gate.validate_result(hole)
+
+    false_pass = gate.contract_witness()
+    false_pass["finite_branch"]["root_panels"][6] = None
+    false_pass["finite_branch"]["homotopies"][3] = None
+    false_pass["finite_branch"]["drift"]["center_diagnostics"][1] = None
+    false_pass["finite_branch"]["drift"]["interval_upper_bounds"][1] = None
+    false_pass["finite_branch"]["drift"]["pass"] = False
+    false_pass["infinite_tail"]["certificate_panels"] = [None, None]
+    false_pass["infinite_tail"]["panel_comparison"]["intersection"] = None
+    false_pass["infinite_tail"]["panel_comparison"]["overlap"] = False
+    with pytest.raises(ValueError, match="G1F"):
+        gate.validate_result(false_pass)
+
+
+def test_v2_contract_rejects_evidence_summary_and_instability_lies(gate) -> None:
+    partial = gate.contract_witness()
+    partial["stability"]["arnoldi"]["primary"]["eigenpairs"][-1] = None
+    partial["stability"]["arnoldi"]["primary"]["status"] = (
+        "arpack-no-convergence"
+    )
+    with pytest.raises(ValueError, match="stability.gates"):
+        gate.validate_result(partial)
+
+    control = gate.contract_witness()
+    control["controls"]["circular_cases"][0]["pass"] = False
+    with pytest.raises(ValueError, match="controls.pass"):
+        gate.validate_result(control)
+
+    instability = gate.contract_witness()
+    instability["classification"]["gates"][
+        "large_h_instability_supported"
+    ] = True
+    with pytest.raises(ValueError, match="large_h_instability_supported"):
+        gate.validate_result(instability)
