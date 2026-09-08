@@ -59,6 +59,13 @@ endet im
 [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
 mit
 `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
+Ein anschliessendes Negativreview fand, dass der v1-Vertrag fruehe Root-,
+Homotopie-, Arnoldi- und Trajektorienabbrueche nicht ehrlich abbilden konnte.
+Die zweite prospektive Amendierung und der explizite v2-Vertrag schliessen
+diese Luecke; das
+[v2-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v2_review_2026-09-08.md)
+endet mit
+`rotating-wave-horizon-transfer-contract-v2-pass-runner-red-open-target-closed`.
 Der wissenschaftliche Runner ist noch unvollstaendig; ein Horizontlauf ist
 nicht autorisiert.
 

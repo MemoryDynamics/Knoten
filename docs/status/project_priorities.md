@@ -84,8 +84,15 @@ autorisieren keinen weiteren P5-Ziellauf.
    [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
    bindet 40 fokussierte, 985 gesamte Tests und gruene CI mit Verdict
    `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
-   Naechster Schritt ist die targetfreie Implementierung der fehlenden
-   Newton-, Krawczyk-, Arnoldi- und Trajektorienpfade. Noch kein
+   Ein spaeteres Negativreview fand unabbildbare fruehe Abbrueche. Der
+   prospektiv amendierte v2-Vertrag schliesst Root-, Homotopie-, Arnoldi-,
+   Trajektorien- und Gate-Nullsemantik nach 47 fokussierten, 992 gesamten
+   Tests und gruener exakter CI. Das
+   [v2-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v2_review_2026-09-08.md)
+   endet mit
+   `rotating-wave-horizon-transfer-contract-v2-pass-runner-red-open-target-closed`.
+   Naechster Schritt sind targetfreie RED-Tests und Implementierung der
+   fehlenden Newton-, Krawczyk-, Arnoldi- und Trajektorienpfade. Noch kein
    Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne

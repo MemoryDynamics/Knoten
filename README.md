@@ -25,8 +25,10 @@ Stand: 2026-09-08.
   Ein separater Audit trennt den nichttautologischen finite-$H$-Kreis vom
   offenen Horizonttransfer. Das Fixed-$\alpha$-Transferprotokoll ist nach
   negativem Review amendiert und als hinreichend reviewed. Ergebnisvertrag,
-  RED-Historie und targetfreie Infrastruktur sind inzwischen mit 985 Tests
-  und gruener CI geprueft. Der wissenschaftliche Horizont-Runner ist noch
+  RED-Historie und targetfreie Infrastruktur wurden zunaechst mit 985 Tests
+  geprueft. Ein anschliessendes Negativreview fand unabbildbare Abbruchpfade;
+  der prospektiv amendierte v2-Vertrag schliesst sie nach 992 Tests und
+  gruener exakter CI. Der wissenschaftliche Horizont-Runner ist noch
   unvollstaendig; Horizontlauf und weitere P5-Zielausfuehrungen bleiben
   geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine

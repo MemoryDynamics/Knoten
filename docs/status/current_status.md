@@ -56,9 +56,14 @@ konstruktiv falschen binary64-Vergleichs; die Amendierung schliesst sie. Das
 Suffizienzurteil lautet
 `rotating-wave-horizon-transfer-protocol-sufficient-implementation-closed`.
 Ergebnisvertrag und rote targetfreie Tests wurden danach getrennt committed;
-die kleinste Infrastruktur besteht 40 fokussierte und 985 gesamte Tests. Das
+die kleinste Infrastruktur bestand 40 fokussierte und 985 gesamte Tests. Das
 Infrastruktururteil lautet
 `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
+Ein nachfolgendes Negativreview zeigte, dass v1 mehrere registrierte
+Abbruchpfade nicht wahrheitsgetreu serialisieren konnte. Der prospektiv
+amendierte v2-Vertrag besteht 47 fokussierte und 992 gesamte Tests sowie die
+exakte CI; sein Reviewurteil ist
+`rotating-wave-horizon-transfer-contract-v2-pass-runner-red-open-target-closed`.
 Newtonleiter, Krawczyk-Homotopie, Arnoldi- und Trajektorienrunner fehlen noch;
 ein Horizontlauf ist nicht autorisiert.
 
