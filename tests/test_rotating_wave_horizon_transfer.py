@@ -981,16 +981,23 @@ def test_exclusion_adapter_records_other_krawczyk_root(gate, monkeypatch) -> Non
         "certify_rotating_wave_box",
         strict_krawczyk_with_unrelated_failed_gate,
     )
+    payload = gate.contract_witness()
+    previous = payload["finite_branch"]["root_panels"][2]["newton_120"]
     row = gate.local_branch_exclusion_backend_record(
         from_horizon=1200,
         to_horizon=1500,
-        previous_root=("0.95", "0.015"),
+        previous_root=(previous["radius"], previous["theta"]),
     )
 
     assert row["status"] == "other-root"
     assert row["leaves"][0]["classification"] == "krawczyk-root"
     assert row["leaves"][0]["residual_box"] is None
     assert row["leaves"][0]["strict_interior"] is True
+    gate._verify_exclusions(
+        [row, None, None, None],
+        local_branch_excluded=False,
+        root_panels=payload["finite_branch"]["root_panels"],
+    )
 
 
 def test_exclusion_adapter_splits_fifo_on_longer_normalized_edge(

@@ -114,10 +114,15 @@ autorisieren keinen weiteren P5-Ziellauf.
    volle outward-rounded Parameterscheiben, exakt 64 Scheiben, strikter
    Einschluss, Nachbarueberlappung und fail-closed Praefixstopps. Das
    [Homotopie-/Intervallreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_homotopy_interval_review_2026-09-09.md)
-   bindet 1029 gruene CI-Tests, aber keine ausgewertete Horizontkante. Naechster
-   Schritt ist der Ausschlussbaum auf exakt demselben Intervallkern; danach
-   folgen tail-augmentiertes Zertifikat, LCG-Arnoldi,
-   Trajektorienabbildung und Backendkomposition. Kein historischer
+   bindet 1029 gruene CI-Tests, aber keine ausgewertete Horizontkante. Der
+   anschliessende
+   [lokale Ausschlussadapter](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_local_exclusion_review_2026-09-09.md)
+   verwendet exakt denselben Intervallkern und die vorregistrierte
+   normalisierte FIFO-Teilung bis Tiefe 20; keine registrierte Domain wurde
+   ausgewertet, seine CI besteht 1038 Tests. Naechster Schritt ist das
+   tail-augmentierte Zertifikat;
+   danach folgen LCG-Arnoldi, Trajektorienabbildung und Backendkomposition.
+   Kein historischer
    Ergebnisrecord darf als neue Evidenz kopiert werden. Noch kein
    Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die

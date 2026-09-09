@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive`; Root- und Homotopieadapter targetfrei reviewed | keine Interaktionsevidenz; weitere wissenschaftliche Adapter, Horizonttransfer und neue Zielautorisierung bleiben offen |
+| P5-D | `p5d-inconclusive`; Root-, Homotopie- und Ausschlussadapter targetfrei reviewed | keine Interaktionsevidenz; weitere wissenschaftliche Adapter, Horizonttransfer und neue Zielautorisierung bleiben offen |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -84,10 +84,14 @@ nutzt den bestehenden Acht-Schritt-Newton-/Krawczyk-Kern. Der anschliessende
 Homotopieadapter erweitert denselben Intervallkern auf volle geschlossene
 Parameterscheiben und erzwingt 64 Scheiben, strikten Einschluss,
 Nachbarueberlappung sowie fail-closed Praefixstopps. Seine CI besteht 1029
-Tests; keine registrierte Horizontkante wurde ausgewertet. Offen sind
-Ausschlussbaum, tail-augmentiertes Zertifikat, LCG-Arnoldi,
-Trajektorienabbildung und Backendkomposition. Ein Horizontlauf ist nicht
-autorisiert.
+Tests; keine registrierte Horizontkante wurde ausgewertet. Der lokale
+Ausschlussadapter verwendet denselben Residual-/Krawczyk-Kern und bildet die
+feste normalisierte FIFO-Teilung bis Tiefe 20 in den rekonstruierten v3-Record
+ab. Er wurde nur an kontrollierten Antworten getestet; keine registrierte
+Domain ist ausgeschlossen oder als Rootdomain klassifiziert. Seine
+FIFO-kuratierte Implementierungs-CI besteht 1038 Tests. Offen sind das
+tail-augmentierte Zertifikat, LCG-Arnoldi, Trajektorienabbildung und
+Backendkomposition. Ein Horizontlauf ist nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 
@@ -201,4 +205,6 @@ negatives Interaktionsergebnis.
   [finite-Rootadapter-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_finite_root_adapter_review_2026-09-09.md)
   sowie das
   [Homotopie-/Intervallreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_homotopy_interval_review_2026-09-09.md)
+  und das
+  [lokale Ausschlussreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_local_exclusion_review_2026-09-09.md)
 - [Claim-Register](paper_claims.md)
