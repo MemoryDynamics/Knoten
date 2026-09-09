@@ -971,10 +971,15 @@ def test_exclusion_adapter_records_other_krawczyk_root(gate, monkeypatch) -> Non
         lambda **kwargs: _fake_exclusion_balance(excluded=False, **kwargs),
         raising=False,
     )
+    def strict_krawczyk_with_unrelated_failed_gate(**kwargs):
+        record = _fake_homotopy_certificate(**kwargs)
+        record["pass"] = False
+        return record
+
     monkeypatch.setattr(
         gate,
         "certify_rotating_wave_box",
-        lambda **kwargs: _fake_homotopy_certificate(**kwargs),
+        strict_krawczyk_with_unrelated_failed_gate,
     )
     row = gate.local_branch_exclusion_backend_record(
         from_horizon=1200,
@@ -1013,11 +1018,74 @@ def test_exclusion_adapter_splits_fifo_on_longer_normalized_edge(
 
     assert calls == [
         (("0.93", "0.97"), ("0.013", "0.017")),
-        (("0.93", "0.95"), ("0.013", "0.017")),
-        (("0.95", "0.97"), ("0.013", "0.017")),
+        (("0.93", "0.97"), ("0.013", "0.015")),
+        (("0.93", "0.97"), ("0.015", "0.017")),
     ]
     assert [leaf["depth"] for leaf in row["leaves"]] == [1, 1]
     assert row["status"] == "all-residual-excluded"
+
+
+def test_exclusion_adapter_keeps_depth_twenty_leaf_unresolved(
+    gate, monkeypatch
+) -> None:
+    calls = 0
+
+    def fake_balance(**kwargs):
+        nonlocal calls
+        calls += 1
+        follows_leftmost_path = (
+            kwargs["radius_interval"][0] == "0.93"
+            and kwargs["theta_interval"][0] == "0.013"
+        )
+        return _fake_exclusion_balance(
+            excluded=not follows_leftmost_path, **kwargs
+        )
+
+    monkeypatch.setattr(
+        gate, "interval_balance_and_jacobian_box", fake_balance, raising=False
+    )
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_box",
+        lambda **kwargs: _fake_homotopy_certificate(passed=False, **kwargs),
+    )
+    row = gate.local_branch_exclusion_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        previous_root=("0.95", "0.015"),
+    )
+
+    unresolved = [
+        leaf for leaf in row["leaves"] if leaf["classification"] == "unresolved"
+    ]
+    assert calls == 41
+    assert len(row["leaves"]) == 21
+    assert len(unresolved) == 1
+    assert unresolved[0]["depth"] == 20
+    assert unresolved[0]["residual_box"] is None
+    assert row["status"] == "inconclusive"
+
+
+def test_exclusion_adapter_reconstructs_krawczyk_summary(gate, monkeypatch) -> None:
+    monkeypatch.setattr(
+        gate,
+        "interval_balance_and_jacobian_box",
+        lambda **kwargs: _fake_exclusion_balance(excluded=False, **kwargs),
+        raising=False,
+    )
+
+    def false_summary(**kwargs):
+        record = _fake_homotopy_certificate(**kwargs)
+        record["gates"]["krawczyk_strict_interior"] = False
+        return record
+
+    monkeypatch.setattr(gate, "certify_rotating_wave_box", false_summary)
+    with pytest.raises(ValueError, match="summary mismatch"):
+        gate.local_branch_exclusion_backend_record(
+            from_horizon=1200,
+            to_horizon=1500,
+            previous_root=("0.95", "0.015"),
+        )
 
 
 @pytest.mark.parametrize(

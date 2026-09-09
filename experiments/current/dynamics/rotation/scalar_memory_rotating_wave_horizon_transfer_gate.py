@@ -26,6 +26,7 @@ from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
     certify_rotating_wave_box,
     certify_rotating_wave_homotopy_box,
+    interval_balance_and_jacobian_box,
     refine_rotating_wave_root,
 )
 from emergenz_knoten.rotating_wave_stability import native_fifo_step
@@ -278,6 +279,154 @@ def _finite_decimal(value: str, *, path: str) -> Decimal:
     if not result.is_finite():
         raise ValueError(f"{path}: decimal must be finite")
     return result
+
+
+def _exclusion_box_record(box: tuple[Decimal, ...]) -> dict[str, list[str]]:
+    return {
+        "radius": [format(box[0], "f"), format(box[1], "f")],
+        "theta": [format(box[2], "f"), format(box[3], "f")],
+    }
+
+
+def local_branch_exclusion_backend_record(
+    *,
+    from_horizon: int,
+    to_horizon: int,
+    previous_root: tuple[str, str],
+) -> dict[str, Any]:
+    """Exhaust one registered local domain with the fixed dyadic FIFO tree."""
+
+    if type(from_horizon) is not int or type(to_horizon) is not int:
+        raise ValueError("exclusion horizons must be registered integers")
+    if (from_horizon, to_horizon) not in tuple(
+        edge[:2] for edge in _HOMOTOPY_EDGES[:4]
+    ):
+        raise ValueError("unregistered forward exclusion edge")
+    if (
+        type(previous_root) is not tuple
+        or len(previous_root) != 2
+        or any(type(value) is not str for value in previous_root)
+    ):
+        raise TypeError("previous_root must contain two decimal strings")
+    for index, value in enumerate(previous_root):
+        _finite_decimal(value, path=f"previous_root[{index}]")
+
+    parameters = _finite_interval_parameters(to_horizon)
+    with localcontext() as context:
+        context.prec = 180
+        radius, theta = (Decimal(value) for value in previous_root)
+        domain = (
+            max(Decimal("0.8"), radius - Decimal("0.02")),
+            min(Decimal("1.1"), radius + Decimal("0.02")),
+            max(Decimal("0.01"), theta - Decimal("0.002")),
+            min(Decimal("0.022"), theta + Decimal("0.002")),
+        )
+    if domain[0] >= domain[1] or domain[2] >= domain[3]:
+        raise ValueError("previous root does not define a nonempty local domain")
+
+    queue: list[tuple[tuple[Decimal, ...], int]] = [(domain, 0)]
+    next_index = 0
+    leaves: list[dict[str, Any]] = []
+    while next_index < len(queue):
+        box, depth = queue[next_index]
+        next_index += 1
+        box_record = _exclusion_box_record(box)
+        evaluated = interval_balance_and_jacobian_box(
+            radius_interval=tuple(box_record["radius"]),
+            theta_interval=tuple(box_record["theta"]),
+            parameters=parameters,
+            precision_dps=120,
+        )
+        residual_box = [_interval_pair(value) for value in evaluated["balance"]]
+        excludes_zero = any(
+            not (Decimal(component[0]) <= 0 <= Decimal(component[1]))
+            for component in residual_box
+        )
+        if excludes_zero:
+            leaves.append(
+                {
+                    "box": box_record,
+                    "classification": "residual-excluded",
+                    "depth": depth,
+                    "krawczyk_image": None,
+                    "residual_box": residual_box,
+                    "strict_interior": None,
+                }
+            )
+            continue
+
+        with localcontext() as context:
+            context.prec = 180
+            center = ((box[0] + box[1]) / 2, (box[2] + box[3]) / 2)
+            half_width = ((box[1] - box[0]) / 2, (box[3] - box[2]) / 2)
+        raw = None
+        try:
+            raw = certify_rotating_wave_box(
+                radius=format(center[0], "f"),
+                theta=format(center[1], "f"),
+                radius_half_width=format(half_width[0], "f"),
+                theta_half_width=format(half_width[1], "f"),
+                parameters=parameters,
+                precision_dps=120,
+            )
+        except ArithmeticError:
+            pass
+        if raw is not None:
+            image = [_interval_pair(value) for value in raw["krawczyk_image"]]
+            reported_strict = bool(
+                type(raw.get("gates")) is dict
+                and raw["gates"].get("krawczyk_strict_interior") is True
+            )
+            strict = _strict_image_in_box(
+                image,
+                box_record,
+                path=f"exclusion[{from_horizon},{to_horizon}]",
+            )
+            if strict is not reported_strict:
+                raise ValueError("exclusion certificate summary mismatch")
+            if strict:
+                leaves.append(
+                    {
+                        "box": box_record,
+                        "classification": "krawczyk-root",
+                        "depth": depth,
+                        "krawczyk_image": image,
+                        "residual_box": None,
+                        "strict_interior": True,
+                    }
+                )
+                continue
+        if depth == 20:
+            leaves.append(
+                {
+                    "box": box_record,
+                    "classification": "unresolved",
+                    "depth": depth,
+                    "krawczyk_image": None,
+                    "residual_box": None,
+                    "strict_interior": None,
+                }
+            )
+            continue
+        lower, upper = _split_exclusion_box(box)
+        queue.extend(((lower, depth + 1), (upper, depth + 1)))
+
+    classifications = [leaf["classification"] for leaf in leaves]
+    status = (
+        "all-residual-excluded"
+        if all(value == "residual-excluded" for value in classifications)
+        else "other-root"
+        if "krawczyk-root" in classifications
+        else "inconclusive"
+    )
+    return {
+        "from_horizon": from_horizon,
+        "leaves": leaves,
+        "local_domain": _exclusion_box_record(domain),
+        "max_depth": 20,
+        "status": status,
+        "to_horizon": to_horizon,
+    }
 
 
 def _load_result_schema() -> dict[str, Any]:
