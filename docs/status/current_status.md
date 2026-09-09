@@ -79,10 +79,12 @@ wird als Widerspruch verworfen. 70 fokussierte und 1015 gesamte Tests sowie
 die exakte Linux-CI sind gruen. Der anschliessende Backend-Bestandsaudit
 korrigiert die pauschale Fehlstellenbeschreibung: finite Residuen/Jacobians,
 Punkt-Newton, lokale Krawczyk-Boxen sowie FIFO-Map/Jacobian und
-Quotientdistanz sind als Bibliothekskerne vorhanden. Offen sind die strikten
-v3-Adapter, der Homotopieschlauch, der Ausschlussbaum, das tail-augmentierte
-Zertifikat und die Durchleitung des vorgeschriebenen LCG-Starts bis ARPACK.
-Ein Horizontlauf ist nicht autorisiert.
+Quotientdistanz sind als Bibliothekskerne vorhanden. Der finite-Rootadapter
+nutzt inzwischen den bestehenden Acht-Schritt-Newton-/Krawczyk-Kern und ist
+targetfrei mit 1022 Tests geprueft. Offen sind Homotopieschlauch,
+Ausschlussbaum, tail-augmentiertes Zertifikat, LCG-Arnoldi,
+Trajektorienabbildung und Backendkomposition. Ein Horizontlauf ist nicht
+autorisiert.
 
 ## P5-D Code-Review und Remediation
 
@@ -192,4 +194,6 @@ negatives Interaktionsergebnis.
   [Orchestrierungsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_runner_orchestration_review_2026-09-09.md)
   sowie den
   [Backend-Bestandsaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_backend_reuse_audit_2026-09-09.md)
+  und das
+  [finite-Rootadapter-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_finite_root_adapter_review_2026-09-09.md)
 - [Claim-Register](paper_claims.md)

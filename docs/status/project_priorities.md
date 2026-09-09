@@ -108,11 +108,14 @@ autorisieren keinen weiteren P5-Ziellauf.
    zeigt, dass finite
    Residuen/Jacobians, Punkt-Newton, lokale Krawczyk-Boxen,
    Voll-FIFO-Jacobian und Quotientdistanz bereits als Bibliothekskerne
-   vorliegen. Naechster Schritt sind ausschliesslich targetfreie RED-Tests und
-   schmale v3-Adapter; neu bleiben Homotopieschlauch, Ausschlussbaum,
-   tail-augmentiertes Zertifikat und die Durchleitung des eingefrorenen
-   LCG-Starts bis ARPACK. Kein historischer Ergebnisrecord darf als neue
-   Evidenz kopiert werden. Noch kein Horizontlauf und kein Versuch 4.
+   vorliegen. Der erste schmale v3-Rootadapter verwendet diese Kerne fuer die
+   feste Acht-Schritt-Newtonfolge und beide Krawczyk-Boxen; sein Review bindet
+   1022 gruene Tests, aber keinen neuen Root. Naechster Schritt sind
+   targetfreie RED-Tests fuer Homotopieschlauch und gemeinsamen
+   Intervallauswerter; danach folgen Ausschlussbaum, tail-augmentiertes
+   Zertifikat, LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Kein
+   historischer Ergebnisrecord darf als neue Evidenz kopiert werden. Noch kein
+   Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
