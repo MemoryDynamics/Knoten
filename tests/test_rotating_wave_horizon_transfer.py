@@ -599,6 +599,194 @@ def test_v3_contract_rejects_evidence_summary_and_instability_lies(gate) -> None
     with pytest.raises(ValueError, match="controls.pass"):
         gate.validate_result(control)
 
+
+class _SyntheticRunnerBackend:
+    """Primitive donor backend for target-free orchestration tests only."""
+
+    def __init__(
+        self,
+        gate,
+        *,
+        failed_root: tuple[int, int] | None = None,
+        partial_arnoldi: bool = False,
+    ) -> None:
+        self.donor = gate.contract_witness()
+        self.failed_root = failed_root
+        self.partial_arnoldi = partial_arnoldi
+        self.calls: list[tuple[object, ...]] = []
+        self._roots = {
+            panel["horizon"]: panel
+            for panel in self.donor["finite_branch"]["root_panels"]
+        }
+        self._homotopies = {
+            (row["from_horizon"], row["to_horizon"]): row
+            for row in self.donor["finite_branch"]["homotopies"]
+        }
+
+    def direct_replay(self) -> bool:
+        self.calls.append(("direct-replay",))
+        return True
+
+    def finite_root_panel(
+        self,
+        *,
+        horizon: int,
+        precision_dps: int,
+        start: tuple[str, str],
+    ) -> dict[str, object] | None:
+        self.calls.append(("root", horizon, precision_dps, start))
+        if self.failed_root == (horizon, precision_dps):
+            return None
+        panel = self._roots[horizon]
+        return copy.deepcopy(
+            {
+                "newton": panel[f"newton_{precision_dps}"],
+                "outer_certificate": panel[f"outer_certificate_{precision_dps}"],
+                "inner_certificate": panel[f"inner_certificate_{precision_dps}"],
+            }
+        )
+
+    def homotopy_edge(
+        self,
+        *,
+        from_horizon: int,
+        to_horizon: int,
+        from_root: tuple[str, str],
+        to_root: tuple[str, str],
+    ) -> dict[str, object]:
+        self.calls.append(
+            ("homotopy", from_horizon, to_horizon, from_root, to_root)
+        )
+        return copy.deepcopy(self._homotopies[(from_horizon, to_horizon)])
+
+    def local_branch_exclusion(
+        self,
+        *,
+        from_horizon: int,
+        to_horizon: int,
+        previous_root: tuple[str, str],
+    ) -> None:
+        self.calls.append(
+            ("exclusion", from_horizon, to_horizon, previous_root)
+        )
+        return None
+
+    def tail_certificate_panel(
+        self, *, precision_dps: int, root: tuple[str, str]
+    ) -> dict[str, object]:
+        self.calls.append(("tail", precision_dps, root))
+        index = {120: 0, 160: 1}[precision_dps]
+        return copy.deepcopy(
+            self.donor["infinite_tail"]["certificate_panels"][index]
+        )
+
+    def arnoldi_panel(
+        self,
+        *,
+        name: str,
+        rounded_root: tuple[float, float],
+        start: list[float],
+    ) -> dict[str, object]:
+        self.calls.append(("arnoldi", name, rounded_root, len(start)))
+        panel = copy.deepcopy(self.donor["stability"]["arnoldi"][name])
+        if self.partial_arnoldi and name == "primary":
+            panel["eigenpairs"][7:] = [None] * 17
+            panel["status"] = "arpack-no-convergence"
+        return panel
+
+    def continuation_arm(
+        self,
+        *,
+        name: str,
+        rounded_root: tuple[float, float],
+        perturbation: list[float],
+    ) -> dict[str, object]:
+        self.calls.append(("arm", name, rounded_root, len(perturbation)))
+        by_name = {
+            row["name"]: row
+            for row in self.donor["stability"]["continuation_arms"]
+        }
+        return copy.deepcopy(by_name[name])
+
+    def exact_arm(self, *, rounded_root: tuple[float, float]) -> dict[str, object]:
+        self.calls.append(("exact-arm", rounded_root))
+        return copy.deepcopy(self.donor["stability"]["exact_arm"])
+
+    def controls(self) -> dict[str, object]:
+        self.calls.append(("controls",))
+        return copy.deepcopy(self.donor["controls"])
+
+
+def _orchestrate(gate, backend: _SyntheticRunnerBackend) -> dict[str, object]:
+    donor = backend.donor
+    return gate.orchestrate_horizon_transfer(
+        backend=backend,
+        identity=copy.deepcopy(donor["identity"]),
+        publication=copy.deepcopy(donor["publication"]),
+    )
+
+
+def test_runner_red_orchestrates_registered_stages_without_publication(
+    gate, monkeypatch
+) -> None:
+    backend = _SyntheticRunnerBackend(gate)
+
+    def forbidden_publish(*args, **kwargs):
+        raise AssertionError("target-free orchestration attempted publication")
+
+    monkeypatch.setattr(gate, "publish_result", forbidden_publish)
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    root_calls = [call[1:3] for call in backend.calls if call[0] == "root"]
+    assert root_calls == [
+        (horizon, precision)
+        for horizon in (1200, 1500, 1800, 2400, 3600, 900, 600)
+        for precision in (80, 120)
+    ]
+    assert [call[1:3] for call in backend.calls if call[0] == "homotopy"] == [
+        (1200, 1500),
+        (1500, 1800),
+        (1800, 2400),
+        (2400, 3600),
+        (1200, 900),
+        (900, 600),
+    ]
+    assert [call[1] for call in backend.calls if call[0] == "tail"] == [120, 160]
+    assert [call[1] for call in backend.calls if call[0] == "arnoldi"] == [
+        "primary",
+        "convergence",
+    ]
+    assert backend.calls[-1] == ("controls",)
+
+
+def test_runner_red_root_stop_is_fail_closed_but_lower_tail_is_independent(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, failed_root=(1500, 80))
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    assert payload["finite_branch"]["root_panels"][3:] == [None] * 4
+    assert all(payload["finite_branch"]["root_panels"][index] for index in (0, 1, 2))
+    assert any(call[:3] == ("exclusion", 1200, 1500) for call in backend.calls)
+    assert not any(
+        call[0] in {"tail", "arnoldi", "arm", "exact-arm"}
+        for call in backend.calls
+    )
+    assert payload["classification"]["gates"]["G1F"] == "inconclusive"
+    assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_runner_red_partial_arnoldi_never_invents_trajectory_evidence(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, partial_arnoldi=True)
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    assert not any(call[0] in {"arm", "exact-arm"} for call in backend.calls)
+    assert payload["stability"]["continuation_arms"] == [None, None, None]
+    assert payload["stability"]["exact_arm"] is None
+    assert payload["classification"]["gates"]["G5"] == "inconclusive"
+    assert payload["classification"]["p5_governance_review_open"] is False
+
     instability = gate.contract_witness()
     instability["classification"]["gates"][
         "large_h_instability_supported"
