@@ -36,6 +36,15 @@ SCHEMA_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_result_schema_v3.json"
 )
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
+_ROOT_EXECUTION_ORDER = (1200, 1500, 1800, 2400, 3600, 900, 600)
+_HOMOTOPY_EDGES = (
+    (1200, 1500, "forward"),
+    (1500, 1800, "forward"),
+    (1800, 2400, "forward"),
+    (2400, 3600, "forward"),
+    (1200, 900, "lower-tail"),
+    (900, 600, "lower-tail"),
+)
 DECISION_PASS = (
     "rotating-wave-horizon-root-transfer-pass-with-large-h-stability-support"
 )
@@ -2118,17 +2127,6 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
     for key in ("decision", "precedence_rank", "p5_governance_review_open"):
         if observed[key] != expected[key]:
             raise ValueError(f"$.classification.{key}: reconstruction mismatch")
-
-
-_ROOT_EXECUTION_ORDER = (1200, 1500, 1800, 2400, 3600, 900, 600)
-_HOMOTOPY_EDGES = (
-    (1200, 1500, "forward"),
-    (1500, 1800, "forward"),
-    (1800, 2400, "forward"),
-    (2400, 3600, "forward"),
-    (1200, 900, "lower-tail"),
-    (900, 600, "lower-tail"),
-)
 
 
 def _root_coordinates(panel: dict[str, Any], precision_dps: int) -> tuple[str, str]:

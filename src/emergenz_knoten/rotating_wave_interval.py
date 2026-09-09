@@ -260,6 +260,33 @@ def krawczyk_image(
     return result[0], result[1]
 
 
+def _inverse_jacobian_strings(
+    jacobian: Sequence[Sequence[Any]],
+    *,
+    precision_dps: int,
+    singular_message: str,
+) -> tuple[tuple[str, str], tuple[str, str]]:
+    """Invert one 2x2 point Jacobian and preserve decimal transport."""
+
+    determinant = (
+        jacobian[0][0] * jacobian[1][1]
+        - jacobian[0][1] * jacobian[1][0]
+    )
+    if determinant == 0:
+        raise ArithmeticError(singular_message)
+    digits = precision_dps - 8
+    return (
+        (
+            mp.nstr(jacobian[1][1] / determinant, digits),
+            mp.nstr(-jacobian[0][1] / determinant, digits),
+        ),
+        (
+            mp.nstr(-jacobian[1][0] / determinant, digits),
+            mp.nstr(jacobian[0][0] / determinant, digits),
+        ),
+    )
+
+
 def _strict_subset(inner: Any, outer: Any) -> bool:
     return bool(
         libmp.mpf_gt(inner._mpi_[0], outer._mpi_[0])
@@ -482,21 +509,10 @@ def certify_rotating_wave_homotopy_box(
                 )
                 for row in range(2)
             )
-            determinant = (
-                point_jacobian[0][0] * point_jacobian[1][1]
-                - point_jacobian[0][1] * point_jacobian[1][0]
-            )
-            if determinant == 0:
-                raise ArithmeticError("homotopy point Jacobian is singular")
-            inverse_strings = (
-                (
-                    mp.nstr(point_jacobian[1][1] / determinant, precision_dps - 8),
-                    mp.nstr(-point_jacobian[0][1] / determinant, precision_dps - 8),
-                ),
-                (
-                    mp.nstr(-point_jacobian[1][0] / determinant, precision_dps - 8),
-                    mp.nstr(point_jacobian[0][0] / determinant, precision_dps - 8),
-                ),
+            inverse_strings = _inverse_jacobian_strings(
+                point_jacobian,
+                precision_dps=precision_dps,
+                singular_message="homotopy point Jacobian is singular",
             )
         inverse = tuple(
             tuple(iv.mpf(value) for value in row) for row in inverse_strings
@@ -592,21 +608,10 @@ def certify_rotating_wave_box(
                 mp.mpf(theta),
                 parameters,
             )
-            determinant = (
-                point_jacobian[0][0] * point_jacobian[1][1]
-                - point_jacobian[0][1] * point_jacobian[1][0]
-            )
-            if determinant == 0:
-                raise ArithmeticError("point Jacobian is singular")
-            inverse_strings = (
-                (
-                    mp.nstr(point_jacobian[1][1] / determinant, precision_dps - 8),
-                    mp.nstr(-point_jacobian[0][1] / determinant, precision_dps - 8),
-                ),
-                (
-                    mp.nstr(-point_jacobian[1][0] / determinant, precision_dps - 8),
-                    mp.nstr(point_jacobian[0][0] / determinant, precision_dps - 8),
-                ),
+            inverse_strings = _inverse_jacobian_strings(
+                point_jacobian,
+                precision_dps=precision_dps,
+                singular_message="point Jacobian is singular",
             )
         inverse = tuple(
             tuple(iv.mpf(value) for value in row) for row in inverse_strings

@@ -108,13 +108,17 @@ autorisieren keinen weiteren P5-Ziellauf.
    zeigt, dass finite
    Residuen/Jacobians, Punkt-Newton, lokale Krawczyk-Boxen,
    Voll-FIFO-Jacobian und Quotientdistanz bereits als Bibliothekskerne
-   vorliegen. Der erste schmale v3-Rootadapter verwendet diese Kerne fuer die
-   feste Acht-Schritt-Newtonfolge und beide Krawczyk-Boxen; sein Review bindet
-   1022 gruene Tests, aber keinen neuen Root. Naechster Schritt sind
-   targetfreie RED-Tests fuer Homotopieschlauch und gemeinsamen
-   Intervallauswerter; danach folgen Ausschlussbaum, tail-augmentiertes
-   Zertifikat, LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Kein
-   historischer Ergebnisrecord darf als neue Evidenz kopiert werden. Noch kein
+   vorliegen. Der schmale v3-Rootadapter verwendet diese Kerne fuer die feste
+   Acht-Schritt-Newtonfolge und beide Krawczyk-Boxen. Homotopieschlauch und
+   gemeinsamer Intervallauswerter sind ebenfalls targetfrei implementiert:
+   volle outward-rounded Parameterscheiben, exakt 64 Scheiben, strikter
+   Einschluss, Nachbarueberlappung und fail-closed Praefixstopps. Das
+   [Homotopie-/Intervallreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_homotopy_interval_review_2026-09-09.md)
+   bindet 1029 gruene CI-Tests, aber keine ausgewertete Horizontkante. Naechster
+   Schritt ist der Ausschlussbaum auf exakt demselben Intervallkern; danach
+   folgen tail-augmentiertes Zertifikat, LCG-Arnoldi,
+   Trajektorienabbildung und Backendkomposition. Kein historischer
+   Ergebnisrecord darf als neue Evidenz kopiert werden. Noch kein
    Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
