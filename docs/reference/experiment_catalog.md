@@ -1,6 +1,6 @@
 # Experiment-Katalog
 
-Stand: 2026-09-02.
+Stand: 2026-09-09.
 
 Diese Datei ist zugleich Experiment-Katalog, Reproduzierbarkeitsnotiz und
 Long-Run-Plan. Sie ersetzt die alten Einzeldateien zu Reproduzierbarkeit,
@@ -47,6 +47,7 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_foundation_audit.py` | kritischer Foundation-Audit der gesamten Rotating-wave-Kette | abgeschlossen, portability-scoped Reconciliation-Pass | neun kanonische Git-Blob-Hashes und sechs Revisionen aus Vollhistorie, unabhaengige 70-stellige finite-Summen-Replays aller fuenf Zellen, Tanh--Sinh-/Gauss--Legendre-Kontinuum und unabhaengiges Skalierungs-Replay; bewahrt Decimal-Fail und nichtportablen Zwischenpass und begrenzt Stabilitaet auf den Anchor |
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l5_existence_scaling.py` | prospektiver L5-Existenz-/Skalierungsholdout | abgeschlossen, scoped L5-Pass | sechster lokaler Root bei alpha=0.00125, H=9600, eta=0.01875; beide 80/120-dps-Krawczyk-Panels, direkter 70-dps-Summen-Replay und alle signierten First-order-Gates bestehen; kein zweiter Intervallbackend oder Stabilitaetsclaim |
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_l3_stability_gate.py` | prospektives P1-Nicht-Anchor-Stabilitaetsgate | abgeschlossen, lokaler numerischer Pass | L3 bei alpha=0.005, H=2400, eta=0.075; 32/48 groesste Ritzpaare mit getrennten Starts und sechs gespiegelte Stoerungsarme ueber 10000 Updates; keine vollstaendige Spektraleinschliessung, stabile Familie oder Formation |
+| `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py` | Fixed-alpha-Horizonttransfer vor P5-D | targetfreie Orchestrierung reviewed, wissenschaftliche Adapter offen | strikter v3-Vertrag, fail-closed Stufenfolge, dyadisch vollstaendiger Ausschlussnachweis und unabhaengiger Ergebnis-Auditor; vorhandene Root-/FIFO-Bibliotheken werden wiederverwendet, Homotopie-, Tail- und Ausschlussadapter fehlen; kein Horizontlauf oder P5-D-Versuch 4 autorisiert |
 | `experiments/current/dynamics/rotation/scalar_memory_loop_center_p2_gate.py` | lokale Loop--Center-Matrixantwort am vorbereiteten L3-Kreis | abgeschlossen, formaler P2-Fail | voller FIFO-Jacobian sagt die schwache nichtlineare Antwort voraus; absolutes Tail-Slope-Gate scheitert und bleibt historisch Fail |
 | `experiments/current/dynamics/rotation/scalar_memory_loop_center_p2r_long_recovery.py` | outcome-informierte sign-sensitive P2-R-Verlaengerung | abgeschlossen, Reconciliation-Pass | reproduziert P2 und zeigt in allen 48 neuen Fenstern Rueckkehr bis 20 Memory-Zeiten; keine unabhaengige Replikation |
 | `experiments/current/dynamics/rotation/scalar_memory_rotating_wave_p3_formation_basin.py` | endliches P3-Formation/Basin-Panel am L3-Kandidaten | abgeschlossen, scoped Pass | zehn Arme aus fuenf nichtkreisfoermigen Geometrien erreichen den Zielorbit; finite-ensemble attraction, kein offener Basin-Ball |
@@ -114,6 +115,33 @@ Hardening und Long-Run-Metastabilitaet.
 | `experiments/current/memory/closure/inertial_vector_field_analytic_gate.py` | inertialer Vektorfeld-Strukturtest | abgeschlossen, konstruktiver Strukturpass | exakter klassischer Oszillator nach Einfuehrung von `(m,pi)`; keine Kopplung an den kanonischen Simulator und keine Parameteridentifikation |
 | `experiments/cli.py` | kategorisierte Experimentsteuerung | aktiv | Einstieg in Skriptfamilien |
 | `experiments/propagation_speed/ballistic_kernel_probe.py` | korrigierter Ein-Kernel-Ballistik-Track mit `eta/eta_c` | aktiv | Sanity-Check fuer skalare Photon-Analogien |
+
+## Horizonttransfer: Backend-Bestand und Ablage
+
+Der Horizonttransfer ist kein numerischer Neubau. Seine wissenschaftlichen
+Rollen werden gegen den folgenden Bestand implementiert; ein historischer
+Experimentrunner gilt dabei nicht automatisch als wiederverwendbare
+Standardbibliothek.
+
+| Rolle im Horizontgate | Vorhandener Bestand | Einstufung / offene Arbeit |
+| --- | --- | --- |
+| finite Summe, Residuum und analytischer Jacobian | `src/emergenz_knoten/rotating_wave.py`, `src/emergenz_knoten/rotating_wave_interval.py` | direkt wiederverwendbar; feste Acht-Schritt-Newtonfolge und v3-Recordadapter fehlen |
+| lokale finite-$H$-Krawczyk-Box | `refine_rotating_wave_root`, `certify_rotating_wave_box` | numerischer Kern vorhanden und getestet; aeussere/innere Boxen muessen ohne Methodenverdopplung in den v3-Vertrag abgebildet werden |
+| $s$-Homotopieschlauch | nur finite-$H$-Intervallkern vorhanden | neu zu implementierende Intervallkombination von $F_a$, $F_b$ und ihren Jacobians; 64 feste Scheiben, keine adaptive Suche |
+| lokaler Ausschlussbaum | Intervallauswertung ist intern vorhanden; v3 prueft bereits die dyadische Vollpartition | Such-/Klassifikationsadapter fehlt; Residualausschluss und Krawczyk-Root muessen aus demselben Intervallkern stammen |
+| unendlicher Tail | analytische Bounds und $q$-Darstellungen liegen im Horizontgate; `scalar_memory_rotating_wave_continuum_reconciliation.py` liefert nur numerische Quadratur | tail-augmentiertes, outward-rounded Krawczyk-Panel ist neu; die Quadratur ist Kontrolle, kein Zertifikatsersatz |
+| Voll-FIFO-Jacobian und Kreisgeschichte | `src/emergenz_knoten/rotating_wave_stability.py` | direkt wiederverwendbar |
+| Arnoldi und Ritzdiagnostik | `src/emergenz_knoten/rotating_wave_stability_gate.py` | weitgehend wiederverwendbar; der alte libm-basierte Start ist fuer dieses Protokoll unzulaessig, daher braucht der Adapter den bereits eingefrorenen LCG-Start |
+| Stoerungstrajektorien und Quotientdistanz | `run_continuation` sowie die darunterliegenden FIFO-/Distanzfunktionen | Dynamikkern wiederverwendbar; registrierte drei Arme, Samples und v3-Typgrenze brauchen einen Adapter |
+| Kontrollen, Publikation und Audit | fruehere Rotationsrunner plus Horizont-v3-Orchestrator/Auditor | Kontrollen gezielt portieren, nicht historische Ergebnisrecords kopieren; Publikation bleibt ein separater, zuletzt ausgefuehrter Schritt |
+
+Neue allgemein verwendbare Numerik gehoert nach `src/emergenz_knoten/` und
+erhaelt direkte Unit-Tests. Die experimentgebundene Parametrisierung,
+Stufenfolge und v3-Serialisierung bleiben im Horizontgate. Registrierte
+Inhaltsartefakte liegen erst nach Freigabe unter `reports/dynamics/rotation/`,
+Preregistrierung und Reviews unter `reports/project/meta/`; das Manifest ist
+weiterhin der letzte Publikationsschritt. Bis zum separaten Readinessreview
+bleiben alle registrierten Ergebnis-, Audit- und Manifestpfade abwesend.
 
 ## Ressourcenbegrenztes rho-Feld
 
@@ -919,7 +947,7 @@ Modellklasse.
 | `reports/project/meta/reviews/scalar_memory_loop_p5d_runner_remediation_protocol_sufficiency_review_2026-09-03.md` | Suffizienzreview des amendierten P5-D-Remediation-Protokolls | Schliesst P5-PR01--P5-PR07 am gruenen Amendierungsblob und oeffnet ausschliesslich adversariale Tests plus minimale Infrastrukturkorrektur. Verdict `p5d-remediation-protocol-sufficient-target-closed`; weder Readiness noch Versuch 3 sind autorisiert. |
 | `reports/project/meta/reviews/scalar_memory_loop_p5d_runner_implementation_readiness_2026-09-03.md` | targetfreies P5-D-v2-Readinessreview | Repinnt Implementierung, Schema, Governance und Tests nach 929 lokalen Tests und gruener CI. Der spaetere Versuch 3 falsifiziert jedoch die behauptete Produktionspfadabdeckung: Der synthetische Off-Arm enthielt native Python-Nullen statt der durch `numpy.finfo(float).tiny` erzeugten NumPy-Float-Nullquotienten. |
 | `reports/dynamics/rotation/scalar_memory_loop_p5d_mutual_center_attempt_3.json` und `reports/project/meta/reviews/scalar_memory_loop_p5d_attempt3_numpy_float_schema_failure_2026-09-05.md` | P5-D-Versuch-3-Receipt und Incident | `p5d-inconclusive`: Die Einmalfreigabe ist dauerhaft verbraucht. Panel, Response und Klassifikation wurden in memory berechnet; die erste v2-Pruefung stoppte an `channel_off_arms[0].ledger_rival_fractions.flipped_force_a` vom Typ `numpy.float64`. Ergebnis, Report, Manifest, Audit und beobachtete Entscheidung fehlen; kein Versuch 4 oder Patch ohne neues prospektives Protokoll. |
-| `reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md` und Horizonttransfer-Kette vom 2026-09-08 | targetfreie Abgrenzung, Fixed-alpha-Protokoll und Infrastruktur | Der FIFO ist nur eine Alterswarteschlange; finite-H-Kreise sind nicht tautologisch, aber ihr Transfer zu unendlicher exponentieller Erinnerung blieb offen. Das amendierte Protokoll friert `alpha=0.01`, sieben Horizonte bis 3600, lokale Branchhomotopie, analytische Tail-/Jacobianbounds, einen H=2400-Stabilitaetsholdout und unabhaengige Speicherfalsifikatoren ein. Vertrag, RED-Historie und targetfreie Infrastruktur bestehen 985 Tests und gruene CI; Verdict `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`. Noch kein wissenschaftlicher Runner oder Horizontlauf. |
+| `reports/project/meta/reviews/scalar_memory_finite_h_non_tautology_audit_2026-09-07.md` und Horizonttransfer-Kette vom 2026-09-08/09 | targetfreie Abgrenzung, Fixed-alpha-Protokoll und Orchestrierung | Der FIFO ist nur eine Alterswarteschlange; finite-H-Kreise sind nicht tautologisch, aber ihr Transfer zu unendlicher exponentieller Erinnerung bleibt offen. Das amendierte Protokoll friert `alpha=0.01`, sieben Horizonte bis 3600, lokale Branchhomotopie, analytische Tail-/Jacobianbounds, einen H=2400-Stabilitaetsholdout und unabhaengige Speicherfalsifikatoren ein. v3-Vertrag, Orchestrierung und korrigierter Vollpartitionsnachweis bestehen 1015 Tests und gruene CI. Root-/Krawczyk- und FIFO-/Stabilitaetskerne sind bereits als Bibliothek vorhanden; protokollspezifische Homotopie-, Ausschluss-, Tail-, LCG-Arnoldi- und Recordadapter fehlen. Noch kein Horizontlauf. |
 | `reports/project/meta/preregistration/scalar_memory_center_mechanics_p0_audit_2026-08-16.md` | Center-Mechanik P0 | `P0-pass-center-effective-mechanics`: kompletter K0-Center-Kandidat, alle Seeds 1--20 als Discovery quarantiniert, neue Seeds und Transferzelle versiegelt; 0 Defekte, nur A autorisiert, D0--D5 ohne S1-Kandidat versiegelt. |
 | `reports/project/meta/reviews/scalar_memory_center_physical_port_gate_a_2026-08-16.md` | Center Gate A: physische Portherleitung | Physischer Center-Port nicht identifiziert, mathematischer passiver Port bleibt. Ein x-konjugierter Port hat f dx=f dc+f dr; ein effektives U_ext(c,Q) transformiert jedoch zur selben additiven x-Gleichung. Ohne mikroskopischen Aktuator und finite-H-Grenzledger bleiben B/C/E/F1 blockiert. |
 | `reports/kernels/shape_and_memory/kernel_memory_photon_decision_2026-07-07.md` | Kernel, Memory und Photon-Track | Paper I als effektives Memory-Kernel-Confinement; Zwei-Skalen-Kernel optional; Photon-Track braucht erweiterten Zustand. |

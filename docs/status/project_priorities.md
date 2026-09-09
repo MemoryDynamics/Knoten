@@ -103,10 +103,16 @@ autorisieren keinen weiteren P5-Ziellauf.
    bindet 70 fokussierte, 1015 gesamte Tests und gruene exakte Linux-CI mit
    Verdict
    `rotating-wave-horizon-orchestration-pass-scientific-backends-incomplete-target-closed`.
-   Naechster Schritt sind ausschliesslich targetfreie RED-Tests und
-   Implementierung der fehlenden Newton-, Krawczyk-, Ausschlussbaum-,
-   Arnoldi- und Trajektorienbackends. Noch kein Horizontlauf und kein Versuch
-   4.
+   Der anschliessende
+   [Katalog-/Backend-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_backend_reuse_audit_2026-09-09.md)
+   zeigt, dass finite
+   Residuen/Jacobians, Punkt-Newton, lokale Krawczyk-Boxen,
+   Voll-FIFO-Jacobian und Quotientdistanz bereits als Bibliothekskerne
+   vorliegen. Naechster Schritt sind ausschliesslich targetfreie RED-Tests und
+   schmale v3-Adapter; neu bleiben Homotopieschlauch, Ausschlussbaum,
+   tail-augmentiertes Zertifikat und die Durchleitung des eingefrorenen
+   LCG-Starts bis ARPACK. Kein historischer Ergebnisrecord darf als neue
+   Evidenz kopiert werden. Noch kein Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
