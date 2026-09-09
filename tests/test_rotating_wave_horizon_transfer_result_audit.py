@@ -88,6 +88,13 @@ def test_auditor_source_does_not_import_runner_or_scientific_backend(auditor) ->
     assert not any(name.startswith(("numpy", "scipy", "mpmath")) for name in imported)
 
 
+def test_auditor_reconstructs_portable_registered_arnoldi_hashes(auditor) -> None:
+    assert auditor._arnoldi_start_hashes() == {
+        "primary": "572db16bc576c2eabe9b45af772338780c058e8d148eff00d2cc3041861d1382",
+        "convergence": "29efa5c8c189a296b4610f3bfef60ecdba585dd29ffec62baf89af0d1aa8d7f6",
+    }
+
+
 def test_auditor_reads_manifest_before_schema_or_content(auditor, tmp_path: Path, monkeypatch) -> None:
     result_path = tmp_path / "result.json"
     report_path = tmp_path / "result.md"

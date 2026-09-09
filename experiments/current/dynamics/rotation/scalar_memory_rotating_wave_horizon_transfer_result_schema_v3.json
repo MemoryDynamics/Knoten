@@ -32,8 +32,8 @@
     "blob_rotating_wave": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
     "blob_rotating_wave_interval": "58ce9b0862f980c17c691c4555557e8e363468a4",
     "blob_rotating_wave_stability": "9defb5a6876371202e1ba57cea030c997b9c6edd",
-    "arnoldi_convergence_start_sha256": "f21349588976588987a319ee0d18c3644c44605209ea0ac58ad82fcdd1ec92d2",
-    "arnoldi_primary_start_sha256": "34f174aa5fc73947cb9e2a4383f0ade2a573311afc15d74ebd290d494a99afb3",
+    "arnoldi_convergence_start_sha256": "29efa5c8c189a296b4610f3bfef60ecdba585dd29ffec62baf89af0d1aa8d7f6",
+    "arnoldi_primary_start_sha256": "572db16bc576c2eabe9b45af772338780c058e8d148eff00d2cc3041861d1382",
     "claim_boundary": "local fixed-alpha rotating-wave root transfer with numerical large-H stability support only; no global uniqueness, generic formation, infinite-dimensional stability, interaction, oscillator, spin, momentum, inertia or mass",
     "contract_version": 3,
     "evidence_revision": "bf038d758f2dd8a367699832f194621756c39696",
@@ -41,8 +41,8 @@
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
     "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v3",
-    "protocol_blob": "289f64c984b9159cd572d676ed280321aebac836",
-    "protocol_revision": "0adab01d81eed7f11e460a7ce59c394636f64d55",
+    "protocol_blob": "671e931a8337b1c31923dbd122085167185e9091",
+    "protocol_revision": "75ce9adae6790f4fa86ee7c1a8f85a0a600492a6",
     "true": true
   },
   "enums": {

@@ -750,6 +750,13 @@ def test_v3_contract_rejects_stability_input_mutations(gate) -> None:
         gate.validate_result(dimensionality)
 
 
+def test_v3_arnoldi_starts_have_portable_registered_hashes(gate) -> None:
+    assert gate._arnoldi_start_hashes() == {
+        "primary": "572db16bc576c2eabe9b45af772338780c058e8d148eff00d2cc3041861d1382",
+        "convergence": "29efa5c8c189a296b4610f3bfef60ecdba585dd29ffec62baf89af0d1aa8d7f6",
+    }
+
+
 def test_v3_contract_rejects_spectral_summary_lies(gate) -> None:
     classification = gate.contract_witness()
     pair = classification["stability"]["arnoldi"]["primary"]["eigenpairs"][3]

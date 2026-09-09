@@ -997,19 +997,24 @@ def _verify_root_and_homotopy_slots(payload: dict[str, Any]) -> list[bool | None
     return root_evidence
 
 
-def _arnoldi_start_hashes() -> dict[str, str]:
+def _arnoldi_start_vectors() -> dict[str, list[float]]:
+    component = float.fromhex("0x1.d8f7208e6b82cp-7")
     result = {}
-    for name, (first, second) in {
-        "primary": (math.sqrt(2.0), math.sqrt(3.0)),
-        "convergence": (math.sqrt(5.0), math.sqrt(7.0)),
-    }.items():
-        values = [
-            math.sin(first * (index + 1)) + math.cos(second * (index + 0.5))
-            for index in range(4800)
-        ]
-        norm = math.sqrt(math.fsum(value * value for value in values))
-        result[name] = _vector_sha256([value / norm for value in values])
+    for name, seed in (("primary", 0x243F6A88), ("convergence", 0x85A308D3)):
+        state = seed
+        values = []
+        for _ in range(4800):
+            state = (1664525 * state + 1013904223) & 0xFFFFFFFF
+            values.append(component if state & 0x80000000 else -component)
+        result[name] = values
     return result
+
+
+def _arnoldi_start_hashes() -> dict[str, str]:
+    return {
+        name: _vector_sha256(values)
+        for name, values in _arnoldi_start_vectors().items()
+    }
 
 
 def _verify_stability_inputs(payload: dict[str, Any]) -> None:
