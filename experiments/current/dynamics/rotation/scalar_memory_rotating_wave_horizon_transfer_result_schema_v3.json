@@ -19,6 +19,7 @@
     "number_matrix_2": {"item": "array:number_pair", "length": 2},
     "number_pair": {"item": "number", "length": 2},
     "q_rows": {"item": "object:q_representation", "length": 7},
+    "real_vector_4800": {"item": "number", "length": 4800},
     "root_panels": {"item": "nullable:object:root_panel", "length": 7},
     "tail_bound_rows": {"item": "object:tail_bound", "length": 7},
     "trajectory_samples": {"item": "nullable:object:trajectory_sample", "length": 501}
@@ -31,15 +32,17 @@
     "blob_rotating_wave": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
     "blob_rotating_wave_interval": "58ce9b0862f980c17c691c4555557e8e363468a4",
     "blob_rotating_wave_stability": "9defb5a6876371202e1ba57cea030c997b9c6edd",
+    "arnoldi_convergence_start_sha256": "f21349588976588987a319ee0d18c3644c44605209ea0ac58ad82fcdd1ec92d2",
+    "arnoldi_primary_start_sha256": "34f174aa5fc73947cb9e2a4383f0ade2a573311afc15d74ebd290d494a99afb3",
     "claim_boundary": "local fixed-alpha rotating-wave root transfer with numerical large-H stability support only; no global uniqueness, generic formation, infinite-dimensional stability, interaction, oscillator, spin, momentum, inertia or mass",
-    "contract_version": 2,
+    "contract_version": 3,
     "evidence_revision": "bf038d758f2dd8a367699832f194621756c39696",
     "forward_horizons": [1200, 1500, 1800, 2400, 3600],
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
-    "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v2",
-    "protocol_blob": "4a24d536275eecc91aea0dcc670feb34152111fb",
-    "protocol_revision": "a3c244335bc520ae5b482e33c3857305060d4801",
+    "payload_schema": "scalar-memory-rotating-wave-horizon-transfer-v3",
+    "protocol_blob": "289f64c984b9159cd572d676ed280321aebac836",
+    "protocol_revision": "0adab01d81eed7f11e460a7ce59c394636f64d55",
     "true": true
   },
   "enums": {
@@ -74,7 +77,7 @@
       "max_iterations": "integer",
       "ncv": "integer",
       "requested_count": "integer",
-      "start_sha256": "sha256",
+      "start_sha256": "const:arnoldi_primary_start_sha256",
       "status": "enum:arnoldi_status",
       "tolerance": "number"
     },
@@ -84,7 +87,7 @@
       "max_iterations": "integer",
       "ncv": "integer",
       "requested_count": "integer",
-      "start_sha256": "sha256",
+      "start_sha256": "const:arnoldi_convergence_start_sha256",
       "status": "enum:arnoldi_status",
       "tolerance": "number"
     },
@@ -104,7 +107,7 @@
       "box": "object:root_box",
       "interval_backend": "string",
       "jacobian_box": "array:decimal_matrix_2",
-      "krawczyk_image": "array:decimal_pair",
+      "krawczyk_image": "array:decimal_matrix_2",
       "strict_interior": "boolean"
     },
     "circular_case": {
@@ -125,12 +128,15 @@
       "precedence_rank": "integer"
     },
     "continuation_arm": {
+      "amplitude": "number",
       "completed": "boolean",
       "final_distance": "number",
       "final_ratio": "number",
       "growth_factor": "number",
       "initial_distance": "number",
       "name": "string",
+      "perturbation": "array:real_vector_4800",
+      "perturbation_sha256": "sha256",
       "samples": "array:trajectory_samples",
       "stopped": "boolean"
     },
@@ -165,7 +171,10 @@
     "exclusion_leaf": {
       "box": "object:root_box",
       "classification": "enum:exclusion_leaf_classification",
-      "depth": "integer"
+      "depth": "integer",
+      "krawczyk_image": "nullable:array:decimal_matrix_2",
+      "residual_box": "nullable:array:decimal_matrix_2",
+      "strict_interior": "nullable:boolean"
     },
     "eta_zero_case": {
       "horizon": "integer",
@@ -208,7 +217,7 @@
     "homotopy_slab": {
       "box": "object:root_box",
       "index": "integer",
-      "krawczyk_image": "array:decimal_pair",
+      "krawczyk_image": "array:decimal_matrix_2",
       "overlaps_previous": "nullable:boolean",
       "s_interval": "array:decimal_pair",
       "strict_interior": "boolean"
@@ -243,7 +252,7 @@
       "theta": "decimal"
     },
     "panel_agreement": {
-      "leading_transverse_distance": "number",
+      "leading_transverse_distance": "nullable:number",
       "pass": "boolean",
       "symmetry_pass": "boolean"
     },
@@ -305,13 +314,15 @@
       "theta": "array:decimal_pair"
     },
     "root_panel": {
-      "certificate_120": "object:certificate",
-      "certificate_80": "object:certificate",
       "centers_agree": "boolean",
       "horizon": "integer",
-      "inner_intersection": "object:root_box",
+      "inner_certificate_120": "object:certificate",
+      "inner_certificate_80": "object:certificate",
+      "inner_intersection": "nullable:object:root_box",
       "newton_120": "object:newton_panel",
-      "newton_80": "object:newton_panel"
+      "newton_80": "object:newton_panel",
+      "outer_certificate_120": "object:certificate",
+      "outer_certificate_80": "object:certificate"
     },
     "stability": {
       "arnoldi": "object:arnoldi",
@@ -319,7 +330,7 @@
       "exact_arm": "nullable:object:exact_arm",
       "gates": "object:stability_gates",
       "horizon": "integer",
-      "rounded_root": "array:number_pair"
+      "rounded_root": "nullable:array:number_pair"
     },
     "stability_gates": {
       "continuations_complete": "boolean",

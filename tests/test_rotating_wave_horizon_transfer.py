@@ -19,7 +19,7 @@ from emergenz_knoten.rotating_wave_stability import circular_history
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v3.json"
 )
 RUNNER_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
@@ -480,7 +480,7 @@ def _classify_witness(gate, payload: dict[str, object], **gate_updates: object) 
     )
 
 
-def test_v2_contract_serializes_a_dependent_root_ladder_stop(gate) -> None:
+def test_v3_contract_serializes_a_dependent_root_ladder_stop(gate) -> None:
     payload = gate.contract_witness()
     payload["finite_branch"]["root_panels"][4:] = [None, None, None]
     payload["finite_branch"]["homotopies"][1:4] = [None, None, None]
@@ -490,6 +490,19 @@ def test_v2_contract_serializes_a_dependent_root_ladder_stop(gate) -> None:
     payload["infinite_tail"]["certificate_panels"] = [None, None]
     payload["infinite_tail"]["panel_comparison"]["intersection"] = None
     payload["infinite_tail"]["panel_comparison"]["overlap"] = False
+    payload["stability"]["continuation_arms"] = [None, None, None]
+    payload["stability"]["exact_arm"] = None
+    payload["stability"]["rounded_root"] = None
+    for panel in payload["stability"]["arnoldi"].values():
+        if isinstance(panel, dict) and "eigenpairs" in panel:
+            panel["eigenpairs"] = [None] * len(panel["eigenpairs"])
+            panel["status"] = "arpack-no-convergence"
+    payload["stability"]["arnoldi"]["panel_agreement"] = {
+        "leading_transverse_distance": None,
+        "pass": False,
+        "symmetry_pass": False,
+    }
+    payload["stability"]["gates"] = gate._stability_evidence(payload)
     _classify_witness(
         gate,
         payload,
@@ -497,15 +510,17 @@ def test_v2_contract_serializes_a_dependent_root_ladder_stop(gate) -> None:
         G2F="inconclusive",
         G3="inconclusive",
         G4="inconclusive",
+        G5="inconclusive",
     )
     gate.validate_result(payload)
 
 
-def test_v2_contract_serializes_a_homotopy_prefix_stop(gate) -> None:
+def test_v3_contract_serializes_a_homotopy_prefix_stop(gate) -> None:
     payload = gate.contract_witness()
     homotopy = payload["finite_branch"]["homotopies"][1]
     homotopy["slabs"][11:] = [None] * 53
     homotopy["slabs"][10]["strict_interior"] = False
+    homotopy["slabs"][10]["krawczyk_image"][0][0] = homotopy["slabs"][10]["box"]["radius"][0]
     homotopy["pass"] = False
     homotopy["status"] = "inconclusive"
     payload["finite_branch"]["homotopies"][2:4] = [None, None]
@@ -513,11 +528,14 @@ def test_v2_contract_serializes_a_homotopy_prefix_stop(gate) -> None:
     gate.validate_result(payload)
 
 
-def test_v2_contract_serializes_partial_and_missing_vector_arnoldi(gate) -> None:
+def test_v3_contract_serializes_partial_and_missing_vector_arnoldi(gate) -> None:
     partial = gate.contract_witness()
     panel = partial["stability"]["arnoldi"]["primary"]
     panel["eigenpairs"][7:] = [None] * 17
     panel["status"] = "arpack-no-convergence"
+    partial["stability"]["arnoldi"]["panel_agreement"].update(
+        {"pass": False, "symmetry_pass": False}
+    )
     partial["stability"]["gates"] = gate._stability_evidence(partial)
     _classify_witness(gate, partial, G5="inconclusive")
     gate.validate_result(partial)
@@ -526,12 +544,15 @@ def test_v2_contract_serializes_partial_and_missing_vector_arnoldi(gate) -> None
     missing_panel = missing["stability"]["arnoldi"]["primary"]
     missing_panel["eigenpairs"][0]["vector"] = None
     missing_panel["status"] = "missing-vectors"
+    missing["stability"]["arnoldi"]["panel_agreement"].update(
+        {"pass": False, "symmetry_pass": False}
+    )
     missing["stability"]["gates"] = gate._stability_evidence(missing)
     _classify_witness(gate, missing, G5="inconclusive")
     gate.validate_result(missing)
 
 
-def test_v2_contract_serializes_early_trajectory_stop(gate) -> None:
+def test_v3_contract_serializes_early_trajectory_stop(gate) -> None:
     payload = gate.contract_witness()
     arm = payload["stability"]["continuation_arms"][0]
     arm["samples"][5:] = [None] * 496
@@ -542,7 +563,7 @@ def test_v2_contract_serializes_early_trajectory_stop(gate) -> None:
     gate.validate_result(payload)
 
 
-def test_v2_contract_rejects_null_holes_and_positive_gates_after_stop(gate) -> None:
+def test_v3_contract_rejects_null_holes_and_positive_gates_after_stop(gate) -> None:
     hole = gate.contract_witness()
     hole["stability"]["continuation_arms"][0]["samples"][2] = None
     with pytest.raises(ValueError, match="prefix"):
@@ -561,11 +582,14 @@ def test_v2_contract_rejects_null_holes_and_positive_gates_after_stop(gate) -> N
         gate.validate_result(false_pass)
 
 
-def test_v2_contract_rejects_evidence_summary_and_instability_lies(gate) -> None:
+def test_v3_contract_rejects_evidence_summary_and_instability_lies(gate) -> None:
     partial = gate.contract_witness()
     partial["stability"]["arnoldi"]["primary"]["eigenpairs"][-1] = None
     partial["stability"]["arnoldi"]["primary"]["status"] = (
         "arpack-no-convergence"
+    )
+    partial["stability"]["arnoldi"]["panel_agreement"].update(
+        {"pass": False, "symmetry_pass": False}
     )
     with pytest.raises(ValueError, match="stability.gates"):
         gate.validate_result(partial)
@@ -581,3 +605,183 @@ def test_v2_contract_rejects_evidence_summary_and_instability_lies(gate) -> None
     ] = True
     with pytest.raises(ValueError, match="large_h_instability_supported"):
         gate.validate_result(instability)
+
+
+def test_v3_contract_rejects_root_certificate_and_center_mutations(gate) -> None:
+    missing = gate.contract_witness()
+    missing["finite_branch"]["root_panels"][2]["outer_certificate_80"] = None
+    with pytest.raises((TypeError, ValueError), match="outer_certificate_80"):
+        gate.validate_result(missing)
+
+    center = gate.contract_witness()
+    center["finite_branch"]["root_panels"][2]["newton_80"]["radius"] = (
+        "0.9465175048042250000000000000000000000001"
+    )
+    with pytest.raises(ValueError, match="center|centers_agree"):
+        gate.validate_result(center)
+
+    intersection = gate.contract_witness()
+    intersection["finite_branch"]["root_panels"][2]["inner_intersection"][
+        "radius"
+    ][0] = "0"
+    with pytest.raises(ValueError, match="inner_intersection"):
+        gate.validate_result(intersection)
+
+    inclusion = gate.contract_witness()
+    certificate = inclusion["finite_branch"]["root_panels"][2][
+        "outer_certificate_80"
+    ]
+    certificate["krawczyk_image"][0][0] = certificate["box"]["radius"][0]
+    certificate["strict_interior"] = False
+    with pytest.raises(ValueError, match="G1F"):
+        gate.validate_result(inclusion)
+
+
+def test_v3_contract_serializes_disjoint_inner_images_as_inconclusive(gate) -> None:
+    payload = gate.contract_witness()
+    panel = payload["finite_branch"]["root_panels"][0]
+    radius = "0.946517504804225"
+    with localcontext() as context:
+        context.prec = 180
+        center = Decimal(radius)
+        panel["inner_certificate_80"]["krawczyk_image"][0] = [
+            format(center - Decimal("9e-31"), "f"),
+            format(center - Decimal("8e-31"), "f"),
+        ]
+        panel["inner_certificate_120"]["krawczyk_image"][0] = [
+            format(center + Decimal("8e-31"), "f"),
+            format(center + Decimal("9e-31"), "f"),
+        ]
+    panel["inner_intersection"] = None
+    _classify_witness(gate, payload, G1R="inconclusive")
+    gate.validate_result(payload)
+
+
+def test_v3_contract_rejects_homotopy_and_tail_reconstruction_lies(gate) -> None:
+    s_interval = gate.contract_witness()
+    s_interval["finite_branch"]["homotopies"][0]["slabs"][7]["s_interval"] = [
+        "0",
+        "1",
+    ]
+    with pytest.raises(ValueError, match="s_interval"):
+        gate.validate_result(s_interval)
+
+    center = gate.contract_witness()
+    box = center["finite_branch"]["homotopies"][0]["slabs"][7]["box"]["radius"]
+    with localcontext() as context:
+        context.prec = 180
+        box[:] = [format(Decimal(value) + Decimal("1e-8"), "f") for value in box]
+    with pytest.raises(ValueError, match="center mismatch"):
+        gate.validate_result(center)
+
+    overlap = gate.contract_witness()
+    slab = overlap["finite_branch"]["homotopies"][0]["slabs"][1]
+    with localcontext() as context:
+        context.prec = 180
+        shifted = Decimal("0.946517504804225") + Decimal("6.5e-5")
+        slab["krawczyk_image"][0] = gate._decimal_box(
+            format(shifted, "f"), "5e-6"
+        )
+    with pytest.raises(ValueError, match="overlaps_previous"):
+        gate.validate_result(overlap)
+
+    tail = gate.contract_witness()
+    tail["infinite_tail"]["panel_comparison"]["intersection"]["theta"][0] = "0"
+    with pytest.raises(ValueError, match="panel_comparison"):
+        gate.validate_result(tail)
+
+
+def test_v3_contract_rejects_unproved_exclusion_leaf(gate) -> None:
+    payload = gate.contract_witness()
+    contract = gate._load_result_schema()
+    attempt = gate._witness_value(
+        "object:branch_exclusion", contract, fill_nullable=True
+    )
+    attempt.update(
+        {
+            "from_horizon": 1200,
+            "to_horizon": 1500,
+            "max_depth": 20,
+            "status": "all-residual-excluded",
+        }
+    )
+    leaf = attempt["leaves"][0]
+    leaf.update(
+        {
+            "classification": "residual-excluded",
+            "residual_box": [["-1", "1"], ["-1", "1"]],
+            "krawczyk_image": None,
+            "strict_interior": None,
+        }
+    )
+    payload["finite_branch"]["exclusions"][0] = attempt
+    with pytest.raises(ValueError, match="does not exclude zero"):
+        gate.validate_result(payload)
+
+
+def test_v3_contract_rejects_stability_input_mutations(gate) -> None:
+    start = gate.contract_witness()
+    start["stability"]["arnoldi"]["primary"]["start_sha256"] = "0" * 64
+    with pytest.raises((TypeError, ValueError), match="start_sha256"):
+        gate.validate_result(start)
+
+    perturbation_hash = gate.contract_witness()
+    perturbation_hash["stability"]["continuation_arms"][0][
+        "perturbation_sha256"
+    ] = "0" * 64
+    with pytest.raises(ValueError, match="perturbation_sha256"):
+        gate.validate_result(perturbation_hash)
+
+    perturbation_vector = gate.contract_witness()
+    perturbation_vector["stability"]["continuation_arms"][2]["perturbation"][3] = 1.0
+    with pytest.raises(ValueError, match="perturbation"):
+        gate.validate_result(perturbation_vector)
+
+    rounded = gate.contract_witness()
+    rounded["stability"]["rounded_root"][0] += 1e-12
+    with pytest.raises(ValueError, match="rounded_root"):
+        gate.validate_result(rounded)
+
+    dimensionality = gate.contract_witness()
+    dimensionality["finite_branch"]["root_panels"][0]["inner_certificate_80"][
+        "krawczyk_image"
+    ].pop()
+    with pytest.raises((TypeError, ValueError), match="krawczyk_image"):
+        gate.validate_result(dimensionality)
+
+
+def test_v3_contract_rejects_spectral_summary_lies(gate) -> None:
+    classification = gate.contract_witness()
+    pair = classification["stability"]["arnoldi"]["primary"]["eigenpairs"][3]
+    pair["translation_overlap"] = 1.0
+    with pytest.raises(ValueError, match="classification"):
+        gate.validate_result(classification)
+
+    modulus = gate.contract_witness()
+    modulus["stability"]["arnoldi"]["primary"]["eigenpairs"][3]["modulus"] = 0.8
+    with pytest.raises(ValueError, match="modulus"):
+        gate.validate_result(modulus)
+
+    agreement = gate.contract_witness()
+    agreement["stability"]["arnoldi"]["panel_agreement"][
+        "leading_transverse_distance"
+    ] = 1e-6
+    with pytest.raises(ValueError, match="leading_transverse_distance"):
+        gate.validate_result(agreement)
+
+
+def test_v3_contract_rejects_trajectory_and_control_summary_lies(gate) -> None:
+    trajectory = gate.contract_witness()
+    trajectory["stability"]["continuation_arms"][0]["final_ratio"] = 0.04
+    with pytest.raises(ValueError, match="trajectory summary"):
+        gate.validate_result(trajectory)
+
+    exact = gate.contract_witness()
+    exact["stability"]["exact_arm"]["maximum_distance"] = 1e-12
+    with pytest.raises(ValueError, match="maximum_distance"):
+        gate.validate_result(exact)
+
+    control = gate.contract_witness()
+    control["controls"]["circular_cases"][0]["pass"] = False
+    with pytest.raises(ValueError, match="controls.pass"):
+        gate.validate_result(control)

@@ -17,7 +17,7 @@ AUDITOR_PATH = ROOT / (
 )
 SCHEMA_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v3.json"
 )
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
 
@@ -58,7 +58,7 @@ def _sha256(path: Path) -> str:
 
 def _manifest(result_path: Path, report_path: Path) -> dict[str, object]:
     return {
-        "schema": "scalar-memory-rotating-wave-horizon-publication-v2",
+        "schema": "scalar-memory-rotating-wave-horizon-publication-v3",
         "artifacts": [
             {
                 "role": "result-json",
@@ -286,3 +286,92 @@ def test_auditor_independently_rejects_null_holes_and_false_positive_gate(
     false_summary["controls"]["eta_zero_cases"][0]["pass"] = False
     with pytest.raises(ValueError, match="controls.pass"):
         auditor._verify_reconstructed_values(false_summary)
+
+
+def test_auditor_independently_reconstructs_v3_interval_evidence(auditor) -> None:
+    inner = auditor.contract_witness()
+    inner["finite_branch"]["root_panels"][2]["inner_intersection"]["radius"][0] = "0"
+    with pytest.raises(ValueError, match="inner_intersection"):
+        auditor._verify_reconstructed_values(inner)
+
+    slab = auditor.contract_witness()
+    slab["finite_branch"]["homotopies"][0]["slabs"][3]["s_interval"] = ["0", "1"]
+    with pytest.raises(ValueError, match="s_interval"):
+        auditor._verify_reconstructed_values(slab)
+
+    overlap = auditor.contract_witness()
+    row = overlap["finite_branch"]["homotopies"][0]["slabs"][1]
+    row["krawczyk_image"][0] = [
+        "0.946577504804225",
+        "0.946587504804225",
+    ]
+    with pytest.raises(ValueError, match="overlaps_previous"):
+        auditor._verify_reconstructed_values(overlap)
+
+    tail = auditor.contract_witness()
+    tail["infinite_tail"]["panel_comparison"]["intersection"]["theta"][0] = "0"
+    with pytest.raises(ValueError, match="panel_comparison"):
+        auditor._verify_reconstructed_values(tail)
+
+
+def test_auditor_independently_reconstructs_v3_stability_inputs(auditor) -> None:
+    start = auditor.contract_witness()
+    start["stability"]["arnoldi"]["primary"]["start_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="start_sha256"):
+        auditor._verify_reconstructed_values(start)
+
+    perturbation = auditor.contract_witness()
+    perturbation["stability"]["continuation_arms"][2]["perturbation"][7] = 1.0
+    with pytest.raises(ValueError, match="perturbation"):
+        auditor._verify_reconstructed_values(perturbation)
+
+    rounded = auditor.contract_witness()
+    rounded["stability"]["rounded_root"][1] += 1e-12
+    with pytest.raises(ValueError, match="rounded_root"):
+        auditor._verify_reconstructed_values(rounded)
+
+    spectral = auditor.contract_witness()
+    spectral["stability"]["arnoldi"]["primary"]["eigenpairs"][3][
+        "translation_overlap"
+    ] = 1.0
+    with pytest.raises(ValueError, match="classification"):
+        auditor._verify_reconstructed_values(spectral)
+
+    agreement = auditor.contract_witness()
+    agreement["stability"]["arnoldi"]["panel_agreement"][
+        "leading_transverse_distance"
+    ] = 1e-6
+    with pytest.raises(ValueError, match="leading_transverse_distance"):
+        auditor._verify_reconstructed_values(agreement)
+
+    trajectory = auditor.contract_witness()
+    trajectory["stability"]["continuation_arms"][0]["growth_factor"] = 2.0
+    with pytest.raises(ValueError, match="trajectory summary"):
+        auditor._verify_reconstructed_values(trajectory)
+
+
+def test_auditor_independently_rejects_unproved_exclusion(auditor) -> None:
+    payload = auditor.contract_witness()
+    contract = auditor._load_result_schema()
+    attempt = auditor._witness_value(
+        "object:branch_exclusion", contract, fill_nullable=True
+    )
+    attempt.update(
+        {
+            "from_horizon": 1200,
+            "to_horizon": 1500,
+            "max_depth": 20,
+            "status": "all-residual-excluded",
+        }
+    )
+    attempt["leaves"][0].update(
+        {
+            "classification": "residual-excluded",
+            "residual_box": [["-1", "1"], ["-1", "1"]],
+            "krawczyk_image": None,
+            "strict_interior": None,
+        }
+    )
+    payload["finite_branch"]["exclusions"][0] = attempt
+    with pytest.raises(ValueError, match="does not exclude zero"):
+        auditor._verify_reconstructed_values(payload)

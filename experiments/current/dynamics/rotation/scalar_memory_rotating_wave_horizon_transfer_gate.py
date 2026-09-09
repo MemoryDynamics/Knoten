@@ -27,7 +27,7 @@ from emergenz_knoten.rotating_wave_stability import native_fifo_step
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v2.json"
+    "scalar_memory_rotating_wave_horizon_transfer_result_schema_v3.json"
 )
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
 DECISION_PASS = (
@@ -233,6 +233,89 @@ def _witness_value(
     raise ValueError(f"unknown witness specification {specification}")
 
 
+def _decimal_box(center: str, half_width: str) -> list[str]:
+    with localcontext() as context:
+        context.prec = 180
+        value = Decimal(center)
+        width = Decimal(half_width)
+        return [format(value - width, "f"), format(value + width, "f")]
+
+
+def _set_certificate_witness(
+    certificate: dict[str, Any],
+    *,
+    radius: str,
+    theta: str,
+    half_width: str,
+) -> None:
+    certificate["box"] = {
+        "radius": _decimal_box(radius, half_width),
+        "theta": _decimal_box(theta, half_width),
+    }
+    image_width = format(Decimal(half_width) / 2, "f")
+    certificate["krawczyk_image"] = [
+        _decimal_box(radius, image_width),
+        _decimal_box(theta, image_width),
+    ]
+    certificate["strict_interior"] = True
+
+
+def _vector_sha256(values: Sequence[float]) -> str:
+    digest = hashlib.sha256()
+    for value in values:
+        digest.update(struct.pack("<d", float(value)))
+    return digest.hexdigest()
+
+
+def _registered_perturbation_vectors(
+    *,
+    radius: float,
+    theta: float,
+    horizon: int,
+) -> tuple[float, dict[str, list[float]]]:
+    amplitude = 1e-7 * radius
+    dimension = 2 * horizon
+    radial = [0.0] * dimension
+    tangential = [0.0] * dimension
+    radial[0] = amplitude
+    tangential[1] = amplitude
+
+    inverse_root_h = 1.0 / math.sqrt(horizon)
+    translation_x = [inverse_root_h if index % 2 == 0 else 0.0 for index in range(dimension)]
+    translation_y = [0.0 if index % 2 == 0 else inverse_root_h for index in range(dimension)]
+    rotation = []
+    for age in range(horizon):
+        x = radius * math.cos(-theta * age)
+        y = radius * math.sin(-theta * age)
+        rotation.extend((-y, x))
+    for basis in (translation_x, translation_y):
+        projection = math.fsum(a * b for a, b in zip(rotation, basis, strict=True))
+        rotation = [
+            value - projection * direction
+            for value, direction in zip(rotation, basis, strict=True)
+        ]
+    rotation_norm = math.sqrt(math.fsum(value * value for value in rotation))
+    rotation = [value / rotation_norm for value in rotation]
+
+    full = [
+        math.sin(0.37 * index) + math.cos(0.11 * index)
+        for index in range(dimension)
+    ]
+    for basis in (translation_x, translation_y, rotation):
+        projection = math.fsum(a * b for a, b in zip(full, basis, strict=True))
+        full = [
+            value - projection * direction
+            for value, direction in zip(full, basis, strict=True)
+        ]
+    full_norm = math.sqrt(math.fsum(value * value for value in full))
+    full = [amplitude * value / full_norm for value in full]
+    return amplitude, {
+        "radial": radial,
+        "tangential": tangential,
+        "full-history-transverse": full,
+    }
+
+
 def contract_witness() -> dict[str, Any]:
     contract = _load_result_schema()
     result = _witness_value(contract["root"], contract, fill_nullable=True)
@@ -259,13 +342,29 @@ def contract_witness() -> dict[str, Any]:
         panel["newton_120"]["precision_dps"] = 120
         panel["newton_80"]["steps"] = 8
         panel["newton_120"]["steps"] = 8
+        radius = "0.946517504804225"
+        theta = "0.015770381717135"
+        for precision in (80, 120):
+            panel[f"newton_{precision}"]["radius"] = radius
+            panel[f"newton_{precision}"]["theta"] = theta
+        for precision in (80, 120):
+            _set_certificate_witness(
+                panel[f"outer_certificate_{precision}"],
+                radius=radius,
+                theta=theta,
+                half_width="1e-8",
+            )
+            _set_certificate_witness(
+                panel[f"inner_certificate_{precision}"],
+                radius=radius,
+                theta=theta,
+                half_width="1e-30",
+            )
         panel["inner_intersection"] = {
-            "radius": ["0.946517504804225", "0.946517504804225"],
-            "theta": ["0.015770381717135", "0.015770381717135"],
+            "radius": _decimal_box(radius, "5e-31"),
+            "theta": _decimal_box(theta, "5e-31"),
         }
         panel["centers_agree"] = True
-        panel["certificate_80"]["strict_interior"] = True
-        panel["certificate_120"]["strict_interior"] = True
     for homotopy, (first, second, direction) in zip(
         result["finite_branch"]["homotopies"],
         homotopy_edges,
@@ -281,6 +380,14 @@ def contract_witness() -> dict[str, Any]:
             }
         )
         for index, slab in enumerate(homotopy["slabs"]):
+            slab["box"] = {
+                "radius": _decimal_box("0.946517504804225", "1e-4"),
+                "theta": _decimal_box("0.015770381717135", "1e-6"),
+            }
+            slab["krawczyk_image"] = [
+                _decimal_box("0.946517504804225", "5e-5"),
+                _decimal_box("0.015770381717135", "5e-7"),
+            ]
             slab.update(
                 {
                     "index": index,
@@ -294,22 +401,25 @@ def contract_witness() -> dict[str, Any]:
             )
     result["finite_branch"]["exclusions"] = [None] * 4
     result["finite_branch"]["direct_replay_pass"] = True
-    drift_rows = [
-        {
-            "from_horizon": 1800,
-            "to_horizon": 2400,
-            "radius_component": 0.0,
-            "theta_component": 0.0,
-            "upper_bound": 0.0,
-        },
-        {
-            "from_horizon": 2400,
-            "to_horizon": 3600,
-            "radius_component": 0.0,
-            "theta_component": 0.0,
-            "upper_bound": 0.0,
-        },
-    ]
+    drift_rows = []
+    for first_slot, second_slot in ((4, 5), (5, 6)):
+        first_panel = result["finite_branch"]["root_panels"][first_slot]
+        second_panel = result["finite_branch"]["root_panels"][second_slot]
+        radius_component, theta_component = _interval_drift_components(
+            first_panel["inner_intersection"],
+            second_panel["inner_intersection"],
+            radius_scale=0.946517504804225,
+            theta_scale=0.015770381717135,
+        )
+        drift_rows.append(
+            {
+                "from_horizon": first_panel["horizon"],
+                "to_horizon": second_panel["horizon"],
+                "radius_component": radius_component,
+                "theta_component": theta_component,
+                "upper_bound": max(radius_component, theta_component),
+            }
+        )
     result["finite_branch"]["drift"] = {
         "center_diagnostics": copy.deepcopy(drift_rows),
         "interval_upper_bounds": drift_rows,
@@ -327,9 +437,25 @@ def contract_witness() -> dict[str, Any]:
         strict=True,
     ):
         panel["precision_dps"] = precision
-        panel["certificate"]["strict_interior"] = True
-    result["infinite_tail"]["panel_comparison"]["overlap"] = True
+        panel["root"] = ["0.946517504804225", "0.015770381717135"]
+        _set_certificate_witness(
+            panel["certificate"],
+            radius=panel["root"][0],
+            theta=panel["root"][1],
+            half_width="1e-10",
+        )
+    result["infinite_tail"]["panel_comparison"] = {
+        "intersection": {
+            "radius": _decimal_box("0.946517504804225", "5e-11"),
+            "theta": _decimal_box("0.015770381717135", "5e-11"),
+        },
+        "overlap": True,
+    }
     result["stability"]["horizon"] = 2400
+    result["stability"]["rounded_root"] = [
+        0.946517504804225,
+        0.015770381717135,
+    ]
     primary = result["stability"]["arnoldi"]["primary"]
     convergence = result["stability"]["arnoldi"]["convergence"]
     primary.update(
@@ -358,13 +484,26 @@ def contract_witness() -> dict[str, Any]:
             pair = panel["eigenpairs"][index]
             pair.update(
                 {
-                    "eigenvalue": [1.0, 0.0],
+                    "eigenvalue": [
+                        math.cos(0.015770381717135)
+                        if classification == "translation"
+                        else 1.0,
+                        (1.0 if index == 0 else -1.0)
+                        * math.sin(0.015770381717135)
+                        if classification == "translation"
+                        else 0.0,
+                    ],
                     "modulus": 1.0,
                     "classification": classification,
                 }
             )
             pair[f"{classification}_overlap"] = 1.0
     arm_names = ("radial", "tangential", "full-history-transverse")
+    amplitude, perturbations = _registered_perturbation_vectors(
+        radius=result["stability"]["rounded_root"][0],
+        theta=result["stability"]["rounded_root"][1],
+        horizon=2400,
+    )
     for arm, name in zip(
         result["stability"]["continuation_arms"], arm_names, strict=True
     ):
@@ -377,10 +516,15 @@ def contract_witness() -> dict[str, Any]:
                 "final_distance": 0.05,
                 "final_ratio": 0.05,
                 "growth_factor": 1.0,
+                "amplitude": amplitude,
+                "perturbation": perturbations[name],
+                "perturbation_sha256": _vector_sha256(perturbations[name]),
             }
         )
         for index, sample in enumerate(arm["samples"]):
-            sample.update({"step": 10 * index, "distance": 0.0})
+            sample.update(
+                {"step": 10 * index, "distance": 1.0 if index == 0 else 0.05}
+            )
     exact_arm = result["stability"]["exact_arm"]
     exact_arm.update(
         {"completed": True, "stopped": False, "maximum_distance": 0.0}
@@ -800,6 +944,142 @@ def _nonnull_prefix_length(values: Sequence[Any], *, path: str) -> int:
     return count
 
 
+def _decimal_interval(values: Sequence[str], *, path: str) -> tuple[Decimal, Decimal]:
+    if len(values) != 2:
+        raise ValueError(f"{path}: expected two endpoints")
+    lower, upper = (Decimal(value) for value in values)
+    if lower > upper:
+        raise ValueError(f"{path}: reversed interval")
+    return lower, upper
+
+
+def _interval_intersection(
+    first: Sequence[str],
+    second: Sequence[str],
+    *,
+    path: str,
+) -> list[str] | None:
+    first_lower, first_upper = _decimal_interval(first, path=f"{path}.first")
+    second_lower, second_upper = _decimal_interval(second, path=f"{path}.second")
+    lower = max(first_lower, second_lower)
+    upper = min(first_upper, second_upper)
+    if lower > upper:
+        return None
+    return [format(lower, "f"), format(upper, "f")]
+
+
+def _image_intersection(
+    first: Sequence[Sequence[str]],
+    second: Sequence[Sequence[str]],
+    *,
+    path: str,
+) -> dict[str, list[str]] | None:
+    radius = _interval_intersection(first[0], second[0], path=f"{path}.radius")
+    theta = _interval_intersection(first[1], second[1], path=f"{path}.theta")
+    if radius is None or theta is None:
+        return None
+    return {"radius": radius, "theta": theta}
+
+
+def _strict_image_in_box(
+    image: Sequence[Sequence[str]],
+    box: dict[str, Sequence[str]],
+    *,
+    path: str,
+) -> bool:
+    for index, name in enumerate(("radius", "theta")):
+        image_lower, image_upper = _decimal_interval(
+            image[index], path=f"{path}.image.{name}"
+        )
+        box_lower, box_upper = _decimal_interval(
+            box[name], path=f"{path}.box.{name}"
+        )
+        if not box_lower < image_lower <= image_upper < box_upper:
+            return False
+    return True
+
+
+def _verify_certificate(
+    certificate: dict[str, Any],
+    *,
+    center: Sequence[str] | None = None,
+    half_width: str,
+    path: str,
+) -> bool:
+    with localcontext() as context:
+        context.prec = 180
+        expected_width = 2 * Decimal(half_width)
+        for name in ("radius", "theta"):
+            lower, upper = _decimal_interval(
+                certificate["box"][name], path=f"{path}.box.{name}"
+            )
+            if upper - lower != expected_width:
+                raise ValueError(f"{path}.box.{name}: half-width mismatch")
+            if center is not None and (lower + upper) / 2 != Decimal(
+                center[0 if name == "radius" else 1]
+            ):
+                raise ValueError(f"{path}.box.{name}: center mismatch")
+    strict = _strict_image_in_box(
+        certificate["krawczyk_image"], certificate["box"], path=path
+    )
+    if certificate["strict_interior"] is not strict:
+        raise ValueError(f"{path}.strict_interior: reconstruction mismatch")
+    return strict
+
+
+def _verify_root_panel(panel: dict[str, Any], *, path: str) -> bool:
+    if (
+        panel["newton_80"]["precision_dps"],
+        panel["newton_120"]["precision_dps"],
+        panel["newton_80"]["steps"],
+        panel["newton_120"]["steps"],
+    ) != (80, 120, 8, 8):
+        raise ValueError(f"{path}: Newton configuration mismatch")
+    with localcontext() as context:
+        context.prec = 180
+        radius_agreement = abs(
+            Decimal(panel["newton_80"]["radius"])
+            - Decimal(panel["newton_120"]["radius"])
+        ) <= Decimal("1e-50")
+        theta_agreement = abs(
+            Decimal(panel["newton_80"]["theta"])
+            - Decimal(panel["newton_120"]["theta"])
+        ) <= Decimal("1e-50")
+    centers_agree = radius_agreement and theta_agreement
+    if panel["centers_agree"] is not centers_agree:
+        raise ValueError(f"{path}.centers_agree: reconstruction mismatch")
+    certificates = {
+        name: _verify_certificate(
+            panel[name],
+            center=(
+                panel["newton_80"]["radius"],
+                panel["newton_80"]["theta"],
+            )
+            if name.endswith("80")
+            else (
+                panel["newton_120"]["radius"],
+                panel["newton_120"]["theta"],
+            ),
+            half_width="1e-8" if name.startswith("outer") else "1e-30",
+            path=f"{path}.{name}",
+        )
+        for name in (
+            "outer_certificate_80",
+            "inner_certificate_80",
+            "outer_certificate_120",
+            "inner_certificate_120",
+        )
+    }
+    intersection = _image_intersection(
+        panel["inner_certificate_80"]["krawczyk_image"],
+        panel["inner_certificate_120"]["krawczyk_image"],
+        path=f"{path}.inner_intersection",
+    )
+    if panel["inner_intersection"] != intersection:
+        raise ValueError(f"{path}.inner_intersection: reconstruction mismatch")
+    return bool(centers_agree and intersection is not None and all(certificates.values()))
+
+
 def _verify_root_slots(root_panels: list[dict[str, Any] | None]) -> None:
     for index, panel in enumerate(root_panels):
         if panel is not None and panel["horizon"] != HORIZONS[index]:
@@ -852,6 +1132,41 @@ def _verify_homotopy_slots(
                 raise ValueError(
                     f"$.finite_branch.homotopies[{index}].slabs: index mismatch"
                 )
+            slab_path = f"$.finite_branch.homotopies[{index}].slabs[{slab_index}]"
+            expected_s = [
+                format(Decimal(slab_index) / Decimal(64), "f"),
+                format(Decimal(slab_index + 1) / Decimal(64), "f"),
+            ]
+            if slab["s_interval"] != expected_s:
+                raise ValueError(f"{slab_path}.s_interval: reconstruction mismatch")
+            for coordinate, half_width in (("radius", "1e-4"), ("theta", "1e-6")):
+                lower, upper = _decimal_interval(
+                    slab["box"][coordinate], path=f"{slab_path}.box.{coordinate}"
+                )
+                if upper - lower != 2 * Decimal(half_width):
+                    raise ValueError(f"{slab_path}.box.{coordinate}: width mismatch")
+                with localcontext() as context:
+                    context.prec = 180
+                    interpolation = Decimal(2 * slab_index + 1) / Decimal(128)
+                    start = Decimal(root_panels[first_slot]["newton_120"][coordinate])
+                    stop = Decimal(root_panels[second_slot]["newton_120"][coordinate])
+                    expected_center = (1 - interpolation) * start + interpolation * stop
+                    if (lower + upper) / 2 != expected_center:
+                        raise ValueError(f"{slab_path}.box.{coordinate}: center mismatch")
+            strict = _strict_image_in_box(
+                slab["krawczyk_image"], slab["box"], path=slab_path
+            )
+            if slab["strict_interior"] is not strict:
+                raise ValueError(f"{slab_path}.strict_interior: reconstruction mismatch")
+            overlap = None
+            if slab_index:
+                overlap = _image_intersection(
+                    homotopy["slabs"][slab_index - 1]["krawczyk_image"],
+                    slab["krawczyk_image"],
+                    path=f"{slab_path}.overlap",
+                ) is not None
+            if slab["overlaps_previous"] is not overlap:
+                raise ValueError(f"{slab_path}.overlaps_previous: reconstruction mismatch")
         slab_state = evaluate_homotopy_slabs(homotopy["slabs"][:slab_count])
         if homotopy["status"] == "pass":
             if slab_state != "pass" or homotopy["pass"] is not True:
@@ -881,6 +1196,32 @@ def _verify_exclusions(
         leaves = attempt["leaves"]
         status = attempt["status"]
         classifications = [leaf["classification"] for leaf in leaves]
+        for leaf_index, leaf in enumerate(leaves):
+            leaf_path = f"$.finite_branch.exclusions[{index}].leaves[{leaf_index}]"
+            classification = leaf["classification"]
+            residual = leaf["residual_box"]
+            image = leaf["krawczyk_image"]
+            strict_field = leaf["strict_interior"]
+            if classification == "residual-excluded":
+                if image is not None or strict_field is not None or residual is None:
+                    raise ValueError(f"{leaf_path}: residual witness mismatch")
+                excludes_zero = any(
+                    not (lower <= 0 <= upper)
+                    for lower, upper in (
+                        _decimal_interval(component, path=f"{leaf_path}.residual_box")
+                        for component in residual
+                    )
+                )
+                if not excludes_zero:
+                    raise ValueError(f"{leaf_path}: residual does not exclude zero")
+            elif classification == "krawczyk-root":
+                if residual is not None or image is None or strict_field is None:
+                    raise ValueError(f"{leaf_path}: Krawczyk witness mismatch")
+                strict = _strict_image_in_box(image, leaf["box"], path=leaf_path)
+                if strict_field is not strict or not strict:
+                    raise ValueError(f"{leaf_path}: false Krawczyk inclusion")
+            elif any(value is not None for value in (residual, image, strict_field)):
+                raise ValueError(f"{leaf_path}: unresolved leaf carries a claim witness")
         if status == "all-residual-excluded":
             if any(value != "residual-excluded" for value in classifications):
                 raise ValueError(
@@ -908,12 +1249,160 @@ def _verify_arnoldi_panel(
     )
     if panel["expected_count"] != expected_count or panel["requested_count"] != expected_count:
         raise ValueError(f"{path}: registered count mismatch")
+    expected_configuration = {
+        24: (96, 20000, 1e-10),
+        36: (144, 40000, 1e-12),
+    }[expected_count]
+    if (
+        panel["ncv"],
+        panel["max_iterations"],
+        panel["tolerance"],
+    ) != expected_configuration:
+        raise ValueError(f"{path}: registered solver configuration mismatch")
     if panel["status"] == "complete" and (count != expected_count or missing_vector):
         raise ValueError(f"{path}: complete status with incomplete slots")
     if panel["status"] == "missing-vectors" and not missing_vector:
         raise ValueError(f"{path}: missing-vectors status without missing vector")
     if panel["status"] == "wrong-cardinality" and count == expected_count:
         raise ValueError(f"{path}: wrong-cardinality status with full count")
+    previous_modulus = math.inf
+    for index, pair in enumerate(pairs[:count]):
+        value = complex(*pair["eigenvalue"])
+        modulus = abs(value)
+        if pair["modulus"] != modulus:
+            raise ValueError(f"{path}.eigenpairs[{index}].modulus: mismatch")
+        expected_classification = (
+            "translation"
+            if pair["translation_overlap"] >= 0.99
+            else "rotation"
+            if pair["rotation_overlap"] >= 0.99
+            else "transverse"
+        )
+        if pair["classification"] != expected_classification:
+            raise ValueError(f"{path}.eigenpairs[{index}].classification: mismatch")
+        if modulus > previous_modulus:
+            raise ValueError(f"{path}.eigenpairs: not sorted by modulus")
+        previous_modulus = modulus
+
+
+def _verify_arnoldi_summary(payload: dict[str, Any]) -> None:
+    panels = [
+        payload["stability"]["arnoldi"][name]
+        for name in ("primary", "convergence")
+    ]
+    complete = all(panel["status"] == "complete" for panel in panels)
+    rounded_root = payload["stability"]["rounded_root"]
+    theta = 0.0 if rounded_root is None else rounded_root[1]
+    expected_translations = (
+        complex(math.cos(theta), math.sin(theta)),
+        complex(math.cos(theta), -math.sin(theta)),
+    )
+    symmetry_pass = complete
+    for panel in panels:
+        pairs = [pair for pair in panel["eigenpairs"] if pair is not None]
+        translations = [pair for pair in pairs if pair["classification"] == "translation"]
+        rotations = [pair for pair in pairs if pair["classification"] == "rotation"]
+        symmetry_pass = bool(
+            symmetry_pass
+            and len(translations) >= 2
+            and all(
+                min(abs(complex(*pair["eigenvalue"]) - expected) for pair in translations)
+                <= 1e-7
+                for expected in expected_translations
+            )
+            and any(abs(complex(*pair["eigenvalue"]) - 1.0) <= 1e-7 for pair in rotations)
+        )
+    primary = [
+        pair
+        for pair in panels[0]["eigenpairs"]
+        if pair is not None and pair["classification"] == "transverse"
+    ]
+    convergence = [
+        pair
+        for pair in panels[1]["eigenpairs"]
+        if pair is not None and pair["classification"] == "transverse"
+    ]
+    distance = None
+    if primary and convergence:
+        leading = primary[0]
+        leading_value = complex(*leading["eigenvalue"])
+        distance = min(
+            abs(leading_value - complex(*pair["eigenvalue"])) for pair in convergence
+        )
+    agreement = payload["stability"]["arnoldi"]["panel_agreement"]
+    expected_pass = bool(
+        complete and symmetry_pass and distance is not None and distance <= 1e-5
+    )
+    if agreement["symmetry_pass"] is not symmetry_pass:
+        raise ValueError("$.stability.arnoldi.panel_agreement.symmetry_pass: mismatch")
+    if agreement["leading_transverse_distance"] != distance:
+        raise ValueError("$.stability.arnoldi.panel_agreement.leading_transverse_distance: mismatch")
+    if agreement["pass"] is not expected_pass:
+        raise ValueError("$.stability.arnoldi.panel_agreement.pass: mismatch")
+
+
+def _arnoldi_start_hashes() -> dict[str, str]:
+    specifications = {
+        "primary": (math.sqrt(2.0), math.sqrt(3.0)),
+        "convergence": (math.sqrt(5.0), math.sqrt(7.0)),
+    }
+    result = {}
+    for name, (first, second) in specifications.items():
+        values = [
+            math.sin(first * (index + 1))
+            + math.cos(second * (index + 0.5))
+            for index in range(4800)
+        ]
+        norm = math.sqrt(math.fsum(value * value for value in values))
+        result[name] = _vector_sha256([value / norm for value in values])
+    return result
+
+
+def _verify_stability_inputs(payload: dict[str, Any]) -> None:
+    stability = payload["stability"]
+    root_panel = payload["finite_branch"]["root_panels"][5]
+    if root_panel is None:
+        has_spectral_output = any(
+            pair is not None
+            for name in ("primary", "convergence")
+            for pair in stability["arnoldi"][name]["eigenpairs"]
+        )
+        if (
+            stability["rounded_root"] is not None
+            or has_spectral_output
+            or any(arm is not None for arm in stability["continuation_arms"])
+            or stability["exact_arm"] is not None
+        ):
+            raise ValueError("$.stability: inputs without H=2400 root")
+        return
+    expected_root = [
+        float(root_panel["newton_120"]["radius"]),
+        float(root_panel["newton_120"]["theta"]),
+    ]
+    if stability["rounded_root"] != expected_root:
+        raise ValueError("$.stability.rounded_root: reconstruction mismatch")
+    starts = _arnoldi_start_hashes()
+    for name in ("primary", "convergence"):
+        if stability["arnoldi"][name]["start_sha256"] != starts[name]:
+            raise ValueError(f"$.stability.arnoldi.{name}.start_sha256: mismatch")
+    amplitude, perturbations = _registered_perturbation_vectors(
+        radius=expected_root[0], theta=expected_root[1], horizon=2400
+    )
+    names = ("radial", "tangential", "full-history-transverse")
+    for index, (name, arm) in enumerate(
+        zip(names, stability["continuation_arms"], strict=True)
+    ):
+        if arm is None:
+            continue
+        path = f"$.stability.continuation_arms[{index}]"
+        expected = perturbations[name]
+        if arm["name"] != name or arm["amplitude"] != amplitude:
+            raise ValueError(f"{path}: registered perturbation mismatch")
+        if arm["perturbation"] != expected:
+            raise ValueError(f"{path}.perturbation: reconstruction mismatch")
+        digest = _vector_sha256(expected)
+        if arm["perturbation_sha256"] != digest:
+            raise ValueError(f"{path}.perturbation_sha256: reconstruction mismatch")
 
 
 def _verify_trajectory(
@@ -934,6 +1423,22 @@ def _verify_trajectory(
         raise ValueError(f"{path}: complete trajectory has missing samples")
     if arm["stopped"] and arm["completed"]:
         raise ValueError(f"{path}: stopped trajectory marked complete")
+    distances = [sample["distance"] for sample in samples[:count]]
+    if "initial_distance" in arm and distances:
+        initial = distances[0]
+        final = distances[-1]
+        ratio = final / initial if initial > 0.0 else math.inf
+        growth = max(distances) / initial if initial > 0.0 else math.inf
+        if (
+            arm["initial_distance"] != initial
+            or arm["final_distance"] != final
+            or arm["final_ratio"] != ratio
+            or arm["growth_factor"] != growth
+        ):
+            raise ValueError(f"{path}: trajectory summary mismatch")
+    if "maximum_distance" in arm and distances:
+        if arm["maximum_distance"] != max(distances):
+            raise ValueError(f"{path}.maximum_distance: reconstruction mismatch")
 
 
 def _stability_evidence(payload: dict[str, Any]) -> dict[str, bool]:
@@ -1024,10 +1529,20 @@ def _controls_evidence(payload: dict[str, Any]) -> bool:
     mutations = controls["mutations"]
     return bool(
         [row["horizon"] for row in circular] == expected_horizons
+        and all(
+            row["pass"]
+            is (
+                row["complete_state_relative_error"] < 5e-14
+                and row["new_point_relative_error"] < 5e-14
+            )
+            for row in circular
+        )
         and all(row["pass"] for row in circular)
         and [row["horizon"] for row in eta_zero] == list(HORIZONS)
         and all(
-            row["steps"] == row["horizon"] + 1 and row["pass"]
+            row["steps"] == row["horizon"] + 1
+            and row["pass"] is (row["maximum_deviation"] < 1e-14)
+            and row["pass"]
             for row in eta_zero
         )
         and [row["name"] for row in mutations]
@@ -1052,6 +1567,14 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
         raise ValueError("$.identity.parameters: registered values do not match")
     root_panels = payload["finite_branch"]["root_panels"]
     _verify_root_slots(root_panels)
+    root_evidence = [
+        None
+        if panel is None
+        else _verify_root_panel(
+            panel, path=f"$.finite_branch.root_panels[{index}]"
+        )
+        for index, panel in enumerate(root_panels)
+    ]
     _verify_homotopy_slots(payload["finite_branch"]["homotopies"], root_panels)
     if payload["stability"]["horizon"] != 2400:
         raise ValueError("$.stability.horizon: expected 2400")
@@ -1071,7 +1594,7 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
     root_boxes = {
         panel["horizon"]: panel["inner_intersection"]
         for panel in root_panels
-        if panel is not None
+        if panel is not None and panel["inner_intersection"] is not None
     }
     for index, (first_horizon, second_horizon) in enumerate(
         ((1800, 2400), (2400, 3600))
@@ -1128,6 +1651,8 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
         path="$.stability.arnoldi.convergence",
         expected_count=36,
     )
+    _verify_stability_inputs(payload)
+    _verify_arnoldi_summary(payload)
     arms = payload["stability"]["continuation_arms"]
     _nonnull_prefix_length(arms, path="$.stability.continuation_arms")
     for index, arm in enumerate(arms):
@@ -1147,13 +1672,7 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
         raise ValueError("$.controls.pass: reconstruction mismatch")
 
     def complete_root(index: int) -> bool:
-        panel = root_panels[index]
-        return bool(
-            panel is not None
-            and panel["centers_agree"]
-            and panel["certificate_80"]["strict_interior"]
-            and panel["certificate_120"]["strict_interior"]
-        )
+        return root_evidence[index] is True
 
     forward_roots_complete = all(complete_root(index) for index in range(2, 7))
     lower_roots_complete = all(complete_root(index) for index in (2, 1, 0))
@@ -1166,13 +1685,41 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
         for row in payload["finite_branch"]["homotopies"][4:]
     )
     tail_panels = payload["infinite_tail"]["certificate_panels"]
-    tail_complete = bool(
-        all(
-            row is not None and row["certificate"]["strict_interior"]
-            for row in tail_panels
+    _nonnull_prefix_length(tail_panels, path="$.infinite_tail.certificate_panels")
+    tail_certificates = []
+    for index, row in enumerate(tail_panels):
+        if row is None:
+            tail_certificates.append(False)
+            continue
+        expected_precision = (120, 160)[index]
+        if row["precision_dps"] != expected_precision:
+            raise ValueError(
+                f"$.infinite_tail.certificate_panels[{index}]: precision mismatch"
+            )
+        tail_certificates.append(
+            _verify_certificate(
+                row["certificate"],
+                center=row["root"],
+                half_width="1e-10",
+                path=f"$.infinite_tail.certificate_panels[{index}].certificate",
+            )
         )
-        and payload["infinite_tail"]["panel_comparison"]["overlap"]
-    )
+    tail_complete = False
+    if all(row is not None for row in tail_panels):
+        intersection = _image_intersection(
+            tail_panels[0]["certificate"]["krawczyk_image"],
+            tail_panels[1]["certificate"]["krawczyk_image"],
+            path="$.infinite_tail.panel_comparison",
+        )
+        comparison = payload["infinite_tail"]["panel_comparison"]
+        overlap = intersection is not None
+        if comparison["intersection"] != intersection or comparison["overlap"] is not overlap:
+            raise ValueError("$.infinite_tail.panel_comparison: reconstruction mismatch")
+        tail_complete = bool(overlap and all(tail_certificates))
+    else:
+        comparison = payload["infinite_tail"]["panel_comparison"]
+        if comparison != {"intersection": None, "overlap": False}:
+            raise ValueError("$.infinite_tail.panel_comparison: value without panels")
     prerequisites = {
         "G1F": forward_roots_complete,
         "G1R": lower_roots_complete,
@@ -1250,7 +1797,7 @@ def publish_result(
     _atomic_write_bytes(Path(result_path), result_bytes)
     _atomic_write_bytes(Path(report_path), report_bytes)
     manifest = {
-        "schema": "scalar-memory-rotating-wave-horizon-publication-v2",
+        "schema": "scalar-memory-rotating-wave-horizon-publication-v3",
         "artifacts": [
             {
                 "role": "result-json",
