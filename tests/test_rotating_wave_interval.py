@@ -2,6 +2,7 @@ import numpy as np
 from mpmath import iv
 import pytest
 
+import emergenz_knoten.rotating_wave_interval as rw_interval
 from emergenz_knoten.rotating_wave import finite_h_rotating_wave_residual
 from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
@@ -167,3 +168,84 @@ def test_interval_parameters_reject_invalid_values(field: str, value: object):
     values[field] = value
     with pytest.raises(ValueError):
         IntervalRotatingWaveParameters(**values)
+
+
+def test_public_interval_box_encloses_point_balance_and_jacobian() -> None:
+    observed = rw_interval.interval_balance_and_jacobian_box(
+        radius_interval=("1.09", "1.11"),
+        theta_interval=("0.12", "0.14"),
+        parameters=_parameters(),
+        precision_dps=70,
+    )
+    point = point_balance_and_jacobian(
+        radius="1.1",
+        theta="0.13",
+        parameters=_parameters(),
+        precision_dps=80,
+    )
+
+    for interval, value in zip(observed["balance"], point["balance"], strict=True):
+        assert float(interval["lower"]) <= float(value) <= float(interval["upper"])
+    for interval_row, point_row in zip(
+        observed["jacobian"], point["jacobian"], strict=True
+    ):
+        for interval, value in zip(interval_row, point_row, strict=True):
+            assert float(interval["lower"]) <= float(value) <= float(
+                interval["upper"]
+            )
+
+
+def test_homotopy_interval_box_encloses_sampled_interpolation() -> None:
+    first = _parameters(horizon=17)
+    second = _parameters(horizon=23)
+    observed = rw_interval.certify_rotating_wave_homotopy_box(
+        radius="1.1",
+        theta="0.13",
+        radius_half_width="0.01",
+        theta_half_width="0.01",
+        s_interval=("0.25", "0.5"),
+        first_parameters=first,
+        second_parameters=second,
+        precision_dps=70,
+    )
+    first_point = point_balance_and_jacobian(
+        radius="1.1", theta="0.13", parameters=first, precision_dps=80
+    )
+    second_point = point_balance_and_jacobian(
+        radius="1.1", theta="0.13", parameters=second, precision_dps=80
+    )
+    for s_value in (0.25, 0.375, 0.5):
+        expected = [
+            (1.0 - s_value) * float(a) + s_value * float(b)
+            for a, b in zip(
+                first_point["balance"], second_point["balance"], strict=True
+            )
+        ]
+        for interval, value in zip(
+            observed["function_box"], expected, strict=True
+        ):
+            assert float(interval["lower"]) <= value <= float(interval["upper"])
+
+
+def test_homotopy_rejects_parameter_changes_beyond_horizon() -> None:
+    changed = IntervalRotatingWaveParameters(
+        alpha="0.08",
+        horizon=23,
+        memory_mass="1.2",
+        eta="0.18",
+        sigma_rep="1.0",
+        sigma_att="3.0",
+        amplitude_rep="1.0",
+        amplitude_att="4.5",
+    )
+    with pytest.raises(ValueError, match="horizon"):
+        rw_interval.certify_rotating_wave_homotopy_box(
+            radius="1.1",
+            theta="0.13",
+            radius_half_width="0.01",
+            theta_half_width="0.01",
+            s_interval=("0.25", "0.5"),
+            first_parameters=_parameters(17),
+            second_parameters=changed,
+            precision_dps=70,
+        )

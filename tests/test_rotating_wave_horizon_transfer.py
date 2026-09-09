@@ -732,6 +732,78 @@ def test_finite_root_adapter_rejects_nonregistered_inputs(
         )
 
 
+def _fake_homotopy_certificate(*, passed: bool = True) -> dict[str, object]:
+    return {
+        "box": _fake_interval_certificate()["box"],
+        "krawczyk_image": _fake_interval_certificate()["krawczyk_image"],
+        "gates": {"krawczyk_strict_interior": passed},
+        "pass": passed,
+    }
+
+
+def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> None:
+    calls: list[dict[str, object]] = []
+
+    def fake_homotopy(**kwargs):
+        calls.append(kwargs)
+        return _fake_homotopy_certificate()
+
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_homotopy_box",
+        fake_homotopy,
+        raising=False,
+    )
+    row = gate.homotopy_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        from_root=("0.94", "0.015"),
+        to_root=("0.96", "0.016"),
+    )
+
+    assert len(calls) == 64
+    assert calls[0]["s_interval"] == ("0", "0.015625")
+    assert calls[-1]["s_interval"] == ("0.984375", "1")
+    assert calls[0]["radius_half_width"] == "1e-4"
+    assert calls[0]["theta_half_width"] == "1e-6"
+    assert calls[0]["precision_dps"] == 120
+    assert calls[0]["first_parameters"].horizon == 1200
+    assert calls[0]["second_parameters"].horizon == 1500
+    assert row["status"] == "pass"
+    assert row["pass"] is True
+    assert len(row["slabs"]) == 64
+    assert row["slabs"][0]["overlaps_previous"] is None
+    assert all(slab["overlaps_previous"] for slab in row["slabs"][1:])
+
+
+def test_homotopy_adapter_stops_after_first_failed_slab(gate, monkeypatch) -> None:
+    calls = 0
+
+    def fake_homotopy(**kwargs):
+        nonlocal calls
+        calls += 1
+        return _fake_homotopy_certificate(passed=calls != 11)
+
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_homotopy_box",
+        fake_homotopy,
+        raising=False,
+    )
+    row = gate.homotopy_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        from_root=("0.94", "0.015"),
+        to_root=("0.96", "0.016"),
+    )
+
+    assert calls == 11
+    assert row["status"] == "inconclusive"
+    assert row["pass"] is False
+    assert row["slabs"][10]["strict_interior"] is False
+    assert row["slabs"][11:] == [None] * 53
+
+
 class _SyntheticRunnerBackend:
     """Primitive donor backend for target-free orchestration tests only."""
 
