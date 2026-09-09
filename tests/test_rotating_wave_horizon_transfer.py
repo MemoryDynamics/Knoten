@@ -901,6 +901,145 @@ def test_homotopy_adapter_turns_numeric_singularity_into_inconclusive(
     assert row["slabs"] == [None] * 64
 
 
+def _fake_exclusion_balance(
+    *,
+    radius_interval: tuple[str, str],
+    theta_interval: tuple[str, str],
+    excluded: bool,
+    **kwargs,
+) -> dict[str, object]:
+    return {
+        "box": [
+            {"lower": radius_interval[0], "upper": radius_interval[1]},
+            {"lower": theta_interval[0], "upper": theta_interval[1]},
+        ],
+        "balance": [
+            {"lower": "1", "upper": "2"}
+            if excluded
+            else {"lower": "-1", "upper": "1"},
+            {"lower": "-1", "upper": "1"},
+        ],
+    }
+
+
+def test_exclusion_adapter_uses_shared_residual_evaluator(gate, monkeypatch) -> None:
+    calls: list[dict[str, object]] = []
+
+    def fake_balance(**kwargs):
+        calls.append(kwargs)
+        return _fake_exclusion_balance(excluded=True, **kwargs)
+
+    monkeypatch.setattr(
+        gate, "interval_balance_and_jacobian_box", fake_balance, raising=False
+    )
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_box",
+        lambda **kwargs: pytest.fail("Krawczyk must not run after residual exclusion"),
+    )
+    row = gate.local_branch_exclusion_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        previous_root=("0.946517504804225", "0.015770381717135"),
+    )
+
+    assert len(calls) == 1
+    assert calls[0]["parameters"].horizon == 1500
+    assert calls[0]["precision_dps"] == 120
+    assert row["local_domain"] == {
+        "radius": ["0.926517504804225", "0.966517504804225"],
+        "theta": ["0.013770381717135", "0.017770381717135"],
+    }
+    assert row["max_depth"] == 20
+    assert row["status"] == "all-residual-excluded"
+    assert row["leaves"] == [
+        {
+            "box": row["local_domain"],
+            "classification": "residual-excluded",
+            "depth": 0,
+            "krawczyk_image": None,
+            "residual_box": [["1", "2"], ["-1", "1"]],
+            "strict_interior": None,
+        }
+    ]
+
+
+def test_exclusion_adapter_records_other_krawczyk_root(gate, monkeypatch) -> None:
+    monkeypatch.setattr(
+        gate,
+        "interval_balance_and_jacobian_box",
+        lambda **kwargs: _fake_exclusion_balance(excluded=False, **kwargs),
+        raising=False,
+    )
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_box",
+        lambda **kwargs: _fake_homotopy_certificate(**kwargs),
+    )
+    row = gate.local_branch_exclusion_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        previous_root=("0.95", "0.015"),
+    )
+
+    assert row["status"] == "other-root"
+    assert row["leaves"][0]["classification"] == "krawczyk-root"
+    assert row["leaves"][0]["residual_box"] is None
+    assert row["leaves"][0]["strict_interior"] is True
+
+
+def test_exclusion_adapter_splits_fifo_on_longer_normalized_edge(
+    gate, monkeypatch
+) -> None:
+    calls: list[tuple[tuple[str, str], tuple[str, str]]] = []
+
+    def fake_balance(**kwargs):
+        calls.append((kwargs["radius_interval"], kwargs["theta_interval"]))
+        return _fake_exclusion_balance(excluded=len(calls) > 1, **kwargs)
+
+    monkeypatch.setattr(
+        gate, "interval_balance_and_jacobian_box", fake_balance, raising=False
+    )
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_box",
+        lambda **kwargs: _fake_homotopy_certificate(passed=False, **kwargs),
+    )
+    row = gate.local_branch_exclusion_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        previous_root=("0.95", "0.015"),
+    )
+
+    assert calls == [
+        (("0.93", "0.97"), ("0.013", "0.017")),
+        (("0.93", "0.95"), ("0.013", "0.017")),
+        (("0.95", "0.97"), ("0.013", "0.017")),
+    ]
+    assert [leaf["depth"] for leaf in row["leaves"]] == [1, 1]
+    assert row["status"] == "all-residual-excluded"
+
+
+@pytest.mark.parametrize(
+    ("from_horizon", "to_horizon", "previous_root", "error"),
+    [
+        (1200, 1800, ("0.95", "0.015"), ValueError),
+        (1200.0, 1500, ("0.95", "0.015"), ValueError),
+        (1200, 1500, ["0.95", "0.015"], TypeError),
+        (1200, 1500, ("nan", "0.015"), ValueError),
+    ],
+)
+def test_exclusion_adapter_rejects_nonregistered_inputs(
+    gate, from_horizon, to_horizon, previous_root, error
+) -> None:
+    with pytest.raises(error):
+        gate.local_branch_exclusion_backend_record(
+            from_horizon=from_horizon,
+            to_horizon=to_horizon,
+            previous_root=previous_root,
+        )
+
+
 class _SyntheticRunnerBackend:
     """Primitive donor backend for target-free orchestration tests only."""
 
