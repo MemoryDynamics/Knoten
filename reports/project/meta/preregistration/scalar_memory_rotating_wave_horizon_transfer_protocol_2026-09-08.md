@@ -2,9 +2,9 @@
 
 Datum: 2026-09-08.
 
-Status: **prospektiv zum dritten Mal amendiert nach negativem
-Evidenzvertragsreview, vor wissenschaftlichem Runnercode und vor jeder neuen
-Horizont-Trajektorie; P5-D-Target geschlossen**.
+Status: **prospektiv zum vierten Mal amendiert nach plattformabhaengigem
+Arnoldi-Start-Falsifikator, vor wissenschaftlichem Runnercode und vor jeder
+neuen Horizont-Trajektorie; P5-D-Target geschlossen**.
 
 Die Amendierung schliesst HT-P01--HT-P06 aus dem separat committed Review an
 Revision `c1ee529d969ebafed7a557e3db47eba95a38af17`, Reviewblob
@@ -29,6 +29,17 @@ Methode, Schwelle oder Suchfreiheit hinzu, sondern verlangt, dass bereits
 registrierte aeussere/innere Zertifikate, Ausschlusswitnesses, Startvektoren
 und Stoerungen im Ergebnis nachpruefbar gespeichert werden. Auch fuer diese
 Amendierung wurde kein registrierter numerischer Wert ausgewertet.
+
+Die vierte Amendierung reagiert auf die fehlgeschlagene Linux-CI
+[34310627799](https://github.com/MemoryDynamics/Knoten/actions/runs/34310627799)
+fuer die targetfreie Vertragsrevision
+`a250bb7a7b37337be9e51dfb313942ca217efd0d`. Die dortige `libm` erzeugte fuer
+die registrierten nativen `sin`-/`cos`-Starts andere letzte binary64-Bits als
+Windows; die behauptete plattformuebergreifende Hashdeterministik war damit
+falsifiziert. Vor jedem Targetzugriff ersetzt diese Amendierung nur die zwei
+Arnoldi-Starts durch rein ganzzahlig erzeugte, mit einem expliziten
+binary64-Hexwert skalierte Vektoren. Kein Root, kein Arnoldi-Panel und keine
+Horizonttrajektorie wurde dafuer ausgewertet.
 
 Dieses Protokoll operationalisiert den Befund
 `finite-h-loop-nontautological-horizon-transfer-open`. Es darf erst nach
@@ -307,13 +318,24 @@ Voll-FIFO-Map wird in zwei Arnoldi-Panels ausgewertet:
 | primaer | 24 | 96 | `1e-10` | 20000 |
 | Konvergenz | 36 | 144 | `1e-12` | 40000 |
 
-Mit Komponentenindex $k=0,\ldots,4799$ ist der normalisierte Start des
-primaeren Panels
-`sin(sqrt(2)*(k+1))+cos(sqrt(3)*(k+0.5))`; das Konvergenzpanel verwendet
-getrennt
-`sin(sqrt(5)*(k+1))+cos(sqrt(7)*(k+0.5))`. Der 120-dps-Root wird fuer die
-Voll-FIFO-Rechnung genau einmal in binary64 gerundet und dieser Wert
-vollstaendig protokolliert.
+Die beiden 4800-komponentigen Starts werden plattformunabhaengig aus einer
+32-bit-LCG-Folge erzeugt. Fuer Seed $s_{-1}$ gilt in aufsteigender
+Komponentenreihenfolge
+
+$$
+s_k=(1664525s_{k-1}+1013904223)\bmod 2^{32},\qquad
+v_k=\begin{cases}c,&s_k\mathbin{\&}2^{31}\ne0,\\-c,&\text{sonst},\end{cases}
+$$
+
+mit dem expliziten binary64-Wert
+`c=float.fromhex("0x1.d8f7208e6b82cp-7")`. Das primaere Panel verwendet Seed
+`0x243f6a88`, das Konvergenzpanel `0x85a308d3`. Die little-endian-float64-
+Hashes sind
+`572db16bc576c2eabe9b45af772338780c058e8d148eff00d2cc3041861d1382`
+beziehungsweise
+`29efa5c8c189a296b4610f3bfef60ecdba585dd29ffec62baf89af0d1aa8d7f6`.
+Der 120-dps-Root wird fuer die Voll-FIFO-Rechnung genau einmal in binary64
+gerundet und dieser Wert vollstaendig protokolliert.
 
 Alle gespeicherten Ritzresiduen muessen kleiner `1e-8` sein. Symmetriemoden,
 Paneluebereinstimmung und Schwellen werden unveraendert vom Anchor geerbt:
@@ -542,17 +564,13 @@ rekonstruierbar machen.
 4. Der Schnitt und die Ueberlappung der beiden 120-/160-dps-
    Tail-Krawczyk-Bilder werden ebenfalls ausschliesslich aus den gespeicherten
    Endpunkten rekonstruiert.
-5. Der primaere Arnoldi-Start ist die normierte binary64-Auswertung
-   `sin(sqrt(2)*(k+1))+cos(sqrt(3)*(k+0.5))`. Der Konvergenzstart ist die
-   normierte binary64-Auswertung
-   `sin(sqrt(5)*(k+1))+cos(sqrt(7)*(k+0.5))`, jeweils fuer
-   `k=0,...,4799`. Die Norm ist deterministisch
-   `sqrt(fsum(v_k*v_k))`; Division und trigonometrische Werte sind native
-   binary64. Ihre SHA-256 ueber contiguous little-endian float64-Bytes werden
-   als Vertragskonstanten gebunden und im
-   Standardbibliothek-Auditor ohne NumPy rekonstruiert. Der abweichende
-   allgemeine `S2`-Start aus der bestehenden Bibliothek ist fuer dieses Gate
-   unzulaessig.
+5. Die beiden Arnoldi-Starts folgen exakt der 32-bit-LCG-Konstruktion aus
+   Abschnitt 5. Ganzzahlzustand, Seeds, Vorzeichenbit und der binary64-Hexwert
+   sind plattformunabhaengig. Ihre SHA-256 ueber contiguous little-endian
+   float64-Bytes werden als Vertragskonstanten gebunden und im
+   Standardbibliothek-Auditor ohne NumPy rekonstruiert. Trigonometrische oder
+   der allgemeine `S2`-Start aus der bestehenden Bibliothek sind fuer dieses
+   Gate unzulaessig.
 6. Jeder der drei Stoerungsarme speichert `amplitude=1e-7 R_2400`, den
    tatsaechlich verwendeten 4800-Komponenten-float64-Vektor und dessen
    SHA-256 ueber contiguous little-endian Bytes. Runner-Validator und
