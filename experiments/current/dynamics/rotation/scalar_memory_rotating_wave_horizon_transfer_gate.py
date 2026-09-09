@@ -1774,6 +1774,462 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
             raise ValueError(f"$.classification.{key}: reconstruction mismatch")
 
 
+_ROOT_EXECUTION_ORDER = (1200, 1500, 1800, 2400, 3600, 900, 600)
+_HOMOTOPY_EDGES = (
+    (1200, 1500, "forward"),
+    (1500, 1800, "forward"),
+    (1800, 2400, "forward"),
+    (2400, 3600, "forward"),
+    (1200, 900, "lower-tail"),
+    (900, 600, "lower-tail"),
+)
+
+
+def _root_coordinates(panel: dict[str, Any], precision_dps: int) -> tuple[str, str]:
+    newton = panel[f"newton_{precision_dps}"]
+    return newton["radius"], newton["theta"]
+
+
+def _combine_root_panel(
+    horizon: int,
+    precision_records: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    panel: dict[str, Any] = {"horizon": horizon}
+    for precision in (80, 120):
+        record = precision_records[precision]
+        panel[f"newton_{precision}"] = copy.deepcopy(record["newton"])
+        panel[f"outer_certificate_{precision}"] = copy.deepcopy(
+            record["outer_certificate"]
+        )
+        panel[f"inner_certificate_{precision}"] = copy.deepcopy(
+            record["inner_certificate"]
+        )
+    centers = [_root_coordinates(panel, precision) for precision in (80, 120)]
+    panel["centers_agree"] = all(
+        abs(Decimal(centers[0][index]) - Decimal(centers[1][index])) <= Decimal("1e-50")
+        for index in range(2)
+    )
+    panel["inner_intersection"] = _image_intersection(
+        panel["inner_certificate_80"]["krawczyk_image"],
+        panel["inner_certificate_120"]["krawczyk_image"],
+        path=f"orchestration.root[{horizon}].inner_intersection",
+    )
+    return panel
+
+
+def _drift_record(root_panels: Sequence[dict[str, Any] | None]) -> dict[str, Any]:
+    by_horizon = {
+        panel["horizon"]: panel
+        for panel in root_panels
+        if panel is not None and panel["inner_intersection"] is not None
+    }
+    rows: list[dict[str, Any] | None] = []
+    for first, second in ((1800, 2400), (2400, 3600)):
+        if first not in by_horizon or second not in by_horizon:
+            rows.append(None)
+            continue
+        radius_component, theta_component = _interval_drift_components(
+            by_horizon[first]["inner_intersection"],
+            by_horizon[second]["inner_intersection"],
+            radius_scale=0.946517504804225,
+            theta_scale=0.015770381717135,
+        )
+        rows.append(
+            {
+                "from_horizon": first,
+                "to_horizon": second,
+                "radius_component": radius_component,
+                "theta_component": theta_component,
+                "upper_bound": max(radius_component, theta_component),
+            }
+        )
+    passed = bool(
+        all(row is not None for row in rows)
+        and drift_gates(
+            previous_upper=rows[0]["upper_bound"],
+            final_upper=rows[1]["upper_bound"],
+        )["pass"]
+    )
+    return {
+        "center_diagnostics": copy.deepcopy(rows),
+        "interval_upper_bounds": rows,
+        "mutation_closes_pass": True,
+        "pass": passed,
+    }
+
+
+def _empty_arnoldi_panel(name: str) -> dict[str, Any]:
+    configuration = {
+        "primary": (24, 96, 1e-10, 20000),
+        "convergence": (36, 144, 1e-12, 40000),
+    }
+    count, ncv, tolerance, iterations = configuration[name]
+    return {
+        "eigenpairs": [None] * count,
+        "expected_count": count,
+        "requested_count": count,
+        "ncv": ncv,
+        "tolerance": tolerance,
+        "max_iterations": iterations,
+        "start_sha256": _arnoldi_start_hashes()[name],
+        "status": "arpack-no-convergence",
+    }
+
+
+def _arnoldi_agreement(
+    primary: dict[str, Any],
+    convergence: dict[str, Any],
+    *,
+    theta: float,
+) -> dict[str, Any]:
+    panels = (primary, convergence)
+    complete = all(panel["status"] == "complete" for panel in panels)
+    expected_translations = (
+        complex(math.cos(theta), math.sin(theta)),
+        complex(math.cos(theta), -math.sin(theta)),
+    )
+    symmetry_pass = complete
+    for panel in panels:
+        pairs = [pair for pair in panel["eigenpairs"] if pair is not None]
+        translations = [
+            pair for pair in pairs if pair["classification"] == "translation"
+        ]
+        rotations = [pair for pair in pairs if pair["classification"] == "rotation"]
+        symmetry_pass = bool(
+            symmetry_pass
+            and len(translations) >= 2
+            and all(
+                min(
+                    abs(complex(*pair["eigenvalue"]) - expected)
+                    for pair in translations
+                )
+                <= 1e-7
+                for expected in expected_translations
+            )
+            and any(
+                abs(complex(*pair["eigenvalue"]) - 1.0) <= 1e-7
+                for pair in rotations
+            )
+        )
+    transverse = [
+        [
+            pair
+            for pair in panel["eigenpairs"]
+            if pair is not None and pair["classification"] == "transverse"
+        ]
+        for panel in panels
+    ]
+    distance = None
+    if transverse[0] and transverse[1]:
+        leading = complex(*transverse[0][0]["eigenvalue"])
+        distance = min(
+            abs(leading - complex(*pair["eigenvalue"])) for pair in transverse[1]
+        )
+    return {
+        "leading_transverse_distance": distance,
+        "pass": bool(
+            complete and symmetry_pass and distance is not None and distance <= 1e-5
+        ),
+        "symmetry_pass": symmetry_pass,
+    }
+
+
+def _gate_state(condition: bool, *, complete: bool) -> str:
+    if not complete:
+        return "inconclusive"
+    return "pass" if condition else "fail"
+
+
+def orchestrate_horizon_transfer(
+    *,
+    backend: Any,
+    identity: dict[str, Any],
+    publication: dict[str, Any],
+) -> dict[str, Any]:
+    """Assemble one target-free run from injected primitive stage backends.
+
+    This function performs no publication and owns no scientific numerical
+    implementation.  Missing primitive evidence closes dependent stages.
+    """
+
+    contract = _load_result_schema()
+    payload = _witness_value(contract["root"], contract, fill_nullable=False)
+    payload["identity"] = copy.deepcopy(identity)
+    payload["publication"] = copy.deepcopy(publication)
+
+    direct_replay_pass = bool(backend.direct_replay())
+    root_panels: list[dict[str, Any] | None] = [None] * len(HORIZONS)
+    index_by_horizon = {horizon: index for index, horizon in enumerate(HORIZONS)}
+    panel_starts = {
+        precision: (
+            str(identity["parameters"]["anchor_radius"]),
+            str(identity["parameters"]["anchor_theta"]),
+        )
+        for precision in (80, 120)
+    }
+    forward_open = True
+    lower_open = True
+    exclusions: list[dict[str, Any] | None] = [None] * 4
+    for horizon in _ROOT_EXECUTION_ORDER:
+        is_forward = horizon in (1200, 1500, 1800, 2400, 3600)
+        if horizon != 1200 and ((is_forward and not forward_open) or (not is_forward and not lower_open)):
+            continue
+        if horizon == 900:
+            anchor = root_panels[index_by_horizon[1200]]
+            if anchor is None:
+                lower_open = False
+                continue
+            panel_starts = {
+                precision: _root_coordinates(anchor, precision)
+                for precision in (80, 120)
+            }
+        records: dict[int, dict[str, Any]] = {}
+        for precision in (80, 120):
+            record = backend.finite_root_panel(
+                horizon=horizon,
+                precision_dps=precision,
+                start=panel_starts[precision],
+            )
+            if record is None:
+                break
+            records[precision] = record
+        if len(records) != 2:
+            if is_forward and horizon != 1200:
+                previous = _ROOT_EXECUTION_ORDER[_ROOT_EXECUTION_ORDER.index(horizon) - 1]
+                exclusions[(1500, 1800, 2400, 3600).index(horizon)] = (
+                    backend.local_branch_exclusion(
+                        from_horizon=previous,
+                        to_horizon=horizon,
+                        previous_root=panel_starts[120],
+                    )
+                )
+                forward_open = False
+            elif horizon == 1200:
+                forward_open = False
+                lower_open = False
+            else:
+                lower_open = False
+            continue
+        panel = _combine_root_panel(horizon, records)
+        root_panels[index_by_horizon[horizon]] = panel
+        panel_starts = {
+            precision: _root_coordinates(panel, precision)
+            for precision in (80, 120)
+        }
+
+    homotopies: list[dict[str, Any] | None] = [None] * 6
+    forward_homotopy_open = True
+    lower_homotopy_open = True
+    for edge_index, (first, second, direction) in enumerate(_HOMOTOPY_EDGES):
+        if direction == "forward" and not forward_homotopy_open:
+            continue
+        if direction == "lower-tail" and not lower_homotopy_open:
+            continue
+        first_panel = root_panels[index_by_horizon[first]]
+        second_panel = root_panels[index_by_horizon[second]]
+        if first_panel is None or second_panel is None:
+            if direction == "forward":
+                forward_homotopy_open = False
+            else:
+                lower_homotopy_open = False
+            continue
+        row = backend.homotopy_edge(
+            from_horizon=first,
+            to_horizon=second,
+            from_root=_root_coordinates(first_panel, 120),
+            to_root=_root_coordinates(second_panel, 120),
+        )
+        homotopies[edge_index] = copy.deepcopy(row)
+        if row["status"] != "pass":
+            if direction == "forward":
+                if exclusions[edge_index] is None:
+                    exclusions[edge_index] = backend.local_branch_exclusion(
+                        from_horizon=first,
+                        to_horizon=second,
+                        previous_root=_root_coordinates(first_panel, 120),
+                    )
+                forward_homotopy_open = False
+            else:
+                lower_homotopy_open = False
+
+    drift = _drift_record(root_panels)
+    payload["finite_branch"] = {
+        "direct_replay_pass": direct_replay_pass,
+        "drift": drift,
+        "exclusions": exclusions,
+        "forward_horizons": [1200, 1500, 1800, 2400, 3600],
+        "homotopies": homotopies,
+        "horizons": list(HORIZONS),
+        "lower_horizons": [900, 600],
+        "lower_tail_status": "lower-tail-stress-inconclusive",
+        "root_panels": root_panels,
+    }
+
+    q_rows = q_representations(HORIZONS)
+    bound_rows = [
+        {"horizon": horizon, **tail_bounds(horizon=horizon, precision_dps=80)}
+        for horizon in HORIZONS
+    ]
+    tail_panels: list[dict[str, Any] | None] = [None, None]
+    tail_comparison: dict[str, Any] = {"intersection": None, "overlap": False}
+    horizon_3600 = root_panels[index_by_horizon[3600]]
+    if horizon_3600 is not None:
+        tail_root = _root_coordinates(horizon_3600, 120)
+        for index, precision in enumerate((120, 160)):
+            panel = backend.tail_certificate_panel(
+                precision_dps=precision,
+                root=tail_root,
+            )
+            if panel is None:
+                break
+            tail_panels[index] = copy.deepcopy(panel)
+        if all(panel is not None for panel in tail_panels):
+            intersection = _image_intersection(
+                tail_panels[0]["certificate"]["krawczyk_image"],
+                tail_panels[1]["certificate"]["krawczyk_image"],
+                path="orchestration.infinite_tail.panel_comparison",
+            )
+            tail_comparison = {
+                "intersection": intersection,
+                "overlap": intersection is not None,
+            }
+    phi0 = Decimal("1") + Decimal("3.5") / Decimal("9")
+    with localcontext() as context:
+        context.prec = 80
+        phi1 = (-Decimal("0.5")).exp() * (
+            Decimal("1") + Decimal("3.5") / Decimal("27")
+        )
+    payload["infinite_tail"] = {
+        "bounds": bound_rows,
+        "certificate_panels": tail_panels,
+        "constants": {
+            "phi0_bound": format(phi0, "f"),
+            "phi1_bound": format(phi1, "f"),
+            "radius_maximum": "1.1",
+        },
+        "panel_comparison": tail_comparison,
+        "q_representations": q_rows,
+    }
+
+    empty_panels = {
+        name: _empty_arnoldi_panel(name) for name in ("primary", "convergence")
+    }
+    stability: dict[str, Any] = {
+        "arnoldi": {
+            **empty_panels,
+            "panel_agreement": {
+                "leading_transverse_distance": None,
+                "pass": False,
+                "symmetry_pass": False,
+            },
+        },
+        "continuation_arms": [None, None, None],
+        "exact_arm": None,
+        "gates": {},
+        "horizon": 2400,
+        "rounded_root": None,
+    }
+    horizon_2400 = root_panels[index_by_horizon[2400]]
+    if horizon_2400 is not None:
+        root_2400 = _root_coordinates(horizon_2400, 120)
+        rounded_root = (float(root_2400[0]), float(root_2400[1]))
+        stability["rounded_root"] = list(rounded_root)
+        starts = _arnoldi_start_vectors()
+        panels = {
+            name: copy.deepcopy(
+                backend.arnoldi_panel(
+                    name=name,
+                    rounded_root=rounded_root,
+                    start=starts[name],
+                )
+            )
+            for name in ("primary", "convergence")
+        }
+        stability["arnoldi"].update(panels)
+        stability["arnoldi"]["panel_agreement"] = _arnoldi_agreement(
+            panels["primary"], panels["convergence"], theta=rounded_root[1]
+        )
+        if all(panel["status"] == "complete" for panel in panels.values()):
+            _, perturbations = _registered_perturbation_vectors(
+                radius=rounded_root[0], theta=rounded_root[1], horizon=2400
+            )
+            stability["continuation_arms"] = [
+                copy.deepcopy(
+                    backend.continuation_arm(
+                        name=name,
+                        rounded_root=rounded_root,
+                        perturbation=perturbations[name],
+                    )
+                )
+                for name in ("radial", "tangential", "full-history-transverse")
+            ]
+            stability["exact_arm"] = copy.deepcopy(
+                backend.exact_arm(rounded_root=rounded_root)
+            )
+    payload["stability"] = stability
+    stability["gates"] = _stability_evidence(payload)
+
+    payload["controls"] = copy.deepcopy(backend.controls())
+    controls_pass = _controls_evidence(payload)
+    payload["controls"]["pass"] = controls_pass
+    root_complete = [panel is not None and _verify_root_panel(panel, path="orchestration.root") for panel in root_panels]
+    forward_roots = all(root_complete[index] for index in range(2, 7))
+    lower_roots = all(root_complete[index] for index in (2, 1, 0))
+    forward_homotopies = all(
+        row is not None and row["status"] == "pass" for row in homotopies[:4]
+    )
+    lower_homotopies = all(
+        row is not None and row["status"] == "pass" for row in homotopies[4:]
+    )
+    lower_tail_status = (
+        "lower-tail-stress-pass"
+        if lower_roots and lower_homotopies
+        else "lower-tail-stress-inconclusive"
+    )
+    payload["finite_branch"]["lower_tail_status"] = lower_tail_status
+    tail_complete = bool(
+        all(panel is not None for panel in tail_panels) and tail_comparison["overlap"]
+    )
+    stable_complete = all(
+        stability["gates"][name]
+        for name in (
+            "continuations_complete",
+            "exact_arm",
+            "panels_complete",
+            "panel_agreement",
+            "perturbation_contraction",
+            "ritz_residuals",
+            "symmetries",
+        )
+    )
+    local_branch_excluded = any(
+        row is not None and row["status"] == "all-residual-excluded"
+        for row in exclusions
+    )
+    gates = {
+        "G0": "pass" if direct_replay_pass and all(row["two_ulp_gate"] and row["nonzero_finite"] for row in q_rows) else "fail",
+        "G1F": "pass" if forward_roots else "inconclusive",
+        "G1R": "pass" if lower_roots else "inconclusive",
+        "G2F": "pass" if forward_homotopies else "inconclusive",
+        "G2R": "pass" if lower_homotopies else "inconclusive",
+        "G3": _gate_state(drift["pass"], complete=all(row is not None for row in drift["interval_upper_bounds"])),
+        "G4": "pass" if tail_complete else "inconclusive",
+        "G5": "pass" if stable_complete else "inconclusive",
+        "G6": "pass" if controls_pass else "fail",
+        "local_branch_excluded": local_branch_excluded,
+        "large_h_instability_supported": stability["gates"]["instability_supported"],
+    }
+    classification = classify_horizon(gates, lower_tail_status=lower_tail_status)
+    payload["classification"] = {
+        **classification,
+        "claim_boundary": contract["constants"]["claim_boundary"],
+        "finite_large_h_stability_only": bool(gates["G5"] == "pass" and gates["G4"] != "pass"),
+        "gates": gates,
+    }
+    validate_result(payload)
+    return payload
+
+
 def _atomic_write_bytes(path: Path, content: bytes) -> None:
     destination = Path(path)
     destination.parent.mkdir(parents=True, exist_ok=True)

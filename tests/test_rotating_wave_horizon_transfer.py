@@ -608,11 +608,17 @@ class _SyntheticRunnerBackend:
         gate,
         *,
         failed_root: tuple[int, int] | None = None,
+        failed_homotopy: tuple[int, int] | None = None,
+        failed_tail_precision: int | None = None,
         partial_arnoldi: bool = False,
+        stopped_arm: str | None = None,
     ) -> None:
         self.donor = gate.contract_witness()
         self.failed_root = failed_root
+        self.failed_homotopy = failed_homotopy
+        self.failed_tail_precision = failed_tail_precision
         self.partial_arnoldi = partial_arnoldi
+        self.stopped_arm = stopped_arm
         self.calls: list[tuple[object, ...]] = []
         self._roots = {
             panel["horizon"]: panel
@@ -657,7 +663,16 @@ class _SyntheticRunnerBackend:
         self.calls.append(
             ("homotopy", from_horizon, to_horizon, from_root, to_root)
         )
-        return copy.deepcopy(self._homotopies[(from_horizon, to_horizon)])
+        row = copy.deepcopy(self._homotopies[(from_horizon, to_horizon)])
+        if self.failed_homotopy == (from_horizon, to_horizon):
+            row["slabs"][11:] = [None] * 53
+            row["slabs"][10]["strict_interior"] = False
+            row["slabs"][10]["krawczyk_image"][0][0] = row["slabs"][10][
+                "box"
+            ]["radius"][0]
+            row["pass"] = False
+            row["status"] = "inconclusive"
+        return row
 
     def local_branch_exclusion(
         self,
@@ -673,8 +688,10 @@ class _SyntheticRunnerBackend:
 
     def tail_certificate_panel(
         self, *, precision_dps: int, root: tuple[str, str]
-    ) -> dict[str, object]:
+    ) -> dict[str, object] | None:
         self.calls.append(("tail", precision_dps, root))
+        if precision_dps == self.failed_tail_precision:
+            return None
         index = {120: 0, 160: 1}[precision_dps]
         return copy.deepcopy(
             self.donor["infinite_tail"]["certificate_panels"][index]
@@ -706,7 +723,12 @@ class _SyntheticRunnerBackend:
             row["name"]: row
             for row in self.donor["stability"]["continuation_arms"]
         }
-        return copy.deepcopy(by_name[name])
+        arm = copy.deepcopy(by_name[name])
+        if name == self.stopped_arm:
+            arm["samples"][5:] = [None] * 496
+            arm["completed"] = False
+            arm["stopped"] = True
+        return arm
 
     def exact_arm(self, *, rounded_root: tuple[float, float]) -> dict[str, object]:
         self.calls.append(("exact-arm", rounded_root))
@@ -784,6 +806,51 @@ def test_runner_red_partial_arnoldi_never_invents_trajectory_evidence(gate) -> N
     assert not any(call[0] in {"arm", "exact-arm"} for call in backend.calls)
     assert payload["stability"]["continuation_arms"] == [None, None, None]
     assert payload["stability"]["exact_arm"] is None
+    assert payload["classification"]["gates"]["G5"] == "inconclusive"
+    assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_runner_homotopy_stop_keeps_prefix_and_invokes_exclusion(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, failed_homotopy=(1200, 1500))
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    first = payload["finite_branch"]["homotopies"][0]
+    assert first["slabs"][:10] == backend._homotopies[(1200, 1500)]["slabs"][:10]
+    assert first["slabs"][10]["strict_interior"] is False
+    assert first["slabs"][11:] == [None] * 53
+    assert payload["finite_branch"]["homotopies"][1:4] == [None] * 3
+    assert all(payload["finite_branch"]["homotopies"][index] for index in (4, 5))
+    assert any(call[:3] == ("exclusion", 1200, 1500) for call in backend.calls)
+    assert payload["classification"]["gates"]["G2F"] == "inconclusive"
+
+
+def test_runner_tail_stop_is_inconclusive_and_keeps_finite_stability_separate(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, failed_tail_precision=160)
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    assert payload["infinite_tail"]["certificate_panels"][0] is not None
+    assert payload["infinite_tail"]["certificate_panels"][1] is None
+    assert payload["infinite_tail"]["panel_comparison"] == {
+        "intersection": None,
+        "overlap": False,
+    }
+    assert payload["classification"]["gates"]["G4"] == "inconclusive"
+    assert payload["classification"]["finite_large_h_stability_only"] is True
+    assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_runner_early_trajectory_stop_preserves_null_suffix(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, stopped_arm="radial")
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    arm = payload["stability"]["continuation_arms"][0]
+    assert arm["samples"][4] is not None
+    assert arm["samples"][5:] == [None] * 496
+    assert arm["completed"] is False
+    assert arm["stopped"] is True
     assert payload["classification"]["gates"]["G5"] == "inconclusive"
     assert payload["classification"]["p5_governance_review_open"] is False
 
