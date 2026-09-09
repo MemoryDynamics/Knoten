@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive`; Horizontvertrag v3 targetfrei reviewed | keine Interaktionsevidenz; Runner, Horizonttransfer und neue Zielautorisierung bleiben offen |
+| P5-D | `p5d-inconclusive`; Horizontorchestrierung targetfrei reviewed | keine Interaktionsevidenz; Numerikbackends, Horizonttransfer und neue Zielautorisierung bleiben offen |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -69,8 +69,15 @@ vor jedem Zielzugriff amendierte portable LCG-Konstruktion besteht 59
 fokussierte und 1004 gesamte Tests sowie die exakte Linux-CI. Das
 Reviewurteil ist
 `rotating-wave-horizon-transfer-contract-v3-pass-runner-red-open-target-closed`.
-Newtonleiter, Krawczyk-Homotopie, Arnoldi- und Trajektorienrunner fehlen noch;
-ein Horizontlauf ist nicht autorisiert.
+Die anschliessende pure Orchestrierung bestand ihre Stopptests. Ein neuer
+Counterexample zeigte jedoch, dass ein einzelnes ausgeschlossenes Halbblatt
+als vollstaendige lokale Ausschlussdomain akzeptiert wurde. Validator und
+Auditor rekonstruieren deshalb nun unabhaengig Rootbindung, deterministische
+dyadische Leafpfade, Praefixfreiheit und vollstaendige Bedeckung. Eine
+vollstaendige Ausschlusspartition bei gleichzeitig zertifiziertem Zielroot
+wird als Widerspruch verworfen. 70 fokussierte und 1015 gesamte Tests sowie
+die exakte Linux-CI sind gruen. Newton-, Krawczyk-, Ausschlussbaum-, Arnoldi-
+und Trajektorienbackends fehlen noch; ein Horizontlauf ist nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 
@@ -176,4 +183,6 @@ negatives Interaktionsergebnis.
   [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
   sowie das
   [v3-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v3_review_2026-09-09.md)
+  und das korrigierende
+  [Orchestrierungsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_runner_orchestration_review_2026-09-09.md)
 - [Claim-Register](paper_claims.md)

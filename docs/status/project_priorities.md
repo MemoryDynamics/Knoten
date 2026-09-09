@@ -94,10 +94,19 @@ autorisieren keinen weiteren P5-Ziellauf.
    bindet 59 fokussierte, 1004 gesamte Tests und gruene exakte Linux-CI mit
    Verdict
    `rotating-wave-horizon-transfer-contract-v3-pass-runner-red-open-target-closed`.
-   Naechster Schritt sind ausschliesslich targetfreie RED-Tests der
-   Runner-Orchestrierung mit injizierten synthetischen Backends, danach die
-   fehlenden Newton-, Krawczyk-, Arnoldi- und Trajektorienpfade. Noch kein
-   Horizontlauf und kein Versuch 4.
+   Die pure Runner-Orchestrierung besteht inzwischen Reihenfolge-, Rootstopp-,
+   Homotopiestopp-, Tail-, Arnoldi- und Trajektorien-Falsifikatoren. Ein dabei
+   gefundener Halbblatt-Counterexample korrigierte das v3-Review: Validator
+   und Auditor beweisen nun die dyadische Ausschlusspartition und verwerfen
+   den Widerspruch zu einem vorhandenen Zielroot. Das
+   [Orchestrierungsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_runner_orchestration_review_2026-09-09.md)
+   bindet 70 fokussierte, 1015 gesamte Tests und gruene exakte Linux-CI mit
+   Verdict
+   `rotating-wave-horizon-orchestration-pass-scientific-backends-incomplete-target-closed`.
+   Naechster Schritt sind ausschliesslich targetfreie RED-Tests und
+   Implementierung der fehlenden Newton-, Krawczyk-, Ausschlussbaum-,
+   Arnoldi- und Trajektorienbackends. Noch kein Horizontlauf und kein Versuch
+   4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die
    P5-Abgrenzung in einheitlicher Papersprache zusammenfuehren, ohne
    Interaktions-, Spin-, Traegheits- oder Masseclaim.
