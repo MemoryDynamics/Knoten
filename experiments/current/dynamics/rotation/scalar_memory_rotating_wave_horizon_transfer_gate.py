@@ -7,6 +7,7 @@ publication entry point remain closed until a separate readiness review.
 
 from __future__ import annotations
 
+from collections import deque
 import copy
 from decimal import Decimal, localcontext
 import hashlib
@@ -324,12 +325,10 @@ def local_branch_exclusion_backend_record(
     if domain[0] >= domain[1] or domain[2] >= domain[3]:
         raise ValueError("previous root does not define a nonempty local domain")
 
-    queue: list[tuple[tuple[Decimal, ...], int]] = [(domain, 0)]
-    next_index = 0
+    queue = deque([(domain, 0)])
     leaves: list[dict[str, Any]] = []
-    while next_index < len(queue):
-        box, depth = queue[next_index]
-        next_index += 1
+    while queue:
+        box, depth = queue.popleft()
         box_record = _exclusion_box_record(box)
         evaluated = interval_balance_and_jacobian_box(
             radius_interval=tuple(box_record["radius"]),
