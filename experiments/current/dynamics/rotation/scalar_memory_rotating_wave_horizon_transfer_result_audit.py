@@ -1320,6 +1320,71 @@ def _controls_evidence(payload: dict[str, Any]) -> bool:
     )
 
 
+def _audit_box(box: dict[str, Any], *, path: str) -> tuple[Decimal, ...]:
+    radius_lower, radius_upper = _decimal_interval(
+        box["radius"], path=f"{path}.radius"
+    )
+    theta_lower, theta_upper = _decimal_interval(
+        box["theta"], path=f"{path}.theta"
+    )
+    return radius_lower, radius_upper, theta_lower, theta_upper
+
+
+def _audit_split(box: tuple[Decimal, ...]) -> tuple[tuple[Decimal, ...], ...]:
+    radius_lower, radius_upper, theta_lower, theta_upper = box
+    radius_score = (radius_upper - radius_lower) / Decimal("0.3")
+    theta_score = (theta_upper - theta_lower) / Decimal("0.012")
+    if radius_score >= theta_score:
+        middle = (radius_lower + radius_upper) / Decimal(2)
+        return (
+            (radius_lower, middle, theta_lower, theta_upper),
+            (middle, radius_upper, theta_lower, theta_upper),
+        )
+    middle = (theta_lower + theta_upper) / Decimal(2)
+    return (
+        (radius_lower, radius_upper, theta_lower, middle),
+        (radius_lower, radius_upper, middle, theta_upper),
+    )
+
+
+def _audit_partition(attempt: dict[str, Any], expected_domain: dict[str, Any], *, path: str) -> None:
+    if attempt["local_domain"] != expected_domain:
+        raise ValueError(f"{path}.local_domain: root-bound domain mismatch")
+    domain = _audit_box(attempt["local_domain"], path=f"{path}.local_domain")
+    codes = []
+    for index, leaf in enumerate(attempt["leaves"]):
+        leaf_path = f"{path}.leaves[{index}]"
+        depth = leaf["depth"]
+        if depth < 0 or depth > attempt["max_depth"]:
+            raise ValueError(f"{leaf_path}.depth: outside registered range")
+        target = _audit_box(leaf["box"], path=f"{leaf_path}.box")
+        current = domain
+        code = ""
+        for _ in range(depth):
+            children = _audit_split(current)
+            membership = [
+                child[0] <= target[0] <= target[1] <= child[1]
+                and child[2] <= target[2] <= target[3] <= child[3]
+                for child in children
+            ]
+            if membership.count(True) != 1:
+                raise ValueError(f"{leaf_path}.box: not a deterministic partition leaf")
+            bit = membership.index(True)
+            code += str(bit)
+            current = children[bit]
+        if target != current:
+            raise ValueError(f"{leaf_path}.box: not a deterministic partition leaf")
+        codes.append(code)
+    codes.sort()
+    if len(codes) != len(set(codes)) or any(
+        right.startswith(left) for left, right in zip(codes, codes[1:])
+    ):
+        raise ValueError(f"{path}.leaves: partition paths overlap")
+    deepest = max((len(code) for code in codes), default=0)
+    if sum(2 ** (deepest - len(code)) for code in codes) != 2**deepest:
+        raise ValueError(f"{path}.leaves: partition does not cover local domain")
+
+
 def _verify_reconstructed_values(payload: dict[str, Any]) -> None:
     expected_parameters = {
         **PARAMETERS,
@@ -1401,6 +1466,36 @@ def _verify_reconstructed_values(payload: dict[str, Any]) -> None:
             raise ValueError(f"$.finite_branch.exclusions[{index}]: edge mismatch")
         if attempt["max_depth"] != 20:
             raise ValueError(f"$.finite_branch.exclusions[{index}]: depth mismatch")
+        previous = next(
+            (
+                panel
+                for panel in root_panels
+                if panel is not None
+                and panel["horizon"] == exclusion_edges[index][0]
+            ),
+            None,
+        )
+        if previous is None:
+            raise ValueError(
+                f"$.finite_branch.exclusions[{index}]: missing previous root"
+            )
+        radius = Decimal(previous["newton_120"]["radius"])
+        theta = Decimal(previous["newton_120"]["theta"])
+        expected_domain = {
+            "radius": [
+                format(max(Decimal("0.8"), radius - Decimal("0.02")), "f"),
+                format(min(Decimal("1.1"), radius + Decimal("0.02")), "f"),
+            ],
+            "theta": [
+                format(max(Decimal("0.01"), theta - Decimal("0.002")), "f"),
+                format(min(Decimal("0.022"), theta + Decimal("0.002")), "f"),
+            ],
+        }
+        _audit_partition(
+            attempt,
+            expected_domain,
+            path=f"$.finite_branch.exclusions[{index}]",
+        )
         classifications = [row["classification"] for row in attempt["leaves"]]
         for leaf_index, leaf in enumerate(attempt["leaves"]):
             path = f"$.finite_branch.exclusions[{index}].leaves[{leaf_index}]"
@@ -1433,6 +1528,30 @@ def _verify_reconstructed_values(payload: dict[str, Any]) -> None:
                 raise ValueError(
                     f"$.finite_branch.exclusions[{index}]: false exclusion"
                 )
+            target = next(
+                (
+                    panel
+                    for panel in root_panels
+                    if panel is not None
+                    and panel["horizon"] == exclusion_edges[index][1]
+                ),
+                None,
+            )
+            if target is not None:
+                target_radius = Decimal(target["newton_120"]["radius"])
+                target_theta = Decimal(target["newton_120"]["theta"])
+                domain_box = _audit_box(
+                    attempt["local_domain"],
+                    path=f"$.finite_branch.exclusions[{index}].local_domain",
+                )
+                if (
+                    domain_box[0] <= target_radius <= domain_box[1]
+                    and domain_box[2] <= target_theta <= domain_box[3]
+                ):
+                    raise ValueError(
+                        f"$.finite_branch.exclusions[{index}]: certified target root "
+                        "inside excluded domain"
+                    )
             complete_exclusion = True
         if attempt["status"] == "other-root" and "krawczyk-root" not in classifications:
             raise ValueError(

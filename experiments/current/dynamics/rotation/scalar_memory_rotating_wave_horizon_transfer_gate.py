@@ -1179,10 +1179,85 @@ def _verify_homotopy_slots(
             )
 
 
+def _box_key(box: dict[str, Any], *, path: str) -> tuple[Decimal, ...]:
+    radius = _decimal_interval(box["radius"], path=f"{path}.radius")
+    theta = _decimal_interval(box["theta"], path=f"{path}.theta")
+    return radius[0], radius[1], theta[0], theta[1]
+
+
+def _split_exclusion_box(box: tuple[Decimal, ...]) -> tuple[tuple[Decimal, ...], tuple[Decimal, ...]]:
+    radius_lower, radius_upper, theta_lower, theta_upper = box
+    radius_width = (radius_upper - radius_lower) / Decimal("0.3")
+    theta_width = (theta_upper - theta_lower) / Decimal("0.012")
+    if radius_width >= theta_width:
+        midpoint = (radius_lower + radius_upper) / 2
+        return (
+            (radius_lower, midpoint, theta_lower, theta_upper),
+            (midpoint, radius_upper, theta_lower, theta_upper),
+        )
+    midpoint = (theta_lower + theta_upper) / 2
+    return (
+        (radius_lower, radius_upper, theta_lower, midpoint),
+        (radius_lower, radius_upper, midpoint, theta_upper),
+    )
+
+
+def _contained_box(child: tuple[Decimal, ...], parent: tuple[Decimal, ...]) -> bool:
+    return bool(
+        parent[0] <= child[0] <= child[1] <= parent[1]
+        and parent[2] <= child[2] <= child[3] <= parent[3]
+    )
+
+
+def _verify_exclusion_partition(
+    attempt: dict[str, Any],
+    *,
+    expected_domain: dict[str, list[str]],
+    path: str,
+) -> None:
+    if attempt["local_domain"] != expected_domain:
+        raise ValueError(f"{path}.local_domain: root-bound domain mismatch")
+    domain = _box_key(attempt["local_domain"], path=f"{path}.local_domain")
+    paths: list[str] = []
+    for index, leaf in enumerate(attempt["leaves"]):
+        leaf_path = f"{path}.leaves[{index}]"
+        depth = leaf["depth"]
+        if not 0 <= depth <= attempt["max_depth"]:
+            raise ValueError(f"{leaf_path}.depth: outside registered range")
+        leaf_box = _box_key(leaf["box"], path=f"{leaf_path}.box")
+        current = domain
+        bits = []
+        for _ in range(depth):
+            lower, upper = _split_exclusion_box(current)
+            in_lower = _contained_box(leaf_box, lower)
+            in_upper = _contained_box(leaf_box, upper)
+            if in_lower == in_upper:
+                raise ValueError(f"{leaf_path}.box: not a deterministic partition leaf")
+            if in_lower:
+                bits.append("0")
+                current = lower
+            else:
+                bits.append("1")
+                current = upper
+        if leaf_box != current:
+            raise ValueError(f"{leaf_path}.box: not a deterministic partition leaf")
+        paths.append("".join(bits))
+    ordered = sorted(paths)
+    if len(set(ordered)) != len(ordered) or any(
+        second.startswith(first) for first, second in zip(ordered, ordered[1:])
+    ):
+        raise ValueError(f"{path}.leaves: partition paths overlap")
+    maximum_depth = max((len(bits) for bits in paths), default=0)
+    covered = sum(1 << (maximum_depth - len(bits)) for bits in paths)
+    if covered != 1 << maximum_depth:
+        raise ValueError(f"{path}.leaves: partition does not cover local domain")
+
+
 def _verify_exclusions(
     exclusions: list[dict[str, Any] | None],
     *,
     local_branch_excluded: bool,
+    root_panels: Sequence[dict[str, Any] | None],
 ) -> None:
     edges = ((1200, 1500), (1500, 1800), (1800, 2400), (2400, 3600))
     complete_exclusion = False
@@ -1193,6 +1268,36 @@ def _verify_exclusions(
             raise ValueError(f"$.finite_branch.exclusions[{index}]: edge mismatch")
         if attempt["max_depth"] != 20:
             raise ValueError(f"$.finite_branch.exclusions[{index}]: depth mismatch")
+        previous_panel = next(
+            (
+                panel
+                for panel in root_panels
+                if panel is not None and panel["horizon"] == edge[0]
+            ),
+            None,
+        )
+        if previous_panel is None:
+            raise ValueError(
+                f"$.finite_branch.exclusions[{index}]: missing previous root"
+            )
+        radius, theta = (
+            Decimal(value) for value in _root_coordinates(previous_panel, 120)
+        )
+        expected_domain = {
+            "radius": [
+                format(max(Decimal("0.8"), radius - Decimal("0.02")), "f"),
+                format(min(Decimal("1.1"), radius + Decimal("0.02")), "f"),
+            ],
+            "theta": [
+                format(max(Decimal("0.01"), theta - Decimal("0.002")), "f"),
+                format(min(Decimal("0.022"), theta + Decimal("0.002")), "f"),
+            ],
+        }
+        _verify_exclusion_partition(
+            attempt,
+            expected_domain=expected_domain,
+            path=f"$.finite_branch.exclusions[{index}]",
+        )
         leaves = attempt["leaves"]
         status = attempt["status"]
         classifications = [leaf["classification"] for leaf in leaves]
@@ -1227,6 +1332,33 @@ def _verify_exclusions(
                 raise ValueError(
                     f"$.finite_branch.exclusions[{index}]: false exclusion"
                 )
+            target_panel = next(
+                (
+                    panel
+                    for panel in root_panels
+                    if panel is not None and panel["horizon"] == edge[1]
+                ),
+                None,
+            )
+            if target_panel is not None and _verify_root_panel(
+                target_panel,
+                path=f"$.finite_branch.exclusions[{index}].target_root",
+            ):
+                target_radius, target_theta = (
+                    Decimal(value) for value in _root_coordinates(target_panel, 120)
+                )
+                domain_key = _box_key(
+                    attempt["local_domain"],
+                    path=f"$.finite_branch.exclusions[{index}].local_domain",
+                )
+                if (
+                    domain_key[0] <= target_radius <= domain_key[1]
+                    and domain_key[2] <= target_theta <= domain_key[3]
+                ):
+                    raise ValueError(
+                        f"$.finite_branch.exclusions[{index}]: certified target root "
+                        "inside excluded domain"
+                    )
             complete_exclusion = True
         elif status == "other-root" and "krawczyk-root" not in classifications:
             raise ValueError(
@@ -1643,6 +1775,7 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
     _verify_exclusions(
         payload["finite_branch"]["exclusions"],
         local_branch_excluded=gates["local_branch_excluded"],
+        root_panels=root_panels,
     )
     _verify_arnoldi_panel(
         payload["stability"]["arnoldi"]["primary"],

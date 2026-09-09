@@ -610,6 +610,7 @@ class _SyntheticRunnerBackend:
         failed_root: tuple[int, int] | None = None,
         failed_homotopy: tuple[int, int] | None = None,
         failed_tail_precision: int | None = None,
+        complete_exclusion: bool = False,
         incomplete_exclusion: bool = False,
         partial_arnoldi: bool = False,
         stopped_arm: str | None = None,
@@ -618,6 +619,7 @@ class _SyntheticRunnerBackend:
         self.failed_root = failed_root
         self.failed_homotopy = failed_homotopy
         self.failed_tail_precision = failed_tail_precision
+        self.complete_exclusion = complete_exclusion
         self.incomplete_exclusion = incomplete_exclusion
         self.partial_arnoldi = partial_arnoldi
         self.stopped_arm = stopped_arm
@@ -686,7 +688,7 @@ class _SyntheticRunnerBackend:
         self.calls.append(
             ("exclusion", from_horizon, to_horizon, previous_root)
         )
-        if self.incomplete_exclusion:
+        if self.incomplete_exclusion or self.complete_exclusion:
             radius = Decimal(previous_root[0])
             theta = Decimal(previous_root[1])
             local_domain = {
@@ -699,17 +701,25 @@ class _SyntheticRunnerBackend:
                     format(theta + Decimal("0.002"), "f"),
                 ],
             }
-            return {
-                "from_horizon": from_horizon,
-                "to_horizon": to_horizon,
-                "local_domain": local_domain,
-                "max_depth": 20,
-                "status": "all-residual-excluded",
-                "leaves": [
+            leaves = [
+                {
+                    "box": {
+                        "radius": copy.deepcopy(local_domain["radius"]),
+                        "theta": [local_domain["theta"][0], previous_root[1]],
+                    },
+                    "classification": "residual-excluded",
+                    "depth": 1,
+                    "krawczyk_image": None,
+                    "residual_box": [["1", "2"], ["-1", "1"]],
+                    "strict_interior": None,
+                }
+            ]
+            if self.complete_exclusion:
+                leaves.append(
                     {
                         "box": {
                             "radius": copy.deepcopy(local_domain["radius"]),
-                            "theta": [local_domain["theta"][0], previous_root[1]],
+                            "theta": [previous_root[1], local_domain["theta"][1]],
                         },
                         "classification": "residual-excluded",
                         "depth": 1,
@@ -717,7 +727,14 @@ class _SyntheticRunnerBackend:
                         "residual_box": [["1", "2"], ["-1", "1"]],
                         "strict_interior": None,
                     }
-                ],
+                )
+            return {
+                "from_horizon": from_horizon,
+                "to_horizon": to_horizon,
+                "local_domain": local_domain,
+                "max_depth": 20,
+                "status": "all-residual-excluded",
+                "leaves": leaves,
             }
         return None
 
@@ -899,6 +916,30 @@ def test_runner_red_rejects_exclusion_leaves_that_do_not_partition_domain(gate) 
     with pytest.raises(ValueError, match="partition"):
         _orchestrate(gate, backend)
 
+
+def test_runner_accepts_complete_exclusion_partition_only_after_root_stop(gate) -> None:
+    backend = _SyntheticRunnerBackend(
+        gate,
+        failed_root=(1500, 80),
+        complete_exclusion=True,
+    )
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+    assert payload["classification"]["decision"] == (
+        "registered-local-horizon-branch-loss"
+    )
+    assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_validator_rejects_complete_exclusion_when_target_root_exists(gate) -> None:
+    backend = _SyntheticRunnerBackend(
+        gate,
+        failed_homotopy=(1200, 1500),
+        complete_exclusion=True,
+    )
+    with pytest.raises(ValueError, match="target root"):
+        _orchestrate(gate, backend)
+
     instability = gate.contract_witness()
     instability["classification"]["gates"][
         "large_h_instability_supported"
@@ -1001,6 +1042,10 @@ def test_v3_contract_rejects_unproved_exclusion_leaf(gate) -> None:
         {
             "from_horizon": 1200,
             "to_horizon": 1500,
+            "local_domain": {
+                "radius": ["0.926517504804225", "0.966517504804225"],
+                "theta": ["0.013770381717135", "0.017770381717135"],
+            },
             "max_depth": 20,
             "status": "all-residual-excluded",
         }
@@ -1008,7 +1053,9 @@ def test_v3_contract_rejects_unproved_exclusion_leaf(gate) -> None:
     leaf = attempt["leaves"][0]
     leaf.update(
         {
+            "box": copy.deepcopy(attempt["local_domain"]),
             "classification": "residual-excluded",
+            "depth": 0,
             "residual_box": [["-1", "1"], ["-1", "1"]],
             "krawczyk_image": None,
             "strict_interior": None,
