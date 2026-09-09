@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-07.
+Stand: 2026-09-09.
 
 Dies ist die einzige aktive Prioritaetenliste des Repositorys. Statusseiten,
 README und Reports duerfen Befunde oder Blocker nennen, aber keine zweite
@@ -84,14 +84,18 @@ autorisieren keinen weiteren P5-Ziellauf.
    [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
    bindet 40 fokussierte, 985 gesamte Tests und gruene CI mit Verdict
    `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
-   Ein spaeteres Negativreview fand unabbildbare fruehe Abbrueche. Der
-   prospektiv amendierte v2-Vertrag schliesst Root-, Homotopie-, Arnoldi-,
-   Trajektorien- und Gate-Nullsemantik nach 47 fokussierten, 992 gesamten
-   Tests und gruener exakter CI. Das
-   [v2-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v2_review_2026-09-08.md)
-   endet mit
-   `rotating-wave-horizon-transfer-contract-v2-pass-runner-red-open-target-closed`.
-   Naechster Schritt sind targetfreie RED-Tests und Implementierung der
+   Ein spaeteres Negativreview fand unabbildbare fruehe Abbrueche; v2 schloss
+   deren Nullsemantik. Das naechste Negativreview fand noch nicht
+   rekonstruierbare positive Zertifikats-, Spektral- und
+   Trajektorienbeziehungen. v3 schliesst sie. Seine erste Linux-CI
+   falsifizierte native `sin`-/`cos`-Starts als plattformunabhaengig; eine vor
+   jedem Zielzugriff amendierte 32-bit-LCG ersetzt sie portabel. Das
+   [v3-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v3_review_2026-09-09.md)
+   bindet 59 fokussierte, 1004 gesamte Tests und gruene exakte Linux-CI mit
+   Verdict
+   `rotating-wave-horizon-transfer-contract-v3-pass-runner-red-open-target-closed`.
+   Naechster Schritt sind ausschliesslich targetfreie RED-Tests der
+   Runner-Orchestrierung mit injizierten synthetischen Backends, danach die
    fehlenden Newton-, Krawczyk-, Arnoldi- und Trajektorienpfade. Noch kein
    Horizontlauf und kein Versuch 4.
 6. **Paper I konsolidieren.** Modellkern, skalare Evidenz, Rotationsast und die

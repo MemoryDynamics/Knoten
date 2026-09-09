@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-07.
+Stand: 2026-09-09.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive`; neue Produktionsgrenze targetfrei ready | keine Interaktionsevidenz; Horizonttransfer und neue Zielautorisierung bleiben offen |
+| P5-D | `p5d-inconclusive`; Horizontvertrag v3 targetfrei reviewed | keine Interaktionsevidenz; Runner, Horizonttransfer und neue Zielautorisierung bleiben offen |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -60,10 +60,15 @@ die kleinste Infrastruktur bestand 40 fokussierte und 985 gesamte Tests. Das
 Infrastruktururteil lautet
 `rotating-wave-horizon-transfer-contract-infrastructure-pass-runner-incomplete-horizon-run-closed`.
 Ein nachfolgendes Negativreview zeigte, dass v1 mehrere registrierte
-Abbruchpfade nicht wahrheitsgetreu serialisieren konnte. Der prospektiv
-amendierte v2-Vertrag besteht 47 fokussierte und 992 gesamte Tests sowie die
-exakte CI; sein Reviewurteil ist
-`rotating-wave-horizon-transfer-contract-v2-pass-runner-red-open-target-closed`.
+Abbruchpfade nicht wahrheitsgetreu serialisieren konnte; v2 schloss diese
+Nullsemantik. Ein weiteres Negativreview zeigte jedoch, dass positive
+Zertifikats-, Spektral- und Trajektorienbeziehungen noch nicht vollstaendig
+rekonstruierbar waren. v3 schliesst diese Luecken. Eine erste Linux-CI
+falsifizierte dabei native `sin`-/`cos`-Starts als plattformunabhaengig; die
+vor jedem Zielzugriff amendierte portable LCG-Konstruktion besteht 59
+fokussierte und 1004 gesamte Tests sowie die exakte Linux-CI. Das
+Reviewurteil ist
+`rotating-wave-horizon-transfer-contract-v3-pass-runner-red-open-target-closed`.
 Newtonleiter, Krawczyk-Homotopie, Arnoldi- und Trajektorienrunner fehlen noch;
 ein Horizontlauf ist nicht autorisiert.
 
@@ -169,4 +174,6 @@ negatives Interaktionsergebnis.
   [RED-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_red_contract_review_2026-09-08.md)
   und
   [Infrastrukturreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_infrastructure_review_2026-09-08.md)
+  sowie das
+  [v3-Vertragsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_transfer_contract_v3_review_2026-09-09.md)
 - [Claim-Register](paper_claims.md)

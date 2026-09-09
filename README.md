@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-08.
+Stand: 2026-09-09.
 
 ## Wissenschaftlicher Stand
 
@@ -26,11 +26,13 @@ Stand: 2026-09-08.
   offenen Horizonttransfer. Das Fixed-$\alpha$-Transferprotokoll ist nach
   negativem Review amendiert und als hinreichend reviewed. Ergebnisvertrag,
   RED-Historie und targetfreie Infrastruktur wurden zunaechst mit 985 Tests
-  geprueft. Ein anschliessendes Negativreview fand unabbildbare Abbruchpfade;
-  der prospektiv amendierte v2-Vertrag schliesst sie nach 992 Tests und
-  gruener exakter CI. Der wissenschaftliche Horizont-Runner ist noch
-  unvollstaendig; Horizontlauf und weitere P5-Zielausfuehrungen bleiben
-  geschlossen.
+  geprueft. Zwei nachfolgende Negativreviews erzwangen zunaechst vollstaendige
+  Abbruchsemantik und danach die Rekonstruktion positiver Evidenzbeziehungen.
+  Die erste v3-CI falsifizierte ausserdem trigonometrisch erzeugte
+  Arnoldi-Starts als plattformunabhaengig. Der prospektiv erneut amendierte,
+  portable v3-Vertrag besteht nun 1004 Tests und exakte Linux-CI. Der
+  wissenschaftliche Horizont-Runner ist noch unvollstaendig; Horizontlauf und
+  weitere P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 
