@@ -306,6 +306,240 @@ def _interval_record(value: Any, digits: int) -> dict[str, Any]:
         }
 
 
+def _ordered_decimal_interval(
+    values: tuple[str, str], *, name: str, precision_dps: int
+) -> tuple[str, str]:
+    if (
+        type(values) is not tuple
+        or len(values) != 2
+        or any(type(value) is not str for value in values)
+    ):
+        raise TypeError(f"{name} must be a pair of decimal strings")
+    with mp.workdps(precision_dps):
+        lower, upper = (mp.mpf(value) for value in values)
+        if not (mp.isfinite(lower) and mp.isfinite(upper) and lower <= upper):
+            raise ValueError(f"{name} must be finite and ordered")
+    return values
+
+
+def interval_balance_and_jacobian_box(
+    *,
+    radius_interval: tuple[str, str],
+    theta_interval: tuple[str, str],
+    parameters: IntervalRotatingWaveParameters,
+    precision_dps: int,
+) -> dict[str, Any]:
+    """Evaluate finite-H balance and Jacobian on one outward-rounded box."""
+
+    if type(precision_dps) is not int or precision_dps < 50:
+        raise ValueError("precision_dps must be an integer of at least 50")
+    radius_interval = _ordered_decimal_interval(
+        radius_interval, name="radius_interval", precision_dps=precision_dps
+    )
+    theta_interval = _ordered_decimal_interval(
+        theta_interval, name="theta_interval", precision_dps=precision_dps
+    )
+    previous_iv_dps = iv.dps
+    iv.dps = precision_dps
+    try:
+        radius = iv.mpf(list(radius_interval))
+        theta = iv.mpf(list(theta_interval))
+        balance, jacobian, components = _balance_and_jacobian(
+            iv, radius, theta, parameters
+        )
+        digits = precision_dps + 8
+        return {
+            "box": [_interval_record(radius, digits), _interval_record(theta, digits)],
+            "balance": [_interval_record(value, digits) for value in balance],
+            "jacobian": [
+                [_interval_record(value, digits) for value in row]
+                for row in jacobian
+            ],
+            "components": [
+                _interval_record(value, digits) for value in components
+            ],
+        }
+    finally:
+        iv.dps = previous_iv_dps
+
+
+def _same_parameters_except_horizon(
+    first: IntervalRotatingWaveParameters,
+    second: IntervalRotatingWaveParameters,
+) -> bool:
+    names = (
+        "alpha",
+        "memory_mass",
+        "eta",
+        "sigma_rep",
+        "sigma_att",
+        "amplitude_rep",
+        "amplitude_att",
+    )
+    return all(getattr(first, name) == getattr(second, name) for name in names)
+
+
+def certify_rotating_wave_homotopy_box(
+    *,
+    radius: str,
+    theta: str,
+    radius_half_width: str,
+    theta_half_width: str,
+    s_interval: tuple[str, str],
+    first_parameters: IntervalRotatingWaveParameters,
+    second_parameters: IntervalRotatingWaveParameters,
+    precision_dps: int,
+) -> dict[str, Any]:
+    """Apply Krawczyk to a fixed box across one closed horizon-homotopy slab."""
+
+    if type(precision_dps) is not int or precision_dps < 50:
+        raise ValueError("precision_dps must be an integer of at least 50")
+    if not _same_parameters_except_horizon(first_parameters, second_parameters):
+        raise ValueError("homotopy may change only the horizon")
+    s_interval = _ordered_decimal_interval(
+        s_interval, name="s_interval", precision_dps=precision_dps
+    )
+    with mp.workdps(precision_dps):
+        s_lower, s_upper = (mp.mpf(value) for value in s_interval)
+        if s_lower < 0 or s_upper > 1:
+            raise ValueError("s_interval must lie in [0, 1]")
+        for name, value in (("radius", radius), ("theta", theta)):
+            if type(value) is not str:
+                raise TypeError(f"{name} must be a decimal string")
+            numeric = mp.mpf(value)
+            if not mp.isfinite(numeric):
+                raise ValueError(f"{name} must be finite")
+        for name, value in (
+            ("radius_half_width", radius_half_width),
+            ("theta_half_width", theta_half_width),
+        ):
+            numeric = mp.mpf(value)
+            if not mp.isfinite(numeric) or numeric <= 0:
+                raise ValueError(f"{name} must be positive and finite")
+
+    previous_iv_dps = iv.dps
+    iv.dps = precision_dps
+    try:
+        center = (iv.mpf(radius), iv.mpf(theta))
+        box = (
+            center[0] + iv.mpf([f"-{radius_half_width}", radius_half_width]),
+            center[1] + iv.mpf([f"-{theta_half_width}", theta_half_width]),
+        )
+        s_box = iv.mpf(list(s_interval))
+        first_center, _, _ = _balance_and_jacobian(
+            iv, center[0], center[1], first_parameters
+        )
+        second_center, _, _ = _balance_and_jacobian(
+            iv, center[0], center[1], second_parameters
+        )
+        function_at_center = tuple(
+            first_center[index]
+            + s_box * (second_center[index] - first_center[index])
+            for index in range(2)
+        )
+        first_box, first_jacobian, _ = _balance_and_jacobian(
+            iv, box[0], box[1], first_parameters
+        )
+        second_box, second_jacobian, _ = _balance_and_jacobian(
+            iv, box[0], box[1], second_parameters
+        )
+        function_box = tuple(
+            first_box[index] + s_box * (second_box[index] - first_box[index])
+            for index in range(2)
+        )
+        jacobian_box = tuple(
+            tuple(
+                first_jacobian[row][column]
+                + s_box
+                * (
+                    second_jacobian[row][column]
+                    - first_jacobian[row][column]
+                )
+                for column in range(2)
+            )
+            for row in range(2)
+        )
+
+        with mp.workdps(precision_dps):
+            point_radius = mp.mpf(radius)
+            point_theta = mp.mpf(theta)
+            point_s = (mp.mpf(s_interval[0]) + mp.mpf(s_interval[1])) / 2
+            _, first_point_jacobian, _ = _balance_and_jacobian(
+                mp, point_radius, point_theta, first_parameters
+            )
+            _, second_point_jacobian, _ = _balance_and_jacobian(
+                mp, point_radius, point_theta, second_parameters
+            )
+            point_jacobian = tuple(
+                tuple(
+                    first_point_jacobian[row][column]
+                    + point_s
+                    * (
+                        second_point_jacobian[row][column]
+                        - first_point_jacobian[row][column]
+                    )
+                    for column in range(2)
+                )
+                for row in range(2)
+            )
+            determinant = (
+                point_jacobian[0][0] * point_jacobian[1][1]
+                - point_jacobian[0][1] * point_jacobian[1][0]
+            )
+            if determinant == 0:
+                raise ArithmeticError("homotopy point Jacobian is singular")
+            inverse_strings = (
+                (
+                    mp.nstr(point_jacobian[1][1] / determinant, precision_dps - 8),
+                    mp.nstr(-point_jacobian[0][1] / determinant, precision_dps - 8),
+                ),
+                (
+                    mp.nstr(-point_jacobian[1][0] / determinant, precision_dps - 8),
+                    mp.nstr(point_jacobian[0][0] / determinant, precision_dps - 8),
+                ),
+            )
+        inverse = tuple(
+            tuple(iv.mpf(value) for value in row) for row in inverse_strings
+        )
+        image = krawczyk_image(
+            center=center,
+            box=box,
+            function_at_center=function_at_center,
+            jacobian_box=jacobian_box,
+            inverse_point_jacobian=inverse,
+        )
+        strict_interior = all(
+            _strict_subset(image[index], box[index]) for index in range(2)
+        )
+        digits = precision_dps + 8
+        return {
+            "precision_dps": precision_dps,
+            "s_interval": list(s_interval),
+            "center": {"radius": radius, "theta": theta},
+            "half_width": {
+                "radius": radius_half_width,
+                "theta": theta_half_width,
+            },
+            "box": [_interval_record(value, digits) for value in box],
+            "function_at_center": [
+                _interval_record(value, digits) for value in function_at_center
+            ],
+            "function_box": [
+                _interval_record(value, digits) for value in function_box
+            ],
+            "jacobian_box": [
+                [_interval_record(value, digits) for value in row]
+                for row in jacobian_box
+            ],
+            "inverse_point_jacobian": [list(row) for row in inverse_strings],
+            "krawczyk_image": [_interval_record(value, digits) for value in image],
+            "gates": {"krawczyk_strict_interior": strict_interior},
+            "pass": strict_interior,
+        }
+    finally:
+        iv.dps = previous_iv_dps
+
+
 def certify_rotating_wave_box(
     *,
     radius: str,

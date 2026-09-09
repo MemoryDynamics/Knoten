@@ -225,6 +225,21 @@ def test_homotopy_interval_box_encloses_sampled_interpolation() -> None:
             observed["function_box"], expected, strict=True
         ):
             assert float(interval["lower"]) <= value <= float(interval["upper"])
+        expected_jacobian = [
+            [
+                (1.0 - s_value) * float(first_point["jacobian"][row][column])
+                + s_value * float(second_point["jacobian"][row][column])
+                for column in range(2)
+            ]
+            for row in range(2)
+        ]
+        for interval_row, expected_row in zip(
+            observed["jacobian_box"], expected_jacobian, strict=True
+        ):
+            for interval, value in zip(interval_row, expected_row, strict=True):
+                assert float(interval["lower"]) <= value <= float(
+                    interval["upper"]
+                )
 
 
 def test_homotopy_rejects_parameter_changes_beyond_horizon() -> None:

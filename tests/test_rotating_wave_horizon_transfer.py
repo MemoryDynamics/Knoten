@@ -732,13 +732,39 @@ def test_finite_root_adapter_rejects_nonregistered_inputs(
         )
 
 
-def _fake_homotopy_certificate(*, passed: bool = True) -> dict[str, object]:
-    return {
-        "box": _fake_interval_certificate()["box"],
-        "krawczyk_image": _fake_interval_certificate()["krawczyk_image"],
+def _fake_homotopy_certificate(
+    *,
+    radius: str = "0.95",
+    theta: str = "0.015",
+    radius_half_width: str = "1e-4",
+    theta_half_width: str = "1e-6",
+    passed: bool = True,
+    **kwargs,
+) -> dict[str, object]:
+    def interval(center: str, half_width: str) -> dict[str, str]:
+        with localcontext() as context:
+            context.prec = 180
+            midpoint = Decimal(center)
+            width = Decimal(half_width)
+            return {
+                "lower": format(midpoint - width, "f"),
+                "upper": format(midpoint + width, "f"),
+            }
+
+    box = [
+        interval(radius, radius_half_width),
+        interval(theta, theta_half_width),
+    ]
+    image = [interval(radius, "5e-5"), interval(theta, "5e-7")]
+    record = {
+        "box": box,
+        "krawczyk_image": image,
         "gates": {"krawczyk_strict_interior": passed},
         "pass": passed,
     }
+    if not passed:
+        record["krawczyk_image"][0]["lower"] = record["box"][0]["lower"]
+    return record
 
 
 def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> None:
@@ -746,7 +772,7 @@ def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> 
 
     def fake_homotopy(**kwargs):
         calls.append(kwargs)
-        return _fake_homotopy_certificate()
+        return _fake_homotopy_certificate(**kwargs)
 
     monkeypatch.setattr(
         gate,
@@ -754,11 +780,14 @@ def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> 
         fake_homotopy,
         raising=False,
     )
+    payload = gate.contract_witness()
+    first = payload["finite_branch"]["root_panels"][2]["newton_120"]
+    second = payload["finite_branch"]["root_panels"][3]["newton_120"]
     row = gate.homotopy_backend_record(
         from_horizon=1200,
         to_horizon=1500,
-        from_root=("0.94", "0.015"),
-        to_root=("0.96", "0.016"),
+        from_root=(first["radius"], first["theta"]),
+        to_root=(second["radius"], second["theta"]),
     )
 
     assert len(calls) == 64
@@ -775,6 +804,9 @@ def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> 
     assert row["slabs"][0]["overlaps_previous"] is None
     assert all(slab["overlaps_previous"] for slab in row["slabs"][1:])
 
+    payload["finite_branch"]["homotopies"][0] = row
+    gate.validate_result(payload)
+
 
 def test_homotopy_adapter_stops_after_first_failed_slab(gate, monkeypatch) -> None:
     calls = 0
@@ -782,7 +814,47 @@ def test_homotopy_adapter_stops_after_first_failed_slab(gate, monkeypatch) -> No
     def fake_homotopy(**kwargs):
         nonlocal calls
         calls += 1
-        return _fake_homotopy_certificate(passed=calls != 11)
+        return _fake_homotopy_certificate(passed=calls != 11, **kwargs)
+
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_homotopy_box",
+        fake_homotopy,
+        raising=False,
+    )
+    row = gate.homotopy_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        from_root=("0.95", "0.015"),
+        to_root=("0.95", "0.015"),
+    )
+
+    assert calls == 11
+    assert row["status"] == "inconclusive"
+    assert row["pass"] is False
+    assert row["slabs"][10]["strict_interior"] is False
+    assert row["slabs"][11:] == [None] * 53
+
+
+def test_homotopy_adapter_stops_on_nonoverlapping_root_tubes(
+    gate, monkeypatch
+) -> None:
+    calls = 0
+
+    def fake_homotopy(**kwargs):
+        nonlocal calls
+        calls += 1
+        record = _fake_homotopy_certificate(**kwargs)
+        if calls == 2:
+            record["box"] = [
+                {"lower": "1.0", "upper": "1.1"},
+                {"lower": "0.01", "upper": "0.02"},
+            ]
+            record["krawczyk_image"] = [
+                {"lower": "1.04", "upper": "1.06"},
+                {"lower": "0.014", "upper": "0.016"},
+            ]
+        return record
 
     monkeypatch.setattr(
         gate,
@@ -797,11 +869,36 @@ def test_homotopy_adapter_stops_after_first_failed_slab(gate, monkeypatch) -> No
         to_root=("0.96", "0.016"),
     )
 
-    assert calls == 11
+    assert calls == 2
+    assert row["status"] == "inconclusive"
+    assert row["slabs"][1]["strict_interior"] is True
+    assert row["slabs"][1]["overlaps_previous"] is False
+    assert row["slabs"][2:] == [None] * 62
+
+
+def test_homotopy_adapter_turns_numeric_singularity_into_inconclusive(
+    gate, monkeypatch
+) -> None:
+    def singular(**kwargs):
+        raise ArithmeticError("singular")
+
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_homotopy_box",
+        singular,
+        raising=False,
+    )
+
+    row = gate.homotopy_backend_record(
+        from_horizon=1200,
+        to_horizon=1500,
+        from_root=("0.94", "0.015"),
+        to_root=("0.96", "0.016"),
+    )
+
     assert row["status"] == "inconclusive"
     assert row["pass"] is False
-    assert row["slabs"][10]["strict_interior"] is False
-    assert row["slabs"][11:] == [None] * 53
+    assert row["slabs"] == [None] * 64
 
 
 class _SyntheticRunnerBackend:

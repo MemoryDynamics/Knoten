@@ -25,6 +25,7 @@ import numpy as np
 from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
     certify_rotating_wave_box,
+    certify_rotating_wave_homotopy_box,
     refine_rotating_wave_root,
 )
 from emergenz_knoten.rotating_wave_stability import native_fifo_step
@@ -144,6 +145,117 @@ def finite_root_backend_record(
         },
         "outer_certificate": certificates[0],
         "inner_certificate": certificates[1],
+    }
+
+
+def homotopy_backend_record(
+    *,
+    from_horizon: int,
+    to_horizon: int,
+    from_root: tuple[str, str],
+    to_root: tuple[str, str],
+) -> dict[str, Any]:
+    """Certify one registered edge through exactly 64 fixed slabs."""
+
+    edge = next(
+        (
+            item
+            for item in _HOMOTOPY_EDGES
+            if item[0] == from_horizon and item[1] == to_horizon
+        ),
+        None,
+    )
+    if edge is None:
+        raise ValueError("unregistered horizon homotopy edge")
+    for name, root in (("from_root", from_root), ("to_root", to_root)):
+        if (
+            type(root) is not tuple
+            or len(root) != 2
+            or any(type(value) is not str for value in root)
+        ):
+            raise TypeError(f"{name} must contain two decimal strings")
+        for index, value in enumerate(root):
+            _finite_decimal(value, path=f"{name}[{index}]")
+
+    first_parameters = _finite_interval_parameters(from_horizon)
+    second_parameters = _finite_interval_parameters(to_horizon)
+    slabs: list[dict[str, Any] | None] = [None] * 64
+    previous_image: list[list[str]] | None = None
+    complete = True
+    with localcontext() as context:
+        context.prec = 180
+        first_center = tuple(Decimal(value) for value in from_root)
+        second_center = tuple(Decimal(value) for value in to_root)
+        for index in range(64):
+            s_lower = Decimal(index) / Decimal(64)
+            s_upper = Decimal(index + 1) / Decimal(64)
+            s_midpoint = (s_lower + s_upper) / Decimal(2)
+            center = tuple(
+                first_center[coordinate]
+                + s_midpoint
+                * (second_center[coordinate] - first_center[coordinate])
+                for coordinate in range(2)
+            )
+            try:
+                raw = certify_rotating_wave_homotopy_box(
+                    radius=format(center[0], "f"),
+                    theta=format(center[1], "f"),
+                    radius_half_width="1e-4",
+                    theta_half_width="1e-6",
+                    s_interval=(format(s_lower, "f"), format(s_upper, "f")),
+                    first_parameters=first_parameters,
+                    second_parameters=second_parameters,
+                    precision_dps=120,
+                )
+            except ArithmeticError:
+                complete = False
+                break
+            image = [_interval_pair(value) for value in raw["krawczyk_image"]]
+            box = {
+                "radius": _interval_pair(raw["box"][0]),
+                "theta": _interval_pair(raw["box"][1]),
+            }
+            overlaps_previous = None
+            if previous_image is not None:
+                overlaps_previous = (
+                    _image_intersection(
+                        previous_image,
+                        image,
+                        path=f"homotopy[{from_horizon},{to_horizon},{index}]",
+                    )
+                    is not None
+                )
+            reported_strict = bool(
+                raw.get("pass") is True
+                and type(raw.get("gates")) is dict
+                and raw["gates"].get("krawczyk_strict_interior") is True
+            )
+            strict = _strict_image_in_box(
+                image,
+                box,
+                path=f"homotopy[{from_horizon},{to_horizon},{index}]",
+            )
+            if strict is not reported_strict:
+                raise ValueError("homotopy certificate summary mismatch")
+            slabs[index] = {
+                "box": box,
+                "index": index,
+                "krawczyk_image": image,
+                "overlaps_previous": overlaps_previous,
+                "s_interval": [format(s_lower, "f"), format(s_upper, "f")],
+                "strict_interior": strict,
+            }
+            if not strict or overlaps_previous is False:
+                complete = False
+                break
+            previous_image = image
+    return {
+        "direction": edge[2],
+        "from_horizon": from_horizon,
+        "pass": complete,
+        "slabs": slabs,
+        "status": "pass" if complete else "inconclusive",
+        "to_horizon": to_horizon,
     }
 
 
