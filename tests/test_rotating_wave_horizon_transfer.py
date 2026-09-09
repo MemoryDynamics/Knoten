@@ -600,6 +600,117 @@ def test_v3_contract_rejects_evidence_summary_and_instability_lies(gate) -> None
         gate.validate_result(control)
 
 
+def _fake_interval_certificate(*, passed: bool = True) -> dict[str, object]:
+    def interval(lower: str, upper: str) -> dict[str, str]:
+        return {"lower": lower, "upper": upper}
+
+    return {
+        "box": [interval("0.9", "1.0"), interval("0.01", "0.02")],
+        "jacobian_box": [
+            [interval("1", "1.1"), interval("2", "2.1")],
+            [interval("3", "3.1"), interval("4", "4.1")],
+        ],
+        "krawczyk_image": [
+            interval("0.94", "0.96"),
+            interval("0.014", "0.016"),
+        ],
+        "gates": {"krawczyk_strict_interior": passed},
+        "pass": passed,
+    }
+
+
+def test_finite_root_adapter_reuses_interval_library_and_maps_v3(
+    gate, monkeypatch
+) -> None:
+    calls: list[tuple[str, dict[str, object]]] = []
+
+    def fake_refine(**kwargs):
+        calls.append(("refine", kwargs))
+        return {
+            "radius": "0.95",
+            "theta": "0.015",
+            "balance": ["1e-70", "-2e-70"],
+            "jacobian": [["1", "2"], ["3", "4"]],
+        }
+
+    def fake_certify(**kwargs):
+        calls.append(("certify", kwargs))
+        return _fake_interval_certificate()
+
+    monkeypatch.setattr(
+        gate, "refine_rotating_wave_root", fake_refine, raising=False
+    )
+    monkeypatch.setattr(
+        gate, "certify_rotating_wave_box", fake_certify, raising=False
+    )
+    record = gate.finite_root_backend_record(
+        horizon=1500,
+        precision_dps=80,
+        start=("0.946", "0.0157"),
+    )
+
+    assert [name for name, _ in calls] == ["refine", "certify", "certify"]
+    refine = calls[0][1]
+    assert refine["iterations"] == 8
+    assert refine["precision_dps"] == 80
+    assert refine["radius"] == "0.946"
+    assert refine["theta"] == "0.0157"
+    assert refine["parameters"].horizon == 1500
+    assert refine["parameters"].alpha == "0.01"
+    assert refine["parameters"].eta == "0.15"
+    assert [call[1]["radius_half_width"] for call in calls[1:]] == [
+        "1e-8",
+        "1e-30",
+    ]
+    assert record["newton"] == {
+        "jacobian": [["1", "2"], ["3", "4"]],
+        "precision_dps": 80,
+        "radius": "0.95",
+        "residual": ["1e-70", "-2e-70"],
+        "steps": 8,
+        "theta": "0.015",
+    }
+    assert record["outer_certificate"]["box"] == {
+        "radius": ["0.9", "1.0"],
+        "theta": ["0.01", "0.02"],
+    }
+    assert record["inner_certificate"]["krawczyk_image"] == [
+        ["0.94", "0.96"],
+        ["0.014", "0.016"],
+    ]
+
+
+def test_finite_root_adapter_fails_closed_on_certificate_failure(
+    gate, monkeypatch
+) -> None:
+    monkeypatch.setattr(
+        gate,
+        "refine_rotating_wave_root",
+        lambda **kwargs: {
+            "radius": "0.95",
+            "theta": "0.015",
+            "balance": ["0", "0"],
+            "jacobian": [["1", "0"], ["0", "1"]],
+        },
+        raising=False,
+    )
+    certificates = iter(
+        [_fake_interval_certificate(), _fake_interval_certificate(passed=False)]
+    )
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_box",
+        lambda **kwargs: next(certificates),
+        raising=False,
+    )
+
+    assert gate.finite_root_backend_record(
+        horizon=1500,
+        precision_dps=120,
+        start=("0.946", "0.0157"),
+    ) is None
+
+
 class _SyntheticRunnerBackend:
     """Primitive donor backend for target-free orchestration tests only."""
 
