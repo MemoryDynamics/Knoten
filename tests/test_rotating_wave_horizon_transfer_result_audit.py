@@ -382,3 +382,39 @@ def test_auditor_independently_rejects_unproved_exclusion(auditor) -> None:
     payload["finite_branch"]["exclusions"][0] = attempt
     with pytest.raises(ValueError, match="does not exclude zero"):
         auditor._verify_reconstructed_values(payload)
+
+
+def test_auditor_rejects_exclusion_leaves_that_do_not_partition_domain(auditor) -> None:
+    payload = auditor.contract_witness()
+    payload["finite_branch"]["exclusions"][0] = {
+        "from_horizon": 1200,
+        "to_horizon": 1500,
+        "local_domain": {
+            "radius": ["0.926517504804225", "0.966517504804225"],
+            "theta": ["0.013770381717135", "0.017770381717135"],
+        },
+        "max_depth": 20,
+        "status": "all-residual-excluded",
+        "leaves": [
+            {
+                "box": {
+                    "radius": ["0.926517504804225", "0.966517504804225"],
+                    "theta": ["0.013770381717135", "0.015770381717135"],
+                },
+                "classification": "residual-excluded",
+                "depth": 1,
+                "krawczyk_image": None,
+                "residual_box": [["1", "2"], ["-1", "1"]],
+                "strict_interior": None,
+            }
+        ],
+    }
+    payload["classification"]["gates"]["local_branch_excluded"] = True
+    payload["classification"].update(
+        auditor.classify_horizon(
+            payload["classification"]["gates"],
+            lower_tail_status=payload["classification"]["lower_tail_status"],
+        )
+    )
+    with pytest.raises(ValueError, match="partition"):
+        auditor._verify_reconstructed_values(payload)

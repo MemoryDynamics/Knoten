@@ -610,6 +610,7 @@ class _SyntheticRunnerBackend:
         failed_root: tuple[int, int] | None = None,
         failed_homotopy: tuple[int, int] | None = None,
         failed_tail_precision: int | None = None,
+        incomplete_exclusion: bool = False,
         partial_arnoldi: bool = False,
         stopped_arm: str | None = None,
     ) -> None:
@@ -617,6 +618,7 @@ class _SyntheticRunnerBackend:
         self.failed_root = failed_root
         self.failed_homotopy = failed_homotopy
         self.failed_tail_precision = failed_tail_precision
+        self.incomplete_exclusion = incomplete_exclusion
         self.partial_arnoldi = partial_arnoldi
         self.stopped_arm = stopped_arm
         self.calls: list[tuple[object, ...]] = []
@@ -680,10 +682,43 @@ class _SyntheticRunnerBackend:
         from_horizon: int,
         to_horizon: int,
         previous_root: tuple[str, str],
-    ) -> None:
+    ) -> dict[str, object] | None:
         self.calls.append(
             ("exclusion", from_horizon, to_horizon, previous_root)
         )
+        if self.incomplete_exclusion:
+            radius = Decimal(previous_root[0])
+            theta = Decimal(previous_root[1])
+            local_domain = {
+                "radius": [
+                    format(radius - Decimal("0.02"), "f"),
+                    format(radius + Decimal("0.02"), "f"),
+                ],
+                "theta": [
+                    format(theta - Decimal("0.002"), "f"),
+                    format(theta + Decimal("0.002"), "f"),
+                ],
+            }
+            return {
+                "from_horizon": from_horizon,
+                "to_horizon": to_horizon,
+                "local_domain": local_domain,
+                "max_depth": 20,
+                "status": "all-residual-excluded",
+                "leaves": [
+                    {
+                        "box": {
+                            "radius": copy.deepcopy(local_domain["radius"]),
+                            "theta": [local_domain["theta"][0], previous_root[1]],
+                        },
+                        "classification": "residual-excluded",
+                        "depth": 1,
+                        "krawczyk_image": None,
+                        "residual_box": [["1", "2"], ["-1", "1"]],
+                        "strict_interior": None,
+                    }
+                ],
+            }
         return None
 
     def tail_certificate_panel(
@@ -853,6 +888,16 @@ def test_runner_early_trajectory_stop_preserves_null_suffix(gate) -> None:
     assert arm["stopped"] is True
     assert payload["classification"]["gates"]["G5"] == "inconclusive"
     assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_runner_red_rejects_exclusion_leaves_that_do_not_partition_domain(gate) -> None:
+    backend = _SyntheticRunnerBackend(
+        gate,
+        failed_root=(1500, 80),
+        incomplete_exclusion=True,
+    )
+    with pytest.raises(ValueError, match="partition"):
+        _orchestrate(gate, backend)
 
     instability = gate.contract_witness()
     instability["classification"]["gates"][
