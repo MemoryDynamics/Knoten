@@ -711,6 +711,27 @@ def test_finite_root_adapter_fails_closed_on_certificate_failure(
     ) is None
 
 
+@pytest.mark.parametrize(
+    ("horizon", "precision", "start", "error"),
+    [
+        (1500.0, 80, ("0.946", "0.0157"), ValueError),
+        (1500, 160, ("0.946", "0.0157"), ValueError),
+        (1500, True, ("0.946", "0.0157"), ValueError),
+        (1500, 80, ["0.946", "0.0157"], TypeError),
+        (1500, 80, ("nan", "0.0157"), ValueError),
+    ],
+)
+def test_finite_root_adapter_rejects_nonregistered_inputs(
+    gate, horizon, precision, start, error
+) -> None:
+    with pytest.raises(error):
+        gate.finite_root_backend_record(
+            horizon=horizon,
+            precision_dps=precision,
+            start=start,
+        )
+
+
 class _SyntheticRunnerBackend:
     """Primitive donor backend for target-free orchestration tests only."""
 

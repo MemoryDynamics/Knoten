@@ -1,8 +1,8 @@
 """Target-free infrastructure for the registered rotating-wave horizon gate.
 
-This module deliberately contains no top-level target execution.  The numerical
-root, interval homotopy, Arnoldi holdout and registered publication entry point
-remain closed until a separate implementation-readiness review.
+This module deliberately contains no top-level target execution.  Scientific
+adapters may be tested target-free, but the registered numerical execution and
+publication entry point remain closed until a separate readiness review.
 """
 
 from __future__ import annotations
@@ -22,6 +22,11 @@ import uuid
 import mpmath as mp
 import numpy as np
 
+from emergenz_knoten.rotating_wave_interval import (
+    IntervalRotatingWaveParameters,
+    certify_rotating_wave_box,
+    refine_rotating_wave_root,
+)
 from emergenz_knoten.rotating_wave_stability import native_fifo_step
 
 
@@ -44,6 +49,102 @@ PARAMETERS = {
 }
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+
+
+def _finite_interval_parameters(horizon: int) -> IntervalRotatingWaveParameters:
+    if type(horizon) is not int or horizon not in HORIZONS:
+        raise ValueError("horizon is outside the registered ladder")
+    return IntervalRotatingWaveParameters(
+        alpha="0.01",
+        horizon=horizon,
+        memory_mass="1.0",
+        eta="0.15",
+        sigma_rep="1.0",
+        sigma_att="3.0",
+        amplitude_rep="1.0",
+        amplitude_att="3.5",
+    )
+
+
+def _interval_pair(record: dict[str, Any]) -> list[str]:
+    return [str(record["lower"]), str(record["upper"])]
+
+
+def _v3_certificate(record: dict[str, Any]) -> dict[str, Any] | None:
+    if record.get("pass") is not True:
+        return None
+    gates = record.get("gates")
+    if type(gates) is not dict or gates.get("krawczyk_strict_interior") is not True:
+        return None
+    return {
+        "box": {
+            "radius": _interval_pair(record["box"][0]),
+            "theta": _interval_pair(record["box"][1]),
+        },
+        "interval_backend": "mpmath.iv",
+        "jacobian_box": [
+            [_interval_pair(value) for value in row]
+            for row in record["jacobian_box"]
+        ],
+        "krawczyk_image": [
+            _interval_pair(value) for value in record["krawczyk_image"]
+        ],
+        "strict_interior": True,
+    }
+
+
+def finite_root_backend_record(
+    *,
+    horizon: int,
+    precision_dps: int,
+    start: tuple[str, str],
+) -> dict[str, Any] | None:
+    """Map the reusable finite-root library to one strict v3 backend record."""
+
+    if type(precision_dps) is not int or precision_dps not in (80, 120):
+        raise ValueError("finite root precision must be 80 or 120 dps")
+    if (
+        type(start) is not tuple
+        or len(start) != 2
+        or any(type(value) is not str for value in start)
+    ):
+        raise TypeError("finite root start must contain two decimal strings")
+    for index, value in enumerate(start):
+        _finite_decimal(value, path=f"start[{index}]")
+    parameters = _finite_interval_parameters(horizon)
+    refined = refine_rotating_wave_root(
+        radius=start[0],
+        theta=start[1],
+        parameters=parameters,
+        precision_dps=precision_dps,
+        iterations=8,
+    )
+    certificates = []
+    for half_width in ("1e-8", "1e-30"):
+        raw = certify_rotating_wave_box(
+            radius=refined["radius"],
+            theta=refined["theta"],
+            radius_half_width=half_width,
+            theta_half_width=half_width,
+            parameters=parameters,
+            precision_dps=precision_dps,
+        )
+        certificate = _v3_certificate(raw)
+        if certificate is None:
+            return None
+        certificates.append(certificate)
+    return {
+        "newton": {
+            "jacobian": refined["jacobian"],
+            "precision_dps": precision_dps,
+            "radius": refined["radius"],
+            "residual": refined["balance"],
+            "steps": 8,
+            "theta": refined["theta"],
+        },
+        "outer_certificate": certificates[0],
+        "inner_certificate": certificates[1],
+    }
 
 
 def _finite_decimal(value: str, *, path: str) -> Decimal:
