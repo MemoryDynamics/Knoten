@@ -73,7 +73,7 @@ Der erste breite fokussierte Lauf fand nur eine zu scharfe
 Gleitkomma-Assertion im neuen Test; der Test vergleicht die outward-rounded
 Intervallverbreiterung nun in Dezimalarithmetik mit expliziter Rundungstoleranz.
 Die Zertifikatsroutine selbst wurde dadurch nicht geaendert. Nach Schliessen
-der Domainluecke bestehen 1054 Projekttests; der strikte Dokumentationsbau
+der Domainluecke bestehen 1052 Projekttests; der strikte Dokumentationsbau
 und der Linter sind ebenfalls gruen.
 
 ## 4. Kritische Grenzen

@@ -33,7 +33,7 @@ Stand: 2026-09-09.
   portable v3-Vertrag wurde anschliessend um eine pure, targetfreie
   Orchestrierung erweitert. Root-, Homotopie-, lokaler Ausschluss- und
   Tail-Krawczyk-Adapter verwenden inzwischen gemeinsame Intervallkerne. Der
-  Tailbaustein ist nach 1054 lokalen Tests targetfrei reviewed; G4 wurde
+  Tailbaustein ist nach 1052 lokalen Tests targetfrei reviewed; G4 wurde
   nicht gemessen. LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen
   weiterhin; Horizontlauf und weitere P5-Zielausfuehrungen bleiben
   geschlossen.
