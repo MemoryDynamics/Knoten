@@ -17,7 +17,7 @@ aktive Navigation nicht mehr entscheidungsfaehig.
 Die historische Information wurde nicht geloescht. Der Katalog und die
 Prioritaeten vom 2026-09-09 liegen inhaltlich unveraendert und lediglich als
 Archiv gekennzeichnet unter `docs/archive/`. Die aktiven Fassungen umfassen
-nun 105 beziehungsweise 51 Zeilen. Der Katalog besitzt sieben klar getrennte
+nun 112 beziehungsweise 59 Zeilen. Der Katalog besitzt sieben klar getrennte
 Abschnitte und hoechstens
 sieben gleichrangige Tabellenzeilen pro Abschnitt. Die Prioritaetenseite
 enthaelt eine einzige Liste mit sechs Punkten; nur Punkt 1 ist aktuell in
@@ -57,3 +57,12 @@ unter eine neue wissenschaftliche Prioritaet.
 
 Die aktive Dokumentation besteht den strikten MkDocs-Bau und die beiden
 Markdown-Mathematiktests.
+
+Die erste offizielle
+[Linux-CI der Kuratierung](https://github.com/MemoryDynamics/Knoten/actions/runs/34433052914)
+bestand 1036 Tests und scheiterte ausschliesslich an zwei
+Frontdoor-Propagationstests: Die Verdichtung hatte eingefrorene P4-R-S-,
+N0- und P5-D-Verdicts aus der aktiven Prioritaetenseite beziehungsweise dem
+Katalog entfernt. Diese Voraussetzungen und Claimgrenzen wurden daraufhin als
+kompakte Prosa wieder eingesetzt, nicht als neue Listenpunkte. Die
+wissenschaftlichen Entscheidungen blieben unveraendert.

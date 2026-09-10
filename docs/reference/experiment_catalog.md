@@ -12,6 +12,13 @@ bewahren die Detailhistorie. Das
 [Kuratierungsreview](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/repository_navigation_curation_review_2026-09-10.md)
 dokumentiert die Trennung von Evidenz, offenen Fragen und Arbeitsreihenfolge.
 
+Die eingefrorenen Frontdoor-Grenzen bleiben
+`referee-source-ready-with-major-claim-restrictions`,
+`p4r-independent-audit-agrees` und
+`p4rs-anchor-scale-transfer-pass`. Zwei vorbereitete Skalen liefern
+**keine Konvergenzordnung**. P5-D bleibt `p5d-inconclusive`; **kein Versuch 4** ist
+autorisiert.
+
 ## 1. Aktive Methodenkette
 
 | Einheit | Stand | Evidenzgrenze |

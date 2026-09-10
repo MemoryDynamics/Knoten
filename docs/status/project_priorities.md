@@ -7,6 +7,14 @@ Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 ist archiviert. Katalog, Status und Reports duerfen Befunde und Blocker
 nennen, aber keine zweite Prioritaetenliste fuehren.
 
+Eingefrorene Voraussetzungen bleiben
+`p4rs-anchor-scale-transfer-pass`,
+`n0-noise-stability-window-bracketed-reviewed-pass` und
+`p5d-mutual-center-design-identifiable`.
+**P5-D Versuch 3 technisch inconclusive: Pipeline geschlossen**; die
+**Attempt-3-Lease ist verbraucht**.
+Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
+
 ## Eine Liste
 
 1. **Remediation abschliessen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
