@@ -31,11 +31,11 @@ Stand: 2026-09-09.
   Die erste v3-CI falsifizierte ausserdem trigonometrisch erzeugte
   Arnoldi-Starts als plattformunabhaengig. Der prospektiv erneut amendierte,
   portable v3-Vertrag wurde anschliessend um eine pure, targetfreie
-  Orchestrierung erweitert. Ein Referee-Counterexample falsifizierte dabei
-  die Ausschlussleaf-Pruefung; die korrigierte dyadische
-  Partitionsrekonstruktion besteht nun 1015 Tests und exakte Linux-CI. Die
-  wissenschaftlichen Numerikbackends fehlen weiterhin; Horizontlauf und
-  weitere P5-Zielausfuehrungen bleiben geschlossen.
+  Orchestrierung erweitert. Root-, Homotopie- und lokaler Ausschlussadapter
+  verwenden inzwischen gemeinsame Intervallkerne und bestehen 1038 Tests in
+  exakter Linux-CI. Tail-, LCG-Arnoldi-, Trajektorien- und
+  Kompositionsadapter fehlen weiterhin; Horizontlauf und weitere
+  P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

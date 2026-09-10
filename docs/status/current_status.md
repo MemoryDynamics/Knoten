@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-09.
+Stand: 2026-09-10.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -30,6 +30,15 @@ mitrotierende Voll-FIFO-Map reproduziert die vorbereitete Historie mit
 maximalem Komponentenfehler $2.46\times10^{-15}$; lokale Stoerungen
 kontrahieren numerisch. Am spaeteren L3-Kandidaten erreichen zudem zehn
 registrierte nichtkreisfoermige Arme den zugehoerigen Orbit.
+
+Fuer diesen vorbereiteten Rotating-wave-FIFO wurde kein KnotScore erhoben.
+Das ist derzeit keine fehlende Erfolgszahl: KnotScore v0.5/v0.6 bewertet
+kontrollierte Metastabilitaet, Residence und Shape-Stationaritaet, waehrend
+Root-, Stabilitaets- und Attraction-Panels eine vorbereitete Kreisloesung
+testen. Eine zulaessige gemeinsame Score-/Formationauswertung braeuchte
+deshalb ein eigenes prospektives Design mit `eta_zero`-Kontrolle; die
+Einordnung steht im
+[Experimentkatalog](../reference/experiment_catalog.md).
 
 Das ist der fuer P5 benoetigte kandidatenbezogene Existenz- und
 Identitaetsnachweis. Es ist kein globaler Einzigkeitsbeweis: $+\theta$ und
