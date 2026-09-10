@@ -27,14 +27,14 @@ autorisiert.
 | Fixed-alpha-Rootadapter | implementiert und reviewed | Adapterbeleg, kein neu berechneter Root |
 | Homotopie-/Intervalladapter | implementiert und reviewed | affine Deformation $F_a+s(F_b-F_a)$, kein kontinuierliches physisches $H$ und keine ausgewertete Kante |
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
-| Tailzertifikat | naechster targetfreier Block | noch kein unendlicher Root |
-| Stabilitaets-/Trajektorienadapter | danach offen | vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
+| Tailzertifikat | implementiert und reviewed | analytische Normbounds augmentieren Residuum und Jacobian outward-rounded; kein Panel ausgewertet, G4 ungemessen |
+| LCG-Arnoldi-/Trajektorienadapter | naechster Block und danach offen | vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
 | Backendkomposition und Readiness | geschlossen | kein Horizontlauf vor separatem Review |
 
-Die drei abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
-Krawczyk-, Residual- und Jacobianfunktionen. Der finale lokale
-Ausschlussstand bestand
-[1038 Tests in Linux-CI](https://github.com/MemoryDynamics/Knoten/actions/runs/34414798462).
+Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
+Krawczyk-, Residual- und Jacobianfunktionen. Das
+[Tail-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_tail_certificate_review_2026-09-10.md)
+trennt den Methodenpass vom weiterhin ungemessenen Gate G4.
 
 ## 2. Experimentfamilien
 
@@ -82,6 +82,7 @@ jeweiligen Runner. Aktuell wiederverwendet werden:
 
 - finite Rotating-wave-Summen, analytische Jacobians und Newtonschritte;
 - outward-rounded finite und parametrische Krawczyk-Auswertung;
+- outward-rounded Tailaugmentation fuer Residuum und beide Jacobi-Spalten;
 - native und mitrotierende FIFO-Map samt Volljacobian;
 - Quotientdistanz und vorhandene Trajektorienfortsetzung;
 - Schema-, Manifest- und unabhaengige Auditbausteine.

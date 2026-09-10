@@ -687,3 +687,161 @@ def certify_rotating_wave_box(
         }
     finally:
         iv.dps = previous_iv_dps
+
+
+def certify_rotating_wave_tail_box(
+    *,
+    radius: str,
+    theta: str,
+    radius_half_width: str,
+    theta_half_width: str,
+    parameters: IntervalRotatingWaveParameters,
+    residual_tail_bound: str,
+    jacobian_radius_tail_bound: str,
+    jacobian_theta_tail_bound: str,
+    precision_dps: int,
+) -> dict[str, Any]:
+    """Certify a root after outward-rounded infinite-tail augmentation.
+
+    The supplied scalar bounds are Euclidean norm bounds for the omitted
+    residual and the two omitted Jacobian columns.  Hence every component is
+    enclosed by the corresponding symmetric interval.  The finite-H point
+    Jacobian is used only as a numerical preconditioner; the Krawczyk
+    Jacobian interval contains the full finite box plus the omitted tail.
+    """
+
+    if type(precision_dps) is not int or precision_dps < 50:
+        raise ValueError("precision_dps must be an integer of at least 50")
+    decimal_values = (
+        ("radius", radius, False),
+        ("theta", theta, False),
+        ("radius_half_width", radius_half_width, True),
+        ("theta_half_width", theta_half_width, True),
+        ("residual_tail_bound", residual_tail_bound, False),
+        ("jacobian_radius_tail_bound", jacobian_radius_tail_bound, False),
+        ("jacobian_theta_tail_bound", jacobian_theta_tail_bound, False),
+    )
+    with mp.workdps(precision_dps):
+        for name, value, strictly_positive in decimal_values:
+            if type(value) is not str:
+                raise TypeError(f"{name} must be a decimal string")
+            numeric = mp.mpf(value)
+            if not mp.isfinite(numeric) or numeric < 0:
+                raise ValueError(f"{name} must be nonnegative and finite")
+            if strictly_positive and numeric == 0:
+                raise ValueError(f"{name} must be positive")
+
+    previous_iv_dps = iv.dps
+    iv.dps = precision_dps
+    try:
+        center = (iv.mpf(radius), iv.mpf(theta))
+        box = (
+            center[0] + iv.mpf([f"-{radius_half_width}", radius_half_width]),
+            center[1] + iv.mpf([f"-{theta_half_width}", theta_half_width]),
+        )
+        finite_center, _, _ = _balance_and_jacobian(
+            iv, center[0], center[1], parameters
+        )
+        finite_box, finite_jacobian_box, _ = _balance_and_jacobian(
+            iv, box[0], box[1], parameters
+        )
+        residual_uncertainty = iv.mpf(
+            [f"-{residual_tail_bound}", residual_tail_bound]
+        )
+        column_uncertainties = (
+            iv.mpf(
+                [f"-{jacobian_radius_tail_bound}", jacobian_radius_tail_bound]
+            ),
+            iv.mpf(
+                [f"-{jacobian_theta_tail_bound}", jacobian_theta_tail_bound]
+            ),
+        )
+        function_at_center = tuple(
+            value + residual_uncertainty for value in finite_center
+        )
+        function_box = tuple(value + residual_uncertainty for value in finite_box)
+        jacobian_box = tuple(
+            tuple(
+                finite_jacobian_box[row][column] + column_uncertainties[column]
+                for column in range(2)
+            )
+            for row in range(2)
+        )
+
+        with mp.workdps(precision_dps):
+            _, point_jacobian, _ = _balance_and_jacobian(
+                mp, mp.mpf(radius), mp.mpf(theta), parameters
+            )
+            inverse_strings = _inverse_jacobian_strings(
+                point_jacobian,
+                precision_dps=precision_dps,
+                singular_message="finite point Jacobian is singular",
+            )
+        inverse = tuple(
+            tuple(iv.mpf(value) for value in row) for row in inverse_strings
+        )
+        inverse_determinant = (
+            inverse[0][0] * inverse[1][1] - inverse[0][1] * inverse[1][0]
+        )
+        image = krawczyk_image(
+            center=center,
+            box=box,
+            function_at_center=function_at_center,
+            jacobian_box=jacobian_box,
+            inverse_point_jacobian=inverse,
+        )
+        gates = {
+            "physical_domain": bool(
+                _strictly_positive(box[0])
+                and _strictly_positive(box[1])
+                and libmp.mpf_lt(box[1]._mpi_[1], iv.pi._mpi_[0])
+            ),
+            "inverse_nonsingular": not _contains_zero(inverse_determinant),
+            "function_box_contains_zero": all(
+                _contains_zero(value) for value in function_box
+            ),
+            "krawczyk_strict_interior": all(
+                _strict_subset(image[index], box[index]) for index in range(2)
+            ),
+        }
+        digits = precision_dps + 8
+        return {
+            "precision_dps": precision_dps,
+            "center": {"radius": radius, "theta": theta},
+            "half_width": {
+                "radius": radius_half_width,
+                "theta": theta_half_width,
+            },
+            "tail_bounds": {
+                "residual": residual_tail_bound,
+                "jacobian_radius": jacobian_radius_tail_bound,
+                "jacobian_theta": jacobian_theta_tail_bound,
+            },
+            "box": [_interval_record(value, digits) for value in box],
+            "finite_function_at_center": [
+                _interval_record(value, digits) for value in finite_center
+            ],
+            "function_at_center": [
+                _interval_record(value, digits) for value in function_at_center
+            ],
+            "function_box": [
+                _interval_record(value, digits) for value in function_box
+            ],
+            "finite_jacobian_box": [
+                [_interval_record(value, digits) for value in row]
+                for row in finite_jacobian_box
+            ],
+            "jacobian_box": [
+                [_interval_record(value, digits) for value in row]
+                for row in jacobian_box
+            ],
+            "inverse_point_jacobian": [list(row) for row in inverse_strings],
+            "inverse_determinant": _interval_record(inverse_determinant, digits),
+            "krawczyk_image": [
+                _interval_record(value, digits) for value in image
+            ],
+            "gates": gates,
+            "pass": all(gates.values()),
+        }
+    finally:
+        iv.dps = previous_iv_dps

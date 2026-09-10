@@ -98,9 +98,15 @@ Ausschlussadapter verwendet denselben Residual-/Krawczyk-Kern und bildet die
 feste normalisierte FIFO-Teilung bis Tiefe 20 in den rekonstruierten v3-Record
 ab. Er wurde nur an kontrollierten Antworten getestet; keine registrierte
 Domain ist ausgeschlossen oder als Rootdomain klassifiziert. Seine
-FIFO-kuratierte Implementierungs-CI besteht 1038 Tests. Offen sind das
-tail-augmentierte Zertifikat, LCG-Arnoldi, Trajektorienabbildung und
-Backendkomposition. Ein Horizontlauf ist nicht autorisiert.
+FIFO-kuratierte Implementierungs-CI besteht 1038 Tests. Das anschliessende
+Tailzertifikat erweitert das endliche Residuum und beide Jacobi-Spalten um
+die registrierten analytischen Normbounds und verwendet danach denselben
+outward-rounded Krawczyk-Kern. Null-Tail-Reproduktion, Intervallerweiterung,
+Typfehler und Nichtinklusion sind targetfrei getestet. Das Reviewurteil ist
+`horizon-tail-krawczyk-adapter-target-free-pass-g4-unmeasured`: Es wurde kein
+$H=3600$-Kandidat eingesetzt und G4 bleibt ungemessen. Offen sind
+LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Ein Horizontlauf
+ist nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 

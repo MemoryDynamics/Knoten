@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import numpy as np
 from mpmath import iv
 import pytest
@@ -7,6 +9,7 @@ from emergenz_knoten.rotating_wave import finite_h_rotating_wave_residual
 from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
     certify_rotating_wave_box,
+    certify_rotating_wave_tail_box,
     krawczyk_image,
     point_balance_and_jacobian,
 )
@@ -264,3 +267,100 @@ def test_homotopy_rejects_parameter_changes_beyond_horizon() -> None:
             second_parameters=changed,
             precision_dps=70,
         )
+
+
+def test_tail_certificate_augments_every_residual_and_jacobian_component() -> None:
+    finite = certify_rotating_wave_box(
+        radius="1.1",
+        theta="0.13",
+        radius_half_width="1e-6",
+        theta_half_width="1e-6",
+        parameters=_parameters(),
+        precision_dps=70,
+    )
+    augmented = certify_rotating_wave_tail_box(
+        radius="1.1",
+        theta="0.13",
+        radius_half_width="1e-6",
+        theta_half_width="1e-6",
+        parameters=_parameters(),
+        residual_tail_bound="1e-4",
+        jacobian_radius_tail_bound="2e-4",
+        jacobian_theta_tail_bound="3e-4",
+        precision_dps=70,
+    )
+
+    for finite_value, full_value in zip(
+        finite["function_box"], augmented["function_box"], strict=True
+    ):
+        lower_growth = Decimal(finite_value["lower"]) - Decimal(full_value["lower"])
+        upper_growth = Decimal(full_value["upper"]) - Decimal(finite_value["upper"])
+        assert lower_growth >= Decimal("0.999999999999") * Decimal("1e-4")
+        assert upper_growth >= Decimal("0.999999999999") * Decimal("1e-4")
+    for row in range(2):
+        for column, bound in enumerate((Decimal("2e-4"), Decimal("3e-4"))):
+            finite_value = finite["jacobian_box"][row][column]
+            full_value = augmented["jacobian_box"][row][column]
+            lower_growth = Decimal(finite_value["lower"]) - Decimal(
+                full_value["lower"]
+            )
+            upper_growth = Decimal(full_value["upper"]) - Decimal(
+                finite_value["upper"]
+            )
+            assert lower_growth >= Decimal("0.999999999999") * bound
+            assert upper_growth >= Decimal("0.999999999999") * bound
+    assert augmented["tail_bounds"] == {
+        "residual": "1e-4",
+        "jacobian_radius": "2e-4",
+        "jacobian_theta": "3e-4",
+    }
+
+
+def test_zero_tail_bounds_recover_finite_krawczyk_image() -> None:
+    arguments = {
+        "radius": "1.1",
+        "theta": "0.13",
+        "radius_half_width": "1e-6",
+        "theta_half_width": "1e-6",
+        "parameters": _parameters(),
+        "precision_dps": 70,
+    }
+    finite = certify_rotating_wave_box(**arguments)
+    augmented = certify_rotating_wave_tail_box(
+        **arguments,
+        residual_tail_bound="0",
+        jacobian_radius_tail_bound="0",
+        jacobian_theta_tail_bound="0",
+    )
+
+    assert augmented["krawczyk_image"] == finite["krawczyk_image"]
+    assert augmented["jacobian_box"] == finite["jacobian_box"]
+    assert augmented["function_at_center"] == finite["function_at_center"]
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "error"),
+    (
+        ("residual_tail_bound", "-1e-9", ValueError),
+        ("jacobian_radius_tail_bound", "nan", ValueError),
+        ("jacobian_theta_tail_bound", 0.0, TypeError),
+        ("radius_half_width", "0", ValueError),
+    ),
+)
+def test_tail_certificate_rejects_invalid_bounds(
+    field: str, value: object, error: type[Exception]
+) -> None:
+    arguments = {
+        "radius": "1.1",
+        "theta": "0.13",
+        "radius_half_width": "1e-6",
+        "theta_half_width": "1e-6",
+        "parameters": _parameters(),
+        "residual_tail_bound": "1e-4",
+        "jacobian_radius_tail_bound": "2e-4",
+        "jacobian_theta_tail_bound": "3e-4",
+        "precision_dps": 70,
+    }
+    arguments[field] = value
+    with pytest.raises(error):
+        certify_rotating_wave_tail_box(**arguments)

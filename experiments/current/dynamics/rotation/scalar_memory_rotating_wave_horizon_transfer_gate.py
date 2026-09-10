@@ -27,6 +27,7 @@ from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
     certify_rotating_wave_box,
     certify_rotating_wave_homotopy_box,
+    certify_rotating_wave_tail_box,
     interval_balance_and_jacobian_box,
     refine_rotating_wave_root,
 )
@@ -425,6 +426,59 @@ def local_branch_exclusion_backend_record(
         "max_depth": 20,
         "status": status,
         "to_horizon": to_horizon,
+    }
+
+
+def tail_certificate_backend_record(
+    *,
+    precision_dps: int,
+    root: tuple[str, str],
+) -> dict[str, Any] | None:
+    """Map the analytic H=3600 tail enclosure to one strict v3 panel."""
+
+    if type(precision_dps) is not int or precision_dps not in (120, 160):
+        raise ValueError("tail certificate precision must be 120 or 160 dps")
+    if (
+        type(root) is not tuple
+        or len(root) != 2
+        or any(type(value) is not str for value in root)
+    ):
+        raise TypeError("tail certificate root must contain two decimal strings")
+    coordinates = tuple(
+        _finite_decimal(value, path=f"root[{index}]")
+        for index, value in enumerate(root)
+    )
+    half_width = Decimal("1e-10")
+    if not (
+        Decimal("0.8") <= coordinates[0] - half_width
+        and coordinates[0] + half_width <= Decimal("1.1")
+        and Decimal("0.01") <= coordinates[1] - half_width
+        and coordinates[1] + half_width <= Decimal("0.022")
+    ):
+        raise ValueError("tail certificate box lies outside the registered domain")
+
+    bounds = tail_bounds(horizon=3600, precision_dps=precision_dps)
+    try:
+        raw = certify_rotating_wave_tail_box(
+            radius=root[0],
+            theta=root[1],
+            radius_half_width="1e-10",
+            theta_half_width="1e-10",
+            parameters=_finite_interval_parameters(3600),
+            residual_tail_bound=bounds["residual_bound"],
+            jacobian_radius_tail_bound=bounds["jacobian_radius_bound"],
+            jacobian_theta_tail_bound=bounds["jacobian_theta_bound"],
+            precision_dps=precision_dps,
+        )
+    except ArithmeticError:
+        return None
+    certificate = _v3_certificate(raw)
+    if certificate is None:
+        return None
+    return {
+        "certificate": certificate,
+        "precision_dps": precision_dps,
+        "root": list(root),
     }
 
 

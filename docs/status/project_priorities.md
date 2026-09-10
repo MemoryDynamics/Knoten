@@ -20,8 +20,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 1. **Remediation abschliessen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
    nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
-   targetfrei reviewed. Die verbleibende feste Folge lautet:
-   tail-augmentiertes Krawczyk-Zertifikat, LCG-Arnoldi-Adapter,
+   targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
+   ebenfalls targetfrei reviewed, waehrend G4 ungemessen bleibt. Die
+   verbleibende feste Folge lautet: LCG-Arnoldi-Adapter,
    Trajektorienadapter, Backendkomposition und unabhaengiges
    Readinessreview. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben. Bis zum Review gibt es weder einen Horizontlauf noch
@@ -54,6 +55,6 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Aktueller Haltepunkt
 
-Der naechste erlaubte Codeblock innerhalb Prioritaet 1 ist ausschliesslich das
-targetfreie Tailzertifikat. Der aktuelle methodische Stand und die
+Der naechste erlaubte Codeblock innerhalb Prioritaet 1 ist ausschliesslich der
+targetfreie LCG-Arnoldi-Adapter. Der aktuelle methodische Stand und die
 Evidenzgrenzen stehen im [Experimentkatalog](../reference/experiment_catalog.md).

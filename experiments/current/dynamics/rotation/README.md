@@ -71,6 +71,13 @@ synthetischen First-order-/Branch-Crossing-Falsifikatoren, off-target
 Summenvergleich, Provenienz, Lint und Dokumentationsbau. Beide Zielpanels
 verwenden `mpmath.iv` 1.3.0; sie sind keine unabhaengigen Intervallbackends.
 
+Das spaetere Fixed-alpha-Horizontgate bleibt targetgeschlossen. Seine
+Root-, Homotopie-, lokalen Ausschluss- und Tail-Krawczyk-Adapter sind
+targetfrei implementiert und reviewed. Insbesondere ist das Tailpanel nur
+eine Methode: Noch wurde kein $H=3600$-Root eingesetzt und Gate G4 ist nicht
+gemessen. Als naechster Remediationsbaustein ist nur der portable
+LCG-Arnoldi-Adapter offen.
+
 ## Claim-Grenze
 
 Die Programme etablieren:

@@ -1073,6 +1073,99 @@ def test_exclusion_adapter_keeps_depth_twenty_leaf_unresolved(
     assert row["status"] == "inconclusive"
 
 
+def _fake_tail_certificate(*, passed: bool = True, **kwargs) -> dict[str, object]:
+    radius = kwargs["radius"]
+    theta = kwargs["theta"]
+    return {
+        "pass": passed,
+        "gates": {"krawczyk_strict_interior": passed},
+        "box": [
+            {
+                "lower": str(Decimal(radius) - Decimal("1e-10")),
+                "upper": str(Decimal(radius) + Decimal("1e-10")),
+            },
+            {
+                "lower": str(Decimal(theta) - Decimal("1e-10")),
+                "upper": str(Decimal(theta) + Decimal("1e-10")),
+            },
+        ],
+        "jacobian_box": [
+            [{"lower": "1", "upper": "2"}, {"lower": "3", "upper": "4"}],
+            [{"lower": "5", "upper": "6"}, {"lower": "7", "upper": "8"}],
+        ],
+        "krawczyk_image": [
+            {"lower": radius, "upper": radius},
+            {"lower": theta, "upper": theta},
+        ],
+    }
+
+
+def test_tail_adapter_uses_registered_bounds_and_maps_strict_certificate(
+    gate, monkeypatch
+) -> None:
+    calls = []
+
+    def fake_certify(**kwargs):
+        calls.append(kwargs)
+        return _fake_tail_certificate(**kwargs)
+
+    monkeypatch.setattr(gate, "certify_rotating_wave_tail_box", fake_certify)
+    root = ("0.9465", "0.01577")
+    record = gate.tail_certificate_backend_record(
+        precision_dps=120,
+        root=root,
+    )
+
+    assert record is not None
+    assert record["precision_dps"] == 120
+    assert record["root"] == list(root)
+    assert len(calls) == 1
+    call = calls[0]
+    expected = gate.tail_bounds(horizon=3600, precision_dps=120)
+    assert call["parameters"].horizon == 3600
+    assert call["radius_half_width"] == "1e-10"
+    assert call["theta_half_width"] == "1e-10"
+    assert call["residual_tail_bound"] == expected["residual_bound"]
+    assert call["jacobian_radius_tail_bound"] == expected["jacobian_radius_bound"]
+    assert call["jacobian_theta_tail_bound"] == expected["jacobian_theta_bound"]
+    gate._verify_certificate(
+        record["certificate"],
+        center=record["root"],
+        half_width="1e-10",
+        path="tail-adapter-test",
+    )
+
+
+def test_tail_adapter_fails_closed_on_noninclusion(gate, monkeypatch) -> None:
+    monkeypatch.setattr(
+        gate,
+        "certify_rotating_wave_tail_box",
+        lambda **kwargs: _fake_tail_certificate(passed=False, **kwargs),
+    )
+    assert gate.tail_certificate_backend_record(
+        precision_dps=160,
+        root=("0.9465", "0.01577"),
+    ) is None
+
+
+@pytest.mark.parametrize(
+    ("precision", "root", "error"),
+    (
+        (80, ("0.9465", "0.01577"), ValueError),
+        (True, ("0.9465", "0.01577"), ValueError),
+        (120, ["0.9465", "0.01577"], TypeError),
+        (120, ("nan", "0.01577"), ValueError),
+        (120, ("1.2", "0.01577"), ValueError),
+        (120, ("0.9465", "0.009"), ValueError),
+    ),
+)
+def test_tail_adapter_rejects_unregistered_inputs(
+    gate, precision: object, root: object, error: type[Exception]
+) -> None:
+    with pytest.raises(error):
+        gate.tail_certificate_backend_record(precision_dps=precision, root=root)
+
+
 def test_exclusion_adapter_reconstructs_krawczyk_summary(gate, monkeypatch) -> None:
     monkeypatch.setattr(
         gate,
