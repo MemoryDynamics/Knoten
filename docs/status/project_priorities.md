@@ -22,7 +22,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
    targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
    ebenfalls targetfrei reviewed, waehrend G4 ungemessen bleibt. Die
-   verbleibende feste Folge lautet: LCG-Arnoldi-Adapter,
+   Der explizit autorisierte, isolierte G4-Komponentenlauf wird nun vorgezogen:
+   erst eigenstaendiger Ergebnisvertrag, Auditor und Readinessreview, dann
+   genau ein Lauf. Danach lautet die feste Folge: LCG-Arnoldi-Adapter,
    Trajektorienadapter, Backendkomposition und unabhaengiges
    Readinessreview. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben. Bis zum Review gibt es weder einen Horizontlauf noch
@@ -56,5 +58,5 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 ## Aktueller Haltepunkt
 
 Der naechste erlaubte Codeblock innerhalb Prioritaet 1 ist ausschliesslich der
-targetfreie LCG-Arnoldi-Adapter. Der aktuelle methodische Stand und die
+targetfreie G4-Komponentenrunner samt Auditor. Der aktuelle methodische Stand und die
 Evidenzgrenzen stehen im [Experimentkatalog](../reference/experiment_catalog.md).

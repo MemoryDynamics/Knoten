@@ -105,8 +105,12 @@ outward-rounded Krawczyk-Kern. Null-Tail-Reproduktion, Intervallerweiterung,
 Typfehler und Nichtinklusion sind targetfrei getestet. Das Reviewurteil ist
 `horizon-tail-krawczyk-adapter-target-free-pass-g4-unmeasured`: Es wurde kein
 $H=3600$-Kandidat eingesetzt und G4 bleibt ungemessen. Offen sind
-LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Ein Horizontlauf
-ist nicht autorisiert.
+LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Die explizite
+Nutzerfreigabe vom 2026-09-13 zieht nun einen isolierten G4-Komponentenlauf
+vor. Sein neues Protokoll trennt lokale Existenz von Branchidentitaet und
+verlangt vor genau einem Lauf einen eigenen Ergebnisvertrag, Auditor,
+Readinessreview, sauberen Commit und gruene CI. Vollstaendiger Horizontlauf,
+G5 und P5-D bleiben nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 
