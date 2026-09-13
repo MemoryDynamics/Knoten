@@ -78,10 +78,11 @@ eine Methode. Der erste isolierte G4-Komponentenlauf brach bei der
 nachgeschalteten Recordvalidierung an einer zu exakten Kontrolle der
 outward-gerundeten Box ab. Der Codepfad rief zuvor mindestens ein Tailpanel
 auf, publizierte aber weder validierte Panelrecords noch Ergebnisartefakte.
-Die Pruefung ist targetfrei korrigiert, aber G4 bleibt ungemessen. Genau ein
-separat preregistrierter Retry ist neu freigegeben und darf erst nach
-sauberem Commit und exakter gruener CI starten. LCG-Arnoldi gehoert erst
-danach zu G5.
+Die Pruefung ist targetfrei korrigiert. Der separat preregistrierte Retry
+besteht danach das isolierte G4-Komponentengate mit zwei strikten,
+ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
+zu. Das ist lokale $F_\infty$-Existenz, keine G1--G3-Branchverbindung und
+keine Stabilitaet. LCG-Arnoldi gehoert erst danach zu G5.
 
 ## Claim-Grenze
 

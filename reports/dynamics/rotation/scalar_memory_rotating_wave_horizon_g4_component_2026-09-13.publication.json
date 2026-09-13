@@ -1,0 +1,17 @@
+{
+  "artifacts": [
+    {
+      "path": "scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.json",
+      "role": "result-json",
+      "sha256": "783328382545dbf4a08698ebd7a8ba7f3ef06ac344630f2b04e4ef7dd54c5a88"
+    },
+    {
+      "path": "scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.md",
+      "role": "readable-report",
+      "sha256": "dc1919c0d0620e72651ac8a3e5e386ef09574f51dc7b505e92b257d5a6074bf3"
+    }
+  ],
+  "execution_commit": "fb1cc7d3f9fac5aa9cc2b5e3000ccf030df50c71",
+  "protocol_sha256": "3236ee19d4688c48fa268f5344285ca6b02d84c58612b548781c558ab62ec6fc",
+  "schema": "scalar-memory-rotating-wave-horizon-g4-publication-v1"
+}

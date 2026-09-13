@@ -155,6 +155,11 @@ unter den Tailbounds ein Root von $F_\infty$. Erst G1 bis G3 verbinden diesen
 Root mit der endlichen Anchor-Leiter. Erst G5 fuegt lokale dynamische
 Stabilitaet hinzu. G6 kontrolliert die Speicherimplementierung.
 
+Der separat preregistrierte Retry vom 2026-09-13 hat diesen isolierten G4-Test
+mit zwei strikten, ueberlappenden 120/160-dps-Panels bestanden; der getrennte
+Recordaudit stimmt zu. Die staerkeren Aussagen bleiben deshalb weiterhin an
+die jeweils nachgelagerten Gates gebunden.
+
 Keine Kombination dieser Gates beweist fuer sich physikalische Masse,
 internen Spin, generische Knotenbildung oder Knoteninteraktion. Diese Claims
 benoetigen eigene Observablen und Falsifikatoren.

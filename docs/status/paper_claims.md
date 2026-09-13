@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-09-02.
+Stand: 2026-09-13.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -36,8 +36,10 @@ Als technischer Spin-off ist inzwischen enger tragbar:
 - ein lokaler computerassistierter Krawczyk-Existenz-/Eindeutigkeitsbeweis
   unter der `mpmath.iv`-Vertrauensbasis fuer den Anchor und fuenf weitere
   gematchte Zellen bei `H*alpha=12`, `eta/alpha=15`;
-- ein separat hochpraezise reproduzierter numerischer Fixed-gain-Kontinuumsroot mit
-  First-order-Skalierung;
+- ein separat hochpraezise reproduzierter numerischer Fixed-gain-
+  Kontinuumsroot mit First-order-Skalierung sowie, getrennt davon, ein durch
+  zwei 120/160-dps-Tail-Krawczyk-Panels lokal zertifizierter Root von
+  $F_\infty$ bei festem $\alpha=0.01$ und $H=3600$-Kopf;
 - lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
   prospektiv gewaehlten feineren L3-Zelle;
 - eine lokale matrixwertige Loop--Center-Kleinsignalantwort am vorbereiteten
@@ -60,8 +62,9 @@ ein offener Basin-Ball, generische oder spontane Formation, internes S1 nach
 Traegheitsgesetz, physische Arbeit oder Masse. Der
 Foundation-Audit, prospektives L5-Review sowie die separaten kritischen L3-,
 P2-, P2-R- und P3-Reviews sind die reviewertragenden Quellen. Ein zweiter
-Intervallbackend und eine
-vollstaendige Spektraleinschliessung fehlen. Das interne Source-Referee-Audit
+Intervallbackend, die G1--G3-Verbindung des isolierten $F_\infty$-Roots mit
+der gesamten endlichen Leiter und eine vollstaendige Spektraleinschliessung
+fehlen. Das interne Source-Referee-Audit
 urteilt deshalb nur
 `referee-source-ready-with-major-claim-restrictions`: zusaetzlich fehlen ein
 vollstaendiger Wheel-/Hash-Lock und eine zitierbare Release mit

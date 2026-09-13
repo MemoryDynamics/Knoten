@@ -116,10 +116,13 @@ ist weder Panelpass noch -fail verwertbar. Ergebnisartefakte und
 unabhaengiger Ergebnisaudit entstanden nicht. Der Ausgang ist
 `g4-experiment-invalid-outward-box-validation`, nicht G4-Fail.
 Die Boxpruefung ist targetfrei auf garantierte Umschliessung plus eng
-praezisionsgebundenen Serialisierungsueberschuss korrigiert. G4 bleibt
-ungemessen. Die neue Nutzerfreigabe autorisiert genau einen separat
-preregistrierten Retry nach sauberem Retry-Commit und exakter gruener CI.
-Vollstaendiger Horizontlauf, G5 und P5-D bleiben nicht autorisiert.
+praezisionsgebundenen Serialisierungsueberschuss korrigiert. Der separat
+preregistrierte Retry auf Commit `fb1cc7d` besteht anschliessend beide
+strikten 120/160-dps-Tailpanels; ihre Krawczyk-Bilder ueberlappen. Der
+Standardbibliothek-Auditor rekonstruiert alle acht Checks und urteilt
+`g4-independent-audit-agrees`. Damit ist G4 als isolierte lokale
+$F_\infty$-Komponente `pass`. Die G1--G3-Branchverbindung, G5, der
+vollstaendige Horizontlauf und P5-D bleiben nicht autorisiert oder belegt.
 
 ## P5-D Code-Review und Remediation
 

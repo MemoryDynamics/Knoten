@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "decision_reconstructed": true,
+    "finite_root_certificate": true,
+    "manifest_first_and_hashes": true,
+    "readable_report_reconstructed": true,
+    "registered_identity": true,
+    "root_contract": true,
+    "tail_bounds": true,
+    "tail_certificates_and_overlap": true
+  },
+  "decision": "g4-local-infinite-root-pass",
+  "execution_commit": "fb1cc7d3f9fac5aa9cc2b5e3000ccf030df50c71",
+  "result_sha256": "783328382545dbf4a08698ebd7a8ba7f3ef06ac344630f2b04e4ef7dd54c5a88",
+  "schema": "scalar-memory-rotating-wave-horizon-g4-independent-audit-v1",
+  "trust_boundary": "record and hash audit; not a second interval backend",
+  "verdict": "g4-independent-audit-agrees"
+}
