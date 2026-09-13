@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-10.
+Stand: 2026-09-13.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -21,8 +21,8 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
    targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
-   ebenfalls targetfrei reviewed, waehrend G4 ungemessen bleibt. Die
-   Der explizit autorisierte, isolierte G4-Komponentenlauf wird nun vorgezogen:
+   ebenfalls targetfrei reviewed, waehrend G4 ungemessen bleibt. Der
+   explizit autorisierte, isolierte G4-Komponentenlauf wird nun vorgezogen:
    erst eigenstaendiger Ergebnisvertrag, Auditor und Readinessreview, dann
    genau ein Lauf. Danach lautet die feste Folge: LCG-Arnoldi-Adapter,
    Trajektorienadapter, Backendkomposition und unabhaengiges

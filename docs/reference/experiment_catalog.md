@@ -1,6 +1,6 @@
 # Experimentkatalog
 
-Stand: 2026-09-10.
+Stand: 2026-09-13.
 
 Diese Seite ist ein kuratierter Wegweiser, kein Ergebnisjournal und keine
 zweite Roadmap. Die einzige Arbeitsreihenfolge steht unter
@@ -35,6 +35,11 @@ Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das
 [Tail-Review](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_tail_certificate_review_2026-09-10.md)
 trennt den Methodenpass vom weiterhin ungemessenen Gate G4.
+
+Hier bezeichnet G4 den lokalen $H\to\infty$-Roottest fuer eine Schleife. Das
+gleichnamige historische P3.8f-Gate fuer gerichteten Zwei-Knoten-Transfer
+gehoert zur Familie „Kopplung und Interaktion“ und wird durch diesen Lauf
+nicht ausgewertet.
 
 ## 2. Experimentfamilien
 

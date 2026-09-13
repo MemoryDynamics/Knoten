@@ -1,6 +1,6 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-13.
+Stand: 2026-09-13, nach G4-Runner-Review.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite
@@ -31,6 +31,21 @@ Rootzertifikat und Dynamik gemeinsam bestehen.
 | $c$ | Memory-Center | mechanische Center-Variable, nicht die interne Kreisphase |
 | $\mu$ | effektiver Center-Port-Koeffizient | gehoert nicht zum G4-Rootbeweis |
 
+Der normalisierte Centerfilter ist tatsaechlich eine endliche geometrische
+Reihe:
+
+$$
+B_H(z)=\frac{\alpha}{1-q^H}
+\sum_{j=0}^{H-1}(qz^{-1})^j
+=\frac{\alpha}{1-q^H}
+\frac{1-q^Hz^{-H}}{1-qz^{-1}}.
+$$
+
+Die Summenform zeigt, was der Code tut: Alte Positionen werden mit
+abfallenden Gewichten gelesen. Die Quotientenform ist nur dieselbe Summe in
+Kurzschrift. Eine ausfuehrliche Herleitung steht unter
+[Centerfilter und Ringspeicher](scalar_memory_center_filter.md).
+
 Fuer einen vorbereiteten Kreis $x_n=R e^{in\theta}$ reduziert sich das volle
 Update auf zwei reelle Gleichungen $F_H(R,\theta)=0$: eine radiale und eine
 tangentiale Balance. Ein Root ist also ein Wertepaar $(R,\theta)$, bei dem
@@ -51,6 +66,12 @@ beide Komponenten gleichzeitig verschwinden.
 G4 und G5 sind verschieden: G4 fragt, ob eine Gleichgewichtsloesung existiert.
 G5 fragt, ob benachbarte Zustaende zu ihr zurueckkehren. Existenz ist noch
 keine Stabilitaet.
+
+**Achtung, historischer Namenskonflikt:** Dieses G4 gehoert ausschliesslich
+zum Fixed-$\alpha$-Horizontprotokoll. Ein aelteres P3.8f-Protokoll nennt auch
+den gerichteten Transfer zwischen zwei Knoten „G4“. Das sind zwei
+verschiedene Tests. Der hier ausgefuehrte G4-Komponentenlauf prueft
+$F_\infty$ fuer **eine** Schleife; er misst noch keine Schleifenkopplung.
 
 ## 4. G4 Schritt fuer Schritt
 
@@ -137,4 +158,3 @@ Stabilitaet hinzu. G6 kontrolliert die Speicherimplementierung.
 Keine Kombination dieser Gates beweist fuer sich physikalische Masse,
 internen Spin, generische Knotenbildung oder Knoteninteraktion. Diese Claims
 benoetigen eigene Observablen und Falsifikatoren.
-

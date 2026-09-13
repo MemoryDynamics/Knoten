@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-09.
+Stand: 2026-09-13.
 
 ## Wissenschaftlicher Stand
 
@@ -33,9 +33,11 @@ Stand: 2026-09-09.
   portable v3-Vertrag wurde anschliessend um eine pure, targetfreie
   Orchestrierung erweitert. Root-, Homotopie-, lokaler Ausschluss- und
   Tail-Krawczyk-Adapter verwenden inzwischen gemeinsame Intervallkerne. Der
-  Tailbaustein ist nach 1052 lokalen Tests targetfrei reviewed; G4 wurde
-  nicht gemessen. LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen
-  weiterhin; Horizontlauf und weitere P5-Zielausfuehrungen bleiben
+  Tailbaustein und der isolierte G4-Komponentenrunner sind nach 1060 lokalen
+  Tests targetfrei reviewed; G4 wurde noch nicht gemessen. Der eine
+  Komponentenlauf ist erst nach gruener exakter CI zulaessig.
+  LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen weiterhin;
+  vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
   geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.

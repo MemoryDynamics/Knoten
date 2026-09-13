@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-10.
+Stand: 2026-09-13.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -107,10 +107,12 @@ Typfehler und Nichtinklusion sind targetfrei getestet. Das Reviewurteil ist
 $H=3600$-Kandidat eingesetzt und G4 bleibt ungemessen. Offen sind
 LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Die explizite
 Nutzerfreigabe vom 2026-09-13 zieht nun einen isolierten G4-Komponentenlauf
-vor. Sein neues Protokoll trennt lokale Existenz von Branchidentitaet und
-verlangt vor genau einem Lauf einen eigenen Ergebnisvertrag, Auditor,
-Readinessreview, sauberen Commit und gruene CI. Vollstaendiger Horizontlauf,
-G5 und P5-D bleiben nicht autorisiert.
+vor. Protokoll, Ergebnisvertrag, Runner, Standardbibliothek-Auditor und
+Readinessreview sind nach 1060 lokalen Tests vorbereitet. Dabei wurde eine
+28-stellige `Decimal`-Validierungsfalle fuer die $10^{-30}$-Innenbox vor
+jedem Zielzugriff behoben. Vor genau einem Lauf fehlen nur sauberer Commit
+und gruene exakte CI. Vollstaendiger Horizontlauf, G5 und P5-D bleiben nicht
+autorisiert.
 
 ## P5-D Code-Review und Remediation
 
