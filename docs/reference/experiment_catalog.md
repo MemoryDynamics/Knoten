@@ -27,8 +27,8 @@ autorisiert.
 | Fixed-alpha-Rootadapter | implementiert und reviewed | Adapterbeleg, kein neu berechneter Root |
 | Homotopie-/Intervalladapter | implementiert und reviewed | affine Deformation $F_a+s(F_b-F_a)$, kein kontinuierliches physisches $H$ und keine ausgewertete Kante |
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
-| Tailzertifikat/G4 | Kern reviewed; isolierter Komponentenlauf preregistriert | Ergebnisvertrag, Auditor und Readiness vor genau einem Lauf; G4 noch ungemessen |
-| LCG-Arnoldi-/Trajektorienadapter | nach dem G4-Komponentenlauf offen | G5; vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
+| Tailzertifikat/G4 | Kern reviewed; erster Komponentenlauf technisch invalid | outward-Boxvalidator targetfrei remediated; kein Ergebnis, G4 ungemessen, kein Retry ohne neue Freigabe |
+| LCG-Arnoldi-/Trajektorienadapter | bis zu einem gueltigen G4-Befund geschlossen | G5; vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
 | Backendkomposition und Readiness | geschlossen | kein Horizontlauf vor separatem Review |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
@@ -60,7 +60,7 @@ nicht ausgewertet.
 | Erzeugt die FIFO-Struktur den Kreis tautologisch? | Nein. Sie ordnet Alter; der Kreis folgt nur aus Kraftbalance und Dynamik. | finite-$H$-Audit, Rootzertifikat und Kontrollen |
 | Wie hoch ist der KnotScore des Rotating-wave-FIFO? | Nicht erhoben und derzeit nicht entscheidungsfaehig. | gepaarte Formation aus nichtkreisfoermigen Starts plus `eta_zero`, Stationaritaet und vorregistrierte Scorecard |
 | Ist der finite Kreis ein gebildeter Knoten? | Fuer zehn vorbereitete Nichtkreis-Arme gibt es endliche Attractionsevidenz, aber keinen offenen Basin- oder generischen Formationsbeweis. | eigenstaendiges Formation-/Basin-Protokoll |
-| Ueberlebt der Root bei festem $\alpha$ fuer $H\to\infty$? | Offen. | Horizontgate einschliesslich Tailzertifikat |
+| Ueberlebt der Root bei festem $\alpha$ fuer $H\to\infty$? | Offen; erster isolierter G4-Lauf bei der nachgeschalteten Recordvalidierung technisch invalid. | neuer autorisierter Komponentenlauf oder vollstaendiges Horizontgate |
 | Besitzt das System eine interne $S^1$-Phase oder Spin? | Nicht gezeigt; die bisherige Bahn ist eine raeumliche $SO(2)$-Gruppenbahn. | interne Observable nach Quotientierung der Raumrotation |
 | Ist $\mu$ physikalische Masse? | Nur eine effektive positive Center-Port-Darstellung ist belegt. | mikroskopischer Aktuator, Portinvarianz und Einheitenkalibrierung |
 | Gibt es Knoteninteraktion? | P5-D ist technisch `inconclusive`. | erst abgeschlossene Remediation, dann separat autorisierter Lauf |

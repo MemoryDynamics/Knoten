@@ -33,11 +33,13 @@ Stand: 2026-09-13.
   portable v3-Vertrag wurde anschliessend um eine pure, targetfreie
   Orchestrierung erweitert. Root-, Homotopie-, lokaler Ausschluss- und
   Tail-Krawczyk-Adapter verwenden inzwischen gemeinsame Intervallkerne. Der
-  Tailbaustein und der isolierte G4-Komponentenrunner sind nach 1060 lokalen
-  Tests targetfrei reviewed; G4 wurde noch nicht gemessen. Der eine
-  Komponentenlauf ist erst nach gruener exakter CI zulaessig.
+  Tailbaustein und der isolierte G4-Komponentenrunner wurden targetfrei
+  reviewed. Der erste autorisierte Komponentenlauf brach nach gruener CI an
+  einer zu strikten Boxserialisierungspruefung ab; es entstand kein Ergebnis
+  und G4 bleibt ungemessen. Die outward-Rundungspruefung ist targetfrei
+  korrigiert, ein weiterer Zielzugriff braucht jedoch eine neue Freigabe.
   LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen weiterhin;
-  vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
+  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
   geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.

@@ -74,11 +74,12 @@ verwenden `mpmath.iv` 1.3.0; sie sind keine unabhaengigen Intervallbackends.
 Das spaetere Fixed-alpha-Horizontgate bleibt targetgeschlossen. Seine
 Root-, Homotopie-, lokalen Ausschluss- und Tail-Krawczyk-Adapter sind
 targetfrei implementiert und reviewed. Insbesondere ist das Tailpanel nur
-eine Methode: Noch wurde kein $H=3600$-Root eingesetzt und Gate G4 ist nicht
-gemessen. Der isolierte G4-Komponentenrunner samt Standardbibliothek-Auditor
-ist nach 1060 lokalen Tests bedingt ausfuehrungsbereit; vor genau einem Lauf
-fehlt nur die gruene CI des sauberen Readiness-Commits. LCG-Arnoldi gehoert
-erst danach zu G5.
+eine Methode. Der erste isolierte G4-Komponentenlauf brach bei der
+nachgeschalteten Recordvalidierung an einer zu exakten Kontrolle der
+outward-gerundeten Box ab. Der Codepfad rief zuvor mindestens ein Tailpanel
+auf, publizierte aber weder validierte Panelrecords noch Ergebnisartefakte.
+Die Pruefung ist targetfrei korrigiert, aber G4 bleibt ungemessen und ein
+Retry ist ohne neue Freigabe verboten. LCG-Arnoldi gehoert erst danach zu G5.
 
 ## Claim-Grenze
 

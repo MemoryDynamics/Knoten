@@ -1428,21 +1428,31 @@ def _verify_certificate(
     *,
     center: Sequence[str] | None = None,
     half_width: str,
+    precision_dps: int,
     path: str,
 ) -> bool:
     with localcontext() as context:
-        context.prec = 180
-        expected_width = 2 * Decimal(half_width)
-        for name in ("radius", "theta"):
+        context.prec = 200
+        width = Decimal(half_width)
+        for index, name in enumerate(("radius", "theta")):
             lower, upper = _decimal_interval(
                 certificate["box"][name], path=f"{path}.box.{name}"
             )
-            if upper - lower != expected_width:
-                raise ValueError(f"{path}.box.{name}: half-width mismatch")
-            if center is not None and (lower + upper) / 2 != Decimal(
-                center[0 if name == "radius" else 1]
+            if center is None:
+                if upper - lower < 2 * width:
+                    raise ValueError(f"{path}.box.{name}: half-width mismatch")
+                continue
+            midpoint = Decimal(center[index])
+            expected_lower = midpoint - width
+            expected_upper = midpoint + width
+            tolerance = max(abs(midpoint), Decimal(1)).scaleb(4 - precision_dps)
+            if not (
+                lower <= expected_lower
+                and expected_upper <= upper
+                and expected_lower - lower <= tolerance
+                and upper - expected_upper <= tolerance
             ):
-                raise ValueError(f"{path}.box.{name}: center mismatch")
+                raise ValueError(f"{path}.box.{name}: center/width mismatch")
     strict = _strict_image_in_box(
         certificate["krawczyk_image"], certificate["box"], path=path
     )
@@ -1485,6 +1495,7 @@ def _verify_root_panel(panel: dict[str, Any], *, path: str) -> bool:
                 panel["newton_120"]["theta"],
             ),
             half_width="1e-8" if name.startswith("outer") else "1e-30",
+            precision_dps=80 if name.endswith("80") else 120,
             path=f"{path}.{name}",
         )
         for name in (
@@ -2261,6 +2272,7 @@ def _verify_result_semantics(payload: dict[str, Any]) -> None:
                 row["certificate"],
                 center=row["root"],
                 half_width="1e-10",
+                precision_dps=expected_precision,
                 path=f"$.infinite_tail.certificate_panels[{index}].certificate",
             )
         )

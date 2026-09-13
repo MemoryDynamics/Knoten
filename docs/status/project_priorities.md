@@ -21,14 +21,16 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
    targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
-   ebenfalls targetfrei reviewed, waehrend G4 ungemessen bleibt. Der
-   explizit autorisierte, isolierte G4-Komponentenlauf wird nun vorgezogen:
-   erst eigenstaendiger Ergebnisvertrag, Auditor und Readinessreview, dann
-   genau ein Lauf. Danach lautet die feste Folge: LCG-Arnoldi-Adapter,
-   Trajektorienadapter, Backendkomposition und unabhaengiges
-   Readinessreview. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
-   fail-closed bleiben. Bis zum Review gibt es weder einen Horizontlauf noch
-   P5-D-Versuch 4.
+   ebenfalls targetfrei reviewed. Der erste isolierte G4-Komponentenlauf
+   brach bei der nachgeschalteten Recordvalidierung an einer unzulaessig
+   exakten Kontrolle der outward-gerundeten Box ab; kein verwertbares
+   Ergebnis entstand und G4 bleibt ungemessen. Die Boxpruefung ist nun
+   targetfrei remediated und mit 1063 lokalen Repositorytests geprueft.
+   Nach sauberem Remediation-Commit und gruener CI ist ein neuer Zielzugriff
+   weiterhin nur mit ausdruecklicher
+   Freigabe zulaessig. LCG-Arnoldi/G5, vollstaendiger Horizontlauf und
+   P5-D-Versuch 4 bleiben geschlossen. Abbruch-, Typ-, Intervall- und
+   Publikationsfehler muessen fail-closed bleiben.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -57,6 +59,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Aktueller Haltepunkt
 
-Der naechste erlaubte Codeblock innerhalb Prioritaet 1 ist ausschliesslich der
-targetfreie G4-Komponentenrunner samt Auditor. Der aktuelle methodische Stand und die
+Der targetfreie Abschluss der G4-Boxremediation samt Auditor ist lokal
+erreicht; offen sind sauberer Commit und gruene exakte CI. Ein weiterer
+Zielzugriff ist nicht autorisiert. Der aktuelle methodische Stand und die
 Evidenzgrenzen stehen im [Experimentkatalog](../reference/experiment_catalog.md).

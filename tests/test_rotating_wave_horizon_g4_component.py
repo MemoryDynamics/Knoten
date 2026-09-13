@@ -167,6 +167,25 @@ def test_runner_validator_rejects_unknown_fields_and_false_pass(runner):
         runner.validate_payload(invalid_newton, gate=gate)
 
 
+def test_registered_box_accepts_only_tiny_outward_serialization_slack(runner):
+    from decimal import Decimal, localcontext
+
+    payload, _ = _payload(runner)
+    gate = runner._load_horizon_gate()
+    interval = payload["finite_root"]["outer_certificate"]["box"]["radius"]
+    with localcontext() as context:
+        context.prec = 200
+        interval[0] = format(Decimal(interval[0]) - Decimal("1e-121"), "f")
+        interval[1] = format(Decimal(interval[1]) + Decimal("1e-121"), "f")
+    runner.validate_payload(payload, gate=gate)
+
+    with localcontext() as context:
+        context.prec = 200
+        interval[0] = format(Decimal(interval[0]) - Decimal("1e-115"), "f")
+    with pytest.raises(ValueError, match="registered box"):
+        runner.validate_payload(payload, gate=gate)
+
+
 def _redirect_outputs(module, temporary: Path) -> None:
     module.RESULT = temporary / "scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.json"
     module.REPORT = module.RESULT.with_suffix(".md")
@@ -197,6 +216,30 @@ def test_publication_and_independent_audit_agree(runner, auditor, tmp_path: Path
 
     assert observed["verdict"] == "g4-independent-audit-agrees"
     assert observed["decision"] == "g4-local-infinite-root-pass"
+    assert all(observed["checks"].values())
+
+
+def test_independent_audit_accepts_bounded_outward_box_serialization(
+    runner, auditor, tmp_path: Path
+):
+    from decimal import Decimal, localcontext
+
+    _redirect_outputs(runner, tmp_path)
+    _redirect_outputs(auditor, tmp_path)
+    payload, _ = _payload(runner)
+    payload["identity"]["protocol_sha256"] = hashlib.sha256(
+        runner.PROTOCOL.read_bytes()
+    ).hexdigest()
+    interval = payload["finite_root"]["outer_certificate"]["box"]["radius"]
+    with localcontext() as context:
+        context.prec = 200
+        interval[0] = format(Decimal(interval[0]) - Decimal("1e-121"), "f")
+        interval[1] = format(Decimal(interval[1]) + Decimal("1e-121"), "f")
+    runner.publish(payload)
+
+    observed = auditor.audit()
+
+    assert observed["verdict"] == "g4-independent-audit-agrees"
     assert all(observed["checks"].values())
 
 

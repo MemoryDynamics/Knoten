@@ -102,17 +102,23 @@ FIFO-kuratierte Implementierungs-CI besteht 1038 Tests. Das anschliessende
 Tailzertifikat erweitert das endliche Residuum und beide Jacobi-Spalten um
 die registrierten analytischen Normbounds und verwendet danach denselben
 outward-rounded Krawczyk-Kern. Null-Tail-Reproduktion, Intervallerweiterung,
-Typfehler und Nichtinklusion sind targetfrei getestet. Das Reviewurteil ist
-`horizon-tail-krawczyk-adapter-target-free-pass-g4-unmeasured`: Es wurde kein
-$H=3600$-Kandidat eingesetzt und G4 bleibt ungemessen. Offen sind
+Typfehler und Nichtinklusion sind targetfrei getestet. Das damalige
+Reviewurteil lautete
+`horizon-tail-krawczyk-adapter-target-free-pass-g4-unmeasured`: Zu diesem
+Zeitpunkt war kein $H=3600$-Kandidat eingesetzt worden. Offen sind
 LCG-Arnoldi, Trajektorienabbildung und Backendkomposition. Die explizite
-Nutzerfreigabe vom 2026-09-13 zieht nun einen isolierten G4-Komponentenlauf
-vor. Protokoll, Ergebnisvertrag, Runner, Standardbibliothek-Auditor und
-Readinessreview sind nach 1060 lokalen Tests vorbereitet. Dabei wurde eine
-28-stellige `Decimal`-Validierungsfalle fuer die $10^{-30}$-Innenbox vor
-jedem Zielzugriff behoben. Vor genau einem Lauf fehlen nur sauberer Commit
-und gruene exakte CI. Vollstaendiger Horizontlauf, G5 und P5-D bleiben nicht
-autorisiert.
+Nutzerfreigabe vom 2026-09-13 zog einen isolierten G4-Komponentenlauf vor.
+Nach gruenem Readiness-Commit und exakter CI startete dieser genau einmal,
+brach aber bei der nachgeschalteten Recordvalidierung an einer unzulaessig
+exakten Kontrolle der outward-gerundeten aeusseren Box ab. Der Codepfad
+rief zuvor mindestens das erste Tailpanel auf; mangels publiziertem Record
+ist weder Panelpass noch -fail verwertbar. Ergebnisartefakte und
+unabhaengiger Ergebnisaudit entstanden nicht. Der Ausgang ist
+`g4-experiment-invalid-outward-box-validation`, nicht G4-Fail.
+Die Boxpruefung ist targetfrei auf garantierte Umschliessung plus eng
+praezisionsgebundenen Serialisierungsueberschuss korrigiert. G4 bleibt
+ungemessen und ein weiterer Zielzugriff braucht eine neue Freigabe.
+Vollstaendiger Horizontlauf, G5 und P5-D bleiben nicht autorisiert.
 
 ## P5-D Code-Review und Remediation
 

@@ -147,7 +147,12 @@ def _decimal_matrix(value: Any, *, path: str) -> list[list[Decimal]]:
 
 
 def _strict_certificate(
-    certificate: dict[str, Any], *, root: list[str], half_width: str, path: str
+    certificate: dict[str, Any],
+    *,
+    root: list[str],
+    half_width: str,
+    precision_dps: int,
+    path: str,
 ) -> bool:
     if set(certificate) != {
         "box",
@@ -171,8 +176,17 @@ def _strict_certificate(
         width = Decimal(half_width)
         with localcontext() as context:
             context.prec = 200
-            expected_box = (center - width, center + width)
-        if (lower, upper) != expected_box:
+            expected_lower = center - width
+            expected_upper = center + width
+            serialization_tolerance = max(abs(center), Decimal(1)).scaleb(
+                4 - precision_dps
+            )
+        if not (
+            lower <= expected_lower
+            and expected_upper <= upper
+            and expected_lower - lower <= serialization_tolerance
+            and upper - expected_upper <= serialization_tolerance
+        ):
             raise ValueError(f"{path}.box.{coordinate}: registered box mismatch")
         image_lower, image_upper = _decimal_interval(
             certificate["krawczyk_image"][index],
@@ -303,6 +317,7 @@ def validate_payload(payload: dict[str, Any], *, gate: Any) -> None:
             finite["outer_certificate"],
             root=root,
             half_width="1e-8",
+            precision_dps=120,
             path="$.finite_root.outer_certificate",
         ):
             raise ValueError("$.finite_root.outer_certificate: false inclusion")
@@ -310,6 +325,7 @@ def validate_payload(payload: dict[str, Any], *, gate: Any) -> None:
             finite["inner_certificate"],
             root=root,
             half_width="1e-30",
+            precision_dps=120,
             path="$.finite_root.inner_certificate",
         ):
             raise ValueError("$.finite_root.inner_certificate: false inclusion")
@@ -344,6 +360,7 @@ def validate_payload(payload: dict[str, Any], *, gate: Any) -> None:
                 panel["certificate"],
                 root=root,
                 half_width="1e-10",
+                precision_dps=(120, 160)[index],
                 path=f"$.infinite_tail.certificate_panels[{index}].certificate",
             )
         )

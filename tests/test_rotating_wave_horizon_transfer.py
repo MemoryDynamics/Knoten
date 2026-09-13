@@ -1132,6 +1132,7 @@ def test_tail_adapter_uses_registered_bounds_and_maps_strict_certificate(
         record["certificate"],
         center=record["root"],
         half_width="1e-10",
+        precision_dps=120,
         path="tail-adapter-test",
     )
 
@@ -1604,6 +1605,24 @@ def test_v3_contract_serializes_disjoint_inner_images_as_inconclusive(gate) -> N
     panel["inner_intersection"] = None
     _classify_witness(gate, payload, G1R="inconclusive")
     gate.validate_result(payload)
+
+
+def test_v3_contract_bounds_outward_certificate_serialization_slack(gate) -> None:
+    payload = gate.contract_witness()
+    box = payload["finite_branch"]["root_panels"][2]["outer_certificate_80"][
+        "box"
+    ]["radius"]
+    with localcontext() as context:
+        context.prec = 200
+        box[0] = format(Decimal(box[0]) - Decimal("1e-81"), "f")
+        box[1] = format(Decimal(box[1]) + Decimal("1e-81"), "f")
+    gate.validate_result(payload)
+
+    with localcontext() as context:
+        context.prec = 200
+        box[0] = format(Decimal(box[0]) - Decimal("1e-75"), "f")
+    with pytest.raises(ValueError, match="center/width mismatch"):
+        gate.validate_result(payload)
 
 
 def test_v3_contract_rejects_homotopy_and_tail_reconstruction_lies(gate) -> None:

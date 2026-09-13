@@ -149,7 +149,12 @@ def _decimal_matrix(value: Any, *, path: str) -> list[list[Decimal]]:
 
 
 def _certificate(
-    value: Any, *, root: list[str], half_width: str, path: str
+    value: Any,
+    *,
+    root: list[str],
+    half_width: str,
+    precision_dps: int,
+    path: str,
 ) -> bool:
     if type(value) is not dict or set(value) != {
         "box",
@@ -171,8 +176,17 @@ def _certificate(
         center = Decimal(root[index])
         with localcontext() as context:
             context.prec = 200
-            expected_box = (center - width, center + width)
-        if box != expected_box:
+            expected_lower = center - width
+            expected_upper = center + width
+            serialization_tolerance = max(abs(center), Decimal(1)).scaleb(
+                4 - precision_dps
+            )
+        if not (
+            box[0] <= expected_lower
+            and expected_upper <= box[1]
+            and expected_lower - box[0] <= serialization_tolerance
+            and box[1] - expected_upper <= serialization_tolerance
+        ):
             raise ValueError(f"{path}.box.{coordinate}: registration mismatch")
         image = _interval(
             value["krawczyk_image"][index],
@@ -352,9 +366,17 @@ def audit() -> dict[str, Any]:
         _decimal_vector(newton["residual"], path="finite.newton.residual")
         _decimal_matrix(newton["jacobian"], path="finite.newton.jacobian")
         finite_ok = _certificate(
-            finite["outer_certificate"], root=root, half_width="1e-8", path="outer"
+            finite["outer_certificate"],
+            root=root,
+            half_width="1e-8",
+            precision_dps=120,
+            path="outer",
         ) and _certificate(
-            finite["inner_certificate"], root=root, half_width="1e-30", path="inner"
+            finite["inner_certificate"],
+            root=root,
+            half_width="1e-30",
+            precision_dps=120,
+            path="inner",
         )
     checks["finite_root_certificate"] = finite_ok
 
@@ -389,6 +411,7 @@ def audit() -> dict[str, Any]:
                 panel["certificate"],
                 root=root,
                 half_width="1e-10",
+                precision_dps=(120, 160)[index],
                 path=f"tail[{index}]",
             )
         )
