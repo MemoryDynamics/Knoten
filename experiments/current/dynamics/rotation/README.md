@@ -78,8 +78,10 @@ eine Methode. Der erste isolierte G4-Komponentenlauf brach bei der
 nachgeschalteten Recordvalidierung an einer zu exakten Kontrolle der
 outward-gerundeten Box ab. Der Codepfad rief zuvor mindestens ein Tailpanel
 auf, publizierte aber weder validierte Panelrecords noch Ergebnisartefakte.
-Die Pruefung ist targetfrei korrigiert, aber G4 bleibt ungemessen und ein
-Retry ist ohne neue Freigabe verboten. LCG-Arnoldi gehoert erst danach zu G5.
+Die Pruefung ist targetfrei korrigiert, aber G4 bleibt ungemessen. Genau ein
+separat preregistrierter Retry ist neu freigegeben und darf erst nach
+sauberem Commit und exakter gruener CI starten. LCG-Arnoldi gehoert erst
+danach zu G5.
 
 ## Claim-Grenze
 

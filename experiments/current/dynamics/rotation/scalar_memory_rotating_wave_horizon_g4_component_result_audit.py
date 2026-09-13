@@ -22,7 +22,7 @@ def _repo_root() -> Path:
 ROOT = _repo_root()
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_g4_component_protocol_2026-09-13.md"
+    "scalar_memory_rotating_wave_horizon_g4_component_retry_protocol_2026-09-13.md"
 )
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
@@ -326,8 +326,7 @@ def audit() -> dict[str, Any]:
         identity["schema"] != "scalar-memory-rotating-wave-horizon-g4-component-v1"
         or identity["execution_commit"] != manifest["execution_commit"]
         or identity["protocol_sha256"] != manifest["protocol_sha256"]
-        or identity["protocol_path"]
-        != "reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_g4_component_protocol_2026-09-13.md"
+        or identity["protocol_path"] != PROTOCOL.relative_to(ROOT).as_posix()
         or identity["dependencies"] != {"mpmath": "1.3.0"}
         or identity["parameters"] != PARAMETERS
         or identity["start"] != START

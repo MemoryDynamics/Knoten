@@ -26,9 +26,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    exakten Kontrolle der outward-gerundeten Box ab; kein verwertbares
    Ergebnis entstand und G4 bleibt ungemessen. Die Boxpruefung ist nun
    targetfrei remediated und mit 1063 lokalen Repositorytests geprueft.
-   Nach sauberem Remediation-Commit und gruener CI ist ein neuer Zielzugriff
-   weiterhin nur mit ausdruecklicher
-   Freigabe zulaessig. LCG-Arnoldi/G5, vollstaendiger Horizontlauf und
+   Die neue Nutzerfreigabe autorisiert genau einen separat preregistrierten
+   Retry nach sauberem Retry-Commit und gruener exakter CI. LCG-Arnoldi/G5,
+   vollstaendiger Horizontlauf und
    P5-D-Versuch 4 bleiben geschlossen. Abbruch-, Typ-, Intervall- und
    Publikationsfehler muessen fail-closed bleiben.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
@@ -59,7 +59,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Aktueller Haltepunkt
 
-Der targetfreie Abschluss der G4-Boxremediation samt Auditor ist lokal
-erreicht; offen sind sauberer Commit und gruene exakte CI. Ein weiterer
-Zielzugriff ist nicht autorisiert. Der aktuelle methodische Stand und die
-Evidenzgrenzen stehen im [Experimentkatalog](../reference/experiment_catalog.md).
+Der G4-Retry ist separat preregistriert und lokal ausfuehrungsbereit. Genau
+ein Zielzugriff ist erst nach sauberem Retry-Commit und gruener exakter CI
+autorisiert. Der aktuelle methodische Stand und die Evidenzgrenzen stehen im
+[Experimentkatalog](../reference/experiment_catalog.md).

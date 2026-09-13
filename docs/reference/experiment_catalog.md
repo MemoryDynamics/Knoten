@@ -27,8 +27,8 @@ autorisiert.
 | Fixed-alpha-Rootadapter | implementiert und reviewed | Adapterbeleg, kein neu berechneter Root |
 | Homotopie-/Intervalladapter | implementiert und reviewed | affine Deformation $F_a+s(F_b-F_a)$, kein kontinuierliches physisches $H$ und keine ausgewertete Kante |
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
-| Tailzertifikat/G4 | Kern reviewed; erster Komponentenlauf technisch invalid | outward-Boxvalidator targetfrei remediated; kein Ergebnis, G4 ungemessen, kein Retry ohne neue Freigabe |
-| LCG-Arnoldi-/Trajektorienadapter | bis zu einem gueltigen G4-Befund geschlossen | G5; vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
+| Tailzertifikat/G4 | Erstlauf technisch invalid; ein Retry neu autorisiert | Retry separat preregistriert und lokal mit 1063 Tests ready; Ziel erst nach sauberem Commit und exakter gruener CI |
+| LCG-Arnoldi-/Trajektorienadapter | bis zum Retry-Befund geschlossen | G5; vorhandene Kerne, aber noch keine v3-konforme LCG-/Recordabbildung |
 | Backendkomposition und Readiness | geschlossen | kein Horizontlauf vor separatem Review |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,

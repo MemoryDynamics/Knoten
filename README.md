@@ -37,7 +37,9 @@ Stand: 2026-09-13.
   reviewed. Der erste autorisierte Komponentenlauf brach nach gruener CI an
   einer zu strikten Boxserialisierungspruefung ab; es entstand kein Ergebnis
   und G4 bleibt ungemessen. Die outward-Rundungspruefung ist targetfrei
-  korrigiert, ein weiterer Zielzugriff braucht jedoch eine neue Freigabe.
+  korrigiert. Ein einzelner Retry ist neu freigegeben, separat
+  preregistriert und lokal ready; er darf erst nach sauberem Commit und
+  exakter gruener CI starten.
   LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen weiterhin;
   Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
   geschlossen.

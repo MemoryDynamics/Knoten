@@ -27,7 +27,7 @@ def _repo_root() -> Path:
 ROOT = _repo_root()
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_g4_component_protocol_2026-09-13.md"
+    "scalar_memory_rotating_wave_horizon_g4_component_retry_protocol_2026-09-13.md"
 )
 HORIZON_GATE_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_gate.py"
