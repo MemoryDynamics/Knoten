@@ -1,6 +1,6 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-14, nach G4-zu-G5-Meta-Review.
+Stand: 2026-09-15, nach targetfreiem G5-Vertragsreview.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite
@@ -168,6 +168,36 @@ Rahmen wird das Ergebnis lediglich um $-\theta$ zurueckgedreht. Dadurch wird
 die Kreisbahn zum Fixpunkt, ohne einen harmonischen Oszillator in das Modell
 einzubauen.
 
+Ausgeschrieben ist der Zustand vor dem Schritt
+
+$$
+Y_n=(h_n^{(0)},\ldots,h_n^{(H-1)})
+   =(x_n,x_{n-1},\ldots,x_{n-H+1}).
+$$
+
+Nach Berechnung von $x_{n+1}$ setzt der native FIFO
+
+$$
+h_{n+1}^{(0)}=x_{n+1},\qquad
+h_{n+1}^{(j)}=h_n^{(j-1)}\quad(1\leq j<H),
+$$
+
+also $Y_{n+1}=(x_{n+1},x_n,\ldots,x_{n-H+2})$. Im Skript entspricht das
+`result[0] = x_new` und `result[1:] = state[:-1]`. Der aelteste Punkt wird
+verworfen, alle anderen werden um eine Altersstufe weitergeschoben. Beim
+naechsten Lesen bekommt Altersstufe $j$ das Gewicht $\alpha M_0q^j$; die
+gesamte noch gespeicherte Masse ist daher
+
+$$
+\sum_{j=0}^{H-1}\alpha M_0q^j=M_0(1-q^H).
+$$
+
+Damit ist der FIFO tatsaechlich das endliche Gedaechtnis des Modells. Wichtig
+ist die Abgrenzung: Die mathematische Warteschlange ist kein raeumlicher
+Ring, ein zirkulaerer Array waere nur ihre effizientere Implementierung, und
+die anschliessende Drehung um $-\theta$ ist nur der Wechsel in mitrotierende
+Koordinaten. Keine dieser drei Operationen setzt eine Kreisloesung voraus.
+
 Nur Arnoldi verwendet die Linearisierung dieser vollen Map. Die drei
 Stoerungsarme werden mit der nichtlinearen Grundgleichung propagiert. Das
 Spektrum sagt daher voraus, was sehr kleine Stoerungen lokal tun sollten;
@@ -175,9 +205,11 @@ die Trajektorien versuchen genau diese Vorhersage zu falsifizieren.
 
 Vor beiden Rechnungen bindet ein neuer Preflight $q$, $H$, $M_0$, $\eta$,
 Kernelparameter, Gewichtssumme, Kreis-Fixpunkt, vollen Jacobian und
-Symmetrieresiduen in einen hashbaren Record. Er ist targetfrei getestet,
-aber noch nicht in einen eingefrorenen G5-Ergebnisvertrag eingebaut. Das
-isolierte G5-Komponentenprotokoll beschreibt diesen naechsten Schritt.
+Symmetrieresiduen in einen hashbaren Record. Der isolierte
+G5-Ergebnisvertrag, seine fail-closed Backendkomposition und der
+standardbibliotheksbasierte Record-/Publikationsaudit sind nun targetfrei
+implementiert. Vor einem Zielzugriff fehlen weiterhin der
+Execution-Context-Guard und das getrennte Readinessreview.
 
 ## 8. Wie Befunde gelesen werden muessen
 

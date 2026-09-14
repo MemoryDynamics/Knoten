@@ -45,9 +45,11 @@ Stand: 2026-09-14.
   Grundgleichungs-Preflight fuer Gewichtssumme, native Kreisidentitaet,
   Voll-Jacobian und Symmetrien ist nun ebenfalls targetfrei geprueft. G5
   simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
-  lokal linearisiert. Ergebnisvertrag, Backendkomposition, unabhaengiger
-  Audit und Readinessreview fehlen weiterhin. Vollstaendiger Horizontlauf
-  und weitere P5-Zielausfuehrungen bleiben geschlossen.
+  lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
+  Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
+  nun targetfrei. Execution-Context-Guard und Readinessreview fehlen
+  weiterhin. Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen
+  bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

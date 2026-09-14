@@ -1,6 +1,6 @@
 # Experimentkatalog
 
-Stand: 2026-09-14.
+Stand: 2026-09-15.
 
 Diese Seite ist ein kuratierter Wegweiser, kein Ergebnisjournal und keine
 zweite Roadmap. Die einzige Arbeitsreihenfolge steht unter
@@ -29,7 +29,7 @@ autorisiert.
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5-Adapter und Grundgleichungs-Preflight | targetfrei reviewed Pass | LCG-, Ritzvektor- und Trajektorienabbildung plus hashbarer Record fuer Gewichtssumme, Kreisidentitaet, Voll-Jacobian und Symmetrien; G5 ungemessen |
-| G5-Komponentenvertrag und Readiness | naechster targetfreier Block | Preflight persistent binden, Backend und Auditor komponieren; kein Ziel vor separatem Review |
+| G5-Komponentenvertrag und Readiness | Vertrag, Komposition und Audit targetfrei implementiert | fester Sieben-Ebenen-Record, fail-closed Stufen, manifest-last-Publikation und numerikfreier Audit; Execution-Context und Readiness noch offen |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das

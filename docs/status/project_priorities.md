@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-14.
+Stand: 2026-09-15.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -37,9 +37,11 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    getrennt, waehrend der Altblob exakt erhalten bleibt. Der gemeinsame
    Grundgleichungs-Preflight ist nun targetfrei implementiert und erzeugt
    einen hashbaren Record fuer Gewichtssumme, native Kreiskovarianz,
-   Fixpunkt, Voll-Jacobian und Symmetrien. Als naechstes folgen der
-   eingefrorene isolierte G5-Ergebnisvertrag, Backendkomposition,
-   unabhaengiger Auditor und Readinessreview. G5, vollstaendiger
+   Fixpunkt, Voll-Jacobian und Symmetrien. Der eingefrorene isolierte
+   G5-Ergebnisvertrag, seine fail-closed Backendkomposition sowie ein
+   standardbibliotheksbasierter Record-/Publikationsauditor bestehen nun
+   targetfrei. Als naechstes folgen Execution-Context-Guard und
+   Readinessreview. G5, vollstaendiger
    Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise
    geschlossen. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben.
@@ -73,9 +75,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
 Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
-reviewed. Der naechste erlaubte Codeblock ist ausschliesslich der isolierte
-G5-Ergebnisvertrag mit Backendkomposition, persistiertem Preflight,
-unabhaengigem Auditor und separatem Readinessreview. Ein neuer Zielzugriff
-ist nicht autorisiert. Der aktuelle
+reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
+unabhaengiger Auditor sind targetfrei implementiert. Der naechste erlaubte
+Block ist ausschliesslich Execution-Context-Hardening und das separate
+Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

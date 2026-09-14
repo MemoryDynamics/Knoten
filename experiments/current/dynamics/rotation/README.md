@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-09-14.
+Stand: 2026-09-15.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -89,8 +89,9 @@ Preflight prueft targetfrei die direkte Gewichtssumme, native
 Kreiskovarianz, den mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien.
 Das isolierte G5-Protokoll haelt fest, dass die nichtlinearen Arme die
 Voll-FIFO-Grundgleichung und keinen eingesetzten harmonischen Oszillator
-simulieren. Vor einem Zielzugriff fehlen Komponentenvertrag,
-Backendkomposition, unabhaengiger Audit und Readinessreview.
+simulieren. Komponentenvertrag, fail-closed Backendkomposition sowie
+Record-/Publikationsaudit sind targetfrei implementiert. Vor einem
+Zielzugriff fehlen Execution-Context-Guard und Readinessreview.
 
 ## Claim-Grenze
 

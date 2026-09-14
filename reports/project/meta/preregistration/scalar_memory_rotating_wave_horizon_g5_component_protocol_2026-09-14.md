@@ -4,6 +4,10 @@ Datum: 2026-09-14.
 
 Status: **outcome-blind eingefroren vor erstem G5-Zugriff**.
 
+Klarstellende Amendierung 2026-09-15, weiterhin vor jedem Zielzugriff: Der
+bereits registrierte FIFO-Shift wird indexgenau ausgeschrieben. Parameter,
+Schwellen, Stoerungen, Entscheidungen und Stopregeln bleiben unveraendert.
+
 ## 1. Frage und Claimgrenze
 
 Der Komponentenlauf fragt ausschliesslich, ob der deterministische
@@ -34,8 +38,39 @@ e^{-r^2/(2\sigma_{\rm rep}^2)}
 e^{-r^2/(2\sigma_{\rm att}^2)}.
 $$
 
-Danach wird die geordnete Geschichte als
-$(x_{n+1},x_n,\ldots,x_{n-H+2})$ weitergeschoben. Es gelten ohne Suche
+Der Zustandsvektor ist dabei nicht nur der neueste Punkt, sondern die
+altersgeordnete Geschichte
+
+$$
+Y_n=(h_n^{(0)},h_n^{(1)},\ldots,h_n^{(H-1)})
+   =(x_n,x_{n-1},\ldots,x_{n-H+1}).
+$$
+
+Nach dem Positionsschritt fuehrt das Skript exakt den FIFO-Shift
+
+$$
+h_{n+1}^{(0)}=x_{n+1},\qquad
+h_{n+1}^{(j)}=h_n^{(j-1)}\quad(1\leq j\leq H-1)
+$$
+
+aus, also
+
+$$
+Y_{n+1}=(x_{n+1},x_n,\ldots,x_{n-H+2}).
+$$
+
+Im Code sind dies `result[0] = x_new` und
+`result[1:] = state[:-1]`. Der bisher aelteste Eintrag
+$h_n^{(H-1)}=x_{n-H+1}$ faellt heraus; jeder andere Eintrag wird genau um
+eine Altersklasse verschoben. Beim naechsten Kraftlesen traegt
+$h_{n+1}^{(j)}$ deshalb das Gewicht $\alpha M_0q^j$. Das ist die endliche,
+ungekomprimierte Realisierung des exponentiell vergessenden Gedaechtnisses,
+nicht eine vorgegebene Kreisgeometrie. Ein zirkulaerer Puffer waere nur eine
+aequivalente Speicheroptimierung dieses Shifts.
+
+Im mitrotierenden Rahmen wird erst nach diesem nativen Shift jede
+gespeicherte Koordinate mit $R_{-\theta}$ gedreht. Diese Drehung ist nur ein
+Koordinatenwechsel, keine weitere Gedaechtnisdynamik. Es gelten ohne Suche
 
 $$
 \alpha=0.01,\quad q=0.99,\quad H=2400,\quad M_0=1,
