@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-13.
+Stand: 2026-09-14.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -31,7 +31,10 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    zu. Das ist lokale $F_\infty$-Existenz, noch kein vollstaendiger
    Horizonttransfer. LCG-Arnoldi- und Trajektorienadapter bestehen nun
    targetfrei; dabei wurden Instabilitaet auf dasselbe gematchte Ritzpaar
-   verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Als
+   verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Eine
+   erste Aenderung am historisch eingefrorenen Stabilitaetskern wurde durch
+   dessen CI-Blob-Sperren falsifiziert; der korrigierte G5-Kern ist nun
+   getrennt, waehrend der Altblob exakt erhalten bleibt. Als
    naechstes folgen Backendkomposition, persistierter Fixed-Point-/Jacobian-/
    Symmetriepreflight und unabhaengiges Readinessreview. G5, vollstaendiger
    Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise

@@ -1,6 +1,6 @@
 # Experimentkatalog
 
-Stand: 2026-09-13.
+Stand: 2026-09-14.
 
 Diese Seite ist ein kuratierter Wegweiser, kein Ergebnisjournal und keine
 zweite Roadmap. Die einzige Arbeitsreihenfolge steht unter

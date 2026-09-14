@@ -1,6 +1,6 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-13, nach G4-Runner-Review.
+Stand: 2026-09-14, nach G4-zu-G5-Meta-Review.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite

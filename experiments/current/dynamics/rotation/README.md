@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-09-13.
+Stand: 2026-09-14.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die

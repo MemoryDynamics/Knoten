@@ -93,10 +93,13 @@ Falsifikation fuehrte zur oben beschriebenen Modultrennung; die vier
 Provenienztests muessen deshalb nach dem Korrekturcommit erneut gegen `HEAD`
 laufen.
 
-Der exakte Repository-Lint, der strikte Dokumentationsbuild und die gesamte
-Repositorytestsuite sind erst nach diesem Korrekturcommit erneut als Evidenz
-zu werten. Die eng gefilterten G5-Tests werden zusaetzlich separat
-ausgefuehrt.
+Der Korrekturcommit `30deb75` besteht anschliessend die vier historischen
+Blob-Sperren. Der exakt in CI verwendete Lintumfang und der strikte
+Dokumentationsbuild bestehen ebenfalls. Die vollstaendige Suite besteht mit
+1084 Tests in 320,67 Sekunden. Zusaetzlich bestehen 5 isolierte Tests des
+neuen Arnoldi-Randes sowie 16 eng gefilterte G5-/Panel-/Auditor-
+Falsifikationstests. Diese Zahlen belegen den Codepfad, nicht das
+wissenschaftliche G5-Ziel.
 
 ## 6. Trust Base und offene Risiken
 
