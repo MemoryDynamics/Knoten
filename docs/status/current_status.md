@@ -131,8 +131,14 @@ unveraendert an ARPACK weitergegeben, Ritzvektoren werden v3-konform
 gespeichert, Fehler behalten Nullsuffixe, und Instabilitaet verlangt nun das
 tatsaechlich gematchte Paar beider Panels. Fortsetzungen bleiben bis zu
 vollstaendigen Residual-, Symmetrie-, Panel- und Hashchecks geschlossen.
-G5 wurde dabei nicht ausgefuehrt. Vor Readiness fehlen Backendkomposition und
-ein persistierter Fixed-Point-/Jacobian-/Symmetriepreflight.
+Der anschliessende Grundgleichungs-Preflight bindet ausserdem $q$, $H$,
+$M_0$, $\eta$, Depositionsgewicht, direkte Gewichtssumme, native
+Kreiskovarianz, mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien an
+einen kanonisch hashbaren Record. Er bestaetigt targetfrei die beabsichtigte
+Architektur: Nur Arnoldi ist linearisiert; die Stoerungsarme iterieren die
+nichtlineare Voll-FIFO-Grundgleichung. G5 wurde dabei nicht ausgefuehrt. Vor
+Readiness fehlen der eingefrorene Komponentenvertrag, Backendkomposition
+und unabhaengige Auditierung des persistierten Records.
 
 ## P5-D Code-Review und Remediation
 

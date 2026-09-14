@@ -153,7 +153,33 @@ erreicht den gemockten Solver unveraendert, und partielle oder fehlerhafte
 Eigenpaare koennen keinen Trajektorienlauf oeffnen. Das ist weiterhin nur ein
 Adaptertest. Ein echtes H=2400-Spektrum wurde noch nicht berechnet.
 
-## 7. Wie Befunde gelesen werden muessen
+## 7. Ist G5 noch die Grundgleichung?
+
+Ja. Fuer die geordnete Geschichte
+$Y_n=(x_n,x_{n-1},\ldots,x_{n-H+1})$ rechnet G5 direkt
+
+$$
+x_{n+1}=x_n-\eta\sum_{j=0}^{H-1}\alpha M_0q^j
+\phi(\|x_n-x_{n-j}\|)(x_n-x_{n-j})
+$$
+
+und schiebt danach den FIFO um einen Eintrag weiter. Im mitrotierenden
+Rahmen wird das Ergebnis lediglich um $-\theta$ zurueckgedreht. Dadurch wird
+die Kreisbahn zum Fixpunkt, ohne einen harmonischen Oszillator in das Modell
+einzubauen.
+
+Nur Arnoldi verwendet die Linearisierung dieser vollen Map. Die drei
+Stoerungsarme werden mit der nichtlinearen Grundgleichung propagiert. Das
+Spektrum sagt daher voraus, was sehr kleine Stoerungen lokal tun sollten;
+die Trajektorien versuchen genau diese Vorhersage zu falsifizieren.
+
+Vor beiden Rechnungen bindet ein neuer Preflight $q$, $H$, $M_0$, $\eta$,
+Kernelparameter, Gewichtssumme, Kreis-Fixpunkt, vollen Jacobian und
+Symmetrieresiduen in einen hashbaren Record. Er ist targetfrei getestet,
+aber noch nicht in einen eingefrorenen G5-Ergebnisvertrag eingebaut. Das
+isolierte G5-Komponentenprotokoll beschreibt diesen naechsten Schritt.
+
+## 8. Wie Befunde gelesen werden muessen
 
 Ein isolierter G4-Pass stuetzt nur: In der registrierten lokalen Box existiert
 unter den Tailbounds ein Root von $F_\infty$. Erst G1 bis G3 verbinden diesen

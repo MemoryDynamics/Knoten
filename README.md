@@ -41,10 +41,13 @@ Stand: 2026-09-14.
   isolierte G4-Komponentengate mit zwei strikten 120/160-dps-Panels; der
   unabhaengige Recordaudit stimmt zu. Damit ist ein lokaler
   $F_\infty$-Root belegt, nicht der vollstaendige Horizonttransfer.
-  LCG-Arnoldi- und Trajektorienadapter bestehen inzwischen targetfrei;
-  Backendkomposition, persistierter Stabilitaetspreflight und Readinessreview
-  fehlen weiterhin. Vollstaendiger Horizontlauf und weitere
-  P5-Zielausfuehrungen bleiben geschlossen.
+  LCG-Arnoldi- und Trajektorienadapter bestehen inzwischen targetfrei; der
+  Grundgleichungs-Preflight fuer Gewichtssumme, native Kreisidentitaet,
+  Voll-Jacobian und Symmetrien ist nun ebenfalls targetfrei geprueft. G5
+  simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
+  lokal linearisiert. Ergebnisvertrag, Backendkomposition, unabhaengiger
+  Audit und Readinessreview fehlen weiterhin. Vollstaendiger Horizontlauf
+  und weitere P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

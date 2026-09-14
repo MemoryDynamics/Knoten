@@ -33,17 +33,18 @@ from emergenz_knoten.rotating_wave_interval import (
 )
 from emergenz_knoten.rotating_wave_stability import (
     circular_history,
-    co_rotating_fifo_jacobian,
-    co_rotating_fifo_step,
     native_fifo_step,
     translation_reduced_norm,
 )
-from emergenz_knoten.rotating_wave_horizon_stability import run_lcg_eigen_panel
+from emergenz_knoten.rotating_wave_horizon_stability import (
+    build_full_fifo_preflight,
+    preflight_sha256,
+    run_lcg_eigen_panel,
+)
 from emergenz_knoten.rotating_wave_stability_gate import (
     ArnoldiPanel,
     RotatingWaveCandidate,
     StabilityThresholds,
-    analytic_symmetry_checks,
     run_continuation,
 )
 
@@ -546,35 +547,28 @@ def _g5_candidate(rounded_root: tuple[float, float]) -> RotatingWaveCandidate:
 def _g5_history_and_jacobian(
     candidate: RotatingWaveCandidate,
 ) -> tuple[np.ndarray, Any]:
-    history = circular_history(
-        radius=candidate.radius,
-        theta=candidate.theta,
-        horizon=candidate.horizon,
-    )
-    fixed_update = co_rotating_fifo_step(
-        history,
-        theta=candidate.theta,
-        **candidate.step_parameters(),
-    )
-    fixed_error = float(np.max(np.abs(fixed_update - history)))
-    if not math.isfinite(fixed_error) or fixed_error > 1e-14:
-        raise ArithmeticError("G5 rounded root fails the binary64 fixed-point guard")
-    jacobian = co_rotating_fifo_jacobian(
-        history,
-        theta=candidate.theta,
-        **candidate.step_parameters(),
-    )
-    if jacobian.shape != (4800, 4800) or jacobian.nnz != 19196:
-        raise ArithmeticError("G5 full-FIFO Jacobian shape or sparsity mismatch")
-    symmetry = analytic_symmetry_checks(
-        jacobian,
-        history,
+    prepared = build_full_fifo_preflight(
         candidate,
-        residual_maximum=1e-10,
+        fixed_point_maximum=1e-14,
+        symmetry_residual_maximum=1e-10,
     )
-    if symmetry["pass"] is not True:
-        raise ArithmeticError("G5 analytic symmetry guard failed")
-    return history, jacobian
+    return prepared.history, prepared.jacobian
+
+
+def g5_preflight_backend_record(
+    *, rounded_root: tuple[float, float]
+) -> dict[str, Any]:
+    """Return a hash-bound, persistable preflight of the direct G5 map."""
+
+    prepared = build_full_fifo_preflight(
+        _g5_candidate(rounded_root),
+        fixed_point_maximum=1e-14,
+        symmetry_residual_maximum=1e-10,
+    )
+    return {
+        "record": copy.deepcopy(prepared.record),
+        "record_sha256": preflight_sha256(prepared.record),
+    }
 
 
 def _v3_eigenpair(row: dict[str, Any]) -> dict[str, Any]:

@@ -10,6 +10,7 @@ from pathlib import Path
 import struct
 import subprocess
 import sys
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -1197,52 +1198,43 @@ def test_g5_state_builder_uses_registered_full_fifo_map_and_guards(
 
     calls = {}
 
-    def fake_history(**kwargs):
-        calls["history"] = kwargs
-        return history
+    def fake_preflight(candidate, **kwargs):
+        calls["candidate"] = candidate
+        calls["thresholds"] = kwargs
+        return SimpleNamespace(history=history, jacobian=Jacobian(), record={})
 
-    def fake_step(observed, **kwargs):
-        calls["step"] = kwargs
-        return observed.copy()
-
-    def fake_jacobian(observed, **kwargs):
-        calls["jacobian"] = kwargs
-        return Jacobian()
-
-    monkeypatch.setattr(gate, "circular_history", fake_history)
-    monkeypatch.setattr(gate, "co_rotating_fifo_step", fake_step)
-    monkeypatch.setattr(gate, "co_rotating_fifo_jacobian", fake_jacobian)
-    monkeypatch.setattr(
-        gate,
-        "analytic_symmetry_checks",
-        lambda *args, **kwargs: {"pass": True},
-    )
+    monkeypatch.setattr(gate, "build_full_fifo_preflight", fake_preflight)
     candidate = gate._g5_candidate((0.9465, 0.01577))
     observed_history, observed_jacobian = gate._g5_history_and_jacobian(candidate)
 
     assert observed_history is history
     assert isinstance(observed_jacobian, Jacobian)
-    assert calls["history"] == {
-        "radius": 0.9465,
-        "theta": 0.01577,
-        "horizon": 2400,
+    assert calls["candidate"] is candidate
+    assert calls["thresholds"] == {
+        "fixed_point_maximum": 1e-14,
+        "symmetry_residual_maximum": 1e-10,
     }
-    assert calls["step"]["alpha"] == 0.01
-    assert calls["step"]["eta"] == 0.15
-    assert calls["jacobian"] == calls["step"]
 
 
-def test_g5_state_builder_rejects_binary64_fixed_point_drift(gate, monkeypatch) -> None:
-    history = np.ones((2400, 2))
-    monkeypatch.setattr(gate, "circular_history", lambda **kwargs: history)
+def test_g5_preflight_adapter_binds_canonical_record_hash(gate, monkeypatch) -> None:
+    record = {"schema": "synthetic", "gates": {"pass": True}}
     monkeypatch.setattr(
         gate,
-        "co_rotating_fifo_step",
-        lambda observed, **kwargs: observed + 2e-14,
+        "build_full_fifo_preflight",
+        lambda candidate, **kwargs: SimpleNamespace(
+            history=np.zeros((2400, 2)),
+            jacobian=object(),
+            record=record,
+        ),
     )
 
-    with pytest.raises(ArithmeticError, match="fixed-point guard"):
-        gate._g5_history_and_jacobian(gate._g5_candidate((0.9465, 0.01577)))
+    envelope = gate.g5_preflight_backend_record(
+        rounded_root=(0.9465, 0.01577)
+    )
+
+    assert envelope["record"] == record
+    assert envelope["record"] is not record
+    assert envelope["record_sha256"] == gate.preflight_sha256(record)
 
 
 @pytest.mark.parametrize(

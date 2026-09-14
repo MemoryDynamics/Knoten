@@ -34,9 +34,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Eine
    erste Aenderung am historisch eingefrorenen Stabilitaetskern wurde durch
    dessen CI-Blob-Sperren falsifiziert; der korrigierte G5-Kern ist nun
-   getrennt, waehrend der Altblob exakt erhalten bleibt. Als
-   naechstes folgen Backendkomposition, persistierter Fixed-Point-/Jacobian-/
-   Symmetriepreflight und unabhaengiges Readinessreview. G5, vollstaendiger
+   getrennt, waehrend der Altblob exakt erhalten bleibt. Der gemeinsame
+   Grundgleichungs-Preflight ist nun targetfrei implementiert und erzeugt
+   einen hashbaren Record fuer Gewichtssumme, native Kreiskovarianz,
+   Fixpunkt, Voll-Jacobian und Symmetrien. Als naechstes folgen der
+   eingefrorene isolierte G5-Ergebnisvertrag, Backendkomposition,
+   unabhaengiger Auditor und Readinessreview. G5, vollstaendiger
    Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise
    geschlossen. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben.
@@ -69,9 +72,10 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 ## Aktueller Haltepunkt
 
 Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
-Pass abgeschlossen; die G5-Arnoldi-/Trajektorienadapter sind targetfrei
-reviewed. Der naechste erlaubte Codeblock ist ausschliesslich ihre
-targetfreie Backendkomposition mit persistiertem Preflight und separatem
-Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
+Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
+reviewed. Der naechste erlaubte Codeblock ist ausschliesslich der isolierte
+G5-Ergebnisvertrag mit Backendkomposition, persistiertem Preflight,
+unabhaengigem Auditor und separatem Readinessreview. Ein neuer Zielzugriff
+ist nicht autorisiert. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

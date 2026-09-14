@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from scipy.sparse import csr_matrix
 
 import emergenz_knoten.rotating_wave_horizon_stability as horizon_stability
 from emergenz_knoten.rotating_wave_stability import circular_history
@@ -47,6 +48,152 @@ def _candidate() -> RotatingWaveCandidate:
 
 def _panel() -> ArnoldiPanel:
     return ArnoldiPanel("synthetic", 2, 4, 1e-10, 20, "external")
+
+
+def _preflight_jacobian() -> csr_matrix:
+    dense = np.zeros((6, 6))
+    dense.ravel()[:20] = np.arange(1.0, 21.0)
+    return csr_matrix(dense)
+
+
+def _patch_preflight_dependencies(monkeypatch, *, fixed_drift: float = 0.0) -> None:
+    monkeypatch.setattr(
+        horizon_stability,
+        "native_fifo_step",
+        lambda history, **kwargs: history
+        @ horizon_stability.rotation_matrix(_candidate().theta).T,
+    )
+    monkeypatch.setattr(
+        horizon_stability,
+        "co_rotating_fifo_step",
+        lambda history, **kwargs: history + fixed_drift,
+    )
+    monkeypatch.setattr(
+        horizon_stability,
+        "co_rotating_fifo_jacobian",
+        lambda history, **kwargs: _preflight_jacobian(),
+    )
+    monkeypatch.setattr(
+        horizon_stability,
+        "analytic_symmetry_checks",
+        lambda *args, **kwargs: {
+            "pass": True,
+            "rotation_relative_residual": 1e-15,
+            "translation_x_relative_residual": 2e-15,
+            "translation_y_relative_residual": 3e-15,
+        },
+    )
+
+
+def test_full_fifo_preflight_binds_ground_equation_and_structure(monkeypatch) -> None:
+    _patch_preflight_dependencies(monkeypatch)
+
+    prepared = horizon_stability.build_full_fifo_preflight(
+        _candidate(),
+        fixed_point_maximum=1e-14,
+        symmetry_residual_maximum=1e-10,
+    )
+    record = prepared.record
+
+    assert record["schema"] == horizon_stability.PREFLIGHT_SCHEMA
+    assert record["equation"]["equation_id"] == horizon_stability.EQUATION_ID
+    assert record["equation"]["noise_amplitude"] == 0.0
+    assert record["equation"]["q"] == 0.9
+    assert record["equation"]["deposition_weight"] == 0.1
+    assert record["jacobian"]["shape"] == [6, 6]
+    assert record["jacobian"]["nnz"] == 20
+    assert record["gates"]["pass"] is True
+    assert len(record["orbit"]["history_sha256"]) == 64
+    assert len(record["jacobian"]["sha256"]) == 64
+    assert len(horizon_stability.preflight_sha256(record)) == 64
+
+
+def test_full_fifo_preflight_fails_closed_on_direct_map_drift(monkeypatch) -> None:
+    _patch_preflight_dependencies(monkeypatch, fixed_drift=2e-14)
+
+    with pytest.raises(ArithmeticError, match="fixed_point"):
+        horizon_stability.build_full_fifo_preflight(
+            _candidate(),
+            fixed_point_maximum=1e-14,
+            symmetry_residual_maximum=1e-10,
+        )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "failed_gate"),
+    (
+        ("native-circle", "native_circle_covariance"),
+        ("weight-sum", "weight_identity"),
+        ("jacobian", "jacobian_structure"),
+        ("symmetry", "symmetries"),
+    ),
+)
+def test_full_fifo_preflight_rejects_ground_equation_mutations(
+    monkeypatch, mutation: str, failed_gate: str
+) -> None:
+    _patch_preflight_dependencies(monkeypatch)
+    if mutation == "native-circle":
+        monkeypatch.setattr(
+            horizon_stability,
+            "native_fifo_step",
+            lambda history, **kwargs: history
+            @ horizon_stability.rotation_matrix(_candidate().theta).T
+            + 2e-14,
+        )
+    elif mutation == "weight-sum":
+        monkeypatch.setattr(
+            horizon_stability,
+            "finite_memory_weights",
+            lambda **kwargs: np.zeros(3),
+        )
+    elif mutation == "jacobian":
+        monkeypatch.setattr(
+            horizon_stability,
+            "co_rotating_fifo_jacobian",
+            lambda history, **kwargs: csr_matrix(np.eye(6)),
+        )
+    else:
+        monkeypatch.setattr(
+            horizon_stability,
+            "analytic_symmetry_checks",
+            lambda *args, **kwargs: {
+                "pass": False,
+                "rotation_relative_residual": 2e-10,
+                "translation_x_relative_residual": 2e-10,
+                "translation_y_relative_residual": 2e-10,
+            },
+        )
+
+    with pytest.raises(ArithmeticError, match=failed_gate):
+        horizon_stability.build_full_fifo_preflight(
+            _candidate(),
+            fixed_point_maximum=1e-14,
+            symmetry_residual_maximum=1e-10,
+        )
+
+
+@pytest.mark.parametrize(
+    ("fixed_threshold", "symmetry_threshold"),
+    ((-1.0, 1e-10), (1e-14, float("nan"))),
+)
+def test_full_fifo_preflight_rejects_invalid_thresholds(
+    fixed_threshold: float, symmetry_threshold: float
+) -> None:
+    with pytest.raises(ValueError, match="threshold"):
+        horizon_stability.build_full_fifo_preflight(
+            _candidate(),
+            fixed_point_maximum=fixed_threshold,
+            symmetry_residual_maximum=symmetry_threshold,
+        )
+
+
+def test_preflight_hash_is_independent_of_dictionary_insertion_order() -> None:
+    first = {"schema": "v1", "nested": {"b": 2, "a": 1}}
+    second = {"nested": {"a": 1, "b": 2}, "schema": "v1"}
+
+    assert horizon_stability.preflight_sha256(
+        first
+    ) == horizon_stability.preflight_sha256(second)
 
 
 def test_explicit_start_reaches_solver_unchanged_and_vectors_are_recorded(

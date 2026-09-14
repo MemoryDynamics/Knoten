@@ -84,8 +84,13 @@ ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
 zu. Das ist lokale $F_\infty$-Existenz, keine G1--G3-Branchverbindung und
 keine Stabilitaet. Die LCG-Arnoldi- und Trajektorienadapter fuer G5 bestehen
 inzwischen targetfrei; ein H=2400-Spektrum oder eine Stoerungsfortsetzung
-wurde damit noch nicht ausgefuehrt. Vor einem Zielzugriff fehlen
-Backendkomposition, persistierter Preflight und Readinessreview.
+wurde damit noch nicht ausgefuehrt. Der zusaetzliche Grundgleichungs-
+Preflight prueft targetfrei die direkte Gewichtssumme, native
+Kreiskovarianz, den mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien.
+Das isolierte G5-Protokoll haelt fest, dass die nichtlinearen Arme die
+Voll-FIFO-Grundgleichung und keinen eingesetzten harmonischen Oszillator
+simulieren. Vor einem Zielzugriff fehlen Komponentenvertrag,
+Backendkomposition, unabhaengiger Audit und Readinessreview.
 
 ## Claim-Grenze
 

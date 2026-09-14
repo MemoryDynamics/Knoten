@@ -28,8 +28,8 @@ autorisiert.
 | Homotopie-/Intervalladapter | implementiert und reviewed | affine Deformation $F_a+s(F_b-F_a)$, kein kontinuierliches physisches $H$ und keine ausgewertete Kante |
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
-| LCG-Arnoldi-/Trajektorienadapter | targetfrei reviewed Pass | v3-konforme LCG-, Ritzvektor-, Status- und Trajektorienabbildung; G5 ungemessen |
-| Backendkomposition und Readiness | naechster targetfreier Block | Fixed-Point-/Jacobian-/Symmetriepreflight persistent binden; kein Ziel vor separatem Review |
+| G5-Adapter und Grundgleichungs-Preflight | targetfrei reviewed Pass | LCG-, Ritzvektor- und Trajektorienabbildung plus hashbarer Record fuer Gewichtssumme, Kreisidentitaet, Voll-Jacobian und Symmetrien; G5 ungemessen |
+| G5-Komponentenvertrag und Readiness | naechster targetfreier Block | Preflight persistent binden, Backend und Auditor komponieren; kein Ziel vor separatem Review |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das
