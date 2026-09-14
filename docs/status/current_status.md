@@ -124,6 +124,16 @@ Standardbibliothek-Auditor rekonstruiert alle acht Checks und urteilt
 $F_\infty$-Komponente `pass`. Die G1--G3-Branchverbindung, G5, der
 vollstaendige Horizontlauf und P5-D bleiben nicht autorisiert oder belegt.
 
+Das anschliessende G4-zu-G5-Meta-Review bestaetigt diese enge Claimgrenze und
+findet keinen neuen kritischen G4-Defekt. Die daraus abgeleiteten
+LCG-Arnoldi- und Trajektorienadapter bestehen targetfrei: der LCG-Start wird
+unveraendert an ARPACK weitergegeben, Ritzvektoren werden v3-konform
+gespeichert, Fehler behalten Nullsuffixe, und Instabilitaet verlangt nun das
+tatsaechlich gematchte Paar beider Panels. Fortsetzungen bleiben bis zu
+vollstaendigen Residual-, Symmetrie-, Panel- und Hashchecks geschlossen.
+G5 wurde dabei nicht ausgefuehrt. Vor Readiness fehlen Backendkomposition und
+ein persistierter Fixed-Point-/Jacobian-/Symmetriepreflight.
+
 ## P5-D Code-Review und Remediation
 
 Das Review trennte eine algebraisch konsistente Center-/Port-Konstruktion von

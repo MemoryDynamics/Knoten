@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import copy
 import hashlib
 import importlib.util
 import json
@@ -355,6 +356,61 @@ def test_auditor_independently_reconstructs_v3_stability_inputs(auditor) -> None
     trajectory["stability"]["continuation_arms"][0]["growth_factor"] = 2.0
     with pytest.raises(ValueError, match="trajectory summary"):
         auditor._verify_reconstructed_values(trajectory)
+
+    negative_residual = auditor.contract_witness()
+    negative_residual["stability"]["arnoldi"]["primary"]["eigenpairs"][3][
+        "normalized_residual"
+    ] = -1e-12
+    with pytest.raises(ValueError, match="normalized_residual"):
+        auditor._verify_reconstructed_values(negative_residual)
+
+    overlap = auditor.contract_witness()
+    overlap["stability"]["arnoldi"]["primary"]["eigenpairs"][0][
+        "translation_overlap"
+    ] = 1.1
+    with pytest.raises(ValueError, match="symmetry overlap"):
+        auditor._verify_reconstructed_values(overlap)
+
+    zero_vector = auditor.contract_witness()
+    zero_vector["stability"]["arnoldi"]["primary"]["eigenpairs"][3][
+        "vector"
+    ] = [[0.0, 0.0]] * 4800
+    with pytest.raises(ValueError, match="zero or nonfinite"):
+        auditor._verify_reconstructed_values(zero_vector)
+
+
+def test_auditor_requires_the_same_matched_pair_for_instability(auditor) -> None:
+    payload = auditor.contract_witness()
+    primary_rows = payload["stability"]["arnoldi"]["primary"]["eigenpairs"]
+    convergence_rows = payload["stability"]["arnoldi"]["convergence"][
+        "eigenpairs"
+    ]
+    primary = copy.deepcopy(primary_rows[3])
+    primary.update({"eigenvalue": [1.0000011, 0.0], "modulus": 1.0000011})
+    primary_rows[:] = [primary, *primary_rows[:3], *primary_rows[4:]]
+    unrelated = copy.deepcopy(convergence_rows[3])
+    unrelated.update({"eigenvalue": [1.01, 0.0], "modulus": 1.01})
+    matched = copy.deepcopy(convergence_rows[4])
+    matched.update({"eigenvalue": [1.0000005, 0.0], "modulus": 1.0000005})
+    convergence_rows[:] = [
+        unrelated,
+        matched,
+        *convergence_rows[:3],
+        *convergence_rows[5:],
+    ]
+    distance = abs(complex(*primary["eigenvalue"]) - complex(*matched["eigenvalue"]))
+    payload["stability"]["arnoldi"]["panel_agreement"].update(
+        {
+            "leading_transverse_distance": distance,
+            "pass": True,
+            "symmetry_pass": True,
+        }
+    )
+
+    evidence = auditor._stability_evidence(payload)
+
+    assert evidence["panel_agreement"] is True
+    assert evidence["instability_supported"] is False
 
 
 def test_auditor_independently_rejects_unproved_exclusion(auditor) -> None:

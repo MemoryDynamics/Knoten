@@ -82,7 +82,10 @@ Die Pruefung ist targetfrei korrigiert. Der separat preregistrierte Retry
 besteht danach das isolierte G4-Komponentengate mit zwei strikten,
 ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
 zu. Das ist lokale $F_\infty$-Existenz, keine G1--G3-Branchverbindung und
-keine Stabilitaet. LCG-Arnoldi gehoert erst danach zu G5.
+keine Stabilitaet. Die LCG-Arnoldi- und Trajektorienadapter fuer G5 bestehen
+inzwischen targetfrei; ein H=2400-Spektrum oder eine Stoerungsfortsetzung
+wurde damit noch nicht ausgefuehrt. Vor einem Zielzugriff fehlen
+Backendkomposition, persistierter Preflight und Readinessreview.
 
 ## Claim-Grenze
 

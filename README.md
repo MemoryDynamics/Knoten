@@ -41,9 +41,10 @@ Stand: 2026-09-13.
   isolierte G4-Komponentengate mit zwei strikten 120/160-dps-Panels; der
   unabhaengige Recordaudit stimmt zu. Damit ist ein lokaler
   $F_\infty$-Root belegt, nicht der vollstaendige Horizonttransfer.
-  LCG-Arnoldi-, Trajektorien- und Kompositionsadapter fehlen weiterhin;
-  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
-  geschlossen.
+  LCG-Arnoldi- und Trajektorienadapter bestehen inzwischen targetfrei;
+  Backendkomposition, persistierter Stabilitaetspreflight und Readinessreview
+  fehlen weiterhin. Vollstaendiger Horizontlauf und weitere
+  P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

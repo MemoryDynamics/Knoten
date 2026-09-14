@@ -29,9 +29,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Der separat preregistrierte Retry besteht G4 mit zwei strikten,
    ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
    zu. Das ist lokale $F_\infty$-Existenz, noch kein vollstaendiger
-   Horizonttransfer. Als naechstes folgen targetfrei LCG-Arnoldi-/G5- und
-   Trajektorienadapter, danach Backendkomposition und unabhaengiges
-   Readinessreview. Vollstaendiger Horizontlauf und P5-D-Versuch 4 bleiben
+   Horizonttransfer. LCG-Arnoldi- und Trajektorienadapter bestehen nun
+   targetfrei; dabei wurden Instabilitaet auf dasselbe gematchte Ritzpaar
+   verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Als
+   naechstes folgen Backendkomposition, persistierter Fixed-Point-/Jacobian-/
+   Symmetriepreflight und unabhaengiges Readinessreview. G5, vollstaendiger
+   Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise
    geschlossen. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
@@ -63,7 +66,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 ## Aktueller Haltepunkt
 
 Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
-Pass abgeschlossen. Der naechste erlaubte Codeblock ist ausschliesslich die
-targetfreie LCG-Arnoldi-/G5-Integration; ein neuer Zielzugriff ist nicht
-autorisiert. Der aktuelle methodische Stand und die Evidenzgrenzen stehen im
+Pass abgeschlossen; die G5-Arnoldi-/Trajektorienadapter sind targetfrei
+reviewed. Der naechste erlaubte Codeblock ist ausschliesslich ihre
+targetfreie Backendkomposition mit persistiertem Preflight und separatem
+Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
+methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

@@ -148,6 +148,11 @@ sondern als reproduzierbaren technischen Bauplan. Derselbe Seed erzeugt auf
 Windows und Linux exakt dieselben Bytes. **LCG-Arnoldi ist daher nur der
 portable Stabilitaetsrechner fuer G5 und keine Zutat der G4-Gleichung.**
 
+Der zugehoerige Codepfad ist inzwischen targetfrei geprueft: Der LCG-Vektor
+erreicht den gemockten Solver unveraendert, und partielle oder fehlerhafte
+Eigenpaare koennen keinen Trajektorienlauf oeffnen. Das ist weiterhin nur ein
+Adaptertest. Ein echtes H=2400-Spektrum wurde noch nicht berechnet.
+
 ## 7. Wie Befunde gelesen werden muessen
 
 Ein isolierter G4-Pass stuetzt nur: In der registrierten lokalen Box existiert

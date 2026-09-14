@@ -496,6 +496,7 @@ def contract_witness() -> dict[str, Any]:
                     "classification": "transverse",
                 }
             )
+            pair["vector"][0] = [1.0, 0.0]
         for index, classification in enumerate(
             ("translation", "translation", "rotation")
         ):
@@ -1108,6 +1109,27 @@ def _verify_partial_panels_and_trajectories(payload: dict[str, Any]) -> None:
                 raise ValueError(
                     f"$.stability.arnoldi.{name}.eigenpairs[{index}].classification: mismatch"
                 )
+            if pair["normalized_residual"] < 0.0:
+                raise ValueError(
+                    f"$.stability.arnoldi.{name}.eigenpairs[{index}].normalized_residual: negative"
+                )
+            if not (
+                0.0 <= pair["translation_overlap"] <= 1.0 + 1e-12
+                and 0.0 <= pair["rotation_overlap"] <= 1.0 + 1e-12
+            ):
+                raise ValueError(
+                    f"$.stability.arnoldi.{name}.eigenpairs[{index}]: invalid symmetry overlap"
+                )
+            if pair["vector"] is not None:
+                norm_squared = math.fsum(
+                    component * component
+                    for entry in pair["vector"]
+                    for component in entry
+                )
+                if not math.isfinite(norm_squared) or norm_squared <= 0.0:
+                    raise ValueError(
+                        f"$.stability.arnoldi.{name}.eigenpairs[{index}].vector: zero or nonfinite"
+                    )
             if modulus > previous_modulus:
                 raise ValueError(f"$.stability.arnoldi.{name}.eigenpairs: unsorted")
             previous_modulus = modulus
@@ -1253,21 +1275,35 @@ def _stability_evidence(payload: dict[str, Any]) -> dict[str, bool]:
         and transverse
         and all(pair["modulus"] < 1.0 - 1e-4 for pair in transverse)
     )
-    leading = [
-        max(
-            (
-                pair["modulus"]
-                for pair in panel["eigenpairs"]
-                if pair is not None and pair["classification"] == "transverse"
-            ),
-            default=-math.inf,
-        )
-        for panel in panels
+    primary_transverse = [
+        pair
+        for pair in panels[0]["eigenpairs"]
+        if pair is not None and pair["classification"] == "transverse"
     ]
+    convergence_transverse = [
+        pair
+        for pair in panels[1]["eigenpairs"]
+        if pair is not None and pair["classification"] == "transverse"
+    ]
+    primary_leading = primary_transverse[0] if primary_transverse else None
+    matched_convergence = (
+        min(
+            convergence_transverse,
+            key=lambda pair: abs(
+                complex(*pair["eigenvalue"])
+                - complex(*primary_leading["eigenvalue"])
+            ),
+        )
+        if primary_leading is not None and convergence_transverse
+        else None
+    )
     unstable_spectrum = bool(
         panels_complete
         and agreement
-        and all(value > 1.0 + 1e-6 for value in leading)
+        and primary_leading is not None
+        and matched_convergence is not None
+        and primary_leading["modulus"] > 1.0 + 1e-6
+        and matched_convergence["modulus"] > 1.0 + 1e-6
     )
     growth = any(
         arm is not None and arm["growth_factor"] >= 100.0 for arm in arms

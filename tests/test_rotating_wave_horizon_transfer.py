@@ -8,6 +8,8 @@ import json
 import math
 from pathlib import Path
 import struct
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -1167,6 +1169,254 @@ def test_tail_adapter_rejects_unregistered_inputs(
         gate.tail_certificate_backend_record(precision_dps=precision, root=root)
 
 
+def _synthetic_g5_rows(count: int) -> list[dict[str, object]]:
+    vector = [[0.0, 0.0]] * 4800
+    return [
+        {
+            "classification": "transverse",
+            "imag": 0.0,
+            "modulus": 0.9 - 1e-4 * index,
+            "normalized_residual": 1e-12,
+            "real": 0.9 - 1e-4 * index,
+            "rotation_overlap": 0.0,
+            "translation_overlap": 0.0,
+            "vector": vector,
+        }
+        for index in range(count)
+    ]
+
+
+def test_g5_state_builder_uses_registered_full_fifo_map_and_guards(
+    gate, monkeypatch
+) -> None:
+    history = np.ones((2400, 2))
+
+    class Jacobian:
+        shape = (4800, 4800)
+        nnz = 19196
+
+    calls = {}
+
+    def fake_history(**kwargs):
+        calls["history"] = kwargs
+        return history
+
+    def fake_step(observed, **kwargs):
+        calls["step"] = kwargs
+        return observed.copy()
+
+    def fake_jacobian(observed, **kwargs):
+        calls["jacobian"] = kwargs
+        return Jacobian()
+
+    monkeypatch.setattr(gate, "circular_history", fake_history)
+    monkeypatch.setattr(gate, "co_rotating_fifo_step", fake_step)
+    monkeypatch.setattr(gate, "co_rotating_fifo_jacobian", fake_jacobian)
+    monkeypatch.setattr(
+        gate,
+        "analytic_symmetry_checks",
+        lambda *args, **kwargs: {"pass": True},
+    )
+    candidate = gate._g5_candidate((0.9465, 0.01577))
+    observed_history, observed_jacobian = gate._g5_history_and_jacobian(candidate)
+
+    assert observed_history is history
+    assert isinstance(observed_jacobian, Jacobian)
+    assert calls["history"] == {
+        "radius": 0.9465,
+        "theta": 0.01577,
+        "horizon": 2400,
+    }
+    assert calls["step"]["alpha"] == 0.01
+    assert calls["step"]["eta"] == 0.15
+    assert calls["jacobian"] == calls["step"]
+
+
+def test_g5_state_builder_rejects_binary64_fixed_point_drift(gate, monkeypatch) -> None:
+    history = np.ones((2400, 2))
+    monkeypatch.setattr(gate, "circular_history", lambda **kwargs: history)
+    monkeypatch.setattr(
+        gate,
+        "co_rotating_fifo_step",
+        lambda observed, **kwargs: observed + 2e-14,
+    )
+
+    with pytest.raises(ArithmeticError, match="fixed-point guard"):
+        gate._g5_history_and_jacobian(gate._g5_candidate((0.9465, 0.01577)))
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_status"),
+    (
+        ("complete", "complete"),
+        ("partial", "wrong-cardinality"),
+        ("missing-vector", "missing-vectors"),
+        ("nonfinite", "nonfinite"),
+        ("residual", "residual-fail"),
+        ("arpack", "arpack-no-convergence"),
+    ),
+)
+def test_g5_arnoldi_adapter_maps_lcg_started_backend_statuses(
+    gate, monkeypatch, mutation: str, expected_status: str
+) -> None:
+    captured = {}
+    monkeypatch.setattr(
+        gate,
+        "_g5_history_and_jacobian",
+        lambda candidate: (np.zeros((2400, 2)), object()),
+    )
+
+    def fake_run(*args, **kwargs):
+        captured["start"] = kwargs["explicit_start"].copy()
+        captured["include_vectors"] = kwargs["include_vectors"]
+        rows = _synthetic_g5_rows(24)
+        converged = True
+        if mutation == "partial":
+            rows = rows[:7]
+        elif mutation == "missing-vector":
+            rows[0]["vector"] = None
+        elif mutation == "nonfinite":
+            rows[0]["real"] = float("nan")
+        elif mutation == "residual":
+            rows[0]["normalized_residual"] = 1e-7
+        elif mutation == "arpack":
+            rows = rows[:7]
+            converged = False
+        return {"arpack_converged": converged, "eigenpairs": rows}
+
+    monkeypatch.setattr(gate, "run_eigen_panel", fake_run)
+    start = gate._arnoldi_start_vectors()["primary"]
+    record = gate.arnoldi_backend_record(
+        name="primary",
+        rounded_root=(0.9465, 0.01577),
+        start=start,
+    )
+
+    np.testing.assert_array_equal(captured["start"], np.asarray(start))
+    assert captured["include_vectors"] is True
+    assert record["status"] == expected_status
+    assert len(record["eigenpairs"]) == 24
+    if mutation == "nonfinite":
+        assert record["eigenpairs"] == [None] * 24
+    assert record["start_sha256"] == gate._arnoldi_start_hashes()["primary"]
+
+
+def test_g5_arnoldi_adapter_rejects_mutated_lcg_start(gate) -> None:
+    start = gate._arnoldi_start_vectors()["primary"]
+    start[0] *= -1.0
+
+    with pytest.raises(ValueError, match="registered LCG"):
+        gate.arnoldi_backend_record(
+            name="primary",
+            rounded_root=(0.9465, 0.01577),
+            start=start,
+        )
+
+
+def test_g5_continuation_adapters_preserve_samples_and_null_suffixes(
+    gate, monkeypatch
+) -> None:
+    amplitude = 9.465e-8
+    radial = [0.0] * 4800
+    radial[0] = amplitude
+    monkeypatch.setattr(
+        gate,
+        "_registered_perturbation_vectors",
+        lambda **kwargs: (amplitude, {"radial": radial}),
+    )
+    monkeypatch.setattr(
+        gate,
+        "circular_history",
+        lambda **kwargs: np.zeros((2400, 2)),
+    )
+    monkeypatch.setattr(gate, "translation_reduced_norm", lambda *args, **kwargs: 1.0)
+
+    def fake_continuation(name, perturbation, *args, **kwargs):
+        assert name == "radial"
+        np.testing.assert_array_equal(perturbation.ravel(), np.asarray(radial))
+        return {
+            "final_distance": 0.05,
+            "final_ratio": 0.5,
+            "final_step": 17,
+            "growth_factor": 1.0,
+            "initial_distance": 0.1,
+            "maximum_distance": 0.1,
+            "stopped": True,
+            "trace": [
+                {"distance": 0.1, "step": 0},
+                {"distance": 0.08, "step": 10},
+                {"distance": 0.05, "step": 17},
+            ],
+        }
+
+    monkeypatch.setattr(gate, "run_continuation", fake_continuation)
+    record = gate.continuation_backend_record(
+        name="radial",
+        rounded_root=(0.9465, 0.01577),
+        perturbation=radial,
+    )
+
+    assert record["completed"] is False
+    assert record["stopped"] is True
+    assert [row["step"] for row in record["samples"][:3]] == [0, 10, 17]
+    assert record["samples"][3:] == [None] * 498
+    assert record["perturbation_sha256"] == gate._vector_sha256(radial)
+
+
+def test_g5_continuation_adapter_rejects_mutated_perturbation(
+    gate, monkeypatch
+) -> None:
+    expected = [0.0] * 4800
+    expected[0] = 1e-7
+    monkeypatch.setattr(
+        gate,
+        "_registered_perturbation_vectors",
+        lambda **kwargs: (1e-7, {"radial": expected}),
+    )
+    mutated = expected.copy()
+    mutated[7] = 1e-15
+
+    with pytest.raises(ValueError, match="not registered"):
+        gate.continuation_backend_record(
+            name="radial",
+            rounded_root=(0.9465, 0.01577),
+            perturbation=mutated,
+        )
+
+
+def test_g5_exact_adapter_uses_zero_perturbation_and_fixed_sample_slots(
+    gate, monkeypatch
+) -> None:
+    monkeypatch.setattr(
+        gate,
+        "circular_history",
+        lambda **kwargs: np.ones((2400, 2)),
+    )
+    monkeypatch.setattr(gate, "translation_reduced_norm", lambda *args, **kwargs: 2.0)
+
+    def fake_continuation(name, perturbation, *args, **kwargs):
+        assert name == "exact"
+        assert np.count_nonzero(perturbation) == 0
+        return {
+            "final_step": 5000,
+            "maximum_distance": 2e-12,
+            "stopped": False,
+            "trace": [
+                {"distance": float(index) * 1e-15, "step": 10 * index}
+                for index in range(501)
+            ],
+        }
+
+    monkeypatch.setattr(gate, "run_continuation", fake_continuation)
+    record = gate.exact_backend_record(rounded_root=(0.9465, 0.01577))
+
+    assert record["completed"] is True
+    assert record["stopped"] is False
+    assert record["maximum_distance"] == 2e-12
+    assert len(record["samples"]) == 501
+    assert record["samples"][-1]["step"] == 5000
+
+
 def test_exclusion_adapter_reconstructs_krawczyk_summary(gate, monkeypatch) -> None:
     monkeypatch.setattr(
         gate,
@@ -1222,6 +1472,7 @@ class _SyntheticRunnerBackend:
         complete_exclusion: bool = False,
         incomplete_exclusion: bool = False,
         partial_arnoldi: bool = False,
+        residual_fail_arnoldi: bool = False,
         stopped_arm: str | None = None,
     ) -> None:
         self.donor = gate.contract_witness()
@@ -1231,6 +1482,7 @@ class _SyntheticRunnerBackend:
         self.complete_exclusion = complete_exclusion
         self.incomplete_exclusion = incomplete_exclusion
         self.partial_arnoldi = partial_arnoldi
+        self.residual_fail_arnoldi = residual_fail_arnoldi
         self.stopped_arm = stopped_arm
         self.calls: list[tuple[object, ...]] = []
         self._roots = {
@@ -1370,6 +1622,8 @@ class _SyntheticRunnerBackend:
         if self.partial_arnoldi and name == "primary":
             panel["eigenpairs"][7:] = [None] * 17
             panel["status"] = "arpack-no-convergence"
+        if self.residual_fail_arnoldi and name == "primary":
+            panel["eigenpairs"][3]["normalized_residual"] = 1e-7
         return panel
 
     def continuation_arm(
@@ -1469,6 +1723,17 @@ def test_runner_red_partial_arnoldi_never_invents_trajectory_evidence(gate) -> N
     assert payload["stability"]["exact_arm"] is None
     assert payload["classification"]["gates"]["G5"] == "inconclusive"
     assert payload["classification"]["p5_governance_review_open"] is False
+
+
+def test_runner_residual_failed_arnoldi_never_opens_trajectories(gate) -> None:
+    backend = _SyntheticRunnerBackend(gate, residual_fail_arnoldi=True)
+    payload = _orchestrate(gate, backend)
+    gate.validate_result(payload)
+
+    assert not any(call[0] in {"arm", "exact-arm"} for call in backend.calls)
+    assert payload["stability"]["continuation_arms"] == [None, None, None]
+    assert payload["stability"]["exact_arm"] is None
+    assert payload["classification"]["gates"]["G5"] == "inconclusive"
 
 
 def test_runner_homotopy_stop_keeps_prefix_and_invokes_exclusion(gate) -> None:
@@ -1731,6 +1996,43 @@ def test_v3_arnoldi_starts_have_portable_registered_hashes(gate) -> None:
     }
 
 
+def test_g5_registered_vector_hashes_replay_in_a_fresh_process(gate) -> None:
+    _, vectors = gate._registered_perturbation_vectors(
+        radius=0.9465,
+        theta=0.01577,
+        horizon=2400,
+    )
+    expected = {
+        "lcg": gate._arnoldi_start_hashes(),
+        "full": gate._vector_sha256(vectors["full-history-transverse"]),
+    }
+    script = f"""
+import importlib.util
+from pathlib import Path
+p = Path({str(RUNNER_PATH)!r})
+s = importlib.util.spec_from_file_location('fresh_horizon_gate', p)
+m = importlib.util.module_from_spec(s)
+s.loader.exec_module(m)
+_, vectors = m._registered_perturbation_vectors(
+    radius=0.9465, theta=0.01577, horizon=2400
+)
+print(m._arnoldi_start_hashes()['primary'])
+print(m._arnoldi_start_hashes()['convergence'])
+print(m._vector_sha256(vectors['full-history-transverse']))
+"""
+    completed = subprocess.run(
+        [sys.executable, "-c", script],
+        check=True,
+        capture_output=True,
+        cwd=ROOT,
+        text=True,
+    )
+    primary, convergence, full = completed.stdout.splitlines()
+
+    assert {"primary": primary, "convergence": convergence} == expected["lcg"]
+    assert full == expected["full"]
+
+
 def test_v3_contract_rejects_spectral_summary_lies(gate) -> None:
     classification = gate.contract_witness()
     pair = classification["stability"]["arnoldi"]["primary"]["eigenpairs"][3]
@@ -1749,6 +2051,61 @@ def test_v3_contract_rejects_spectral_summary_lies(gate) -> None:
     ] = 1e-6
     with pytest.raises(ValueError, match="leading_transverse_distance"):
         gate.validate_result(agreement)
+
+    negative_residual = gate.contract_witness()
+    negative_residual["stability"]["arnoldi"]["primary"]["eigenpairs"][3][
+        "normalized_residual"
+    ] = -1e-12
+    with pytest.raises(ValueError, match="normalized_residual"):
+        gate.validate_result(negative_residual)
+
+    overlap = gate.contract_witness()
+    overlap["stability"]["arnoldi"]["primary"]["eigenpairs"][0][
+        "translation_overlap"
+    ] = 1.1
+    with pytest.raises(ValueError, match="symmetry overlap"):
+        gate.validate_result(overlap)
+
+    zero_vector = gate.contract_witness()
+    zero_vector["stability"]["arnoldi"]["primary"]["eigenpairs"][3][
+        "vector"
+    ] = [[0.0, 0.0]] * 4800
+    with pytest.raises(ValueError, match="zero or nonfinite"):
+        gate.validate_result(zero_vector)
+
+
+def test_g5_instability_requires_the_matched_convergence_pair(gate) -> None:
+    payload = gate.contract_witness()
+    primary_rows = payload["stability"]["arnoldi"]["primary"]["eigenpairs"]
+    convergence_rows = payload["stability"]["arnoldi"]["convergence"][
+        "eigenpairs"
+    ]
+    primary = copy.deepcopy(primary_rows[3])
+    primary.update({"eigenvalue": [1.0000011, 0.0], "modulus": 1.0000011})
+    primary_rows[:] = [primary, *primary_rows[:3], *primary_rows[4:]]
+    unrelated = copy.deepcopy(convergence_rows[3])
+    unrelated.update({"eigenvalue": [1.01, 0.0], "modulus": 1.01})
+    matched = copy.deepcopy(convergence_rows[4])
+    matched.update({"eigenvalue": [1.0000005, 0.0], "modulus": 1.0000005})
+    convergence_rows[:] = [
+        unrelated,
+        matched,
+        *convergence_rows[:3],
+        *convergence_rows[5:],
+    ]
+    distance = abs(complex(*primary["eigenvalue"]) - complex(*matched["eigenvalue"]))
+    payload["stability"]["arnoldi"]["panel_agreement"].update(
+        {
+            "leading_transverse_distance": distance,
+            "pass": True,
+            "symmetry_pass": True,
+        }
+    )
+
+    evidence = gate._stability_evidence(payload)
+
+    assert evidence["panel_agreement"] is True
+    assert evidence["instability_supported"] is False
 
 
 def test_v3_contract_rejects_trajectory_and_control_summary_lies(gate) -> None:

@@ -31,7 +31,21 @@ from emergenz_knoten.rotating_wave_interval import (
     interval_balance_and_jacobian_box,
     refine_rotating_wave_root,
 )
-from emergenz_knoten.rotating_wave_stability import native_fifo_step
+from emergenz_knoten.rotating_wave_stability import (
+    circular_history,
+    co_rotating_fifo_jacobian,
+    co_rotating_fifo_step,
+    native_fifo_step,
+    translation_reduced_norm,
+)
+from emergenz_knoten.rotating_wave_stability_gate import (
+    ArnoldiPanel,
+    RotatingWaveCandidate,
+    StabilityThresholds,
+    analytic_symmetry_checks,
+    run_continuation,
+    run_eigen_panel,
+)
 
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -62,6 +76,27 @@ PARAMETERS = {
 }
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+_G5_PANEL_CONFIGURATIONS = {
+    "primary": (24, 96, 1e-10, 20000),
+    "convergence": (36, 144, 1e-12, 40000),
+}
+_G5_THRESHOLDS = StabilityThresholds(
+    eigen_residual=1e-8,
+    symmetry_overlap=0.99,
+    symmetry_eigenvalue=1e-7,
+    leading_complex_agreement=1e-5,
+    leading_modulus_agreement=1e-6,
+    unstable_modulus=1.0 + 1e-6,
+    stable_modulus=1.0 - 1e-4,
+    perturbation_scale_fraction=1e-7,
+    continuation_steps=5000,
+    sample_every=10,
+    stopping_radius_fraction=0.25,
+    unstable_growth_minimum=100.0,
+    stable_transient_growth_maximum=10.0,
+    stable_final_ratio_maximum=0.1,
+    exact_control_distance_maximum=1e-10,
+)
 
 
 def _finite_interval_parameters(horizon: int) -> IntervalRotatingWaveParameters:
@@ -479,6 +514,291 @@ def tail_certificate_backend_record(
         "certificate": certificate,
         "precision_dps": precision_dps,
         "root": list(root),
+    }
+
+
+def _g5_candidate(rounded_root: tuple[float, float]) -> RotatingWaveCandidate:
+    if (
+        type(rounded_root) is not tuple
+        or len(rounded_root) != 2
+        or any(type(value) is not float for value in rounded_root)
+        or not all(math.isfinite(value) for value in rounded_root)
+    ):
+        raise TypeError("G5 rounded root must contain two finite binary64 values")
+    radius, theta = rounded_root
+    if not 0.8 <= radius <= 1.1 or not 0.01 <= theta <= 0.022:
+        raise ValueError("G5 rounded root lies outside the registered domain")
+    return RotatingWaveCandidate(
+        candidate_id="fixed-alpha-horizon-h2400-v1",
+        radius=radius,
+        theta=theta,
+        alpha=PARAMETERS["alpha"],
+        horizon=2400,
+        memory_mass=PARAMETERS["memory_mass"],
+        eta=PARAMETERS["eta"],
+        sigma_rep=PARAMETERS["sigma_rep"],
+        sigma_att=PARAMETERS["sigma_att"],
+        amplitude_rep=PARAMETERS["amplitude_rep"],
+        amplitude_att=PARAMETERS["amplitude_att"],
+    )
+
+
+def _g5_history_and_jacobian(
+    candidate: RotatingWaveCandidate,
+) -> tuple[np.ndarray, Any]:
+    history = circular_history(
+        radius=candidate.radius,
+        theta=candidate.theta,
+        horizon=candidate.horizon,
+    )
+    fixed_update = co_rotating_fifo_step(
+        history,
+        theta=candidate.theta,
+        **candidate.step_parameters(),
+    )
+    fixed_error = float(np.max(np.abs(fixed_update - history)))
+    if not math.isfinite(fixed_error) or fixed_error > 1e-14:
+        raise ArithmeticError("G5 rounded root fails the binary64 fixed-point guard")
+    jacobian = co_rotating_fifo_jacobian(
+        history,
+        theta=candidate.theta,
+        **candidate.step_parameters(),
+    )
+    if jacobian.shape != (4800, 4800) or jacobian.nnz != 19196:
+        raise ArithmeticError("G5 full-FIFO Jacobian shape or sparsity mismatch")
+    symmetry = analytic_symmetry_checks(
+        jacobian,
+        history,
+        candidate,
+        residual_maximum=1e-10,
+    )
+    if symmetry["pass"] is not True:
+        raise ArithmeticError("G5 analytic symmetry guard failed")
+    return history, jacobian
+
+
+def _v3_eigenpair(row: dict[str, Any]) -> dict[str, Any]:
+    vector = row.get("vector")
+    eigenvalue = [float(row["real"]), float(row["imag"])]
+    return {
+        "classification": row["classification"],
+        "eigenvalue": eigenvalue,
+        "modulus": abs(complex(*eigenvalue)),
+        "normalized_residual": row["normalized_residual"],
+        "rotation_overlap": row["rotation_overlap"],
+        "translation_overlap": row["translation_overlap"],
+        "vector": vector,
+    }
+
+
+def _serializable_eigenpair(row: dict[str, Any]) -> bool:
+    scalars = (
+        row["real"],
+        row["imag"],
+        row["modulus"],
+        row["normalized_residual"],
+        row["rotation_overlap"],
+        row["translation_overlap"],
+    )
+    vector = row.get("vector")
+    return bool(
+        all(math.isfinite(value) for value in scalars)
+        and (
+            vector is None
+            or (
+                len(vector) == 4800
+                and all(
+                    len(value) == 2
+                    and all(math.isfinite(component) for component in value)
+                    for value in vector
+                )
+            )
+        )
+    )
+
+
+def arnoldi_backend_record(
+    *,
+    name: str,
+    rounded_root: tuple[float, float],
+    start: Sequence[float],
+) -> dict[str, Any]:
+    """Map one registered LCG-started full-FIFO Arnoldi panel to v3."""
+
+    if name not in _G5_PANEL_CONFIGURATIONS:
+        raise ValueError("unknown registered G5 Arnoldi panel")
+    start_values = [float(value) for value in start]
+    expected_start = _arnoldi_start_vectors()[name]
+    if (
+        len(start_values) != 4800
+        or not all(math.isfinite(value) for value in start_values)
+        or _vector_sha256(start_values) != _vector_sha256(expected_start)
+    ):
+        raise ValueError("G5 Arnoldi start does not match the registered LCG vector")
+    candidate = _g5_candidate(rounded_root)
+    history, jacobian = _g5_history_and_jacobian(candidate)
+    requested, ncv, tolerance, max_iterations = _G5_PANEL_CONFIGURATIONS[name]
+    panel = ArnoldiPanel(
+        name=name,
+        requested=requested,
+        ncv=ncv,
+        tolerance=tolerance,
+        max_iterations=max_iterations,
+        start_id=f"external-lcg-{name}",
+    )
+    raw = run_eigen_panel(
+        jacobian,
+        history,
+        candidate,
+        panel,
+        _G5_THRESHOLDS,
+        explicit_start=np.asarray(start_values, dtype=np.float64),
+        include_vectors=True,
+    )
+    rows = raw["eigenpairs"]
+    if len(rows) > requested:
+        raise ValueError("G5 Arnoldi backend returned too many eigenpairs")
+    serializable_rows = []
+    for row in rows:
+        if not _serializable_eigenpair(row):
+            break
+        serializable_rows.append(row)
+    nonfinite = len(serializable_rows) != len(rows)
+    missing_vectors = any(row.get("vector") is None for row in serializable_rows)
+    residuals = not nonfinite and all(
+        row["normalized_residual"] <= _G5_THRESHOLDS.eigen_residual
+        for row in rows
+    )
+    if nonfinite:
+        status = "nonfinite"
+    elif raw["arpack_converged"] is not True:
+        status = "arpack-no-convergence"
+    elif len(rows) != requested:
+        status = "wrong-cardinality"
+    elif missing_vectors:
+        status = "missing-vectors"
+    elif not residuals:
+        status = "residual-fail"
+    else:
+        status = "complete"
+    serialized_pairs = [_v3_eigenpair(row) for row in serializable_rows]
+    serialized_pairs.sort(key=lambda pair: pair["modulus"], reverse=True)
+    return {
+        "eigenpairs": serialized_pairs
+        + [None] * (requested - len(serialized_pairs)),
+        "expected_count": requested,
+        "requested_count": requested,
+        "ncv": ncv,
+        "tolerance": tolerance,
+        "max_iterations": max_iterations,
+        "start_sha256": _vector_sha256(start_values),
+        "status": status,
+    }
+
+
+def _v3_trajectory_samples(trace: Sequence[dict[str, Any]]) -> list[dict[str, Any] | None]:
+    if len(trace) > 501:
+        raise ValueError("G5 continuation returned too many samples")
+    samples = []
+    for row in trace:
+        if type(row["step"]) is not int or not math.isfinite(row["distance"]):
+            raise ValueError("G5 continuation returned an invalid sample")
+        samples.append({"distance": float(row["distance"]), "step": row["step"]})
+    return samples + [None] * (501 - len(samples))
+
+
+def continuation_backend_record(
+    *,
+    name: str,
+    rounded_root: tuple[float, float],
+    perturbation: Sequence[float],
+) -> dict[str, Any]:
+    """Map one registered nonlinear G5 perturbation continuation to v3."""
+
+    if name not in ("radial", "tangential", "full-history-transverse"):
+        raise ValueError("unknown registered G5 continuation arm")
+    candidate = _g5_candidate(rounded_root)
+    expected_amplitude, expected_vectors = _registered_perturbation_vectors(
+        radius=candidate.radius,
+        theta=candidate.theta,
+        horizon=candidate.horizon,
+    )
+    values = [float(value) for value in perturbation]
+    expected = expected_vectors[name]
+    if (
+        len(values) != 4800
+        or not all(math.isfinite(value) for value in values)
+        or _vector_sha256(values) != _vector_sha256(expected)
+    ):
+        raise ValueError("G5 continuation perturbation is not registered")
+    history = circular_history(
+        radius=candidate.radius,
+        theta=candidate.theta,
+        horizon=candidate.horizon,
+    )
+    reference_norm = translation_reduced_norm(
+        history,
+        alpha=candidate.alpha,
+        memory_mass=candidate.memory_mass,
+    )
+    raw = run_continuation(
+        name,
+        np.asarray(values, dtype=np.float64).reshape((2400, 2)),
+        history,
+        reference_norm,
+        candidate,
+        _G5_THRESHOLDS,
+    )
+    completed = bool(
+        raw["stopped"] is False
+        and raw["final_step"] == _G5_THRESHOLDS.continuation_steps
+    )
+    return {
+        "amplitude": expected_amplitude,
+        "completed": completed,
+        "final_distance": raw["final_distance"],
+        "final_ratio": raw["final_ratio"],
+        "growth_factor": raw["growth_factor"],
+        "initial_distance": raw["initial_distance"],
+        "name": name,
+        "perturbation": values,
+        "perturbation_sha256": _vector_sha256(values),
+        "samples": _v3_trajectory_samples(raw["trace"]),
+        "stopped": raw["stopped"],
+    }
+
+
+def exact_backend_record(*, rounded_root: tuple[float, float]) -> dict[str, Any]:
+    """Map the unperturbed full-FIFO continuation to the v3 exact arm."""
+
+    candidate = _g5_candidate(rounded_root)
+    history = circular_history(
+        radius=candidate.radius,
+        theta=candidate.theta,
+        horizon=candidate.horizon,
+    )
+    reference_norm = translation_reduced_norm(
+        history,
+        alpha=candidate.alpha,
+        memory_mass=candidate.memory_mass,
+    )
+    raw = run_continuation(
+        "exact",
+        np.zeros_like(history),
+        history,
+        reference_norm,
+        candidate,
+        _G5_THRESHOLDS,
+    )
+    completed = bool(
+        raw["stopped"] is False
+        and raw["final_step"] == _G5_THRESHOLDS.continuation_steps
+    )
+    return {
+        "completed": completed,
+        "maximum_distance": raw["maximum_distance"],
+        "samples": _v3_trajectory_samples(raw["trace"]),
+        "stopped": raw["stopped"],
     }
 
 
@@ -902,6 +1222,7 @@ def contract_witness() -> dict[str, Any]:
                     "classification": "transverse",
                 }
             )
+            pair["vector"][0] = [1.0, 0.0]
         for index, classification in enumerate(
             ("translation", "translation", "rotation")
         ):
@@ -1847,6 +2168,21 @@ def _verify_arnoldi_panel(
         )
         if pair["classification"] != expected_classification:
             raise ValueError(f"{path}.eigenpairs[{index}].classification: mismatch")
+        if pair["normalized_residual"] < 0.0:
+            raise ValueError(f"{path}.eigenpairs[{index}].normalized_residual: negative")
+        if not (
+            0.0 <= pair["translation_overlap"] <= 1.0 + 1e-12
+            and 0.0 <= pair["rotation_overlap"] <= 1.0 + 1e-12
+        ):
+            raise ValueError(f"{path}.eigenpairs[{index}]: invalid symmetry overlap")
+        if pair["vector"] is not None:
+            norm_squared = math.fsum(
+                component * component
+                for entry in pair["vector"]
+                for component in entry
+            )
+            if not math.isfinite(norm_squared) or norm_squared <= 0.0:
+                raise ValueError(f"{path}.eigenpairs[{index}].vector: zero or nonfinite")
         if modulus > previous_modulus:
             raise ValueError(f"{path}.eigenpairs: not sorted by modulus")
         previous_modulus = modulus
@@ -2066,13 +2402,25 @@ def _stability_evidence(payload: dict[str, Any]) -> dict[str, bool]:
     convergence_transverse = [
         pair for pair in panels[1]["eigenpairs"] if pair is not None and pair["classification"] == "transverse"
     ]
+    primary_leading = primary_transverse[0] if primary_transverse else None
+    matched_convergence = (
+        min(
+            convergence_transverse,
+            key=lambda pair: abs(
+                complex(*pair["eigenvalue"])
+                - complex(*primary_leading["eigenvalue"])
+            ),
+        )
+        if primary_leading is not None and convergence_transverse
+        else None
+    )
     unstable_spectrum = bool(
         panels_complete
         and agreement
-        and primary_transverse
-        and convergence_transverse
-        and max(pair["modulus"] for pair in primary_transverse) > 1.0 + 1e-6
-        and max(pair["modulus"] for pair in convergence_transverse) > 1.0 + 1e-6
+        and primary_leading is not None
+        and matched_convergence is not None
+        and primary_leading["modulus"] > 1.0 + 1e-6
+        and matched_convergence["modulus"] > 1.0 + 1e-6
     )
     growth = any(
         arm is not None and arm["growth_factor"] >= 100.0 for arm in arms
@@ -2492,6 +2840,38 @@ def _arnoldi_agreement(
     }
 
 
+def _arnoldi_ready_for_continuation(
+    primary: dict[str, Any],
+    convergence: dict[str, Any],
+    agreement: dict[str, Any],
+) -> bool:
+    panels = ((primary, 24), (convergence, 36))
+    try:
+        for panel, expected_count in panels:
+            _verify_arnoldi_panel(
+                panel,
+                path="orchestration.stability.arnoldi",
+                expected_count=expected_count,
+            )
+    except (TypeError, ValueError):
+        return False
+    return bool(
+        all(panel["status"] == "complete" for panel, _ in panels)
+        and primary["start_sha256"] == _arnoldi_start_hashes()["primary"]
+        and convergence["start_sha256"]
+        == _arnoldi_start_hashes()["convergence"]
+        and agreement["pass"]
+        and agreement["symmetry_pass"]
+        and all(
+            pair is not None
+            and pair["vector"] is not None
+            and pair["normalized_residual"] <= 1e-8
+            for panel, _ in panels
+            for pair in panel["eigenpairs"]
+        )
+    )
+
+
 def _gate_state(condition: bool, *, complete: bool) -> str:
     if not complete:
         return "inconclusive"
@@ -2707,7 +3087,11 @@ def orchestrate_horizon_transfer(
         stability["arnoldi"]["panel_agreement"] = _arnoldi_agreement(
             panels["primary"], panels["convergence"], theta=rounded_root[1]
         )
-        if all(panel["status"] == "complete" for panel in panels.values()):
+        if _arnoldi_ready_for_continuation(
+            panels["primary"],
+            panels["convergence"],
+            stability["arnoldi"]["panel_agreement"],
+        ):
             _, perturbations = _registered_perturbation_vectors(
                 radius=rounded_root[0], theta=rounded_root[1], horizon=2400
             )
