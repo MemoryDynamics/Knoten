@@ -1268,7 +1268,6 @@ def test_g5_arnoldi_adapter_maps_lcg_started_backend_statuses(
 
     def fake_run(*args, **kwargs):
         captured["start"] = kwargs["explicit_start"].copy()
-        captured["include_vectors"] = kwargs["include_vectors"]
         rows = _synthetic_g5_rows(24)
         converged = True
         if mutation == "partial":
@@ -1284,7 +1283,7 @@ def test_g5_arnoldi_adapter_maps_lcg_started_backend_statuses(
             converged = False
         return {"arpack_converged": converged, "eigenpairs": rows}
 
-    monkeypatch.setattr(gate, "run_eigen_panel", fake_run)
+    monkeypatch.setattr(gate, "run_lcg_eigen_panel", fake_run)
     start = gate._arnoldi_start_vectors()["primary"]
     record = gate.arnoldi_backend_record(
         name="primary",
@@ -1293,7 +1292,6 @@ def test_g5_arnoldi_adapter_maps_lcg_started_backend_statuses(
     )
 
     np.testing.assert_array_equal(captured["start"], np.asarray(start))
-    assert captured["include_vectors"] is True
     assert record["status"] == expected_status
     assert len(record["eigenpairs"]) == 24
     if mutation == "nonfinite":

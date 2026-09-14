@@ -1,21 +1,15 @@
 import numpy as np
-import pytest
-
-import emergenz_knoten.rotating_wave_stability_gate as stability_gate
 
 from emergenz_knoten.rotating_wave_stability import (
     circular_history,
     symmetry_tangent_vectors,
 )
 from emergenz_knoten.rotating_wave_stability_gate import (
-    ArnoldiPanel,
-    RotatingWaveCandidate,
     StabilityThresholds,
     deterministic_arnoldi_start,
     evaluate_decision,
     mirrored_diagnostics,
     registered_perturbations,
-    run_eigen_panel,
 )
 
 
@@ -101,94 +95,6 @@ def test_two_frozen_arnoldi_starts_are_distinct_and_normalized():
     np.testing.assert_allclose(np.linalg.norm(second), 1.0, atol=2.0e-15)
     assert not np.array_equal(first, second)
     assert abs(float(first @ second)) < 0.1
-
-
-def test_explicit_arnoldi_start_reaches_solver_unchanged_and_vectors_are_opt_in(
-    monkeypatch,
-):
-    history = circular_history(radius=0.9, theta=0.03, horizon=3)
-    candidate = RotatingWaveCandidate(
-        candidate_id="synthetic",
-        radius=0.9,
-        theta=0.03,
-        alpha=0.1,
-        horizon=3,
-        memory_mass=1.0,
-        eta=0.15,
-        sigma_rep=1.0,
-        sigma_att=3.0,
-        amplitude_rep=1.0,
-        amplitude_att=3.5,
-    )
-    panel = ArnoldiPanel(
-        name="synthetic",
-        requested=2,
-        ncv=4,
-        tolerance=1e-10,
-        max_iterations=20,
-        start_id="unused",
-    )
-    explicit = np.asarray([1.0, -2.0, 3.0, -4.0, 5.0, -6.0])
-    captured = {}
-
-    def fake_eigs(jacobian, **kwargs):
-        captured["start"] = kwargs["v0"].copy()
-        values = np.asarray([1.0 + 0.0j, 0.9 + 0.1j])
-        vectors = np.eye(6, 2, dtype=complex)
-        return values, vectors
-
-    monkeypatch.setattr(stability_gate, "eigs", fake_eigs)
-    result = run_eigen_panel(
-        np.eye(6),
-        history,
-        candidate,
-        panel,
-        THRESHOLDS,
-        explicit_start=explicit,
-        include_vectors=True,
-    )
-
-    np.testing.assert_array_equal(captured["start"], explicit)
-    assert len(result["eigenpairs"]) == 2
-    assert len(result["eigenpairs"][0]["vector"]) == 6
-    assert result["eigenpairs"][0]["vector"][0] == [1.0, 0.0]
-
-
-@pytest.mark.parametrize(
-    "start",
-    (
-        np.ones(5),
-        np.asarray([1.0, 1.0, 1.0, 1.0, 1.0, np.nan]),
-        np.zeros(6),
-        np.ones(6, dtype=complex),
-    ),
-)
-def test_explicit_arnoldi_start_rejects_invalid_vectors(start):
-    history = circular_history(radius=0.9, theta=0.03, horizon=3)
-    candidate = RotatingWaveCandidate(
-        candidate_id="synthetic",
-        radius=0.9,
-        theta=0.03,
-        alpha=0.1,
-        horizon=3,
-        memory_mass=1.0,
-        eta=0.15,
-        sigma_rep=1.0,
-        sigma_att=3.0,
-        amplitude_rep=1.0,
-        amplitude_att=3.5,
-    )
-    panel = ArnoldiPanel("synthetic", 2, 4, 1e-10, 20, "unused")
-
-    with pytest.raises(ValueError, match="explicit Arnoldi start"):
-        run_eigen_panel(
-            np.eye(6),
-            history,
-            candidate,
-            panel,
-            THRESHOLDS,
-            explicit_start=start,
-        )
 
 
 def test_registered_perturbations_are_mirrored_and_transverse():

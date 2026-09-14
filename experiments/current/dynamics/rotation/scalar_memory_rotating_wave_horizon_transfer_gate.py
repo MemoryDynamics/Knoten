@@ -38,13 +38,13 @@ from emergenz_knoten.rotating_wave_stability import (
     native_fifo_step,
     translation_reduced_norm,
 )
+from emergenz_knoten.rotating_wave_horizon_stability import run_lcg_eigen_panel
 from emergenz_knoten.rotating_wave_stability_gate import (
     ArnoldiPanel,
     RotatingWaveCandidate,
     StabilityThresholds,
     analytic_symmetry_checks,
     run_continuation,
-    run_eigen_panel,
 )
 
 
@@ -646,14 +646,13 @@ def arnoldi_backend_record(
         max_iterations=max_iterations,
         start_id=f"external-lcg-{name}",
     )
-    raw = run_eigen_panel(
+    raw = run_lcg_eigen_panel(
         jacobian,
         history,
         candidate,
         panel,
         _G5_THRESHOLDS,
         explicit_start=np.asarray(start_values, dtype=np.float64),
-        include_vectors=True,
     )
     rows = raw["eigenpairs"]
     if len(rows) > requested:

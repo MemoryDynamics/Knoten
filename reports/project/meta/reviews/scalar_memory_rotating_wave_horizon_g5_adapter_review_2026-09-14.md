@@ -15,16 +15,22 @@ registrierte H=2400-Root noch ein reales Arnoldi-Panel oder eine reale
 Stoerungsfortsetzung wurde ausgewertet. Das Resultat ist Code- und
 Vertragsevidenz, kein Stabilitaetsbefund.
 
-## 2. Gemeinsamer Arnoldi-Kern
+## 2. Abgegrenzter Arnoldi-Kern
 
-`src/emergenz_knoten/rotating_wave_stability_gate.py` akzeptiert nun optional
-einen externen reellen Startvektor. Dimension, Endlichkeit und Nichtnullheit
-werden vor ARPACK geprueft; der Vektor wird nicht normalisiert oder
-umgeformt. Damit erreicht die registrierte 32-bit-LCG-Folge `v0` direkt.
+Die abgeschlossenen P3-, P4-, P4R- und P4RS-Protokolle frieren
+`src/emergenz_knoten/rotating_wave_stability_gate.py` ueber Blob-Hashes ein.
+Der erste Implementierungsversuch veraenderte diese Datei und war deshalb
+architektonisch unzulaessig. Der historische Kern wurde exakt auf den
+eingefrorenen Git-Blob `630beb9952abefea823d91388dcbb2de8f1a2927`
+zurueckgesetzt.
 
-Die Speicherung komplexer Ritzvektoren ist opt-in. Anchor- und L3-Runner
-behalten ohne diese Option ihr historisches Ausgabeformat. Der neue G5-
-Adapter erhaelt dagegen zu jedem Ritzpaar alle 4800 komplexen Komponenten.
+Der neue, horizontspezifische Kern liegt stattdessen in
+`src/emergenz_knoten/rotating_wave_horizon_stability.py`. Er verwendet die
+gemeinsamen Datentypen und Symmetrieklassifikation, veraendert aber keine
+historisch gebundene Quelldatei. Ein externer reeller Startvektor wird auf
+Dimension, Endlichkeit und Nichtnullheit geprueft und unveraendert als `v0`
+an ARPACK uebergeben. Zu jedem Ritzpaar werden alle 4800 komplexen
+Vektorkomponenten gespeichert.
 
 ## 3. H=2400-Adapter
 
@@ -68,17 +74,29 @@ synthetische Positivzeuge enthielt zuvor nur formale Nullvektoren; er wurde
 zu nichttrivialen Einheitszeugen korrigiert. Diese Korrektur betrifft keinen
 wissenschaftlichen Ergebnisrecord.
 
-Die Tests decken LCG-Weitergabe bis zum gemockten Solver, opt-in
+Die Tests decken LCG-Weitergabe bis zum gemockten Solver,
 Vektorserialisierung, ungueltige Startvektoren, alle sechs Panelstatus,
 mutierte Stoerungen, Trajektorien-Nullsuffixe, den exakten Arm, den
 Fixed-Point-Guard und das gematchte Instabilitaetspaar ab. Ein frischer
 Pythonprozess reproduziert beide LCG-Hashes und den Vollhistorien-
 Stoerungshash auf derselben Plattform.
 
-Der exakte Repository-Lint, der strikte Dokumentationsbuild und alle 1084
-Repositorytests bestehen. Davon wurden 23 eng auf G5, explizite Starts,
-Panelmatching und Stabilitaetsrekonstruktion gefilterte Tests nach der
-Adapterhaertung separat ausgefuehrt.
+### CI-Falsifikation des ersten Entwurfs
+
+Der Commit `bfd17ae` bestand lokal 1084 Tests, fiel in CI-Lauf
+`34812975681` aber an vier historischen Blob-Sperren durch. Die Ursache war
+nicht ein numerisches Zielresultat: Die Sperrtests lesen absichtlich den
+committeten `HEAD`-Blob, waehrend der lokale Vorabtest noch den vorherigen
+Commit mit nichtcommitteten Aenderungen verglich. Damit war das lokale Gruen
+fuer genau diese Provenienzeigenschaft nicht aussagekraeftig. Die CI-
+Falsifikation fuehrte zur oben beschriebenen Modultrennung; die vier
+Provenienztests muessen deshalb nach dem Korrekturcommit erneut gegen `HEAD`
+laufen.
+
+Der exakte Repository-Lint, der strikte Dokumentationsbuild und die gesamte
+Repositorytestsuite sind erst nach diesem Korrekturcommit erneut als Evidenz
+zu werten. Die eng gefilterten G5-Tests werden zusaetzlich separat
+ausgefuehrt.
 
 ## 6. Trust Base und offene Risiken
 

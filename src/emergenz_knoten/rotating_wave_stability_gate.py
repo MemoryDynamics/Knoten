@@ -161,7 +161,6 @@ def classify_eigenpairs(
     history: np.ndarray,
     *,
     symmetry_overlap_minimum: float,
-    include_vectors: bool = False,
 ) -> list[dict[str, Any]]:
     """Classify returned Ritz pairs against the analytic symmetry subspace."""
 
@@ -192,16 +191,6 @@ def classify_eigenpairs(
                 "translation_overlap": translation_overlap,
                 "rotation_overlap": rotation_overlap,
                 "classification": classification,
-                **(
-                    {
-                        "vector": [
-                            [float(value.real), float(value.imag)]
-                            for value in vector
-                        ]
-                    }
-                    if include_vectors
-                    else {}
-                ),
             }
         )
     rows.sort(key=lambda row: row["modulus"], reverse=True)
@@ -240,25 +229,8 @@ def run_eigen_panel(
     candidate: RotatingWaveCandidate,
     panel: ArnoldiPanel,
     thresholds: StabilityThresholds,
-    *,
-    explicit_start: np.ndarray | None = None,
-    include_vectors: bool = False,
 ) -> dict[str, Any]:
     """Run one frozen largest-modulus ARPACK panel."""
-
-    if explicit_start is None:
-        start = deterministic_arnoldi_start(jacobian.shape[0], panel.start_id)
-    else:
-        raw_start = np.asarray(explicit_start)
-        if np.iscomplexobj(raw_start):
-            raise ValueError("explicit Arnoldi start must be real")
-        start = np.asarray(raw_start, dtype=np.float64)
-        if start.shape != (jacobian.shape[0],):
-            raise ValueError("explicit Arnoldi start has the wrong dimension")
-        if not np.isfinite(start).all():
-            raise ValueError("explicit Arnoldi start must be finite")
-        if not np.any(start):
-            raise ValueError("explicit Arnoldi start must be nonzero")
 
     exception = None
     try:
@@ -269,7 +241,7 @@ def run_eigen_panel(
             ncv=panel.ncv,
             tol=panel.tolerance,
             maxiter=panel.max_iterations,
-            v0=start,
+            v0=deterministic_arnoldi_start(jacobian.shape[0], panel.start_id),
         )
         arpack_converged = True
     except ArpackNoConvergence as error:
@@ -291,7 +263,6 @@ def run_eigen_panel(
         vectors,
         history,
         symmetry_overlap_minimum=thresholds.symmetry_overlap,
-        include_vectors=include_vectors,
     )
     residual_pass = bool(
         len(rows) == panel.requested
