@@ -90,8 +90,9 @@ Kreiskovarianz, den mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien.
 Das isolierte G5-Protokoll haelt fest, dass die nichtlinearen Arme die
 Voll-FIFO-Grundgleichung und keinen eingesetzten harmonischen Oszillator
 simulieren. Komponentenvertrag, fail-closed Backendkomposition sowie
-Record-/Publikationsaudit sind targetfrei implementiert. Vor einem
-Zielzugriff fehlen Execution-Context-Guard und Readinessreview.
+Record-/Publikationsaudit und one-shot Execution-Context-Guard sind
+targetfrei implementiert. Die getrackte Governance ist geschlossen; vor
+einem Zielzugriff fehlt das Readinessreview.
 
 ## Claim-Grenze
 

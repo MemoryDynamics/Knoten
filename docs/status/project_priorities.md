@@ -40,8 +40,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Fixpunkt, Voll-Jacobian und Symmetrien. Der eingefrorene isolierte
    G5-Ergebnisvertrag, seine fail-closed Backendkomposition sowie ein
    standardbibliotheksbasierter Record-/Publikationsauditor bestehen nun
-   targetfrei. Als naechstes folgen Execution-Context-Guard und
-   Readinessreview. G5, vollstaendiger
+   targetfrei. Der one-shot Execution-Context-Guard ist implementiert und
+   maschinell geschlossen. Als naechstes folgt das Readinessreview. G5,
+   vollstaendiger
    Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise
    geschlossen. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben.
@@ -76,8 +77,8 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
 Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
 reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
-unabhaengiger Auditor sind targetfrei implementiert. Der naechste erlaubte
-Block ist ausschliesslich Execution-Context-Hardening und das separate
-Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
+unabhaengiger Auditor sowie der geschlossene Execution-Context-Guard sind
+targetfrei implementiert. Der naechste erlaubte Block ist ausschliesslich
+das separate Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

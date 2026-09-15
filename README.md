@@ -47,9 +47,10 @@ Stand: 2026-09-14.
   simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
   lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
   Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
-  nun targetfrei. Execution-Context-Guard und Readinessreview fehlen
-  weiterhin. Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen
-  bleiben geschlossen.
+  nun targetfrei. Der Execution-Context-Guard ist implementiert und durch
+  maschinelle Governance geschlossen; das Readinessreview fehlt weiterhin.
+  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
+  geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

@@ -15,6 +15,9 @@ from typing import Any
 
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+_UUID4 = re.compile(
+    r"[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\Z"
+)
 
 
 def _fail(path: str, expected: str, value: Any) -> None:
@@ -36,6 +39,8 @@ def _primitive(value: Any, specification: str, *, path: str) -> None:
         valid = type(value) is str and _SHA1.fullmatch(value) is not None
     elif specification == "sha256":
         valid = type(value) is str and _SHA256.fullmatch(value) is not None
+    elif specification == "uuid4":
+        valid = type(value) is str and _UUID4.fullmatch(value) is not None
     elif specification == "decimal":
         try:
             valid = type(value) is str and Decimal(value).is_finite()

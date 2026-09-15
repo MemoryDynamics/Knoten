@@ -31,6 +31,16 @@
     "trajectory_name": ["radial", "tangential", "full-history-transverse"]
   },
   "objects": {
+    "authorization": {
+      "attempt": "integer",
+      "attempt_receipt_path": "string",
+      "attempt_receipt_sha256": "sha256",
+      "authorization_id": "uuid4",
+      "ci_run_id": "integer",
+      "governance_sha256": "sha256",
+      "implementation_revision": "sha1",
+      "upstream_revision": "sha1"
+    },
     "arnoldi": {
       "convergence": "object:arnoldi_panel_36",
       "panel_agreement": "object:panel_agreement",
@@ -109,6 +119,7 @@
     "exact_arm": {"completed": "boolean", "maximum_distance": "number", "samples": "array:trajectory_samples", "stopped": "boolean"},
     "finite_root": {"inner_certificate": "object:certificate", "newton": "object:newton_panel", "outer_certificate": "object:certificate"},
     "identity": {
+      "authorization": "object:authorization",
       "created_utc": "string",
       "dependencies": "object:dependencies",
       "equation_id": "const:equation_id",

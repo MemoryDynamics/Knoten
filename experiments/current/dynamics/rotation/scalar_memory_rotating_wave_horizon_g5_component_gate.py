@@ -37,6 +37,10 @@ PROTOCOL = ROOT / (
 RESULT_NAME = "scalar_memory_rotating_wave_horizon_g5_component_2026-09-14.json"
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
+ATTEMPT_RECEIPT_PATH = (
+    "reports/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_1_receipt.json"
+)
 START = ("0.946517504804225", "0.015770381717135")
 PARAMETERS = {
     "alpha": 0.01,
@@ -502,6 +506,14 @@ def validate_payload(payload: dict[str, Any]) -> None:
         raise ValueError("$.identity: registered input mismatch")
     if identity["equation_id"] != EQUATION_ID:
         raise ValueError("$.identity.equation_id: mismatch")
+    authorization = identity["authorization"]
+    if (
+        authorization["attempt"] != 1
+        or authorization["attempt_receipt_path"] != ATTEMPT_RECEIPT_PATH
+        or authorization["ci_run_id"] <= 0
+        or authorization["upstream_revision"] != identity["execution_commit"]
+    ):
+        raise ValueError("$.identity.authorization: execution binding mismatch")
     created = datetime.fromisoformat(identity["created_utc"])
     if created.tzinfo is None or created.utcoffset() != UTC.utcoffset(created):
         raise ValueError("$.identity.created_utc: UTC timestamp required")
@@ -622,6 +634,10 @@ def validate_payload(payload: dict[str, Any]) -> None:
                 raise ValueError(f"$.arnoldi.{name}: modulus mismatch")
             if pair["normalized_residual"] < 0.0:
                 raise ValueError(f"$.arnoldi.{name}: negative residual")
+            if pair["vector"] is not None and not any(
+                real != 0.0 or imag != 0.0 for real, imag in pair["vector"]
+            ):
+                raise ValueError(f"$.arnoldi.{name}: zero Ritz vector")
             if not (0.0 <= pair["translation_overlap"] <= 1.0 and 0.0 <= pair["rotation_overlap"] <= 1.0):
                 raise ValueError(f"$.arnoldi.{name}: overlap outside [0,1]")
             expected_classification = (

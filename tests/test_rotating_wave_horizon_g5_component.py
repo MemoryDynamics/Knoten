@@ -161,6 +161,16 @@ def _preflight(runner, *, passed: bool):
 
 def _identity(runner):
     return {
+        "authorization": {
+            "attempt": 1,
+            "attempt_receipt_path": runner.ATTEMPT_RECEIPT_PATH,
+            "attempt_receipt_sha256": "c" * 64,
+            "authorization_id": "00000000-0000-4000-8000-000000000000",
+            "ci_run_id": 1,
+            "governance_sha256": "d" * 64,
+            "implementation_revision": "e" * 40,
+            "upstream_revision": "a" * 40,
+        },
         "created_utc": "2026-09-14T00:00:00+00:00",
         "dependencies": {"mpmath": "1.3.0", "numpy": "2.4.2", "scipy": "1.17.1"},
         "equation_id": runner.EQUATION_ID,
@@ -342,6 +352,25 @@ def test_independent_auditor_has_no_numerical_or_runner_imports():
     assert "scalar_memory_rotating_wave_horizon_g5_component_gate" not in imported
 
 
+def _write_receipt(payload, directory: Path) -> Path:
+    authorization = payload["identity"]["authorization"]
+    receipt = {
+        "attempt": authorization["attempt"],
+        "authorization_id": authorization["authorization_id"],
+        "ci_run_id": authorization["ci_run_id"],
+        "created_utc": "2026-09-15T00:00:00+00:00",
+        "governance_sha256": authorization["governance_sha256"],
+        "implementation_revision": authorization["implementation_revision"],
+        "revision": payload["identity"]["execution_commit"],
+        "schema": "scalar-memory-rotating-wave-horizon-g5-attempt-receipt-v1",
+    }
+    content = (json.dumps(receipt, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    path = directory / Path(payload["identity"]["authorization"]["attempt_receipt_path"]).name
+    path.write_bytes(content)
+    authorization["attempt_receipt_sha256"] = hashlib.sha256(content).hexdigest()
+    return path
+
+
 def test_publication_is_manifest_last_nonoverwriting_and_independently_audited(
     runner, auditor, tmp_path
 ):
@@ -350,12 +379,14 @@ def test_publication_is_manifest_last_nonoverwriting_and_independently_audited(
         identity=_identity(runner),
         publication=_publication(runner),
     )
+    receipt = _write_receipt(payload, tmp_path)
 
     paths = runner.publish_payload(payload, directory=tmp_path)
     audit = auditor.audit_publication(
         result_path=paths["result"],
         report_path=paths["report"],
         manifest_path=paths["manifest"],
+        receipt_path=receipt,
     )
 
     assert audit["publication_pass"] is True
@@ -370,6 +401,7 @@ def test_publication_audit_rejects_mutated_companion_report(runner, auditor, tmp
         identity=_identity(runner),
         publication=_publication(runner),
     )
+    receipt = _write_receipt(payload, tmp_path)
     paths = runner.publish_payload(payload, directory=tmp_path)
     paths["report"].write_text("mutated\n", encoding="utf-8")
 
@@ -378,6 +410,26 @@ def test_publication_audit_rejects_mutated_companion_report(runner, auditor, tmp
             result_path=paths["result"],
             report_path=paths["report"],
             manifest_path=paths["manifest"],
+            receipt_path=receipt,
+        )
+
+
+def test_publication_audit_rejects_mutated_attempt_receipt(runner, auditor, tmp_path):
+    payload = runner.assemble_component(
+        backend=_FiniteFailureBackend(),
+        identity=_identity(runner),
+        publication=_publication(runner),
+    )
+    receipt = _write_receipt(payload, tmp_path)
+    paths = runner.publish_payload(payload, directory=tmp_path)
+    receipt.write_text("{}\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="receipt: hash mismatch"):
+        auditor.audit_publication(
+            result_path=paths["result"],
+            report_path=paths["report"],
+            manifest_path=paths["manifest"],
+            receipt_path=receipt,
         )
 
 
@@ -425,3 +477,115 @@ def test_classification_requires_transient_bound_as_well_as_final_contraction(ru
     assert result["gates"]["stable_spectrum"] is True
     assert result["gates"]["perturbation_contraction"] is False
     assert result["decision"] == "g5-inconclusive"
+
+
+class _CompleteBackend(_PreflightBackend):
+    def __init__(self, runner):
+        super().__init__(runner, passed=True)
+        self.vector = [[0.0, 0.0] for _ in range(4800)]
+        self.vector[0] = [1.0, 0.0]
+
+    def arnoldi_panel(self, **kwargs):
+        name = kwargs["name"]
+        self.calls.append(("arnoldi", name))
+        count, ncv, tolerance, iterations = self.runner.PANEL_CONFIGURATIONS[name]
+        theta = kwargs["rounded_root"][1]
+        pairs = [
+            _pair(complex(np.cos(theta), np.sin(theta)), "translation"),
+            _pair(complex(np.cos(theta), -np.sin(theta)), "translation"),
+            _pair(1.0 + 0.0j, "rotation"),
+        ]
+        pairs.extend(
+            _pair(0.8 - 1e-6 * index + 0.01j, "transverse")
+            for index in range(count - 3)
+        )
+        for pair in pairs:
+            pair["vector"] = self.vector
+        pairs.sort(key=lambda pair: pair["modulus"], reverse=True)
+        return {
+            "eigenpairs": pairs,
+            "expected_count": count,
+            "max_iterations": iterations,
+            "ncv": ncv,
+            "requested_count": count,
+            "start_sha256": self.runner._vector_sha256(kwargs["start"]),
+            "status": "complete",
+            "tolerance": tolerance,
+        }
+
+    def continuation_arm(self, **kwargs):
+        self.calls.append(("continuation", kwargs["name"]))
+        samples = [
+            {"distance": 1.0 if index == 0 else 0.05, "step": 10 * index}
+            for index in range(501)
+        ]
+        return {
+            "amplitude": 1e-7 * kwargs["rounded_root"][0],
+            "completed": True,
+            "final_distance": 0.05,
+            "final_ratio": 0.05,
+            "growth_factor": 1.0,
+            "initial_distance": 1.0,
+            "name": kwargs["name"],
+            "perturbation": list(kwargs["perturbation"]),
+            "perturbation_sha256": self.runner._vector_sha256(
+                kwargs["perturbation"]
+            ),
+            "samples": samples,
+            "stopped": False,
+        }
+
+    def exact_arm(self, **kwargs):
+        self.calls.append("exact")
+        return {
+            "completed": True,
+            "maximum_distance": 0.0,
+            "samples": [
+                {"distance": 0.0, "step": 10 * index} for index in range(501)
+            ],
+            "stopped": False,
+        }
+
+
+def test_full_synthetic_record_serializes_within_registered_size_budget(
+    runner, auditor, tmp_path
+):
+    payload = runner.assemble_component(
+        backend=_CompleteBackend(runner),
+        identity=_identity(runner),
+        publication=_publication(runner),
+    )
+    receipt = _write_receipt(payload, tmp_path)
+    encoded = json.dumps(
+        payload, allow_nan=False, indent=2, sort_keys=True
+    ).encode("utf-8")
+
+    assert payload["classification"]["decision"] == (
+        "g5-local-direct-stability-pass"
+    )
+    assert 1_000_000 < len(encoded) < 30_000_000
+    assert auditor.audit_payload(payload)["pass"] is True
+    paths = runner.publish_payload(payload, directory=tmp_path)
+    assert paths["result"].stat().st_size < 30_000_000
+    assert auditor.audit_publication(
+        result_path=paths["result"],
+        report_path=paths["report"],
+        manifest_path=paths["manifest"],
+        receipt_path=receipt,
+    )["publication_pass"] is True
+
+
+def test_zero_ritz_vector_is_rejected_by_runner_and_auditor(runner, auditor):
+    payload = runner.assemble_component(
+        backend=_CompleteBackend(runner),
+        identity=_identity(runner),
+        publication=_publication(runner),
+    )
+    payload["arnoldi"]["primary"]["eigenpairs"][0]["vector"] = [
+        [0.0, 0.0] for _ in range(4800)
+    ]
+
+    with pytest.raises(ValueError, match="zero Ritz vector"):
+        runner.validate_payload(payload)
+    with pytest.raises(ValueError, match="zero Ritz vector"):
+        auditor.audit_payload(payload)

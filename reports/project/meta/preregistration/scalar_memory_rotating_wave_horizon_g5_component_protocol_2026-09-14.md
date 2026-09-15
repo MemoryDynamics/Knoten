@@ -7,6 +7,9 @@ Status: **outcome-blind eingefroren vor erstem G5-Zugriff**.
 Klarstellende Amendierung 2026-09-15, weiterhin vor jedem Zielzugriff: Der
 bereits registrierte FIFO-Shift wird indexgenau ausgeschrieben. Parameter,
 Schwellen, Stoerungen, Entscheidungen und Stopregeln bleiben unveraendert.
+Zusaetzlich wird die bereits verlangte getrennte Freigabe maschinenlesbar als
+einmalige Governance-Lease konkretisiert. Auch dies aendert keine
+wissenschaftliche Einstellung.
 
 ## 1. Frage und Claimgrenze
 
@@ -194,6 +197,17 @@ fehlendes Manifest erkennen.
 Ein Major-/Critical-Befund, rote exakte CI oder ein schmutziger Arbeitsbaum
 stoppt die Ausfuehrung. Nach Zielzugriff sind Parametersuche, Wechsel des
 Roots, neue Stoerungsrichtung und Wiederholung ohne Amendierung verboten.
+
+Die Implementierung bleibt zunaechst durch einen getrackten Governance-Record
+geschlossen. Eine spaetere Freigabe darf nur diesen Record aendern und muss
+einen ausdruecklichen Nutzerentscheid, UUIDv4, Implementierungscommit,
+offizielle erfolgreiche CI fuer genau diesen Commit, Readinessreview,
+geschuetzte Git-Blobs, Ergebnisvertrag und exakte Python-/NumPy-/SciPy-/
+mpmath-Versionen binden. Der Guard prueft sauberen Arbeitsbaum, identischen
+Upstream, leere feste Zielpfade und verbraucht vor jeder numerischen Arbeit
+atomar genau eine Receipt. Receipt-Hash und Autorisierung werden im
+Ergebnisrecord gespeichert und vom Publikationsaudit gegen die Receipt-Datei
+rekonstruiert.
 
 Dieses Protokoll autorisiert noch keinen Zielzugriff. Erst ein getrenntes
 Readinessreview nach targetfreier Implementierung, unabhaengigem Audit und

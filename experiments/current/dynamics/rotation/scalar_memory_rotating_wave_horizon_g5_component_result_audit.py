@@ -51,6 +51,10 @@ PANEL_CONFIGURATIONS = {
 RESULT_NAME = "scalar_memory_rotating_wave_horizon_g5_component_2026-09-14.json"
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
+ATTEMPT_RECEIPT_PATH = (
+    "reports/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_1_receipt.json"
+)
 
 
 def _contract() -> dict[str, Any]:
@@ -336,6 +340,10 @@ def _verify_panel(panel: dict[str, Any], *, name: str) -> None:
             raise ValueError(f"$.arnoldi.{name}: modulus mismatch")
         if pair["normalized_residual"] < 0.0:
             raise ValueError(f"$.arnoldi.{name}: negative residual")
+        if pair["vector"] is not None and not any(
+            real != 0.0 or imag != 0.0 for real, imag in pair["vector"]
+        ):
+            raise ValueError(f"$.arnoldi.{name}: zero Ritz vector")
         if not (
             0.0 <= pair["translation_overlap"] <= 1.0
             and 0.0 <= pair["rotation_overlap"] <= 1.0
@@ -502,6 +510,14 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
         or identity["start"] != list(START)
     ):
         raise ValueError("$.identity: registered input mismatch")
+    authorization = identity["authorization"]
+    if (
+        authorization["attempt"] != 1
+        or authorization["attempt_receipt_path"] != ATTEMPT_RECEIPT_PATH
+        or authorization["ci_run_id"] <= 0
+        or authorization["upstream_revision"] != identity["execution_commit"]
+    ):
+        raise ValueError("$.identity.authorization: execution binding mismatch")
     created = datetime.fromisoformat(identity["created_utc"])
     if created.tzinfo is None or created.utcoffset() != UTC.utcoffset(created):
         raise ValueError("$.identity.created_utc: UTC required")
@@ -598,7 +614,7 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def audit_publication(
-    *, result_path: Path, report_path: Path, manifest_path: Path
+    *, result_path: Path, report_path: Path, manifest_path: Path, receipt_path: Path
 ) -> dict[str, Any]:
     """Verify the manifest-last publication envelope and audit its payload."""
 
@@ -647,6 +663,38 @@ def audit_publication(
         result_path.stat().st_mtime_ns, report_path.stat().st_mtime_ns
     ):
         raise ValueError("manifest: not published last")
+    authorization = payload["identity"]["authorization"]
+    if receipt_path.name != Path(ATTEMPT_RECEIPT_PATH).name:
+        raise ValueError("receipt: registered filename mismatch")
+    receipt_bytes = receipt_path.read_bytes()
+    if hashlib.sha256(receipt_bytes).hexdigest() != authorization["attempt_receipt_sha256"]:
+        raise ValueError("receipt: hash mismatch")
+    receipt = json.loads(receipt_bytes)
+    if type(receipt) is not dict or set(receipt) != {
+        "attempt",
+        "authorization_id",
+        "ci_run_id",
+        "created_utc",
+        "governance_sha256",
+        "implementation_revision",
+        "revision",
+        "schema",
+    }:
+        raise ValueError("receipt: fields mismatch")
+    if receipt != {
+        "attempt": authorization["attempt"],
+        "authorization_id": authorization["authorization_id"],
+        "ci_run_id": authorization["ci_run_id"],
+        "created_utc": receipt["created_utc"],
+        "governance_sha256": authorization["governance_sha256"],
+        "implementation_revision": authorization["implementation_revision"],
+        "revision": payload["identity"]["execution_commit"],
+        "schema": "scalar-memory-rotating-wave-horizon-g5-attempt-receipt-v1",
+    }:
+        raise ValueError("receipt: provenance mismatch")
+    created = datetime.fromisoformat(receipt["created_utc"])
+    if created.tzinfo is None or created.utcoffset() != UTC.utcoffset(created):
+        raise ValueError("receipt: UTC timestamp required")
     result = audit_payload(payload)
     return {
         **result,

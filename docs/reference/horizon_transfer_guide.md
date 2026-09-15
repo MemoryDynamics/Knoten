@@ -208,8 +208,10 @@ Kernelparameter, Gewichtssumme, Kreis-Fixpunkt, vollen Jacobian und
 Symmetrieresiduen in einen hashbaren Record. Der isolierte
 G5-Ergebnisvertrag, seine fail-closed Backendkomposition und der
 standardbibliotheksbasierte Record-/Publikationsaudit sind nun targetfrei
-implementiert. Vor einem Zielzugriff fehlen weiterhin der
-Execution-Context-Guard und das getrennte Readinessreview.
+implementiert. Der Execution-Context-Guard bindet nun eine spaetere
+Einmalfreigabe an Commit, offizielle CI, geschuetzte Blobs, Abhaengigkeiten,
+Upstream und Receipt; die getrackte Governance ist geschlossen. Vor einem
+Zielzugriff fehlt weiterhin das getrennte Readinessreview.
 
 ## 8. Wie Befunde gelesen werden muessen
 

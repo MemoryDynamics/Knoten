@@ -1,0 +1,11 @@
+{
+  "authorization": null,
+  "gate": "G5",
+  "protocol_blob": "9815604436b93054097c69c0de1b4d49cfee1778",
+  "reason": "target-free implementation review in progress; no G5 target access authorized",
+  "result_schema_sha256": "02d90aaeed3832083c435bf68fc51e9a20f6b3b99eac52077f5a40d5134491ba",
+  "schema": "scalar-memory-rotating-wave-horizon-g5-governance-v1",
+  "state": "closed",
+  "target_authorized": false,
+  "target_calls_recorded": []
+}
