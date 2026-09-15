@@ -156,3 +156,22 @@ geschlossen. Der naechste zulaessige Schritt ist ausschliesslich eine
 ausdrueckliche Nutzerentscheidung ueber einen Governance-only-
 Autorisierungscommit fuer Attempt 1; erst ein weiterer Turn darf danach den
 einmaligen Zielzugriff ausloesen.
+
+## 7. Erneuter Gesamtpfadreview nach Nutzerentscheid
+
+Nach Offenlegung der behobenen Provenienzluecke hat der Nutzer am 2026-09-15
+die Autorisierung fuer denselben Ablauf ausdruecklich erneuert. Daraufhin
+wurde der targetfreie Importpfad ein weiteres Mal real geladen. Durch die
+eager Exporte in `emergenz_knoten.__init__` wurden dabei 60 lokale Module
+importiert; nur die in Abschnitt 2 genannten Rotating-Wave-Module sind am
+numerischen Zielpfad beteiligt. Der breite Import ist eine verbleibende
+Hygienegrenze, aber kein Ergebnis- oder Readinessblocker: Zwischen
+Implementation revision und aktuellem Review besteht fuer keine Python-Datei
+und nicht fuer `requirements.txt` ein Drift, und der Guard erzwingt dies vor
+Receipt-Erzeugung erneut.
+
+Die fokussierte Suite besteht im Wiederholungslauf mit `65 passed in 8.05s`.
+Es trat kein weiterer Major- oder Critical-Befund auf. Damit ist als naechster
+Schritt der Governance-only-Autorisierungscommit fuer Attempt 1 zulaessig.
+Bis zu dessen erfolgreicher Validierung bleiben Receipt, Ziellauf und
+G5-Ergebnis weiterhin ausstehend.
