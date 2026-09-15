@@ -91,8 +91,8 @@ Das isolierte G5-Protokoll haelt fest, dass die nichtlinearen Arme die
 Voll-FIFO-Grundgleichung und keinen eingesetzten harmonischen Oszillator
 simulieren. Komponentenvertrag, fail-closed Backendkomposition sowie
 Record-/Publikationsaudit und one-shot Execution-Context-Guard sind
-targetfrei implementiert. Die getrackte Governance ist geschlossen; vor
-einem Zielzugriff fehlt das Readinessreview.
+targetfrei implementiert und reviewed. Die getrackte Governance ist
+geschlossen; ein Zielzugriff ist nicht autorisiert.
 
 ## Claim-Grenze
 

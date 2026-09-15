@@ -41,8 +41,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    G5-Ergebnisvertrag, seine fail-closed Backendkomposition sowie ein
    standardbibliotheksbasierter Record-/Publikationsauditor bestehen nun
    targetfrei. Der one-shot Execution-Context-Guard ist implementiert und
-   maschinell geschlossen. Als naechstes folgt das Readinessreview. G5,
-   vollstaendiger
+   maschinell geschlossen; das getrennte Readinessreview besteht targetfrei.
+   Als naechstes ist ausschliesslich eine ausdrueckliche Entscheidung ueber
+   die Einmalfreigabe zulaessig. G5, vollstaendiger
    Horizontlauf und P5-D-Versuch 4 bleiben ungemessen beziehungsweise
    geschlossen. Abbruch-, Typ-, Intervall- und Publikationsfehler muessen
    fail-closed bleiben.
@@ -78,7 +79,8 @@ Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
 Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
 reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
 unabhaengiger Auditor sowie der geschlossene Execution-Context-Guard sind
-targetfrei implementiert. Der naechste erlaubte Block ist ausschliesslich
-das separate Readinessreview. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
+targetfrei implementiert und reviewed. Der naechste erlaubte Block ist
+ausschliesslich die ausdrueckliche Entscheidung ueber eine Governance-only-
+Einmalfreigabe. Ein neuer Zielzugriff ist nicht autorisiert. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

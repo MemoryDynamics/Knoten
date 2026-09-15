@@ -210,8 +210,8 @@ G5-Ergebnisvertrag, seine fail-closed Backendkomposition und der
 standardbibliotheksbasierte Record-/Publikationsaudit sind nun targetfrei
 implementiert. Der Execution-Context-Guard bindet nun eine spaetere
 Einmalfreigabe an Commit, offizielle CI, geschuetzte Blobs, Abhaengigkeiten,
-Upstream und Receipt; die getrackte Governance ist geschlossen. Vor einem
-Zielzugriff fehlt weiterhin das getrennte Readinessreview.
+Upstream und Receipt. Das getrennte Readinessreview besteht targetfrei; die
+getrackte Governance bleibt geschlossen und kein Zielzugriff ist autorisiert.
 
 ## 8. Wie Befunde gelesen werden muessen
 

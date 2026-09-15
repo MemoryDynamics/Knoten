@@ -29,7 +29,7 @@ autorisiert.
 | Lokaler Ausschlussadapter | implementiert und reviewed | vollstaendige dyadische Recordsemantik, aber keine registrierte Domain ausgewertet |
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5-Adapter und Grundgleichungs-Preflight | targetfrei reviewed Pass | LCG-, Ritzvektor- und Trajektorienabbildung plus hashbarer Record fuer Gewichtssumme, Kreisidentitaet, Voll-Jacobian und Symmetrien; G5 ungemessen |
-| G5-Komponentenvertrag und Readiness | Vertrag, Komposition, Audit und geschlossener Execution-Guard targetfrei implementiert | fester Sieben-Ebenen-Record, fail-closed Stufen, manifest-last-Publikation, numerikfreier Audit und one-shot Governance; Readiness noch offen |
+| G5-Komponentenvertrag und Readiness | targetfreier Readiness-Pass; Governance geschlossen | fester Sieben-Ebenen-Record, fail-closed Stufen, manifest-last-Publikation, numerikfreier Audit und one-shot Governance; kein G5-Zielwert gemessen oder autorisiert |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das

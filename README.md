@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-14.
+Stand: 2026-09-15.
 
 ## Wissenschaftlicher Stand
 
@@ -48,9 +48,9 @@ Stand: 2026-09-14.
   lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
   Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
   nun targetfrei. Der Execution-Context-Guard ist implementiert und durch
-  maschinelle Governance geschlossen; das Readinessreview fehlt weiterhin.
-  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben
-  geschlossen.
+  maschinelle Governance geschlossen; das getrennte Readinessreview besteht
+  targetfrei. Dies ist kein G5-Ergebnis und keine Zielautorisierung.
+  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 
