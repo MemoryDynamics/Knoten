@@ -76,6 +76,7 @@ DEPENDENCIES = {
     "scipy": "1.17.1",
 }
 PROTECTED_PATHS = (
+    "requirements.txt",
     PROTOCOL_REL.as_posix(),
     SCHEMA_REL.as_posix(),
     COMPONENT_REL.as_posix(),
@@ -84,8 +85,11 @@ PROTECTED_PATHS = (
     "scalar_memory_rotating_wave_horizon_g5_execution.py",
     "experiments/current/dynamics/rotation/"
     "scalar_memory_rotating_wave_horizon_transfer_gate.py",
+    "src/emergenz_knoten/rotating_wave.py",
+    "src/emergenz_knoten/rotating_wave_interval.py",
     "src/emergenz_knoten/rotating_wave_horizon_stability.py",
     "src/emergenz_knoten/rotating_wave_stability.py",
+    "src/emergenz_knoten/rotating_wave_stability_gate.py",
     "src/emergenz_knoten/strict_json_contract.py",
     "tests/test_rotating_wave_horizon_g5_component.py",
     "tests/test_rotating_wave_horizon_g5_execution.py",
@@ -352,6 +356,18 @@ def require_target_authorization(
     ):
         raise RuntimeError("G5 official CI metadata mismatch")
     _git("merge-base", "--is-ancestor", implementation, "HEAD")
+    changed_since_implementation = set(
+        _git("diff", "--name-only", implementation, "HEAD").splitlines()
+    )
+    forbidden_drift = sorted(
+        path
+        for path in changed_since_implementation
+        if path != GOVERNANCE_REL.as_posix() and not path.endswith(".md")
+    )
+    if forbidden_drift:
+        raise RuntimeError(
+            f"G5 non-document drift since reviewed implementation: {forbidden_drift}"
+        )
     changed_last = set(_git("diff", "--name-only", "HEAD^", "HEAD").splitlines())
     if changed_last != {GOVERNANCE_REL.as_posix()}:
         raise RuntimeError("G5 authorization commit changed more than governance")

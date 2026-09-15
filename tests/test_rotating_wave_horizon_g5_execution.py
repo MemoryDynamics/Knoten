@@ -118,6 +118,17 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path, *, governance=No
     def fake_git(*arguments: str) -> str:
         if arguments[:2] == ("merge-base", "--is-ancestor"):
             return ""
+        if arguments == (
+            "diff",
+            "--name-only",
+            authorization["implementation_revision"],
+            "HEAD",
+        ):
+            return (
+                execution.READINESS_REVIEW_REL.as_posix()
+                + "\n"
+                + execution.GOVERNANCE_REL.as_posix()
+            )
         if arguments == ("diff", "--name-only", "HEAD^", "HEAD"):
             return execution.GOVERNANCE_REL.as_posix()
         if arguments == ("status", "--porcelain", "--untracked-files=all"):
@@ -188,7 +199,14 @@ def test_authorization_binds_ci_blobs_dependencies_upstream_and_consumes_once(
 
 @pytest.mark.parametrize(
     "mutation",
-    ("remote-head", "dependency", "protected-blob", "mixed-commit", "readiness"),
+    (
+        "remote-head",
+        "dependency",
+        "protected-blob",
+        "source-drift",
+        "mixed-commit",
+        "readiness",
+    ),
 )
 def test_authorization_fails_before_receipt_on_context_mutations(
     execution, monkeypatch, tmp_path, mutation
@@ -219,6 +237,20 @@ def test_authorization_fails_before_receipt_on_context_mutations(
             return clean_git(*arguments)
 
         monkeypatch.setattr(execution, "_git", mixed)
+    elif mutation == "source-drift":
+        clean_git = execution._git
+
+        def source_drift(*arguments: str) -> str:
+            if arguments == (
+                "diff",
+                "--name-only",
+                governance["authorization"]["implementation_revision"],
+                "HEAD",
+            ):
+                return "src/emergenz_knoten/unreviewed.py"
+            return clean_git(*arguments)
+
+        monkeypatch.setattr(execution, "_git", source_drift)
     elif mutation == "readiness":
         monkeypatch.setattr(
             execution,
@@ -278,3 +310,19 @@ def test_execution_module_has_no_top_level_target_call():
             and isinstance(statement.value.func, ast.Name)
             and statement.value.func.id == "execute_once"
         )
+
+
+def test_guard_protects_complete_direct_numerical_dependency_set(execution):
+    required = {
+        "requirements.txt",
+        "experiments/current/dynamics/rotation/"
+        "scalar_memory_rotating_wave_horizon_transfer_gate.py",
+        "src/emergenz_knoten/rotating_wave.py",
+        "src/emergenz_knoten/rotating_wave_interval.py",
+        "src/emergenz_knoten/rotating_wave_horizon_stability.py",
+        "src/emergenz_knoten/rotating_wave_stability.py",
+        "src/emergenz_knoten/rotating_wave_stability_gate.py",
+        "src/emergenz_knoten/strict_json_contract.py",
+    }
+
+    assert required <= set(execution.PROTECTED_PATHS)
