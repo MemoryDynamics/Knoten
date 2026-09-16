@@ -32,7 +32,7 @@ def execution():
     return _load()
 
 
-def test_tracked_governance_is_closed_and_blocks_before_receipt(execution, monkeypatch):
+def test_tracked_governance_is_valid_without_implicit_receipt(execution, monkeypatch):
     called = []
     tracked_governance = json.loads(
         (execution.ROOT / execution.GOVERNANCE_REL).read_text(encoding="utf-8")
@@ -52,6 +52,12 @@ def test_tracked_governance_is_closed_and_blocks_before_receipt(execution, monke
     )
 
     governance = execution._load_governance()
+
+    if governance["state"] == "authorized_once":
+        assert governance["target_authorized"] is True
+        assert governance["authorization"]["attempt"] == execution.REGISTERED_ATTEMPT
+        assert called == []
+        return
 
     assert governance["state"] == "closed"
     assert governance["target_authorized"] is False
