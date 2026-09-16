@@ -52,7 +52,9 @@ Stand: 2026-09-15.
   eines ungeclippten binary64-Overlaps. Die Recordgrenze ist inzwischen
   targetfrei mit dimensionsskalierter Rundungskanonisierung und
   Falsifikationstests remediiert. Es existiert kein Ergebnis; Attempt 1 ist
-  verbraucht und ein Retry nicht autorisiert.
+  verbraucht. Attempt 2 ist mit getrennten Artefaktpfaden prospektiv
+  registriert und targetfrei reviewed; bis zum Governance-only-Commit bleibt
+  der Zielzugriff geschlossen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 
