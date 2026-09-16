@@ -69,7 +69,7 @@ def _authorized_governance(execution):
     protected[execution.PROTOCOL_REL.as_posix()] = "5" * 40
     return {
         "authorization": {
-            "attempt": 1,
+            "attempt": execution.REGISTERED_ATTEMPT,
             "authorization_id": "12345678-1234-4abc-8def-123456789abc",
             "ci": {
                 "api_url": f"https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/{run_id}",
@@ -88,7 +88,7 @@ def _authorized_governance(execution):
         },
         "gate": "G5",
         "protocol_blob": "5" * 40,
-        "reason": "explicit-user-authorized-one-shot-attempt-1",
+        "reason": "explicit-user-authorized-one-shot-attempt-2",
         "result_schema_sha256": schema_digest,
         "schema": execution.GOVERNANCE_SCHEMA,
         "state": "authorized_once",
@@ -190,7 +190,7 @@ def test_authorization_binds_ci_blobs_dependencies_upstream_and_consumes_once(
         output_directory=tmp_path,
     )
 
-    assert result["attempt"] == 1
+    assert result["attempt"] == execution.REGISTERED_ATTEMPT
     assert result["revision"] == result["upstream_revision"] == head
     assert result["attempt_receipt_sha256"] == "7" * 64
     assert len(receipts) == 1
@@ -201,6 +201,7 @@ def test_authorization_binds_ci_blobs_dependencies_upstream_and_consumes_once(
     "mutation",
     (
         "remote-head",
+        "attempt",
         "dependency",
         "protected-blob",
         "source-drift",
@@ -212,7 +213,9 @@ def test_authorization_fails_before_receipt_on_context_mutations(
     execution, monkeypatch, tmp_path, mutation
 ):
     governance = _authorized_governance(execution)
-    if mutation == "dependency":
+    if mutation == "attempt":
+        governance["authorization"]["attempt"] = 1
+    elif mutation == "dependency":
         governance["authorization"]["dependencies"]["numpy"] = "0.0"
     source, remote, receipts, _ = _install_authorized_fakes(
         execution, monkeypatch, tmp_path, governance=governance
@@ -265,6 +268,52 @@ def test_authorization_fails_before_receipt_on_context_mutations(
             output_directory=tmp_path,
         )
     assert receipts == []
+
+
+def test_retry_paths_are_attempt_2_and_do_not_alias_attempt_1(execution):
+    assert execution.REGISTERED_ATTEMPT == 2
+    assert "attempt_2" in execution.ATTEMPT_RECEIPT_REL.name
+    assert "attempt_2" in execution.RESULT_NAME
+    assert "attempt_1" not in execution.ATTEMPT_RECEIPT_REL.name
+    assert "attempt_1" not in execution.RESULT_NAME
+
+
+def test_attempt_2_receipt_records_registered_attempt(
+    execution, monkeypatch, tmp_path
+):
+    monkeypatch.setattr(execution, "ROOT", tmp_path)
+    monkeypatch.setattr(execution, "ATTEMPT_RECEIPT_REL", Path("receipt.json"))
+
+    relative, digest = execution._create_attempt_receipt(
+        authorization_id="12345678-1234-4abc-8def-123456789abc",
+        ci_run_id=123,
+        governance_sha256="a" * 64,
+        implementation_revision="b" * 40,
+        revision="c" * 40,
+    )
+
+    receipt = json.loads((tmp_path / relative).read_text(encoding="utf-8"))
+    assert receipt["attempt"] == execution.REGISTERED_ATTEMPT == 2
+    assert len(digest) == 64
+
+
+def test_attempt_1_receipt_does_not_block_attempt_2_paths(
+    execution, monkeypatch, tmp_path
+):
+    output = tmp_path / "reports"
+    output.mkdir()
+    (output / "attempt_1_receipt.json").write_text("{}\n", encoding="utf-8")
+    monkeypatch.setattr(execution, "ROOT", tmp_path)
+    monkeypatch.setattr(execution, "OUTPUT_DIRECTORY_REL", Path("reports"))
+    monkeypatch.setattr(
+        execution, "ATTEMPT_RECEIPT_REL", Path("reports/attempt_2_receipt.json")
+    )
+
+    execution._validate_output_paths(output)
+
+    (output / "attempt_2_receipt.json").write_text("{}\n", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="already exists"):
+        execution._validate_output_paths(output)
 
 
 def test_execute_once_cannot_import_numerical_target_while_governance_is_closed(

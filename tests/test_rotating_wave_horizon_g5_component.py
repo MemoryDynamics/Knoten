@@ -162,7 +162,7 @@ def _preflight(runner, *, passed: bool):
 def _identity(runner):
     return {
         "authorization": {
-            "attempt": 1,
+            "attempt": runner.REGISTERED_ATTEMPT,
             "attempt_receipt_path": runner.ATTEMPT_RECEIPT_PATH,
             "attempt_receipt_sha256": "c" * 64,
             "authorization_id": "00000000-0000-4000-8000-000000000000",
@@ -192,6 +192,12 @@ def _publication(runner):
         "manifest_path": runner.MANIFEST_NAME,
         "manifest_published_last": True,
     }
+
+
+def test_runner_and_auditor_register_only_attempt_2(runner, auditor):
+    assert runner.REGISTERED_ATTEMPT == auditor.REGISTERED_ATTEMPT == 2
+    assert runner.ATTEMPT_RECEIPT_PATH == auditor.ATTEMPT_RECEIPT_PATH
+    assert runner.RESULT_NAME == auditor.RESULT_NAME
 
 
 class _FiniteFailureBackend:

@@ -32,14 +32,17 @@ HORIZON_GATE_PATH = Path(__file__).with_name(
 )
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_g5_component_protocol_2026-09-14.md"
+    "scalar_memory_rotating_wave_horizon_g5_component_retry_protocol_2026-09-16.md"
 )
-RESULT_NAME = "scalar_memory_rotating_wave_horizon_g5_component_2026-09-14.json"
+REGISTERED_ATTEMPT = 2
+RESULT_NAME = (
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_2026-09-16.json"
+)
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
 ATTEMPT_RECEIPT_PATH = (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_1_receipt.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_receipt.json"
 )
 START = ("0.946517504804225", "0.015770381717135")
 PARAMETERS = {
@@ -508,7 +511,7 @@ def validate_payload(payload: dict[str, Any]) -> None:
         raise ValueError("$.identity.equation_id: mismatch")
     authorization = identity["authorization"]
     if (
-        authorization["attempt"] != 1
+        authorization["attempt"] != REGISTERED_ATTEMPT
         or authorization["attempt_receipt_path"] != ATTEMPT_RECEIPT_PATH
         or authorization["ci_run_id"] <= 0
         or authorization["upstream_revision"] != identity["execution_commit"]

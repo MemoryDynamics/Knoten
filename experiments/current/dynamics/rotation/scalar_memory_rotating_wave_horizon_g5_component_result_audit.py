@@ -48,12 +48,15 @@ PANEL_CONFIGURATIONS = {
     "primary": (24, 96, 1e-10, 20000, 0x243F6A88),
     "convergence": (36, 144, 1e-12, 40000, 0x85A308D3),
 }
-RESULT_NAME = "scalar_memory_rotating_wave_horizon_g5_component_2026-09-14.json"
+REGISTERED_ATTEMPT = 2
+RESULT_NAME = (
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_2026-09-16.json"
+)
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
 ATTEMPT_RECEIPT_PATH = (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_1_receipt.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_receipt.json"
 )
 
 
@@ -512,7 +515,7 @@ def audit_payload(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("$.identity: registered input mismatch")
     authorization = identity["authorization"]
     if (
-        authorization["attempt"] != 1
+        authorization["attempt"] != REGISTERED_ATTEMPT
         or authorization["attempt_receipt_path"] != ATTEMPT_RECEIPT_PATH
         or authorization["ci_run_id"] <= 0
         or authorization["upstream_revision"] != identity["execution_commit"]

@@ -1,8 +1,8 @@
 {
   "authorization": null,
   "gate": "G5",
-  "protocol_blob": "9815604436b93054097c69c0de1b4d49cfee1778",
-  "reason": "attempt 1 consumed by recorded pipeline incident; no retry authorized",
+  "protocol_blob": "44e6378f9e8d62f2a42db0a56115a9729f1eb237",
+  "reason": "attempt 2 retry implementation under target-free review; no target access authorized",
   "result_schema_sha256": "02d90aaeed3832083c435bf68fc51e9a20f6b3b99eac52077f5a40d5134491ba",
   "schema": "scalar-memory-rotating-wave-horizon-g5-governance-v1",
   "state": "closed",

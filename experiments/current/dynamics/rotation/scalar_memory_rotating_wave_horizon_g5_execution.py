@@ -29,6 +29,10 @@ GOVERNANCE_REL = Path(
 )
 PROTOCOL_REL = Path(
     "reports/project/meta/preregistration/"
+    "scalar_memory_rotating_wave_horizon_g5_component_retry_protocol_2026-09-16.md"
+)
+ORIGINAL_PROTOCOL_REL = Path(
+    "reports/project/meta/preregistration/"
     "scalar_memory_rotating_wave_horizon_g5_component_protocol_2026-09-14.md"
 )
 SCHEMA_REL = Path(
@@ -45,14 +49,17 @@ AUDITOR_REL = Path(
 )
 READINESS_REVIEW_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_g5_execution_readiness_review_2026-09-15.md"
+    "scalar_memory_rotating_wave_horizon_g5_retry_readiness_review_2026-09-16.md"
 )
 ATTEMPT_RECEIPT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_1_receipt.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_receipt.json"
 )
 OUTPUT_DIRECTORY_REL = Path("reports/dynamics/rotation")
-RESULT_NAME = "scalar_memory_rotating_wave_horizon_g5_component_2026-09-14.json"
+REGISTERED_ATTEMPT = 2
+RESULT_NAME = (
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_2026-09-16.json"
+)
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
 GOVERNANCE_SCHEMA = "scalar-memory-rotating-wave-horizon-g5-governance-v1"
@@ -78,6 +85,7 @@ DEPENDENCIES = {
 PROTECTED_PATHS = (
     "requirements.txt",
     PROTOCOL_REL.as_posix(),
+    ORIGINAL_PROTOCOL_REL.as_posix(),
     SCHEMA_REL.as_posix(),
     COMPONENT_REL.as_posix(),
     AUDITOR_REL.as_posix(),
@@ -93,6 +101,7 @@ PROTECTED_PATHS = (
     "src/emergenz_knoten/strict_json_contract.py",
     "tests/test_rotating_wave_horizon_g5_component.py",
     "tests/test_rotating_wave_horizon_g5_execution.py",
+    "tests/test_rotating_wave_horizon_stability.py",
 )
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -245,7 +254,7 @@ def _create_attempt_receipt(
     path = ROOT / ATTEMPT_RECEIPT_REL
     path.parent.mkdir(parents=True, exist_ok=True)
     receipt = {
-        "attempt": 1,
+        "attempt": REGISTERED_ATTEMPT,
         "authorization_id": authorization_id,
         "ci_run_id": ci_run_id,
         "created_utc": datetime.now(UTC).isoformat(),
@@ -283,7 +292,7 @@ def require_target_authorization(
     authorization = governance["authorization"]
     if type(authorization) is not dict or set(authorization) != AUTHORIZATION_KEYS:
         raise RuntimeError("G5 authorization keys mismatch")
-    if authorization["attempt"] != 1:
+    if authorization["attempt"] != REGISTERED_ATTEMPT:
         raise RuntimeError("G5 authorization attempt mismatch")
     authorization_id = authorization["authorization_id"]
     if type(authorization_id) is not str or _UUID4.fullmatch(authorization_id) is None:
@@ -388,7 +397,7 @@ def require_target_authorization(
         revision=head,
     )
     return {
-        "attempt": 1,
+        "attempt": REGISTERED_ATTEMPT,
         "attempt_receipt_path": receipt_path,
         "attempt_receipt_sha256": receipt_sha256,
         "authorization_id": authorization_id,
