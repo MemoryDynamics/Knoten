@@ -2,7 +2,7 @@
 
 Datum: 2026-09-16.
 
-Implementation revision: `319c0b1f1e9a47e1791acfa145e97ed70788c9bb`
+Implementation revision: `7e7610e9e5baa928d4855b269081ec67beb8b25d`
 
 Verdict: **`g5-implementation-ready-target-closed`**
 
@@ -55,8 +55,8 @@ werden verworfen. Kein Major- oder Critical-Befund verbleibt.
 - Lokale Vollregression vor den letzten reinen Testergänzungen:
   `1126 passed in 332.20s`.
 - Offizielle Linux-CI mit allen finalen Tests:
-  [GitHub Actions run 35135707220](https://github.com/MemoryDynamics/Knoten/actions/runs/35135707220),
-  `1129 passed in 382.77s`, Lint Pass und strikter Doku-Build Pass.
+  [GitHub Actions run 35137838583](https://github.com/MemoryDynamics/Knoten/actions/runs/35137838583),
+  `1129 passed in 267.54s`, Lint Pass und strikter Doku-Build Pass.
 - Reale Closed-Probe am Implementierungscommit: Abbruch vor Receipt und
   Zielmodul mit `G5 target sealed by machine governance`.
 - Laufzeitbindung: Python 3.12, NumPy 2.3.5, SciPy 1.17.1 und mpmath 1.3.0.
@@ -78,7 +78,7 @@ werden verworfen. Kein Major- oder Critical-Befund verbleibt.
 - Blob `src/emergenz_knoten/rotating_wave_stability_gate.py`: `630beb9952abefea823d91388dcbb2de8f1a2927`
 - Blob `src/emergenz_knoten/strict_json_contract.py`: `221372ea86f857aa4141e2609e46a0dc536c1ab4`
 - Blob `tests/test_rotating_wave_horizon_g5_component.py`: `48c38312eb4d9cf6c6dbd67cfff43ae189faaed2`
-- Blob `tests/test_rotating_wave_horizon_g5_execution.py`: `1a875ff0f26425037a0fb090f9066d822b026c38`
+- Blob `tests/test_rotating_wave_horizon_g5_execution.py`: `47d7992be913afc2828b73bcd6c1c6cdf89e44be`
 - Blob `tests/test_rotating_wave_horizon_stability.py`: `54669ebd8d37ff5821decd40f47c7bc3394962b3`
 
 Der geschlossene Governance-Blob im Implementierungscommit ist
