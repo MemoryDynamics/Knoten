@@ -322,20 +322,14 @@ def test_attempt_1_receipt_does_not_block_attempt_2_paths(
         execution._validate_output_paths(output)
 
 
-def test_execute_once_cannot_import_numerical_target_while_governance_is_closed(
+def test_execute_once_cannot_import_numerical_target_when_governance_is_closed(
     execution, monkeypatch
 ):
-    tracked_governance = json.loads(
-        (execution.ROOT / execution.GOVERNANCE_REL).read_text(encoding="utf-8")
+    monkeypatch.setattr(
+        execution,
+        "_load_governance",
+        lambda path=None: {"state": "closed"},
     )
-    clean_blob = execution._git_blob
-
-    def current_protocol(path: str, revision: str = "HEAD") -> str:
-        if path == execution.PROTOCOL_REL.as_posix() and revision == "HEAD":
-            return tracked_governance["protocol_blob"]
-        return clean_blob(path, revision)
-
-    monkeypatch.setattr(execution, "_git_blob", current_protocol)
     monkeypatch.setattr(
         execution,
         "_load_module",
