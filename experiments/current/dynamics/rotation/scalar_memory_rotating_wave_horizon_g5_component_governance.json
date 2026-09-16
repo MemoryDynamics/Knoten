@@ -1,11 +1,51 @@
 {
-  "authorization": null,
+  "authorization": {
+    "attempt": 2,
+    "authorization_id": "a620c161-0a46-49d7-a26a-81d0eac85d54",
+    "ci": {
+      "api_url": "https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/35137838583",
+      "conclusion": "success",
+      "head_sha": "7e7610e9e5baa928d4855b269081ec67beb8b25d",
+      "run_id": 35137838583,
+      "status": "completed"
+    },
+    "closed_governance_blob": "3c8e5fda7e4f96bd4cca8c08f8883cecbc7b702b",
+    "dependencies": {
+      "mpmath": "1.3.0",
+      "numpy": "2.3.5",
+      "python": "3.12",
+      "scipy": "1.17.1"
+    },
+    "implementation_revision": "7e7610e9e5baa928d4855b269081ec67beb8b25d",
+    "protected_blobs": {
+      "requirements.txt": "257723e469e56d5e1db0efcaff57c26e71a9ebf5",
+      "reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_g5_component_retry_protocol_2026-09-16.md": "44e6378f9e8d62f2a42db0a56115a9729f1eb237",
+      "reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_g5_component_protocol_2026-09-14.md": "9815604436b93054097c69c0de1b4d49cfee1778",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_result_schema_v1.json": "8c3aa7582e1c693452906db840b68b369c603529",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_gate.py": "ea7621950886cfc1c91ff8767bb4dd50ed35cf08",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_result_audit.py": "643050b85e6d3a93b44fce07f4dce81bb86fc3c6",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_execution.py": "75c3bf2b883c0240cca2a34ab235756467da0047",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py": "1f6ed63a92eb12812a4c7d31ad39b0d70b146eb9",
+      "src/emergenz_knoten/rotating_wave.py": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
+      "src/emergenz_knoten/rotating_wave_interval.py": "e269e729c68c8030a6aae222fb4fa67069dd46fd",
+      "src/emergenz_knoten/rotating_wave_horizon_stability.py": "376f263af4891869a7e81969ca05e11ba86735a5",
+      "src/emergenz_knoten/rotating_wave_stability.py": "9defb5a6876371202e1ba57cea030c997b9c6edd",
+      "src/emergenz_knoten/rotating_wave_stability_gate.py": "630beb9952abefea823d91388dcbb2de8f1a2927",
+      "src/emergenz_knoten/strict_json_contract.py": "221372ea86f857aa4141e2609e46a0dc536c1ab4",
+      "tests/test_rotating_wave_horizon_g5_component.py": "48c38312eb4d9cf6c6dbd67cfff43ae189faaed2",
+      "tests/test_rotating_wave_horizon_g5_execution.py": "47d7992be913afc2828b73bcd6c1c6cdf89e44be",
+      "tests/test_rotating_wave_horizon_stability.py": "54669ebd8d37ff5821decd40f47c7bc3394962b3"
+    },
+    "readiness_review_blob": "727e5364532bd13bd95f2a3493180262ba535437",
+    "readiness_review_path": "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_retry_readiness_review_2026-09-16.md",
+    "schema_sha256": "02d90aaeed3832083c435bf68fc51e9a20f6b3b99eac52077f5a40d5134491ba"
+  },
   "gate": "G5",
   "protocol_blob": "44e6378f9e8d62f2a42db0a56115a9729f1eb237",
-  "reason": "attempt 2 retry implementation under target-free review; no target access authorized",
+  "reason": "explicit user authorization on 2026-09-16 after outcome-blind retry protocol, remediation review, and final readiness review",
   "result_schema_sha256": "02d90aaeed3832083c435bf68fc51e9a20f6b3b99eac52077f5a40d5134491ba",
   "schema": "scalar-memory-rotating-wave-horizon-g5-governance-v1",
-  "state": "closed",
-  "target_authorized": false,
+  "state": "authorized_once",
+  "target_authorized": true,
   "target_calls_recorded": []
 }
