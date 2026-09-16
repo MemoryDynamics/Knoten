@@ -194,8 +194,8 @@ def _publication(runner):
     }
 
 
-def test_runner_and_auditor_register_only_attempt_2(runner, auditor):
-    assert runner.REGISTERED_ATTEMPT == auditor.REGISTERED_ATTEMPT == 2
+def test_runner_and_auditor_register_only_attempt_3(runner, auditor):
+    assert runner.REGISTERED_ATTEMPT == auditor.REGISTERED_ATTEMPT == 3
     assert runner.ATTEMPT_RECEIPT_PATH == auditor.ATTEMPT_RECEIPT_PATH
     assert runner.RESULT_NAME == auditor.RESULT_NAME
 
@@ -485,6 +485,93 @@ def test_classification_requires_transient_bound_as_well_as_final_contraction(ru
     assert result["decision"] == "g5-inconclusive"
 
 
+def _off_grid_arm():
+    dense = [1.0] + [0.05] * 5000
+    dense[1] = 2.0
+    return {
+        "completed": True,
+        "dense_distances": dense,
+        "final_distance": 0.05,
+        "final_ratio": 0.05,
+        "growth_factor": 2.0,
+        "initial_distance": 1.0,
+        "maximum_distance": 2.0,
+        "maximum_step": 1,
+        "samples": [
+            {"distance": dense[10 * index], "step": 10 * index}
+            for index in range(501)
+        ],
+        "stopped": False,
+    }
+
+
+def test_trajectory_summary_uses_dense_trace_for_off_grid_maximum(runner, auditor):
+    arm = _off_grid_arm()
+
+    runner._verify_trajectory(arm, path="$.synthetic")
+    auditor._verify_trajectory(arm, path="$.synthetic")
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    (
+        ("null-hole", "form a prefix"),
+        ("negative", "invalid distance"),
+        ("nonfinite", "invalid distance"),
+        ("short", "completion state mismatch"),
+        ("initial", "summary mismatch"),
+        ("final", "summary mismatch"),
+        ("final-ratio", "summary mismatch"),
+        ("growth", "summary mismatch"),
+        ("maximum", "summary mismatch"),
+        ("maximum-step", "summary mismatch"),
+        ("sample", "dense projection mismatch"),
+    ),
+)
+def test_dense_trajectory_mutations_fail_closed(runner, auditor, mutation, message):
+    arm = _off_grid_arm()
+    if mutation == "null-hole":
+        arm["dense_distances"][2] = None
+    elif mutation == "negative":
+        arm["dense_distances"][2] = -1.0
+    elif mutation == "nonfinite":
+        arm["dense_distances"][2] = float("nan")
+    elif mutation == "short":
+        arm["dense_distances"].pop()
+    elif mutation == "initial":
+        arm["initial_distance"] = 0.5
+    elif mutation == "final":
+        arm["final_distance"] = 0.1
+    elif mutation == "final-ratio":
+        arm["final_ratio"] = 0.1
+    elif mutation == "growth":
+        arm["growth_factor"] = 1.0
+    elif mutation == "maximum":
+        arm["maximum_distance"] = 1.0
+    elif mutation == "maximum-step":
+        arm["maximum_step"] = 2
+    else:
+        arm["samples"][1]["distance"] = 0.5
+
+    for verifier in (runner._verify_trajectory, auditor._verify_trajectory):
+        with pytest.raises(ValueError, match=message):
+            verifier(arm, path="$.synthetic")
+
+
+def test_v2_schema_requires_fixed_length_dense_trace(runner, auditor):
+    payload = runner.assemble_component(
+        backend=_CompleteBackend(runner),
+        identity=_identity(runner),
+        publication=_publication(runner),
+    )
+    payload["trajectories"]["perturbation_arms"][0]["dense_distances"].pop()
+
+    with pytest.raises(ValueError, match="length"):
+        runner.validate_payload(payload)
+    with pytest.raises(ValueError, match="length"):
+        auditor.audit_payload(payload)
+
+
 class _CompleteBackend(_PreflightBackend):
     def __init__(self, runner):
         super().__init__(runner, passed=True)
@@ -521,17 +608,21 @@ class _CompleteBackend(_PreflightBackend):
 
     def continuation_arm(self, **kwargs):
         self.calls.append(("continuation", kwargs["name"]))
+        dense = [1.0] + [0.05] * 5000
         samples = [
-            {"distance": 1.0 if index == 0 else 0.05, "step": 10 * index}
+            {"distance": dense[10 * index], "step": 10 * index}
             for index in range(501)
         ]
         return {
             "amplitude": 1e-7 * kwargs["rounded_root"][0],
             "completed": True,
+            "dense_distances": dense,
             "final_distance": 0.05,
             "final_ratio": 0.05,
             "growth_factor": 1.0,
             "initial_distance": 1.0,
+            "maximum_distance": 1.0,
+            "maximum_step": 0,
             "name": kwargs["name"],
             "perturbation": list(kwargs["perturbation"]),
             "perturbation_sha256": self.runner._vector_sha256(
@@ -545,7 +636,9 @@ class _CompleteBackend(_PreflightBackend):
         self.calls.append("exact")
         return {
             "completed": True,
+            "dense_distances": [0.0] * 5001,
             "maximum_distance": 0.0,
+            "maximum_step": 0,
             "samples": [
                 {"distance": 0.0, "step": 10 * index} for index in range(501)
             ],

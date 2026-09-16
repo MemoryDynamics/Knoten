@@ -22,9 +22,9 @@ from emergenz_knoten.strict_json_contract import validate_payload as validate_co
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_g5_component_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_result_schema_v2.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-g5-component-v1"
+SCHEMA = "scalar-memory-rotating-wave-horizon-g5-component-v2"
 EQUATION_ID = "deterministic-native-k0h-full-fifo-v1"
 START = ("0.946517504804225", "0.015770381717135")
 PARAMETERS = {
@@ -48,22 +48,22 @@ PANEL_CONFIGURATIONS = {
     "primary": (24, 96, 1e-10, 20000, 0x243F6A88),
     "convergence": (36, 144, 1e-12, 40000, 0x85A308D3),
 }
-REGISTERED_ATTEMPT = 2
+REGISTERED_ATTEMPT = 3
 RESULT_NAME = (
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_2026-09-16.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json"
 )
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
 ATTEMPT_RECEIPT_PATH = (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_receipt.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_receipt.json"
 )
 
 
 def _contract() -> dict[str, Any]:
     contract = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     if contract.get("schema") != (
-        "scalar-memory-rotating-wave-horizon-g5-result-contract-v1"
+        "scalar-memory-rotating-wave-horizon-g5-result-contract-v2"
     ):
         raise ValueError("audit: result-contract identity mismatch")
     return contract
@@ -376,34 +376,54 @@ def _verify_panel(panel: dict[str, Any], *, name: str) -> None:
 
 
 def _verify_trajectory(arm: dict[str, Any], *, path: str) -> None:
-    count = _nonnull_prefix(arm["samples"], path=f"{path}.samples")
-    samples = arm["samples"][:count]
-    if not samples:
-        raise ValueError(f"{path}: initial sample missing")
-    for index, sample in enumerate(samples):
-        if index < count - 1 or arm["completed"]:
-            if sample["step"] != 10 * index:
-                raise ValueError(f"{path}.samples: grid mismatch")
-    if arm["completed"] and (arm["stopped"] or count != 501):
-        raise ValueError(f"{path}: false completion")
-    distances = [sample["distance"] for sample in samples]
+    dense_count = _nonnull_prefix(
+        arm["dense_distances"], path=f"{path}.dense_distances"
+    )
+    dense = arm["dense_distances"][:dense_count]
+    if not dense or any(
+        type(value) not in (int, float) or not math.isfinite(value) or value < 0.0
+        for value in dense
+    ):
+        raise ValueError(f"{path}.dense_distances: invalid distance")
+    final_step = dense_count - 1
+    complete = bool(not arm["stopped"] and final_step == 5000)
+    if arm["completed"] is not complete or (not complete and not arm["stopped"]):
+        raise ValueError(f"{path}: completion state mismatch")
+    sample_count = _nonnull_prefix(arm["samples"], path=f"{path}.samples")
+    samples = arm["samples"][:sample_count]
+    expected_steps = list(range(0, final_step + 1, 10))
+    if expected_steps[-1] != final_step:
+        expected_steps.append(final_step)
+    if [sample["step"] for sample in samples] != expected_steps:
+        raise ValueError(f"{path}.samples: grid mismatch")
+    if any(sample["distance"] != dense[sample["step"]] for sample in samples):
+        raise ValueError(f"{path}.samples: dense projection mismatch")
+    maximum = max(dense)
+    maximum_step = dense.index(maximum)
     if "initial_distance" in arm:
-        initial = distances[0]
+        initial = dense[0]
         if initial <= 0.0:
             raise ValueError(f"{path}: invalid initial distance")
         if (
             arm["initial_distance"],
             arm["final_distance"],
             arm["final_ratio"],
+            arm["maximum_distance"],
+            arm["maximum_step"],
             arm["growth_factor"],
         ) != (
             initial,
-            distances[-1],
-            distances[-1] / initial,
-            max(distances) / initial,
+            dense[-1],
+            dense[-1] / initial,
+            maximum,
+            maximum_step,
+            maximum / initial,
         ):
             raise ValueError(f"{path}: summary mismatch")
-    elif arm["maximum_distance"] != max(distances):
+    elif (arm["maximum_distance"], arm["maximum_step"]) != (
+        maximum,
+        maximum_step,
+    ):
         raise ValueError(f"{path}: exact-control summary mismatch")
 
 

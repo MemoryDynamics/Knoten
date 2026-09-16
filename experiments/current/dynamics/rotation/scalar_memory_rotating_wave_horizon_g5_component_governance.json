@@ -1,9 +1,9 @@
 {
   "authorization": null,
   "gate": "G5",
-  "protocol_blob": "44e6378f9e8d62f2a42db0a56115a9729f1eb237",
-  "reason": "attempt 2 consumed by recorded trajectory-summary contract incident; no attempt 3 authorized",
-  "result_schema_sha256": "02d90aaeed3832083c435bf68fc51e9a20f6b3b99eac52077f5a40d5134491ba",
+  "protocol_blob": "f194ae9f1f08278378ab6de9965192051dd04803",
+  "reason": "attempt 3 dense-trajectory remediation under target-free review; no target access authorized",
+  "result_schema_sha256": "d338a69ed5cb6c7909ed6776e880176978747160fd19abcf8055b96ffea369e0",
   "schema": "scalar-memory-rotating-wave-horizon-g5-governance-v1",
   "state": "closed",
   "target_authorized": false,

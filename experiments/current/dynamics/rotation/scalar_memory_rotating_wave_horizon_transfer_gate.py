@@ -700,6 +700,50 @@ def _v3_trajectory_samples(trace: Sequence[dict[str, Any]]) -> list[dict[str, An
     return samples + [None] * (501 - len(samples))
 
 
+def _g5_dense_distance_record(raw: dict[str, Any]) -> dict[str, Any]:
+    """Reconstruct every scalar continuation summary from its full-step trace."""
+
+    source = raw["distance_trace"]
+    if type(source) is not list or any(
+        isinstance(value, (bool, np.bool_))
+        or not isinstance(value, (int, float, np.integer, np.floating))
+        for value in source
+    ):
+        raise ValueError("G5 continuation returned a nonnumeric dense distance")
+    values = [float(value) for value in source]
+    final_step = raw["final_step"]
+    expected_length = _G5_THRESHOLDS.continuation_steps + 1
+    if (
+        type(final_step) is not int
+        or final_step < 0
+        or final_step >= expected_length
+        or len(values) != final_step + 1
+        or any(not math.isfinite(value) or value < 0.0 for value in values)
+    ):
+        raise ValueError("G5 continuation returned an invalid dense distance trace")
+    maximum = max(values)
+    maximum_step = values.index(maximum)
+    initial = values[0]
+    final = values[-1]
+    if raw["maximum_distance"] != maximum or raw["final_distance"] != final:
+        raise ValueError("G5 continuation dense distance summary mismatch")
+    samples = _v3_trajectory_samples(raw["trace"])
+    for sample in samples:
+        if sample is None:
+            break
+        step = sample["step"]
+        if step < 0 or step >= len(values) or sample["distance"] != values[step]:
+            raise ValueError("G5 continuation sample is not a dense-trace projection")
+    return {
+        "dense_distances": values + [None] * (expected_length - len(values)),
+        "final": final,
+        "initial": initial,
+        "maximum": maximum,
+        "maximum_step": maximum_step,
+        "samples": samples,
+    }
+
+
 def continuation_backend_record(
     *,
     name: str,
@@ -746,17 +790,30 @@ def continuation_backend_record(
         raw["stopped"] is False
         and raw["final_step"] == _G5_THRESHOLDS.continuation_steps
     )
+    dense = _g5_dense_distance_record(raw)
+    initial = dense["initial"]
+    if initial <= 0.0:
+        raise ValueError("G5 continuation returned a nonpositive initial distance")
+    if (
+        raw["initial_distance"] != initial
+        or raw["final_ratio"] != dense["final"] / initial
+        or raw["growth_factor"] != dense["maximum"] / initial
+    ):
+        raise ValueError("G5 continuation dense distance ratio mismatch")
     return {
         "amplitude": expected_amplitude,
         "completed": completed,
-        "final_distance": raw["final_distance"],
-        "final_ratio": raw["final_ratio"],
-        "growth_factor": raw["growth_factor"],
-        "initial_distance": raw["initial_distance"],
+        "dense_distances": dense["dense_distances"],
+        "final_distance": dense["final"],
+        "final_ratio": dense["final"] / initial,
+        "growth_factor": dense["maximum"] / initial,
+        "initial_distance": initial,
+        "maximum_distance": dense["maximum"],
+        "maximum_step": dense["maximum_step"],
         "name": name,
         "perturbation": values,
         "perturbation_sha256": _vector_sha256(values),
-        "samples": _v3_trajectory_samples(raw["trace"]),
+        "samples": dense["samples"],
         "stopped": raw["stopped"],
     }
 
@@ -787,10 +844,13 @@ def exact_backend_record(*, rounded_root: tuple[float, float]) -> dict[str, Any]
         raw["stopped"] is False
         and raw["final_step"] == _G5_THRESHOLDS.continuation_steps
     )
+    dense = _g5_dense_distance_record(raw)
     return {
         "completed": completed,
-        "maximum_distance": raw["maximum_distance"],
-        "samples": _v3_trajectory_samples(raw["trace"]),
+        "dense_distances": dense["dense_distances"],
+        "maximum_distance": dense["maximum"],
+        "maximum_step": dense["maximum_step"],
+        "samples": dense["samples"],
         "stopped": raw["stopped"],
     }
 

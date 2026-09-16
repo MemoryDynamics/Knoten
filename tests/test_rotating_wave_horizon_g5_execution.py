@@ -94,7 +94,7 @@ def _authorized_governance(execution):
         },
         "gate": "G5",
         "protocol_blob": "5" * 40,
-        "reason": "explicit-user-authorized-one-shot-attempt-2",
+        "reason": "explicit-user-authorized-one-shot-attempt-3",
         "result_schema_sha256": schema_digest,
         "schema": execution.GOVERNANCE_SCHEMA,
         "state": "authorized_once",
@@ -276,15 +276,17 @@ def test_authorization_fails_before_receipt_on_context_mutations(
     assert receipts == []
 
 
-def test_retry_paths_are_attempt_2_and_do_not_alias_attempt_1(execution):
-    assert execution.REGISTERED_ATTEMPT == 2
-    assert "attempt_2" in execution.ATTEMPT_RECEIPT_REL.name
-    assert "attempt_2" in execution.RESULT_NAME
+def test_retry_paths_are_attempt_3_and_do_not_alias_prior_attempts(execution):
+    assert execution.REGISTERED_ATTEMPT == 3
+    assert "attempt_3" in execution.ATTEMPT_RECEIPT_REL.name
+    assert "attempt_3" in execution.RESULT_NAME
     assert "attempt_1" not in execution.ATTEMPT_RECEIPT_REL.name
     assert "attempt_1" not in execution.RESULT_NAME
+    assert "attempt_2" not in execution.ATTEMPT_RECEIPT_REL.name
+    assert "attempt_2" not in execution.RESULT_NAME
 
 
-def test_attempt_2_receipt_records_registered_attempt(
+def test_attempt_3_receipt_records_registered_attempt(
     execution, monkeypatch, tmp_path
 ):
     monkeypatch.setattr(execution, "ROOT", tmp_path)
@@ -299,25 +301,26 @@ def test_attempt_2_receipt_records_registered_attempt(
     )
 
     receipt = json.loads((tmp_path / relative).read_text(encoding="utf-8"))
-    assert receipt["attempt"] == execution.REGISTERED_ATTEMPT == 2
+    assert receipt["attempt"] == execution.REGISTERED_ATTEMPT == 3
     assert len(digest) == 64
 
 
-def test_attempt_1_receipt_does_not_block_attempt_2_paths(
+def test_prior_receipts_do_not_block_attempt_3_paths(
     execution, monkeypatch, tmp_path
 ):
     output = tmp_path / "reports"
     output.mkdir()
     (output / "attempt_1_receipt.json").write_text("{}\n", encoding="utf-8")
+    (output / "attempt_2_receipt.json").write_text("{}\n", encoding="utf-8")
     monkeypatch.setattr(execution, "ROOT", tmp_path)
     monkeypatch.setattr(execution, "OUTPUT_DIRECTORY_REL", Path("reports"))
     monkeypatch.setattr(
-        execution, "ATTEMPT_RECEIPT_REL", Path("reports/attempt_2_receipt.json")
+        execution, "ATTEMPT_RECEIPT_REL", Path("reports/attempt_3_receipt.json")
     )
 
     execution._validate_output_paths(output)
 
-    (output / "attempt_2_receipt.json").write_text("{}\n", encoding="utf-8")
+    (output / "attempt_3_receipt.json").write_text("{}\n", encoding="utf-8")
     with pytest.raises(RuntimeError, match="already exists"):
         execution._validate_output_paths(output)
 

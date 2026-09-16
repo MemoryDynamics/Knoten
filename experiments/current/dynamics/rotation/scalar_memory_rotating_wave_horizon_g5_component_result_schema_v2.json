@@ -1,0 +1,188 @@
+{
+  "arrays": {
+    "artifacts": {"item": "object:artifact", "length": 2},
+    "complex_pair": {"item": "number", "length": 2},
+    "complex_vector_4800": {"item": "array:complex_pair", "length": 4800},
+    "decimal_interval_matrix_2": {"item": "array:decimal_interval_row_2", "length": 2},
+    "decimal_interval_row_2": {"item": "array:decimal_pair", "length": 2},
+    "decimal_interval_vector_2": {"item": "array:decimal_pair", "length": 2},
+    "decimal_matrix_2": {"item": "array:decimal_row_2", "length": 2},
+    "decimal_pair": {"item": "decimal", "length": 2},
+    "decimal_row_2": {"item": "decimal", "length": 2},
+    "dense_distances": {"item": "nullable:number", "length": 5001},
+    "eigenpairs_24": {"item": "nullable:object:eigenpair", "length": 24},
+    "eigenpairs_36": {"item": "nullable:object:eigenpair", "length": 36},
+    "number_pair": {"item": "number", "length": 2},
+    "real_vector_4800": {"item": "number", "length": 4800},
+    "trajectory_arms": {"item": "nullable:object:trajectory_arm", "length": 3},
+    "trajectory_samples": {"item": "nullable:object:trajectory_sample", "length": 501}
+  },
+  "constants": {
+    "claim_boundary": "local direct H=2400 FIFO dynamics only; no H-infinity, formation, interaction, inertia, or mass claim",
+    "equation_id": "deterministic-native-k0h-full-fifo-v1",
+    "payload_schema": "scalar-memory-rotating-wave-horizon-g5-component-v2",
+    "preflight_schema": "scalar-memory-rotating-wave-g5-preflight-v1"
+  },
+  "enums": {
+    "arnoldi_status": ["complete", "arpack-no-convergence", "wrong-cardinality", "missing-vectors", "nonfinite", "residual-fail"],
+    "artifact_role": ["result-json", "readable-report"],
+    "decision": ["g5-local-direct-stability-pass", "g5-local-direct-instability-supported", "g5-inconclusive", "g5-experiment-invalid"],
+    "eigenpair_classification": ["translation", "rotation", "transverse"],
+    "gate_state": ["pass", "inconclusive", "invalid"],
+    "trajectory_name": ["radial", "tangential", "full-history-transverse"]
+  },
+  "objects": {
+    "authorization": {
+      "attempt": "integer",
+      "attempt_receipt_path": "string",
+      "attempt_receipt_sha256": "sha256",
+      "authorization_id": "uuid4",
+      "ci_run_id": "integer",
+      "governance_sha256": "sha256",
+      "implementation_revision": "sha1",
+      "upstream_revision": "sha1"
+    },
+    "arnoldi": {
+      "convergence": "object:arnoldi_panel_36",
+      "panel_agreement": "object:panel_agreement",
+      "primary": "object:arnoldi_panel_24"
+    },
+    "arnoldi_panel_24": {
+      "eigenpairs": "array:eigenpairs_24",
+      "expected_count": "integer",
+      "max_iterations": "integer",
+      "ncv": "integer",
+      "requested_count": "integer",
+      "start_sha256": "sha256",
+      "status": "enum:arnoldi_status",
+      "tolerance": "number"
+    },
+    "arnoldi_panel_36": {
+      "eigenpairs": "array:eigenpairs_36",
+      "expected_count": "integer",
+      "max_iterations": "integer",
+      "ncv": "integer",
+      "requested_count": "integer",
+      "start_sha256": "sha256",
+      "status": "enum:arnoldi_status",
+      "tolerance": "number"
+    },
+    "artifact": {"path": "string", "role": "enum:artifact_role"},
+    "candidate": {"candidate_id": "string", "horizon": "integer", "radius": "number", "theta": "number"},
+    "certificate": {
+      "box": "object:root_box",
+      "interval_backend": "string",
+      "jacobian_box": "array:decimal_interval_matrix_2",
+      "krawczyk_image": "array:decimal_interval_vector_2",
+      "strict_interior": "boolean"
+    },
+    "classification": {
+      "G5": "enum:gate_state",
+      "claim_boundary": "const:claim_boundary",
+      "decision": "enum:decision",
+      "gates": "object:decision_gates"
+    },
+    "decision_gates": {
+      "continuations_complete": "boolean",
+      "exact_arm": "boolean",
+      "instability_supported": "boolean",
+      "panel_agreement": "boolean",
+      "panels_complete": "boolean",
+      "perturbation_contraction": "boolean",
+      "preflight": "boolean",
+      "ritz_residuals": "boolean",
+      "stable_spectrum": "boolean",
+      "symmetries": "boolean"
+    },
+    "dependencies": {"mpmath": "string", "numpy": "string", "scipy": "string"},
+    "eigenpair": {
+      "classification": "enum:eigenpair_classification",
+      "eigenvalue": "array:number_pair",
+      "modulus": "number",
+      "normalized_residual": "number",
+      "rotation_overlap": "number",
+      "translation_overlap": "number",
+      "vector": "nullable:array:complex_vector_4800"
+    },
+    "equation": {
+      "alpha": "number",
+      "amplitude_att": "number",
+      "amplitude_rep": "number",
+      "deposition_weight": "number",
+      "equation_id": "const:equation_id",
+      "eta": "number",
+      "memory_mass": "number",
+      "noise_amplitude": "number",
+      "q": "number",
+      "sigma_att": "number",
+      "sigma_rep": "number"
+    },
+    "exact_arm": {
+      "completed": "boolean",
+      "dense_distances": "array:dense_distances",
+      "maximum_distance": "number",
+      "maximum_step": "integer",
+      "samples": "array:trajectory_samples",
+      "stopped": "boolean"
+    },
+    "finite_root": {"inner_certificate": "object:certificate", "newton": "object:newton_panel", "outer_certificate": "object:certificate"},
+    "identity": {
+      "authorization": "object:authorization",
+      "created_utc": "string",
+      "dependencies": "object:dependencies",
+      "equation_id": "const:equation_id",
+      "execution_commit": "sha1",
+      "parameters": "object:parameters",
+      "protocol_path": "string",
+      "protocol_sha256": "sha256",
+      "schema": "const:payload_schema",
+      "start": "array:decimal_pair"
+    },
+    "jacobian": {"dimension": "integer", "nnz": "integer", "sha256": "sha256", "shape": "array:number_pair"},
+    "memory": {"closed_form_retained_weight": "number", "direct_retained_weight": "number", "identity_absolute_error": "number"},
+    "newton_panel": {"jacobian": "array:decimal_matrix_2", "precision_dps": "integer", "radius": "decimal", "residual": "array:decimal_pair", "steps": "integer", "theta": "decimal"},
+    "orbit": {"co_rotating_fixed_point_max_abs_error": "number", "history_sha256": "sha256", "native_circle_covariance_max_abs_error": "number"},
+    "panel_agreement": {"leading_transverse_distance": "nullable:number", "pass": "boolean", "symmetry_pass": "boolean"},
+    "parameters": {
+      "alpha": "number", "amplitude_att": "number", "amplitude_rep": "number", "epsilon": "number", "eta": "number",
+      "horizon": "integer", "memory_mass": "number", "q": "number", "sigma_att": "number", "sigma_rep": "number"
+    },
+    "payload": {
+      "arnoldi": "object:arnoldi",
+      "classification": "object:classification",
+      "finite_root": "nullable:object:finite_root",
+      "identity": "object:identity",
+      "preflight": "nullable:object:preflight",
+      "publication": "object:publication",
+      "trajectories": "object:trajectories"
+    },
+    "preflight": {"record": "object:preflight_record", "record_sha256": "sha256"},
+    "preflight_gates": {"finite": "boolean", "fixed_point": "boolean", "jacobian_structure": "boolean", "native_circle_covariance": "boolean", "pass": "boolean", "symmetries": "boolean", "weight_identity": "boolean"},
+    "preflight_record": {
+      "candidate": "object:candidate",
+      "equation": "object:equation",
+      "gates": "object:preflight_gates",
+      "jacobian": "object:jacobian",
+      "memory": "object:memory",
+      "orbit": "object:orbit",
+      "portability": "string",
+      "schema": "const:preflight_schema",
+      "symmetry": "object:symmetry",
+      "thresholds": "object:preflight_thresholds"
+    },
+    "preflight_thresholds": {"fixed_point_maximum": "number", "symmetry_residual_maximum": "number"},
+    "publication": {"artifacts": "array:artifacts", "manifest_path": "string", "manifest_published_last": "boolean"},
+    "root_box": {"radius": "array:decimal_pair", "theta": "array:decimal_pair"},
+    "symmetry": {"pass": "boolean", "residual_maximum": "number", "rotation_relative_residual": "number", "translation_x_relative_residual": "number", "translation_y_relative_residual": "number"},
+    "trajectories": {"exact_control": "nullable:object:exact_arm", "perturbation_arms": "array:trajectory_arms"},
+    "trajectory_arm": {
+      "amplitude": "number", "completed": "boolean", "dense_distances": "array:dense_distances", "final_distance": "number",
+      "final_ratio": "number", "growth_factor": "number", "initial_distance": "number", "maximum_distance": "number",
+      "maximum_step": "integer", "name": "enum:trajectory_name", "perturbation": "array:real_vector_4800",
+      "perturbation_sha256": "sha256", "samples": "array:trajectory_samples", "stopped": "boolean"
+    },
+    "trajectory_sample": {"distance": "number", "step": "integer"}
+  },
+  "root": "object:payload",
+  "schema": "scalar-memory-rotating-wave-horizon-g5-result-contract-v2"
+}

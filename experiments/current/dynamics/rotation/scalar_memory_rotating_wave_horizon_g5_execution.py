@@ -29,6 +29,10 @@ GOVERNANCE_REL = Path(
 )
 PROTOCOL_REL = Path(
     "reports/project/meta/preregistration/"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_protocol_2026-09-17.md"
+)
+RETRY_PROTOCOL_REL = Path(
+    "reports/project/meta/preregistration/"
     "scalar_memory_rotating_wave_horizon_g5_component_retry_protocol_2026-09-16.md"
 )
 ORIGINAL_PROTOCOL_REL = Path(
@@ -36,6 +40,10 @@ ORIGINAL_PROTOCOL_REL = Path(
     "scalar_memory_rotating_wave_horizon_g5_component_protocol_2026-09-14.md"
 )
 SCHEMA_REL = Path(
+    "experiments/current/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_g5_component_result_schema_v2.json"
+)
+PREVIOUS_SCHEMA_REL = Path(
     "experiments/current/dynamics/rotation/"
     "scalar_memory_rotating_wave_horizon_g5_component_result_schema_v1.json"
 )
@@ -49,16 +57,16 @@ AUDITOR_REL = Path(
 )
 READINESS_REVIEW_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_g5_retry_readiness_review_2026-09-16.md"
+    "scalar_memory_rotating_wave_horizon_g5_attempt_3_readiness_review_2026-09-17.md"
 )
 ATTEMPT_RECEIPT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_receipt.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_receipt.json"
 )
 OUTPUT_DIRECTORY_REL = Path("reports/dynamics/rotation")
-REGISTERED_ATTEMPT = 2
+REGISTERED_ATTEMPT = 3
 RESULT_NAME = (
-    "scalar_memory_rotating_wave_horizon_g5_component_attempt_2_2026-09-16.json"
+    "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json"
 )
 REPORT_NAME = RESULT_NAME.removesuffix(".json") + ".md"
 MANIFEST_NAME = RESULT_NAME.removesuffix(".json") + ".publication.json"
@@ -85,8 +93,10 @@ DEPENDENCIES = {
 PROTECTED_PATHS = (
     "requirements.txt",
     PROTOCOL_REL.as_posix(),
+    RETRY_PROTOCOL_REL.as_posix(),
     ORIGINAL_PROTOCOL_REL.as_posix(),
     SCHEMA_REL.as_posix(),
+    PREVIOUS_SCHEMA_REL.as_posix(),
     COMPONENT_REL.as_posix(),
     AUDITOR_REL.as_posix(),
     "experiments/current/dynamics/rotation/"

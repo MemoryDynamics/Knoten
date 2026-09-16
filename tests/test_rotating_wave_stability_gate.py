@@ -3,13 +3,16 @@ import numpy as np
 from emergenz_knoten.rotating_wave_stability import (
     circular_history,
     symmetry_tangent_vectors,
+    translation_reduced_norm,
 )
 from emergenz_knoten.rotating_wave_stability_gate import (
+    RotatingWaveCandidate,
     StabilityThresholds,
     deterministic_arnoldi_start,
     evaluate_decision,
     mirrored_diagnostics,
     registered_perturbations,
+    run_continuation,
 )
 
 
@@ -127,6 +130,46 @@ def test_registered_perturbations_are_mirrored_and_transverse():
     np.testing.assert_allclose(np.linalg.norm(full), scale, rtol=2.0e-15)
     for tangent in symmetry_tangent_vectors(history).values():
         assert abs(float(full @ tangent)) <= 2.0e-17
+
+
+def test_continuation_records_every_scalar_distance_before_sampling():
+    candidate = RotatingWaveCandidate(
+        candidate_id="dense-trace-test",
+        radius=0.9,
+        theta=0.03,
+        alpha=0.1,
+        horizon=3,
+        memory_mass=1.0,
+        eta=0.15,
+        sigma_rep=1.0,
+        sigma_att=3.0,
+        amplitude_rep=1.0,
+        amplitude_att=3.5,
+    )
+    thresholds = StabilityThresholds(
+        **{
+            **THRESHOLDS.__dict__,
+            "continuation_steps": 3,
+            "sample_every": 2,
+        }
+    )
+    history = circular_history(radius=0.9, theta=0.03, horizon=3)
+    result = run_continuation(
+        "exact",
+        np.zeros_like(history),
+        history,
+        translation_reduced_norm(history, alpha=0.1, memory_mass=1.0),
+        candidate,
+        thresholds,
+    )
+
+    assert result["final_step"] == 3
+    assert len(result["distance_trace"]) == 4
+    assert [sample["step"] for sample in result["trace"]] == [0, 2, 3]
+    assert all(
+        sample["distance"] == result["distance_trace"][sample["step"]]
+        for sample in result["trace"]
+    )
 
 
 def test_frozen_decision_semantics_separate_pass_fail_and_inconclusive():

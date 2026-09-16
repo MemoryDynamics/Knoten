@@ -1324,13 +1324,15 @@ def test_g5_continuation_adapters_preserve_samples_and_null_suffixes(
     def fake_continuation(name, perturbation, *args, **kwargs):
         assert name == "radial"
         np.testing.assert_array_equal(perturbation.ravel(), np.asarray(radial))
+        distances = [0.1, 0.2] + [0.08] * 15 + [0.05]
         return {
+            "distance_trace": distances,
             "final_distance": 0.05,
             "final_ratio": 0.5,
             "final_step": 17,
-            "growth_factor": 1.0,
+            "growth_factor": 2.0,
             "initial_distance": 0.1,
-            "maximum_distance": 0.1,
+            "maximum_distance": 0.2,
             "stopped": True,
             "trace": [
                 {"distance": 0.1, "step": 0},
@@ -1350,6 +1352,11 @@ def test_g5_continuation_adapters_preserve_samples_and_null_suffixes(
     assert record["stopped"] is True
     assert [row["step"] for row in record["samples"][:3]] == [0, 10, 17]
     assert record["samples"][3:] == [None] * 498
+    assert record["dense_distances"][:18] == [0.1, 0.2] + [0.08] * 15 + [0.05]
+    assert record["dense_distances"][18:] == [None] * 4983
+    assert record["maximum_distance"] == 0.2
+    assert record["maximum_step"] == 1
+    assert record["growth_factor"] == 2.0
     assert record["perturbation_sha256"] == gate._vector_sha256(radial)
 
 
@@ -1387,12 +1394,15 @@ def test_g5_exact_adapter_uses_zero_perturbation_and_fixed_sample_slots(
     def fake_continuation(name, perturbation, *args, **kwargs):
         assert name == "exact"
         assert np.count_nonzero(perturbation) == 0
+        distances = [float(index) * 1e-15 for index in range(5001)]
         return {
+            "distance_trace": distances,
+            "final_distance": distances[-1],
             "final_step": 5000,
-            "maximum_distance": 2e-12,
+            "maximum_distance": distances[-1],
             "stopped": False,
             "trace": [
-                {"distance": float(index) * 1e-15, "step": 10 * index}
+                {"distance": distances[10 * index], "step": 10 * index}
                 for index in range(501)
             ],
         }
@@ -1402,7 +1412,9 @@ def test_g5_exact_adapter_uses_zero_perturbation_and_fixed_sample_slots(
 
     assert record["completed"] is True
     assert record["stopped"] is False
-    assert record["maximum_distance"] == 2e-12
+    assert record["maximum_distance"] == float(5000) * 1e-15
+    assert record["maximum_step"] == 5000
+    assert len(record["dense_distances"]) == 5001
     assert len(record["samples"]) == 501
     assert record["samples"][-1]["step"] == 5000
 
