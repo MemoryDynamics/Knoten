@@ -47,10 +47,10 @@ Stand: 2026-09-15.
   simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
   lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
   Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
-  nun targetfrei. Der Execution-Context-Guard ist implementiert und durch
-  maschinelle Governance geschlossen; das getrennte Readinessreview besteht
-  targetfrei. Dies ist kein G5-Ergebnis und keine Zielautorisierung.
-  Vollstaendiger Horizontlauf und weitere P5-Zielausfuehrungen bleiben geschlossen.
+  nun targetfrei. Der autorisierte G5-Attempt 1 erreichte Root, Preflight und
+  Arnoldi, scheiterte aber vor Publikation an der exakten $[0,1]$-Validierung
+  eines ungeclippten binary64-Overlaps. Es existiert kein Ergebnis; Attempt 1
+  ist verbraucht und ein Retry nicht autorisiert.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 
