@@ -49,8 +49,10 @@ Stand: 2026-09-15.
   Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
   nun targetfrei. Der autorisierte G5-Attempt 1 erreichte Root, Preflight und
   Arnoldi, scheiterte aber vor Publikation an der exakten $[0,1]$-Validierung
-  eines ungeclippten binary64-Overlaps. Es existiert kein Ergebnis; Attempt 1
-  ist verbraucht und ein Retry nicht autorisiert.
+  eines ungeclippten binary64-Overlaps. Die Recordgrenze ist inzwischen
+  targetfrei mit dimensionsskalierter Rundungskanonisierung und
+  Falsifikationstests remediiert. Es existiert kein Ergebnis; Attempt 1 ist
+  verbraucht und ein Retry nicht autorisiert.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

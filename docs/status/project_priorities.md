@@ -43,9 +43,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    targetfrei. Attempt 1 erreichte nach Root und Preflight die Arnoldi-Panels,
    scheiterte aber vor Publikation an einem ungeclippten binary64-Overlap
    ausserhalb des exakten Intervalls $[0,1]$. Es existiert kein G5-Ergebnis;
-   der Versuch ist verbraucht und kein Retry autorisiert. Als naechstes ist
-   ausschliesslich targetfreie Incident-Remediation zulaessig. G5,
-   vollstaendiger Horizontlauf und P5-D-Versuch 4 bleiben ungemessen.
+   der Versuch ist verbraucht und kein Retry autorisiert. Die
+   Overlap-Recordgrenze ist inzwischen mit dimensionsskalierter
+   binary64-Kanonisierung und Falsifikationstests targetfrei remediiert. Als
+   naechstes ist ausschliesslich ein prospektives Retry-Protokoll mit neuem
+   Readinessreview zulaessig. G5, vollstaendiger Horizontlauf und P5-D-Versuch
+   4 bleiben ungemessen.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -79,8 +82,9 @@ Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
 reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
 unabhaengiger Auditor sowie der Execution-Context-Guard sind targetfrei
 implementiert und reviewed. G5-Attempt 1 ist als Pipeline-Incident ohne
-Ergebnis verbraucht. Der naechste erlaubte Block ist ausschliesslich die
-targetfreie Remediation der Overlap-Recordgrenze; ein Retry ist nicht
-autorisiert. Der aktuelle
+Ergebnis verbraucht; die Overlap-Recordgrenze ist targetfrei remediiert und
+getestet. Der naechste erlaubte Block ist ausschliesslich ein prospektives
+Retry-Protokoll samt neuem Readinessreview; ein Retry ist nicht autorisiert.
+Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

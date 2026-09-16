@@ -223,6 +223,60 @@ def test_explicit_start_reaches_solver_unchanged_and_vectors_are_recorded(
     assert result["eigenpairs"][0]["vector"][0] == [1.0, 0.0]
 
 
+def test_projection_overlap_canonicalizes_only_binary64_boundary_drift() -> None:
+    epsilon = np.finfo(np.float64).eps
+
+    assert horizon_stability._canonical_projection_overlap(
+        1.0 + epsilon, dimension=4800
+    ) == 1.0
+    assert horizon_stability._canonical_projection_overlap(
+        -epsilon, dimension=4800
+    ) == 0.0
+    assert horizon_stability._canonical_projection_overlap(
+        0.25, dimension=4800
+    ) == 0.25
+
+
+@pytest.mark.parametrize("overlap", (-1e-8, 1.0 + 1e-8, np.nan, np.inf))
+def test_projection_overlap_rejects_non_roundoff_violations(overlap: float) -> None:
+    with pytest.raises(ArithmeticError, match="projection bound"):
+        horizon_stability._canonical_projection_overlap(overlap, dimension=4800)
+
+
+def test_eigen_panel_serializes_roundoff_overlap_at_exact_boundary(monkeypatch) -> None:
+    history = circular_history(radius=0.9, theta=0.03, horizon=3)
+    translation = np.zeros((6, 2))
+    translation[0, 0] = np.nextafter(1.0, 2.0)
+    translation[1, 1] = 1.0
+    rotation = np.zeros(6)
+    rotation[2] = 1.0
+
+    monkeypatch.setattr(
+        horizon_stability,
+        "symmetry_basis",
+        lambda _history: (translation, rotation),
+    )
+    monkeypatch.setattr(
+        horizon_stability,
+        "eigs",
+        lambda jacobian, **kwargs: (
+            np.asarray([1.0 + 0.0j, 0.9 + 0.1j]),
+            np.eye(6, 2, dtype=complex),
+        ),
+    )
+
+    result = horizon_stability.run_lcg_eigen_panel(
+        np.eye(6),
+        history,
+        _candidate(),
+        _panel(),
+        THRESHOLDS,
+        explicit_start=np.ones(6),
+    )
+
+    assert result["eigenpairs"][0]["translation_overlap"] == 1.0
+
+
 @pytest.mark.parametrize(
     "start",
     (

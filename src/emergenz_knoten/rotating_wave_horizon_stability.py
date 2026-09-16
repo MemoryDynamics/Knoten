@@ -240,6 +240,25 @@ def _explicit_start(values: np.ndarray, *, dimension: int) -> np.ndarray:
     return start
 
 
+def _canonical_projection_overlap(value: float, *, dimension: int) -> float:
+    """Map roundoff-sized projection-bound drift back to ``[0, 1]``.
+
+    A normalized orthogonal projection is mathematically bounded by one.
+    Binary64 dot products, QR, and norms can cross that bound by a few ulp.
+    The error budget is a conservative multiple of the standard accumulated
+    roundoff bound for ``dimension`` terms; larger violations fail closed.
+    """
+
+    overlap = float(value)
+    accumulated = dimension * np.finfo(np.float64).eps
+    if dimension < 1 or accumulated >= 1.0:
+        raise ValueError("projection dimension is outside the binary64 error model")
+    tolerance = 8.0 * accumulated / (1.0 - accumulated)
+    if not math.isfinite(overlap) or not -tolerance <= overlap <= 1.0 + tolerance:
+        raise ArithmeticError("symmetry overlap violates the projection bound")
+    return min(1.0, max(0.0, overlap))
+
+
 def _classify_with_vectors(
     jacobian: Any,
     eigenvalues: np.ndarray,
@@ -258,10 +277,14 @@ def _classify_with_vectors(
         residual = float(
             np.linalg.norm(jacobian @ vector - eigenvalue * vector) / vector_norm
         )
-        translation_overlap = float(
-            np.linalg.norm(translation_basis.conj().T @ vector) / vector_norm
+        translation_overlap = _canonical_projection_overlap(
+            np.linalg.norm(translation_basis.conj().T @ vector) / vector_norm,
+            dimension=vector.size,
         )
-        rotation_overlap = float(abs(np.vdot(rotation_basis, vector)) / vector_norm)
+        rotation_overlap = _canonical_projection_overlap(
+            abs(np.vdot(rotation_basis, vector)) / vector_norm,
+            dimension=vector.size,
+        )
         if translation_overlap >= symmetry_overlap_minimum:
             classification = "translation"
         elif rotation_overlap >= symmetry_overlap_minimum:

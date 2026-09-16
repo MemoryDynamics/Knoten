@@ -39,3 +39,7 @@ Remediation muesste Overlaps vor Serialisierung mathematisch auf $[0,1]$
 kanonisieren und durch Grenztests absichern. Jeder Retry benoetigt ein eigenes
 prospektives Amendement, neues Review, neue Governance und ausdrueckliche
 Autorisierung.
+
+Diese targetfreie Remediation wurde anschliessend umgesetzt und separat im
+[Overlap-Remediation-Review](scalar_memory_rotating_wave_horizon_g5_overlap_remediation_review_2026-09-16.md)
+bewertet. Sie ist keine Retry-Autorisierung.
