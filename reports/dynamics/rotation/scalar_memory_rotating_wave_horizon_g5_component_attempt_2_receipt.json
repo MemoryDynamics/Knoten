@@ -1,0 +1,10 @@
+{
+  "attempt": 2,
+  "authorization_id": "a620c161-0a46-49d7-a26a-81d0eac85d54",
+  "ci_run_id": 35137838583,
+  "created_utc": "2026-09-16T20:54:01.768190+00:00",
+  "governance_sha256": "4e6a6993cbe9aff22439ff3c7061ccffe66e05d8cb64cd29643f90dd42dcaad7",
+  "implementation_revision": "7e7610e9e5baa928d4855b269081ec67beb8b25d",
+  "revision": "3c3fe7d8003f13498be5f423eccbb34abc5b2c5e",
+  "schema": "scalar-memory-rotating-wave-horizon-g5-attempt-receipt-v1"
+}

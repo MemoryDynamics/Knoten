@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-14.
+Stand: 2026-09-16.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,7 +16,7 @@ vollstaendige vorherige Stand liegt im
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive`; Root-, Homotopie- und Ausschlussadapter targetfrei reviewed | keine Interaktionsevidenz; weitere wissenschaftliche Adapter, Horizonttransfer und neue Zielautorisierung bleiben offen |
+| P5-D | `p5d-inconclusive`; G5-Attempts 1 und 2 ohne publiziertes Ergebnis verbraucht | keine Interaktionsevidenz; Attempt 2 ist ein Trajektorien-Vertragsincident, kein Stabilitaetsbefund; weitere Zielautorisierung geschlossen |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-15.
+Stand: 2026-09-16.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -46,9 +46,13 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    der Versuch ist verbraucht und kein Retry autorisiert. Die
    Overlap-Recordgrenze ist inzwischen mit dimensionsskalierter
    binary64-Kanonisierung und Falsifikationstests targetfrei remediiert. Als
-   prospektive Attempt-2-Protokoll und das neue Readinessreview bestehen nun
-   targetfrei; Governance bleibt bis zum getrennten Einmalcommit geschlossen.
-   G5, vollstaendiger Horizontlauf und P5-D-Versuch 4 bleiben ungemessen.
+   prospektive Attempt-2-Protokoll und das neue Readinessreview bestanden
+   targetfrei. Attempt 2 erreichte die nichtlinearen Fortsetzungen, scheiterte
+   aber vor Publikation: Der Integrator bildet das Maximum ueber jeden Schritt,
+   waehrend der Validator es aus dem Zehnersampling rekonstruiert. Das ist ein
+   zweiter Pipeline-Incident, kein G5-Befund. Attempt 2 ist verbraucht; kein
+   Attempt 3 ist autorisiert. G5, vollstaendiger Horizontlauf und P5-D-Versuch
+   4 bleiben ungemessen.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -81,10 +85,11 @@ Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
 Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
 reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
 unabhaengiger Auditor sowie der Execution-Context-Guard sind targetfrei
-implementiert und reviewed. G5-Attempt 1 ist als Pipeline-Incident ohne
-Ergebnis verbraucht; die Overlap-Recordgrenze ist targetfrei remediiert und
-getestet. Attempt 2 ist prospektiv registriert und targetfrei reviewed; der
-naechste erlaubte Block ist ausschliesslich der Governance-only-
-Autorisierungscommit und danach genau ein Run. Der aktuelle
+implementiert und reviewed. G5-Attempts 1 und 2 sind als getrennte
+Pipeline-Incidents ohne Ergebnis verbraucht. Attempt 2 falsifiziert die
+Trajektorien-Vertragsabdeckung: Vollschrittmaximum und publiziertes
+Zehnersampling sind semantisch verschieden. Der naechste erlaubte Block ist
+ausschliesslich targetfreie Incident-, Vertrags- und Testremediation; es gibt
+keinen automatischen Attempt 3. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
