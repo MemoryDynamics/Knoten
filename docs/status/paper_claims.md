@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-09-13.
+Stand: 2026-09-17.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -41,7 +41,10 @@ Als technischer Spin-off ist inzwischen enger tragbar:
   zwei 120/160-dps-Tail-Krawczyk-Panels lokal zertifizierter Root von
   $F_\infty$ bei festem $\alpha=0.01$ und $H=3600$-Kopf;
 - lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
-  prospektiv gewaehlten feineren L3-Zelle;
+  prospektiv gewaehlten feineren L3-Zelle sowie einen vorregistrierten
+  direkten $H=2400$-Pass desselben Grundgleichungsasts mit zwei
+  uebereinstimmenden Largest-modulus-Arnoldi-Panels und drei kontrahierenden
+  nichtlinearen Voll-FIFO-Stoerungsarmen;
 - eine lokale matrixwertige Loop--Center-Kleinsignalantwort am vorbereiteten
   L3-Kreis und, in einer outcome-informierten prospektiven Verlaengerung,
   aufgeloeste Rueckkehr aller signierten Arme durch 20 Memory-Zeiten;
@@ -80,7 +83,7 @@ der kanonischen Gate-Folge in den
 
 | Freigabe | Nach einem dokumentierten Pass zusaetzlich tragbar | Weiterhin gesperrt |
 | --- | --- | --- |
-| P1 Nicht-Anchor-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle als zweiter getesteter Skala | vollstaendige Spektralstabilitaet und stabile Familie |
+| P1/G5 lokale finite-H-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle sowie bei exakt `H=2400` zwei uebereinstimmende Largest-modulus-Arnoldi-Panels mit fuehrendem transversalen Betrag `0.9930442` und drei kontrahierende nichtlineare Voll-FIFO-Stoerungsarme | kein vollstaendiger Intervallspektralbeweis, keine stabile Familie, G1--G3-Branchverbindung, $H\to\infty$-Stabilitaet, Formation oder Interaktion |
 | P2 Loop--Center plus P2-R-Reconciliation | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten, matrixwertige effektive Kleinsignalantwort und aufgeloeste Rueckkehr unter dem deklarierten schwachen Port | unabhaengige Replikation, skalares Massengesetz, mikroskopischer Aktuator, physische Arbeit oder Masse |
 | P3 Formation/Basin -- reviewed Pass | finite-ensemble attraction fuer fuenf registrierte nichtkreisfoermige Historiengeometrien in beiden gesetzten Chiralitaeten; zwei Geometrien verwenden weder Zielradius noch Zielwinkel | offener Basin-Ball oder -Volumen, generische/spontane Formation, Chiralitaetsselektion aus symmetrischen Daten und Rauschrobustheit |
 | P4 reziproke Single-Loop-Mechanik -- reviewed Fail | kein neuer Mechanikclaim: nur als negativer/diagnostischer Befund berichten, dass der explizit konstruierte Source-/Write-Port seinen finite-H-Write-/Age-Ledger schliesst, waehrend das registrierte Gesamtgate formal scheitert und 24/24 Arme eine chirality-odd Querantwort oberhalb der Grenze zeigen | operationaler Single-Loop-Mechanikpass, direkter P5-Targetzugriff, skalares Massengesetz, materieller Schwerpunkt, konservierter Impuls, intrinsischer Spin oder physische Masse; der spaetere P4-R-Pass benennt diesen Fail nicht um |

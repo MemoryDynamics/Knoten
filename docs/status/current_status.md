@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-16.
+Stand: 2026-09-17.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -13,10 +13,10 @@ vollstaendige vorherige Stand liegt im
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
 | Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
-| Native Rotation | sechs lokal eindeutige finite-$H$-Roots; direkte Voll-FIFO-, Stabilitaets- und Attraction-Panels fuer ausgewaehlte Zellen | vorbereitete Kreisloesungen, keine globale Eindeutigkeit oder generische Formation |
+| Native Rotation | sechs lokal eindeutige finite-$H$-Roots; G5 besteht direkte Root-, Spektral- und Nichtlinearitaetsgates bei $H=2400$ | lokale numerische Stabilitaet des vorbereiteten Orbits, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
-| P5-D | `p5d-inconclusive`; G5-Attempts 1 und 2 ohne publiziertes Ergebnis verbraucht | keine Interaktionsevidenz; Attempt 2 ist ein Trajektorien-Vertragsincident, kein Stabilitaetsbefund; weitere Zielautorisierung geschlossen |
+| P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
 | Source-Audit | `referee-source-ready-with-major-claim-restrictions` | publication source mit offenen Hardening-Auflagen |
 
 ## Was der Kreisnachweis genau sagt
@@ -121,8 +121,8 @@ preregistrierte Retry auf Commit `fb1cc7d` besteht anschliessend beide
 strikten 120/160-dps-Tailpanels; ihre Krawczyk-Bilder ueberlappen. Der
 Standardbibliothek-Auditor rekonstruiert alle acht Checks und urteilt
 `g4-independent-audit-agrees`. Damit ist G4 als isolierte lokale
-$F_\infty$-Komponente `pass`. Die G1--G3-Branchverbindung, G5, der
-vollstaendige Horizontlauf und P5-D bleiben nicht autorisiert oder belegt.
+$F_\infty$-Komponente `pass`. Die G1--G3-Branchverbindung, der
+vollstaendige Horizontlauf und P5-D bleiben nicht belegt.
 
 Das anschliessende G4-zu-G5-Meta-Review bestaetigt diese enge Claimgrenze und
 findet keinen neuen kritischen G4-Defekt. Die daraus abgeleiteten
@@ -136,9 +136,14 @@ $M_0$, $\eta$, Depositionsgewicht, direkte Gewichtssumme, native
 Kreiskovarianz, mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien an
 einen kanonisch hashbaren Record. Er bestaetigt targetfrei die beabsichtigte
 Architektur: Nur Arnoldi ist linearisiert; die Stoerungsarme iterieren die
-nichtlineare Voll-FIFO-Grundgleichung. G5 wurde dabei nicht ausgefuehrt. Vor
-Readiness fehlen der eingefrorene Komponentenvertrag, Backendkomposition
-und unabhaengige Auditierung des persistierten Records.
+nichtlineare Voll-FIFO-Grundgleichung. Nach zwei getrennten
+Publikationsincidents schloss Attempt 3 die Recordluecke mit einer dichten
+Vollschrittspur. Der einmalige Ziellauf besteht beide Arnoldi-Panels und alle
+drei nichtlinearen Stoerungsarme; der unabhaengige Auditor rekonstruiert
+Record, Entscheidung und Publikationshashes. Das Ergebnis lautet
+`g5-local-direct-stability-pass` fuer exakt $H=2400$. Dies ist kein
+Intervallbeweis des vollen Spektrums und keine Aussage ueber
+$H\to\infty$, Formation oder Interaktion.
 
 ## P5-D Code-Review und Remediation
 

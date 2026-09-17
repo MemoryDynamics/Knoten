@@ -17,7 +17,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Remediation abschliessen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
+1. **Fixed-alpha-Horizontgate vervollstaendigen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
    nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
    targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
@@ -50,13 +50,13 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    targetfrei. Attempt 2 erreichte die nichtlinearen Fortsetzungen, scheiterte
    aber vor Publikation: Der Integrator bildet das Maximum ueber jeden Schritt,
    waehrend der Validator es aus dem Zehnersampling rekonstruiert. Das ist ein
-   zweiter Pipeline-Incident, kein G5-Befund. Attempt 2 ist verbraucht; kein
-   Attempt 3 war nicht automatisch autorisiert. Die Vollschrittspur ist nun
-   targetfrei rekonstruktiv validiert; 1145 Tests, Lint und Docs bestehen. Das
-   Readinessreview erlaubt nach expliziter Nutzerfreigabe genau einen
-   Governance-only-Autorisierungscommit und einen Attempt-3-Lauf. Bis zu diesem
-   Commit bleibt das Target geschlossen. G5, vollstaendiger Horizontlauf und
-   P5-D-Versuch 4 bleiben ungemessen.
+   zweiter Pipeline-Incident, kein G5-Befund. Die anschliessend
+   preregistrierte dichte Vollschrittspur besteht 1145 Tests, Lint und Docs.
+   Attempt 3 wurde genau einmal ausgefuehrt und unabhaengig auditiert: beide
+   Arnoldi-Panels sowie alle drei nichtlinearen Stoerungsarme bestehen. Der
+   Befund `g5-local-direct-stability-pass` gilt nur lokal bei exakt $H=2400$.
+   Offen bleiben die G1--G3-Branchverbindung, der vollstaendige Horizontlauf
+   und jede P5-D-Folgeausfuehrung.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -91,8 +91,9 @@ reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
 unabhaengiger Auditor sowie der Execution-Context-Guard sind targetfrei
 implementiert und reviewed. G5-Attempts 1 und 2 sind als getrennte
 Pipeline-Incidents ohne Ergebnis verbraucht. Attempt 2 falsifizierte die
-Trajektorien-Vertragsabdeckung; die dichte, rekonstruktive Recordsemantik ist
-nun targetfrei reviewed und CI-gruen. Attempt 3 bleibt bis zum separaten
-Governance-only-Commit technisch geschlossen. Der aktuelle
+Trajektorien-Vertragsabdeckung; Attempt 3 schliesst sie mit auditierter
+dichter Spur und endet als `g5-local-direct-stability-pass`. Die einmalige
+Autorisierung ist verbraucht. Als naechste Horizontluecke bleibt die
+G1--G3-Verbindung zwischen den isolierten G4- und G5-Befunden. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
