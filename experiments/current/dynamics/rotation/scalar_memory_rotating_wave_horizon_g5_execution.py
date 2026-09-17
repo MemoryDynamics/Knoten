@@ -104,6 +104,7 @@ PROTECTED_PATHS = (
     "experiments/current/dynamics/rotation/"
     "scalar_memory_rotating_wave_horizon_transfer_gate.py",
     "src/emergenz_knoten/rotating_wave.py",
+    "src/emergenz_knoten/rotating_wave_dense_continuation.py",
     "src/emergenz_knoten/rotating_wave_interval.py",
     "src/emergenz_knoten/rotating_wave_horizon_stability.py",
     "src/emergenz_knoten/rotating_wave_stability.py",
@@ -113,6 +114,7 @@ PROTECTED_PATHS = (
     "tests/test_rotating_wave_horizon_g5_execution.py",
     "tests/test_rotating_wave_horizon_stability.py",
     "tests/test_rotating_wave_horizon_transfer.py",
+    "tests/test_rotating_wave_dense_continuation.py",
     "tests/test_rotating_wave_stability_gate.py",
 )
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")

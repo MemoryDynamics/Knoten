@@ -391,7 +391,6 @@ def run_continuation(
     )
     initial_distance = distance
     maximum_distance = distance
-    distance_trace = [distance]
     trace = [{"step": 0, "distance": distance, "alignment_phase": phase}]
     stop_radius = thresholds.stopping_radius_fraction * reference_norm
     stopped = False
@@ -409,7 +408,6 @@ def run_continuation(
             alpha=candidate.alpha,
             memory_mass=candidate.memory_mass,
         )
-        distance_trace.append(distance)
         maximum_distance = max(maximum_distance, distance)
         final_step = step
         if step % thresholds.sample_every == 0:
@@ -450,7 +448,6 @@ def run_continuation(
         "stopped": stopped,
         "stop_reason": stop_reason,
         "final_step": final_step,
-        "distance_trace": distance_trace,
         "trace": trace,
     }
 

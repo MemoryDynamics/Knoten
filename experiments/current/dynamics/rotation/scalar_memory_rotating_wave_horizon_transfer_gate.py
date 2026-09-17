@@ -41,11 +41,13 @@ from emergenz_knoten.rotating_wave_horizon_stability import (
     preflight_sha256,
     run_lcg_eigen_panel,
 )
+from emergenz_knoten.rotating_wave_dense_continuation import (
+    run_dense_continuation as run_continuation,
+)
 from emergenz_knoten.rotating_wave_stability_gate import (
     ArnoldiPanel,
     RotatingWaveCandidate,
     StabilityThresholds,
-    run_continuation,
 )
 
 
