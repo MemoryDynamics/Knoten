@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-16.
+Stand: 2026-09-17.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -51,8 +51,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    aber vor Publikation: Der Integrator bildet das Maximum ueber jeden Schritt,
    waehrend der Validator es aus dem Zehnersampling rekonstruiert. Das ist ein
    zweiter Pipeline-Incident, kein G5-Befund. Attempt 2 ist verbraucht; kein
-   Attempt 3 ist autorisiert. G5, vollstaendiger Horizontlauf und P5-D-Versuch
-   4 bleiben ungemessen.
+   Attempt 3 war nicht automatisch autorisiert. Die Vollschrittspur ist nun
+   targetfrei rekonstruktiv validiert; 1145 Tests, Lint und Docs bestehen. Das
+   Readinessreview erlaubt nach expliziter Nutzerfreigabe genau einen
+   Governance-only-Autorisierungscommit und einen Attempt-3-Lauf. Bis zu diesem
+   Commit bleibt das Target geschlossen. G5, vollstaendiger Horizontlauf und
+   P5-D-Versuch 4 bleiben ungemessen.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -86,10 +90,9 @@ Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
 reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
 unabhaengiger Auditor sowie der Execution-Context-Guard sind targetfrei
 implementiert und reviewed. G5-Attempts 1 und 2 sind als getrennte
-Pipeline-Incidents ohne Ergebnis verbraucht. Attempt 2 falsifiziert die
-Trajektorien-Vertragsabdeckung: Vollschrittmaximum und publiziertes
-Zehnersampling sind semantisch verschieden. Der naechste erlaubte Block ist
-ausschliesslich targetfreie Incident-, Vertrags- und Testremediation; es gibt
-keinen automatischen Attempt 3. Der aktuelle
+Pipeline-Incidents ohne Ergebnis verbraucht. Attempt 2 falsifizierte die
+Trajektorien-Vertragsabdeckung; die dichte, rekonstruktive Recordsemantik ist
+nun targetfrei reviewed und CI-gruen. Attempt 3 bleibt bis zum separaten
+Governance-only-Commit technisch geschlossen. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
