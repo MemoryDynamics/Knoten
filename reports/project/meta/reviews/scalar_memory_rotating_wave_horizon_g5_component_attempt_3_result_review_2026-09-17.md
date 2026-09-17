@@ -7,8 +7,11 @@ Verdict: **`g5-attempt-3-result-reviewed-local-direct-stability-pass`**
 Der vorregistrierte Attempt 3 wurde genau einmal auf Execution-Commit
 `9007564d4420e357fbef733fe05c7b58d8d1a81d` ausgefuehrt. Receipt, Ergebnis,
 Lesereport und zuletzt geschriebenes Manifest liegen vor. Der getrennte
-Standardbibliothek-Auditor akzeptierte Payload und Publikation waehrend des
-Laufs und in einer anschliessenden rein lesenden Wiederholung.
+Auditor akzeptierte Payload und Publikation waehrend des Laufs. Ein spaeteres
+Pre-Merge-Review fand, dass sein generischer Vertragsimport transitiv das
+numerische Paket lud. Nach einer rein infrastrukturellen Importremediation
+akzeptiert dieselbe Auditlogik die unveraenderten Artefakte auch in einem
+isolierten Standardbibliotheksprozess.
 
 ## 1. Evidenz
 

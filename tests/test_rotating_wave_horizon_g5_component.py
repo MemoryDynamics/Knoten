@@ -6,6 +6,8 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -355,7 +357,50 @@ def test_independent_auditor_has_no_numerical_or_runner_imports():
             imported.add(node.module.split(".", 1)[0])
 
     assert imported.isdisjoint({"numpy", "scipy", "mpmath"})
+    assert "emergenz_knoten" not in imported
     assert "scalar_memory_rotating_wave_horizon_g5_component_gate" not in imported
+
+
+def test_independent_auditor_imports_in_isolated_standard_library_process():
+    source = (
+        "import importlib.util, pathlib, sys; "
+        f"p=pathlib.Path({str(AUDITOR_PATH)!r}); "
+        "s=importlib.util.spec_from_file_location('isolated_g5_auditor',p); "
+        "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
+        "assert not ({'numpy','scipy','mpmath'} & set(sys.modules)); "
+        "assert not any(n == 'emergenz_knoten' or n.startswith('emergenz_knoten.') "
+        "for n in sys.modules)"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-I", "-c", source],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_tracked_attempt3_publication_audits_in_isolated_stdlib_process():
+    report_directory = ROOT / "reports/dynamics/rotation"
+    source = (
+        "import importlib.util, pathlib; "
+        f"p=pathlib.Path({str(AUDITOR_PATH)!r}); "
+        f"b=pathlib.Path({str(report_directory)!r}); "
+        "s=importlib.util.spec_from_file_location('isolated_g5_auditor',p); "
+        "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
+        "m.audit_publication("
+        "result_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json',"
+        "report_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.md',"
+        "manifest_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.publication.json',"
+        "receipt_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_receipt.json')"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-I", "-c", source],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def _write_receipt(payload, directory: Path) -> Path:

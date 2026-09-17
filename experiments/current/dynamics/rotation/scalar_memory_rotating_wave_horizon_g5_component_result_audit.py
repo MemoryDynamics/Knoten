@@ -11,16 +11,15 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from decimal import Decimal, localcontext
 import hashlib
+import importlib.util
 import json
 import math
 from pathlib import Path
 import struct
 from typing import Any, Sequence
 
-from emergenz_knoten.strict_json_contract import validate_payload as validate_contract
-
-
 ROOT = Path(__file__).resolve().parents[4]
+CONTRACT_VALIDATOR_PATH = ROOT / "src/emergenz_knoten/strict_json_contract.py"
 SCHEMA_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_g5_component_result_schema_v2.json"
 )
@@ -58,6 +57,25 @@ ATTEMPT_RECEIPT_PATH = (
     "reports/dynamics/rotation/"
     "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_receipt.json"
 )
+
+
+def _load_contract_validator() -> Any:
+    """Load the shared stdlib validator without importing the numerical package."""
+
+    specification = importlib.util.spec_from_file_location(
+        "g5_strict_json_contract", CONTRACT_VALIDATOR_PATH
+    )
+    if specification is None or specification.loader is None:
+        raise RuntimeError("audit: cannot load strict JSON contract validator")
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    validator = getattr(module, "validate_payload", None)
+    if not callable(validator):
+        raise RuntimeError("audit: strict JSON contract validator is missing")
+    return validator
+
+
+validate_contract = _load_contract_validator()
 
 
 def _contract() -> dict[str, Any]:
