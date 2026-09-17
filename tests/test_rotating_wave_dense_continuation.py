@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import ast
+import inspect
+import textwrap
+
 import numpy as np
 import pytest
 
@@ -47,6 +51,63 @@ THRESHOLDS = StabilityThresholds(
     stable_final_ratio_maximum=0.1,
     exact_control_distance_maximum=1e-10,
 )
+
+
+def _normalized_source_tree(function, *, remove_dense_trace: bool) -> str:
+    node = ast.parse(textwrap.dedent(inspect.getsource(function))).body[0]
+    assert isinstance(node, ast.FunctionDef)
+    node.name = "run_continuation"
+    if node.body and isinstance(node.body[0], ast.Expr):
+        node.body.pop(0)
+    if remove_dense_trace:
+        class DenseTraceStripper(ast.NodeTransformer):
+            def visit_Assign(self, child):
+                if any(
+                    isinstance(target, ast.Name) and target.id == "distance_trace"
+                    for target in child.targets
+                ):
+                    return None
+                return self.generic_visit(child)
+
+            def visit_Expr(self, child):
+                call = child.value
+                if (
+                    isinstance(call, ast.Call)
+                    and isinstance(call.func, ast.Attribute)
+                    and isinstance(call.func.value, ast.Name)
+                    and call.func.value.id == "distance_trace"
+                    and call.func.attr == "append"
+                ):
+                    return None
+                return self.generic_visit(child)
+
+            def visit_Return(self, child):
+                child = self.generic_visit(child)
+                if not isinstance(child.value, ast.Dict):
+                    return child
+                pairs = [
+                    (key, value)
+                    for key, value in zip(
+                        child.value.keys, child.value.values, strict=True
+                    )
+                    if not (
+                        isinstance(key, ast.Constant)
+                        and key.value == "distance_trace"
+                    )
+                ]
+                child.value.keys = [key for key, _ in pairs]
+                child.value.values = [value for _, value in pairs]
+                return child
+
+        node = DenseTraceStripper().visit(node)
+        assert isinstance(node, ast.FunctionDef)
+    return ast.dump(node, include_attributes=False)
+
+
+def test_dense_continuation_control_flow_matches_frozen_core_source() -> None:
+    assert _normalized_source_tree(
+        run_dense_continuation, remove_dense_trace=True
+    ) == _normalized_source_tree(run_continuation, remove_dense_trace=False)
 
 
 @pytest.mark.parametrize("name", ("exact", "radial"))
