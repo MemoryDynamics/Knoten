@@ -112,6 +112,8 @@ PROTECTED_PATHS = (
     "tests/test_rotating_wave_horizon_g5_component.py",
     "tests/test_rotating_wave_horizon_g5_execution.py",
     "tests/test_rotating_wave_horizon_stability.py",
+    "tests/test_rotating_wave_horizon_transfer.py",
+    "tests/test_rotating_wave_stability_gate.py",
 )
 _SHA1 = re.compile(r"[0-9a-f]{40}\Z")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
