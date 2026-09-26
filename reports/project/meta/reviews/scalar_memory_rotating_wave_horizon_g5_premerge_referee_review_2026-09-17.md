@@ -47,7 +47,7 @@ Nach der Korrektur bestehen lokal:
 2. der isolierte Auditorimport mit Python `-I`;
 3. der vollstaendige Audit des getrackten Attempt-3-Records im selben
    isolierten Prozess auf der Erzeugerplattform;
-4. alle 30 G5-Komponenten- und Auditor-Tests.
+4. alle 31 G5-Komponenten- und Auditor-Tests.
 
 Die erste exakte Linux-CI nach dieser Remediation scheiterte dennoch bei
 1146 bestandenen Tests an der bitgenauen Rekonstruktion eines komplexen
