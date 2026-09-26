@@ -10,8 +10,11 @@ Lesereport und zuletzt geschriebenes Manifest liegen vor. Der getrennte
 Auditor akzeptierte Payload und Publikation waehrend des Laufs. Ein spaeteres
 Pre-Merge-Review fand, dass sein generischer Vertragsimport transitiv das
 numerische Paket lud. Nach einer rein infrastrukturellen Importremediation
-akzeptiert dieselbe Auditlogik die unveraenderten Artefakte auch in einem
-isolierten Standardbibliotheksprozess.
+akzeptiert dieselbe Auditlogik die unveraenderten Artefakte auf der
+Erzeugerplattform auch in einem isolierten Standardbibliotheksprozess. Ein
+bitgenauer semantischer Cross-platform-Audit bleibt durch die registrierte
+binary64-Portabilitaetsgrenze ausgeschlossen; die Artefakthashes sind
+plattformunabhaengig reproduzierbar.
 
 ## 1. Evidenz
 

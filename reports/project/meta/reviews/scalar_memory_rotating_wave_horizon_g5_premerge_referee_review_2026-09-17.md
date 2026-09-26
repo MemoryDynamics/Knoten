@@ -1,6 +1,6 @@
 # G5 Pre-Merge-Review aus Referee-Perspektive
 
-Stand: 2026-09-17.
+Stand: 2026-09-26.
 
 Verdict: **`g5-premerge-referee-pass-major-remediated-claim-restricted`**
 
@@ -41,13 +41,30 @@ Die Remediation laedt ausschliesslich den gemeinsamen generischen
 JSON-Vertragsvalidator direkt per `importlib` aus seiner Datei. Sie aendert
 weder Schwellen noch Rekonstruktion, Entscheidung oder Ergebnisartefakte.
 
-Nach der Korrektur bestehen:
+Nach der Korrektur bestehen lokal:
 
 1. der AST-Test ohne Paket- oder numerischen Import;
 2. der isolierte Auditorimport mit Python `-I`;
 3. der vollstaendige Audit des getrackten Attempt-3-Records im selben
-   isolierten Prozess;
+   isolierten Prozess auf der Erzeugerplattform;
 4. alle 30 G5-Komponenten- und Auditor-Tests.
+
+Die erste exakte Linux-CI nach dieser Remediation scheiterte dennoch bei
+1146 bestandenen Tests an der bitgenauen Rekonstruktion eines komplexen
+Eigenwertbetrags. Damit falsifizierte sie die zunaechst zu weit gehende
+Annahme, der auf Windows erzeugte Record sei semantisch bitgenau auf Linux
+auditierbar. Das Ergebnis passt zur bereits im Record deklarierten Grenze
+`same-platform-binary64-transcendentals`; auch komplexe Betragsbildung kann
+zwischen den verwendeten Laufzeitbibliotheken um eine ULP abweichen.
+
+Die Testaufteilung wird deshalb nicht durch eine nachtraeglich grosszuegige
+Toleranz ersetzt. Stattdessen prueft jede Plattform einen dort erzeugten
+synthetischen Vollrecord in einem isolierten Standardbibliotheksprozess. Der
+getrackte Attempt-3-Record wird plattformuebergreifend byte- und
+manifestgenau geprueft; seine vollstaendige semantische Reproduktion bleibt
+ausdruecklich same-platform. Der rote Lauf
+[35274641663](https://github.com/MemoryDynamics/Knoten/actions/runs/35274641663)
+bleibt als Falsifikationsnachweis sichtbar.
 
 Der Auditor teilt weiterhin den rein generischen Vertragsinterpreter mit dem
 Runner. Seine Schwellen-, Hash-, Panel-, Trajektorien- und
@@ -60,15 +77,15 @@ Unabhaengigkeit, keine zweite numerische Implementierung.
   Intervallschranke fuer alle 4800 Eigenwerte.
 - Drei registrierte Stoerungsrichtungen und 5000 Schritte belegen lokale
   endliche Kontraktion, keinen offenen Basin-Ball oder asymptotischen Satz.
-- G4 zertifiziert lokal einen Root von (F_\infty); G5 stuetzt Stabilitaet
-  bei genau (H=2400). Ohne G1--G3 folgt daraus keine Branchverbindung und
-  keine (H\to\infty)-Stabilitaet.
+- G4 zertifiziert lokal einen Root von $F_\infty$; G5 stuetzt Stabilitaet
+  bei genau $H=2400$. Ohne G1--G3 folgt daraus keine Branchverbindung und
+  keine $H\to\infty$-Stabilitaet.
 - Der 30,7-MB-Rohrecord ist unterhalb der GitHub-Einzeldateigrenze und
   manifestgebunden, vergroessert aber das Repository dauerhaft. Weitere
   Vollvektorrecords brauchen vorab eine Archivierungsstrategie.
 - Die binary64-Transzendentalevidenz bleibt als same-platform gekennzeichnet.
 
-Damit bleiben Formation, Interaktion, internes (S^1), Spin, Traegheit und
+Damit bleiben Formation, Interaktion, internes $S^1$, Spin, Traegheit und
 physikalische Masse gesperrt.
 
 ## 4. Integrationsurteil
@@ -82,4 +99,3 @@ Nach gruener exakter Branch-CI darf der kumulative Stand in `main`
 fast-forward integriert werden. Der naechste wissenschaftliche Block ist
 G1--G3 samt G0-/G6-Integration. Ein neuer G5-Lauf, P5-D-Lauf oder
 Parameter-Retuning ist dadurch nicht autorisiert.
-

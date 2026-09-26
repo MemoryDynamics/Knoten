@@ -380,19 +380,28 @@ def test_independent_auditor_imports_in_isolated_standard_library_process():
     assert completed.returncode == 0, completed.stderr
 
 
-def test_tracked_attempt3_publication_audits_in_isolated_stdlib_process():
-    report_directory = ROOT / "reports/dynamics/rotation"
+def test_synthetic_publication_audits_in_isolated_stdlib_process(
+    runner, tmp_path
+):
+    payload = runner.assemble_component(
+        backend=_FiniteFailureBackend(),
+        identity=_identity(runner),
+        publication=_publication(runner),
+    )
+    receipt = _write_receipt(payload, tmp_path)
+    paths = runner.publish_payload(payload, directory=tmp_path)
     source = (
         "import importlib.util, pathlib; "
         f"p=pathlib.Path({str(AUDITOR_PATH)!r}); "
-        f"b=pathlib.Path({str(report_directory)!r}); "
+        f"result=pathlib.Path({str(paths['result'])!r}); "
+        f"report=pathlib.Path({str(paths['report'])!r}); "
+        f"manifest=pathlib.Path({str(paths['manifest'])!r}); "
+        f"receipt=pathlib.Path({str(receipt)!r}); "
         "s=importlib.util.spec_from_file_location('isolated_g5_auditor',p); "
         "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
         "m.audit_publication("
-        "result_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json',"
-        "report_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.md',"
-        "manifest_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.publication.json',"
-        "receipt_path=b/'scalar_memory_rotating_wave_horizon_g5_component_attempt_3_receipt.json')"
+        "result_path=result,report_path=report,manifest_path=manifest,"
+        "receipt_path=receipt)"
     )
     completed = subprocess.run(
         [sys.executable, "-I", "-c", source],
@@ -401,6 +410,18 @@ def test_tracked_attempt3_publication_audits_in_isolated_stdlib_process():
         text=True,
     )
     assert completed.returncode == 0, completed.stderr
+
+
+def test_tracked_attempt3_publication_hashes_are_cross_platform():
+    report_directory = ROOT / "reports/dynamics/rotation"
+    manifest_path = report_directory / (
+        "scalar_memory_rotating_wave_horizon_g5_component_attempt_3_"
+        "2026-09-17.publication.json"
+    )
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for artifact in manifest["artifacts"]:
+        content = (report_directory / artifact["path"]).read_bytes()
+        assert hashlib.sha256(content).hexdigest() == artifact["sha256"]
 
 
 def _write_receipt(payload, directory: Path) -> Path:
