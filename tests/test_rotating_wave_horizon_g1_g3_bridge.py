@@ -230,6 +230,86 @@ def test_independent_auditor_rejects_replay_and_endpoint_mutations() -> None:
         audit.audit_payload(broken)
 
 
+def test_manifest_last_publication_round_trip_is_independently_audited(
+    tmp_path: Path, monkeypatch
+) -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    template = gate.contract_witness()
+    template["publication"] = {
+        "artifacts": [
+            {"path": "result.json", "role": "result-json"},
+            {"path": "result.md", "role": "readable-report"},
+        ],
+        "auditor_output_path": "result.audit.json",
+        "manifest_path": "result.publication.json",
+        "manifest_published_last": True,
+    }
+    payload = gate.orchestrate_bridge(
+        backend=_SyntheticBridgeBackend(template),
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=gate.load_sealed_components(),
+    )
+    audit_report = audit.audit_payload(payload)
+    writes = []
+    original = gate._atomic_write_bytes
+
+    def recording_write(path, content):
+        writes.append(Path(path).name)
+        original(path, content)
+
+    monkeypatch.setattr(gate, "_atomic_write_bytes", recording_write)
+    gate.publish_bridge_result(payload, audit_report, repository_root=tmp_path)
+    assert writes == [
+        "result.json",
+        "result.md",
+        "result.audit.json",
+        "result.publication.json",
+    ]
+    verified = audit.audit_publication(
+        tmp_path / "result.publication.json",
+        publication_root=tmp_path,
+        evidence_root=ROOT,
+    )
+    assert verified["publication_verified"] is True
+    with pytest.raises(FileExistsError):
+        gate.publish_bridge_result(payload, audit_report, repository_root=tmp_path)
+
+
+def test_publication_audit_rejects_post_manifest_artifact_mutation(
+    tmp_path: Path,
+) -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    template = gate.contract_witness()
+    template["publication"] = {
+        "artifacts": [
+            {"path": "result.json", "role": "result-json"},
+            {"path": "result.md", "role": "readable-report"},
+        ],
+        "auditor_output_path": "result.audit.json",
+        "manifest_path": "result.publication.json",
+        "manifest_published_last": True,
+    }
+    payload = gate.orchestrate_bridge(
+        backend=_SyntheticBridgeBackend(template),
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=gate.load_sealed_components(),
+    )
+    gate.publish_bridge_result(
+        payload, audit.audit_payload(payload), repository_root=tmp_path
+    )
+    (tmp_path / "result.md").write_text("tampered\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="hash mismatch"):
+        audit.audit_publication(
+            tmp_path / "result.publication.json",
+            publication_root=tmp_path,
+            evidence_root=ROOT,
+        )
+
+
 @pytest.mark.parametrize(
     ("updates", "decision"),
     [

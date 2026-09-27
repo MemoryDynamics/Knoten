@@ -13,6 +13,7 @@ from functools import cache
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -1077,6 +1078,132 @@ def orchestrate_bridge(
     payload["classification"]["gates"] = gates
     validate_result(payload)
     return payload
+
+
+def _atomic_write_bytes(path: Path, content: bytes) -> None:
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    temporary = destination.with_name(f".{destination.name}.tmp")
+    temporary.write_bytes(content)
+    os.replace(temporary, destination)
+
+
+def _publication_path(repository: Path, relative: str, *, field: str) -> Path:
+    if type(relative) is not str or not relative or "\\" in relative:
+        raise ValueError(f"{field}: expected nonempty POSIX repository path")
+    candidate = (repository / relative).resolve()
+    if repository not in candidate.parents:
+        raise ValueError(f"{field}: path escaped repository")
+    return candidate
+
+
+def publish_bridge_result(
+    payload: dict[str, Any],
+    audit_report: dict[str, Any],
+    *,
+    repository_root: Path = ROOT,
+) -> dict[str, Any]:
+    """Publish result, report and audit atomically, with the manifest last."""
+
+    validate_result(payload)
+    if (
+        audit_report.get("verdict")
+        != "g1-g3-bridge-independent-audit-agrees"
+        or audit_report.get("decision") != payload["classification"]["decision"]
+    ):
+        raise ValueError("independent audit does not bind the bridge decision")
+    artifacts = payload["publication"]["artifacts"]
+    if [row["role"] for row in artifacts] != ["result-json", "readable-report"]:
+        raise ValueError("publication artifact order mismatch")
+    repository = Path(repository_root).resolve()
+    result_path = _publication_path(
+        repository, artifacts[0]["path"], field="publication.result"
+    )
+    report_path = _publication_path(
+        repository, artifacts[1]["path"], field="publication.report"
+    )
+    audit_path = _publication_path(
+        repository,
+        payload["publication"]["auditor_output_path"],
+        field="publication.audit",
+    )
+    manifest_path = _publication_path(
+        repository,
+        payload["publication"]["manifest_path"],
+        field="publication.manifest",
+    )
+    destinations = (result_path, report_path, audit_path, manifest_path)
+    if len(set(destinations)) != 4:
+        raise ValueError("publication paths must be distinct")
+    existing = [path for path in destinations if path.exists()]
+    if existing:
+        raise FileExistsError(f"refusing to overwrite publication: {existing[0]}")
+
+    result_bytes = (
+        json.dumps(payload, allow_nan=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    gates = payload["classification"]["gates"]
+    report_lines = [
+        "# Rotating-wave G1--G3 horizon bridge",
+        "",
+        f"Decision: `{payload['classification']['decision']}`.",
+        "",
+        f"Claim boundary: {payload['classification']['claim_boundary']}",
+        "",
+        "| Gate | State |",
+        "| --- | --- |",
+    ]
+    report_lines.extend(
+        f"| {name} | `{value}` |"
+        for name, value in gates.items()
+        if name != "local_branch_excluded"
+    )
+    report_lines.extend(
+        [
+            "",
+            "This record composes finite-root branch evidence with hash-bound ",
+            "G4/G5 endpoints. It does not establish H-infinity stability, ",
+            "formation, interaction, inertia or mass.",
+            "",
+        ]
+    )
+    report_bytes = "\n".join(report_lines).encode("utf-8")
+    bound_audit = copy.deepcopy(audit_report)
+    bound_audit["result_sha256"] = hashlib.sha256(result_bytes).hexdigest()
+    audit_bytes = (
+        json.dumps(bound_audit, allow_nan=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    rows = [
+        {
+            "path": artifacts[0]["path"],
+            "role": "result-json",
+            "sha256": hashlib.sha256(result_bytes).hexdigest(),
+        },
+        {
+            "path": artifacts[1]["path"],
+            "role": "readable-report",
+            "sha256": hashlib.sha256(report_bytes).hexdigest(),
+        },
+        {
+            "path": payload["publication"]["auditor_output_path"],
+            "role": "independent-audit",
+            "sha256": hashlib.sha256(audit_bytes).hexdigest(),
+        },
+    ]
+    manifest = {
+        "artifacts": rows,
+        "execution_commit": payload["identity"]["execution_commit"],
+        "protocol_sha256": payload["identity"]["protocol_sha256"],
+        "schema": "scalar-memory-rotating-wave-horizon-g1-g3-publication-v1",
+    }
+    manifest_bytes = (
+        json.dumps(manifest, allow_nan=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    _atomic_write_bytes(result_path, result_bytes)
+    _atomic_write_bytes(report_path, report_bytes)
+    _atomic_write_bytes(audit_path, audit_bytes)
+    _atomic_write_bytes(manifest_path, manifest_bytes)
+    return manifest
 
 
 def _centered_pair(center: str, half_width: str) -> list[str]:

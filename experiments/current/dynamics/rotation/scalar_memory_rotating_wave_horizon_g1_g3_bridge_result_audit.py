@@ -581,3 +581,69 @@ def audit_payload(
         ),
         "verdict": "g1-g3-bridge-independent-audit-agrees",
     }
+
+
+def audit_publication(
+    manifest_path: Path,
+    *,
+    publication_root: Path = ROOT,
+    evidence_root: Path = ROOT,
+) -> dict[str, Any]:
+    """Verify a manifest-last publication and independently re-audit its result."""
+
+    root = Path(publication_root).resolve()
+    manifest_location = Path(manifest_path).resolve()
+    if root not in manifest_location.parents:
+        raise ValueError("manifest path escaped publication root")
+    manifest = _json(manifest_location)
+    if manifest.get("schema") != (
+        "scalar-memory-rotating-wave-horizon-g1-g3-publication-v1"
+    ):
+        raise ValueError("publication schema mismatch")
+    rows = manifest.get("artifacts")
+    if type(rows) is not list or [row.get("role") for row in rows] != [
+        "result-json",
+        "readable-report",
+        "independent-audit",
+    ]:
+        raise ValueError("publication artifact order mismatch")
+    contents: dict[str, bytes] = {}
+    for row in rows:
+        relative = row.get("path")
+        if type(relative) is not str or not relative or "\\" in relative:
+            raise ValueError("invalid publication artifact path")
+        path = (root / relative).resolve()
+        if root not in path.parents:
+            raise ValueError("publication artifact escaped root")
+        raw = path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != row.get("sha256"):
+            raise ValueError(f"publication artifact hash mismatch: {row['role']}")
+        contents[row["role"]] = raw
+    result = json.loads(contents["result-json"])
+    if type(result) is not dict:
+        raise TypeError("published result root must be an object")
+    report = audit_payload(result, repository_root=evidence_root)
+    published_audit = json.loads(contents["independent-audit"])
+    if (
+        type(published_audit) is not dict
+        or published_audit.get("verdict") != report["verdict"]
+        or published_audit.get("decision") != report["decision"]
+        or published_audit.get("result_sha256")
+        != hashlib.sha256(contents["result-json"]).hexdigest()
+    ):
+        raise ValueError("published independent audit does not bind result")
+    readable = contents["readable-report"].decode("utf-8")
+    if result["classification"]["decision"] not in readable:
+        raise ValueError("readable report does not state reconstructed decision")
+    expected_manifest = result["publication"]["manifest_path"]
+    if manifest_location.relative_to(root).as_posix() != expected_manifest:
+        raise ValueError("payload manifest path mismatch")
+    if manifest.get("execution_commit") != result["identity"]["execution_commit"]:
+        raise ValueError("manifest execution commit mismatch")
+    if manifest.get("protocol_sha256") != result["identity"]["protocol_sha256"]:
+        raise ValueError("manifest protocol hash mismatch")
+    return {
+        **report,
+        "manifest_sha256": hashlib.sha256(manifest_location.read_bytes()).hexdigest(),
+        "publication_verified": True,
+    }
