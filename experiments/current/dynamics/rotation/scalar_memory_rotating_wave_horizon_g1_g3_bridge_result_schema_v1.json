@@ -1,0 +1,282 @@
+{
+  "arrays": {
+    "artifact_rows": {"item": "object:artifact", "length": 2},
+    "circular_cases": {"item": "object:circular_case", "length": 9},
+    "decimal_matrix_2": {"item": "array:decimal_pair", "length": 2},
+    "decimal_pair": {"item": "decimal", "length": 2},
+    "drift_rows": {"item": "nullable:object:drift_row", "length": 2},
+    "endpoint_links": {"item": "object:endpoint_link", "length": 2},
+    "eta_zero_cases": {"item": "object:eta_zero_case", "length": 7},
+    "exclusion_attempts": {"item": "nullable:object:branch_exclusion", "length": 4},
+    "exclusion_leaves": {"item": "object:exclusion_leaf", "min_length": 1, "max_length": 1048576},
+    "homotopies": {"item": "nullable:object:homotopy", "length": 6},
+    "homotopy_slabs": {"item": "nullable:object:homotopy_slab", "length": 64},
+    "mutation_rows": {"item": "object:mutation", "length": 4},
+    "q_rows": {"item": "object:q_representation", "length": 7},
+    "root_panels": {"item": "nullable:object:root_panel", "length": 7},
+    "sealed_files": {"item": "object:sealed_file", "length": 5}
+  },
+  "constants": {
+    "claim_boundary": "local fixed-alpha root-branch connection with local direct FIFO stability support at exactly H=2400; no H-infinity stability, global uniqueness, formation, interaction, spin, inertia or mass",
+    "contract_version": 1,
+    "forward_horizons": [1200, 1500, 1800, 2400, 3600],
+    "g4_audit_sha256": "366d221e6d14093da48f7a8f4ea1a439d4b26e5635b65c95bcb763bc968a2aa5",
+    "g4_manifest_sha256": "63a54a572e4af3067609e93caea503b30f46013d89d968c4fdb2d9719a6597da",
+    "g4_result_sha256": "783328382545dbf4a08698ebd7a8ba7f3ef06ac344630f2b04e4ef7dd54c5a88",
+    "g5_manifest_sha256": "62ed914737028678be360633f4c97b8cb28cd0ef9fae6e7077684fa272a9df8e",
+    "g5_result_sha256": "3321ee6392a6eb2a3c5098fa437cb41bb57b9da7e1c0ada521bdd1e894f4ec39",
+    "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
+    "lower_horizons": [900, 600],
+    "payload_schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-v1",
+    "protocol_blob": "6dbb768d2fba1ee86c0ef38978125e6b9c6d6969",
+    "protocol_sha256": "c00cbeddbc0469d58ea6dd3d1b1df584f3571509c477eb5ed7e564f6181f68fb",
+    "true": true
+  },
+  "enums": {
+    "artifact_role": ["result-json", "readable-report"],
+    "component": ["G4", "G5"],
+    "component_decision": ["g4-local-infinite-root-pass", "g5-local-direct-stability-pass"],
+    "decision": [
+      "g1-g3-bridge-experiment-invalid",
+      "registered-local-horizon-branch-loss",
+      "g1-g3-bridge-inconclusive",
+      "rotating-wave-horizon-branch-drift",
+      "sealed-component-endpoint-mismatch",
+      "rotating-wave-root-branch-connected-with-h2400-local-stability-support"
+    ],
+    "direction": ["forward", "lower-tail"],
+    "exclusion_leaf_classification": ["residual-excluded", "krawczyk-root", "unresolved"],
+    "exclusion_status": ["all-residual-excluded", "other-root", "inconclusive"],
+    "gate_state": ["pass", "fail", "inconclusive"],
+    "lower_tail_status": ["lower-tail-stress-pass", "lower-tail-stress-inconclusive"],
+    "mutation_name": ["drift-width", "reverse-modulo", "overwrite-before-read", "wrong-oldest-slot"],
+    "precision": [80, 120],
+    "sealed_role": ["g4-result", "g4-manifest", "g4-audit", "g5-result", "g5-manifest"]
+  },
+  "objects": {
+    "artifact": {
+      "path": "string",
+      "role": "enum:artifact_role"
+    },
+    "authorization": {
+      "authorization_id": "uuid4",
+      "ci_run_id": "integer",
+      "governance_sha256": "sha256",
+      "implementation_revision": "sha1",
+      "receipt_path": "string",
+      "receipt_sha256": "sha256",
+      "upstream_revision": "sha1"
+    },
+    "branch_exclusion": {
+      "from_horizon": "integer",
+      "leaves": "array:exclusion_leaves",
+      "local_domain": "object:root_box",
+      "max_depth": "integer",
+      "status": "enum:exclusion_status",
+      "to_horizon": "integer"
+    },
+    "certificate": {
+      "box": "object:root_box",
+      "interval_backend": "string",
+      "jacobian_box": "array:decimal_matrix_2",
+      "krawczyk_image": "array:decimal_matrix_2",
+      "strict_interior": "boolean"
+    },
+    "circular_case": {
+      "age_history_sha256": "sha256",
+      "case_id": "string",
+      "complete_state_relative_error": "number",
+      "horizon": "integer",
+      "new_point_relative_error": "number",
+      "pass": "boolean"
+    },
+    "classification": {
+      "claim_boundary": "const:claim_boundary",
+      "decision": "enum:decision",
+      "gates": "object:gates",
+      "lower_tail_status": "enum:lower_tail_status",
+      "precedence_rank": "integer"
+    },
+    "controls": {
+      "circular_cases": "array:circular_cases",
+      "eta_zero_cases": "array:eta_zero_cases",
+      "mutations": "array:mutation_rows",
+      "pass": "boolean"
+    },
+    "drift": {
+      "center_diagnostics": "array:drift_rows",
+      "interval_upper_bounds": "array:drift_rows",
+      "mutation_closes_pass": "boolean",
+      "pass": "boolean"
+    },
+    "drift_row": {
+      "from_horizon": "integer",
+      "radius_component": "number",
+      "theta_component": "number",
+      "to_horizon": "integer",
+      "upper_bound": "number"
+    },
+    "endpoint_link": {
+      "bridge_120_inner_in_component_outer": "boolean",
+      "bridge_80_inner_in_component_outer": "boolean",
+      "component": "enum:component",
+      "component_inner_image": "array:decimal_matrix_2",
+      "component_inner_in_bridge_120_outer": "boolean",
+      "component_inner_in_bridge_80_outer": "boolean",
+      "component_outer_box": "object:root_box",
+      "horizon": "integer",
+      "pass": "boolean"
+    },
+    "eta_zero_case": {
+      "horizon": "integer",
+      "maximum_deviation": "number",
+      "pass": "boolean",
+      "steps": "integer"
+    },
+    "exclusion_leaf": {
+      "box": "object:root_box",
+      "classification": "enum:exclusion_leaf_classification",
+      "depth": "integer",
+      "krawczyk_image": "nullable:array:decimal_matrix_2",
+      "residual_box": "nullable:array:decimal_matrix_2",
+      "strict_interior": "nullable:boolean"
+    },
+    "finite_branch": {
+      "direct_replay_pass": "boolean",
+      "drift": "object:drift",
+      "exclusions": "array:exclusion_attempts",
+      "forward_horizons": "const:forward_horizons",
+      "homotopies": "array:homotopies",
+      "horizons": "const:horizons",
+      "lower_horizons": "const:lower_horizons",
+      "lower_tail_status": "enum:lower_tail_status",
+      "root_panels": "array:root_panels"
+    },
+    "gates": {
+      "G0": "enum:gate_state",
+      "G1F": "enum:gate_state",
+      "G1R": "enum:gate_state",
+      "G2F": "enum:gate_state",
+      "G2R": "enum:gate_state",
+      "G3": "enum:gate_state",
+      "G4": "enum:gate_state",
+      "G5": "enum:gate_state",
+      "G6": "enum:gate_state",
+      "H2400_link": "enum:gate_state",
+      "H3600_link": "enum:gate_state",
+      "local_branch_excluded": "boolean"
+    },
+    "homotopy": {
+      "direction": "enum:direction",
+      "from_horizon": "integer",
+      "pass": "boolean",
+      "slabs": "array:homotopy_slabs",
+      "status": "enum:gate_state",
+      "to_horizon": "integer"
+    },
+    "homotopy_slab": {
+      "box": "object:root_box",
+      "index": "integer",
+      "krawczyk_image": "array:decimal_matrix_2",
+      "overlaps_previous": "nullable:boolean",
+      "s_interval": "array:decimal_pair",
+      "strict_interior": "boolean"
+    },
+    "identity": {
+      "authorization": "object:authorization",
+      "created_utc": "string",
+      "execution_commit": "sha1",
+      "parameters": "object:parameters",
+      "protocol_blob": "const:protocol_blob",
+      "protocol_sha256": "const:protocol_sha256",
+      "schema": "const:payload_schema",
+      "version": "const:contract_version"
+    },
+    "mutation": {
+      "detected": "boolean",
+      "name": "enum:mutation_name"
+    },
+    "newton_panel": {
+      "jacobian": "array:decimal_matrix_2",
+      "precision_dps": "enum:precision",
+      "radius": "decimal",
+      "residual": "array:decimal_pair",
+      "steps": "integer",
+      "theta": "decimal"
+    },
+    "parameters": {
+      "alpha": "number",
+      "amplitude_att": "number",
+      "amplitude_rep": "number",
+      "anchor_radius": "number",
+      "anchor_theta": "number",
+      "epsilon": "number",
+      "eta": "number",
+      "memory_mass": "number",
+      "q": "number",
+      "sigma_att": "number",
+      "sigma_rep": "number"
+    },
+    "payload": {
+      "classification": "object:classification",
+      "controls": "object:controls",
+      "endpoint_links": "array:endpoint_links",
+      "finite_branch": "object:finite_branch",
+      "identity": "object:identity",
+      "publication": "object:publication",
+      "sealed_components": "object:sealed_components"
+    },
+    "publication": {
+      "artifacts": "array:artifact_rows",
+      "auditor_output_path": "string",
+      "manifest_path": "string",
+      "manifest_published_last": "boolean"
+    },
+    "q_representation": {
+      "decimal_power": "decimal",
+      "diagnostic_exp_log1p": "number",
+      "diagnostic_relative_difference": "number",
+      "direct_power": "number",
+      "exp_log_power": "number",
+      "horizon": "integer",
+      "nonzero_finite": "boolean",
+      "two_ulp_gate": "boolean",
+      "ulp_difference": "integer"
+    },
+    "root_box": {
+      "radius": "array:decimal_pair",
+      "theta": "array:decimal_pair"
+    },
+    "root_panel": {
+      "centers_agree": "boolean",
+      "cross_120_inner_in_80_outer": "boolean",
+      "cross_80_inner_in_120_outer": "boolean",
+      "horizon": "integer",
+      "inner_certificate_120": "object:certificate",
+      "inner_certificate_80": "object:certificate",
+      "inner_intersection": "nullable:object:root_box",
+      "newton_120": "object:newton_panel",
+      "newton_80": "object:newton_panel",
+      "outer_certificate_120": "object:certificate",
+      "outer_certificate_80": "object:certificate"
+    },
+    "sealed_components": {
+      "files": "array:sealed_files",
+      "g4_root": "object:sealed_root",
+      "g5_root": "object:sealed_root"
+    },
+    "sealed_file": {
+      "path": "string",
+      "role": "enum:sealed_role",
+      "sha256": "sha256"
+    },
+    "sealed_root": {
+      "decision": "enum:component_decision",
+      "horizon": "integer",
+      "inner_image": "array:decimal_matrix_2",
+      "outer_box": "object:root_box"
+    }
+  },
+  "root": "object:payload",
+  "schema": "strict-json-contract-v1"
+}
