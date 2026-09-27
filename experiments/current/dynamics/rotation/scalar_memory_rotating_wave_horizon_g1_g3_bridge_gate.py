@@ -15,6 +15,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import subprocess
 from typing import Any, Sequence
 
 from emergenz_knoten.strict_json_contract import validate_payload as validate_contract
@@ -63,7 +64,7 @@ SEALED_FILES = (
         "g4-audit",
         "reports/project/meta/reviews/"
         "scalar_memory_rotating_wave_horizon_g4_component_independent_audit_2026-09-13.json",
-        "366d221e6d14093da48f7a8f4ea1a439d4b26e5635b65c95bcb763bc968a2aa5",
+        "e83309992fe8b964c507930664f557367a50d87d32aedf7bf39ecbe1bb346d19",
     ),
     (
         "g5-result",
@@ -78,6 +79,15 @@ SEALED_FILES = (
         "62ed914737028678be360633f4c97b8cb28cd0ef9fae6e7077684fa272a9df8e",
     ),
 )
+
+
+def _git_blob_bytes(repository: Path, relative: str) -> bytes:
+    return subprocess.run(
+        ["git", "cat-file", "blob", f"HEAD:{relative}"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 @cache
@@ -104,7 +114,7 @@ def load_sealed_components(*, root: Path = ROOT) -> dict[str, Any]:
         path = (repository / relative).resolve()
         if repository not in path.parents:
             raise ValueError("sealed component path escaped repository")
-        raw = path.read_bytes()
+        raw = _git_blob_bytes(repository, relative)
         observed = hashlib.sha256(raw).hexdigest()
         if observed != expected_sha256:
             raise ValueError(f"sealed component hash mismatch: {role}")

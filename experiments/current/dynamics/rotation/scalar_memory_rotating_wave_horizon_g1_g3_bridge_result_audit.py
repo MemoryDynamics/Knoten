@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 from typing import Any, Sequence
 
 
@@ -36,7 +37,7 @@ SEALED_FILES = (
         "g4-audit",
         "reports/project/meta/reviews/"
         "scalar_memory_rotating_wave_horizon_g4_component_independent_audit_2026-09-13.json",
-        "366d221e6d14093da48f7a8f4ea1a439d4b26e5635b65c95bcb763bc968a2aa5",
+        "e83309992fe8b964c507930664f557367a50d87d32aedf7bf39ecbe1bb346d19",
     ),
     (
         "g5-result",
@@ -65,6 +66,15 @@ PARAMETERS = {
     "sigma_rep": 1.0,
 }
 REPLAY_SEMANTICS = "independent finite-sum replay; not a second interval proof"
+
+
+def _git_blob_bytes(repository: Path, relative: str) -> bytes:
+    return subprocess.run(
+        ["git", "cat-file", "blob", f"HEAD:{relative}"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 @cache
@@ -139,7 +149,7 @@ def _verify_sealed(payload: dict[str, Any], *, repository: Path) -> None:
         path = (root / relative).resolve()
         if root not in path.parents:
             raise ValueError("sealed path escaped repository")
-        raw = path.read_bytes()
+        raw = _git_blob_bytes(root, relative)
         if hashlib.sha256(raw).hexdigest() != digest:
             raise ValueError(f"sealed hash mismatch: {role}")
         if role in {"g4-result", "g5-result"}:

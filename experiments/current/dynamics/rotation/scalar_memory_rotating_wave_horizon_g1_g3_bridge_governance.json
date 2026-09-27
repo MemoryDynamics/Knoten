@@ -1,9 +1,9 @@
 {
   "authorization": null,
   "gate": "G1-G3",
-  "protocol_blob": "dd8a8ef09ec81fb98e9320e4e81603cc6e1a188b",
+  "protocol_blob": "97d06fc41ac57f4eb0b90bda5c15c81b3eb36123",
   "reason": "implementation and independent audit are target-free; readiness review, official CI and a new explicit user authorization remain required",
-  "result_schema_sha256": "d7300c7a78f1c5207fffdfa9b08fb681c3e11bb87047f56342752145a30e28e7",
+  "result_schema_sha256": "dc9159878000e5a7540007a42a287a2acc07fcd70d02e7f94eb23cc74f8e5268",
   "schema": "scalar-memory-rotating-wave-horizon-g1-g3-governance-v1",
   "state": "closed",
   "target_authorized": false,

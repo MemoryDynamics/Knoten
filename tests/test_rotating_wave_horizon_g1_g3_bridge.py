@@ -154,6 +154,22 @@ def test_sealed_loader_hashes_and_extracts_only_registered_endpoint_roots() -> N
     assert set(sealed) == {"files", "g4_root", "g5_root"}
 
 
+def test_sealed_loader_reads_canonical_git_blobs_not_checkout_bytes(
+    monkeypatch,
+) -> None:
+    gate = _load_gate()
+
+    def forbidden(self):
+        raise AssertionError("sealed loader read platform-dependent checkout bytes")
+
+    monkeypatch.setattr(Path, "read_bytes", forbidden)
+    sealed = gate.load_sealed_components()
+    audit = next(row for row in sealed["files"] if row["role"] == "g4-audit")
+    assert audit["sha256"] == (
+        "e83309992fe8b964c507930664f557367a50d87d32aedf7bf39ecbe1bb346d19"
+    )
+
+
 def test_sealed_loader_fails_before_parse_on_registered_hash_drift(
     monkeypatch,
 ) -> None:
