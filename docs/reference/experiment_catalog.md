@@ -30,7 +30,7 @@ autorisiert.
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5-Adapter und Grundgleichungs-Preflight | reviewed Pass | hashbarer Record fuer Gewichtssumme, Kreisidentitaet, Voll-Jacobian und Symmetrien besteht im Ziellauf |
 | G5 direkte finite-H-Stabilitaet | `g5-local-direct-stability-pass`; Attempt 3 verbraucht | lokale numerische Stabilitaet bei exakt $H=2400$; kein $H\to\infty$-, Formations- oder Interaktionsclaim |
-| G1--G3-Brueckenkomponente | Attempt 1 vor Audit/Publikation inconclusive; Attempt-2-v2-Vertrag und Outward-Rounding-Falsifikation targetfrei reviewed, Target geschlossen | noch kein Leiterergebnis; vollstaendigen Lauf, exakte CI und Readiness abschliessen |
+| G1--G3-Brueckenkomponente | Attempt 1 vor Audit/Publikation inconclusive; Attempt-2-v2-Vertrag, Falsifikation, 1199 Tests und exakte CI reviewed, Target geschlossen | noch kein Leiterergebnis; genau ein Attempt 2 braucht neue explizite Autorisierung |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das

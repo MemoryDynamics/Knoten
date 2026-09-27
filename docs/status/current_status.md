@@ -171,8 +171,11 @@ uebermaessige Aufweitung bleiben harte Fehler. Produktionsvalidator und
 getrennter Standardbibliotheksauditor bestehen die targetfreien
 Falsifikationstests; neue `attempt_2`-Pfade schuetzen das alte Receipt. Das
 kritische Remediationreview findet keinen Major- oder Critical-Codebefund.
-Vollstaendiger Testlauf, exakte CI und ein neues Readinessreview stehen noch
-aus; Attempt 2 bleibt geschlossen.
+Der exakte Implementierungscommit besteht 1199 lokale Tests, den CI-genauen
+Ruff-Scope, strict Docs und die offizielle Linux-CI. Das neue Review endet mit
+`g1-g3-implementation-ready-target-closed`. Das ist Methodenreadiness, kein
+G1--G3-Befund; Attempt 2 bleibt bis zu einer neuen ausdruecklichen
+Einmalfreigabe geschlossen.
 
 ## P5-D Code-Review und Remediation
 

@@ -17,7 +17,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **G1--G3-Branchverbindung messen -- Attempt-2-Remediation im Readinesspfad.**
+1. **G1--G3-Branchverbindung messen -- Attempt 2 bereit, Target geschlossen.**
    G4 belegt isoliert einen lokalen $F_\infty$-Root; G5 belegt isoliert lokale
    direkte FIFO-Stabilitaet bei exakt $H=2400$. Das neue Brueckenprotokoll
    prueft prospektiv, ob die finite Leiter
@@ -38,9 +38,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Auswaertsrundung, verwerfen Einwaertsschrumpfung und uebermaessige
    Aufweitung und reservieren getrennte Attempt-2-Pfade. Produktionsvalidator
    und unabhaengiger Auditor bestehen die targetfreien Falsifikationstests;
-   das kritische Code-Review findet keinen Major- oder Critical-Befund. Offen
-   sind vollstaendiger Lauf, exakte CI und neues Readinessreview; Versuch 2
-   ist nicht autorisiert.
+   das kritische Code-Review findet keinen Major- oder Critical-Befund. Der
+   exakte Implementierungscommit besteht 1199 lokale Tests, den CI-genauen
+   Ruff-Scope, strict Docs und die offizielle Linux-CI. Das neue
+   Readinessreview endet mit
+   `g1-g3-implementation-ready-target-closed`; Versuch 2 ist nicht
+   autorisiert.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -72,8 +75,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 G4 und G5 sind als getrennte lokale Komponenten positiv und unabhaengig
 auditiert. Die G1--G3-Bruecke zwischen ihnen ist targetfrei implementiert,
 unabhaengig nachrechenbar und durch geschlossene Governance versiegelt. Der
-Attempt 1 ist als Pipeline-Incident ohne Ergebnis verbraucht. Der aktuelle
-Haltepunkt ist die targetfreie Remediation der Homotopie-Recordgrenze; erst
-nach erneutem Review und exakter CI duerfte eine neue Freigabe erbeten werden. Der aktuelle
+Attempt 1 ist als Pipeline-Incident ohne Ergebnis verbraucht. Die
+Attempt-2-Remediation ist reviewed und CI-gruen, bleibt aber durch geschlossene
+Governance versiegelt. Der aktuelle Haltepunkt ist eine neue ausdrueckliche
+Nutzerentscheidung ueber genau einen Attempt-2-Zugriff. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
