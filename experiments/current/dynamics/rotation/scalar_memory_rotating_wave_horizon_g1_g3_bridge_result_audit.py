@@ -430,6 +430,20 @@ def audit_payload(
     _legacy().validate_result(payload, schema)
     if payload["identity"]["parameters"] != PARAMETERS:
         raise ValueError("$.identity.parameters: registered values mismatch")
+    publication = payload["publication"]
+    if (
+        [row["role"] for row in publication["artifacts"]]
+        != ["result-json", "readable-report"]
+        or publication["manifest_published_last"] is not True
+    ):
+        raise ValueError("$.publication: registered order/manifest-last mismatch")
+    publication_paths = [
+        *(row["path"] for row in publication["artifacts"]),
+        publication["auditor_output_path"],
+        publication["manifest_path"],
+    ]
+    if len(set(publication_paths)) != 4:
+        raise ValueError("$.publication: paths must be distinct")
     _verify_sealed(payload, repository=repository_root)
     roots = _verify_roots_and_homotopies(payload)
     replays = _verify_replays(payload)
@@ -623,6 +637,20 @@ def audit_publication(
     if type(result) is not dict:
         raise TypeError("published result root must be an object")
     report = audit_payload(result, repository_root=evidence_root)
+    publication = result["publication"]
+    expected_rows = [
+        {"path": publication["artifacts"][0]["path"], "role": "result-json"},
+        {"path": publication["artifacts"][1]["path"], "role": "readable-report"},
+        {
+            "path": publication["auditor_output_path"],
+            "role": "independent-audit",
+        },
+    ]
+    if any(
+        row["path"] != expected["path"] or row["role"] != expected["role"]
+        for row, expected in zip(rows, expected_rows, strict=True)
+    ):
+        raise ValueError("manifest artifacts do not match result publication paths")
     published_audit = json.loads(contents["independent-audit"])
     if (
         type(published_audit) is not dict

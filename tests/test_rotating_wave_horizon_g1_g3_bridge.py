@@ -63,6 +63,10 @@ def test_contract_witness_validates_and_extra_fields_fail() -> None:
     broken["unexpected"] = True
     with pytest.raises(ValueError):
         gate.validate_result(broken)
+    broken = copy.deepcopy(payload)
+    broken["publication"]["manifest_published_last"] = False
+    with pytest.raises(ValueError, match="manifest_published_last"):
+        gate.validate_result(broken)
 
 
 def test_root_panel_requires_cross_inclusion_not_only_overlap() -> None:

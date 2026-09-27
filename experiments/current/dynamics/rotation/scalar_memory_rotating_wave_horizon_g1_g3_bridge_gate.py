@@ -562,6 +562,21 @@ def validate_result(payload: dict[str, Any]) -> None:
     validate_contract(payload, contract)
     if payload["identity"]["parameters"] != PARAMETERS:
         raise ValueError("$.identity.parameters: registered parameters mismatch")
+    publication = payload["publication"]
+    if [row["role"] for row in publication["artifacts"]] != [
+        "result-json",
+        "readable-report",
+    ]:
+        raise ValueError("$.publication.artifacts: role order mismatch")
+    if publication["manifest_published_last"] is not True:
+        raise ValueError("$.publication.manifest_published_last: must be true")
+    publication_paths = [
+        *(row["path"] for row in publication["artifacts"]),
+        publication["auditor_output_path"],
+        publication["manifest_path"],
+    ]
+    if len(set(publication_paths)) != 4:
+        raise ValueError("$.publication: paths must be distinct")
     _sealed_files(payload)
     if payload["finite_branch"]["horizons"] != list(HORIZONS):
         raise ValueError("$.finite_branch.horizons: order mismatch")
