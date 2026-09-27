@@ -1,0 +1,11 @@
+{
+  "authorization": null,
+  "gate": "G1-G3",
+  "protocol_blob": "dd8a8ef09ec81fb98e9320e4e81603cc6e1a188b",
+  "reason": "implementation and independent audit are target-free; readiness review, official CI and a new explicit user authorization remain required",
+  "result_schema_sha256": "d7300c7a78f1c5207fffdfa9b08fb681c3e11bb87047f56342752145a30e28e7",
+  "schema": "scalar-memory-rotating-wave-horizon-g1-g3-governance-v1",
+  "state": "closed",
+  "target_authorized": false,
+  "target_calls_recorded": []
+}
