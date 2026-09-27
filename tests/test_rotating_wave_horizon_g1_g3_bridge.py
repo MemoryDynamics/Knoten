@@ -219,3 +219,98 @@ def test_false_local_exclusion_requires_complete_partition() -> None:
     payload["classification"]["precedence_rank"] = 2
     with pytest.raises(ValueError, match="partition"):
         gate.validate_result(payload)
+
+
+class _SyntheticBridgeBackend:
+    def __init__(self, template: dict, *, fail_horizon: int | None = None) -> None:
+        self.template = template
+        self.fail_horizon = fail_horizon
+        self.calls: list[tuple] = []
+
+    def direct_replay(self) -> bool:
+        self.calls.append(("direct_replay",))
+        return True
+
+    def finite_root_panel(
+        self, *, horizon: int, precision_dps: int, start: tuple[str, str]
+    ) -> dict | None:
+        self.calls.append(("root", horizon, precision_dps, start))
+        if horizon == self.fail_horizon:
+            return None
+        panel = self.template["finite_branch"]["root_panels"]
+        row = panel[[600, 900, 1200, 1500, 1800, 2400, 3600].index(horizon)]
+        return copy.deepcopy(
+            {
+                "inner_certificate": row[f"inner_certificate_{precision_dps}"],
+                "newton": row[f"newton_{precision_dps}"],
+                "outer_certificate": row[f"outer_certificate_{precision_dps}"],
+            }
+        )
+
+    def homotopy_edge(
+        self,
+        *,
+        from_horizon: int,
+        to_horizon: int,
+        from_root: tuple[str, str],
+        to_root: tuple[str, str],
+    ) -> dict:
+        self.calls.append(
+            ("homotopy", from_horizon, to_horizon, from_root, to_root)
+        )
+        for row in self.template["finite_branch"]["homotopies"]:
+            if (row["from_horizon"], row["to_horizon"]) == (
+                from_horizon,
+                to_horizon,
+            ):
+                return copy.deepcopy(row)
+        raise AssertionError("unregistered synthetic edge")
+
+    def local_branch_exclusion(self, **kwargs) -> None:
+        self.calls.append(("exclusion", kwargs["from_horizon"], kwargs["to_horizon"]))
+        return None
+
+    def controls(self) -> dict:
+        self.calls.append(("controls",))
+        return copy.deepcopy(self.template["controls"])
+
+    def tail_certificate_panel(self, **kwargs):
+        raise AssertionError("G1--G3 bridge must not rerun G4")
+
+    def arnoldi_panel(self, **kwargs):
+        raise AssertionError("G1--G3 bridge must not rerun G5")
+
+
+def test_orchestrator_composes_finite_branch_without_rerunning_g4_or_g5() -> None:
+    gate = _load_gate()
+    template = gate.contract_witness()
+    backend = _SyntheticBridgeBackend(template)
+    payload = gate.orchestrate_bridge(
+        backend=backend,
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=template["sealed_components"],
+    )
+    assert payload["classification"]["decision"] == (
+        "rotating-wave-root-branch-connected-with-h2400-local-stability-support"
+    )
+    assert sum(call[0] == "root" for call in backend.calls) == 14
+    assert sum(call[0] == "homotopy" for call in backend.calls) == 6
+    assert backend.calls[-1] == ("controls",)
+
+
+def test_orchestrator_preserves_inconclusive_prefix_after_root_failure() -> None:
+    gate = _load_gate()
+    template = gate.contract_witness()
+    backend = _SyntheticBridgeBackend(template, fail_horizon=3600)
+    payload = gate.orchestrate_bridge(
+        backend=backend,
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=template["sealed_components"],
+    )
+    assert payload["finite_branch"]["root_panels"][6] is None
+    assert payload["finite_branch"]["homotopies"][3] is None
+    assert payload["endpoint_links"][1] is None
+    assert payload["classification"]["decision"] == "g1-g3-bridge-inconclusive"
+    assert ("exclusion", 2400, 3600) in backend.calls
