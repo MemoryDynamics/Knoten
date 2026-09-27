@@ -17,7 +17,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **G1--G3-Branchverbindung messen -- Readiness bestanden, Target geschlossen.**
+1. **G1--G3-Branchverbindung messen -- Attempt 1 inconclusive, Remediation offen.**
    G4 belegt isoliert einen lokalen $F_\infty$-Root; G5 belegt isoliert lokale
    direkte FIFO-Stabilitaet bei exakt $H=2400$. Das neue Brueckenprotokoll
    prueft prospektiv, ob die finite Leiter
@@ -30,8 +30,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Implementierungs-CI-Lauf falsifizierte einen Windows-Checkout-Hash des
    G4-Audits; die dritte outcome-blinde Amendierung bindet alle fuenf Inputs
    an kanonische Git-Blobs. Der Folgelauf besteht Ruff, 1194 Tests und den
-   strikten Docs-Bau. Offen ist nur eine neue explizite Nutzerfreigabe fuer
-   den Governance-only-Commit. Bis dahin existiert kein G1--G3-Ergebnis.
+   strikten Docs-Bau. Der danach autorisierte Attempt 1 wurde durch das
+   exklusive Receipt verbraucht, scheiterte aber vor Audit und Publikation an
+   einer zu exakten Mittelpunktpruefung der outward-gerundeten ersten
+   Homotopiebox. Es existiert kein G1--G3-Ergebnis. Als naechstes sind eine
+   outcome-blinde Recordgrenzen-Amendierung, Falsifikationstests, Review und
+   neue Readiness erforderlich; ein Retry ist nicht autorisiert.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -63,7 +67,8 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 G4 und G5 sind als getrennte lokale Komponenten positiv und unabhaengig
 auditiert. Die G1--G3-Bruecke zwischen ihnen ist targetfrei implementiert,
 unabhaengig nachrechenbar und durch geschlossene Governance versiegelt. Der
-Readinessreview und exakte CI sind abgeschlossen. Ein Leiterlauf braucht nun
-eine neue ausdrueckliche Freigabe und danach einen Governance-only-Commit. Der aktuelle
+Attempt 1 ist als Pipeline-Incident ohne Ergebnis verbraucht. Der aktuelle
+Haltepunkt ist die targetfreie Remediation der Homotopie-Recordgrenze; erst
+nach erneutem Review und exakter CI duerfte eine neue Freigabe erbeten werden. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

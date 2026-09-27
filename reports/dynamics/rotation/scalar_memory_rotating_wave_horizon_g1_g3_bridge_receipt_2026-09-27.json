@@ -1,0 +1,9 @@
+{
+  "authorization_id": "84e81fc5-a78c-4a2a-9fb3-f771bd154688",
+  "ci_run_id": 36305048454,
+  "created_utc": "2026-09-27T21:10:42.707513+00:00",
+  "governance_sha256": "8c568fe737f46c83661c0e5f97d51ef1b52ab78e29d2e10c57d08003fceeaecc",
+  "implementation_revision": "b8d33c4833ded85513baf0ebcffbd7e836245c9c",
+  "revision": "750ef3b3faa35c7d1cbbc4ef33f44079b80f4656",
+  "schema": "scalar-memory-rotating-wave-horizon-g1-g3-receipt-v1"
+}

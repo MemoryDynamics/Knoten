@@ -159,8 +159,12 @@ geschlossen. Der erste offizielle CI-Lauf fand einen plattformabhaengigen
 CRLF-Hash des G4-Audits; die outcome-blinde Remediation bindet nun alle fuenf
 Inputs an kanonische Git-Blobs. Der Folgelauf besteht Ruff, 1194 Tests und
 strikten Docs-Bau. Daher gibt es noch keinen G1--G3-Befund und weiterhin
-keinen $H\to\infty$-Stabilitaetsclaim; offen ist die explizite Freigabe fuer
-den einmaligen Leiterlauf.
+keinen $H\to\infty$-Stabilitaetsclaim. Der spaeter autorisierte Attempt 1
+erreichte die nachgeschaltete Homotopievalidierung, scheiterte dort aber vor
+Audit und Publikation an einer exakten Mittelpunktforderung fuer eine
+outward-gerundete Box. Nur das exklusive Receipt entstand. Der Versuch ist ein
+verbrauchter Pipeline-Incident ohne G1--G3-Befund; ein Retry ist nicht
+autorisiert.
 
 ## P5-D Code-Review und Remediation
 
