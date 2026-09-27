@@ -423,6 +423,270 @@ def validate_result(payload: dict[str, Any]) -> None:
         raise ValueError("$.classification.precedence_rank: reconstruction mismatch")
 
 
+def _root_coordinates(
+    panel: dict[str, Any], precision_dps: int
+) -> tuple[str, str]:
+    newton = panel[f"newton_{precision_dps}"]
+    return newton["radius"], newton["theta"]
+
+
+def _bridge_root_panel(
+    horizon: int, precision_records: dict[int, dict[str, Any]]
+) -> dict[str, Any]:
+    """Add cross-precision identity checks to the reviewed v3 root panel."""
+
+    panel = _transfer_gate()._combine_root_panel(horizon, precision_records)
+    panel["cross_80_inner_in_120_outer"] = _image_in_box(
+        panel["inner_certificate_80"]["krawczyk_image"],
+        panel["outer_certificate_120"]["box"],
+        path=f"orchestration.root[{horizon}].cross_80_to_120",
+    )
+    panel["cross_120_inner_in_80_outer"] = _image_in_box(
+        panel["inner_certificate_120"]["krawczyk_image"],
+        panel["outer_certificate_80"]["box"],
+        path=f"orchestration.root[{horizon}].cross_120_to_80",
+    )
+    return panel
+
+
+def _endpoint_link(
+    *,
+    component: str,
+    component_root: dict[str, Any],
+    panel: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if panel is None:
+        return None
+    outer_box = copy.deepcopy(component_root["outer_box"])
+    inner_image = copy.deepcopy(component_root["inner_image"])
+    link = {
+        "bridge_120_inner_in_component_outer": _image_in_box(
+            panel["inner_certificate_120"]["krawczyk_image"],
+            outer_box,
+            path=f"orchestration.endpoint.{component}.bridge_120",
+        ),
+        "bridge_80_inner_in_component_outer": _image_in_box(
+            panel["inner_certificate_80"]["krawczyk_image"],
+            outer_box,
+            path=f"orchestration.endpoint.{component}.bridge_80",
+        ),
+        "component": component,
+        "component_inner_image": inner_image,
+        "component_inner_in_bridge_120_outer": _image_in_box(
+            inner_image,
+            panel["outer_certificate_120"]["box"],
+            path=f"orchestration.endpoint.{component}.component_to_120",
+        ),
+        "component_inner_in_bridge_80_outer": _image_in_box(
+            inner_image,
+            panel["outer_certificate_80"]["box"],
+            path=f"orchestration.endpoint.{component}.component_to_80",
+        ),
+        "component_outer_box": outer_box,
+        "horizon": component_root["horizon"],
+    }
+    link["pass"] = all(
+        link[name]
+        for name in (
+            "bridge_120_inner_in_component_outer",
+            "bridge_80_inner_in_component_outer",
+            "component_inner_in_bridge_120_outer",
+            "component_inner_in_bridge_80_outer",
+        )
+    )
+    return link
+
+
+def orchestrate_bridge(
+    *,
+    backend: Any,
+    identity: dict[str, Any],
+    publication: dict[str, Any],
+    sealed_components: dict[str, Any],
+) -> dict[str, Any]:
+    """Compose G1--G3 evidence without rerunning sealed G4 or G5 stages.
+
+    The injected backend owns only primitive finite-root, homotopy, exclusion,
+    replay and control operations.  Missing evidence closes every dependent
+    prefix.  This function neither publishes files nor calls tail/stability
+    backends.
+    """
+
+    direct_replay_pass = bool(backend.direct_replay())
+    reused = _transfer_gate()
+    execution_order = (1200, 1500, 1800, 2400, 3600, 900, 600)
+    homotopy_edges = (
+        (1200, 1500, "forward"),
+        (1500, 1800, "forward"),
+        (1800, 2400, "forward"),
+        (2400, 3600, "forward"),
+        (1200, 900, "lower-tail"),
+        (900, 600, "lower-tail"),
+    )
+    index_by_horizon = {horizon: index for index, horizon in enumerate(HORIZONS)}
+    root_panels: list[dict[str, Any] | None] = [None] * len(HORIZONS)
+    starts = {
+        precision: (
+            str(identity["parameters"]["anchor_radius"]),
+            str(identity["parameters"]["anchor_theta"]),
+        )
+        for precision in (80, 120)
+    }
+    exclusions: list[dict[str, Any] | None] = [None] * 4
+    forward_open = True
+    lower_open = True
+
+    for horizon in execution_order:
+        forward = horizon in FORWARD_HORIZONS
+        if horizon != 1200 and (
+            (forward and not forward_open) or (not forward and not lower_open)
+        ):
+            continue
+        if horizon == 900:
+            anchor = root_panels[index_by_horizon[1200]]
+            if anchor is None:
+                lower_open = False
+                continue
+            starts = {
+                precision: _root_coordinates(anchor, precision)
+                for precision in (80, 120)
+            }
+        records: dict[int, dict[str, Any]] = {}
+        for precision in (80, 120):
+            record = backend.finite_root_panel(
+                horizon=horizon,
+                precision_dps=precision,
+                start=starts[precision],
+            )
+            if record is None:
+                break
+            records[precision] = record
+        if len(records) != 2:
+            if forward and horizon != 1200:
+                previous = execution_order[execution_order.index(horizon) - 1]
+                exclusions[(1500, 1800, 2400, 3600).index(horizon)] = (
+                    backend.local_branch_exclusion(
+                        from_horizon=previous,
+                        to_horizon=horizon,
+                        previous_root=starts[120],
+                    )
+                )
+                forward_open = False
+            elif horizon == 1200:
+                forward_open = False
+                lower_open = False
+            else:
+                lower_open = False
+            continue
+        panel = _bridge_root_panel(horizon, records)
+        root_panels[index_by_horizon[horizon]] = panel
+        starts = {
+            precision: _root_coordinates(panel, precision)
+            for precision in (80, 120)
+        }
+
+    homotopies: list[dict[str, Any] | None] = [None] * 6
+    forward_homotopy_open = True
+    lower_homotopy_open = True
+    for edge_index, (first, second, direction) in enumerate(homotopy_edges):
+        if direction == "forward" and not forward_homotopy_open:
+            continue
+        if direction == "lower-tail" and not lower_homotopy_open:
+            continue
+        first_panel = root_panels[index_by_horizon[first]]
+        second_panel = root_panels[index_by_horizon[second]]
+        if first_panel is None or second_panel is None:
+            if direction == "forward":
+                forward_homotopy_open = False
+            else:
+                lower_homotopy_open = False
+            continue
+        row = backend.homotopy_edge(
+            from_horizon=first,
+            to_horizon=second,
+            from_root=_root_coordinates(first_panel, 120),
+            to_root=_root_coordinates(second_panel, 120),
+        )
+        homotopies[edge_index] = copy.deepcopy(row)
+        if row["status"] != "pass":
+            if direction == "forward":
+                if exclusions[edge_index] is None:
+                    exclusions[edge_index] = backend.local_branch_exclusion(
+                        from_horizon=first,
+                        to_horizon=second,
+                        previous_root=_root_coordinates(first_panel, 120),
+                    )
+                forward_homotopy_open = False
+            else:
+                lower_homotopy_open = False
+
+    legacy_panels = []
+    for panel in root_panels:
+        if panel is None:
+            legacy_panels.append(None)
+            continue
+        legacy = copy.deepcopy(panel)
+        legacy.pop("cross_80_inner_in_120_outer")
+        legacy.pop("cross_120_inner_in_80_outer")
+        legacy_panels.append(legacy)
+    drift = reused._drift_record(legacy_panels)
+    lower_complete = bool(
+        all(root_panels[index_by_horizon[horizon]] is not None for horizon in (1200, 900, 600))
+        and all(row is not None and row["status"] == "pass" for row in homotopies[4:])
+    )
+    lower_status = (
+        "lower-tail-stress-pass"
+        if lower_complete
+        else "lower-tail-stress-inconclusive"
+    )
+    payload: dict[str, Any] = {
+        "classification": {
+            "claim_boundary": _load_schema()["constants"]["claim_boundary"],
+            "decision": "g1-g3-bridge-inconclusive",
+            "gates": {},
+            "lower_tail_status": lower_status,
+            "precedence_rank": 3,
+        },
+        "controls": {},
+        "endpoint_links": [
+            _endpoint_link(
+                component="G5",
+                component_root=sealed_components["g5_root"],
+                panel=root_panels[index_by_horizon[2400]],
+            ),
+            _endpoint_link(
+                component="G4",
+                component_root=sealed_components["g4_root"],
+                panel=root_panels[index_by_horizon[3600]],
+            ),
+        ],
+        "finite_branch": {
+            "direct_replay_pass": direct_replay_pass,
+            "drift": drift,
+            "exclusions": exclusions,
+            "forward_horizons": list(FORWARD_HORIZONS),
+            "homotopies": homotopies,
+            "horizons": list(HORIZONS),
+            "lower_horizons": list(LOWER_HORIZONS),
+            "lower_tail_status": lower_status,
+            "root_panels": root_panels,
+        },
+        "identity": copy.deepcopy(identity),
+        "publication": copy.deepcopy(publication),
+        "q_representations": reused.q_representations(HORIZONS),
+        "sealed_components": copy.deepcopy(sealed_components),
+    }
+    # Keep controls last: G4/G5 are sealed data above and are never backend calls.
+    payload["controls"] = copy.deepcopy(backend.controls())
+    payload["controls"]["pass"] = reused._controls_evidence(payload)
+    gates = _reconstructed_gates(payload)
+    decision = classify_bridge(gates)
+    payload["classification"].update(decision)
+    payload["classification"]["gates"] = gates
+    validate_result(payload)
+    return payload
+
+
 def _centered_pair(center: str, half_width: str) -> list[str]:
     with localcontext() as context:
         context.prec = 180
