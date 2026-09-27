@@ -258,6 +258,27 @@ rekonstruiert, dass mindestens einer der beiden Fehler nicht unter
 $5\times10^{-14}$ liegt. Die Driftbreitenmutation bleibt ein targetfreier
 Validatorfalsifikator und ist kein G6-Laufzeitrecord.
 
+Die nichtkreisfoermigen Geschichten sind fuer beide Horizonte mit
+$j=0,\ldots,H-1$ fest
+
+$$
+x_j=\sin(0.17j)+0.03j,
+\qquad
+y_j=\cos(0.11j)-0.02j.
+$$
+
+Der gemeinsame H=17-Mutationsinput ist
+
+$$
+x_j=0.025j+0.003j^2,
+\qquad
+y_j=0.4\sin(0.09j).
+$$
+
+Die sieben Kreisgeschichten verwenden ohne Rundung oder Refitting den
+registrierten Anchor $(R,\theta)=(0.946517504804225,
+0.015770381717135)$ und die jeweilige volle FIFO-Laenge.
+
 Die Entscheidungen besitzen folgende Praezedenz:
 
 1. G0 oder G6 scheitert:
