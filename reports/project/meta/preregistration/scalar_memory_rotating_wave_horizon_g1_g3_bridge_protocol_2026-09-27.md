@@ -106,6 +106,26 @@ vorherigen Panelmittelpunkt erzeugt. Globale Suche, alternative Startwerte,
 Retuning, adaptive Schrittwahl oder eine zweite Chance nach Sichtung eines
 Ergebnisses bleiben verboten.
 
+Der direkte Summenreplay wird nun explizit als primitive Evidenz eingefroren.
+Fuer jedes vorhandene Rootpanel wird dessen 120-dps-Mittelpunkt in einem
+separaten direkten 70-dps-`mpmath`-Summenpfad ausgewertet, der weder den
+Root- noch den Intervallauswerter aufruft. Gespeichert werden Mittelpunkt,
+beide signierten Residuen, radiale und tangentiale Summe sowie deren
+Maximum. Ein Replay besteht genau dann, wenn alle Dezimalwerte endlich sind,
+die radiale Summe positiv, die tangentiale Summe negativ und
+
+$$
+\max(|F_R|,|F_T|)\le 10^{-45}
+$$
+
+gilt. Die Validatoren rekonstruieren Maximum, Vorzeichen und Passzustand aus
+diesen Dezimalwerten. Die fuenf Vorwaertsreplays entscheiden G0; ein
+fehlender Vorwaertsreplay ist `inconclusive`, ein vollstaendig ausgewerteter
+Replay oberhalb der Schwelle ist `fail`. Replays des unteren Stressasts
+werden ebenfalls gespeichert, duerfen aber nur dessen getrennten Status
+schliessen. Damit kann ein lower-tail-Fehler den Aufwaertsclaim nicht ueber
+G0 umgehen.
+
 Jedes Panel verwendet die unveraenderten aeusseren und inneren
 Krawczyk-Halbbreiten $10^{-8}$ und $10^{-30}$. Beide Praezisionspanels
 muessen strikt einschliessen und ihre Mittelpunkte je Koordinate bis
@@ -226,6 +246,18 @@ aufrufen noch vor dem Lesen materialisieren. Modulo-Richtung,
 Read/write-Reihenfolge und Overwrite-Slot erhalten weiterhin obligatorische
 targetfreie Mutationsfalsifikatoren.
 
+Jeder der neun Circular-Records speichert den SHA-256 der erwarteten
+Altersfolge und den SHA-256 der aus dem Ringspeicher materialisierten
+Altersfolge getrennt; beide muessen identisch sein. IDs und Reihenfolge sind
+`noncircle-H17`, `noncircle-H257` und danach `anchor-H600` bis
+`anchor-H3600` in Leiterreihenfolge. Fuer die drei registrierten
+FIFO-Mutationen `reverse-modulo`, `overwrite-before-read` und
+`wrong-oldest-slot` werden am nichtkreisfoermigen H=17-Fall neuer-Punkt- und
+Gesamtzustandsfehler gespeichert. `detected` wird ausschliesslich daraus
+rekonstruiert, dass mindestens einer der beiden Fehler nicht unter
+$5\times10^{-14}$ liegt. Die Driftbreitenmutation bleibt ein targetfreier
+Validatorfalsifikator und ist kein G6-Laufzeitrecord.
+
 Die Entscheidungen besitzen folgende Praezedenz:
 
 1. G0 oder G6 scheitert:
@@ -296,3 +328,24 @@ Revision schliesst sie ohne Zugriff auf einen neuen Leiterroot:
 - HGB-P05: fuenf Laufzeitinputs und drei reine Governance-Reviews sind
   getrennt benannt.
 - HGB-P06: der nicht registrierte lower-tail-loss-Ausgang wurde entfernt.
+
+## 10. Zweite Amendierung nach Implementierungsreview
+
+Das vor der konkreten Backend-Anbindung eingefrorene Implementierungsreview
+fand HGB-I01--I03. Diese Revision schliesst sie ohne Zugriff auf einen neuen
+Leiterroot:
+
+- HGB-I01: das freie G0-Bool wird durch sieben geordnete, gegebenenfalls
+  nullable direkte 70-dps-Summenreplays ersetzt; Schwelle, Vorzeichen und
+  forward/lower-tail-Semantik sind nun vorab festgelegt;
+- HGB-I02: die drei FIFO-Mutationen speichern rekonstruierbare Fehler statt
+  frei gesetzter Detektionsbooleans; `drift-width` verbleibt im targetfreien
+  Vertragstest;
+- HGB-I03: jede Circular-Kontrolle speichert erwarteten und beobachteten
+  Altersfolgenhash, und ihre neun IDs sind eingefroren.
+
+Die Entscheidungsreihenfolge wird dabei praezisiert: Nur `G0=fail` oder
+`G6=fail` erzeugt `g1-g3-bridge-experiment-invalid`; unvollstaendige
+Vorwaertsevidenz bleibt `g1-g3-bridge-inconclusive`. Alle bisherigen
+Claimgrenzen, Stopregeln und die Notwendigkeit einer neuen Nutzerfreigabe
+bleiben unveraendert.
