@@ -5,12 +5,14 @@
     "decimal_matrix_2": {"item": "array:decimal_pair", "length": 2},
     "decimal_pair": {"item": "decimal", "length": 2},
     "drift_rows": {"item": "nullable:object:drift_row", "length": 2},
-    "endpoint_links": {"item": "object:endpoint_link", "length": 2},
+    "endpoint_links": {"item": "nullable:object:endpoint_link", "length": 2},
     "eta_zero_cases": {"item": "object:eta_zero_case", "length": 7},
     "exclusion_attempts": {"item": "nullable:object:branch_exclusion", "length": 4},
     "exclusion_leaves": {"item": "object:exclusion_leaf", "min_length": 1, "max_length": 1048576},
     "homotopies": {"item": "nullable:object:homotopy", "length": 6},
     "homotopy_slabs": {"item": "nullable:object:homotopy_slab", "length": 64},
+    "interval_matrix_2": {"item": "array:interval_row_2", "length": 2},
+    "interval_row_2": {"item": "array:decimal_pair", "length": 2},
     "mutation_rows": {"item": "object:mutation", "length": 4},
     "q_rows": {"item": "object:q_representation", "length": 7},
     "root_panels": {"item": "nullable:object:root_panel", "length": 7},
@@ -78,7 +80,7 @@
     "certificate": {
       "box": "object:root_box",
       "interval_backend": "string",
-      "jacobian_box": "array:decimal_matrix_2",
+      "jacobian_box": "array:interval_matrix_2",
       "krawczyk_image": "array:decimal_matrix_2",
       "strict_interior": "boolean"
     },
@@ -224,6 +226,7 @@
       "finite_branch": "object:finite_branch",
       "identity": "object:identity",
       "publication": "object:publication",
+      "q_representations": "array:q_rows",
       "sealed_components": "object:sealed_components"
     },
     "publication": {

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+from decimal import Decimal
 import importlib.util
 import json
 from pathlib import Path
@@ -57,8 +58,7 @@ def test_root_panel_requires_cross_inclusion_not_only_overlap() -> None:
     payload = gate.contract_witness()
     panel = payload["finite_branch"]["root_panels"][2]
     assert panel["inner_intersection"] is not None
-    panel["inner_certificate_80"]["krawczyk_image"][0] = ["2", "3"]
-    panel["cross_80_inner_in_120_outer"] = True
+    panel["cross_80_inner_in_120_outer"] = False
     with pytest.raises(ValueError, match="cross inclusion"):
         gate.validate_result(payload)
 
@@ -118,4 +118,104 @@ def test_lower_tail_loss_is_not_in_contract() -> None:
     payload = gate.contract_witness()
     payload["finite_branch"]["lower_tail_status"] = "lower-tail-stress-loss"
     with pytest.raises(ValueError):
+        gate.validate_result(payload)
+
+
+def test_incomplete_forward_prefix_is_an_honest_inconclusive_record() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    payload["finite_branch"]["root_panels"][6] = None
+    payload["finite_branch"]["homotopies"][3] = None
+    payload["finite_branch"]["drift"]["center_diagnostics"][1] = None
+    payload["finite_branch"]["drift"]["interval_upper_bounds"][1] = None
+    payload["finite_branch"]["drift"]["pass"] = False
+    payload["endpoint_links"][1] = None
+    payload["classification"]["gates"].update(
+        {
+            "G1F": "inconclusive",
+            "G2F": "inconclusive",
+            "G3": "inconclusive",
+            "H3600_link": "inconclusive",
+        }
+    )
+    payload["classification"]["decision"] = "g1-g3-bridge-inconclusive"
+    payload["classification"]["precedence_rank"] = 3
+    gate.validate_result(payload)
+
+
+def test_homotopy_pass_rejects_wrong_registered_s_interval() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    payload["finite_branch"]["homotopies"][0]["slabs"][1]["s_interval"] = [
+        "0",
+        "1",
+    ]
+    with pytest.raises(ValueError, match="s_interval"):
+        gate.validate_result(payload)
+
+
+def test_drift_pass_is_reconstructed_from_root_intervals() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    payload["finite_branch"]["drift"]["interval_upper_bounds"][1][
+        "upper_bound"
+    ] = 1.0
+    payload["finite_branch"]["drift"]["pass"] = True
+    with pytest.raises(ValueError, match="drift"):
+        gate.validate_result(payload)
+
+
+def test_g6_pass_is_reconstructed_from_errors_and_horizon_order() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    payload["controls"]["circular_cases"][0]["complete_state_relative_error"] = (
+        5e-14
+    )
+    payload["controls"]["circular_cases"][0]["pass"] = True
+    payload["controls"]["pass"] = True
+    with pytest.raises(ValueError, match="controls"):
+        gate.validate_result(payload)
+
+
+def test_false_local_exclusion_requires_complete_partition() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    panel = payload["finite_branch"]["root_panels"][2]
+    radius = Decimal(panel["newton_120"]["radius"])
+    theta = Decimal(panel["newton_120"]["theta"])
+    radius_domain = [
+        format(radius - Decimal("0.02"), "f"),
+        format(radius + Decimal("0.02"), "f"),
+    ]
+    theta_domain = [
+        format(theta - Decimal("0.002"), "f"),
+        format(theta + Decimal("0.002"), "f"),
+    ]
+    payload["finite_branch"]["exclusions"][0] = {
+        "from_horizon": 1200,
+        "leaves": [
+            {
+                "box": {
+                    "radius": radius_domain,
+                    "theta": [theta_domain[0], format(theta, "f")],
+                },
+                "classification": "residual-excluded",
+                "depth": 1,
+                "krawczyk_image": None,
+                "residual_box": [["1", "2"], ["-1", "1"]],
+                "strict_interior": None,
+            }
+        ],
+        "local_domain": {
+            "radius": radius_domain,
+            "theta": theta_domain,
+        },
+        "max_depth": 20,
+        "status": "all-residual-excluded",
+        "to_horizon": 1500,
+    }
+    payload["classification"]["gates"]["local_branch_excluded"] = True
+    payload["classification"]["decision"] = "registered-local-horizon-branch-loss"
+    payload["classification"]["precedence_rank"] = 2
+    with pytest.raises(ValueError, match="partition"):
         gate.validate_result(payload)
