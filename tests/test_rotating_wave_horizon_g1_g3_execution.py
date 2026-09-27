@@ -102,6 +102,7 @@ def _authorized_governance(execution):
     protected[execution.PROTOCOL_REL.as_posix()] = tracked["protocol_blob"]
     return {
         "authorization": {
+            "attempt": execution.REGISTERED_ATTEMPT,
             "authorization_id": "12345678-1234-4abc-8def-123456789abc",
             "ci": {
                 "api_url": (
@@ -235,6 +236,7 @@ def test_authorization_binds_ci_blobs_dependencies_upstream_and_consumes_once(
     )
 
     assert result["revision"] == result["upstream_revision"] == head
+    assert result["attempt"] == execution.REGISTERED_ATTEMPT == 2
     assert result["receipt_sha256"] == "7" * 64
     assert len(receipts) == 1
     assert receipts[0]["revision"] == head
@@ -244,6 +246,7 @@ def test_authorization_binds_ci_blobs_dependencies_upstream_and_consumes_once(
     "mutation",
     (
         "remote-head",
+        "attempt",
         "dependency",
         "protected-blob",
         "source-drift",
@@ -255,7 +258,9 @@ def test_authorization_fails_before_receipt_on_context_mutations(
     execution, monkeypatch, tmp_path: Path, mutation: str
 ) -> None:
     governance = _authorized_governance(execution)
-    if mutation == "dependency":
+    if mutation == "attempt":
+        governance["authorization"]["attempt"] = 1
+    elif mutation == "dependency":
         governance["authorization"]["dependencies"]["numpy"] = "0.0"
     source, remote, receipts, _ = _install_authorized_fakes(
         execution, monkeypatch, tmp_path, governance=governance
@@ -322,6 +327,8 @@ def test_receipt_is_exclusive_and_hash_bound(tmp_path: Path, monkeypatch) -> Non
     )
     assert relative == "receipt.json"
     assert len(digest) == 64
+    receipt = json.loads((tmp_path / "receipt.json").read_text(encoding="utf-8"))
+    assert receipt["attempt"] == execution.REGISTERED_ATTEMPT == 2
     with pytest.raises(RuntimeError, match="already consumed"):
         execution._create_receipt(
             authorization_id="00000000-0000-4000-8000-000000000001",
@@ -332,10 +339,22 @@ def test_receipt_is_exclusive_and_hash_bound(tmp_path: Path, monkeypatch) -> Non
         )
 
 
+def test_attempt_2_paths_do_not_alias_consumed_attempt_1(execution) -> None:
+    assert execution.REGISTERED_ATTEMPT == 2
+    assert "attempt_2" in execution.RECEIPT_REL.name
+    assert "attempt_2" in execution.RESULT_REL.name
+    assert "attempt_2" in execution.AUDIT_REL.name
+    assert "attempt_2" in execution.READINESS_REVIEW_REL.name
+    assert execution.RECEIPT_REL.name != (
+        "scalar_memory_rotating_wave_horizon_g1_g3_bridge_receipt_2026-09-27.json"
+    )
+
+
 def test_execute_once_orders_guard_target_audit_and_publication(monkeypatch) -> None:
     execution = _load_execution()
     calls = []
     provenance = {
+        "attempt": 2,
         "authorization_id": "00000000-0000-4000-8000-000000000001",
         "ci_run_id": 1,
         "governance_sha256": "a" * 64,

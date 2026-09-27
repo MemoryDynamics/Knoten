@@ -14,7 +14,7 @@ from typing import Any, Sequence
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v2.json"
 )
 LEGACY_AUDIT_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_result_audit.py"
@@ -438,6 +438,8 @@ def audit_payload(
 
     schema = _json(SCHEMA_PATH)
     _legacy().validate_result(payload, schema)
+    if payload["identity"]["authorization"]["attempt"] != 2:
+        raise ValueError("$.identity.authorization.attempt: registered attempt mismatch")
     if payload["identity"]["parameters"] != PARAMETERS:
         raise ValueError("$.identity.parameters: registered values mismatch")
     publication = payload["publication"]

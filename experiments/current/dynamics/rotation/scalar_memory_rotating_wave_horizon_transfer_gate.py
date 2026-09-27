@@ -2023,16 +2023,25 @@ def _verify_homotopy_slots(
                 lower, upper = _decimal_interval(
                     slab["box"][coordinate], path=f"{slab_path}.box.{coordinate}"
                 )
-                if upper - lower != 2 * Decimal(half_width):
-                    raise ValueError(f"{slab_path}.box.{coordinate}: width mismatch")
                 with localcontext() as context:
                     context.prec = 180
                     interpolation = Decimal(2 * slab_index + 1) / Decimal(128)
                     start = Decimal(root_panels[first_slot]["newton_120"][coordinate])
                     stop = Decimal(root_panels[second_slot]["newton_120"][coordinate])
                     expected_center = (1 - interpolation) * start + interpolation * stop
-                    if (lower + upper) / 2 != expected_center:
-                        raise ValueError(f"{slab_path}.box.{coordinate}: center mismatch")
+                    width = Decimal(half_width)
+                    expected_lower = expected_center - width
+                    expected_upper = expected_center + width
+                    tolerance = max(abs(expected_center), Decimal(1)).scaleb(-116)
+                    if not (
+                        lower <= expected_lower
+                        and expected_upper <= upper
+                        and expected_lower - lower <= tolerance
+                        and upper - expected_upper <= tolerance
+                    ):
+                        raise ValueError(
+                            f"{slab_path}.box.{coordinate}: center/width mismatch"
+                        )
             strict = _strict_image_in_box(
                 slab["krawczyk_image"], slab["box"], path=slab_path
             )

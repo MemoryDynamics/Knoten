@@ -2,7 +2,7 @@
 
 Datum: 2026-09-27.
 
-Status: **dreimal amendiert, outcome-blind fuer den neuen G1--G3-Zugriff;
+Status: **viermal amendiert, outcome-blind fuer den neuen G1--G3-Zugriff;
 Target geschlossen**.
 
 Dieses Protokoll ersetzt keinen bereits publizierten G4- oder G5-Lauf. Es
@@ -314,12 +314,13 @@ Kardinalitaeten, Intervallinklusionen, dyadische Vollstaendigkeit, Drift,
 Hashes und Entscheidung getrennt. Der Auditor ist kein zweiter Newton- oder
 Intervallbackend.
 
-Reservierte Publikationspfade:
+Die Pfade des verbrauchten ersten Versuchs bleiben unveraendert und werden
+nicht wiederverwendet. Reservierte Publikationspfade fuer Versuch 2:
 
-- `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_2026-09-27.json`;
+- `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.json`;
 - gleicher Basispfad mit `.md` und `.publication.json`;
-- `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_independent_audit_2026-09-27.json`;
-- `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_review_2026-09-27.md`.
+- `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_independent_audit_2026-09-27.json`;
+- `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_result_review_2026-09-27.md`.
 
 Vor jeder Zielautorisierung sind erforderlich:
 
@@ -390,3 +391,41 @@ Entscheidung. Validator, unabhaengiger Auditor und Tests muessen die
 Git-Blob-Domaene getrennt gegen Checkout-Drift pruefen. Der fehlgeschlagene
 CI-Lauf autorisiert keinen Targetzugriff; Governance und Leiter bleiben
 geschlossen.
+
+## 12. Vierte Amendierung nach dem verbrauchten ersten Zielversuch
+
+Versuch 1 wurde mit der einmaligen UUID
+`84e81fc5-a78c-4a2a-9fb3-f771bd154688` autorisiert und genau einmal
+gestartet. Er stoppte vor Ergebnis-, Report-, Audit- und
+Manifestpublikation bei der semantischen Validierung der ersten
+Homotopiescheibe: Der Validator verlangte exakt symmetrische gespeicherte
+Dezimalendpunkte, waehrend `mpmath.iv` die Intervallgrenzen korrekt nach
+aussen rundete. Nur das unveraenderliche Receipt wurde erzeugt. Es wurden
+keine numerischen Rootwerte oder Teilentscheidungen publiziert oder fuer
+diese Amendierung verwendet.
+
+Der gespeicherte Zertifikatskasten darf deshalb fuer jedes Koordinatenzentrum
+$c$, die registrierte Halbbreite $w$ und die Backendpraezision $p$ den
+beabsichtigten Kasten $[c-w,c+w]$ nach aussen enthalten. Beide zusaetzlichen
+Aufweitungen muessen einzeln durch
+
+$$
+\tau_p(c)=\max(|c|,1)\,10^{4-p}
+$$
+
+beschraenkt sein. Fuer Homotopiescheiben gilt $p=120$. Fuer Rootzertifikate
+gilt die jeweilige Panelpraezision $p\in\{80,120\}$. Einwaertsrundung,
+fehlender Einschluss oder groessere Aufweitung bleibt ein harter
+Vertragsfehler. Produktionsvalidator und standardbibliotheksbasierter
+Auditor rekonstruieren diese Bedingung unabhaengig aus den gespeicherten
+Dezimalendpunkten.
+
+Vor Versuch 2 muessen targetfreie Tests mindestens (a) kleine asymmetrische
+Auswaertsrundung akzeptieren, (b) Einwaertsschrumpfung verwerfen und (c)
+uebermaessige Aufweitung verwerfen. Versuch 2 besitzt eigene Receipt-,
+Ergebnis-, Report-, Audit- und Manifestpfade und eine gebundene
+Versuchsnummer `2`. Das Receipt aus Versuch 1 wird niemals ueberschrieben.
+Diese Remediation aendert keine Modellzahl, Homotopie, Halbbreite, Schwelle,
+Gatefolge oder wissenschaftliche Entscheidung. Governance bleibt bis zu
+neuem Review, gruener exakter CI und einer neuen ausdruecklichen
+Nutzerfreigabe geschlossen.

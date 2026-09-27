@@ -839,19 +839,31 @@ def _verify_certificate(
     *,
     center: Sequence[str] | None = None,
     half_width: str,
+    precision_dps: int,
     path: str,
 ) -> bool:
     with localcontext() as context:
-        context.prec = 180
-        expected_width = 2 * Decimal(half_width)
+        context.prec = 200
+        width = Decimal(half_width)
         for index, name in enumerate(("radius", "theta")):
             lower, upper = _decimal_interval(
                 certificate["box"][name], path=f"{path}.box.{name}"
             )
-            if upper - lower != expected_width:
-                raise ValueError(f"{path}.box.{name}: half-width mismatch")
-            if center is not None and (lower + upper) / 2 != Decimal(center[index]):
-                raise ValueError(f"{path}.box.{name}: center mismatch")
+            if center is None:
+                if upper - lower < 2 * width:
+                    raise ValueError(f"{path}.box.{name}: half-width mismatch")
+                continue
+            midpoint = Decimal(center[index])
+            expected_lower = midpoint - width
+            expected_upper = midpoint + width
+            tolerance = max(abs(midpoint), Decimal(1)).scaleb(4 - precision_dps)
+            if not (
+                lower <= expected_lower
+                and expected_upper <= upper
+                and expected_lower - lower <= tolerance
+                and upper - expected_upper <= tolerance
+            ):
+                raise ValueError(f"{path}.box.{name}: center/width mismatch")
     strict = _strict_image_in_box(
         certificate["krawczyk_image"], certificate["box"], path=path
     )
@@ -892,6 +904,7 @@ def _verify_root_panel(panel: dict[str, Any], *, path: str) -> bool:
                     panel[f"{scale}_certificate_{precision}"],
                     center=center,
                     half_width=half_width,
+                    precision_dps=precision,
                     path=f"{path}.{scale}_certificate_{precision}",
                 )
             )
@@ -966,16 +979,25 @@ def _verify_root_and_homotopy_slots(payload: dict[str, Any]) -> list[bool | None
                 lower, upper = _decimal_interval(
                     slab["box"][coordinate], path=f"{path}.box.{coordinate}"
                 )
-                if upper - lower != 2 * Decimal(half_width):
-                    raise ValueError(f"{path}.box.{coordinate}: width mismatch")
                 with localcontext() as context:
                     context.prec = 180
                     interpolation = Decimal(2 * slab_index + 1) / Decimal(128)
                     start = Decimal(roots[first_slot]["newton_120"][coordinate])
                     stop = Decimal(roots[second_slot]["newton_120"][coordinate])
                     expected_center = (1 - interpolation) * start + interpolation * stop
-                    if (lower + upper) / 2 != expected_center:
-                        raise ValueError(f"{path}.box.{coordinate}: center mismatch")
+                    width = Decimal(half_width)
+                    expected_lower = expected_center - width
+                    expected_upper = expected_center + width
+                    tolerance = max(abs(expected_center), Decimal(1)).scaleb(-116)
+                    if not (
+                        lower <= expected_lower
+                        and expected_upper <= upper
+                        and expected_lower - lower <= tolerance
+                        and upper - expected_upper <= tolerance
+                    ):
+                        raise ValueError(
+                            f"{path}.box.{coordinate}: center/width mismatch"
+                        )
             strict = _strict_image_in_box(
                 slab["krawczyk_image"], slab["box"], path=path
             )
@@ -1625,6 +1647,7 @@ def _verify_reconstructed_values(payload: dict[str, Any]) -> None:
                 row["certificate"],
                 center=row["root"],
                 half_width="1e-10",
+                precision_dps=expected_precision,
                 path=f"$.infinite_tail.certificate_panels[{index}].certificate",
             )
         )

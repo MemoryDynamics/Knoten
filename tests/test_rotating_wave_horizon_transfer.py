@@ -742,6 +742,7 @@ def _fake_homotopy_certificate(
     radius_half_width: str = "1e-4",
     theta_half_width: str = "1e-6",
     passed: bool = True,
+    outward_slack: str | None = None,
     **kwargs,
 ) -> dict[str, object]:
     def interval(center: str, half_width: str) -> dict[str, str]:
@@ -749,10 +750,13 @@ def _fake_homotopy_certificate(
             context.prec = 180
             midpoint = Decimal(center)
             width = Decimal(half_width)
-            return {
-                "lower": format(midpoint - width, "f"),
-                "upper": format(midpoint + width, "f"),
-            }
+            lower = midpoint - width
+            upper = midpoint + width
+            if outward_slack is not None:
+                slack = Decimal(outward_slack)
+                lower -= slack
+                upper += 2 * slack
+            return {"lower": format(lower, "f"), "upper": format(upper, "f")}
 
     box = [
         interval(radius, radius_half_width),
@@ -775,7 +779,7 @@ def test_homotopy_adapter_uses_exact_fixed_slab_partition(gate, monkeypatch) -> 
 
     def fake_homotopy(**kwargs):
         calls.append(kwargs)
-        return _fake_homotopy_certificate(**kwargs)
+        return _fake_homotopy_certificate(outward_slack="1e-121", **kwargs)
 
     monkeypatch.setattr(
         gate,
@@ -1906,7 +1910,7 @@ def test_v3_contract_rejects_homotopy_and_tail_reconstruction_lies(gate) -> None
     with localcontext() as context:
         context.prec = 180
         box[:] = [format(Decimal(value) + Decimal("1e-8"), "f") for value in box]
-    with pytest.raises(ValueError, match="center mismatch"):
+    with pytest.raises(ValueError, match="center/width mismatch"):
         gate.validate_result(center)
 
     overlap = gate.contract_witness()

@@ -30,7 +30,7 @@ PROTOCOL_REL = Path(
     "scalar_memory_rotating_wave_horizon_g1_g3_bridge_protocol_2026-09-27.md"
 )
 SCHEMA_REL = Path(
-    BASE + "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v1.json"
+    BASE + "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v2.json"
 )
 COMPONENT_REL = Path(
     BASE + "scalar_memory_rotating_wave_horizon_g1_g3_bridge_gate.py"
@@ -43,21 +43,22 @@ EXECUTION_REL = Path(
 )
 READINESS_REVIEW_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_execution_readiness_review_2026-09-27.md"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_execution_readiness_review_2026-09-27.md"
 )
 RECEIPT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_receipt_2026-09-27.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_receipt_2026-09-27.json"
 )
+REGISTERED_ATTEMPT = 2
 RESULT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_2026-09-27.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.json"
 )
 REPORT_REL = RESULT_REL.with_suffix(".md")
 MANIFEST_REL = RESULT_REL.with_suffix(".publication.json")
 AUDIT_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_independent_audit_2026-09-27.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_independent_audit_2026-09-27.json"
 )
 GOVERNANCE_SCHEMA = "scalar-memory-rotating-wave-horizon-g1-g3-governance-v1"
 DEPENDENCIES = {
@@ -87,6 +88,7 @@ PROTECTED_PATHS = (
     "tests/test_rotating_wave_horizon_transfer.py",
 )
 AUTHORIZATION_KEYS = {
+    "attempt",
     "authorization_id",
     "ci",
     "closed_governance_blob",
@@ -234,13 +236,14 @@ def _create_receipt(
     path = ROOT / RECEIPT_REL
     path.parent.mkdir(parents=True, exist_ok=True)
     receipt = {
+        "attempt": REGISTERED_ATTEMPT,
         "authorization_id": authorization_id,
         "ci_run_id": ci_run_id,
         "created_utc": datetime.now(UTC).isoformat(),
         "governance_sha256": governance_sha256,
         "implementation_revision": implementation_revision,
         "revision": revision,
-        "schema": "scalar-memory-rotating-wave-horizon-g1-g3-receipt-v1",
+        "schema": "scalar-memory-rotating-wave-horizon-g1-g3-attempt-receipt-v1",
     }
     content = (
         json.dumps(receipt, allow_nan=False, indent=2, sort_keys=True) + "\n"
@@ -270,6 +273,8 @@ def require_target_authorization(
     authorization = governance["authorization"]
     if type(authorization) is not dict or set(authorization) != AUTHORIZATION_KEYS:
         raise RuntimeError("G1-G3 authorization keys mismatch")
+    if authorization["attempt"] != REGISTERED_ATTEMPT:
+        raise RuntimeError("G1-G3 authorization attempt mismatch")
     authorization_id = authorization["authorization_id"]
     implementation = authorization["implementation_revision"]
     if type(authorization_id) is not str or _UUID4.fullmatch(authorization_id) is None:
@@ -355,6 +360,7 @@ def require_target_authorization(
         revision=head,
     )
     return {
+        "attempt": REGISTERED_ATTEMPT,
         "authorization_id": authorization_id,
         "ci_run_id": run_id,
         "governance_sha256": governance_sha256,
@@ -386,6 +392,7 @@ def execute_once() -> dict[str, Any]:
         "authorization": {
             key: provenance[key]
             for key in (
+                "attempt",
                 "authorization_id",
                 "ci_run_id",
                 "governance_sha256",

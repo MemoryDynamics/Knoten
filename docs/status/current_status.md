@@ -164,7 +164,15 @@ erreichte die nachgeschaltete Homotopievalidierung, scheiterte dort aber vor
 Audit und Publikation an einer exakten Mittelpunktforderung fuer eine
 outward-gerundete Box. Nur das exklusive Receipt entstand. Der Versuch ist ein
 verbrauchter Pipeline-Incident ohne G1--G3-Befund; ein Retry ist nicht
-autorisiert.
+autorisiert. Die vierte outcome-blinde Amendierung versioniert den Vertrag als
+v2 und ersetzt exakte Mittelpunkt-/Breitenidentitaet durch eine beidseitig
+beschraenkte Outward-Containment-Pruefung. Einwaertsschrumpfung und
+uebermaessige Aufweitung bleiben harte Fehler. Produktionsvalidator und
+getrennter Standardbibliotheksauditor bestehen die targetfreien
+Falsifikationstests; neue `attempt_2`-Pfade schuetzen das alte Receipt. Das
+kritische Remediationreview findet keinen Major- oder Critical-Codebefund.
+Vollstaendiger Testlauf, exakte CI und ein neues Readinessreview stehen noch
+aus; Attempt 2 bleibt geschlossen.
 
 ## P5-D Code-Review und Remediation
 

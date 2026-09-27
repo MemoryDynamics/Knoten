@@ -21,7 +21,7 @@
   },
   "constants": {
     "claim_boundary": "local fixed-alpha root-branch connection with local direct FIFO stability support at exactly H=2400; no H-infinity stability, global uniqueness, formation, interaction, spin, inertia or mass",
-    "contract_version": 1,
+    "contract_version": 2,
     "forward_horizons": [1200, 1500, 1800, 2400, 3600],
     "g4_audit_sha256": "e83309992fe8b964c507930664f557367a50d87d32aedf7bf39ecbe1bb346d19",
     "g4_manifest_sha256": "63a54a572e4af3067609e93caea503b30f46013d89d968c4fdb2d9719a6597da",
@@ -30,9 +30,9 @@
     "g5_result_sha256": "3321ee6392a6eb2a3c5098fa437cb41bb57b9da7e1c0ada521bdd1e894f4ec39",
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
-    "payload_schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-v1",
-    "protocol_blob": "97d06fc41ac57f4eb0b90bda5c15c81b3eb36123",
-    "protocol_sha256": "dfdb4841b7ce94ac3821697f5d3281d8a17412d0524bdb7ea7ae9d3565062823",
+    "payload_schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-v2",
+    "protocol_blob": "2a6f0988240fe625a26ef72d42d40a7a4840f940",
+    "protocol_sha256": "68c2ce0d05f26992bdac886af6252c583707a180a828d03ffdaf3a3fbbe0e9b8",
     "true": true
   },
   "enums": {
@@ -63,6 +63,7 @@
       "role": "enum:artifact_role"
     },
     "authorization": {
+      "attempt": "integer",
       "authorization_id": "uuid4",
       "ci_run_id": "integer",
       "governance_sha256": "sha256",

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import copy
-from decimal import Decimal
+from decimal import Decimal, localcontext
 import importlib.util
 import json
 from pathlib import Path
@@ -14,7 +14,7 @@ from emergenz_knoten.strict_json_contract import validate_payload
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v2.json"
 )
 GATE_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
@@ -50,6 +50,8 @@ def test_bridge_schema_is_strict_and_self_contained() -> None:
     contract = _schema()
     assert set(contract) == {"arrays", "constants", "enums", "objects", "root", "schema"}
     assert contract["root"] == "object:payload"
+    assert contract["constants"]["contract_version"] == 2
+    assert contract["constants"]["payload_schema"].endswith("bridge-v2")
     assert contract["constants"]["horizons"] == [600, 900, 1200, 1500, 1800, 2400, 3600]
     assert contract["arrays"]["sealed_files"]["length"] == 5
 
@@ -67,6 +69,10 @@ def test_contract_witness_validates_and_extra_fields_fail() -> None:
     broken["publication"]["manifest_published_last"] = False
     with pytest.raises(ValueError, match="manifest_published_last"):
         gate.validate_result(broken)
+    broken = copy.deepcopy(payload)
+    broken["identity"]["authorization"]["attempt"] = 1
+    with pytest.raises(ValueError, match="registered attempt mismatch"):
+        gate.validate_result(broken)
 
 
 def test_root_panel_requires_cross_inclusion_not_only_overlap() -> None:
@@ -77,6 +83,52 @@ def test_root_panel_requires_cross_inclusion_not_only_overlap() -> None:
     panel["cross_80_inner_in_120_outer"] = False
     with pytest.raises(ValueError, match="cross inclusion"):
         gate.validate_result(payload)
+
+
+def test_outward_rounded_root_and_homotopy_boxes_are_bounded() -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    payload = gate.contract_witness()
+    root_box = payload["finite_branch"]["root_panels"][2][
+        "outer_certificate_120"
+    ]["box"]["radius"]
+    homotopy_box = payload["finite_branch"]["homotopies"][0]["slabs"][0][
+        "box"
+    ]["radius"]
+    with localcontext() as context:
+        context.prec = 200
+        root_box[0] = format(Decimal(root_box[0]) - Decimal("1e-121"), "f")
+        root_box[1] = format(Decimal(root_box[1]) + Decimal("2e-121"), "f")
+        homotopy_box[0] = format(
+            Decimal(homotopy_box[0]) - Decimal("1e-121"), "f"
+        )
+        homotopy_box[1] = format(
+            Decimal(homotopy_box[1]) + Decimal("2e-121"), "f"
+        )
+    gate.validate_result(payload)
+    audit._verify_roots_and_homotopies(payload)
+
+
+@pytest.mark.parametrize(("direction", "amount"), (("inward", "1e-121"), ("excess", "1e-110")))
+def test_homotopy_box_rejects_inward_or_excess_rounding(
+    direction: str, amount: str
+) -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    payload = gate.contract_witness()
+    box = payload["finite_branch"]["homotopies"][0]["slabs"][0]["box"][
+        "radius"
+    ]
+    with localcontext() as context:
+        context.prec = 200
+        if direction == "inward":
+            box[0] = format(Decimal(box[0]) + Decimal(amount), "f")
+        else:
+            box[0] = format(Decimal(box[0]) - Decimal(amount), "f")
+    with pytest.raises(ValueError, match="center/width mismatch"):
+        gate.validate_result(payload)
+    with pytest.raises(ValueError, match="center/width mismatch"):
+        audit._verify_roots_and_homotopies(payload)
 
 
 def test_endpoint_link_booleans_are_reconstructed_from_intervals() -> None:

@@ -17,7 +17,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **G1--G3-Branchverbindung messen -- Attempt 1 inconclusive, Remediation offen.**
+1. **G1--G3-Branchverbindung messen -- Attempt-2-Remediation im Readinesspfad.**
    G4 belegt isoliert einen lokalen $F_\infty$-Root; G5 belegt isoliert lokale
    direkte FIFO-Stabilitaet bei exakt $H=2400$. Das neue Brueckenprotokoll
    prueft prospektiv, ob die finite Leiter
@@ -33,9 +33,14 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    strikten Docs-Bau. Der danach autorisierte Attempt 1 wurde durch das
    exklusive Receipt verbraucht, scheiterte aber vor Audit und Publikation an
    einer zu exakten Mittelpunktpruefung der outward-gerundeten ersten
-   Homotopiebox. Es existiert kein G1--G3-Ergebnis. Als naechstes sind eine
-   outcome-blinde Recordgrenzen-Amendierung, Falsifikationstests, Review und
-   neue Readiness erforderlich; ein Retry ist nicht autorisiert.
+   Homotopiebox. Es existiert kein G1--G3-Ergebnis. Die vierte outcome-blinde
+   Amendierung und der v2-Vertrag erlauben nur praezisionsgebundene
+   Auswaertsrundung, verwerfen Einwaertsschrumpfung und uebermaessige
+   Aufweitung und reservieren getrennte Attempt-2-Pfade. Produktionsvalidator
+   und unabhaengiger Auditor bestehen die targetfreien Falsifikationstests;
+   das kritische Code-Review findet keinen Major- oder Critical-Befund. Offen
+   sind vollstaendiger Lauf, exakte CI und neues Readinessreview; Versuch 2
+   ist nicht autorisiert.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder

@@ -23,7 +23,7 @@ from emergenz_knoten.strict_json_contract import validate_payload as validate_co
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v2.json"
 )
 TRANSFER_GATE_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_gate.py"
@@ -570,6 +570,8 @@ def validate_result(payload: dict[str, Any]) -> None:
 
     contract = _load_schema()
     validate_contract(payload, contract)
+    if payload["identity"]["authorization"]["attempt"] != 2:
+        raise ValueError("$.identity.authorization.attempt: registered attempt mismatch")
     if payload["identity"]["parameters"] != PARAMETERS:
         raise ValueError("$.identity.parameters: registered parameters mismatch")
     publication = payload["publication"]
@@ -1476,6 +1478,7 @@ def contract_witness() -> dict[str, Any]:
         },
         "identity": {
             "authorization": {
+                "attempt": 2,
                 "authorization_id": "00000000-0000-4000-8000-000000000001",
                 "ci_run_id": 1,
                 "governance_sha256": "1" * 64,
@@ -1490,7 +1493,7 @@ def contract_witness() -> dict[str, Any]:
             "protocol_blob": _load_schema()["constants"]["protocol_blob"],
             "protocol_sha256": _load_schema()["constants"]["protocol_sha256"],
             "schema": _load_schema()["constants"]["payload_schema"],
-            "version": 1,
+            "version": 2,
         },
         "publication": {
             "artifacts": [
