@@ -592,6 +592,10 @@ def validate_result(payload: dict[str, Any]) -> None:
         raise ValueError("$.q_representations: reconstruction mismatch")
     drift = payload["finite_branch"]["drift"]
     drift_rows = drift["interval_upper_bounds"]
+    if drift["center_diagnostics"] != drift_rows:
+        raise ValueError(
+            "$.finite_branch.drift.center_diagnostics: reconstruction mismatch"
+        )
     root_boxes = {
         panel["horizon"]: panel["inner_intersection"]
         for panel in legacy_panels

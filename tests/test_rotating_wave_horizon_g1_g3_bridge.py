@@ -20,10 +20,22 @@ GATE_PATH = ROOT / (
     "experiments/current/dynamics/rotation/"
     "scalar_memory_rotating_wave_horizon_g1_g3_bridge_gate.py"
 )
+AUDIT_PATH = ROOT / (
+    "experiments/current/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_audit.py"
+)
 
 
 def _load_gate():
     spec = importlib.util.spec_from_file_location("g1_g3_bridge_under_test", GATE_PATH)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_audit():
+    spec = importlib.util.spec_from_file_location("g1_g3_audit_under_test", AUDIT_PATH)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -181,6 +193,41 @@ def test_registered_bridge_backend_has_no_g4_or_g5_execution_methods() -> None:
     backend = gate.RegisteredBridgeBackend()
     assert not hasattr(backend, "tail_certificate_panel")
     assert not hasattr(backend, "arnoldi_panel")
+
+
+def test_independent_auditor_accepts_target_free_composition() -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    template = gate.contract_witness()
+    payload = gate.orchestrate_bridge(
+        backend=_SyntheticBridgeBackend(template),
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=gate.load_sealed_components(),
+    )
+    report = audit.audit_payload(payload)
+    assert report["verdict"] == "g1-g3-bridge-independent-audit-agrees"
+    assert report["decision"] == "sealed-component-endpoint-mismatch"
+
+
+def test_independent_auditor_rejects_replay_and_endpoint_mutations() -> None:
+    gate = _load_gate()
+    audit = _load_audit()
+    template = gate.contract_witness()
+    payload = gate.orchestrate_bridge(
+        backend=_SyntheticBridgeBackend(template),
+        identity=template["identity"],
+        publication=template["publication"],
+        sealed_components=gate.load_sealed_components(),
+    )
+    broken = copy.deepcopy(payload)
+    broken["finite_branch"]["direct_replays"][2]["residual_maximum"] = "1"
+    with pytest.raises(ValueError, match="replay reconstruction"):
+        audit.audit_payload(broken)
+    broken = copy.deepcopy(payload)
+    broken["endpoint_links"][0]["pass"] = True
+    with pytest.raises(ValueError, match="endpoint"):
+        audit.audit_payload(broken)
 
 
 @pytest.mark.parametrize(
