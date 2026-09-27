@@ -31,8 +31,8 @@
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
     "payload_schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-v1",
-    "protocol_blob": "77648c1a17610d0d14b055a59150d3b053d5b4f7",
-    "protocol_sha256": "9611e3b9f26fd02b4d082c748379dc6841b3b519c9ac8c2a4d9d1cf846df9589",
+    "protocol_blob": "dd8a8ef09ec81fb98e9320e4e81603cc6e1a188b",
+    "protocol_sha256": "e21ed5eac2f917e90cce90b63a73f5375d93de6a1ee631d1259945f53b0810ee",
     "true": true
   },
   "enums": {
