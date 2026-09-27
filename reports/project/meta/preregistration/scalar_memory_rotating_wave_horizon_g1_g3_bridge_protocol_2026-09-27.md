@@ -2,7 +2,7 @@
 
 Datum: 2026-09-27.
 
-Status: **einmal amendiert, outcome-blind fuer den neuen G1--G3-Zugriff;
+Status: **dreimal amendiert, outcome-blind fuer den neuen G1--G3-Zugriff;
 Target geschlossen**.
 
 Dieses Protokoll ersetzt keinen bereits publizierten G4- oder G5-Lauf. Es
@@ -60,11 +60,14 @@ Die versiegelten positiven Komponenten werden nicht neu berechnet:
 | --- | --- | --- |
 | G4-Ergebnis | `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.json` | `783328382545dbf4a08698ebd7a8ba7f3ef06ac344630f2b04e4ef7dd54c5a88` |
 | G4-Manifest | gleicher Basispfad mit Suffix `.publication.json` | `63a54a572e4af3067609e93caea503b30f46013d89d968c4fdb2d9719a6597da` |
-| G4-Audit | `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g4_component_independent_audit_2026-09-13.json` | `366d221e6d14093da48f7a8f4ea1a439d4b26e5635b65c95bcb763bc968a2aa5` |
+| G4-Audit | `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g4_component_independent_audit_2026-09-13.json` | `e83309992fe8b964c507930664f557367a50d87d32aedf7bf39ecbe1bb346d19` |
 | G5-Ergebnis | `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json` | `3321ee6392a6eb2a3c5098fa437cb41bb57b9da7e1c0ada521bdd1e894f4ec39` |
 | G5-Manifest | gleicher Basispfad mit Suffix `.publication.json` | `62ed914737028678be360633f4c97b8cb28cd0ef9fae6e7077684fa272a9df8e` |
 
-Diese Tabelle enthaelt genau die fuenf wissenschaftlichen Laufzeitinputs.
+Diese Tabelle enthaelt genau die fuenf wissenschaftlichen Laufzeitinputs. Alle
+fuenf SHA-256-Werte gelten fuer die kanonischen Git-Blob-Bytes aus
+`HEAD:<pfad>`, nicht fuer durch Checkout-Einstellungen veraenderbare
+Arbeitsbaumbytes.
 Governance-Provenienz liefern zusaetzlich das G4-Ergebnisreview mit SHA-256
 `0a22da0e3add844d9acca7fce148eadca7045784e72cffdcdc4b20452e9d1484`,
 das G5-Ergebnisreview mit SHA-256
@@ -370,3 +373,20 @@ Die Entscheidungsreihenfolge wird dabei praezisiert: Nur `G0=fail` oder
 Vorwaertsevidenz bleibt `g1-g3-bridge-inconclusive`. Alle bisherigen
 Claimgrenzen, Stopregeln und die Notwendigkeit einer neuen Nutzerfreigabe
 bleiben unveraendert.
+
+## 11. Dritte Amendierung nach Linux-CI-Portabilitaetsbefund
+
+Der erste offizielle targetfreie Implementierungs-CI-Lauf
+`36304429782` bestand Installation und Lint, falsifizierte aber die
+plattformuebergreifende Hashdomaene des G4-Audits. Dessen vorab notierter
+SHA-256 `366d...a2aa5` gehoerte zu Windows-Checkoutbytes mit CRLF; der
+kanonische Git-Blob besitzt SHA-256 `e833...6d19`. Die vier JSON-Inputs sind
+byteidentisch und unveraendert.
+
+Diese outcome-blinde Remediation bindet deshalb alle fuenf Inputs einheitlich
+an `git show HEAD:<pfad>` beziehungsweise dieselben kanonischen Git-Blob-Bytes.
+Sie aendert keine wissenschaftliche Zahl, Box, Schwelle, Gatefolge oder
+Entscheidung. Validator, unabhaengiger Auditor und Tests muessen die
+Git-Blob-Domaene getrennt gegen Checkout-Drift pruefen. Der fehlgeschlagene
+CI-Lauf autorisiert keinen Targetzugriff; Governance und Leiter bleiben
+geschlossen.
