@@ -107,6 +107,82 @@ def test_g6_age_hash_and_mutation_detection_are_reconstructed() -> None:
         gate.validate_result(payload)
 
 
+def test_registered_g6_controls_run_from_frozen_histories() -> None:
+    gate = _load_gate()
+    controls = gate.registered_controls_backend_record()
+    assert controls["pass"] is True
+    assert [row["case_id"] for row in controls["circular_cases"]] == [
+        "noncircle-H17",
+        "noncircle-H257",
+        "anchor-H600",
+        "anchor-H900",
+        "anchor-H1200",
+        "anchor-H1500",
+        "anchor-H1800",
+        "anchor-H2400",
+        "anchor-H3600",
+    ]
+    assert all(
+        row["expected_age_history_sha256"]
+        == row["observed_age_history_sha256"]
+        for row in controls["circular_cases"]
+    )
+    assert all(row["detected"] for row in controls["mutations"])
+
+
+def test_sealed_loader_hashes_and_extracts_only_registered_endpoint_roots() -> None:
+    gate = _load_gate()
+    sealed = gate.load_sealed_components()
+    assert sealed["g4_root"]["horizon"] == 3600
+    assert sealed["g5_root"]["horizon"] == 2400
+    assert set(sealed) == {"files", "g4_root", "g5_root"}
+
+
+def test_sealed_loader_fails_before_parse_on_registered_hash_drift(
+    monkeypatch,
+) -> None:
+    gate = _load_gate()
+    rows = list(gate.SEALED_FILES)
+    rows[0] = (rows[0][0], rows[0][1], "0" * 64)
+    monkeypatch.setattr(gate, "SEALED_FILES", tuple(rows))
+    with pytest.raises(ValueError, match="hash mismatch"):
+        gate.load_sealed_components()
+
+
+def test_direct_replay_backend_does_not_call_root_or_interval_solver(
+    monkeypatch,
+) -> None:
+    gate = _load_gate()
+    reused = gate._transfer_gate()
+    g4 = json.loads(
+        (
+            ROOT
+            / "reports/dynamics/rotation/"
+            "scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.json"
+        ).read_text(encoding="utf-8")
+    )
+    newton = g4["finite_root"]["newton"]
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("direct replay called a root or interval solver")
+
+    monkeypatch.setattr(reused, "refine_rotating_wave_root", forbidden)
+    monkeypatch.setattr(reused, "certify_rotating_wave_box", forbidden)
+    row = reused.finite_sum_replay_backend_record(
+        horizon=3600,
+        root=(newton["radius"], newton["theta"]),
+    )
+    assert row["pass"] is True
+    assert Decimal(row["residual_maximum"]) <= Decimal("1e-45")
+
+
+def test_registered_bridge_backend_has_no_g4_or_g5_execution_methods() -> None:
+    gate = _load_gate()
+    backend = gate.RegisteredBridgeBackend()
+    assert not hasattr(backend, "tail_certificate_panel")
+    assert not hasattr(backend, "arnoldi_panel")
+
+
 @pytest.mark.parametrize(
     ("updates", "decision"),
     [

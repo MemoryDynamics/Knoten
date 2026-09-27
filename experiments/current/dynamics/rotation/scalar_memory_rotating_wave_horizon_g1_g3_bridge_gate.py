@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 from decimal import Decimal, localcontext
 from functools import cache
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -90,6 +91,120 @@ def _transfer_gate() -> Any:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def load_sealed_components(*, root: Path = ROOT) -> dict[str, Any]:
+    """Hash and minimally extract the registered G4/G5 endpoint evidence."""
+
+    repository = Path(root).resolve()
+    documents: dict[str, dict[str, Any]] = {}
+    files = []
+    for role, relative, expected_sha256 in SEALED_FILES:
+        path = (repository / relative).resolve()
+        if repository not in path.parents:
+            raise ValueError("sealed component path escaped repository")
+        raw = path.read_bytes()
+        observed = hashlib.sha256(raw).hexdigest()
+        if observed != expected_sha256:
+            raise ValueError(f"sealed component hash mismatch: {role}")
+        files.append({"role": role, "path": relative, "sha256": observed})
+        if role in {"g4-result", "g4-manifest", "g4-audit", "g5-result", "g5-manifest"}:
+            parsed = json.loads(raw)
+            if type(parsed) is not dict:
+                raise TypeError(f"sealed component root is not an object: {role}")
+            documents[role] = parsed
+
+    g4 = documents["g4-result"]
+    g5 = documents["g5-result"]
+    g4_manifest = documents["g4-manifest"]
+    g5_manifest = documents["g5-manifest"]
+    g4_audit = documents["g4-audit"]
+    if (
+        g4["identity"]["schema"]
+        != "scalar-memory-rotating-wave-horizon-g4-component-v1"
+        or g4["classification"]["decision"] != "g4-local-infinite-root-pass"
+        or g4_audit["verdict"] != "g4-independent-audit-agrees"
+        or g5["identity"]["schema"]
+        != "scalar-memory-rotating-wave-horizon-g5-component-v2"
+        or g5["classification"]["decision"] != "g5-local-direct-stability-pass"
+    ):
+        raise ValueError("sealed component decision or schema mismatch")
+    expected_manifest_rows = {
+        "g4-manifest": (Path(SEALED_FILES[0][1]).name, SEALED_FILES[0][2]),
+        "g5-manifest": (Path(SEALED_FILES[3][1]).name, SEALED_FILES[3][2]),
+    }
+    for role, manifest in (
+        ("g4-manifest", g4_manifest),
+        ("g5-manifest", g5_manifest),
+    ):
+        name, digest = expected_manifest_rows[role]
+        rows = manifest["artifacts"]
+        if not any(
+            row.get("role") == "result-json"
+            and row.get("path") == name
+            and row.get("sha256") == digest
+            for row in rows
+        ):
+            raise ValueError(f"sealed manifest does not bind result: {role}")
+    if g4_audit.get("result_sha256") != SEALED_FILES[0][2]:
+        raise ValueError("sealed G4 audit does not bind registered result")
+
+    expected_g4_parameters = {
+        "alpha": 0.01,
+        "amplitude_att": 3.5,
+        "amplitude_rep": 1.0,
+        "eta": 0.15,
+        "horizon": 3600,
+        "memory_mass": 1.0,
+        "sigma_att": 3.0,
+        "sigma_rep": 1.0,
+    }
+    expected_g5_parameters = {
+        "alpha": 0.01,
+        "amplitude_att": 3.5,
+        "amplitude_rep": 1.0,
+        "epsilon": 0.0,
+        "eta": 0.15,
+        "horizon": 2400,
+        "memory_mass": 1.0,
+        "q": 0.99,
+        "sigma_att": 3.0,
+        "sigma_rep": 1.0,
+    }
+    if g4["identity"]["parameters"] != expected_g4_parameters:
+        raise ValueError("sealed G4 parameter mismatch")
+    if g5["identity"]["parameters"] != expected_g5_parameters:
+        raise ValueError("sealed G5 parameter mismatch")
+
+    def root_record(
+        document: dict[str, Any], *, horizon: int, decision: str
+    ) -> dict[str, Any]:
+        finite = document["finite_root"]
+        if not (
+            finite["inner_certificate"]["strict_interior"]
+            and finite["outer_certificate"]["strict_interior"]
+        ):
+            raise ValueError("sealed component root certificate is not strict")
+        return {
+            "decision": decision,
+            "horizon": horizon,
+            "inner_image": copy.deepcopy(
+                finite["inner_certificate"]["krawczyk_image"]
+            ),
+            "outer_box": copy.deepcopy(finite["outer_certificate"]["box"]),
+        }
+
+    result = {
+        "files": files,
+        "g4_root": root_record(
+            g4, horizon=3600, decision="g4-local-infinite-root-pass"
+        ),
+        "g5_root": root_record(
+            g5, horizon=2400, decision="g5-local-direct-stability-pass"
+        ),
+    }
+    _sealed_files({"sealed_components": result})
+    return result
 
 
 def _load_schema() -> dict[str, Any]:
@@ -620,6 +735,133 @@ def _endpoint_link(
         )
     )
     return link
+
+
+def registered_controls_backend_record() -> dict[str, Any]:
+    """Run the preregistered finite-memory implementation controls."""
+
+    reused = _transfer_gate()
+    np = reused.np
+    parameters = {
+        name: PARAMETERS[name]
+        for name in (
+            "alpha",
+            "memory_mass",
+            "eta",
+            "sigma_rep",
+            "sigma_att",
+            "amplitude_rep",
+            "amplitude_att",
+        )
+    }
+    histories: list[tuple[str, int, Any]] = []
+    for horizon in (17, 257):
+        ages = np.arange(horizon, dtype=float)
+        history = np.column_stack(
+            (
+                np.sin(0.17 * ages) + 0.03 * ages,
+                np.cos(0.11 * ages) - 0.02 * ages,
+            )
+        )
+        histories.append((f"noncircle-H{horizon}", horizon, history))
+    for horizon in HORIZONS:
+        history = reused.circular_history(
+            radius=PARAMETERS["anchor_radius"],
+            theta=PARAMETERS["anchor_theta"],
+            horizon=horizon,
+        )
+        histories.append((f"anchor-H{horizon}", horizon, history))
+
+    circular_cases = []
+    for case_id, horizon, history in histories:
+        expected_hash = hashlib.sha256(
+            np.ascontiguousarray(history).tobytes()
+        ).hexdigest()
+        observed = reused.run_circular_control(history, parameters=parameters)
+        circular_cases.append(
+            {
+                "case_id": case_id,
+                "complete_state_relative_error": observed[
+                    "complete_state_relative_error"
+                ],
+                "expected_age_history_sha256": expected_hash,
+                "horizon": horizon,
+                "new_point_relative_error": observed["new_point_relative_error"],
+                "observed_age_history_sha256": observed["age_history_sha256"],
+                "pass": observed["pass"],
+            }
+        )
+
+    eta_zero_cases = []
+    for horizon in HORIZONS:
+        history = reused.circular_history(
+            radius=PARAMETERS["anchor_radius"],
+            theta=PARAMETERS["anchor_theta"],
+            horizon=horizon,
+        )
+        collapsed = reused.eta_zero_collapse(history, steps=horizon + 1)
+        expected = np.repeat(history[[0]], horizon, axis=0)
+        maximum_deviation = float(np.max(np.abs(collapsed - expected)))
+        eta_zero_cases.append(
+            {
+                "horizon": horizon,
+                "maximum_deviation": maximum_deviation,
+                "pass": maximum_deviation < 1e-14,
+                "steps": horizon + 1,
+            }
+        )
+
+    ages = np.arange(17, dtype=float)
+    mutation_history = np.column_stack(
+        (0.025 * ages + 0.003 * ages**2, 0.4 * np.sin(0.09 * ages))
+    )
+    mutations = []
+    for name in (
+        "reverse-modulo",
+        "overwrite-before-read",
+        "wrong-oldest-slot",
+    ):
+        observed = reused.run_circular_control(
+            mutation_history, parameters=parameters, mutation=name
+        )
+        mutations.append(
+            {
+                "complete_state_relative_error": observed[
+                    "complete_state_relative_error"
+                ],
+                "detected": not observed["pass"],
+                "horizon": 17,
+                "name": name,
+                "new_point_relative_error": observed["new_point_relative_error"],
+            }
+        )
+    controls = {
+        "circular_cases": circular_cases,
+        "eta_zero_cases": eta_zero_cases,
+        "mutations": mutations,
+        "pass": False,
+    }
+    controls["pass"] = _controls_evidence({"controls": controls})
+    return controls
+
+
+class RegisteredBridgeBackend:
+    """Thin adapter over the reviewed primitive finite-memory backends."""
+
+    def finite_root_panel(self, **kwargs: Any) -> dict[str, Any] | None:
+        return _transfer_gate().finite_root_backend_record(**kwargs)
+
+    def finite_sum_replay(self, **kwargs: Any) -> dict[str, Any]:
+        return _transfer_gate().finite_sum_replay_backend_record(**kwargs)
+
+    def homotopy_edge(self, **kwargs: Any) -> dict[str, Any]:
+        return _transfer_gate().homotopy_backend_record(**kwargs)
+
+    def local_branch_exclusion(self, **kwargs: Any) -> dict[str, Any]:
+        return _transfer_gate().local_branch_exclusion_backend_record(**kwargs)
+
+    def controls(self) -> dict[str, Any]:
+        return registered_controls_backend_record()
 
 
 def orchestrate_bridge(

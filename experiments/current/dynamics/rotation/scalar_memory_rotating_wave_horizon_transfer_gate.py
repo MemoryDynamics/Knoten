@@ -198,6 +198,75 @@ def finite_root_backend_record(
     }
 
 
+def finite_sum_replay_backend_record(
+    *, horizon: int, root: tuple[str, str]
+) -> dict[str, Any]:
+    """Evaluate one root by the direct registered finite-sum formula.
+
+    This path deliberately does not call a root refiner or interval evaluator;
+    it is a pointwise replay, not a second interval proof.
+    """
+
+    if type(horizon) is not int or horizon not in HORIZONS:
+        raise ValueError("finite-sum replay horizon is not registered")
+    if (
+        type(root) is not tuple
+        or len(root) != 2
+        or any(type(value) is not str for value in root)
+    ):
+        raise TypeError("finite-sum replay root must contain decimal strings")
+    for index, value in enumerate(root):
+        _finite_decimal(value, path=f"root[{index}]")
+    precision_dps = 70
+    with mp.workdps(precision_dps):
+        radius = mp.mpf(root[0])
+        theta = mp.mpf(root[1])
+        alpha = mp.mpf("0.01")
+        q = mp.mpf("0.99")
+        eta = mp.mpf("0.15")
+        weight = alpha
+        radial_sum = mp.mpf("0")
+        tangential_sum = mp.mpf("0")
+        for age in range(1, horizon):
+            weight *= q
+            phase = age * theta
+            chord_factor = 1 - mp.cos(phase)
+            chi = radius**2 * chord_factor
+            gradient_factor = -mp.exp(-chi) + mp.mpf("3.5") / 9 * mp.exp(
+                -chi / 9
+            )
+            radial_sum += weight * gradient_factor * chord_factor
+            tangential_sum += weight * gradient_factor * mp.sin(phase)
+        radial_residual = mp.cos(theta) - 1 + eta * radial_sum
+        tangential_residual = mp.sin(theta) + eta * tangential_sum
+        radial_text = mp.nstr(radial_residual, precision_dps)
+        tangential_text = mp.nstr(tangential_residual, precision_dps)
+        radial_sum_text = mp.nstr(radial_sum, precision_dps)
+        tangential_sum_text = mp.nstr(tangential_sum, precision_dps)
+    residual_maximum = max(
+        abs(Decimal(radial_text)), abs(Decimal(tangential_text))
+    )
+    residual_gate = residual_maximum <= Decimal("1e-45")
+    physical_signs = Decimal(radial_sum_text) > 0 > Decimal(tangential_sum_text)
+    return {
+        "horizon": horizon,
+        "pass": bool(residual_gate and physical_signs),
+        "physical_signs": physical_signs,
+        "precision_dps": precision_dps,
+        "radial_residual": radial_text,
+        "radial_sum": radial_sum_text,
+        "radius": root[0],
+        "residual_gate": residual_gate,
+        "residual_maximum": str(residual_maximum),
+        "semantics": (
+            "independent finite-sum replay; not a second interval proof"
+        ),
+        "tangential_residual": tangential_text,
+        "tangential_sum": tangential_sum_text,
+        "theta": root[1],
+    }
+
+
 def homotopy_backend_record(
     *,
     from_horizon: int,
