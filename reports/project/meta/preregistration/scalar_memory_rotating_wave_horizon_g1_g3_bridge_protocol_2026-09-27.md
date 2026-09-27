@@ -2,7 +2,8 @@
 
 Datum: 2026-09-27.
 
-Status: **outcome-blind fuer den neuen G1--G3-Zugriff; Target geschlossen**.
+Status: **einmal amendiert, outcome-blind fuer den neuen G1--G3-Zugriff;
+Target geschlossen**.
 
 Dieses Protokoll ersetzt keinen bereits publizierten G4- oder G5-Lauf. Es
 isoliert die noch fehlende endliche Horizontleiter und komponiert ihr spaeteres
@@ -63,13 +64,28 @@ Die versiegelten positiven Komponenten werden nicht neu berechnet:
 | G5-Ergebnis | `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json` | `3321ee6392a6eb2a3c5098fa437cb41bb57b9da7e1c0ada521bdd1e894f4ec39` |
 | G5-Manifest | gleicher Basispfad mit Suffix `.publication.json` | `62ed914737028678be360633f4c97b8cb28cd0ef9fae6e7077684fa272a9df8e` |
 
-Der Kompositionsvalidator muss Manifest und Inhaltsartefakte erneut hashen,
-die jeweiligen Schemata und Entscheidungen rekonstruieren und insbesondere
-`g4-local-infinite-root-pass` sowie `g5-local-direct-stability-pass`
-verlangen. Ein gespeichertes Pass-Boolfeld allein genuegt nicht. Der
-G5-Rohrecord bleibt wegen seiner dokumentierten Transzendentalsemantik
+Diese Tabelle enthaelt genau die fuenf wissenschaftlichen Laufzeitinputs.
+Governance-Provenienz liefern zusaetzlich das G4-Ergebnisreview mit SHA-256
+`0a22da0e3add844d9acca7fce148eadca7045784e72cffdcdc4b20452e9d1484`,
+das G5-Ergebnisreview mit SHA-256
+`a79293a248fbab421dd96bb160b2fa10a5bb9d8bd9815ab98b46759da0c8580f`
+und das G5-Pre-Merge-Review mit SHA-256
+`3d48a32b4c50933d3ead087b36f8ebf64f221ab19d2077427ce889a9a6d38705`.
+Diese Reviews werden nicht als numerische Runnerinputs interpretiert.
+
+Der Kompositionsvalidator muss Manifest und Inhaltsartefakte erneut hashen.
+Er liest danach nur die fuer die Komposition noetigen primitiven Felder:
+Parameter, Schema-ID, Entscheidung und finite Rootzertifikate. Er verlangt
+`g4-local-infinite-root-pass` sowie `g5-local-direct-stability-pass` und
+rekonstruiert die Endpunktinklusionen aus Dezimalgrenzen. Da bereits jede
+Byteaenderung den vorab gebundenen SHA-256 bricht, wird kein frei mutierbares
+Pass-Boolfeld akzeptiert.
+
+Der G5-Rohrecord bleibt wegen seiner dokumentierten Transzendentalsemantik
 same-platform; seine Bytes und sein Manifest sind plattformuebergreifend
-hashbar.
+hashbar. Der Brueckenlauf berechnet deshalb weder Eigenwertbetraege noch
+Trajektorien- oder Transzendentalwerte aus G5 erneut. Das ist eine
+hashgebundene Evidenzkomposition, keine neue numerische G5-Replikation.
 
 ## 3. G0, Leiter und lokale Zertifikate
 
@@ -92,8 +108,13 @@ Ergebnisses bleiben verboten.
 
 Jedes Panel verwendet die unveraenderten aeusseren und inneren
 Krawczyk-Halbbreiten $10^{-8}$ und $10^{-30}$. Beide Praezisionspanels
-muessen strikt einschliessen, ihre Mittelpunkte je Koordinate bis
-$10^{-50}$ uebereinstimmen und ihre inneren Bilder schneiden.
+muessen strikt einschliessen und ihre Mittelpunkte je Koordinate bis
+$10^{-50}$ uebereinstimmen. Zusaetzlich muss das innere 80-dps-Krawczyk-Bild
+vollstaendig in der aeusseren 120-dps-Eindeutigkeitsbox liegen und das innere
+120-dps-Bild vollstaendig in der aeusseren 80-dps-Box. Der bisherige
+Innenbildschnitt bleibt als Diagnostik gespeichert, entscheidet die
+Rootidentitaet aber nicht mehr allein. Validator und Auditor rekonstruieren
+beide Kreuzinklusionen aus den Dezimalendpunkten; ein Boolfeld genuegt nicht.
 
 - `G1F=pass` verlangt alle fuenf Vorwaertspanels.
 - `G1R=pass` verlangt die beiden zusaetzlichen tieferen Panels und wird als
@@ -162,14 +183,18 @@ Ein G1--G3-Pass wird erst komponierbar, wenn die neuen Endpunkte mit den
 bereits zertifizierten Komponenten dieselben lokalen Roots bezeichnen.
 Koordinatennaehe oder sich bloss schneidende Boxen genuegen dafuer nicht.
 
-Fuer $H=2400$ wird das neue 80-/120-dps-Innenbild $I_{2400}$ gegen das
-versiegelte G5-Panel geprueft; fuer $H=3600$ wird $I_{3600}$ gegen das
-versiegelte G4-Panel geprueft. An jedem Endpunkt muessen beide exakten
+Fuer $H=2400$ werden beide neuen Innenbilder gegen das versiegelte G5-Panel
+geprueft; fuer $H=3600$ werden beide neuen Innenbilder gegen das versiegelte
+G4-Panel geprueft. An jedem Endpunkt muessen alle vier exakten
 Dezimalinklusionen gelten:
 
-1. das neue geschnittene Innenbild liegt vollstaendig in der aeusseren
+1. das neue 80-dps-Innenbild liegt vollstaendig in der aeusseren
    Komponentenbox;
-2. das innere Krawczyk-Bild der Komponente liegt vollstaendig in der neuen
+2. das neue 120-dps-Innenbild liegt vollstaendig in der aeusseren
+   Komponentenbox;
+3. das innere Krawczyk-Bild der Komponente liegt vollstaendig in der neuen
+   80-dps-Aussenbox;
+4. das innere Komponentenbild liegt vollstaendig in der neuen
    120-dps-Aussenbox.
 
 Damit liegt jeder der beiden lokal eindeutigen Roots in der
@@ -184,10 +209,22 @@ Nichtexistenz.
 ## 7. G6 und Entscheidungslogik
 
 G6 wird im neuen Komponentenlauf erneut ausgefuehrt, weil es die endliche
-Speicherimplementierung der Leiter kontrolliert. Es verlangt fuer alle sieben
-Horizonte die unabhaengige Shift-/Circular-FIFO-Aequivalenz sowie den
-$\eta=0$-Kollaps. Die Circular-Implementierung darf weder die native
-FIFO-Schrittfunktion aufrufen noch vor dem Lesen materialisieren.
+Speicherimplementierung der Leiter kontrolliert. Die unveraenderten
+Kontrollen sind:
+
+1. Shift-/Circular-FIFO-Aequivalenz fuer deterministische nichtkreisfoermige
+   Geschichten bei $H=17$ und $H=257$ sowie fuer Kreisgeschichten bei allen
+   sieben Leiterhorizonten. Altersfolge, neuer Punkt und kompletter
+   Folgezustand muessen uebereinstimmen; der symmetrisch normierte relative
+   Ein-Schritt-Fehler muss kleiner $5\times10^{-14}$ sein.
+2. Bei $\eta=0$ muss jede der sieben Kreisgeschichten nach exakt $H+1$
+   FIFO-Shifts mit maximaler Abweichung kleiner $10^{-14}$ zur konstanten
+   Geschichte kollabieren.
+
+Die Circular-Implementierung darf weder die native FIFO-Schrittfunktion
+aufrufen noch vor dem Lesen materialisieren. Modulo-Richtung,
+Read/write-Reihenfolge und Overwrite-Slot erhalten weiterhin obligatorische
+targetfreie Mutationsfalsifikatoren.
 
 Die Entscheidungen besitzen folgende Praezedenz:
 
@@ -205,15 +242,17 @@ Die Entscheidungen besitzen folgende Praezedenz:
    versiegeltes G5 und G6 bestehen:
    `rotating-wave-root-branch-connected-with-h2400-local-stability-support`.
 
-Der lower-tail-Stressast wird separat als `pass`, `inconclusive` oder
-`registered-local-loss` berichtet und kann den logisch aufwaerts gerichteten
-Grenztransfer nicht allein widerlegen.
+Der lower-tail-Stressast wird separat als `pass` oder `inconclusive`
+berichtet und kann den logisch aufwaerts gerichteten Grenztransfer nicht
+allein widerlegen. Der registrierte lokale Ausschlussbaum gilt nur fuer die
+vier Vorwaertskanten und darf keinen lower-tail-loss-Claim erzeugen.
 
 ## 8. Ergebnisvertrag, Audit und Stopregeln
 
 Der neue Record speichert primitive Rootpanels, Homotopiescheiben,
-Ausschlussleaves, Driftintervalle, G0-/G6-Kontrollen, die vier gebundenen
-G4-/G5-Inhaltshashes, Endpunkt-Inklusionszeugen und die Entscheidungsinputs.
+Ausschlussleaves, Driftintervalle, G0-/G6-Kontrollen, die fuenf gebundenen
+G4-/G5-Laufzeitinputhashes, Endpunkt-Inklusionszeugen und die
+Entscheidungsinputs.
 Validator und ein standardbibliotheksbasierter Auditor rekonstruieren
 Kardinalitaeten, Intervallinklusionen, dyadische Vollstaendigkeit, Drift,
 Hashes und Entscheidung getrennt. Der Auditor ist kein zweiter Newton- oder
@@ -241,3 +280,19 @@ Abhaengigkeit, nachtraegliche Boxaenderung, Drift eines versiegelten
 Komponentenhashes oder vorzeitiger Targetzugriff stoppt die Arbeit fuer eine
 erneute Amendierung. Ein Pass autorisiert weder einen weiteren G5-/P5-D-Lauf
 noch Interaktions-, Traegheits- oder Masseclaims.
+
+## 9. Erste Amendierung nach kritischem Review
+
+Das getrennt eingefrorene Review der Erstfassung fand HGB-P01--P06. Diese
+Revision schliesst sie ohne Zugriff auf einen neuen Leiterroot:
+
+- HGB-P01/P03: Kreuzinklusion ersetzt blossen Intervallschnitt als
+  Identitaetsbeweis innerhalb der Praezisionspanels und an beiden versiegelten
+  Endpunkten.
+- HGB-P02: bytegenaue Komposition und minimale Dezimalextraktion werden vom
+  plattformgebundenen vollstaendigen G5-Semantikaudit getrennt.
+- HGB-P04: beide nichtkreisfoermigen Horizonte, alle sieben Kreishorizonte,
+  Schrittzahlen und Fehlerschwellen von G6 sind explizit eingefroren.
+- HGB-P05: fuenf Laufzeitinputs und drei reine Governance-Reviews sind
+  getrennt benannt.
+- HGB-P06: der nicht registrierte lower-tail-loss-Ausgang wurde entfernt.
