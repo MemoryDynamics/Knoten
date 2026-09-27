@@ -212,6 +212,10 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
     }
 
 
+def _read_readiness_review() -> str:
+    return (ROOT / READINESS_REVIEW_REL).read_text(encoding="utf-8")
+
+
 def _validate_output_paths() -> None:
     paths = (ROOT / RESULT_REL, ROOT / REPORT_REL, ROOT / MANIFEST_REL, ROOT / AUDIT_REL, ROOT / RECEIPT_REL)
     existing = [path.as_posix() for path in paths if path.exists()]
@@ -293,9 +297,7 @@ def require_target_authorization(
         raise RuntimeError("G1-G3 readiness-review path mismatch")
     if _git_blob(READINESS_REVIEW_REL.as_posix()) != authorization["readiness_review_blob"]:
         raise RuntimeError("G1-G3 readiness-review blob mismatch")
-    readiness = _parse_readiness_review(
-        (ROOT / READINESS_REVIEW_REL).read_text(encoding="utf-8")
-    )
+    readiness = _parse_readiness_review(_read_readiness_review())
     if readiness["implementation_revision"] != implementation or readiness["blobs"] != protected:
         raise RuntimeError("G1-G3 readiness implementation binding mismatch")
     ci = authorization["ci"]

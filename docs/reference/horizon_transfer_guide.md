@@ -1,6 +1,6 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-15, nach targetfreiem G5-Vertragsreview.
+Stand: 2026-09-27, nach targetfreier G1--G3-Brueckenimplementierung.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite
@@ -148,10 +148,11 @@ sondern als reproduzierbaren technischen Bauplan. Derselbe Seed erzeugt auf
 Windows und Linux exakt dieselben Bytes. **LCG-Arnoldi ist daher nur der
 portable Stabilitaetsrechner fuer G5 und keine Zutat der G4-Gleichung.**
 
-Der zugehoerige Codepfad ist inzwischen targetfrei geprueft: Der LCG-Vektor
-erreicht den gemockten Solver unveraendert, und partielle oder fehlerhafte
-Eigenpaare koennen keinen Trajektorienlauf oeffnen. Das ist weiterhin nur ein
-Adaptertest. Ein echtes H=2400-Spektrum wurde noch nicht berechnet.
+Der zugehoerige Codepfad wurde zunaechst targetfrei geprueft. Der spaeter
+separat autorisierte G5-Attempt 3 berechnete danach zwei echte
+$H=2400$-Arnoldi-Panels und drei nichtlineare Stoerungsarme. Der unabhaengige
+Audit stuetzt lokale Stabilitaet bei genau diesem endlichen Horizont; daraus
+folgt weiterhin keine $H\to\infty$-Stabilitaet.
 
 ## 7. Ist G5 noch die Grundgleichung?
 
@@ -224,6 +225,18 @@ Der separat preregistrierte Retry vom 2026-09-13 hat diesen isolierten G4-Test
 mit zwei strikten, ueberlappenden 120/160-dps-Panels bestanden; der getrennte
 Recordaudit stimmt zu. Die staerkeren Aussagen bleiben deshalb weiterhin an
 die jeweils nachgelagerten Gates gebunden.
+
+Die nun implementierte G1--G3-Bruecke berechnet diese isolierten Komponenten
+nicht erneut. Sie hasht deren fuenf versiegelte Resultat-, Manifest- und
+Auditinputs und verlangt bei $H=2400$ sowie $H=3600$ gegenseitige
+Krawczyk-Inklusionen: Beide neuen Innenbilder muessen in der alten
+Eindeutigkeitsbox liegen und das alte Innenbild in beiden neuen
+Eindeutigkeitsboxen. Dazwischen muessen alle finite Rootpanels und 64er-
+Homotopieroehren bestehen; G3 wird aus den outward-gerundeten
+Innenintervallen rekonstruiert. Vertrag, direkter 70-dps-Summenreplay,
+FIFO-Kontrollen, Standardbibliotheksaudit, Manifest-last-Publikation und
+One-shot-Guard sind targetfrei geprueft. Die Governance ist geschlossen: Es
+gibt noch kein numerisches G1--G3-Ergebnis.
 
 Keine Kombination dieser Gates beweist fuer sich physikalische Masse,
 internen Spin, generische Knotenbildung oder Knoteninteraktion. Diese Claims

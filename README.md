@@ -4,7 +4,7 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-15.
+Stand: 2026-09-27.
 
 ## Wissenschaftlicher Stand
 
@@ -47,14 +47,12 @@ Stand: 2026-09-15.
   simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
   lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
   Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
-  nun targetfrei. Der autorisierte G5-Attempt 1 erreichte Root, Preflight und
-  Arnoldi, scheiterte aber vor Publikation an der exakten $[0,1]$-Validierung
-  eines ungeclippten binary64-Overlaps. Die Recordgrenze ist inzwischen
-  targetfrei mit dimensionsskalierter Rundungskanonisierung und
-  Falsifikationstests remediiert. Es existiert kein Ergebnis; Attempt 1 ist
-  verbraucht. Attempt 2 ist mit getrennten Artefaktpfaden prospektiv
-  registriert und targetfrei reviewed; bis zum Governance-only-Commit bleibt
-  der Zielzugriff geschlossen.
+  nun targetfrei. Nach zwei dokumentierten Pipeline-Incidents bestand der
+  separat autorisierte G5-Attempt 3 beide Arnoldi-Panels und drei
+  nichtlineare Stoerungsarme; der enge Befund gilt nur bei $H=2400$. Die
+  fehlende G1--G3-Branchverbindung zu G4 ist inzwischen als eigene Komponente
+  preregistriert, targetfrei implementiert und unabhaengig auditierbar. Ihre
+  One-shot-Governance bleibt geschlossen; es gibt noch kein Leiterergebnis.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

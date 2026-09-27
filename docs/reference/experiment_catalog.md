@@ -1,6 +1,6 @@
 # Experimentkatalog
 
-Stand: 2026-09-17.
+Stand: 2026-09-27.
 
 Diese Seite ist ein kuratierter Wegweiser, kein Ergebnisjournal und keine
 zweite Roadmap. Die einzige Arbeitsreihenfolge steht unter
@@ -30,6 +30,7 @@ autorisiert.
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5-Adapter und Grundgleichungs-Preflight | reviewed Pass | hashbarer Record fuer Gewichtssumme, Kreisidentitaet, Voll-Jacobian und Symmetrien besteht im Ziellauf |
 | G5 direkte finite-H-Stabilitaet | `g5-local-direct-stability-pass`; Attempt 3 verbraucht | lokale numerische Stabilitaet bei exakt $H=2400$; kein $H\to\infty$-, Formations- oder Interaktionsclaim |
+| G1--G3-Brueckenkomponente | Vertrag, Backends, unabhaengiger Audit, Manifest-last-Publikation und One-shot-Guard targetfrei gruen; Target geschlossen | noch kein Leiterergebnis; verbindet erst nach autorisiertem Pass die isolierten G4-/G5-Roots |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das
@@ -60,7 +61,7 @@ nicht ausgewertet.
 | Erzeugt die FIFO-Struktur den Kreis tautologisch? | Nein. Sie ordnet Alter; der Kreis folgt nur aus Kraftbalance und Dynamik. | finite-$H$-Audit, Rootzertifikat und Kontrollen |
 | Wie hoch ist der KnotScore des Rotating-wave-FIFO? | Nicht erhoben und derzeit nicht entscheidungsfaehig. | gepaarte Formation aus nichtkreisfoermigen Starts plus `eta_zero`, Stationaritaet und vorregistrierte Scorecard |
 | Ist der finite Kreis ein gebildeter Knoten? | Fuer zehn vorbereitete Nichtkreis-Arme gibt es endliche Attractionsevidenz, aber keinen offenen Basin- oder generischen Formationsbeweis. | eigenstaendiges Formation-/Basin-Protokoll |
-| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | Ja, in der registrierten Box und konditional auf Tailbounds/`mpmath.iv`; die G1--G3-Branchverbindung bleibt offen. | vollstaendiges Horizontgate |
+| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G4: ja, lokal und konditional auf Tailbounds/`mpmath.iv`; ob die finite Leiter derselbe Ast ist, bleibt ungemessen. | autorisierter G1--G3-Brueckenlauf |
 | Besitzt das System eine interne $S^1$-Phase oder Spin? | Nicht gezeigt; die bisherige Bahn ist eine raeumliche $SO(2)$-Gruppenbahn. | interne Observable nach Quotientierung der Raumrotation |
 | Ist $\mu$ physikalische Masse? | Nur eine effektive positive Center-Port-Darstellung ist belegt. | mikroskopischer Aktuator, Portinvarianz und Einheitenkalibrierung |
 | Gibt es Knoteninteraktion? | P5-D ist technisch `inconclusive`. | erst abgeschlossene Remediation, dann separat autorisierter Lauf |

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-17.
+Stand: 2026-09-27.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -17,46 +17,19 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Fixed-alpha-Horizontgate vervollstaendigen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
-   nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
-   Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
-   targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
-   ebenfalls targetfrei reviewed. Der erste isolierte G4-Komponentenlauf
-   brach bei der nachgeschalteten Recordvalidierung an einer unzulaessig
-   exakten Kontrolle der outward-gerundeten Box ab; kein verwertbares
-   Ergebnis entstand und G4 bleibt ungemessen. Die Boxpruefung ist nun
-   targetfrei remediated und mit 1063 lokalen Repositorytests geprueft.
-   Der separat preregistrierte Retry besteht G4 mit zwei strikten,
-   ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
-   zu. Das ist lokale $F_\infty$-Existenz, noch kein vollstaendiger
-   Horizonttransfer. LCG-Arnoldi- und Trajektorienadapter bestehen nun
-   targetfrei; dabei wurden Instabilitaet auf dasselbe gematchte Ritzpaar
-   verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Eine
-   erste Aenderung am historisch eingefrorenen Stabilitaetskern wurde durch
-   dessen CI-Blob-Sperren falsifiziert; der korrigierte G5-Kern ist nun
-   getrennt, waehrend der Altblob exakt erhalten bleibt. Der gemeinsame
-   Grundgleichungs-Preflight ist nun targetfrei implementiert und erzeugt
-   einen hashbaren Record fuer Gewichtssumme, native Kreiskovarianz,
-   Fixpunkt, Voll-Jacobian und Symmetrien. Der eingefrorene isolierte
-   G5-Ergebnisvertrag, seine fail-closed Backendkomposition sowie ein
-   standardbibliotheksbasierter Record-/Publikationsauditor bestehen nun
-   targetfrei. Attempt 1 erreichte nach Root und Preflight die Arnoldi-Panels,
-   scheiterte aber vor Publikation an einem ungeclippten binary64-Overlap
-   ausserhalb des exakten Intervalls $[0,1]$. Es existiert kein G5-Ergebnis;
-   der Versuch ist verbraucht und kein Retry autorisiert. Die
-   Overlap-Recordgrenze ist inzwischen mit dimensionsskalierter
-   binary64-Kanonisierung und Falsifikationstests targetfrei remediiert. Als
-   prospektive Attempt-2-Protokoll und das neue Readinessreview bestanden
-   targetfrei. Attempt 2 erreichte die nichtlinearen Fortsetzungen, scheiterte
-   aber vor Publikation: Der Integrator bildet das Maximum ueber jeden Schritt,
-   waehrend der Validator es aus dem Zehnersampling rekonstruiert. Das ist ein
-   zweiter Pipeline-Incident, kein G5-Befund. Die anschliessend
-   preregistrierte dichte Vollschrittspur besteht 1145 Tests, Lint und Docs.
-   Attempt 3 wurde genau einmal ausgefuehrt und unabhaengig auditiert: beide
-   Arnoldi-Panels sowie alle drei nichtlinearen Stoerungsarme bestehen. Der
-   Befund `g5-local-direct-stability-pass` gilt nur lokal bei exakt $H=2400$.
-   Offen bleiben die G1--G3-Branchverbindung, der vollstaendige Horizontlauf
-   und jede P5-D-Folgeausfuehrung.
+1. **G1--G3-Branchverbindung messen -- Readiness in Arbeit, Target geschlossen.**
+   G4 belegt isoliert einen lokalen $F_\infty$-Root; G5 belegt isoliert lokale
+   direkte FIFO-Stabilitaet bei exakt $H=2400$. Das neue Brueckenprotokoll
+   prueft prospektiv, ob die finite Leiter
+   $1200\to1500\to1800\to2400\to3600$ dieselbe lokale Rootfamilie mit beiden
+   versiegelten Endpunkten verbindet. Root-, Homotopie-, Drift-, Replay-,
+   FIFO-Kontroll-, Hashkompositions-, Audit-, Publikations- und One-shot-
+   Guardpfade sind targetfrei implementiert. Ein Implementierungsreview fand
+   zuvor freie G0-/G6-Boolfelder; die Amendierung ersetzt sie durch
+   rekonstruierbare Residuen, Fehler und Hashpaare. 129 gemeinsame
+   Bruecken-/Bestandsregressionen sind gruen. Offen sind das abschliessende
+   Code-/Readinessreview, die vollstaendige CI und danach eine neue explizite
+   Nutzerfreigabe. Bis dahin existiert kein G1--G3-Ergebnis.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -85,15 +58,10 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Aktueller Haltepunkt
 
-Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
-Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
-reviewed. Ergebnisvertrag, Backendkomposition, persistierter Preflight und
-unabhaengiger Auditor sowie der Execution-Context-Guard sind targetfrei
-implementiert und reviewed. G5-Attempts 1 und 2 sind als getrennte
-Pipeline-Incidents ohne Ergebnis verbraucht. Attempt 2 falsifizierte die
-Trajektorien-Vertragsabdeckung; Attempt 3 schliesst sie mit auditierter
-dichter Spur und endet als `g5-local-direct-stability-pass`. Die einmalige
-Autorisierung ist verbraucht. Als naechste Horizontluecke bleibt die
-G1--G3-Verbindung zwischen den isolierten G4- und G5-Befunden. Der aktuelle
+G4 und G5 sind als getrennte lokale Komponenten positiv und unabhaengig
+auditiert. Die G1--G3-Bruecke zwischen ihnen ist targetfrei implementiert,
+unabhaengig nachrechenbar und durch geschlossene Governance versiegelt. Der
+naechste zulaessige Schritt ist das Readinessreview mit exakter CI; ein
+Leiterlauf braucht danach eine neue ausdrueckliche Freigabe. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

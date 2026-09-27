@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-17.
+Stand: 2026-09-27.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -144,6 +144,19 @@ Record, Entscheidung und Publikationshashes. Das Ergebnis lautet
 `g5-local-direct-stability-pass` fuer exakt $H=2400$. Dies ist kein
 Intervallbeweis des vollen Spektrums und keine Aussage ueber
 $H\to\infty$, Formation oder Interaktion.
+
+Die verbleibende G1--G3-Branchverbindung ist inzwischen als eigene, engere
+Komponente preregistriert und targetfrei implementiert. Sie rechnet G4 und G5
+nicht erneut, sondern bindet deren fuenf versiegelte Artefakte und fordert
+gegenseitige Krawczyk-Inklusionen an $H=2400$ und $H=3600$. Ein
+Implementierungsreview verwarf zunaechst freie G0-/G6-Boolfelder; der
+amendierte Vertrag speichert direkte 70-dps-Summenresiduen,
+FIFO-Fehlerwerte und erwartete/beobachtete Altersfolgenhashes. Validator und
+getrennter Standardbibliotheksauditor rekonstruieren Root-, Homotopie-,
+Drift-, Ausschluss-, Endpunkt- und Entscheidungssemantik. Manifest-last-
+Publikation und One-shot-Guard sind targetfrei geprueft; die Governance ist
+geschlossen. Daher gibt es noch keinen G1--G3-Befund und weiterhin keinen
+$H\to\infty$-Stabilitaetsclaim.
 
 ## P5-D Code-Review und Remediation
 

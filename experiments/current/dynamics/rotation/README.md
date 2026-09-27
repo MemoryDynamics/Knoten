@@ -1,6 +1,6 @@
 # Native rotating-wave pipeline
 
-Stand: 2026-09-15.
+Stand: 2026-09-27.
 
 Dieses Verzeichnis enthaelt die aktive, sequentielle Evidenzpipeline fuer
 raeumliche Rotating waves des nativen skalaren finite-memory-Modells. Die
@@ -71,7 +71,7 @@ synthetischen First-order-/Branch-Crossing-Falsifikatoren, off-target
 Summenvergleich, Provenienz, Lint und Dokumentationsbau. Beide Zielpanels
 verwenden `mpmath.iv` 1.3.0; sie sind keine unabhaengigen Intervallbackends.
 
-Das spaetere Fixed-alpha-Horizontgate bleibt targetgeschlossen. Seine
+Der spaetere Fixed-alpha-Horizontzweig ist stufenweise ausgefuehrt worden. Seine
 Root-, Homotopie-, lokalen Ausschluss- und Tail-Krawczyk-Adapter sind
 targetfrei implementiert und reviewed. Insbesondere ist das Tailpanel nur
 eine Methode. Der erste isolierte G4-Komponentenlauf brach bei der
@@ -82,17 +82,21 @@ Die Pruefung ist targetfrei korrigiert. Der separat preregistrierte Retry
 besteht danach das isolierte G4-Komponentengate mit zwei strikten,
 ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
 zu. Das ist lokale $F_\infty$-Existenz, keine G1--G3-Branchverbindung und
-keine Stabilitaet. Die LCG-Arnoldi- und Trajektorienadapter fuer G5 bestehen
-inzwischen targetfrei; ein H=2400-Spektrum oder eine Stoerungsfortsetzung
-wurde damit noch nicht ausgefuehrt. Der zusaetzliche Grundgleichungs-
-Preflight prueft targetfrei die direkte Gewichtssumme, native
+keine Stabilitaet. Der spaeter separat autorisierte G5-Attempt 3 bestand bei
+exakt $H=2400$ zwei Arnoldi-Panels und drei nichtlineare
+Stoerungsarmfamilien; sein unabhaengiger Audit stimmt dem engen lokalen
+Stabilitaetsbefund zu. Der zusaetzliche Grundgleichungs-Preflight prueft die
+direkte Gewichtssumme, native
 Kreiskovarianz, den mitrotierenden Fixpunkt, Voll-Jacobian und Symmetrien.
 Das isolierte G5-Protokoll haelt fest, dass die nichtlinearen Arme die
 Voll-FIFO-Grundgleichung und keinen eingesetzten harmonischen Oszillator
 simulieren. Komponentenvertrag, fail-closed Backendkomposition sowie
-Record-/Publikationsaudit und one-shot Execution-Context-Guard sind
-targetfrei implementiert und reviewed. Die getrackte Governance ist
-geschlossen; ein Zielzugriff ist nicht autorisiert.
+Record-/Publikationsaudit und one-shot Execution-Context-Guard wurden vor G5
+targetfrei implementiert und reviewed. Die danach preregistrierte
+G1--G3-Bruecke soll erst zeigen, ob die finite Leiter mit den isolierten G4-
+und G5-Komponenten identisch ist. Ihr Vertrag, ihre Backends, ihr getrennter
+Standardbibliotheksaudit und ihr One-shot-Guard sind targetfrei gruen. Ihre
+getrackte Governance ist geschlossen; es gibt noch kein Leiterergebnis.
 
 ## Claim-Grenze
 
