@@ -82,6 +82,31 @@ def test_sealed_component_hash_drift_fails_before_decision() -> None:
         gate.validate_result(payload)
 
 
+def test_g0_replay_is_reconstructed_from_signed_primitive_values() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    row = payload["finite_branch"]["direct_replays"][2]
+    row["radial_residual"] = "1e-40"
+    row["residual_maximum"] = "1e-40"
+    with pytest.raises(ValueError, match="residual gate"):
+        gate.validate_result(payload)
+
+
+def test_g6_age_hash_and_mutation_detection_are_reconstructed() -> None:
+    gate = _load_gate()
+    payload = gate.contract_witness()
+    payload["controls"]["circular_cases"][0][
+        "observed_age_history_sha256"
+    ] = "f" * 64
+    with pytest.raises(ValueError, match="circular_cases"):
+        gate.validate_result(payload)
+    payload = gate.contract_witness()
+    payload["controls"]["mutations"][0]["new_point_relative_error"] = 0.0
+    payload["controls"]["mutations"][0]["complete_state_relative_error"] = 0.0
+    with pytest.raises(ValueError, match="mutations"):
+        gate.validate_result(payload)
+
+
 @pytest.mark.parametrize(
     ("updates", "decision"),
     [
@@ -125,6 +150,8 @@ def test_incomplete_forward_prefix_is_an_honest_inconclusive_record() -> None:
     gate = _load_gate()
     payload = gate.contract_witness()
     payload["finite_branch"]["root_panels"][6] = None
+    payload["finite_branch"]["direct_replays"][6] = None
+    payload["finite_branch"]["direct_replay_pass"] = False
     payload["finite_branch"]["homotopies"][3] = None
     payload["finite_branch"]["drift"]["center_diagnostics"][1] = None
     payload["finite_branch"]["drift"]["interval_upper_bounds"][1] = None
@@ -133,6 +160,7 @@ def test_incomplete_forward_prefix_is_an_honest_inconclusive_record() -> None:
     payload["classification"]["gates"].update(
         {
             "G1F": "inconclusive",
+            "G0": "inconclusive",
             "G2F": "inconclusive",
             "G3": "inconclusive",
             "H3600_link": "inconclusive",
@@ -227,10 +255,6 @@ class _SyntheticBridgeBackend:
         self.fail_horizon = fail_horizon
         self.calls: list[tuple] = []
 
-    def direct_replay(self) -> bool:
-        self.calls.append(("direct_replay",))
-        return True
-
     def finite_root_panel(
         self, *, horizon: int, precision_dps: int, start: tuple[str, str]
     ) -> dict | None:
@@ -246,6 +270,15 @@ class _SyntheticBridgeBackend:
                 "outer_certificate": row[f"outer_certificate_{precision_dps}"],
             }
         )
+
+    def finite_sum_replay(
+        self, *, horizon: int, root: tuple[str, str]
+    ) -> dict:
+        self.calls.append(("replay", horizon, root))
+        row = self.template["finite_branch"]["direct_replays"][
+            [600, 900, 1200, 1500, 1800, 2400, 3600].index(horizon)
+        ]
+        return copy.deepcopy(row)
 
     def homotopy_edge(
         self,

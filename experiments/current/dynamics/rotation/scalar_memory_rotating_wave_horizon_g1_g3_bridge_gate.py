@@ -28,6 +28,9 @@ TRANSFER_GATE_PATH = Path(__file__).with_name(
 HORIZONS = (600, 900, 1200, 1500, 1800, 2400, 3600)
 FORWARD_HORIZONS = (1200, 1500, 1800, 2400, 3600)
 LOWER_HORIZONS = (900, 600)
+REPLAY_DPS = 70
+REPLAY_RESIDUAL_MAXIMUM = Decimal("1e-45")
+REPLAY_SEMANTICS = "independent finite-sum replay; not a second interval proof"
 PARAMETERS = {
     "alpha": 0.01,
     "amplitude_att": 3.5,
@@ -199,14 +202,18 @@ def _validate_endpoint_link(
 def classify_bridge(gates: dict[str, Any]) -> dict[str, Any]:
     """Apply the preregistered bridge decision precedence."""
 
-    if gates["G0"] != "pass" or gates["G6"] != "pass":
+    if gates["G0"] == "fail" or gates["G6"] == "fail":
         return {"decision": "g1-g3-bridge-experiment-invalid", "precedence_rank": 1}
     if gates["local_branch_excluded"]:
         return {
             "decision": "registered-local-horizon-branch-loss",
             "precedence_rank": 2,
         }
-    if gates["G1F"] != "pass" or gates["G2F"] != "pass":
+    if (
+        gates["G0"] != "pass"
+        or gates["G1F"] != "pass"
+        or gates["G2F"] != "pass"
+    ):
         return {"decision": "g1-g3-bridge-inconclusive", "precedence_rank": 3}
     if gates["G3"] == "fail":
         return {
@@ -258,8 +265,14 @@ def _reconstructed_gates(payload: dict[str, Any]) -> dict[str, Any]:
         for index, panel in enumerate(panels)
     ]
     homotopies = branch["homotopies"]
+    replays = branch["direct_replays"]
     g1f = all(panel_pass[index] for index in range(2, 7))
-    g1r = all(panel_pass[index] for index in (2, 1, 0))
+    g1r = all(
+        panel_pass[index]
+        and replays[index] is not None
+        and replays[index]["pass"]
+        for index in (2, 1, 0)
+    )
     g2f = all(
         row is not None and row["status"] == "pass" and row["pass"]
         for row in homotopies[:4]
@@ -290,13 +303,21 @@ def _reconstructed_gates(payload: dict[str, Any]) -> dict[str, Any]:
         row is not None and row["status"] == "all-residual-excluded"
         for row in branch["exclusions"]
     )
+    q_pass = all(
+        row["two_ulp_gate"] and row["nonzero_finite"]
+        for row in payload["q_representations"]
+    )
+    forward_replays = [replays[index] for index in range(2, 7)]
+    if not q_pass or any(
+        row is not None and not row["pass"] for row in forward_replays
+    ):
+        g0 = "fail"
+    elif all(row is not None and row["pass"] for row in forward_replays):
+        g0 = "pass"
+    else:
+        g0 = "inconclusive"
     return {
-        "G0": (
-            "pass"
-            if branch["direct_replay_pass"]
-            and all(row["two_ulp_gate"] and row["nonzero_finite"] for row in payload["q_representations"])
-            else "fail"
-        ),
+        "G0": g0,
         "G1F": "pass" if g1f else "inconclusive",
         "G1R": "pass" if g1r else "inconclusive",
         "G2F": "pass" if g2f else "inconclusive",
@@ -308,11 +329,114 @@ def _reconstructed_gates(payload: dict[str, Any]) -> dict[str, Any]:
         ),
         "G4": "pass",
         "G5": "pass",
-        "G6": "pass" if _transfer_gate()._controls_evidence(payload) else "fail",
+        "G6": "pass" if _controls_evidence(payload) else "fail",
         "H2400_link": link_states[0],
         "H3600_link": link_states[1],
         "local_branch_excluded": local_branch_excluded,
     }
+
+
+def _verify_replays(payload: dict[str, Any]) -> None:
+    branch = payload["finite_branch"]
+    panels = branch["root_panels"]
+    replays = branch["direct_replays"]
+    for index, (panel, row, horizon) in enumerate(
+        zip(panels, replays, HORIZONS, strict=True)
+    ):
+        path = f"$.finite_branch.direct_replays[{index}]"
+        if panel is None:
+            if row is not None:
+                raise ValueError(f"{path}: replay without root panel")
+            continue
+        if row is None:
+            continue
+        if row["horizon"] != horizon or row["precision_dps"] != REPLAY_DPS:
+            raise ValueError(f"{path}: registered horizon or precision mismatch")
+        root = panel["newton_120"]
+        if row["radius"] != root["radius"] or row["theta"] != root["theta"]:
+            raise ValueError(f"{path}: replay center does not match 120-dps root")
+        if row["semantics"] != REPLAY_SEMANTICS:
+            raise ValueError(f"{path}: replay semantics mismatch")
+        radial = _finite_decimal(row["radial_residual"], path=f"{path}.radial_residual")
+        tangential = _finite_decimal(
+            row["tangential_residual"], path=f"{path}.tangential_residual"
+        )
+        residual_maximum = _finite_decimal(
+            row["residual_maximum"], path=f"{path}.residual_maximum"
+        )
+        radial_sum = _finite_decimal(row["radial_sum"], path=f"{path}.radial_sum")
+        tangential_sum = _finite_decimal(
+            row["tangential_sum"], path=f"{path}.tangential_sum"
+        )
+        expected_maximum = max(abs(radial), abs(tangential))
+        if residual_maximum != expected_maximum:
+            raise ValueError(f"{path}: residual maximum mismatch")
+        residual_gate = residual_maximum <= REPLAY_RESIDUAL_MAXIMUM
+        physical_signs = radial_sum > 0 and tangential_sum < 0
+        if row["residual_gate"] is not residual_gate:
+            raise ValueError(f"{path}: residual gate mismatch")
+        if row["physical_signs"] is not physical_signs:
+            raise ValueError(f"{path}: physical-sign gate mismatch")
+        if row["pass"] is not (residual_gate and physical_signs):
+            raise ValueError(f"{path}: replay pass mismatch")
+    expected_summary = all(
+        replays[index] is not None and replays[index]["pass"]
+        for index in range(2, 7)
+    )
+    if branch["direct_replay_pass"] is not expected_summary:
+        raise ValueError("$.finite_branch.direct_replay_pass: reconstruction mismatch")
+
+
+def _controls_evidence(payload: dict[str, Any]) -> bool:
+    controls = payload["controls"]
+    expected_cases = [
+        ("noncircle-H17", 17),
+        ("noncircle-H257", 257),
+        *((f"anchor-H{horizon}", horizon) for horizon in HORIZONS),
+    ]
+    circular = controls["circular_cases"]
+    circular_pass = True
+    for row, (case_id, horizon) in zip(circular, expected_cases, strict=True):
+        expected = bool(
+            row["case_id"] == case_id
+            and row["horizon"] == horizon
+            and row["expected_age_history_sha256"]
+            == row["observed_age_history_sha256"]
+            and row["new_point_relative_error"] < 5e-14
+            and row["complete_state_relative_error"] < 5e-14
+        )
+        if row["pass"] is not expected:
+            raise ValueError("$.controls.circular_cases: pass reconstruction mismatch")
+        circular_pass = circular_pass and expected
+    eta_pass = True
+    for row, horizon in zip(controls["eta_zero_cases"], HORIZONS, strict=True):
+        expected = bool(
+            row["horizon"] == horizon
+            and row["steps"] == horizon + 1
+            and row["maximum_deviation"] < 1e-14
+        )
+        if row["pass"] is not expected:
+            raise ValueError("$.controls.eta_zero_cases: pass reconstruction mismatch")
+        eta_pass = eta_pass and expected
+    mutation_names = (
+        "reverse-modulo",
+        "overwrite-before-read",
+        "wrong-oldest-slot",
+    )
+    mutation_pass = True
+    for row, name in zip(controls["mutations"], mutation_names, strict=True):
+        detected = bool(
+            row["horizon"] == 17
+            and row["name"] == name
+            and (
+                row["new_point_relative_error"] >= 5e-14
+                or row["complete_state_relative_error"] >= 5e-14
+            )
+        )
+        if row["detected"] is not detected:
+            raise ValueError("$.controls.mutations: detection reconstruction mismatch")
+        mutation_pass = mutation_pass and detected
+    return bool(circular_pass and eta_pass and mutation_pass)
 
 
 def validate_result(payload: dict[str, Any]) -> None:
@@ -348,6 +472,7 @@ def validate_result(payload: dict[str, Any]) -> None:
     reused._verify_homotopy_slots(
         payload["finite_branch"]["homotopies"], legacy_panels
     )
+    _verify_replays(payload)
     if payload["q_representations"] != reused.q_representations(HORIZONS):
         raise ValueError("$.q_representations: reconstruction mismatch")
     drift = payload["finite_branch"]["drift"]
@@ -395,7 +520,7 @@ def validate_result(payload: dict[str, Any]) -> None:
     )
     if drift["pass"] is not expected_drift_pass:
         raise ValueError("$.finite_branch.drift.pass: drift reconstruction mismatch")
-    controls_pass = reused._controls_evidence(payload)
+    controls_pass = _controls_evidence(payload)
     if payload["controls"]["pass"] is not controls_pass:
         raise ValueError("$.controls.pass: controls reconstruction mismatch")
     reconstructed = _reconstructed_gates(payload)
@@ -512,7 +637,6 @@ def orchestrate_bridge(
     backends.
     """
 
-    direct_replay_pass = bool(backend.direct_replay())
     reused = _transfer_gate()
     execution_order = (1200, 1500, 1800, 2400, 3600, 900, 600)
     homotopy_edges = (
@@ -585,6 +709,21 @@ def orchestrate_bridge(
             for precision in (80, 120)
         }
 
+    direct_replays: list[dict[str, Any] | None] = [None] * len(HORIZONS)
+    for index, panel in enumerate(root_panels):
+        if panel is None:
+            continue
+        direct_replays[index] = copy.deepcopy(
+            backend.finite_sum_replay(
+                horizon=panel["horizon"],
+                root=_root_coordinates(panel, 120),
+            )
+        )
+    direct_replay_pass = all(
+        direct_replays[index] is not None and direct_replays[index]["pass"]
+        for index in range(2, 7)
+    )
+
     homotopies: list[dict[str, Any] | None] = [None] * 6
     forward_homotopy_open = True
     lower_homotopy_open = True
@@ -630,8 +769,14 @@ def orchestrate_bridge(
         legacy.pop("cross_120_inner_in_80_outer")
         legacy_panels.append(legacy)
     drift = reused._drift_record(legacy_panels)
+    drift.pop("mutation_closes_pass")
     lower_complete = bool(
-        all(root_panels[index_by_horizon[horizon]] is not None for horizon in (1200, 900, 600))
+        all(
+            root_panels[index_by_horizon[horizon]] is not None
+            and direct_replays[index_by_horizon[horizon]] is not None
+            and direct_replays[index_by_horizon[horizon]]["pass"]
+            for horizon in (1200, 900, 600)
+        )
         and all(row is not None and row["status"] == "pass" for row in homotopies[4:])
     )
     lower_status = (
@@ -662,6 +807,7 @@ def orchestrate_bridge(
         ],
         "finite_branch": {
             "direct_replay_pass": direct_replay_pass,
+            "direct_replays": direct_replays,
             "drift": drift,
             "exclusions": exclusions,
             "forward_horizons": list(FORWARD_HORIZONS),
@@ -678,7 +824,7 @@ def orchestrate_bridge(
     }
     # Keep controls last: G4/G5 are sealed data above and are never backend calls.
     payload["controls"] = copy.deepcopy(backend.controls())
-    payload["controls"]["pass"] = reused._controls_evidence(payload)
+    payload["controls"]["pass"] = _controls_evidence(payload)
     gates = _reconstructed_gates(payload)
     decision = classify_bridge(gates)
     payload["classification"].update(decision)
@@ -806,6 +952,24 @@ def _endpoint(component: str, horizon: int) -> dict[str, Any]:
     }
 
 
+def _replay(horizon: int) -> dict[str, Any]:
+    return {
+        "horizon": horizon,
+        "pass": True,
+        "physical_signs": True,
+        "precision_dps": REPLAY_DPS,
+        "radial_residual": "0",
+        "radial_sum": "1",
+        "radius": "0.95",
+        "residual_gate": True,
+        "residual_maximum": "0",
+        "semantics": REPLAY_SEMANTICS,
+        "tangential_residual": "0",
+        "tangential_sum": "-1",
+        "theta": "0.016",
+    }
+
+
 def contract_witness() -> dict[str, Any]:
     """Return a complete synthetic positive payload without target access."""
 
@@ -844,11 +1008,16 @@ def contract_witness() -> dict[str, Any]:
     controls = {
         "circular_cases": [
             {
-                "age_history_sha256": f"{index + 1:064x}",
-                "case_id": f"case-H{horizon}",
+                "case_id": (
+                    f"noncircle-H{horizon}"
+                    if horizon in (17, 257)
+                    else f"anchor-H{horizon}"
+                ),
                 "complete_state_relative_error": 0.0,
+                "expected_age_history_sha256": f"{index + 1:064x}",
                 "horizon": horizon,
                 "new_point_relative_error": 0.0,
+                "observed_age_history_sha256": f"{index + 1:064x}",
                 "pass": True,
             }
             for index, horizon in enumerate(circular_horizons)
@@ -863,9 +1032,14 @@ def contract_witness() -> dict[str, Any]:
             for horizon in HORIZONS
         ],
         "mutations": [
-            {"detected": True, "name": name}
+            {
+                "complete_state_relative_error": 1e-6,
+                "detected": True,
+                "horizon": 17,
+                "name": name,
+                "new_point_relative_error": 1e-6,
+            }
             for name in (
-                "drift-width",
                 "reverse-modulo",
                 "overwrite-before-read",
                 "wrong-oldest-slot",
@@ -888,10 +1062,10 @@ def contract_witness() -> dict[str, Any]:
         "endpoint_links": [_endpoint("G5", 2400), _endpoint("G4", 3600)],
         "finite_branch": {
             "direct_replay_pass": True,
+            "direct_replays": [_replay(horizon) for horizon in HORIZONS],
             "drift": {
                 "center_diagnostics": copy.deepcopy(drift_rows),
                 "interval_upper_bounds": drift_rows,
-                "mutation_closes_pass": True,
                 "pass": True,
             },
             "exclusions": [None, None, None, None],

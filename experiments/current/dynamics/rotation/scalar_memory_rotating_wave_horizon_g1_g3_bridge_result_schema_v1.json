@@ -13,8 +13,9 @@
     "homotopy_slabs": {"item": "nullable:object:homotopy_slab", "length": 64},
     "interval_matrix_2": {"item": "array:interval_row_2", "length": 2},
     "interval_row_2": {"item": "array:decimal_pair", "length": 2},
-    "mutation_rows": {"item": "object:mutation", "length": 4},
+    "mutation_rows": {"item": "object:mutation", "length": 3},
     "q_rows": {"item": "object:q_representation", "length": 7},
+    "replay_rows": {"item": "nullable:object:replay_row", "length": 7},
     "root_panels": {"item": "nullable:object:root_panel", "length": 7},
     "sealed_files": {"item": "object:sealed_file", "length": 5}
   },
@@ -30,8 +31,8 @@
     "horizons": [600, 900, 1200, 1500, 1800, 2400, 3600],
     "lower_horizons": [900, 600],
     "payload_schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-v1",
-    "protocol_blob": "6dbb768d2fba1ee86c0ef38978125e6b9c6d6969",
-    "protocol_sha256": "c00cbeddbc0469d58ea6dd3d1b1df584f3571509c477eb5ed7e564f6181f68fb",
+    "protocol_blob": "77648c1a17610d0d14b055a59150d3b053d5b4f7",
+    "protocol_sha256": "9611e3b9f26fd02b4d082c748379dc6841b3b519c9ac8c2a4d9d1cf846df9589",
     "true": true
   },
   "enums": {
@@ -51,8 +52,9 @@
     "exclusion_status": ["all-residual-excluded", "other-root", "inconclusive"],
     "gate_state": ["pass", "fail", "inconclusive"],
     "lower_tail_status": ["lower-tail-stress-pass", "lower-tail-stress-inconclusive"],
-    "mutation_name": ["drift-width", "reverse-modulo", "overwrite-before-read", "wrong-oldest-slot"],
+    "mutation_name": ["reverse-modulo", "overwrite-before-read", "wrong-oldest-slot"],
     "precision": [80, 120],
+    "replay_precision": [70],
     "sealed_role": ["g4-result", "g4-manifest", "g4-audit", "g5-result", "g5-manifest"]
   },
   "objects": {
@@ -85,11 +87,12 @@
       "strict_interior": "boolean"
     },
     "circular_case": {
-      "age_history_sha256": "sha256",
       "case_id": "string",
       "complete_state_relative_error": "number",
+      "expected_age_history_sha256": "sha256",
       "horizon": "integer",
       "new_point_relative_error": "number",
+      "observed_age_history_sha256": "sha256",
       "pass": "boolean"
     },
     "classification": {
@@ -108,7 +111,6 @@
     "drift": {
       "center_diagnostics": "array:drift_rows",
       "interval_upper_bounds": "array:drift_rows",
-      "mutation_closes_pass": "boolean",
       "pass": "boolean"
     },
     "drift_row": {
@@ -145,6 +147,7 @@
     },
     "finite_branch": {
       "direct_replay_pass": "boolean",
+      "direct_replays": "array:replay_rows",
       "drift": "object:drift",
       "exclusions": "array:exclusion_attempts",
       "forward_horizons": "const:forward_horizons",
@@ -195,8 +198,11 @@
       "version": "const:contract_version"
     },
     "mutation": {
+      "complete_state_relative_error": "number",
       "detected": "boolean",
-      "name": "enum:mutation_name"
+      "horizon": "integer",
+      "name": "enum:mutation_name",
+      "new_point_relative_error": "number"
     },
     "newton_panel": {
       "jacobian": "array:decimal_matrix_2",
@@ -245,6 +251,21 @@
       "nonzero_finite": "boolean",
       "two_ulp_gate": "boolean",
       "ulp_difference": "integer"
+    },
+    "replay_row": {
+      "horizon": "integer",
+      "pass": "boolean",
+      "physical_signs": "boolean",
+      "precision_dps": "enum:replay_precision",
+      "radial_residual": "decimal",
+      "radial_sum": "decimal",
+      "radius": "decimal",
+      "residual_gate": "boolean",
+      "residual_maximum": "decimal",
+      "semantics": "string",
+      "tangential_residual": "decimal",
+      "tangential_sum": "decimal",
+      "theta": "decimal"
     },
     "root_box": {
       "radius": "array:decimal_pair",
