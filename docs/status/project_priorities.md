@@ -17,7 +17,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **G1--G3-Branchverbindung messen -- Readiness in Arbeit, Target geschlossen.**
+1. **G1--G3-Branchverbindung messen -- Readiness bestanden, Target geschlossen.**
    G4 belegt isoliert einen lokalen $F_\infty$-Root; G5 belegt isoliert lokale
    direkte FIFO-Stabilitaet bei exakt $H=2400$. Das neue Brueckenprotokoll
    prueft prospektiv, ob die finite Leiter
@@ -26,10 +26,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    FIFO-Kontroll-, Hashkompositions-, Audit-, Publikations- und One-shot-
    Guardpfade sind targetfrei implementiert. Ein Implementierungsreview fand
    zuvor freie G0-/G6-Boolfelder; die Amendierung ersetzt sie durch
-   rekonstruierbare Residuen, Fehler und Hashpaare. 129 gemeinsame
-   Bruecken-/Bestandsregressionen sind gruen. Offen sind das abschliessende
-   Code-/Readinessreview, die vollstaendige CI und danach eine neue explizite
-   Nutzerfreigabe. Bis dahin existiert kein G1--G3-Ergebnis.
+   rekonstruierbare Residuen, Fehler und Hashpaare. Der erste offizielle
+   Implementierungs-CI-Lauf falsifizierte einen Windows-Checkout-Hash des
+   G4-Audits; die dritte outcome-blinde Amendierung bindet alle fuenf Inputs
+   an kanonische Git-Blobs. Der Folgelauf besteht Ruff, 1194 Tests und den
+   strikten Docs-Bau. Offen ist nur eine neue explizite Nutzerfreigabe fuer
+   den Governance-only-Commit. Bis dahin existiert kein G1--G3-Ergebnis.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -61,7 +63,7 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 G4 und G5 sind als getrennte lokale Komponenten positiv und unabhaengig
 auditiert. Die G1--G3-Bruecke zwischen ihnen ist targetfrei implementiert,
 unabhaengig nachrechenbar und durch geschlossene Governance versiegelt. Der
-naechste zulaessige Schritt ist das Readinessreview mit exakter CI; ein
-Leiterlauf braucht danach eine neue ausdrueckliche Freigabe. Der aktuelle
+Readinessreview und exakte CI sind abgeschlossen. Ein Leiterlauf braucht nun
+eine neue ausdrueckliche Freigabe und danach einen Governance-only-Commit. Der aktuelle
 methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

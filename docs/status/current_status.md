@@ -155,8 +155,12 @@ FIFO-Fehlerwerte und erwartete/beobachtete Altersfolgenhashes. Validator und
 getrennter Standardbibliotheksauditor rekonstruieren Root-, Homotopie-,
 Drift-, Ausschluss-, Endpunkt- und Entscheidungssemantik. Manifest-last-
 Publikation und One-shot-Guard sind targetfrei geprueft; die Governance ist
-geschlossen. Daher gibt es noch keinen G1--G3-Befund und weiterhin keinen
-$H\to\infty$-Stabilitaetsclaim.
+geschlossen. Der erste offizielle CI-Lauf fand einen plattformabhaengigen
+CRLF-Hash des G4-Audits; die outcome-blinde Remediation bindet nun alle fuenf
+Inputs an kanonische Git-Blobs. Der Folgelauf besteht Ruff, 1194 Tests und
+strikten Docs-Bau. Daher gibt es noch keinen G1--G3-Befund und weiterhin
+keinen $H\to\infty$-Stabilitaetsclaim; offen ist die explizite Freigabe fuer
+den einmaligen Leiterlauf.
 
 ## P5-D Code-Review und Remediation
 
