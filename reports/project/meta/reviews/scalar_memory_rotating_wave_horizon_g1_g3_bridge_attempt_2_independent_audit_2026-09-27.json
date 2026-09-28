@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "classification": true,
+    "controls": true,
+    "drift": true,
+    "endpoint_identity": true,
+    "finite_branch": true,
+    "replays": true,
+    "schema": true,
+    "sealed_hashes": true
+  },
+  "decision": "rotating-wave-root-branch-connected-with-h2400-local-stability-support",
+  "result_sha256": "31bff4d3f1dfbede5060b43622aacd597b79a6f8b67ec09f2119d35759a0669d",
+  "schema": "scalar-memory-rotating-wave-horizon-g1-g3-bridge-audit-v1",
+  "trust_boundary": "record/hash/decimal-relationship audit; not a second interval backend",
+  "verdict": "g1-g3-bridge-independent-audit-agrees"
+}

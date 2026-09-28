@@ -1,52 +1,11 @@
 {
-  "authorization": {
-    "attempt": 2,
-    "authorization_id": "e5ac3f5a-513f-47df-baa0-48a38aff3afc",
-    "ci": {
-      "api_url": "https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/36354118411",
-      "conclusion": "success",
-      "head_sha": "bdc033293b74ce2115a3006d13d1ba749bb3ef93",
-      "run_id": 36354118411,
-      "status": "completed"
-    },
-    "closed_governance_blob": "d686ab5f863797f2e2be0c48940413ff945446be",
-    "dependencies": {
-      "mpmath": "1.3.0",
-      "numpy": "2.3.5",
-      "python": "3.12",
-      "scipy": "1.17.1"
-    },
-    "implementation_revision": "bdc033293b74ce2115a3006d13d1ba749bb3ef93",
-    "protected_blobs": {
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_execution.py": "182e6e57874f9038f26a69780a4f60b816b5ea12",
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_gate.py": "73ac3541b71028fbdd8273669ce0c192aba55c3b",
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_audit.py": "91d5b889db86f725d0f327034b893ca3aa9d634a",
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_schema_v2.json": "078bab40cf4cac32c030bfee4af2d66dcc50835d",
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py": "56e0c525df4910f78ab14793368b4ce92f176519",
-      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_result_audit.py": "cbb7614cdfd5a2adcd423c1a8f6ec5d85e0b684d",
-      "reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_g1_g3_bridge_protocol_2026-09-27.md": "2a6f0988240fe625a26ef72d42d40a7a4840f940",
-      "requirements.txt": "257723e469e56d5e1db0efcaff57c26e71a9ebf5",
-      "src/emergenz_knoten/rotating_wave.py": "3b70f408ab8bb24e7cc6df4b9c61f54f17a65a4d",
-      "src/emergenz_knoten/rotating_wave_dense_continuation.py": "26043400e721855dc47c512bc36524555d09b089",
-      "src/emergenz_knoten/rotating_wave_horizon_stability.py": "376f263af4891869a7e81969ca05e11ba86735a5",
-      "src/emergenz_knoten/rotating_wave_interval.py": "e269e729c68c8030a6aae222fb4fa67069dd46fd",
-      "src/emergenz_knoten/rotating_wave_stability.py": "9defb5a6876371202e1ba57cea030c997b9c6edd",
-      "src/emergenz_knoten/rotating_wave_stability_gate.py": "630beb9952abefea823d91388dcbb2de8f1a2927",
-      "src/emergenz_knoten/strict_json_contract.py": "221372ea86f857aa4141e2609e46a0dc536c1ab4",
-      "tests/test_rotating_wave_horizon_g1_g3_bridge.py": "ff03773e768ff97d49c369292f5350254cd7fccf",
-      "tests/test_rotating_wave_horizon_g1_g3_execution.py": "fc3632b4b3d3a182cb9faca8c870cce9dcae9922",
-      "tests/test_rotating_wave_horizon_transfer.py": "6fe72c69c00cbabc02b9f9395cf92b5cbad4cbd0"
-    },
-    "readiness_review_blob": "c825ac53caf8cf1cb39458ef77f78ed88a0a8202",
-    "readiness_review_path": "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_execution_readiness_review_2026-09-27.md",
-    "schema_sha256": "5d2941c438392d9148fc0f8337b652688927a6e48ce7b02f613cd1180d5c0313"
-  },
+  "authorization": null,
   "gate": "G1-G3",
   "protocol_blob": "2a6f0988240fe625a26ef72d42d40a7a4840f940",
-  "reason": "explicit user authorization on 2026-09-28 for exactly one G1-G3 bridge attempt 2",
+  "reason": "attempt 2 completed and published on 2026-09-28 with independently audited local fixed-alpha root-branch connection; one-shot authorization consumed",
   "result_schema_sha256": "5d2941c438392d9148fc0f8337b652688927a6e48ce7b02f613cd1180d5c0313",
   "schema": "scalar-memory-rotating-wave-horizon-g1-g3-governance-v1",
-  "state": "authorized_once",
-  "target_authorized": true,
+  "state": "closed",
+  "target_authorized": false,
   "target_calls_recorded": []
 }

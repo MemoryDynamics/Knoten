@@ -13,7 +13,7 @@ vollstaendige vorherige Stand liegt im
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
 | Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
-| Native Rotation | sechs lokal eindeutige finite-$H$-Roots; G5 besteht direkte Root-, Spektral- und Nichtlinearitaetsgates bei $H=2400$ | lokale numerische Stabilitaet des vorbereiteten Orbits, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
+| Native Rotation | sieben lokal eindeutige finite-$H$-Roots; sechs zertifizierte Homotopiekanten verbinden G5 bei $H=2400$ mit dem lokalen G4-$F_\infty$-Root | lokale Rootast-Verbindung und direkte numerische Stabilitaet bei exakt $H=2400$; keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
@@ -51,10 +51,11 @@ Kreis.
 Der FIFO ist dabei nur eine endliche Alterswarteschlange und schreibt keine
 raeumliche Ringtopologie vor. Krawczyk-Balancen, der kollabierende
 $\eta=0$-Arm und zehn anziehende nichtkreisfoermige P3-Historien widerlegen
-die enge Ringspeicher-Tautologie. Offen bleibt der staerkere Transfer: Die
-registrierte Leiter haelt $H\alpha=12$ fest und zeigt nicht, dass Root und
-Stabilitaet bei festem $\alpha$ den Grenzfall $H\to\infty$ erreichen. Deshalb
-steht vor einer neuen P5-Zielautorisierung ein separates Horizontgate.
+die enge Ringspeicher-Tautologie. Der inzwischen positiv auditierte
+G1--G3-Lauf verbindet bei festem $\alpha=0.01$ sieben lokale finite Roots
+ueber sechs Krawczyk-Homotopiekanten mit dem lokalen $F_\infty$-Root. Das
+schliesst die Rootast-Luecke, zeigt aber nicht, dass die direkte Stabilitaet
+von $H=2400$ den Grenzfall $H\to\infty$ erreicht.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
@@ -120,9 +121,10 @@ praezisionsgebundenen Serialisierungsueberschuss korrigiert. Der separat
 preregistrierte Retry auf Commit `fb1cc7d` besteht anschliessend beide
 strikten 120/160-dps-Tailpanels; ihre Krawczyk-Bilder ueberlappen. Der
 Standardbibliothek-Auditor rekonstruiert alle acht Checks und urteilt
-`g4-independent-audit-agrees`. Damit ist G4 als isolierte lokale
-$F_\infty$-Komponente `pass`. Die G1--G3-Branchverbindung, der
-vollstaendige Horizontlauf und P5-D bleiben nicht belegt.
+`g4-independent-audit-agrees`. Damit war G4 zunaechst nur als isolierte lokale
+$F_\infty$-Komponente `pass`; die G1--G3-Branchverbindung und der
+vollstaendige Horizontlauf waren zu diesem Zwischenstand noch nicht belegt.
+P5-D bleibt weiterhin nicht belegt.
 
 Das anschliessende G4-zu-G5-Meta-Review bestaetigt diese enge Claimgrenze und
 findet keinen neuen kritischen G4-Defekt. Die daraus abgeleiteten
@@ -158,8 +160,8 @@ Publikation und One-shot-Guard sind targetfrei geprueft; die Governance ist
 geschlossen. Der erste offizielle CI-Lauf fand einen plattformabhaengigen
 CRLF-Hash des G4-Audits; die outcome-blinde Remediation bindet nun alle fuenf
 Inputs an kanonische Git-Blobs. Der Folgelauf besteht Ruff, 1194 Tests und
-strikten Docs-Bau. Daher gibt es noch keinen G1--G3-Befund und weiterhin
-keinen $H\to\infty$-Stabilitaetsclaim. Der spaeter autorisierte Attempt 1
+strikten Docs-Bau. Zu diesem Readiness-Zwischenstand gab es noch keinen
+G1--G3-Befund. Der spaeter autorisierte Attempt 1
 erreichte die nachgeschaltete Homotopievalidierung, scheiterte dort aber vor
 Audit und Publikation an einer exakten Mittelpunktforderung fuer eine
 outward-gerundete Box. Nur das exklusive Receipt entstand. Der Versuch ist ein
@@ -173,9 +175,17 @@ Falsifikationstests; neue `attempt_2`-Pfade schuetzen das alte Receipt. Das
 kritische Remediationreview findet keinen Major- oder Critical-Codebefund.
 Der exakte Implementierungscommit besteht 1199 lokale Tests, den CI-genauen
 Ruff-Scope, strict Docs und die offizielle Linux-CI. Das neue Review endet mit
-`g1-g3-implementation-ready-target-closed`. Das ist Methodenreadiness, kein
-G1--G3-Befund; Attempt 2 bleibt bis zu einer neuen ausdruecklichen
-Einmalfreigabe geschlossen.
+`g1-g3-implementation-ready-target-closed`. Der danach einmalig autorisierte
+Attempt 2 publiziert sieben lokal eindeutige 80-/120-dps-Rootpanels, sechs
+vollstaendige 64-Scheiben-Homotopien, direkte Summenreplays, fallende
+outward-rounded Drift und positive gegenseitige Endpunktinklusionen zu G5
+bei $H=2400$ und G4 bei $H=3600$. Alle Gates bestehen; der unabhaengige
+Auditor stimmt zu. Das Ergebnisreview urteilt
+`g1-g3-local-fixed-alpha-root-branch-connected-reviewed-pass`. Zulassbar ist
+damit die lokale Rootast-Verbindung mit direkter Stabilitaetsstuetzung bei
+exakt $H=2400$. Nicht belegt sind $H\to\infty$-Stabilitaet, globale
+Eindeutigkeit, Formation, Interaktion, Spin, Traegheit oder Masse. Die
+Attempt-2-Autorisierung ist verbraucht und Governance wieder geschlossen.
 
 ## P5-D Code-Review und Remediation
 

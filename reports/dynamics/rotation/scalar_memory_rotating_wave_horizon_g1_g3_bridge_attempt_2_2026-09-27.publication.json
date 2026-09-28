@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    {
+      "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.json",
+      "role": "result-json",
+      "sha256": "31bff4d3f1dfbede5060b43622aacd597b79a6f8b67ec09f2119d35759a0669d"
+    },
+    {
+      "path": "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.md",
+      "role": "readable-report",
+      "sha256": "80b6133f50f4c03a39e1b37acef94f8200396e178e6009fab5ff566bc2484f31"
+    },
+    {
+      "path": "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_independent_audit_2026-09-27.json",
+      "role": "independent-audit",
+      "sha256": "f4fdfd5dffa7eb3fc7a7ca17a8b9afdb742c69c815767608a8295bd017cad5a0"
+    }
+  ],
+  "execution_commit": "f9a6fcf45d1e3beeb81fe001be077076e429316b",
+  "protocol_sha256": "68c2ce0d05f26992bdac886af6252c583707a180a828d03ffdaf3a3fbbe0e9b8",
+  "schema": "scalar-memory-rotating-wave-horizon-g1-g3-publication-v1"
+}
