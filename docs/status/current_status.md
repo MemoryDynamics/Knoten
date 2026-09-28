@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-27.
+Stand: 2026-09-28.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -13,7 +13,7 @@ vollstaendige vorherige Stand liegt im
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
 | Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
-| Native Rotation | sieben lokal eindeutige finite-$H$-Roots; sechs zertifizierte Homotopiekanten verbinden G5 bei $H=2400$ mit dem lokalen G4-$F_\infty$-Root | lokale Rootast-Verbindung und direkte numerische Stabilitaet bei exakt $H=2400$; keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
+| Native Rotation | sieben lokal eindeutige finite-$H$-Roots; sechs zertifizierte Homotopiekanten verbinden G5 bei $H=2400$ mit dem endlichen G4-Kopf bei $H=3600$ | lokale finite Rootast-Verbindung und direkte numerische Stabilitaet bei exakt $H=2400$; separater lokaler $F_\infty$-Root, aber kein letzter Branchtransfer, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
@@ -53,9 +53,18 @@ raeumliche Ringtopologie vor. Krawczyk-Balancen, der kollabierende
 $\eta=0$-Arm und zehn anziehende nichtkreisfoermige P3-Historien widerlegen
 die enge Ringspeicher-Tautologie. Der inzwischen positiv auditierte
 G1--G3-Lauf verbindet bei festem $\alpha=0.01$ sieben lokale finite Roots
-ueber sechs Krawczyk-Homotopiekanten mit dem lokalen $F_\infty$-Root. Das
-schliesst die Rootast-Luecke, zeigt aber nicht, dass die direkte Stabilitaet
+ueber sechs Krawczyk-Homotopiekanten bis zum endlichen G4-$H=3600$-Kopf.
+G4 zertifiziert separat einen lokalen $F_\infty$-Root in derselben kleinen
+Umgebung; ohne Homotopie $F_{3600}\to F_\infty$ bleibt dieser letzte
+Branchtransfer offen. Ebenso ist nicht gezeigt, dass die direkte Stabilitaet
 von $H=2400$ den Grenzfall $H\to\infty$ erreicht.
+
+Das abschliessende Metareview vor Paper I urteilt deshalb
+`finite-branch-paper-i-ready-with-explicit-infinity-gap`. Es fand keinen
+Critical- oder Major-Implementierungsbefund, korrigierte aber vor der
+Manuskriptarbeit den Major-Dokumentationsbefund, der den endlichen
+$H=3600$-Endpunkt zu weitgehend mit dem separaten $F_\infty$-Root
+identifiziert hatte.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

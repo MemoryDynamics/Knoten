@@ -61,7 +61,7 @@ nicht ausgewertet.
 | Erzeugt die FIFO-Struktur den Kreis tautologisch? | Nein. Sie ordnet Alter; der Kreis folgt nur aus Kraftbalance und Dynamik. | finite-$H$-Audit, Rootzertifikat und Kontrollen |
 | Wie hoch ist der KnotScore des Rotating-wave-FIFO? | Nicht erhoben und derzeit nicht entscheidungsfaehig. | gepaarte Formation aus nichtkreisfoermigen Starts plus `eta_zero`, Stationaritaet und vorregistrierte Scorecard |
 | Ist der finite Kreis ein gebildeter Knoten? | Fuer zehn vorbereitete Nichtkreis-Arme gibt es endliche Attractionsevidenz, aber keinen offenen Basin- oder generischen Formationsbeweis. | eigenstaendiges Formation-/Basin-Protokoll |
-| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G1--G3 verbindet die lokale finite Leiter mit dem G4-$F_\infty$-Root und zeigt fallende Drift; Stabilitaet ist direkt nur bei $H=2400$ belegt. | zweiter Intervallbackend und eigener Stabilitaetsgrenztransfer |
+| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G1--G3 verbindet die finite Leiter bis zum G4-$H=3600$-Kopf und zeigt fallende Drift; G4 belegt separat einen lokalen $F_\infty$-Root in derselben kleinen Umgebung. | Homotopie $F_{3600}\to F_\infty$, zweiter Intervallbackend und eigener Stabilitaetsgrenztransfer |
 | Besitzt das System eine interne $S^1$-Phase oder Spin? | Nicht gezeigt; die bisherige Bahn ist eine raeumliche $SO(2)$-Gruppenbahn. | interne Observable nach Quotientierung der Raumrotation |
 | Ist $\mu$ physikalische Masse? | Nur eine effektive positive Center-Port-Darstellung ist belegt. | mikroskopischer Aktuator, Portinvarianz und Einheitenkalibrierung |
 | Gibt es Knoteninteraktion? | P5-D ist technisch `inconclusive`. | erst abgeschlossene Remediation, dann separat autorisierter Lauf |

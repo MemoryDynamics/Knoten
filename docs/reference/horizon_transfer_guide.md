@@ -1,6 +1,6 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-27, nach targetfreier G1--G3-Brueckenimplementierung.
+Stand: 2026-09-28, nach auditiertem G1--G3-Attempt 2 und Metareview.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite
@@ -217,26 +217,28 @@ getrackte Governance bleibt geschlossen und kein Zielzugriff ist autorisiert.
 ## 8. Wie Befunde gelesen werden muessen
 
 Ein isolierter G4-Pass stuetzt nur: In der registrierten lokalen Box existiert
-unter den Tailbounds ein Root von $F_\infty$. Erst G1 bis G3 verbinden diesen
-Root mit der endlichen Anchor-Leiter. Erst G5 fuegt lokale dynamische
-Stabilitaet hinzu. G6 kontrolliert die Speicherimplementierung.
+unter den Tailbounds ein Root von $F_\infty$. G1 bis G3 verbinden die
+endliche Anchor-Leiter mit dem endlichen G4-Kopf bei $H=3600$, aber noch
+nicht durch eine weitere Homotopie mit dem separaten $F_\infty$-Root. G5
+fuegt am identischen endlichen $H=2400$-Root lokale dynamische Stabilitaet
+hinzu. G6 kontrolliert die Speicherimplementierung.
 
 Der separat preregistrierte Retry vom 2026-09-13 hat diesen isolierten G4-Test
 mit zwei strikten, ueberlappenden 120/160-dps-Panels bestanden; der getrennte
 Recordaudit stimmt zu. Die staerkeren Aussagen bleiben deshalb weiterhin an
 die jeweils nachgelagerten Gates gebunden.
 
-Die nun implementierte G1--G3-Bruecke berechnet diese isolierten Komponenten
-nicht erneut. Sie hasht deren fuenf versiegelte Resultat-, Manifest- und
-Auditinputs und verlangt bei $H=2400$ sowie $H=3600$ gegenseitige
+Die ausgefuehrte G1--G3-Bruecke berechnet diese isolierten Komponenten nicht
+erneut. Sie hasht deren fuenf versiegelte Resultat-, Manifest- und Auditinputs
+und verlangt bei $H=2400$ sowie $H=3600$ gegenseitige
 Krawczyk-Inklusionen: Beide neuen Innenbilder muessen in der alten
 Eindeutigkeitsbox liegen und das alte Innenbild in beiden neuen
-Eindeutigkeitsboxen. Dazwischen muessen alle finite Rootpanels und 64er-
-Homotopieroehren bestehen; G3 wird aus den outward-gerundeten
-Innenintervallen rekonstruiert. Vertrag, direkter 70-dps-Summenreplay,
-FIFO-Kontrollen, Standardbibliotheksaudit, Manifest-last-Publikation und
-One-shot-Guard sind targetfrei geprueft. Die Governance ist geschlossen: Es
-gibt noch kein numerisches G1--G3-Ergebnis.
+Eindeutigkeitsboxen. Dazwischen bestehen im positiven Attempt 2 alle sieben
+finite Rootpanels, sechs 64er-Homotopieroehren und alle erforderlichen
+Nachbarueberlappungen; G3 wurde aus den outward-gerundeten Innenintervallen
+rekonstruiert. Vertrag, direkter 70-dps-Summenreplay, FIFO-Kontrollen,
+Standardbibliotheksaudit, Manifest-last-Publikation und One-shot-Guard sind
+geprueft. Die Governance ist nach dem verbrauchten Lauf wieder geschlossen.
 
 Keine Kombination dieser Gates beweist fuer sich physikalische Masse,
 internen Spin, generische Knotenbildung oder Knoteninteraktion. Diese Claims

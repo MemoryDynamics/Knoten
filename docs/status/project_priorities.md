@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-27.
+Stand: 2026-09-28.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -48,9 +48,13 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 G4, G5 und die verbindende G1--G3-Leiter sind positiv und unabhaengig
 auditiert. Attempt 2 verbindet bei festem $\alpha=0.01$ alle sieben lokalen
-Rootpanels, sechs Homotopiekanten und beide versiegelten Endpunkte; direkte
-Stabilitaetsevidenz bleibt auf exakt $H=2400$ begrenzt. Governance ist nach
-dem verbrauchten Lauf wieder geschlossen. Der aktuelle Haltepunkt ist die
-Paper-I-Konsolidierung mit dieser engen Claimgrenze. Der methodische Stand
-und die Evidenzgrenzen stehen im
+finite Rootpanels, sechs Homotopiekanten und die versiegelten endlichen
+G5-/G4-Endpunkte bei $H=2400/3600$; direkte Stabilitaetsevidenz bleibt auf
+exakt $H=2400$ begrenzt. G4 zertifiziert separat einen lokalen
+$F_\infty$-Root, aber noch keinen Transfer $F_{3600}\to F_\infty$.
+Governance ist nach dem verbrauchten Lauf wieder geschlossen. Das
+abschliessende Metareview urteilt
+`finite-branch-paper-i-ready-with-explicit-infinity-gap`. Der aktuelle
+Haltepunkt ist die Paper-I-Konsolidierung mit dieser engen Claimgrenze. Der
+methodische Stand und die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

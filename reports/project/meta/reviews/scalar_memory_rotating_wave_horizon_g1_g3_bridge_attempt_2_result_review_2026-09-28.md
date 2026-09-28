@@ -54,16 +54,21 @@ interpretiert.
 
 ## Kritische Einordnung
 
-Der positive Befund schliesst die bislang offene logische Luecke zwischen den
+Der positive Befund schliesst die finite logische Luecke zwischen den
 isolierten Komponenten: Innerhalb der registrierten lokalen Boxen und des
 gemeinsamen Intervall-Vertrauenskerns gehoeren die finite Rootleiter, der
-direkt stabilitaetsgepruefte Root bei exakt $H=2400$ und der lokale
-$F_\infty$-Root zur selben zertifizierten Rootfamilie.
+direkt stabilitaetsgepruefte Root bei exakt $H=2400$ und der finite
+$H=3600$-Kopf der G4-Komponente zur selben zertifizierten Rootfamilie.
 
-Das ist staerker als blosse Koordinatennaehe. Die Astidentitaet beruht auf
-strikten Krawczyk-Einschluessen jeder Homotopiescheibe, Nachbarueberlappungen
-und gegenseitigen Endpunktinklusionen. Die fallende Drift liefert zusaetzliche
-Skalierungsevidenz, ist aber allein kein Grenzwertbeweis.
+Das ist staerker als blosse Koordinatennaehe. Die finite Astidentitaet beruht
+auf strikten Krawczyk-Einschluessen jeder Homotopiescheibe,
+Nachbarueberlappungen und gegenseitigen Endpunktinklusionen. G4 zertifiziert
+getrennt einen lokalen $F_\infty$-Root in einer kleinen Box um denselben
+$H=3600$-Mittelpunkt. Da G4 aber keine Homotopie
+$F_{3600}\to F_\infty$ enthaelt, folgt daraus keine zertifizierte
+Astidentitaet zwischen den beiden verschiedenen Gleichungen. Die fallende
+Drift liefert starke zusaetzliche Skalierungsevidenz, ist aber allein kein
+Grenzwertbeweis.
 
 Folgende Einschraenkungen bleiben wesentlich:
 
@@ -75,8 +80,10 @@ Folgende Einschraenkungen bleiben wesentlich:
    kein zweiter Intervallbackend.
 3. Die direkte Stabilitaetsevidenz stammt weiterhin nur von exakt $H=2400$
    und ist kein Intervallbeweis des vollstaendigen Spektrums.
-4. Der G4-Endpunkt ist ein lokaler $F_\infty$-Rootbeweis, kein
-   $H\to\infty$-Stabilitaetsbeweis.
+4. Der neue H3600-Endpunktlink bindet den endlichen G4-Root. Der getrennte
+   lokale $F_\infty$-Rootbeweis verwendet denselben Mittelpunkt, beweist aber
+   ohne eine weitere Homotopie keinen letzten Branchtransfer
+   $F_{3600}\to F_\infty$ und keine $H\to\infty$-Stabilitaet.
 5. G6 bestaetigt Implementierungssemantik. Exakte Nullfehler in diesen
    deterministischen Vergleichsarmen sind keine physikalische Evidenz.
 6. Der Lauf beweist weder globale Eindeutigkeit oder einen offenen Basin,
@@ -108,9 +115,10 @@ Zulaessig ist:
 
 > Bei festem $\alpha=0.01$ verbindet eine lokal Krawczyk-zertifizierte,
 > preregistrierte finite Horizontleiter den direkt stabilitaetsgeprueften
-> $H=2400$-Root mit dem lokalen $F_\infty$-Root; die zertifizierte Drift
-> faellt auf der letzten gemessenen Stufe deutlich und alle registrierten
-> Implementierungskontrollen bestehen.
+> $H=2400$-Root mit dem endlichen $H=3600$-Kopf der G4-Komponente; die
+> zertifizierte Drift faellt auf der letzten gemessenen Stufe deutlich. G4
+> liefert separat einen lokalen $F_\infty$-Existenzbeleg in derselben kleinen
+> Umgebung, aber keinen zertifizierten letzten Branchtransfer.
 
 Nicht zulaessig bleibt insbesondere:
 

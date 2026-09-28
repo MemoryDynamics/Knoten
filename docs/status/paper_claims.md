@@ -43,7 +43,8 @@ Als technischer Spin-off ist inzwischen enger tragbar:
 - eine preregistrierte lokale fixed-$\alpha$-Rootast-Verbindung ueber sieben
   finite Horizonte von $H=600$ bis $H=3600$, sechs vollstaendige
   Krawczyk-Homotopiekanten und gegenseitige Endpunktinklusionen zur direkten
-  G5-Stabilitaetszelle bei $H=2400$ und zum lokalen G4-$F_\infty$-Root;
+  G5-Stabilitaetszelle bei $H=2400$ sowie zum endlichen $H=3600$-Kopf der
+  G4-Komponente;
 - lokale numerische Stabilitaetsevidenz am vorbereiteten Anchor und an der
   prospektiv gewaehlten feineren L3-Zelle sowie einen vorregistrierten
   direkten $H=2400$-Pass desselben Grundgleichungsasts mit zwei
@@ -69,7 +70,8 @@ ein offener Basin-Ball, generische oder spontane Formation, internes S1 nach
 Traegheitsgesetz, physische Arbeit oder Masse. Der
 Foundation-Audit, prospektives L5-Review sowie die separaten kritischen L3-,
 P2-, P2-R-, P3- und G1--G3-Reviews sind die reviewertragenden Quellen. Ein
-zweiter Intervallbackend, ein Stabilitaetsgrenztransfer von $H=2400$ nach
+zweiter Intervallbackend, der letzte zertifizierte Rootasttransfer
+$F_{3600}\to F_\infty$, ein Stabilitaetsgrenztransfer von $H=2400$ nach
 $H\to\infty$ und eine vollstaendige Spektraleinschliessung fehlen. Das
 interne Source-Referee-Audit
 urteilt deshalb nur
@@ -88,7 +90,7 @@ der kanonischen Gate-Folge in den
 | Freigabe | Nach einem dokumentierten Pass zusaetzlich tragbar | Weiterhin gesperrt |
 | --- | --- | --- |
 | P1/G5 lokale finite-H-Stabilitaet -- reviewed Pass | lokale numerische Stabilitaetsevidenz an der deklarierten L3-Zelle sowie bei exakt `H=2400` zwei uebereinstimmende Largest-modulus-Arnoldi-Panels mit fuehrendem transversalen Betrag `0.9930442` und drei kontrahierende nichtlineare Voll-FIFO-Stoerungsarme | kein vollstaendiger Intervallspektralbeweis, keine stabile Familie, $H\to\infty$-Stabilitaet, Formation oder Interaktion |
-| G1--G3 fixed-$\alpha$-Horizontbruecke -- reviewed Pass | lokal Krawczyk-zertifizierte Rootast-Verbindung ueber $H=(600,900,1200,1500,1800,2400,3600)$ mit sechs Homotopiekanten, fallender zertifizierter Drift und Endpunktidentitaet zum G5-$H=2400$-Root und lokalen G4-$F_\infty$-Root | kein zweiter Intervallbackend, kein Stabilitaetsgrenztransfer, keine globale Eindeutigkeit, Formation, Interaktion, interne Phase, Spin, Traegheit oder Masse |
+| G1--G3 fixed-$\alpha$-Horizontbruecke -- reviewed Pass | lokal Krawczyk-zertifizierte Rootast-Verbindung ueber $H=(600,900,1200,1500,1800,2400,3600)$ mit sechs Homotopiekanten, fallender zertifizierter Drift und Endpunktidentitaet zum G5-$H=2400$-Root sowie endlichen G4-$H=3600$-Root | kein zweiter Intervallbackend, kein zertifizierter Transfer $F_{3600}\to F_\infty$, kein Stabilitaetsgrenztransfer, keine globale Eindeutigkeit, Formation, Interaktion, interne Phase, Spin, Traegheit oder Masse |
 | P2 Loop--Center plus P2-R-Reconciliation | gemeinsame, phasenkovariante Loop-/Center-Reduktion am selben vorbereiteten Kandidaten, matrixwertige effektive Kleinsignalantwort und aufgeloeste Rueckkehr unter dem deklarierten schwachen Port | unabhaengige Replikation, skalares Massengesetz, mikroskopischer Aktuator, physische Arbeit oder Masse |
 | P3 Formation/Basin -- reviewed Pass | finite-ensemble attraction fuer fuenf registrierte nichtkreisfoermige Historiengeometrien in beiden gesetzten Chiralitaeten; zwei Geometrien verwenden weder Zielradius noch Zielwinkel | offener Basin-Ball oder -Volumen, generische/spontane Formation, Chiralitaetsselektion aus symmetrischen Daten und Rauschrobustheit |
 | P4 reziproke Single-Loop-Mechanik -- reviewed Fail | kein neuer Mechanikclaim: nur als negativer/diagnostischer Befund berichten, dass der explizit konstruierte Source-/Write-Port seinen finite-H-Write-/Age-Ledger schliesst, waehrend das registrierte Gesamtgate formal scheitert und 24/24 Arme eine chirality-odd Querantwort oberhalb der Grenze zeigen | operationaler Single-Loop-Mechanikpass, direkter P5-Targetzugriff, skalares Massengesetz, materieller Schwerpunkt, konservierter Impuls, intrinsischer Spin oder physische Masse; der spaetere P4-R-Pass benennt diesen Fail nicht um |
