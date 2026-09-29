@@ -1,0 +1,176 @@
+{
+  "arrays": {
+    "artifact_rows": {"item": "object:artifact", "length": 2},
+    "bounds_rows": {"item": "object:tail_bound", "length": 2},
+    "decimal_matrix_2": {"item": "array:decimal_pair", "length": 2},
+    "decimal_pair": {"item": "decimal", "length": 2},
+    "images_2": {"item": "array:decimal_matrix_2", "length": 2},
+    "interval_matrix_2": {"item": "array:interval_row_2", "length": 2},
+    "interval_row_2": {"item": "array:decimal_pair", "length": 2},
+    "panels": {"item": "nullable:object:panel", "length": 2},
+    "precisions": {"item": "enum:precision", "length": 2},
+    "root_boxes_2": {"item": "object:root_box", "length": 2},
+    "sealed_files": {"item": "object:sealed_file", "length": 6}
+  },
+  "constants": {
+    "claim_boundary": "local uniform root-branch continuation from finite H=3600 to F_infinity under registered tail bounds and mpmath.iv; no H-infinity stability, global uniqueness, formation, interaction, spin, inertia or mass",
+    "contract_version": 1,
+    "finite_endpoint": "F_3600",
+    "homotopy_family": "F_s=F_3600+s*T_3600",
+    "infinite_endpoint": "F_infinity",
+    "parameters": {
+      "alpha": 0.01,
+      "amplitude_att": 3.5,
+      "amplitude_rep": 1.0,
+      "eta": 0.15,
+      "horizon": 3600,
+      "memory_mass": 1.0,
+      "q": 0.99,
+      "sigma_att": 3.0,
+      "sigma_rep": 1.0
+    },
+    "payload_schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-v1",
+    "precisions": [120, 160],
+    "protocol_blob": "adf008c12cd698d61ac22f8edbd62d7e6771ac1b",
+    "protocol_sha256": "4bba4b87b805e5d7238092782f59431b2e6e3cf4f7bf7115add8cacf4fe61be2",
+    "scale_interval": ["0", "1"]
+  },
+  "enums": {
+    "artifact_role": ["result-json", "readable-report"],
+    "decision": [
+      "g-infinity-branch-link-inconclusive",
+      "g-infinity-uniform-tail-branch-link-pass"
+    ],
+    "gate_state": ["pass", "inconclusive"],
+    "precision": [120, 160],
+    "sealed_role": [
+      "g1-g3-result",
+      "g1-g3-manifest",
+      "g1-g3-audit",
+      "g4-result",
+      "g4-manifest",
+      "g4-audit"
+    ]
+  },
+  "objects": {
+    "artifact": {
+      "path": "string",
+      "role": "enum:artifact_role"
+    },
+    "authorization": {
+      "authorization_id": "uuid4",
+      "ci_run_id": "integer",
+      "governance_sha256": "sha256",
+      "implementation_revision": "sha1",
+      "receipt_path": "string",
+      "receipt_sha256": "sha256",
+      "upstream_revision": "sha1"
+    },
+    "classification": {
+      "claim_boundary": "const:claim_boundary",
+      "decision": "enum:decision",
+      "gates": "object:gates"
+    },
+    "endpoint_binding": {
+      "bridge_endpoint_pass": "boolean",
+      "bridge_root_matches_g4": "boolean",
+      "finite_root_in_uniform_box": "boolean",
+      "g4_tail_boxes_match_uniform": "boolean",
+      "g4_tail_images_in_uniform_box": "boolean",
+      "pass": "boolean"
+    },
+    "gates": {
+      "U0": "enum:gate_state",
+      "U1": "enum:gate_state",
+      "U2": "enum:gate_state",
+      "U3": "enum:gate_state",
+      "U4": "enum:gate_state",
+      "U5": "enum:gate_state"
+    },
+    "homotopy": {
+      "endpoint_binding": "object:endpoint_binding",
+      "intersection": "nullable:object:root_box",
+      "overlap": "boolean",
+      "panels": "array:panels"
+    },
+    "identity": {
+      "authorization": "object:authorization",
+      "created_utc": "string",
+      "execution_commit": "sha1",
+      "parameters": "const:parameters",
+      "protocol_blob": "const:protocol_blob",
+      "protocol_sha256": "const:protocol_sha256",
+      "schema": "const:payload_schema",
+      "version": "const:contract_version"
+    },
+    "model_identity": {
+      "finite_endpoint": "const:finite_endpoint",
+      "homotopy_family": "const:homotopy_family",
+      "infinite_endpoint": "const:infinite_endpoint",
+      "scale_interval": "const:scale_interval",
+      "tail_bounds_replayed": "boolean"
+    },
+    "panel": {
+      "box": "object:root_box",
+      "center": "array:decimal_pair",
+      "gates": "object:panel_gates",
+      "inverse_point_jacobian": "array:decimal_matrix_2",
+      "jacobian_box": "array:interval_matrix_2",
+      "krawczyk_image": "array:decimal_matrix_2",
+      "pass": "boolean",
+      "precision_dps": "enum:precision",
+      "preconditioned_jacobian_defect": "array:interval_matrix_2",
+      "regularity_infinity_norm_upper": "decimal",
+      "regularity_row_sum_bounds": "array:decimal_matrix_2",
+      "scale_interval": "const:scale_interval",
+      "tail_bounds": "object:tail_bound"
+    },
+    "panel_gates": {
+      "function_box_contains_zero": "boolean",
+      "inverse_nonsingular": "boolean",
+      "krawczyk_strict_interior": "boolean",
+      "physical_domain": "boolean",
+      "uniform_regularity": "boolean"
+    },
+    "payload": {
+      "classification": "object:classification",
+      "homotopy": "object:homotopy",
+      "identity": "object:identity",
+      "model_identity": "object:model_identity",
+      "publication": "object:publication",
+      "sealed_inputs": "object:sealed_inputs"
+    },
+    "publication": {
+      "artifacts": "array:artifact_rows",
+      "auditor_output_path": "string",
+      "manifest_path": "string",
+      "manifest_published_last": "boolean"
+    },
+    "root_box": {
+      "radius": "array:decimal_pair",
+      "theta": "array:decimal_pair"
+    },
+    "sealed_file": {
+      "path": "string",
+      "role": "enum:sealed_role",
+      "sha256": "sha256"
+    },
+    "sealed_inputs": {
+      "bridge_endpoint_pass": "boolean",
+      "bridge_root": "array:decimal_pair",
+      "files": "array:sealed_files",
+      "g4_finite_root": "array:decimal_pair",
+      "g4_tail_boxes": "array:root_boxes_2",
+      "g4_tail_images": "array:images_2",
+      "tail_bounds": "array:bounds_rows"
+    },
+    "tail_bound": {
+      "jacobian_radius_bound": "decimal",
+      "jacobian_theta_bound": "decimal",
+      "precision_dps": "enum:precision",
+      "residual_bound": "decimal"
+    }
+  },
+  "root": "object:payload",
+  "schema": "strict-json-contract-v1"
+}

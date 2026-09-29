@@ -845,3 +845,208 @@ def certify_rotating_wave_tail_box(
         }
     finally:
         iv.dps = previous_iv_dps
+
+
+def certify_rotating_wave_tail_homotopy_box(
+    *,
+    radius: str,
+    theta: str,
+    radius_half_width: str,
+    theta_half_width: str,
+    tail_scale_interval: tuple[str, str],
+    parameters: IntervalRotatingWaveParameters,
+    residual_tail_bound: str,
+    jacobian_radius_tail_bound: str,
+    jacobian_theta_tail_bound: str,
+    precision_dps: int,
+) -> dict[str, Any]:
+    """Certify one box uniformly along a scaled infinite-tail homotopy.
+
+    The exact family is ``F_s = F_H + s T_H``.  The supplied tail bounds
+    enclose ``T_H`` and its two Jacobian columns on the whole box.  Since the
+    registered scale interval is nonnegative, multiplying the symmetric
+    tail enclosures by it safely contains every member of the family.
+
+    In addition to strict Krawczyk inclusion, the result records the
+    infinity-norm upper bound of ``I - Y D F_s(X)``.  A value below one makes
+    the uniform regularity/uniqueness premise explicit for continuation.
+    """
+
+    if type(precision_dps) is not int or precision_dps < 50:
+        raise ValueError("precision_dps must be an integer of at least 50")
+    scale_interval = _ordered_decimal_interval(
+        tail_scale_interval,
+        name="tail_scale_interval",
+        precision_dps=precision_dps,
+    )
+    with mp.workdps(precision_dps):
+        scale_lower, scale_upper = (mp.mpf(value) for value in scale_interval)
+        if scale_lower < 0 or scale_upper > 1:
+            raise ValueError("tail_scale_interval must lie in [0, 1]")
+        decimal_values = (
+            ("radius", radius, False),
+            ("theta", theta, False),
+            ("radius_half_width", radius_half_width, True),
+            ("theta_half_width", theta_half_width, True),
+            ("residual_tail_bound", residual_tail_bound, False),
+            ("jacobian_radius_tail_bound", jacobian_radius_tail_bound, False),
+            ("jacobian_theta_tail_bound", jacobian_theta_tail_bound, False),
+        )
+        for name, value, strictly_positive in decimal_values:
+            if type(value) is not str:
+                raise TypeError(f"{name} must be a decimal string")
+            numeric = mp.mpf(value)
+            if not mp.isfinite(numeric) or numeric < 0:
+                raise ValueError(f"{name} must be nonnegative and finite")
+            if strictly_positive and numeric == 0:
+                raise ValueError(f"{name} must be positive")
+
+    previous_iv_dps = iv.dps
+    iv.dps = precision_dps
+    try:
+        center = (iv.mpf(radius), iv.mpf(theta))
+        box = (
+            center[0] + iv.mpf([f"-{radius_half_width}", radius_half_width]),
+            center[1] + iv.mpf([f"-{theta_half_width}", theta_half_width]),
+        )
+        scale_box = iv.mpf(list(scale_interval))
+        finite_center, _, _ = _balance_and_jacobian(
+            iv, center[0], center[1], parameters
+        )
+        finite_box, finite_jacobian_box, _ = _balance_and_jacobian(
+            iv, box[0], box[1], parameters
+        )
+        residual_uncertainty = iv.mpf(
+            [f"-{residual_tail_bound}", residual_tail_bound]
+        )
+        column_uncertainties = (
+            iv.mpf(
+                [f"-{jacobian_radius_tail_bound}", jacobian_radius_tail_bound]
+            ),
+            iv.mpf(
+                [f"-{jacobian_theta_tail_bound}", jacobian_theta_tail_bound]
+            ),
+        )
+        function_at_center = tuple(
+            value + scale_box * residual_uncertainty for value in finite_center
+        )
+        function_box = tuple(
+            value + scale_box * residual_uncertainty for value in finite_box
+        )
+        jacobian_box = tuple(
+            tuple(
+                finite_jacobian_box[row][column]
+                + scale_box * column_uncertainties[column]
+                for column in range(2)
+            )
+            for row in range(2)
+        )
+
+        with mp.workdps(precision_dps):
+            _, point_jacobian, _ = _balance_and_jacobian(
+                mp, mp.mpf(radius), mp.mpf(theta), parameters
+            )
+            inverse_strings = _inverse_jacobian_strings(
+                point_jacobian,
+                precision_dps=precision_dps,
+                singular_message="finite point Jacobian is singular",
+            )
+        inverse = tuple(
+            tuple(iv.mpf(value) for value in row) for row in inverse_strings
+        )
+        inverse_determinant = (
+            inverse[0][0] * inverse[1][1] - inverse[0][1] * inverse[1][0]
+        )
+        defect = tuple(
+            tuple(
+                iv.mpf(1 if row == column else 0)
+                - sum(
+                    (
+                        inverse[row][inner] * jacobian_box[inner][column]
+                        for inner in range(2)
+                    ),
+                    iv.mpf(0),
+                )
+                for column in range(2)
+            )
+            for row in range(2)
+        )
+        defect_row_sums = tuple(
+            sum((abs(value) for value in row), iv.mpf(0)) for row in defect
+        )
+        with mp.workdps(precision_dps):
+            defect_upper = max(
+                mp.make_mpf(value._mpi_[1]) for value in defect_row_sums
+            )
+        image = krawczyk_image(
+            center=center,
+            box=box,
+            function_at_center=function_at_center,
+            jacobian_box=jacobian_box,
+            inverse_point_jacobian=inverse,
+        )
+        gates = {
+            "physical_domain": bool(
+                _strictly_positive(box[0])
+                and _strictly_positive(box[1])
+                and libmp.mpf_lt(box[1]._mpi_[1], iv.pi._mpi_[0])
+            ),
+            "inverse_nonsingular": not _contains_zero(inverse_determinant),
+            "function_box_contains_zero": all(
+                _contains_zero(value) for value in function_box
+            ),
+            "krawczyk_strict_interior": all(
+                _strict_subset(image[index], box[index]) for index in range(2)
+            ),
+            "uniform_regularity": bool(defect_upper < 1),
+        }
+        digits = precision_dps + 8
+        return {
+            "precision_dps": precision_dps,
+            "tail_scale_interval": list(scale_interval),
+            "center": {"radius": radius, "theta": theta},
+            "half_width": {
+                "radius": radius_half_width,
+                "theta": theta_half_width,
+            },
+            "tail_bounds": {
+                "residual": residual_tail_bound,
+                "jacobian_radius": jacobian_radius_tail_bound,
+                "jacobian_theta": jacobian_theta_tail_bound,
+            },
+            "box": [_interval_record(value, digits) for value in box],
+            "finite_function_at_center": [
+                _interval_record(value, digits) for value in finite_center
+            ],
+            "function_at_center": [
+                _interval_record(value, digits) for value in function_at_center
+            ],
+            "function_box": [
+                _interval_record(value, digits) for value in function_box
+            ],
+            "finite_jacobian_box": [
+                [_interval_record(value, digits) for value in row]
+                for row in finite_jacobian_box
+            ],
+            "jacobian_box": [
+                [_interval_record(value, digits) for value in row]
+                for row in jacobian_box
+            ],
+            "inverse_point_jacobian": [list(row) for row in inverse_strings],
+            "inverse_determinant": _interval_record(inverse_determinant, digits),
+            "preconditioned_jacobian_defect": [
+                [_interval_record(value, digits) for value in row]
+                for row in defect
+            ],
+            "regularity_row_sum_bounds": [
+                _interval_record(value, digits) for value in defect_row_sums
+            ],
+            "regularity_infinity_norm_upper": mp.nstr(defect_upper, digits),
+            "krawczyk_image": [
+                _interval_record(value, digits) for value in image
+            ],
+            "gates": gates,
+            "pass": all(gates.values()),
+        }
+    finally:
+        iv.dps = previous_iv_dps

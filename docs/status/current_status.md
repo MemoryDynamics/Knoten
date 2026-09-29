@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-28.
+Stand: 2026-09-29.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -65,6 +65,20 @@ Critical- oder Major-Implementierungsbefund, korrigierte aber vor der
 Manuskriptarbeit den Major-Dokumentationsbefund, der den endlichen
 $H=3600$-Endpunkt zu weitgehend mit dem separaten $F_\infty$-Root
 identifiziert hatte.
+
+Die Unendlichkeits-Astluecke ist inzwischen als eigener harter Ein-Box-Test
+prospektiv spezifiziert. Die targetfreie Implementierung bildet
+$F_s=F_{3600}+sT_{3600}$ auf $s\in[0,1]$ direkt ab und verlangt neben zwei
+strikten 120-/160-dps-Krawczyk-Panels eine uniforme Schranke
+$\sup\|I-YD F_s(X)\|_\infty<1$. Validator und getrennter
+Standardbibliotheksauditor extrahieren die G1--G3-/G4-Endpoints erneut aus
+sechs fest gehashten Git-Blobs. Zwei im Review gefundene Vertragsfehler bei
+Snapshot-Rueckbindung und Decimal-Kontext sind vor einem Ziellauf behoben.
+27 neue Tests, der relevante 284-Test-Horizontverbund und die vollstaendige
+1226-Test-Repository-Matrix bestehen; das Urteil lautet
+`g-infinity-branch-link-contract-implementation-pass-target-closed`.
+Governance bleibt geschlossen, offizielle CI und Execution-Readiness stehen
+noch aus, und es gibt weiterhin keinen Branch-Link-Resultatclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
