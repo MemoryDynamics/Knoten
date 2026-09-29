@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-28.
+Stand: 2026-09-29.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -18,27 +18,32 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Paper I konsolidieren.** Modellkern, skalare Evidenz,
+1. **Unendlichkeits-Astluecke schliessen.** Den natuerlichen Tail-Link
+   $F_s=F_{3600}+sT_{3600}$ als uniformes Krawczyk-/Regularitaetsgate
+   targetfrei implementieren, adversarial testen und reviewen. Erst eine
+   spaetere explizite Einmalfreigabe darf den neuen Zertifikatsrecord
+   erzeugen. Dies ist kein $H\to\infty$-Stabilitaetsgate.
+2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
    kontrolliert belegte Existenz-, Stabilitaets-, Skalierungs- und
    Center-Port-Aussagen; interne Phase, physikalische Masse und Interaktion
    bleiben getrennte Hypothesen.
-2. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 1.** Festlegen,
+3. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 2.** Festlegen,
    ob Paper I ueberhaupt einen Formationsclaim benoetigt. Erst dann darf ein
    gepaartes Formation-/KnotScore-Protokoll fuer den Rotating-wave-FIFO
    entstehen. Ein Score auf einer vorbereiteten exakten Kreisgeschichte ohne
    `eta_zero`- und Formationskontrolle waere nicht entscheidend und wird nicht
    nachgetragen.
-3. **Zertifikats- und Release-Hardening -- parallel zu 1/2.** Einen
+4. **Zertifikats- und Release-Hardening -- parallel zu 1--3.** Einen
    zweiten unabhaengigen Intervallbackend, reproduzierbare Dependency-Hashes,
    `CITATION.cff` und eine zitierbare Release vorbereiten. Diese Punkte
    erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
-4. **Interaktionsprogramm neu autorisieren -- nach Paper-I-Claimreview.** P5-D bleibt
+5. **Interaktionsprogramm neu autorisieren -- nach Paper-I-Claimreview.** P5-D bleibt
    `inconclusive`. Ein weiterer Ziellauf braucht ein separates
    outcome-blindes Protokoll, eine neue explizite Freigabe und einen sauberen
    Readiness-Commit. Vorher ist nur targetfreie Methodenarbeit erlaubt.
-5. **Repository fortlaufend kuratieren -- bei jedem abgeschlossenen Block.**
+6. **Repository fortlaufend kuratieren -- bei jedem abgeschlossenen Block.**
    Aktive Seiten auf hoechstens sieben gleichrangige Elemente begrenzen,
    historische Detailregister ins Archiv verschieben, Standardbibliotheken
    erweitern statt Runnerlogik zu duplizieren und Status/Claims nach jedem
@@ -55,6 +60,8 @@ $F_\infty$-Root, aber noch keinen Transfer $F_{3600}\to F_\infty$.
 Governance ist nach dem verbrauchten Lauf wieder geschlossen. Das
 abschliessende Metareview urteilt
 `finite-branch-paper-i-ready-with-explicit-infinity-gap`. Der aktuelle
-Haltepunkt ist die Paper-I-Konsolidierung mit dieser engen Claimgrenze. Der
-methodische Stand und die Evidenzgrenzen stehen im
+Haltepunkt ist das prospektiv spezifizierte, noch nicht implementierte
+uniforme Tail-Branch-Link-Gate. Paper I folgt entweder auf dessen Ergebnis
+oder mit weiterhin expliziter Unendlichkeitsluecke. Der methodische Stand und
+die Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
