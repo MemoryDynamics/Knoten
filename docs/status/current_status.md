@@ -77,8 +77,12 @@ Snapshot-Rueckbindung und Decimal-Kontext sind vor einem Ziellauf behoben.
 27 neue Tests, der relevante 284-Test-Horizontverbund und die vollstaendige
 1226-Test-Repository-Matrix bestehen; das Urteil lautet
 `g-infinity-branch-link-contract-implementation-pass-target-closed`.
-Governance bleibt geschlossen, offizielle CI und Execution-Readiness stehen
-noch aus, und es gibt weiterhin keinen Branch-Link-Resultatclaim.
+Der exakte Implementierungscommit bestand danach auch die offizielle
+Linux-CI mit Lint, Tests und strict Docs. Das Execution-Readinessreview bindet
+Commit, CI und alle zwoelf geschuetzten Git-Blobs mit dem Urteil
+`g-infinity-branch-link-implementation-ready-target-closed`. Governance
+bleibt geschlossen, alle neuen Resultatpfade sind unbeschrieben, und es gibt
+weiterhin keinen Branch-Link-Resultatclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

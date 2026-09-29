@@ -20,8 +20,8 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 1. **Unendlichkeits-Astluecke schliessen.** Den natuerlichen Tail-Link
    $F_s=F_{3600}+sT_{3600}$ als uniformes Krawczyk-/Regularitaetsgate
-   nach targetfreier Implementierung und Review durch offizielle CI und ein
-   Execution-Readinessreview binden. Erst eine spaetere explizite
+   nach targetfreier Implementierung und Review durch offizielle CI binden:
+   der Vertrag ist nun execution-ready und target-closed. Erst eine explizite
    Einmalfreigabe darf den neuen Zertifikatsrecord erzeugen. Dies ist kein
    $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
@@ -61,10 +61,12 @@ $F_\infty$-Root, aber noch keinen Transfer $F_{3600}\to F_\infty$.
 Governance ist nach dem verbrauchten Lauf wieder geschlossen. Das
 abschliessende Metareview urteilt
 `finite-branch-paper-i-ready-with-explicit-infinity-gap`. Der aktuelle
-Haltepunkt ist der Implementation-Commit mit offizieller CI fuer das
-prospektiv spezifizierte und targetfrei reviewte uniforme
-Tail-Branch-Link-Gate. Die Governance ist geschlossen und es existiert noch
-kein neuer Zertifikatsrecord. Paper I folgt entweder auf dessen Ergebnis oder
-mit weiterhin expliziter Unendlichkeitsluecke. Der methodische Stand und die
+Haltepunkt ist das positiv abgeschlossene Execution-Readinessreview des
+prospektiv spezifizierten uniformen Tail-Branch-Link-Gates. Es bindet den
+exakten Implementierungscommit, die erfolgreiche offizielle CI und zwoelf
+geschuetzte Git-Blobs. Die Governance ist geschlossen und es existiert noch
+kein neuer Zertifikatsrecord. Prioritaet 1 wartet damit ausschliesslich auf
+eine explizite Einmalfreigabe. Paper I folgt entweder auf das Ergebnis oder
+mit weiterhin expliziter Unendlichkeitsluecke. Methodischer Stand und
 Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
