@@ -1,0 +1,9 @@
+{
+  "authorization_id": "c29929ac-7e89-4595-8093-4fd2e03cb9dc",
+  "ci_run_id": 36634405729,
+  "created_utc": "2026-09-30T20:53:54.710572+00:00",
+  "governance_sha256": "9183ac23d696217d32de17687716b99841234d8915f5372618e4c200b81afcf6",
+  "implementation_revision": "0e42d48592680526e41631ae23e882ceb9541c9f",
+  "revision": "4f1236f0ce3b96ff83c22ce1242ada544965db57",
+  "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v1"
+}

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-29.
+Stand: 2026-09-30.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -80,9 +80,15 @@ Snapshot-Rueckbindung und Decimal-Kontext sind vor einem Ziellauf behoben.
 Der exakte Implementierungscommit bestand danach auch die offizielle
 Linux-CI mit Lint, Tests und strict Docs. Das Execution-Readinessreview bindet
 Commit, CI und alle zwoelf geschuetzten Git-Blobs mit dem Urteil
-`g-infinity-branch-link-implementation-ready-target-closed`. Governance
-bleibt geschlossen, alle neuen Resultatpfade sind unbeschrieben, und es gibt
-weiterhin keinen Branch-Link-Resultatclaim.
+`g-infinity-branch-link-implementation-ready-target-closed`. Der autorisierte
+Attempt 1 wurde am 2026-09-30 verbraucht, aber vor jeder Publikation durch den
+Validator mit `inward regularity bound` gestoppt. Das exklusive Receipt ist
+erhalten; Resultat, Audit und Manifest existieren nicht. Der Befund lautet
+`g-infinity-branch-link-attempt-1-inconclusive-regularity-serialization-failure`:
+Er falsifiziert den Dezimalrecord, nicht den mathematischen Astlink. Vor
+Attempt 2 sind exakte Binaer-zu-Dezimal-Endpunkte, ein eigenes Amendment,
+Regressionstests, Review und neue CI erforderlich. Es gibt weiterhin keinen
+Branch-Link-Resultatclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

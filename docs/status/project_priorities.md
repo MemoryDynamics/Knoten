@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-29.
+Stand: 2026-09-30.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -20,10 +20,12 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
 
 1. **Unendlichkeits-Astluecke schliessen.** Den natuerlichen Tail-Link
    $F_s=F_{3600}+sT_{3600}$ als uniformes Krawczyk-/Regularitaetsgate
-   nach targetfreier Implementierung und Review durch offizielle CI binden:
-   der Vertrag ist nun execution-ready und target-closed. Erst eine explizite
-   Einmalfreigabe darf den neuen Zertifikatsrecord erzeugen. Dies ist kein
-   $H\to\infty$-Stabilitaetsgate.
+   pruefen. Attempt 1 ist durch einen konservativ abgefangenen
+   Dezimalserialisierungsfehler technisch inconclusive. Zuerst exakte
+   Binaer-zu-Dezimal-Endpunkte targetfrei implementieren und adversarial
+   reviewen; danach duerfen neue CI, Readiness und eine eigene
+   Einmalautorisierung fuer Attempt 2 folgen. Wissenschaftliche Parameter und
+   Schwellen bleiben eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -61,12 +63,12 @@ $F_\infty$-Root, aber noch keinen Transfer $F_{3600}\to F_\infty$.
 Governance ist nach dem verbrauchten Lauf wieder geschlossen. Das
 abschliessende Metareview urteilt
 `finite-branch-paper-i-ready-with-explicit-infinity-gap`. Der aktuelle
-Haltepunkt ist das positiv abgeschlossene Execution-Readinessreview des
-prospektiv spezifizierten uniformen Tail-Branch-Link-Gates. Es bindet den
-exakten Implementierungscommit, die erfolgreiche offizielle CI und zwoelf
-geschuetzte Git-Blobs. Die Governance ist geschlossen und es existiert noch
-kein neuer Zertifikatsrecord. Prioritaet 1 wartet damit ausschliesslich auf
-eine explizite Einmalfreigabe. Paper I folgt entweder auf das Ergebnis oder
-mit weiterhin expliziter Unendlichkeitsluecke. Methodischer Stand und
-Evidenzgrenzen stehen im
+Haltepunkt ist der konservativ gestoppte Attempt 1 des uniformen
+Tail-Branch-Link-Gates. Das Receipt ist verbraucht; ein Resultatrecord wurde
+nicht publiziert. Der Abbruch betrifft die unabhaengige Dezimalserialisierung
+von Defektmatrix und Zeilensumme und ist kein mathematisches Negativergebnis.
+Prioritaet 1 ist deshalb die targetfreie Attempt-2-Remediation bei
+unveraenderten wissenschaftlichen Parametern. Paper I folgt entweder auf ein
+spaeteres valides Ergebnis oder mit weiterhin expliziter
+Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
