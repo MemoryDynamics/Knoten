@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import copy
-from decimal import Decimal, localcontext
+from decimal import Decimal, ROUND_UP, localcontext
 import importlib.util
 from pathlib import Path
 
@@ -47,7 +47,7 @@ def auditor():
 
 def _authorization():
     return {
-        "attempt": 2,
+        "attempt": 3,
         "authorization_id": "00000000-0000-4000-8000-000000000001",
         "ci_run_id": 123,
         "governance_sha256": "a" * 64,
@@ -283,6 +283,50 @@ def test_validator_rejects_inward_regularity_and_false_decision(gate):
     with pytest.raises(ValueError, match="overlap mismatch"):
         gate.validate_payload(
             false_decision, sealed_reference=payload["sealed_inputs"]
+        )
+
+
+def test_long_regularity_sum_is_exact_and_decimal_context_invariant(gate, auditor):
+    payload, _ = _payload(gate)
+    value = "0.12345678901234567890123456789"
+    exact_sum = "0.24691357802469135780246913578"
+    panel = payload["homotopy"]["panels"][0]
+    panel["preconditioned_jacobian_defect"][0] = [
+        [value, value],
+        [value, value],
+    ]
+    panel["regularity_row_sum_bounds"][0] = [exact_sum, exact_sum]
+    panel["regularity_infinity_norm_upper"] = exact_sum
+
+    with localcontext() as context:
+        context.prec = 6
+        context.rounding = ROUND_UP
+        gate.validate_payload(payload, sealed_reference=payload["sealed_inputs"])
+        result = (
+            gate.json.dumps(payload, indent=2, sort_keys=True, allow_nan=False)
+            + "\n"
+        ).encode("utf-8")
+        auditor.audit_payload_bytes(
+            result,
+            gate.render_report(payload).encode("utf-8"),
+            sealed_reference=payload["sealed_inputs"],
+        )
+
+    inward = copy.deepcopy(payload)
+    inward_value = "0.24691357802469135780246913577"
+    inward_panel = inward["homotopy"]["panels"][0]
+    inward_panel["regularity_row_sum_bounds"][0] = [inward_value, inward_value]
+    inward_panel["regularity_infinity_norm_upper"] = inward_value
+    with pytest.raises(ValueError, match="inward regularity"):
+        gate.validate_payload(inward, sealed_reference=inward["sealed_inputs"])
+    result = (
+        gate.json.dumps(inward, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    ).encode("utf-8")
+    with pytest.raises(ValueError, match="inward regularity"):
+        auditor.audit_payload_bytes(
+            result,
+            gate.render_report(inward).encode("utf-8"),
+            sealed_reference=inward["sealed_inputs"],
         )
 
 

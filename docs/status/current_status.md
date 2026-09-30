@@ -109,6 +109,16 @@ Attempt 2 lautet daher
 Nur das Receipt existiert; es gibt weiterhin keinen
 Branch-Link-Resultatclaim.
 
+Attempt 3 ist inzwischen targetfrei implementiert. Produktionsvalidator und
+Auditor bilden die exakten Dezimalendpunkte auf rationale Zahlen ab und
+berechnen jede Defektzeilennorm ohne `Decimal`-Rundung. Das 29-stellige
+Gegenbeispiel bleibt selbst bei globaler Praezision 6 und `ROUND_UP` exakt;
+eine um $10^{-29}$ zu kleine Obergrenze scheitert weiterhin hart. 42
+fokussierte und 1241 gesamte Tests sowie Ruff bestehen. Das Reviewurteil
+lautet
+`g-infinity-branch-link-attempt-3-rational-remediation-pass-target-closed`.
+Governance bleibt geschlossen; offizielle CI und Readiness stehen noch aus.
+
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
 die Vorwaertsleiter bis $H=3600$ von der unteren $H=900,600$-Belastung und

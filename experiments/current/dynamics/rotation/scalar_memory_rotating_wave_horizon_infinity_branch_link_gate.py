@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 from datetime import UTC, datetime
 from decimal import Decimal, localcontext
+from fractions import Fraction
 from functools import cache
 import hashlib
 import importlib.util
@@ -29,27 +30,27 @@ from emergenz_knoten.strict_json_contract import validate_payload as validate_co
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v2.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v3.json"
 )
 TRANSFER_GATE_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_gate.py"
 )
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_protocol_2026-09-30.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_protocol_2026-09-30.md"
 )
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_2026-09-30.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_independent_audit_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_independent_audit_2026-09-30.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v2"
-ATTEMPT = 2
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v3"
+ATTEMPT = 3
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -351,7 +352,7 @@ def _validate_sealed_inputs(sealed: dict[str, Any]) -> None:
             "identity": {
                 "attempt": ATTEMPT,
                 "schema": SCHEMA,
-                "version": 2,
+                "version": 3,
                 "created_utc": "synthetic",
                 "execution_commit": "0" * 40,
                 "protocol_blob": _schema()["constants"]["protocol_blob"],
@@ -574,7 +575,7 @@ def run_contract(
         "identity": {
             "attempt": ATTEMPT,
             "schema": SCHEMA,
-            "version": 2,
+            "version": 3,
             "created_utc": created_utc or datetime.now(UTC).isoformat(),
             "execution_commit": execution_commit,
             "protocol_blob": _schema()["constants"]["protocol_blob"],
@@ -615,14 +616,15 @@ def run_contract(
     return payload
 
 
-def _row_norm_upper(defect_row: Sequence[Sequence[str]], *, path: str) -> Decimal:
-    return sum(
-        max(abs(lower), abs(upper))
+def _row_norm_upper(defect_row: Sequence[Sequence[str]], *, path: str) -> Fraction:
+    terms = (
+        max(abs(Fraction(lower)), abs(Fraction(upper)))
         for lower, upper in (
             _pair(value, path=f"{path}[{index}]")
             for index, value in enumerate(defect_row)
         )
     )
+    return sum(terms, start=Fraction())
 
 
 def validate_payload(
@@ -696,7 +698,7 @@ def validate_payload(
             for row_index, value in enumerate(panel["regularity_row_sum_bounds"])
         ]
         for observed, recorded in zip(row_uppers, recorded_rows, strict=True):
-            if recorded[1] < observed:
+            if Fraction(recorded[1]) < observed:
                 raise ValueError("$.homotopy.panels: inward regularity bound")
         regularity_upper = max(value[1] for value in recorded_rows)
         if _decimal(

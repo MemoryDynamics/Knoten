@@ -75,7 +75,7 @@ def test_readiness_parser_requires_exact_blob_table(execution):
     )
     text = (
         f"Implementation revision: `{revision}`\n"
-        "Verdict: **`g-infinity-branch-link-attempt-2-implementation-ready-target-closed`**\n"
+        "Verdict: **`g-infinity-branch-link-attempt-3-implementation-ready-target-closed`**\n"
         "https://github.com/MemoryDynamics/Knoten/actions/runs/123\n"
         f"{rows}\n"
     )
@@ -195,7 +195,7 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path: Path):
     monkeypatch.setattr(execution, "_validate_output_paths", lambda: None)
     review = [
         f"Implementation revision: `{authorization['implementation_revision']}`",
-        "Verdict: **`g-infinity-branch-link-attempt-2-implementation-ready-target-closed`**",
+        "Verdict: **`g-infinity-branch-link-attempt-3-implementation-ready-target-closed`**",
         (
             "https://github.com/MemoryDynamics/Knoten/actions/runs/"
             f"{authorization['ci']['run_id']}"

@@ -1,0 +1,11 @@
+{
+  "authorization": null,
+  "gate": "G-infinity-branch-link",
+  "protocol_blob": "d767da5e2ec0616abaccc5f5173d7f32957081ae",
+  "reason": "attempt-3 rational-relation remediation under review; target remains closed",
+  "result_schema_sha256": "44c968bbb974f04323c4b334e1b98706fef815ca3f114068fedc72a30eb321bb",
+  "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v3",
+  "state": "closed",
+  "target_authorized": false,
+  "target_calls_recorded": []
+}

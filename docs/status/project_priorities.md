@@ -29,8 +29,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    28-stellige `Decimal`-Summation technisch inconclusive. Als Naechstes muss
    Attempt 3 dieselbe Relation targetfrei mit exakten rationalen Summen
    auswerten. Das enge Amendment ist inzwischen positiv reviewt; erst nach
-   Implementierung, Review, CI und neuer Einmalautorisierung darf er laufen.
-   Wissenschaftliche Parameter und Schwellen bleiben
+   targetfreier Implementierung und Review ebenfalls gruen. Als Naechstes
+   folgen offizielle CI und Readiness; erst danach darf eine neue
+   Einmalautorisierung laufen. Wissenschaftliche Parameter und Schwellen bleiben
    eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
@@ -77,7 +78,8 @@ Attempt 2 ist trotz positiver Remediation, CI und Readiness an einer zweiten,
 nun synthetisch reproduzierten Decimal-Kontextstelle vor Publikation
 gescheitert. Beide Receipts sind verbraucht; kein Resultatrecord existiert.
 Prioritaet 1 ist die enge targetfreie Attempt-3-Umstellung der Zeilensummen
-auf exakte rationale Arithmetik. Paper I folgt entweder auf ein valides
-spaeteres Ergebnis oder mit weiterhin expliziter
+auf exakte rationale Arithmetik. Diese Remediation ist nun targetfrei gruen;
+Prioritaet 1 steht vor offizieller CI und Readiness. Paper I folgt entweder
+auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

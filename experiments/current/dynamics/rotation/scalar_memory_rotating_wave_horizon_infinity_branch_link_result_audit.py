@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from decimal import Decimal, localcontext
+from fractions import Fraction
 import hashlib
 import json
 import math
@@ -15,16 +16,16 @@ from typing import Any, Sequence
 ROOT = Path(__file__).resolve().parents[4]
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_2026-09-30.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT_OUTPUT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_independent_audit_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_independent_audit_2026-09-30.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v2"
-ATTEMPT = 2
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v3"
+ATTEMPT = 3
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -32,8 +33,8 @@ CLAIM_BOUNDARY = (
     "under registered tail bounds and mpmath.iv; no H-infinity stability, "
     "global uniqueness, formation, interaction, spin, inertia or mass"
 )
-PROTOCOL_BLOB = "4efc6a50d28bb6f32ec3e913fb7ca30c568c6621"
-PROTOCOL_SHA256 = "9068d43d368e1ddc05de3ec53c6da8f73f69bf842ee4df77d808986f59c8cb8e"
+PROTOCOL_BLOB = "d767da5e2ec0616abaccc5f5173d7f32957081ae"
+PROTOCOL_SHA256 = "e06995e151d3761501541aceaa29e6153965cc1b38d3a4e9ce7f2a973d156be8"
 PARAMETERS = {
     "alpha": 0.01,
     "amplitude_att": 3.5,
@@ -285,10 +286,19 @@ def _sealed_snapshot_from_git() -> dict[str, Any]:
     }
 
 
-def _row_norm_upper(row: Any, *, path: str) -> Decimal:
+def _row_norm_upper(row: Any, *, path: str) -> Fraction:
     if type(row) is not list or len(row) != 2:
         raise TypeError(f"{path}: expected two intervals")
-    return sum(max(abs(lower), abs(upper)) for lower, upper in (_pair(value, path=f"{path}[{index}]") for index, value in enumerate(row)))
+    return sum(
+        (
+            max(abs(Fraction(lower)), abs(Fraction(upper)))
+            for lower, upper in (
+                _pair(value, path=f"{path}[{index}]")
+                for index, value in enumerate(row)
+            )
+        ),
+        start=Fraction(),
+    )
 
 
 def _validate_panel(panel: Any, *, index: int, sealed: dict[str, Any]) -> dict[str, Any]:
@@ -350,7 +360,10 @@ def _validate_panel(panel: Any, *, index: int, sealed: dict[str, Any]) -> dict[s
         _pair(value, path=f"panel.row_bounds[{row_index}]")
         for row_index, value in enumerate(row_bounds)
     ]
-    if any(recorded[1] < observed for recorded, observed in zip(recorded_rows, row_uppers, strict=True)):
+    if any(
+        Fraction(recorded[1]) < observed
+        for recorded, observed in zip(recorded_rows, row_uppers, strict=True)
+    ):
         raise ValueError("inward regularity bound")
     regularity_upper = max(value[1] for value in recorded_rows)
     if _decimal(panel["regularity_infinity_norm_upper"], path="panel.regularity") != regularity_upper:
@@ -464,7 +477,7 @@ def audit_payload_bytes(
     if (
         identity["attempt"] != ATTEMPT
         or identity["schema"] != SCHEMA
-        or identity["version"] != 2
+        or identity["version"] != 3
         or identity["protocol_blob"] != PROTOCOL_BLOB
         or identity["protocol_sha256"] != PROTOCOL_SHA256
         or identity["parameters"] != PARAMETERS
@@ -625,7 +638,7 @@ def audit_payload_bytes(
     if report_bytes != expected_report:
         raise ValueError("readable report mismatch")
     return {
-        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v2",
+        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v3",
         "audited_decision": expected_decision,
         "checks": {
             "classification_reconstructed": True,
