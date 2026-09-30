@@ -333,6 +333,52 @@ def _interval_record(value: Any, digits: int) -> dict[str, Any]:
         }
 
 
+MAX_EXACT_ENDPOINT_BITS = 10_000
+MAX_EXACT_ENDPOINT_EXPONENT = 10_000
+
+
+def exact_decimal_from_mpf_tuple(value: Any) -> str:
+    """Return the exact canonical decimal for one finite mpmath mpf tuple.
+
+    The conversion uses only integer arithmetic.  In particular it does not
+    inherit a caller's decimal or mpmath precision and therefore cannot move
+    an interval endpoint inward while rendering it.
+    """
+
+    if type(value) not in (tuple, list) or len(value) != 4:
+        raise TypeError("mpf endpoint must be a four-integer tuple")
+    sign, mantissa, exponent, bit_count = value
+    if any(type(item) is not int for item in value):
+        raise TypeError("mpf endpoint fields must be integers, not booleans")
+    if sign not in (0, 1):
+        raise ValueError("mpf endpoint sign must be zero or one")
+    if mantissa < 0:
+        raise ValueError("mpf endpoint mantissa must be nonnegative")
+    if abs(exponent) > MAX_EXACT_ENDPOINT_EXPONENT:
+        raise ValueError("mpf endpoint exponent exceeds registered limit")
+    if mantissa == 0:
+        if sign != 0 or exponent != 0 or bit_count != 0:
+            raise ValueError("mpf zero endpoint must be canonical")
+        return "0"
+    if bit_count != mantissa.bit_length():
+        raise ValueError("mpf endpoint bit count mismatch")
+    if bit_count > MAX_EXACT_ENDPOINT_BITS:
+        raise ValueError("mpf endpoint mantissa exceeds registered limit")
+
+    if exponent >= 0:
+        text = str(mantissa << exponent)
+    else:
+        places = -exponent
+        digits = str(mantissa * (5**places))
+        if len(digits) <= places:
+            text = "0." + ("0" * (places - len(digits))) + digits
+        else:
+            split = len(digits) - places
+            text = digits[:split] + "." + digits[split:]
+        text = text.rstrip("0").rstrip(".")
+    return "-" + text if sign else text
+
+
 def _ordered_decimal_interval(
     values: tuple[str, str], *, name: str, precision_dps: int
 ) -> tuple[str, str]:

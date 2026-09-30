@@ -86,9 +86,15 @@ Validator mit `inward regularity bound` gestoppt. Das exklusive Receipt ist
 erhalten; Resultat, Audit und Manifest existieren nicht. Der Befund lautet
 `g-infinity-branch-link-attempt-1-inconclusive-regularity-serialization-failure`:
 Er falsifiziert den Dezimalrecord, nicht den mathematischen Astlink. Vor
-Attempt 2 sind exakte Binaer-zu-Dezimal-Endpunkte, ein eigenes Amendment,
-Regressionstests, Review und neue CI erforderlich. Es gibt weiterhin keinen
-Branch-Link-Resultatclaim.
+Attempt 2 waren exakte Binaer-zu-Dezimal-Endpunkte, ein eigenes Amendment,
+Regressionstests, Review und neue CI erforderlich. Amendment und targetfreie
+Remediation liegen inzwischen vor: Der Adapter bildet jedes mpmath-Tupel
+$(s,m,e,b)$ ohne Praezisionskontext exakt auf $(-1)^s m2^e$ ab. 41
+fokussierte Tests, das konstruktive Attempt-1-Gegenbeispiel, 1240 gesamte
+Tests und der exakte Ruff-Scope bestehen. Das Reviewurteil lautet
+`g-infinity-branch-link-attempt-2-remediation-pass-target-closed`.
+Attempt-2-Governance bleibt geschlossen; offizielle CI und Readiness stehen
+noch aus. Es gibt weiterhin keinen Branch-Link-Resultatclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

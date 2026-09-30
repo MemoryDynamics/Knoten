@@ -47,6 +47,7 @@ def auditor():
 
 def _authorization():
     return {
+        "attempt": 2,
         "authorization_id": "00000000-0000-4000-8000-000000000001",
         "ci_run_id": 123,
         "governance_sha256": "a" * 64,
@@ -148,6 +149,81 @@ def _payload(gate, *, panel_factory=None, sealed=None):
         created_utc="2026-09-29T00:00:00+00:00",
     )
     return payload, calls
+
+
+def _raw_interval(lower_binary, upper_binary, *, legacy_lower="0", legacy_upper="0"):
+    return {
+        "lower": legacy_lower,
+        "upper": legacy_upper,
+        "lower_binary": list(lower_binary),
+        "upper_binary": list(upper_binary),
+    }
+
+
+def test_panel_adapter_reconstructs_exact_binary_endpoints_not_legacy_text(gate):
+    zero = _raw_interval((0, 0, 0, 0), (0, 0, 0, 0))
+    quarter_with_bad_text = _raw_interval(
+        (0, 1, -2, 1),
+        (0, 1, -2, 1),
+        legacy_lower="0.3",
+        legacy_upper="0.3",
+    )
+    half_with_bad_text = _raw_interval(
+        (0, 1, -1, 1),
+        (0, 1, -1, 1),
+        legacy_lower="0.4",
+        legacy_upper="0.4",
+    )
+    one = _raw_interval((0, 1, 0, 1), (0, 1, 0, 1))
+    root = ["1", "0.5"]
+    bounds = {
+        "precision_dps": 120,
+        "residual_bound": "0",
+        "jacobian_radius_bound": "0",
+        "jacobian_theta_bound": "0",
+    }
+    raw = {
+        "precision_dps": 120,
+        "tail_scale_interval": ["0", "1"],
+        "center": {"radius": root[0], "theta": root[1]},
+        "half_width": {"radius": gate.HALF_WIDTH, "theta": gate.HALF_WIDTH},
+        "tail_bounds": {
+            "residual": "0",
+            "jacobian_radius": "0",
+            "jacobian_theta": "0",
+        },
+        "box": [
+            _raw_interval((0, 1, -1, 1), (0, 3, -1, 2)),
+            _raw_interval((0, 1, -2, 1), (0, 3, -2, 2)),
+        ],
+        "jacobian_box": [[zero, zero], [zero, zero]],
+        "inverse_point_jacobian": [["1", "0"], ["0", "1"]],
+        "preconditioned_jacobian_defect": [
+            [quarter_with_bad_text, quarter_with_bad_text],
+            [zero, zero],
+        ],
+        "regularity_row_sum_bounds": [half_with_bad_text, zero],
+        "krawczyk_image": [one, half_with_bad_text],
+        "gates": {
+            "physical_domain": True,
+            "inverse_nonsingular": True,
+            "function_box_contains_zero": True,
+            "krawczyk_strict_interior": True,
+            "uniform_regularity": True,
+        },
+        "pass": True,
+    }
+
+    panel = gate._panel_record(raw, precision=120, root=root, bounds=bounds)
+
+    assert panel["preconditioned_jacobian_defect"][0] == [
+        ["0.25", "0.25"],
+        ["0.25", "0.25"],
+    ]
+    assert panel["regularity_row_sum_bounds"][0] == ["0.5", "0.5"]
+    assert gate._row_norm_upper(
+        panel["preconditioned_jacobian_defect"][0], path="test"
+    ) == Decimal("0.5")
 
 
 def test_uniform_contract_passes_only_two_fixed_precision_panels(gate):

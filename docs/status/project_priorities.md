@@ -23,10 +23,11 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    pruefen. Attempt 1 ist durch einen konservativ abgefangenen
    Dezimalserialisierungsfehler technisch inconclusive. Zuerst exakte
    Binaer-zu-Dezimal-Endpunkte targetfrei implementieren und adversarial
-   reviewen. Das Attempt-2-Amendment ist inzwischen als hinreichend eng
-   beurteilt; danach duerfen neue CI, Readiness und eine eigene
-   Einmalautorisierung fuer Attempt 2 folgen. Wissenschaftliche Parameter und
-   Schwellen bleiben eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
+   reviewen. Amendment und Remediation sind inzwischen positiv targetfrei
+   reviewed; als Naechstes folgen offizielle CI und das blobgebundene
+   Readinessreview. Erst danach darf eine eigene Einmalautorisierung fuer
+   Attempt 2 folgen. Wissenschaftliche Parameter und Schwellen bleiben
+   eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -68,8 +69,9 @@ Haltepunkt ist der konservativ gestoppte Attempt 1 des uniformen
 Tail-Branch-Link-Gates. Das Receipt ist verbraucht; ein Resultatrecord wurde
 nicht publiziert. Der Abbruch betrifft die unabhaengige Dezimalserialisierung
 von Defektmatrix und Zeilensumme und ist kein mathematisches Negativergebnis.
-Prioritaet 1 ist deshalb die targetfreie Attempt-2-Remediation bei
-unveraenderten wissenschaftlichen Parametern. Paper I folgt entweder auf ein
-spaeteres valides Ergebnis oder mit weiterhin expliziter
+Die targetfreie Attempt-2-Remediation ist bei unveraenderten
+wissenschaftlichen Parametern abgeschlossen; Prioritaet 1 steht nun vor
+offizieller CI und Readiness. Paper I folgt entweder auf ein spaeteres
+valides Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

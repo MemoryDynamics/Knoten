@@ -22,32 +22,34 @@ from typing import Any, Callable, Sequence
 from emergenz_knoten.rotating_wave_interval import (
     IntervalRotatingWaveParameters,
     certify_rotating_wave_tail_homotopy_box,
+    exact_decimal_from_mpf_tuple,
 )
 from emergenz_knoten.strict_json_contract import validate_payload as validate_contract
 
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v1.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v2.json"
 )
 TRANSFER_GATE_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_gate.py"
 )
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_protocol_2026-09-29.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_protocol_2026-09-30.md"
 )
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_2026-09-30.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_independent_audit_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_independent_audit_2026-09-30.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v1"
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v2"
+ATTEMPT = 2
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -288,11 +290,12 @@ def _pair(values: Sequence[str], *, path: str) -> tuple[Decimal, Decimal]:
 
 
 def _raw_interval(value: Any, *, path: str) -> list[str]:
-    if type(value) is not dict or type(value.get("lower")) is not str or type(
-        value.get("upper")
-    ) is not str:
+    if type(value) is not dict or "lower_binary" not in value or "upper_binary" not in value:
         raise TypeError(f"{path}: invalid raw interval")
-    pair = [value["lower"], value["upper"]]
+    pair = [
+        exact_decimal_from_mpf_tuple(value["lower_binary"]),
+        exact_decimal_from_mpf_tuple(value["upper_binary"]),
+    ]
     _pair(pair, path=path)
     return pair
 
@@ -346,14 +349,16 @@ def _validate_sealed_inputs(sealed: dict[str, Any]) -> None:
     validate_contract(
         {
             "identity": {
+                "attempt": ATTEMPT,
                 "schema": SCHEMA,
-                "version": 1,
+                "version": 2,
                 "created_utc": "synthetic",
                 "execution_commit": "0" * 40,
                 "protocol_blob": _schema()["constants"]["protocol_blob"],
                 "protocol_sha256": _schema()["constants"]["protocol_sha256"],
                 "parameters": PARAMETERS,
                 "authorization": {
+                    "attempt": ATTEMPT,
                     "authorization_id": "00000000-0000-4000-8000-000000000000",
                     "ci_run_id": 0,
                     "governance_sha256": "0" * 64,
@@ -567,8 +572,9 @@ def run_contract(
     decision = PASS_DECISION if all(value == "pass" for value in gates.values()) else INCONCLUSIVE_DECISION
     payload = {
         "identity": {
+            "attempt": ATTEMPT,
             "schema": SCHEMA,
-            "version": 1,
+            "version": 2,
             "created_utc": created_utc or datetime.now(UTC).isoformat(),
             "execution_commit": execution_commit,
             "protocol_blob": _schema()["constants"]["protocol_blob"],

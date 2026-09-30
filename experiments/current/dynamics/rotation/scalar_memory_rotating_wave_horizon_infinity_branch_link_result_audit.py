@@ -15,15 +15,16 @@ from typing import Any, Sequence
 ROOT = Path(__file__).resolve().parents[4]
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_2026-09-30.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT_OUTPUT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_independent_audit_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_independent_audit_2026-09-30.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v1"
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v2"
+ATTEMPT = 2
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -31,8 +32,8 @@ CLAIM_BOUNDARY = (
     "under registered tail bounds and mpmath.iv; no H-infinity stability, "
     "global uniqueness, formation, interaction, spin, inertia or mass"
 )
-PROTOCOL_BLOB = "adf008c12cd698d61ac22f8edbd62d7e6771ac1b"
-PROTOCOL_SHA256 = "4bba4b87b805e5d7238092782f59431b2e6e3cf4f7bf7115add8cacf4fe61be2"
+PROTOCOL_BLOB = "4efc6a50d28bb6f32ec3e913fb7ca30c568c6621"
+PROTOCOL_SHA256 = "9068d43d368e1ddc05de3ec53c6da8f73f69bf842ee4df77d808986f59c8cb8e"
 PARAMETERS = {
     "alpha": 0.01,
     "amplitude_att": 3.5,
@@ -448,6 +449,7 @@ def audit_payload_bytes(
     identity = _exact_fields(
         payload["identity"],
         {
+            "attempt",
             "authorization",
             "created_utc",
             "execution_commit",
@@ -460,8 +462,9 @@ def audit_payload_bytes(
         path="$.identity",
     )
     if (
-        identity["schema"] != SCHEMA
-        or identity["version"] != 1
+        identity["attempt"] != ATTEMPT
+        or identity["schema"] != SCHEMA
+        or identity["version"] != 2
         or identity["protocol_blob"] != PROTOCOL_BLOB
         or identity["protocol_sha256"] != PROTOCOL_SHA256
         or identity["parameters"] != PARAMETERS
@@ -472,6 +475,7 @@ def audit_payload_bytes(
     authorization = _exact_fields(
         identity["authorization"],
         {
+            "attempt",
             "authorization_id",
             "ci_run_id",
             "governance_sha256",
@@ -483,7 +487,8 @@ def audit_payload_bytes(
         path="$.identity.authorization",
     )
     if (
-        _UUID4.fullmatch(authorization["authorization_id"]) is None
+        authorization["attempt"] != ATTEMPT
+        or _UUID4.fullmatch(authorization["authorization_id"]) is None
         or type(authorization["ci_run_id"]) is not int
         or _SHA256.fullmatch(authorization["governance_sha256"]) is None
         or _SHA1.fullmatch(authorization["implementation_revision"]) is None
@@ -620,7 +625,7 @@ def audit_payload_bytes(
     if report_bytes != expected_report:
         raise ValueError("readable report mismatch")
     return {
-        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v1",
+        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v2",
         "audited_decision": expected_decision,
         "checks": {
             "classification_reconstructed": True,

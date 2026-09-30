@@ -75,7 +75,7 @@ def test_readiness_parser_requires_exact_blob_table(execution):
     )
     text = (
         f"Implementation revision: `{revision}`\n"
-        "Verdict: **`g-infinity-branch-link-implementation-ready-target-closed`**\n"
+        "Verdict: **`g-infinity-branch-link-attempt-2-implementation-ready-target-closed`**\n"
         "https://github.com/MemoryDynamics/Knoten/actions/runs/123\n"
         f"{rows}\n"
     )
@@ -101,6 +101,7 @@ def _authorized_governance(execution):
     protected[execution.PROTOCOL_REL.as_posix()] = tracked["protocol_blob"]
     return {
         "authorization": {
+            "attempt": execution.ATTEMPT,
             "authorization_id": "12345678-1234-4abc-8def-123456789abc",
             "ci": {
                 "api_url": (
@@ -194,7 +195,7 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path: Path):
     monkeypatch.setattr(execution, "_validate_output_paths", lambda: None)
     review = [
         f"Implementation revision: `{authorization['implementation_revision']}`",
-        "Verdict: **`g-infinity-branch-link-implementation-ready-target-closed`**",
+        "Verdict: **`g-infinity-branch-link-attempt-2-implementation-ready-target-closed`**",
         (
             "https://github.com/MemoryDynamics/Knoten/actions/runs/"
             f"{authorization['ci']['run_id']}"
@@ -273,6 +274,7 @@ def test_execute_once_orders_guard_target_audit_publication_and_verification(
 ):
     calls = []
     provenance = {
+        "attempt": execution.ATTEMPT,
         "authorization_id": "00000000-0000-4000-8000-000000000001",
         "ci_run_id": 1,
         "governance_sha256": "a" * 64,

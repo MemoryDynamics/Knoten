@@ -1,4 +1,4 @@
-"""One-shot guard for the uniform H=3600 to infinity branch-link gate.
+"""Attempt-2 one-shot guard for the uniform H=3600 to infinity branch-link gate.
 
 Importing this module performs no target work.  The tracked governance is
 closed.  A later governance-only commit must bind a reviewed implementation,
@@ -24,15 +24,15 @@ ROOT = Path(__file__).resolve().parents[4]
 BASE = "experiments/current/dynamics/rotation/"
 GOVERNANCE_REL = Path(
     BASE
-    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_governance.json"
+    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_governance.json"
 )
 PROTOCOL_REL = Path(
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_protocol_2026-09-29.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_protocol_2026-09-30.md"
 )
 SCHEMA_REL = Path(
     BASE
-    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v1.json"
+    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v2.json"
 )
 GATE_REL = Path(
     BASE + "scalar_memory_rotating_wave_horizon_infinity_branch_link_gate.py"
@@ -47,25 +47,26 @@ EXECUTION_REL = Path(
 )
 READINESS_REVIEW_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_execution_readiness_review_2026-09-29.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_execution_readiness_review_2026-09-30.md"
 )
 RECEIPT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_receipt_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_receipt_2026-09-30.json"
 )
 RESULT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_2026-09-30.json"
 )
 REPORT_REL = RESULT_REL.with_suffix(".md")
 MANIFEST_REL = RESULT_REL.with_suffix(".publication.json")
 AUDIT_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_independent_audit_2026-09-29.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_independent_audit_2026-09-30.json"
 )
 GOVERNANCE_SCHEMA = (
-    "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v1"
+    "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v2"
 )
+ATTEMPT = 2
 DEPENDENCIES = {"mpmath": "1.3.0", "python": "3.12"}
 PROTECTED_PATHS = (
     "requirements-dev.txt",
@@ -80,8 +81,13 @@ PROTECTED_PATHS = (
     "tests/test_rotating_wave_tail_homotopy_interval.py",
     "tests/test_rotating_wave_horizon_infinity_branch_link.py",
     "tests/test_rotating_wave_horizon_infinity_branch_link_execution.py",
+    "reports/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_receipt_2026-09-29.json",
+    "reports/project/meta/reviews/"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_1_serialization_incident_2026-09-30.md",
 )
 AUTHORIZATION_KEYS = {
+    "attempt",
     "authorization_id",
     "ci",
     "closed_governance_blob",
@@ -199,7 +205,7 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
         raise RuntimeError("infinity branch-link readiness review is incomplete")
     if (
         verdict.group(1)
-        != "g-infinity-branch-link-implementation-ready-target-closed"
+        != "g-infinity-branch-link-attempt-2-implementation-ready-target-closed"
     ):
         raise RuntimeError("infinity branch-link readiness verdict is not upheld")
     if set(blobs) != set(PROTECTED_PATHS):
@@ -241,13 +247,14 @@ def _create_receipt(
     path = ROOT / RECEIPT_REL
     path.parent.mkdir(parents=True, exist_ok=True)
     receipt = {
+        "attempt": ATTEMPT,
         "authorization_id": authorization_id,
         "ci_run_id": ci_run_id,
         "created_utc": datetime.now(UTC).isoformat(),
         "governance_sha256": governance_sha256,
         "implementation_revision": implementation_revision,
         "revision": revision,
-        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v1",
+        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v2",
     }
     content = (
         json.dumps(receipt, allow_nan=False, indent=2, sort_keys=True) + "\n"
@@ -279,6 +286,8 @@ def require_target_authorization(
         raise RuntimeError("infinity branch-link authorization keys mismatch")
     authorization_id = authorization["authorization_id"]
     implementation = authorization["implementation_revision"]
+    if authorization["attempt"] != ATTEMPT:
+        raise RuntimeError("infinity branch-link attempt mismatch")
     if type(authorization_id) is not str or _UUID4.fullmatch(authorization_id) is None:
         raise RuntimeError("infinity branch-link authorization ID is invalid")
     if type(implementation) is not str or _SHA1.fullmatch(implementation) is None:
@@ -371,6 +380,7 @@ def require_target_authorization(
         revision=head,
     )
     return {
+        "attempt": ATTEMPT,
         "authorization_id": authorization_id,
         "ci_run_id": run_id,
         "governance_sha256": governance_sha256,
@@ -400,6 +410,7 @@ def execute_once() -> dict[str, Any]:
     authorization = {
         key: provenance[key]
         for key in (
+            "attempt",
             "authorization_id",
             "ci_run_id",
             "governance_sha256",

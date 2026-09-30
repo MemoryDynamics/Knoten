@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from fractions import Fraction
+
 import pytest
 
 from emergenz_knoten import rotating_wave_interval as interval
@@ -105,3 +107,41 @@ def test_tail_homotopy_restores_interval_precision_after_singularity(monkeypatch
             precision_dps=80,
         )
     assert interval.iv.dps == previous
+
+
+@pytest.mark.parametrize(
+    ("endpoint", "expected"),
+    [
+        ((0, 0, 0, 0), "0"),
+        ((0, 1, 0, 1), "1"),
+        ((1, 3, -2, 2), "-0.75"),
+        ((0, 1, -10, 1), "0.0009765625"),
+        ((0, 3, 2, 2), "12"),
+    ],
+)
+def test_exact_mpf_endpoint_conversion_is_canonical(endpoint, expected):
+    text = interval.exact_decimal_from_mpf_tuple(endpoint)
+
+    assert text == expected
+    sign, mantissa, exponent, _ = endpoint
+    exact = Fraction((-1 if sign else 1) * mantissa)
+    exact = exact * (2**exponent) if exponent >= 0 else exact / (2 ** (-exponent))
+    assert Fraction(text) == exact
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        (False, 1, 0, 1),
+        (0, 1, 0),
+        (2, 1, 0, 1),
+        (0, -1, 0, 1),
+        (0, 3, 0, 1),
+        (1, 0, 0, 0),
+        (0, 1, interval.MAX_EXACT_ENDPOINT_EXPONENT + 1, 1),
+        (0, 1 << interval.MAX_EXACT_ENDPOINT_BITS, 0, interval.MAX_EXACT_ENDPOINT_BITS + 1),
+    ],
+)
+def test_exact_mpf_endpoint_conversion_rejects_malformed_or_unbounded_input(endpoint):
+    with pytest.raises((TypeError, ValueError)):
+        interval.exact_decimal_from_mpf_tuple(endpoint)
