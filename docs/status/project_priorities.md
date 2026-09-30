@@ -24,9 +24,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Dezimalserialisierungsfehler technisch inconclusive. Zuerst exakte
    Binaer-zu-Dezimal-Endpunkte targetfrei implementieren und adversarial
    reviewen. Amendment und Remediation sind inzwischen positiv targetfrei
-   reviewed; als Naechstes folgen offizielle CI und das blobgebundene
-   Readinessreview. Erst danach darf eine eigene Einmalautorisierung fuer
-   Attempt 2 folgen. Wissenschaftliche Parameter und Schwellen bleiben
+   reviewed; offizielle CI und blobgebundenes Readinessreview sind ebenfalls
+   positiv abgeschlossen. Als Naechstes folgt die eigene Einmalautorisierung
+   fuer Attempt 2. Wissenschaftliche Parameter und Schwellen bleiben
    eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
@@ -70,8 +70,9 @@ Tail-Branch-Link-Gates. Das Receipt ist verbraucht; ein Resultatrecord wurde
 nicht publiziert. Der Abbruch betrifft die unabhaengige Dezimalserialisierung
 von Defektmatrix und Zeilensumme und ist kein mathematisches Negativergebnis.
 Die targetfreie Attempt-2-Remediation ist bei unveraenderten
-wissenschaftlichen Parametern abgeschlossen; Prioritaet 1 steht nun vor
-offizieller CI und Readiness. Paper I folgt entweder auf ein spaeteres
-valides Ergebnis oder mit weiterhin expliziter
+wissenschaftlichen Parametern abgeschlossen; offizielle CI und Readiness
+sind positiv. Prioritaet 1 steht nun unmittelbar vor dem eigenen
+governance-only Einmalzugriff. Paper I folgt entweder auf ein valides
+Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

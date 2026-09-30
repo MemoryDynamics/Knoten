@@ -93,8 +93,13 @@ $(s,m,e,b)$ ohne Praezisionskontext exakt auf $(-1)^s m2^e$ ab. 41
 fokussierte Tests, das konstruktive Attempt-1-Gegenbeispiel, 1240 gesamte
 Tests und der exakte Ruff-Scope bestehen. Das Reviewurteil lautet
 `g-infinity-branch-link-attempt-2-remediation-pass-target-closed`.
-Attempt-2-Governance bleibt geschlossen; offizielle CI und Readiness stehen
-noch aus. Es gibt weiterhin keinen Branch-Link-Resultatclaim.
+Der exakte Implementierungscommit hat inzwischen auch die offizielle
+Linux-CI mit Lint, 1240 Tests und strict Docs bestanden. Das
+Execution-Readinessreview bindet Commit, CI, Attempt-1-Incident und 14
+geschuetzte Blobs mit dem Urteil
+`g-infinity-branch-link-attempt-2-implementation-ready-target-closed`.
+Attempt-2-Governance bleibt geschlossen und alle neuen Exklusivpfade sind
+unbeschrieben. Es gibt weiterhin keinen Branch-Link-Resultatclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
