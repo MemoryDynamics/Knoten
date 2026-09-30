@@ -28,8 +28,9 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    positiv abgeschlossen. Attempt 2 wurde dennoch durch die nachgeschaltete
    28-stellige `Decimal`-Summation technisch inconclusive. Als Naechstes muss
    Attempt 3 dieselbe Relation targetfrei mit exakten rationalen Summen
-   auswerten; erst nach Amendment, Review, CI und neuer Einmalautorisierung
-   darf er laufen. Wissenschaftliche Parameter und Schwellen bleiben
+   auswerten. Das enge Amendment ist inzwischen positiv reviewt; erst nach
+   Implementierung, Review, CI und neuer Einmalautorisierung darf er laufen.
+   Wissenschaftliche Parameter und Schwellen bleiben
    eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
