@@ -25,8 +25,11 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Binaer-zu-Dezimal-Endpunkte targetfrei implementieren und adversarial
    reviewen. Amendment und Remediation sind inzwischen positiv targetfrei
    reviewed; offizielle CI und blobgebundenes Readinessreview sind ebenfalls
-   positiv abgeschlossen. Als Naechstes folgt die eigene Einmalautorisierung
-   fuer Attempt 2. Wissenschaftliche Parameter und Schwellen bleiben
+   positiv abgeschlossen. Attempt 2 wurde dennoch durch die nachgeschaltete
+   28-stellige `Decimal`-Summation technisch inconclusive. Als Naechstes muss
+   Attempt 3 dieselbe Relation targetfrei mit exakten rationalen Summen
+   auswerten; erst nach Amendment, Review, CI und neuer Einmalautorisierung
+   darf er laufen. Wissenschaftliche Parameter und Schwellen bleiben
    eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
@@ -69,10 +72,11 @@ Haltepunkt ist der konservativ gestoppte Attempt 1 des uniformen
 Tail-Branch-Link-Gates. Das Receipt ist verbraucht; ein Resultatrecord wurde
 nicht publiziert. Der Abbruch betrifft die unabhaengige Dezimalserialisierung
 von Defektmatrix und Zeilensumme und ist kein mathematisches Negativergebnis.
-Die targetfreie Attempt-2-Remediation ist bei unveraenderten
-wissenschaftlichen Parametern abgeschlossen; offizielle CI und Readiness
-sind positiv. Prioritaet 1 steht nun unmittelbar vor dem eigenen
-governance-only Einmalzugriff. Paper I folgt entweder auf ein valides
-Ergebnis oder mit weiterhin expliziter
+Attempt 2 ist trotz positiver Remediation, CI und Readiness an einer zweiten,
+nun synthetisch reproduzierten Decimal-Kontextstelle vor Publikation
+gescheitert. Beide Receipts sind verbraucht; kein Resultatrecord existiert.
+Prioritaet 1 ist die enge targetfreie Attempt-3-Umstellung der Zeilensummen
+auf exakte rationale Arithmetik. Paper I folgt entweder auf ein valides
+spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

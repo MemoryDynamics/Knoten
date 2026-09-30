@@ -28,7 +28,7 @@ autorisiert.
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5 finite-H-Stabilitaet | Adapter/Grundgleichungs-Preflight reviewed; `g5-local-direct-stability-pass`, Attempt 3 verbraucht | lokale numerische Stabilitaet bei exakt $H=2400$; kein $H\to\infty$-, Formations- oder Interaktionsclaim |
 | G1--G3-Brueckenkomponente | `g1-g3-local-fixed-alpha-root-branch-connected-reviewed-pass`; Attempt 2 publiziert und unabhaengig auditiert | lokale Rootast-Verbindung $H=600\ldots3600$ mit Endpunktlinks zu G5/G4; direkte Stabilitaet nur bei $H=2400$, kein $H\to\infty$-Stabilitaetsclaim |
-| Uniformer Unendlichkeits-Astlink | Attempt 1 technisch inconclusive; Attempt-2-Endpunktserialisierung targetfrei reviewed, Governance geschlossen | offizielle CI, Readiness und neuer autorisierter Record; weiterhin keine Branchidentitaet $F_{3600}\to F_\infty$ |
+| Uniformer Unendlichkeits-Astlink | Attempts 1/2 technisch inconclusive; Attempt 2 zeigte nach exakter Endpunktserialisierung eine zweite Rundungsstelle in der 28-stelligen `Decimal`-Zeilensumme | exakte rationale Zeilensummen fuer Attempt 3; weiterhin keine Branchidentitaet $F_{3600}\to F_\infty$ |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das
@@ -59,7 +59,7 @@ nicht ausgewertet.
 | Erzeugt die FIFO-Struktur den Kreis tautologisch? | Nein. Sie ordnet Alter; der Kreis folgt nur aus Kraftbalance und Dynamik. | finite-$H$-Audit, Rootzertifikat und Kontrollen |
 | Wie hoch ist der KnotScore des Rotating-wave-FIFO? | Nicht erhoben und derzeit nicht entscheidungsfaehig. | gepaarte Formation aus nichtkreisfoermigen Starts plus `eta_zero`, Stationaritaet und vorregistrierte Scorecard |
 | Ist der finite Kreis ein gebildeter Knoten? | Fuer zehn vorbereitete Nichtkreis-Arme gibt es endliche Attractionsevidenz, aber keinen offenen Basin- oder generischen Formationsbeweis. | eigenstaendiges Formation-/Basin-Protokoll |
-| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G1--G3 verbindet die finite Leiter bis zum G4-$H=3600$-Kopf; G4 belegt separat einen lokalen $F_\infty$-Root. Attempt 1 endete vor Publikation; die enge Attempt-2-Remediation ist targetfrei gruen. | CI-/Readiness-gebundener Attempt-2-Link-Record $F_{3600}\to F_\infty$; getrennt davon zweiter Intervallbackend und Stabilitaetsgrenztransfer |
+| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G1--G3 verbindet die finite Leiter bis zum G4-$H=3600$-Kopf; G4 belegt separat einen lokalen $F_\infty$-Root. Attempts 1/2 endeten ohne Resultat an zwei getrennten Record-Rundungsstellen. | rational-exakt remedierter Attempt-3-Link-Record $F_{3600}\to F_\infty$; getrennt davon zweiter Intervallbackend und Stabilitaetsgrenztransfer |
 | Besitzt das System eine interne $S^1$-Phase oder Spin? | Nicht gezeigt; die bisherige Bahn ist eine raeumliche $SO(2)$-Gruppenbahn. | interne Observable nach Quotientierung der Raumrotation |
 | Ist $\mu$ physikalische Masse? | Nur eine effektive positive Center-Port-Darstellung ist belegt. | mikroskopischer Aktuator, Portinvarianz und Einheitenkalibrierung |
 | Gibt es Knoteninteraktion? | P5-D ist technisch `inconclusive`. | erst abgeschlossene Remediation, dann separat autorisierter Lauf |
