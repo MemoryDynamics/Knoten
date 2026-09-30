@@ -23,7 +23,8 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    pruefen. Attempt 1 ist durch einen konservativ abgefangenen
    Dezimalserialisierungsfehler technisch inconclusive. Zuerst exakte
    Binaer-zu-Dezimal-Endpunkte targetfrei implementieren und adversarial
-   reviewen; danach duerfen neue CI, Readiness und eine eigene
+   reviewen. Das Attempt-2-Amendment ist inzwischen als hinreichend eng
+   beurteilt; danach duerfen neue CI, Readiness und eine eigene
    Einmalautorisierung fuer Attempt 2 folgen. Wissenschaftliche Parameter und
    Schwellen bleiben eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
