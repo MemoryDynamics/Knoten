@@ -95,9 +95,11 @@ publiziert, aber formal U4-inconclusive: nur die bytegenaue Gleichheit zweier
 outward-Boxdarstellungen scheitert, waehrend beide uniformen Zertifikate und
 die G4-Bildinklusion bestehen. Als Naechstes folgt kein Retry, sondern ein
 targetfreier, explizit outcome-informierter Endpoint-Lemma-Audit. Sein
-Protokoll ist nun vor der Auditimplementierung eingefroren und kritisch
-reviewt. Paper I
-folgt entweder
+Protokoll ist eingefroren und kritisch reviewt; die targetfreie Implementierung,
+12 Falsifikationskontrollen, die wieder geschlossene Attempt-4-Governance und
+1263 Repository-Tests sind positiv reviewt. Als Naechstes folgen die offizielle
+CI des exakten Implementierungscommits und erst danach die einmalige
+Read-only-Auswertung. Paper I folgt entweder
 auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
