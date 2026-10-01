@@ -1,11 +1,48 @@
 {
-  "authorization": null,
+  "authorization": {
+    "attempt": 3,
+    "authorization_id": "5251d439-1df3-4c41-bd9d-f16a13a8f87a",
+    "ci": {
+      "api_url": "https://api.github.com/repos/MemoryDynamics/Knoten/actions/runs/36781727449",
+      "conclusion": "success",
+      "head_sha": "2fe83db72bcb96366c0900afb19aef3d13c0a46b",
+      "run_id": 36781727449,
+      "status": "completed"
+    },
+    "closed_governance_blob": "ee8c835ea500c94160435383f21eaa87991b9264",
+    "dependencies": {
+      "mpmath": "1.3.0",
+      "python": "3.12"
+    },
+    "implementation_revision": "2fe83db72bcb96366c0900afb19aef3d13c0a46b",
+    "protected_blobs": {
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_execution.py": "be0c52766b6f6a494c1923bdbe4feed0b376706a",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_gate.py": "62fe4255a827191d613fc05f070639032ebb9147",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_result_audit.py": "61196411adcfcd7eaa6aa268426bb3475f5ae4b6",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v3.json": "68977bcb9f0dcf07bd856946f390052f9120bd2a",
+      "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_transfer_gate.py": "56e0c525df4910f78ab14793368b4ce92f176519",
+      "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_receipt_2026-09-30.json": "bc7ec60751f5a6b39f9d8f9204d5174cb9d5cafa",
+      "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_receipt_2026-09-29.json": "a2bf531219a6d13c16e074d29540be989942134e",
+      "reports/project/meta/preregistration/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_protocol_2026-09-30.md": "d767da5e2ec0616abaccc5f5173d7f32957081ae",
+      "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_1_serialization_incident_2026-09-30.md": "f31fc4b97a18803e742d1fa623c9998c19919781",
+      "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_decimal_context_incident_2026-09-30.md": "d5af15e00eeb0139be2e77f867f3946fbdd173e2",
+      "requirements-dev.txt": "da35038de6d498e423eef7e5dfc287c444b1f9e4",
+      "src/emergenz_knoten/rotating_wave_interval.py": "3643f884f7ebe49d90b86b92722e2bc7ade7f276",
+      "src/emergenz_knoten/strict_json_contract.py": "221372ea86f857aa4141e2609e46a0dc536c1ab4",
+      "tests/test_rotating_wave_horizon_infinity_branch_link.py": "7556ac43ca4433189046366b038a7617d04f4245",
+      "tests/test_rotating_wave_horizon_infinity_branch_link_execution.py": "643374a88d4f7182e4cce87471ccc9e70c731c3e",
+      "tests/test_rotating_wave_tail_homotopy_interval.py": "0b0793a013964fdb8a76fbb83cba2ede33801f43"
+    },
+    "readiness_review_blob": "5c7b088d3bf759e286e320fd50c64737d75bc4b6",
+    "readiness_review_path": "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_execution_readiness_review_2026-09-30.md",
+    "schema_sha256": "44c968bbb974f04323c4b334e1b98706fef815ca3f114068fedc72a30eb321bb"
+  },
   "gate": "G-infinity-branch-link",
   "protocol_blob": "d767da5e2ec0616abaccc5f5173d7f32957081ae",
-  "reason": "attempt-3 rational-relation remediation under review; target remains closed",
+  "reason": "explicit broad user authorization on 2026-10-01 for one reviewed attempt-3 target access",
   "result_schema_sha256": "44c968bbb974f04323c4b334e1b98706fef815ca3f114068fedc72a30eb321bb",
   "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v3",
-  "state": "closed",
-  "target_authorized": false,
+  "state": "authorized_once",
+  "target_authorized": true,
   "target_calls_recorded": []
 }
