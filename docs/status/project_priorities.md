@@ -30,10 +30,14 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Attempt 3 dieselbe Relation targetfrei mit exakten rationalen Summen
    auswerten. Das enge Amendment ist inzwischen positiv reviewt; erst nach
    targetfreier Implementierung und Review ebenfalls gruen. Offizielle CI und
-   blobgebundenes Readinessreview sind nun positiv abgeschlossen. Als
-   Naechstes darf genau eine neue Einmalautorisierung und danach der
-   unveraenderte Ziellauf erfolgen. Wissenschaftliche Parameter und Schwellen
-   bleiben eingefroren. Dies ist kein $H\to\infty$-Stabilitaetsgate.
+   blobgebundenes Readinessreview waren positiv; der einmalige Lauf scheiterte
+   jedoch noch vor dem Gate-Import an einer nicht gebundenen
+   NumPy--Numba-Inkompatibilitaet. Attempt 3 ist technisch inconclusive und
+   verbraucht. Vor Attempt 4 muessen `requirements.txt`, `pyproject.toml` und
+   die exakten Runtime-Versionen geschuetzt sowie Gate und Auditor vor dem
+   Receipt targetfrei importiert werden. Wissenschaftliche Parameter und
+   Schwellen bleiben eingefroren. Dies ist kein
+   $H\to\infty$-Stabilitaetsgate.
 2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
    Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
    $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
@@ -78,9 +82,11 @@ von Defektmatrix und Zeilensumme und ist kein mathematisches Negativergebnis.
 Attempt 2 ist trotz positiver Remediation, CI und Readiness an einer zweiten,
 nun synthetisch reproduzierten Decimal-Kontextstelle vor Publikation
 gescheitert. Beide Receipts sind verbraucht; kein Resultatrecord existiert.
-Prioritaet 1 ist der unveraenderte Attempt-3-Ziellauf mit exakten rationalen
-Zeilensummen. Remediation, offizielle CI und blobgebundene Readiness sind
-gruen; Governance ist noch geschlossen. Paper I folgt entweder
+Attempt 3 ist trotz rationaler Remediation, CI und Readiness vor jeder
+Zielauswertung an einer nicht vollstaendig gebundenen Runtime gescheitert.
+Alle drei Receipts sind verbraucht; kein Resultatrecord existiert.
+Prioritaet 1 ist das enge Attempt-4-Dependency-/Preflight-Amendment mit
+Import-vor-Receipt-Semantik. Paper I folgt entweder
 auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).

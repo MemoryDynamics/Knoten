@@ -1,0 +1,10 @@
+{
+  "attempt": 3,
+  "authorization_id": "5251d439-1df3-4c41-bd9d-f16a13a8f87a",
+  "ci_run_id": 36781727449,
+  "created_utc": "2026-10-01T04:19:21.630118+00:00",
+  "governance_sha256": "5be92a42e1c0408b6553ed9a2f1b11797a1a938233d02606979a8ce7f26eff7f",
+  "implementation_revision": "2fe83db72bcb96366c0900afb19aef3d13c0a46b",
+  "revision": "fc825f3a95bf67ed84d6e72c9889220ef8c34b49",
+  "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v3"
+}

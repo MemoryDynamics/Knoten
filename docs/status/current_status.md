@@ -122,8 +122,18 @@ Linux-CI mit Lint, 1241 Tests und strict Docs. Das Execution-Readinessreview
 bindet Commit, CI, beide Incidentketten und 16 geschuetzte Blobs mit dem
 Urteil
 `g-infinity-branch-link-attempt-3-implementation-ready-target-closed`.
-Governance bleibt geschlossen; Resultat, Audit und Manifest existieren noch
-nicht.
+Der darauf einmalig autorisierte Standardaufruf verbrauchte das exklusive
+Receipt, brach aber noch beim Gate-Import ab: Die lokal nur aus
+`requirements-dev.txt` erneuerte Umgebung kombinierte NumPy 2.5 mit Numba
+0.63.1, das hoechstens NumPy 2.3 akzeptiert. Der Runner hatte
+`requirements.txt` und die transitiven Runtime-Versionen nicht gebunden und
+erzeugte das Receipt vor dem targetfreien Import-Preflight. Der korrigierende
+Befund lautet
+`g-infinity-branch-link-attempt-3-inconclusive-dependency-preflight-failure`.
+Resultat, Audit und Manifest existieren nicht; die Lease ist verbraucht und
+es gibt weiterhin keinen Branch-Link-Resultatclaim. Ein Attempt 4 erfordert
+zuerst ein enges Amendment, vollstaendige Dependency-Bindung und
+Import-vor-Receipt-Semantik ohne Aenderung der wissenschaftlichen Parameter.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
