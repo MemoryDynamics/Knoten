@@ -141,8 +141,12 @@ vor dem Receipt geladen und danach als dieselben Modulobjekte verwendet. 52
 fokussierte Tests, 1251 gesamte Tests, Ruff und strict Docs bestehen in einer
 frischen gepinnten CI-Umgebung. Das Reviewurteil lautet
 `g-infinity-branch-link-attempt-4-runtime-preflight-remediation-pass-target-closed`.
-Governance bleibt geschlossen; offizielle CI und blobgebundene Readiness
-stehen noch aus.
+Der exakte Implementierungscommit bestand danach auch die offizielle
+Linux-CI mit gepinnter Installation, Lint, 1251 Tests und strict Docs. Das
+Execution-Readinessreview bindet Commit, CI, sieben Runtimepins, alle drei
+Incidentketten und 22 geschuetzte Blobs mit dem Urteil
+`g-infinity-branch-link-attempt-4-implementation-ready-target-closed`.
+Governance bleibt geschlossen; Resultat, Audit und Manifest existieren nicht.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

@@ -89,8 +89,10 @@ Prioritaet 1 ist das enge Attempt-4-Dependency-/Preflight-Amendment mit
 Import-vor-Receipt-Semantik. Das Protokoll ist eingefroren und positiv
 reviewt; targetfreie Implementierung, 52 fokussierte Tests, die gesamte
 1251-Test-Matrix, Ruff, strict Docs und das Implementierungsreview sind nun
-gruen. Als Naechstes folgen offizieller CI-Nachweis und blobgebundene
-Readiness; Governance bleibt geschlossen. Paper I folgt entweder
+gruen. Offizieller Linux-CI-Nachweis und blobgebundene Readiness sind
+ebenfalls positiv abgeschlossen. Als Naechstes darf genau eine
+governance-only Autorisierung und danach der unveraenderte Standardlauf
+erfolgen. Paper I folgt entweder
 auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
