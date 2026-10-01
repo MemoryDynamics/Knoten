@@ -94,7 +94,9 @@ ebenfalls positiv abgeschlossen. Der einmalige Standardlauf ist gueltig
 publiziert, aber formal U4-inconclusive: nur die bytegenaue Gleichheit zweier
 outward-Boxdarstellungen scheitert, waehrend beide uniformen Zertifikate und
 die G4-Bildinklusion bestehen. Als Naechstes folgt kein Retry, sondern ein
-targetfreier, explizit outcome-informierter Endpoint-Lemma-Audit. Paper I
+targetfreier, explizit outcome-informierter Endpoint-Lemma-Audit. Sein
+Protokoll ist nun vor der Auditimplementierung eingefroren und kritisch
+reviewt. Paper I
 folgt entweder
 auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im

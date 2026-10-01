@@ -716,6 +716,7 @@ eingesetzten Transportgesetze.
 - Attempt-4-Remediation: [targetfreies Implementierungsreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_implementation_review_2026-10-01.md)
 - Attempt-4-Readiness: [blob- und CI-gebundenes Execution-Review](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_execution_readiness_review_2026-10-01.md)
 - Attempt-4-Ergebnis: [publizierter Report](dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.md), [unabhaengiger Audit](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_independent_audit_2026-10-01.json) und [kritisches Ergebnisreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_result_review_2026-10-01.md)
+- Endpoint-Lemma-Reconciliation: [outcome-informiertes Protokoll](project/meta/preregistration/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_protocol_2026-10-01.md) und [kritisches Protokollreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_protocol_review_2026-10-01.md)
 - [P5-D Produktionspfad-Protokoll 2026-09-06](project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
 - [P5-D Produktionsgrenzen-Readinessreview 2026-09-07](project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
 
