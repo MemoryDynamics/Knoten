@@ -134,6 +134,9 @@ Resultat, Audit und Manifest existieren nicht; die Lease ist verbraucht und
 es gibt weiterhin keinen Branch-Link-Resultatclaim. Ein Attempt 4 erfordert
 zuerst ein enges Amendment, vollstaendige Dependency-Bindung und
 Import-vor-Receipt-Semantik ohne Aenderung der wissenschaftlichen Parameter.
+Dieses Amendment ist nun prospektiv eingefroren und positiv protokollreviewt;
+Governance bleibt geschlossen, bis Implementierung, adversarial Tests,
+offizielle CI und Readiness ebenfalls bestanden sind.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

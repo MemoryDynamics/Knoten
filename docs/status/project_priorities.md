@@ -86,7 +86,9 @@ Attempt 3 ist trotz rationaler Remediation, CI und Readiness vor jeder
 Zielauswertung an einer nicht vollstaendig gebundenen Runtime gescheitert.
 Alle drei Receipts sind verbraucht; kein Resultatrecord existiert.
 Prioritaet 1 ist das enge Attempt-4-Dependency-/Preflight-Amendment mit
-Import-vor-Receipt-Semantik. Paper I folgt entweder
+Import-vor-Receipt-Semantik. Das Protokoll ist eingefroren und positiv
+reviewt; als Naechstes folgen ausschliesslich targetfreie Implementierung und
+Falsifikation. Paper I folgt entweder
 auf ein valides spaeteres Ergebnis oder mit weiterhin expliziter
 Unendlichkeitsluecke. Methodischer Stand und Evidenzgrenzen stehen im
 [Experimentkatalog](../reference/experiment_catalog.md).
