@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    {
+      "path": "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.json",
+      "role": "result-json",
+      "sha256": "9b69493b5885c22aa2cbbf855cc5050a6990d6c8618427084afb60fce6c89d17"
+    },
+    {
+      "path": "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.md",
+      "role": "readable-report",
+      "sha256": "5e45fc14355b028c8e89ef1ee054f73b64d61b51429c99a62c58ee42674f7fcc"
+    },
+    {
+      "path": "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_independent_audit_2026-10-01.json",
+      "role": "independent-audit",
+      "sha256": "831c48a27fc75964e5a808fbac77bc0bafe5f272abed114f61521a520d783b49"
+    }
+  ],
+  "execution_commit": "ee87ad931c4c8b27cff2cb44b445459ad4c79511",
+  "protocol_sha256": "598cdf73a7ccdfa45bd163165c2dd2be54d47209cacdb0b297ce0e05472132cd",
+  "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-publication-v1"
+}

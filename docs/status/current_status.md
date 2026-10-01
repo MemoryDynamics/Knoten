@@ -146,7 +146,19 @@ Linux-CI mit gepinnter Installation, Lint, 1251 Tests und strict Docs. Das
 Execution-Readinessreview bindet Commit, CI, sieben Runtimepins, alle drei
 Incidentketten und 22 geschuetzte Blobs mit dem Urteil
 `g-infinity-branch-link-attempt-4-implementation-ready-target-closed`.
-Governance bleibt geschlossen; Resultat, Audit und Manifest existieren nicht.
+Der einmalig autorisierte Standardlauf wurde danach technisch vollstaendig
+publiziert und unabhaengig re-verifiziert. Er endet formal
+`g-infinity-branch-link-inconclusive`: U0--U3 und U5 bestehen, beide Panels
+sind strikt und regulaer mit $\rho_\infty\approx5.9582\,10^{-6}$, aber U4
+scheitert allein an `g4_tail_boxes_match_uniform=False`. Die versiegelten
+G4-Krawczyk-Bilder liegen dagegen in den uniformen Boxen. Das kritische
+Review findet eine Major-Protokoll-zu-Code-Ueberbeschraenkung: exakte
+Textgleichheit unabhaengig outward-gerundeter Boxen wurde verlangt, obwohl
+das registrierte Endpunktlemma Zertifikatsinklusion und Eindeutigkeit braucht.
+Attempt 4 bleibt unveraendert inconclusive; ein targetfreier,
+outcome-informierter Endpoint-Lemma-Audit muss diese Logik nun separat
+falsifizieren oder reconciliieren. Das ist weiterhin kein
+$H\to\infty$-Stabilitaetsclaim.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

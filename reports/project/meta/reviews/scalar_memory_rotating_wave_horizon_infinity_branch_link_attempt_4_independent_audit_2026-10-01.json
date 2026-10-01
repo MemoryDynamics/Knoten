@@ -1,0 +1,16 @@
+{
+  "audited_decision": "g-infinity-branch-link-inconclusive",
+  "checks": {
+    "classification_reconstructed": true,
+    "decimal_relations_reconstructed": true,
+    "endpoint_binding_reconstructed": true,
+    "model_identity_reconstructed": true,
+    "report_reconstructed": true,
+    "sealed_git_blobs_verified": true,
+    "tail_bounds_replayed": true
+  },
+  "report_sha256": "5e45fc14355b028c8e89ef1ee054f73b64d61b51429c99a62c58ee42674f7fcc",
+  "result_sha256": "9b69493b5885c22aa2cbbf855cc5050a6990d6c8618427084afb60fce6c89d17",
+  "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v4",
+  "verdict": "g-infinity-branch-link-independent-audit-agrees"
+}
