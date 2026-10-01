@@ -1,6 +1,6 @@
 # Experimentkatalog
 
-Stand: 2026-09-30.
+Stand: 2026-10-02.
 
 Diese Seite ist ein kuratierter Wegweiser, kein Ergebnisjournal und keine
 zweite Roadmap. Die einzige Arbeitsreihenfolge steht unter
@@ -28,7 +28,7 @@ autorisiert.
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5 finite-H-Stabilitaet | Adapter/Grundgleichungs-Preflight reviewed; `g5-local-direct-stability-pass`, Attempt 3 verbraucht | lokale numerische Stabilitaet bei exakt $H=2400$; kein $H\to\infty$-, Formations- oder Interaktionsclaim |
 | G1--G3-Brueckenkomponente | `g1-g3-local-fixed-alpha-root-branch-connected-reviewed-pass`; Attempt 2 publiziert und unabhaengig auditiert | lokale Rootast-Verbindung $H=600\ldots3600$ mit Endpunktlinks zu G5/G4; direkte Stabilitaet nur bei $H=2400$, kein $H\to\infty$-Stabilitaetsclaim |
-| Uniformer Unendlichkeits-Astlink | Attempt 4 gueltig `inconclusive`: U0--U3/U5 pass, U4 scheitert nur an exakter outward-Boxtextgleichheit; G4-Bilder liegen in den uniformen Boxen | targetfreier outcome-informierter Endpoint-Lemma-Audit; weiterhin kein prospektiver Branchidentitaets- oder Stabilitaetsclaim |
+| Uniformer Unendlichkeits-Astlink | Attempt 4 bleibt gueltig `inconclusive`; der getrennte Audit besteht R0--R6 und reconciliiert die lokale Endpunktidentitaet post-hoc ueber zertifizierte Bildinklusion | kein prospektiver Attempt-4-Pass, kein zweiter Intervallbackend und keine dynamische $H\to\infty$-Stabilitaet |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das
@@ -59,7 +59,7 @@ nicht ausgewertet.
 | Erzeugt die FIFO-Struktur den Kreis tautologisch? | Nein. Sie ordnet Alter; der Kreis folgt nur aus Kraftbalance und Dynamik. | finite-$H$-Audit, Rootzertifikat und Kontrollen |
 | Wie hoch ist der KnotScore des Rotating-wave-FIFO? | Nicht erhoben und derzeit nicht entscheidungsfaehig. | gepaarte Formation aus nichtkreisfoermigen Starts plus `eta_zero`, Stationaritaet und vorregistrierte Scorecard |
 | Ist der finite Kreis ein gebildeter Knoten? | Fuer zehn vorbereitete Nichtkreis-Arme gibt es endliche Attractionsevidenz, aber keinen offenen Basin- oder generischen Formationsbeweis. | eigenstaendiges Formation-/Basin-Protokoll |
-| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | G1--G3 und G4 bleiben positiv; Attempt 4 zertifiziert die uniforme Homotopie lokal, ist aber wegen representationeller U4-Boxgleichheit formal inconclusive. | Endpoint-Lemma-Reconciliation ohne Retuning; getrennt davon zweiter Intervallbackend und Stabilitaetsgrenztransfer |
+| Ueberlebt lokal ein Root bei festem $\alpha$ fuer $H\to\infty$? | Die publizierten Zertifikate tragen die lokale Endpunktidentitaet im post-hoc Audit; Attempt 4 selbst bleibt wegen representationeller U4-Boxgleichheit formal inconclusive. | zweiter Intervallbackend; getrennt davon dynamischer Stabilitaetsgrenztransfer |
 | Besitzt das System eine interne $S^1$-Phase oder Spin? | Nicht gezeigt; die bisherige Bahn ist eine raeumliche $SO(2)$-Gruppenbahn. | interne Observable nach Quotientierung der Raumrotation |
 | Ist $\mu$ physikalische Masse? | Nur eine effektive positive Center-Port-Darstellung ist belegt. | mikroskopischer Aktuator, Portinvarianz und Einheitenkalibrierung |
 | Gibt es Knoteninteraktion? | P5-D ist technisch `inconclusive`. | erst abgeschlossene Remediation, dann separat autorisierter Lauf |

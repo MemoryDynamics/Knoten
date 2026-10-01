@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-30.
+Stand: 2026-10-02.
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -13,7 +13,7 @@ vollstaendige vorherige Stand liegt im
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
 | Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
-| Native Rotation | sieben lokal eindeutige finite-$H$-Roots; sechs zertifizierte Homotopiekanten verbinden G5 bei $H=2400$ mit dem endlichen G4-Kopf bei $H=3600$ | lokale finite Rootast-Verbindung und direkte numerische Stabilitaet bei exakt $H=2400$; separater lokaler $F_\infty$-Root, aber kein letzter Branchtransfer, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
+| Native Rotation | sieben lokal eindeutige finite-$H$-Roots; sechs zertifizierte Homotopiekanten verbinden G5 bei $H=2400$ mit $H=3600$; der lokale $F_\infty$-Endpunkt ist outcome-informiert ueber Bildinklusion reconciliiert | lokale finite Rootast-Verbindung, post-hoc Endpunktidentitaet und direkte numerische Stabilitaet bei exakt $H=2400$; kein prospektiver Attempt-4-Pass, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
@@ -170,7 +170,16 @@ Attempt-4-Governance bestehen 1263 Repository-Tests. Das Implementierungsurteil
 lautet
 `g-infinity-endpoint-lemma-reconciliation-implementation-pass-posthoc-no-output`.
 Der Auditoutput existiert vor der offiziellen CI des exakten Commits bewusst
-nicht.
+nicht. Inzwischen hat der exakte Commit `d301eb6` die offizielle CI
+[36932268414](https://github.com/MemoryDynamics/Knoten/actions/runs/36932268414)
+vollstaendig bestanden. Der danach ausgefuehrte Audit besteht R0--R6 und
+urteilt `g-infinity-endpoint-lemma-reconciled-posthoc`: alle vier endlichen
+und beide G4-Krawczyk-Bilder liegen in den uniformen Boxen, waehrend deren
+outward-Textdarstellungen nachweislich verschieden bleiben. Das kritische
+Ergebnisreview bestaetigt die lokale Endpunktidentitaet auf den publizierten
+Zertifikaten. Attempt 4 bleibt formal inconclusive; ein zweiter
+Intervallbackend und dynamische $H\to\infty$-Stabilitaet sind weiterhin
+offen.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

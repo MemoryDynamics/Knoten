@@ -228,6 +228,26 @@ def test_git_blob_mutation_is_rejected(audit_module):
 
 def test_import_has_no_top_level_execution():
     source = SCRIPT.read_text(encoding="utf-8")
+    output_paths = (
+        ROOT
+        / "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.json",
+        ROOT
+        / "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.md",
+    )
+
+    def snapshot(path):
+        if not path.exists():
+            return None
+        return path.read_bytes(), path.stat().st_mtime_ns
+
+    before = tuple(snapshot(path) for path in output_paths)
+    specification = importlib.util.spec_from_file_location(
+        "endpoint_lemma_reconciliation_import_test", SCRIPT
+    )
+    assert specification is not None and specification.loader is not None
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    after = tuple(snapshot(path) for path in output_paths)
 
     assert "if __name__ == \"__main__\":" in source
-    assert not (ROOT / "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.json").exists()
+    assert after == before
