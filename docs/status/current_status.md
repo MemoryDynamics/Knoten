@@ -117,7 +117,13 @@ eine um $10^{-29}$ zu kleine Obergrenze scheitert weiterhin hart. 42
 fokussierte und 1241 gesamte Tests sowie Ruff bestehen. Das Reviewurteil
 lautet
 `g-infinity-branch-link-attempt-3-rational-remediation-pass-target-closed`.
-Governance bleibt geschlossen; offizielle CI und Readiness stehen noch aus.
+Der exakte Implementierungscommit bestand danach auch die offizielle
+Linux-CI mit Lint, 1241 Tests und strict Docs. Das Execution-Readinessreview
+bindet Commit, CI, beide Incidentketten und 16 geschuetzte Blobs mit dem
+Urteil
+`g-infinity-branch-link-attempt-3-implementation-ready-target-closed`.
+Governance bleibt geschlossen; Resultat, Audit und Manifest existieren noch
+nicht.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
