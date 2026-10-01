@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import copy
 import hashlib
+import importlib.metadata
 import importlib.util
 import json
 from pathlib import Path
@@ -75,7 +76,7 @@ def test_readiness_parser_requires_exact_blob_table(execution):
     )
     text = (
         f"Implementation revision: `{revision}`\n"
-        "Verdict: **`g-infinity-branch-link-attempt-3-implementation-ready-target-closed`**\n"
+        "Verdict: **`g-infinity-branch-link-attempt-4-implementation-ready-target-closed`**\n"
         "https://github.com/MemoryDynamics/Knoten/actions/runs/123\n"
         f"{rows}\n"
     )
@@ -185,6 +186,7 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path: Path):
         "status": "completed",
     }
     receipts = []
+    events = []
     monkeypatch.setattr(execution, "_git_blob", fake_blob)
     monkeypatch.setattr(execution, "_git", fake_git)
     monkeypatch.setattr(
@@ -193,9 +195,15 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path: Path):
         lambda: copy.deepcopy(execution.DEPENDENCIES),
     )
     monkeypatch.setattr(execution, "_validate_output_paths", lambda: None)
+    monkeypatch.setattr(
+        execution,
+        "_load_module",
+        lambda path, name: events.append(f"import:{path.name}")
+        or SimpleNamespace(name=name),
+    )
     review = [
         f"Implementation revision: `{authorization['implementation_revision']}`",
-        "Verdict: **`g-infinity-branch-link-attempt-3-implementation-ready-target-closed`**",
+        "Verdict: **`g-infinity-branch-link-attempt-4-implementation-ready-target-closed`**",
         (
             "https://github.com/MemoryDynamics/Knoten/actions/runs/"
             f"{authorization['ci']['run_id']}"
@@ -209,32 +217,40 @@ def _install_authorized_fakes(execution, monkeypatch, tmp_path: Path):
     monkeypatch.setattr(
         execution,
         "_create_receipt",
-        lambda **kwargs: receipts.append(kwargs)
+        lambda **kwargs: events.append("receipt")
+        or receipts.append(kwargs)
         or (execution.RECEIPT_REL.as_posix(), "7" * 64),
     )
-    return source, remote, receipts, head
+    return source, remote, receipts, head, events
 
 
 def test_authorization_binds_ci_blobs_upstream_and_consumes_once(
     execution, monkeypatch, tmp_path: Path
 ):
-    source, remote, receipts, head = _install_authorized_fakes(
+    source, remote, receipts, head, events = _install_authorized_fakes(
         execution, monkeypatch, tmp_path
     )
 
-    result = execution.require_target_authorization(
+    result, gate, auditor = execution.require_target_authorization(
         governance_path=source, metadata_fn=lambda run_id: remote
     )
 
     assert result["revision"] == result["upstream_revision"] == head
     assert result["receipt_sha256"] == "7" * 64
     assert len(receipts) == 1
+    assert gate.name == "authorized_infinity_branch_gate"
+    assert auditor.name == "authorized_infinity_branch_auditor"
+    assert events == [
+        f"import:{execution.GATE_REL.name}",
+        f"import:{execution.AUDITOR_REL.name}",
+        "receipt",
+    ]
 
 
 def test_authorization_fails_before_receipt_on_remote_mismatch(
     execution, monkeypatch, tmp_path: Path
 ):
-    source, remote, receipts, _ = _install_authorized_fakes(
+    source, remote, receipts, _, events = _install_authorized_fakes(
         execution, monkeypatch, tmp_path
     )
     remote["head_sha"] = "8" * 40
@@ -244,6 +260,71 @@ def test_authorization_fails_before_receipt_on_remote_mismatch(
             governance_path=source, metadata_fn=lambda run_id: remote
         )
     assert receipts == []
+    assert events == []
+
+
+@pytest.mark.parametrize("failure_index", [0, 1])
+def test_import_failure_stops_before_receipt(
+    execution, monkeypatch, tmp_path: Path, failure_index: int
+):
+    source, remote, receipts, _, events = _install_authorized_fakes(
+        execution, monkeypatch, tmp_path
+    )
+    calls = []
+
+    def failing_loader(path, name):
+        calls.append((path, name))
+        if len(calls) - 1 == failure_index:
+            raise ImportError("synthetic incompatible runtime")
+        return SimpleNamespace(name=name)
+
+    with pytest.raises(ImportError, match="incompatible runtime"):
+        execution.require_target_authorization(
+            governance_path=source,
+            metadata_fn=lambda run_id: remote,
+            module_loader=failing_loader,
+        )
+    assert receipts == []
+    assert "receipt" not in events
+    assert len(calls) == failure_index + 1
+
+
+@pytest.mark.parametrize("dependency", sorted(_load_execution().DEPENDENCIES))
+def test_dependency_drift_stops_before_import_and_receipt(
+    execution, monkeypatch, tmp_path: Path, dependency: str
+):
+    source, remote, receipts, _, events = _install_authorized_fakes(
+        execution, monkeypatch, tmp_path
+    )
+    observed = copy.deepcopy(execution.DEPENDENCIES)
+    observed[dependency] = "wrong"
+    monkeypatch.setattr(execution, "_installed_dependencies", lambda: observed)
+
+    with pytest.raises(RuntimeError, match="installed dependencies"):
+        execution.require_target_authorization(
+            governance_path=source, metadata_fn=lambda run_id: remote
+        )
+    assert receipts == []
+    assert events == []
+
+
+def test_missing_dependency_metadata_stops_before_import_and_receipt(
+    execution, monkeypatch, tmp_path: Path
+):
+    source, remote, receipts, _, events = _install_authorized_fakes(
+        execution, monkeypatch, tmp_path
+    )
+
+    def missing():
+        raise importlib.metadata.PackageNotFoundError("numpy")
+
+    monkeypatch.setattr(execution, "_installed_dependencies", missing)
+    with pytest.raises(importlib.metadata.PackageNotFoundError):
+        execution.require_target_authorization(
+            governance_path=source, metadata_fn=lambda run_id: remote
+        )
+    assert receipts == []
+    assert events == []
 
 
 def test_receipt_is_exclusive(execution, monkeypatch, tmp_path: Path):
@@ -301,12 +382,7 @@ def test_execute_once_orders_guard_target_audit_publication_and_verification(
     monkeypatch.setattr(
         execution,
         "require_target_authorization",
-        lambda: calls.append(("guard",)) or provenance,
-    )
-    monkeypatch.setattr(
-        execution,
-        "_load_module",
-        lambda path, name: gate if path == execution.ROOT / execution.GATE_REL else auditor,
+        lambda: calls.append(("guard",)) or (provenance, gate, auditor),
     )
 
     result = execution.execute_once()

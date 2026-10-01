@@ -16,16 +16,16 @@ from typing import Any, Sequence
 ROOT = Path(__file__).resolve().parents[4]
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT_OUTPUT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_independent_audit_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_independent_audit_2026-10-01.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v3"
-ATTEMPT = 3
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v4"
+ATTEMPT = 4
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -33,8 +33,8 @@ CLAIM_BOUNDARY = (
     "under registered tail bounds and mpmath.iv; no H-infinity stability, "
     "global uniqueness, formation, interaction, spin, inertia or mass"
 )
-PROTOCOL_BLOB = "d767da5e2ec0616abaccc5f5173d7f32957081ae"
-PROTOCOL_SHA256 = "e06995e151d3761501541aceaa29e6153965cc1b38d3a4e9ce7f2a973d156be8"
+PROTOCOL_BLOB = "15e97efc5e44ee0179b72b4ea6f16e4a65c5941a"
+PROTOCOL_SHA256 = "598cdf73a7ccdfa45bd163165c2dd2be54d47209cacdb0b297ce0e05472132cd"
 PARAMETERS = {
     "alpha": 0.01,
     "amplitude_att": 3.5,
@@ -477,7 +477,7 @@ def audit_payload_bytes(
     if (
         identity["attempt"] != ATTEMPT
         or identity["schema"] != SCHEMA
-        or identity["version"] != 3
+        or identity["version"] != 4
         or identity["protocol_blob"] != PROTOCOL_BLOB
         or identity["protocol_sha256"] != PROTOCOL_SHA256
         or identity["parameters"] != PARAMETERS
@@ -638,7 +638,7 @@ def audit_payload_bytes(
     if report_bytes != expected_report:
         raise ValueError("readable report mismatch")
     return {
-        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v3",
+        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-independent-audit-v4",
         "audited_decision": expected_decision,
         "checks": {
             "classification_reconstructed": True,

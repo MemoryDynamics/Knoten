@@ -28,7 +28,7 @@ autorisiert.
 | Tailzertifikat/G4 | isolierter Retry reviewed Pass | lokaler $F_\infty$-Root mit zwei strikten 120/160-dps-Panels; keine Branchidentitaet oder Stabilitaet |
 | G5 finite-H-Stabilitaet | Adapter/Grundgleichungs-Preflight reviewed; `g5-local-direct-stability-pass`, Attempt 3 verbraucht | lokale numerische Stabilitaet bei exakt $H=2400$; kein $H\to\infty$-, Formations- oder Interaktionsclaim |
 | G1--G3-Brueckenkomponente | `g1-g3-local-fixed-alpha-root-branch-connected-reviewed-pass`; Attempt 2 publiziert und unabhaengig auditiert | lokale Rootast-Verbindung $H=600\ldots3600$ mit Endpunktlinks zu G5/G4; direkte Stabilitaet nur bei $H=2400$, kein $H\to\infty$-Stabilitaetsclaim |
-| Uniformer Unendlichkeits-Astlink | Attempts 1/2 technisch inconclusive; Attempt 3 scheiterte vor dem Gate-Import an unvollstaendig gebundener NumPy--Numba-Runtime | Attempt-4-Dependency-/Import-Preflight vor Receipt; weiterhin keine Branchidentitaet $F_{3600}\to F_\infty$ |
+| Uniformer Unendlichkeits-Astlink | Attempts 1/2 technisch inconclusive; Attempt 3 scheiterte vor dem Gate-Import; Attempt-4-Dependency-/Import-Preflight targetfrei reviewed | offizielle CI und blobgebundene Readiness vor jeder Autorisierung; weiterhin keine Branchidentitaet $F_{3600}\to F_\infty$ |
 
 Die vier abgeschlossenen Horizontadapter verwenden gemeinsame Newton-,
 Krawczyk-, Residual- und Jacobianfunktionen. Das

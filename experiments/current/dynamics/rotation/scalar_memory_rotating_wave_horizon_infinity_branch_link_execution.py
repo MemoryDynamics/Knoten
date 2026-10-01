@@ -1,4 +1,4 @@
-"""Attempt-3 one-shot guard for the uniform H=3600 to infinity branch-link gate.
+"""Attempt-4 one-shot guard for the uniform H=3600 to infinity branch-link gate.
 
 Importing this module performs no target work.  The tracked governance is
 closed.  A later governance-only commit must bind a reviewed implementation,
@@ -24,15 +24,15 @@ ROOT = Path(__file__).resolve().parents[4]
 BASE = "experiments/current/dynamics/rotation/"
 GOVERNANCE_REL = Path(
     BASE
-    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_governance.json"
+    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_governance.json"
 )
 PROTOCOL_REL = Path(
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_protocol_2026-09-30.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_protocol_2026-10-01.md"
 )
 SCHEMA_REL = Path(
     BASE
-    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v3.json"
+    + "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v4.json"
 )
 GATE_REL = Path(
     BASE + "scalar_memory_rotating_wave_horizon_infinity_branch_link_gate.py"
@@ -47,35 +47,47 @@ EXECUTION_REL = Path(
 )
 READINESS_REVIEW_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_execution_readiness_review_2026-09-30.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_execution_readiness_review_2026-10-01.md"
 )
 RECEIPT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_receipt_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_receipt_2026-10-01.json"
 )
 RESULT_REL = Path(
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.json"
 )
 REPORT_REL = RESULT_REL.with_suffix(".md")
 MANIFEST_REL = RESULT_REL.with_suffix(".publication.json")
 AUDIT_REL = Path(
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_independent_audit_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_independent_audit_2026-10-01.json"
 )
 GOVERNANCE_SCHEMA = (
-    "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v3"
+    "scalar-memory-rotating-wave-horizon-infinity-branch-link-governance-v4"
 )
-ATTEMPT = 3
-DEPENDENCIES = {"mpmath": "1.3.0", "python": "3.12"}
+ATTEMPT = 4
+DEPENDENCIES = {
+    "matplotlib": "3.10.8",
+    "mpmath": "1.3.0",
+    "numba": "0.63.1",
+    "numpy": "2.3.5",
+    "pandas": "3.0.3",
+    "python": "3.12",
+    "scipy": "1.17.1",
+}
 PROTECTED_PATHS = (
+    "requirements.txt",
     "requirements-dev.txt",
+    "pyproject.toml",
     PROTOCOL_REL.as_posix(),
     SCHEMA_REL.as_posix(),
     GATE_REL.as_posix(),
     AUDITOR_REL.as_posix(),
     EXECUTION_REL.as_posix(),
     BASE + "scalar_memory_rotating_wave_horizon_transfer_gate.py",
+    "src/emergenz_knoten/__init__.py",
+    "src/emergenz_knoten/spectral_memory_trace.py",
     "src/emergenz_knoten/rotating_wave_interval.py",
     "src/emergenz_knoten/strict_json_contract.py",
     "tests/test_rotating_wave_tail_homotopy_interval.py",
@@ -89,6 +101,10 @@ PROTECTED_PATHS = (
     "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_receipt_2026-09-30.json",
     "reports/project/meta/reviews/"
     "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_2_decimal_context_incident_2026-09-30.md",
+    "reports/dynamics/rotation/"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_receipt_2026-09-30.json",
+    "reports/project/meta/reviews/"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_dependency_preflight_incident_2026-10-01.md",
 )
 AUTHORIZATION_KEYS = {
     "attempt",
@@ -130,8 +146,13 @@ def _sha256_file(path: Path) -> str:
 
 def _installed_dependencies() -> dict[str, str]:
     return {
+        "matplotlib": importlib.metadata.version("matplotlib"),
         "mpmath": importlib.metadata.version("mpmath"),
+        "numba": importlib.metadata.version("numba"),
+        "numpy": importlib.metadata.version("numpy"),
+        "pandas": importlib.metadata.version("pandas"),
         "python": f"{sys.version_info.major}.{sys.version_info.minor}",
+        "scipy": importlib.metadata.version("scipy"),
     }
 
 
@@ -209,7 +230,7 @@ def _parse_readiness_review(text: str) -> dict[str, Any]:
         raise RuntimeError("infinity branch-link readiness review is incomplete")
     if (
         verdict.group(1)
-        != "g-infinity-branch-link-attempt-3-implementation-ready-target-closed"
+        != "g-infinity-branch-link-attempt-4-implementation-ready-target-closed"
     ):
         raise RuntimeError("infinity branch-link readiness verdict is not upheld")
     if set(blobs) != set(PROTECTED_PATHS):
@@ -258,7 +279,7 @@ def _create_receipt(
         "governance_sha256": governance_sha256,
         "implementation_revision": implementation_revision,
         "revision": revision,
-        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v3",
+        "schema": "scalar-memory-rotating-wave-horizon-infinity-branch-link-receipt-v4",
     }
     content = (
         json.dumps(receipt, allow_nan=False, indent=2, sort_keys=True) + "\n"
@@ -279,7 +300,8 @@ def require_target_authorization(
     *,
     governance_path: Path | None = None,
     metadata_fn: Callable[[int], dict[str, Any]] = _github_run_metadata,
-) -> dict[str, Any]:
+    module_loader: Callable[[Path, str], Any] | None = None,
+) -> tuple[dict[str, Any], Any, Any]:
     governance = _load_governance(governance_path)
     if governance["state"] == "closed":
         raise RuntimeError("infinity branch-link target sealed by machine governance")
@@ -374,6 +396,9 @@ def require_target_authorization(
     if head != upstream:
         raise RuntimeError("infinity branch-link requires upstream synchronization")
     _validate_output_paths()
+    loader = _load_module if module_loader is None else module_loader
+    gate = loader(ROOT / GATE_REL, "authorized_infinity_branch_gate")
+    auditor = loader(ROOT / AUDITOR_REL, "authorized_infinity_branch_auditor")
     source = ROOT / GOVERNANCE_REL if governance_path is None else Path(governance_path)
     governance_sha256 = _sha256_file(source)
     receipt_path, receipt_sha256 = _create_receipt(
@@ -383,17 +408,21 @@ def require_target_authorization(
         implementation_revision=implementation,
         revision=head,
     )
-    return {
-        "attempt": ATTEMPT,
-        "authorization_id": authorization_id,
-        "ci_run_id": run_id,
-        "governance_sha256": governance_sha256,
-        "implementation_revision": implementation,
-        "receipt_path": receipt_path,
-        "receipt_sha256": receipt_sha256,
-        "revision": head,
-        "upstream_revision": upstream,
-    }
+    return (
+        {
+            "attempt": ATTEMPT,
+            "authorization_id": authorization_id,
+            "ci_run_id": run_id,
+            "governance_sha256": governance_sha256,
+            "implementation_revision": implementation,
+            "receipt_path": receipt_path,
+            "receipt_sha256": receipt_sha256,
+            "revision": head,
+            "upstream_revision": upstream,
+        },
+        gate,
+        auditor,
+    )
 
 
 def _load_module(path: Path, name: str) -> Any:
@@ -408,9 +437,7 @@ def _load_module(path: Path, name: str) -> Any:
 def execute_once() -> dict[str, Any]:
     """Consume authorization, calculate two panels, audit, and publish."""
 
-    provenance = require_target_authorization()
-    gate = _load_module(ROOT / GATE_REL, "authorized_infinity_branch_gate")
-    auditor = _load_module(ROOT / AUDITOR_REL, "authorized_infinity_branch_auditor")
+    provenance, gate, auditor = require_target_authorization()
     authorization = {
         key: provenance[key]
         for key in (

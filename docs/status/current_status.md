@@ -135,8 +135,14 @@ es gibt weiterhin keinen Branch-Link-Resultatclaim. Ein Attempt 4 erfordert
 zuerst ein enges Amendment, vollstaendige Dependency-Bindung und
 Import-vor-Receipt-Semantik ohne Aenderung der wissenschaftlichen Parameter.
 Dieses Amendment ist nun prospektiv eingefroren und positiv protokollreviewt;
-Governance bleibt geschlossen, bis Implementierung, adversarial Tests,
-offizielle CI und Readiness ebenfalls bestanden sind.
+die targetfreie Implementierung bindet jetzt beide Requirements-Dateien,
+`pyproject.toml` und sieben direkte Runtime-Versionen. Gate und Auditor werden
+vor dem Receipt geladen und danach als dieselben Modulobjekte verwendet. 52
+fokussierte Tests, 1251 gesamte Tests, Ruff und strict Docs bestehen in einer
+frischen gepinnten CI-Umgebung. Das Reviewurteil lautet
+`g-infinity-branch-link-attempt-4-runtime-preflight-remediation-pass-target-closed`.
+Governance bleibt geschlossen; offizielle CI und blobgebundene Readiness
+stehen noch aus.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

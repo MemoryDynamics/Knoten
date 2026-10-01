@@ -30,27 +30,27 @@ from emergenz_knoten.strict_json_contract import validate_payload as validate_co
 
 ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).with_name(
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v3.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_result_schema_v4.json"
 )
 TRANSFER_GATE_PATH = Path(__file__).with_name(
     "scalar_memory_rotating_wave_horizon_transfer_gate.py"
 )
 PROTOCOL = ROOT / (
     "reports/project/meta/preregistration/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_protocol_2026-09-30.md"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_protocol_2026-10-01.md"
 )
 RESULT = ROOT / (
     "reports/dynamics/rotation/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.json"
 )
 REPORT = RESULT.with_suffix(".md")
 MANIFEST = RESULT.with_suffix(".publication.json")
 AUDIT = ROOT / (
     "reports/project/meta/reviews/"
-    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_3_independent_audit_2026-09-30.json"
+    "scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_independent_audit_2026-10-01.json"
 )
-SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v3"
-ATTEMPT = 3
+SCHEMA = "scalar-memory-rotating-wave-horizon-infinity-branch-link-v4"
+ATTEMPT = 4
 PASS_DECISION = "g-infinity-uniform-tail-branch-link-pass"
 INCONCLUSIVE_DECISION = "g-infinity-branch-link-inconclusive"
 CLAIM_BOUNDARY = (
@@ -352,7 +352,7 @@ def _validate_sealed_inputs(sealed: dict[str, Any]) -> None:
             "identity": {
                 "attempt": ATTEMPT,
                 "schema": SCHEMA,
-                "version": 3,
+                "version": 4,
                 "created_utc": "synthetic",
                 "execution_commit": "0" * 40,
                 "protocol_blob": _schema()["constants"]["protocol_blob"],
@@ -575,7 +575,7 @@ def run_contract(
         "identity": {
             "attempt": ATTEMPT,
             "schema": SCHEMA,
-            "version": 3,
+            "version": 4,
             "created_utc": created_utc or datetime.now(UTC).isoformat(),
             "execution_commit": execution_commit,
             "protocol_blob": _schema()["constants"]["protocol_blob"],

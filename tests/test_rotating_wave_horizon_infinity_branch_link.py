@@ -47,7 +47,7 @@ def auditor():
 
 def _authorization():
     return {
-        "attempt": 3,
+        "attempt": 4,
         "authorization_id": "00000000-0000-4000-8000-000000000001",
         "ci_run_id": 123,
         "governance_sha256": "a" * 64,
