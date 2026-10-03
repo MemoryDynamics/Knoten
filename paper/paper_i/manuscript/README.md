@@ -120,6 +120,8 @@ Argumentation.
 
 Getrennte Schleifen-/Port-Einordnung:
 
+- `paper/paper_i/supplement/evidence_manifest.json`
+- `paper/paper_i/supplement/README.md`
 - `docs/status/p4rs_plain_language_summary.md`
 - `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
 - `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.md`

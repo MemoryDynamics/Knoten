@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-02.
+Stand: 2026-10-04.
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -26,19 +26,23 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Attempt 4 bleibt formal inconclusive und dynamische
    $H\to\infty$-Stabilitaet bleibt offen. Interne Phase, physikalische Masse
    und Interaktion bleiben getrennte Hypothesen. Die erste getrennte
-   Manuskriptintegration und beide Release-PDFs sind erstellt und visuell
-   geprueft. Als Naechstes folgt der Quellen-/Supplement-/Release-Referee-Pass,
-   nicht ein weiterer bestaetigender Ziellauf.
+   Manuskriptintegration und beide Release-PDFs sind erstellt, visuell
+   geprueft und durch die offizielle CI bestaetigt. Eine auf sechs Claims
+   begrenzte, maschinenpruefbare Supplementspur bindet Resultate, Code, Audits,
+   Tests und Negativgrenzen an eingefrorene Commits. Als Naechstes folgen
+   Dependency-Hash-Lock und eindeutige Zitationsmetadaten; kein weiterer
+   bestaetigender Ziellauf.
 2. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 1.** Festlegen,
    ob Paper I ueberhaupt einen Formationsclaim benoetigt. Erst dann darf ein
    gepaartes Formation-/KnotScore-Protokoll fuer den Rotating-wave-FIFO
    entstehen. Ein Score auf einer vorbereiteten exakten Kreisgeschichte ohne
    `eta_zero`- und Formationskontrolle waere nicht entscheidend und wird nicht
    nachgetragen.
-3. **Zertifikats- und Release-Hardening -- parallel zu 1--2.** Einen
-   zweiten unabhaengigen Intervallbackend, reproduzierbare Dependency-Hashes,
-   `CITATION.cff` und eine zitierbare Release vorbereiten. Diese Punkte
-   erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
+3. **Zertifikats- und Release-Hardening -- parallel zu 1--2.** Die
+   Claim-Evidenzspur ist geschlossen. Offen bleiben ein zweiter unabhaengiger
+   Intervallbackend, ein transitiver Dependency-Lock mit Artefakthashes,
+   eindeutige Metadaten fuer `CITATION.cff` und eine zitierbare Release. Diese
+   Punkte erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
 4. **Interaktionsprogramm neu autorisieren -- nach Paper-I-Claimreview.** P5-D bleibt
    `inconclusive`. Ein weiterer Ziellauf braucht ein separates
    outcome-blindes Protokoll, eine neue explizite Freigabe und einen sauberen
@@ -61,6 +65,9 @@ Standardbibliotheksaudit besteht R0--R6 und reconciliiert die lokale
 $F_{3600}\to F_\infty$-Endpunktidentitaet outcome-informiert ueber
 Krawczyk-Bildinklusion und uniforme Eindeutigkeit. Das ersetzt weder einen
 prospektiven Attempt-4-Pass noch einen zweiten Intervallbackend und zeigt keine
-dynamische $H\to\infty$-Stabilitaet. Der aktive Haltepunkt ist damit die
-Paper-I-Konsolidierung mit genau diesen Claimgrenzen. Methodischer Stand und
-Evidenzgrenzen stehen im [Experimentkatalog](../reference/experiment_catalog.md).
+dynamische $H\to\infty$-Stabilitaet. Der aktive Haltepunkt ist damit das
+Paper-I-Release-Hardening mit genau diesen Claimgrenzen. Die
+[Claim-Evidenzspur](https://github.com/MemoryDynamics/Knoten/blob/codex/g1-g3-horizon-bridge/paper/paper_i/supplement/README.md)
+und der
+[Experimentkatalog](../reference/experiment_catalog.md) halten Quellen,
+Methodik und Grenzen getrennt fest.

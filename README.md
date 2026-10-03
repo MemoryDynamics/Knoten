@@ -4,55 +4,25 @@ Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
 
-Stand: 2026-09-27.
+Stand: 2026-10-04.
 
 ## Wissenschaftlicher Stand
 
-- Paper 0 ist der mathematische Anker.
-- Paper I traegt kontrollierte Evidenz fuer eine co-moving skalare
-  Relaxationswolke, nicht fuer ein isoliertes physikalisches Teilchen.
-- Der getrennte deterministische Ast besitzt lokal zertifizierte
-  finite-$H$-Kreisloesungen und ausgewaehlte Stabilitaetsbefunde.
-- Der P4-R-S-Anchor-Holdout bleibt `p4rs-anchor-scale-transfer-pass` und ist
-  keine Replikation.
-- Das interne Source-Audit bleibt
-  `referee-source-ready-with-major-claim-restrictions`.
-- P5-D bleibt nach drei an der finalen Ergebnisstrecke gescheiterten
-  Zielaufrufen `p5d-inconclusive`. Versuch 3 verbrauchte seine Einmalfreigabe
-  und falsifizierte die damalige targetfreie Readiness-Abdeckung. Die danach
-  neu protokollierte Produktionsgrenze ist nach 945 lokalen Tests und gruener
-  CI targetfrei repariert und reviewed; sie ist keine Interaktionsevidenz.
-  Ein separater Audit trennt den nichttautologischen finite-$H$-Kreis vom
-  offenen Horizonttransfer. Das Fixed-$\alpha$-Transferprotokoll ist nach
-  negativem Review amendiert und als hinreichend reviewed. Ergebnisvertrag,
-  RED-Historie und targetfreie Infrastruktur wurden zunaechst mit 985 Tests
-  geprueft. Zwei nachfolgende Negativreviews erzwangen zunaechst vollstaendige
-  Abbruchsemantik und danach die Rekonstruktion positiver Evidenzbeziehungen.
-  Die erste v3-CI falsifizierte ausserdem trigonometrisch erzeugte
-  Arnoldi-Starts als plattformunabhaengig. Der prospektiv erneut amendierte,
-  portable v3-Vertrag wurde anschliessend um eine pure, targetfreie
-  Orchestrierung erweitert. Root-, Homotopie-, lokaler Ausschluss- und
-  Tail-Krawczyk-Adapter verwenden inzwischen gemeinsame Intervallkerne. Der
-  Tailbaustein und der isolierte G4-Komponentenrunner wurden targetfrei
-  reviewed. Der erste autorisierte Komponentenlauf brach nach gruener CI an
-  einer zu strikten Boxserialisierungspruefung ab; es entstand kein Ergebnis
-  und hinterliess kein Ergebnis. Die outward-Rundungspruefung wurde
-  targetfrei korrigiert. Der separat preregistrierte Retry besteht das
-  isolierte G4-Komponentengate mit zwei strikten 120/160-dps-Panels; der
-  unabhaengige Recordaudit stimmt zu. Damit ist ein lokaler
-  $F_\infty$-Root belegt, nicht der vollstaendige Horizonttransfer.
-  LCG-Arnoldi- und Trajektorienadapter bestehen inzwischen targetfrei; der
-  Grundgleichungs-Preflight fuer Gewichtssumme, native Kreisidentitaet,
-  Voll-Jacobian und Symmetrien ist nun ebenfalls targetfrei geprueft. G5
-  simuliert dabei die nichtlineare Voll-FIFO-Grundgleichung; nur Arnoldi ist
-  lokal linearisiert. Der isolierte Ergebnisvertrag, die fail-closed
-  Backendkomposition und der unabhaengige Record-/Publikationsaudit bestehen
-  nun targetfrei. Nach zwei dokumentierten Pipeline-Incidents bestand der
-  separat autorisierte G5-Attempt 3 beide Arnoldi-Panels und drei
-  nichtlineare Stoerungsarme; der enge Befund gilt nur bei $H=2400$. Die
-  fehlende G1--G3-Branchverbindung zu G4 ist inzwischen als eigene Komponente
-  preregistriert, targetfrei implementiert und unabhaengig auditierbar. Ihre
-  One-shot-Governance bleibt geschlossen; es gibt noch kein Leiterergebnis.
+- Paper 0 ist der mathematische Anker; Paper I traegt kontrollierte Evidenz
+  fuer eine co-moving skalare Relaxationswolke, nicht fuer ein Teilchen.
+- Der getrennte deterministische Ast besitzt sieben lokal zertifizierte
+  finite-$H$-Kreisroots und sechs verbindende Homotopiekanten bei
+  $\alpha=0.01$.
+- Direkte lokale Stabilitaetsevidenz liegt fuer exakt $H=2400$ vor; ein
+  vollstaendiger Intervallspektralbeweis fehlt.
+- Ein lokaler $F_\infty$-Root ist zertifiziert. Die lokale Endpunktidentitaet
+  ist post hoc ueber Krawczyk-Bildinklusion reconciliiert; Attempt 4 bleibt
+  formal inconclusive und dynamische $H\to\infty$-Stabilitaet offen.
+- P4-R-S bleibt ein Zwei-Zellen-Skalentransfer, keine Replikation. P5-D bleibt
+  nach drei verbrauchten Produktionsaufrufen `p5d-inconclusive`.
+- Paper I besitzt eine eingefrorene, maschinenpruefbare
+  [Claim-Evidenzspur](paper/paper_i/supplement/README.md); zweiter
+  Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI bleiben offen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 

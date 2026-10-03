@@ -4,6 +4,9 @@ Stand: 2026-10-04.
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+Die maschinenpruefbare Zuordnung der Paper-I-Aussagen zu Resultaten, Code,
+Audits, Tests und Negativgrenzen steht im
+[Paper-I-Supplement](https://github.com/MemoryDynamics/Knoten/blob/codex/g1-g3-horizon-bridge/paper/paper_i/supplement/README.md).
 
 ## Paper 0: Mathematical Anchor
 

@@ -719,7 +719,7 @@ eingesetzten Transportgesetze.
 - Endpoint-Lemma-Reconciliation: [outcome-informiertes Protokoll](project/meta/preregistration/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_protocol_2026-10-01.md) und [kritisches Protokollreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_protocol_review_2026-10-01.md)
 - Endpoint-Lemma-Implementierung: [targetfreies Code- und Falsifikationsreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_implementation_review_2026-10-01.md)
 - Endpoint-Lemma-Ergebnis: [post-hoc Reconciliation](dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.md) und [kritisches Ergebnisreview](project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_result_review_2026-10-02.md)
-- Paper-I-Konsolidierung: [Referee-Review der getrennten Rotating-wave-Integration](project/meta/reviews/paper_i_rotating_wave_claim_consolidation_review_2026-10-04.md)
+- Paper-I-Konsolidierung und Quellenspur: [Integrationsreview](project/meta/reviews/paper_i_rotating_wave_claim_consolidation_review_2026-10-04.md), [maschinenpruefbares Supplement](../paper/paper_i/supplement/README.md) und [Release-Referee-Pass](project/meta/reviews/paper_i_source_trace_release_review_2026-10-04.md)
 - [P5-D Produktionspfad-Protokoll 2026-09-06](project/meta/preregistration/scalar_memory_loop_p5d_production_path_preflight_protocol_2026-09-06.md)
 - [P5-D Produktionsgrenzen-Readinessreview 2026-09-07](project/meta/reviews/scalar_memory_loop_p5d_production_path_readiness_review_2026-09-07.md)
 

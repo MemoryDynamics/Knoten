@@ -1,0 +1,151 @@
+{
+  "schema": "paper-i-claim-evidence-trace-v1",
+  "version": 1,
+  "created_date": "2026-10-04",
+  "repository": "https://github.com/MemoryDynamics/Knoten",
+  "evidence_snapshot_commit": "1bbaa4752907f0bf34e2a4bc8635426042c5a652",
+  "manuscript_snapshot_commit": "668e97cdfff0d313d327a8e359918260a4b64835",
+  "claims": [
+    {
+      "id": "C1",
+      "short_name": "linear-co-moving-memory-cloud",
+      "evidence_class": "finite-run-numerical-reconciliation",
+      "supported_statement": "Nine active long-run slices support the retained-mass linear radius law with median relative error 0.007553084414280692 and maximum relative error 0.011526625184705439.",
+      "execution_commits": [
+        "429c7e03ac6d2ccacefe80f779e04b347a0f3c00"
+      ],
+      "results": [
+        "reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.json",
+        "reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md"
+      ],
+      "code": [
+        "experiments/current/dynamics/long_runs/linear_long_run_reconciliation.py"
+      ],
+      "tests": [
+        "tests/test_linear_long_run_reconciliation.py"
+      ],
+      "exclusions": "No isolated nonlinear object, phase transition, particle, inertia, or mass follows."
+    },
+    {
+      "id": "C2",
+      "short_name": "kernel-collapse-and-nonlinearity-boundary",
+      "evidence_class": "controlled-finite-run-comparison",
+      "supported_statement": "Matched one- and two-scale kernels collapse on the local curvature axis to the reported numerical tolerance; the fixed-g gate gives a smooth radius correction and remains preregistered inconclusive.",
+      "execution_commits": [
+        "3eb0352496969c6f0592fa02a02ee07665e871e7",
+        "5c40d7bbd77faed6a96dcd4a7733df23704edecf"
+      ],
+      "results": [
+        "reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.json",
+        "reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md",
+        "reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.json",
+        "reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md"
+      ],
+      "code": [
+        "experiments/current/kernels/families/kernel_family_comparison.py",
+        "experiments/current/kernels/controls/fixed_g_scale_reconciliation.py"
+      ],
+      "tests": [
+        "tests/test_kernel_family_comparison.py",
+        "tests/test_fixed_g_scale_reconciliation.py"
+      ],
+      "exclusions": "The comparison does not establish a nonlinear metastable transition or a universal kernel equivalence."
+    },
+    {
+      "id": "C3",
+      "short_name": "finite-h-root-branch",
+      "evidence_class": "computer-assisted-local-existence-and-homotopy",
+      "supported_statement": "At alpha=0.01, seven local finite-H roots at H=(600,900,1200,1500,1800,2400,3600) are connected by six Krawczyk homotopy edges.",
+      "execution_commits": [
+        "f9a6fcf45d1e3beeb81fe001be077076e429316b"
+      ],
+      "results": [
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.md",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_independent_audit_2026-09-27.json",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_result_review_2026-09-28.md"
+      ],
+      "code": [
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_gate.py",
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_result_audit.py"
+      ],
+      "tests": [
+        "tests/test_rotating_wave_horizon_g1_g3_bridge.py"
+      ],
+      "exclusions": "This is local fixed-alpha branch evidence, not global uniqueness, generic formation, interaction, spin, inertia, or mass."
+    },
+    {
+      "id": "C4",
+      "short_name": "h2400-local-direct-stability",
+      "evidence_class": "local-numerical-spectrum-and-nonlinear-perturbation",
+      "supported_statement": "At exactly H=2400, two Arnoldi panels agree and three nonlinear full-FIFO perturbation arms contract around the prepared rotating wave.",
+      "execution_commits": [
+        "9007564d4420e357fbef733fe05c7b58d8d1a81d"
+      ],
+      "results": [
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_2026-09-17.md",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_result_review_2026-09-17.md"
+      ],
+      "code": [
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_gate.py",
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g5_component_result_audit.py"
+      ],
+      "tests": [
+        "tests/test_rotating_wave_horizon_g5_component.py"
+      ],
+      "exclusions": "This is not a complete interval spectral proof and does not transfer stability to other horizons or H=infinity."
+    },
+    {
+      "id": "C5",
+      "short_name": "local-infinite-memory-root",
+      "evidence_class": "computer-assisted-local-root-conditional-on-one-interval-backend",
+      "supported_statement": "Two 120/160-dps Krawczyk panels certify a local root of the infinite-memory balance under the registered tail bounds and the mpmath.iv trust base.",
+      "execution_commits": [
+        "fb1cc7d3f9fac5aa9cc2b5e3000ccf030df50c71"
+      ],
+      "results": [
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g4_component_2026-09-13.md",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g4_component_independent_audit_2026-09-13.json",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g4_component_result_review_2026-09-13.md"
+      ],
+      "code": [
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g4_component_gate.py",
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_g4_component_result_audit.py"
+      ],
+      "tests": [
+        "tests/test_rotating_wave_horizon_g4_component.py"
+      ],
+      "exclusions": "The certificate does not by itself connect the root to the finite branch and supplies no dynamical stability claim."
+    },
+    {
+      "id": "C6",
+      "short_name": "posthoc-infinity-endpoint-identity",
+      "evidence_class": "outcome-informed-posthoc-reconciliation",
+      "supported_statement": "Published finite and infinite Krawczyk images lie inside the registered uniform boxes, reconciling local endpoint identity through inclusion and uniqueness.",
+      "execution_commits": [
+        "d301eb6505763383aa69b980b32462d6e60b034c"
+      ],
+      "results": [
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_branch_link_attempt_4_2026-10-01.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.json",
+        "reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.md",
+        "reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_result_review_2026-10-02.md"
+      ],
+      "code": [
+        "experiments/current/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation.py"
+      ],
+      "tests": [
+        "tests/test_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation.py"
+      ],
+      "exclusions": "Attempt 4 remains formally inconclusive; there is no independent second interval backend and no dynamical H-to-infinity stability result."
+    }
+  ],
+  "release_blockers": [
+    "Independent replication of the interval certificates with a second backend is absent.",
+    "A transitive dependency lock with artifact hashes is absent.",
+    "CITATION.cff awaits unambiguous author and preferred-citation metadata.",
+    "No archival release identifier or DOI has been minted."
+  ]
+}
