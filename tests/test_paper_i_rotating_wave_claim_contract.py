@@ -24,6 +24,8 @@ def test_rotating_wave_section_preserves_claim_boundaries(path):
     assert r"\mu_F" in text
     assert "interval backend" in lower or "interval-backend" in lower
     assert "physical mass" in lower
+    assert "claim-to-result, code, audit, test, and exclusion map" in lower
+    assert "ace7000351b7c4ccba8f9cfc8b7464c3361993f2" in text
     assert "certified to $H=\\infty$" not in text
 
 

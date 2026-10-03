@@ -17,7 +17,7 @@ vollstaendige vorherige Stand liegt im
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
-| Source-Audit | `paper-i-source-trace-pass-release-metadata-open` | sechs maschinenpruefbar eingefrorene Claimspuren; zweiter Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI offen |
+| Source-Audit | historisch `referee-source-ready-with-major-claim-restrictions`; aktuell `paper-i-source-trace-pass-release-metadata-open` | sechs maschinenpruefbar eingefrorene Claimspuren; zweiter Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI offen |
 
 ## Was der Kreisnachweis genau sagt
 

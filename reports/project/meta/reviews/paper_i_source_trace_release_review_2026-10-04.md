@@ -48,3 +48,7 @@ verbrauchter Produktionsleases und beschraenkt sich auf Record-, Quell- und
 Vertragspruefung. Vor der Bezeichnung "citation ready" bleiben die vier
 Releasegrenzen offen; sie sind Infrastruktur- beziehungsweise
 Replikationsaufgaben und duerfen die Claimstufe nicht veraendern.
+
+Beide Manuskriptfassungen verweisen mit dem unveraenderlichen Commit
+`ace7000351b7c4ccba8f9cfc8b7464c3361993f2` direkt auf diese Evidenzspur. Der
+externe Leser ist damit nicht auf einen beweglichen Branchzustand angewiesen.

@@ -18,8 +18,10 @@ Stand: 2026-10-04.
 - Ein lokaler $F_\infty$-Root ist zertifiziert. Die lokale Endpunktidentitaet
   ist post hoc ueber Krawczyk-Bildinklusion reconciliiert; Attempt 4 bleibt
   formal inconclusive und dynamische $H\to\infty$-Stabilitaet offen.
-- P4-R-S bleibt ein Zwei-Zellen-Skalentransfer, keine Replikation. P5-D bleibt
-  nach drei verbrauchten Produktionsaufrufen `p5d-inconclusive`.
+- Der P4-R-S-Anchor-Holdout bleibt ein Zwei-Zellen-Skalentransfer und ist
+  keine Replikation; sein historischer Source-Audit bleibt
+  `referee-source-ready-with-major-claim-restrictions`. P5-D bleibt nach drei
+  verbrauchten Produktionsaufrufen `p5d-inconclusive`.
 - Paper I besitzt eine eingefrorene, maschinenpruefbare
   [Claim-Evidenzspur](paper/paper_i/supplement/README.md); zweiter
   Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI bleiben offen.
