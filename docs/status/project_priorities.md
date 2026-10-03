@@ -25,7 +25,10 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Center-Port-Aussagen. Die Endpunktidentitaet ist nur post-hoc reconciliiert;
    Attempt 4 bleibt formal inconclusive und dynamische
    $H\to\infty$-Stabilitaet bleibt offen. Interne Phase, physikalische Masse
-   und Interaktion bleiben getrennte Hypothesen.
+   und Interaktion bleiben getrennte Hypothesen. Die erste getrennte
+   Manuskriptintegration und beide Release-PDFs sind erstellt und visuell
+   geprueft. Als Naechstes folgt der Quellen-/Supplement-/Release-Referee-Pass,
+   nicht ein weiterer bestaetigender Ziellauf.
 2. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 1.** Festlegen,
    ob Paper I ueberhaupt einen Formationsclaim benoetigt. Erst dann darf ein
    gepaartes Formation-/KnotScore-Protokoll fuer den Rotating-wave-FIFO

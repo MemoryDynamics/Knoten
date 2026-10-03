@@ -1,6 +1,6 @@
 # Paper I - Self-Interacting Stochastic Dynamics with Exponential Memory
 
-Stand: 2026-09-01.
+Stand: 2026-10-04.
 
 ## Rolle
 
@@ -61,10 +61,17 @@ gespeicherte Entscheidung ohne Feldabweichung.
 Dieser Zwei-Zellen-Pass ist weder eine unabhaengige Replikation noch eine
 Konvergenzordnung und identifiziert keine physische Interaktion, keinen Spin,
 keine Traegheit und keine Masse. Er wird deshalb nicht in den Paper-I-
-Hauptclaim eingemischt. Eine spaetere Einordnung ist nur als getrennte
-technische Notiz, Supplement-Option oder eng markierter Outlook vorgesehen;
-`main.tex` und `main_compact.tex` bleiben in ihrer zentralen Evidenzlinie
-unveraendert.
+Hauptclaim eingemischt. Beide Manuskriptfassungen enthalten nun einen klar
+getrennten computerassistierten Abschnitt zur endlichen Rootfamilie, zur
+lokalen $H=2400$-Stabilitaetsevidenz und zur post-hoc reconciliierten
+$F_\infty$-Endpunktidentitaet. Der zentrale Memory-Cloud-Claim bleibt
+unveraendert; Attempt 4 bleibt formal inconclusive und dynamische
+$H\to\infty$-Stabilitaet offen.
+
+Die Notation folgt dort bewusst dem Modellkern: $q=1-\alpha$, $H$, $M_H$,
+$B_H$, $c_n$ und $g_H$. Der effektive Center-Port-Koeffizient $\mu_F$ wird
+nur als separater Portvertrag genannt und nicht als physikalische Masse oder
+Bestandteil der Rootgleichung behandelt.
 
 | Ebene | Eng tragbare Aussage | Nicht daraus ableitbar |
 | --- | --- | --- |
@@ -115,6 +122,10 @@ Getrennte Schleifen-/Port-Einordnung:
 
 - `docs/status/p4rs_plain_language_summary.md`
 - `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
+- `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_g1_g3_bridge_attempt_2_2026-09-27.md`
+- `reports/dynamics/rotation/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_2026-10-01.md`
+- `reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_infinity_endpoint_lemma_reconciliation_result_review_2026-10-02.md`
+- `reports/project/meta/reviews/paper_i_rotating_wave_claim_consolidation_review_2026-10-04.md`
 
 ## Reviewte N0-Bruecke zum Schleifenarm
 

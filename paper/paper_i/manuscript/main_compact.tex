@@ -14,7 +14,7 @@ Markov Embedding and a Linear Memory-Cloud Baseline}
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{26 July 2026}
+\date{4 October 2026}
 
 \begin{abstract}
 We study a point-valued stochastic process coupled to a self-generated spatial
@@ -290,6 +290,39 @@ When a relaxation rate is independently identified, the dimensionless ratio
 compares relaxation with diffusion on the deposition scale.
 No physical mass interpretation follows without an additional operational
 calibration.
+
+\section{Separate Deterministic Rotating-Wave Branch}
+
+For completeness, we separate the stochastic memory-cloud result from a
+computer-assisted deterministic specialization in $d=2$.  With
+$q=1-\alpha$ and a filled FIFO of depth $H$, the retained mass is
+$M_H=M_0(1-q^H)$ and the normalized center filter is
+\begin{equation}
+B_H(z)=\frac{\alpha}{1-q^H}
+\sum_{j=0}^{H-1}(qz^{-1})^j,\qquad B_H(1)=1.
+\end{equation}
+The center $c_n=B_H(L)x_n$ is not the orbital phase.  The certified calculation
+uses the full nonlinear FIFO force and its full Jacobian, not the local scalar
+replacement $-g_H(x_n-c_n)$.
+
+The relative-equilibrium ansatz $x_n=R\exp(i n\theta)$ reduces the unchanged
+update to radial and tangential balances $F_H(R,\theta)=0$; it does not add a
+harmonic oscillator.  At fixed $\alpha=0.01$, Krawczyk certificates connect a
+local finite root branch through
+$H=(600,900,1200,1500,1800,2400,3600)$.  The identical $H=2400$ root has
+separate local numerical stability evidence from two agreeing Arnoldi panels
+and three contracting nonlinear full-FIFO perturbation arms.
+
+A separate pair of 120/160-digit panels certifies a local $F_\infty$ root.
+The prospective uniform-tail run remains formally inconclusive because it
+required byte-identical text for independently outward-rounded boxes.  A
+registered post-hoc audit passed R0--R6 and reconciled the local endpoint from
+certified image inclusion and uniform uniqueness despite unequal box texts.
+This is neither a prospective pass nor a second interval backend.  It proves
+no dynamical $H\to\infty$ stability, formation, internal phase, spin,
+interaction, inertia, or physical mass.  The effective center-port
+coefficient $\mu_F$ belongs to a separate port contract and not to the root
+equation.
 
 \section{Discussion}
 

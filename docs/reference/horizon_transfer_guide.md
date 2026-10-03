@@ -1,6 +1,7 @@
 # Horizonttransfer: vom Ringspeicher zum unendlichen Gedaechtnis
 
-Stand: 2026-09-28, nach auditiertem G1--G3-Attempt 2 und Metareview.
+Stand: 2026-10-04, nach auditiertem G1--G3-Attempt 2 und
+Endpoint-Lemma-Reconciliation.
 
 Diese Seite erklaert den Fixed-alpha-Horizonttest zuerst anschaulich und dann
 bis zur implementierten Mathematik. Sie ist ein Lesepfad, keine zweite
@@ -218,10 +219,16 @@ getrackte Governance bleibt geschlossen und kein Zielzugriff ist autorisiert.
 
 Ein isolierter G4-Pass stuetzt nur: In der registrierten lokalen Box existiert
 unter den Tailbounds ein Root von $F_\infty$. G1 bis G3 verbinden die
-endliche Anchor-Leiter mit dem endlichen G4-Kopf bei $H=3600$, aber noch
-nicht durch eine weitere Homotopie mit dem separaten $F_\infty$-Root. G5
-fuegt am identischen endlichen $H=2400$-Root lokale dynamische Stabilitaet
-hinzu. G6 kontrolliert die Speicherimplementierung.
+endliche Anchor-Leiter mit dem endlichen G4-Kopf bei $H=3600$. Der spaetere
+uniforme Attempt 4 bleibt formal U4-inconclusive, weil sein Code zusaetzlich
+bytegleiche Texte unabhaengig outward-gerundeter Boxen verlangte. Ein getrennt
+registrierter, outcome-informierter Standardbibliotheksaudit besteht jedoch
+R0--R6: Die zertifizierten endlichen und G4-Krawczyk-Bilder liegen in den
+uniformen Eindeutigkeitsboxen. Unter dem registrierten Endpoint-Lemma
+reconciliiert das die lokale Endpunktidentitaet, ohne Attempt 4 nachtraeglich
+in einen prospektiven Pass umzubenennen. G5 fuegt am identischen endlichen
+$H=2400$-Root lokale dynamische Stabilitaet hinzu. G6 kontrolliert die
+Speicherimplementierung.
 
 Der separat preregistrierte Retry vom 2026-09-13 hat diesen isolierten G4-Test
 mit zwei strikten, ueberlappenden 120/160-dps-Panels bestanden; der getrennte
@@ -239,6 +246,13 @@ Nachbarueberlappungen; G3 wurde aus den outward-gerundeten Innenintervallen
 rekonstruiert. Vertrag, direkter 70-dps-Summenreplay, FIFO-Kontrollen,
 Standardbibliotheksaudit, Manifest-last-Publikation und One-shot-Guard sind
 geprueft. Die Governance ist nach dem verbrauchten Lauf wieder geschlossen.
+
+Der anschliessende Endpoint-Lemma-Audit startet keinen numerischen Backend-
+oder Targetlauf. Er bindet sieben publizierte Git-Blobs und rekonstruiert die
+entscheidenden Einschlussrelationen mit exakter `Decimal`-Ordnung. Das ist
+eine post-hoc mathematische Reconciliation auf der vorhandenen
+`mpmath.iv`-Vertrauensbasis, keine unabhaengige Intervallreplikation. Vor allem
+bleibt die dynamische $H\to\infty$-Stabilitaet offen.
 
 Keine Kombination dieser Gates beweist fuer sich physikalische Masse,
 internen Spin, generische Knotenbildung oder Knoteninteraktion. Diese Claims

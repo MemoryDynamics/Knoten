@@ -16,7 +16,7 @@
 \author{H. Horn}
 \affiliation{Peine Stederdorf, Germany}
 
-\date{26 July 2026}
+\date{4 October 2026}
 
 \begin{abstract}
 We study a point-valued stochastic process on a continuous state space in which
@@ -520,20 +520,20 @@ projection artifacts and from the corresponding control spectrum.
 \subsection{Local relaxation diagnostics}
 
 For a quasi-stationary memory field, let $x_\star$ satisfy
-$\nabla\Phi[\rho](x_\star)=0$ and let $H$ be the Hessian of the memory
+$\nabla\Phi[\rho](x_\star)=0$ and let $\mathcal H$ be the Hessian of the memory
 potential there.
 The formal continuum approximation from Eq.~(\ref{eq:coarse_sde}) gives
 \begin{equation}
-dX_t=-\frac{\eta}{\alpha}H(X_t-x_\star)\,dt
+dX_t=-\frac{\eta}{\alpha}\mathcal H(X_t-x_\star)\,dt
      +\sqrt{2D}\,dW_t .
 \label{eq:ou_full}
 \end{equation}
-Local restoring behavior requires the symmetric part of $H$ to be positive in
+Local restoring behavior requires the symmetric part of $\mathcal H$ to be positive in
 the directions considered.
-If $\lambda_H$ is a characteristic eigenvalue, the frozen-memory rate scales
+If $\lambda_{\mathcal H}$ is a characteristic eigenvalue, the frozen-memory rate scales
 as
 \begin{equation}
-\Gamma_{\mathrm{rel}}\sim\frac{\eta}{\alpha}\lambda_H .
+\Gamma_{\mathrm{rel}}\sim\frac{\eta}{\alpha}\lambda_{\mathcal H} .
 \end{equation}
 This is a local approximation to the broader spectral diagnostic in
 Eq.~(\ref{eq:implied_rate_full}), not an independent proof of a metastable
@@ -548,6 +548,83 @@ $\sigma$ and $D$ are transformed consistently.
 Neither $\Gamma_{\mathrm{rel}}$ nor $\widehat\Gamma$ is a physical mass.
 Such an interpretation would require a separate operational calibration that
 is absent from this paper.
+
+\section{Separate Computer-Assisted Rotating-Wave Branch}
+\label{sec:rotating_branch_full}
+
+The stochastic memory-cloud result above and the following deterministic
+branch are logically distinct.  The latter sets $\varepsilon=0$, works in
+$d=2$, and stores the last $H$ positions explicitly.  With
+$q=1-\alpha$, the full nonlinear FIFO update is
+\begin{equation}
+x_{n+1}=x_n-\eta\sum_{j=0}^{H-1}\alpha M_0q^j
+\phi(\lVert x_n-x_{n-j}\rVert)(x_n-x_{n-j}),
+\label{eq:finite_fifo_rotating_full}
+\end{equation}
+followed by the shift
+$(x_{n+1},x_n,\ldots,x_{n-H+2})$.
+Thus the FIFO orders the memory by age; it does not impose a spatial circle.
+
+The corresponding retained mass and normalized center filter are
+\begin{equation}
+M_H=M_0(1-q^H),
+\end{equation}
+\begin{equation}
+B_H(z)=\frac{\alpha}{1-q^H}
+\sum_{j=0}^{H-1}(qz^{-1})^j,\qquad B_H(1)=1.
+\label{eq:center_filter_rotating_full}
+\end{equation}
+The memory center is $c_n=B_H(L)x_n$.  In a separate local center reduction,
+one may define the restoring gain $g_H=\eta M_H\kappa_K$, but the certified
+finite-radius calculation uses Eq.~(\ref{eq:finite_fifo_rotating_full}) and
+its full FIFO Jacobian rather than replacing it by $-g_H(x_n-c_n)$.
+In particular, $c_n$ is a center coordinate and not the orbital phase.
+
+Substitution of the relative equilibrium
+$x_n=R\exp(i n\theta)$ reduces Eq.~(\ref{eq:finite_fifo_rotating_full}) to
+two real balance equations,
+\begin{equation}
+F_H(R,\theta)=0,
+\label{eq:rotating_balance_full}
+\end{equation}
+one radial and one tangential.  This is an ansatz used to locate a relative
+equilibrium of the original update, not an added harmonic oscillator.
+Three computer-assisted findings must be kept separate.
+
+First, at fixed $\alpha=0.01$, interval Krawczyk certificates establish a
+local finite root branch for
+$H=(600,900,1200,1500,1800,2400,3600)$.
+Six registered equation homotopies connect adjacent cells, while mutual
+endpoint inclusions identify the $H=2400$ and $H=3600$ roots with the
+separately sealed finite components.  This proves local existence and branch
+connection only inside the registered boxes.
+
+Second, the identical $H=2400$ root has direct local numerical stability
+evidence: two largest-modulus Arnoldi panels agree and three nonlinear
+full-FIFO perturbation trajectories contract.  Arnoldi alone is linearized;
+the perturbation trajectories iterate Eq.~(\ref{eq:finite_fifo_rotating_full}).
+This is not a complete interval enclosure of the spectrum and it does not
+transfer stability to other values of $H$.
+
+Third, two 120/160-digit Krawczyk panels certify a local root of the
+infinite-memory balance $F_\infty$ under registered tail bounds.  The
+prospective uniform-tail run remains formally inconclusive because one gate
+required byte-identical text representations of two independently
+outward-rounded boxes.  A separately registered, outcome-informed audit of
+the published intervals nevertheless passed all gates R0--R6: the certified
+finite and infinite Krawczyk images lie in the corresponding uniform
+uniqueness boxes even though the box texts differ.  Uniform uniqueness then
+identifies the local endpoint.  This is a post-hoc endpoint-lemma
+reconciliation, not a retrospective pass of the prospective run and not an
+independent interval-backend replication.
+
+No dynamical $H\to\infty$ stability follows.  Nor does this prepared spatial
+$SO(2)$ orbit establish spontaneous formation, an internal phase after
+quotienting spatial rotation, spin, interaction, inertia, or physical mass.
+A separately declared center-force port may possess an effective coefficient
+$\mu_F$ (and hence a filter-inertia parametrization), but $\mu_F$ is not part
+of Eq.~(\ref{eq:rotating_balance_full}) and is not a material mass.
+
 \section{Discussion and Outlook}
 %-------------------------------------------------
 

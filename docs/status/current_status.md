@@ -181,6 +181,15 @@ Zertifikaten. Attempt 4 bleibt formal inconclusive; ein zweiter
 Intervallbackend und dynamische $H\to\infty$-Stabilitaet sind weiterhin
 offen.
 
+Die Lang- und Kompaktfassung von Paper I enthalten inzwischen einen getrennten
+computerassistierten Rotating-wave-Abschnitt. Er schreibt volle FIFO-Gleichung,
+$B_H$, $c_n$ und $g_H$ aus, trennt finite Existenz, lokale
+$H=2400$-Stabilitaetsevidenz und post-hoc Endpunktidentitaet und reserviert
+$\mu_F$ fuer den separaten Center-Portvertrag. Beide Release-PDFs bauen ohne
+offene Referenzen oder Overfull-Boxen und wurden seitenweise visuell geprueft.
+Offen bleiben Quellen-/Supplementbindung, zweiter Intervallbackend,
+Dependency-Lock und zitierbare Release.
+
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt
 die Vorwaertsleiter bis $H=3600$ von der unteren $H=900,600$-Belastung und
