@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software or its evidence records, please cite the preferred citation below."
+title: "Emergenz Knoten"
+type: software
+authors:
+  - family-names: "Horn"
+    given-names: "H."
+version: "0.1.0"
+repository-code: "https://github.com/MemoryDynamics/Knoten"
+url: "https://github.com/MemoryDynamics/Knoten"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Self-Interacting Stochastic Dynamics with Exponential Memory: Markov Embedding, Effective Scaling, and a Linear Memory-Cloud Baseline"
+  authors:
+    - family-names: "Horn"
+      given-names: "H."
+  year: 2026

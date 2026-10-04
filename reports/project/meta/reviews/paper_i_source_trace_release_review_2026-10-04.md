@@ -1,7 +1,7 @@
 # Paper I: Quellen- und Release-Referee-Pass
 
 Datum: 2026-10-04  
-Urteil: `paper-i-source-trace-pass-release-metadata-open`
+Urteil: `paper-i-source-trace-and-release-metadata-pass-archive-open`
 
 ## Umfang
 
@@ -28,12 +28,14 @@ umetikettiert werden.
 
 ## Kritische Grenzen
 
-Der Quellenpfad ist nun eindeutig, aber die Einreichung ist noch nicht
-archivfest. Es fehlen ein zweiter unabhaengiger Intervallbackend, ein
-transitiver Dependency-Lock mit Artefakthashes, eindeutige Autoren- und
-Preferred-citation-Metadaten fuer `CITATION.cff` sowie eine unveraenderliche
-Release-ID oder DOI. Die bestehenden direkten Python-Pins sind deshalb nicht
-als vollstaendiger Lock auszugeben.
+Der Quellenpfad ist nun eindeutig. Ein mit Python 3.12 erzeugter transitiver
+Lock bindet 50 Pakete und 1219 PyPI-Artefakthashes; seine Installation mit
+`--require-hashes` besteht in einem frischen Zielordner. `CITATION.cff`
+uebernimmt Titel und Autor H. Horn aus der Langfassung, ohne ORCID, Journal
+oder DOI zu erfinden, und besteht die CFF-1.2.0-Schemavalidierung.
+
+Die Einreichung ist dennoch nicht archivfest. Es fehlen ein zweiter
+unabhaengiger Intervallbackend und eine unveraenderliche Release-ID oder DOI.
 
 Die Auditoren sind vom Produktionsrunner getrennt und rekonstruieren die
 Records, teilen aber den wesentlichen `mpmath.iv`-Trust-Stack. Sie sind keine
@@ -45,7 +47,7 @@ Endpunktidentitaet weiterhin keine dynamische $H\to\infty$-Stabilitaet.
 Kein Critical- oder Major-Claimfehler wurde in der Quellenzuordnung gefunden.
 Die Reproduktionsanleitung vermeidet einen methodisch unzulaessigen Rerun
 verbrauchter Produktionsleases und beschraenkt sich auf Record-, Quell- und
-Vertragspruefung. Vor der Bezeichnung "citation ready" bleiben die vier
+Vertragspruefung. Vor der Bezeichnung "archivally released" bleiben die zwei
 Releasegrenzen offen; sie sind Infrastruktur- beziehungsweise
 Replikationsaufgaben und duerfen die Claimstufe nicht veraendern.
 

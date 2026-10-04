@@ -34,13 +34,12 @@ replication.
 
 ## Verification
 
-Install the pinned direct runtime and test dependencies, then verify the
-manifest contract and the corresponding record contracts:
+Install the Python 3.12 transitive hash lock, then verify the manifest contract
+and the corresponding record contracts:
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pip install -r requirements-dev.txt
-python -m pip install -e .
+python -m pip install --require-hashes -r requirements-lock.txt
+python -m pip install --no-deps --no-build-isolation -e .
 python -m pytest tests/test_paper_i_evidence_trace.py \
   tests/test_linear_long_run_reconciliation.py \
   tests/test_kernel_family_comparison.py \
@@ -58,8 +57,8 @@ prospective governance rather than a reproduction shortcut.
 
 ## Release boundary
 
-This trace closes the path-to-source ambiguity but not archival release
-readiness. Four items remain: a second interval backend, a transitive lock
-with artifact hashes, unambiguous author/preferred-citation metadata for
-`CITATION.cff`, and an immutable release identifier or DOI. None of these
-administrative or replication steps may broaden the scientific claims.
+This trace, the transitive hash lock, and `CITATION.cff` close the repository
+source and metadata ambiguities but not archival release readiness. Two items
+remain: an independent second interval backend and an immutable release
+identifier or DOI. Neither replication nor archiving may broaden the
+scientific claims.

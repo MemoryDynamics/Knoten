@@ -29,20 +29,21 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Manuskriptintegration und beide Release-PDFs sind erstellt, visuell
    geprueft und durch die offizielle CI bestaetigt. Eine auf sechs Claims
    begrenzte, maschinenpruefbare Supplementspur bindet Resultate, Code, Audits,
-   Tests und Negativgrenzen an eingefrorene Commits. Als Naechstes folgen
-   Dependency-Hash-Lock und eindeutige Zitationsmetadaten; kein weiterer
-   bestaetigender Ziellauf.
+   Tests und Negativgrenzen an eingefrorene Commits. Transitive
+   Dependency-Hashes und eindeutige Zitationsmetadaten sind ebenfalls
+   geschlossen. Als Naechstes folgt die Archiv-Release-Vorbereitung; kein
+   weiterer bestaetigender Ziellauf.
 2. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 1.** Festlegen,
    ob Paper I ueberhaupt einen Formationsclaim benoetigt. Erst dann darf ein
    gepaartes Formation-/KnotScore-Protokoll fuer den Rotating-wave-FIFO
    entstehen. Ein Score auf einer vorbereiteten exakten Kreisgeschichte ohne
    `eta_zero`- und Formationskontrolle waere nicht entscheidend und wird nicht
    nachgetragen.
-3. **Zertifikats- und Release-Hardening -- parallel zu 1--2.** Die
-   Claim-Evidenzspur ist geschlossen. Offen bleiben ein zweiter unabhaengiger
-   Intervallbackend, ein transitiver Dependency-Lock mit Artefakthashes,
-   eindeutige Metadaten fuer `CITATION.cff` und eine zitierbare Release. Diese
-   Punkte erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
+3. **Zertifikats- und Release-Hardening -- parallel zu 1--2.** Claimspur,
+   transitiver Python-3.12-Hash-Lock und `CITATION.cff` sind geschlossen.
+   Offen bleiben ein zweiter unabhaengiger Intervallbackend und eine
+   unveraenderliche Archiv-Release mit DOI. Diese Punkte erhoehen Pruefbarkeit,
+   ersetzen aber kein wissenschaftliches Gate.
 4. **Interaktionsprogramm neu autorisieren -- nach Paper-I-Claimreview.** P5-D bleibt
    `inconclusive`. Ein weiterer Ziellauf braucht ein separates
    outcome-blindes Protokoll, eine neue explizite Freigabe und einen sauberen

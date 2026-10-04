@@ -144,8 +144,6 @@
   ],
   "release_blockers": [
     "Independent replication of the interval certificates with a second backend is absent.",
-    "A transitive dependency lock with artifact hashes is absent.",
-    "CITATION.cff awaits unambiguous author and preferred-citation metadata.",
     "No archival release identifier or DOI has been minted."
   ]
 }

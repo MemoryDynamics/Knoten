@@ -17,7 +17,7 @@ vollstaendige vorherige Stand liegt im
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |
 | P5-D | `p5d-inconclusive`; drei eigene Produktionsaufrufe technisch verbraucht | keine Interaktionsevidenz; der separate G5-Pass ist ein Single-Loop-Stabilitaetsbefund und keine P5-D-Aussage |
-| Source-Audit | historisch `referee-source-ready-with-major-claim-restrictions`; aktuell `paper-i-source-trace-pass-release-metadata-open` | sechs maschinenpruefbar eingefrorene Claimspuren; zweiter Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI offen |
+| Source-Audit | historisch `referee-source-ready-with-major-claim-restrictions`; aktuell `paper-i-source-trace-and-release-metadata-pass-archive-open` | sechs eingefrorene Claimspuren, transitiver Hash-Lock und `CITATION.cff`; zweiter Intervallbackend und DOI offen |
 
 ## Was der Kreisnachweis genau sagt
 
@@ -186,9 +186,11 @@ computerassistierten Rotating-wave-Abschnitt. Er schreibt volle FIFO-Gleichung,
 $B_H$, $c_n$ und $g_H$ aus, trennt finite Existenz, lokale
 $H=2400$-Stabilitaetsevidenz und post-hoc Endpunktidentitaet und reserviert
 $\mu_F$ fuer den separaten Center-Portvertrag. Beide Release-PDFs bauen ohne
-offene Referenzen oder Overfull-Boxen und wurden seitenweise visuell geprueft.
-Offen bleiben Quellen-/Supplementbindung, zweiter Intervallbackend,
-Dependency-Lock und zitierbare Release.
+offene Referenzen oder Overfull-Boxen, wurden seitenweise visuell geprueft und
+verweisen auf die commit-fixierte Claim-Evidenzspur. Der transitive
+Python-3.12-Lock mit Artefakthashes wurde in einer frischen Umgebung
+installiert; `CITATION.cff` spiegelt den Manuskriptautor H. Horn. Offen bleiben
+ein zweiter Intervallbackend und eine zitierbare Archiv-Release mit DOI.
 
 Dieses Gate ist inzwischen prospektiv spezifiziert. Es haelt
 $\alpha=0.01$, $\eta=0.15$, $M_0$, Kernel und $\varepsilon=0$ fest, trennt

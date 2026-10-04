@@ -23,8 +23,8 @@ Stand: 2026-10-04.
   `referee-source-ready-with-major-claim-restrictions`. P5-D bleibt nach drei
   verbrauchten Produktionsaufrufen `p5d-inconclusive`.
 - Paper I besitzt eine eingefrorene, maschinenpruefbare
-  [Claim-Evidenzspur](paper/paper_i/supplement/README.md); zweiter
-  Intervallbackend, Hash-Lock, Zitationsmetadaten und DOI bleiben offen.
+  [Claim-Evidenzspur](paper/paper_i/supplement/README.md), einen transitiven
+  Hash-Lock und `CITATION.cff`; zweiter Intervallbackend und DOI bleiben offen.
 - Interaktion, Ladung, Spin, Impuls, Traegheit und Masse sind Hypothesen, keine
   Ergebnisse dieses Repositorys.
 
@@ -45,9 +45,8 @@ Prioritaetenliste.
 ## Installation und Pruefung
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pip install -r requirements-dev.txt
-python -m pip install -e .
+python -m pip install --require-hashes -r requirements-lock.txt
+python -m pip install --no-deps --no-build-isolation -e .
 python -m pytest tests -q
 python -m mkdocs build --strict
 ```

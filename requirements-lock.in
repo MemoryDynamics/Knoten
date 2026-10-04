@@ -1,0 +1,8 @@
+# Unified Python 3.12 environment for runtime, tests, documentation, and
+# non-isolated editable installation in CI.
+-r requirements.txt
+-r requirements-dev.txt
+-r docs/requirements.txt
+
+setuptools==84.0.0
+wheel==0.48.0
