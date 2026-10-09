@@ -434,6 +434,20 @@ The implemented finite-history benchmark uses the retained mass
 M_{\mathrm{stored}}=1-(1-\alpha)^H
 \end{equation}
 inside $g$, where $H$ is the stored history depth.
+This corrects the local gain but does not make
+Eq.~(\ref{eq:linear_radius_full}) exact for a finite buffer: retirement of
+the oldest contribution adds a term to the centroid update. The benchmark
+is a retained-mass approximation to the untruncated linear mode; its
+truncation error must be assessed separately from nonlinear corrections.
+For the nine reported slices ($\alpha=0.01$, $H=600$), the full linear FIFO
+impulse response changes the position-relative RMS prediction by at most
+$0.0074\%$. Doubling its numerical length from 20000 to 40000 updates
+changes the accumulated variance by less than $10^{-10}$ relatively;
+this convergence check is not a rigorous remainder bound.
+The stored observable is the median radius of the memory cloud about its
+centroid, whereas Eq.~(\ref{eq:linear_radius_full}) describes the stationary
+RMS of $x_n-m_n$. Their agreement compares distinct observables and requires
+a matching memory-cloud statistic before it validates the radius formula.
 Equation~(\ref{eq:linear_radius_full}) predicts compact motion relative to the
 moving memory center without invoking nonlinear metastability.
 
@@ -562,8 +576,9 @@ approximation.
 The principal numerical conclusion is narrower and more informative than the
 earlier knot interpretation.
 The corrected scalar reference branch is a reproducible co-moving relaxation
-cloud whose radius follows the exact linear center-relative prediction across
-all nine tested long-run slices.
+cloud whose stored radius is close to the linear center-relative prediction
+across all nine tested long-run slices. This comparison does not yet match
+the memory-cloud and position-relative observables or their summary statistics.
 Kernel-family matching shows that the same branch identifies local restoring
 curvature rather than a specifically two-scale mechanism.
 The largest controlled departure found so far is a smooth $6.2\%$ radius

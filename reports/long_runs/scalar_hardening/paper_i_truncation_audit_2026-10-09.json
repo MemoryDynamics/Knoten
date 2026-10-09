@@ -1,0 +1,127 @@
+{
+  "alpha": 0.01,
+  "horizon": 600,
+  "tail_weight": 0.0024050092913110673,
+  "method": "Squared causal impulse response of native linear FIFO update; numerical infinite-sum approximation",
+  "observable_caveat": "Stored measurement is a median memory-cloud radius, not the stationary RMS of x-center. Cloud RMS is a distinct reference; median and RMS must also be distinguished.",
+  "radius_tolerance": 0.001,
+  "convergence_tolerance": 1e-10,
+  "impulse_lengths": [
+    20000,
+    40000
+  ],
+  "max_relative_truncation_difference": 7.343432101813985e-05,
+  "median_measured_relative_error": 0.007589409658207202,
+  "max_measured_relative_error": 0.011563093686431491,
+  "records": [
+    {
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "gain": 0.18289241496325967,
+      "finite_h_radius": 0.0002916509614884725,
+      "finite_h_memory_cloud_rms": 0.00029295352248401806,
+      "cloud_measured_relative_difference": -0.004716626731497642,
+      "ar1_radius": 0.00029167238025167605,
+      "relative_truncation_difference": -7.343432101813985e-05,
+      "measured_relative_error": 0.0002715280597217484
+    },
+    {
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00020730697844942913,
+      "finite_h_memory_cloud_rms": 0.0002083080050910665,
+      "cloud_measured_relative_difference": 0.0020572609048001844,
+      "ar1_radius": 0.00020731445247405012,
+      "relative_truncation_difference": -3.605163331255046e-05,
+      "measured_relative_error": 0.006895911403276278
+    },
+    {
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00023937747962533173,
+      "finite_h_memory_cloud_rms": 0.00024053336562736234,
+      "cloud_measured_relative_difference": 0.0067020149869618795,
+      "ar1_radius": 0.00023938610988558543,
+      "relative_truncation_difference": -3.6051633312439435e-05,
+      "measured_relative_error": 0.011563093686431491
+    },
+    {
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.0002676321583624063,
+      "finite_h_memory_cloud_rms": 0.0002689244781997968,
+      "cloud_measured_relative_difference": 0.0022317576967780806,
+      "ar1_radius": 0.0002676418072867017,
+      "relative_truncation_difference": -3.605163331232841e-05,
+      "measured_relative_error": 0.007071250790804395
+    },
+    {
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00031666664027902935,
+      "finite_h_memory_cloud_rms": 0.0003181957337316862,
+      "cloud_measured_relative_difference": 0.0028327976913240516,
+      "ar1_radius": 0.0003166780570402199,
+      "relative_truncation_difference": -3.605163331266148e-05,
+      "measured_relative_error": 0.007675193037130601
+    },
+    {
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00037848902808329895,
+      "finite_h_memory_cloud_rms": 0.00038031664432426035,
+      "cloud_measured_relative_difference": 0.005963260221193201,
+      "ar1_radius": 0.0003785026737228998,
+      "relative_truncation_difference": -3.6051633312439435e-05,
+      "measured_relative_error": 0.010820771683285324
+    },
+    {
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00043154388849023494,
+      "finite_h_memory_cloud_rms": 0.0004336276916146912,
+      "cloud_measured_relative_difference": 0.005303714794077541,
+      "ar1_radius": 0.00043155944691316764,
+      "relative_truncation_difference": -3.605163331255046e-05,
+      "measured_relative_error": 0.010158041498238068
+    },
+    {
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.0005352643167248126,
+      "finite_h_memory_cloud_rms": 0.0005378489563995936,
+      "cloud_measured_relative_difference": 0.002747426545467002,
+      "ar1_radius": 0.0005352836145734033,
+      "relative_truncation_difference": -3.605163331232841e-05,
+      "measured_relative_error": 0.007589409658207202
+    },
+    {
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404318,
+      "finite_h_radius": 0.00037848902808329895,
+      "finite_h_memory_cloud_rms": 0.00038031664432426035,
+      "cloud_measured_relative_difference": 0.0024490067255511505,
+      "ar1_radius": 0.0003785026737228998,
+      "relative_truncation_difference": -3.6051633312439435e-05,
+      "measured_relative_error": 0.0072895488535622555
+    }
+  ],
+  "tolerance_pass": true
+}

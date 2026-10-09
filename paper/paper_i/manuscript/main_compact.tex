@@ -209,6 +209,22 @@ R_{\mathrm{lin}}
 For a truncated history buffer, the implemented benchmark replaces the
 infinite-memory mass in $g$ by the retained mass
 $M_{\mathrm{stored}}=1-(1-\alpha)^H$.
+This corrects the local gain but does not make Eq.~(\ref{eq:linear_radius})
+exact for a finite buffer: retirement of the oldest contribution adds a
+term to the centroid update. The benchmark is therefore a retained-mass
+approximation to the untruncated linear mode; its truncation error must be
+assessed separately from nonlinear corrections.
+For the nine reported slices ($\alpha=0.01$, $H=600$), a causal
+impulse-response calculation of the full linear FIFO update changes the
+position-relative RMS prediction by at most $0.0074\%$. Doubling the
+impulse length from 20000 to 40000 updates changes the accumulated variance
+by less than $10^{-10}$ in relative terms; this is a numerical convergence
+check, not a rigorous remainder bound.
+The stored numerical observable, however, is the median radius of the
+memory cloud about its centroid, whereas Eq.~(\ref{eq:linear_radius})
+describes the stationary RMS of $x_n-m_n$. The quoted agreement compares
+distinct observables. A matching memory-cloud statistic is required before
+interpreting these errors as a validation of the radius formula.
 
 Equation~(\ref{eq:linear_radius}) is the relevant null hypothesis for compact
 co-moving clouds.
