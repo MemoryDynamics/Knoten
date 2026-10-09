@@ -1,0 +1,75 @@
+\appendix
+\section{Second-Moment and Transport Identities}
+For normalized point deposition, the new memory is a mixture of the old
+measure with weight $q$ and a point measure with weight $\alpha$. The
+variance identity for this mixture is
+\begin{align}
+Q_{n+1}&=q Q_n+q|c_n-c_{n+1}|^2
++\alpha|x_{n+1}-c_{n+1}|^2\\
+&=qQ_n+q\alpha|x_{n+1}-c_n|^2.
+\end{align}
+This proves Eq.~(\ref{eq:cloud_recursion}) without a Gaussian assumption.
+Its stationary expectation and $r_{n+1}=q(x_{n+1}-c_n)$ give
+Eq.~(\ref{eq:cloud_radius}). The position-relative variance follows from
+the innovation independence in Eq.~(\ref{eq:relative_mode}). For a centered
+deposition profile of nonzero variance, the cloud recursion acquires its
+deposition variance term; the point-deposition result must not be applied
+unchanged to that model.
+
+For finite history, let $h_n$ be the visible-coordinate response to a unit
+innovation, with zero prehistory. The centroid response is
+$b_n=\sum_jw_jh_{n-j}$. The two impulse energies per coordinate are
+\begin{align}
+E_r&=\sum_{n\geq0}(h_n-b_n)^2,\\
+E_Q&=\sum_{n\geq0}\sum_jw_j(h_{n-j}-b_n)^2.
+\end{align}
+Multiplying by $d\varepsilon^2$ yields the second moments. The position
+response itself approaches a nonzero constant, but both centered energies
+converge. Parseval's identity gives Eqs.~(\ref{eq:finite_relative}) and
+(\ref{eq:finite_cloud}); for the latter the weighted sum of squared filter
+differences simplifies to $1-|B_H|^2$.
+
+For $H>1$ and $0<g<1$, the noiseless position-history companion map has
+nonnegative top-row coefficients $(1-g+gw_0,gw_1,\ldots,gw_{H-1})$ summing
+to one and shift rows below it. The matrix is irreducible and aperiodic.
+Its eigenvalue one is the translation mode, and all remaining eigenvalues
+have modulus below one. At $g=0$, the visible process is a random walk;
+its finite-window lag differences still have stationary second moments.
+This justifies the relative linear reference for the tested gain cells;
+it is not a stability theorem for the nonlinear Gaussian map.
+
+Expanding the filter near zero frequency gives
+$B_H(e^{i\omega})=1-i\omega\bar j_H+O(\omega^2)$ and
+$F_H(e^{i\omega})=i\omega(1+g\bar j_H)+O(\omega^2)$.
+Thus the large-scale innovation variance is
+$\varepsilon^2/(1+g\bar j_H)^2$, proving Eq.~(\ref{eq:diffusion}), with
+\begin{equation}
+\bar j_H=\frac{q}{\alpha}-\frac{Hq^H}{1-q^H}.
+\end{equation}
+The untruncated limit has $\bar j=q/\alpha$. The discrete update count
+remains a model parameter; no physical-time calibration is inferred.
+
+\section{Reproduction and Measurement Limits}
+The finite reference is evaluated by two implementations: a causal FIFO
+recurrence with a single unit innovation and a midpoint frequency integral
+with 131,072 points on $[0,\pi]$. The reference tests include $H=1$, the
+zero-gain random-walk covariance obtained from pairwise lag distances, the
+untruncated limit, and a second $(\alpha,H,g)$ cell distinct from the
+reported long runs. Their purpose is to test the reference calculation,
+not to provide new nonlinear simulation evidence.
+
+The terminal block is selected from the stored integer timestamps before
+any radius ratio is computed. It is the maximal regular suffix, which is
+10,001 measurements at unit stride for every reported case. Source-file
+hashes and the extracted-array archive hash are recorded; a rebuild checks
+the archive hash. Squared radii are averaged first, then square-rooted;
+the seed ratios are aggregated last. No instantaneous-radius median is
+substituted into the RMS comparison.
+
+The two halves of each terminal block are also reported in the
+machine-readable output. They expose finite-window variability without
+selecting a favorable subwindow. Since these measurements are correlated,
+neither the number of stored points nor the preceding $N$ updates supplies
+an independent sample count. The five-seed IQR is the only uncertainty
+summary used in the main figures. No statistical equivalence margin or
+confidence-level claim is attached to the observed discrepancies.

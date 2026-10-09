@@ -98,26 +98,27 @@ hochgestuft wird. Ein `inconclusive` schaltet keine neue Sprache frei.
 
 ## Paper I: Minimal Dynamical Foundation
 
-Status: mathematisch mit Paper 0 synchronisiert; der aktuelle kleine-Radius-Ast traegt als co-moving linearer skalarer Relaxationsbefund, noch nicht als nichtlineare Metastabilitaetsevidenz.
+Status 2026-10-09: Der kleine-Radius-Ast traegt als kontrollierter co-moving
+linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
+selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben
+stationaeren zweiten Momente; die Daten sind terminale Stichproben, kein
+Nachweis nichtlinearer Metastabilitaet.
 
 Der reviewed P4-R-S-Skalenpass gehoert nicht zu diesem Hauptclaim. Er stammt
 aus einem rauschfreien deterministischen `d=2`-Ast mit vorbereitetem Orbit und
 explizit konstruiertem Source-/Write-Port. Fuer Paper I ist er derzeit nur als
-getrennte technische Notiz, Supplement-Option oder eng markierter Outlook
-tragbar; Abstract und Hauptschluss bleiben frei von Schleifenmaterie-, Spin-,
-Traegheits- und Masseaussagen. Die reviewed N0-Klammer ist inzwischen eng in
-beide Diskussionsfassungen aufgenommen: Sie berichtet eine finite-time
-Phasenkohaerenzgrenze in der dimensionslosen Koordinate
-`chi=epsilon/(R sqrt(alpha))`, nicht einen physikalischen Rauschpegel oder
-stochastische Formation.
+Evidenz fuer das separate FIFO-/Rotating-Wave-Paper vorgesehen. Abstract,
+Hauptschluss und Discussion von Paper I verwenden weder diesen Befund noch
+die reviewed N0-Klammer als Evidenz fuer die stochastische Relaxationsbranch.
 
 Aktuell tragbar:
 
 - Minimalmodell mit relaxierendem Memory;
 - sichtbarer Prozess nichtmarkovsch, augmentierter Zustand markovsch;
 - interne Speicherskala `alpha^{-1}` in der normierten Konvention;
-- Knotenbegriff als diagnostischer Kandidat, nicht beobachtete Metastabilitaet;
-- Relaxationsraten nur als Stabilitaets- oder mass-like proxies.
+- zwei getrennte Radiusobservablen mit passender linearer finite-H-Referenz;
+- Konsistenz der terminalen RMS-Radien mit den gesetzten Modellparametern;
+- kein beobachteter nichtlinearer Metastabilitaets- oder Masseclaim.
 
 Noch nicht tragbar:
 
@@ -134,11 +135,17 @@ keinen endlichen Phasenuebergang.
 Der enge Kernel-Core-Audit und die seed-gematchte Ablation zeigen, dass die
 bisherige (1,35)-Referenz im gesampelten Taylor-Regime bis etwa 1e-8 relativ
 durch den attraktiven Ein-Kernel-Punkt (0,26) reproduziert wird. Fuer
-A_att>=5 folgt der dynamische Radius der exakten linearen
-Memory-Center-Vorhersage mit 0.94 Prozent medianem und 3.44 Prozent maximalem
-relativen Fehler. Die erweiterte Reconciliation ueber neun aktive
-`N=30M/300M`-Slices reduziert den maximalen finite-memory Radiusfehler auf
-`1.16%`. Der direkte Familienvergleich zeigt bei q=3 die exakte
+A_att>=5 war historisch eine Naehe zur linearen Positionsradius-Formel
+berichtet worden. Die damaligen Fehlerzahlen vergleichen jedoch
+Memory-Wolkenmediane mit Positions-RMS und sind keine Validierung identischer
+Observablen. Die korrigierte terminale RMS-Auswertung von 2026-10-09 ergibt
+ueber neun aktive `N=30M/300M`-Slices 0.076% mediane und 0.984% maximale
+Memory-Wolken-Abweichung; fuer den Positionsradius sind es 0.090% und 0.761%.
+Acht eta-zero-Kontrollslices erreichen maximal 2.122% Memory-Wolken-Abweichung.
+Je Slice liegen fuenf Seeds mit 10001 konsekutiven terminalen Messungen vor.
+Seed-IQRs sind keine Konfidenzintervalle, N ist nicht die Messfensterlaenge.
+Die Referenz ist unabhaengig per Impulsantwort und Spektralintegral geprueft.
+Der direkte Familienvergleich zeigt bei q=3 die exakte
 Reparametrisierung `A_eff=A_att-9`; auf dieser Achse kollabieren Ein- und
 Zweiskalen-KPIs numerisch.
 

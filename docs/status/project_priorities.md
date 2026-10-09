@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-09-17.
+Stand: 2026-10-09 (Paper-I-Finalisierung; die wissenschaftlichen Gates bleiben unveraendert).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -57,18 +57,21 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Befund `g5-local-direct-stability-pass` gilt nur lokal bei exakt $H=2400$.
    Offen bleiben die G1--G3-Branchverbindung, der vollstaendige Horizontlauf
    und jede P5-D-Folgeausfuehrung.
-2. **Paper I konsolidieren -- nach 1.** Modellkern, skalare Evidenz,
-   Rotating-wave-Ast und Abgrenzungen in der Sprache von $q$, $g$, $H$,
-   $B_H$, $c$ und $\mu$ zusammenfuehren. Zulaessig sind nur lokal oder
-   kontrolliert belegte Existenz-, Stabilitaets-, Skalierungs- und
-   Center-Port-Aussagen; interne Phase, physikalische Masse und Interaktion
-   bleiben getrennte Hypothesen.
-3. **Vorbereiteten Orbit und gebildeten Knoten trennen -- nach 2.** Festlegen,
-   ob Paper I ueberhaupt einen Formationsclaim benoetigt. Erst dann darf ein
-   gepaartes Formation-/KnotScore-Protokoll fuer den Rotating-wave-FIFO
-   entstehen. Ein Score auf einer vorbereiteten exakten Kreisgeschichte ohne
-   `eta_zero`- und Formationskontrolle waere nicht entscheidend und wird nicht
-   nachgetragen.
+2. **Paper I finalisieren -- vom Autor eigenstaendig priorisiert.** Paper I
+   traegt den stochastischen linearen Relaxationsbefund. Positionsradius und
+   Memory-Wolkenradius sind getrennt hergeleitet und als identische RMS-
+   Statistiken mit 85 terminalen Seed-Traces verglichen. Die finite-H-
+   Referenz ist unabhaengig per Impulsantwort und Spektralintegral geprueft.
+   Die umfangreiche Rotating-wave-Theorie gehoert ins separate FIFO-Paper;
+   dessen Gates blockieren die Finalisierung von Paper I nicht. Vor der
+   Autorenfreigabe werden PDFs, Referenzen und reproduzierbarer Datenstand
+   geschlossen; die formelle Journaleinreichung bleibt eine Autorenentscheidung.
+3. **FIFO-Paper eigenstaendig bearbeiten -- getrennt von 2.** Existenz und
+   lokale Stabilitaet vorbereiteter Orbits mit der jeweils geprueften
+   Vertrauensbasis berichten. Paper I benoetigt keinen Formationsclaim.
+   Ein Formation-/KnotScore-Protokoll bleibt ein separates prospektives
+   Projektgate. Ein Score auf einer vorbereiteten exakten Kreisgeschichte
+   ohne `eta_zero`- und Formationskontrolle wird nicht nachgetragen.
 4. **Zertifikats- und Release-Hardening -- nach 1, parallel zu 2/3.** Einen
    zweiten unabhaengigen Intervallbackend, reproduzierbare Dependency-Hashes,
    `CITATION.cff` und eine zitierbare Release vorbereiten. Diese Punkte

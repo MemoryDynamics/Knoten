@@ -1,157 +1,83 @@
-# Paper I - Self-Interacting Stochastic Dynamics with Exponential Memory
+# Paper I: observable-matched linear relaxation
 
-Stand: 2026-09-01.
+Stand: 2026-10-09.
 
-## Rolle
+Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
+Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare
+vorbereitete Relativgleichgewichte. Existenz- und Stabilitaetsclaims dieses
+anderen Arms sind keine Voraussetzung und keine Evidenz fuer Paper I.
 
-Paper I ist die eigenstaendige Modell- und Evidenzfassung. Es definiert den
-sichtbaren nichtmarkovschen Prozess `x_n`, die Markov-Einbettung
-`z_n = (x_n, rho_n)` und die exponentielle Memory-Dynamik. Der aktuelle
-publikationsrelevante Befund ist eine lineare co-moving Relaxationswolke, nicht
-ein isolierter nichtlinearer Knoten.
+## Kanonische Fassungen
 
-Es gibt zwei synchronisierte Varianten:
+- `main.tex`: vollstaendige Lesefassung mit Herleitungen und Methodenanhang.
+- `main_compact.tex`: derselbe Haupttext ohne Anhang.
+- `content.tex`: gemeinsamer Modell-, Theorie- und Evidenztext.
+- `appendix.tex`: Herleitungen, Stabilitaetsvoraussetzungen, Reproduktion.
 
-- `main.tex`: ausfuehrliche Fassung mit Regularitaets-, Operator-, Skalierungs-
-  und Diagnostikdiskussion.
-- `main_compact.tex`: kompakte Publikationsfassung mit derselben Modell- und
-  Evidenzlinie.
+Beide PDFs stehen nach dem Build in `../release/`. Das PRE-Layout legt die
+fachliche Richtung fest, ist aber weder eine Einreichung noch eine Zusage
+ueber Journalannahme.
 
-## Hauptresultat
+## Inhaltlich geschlossene Punkte
 
-Aus der exakten Memory-Center-Rekursion
+- [x] Point-deposition-Modell als Memory-Mass statt glatter Dichte formulieren.
+- [x] Geordneten finite-H-Zustand und native Update-Reihenfolge angeben.
+- [x] Positionsradius und Memory-Wolkenradius getrennt herleiten.
+- [x] RMS-Statistik in Messung und Vorhersage identisch definieren.
+- [x] Finite-H-Referenz per Impulsantwort und unabhaengigem Spektralintegral pruefen.
+- [x] Neun aktive Slices und acht geteilte eta-zero-Kontrollen auswerten.
+- [x] Alle 85 extrahierten terminalen Radius-Traces mit Quellhashes archivieren.
+- [x] Abbildungen mit Seed-IQRs und vollstaendige Parametertabelle erzeugen.
+- [x] Literatur zu Aging, Markov-Einbettung, Walking Droplets und Autochemotaxis abgrenzen.
+- [x] Kernel-Kollaps und feste-Gain-Kontrolle sichtbar einbinden.
+- [x] Unbelegte Informationsverlust-, Metastabilitaets- und Zeitclaims entfernen.
+- [x] FIFO-Rotationsbefunde aus der Evidenzlinie von Paper I herausnehmen.
 
-```text
-m[n+1] = (1-alpha) m[n] + alpha x[n+1]
-```
+## Befund und Grenze
 
-folgt im lokal linearen Skalarregime fuer `r_n = x_n - m_n` ein reeller
-AR(1)-Relativmodus. Seine stationaere RMS-Radiusvorhersage wird mit der
-tatsaechlich gespeicherten finite-memory Masse ausgewertet.
+Primaer ist der Median ueber fuenf Seeds des Verhaeltnisses aus terminalem
+zeitlichem RMS und fester linearer finite-H-Vorhersage. Fuer den
+Memory-Wolkenradius ergeben sich 0.076% mediane und 0.984% maximale
+Abweichung ueber neun aktive Slices. Der Positionsradius liefert 0.090%
+beziehungsweise 0.761%. Der maximale Memory-Radiusfehler der acht
+eta-zero-Kontrollen ist 2.122%.
 
-Ueber neun aktive Long-Run-Slices mit je fuenf Seeds, `d=3..20` und
-Lauflaengen bis `N=300M` betraegt der mediane relative Radiusfehler `0.76%`,
-der maximale `1.15%`. Gematchte Ein- und Zweiskalenkernel kollabieren auf der
-lokalen Kruemmungsachse. Ein feste-g-Nichtlinearitaetsgate zeigt bei
-`R_linear/L=0.3` eine glatte `6.2%`-Radiuskorrektur, aber keinen Shape- oder
-Residence-Umschlag; seine vorregistrierte Gesamtentscheidung bleibt
-`inconclusive`.
+Die 10001 terminalen Messungen umfassen nur 10000 Updates, also 100
+Memory-Persistenzzeiten, auch bei N=300M. Seed-IQRs sind Streuungen, keine
+Konfidenzintervalle. Die Auswertung ist post-hoc und keine neue prospektive
+Replikation. Langzeitlaufdauer ist keine unabhaengige Stichprobengroesse.
 
-Daraus folgt:
+Die historischen Fehlerzahlen 0.76% und 1.15% vergleichen unterschiedliche
+Observablen und Mittelungskonventionen. Sie sind durch die neue Analyse
+ersetzt, nicht als neue exakte Theoriefehler umetikettiert worden.
 
-- gestuetzt: reproduzierbare kompakte, mitbewegte skalare Relaxationswolke;
-- nicht isoliert: nichtlinearer metastabiler Zustand oder Phasenuebergang;
-- nicht informativ fuer Dimensionsselektion: `D_mem` nahe drei im
-  dreidimensionalen isotropen Embedding.
+## Reproduktion
 
-`Dynamical knot` bleibt als Projektbegriff fuer einen kuenftigen Befund
-reserviert, der die lineare Nullhypothese, `eta=0`-Kontrollen und skalenbewusste
-Metastabilitaetsdiagnostik uebersteht.
-
-## Abgrenzung zum deterministischen Schleifenast
-
-Der reviewed P4-R-S-Befund stammt aus einem getrennten rauschfreien
-`d=2`-Rotating-wave-Ast mit vorbereitetem Kreisorbit und explizit
-konstruiertem Source-/Write-Port. Dort uebertraegt sich derselbe registrierte
-diskrete Antworttyp von L3 auf den schon zuvor existenzzertifizierten Anchor;
-die groesste Anchor--L3-Abweichung ist `0.00232715` gegen die prospektive
-Grenze `0.05`. Ein separat implementierter Auditor rekonstruiert die
-gespeicherte Entscheidung ohne Feldabweichung.
-
-Dieser Zwei-Zellen-Pass ist weder eine unabhaengige Replikation noch eine
-Konvergenzordnung und identifiziert keine physische Interaktion, keinen Spin,
-keine Traegheit und keine Masse. Er wird deshalb nicht in den Paper-I-
-Hauptclaim eingemischt. Eine spaetere Einordnung ist nur als getrennte
-technische Notiz, Supplement-Option oder eng markierter Outlook vorgesehen;
-`main.tex` und `main_compact.tex` bleiben in ihrer zentralen Evidenzlinie
-unveraendert.
-
-| Ebene | Eng tragbare Aussage | Nicht daraus ableitbar |
-| --- | --- | --- |
-| Evidenz | P4 schliesst den konstruierten Write-/Age-Ledger, scheitert aber formal am registrierten Gesamtgate. | operationaler Single-Loop-Mechanikpass |
-| Evidenz | P4-R traegt am vorbereiteten L3-Kreis eine diskrete chirality-odd Portantwort mit 8/8 Phasensupport. | kontinuierliche Phase, interne Topologie oder unabhaengige Replikation |
-| Evidenz | P4-R-S uebertraegt denselben registrierten Antworttyp auf den Anchor; maximaler Zwei-Zellen-Unterschied `0.00232715` gegen `0.05`. | Konvergenzordnung, stabile Familie oder natuerliche Portselektion |
-| Inferenz | Die explizite diskrete Portarchitektur ist an zwei vorbereiteten Skalen intern kompatibel. | mechanisches Objekt, materieller Schwerpunkt oder physische Arbeit |
-| Hypothese | Zwei getrennte Schleifen koennten ueber einen gegenseitigen Port eine nichtadditive Mutualantwort zeigen. | Interaktion, Ladung, Spin, Impuls, Traegheit oder Masse vor einem reviewed P5-Lauf |
-
-## Literaturpositionierung
-
-Die Einleitung grenzt die Arbeit jetzt konkret ab gegen:
-
-- Benaim, Ledoux und Raimond: normalisierte kumulative Besetzungsmasse;
-- Benaim und Raimond (2005): symmetrische Wechselwirkung und
-  Free-Energy-Konvergenz;
-- Herrmann und Roynette (2003): ungewichtete Vollhistorie, nicht
-  exponentielles Memory;
-- Milisic, Meunier und Roux (2026): Aging-Kernel mit linearen
-  Wechselwirkungen und explizitem Exponentialfall.
-
-Die Neuheit wird nicht mehr mit exponentiellem Memory oder Zustandserweiterung
-allein begruendet, sondern mit dem konkreten diskreten Feldmodell und dem
-kontrollierten linearen Nulltest.
-
-## Abbildungen
-
-Aktiv verwendet:
-
-- `fig_markov_embedding.pdf` in der Langfassung;
-- `fig_memory_weights.pdf` in der Langfassung;
-- `figures/draft/scalar_hardening/linear_reconciliation_2026-07-19/linear_long_run_reconciliation.png`
-  in beiden Fassungen.
-
-Die historische `fig3_knot_trajectory.pdf` bleibt im Ordner erhalten, wird aber
-nicht mehr als Paper-Evidenz verwendet. Die schematische
-`fig_relaxation_diagnostic.pdf` ist ebenfalls nicht mehr Teil der zentralen
-Argumentation.
-
-## Zentrale Evidenz
-
-- `reports/long_runs/scalar_hardening/linear_long_run_reconciliation_2026-07-19.md`
-- `reports/kernels/core/kernel_family_comparison_d3_N300k_2026-07-19.md`
-- `reports/kernels/nonlinearity/fixed_g_scale_reconciliation_d3_N300k_A26_2026-07-19.md`
-- `docs/status/paper_claims.md`
-
-Getrennte Schleifen-/Port-Einordnung:
-
-- `docs/status/p4rs_plain_language_summary.md`
-- `reports/project/meta/reviews/scalar_memory_loop_p4rs_anchor_scale_result_review_2026-08-30.md`
-
-## Reviewte N0-Bruecke zum Schleifenarm
-
-Die Paper-I-Uebergangssprache bleibt der gemeinsame Modellkern:
-
-\[
-x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),\qquad
-\rho_{n+1}=(1-\lambda_{\rm m})\rho_n
-+\beta_\rho G_\sigma(\cdot-x_{n+1}).
-\]
-
-Der Schleifenarm verwendet davon zunaechst die deterministische
-`epsilon=0`-Spezialisierung mit endlichem geordnetem Gedächtnis. Der vor P5
-eingeschobene N0-Stresstest hebt diese Spezialisierung kontrolliert auf. Er
-vergleicht Skalen ueber
-`chi = epsilon / (R sqrt(alpha))`, entsprechend
-`D/R^2 = chi^2/2` unter der Paper-I-Konvention
-`D = epsilon^2/(2 alpha)`.
-
-Der prospektive Lauf und sein unabhaengiges Recompute sind nun reviewed. Bis
-`chi=1e-16` bleibt die Innovation numerisch unaufgeloest; `1e-15..1e-4`
-bestehen, `1e-3` und `1e-2` scheitern am lokalen Phasen-/Chiralitaetsgate.
-Dies ist eine finite-time Robustheitsklammer zweier vorbereiteter Zellen, kein
-physikalischer Rauschpegel. Diese enge Abgrenzung steht jetzt in den
-Diskussionsabschnitten der Lang- und Kurzfassung; sie erweitert nicht den
-Paper-I-Hauptclaim. Rohes `epsilon` ist wegen der Normierung mit `R` und
-`alpha` weder zell- noch konventionsuebergreifend vergleichbar.
-
-Ergebnis und enges Review:
-
-- `reports/dynamics/rotation/scalar_memory_rotating_wave_noise_stress_2026-08-31.md`
-- `reports/project/meta/reviews/scalar_memory_rotating_wave_noise_stress_result_review_2026-09-01.md`
-
-## Build
+Im Repository-Hauptverzeichnis:
 
 ```powershell
+python -m pip install -r paper/paper_i/scripts/requirements-finalization.txt
+python paper/paper_i/scripts/finalize_evidence.py
+python -m pytest paper/paper_i/scripts/test_finalization.py -q
 cd paper/paper_i/manuscript
 latexmk -xelatex main.tex
 latexmk -xelatex main_compact.tex
 ```
+
+Der Rebuild verwendet nur den eingecheckten Radius-Extrakt und die ebenfalls
+eingecheckten Kernel-Kontrollsummaries. Die optionale `--extract-from`-Option
+liest die historischen Originaloutputs neu; sie ist fuer den normalen
+Rebuild nicht erforderlich. Der Extrakt ersetzt kein Vollarchiv aller
+urspruenglichen Trajektorienkoordinaten.
+
+## Abschlusspruefung
+
+- [x] Endgueltige Manuskripte bauen und Warnungen pruefen.
+- [x] Alle PDF-Seiten visuell pruefen.
+- [x] Claim-, Formel-, Tabellen-, Literatur- und Bildreferenz-Audit abschliessen.
+- [ ] Versionierte GitHub-Fassung mit unveraenderlichem Datenverweis publizieren.
+
+Vor einer formellen Einreichung entscheidet der Autor ueber Journal,
+Autorenmetadaten, Offenlegung von KI-Unterstuetzung gemaess Journalregeln
+und gegebenenfalls einen DOI fuer den Datenstand. Das sind keine neuen
+wissenschaftlichen Simulationsgates.

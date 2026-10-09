@@ -1,0 +1,26 @@
+name: Paper I reproducibility
+
+on:
+  push:
+    paths:
+      - 'paper/paper_i/**'
+      - '.github/workflows/paper-i.yml'
+  pull_request:
+    paths:
+      - 'paper/paper_i/**'
+      - '.github/workflows/paper-i.yml'
+
+jobs:
+  numerical-reference:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install paper dependencies
+        run: python -m pip install -r paper/paper_i/scripts/requirements-finalization.txt
+      - name: Check independent reference calculations
+        run: python -m pytest paper/paper_i/scripts/test_finalization.py -q
+      - name: Rebuild from archived terminal observables
+        run: python paper/paper_i/scripts/finalize_evidence.py
