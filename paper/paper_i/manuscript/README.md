@@ -75,7 +75,7 @@ urspruenglichen Trajektorienkoordinaten.
 - [x] Endgueltige Manuskripte bauen und Warnungen pruefen.
 - [x] Alle PDF-Seiten visuell pruefen.
 - [x] Claim-, Formel-, Tabellen-, Literatur- und Bildreferenz-Audit abschliessen.
-- [ ] Versionierte GitHub-Fassung mit unveraenderlichem Datenverweis publizieren.
+- [x] Versionierte GitHub-Fassung mit unveraenderlichem Datenverweis publizieren.
 
 Vor einer formellen Einreichung entscheidet der Autor ueber Journal,
 Autorenmetadaten, Offenlegung von KI-Unterstuetzung gemaess Journalregeln
