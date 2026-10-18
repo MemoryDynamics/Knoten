@@ -24,8 +24,10 @@ nav:
   - Experimente: reference/experiment_catalog.md
   - Repository: reference/repository_map.md
   - Diskussion und Einstieg:
-      - Artikelentwurf: outreach/medium_entwurf.md
-      - Mitpruefen: outreach/mitpruefen.md
+      - Artikelentwurf (Deutsch): outreach/medium_entwurf.md
+      - Article draft (English): outreach/medium_draft_en.md
+      - Mitpruefen (Deutsch): outreach/mitpruefen.md
+      - Contribute a review (English): outreach/contribute_review_en.md
 
 exclude_docs: |
   archive/**

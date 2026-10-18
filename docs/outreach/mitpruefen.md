@@ -1,5 +1,7 @@
 # Eine konkrete Frage mitprüfen
 
+[English version](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/contribute_review_en.md)
+
 Stand: 2026-10-19. Diese Seite ist eine Einladung zur Diskussion und keine
 zweite wissenschaftliche Prioritätenliste. Die verbindliche Reihenfolge
 steht in den
@@ -13,8 +15,13 @@ Emergenz Knoten untersucht diskrete Dynamik mit relaxierendem Gedächtnis.
 Persönliche Motivation und eine mögliche spätere physikalische Deutung sind
 von den geprüften Modellresultaten zu trennen. Ein Weltformel-, Teilchen-,
 Masse-, Ladungs- oder Spin-Nachweis liegt nicht vor. Den zugänglichen
-Hintergrund erzählt der
-[Artikelentwurf](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md).
+Hintergrund erzählen der
+[deutsche Artikelentwurf](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+und seine
+[englische Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md).
+Die neuronale Deutung des Traums und ein möglicher KI-Nutzen bleiben
+Hypothesen; die bisherigen Modellbefunde belegen weder Gehirnfunktionen
+noch Lernfähigkeit.
 
 Du musst weder die Grundidee teilen noch das ganze Repository lesen.
 Eine einzelne überprüfbare Kritik oder Reproduktion genügt. Die unten

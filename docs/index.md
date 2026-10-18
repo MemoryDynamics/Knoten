@@ -9,11 +9,15 @@ Zwischenstaende bleiben im Archiv, steuern die Arbeit aber nicht mehr.
 ## Persoenlicher Einstieg und offene Diskussion
 
 Ergaenzt am 2026-10-19: Der
-[Medium-Artikelentwurf](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
-erklaert die persoenliche Motivation und die wissenschaftlichen Grenzen in
-allgemeinverstaendlicher Sprache. Die
+[Medium-Artikelentwurf auf Deutsch](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+und die
+[englische Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
+erzaehlen den Traum, den Weg zum Modell und die wissenschaftlichen Grenzen.
+Die
 [Einladung zum Mitpruefen](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md)
-bietet drei begrenzte Aufgaben. Ein einzelner nachvollziehbarer Einwand oder
+ist ebenfalls
+[auf Englisch verfuegbar](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/contribute_review_en.md)
+und bietet drei begrenzte Aufgaben. Ein einzelner nachvollziehbarer Einwand oder
 Reproduktionsbefund ist bereits ein Beitrag.
 
 ## Modell in einem Satz
