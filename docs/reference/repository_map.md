@@ -9,7 +9,7 @@ sind grob, aber sie zeigen die aktive Struktur ohne die alten Parallel-Dokumente
 
 ```mermaid
 flowchart TD
-    root["Emergenz_Knoten"]
+    root["Memory Dynamics"]
 
     root --> src["src/emergenz_knoten<br/>kanonischer Paketkern"]
     root --> experiments["experiments<br/>reproduzierbare Entry-Points"]

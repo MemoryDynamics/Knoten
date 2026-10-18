@@ -1,5 +1,5 @@
-site_name: Emergenz Knoten
-site_description: Documentation for the finite-memory Emergenz Knoten project.
+site_name: Memory Dynamics
+site_description: Documentation for the finite-memory Memory Dynamics research project.
 repo_url: https://github.com/MemoryDynamics/Knoten
 docs_dir: docs
 

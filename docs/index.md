@@ -1,4 +1,6 @@
-# Emergenz Knoten
+# Memory Dynamics
+
+Projektwebsite: [MemoryDynamics.org](https://memorydynamics.org/).
 
 Stand: 2026-09-05.
 

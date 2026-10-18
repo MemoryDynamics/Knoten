@@ -39,9 +39,11 @@ Ein Punkt bewegt sich, hinterlässt eine verblassende Spur und reagiert
 anschließend auf diese Spur. Im Rechner speichern wir dafür eine endliche
 Zahl vergangener Positionen.
 
-Das Projekt heißt **Emergenz Knoten**. Die große Hoffnung dahinter war und
-ist, auf diesem Weg etwas über die Entstehung physikalischer Strukturen
-zu verstehen. Da liegt das Wort „Weltformel“ natürlich nahe. Bislang haben
+Das Projekt heißt inzwischen **Memory Dynamics** und ist unter
+[MemoryDynamics.org](https://memorydynamics.org/) zu finden. Die große
+Hoffnung dahinter war und ist, auf diesem Weg etwas über die Entstehung
+physikalischer Strukturen zu verstehen. Da liegt das Wort „Weltformel“
+natürlich nahe. Bislang haben
 wir ein mathematisches Modell und eine Reihe von Ergebnissen, deren
 Reichweite wir prüfen müssen.
 

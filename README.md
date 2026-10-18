@@ -1,8 +1,11 @@
-# Emergenz Knoten
+# Memory Dynamics
 
 Minimalistisches Forschungsmodell fuer diskrete Dynamik mit endlichem,
 relaxierendem Gedaechtnis, metastabilen Strukturen und kontrollierten
 Rotations-/Interaktionskandidaten.
+
+Projektwebsite: [MemoryDynamics.org](https://memorydynamics.org/).
+Frueherer Projektname: Emergenz Knoten.
 
 Stand: 2026-09-15.
 

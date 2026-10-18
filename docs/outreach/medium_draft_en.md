@@ -35,8 +35,9 @@ That sounds abstract at first. The idea behind it is simpler: a point
 moves, leaves a fading trace, and then responds to that trace. In the
 computer, we retain a finite number of past positions.
 
-The project is called **Emergenz Knoten**. The larger hope has been, and
-still is, to learn something about how physical structures arise. It is
+The project is now called **Memory Dynamics**. Its website is
+[MemoryDynamics.org](https://memorydynamics.org/). The larger hope has been,
+and still is, to learn something about how physical structures arise. It is
 easy to start thinking about a “theory of everything.” So far, we have a
 mathematical model and a set of results whose scope we need to examine.
 

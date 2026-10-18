@@ -10,7 +10,8 @@ not authorize further restricted experimental runs.
 
 ## What the Project Examines
 
-Emergenz Knoten studies discrete dynamics with relaxing memory. Personal
+Memory Dynamics studies discrete dynamics with relaxing memory.
+Project website: [MemoryDynamics.org](https://memorydynamics.org/). Personal
 motivation and possible future physical interpretations must be
 distinguished from tested model results. The project has not demonstrated
 a theory of everything, particles, physical mass, charge, or spin. The

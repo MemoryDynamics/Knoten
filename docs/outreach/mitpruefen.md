@@ -11,7 +11,8 @@ autorisieren keine weiteren gesperrten Zielauswertungen.
 
 ## Worum es geht
 
-Emergenz Knoten untersucht diskrete Dynamik mit relaxierendem Gedächtnis.
+Memory Dynamics untersucht diskrete Dynamik mit relaxierendem Gedächtnis.
+Projektwebsite: [MemoryDynamics.org](https://memorydynamics.org/).
 Persönliche Motivation und eine mögliche spätere physikalische Deutung sind
 von den geprüften Modellresultaten zu trennen. Ein Weltformel-, Teilchen-,
 Masse-, Ladungs- oder Spin-Nachweis liegt nicht vor. Den zugänglichen
