@@ -23,6 +23,9 @@ nav:
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md
   - Repository: reference/repository_map.md
+  - Diskussion und Einstieg:
+      - Artikelentwurf: outreach/medium_entwurf.md
+      - Mitpruefen: outreach/mitpruefen.md
 
 exclude_docs: |
   archive/**

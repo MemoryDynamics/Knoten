@@ -6,6 +6,19 @@ Rotations-/Interaktionskandidaten.
 
 Stand: 2026-09-15.
 
+## Neu hier? Idee, Befunde und offene Fragen
+
+Kann eine Dynamik, die ihre eigene Vergangenheit speichert, langlebige
+Strukturen hervorbringen? Das ist die Forschungsfrage hinter diesem Projekt.
+Die persoenliche Motivation reicht bis zu einem Kindheitstraum von Knoten
+zurueck. Der wissenschaftliche Massstab sind pruefbare Modellresultate.
+Eine Weltformel oder eine Identifikation realer Teilchen liegt nicht vor.
+
+Fuer den oeffentlichen Einstieg, ergaenzt am 2026-10-19:
+
+- [Artikelentwurf: Ein Kindheitstraum von Knoten](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md) erzaehlt Motivation, Ergebnisse und Grenzen; noch nicht auf Medium veroeffentlicht.
+- [Eine konkrete Frage pruefen](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md): drei begrenzte Review-Einstiege mit Quellen und erwartetem Ergebnis. Niemand muss das gesamte Projekt begutachten.
+
 ## Wissenschaftlicher Stand
 
 - Paper 0 ist der mathematische Anker.

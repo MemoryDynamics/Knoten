@@ -6,6 +6,16 @@ Diese Seite ist die kurze Frontdoor. Die Navigation folgt der Projektregel:
 hoechstens sieben Eintraege je Ebene und hoechstens sieben Ebenen. Historische
 Zwischenstaende bleiben im Archiv, steuern die Arbeit aber nicht mehr.
 
+## Persoenlicher Einstieg und offene Diskussion
+
+Ergaenzt am 2026-10-19: Der
+[Medium-Artikelentwurf](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+erklaert die persoenliche Motivation und die wissenschaftlichen Grenzen in
+allgemeinverstaendlicher Sprache. Die
+[Einladung zum Mitpruefen](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md)
+bietet drei begrenzte Aufgaben. Ein einzelner nachvollziehbarer Einwand oder
+Reproduktionsbefund ist bereits ein Beitrag.
+
 ## Modell in einem Satz
 
 Das Projekt untersucht diskrete Dynamik mit endlichem, relaxierendem
