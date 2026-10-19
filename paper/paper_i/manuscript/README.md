@@ -1,6 +1,17 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-09.
+Stand: 2026-10-19.
+
+## Wissenschaftlicher Reifegrad
+
+Die PDF-Fassung vom 2026-10-09 bleibt als reproduzierbare Baseline erhalten.
+Die abgeschlossene technische Checkliste bedeutet **nicht PRE-Einreichungsreife**.
+Neuheitsabgrenzung, eine tragfaehige physikalische Hauptaussage und deren
+gezielte Pruefung fehlen noch. Die verbindliche Reihenfolge steht in den
+[Projektprioritaeten](../../../docs/status/project_priorities.md); der
+[Neuheitsaudit](../research/pre_reassessment_2026-10-19.md) trennt bekannte
+Resultate von der noch offenen nichtlinearen Arbeitshypothese. Die neuen
+Forschungsrechnungen aendern weder die eingefrorenen PDFs noch die alten Daten.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare
@@ -79,5 +90,6 @@ urspruenglichen Trajektorienkoordinaten.
 
 Vor einer formellen Einreichung entscheidet der Autor ueber Journal,
 Autorenmetadaten, Offenlegung von KI-Unterstuetzung gemaess Journalregeln
-und gegebenenfalls einen DOI fuer den Datenstand. Das sind keine neuen
-wissenschaftlichen Simulationsgates.
+und gegebenenfalls einen DOI fuer den Datenstand. Unabhaengig davon sind
+die nun ausgewiesenen wissenschaftlichen Neuheits- und Evidenzluecken zu
+schliessen; eine Autorenfreigabe allein ersetzt das nicht.

@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-09-17.
+Stand: 2026-10-19 (Paper-I-Reifegrad aktualisiert; FIFO-Gates unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -98,7 +98,17 @@ hochgestuft wird. Ein `inconclusive` schaltet keine neue Sprache frei.
 
 ## Paper I: Minimal Dynamical Foundation
 
-Status 2026-10-09: Der kleine-Radius-Ast traegt als kontrollierter co-moving
+Status 2026-10-19: Die Fassung vom 2026-10-09 ist eine reproduzierbare Baseline,
+keine bestaetigte PRE-einreichungsreife Arbeit. Linearer Kurvaturkollaps,
+Markov-Einbettung und unterdrueckte, aber fortbestehende Diffusion werden
+nicht als neue allgemeine Mechanismen beansprucht. Der
+[Neuheitsaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/pre_reassessment_2026-10-19.md)
+grenzt die bereits bekannte Architektur von einer noch zu pruefenden
+kernelabhaengigen nichtlinearen Vorhersage ab. Die Transportformel ist
+analytisch, nicht anhand der Radiusdaten validiert. Die formale
+Schwachrauschrechnung ist Forschungsarbeit, noch kein Manuskriptbefund.
+
+Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben
 stationaeren zweiten Momente; die Daten sind terminale Stichproben, kein

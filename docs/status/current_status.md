@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-17.
+Stand: 2026-10-19 (Paper-I-Einordnung aktualisiert; FIFO-Befunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -12,7 +12,7 @@ vollstaendige vorherige Stand liegt im
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
-| Paper I, skalar | kontrollierte co-moving Relaxationswolke; observable-gematchter terminaler RMS-Vergleich | lineare finite-memory Referenz; Wolkenradius: 0.076% mediane / 0.984% maximale aktive Abweichung, 85 Seed-Traces; keine nichtlineare Metastabilitaet |
+| Paper I, skalar | kontrollierte co-moving Relaxationswolke; observable-gematchter terminaler RMS-Vergleich | reproduzierbare Baseline, noch nicht PRE-einreichungsreif; Wolkenradius: 0.076% mediane / 0.984% maximale aktive Abweichung, 85 Seed-Traces; Transportvorhersage nicht numerisch validiert, nichtlineare Neuheit offen |
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; G5 besteht direkte Root-, Spektral- und Nichtlinearitaetsgates bei $H=2400$ | lokale numerische Stabilitaet des vorbereiteten Orbits, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-09 (Paper-I-Finalisierung; die wissenschaftlichen Gates bleiben unveraendert).
+Stand: 2026-10-19 (Paper-I-Neubewertung vor PRE; keine neue FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -13,11 +13,27 @@ Eingefrorene Voraussetzungen bleiben
 `p5d-mutual-center-design-identifiable`.
 **P5-D Versuch 3 technisch inconclusive: Pipeline geschlossen**; die
 **Attempt-3-Lease ist verbraucht**.
-Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
+Diese Befunde ordnen Prioritaet 2 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Fixed-alpha-Horizontgate vervollstaendigen -- in Arbeit.** Der P5-D-Produktionspfad bleibt
+1. **Paper I wissenschaftlich nachschaerfen -- aktuelle Autorenprioritaet.**
+   Die reproduzierbare Fassung vom 2026-10-09 bleibt eingefrorene Baseline,
+   ist aber nicht als PRE-einreichungsreif eingestuft. Zuerst die konkrete
+   Neuheit gegen Aging-Diffusionen, Autochemotaxis, exponentiell gewichtete
+   Occupation-Masse sowie Sarkars PRE-"Memory engine" und Gaussian-Delay-
+   Feedback pruefen; der reine Befund kompakter relativer Radien bei
+   fortbestehender Diffusion ist kein ausreichender Neuheitsanspruch.
+   Anschliessend eine parameterfreie erste nichtlineare Korrektur samt
+   Gueltigkeitsgrenze herleiten und targetfrei gegen unabhaengige Rechnungen
+   pruefen. Erst danach ein prospektives, begrenztes Transport-/Skalenpanel
+   mit gematchten Kerneln, Autokorrelation, Seed-Unsicherheit und explizitem
+   Falsifikationskriterium einfrieren. Kein weiterer 30M/300M-Radiuslauf nur
+   zur Praezisionssteigerung. Bei fehlender neuer Aussage Baseline als
+   technischen Anker behalten; Manuskriptziel und Journal dann neu entscheiden.
+   Der [PRE-Neuheitsaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/pre_reassessment_2026-10-19.md)
+   dokumentiert Evidenz, offene Literaturfragen und die bedingte Arbeitshypothese.
+2. **Fixed-alpha-Horizontgate vervollstaendigen -- separater FIFO-Arm.** Der P5-D-Produktionspfad bleibt
    nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
    Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
    targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
@@ -57,26 +73,17 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Befund `g5-local-direct-stability-pass` gilt nur lokal bei exakt $H=2400$.
    Offen bleiben die G1--G3-Branchverbindung, der vollstaendige Horizontlauf
    und jede P5-D-Folgeausfuehrung.
-2. **Paper I finalisieren -- vom Autor eigenstaendig priorisiert.** Paper I
-   traegt den stochastischen linearen Relaxationsbefund. Positionsradius und
-   Memory-Wolkenradius sind getrennt hergeleitet und als identische RMS-
-   Statistiken mit 85 terminalen Seed-Traces verglichen. Die finite-H-
-   Referenz ist unabhaengig per Impulsantwort und Spektralintegral geprueft.
-   Die umfangreiche Rotating-wave-Theorie gehoert ins separate FIFO-Paper;
-   dessen Gates blockieren die Finalisierung von Paper I nicht. Vor der
-   Autorenfreigabe werden PDFs, Referenzen und reproduzierbarer Datenstand
-   geschlossen; die formelle Journaleinreichung bleibt eine Autorenentscheidung.
-3. **FIFO-Paper eigenstaendig bearbeiten -- getrennt von 2.** Existenz und
+3. **FIFO-Paper eigenstaendig bearbeiten -- getrennt von 1, nach 2.** Existenz und
    lokale Stabilitaet vorbereiteter Orbits mit der jeweils geprueften
    Vertrauensbasis berichten. Paper I benoetigt keinen Formationsclaim.
    Ein Formation-/KnotScore-Protokoll bleibt ein separates prospektives
    Projektgate. Ein Score auf einer vorbereiteten exakten Kreisgeschichte
    ohne `eta_zero`- und Formationskontrolle wird nicht nachgetragen.
-4. **Zertifikats- und Release-Hardening -- nach 1, parallel zu 2/3.** Einen
+4. **Zertifikats- und Release-Hardening -- nach 2, parallel zu 1/3.** Einen
    zweiten unabhaengigen Intervallbackend, reproduzierbare Dependency-Hashes,
    `CITATION.cff` und eine zitierbare Release vorbereiten. Diese Punkte
    erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
-5. **Interaktionsprogramm neu autorisieren -- erst nach 1.** P5-D bleibt
+5. **Interaktionsprogramm neu autorisieren -- erst nach 2.** P5-D bleibt
    `inconclusive`. Ein weiterer Ziellauf braucht ein separates
    outcome-blindes Protokoll, eine neue explizite Freigabe und einen sauberen
    Readiness-Commit. Vorher ist nur targetfreie Methodenarbeit erlaubt.
@@ -87,6 +94,16 @@ Diese Befunde ordnen Prioritaet 1 ein, sind aber keine weiteren Arbeitspunkte.
    Review synchronisieren.
 
 ## Aktueller Haltepunkt
+
+Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
+aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert
+bereits bestehende Transport-/Memory-Architekturen; die volle Aging-Arbeit ist
+noch nicht im Gleichungsdetail abgeglichen. Die neue nichtlineare Rechnung
+ist eine formale lokale Vorhersage, keine gemessene Evidenz und kein Beweis
+einer stationaeren nichtlinearen Verteilung. Neue Zielsimulationen sind in
+diesem Arbeitsblock nicht gelaufen.
+
+### Separater FIFO-Haltepunkt
 
 Der isolierte G4-Komponentenblock ist mit unabhaengig auditiertem lokalem
 Pass abgeschlossen; G5-Adapter und Grundgleichungs-Preflight sind targetfrei
