@@ -11,7 +11,7 @@ KI-generierte Illustration zur Traumerinnerung.*
 Struktur, Formulierung und Übersetzung. Die Traumschilderung und die
 persönliche Motivation stammen von mir.*
 
-*Quellfassung · [Veröffentlicht auf Medium am 19. Oktober 2026](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8) · [English draft](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)*
+*Quellfassung · [Veröffentlicht auf Medium am 19. Oktober 2026](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8) · [English version](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe)*
 
 Als Kleinkind hatte ich einen Traum. Ich flog frei umher, bog etwas ab und
 verfing mich in meiner eigenen Flugbahn. So sehr, dass ich irgendwann in
@@ -117,6 +117,8 @@ Wie weit die Idee trägt, die aus dem Traum entstanden ist, würde ich gern
 gemeinsam herausfinden.
 
 ---
+
+English version: [A Dream of Knots](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe).
 
 Zum Nachlesen: [Wissenschaftlicher Stand](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/docs/status/current_status.md),
 [lokaler Stabilitätsbefund](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_result_review_2026-09-17.md)

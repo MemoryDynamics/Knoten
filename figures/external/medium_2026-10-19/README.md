@@ -1,6 +1,7 @@
 # Images for the Medium essay
 
 Date: 2026-10-19. Article: [Ein Traum von Knoten](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8).
+English article: [A Dream of Knots](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe).
 
 ## Dream illustration
 

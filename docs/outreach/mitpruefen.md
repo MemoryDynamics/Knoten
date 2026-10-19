@@ -19,7 +19,7 @@ Masse-, Ladungs- oder Spin-Nachweis liegt nicht vor. Den zugänglichen
 Hintergrund erzählen der
 [deutsche Artikel](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 und seine
-[englische Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md).
+[englische Fassung](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe).
 Die neuronale Deutung des Traums und ein möglicher KI-Nutzen bleiben
 Hypothesen; die bisherigen Modellbefunde belegen weder Gehirnfunktionen
 noch Lernfähigkeit.
@@ -64,7 +64,9 @@ Der
 [deutsche Artikel](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 ist seit dem 19. Oktober 2026 frei lesbar auf Medium veröffentlicht.
 Die [Quellfassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
-bleibt auf GitHub. Die englische Fassung ist weiterhin ein Entwurf.
+bleibt auf GitHub. Auch die
+[englische Fassung](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe)
+ist mit denselben Bildern frei lesbar auf Medium veröffentlicht.
 Der Artikel ist kein begutachteter Fachartikel; der Sol6.1-Hinweis steht am
 Anfang. Medium beschreibt den
 [Import eines vorhandenen Artikels](https://help.medium.com/hc/en-us/articles/214550207-Importing-a-post-to-Medium)

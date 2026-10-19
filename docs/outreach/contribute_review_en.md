@@ -15,7 +15,7 @@ Project website: [MemoryDynamics.org](https://memorydynamics.org/). Personal
 motivation and possible future physical interpretations must be
 distinguished from tested model results. The project has not demonstrated
 a theory of everything, particles, physical mass, charge, or spin. The
-[English article draft](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
+[English article on Medium](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe)
 and its
 [German article on Medium](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 provide an accessible account. The neural interpretation of the dream and
@@ -59,13 +59,15 @@ governance.
 ## Publication and Sources
 
 The
-[English article](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
-remains an editorial draft. The
+[English article](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe)
+and the
 [German article](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
-was published on Medium on 19 October 2026 without a paywall. Its
-[source version](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
-remains on GitHub. The article is not a peer-reviewed paper, and the
-Sol6.1 disclosure appears at the start. Medium describes how to
+are published on Medium without a paywall, with the same images and
+captions in the respective language. Their
+[English source](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
+and [German source](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+remain on GitHub. These are not peer-reviewed papers; both include the
+Sol6.1 disclosure at the start. Medium describes how to
 [import an existing article](https://help.medium.com/hc/en-us/articles/214550207-Importing-a-post-to-Medium)
 and
 [set a canonical link](https://help.medium.com/hc/en-us/articles/360033930293-Set-a-canonical-link);

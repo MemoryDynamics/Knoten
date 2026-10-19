@@ -13,9 +13,9 @@ Zwischenstaende bleiben im Archiv, steuern die Arbeit aber nicht mehr.
 Ergaenzt am 2026-10-19: Der
 [Medium-Artikel auf Deutsch](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 und die
-[englische Entwurfsfassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
+[englische Fassung auf Medium](https://medium.com/@haukeh/a-dream-of-knots-177de95c35fe)
 erzaehlen den Traum, den Weg zum Modell und die wissenschaftlichen Grenzen.
-Die deutsche Fassung ist seit dem 2026-10-19 auf Medium veroeffentlicht.
+Beide Fassungen sind mit Bildern frei lesbar auf Medium veroeffentlicht.
 Die
 [Einladung zum Mitpruefen](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md)
 ist ebenfalls
