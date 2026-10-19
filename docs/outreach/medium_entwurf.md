@@ -2,6 +2,10 @@
 
 *Wie ein Kindheitstraum zum Ausgangspunkt eines Forschungsprojekts wurde.*
 
+*Hinweis: Dieser Text entstand mit Unterstützung von Sol6.1 (KI) bei
+Struktur, Formulierung und Übersetzung. Die Traumschilderung und die
+persönliche Motivation stammen von mir.*
+
 *Entwurf für Medium · 19. Oktober 2026 · [English version](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)*
 
 Als Kleinkind hatte ich einen Traum. Ich flog frei umher, bog etwas ab und
@@ -106,7 +110,3 @@ Zum Nachlesen: [Wissenschaftlicher Stand](https://github.com/MemoryDynamics/Knot
 [lokaler Stabilitätsbefund](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_result_review_2026-09-17.md)
 und [internes Review](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_premerge_referee_review_2026-09-17.md).
 Die internen Prüfungen sind keine unabhängige externe Replikation.
-
-*Hinweis: Dieser Text entstand mit Unterstützung von Sol6.1 (KI) bei
-Struktur, Formulierung und Übersetzung. Die Traumschilderung und die
-persönliche Motivation stammen von mir.*

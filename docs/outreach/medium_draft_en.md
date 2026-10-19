@@ -2,6 +2,10 @@
 
 *How a childhood dream became the starting point for a research project.*
 
+*Disclosure: Sol6.1 (AI) assisted with the structure, wording, and
+translation of this article. The dream account and personal motivation
+are my own.*
+
 *Draft for Medium · 19 October 2026 · [Deutsche Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)*
 
 As a small child, I had a dream. I was flying freely, turned a little, and
@@ -100,7 +104,3 @@ Further reading: [Scientific status](https://github.com/MemoryDynamics/Knoten/bl
 and [internal review](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_premerge_referee_review_2026-09-17.md).
 The internal checks are not an independent external replication. These
 technical sources are currently in German.
-
-*Disclosure: Sol6.1 (AI) assisted with the structure, wording, and
-translation of this article. The dream account and personal motivation
-are my own.*
