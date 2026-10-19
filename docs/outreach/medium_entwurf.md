@@ -2,6 +2,11 @@
 
 *Wie ein Kindheitstraum zum Ausgangspunkt eines Forschungsprojekts wurde.*
 
+![Eine kupferfarbene Flugspur bildet einen verwickelten Knoten vor dunkelblauem Hintergrund.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/dream_flight_memory_hero.png)
+
+*Eine Flugbahn, die sich in ihrer eigenen Vergangenheit verfängt.
+KI-generierte Illustration zur Traumerinnerung.*
+
 *Hinweis: Dieser Text entstand mit Unterstützung von Sol6.1 (KI) bei
 Struktur, Formulierung und Übersetzung. Die Traumschilderung und die
 persönliche Motivation stammen von mir.*
@@ -42,6 +47,15 @@ Das klingt erst einmal abstrakt. Die Vorstellung dahinter ist einfacher:
 Ein Punkt bewegt sich, hinterlässt eine verblassende Spur und reagiert
 anschließend auf diese Spur. Im Rechner speichern wir dafür eine endliche
 Zahl vergangener Positionen.
+
+Bei dieser Abbildung hat auch meine Frau verstanden, was ich meine.
+
+![Historische dreidimensionale Modelltrajektorie mit örtlichen Verdichtungen; Violett zeigt frühe, Gelb späte Schritte.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/fig3_knot_trajectory_historical.png)
+
+*Eine frühe Modellsimulation: Die Linie verbindet aufeinanderfolgende
+Positionen, die Farbe läuft von frühen (violett) zu späten Schritten (gelb).
+Die Verdichtungen machen die Idee anschaulich; diese historische Grafik
+ist kein aktueller Stabilitäts- oder Teilchennachweis.*
 
 Das Projekt heißt inzwischen **Memory Dynamics** und ist unter
 [MemoryDynamics.org](https://memorydynamics.org/) zu finden. Die große

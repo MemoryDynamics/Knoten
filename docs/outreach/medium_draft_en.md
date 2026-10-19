@@ -2,6 +2,11 @@
 
 *How a childhood dream became the starting point for a research project.*
 
+![A copper-colored flight path forms an intricate knot against a deep blue background.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/dream_flight_memory_hero.png)
+
+*A flight path caught in its own past. AI-generated illustration of the
+dream recollection.*
+
 *Disclosure: Sol6.1 (AI) assisted with the structure, wording, and
 translation of this article. The dream account and personal motivation
 are my own.*
@@ -38,6 +43,15 @@ full memory state gives us a Markov description.
 That sounds abstract at first. The idea behind it is simpler: a point
 moves, leaves a fading trace, and then responds to that trace. In the
 computer, we retain a finite number of past positions.
+
+This was the figure that helped my wife understand what I meant.
+
+![Historical three-dimensional model trajectory with spatial clusters; purple shows early steps and yellow late steps.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/fig3_knot_trajectory_historical.png)
+
+*An early model simulation: the line joins successive positions, and the
+color runs from early (purple) to late steps (yellow). The clusters
+illustrate the idea; this historical figure does not establish the current
+stability result or physical particles.*
 
 The project is now called **Memory Dynamics**. Its website is
 [MemoryDynamics.org](https://memorydynamics.org/). The larger hope has been,

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-19",
+  "source_commit_before_image_additions": "a6784665bee57f204af9f1e96b37b6e5a1259d7a",
+  "historical_pdf": {
+    "path": "figures/paper/fig3_knot_trajectory.pdf",
+    "sha256": "ae619e4da59c05c33f4b49992c9bd1342801f8e8eef215326f2070c5d6a5cca5"
+  },
+  "images": [
+    {
+      "file": "dream_flight_memory_hero.png",
+      "role": "AI-generated conceptual illustration",
+      "pixels": [
+        1672,
+        941
+      ],
+      "sha256": "0cacadf758bc0dcbff172197071dfcb596f1d04e1dd09116dde0987bed67877d"
+    },
+    {
+      "file": "fig3_knot_trajectory_historical.png",
+      "role": "unaltered raster rendering of historical PDF",
+      "pixels": [
+        2400,
+        2013
+      ],
+      "sha256": "c94a2f653a46a00ecfd80134f97136ae2d185aef40f067649279152be7b2fde8"
+    }
+  ]
+}
