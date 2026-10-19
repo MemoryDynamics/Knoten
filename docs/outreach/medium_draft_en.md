@@ -111,8 +111,10 @@ dream can go.
 
 ---
 
-Further reading: [Scientific status](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/docs/status/current_status.md),
-[local stability finding](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_result_review_2026-09-17.md),
-and [internal review](https://github.com/MemoryDynamics/Knoten/blob/35ae7b0eb7d7bb8cc57eaa2c2af80b32d955fb4f/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_premerge_referee_review_2026-09-17.md).
+German version: [Ein Traum von Knoten](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8).
+
+Further reading: [Current scientific status](https://github.com/MemoryDynamics/Knoten/blob/main/docs/status/current_status.md),
+[local stability finding](https://github.com/MemoryDynamics/Knoten/blob/b7f5705a43953f437cb3acd95c069490ab89697a/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_component_attempt_3_result_review_2026-09-17.md),
+and [internal review](https://github.com/MemoryDynamics/Knoten/blob/b7f5705a43953f437cb3acd95c069490ab89697a/reports/project/meta/reviews/scalar_memory_rotating_wave_horizon_g5_premerge_referee_review_2026-09-17.md).
 The internal checks are not an independent external replication. These
 technical sources are currently in German.
