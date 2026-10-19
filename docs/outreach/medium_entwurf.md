@@ -48,8 +48,6 @@ Ein Punkt bewegt sich, hinterlässt eine verblassende Spur und reagiert
 anschließend auf diese Spur. Im Rechner speichern wir dafür eine endliche
 Zahl vergangener Positionen.
 
-Bei dieser Abbildung hat auch meine Frau verstanden, was ich meine.
-
 ![Historische dreidimensionale Modelltrajektorie mit örtlichen Verdichtungen; Violett zeigt frühe, Gelb späte Schritte.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/fig3_knot_trajectory_historical.png)
 
 *Eine frühe Modellsimulation: Die Linie verbindet aufeinanderfolgende

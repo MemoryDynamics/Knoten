@@ -44,8 +44,6 @@ That sounds abstract at first. The idea behind it is simpler: a point
 moves, leaves a fading trace, and then responds to that trace. In the
 computer, we retain a finite number of past positions.
 
-This was the figure that helped my wife understand what I meant.
-
 ![Historical three-dimensional model trajectory with spatial clusters; purple shows early steps and yellow late steps.](https://github.com/MemoryDynamics/Knoten/raw/refs/heads/main/figures/external/medium_2026-10-19/fig3_knot_trajectory_historical.png)
 
 *An early model simulation: the line joins successive positions, and the
