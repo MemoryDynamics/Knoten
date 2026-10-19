@@ -6,7 +6,7 @@
 Struktur, Formulierung und Übersetzung. Die Traumschilderung und die
 persönliche Motivation stammen von mir.*
 
-*Entwurf für Medium · 19. Oktober 2026 · [English version](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)*
+*Quellfassung · [Veröffentlicht auf Medium am 19. Oktober 2026](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8) · [English draft](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)*
 
 Als Kleinkind hatte ich einen Traum. Ich flog frei umher, bog etwas ab und
 verfing mich in meiner eigenen Flugbahn. So sehr, dass ich irgendwann in

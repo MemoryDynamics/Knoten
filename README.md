@@ -19,7 +19,7 @@ Eine Weltformel oder eine Identifikation realer Teilchen liegt nicht vor.
 
 Fuer den oeffentlichen Einstieg, ergaenzt am 2026-10-19:
 
-- Artikelentwurf: [Deutsch](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md) und [English](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md). Der persoenliche Traum, der schrittweise Weg zum Modell, Ergebnisse und offene Fragen; noch nicht auf Medium veroeffentlicht.
+- Artikel: [Deutsch auf Medium](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8) und [English draft](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md). Der persoenliche Traum, der schrittweise Weg zum Modell, Ergebnisse und offene Fragen. Die deutsche Fassung wurde am 2026-10-19 frei lesbar veroeffentlicht.
 - Eine konkrete Frage pruefen: [Deutsch](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md) und [English](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/contribute_review_en.md). Drei begrenzte Review-Einstiege mit Quellen und erwartetem Ergebnis. Niemand muss das gesamte Projekt begutachten.
 
 ## Wissenschaftlicher Stand

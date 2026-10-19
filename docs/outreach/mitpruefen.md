@@ -17,7 +17,7 @@ Persönliche Motivation und eine mögliche spätere physikalische Deutung sind
 von den geprüften Modellresultaten zu trennen. Ein Weltformel-, Teilchen-,
 Masse-, Ladungs- oder Spin-Nachweis liegt nicht vor. Den zugänglichen
 Hintergrund erzählen der
-[deutsche Artikelentwurf](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+[deutsche Artikel](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 und seine
 [englische Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md).
 Die neuronale Deutung des Traums und ein möglicher KI-Nutzen bleiben
@@ -61,10 +61,12 @@ sind.
 ## Veröffentlichungen und Quellen
 
 Der
-[Medium-Text](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
-ist ein redaktioneller Entwurf. Er ist kein begutachteter Fachartikel und
-noch nicht auf Medium veröffentlicht. Die endgültige persönliche Erzählung
-und die Veröffentlichung erfolgen durch den Autor. Medium beschreibt den
+[deutsche Artikel](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
+ist seit dem 19. Oktober 2026 frei lesbar auf Medium veröffentlicht.
+Die [Quellfassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+bleibt auf GitHub. Die englische Fassung ist weiterhin ein Entwurf.
+Der Artikel ist kein begutachteter Fachartikel; der Sol6.1-Hinweis steht am
+Anfang. Medium beschreibt den
 [Import eines vorhandenen Artikels](https://help.medium.com/hc/en-us/articles/214550207-Importing-a-post-to-Medium)
 und das
 [Setzen eines Canonical-Links](https://help.medium.com/hc/en-us/articles/360033930293-Set-a-canonical-link);

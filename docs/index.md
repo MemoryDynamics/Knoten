@@ -11,10 +11,11 @@ Zwischenstaende bleiben im Archiv, steuern die Arbeit aber nicht mehr.
 ## Persoenlicher Einstieg und offene Diskussion
 
 Ergaenzt am 2026-10-19: Der
-[Medium-Artikelentwurf auf Deutsch](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)
+[Medium-Artikel auf Deutsch](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)
 und die
-[englische Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
+[englische Entwurfsfassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_draft_en.md)
 erzaehlen den Traum, den Weg zum Modell und die wissenschaftlichen Grenzen.
+Die deutsche Fassung ist seit dem 2026-10-19 auf Medium veroeffentlicht.
 Die
 [Einladung zum Mitpruefen](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/mitpruefen.md)
 ist ebenfalls

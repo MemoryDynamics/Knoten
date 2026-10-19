@@ -6,7 +6,7 @@
 translation of this article. The dream account and personal motivation
 are my own.*
 
-*Draft for Medium · 19 October 2026 · [Deutsche Fassung](https://github.com/MemoryDynamics/Knoten/blob/main/docs/outreach/medium_entwurf.md)*
+*Draft for Medium · 19 October 2026 · [Deutsche Fassung auf Medium](https://medium.com/@haukeh/ein-traum-von-knoten-9232412d4ff8)*
 
 As a small child, I had a dream. I was flying freely, turned a little, and
 got caught in my own flight path. So caught up in it that I eventually
