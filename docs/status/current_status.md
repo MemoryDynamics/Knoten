@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-19 (Paper-I-Einordnung aktualisiert; FIFO-Befunde unveraendert).
+Stand: 2026-10-21 (Gesamtprogramm neu priorisiert; wissenschaftliche Befunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,12 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
+von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und
+Gravitation. Der naechste Block ist ein begrenzter Machbarkeitscheck gemaess
+den Projektprioritaeten. Die Planung ist keine neue Physikevidenz und
+keine FIFO-/P5-Zielautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

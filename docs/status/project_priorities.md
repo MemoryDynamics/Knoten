@@ -1,11 +1,14 @@
 # Projektprioritaeten
 
-Stand: 2026-10-19 (Paper-I-Neubewertung vor PRE; keine neue FIFO-/P5-Autorisierung).
+Stand: 2026-10-21 (Gesamtprogramm vor Publikationsoptimierung; keine neue FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
 ist archiviert. Katalog, Status und Reports duerfen Befunde und Blocker
-nennen, aber keine zweite Prioritaetenliste fuehren.
+nennen, aber keine zweite Prioritaetenliste fuehren. Die
+[Forschungsroadmap](research_roadmap.md) beschreibt Ziel und Abhaengigkeiten,
+keine zweite Aufgabenliste. Der [Stand vom 2026-10-19](https://github.com/MemoryDynamics/Knoten/blob/b43fc11af4dcda82058a64e0d2e0e013c9aba585/docs/status/project_priorities.md)
+bewahrt die vorherige Arbeitsreihenfolge.
 
 Eingefrorene Voraussetzungen bleiben
 `p4rs-anchor-scale-transfer-pass`,
@@ -13,85 +16,84 @@ Eingefrorene Voraussetzungen bleiben
 `p5d-mutual-center-design-identifiable`.
 **P5-D Versuch 3 technisch inconclusive: Pipeline geschlossen**; die
 **Attempt-3-Lease ist verbraucht**.
-Diese Befunde ordnen Prioritaet 2 ein, sind aber keine weiteren Arbeitspunkte.
+Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Paper I wissenschaftlich nachschaerfen -- aktuelle Autorenprioritaet.**
+1. **Gemeinsamen Machbarkeitscheck erstellen -- jetzt.** Fuer die unveraenderte
+   Mikrodynamik eine kompakte Matrix aus Input, abgeleitetem Resultat, offener
+   Annahme und moeglichem Gegenbefund erstellen. Drei Fragen bearbeiten:
+   Welche effektiven Freiheitsgrade bleiben nach Symmetriereduktion? Welche
+   Lokalitaets-/Propagationsstruktur erlaubt das Modell? Welche Voraussetzungen
+   einer Quantenbeschreibung sind vorhanden oder fehlen? Die Quantenfrage
+   wird parallel zur klassischen Modenanalyse geprueft, nicht erst nach
+   erfolgreichen Mehrknotentests. Ergebnis: eine begruendete Auswahl genau
+   eines naechsten Brueckennachweises oder ein dokumentierter Blocker.
+   Zunaechst Literatur-, Gleichungs- und Bestandsanalyse, keine neuen Ziellaeufe.
+   Erweiterungen getrennt kennzeichnen; neue Modellregeln und groessere
+   Simulationsprogramme brauchen eine Richtungsentscheidung des Autors.
+2. **Paper I als begrenzten Ausgangspunkt abschliessen -- nach Einordnung aus 1.**
    Die reproduzierbare Fassung vom 2026-10-09 bleibt eingefrorene Baseline,
    ist aber nicht als PRE-einreichungsreif eingestuft. Zuerst die konkrete
    Neuheit gegen Aging-Diffusionen, Autochemotaxis, exponentiell gewichtete
    Occupation-Masse sowie Sarkars PRE-"Memory engine" und Gaussian-Delay-
    Feedback pruefen; der reine Befund kompakter relativer Radien bei
    fortbestehender Diffusion ist kein ausreichender Neuheitsanspruch.
-   Anschliessend eine parameterfreie erste nichtlineare Korrektur samt
-   Gueltigkeitsgrenze herleiten und targetfrei gegen unabhaengige Rechnungen
-   pruefen. Erst danach ein prospektives, begrenztes Transport-/Skalenpanel
+   Die bereits formale erste nichtlineare Korrektur als eigene
+   Publikationshypothese samt Gueltigkeitsgrenze weiter pruefen; sie ist
+   kein nachgewiesener Schritt zu Gravitation oder Standardmodell.
+   Erst nach Punkt 1 und begruendeter wissenschaftlicher Auswahl ein
+   prospektives, begrenztes Transport-/Skalenpanel
    mit gematchten Kerneln, Autokorrelation, Seed-Unsicherheit und explizitem
    Falsifikationskriterium einfrieren. Kein weiterer 30M/300M-Radiuslauf nur
    zur Praezisionssteigerung. Bei fehlender neuer Aussage Baseline als
    technischen Anker behalten; Manuskriptziel und Journal dann neu entscheiden.
    Der [PRE-Neuheitsaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/pre_reassessment_2026-10-19.md)
    dokumentiert Evidenz, offene Literaturfragen und die bedingte Arbeitshypothese.
-2. **Fixed-alpha-Horizontgate vervollstaendigen -- separater FIFO-Arm.** Der P5-D-Produktionspfad bleibt
-   nach Versuch 3 geschlossen. Root-, Homotopie- und lokaler
-   Ausschlussadapter des vorgeschalteten Fixed-alpha-Horizontgates sind
-   targetfrei reviewed; das tail-augmentierte Krawczyk-Zertifikat ist nun
-   ebenfalls targetfrei reviewed. Der erste isolierte G4-Komponentenlauf
-   brach bei der nachgeschalteten Recordvalidierung an einer unzulaessig
-   exakten Kontrolle der outward-gerundeten Box ab; kein verwertbares
-   Ergebnis entstand und G4 bleibt ungemessen. Die Boxpruefung ist nun
-   targetfrei remediated und mit 1063 lokalen Repositorytests geprueft.
-   Der separat preregistrierte Retry besteht G4 mit zwei strikten,
-   ueberlappenden 120/160-dps-Tailpanels; der unabhaengige Recordaudit stimmt
-   zu. Das ist lokale $F_\infty$-Existenz, noch kein vollstaendiger
-   Horizonttransfer. LCG-Arnoldi- und Trajektorienadapter bestehen nun
-   targetfrei; dabei wurden Instabilitaet auf dasselbe gematchte Ritzpaar
-   verschaerft und Fortsetzungen fail-closed hinter Panelchecks gelegt. Eine
-   erste Aenderung am historisch eingefrorenen Stabilitaetskern wurde durch
-   dessen CI-Blob-Sperren falsifiziert; der korrigierte G5-Kern ist nun
-   getrennt, waehrend der Altblob exakt erhalten bleibt. Der gemeinsame
-   Grundgleichungs-Preflight ist nun targetfrei implementiert und erzeugt
-   einen hashbaren Record fuer Gewichtssumme, native Kreiskovarianz,
-   Fixpunkt, Voll-Jacobian und Symmetrien. Der eingefrorene isolierte
-   G5-Ergebnisvertrag, seine fail-closed Backendkomposition sowie ein
-   standardbibliotheksbasierter Record-/Publikationsauditor bestehen nun
-   targetfrei. Attempt 1 erreichte nach Root und Preflight die Arnoldi-Panels,
-   scheiterte aber vor Publikation an einem ungeclippten binary64-Overlap
-   ausserhalb des exakten Intervalls $[0,1]$. Es existiert kein G5-Ergebnis;
-   der Versuch ist verbraucht und kein Retry autorisiert. Die
-   Overlap-Recordgrenze ist inzwischen mit dimensionsskalierter
-   binary64-Kanonisierung und Falsifikationstests targetfrei remediiert. Als
-   prospektive Attempt-2-Protokoll und das neue Readinessreview bestanden
-   targetfrei. Attempt 2 erreichte die nichtlinearen Fortsetzungen, scheiterte
-   aber vor Publikation: Der Integrator bildet das Maximum ueber jeden Schritt,
-   waehrend der Validator es aus dem Zehnersampling rekonstruiert. Das ist ein
-   zweiter Pipeline-Incident, kein G5-Befund. Die anschliessend
-   preregistrierte dichte Vollschrittspur besteht 1145 Tests, Lint und Docs.
-   Attempt 3 wurde genau einmal ausgefuehrt und unabhaengig auditiert: beide
-   Arnoldi-Panels sowie alle drei nichtlinearen Stoerungsarme bestehen. Der
-   Befund `g5-local-direct-stability-pass` gilt nur lokal bei exakt $H=2400$.
-   Offen bleiben die G1--G3-Branchverbindung, der vollstaendige Horizontlauf
-   und jede P5-D-Folgeausfuehrung.
-3. **FIFO-Paper eigenstaendig bearbeiten -- getrennt von 1, nach 2.** Existenz und
+3. **Fixed-alpha-Horizontgate vervollstaendigen -- nach Einordnung aus 1.**
+   Im separaten FIFO-Arm bestehen G4 fuer lokale $F_\infty$-Existenz und
+   G5 fuer lokale numerische Stabilitaet bei exakt $H=2400$. Offen bleiben
+   die G1--G3-Branchverbindung und der vollstaendige Horizonttransfer;
+   insbesondere ist Stabilitaet bei unendlichem Horizont nicht belegt.
+   Vor neuer Ausfuehrung die damit entscheidbare Aussage festhalten.
+   G5-Ausfuehrungsautorisierung verbraucht; P5-D bleibt nach Versuch 3
+   geschlossen. Technische Versuchschronik im oben verlinkten Stand vom
+   2026-10-19, aktuelle Evidenz im Experimentkatalog.
+4. **FIFO-Paper eigenstaendig bearbeiten -- getrennt von 2, nach 3.** Existenz und
    lokale Stabilitaet vorbereiteter Orbits mit der jeweils geprueften
    Vertrauensbasis berichten. Paper I benoetigt keinen Formationsclaim.
    Ein Formation-/KnotScore-Protokoll bleibt ein separates prospektives
    Projektgate. Ein Score auf einer vorbereiteten exakten Kreisgeschichte
    ohne `eta_zero`- und Formationskontrolle wird nicht nachgetragen.
-4. **Zertifikats- und Release-Hardening -- nach 2, parallel zu 1/3.** Einen
+5. **Zertifikats- und Release-Hardening -- nach 3, parallel zu 2/4.** Einen
    zweiten unabhaengigen Intervallbackend, reproduzierbare Dependency-Hashes,
    `CITATION.cff` und eine zitierbare Release vorbereiten. Diese Punkte
    erhoehen Pruefbarkeit, ersetzen aber kein wissenschaftliches Gate.
-5. **Interaktionsprogramm neu autorisieren -- erst nach 2.** P5-D bleibt
+6. **Interaktionsprogramm nur bei begruendetem Brueckenziel neu autorisieren -- nach 1 und 3.** P5-D bleibt
    `inconclusive`. Ein weiterer Ziellauf braucht ein separates
    outcome-blindes Protokoll, eine neue explizite Freigabe und einen sauberen
    Readiness-Commit. Vorher ist nur targetfreie Methodenarbeit erlaubt.
-6. **Repository fortlaufend kuratieren -- bei jedem abgeschlossenen Block.**
+   Das Ziel muss aus dem Machbarkeitscheck folgen: Observable, Nullmodell,
+   Gueltigkeitsbereich und Abbruchkriterium vorab festlegen, ohne ein
+   gewuenschtes Feldgesetz oder Teilchenlabel als Ergebnis einzubauen.
+7. **Repository und Roadmap fortlaufend kuratieren -- bei jedem abgeschlossenen Block.**
    Aktive Seiten auf hoechstens sieben gleichrangige Elemente begrenzen,
    historische Detailregister ins Archiv verschieben, Standardbibliotheken
    erweitern statt Runnerlogik zu duplizieren und Status/Claims nach jedem
-   Review synchronisieren.
+   Review synchronisieren. Nur neue Evidenz oder eine explizite
+   Richtungsentscheidung aendert den Status einer Bruecke. Technische
+   Reparaturen zaehlen nicht als neue Physikevidenz.
+
+## Naechstes abnehmbares Ergebnis
+
+Ein kurzer Machbarkeitsbericht mit einer Annahmen-/Resultatmatrix fuer das
+Minimalmodell und getrennt gekennzeichneten Erweiterungen. Er muss fuer jede
+der drei Fragen aus Punkt 1 mindestens einen entscheidenden Nachweis oder
+ein begruendetes Hindernis benennen. Am Ende steht eine Empfehlung mit
+Alternativen und Entscheidungskriterium, kein automatisch gestarteter Scan.
+Das ist eine endliche Bestandspruefung, kein Auftrag, bereits Quantenmechanik
+oder Gravitation herzuleiten. Diese Planungsanpassung erteilt keine neue
+FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
 
