@@ -1,36 +1,46 @@
 # Paper II - Propagation Speed and Light-Cone Dynamics
 
-Stand: 2026-07-13.
+Stand: 2026-10-21.
+
+**Nicht als Ergebnisfassung zirkulieren:** `main.tex` ist ein alter
+Companion-Draft. Trotz vorsichtigem Abstract enthaelt er noch unbelegte
+Aussagen ueber Knoten, fehlende geometrische Inputs und gemessene universelle
+Propagation. Der [R0-Audit](../../docs/reference/foundation_feasibility.md)
+benennt diese Luecke. Quelle und gegebenenfalls vorhandenes PDF sind noch
+nicht an den aktuellen Paper-I-Befund angepasst.
 
 ## Rolle
 
 Paper II ist aktuell ein Companion-Draft und Future-Work-Programm. Es sammelt
-die These, dass aus irreversibler Speicherdynamik und gekoppelten metastabilen
+die These, dass aus Memory-Dynamik und gekoppelten langlebigen
 Knoten endliche Antwortzeiten, effektive Signalfronten und spaeter
 Lorentz-artige Kinematik entstehen koennen.
 
-Der Draft darf derzeit nicht als Claim-Paper gelesen werden. Die aktuelle
-Paper-0/Paper-I-Linie bleibt konservativ: erst Markov-Einbettung,
-co-moving scalar-knot Evidenz und Kontrolltrennung; danach erst Propagation,
-`c_eff` und Lorentz-artige Kinematik.
+Der Draft darf derzeit nicht als Claim-Paper gelesen werden. Seine Rolle ist
+Propagation und Kinematik, nicht bereits Gravitationsdynamik. Die aktive
+Arbeitsfolge steht allein in den
+[Projektprioritaeten](../../docs/status/project_priorities.md).
 
 ## Status
 
-Die Struktur ist vorbereitet, aber die empirische Haertung steht hinter der
-aktuellen Paper-0/Paper-I-Arbeit:
+Die vorbereitete Struktur ist noch kein physikalischer Nachweis:
 
-- Zuerst Non-Markovian Basis und Markov-Einbettung klaeren.
-- Dann Paper I als Minimalmodell haerten.
-- Danach Propagation, `c_eff` und Lorentz-Kinematik mit klaren
-  Negativkontrollen und robusten Onset-Kriterien weiterziehen.
+- Paper I liefert im getesteten Ast eine klassische lineare Radiusbaseline,
+  keinen nachgewiesenen nichtlinearen Materiebaustein.
+- B1 muss Zustand, Interventionen und Informationszugriff fuer eine
+  gemeinsame operationale Beschreibung klaeren, bevor ein Signaltest
+  physikalisch interpretiert wird.
 - Die algebraische/operatorische Sprache ist textlich eingearbeitet, die
   numerische Operatorpipeline aber noch offen.
 - Keine `d=3`-Selektion, keine harte Signalgeschwindigkeit und keine
   Lorentz-Kinematik als aktuelles Resultat behaupten.
-- Aktueller Input aus Paper I: lokale `D_mem ~=2.94`-Memory-Shape im
-  gewaehlten 3D-Embedding. Paper II muss erst klaeren, ob daraus unter
-  Ambient-Dimension, Mehrknoten-Wechselwirkung und externer Grobkoernung eine
-  robuste externe/macroskopische 3D-Beschreibung wird.
+- Die fruehere `D_mem ~=2.94`-Beobachtung im gewaehlten 3D-Embedding ist
+  durch ambiente lineare Gaussgeometrie erklaerbar, keine 3D-Emergenz.
+- Endliche Antwortschwellen ersetzen keinen Kausalrand. Der direkte
+  Gauss-Readout hat bei erlaubter Quellenintervention eine Fernantwort;
+  eine effektive Lokalitaet braucht eine eigene Fehler-/Skalenkontrolle.
+- Ein gemeinsamer Lichtkegel allein liefert weder die volle Lorentz-
+  Invarianz der Dynamik noch Einstein-Gleichungen oder universelle Kopplung.
 
 ## Dateien
 

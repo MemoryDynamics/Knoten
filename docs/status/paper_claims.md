@@ -1,9 +1,18 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-19 (Paper-I-Reifegrad aktualisiert; FIFO-Gates unveraendert).
+Stand: 2026-10-21 (R0-Annahmenaudit ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der begrenzte [R0-Audit](../reference/foundation_feasibility.md) liefert
+bedingte analytische Grenzen, keinen neuen Produktionspass: Die Kreisphase
+ist eine Raumrotation; direkte Gaussquellen haben bei zugelassener
+Quellenintervention keinen harten raeumlichen Antwortrand; Bell-lokale,
+messwahlunabhaengige klassische Messmodelle bleiben mit Memory beschraenkt.
+Andere Formmoden, relative Orientierungen, effektive Lokalitaet und anders
+begruendete Messarchitekturen werden dadurch nicht allgemein ausgeschlossen.
+Es fehlt ein gemeinsamer operationaler Vertrag fuer die Programme II/III.
 
 ## Paper 0: Mathematical Anchor
 

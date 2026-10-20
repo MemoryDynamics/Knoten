@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-21 (Gesamtprogramm vor Publikationsoptimierung; keine neue FIFO-/P5-Autorisierung).
+Stand: 2026-10-21 (begrenzter R0-Audit abgeschlossen; B1-Vertrag offen; keine neue FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -20,19 +20,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Gemeinsamen Machbarkeitscheck erstellen -- jetzt.** Fuer die unveraenderte
-   Mikrodynamik eine kompakte Matrix aus Input, abgeleitetem Resultat, offener
-   Annahme und moeglichem Gegenbefund erstellen. Drei Fragen bearbeiten:
-   Welche effektiven Freiheitsgrade bleiben nach Symmetriereduktion? Welche
-   Lokalitaets-/Propagationsstruktur erlaubt das Modell? Welche Voraussetzungen
-   einer Quantenbeschreibung sind vorhanden oder fehlen? Die Quantenfrage
-   wird parallel zur klassischen Modenanalyse geprueft, nicht erst nach
-   erfolgreichen Mehrknotentests. Ergebnis: eine begruendete Auswahl genau
-   eines naechsten Brueckennachweises oder ein dokumentierter Blocker.
-   Zunaechst Literatur-, Gleichungs- und Bestandsanalyse, keine neuen Ziellaeufe.
-   Erweiterungen getrennt kennzeichnen; neue Modellregeln und groessere
-   Simulationsprogramme brauchen eine Richtungsentscheidung des Autors.
-2. **Paper I als begrenzten Ausgangspunkt abschliessen -- nach Einordnung aus 1.**
+1. **B1: gemeinsamen operationalen Vertrag klaeren -- jetzt.** Der begrenzte
+   [R0-Audit](../reference/foundation_feasibility.md) ist dokumentiert:
+   Kreisphase ist raeumlich, der direkte Gauss-Readout hat keinen harten
+   Kausalrand, Bell-lokale Messbeschreibungen bleiben auch mit Memory
+   beschraenkt. Das ist kein allgemeiner Unmoeglichkeitssatz. Fuer einen
+   bestehenden Modellzweig nun Zustand, Praeparation, Interventionen,
+   Readouts zweier Teilsysteme und Informationszugriff explizit zuordnen.
+   Daraus ersten Antwortoperator und bedingte Wahrscheinlichkeitsstruktur
+   ableiten, oder die fehlende Regel als Blocker benennen. Keine neue
+   Mediatorgleichung oder Quantenmessregel einsetzen, um eine Luecke zu
+   verdecken. Dies bleibt analytische Bestandsarbeit ohne Ziellaeufe;
+   neue Modellregeln erfordern eine Richtungsentscheidung des Autors.
+2. **Paper I als begrenzten Ausgangspunkt abschliessen -- R0-Einordnung liegt vor.**
    Die reproduzierbare Fassung vom 2026-10-09 bleibt eingefrorene Baseline,
    ist aber nicht als PRE-einreichungsreif eingestuft. Zuerst die konkrete
    Neuheit gegen Aging-Diffusionen, Autochemotaxis, exponentiell gewichtete
@@ -42,7 +42,7 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Die bereits formale erste nichtlineare Korrektur als eigene
    Publikationshypothese samt Gueltigkeitsgrenze weiter pruefen; sie ist
    kein nachgewiesener Schritt zu Gravitation oder Standardmodell.
-   Erst nach Punkt 1 und begruendeter wissenschaftlicher Auswahl ein
+   Erst nach wissenschaftlicher Auswahl im Licht von R0/B1 ein
    prospektives, begrenztes Transport-/Skalenpanel
    mit gematchten Kerneln, Autokorrelation, Seed-Unsicherheit und explizitem
    Falsifikationskriterium einfrieren. Kein weiterer 30M/300M-Radiuslauf nur
@@ -86,16 +86,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-Ein kurzer Machbarkeitsbericht mit einer Annahmen-/Resultatmatrix fuer das
-Minimalmodell und getrennt gekennzeichneten Erweiterungen. Er muss fuer jede
-der drei Fragen aus Punkt 1 mindestens einen entscheidenden Nachweis oder
-ein begruendetes Hindernis benennen. Am Ende steht eine Empfehlung mit
-Alternativen und Entscheidungskriterium, kein automatisch gestarteter Scan.
-Das ist eine endliche Bestandspruefung, kein Auftrag, bereits Quantenmechanik
-oder Gravitation herzuleiten. Diese Planungsanpassung erteilt keine neue
-FIFO-/P5-Zielautorisierung.
+R0 liefert die geforderte Annahmen-/Resultatmatrix samt Gegenargumenten,
+analytischen Grenzen und zwoelf synthetischen Checks. B1 muss als naechstes
+zeigen, welche operationalen Regeln bereits im Einzelprozess bzw. in den
+deklarierten Erweiterungen stehen und welche erst erfunden werden muessten.
+Abnahme ist ein eindeutiger Vertrag oder ein konkreter Blocker, kein
+automatisch gestarteter Scan. Das ist kein Auftrag, bereits Quantenmechanik
+oder Gravitation herzuleiten. Keine neue FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
+
+R0 ist als begrenzte Bestandspruefung abgeschlossen, nicht als allgemeines
+Machbarkeitsurteil. Die bisherige Einzelprozessregel definiert keine zwei
+unabhaengig einstellbaren Messstationen; konstruierte Kopplungsports sind
+Erweiterungen. Paper-II-Alttext und Paper-III-Planung muessen an diese Grenze
+angepasst gelesen werden; ihre READMEs markieren den offenen Anschluss.
 
 Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
 aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert

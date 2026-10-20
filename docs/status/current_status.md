@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-21 (Gesamtprogramm neu priorisiert; wissenschaftliche Befunde unveraendert).
+Stand: 2026-10-21 (R0-Annahmenaudit dokumentiert; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -11,9 +11,13 @@ vollstaendige vorherige Stand liegt im
 
 Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
 von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und
-Gravitation. Der naechste Block ist ein begrenzter Machbarkeitscheck gemaess
-den Projektprioritaeten. Die Planung ist keine neue Physikevidenz und
-keine FIFO-/P5-Zielautorisierung.
+Gravitation. Der begrenzte [R0-Audit](../reference/foundation_feasibility.md)
+ist dokumentiert: raeumliche Kreisphase, nichtkompakter direkter Gauss-Readout
+und bedingte klassische Korrelationsgrenzen. Zwoelf synthetische Checks
+pruefen die engen Aussagen und Gegenbeispiele gegen Ueberinterpretation.
+Das ist kein allgemeines Go oder No-go fuer das Fernziel und keine neue
+Produktions- oder FIFO-/P5-Evidenz. B1 muss den fehlenden gemeinsamen
+operationalen Vertrag klaeren.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

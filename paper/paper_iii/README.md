@@ -7,6 +7,15 @@ phenomenology. It deliberately keeps that route open as a future research
 question, but only behind reproducible knot, synchronization, and collective-mode
 evidence.
 
+Update 2026-10-21: the bounded
+[R0 feasibility audit](../../docs/reference/foundation_feasibility.md)
+requires an early quantum/locality assessment, in parallel with classical
+mode analysis. Synchronization is not a prerequisite for asking whether the
+model can support the required measurement statistics. The next B1 task is
+an operational state/intervention contract, not a particle-label scan.
+Only the [project priorities](../../docs/status/project_priorities.md) govern
+execution; this page describes hypotheses and possible dependencies.
+
 ## Reframed Aim
 
 The current working direction is no longer that the minimal process must first
@@ -50,7 +59,8 @@ These are hypotheses, not claims:
 
 ## Required Demonstrations
 
-A credible Paper-III path requires the following, in order:
+The classical mode route would need the following demonstrations. They do
+not establish quantum mechanics, and do not postpone the early R0/B1 audit:
 
 1. **Single-knot mode extraction**
    - center or external coordinate;
@@ -95,8 +105,13 @@ This programme does not currently claim:
 
 ## Concrete Next Step
 
-The next implementable unit is not another dimension scan. It is a
-synchronization measurement stack:
+The current next step is B1: identify the full state, preparation, allowed
+interventions, two-subsystem readouts and information access in an existing
+model branch. Derive its response and conditional probability structure or
+identify the missing rule. Any new microscopic or measurement rule requires
+an explicit model decision; no existing execution gate is reopened.
+
+A possible later classical synchronization stack remains:
 
 ```text
 single-knot observables
