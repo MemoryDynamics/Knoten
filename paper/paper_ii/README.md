@@ -27,9 +27,10 @@ Die vorbereitete Struktur ist noch kein physikalischer Nachweis:
 
 - Paper I liefert im getesteten Ast eine klassische lineare Radiusbaseline,
   keinen nachgewiesenen nichtlinearen Materiebaustein.
-- B1 muss Zustand, Interventionen und Informationszugriff fuer eine
-  gemeinsame operationale Beschreibung klaeren, bevor ein Signaltest
-  physikalisch interpretiert wird.
+- Die [B1-Bestandsanalyse](../../docs/reference/operational_contract.md)
+  spezifiziert die vorhandene klassische Quellenantwort. Fuer ihre
+  physikalische Deutung fehlen ein begruendetes Mehrsystemgesetz sowie
+  Aktuator-, Detektor- und Raumzeitzuordnung.
 - Die algebraische/operatorische Sprache ist textlich eingearbeitet, die
   numerische Operatorpipeline aber noch offen.
 - Keine `d=3`-Selektion, keine harte Signalgeschwindigkeit und keine

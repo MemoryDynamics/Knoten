@@ -29,7 +29,7 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
 | --- | --- | --- |
 | R0: Annahmen und Machbarkeit | Was ist eingebaut, was abgeleitet, was fehlt? Gemeinsame Matrix fuer Freiheitsgrade, Lokalitaet und Quantenfaehigkeit. | Begrenzter [Audit](../reference/foundation_feasibility.md) abgeschlossen: bedingte Grenzen und Gegenargumente dokumentiert, kein allgemeines Go oder No-go. |
 | R1: Kontrolliertes Minimalmodell | Definierte Dynamik, reproduzierbare Observablen, bekannte Grenzfaelle und Grenzen. Nichtlineare Struktur von linearer Relaxation unterscheiden. | Paper 0/I liefern Teile; FIFO ergaenzt einen separaten nichtlinearen Ast. Publikationsneuheit und fundamentale Relevanz getrennt bewerten. |
-| R2: Gemeinsame effektive Beschreibung | Langlebige Freiheitsgrade nach Symmetriereduktion; abgeleitete Bewegung, Kopplungen und Erhaltung bzw. Bilanzierung. Gueltigkeit unter Skalenwechsel testen. | Offen. Naechster Anschluss B1: gemeinsamer operationaler Zustands-/Interventionsvertrag. Ein erweiterter Zustand oder Fit allein ist keine geschlossene effektive Theorie. |
+| R2: Gemeinsame effektive Beschreibung | Langlebige Freiheitsgrade nach Symmetriereduktion; abgeleitete Bewegung, Kopplungen und Erhaltung bzw. Bilanzierung. Gueltigkeit unter Skalenwechsel testen. | Offen. [B1](../reference/operational_contract.md) spezifiziert die vorhandene klassische Quellenantwort; die physikalische Wahl oder Herleitung eines Mehrsystem-/Messgesetzes fehlt. Eine Erweiterung braucht eine Richtungsentscheidung. Ein erweiterter Zustand oder Fit allein ist keine geschlossene effektive Theorie. |
 | R3: Relativistische und quantenmechanische Verbindungen | Gemeinsame Propagationsstruktur und Kontrolle eines bevorzugten Bezugsrahmens; separat eine konsistente Quanten-/Messbeschreibung mit nichtklassischen Korrelationen. | Beide Verbindungen offen und frueh auf Vertraeglichkeit zu pruefen. Ein Lichtkegel beweist weder Lorentz-Invarianz der ganzen Dynamik noch Quantisierung. |
 | R4: Gravitation und Standardmodell | Gravitation: dynamische Geometrie, universelle Kopplung und kontrollierter Einstein-Grenzfall. Standardmodell: passende Eichstruktur, chirale Fermionen, Statistik und konsistente Wechselwirkungen. | Langfristige Ziele fuer II/III. Symmetrienamen oder attraktive Kraefte genuegen nicht. Klassische Gravitationstests brauchen nicht vorab eine vollstaendige Quantentheorie. |
 | R5: Gemeinsame Physik und Vorhersagen | Beide Sektoren aus kompatiblen Annahmen und demselben Skalengrenzfall verbinden; unabhaengige quantitative Vorhersagen gegen Beobachtungen pruefen. | Noch keine belastbare Route. Widerspruechliche Annahmen zwischen II und III schliessen eine gemeinsame Herleitung aus, auch wenn Einzelanalogien funktionieren. |
@@ -51,6 +51,11 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
 Paper-Nummern legen keine starre Forschungsreihenfolge fest. II und III
 muessen kompatible Annahmen und eine gemeinsame effektive Grundlage nutzen.
 Ob weitere Paper noetig sind, entscheidet der tatsaechliche Befund.
+
+Der naechste Arbeitsabschnitt konkretisiert nur den ersten offenen
+Uebergang. B1 macht jetzt die Architekturentscheidung sichtbar; Paper I
+bleibt daneben ein eigenstaendiger Publikationsstrang. Die spaeteren Stufen
+bleiben grob, bis ein belastbares Ergebnis ihre Verfeinerung rechtfertigt.
 
 ## Leitplanken
 

@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-21 (R0-Annahmenaudit ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
+Stand: 2026-10-21 (R0/B1-Bestandsanalysen ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -12,7 +12,12 @@ Quellenintervention keinen harten raeumlichen Antwortrand; Bell-lokale,
 messwahlunabhaengige klassische Messmodelle bleiben mit Memory beschraenkt.
 Andere Formmoden, relative Orientierungen, effektive Lokalitaet und anders
 begruendete Messarchitekturen werden dadurch nicht allgemein ausgeschlossen.
-Es fehlt ein gemeinsamer operationaler Vertrag fuer die Programme II/III.
+Die [B1-Bestandsanalyse](../reference/operational_contract.md) spezifiziert
+die klassische Frozen-Source-Antwort und ihre bedingte Verteilung.
+Es fehlt weiterhin ein gemeinsamer physikalischer Mehrsystem-/Messvertrag
+fuer die Programme II/III. B1 fuehrt keine neue Modellregel ein und
+autorisiert weder einen Quantenclaim noch eine physikalische Interpretation
+des direkten Fernzugriffs als Ueberlichtkommunikation.
 
 ## Paper 0: Mathematical Anchor
 

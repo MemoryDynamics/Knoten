@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-21 (R0-Annahmenaudit dokumentiert; Produktionsbefunde unveraendert).
+Stand: 2026-10-21 (R0/B1-Bestandsanalysen dokumentiert; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,8 +16,14 @@ ist dokumentiert: raeumliche Kreisphase, nichtkompakter direkter Gauss-Readout
 und bedingte klassische Korrelationsgrenzen. Zwoelf synthetische Checks
 pruefen die engen Aussagen und Gegenbeispiele gegen Ueberinterpretation.
 Das ist kein allgemeines Go oder No-go fuer das Fernziel und keine neue
-Produktions- oder FIFO-/P5-Evidenz. B1 muss den fehlenden gemeinsamen
-operationalen Vertrag klaeren.
+Produktions- oder FIFO-/P5-Evidenz. Die
+[B1-Bestandsanalyse](../reference/operational_contract.md) spezifiziert
+Zustand, Quellenvariation, Ein-Schritt-Antwort und bedingte Verteilung des
+vorhandenen Frozen-Source-Zweigs. Fuenf neue synthetische Checks pruefen
+seine Zuordnung zur Implementierung. Ein physikalischer Zwei-Stationen-
+Vertrag mit begruendeter Wahl oder Herleitung des Mehrsystemgesetzes,
+Aktuatoren und Detektoren fehlt weiter. Mathematisch definierte Paarkopplungen
+existieren; ihre physikalische Auswahl folgt nicht aus dem analytischen Abschluss.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

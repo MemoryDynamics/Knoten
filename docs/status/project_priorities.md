@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-21 (begrenzter R0-Audit abgeschlossen; B1-Vertrag offen; keine neue FIFO-/P5-Autorisierung).
+Stand: 2026-10-21 (R0 und B1-Bestandsanalyse dokumentiert; physikalische Architekturentscheidung offen; keine neue FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -20,18 +20,22 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **B1: gemeinsamen operationalen Vertrag klaeren -- jetzt.** Der begrenzte
-   [R0-Audit](../reference/foundation_feasibility.md) ist dokumentiert:
-   Kreisphase ist raeumlich, der direkte Gauss-Readout hat keinen harten
-   Kausalrand, Bell-lokale Messbeschreibungen bleiben auch mit Memory
-   beschraenkt. Das ist kein allgemeiner Unmoeglichkeitssatz. Fuer einen
-   bestehenden Modellzweig nun Zustand, Praeparation, Interventionen,
-   Readouts zweier Teilsysteme und Informationszugriff explizit zuordnen.
-   Daraus ersten Antwortoperator und bedingte Wahrscheinlichkeitsstruktur
-   ableiten, oder die fehlende Regel als Blocker benennen. Keine neue
-   Mediatorgleichung oder Quantenmessregel einsetzen, um eine Luecke zu
-   verdecken. Dies bleibt analytische Bestandsarbeit ohne Ziellaeufe;
-   neue Modellregeln erfordern eine Richtungsentscheidung des Autors.
+1. **Architekturentscheidung aus R0/B1 vorbereiten -- jetzt.** Der begrenzte
+   [R0-Audit](../reference/foundation_feasibility.md) und die
+   [B1-Bestandsanalyse](../reference/operational_contract.md) liegen vor:
+   Die klassische Quellenantwort ist spezifiziert; ein gemeinsames
+   physikalisches Mehrsystem-/Messgesetz ist aus Paper I nicht bestimmt.
+   Direkter Fernzugriff und unabhaengiges Rauschen ergeben nicht automatisch
+   Bell-Lokalitaet oder eine Quantentheorie. Als naechstes eine begrenzte
+   Entscheidungsvorlage: Welche Aussage traegt die bestehende klassische
+   Architektur, welche Herleitungen oder Zusatzannahmen fehlen fuer den
+   fundamentalen Anspruch, und welche erste Gegenpruefung entscheidet
+   ueber einen Pfad?
+   Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
+   Luecke zu verdecken. Dies bleibt analytische Bestandsarbeit ohne
+   Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
+   Autors. Paper I kann als eigenstaendiger Publikationsstrang parallel
+   weiterbearbeitet werden.
 2. **Paper I als begrenzten Ausgangspunkt abschliessen -- R0-Einordnung liegt vor.**
    Die reproduzierbare Fassung vom 2026-10-09 bleibt eingefrorene Baseline,
    ist aber nicht als PRE-einreichungsreif eingestuft. Zuerst die konkrete
@@ -86,21 +90,26 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-R0 liefert die geforderte Annahmen-/Resultatmatrix samt Gegenargumenten,
-analytischen Grenzen und zwoelf synthetischen Checks. B1 muss als naechstes
-zeigen, welche operationalen Regeln bereits im Einzelprozess bzw. in den
-deklarierten Erweiterungen stehen und welche erst erfunden werden muessten.
-Abnahme ist ein eindeutiger Vertrag oder ein konkreter Blocker, kein
-automatisch gestarteter Scan. Das ist kein Auftrag, bereits Quantenmechanik
-oder Gravitation herzuleiten. Keine neue FIFO-/P5-Zielautorisierung.
+R0 liefert die Annahmen-/Resultatmatrix; B1 trennt vorhandene klassische
+Operationen von fehlenden physikalischen Regeln. Die naechste Vorlage
+muss fuer jeden erwogenen Pfad Annahmen, erwartete Aussage und Gegenbefund
+nennen. Abnahme ist eine begruendete Richtungsentscheidung, kein automatisch
+gestarteter Scan und kein weiterer blosser Statusbericht. Die konkrete
+Paper-I-Neuheitsaussage wird separat bewertet. Keine neue
+FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
 
-R0 ist als begrenzte Bestandspruefung abgeschlossen, nicht als allgemeines
-Machbarkeitsurteil. Die bisherige Einzelprozessregel definiert keine zwei
-unabhaengig einstellbaren Messstationen; konstruierte Kopplungsports sind
-Erweiterungen. Paper-II-Alttext und Paper-III-Planung muessen an diese Grenze
-angepasst gelesen werden; ihre READMEs markieren den offenen Anschluss.
+R0 und B1 sind als begrenzte Bestandspruefungen abgeschlossen, nicht als
+allgemeines Machbarkeitsurteil. Die bisherige Einzelprozessregel definiert
+keine zwei unabhaengig einstellbaren Messstationen; konstruierte
+Kopplungsports sind Erweiterungen. B1 liefert fuer den Frozen-Source-Zweig
+die bedingte Uebergangsverteilung und Ein-Schritt-Antwort; fuenf zusaetzliche
+synthetische Checks sichern die Zuordnung zum vorhandenen Runner. Daraus
+folgt weder eine autonome Mehrsystemtheorie noch eine physikalische
+Ueberlichtkommunikation. Paper-II-Alttext und Paper-III-Planung muessen an
+diese Grenze angepasst gelesen werden; ihre READMEs markieren den offenen
+Anschluss.
 
 Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
 aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert

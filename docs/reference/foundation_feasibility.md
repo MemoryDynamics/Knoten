@@ -29,11 +29,13 @@ Drei Verbindungen sind unterschiedlich einzustufen:
   zweier Messstationen. Daher liegt weder ein Quantennachweis noch ein
   pauschaler Unmoeglichkeitsbeweis fuer alle Modellvarianten vor.
 
-**Empfehlung:** Als einzige naechste physikalische Verbindung B1, einen
-gemeinsamen operationalen Zustands-/Interventionsvertrag, spezifizieren.
-Vor dessen Abschluss keine Quanten-, Lichtkegel- oder Teilchensuche durch
-Parameteroptimierung. Paper I bleibt parallel ein begrenzter klassischer
-Anker; seine Publikationsfrage ist davon getrennt.
+**Aus R0 abgeleiteter Anschluss:** B1, einen gemeinsamen operationalen
+Zustands-/Interventionsvertrag, pruefen. Die
+[Bestandsanalyse liegt inzwischen vor](operational_contract.md); die
+physikalische Mehrsystem-/Messregel bleibt unbestimmt. Ohne deren Klaerung
+keine Quanten-, Lichtkegel- oder Teilchensuche durch Parameteroptimierung.
+Paper I bleibt parallel ein begrenzter klassischer Anker; seine
+Publikationsfrage ist davon getrennt.
 
 ## 2. Annahmen und Resultate
 
@@ -183,7 +185,7 @@ Fernziel erreicht. Ebenso begruendet eine fehlende Quelle kein No-go.
 
 ## 5. B1 und Alternativen
 
-**Einziger ausgewaehlter naechster Brueckenschritt B1:** Fuer einen konkret
+**Aus R0 ausgewaehlter Brueckenschritt B1:** Fuer einen konkret
 benannten bestehenden Modellzweig den operationalen Vertrag festhalten:
 vollstaendiger Zustand, Praeparation, zulaessige Interventionen, Readouts
 zweier Teilsysteme, Informationszugriff beim Update und zeitliche Zuordnung.
@@ -199,6 +201,11 @@ ein direkter Fernzugriff muss auf beobachtbares Signalisieren geprueft werden.
 Ein positives B1-Ergebnis waere nur eine definierte Pruefbasis, kein Go fuer
 Quantenmechanik, Gravitation oder Standardmodell.
 
+**Fortschreibung:** Die [B1-Bestandsanalyse](operational_contract.md) ordnet
+die vorhandenen Regeln zu und leitet fuer die Frozen-Source-Erweiterung
+Antwort und bedingte Verteilung ab. Der gemeinsame physikalische
+Mehrsystem-/Messvertrag bleibt als konkreter Blocker offen.
+
 **Aktuelle Luecke:** Der native Einzelprozess definiert keine zwei
 unabhaengig einstellbaren Messstationen. Die bisherigen Mehrknotenports
 sind konstruierte Erweiterungen. Welche davon physikalisch gemeint ist,
@@ -210,8 +217,9 @@ Richtungsentscheidung. Insbesondere bleibt P5-D geschlossen.
 weiterentwickeln, ohne einen fundamentalen Anspruch zu behaupten; oder
 eine begruendete neue mikroskopische Struktur formulieren und deren
 zusaetzliche Annahmen offen tragen. Diese zweite Option wird hier nicht
-automatisch gewaehlt. Die B1-Bestandsanalyse entscheidet zuerst, ob eine
-solche Erweiterung fuer den gewaehlten Anspruch ueberhaupt noetig ist.
+automatisch gewaehlt. Die B1-Bestandsanalyse benennt die fehlenden Regeln;
+ob diese hergeleitet oder als Erweiterung gesetzt werden sollen, bleibt
+eine explizite Richtungsentscheidung.
 
 ## 6. Verifikation und offene redaktionelle Luecke
 
