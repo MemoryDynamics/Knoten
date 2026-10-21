@@ -22,7 +22,8 @@ complete novelty review or a prospective numerical test.
 
 ## Source and claim ledger
 
-All sources checked on 2026-10-19. A source-reported theorem is not an
+Initial sources checked on 2026-10-19; the additions below are dated
+2026-10-21. A source-reported theorem is not an
 independent reproduction. Absence of a result from this ledger is not
 proof that it is absent from the literature.
 
@@ -33,6 +34,17 @@ proof that it is absent from the literature.
 | [Du, Ren, Suciu and Wang, arXiv:2311.11428v3](https://arxiv.org/html/2311.11428v3), Eq. (4), Assumption 1 and Example 1; [journal record](https://doi.org/10.1016/j.matpur.2025.103782) | The same continuous-time architecture of a trajectory and exponentially weighted occupation measure is explicit; contractivity and stationary measures are proved under stated drift conditions. | Their uniform large-distance restoring assumption does not follow from our bounded Gaussian interaction alone. Do not import their absolute ergodicity theorem into our unpinned translation-invariant model. The architecture and Markov augmentation are not new here. |
 | [Sarkar, PRE 112, 054111 (2025)](https://journals.aps.org/pre/pdf/10.1103/t7nk-4p57), Secs. II B--C, Eqs. (1)--(3) | A noisy particle writes a fading Gaussian scalar imprint and responds to its gradient; the paper reports structured motion. | Particularly close topical precedent, absent from the frozen bibliography. Its equations include both a convolutional field source and intrinsic velocity memory. These extra temporal filters cannot be silently removed to declare identical models. Its coherence/energy interpretations are source-reported, not adopted or reproduced here. |
 | [Kopp and Klapp, arXiv:2210.03182v3](https://arxiv.org/pdf/2210.03182), Secs. II--III, Eqs. (1)--(5) | Overdamped Brownian motion with a nonlinear finite-range Gaussian force depending on a delayed position; linearization is explicitly separated from nonlinear behavior. | A single discrete delay and repulsive feedback differ from our distributed, net-attractive history. Nonlinear Gaussian memory feedback and comparing its linear/nonlinear transport are nevertheless not new categories. |
+| [Newman and Grima, PRE 70, 051916 (2004), author-uploaded full text](https://www.researchgate.net/publication/8128610_Many-body_theory_of_chemotactic_cell-cell_interactions), abstract, Sec. II and Sec. V inspected 2026-10-21 | Langevin chemotaxis with a diffusing, decaying field; explicit coupling-perturbation corrections to diffusion, including a second-order calculation in one dimension. | Perturbatively corrected memory-mediated diffusion is not a new category either. Their expansion parameter is chemotactic coupling, not our noise amplitude. The age-dependent heat kernel is not our fixed-width Gaussian mixture; no coefficient identity follows without a model and limit mapping. |
+
+On 2026-10-21 the Kopp--Klapp comparison was extended to Sec. IV,
+Eqs. (19)--(22): their analytical transport estimate expands in small
+delay and uses the Hessian at zero. This is a different asymptotic limit
+from fixed-memory weak noise, but does not establish novelty of our
+coefficient. Newman--Grima's Sec. V likewise prevents presenting a generic
+"first nonlinear transport correction" as a new mechanism. Its author-
+uploaded primary text was accessible; the publisher PDF returned HTTP 401.
+The aging-paper delivery URL again returned HTTP 403. Its full-text
+comparison remains missing, not silently treated as a completed review.
 
 Own inference: the linear transport story is a useful baseline and a
 required control, but is not a sufficient replacement novelty claim. The
@@ -85,10 +97,12 @@ A subsequent [global-contraction note](weak_noise_validity_2026-10-21.md)
 justifies the quadratic-moment expansion below under the stronger
 condition $|\eta|G_2q/\alpha<1$, where $G_2$ bounds the full kernel Hessian.
 Its argument also covers untruncated exponential memory. All active
-archived Paper-I cells lie outside this sufficient domain. The general
-expansion remains conditional, and the nonlinear infinite-lag transport
-interchange is not established even by that note. Neither result by itself
-establishes publication novelty.
+archived Paper-I cells lie outside this sufficient domain. The transport
+extension to that note now supplies a summable innovation-coupling bound
+for the Taylor remainder, justifying the infinite-lag covariance sum and
+an explicit untruncated transport coefficient in the same strict domain.
+The general expansion outside it remains conditional. Neither result by
+itself establishes publication novelty.
 
 For the manuscript kernel, direct Taylor expansion gives
 
@@ -160,9 +174,10 @@ $$
 +O(\varepsilon^4),\qquad \bar j=\sum_j j w_j.
 $$
 
-The second term is a prediction to test, not yet a validated nonlinear
-transport law. The all-lag covariance interchange needs justification
-before it is promoted to an asymptotic theorem. The cubic polynomial must
+The second term is a prediction to test, not measured nonlinear transport.
+The separate contraction note now justifies the all-lag covariance
+interchange only in its strict domain; local linear stability is still
+insufficient. The cubic polynomial must
 not be simulated as though it were a globally stable replacement for the
 bounded Gaussian force: an explicit cubic update can diverge at large
 amplitudes regardless of its local expansion.
@@ -179,6 +194,14 @@ observable whose response coefficient is nonzero, this is substantially
 more discriminating than simply observing a 6.24% endpoint shift in one
 kernel. A radius-correction sign must be calculated, not inferred solely
 from the sign of $\lambda$; discrete update effects matter.
+
+For transport, the newly justified coefficient is more specific: with
+$\eta>0$ inside both contraction domains, the weighted age-covariance sum
+and the response denominator are positive. The two $\varepsilon^4$
+corrections are respectively positive and negative relative to the common
+linear reference, with ratio $-23/13$. This does not assert opposite
+radius corrections, superdiffusion or an effect above the Brownian control.
+No finite-noise test of this asymptotic sign/ratio has been performed.
 
 The legacy three-scale statistic is a normalized median width,
 not the RMS used above. The 6.24% value must not be used to calibrate
@@ -231,6 +254,24 @@ prospective panel have not been frozen in this note. It is not itself an
 execution authorization or a preregistered experiment.
 
 ## Conditions before new target data
+
+The defensible candidate core is now concrete: **an explicit weak-noise
+diffusion correction for the full nonlinear, exponentially weighted
+history law, controlled by a global sufficient condition, with a
+matched-curvature kernel contrast.** The contraction and Gaussian-chaos
+methods are standard; the model-specific coefficient and its discriminating
+comparison are the candidate contribution. It would be misleading to
+substitute generic memory, Markov augmentation or diffusion renormalization
+as the novelty claim. The fixed-noise coupling expansion of Newman--Grima
+and the small-delay expansion of Kopp--Klapp use different limits; difference
+of limits alone is not proof of sufficient scientific significance.
+
+The untruncated formula now avoids making the separate FIFO orbit theory
+a prerequisite for Paper I. It still does not cover the active frozen
+baseline, provide a usable finite-noise error tolerance or establish a
+route to the fundamental physics program. An independent mathematical
+review and the unresolved full-text comparison remain necessary before
+treating this research note as a publication-ready theorem package.
 
 The remaining full-text/novelty comparison and an explicit error-domain
 assessment must precede a bounded prospective protocol. That protocol must

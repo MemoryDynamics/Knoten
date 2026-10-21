@@ -136,9 +136,15 @@ Die separate
 begruendet stationaere quadratische Momente durch Ordnung $\varepsilon^4$
 mit Rest $O(\varepsilon^6)$ unter $|\eta|G_2q/\alpha<1$, auch bei
 ungekuerztem exponentiellem Gedaechtnis. Keine aktive archivierte Zelle
-erfuellt diese hinreichende Schranke. Sie belegt weder die nichtlineare
-Transportkorrektur noch einen FIFO-Branchtransfer oder hinreichende
-Publikationsneuheit; die allgemeine Gueltigkeitsfrage bleibt offen.
+erfuellt diese hinreichende Schranke. Die anschliessende Analyse des
+Einzelinnovations-Einflusses begruendet mit einem summierbaren Rest die
+Transportkorrektur bis Ordnung $\varepsilon^4$ in demselben Bereich.
+Fuer ungekuerztes Gedaechtnis liegt der Koeffizient explizit vor; die
+gematchten Kernel haben entgegengesetzte fuehrende Transportkorrekturen
+relativ zur linearen Referenz, nicht notwendig zur Brownian-Kontrolle.
+Numerische Validierung, unabhaengiges Fachreview, die allgemeine
+Gueltigkeitsfrage, FIFO-Branchtransfer und hinreichende Publikationsneuheit
+bleiben offen.
 
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik

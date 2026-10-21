@@ -10,11 +10,13 @@ from scipy.linalg import solve_discrete_lyapunov
 
 from weak_nonlinearity import (
     covariance_response,
+    exponential_contraction_diagnostic,
     exponential_weights,
     lag_matrix,
     radius_energies,
     stationary_msd,
     transport_response,
+    untruncated_transport_response,
 )
 
 
@@ -171,3 +173,101 @@ def test_transport_derivative_matches_first_moment_of_effective_gain():
 def test_invalid_domains_fail_closed(weights, gain, dimension):
     with pytest.raises(ValueError):
         covariance_response(weights, gain, dimension)
+
+
+@pytest.mark.parametrize(
+    "alpha,gain", [(0.1, 0.04), (0.35, 0.2), (0.8, 2.0), (0.2, -0.05)]
+)
+def test_infinite_transport_against_two_state_covariance_recursion(alpha, gain):
+    q = 1 - alpha
+    root = q * (1 - gain)
+    covariance = np.diag([0.0, q**2 / (1 - root**2)])
+    transition = np.array([[1.0, -gain], [0.0, root]])
+    noise = np.array([1.0, q])
+    age_covariance = 0.0
+    for age in range(1, 1000):
+        covariance = transition @ covariance @ transition.T + np.outer(noise, noise)
+        age_covariance += alpha * q**age * age * covariance[0, 0]
+    cubic_gain, dimension = 0.017, 3
+    diffusion, correction = untruncated_transport_response(
+        alpha, gain, cubic_gain, dimension
+    )
+    denominator = 1 + gain * q / alpha
+    assert diffusion == pytest.approx(0.5 / denominator**2, rel=2e-13)
+    assert correction == pytest.approx(
+        -(dimension + 2) * cubic_gain * age_covariance / denominator**3,
+        rel=2e-12,
+    )
+
+
+@pytest.mark.parametrize("cubic_gain", [-0.003, 0.002])
+def test_infinite_coefficients_match_long_finite_linear_reference(cubic_gain):
+    alpha, horizon, gain, dimension = 0.3, 100, 0.12, 3
+    mass = 1 - (1 - alpha) ** horizon
+    weights = exponential_weights(alpha, horizon)
+    _, _, perturbation = covariance_response(weights, mass * gain, dimension)
+    finite_diffusion, finite_derivative = transport_response(
+        weights, mass * gain, perturbation
+    )
+    infinite = untruncated_transport_response(alpha, gain, cubic_gain, dimension)
+    np.testing.assert_allclose(
+        infinite,
+        [finite_diffusion, cubic_gain * mass * finite_derivative],
+        rtol=1e-9,
+        atol=1e-13,
+    )
+
+
+def test_zero_curvature_uses_the_brownian_weighted_second_age():
+    alpha, cubic_gain, dimension = 0.23, 0.017, 4
+    q = 1 - alpha
+    diffusion, correction = untruncated_transport_response(
+        alpha, 0.0, cubic_gain, dimension
+    )
+    assert diffusion == pytest.approx(0.5)
+    assert correction == pytest.approx(
+        -(dimension + 2) * cubic_gain * q * (1 + q) / alpha**2
+    )
+    assert untruncated_transport_response(alpha, 0.0, 0.0, dimension) == (0.5, 0.0)
+
+
+def test_matched_curvature_transport_split_has_predicted_sign_and_ratio():
+    alpha, eta, dimension = 0.25, 0.01, 3
+    results = []
+    for repulsive, attractive in [(0.0, 26.0), (1.0, 35.0)]:
+        curvature = attractive / 9 - repulsive
+        cubic = repulsive / 2 - attractive / 162
+        theta, _, rate = exponential_contraction_diagnostic(
+            alpha, eta * (repulsive + attractive / 9)
+        )
+        assert theta < 1 and rate < 1
+        results.append(
+            untruncated_transport_response(
+                alpha, eta * curvature, eta * cubic, dimension
+            )
+        )
+    assert results[0][0] == pytest.approx(results[1][0])
+    assert results[0][1] > 0 > results[1][1]
+    assert results[1][1] / results[0][1] == pytest.approx(-23 / 13)
+
+
+@pytest.mark.parametrize(
+    "alpha,gain,cubic_gain,dimension",
+    [
+        (0.0, 0.1, 0.01, 3),
+        (1.0, 0.1, 0.01, 3),
+        (1e-30, 0.1, 0.01, 3),
+        (0.5, -1.0, 0.01, 3),
+        (0.5, 3.0, 0.01, 3),
+        (0.2, np.nan, 0.01, 3),
+        (0.2, 0.1, np.nan, 3),
+        (0.2, 0.1, 0.01, 0),
+        (0.2, 0.1, 0.01, 2.5),
+        (0.2, 0.1, 0.01, True),
+    ],
+)
+def test_invalid_infinite_transport_domains_fail_closed(
+    alpha, gain, cubic_gain, dimension
+):
+    with pytest.raises(ValueError):
+        untruncated_transport_response(alpha, gain, cubic_gain, dimension)

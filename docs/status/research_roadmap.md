@@ -40,7 +40,7 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
 - **Paper I:** geprueftes Minimalmodell, Literaturvergleich, Baseline und
   Grenzen. Sein Nutzen setzt keine PRE-Annahme voraus; eine Einreichung
   braucht dennoch einen eigenstaendigen wissenschaftlichen Beitrag. Ein
-  [neuer hinreichender Momentbereich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+  [hinreichender Moment-/Transportbereich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
   praezisiert R1, umfasst aber keine aktive archivierte Zelle und schliesst
   keine der Verbindungen R2--R5.
 - **FIFO-Paper:** eigener nichtlinearer Ast mit getrennten Aussagen zu

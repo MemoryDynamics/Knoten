@@ -1,8 +1,9 @@
-# A sufficient domain for stationary weak-noise moments
+# A sufficient domain for stationary weak-noise moments and transport
 
 Date: 2026-10-21. Internal analytical continuation of
 `5d3a7aeeaa4664f26c047e9a59ae114a1578dd94`. No new model rule, production
-trajectory, parameter scan or independent referee review.
+trajectory, parameter scan or independent referee review. The transport
+extension below follows the moment-only version published at `eedd403`.
 
 ## Result and boundary
 
@@ -15,9 +16,10 @@ over the truncation length at fixed model coefficients.
 
 This is a sufficient, not necessary, condition. **None of the active
 frozen Paper-I cells satisfies it.** The result does not retroactively
-justify their stationary weak-noise interpretation. It also does not
-justify the nonlinear long-time diffusion correction: an infinite-lag
-transport interchange still needs a separate argument.
+justify their stationary weak-noise interpretation. A separate summable-
+remainder argument below now also justifies the nonlinear long-time
+diffusion correction in this same strict domain. A fixed-lag moment bound
+alone would not justify that interchange.
 
 The contraction method is standard. The contribution here is an explicit
 application and scope check for this model, not a claim of mathematical
@@ -242,8 +244,8 @@ $$
 
 Oddness of the force and symmetry of the innovations give zero means,
 so quadratic lag moments are covariances. The same expansion holds at
-each fixed time lag. It does not, by itself, bound the remainder summed
-over infinitely many time lags.
+each fixed time lag. The additional estimates in the transport section
+are needed to control the remainder summed over infinitely many time lags.
 
 ### Connection to the finite covariance helper
 
@@ -269,6 +271,219 @@ also follow. This is not a numerical evaluation or independent validation
 of an infinite-dimensional correction coefficient. Finite normalized
 radius weights are uniformly bounded by $\gamma_j/M_2$, so the analogous
 quadratic error bounds can be uniform over $H\geq2$.
+
+## Summable remainder and transport
+
+The claim here concerns the per-coordinate stationary MSD slope, with one
+update as the unit of time:
+
+$$
+D_H(\varepsilon)=\lim_{N\to\infty}\frac{1}{2N}
+\mathbb E\left[\left(\sum_{n=1}^N v_n^a\right)^2\right].
+$$
+
+All parameters other than $\varepsilon$ remain fixed in $\theta<1$.
+This is not a simultaneous continuous-time or $\alpha\to0$ limit.
+
+### Derivative bounds and one-innovation coupling
+
+For the same constants $c_3,c_5$ above, differentiating the Gaussian
+remainders gives the global bounds
+
+$$
+\|\nabla^2K(u)-\kappa I\|_{\rm op}\leq3c_3|u|^2,
+$$
+
+$$
+\|\nabla^2K(u)-\kappa I-
+\lambda(|u|^2I+2uu^T)\|_{\rm op}\leq5c_5|u|^4.
+$$
+
+For a single Gaussian the second inequality follows by bounding the two
+terms $(e^{-z}-1+z)I$ and
+$-(e^{-z}-1)uu^T/s^2$ with $z=|u|^2/(2s^2)$. Their bounds sum to
+$5|A||u|^4/(8s^6)$. Termwise differentiation on bounded subsets of $E_r$
+is justified by the same summable third- and fifth-power history bounds.
+Thus, for $N_H(V)=T_{H,0}(V)-A_HV$,
+
+$$
+\|DN_H(V)\|\leq3C_3\|V\|_r^2,\qquad
+\|DR_H(V)\|\leq5C_5\|V\|_r^4.
+$$
+
+Replace only $\xi_0$ by an independent copy, keeping all other innovations
+the same, and mark the coupled process with a star. For an $E_r$-valued
+process $X$ set $\delta_p(X,k)=\|X_k-X_k^*\|_{L^p(E_r)}$. The contraction
+and the linear propagator imply, for $k\geq0$,
+
+$$
+\delta_p(V^{\varepsilon,H},k)\leq C_p\varepsilon a^k,
+\qquad \delta_p(W,k)\leq C_p a^k.
+$$
+
+Set $U^\varepsilon=V^{\varepsilon,H}-\varepsilon W$ and
+$E^\varepsilon=V^{\varepsilon,H}-\varepsilon W-\varepsilon^3 Z$.
+At time zero, $U^\varepsilon-U^{\varepsilon,*}$,
+$Z-Z^*$ and $E^\varepsilon-E^{\varepsilon,*}$ vanish: the new innovation
+enters $V$ and $\varepsilon W$ in exactly the same additive way, and $Z_0$
+uses only earlier innovations. The recurrence
+
+$$
+U^\varepsilon_{n+1}=A_HU^\varepsilon_n+N_H(V^{\varepsilon,H}_n)
+$$
+
+and the derivative bound, combined with the stationary moment bounds and
+Holder's inequality, give forcing differences
+$O_{L^p}(\varepsilon^3 a^n)$. Convolution with $A_H^{k-1-n}$ therefore gives
+
+$$
+\delta_p(U^\varepsilon,k)\leq C_p\varepsilon^3(k+1)a^k,
+\qquad \delta_p(Z,k)\leq C_p(k+1)a^k.
+$$
+
+For clarity, the cubic-difference estimate needed in the next subtraction
+is stronger than bounding each cubic term separately. Write
+$Q_H(V)=\mathcal B_H(V,V,V)$ with a bounded symmetric trilinear map.
+Then $Q_H(V)-Q_H(Y)$ is a sum of three terms each containing $V-Y$.
+Apply this with $Y=\varepsilon W$ and compare its starred version. Every
+term contains either a coupled difference of $U^\varepsilon$ times two
+$O_{L^p}(\varepsilon)$ factors, or an $O_{L^p}(\varepsilon^3)$ factor
+times a coupled difference of $V$ or $\varepsilon W$ and one further
+$O_{L^p}(\varepsilon)$ factor. Using higher moments where required gives
+$O_{L^p}(\varepsilon^5(k+1)a^k)$. The coupled fifth-order remainder is
+$O_{L^p}(\varepsilon^5a^k)$ by the derivative bound. A second stable
+convolution establishes
+
+$$
+\boxed{\delta_p(E^\varepsilon,k)
+\leq C_p\varepsilon^5(k+1)^2a^k.}
+$$
+
+Factors $a^{-1}$ or $a^{-2}$ from the convolution are absorbed into the
+constant; $a>0$ is fixed. Constants can be uniform over $H$ and
+$0<\varepsilon\leq\varepsilon_0$, not over approach to $\theta=1$ or
+$\alpha=0$. This is the extra estimate absent from a fixed-lag expansion.
+
+### From dependence to the covariance sum
+
+Now use scalar coordinates of the processes and define
+$\Delta_2(X)=\sum_{k\geq0}\|X_k-X_k^*\|_2$. For centered, jointly causal
+stationary processes driven by the same iid innovations,
+
+$$
+\sum_{k\in\mathbb Z}|\operatorname{Cov}(X_0,Y_k)|
+\leq\Delta_2(X)\Delta_2(Y).
+$$
+
+Here is the argument rather than an assumed mixing-rate interchange.
+Let $\mathcal F_j=\sigma(\xi_i:i\leq j)$ and
+$P_jX=\mathbb E[X\mid\mathcal F_j]-\mathbb E[X\mid\mathcal F_{j-1}]$.
+Independent resampling and conditional Jensen give
+$\|P_0X_n\|_2\leq\|X_n-X_n^*\|_2$. The iid remote-past tail is trivial,
+so the centered causal variable has the orthogonal expansion
+$X_n=\sum_{j\leq n}P_jX_n$. Consequently
+
+$$
+|\operatorname{Cov}(X_0,Y_k)|
+\leq\sum_{m\geq\max(0,-k)}
+\delta_2(X,m)\delta_2(Y,k+m).
+$$
+
+Summing this nonnegative double series gives the product bound. The
+resampling/projection method is standard; see Wu,
+[Nonlinear system theory: Another look at dependence (2005)](https://www.stat.uchicago.edu/~wbwu/papers/0506715102v1.pdf),
+Definitions 1--3 and Theorem 1, inspected on 2026-10-21. The small-noise
+orders and the Gaussian-memory derivative bounds here are our explicit
+specialization, not results claimed from that source.
+
+Let $w,z,e^\varepsilon$ be the first history coordinate and one spatial
+component of $W,Z,E^\varepsilon$. The estimates above imply
+$\Delta_2(w),\Delta_2(z)=O(1)$ and
+$\Delta_2(e^\varepsilon)=O(\varepsilon^5)$. For
+$\Gamma(X,Y)=\sum_{k\in\mathbb Z}\operatorname{Cov}(X_0,Y_k)$, expansion
+of $v^a=\varepsilon w+\varepsilon^3z+e^\varepsilon$ now gives
+
+$$
+D_H(\varepsilon)=\frac{\varepsilon^2}{2}\Gamma(w,w)
++\frac{\varepsilon^4}{2}[\Gamma(w,z)+\Gamma(z,w)]
++O(\varepsilon^6).
+$$
+
+In particular the potentially problematic $w$--remainder covariance sum
+is $O(\varepsilon^6)$ after its prefactor. The $z$--$z$ contribution is
+also of that order. Absolute covariance summability justifies the MSD
+slope limit by the usual triangular covariance sum. This proves a
+stationary transport coefficient and its expansion, not a functional
+central-limit theorem, a practical burn-in or a finite-noise accuracy bound.
+
+### Identifying the coefficient
+
+Write $C_{jj}^{(H)}$ for the per-coordinate unit-noise variance of the
+linear lag $L_j(W)$. Its cubic force has first Gaussian-chaos projection
+$(d+2)C_{jj}^{(H)}L_j(W)$. The remaining cubic chaos is orthogonal to every
+linear Gaussian observable at every time. Hence the cross-covariance
+coefficient equals the response to replacing the lag-force gains by
+
+$$
+\eta\gamma_j\kappa\longmapsto
+\eta\gamma_j\kappa+\varepsilon^2\eta\gamma_j\lambda(d+2)C_{jj}^{(H)}.
+$$
+
+This is a coefficient calculation, not a finite-noise Gaussian closure.
+The perturbed linear operator is still contractive for sufficiently small
+perturbation because its added operator is bounded on $E_r$.
+Its zero-frequency transfer is the reciprocal of one plus the first age
+moment of the lag gains. Thus, with
+$\mu_H=\sum_{1\leq j<H}j\gamma_j$ and
+$S_H=\sum_{1\leq j<H}j\gamma_j C_{jj}^{(H)}$,
+
+$$
+\boxed{D_H(\varepsilon)=
+\frac{\varepsilon^2}{2(1+\eta\kappa\mu_H)^2}
+-\varepsilon^4\frac{\eta\lambda(d+2)S_H}
+{(1+\eta\kappa\mu_H)^3}+O(\varepsilon^6).}
+$$
+
+Both age sums converge at $H=\infty$ by the weighted-history estimates.
+The denominator is positive, since $|\eta\kappa\mu_H|\leq\theta<1$.
+This also recovers the earlier finite-matrix response formula with
+$g=\eta M_H\kappa$ and $\beta=\eta M_H\lambda$.
+
+### Closed untruncated coefficient
+
+For $H=\infty$, set $g_\infty=\eta\kappa$ and
+$\rho=q(1-g_\infty)$. The unit-noise linear increments obey the exact
+ARMA relation
+$w_n=\rho w_{n-1}+\xi_n-q\xi_{n-1}$, with $|\rho|<1$ in the strict
+domain. Their covariance is
+
+$$
+c_0=1+\frac{(\rho-q)^2}{1-\rho^2},\qquad
+c_k=\frac{(\rho-q)(1-q\rho)}{1-\rho^2}\rho^{k-1},\quad k\geq1.
+$$
+
+Therefore $C_{jj}^{(\infty)}=jc_0+2\sum_{k=1}^{j-1}(j-k)c_k$.
+Summing the geometric series and their first two age moments gives
+
+$$
+\mu_\infty=\frac q\alpha,\qquad
+S_\infty=
+\frac{q\{\alpha(1+4q+q^2)+q(q^2+2q-1)(1-\rho)\}}
+{\alpha(1-\rho)(1+\rho)(1-q\rho)}.
+$$
+
+At $g_\infty=0$ this reduces to $q(1+q)/\alpha^2$, the weighted second
+age of Brownian increments. The implementation checks linear stability
+but does not itself certify the full nonlinear contraction hypothesis.
+
+For the existing matched-curvature kernels $(A_r,A_a)=(0,26)$ and $(1,35)$
+with $s_r=1,s_a=3$, $\kappa=26/9$ is identical while
+$\lambda=-13/81$ and $23/81$. At the same $\eta>0$, memory and dimension
+inside both contraction domains, $S_H>0$. Their leading transport
+corrections are therefore respectively positive and negative, with ratio
+$-23/13$. The comparison is to their common linear diffusion reference,
+not to the Brownian control; this predicts neither superdiffusion nor a
+new phase. These are asymptotic coefficients, not a finite-noise data test.
 
 ## A restricted truncation bound
 
@@ -315,16 +530,24 @@ certificate; unresolved near-boundary cases return no rate. Nineteen
 additional synthetic checks cover the strict domain, weighted norms of
 the existing lag matrix, production-kernel Hessians, archived-condition
 exclusion, unresolved floating-point rates and invalid inputs. Together
-with the earlier stationarity and weak-response checks, 49 research tests
-pass locally. Eight baseline and ten documentation/claim/evidence checks
-also pass (67 total), as do Ruff and the strict documentation build, using
-NumPy 2.3.5, SciPy 1.16.3 and pytest 8.4.2. These checks audit implementation
-and algebra, not the general proof or physical validity of the model.
+with the earlier stationarity and weak-response checks, the moment-only
+version passed 49 research tests and 18 baseline/documentation checks.
+The transport extension adds 22 checks: production-Hessian remainder
+bounds; comparison with a two-state covariance recurrence matching the
+existing visible-MSD reference; a long finite-history Lyapunov calculation;
+Brownian weighted-age controls; the matched-kernel sign and ratio; and
+invalid domains. All 71 research tests and 18 baseline/documentation checks
+pass locally (89 total), as do Ruff and the strict documentation build,
+with NumPy 2.3.5, SciPy 1.16.3 and pytest 8.4.2. These are algebraic
+and deterministic covariance calculations, not sampled trajectories or
+tests of the general proof or physical validity of the model.
 
 The next scientific decision is whether this restricted kernel-sensitive
-moment result adds enough beyond the closest literature to support a
-revised Paper I, or whether a stronger/local-branch theorem is essential.
-Transport, finite-noise accuracy and the full-text aging-paper comparison
-remain open. No parameter panel or new trajectory run is authorized by
-this note. Frozen PDFs and data remain unchanged, and there is no new
+moment/transport result adds enough beyond the closest literature to
+support a revised Paper I, or whether a stronger/local-branch theorem is
+essential.
+The transport interchange is now supported only in the strict domain;
+finite-noise accuracy, the archived active regime and the full-text aging-
+paper comparison remain open. No parameter panel or new trajectory run is
+authorized by this note. Frozen PDFs and data remain unchanged, and there is no new
 bridge to gravity or quantum theory.

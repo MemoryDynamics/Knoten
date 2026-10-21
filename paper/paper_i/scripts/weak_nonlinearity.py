@@ -1,7 +1,8 @@
-"""Target-free, formal weak-noise response of the finite-history model.
+"""Target-free weak-noise coefficients for exponential-memory dynamics.
 
-This computes local perturbative coefficients, not a stationary nonlinear
-simulation or an existence proof. Production evidence remains frozen.
+Stationary nonlinear validity requires the separately proved global
+condition, not merely a stable linear reference. No trajectory simulation
+or existence proof is performed here. Production evidence remains frozen.
 """
 
 from __future__ import annotations
@@ -122,6 +123,47 @@ def transport_response(weights, gain: float, derivative_matrix=None):
         np.eye(len(matrix)) - matrix, derivative_matrix @ inverse_response
     )[0]
     return 0.5 * transfer**2, transfer * transfer_derivative
+
+
+def untruncated_transport_response(
+    alpha: float, gain: float, cubic_gain: float, dimension: int
+):
+    """Return D2, D4 in per-coordinate D=eps^2*D2+eps^4*D4+O(eps^6).
+
+    Canonical unit-mass exponential memory: gain=eta*kappa and
+    cubic_gain=eta*lambda. Linear stability is checked here; it does not
+    certify the nonlinear expansion's global contraction hypothesis.
+    """
+    if not np.isfinite(alpha) or not 0 < alpha < 1:
+        raise ValueError("require finite 0<alpha<1")
+    q = 1 - alpha
+    if not 0 < q < 1:
+        raise ValueError("memory decay must be resolvable in floating point")
+    if not np.isfinite(gain) or not np.isfinite(cubic_gain):
+        raise ValueError("curvature and cubic gains must be finite")
+    if (
+        isinstance(dimension, bool)
+        or not isinstance(dimension, (int, np.integer))
+        or dimension < 1
+    ):
+        raise ValueError("dimension must be a positive integer")
+    root = q * (1 - gain)
+    if not np.isfinite(root) or abs(root) >= 1:
+        raise ValueError("untruncated linear increment process is not stable")
+    # Stable gaps avoid subtracting two nearly equal numbers at small alpha.
+    gap = alpha + q * gain
+    memory_gap = alpha * (1 + q) + q**2 * gain
+    numerator = alpha * (1 + 4 * q + q**2) + q * (q**2 + 2 * q - 1) * gap
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        age_covariance = np.divide(q * numerator, alpha * gap * (1 + root) * memory_gap)
+        transfer = np.divide(alpha, gap)
+        diffusion = 0.5 * transfer**2
+        correction = -(dimension + 2) * cubic_gain * age_covariance * transfer**3
+    if not np.all(np.isfinite([diffusion, correction, age_covariance])):
+        raise ValueError("transport coefficients overflow")
+    if age_covariance <= 0 or diffusion <= 0:
+        raise ValueError("transport coefficients are unresolved in floating point")
+    return float(diffusion), float(correction)
 
 
 def stationary_msd(weights, gain: float, lags, dimension: int = 1):

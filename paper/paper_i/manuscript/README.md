@@ -20,8 +20,11 @@ Schwachrauschentwicklung: Ein exaktes Koexistenzbeispiel trennt lokale
 Stabilitaet von globaler Branch-Selektion. Eine anschliessende
 [Kontraktionsnotiz](../research/weak_noise_validity_2026-10-21.md) begruendet
 die Momententwicklung unter einer strengeren globalen Bedingung, auch bei
-ungekuerztem Gedaechtnis. Keine aktive archivierte Zelle erfuellt diese
-hinreichende Schranke; die nichtlineare Transportkorrektur bleibt offen.
+ungekuerztem Gedaechtnis. Ihre Transporterweiterung kontrolliert zusaetzlich
+den Rest in der unendlichen Kovarianzsumme und liefert einen expliziten
+Diffusionskoeffizienten bis Ordnung $\varepsilon^4$. Keine aktive
+archivierte Zelle erfuellt diese hinreichende Schranke; praktische
+Fehlertoleranzen und der vollstaendige Neuheitsvergleich fehlen weiter.
 Auch diese Forschungsbefunde stellen fuer sich keine ausreichende
 Publikationsneuheit dar.
 

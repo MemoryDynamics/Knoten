@@ -55,8 +55,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    begruendet stationaere Momentkorrekturen unter einer strengeren globalen
    Bedingung, auch ohne Horizontkuerzung. Keine aktive archivierte Zelle
    erfuellt diese hinreichende Schranke. Nun Neuheitswert und physikalische
-   Aussage dieses begrenzten Bereichs pruefen; den fehlenden Transport-
-   Grenztausch getrennt behandeln. Vor jedem Panel globale stationaere
+   Aussage dieses begrenzten Bereichs pruefen. Der zusaetzlich hergeleitete
+   summierbare Rest begruendet dort nun auch den Transport-Grenztausch
+   und einen expliziten ungekuerzten Koeffizienten. Kopplungsperturbation
+   nach Newman--Grima und die Small-delay-Approximation nach Kopp--Klapp
+   als konkrete Vergleichsgrenzen fuehren; andere Grenzwerte allein sind
+   kein Neuheitsbeweis. Vor jedem Panel globale stationaere
    Aussage und lokale bzw. endlichzeitige Branch-Aussage unterscheiden.
    Erst nach wissenschaftlicher Auswahl im Licht von R0/B1 ein
    prospektives, begrenztes Transport-/Skalenpanel
@@ -106,10 +110,11 @@ Die Vorlage fuer den fundamentalen Pfad ist zur Autorenentscheidung bereit.
 Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche
 Pruefung. Waehrend diese offen ist, kann die Paper-I-Neuheits- und
 Gueltigkeitspruefung weitergehen: Den nun hinreichend kontrollierten
-Momentbereich gegen die Literatur bewerten und entscheiden, ob die
-wissenschaftliche Frage damit beantwortbar ist. Der nichtlineare
-Transport-Grenztausch und eine Aussage fuer die archivierten aktiven
-Parameter fehlen weiterhin. Ein Datenpanel wird dadurch nicht automatisch
+Moment-/Transportbereich gegen die Literatur bewerten und entscheiden, ob
+die wissenschaftliche Frage damit beantwortbar ist. Eine praktisch nutzbare
+Fehlertoleranz und eine Aussage fuer die archivierten aktiven Parameter
+fehlen weiterhin; ebenso der Volltextabgleich der Aging-Arbeit und ein
+unabhaengiges Fachreview. Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
@@ -133,9 +138,10 @@ ist keine gemessene Evidenz. Stationaere
 relative Existenz ist nun fuer festes endliches $H$ und positives Rauschen
 analytisch begruendet. Eine zusaetzliche globale Kontraktionsbedingung
 kontrolliert die Momententwicklung und den Horizontfehler in einem engeren
-Bereich, der keine aktive archivierte Zelle umfasst. Das schliesst weder
-die allgemeine Gueltigkeitsluecke noch den nichtlinearen Transport-
-Grenztausch. Neue Zielsimulationen sind in diesem Arbeitsblock nicht gelaufen.
+Bereich, der keine aktive archivierte Zelle umfasst. Ein summierbarer
+Kopplungsrest schliesst dort auch den nichtlinearen Transport-Grenztausch,
+nicht jedoch die allgemeine Gueltigkeitsluecke oder den Neuheitsvergleich.
+Neue Zielsimulationen sind in diesem Arbeitsblock nicht gelaufen.
 
 ### Separater FIFO-Haltepunkt
 

@@ -37,8 +37,11 @@ Die anschliessende
 begruendet die stationaere Momententwicklung unter einer strengeren
 globalen Bedingung auch fuer ungekuerztes exponentielles Gedaechtnis.
 Alle aktiven archivierten Zellen liegen ausserhalb dieses hinreichenden
-Bereichs; das beweist keine Instabilitaet. Nichtlinearer Transport,
-Publikationsneuheit und der separate FIFO-Horizonttransfer bleiben offen.
+Bereichs; das beweist keine Instabilitaet. Ein zusaetzlicher summierbarer
+Restterm begruendet nun auch die nichtlineare Transportkorrektur in diesem
+engen Bereich, einschliesslich eines expliziten ungekuerzten Koeffizienten.
+Numerische Transportvalidierung, Publikationsneuheit, die allgemeine
+Gueltigkeit und der separate FIFO-Horizonttransfer bleiben offen.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

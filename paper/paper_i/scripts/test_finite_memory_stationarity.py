@@ -199,3 +199,34 @@ def test_unresolved_floating_point_decay_is_not_reported_as_a_certificate():
         None,
         None,
     )
+
+
+@pytest.mark.parametrize("dimension", [1, 3])
+@pytest.mark.parametrize("repulsive,attractive", [(0.0, 26.0), (1.0, 35.0)])
+def test_global_hessian_remainders_control_coupled_taylor_errors(
+    kernels, dimension, repulsive, attractive
+):
+    curvature = attractive / 9 - repulsive
+    cubic = repulsive / 2 - attractive / 162
+    c3 = repulsive / 2 + attractive / 162
+    c5 = repulsive / 8 + attractive / (8 * 3**6)
+    direction = np.arange(1, dimension + 1, dtype=float)
+    direction /= np.linalg.norm(direction)
+    identity = np.eye(dimension)
+    for radius in (0.0, 0.005, 0.1, 0.7, 3.0, 8.0, 100.0):
+        displacement = radius * direction
+        hessian = kernels.double_gaussian_hessian(
+            displacement,
+            np.zeros((1, dimension)),
+            [1.0],
+            sigma_rep=1,
+            sigma_att=3,
+            amplitude_rep=repulsive,
+            amplitude_att=attractive,
+        )
+        nonlinear = hessian - curvature * identity
+        remainder = nonlinear - cubic * (
+            radius**2 * identity + 2 * np.outer(displacement, displacement)
+        )
+        assert np.linalg.norm(nonlinear, ord=2) <= 3 * c3 * radius**2 + 2e-14
+        assert np.linalg.norm(remainder, ord=2) <= 5 * c5 * radius**4 + 2e-14

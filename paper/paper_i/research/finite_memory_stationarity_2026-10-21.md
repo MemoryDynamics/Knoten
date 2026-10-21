@@ -188,8 +188,9 @@ The finite-$H$, positive-noise existence prerequisite is now supported by
 an explicit argument. Without an additional global condition, the
 stationary weak-noise expansion and uniform remainder estimates remain
 open. The separate contraction note supplies a sufficient domain for
-moments, not the transport-limit interchange or a theorem at the archived
-active parameters. A next validation must distinguish a globally stationary
+moments and, with an additional summable-remainder argument, their
+transport-limit interchange. It provides no theorem at the archived active
+parameters. A next validation must distinguish a globally stationary
 prediction from a conditional or finite-time local-branch prediction before
 choosing data.
 Neither a theorem valid at each fixed noise nor a long-looking trajectory
