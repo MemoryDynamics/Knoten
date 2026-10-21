@@ -15,9 +15,13 @@ Forschungsrechnungen aendern weder die eingefrorenen PDFs noch die alten Daten.
 
 Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
 schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher
-und positivem Rauschen. Sie rechtfertigt noch keine stationaere
-Schwachrauschentwicklung: Ein exaktes Koexistenzbeispiel trennt lokale
-Stabilitaet von globaler Branch-Selektion. Eine anschliessende
+und positivem Rauschen. Dieser Existenzbeweis allein rechtfertigt keine
+stationaere Schwachrauschentwicklung: Ein exaktes Koexistenzbeispiel trennt
+lokale Stabilitaet von globaler Branch-Selektion. Die spaetere
+Mittelungsergaenzung begruendet diese Momententwicklung bei festem
+endlichem $H$ auch fuer die archivierten Modellkoeffizienten, aber ohne
+brauchbare Fehlergrenzen fuer ihr endliches Rauschen und ohne Transport-
+oder unendlichen Horizontgrenzwert. Eine separate
 [Kontraktionsnotiz](../research/weak_noise_validity_2026-10-21.md) begruendet
 die Momententwicklung unter einer strengeren globalen Bedingung, auch bei
 ungekuerztem Gedaechtnis. Ihre Transporterweiterung kontrolliert zusaetzlich

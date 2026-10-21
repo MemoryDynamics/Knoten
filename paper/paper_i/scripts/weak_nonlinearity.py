@@ -56,6 +56,40 @@ def exponential_weights(alpha: float, horizon: int) -> np.ndarray:
     return weights / weights.sum()
 
 
+def finite_averaging_diagnostic(
+    alpha: float, horizon: int, radial_feedback_bound: float
+):
+    """Return (chi, self_weight, log10_moment_factor), or (chi, None, None).
+
+    Assumes grad K(u)=c(|u|)*u with 0<=eta*c<=radial_feedback_bound.
+    The caller must check that sign condition separately. Canonical unit
+    memory mass is assumed. chi<1 controls fixed-H stationary moments,
+    NOT pairwise contraction, nonlinear transport, or an infinite horizon.
+    The logarithmic factor avoids forming a block rate rounded to one.
+    This floating-point diagnostic is not an interval certificate.
+    """
+    if not np.isfinite(alpha) or not 0 < alpha < 1:
+        raise ValueError("require finite 0<alpha<1")
+    q = 1 - alpha
+    if not 0 < q < 1:
+        raise ValueError("memory decay must be resolvable in floating point")
+    if isinstance(horizon, bool) or not isinstance(horizon, (int, np.integer)):
+        raise ValueError("horizon must be an integer")
+    if horizon < 2:
+        raise ValueError("require H>=2")
+    if not np.isfinite(radial_feedback_bound) or radial_feedback_bound < 0:
+        raise ValueError("radial feedback bound must be finite and nonnegative")
+    k = horizon - 1
+    tail_mass = q * -np.expm1(k * np.log1p(-alpha))
+    chi = radial_feedback_bound * tail_mass
+    if chi >= 1:
+        return float(chi), None, None
+    log_factor = np.log10(float(k)) - k * np.log1p(-chi) / np.log(10)
+    if not np.isfinite(log_factor):
+        raise ValueError("moment-factor diagnostic overflows")
+    return float(chi), float(1 - chi), float(log_factor)
+
+
 def lag_matrix(weights, gain: float) -> np.ndarray:
     """Advance L_j=x_n-x_(n-j), j=1,...,H-1, in the linear map."""
     weights = np.asarray(weights, dtype=float)

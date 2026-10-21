@@ -21,11 +21,18 @@ remainder argument below now also justifies the nonlinear long-time
 diffusion correction in this same strict domain. A fixed-lag moment bound
 alone would not justify that interchange.
 
+The later positive-averaging extension in the
+[finite-memory note](finite_memory_stationarity_2026-10-21.md) does cover
+the archived model coefficients for fixed-$H$ stationary moments as noise
+vanishes. It supplies neither a practical finite-noise tolerance there nor
+the untruncated and transport conclusions established in this note's domain.
+
 The contraction method is standard. The contribution here is an explicit
 application and scope check for this model, not a claim of mathematical
 priority or sufficient PRE novelty. It complements the broader
 [finite-memory existence result](finite_memory_stationarity_2026-10-21.md),
-which requires no small coupling but does not control vanishing noise.
+whose minorization alone requires no small coupling but does not control
+vanishing noise.
 
 ## Model and sufficient condition
 

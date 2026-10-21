@@ -41,8 +41,11 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
   Grenzen. Sein Nutzen setzt keine PRE-Annahme voraus; eine Einreichung
   braucht dennoch einen eigenstaendigen wissenschaftlichen Beitrag. Ein
   [hinreichender Moment-/Transportbereich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
-  praezisiert R1, umfasst aber keine aktive archivierte Zelle und schliesst
-  keine der Verbindungen R2--R5.
+  praezisiert R1, umfasst aber keine aktive archivierte Zelle. Eine
+  [ergaenzende Mittelungsdarstellung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+  kontrolliert dort stationaere Momente asymptotisch bei festem endlichem
+  Speicher, nicht den Transport oder praktisch nutzbare Fehlergrenzen.
+  Keines dieser Resultate schliesst eine der Verbindungen R2--R5.
 - **FIFO-Paper:** eigener nichtlinearer Ast mit getrennten Aussagen zu
   vorbereiteter Existenz, Stabilitaet, Horizonttransfer und Formation.
 - **Paper-II-Programm:** zuerst Propagation und Kinematik; die eigentliche

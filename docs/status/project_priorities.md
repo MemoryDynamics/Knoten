@@ -54,10 +54,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
    begruendet stationaere Momentkorrekturen unter einer strengeren globalen
    Bedingung, auch ohne Horizontkuerzung. Keine aktive archivierte Zelle
-   erfuellt diese hinreichende Schranke. Nun Neuheitswert und physikalische
-   Aussage dieses begrenzten Bereichs pruefen. Der zusaetzlich hergeleitete
-   summierbare Rest begruendet dort nun auch den Transport-Grenztausch
-   und einen expliziten ungekuerzten Koeffizienten. Kopplungsperturbation
+   erfuellt diese hinreichende Schranke. Eine ergaenzende positive
+   Mittelungsdarstellung in der Stationaritaetsnotiz umfasst hingegen die
+   archivierten Modellkoeffizienten fuer die Momententwicklung bei festem
+   endlichem $H$. Ihre enormen Konstanten validieren weder das vorhandene
+   endliche Rauschen noch den Transport. Nun praktische Fehlertoleranz
+   und Neuheitswert dieser getrennten Aussagen pruefen. Der hergeleitete
+   summierbare Rest begruendet nur im strengeren Kontraktionsbereich den
+   Transport-Grenztausch und einen expliziten ungekuerzten Koeffizienten.
+   Kopplungsperturbation
    nach Newman--Grima und die Small-delay-Approximation nach Kopp--Klapp
    als konkrete Vergleichsgrenzen fuehren; andere Grenzwerte allein sind
    kein Neuheitsbeweis. Vor jedem Panel globale stationaere
@@ -111,9 +116,11 @@ Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche
 Pruefung. Waehrend diese offen ist, kann die Paper-I-Neuheits- und
 Gueltigkeitspruefung weitergehen: Den nun hinreichend kontrollierten
 Moment-/Transportbereich gegen die Literatur bewerten und entscheiden, ob
-die wissenschaftliche Frage damit beantwortbar ist. Eine praktisch nutzbare
-Fehlertoleranz und eine Aussage fuer die archivierten aktiven Parameter
-fehlen weiterhin; ebenso der Volltextabgleich der Aging-Arbeit und ein
+die wissenschaftliche Frage damit beantwortbar ist. Die neue
+Mittelungsdarstellung schliesst die asymptotische Momentluecke bei den
+archivierten Modellkoeffizienten und festem $H$, nicht die praktische
+Fehlertoleranz oder den Transport dort. Offen bleiben diese Grenzen,
+der Volltextabgleich der Aging-Arbeit und ein
 unabhaengiges Fachreview. Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
@@ -136,7 +143,10 @@ bereits bestehende Transport-/Memory-Architekturen; die volle Aging-Arbeit ist
 noch nicht im Gleichungsdetail abgeglichen. Die neue nichtlineare Rechnung
 ist keine gemessene Evidenz. Stationaere
 relative Existenz ist nun fuer festes endliches $H$ und positives Rauschen
-analytisch begruendet. Eine zusaetzliche globale Kontraktionsbedingung
+analytisch begruendet. Positive Mittelung rechtfertigt zusaetzlich die
+stationaere Momententwicklung bei den archivierten Modellkoeffizienten,
+aber nur asymptotisch bei festem $H$ und ohne brauchbare Fehlerkonstanten.
+Eine separate globale Kontraktionsbedingung
 kontrolliert die Momententwicklung und den Horizontfehler in einem engeren
 Bereich, der keine aktive archivierte Zelle umfasst. Ein summierbarer
 Kopplungsrest schliesst dort auch den nichtlinearen Transport-Grenztausch,

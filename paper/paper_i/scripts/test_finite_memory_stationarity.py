@@ -12,6 +12,7 @@ from scipy.stats import multivariate_normal
 from weak_nonlinearity import (
     exponential_contraction_diagnostic,
     exponential_weights,
+    finite_averaging_diagnostic,
     lag_matrix,
 )
 
@@ -83,6 +84,8 @@ def test_locally_stable_collapse_coexists_with_exact_stable_two_cycle(kernels):
     curvature = kernels.two_scale_local_curvature(**parameters)
     assert eta * mass * curvature == pytest.approx(0.75)
     assert 0 < b < 2
+    assert eta * gamma_one * a == pytest.approx(a)
+    assert a > 1  # The coexistence example is outside the averaging domain.
 
     # The age-zero displacement is identically zero, also when differentiating.
     def advance(value):
@@ -230,3 +233,148 @@ def test_global_hessian_remainders_control_coupled_taylor_errors(
         )
         assert np.linalg.norm(nonlinear, ord=2) <= 3 * c3 * radius**2 + 2e-14
         assert np.linalg.norm(remainder, ord=2) <= 5 * c5 * radius**4 + 2e-14
+
+
+@pytest.mark.parametrize("budget", [0.0, 0.2, 0.95, 1.0, 1.1])
+def test_finite_averaging_diagnostic_requires_strict_positive_self_weight(budget):
+    chi, self_weight, log_factor = finite_averaging_diagnostic(0.5, 3, budget / 0.375)
+    assert chi == pytest.approx(budget)
+    if budget >= 1:
+        assert self_weight is None and log_factor is None
+    else:
+        assert self_weight == pytest.approx(1 - budget)
+        assert 10**log_factor == pytest.approx(2 / (1 - budget) ** 2)
+
+
+@pytest.mark.parametrize("dimension", [1, 3])
+@pytest.mark.parametrize("horizon", [2, 4, 7])
+def test_state_dependent_averaging_blocks_share_a_column_and_bound_noise(
+    dimension, horizon
+):
+    k, delta, epsilon = horizon - 1, 0.6, 0.17
+    initial = np.sin(np.arange(horizon * dimension).reshape(horizon, dimension))
+    state = initial.copy()
+    product = np.eye(horizon)
+    propagated_noise = np.zeros_like(state)
+    noise_bound = 0.0
+    weights = np.arange(1, horizon, dtype=float)
+    weights /= weights.sum()
+
+    def diameter(history):
+        return np.linalg.norm(history[:, None] - history[None, :], axis=2).max()
+
+    # The matrices depend on the noisy state; no independence is assumed.
+    for step in range(k):
+        separations = np.linalg.norm(state[0] - state[1:], axis=1)
+        tail = (1 - delta) * weights / (1 + separations**2)
+        matrix = np.zeros((horizon, horizon))
+        matrix[0] = np.concatenate(([1 - tail.sum()], tail))
+        matrix[1:, :-1] = np.eye(k)
+        noise = np.cos(step + np.arange(dimension))
+        injection = np.zeros_like(state)
+        injection[0] = epsilon * noise
+        state = matrix @ state + injection
+        product = matrix @ product
+        propagated_noise = matrix @ propagated_noise + injection
+        noise_bound += epsilon * np.linalg.norm(noise)
+    np.testing.assert_allclose(state, product @ initial + propagated_noise, atol=2e-15)
+    np.testing.assert_allclose(product.sum(axis=1), 1.0, atol=2e-15)
+    assert np.min(product[:, 0]) >= delta**k - 2e-15
+    assert diameter(product @ initial) <= (1 - delta**k) * diameter(initial) + 2e-15
+    assert diameter(propagated_noise) <= noise_bound + 2e-15
+    assert diameter(state) <= (1 - delta**k) * diameter(initial) + noise_bound + 2e-15
+
+
+@pytest.mark.parametrize("dimension", [1, 3])
+@pytest.mark.parametrize(
+    "repulsive,attractive", [(1.0, 9.0), (1.0, 20.0), (1.0, 35.0), (0.0, 26.0)]
+)
+def test_production_gradient_reconstructs_the_convex_position_update(
+    kernels, dimension, repulsive, attractive
+):
+    alpha, horizon, eta = 0.01, 9, 0.15
+    gamma = alpha * (1 - alpha) ** np.arange(horizon)
+    chi, delta, _ = finite_averaging_diagnostic(alpha, horizon, eta * attractive / 9)
+    assert chi < 1
+    history = np.cos(np.arange(horizon * dimension).reshape(horizon, dimension))
+    for scale in (0.0, 0.01, 1.0, 10.0):
+        positions = scale * history
+        radii_squared = np.sum((positions[0] - positions[1:]) ** 2, axis=1)
+        radial = attractive / 9 * np.exp(-radii_squared / 18) - repulsive * np.exp(
+            -radii_squared / 2
+        )
+        assert np.all(radial >= 0)
+        assert np.all(radial <= attractive / 9)
+        coefficients = eta * gamma[1:] * radial
+        self_weight = 1 - coefficients.sum()
+        assert self_weight >= delta
+        expected = self_weight * positions[0] + coefficients @ positions[1:]
+        gradient = kernels.double_gaussian_gradient(
+            positions[0],
+            positions,
+            gamma,
+            sigma_rep=1.0,
+            sigma_att=3.0,
+            amplitude_rep=repulsive,
+            amplitude_att=attractive,
+        )
+        np.testing.assert_allclose(positions[0] - eta * gradient, expected, atol=2e-15)
+
+
+@pytest.mark.parametrize("horizon", [2, 5, 9])
+def test_linear_averaging_quotient_is_the_existing_lag_matrix(horizon):
+    alpha, eta, curvature = 0.2, 0.15, 35 / 9 - 1
+    gamma = alpha * (1 - alpha) ** np.arange(horizon)
+    tail = eta * curvature * gamma[1:]
+    companion = np.zeros((horizon, horizon))
+    companion[0] = np.concatenate(([1 - tail.sum()], tail))
+    companion[1:, :-1] = np.eye(horizon - 1)
+    quotient = np.column_stack((np.ones(horizon - 1), -np.eye(horizon - 1)))
+    relative = lag_matrix(
+        exponential_weights(alpha, horizon), eta * curvature * gamma.sum()
+    )
+    np.testing.assert_allclose(quotient @ companion, relative @ quotient, atol=2e-15)
+
+
+def test_archived_cells_have_a_finite_h_moment_domain_but_impractical_bound():
+    path = Path(__file__).resolve().parents[1] / "evidence/trace_manifest.json"
+    cases = json.loads(path.read_text(encoding="utf-8"))["cases"]
+    counts = {"baseline": 0, "eta_zero": 0}
+    diagnostics = {}
+    for case in cases:
+        assert case["horizon"] == 600
+        assert case["amplitude_att"] / 9 >= 1
+        eta = case["gain"] / (case["stored_mass"] * (case["amplitude_att"] / 9 - 1))
+        bound = eta * case["amplitude_att"] / 9
+        chi, delta, log_factor = finite_averaging_diagnostic(
+            case["alpha"], case["horizon"], bound
+        )
+        assert chi == pytest.approx(bound * (case["stored_mass"] - case["alpha"]))
+        assert delta > 0
+        counts[case["condition"]] += 1
+        if case["condition"] == "baseline":
+            assert log_factor > 100
+            diagnostics[case["amplitude_att"]] = (chi, log_factor)
+        else:
+            assert chi == 0 and log_factor == pytest.approx(np.log10(599))
+    assert counts == {"baseline": 45, "eta_zero": 40}
+    assert diagnostics[20.0] == pytest.approx((0.3291983302362297, 106.64753996699004))
+    assert diagnostics[35.0] == pytest.approx((0.5760970779134019, 226.04484705437068))
+
+
+@pytest.mark.parametrize(
+    "alpha,horizon,bound",
+    [
+        (0.0, 3, 0.1),
+        (1.0, 3, 0.1),
+        (1e-30, 3, 0.0),
+        (0.2, 1, 0.1),
+        (0.2, True, 0.1),
+        (0.2, 3.5, 0.1),
+        (0.2, 3, -0.1),
+        (0.2, 3, np.inf),
+    ],
+)
+def test_invalid_averaging_inputs_fail_closed(alpha, horizon, bound):
+    with pytest.raises(ValueError):
+        finite_averaging_diagnostic(alpha, horizon, bound)

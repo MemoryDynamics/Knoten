@@ -131,6 +131,13 @@ Schwachrauschentwicklung. Der algebraisch konstruierte koexistierende
 Zweierzyklus ist ein Gegencheck, kein FIFO-Produktionsbefund und kein
 neuer Formationsclaim. Diese Resultate sind noch nicht in die eingefrorenen
 Manuskripte uebernommen; ein unabhaengiges Fachreview steht aus.
+Die spaetere Ergaenzung durch positive Mittelung begruendet bei festem
+endlichem $H$ die stationaere Momententwicklung bis $\varepsilon^4$ mit
+Rest $O(\varepsilon^6)$ auch fuer die archivierten Modellkoeffizienten.
+Das ist eine Kleinrauschaussage, keine Validierung ihrer konkreten
+Rauschstaerke. Die Konstanten sind praktisch unbrauchbar; der Beweis
+kontrolliert weder den nichtlinearen Transport noch $H\to\infty$ und
+gilt nicht fuer den lokal repulsiven vorbereiteten FIFO-Anchor.
 Die separate
 [Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
 begruendet stationaere quadratische Momente durch Ordnung $\varepsilon^4$

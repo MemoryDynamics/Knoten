@@ -32,6 +32,12 @@ Drifts. Die Schranke ist nicht uniform fuer verschwindendes Rauschen oder
 wachsenden Horizont. Ein exaktes Zweierzyklus-Gegenbeispiel verhindert,
 lokale Stabilitaet mit globaler Branch-Selektion gleichzusetzen. Dies sind
 analytische Forschungsbefunde, keine neue Radius- oder Transportevidenz.
+Eine Ergaenzung derselben Notiz nutzt positive Mittelung, um stationaere
+quadratische Momente bis Ordnung $\varepsilon^4$ mit Rest
+$O(\varepsilon^6)$ bei festem endlichem $H$ zu begruenden. Alle archivierten
+Modellkoeffizienten erfuellen diese zusaetzlichen Voraussetzungen; die
+enormen Fehlerkonstanten bestaetigen weder das vorhandene endliche Rauschen
+noch praktische Durchmischung, Transport oder den unendlichen Horizont.
 Die anschliessende
 [Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
 begruendet die stationaere Momententwicklung unter einer strengeren

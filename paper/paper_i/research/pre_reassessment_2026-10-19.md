@@ -101,8 +101,14 @@ archived Paper-I cells lie outside this sufficient domain. The transport
 extension to that note now supplies a summable innovation-coupling bound
 for the Taylor remainder, justifying the infinite-lag covariance sum and
 an explicit untruncated transport coefficient in the same strict domain.
-The general expansion outside it remains conditional. Neither result by
-itself establishes publication novelty.
+The later positive-averaging extension of the finite-memory note gives a
+second sufficient domain for stationary quadratic moments: nonnegative
+radial feedback with $\eta(A_a/s_a^2)(q-q^H)<1$. It includes all archived
+model coefficients at fixed $H=600$, but its enormous constants do not
+validate their finite noise or terminal blocks. It does not extend the
+transport theorem or control $H\to\infty$. Outside these stated domains
+the corresponding expansions remain conditional. None of these validity
+arguments by itself establishes publication novelty.
 
 For the manuscript kernel, direct Taylor expansion gives
 
@@ -226,8 +232,9 @@ separations are **all age-resolved pairs**, not merely $x_n-c_n$. A small
 current-point radius alone does not bound an old deposit's displacement.
 Neither the pointwise bound nor its Gaussian expectation is a bound on the
 stationary covariance error of the nonlinear process. The separate
-contraction argument supplies that transfer only in its strict domain;
-it provides no usable error tolerance for the archived active cells.
+contraction and finite-$H$ positive-averaging arguments supply that transfer
+in their respective moment domains; neither currently provides a usable
+error tolerance for the archived active cells.
 
 ## Checks and evidence boundary
 
@@ -266,10 +273,12 @@ as the novelty claim. The fixed-noise coupling expansion of Newman--Grima
 and the small-delay expansion of Kopp--Klapp use different limits; difference
 of limits alone is not proof of sufficient scientific significance.
 
-The untruncated formula now avoids making the separate FIFO orbit theory
-a prerequisite for Paper I. It still does not cover the active frozen
-baseline, provide a usable finite-noise error tolerance or establish a
-route to the fundamental physics program. An independent mathematical
+The untruncated transport formula now avoids making the separate FIFO
+orbit theory a prerequisite for Paper I. Its sufficient domain still
+excludes the active frozen baseline. The additional fixed-$H$ moment
+result covers those model coefficients asymptotically, but provides no
+usable finite-noise error tolerance or route to the fundamental physics
+program. An independent mathematical
 review and the unresolved full-text comparison remain necessary before
 treating this research note as a publication-ready theorem package.
 
