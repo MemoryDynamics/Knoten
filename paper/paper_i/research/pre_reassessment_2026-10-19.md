@@ -75,6 +75,15 @@ moment expansion. Existence of a stationary nonlinear relative law,
 interchange of the stationary and weak-noise limits, and uniform error
 bounds have not been proved.
 
+Update 2026-10-21: the [finite-memory stationarity note](finite_memory_stationarity_2026-10-21.md)
+now supplies existence, uniqueness and finite polynomial moments for fixed
+finite $H$ and positive noise under the full bounded force. Its
+minorization is not uniform in $H$ or vanishing noise. An explicit
+coexistence example also shows why local linear stability alone does not
+select the stationary weak-noise branch. The expansion and limit
+interchanges below therefore remain conditional; the original existence
+gap is closed only in the stated finite-$H$, positive-noise scope.
+
 For the manuscript kernel, direct Taylor expansion gives
 
 $$

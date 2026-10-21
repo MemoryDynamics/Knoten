@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-21 (R0/B1-Bestandsanalysen dokumentiert; Produktionsbefunde unveraendert).
+Stand: 2026-10-21 (R0/B1 und finite-Memory-Stationaritaet eingeordnet; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -24,6 +24,14 @@ seine Zuordnung zur Implementierung. Ein physikalischer Zwei-Stationen-
 Vertrag mit begruendeter Wahl oder Herleitung des Mehrsystemgesetzes,
 Aktuatoren und Detektoren fehlt weiter. Mathematisch definierte Paarkopplungen
 existieren; ihre physikalische Auswahl folgt nicht aus dem analytischen Abschluss.
+
+Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+begruendet fuer festes endliches $H$ und positives Gaussrauschen eine
+eindeutige relative stationaere Verteilung des beschraenkten nichtlinearen
+Drifts. Die Schranke ist nicht uniform fuer verschwindendes Rauschen oder
+wachsenden Horizont. Ein exaktes Zweierzyklus-Gegenbeispiel verhindert,
+lokale Stabilitaet mit globaler Branch-Selektion gleichzusetzen. Dies sind
+analytische Forschungsbefunde, keine neue Radius- oder Transportevidenz.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

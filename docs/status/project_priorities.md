@@ -46,6 +46,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Die bereits formale erste nichtlineare Korrektur als eigene
    Publikationshypothese samt Gueltigkeitsgrenze weiter pruefen; sie ist
    kein nachgewiesener Schritt zu Gravitation oder Standardmodell.
+   Eine [neue analytische Notiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+   begruendet stationaere relative Existenz fuer festes endliches $H$ und
+   positives Rauschen. Ein exaktes Koexistenzbeispiel zeigt zugleich, dass
+   lokale lineare Stabilitaet die globale Schwachrauschverteilung nicht
+   festlegt. Vor jedem Panel daher globale stationaere Aussage und lokale
+   bzw. endlichzeitige Branch-Aussage unterscheiden.
    Erst nach wissenschaftlicher Auswahl im Licht von R0/B1 ein
    prospektives, begrenztes Transport-/Skalenpanel
    mit gematchten Kerneln, Autokorrelation, Seed-Unsicherheit und explizitem
@@ -114,9 +120,11 @@ Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
 aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert
 bereits bestehende Transport-/Memory-Architekturen; die volle Aging-Arbeit ist
 noch nicht im Gleichungsdetail abgeglichen. Die neue nichtlineare Rechnung
-ist eine formale lokale Vorhersage, keine gemessene Evidenz und kein Beweis
-einer stationaeren nichtlinearen Verteilung. Neue Zielsimulationen sind in
-diesem Arbeitsblock nicht gelaufen.
+ist eine formale lokale Vorhersage, keine gemessene Evidenz. Stationaere
+relative Existenz ist nun fuer festes endliches $H$ und positives Rauschen
+analytisch begruendet; kleine-Rausch- und Horizontgrenzwerte sowie die
+stationaere Stoerungsentwicklung folgen daraus nicht. Neue Zielsimulationen
+sind in diesem Arbeitsblock nicht gelaufen.
 
 ### Separater FIFO-Haltepunkt
 

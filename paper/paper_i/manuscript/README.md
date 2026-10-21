@@ -1,6 +1,6 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-19.
+Stand: 2026-10-21.
 
 ## Wissenschaftlicher Reifegrad
 
@@ -12,6 +12,13 @@ gezielte Pruefung fehlen noch. Die verbindliche Reihenfolge steht in den
 [Neuheitsaudit](../research/pre_reassessment_2026-10-19.md) trennt bekannte
 Resultate von der noch offenen nichtlinearen Arbeitshypothese. Die neuen
 Forschungsrechnungen aendern weder die eingefrorenen PDFs noch die alten Daten.
+
+Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
+schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher
+und positivem Rauschen. Sie rechtfertigt noch keine stationaere
+Schwachrauschentwicklung: Ein exaktes Koexistenzbeispiel trennt lokale
+Stabilitaet von globaler Branch-Selektion. Auch dieser Forschungsbefund
+stellt fuer sich keine ausreichende Publikationsneuheit dar.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare
@@ -29,7 +36,7 @@ Beide PDFs stehen nach dem Build in `../release/`. Das PRE-Layout legt die
 fachliche Richtung fest, ist aber weder eine Einreichung noch eine Zusage
 ueber Journalannahme.
 
-## Inhaltlich geschlossene Punkte
+## Geschlossene Baseline-Punkte
 
 - [x] Point-deposition-Modell als Memory-Mass statt glatter Dichte formulieren.
 - [x] Geordneten finite-H-Zustand und native Update-Reihenfolge angeben.
@@ -39,7 +46,7 @@ ueber Journalannahme.
 - [x] Neun aktive Slices und acht geteilte eta-zero-Kontrollen auswerten.
 - [x] Alle 85 extrahierten terminalen Radius-Traces mit Quellhashes archivieren.
 - [x] Abbildungen mit Seed-IQRs und vollstaendige Parametertabelle erzeugen.
-- [x] Literatur zu Aging, Markov-Einbettung, Walking Droplets und Autochemotaxis abgrenzen.
+- [x] Literaturstand der Baseline zu Aging, Markov-Einbettung, Walking Droplets und Autochemotaxis einordnen; die aktuelle Neuheitspruefung bleibt offen.
 - [x] Kernel-Kollaps und feste-Gain-Kontrolle sichtbar einbinden.
 - [x] Unbelegte Informationsverlust-, Metastabilitaets- und Zeitclaims entfernen.
 - [x] FIFO-Rotationsbefunde aus der Evidenzlinie von Paper I herausnehmen.

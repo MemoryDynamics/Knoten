@@ -122,6 +122,16 @@ kernelabhaengigen nichtlinearen Vorhersage ab. Die Transportformel ist
 analytisch, nicht anhand der Radiusdaten validiert. Die formale
 Schwachrauschrechnung ist Forschungsarbeit, noch kein Manuskriptbefund.
 
+Fortschreibung 2026-10-21: Die
+[Stationaritaetsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+gibt ein explizites Minorisierungsargument fuer die relative stationaere
+Verteilung bei festem endlichem $H$ und positivem Rauschen. Ihre Existenz
+beweist weder praktische Durchmischung noch die globale stationaere
+Schwachrauschentwicklung. Der algebraisch konstruierte koexistierende
+Zweierzyklus ist ein Gegencheck, kein FIFO-Produktionsbefund und kein
+neuer Formationsclaim. Diese Resultate sind noch nicht in die eingefrorenen
+Manuskripte uebernommen; ein unabhaengiges Fachreview steht aus.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben
