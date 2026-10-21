@@ -10,6 +10,40 @@ import numpy as np
 from scipy.linalg import solve_discrete_lyapunov
 
 
+def exponential_contraction_diagnostic(alpha: float, global_hessian_gain: float):
+    """Return (theta, history_decay, contraction_rate) or (theta, None, None).
+
+    global_hessian_gain bounds |eta|*sup_x ||Hess K(x)|| for unit memory mass;
+    it is NOT the local curvature gain. The sufficient condition theta<1
+    covers all truncations and the untruncated exponential history.
+    This floating-point diagnostic is not an interval certificate or a
+    simulation authorization. Unresolved near-boundary rates return None.
+    """
+    if not np.isfinite(alpha) or not 0 < alpha < 1:
+        raise ValueError("require finite 0<alpha<1")
+    q = 1 - alpha
+    if not 0 < q < 1:
+        raise ValueError("memory decay must be resolvable in floating point")
+    if not np.isfinite(global_hessian_gain) or global_hessian_gain < 0:
+        raise ValueError("global Hessian gain must be finite and nonnegative")
+    theta = global_hessian_gain * q / alpha
+    if not np.isfinite(theta):
+        raise ValueError("contraction diagnostic overflows")
+    if theta >= 1:
+        return theta, None, None
+    threshold = max(q ** (1 / 5), q / (1 - global_hessian_gain * q))
+    history_decay = (1 + threshold) / 2
+    if not q < history_decay**5 < 1:
+        return theta, None, None
+    rate = max(
+        history_decay,
+        global_hessian_gain * q / (1 - q / history_decay),
+    )
+    if not np.isfinite(rate) or rate >= 1:
+        return theta, None, None
+    return theta, history_decay, rate
+
+
 def exponential_weights(alpha: float, horizon: int) -> np.ndarray:
     if not np.isfinite(alpha) or not 0 < alpha < 1:
         raise ValueError("require finite 0<alpha<1")

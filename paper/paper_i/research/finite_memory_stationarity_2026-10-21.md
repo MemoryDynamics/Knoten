@@ -15,9 +15,13 @@ minorization gives uniform convergence in total variation. Its bound is
 generally far too weak to certify a practical burn-in and is not uniform
 as noise vanishes or history length grows.
 
-This does **not** establish the stationary weak-noise expansion around the
-collapsed state. An explicit two-point-history example below has a stable
-collapsed state and a stable nonzero period-two orbit while its local
+This minorization does **not** establish the stationary weak-noise expansion
+around the collapsed state. A separate
+[global-contraction argument](weak_noise_validity_2026-10-21.md) now does so
+for quadratic moments in a stricter domain, including untruncated memory,
+but does not cover any active archived Paper-I cell. An explicit
+two-point-history example below has a stable collapsed state and a stable
+nonzero period-two orbit while its local
 linear gain still satisfies $0<g<1$. This demonstrates coexistence, not
 which attractor dominates the stationary small-noise limit.
 
@@ -181,10 +185,13 @@ law is that branch.
 ## Consequence for Paper I
 
 The finite-$H$, positive-noise existence prerequisite is now supported by
-an explicit argument. The stationary weak-noise expansion, uniform
-remainder estimates and transport-limit interchange remain open. A next
-validation must distinguish a globally stationary prediction from a
-conditional or finite-time local-branch prediction before choosing data.
+an explicit argument. Without an additional global condition, the
+stationary weak-noise expansion and uniform remainder estimates remain
+open. The separate contraction note supplies a sufficient domain for
+moments, not the transport-limit interchange or a theorem at the archived
+active parameters. A next validation must distinguish a globally stationary
+prediction from a conditional or finite-time local-branch prediction before
+choosing data.
 Neither a theorem valid at each fixed noise nor a long-looking trajectory
 settles that distinction.
 
@@ -193,8 +200,9 @@ the Gaussian density lower bound with independent SciPy log densities,
 the force bound with the production kernel, and the exact coexistence map
 and derivatives with the production gradient/Hessian. They check the
 algebraic implementation, not the theorem's generality or a stationary
-small-noise distribution. Nine new checks and the existing 21 local-response,
-eight baseline and 14 documentation/claim checks pass locally (52 total), with
+small-noise distribution. At the original stationarity commit, nine new
+checks and the existing 21 local-response, eight baseline and 14
+documentation/claim checks passed locally (52 total), with
 NumPy 2.3.5, SciPy 1.16.3 and pytest 8.4.2. The dedicated research CI includes
 the new test file. Frozen manuscript PDFs and evidence are unchanged.
 The missing full-text aging-paper comparison remains open: the official

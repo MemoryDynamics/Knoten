@@ -131,6 +131,14 @@ Schwachrauschentwicklung. Der algebraisch konstruierte koexistierende
 Zweierzyklus ist ein Gegencheck, kein FIFO-Produktionsbefund und kein
 neuer Formationsclaim. Diese Resultate sind noch nicht in die eingefrorenen
 Manuskripte uebernommen; ein unabhaengiges Fachreview steht aus.
+Die separate
+[Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+begruendet stationaere quadratische Momente durch Ordnung $\varepsilon^4$
+mit Rest $O(\varepsilon^6)$ unter $|\eta|G_2q/\alpha<1$, auch bei
+ungekuerztem exponentiellem Gedaechtnis. Keine aktive archivierte Zelle
+erfuellt diese hinreichende Schranke. Sie belegt weder die nichtlineare
+Transportkorrektur noch einen FIFO-Branchtransfer oder hinreichende
+Publikationsneuheit; die allgemeine Gueltigkeitsfrage bleibt offen.
 
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik

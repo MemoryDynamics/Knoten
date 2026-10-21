@@ -32,6 +32,13 @@ Drifts. Die Schranke ist nicht uniform fuer verschwindendes Rauschen oder
 wachsenden Horizont. Ein exaktes Zweierzyklus-Gegenbeispiel verhindert,
 lokale Stabilitaet mit globaler Branch-Selektion gleichzusetzen. Dies sind
 analytische Forschungsbefunde, keine neue Radius- oder Transportevidenz.
+Die anschliessende
+[Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+begruendet die stationaere Momententwicklung unter einer strengeren
+globalen Bedingung auch fuer ungekuerztes exponentielles Gedaechtnis.
+Alle aktiven archivierten Zellen liegen ausserhalb dieses hinreichenden
+Bereichs; das beweist keine Instabilitaet. Nichtlinearer Transport,
+Publikationsneuheit und der separate FIFO-Horizonttransfer bleiben offen.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

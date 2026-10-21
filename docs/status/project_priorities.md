@@ -50,8 +50,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    begruendet stationaere relative Existenz fuer festes endliches $H$ und
    positives Rauschen. Ein exaktes Koexistenzbeispiel zeigt zugleich, dass
    lokale lineare Stabilitaet die globale Schwachrauschverteilung nicht
-   festlegt. Vor jedem Panel daher globale stationaere Aussage und lokale
-   bzw. endlichzeitige Branch-Aussage unterscheiden.
+   festlegt. Die anschliessende
+   [Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+   begruendet stationaere Momentkorrekturen unter einer strengeren globalen
+   Bedingung, auch ohne Horizontkuerzung. Keine aktive archivierte Zelle
+   erfuellt diese hinreichende Schranke. Nun Neuheitswert und physikalische
+   Aussage dieses begrenzten Bereichs pruefen; den fehlenden Transport-
+   Grenztausch getrennt behandeln. Vor jedem Panel globale stationaere
+   Aussage und lokale bzw. endlichzeitige Branch-Aussage unterscheiden.
    Erst nach wissenschaftlicher Auswahl im Licht von R0/B1 ein
    prospektives, begrenztes Transport-/Skalenpanel
    mit gematchten Kerneln, Autokorrelation, Seed-Unsicherheit und explizitem
@@ -99,9 +105,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 Die Vorlage fuer den fundamentalen Pfad ist zur Autorenentscheidung bereit.
 Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche
 Pruefung. Waehrend diese offen ist, kann die Paper-I-Neuheits- und
-Gueltigkeitspruefung weitergehen: Literaturabgleich und die Voraussetzungen
-der formalen stationaeren Rechnung klaeren, bevor ein Datenpanel festgelegt
-wird. Keine neue FIFO-/P5-Zielautorisierung.
+Gueltigkeitspruefung weitergehen: Den nun hinreichend kontrollierten
+Momentbereich gegen die Literatur bewerten und entscheiden, ob die
+wissenschaftliche Frage damit beantwortbar ist. Der nichtlineare
+Transport-Grenztausch und eine Aussage fuer die archivierten aktiven
+Parameter fehlen weiterhin. Ein Datenpanel wird dadurch nicht automatisch
+festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
 
@@ -120,11 +129,13 @@ Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
 aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert
 bereits bestehende Transport-/Memory-Architekturen; die volle Aging-Arbeit ist
 noch nicht im Gleichungsdetail abgeglichen. Die neue nichtlineare Rechnung
-ist eine formale lokale Vorhersage, keine gemessene Evidenz. Stationaere
+ist keine gemessene Evidenz. Stationaere
 relative Existenz ist nun fuer festes endliches $H$ und positives Rauschen
-analytisch begruendet; kleine-Rausch- und Horizontgrenzwerte sowie die
-stationaere Stoerungsentwicklung folgen daraus nicht. Neue Zielsimulationen
-sind in diesem Arbeitsblock nicht gelaufen.
+analytisch begruendet. Eine zusaetzliche globale Kontraktionsbedingung
+kontrolliert die Momententwicklung und den Horizontfehler in einem engeren
+Bereich, der keine aktive archivierte Zelle umfasst. Das schliesst weder
+die allgemeine Gueltigkeitsluecke noch den nichtlinearen Transport-
+Grenztausch. Neue Zielsimulationen sind in diesem Arbeitsblock nicht gelaufen.
 
 ### Separater FIFO-Haltepunkt
 

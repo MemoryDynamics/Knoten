@@ -70,19 +70,25 @@ it does not replace those established helpers or the production simulator.
 ## Formal first nonlinear correction
 
 This section is an original derivation in this working note, **not a claim
-of literature priority**. It is conditional on a smooth local weak-noise
-moment expansion. Existence of a stationary nonlinear relative law,
-interchange of the stationary and weak-noise limits, and uniform error
-bounds have not been proved.
+of literature priority**. Its general use is conditional on a smooth local
+weak-noise moment expansion. The updates below distinguish the now-proved
+restricted domains from the remaining stationary and transport-limit gaps.
 
 Update 2026-10-21: the [finite-memory stationarity note](finite_memory_stationarity_2026-10-21.md)
 now supplies existence, uniqueness and finite polynomial moments for fixed
 finite $H$ and positive noise under the full bounded force. Its
 minorization is not uniform in $H$ or vanishing noise. An explicit
 coexistence example also shows why local linear stability alone does not
-select the stationary weak-noise branch. The expansion and limit
-interchanges below therefore remain conditional; the original existence
-gap is closed only in the stated finite-$H$, positive-noise scope.
+select the stationary weak-noise branch.
+
+A subsequent [global-contraction note](weak_noise_validity_2026-10-21.md)
+justifies the quadratic-moment expansion below under the stronger
+condition $|\eta|G_2q/\alpha<1$, where $G_2$ bounds the full kernel Hessian.
+Its argument also covers untruncated exponential memory. All active
+archived Paper-I cells lie outside this sufficient domain. The general
+expansion remains conditional, and the nonlinear infinite-lag transport
+interchange is not established even by that note. Neither result by itself
+establishes publication novelty.
 
 For the manuscript kernel, direct Taylor expansion gives
 
@@ -196,8 +202,9 @@ moments give an explicit force-remainder diagnostic. The relevant
 separations are **all age-resolved pairs**, not merely $x_n-c_n$. A small
 current-point radius alone does not bound an old deposit's displacement.
 Neither the pointwise bound nor its Gaussian expectation is a bound on the
-stationary covariance error of the nonlinear process. Establishing that
-transfer remains open.
+stationary covariance error of the nonlinear process. The separate
+contraction argument supplies that transfer only in its strict domain;
+it provides no usable error tolerance for the archived active cells.
 
 ## Checks and evidence boundary
 

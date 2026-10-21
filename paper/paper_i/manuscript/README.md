@@ -17,8 +17,13 @@ Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
 schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher
 und positivem Rauschen. Sie rechtfertigt noch keine stationaere
 Schwachrauschentwicklung: Ein exaktes Koexistenzbeispiel trennt lokale
-Stabilitaet von globaler Branch-Selektion. Auch dieser Forschungsbefund
-stellt fuer sich keine ausreichende Publikationsneuheit dar.
+Stabilitaet von globaler Branch-Selektion. Eine anschliessende
+[Kontraktionsnotiz](../research/weak_noise_validity_2026-10-21.md) begruendet
+die Momententwicklung unter einer strengeren globalen Bedingung, auch bei
+ungekuerztem Gedaechtnis. Keine aktive archivierte Zelle erfuellt diese
+hinreichende Schranke; die nichtlineare Transportkorrektur bleibt offen.
+Auch diese Forschungsbefunde stellen fuer sich keine ausreichende
+Publikationsneuheit dar.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare
