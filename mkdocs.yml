@@ -12,6 +12,7 @@ nav:
       - Aktueller Stand: status/current_status.md
       - Prioritaeten: status/project_priorities.md
       - Forschungsroadmap: status/research_roadmap.md
+      - Architekturentscheidung: status/architecture_decision.md
       - Paper-Claims: status/paper_claims.md
   - Modell und Gleichungen:
       - Theorie: reference/THEORETICAL_CONTEXT.md

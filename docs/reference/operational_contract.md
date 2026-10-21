@@ -183,3 +183,5 @@ keine neue Regel wird hier eingefuehrt. Der klassische Publikationsstrang
 und die Neuheitspruefung fuer Paper I bleiben davon unabhaengig. Die
 Arbeitsreihenfolge bleibt allein in den
 [Projektprioritaeten](../status/project_priorities.md).
+Die [Entscheidungsvorlage](../status/architecture_decision.md) vergleicht
+die drei Wege samt Annahmen und Gegenpruefungen, ohne eine neue Regel zu setzen.

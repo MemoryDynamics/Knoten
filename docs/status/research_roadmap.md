@@ -53,7 +53,7 @@ muessen kompatible Annahmen und eine gemeinsame effektive Grundlage nutzen.
 Ob weitere Paper noetig sind, entscheidet der tatsaechliche Befund.
 
 Der naechste Arbeitsabschnitt konkretisiert nur den ersten offenen
-Uebergang. B1 macht jetzt die Architekturentscheidung sichtbar; Paper I
+Uebergang. B1 fuehrt zur [Architekturentscheidung](architecture_decision.md); Paper I
 bleibt daneben ein eigenstaendiger Publikationsstrang. Die spaeteren Stufen
 bleiben grob, bis ein belastbares Ergebnis ihre Verfeinerung rechtfertigt.
 

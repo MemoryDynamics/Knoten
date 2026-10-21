@@ -20,17 +20,17 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Architekturentscheidung aus R0/B1 vorbereiten -- jetzt.** Der begrenzte
+1. **Architekturentscheidung aus R0/B1 treffen -- Vorlage liegt vor.** Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die
    [B1-Bestandsanalyse](../reference/operational_contract.md) liegen vor:
    Die klassische Quellenantwort ist spezifiziert; ein gemeinsames
    physikalisches Mehrsystem-/Messgesetz ist aus Paper I nicht bestimmt.
    Direkter Fernzugriff und unabhaengiges Rauschen ergeben nicht automatisch
-   Bell-Lokalitaet oder eine Quantentheorie. Als naechstes eine begrenzte
-   Entscheidungsvorlage: Welche Aussage traegt die bestehende klassische
-   Architektur, welche Herleitungen oder Zusatzannahmen fehlen fuer den
-   fundamentalen Anspruch, und welche erste Gegenpruefung entscheidet
-   ueber einen Pfad?
+   Bell-Lokalitaet oder eine Quantentheorie. Die
+   [Entscheidungsvorlage](architecture_decision.md) vergleicht die
+   unveraenderte Regel, eine explizite klassische Erweiterung und eine
+   vorausgesetzte Quantenstruktur samt ersten Gegenpruefungen. Empfehlung
+   ist vorerst die unveraenderte Regel, ohne Erfolgsaussicht zu behaupten.
    Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
    Luecke zu verdecken. Dies bleibt analytische Bestandsarbeit ohne
    Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
@@ -90,13 +90,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-R0 liefert die Annahmen-/Resultatmatrix; B1 trennt vorhandene klassische
-Operationen von fehlenden physikalischen Regeln. Die naechste Vorlage
-muss fuer jeden erwogenen Pfad Annahmen, erwartete Aussage und Gegenbefund
-nennen. Abnahme ist eine begruendete Richtungsentscheidung, kein automatisch
-gestarteter Scan und kein weiterer blosser Statusbericht. Die konkrete
-Paper-I-Neuheitsaussage wird separat bewertet. Keine neue
-FIFO-/P5-Zielautorisierung.
+Die Vorlage fuer den fundamentalen Pfad ist zur Autorenentscheidung bereit.
+Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche
+Pruefung. Waehrend diese offen ist, kann die Paper-I-Neuheits- und
+Gueltigkeitspruefung weitergehen: Literaturabgleich und die Voraussetzungen
+der formalen stationaeren Rechnung klaeren, bevor ein Datenpanel festgelegt
+wird. Keine neue FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
 
