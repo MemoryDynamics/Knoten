@@ -38,9 +38,12 @@ Der vorgeschlagene Block-MSD stimmt nicht mit dem Langzeittransport
 ueberein. Die anschliessende
 [gepaarte Machbarkeitsnotiz](../research/paired_transport_feasibility_2026-10-22.md)
 repariert den fuehrenden Bias durch einen bekannten Zweilaengen-Schaetzer
-und berechnet die Langblock-Varianz samt kubischem Gauss-Chaos. Endliche
-Blockunsicherheit, der echte Transportrest und Burn-in muessen vor
-neuen Zielsimulationen geklaert werden. Die PDFs bleiben unveraendert.
+und berechnet die Langblock-Varianz samt kubischem Gauss-Chaos. Eine
+[Ergaenzung](../research/finite_block_transport_bound_2026-10-22.md)
+begrenzt die endliche Stichprobenunsicherheit des fuehrenden Koeffizienten,
+ohne unabhaengige Bloecke anzunehmen. Der nichtlineare Schaetzerrest,
+der echte Transportrest und Burn-in muessen vor neuen Zielsimulationen
+geklaert werden. Die PDFs bleiben unveraendert.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare

@@ -9,8 +9,11 @@ human review, a simulation result, or a panel authorization.
 the long-time question by a short-time observable. Shared innovations
 cancel the common linear contribution pathwise. The remaining paired
 variance has a nonzero third-chaos contribution, calculated below.
-Its long-block limit is now available; finite-block precision and the
-finite-noise transport remainder are not yet bounded numerically.
+Its long-block limit is available. A
+[follow-up bound](finite_block_transport_bound_2026-10-22.md) now controls
+sampling of the leading coefficient at finite block length and sample
+count, without assuming Gaussian or independent blocks. Transfer to the
+full estimator and the finite-noise transport remainder remain open.
 The implementation decision remains **hold**, not a scientific no-go.
 
 ## Estimator and estimand
@@ -337,17 +340,18 @@ accurate to twelve absolute decimal places.
 | Error source | Established here | Still required before a panel |
 | --- | --- | --- |
 | Finite lag in the mean | Exact coefficient response and conservative two-length tail bounds | Combine with the finite-noise remainder; predeclare the accepted total bias |
-| Sampling | Pathwise linear cancellation; exact finite-sample covariance identity; long-block reference including third chaos | Quantify finite-$L$ superblock covariance and approximation error, without assuming independent coordinates/blocks |
+| Sampling | Pathwise linear cancellation; long-block reference including third chaos; subsequent conservative finite-sample bound for the leading coefficient | Quantitative transfer to the full finite-noise estimator, including its random remainder |
 | Nonlinear transport remainder | Existing asymptotic $O(\varepsilon^6)$ theorem in the strict domain | Usable constant or justified numerical error domain for chosen nonzero noise |
 | Memory horizon | Estimand and reference consistently use $H=600$ | A separate transfer bound if an untruncated claim is intended; this note makes no such transfer |
 | Initialization | Stationary causal coupling specified | Burn-in error for the actual paired initializer |
 | Numerical implementation | Deterministic coefficient checks | Coupling, subtraction, precision and runtime contract for the eventual shared production force |
 
 The original long-time target remains unchanged. The corrected expectation
-addresses the estimator mismatch; it does not justify replacing the open
-finite-block variance calculation by the long-block factor. The next
-readiness step is the finite-block paired covariance and a usable transport
-remainder, followed by an explicit total-error/cost decision. No new
+addresses the estimator mismatch; it does not justify treating the
+long-block factor as exact at finite $L$. The follow-up instead bounds
+finite-sample coefficient variance conservatively. The next readiness
+step is a usable remainder for the full estimator and transport prediction,
+followed by an explicit total-error/cost decision. No new
 FIFO/P5 evidence, gravity/quantum bridge or publication novelty follows
 from this statistical repair.
 

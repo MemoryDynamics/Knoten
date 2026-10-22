@@ -278,8 +278,11 @@ repairs the leading lag bias using an established two-length estimator and
 calculates the model-specific long-block paired variance. The third chaos
 contributes to this variance even though it drops out of the first mean
 correction. Neither the statistical method nor this reference calculation
-is sufficient publication novelty; finite-block precision, finite-noise
-accuracy and practical initialization still need to be controlled.
+is sufficient publication novelty. A further
+[finite-sample bound](finite_block_transport_bound_2026-10-22.md) now
+controls sampling of the leading coefficient at finite block length;
+finite-noise estimator/transport accuracy and practical initialization
+still need to be controlled.
 
 The defensible candidate core is now concrete: **an explicit weak-noise
 diffusion correction for the full nonlinear, exponentially weighted

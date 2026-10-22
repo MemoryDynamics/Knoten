@@ -171,8 +171,12 @@ Koeffizientenbias und eine modellbezogene Langblock-Varianz einschliesslich
 des dritten Gauss-Chaos. Das ist weder eine neue statistische Methode
 noch endliche-Lauf-Power oder Transportevidenz. Insbesondere rechtfertigt
 die asymptotische Koordinatenunabhaengigkeit keinen Faktor $1/d$ bei
-endlicher Blocklaenge. Nichtlinearer Rest, Burn-in und endliche
-Blockkovarianz bleiben Teil des offenen Readiness-Gates.
+endlicher Blocklaenge. Die anschliessende
+[finite-Stichproben-Schranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
+umgeht diese Annahme mit Moment- und Kopplungsgrenzen. Sie kontrolliert
+nur den fuehrenden stationaeren Koeffizienten, nicht bereits den
+vollstaendigen nichtlinearen Schaetzer. Dessen zufaelliger Rest, die
+Transport-Fehlergrenze und Burn-in bleiben Teil des Readiness-Gates.
 
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik

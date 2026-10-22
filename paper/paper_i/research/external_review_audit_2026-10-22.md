@@ -18,8 +18,10 @@ prove that no affordable test exists.
 Follow-up: the [paired feasibility note](paired_transport_feasibility_2026-10-22.md)
 now specifies a two-length correction with coefficient-level bias bounds
 and calculates the long-block paired variance including third Gaussian
-chaos. Finite-block precision and the finite-noise remainder remain open;
-this does not retroactively validate the reviewed panel's sizing.
+chaos. A later [finite-sample bound](finite_block_transport_bound_2026-10-22.md)
+controls the leading coefficient without a long-block approximation.
+Finite-noise precision and the nonlinear remainder remain open; neither
+follow-up retroactively validates the reviewed panel's sizing.
 
 ## Findings
 

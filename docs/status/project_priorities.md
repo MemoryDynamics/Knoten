@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-22 (gepaarte Transportreferenz und Zweilaengen-Bias begruendet; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-22 (endliche Stichprobengrenze fuer den fuehrenden Transportkontrast; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -66,10 +66,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [gepaarte Machbarkeitsrechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
    spezifiziert einen Zweilaengen-Schaetzer mit kontrolliertem
    Koeffizientenbias und berechnet die Langblock-Varianz einschliesslich
-   des dritten Gauss-Chaos. Jetzt deren endliche-Block-Kovarianz und
-   Naeherungsfehler quantifizieren; daneben die echte Transport-
-   Fehlerschranke und den Neuheitswert pruefen. Die Langblock-Referenz
-   darf keine unbewiesene endliche-Lauf-Power ersetzen.
+   des dritten Gauss-Chaos. Eine anschliessende
+   [finite-Stichproben-Schranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
+   kontrolliert den fuehrenden Koeffizienten bei endlicher Blocklaenge,
+   einschliesslich Block- und Koordinatenabhaengigkeit. Jetzt den
+   nichtlinearen Rest des gepaarten Schaetzers quantitativ begrenzen,
+   sowohl seinen Zufallsfehler als auch seinen Mittelwert. Zusammen mit
+   Transportrest, Initialisierung, numerischer Praezision und Neuheitswert
+   ergibt dies erst das Readiness-Gate. Die Koeffizientenschranke ersetzt
+   keine endliche-Rausch-Power und keinen praktischen Kostencheck.
    Die vorgeschlagenen acht Milliarden Updates sind nicht freigegeben.
    Der hergeleitete
    summierbare Rest begruendet nur im strengeren Kontraktionsbereich den
@@ -134,9 +139,11 @@ archivierten Modellkoeffizienten und festem $H$, nicht die praktische
 Fehlertoleranz oder den Transport dort. Das externe Modellreview ist
 ausgewertet; seine Nachweisstaerke ist fuer den vorgeschlagenen Schaetzer
 nicht bestaetigt. Ein passender Zweilaengen-Schaetzer und die gepaarte
-Langblock-Kovarianz sind jetzt analytisch bestimmt. Als naechstes den
-endlichen Blockfehler der Varianz sowie eine nutzbare nichtlineare
-Transport-Fehlergrenze zum Gesamtfehlerbudget verbinden. Der Volltextabgleich
+Langblock-Kovarianz sind analytisch bestimmt; fuer den fuehrenden
+Koeffizienten liegt nun auch eine konservative endliche Stichprobengrenze
+vor. Als naechstes den zufaelligen Schaetzerrest bei endlichem Rauschen,
+eine nutzbare Transport-Fehlergrenze und Initialisierung zum Gesamtfehlerbudget
+verbinden. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-22 (gepaarte Transportreferenz ergaenzt; Produktionsbefunde unveraendert).
+Stand: 2026-10-22 (finite Stichprobengrenze fuer den fuehrenden gepaarten Koeffizienten; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -59,8 +59,14 @@ ergibt etwa 2.32 statt 13.5 Standardabweichungen. Eine anschliessende
 [gepaarte Referenzrechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
 kontrolliert den fuehrenden Endlichzeitbias mit einer Zweilaengen-Korrektur
 und berechnet die Langblock-Varianz inklusive kubischem Gauss-Chaos.
-Die Varianz bei endlicher Blocklaenge, der echte Transportrest bei
-endlichem Rauschen und praktische Initialisierung sind weiter offen.
+Die anschliessende
+[finite-Stichproben-Rechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
+begrenzt Sampling plus Blockbias fuer den fuehrenden Koeffizienten beim
+diskutierten Budget auf einen konservativen relativen 95%-Radius unter
+8.8%. Dies ist eine analytische Referenzrechnung in Gleitkommaarithmetik,
+keine Daten-Konfidenz oder Fehlergarantie fuer endliches Rauschen.
+Der zufaellige nichtlineare Schaetzerrest, der echte Transportrest und
+praktische Initialisierung sind weiter offen.
 Keine neue Zielsimulation und keine Panelautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |

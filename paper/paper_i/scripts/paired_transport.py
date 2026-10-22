@@ -51,20 +51,37 @@ def cubic_force_covariance_sum(weights, gain, covariance, dimension, maximum_lag
     Signed covariances are retained. A finite sum is NOT a lower bound;
     the caller must supply an absolute omitted-tail bound separately.
     """
+    _, third = cubic_force_covariances(
+        weights, gain, covariance, dimension, maximum_lag
+    )
+    return float(third[0] + 2 * third[1:].sum())
+
+
+def cubic_force_covariances(weights, gain, covariance, dimension, maximum_lag):
+    """Per-coordinate first/third-chaos forcing covariances at 0,...,T.
+
+    These are signed coefficients. Truncating either array needs a
+    separate absolute tail bound before it controls a full covariance sum.
+    """
     _positive_integer(dimension, "dimension")
     _positive_integer(maximum_lag, "maximum_lag")
     matrix, cross = _checked_covariance(weights, gain, covariance)
     tail = np.asarray(weights, dtype=float)[1:]
     pair_weights = np.outer(tail, tail)
-    total = np.sum(pair_weights * cross * cross * cross)
-    for _ in range(maximum_lag):
+    linear_force = (dimension + 2) * tail * np.diag(cross)
+    first = np.empty(maximum_lag + 1)
+    third = np.empty(maximum_lag + 1)
+    for time in range(maximum_lag + 1):
+        first[time] = linear_force @ cross @ linear_force
+        third[time] = 2 * (dimension + 2) * np.sum(pair_weights * cross * cross * cross)
+        if time == maximum_lag:
+            break
         # A is a common first row plus a shift, avoiding a dense matrix product.
         first_row = matrix[0] @ cross
         following = np.broadcast_to(first_row, cross.shape).copy()
         following[1:] += cross[:-1]
         cross = following
-        total += 2 * np.sum(pair_weights * cross * cross * cross)
-    return float(2 * (dimension + 2) * total)
+    return first, third
 
 
 def exponential_cubic_tail_bound(
@@ -250,7 +267,7 @@ def audit_paired_reference():
         "long_block_reference": paired_long_block_reference(
             weights, gain, covariance, dimension, spectrum
         ),
-        "finite_block_paired_covariance": "not yet bounded; long-block variance must not be used as finite-L power",
+        "finite_block_paired_covariance": "not evaluated here; finite_block_transport.py gives a conservative leading-coefficient bound, not finite-noise power",
         "finite_noise_transport_remainder": "not yet numerically bounded",
     }
 
