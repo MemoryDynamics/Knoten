@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-21 (R0/B1 und finite-Memory-Stationaritaet eingeordnet; Produktionsbefunde unveraendert).
+Stand: 2026-10-22 (gepaarte Transportreferenz ergaenzt; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -55,8 +55,13 @@ Transporttest vorgeschlagen. Der
 bestaetigt dessen unendliche Koeffizienten, nicht die Panelreife:
 Block-MSD bei Lag 100 und Langzeittransport sind verschieden; der
 lineare Bias betraegt 37.17%. Korrekte unabhaengige Gaussreferenz-Skalierung
-ergibt etwa 2.32 statt 13.5 Standardabweichungen. Gepaarte Praezision und
-echter Transportrest sind offen. Kein neuer Ziellauf wurde freigegeben.
+ergibt etwa 2.32 statt 13.5 Standardabweichungen. Eine anschliessende
+[gepaarte Referenzrechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
+kontrolliert den fuehrenden Endlichzeitbias mit einer Zweilaengen-Korrektur
+und berechnet die Langblock-Varianz inklusive kubischem Gauss-Chaos.
+Die Varianz bei endlicher Blocklaenge, der echte Transportrest bei
+endlichem Rauschen und praktische Initialisierung sind weiter offen.
+Keine neue Zielsimulation und keine Panelautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

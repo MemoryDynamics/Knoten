@@ -164,6 +164,16 @@ Ein signifikant falsches Vorzeichen darf nach bestandenen Voraussetzungen
 nicht pauschal als inconclusive behandelt werden. Externes Modellreview
 ersetzt kein unabhaengiges menschliches Fachreview.
 
+Die anschliessende
+[gepaarte Transportreferenz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
+liefert einen bekannten Zweilaengen-Schaetzer mit explizitem
+Koeffizientenbias und eine modellbezogene Langblock-Varianz einschliesslich
+des dritten Gauss-Chaos. Das ist weder eine neue statistische Methode
+noch endliche-Lauf-Power oder Transportevidenz. Insbesondere rechtfertigt
+die asymptotische Koordinatenunabhaengigkeit keinen Faktor $1/d$ bei
+endlicher Blocklaenge. Nichtlinearer Rest, Burn-in und endliche
+Blockkovarianz bleiben Teil des offenen Readiness-Gates.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben

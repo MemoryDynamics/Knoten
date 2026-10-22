@@ -1,6 +1,6 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-21.
+Stand: 2026-10-22.
 
 ## Wissenschaftlicher Reifegrad
 
@@ -35,8 +35,12 @@ Publikationsneuheit dar.
 Das [externe Review und sein Gegencheck](../research/external_review_audit_2026-10-22.md)
 liefern einen konkreten Testkandidaten, aber noch keine Panelreife:
 Der vorgeschlagene Block-MSD stimmt nicht mit dem Langzeittransport
-ueberein; gepaarte Unsicherheit und die echte Transport-Fehlergrenze
-muessen vor neuen Zielsimulationen geklaert werden.
+ueberein. Die anschliessende
+[gepaarte Machbarkeitsnotiz](../research/paired_transport_feasibility_2026-10-22.md)
+repariert den fuehrenden Bias durch einen bekannten Zweilaengen-Schaetzer
+und berechnet die Langblock-Varianz samt kubischem Gauss-Chaos. Endliche
+Blockunsicherheit, der echte Transportrest und Burn-in muessen vor
+neuen Zielsimulationen geklaert werden. Die PDFs bleiben unveraendert.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare

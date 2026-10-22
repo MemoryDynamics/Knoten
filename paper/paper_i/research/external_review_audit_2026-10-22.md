@@ -15,6 +15,12 @@ power calculation do not measure the same quantity. The finite-noise
 transport remainder and paired precision remain open. This audit does not
 prove that no affordable test exists.
 
+Follow-up: the [paired feasibility note](paired_transport_feasibility_2026-10-22.md)
+now specifies a two-length correction with coefficient-level bias bounds
+and calculates the long-block paired variance including third Gaussian
+chaos. Finite-block precision and the finite-noise remainder remain open;
+this does not retroactively validate the reviewed panel's sizing.
+
 ## Findings
 
 | Priority | Finding | Consequence |

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-22 (externes Transportreview gegengeprueft; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-22 (gepaarte Transportreferenz und Zweilaengen-Bias begruendet; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -62,8 +62,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [Gegencheck des externen Reviews](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
    reproduziert die Koeffizienten, findet aber im vorgeschlagenen
    Block-MSD-Panel eine Verwechslung von endlichem Lag und Langzeittransport.
-   Zuerst Observable und gepaarte Kovarianz korrekt spezifizieren;
-   daneben die echte Transport-Fehlerschranke und den Neuheitswert pruefen.
+   Die anschliessende
+   [gepaarte Machbarkeitsrechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
+   spezifiziert einen Zweilaengen-Schaetzer mit kontrolliertem
+   Koeffizientenbias und berechnet die Langblock-Varianz einschliesslich
+   des dritten Gauss-Chaos. Jetzt deren endliche-Block-Kovarianz und
+   Naeherungsfehler quantifizieren; daneben die echte Transport-
+   Fehlerschranke und den Neuheitswert pruefen. Die Langblock-Referenz
+   darf keine unbewiesene endliche-Lauf-Power ersetzen.
    Die vorgeschlagenen acht Milliarden Updates sind nicht freigegeben.
    Der hergeleitete
    summierbare Rest begruendet nur im strengeren Kontraktionsbereich den
@@ -127,10 +133,12 @@ Mittelungsdarstellung schliesst die asymptotische Momentluecke bei den
 archivierten Modellkoeffizienten und festem $H$, nicht die praktische
 Fehlertoleranz oder den Transport dort. Das externe Modellreview ist
 ausgewertet; seine Nachweisstaerke ist fuer den vorgeschlagenen Schaetzer
-nicht bestaetigt. Als naechstes die Langzeitfrage mit einem dazu passenden
-gepaarten Schaetzer samt Kovarianzrechnung verbinden. Offen bleiben die
-Transport-Fehlergrenze, der Volltextabgleich der Aging-Arbeit und ein
-unabhaengiges Fachreview. Ein Datenpanel wird dadurch nicht automatisch
+nicht bestaetigt. Ein passender Zweilaengen-Schaetzer und die gepaarte
+Langblock-Kovarianz sind jetzt analytisch bestimmt. Als naechstes den
+endlichen Blockfehler der Varianz sowie eine nutzbare nichtlineare
+Transport-Fehlergrenze zum Gesamtfehlerbudget verbinden. Der Volltextabgleich
+der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
+Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
 ## Aktueller Haltepunkt
