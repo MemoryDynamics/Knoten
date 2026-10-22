@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-21 (R0 und B1-Bestandsanalyse dokumentiert; physikalische Architekturentscheidung offen; keine neue FIFO-/P5-Autorisierung).
+Stand: 2026-10-22 (externes Transportreview gegengeprueft; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -58,8 +58,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Mittelungsdarstellung in der Stationaritaetsnotiz umfasst hingegen die
    archivierten Modellkoeffizienten fuer die Momententwicklung bei festem
    endlichem $H$. Ihre enormen Konstanten validieren weder das vorhandene
-   endliche Rauschen noch den Transport. Nun praktische Fehlertoleranz
-   und Neuheitswert dieser getrennten Aussagen pruefen. Der hergeleitete
+   endliche Rauschen noch den Transport. Der
+   [Gegencheck des externen Reviews](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
+   reproduziert die Koeffizienten, findet aber im vorgeschlagenen
+   Block-MSD-Panel eine Verwechslung von endlichem Lag und Langzeittransport.
+   Zuerst Observable und gepaarte Kovarianz korrekt spezifizieren;
+   daneben die echte Transport-Fehlerschranke und den Neuheitswert pruefen.
+   Die vorgeschlagenen acht Milliarden Updates sind nicht freigegeben.
+   Der hergeleitete
    summierbare Rest begruendet nur im strengeren Kontraktionsbereich den
    Transport-Grenztausch und einen expliziten ungekuerzten Koeffizienten.
    Kopplungsperturbation
@@ -119,8 +125,11 @@ Moment-/Transportbereich gegen die Literatur bewerten und entscheiden, ob
 die wissenschaftliche Frage damit beantwortbar ist. Die neue
 Mittelungsdarstellung schliesst die asymptotische Momentluecke bei den
 archivierten Modellkoeffizienten und festem $H$, nicht die praktische
-Fehlertoleranz oder den Transport dort. Offen bleiben diese Grenzen,
-der Volltextabgleich der Aging-Arbeit und ein
+Fehlertoleranz oder den Transport dort. Das externe Modellreview ist
+ausgewertet; seine Nachweisstaerke ist fuer den vorgeschlagenen Schaetzer
+nicht bestaetigt. Als naechstes die Langzeitfrage mit einem dazu passenden
+gepaarten Schaetzer samt Kovarianzrechnung verbinden. Offen bleiben die
+Transport-Fehlergrenze, der Volltextabgleich der Aging-Arbeit und ein
 unabhaengiges Fachreview. Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
@@ -152,6 +161,11 @@ Bereich, der keine aktive archivierte Zelle umfasst. Ein summierbarer
 Kopplungsrest schliesst dort auch den nichtlinearen Transport-Grenztausch,
 nicht jedoch die allgemeine Gueltigkeitsluecke oder den Neuheitsvergleich.
 Neue Zielsimulationen sind in diesem Arbeitsblock nicht gelaufen.
+Der externe Panelvorschlag hat noch keinen Readiness-Status: Am festen
+Review-Punkt ergibt die lineare Referenz einen Block-MSD-Bias von 37.17%
+und die korrigierte unabhaengige Groessenabschaetzung etwa 2.32 statt
+13.5 Standardabweichungen. Das ist kein Unmoeglichkeitsbeweis fuer gepaarte
+Tests und kein neuer Datenbefund.
 
 ### Separater FIFO-Haltepunkt
 

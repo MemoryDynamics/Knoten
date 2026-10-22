@@ -49,6 +49,15 @@ engen Bereich, einschliesslich eines expliziten ungekuerzten Koeffizienten.
 Numerische Transportvalidierung, Publikationsneuheit, die allgemeine
 Gueltigkeit und der separate FIFO-Horizonttransfer bleiben offen.
 
+Update 2026-10-22: Ein externes Zweitmodellreview hat einen konkreten
+Transporttest vorgeschlagen. Der
+[reproduzierbare Gegencheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
+bestaetigt dessen unendliche Koeffizienten, nicht die Panelreife:
+Block-MSD bei Lag 100 und Langzeittransport sind verschieden; der
+lineare Bias betraegt 37.17%. Korrekte unabhaengige Gaussreferenz-Skalierung
+ergibt etwa 2.32 statt 13.5 Standardabweichungen. Gepaarte Praezision und
+echter Transportrest sind offen. Kein neuer Ziellauf wurde freigegeben.
+
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |

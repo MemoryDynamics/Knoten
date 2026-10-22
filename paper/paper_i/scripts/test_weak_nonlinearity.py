@@ -8,6 +8,7 @@ import numpy as np
 import pytest
 from scipy.linalg import solve_discrete_lyapunov
 
+from review_transport_audit import audit_review_cell, gaussian_block_floor
 from weak_nonlinearity import (
     covariance_response,
     exponential_contraction_diagnostic,
@@ -15,6 +16,7 @@ from weak_nonlinearity import (
     lag_matrix,
     radius_energies,
     stationary_msd,
+    stationary_msd_response,
     transport_response,
     untruncated_transport_response,
 )
@@ -271,3 +273,109 @@ def test_invalid_infinite_transport_domains_fail_closed(
 ):
     with pytest.raises(ValueError):
         untruncated_transport_response(alpha, gain, cubic_gain, dimension)
+
+
+@pytest.mark.parametrize(
+    "alpha,horizon,gain,dimension",
+    [(0.2, 2, 0.3, 1), (0.15, 5, 0.2, 3), (0.4, 9, 0.0, 4)],
+)
+def test_fixed_lag_response_matches_independent_perturbed_matrix_covariances(
+    alpha, horizon, gain, dimension
+):
+    weights = exponential_weights(alpha, horizon)
+    matrix = lag_matrix(weights, gain)
+    _, _, perturbation = covariance_response(weights, gain, dimension)
+    lags = np.array([0, 1, 2, 7, 23, 101])
+    actual, derivative = stationary_msd_response(weights, gain, lags, dimension)
+
+    def direct_msd(operator):
+        covariance = solve_discrete_lyapunov(operator, np.ones_like(operator))
+        result = []
+        for lag in lags:
+            value = lag * covariance[0, 0]
+            for index in range(1, lag):
+                value += (
+                    2
+                    * (lag - index)
+                    * (np.linalg.matrix_power(operator, index) @ covariance)[0, 0]
+                )
+            result.append(dimension * value)
+        return np.array(result)
+
+    step = 1e-4
+    numerical = (
+        -direct_msd(matrix + 2 * step * perturbation)
+        + 8 * direct_msd(matrix + step * perturbation)
+        - 8 * direct_msd(matrix - step * perturbation)
+        + direct_msd(matrix - 2 * step * perturbation)
+    ) / (12 * step)
+    np.testing.assert_allclose(actual, direct_msd(matrix), rtol=2e-13, atol=2e-13)
+    np.testing.assert_allclose(derivative, numerical, rtol=2e-7, atol=2e-8)
+
+
+@pytest.mark.parametrize("dimension", [1, 3])
+@pytest.mark.parametrize("seeds", [1, 5])
+def test_gaussian_block_floor_reduces_to_independent_brownian_blocks(dimension, seeds):
+    blocks = 7
+    msd = 5.0 * np.arange(blocks + 1)
+    floor = gaussian_block_floor(msd, blocks, seeds, dimension)
+    assert floor["variance_inflation_lower"] == 1
+    assert floor["variance_inflation_upper"] == 1
+    assert floor["relative_se_upper"] == pytest.approx(
+        np.sqrt(2 / (dimension * seeds * blocks))
+    )
+
+
+def test_gaussian_block_floor_matches_full_correlated_quadratic_form():
+    blocks, length, dimension, seeds = 12, 3, 3, 5
+    root = -0.4
+    indices = np.arange(blocks * length)
+    increments = root ** np.abs(indices[:, None] - indices[None, :]) / (1 - root**2)
+    block_map = np.kron(np.eye(blocks), np.ones((1, length)))
+    block_covariance = block_map @ increments @ block_map.T
+    msd = np.array([increments[:n, :n].sum() for n in length * np.arange(blocks + 1)])
+    floor = gaussian_block_floor(msd, blocks, seeds, dimension)
+    variance = 2 * np.sum(block_covariance**2) / (dimension * seeds * blocks**2)
+    assert floor["relative_se_upper"] == pytest.approx(
+        np.sqrt(variance) / block_covariance[0, 0]
+    )
+    tail = np.sum(block_covariance[0, 3:] ** 2)
+    partial = gaussian_block_floor(msd[:4], blocks, seeds, dimension, tail)
+    assert partial["relative_se_lower"] <= floor["relative_se_upper"]
+    assert floor["relative_se_upper"] <= partial["relative_se_upper"]
+    assert partial["relative_se_upper"] > partial["relative_se_lower"]
+
+
+def test_reviewed_cell_does_not_conflate_block_and_long_time_transport():
+    result = audit_review_cell()
+    assert result["finite_mean_age"] == pytest.approx(97.31889850537348)
+    assert result["finite_D2"] == pytest.approx(0.30025902139879984)
+    assert result["block_D2"] == pytest.approx(0.4118720005785257)
+    assert result["relative_linear_block_bias"] == pytest.approx(0.3717223171505746)
+    assert 0.35 < result["block_to_long_time_quartic_ratio"] < 0.36
+    assert 2 < result["independent_kernel_gaussian_sizing_z"] < 3
+    assert result["omitted_block_covariance_squares_bound"] < 1e-20
+    first, second = result["kernels"]
+    assert first["infinite_relative_correction"] == pytest.approx(0.0008933257688964004)
+    assert second["infinite_relative_correction"] == pytest.approx(
+        -0.0015804994372782472
+    )
+    assert second["block_D4"] / first["block_D4"] == pytest.approx(-23 / 13)
+
+
+@pytest.mark.parametrize(
+    "msd,blocks,seeds,dimension,tail",
+    [
+        ([0, 1, 2], 0, 1, 1, 0),
+        ([0, 1, 2], 5, True, 1, 0),
+        ([0, 1, 2], 5, 1, 1.5, 0),
+        ([0, 1, 2], 5, 1, 1, None),
+        ([0, 1, 2], 5, 1, 1, -1),
+        ([0, 1, np.nan], 5, 1, 1, 0),
+        ([1, 2, 3], 5, 1, 1, 0),
+        ([0, 0, 1], 5, 1, 1, 0),
+    ],
+)
+def test_invalid_gaussian_floor_inputs_fail_closed(msd, blocks, seeds, dimension, tail):
+    with pytest.raises(ValueError):
+        gaussian_block_floor(msd, blocks, seeds, dimension, tail)

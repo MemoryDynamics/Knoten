@@ -202,19 +202,45 @@ def untruncated_transport_response(
 
 def stationary_msd(weights, gain: float, lags, dimension: int = 1):
     """Exact linear displacement variance/eps^2 from stationary increments."""
+    return stationary_msd_response(weights, gain, lags, dimension)[0]
+
+
+def stationary_msd_response(weights, gain: float, lags, dimension: int = 1):
+    """Return linear MSD/eps^2 and its derivative in t=beta*eps^2 at zero.
+
+    The second result is a fixed-lag coefficient, not the infinite-lag
+    transport response. Nonlinear validity retains the separate hypotheses.
+    """
     lags = np.asarray(lags)
     if lags.ndim != 1 or not np.issubdtype(lags.dtype, np.integer) or np.any(lags < 0):
         raise ValueError("lags must be a vector of nonnegative integers")
     matrix = lag_matrix(weights, gain)
-    covariance, _, _ = covariance_response(weights, gain, dimension)
+    covariance, derivative, perturbation = covariance_response(weights, gain, dimension)
     maximum = int(lags.max(initial=0))
     msd = np.zeros(maximum + 1)
+    response = np.zeros(maximum + 1)
     covariance_column = covariance[:, 0].copy()
+    derivative_column = derivative[:, 0].copy()
     gamma_zero = covariance_column[0]
+    derivative_zero = derivative_column[0]
     correlation_sum = weighted_sum = 0.0
+    derivative_sum = derivative_weighted_sum = 0.0
     for lag in range(1, maximum + 1):
         msd[lag] = lag * gamma_zero + 2 * (lag * correlation_sum - weighted_sum)
-        covariance_column = matrix @ covariance_column
+        response[lag] = lag * derivative_zero + 2 * (
+            lag * derivative_sum - derivative_weighted_sum
+        )
+        # Both lag operators are rank-one updates; A also shifts the history.
+        next_covariance = np.full_like(covariance_column, matrix[0] @ covariance_column)
+        next_derivative = np.full_like(
+            derivative_column,
+            matrix[0] @ derivative_column + perturbation[0] @ covariance_column,
+        )
+        next_covariance[1:] += covariance_column[:-1]
+        next_derivative[1:] += derivative_column[:-1]
+        covariance_column, derivative_column = next_covariance, next_derivative
         correlation_sum += covariance_column[0]
         weighted_sum += lag * covariance_column[0]
-    return dimension * msd[lags]
+        derivative_sum += derivative_column[0]
+        derivative_weighted_sum += lag * derivative_column[0]
+    return dimension * msd[lags], dimension * response[lags]

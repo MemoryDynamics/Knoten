@@ -530,6 +530,13 @@ metadata, not new trajectory outcomes or a search for a favorable regime.
 
 ## Verification and next decision
 
+The [2026-10-22 external-review audit](external_review_audit_2026-10-22.md)
+reproduces the closed coefficients but finds a fixed-lag/long-time
+estimand mismatch in the suggested numerical panel. A Gaussian expected
+force remainder does not replace the summable transport remainder proved
+here. Explicit finite-noise constants and paired-estimator precision
+remain required; no target run is authorized by that review.
+
 The floating-point `exponential_contraction_diagnostic` in
 [weak_nonlinearity.py](../scripts/weak_nonlinearity.py) reports the budget,
 weighted-history decay and contraction rate. It is not an interval

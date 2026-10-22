@@ -153,6 +153,17 @@ Numerische Validierung, unabhaengiges Fachreview, die allgemeine
 Gueltigkeitsfrage, FIFO-Branchtransfer und hinreichende Publikationsneuheit
 bleiben offen.
 
+Externes Modellreview vom 2026-10-21, gegengeprueft am 2026-10-22:
+Die ungekuerzten Transportkoeffizienten wurden reproduziert. Der
+[Panel-Gegencheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
+zeigt jedoch eine endliche-Lag/Langzeit-Verwechslung, einen unzulaessigen
+Transfer der Kraftrest-Diagnostik auf den Transportfehler und eine
+unvollstaendige Powerrechnung. Dies ist keine Widerlegung der
+asymptotischen Formel, aber auch kein positiver Readiness-Befund.
+Ein signifikant falsches Vorzeichen darf nach bestandenen Voraussetzungen
+nicht pauschal als inconclusive behandelt werden. Externes Modellreview
+ersetzt kein unabhaengiges menschliches Fachreview.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben

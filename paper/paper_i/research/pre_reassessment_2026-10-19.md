@@ -262,6 +262,17 @@ execution authorization or a preregistered experiment.
 
 ## Conditions before new target data
 
+Update 2026-10-22: the [external-review audit](external_review_audit_2026-10-22.md)
+reproduces the proposed cell's untruncated coefficients but rejects its
+current readiness claim. At the proposed $L=100$, raw block-MSD has a
+37.17% linear bias relative to long-time transport, and the leading kernel
+contrast is only 35.33% of its long-time value. Corrected independent
+Gaussian sizing gives about $2.32\sigma$, not $13.5\sigma$; paired precision
+is not yet calculated. The Gaussian force-remainder diagnostic remains
+distinct from a transport error bound. No proposed target budget has been
+authorized. This is a correctable design problem, not evidence that no
+informative paired test exists.
+
 The defensible candidate core is now concrete: **an explicit weak-noise
 diffusion correction for the full nonlinear, exponentially weighted
 history law, controlled by a global sufficient condition, with a

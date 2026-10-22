@@ -32,6 +32,12 @@ Fehlertoleranzen und der vollstaendige Neuheitsvergleich fehlen weiter.
 Auch diese Forschungsbefunde stellen fuer sich keine ausreichende
 Publikationsneuheit dar.
 
+Das [externe Review und sein Gegencheck](../research/external_review_audit_2026-10-22.md)
+liefern einen konkreten Testkandidaten, aber noch keine Panelreife:
+Der vorgeschlagene Block-MSD stimmt nicht mit dem Langzeittransport
+ueberein; gepaarte Unsicherheit und die echte Transport-Fehlergrenze
+muessen vor neuen Zielsimulationen geklaert werden.
+
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare
 vorbereitete Relativgleichgewichte. Existenz- und Stabilitaetsclaims dieses
