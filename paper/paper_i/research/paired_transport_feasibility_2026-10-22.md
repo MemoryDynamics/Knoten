@@ -350,8 +350,12 @@ The original long-time target remains unchanged. The corrected expectation
 addresses the estimator mismatch; it does not justify treating the
 long-block factor as exact at finite $L$. The follow-up instead bounds
 finite-sample coefficient variance conservatively. The next readiness
-step is a usable remainder for the full estimator and transport prediction,
-followed by an explicit total-error/cost decision. No new
+step was a usable remainder for the full estimator and transport prediction.
+The [2026-10-23 budget](finite_noise_transport_budget_2026-10-23.md) now
+supplies these and a fully prefilled initialization bound. The resulting
+small sufficient noise interval leaves precision/accumulation and cost
+as the practical gate; the table above records this note's earlier scope.
+No new
 FIFO/P5 evidence, gravity/quantum bridge or publication novelty follows
 from this statistical repair.
 

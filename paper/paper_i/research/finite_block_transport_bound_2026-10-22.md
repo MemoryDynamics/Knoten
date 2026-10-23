@@ -291,6 +291,14 @@ benchmarked or authorized.
 
 ## Countercheck and Remaining Gate
 
+Follow-up on 2026-10-23: an
+[explicit finite-noise budget](finite_noise_transport_budget_2026-10-23.md)
+now provides the estimator/transport remainders and a fully prefilled
+flat-start coupling listed below. It yields a small sufficient noise
+interval in real arithmetic, not a numerical implementation or rounding
+certificate. The earlier proposed noise and empty-memory startup remain
+unvalidated; the precision/cost and novelty gates remain open.
+
 For $H=2$, zero curvature and one-dimensional unit-noise increments,
 $W_n=\xi_n$ and $Z_n=-w_1\xi_{n-1}^3$. At $L=1$ exact Gaussian moments
 give $\operatorname{Var}(Q_j)=118.5w_1^2$ and zero adjacent covariance.
@@ -302,7 +310,7 @@ countercheck exactly for the relevant polynomial degrees.
 
 The new bound bypasses that approximation rather than proving it accurate.
 It closes a conservative finite-sample sampling bound for the leading
-coefficient. Remaining requirements are:
+coefficient. At the time of this note the remaining requirements were:
 
 - An explicit finite-noise bound for the normalized paired estimator's
   remainder, controlling its random error as well as its mean. A bound

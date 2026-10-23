@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-21 (R0/B1-Bestandsanalysen ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
+Stand: 2026-10-23 (Paper-I-Fehlerbudget ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -175,8 +175,16 @@ endlicher Blocklaenge. Die anschliessende
 [finite-Stichproben-Schranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
 umgeht diese Annahme mit Moment- und Kopplungsgrenzen. Sie kontrolliert
 nur den fuehrenden stationaeren Koeffizienten, nicht bereits den
-vollstaendigen nichtlinearen Schaetzer. Dessen zufaelliger Rest, die
-Transport-Fehlergrenze und Burn-in bleiben Teil des Readiness-Gates.
+vollstaendigen nichtlinearen Schaetzer. Das anschliessende
+[Gesamtfehlerbudget](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_noise_transport_budget_2026-10-23.md)
+ergaenzt explizite nichtlineare Schaetzer-/Transportreste und die Kopplung
+eines vollstaendig vorgefuellten flachen Starts. Es ergibt einen
+hinreichenden kleinen Rauschbereich in exakter Arithmetik; die numerische
+Auswertung ist kein Intervall- oder Implementierungszertifikat. Der
+Kontrast liegt am oberen Rand nur bei etwa $9.54\,10^{-10}$ des linearen
+Hintergrunds. Das belegt weder praktische Nachweisbarkeit noch deren
+Unmoeglichkeit, bestaetigt nicht $\varepsilon=0.007$ und deckt keinen
+Start mit leerem Speicher ab. Fachreview und Neuheitsvergleich fehlen.
 
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik

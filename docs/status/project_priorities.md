@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-22 (endliche Stichprobengrenze fuer den fuehrenden Transportkontrast; physikalische Architekturentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-23 (explizites nichtlineares Fehlerbudget; numerische Nachweisbarkeit offen; keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -69,12 +69,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    des dritten Gauss-Chaos. Eine anschliessende
    [finite-Stichproben-Schranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
    kontrolliert den fuehrenden Koeffizienten bei endlicher Blocklaenge,
-   einschliesslich Block- und Koordinatenabhaengigkeit. Jetzt den
-   nichtlinearen Rest des gepaarten Schaetzers quantitativ begrenzen,
-   sowohl seinen Zufallsfehler als auch seinen Mittelwert. Zusammen mit
-   Transportrest, Initialisierung, numerischer Praezision und Neuheitswert
-   ergibt dies erst das Readiness-Gate. Die Koeffizientenschranke ersetzt
-   keine endliche-Rausch-Power und keinen praktischen Kostencheck.
+   einschliesslich Block- und Koordinatenabhaengigkeit. Das neue
+   [Gesamtfehlerbudget](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_noise_transport_budget_2026-10-23.md)
+   ergaenzt den zufaelligen nichtlinearen Schaetzerrest, den Transportrest
+   und eine vollstaendig vorgefuellte flache Anfangshistorie. Fuer eine
+   illustrative 10%-Grenze ergibt sich ein hinreichender Rauschbereich
+   bis etwa $4.46\,10^{-6}$; dort ist der Kontrast nur etwa $9.54\,10^{-10}$
+   des linearen Hintergrunds. Jetzt eine ausloeschungsarme gepaarte
+   Restdarstellung, unabhaengige Hochpraezisions-Gegenchecks und den
+   Rundungs-/Akkumulations-/Kostenvertrag targetfrei pruefen. Keine
+   nachtraegliche Subtraktion grosser unabhaengig gerundeter Trajektorien
+   als validierte Methode behandeln. Der vorgefuellte Start muss explizit
+   implementiert und geprueft werden; der bisherige leere Start ist nicht
+   abgedeckt. Das Budget ist kein Intervallzertifikat, Fachreview oder
+   Neuheitsbeweis. Erst mit diesen Pruefungen und dem Literaturabgleich
+   eine praktische Machbarkeitsentscheidung treffen.
    Die vorgeschlagenen acht Milliarden Updates sind nicht freigegeben.
    Der hergeleitete
    summierbare Rest begruendet nur im strengeren Kontraktionsbereich den
@@ -141,9 +150,12 @@ ausgewertet; seine Nachweisstaerke ist fuer den vorgeschlagenen Schaetzer
 nicht bestaetigt. Ein passender Zweilaengen-Schaetzer und die gepaarte
 Langblock-Kovarianz sind analytisch bestimmt; fuer den fuehrenden
 Koeffizienten liegt nun auch eine konservative endliche Stichprobengrenze
-vor. Als naechstes den zufaelligen Schaetzerrest bei endlichem Rauschen,
-eine nutzbare Transport-Fehlergrenze und Initialisierung zum Gesamtfehlerbudget
-verbinden. Der Volltextabgleich
+vor. Das explizite Gesamtfehlerbudget schliesst die analytische Uebertragung
+auf endliches Rauschen bei festem $H$ und vollstaendig vorgefuelltem Start,
+nicht die Maschinenarithmetik. Als naechstes eine targetfreie
+Praezisions-/Kostenentscheidung fuer die sehr kleine gepaarte Differenz
+erarbeiten; keine neue Rauschwahl oder Produktionsfreigabe aus der
+hinreichenden Schranke ableiten. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

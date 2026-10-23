@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-22 (finite Stichprobengrenze fuer den fuehrenden gepaarten Koeffizienten; Produktionsbefunde unveraendert).
+Stand: 2026-10-23 (nichtlineares Fehlerbudget mit vorgefuelltem Start; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -65,9 +65,17 @@ begrenzt Sampling plus Blockbias fuer den fuehrenden Koeffizienten beim
 diskutierten Budget auf einen konservativen relativen 95%-Radius unter
 8.8%. Dies ist eine analytische Referenzrechnung in Gleitkommaarithmetik,
 keine Daten-Konfidenz oder Fehlergarantie fuer endliches Rauschen.
-Der zufaellige nichtlineare Schaetzerrest, der echte Transportrest und
-praktische Initialisierung sind weiter offen.
-Keine neue Zielsimulation und keine Panelautorisierung.
+Die [Fortsetzung vom 2026-10-23](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_noise_transport_budget_2026-10-23.md)
+liefert explizite Schranken fuer zufaelligen Schaetzerrest, Transportrest
+und einen vollstaendig vorgefuellten flachen Start. Ein illustratives
+10%-Gesamtbudget bei 95% Ueberdeckung ist in exakter Arithmetik fuer einen
+sehr kleinen Rauschbereich hinreichend kontrolliert. Am oberen Rand
+$\varepsilon\simeq4.46\,10^{-6}$ betraegt der fuehrende Kontrast nur
+etwa $9.54\,10^{-10}$ des linearen Beitrags. Die Gleitkommaauswertung
+ist kein Intervallzertifikat und bestaetigt weder die fruehere Rauschwahl
+$0.007$ noch den bisherigen leeren Speicherstart. Numerische
+Differenzdarstellung, Akkumulationsfehler, Laufkosten und unabhaengiges
+Fachreview bleiben offen. Keine neue Zielsimulation oder Panelautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

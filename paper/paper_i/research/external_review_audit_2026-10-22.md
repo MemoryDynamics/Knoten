@@ -11,8 +11,9 @@ reproduced here.
 **Decision:** retain the proposed cell as an unapproved design candidate.
 Do not freeze or execute the proposed eight-billion-update panel yet.
 The coefficient checks are reproducible, but the proposed estimator and
-power calculation do not measure the same quantity. The finite-noise
-transport remainder and paired precision remain open. This audit does not
+power calculation do not measure the same quantity. At the time of this
+audit the finite-noise transport remainder and paired precision were open.
+This audit does not
 prove that no affordable test exists.
 
 Follow-up: the [paired feasibility note](paired_transport_feasibility_2026-10-22.md)
@@ -20,8 +21,11 @@ now specifies a two-length correction with coefficient-level bias bounds
 and calculates the long-block paired variance including third Gaussian
 chaos. A later [finite-sample bound](finite_block_transport_bound_2026-10-22.md)
 controls the leading coefficient without a long-block approximation.
-Finite-noise precision and the nonlinear remainder remain open; neither
-follow-up retroactively validates the reviewed panel's sizing.
+An [explicit finite-noise budget](finite_noise_transport_budget_2026-10-23.md)
+subsequently supplies nonlinear estimator/transport remainders for a fully
+prefilled start, but only a very small sufficient noise interval. Numerical
+precision and cost remain open, and $0.007$ is not validated. None of
+these follow-ups retroactively validates the reviewed panel's sizing.
 
 ## Findings
 

@@ -1,6 +1,6 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-22.
+Stand: 2026-10-23.
 
 ## Wissenschaftlicher Reifegrad
 
@@ -41,9 +41,15 @@ repariert den fuehrenden Bias durch einen bekannten Zweilaengen-Schaetzer
 und berechnet die Langblock-Varianz samt kubischem Gauss-Chaos. Eine
 [Ergaenzung](../research/finite_block_transport_bound_2026-10-22.md)
 begrenzt die endliche Stichprobenunsicherheit des fuehrenden Koeffizienten,
-ohne unabhaengige Bloecke anzunehmen. Der nichtlineare Schaetzerrest,
-der echte Transportrest und Burn-in muessen vor neuen Zielsimulationen
-geklaert werden. Die PDFs bleiben unveraendert.
+ohne unabhaengige Bloecke anzunehmen. Das neue
+[Gesamtfehlerbudget](../research/finite_noise_transport_budget_2026-10-23.md)
+ergibt mit expliziten Schaetzer-/Transportresten und vollstaendig
+vorgefuelltem Start einen hinreichenden kleinen Rauschbereich. Es
+validiert keine Maschinenarithmetik: Der Kontrast am oberen Rand ist
+nur etwa ein Milliardstel des linearen Hintergrunds. Vor Zielsimulationen
+bleiben eine ausloeschungsarme Implementierung, Hochpraezisions- und
+Kostenchecks, Fachreview und Neuheitsvergleich erforderlich. Der bisherige
+leere Speicherstart ist nicht abgedeckt. Die PDFs bleiben unveraendert.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
 Die eigenstaendige FIFO-/Rotating-Wave-Arbeit behandelt nichtlineare

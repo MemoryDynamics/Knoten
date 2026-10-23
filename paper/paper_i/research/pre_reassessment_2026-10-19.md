@@ -280,9 +280,15 @@ contributes to this variance even though it drops out of the first mean
 correction. Neither the statistical method nor this reference calculation
 is sufficient publication novelty. A further
 [finite-sample bound](finite_block_transport_bound_2026-10-22.md) now
-controls sampling of the leading coefficient at finite block length;
-finite-noise estimator/transport accuracy and practical initialization
-still need to be controlled.
+controls sampling of the leading coefficient at finite block length.
+The [explicit finite-noise budget](finite_noise_transport_budget_2026-10-23.md)
+then controls the random estimator/transport remainders and a fully
+prefilled flat start in real arithmetic. Its sufficient noise interval
+has an upper endpoint near $4.46\,10^{-6}$, with leading contrast about
+$9.54\,10^{-10}$ of the common linear background. Practical precision,
+initialization implementation and cost remain unvalidated; the former
+$0.007$ choice is not justified by this conservative bound. This is no
+new measured evidence or novelty claim.
 
 The defensible candidate core is now concrete: **an explicit weak-noise
 diffusion correction for the full nonlinear, exponentially weighted
