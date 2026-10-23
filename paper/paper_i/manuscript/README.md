@@ -46,9 +46,11 @@ ohne unabhaengige Bloecke anzunehmen. Das neue
 ergibt mit expliziten Schaetzer-/Transportresten und vollstaendig
 vorgefuelltem Start einen hinreichenden kleinen Rauschbereich. Es
 validiert keine Maschinenarithmetik: Der Kontrast am oberen Rand ist
-nur etwa ein Milliardstel des linearen Hintergrunds. Vor Zielsimulationen
-bleiben eine ausloeschungsarme Implementierung, Hochpraezisions- und
-Kostenchecks, Fachreview und Neuheitsvergleich erforderlich. Der bisherige
+nur etwa ein Milliardstel des linearen Hintergrunds. Eine
+[exakte Restdarstellung](../research/paired_residual_precision_2026-10-23.md)
+besteht inzwischen begrenzte Hochpraezisionschecks. Vor Zielsimulationen
+bleiben Akkumulationskontrolle, eine vertretbare Kostenentscheidung,
+Fachreview und Neuheitsvergleich erforderlich. Der bisherige
 leere Speicherstart ist nicht abgedeckt. Die PDFs bleiben unveraendert.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.

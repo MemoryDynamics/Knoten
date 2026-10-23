@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-23 (nichtlineares Fehlerbudget mit vorgefuelltem Start; Produktionsbefunde unveraendert).
+Stand: 2026-10-23 (Fehlerbudget und begrenzte Praezisionschecks; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -73,9 +73,17 @@ sehr kleinen Rauschbereich hinreichend kontrolliert. Am oberen Rand
 $\varepsilon\simeq4.46\,10^{-6}$ betraegt der fuehrende Kontrast nur
 etwa $9.54\,10^{-10}$ des linearen Beitrags. Die Gleitkommaauswertung
 ist kein Intervallzertifikat und bestaetigt weder die fruehere Rauschwahl
-$0.007$ noch den bisherigen leeren Speicherstart. Numerische
-Differenzdarstellung, Akkumulationsfehler, Laufkosten und unabhaengiges
-Fachreview bleiben offen. Keine neue Zielsimulation oder Panelautorisierung.
+$0.007$ noch den bisherigen leeren Speicherstart. Die numerische
+Differenzdarstellung wurde anschliessend als
+[exakte skalierte Restrekursion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_residual_precision_2026-10-23.md)
+geprueft: Kleine deterministische Historien und ein H=600-Ein-Schritt-Test
+stimmen mit direkten 80-/110-stelligen Vollkraftrechnungen ueberein.
+Das ist keine Langlaufgarantie. Der reine Referenz-Mikrobenchmark misst
+etwa 0.261 ms pro Paarupdate; naive serielle Hochrechnung ergibt rund
+145 Stunden fuer die diskutierte Paarzahl, ohne RNG/Statistik/I/O.
+Akkumulationsfehler, praktische Kostenentscheidung, Neuheitsvergleich
+und unabhaengiges Fachreview bleiben offen. Keine neue Zielsimulation
+oder Panelautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

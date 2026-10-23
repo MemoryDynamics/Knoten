@@ -290,6 +290,16 @@ initialization implementation and cost remain unvalidated; the former
 $0.007$ choice is not justified by this conservative bound. This is no
 new measured evidence or novelty claim.
 
+An [exact scaled-residual calculation](paired_residual_precision_2026-10-23.md)
+subsequently passes bounded high-precision controls and measures reference
+code cost. Cancellation can be avoided without truncating the force;
+long-run accumulation and an affordable protocol are not yet validated.
+This methodological progress must not be substituted for a novel physical
+claim. Source recheck on 2026-10-23: the official SSRN delivery endpoint
+still returns HTTP 403, and the accessible CIRM description remains
+abstract-level evidence. No full-text comparison is claimed from either
+the search result or the video description.
+
 The defensible candidate core is now concrete: **an explicit weak-noise
 diffusion correction for the full nonlinear, exponentially weighted
 history law, controlled by a global sufficient condition, with a

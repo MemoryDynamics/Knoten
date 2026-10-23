@@ -280,6 +280,13 @@ remains unauthorized; no simulation has been performed here.
 
 ## Verification and scope
 
+Follow-up: the [exact scaled-residual implementation](paired_residual_precision_2026-10-23.md)
+passes small deterministic history and single-step high-precision checks,
+including $H=600$. It avoids direct subtraction of the common linear
+background, but supplies no long-run accumulation certificate. Its
+unoptimized fixed-state cost measurement also cautions against executing
+the proposed count without a separate feasibility decision.
+
 [finite_noise_transport.py](../scripts/finite_noise_transport.py) evaluates
 the displayed constants. The
 [tests](../scripts/test_finite_noise_transport.py) check Gaussian moments

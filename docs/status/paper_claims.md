@@ -186,6 +186,15 @@ Hintergrunds. Das belegt weder praktische Nachweisbarkeit noch deren
 Unmoeglichkeit, bestaetigt nicht $\varepsilon=0.007$ und deckt keinen
 Start mit leerem Speicher ab. Fachreview und Neuheitsvergleich fehlen.
 
+Die [exakte Restrekursion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_residual_precision_2026-10-23.md)
+umgeht die Subtraktion des gemeinsamen linearen Hintergrunds und besteht
+kleine deterministische Hochpraezisions-Gegenchecks, einschliesslich eines
+H=600-Ein-Schritt-Tests. Das ist eine numerische Methodenpruefung, kein
+stochastischer Transportbefund oder Langlauf-Fehlerzertifikat. Der
+Referenzcode ist im Mikrobenchmark fuer Milliarden Updates teuer;
+eine optimierte Laufzeit wurde nicht gemessen. Keine neue Publikations-
+oder Physikbehauptung folgt daraus.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben

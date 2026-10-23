@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-23 (explizites nichtlineares Fehlerbudget; numerische Nachweisbarkeit offen; keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-23 (Fehlerbudget und ausloeschungsarme Restdarstellung; Langlauf-/Kostenentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -75,12 +75,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    und eine vollstaendig vorgefuellte flache Anfangshistorie. Fuer eine
    illustrative 10%-Grenze ergibt sich ein hinreichender Rauschbereich
    bis etwa $4.46\,10^{-6}$; dort ist der Kontrast nur etwa $9.54\,10^{-10}$
-   des linearen Hintergrunds. Jetzt eine ausloeschungsarme gepaarte
-   Restdarstellung, unabhaengige Hochpraezisions-Gegenchecks und den
-   Rundungs-/Akkumulations-/Kostenvertrag targetfrei pruefen. Keine
+   des linearen Hintergrunds. Die anschliessende
+   [exakte Restdarstellung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_residual_precision_2026-10-23.md)
+   besteht kleine deterministische Historien- und H=600-Ein-Schritt-
+   Gegenchecks gegen 80-/110-stellige Vollkraftrechnungen. Damit ist die
+   kleine Differenz nicht schon ein numerisches Ausschlussargument. Der unoptimierte
+   Referenzcode ergab jedoch etwa 0.261 ms pro Paarupdate, naiv seriell
+   rund 145 Stunden fuer die diskutierte Paarzahl ohne RNG/Statistik/I/O.
+   Das ist keine Laufzeitgarantie. Jetzt Akkumulation und Summation
+   begrenzt pruefen und mit Kosten sowie Neuheitswert ueber einen
+   vertretbaren Test entscheiden, nicht automatisch einen grossen Runner
+   optimieren oder starten. Keine
    nachtraegliche Subtraktion grosser unabhaengig gerundeter Trajektorien
-   als validierte Methode behandeln. Der vorgefuellte Start muss explizit
-   implementiert und geprueft werden; der bisherige leere Start ist nicht
+   als validierte Methode behandeln. Der vorgefuellte Start ist im
+   Methodenprototyp abgebildet, nicht im Produktionsrunner; dessen leerer Start ist nicht
    abgedeckt. Das Budget ist kein Intervallzertifikat, Fachreview oder
    Neuheitsbeweis. Erst mit diesen Pruefungen und dem Literaturabgleich
    eine praktische Machbarkeitsentscheidung treffen.
@@ -152,10 +160,12 @@ Langblock-Kovarianz sind analytisch bestimmt; fuer den fuehrenden
 Koeffizienten liegt nun auch eine konservative endliche Stichprobengrenze
 vor. Das explizite Gesamtfehlerbudget schliesst die analytische Uebertragung
 auf endliches Rauschen bei festem $H$ und vollstaendig vorgefuelltem Start,
-nicht die Maschinenarithmetik. Als naechstes eine targetfreie
-Praezisions-/Kostenentscheidung fuer die sehr kleine gepaarte Differenz
-erarbeiten; keine neue Rauschwahl oder Produktionsfreigabe aus der
-hinreichenden Schranke ableiten. Der Volltextabgleich
+nicht die Maschinenarithmetik. Die exakte ausloeschungsarme Darstellung
+besteht begrenzte Hochpraezisionschecks; der Referenzcode ist fuer die
+diskutierte Paarzahl teuer. Als naechstes die verbleibende
+Akkumulations-/Summationskontrolle und den wissenschaftlichen Nutzen in
+eine begrenzte Machbarkeitsentscheidung ueberfuehren, bevor weitere
+Implementierungsarbeit oder eine Rauschwahl festgelegt wird. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

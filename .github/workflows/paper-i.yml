@@ -35,4 +35,4 @@ jobs:
       - name: Install local-response dependencies
         run: python -m pip install -r paper/paper_i/scripts/requirements-research.txt
       - name: Check synthetic transport and perturbation controls
-        run: python -m pytest paper/paper_i/scripts/test_weak_nonlinearity.py paper/paper_i/scripts/test_finite_memory_stationarity.py paper/paper_i/scripts/test_paired_transport.py paper/paper_i/scripts/test_finite_block_transport.py paper/paper_i/scripts/test_finite_noise_transport.py -q
+        run: python -m pytest paper/paper_i/scripts/test_weak_nonlinearity.py paper/paper_i/scripts/test_finite_memory_stationarity.py paper/paper_i/scripts/test_paired_transport.py paper/paper_i/scripts/test_finite_block_transport.py paper/paper_i/scripts/test_finite_noise_transport.py paper/paper_i/scripts/test_paired_residual_precision.py -q
