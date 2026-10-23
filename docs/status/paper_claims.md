@@ -195,6 +195,16 @@ Referenzcode ist im Mikrobenchmark fuer Milliarden Updates teuer;
 eine optimierte Laufzeit wurde nicht gemessen. Keine neue Publikations-
 oder Physikbehauptung folgt daraus.
 
+Die [Fehlerfortpflanzungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_error_propagation_2026-10-23.md)
+kontrolliert bedingt die Verstaerkung vorgegebener lokaler Defekte. Der
+separate Summationsbaum begrenzt nur Rundungsfehler relativ zu seinen
+binary64-Eingaben. Beides ist kein Langlaufzertifikat: lokale Fehler,
+Laggrenzen und die vollstaendige Statistik-/Innovationsschnittstelle
+fehlen als validierte Voraussetzungen. Die neue
+[Entscheidungsvorlage](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paper_i_decision_brief_2026-10-23.md)
+empfiehlt daher eine fachliche Bewertung des analytischen Beitrags vor
+weiterer Runneroptimierung; sie behauptet keine Publikationsreife.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-23 (Fehlerbudget und ausloeschungsarme Restdarstellung; Langlauf-/Kostenentscheidung offen; keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-23 (Paper-I-Entscheidungsvorlage und bedingte Fehlerfortpflanzung; kein Langlaufzertifikat, keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -82,10 +82,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    kleine Differenz nicht schon ein numerisches Ausschlussargument. Der unoptimierte
    Referenzcode ergab jedoch etwa 0.261 ms pro Paarupdate, naiv seriell
    rund 145 Stunden fuer die diskutierte Paarzahl ohne RNG/Statistik/I/O.
-   Das ist keine Laufzeitgarantie. Jetzt Akkumulation und Summation
-   begrenzt pruefen und mit Kosten sowie Neuheitswert ueber einen
-   vertretbaren Test entscheiden, nicht automatisch einen grossen Runner
-   optimieren oder starten. Keine
+   Das ist keine Laufzeitgarantie. Die anschliessende
+   [begrenzte Fehlerfortpflanzungspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_error_propagation_2026-10-23.md)
+   liefert bedingte Zustandsschranken und einen separat begrenzten
+   Summationsbaum. Lokale Updatefehler, Laggrenzen und die vollstaendige
+   Statistik-/Innovationsschnittstelle sind damit nicht validiert. Die
+   [kurze Entscheidungsvorlage](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paper_i_decision_brief_2026-10-23.md)
+   verdichtet Hauptresultat, Literaturgrenzen und Nachweisaufwand fuer
+   die fachliche Diskussion. Jetzt diesen Beitragskern bewerten, bevor
+   weitere Runneroptimierung oder ein grosser Test beauftragt wird. Keine
    nachtraegliche Subtraktion grosser unabhaengig gerundeter Trajektorien
    als validierte Methode behandeln. Der vorgefuellte Start ist im
    Methodenprototyp abgebildet, nicht im Produktionsrunner; dessen leerer Start ist nicht
@@ -162,10 +167,12 @@ vor. Das explizite Gesamtfehlerbudget schliesst die analytische Uebertragung
 auf endliches Rauschen bei festem $H$ und vollstaendig vorgefuelltem Start,
 nicht die Maschinenarithmetik. Die exakte ausloeschungsarme Darstellung
 besteht begrenzte Hochpraezisionschecks; der Referenzcode ist fuer die
-diskutierte Paarzahl teuer. Als naechstes die verbleibende
-Akkumulations-/Summationskontrolle und den wissenschaftlichen Nutzen in
-eine begrenzte Machbarkeitsentscheidung ueberfuehren, bevor weitere
-Implementierungsarbeit oder eine Rauschwahl festgelegt wird. Der Volltextabgleich
+diskutierte Paarzahl teuer. Die neue bedingte Fehlerfortpflanzung begrenzt
+die Verstaerkung vorgegebener lokaler Fehler, nicht deren tatsaechliche
+Groesse im Simulator. Der Summationsbaum hat einen separaten Fehlervertrag.
+Die Entscheidungsvorlage ist nun fuer die fachliche Diskussion vorbereitet:
+Beitragskern und Gueltigkeitsargument bewerten, bevor weitere
+Runnerimplementierung oder eine Rauschwahl festgelegt wird. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

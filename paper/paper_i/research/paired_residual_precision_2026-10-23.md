@@ -7,6 +7,12 @@ made the leading contrast about a billion times smaller than its common
 linear background at the sufficient interval's upper endpoint. This note
 tests whether subtracting that background is an avoidable numerical loss.
 
+Follow-up: the [conditional error-propagation audit](paired_error_propagation_2026-10-23.md)
+now gives positive state-error envelopes and a separately bounded scalar
+reduction. Validated local update defects, lag caps and the complete
+statistic arithmetic remain missing. The [decision brief](paper_i_decision_brief_2026-10-23.md)
+therefore prioritizes scientific assessment before more runner optimization.
+
 ## Exact force and state transformation
 
 For $K(u)=A_r e^{-|u|^2/(2s_r^2)}-A_a e^{-|u|^2/(2s_a^2)}$, put

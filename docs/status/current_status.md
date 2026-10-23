@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-23 (Fehlerbudget und begrenzte Praezisionschecks; Produktionsbefunde unveraendert).
+Stand: 2026-10-23 (Entscheidungsvorlage und bedingte Fehlerfortpflanzung; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -81,9 +81,16 @@ stimmen mit direkten 80-/110-stelligen Vollkraftrechnungen ueberein.
 Das ist keine Langlaufgarantie. Der reine Referenz-Mikrobenchmark misst
 etwa 0.261 ms pro Paarupdate; naive serielle Hochrechnung ergibt rund
 145 Stunden fuer die diskutierte Paarzahl, ohne RNG/Statistik/I/O.
-Akkumulationsfehler, praktische Kostenentscheidung, Neuheitsvergleich
-und unabhaengiges Fachreview bleiben offen. Keine neue Zielsimulation
-oder Panelautorisierung.
+Die [bedingte Fehlerfortpflanzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_error_propagation_2026-10-23.md)
+liefert inzwischen zeituniforme Zustandsschranken fuer vorgegebene lokale
+Defekte und Laggrenzen sowie eine separat begrenzte skalare Mittelung.
+Die benoetigten lokalen Fehlergrenzen des Simulators und dessen gesamte
+Statistik-/Innovationsschnittstelle bleiben unvalidiert. Eine
+[Entscheidungsvorlage fuer die fachliche Diskussion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paper_i_decision_brief_2026-10-23.md)
+fasst Resultatkandidat, Literaturabgrenzung und Aufwand zusammen. Sie ist
+kein Fachreview und wurde nicht versendet. Praktische Kostenentscheidung,
+Neuheitsvergleich und unabhaengiges Fachreview bleiben offen. Keine neue
+Zielsimulation oder Panelautorisierung.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

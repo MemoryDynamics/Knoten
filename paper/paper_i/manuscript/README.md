@@ -48,9 +48,15 @@ vorgefuelltem Start einen hinreichenden kleinen Rauschbereich. Es
 validiert keine Maschinenarithmetik: Der Kontrast am oberen Rand ist
 nur etwa ein Milliardstel des linearen Hintergrunds. Eine
 [exakte Restdarstellung](../research/paired_residual_precision_2026-10-23.md)
-besteht inzwischen begrenzte Hochpraezisionschecks. Vor Zielsimulationen
-bleiben Akkumulationskontrolle, eine vertretbare Kostenentscheidung,
-Fachreview und Neuheitsvergleich erforderlich. Der bisherige
+besteht inzwischen begrenzte Hochpraezisionschecks. Die anschliessende
+[Fehlerfortpflanzungsnotiz](../research/paired_error_propagation_2026-10-23.md)
+begrenzt die Verstaerkung vorgegebener lokaler Defekte und separat die
+skalare Mittelung, nicht die gesamte Simulatorarithmetik. Die
+[Entscheidungsvorlage](../research/paper_i_decision_brief_2026-10-23.md)
+fasst den analytischen Beitragskern fuer eine fachliche Diskussion
+zusammen. Vor Zielsimulationen bleiben validierte lokale Fehler und
+Laggrenzen, eine vertretbare Kostenentscheidung, Fachreview und
+Neuheitsvergleich erforderlich. Der bisherige
 leere Speicherstart ist nicht abgedeckt. Die PDFs bleiben unveraendert.
 
 Paper I behandelt den kontrollierten stochastischen Relaxationsbefund.
