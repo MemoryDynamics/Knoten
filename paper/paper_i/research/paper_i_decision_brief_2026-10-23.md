@@ -1,6 +1,6 @@
 # Paper I: Entscheidungsvorlage zum wissenschaftlichen Kern
 
-Stand: 2026-10-23. Interne Bewertung fuer die Diskussion mit Olaf, kein
+Stand: 2026-10-24. Interne Bewertung fuer die Diskussion mit Olaf, kein
 Fachgutachten und keine Einreichungs- oder Simulationsfreigabe. Die
 [Projektprioritaeten](../../../docs/status/project_priorities.md) bleiben
 die einzige aktive Arbeitsliste. Die Baseline vom 2026-10-09 bleibt erhalten.
@@ -11,6 +11,13 @@ die einzige aktive Arbeitsliste. Die Baseline vom 2026-10-09 bleibt erhalten.
 Transporttest entscheiden.** Die Frage ist inzwischen praezise genug
 fuer eine Diskussion; ihre Publikationsneuheit ist noch nicht belegt.
 Weitere Runneroptimierung vor dieser Bewertung ist nicht priorisiert.
+
+Der neue [Vergleich mit statistischer Linearisierung](gaussian_projection_audit_2026-10-24.md)
+verschaerft die Frage: Die bekannte Gaussprojektion reproduziert den
+vollstaendigen ersten Transportkorrekturterm. Der moegliche Mehrwert liegt
+damit im kontrollierten Gueltigkeitsnachweis, nicht in einem von dieser
+Naeherung unterscheidbaren $D_4$-Koeffizienten. Auch rigorose
+Linearisierungstheorie existiert bereits; ihr genauer Ueberlapp bleibt zu pruefen.
 
 Die Leitfrage lautet: **Wann reicht gleiche lokale Kernelkruemmung nicht
 mehr aus, um den Langzeittransport vorherzusagen, und laesst sich die
@@ -113,9 +120,10 @@ umgekehrt eine fehlende Neuheit nicht ersetzen.
 
 ## Drei Fragen fuer die fachliche Diskussion
 
-1. Ist der kontrollierte Transport-Grenztausch samt explizitem
-   kernelabhaengigem Koeffizienten ein substanzieller Beitrag gegenueber
-   den naechsten Arbeiten, oder eine weitgehend routinemaessige Anwendung?
+1. Ist die kontrollierte Gueltigkeit des hier bereits durch statistische
+   Linearisierung reproduzierbaren Koeffizienten, insbesondere der
+   Transport-Grenztausch und das ungekuerzte Gedaechtnis, ein substanzieller
+   Beitrag gegenueber bestehenden rigorosen Naeherungsverfahren?
 2. Welche Luecke sieht der Leser in der stationaeren Herleitung und
    ihrer Gueltigkeitsdomain? Besonders kritisch: schwaches Rauschen,
    langer Beobachtungszeitraum und unendliches Gedaechtnis.

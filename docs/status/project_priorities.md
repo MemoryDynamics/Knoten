@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-23 (Paper-I-Entscheidungsvorlage und bedingte Fehlerfortpflanzung; kein Langlaufzertifikat, keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-24 (Paper-I-Koeffizient durch bekannte Gaussprojektion reproduziert; Gueltigkeitsbeitrag bewerten, keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -46,6 +46,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Die bereits formale erste nichtlineare Korrektur als eigene
    Publikationshypothese samt Gueltigkeitsgrenze weiter pruefen; sie ist
    kein nachgewiesener Schritt zu Gravitation oder Standardmodell.
+   Der [Gaussprojektions-Audit vom 2026-10-24](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/gaussian_projection_audit_2026-10-24.md)
+   reproduziert den gesamten ersten Transportkoeffizienten mit bekannter
+   statistischer Linearisierung. Ein Mittelwerttest von $D_4$ unterscheidet
+   diese Erklaerungen daher nicht. Jetzt den kontrollierten Gueltigkeits-
+   und Grenzwertbeitrag gegen bestehende rigorose Naeherungstheorie
+   bewerten; nicht automatisch auf $D_6$ ausweichen oder den Test vergroessern.
    Eine [neue analytische Notiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
    begruendet stationaere relative Existenz fuer festes endliches $H$ und
    positives Rauschen. Ein exaktes Koexistenzbeispiel zeigt zugleich, dass
@@ -172,7 +178,9 @@ die Verstaerkung vorgegebener lokaler Fehler, nicht deren tatsaechliche
 Groesse im Simulator. Der Summationsbaum hat einen separaten Fehlervertrag.
 Die Entscheidungsvorlage ist nun fuer die fachliche Diskussion vorbereitet:
 Beitragskern und Gueltigkeitsargument bewerten, bevor weitere
-Runnerimplementierung oder eine Rauschwahl festgelegt wird. Der Volltextabgleich
+Runnerimplementierung oder eine Rauschwahl festgelegt wird. Die bekannte
+Gaussprojektion reproduziert inzwischen nachweislich denselben $D_4$;
+ein reiner Mittelwertvergleich loest die Neuheitsfrage nicht. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

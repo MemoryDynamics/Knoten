@@ -20,6 +20,15 @@ the same relative cloud and transport, and can that failure be predicted
 without fitting the nonlinear data?** The candidate has not passed a
 complete novelty review or a prospective numerical test.
 
+Update 2026-10-24: a [Gaussian-projection countercheck](gaussian_projection_audit_2026-10-24.md)
+now reproduces the entire first transport correction using established
+statistical linearization, including the matched-kernel sign and ratio.
+This is a specific coefficient identity, not proof of prior publication
+of our full theorem. The remaining candidate contribution is controlled
+validity in the stated memory/transport domain; its overlap with existing
+rigorous linearization theory must also be assessed. A mean-$D_4$ test
+alone cannot discriminate the result from this known approximation.
+
 ## Source and claim ledger
 
 Initial sources checked on 2026-10-19; the additions below are dated
@@ -35,6 +44,8 @@ proof that it is absent from the literature.
 | [Sarkar, PRE 112, 054111 (2025)](https://journals.aps.org/pre/pdf/10.1103/t7nk-4p57), Secs. II B--C, Eqs. (1)--(3) | A noisy particle writes a fading Gaussian scalar imprint and responds to its gradient; the paper reports structured motion. | Particularly close topical precedent, absent from the frozen bibliography. Its equations include both a convolutional field source and intrinsic velocity memory. These extra temporal filters cannot be silently removed to declare identical models. Its coherence/energy interpretations are source-reported, not adopted or reproduced here. |
 | [Kopp and Klapp, arXiv:2210.03182v3](https://arxiv.org/pdf/2210.03182), Secs. II--III, Eqs. (1)--(5) | Overdamped Brownian motion with a nonlinear finite-range Gaussian force depending on a delayed position; linearization is explicitly separated from nonlinear behavior. | A single discrete delay and repulsive feedback differ from our distributed, net-attractive history. Nonlinear Gaussian memory feedback and comparing its linear/nonlinear transport are nevertheless not new categories. |
 | [Newman and Grima, PRE 70, 051916 (2004), author-uploaded full text](https://www.researchgate.net/publication/8128610_Many-body_theory_of_chemotactic_cell-cell_interactions), abstract, Sec. II and Sec. V inspected 2026-10-21 | Langevin chemotaxis with a diffusing, decaying field; explicit coupling-perturbation corrections to diffusion, including a second-order calculation in one dimension. | Perturbatively corrected memory-mediated diffusion is not a new category either. Their expansion parameter is chemotactic coupling, not our noise amplitude. The age-dependent heat kernel is not our fixed-width Gaussian mixture; no coefficient identity follows without a model and limit mapping. |
+| [Katayama, ECC 2013, Section III, Proposition 1, Eq. (11), Table I](https://skoge.folk.ntnu.no/prost/proceedings/ecc-2013/data/papers/0306.pdf), inspected 2026-10-24 | Gaussian minimum-mean-square linearization uses the expected Jacobian; the cubic example retains cross-covariance but omits residual variance. | Applying this standard projection to our full Gaussian force reproduces our $D_4$ exactly. This is our explicit specialization, not a transport theorem attributed to the filtering paper. |
+| [Bernard and Wu, Journal of Applied Probability 35 (1998), 718--730](https://doi.org/10.1239/jap/1032265219), publisher abstract | The authors report rigorous linearization principles using entropy and large deviations. | Prevents a generic claim to the first rigorous justification. Full theorem-level overlap with our small-noise memory result remains unverified; the abstract is not a substitute for it. |
 
 On 2026-10-21 the Kopp--Klapp comparison was extended to Sec. IV,
 Eqs. (19)--(22): their analytical transport estimate expands in small

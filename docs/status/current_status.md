@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-23 (Entscheidungsvorlage und bedingte Fehlerfortpflanzung; Produktionsbefunde unveraendert).
+Stand: 2026-10-24 (Gaussprojektion reproduziert den ersten Transportkoeffizienten; Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -91,6 +91,17 @@ fasst Resultatkandidat, Literaturabgrenzung und Aufwand zusammen. Sie ist
 kein Fachreview und wurde nicht versendet. Praktische Kostenentscheidung,
 Neuheitsvergleich und unabhaengiges Fachreview bleiben offen. Keine neue
 Zielsimulation oder Panelautorisierung.
+
+Der [Neuheits-Gegencheck vom 2026-10-24](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/gaussian_projection_audit_2026-10-24.md)
+zeigt nun eine konkrete Identitaet: Bekannte statistische Linearisierung
+reproduziert den gesamten ersten nichtlinearen Transportkoeffizienten.
+Ein kubischer Rest mit nichtverschwindender Varianz bleibt dabei erhalten;
+dies ist keine exakte lineare Reduktion und kein Nachweis einer gaussverteilten
+nichtlinearen stationaeren Dynamik. Der moegliche
+Publikationsbeitrag liegt damit in der kontrollierten Gueltigkeit, deren
+Abgrenzung gegen rigorose Naeherungstheorie offen bleibt. 32 neue
+deterministische Integral-/Matrix-/Projektionschecks bestehen; keine
+Zieltrajektorien oder neue Physikevidenz.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

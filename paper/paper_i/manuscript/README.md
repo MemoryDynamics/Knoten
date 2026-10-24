@@ -1,6 +1,6 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-23.
+Stand: 2026-10-24.
 
 ## Wissenschaftlicher Reifegrad
 
@@ -12,6 +12,14 @@ gezielte Pruefung fehlen noch. Die verbindliche Reihenfolge steht in den
 [Neuheitsaudit](../research/pre_reassessment_2026-10-19.md) trennt bekannte
 Resultate von der noch offenen nichtlinearen Arbeitshypothese. Die neuen
 Forschungsrechnungen aendern weder die eingefrorenen PDFs noch die alten Daten.
+
+Der neue [Gaussprojektions-Audit](../research/gaussian_projection_audit_2026-10-24.md)
+reproduziert den gesamten ersten Transportkorrekturterm mit etablierter
+statistischer Linearisierung. Der moegliche Mehrwert liegt damit im
+kontrollierten Gueltigkeitsnachweis und dessen Behandlung von Gedaechtnis
+und Langzeitgrenze, nicht in einer durch den $D_4$-Mittelwert abgrenzbaren
+neuen Methode. Der Vergleich mit bestehender rigoroser Naeherungstheorie
+bleibt offen. Eine exakte lineare Reduktion folgt aus diesem Befund nicht.
 
 Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
 schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher

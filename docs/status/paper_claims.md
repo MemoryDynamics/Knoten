@@ -205,6 +205,14 @@ fehlen als validierte Voraussetzungen. Die neue
 empfiehlt daher eine fachliche Bewertung des analytischen Beitrags vor
 weiterer Runneroptimierung; sie behauptet keine Publikationsreife.
 
+Der [Gaussprojektions-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/gaussian_projection_audit_2026-10-24.md)
+reproduziert den vollstaendigen $D_4$ durch etablierte statistische
+Linearisierung, nicht nur sein Vorzeichen. Das ist kein Nachweis, dass
+der gesamte Gueltigkeitssatz bereits publiziert wurde, aber ein
+Mittelwerttest dieses Koeffizienten kann die beiden Beschreibungen nicht
+unterscheiden. Die Restvarianz verschwindet nicht; exakte Gaussdynamik
+oder ein gaussreines Fehlerbudget folgt aus der Identitaet ebenfalls nicht.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben

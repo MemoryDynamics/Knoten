@@ -6,7 +6,9 @@ import sys
 
 import numpy as np
 import pytest
+from scipy.integrate import quad
 from scipy.linalg import solve_discrete_lyapunov
+from scipy.special import gamma
 
 from review_transport_audit import audit_review_cell, gaussian_block_floor
 from weak_nonlinearity import (
@@ -111,6 +113,110 @@ def test_cross_lag_wick_forcing_from_correlated_gaussian_quadrature():
     empirical = np.einsum("n,ni,nj->ij", probability, correlated[:, 0, :], cubic)
     expected = (dimension + 2) * covariance * np.diag(covariance)[None, :]
     np.testing.assert_allclose(empirical, expected, atol=1e-13)
+
+
+def _projected_gaussian_gain(variance, kernel, dimension):
+    """Closed Gaussian regression formula, not a nonlinear simulator."""
+    ar, aa, sr, sa = kernel
+    power = -1 - dimension / 2
+    return (
+        aa / sa**2 * (1 + variance / sa**2) ** power
+        - ar / sr**2 * (1 + variance / sr**2) ** power
+    )
+
+
+@pytest.mark.parametrize("dimension", [1, 3, 7])
+@pytest.mark.parametrize("variance", [0.02, 0.7])
+@pytest.mark.parametrize("kernel", [(0, 26, 1, 3), (1, 35, 1, 3)])
+def test_gaussian_force_projection_against_radial_integral(dimension, variance, kernel):
+    ar, aa, sr, sa = kernel
+    normalization = dimension * 2 ** (dimension / 2 - 1) * gamma(dimension / 2)
+
+    def integrand(radius):
+        physical_r2 = variance * radius**2
+        force_gain = aa / sa**2 * np.exp(
+            -physical_r2 / (2 * sa**2)
+        ) - ar / sr**2 * np.exp(-physical_r2 / (2 * sr**2))
+        return radius ** (dimension + 1) * np.exp(-(radius**2) / 2) * force_gain
+
+    integral, _ = quad(integrand, 0, np.inf, epsabs=1e-11, epsrel=1e-12)
+    projected = integral / normalization
+    assert projected == pytest.approx(
+        _projected_gaussian_gain(variance, kernel, dimension), rel=2e-12
+    )
+
+
+@pytest.mark.parametrize("correlation", [-0.4, 0.6])
+def test_gaussian_projection_keeps_correlated_lag_regression(correlation):
+    covariance = np.array(
+        [[0.4, correlation * np.sqrt(0.28)], [correlation * np.sqrt(0.28), 0.7]]
+    )
+    nodes, weights = np.polynomial.hermite.hermgauss(32)
+    indices = np.array(np.meshgrid(np.arange(32), np.arange(32))).reshape(2, -1).T
+    probability = np.prod((weights / np.sqrt(np.pi))[indices], axis=1)
+    states = np.sqrt(2) * nodes[indices] @ np.linalg.cholesky(covariance).T
+    kernel = (1, 35, 1, 3)
+    force = states * (35 / 9 * np.exp(-(states**2) / 18) - np.exp(-(states**2) / 2))
+    cross = np.einsum("n,ni,nj->ij", probability, force, states)
+    regression = np.linalg.solve(covariance, cross.T).T
+    expected = np.diag(_projected_gaussian_gain(np.diag(covariance), kernel, 1))
+    np.testing.assert_allclose(regression, expected, atol=2e-11, rtol=2e-11)
+
+
+@pytest.mark.parametrize("horizon", [2, 7, 21])
+@pytest.mark.parametrize("dimension", [1, 3])
+@pytest.mark.parametrize("kernel", [(0, 26, 1, 3), (1, 35, 1, 3)])
+def test_statistical_linearization_reproduces_transport_correction(
+    horizon, dimension, kernel
+):
+    alpha, eta = 0.3, 0.01
+    ar, aa, sr, sa = kernel
+    curvature, cubic = aa / sa**2 - ar / sr**2, ar / (2 * sr**4) - aa / (2 * sa**4)
+    weights = exponential_weights(alpha, horizon)
+    mass = 1 - (1 - alpha) ** horizon
+    gain = eta * mass * curvature
+    covariance, _, derivative_matrix = covariance_response(weights, gain, dimension)
+    d2, response = transport_response(weights, gain, derivative_matrix)
+    d4 = eta * mass * cubic * response
+    source = np.ones(horizon - 1)
+    shift = np.zeros((horizon - 1, horizon - 1))
+    shift[1:, :-1] = np.eye(horizon - 2)
+
+    def projected_transport(t):
+        # An analytic complex-step derivative, never a physical negative variance.
+        coefficients = (
+            eta
+            * mass
+            * weights[1:]
+            * _projected_gaussian_gain(t * np.diag(covariance), kernel, dimension)
+        )
+        operator = shift - np.outer(source, coefficients)
+        transfer = np.linalg.solve(np.eye(horizon - 1) - operator, source)[0]
+        return 0.5 * transfer**2
+
+    assert projected_transport(0.0) == pytest.approx(d2, rel=1e-13)
+    derivative = np.imag(projected_transport(1e-20j)) / 1e-20
+    assert derivative == pytest.approx(d4, rel=2e-12)
+
+
+@pytest.mark.parametrize("dimension", [1, 2, 3])
+@pytest.mark.parametrize("variance", [0.25, 1.0])
+def test_projection_does_not_erase_nonzero_cubic_residual(dimension, variance):
+    nodes, weights = np.polynomial.hermite.hermgauss(4)
+    indices = (
+        np.array(np.meshgrid(*([np.arange(4)] * dimension))).reshape(dimension, -1).T
+    )
+    states = np.sqrt(2 * variance) * nodes[indices]
+    probability = np.prod((weights / np.sqrt(np.pi))[indices], axis=1)
+    cubic = np.sum(states**2, axis=1)[:, None] * states
+    residual = cubic - (dimension + 2) * variance * states
+    cross = np.einsum("n,ni,nj->ij", probability, residual, states)
+    residual_energy = np.sum(probability * np.sum(residual**2, axis=1))
+    np.testing.assert_allclose(cross, 0, atol=1e-13)
+    assert residual_energy == pytest.approx(
+        2 * dimension * (dimension + 2) * variance**3
+    )
+    assert residual_energy > 0
 
 
 @pytest.mark.parametrize(
