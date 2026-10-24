@@ -40,6 +40,9 @@ this argument with two established frameworks. In particular, the
 weighted-history contraction here is not total-variation mixing on the
 full history. The explicit summable transport remainder, rather than
 stationary differentiability alone, is the claim to assess for added value.
+The same audit now supplies a second direct Poisson/resolvent proof for
+the concrete transport observables and remainder. It uses the global
+contraction/Taylor bounds below, not a new method or a larger validity domain.
 
 ## Model and sufficient condition
 

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-24 (begrenzter Antworttheorie-Vergleich abgeschlossen; Publikationsbeitrag offen, Produktionsbefunde unveraendert).
+Stand: 2026-10-25 (konkreter Poisson-/Transportbeweis ergaenzt; Publikationsbeitrag offen, Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -106,11 +106,14 @@ Zieltrajektorien oder neue Physikevidenz.
 Der anschliessende [Satzvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
 weist eine direkte Totalvariations-Anwendung auf den vollen Historienraum
 zurueck, ohne der vorhandenen metrischen Kontraktion zu widersprechen.
-Eine glatte Antworttheorie bleibt als Herleitungsweg plausibel; ihre
-Normvoraussetzungen und der Transport-Resolvent sind nicht verifiziert.
-Ein exaktes AR(1)-Beispiel zeigt, warum stationaere Momentantwort allein
-den Transport nicht bestimmt. Dies grenzt bekannte Methoden ab, belegt
-aber keinen neuen Mechanismus oder eine ausreichende Publikationsneuheit.
+Die ergaenzte direkte Poissonrechnung kontrolliert nun intern die
+konkreten Observablen, den Korrelations-Resolvent und den Transportrest
+uniform im Horizont. Sie behauptet keinen allgemeinen Satzimport und
+keine Erweiterung des Gueltigkeitsbereichs. 14 neue synthetische
+Matrix-/Quadraturchecks bestaetigen die getrennten Verteilungs- und
+Korrelationsbeitraege zum Koeffizienten. Dies staerkt die Einordnung als
+Anwendung bekannter Methoden, nicht die Behauptung eines neuen Mechanismus.
+Unabhaengige Beweispruefung und Publikationsbewertung bleiben offen.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

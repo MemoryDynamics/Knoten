@@ -1,6 +1,6 @@
 # Paper I: observable-matched linear relaxation
 
-Stand: 2026-10-24.
+Stand: 2026-10-25.
 
 ## Wissenschaftlicher Reifegrad
 
@@ -20,8 +20,10 @@ kontrollierten Gueltigkeitsnachweis und dessen Behandlung von Gedaechtnis
 und Langzeitgrenze, nicht in einer durch den $D_4$-Mittelwert abgrenzbaren
 neuen Methode. Ein [begrenzter Satzvergleich](../research/linear_response_scope_audit_2026-10-24.md)
 liegt nun vor: Die volle Historie erlaubt keinen direkten
-Totalvariations-Satzimport; glatte Antworttheorie benoetigt noch eine
-passende Norm- und Transportpruefung. Dies belegt keine Neuheit. Der
+Totalvariations-Satzimport. Die anschliessende direkte Poissonrechnung
+kontrolliert intern die konkreten Observablen und den Transportrest auf
+einem zweiten Weg. Dies stuetzt die Einordnung als Anwendung bekannter
+Methoden, nicht als neue Antworttheorie. Der
 gesamte Literaturvergleich und die fachliche Beitragsbewertung bleiben
 offen. Eine exakte lineare Reduktion folgt aus dem Projektionsbefund nicht.
 

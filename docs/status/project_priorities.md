@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-24 (begrenzter Antworttheorie-Vergleich abgeschlossen; modellspezifischen Gueltigkeitsbeitrag bewerten, keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-25 (konkreter Antwortbeweis ergaenzt; Wert des kontrollierten Modellbeispiels bewerten, keine neue Panel-/FIFO-/P5-Autorisierung).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -52,9 +52,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    diese Erklaerungen daher nicht. Jetzt den kontrollierten Gueltigkeits-
    und Grenzwertbeitrag fachlich bewerten. Der
    [begrenzte Satzvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
-   ist abgeschlossen: Eine Totalvariationsroute scheitert am vollen
-   Historienzustand; eine glatte Observable-Response erfordert weitere
-   Norm-, Korrelations- und Restkontrolle. Das ist kein Neuheitsbeweis.
+   ist um einen direkten konkreten Poissonbeweis ergaenzt: Die
+   Totalvariationsroute scheitert am vollen Historienzustand, aber die
+   benoetigten Observablen, Korrelationen und der Rest lassen sich mit
+   bekannten Antwortmethoden intern kontrollieren. Die Frage ist jetzt
+   der wissenschaftliche Wert dieses kontrollierten Modellbeispiels,
+   nicht eine neue allgemeine Methode. Kein Neuheitsbeweis oder Fachreview.
    Nicht automatisch auf $D_6$ ausweichen oder den Test vergroessern.
    Eine [neue analytische Notiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
    begruendet stationaere relative Existenz fuer festes endliches $H$ und
@@ -185,9 +188,9 @@ Beitragskern und Gueltigkeitsargument bewerten, bevor weitere
 Runnerimplementierung oder eine Rauschwahl festgelegt wird. Die bekannte
 Gaussprojektion reproduziert inzwischen nachweislich denselben $D_4$;
 ein reiner Mittelwertvergleich loest die Neuheitsfrage nicht. Der begrenzte
-Satzvergleich praezisiert inzwischen die verbleibende Frage nach dem
-Mehrwert der expliziten, horizontuniformen Transport-Restkontrolle; er
-ersetzt keine fachliche Bewertung. Der Volltextabgleich
+Satzvergleich und der ergaenzte konkrete Poissonbeweis praezisieren
+inzwischen die verbleibende Frage nach dem Mehrwert des kontrollierten
+Modellbeispiels; sie ersetzen keine fachliche Bewertung. Der Volltextabgleich
 der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.

@@ -485,3 +485,91 @@ def test_reviewed_cell_does_not_conflate_block_and_long_time_transport():
 def test_invalid_gaussian_floor_inputs_fail_closed(msd, blocks, seeds, dimension, tail):
     with pytest.raises(ValueError):
         gaussian_block_floor(msd, blocks, seeds, dimension, tail)
+
+
+def _poisson_transport_components(weights, gain, dimension):
+    """Law and propagation response per unit cubic gain, in lag coordinates."""
+    matrix = lag_matrix(weights, gain)
+    source = np.ones(len(matrix))
+    readout = np.eye(len(matrix))[0]
+    inverse_matrix = np.eye(len(matrix)) - matrix
+    covariance = solve_discrete_lyapunov(matrix, np.outer(source, source))
+    linear_poisson = np.linalg.solve(inverse_matrix.T, readout)
+    quadratic = (
+        np.outer(readout, linear_poisson)
+        + np.outer(linear_poisson, readout)
+        - np.outer(readout, readout)
+    ) / 2
+    poisson = solve_discrete_lyapunov(matrix.T, quadratic)
+    projected_cubic = -(dimension + 2) * np.outer(
+        source, np.asarray(weights)[1:] * np.diag(covariance)
+    )
+    law = 2 * np.trace(poisson @ matrix @ covariance @ projected_cubic.T)
+    propagation = (
+        readout
+        @ covariance
+        @ np.linalg.solve(inverse_matrix.T, projected_cubic.T @ linear_poisson)
+    )
+    return law, propagation, covariance, poisson, linear_poisson
+
+
+@pytest.mark.parametrize("horizon", [2, 5, 9])
+@pytest.mark.parametrize("gain", [0.0, 0.2])
+@pytest.mark.parametrize("dimension", [1, 3])
+def test_poisson_law_and_propagation_sum_matches_transfer(horizon, gain, dimension):
+    weights = exponential_weights(0.4, horizon)
+    law, propagation, covariance, poisson, linear = _poisson_transport_components(
+        weights, gain, dimension
+    )
+    matrix = lag_matrix(weights, gain)
+    readout = np.eye(len(matrix))[0]
+    quadratic = (
+        np.outer(readout, linear)
+        + np.outer(linear, readout)
+        - np.outer(readout, readout)
+    ) / 2
+    np.testing.assert_allclose(
+        poisson - matrix.T @ poisson @ matrix, quadratic, atol=2e-13
+    )
+    _, covariance_derivative, perturbation = covariance_response(
+        weights, gain, dimension
+    )
+    diffusion, derivative = transport_response(weights, gain, perturbation)
+    assert np.trace(quadratic @ covariance) == pytest.approx(diffusion, abs=2e-13)
+    assert law == pytest.approx(np.trace(quadratic @ covariance_derivative), abs=2e-13)
+    assert law + propagation == pytest.approx(derivative, rel=2e-12, abs=2e-13)
+    if gain == 0:
+        assert law == pytest.approx(0, abs=2e-13)
+        assert abs(propagation) > 0.1
+
+
+@pytest.mark.parametrize("horizon,dimension", [(2, 1), (3, 2)])
+def test_poisson_terms_against_direct_cubic_gaussian_integrals(horizon, dimension):
+    weights = exponential_weights(0.4, horizon)
+    matrix = lag_matrix(weights, 0.2)
+    size = len(matrix)
+    law, propagation, covariance, poisson, linear = _poisson_transport_components(
+        weights, 0.2, dimension
+    )
+    nodes, probabilities = np.polynomial.hermite.hermgauss(3)
+    indices = (
+        np.array(np.meshgrid(*([np.arange(3)] * (size * dimension))))
+        .reshape(size * dimension, -1)
+        .T
+    )
+    probability = np.prod((probabilities / np.sqrt(np.pi))[indices], axis=1)
+    states = (
+        np.sqrt(2)
+        * nodes[indices].reshape(-1, dimension, size)
+        @ np.linalg.cholesky(covariance).T
+    )
+    force = -np.sum(weights[1:] * np.sum(states**2, axis=1) * states[:, 0, :], axis=1)
+    quadratic_response = 2 * (states[:, 0, :] @ matrix.T @ poisson @ np.ones(size))
+    assert probability @ (quadratic_response * force) == pytest.approx(law, abs=2e-13)
+
+    # The reversed Gaussian regression sums E[g(Y_0) | Y_k] over k >= 0.
+    reverse_sum = np.linalg.solve(
+        covariance, np.linalg.solve(np.eye(size) - matrix, covariance[:, 0])
+    )
+    propagated = (states[:, 0, :] @ reverse_sum) * force * linear.sum()
+    assert probability @ propagated == pytest.approx(propagation, abs=2e-13)

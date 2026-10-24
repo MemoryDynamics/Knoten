@@ -1,6 +1,6 @@
 # Paper I: Entscheidungsvorlage zum wissenschaftlichen Kern
 
-Stand: 2026-10-24. Interne Bewertung fuer die Diskussion mit Olaf, kein
+Stand: 2026-10-25. Interne Bewertung fuer die Diskussion mit Olaf, kein
 Fachgutachten und keine Einreichungs- oder Simulationsfreigabe. Die
 [Projektprioritaeten](../../../docs/status/project_priorities.md) bleiben
 die einzige aktive Arbeitsliste. Die Baseline vom 2026-10-09 bleibt erhalten.
@@ -19,10 +19,12 @@ damit im kontrollierten Gueltigkeitsnachweis, nicht in einem von dieser
 Naeherung unterscheidbaren $D_4$-Koeffizienten. Der anschliessende
 [Satzvergleich](linear_response_scope_audit_2026-10-24.md) grenzt zwei
 rigorose Antworttheorien ab: Die Totalvariationsroute scheitert am vollen
-Historienzustand; eine glatte Observable-Response bleibt plausibel, ist
-aber noch nicht als direkter Satzimport verifiziert. Fuer den Transport
-muessen auch die zeitlichen Korrelationen und die Restordnung kontrolliert
-werden. Keine dieser Grenzen ist bereits ein Neuheitsargument.
+Historienzustand. Eine anschliessende direkte Poisson-/Resolventrechnung
+kontrolliert nun intern die konkret benoetigten Observablen, zeitlichen
+Korrelationen und die Restordnung uniform im Horizont. Ein allgemeiner
+Satzimport wird damit nicht behauptet. Beide Herleitungswege nutzen
+bekannte Methoden; die offene Frage ist der Wert des kontrollierten
+Modellbeispiels, nicht eine neue allgemeine Antworttheorie.
 
 Die Leitfrage lautet: **Wann reicht gleiche lokale Kernelkruemmung nicht
 mehr aus, um den Langzeittransport vorherzusagen, und laesst sich die
@@ -90,7 +92,7 @@ des ersten Korrekturterms von $\lambda$.
 | Physikalischer Mehrwert | Gleiche lineare Antwort verdeckt unterschiedliche nichtlineare Transportantwort. Ist die kontrollierte Aufloesung dieser Entartung interessant genug oder lediglich eine erwartbare Perturbationskorrektur? |
 | Naechste Literatur | Der [Neuheitsaudit](pre_reassessment_2026-10-19.md) dokumentiert bereits Memory-Transport, Gaussian-Feedback und perturbative Diffusionskorrekturen. Ein anderes Expansionsargument allein begruendet keine ausreichende Neuheit. |
 | Konkrete Vergleichsgrenze | [Kopp--Klapp, Abschnitt IV, Gl. (19)--(22)](https://arxiv.org/pdf/2210.03182v3) verwenden fuer ihre Transportnaeherung kleinen Delay und die Hesse-Matrix am Ursprung. Unser Kandidat entwickelt bei festem Gedaechtnis in kleiner Rauschamplitude. Das unterscheidet diese Rechnungen, beweist aber keine Literaturprioritaet; am 2026-10-23 erneut am Volltext geprueft. |
-| Rigorose Methoden | Der [begrenzte Satzvergleich](linear_response_scope_audit_2026-10-24.md) trennt bekannte Antworttheorie von der noch zu bewertenden modellspezifischen Kontrolle. Stationaere Differenzierbarkeit allein liefert weder die gesamte Transportantwort noch automatisch den Rest $O(\varepsilon^6)$. |
+| Rigorose Methoden | Der [Satzvergleich mit direkter Poissonrechnung](linear_response_scope_audit_2026-10-24.md) liefert intern die konkrete Transportantwort samt Rest $O(\varepsilon^6)$ auf einem zweiten Weg. Das ist keine unabhaengige Begutachtung. Die Einordnung als modellspezifische Anwendung bekannter Methoden wird dadurch staerker. |
 | Offene Literaturfrage | Der Aging-Volltext ist weiterhin nicht auf Gleichungsebene abgeglichen. Sein Abstract genuegt weder fuer eine Identitaetsbehauptung noch fuer eine Entwarnung. |
 | Vorhandene Daten | Die archivierten Radien pruefen eine lineare Referenz, nicht diesen Transportkoeffizienten. Keine aktive archivierte Zelle liegt im obigen hinreichenden Kontraktionsbereich. |
 | Praktische Nachweisbarkeit | Ein analytisches endliches Fehlerbudget existiert, aber nur mit sehr konservativem Rauschbereich. Die Maschinenarithmetik des vollstaendigen Tests ist noch nicht abgesichert. |
@@ -129,8 +131,8 @@ umgekehrt eine fehlende Neuheit nicht ersetzen.
 1. Liefert die explizite, horizontuniforme Restkontrolle des bereits durch
    statistische Linearisierung reproduzierbaren Koeffizienten einen
    substanziellen Beitrag, oder ist sie eine routinemaessige Anwendung
-   bekannter Antwort- und Kopplungsmethoden? Der Satzvergleich grenzt
-   direkte Importmoeglichkeiten ein, belegt aber keine Neuheit.
+   bekannter Antwort- und Kopplungsmethoden? Die direkte Poissonrechnung
+   liefert inzwischen auch den konkreten Antwortbeweis, keine neue Methode.
 2. Welche Luecke sieht der Leser in der stationaeren Herleitung und
    ihrer Gueltigkeitsdomain? Besonders kritisch: schwaches Rauschen,
    langer Beobachtungszeitraum und unendliches Gedaechtnis.

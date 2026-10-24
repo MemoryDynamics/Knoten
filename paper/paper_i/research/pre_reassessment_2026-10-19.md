@@ -30,9 +30,11 @@ rigorous linearization theory must also be assessed. A mean-$D_4$ test
 alone cannot discriminate the result from this known approximation. The
 subsequent [response-theory audit](linear_response_scope_audit_2026-10-24.md)
 checks two theorem-level routes. It rules out a direct weighted-total-
-variation application on the full-history space and identifies the
-remaining smooth-observable, correlation-response and remainder checks.
-These are applicability boundaries, not affirmative evidence of novelty.
+variation application on the full-history space. Its subsequent direct
+Poisson proof (updated 2026-10-25) now controls the concrete observables,
+correlation response and remainder uniformly in the horizon, without
+importing a general theorem verbatim. This supports a controlled
+application of established methods, not evidence of method novelty.
 
 ## Source and claim ledger
 
@@ -51,8 +53,9 @@ proof that it is absent from the literature.
 | [Newman and Grima, PRE 70, 051916 (2004), author-uploaded full text](https://www.researchgate.net/publication/8128610_Many-body_theory_of_chemotactic_cell-cell_interactions), abstract, Sec. II and Sec. V inspected 2026-10-21 | Langevin chemotaxis with a diffusing, decaying field; explicit coupling-perturbation corrections to diffusion, including a second-order calculation in one dimension. | Perturbatively corrected memory-mediated diffusion is not a new category either. Their expansion parameter is chemotactic coupling, not our noise amplitude. The age-dependent heat kernel is not our fixed-width Gaussian mixture; no coefficient identity follows without a model and limit mapping. |
 | [Katayama, ECC 2013, Section III, Proposition 1, Eq. (11), Table I](https://skoge.folk.ntnu.no/prost/proceedings/ecc-2013/data/papers/0306.pdf), inspected 2026-10-24 | Gaussian minimum-mean-square linearization uses the expected Jacobian; the cubic example retains cross-covariance but omits residual variance. | Applying this standard projection to our full Gaussian force reproduces our $D_4$ exactly. This is our explicit specialization, not a transport theorem attributed to the filtering paper. |
 | [Bernard and Wu, Journal of Applied Probability 35 (1998), 718--730](https://doi.org/10.1239/jap/1032265219), publisher abstract | The authors report rigorous linearization principles using entropy and large deviations. | Prevents a generic claim to the first rigorous justification. Full theorem-level overlap with our small-noise memory result remains unverified; the abstract is not a substitute for it. |
-| [Hairer and Majda, author version (2010)](https://www.hairer.org/papers/FDT.pdf), Section 2, Theorem 2.3, inspected 2026-10-24 | Rigorous response of invariant expectations in weighted observable spaces. | The [applicability audit](linear_response_scope_audit_2026-10-24.md) records the unverified model mapping and extra transport requirements; no new general response method is claimed. |
+| [Hairer and Majda, author version (2010)](https://www.hairer.org/papers/FDT.pdf), Section 2, Theorem 2.3 and Remark 2.4, inspected 2026-10-24 | Rigorous response of invariant expectations using weighted observables and Poisson solutions. | The [applicability audit](linear_response_scope_audit_2026-10-24.md) now supplies a direct concrete-observable proof, not a general theorem import; no new response method is claimed. |
 | [Ferre, Herve and Ledoux, author version (2012)](https://herve.perso.math.cnrs.fr/Stab-FHL.pdf), (VG), Theorem 1 and Proposition 1, inspected 2026-10-24 | Weighted-supremum perturbation theory and an AR(1) regularity example. | Our full-history support argument excludes the stated (VG) hypothesis on that representation, not other response frameworks or finite-dimensional projections. |
+| [Duncan, Nusken and Pavliotis, J. Stat. Phys. 169 (2017), 1098--1131](https://pmc.ncbi.nlm.nih.gov/articles/PMC6959385/), Section 2.3, Lemma 2, Eqs. (22)--(25), inspected 2026-10-24 | Poisson/inverse-operator representation of asymptotic variance in a continuous-time diffusion setting. | A methodological precedent, not an applicability theorem for our discrete infinite-history process. The new direct proof supplies its own contraction and observable estimates. |
 
 On 2026-10-21 the Kopp--Klapp comparison was extended to Sec. IV,
 Eqs. (19)--(22): their analytical transport estimate expands in small
@@ -325,9 +328,10 @@ matched-curvature kernel contrast.** The contraction, response and
 Gaussian-chaos methods are standard. Since Gaussian statistical
 linearization reproduces the coefficient, the remaining candidate is its
 explicit controlled validity, not a mean coefficient that distinguishes
-our result from that approximation. The bounded theorem comparison does
-not establish whether this control is a substantial contribution or a
-routine model-specific application. It would be misleading to
+our result from that approximation. The direct observable proof now
+establishes the response route internally, including the remainder; its
+scientific value as a controlled model example still needs assessment.
+It would be misleading to
 substitute generic memory, Markov augmentation or diffusion renormalization
 as the novelty claim. The fixed-noise coupling expansion of Newman--Grima
 and the small-delay expansion of Kopp--Klapp use different limits; difference
