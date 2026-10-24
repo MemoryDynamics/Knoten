@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-09-17.
+Stand: 2026-10-24 (begrenzter Antworttheorie-Vergleich abgeschlossen; Publikationsbeitrag offen, Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -9,10 +9,113 @@ vollstaendige vorherige Stand liegt im
 
 ## Evidenz
 
+Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
+von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und
+Gravitation. Der begrenzte [R0-Audit](../reference/foundation_feasibility.md)
+ist dokumentiert: raeumliche Kreisphase, nichtkompakter direkter Gauss-Readout
+und bedingte klassische Korrelationsgrenzen. Zwoelf synthetische Checks
+pruefen die engen Aussagen und Gegenbeispiele gegen Ueberinterpretation.
+Das ist kein allgemeines Go oder No-go fuer das Fernziel und keine neue
+Produktions- oder FIFO-/P5-Evidenz. Die
+[B1-Bestandsanalyse](../reference/operational_contract.md) spezifiziert
+Zustand, Quellenvariation, Ein-Schritt-Antwort und bedingte Verteilung des
+vorhandenen Frozen-Source-Zweigs. Fuenf neue synthetische Checks pruefen
+seine Zuordnung zur Implementierung. Ein physikalischer Zwei-Stationen-
+Vertrag mit begruendeter Wahl oder Herleitung des Mehrsystemgesetzes,
+Aktuatoren und Detektoren fehlt weiter. Mathematisch definierte Paarkopplungen
+existieren; ihre physikalische Auswahl folgt nicht aus dem analytischen Abschluss.
+
+Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+begruendet fuer festes endliches $H$ und positives Gaussrauschen eine
+eindeutige relative stationaere Verteilung des beschraenkten nichtlinearen
+Drifts. Die Schranke ist nicht uniform fuer verschwindendes Rauschen oder
+wachsenden Horizont. Ein exaktes Zweierzyklus-Gegenbeispiel verhindert,
+lokale Stabilitaet mit globaler Branch-Selektion gleichzusetzen. Dies sind
+analytische Forschungsbefunde, keine neue Radius- oder Transportevidenz.
+Eine Ergaenzung derselben Notiz nutzt positive Mittelung, um stationaere
+quadratische Momente bis Ordnung $\varepsilon^4$ mit Rest
+$O(\varepsilon^6)$ bei festem endlichem $H$ zu begruenden. Alle archivierten
+Modellkoeffizienten erfuellen diese zusaetzlichen Voraussetzungen; die
+enormen Fehlerkonstanten bestaetigen weder das vorhandene endliche Rauschen
+noch praktische Durchmischung, Transport oder den unendlichen Horizont.
+Die anschliessende
+[Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+begruendet die stationaere Momententwicklung unter einer strengeren
+globalen Bedingung auch fuer ungekuerztes exponentielles Gedaechtnis.
+Alle aktiven archivierten Zellen liegen ausserhalb dieses hinreichenden
+Bereichs; das beweist keine Instabilitaet. Ein zusaetzlicher summierbarer
+Restterm begruendet nun auch die nichtlineare Transportkorrektur in diesem
+engen Bereich, einschliesslich eines expliziten ungekuerzten Koeffizienten.
+Numerische Transportvalidierung, Publikationsneuheit, die allgemeine
+Gueltigkeit und der separate FIFO-Horizonttransfer bleiben offen.
+
+Update 2026-10-22: Ein externes Zweitmodellreview hat einen konkreten
+Transporttest vorgeschlagen. Der
+[reproduzierbare Gegencheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
+bestaetigt dessen unendliche Koeffizienten, nicht die Panelreife:
+Block-MSD bei Lag 100 und Langzeittransport sind verschieden; der
+lineare Bias betraegt 37.17%. Korrekte unabhaengige Gaussreferenz-Skalierung
+ergibt etwa 2.32 statt 13.5 Standardabweichungen. Eine anschliessende
+[gepaarte Referenzrechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
+kontrolliert den fuehrenden Endlichzeitbias mit einer Zweilaengen-Korrektur
+und berechnet die Langblock-Varianz inklusive kubischem Gauss-Chaos.
+Die anschliessende
+[finite-Stichproben-Rechnung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
+begrenzt Sampling plus Blockbias fuer den fuehrenden Koeffizienten beim
+diskutierten Budget auf einen konservativen relativen 95%-Radius unter
+8.8%. Dies ist eine analytische Referenzrechnung in Gleitkommaarithmetik,
+keine Daten-Konfidenz oder Fehlergarantie fuer endliches Rauschen.
+Die [Fortsetzung vom 2026-10-23](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_noise_transport_budget_2026-10-23.md)
+liefert explizite Schranken fuer zufaelligen Schaetzerrest, Transportrest
+und einen vollstaendig vorgefuellten flachen Start. Ein illustratives
+10%-Gesamtbudget bei 95% Ueberdeckung ist in exakter Arithmetik fuer einen
+sehr kleinen Rauschbereich hinreichend kontrolliert. Am oberen Rand
+$\varepsilon\simeq4.46\,10^{-6}$ betraegt der fuehrende Kontrast nur
+etwa $9.54\,10^{-10}$ des linearen Beitrags. Die Gleitkommaauswertung
+ist kein Intervallzertifikat und bestaetigt weder die fruehere Rauschwahl
+$0.007$ noch den bisherigen leeren Speicherstart. Die numerische
+Differenzdarstellung wurde anschliessend als
+[exakte skalierte Restrekursion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_residual_precision_2026-10-23.md)
+geprueft: Kleine deterministische Historien und ein H=600-Ein-Schritt-Test
+stimmen mit direkten 80-/110-stelligen Vollkraftrechnungen ueberein.
+Das ist keine Langlaufgarantie. Der reine Referenz-Mikrobenchmark misst
+etwa 0.261 ms pro Paarupdate; naive serielle Hochrechnung ergibt rund
+145 Stunden fuer die diskutierte Paarzahl, ohne RNG/Statistik/I/O.
+Die [bedingte Fehlerfortpflanzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_error_propagation_2026-10-23.md)
+liefert inzwischen zeituniforme Zustandsschranken fuer vorgegebene lokale
+Defekte und Laggrenzen sowie eine separat begrenzte skalare Mittelung.
+Die benoetigten lokalen Fehlergrenzen des Simulators und dessen gesamte
+Statistik-/Innovationsschnittstelle bleiben unvalidiert. Eine
+[Entscheidungsvorlage fuer die fachliche Diskussion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paper_i_decision_brief_2026-10-23.md)
+fasst Resultatkandidat, Literaturabgrenzung und Aufwand zusammen. Sie ist
+kein Fachreview und wurde nicht versendet. Praktische Kostenentscheidung,
+Neuheitsvergleich und unabhaengiges Fachreview bleiben offen. Keine neue
+Zielsimulation oder Panelautorisierung.
+
+Der [Neuheits-Gegencheck vom 2026-10-24](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/gaussian_projection_audit_2026-10-24.md)
+zeigt nun eine konkrete Identitaet: Bekannte statistische Linearisierung
+reproduziert den gesamten ersten nichtlinearen Transportkoeffizienten.
+Ein kubischer Rest mit nichtverschwindender Varianz bleibt dabei erhalten;
+dies ist keine exakte lineare Reduktion und kein Nachweis einer gaussverteilten
+nichtlinearen stationaeren Dynamik. Der moegliche
+Publikationsbeitrag liegt damit in der kontrollierten Gueltigkeit, deren
+Abgrenzung gegen rigorose Naeherungstheorie offen bleibt. 32 neue
+deterministische Integral-/Matrix-/Projektionschecks bestehen; keine
+Zieltrajektorien oder neue Physikevidenz.
+
+Der anschliessende [Satzvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
+weist eine direkte Totalvariations-Anwendung auf den vollen Historienraum
+zurueck, ohne der vorhandenen metrischen Kontraktion zu widersprechen.
+Eine glatte Antworttheorie bleibt als Herleitungsweg plausibel; ihre
+Normvoraussetzungen und der Transport-Resolvent sind nicht verifiziert.
+Ein exaktes AR(1)-Beispiel zeigt, warum stationaere Momentantwort allein
+den Transport nicht bestimmt. Dies grenzt bekannte Methoden ab, belegt
+aber keinen neuen Mechanismus oder eine ausreichende Publikationsneuheit.
+
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |
 | Paper 0 | technischer Anker | mathematischer Ausgangspunkt |
-| Paper I, skalar | kontrollierte co-moving Relaxationswolke | lineare finite-memory Grobkoernung |
+| Paper I, skalar | kontrollierte co-moving Relaxationswolke; observable-gematchter terminaler RMS-Vergleich | reproduzierbare Baseline, noch nicht PRE-einreichungsreif; Wolkenradius: 0.076% mediane / 0.984% maximale aktive Abweichung, 85 Seed-Traces; Transportvorhersage nicht numerisch validiert, nichtlineare Neuheit offen |
 | Native Rotation | sechs lokal eindeutige finite-$H$-Roots; G5 besteht direkte Root-, Spektral- und Nichtlinearitaetsgates bei $H=2400$ | lokale numerische Stabilitaet des vorbereiteten Orbits, keine globale Eindeutigkeit, $H\to\infty$-Stabilitaet oder generische Formation |
 | P4-R-S | `p4rs-anchor-scale-transfer-pass` | Zwei-Zellen-Skalentransfer, keine Replikation |
 | N0 | `n0-noise-stability-window-bracketed-reviewed-pass` | endliche numerische Robustheitsklammer, keine Planck-Kalibrierung |

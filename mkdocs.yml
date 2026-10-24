@@ -11,11 +11,15 @@ nav:
   - Projektsteuerung:
       - Aktueller Stand: status/current_status.md
       - Prioritaeten: status/project_priorities.md
+      - Forschungsroadmap: status/research_roadmap.md
+      - Architekturentscheidung: status/architecture_decision.md
       - Paper-Claims: status/paper_claims.md
   - Modell und Gleichungen:
       - Theorie: reference/THEORETICAL_CONTEXT.md
       - Modellvokabular: reference/model_vocabulary.md
       - Implementierte Gleichungen: reference/implemented_equations.md
+      - Physikalische Machbarkeit: reference/foundation_feasibility.md
+      - Zustand und Interventionen: reference/operational_contract.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md
