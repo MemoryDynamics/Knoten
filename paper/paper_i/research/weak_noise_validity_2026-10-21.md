@@ -34,6 +34,13 @@ priority or sufficient PRE novelty. It complements the broader
 whose minorization alone requires no small coupling but does not control
 vanishing noise.
 
+Scope update 2026-10-24: the
+[response-theory audit](linear_response_scope_audit_2026-10-24.md) compares
+this argument with two established frameworks. In particular, the
+weighted-history contraction here is not total-variation mixing on the
+full history. The explicit summable transport remainder, rather than
+stationary differentiability alone, is the claim to assess for added value.
+
 ## Model and sufficient condition
 
 Use $q=1-\alpha$, $0<\alpha<1$, $\gamma_j=\alpha q^j$ and

@@ -18,8 +18,12 @@ reproduziert den gesamten ersten Transportkorrekturterm mit etablierter
 statistischer Linearisierung. Der moegliche Mehrwert liegt damit im
 kontrollierten Gueltigkeitsnachweis und dessen Behandlung von Gedaechtnis
 und Langzeitgrenze, nicht in einer durch den $D_4$-Mittelwert abgrenzbaren
-neuen Methode. Der Vergleich mit bestehender rigoroser Naeherungstheorie
-bleibt offen. Eine exakte lineare Reduktion folgt aus diesem Befund nicht.
+neuen Methode. Ein [begrenzter Satzvergleich](../research/linear_response_scope_audit_2026-10-24.md)
+liegt nun vor: Die volle Historie erlaubt keinen direkten
+Totalvariations-Satzimport; glatte Antworttheorie benoetigt noch eine
+passende Norm- und Transportpruefung. Dies belegt keine Neuheit. Der
+gesamte Literaturvergleich und die fachliche Beitragsbewertung bleiben
+offen. Eine exakte lineare Reduktion folgt aus dem Projektionsbefund nicht.
 
 Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
 schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher

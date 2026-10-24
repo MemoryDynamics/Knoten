@@ -16,15 +16,20 @@ Der neue [Vergleich mit statistischer Linearisierung](gaussian_projection_audit_
 verschaerft die Frage: Die bekannte Gaussprojektion reproduziert den
 vollstaendigen ersten Transportkorrekturterm. Der moegliche Mehrwert liegt
 damit im kontrollierten Gueltigkeitsnachweis, nicht in einem von dieser
-Naeherung unterscheidbaren $D_4$-Koeffizienten. Auch rigorose
-Linearisierungstheorie existiert bereits; ihr genauer Ueberlapp bleibt zu pruefen.
+Naeherung unterscheidbaren $D_4$-Koeffizienten. Der anschliessende
+[Satzvergleich](linear_response_scope_audit_2026-10-24.md) grenzt zwei
+rigorose Antworttheorien ab: Die Totalvariationsroute scheitert am vollen
+Historienzustand; eine glatte Observable-Response bleibt plausibel, ist
+aber noch nicht als direkter Satzimport verifiziert. Fuer den Transport
+muessen auch die zeitlichen Korrelationen und die Restordnung kontrolliert
+werden. Keine dieser Grenzen ist bereits ein Neuheitsargument.
 
 Die Leitfrage lautet: **Wann reicht gleiche lokale Kernelkruemmung nicht
 mehr aus, um den Langzeittransport vorherzusagen, und laesst sich die
 Abweichung ohne Fit an nichtlineare Simulationsdaten berechnen?**
 
-Ein moeglicher Arbeitstitel ist *Kernel-sensitive transport beyond linear
-memory response*. Gemeint ist klassische stochastische Dynamik in einem
+Ein moeglicher Arbeitstitel ist *Controlled weak-noise transport with
+exponential memory*. Gemeint ist klassische stochastische Dynamik in einem
 vorgegebenen Raum, keine bereits emergente Raumzeit oder Quantentheorie.
 
 ## Der konkrete Resultatkandidat
@@ -85,6 +90,7 @@ des ersten Korrekturterms von $\lambda$.
 | Physikalischer Mehrwert | Gleiche lineare Antwort verdeckt unterschiedliche nichtlineare Transportantwort. Ist die kontrollierte Aufloesung dieser Entartung interessant genug oder lediglich eine erwartbare Perturbationskorrektur? |
 | Naechste Literatur | Der [Neuheitsaudit](pre_reassessment_2026-10-19.md) dokumentiert bereits Memory-Transport, Gaussian-Feedback und perturbative Diffusionskorrekturen. Ein anderes Expansionsargument allein begruendet keine ausreichende Neuheit. |
 | Konkrete Vergleichsgrenze | [Kopp--Klapp, Abschnitt IV, Gl. (19)--(22)](https://arxiv.org/pdf/2210.03182v3) verwenden fuer ihre Transportnaeherung kleinen Delay und die Hesse-Matrix am Ursprung. Unser Kandidat entwickelt bei festem Gedaechtnis in kleiner Rauschamplitude. Das unterscheidet diese Rechnungen, beweist aber keine Literaturprioritaet; am 2026-10-23 erneut am Volltext geprueft. |
+| Rigorose Methoden | Der [begrenzte Satzvergleich](linear_response_scope_audit_2026-10-24.md) trennt bekannte Antworttheorie von der noch zu bewertenden modellspezifischen Kontrolle. Stationaere Differenzierbarkeit allein liefert weder die gesamte Transportantwort noch automatisch den Rest $O(\varepsilon^6)$. |
 | Offene Literaturfrage | Der Aging-Volltext ist weiterhin nicht auf Gleichungsebene abgeglichen. Sein Abstract genuegt weder fuer eine Identitaetsbehauptung noch fuer eine Entwarnung. |
 | Vorhandene Daten | Die archivierten Radien pruefen eine lineare Referenz, nicht diesen Transportkoeffizienten. Keine aktive archivierte Zelle liegt im obigen hinreichenden Kontraktionsbereich. |
 | Praktische Nachweisbarkeit | Ein analytisches endliches Fehlerbudget existiert, aber nur mit sehr konservativem Rauschbereich. Die Maschinenarithmetik des vollstaendigen Tests ist noch nicht abgesichert. |
@@ -120,10 +126,11 @@ umgekehrt eine fehlende Neuheit nicht ersetzen.
 
 ## Drei Fragen fuer die fachliche Diskussion
 
-1. Ist die kontrollierte Gueltigkeit des hier bereits durch statistische
-   Linearisierung reproduzierbaren Koeffizienten, insbesondere der
-   Transport-Grenztausch und das ungekuerzte Gedaechtnis, ein substanzieller
-   Beitrag gegenueber bestehenden rigorosen Naeherungsverfahren?
+1. Liefert die explizite, horizontuniforme Restkontrolle des bereits durch
+   statistische Linearisierung reproduzierbaren Koeffizienten einen
+   substanziellen Beitrag, oder ist sie eine routinemaessige Anwendung
+   bekannter Antwort- und Kopplungsmethoden? Der Satzvergleich grenzt
+   direkte Importmoeglichkeiten ein, belegt aber keine Neuheit.
 2. Welche Luecke sieht der Leser in der stationaeren Herleitung und
    ihrer Gueltigkeitsdomain? Besonders kritisch: schwaches Rauschen,
    langer Beobachtungszeitraum und unendliches Gedaechtnis.

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-24 (Gaussprojektion reproduziert den ersten Transportkoeffizienten; Produktionsbefunde unveraendert).
+Stand: 2026-10-24 (begrenzter Antworttheorie-Vergleich abgeschlossen; Publikationsbeitrag offen, Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -102,6 +102,15 @@ Publikationsbeitrag liegt damit in der kontrollierten Gueltigkeit, deren
 Abgrenzung gegen rigorose Naeherungstheorie offen bleibt. 32 neue
 deterministische Integral-/Matrix-/Projektionschecks bestehen; keine
 Zieltrajektorien oder neue Physikevidenz.
+
+Der anschliessende [Satzvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
+weist eine direkte Totalvariations-Anwendung auf den vollen Historienraum
+zurueck, ohne der vorhandenen metrischen Kontraktion zu widersprechen.
+Eine glatte Antworttheorie bleibt als Herleitungsweg plausibel; ihre
+Normvoraussetzungen und der Transport-Resolvent sind nicht verifiziert.
+Ein exaktes AR(1)-Beispiel zeigt, warum stationaere Momentantwort allein
+den Transport nicht bestimmt. Dies grenzt bekannte Methoden ab, belegt
+aber keinen neuen Mechanismus oder eine ausreichende Publikationsneuheit.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |

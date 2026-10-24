@@ -213,6 +213,14 @@ Mittelwerttest dieses Koeffizienten kann die beiden Beschreibungen nicht
 unterscheiden. Die Restvarianz verschwindet nicht; exakte Gaussdynamik
 oder ein gaussreines Fehlerbudget folgt aus der Identitaet ebenfalls nicht.
 
+Der [begrenzte Antworttheorie-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
+liefert keinen Neuheitsbeweis: Totalvariations-Mischung scheitert am vollen
+Historienzustand, nicht die Kontraktion in der gewichteten Metrik.
+Die Uebertragung glatter Antworttheorie ist offen; fuer den Transport sind
+stationaere Verteilungsantwort, zeitliche Korrelationsantwort und eine
+quantitative Restordnung auseinanderzuhalten. Ein Satz ueber eine erste
+Ableitung allein rechtfertigt nicht den behaupteten $O(\varepsilon^6)$-Rest.
+
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
 selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben
