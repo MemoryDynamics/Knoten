@@ -22,6 +22,14 @@ from typing import Any
 import mpmath
 
 from emergenz_knoten.fifo_normal_stability import certify_normal_fifo_box
+from emergenz_knoten.fifo_oblique_probe import (
+    ANGLES_DEGREES,
+    PROBE_SCOPE,
+    RELATIVE_AMPLITUDE,
+    SAMPLE_EVERY,
+    STEPS,
+    run_oblique_probe,
+)
 from emergenz_knoten.rotating_wave_interval import IntervalRotatingWaveParameters
 
 
@@ -135,6 +143,7 @@ def _check_module_origins() -> list[str]:
     for module_name in (
         certify_normal_fifo_box.__module__,
         IntervalRotatingWaveParameters.__module__,
+        run_oblique_probe.__module__,
     ):
         relative = Path("src") / Path(*module_name.split(".")).with_suffix(".py")
         actual = Path(sys.modules[module_name].__file__).resolve()
@@ -230,6 +239,8 @@ def _run_worker(
             try:
                 result = json.loads(stdout)
                 _validate_worker_result(result, inputs, precision)
+                if "--oblique-probe" in command:
+                    _validate_probe_record(result.get("oblique_probe"), inputs)
             except (ValueError, KeyError, TypeError) as error:
                 record.update(error=str(error), stdout=stdout)
             else:
@@ -239,6 +250,38 @@ def _run_worker(
     record["elapsed_seconds"] = time.monotonic() - start
     record["finished_utc"] = _utc()
     return record
+
+
+def _validate_probe_record(record: Any, inputs: dict) -> None:
+    if not isinstance(record, dict) or record.get("status") not in {
+        "completed",
+        "error",
+        "not-run",
+    }:
+        raise ValueError("missing oblique probe record")
+    if record["status"] != "completed":
+        return
+    result = record["result"]
+    if (
+        result.get("schema") != "fifo-oblique-probe-v1"
+        or result.get("scope") != PROBE_SCOPE
+        or result.get("arithmetic") != "float64"
+        or result.get("parameters") != inputs["parameters"]
+        or result.get("radius") != float(inputs["radius"])
+        or result.get("theta") != float(inputs["theta"])
+        or result.get("settings")
+        != {
+            "angles_degrees": list(ANGLES_DEGREES),
+            "signs": [-1, 1],
+            "relative_amplitude": RELATIVE_AMPLITUDE,
+            "steps": STEPS,
+            "sample_every": SAMPLE_EVERY,
+            "scaled_duration_alpha_n": float(inputs["parameters"]["alpha"]) * STEPS,
+        }
+        or [(arm["angle_degrees"], arm["sign"]) for arm in result["arms"]]
+        != [(angle, sign) for angle in ANGLES_DEGREES for sign in (-1, 1)]
+    ):
+        raise ValueError("oblique probe does not match registered inputs/settings")
 
 
 def classify_panels(panels: list[dict]) -> str:
@@ -281,6 +324,7 @@ def _run_attempt(directory: Path, inputs: dict, metadata: dict) -> dict:
         "precision_panels": list(PRECISIONS),
         "seconds_per_panel": PANEL_SECONDS,
         "authorization_acknowledged_by_operator": True,
+        "authorization_scope": "Author approved the two bounded panels and requested oblique perturbations before execution; fixed supplementary probes run only in the 80-dps worker, within its existing deadline.",
     }
     _write_json(directory / "receipt.json", receipt)
     panels = []
@@ -289,19 +333,35 @@ def _run_attempt(directory: Path, inputs: dict, metadata: dict) -> dict:
             directory / f"panel_{precision}_started.json",
             {"started_utc": _utc(), "precision_dps": precision},
         )
+        command = [
+            sys.executable,
+            str(Path(__file__).resolve()),
+            "--worker",
+            str(precision),
+        ]
+        if precision == 80:
+            command.append("--oblique-probe")
         panel = _run_worker(
-            [sys.executable, str(Path(__file__).resolve()), "--worker", str(precision)],
+            command,
             inputs,
             precision,
             seconds=PANEL_SECONDS,
         )
         _write_json(directory / f"panel_{precision}.json", panel)
         panels.append(panel)
+    probe = (panels[0]["result"] or {}).get(
+        "oblique_probe", {"status": "not-available"}
+    )
     summary = {
         "schema": receipt["schema"],
         "metadata": metadata,
         "finished_utc": _utc(),
         "decision": classify_panels(panels),
+        "oblique_probe": {
+            "status": probe["status"],
+            "decision": probe.get("result", {}).get("decision"),
+            "result_file": "panel_80.json",
+        },
         "panels": [
             {key: panel[key] for key in ("precision_dps", "status", "elapsed_seconds")}
             | {
@@ -312,13 +372,13 @@ def _run_attempt(directory: Path, inputs: dict, metadata: dict) -> dict:
             }
             for panel in panels
         ],
-        "claim_boundary": "One prepared finite-H circle's local linear normal form only; no planar proof, formation, lifetime, topology or quantum claim.",
+        "claim_boundary": "The main decision is normal-only. Supplementary float64 oblique probes describe one fixed finite window, not full 3D stability. No planar proof, formation, lifetime, topology or quantum claim.",
     }
     _write_json(directory / "summary.json", summary)
     lines = [
         "# FIFO normal anchor attempt 1",
         "",
-        f"Decision: **{summary['decision']}**.",
+        f"Normal-only decision: **{summary['decision']}**.",
         "",
         "| dps | status | decision | seconds |",
         "| ---: | --- | --- | ---: |",
@@ -329,6 +389,28 @@ def _run_attempt(directory: Path, inputs: dict, metadata: dict) -> dict:
         )
     lines += [
         "",
+        "## Supplementary oblique probes",
+        "",
+        f"Status: {probe['status']}. Decision: {probe.get('result', {}).get('decision')}.",
+        "",
+    ]
+    if probe["status"] == "completed":
+        lines += [
+            "Float64; proper-rotation/translation aligned, age-labelled shape RMS. Angles are in history-state norm.",
+            "",
+            "| angle | sign | initial RMS | final / initial | sampled peak / initial |",
+            "| ---: | ---: | ---: | ---: | ---: |",
+        ]
+        for arm in probe["result"]["arms"]:
+            lines.append(
+                f"| {arm['angle_degrees']} | {arm['sign']} | {arm['initial_distance']:.9g} | {arm['final_ratio']:.9g} | {arm['sampled_peak_ratio']:.9g} |"
+            )
+        lines += [
+            "",
+            f"Maximum sampled baseline shape drift: {max(probe['result']['baseline_distances']):.9g}.",
+            "",
+        ]
+    lines += [
         summary["claim_boundary"],
         "",
         "Exact inputs and provenance: receipt.json. Full intervals and failures: panel_80.json and panel_120.json.",
@@ -356,17 +438,41 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute-authorized", action="store_true")
     parser.add_argument("--expected-revision")
+    parser.add_argument("--oblique-probe", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument(
         "--worker", type=int, choices=PRECISIONS, help=argparse.SUPPRESS
     )
     args = parser.parse_args(argv)
+    if args.oblique_probe and args.worker != 80:
+        parser.error("oblique probes belong only to the 80-dps worker budget")
     if args.worker is not None:
         _check_module_origins()
         payload = json.load(sys.stdin)
+        inputs = dict(payload)
         parameters = IntervalRotatingWaveParameters(**payload.pop("parameters"))
         result = certify_normal_fifo_box(
             **payload, parameters=parameters, precision_dps=args.worker
         )
+        if args.oblique_probe:
+            probe = {"status": "not-run", "reason": "root not certified"}
+            if result["root_certificate"]["pass"]:
+                start = time.monotonic()
+                try:
+                    probe = {
+                        "status": "completed",
+                        "result": run_oblique_probe(
+                            radius=float(inputs["radius"]),
+                            theta=float(inputs["theta"]),
+                            parameters=inputs["parameters"],
+                        ),
+                    }
+                except Exception as error:
+                    probe = {
+                        "status": "error",
+                        "error": f"{type(error).__name__}: {error}",
+                    }
+                probe["elapsed_seconds"] = time.monotonic() - start
+            result["oblique_probe"] = probe
         print(json.dumps(result, allow_nan=False))
         return 0
     if not args.execute_authorized or not args.expected_revision:

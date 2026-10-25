@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (FIFO-Normalrunner synthetisch geprueft; konkrete Zielfreigabe angefragt, noch nicht erteilt).
+Stand: 2026-10-25 (begrenzter FIFO-Ankertest freigegeben; schraege Zusatzstoerungen vor Zielauswertung festgelegt).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -38,9 +38,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [begrenzte H=1200-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
    ist vor jeder Zielauswertung vorgeschlagen. Der begrenzte Runner
    besteht jetzt 34 Herkunfts-, Subprozess-, Abbruch- und Ergebniskontrollen.
-   Naechster Schritt ist nach CI-Pruefung und der angefragten konkreten
-   Autorenfreigabe genau der einmalige 80-/120-dps-Test, ohne adaptive
-   Nachsuche. Bis dahin keine Zielauswertung. Bisher gibt es keinen neuen
+   Die konkrete Autorenfreigabe liegt jetzt vor, mit ausdruecklichem Wunsch
+   nach schraegen Stoerungen. Der vorab festgelegte Zusatz prueft 0/30/45/60/90
+   Grad mit beiden Vorzeichen fuer 2000 Updates, innerhalb des unveraenderten
+   ersten 300-Sekunden-Budgets. Naechster Schritt ist nach Pruefung und
+   Einfrieren des erweiterten Runners genau der einmalige 80-/120-dps-Test,
+   ohne adaptive Nachsuche. Bis dahin keine Zielauswertung. Bisher gibt es keinen neuen
    normalen Stabilitaetsbefund am archivierten Anker.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
@@ -55,8 +58,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    vorausgesetzte Quantenstruktur samt ersten Gegenpruefungen. Empfehlung
    ist vorerst die unveraenderte Regel, ohne Erfolgsaussicht zu behaupten.
    Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
-   Luecke zu verdecken. Dies bleibt analytische Bestandsarbeit ohne
-   Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
+   Luecke zu verdecken. Ausserhalb des konkret freigegebenen Ankertests
+   bleibt dies Bestandsarbeit ohne Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
    Autors. Paper I kann als eigenstaendiger Publikationsstrang parallel
    weiterbearbeitet werden.
 2. **Paper I als begrenzten Ausgangspunkt abschliessen -- R0-Einordnung liegt vor.**

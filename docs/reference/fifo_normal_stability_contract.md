@@ -185,7 +185,7 @@ noch eine neue Auswertung archivierter FIFO-Zellen.
 
 ## 5. Begrenzte Zielauswertung noch offen
 
-Vor einer Zielauswertung fehlen folgende Bestandteile eines begrenzten,
+Eine begrenzte Zielauswertung erfordert folgende Bestandteile eines
 vorab festzulegenden Ausfuehrungsvertrags:
 
 - **Root und Herkunft:** Ein fest ausgewaehlter existenzzertifizierter
@@ -215,8 +215,12 @@ implementiert, darunter ein echter Prozessabbruch und ein kleiner
 Nicht-Root-Worker. Zusammen mit den vorherigen Regressionen bestehen 207
 Tests. Der Runner liest den gepinnten Git-Input, verlangt eine saubere
 benannte Ausfuehrungsrevision und ueberschreibt keine bestehende Auswertung.
-Sein Ausfuehrungsflag ersetzt keine menschliche Zustimmung. Die Freigabe
-fuer den Ankertest steht weiterhin aus; kein Zielbefund liegt vor.
+Sein Ausfuehrungsflag ersetzt keine menschliche Zustimmung. Die konkrete
+Autorenfreigabe liegt inzwischen vor und verlangt auch schraege Stoerungen.
+Der entsprechend ergaenzte Vertrag legt zehn feste Winkel-/Vorzeichenarme
+fuer 2000 Updates im bestehenden ersten Panelbudget fest. Das sind
+float64-Formdiagnosen in einem endlichen Fenster, kein Ersatz fuer den
+linearen Normaltest oder ein allgemeiner 3D-Pass. Kein Zielbefund liegt vor.
 
 Bis dahin ist nur die Methode vorbereitet. Auch ein spaeterer strikt
 bestandener Normaltest waere ein lokaler Strukturbaustein, keine

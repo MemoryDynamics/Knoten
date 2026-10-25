@@ -1,6 +1,7 @@
 """Runner controls use pinned-source reads, stubs and tiny non-target workers."""
 
 from copy import deepcopy
+import io
 import json
 from pathlib import Path
 import sys
@@ -121,6 +122,7 @@ def test_numerical_modules_are_loaded_from_this_worktree(monkeypatch, tmp_path):
     assert runner._check_module_origins() == [
         "src/emergenz_knoten/fifo_normal_stability.py",
         "src/emergenz_knoten/rotating_wave_interval.py",
+        "src/emergenz_knoten/fifo_oblique_probe.py",
     ]
     module = sys.modules[runner.certify_normal_fifo_box.__module__]
     monkeypatch.setattr(module, "__file__", str(tmp_path / "other-installation.py"))
@@ -248,12 +250,14 @@ def test_attempt_persists_each_panel_and_cannot_overwrite_or_retry(
         if precision == 120:
             assert (directory / "panel_80.json").exists()
         assert seconds == 300
+        assert ("--oblique-probe" in command) == (precision == 80)
         calls.append(precision)
         return _panel(precision, "strictly-schur" if precision == 80 else "timeout")
 
     monkeypatch.setattr(runner, "_run_worker", fake_worker)
     summary = runner._run_attempt(directory, _inputs(), {"synthetic": True})
     assert summary["decision"] == "inconclusive"
+    assert summary["oblique_probe"]["status"] == "not-available"
     assert calls == [80, 120]
     saved = {path.name: path.read_bytes() for path in directory.iterdir()}
     assert json.loads(saved["panel_120.json"])["status"] == "timeout"
@@ -269,3 +273,51 @@ def test_output_serialization_failure_does_not_create_a_false_result(tmp_path):
     with pytest.raises(ValueError):
         runner._write_json(path, {"bad": float("nan")})
     assert not path.exists()
+
+
+def test_probe_record_missing_or_wrong_inputs_cannot_pass():
+    with pytest.raises(ValueError, match="missing oblique"):
+        runner._validate_probe_record(None, _inputs())
+    with pytest.raises(ValueError, match="registered inputs"):
+        runner._validate_probe_record({"status": "completed", "result": {}}, _inputs())
+
+
+def test_mixed_growth_does_not_change_normal_only_classification():
+    panels = [_panel(80, "strictly-schur"), _panel(120, "strictly-schur")]
+    panels[0]["result"]["oblique_probe"] = {
+        "status": "completed",
+        "result": {"decision": "growth-over-registered-window"},
+    }
+    assert runner.classify_panels(panels) == "strictly-schur"
+
+
+def test_probe_flag_cannot_add_work_to_second_panel(capsys):
+    with pytest.raises(SystemExit) as caught:
+        runner.main(["--worker", "120", "--oblique-probe"])
+    assert caught.value.code == 2
+    assert "80-dps worker budget" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("fails", [False, True])
+def test_worker_keeps_probe_arithmetic_and_failures_separate(
+    monkeypatch, capsys, fails
+):
+    monkeypatch.setattr(runner, "_check_module_origins", lambda: [])
+    monkeypatch.setattr(runner, "certify_normal_fifo_box", lambda **kwargs: _result())
+    monkeypatch.setattr(sys, "stdin", io.StringIO(json.dumps(_inputs())))
+    calls = []
+
+    def small_probe(**kwargs):
+        calls.append(kwargs)
+        if fails:
+            raise FloatingPointError("synthetic failure")
+        return {"decision": "growth-over-registered-window"}
+
+    monkeypatch.setattr(runner, "run_oblique_probe", small_probe)
+    assert runner.main(["--worker", "80", "--oblique-probe"]) == 0
+    result = json.loads(capsys.readouterr().out)
+    assert result["decision"] == "strictly-schur"
+    assert result["oblique_probe"]["status"] == ("error" if fails else "completed")
+    assert calls == [
+        {"radius": 1.1, "theta": 0.13, "parameters": _inputs()["parameters"]}
+    ]

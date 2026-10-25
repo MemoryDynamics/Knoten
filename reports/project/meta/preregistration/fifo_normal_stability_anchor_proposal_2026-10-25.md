@@ -1,12 +1,16 @@
 # FIFO normal stability: bounded anchor proposal
 
-Date: 2026-10-25. Status: **proposed, not authorized, not executed**.
+Date: 2026-10-25. Status: **authorized with a pre-run oblique amendment; not executed**.
 This fixes a single target before inspecting any of its normal stability
 outcomes. It does not reopen G5 or P5, change the model, or authorize a
 parameter search. The bounded execution runner is now implemented and
 tested without target execution. The
 [initial proposal](https://github.com/MemoryDynamics/Knoten/blob/927922df21a88e87d17200d02acb5ffa0a3d6a3f/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
 preserves the pre-run target and budget; these have not changed.
+The author has now explicitly approved the bounded attempt and requested
+oblique perturbations as well. The fixed supplement below is recorded
+before the first target evaluation. This authorization does not reopen
+other targets or permit automatic retries.
 
 ## Question and selection
 
@@ -49,8 +53,9 @@ recursion on the entire degree-1197 quotient. Keep all additional modes.
 - Sequential execution, no parameter variation or root search.
 - Stop the active worker when its panel budget expires. Report the timeout;
   do not silently retry. The second predefined panel may still run.
-- No extra precision, horizon, geometry, model, trajectory, noise or
-  long-lifetime study under this proposal.
+- No extra precision, horizon, geometry, model, noise or long-lifetime
+  study. The only added trajectories are the fixed oblique supplement below,
+  inside the existing first-panel deadline.
 
 Before target execution, freeze the runner revision and verify synthetic
 tests for fixed-input selection, provenance rejection, timeout handling,
@@ -97,6 +102,64 @@ and documentation regressions, **207 tests pass**. These are method and
 execution controls, not a new anchor stability result or independent
 scientific review.
 
+### Authorized oblique supplement, fixed before execution
+
+The actual anchor has theta approximately 0.01577 radians, not pi/2.
+The pi/2 circles used earlier were small synthetic method controls.
+Here an angle means the angle of a history perturbation relative to the
+planar subspace in the unweighted full-history Euclidean norm. It is not
+the angular spacing of consecutive history nodes, nor a fixed angle at
+every individual node.
+
+At a planar circle the radial-kernel map is reflection symmetric: its
+linearization separates planar and normal variations. Consequently an
+oblique linear variation is the sum of the two block responses. A pure
+normal test cannot certify the planar block; the fixed supplementary
+nonlinear probes also expose possible mixed finite-time behavior.
+
+- Reuse the same frozen center and parameters, converted to float64.
+  This supplement is not an 80-digit trajectory calculation.
+- Form the envelope `cos(2*j*theta)+0.3*sin(3*j*theta)`. Multiply it by the
+  local radial unit vector for the planar pattern, and by the normal unit
+  vector for the normal pattern.
+- Project the planar pattern off the two planar translations and the
+  in-plane rigid rotation. Project the normal pattern off the normal
+  translation and the two infinitesimal plane tilts. Normalize each to
+  unit RMS across the H age-labelled nodes. This projects known tangent
+  vectors, not numerically selected near-neutral eigenmodes.
+- Combine the patterns as `cos(beta)*P+sin(beta)*N`, at beta = 0, 30, 45,
+  60 and 90 degrees, with both overall signs. These are ten arms, including
+  pure planar/normal controls. Use one fixed RMS amplitude `1e-5*R`.
+- Evolve each arm and a common unperturbed reference for exactly 2000
+  deterministic native FIFO updates (`alpha*n=20`); no stochastic drive,
+  root refinement, amplitude adaptation or reselection of patterns.
+- Sample every ten updates, including the initial and final states.
+  Read out shape RMS after optimal translation and proper 3D rotation,
+  preserving age labels. Report final/initial and maximum sampled/initial
+  distances. The latter is not a bound between samples. Alignment defines
+  a shape observable, not a claim that orientation is physically a gauge.
+- If the maximum sampled reference shape drift from its initial circle
+  is at least 1% of the smallest initial arm distance, label the window
+  `unresolved-baseline-drift`. Otherwise any final ratio above 1.2 gives
+  `growth-over-registered-window`; all below 0.8 gives
+  `contraction-over-registered-window`; otherwise it is unresolved.
+  These thresholds are descriptive, not stability certificates.
+- Execute this supplement once, after the normal calculation in the
+  80-dps worker, only if the root was certified. It shares that worker's
+  original 300-second deadline. The 120-dps worker does not repeat it.
+  Timeout, nonfinite arithmetic or other failure yields a technical
+  non-result, not instability; no automatic fallback is authorized.
+
+The linear normal decision and supplementary finite-window description
+remain separate in all reports. One amplitude, spatial pattern and finite
+window cannot establish an all-mode result, nonlinear basin or lifetime.
+Target-free controls check proper alignment, all six removed rigid
+tangents, registered angles, agreement with the existing planar kernel,
+first-order block additivity and complete sampling.
+With this amendment, **229 affected regression tests pass locally**,
+including 56 runner/probe controls. Lint and the strict documentation
+build also pass. No target calculation is included in those tests.
+
 ## Decision rules
 
 Each panel retains the adapter's result:
@@ -126,7 +189,9 @@ rigorously, nonlinear basin size, generic formation, noise lifetime,
 topological protection, dimension selection, quantum behavior, or a
 physical weak interaction. A second precision is not an independent
 interval backend. No new target evaluation has been made to prepare this
-proposal; constructed H=4 controls are only method tests.
+proposal or its oblique amendment; constructed H=4 controls and small
+oblique probes are only method tests.
 
-Author approval for this specific bounded evaluation is required before
-execution. There is no automatic fallback after an inconclusive result.
+Author approval for this specific bounded evaluation has been received.
+Freeze and verify the amended runner before execution. There is no
+automatic fallback after an inconclusive result.
