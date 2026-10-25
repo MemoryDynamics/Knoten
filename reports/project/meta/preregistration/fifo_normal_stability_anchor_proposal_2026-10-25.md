@@ -3,7 +3,10 @@
 Date: 2026-10-25. Status: **proposed, not authorized, not executed**.
 This fixes a single target before inspecting any of its normal stability
 outcomes. It does not reopen G5 or P5, change the model, or authorize a
-parameter search. The bounded execution runner is not implemented yet.
+parameter search. The bounded execution runner is now implemented and
+tested without target execution. The
+[initial proposal](https://github.com/MemoryDynamics/Knoten/blob/927922df21a88e87d17200d02acb5ffa0a3d6a3f/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
+preserves the pre-run target and budget; these have not changed.
 
 ## Question and selection
 
@@ -54,6 +57,45 @@ tests for fixed-input selection, provenance rejection, timeout handling,
 result persistence, and classification. Record clean execution revision,
 Python/mpmath versions, exact inputs, elapsed time and both panel outputs.
 Preserve errors and inconclusive panels as well as successes.
+
+### Runner readiness
+
+The [runner](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/dynamics/rotation/fifo_normal_anchor.py)
+reads and hashes the pinned Git blob, selects the same 120-dps source
+center for both panels, requires a clean explicitly named execution
+revision, and checks that the adapter and interval modules were loaded
+from that worktree. The reviewed runtime is Python 3.12 with mpmath 1.3.0.
+
+Each panel is a separate subprocess. Its monotonic deadline accounts for
+startup time; on expiry the parent kills and reaps that worker. Operating-
+system termination and report-writing overhead can make the reported total
+wall time slightly exceed the 300-second worker budget; this is reported,
+not additional numerical execution. There is no automatic retry.
+
+The fixed output directory is
+`reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25`.
+Exclusive creation prevents a second attempt from overwriting an existing
+one. A receipt is flushed before numerical work; start markers and complete
+panel records are saved separately, followed by a summary and readable
+report. A marker alone is not evidence of a live process or a result.
+An interrupted attempt is not automatically resumed.
+
+The explicit execution acknowledgement flag is an operator safeguard,
+not evidence of human consent by itself. The generic stdin worker is an
+internal execution mechanism, not an authorization boundary. No command
+using target inputs may be invoked until the author has approved this
+bounded evaluation. Before invocation, record the approved scope and
+freeze the tested runner's full Git revision.
+
+Local verification: 34 runner controls pass, including pinned-source
+inspection without numerical evaluation, source and import rejection,
+default no-execution behavior, ordered classification, durable separate
+results and overwrite refusal. A real small non-root H=4 worker checks
+the subprocess bridge. A real timeout worker is killed before a delayed
+file-writing side effect. With adapter, polynomial, interval, structure
+and documentation regressions, **207 tests pass**. These are method and
+execution controls, not a new anchor stability result or independent
+scientific review.
 
 ## Decision rules
 

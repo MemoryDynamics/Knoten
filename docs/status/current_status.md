@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (FIFO-Normaltest synthetisch vorbereitet; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
+Stand: 2026-10-25 (FIFO-Normalrunner vorbereitet, Zielfreigabe ausstehend; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -50,6 +50,10 @@ Kontrollen umfassen konstruierte H=4-Roots mit abklingender und wachsender
 Normalmode sowie den Produktionskernel. Der vorgeschlagene begrenzte
 H=1200-Ankertest ist noch nicht autorisiert oder ausgefuehrt. Kein neuer
 3D-Stabilitaetspass oder Zielversuch.
+Der Runner ist mit 34 zusaetzlichen Tests auf feste Herkunft, Importpfade,
+Prozessabbruch, getrennte Ergebnissicherung und verweigerte Wiederholung
+geprueft. Insgesamt bestehen lokal 207 betroffene Regressionstests.
+Die angefragte Autorenfreigabe liegt noch nicht vor.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

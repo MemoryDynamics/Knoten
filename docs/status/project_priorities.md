@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (FIFO-Normaltest als Methodenprototyp vorbereitet; keine neue Zielausfuehrungsfreigabe).
+Stand: 2026-10-25 (FIFO-Normalrunner synthetisch geprueft; konkrete Zielfreigabe angefragt, noch nicht erteilt).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -36,10 +36,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Krawczyk-Pruefung und direkten binaeren Intervallen implementiert und
    an konstruierten stabilen/instabilen Normalfaellen geprueft. Der
    [begrenzte H=1200-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
-   ist vor jeder Zielauswertung vorgeschlagen. Naechster Schritt ist der
-   begrenzte Ausfuehrungsrunner samt Herkunfts- und Abbruchkontrollen,
-   danach nur mit Freigabe auswerten. Bisher gibt es keinen neuen normalen
-   Stabilitaetsbefund am archivierten Anker.
+   ist vor jeder Zielauswertung vorgeschlagen. Der begrenzte Runner
+   besteht jetzt 34 Herkunfts-, Subprozess-, Abbruch- und Ergebniskontrollen.
+   Naechster Schritt ist nach CI-Pruefung und der angefragten konkreten
+   Autorenfreigabe genau der einmalige 80-/120-dps-Test, ohne adaptive
+   Nachsuche. Bis dahin keine Zielauswertung. Bisher gibt es keinen neuen
+   normalen Stabilitaetsbefund am archivierten Anker.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die

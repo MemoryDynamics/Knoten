@@ -210,7 +210,13 @@ vorab festzulegenden Ausfuehrungsvertrags:
 Der [vorgeschlagene Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
 legt den urspruenglichen H=1200-Anker, die Quellenrevision, zwei
 Praezisionsstufen und Abbruchgrenzen vor jeder Zielauswertung fest.
-Er ist noch nicht autorisiert; der begrenzte Ausfuehrungsrunner fehlt noch.
+Der begrenzte Runner ist inzwischen mit 34 Ablauf- und Fehlerkontrollen
+implementiert, darunter ein echter Prozessabbruch und ein kleiner
+Nicht-Root-Worker. Zusammen mit den vorherigen Regressionen bestehen 207
+Tests. Der Runner liest den gepinnten Git-Input, verlangt eine saubere
+benannte Ausfuehrungsrevision und ueberschreibt keine bestehende Auswertung.
+Sein Ausfuehrungsflag ersetzt keine menschliche Zustimmung. Die Freigabe
+fuer den Ankertest steht weiterhin aus; kein Zielbefund liegt vor.
 
 Bis dahin ist nur die Methode vorbereitet. Auch ein spaeterer strikt
 bestandener Normaltest waere ein lokaler Strukturbaustein, keine
