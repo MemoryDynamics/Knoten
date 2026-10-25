@@ -2,8 +2,8 @@
 
 Stand: 2026-10-25. Aufbauend auf der
 [Strukturauswahl](fifo_structure_candidate.md), Ausgangsrevision `6a5b76d`.
-Analytische Reduktion und synthetischer Prototyp, **kein Zielbefund und
-noch kein ausfuehrungsreifes Messprotokoll**. Die Arbeitsreihenfolge steht
+Analytische Reduktion und synthetisch gepruefter Rootbox-Adapter,
+**kein Zielbefund und keine Zielausfuehrungsfreigabe**. Die Arbeitsreihenfolge steht
 in den [Projektprioritaeten](../status/project_priorities.md).
 
 ## 1. Welche Aussage geprueft werden soll
@@ -133,14 +133,57 @@ Zwei Praezisionen sind kein zweiter unabhaengiger Intervallbackend.
 Die gespeicherten binaeren Endpunkte sind fuer Einschliessungen massgeblich;
 Dezimaldarstellungen dienen der Lesbarkeit.
 
-Lokale Verifikation: 66 Tests in `tests/test_fifo_normal_stability.py`
-bestanden; zusammen mit den betroffenen Intervall-, Struktur- und
-Dokumentationsregressionen 150 bestanden. Verwendet wurden Python 3.12.14,
-mpmath 1.3.0, NumPy 2.3.5, SciPy 1.16.3 und pytest 8.4.2. Die kleinen
-Kontrollen ersetzen weder ein unabhaengiges Fachreview noch die fehlende
-Rootbox-Anbindung.
+### Rootbox-Anbindung
 
-## 5. Fehlende Bindung an einen konkreten Kandidaten
+`certify_normal_fifo_box` ergaenzt jetzt die zuvor fehlende Kette. Fuer
+exakte dezimale Parameter und eine vorgegebene Box wird zuerst das
+vorhandene finite-H-Krawczyk-Verfahren erneut ausgewertet. Ohne dessen
+bestandene Bedingungen folgt `root-not-certified`, ohne Schur-Auswertung.
+Die Anbindung akzeptiert kein externes Pass-Flag.
+
+Die binaeren Endpunkte der gesamten zertifizierten Rootbox gehen direkt
+in die Intervallrechnung fuer $c_j$, $p_H$, $\cos\theta$ und den
+Polynomquotienten ein. Weder Mittelpunkt noch angezeigte Dezimalgrenzen
+werden zurueckgelesen. Die Division und die Schur-Rekursion arbeiten ohne
+dezimalen Zwischenexport. Bei einem mit der Faktorenidentitaet
+unvereinbaren Rest folgt `inconsistent-symmetry-factor`, kein physikalischer
+Instabilitaetsclaim. Parameter, Root-Eingaben, Zertifikat und alle
+Polynomintervalle werden zusammen ausgegeben. Der Adapter bindet noch
+keinen bestimmten archivierten Kandidaten und ist kein Zielrunner.
+
+Zwei **konstruierte Methodenkontrollen**, keine ausgewaehlten
+Forschungskandidaten, pruefen diese ganze Kette. Fuer $H=4$, $R=1$,
+$\theta=\pi/2$, $q=1-\alpha$, $\eta=M_0=1$ erzwingt die Kreisbalance
+
+$$
+c_1=-\frac{1}{1-q^2},\quad c_2=\frac{1}{1-q^2},\quad
+c_3=-\frac{q^2}{1-q^2},\qquad
+q_{H-3}(z)=z-\frac{q^2}{1-q^2}.
+$$
+
+Mit $\sigma_{\rm rep}=1$, $\sigma_{\rm att}=2$ lassen sich die beiden
+Gaussamplituden aus den erforderlichen Kraftfaktoren bei den Chordlaengen
+$\sqrt2$ und $2$ durch ein lineares Zweiersystem bestimmen. Der Test
+waehlt vorab $q=1/2$ und $q=3/4$: Die Normalformmode ist dann $1/3$
+beziehungsweise $9/7$. Die Amplituden werden auf 110 Dezimalstellen
+geschrieben; anschliessend zertifiziert der Adapter den nahen Root des
+**so definierten Dezimalmodells** bei 60 und 90 Stellen. Dies setzt keinen
+exakt rationalen Winkel oder unveraenderten Root nach Rundung voraus.
+Die Stabilitaetsaussagen folgen aus der Intervallkette, nicht allein aus
+der idealisierten Kontrollformel. Ueber den ebenen Formblock dieser
+Testmodelle wird nichts behauptet.
+
+Die [23 Adaptertests](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_fifo_normal_adapter.py)
+pruefen zudem eine unabhaengige Chordformel, den normalen Differenzenquotienten
+des Produktionskernels, Nicht-Roots, absichtlich inkonsistente Faktoren,
+beschadigte Anzeigedezimalen, Eingaben und Praezisionswiederherstellung.
+Die 66 bisherigen Polynomtests bleiben gruen. Zusammen mit den betroffenen
+Intervall-, Struktur- und Dokumentationsregressionen: **173 bestanden**.
+Verwendet wurden Python 3.12.14, mpmath 1.3.0, NumPy 2.3.5, SciPy 1.16.3
+und pytest 8.4.2. Diese Kontrollen sind weder ein unabhaengiges Fachreview
+noch eine neue Auswertung archivierter FIFO-Zellen.
+
+## 5. Begrenzte Zielauswertung noch offen
 
 Vor einer Zielauswertung fehlen folgende Bestandteile eines begrenzten,
 vorab festzulegenden Ausfuehrungsvertrags:
@@ -149,10 +192,9 @@ vorab festzulegenden Ausfuehrungsvertrags:
   endlicher Kreisroot mit Revision, exakten Parametern und Rootbox. Nicht
   nach Sichtung von Normalbefunden den guenstigsten Kandidaten auswaehlen.
   Das separate unendliche G4-Zertifikat ersetzt diese finite-H-Bindung nicht.
-- **Verifizierte Abbildung:** Die Rootbox muss alle exakten $c_j$, den
-  Symmetriefaktor und die Quotientenkoeffizienten einschliessen. Der
-  Adapter vom vorhandenen Rootzertifikat zum neuen Polynomtest ist noch
-  nicht implementiert. In der bestehenden Intervallbalance ist die erste
+- **Verifizierte Abbildung:** Der jetzt implementierte Adapter muss mit
+  dem festgelegten Zielinput und seiner Herkunft verbunden werden; seine
+  Kontrollfaelle sind kein Zielpass. In der bestehenden Intervallbalance ist die erste
   Komponente $-F_R$, die zweite $F_T$; diese Vorzeichenkonvention bleibt
   explizit zu pruefen.
 - **Symmetrie und Rest:** Der exakte Kreisroot begruendet die Division;
@@ -164,6 +206,11 @@ vorab festzulegenden Ausfuehrungsvertrags:
   Praezisionserhoehung.
 - **Autorisierung:** Erst nach Adapterpruefung und Freigabe einen solchen
   Zieltest ausfuehren. Alte G5- und P5-Freigaben werden nicht wiederverwendet.
+
+Der [vorgeschlagene Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
+legt den urspruenglichen H=1200-Anker, die Quellenrevision, zwei
+Praezisionsstufen und Abbruchgrenzen vor jeder Zielauswertung fest.
+Er ist noch nicht autorisiert; der begrenzte Ausfuehrungsrunner fehlt noch.
 
 Bis dahin ist nur die Methode vorbereitet. Auch ein spaeterer strikt
 bestandener Normaltest waere ein lokaler Strukturbaustein, keine

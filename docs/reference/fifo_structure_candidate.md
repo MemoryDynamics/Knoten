@@ -199,8 +199,9 @@ Quanteninterpretation waeren jeweils weitere, getrennte Schritte.
 Der anschliessende [Methodenvertrag](fifo_normal_stability_contract.md)
 trennt die drei normalen Symmetriemoden durch einen exakten kubischen
 Faktor und spezifiziert einen Intervall-Schur-Test fuer den gesamten
-Formquotienten. Der Prototyp ist nur synthetisch geprueft; seine Bindung
-an eine zertifizierte konkrete Kreisloesung fehlt noch. Dieses Gate ist
+Formquotienten. Die Rootbox-Anbindung ist inzwischen an konstruierten
+Kontrollen geprueft; ein Test des archivierten Ankers ist vorgeschlagen,
+aber noch nicht ausgefuehrt oder freigegeben. Dieses Gate ist
 in den [Projektprioritaeten](../status/project_priorities.md) verankert,
 vor Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer
 messender Lauf braucht einen begrenzten Vertrag und Ausfuehrungsfreigabe.

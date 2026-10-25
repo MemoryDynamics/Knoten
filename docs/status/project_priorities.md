@@ -32,10 +32,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [Normalstabilitaets-Methodenvertrag](../reference/fifo_normal_stability_contract.md)
    trennt nun exakt drei Symmetriemoden und prueft den Formquotienten mit
    einer bekannten Schur-Rekursion; der Intervallprototyp besteht kleine
-   synthetische Gegenchecks. Naechster begrenzter Schritt ist die
-   verifizierte Abbildung einer finiten Rootbox auf Quotientenkoeffizienten
-   samt festem Ausfuehrungsvertrag. Erst danach eine Zielauswertung
-   freigeben; bisher gibt es keinen neuen normalen Stabilitaetsbefund.
+   synthetische Gegenchecks. Die Rootbox-Abbildung ist jetzt mit frischer
+   Krawczyk-Pruefung und direkten binaeren Intervallen implementiert und
+   an konstruierten stabilen/instabilen Normalfaellen geprueft. Der
+   [begrenzte H=1200-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md)
+   ist vor jeder Zielauswertung vorgeschlagen. Naechster Schritt ist der
+   begrenzte Ausfuehrungsrunner samt Herkunfts- und Abbruchkontrollen,
+   danach nur mit Freigabe auswerten. Bisher gibt es keinen neuen normalen
+   Stabilitaetsbefund am archivierten Anker.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die

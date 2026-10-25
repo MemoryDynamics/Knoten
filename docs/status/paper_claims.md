@@ -31,8 +31,9 @@ Kreisloesung nach 3D ist algebraisch; Stabilitaet in den zusaetzlichen
 Normalrichtungen ist offen und nicht Teil des bisherigen G5-Passes.
 Der [Normaltest-Prototyp](../reference/fifo_normal_stability_contract.md)
 liefert eine exakte Symmetriedivision und eine bekannte Intervall-Schur-
-Pruefung fuer vorgegebene Koeffizientenboxen, noch keine verifizierte
-Koeffizientenbox eines Zielroots. Synthetische Methodentests sind weder
+Pruefung samt erneutem Existenzzertifikat und Rootbox-Anbindung, bisher
+nur an konstruierten Kontrollmodellen. Eine Koeffizientenbox eines
+archivierten Zielroots ist noch nicht neu ausgewertet. Methodentests sind weder
 neue physikalische Evidenz noch ein Stabilitaetszertifikat dieses Kandidaten.
 
 ## Paper 0: Mathematical Anchor

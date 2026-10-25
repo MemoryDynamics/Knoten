@@ -44,8 +44,12 @@ nach genau drei normalen Symmetriemoden. Ein Intervallprototyp der bekannten
 Schur-Rekursion unterscheidet strikte Stabilitaet, Nicht-Striktheit und
 Unentschiedenheit an synthetischen Kontrollen. Zusatzmoden nahe eins bleiben
 erhalten; transiente Verstaerkung bleibt von asymptotischem Abklingen
-getrennt. Die verifizierte Bindung an einen konkreten finiten Kreisroot
-fehlt noch. Kein neuer 3D-Stabilitaetspass oder Zielversuch.
+getrennt. Die Rootbox-Anbindung ist jetzt mit frischer Krawczyk-Pruefung
+und direkter Weitergabe binaerer Intervallgrenzen implementiert. 23 neue
+Kontrollen umfassen konstruierte H=4-Roots mit abklingender und wachsender
+Normalmode sowie den Produktionskernel. Der vorgeschlagene begrenzte
+H=1200-Ankertest ist noch nicht autorisiert oder ausgefuehrt. Kein neuer
+3D-Stabilitaetspass oder Zielversuch.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine
