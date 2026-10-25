@@ -1,6 +1,12 @@
 # FIFO normal stability: bounded anchor proposal
 
-Date: 2026-10-25. Status: **authorized with a pre-run oblique amendment; not executed**.
+Date: 2026-10-25. Status: **executed once and closed**.
+The [execution report](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
+records an inconclusive normal certificate and strong finite-window
+growth in all tested arms with a normal component. No retry occurred.
+The text below preserves the pre-run plan; its frozen, authorized version
+is [revision 16f60f5](https://github.com/MemoryDynamics/Knoten/blob/16f60f5a12281628a55eb5e591fe027418d21a3a/reports/project/meta/preregistration/fifo_normal_stability_anchor_proposal_2026-10-25.md).
+
 This fixes a single target before inspecting any of its normal stability
 outcomes. It does not reopen G5 or P5, change the model, or authorize a
 parameter search. The bounded execution runner is now implemented and

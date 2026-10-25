@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (FIFO-Ankertest mit schraegen Zusatzstoerungen freigegeben, noch nicht ausgefuehrt; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
+Stand: 2026-10-25 (FIFO-Ankertest abgeschlossen: starke normale/schraege Formverstaerkung, rigoroser Normaltest unentschieden; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -32,10 +32,10 @@ sind die beiden ebenen Drehsinne durch eigentliche Rotation verbunden;
 die $\mathbb Z_2$-Wegklassen des nichtentarteten Rahmenbereichs sind keine
 zwei Teilchentypen. Im vollen FIFO-Raum laesst sich die Rotationsschleife
 ueber erlaubte Rahmenentartungen kontrahieren. Ein separat hergeleiteter
-Normalblock macht die noch ungepruefte Stabilitaet gegen Auslenkungen aus
+Normalblock macht die gesondert zu pruefende Stabilitaet gegen Auslenkungen aus
 der Ebene explizit. 26 kleine synthetische Checks bestehen, einschliesslich
-einer kollapsfreien Kontraktion der Rahmenrotation in 4D. Keine neue
-Zielmessung, geschuetzte topologische Ladung oder Wechselwirkungsidentifikation.
+einer kollapsfreien Kontraktion der Rahmenrotation in 4D. Diese synthetischen
+Checks sind keine Zielmessung, geschuetzte topologische Ladung oder Wechselwirkungsidentifikation.
 
 Der anschliessende
 [Normalstabilitaets-Methodenvertrag](../reference/fifo_normal_stability_contract.md)
@@ -47,20 +47,22 @@ erhalten; transiente Verstaerkung bleibt von asymptotischem Abklingen
 getrennt. Die Rootbox-Anbindung ist jetzt mit frischer Krawczyk-Pruefung
 und direkter Weitergabe binaerer Intervallgrenzen implementiert. 23 neue
 Kontrollen umfassen konstruierte H=4-Roots mit abklingender und wachsender
-Normalmode sowie den Produktionskernel. Der vorgeschlagene begrenzte
-H=1200-Ankertest ist jetzt autorisiert, aber noch nicht ausgefuehrt. Kein neuer
-3D-Stabilitaetspass oder Zielversuch.
-Der Runner ist mit 34 zusaetzlichen Tests auf feste Herkunft, Importpfade,
-Prozessabbruch, getrennte Ergebnissicherung und verweigerte Wiederholung
-geprueft. Insgesamt bestehen lokal 207 betroffene Regressionstests.
-Die Autorenfreigabe umfasst jetzt auch schraege Stoerungen. Der vorab
-festgelegte Zusatz prueft zehn feste Winkel-/Vorzeichenarme in float64
-fuer 2000 Updates, innerhalb des ersten unveraenderten 300-Sekunden-Budgets.
-Die endliche Formabweichung bleibt vom rigorosen Normaltest getrennt;
-sie waere kein allgemeiner 3D-Stabilitaetsbeweis.
-Mit der Erweiterung bestehen lokal 229 betroffene Regressionstests,
-einschliesslich 56 Runner-/Stoerungskontrollen, sowie Lint und strikter
-Dokumentationsbau. Diese Tests enthalten keine Zielauswertung.
+Normalmode sowie den Produktionskernel. Der begrenzte H=1200-Ankertest
+wurde nach ausdruecklicher Autorenfreigabe samt festen schraegen Stoerungen
+einmalig ausgefuehrt. Die
+[Auswertung mit Kurven und Rohdaten](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
+trennt zwei Ergebnisse: Beide frischen Rootzertifikate bestehen, aber die
+80-/120-dps-Normaltests bleiben durch Intervallaufweitung unentschieden.
+Die zehn float64-Arme ueber 2000 Updates zeigen Abklingen bei 0 Grad
+(Endfaktor etwa 0.000462) und starke Formverstaerkung bei 30/45/60/90 Grad
+(Endfaktoren etwa 1206/1705/2087/2409). Die ungestoerte Form driftet nur
+um maximal abgetastet 2.09e-15. Das ist ein deutlicher begrenzter
+Wachstumsbefund, noch kein asymptotischer Instabilitaetsbeweis und kein
+allgemeiner 3D-Stabilitaetspass. Es gab keinen Timeout oder weiteren Versuch.
+Vor Ausfuehrung bestanden 229 betroffene lokale Regressionstests,
+einschliesslich 56 Runner-/Stoerungskontrollen, Lint, strikter
+Dokumentationsbau und die vollstaendige GitHub-CI. Diese Softwaretests
+enthalten selbst keine Zielauswertung. Die Versuchsgenehmigung ist verbraucht.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

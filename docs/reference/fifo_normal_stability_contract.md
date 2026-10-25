@@ -183,7 +183,7 @@ Verwendet wurden Python 3.12.14, mpmath 1.3.0, NumPy 2.3.5, SciPy 1.16.3
 und pytest 8.4.2. Diese Kontrollen sind weder ein unabhaengiges Fachreview
 noch eine neue Auswertung archivierter FIFO-Zellen.
 
-## 5. Begrenzte Zielauswertung noch offen
+## 5. Begrenzte Zielauswertung und Ergebnis
 
 Eine begrenzte Zielauswertung erfordert folgende Bestandteile eines
 vorab festzulegenden Ausfuehrungsvertrags:
@@ -220,9 +220,17 @@ Autorenfreigabe liegt inzwischen vor und verlangt auch schraege Stoerungen.
 Der entsprechend ergaenzte Vertrag legt zehn feste Winkel-/Vorzeichenarme
 fuer 2000 Updates im bestehenden ersten Panelbudget fest. Das sind
 float64-Formdiagnosen in einem endlichen Fenster, kein Ersatz fuer den
-linearen Normaltest oder ein allgemeiner 3D-Pass. Kein Zielbefund liegt vor.
+linearen Normaltest oder ein allgemeiner 3D-Pass.
 
-Bis dahin ist nur die Methode vorbereitet. Auch ein spaeterer strikt
+Der [einmalige Versuch](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
+ist inzwischen abgeschlossen. Beide Rootpruefungen bestehen; beide
+Normaltests bleiben durch Aufweitung der Intervall-Polynomdivision schon
+beim ersten Schur-Vergleich unentschieden. Die vorab festgelegten
+schraegen/normalen Stoerungen wachsen stark im endlichen Fenster, die
+getestete planare Stoerung klingt ab. Dies ersetzt das fehlende
+asymptotische Zertifikat nicht. Keine automatische Wiederholung.
+
+Auch ein spaeterer strikt
 bestandener Normaltest waere ein lokaler Strukturbaustein, keine
 Herleitung von Teilchen, einer Raumdimension oder der schwachen
 Wechselwirkung. Paper-I-Baseline und bisherige FIFO-Claims bleiben bestehen.

@@ -23,8 +23,11 @@ ist Ausgangswissen, kein Beleg fuer diese weitergehenden Verbindungen.
 Als begrenzter Strukturkandidat fuer R2 ist inzwischen die
 [altersmarkierte FIFO-Schleife mit Orientierungsrahmen](../reference/fifo_structure_candidate.md)
 identifiziert. Ihre bedingte Konfigurationsraumtopologie ist nicht bereits
-eine geschuetzte Ladung. Die zusaetzlichen Normalmoden bei einer gewaehlten
-3D-Einbettung bleiben ungeprueft. Diese Auswahl konkretisiert den
+eine geschuetzte Ladung. Der erste begrenzte
+[3D-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
+zeigt starkes endliches Formwachstum bei schraegen/normalen Stoerungen;
+das rigorose Normalzertifikat bleibt numerisch unentschieden. Eine robuste
+3D-Struktur ist damit nicht belegt. Diese Auswahl konkretisiert den
 unveraenderten klassischen Pfad, ohne zusaetzliche Felder oder eine
 Quantenregel als Ergebnis auszugeben.
 

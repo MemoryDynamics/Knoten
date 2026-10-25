@@ -200,8 +200,13 @@ Der anschliessende [Methodenvertrag](fifo_normal_stability_contract.md)
 trennt die drei normalen Symmetriemoden durch einen exakten kubischen
 Faktor und spezifiziert einen Intervall-Schur-Test fuer den gesamten
 Formquotienten. Die Rootbox-Anbindung ist inzwischen an konstruierten
-Kontrollen geprueft; ein Test des archivierten Ankers ist vorgeschlagen,
-aber noch nicht ausgefuehrt oder freigegeben. Dieses Gate ist
+Kontrollen geprueft. Der inzwischen freigegebene und abgeschlossene
+[H=1200-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
+bleibt im rigorosen Normalteil wegen Intervallaufweitung unentschieden.
+Feste schraege und senkrechte Stoerungen wachsen stark ueber 2000 Updates;
+die getestete planare Formstoerung klingt ab. Das stellt die robuste
+3D-Bausteininterpretation zurueck, beweist aber noch keine asymptotische
+Instabilitaet. Die weitere methodische Pruefung ist
 in den [Projektprioritaeten](../status/project_priorities.md) verankert,
 vor Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer
 messender Lauf braucht einen begrenzten Vertrag und Ausfuehrungsfreigabe.
