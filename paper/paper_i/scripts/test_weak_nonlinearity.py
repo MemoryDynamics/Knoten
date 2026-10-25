@@ -24,6 +24,134 @@ from weak_nonlinearity import (
 )
 
 
+@pytest.mark.parametrize("alpha", [0.19, 0.43])
+@pytest.mark.parametrize("gain", [-0.07, 0.31])
+@pytest.mark.parametrize("flat_prehistory", [False, True])
+def test_aging_euler_map_matches_both_initial_history_conventions(
+    alpha, gain, flat_prehistory
+):
+    history = np.array([[0.4, -0.2], [0.1, 0.8], [-0.3, 0.6], [0.7, -0.1]])
+    innovation = np.array([0.3, -0.8])
+    step, sigma = 0.37, 0.5
+    q = 1 - alpha
+    decay = -np.log(q) / step
+    source_coupling = -gain * alpha / step**2
+    lags = np.arange(len(history))
+    displacements = history[-1] - history[::-1]
+    drift = -gain * (alpha * q**lags) @ displacements
+    if flat_prehistory:
+        drift -= gain * q ** len(history) * (history[-1] - history[0])
+    canonical_increment = drift + sigma * np.sqrt(step) * innovation
+
+    sampled_kernel = np.exp(-decay * step * lags)
+    if flat_prehistory:
+        centered = history - history[0]
+        # Section 6's convolution scheme includes the entire sampled mass.
+        source_drift = (
+            source_coupling
+            * step**2
+            * (
+                centered[-1] / (1 - np.exp(-decay * step))
+                - sampled_kernel @ centered[::-1]
+            )
+        )
+    else:
+        source_drift = source_coupling * step**2 * (sampled_kernel @ displacements)
+    source_increment = source_drift + sigma * np.sqrt(step) * innovation
+    np.testing.assert_allclose(canonical_increment, source_increment, atol=2e-15)
+
+
+@pytest.mark.parametrize("alpha", [0.19, 0.43])
+@pytest.mark.parametrize("gain", [-0.07, 0.31])
+def test_aging_sampled_age_moment_recovers_discrete_transport(alpha, gain):
+    step, epsilon = 0.4, 0.3
+    q = 1 - alpha
+    source_coupling = -gain * alpha / step**2
+    sampled_first_moment = step**2 * q / alpha**2
+    sigma = epsilon / np.sqrt(step)
+    source_diffusion = sigma**2 / (
+        2 * (1 - source_coupling * sampled_first_moment) ** 2
+    )
+    d2, d4 = untruncated_transport_response(alpha, gain, 0.0, 1)
+    assert epsilon**2 * d2 / step == pytest.approx(source_diffusion, rel=1e-13)
+    assert d4 == 0.0
+    assert abs(q * (1 - gain)) < 1
+
+
+@pytest.mark.parametrize("source_coupling", [-0.7, 0.6])
+def test_aging_scaled_discrete_transport_tends_to_continuous_coefficient(
+    source_coupling,
+):
+    decay, sigma = 1.3, 0.4
+    expected = sigma**2 / (2 * (1 - source_coupling / decay**2) ** 2)
+    errors = []
+    for step in (0.2, 0.1, 0.05, 0.025):
+        alpha = -np.expm1(-decay * step)
+        gain = -source_coupling * step**2 / alpha
+        d2, _ = untruncated_transport_response(alpha, gain, 0.0, 1)
+        errors.append(abs(sigma**2 * d2 - expected))
+    ratios = np.array(errors[:-1]) / errors[1:]
+    assert np.all((ratios > 3.8) & (ratios < 4.2))
+
+
+@pytest.mark.parametrize("source_coupling", [-0.7, 0.0, 0.6])
+def test_aging_exponential_resolvent_and_variance_solve_the_linear_model(
+    source_coupling,
+):
+    decay, sigma = 1.3, 0.4
+    pole = source_coupling / decay - decay
+    constant = decay**2 / (decay**2 - source_coupling)
+    transient = -source_coupling / (decay**2 - source_coupling)
+
+    def resolvent(time):
+        return constant + transient * np.exp(pole * time)
+
+    assert resolvent(0) == pytest.approx(1)
+    for time in (0.9, 2.4):
+        convolution = quad(
+            lambda age: resolvent(time - age) * np.exp(-decay * age), 0, time
+        )[0]
+        derivative = transient * pole * np.exp(pole * time)
+        assert derivative == pytest.approx(
+            source_coupling * (resolvent(time) / decay - convolution), abs=2e-13
+        )
+        variance = sigma**2 * quad(lambda age: resolvent(age) ** 2, 0, time)[0]
+        explicit = sigma**2 * (
+            constant**2 * time
+            + 2 * constant * transient * np.expm1(pole * time) / pole
+            + transient**2 * np.expm1(2 * pole * time) / (2 * pole)
+        )
+        assert variance == pytest.approx(explicit, rel=1e-13)
+
+
+@pytest.mark.parametrize("decay", [0.7, 2.0])
+def test_aging_critical_special_case_rejects_printed_intro_prefactor(decay):
+    first, second, third = (1 / decay**2, 2 / decay**3, 6 / decay**4)
+    slope = 2 * first / second
+    intro_constant = 4 * first * third / second**2
+    body_constant = 2 * first * third / (3 * second**2)
+    assert slope == pytest.approx(decay)
+    assert intro_constant == pytest.approx(6)
+    assert body_constant == pytest.approx(1)
+    time = 1.1
+    convolution = quad(
+        lambda age: (1 + decay * (time - age)) * np.exp(-decay * age), 0, time
+    )[0]
+    assert decay**2 * ((1 + decay * time) / decay - convolution) == pytest.approx(
+        decay, rel=1e-13
+    )
+    variance = quad(lambda age: (1 + decay * age) ** 2, 0, time)[0]
+    assert variance == pytest.approx(
+        time + decay * time**2 + decay**2 * time**3 / 3, rel=1e-13
+    )
+
+
+def test_aging_printed_figure_kernel_has_first_moment_two_not_one_quarter():
+    first_moment = quad(lambda age: age**2 * np.exp(-age), 0, np.inf)[0]
+    assert first_moment == pytest.approx(2, rel=1e-12)
+    assert first_moment != pytest.approx(0.25)
+
+
 @pytest.mark.parametrize("gain", [0.0, 0.17, 0.63])
 def test_lag_covariance_matches_independent_impulse_reference(gain):
     spec = importlib.util.spec_from_file_location(

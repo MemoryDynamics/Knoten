@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (konkreter Antwortbeweis ergaenzt; Wert des kontrollierten Modellbeispiels bewerten, keine neue Panel-/FIFO-/P5-Autorisierung).
+Stand: 2026-10-25 (Aging-Volltext abgeglichen: exakte lineare Euler-Zuordnung; nichtlinearer Publikationsbeitrag weiter offen, keine neue Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -43,6 +43,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Occupation-Masse sowie Sarkars PRE-"Memory engine" und Gaussian-Delay-
    Feedback pruefen; der reine Befund kompakter relativer Radien bei
    fortbestehender Diffusion ist kein ausreichender Neuheitsanspruch.
+   Der nun abgeschlossene
+   [Aging-Volltextabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/aging_full_text_comparison_2026-10-25.md)
+   liefert die exakte lineare Euler-Zuordnung samt Startkonventionen und
+   skaliertem kontinuierlichem Transportgrenzwert. Die Quelle behandelt
+   keine nichtlineare Schwachrauschentwicklung; daraus folgt keine
+   Neuheitsbestaetigung. Die konkrete Gueltigkeitsleistung gegen rigorose
+   Linearisierungs-/Antworttheorie und durch ein Fachreview bewerten.
    Die bereits formale erste nichtlineare Korrektur als eigene
    Publikationshypothese samt Gueltigkeitsgrenze weiter pruefen; sie ist
    kein nachgewiesener Schritt zu Gravitation oder Standardmodell.
@@ -190,8 +197,10 @@ Gaussprojektion reproduziert inzwischen nachweislich denselben $D_4$;
 ein reiner Mittelwertvergleich loest die Neuheitsfrage nicht. Der begrenzte
 Satzvergleich und der ergaenzte konkrete Poissonbeweis praezisieren
 inzwischen die verbleibende Frage nach dem Mehrwert des kontrollierten
-Modellbeispiels; sie ersetzen keine fachliche Bewertung. Der Volltextabgleich
-der Aging-Arbeit und ein unabhaengiges Fachreview bleiben ebenfalls offen.
+Modellbeispiels; sie ersetzen keine fachliche Bewertung. Der gelieferte
+Aging-Volltext ist nun auf Modellebene abgeglichen, mit dokumentierten
+Vorzeichen-/Koeffizientenproblemen der gelieferten Fassung. Bernard--Wu
+auf Satzebene und ein unabhaengiges Fachreview bleiben offen.
 Ein Datenpanel wird dadurch nicht automatisch
 festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
 
@@ -211,7 +220,8 @@ Anschluss.
 Paper I ist als Baseline redaktionell und reproduktionstechnisch geschlossen,
 aber die wissenschaftliche PRE-Reife ist offen. Der Neuheitsaudit identifiziert
 bereits bestehende Transport-/Memory-Architekturen; die volle Aging-Arbeit ist
-noch nicht im Gleichungsdetail abgeglichen. Die neue nichtlineare Rechnung
+inzwischen auf Modellebene abgeglichen und deckt die lineare Euler-Regel
+nach expliziter Parameterzuordnung ab. Die neue nichtlineare Rechnung
 ist keine gemessene Evidenz. Stationaere
 relative Existenz ist nun fuer festes endliches $H$ und positives Rauschen
 analytisch begruendet. Positive Mittelung rechtfertigt zusaetzlich die

@@ -27,6 +27,14 @@ Methoden, nicht als neue Antworttheorie. Der
 gesamte Literaturvergleich und die fachliche Beitragsbewertung bleiben
 offen. Eine exakte lineare Reduktion folgt aus dem Projektionsbefund nicht.
 
+Der [Aging-Volltextabgleich](../research/aging_full_text_comparison_2026-10-25.md)
+ist inzwischen moeglich: Die ungekuerzte lineare Referenz entspricht nach
+expliziter Parameter- und Startzuordnung dem Euler-Schema der Quelle.
+Der kontinuierliche Transportkoeffizient folgt im skalierten
+Zeitschrittgrenzwert. Die nichtlineare Vollkraft ist dadurch nicht
+identifiziert. Der lineare Teil ist als bekannter Ausgangspunkt einzuordnen;
+der Mehrwert der kontrollierten nichtlinearen Aussage bleibt offen.
+
 Die [Stationaritaetsnotiz](../research/finite_memory_stationarity_2026-10-21.md)
 schliesst einen begrenzten Existenzschritt bei festem endlichem Speicher
 und positivem Rauschen. Dieser Existenzbeweis allein rechtfertigt keine

@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-25 (konkrete Poisson-/Transportantwort ergaenzt; Paper-I-/FIFO-Produktionsbefunde unveraendert).
+Stand: 2026-10-25 (Aging-Volltext und lineare Euler-Zuordnung geprueft; Paper-I-/FIFO-Produktionsbefunde unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -223,6 +223,16 @@ allein wuerde den $O(\varepsilon^6)$-Rest nicht rechtfertigen; die benoetigten
 Observablen- und Restabschaetzungen sind deshalb explizit ausgefuehrt.
 Dies ist keine unabhaengige Beweispruefung, neue allgemeine Methode oder
 Erweiterung auf die archivierten aktiven Modellzellen.
+
+Der [Aging-Volltextvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/aging_full_text_comparison_2026-10-25.md)
+schliesst nun die bisherige Zugriffsluecke. Bei ungekuerztem exponentiellem
+Gedaechtnis entspricht unsere lineare Regel exakt dem Euler-Schema der
+Quelle, wenn Parameter, Rauschen und Start gematcht sind. Kontinuierlicher
+und diskreter Diffusionskoeffizient sind erst im skalierten Grenzwert
+identisch. Die Quelle liefert keine nichtlineare Schwachrauschentwicklung;
+das bestaetigt weder deren Neuheit noch die gesamten allgemeinen Saetze
+des Preprints. Gepruefte Vorzeichen-/Koeffizientenfehler der gelieferten
+Fassung werden nicht uebernommen. Keine neue Produktions- oder Physikevidenz.
 
 Der kleine-Radius-Ast traegt als kontrollierter co-moving
 linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik

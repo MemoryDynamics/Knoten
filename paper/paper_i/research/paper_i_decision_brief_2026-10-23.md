@@ -26,6 +26,14 @@ Satzimport wird damit nicht behauptet. Beide Herleitungswege nutzen
 bekannte Methoden; die offene Frage ist der Wert des kontrollierten
 Modellbeispiels, nicht eine neue allgemeine Antworttheorie.
 
+Der nun moegliche [Aging-Volltextabgleich](aging_full_text_comparison_2026-10-25.md)
+zeigt zudem eine exakte Zuordnung unserer ungekuerzten linearen Regel zum
+Euler-Schema des Preprints, einschliesslich der Startkonventionen. Der
+kontinuierliche Diffusionskoeffizient folgt erst im passend skalierten
+Zeitschrittgrenzwert. Die lineare Grundlage ist damit konkret abgedeckt;
+die Quelle behandelt keine nichtlineare Schwachrauschkorrektur. Das ist
+keine Entwarnung zur Neuheit des verbleibenden Gueltigkeitsbeitrags.
+
 Die Leitfrage lautet: **Wann reicht gleiche lokale Kernelkruemmung nicht
 mehr aus, um den Langzeittransport vorherzusagen, und laesst sich die
 Abweichung ohne Fit an nichtlineare Simulationsdaten berechnen?**
@@ -93,7 +101,7 @@ des ersten Korrekturterms von $\lambda$.
 | Naechste Literatur | Der [Neuheitsaudit](pre_reassessment_2026-10-19.md) dokumentiert bereits Memory-Transport, Gaussian-Feedback und perturbative Diffusionskorrekturen. Ein anderes Expansionsargument allein begruendet keine ausreichende Neuheit. |
 | Konkrete Vergleichsgrenze | [Kopp--Klapp, Abschnitt IV, Gl. (19)--(22)](https://arxiv.org/pdf/2210.03182v3) verwenden fuer ihre Transportnaeherung kleinen Delay und die Hesse-Matrix am Ursprung. Unser Kandidat entwickelt bei festem Gedaechtnis in kleiner Rauschamplitude. Das unterscheidet diese Rechnungen, beweist aber keine Literaturprioritaet; am 2026-10-23 erneut am Volltext geprueft. |
 | Rigorose Methoden | Der [Satzvergleich mit direkter Poissonrechnung](linear_response_scope_audit_2026-10-24.md) liefert intern die konkrete Transportantwort samt Rest $O(\varepsilon^6)$ auf einem zweiten Weg. Das ist keine unabhaengige Begutachtung. Die Einordnung als modellspezifische Anwendung bekannter Methoden wird dadurch staerker. |
-| Offene Literaturfrage | Der Aging-Volltext ist weiterhin nicht auf Gleichungsebene abgeglichen. Sein Abstract genuegt weder fuer eine Identitaetsbehauptung noch fuer eine Entwarnung. |
+| Aging-Vergleich und offene Literatur | Der gelieferte Volltext ist auf Modellebene abgeglichen: exakte lineare Euler-Zuordnung, keine nichtlineare Transportentwicklung. Vorzeichen-/Koeffizientenfehler der gelieferten Fassung sind dokumentiert. Bernard--Wu und die breitere Neuheit des kontrollierten Resultats bleiben auf Satzebene zu pruefen. |
 | Vorhandene Daten | Die archivierten Radien pruefen eine lineare Referenz, nicht diesen Transportkoeffizienten. Keine aktive archivierte Zelle liegt im obigen hinreichenden Kontraktionsbereich. |
 | Praktische Nachweisbarkeit | Ein analytisches endliches Fehlerbudget existiert, aber nur mit sehr konservativem Rauschbereich. Die Maschinenarithmetik des vollstaendigen Tests ist noch nicht abgesichert. |
 

@@ -36,17 +36,27 @@ correlation response and remainder uniformly in the horizon, without
 importing a general theorem verbatim. This supports a controlled
 application of established methods, not evidence of method novelty.
 
+Update 2026-10-25: the user supplied the aging preprint. The
+[full-text comparison](aging_full_text_comparison_2026-10-25.md) establishes
+an exact match between our untruncated linear update and its Euler scheme
+after parameter and initialization matching. The continuous transport
+coefficient follows in a scaled small-step limit, not by setting the two
+first age moments equal at finite step. The source does not treat our
+nonlinear weak-noise correction; this does not establish its novelty.
+Version-specific sign and prefactor inconsistencies are recorded rather
+than imported. The aging model-level access gap is closed.
+
 ## Source and claim ledger
 
-Initial sources checked on 2026-10-19; the additions below are dated
-2026-10-21. A source-reported theorem is not an
+Initial sources checked on 2026-10-19; later inspections are dated in the
+entries and updates below. A source-reported theorem is not an
 independent reproduction. Absence of a result from this ledger is not
 proof that it is absent from the literature.
 
 | Source and inspected material | Verified overlap / source-reported result | Scope and consequence for this paper |
 | --- | --- | --- |
 | [Grima, PRL 95, 128103 (2005), author manuscript v2](https://arxiv.org/pdf/q-bio/0505004), Eqs. (1)--(3), (8), Fig. 1 | Deposited, diffusing and decaying chemical field coupled back to a noisy trajectory; approximate renormalized diffusion with inverse-square coupling dependence. | The derivation has explicit scale assumptions. Its field model is not our fixed spatial kernel. Nevertheless, reduced diffusion without self-localization is already an established physical story, not our new mechanism. |
-| [Milisic, Meunier and Roux, SSRN 6659876](https://doi.org/10.2139/ssrn.6659876), abstract; [CIRM author talk description](https://www.carmin.tv/en/video/self-interacting-diffusions-with-aging) | Linear attraction/repulsion to history with aging; long-time regimes depending on the memory kernel and an explicit exponential-memory case. | Closest linear competitor. The full 22-page manuscript was not retrieved; exact coefficient and discretization equivalence remain unresolved. Abstract-level evidence is sufficient to reject a broad novelty claim, not to declare theorem-by-theorem equivalence. |
+| [Meunier, Milisic and Roux, SSRN 6659876](https://doi.org/10.2139/ssrn.6659876), user-supplied 22-page preprint read 2026-10-25; Eqs. (1.1), (1.4), (3.3), Sections 5--6 | Linear age-weighted self-interaction, explicit exponential resolvent and Euler schemes. | The [full-text audit](aging_full_text_comparison_2026-10-25.md) gives the exact linear discrete map, the continuous coefficient limit and initialization qualifications. No nonlinear weak-noise transport theorem is supplied by this work; its sign/prefactor inconsistencies forbid uncritical formula reuse. |
 | [Du, Ren, Suciu and Wang, arXiv:2311.11428v3](https://arxiv.org/html/2311.11428v3), Eq. (4), Assumption 1 and Example 1; [journal record](https://doi.org/10.1016/j.matpur.2025.103782) | The same continuous-time architecture of a trajectory and exponentially weighted occupation measure is explicit; contractivity and stationary measures are proved under stated drift conditions. | Their uniform large-distance restoring assumption does not follow from our bounded Gaussian interaction alone. Do not import their absolute ergodicity theorem into our unpinned translation-invariant model. The architecture and Markov augmentation are not new here. |
 | [Sarkar, PRE 112, 054111 (2025)](https://journals.aps.org/pre/pdf/10.1103/t7nk-4p57), Secs. II B--C, Eqs. (1)--(3) | A noisy particle writes a fading Gaussian scalar imprint and responds to its gradient; the paper reports structured motion. | Particularly close topical precedent, absent from the frozen bibliography. Its equations include both a convolutional field source and intrinsic velocity memory. These extra temporal filters cannot be silently removed to declare identical models. Its coherence/energy interpretations are source-reported, not adopted or reproduced here. |
 | [Kopp and Klapp, arXiv:2210.03182v3](https://arxiv.org/pdf/2210.03182), Secs. II--III, Eqs. (1)--(5) | Overdamped Brownian motion with a nonlinear finite-range Gaussian force depending on a delayed position; linearization is explicitly separated from nonlinear behavior. | A single discrete delay and repulsive feedback differ from our distributed, net-attractive history. Nonlinear Gaussian memory feedback and comparing its linear/nonlinear transport are nevertheless not new categories. |
@@ -64,8 +74,10 @@ from fixed-memory weak noise, but does not establish novelty of our
 coefficient. Newman--Grima's Sec. V likewise prevents presenting a generic
 "first nonlinear transport correction" as a new mechanism. Its author-
 uploaded primary text was accessible; the publisher PDF returned HTTP 401.
-The aging-paper delivery URL again returned HTTP 403. Its full-text
-comparison remains missing, not silently treated as a completed review.
+The aging-paper delivery URL returned HTTP 403 on 2026-10-21 and again on
+2026-10-25. The subsequent user-supplied PDF now closes the model-level
+full-text comparison, with a file hash and exact inspection scope in the
+linked audit. It does not certify all general-kernel proofs.
 
 Own inference: the linear transport story is a useful baseline and a
 required control, but is not a sufficient replacement novelty claim. The
@@ -77,8 +89,10 @@ literature before any assertion of priority.
 Search boundary: exact aging-paper title and authors; exponentially weighted
 self-interacting diffusion; self-attraction, finite memory and transport;
 nonlinear/quartic history interactions. The author talk independently confirms
-the aging topic, but does not close the missing full-text comparison. No
-simulations are justified merely by this incomplete search.
+the aging topic; the later supplied manuscript, not the talk abstract,
+closes the model-level comparison. The broader novelty search and the
+Bernard--Wu theorem comparison remain incomplete. No simulations are
+justified merely by this search.
 
 The added Gaussian-feedback search exposed Sarkar's paper, which the
 2026-10-09 bibliography had missed. Its model-level comparison must be

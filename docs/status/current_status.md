@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (konkreter Poisson-/Transportbeweis ergaenzt; Publikationsbeitrag offen, Produktionsbefunde unveraendert).
+Stand: 2026-10-25 (Aging-Volltextvergleich abgeschlossen; nichtlinearer Publikationsbeitrag offen, Produktionsbefunde unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -114,6 +114,16 @@ Matrix-/Quadraturchecks bestaetigen die getrennten Verteilungs- und
 Korrelationsbeitraege zum Koeffizienten. Dies staerkt die Einordnung als
 Anwendung bekannter Methoden, nicht die Behauptung eines neuen Mechanismus.
 Unabhaengige Beweispruefung und Publikationsbewertung bleiben offen.
+
+Der gelieferte [Aging-Volltext](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/aging_full_text_comparison_2026-10-25.md)
+ist nun auf Modellebene abgeglichen. Die ungekuerzte lineare Regel ist
+nach Parameter- und Startzuordnung exakt das Euler-Schema des Preprints;
+sein kontinuierlicher Transportkoeffizient folgt im passend skalierten
+Zeitschrittgrenzwert. Zwanzig neue deterministische Checks pruefen diese
+Zuordnung, Resolvent und Koeffizienten sowie konkrete Inkonsistenzen der
+gelieferten Fassung. Der Preprint behandelt keine nichtlineare
+Schwachrauschkorrektur. Das schliesst die Zugriffsluecke, nicht die breitere
+Neuheitsfrage oder den fehlenden fundamentalen Anschluss.
 
 | Bereich | Reviewed Befund | Belastbare Lesart |
 | --- | --- | --- |
