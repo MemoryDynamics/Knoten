@@ -37,6 +37,15 @@ keine Quanten-, Lichtkegel- oder Teilchensuche durch Parameteroptimierung.
 Paper I bleibt parallel ein begrenzter klassischer Anker; seine
 Publikationsfrage ist davon getrennt.
 
+Ergaenzung 2026-10-25: Die
+[FIFO-Strukturauswahl](fifo_structure_candidate.md) konkretisiert einen
+begrenzten Kandidaten aus derselben Regel: altersmarkierte Schleife und
+Orientierungsrahmen, ohne interne Phase oder neue Felder. Sie trennt
+bedingte $SO(3)$-Wegtopologie von Schutz im vollen Zustandsraum und
+identifiziert die noch ungeprueften 3D-Normalmoden. Der Satz ueber den
+Rotationsquotienten in R0 schliesst raeumliche Orientierungen als
+kollektive Koordinaten nicht aus; er unterscheidet sie von internen Moden.
+
 ## 2. Annahmen und Resultate
 
 | Bereich | Input | Belegt / hergeleitet | Fehlender Schritt / entscheidender Gegenbefund |

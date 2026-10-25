@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (Aging-Volltext abgeglichen: exakte lineare Euler-Zuordnung; nichtlinearer Publikationsbeitrag weiter offen, keine neue Ausfuehrungsfreigabe).
+Stand: 2026-10-25 (FIFO-Strukturkandidat analytisch eingeordnet; Aging-Volltext abgeglichen, keine neue Zielausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -20,7 +20,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Architekturentscheidung aus R0/B1 treffen -- Vorlage liegt vor.** Der begrenzte
+1. **Bestehende Regel ausschoepfen: FIFO-Strukturkandidat pruefen.** Auf
+   Autorenwunsch steht die geeignete Struktur vor einer Feld- oder
+   Teilcheninterpretation. Die
+   [analytische Strukturauswahl](../reference/fifo_structure_candidate.md)
+   identifiziert eine altersmarkierte Schleife mit abgeleitetem Rahmen,
+   keinen bereits geschuetzten Knotentyp. In gewaehltem 3D sind die beiden
+   ebenen Drehsinne durch Raumrotation verbunden. Die bedingte
+   $SO(3)$-Wegtopologie endet an erlaubten Rahmenentartungen und traegt
+   nicht bei frei zugaenglichem $d\geq4$. Naechster
+   begrenzter Methodenabschluss: den zusaetzlichen Normalblock gegen
+   Symmetriemoden abgrenzen und einen kleinen 3D-Stabilitaetsvertrag
+   spezifizieren, bevor neue Messlaeufe oder Lebensdauern bewertet werden.
+   Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
+   Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die
    [B1-Bestandsanalyse](../reference/operational_contract.md) liegen vor:
    Die klassische Quellenantwort ist spezifiziert; ein gemeinsames
@@ -169,6 +182,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Reparaturen zaehlen nicht als neue Physikevidenz.
 
 ## Naechstes abnehmbares Ergebnis
+
+Fuer den fundamentalen Pfad liegt nun ein konkreter FIFO-Strukturkandidat
+samt Entartungsgegenbeispiel und analytischem Normalblock vor. Ein
+targetfreier Pruefvertrag fuer die fehlenden 3D-Moden muss Symmetrien,
+Gueltigkeitsbereich und Abbruchkriterium festlegen. Keine automatische
+Auswertung archivierter Zielzellen, neue Rootsuche oder Modellergaenzung.
 
 Die Vorlage fuer den fundamentalen Pfad ist zur Autorenentscheidung bereit.
 Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche

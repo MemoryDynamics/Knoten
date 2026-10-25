@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-25 (Aging-Volltext und lineare Euler-Zuordnung geprueft; Paper-I-/FIFO-Produktionsbefunde unveraendert).
+Stand: 2026-10-25 (FIFO-Rahmenstruktur analytisch eingeordnet; Paper-I-/FIFO-Produktionsbefunde unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -18,6 +18,17 @@ Es fehlt weiterhin ein gemeinsamer physikalischer Mehrsystem-/Messvertrag
 fuer die Programme II/III. B1 fuehrt keine neue Modellregel ein und
 autorisiert weder einen Quantenclaim noch eine physikalische Interpretation
 des direkten Fernzugriffs als Ueberlichtkommunikation.
+
+Die [FIFO-Strukturauswahl](../reference/fifo_structure_candidate.md)
+liefert ein abgeleitetes Orientierungsreadout, keine neue Dynamik. Der
+nichtentartete 3D-Rahmenbereich hat $SO(3)$-Wegtopologie, aber der volle
+FIFO-Konfigurationsraum erlaubt ihre Kontraktion ueber entartete Zustaende.
+Bei frei zugaenglichem $d\geq4$ entfaellt diese Wegklasse bereits im
+nichtentarteten Zweirahmenraum; sie ist kein dimensionsunabhaengiger Befund.
+Das ist keine intrinsische Knotenchiralitaet, Hopf-Ladung, fermionische
+Quantisierung oder schwache Wechselwirkung. Die Uebertragung der ebenen
+Kreisloesung nach 3D ist algebraisch; Stabilitaet in den zusaetzlichen
+Normalrichtungen ist offen und nicht Teil des bisherigen G5-Passes.
 
 ## Paper 0: Mathematical Anchor
 

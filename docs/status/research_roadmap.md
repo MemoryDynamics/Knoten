@@ -1,6 +1,6 @@
 # Forschungsroadmap
 
-Stand: 2026-10-21. Grobe, schrittweise zu verfeinernde Zielarchitektur.
+Stand: 2026-10-25. Grobe, schrittweise zu verfeinernde Zielarchitektur.
 Die Ausfuehrungsreihenfolge steht ausschliesslich in den
 [Projektprioritaeten](project_priorities.md).
 
@@ -19,6 +19,14 @@ Der separate FIFO-Zweig liefert lokale Existenz- und Stabilitaetsbefunde
 vorbereiteter Rotation. Weder Zweig etabliert derzeit Quantenmechanik,
 relativistische Gravitation oder Standardmodellteilchen. Nahe Literatur
 ist Ausgangswissen, kein Beleg fuer diese weitergehenden Verbindungen.
+
+Als begrenzter Strukturkandidat fuer R2 ist inzwischen die
+[altersmarkierte FIFO-Schleife mit Orientierungsrahmen](../reference/fifo_structure_candidate.md)
+identifiziert. Ihre bedingte Konfigurationsraumtopologie ist nicht bereits
+eine geschuetzte Ladung. Die zusaetzlichen Normalmoden bei einer gewaehlten
+3D-Einbettung bleiben ungeprueft. Diese Auswahl konkretisiert den
+unveraenderten klassischen Pfad, ohne zusaetzliche Felder oder eine
+Quantenregel als Ergebnis auszugeben.
 
 ## Stufen und Entscheidungspunkte
 

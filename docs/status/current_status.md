@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (Aging-Volltextvergleich abgeschlossen; nichtlinearer Publikationsbeitrag offen, Produktionsbefunde unveraendert).
+Stand: 2026-10-25 (FIFO-Strukturkandidat analytisch eingeordnet; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -24,6 +24,18 @@ seine Zuordnung zur Implementierung. Ein physikalischer Zwei-Stationen-
 Vertrag mit begruendeter Wahl oder Herleitung des Mehrsystemgesetzes,
 Aktuatoren und Detektoren fehlt weiter. Mathematisch definierte Paarkopplungen
 existieren; ihre physikalische Auswahl folgt nicht aus dem analytischen Abschluss.
+
+Die [FIFO-Strukturanalyse](../reference/fifo_structure_candidate.md)
+identifiziert als begrenzten Arbeitskandidaten eine altersgeordnete
+Memory-Schleife mit abgeleitetem Orientierungsrahmen. In gewaehltem 3D
+sind die beiden ebenen Drehsinne durch eigentliche Rotation verbunden;
+die $\mathbb Z_2$-Wegklassen des nichtentarteten Rahmenbereichs sind keine
+zwei Teilchentypen. Im vollen FIFO-Raum laesst sich die Rotationsschleife
+ueber erlaubte Rahmenentartungen kontrahieren. Ein separat hergeleiteter
+Normalblock macht die noch ungepruefte Stabilitaet gegen Auslenkungen aus
+der Ebene explizit. 26 kleine synthetische Checks bestehen, einschliesslich
+einer kollapsfreien Kontraktion der Rahmenrotation in 4D. Keine neue
+Zielmessung, geschuetzte topologische Ladung oder Wechselwirkungsidentifikation.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

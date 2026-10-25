@@ -23,6 +23,7 @@ nav:
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md
+      - FIFO-Strukturkandidat: reference/fifo_structure_candidate.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md
