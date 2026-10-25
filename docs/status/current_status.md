@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (FIFO-Strukturkandidat analytisch eingeordnet; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
+Stand: 2026-10-25 (FIFO-Normaltest synthetisch vorbereitet; Produktionsbefunde und offene Paper-I-Neuheit unveraendert).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -36,6 +36,16 @@ Normalblock macht die noch ungepruefte Stabilitaet gegen Auslenkungen aus
 der Ebene explizit. 26 kleine synthetische Checks bestehen, einschliesslich
 einer kollapsfreien Kontraktion der Rahmenrotation in 4D. Keine neue
 Zielmessung, geschuetzte topologische Ladung oder Wechselwirkungsidentifikation.
+
+Der anschliessende
+[Normalstabilitaets-Methodenvertrag](../reference/fifo_normal_stability_contract.md)
+reduziert die offene lineare Frage auf den vollstaendigen Formquotienten
+nach genau drei normalen Symmetriemoden. Ein Intervallprototyp der bekannten
+Schur-Rekursion unterscheidet strikte Stabilitaet, Nicht-Striktheit und
+Unentschiedenheit an synthetischen Kontrollen. Zusatzmoden nahe eins bleiben
+erhalten; transiente Verstaerkung bleibt von asymptotischem Abklingen
+getrennt. Die verifizierte Bindung an einen konkreten finiten Kreisroot
+fehlt noch. Kein neuer 3D-Stabilitaetspass oder Zielversuch.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

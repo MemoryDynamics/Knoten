@@ -196,11 +196,14 @@ Quanteninterpretation waeren jeweils weitere, getrennte Schritte.
 | Altersmarkierte Schleife mit Rahmen | Abgeleitetes $SO(3)$-Readout in gewaehltem 3D; bedingte Wegtopologie | Geeigneter begrenzter Arbeitskandidat, kein schon geschuetzter Knotentyp. |
 | Hopfion, verknuepfte Feldroehren oder intrinsische Knotenchiralitaet | Benoetigtes Feld bzw. geeignete Kurvenstruktur fehlt im geprueften Kreisast | Nicht aus der FIFO-Adresse oder dem Rahmen ableiten. |
 
-Das naechste fachliche Gate fuer diesen Kandidaten ist in den
-[Projektprioritaeten](../status/project_priorities.md) verankert: normaler
-Stabilitaetsblock und saubere Trennung von Gruppen- und Formmoden, vor
-Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer messender
-Lauf braucht einen vorab begrenzten Vertrag und Ausfuehrungsfreigabe.
+Der anschliessende [Methodenvertrag](fifo_normal_stability_contract.md)
+trennt die drei normalen Symmetriemoden durch einen exakten kubischen
+Faktor und spezifiziert einen Intervall-Schur-Test fuer den gesamten
+Formquotienten. Der Prototyp ist nur synthetisch geprueft; seine Bindung
+an eine zertifizierte konkrete Kreisloesung fehlt noch. Dieses Gate ist
+in den [Projektprioritaeten](../status/project_priorities.md) verankert,
+vor Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer
+messender Lauf braucht einen begrenzten Vertrag und Ausfuehrungsfreigabe.
 Keine neue Parametersuche, G5-Wiederholung oder P5-Freigabe folgt aus
 dieser analytischen Strukturauswahl.
 

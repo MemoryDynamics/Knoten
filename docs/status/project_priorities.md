@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (FIFO-Strukturkandidat analytisch eingeordnet; Aging-Volltext abgeglichen, keine neue Zielausfuehrungsfreigabe).
+Stand: 2026-10-25 (FIFO-Normaltest als Methodenprototyp vorbereitet; keine neue Zielausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -28,10 +28,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    keinen bereits geschuetzten Knotentyp. In gewaehltem 3D sind die beiden
    ebenen Drehsinne durch Raumrotation verbunden. Die bedingte
    $SO(3)$-Wegtopologie endet an erlaubten Rahmenentartungen und traegt
-   nicht bei frei zugaenglichem $d\geq4$. Naechster
-   begrenzter Methodenabschluss: den zusaetzlichen Normalblock gegen
-   Symmetriemoden abgrenzen und einen kleinen 3D-Stabilitaetsvertrag
-   spezifizieren, bevor neue Messlaeufe oder Lebensdauern bewertet werden.
+   nicht bei frei zugaenglichem $d\geq4$. Der
+   [Normalstabilitaets-Methodenvertrag](../reference/fifo_normal_stability_contract.md)
+   trennt nun exakt drei Symmetriemoden und prueft den Formquotienten mit
+   einer bekannten Schur-Rekursion; der Intervallprototyp besteht kleine
+   synthetische Gegenchecks. Naechster begrenzter Schritt ist die
+   verifizierte Abbildung einer finiten Rootbox auf Quotientenkoeffizienten
+   samt festem Ausfuehrungsvertrag. Erst danach eine Zielauswertung
+   freigeben; bisher gibt es keinen neuen normalen Stabilitaetsbefund.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die
