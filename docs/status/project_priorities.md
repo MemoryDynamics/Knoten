@@ -48,7 +48,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Keine Parametersuche zur Rettung des Kreises. Das endliche Wachstum ist
    noch kein asymptotischer Instabilitaetsbeweis. Ein weiterer Zieltest
    braucht eigenen begrenzten Vertrag und neue Freigabe; die vorliegende
-   Freigabe ist verbraucht.
+   Freigabe ist verbraucht. Der Autor hat danach separat die
+   [120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_oblique_120_control_2026-10-25.md)
+   angefordert. Diese eng begrenzte Kontrolle wird jetzt vorgezogen:
+   zwei neue 120-Grad-Arme gegen die gespeicherten 60-Grad-Arme mit
+   entgegengesetztem Vorzeichen, sonst unveraenderter Anker und Zeitfenster.
+   Kein neuer Normalzertifikatslauf. Danach bleibt die Modenfrage oben offen.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die
@@ -62,8 +67,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    vorausgesetzte Quantenstruktur samt ersten Gegenpruefungen. Empfehlung
    ist vorerst die unveraenderte Regel, ohne Erfolgsaussicht zu behaupten.
    Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
-   Luecke zu verdecken. Nach dem abgeschlossenen Ankertest bleibt dies
-   Bestandsarbeit ohne weitere Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
+   Luecke zu verdecken. Ausser der separat angeforderten 120-Grad-Kontrolle
+   bleibt dies Bestandsarbeit ohne weitere Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
    Autors. Paper I kann als eigenstaendiger Publikationsstrang parallel
    weiterbearbeitet werden.
 2. **Paper I als begrenzten Ausgangspunkt abschliessen -- R0-Einordnung liegt vor.**

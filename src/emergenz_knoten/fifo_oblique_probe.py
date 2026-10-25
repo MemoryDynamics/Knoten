@@ -58,8 +58,8 @@ def form_directions(history: np.ndarray, theta: float) -> tuple[np.ndarray, np.n
 
 
 def mixed_direction(planar: np.ndarray, normal: np.ndarray, angle: int) -> np.ndarray:
-    """Angle in the full unweighted history norm, not at each history node."""
-    if angle not in ANGLES_DEGREES:
+    """Oriented mixing angle in the planar/normal pattern basis."""
+    if angle not in (*ANGLES_DEGREES, 120):
         raise ValueError("unregistered perturbation angle")
     if angle == 0:
         return planar.copy()
@@ -100,6 +100,7 @@ def run_oblique_probe(
     parameters: dict,
     steps: int = STEPS,
     sample_every: int = SAMPLE_EVERY,
+    angles: tuple[int, ...] = ANGLES_DEGREES,
 ) -> dict:
     """Run all fixed angles/signs once; small horizons/windows are for tests."""
     if (
@@ -108,6 +109,15 @@ def run_oblique_probe(
         or min(steps, sample_every) < 1
     ):
         raise ValueError("positive integer step and sampling counts required")
+    if (
+        not angles
+        or len(set(angles)) != len(angles)
+        or any(
+            type(angle) is not int or angle not in (*ANGLES_DEGREES, 120)
+            for angle in angles
+        )
+    ):
+        raise ValueError("distinct supported angles required")
     horizon = parameters["horizon"]
     history = np.column_stack(
         (
@@ -128,7 +138,7 @@ def run_oblique_probe(
     amplitude = RELATIVE_AMPLITUDE * radius
     states = []
     arms = []
-    for angle in ANGLES_DEGREES:
+    for angle in angles:
         direction = mixed_direction(planar, normal, angle)
         for sign in (-1, 1):
             states.append(history + sign * amplitude * direction)
@@ -166,7 +176,7 @@ def run_oblique_probe(
         "radius": radius,
         "theta": theta,
         "settings": {
-            "angles_degrees": list(ANGLES_DEGREES),
+            "angles_degrees": list(angles),
             "signs": [-1, 1],
             "relative_amplitude": RELATIVE_AMPLITUDE,
             "steps": steps,

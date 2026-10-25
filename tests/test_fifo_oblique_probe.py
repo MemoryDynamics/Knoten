@@ -140,3 +140,51 @@ def test_nonfinite_state_is_a_technical_error(monkeypatch):
 def test_degenerate_pattern_is_not_silently_normalized():
     with pytest.raises(ValueError, match="degenerate"):
         probe.form_directions(np.zeros((5, 3)), 0.2)
+
+
+def test_120_initial_pattern_is_mirror_of_opposite_sign_60():
+    h = history()
+    p, n = probe.form_directions(h, 0.31)
+    reflection = np.array([1, 1, -1])
+    d60, d120 = [probe.mixed_direction(p, n, angle) for angle in (60, 120)]
+    np.testing.assert_allclose(d120, -d60 * reflection, atol=1e-15)
+    assert np.sum(d120 * p) / len(h) == pytest.approx(-0.5)
+    assert np.sum(d120 * n) / len(h) == pytest.approx(np.sqrt(3) / 2)
+
+
+def test_full_nonlinear_update_commutes_with_plane_reflection():
+    h = history() + 0.07 * np.random.default_rng(381).normal(size=(17, 3))
+    reflection = np.array([1, 1, -1])
+    w = finite_memory_weights(alpha=0.13, horizon=17, memory_mass=1.0)
+    np.testing.assert_allclose(
+        probe._native_step(h * reflection, w, 0.15, KERNEL),
+        probe._native_step(h, w, 0.15, KERNEL) * reflection,
+        atol=1e-15,
+    )
+    other = h + np.random.default_rng(34).normal(size=(17, 3))
+    assert probe.shape_distance(h * reflection, other * reflection) == pytest.approx(
+        probe.shape_distance(h, other), abs=1e-14
+    )
+
+
+def test_small_120_and_60_trajectories_match_opposite_sign_curves():
+    arguments = dict(
+        radius=1.2, theta=0.31, parameters=PARAMETERS, steps=23, sample_every=2
+    )
+    reference = probe.run_oblique_probe(**arguments, angles=(60,))
+    control = probe.run_oblique_probe(**arguments, angles=(120,))
+    assert control["sample_steps"][-1] == 23
+    assert len(control["arms"]) == 2
+    for new, old in zip(control["arms"], reversed(reference["arms"]), strict=True):
+        assert new["sign"] == -old["sign"]
+        np.testing.assert_allclose(
+            new["distances"], old["distances"], atol=1e-14, rtol=1e-10
+        )
+
+
+@pytest.mark.parametrize("angles", [(), (60, 60), (121,), (60.0,)])
+def test_invalid_angle_selections_fail_before_integration(angles):
+    with pytest.raises(ValueError, match="angles"):
+        probe.run_oblique_probe(
+            radius=1.2, theta=0.31, parameters=PARAMETERS, angles=angles
+        )
