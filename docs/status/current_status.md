@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-26 (120-Grad-Symmetriekontrolle bestanden; starke endliche normale/schraege Formverstaerkung, rigoroser Normaltest unentschieden; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-26 (H=1200-Kreis normal linear instabil: exakter Vorzeichenbeleg aus Archivkoeffizienten; alte Schur-Pruefung unentschieden; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -75,8 +75,18 @@ allgemeine Stabilitaet oder reale Physik. Kein weiterer Normalzertifikatslauf.
 Abschnitt 6 des [Methodenvertrags](../reference/fifo_normal_stability_contract.md)
 enthaelt nun einen elementaren hinreichenden Vorzeichenbeleg fuer eine
 reelle wachsende Normalmode, samt 20 synthetischen Gegenkontrollen.
-Insgesamt bestehen lokal 270 betroffene Tests. Die Ankerkoeffizienten
-wurden damit noch nicht ausgewertet; kein neuer Instabilitaetsbeweis.
+Die danach separat freigegebene
+[Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+belegt jetzt in beiden 80-/120-dps-Datensaetzen strikt
+$S\approx-0.3276456990433840337505836<0$ mit ueberlappenden exakten
+rationalen Intervallen. Damit existiert am unveraenderten H=1200-Kreis
+eine reelle Normalformmode mit Multiplikator groesser als eins. Dieser
+Kreis ist kein linear stabiler 3D-Baustein. Der Beleg uebernimmt die
+urspruengliche Root-/Koeffizienten-Vertrauensbasis; es gab keine neue
+Simulation oder Rootrechnung. Je ein Lauf dauerte 1.531/1.516 Sekunden;
+198 lokale Tests, Lint und Dokumentationsbau bestanden vor Ausfuehrung.
+Keine Wiederholung, Freigabe verbraucht. Andere FIFO-Strukturen und die
+nichtlineare Folgeentwicklung sind dadurch nicht entschieden.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

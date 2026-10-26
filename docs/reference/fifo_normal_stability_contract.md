@@ -2,8 +2,9 @@
 
 Stand: 2026-10-26. Aufbauend auf der
 [Strukturauswahl](fifo_structure_candidate.md), Ausgangsrevision `6a5b76d`.
-Analytische Reduktion, synthetische Kontrollen und der in Abschnitt 5
-dokumentierte unentschiedene Zielversuch. **Keine neue Zielausfuehrungsfreigabe.** Die Arbeitsreihenfolge steht
+Analytische Reduktion, synthetische Kontrollen, unentschiedener Schur-Versuch
+und anschliessender positiver Instabilitaetsbeleg aus Archivkoeffizienten
+(Abschnitt 6). **Alle hier dokumentierten Ausfuehrungsfreigaben sind verbraucht.** Die Arbeitsreihenfolge steht
 in den [Projektprioritaeten](../status/project_priorities.md).
 
 ## 1. Welche Aussage geprueft werden soll
@@ -242,7 +243,8 @@ Normalmode von transienter Verstaerkung zu unterscheiden. Dafuer kann
 eine elementare Vorzeichenpruefung ausreichen, ohne den gesamten
 Formquotienten auszurechnen. Die folgende eigene Herleitung ist eine
 Anwendung des Zwischenwertsatzes, kein beanspruchter neuer allgemeiner
-Stabilitaetssatz. Sie wurde noch nicht am Anker ausgewertet.
+Stabilitaetssatz. Die separat freigegebene Archivauswertung liefert nun
+einen strikt negativen Wert am Anker; siehe Ergebnis am Abschnittsende.
 
 Fuer den Normalblock aus Abschnitt 2 und reelles $x>0$ sei
 
@@ -311,17 +313,21 @@ Geprueft am 2026-10-26:
   bekannte allgemeinere Route. Sie werden hier nicht implementiert oder
   reproduziert. Ein gescheiterter Einschluss ist kein Stabilitaetsbefund.
 
-Die Vorzeichenroute soll zunaechst an synthetischen Faellen geprueft
-werden; diese Pruefung ist inzwischen erfolgt: 20 neue exakte bzw.
-Intervallkontrollen bestehen, insgesamt 270 betroffene Regressionstests.
-Ein Ankertest waere ein eigener begrenzter Beleg anhand der schon
-gespeicherten Koeffizientenintervalle, ohne neue Trajektorien oder
-Parametersuche. Die bisherigen Versuchsfreigaben werden dafuer nicht
-wiederverwendet.
+### Ausgewerteter Anker
 
-Die gespeicherten binaeren Endpunkte lassen sich als exakte rationale
-Zahlen lesen. Da nur ganzzahlige Gewichte und Summen vorkommen, kann
-dieser spaetere Archivtest ohne weitere Rundung erfolgen. Das wuerde
+Nach 20 synthetischen mathematischen Kontrollen wurde ein eigener
+Archiv-Runner geprueft, eingefroren und mit separater Autorenfreigabe
+einmal je Datensatz ausgefuehrt. Die
+[Ergebnisse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+liefern in beiden archivierten Praezisionsstufen 80/120 dps
+$S\approx-0.3276456990433840337505836$. Beide exakten rationalen
+Intervalle liegen strikt zwischen $-0.327646$ und $-0.327645$ und
+ueberlappen. Damit existiert am H=1200-Anker eine echte reelle wachsende
+Normalformmode. Die alte Schur-Klassifikation bleibt `inconclusive`.
+
+Die binaeren Endpunkte wurden ohne neue Rundung als Brueche summiert;
 die Vertrauensbasis der urspruenglichen Root- und Koeffizientenintervalle
-nicht ersetzen, aber neue Summationsrundung vermeiden. Die Hilfe und
-synthetischen Tests enthalten keinen solchen Ankeraufruf.
+wird uebernommen, nicht erneut zertifiziert. Laufzeiten 1.531/1.516 Sekunden,
+jeweils unter 30 Sekunden; keine neue Simulation, Rootrechnung, Suche oder
+Wiederholung. Der Befund betrifft diesen Kreis, keine allgemeine
+Unmoeglichkeit stabiler FIFO-Strukturen. Die Freigabe ist verbraucht.

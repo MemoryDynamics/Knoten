@@ -41,3 +41,12 @@ formation, particle interpretation or conclusion about all FIFO states follows.
 Synthetic controls cover decoding, sign/index mapping, zero boundaries,
 non-pass counterexamples, exactness beyond float64, archive validation,
 authorization, exclusive writes and timeout termination before target execution.
+
+## Closure
+
+Executed once per archived dataset on 2026-10-26 from frozen revision
+`a155b7b5daad3c31f2c4c8b84bdf6699a946f70b`, after 198 local tests,
+lint and strict documentation build passed. Both runs completed below
+30 seconds and returned `positive-real-normal-mode-certified`.
+[Result and limits](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md).
+Authorization consumed; no repeat or further target execution is authorized.

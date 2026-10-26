@@ -1,0 +1,35 @@
+{
+  "elapsed_seconds": 1.5309999999590218,
+  "finished_utc": "2026-10-26T21:56:01.263035+00:00",
+  "precision_dps": 80,
+  "result": {
+    "archived_schur_decision": "inconclusive",
+    "arithmetic": "exact fractions of archived binary endpoints",
+    "decision": "positive-real-normal-mode-certified",
+    "lag_count": 1199,
+    "precision_dps": 80,
+    "schema": "fifo-archived-normal-slope-v1",
+    "slope": {
+      "lower": {
+        "approximate_decimal_not_used_for_decision": "-0.3276456990433840337505836",
+        "denominator": "8148143905337944345073782753637512644205873574663745002544561797417525199053346824733589504",
+        "numerator": "-2669704305770539956358589789268429058134395502218535029542865967708101491000900079716911823"
+      },
+      "upper": {
+        "approximate_decimal_not_used_for_decision": "-0.3276456990433840337505836",
+        "denominator": "8148143905337944345073782753637512644205873574663745002544561797417525199053346824733589504",
+        "numerator": "-2669704305770539956358589789268429056826549327369852183661187359438254612609234018434141609"
+      }
+    },
+    "source": {
+      "path": "reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/panel_80.json",
+      "revision": "fdbd24fd437187a4db185d413f4c3bd022104b3b",
+      "sha256_git_blob_bytes": "5c3e1cfba7f50e35183332ed74497a38857f124ef5ceefd0233d920bb0c6fd95"
+    },
+    "trust_basis": "archived root/coefficient enclosure from mpmath.iv; no recertification"
+  },
+  "returncode": 0,
+  "started_utc": "2026-10-26T21:55:59.734026+00:00",
+  "status": "completed",
+  "stderr": ""
+}

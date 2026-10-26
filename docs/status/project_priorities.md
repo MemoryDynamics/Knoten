@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-26 (120-Grad-Symmetriekontrolle bestanden; Normalzertifikat weiter unentschieden, starke endliche Formverstaerkung ausserhalb der Ebene).
+Stand: 2026-10-26 (H=1200-Kreis normal linear instabil; Vorzeichenbeleg aus Archivkoeffizienten abgeschlossen, keine weitere Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -42,30 +42,27 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    dokumentiert: Beide Rootzertifikate bestehen; beide Normaltests bleiben
    durch Intervallaufweitung unentschieden. Im festen 2000-Update-Fenster
    klingt die getestete planare Formstoerung ab, alle getesteten 30/45/60/90-
-   Grad-Arme wachsen stark. Kein robuster 3D-Baustein belegt. Naechster
-   Schritt ist eine gezielte Zertifizierung der vermuteten wachsenden
-   Normalmode. Die methodische Vorbereitung liegt jetzt in Abschnitt 6
-   des Methodenvertrags vor: Ein strikt negatives
-   $S=1+\sum_{j=1}^{H-1}j c_j$ beweist eine reelle Aussenwurzel,
-   ohne die aufweitende Polynomdivision. 20 neue synthetische Kontrollen
-   pruefen Identitaeten, Intervallgrenzen und Gegenbeispiele zur falschen
-   Umkehrung. Ein nicht-negatives Ergebnis waere kein Stabilitaetspass.
-   Die Ankerkoeffizienten wurden mit diesem Kriterium noch nicht ausgewertet.
-   Der Autor hat jetzt ausschliesslich ihre
-   [begrenzte Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_archived_normal_slope_2026-10-26.md)
-   freigegeben: je einmal 80/120 dps, hoechstens 30 Sekunden, exakte
-   rationale Summation, keine neuen Simulationen oder Wiederholungen.
-   Keine Parametersuche zur Rettung des Kreises. Das endliche Wachstum ist
-   noch kein asymptotischer Instabilitaetsbeweis. Die urspruengliche
-   Ausfuehrungsfreigabe ist verbraucht; nur die neue Archivauswertung oben
-   ist freigegeben. Der Autor hat zuvor separat die
+   Grad-Arme wachsen stark. Die anschliessend separat freigegebene
+   [Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+   schliesst die Modenfrage am Anker: Beide exakten 80-/120-dps-Intervalle
+   fuer $S=1+\sum_{j=1}^{H-1}j c_j$ sind strikt negativ
+   (etwa $-0.3276456990$). Damit ist eine reelle wachsende Normalformmode
+   belegt, unter der Vertrauensbasis der archivierten Einschliessungen.
+   **Dieser Kreis ist kein linear stabiler 3D-Baustein.** Keine weitere
+   Ausfuehrung ist freigegeben. Naechster inhaltlicher Schritt ist eine
+   analytische Strukturpruefung: Welche Bedingungen muesste eine andere
+   Struktur der unveraenderten Regel erfuellen? $S\geq0$ waere fuer einen
+   stabilen Kreis nur notwendig, keineswegs hinreichend. Keine Parametersuche
+   zur Rettung des ausgeschlossenen Ankers; andere FIFO-Strukturen sind
+   durch den Einzelbefund nicht ausgeschlossen. Der Autor hat zuvor separat die
    [120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_oblique_120_control_2026-10-25.md)
    angefordert. Diese Kontrolle ist inzwischen
    [bestanden](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md):
    Beide 120-Grad-Arme stimmen mit den gespeicherten 60-Grad-Armen bei
    entgegengesetztem Vorzeichen an allen 201 Abtastpunkten auf Rundungsniveau
    ueberein. Kein neuer Normalzertifikatslauf, keine Verallgemeinerung des
-   explorativen Wachstumsbefunds. Naechster Schritt bleibt die Modenfrage oben.
+   explorativen Wachstumsbefunds. Der spaetere Vorzeichenbeleg oben ist
+   eine eigene Aussage, kein Ergebnis dieser Winkelkontrolle.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die

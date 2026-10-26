@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-25 (FIFO-Rahmenstruktur analytisch eingeordnet; Paper-I-/FIFO-Produktionsbefunde unveraendert).
+Stand: 2026-10-26 (Normalinstabilitaet des H=1200-FIFO-Ankers aus Archivkoeffizienten belegt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -27,14 +27,20 @@ Bei frei zugaenglichem $d\geq4$ entfaellt diese Wegklasse bereits im
 nichtentarteten Zweirahmenraum; sie ist kein dimensionsunabhaengiger Befund.
 Das ist keine intrinsische Knotenchiralitaet, Hopf-Ladung, fermionische
 Quantisierung oder schwache Wechselwirkung. Die Uebertragung der ebenen
-Kreisloesung nach 3D ist algebraisch; Stabilitaet in den zusaetzlichen
-Normalrichtungen ist offen und nicht Teil des bisherigen G5-Passes.
+Kreisloesung nach 3D ist algebraisch; Normalstabilitaet ist nicht Teil
+des bisherigen 2D-G5-Passes.
 Der [Normaltest-Prototyp](../reference/fifo_normal_stability_contract.md)
 liefert eine exakte Symmetriedivision und eine bekannte Intervall-Schur-
-Pruefung samt erneutem Existenzzertifikat und Rootbox-Anbindung, bisher
-nur an konstruierten Kontrollmodellen. Eine Koeffizientenbox eines
-archivierten Zielroots ist noch nicht neu ausgewertet. Methodentests sind weder
-neue physikalische Evidenz noch ein Stabilitaetszertifikat dieses Kandidaten.
+Pruefung samt erneutem Existenzzertifikat und Rootbox-Anbindung. Am
+H=1200-Anker bestehen beide Rootpruefungen, die Schur-Pruefung bleibt
+wegen Intervallaufweitung unentschieden. Die separat freigegebene
+[Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+liefert nun $S=1+\sum_j j c_j<0$ mit exakten rationalen Grenzen in beiden
+80-/120-dps-Datensaetzen. Unter der urspruenglichen Intervall-Vertrauensbasis
+ist damit mindestens eine reelle normale Formmode mit Multiplikator
+groesser als eins belegt. Dieser Kreis ist kein linear stabiler 3D-Baustein.
+Keine neue Simulation; keine genaue Wachstumsrate, nichtlineare Folgeentwicklung,
+allgemeine FIFO-Instabilitaet oder physikalische Teilchenidentifikation.
 
 ## Paper 0: Mathematical Anchor
 

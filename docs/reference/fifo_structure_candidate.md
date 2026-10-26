@@ -1,8 +1,8 @@
 # FIFO-Schleife als orientierte Struktur
 
-Stand: 2026-10-25. Analytische Strukturauswahl auf Basis von `fc5a1cb`;
-keine neue Modellregel, kein Ziel- oder Stabilitaetslauf und kein
-unabhaengiges Fachreview. Arbeitsfolge:
+Stand: 2026-10-26. Analytische Strukturauswahl auf Basis von `fc5a1cb`,
+ergaenzt um den abgeschlossenen Instabilitaetsbeleg am H=1200-Anker;
+keine neue Modellregel und kein unabhaengiges Fachreview. Arbeitsfolge:
 [Projektprioritaeten](../status/project_priorities.md).
 
 ## 1. Der konkrete Kandidat
@@ -205,8 +205,13 @@ Kontrollen geprueft. Der inzwischen freigegebene und abgeschlossene
 bleibt im rigorosen Normalteil wegen Intervallaufweitung unentschieden.
 Feste schraege und senkrechte Stoerungen wachsen stark ueber 2000 Updates;
 die getestete planare Formstoerung klingt ab. Das stellt die robuste
-3D-Bausteininterpretation zurueck, beweist aber noch keine asymptotische
-Instabilitaet. Die weitere methodische Pruefung ist
+3D-Bausteininterpretation zunaechst zurueck. Die separat freigegebene
+[Archivauswertung vom 2026-10-26](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+belegt nun durch $S=1+\sum_j j c_j<0$ in beiden Praezisionsstufen eine
+reelle wachsende Normalformmode. **Der konkrete H=1200-Kreis ist kein
+linear stabiler 3D-Baustein.** Der Beleg uebernimmt die Vertrauensbasis
+der archivierten Root-/Koeffizientenintervalle und trifft keine Aussage
+ueber andere FIFO-Strukturen. Die weitere Strukturpruefung ist
 in den [Projektprioritaeten](../status/project_priorities.md) verankert,
 vor Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer
 messender Lauf braucht einen begrenzten Vertrag und Ausfuehrungsfreigabe.
@@ -245,7 +250,8 @@ Lokaler Lauf: `pytest tests/test_fifo_structure.py -q`, 26 bestanden mit
 NumPy 2.3.5, SciPy 1.16.3 und pytest 8.4.2. Diese endlichen Checks ersetzen
 die allgemeinen Ableitungen und ein unabhaengiges Review nicht.
 
-Offen bleiben Stabilitaet in den zusaetzlichen Richtungen, Kondition und
-Lebensdauer des Rahmens unter Rauschen, nichtkreisfoermige Strukturtypen,
+Die Normalinstabilitaet ist am geprueften H=1200-Kreis nun belegt.
+Offen bleiben Kondition und Lebensdauer des Rahmens unter Rauschen,
+nichtkreisfoermige Strukturtypen und deren Stabilitaet,
 Formation und physikalische Mehrsystemdynamik. Paper-I-Baseline und alle
 bisherigen FIFO-/P5-Claimgrenzen bleiben unveraendert.

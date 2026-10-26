@@ -1,6 +1,6 @@
 # Forschungsroadmap
 
-Stand: 2026-10-25. Grobe, schrittweise zu verfeinernde Zielarchitektur.
+Stand: 2026-10-26. Grobe, schrittweise zu verfeinernde Zielarchitektur.
 Die Ausfuehrungsreihenfolge steht ausschliesslich in den
 [Projektprioritaeten](project_priorities.md).
 
@@ -26,8 +26,11 @@ identifiziert. Ihre bedingte Konfigurationsraumtopologie ist nicht bereits
 eine geschuetzte Ladung. Der erste begrenzte
 [3D-Ankertest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/analysis.md)
 zeigt starkes endliches Formwachstum bei schraegen/normalen Stoerungen;
-das rigorose Normalzertifikat bleibt numerisch unentschieden. Eine robuste
-3D-Struktur ist damit nicht belegt. Diese Auswahl konkretisiert den
+die damalige Schur-Pruefung bleibt numerisch unentschieden. Der anschliessende
+[Vorzeichenbeleg aus Archivkoeffizienten](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+beweist eine echte wachsende Normalformmode am H=1200-Kreis. Dieser
+konkrete Kreis scheidet als linear stabiler 3D-Baustein aus; andere
+Strukturtypen sind damit nicht ausgeschlossen. Diese Pruefung konkretisiert den
 unveraenderten klassischen Pfad, ohne zusaetzliche Felder oder eine
 Quantenregel als Ergebnis auszugeben.
 
