@@ -72,6 +72,12 @@ allen 201 Abtastpunkten ueberein; die groesste absolute Formdistanzdifferenz
 betraegt etwa 1.01e-16. Das plausibilisiert Code und Modellsymmetrie, nicht
 allgemeine Stabilitaet oder reale Physik. Kein weiterer Normalzertifikatslauf.
 
+Abschnitt 6 des [Methodenvertrags](../reference/fifo_normal_stability_contract.md)
+enthaelt nun einen elementaren hinreichenden Vorzeichenbeleg fuer eine
+reelle wachsende Normalmode, samt 20 synthetischen Gegenkontrollen.
+Insgesamt bestehen lokal 270 betroffene Tests. Die Ankerkoeffizienten
+wurden damit noch nicht ausgewertet; kein neuer Instabilitaetsbeweis.
+
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine
 eindeutige relative stationaere Verteilung des beschraenkten nichtlinearen

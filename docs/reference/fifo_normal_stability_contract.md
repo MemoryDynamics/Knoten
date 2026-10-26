@@ -1,9 +1,9 @@
 # FIFO-Normalstabilitaet: Methodenvertrag
 
-Stand: 2026-10-25. Aufbauend auf der
+Stand: 2026-10-26. Aufbauend auf der
 [Strukturauswahl](fifo_structure_candidate.md), Ausgangsrevision `6a5b76d`.
-Analytische Reduktion und synthetisch gepruefter Rootbox-Adapter,
-**kein Zielbefund und keine Zielausfuehrungsfreigabe**. Die Arbeitsreihenfolge steht
+Analytische Reduktion, synthetische Kontrollen und der in Abschnitt 5
+dokumentierte unentschiedene Zielversuch. **Keine neue Zielausfuehrungsfreigabe.** Die Arbeitsreihenfolge steht
 in den [Projektprioritaeten](../status/project_priorities.md).
 
 ## 1. Welche Aussage geprueft werden soll
@@ -234,3 +234,94 @@ Auch ein spaeterer strikt
 bestandener Normaltest waere ein lokaler Strukturbaustein, keine
 Herleitung von Teilchen, einer Raumdimension oder der schwachen
 Wechselwirkung. Paper-I-Baseline und bisherige FIFO-Claims bleiben bestehen.
+
+## 6. Ein gezielter hinreichender Instabilitaetsbeleg
+
+Nach dem endlichen Wachstumsbefund ist zunaechst eine echte wachsende
+Normalmode von transienter Verstaerkung zu unterscheiden. Dafuer kann
+eine elementare Vorzeichenpruefung ausreichen, ohne den gesamten
+Formquotienten auszurechnen. Die folgende eigene Herleitung ist eine
+Anwendung des Zwischenwertsatzes, kein beanspruchter neuer allgemeiner
+Stabilitaetssatz. Sie wurde noch nicht am Anker ausgewertet.
+
+Fuer den Normalblock aus Abschnitt 2 und reelles $x>0$ sei
+
+$$
+f(x)=\frac{p_H(x)}{x^{H-1}}
+=x-1+\sum_{j=1}^{H-1}c_j(1-x^{-j}).
+$$
+
+Die Translationssymmetrie liefert exakt $f(1)=0$, nicht nur numerisch.
+Weiter gilt
+
+$$
+S=f'(1)=p_H'(1)=1+\sum_{j=1}^{H-1}j c_j.
+$$
+
+**Hinreichendes Kriterium:** Falls $S<0$, hat $B_\perp$ mindestens
+einen reellen Multiplikator $\lambda>1$.
+
+**Beweis:** Aus $f(1)=0$ und $f'(1)<0$ folgt $f(x)<0$ fuer $x>1$
+hinreichend nahe an eins. Fuer $x\to\infty$ gilt $f(x)\to\infty$.
+Der Zwischenwertsatz liefert eine Nullstelle oberhalb eins. Explizit
+genuegt als obere Vergleichsstelle $u=1+\sum_j|c_j|>1$, denn
+
+$$
+f(u)\geq u-1-\sum_j|c_j|(1-u^{-j})
+=\sum_j|c_j|u^{-j}>0.
+$$
+
+Damit liegt mindestens eine reelle Nullstelle in $(1,u)$. Der zugehoerige
+Companion-Eigenvektor hat Komponenten $v_j=\lambda^{-j}$. Am exakten
+Kreisroot kann diese Mode nicht im bekannten Symmetrieraum liegen,
+dessen Multiplikatoren nur $1,e^{\pm i\theta}$ sind. Es handelt sich
+also um eine linear wachsende Formmode. Weder die genaue Wachstumsrate
+noch Eindeutigkeit oder ein spaeterer nichtlinearer Attraktor sind damit
+bewiesen.
+
+**Gegenrichtung ungueltig:** $S\geq0$ schliesst Instabilitaet nicht aus.
+Negative oder komplexe Aussenwurzeln sowie eine gerade Zahl positiver
+Aussenwurzeln koennen dem Kriterium entgehen. Synthetische Gegenbeispiele
+mit diesen drei Faellen verhindern eine falsche Stabilitaetsklassifikation.
+Am Kreisroot gilt zudem exakt
+$S=2(1-\cos\theta)q_{H-3}(1)$, was unabhaengig gegen die direkte
+Polynomableitung kontrolliert wird.
+
+Fuer einen Intervallbeleg muss die **obere** Grenze von
+$1+\sum_j j[c_j]$ strikt negativ sein. Ein negativer Mittelpunkt
+genuegt nicht. Die Koeffizienten muessen weiterhin den exakten
+existenzzertifizierten Kreisroot einschliessen. Die neue arithmetische
+Hilfsfunktion `normal_translation_slope` berechnet nur diese Summe;
+sie ist kein eigenstaendiger physikalischer Zertifikatsrunner.
+Der Vorteil ist eine lineare Summe ohne die wiederholte
+Symmetrie-Polynomdivision. Ein nicht-negatives oder null einschliessendes
+Ergebnis bleibt fuer die Instabilitaetsfrage unentschieden.
+
+### Literatur und Abgrenzung
+
+Geprueft am 2026-10-26:
+
+- [Trefethen et al., Hydrodynamic Stability Without Eigenvalues, Science 261 (1993), 578-584](https://people.maths.ox.ac.uk/trefethen/publication/PDF/1993_57.pdf),
+  Abstract und Einleitung, Druckseite 578: starke transiente Verstaerkung
+  kann trotz abklingender Eigenmoden auftreten. Das begruendet die Trennung
+  von Kurvenwachstum und Spektralbeleg; es ist kein Ergebnis ueber FIFO.
+- [Rump, Verified Error Bounds for All Eigenvalues and Eigenvectors of a Matrix](https://www.tuhh.de/ti3/paper/rump/Ru22a.pdf),
+  Autorenmanuskript, Abstract, Einleitung und Satz 2.1, PDF-Seiten 1-3:
+  verifizierte Eigenpaar- bzw. Invariantenraum-Einschliessungen sind eine
+  bekannte allgemeinere Route. Sie werden hier nicht implementiert oder
+  reproduziert. Ein gescheiterter Einschluss ist kein Stabilitaetsbefund.
+
+Die Vorzeichenroute soll zunaechst an synthetischen Faellen geprueft
+werden; diese Pruefung ist inzwischen erfolgt: 20 neue exakte bzw.
+Intervallkontrollen bestehen, insgesamt 270 betroffene Regressionstests.
+Ein Ankertest waere ein eigener begrenzter Beleg anhand der schon
+gespeicherten Koeffizientenintervalle, ohne neue Trajektorien oder
+Parametersuche. Die bisherigen Versuchsfreigaben werden dafuer nicht
+wiederverwendet.
+
+Die gespeicherten binaeren Endpunkte lassen sich als exakte rationale
+Zahlen lesen. Da nur ganzzahlige Gewichte und Summen vorkommen, kann
+dieser spaetere Archivtest ohne weitere Rundung erfolgen. Das wuerde
+die Vertrauensbasis der urspruenglichen Root- und Koeffizientenintervalle
+nicht ersetzen, aber neue Summationsrundung vermeiden. Die Hilfe und
+synthetischen Tests enthalten keinen solchen Ankeraufruf.

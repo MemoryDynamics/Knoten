@@ -43,8 +43,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    durch Intervallaufweitung unentschieden. Im festen 2000-Update-Fenster
    klingt die getestete planare Formstoerung ab, alle getesteten 30/45/60/90-
    Grad-Arme wachsen stark. Kein robuster 3D-Baustein belegt. Naechster
-   Schritt ist die methodische Vorbereitung einer gezielten Zertifizierung
-   der vermuteten wachsenden Normalmode, zunaechst an synthetischen Kontrollen.
+   Schritt ist eine gezielte Zertifizierung der vermuteten wachsenden
+   Normalmode. Die methodische Vorbereitung liegt jetzt in Abschnitt 6
+   des Methodenvertrags vor: Ein strikt negatives
+   $S=1+\sum_{j=1}^{H-1}j c_j$ beweist eine reelle Aussenwurzel,
+   ohne die aufweitende Polynomdivision. 20 neue synthetische Kontrollen
+   pruefen Identitaeten, Intervallgrenzen und Gegenbeispiele zur falschen
+   Umkehrung. Ein nicht-negatives Ergebnis waere kein Stabilitaetspass.
+   Die Ankerkoeffizienten wurden mit diesem Kriterium noch nicht ausgewertet.
    Keine Parametersuche zur Rettung des Kreises. Das endliche Wachstum ist
    noch kein asymptotischer Instabilitaetsbeweis. Ein weiterer Zieltest
    braucht eigenen begrenzten Vertrag und neue Freigabe; die vorliegende

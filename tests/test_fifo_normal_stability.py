@@ -10,6 +10,7 @@ import pytest
 
 from emergenz_knoten.fifo_normal_stability import (
     interval_schur_test,
+    normal_translation_slope,
     rotation_symmetry_division,
 )
 
@@ -66,6 +67,65 @@ def _exact_schur(polynomial):
 def _binary_fraction(raw):
     sign, mantissa, exponent, _ = raw
     return (-1) ** sign * F(mantissa) * F(2) ** exponent
+
+
+@pytest.mark.parametrize("quotient", POLYNOMIALS)
+def test_translation_slope_matches_exact_derivative_and_shape_quotient(quotient):
+    full = list(np.convolve(SYMMETRY, quotient))
+    couplings = [-coefficient for coefficient in full[2:]]
+    degree = len(full) - 1
+    derivative = sum((degree - index) * value for index, value in enumerate(full))
+    slope = normal_translation_slope(couplings)
+    assert sum(full) == 0
+    assert full[1] == sum(couplings) - 1
+    assert slope == derivative == 2 * (1 - COSINE) * sum(quotient)
+
+
+def test_negative_slope_has_known_real_unstable_mode_and_positive_upper_endpoint():
+    root = F(5, 4)
+    full = list(np.convolve(SYMMETRY, [F(1), -root]))
+    couplings = [-coefficient for coefficient in full[2:]]
+    assert normal_translation_slope(couplings) < 0
+    upper = 1 + sum(abs(value) for value in couplings)
+    assert 1 < root < upper
+    scalar = (
+        upper - 1 + sum(c * (1 - upper ** (-j)) for j, c in enumerate(couplings, 1))
+    )
+    assert scalar > 0
+
+
+@pytest.mark.parametrize(
+    "quotient",
+    [
+        [F(1), F(5, 4)],  # Negative unstable root.
+        [F(1), F(0), F(25, 16)],  # Complex unstable conjugate pair.
+        [F(1), F(-11, 4), F(15, 8)],  # Two positive unstable roots: 5/4 and 3/2.
+    ],
+)
+def test_positive_slope_is_not_a_stability_certificate(quotient):
+    full = list(np.convolve(SYMMETRY, quotient))
+    assert normal_translation_slope([-value for value in full[2:]]) > 0
+    assert _exact_schur(quotient)[0] is False
+
+
+@pytest.mark.parametrize(
+    "bounds,strict_negative", [(("-2", "-1.9"), True), (("-1.1", "-0.9"), False)]
+)
+def test_interval_slope_preserves_uncertainty(bounds, strict_negative):
+    previous = iv.dps
+    iv.dps = 60
+    try:
+        value = normal_translation_slope([iv.mpf(list(bounds))])
+        assert _binary_fraction(value._mpi_[0]) <= 1 + F(bounds[0])
+        assert _binary_fraction(value._mpi_[1]) >= 1 + F(bounds[1])
+        assert (_binary_fraction(value._mpi_[1]) < 0) is strict_negative
+    finally:
+        iv.dps = previous
+
+
+def test_translation_slope_rejects_missing_lags():
+    with pytest.raises(ValueError, match="lag coupling"):
+        normal_translation_slope([])
 
 
 @pytest.mark.parametrize("precision", [50, 90])

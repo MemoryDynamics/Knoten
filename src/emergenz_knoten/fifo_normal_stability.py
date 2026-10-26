@@ -39,6 +39,18 @@ def rotation_symmetry_division(
     return quotient, remainder[-3:]
 
 
+def normal_translation_slope(couplings: Sequence[Any]) -> Any:
+    """Return p'(1)=1+sum(j*c_j) for the translation-preserving normal block.
+
+    A rigorously negative upper bound suffices for a real eigenvalue >1.
+    Nonnegative or unresolved values do not imply stability. This arithmetic
+    helper does not bind coefficients to a certified physical circle.
+    """
+    if len(couplings) < 1:
+        raise ValueError("at least one lag coupling is required")
+    return 1 + sum(age * coupling for age, coupling in enumerate(couplings, start=1))
+
+
 def interval_schur_test(
     coefficients: Sequence[tuple[str, str]], *, precision_dps: int
 ) -> dict[str, Any]:
