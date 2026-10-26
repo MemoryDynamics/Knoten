@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-25 (FIFO-Ankertest abgeschlossen: Normalzertifikat unentschieden, starke Formverstaerkung ausserhalb der Ebene).
+Stand: 2026-10-26 (120-Grad-Symmetriekontrolle bestanden; Normalzertifikat weiter unentschieden, starke endliche Formverstaerkung ausserhalb der Ebene).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -50,10 +50,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    braucht eigenen begrenzten Vertrag und neue Freigabe; die vorliegende
    Freigabe ist verbraucht. Der Autor hat danach separat die
    [120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_oblique_120_control_2026-10-25.md)
-   angefordert. Diese eng begrenzte Kontrolle wird jetzt vorgezogen:
-   zwei neue 120-Grad-Arme gegen die gespeicherten 60-Grad-Arme mit
-   entgegengesetztem Vorzeichen, sonst unveraenderter Anker und Zeitfenster.
-   Kein neuer Normalzertifikatslauf. Danach bleibt die Modenfrage oben offen.
+   angefordert. Diese Kontrolle ist inzwischen
+   [bestanden](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md):
+   Beide 120-Grad-Arme stimmen mit den gespeicherten 60-Grad-Armen bei
+   entgegengesetztem Vorzeichen an allen 201 Abtastpunkten auf Rundungsniveau
+   ueberein. Kein neuer Normalzertifikatslauf, keine Verallgemeinerung des
+   explorativen Wachstumsbefunds. Naechster Schritt bleibt die Modenfrage oben.
    Der bisherige 2D-G5-Pass deckt diese Normalmoden nicht ab; seine
    Ausfuehrungsfreigabe wird nicht wiederverwendet. Der begrenzte
    [R0-Audit](../reference/foundation_feasibility.md) und die
@@ -67,7 +69,7 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    vorausgesetzte Quantenstruktur samt ersten Gegenpruefungen. Empfehlung
    ist vorerst die unveraenderte Regel, ohne Erfolgsaussicht zu behaupten.
    Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
-   Luecke zu verdecken. Ausser der separat angeforderten 120-Grad-Kontrolle
+   Luecke zu verdecken. Nach der abgeschlossenen 120-Grad-Kontrolle
    bleibt dies Bestandsarbeit ohne weitere Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des
    Autors. Paper I kann als eigenstaendiger Publikationsstrang parallel
    weiterbearbeitet werden.

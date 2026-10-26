@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-25 (FIFO-Ankertest abgeschlossen: starke normale/schraege Formverstaerkung, rigoroser Normaltest unentschieden; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-26 (120-Grad-Symmetriekontrolle bestanden; starke endliche normale/schraege Formverstaerkung, rigoroser Normaltest unentschieden; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -63,6 +63,14 @@ Vor Ausfuehrung bestanden 229 betroffene lokale Regressionstests,
 einschliesslich 56 Runner-/Stoerungskontrollen, Lint, strikter
 Dokumentationsbau und die vollstaendige GitHub-CI. Diese Softwaretests
 enthalten selbst keine Zielauswertung. Die Versuchsgenehmigung ist verbraucht.
+
+Die danach separat angeforderte
+[120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md)
+ist ebenfalls abgeschlossen. Beide neuen 120-Grad-Arme stimmen mit den
+gespeicherten 60-Grad-Armen bei entgegengesetztem Gesamtvorzeichen an
+allen 201 Abtastpunkten ueberein; die groesste absolute Formdistanzdifferenz
+betraegt etwa 1.01e-16. Das plausibilisiert Code und Modellsymmetrie, nicht
+allgemeine Stabilitaet oder reale Physik. Kein weiterer Normalzertifikatslauf.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

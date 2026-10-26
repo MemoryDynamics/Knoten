@@ -1,7 +1,11 @@
 # FIFO: gezielte 120-Grad-Symmetriekontrolle
 
-2026-10-25. Status vor Ausfuehrung: vom Autor ausdruecklich angefordert,
-noch nicht gerechnet. Separater Zusatz zum abgeschlossenen Ankertest;
+2026-10-25. Status, nachgetragen am 2026-10-26: einmalig ausgefuehrt und
+abgeschlossen, Symmetriekontrolle bestanden.
+[Ergebnis und Rohdaten](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md).
+Der folgende Vertrag wurde vor Ausfuehrung in
+Revision `8150e3f65c414c4fc1326dd44c32f49a788af588` eingefroren.
+Separater Zusatz zum abgeschlossenen Ankertest;
 keine Wiederholung des Normalzertifikats und keine Parametersuche.
 
 ## Vorhersage und Grenze
