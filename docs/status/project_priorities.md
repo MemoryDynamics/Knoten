@@ -51,10 +51,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    pruefen Identitaeten, Intervallgrenzen und Gegenbeispiele zur falschen
    Umkehrung. Ein nicht-negatives Ergebnis waere kein Stabilitaetspass.
    Die Ankerkoeffizienten wurden mit diesem Kriterium noch nicht ausgewertet.
+   Der Autor hat jetzt ausschliesslich ihre
+   [begrenzte Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_archived_normal_slope_2026-10-26.md)
+   freigegeben: je einmal 80/120 dps, hoechstens 30 Sekunden, exakte
+   rationale Summation, keine neuen Simulationen oder Wiederholungen.
    Keine Parametersuche zur Rettung des Kreises. Das endliche Wachstum ist
-   noch kein asymptotischer Instabilitaetsbeweis. Ein weiterer Zieltest
-   braucht eigenen begrenzten Vertrag und neue Freigabe; die vorliegende
-   Freigabe ist verbraucht. Der Autor hat danach separat die
+   noch kein asymptotischer Instabilitaetsbeweis. Die urspruengliche
+   Ausfuehrungsfreigabe ist verbraucht; nur die neue Archivauswertung oben
+   ist freigegeben. Der Autor hat zuvor separat die
    [120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_oblique_120_control_2026-10-25.md)
    angefordert. Diese Kontrolle ist inzwischen
    [bestanden](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md):
