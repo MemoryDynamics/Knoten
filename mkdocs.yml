@@ -25,6 +25,7 @@ nav:
       - Native Rotating Waves: reference/rotating_wave_foundation.md
       - FIFO-Strukturkandidat: reference/fifo_structure_candidate.md
       - FIFO-Normalstabilitaet: reference/fifo_normal_stability_contract.md
+      - FIFO-Strukturgrenzen: reference/fifo_rigid_structure_limits.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md

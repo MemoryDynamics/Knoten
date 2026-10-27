@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-26 (Normalinstabilitaet des H=1200-FIFO-Ankers aus Archivkoeffizienten belegt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-27 (Normalinstabilitaet des H=1200-FIFO-Ankers belegt; Bahn, Memory-Form und Raumdimension getrennt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -41,6 +41,17 @@ ist damit mindestens eine reelle normale Formmode mit Multiplikator
 groesser als eins belegt. Dieser Kreis ist kein linear stabiler 3D-Baustein.
 Keine neue Simulation; keine genaue Wachstumsrate, nichtlineare Folgeentwicklung,
 allgemeine FIFO-Instabilitaet oder physikalische Teilchenidentifikation.
+
+Die [starre Strukturklassifikation](../reference/fifo_rigid_structure_limits.md)
+ist ein analytischer Befund, kein neuer Loesungsast: Punkt, Gerade, Kreis
+und Helix erschoepfen die festen eigentlichen Raumbewegungen der nativen
+Ein-Punkt-Historie in 3D. Eine Helix kann geometrisch haendig sein, hat aber
+keine dadurch geschuetzte Ladung. $S\ne0$ am Kreis schliesst eine beliebig
+nahe Helixfortsetzung aus; Existenz eines fernen Asts, dessen Stabilitaet
+und nichtstarre Attraktoren sind offen. Keine Quanten- oder Gravitationsaussage.
+Dies ist keine Klassifikation aller Memory-Verteilungen: Kugel-/Torusformen
+in 3D und mehrere Rotationsebenen in hoeheren Dimensionen bleiben moegliche,
+noch nicht als stabile Loesungen etablierte Strukturklassen.
 
 ## Paper 0: Mathematical Anchor
 

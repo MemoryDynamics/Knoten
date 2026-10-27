@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-26 (H=1200-Kreis normal linear instabil; Vorzeichenbeleg aus Archivkoeffizienten abgeschlossen, keine weitere Ausfuehrungsfreigabe).
+Stand: 2026-10-27 (H=1200-Kreis normal linear instabil; Strukturpruefung trennt nun Bahn, Memory-Form und Raumdimension, keine weitere Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -49,12 +49,23 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    (etwa $-0.3276456990$). Damit ist eine reelle wachsende Normalformmode
    belegt, unter der Vertrauensbasis der archivierten Einschliessungen.
    **Dieser Kreis ist kein linear stabiler 3D-Baustein.** Keine weitere
-   Ausfuehrung ist freigegeben. Naechster inhaltlicher Schritt ist eine
-   analytische Strukturpruefung: Welche Bedingungen muesste eine andere
-   Struktur der unveraenderten Regel erfuellen? $S\geq0$ waere fuer einen
-   stabilen Kreis nur notwendig, keineswegs hinreichend. Keine Parametersuche
-   zur Rettung des ausgeschlossenen Ankers; andere FIFO-Strukturen sind
-   durch den Einzelbefund nicht ausgeschlossen. Der Autor hat zuvor separat die
+   Ausfuehrung ist freigegeben. Die anschliessende
+   [analytische Strukturpruefung](../reference/fifo_rigid_structure_limits.md)
+   grenzt den starren 3D-Ast nun auf Punkt, Gerade, Kreis und Helix ein.
+   Die Helix verlangt drei gleichzeitige Balancen; eine beliebig nahe
+   Helixfortsetzung am aktuellen Kreis ist wegen $S\ne0$ ausgeschlossen.
+   Ihre moegliche geometrische Haendigkeit waere keine geschuetzte Ladung.
+   Die Rueckfrage des Autors erweitert die Strukturauswahl ausdruecklich:
+   Bahn, Memory-/Feldform und Umgebungsdimension trennen; Kugel-/Torus-
+   Verteilungen und mehrere Rotationsebenen nicht durch den starren
+   3D-Ansatz ausschliessen. Naechster Schritt ist eine gemeinsame
+   Zustands-/Formdefinition mit festen Kriterien fuer Lokalisation,
+   Dimensionalitaet und Robustheit, bevor ein bestimmter Ast bevorzugt
+   oder numerisch gesucht wird. Keine lokale Rettung des Kreises,
+   Parametersuche oder neue Ziellaeufe. Ein nichttrivialer geschlossener
+   Bahnknoten wuerde in 3D nichtstarre Dynamik benoetigen.
+   Andere FIFO-Strukturen sind durch den Einzelbefund nicht
+   ausgeschlossen. Der Autor hat zuvor separat die
    [120-Grad-Symmetriekontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/fifo_oblique_120_control_2026-10-25.md)
    angefordert. Diese Kontrolle ist inzwischen
    [bestanden](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_oblique_120_control_2026-10-25/report.md):

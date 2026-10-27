@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-26 (H=1200-Kreis normal linear instabil: exakter Vorzeichenbeleg aus Archivkoeffizienten; alte Schur-Pruefung unentschieden; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-27 (H=1200-Kreis normal linear instabil; starre 3D-Bahnklassifikation ist kein Ausschluss anderer Memory-Formen oder Dimensionen; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -87,6 +87,22 @@ Simulation oder Rootrechnung. Je ein Lauf dauerte 1.531/1.516 Sekunden;
 198 lokale Tests, Lint und Dokumentationsbau bestanden vor Ausfuehrung.
 Keine Wiederholung, Freigabe verbraucht. Andere FIFO-Strukturen und die
 nichtlineare Folgeentwicklung sind dadurch nicht entschieden.
+
+Die anschliessende [starre Strukturpruefung](../reference/fifo_rigid_structure_limits.md)
+liefert ohne neue Zielauswertung weitere Grenzen: Ein deterministischer
+FIFO-Fixpunkt ist kollabiert; starre relative Gleichgewichte in 3D sind
+Punkt, Gerade, Kreis oder Helix. Fuer eine Helix muessen radiale,
+tangentiale und axiale Selbstkonsistenz gleichzeitig gelten. Ihr axialer
+Grenzwert ist genau $S$; daher gibt es am aktuellen Kreis keine beliebig
+nahe Helixfortsetzung. Eine endliche Helix koennte geometrisch haendig sein,
+waere aber weder geschuetzter Bahnknoten noch bereits stabiler Baustein.
+Die Einschraenkung betrifft nur starre Einzelbahnen in 3D, nicht
+kugel-/torusartige Memory-Verteilungen oder hoehere Dimensionen.
+Ein expliziter 4D-Zweiebenenansatz zeigt die groessere Klasse bereits
+kinematisch; ein eigener Zielroot fehlt.
+Die Literaturabgrenzung zu klassischem Delay-Antrieb und Schraubenbewegung
+ist mit gelesenen Primaerquellen dokumentiert. 28 neue synthetische
+Kontrollen pruefen die Gleichungen und die Grenzen ihrer Reichweite.
 
 Eine getrennte [Paper-I-Forschungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
 begruendet fuer festes endliches $H$ und positives Gaussrauschen eine

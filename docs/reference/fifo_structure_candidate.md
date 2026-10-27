@@ -1,6 +1,6 @@
 # FIFO-Schleife als orientierte Struktur
 
-Stand: 2026-10-26. Analytische Strukturauswahl auf Basis von `fc5a1cb`,
+Stand: 2026-10-27. Analytische Strukturauswahl auf Basis von `fc5a1cb`,
 ergaenzt um den abgeschlossenen Instabilitaetsbeleg am H=1200-Anker;
 keine neue Modellregel und kein unabhaengiges Fachreview. Arbeitsfolge:
 [Projektprioritaeten](../status/project_priorities.md).
@@ -217,6 +217,13 @@ vor Lebensdauer-, Teilchen- oder Kopplungsinterpretation. Ein neuer
 messender Lauf braucht einen begrenzten Vertrag und Ausfuehrungsfreigabe.
 Keine neue Parametersuche, G5-Wiederholung oder P5-Freigabe folgt aus
 dieser analytischen Strukturauswahl.
+
+Die [anschliessende starre Strukturklassifikation](fifo_rigid_structure_limits.md)
+leitet nun die drei Selbstkonsistenzbedingungen fuer eine Helix direkt
+aus derselben Regel ab. Wegen $S\ne0$ gibt es am geprueften Kreis keine
+beliebig nahe Helixfortsetzung. Eine endliche Helix besitzt moeglicherweise
+geometrische Haendigkeit, aber keinen dadurch geschuetzten Knotentyp.
+Ein solcher neuer Loesungsast ist nicht nachgewiesen.
 
 ## 6. Literaturvergleich ohne Modellimport
 
