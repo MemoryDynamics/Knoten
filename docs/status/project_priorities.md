@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-27 (H=1200-Kreis normal linear instabil; Strukturpruefung trennt nun Bahn, Memory-Form und Raumdimension, keine weitere Ausfuehrungsfreigabe).
+Stand: 2026-10-27 (Wasserstoff-Zielbenchmark verbindet Struktur, Masse, Ladung, Spin und Bindung; H=1200-Kreis normal linear instabil; keine weitere Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -20,9 +20,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Eine Liste
 
-1. **Bestehende Regel ausschoepfen: FIFO-Strukturkandidat pruefen.** Auf
-   Autorenwunsch steht die geeignete Struktur vor einer Feld- oder
-   Teilcheninterpretation. Die
+1. **Wasserstoff-Durchstich: vorhandene Bausteine an einem gemeinsamen Ziel pruefen.**
+   Der [Zielbenchmark](../reference/hydrogen_benchmark.md) umfasst auf
+   Autorenwunsch ausdruecklich Massenverhaeltnis, Ladung, Spin, magnetische
+   Momente, raeumliche Bindung und Spektroskopie. Knotengroesse als
+   Massenursache und FIFO als Spintraeger bleiben zu pruefende Hypothesen.
+   Naechste begrenzte Aufgabe ist die analytische Zuordnung der vorhandenen
+   Zwei-Knoten-, Memory- und Kernelregeln zu Traegheit, Feldrueckwirkung
+   und effektiver Relativdynamik: Inputs, unabhaengige Readouts und fehlende
+   Herleitungen in einem gemeinsamen Register ausweisen. Noch kein
+   Ziellauf und keine Auswahl eines neuen physikalischen Mehrsystemgesetzes.
+   3D und ein effektiver Protontraeger duerfen als deklarierte Inputs des
+   begrenzten Benchmarks dienen; Gravitation und volle Flavorstruktur sind
+   keine Voraussetzungen dieses Durchstichs. Strukturauswahl ist daran
+   auszurichten, statt immer neue unabhaengige Formen oder Kernel zu suchen.
+   Die bisherige
    [analytische Strukturauswahl](../reference/fifo_structure_candidate.md)
    identifiziert eine altersmarkierte Schleife mit abgeleitetem Rahmen,
    keinen bereits geschuetzten Knotentyp. In gewaehltem 3D sind die beiden
@@ -58,10 +70,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Die Rueckfrage des Autors erweitert die Strukturauswahl ausdruecklich:
    Bahn, Memory-/Feldform und Umgebungsdimension trennen; Kugel-/Torus-
    Verteilungen und mehrere Rotationsebenen nicht durch den starren
-   3D-Ansatz ausschliessen. Naechster Schritt ist eine gemeinsame
-   Zustands-/Formdefinition mit festen Kriterien fuer Lokalisation,
-   Dimensionalitaet und Robustheit, bevor ein bestimmter Ast bevorzugt
-   oder numerisch gesucht wird. Keine lokale Rettung des Kreises,
+   3D-Ansatz ausschliessen. Die gemeinsame Zustands-/Formdefinition mit
+   festen Kriterien fuer Lokalisation, Dimensionalitaet und Robustheit
+   ist nun Teil des Wasserstoff-Benchmarks; innere und atomare Laengenskalen
+   sowie isolierte und feldgestuetzte Stabilitaet trennen. Kein bestimmter
+   neuer Ast ist damit ausgewaehlt. Keine lokale Rettung des Kreises,
    Parametersuche oder neue Ziellaeufe. Ein nichttrivialer geschlossener
    Bahnknoten wuerde in 3D nichtstarre Dynamik benoetigen.
    Andere FIFO-Strukturen sind durch den Einzelbefund nicht

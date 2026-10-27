@@ -5,6 +5,14 @@ Stand: 2026-10-27 (Normalinstabilitaet des H=1200-FIFO-Ankers belegt; Bahn, Memo
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
 
+Der [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md) ist
+Future Work: Masse aus Knotengroesse und Spin aus FIFO sind ungepruefte
+Mechanismushypothesen. Das Massenverhaeltnis, magnetische Momente und
+atomare Spektren sind Referenzziele, keine Modellresultate. Ein gesetzter
+Coulomb-/Quantenbaustein oder Teilchenparameter ist als Input auszuweisen;
+ein gebundenes klassisches Paar ist noch kein Wasserstoffatom. Der
+Benchmark erweitert weder die Claims von Paper I noch Ausfuehrungsfreigaben.
+
 Der begrenzte [R0-Audit](../reference/foundation_feasibility.md) liefert
 bedingte analytische Grenzen, keinen neuen Produktionspass: Die Kreisphase
 ist eine Raumrotation; direkte Gaussquellen haben bei zugelassener

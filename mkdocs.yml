@@ -20,6 +20,7 @@ nav:
       - Implementierte Gleichungen: reference/implemented_equations.md
       - Physikalische Machbarkeit: reference/foundation_feasibility.md
       - Zustand und Interventionen: reference/operational_contract.md
+      - Wasserstoff-Zielbenchmark: reference/hydrogen_benchmark.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md

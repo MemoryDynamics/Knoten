@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-27 (H=1200-Kreis normal linear instabil; starre 3D-Bahnklassifikation ist kein Ausschluss anderer Memory-Formen oder Dimensionen; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-27 (Wasserstoff-Zielbenchmark dokumentiert, keine neue physikalische Evidenz; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,13 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der neue [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md)
+enthaelt gemeinsam Massenverhaeltnis, Ladung, Spin, magnetische Momente,
+Bindung und Spektroskopie sowie die Hypothesen Knotengroesse/Traegheit und
+FIFO/Spin. Er trennt gesetzte Inputs, unabhaengige Messgroessen und
+Vorhersagen. Das ist eine Zieldefinition mit Quellenvergleich, kein neuer
+Stabilitaets-, Teilchen- oder Quantenbefund und keine Ausfuehrungsfreigabe.
 
 Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
 von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und

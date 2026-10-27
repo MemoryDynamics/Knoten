@@ -1,6 +1,6 @@
 # Forschungsroadmap
 
-Stand: 2026-10-26. Grobe, schrittweise zu verfeinernde Zielarchitektur.
+Stand: 2026-10-27. Grobe, schrittweise zu verfeinernde Zielarchitektur.
 Die Ausfuehrungsreihenfolge steht ausschliesslich in den
 [Projektprioritaeten](project_priorities.md).
 
@@ -35,6 +35,16 @@ unveraenderten klassischen Pfad, ohne zusaetzliche Felder oder eine
 Quantenregel als Ergebnis auszugeben.
 
 ## Stufen und Entscheidungspunkte
+
+Der [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md)
+verbindet auf Autorenwunsch die bisher getrennten Fragestellungen an einem
+gemeinsamen System: Zwei Strukturen, Traegheit/Massenverhaeltnis, Ladung,
+Spin, magnetische Momente und atomare Bindung muessen eine konsistente
+Beschreibung tragen. Groesse-zu-Masse und FIFO-zu-Spin sind Hypothesen,
+keine Zuordnungen. Der Benchmark darf 3D und einen effektiven Protontraeger
+zunaechst voraussetzen; er behauptet dadurch weder Dimensionsemergenz noch
+die Herleitung aller Teilchen. Seine Bewertungsstufen sind keine zweite
+Arbeitsreihenfolge oder Freigabe fuer neue Modellregeln/Ziellaeufe.
 
 Die Stufen beschreiben Abhaengigkeiten, keine zugesicherte Erfolgsfolge.
 Die Quanten-Machbarkeit wird bereits in R0 geprueft.
