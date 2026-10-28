@@ -5,6 +5,11 @@ Stand: 2026-10-28 (Quark-Referenz und Memory-Emergenz getrennt; Normalinstabilit
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
 
+Der gekoppelte Gauss-Solver ist an synthetischen Aufgaben und dem
+exakten 6D-Oszillator verifiziert. Diese Methodenbefunde sind weder
+eine AL1-Nukleonloesung noch neue Materie-/Emergenzclaims. Der konkrete
+AL1-Ziellauf wartet auf separate Freigabe; kein vorweggenommener Pass.
+
 Der [AL1-Referenzvertrag](../reference/nucleon_spatial_reference.md)
 enthaelt eine analytisch und synthetisch gepruefte Nichtabgeschlossenheit
 des festen Spin-/Flavor-Produktansatzes sowie einen statischen

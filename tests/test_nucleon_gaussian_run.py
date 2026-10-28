@@ -1,6 +1,7 @@
 """Runner contracts tested with synthetic results, never an AL1 eigenproblem."""
 
 from copy import deepcopy
+import json
 import sys
 
 import numpy as np
@@ -91,3 +92,21 @@ def test_result_generation_does_not_mutate_input_matrices():
     result = runner.level_result(matrices)
     assert len(result["solutions"]) == 2
     np.testing.assert_array_equal(matrices["hamiltonian"], np.diag([1, 2]))
+
+
+def test_archived_coefficients_reconstruct_the_same_state_and_observables():
+    matrices = {
+        "overlap": np.array([[1.0, 0.2], [0.2, 1.0]]),
+        "hamiltonian": np.array([[1.0, 0.3], [0.3, 2.0]]),
+        "synthetic_observable": np.array([[0.0, 1.0], [1.0, 0.0]]),
+    }
+    archived = json.loads(json.dumps(runner.level_result(matrices), allow_nan=False))
+    for solution in archived["solutions"]:
+        coefficients = np.array(solution["solver"]["coefficients"])
+        restored = runner.basis.expectations(matrices, coefficients)
+        assert restored == pytest.approx(solution["observables"], abs=1e-14)
+        np.testing.assert_allclose(
+            matrices["hamiltonian"] @ coefficients,
+            solution["solver"]["energy"] * matrices["overlap"] @ coefficients,
+            atol=1e-14,
+        )

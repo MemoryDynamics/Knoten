@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-28 (raeumliche AL1-Referenz spezifiziert; gekoppelte Kanaele und Energieoffset geprueft; keine raeumliche Zielsimulation gestartet).
+Stand: 2026-10-28 (gekoppelter Gauss-Solver synthetisch geprueft; begrenzter AL1-Vorschlag zur Freigabe vorbereitet; kein AL1-Ziellauf).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -35,10 +35,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Der [raeumliche AL1-Vertrag](../reference/nucleon_spatial_reference.md)
    liegt nun mit Literaturparametern und Anschluss an atomare Observablen
    vor. 17 synthetische Operatortests sichern die erforderliche
-   Orts-/Spin-Kopplung und die Energieoffset-Konvention. Naechste
-   begrenzte Aufgabe: einen vorhandenen Solver oder eine etablierte
-   gekoppelte GEM-Basis gegen diesen Operator pruefen und ein festes
-   Konvergenz-/Laufbudget formulieren. DeepQuark nicht ungeprueft starten;
+   Orts-/Spin-Kopplung und die Energieoffset-Konvention. Der gekoppelte
+   Gauss-Solver mit SciPy/LAPACK besteht nun 27 weitere synthetische
+   Methoden- und Runnertests, einschliesslich exaktem 6D-Oszillator.
+   Der [begrenzte AL1-Vorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/nucleon_al1_reference_proposal_2026-10-28.md)
+   umfasst zwei Sektoren, drei feste Basisstufen, je maximal fuenf Minuten
+   und keine Nachanpassung. Naechste Entscheidung ist die konkrete
+   Autorenfreigabe; kein Zielprozess wurde gestartet. DeepQuark nicht ungeprueft starten;
    im gelesenen Baryonpfad fehlt ein im Artikel genannter konstanter Term.
    Keine neue Gitter-QCD-Rechnung oder Parameteranpassung.
    Das Elektron wird auf der Referenzseite als quantisiertes Materiefeld
@@ -271,12 +274,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-Zu Prioritaet 1: eine reproduzierbare, begrenzte Solvervorbereitung fuer
-den festgelegten raeumlichen AL1-Operator, mit gekoppelten Kanaelen,
-eindeutiger Energiekonvention und Kontrollen fuer Energie **und**
-elektromagnetische Antwort. Die bestehenden Operatortests sind ein
-Methodeneingang, keine Nukleonloesung. Vor einem Ziellauf muessen konkrete
-Verfeinerungen, Ressourcenlimit und Abbruchregeln feststehen.
+Zu Prioritaet 1: Der gekoppelte Solver und der feste Ausfuehrungsvorschlag
+liegen vor. Nach ausdruecklicher Freigabe die zwei einmaligen AL1-
+Referenzlaeufe ausfuehren und Energie **sowie** Strukturobservablen nach den
+vorab festgelegten Kriterien einordnen. Die synthetischen Tests sind
+kein Nukleonergebnis. Ohne Freigabe keinen Zielprozess starten; weitere
+unabhaengige analytische Memory-Arbeit bleibt moeglich.
 
 Das gemeinsame Ziel bleibt der Wasserstoff-Durchstich samt unabhaengigem
 Memory-Anschluss. Ein korrekt reproduziertes Quarkmodell allein loest

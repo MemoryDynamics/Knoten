@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-28 (AL1-Referenz spezifiziert, gekoppelte Orts-/Spin-Kanaele erforderlich; kein raeumlicher Nukleonlauf oder neuer Memory-Zielbefund; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-28 (gekoppelter Referenzsolver besteht synthetische Kontrollen; AL1-Ausfuehrungsvorschlag wartet auf Freigabe; kein neuer Memory-Zielbefund).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,13 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [gekoppelte Gauss-Solver](../reference/nucleon_spatial_reference.md)
+ist implementiert. 27 neue synthetische Methoden-/Runnertests bestehen;
+ein 18-Gauss-Preflight reproduziert den exakten 6D-Oszillator samt
+Radius- und Spinobservablen. Die Wellenfunktion wird mitarchiviert.
+Das ist kein AL1-Nukleonlauf. Zwei begrenzte Referenzlaeufe sind als
+Vorschlag mit festen Basisstufen vorbereitet und noch nicht genehmigt.
 
 Die [raeumliche Nukleonreferenz](../reference/nucleon_spatial_reference.md)
 ist als AL1-Methodenvertrag spezifiziert. Eine analytische Restidentitaet

@@ -28,7 +28,9 @@ def level_result(matrices) -> dict:
         solution = basis.ritz_ground(
             matrices["hamiltonian"], matrices["overlap"], relative_cutoff=cutoff
         )
-        observable = basis.expectations(matrices, solution.pop("coefficients"))
+        coefficients = solution.pop("coefficients")
+        observable = basis.expectations(matrices, coefficients)
+        solution["coefficients"] = coefficients.tolist()
         solution["metric_eigenvalues"] = solution["metric_eigenvalues"].tolist()
         solutions.append(
             {"relative_cutoff": cutoff, "solver": solution, "observables": observable}

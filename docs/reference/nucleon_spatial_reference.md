@@ -1,7 +1,7 @@
 # Raeumliche Nukleonreferenz
 
-Stand: 2026-10-28. **Methodenauswahl und Operatorkontrollen, noch kein
-geloester raeumlicher Zustand.** Die
+Stand: 2026-10-28. **Gekoppelter Solver synthetisch geprueft, noch kein
+geloester raeumlicher AL1-Zustand.** Die
 [Trennung von Referenz und Emergenz](matter_reference_contract.md) gilt
 unveraendert. AL1 wird als erste reproduzierbare Constituent-Quarkreferenz
 festgelegt, nicht als neue Memory-Regel oder als vollstaendige QCD.
@@ -218,11 +218,92 @@ das Quarkmodell. Ein aus dem Quarkmodell gelieferter Radius braucht
 separat numerische und physikalische Fehler. Doppelzaehlung zwischen
 Formfaktor-, Kontakt- und Strahlungskorrekturen ist zu vermeiden.
 
+## Implementierte gekoppelte Gaussbasis
+
+Der [Referenzsolver](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/nucleon_gaussian_basis.py)
+implementiert bekannte explizit korrelierte Gaussfunktionen, keine neue
+Quantenmethode. Grundlage sind unter anderem
+[Varga und Suzuki, PRC 52, 2885 (1995)](https://arxiv.org/abs/nucl-th/9508023)
+und die direkt geprueften Formeln (8)--(10) in
+[Fedorov et al., Few-Body Systems 65, 75 (2024)](https://link.springer.com/article/10.1007/s00601-024-01945-x).
+Anders als bei stochastischer Variationsoptimierung werden hier die
+Exponenten vorab festgelegt. Die lineare Diagonalisierung verwendet
+[SciPy/LAPACK `eigh`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html).
+DeepQuark-Code wird nicht kopiert oder ausgefuehrt.
+
+Fuer $x=(\rho,\lambda)$ und positiv definite reelle $2\times2$-Matrizen
+ist $g_A(x)=N_A\exp(-x^TAx)$ normiert. Der Kreuzterm
+$A_{12}\rho\cdot\lambda$ erlaubt korrelierte, insgesamt rotationsskalare
+Ortsfunktionen. $L=0$ bedeutet hier nicht, beide Jacobi-Partialwellen auf
+Null festzuhalten. Die vier inneren Nukleonkanaele werden gemeinsam mit
+der Ortsfunktion durch $P=\frac16\sum_{\pi\in S_3}U_\pi$ symmetrisiert;
+der separate Farbsingulettfaktor stellt die Gesamtantisymmetrie her.
+Der Vergleichssektor $S=I=3/2$, $S_z=I_z=1/2$ hat einen inneren Kanal.
+
+Mit $D=A+B$, $u=w^TD^{-1}w$ und $r=|w^Tx|$ gelten fuer normierte Gauss-
+Ueberlappung $S_{AB}$ die analytischen Verhaeltnisse
+
+$$
+\frac{\langle g_A|T|g_B\rangle}{S_{AB}}
+=\frac{3}{m}\operatorname{tr}(AB D^{-1}),\quad
+\langle r^{-1}\rangle_{AB}=\frac{2}{\sqrt{\pi u}},\quad
+\langle r\rangle_{AB}=2\sqrt{u/\pi},
+$$
+
+$$
+\langle r^2\rangle_{AB}=\frac32u,\quad
+\langle e^{-r^2/r_0^2}\rangle_{AB}=(1+u/r_0^2)^{-3/2},\quad
+\langle e^{i\boldsymbol q\cdot w^Tx}\rangle_{AB}=e^{-q^2u/4}.
+$$
+
+Die Klammern mit Index $AB$ bezeichnen durch $S_{AB}$ dividierte
+Matrixelemente, nicht bereits Erwartungen des Nukleongrundzustands.
+Die ersten Integrale wurden gegen unabhaengige Gauss-Hermite- bzw.
+Radialquadratur geprueft. Die einseitige Sechserprojektion stimmt fuer
+alle implementierten Observablen mit der expliziten 36-Term-Bra-/Ket-
+Projektion ueberein; die Wellenfunktion erfuellt alle sechs
+Permutationsidentitaeten auch punktweise.
+
+Das Ueberlappungsproblem wird ohne kuenstlichen Diagonalzusatz geloest:
+Null- und sehr kleine Metrikrichtungen werden bei vorgegebenem relativem
+Eigenwertcutoff entfernt. Rang, gesamtes Metrikspektrum, Kondition und
+Matrixresiduum werden berichtet. Das Matrixresiduum kontrolliert nur
+die endliche Rechnung, nicht den Rest ausserhalb der Basis. Ein Wechsel
+des Cutoffs kann verschachtelte effektive Unterraeume zerstoeren; deshalb
+werden beide Cutoffs und die Energie-Monotonie explizit verglichen.
+
+Der [synthetische Preflight mit Zustandsarchiv](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_gaussian_readiness_with_state_2026-10-28.json)
+verwendet **keine AL1-Eigenwertrechnung**, sondern
+$H=T+\frac18(\rho^2+\lambda^2)+0.1$ bei $m=1$ in synthetischen Einheiten.
+Der exakte Grundzustand hat $E_0=1.6$, mittleres Quarkradiusquadrat $2$,
+Proton-Ladungsradiusquadrat $2$ und Neutron-Ladungsradiusquadrat $0$.
+18 festgelegte Gaussfunktionen mit vier Kanaelen ergeben 72 rohe
+Richtungen und Rang 51 bei beiden Cutoffs $10^{-10},10^{-12}$.
+Die genannten Werte werden bis auf Rundung reproduziert; relatives
+Matrixresiduum etwa $2.51\,10^{-16}$. Gemessene Laufzeit etwa 0.52 s
+auf diesem Rechner, keine Garantie fuer den groesseren AL1-Lauf.
+
+Die [27 neuen Tests](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_nucleon_gaussian_basis.py)
+zusammen mit den [Runner-Tests](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_nucleon_gaussian_run.py)
+decken auch beide Spinsektoren, Formfaktorsteigung, Metrikfehler,
+Deadline und Nichtueberschreiben ab. Die Gesamtzahl bezieht sich auf
+beide Testdateien. Der erste Preflight ohne Koeffizientenexport bleibt
+im [Provenienz-Commit b09e553](https://github.com/MemoryDynamics/Knoten/tree/b09e553cf6d0e671f05d8f77400bc5317203e71d)
+erhalten. Danach wurde nur der Zustandsexport ergaenzt und der
+synthetische Preflight in eine neue Datei geschrieben.
+
+Archiviert werden die Exponenten und normierten Ritz-Koeffizienten in
+Gauss-major-Reihenfolge, innerhalb jeder Gaussfunktion
+$(s_{12},t_{12})=(0,0),(0,1),(1,0),(1,1)$; im Delta-Sektor nur ein Kanal.
+Damit sind Zustand und Observablen rekonstruierbar. Die Richtung einer
+globalen reellen Phase ist physikalisch bedeutungslos.
+
 ## Numerische Abnahme und offener Ausfuehrungsumfang
 
-Der physikalische Referenzoperator ist festgelegt; ein produktiver Solver
-und sein konkretes Laufbudget sind **noch nicht freigegeben**. Die
-Abnahme muss mindestens enthalten:
+Der physikalische Referenzoperator und der Solver sind spezifiziert.
+Der [einmalige AL1-Ausfuehrungsvorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/nucleon_al1_reference_proposal_2026-10-28.md)
+ist zur Autorenentscheidung vorbereitet, **noch nicht freigegeben**.
+Die Abnahme muss mindestens enthalten:
 
 - Schwerpunktfreie gekoppelte Basis, korrekte Paarsymmetrien und
   Hermitizitaet; kein willkuerlicher Coulomb-Abstandscutoff.
@@ -240,11 +321,14 @@ Abnahme muss mindestens enthalten:
   bekannte Fehlvorhersagen bleiben sichtbar. Bei fehlender Konvergenz
   `inconclusive`, keine automatische Ressourcenvergroesserung.
 
-Reproduzierbar ist bisher nur der feste Operatortest:
+Reproduzierbar sind bisher die festen Operatortests und der synthetische
+Solver-Preflight; kein AL1-Ziellauf:
 
 ```powershell
 python -m experiments.current.reference.nucleon_spatial_preflight --output <neue-ausgabe.json>
 python -m pytest tests/test_nucleon_spatial_preflight.py -q
+$env:OPENBLAS_NUM_THREADS='1'
+python -m experiments.current.reference.nucleon_gaussian_run --mode oscillator-preflight --output <neue-synthetische-ausgabe.json>
 ```
 
 Die offene Arbeitsreihenfolge steht ausschliesslich in den
