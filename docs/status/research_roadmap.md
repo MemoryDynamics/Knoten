@@ -1,6 +1,6 @@
 # Forschungsroadmap
 
-Stand: 2026-10-27. Grobe, schrittweise zu verfeinernde Zielarchitektur.
+Stand: 2026-10-28. Grobe, schrittweise zu verfeinernde Zielarchitektur.
 Die Ausfuehrungsreihenfolge steht ausschliesslich in den
 [Projektprioritaeten](project_priorities.md).
 
@@ -41,9 +41,13 @@ verbindet auf Autorenwunsch die bisher getrennten Fragestellungen an einem
 gemeinsamen System: Zwei Strukturen, Traegheit/Massenverhaeltnis, Ladung,
 Spin, magnetische Momente und atomare Bindung muessen eine konsistente
 Beschreibung tragen. Groesse-zu-Masse und FIFO-zu-Spin sind Hypothesen,
-keine Zuordnungen. Der Benchmark darf 3D und einen effektiven Protontraeger
-zunaechst voraussetzen; er behauptet dadurch weder Dimensionsemergenz noch
-die Herleitung aller Teilchen. Seine Bewertungsstufen sind keine zweite
+keine Zuordnungen. Der Benchmark darf eine aeussere 3D-Beschreibung und
+einen effektiven Protontraeger zunaechst voraussetzen; die innere
+Knoten-/Memory-Dimension bleibt offen. Er behauptet dadurch weder
+Dimensionsemergenz noch die Herleitung aller Teilchen. Der freie
+Neutronenzerfall ist ein spaeterer gemeinsamer Test von Massen, Ladungen,
+Spin und schwachem Uebergang, keine Voraussetzung der ersten Bindungsstufe.
+Seine Bewertungsstufen sind keine zweite
 Arbeitsreihenfolge oder Freigabe fuer neue Modellregeln/Ziellaeufe.
 
 Die Stufen beschreiben Abhaengigkeiten, keine zugesicherte Erfolgsfolge.
@@ -72,14 +76,25 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
   Keines dieser Resultate schliesst eine der Verbindungen R2--R5.
 - **FIFO-Paper:** eigener nichtlinearer Ast mit getrennten Aussagen zu
   vorbereiteter Existenz, Stabilitaet, Horizonttransfer und Formation.
-- **Paper-II-Programm:** zuerst Propagation und Kinematik; die eigentliche
-  Gravitationsdynamik bleibt eine zusaetzliche offene Aufgabe.
-- **Paper-III-Programm:** zuerst Quanten-Machbarkeit und geeignete effektive
-  Freiheitsgrade; erst danach Standardmodellstruktur. Synchronisation
-  allein ersetzt keine dieser Herleitungen.
+- **Paper-II-Programm:** effektive aeussere Raumdimension, Propagation und
+  Kinematik; die eigentliche Gravitationsdynamik bleibt eine zusaetzliche
+  offene Aufgabe. Die Zahl innerer Knotenzustaende ist keine Zahl
+  beobachtbarer Raumrichtungen.
+- **Paper-III-Programm:** Materie, Quantenstruktur und Wechselwirkungen,
+  gebuendelt am Wasserstoff-Zielbenchmark. Masse, Ladung, Spin und Bindung
+  brauchen eine gemeinsame Beschreibung; Quanten-Machbarkeit bleibt eine
+  fruehe Voraussetzung. Neutron/Betazerfall folgt als Anschlusspruefung,
+  nicht als beliebige Instabilitaetsdeutung. Der erste Artikel berichtet
+  nur tatsaechlich erreichte, begrenzte Resultate; eine vollstaendige
+  Standardmodell- oder Wasserstoffherleitung ist kein vorausgesetzter Claim.
 
 Paper-Nummern legen keine starre Forschungsreihenfolge fest. II und III
 muessen kompatible Annahmen und eine gemeinsame effektive Grundlage nutzen.
+Ihre gemeinsame Schnittstelle ist die Abbildung innerer Zustaende auf
+aeussere Positionen, Felder, Symmetriewirkungen und messbare Antworten.
+Paper III darf eine deklarierte effektive 3D-Aussenbeschreibung fuer einen
+begrenzten Vergleich verwenden, ohne auf die vollstaendige Herleitung in
+II zu warten oder sie dadurch als bewiesen auszugeben.
 Ob weitere Paper noetig sind, entscheidet der tatsaechliche Befund.
 
 Der naechste Arbeitsabschnitt konkretisiert nur den ersten offenen

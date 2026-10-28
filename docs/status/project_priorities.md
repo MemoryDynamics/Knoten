@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-27 (Wasserstoff-Zielbenchmark verbindet Struktur, Masse, Ladung, Spin und Bindung; H=1200-Kreis normal linear instabil; keine weitere Ausfuehrungsfreigabe).
+Stand: 2026-10-28 (Paper-III-Zielbenchmark trennt innere Struktur und aeussere Dimension; Neutron als Anschlusspruefung; keine weitere Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -30,9 +30,14 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    und effektiver Relativdynamik: Inputs, unabhaengige Readouts und fehlende
    Herleitungen in einem gemeinsamen Register ausweisen. Noch kein
    Ziellauf und keine Auswahl eines neuen physikalischen Mehrsystemgesetzes.
-   3D und ein effektiver Protontraeger duerfen als deklarierte Inputs des
-   begrenzten Benchmarks dienen; Gravitation und volle Flavorstruktur sind
-   keine Voraussetzungen dieses Durchstichs. Strukturauswahl ist daran
+   Eine aeussere 3D-Orts-/Wechselwirkungsbeschreibung und ein effektiver
+   Protontraeger duerfen als deklarierte Inputs des begrenzten Benchmarks
+   dienen; die innere Knoten-/Memory-Dimension bleibt offen. Die Abbildung
+   zwischen beiden Ebenen ist Teil der Bestandspruefung. Der Benchmark
+   gehoert zum Paper-III-Programm; Neutron/Betazerfall ist ein spaeterer
+   Konsistenztest mit Antineutrino und vollstaendigen Bilanzen, keine neue
+   parallele Aufgabe. Gravitation und volle Flavorstruktur sind keine
+   Voraussetzungen dieses Durchstichs. Strukturauswahl ist daran
    auszurichten, statt immer neue unabhaengige Formen oder Kernel zu suchen.
    Die bisherige
    [analytische Strukturauswahl](../reference/fifo_structure_candidate.md)

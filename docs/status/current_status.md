@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-27 (Wasserstoff-Zielbenchmark dokumentiert, keine neue physikalische Evidenz; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-28 (Paper-III-Zielbenchmark praezisiert, keine neue physikalische Evidenz; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -15,6 +15,10 @@ Bindung und Spektroskopie sowie die Hypothesen Knotengroesse/Traegheit und
 FIFO/Spin. Er trennt gesetzte Inputs, unabhaengige Messgroessen und
 Vorhersagen. Das ist eine Zieldefinition mit Quellenvergleich, kein neuer
 Stabilitaets-, Teilchen- oder Quantenbefund und keine Ausfuehrungsfreigabe.
+Die Autorenpraezisierung ordnet ihn Paper III zu: 3D meint die effektive
+aeussere Wechselwirkungsbeschreibung, nicht eine Beschraenkung der inneren
+Knoten-/Memory-Struktur. Neutron/Betazerfall ist als spaeterer Konsistenztest
+ergaenzt, nicht als Deutung einer vorhandenen Instabilitaet.
 
 Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
 von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und

@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-27 (Normalinstabilitaet des H=1200-FIFO-Ankers belegt; Bahn, Memory-Form und Raumdimension getrennt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-28 (Paper-III-Benchmark und innere/aeussere Dimension praezisiert; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -12,6 +12,10 @@ atomare Spektren sind Referenzziele, keine Modellresultate. Ein gesetzter
 Coulomb-/Quantenbaustein oder Teilchenparameter ist als Input auszuweisen;
 ein gebundenes klassisches Paar ist noch kein Wasserstoffatom. Der
 Benchmark erweitert weder die Claims von Paper I noch Ausfuehrungsfreigaben.
+Er gehoert zum Paper-III-Programm. Eine effektive aeussere 3D-Beschreibung
+legt die innere Knotendimension nicht fest; die zugehoerige Abbildung und
+geschlossene effektive Dynamik sind offen. Neutron/Betazerfall bleibt eine
+Anschlussanforderung, kein aus FIFO-Instabilitaet hergeleiteter Prozess.
 
 Der begrenzte [R0-Audit](../reference/foundation_feasibility.md) liefert
 bedingte analytische Grenzen, keinen neuen Produktionspass: Die Kreisphase

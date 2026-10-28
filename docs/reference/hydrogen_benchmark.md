@@ -1,6 +1,6 @@
 # Wasserstoff als gemeinsamer Zielbenchmark
 
-Stand: 2026-10-27. Ziel- und Hypothesenvertrag auf Autorenwunsch, kein
+Stand: 2026-10-28. Ziel- und Hypothesenvertrag auf Autorenwunsch, kein
 Ergebnis, keine neue Modellregel und keine Ausfuehrungsfreigabe. Die einzige
 Arbeitsreihenfolge bleibt in den [Projektprioritaeten](../status/project_priorities.md).
 
@@ -11,6 +11,11 @@ wechselwirkenden Strukturen und ihren atomaren Observablen. Eine passende
 Bahn, ein diskretes klassisches Modenspektrum oder ein einzelner Zahlenfit
 genuegt nicht. Der volle Zielumfang wird jetzt festgehalten; nicht jede
 Zeile der folgenden Tabelle wird dadurch zum sofortigen Simulationsauftrag.
+Der Benchmark gehoert zum **Paper-III-Programm** (Materie, Quantenstruktur
+und Wechselwirkungen), nicht zum Ergebnisumfang von Paper I. Ein erster
+Artikel braucht einen begrenzten nachgewiesenen Beitrag; Wasserstoff,
+Teilchenidentifikation und schwache Zerfaelle sind nicht automatisch
+gemeinsam in einer einzigen Publikation zu behandeln.
 
 | Eigenschaft | Physikalischer Zielvergleich | Zu pruefender Ansatz, kein Befund |
 | --- | --- | --- |
@@ -22,6 +27,7 @@ Zeile der folgenden Tabelle wird dadurch zum sofortigen Simulationsauftrag.
 | Atomare Bindung und Raumverteilung | Endlicher Grundzustand ohne Kollaps, $1s$-Form mit $\ell=0$, Ionisationsschwelle; im Coulomb-Grenzfall $E_n\propto-1/n^2$ | Effektive Relativdynamik und Energiebilanz herleiten. Eine klassische Kreisbahn ist kein $1s$-Zustand. |
 | Rueckstoss und Spektroskopie | Reduzierte Masse, Uebergaenge, Auswahlregeln; spaeter Fein- und Hyperfeinstruktur | Bereits bestimmte Einzelkomponenten muessen gemeinsam diese Observablen vorhersagen. Fuer $1s$ koppeln die Spins zu $F=0,1$ (21-cm-Uebergang). |
 | Groesse und innere Struktur | Formfaktoren und getrennte atomare/interne Laengenskalen | Memory-Radius, Ladungsradius, Compton-Laenge und Ausdehnung der relativen Wahrscheinlichkeitsverteilung nicht gleichsetzen. Proton zunaechst effektiv, nicht als elementar behaupten. |
+| Neutron als Anschlusspruefung | Freier Betazerfall $n\to p+e^-+\bar\nu_e$, konsistente Energie-, Ladungs-, Impuls- und Drehimpulsbilanz | Neutronzustand und schwacher Uebergang sind zusaetzlich herzuleiten; kein Synonym fuer beliebige Knoteninstabilitaet und keine Voraussetzung des ersten Bindungstests. |
 
 Zahlen und Konventionen: [NIST/CODATA 2022, vollstaendige Tabelle](https://physics.nist.gov/cuu/pdf/all.pdf).
 Atomarer Vergleich: [Tong, Atoms, Abschnitte 7.1.1 und 7.1.6](https://www.damtp.cam.ac.uk/user/tong/aqm/aqmseven.pdf).
@@ -30,6 +36,40 @@ Magnetische Momente freier und gebundener Teilchen sind zu unterscheiden.
 In der hier verwendeten Konvention gilt
 $\boldsymbol\mu_i=g_i e\mathbf S_i/(2m_i)$ mit $e>0$; ein negatives
 Elektronen-$g$ darf nicht nochmals mit einem negativen $q_e$ multipliziert werden.
+
+## Innere Struktur und aeussere Dimension
+
+**Keine Beschraenkung des inneren Knotenzustands auf drei Dimensionen.**
+Schon eine Historie aus $H$ Punkten in $\mathbb R^d$ besitzt $dH$
+Positionskoordinaten. Die Dimension dieses Konfigurationsraums ist nicht
+die raeumliche Dimension einer beobachtbaren Wechselwirkung. Weitere
+interne Freiheitsgrade sind ebenfalls nicht automatisch weitere
+physikalische Raumrichtungen.
+
+Fuer den Benchmark ist schematisch eine Abbildung
+
+$$
+\mathcal O:Z_{\rm full}\longmapsto
+(X_p,X_e,\zeta_p,\zeta_e,\text{effektive Felder}),
+\qquad X_p,X_e\in\mathbb R^3
+$$
+
+zu spezifizieren. Die inneren Zustaende $\zeta_i$ bleiben hinsichtlich
+Dimension und Struktur offen; diese Schreibweise fuehrt keine neuen
+Freiheitsgrade oder eine Produktzerlegung als Modellannahme ein.
+3D bezeichnet hier die effektive aeussere Orts-/Wechselwirkungsbeschreibung
+auf den geprueften Skalen, nicht die gesamte Memory und nicht nur eine
+dreidimensionale Grafik. Gleiche grobe Zustaende muessen eine kontrolliert
+gleiche Vorhersage erlauben, gegebenenfalls erst unter Mitfuehren weiterer
+Memory-/Feldvariablen. Eine Projektion allein beweist keine geschlossene
+3D-Dynamik, Lokalitaet oder Dimensionsemergenz.
+
+Die bisherigen 3D-/4D-Rahmenargumente betreffen frei zugaengliche
+**raeumliche** Einbettungsrichtungen der konkreten Historiengeometrie.
+Sie schliessen nicht jeden hoeherdimensionalen inneren Knoten aus.
+Die physikalische Spinfrage betrifft weiterhin die Wirkung aeusserer
+Raumrotationen auf die beobachtbaren Zustaende, auch bei grossem innerem
+Zustandsraum. Diese Wirkung und ihre Dynamik sind nachzuweisen.
 
 ## Masse aus Groesse: pruefbare Hypothese
 
@@ -40,8 +80,10 @@ R_\rho^2=\frac{\sum_j w_j|y_j-\bar y|^2}{\sum_j w_j},
 \qquad \bar y=\frac{\sum_j w_jy_j}{\sum_j w_j}.
 $$
 
-Dieser Memory-Radius ist weder eine Masse noch bereits ein physikalischer
-Ladungsradius. Auch die Modellparameter `memory_mass`, $M_0$, $H$ und eine
+Dieser Memory-Radius nutzt die jeweilige Eingabemetrik. Ohne die Abbildung
+auf aeussere Observablen ist er weder ein gemessener aeusserer Radius noch
+eine Masse oder ein physikalischer Ladungsradius. Auch die Modellparameter
+`memory_mass`, $M_0$, $H$ und eine
 inverse OU-Relaxationsrate sind keine nachgewiesenen Teilchenmassen.
 Ohne begruendete Energiedichte folgt weder $m\propto R_\rho$ noch
 $m\propto R_\rho^3$; eine Compton-Laenge ist ihrerseits keine geometrische
@@ -129,6 +171,41 @@ Ein konservatives Zweikoerpersystem faengt zwei anfangs ungebundene
 Komponenten nicht ohne Energietransfer ein. Existenz eines gebundenen
 Zustands und seine Formation sind deshalb getrennte Aussagen.
 
+## Neutronenzerfall als spaeterer Konsistenztest
+
+Der beobachtete freie Betazerfall lautet $n\to p+e^-+\bar\nu_e$.
+Zerfallsrate und Winkelkorrelationen pruefen die schwache Wechselwirkung:
+[NIST, Neutron Lifetime Measurement](https://www.nist.gov/programs-projects/fundamental-physics-neutron-lifetime-measurement-using-cold-neutron-beam).
+Im Vergleichsmodell darf das Neutron nicht allein wegen dieses Endzustands
+als bereits gebundenes Proton-Elektron-Paar identifiziert werden. Ein
+zerfallender Memory-Zustand ohne die benoetigten ausgehenden Freiheitsgrade
+und ihre Bilanzen ist kein Nachweis eines Betazerfalls.
+
+Aus den unabhaengigen Massen muss mit vernachlaessigter Neutrinomasse die
+verfuegbare Energie folgen:
+
+$$
+Q_\beta=(m_n-m_p-m_e)c^2\simeq0.782\,\mathrm{MeV}.
+$$
+
+Das ist nicht die volle Neutron-Proton-Massendifferenz, da auch die
+Elektronenruheenergie bereitzustellen ist. Zahlenbasis:
+[NIST/CODATA 2022](https://physics.nist.gov/cuu/pdf/all.pdf).
+Zusaetzlich zu dieser Kinematik braucht es einen begruendeten Uebergang,
+Lebensdauer, Spektrum und Spin-/Winkelkorrelationen. Die vorhandene
+Kreisinstabilitaet liefert keines davon. Freie und kerngebundene
+Neutronen sind hinsichtlich der Zerfallsmoeglichkeit zu unterscheiden.
+
+Ein direkter theoretischer Anschluss an Wasserstoff ist der gebundene
+Betakanal $n\to {\rm H}(ns)+\bar\nu_e$. Die Literatur prognostiziert einen
+kleinen Anteil von etwa $4\times10^{-6}$ und untersucht die
+Hyperfeinbesetzungen; die hier gepruefte Quelle ist ein **Messvorschlag**,
+kein experimenteller Nachweis:
+[Schott et al. (2019), Abstract und Abschnitt 1](https://arxiv.org/abs/1910.04885).
+Das ist eine spaetere Verbindung von schwachem Uebergang, Spin und Bindung,
+kein Ersatz fuer den dominanten ungebundenen Dreikoerperkanal und kein
+zusaetzlicher sofortiger Simulationsauftrag.
+
 ## Vorhandene Bausteine und offene Entscheidungen
 
 Die [B1-Bestandsaufnahme](operational_contract.md) beschreibt vorhandene
@@ -164,9 +241,11 @@ Eine volle Identifikation verlangt mehr als das endliche Benchmarkpanel,
 insbesondere weitere Streu-/Wechselwirkungstests und die zusammengesetzte
 Natur des Protons.
 
-3D und ein effektiver Protontraeger duerfen fuer den begrenzten Vergleich
-als deklarierte Inputs behandelt werden. Dimensionsemergenz, Gravitation
-und die gesamte Flavorstruktur bleiben separate Ziele der
+Eine effektive aeussere 3D-Beschreibung und ein effektiver Protontraeger
+duerfen fuer den begrenzten Vergleich als deklarierte Inputs behandelt
+werden; der innere Knotenzustand ist nicht auf 3D festgelegt.
+Dimensionsemergenz, Gravitation und die gesamte Flavorstruktur bleiben
+separate Ziele der
 [Forschungsroadmap](../status/research_roadmap.md).
 Neue Modellregeln erfordern eine Richtungsentscheidung; konkrete
 Ziellaeufe eine separat gepruefte, begrenzte Freigabe. Bestehende
