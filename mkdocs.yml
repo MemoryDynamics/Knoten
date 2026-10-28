@@ -24,6 +24,7 @@ nav:
           - Zielbenchmark: reference/hydrogen_benchmark.md
           - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
           - Referenz und Emergenz: reference/matter_reference_contract.md
+          - Raeumliche Nukleonreferenz: reference/nucleon_spatial_reference.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md

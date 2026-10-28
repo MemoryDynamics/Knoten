@@ -122,13 +122,16 @@ dieses Rechners.
 
 ## Vertrag fuer die eigentliche Simulation
 
-Die naechste **raeumlich-dynamische** Referenz braucht einen festgelegten
-Hamiltonoperator bzw. eine Wirkung, Freiheitsgrade, Naeherung, Kalibrierung
-und Konvergenzkontrollen. Bei einem Constituent-Modell sind insbesondere
-Confinementpotential und effektive Quarkmassen Inputs; bei Gitter-QCD
-kommen unter anderem Volumen-, Gitterabstands- und Ensemblekontrollen
-hinzu. Diese Entscheidungen sind durch die bisherige Matrixrechnung
-nicht erledigt. Es wurde noch keine solche Simulation gestartet.
+Die [raeumliche Nukleonreferenz](nucleon_spatial_reference.md) legt nun
+AL1-Hamiltonoperator, Literaturparameter, gekoppelte Kanaele und
+elektromagnetischen Anschluss fest. Ein eigener Operatortest zeigt,
+warum der bisherige feste Spin-/Flavorzustand bei ungleichen
+Paarabstaenden kein abgeschlossener Ansatz ist. Ein Code-/Textvergleich
+der oeffentlichen DeepQuark-Implementierung verlangt ausserdem eine
+explizite Energieoffset-Konvention. Das ersetzt keine raeumliche
+Eigenwertrechnung: Solver, konkrete Verfeinerungen und begrenzter
+Ausfuehrungsvertrag bleiben offen. Es wurde noch keine solche Simulation
+gestartet; Confinementpotential und Quarkmassen bleiben Referenzeingaben.
 
 Die Referenz soll Quarkstruktur ueber aeussere Nukleonobservablen an
 denselben atomaren Benchmark anschliessen. Eine separat passend gemachte

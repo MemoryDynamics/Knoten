@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-28 (QCD-/QFT-Referenz und Emergenz getrennt freigegeben; Quark-Zustandskontrolle bestanden; keine raeumliche Zielsimulation gestartet).
+Stand: 2026-10-28 (raeumliche AL1-Referenz spezifiziert; gekoppelte Kanaele und Energieoffset geprueft; keine raeumliche Zielsimulation gestartet).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -32,9 +32,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Softwaretests; er reproduziert bekannte Spin-/Farb-/Ladungsbeziehungen,
    aber keine Bindung oder Masse. Sein magnetisches Verhaeltnis $-2/3$
    weicht um etwa 2.67 Prozent vom dokumentierten Messvergleich ab.
-   Naechste begrenzte Aufgabe ist der Vertrag fuer eine raeumlich-dynamische
-   Referenz mit nachvollziehbarer Naeherung, Inputs und Anschluss an
-   atomare Observablen. Keine ungepruefte Gitter-QCD-Rechnung starten.
+   Der [raeumliche AL1-Vertrag](../reference/nucleon_spatial_reference.md)
+   liegt nun mit Literaturparametern und Anschluss an atomare Observablen
+   vor. 17 synthetische Operatortests sichern die erforderliche
+   Orts-/Spin-Kopplung und die Energieoffset-Konvention. Naechste
+   begrenzte Aufgabe: einen vorhandenen Solver oder eine etablierte
+   gekoppelte GEM-Basis gegen diesen Operator pruefen und ein festes
+   Konvergenz-/Laufbudget formulieren. DeepQuark nicht ungeprueft starten;
+   im gelesenen Baryonpfad fehlt ein im Artikel genannter konstanter Term.
+   Keine neue Gitter-QCD-Rechnung oder Parameteranpassung.
    Das Elektron wird auf der Referenzseite als quantisiertes Materiefeld
    behandelt; Feld-/FIFO-Stabilisierung bleibt auf der Memory-Seite offen.
    Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) ist
@@ -265,45 +271,24 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-Fuer den fundamentalen Pfad liegt nun ein konkreter FIFO-Strukturkandidat
-samt Entartungsgegenbeispiel und analytischem Normalblock vor. Ein
-targetfreier Pruefvertrag fuer die fehlenden 3D-Moden muss Symmetrien,
-Gueltigkeitsbereich und Abbruchkriterium festlegen. Keine automatische
-Auswertung archivierter Zielzellen, neue Rootsuche oder Modellergaenzung.
+Zu Prioritaet 1: eine reproduzierbare, begrenzte Solvervorbereitung fuer
+den festgelegten raeumlichen AL1-Operator, mit gekoppelten Kanaelen,
+eindeutiger Energiekonvention und Kontrollen fuer Energie **und**
+elektromagnetische Antwort. Die bestehenden Operatortests sind ein
+Methodeneingang, keine Nukleonloesung. Vor einem Ziellauf muessen konkrete
+Verfeinerungen, Ressourcenlimit und Abbruchregeln feststehen.
 
-Die Vorlage fuer den fundamentalen Pfad ist zur Autorenentscheidung bereit.
-Sie ersetzt weder eine Modellwahl noch deren spaetere wissenschaftliche
-Pruefung. Waehrend diese offen ist, kann die Paper-I-Neuheits- und
-Gueltigkeitspruefung weitergehen: Den nun hinreichend kontrollierten
-Moment-/Transportbereich gegen die Literatur bewerten und entscheiden, ob
-die wissenschaftliche Frage damit beantwortbar ist. Die neue
-Mittelungsdarstellung schliesst die asymptotische Momentluecke bei den
-archivierten Modellkoeffizienten und festem $H$, nicht die praktische
-Fehlertoleranz oder den Transport dort. Das externe Modellreview ist
-ausgewertet; seine Nachweisstaerke ist fuer den vorgeschlagenen Schaetzer
-nicht bestaetigt. Ein passender Zweilaengen-Schaetzer und die gepaarte
-Langblock-Kovarianz sind analytisch bestimmt; fuer den fuehrenden
-Koeffizienten liegt nun auch eine konservative endliche Stichprobengrenze
-vor. Das explizite Gesamtfehlerbudget schliesst die analytische Uebertragung
-auf endliches Rauschen bei festem $H$ und vollstaendig vorgefuelltem Start,
-nicht die Maschinenarithmetik. Die exakte ausloeschungsarme Darstellung
-besteht begrenzte Hochpraezisionschecks; der Referenzcode ist fuer die
-diskutierte Paarzahl teuer. Die neue bedingte Fehlerfortpflanzung begrenzt
-die Verstaerkung vorgegebener lokaler Fehler, nicht deren tatsaechliche
-Groesse im Simulator. Der Summationsbaum hat einen separaten Fehlervertrag.
-Die Entscheidungsvorlage ist nun fuer die fachliche Diskussion vorbereitet:
-Beitragskern und Gueltigkeitsargument bewerten, bevor weitere
-Runnerimplementierung oder eine Rauschwahl festgelegt wird. Die bekannte
-Gaussprojektion reproduziert inzwischen nachweislich denselben $D_4$;
-ein reiner Mittelwertvergleich loest die Neuheitsfrage nicht. Der begrenzte
-Satzvergleich und der ergaenzte konkrete Poissonbeweis praezisieren
-inzwischen die verbleibende Frage nach dem Mehrwert des kontrollierten
-Modellbeispiels; sie ersetzen keine fachliche Bewertung. Der gelieferte
-Aging-Volltext ist nun auf Modellebene abgeglichen, mit dokumentierten
-Vorzeichen-/Koeffizientenproblemen der gelieferten Fassung. Bernard--Wu
-auf Satzebene und ein unabhaengiges Fachreview bleiben offen.
-Ein Datenpanel wird dadurch nicht automatisch
-festgelegt. Keine neue FIFO-/P5-Zielautorisierung.
+Das gemeinsame Ziel bleibt der Wasserstoff-Durchstich samt unabhaengigem
+Memory-Anschluss. Ein korrekt reproduziertes Quarkmodell allein loest
+weder diese Herleitung noch Gravitation oder Vereinheitlichung. Die
+Memory-seitige Kraft-/Arbeits-/Messabbildung bleibt offen; ein neues
+physikalisches Gesetz wird dort nicht aus der Referenz uebernommen.
+
+Die frueher hier geforderte FIFO-Normalpruefung ist inzwischen ausgewertet:
+Der H=1200-Kreis ist normal linear instabil. Der Befund wird nicht durch
+erneute Pruefung oder Parameterrettung umgangen. Paper-I-Neuheit und
+fachliche Bewertung bleiben gemaess Prioritaet 2 offen; Details und
+Beweisgrenzen stehen dort, nicht in einer zweiten Arbeitsliste.
 
 ## Aktueller Haltepunkt
 

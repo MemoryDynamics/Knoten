@@ -5,6 +5,14 @@ Stand: 2026-10-28 (Quark-Referenz und Memory-Emergenz getrennt; Normalinstabilit
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
 
+Der [AL1-Referenzvertrag](../reference/nucleon_spatial_reference.md)
+enthaelt eine analytisch und synthetisch gepruefte Nichtabgeschlossenheit
+des festen Spin-/Flavor-Produktansatzes sowie einen statischen
+Energieoffset-Abgleich mit DeepQuark. Beide Aussagen sind Methodenbefunde
+innerhalb vorausgesetzter Quantenphysik. Weder ein raeumlicher
+Nukleonzustand noch seine Masse oder sein atomarer Beitrag sind damit
+berechnet; keine Erweiterung der Paper-I- oder Emergenzclaims.
+
 Die [Quark-Referenzkontrolle](../reference/matter_reference_contract.md)
 ist nach ausdruecklicher Autorenentscheidung implementiert und geprueft.
 Spinoren, Flavor/Ladungen, Farbe, S-Wellen-Symmetrie und Sektorwahl sind

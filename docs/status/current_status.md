@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-28 (getrennter Quark-Referenzzweig mit Zustandsalgebra-Kontrolle; kein neuer Memory-Zielbefund; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-28 (AL1-Referenz spezifiziert, gekoppelte Orts-/Spin-Kanaele erforderlich; kein raeumlicher Nukleonlauf oder neuer Memory-Zielbefund; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [raeumliche Nukleonreferenz](../reference/nucleon_spatial_reference.md)
+ist als AL1-Methodenvertrag spezifiziert. Eine analytische Restidentitaet
+und 17 synthetische Tests zeigen: Der bisherige feste Spin-/Flavoranteil
+ist bei ungleichen Hyperfeinkoeffizienten kein abgeschlossener Ansatz.
+Der statische DeepQuark-Codeabgleich identifiziert im gelesenen Baryonpfad
+einen gegenueber dem Artikel fehlenden konstanten Term von -64.63 MeV.
+Dies ist keine Widerlegung der publizierten Zahlen; die Energiekonvention
+muss vor einer Reproduktion abgeglichen werden. Keine neue raeumliche
+Simulation, kein Massennachweis und keine Memory-Aussage.
 
 Der Autor hat den [QCD-/QFT-Referenzzweig](../reference/matter_reference_contract.md)
 ausdruecklich getrennt vom Emergenznachweis freigegeben. Die erste
