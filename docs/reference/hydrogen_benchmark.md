@@ -1,6 +1,6 @@
 # Wasserstoff als gemeinsamer Zielbenchmark
 
-Stand: 2026-10-28. Ziel- und Hypothesenvertrag auf Autorenwunsch, kein
+Stand: 2026-10-28. Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
 Ergebnis, keine neue Modellregel und keine Ausfuehrungsfreigabe. Die einzige
 Arbeitsreihenfolge bleibt in den [Projektprioritaeten](../status/project_priorities.md).
 
@@ -26,7 +26,7 @@ gemeinsam in einer einzigen Publikation zu behandeln.
 | Magnetische Momente | Unterschiedliche freie $g$-Faktoren trotz gleichen Spins: $g_e\simeq-2.00231930436$, $g_p\simeq5.5856946893$ in CODATA-Konvention | Magnetische Antwort aus derselben Ladungs-, Massen- und Spinbeschreibung ableiten; keine separaten Fits pro Zustand. |
 | Atomare Bindung und Raumverteilung | Endlicher Grundzustand ohne Kollaps, $1s$-Form mit $\ell=0$, Ionisationsschwelle; im Coulomb-Grenzfall $E_n\propto-1/n^2$ | Effektive Relativdynamik und Energiebilanz herleiten. Eine klassische Kreisbahn ist kein $1s$-Zustand. |
 | Rueckstoss und Spektroskopie | Reduzierte Masse, Uebergaenge, Auswahlregeln; spaeter Fein- und Hyperfeinstruktur | Bereits bestimmte Einzelkomponenten muessen gemeinsam diese Observablen vorhersagen. Fuer $1s$ koppeln die Spins zu $F=0,1$ (21-cm-Uebergang). |
-| Groesse und innere Struktur | Formfaktoren und getrennte atomare/interne Laengenskalen | Memory-Radius, Ladungsradius, Compton-Laenge und Ausdehnung der relativen Wahrscheinlichkeitsverteilung nicht gleichsetzen. Proton zunaechst effektiv, nicht als elementar behaupten. |
+| Groesse und innere Struktur | Formfaktoren und getrennte atomare/interne Laengenskalen; Quarkstruktur des Protons | Memory-Radius, Ladungsradius, Compton-Laenge und atomare Ausdehnung trennen. Effektiver Protontraeger nur als Zwischenvergleich; Quarkstruktur ausdruecklich untersuchen. |
 | Neutron als Anschlusspruefung | Freier Betazerfall $n\to p+e^-+\bar\nu_e$, konsistente Energie-, Ladungs-, Impuls- und Drehimpulsbilanz | Neutronzustand und schwacher Uebergang sind zusaetzlich herzuleiten; kein Synonym fuer beliebige Knoteninstabilitaet und keine Voraussetzung des ersten Bindungstests. |
 
 Zahlen und Konventionen: [NIST/CODATA 2022, vollstaendige Tabelle](https://physics.nist.gov/cuu/pdf/all.pdf).
@@ -208,6 +208,15 @@ zusaetzlicher sofortiger Simulationsauftrag.
 
 ## Vorhandene Bausteine und offene Entscheidungen
 
+Der Autor hat einen getrennten
+[QCD-/QFT-Referenzzweig](matter_reference_contract.md) freigegeben:
+Proton/Neutron mit Quarkstruktur, Elektron als quantisierte Materiefeld-
+Referenz. Die erste kleine Spin-/Flavor-/Farbkontrolle ist implementiert,
+keine raeumliche QCD-Simulation. Auf der Emergenzseite bleibt die
+Stabilisierung eines Leptonzustands durch Feld/Memory und eventuell FIFO
+eine Hypothese. Gesetzte Quantenstruktur darf dort nicht als Ergebnis
+wiederverwendet werden. Beide Zweige muessen dieselben Observablen bedienen.
+
 Die [B1-Bestandsaufnahme](operational_contract.md) beschreibt vorhandene
 Frozen-Source- und direkte reziproke Kopplungen. Die Einzelprozessregel
 bestimmt dieses Mehrsystemgesetz nicht. Eine feste Quelle besitzt keine
@@ -250,11 +259,14 @@ insbesondere weitere Streu-/Wechselwirkungstests und die zusammengesetzte
 Natur des Protons.
 
 Eine effektive aeussere 3D-Beschreibung und ein effektiver Protontraeger
-duerfen fuer den begrenzten Vergleich als deklarierte Inputs behandelt
-werden; der innere Knotenzustand ist nicht auf 3D festgelegt.
+duerfen fuer einen begrenzten atomaren Zwischenvergleich als deklarierte
+Inputs behandelt werden. Sie ersetzen nicht die nun ausdruecklich
+gewuenschte Quarkstrukturpruefung; der innere Knotenzustand ist nicht auf
+3D festgelegt.
 Dimensionsemergenz, Gravitation und die gesamte Flavorstruktur bleiben
 separate Ziele der
 [Forschungsroadmap](../status/research_roadmap.md).
-Neue Modellregeln erfordern eine Richtungsentscheidung; konkrete
+Der getrennte Referenzzweig ist genehmigt. Neue physikalische Regeln im
+Emergenzzweig erfordern weiterhin eine Richtungsentscheidung; konkrete
 Ziellaeufe eine separat gepruefte, begrenzte Freigabe. Bestehende
 FIFO-/P5-Sperren und verbrauchte Versuchsgenehmigungen bleiben bestehen.

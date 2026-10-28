@@ -1,9 +1,18 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-28 (Paper-III-Benchmark und innere/aeussere Dimension praezisiert; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-28 (Quark-Referenz und Memory-Emergenz getrennt; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Quark-Referenzkontrolle](../reference/matter_reference_contract.md)
+ist nach ausdruecklicher Autorenentscheidung implementiert und geprueft.
+Spinoren, Flavor/Ladungen, Farbe, S-Wellen-Symmetrie und Sektorwahl sind
+Inputs. Reproduzierte Zustandsalgebra und das bekannte einfache
+Momentenverhaeltnis $-2/3$ sind **Referenzresultate**, keine Ableitung aus
+Memory. Die rund 2.67-prozentige Abweichung des Verhaeltnisses vom
+Messvergleich bleibt stehen. Keine raeumliche Quarksimulation, kein
+Confinement-, Massen-, Elektronen- oder Zerfallsnachweis.
 
 Der [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md) ist
 Future Work: Masse aus Knotengroesse und Spin aus FIFO sind ungepruefte

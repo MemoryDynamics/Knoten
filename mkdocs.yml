@@ -20,7 +20,10 @@ nav:
       - Implementierte Gleichungen: reference/implemented_equations.md
       - Physikalische Machbarkeit: reference/foundation_feasibility.md
       - Zustand und Interventionen: reference/operational_contract.md
-      - Wasserstoff-Zielbenchmark: reference/hydrogen_benchmark.md
+      - Wasserstoff und Materie:
+          - Zielbenchmark: reference/hydrogen_benchmark.md
+          - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
+          - Referenz und Emergenz: reference/matter_reference_contract.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md
@@ -29,7 +32,6 @@ nav:
       - FIFO-Strukturgrenzen: reference/fifo_rigid_structure_limits.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
-      - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
   - Experimente: reference/experiment_catalog.md
   - Repository: reference/repository_map.md
 

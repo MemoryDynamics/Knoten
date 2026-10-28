@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-28 (direkter Paar-Audit abgeschlossen; effektive Antwortbeschreibung offen; keine weitere Ausfuehrungsfreigabe).
+Stand: 2026-10-28 (QCD-/QFT-Referenz und Emergenz getrennt freigegeben; Quark-Zustandskontrolle bestanden; keine raeumliche Zielsimulation gestartet).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -25,22 +25,35 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Autorenwunsch ausdruecklich Massenverhaeltnis, Ladung, Spin, magnetische
    Momente, raeumliche Bindung und Spektroskopie. Knotengroesse als
    Massenursache und FIFO als Spintraeger bleiben zu pruefende Hypothesen.
+   Neu auf Autorenwunsch: Proton mit Quarkstruktur untersuchen und
+   [Referenztheorie strikt von Memory-Emergenz trennen](../reference/matter_reference_contract.md).
+   Bekannte QCD-/QFT-Regeln und Teilchenparameter duerfen im Referenzzweig
+   Inputs sein. Der erste endliche Quark-Algebrarechner besteht zwoelf
+   Softwaretests; er reproduziert bekannte Spin-/Farb-/Ladungsbeziehungen,
+   aber keine Bindung oder Masse. Sein magnetisches Verhaeltnis $-2/3$
+   weicht um etwa 2.67 Prozent vom dokumentierten Messvergleich ab.
+   Naechste begrenzte Aufgabe ist der Vertrag fuer eine raeumlich-dynamische
+   Referenz mit nachvollziehbarer Naeherung, Inputs und Anschluss an
+   atomare Observablen. Keine ungepruefte Gitter-QCD-Rechnung starten.
+   Das Elektron wird auf der Referenzseite als quantisiertes Materiefeld
+   behandelt; Feld-/FIFO-Stabilisierung bleibt auf der Memory-Seite offen.
    Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) ist
    abgeschlossen: exakte synchrone Regel, Eingaben/Readouts und drei
    begrenzte Hindernisse sind dokumentiert. Bidirektionale Memory-Abfrage
    liefert keine allgemeine Inkrementbalance; lokalisierte Quellen mit
    festen Gaussbreiten keinen asymptotischen Coulomb-Schwanz; die reine
    3D-Projektion keinen allgemeinen autonomen Abschluss. 16 synthetische
-   Kontrollen bestehen, ohne neue Zielsimulation. Naechste begrenzte
-   Aufgabe ist ein analytischer Reduktionsvergleich fuer beobachtbare
+   Kontrollen bestehen, ohne neue Zielsimulation. Der analytische
+   Reduktionsvergleich bleibt die offene Memory-seitige Verbindung fuer beobachtbare
    Koordinaten und ihren Memory-Rest: Welche Antwortgroessen sind aus der
    unveraenderten Regel identifizierbar, welche Kraft-/Energieannahmen
    waeren zusaetzlich einzusetzen? Nicht Quellengewicht oder Groesse
-   als Traegheit umbenennen. Noch kein Ziellauf und keine Auswahl eines
-   neuen physikalischen Mehrsystemgesetzes.
+   als Traegheit umbenennen. Der Referenzzweig beantwortet diese Frage
+   nicht; noch kein neues physikalisches Mehrsystemgesetz fuer Memory.
    Eine aeussere 3D-Orts-/Wechselwirkungsbeschreibung und ein effektiver
    Protontraeger duerfen als deklarierte Inputs des begrenzten Benchmarks
-   dienen; die innere Knoten-/Memory-Dimension bleibt offen. Die Abbildung
+   dienen, ersetzen aber nicht die Quarkstrukturpruefung. Die innere
+   Knoten-/Memory-Dimension bleibt offen. Die Abbildung
    zwischen beiden Ebenen ist Teil der Bestandspruefung. Der Benchmark
    gehoert zum Paper-III-Programm; Neutron/Betazerfall ist ein spaeterer
    Konsistenztest mit Antineutrino und vollstaendigen Bilanzen, keine neue
@@ -111,7 +124,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    [Entscheidungsvorlage](architecture_decision.md) vergleicht die
    unveraenderte Regel, eine explizite klassische Erweiterung und eine
    vorausgesetzte Quantenstruktur samt ersten Gegenpruefungen. Empfehlung
-   ist vorerst die unveraenderte Regel, ohne Erfolgsaussicht zu behaupten.
+   ist im Memory-/Emergenzzweig vorerst die unveraenderte Regel, ohne
+   Erfolgsaussicht zu behaupten. Der neue Referenzzweig ist davon getrennt.
    Keine neue Mediatorgleichung oder Quantenmessregel einsetzen, um eine
    Luecke zu verdecken. Nach der abgeschlossenen 120-Grad-Kontrolle
    bleibt dies Bestandsarbeit ohne weitere Ziellaeufe; neue Modellregeln erfordern eine Richtungsentscheidung des

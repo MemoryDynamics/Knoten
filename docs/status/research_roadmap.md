@@ -50,6 +50,14 @@ Spin und schwachem Uebergang, keine Voraussetzung der ersten Bindungsstufe.
 Seine Bewertungsstufen sind keine zweite
 Arbeitsreihenfolge oder Freigabe fuer neue Modellregeln/Ziellaeufe.
 
+Die anschliessende Autorenentscheidung erlaubt ausdruecklich einen
+[getrennten QCD-/QFT-Referenzzweig](../reference/matter_reference_contract.md).
+Proton/Neutron sind mit Quarkstruktur zu untersuchen; ein effektiver
+Protontraeger bleibt nur ein Zwischenvergleich. Die erste endliche
+Zustandsalgebra-Kontrolle ist kein dynamisches QCD-Ergebnis. Ein
+quantisiertes Elektronenfeld ist auf der Referenzseite Input; seine
+moegliche Entsprechung in Feld-/FIFO-Zustaenden bleibt herzuleiten.
+
 Die Stufen beschreiben Abhaengigkeiten, keine zugesicherte Erfolgsfolge.
 Die Quanten-Machbarkeit wird bereits in R0 geprueft.
 
@@ -83,7 +91,9 @@ Die Quanten-Machbarkeit wird bereits in R0 geprueft.
 - **Paper-III-Programm:** Materie, Quantenstruktur und Wechselwirkungen,
   gebuendelt am Wasserstoff-Zielbenchmark. Masse, Ladung, Spin und Bindung
   brauchen eine gemeinsame Beschreibung; Quanten-Machbarkeit bleibt eine
-  fruehe Voraussetzung. Neutron/Betazerfall folgt als Anschlusspruefung,
+  fruehe Voraussetzung. Quarkstruktur und Leptonzustand werden mit strikt
+  getrennten Referenz- und Emergenzclaims untersucht.
+  Neutron/Betazerfall folgt als Anschlusspruefung,
   nicht als beliebige Instabilitaetsdeutung. Der erste Artikel berichtet
   nur tatsaechlich erreichte, begrenzte Resultate; eine vollstaendige
   Standardmodell- oder Wasserstoffherleitung ist kein vorausgesetzter Claim.

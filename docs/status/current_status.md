@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-28 (analytischer Paar-Audit mit synthetischen Kontrollen; kein neuer physikalischer Zielbefund; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-28 (getrennter Quark-Referenzzweig mit Zustandsalgebra-Kontrolle; kein neuer Memory-Zielbefund; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der Autor hat den [QCD-/QFT-Referenzzweig](../reference/matter_reference_contract.md)
+ausdruecklich getrennt vom Emergenznachweis freigegeben. Die erste
+Quark-Zustandskontrolle ist ausgefuehrt: Ladungen, gewaehlter Spin-$1/2$-
+Sektor, Farbsingulett und bekannte magnetische Spin-Gewichte stimmen.
+Zwoelf Softwaretests bestehen. Das einfache Momentenverhaeltnis $-2/3$
+weicht um etwa 2.67 Prozent vom dokumentierten Messvergleich ab, ohne
+Nachfit. Keine raeumliche Quarkbindung, keine Gitter-QCD, keine Masse,
+kein Elektronenfeld und keine Memory-Emergenz wurden damit simuliert.
 
 Der neue [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md)
 enthaelt gemeinsam Massenverhaeltnis, Ladung, Spin, magnetische Momente,
