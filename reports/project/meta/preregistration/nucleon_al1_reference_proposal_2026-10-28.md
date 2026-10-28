@@ -1,8 +1,11 @@
 # Einmalige gekoppelte AL1-Referenz: Ausfuehrungsvorschlag
 
-Stand: 2026-10-28. **Status: awaiting-author-approval.** Der allgemeine
-Referenzzweig ist genehmigt; dieser konkrete raeumliche Ziellauf ist es
-noch nicht. Keine FIFO-/P5-Freigabe wird wiederverwendet.
+Stand: 2026-10-28. **Status: author-approved, not yet started.** Der Autor
+hat beide begrenzten Referenzlaeufe ausdruecklich genehmigt. Freigabe,
+Quellstand und anschliessender Verlauf stehen im
+[Versuchsprotokoll](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md).
+Kriterien und Budget bleiben unveraendert. Keine FIFO-/P5-Freigabe wird
+wiederverwendet.
 
 ## Frage und Nichtziele
 
@@ -53,8 +56,9 @@ Kriterien, keine aus QCD hergeleiteten Fehlerschranken.
   zusaetzliche interne Deadlines; der Elternprozess muss die harte Grenze
   auch waehrend einer LAPACK-Routine durchsetzen. Dazu dient der
   [Windows-Supervisor](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/run_nucleon_al1_bounded.ps1),
-  der Prozess und getrennte Ausgabelogs besitzt; seine AL1-Ausfuehrung
-  ist noch nicht genehmigt. Der Solver startet selbst keine Kindprozesse.
+  der Prozess und getrennte Ausgabelogs besitzt. Seine einmalige
+  AL1-Ausfuehrung je Sektor ist nun genehmigt. Der Solver startet selbst
+  keine Kindprozesse.
 - Nur die drei genannten Stufen und zwei Cutoffs pro Stufe. Keine
   Wiederholung eines Zielprozesses, auch nicht nach technischem Fehler.
 - Bei technischem Fehler oder Zeitlimit: Panel stoppen, vorhandene
