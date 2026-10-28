@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-28 (Paper-III-Zielbenchmark praezisiert, keine neue physikalische Evidenz; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
+Stand: 2026-10-28 (analytischer Paar-Audit mit synthetischen Kontrollen; kein neuer physikalischer Zielbefund; H=1200-Kreis normal linear instabil; Paper-I-Neuheit weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -19,6 +19,15 @@ Die Autorenpraezisierung ordnet ihn Paper III zu: 3D meint die effektive
 aeussere Wechselwirkungsbeschreibung, nicht eine Beschraenkung der inneren
 Knoten-/Memory-Struktur. Neutron/Betazerfall ist als spaeterer Konsistenztest
 ergaenzt, nicht als Deutung einer vorhandenen Instabilitaet.
+
+Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) ist
+abgeschlossen. Er zeigt fuer die gepruefte Regel: beidseitiges Auslesen
+gleicht allgemeine Historien nicht automatisch aus; feste Gauss-Readouts
+lokalisierter Quellen haben keinen asymptotischen Coulomb-Schwanz; eine
+reine 3D-Projektion kann verborgene Zustandsabhaengigkeit behalten.
+16 kleine synthetische Checks pruefen Codezuordnung und Gegenbeispiele.
+Das sind begrenzte Strukturaussagen, keine Zielsimulation, keine gemessene
+Masse und kein allgemeines No-go fuer kollektive effektive Felder.
 
 Die [Forschungsroadmap](research_roadmap.md) trennt das langfristige Ziel
 von den offenen Verbindungen zu effektiver Dynamik, Quantenmechanik und

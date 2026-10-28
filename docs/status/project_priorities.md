@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-28 (Paper-III-Zielbenchmark trennt innere Struktur und aeussere Dimension; Neutron als Anschlusspruefung; keine weitere Ausfuehrungsfreigabe).
+Stand: 2026-10-28 (direkter Paar-Audit abgeschlossen; effektive Antwortbeschreibung offen; keine weitere Ausfuehrungsfreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -25,11 +25,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Autorenwunsch ausdruecklich Massenverhaeltnis, Ladung, Spin, magnetische
    Momente, raeumliche Bindung und Spektroskopie. Knotengroesse als
    Massenursache und FIFO als Spintraeger bleiben zu pruefende Hypothesen.
-   Naechste begrenzte Aufgabe ist die analytische Zuordnung der vorhandenen
-   Zwei-Knoten-, Memory- und Kernelregeln zu Traegheit, Feldrueckwirkung
-   und effektiver Relativdynamik: Inputs, unabhaengige Readouts und fehlende
-   Herleitungen in einem gemeinsamen Register ausweisen. Noch kein
-   Ziellauf und keine Auswahl eines neuen physikalischen Mehrsystemgesetzes.
+   Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) ist
+   abgeschlossen: exakte synchrone Regel, Eingaben/Readouts und drei
+   begrenzte Hindernisse sind dokumentiert. Bidirektionale Memory-Abfrage
+   liefert keine allgemeine Inkrementbalance; lokalisierte Quellen mit
+   festen Gaussbreiten keinen asymptotischen Coulomb-Schwanz; die reine
+   3D-Projektion keinen allgemeinen autonomen Abschluss. 16 synthetische
+   Kontrollen bestehen, ohne neue Zielsimulation. Naechste begrenzte
+   Aufgabe ist ein analytischer Reduktionsvergleich fuer beobachtbare
+   Koordinaten und ihren Memory-Rest: Welche Antwortgroessen sind aus der
+   unveraenderten Regel identifizierbar, welche Kraft-/Energieannahmen
+   waeren zusaetzlich einzusetzen? Nicht Quellengewicht oder Groesse
+   als Traegheit umbenennen. Noch kein Ziellauf und keine Auswahl eines
+   neuen physikalischen Mehrsystemgesetzes.
    Eine aeussere 3D-Orts-/Wechselwirkungsbeschreibung und ein effektiver
    Protontraeger duerfen als deklarierte Inputs des begrenzten Benchmarks
    dienen; die innere Knoten-/Memory-Dimension bleibt offen. Die Abbildung

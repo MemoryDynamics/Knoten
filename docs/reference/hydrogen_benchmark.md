@@ -215,6 +215,14 @@ Rueckwirkung; sie ist nur ein erklaerter Schwerquellen-Grenzfall, kein
 Nachweis des endlichen Massenverhaeltnisses. Ein gemeinsames Feld und seine
 moegliche stabilisierende Rueckwirkung sind konkret zu spezifizieren.
 
+Der [analytische Paar-Audit](hydrogen_pair_audit.md) ordnet die vorhandene
+direkte Kopplung nun konkret zu: Bidirektionalitaet garantiert keine
+ausgeglichenen Punkt-/Centerinkremente, feste Gauss-Readouts lokalisierter
+Quellen haben keinen asymptotischen Coulomb-Schwanz, und eine reine
+3D-Projektion ist bei verborgenen Koordinaten nicht allgemein abgeschlossen.
+Diese begrenzten Aussagen sind keine Widerlegung jeder kollektiven
+Feldtheorie; Traegheit und die gemeinsame Bilanz bleiben herzuleiten.
+
 Skalare, Vektor- und Kernelvarianten gehen als vorhandene Kandidaten in
 den Vergleich ein, nicht als gleichzeitig freigegebene Parameterachsen.
 Die [Vektormemory-Nullkontrolle](https://github.com/MemoryDynamics/Knoten/blob/4b0a5687ea72afa7fbd1598d85280d67a78461bd/reports/vector_memory/vector_memory_eta_s_zero_control_2026-07-10.md)

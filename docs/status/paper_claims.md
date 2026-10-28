@@ -17,6 +17,15 @@ legt die innere Knotendimension nicht fest; die zugehoerige Abbildung und
 geschlossene effektive Dynamik sind offen. Neutron/Betazerfall bleibt eine
 Anschlussanforderung, kein aus FIFO-Instabilitaet hergeleiteter Prozess.
 
+Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) liefert
+begrenzte analytische Aussagen mit 16 synthetischen Kontrollen:
+Bidirektionale Kopplung garantiert keine allgemeine Punkt-/Centerbalance;
+endlich viele feste Gaussbreiten liefern fuer lokalisierte Quellen keinen
+asymptotischen Coulomb-Schwanz; reine 3D-Projektion ist nicht allgemein
+abgeschlossen. Keine behauptete Verletzung eines bereits definierten
+Gesamtimpulses, kein Ausschluss aller kollektiven Feldmechanismen und
+keine neue Produktions-, Massen- oder Bindungsevidenz.
+
 Der begrenzte [R0-Audit](../reference/foundation_feasibility.md) liefert
 bedingte analytische Grenzen, keinen neuen Produktionspass: Die Kreisphase
 ist eine Raumrotation; direkte Gaussquellen haben bei zugelassener

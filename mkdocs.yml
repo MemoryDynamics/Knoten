@@ -29,6 +29,7 @@ nav:
       - FIFO-Strukturgrenzen: reference/fifo_rigid_structure_limits.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
+      - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
   - Experimente: reference/experiment_catalog.md
   - Repository: reference/repository_map.md
 
