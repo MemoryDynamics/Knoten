@@ -1,0 +1,84 @@
+{
+  "schema": "emergenz-knoten.nucleon-spatial-preflight.v1",
+  "claim_class": "assumed_reference_operator_audit_only",
+  "decision": "coupled_spatial_spin_channels_required",
+  "source": "https://arxiv.org/html/2506.20555v2#A1",
+  "upstream_reviewed_commit": "0c56c3442f2b5e120d80db790d670a4f9f2edc12",
+  "parameters": {
+    "mass_GeV": 0.315,
+    "kappa": 0.5069,
+    "kappa_spin": 1.8609,
+    "string_GeV2": 0.1653,
+    "offset_GeV": 0.8321,
+    "A_GeV_B_minus_1": 1.6553,
+    "B": 0.2204,
+    "C_GeV4": 0.00202
+  },
+  "synthetic_positions_GeV_inverse": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.25,
+      1.25,
+      0.0
+    ]
+  ],
+  "pair_order_zero_based": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "spin_pair_coefficients_GeV": [
+    0.2909403004199753,
+    0.2536703618338828,
+    0.2273224901269743
+  ],
+  "nonseparable_control_GeV_squared": {
+    "spin_half_residual_squared": 0.01226096890434217,
+    "analytic_residual_squared": 0.012260968904342164,
+    "spin_three_half_control_squared": 8.320017359752859e-32
+  },
+  "equal_coefficient_control_dimensionless": {
+    "spin_half_residual_squared": 8.135128085091686e-31,
+    "analytic_residual_squared": 0.0,
+    "spin_three_half_control_squared": 8.874685183736381e-31
+  },
+  "constant_three_body_shift_GeV": -0.06462784996420673,
+  "not_computed": [
+    "spatial_wavefunction_or_mass_eigenvalue",
+    "charge_or_magnetic_form_factors",
+    "hydrogen_spectrum",
+    "DeepQuark_training_or_reproduction",
+    "Memory_emergence"
+  ],
+  "checks": {
+    "unequal_pair_coefficients_leave_fixed_ansatz": true,
+    "analytic_leakage_identity": true,
+    "equilateral_control_closed": true,
+    "spin_three_half_control_closed": true,
+    "isospin_partner_same_residual": true,
+    "constant_offset_between_64_and_65_MeV": true
+  },
+  "numpy_version": "2.3.5",
+  "script_sha256": {
+    "nucleon_spatial_preflight.py": "fb5a666d162fe0a12d0dc7177856d21e9637f70157eee0a53ff36e8bf8d1b2cb",
+    "nucleon_spin_flavor_reference.py": "b28ed878bb1fb0a401c2c4404af25b7a474ac0d3fc97c764f8b708ebea77bc72"
+  }
+}

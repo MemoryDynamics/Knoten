@@ -1,9 +1,155 @@
 # Paper-Claims und Status
 
-Stand: 2026-09-17.
+Stand: 2026-10-29 (lineare Blindheit des Paar-Mittelwerttests begrenzt Interpretation; kein dynamischer Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [lineare Fehlpositivkontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
+ist eine algebraische Identifizierbarkeitsgrenze des mittleren Readouts,
+kein Gegenbeweis gegen eine effektive lineare Wechselwirkung. 14 neue
+kleine Tests pruefen die Aufspaltung in Rand-/Produktkontrastterme.
+Die archivierte Anfangsgeometrie liefert nur eine Ein-Zustands-Restschranke.
+Weder ein kleiner Mittelwertfehler noch die `expm1`-Auswertung liefern
+statistische Power, Unabhaengigkeit, physikalische Masse oder neue Dynamik.
+
+Der [Paararchiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
+stellt fehlende dichte gemeinsame Bahndaten in den geprueften Ausgaben
+fest, keinen Fail der Mittelungshypothese. Neun neue synthetische Checks
+decken Dateistruktur, FIFO-Rekonstruktion und Informationsverlust ab.
+Die endliche Fensteridentitaet samt Randterm ist algebraisch, kein
+Stationaritaets- oder Ergodizitaetsnachweis. Keine neuen Emergenzclaims.
+
+Die [endliche Paarantwort](../reference/memory_pair_finite_separation.md)
+liefert eine Tayloridentitaet mit kontrolliertem Rest und einen
+**bedingten** statistischen Anschluss an die bekannte Wolkenfaltung.
+Stationaere, zwischen den Traegern unabhaengige innere Prozesse mit
+festgehaltenen Referenzcentern liefern eine reziproke mittlere Antwort
+nach deklarierter Normierung. Phasengekoppelte Gegenbeispiele zeigen,
+dass Stationaritaet allein nicht reicht. Zehn synthetische Checks sind
+keine nativen stabilen Bahnen, kein Ergodizitaets-/Mittelungsbeweis und
+keine neue Hamilton-, Massen-, Bindungs- oder Quantenherleitung.
+
+Die [Lesepotential-/FIFO-Bilanz](../reference/memory_pair_energy.md) ist
+eine exakte algebraische Identitaet mit acht synthetischen Kontrollen.
+Das zugrunde liegende Lesepotential ist im allgemeinen nativen Modell
+keine erhaltene oder monoton fallende Gesamtenergie; ein konstruiertes
+Gegenbeispiel benoetigt weder Bewegung noch Rauschen. Der engere Ausschluss
+einer konstant-diagonalen reinen Gradientenrealisierung betrifft nur den
+lokalen Vierzustandsvergleich in den angegebenen Koordinaten. Keine
+allgemeine Unmoeglichkeit einer physikalischen Energie, keine Waerme-,
+Massen- oder Bindungsvorhersage und keine neue Paper-I-Behauptung.
+
+Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) ist ein
+begrenztes analytisches Resultat: exakte Center-Identitaet mit FIFO-Rand
+und nichtlinearem Rest, bedingte reziproke Filterenergie und Anwendung
+einer bekannten Vierzustands-Spektralschranke. 14 synthetische Checks
+pruefen die Zuordnung. Weder physikalischer Kraft-/Arbeitsport noch
+Teilchenmasse, Spin oder Quantenzustand sind damit hergeleitet. Der
+attraktive lokale kontinuierliche Abschluss besitzt keine freie schwach
+gedaempfte komplexe Normalmode; auf das volle FIFO, negative Kruemmungen
+und nichtlineare endliche Abstaende wird dies nicht uebertragen.
+Keine Erweiterung der Paper-I- oder Emergenzclaims.
+
+Der gekoppelte Gauss-Solver ist an synthetischen Aufgaben und dem
+exakten 6D-Oszillator verifiziert. Diese Methodenbefunde sind weder
+eine AL1-Nukleonloesung noch neue Materie-/Emergenzclaims. Die separat
+genehmigten [AL1-Ziellaeufe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md)
+sind danach einmalig ausgefuehrt worden. Beide bestehen die endliche
+Konsistenzpruefung; $E_N=930.733$ MeV und $E_\Delta=1242.106$ MeV sind
+Modellenergien mit eingesetzten Quarkmassen und Energieoffset. Die
+Reihenfolge ist nur fuer die getesteten endlichen Sektoren gestuetzt.
+Keine Kontinuumsfehlerschranke, Quanten-/Confinementherleitung oder
+Memory-Emergenz. Der grosse nichtrelativistische Geschwindigkeitsproxy
+und das verschlechterte magnetische Verhaeltnis bleiben Gegenbefunde
+zur physikalischen Praezisionsdeutung. Keine weitere Ausfuehrung genehmigt.
+
+Der [AL1-Referenzvertrag](../reference/nucleon_spatial_reference.md)
+enthaelt eine analytisch und synthetisch gepruefte Nichtabgeschlossenheit
+des festen Spin-/Flavor-Produktansatzes sowie einen statischen
+Energieoffset-Abgleich mit DeepQuark. Beide Aussagen sind Methodenbefunde
+innerhalb vorausgesetzter Quantenphysik. Sie selbst berechnen noch keinen
+raeumlichen Nukleonzustand; dieser stammt aus dem oben getrennt
+berichteten Panel. Kein atomarer Beitrag wurde berechnet, keine
+Erweiterung der Paper-I- oder Emergenzclaims.
+
+Die [Quark-Referenzkontrolle](../reference/matter_reference_contract.md)
+ist nach ausdruecklicher Autorenentscheidung implementiert und geprueft.
+Spinoren, Flavor/Ladungen, Farbe, S-Wellen-Symmetrie und Sektorwahl sind
+Inputs. Reproduzierte Zustandsalgebra und das bekannte einfache
+Momentenverhaeltnis $-2/3$ sind **Referenzresultate**, keine Ableitung aus
+Memory. Die rund 2.67-prozentige Abweichung des Verhaeltnisses vom
+Messvergleich bleibt stehen. Keine raeumliche Quarksimulation, kein
+Confinement-, Massen-, Elektronen- oder Zerfallsnachweis.
+
+Der [Wasserstoff-Zielbenchmark](../reference/hydrogen_benchmark.md) ist
+Future Work: Masse aus Knotengroesse und Spin aus FIFO sind ungepruefte
+Mechanismushypothesen. Das Massenverhaeltnis, magnetische Momente und
+atomare Spektren sind Referenzziele, keine Modellresultate. Ein gesetzter
+Coulomb-/Quantenbaustein oder Teilchenparameter ist als Input auszuweisen;
+ein gebundenes klassisches Paar ist noch kein Wasserstoffatom. Der
+Benchmark erweitert weder die Claims von Paper I noch Ausfuehrungsfreigaben.
+Er gehoert zum Paper-III-Programm. Eine effektive aeussere 3D-Beschreibung
+legt die innere Knotendimension nicht fest; die zugehoerige Abbildung und
+geschlossene effektive Dynamik sind offen. Neutron/Betazerfall bleibt eine
+Anschlussanforderung, kein aus FIFO-Instabilitaet hergeleiteter Prozess.
+
+Der [direkte Paar-Audit](../reference/hydrogen_pair_audit.md) liefert
+begrenzte analytische Aussagen mit 16 synthetischen Kontrollen:
+Bidirektionale Kopplung garantiert keine allgemeine Punkt-/Centerbalance;
+endlich viele feste Gaussbreiten liefern fuer lokalisierte Quellen keinen
+asymptotischen Coulomb-Schwanz; reine 3D-Projektion ist nicht allgemein
+abgeschlossen. Keine behauptete Verletzung eines bereits definierten
+Gesamtimpulses, kein Ausschluss aller kollektiven Feldmechanismen und
+keine neue Produktions-, Massen- oder Bindungsevidenz.
+
+Der begrenzte [R0-Audit](../reference/foundation_feasibility.md) liefert
+bedingte analytische Grenzen, keinen neuen Produktionspass: Die Kreisphase
+ist eine Raumrotation; direkte Gaussquellen haben bei zugelassener
+Quellenintervention keinen harten raeumlichen Antwortrand; Bell-lokale,
+messwahlunabhaengige klassische Messmodelle bleiben mit Memory beschraenkt.
+Andere Formmoden, relative Orientierungen, effektive Lokalitaet und anders
+begruendete Messarchitekturen werden dadurch nicht allgemein ausgeschlossen.
+Die [B1-Bestandsanalyse](../reference/operational_contract.md) spezifiziert
+die klassische Frozen-Source-Antwort und ihre bedingte Verteilung.
+Es fehlt weiterhin ein gemeinsamer physikalischer Mehrsystem-/Messvertrag
+fuer die Programme II/III. B1 fuehrt keine neue Modellregel ein und
+autorisiert weder einen Quantenclaim noch eine physikalische Interpretation
+des direkten Fernzugriffs als Ueberlichtkommunikation.
+
+Die [FIFO-Strukturauswahl](../reference/fifo_structure_candidate.md)
+liefert ein abgeleitetes Orientierungsreadout, keine neue Dynamik. Der
+nichtentartete 3D-Rahmenbereich hat $SO(3)$-Wegtopologie, aber der volle
+FIFO-Konfigurationsraum erlaubt ihre Kontraktion ueber entartete Zustaende.
+Bei frei zugaenglichem $d\geq4$ entfaellt diese Wegklasse bereits im
+nichtentarteten Zweirahmenraum; sie ist kein dimensionsunabhaengiger Befund.
+Das ist keine intrinsische Knotenchiralitaet, Hopf-Ladung, fermionische
+Quantisierung oder schwache Wechselwirkung. Die Uebertragung der ebenen
+Kreisloesung nach 3D ist algebraisch; Normalstabilitaet ist nicht Teil
+des bisherigen 2D-G5-Passes.
+Der [Normaltest-Prototyp](../reference/fifo_normal_stability_contract.md)
+liefert eine exakte Symmetriedivision und eine bekannte Intervall-Schur-
+Pruefung samt erneutem Existenzzertifikat und Rootbox-Anbindung. Am
+H=1200-Anker bestehen beide Rootpruefungen, die Schur-Pruefung bleibt
+wegen Intervallaufweitung unentschieden. Die separat freigegebene
+[Archivauswertung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/dynamics/rotation/fifo_archived_normal_slope_2026-10-26/report.md)
+liefert nun $S=1+\sum_j j c_j<0$ mit exakten rationalen Grenzen in beiden
+80-/120-dps-Datensaetzen. Unter der urspruenglichen Intervall-Vertrauensbasis
+ist damit mindestens eine reelle normale Formmode mit Multiplikator
+groesser als eins belegt. Dieser Kreis ist kein linear stabiler 3D-Baustein.
+Keine neue Simulation; keine genaue Wachstumsrate, nichtlineare Folgeentwicklung,
+allgemeine FIFO-Instabilitaet oder physikalische Teilchenidentifikation.
+
+Die [starre Strukturklassifikation](../reference/fifo_rigid_structure_limits.md)
+ist ein analytischer Befund, kein neuer Loesungsast: Punkt, Gerade, Kreis
+und Helix erschoepfen die festen eigentlichen Raumbewegungen der nativen
+Ein-Punkt-Historie in 3D. Eine Helix kann geometrisch haendig sein, hat aber
+keine dadurch geschuetzte Ladung. $S\ne0$ am Kreis schliesst eine beliebig
+nahe Helixfortsetzung aus; Existenz eines fernen Asts, dessen Stabilitaet
+und nichtstarre Attraktoren sind offen. Keine Quanten- oder Gravitationsaussage.
+Dies ist keine Klassifikation aller Memory-Verteilungen: Kugel-/Torusformen
+in 3D und mehrere Rotationsebenen in hoeheren Dimensionen bleiben moegliche,
+noch nicht als stabile Loesungen etablierte Strukturklassen.
 
 ## Paper 0: Mathematical Anchor
 
@@ -98,26 +244,149 @@ hochgestuft wird. Ein `inconclusive` schaltet keine neue Sprache frei.
 
 ## Paper I: Minimal Dynamical Foundation
 
-Status: mathematisch mit Paper 0 synchronisiert; der aktuelle kleine-Radius-Ast traegt als co-moving linearer skalarer Relaxationsbefund, noch nicht als nichtlineare Metastabilitaetsevidenz.
+Status 2026-10-19: Die Fassung vom 2026-10-09 ist eine reproduzierbare Baseline,
+keine bestaetigte PRE-einreichungsreife Arbeit. Linearer Kurvaturkollaps,
+Markov-Einbettung und unterdrueckte, aber fortbestehende Diffusion werden
+nicht als neue allgemeine Mechanismen beansprucht. Der
+[Neuheitsaudit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/pre_reassessment_2026-10-19.md)
+grenzt die bereits bekannte Architektur von einer noch zu pruefenden
+kernelabhaengigen nichtlinearen Vorhersage ab. Die Transportformel ist
+analytisch, nicht anhand der Radiusdaten validiert. Die formale
+Schwachrauschrechnung ist Forschungsarbeit, noch kein Manuskriptbefund.
+
+Fortschreibung 2026-10-21: Die
+[Stationaritaetsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_memory_stationarity_2026-10-21.md)
+gibt ein explizites Minorisierungsargument fuer die relative stationaere
+Verteilung bei festem endlichem $H$ und positivem Rauschen. Ihre Existenz
+beweist weder praktische Durchmischung noch die globale stationaere
+Schwachrauschentwicklung. Der algebraisch konstruierte koexistierende
+Zweierzyklus ist ein Gegencheck, kein FIFO-Produktionsbefund und kein
+neuer Formationsclaim. Diese Resultate sind noch nicht in die eingefrorenen
+Manuskripte uebernommen; ein unabhaengiges Fachreview steht aus.
+Die spaetere Ergaenzung durch positive Mittelung begruendet bei festem
+endlichem $H$ die stationaere Momententwicklung bis $\varepsilon^4$ mit
+Rest $O(\varepsilon^6)$ auch fuer die archivierten Modellkoeffizienten.
+Das ist eine Kleinrauschaussage, keine Validierung ihrer konkreten
+Rauschstaerke. Die Konstanten sind praktisch unbrauchbar; der Beweis
+kontrolliert weder den nichtlinearen Transport noch $H\to\infty$ und
+gilt nicht fuer den lokal repulsiven vorbereiteten FIFO-Anchor.
+Die separate
+[Kontraktionsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/weak_noise_validity_2026-10-21.md)
+begruendet stationaere quadratische Momente durch Ordnung $\varepsilon^4$
+mit Rest $O(\varepsilon^6)$ unter $|\eta|G_2q/\alpha<1$, auch bei
+ungekuerztem exponentiellem Gedaechtnis. Keine aktive archivierte Zelle
+erfuellt diese hinreichende Schranke. Die anschliessende Analyse des
+Einzelinnovations-Einflusses begruendet mit einem summierbaren Rest die
+Transportkorrektur bis Ordnung $\varepsilon^4$ in demselben Bereich.
+Fuer ungekuerztes Gedaechtnis liegt der Koeffizient explizit vor; die
+gematchten Kernel haben entgegengesetzte fuehrende Transportkorrekturen
+relativ zur linearen Referenz, nicht notwendig zur Brownian-Kontrolle.
+Numerische Validierung, unabhaengiges Fachreview, die allgemeine
+Gueltigkeitsfrage, FIFO-Branchtransfer und hinreichende Publikationsneuheit
+bleiben offen.
+
+Externes Modellreview vom 2026-10-21, gegengeprueft am 2026-10-22:
+Die ungekuerzten Transportkoeffizienten wurden reproduziert. Der
+[Panel-Gegencheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/external_review_audit_2026-10-22.md)
+zeigt jedoch eine endliche-Lag/Langzeit-Verwechslung, einen unzulaessigen
+Transfer der Kraftrest-Diagnostik auf den Transportfehler und eine
+unvollstaendige Powerrechnung. Dies ist keine Widerlegung der
+asymptotischen Formel, aber auch kein positiver Readiness-Befund.
+Ein signifikant falsches Vorzeichen darf nach bestandenen Voraussetzungen
+nicht pauschal als inconclusive behandelt werden. Externes Modellreview
+ersetzt kein unabhaengiges menschliches Fachreview.
+
+Die anschliessende
+[gepaarte Transportreferenz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_transport_feasibility_2026-10-22.md)
+liefert einen bekannten Zweilaengen-Schaetzer mit explizitem
+Koeffizientenbias und eine modellbezogene Langblock-Varianz einschliesslich
+des dritten Gauss-Chaos. Das ist weder eine neue statistische Methode
+noch endliche-Lauf-Power oder Transportevidenz. Insbesondere rechtfertigt
+die asymptotische Koordinatenunabhaengigkeit keinen Faktor $1/d$ bei
+endlicher Blocklaenge. Die anschliessende
+[finite-Stichproben-Schranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_block_transport_bound_2026-10-22.md)
+umgeht diese Annahme mit Moment- und Kopplungsgrenzen. Sie kontrolliert
+nur den fuehrenden stationaeren Koeffizienten, nicht bereits den
+vollstaendigen nichtlinearen Schaetzer. Das anschliessende
+[Gesamtfehlerbudget](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/finite_noise_transport_budget_2026-10-23.md)
+ergaenzt explizite nichtlineare Schaetzer-/Transportreste und die Kopplung
+eines vollstaendig vorgefuellten flachen Starts. Es ergibt einen
+hinreichenden kleinen Rauschbereich in exakter Arithmetik; die numerische
+Auswertung ist kein Intervall- oder Implementierungszertifikat. Der
+Kontrast liegt am oberen Rand nur bei etwa $9.54\,10^{-10}$ des linearen
+Hintergrunds. Das belegt weder praktische Nachweisbarkeit noch deren
+Unmoeglichkeit, bestaetigt nicht $\varepsilon=0.007$ und deckt keinen
+Start mit leerem Speicher ab. Fachreview und Neuheitsvergleich fehlen.
+
+Die [exakte Restrekursion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_residual_precision_2026-10-23.md)
+umgeht die Subtraktion des gemeinsamen linearen Hintergrunds und besteht
+kleine deterministische Hochpraezisions-Gegenchecks, einschliesslich eines
+H=600-Ein-Schritt-Tests. Das ist eine numerische Methodenpruefung, kein
+stochastischer Transportbefund oder Langlauf-Fehlerzertifikat. Der
+Referenzcode ist im Mikrobenchmark fuer Milliarden Updates teuer;
+eine optimierte Laufzeit wurde nicht gemessen. Keine neue Publikations-
+oder Physikbehauptung folgt daraus.
+
+Die [Fehlerfortpflanzungsnotiz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paired_error_propagation_2026-10-23.md)
+kontrolliert bedingt die Verstaerkung vorgegebener lokaler Defekte. Der
+separate Summationsbaum begrenzt nur Rundungsfehler relativ zu seinen
+binary64-Eingaben. Beides ist kein Langlaufzertifikat: lokale Fehler,
+Laggrenzen und die vollstaendige Statistik-/Innovationsschnittstelle
+fehlen als validierte Voraussetzungen. Die neue
+[Entscheidungsvorlage](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/paper_i_decision_brief_2026-10-23.md)
+empfiehlt daher eine fachliche Bewertung des analytischen Beitrags vor
+weiterer Runneroptimierung; sie behauptet keine Publikationsreife.
+
+Der [Gaussprojektions-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/gaussian_projection_audit_2026-10-24.md)
+reproduziert den vollstaendigen $D_4$ durch etablierte statistische
+Linearisierung, nicht nur sein Vorzeichen. Das ist kein Nachweis, dass
+der gesamte Gueltigkeitssatz bereits publiziert wurde, aber ein
+Mittelwerttest dieses Koeffizienten kann die beiden Beschreibungen nicht
+unterscheiden. Die Restvarianz verschwindet nicht; exakte Gaussdynamik
+oder ein gaussreines Fehlerbudget folgt aus der Identitaet ebenfalls nicht.
+
+Der [begrenzte Antworttheorie-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/linear_response_scope_audit_2026-10-24.md)
+liefert keinen Neuheitsbeweis: Totalvariations-Mischung scheitert am vollen
+Historienzustand, nicht die Kontraktion in der gewichteten Metrik.
+Die nun ergaenzte konkrete Poissonrechnung liefert intern die stationaere
+Verteilungsantwort, zeitliche Korrelationsantwort und quantitative
+Restordnung auf einem zweiten Weg. Ein Satz ueber eine erste Ableitung
+allein wuerde den $O(\varepsilon^6)$-Rest nicht rechtfertigen; die benoetigten
+Observablen- und Restabschaetzungen sind deshalb explizit ausgefuehrt.
+Dies ist keine unabhaengige Beweispruefung, neue allgemeine Methode oder
+Erweiterung auf die archivierten aktiven Modellzellen.
+
+Der [Aging-Volltextvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/paper/paper_i/research/aging_full_text_comparison_2026-10-25.md)
+schliesst nun die bisherige Zugriffsluecke. Bei ungekuerztem exponentiellem
+Gedaechtnis entspricht unsere lineare Regel exakt dem Euler-Schema der
+Quelle, wenn Parameter, Rauschen und Start gematcht sind. Kontinuierlicher
+und diskreter Diffusionskoeffizient sind erst im skalierten Grenzwert
+identisch. Die Quelle liefert keine nichtlineare Schwachrauschentwicklung;
+das bestaetigt weder deren Neuheit noch die gesamten allgemeinen Saetze
+des Preprints. Gepruefte Vorzeichen-/Koeffizientenfehler der gelieferten
+Fassung werden nicht uebernommen. Keine neue Produktions- oder Physikevidenz.
+
+Der kleine-Radius-Ast traegt als kontrollierter co-moving
+linearer Relaxationsbefund. Paper I definiert Modell und Messstatistik
+selbststaendig. Die neue Auswertung verwendet fuer Theorie und Daten dieselben
+stationaeren zweiten Momente; die Daten sind terminale Stichproben, kein
+Nachweis nichtlinearer Metastabilitaet.
 
 Der reviewed P4-R-S-Skalenpass gehoert nicht zu diesem Hauptclaim. Er stammt
 aus einem rauschfreien deterministischen `d=2`-Ast mit vorbereitetem Orbit und
 explizit konstruiertem Source-/Write-Port. Fuer Paper I ist er derzeit nur als
-getrennte technische Notiz, Supplement-Option oder eng markierter Outlook
-tragbar; Abstract und Hauptschluss bleiben frei von Schleifenmaterie-, Spin-,
-Traegheits- und Masseaussagen. Die reviewed N0-Klammer ist inzwischen eng in
-beide Diskussionsfassungen aufgenommen: Sie berichtet eine finite-time
-Phasenkohaerenzgrenze in der dimensionslosen Koordinate
-`chi=epsilon/(R sqrt(alpha))`, nicht einen physikalischen Rauschpegel oder
-stochastische Formation.
+Evidenz fuer das separate FIFO-/Rotating-Wave-Paper vorgesehen. Abstract,
+Hauptschluss und Discussion von Paper I verwenden weder diesen Befund noch
+die reviewed N0-Klammer als Evidenz fuer die stochastische Relaxationsbranch.
 
 Aktuell tragbar:
 
 - Minimalmodell mit relaxierendem Memory;
 - sichtbarer Prozess nichtmarkovsch, augmentierter Zustand markovsch;
 - interne Speicherskala `alpha^{-1}` in der normierten Konvention;
-- Knotenbegriff als diagnostischer Kandidat, nicht beobachtete Metastabilitaet;
-- Relaxationsraten nur als Stabilitaets- oder mass-like proxies.
+- zwei getrennte Radiusobservablen mit passender linearer finite-H-Referenz;
+- Konsistenz der terminalen RMS-Radien mit den gesetzten Modellparametern;
+- kein beobachteter nichtlinearer Metastabilitaets- oder Masseclaim.
 
 Noch nicht tragbar:
 
@@ -134,11 +403,17 @@ keinen endlichen Phasenuebergang.
 Der enge Kernel-Core-Audit und die seed-gematchte Ablation zeigen, dass die
 bisherige (1,35)-Referenz im gesampelten Taylor-Regime bis etwa 1e-8 relativ
 durch den attraktiven Ein-Kernel-Punkt (0,26) reproduziert wird. Fuer
-A_att>=5 folgt der dynamische Radius der exakten linearen
-Memory-Center-Vorhersage mit 0.94 Prozent medianem und 3.44 Prozent maximalem
-relativen Fehler. Die erweiterte Reconciliation ueber neun aktive
-`N=30M/300M`-Slices reduziert den maximalen finite-memory Radiusfehler auf
-`1.16%`. Der direkte Familienvergleich zeigt bei q=3 die exakte
+A_att>=5 war historisch eine Naehe zur linearen Positionsradius-Formel
+berichtet worden. Die damaligen Fehlerzahlen vergleichen jedoch
+Memory-Wolkenmediane mit Positions-RMS und sind keine Validierung identischer
+Observablen. Die korrigierte terminale RMS-Auswertung von 2026-10-09 ergibt
+ueber neun aktive `N=30M/300M`-Slices 0.076% mediane und 0.984% maximale
+Memory-Wolken-Abweichung; fuer den Positionsradius sind es 0.090% und 0.761%.
+Acht eta-zero-Kontrollslices erreichen maximal 2.122% Memory-Wolken-Abweichung.
+Je Slice liegen fuenf Seeds mit 10001 konsekutiven terminalen Messungen vor.
+Seed-IQRs sind keine Konfidenzintervalle, N ist nicht die Messfensterlaenge.
+Die Referenz ist unabhaengig per Impulsantwort und Spektralintegral geprueft.
+Der direkte Familienvergleich zeigt bei q=3 die exakte
 Reparametrisierung `A_eff=A_att-9`; auf dieser Achse kollabieren Ein- und
 Zweiskalen-KPIs numerisch.
 

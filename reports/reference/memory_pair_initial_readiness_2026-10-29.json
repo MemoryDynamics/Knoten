@@ -1,0 +1,38 @@
+{
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_sha256": "cde1873049a20779cede8d64135c2496faa9d3587d3af752a0209882d186560e",
+  "claim_class": "initial_snapshot_bound_only_not_a_path_or_statistical_power_bound",
+  "cubic_coefficient": 0.7160493827160493,
+  "current_point_offset": 0.00014145032715651688,
+  "curvature": 2.888888888888889,
+  "dimension": 3,
+  "directions": [
+    {
+      "bound_over_linear_signal": 1.2048103850384245e-07,
+      "direction": "A_reads_B",
+      "max_displacement": 0.0009655499992644651,
+      "normalized_cubic_bound": 2.18577541896811e-10,
+      "normalized_linear_signal": 0.0018142069873496318
+    },
+    {
+      "bound_over_linear_signal": 1.2589621251531195e-07,
+      "direction": "B_reads_A",
+      "max_displacement": 0.0010694339610874285,
+      "normalized_cubic_bound": 2.3425411723640663e-10,
+      "normalized_linear_signal": 0.0018606923318516494
+    }
+  ],
+  "effective_kernel": {
+    "amplitude_att": 35.0,
+    "amplitude_rep": 1.0,
+    "sigma_att": 3.0,
+    "sigma_rep": 1.0
+  },
+  "horizon": 600,
+  "initial_radius": 0.00021165345794842206,
+  "maximum_centered_source_radius": 0.0004977111317636828,
+  "report": "reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.json",
+  "report_sha256_utf8_lf": "54f76fc01669fa10cdfa88653c9024a7e98240121e751397eed32ed5c33ba264",
+  "schema": "emergenz-knoten.memory-pair-initial-readiness.v1",
+  "separation_norm": 0.0005291336448710552
+}
