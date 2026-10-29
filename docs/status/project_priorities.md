@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (Paararchive fuer Lagstatistik unzureichend; dichter Datenvertrag und Fenster-Randterm geprueft; neue Diagnose vor Ausfuehrung spezifizieren; AL1-Panel geschlossen).
+Stand: 2026-10-29 (lineare Blindheit des Paar-Mittelwerttests belegt; lagangepasster Auswerter geprueft; statistisches/technisches Protokoll vor Ziellauf offen; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -94,12 +94,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Daten nicht; ein Replay waere ein neuer Lauf. P3.8f-Plus-/Minus-Arme
    sind keine wechselwirkenden Knoten. Der minimale dichte Datenvertrag
    samt endlichem Fenster-Randterm ist mit neun kleinen Kontrollen geprueft.
-   Jetzt eine begrenzte Diagnose vorbereiten: Balance, Abweichung von der
-   Produktfaltung, Centerbewegung und Fensterraender getrennt erfassen;
-   vorab Stationaritaets-/Unsicherheitskriterien und Laufzeit festlegen.
-   Keine Unabhaengigkeit aus Marginalstatistiken oder bloss kleiner
-   Unwucht folgern. Ausfuehrung erst nach geprueftem Runner und gesonderter
-   Autorenfreigabe; die alten Laeufe nicht automatisch wiederholen.
+   Der [Diagnose-Vorabcheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
+   zeigt eine konkrete Fehlpositivgefahr: Lineare Mittelwerte koennen
+   trotz perfekter Phasenkopplung dem unabhaengigen Produkt entsprechen.
+   Ein neuer reiner Auswerter trennt lineare Randterme, nichtlineare
+   Randverteilungsverschiebung und lagangepassten Produktkontrast;
+   14 kleine Kontrollen bestehen. Am alten Anfangssnapshot betraegt die
+   kubische Restschranke nur etwa 1.3e-7 des linearen Feldsignals.
+   Dies ist keine Bahnschranke oder Powerrechnung. Jetzt Geometrie- und
+   Statistikfehler fuer diesen diskriminierenden Readout kontrollieren,
+   feste Fenster, Entscheidungsgrenzen und Laufzeit spezifizieren. Ein
+   Prozentvergleich voller Mittelwerte oder eine nicht aufgeloeste
+   Nichtlinearitaet darf nicht als neuer Emergenzpass gelten. Keine
+   Unabhaengigkeit aus Marginalstatistiken oder kleiner Unwucht folgern.
+   Ausfuehrung erst nach geprueftem Runner und gesonderter Autorenfreigabe;
+   die alten Laeufe nicht automatisch wiederholen.
    Auch eine gemittelte Balance bestimmt
    noch keine physikalische Energie oder Masse; kein unkontrollierter
    zweiter Ableitungsterm wird als Masse gefittet. Keine

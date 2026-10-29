@@ -1,9 +1,17 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-29 (Paararchive liefern keinen dynamischen Mittelungsnachweis; endlicher Fenster-Randterm geprueft; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
+Stand: 2026-10-29 (lineare Blindheit des Paar-Mittelwerttests begrenzt Interpretation; kein dynamischer Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [lineare Fehlpositivkontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
+ist eine algebraische Identifizierbarkeitsgrenze des mittleren Readouts,
+kein Gegenbeweis gegen eine effektive lineare Wechselwirkung. 14 neue
+kleine Tests pruefen die Aufspaltung in Rand-/Produktkontrastterme.
+Die archivierte Anfangsgeometrie liefert nur eine Ein-Zustands-Restschranke.
+Weder ein kleiner Mittelwertfehler noch die `expm1`-Auswertung liefern
+statistische Power, Unabhaengigkeit, physikalische Masse oder neue Dynamik.
 
 Der [Paararchiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
 stellt fehlende dichte gemeinsame Bahndaten in den geprueften Ausgaben

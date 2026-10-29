@@ -21,6 +21,12 @@ findet in den geprueften Paarberichten keine dichten Einzelbahnen fuer
 diesen Test. Er spezifiziert den benoetigten FIFO-Datenumfang und den
 endlichen Fenster-Randterm; ein Replay oder neuer Ziellauf ist nicht erfolgt.
 
+Der folgende [Diagnose-Vorabcheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
+zeigt zusaetzlich: Der lineare mittlere Readout erkennt selbst perfekte
+Abhaengigkeit nicht. Lagangepasste Produkte trennen Randverteilungen vom
+nichtlinearen Kontrast; ein kleines volles Mittelwertdefizit allein darf
+nicht als Bestaetigung der Produktannahme gelten.
+
 ## 1. Momentane Antwort bei endlichem Abstand
 
 Verwende die unveraenderte Regel in

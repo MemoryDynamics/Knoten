@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (Archivluecke fuer native Lagstatistik belegt; FIFO-Datenvertrag und Fenster-Randterm geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
+Stand: 2026-10-29 (lineare Fehlpositive im Paar-Mittelwerttest erkannt; lagangepasster Auswerter geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Diagnose-Vorabcheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
+zeigt, dass lineare Mittelwerte auch bei perfekt abhaengigen Quellen dem
+Produktvergleich entsprechen koennen. Der neue Auswerter trennt deshalb
+lineare und nichtlineare Fensterbeitraege vom lagangepassten Produktkontrast.
+14 kleine Kontrollen bestehen. Eine reine Rechnung am alten Anfangs-
+checkpoint begrenzt dort den nichtlinearen Feldrest auf etwa 1.3e-7 des
+linearen Signals; keine Schranke fuer die spaetere Bahn oder statistische
+Power. Das Ausfuehrungsprotokoll ist noch nicht fertig oder freigegeben.
 
 Der [Paararchiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
 zeigt eine konkrete Datenluecke: Die geprueften P3.1/P3.2/500k-Berichte
