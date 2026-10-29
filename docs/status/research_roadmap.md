@@ -58,10 +58,12 @@ Zustandsalgebra-Kontrolle ist kein dynamisches QCD-Ergebnis. Ein
 quantisiertes Elektronenfeld ist auf der Referenzseite Input; seine
 moegliche Entsprechung in Feld-/FIFO-Zustaenden bleibt herzuleiten.
 Die [raeumliche AL1-Referenz](../reference/nucleon_spatial_reference.md)
-fixiert nun Operator und gemeinsame Nukleon-/Atomobservablen. Gekoppelte
-Orts-/Spin-Kanaele sind erforderlich; ein raeumlicher Loesungsnachweis
-fehlt weiterhin. Dieser Anschluss ist ein Vergleichsmassstab, kein
-zusaetzlicher Emergenzmechanismus.
+fixiert Operator und gemeinsame Nukleon-/Atomobservablen. Die einmaligen
+gekoppelten Nukleon-/Delta-Laeufe bestehen inzwischen die endlichen
+Konsistenzkriterien. Kontinuumskontrolle, physikalische Modellgueltigkeit
+und atomarer Anschluss bleiben offen; grosse Geschwindigkeitsproxies
+und der magnetische Fehlvergleich werden nicht durch Nachfit entfernt.
+Dieser Anschluss ist ein Vergleichsmassstab, kein Emergenzmechanismus.
 
 Die Stufen beschreiben Abhaengigkeiten, keine zugesicherte Erfolgsfolge.
 Die Quanten-Machbarkeit wird bereits in R0 geprueft.

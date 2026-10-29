@@ -1,6 +1,6 @@
 # Materie: Referenztheorie und Emergenz
 
-Stand: 2026-10-28. Autorenentscheidung: **Referenztheorie und
+Stand: 2026-10-29. Autorenentscheidung: **Referenztheorie und
 Emergenznachweis strikt getrennt fuehren.** Bekannte QCD-/QFT-Gleichungen
 und Teilchenparameter duerfen auf der Referenzseite vorausgesetzt werden.
 Dadurch sind sie nicht im Memory-Modell hergeleitet. Das gehoert zum
@@ -128,10 +128,15 @@ elektromagnetischen Anschluss fest. Ein eigener Operatortest zeigt,
 warum der bisherige feste Spin-/Flavorzustand bei ungleichen
 Paarabstaenden kein abgeschlossener Ansatz ist. Ein Code-/Textvergleich
 der oeffentlichen DeepQuark-Implementierung verlangt ausserdem eine
-explizite Energieoffset-Konvention. Das ersetzt keine raeumliche
-Eigenwertrechnung: Solver, konkrete Verfeinerungen und begrenzter
-Ausfuehrungsvertrag bleiben offen. Es wurde noch keine solche Simulation
-gestartet; Confinementpotential und Quarkmassen bleiben Referenzeingaben.
+explizite Energieoffset-Konvention. Inzwischen ist der gekoppelte
+Gauss-Solver implementiert und das separat genehmigte einmalige
+[AL1-Panel](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md)
+abgeschlossen: Nukleon und Delta bestehen die endlichen Konsistenzkriterien,
+bei deutlicher Warnung gegen eine kontrollierte nichtrelativistische
+Praezisionsdeutung. Das raeumlich gekoppelte Momentenverhaeltnis weicht
+staerker vom Messvergleich ab als die einfache Zustandsalgebra oben.
+Keine Anpassung; Confinementpotential und Quarkmassen bleiben Inputs.
+Keine neue Ausfuehrungsfreigabe folgt aus diesen Referenzergebnissen.
 
 Die Referenz soll Quarkstruktur ueber aeussere Nukleonobservablen an
 denselben atomaren Benchmark anschliessen. Eine separat passend gemachte

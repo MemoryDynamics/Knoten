@@ -1,7 +1,7 @@
 # Raeumliche Nukleonreferenz
 
-Stand: 2026-10-28. **Gekoppelter Solver synthetisch geprueft, noch kein
-geloester raeumlicher AL1-Zustand.** Die
+Stand: 2026-10-29. **Einmalige AL1-Laeufe fuer Nukleon und Delta
+abgeschlossen; beide bestehen die endlichen Konsistenzkriterien.** Die
 [Trennung von Referenz und Emergenz](matter_reference_contract.md) gilt
 unveraendert. AL1 wird als erste reproduzierbare Constituent-Quarkreferenz
 festgelegt, nicht als neue Memory-Regel oder als vollstaendige QCD.
@@ -19,8 +19,9 @@ DeepQuark. Als Methodenvergleich verwenden wir die CP-gerade Modellseite
 von [Yamanaka und Hiyama, PRD 103, 035023 (2021), Abschnitt III und Tabelle I](https://arxiv.org/abs/2011.02531)
 sowie [Wu, Meng und Zhu, PRL 136, 071901 (2026), Supplement A.1](https://arxiv.org/html/2506.20555v2#A1).
 Der CP-verletzende Operator der ersten Arbeit gehoert **nicht** zu unserer
-Referenz. Es wurde weder ein fremdes Trainingsprogramm gestartet noch
-eine dort berichtete Nukleonenergie reproduziert.
+Referenz. Kein fremdes Trainingsprogramm wurde gestartet. Die nun eigene
+endliche Eigenwertrechnung ist noch kein unabhaengiger Methodenabgleich
+mit einer publizierten Nukleonenergie zum identischen Operator.
 
 Eine neue Gitter-QCD-Rechnung ist nicht Voraussetzung dieses
 Methodenschritts. Als spaeterer physikalischer Vergleich kommen etwa die
@@ -143,7 +144,8 @@ $0.012260968904342164\ \mathrm{GeV}^2$. Die gleichseitige Kontrolle und
 Spin-$3/2$-Kontrolle verschwinden bis auf Rundung. 17 neue
 [Softwaretests](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_nucleon_spatial_preflight.py)
 pruefen zudem Farbe, Normierung, Isospin, Rotation, Translation und
-alle sechs Permutationen. Kein raeumlicher Eigenwert wurde geloest.
+alle sechs Permutationen. Dieser Operatortest loest selbst keinen
+raeumlichen Eigenwert; der spaetere Ziellauf ist unten getrennt berichtet.
 
 ## Massenkonvention vor Reproduktion klaeren
 
@@ -298,12 +300,43 @@ $(s_{12},t_{12})=(0,0),(0,1),(1,0),(1,1)$; im Delta-Sektor nur ein Kanal.
 Damit sind Zustand und Observablen rekonstruierbar. Die Richtung einer
 globalen reellen Phase ist physikalisch bedeutungslos.
 
-## Numerische Abnahme und offener Ausfuehrungsumfang
+## Ausgefuehrte Referenz und Abnahme
 
-Der physikalische Referenzoperator und der Solver sind spezifiziert.
-Der [einmalige AL1-Ausfuehrungsvorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/nucleon_al1_reference_proposal_2026-10-28.md)
-ist zur Autorenentscheidung vorbereitet, **noch nicht freigegeben**.
-Die Abnahme muss mindestens enthalten:
+Der [einmalige AL1-Vertrag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/nucleon_al1_reference_proposal_2026-10-28.md)
+wurde nach ausdruecklicher Autorenfreigabe ausgefuehrt und ist geschlossen.
+Je ein Nukleon-/Delta-Prozess lief mit einem angeforderten BLAS-Thread
+in etwa 20.4 s, ohne Anpassung oder Wiederholung. Alle drei Basisstufen
+und beide Cutoffs wurden archiviert. Beide Sektoren bestehen die
+17 vorab festgelegten endlichen Konsistenzkriterien.
+
+Der [Ergebnisbericht mit Rohdaten](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md)
+trennt numerische und physikalische Aussage:
+
+| Letzte Basisstufe | Nukleon | Delta |
+| --- | --- | --- |
+| Energie einschliesslich Offset / MeV | 930.733035 | 1242.105567 |
+| Letzte Energieaenderung / MeV | 0.017049 | 0.025227 |
+| Mittlerer Quark-rms-Radius / fm | 0.494643 | 0.578021 |
+| Geladener NR-Impulsradius / fm | 0.524588 | 0.578021 |
+| $2\langle T\rangle/(3m)$ | 1.752086 | 1.178795 |
+
+Der Abstand von 311.37 MeV stuetzt die Reihenfolge der beiden getesteten
+endlichen Sektoren; er ist kein allgemeiner Spinselektionsbeweis.
+Die gleiche Metrikrangwahl an beiden Cutoffs und die letzte Erweiterung
+nur an den Breitenskalenraendern liefern keine Kontinuumsfehlerschranke.
+Der grosse Geschwindigkeitsproxy warnt vor der nichtrelativistischen
+Naeherung. Die NR-Ladungsantwort ist nicht bereits der physikalische
+Sachs-Formfaktor. Delta-Readouts meinen Delta+/Delta0, nicht p/n.
+
+Aus denselben Nukleon-Spin-Gewichten folgt im deklarierten additiven
+Momentansatz $\mu_n/\mu_p=-0.66053985$. Gegen den im Referenzvertrag
+dokumentierten Messvergleich ist das eine Abweichung von 3.568 Prozent,
+also mehr als bei der reinen Zustandsalgebra mit $-2/3$. Keine
+Nachkalibrierung. Die Gesamtenergie ist keine freie Dreiquark-Bindungsenergie;
+absolute Massenskala, Confinement und Quantenmechanik bleiben Inputs.
+Keine Memory-Emergenz, Elektronenrechnung oder Wasserstoffspektrallinie.
+
+Fuer weitergehende Aussagen bleiben die urspruenglichen Anforderungen:
 
 - Schwerpunktfreie gekoppelte Basis, korrekte Paarsymmetrien und
   Hermitizitaet; kein willkuerlicher Coulomb-Abstandscutoff.
@@ -321,8 +354,9 @@ Die Abnahme muss mindestens enthalten:
   bekannte Fehlvorhersagen bleiben sichtbar. Bei fehlender Konvergenz
   `inconclusive`, keine automatische Ressourcenvergroesserung.
 
-Reproduzierbar sind bisher die festen Operatortests und der synthetische
-Solver-Preflight; kein AL1-Ziellauf:
+Die folgenden Befehle betreffen weiterhin nur Operatortests und den
+synthetischen Solver-Preflight. Die AL1-Zieldaten werden aus dem Archiv
+gelesen; die verbrauchte Freigabe erlaubt keine automatische Wiederholung:
 
 ```powershell
 python -m experiments.current.reference.nucleon_spatial_preflight --output <neue-ausgabe.json>

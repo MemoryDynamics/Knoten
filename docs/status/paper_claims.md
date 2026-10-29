@@ -1,22 +1,31 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-28 (Quark-Referenz und Memory-Emergenz getrennt; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-29 (raeumliche Quark-Referenz ausgefuehrt, Memory-Emergenz getrennt; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
 
 Der gekoppelte Gauss-Solver ist an synthetischen Aufgaben und dem
 exakten 6D-Oszillator verifiziert. Diese Methodenbefunde sind weder
-eine AL1-Nukleonloesung noch neue Materie-/Emergenzclaims. Der konkrete
-AL1-Ziellauf wartet auf separate Freigabe; kein vorweggenommener Pass.
+eine AL1-Nukleonloesung noch neue Materie-/Emergenzclaims. Die separat
+genehmigten [AL1-Ziellaeufe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md)
+sind danach einmalig ausgefuehrt worden. Beide bestehen die endliche
+Konsistenzpruefung; $E_N=930.733$ MeV und $E_\Delta=1242.106$ MeV sind
+Modellenergien mit eingesetzten Quarkmassen und Energieoffset. Die
+Reihenfolge ist nur fuer die getesteten endlichen Sektoren gestuetzt.
+Keine Kontinuumsfehlerschranke, Quanten-/Confinementherleitung oder
+Memory-Emergenz. Der grosse nichtrelativistische Geschwindigkeitsproxy
+und das verschlechterte magnetische Verhaeltnis bleiben Gegenbefunde
+zur physikalischen Praezisionsdeutung. Keine weitere Ausfuehrung genehmigt.
 
 Der [AL1-Referenzvertrag](../reference/nucleon_spatial_reference.md)
 enthaelt eine analytisch und synthetisch gepruefte Nichtabgeschlossenheit
 des festen Spin-/Flavor-Produktansatzes sowie einen statischen
 Energieoffset-Abgleich mit DeepQuark. Beide Aussagen sind Methodenbefunde
-innerhalb vorausgesetzter Quantenphysik. Weder ein raeumlicher
-Nukleonzustand noch seine Masse oder sein atomarer Beitrag sind damit
-berechnet; keine Erweiterung der Paper-I- oder Emergenzclaims.
+innerhalb vorausgesetzter Quantenphysik. Sie selbst berechnen noch keinen
+raeumlichen Nukleonzustand; dieser stammt aus dem oben getrennt
+berichteten Panel. Kein atomarer Beitrag wurde berechnet, keine
+Erweiterung der Paper-I- oder Emergenzclaims.
 
 Die [Quark-Referenzkontrolle](../reference/matter_reference_contract.md)
 ist nach ausdruecklicher Autorenentscheidung implementiert und geprueft.

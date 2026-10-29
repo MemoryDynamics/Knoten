@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-28 (gekoppelter Gauss-Solver synthetisch geprueft; begrenzter AL1-Vorschlag zur Freigabe vorbereitet; kein AL1-Ziellauf).
+Stand: 2026-10-29 (begrenztes AL1-Panel abgeschlossen; endliche Konsistenz bestanden, physikalische Grenzen dokumentiert; Memory-Anschluss bleibt Prioritaet).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -38,10 +38,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Orts-/Spin-Kopplung und die Energieoffset-Konvention. Der gekoppelte
    Gauss-Solver mit SciPy/LAPACK besteht nun 27 weitere synthetische
    Methoden- und Runnertests, einschliesslich exaktem 6D-Oszillator.
-   Der [begrenzte AL1-Vorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/project/meta/preregistration/nucleon_al1_reference_proposal_2026-10-28.md)
-   umfasst zwei Sektoren, drei feste Basisstufen, je maximal fuenf Minuten
-   und keine Nachanpassung. Naechste Entscheidung ist die konkrete
-   Autorenfreigabe; kein Zielprozess wurde gestartet. DeepQuark nicht ungeprueft starten;
+   Das [begrenzte AL1-Panel](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md)
+   wurde nach konkreter Autorenfreigabe einmalig ausgefuehrt: je etwa
+   20.4 s fuer N und Delta, drei feste Stufen, keine Nachanpassung.
+   Beide bestehen die endlichen Konsistenzkriterien. Die Modellenergien
+   930.733 und 1242.106 MeV und gemeinsam berechnete Radien/Momente sind
+   nun Vergleichsdaten, keine Memory-Emergenz oder Kontinuumszertifikate.
+   Die $v^2$-Proxies ueber 1 und das schlechtere Momentenverhaeltnis
+   verbieten eine unkritische Praezisionsdeutung. Freigabe geschlossen;
+   keine automatische Basisvergroesserung, Wiederholung oder Nachfit.
+   Jetzt den unten genannten analytischen Memory-Anschluss fortsetzen,
+   statt numerische Genauigkeit der Referenz mit Zielerreichung zu
+   verwechseln. Ein unabhaengiger Methodenabgleich und relativistischer
+   Strom-/Modellfehler bleiben Voraussetzungen einer praezisen atomaren
+   Verwendung. DeepQuark nicht ungeprueft starten;
    im gelesenen Baryonpfad fehlt ein im Artikel genannter konstanter Term.
    Keine neue Gitter-QCD-Rechnung oder Parameteranpassung.
    Das Elektron wird auf der Referenzseite als quantisiertes Materiefeld

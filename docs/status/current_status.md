@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-28 (gekoppelter Referenzsolver besteht synthetische Kontrollen; AL1-Ausfuehrungsvorschlag wartet auf Freigabe; kein neuer Memory-Zielbefund).
+Stand: 2026-10-29 (einmalige Nukleon-/Delta-Referenzlaeufe abgeschlossen; endliche Konsistenz bestanden, physikalische Grenzen offen; kein neuer Memory-Zielbefund).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -13,8 +13,16 @@ Der [gekoppelte Gauss-Solver](../reference/nucleon_spatial_reference.md)
 ist implementiert. 27 neue synthetische Methoden-/Runnertests bestehen;
 ein 18-Gauss-Preflight reproduziert den exakten 6D-Oszillator samt
 Radius- und Spinobservablen. Die Wellenfunktion wird mitarchiviert.
-Das ist kein AL1-Nukleonlauf. Zwei begrenzte Referenzlaeufe sind als
-Vorschlag mit festen Basisstufen vorbereitet und noch nicht genehmigt.
+Dieser synthetische Test ist kein AL1-Nukleonlauf. Die anschliessend
+ausdruecklich genehmigten zwei begrenzten Referenzlaeufe sind nun
+[abgeschlossen und archiviert](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nucleon_al1_attempt1_2026-10-28.md):
+je etwa 20.4 s, drei feste Basisstufen, zwei Cutoffs, keine Anpassung oder
+Wiederholung. Beide endlichen Konsistenz-Passes liefern 930.733 MeV fuer
+N und 1242.106 MeV fuer Delta. Das ist kein Kontinuumszertifikat.
+Die $v^2$-Proxies 1.752 und 1.179 warnen vor der nichtrelativistischen
+Naeherung; das Nukleon-Momentenverhaeltnis -0.660540 liegt um 3.568 Prozent
+vom dokumentierten Messvergleich entfernt. Die allgemeine physikalische
+Validierung und der Memory-Anschluss bleiben offen. Freigabe verbraucht.
 
 Die [raeumliche Nukleonreferenz](../reference/nucleon_spatial_reference.md)
 ist als AL1-Methodenvertrag spezifiziert. Eine analytische Restidentitaet
@@ -23,8 +31,10 @@ ist bei ungleichen Hyperfeinkoeffizienten kein abgeschlossener Ansatz.
 Der statische DeepQuark-Codeabgleich identifiziert im gelesenen Baryonpfad
 einen gegenueber dem Artikel fehlenden konstanten Term von -64.63 MeV.
 Dies ist keine Widerlegung der publizierten Zahlen; die Energiekonvention
-muss vor einer Reproduktion abgeglichen werden. Keine neue raeumliche
-Simulation, kein Massennachweis und keine Memory-Aussage.
+muss bei einer Reproduktion abgeglichen werden. Dieser statische
+Operatortest ist selbst keine raeumliche Simulation; der oben getrennt
+berichtete Ziellauf verwendet den vollstaendigen deklarierten Offset.
+Beides liefert keinen emergenten Massennachweis und keine Memory-Aussage.
 
 Der Autor hat den [QCD-/QFT-Referenzzweig](../reference/matter_reference_contract.md)
 ausdruecklich getrennt vom Emergenznachweis freigegeben. Die erste
