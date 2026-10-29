@@ -216,5 +216,9 @@ Paper-I-Manuskript und archivierte Zielbefunde bleiben unveraendert.
 Der Befund widerlegt die allgemeine Identifikation
 "Kernelpotential gleich gesamte physikalische Energie". Er schliesst
 nicht die Suche nach einer begruendeten effektiven Mechanik.
+Die [Pruefung bei endlichem Paarabstand](memory_pair_finite_separation.md)
+leitet nun Formkorrekturen mit Restschranken und eine bedingte reziproke
+Wolkenwirkung nach statistischer Mittelung ab. Sie setzt die offene
+physikalische Energiezuordnung nicht voraus und schliesst sie nicht.
 Die aktive Arbeitsreihenfolge bleibt allein in den
 [Projektprioritaeten](../status/project_priorities.md).

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (AL1-Panel geschlossen; native Lesepotential-/FIFO-Bilanz geprueft; physikalische Gesamtenergie offen; analytische Antwort bei endlichem Paarabstand als Anschluss).
+Stand: 2026-10-29 (endliche Formantwort und bedingte Mittelungs-Reziprozitaet geprueft; gemeinsame Lagstatistik als naechster Diskriminator; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -81,13 +81,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Eine deklarierte Mobilitaet oder ein nachtraeglich benannter Reservoir-
    rest schliessen diese Luecke nicht. Die bestehenden Center-Aktuator-
    Bilanzen gelten fuer ihre zusaetzlich spezifizierte Kopplung.
-   Als naechsten analytischen Memory-Schritt fuer **getrennte kompakte
-   Traeger bei endlichem Abstand** die Kreuzantwort samt Form- und
-   Historienabhaengigkeit ableiten: Welche Bedingungen erlauben einen
-   gemeinsamen reziproken Centerbeitrag, welche Terme bleiben ausserhalb?
-   Den Fehler einer Punkt-/Centernaeherung explizit begrenzen. Die
-   Ursprungslinearisierung reicht dafuer nicht; ein unkontrollierter
-   zweiter Ableitungsterm wird weiterhin nicht als Masse gefittet. Keine
+   Die [Antwort bei endlichem Abstand](../reference/memory_pair_finite_separation.md)
+   liegt jetzt mit Formtensor-Korrektur, explizitem Rest und zehn
+   synthetischen Kontrollen vor. Unabhaengige stationaere innere
+   Verteilungen liefern eine reziproke mittlere Wolkenwirkung; eine
+   stationaere phasengekoppelte Gegenprobe behaelt eine Unwucht. Der
+   entscheidende offene Test ist daher die **gemeinsame zeitversetzte
+   Kreuzantwort**, nicht ein weiterer isolierter Radius- oder Formtest.
+   Zuerst die vorhandenen Paararchive darauf pruefen, ob gleichzeitig
+   aufgeloeste aktuelle Punkte und Quellenhistorien diese Lagbilanz samt
+   Centerbewegung erlauben. Fehlende Daten offen benennen, nicht aus
+   getrennten Marginalstatistiken auf Unabhaengigkeit schliessen. Ein
+   erforderlicher neuer Test braucht vorab feste Kriterien und eine
+   gesonderte Ausfuehrungsfreigabe. Auch eine gemittelte Balance bestimmt
+   noch keine physikalische Energie oder Masse; kein unkontrollierter
+   zweiter Ableitungsterm wird als Masse gefittet. Keine
    Parametersuche nach schwach gedaempften Moden im ausgeschlossenen
    lokalen Abschluss, keine neue physikalische Regel oder Zielsimulation.
    Ein erforderlicher neuer Arbeits-/Mediumsmechanismus waere dem Autor

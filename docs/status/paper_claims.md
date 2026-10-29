@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-29 (native Potentialbilanz ohne physikalischen Energieclaim; Quark-Referenz und Memory-Emergenz getrennt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-29 (bedingte statistische Paar-Reziprozitaet ohne dynamischen Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [endliche Paarantwort](../reference/memory_pair_finite_separation.md)
+liefert eine Tayloridentitaet mit kontrolliertem Rest und einen
+**bedingten** statistischen Anschluss an die bekannte Wolkenfaltung.
+Stationaere, zwischen den Traegern unabhaengige innere Prozesse mit
+festgehaltenen Referenzcentern liefern eine reziproke mittlere Antwort
+nach deklarierter Normierung. Phasengekoppelte Gegenbeispiele zeigen,
+dass Stationaritaet allein nicht reicht. Zehn synthetische Checks sind
+keine nativen stabilen Bahnen, kein Ergodizitaets-/Mittelungsbeweis und
+keine neue Hamilton-, Massen-, Bindungs- oder Quantenherleitung.
 
 Die [Lesepotential-/FIFO-Bilanz](../reference/memory_pair_energy.md) ist
 eine exakte algebraische Identitaet mit acht synthetischen Kontrollen.

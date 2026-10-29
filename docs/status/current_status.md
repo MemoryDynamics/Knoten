@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (native Lesepotential-/FIFO-Bilanz geprueft; physikalische Gesamtenergie weiter offen; AL1-Panel geschlossen; kein neuer Memory-Ziellauf).
+Stand: 2026-10-29 (endliche Formantwort und bedingte gemittelte Reziprozitaet geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Paarantwort bei endlichem Abstand](../reference/memory_pair_finite_separation.md)
+ist bis zur Formtensor-Korrektur mit expliziter Restschranke bestimmt.
+Zehn synthetische Kontrollen bestehen. Unabhaengige stationaere innere
+Verteilungen liefern nach deklarierter Kraftnormierung die bekannte
+reziproke Wolkenfaltung. Eine stationaere phasengekoppelte Gegenprobe
+behaelt dagegen eine mittlere Unwucht; Einzelstationaritaet reicht nicht.
+Die zeitversetzten Kreuzkorrelationen und die Centerbewegung ueber die
+Memory-Alterslags liefern zu pruefende Beitraege zum Abschlussfehler. Kein Beleg,
+dass native gekoppelte Knoten diese Mittelungsannahmen erfuellen; keine
+Masse, Bindung, Quantentheorie oder neue Zielsimulation.
 
 Die [native Potentialbilanz](../reference/memory_pair_energy.md) trennt
 exakt Bewegung bei alter Historie von Schreiben, Altern und Ausscheiden.
