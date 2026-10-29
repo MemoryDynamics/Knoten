@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (endliche Formantwort und bedingte gemittelte Reziprozitaet geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
+Stand: 2026-10-29 (Archivluecke fuer native Lagstatistik belegt; FIFO-Datenvertrag und Fenster-Randterm geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Paararchiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
+zeigt eine konkrete Datenluecke: Die geprueften P3.1/P3.2/500k-Berichte
+archivieren keine dichten Einzelbahnen beider Knoten. Anfangscheckpoint,
+Seeds oder Plus-/Minus-Responsezweige ersetzen sie nicht. Ein minimaler
+FIFO-Datenvertrag und die exakte endliche Fensterkorrektur sind nun mit
+neun kleinen Kontrollen geprueft. Keine neue Simulation, kein Replay und
+kein negativer physikalischer Befund aus bloss fehlenden Daten.
 
 Die [Paarantwort bei endlichem Abstand](../reference/memory_pair_finite_separation.md)
 ist bis zur Formtensor-Korrektur mit expliziter Restschranke bestimmt.

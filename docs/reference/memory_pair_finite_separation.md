@@ -16,6 +16,11 @@ zeitversetzte Kreuzkorrelationen koennen eine mittlere Unwucht erhalten.
 Damit ist ein pruefbarer statistischer Anschluss bestimmt, kein Nachweis,
 dass die vorhandenen gekoppelten Knoten seine Voraussetzungen erfuellen.
 
+Der anschliessende [Archiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
+findet in den geprueften Paarberichten keine dichten Einzelbahnen fuer
+diesen Test. Er spezifiziert den benoetigten FIFO-Datenumfang und den
+endlichen Fenster-Randterm; ein Replay oder neuer Ziellauf ist nicht erfolgt.
+
 ## 1. Momentane Antwort bei endlichem Abstand
 
 Verwende die unveraenderte Regel in

@@ -1,9 +1,16 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-29 (bedingte statistische Paar-Reziprozitaet ohne dynamischen Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
+Stand: 2026-10-29 (Paararchive liefern keinen dynamischen Mittelungsnachweis; endlicher Fenster-Randterm geprueft; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Paararchiv-Audit](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
+stellt fehlende dichte gemeinsame Bahndaten in den geprueften Ausgaben
+fest, keinen Fail der Mittelungshypothese. Neun neue synthetische Checks
+decken Dateistruktur, FIFO-Rekonstruktion und Informationsverlust ab.
+Die endliche Fensteridentitaet samt Randterm ist algebraisch, kein
+Stationaritaets- oder Ergodizitaetsnachweis. Keine neuen Emergenzclaims.
 
 Die [endliche Paarantwort](../reference/memory_pair_finite_separation.md)
 liefert eine Tayloridentitaet mit kontrolliertem Rest und einen

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (endliche Formantwort und bedingte Mittelungs-Reziprozitaet geprueft; gemeinsame Lagstatistik als naechster Diskriminator; AL1-Panel geschlossen).
+Stand: 2026-10-29 (Paararchive fuer Lagstatistik unzureichend; dichter Datenvertrag und Fenster-Randterm geprueft; neue Diagnose vor Ausfuehrung spezifizieren; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -88,12 +88,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    stationaere phasengekoppelte Gegenprobe behaelt eine Unwucht. Der
    entscheidende offene Test ist daher die **gemeinsame zeitversetzte
    Kreuzantwort**, nicht ein weiterer isolierter Radius- oder Formtest.
-   Zuerst die vorhandenen Paararchive darauf pruefen, ob gleichzeitig
-   aufgeloeste aktuelle Punkte und Quellenhistorien diese Lagbilanz samt
-   Centerbewegung erlauben. Fehlende Daten offen benennen, nicht aus
-   getrennten Marginalstatistiken auf Unabhaengigkeit schliessen. Ein
-   erforderlicher neuer Test braucht vorab feste Kriterien und eine
-   gesonderte Ausfuehrungsfreigabe. Auch eine gemittelte Balance bestimmt
+   Die [Paararchiv-Pruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_archive_audit_2026-10-29.md)
+   ist abgeschlossen: P3.1/P3.2/500k speichern Kennzahlen und Grafiken,
+   keine dichten Einzelbahnen. Anfangscheckpoint und Seeds ersetzen diese
+   Daten nicht; ein Replay waere ein neuer Lauf. P3.8f-Plus-/Minus-Arme
+   sind keine wechselwirkenden Knoten. Der minimale dichte Datenvertrag
+   samt endlichem Fenster-Randterm ist mit neun kleinen Kontrollen geprueft.
+   Jetzt eine begrenzte Diagnose vorbereiten: Balance, Abweichung von der
+   Produktfaltung, Centerbewegung und Fensterraender getrennt erfassen;
+   vorab Stationaritaets-/Unsicherheitskriterien und Laufzeit festlegen.
+   Keine Unabhaengigkeit aus Marginalstatistiken oder bloss kleiner
+   Unwucht folgern. Ausfuehrung erst nach geprueftem Runner und gesonderter
+   Autorenfreigabe; die alten Laeufe nicht automatisch wiederholen.
+   Auch eine gemittelte Balance bestimmt
    noch keine physikalische Energie oder Masse; kein unkontrollierter
    zweiter Ableitungsterm wird als Masse gefittet. Keine
    Parametersuche nach schwach gedaempften Moden im ausgeschlossenen
