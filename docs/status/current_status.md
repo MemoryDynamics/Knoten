@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (einmalige Nukleon-/Delta-Referenzlaeufe abgeschlossen; endliche Konsistenz bestanden, physikalische Grenzen offen; kein neuer Memory-Zielbefund).
+Stand: 2026-10-29 (Memory-Paarreduktion analytisch und synthetisch geprueft; AL1-Panel geschlossen; physikalischer Kraft-/Arbeitsanschluss offen; kein neuer Memory-Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
+eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
+Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
+Ziellauf. Der lokale kontinuierliche Abschluss hat nur bei deklariertem
+Kraftport eine Filtertraegheit. Gemeinsame reziproke Paarenergie bindet
+ihr Verhaeltnis an $\tau_AW_A/(\tau_BW_B)$; eine physikalische Auswahl
+dieses Arbeitsports fehlt. Im attraktiven isotropen Vierzustandsabschluss
+bleibt von einer freien komplexen Normalmode nach einer Periode hoechstens
+$e^{-2\pi}$ ihrer Amplitude. Diese begrenzte Anwendung einer bekannten
+Spektralschranke ist kein No-go fuer die volle nichtlineare FIFO-Dynamik.
 
 Der [gekoppelte Gauss-Solver](../reference/nucleon_spatial_reference.md)
 ist implementiert. 27 neue synthetische Methoden-/Runnertests bestehen;

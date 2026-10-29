@@ -228,7 +228,11 @@ beobachtbare Koordinaten, physikalischer Eingriff, Energie-/Impulsbilanz
 und ein kontrollierter Memory-Rest. Die Arbeit daran darf nicht durch
 Umbenennen von Quellenstaerke in Masse oder durch ungeprueft eingesetzte
 Coulomb-/Quantenregeln ersetzt werden. Ein begrenzter analytischer
-Reduktionsvergleich bleibt innerhalb der unveraenderten Regel; ein
+Reduktionsvergleich bleibt innerhalb der unveraenderten Regel. Die
+[anschliessende Paarreduktion](memory_pair_reduction.md) liefert nun
+die exakte Center-Gleichung mit FIFO-Rand und nichtlinearem Rest sowie
+die bedingte Filtertraegheit und Modengrenze des lokalen kontinuierlichen
+Vergleichs. Sie schliesst die Kraft-/Arbeits- und Massenluecke nicht. Ein
 zusaetzlicher Mediator oder eine Quantenregel erfordert eine
 Richtungsentscheidung. Die einzige Arbeitsreihenfolge steht in den
 [Projektprioritaeten](../status/project_priorities.md).

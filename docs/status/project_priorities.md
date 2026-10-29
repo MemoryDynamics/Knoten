@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (begrenztes AL1-Panel abgeschlossen; endliche Konsistenz bestanden, physikalische Grenzen dokumentiert; Memory-Anschluss bleibt Prioritaet).
+Stand: 2026-10-29 (AL1-Panel geschlossen; exakter Memory-Paarrest und Grenzen der lokalen Filtertraegheit abgeleitet; physikalischer Kraft-/Arbeitsanschluss offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -62,13 +62,29 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    liefert keine allgemeine Inkrementbalance; lokalisierte Quellen mit
    festen Gaussbreiten keinen asymptotischen Coulomb-Schwanz; die reine
    3D-Projektion keinen allgemeinen autonomen Abschluss. 16 synthetische
-   Kontrollen bestehen, ohne neue Zielsimulation. Der analytische
-   Reduktionsvergleich bleibt die offene Memory-seitige Verbindung fuer beobachtbare
-   Koordinaten und ihren Memory-Rest: Welche Antwortgroessen sind aus der
-   unveraenderten Regel identifizierbar, welche Kraft-/Energieannahmen
-   waeren zusaetzlich einzusetzen? Nicht Quellengewicht oder Groesse
-   als Traegheit umbenennen. Der Referenzzweig beantwortet diese Frage
-   nicht; noch kein neues physikalisches Mehrsystemgesetz fuer Memory.
+   Kontrollen bestehen, ohne neue Zielsimulation. Die anschliessende
+   [analytische Paarreduktion](../reference/memory_pair_reduction.md) liefert
+   nun eine exakte Center-Gleichung mit FIFO-Rand und kubisch beschraenktem
+   nichtlinearem Rest; 14 neue synthetische Checks bestehen. Positive
+   Filtertraegheit im lokalen kontinuierlichen Abschluss ist kein
+   Massennachweis. Bei gemeinsamem reziprokem Kraft-/Arbeitsport waere das
+   Verhaeltnis an $\tau_AW_A/(\tau_BW_B)$ gebunden. Eine geometrische
+   Knotengroesse kommt in diese lokale Formel nicht vor. Im attraktiven isotropen Vierzustands-
+   Grenzmodell klingt jede freie komplexe Normalmode pro Periode um
+   mindestens den Faktor $e^{2\pi}$ ab. Dies gilt nicht allgemein fuer
+   das volle FIFO oder nichtlineare endliche Abstaende.
+   Als naechsten Memory-Schritt den **physikalischen Eingriff und seinen
+   Arbeitsbezug** gegen die bestehende Regel pruefen: Ist eine gemeinsame
+   Normierung daraus ausgewaehlt, oder bleibt sie zusaetzliche Annahme?
+   Die neue Restidentitaet dafuer verwenden, ohne einen unkontrollierten
+   zweiten Ableitungsterm als Masse zu fitten. Fuer getrennte kompakte
+   Traeger muss die Antwort bei endlichem Abstand untersucht werden;
+   die gemeinsame Ursprungslinearisierung reicht dafuer nicht. Keine
+   Parametersuche nach schwach gedaempften Moden im ausgeschlossenen
+   lokalen Abschluss, keine neue physikalische Regel oder Zielsimulation.
+   Ein erforderlicher neuer Arbeits-/Mediumsmechanismus waere dem Autor
+   als Richtungsentscheidung vorzulegen. Der Referenzzweig waehlt ihn
+   nicht und schliesst diese Luecke nicht.
    Eine aeussere 3D-Orts-/Wechselwirkungsbeschreibung und ein effektiver
    Protontraeger duerfen als deklarierte Inputs des begrenzten Benchmarks
    dienen, ersetzen aber nicht die Quarkstrukturpruefung. Die innere

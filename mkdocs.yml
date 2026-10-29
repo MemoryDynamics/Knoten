@@ -23,6 +23,7 @@ nav:
       - Wasserstoff und Materie:
           - Zielbenchmark: reference/hydrogen_benchmark.md
           - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
+          - Memory-Paarreduktion: reference/memory_pair_reduction.md
           - Referenz und Emergenz: reference/matter_reference_contract.md
           - Raeumliche Nukleonreferenz: reference/nucleon_spatial_reference.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md

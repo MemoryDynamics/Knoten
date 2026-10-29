@@ -5,6 +5,17 @@ Stand: 2026-10-29 (raeumliche Quark-Referenz ausgefuehrt, Memory-Emergenz getren
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
 
+Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) ist ein
+begrenztes analytisches Resultat: exakte Center-Identitaet mit FIFO-Rand
+und nichtlinearem Rest, bedingte reziproke Filterenergie und Anwendung
+einer bekannten Vierzustands-Spektralschranke. 14 synthetische Checks
+pruefen die Zuordnung. Weder physikalischer Kraft-/Arbeitsport noch
+Teilchenmasse, Spin oder Quantenzustand sind damit hergeleitet. Der
+attraktive lokale kontinuierliche Abschluss besitzt keine freie schwach
+gedaempfte komplexe Normalmode; auf das volle FIFO, negative Kruemmungen
+und nichtlineare endliche Abstaende wird dies nicht uebertragen.
+Keine Erweiterung der Paper-I- oder Emergenzclaims.
+
 Der gekoppelte Gauss-Solver ist an synthetischen Aufgaben und dem
 exakten 6D-Oszillator verifiziert. Diese Methodenbefunde sind weder
 eine AL1-Nukleonloesung noch neue Materie-/Emergenzclaims. Die separat
