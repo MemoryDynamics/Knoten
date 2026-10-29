@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-29 (raeumliche Quark-Referenz ausgefuehrt, Memory-Emergenz getrennt; Normalinstabilitaet des H=1200-Ankers bleibt belegt; Paper-I-Baseline unveraendert).
+Stand: 2026-10-29 (native Potentialbilanz ohne physikalischen Energieclaim; Quark-Referenz und Memory-Emergenz getrennt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Lesepotential-/FIFO-Bilanz](../reference/memory_pair_energy.md) ist
+eine exakte algebraische Identitaet mit acht synthetischen Kontrollen.
+Das zugrunde liegende Lesepotential ist im allgemeinen nativen Modell
+keine erhaltene oder monoton fallende Gesamtenergie; ein konstruiertes
+Gegenbeispiel benoetigt weder Bewegung noch Rauschen. Der engere Ausschluss
+einer konstant-diagonalen reinen Gradientenrealisierung betrifft nur den
+lokalen Vierzustandsvergleich in den angegebenen Koordinaten. Keine
+allgemeine Unmoeglichkeit einer physikalischen Energie, keine Waerme-,
+Massen- oder Bindungsvorhersage und keine neue Paper-I-Behauptung.
 
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) ist ein
 begrenztes analytisches Resultat: exakte Center-Identitaet mit FIFO-Rand

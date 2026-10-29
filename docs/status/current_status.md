@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (Memory-Paarreduktion analytisch und synthetisch geprueft; AL1-Panel geschlossen; physikalischer Kraft-/Arbeitsanschluss offen; kein neuer Memory-Ziellauf).
+Stand: 2026-10-29 (native Lesepotential-/FIFO-Bilanz geprueft; physikalische Gesamtenergie weiter offen; AL1-Panel geschlossen; kein neuer Memory-Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [native Potentialbilanz](../reference/memory_pair_energy.md) trennt
+exakt Bewegung bei alter Historie von Schreiben, Altern und Ausscheiden.
+Ein konstruiertes rauschfreies H=2-Beispiel erhoeht das Lesepotential bei
+stillstehendem Punkt allein durch den FIFO-Schritt. Es ist deshalb keine
+allgemeine erhaltene oder monoton fallende Gesamtenergie. Acht kleine
+synthetische Checks pruefen Bilanz, Codezuordnung und Gegenbeispiele.
+Das ist weder ein No-go fuer eine Memory-/Mediumsenergie noch ein
+physikalischer Arbeits- oder Massennachweis. Die bereits deklarierten
+Center-Aktuatoren sind nicht mit der nativen Kopplung gleichgesetzt.
 
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem

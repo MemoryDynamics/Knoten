@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (AL1-Panel geschlossen; exakter Memory-Paarrest und Grenzen der lokalen Filtertraegheit abgeleitet; physikalischer Kraft-/Arbeitsanschluss offen).
+Stand: 2026-10-29 (AL1-Panel geschlossen; native Lesepotential-/FIFO-Bilanz geprueft; physikalische Gesamtenergie offen; analytische Antwort bei endlichem Paarabstand als Anschluss).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -73,13 +73,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Grenzmodell klingt jede freie komplexe Normalmode pro Periode um
    mindestens den Faktor $e^{2\pi}$ ab. Dies gilt nicht allgemein fuer
    das volle FIFO oder nichtlineare endliche Abstaende.
-   Als naechsten Memory-Schritt den **physikalischen Eingriff und seinen
-   Arbeitsbezug** gegen die bestehende Regel pruefen: Ist eine gemeinsame
-   Normierung daraus ausgewaehlt, oder bleibt sie zusaetzliche Annahme?
-   Die neue Restidentitaet dafuer verwenden, ohne einen unkontrollierten
-   zweiten Ableitungsterm als Masse zu fitten. Fuer getrennte kompakte
-   Traeger muss die Antwort bei endlichem Abstand untersucht werden;
-   die gemeinsame Ursprungslinearisierung reicht dafuer nicht. Keine
+   Die anschliessende [native Potentialbilanz](../reference/memory_pair_energy.md)
+   ist nun exakt bestimmt, mit acht synthetischen Kontrollen. Ihr FIFO-
+   Anteil kann das Lesepotential selbst bei einem stillstehenden Punkt
+   erhoehen. Dieses Potential ist keine allgemeine Gesamtenergie; der
+   physikalische Arbeitsbezug und die Memory-/Mediumsbilanz bleiben offen.
+   Eine deklarierte Mobilitaet oder ein nachtraeglich benannter Reservoir-
+   rest schliessen diese Luecke nicht. Die bestehenden Center-Aktuator-
+   Bilanzen gelten fuer ihre zusaetzlich spezifizierte Kopplung.
+   Als naechsten analytischen Memory-Schritt fuer **getrennte kompakte
+   Traeger bei endlichem Abstand** die Kreuzantwort samt Form- und
+   Historienabhaengigkeit ableiten: Welche Bedingungen erlauben einen
+   gemeinsamen reziproken Centerbeitrag, welche Terme bleiben ausserhalb?
+   Den Fehler einer Punkt-/Centernaeherung explizit begrenzen. Die
+   Ursprungslinearisierung reicht dafuer nicht; ein unkontrollierter
+   zweiter Ableitungsterm wird weiterhin nicht als Masse gefittet. Keine
    Parametersuche nach schwach gedaempften Moden im ausgeschlossenen
    lokalen Abschluss, keine neue physikalische Regel oder Zielsimulation.
    Ein erforderlicher neuer Arbeits-/Mediumsmechanismus waere dem Autor

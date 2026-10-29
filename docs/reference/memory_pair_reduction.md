@@ -310,5 +310,11 @@ Ein gefitteter zweiter Ableitungsterm genuegt weder fuer Masse noch fuer
 eine tragfaehige innere Teilchenmode. Eine weitergehende Reduktion muss
 ihren Rest und Beobachtungsbereich kontrollieren sowie Kraft und Arbeit
 unabhaengig festlegen. Ein angenommener Quanten-/Coulombbaustein aus der
-Referenzrechnung schliesst diese Luecke nicht. Die naechste Arbeitswahl
+Referenzrechnung schliesst diese Luecke nicht. Die anschliessende
+[Lesepotential-/FIFO-Bilanz](memory_pair_energy.md) macht den nativen
+Schreib-/Alterungs-/Ausscheideanteil exakt sichtbar. Sie zeigt an einem
+stillstehenden Punkt, warum das Lesepotential allein keine allgemeine
+erhaltene oder monoton fallende Gesamtenergie ist. Eine physikalische
+Memory-/Mediumsenergie ist damit nicht ausgeschlossen. Die naechste
+Arbeitswahl
 steht ausschliesslich in den [Projektprioritaeten](../status/project_priorities.md).
