@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-01 (native Geometriebilanz und Replikationsvergleich geprueft; globale Konfidenzschranke fuer kleines Panel uninformativ; dynamischer Abschluss und physikalische Energie offen; kein neuer Ziellauf).
+Stand: 2026-11-01 (endliche analytische Bahnschranke numerisch schliessend; kleiner Replikationstest weiterhin nicht nachweisfaehig; dynamischer Abschluss und physikalische Energie offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
+behaelt Nichtlinearitaet und FIFO-Rand im symmetrischen nativen Paar bei.
+Fuer die feste Auswertung N=50000, S=0.01, z=10 schliesst die
+Nichtaustrittsbedingung numerisch bei 0.008173; 18 neue kleine Tests
+bestehen. Die Fehlerwahrscheinlichkeit von etwa 3.5e-14 gilt unter den
+Annahmen exakter Arithmetik und idealer unabhaengiger Gaussinnovationen,
+nicht als Zertifikat der binary64-/PRNG-Ausfuehrung. Eine korrekt
+trunkierte Replikationsstatistik hat ein viel engeres Betragsbudget
+von 7.60e-7, aber bei nur zwei disjunkten Paaren weiterhin eine zu breite
+Hoeffding-Halbbreite von 1.78e-6. Keine Power oder neue Zielbahn; kein
+asymptotischer Stabilitaets-, Bindungs- oder Unabhaengigkeitsnachweis.
 
 Der [Geometrie-/Statistikanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
 liefert eine exakte FIFO-Centerrekonstruktion und trennt lineare von

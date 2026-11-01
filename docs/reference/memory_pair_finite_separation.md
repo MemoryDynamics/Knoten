@@ -32,6 +32,13 @@ rekonstruiert nun den nativen Bewegungsfehler und trennt den Zeitprodukt-
 Readout vom gleichzeitigen Vergleich unabhaengiger Gesamtlaeufe. Dessen
 allgemeine Konfidenzschranke ist fuer ein kleines Panel noch uninformativ.
 
+Die [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
+schliesst danach fuer das symmetrische attraktive Gauss-Paar eine feste
+Nichtaustrittsbedingung numerisch. Nichtlinearitaet und FIFO-Rand bleiben
+enthalten. Der Satz gilt fuer ideale Gaussinnovationen und exakte
+Arithmetik; kein Zertifikat des binary64-Simulators. Das engere lokale
+Kontrastbudget liefert noch keinen nachweisfaehigen kleinen Replikationstest.
+
 ## 1. Momentane Antwort bei endlichem Abstand
 
 Verwende die unveraenderte Regel in

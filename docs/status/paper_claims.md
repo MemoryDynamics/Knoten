@@ -1,9 +1,20 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-01 (Geometriebilanz und endlicher Replikationsschaetzer geprueft; keine praktische Power oder dynamischer Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
+Stand: 2026-11-01 (endliche Nichtaustrittsbedingung analytisch hergeleitet; binary64-Auswertung kein Intervallzertifikat; keine praktische Power oder dynamischer Mittelungsnachweis; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
+ist ein bedingter analytischer Nichtaustrittssatz fuer das identische,
+reziproke, global attraktive Gauss-Paar mit geometrischem FIFO und
+idealen unabhaengigen Gaussinnovationen. Die feste numerische
+Auswertung schliesst, ist aber kein Rundungszertifikat des Simulators.
+18 kleine Tests sind keine neuen Zielbahnen. Nullsetzen seltener
+Budgetverletzungen mit expliziter Verzerrungskontrolle ist keine
+nachtraegliche Auswahl guter Laeufe. Das Beispielpanel bleibt fuer den
+gewaehlten Hoeffding-Nachweis zu klein; kein Signifikanz-, Stationaritaets-,
+Unabhaengigkeits-, Bindungs-, Teilchen- oder Emergenzclaim.
 
 Der [Geometrie-/Statistikanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
 liefert algebraische Fehlerbilanzen und einen bedingt erwartungstreuen

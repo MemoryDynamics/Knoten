@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-01 (Geometriebilanz und Replikationsvergleich geprueft; globale Statistikschranke fuer kleines Panel unbrauchbar; engere Fehlerkontrolle vor Ziellauf; AL1-Panel geschlossen).
+Stand: 2026-11-01 (endliche Bahnschranke analytisch hergeleitet und numerisch schliessend; kleines Hoeffding-Panel weiterhin nicht nachweisfaehig; Signalgroesse vor Ziellauf; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -109,9 +109,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Vergleich unabhaengiger Gesamtlaeufe vermeidet diesen speziellen Fehler
    und benoetigt fuer seinen endlichen Erwartungswert keine Stationaritaet.
    Die einfache globale Hoeffding-Schranke ist fuer ein kleines Panel
-   jedoch uninformativ. Jetzt eine begruendete engere probabilistische
-   Bahn-/Varianz-/Mischungskontrolle pruefen, bevor Laufzahl, feste Fenster,
-   Entscheidungsgrenzen und Laufzeit freigegeben werden. Nicht einfach
+   jedoch uninformativ. Die anschliessende
+   [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
+   schliesst Nichtlinearitaet und FIFO-Rand fuer das symmetrische Paar ein.
+   Bei festem S=0.01, z=10, N=50000 ergibt ihre numerische Auswertung
+   0.008173 < S; 18 kleine Kontrollen bestehen, ohne neue Zielbahn.
+   Der Satz betrifft ideale Gaussinnovationen und exakte Arithmetik,
+   nicht bereits den binary64-Simulator. Das lokal begruendete
+   Kontrastbudget ist viel enger; zwei disjunkte Paare koennen mit der
+   gewaehlten Hoeffding-Schranke trotzdem null nicht ausschliessen.
+   Jetzt die fuehrende nichtlineare Kontrastgroesse am linearen
+   Gaussvergleich analytisch bestimmen. Erst mit begruendeter Signalgroesse
+   und numerischem Fehlerbudget Laufzahl, feste Fenster,
+   Entscheidungsgrenzen und Laufzeit vorlegen. Nicht einfach
    mehr Laeufe starten oder Zeitpunkte als Replikationen zaehlen. Ein
    Prozentvergleich voller Mittelwerte oder eine nicht aufgeloeste
    Nichtlinearitaet darf nicht als neuer Emergenzpass gelten. Keine
