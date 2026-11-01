@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-10-29 (lineare Fehlpositive im Paar-Mittelwerttest erkannt; lagangepasster Auswerter geprueft; dynamischer Mittelungsabschluss und physikalische Energie offen; kein neuer Ziellauf).
+Stand: 2026-11-01 (native Geometriebilanz und Replikationsvergleich geprueft; globale Konfidenzschranke fuer kleines Panel uninformativ; dynamischer Abschluss und physikalische Energie offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Geometrie-/Statistikanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
+liefert eine exakte FIFO-Centerrekonstruktion und trennt lineare von
+nichtlinearen Bewegungsfehlern. 16 neue kleine Kontrollen bestehen.
+Der zeitgleiche Vergleich unabhaengiger Gesamtlaeufe erlaubt einen
+endlichen Erwartungswert ohne Stationaritaet, aber keine automatische
+Langzeitdeutung. Die konservative globale Konfidenzhalbbreite von 35.97
+bei zwei disjunkten Replikationspaaren und dem alten Kernel ist groesser
+als die globale Kontrast-Betragsschranke 15.37. Keine praktische Nachweisstaerke
+daraus ableiten und keine fehlenden Zielbahnen nachtraeglich simulieren.
 
 Der [Diagnose-Vorabcheck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
 zeigt, dass lineare Mittelwerte auch bei perfekt abhaengigen Quellen dem

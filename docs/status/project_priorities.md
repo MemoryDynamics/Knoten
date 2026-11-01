@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-10-29 (lineare Blindheit des Paar-Mittelwerttests belegt; lagangepasster Auswerter geprueft; statistisches/technisches Protokoll vor Ziellauf offen; AL1-Panel geschlossen).
+Stand: 2026-11-01 (Geometriebilanz und Replikationsvergleich geprueft; globale Statistikschranke fuer kleines Panel unbrauchbar; engere Fehlerkontrolle vor Ziellauf; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -101,9 +101,18 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Randverteilungsverschiebung und lagangepassten Produktkontrast;
    14 kleine Kontrollen bestehen. Am alten Anfangssnapshot betraegt die
    kubische Restschranke nur etwa 1.3e-7 des linearen Feldsignals.
-   Dies ist keine Bahnschranke oder Powerrechnung. Jetzt Geometrie- und
-   Statistikfehler fuer diesen diskriminierenden Readout kontrollieren,
-   feste Fenster, Entscheidungsgrenzen und Laufzeit spezifizieren. Ein
+   Dies ist keine Bahnschranke oder Powerrechnung. Der neue
+   [Geometrie-/Statistikanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
+   rekonstruiert jetzt die nativen Center-/Historienfehler samt globaler
+   und lokaler Restschranke; 16 kleine Kontrollen bestehen. Ein gemeinsamer
+   Trend kann den Zeitproduktvergleich verfaelschen. Der gleichzeitige
+   Vergleich unabhaengiger Gesamtlaeufe vermeidet diesen speziellen Fehler
+   und benoetigt fuer seinen endlichen Erwartungswert keine Stationaritaet.
+   Die einfache globale Hoeffding-Schranke ist fuer ein kleines Panel
+   jedoch uninformativ. Jetzt eine begruendete engere probabilistische
+   Bahn-/Varianz-/Mischungskontrolle pruefen, bevor Laufzahl, feste Fenster,
+   Entscheidungsgrenzen und Laufzeit freigegeben werden. Nicht einfach
+   mehr Laeufe starten oder Zeitpunkte als Replikationen zaehlen. Ein
    Prozentvergleich voller Mittelwerte oder eine nicht aufgeloeste
    Nichtlinearitaet darf nicht als neuer Emergenzpass gelten. Keine
    Unabhaengigkeit aus Marginalstatistiken oder kleiner Unwucht folgern.

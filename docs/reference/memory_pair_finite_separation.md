@@ -27,6 +27,11 @@ Abhaengigkeit nicht. Lagangepasste Produkte trennen Randverteilungen vom
 nichtlinearen Kontrast; ein kleines volles Mittelwertdefizit allein darf
 nicht als Bestaetigung der Produktannahme gelten.
 
+Der [Geometrie-/Replikationsanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
+rekonstruiert nun den nativen Bewegungsfehler und trennt den Zeitprodukt-
+Readout vom gleichzeitigen Vergleich unabhaengiger Gesamtlaeufe. Dessen
+allgemeine Konfidenzschranke ist fuer ein kleines Panel noch uninformativ.
+
 ## 1. Momentane Antwort bei endlichem Abstand
 
 Verwende die unveraenderte Regel in

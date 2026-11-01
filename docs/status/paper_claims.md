@@ -1,9 +1,16 @@
 # Paper-Claims und Status
 
-Stand: 2026-10-29 (lineare Blindheit des Paar-Mittelwerttests begrenzt Interpretation; kein dynamischer Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
+Stand: 2026-11-01 (Geometriebilanz und endlicher Replikationsschaetzer geprueft; keine praktische Power oder dynamischer Mittelungsnachweis; physikalische Energie und Memory-Masse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Geometrie-/Statistikanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_geometry_statistics_2026-11-01.md)
+liefert algebraische Fehlerbilanzen und einen bedingt erwartungstreuen
+Vergleich unabhaengiger Gesamtlaeufe. 16 kleine Kontrollen sind keine
+nativen Paarbefunde. Die allgemeine Hoeffding-Anwendung ist gueltig unter
+ihren Annahmen, aber fuer das kleine Beispielpanel uninformativ. Kein
+Signifikanz-, Unabhaengigkeits-, Langzeit- oder neuer Emergenzclaim.
 
 Die [lineare Fehlpositivkontrolle](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diagnostic_preflight_2026-10-29.md)
 ist eine algebraische Identifizierbarkeitsgrenze des mittleren Readouts,
