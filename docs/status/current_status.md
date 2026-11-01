@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-01 (endliche analytische Bahnschranke numerisch schliessend; kleiner Replikationstest weiterhin nicht nachweisfaehig; dynamischer Abschluss und physikalische Energie offen; kein neuer Ziellauf).
+Stand: 2026-11-02 (vollstaendiger Gaussvergleich bestimmt; native Signalgroesse nicht aufgeloest; Diagnosezweig vorerst geschlossen; physikalische Energie und Fernfeldanschluss offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Gaussvergleich des nichtlinearen Readouts](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
+liefert jetzt den Erwartungswert ueber das ganze feste Fenster mit
+Anfangstransient und allen 600 Quellaltern, ohne neue Zielbahn. 17 kleine
+Kontrollen bestehen. Der Kontrast liegt bei etwa 1.36e-14, die bisherige
+obere Transfer-Fehlerschranke zur nativen Dynamik bei 3.48e-7. Das ist
+keine Messung eines grossen Fehlers, erlaubt aber keine native
+Vorzeichen-/Amplitudenvorhersage. Nullmittel macht den ungeraden
+Gauss-Readout trotz Korrelation exakt blind. Die Vorbereitung eines
+kleinen Nachweispanels an diesem Anker wird vorerst geschlossen; kein
+Negativbeweis gegen alle anderen Observablen oder Schaetzmethoden.
 
 Die [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
 behaelt Nichtlinearitaet und FIFO-Rand im symmetrischen nativen Paar bei.

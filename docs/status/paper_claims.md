@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-01 (endliche Nichtaustrittsbedingung analytisch hergeleitet; binary64-Auswertung kein Intervallzertifikat; keine praktische Power oder dynamischer Mittelungsnachweis; Paper-I-Baseline unveraendert).
+Stand: 2026-11-02 (vollstaendiges Gaussintegral und kubischer Kontrast bestimmt; Transfer zur nativen Dynamik nicht aufgeloest; kein Signifikanz-, Bindungs- oder Emergenzclaim; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Gaussvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
+ist analytisch exakt fuer den nichtlinearen Readout des deklarierten
+linearen Vergleichs, numerisch in binary64 ausgewertet. Die native
+Verteilung wird nicht als gaussverteilt vorausgesetzt. 17 kleine Kontrollen
+und die feste Erwartungswertrechnung erzeugen keine Zielbahnen.
+Die winzige Vergleichskorrektur ist nicht gegen den vorhandenen
+Modelltransferfehler aufgeloest. Nullmittel-Blindheit ist eine
+Observablengrenze, keine Abwesenheit von Kopplung. Keine neue
+Masse, Energie, Ladung, Bindung, Quantisierung oder native Signifikanz.
 
 Die [endliche Bahnschranke](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_path_envelope_2026-11-01.md)
 ist ein bedingter analytischer Nichtaustrittssatz fuer das identische,

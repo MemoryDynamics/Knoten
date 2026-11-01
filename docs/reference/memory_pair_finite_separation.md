@@ -39,6 +39,13 @@ enthalten. Der Satz gilt fuer ideale Gaussinnovationen und exakte
 Arithmetik; kein Zertifikat des binary64-Simulators. Das engere lokale
 Kontrastbudget liefert noch keinen nachweisfaehigen kleinen Replikationstest.
 
+Der anschliessende [vollstaendige Gaussvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
+bestimmt den nichtlinearen mittleren Kontrast samt kubischer Fuehrung
+und Rest. Am alten Anker liegt er im Vergleich bei etwa 1.36e-14;
+die native Transfer-Fehlerschranke ist viel groesser. Daher kein neues
+Panel auf dieser Grundlage. Zentrierte Gaussreadouts sind zudem trotz
+Korrelation exakt blind; kleine Mittelwerte belegen keine Unabhaengigkeit.
+
 ## 1. Momentane Antwort bei endlichem Abstand
 
 Verwende die unveraenderte Regel in

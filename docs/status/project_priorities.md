@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-01 (endliche Bahnschranke analytisch hergeleitet und numerisch schliessend; kleines Hoeffding-Panel weiterhin nicht nachweisfaehig; Signalgroesse vor Ziellauf; AL1-Panel geschlossen).
+Stand: 2026-11-02 (Gaussvergleich im ganzen festen Fenster ausgewertet; winziger Kontrast bislang nicht auf native Dynamik uebertragbar; Diagnosezweig vorerst geschlossen; strukturelle Benchmark-Voraussetzungen vor weiterem Panel; AL1-Panel geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -118,10 +118,26 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    nicht bereits den binary64-Simulator. Das lokal begruendete
    Kontrastbudget ist viel enger; zwei disjunkte Paare koennen mit der
    gewaehlten Hoeffding-Schranke trotzdem null nicht ausschliessen.
-   Jetzt die fuehrende nichtlineare Kontrastgroesse am linearen
-   Gaussvergleich analytisch bestimmen. Erst mit begruendeter Signalgroesse
-   und numerischem Fehlerbudget Laufzahl, feste Fenster,
-   Entscheidungsgrenzen und Laufzeit vorlegen. Nicht einfach
+   Der [vollstaendige Gaussvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
+   ist nun samt Anfangstransient, allen 600 Lags und dem ganzen festen
+   Fenster 10000 <= n < 50000 ausgewertet. 17 neue kleine Kontrollen
+   bestehen. Sein nichtlinearer mittlerer Kontrast von etwa 1.36e-14
+   ist gegenueber der nativen Transfer-Fehlerschranke 3.48e-7 nicht
+   aufgeloest. Das sind Vergleichs-Erwartungswerte, keine neuen Zielbahnen
+   oder native Vorhersagen. Bei Nullmittelwert ist der Vektor-Readout
+   im Gaussvergleich sogar trotz Korrelation exakt blind. Diesen Diagnosezweig vorerst
+   abschliessen, kein kleines Nachweispanel oder automatische
+   Schranken-/Laufzahloptimierung am alten Anker.
+   **Jetzt die vorhandenen skalaren/vektoriellen Memory- und Kernelvarianten
+   gezielt an den notwendigen Energie-/Arbeits- und Fernfeldbedingungen
+   des Wasserstoff-Benchmarks pruefen.** Der bekannte fehlende Coulomb-
+   Schwanz fester lokalisierter Gaussquellen und die offene native
+   Energiebilanz bleiben dabei echte Hindernisse. Erst ein konkret
+   benoetigter und im Bestand nicht vorhandener Mechanismus wird als
+   Richtungsentscheidung vorgelegt; keine stillschweigende neue Regel.
+   Eine weitere Diagnosesimulation braucht eine physikalisch relevante
+   Zielobservable, begruendete Signalgroesse und numerisches Fehlerbudget.
+   Nicht einfach
    mehr Laeufe starten oder Zeitpunkte als Replikationen zaehlen. Ein
    Prozentvergleich voller Mittelwerte oder eine nicht aufgeloeste
    Nichtlinearitaet darf nicht als neuer Emergenzpass gelten. Keine
