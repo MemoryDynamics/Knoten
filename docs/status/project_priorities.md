@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-02 (Energie-/Fernfeldbestand getrennt geprueft; kein vorhandener gemeinsamer Ladungsabschluss; Quellen-/Strombilanz als naechster analytischer Schritt; Diagnose- und AL1-Panels geschlossen).
+Stand: 2026-11-04 (FIFO-Strombilanz geschlossen, aber kein physikalischer Ladungsabschluss; bedingte Invariantengrenze; Grenzfall-/Erweiterungsentscheidung vorbereiten; Diagnose- und AL1-Panels geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -137,11 +137,24 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    entfernt beim masselosen Grenzgang auch die Quellstaerke. Eine
    relaxierende skalare Feldenergie hat bei positiver Greenfunktion
    zudem die andere Vorzeichenregel als elektrische Ladung.
-   **Jetzt am kanonischen Schreiben/Vergessen die lokale Quellen-/
-   Strombilanz und ihre Freiheitsgrade herleiten: Liefert sie einen
-   nichttrivialen additiven signierten Quellenwert?** Keine Gauss-
-   Nebenbedingung, Inverse-Laplace-Wirkung oder neue Feldvariable als
-   schon emergent voraussetzen. Der bekannte fehlende Coulomb-Schwanz
+   Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
+   schliesst die lokale Massenbilanz einschliesslich Tail, legt aber
+   keinen eindeutigen physikalischen Strom fest. 19 kleine Kontrollen
+   ergaenzen die Herleitung. Bei endlichem H, idealem unabhaengigem
+   vollrangigem Gaussrauschen, endlichem Drift und uneingeschraenkten
+   Koordinaten gibt es keine nichtkonstante Zustandsfunktion, die fuer
+   alle Starts fast sicher exakt erhalten ist. Das betrifft nicht
+   lokale Gegenladungen bei festem Gesamtwert, effektive endliche
+   Lebensdauern oder unendliche/rauschfreie Grenzfaelle.
+   **Jetzt die Richtungsentscheidung anhand dieses Befunds vorbereiten:
+   kontrollierten Grenzfall des Bestands auf einen konkreten
+   Erhaltungsmechanismus pruefen oder eine explizite Erweiterung als
+   getrennte Hypothese entwerfen.** Empfehlung bis zur Autorenentscheidung:
+   nur die Annahmen und benoetigten Nachweise der Grenzfaelle analytisch
+   abgleichen, keine Regel aendern. Eine laengere Lebensdauer allein
+   ersetzt weder exakte Ladung noch ihren Wechselwirkungsanschluss.
+   Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue
+   Feldvariable als schon emergent voraussetzen. Der fehlende Coulomb-Schwanz
    fester lokalisierter Gaussquellen und die offene native Energiebilanz
    bleiben Hindernisse. Erst ein konkret
    benoetigter und im Bestand nicht vorhandener Mechanismus wird als

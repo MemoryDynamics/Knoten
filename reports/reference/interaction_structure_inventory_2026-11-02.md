@@ -205,6 +205,13 @@ $$
 I(x)=\alpha[M_0G(x-X)-\rho(x)],\qquad \int I=0.
 $$
 
+Praezisierung vom 2026-11-04: Diese Schreibweise verwendet die normierte
+unendliche Memory bzw. den idealen Innovationsanteil. Beim gefuellten
+endlichen FIFO gehoert der aelteste Tail zwingend in die Bilanz; dann
+ist ebenfalls der volle Monopol exakt null. Die explizite lokale
+Bilanz und die verbleibende Stromfreiheit stehen in der
+[anschliessenden Invariantenpruefung](memory_current_invariants_2026-11-04.md).
+
 Er besitzt im Allgemeinen einen Dipolmoment, aber als **ganze Quelle**
 keine Monopolladung. Teilregionen koennen positive und negative
 Anteile besitzen; daraus folgt noch keine robuste Zuordnung zweier

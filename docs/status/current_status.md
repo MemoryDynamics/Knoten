@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-02 (Energie-/Fernfeldbestand geprueft; gaplose Feldantwort und Ladungsport unterschieden; native Ladungs-/Energiebilanz offen; Diagnosezweig geschlossen; kein neuer Ziellauf).
+Stand: 2026-11-04 (exakte FIFO-Massenbilanz und Stromfreiheit hergeleitet; bedingte Grenze exakter Zustandsinvarianten; physikalischer Ladungs-/Energieanschluss offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,19 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
+liefert eine exakte lokale Kontinuitaetsidentitaet einschliesslich des
+aeltesten Eintrags. Die volle Memory-Masse ist konstant; der Strom
+bleibt um divergenzfreie Anteile unbestimmt. Bei endlichem H, idealem
+unabhaengigem vollrangigem Gaussrauschen, endlichem Drift und
+uneingeschraenktem Zustandsraum schliesst die positive H-Schritt-Dichte
+nichtkonstante, fuer jeden Start fast sicher exakt erhaltene
+Zustandsfunktionen aus. Kein Stationaritaets- oder Mischzeitbeweis;
+keine Aussage gegen lokale Gegenladungen bei festem Gesamtwert,
+Metastabilitaet, unendliche Memory oder andere Grenzfaelle. 19 kleine
+Kontrollen sind Softwaretests, nicht der Beweis und keine Zielsimulation.
+Ein physikalischer Ladungsmechanismus ist damit nicht gewonnen.
 
 Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
 findet keinen bereits gemeinsamen nativen Ladungsabschluss in den

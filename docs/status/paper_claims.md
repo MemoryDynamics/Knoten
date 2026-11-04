@@ -1,9 +1,21 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-02 (Energie-/Fernfeld-/Ladungskriterien getrennt; kein vorhandener gemeinsamer Emergenzabschluss; native Kontrastgroesse offen; Paper-I-Baseline unveraendert).
+Stand: 2026-11-04 (FIFO-Massenbilanz exakt; Strom nicht eindeutig; bedingter Ausschluss nichttrivialer exakter Zustandsinvarianten; kein Ladungsnachweis; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
+trennt exakte FIFO-Massenerhaltung von elektrischer Ladung. Gerade
+Umverteilungspfade sind eine gewaehlte Stromdarstellung, kein neuer
+Transportmechanismus; divergenzfreie Anteile sind nicht festgelegt.
+Der Ausschluss nichtkonstanter exakter Zustandsinvarianten gilt nur fuer
+festes endliches H, uneingeschraenkte Koordinaten, endlichen Drift und
+ideales unabhaengiges vollrangiges Gaussrauschen bei Erhaltung fuer
+jeden Start. Keine Aussage fuer entartete/rauschfreie oder unendliche
+Grenzen; kein allgemeines No-go fuer effektive Ladung oder Gegenladungen
+bei konstantem Gesamtwert. 19 konstruierte Kontrollen ergaenzen, ersetzen
+aber nicht den analytischen Beweis. Keine neue Dynamik oder Zielbahn.
 
 Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
 ist ein begrenzter Code-/Theorieaudit der benannten vorhandenen
