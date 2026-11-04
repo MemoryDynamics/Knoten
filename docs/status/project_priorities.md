@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-04 (FIFO-Strombilanz geschlossen, aber kein physikalischer Ladungsabschluss; bedingte Invariantengrenze; Grenzfall-/Erweiterungsentscheidung vorbereiten; Diagnose- und AL1-Panels geschlossen).
+Stand: 2026-11-04 (Invariantengrenzen fuer finite und stetige untrunkierte Memory praezisiert; reine Horizontvergroesserung liefert keinen Ladungsmechanismus; Grenzfall-/Erweiterungsentscheidung offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -146,12 +146,24 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    alle Starts fast sicher exakt erhalten ist. Das betrifft nicht
    lokale Gegenladungen bei festem Gesamtwert, effektive endliche
    Lebensdauern oder unendliche/rauschfreie Grenzfaelle.
+   Die [anschliessende Grenzfallanalyse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_limits_2026-11-04.md)
+   schliesst bei festem positivem Vergessen auch nichtkonstante stetige
+   exakte Invarianten im angegebenen ganzen untrunkierten Zustandsraum
+   aus. Ein unstetiges Traegerlabel zeigt die Grenze des Satzes. Mehr
+   Speicher allein ist damit kein Erhaltungsmechanismus fuer diese
+   Klasse. Die alpha-/H-Grenzen und die native Massennormierung sind
+   vor einem Skalierungsargument getrennt festzulegen.
    **Jetzt die Richtungsentscheidung anhand dieses Befunds vorbereiten:
    kontrollierten Grenzfall des Bestands auf einen konkreten
    Erhaltungsmechanismus pruefen oder eine explizite Erweiterung als
    getrennte Hypothese entwerfen.** Empfehlung bis zur Autorenentscheidung:
    nur die Annahmen und benoetigten Nachweise der Grenzfaelle analytisch
-   abgleichen, keine Regel aendern. Eine laengere Lebensdauer allein
+   abgleichen, keine Regel aendern. Der Feldzustands-Grenzfall ist wie
+   oben eingegrenzt; eine rein groessere-H-Diagnose wird nicht vorbereitet.
+   Fuer topologische Sektoren waeren nun insbesondere der zulaessige
+   Zustandsraum, Defekte und die Erhaltung unter der nativen Dynamik zu
+   benennen, nicht nur eine quantisierte Readout-Funktion. Eine laengere
+   Lebensdauer allein
    ersetzt weder exakte Ladung noch ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue
    Feldvariable als schon emergent voraussetzen. Der fehlende Coulomb-Schwanz

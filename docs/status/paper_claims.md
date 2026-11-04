@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-04 (FIFO-Massenbilanz exakt; Strom nicht eindeutig; bedingter Ausschluss nichttrivialer exakter Zustandsinvarianten; kein Ladungsnachweis; Paper-I-Baseline unveraendert).
+Stand: 2026-11-04 (endliche messbare und untrunkierte stetige Invarianten unterschieden; exakt gespeicherte Information nicht mit Ladung gleichsetzen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Grenzfallanalyse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_limits_2026-11-04.md)
+schliesst unter ihren Volltraeger-/Zustandsraumannahmen auch fuer
+untrunkierte exponentielle Memory nichtkonstante stetige exakte
+Invarianten aus. Stetigkeit bezieht sich auf Ort und Wasserstein-2-
+Memory, nicht auf beliebige moegliche physikalische Zustandsraeume.
+Unstetige Informationslabels sind ausdruecklich nicht ausgeschlossen;
+ein Gegenbeispiel wird angegeben. Keine globale Mischung, keine
+ungezwungene Bahnkontraktion und keine universelle Widerlegung
+topologischer Ladungen. Kein neuer Ziellauf oder Modellast.
 
 Die [Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
 trennt exakte FIFO-Massenerhaltung von elektrischer Ladung. Gerade

@@ -5,6 +5,11 @@ Stand: 2026-11-04. Analytischer Anschluss an die
 Keine neue Zielsimulation, Parametersuche oder Modellregel. Paper I bleibt
 unveraendert; dieser Befund betrifft den Memory-Anschluss an Paper III.
 
+Die [anschliessende Grenzfallpruefung](fading_memory_limits_2026-11-04.md)
+behandelt separat stetige Invarianten untrunkierter Memory und gibt ein
+unstetiges Gegenbeispiel. Die endliche Aussage dieses Berichts wird
+dadurch nicht auf alle unendlichen messbaren Zustandsfunktionen erweitert.
+
 ## Befund und Bedeutung
 
 Das gefuellte endliche FIFO erhaelt seine gesamte Memory-Masse exakt.

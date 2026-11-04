@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-04 (exakte FIFO-Massenbilanz und Stromfreiheit hergeleitet; bedingte Grenze exakter Zustandsinvarianten; physikalischer Ladungs-/Energieanschluss offen; kein neuer Ziellauf).
+Stand: 2026-11-04 (endliche und stetige untrunkierte Invariantengrenzen getrennt; unstetige Informationslabels kein Ladungsnachweis; Grenzfallentscheidung offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [analytische Grenzfallpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_limits_2026-11-04.md)
+erweitert den Befund bedingt auf untrunkierte exponentielle Memory:
+Bei festem positivem Vergessen und idealem vollrangigem Gaussrauschen
+gibt es auf dem angegebenen ganzen Zustandsraum keine nichtkonstante
+Wasserstein-2-stetige exakte Invariante fuer alle Starts. Ein unstetiges
+Traegerlabel ist ein explizites Gegenbeispiel gegen eine Erweiterung
+auf alle messbaren Funktionen. Gemeinsame vorgegebene Schreiborte
+sind keine ungezwungene stochastische Synchronisation. Die Grenzen
+alpha nach null und H nach unendlich vertauschen fuer die native
+Gesamtmasse nicht. Keine Aussage gegen Sektoren auf anderen Raeumen,
+keine Richtungswahl und keine Aenderung der Dynamik.
 
 Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
 liefert eine exakte lokale Kontinuitaetsidentitaet einschliesslich des
