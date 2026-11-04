@@ -1,9 +1,18 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-02 (vollstaendiges Gaussintegral und kubischer Kontrast bestimmt; Transfer zur nativen Dynamik nicht aufgeloest; kein Signifikanz-, Bindungs- oder Emergenzclaim; Paper-I-Baseline unveraendert).
+Stand: 2026-11-02 (Energie-/Fernfeld-/Ladungskriterien getrennt; kein vorhandener gemeinsamer Emergenzabschluss; native Kontrastgroesse offen; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
+ist ein begrenzter Code-/Theorieaudit der benannten vorhandenen
+Architekturen. 15 kleine Kontrollen pruefen Quellenzaehler, statische
+Antworten, Parameterrand und Energiekonventionen. Kein allgemeines
+No-go fuer kollektive Phasen oder andere Modelle. Gaplosigkeit,
+positive Feldenergie und eine passende Ladungs-/Paarvorzeichenregel
+sind verschiedene Anforderungen. Keine neue Memory-Dynamik oder
+abgeleitete elektrische Ladung, Masse, Bindung oder Gravitation.
 
 Der [Gaussvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
 ist analytisch exakt fuer den nichtlinearen Readout des deklarierten

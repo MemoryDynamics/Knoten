@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-02 (vollstaendiger Gaussvergleich bestimmt; native Signalgroesse nicht aufgeloest; Diagnosezweig vorerst geschlossen; physikalische Energie und Fernfeldanschluss offen; kein neuer Ziellauf).
+Stand: 2026-11-02 (Energie-/Fernfeldbestand geprueft; gaplose Feldantwort und Ladungsport unterschieden; native Ladungs-/Energiebilanz offen; Diagnosezweig geschlossen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
+findet keinen bereits gemeinsamen nativen Ladungsabschluss in den
+geprueften Varianten. Sie trennt kurzreichweitige Gaussreadouts,
+normierte Relaxations-Diffusionsmemory, Zusatzfelder mit moeglicher
+gaploser Antwort und den energiegeschlossenen Gradientenmediator.
+Ein Feldpol wird durch Source-/Readout-Gradienten unter Umstaenden
+aufgehoben; das Vorzeichen einer eliminierten skalaren Feldenergie
+ist nicht automatisch das elektromagnetische. 15 neue kleine
+Kontrollen bestehen. Die optional bereits vorhandene Vektormemory-
+Rueckkopplung ist in der Theorieuebersicht nun korrekt abgegrenzt.
+Keine Dynamik geaendert, kein neues Feld oder Ziellauf eingefuehrt.
 
 Der [Gaussvergleich des nichtlinearen Readouts](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_gaussian_readout_2026-11-02.md)
 liefert jetzt den Erwartungswert ueber das ganze feste Fenster mit

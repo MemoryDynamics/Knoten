@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-02 (Gaussvergleich im ganzen festen Fenster ausgewertet; winziger Kontrast bislang nicht auf native Dynamik uebertragbar; Diagnosezweig vorerst geschlossen; strukturelle Benchmark-Voraussetzungen vor weiterem Panel; AL1-Panel geschlossen).
+Stand: 2026-11-02 (Energie-/Fernfeldbestand getrennt geprueft; kein vorhandener gemeinsamer Ladungsabschluss; Quellen-/Strombilanz als naechster analytischer Schritt; Diagnose- und AL1-Panels geschlossen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -128,11 +128,22 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    im Gaussvergleich sogar trotz Korrelation exakt blind. Diesen Diagnosezweig vorerst
    abschliessen, kein kleines Nachweispanel oder automatische
    Schranken-/Laufzahloptimierung am alten Anker.
-   **Jetzt die vorhandenen skalaren/vektoriellen Memory- und Kernelvarianten
-   gezielt an den notwendigen Energie-/Arbeits- und Fernfeldbedingungen
-   des Wasserstoff-Benchmarks pruefen.** Der bekannte fehlende Coulomb-
-   Schwanz fester lokalisierter Gaussquellen und die offene native
-   Energiebilanz bleiben dabei echte Hindernisse. Erst ein konkret
+   Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
+   trennt jetzt die vorhandenen skalaren, vektoriellen und Mediator-
+   Architekturen; 15 kleine algebraische Kontrollen bestehen. Der
+   Energie-Gradientenmediator besitzt keinen Coulomb-Pol; einzelne
+   andere Zusatzmodelle erlauben gaplose Feldantworten, aber keinen
+   bereits aus Memory hergeleiteten Ladungsport. Normiertes Vergessen
+   entfernt beim masselosen Grenzgang auch die Quellstaerke. Eine
+   relaxierende skalare Feldenergie hat bei positiver Greenfunktion
+   zudem die andere Vorzeichenregel als elektrische Ladung.
+   **Jetzt am kanonischen Schreiben/Vergessen die lokale Quellen-/
+   Strombilanz und ihre Freiheitsgrade herleiten: Liefert sie einen
+   nichttrivialen additiven signierten Quellenwert?** Keine Gauss-
+   Nebenbedingung, Inverse-Laplace-Wirkung oder neue Feldvariable als
+   schon emergent voraussetzen. Der bekannte fehlende Coulomb-Schwanz
+   fester lokalisierter Gaussquellen und die offene native Energiebilanz
+   bleiben Hindernisse. Erst ein konkret
    benoetigter und im Bestand nicht vorhandener Mechanismus wird als
    Richtungsentscheidung vorgelegt; keine stillschweigende neue Regel.
    Eine weitere Diagnosesimulation braucht eine physikalisch relevante
