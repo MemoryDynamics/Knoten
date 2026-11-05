@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-05 (Invariantengrenzen und topologische Zustandsraumkriterien liegen vor; Vektormemory-Normierung allein unzureichend; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
+Stand: 2026-11-05 (kollektive Flussbedingung als alternative Ladungsroute abgeglichen; naiver FIFO-Altersfluss unzureichend; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -168,6 +168,17 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Kriterien, keine Erlaubnis zum stillschweigenden Einbau von S2-Zwang,
    Skyrme-Term oder FR-Quantisierung. Die bereits gestellte
    Richtungsfrage bleibt offen; kein neuer Ziellauf wird vorbereitet.
+   Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
+   ergaenzt jetzt die davon verschiedene Defektroute. Ein naiver
+   altersgewichteter Linienfluss entlang einer geschlossenen FIFO-Bahn
+   hat innere Quellenreste; gerichtete Punktdepositionen sind nicht
+   identisch mit diesem Linienfluss. Das naechste analytische
+   Auswahlkriterium ist eine native lokale Bedingung samt Updatebilanz
+   und energetischem/statistischem Anschluss, nicht eine weitere
+   isolierte Knotenform. Eine bedingte Graph-Greenfunktion setzt diese
+   Bausteine voraus und leitet weder die aeussere 3D-Geometrie noch
+   Quantendynamik ab. Kein Hopf-Zwang als universelle Voraussetzung,
+   kein pauschales No-go gegen kollektive Phasen und keine neue Regelwahl.
    Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
    ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue

@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-05 (topologische Felder nicht aus Einzelnormierung ableiten; Zustandsraum, Erhaltung, Stabilitaet und Quantisierung getrennt; Paper-I-Baseline unveraendert).
+Stand: 2026-11-05 (kollektive Flussdefekte als getrennte Referenzroute; FIFO-Altersfluss nicht automatisch divergenzfrei; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
+enthaelt bedingte Graphalgebra und ein Gegenbeispiel fuer den naiven
+FIFO-Linienflussanschluss. Globale Neutralitaet, lokale Defekte,
+Ganzzahligkeit, freie Energie, aeussere Dimension und Quantenstruktur
+sind verschiedene Anforderungen. Weder der Graph noch eine passende
+Zustandsverteilung oder ein Quantenfeld wurde aus Memory hergeleitet.
+Der fehlende Fernschwanz einzelner Gaussquellen schliesst kollektive
+Phasen nicht allgemein aus. Keine neue Dynamik oder Zielsimulation;
+kein Claim zu elektrischer Ladung, Spin, Bindung oder Gravitation.
 
 Der [topologische Bestandsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
 liefert ein explizites Gegenbeispiel gegen die automatische Interpretation

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-05 (topologische Zustandsraumkriterien konkretisiert und getestet; native Vektormemory garantiert weder Nullstellenfreiheit noch festen Richtungsrand; Richtungsentscheidung offen; kein neuer Ziellauf).
+Stand: 2026-11-05 (kollektive Ladungsroute mit Primaerliteratur abgeglichen; FIFO-Altersfluss besitzt innere Quellenreste; Richtungsentscheidung offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,19 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
+grenzt eine Alternative zu topologischen Knotenlabels ab: Defekte
+lokaler Flussbedingungen. Klassische freie Energie, energetische
+Wechselwirkung und quantenmechanische Eichdynamik werden getrennt.
+Ein konkreter FIFO-Gegenbefund ist analytisch bestimmt: Auch ein
+geschlossener altersgewichteter Linienfluss besitzt im Allgemeinen
+innere Quellenreste. Die native Punkt-Vektormemory ist zudem kein
+exaktes Linienintegral. Die bedingte Graphminimierung liefert eine
+inverse Laplace-Matrix, aber weder automatisch 3D noch Coulomb-Physik
+aus Memory. Keine neue Regel, kein Ziellauf oder Quanten-/Ladungsclaim.
+79 betroffene Tests einschliesslich 13 neuer algebraischer Kontrollen,
+Lint und strikter Dokumentationsbau bestehen.
 
 Der [topologische Zustandsraumabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
 zeigt an einer alterskonsistenten Hin-und-zurueck-Historie eine exakte
