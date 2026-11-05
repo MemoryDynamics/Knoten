@@ -1,9 +1,17 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-04 (endliche messbare und untrunkierte stetige Invarianten unterschieden; exakt gespeicherte Information nicht mit Ladung gleichsetzen; Paper-I-Baseline unveraendert).
+Stand: 2026-11-05 (topologische Felder nicht aus Einzelnormierung ableiten; Zustandsraum, Erhaltung, Stabilitaet und Quantisierung getrennt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [topologische Bestandsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
+liefert ein explizites Gegenbeispiel gegen die automatische Interpretation
+der gerichteten Gaussmemory als globales S2-Feld mit festem Rand. Er
+schliesst nicht alle speziell konstruierten Felder oder effektiven
+Sektoren aus. Bekannte Hopf-Energien und FR-Quantisierung sind hier
+Referenzannahmen, keine Memory-Ableitungen. Keine neue Zielsimulation,
+physikalische Ladung, Spinquantisierung oder Modellwahl.
 
 Die [Grenzfallanalyse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_limits_2026-11-04.md)
 schliesst unter ihren Volltraeger-/Zustandsraumannahmen auch fuer

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-04 (Invariantengrenzen fuer finite und stetige untrunkierte Memory praezisiert; reine Horizontvergroesserung liefert keinen Ladungsmechanismus; Grenzfall-/Erweiterungsentscheidung offen).
+Stand: 2026-11-05 (Invariantengrenzen und topologische Zustandsraumkriterien liegen vor; Vektormemory-Normierung allein unzureichend; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -160,11 +160,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    nur die Annahmen und benoetigten Nachweise der Grenzfaelle analytisch
    abgleichen, keine Regel aendern. Der Feldzustands-Grenzfall ist wie
    oben eingegrenzt; eine rein groessere-H-Diagnose wird nicht vorbereitet.
-   Fuer topologische Sektoren waeren nun insbesondere der zulaessige
-   Zustandsraum, Defekte und die Erhaltung unter der nativen Dynamik zu
-   benennen, nicht nur eine quantisierte Readout-Funktion. Eine laengere
-   Lebensdauer allein
-   ersetzt weder exakte Ladung noch ihren Wechselwirkungsanschluss.
+   Der [topologische Zustandsraumabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
+   liegt jetzt vor: Einzelnormierung der Richtungen garantiert weder
+   ein nullstellenfreies Summenfeld noch einen festen Richtungsrand.
+   Fuer einen konkreten Sektor bleiben Zielraum/Rand und Erhaltung
+   unter der nativen Dynamik nachzuweisen. Die Hopf-Referenz liefert
+   Kriterien, keine Erlaubnis zum stillschweigenden Einbau von S2-Zwang,
+   Skyrme-Term oder FR-Quantisierung. Die bereits gestellte
+   Richtungsfrage bleibt offen; kein neuer Ziellauf wird vorbereitet.
+   Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
+   ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue
    Feldvariable als schon emergent voraussetzen. Der fehlende Coulomb-Schwanz
    fester lokalisierter Gaussquellen und die offene native Energiebilanz

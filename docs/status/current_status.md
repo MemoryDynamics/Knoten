@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-04 (endliche und stetige untrunkierte Invariantengrenzen getrennt; unstetige Informationslabels kein Ladungsnachweis; Grenzfallentscheidung offen; kein neuer Ziellauf).
+Stand: 2026-11-05 (topologische Zustandsraumkriterien konkretisiert und getestet; native Vektormemory garantiert weder Nullstellenfreiheit noch festen Richtungsrand; Richtungsentscheidung offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [topologische Zustandsraumabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
+zeigt an einer alterskonsistenten Hin-und-zurueck-Historie eine exakte
+Nullebene des gerichteten Gaussfelds trotz normierter Einzelrichtungen.
+Die normierte Feldrichtung besitzt zudem keinen gemeinsamen Fernrand.
+Ein globales Hopf-Feld folgt daher nicht automatisch aus diesem Readout.
+Der Vergleich mit Hopf-Referenzen trennt Zielraum/Rand, topologisches
+Label, Stabilitaet und Quantisierung. Keine Aussage gegen alle moeglichen
+Vektormemory-Zustaende und keine neue Feld- oder Normierungsregel.
+104 betroffene Tests einschliesslich sechs neuer Gegenkontrollen,
+Lint und strikter Dokumentationsbau bestehen.
 
 Die [analytische Grenzfallpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_limits_2026-11-04.md)
 erweitert den Befund bedingt auf untrunkierte exponentielle Memory:
