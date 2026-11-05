@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-05 (kollektive Ladungsroute mit Primaerliteratur abgeglichen; FIFO-Altersfluss besitzt innere Quellenreste; Richtungsentscheidung offen; kein neuer Ziellauf).
+Stand: 2026-11-05 (bedingter Langmemory-Umlaufgrenzfall und kollektive Spektralgrenze getrennt; neue Primaerliteratur abgeglichen; Richtungsentscheidung offen; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Umlauf-/Kollektivpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/loop_flux_limits_2026-11-05.md)
+liefert einen bedingten positiven Grenzfall: Vorgegebene periodische
+Historien werden bei ausreichend langer Memory und kleinem Vergessen
+im Linienreadout gleichgewichtet. Kein Nachweis nativer periodischer
+Bahnen. Unabhaengige lokalisierte Loops mit dem angegebenen endlichen
+Moment haben dagegen eine mit k^2 verschwindende spektrale Amplitude,
+nicht die klassische Coulomb-Referenz. Spurnormierung kann diesen
+Unterschied verbergen. Keine Aussage gegen kollektive Phasen und
+keine neue Modelldynamik oder Zielsimulation.
+91 betroffene Tests einschliesslich 12 neuer konstruierter Kontrollen,
+Lint und strikter Dokumentationsbau bestehen.
 
 Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
 grenzt eine Alternative zu topologischen Knotenlabels ab: Defekte

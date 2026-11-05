@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-05 (kollektive Flussdefekte als getrennte Referenzroute; FIFO-Altersfluss nicht automatisch divergenzfrei; Paper-I-Baseline unveraendert).
+Stand: 2026-11-05 (vorgegebener Umlaufgrenzfall ist keine native Bahnherleitung; unabhaengiges Loopensemble ist keine Coulomb-Phase; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Umlaufgrenzen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/loop_flux_limits_2026-11-05.md)
+sind bedingte Readout- und Ensembleaussagen. Gleichgewichtung im
+Langmemory-Grenzgang setzt eine periodische Historie voraus; endlicher
+Tail, Punkt-/Linienfehler und Normierung bleiben explizit. Der
+spektrale Ausschluss gilt fuer unabhaengig platzierte, euklidisch
+geschlossene Loops mit endlichem staerkegewichteten Geometriemoment,
+nicht fuer alle kollektiven Phasen oder Quantenfelder. Ein passendes
+normiertes Winkelbild allein ist kein Coulomb-Nachweis. Keine neue
+Stabilitaets-, Ladungs-, Quanten- oder Gravitationsbehauptung.
 
 Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
 enthaelt bedingte Graphalgebra und ein Gegenbeispiel fuer den naiven

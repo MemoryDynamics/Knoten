@@ -187,6 +187,12 @@ Skalierungsunterscheidungen stehen im
 [Grenzfallbericht](fading_memory_limits_2026-11-04.md). Der Gegenbefund
 schliesst einen erst noch nachzuweisenden kontrollierten Grenzfall nicht aus.
 
+Die [anschliessende Umlauf-/Kollektivpruefung](loop_flux_limits_2026-11-05.md)
+bestimmt nun einen solchen bedingten Readout-Grenzfall fuer vorgegebene
+periodische Historien. Sie leitet keine native Bahn her und zeigt
+getrennt, weshalb unabhaengige lokalisierte Umlaeufe die langwellige
+Amplitude der klassischen Coulomb-Referenz dennoch verfehlen.
+
 Schliesslich besitzt selbst das native **Punkt**-Vektorfeld einer
 gleichgewichteten geschlossenen Polygonhistorie im Allgemeinen eine
 nichtverschwindende Divergenz. Der direkte Test vergleicht dessen

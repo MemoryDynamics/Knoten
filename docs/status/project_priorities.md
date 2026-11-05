@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-05 (kollektive Flussbedingung als alternative Ladungsroute abgeglichen; naiver FIFO-Altersfluss unzureichend; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
+Stand: 2026-11-05 (bedingter Langmemory-Umlauf und kollektive Antwort getrennt; normierte Winkelbilder reichen nicht; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -179,6 +179,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Bausteine voraus und leitet weder die aeussere 3D-Geometrie noch
    Quantendynamik ab. Kein Hopf-Zwang als universelle Voraussetzung,
    kein pauschales No-go gegen kollektive Phasen und keine neue Regelwahl.
+   Die [Umlauf-/Kollektivpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/loop_flux_limits_2026-11-05.md)
+   erhaelt einen bedingten positiven Langmemory-Grenzfall bei
+   vorgegebener Periodizitaet, ohne die native Bahn zu behaupten.
+   Ein unabhaengiges Ensemble lokalisierter Umlaeufe mit endlichem
+   Geometriemoment reicht jedoch nicht fuer die klassische Coulomb-
+   Spektralamplitude. Daher jeden Kandidaten zugleich an nativer
+   Zustandskontrolle und einer begruendeten kollektiven Antwort messen;
+   keine Durchstichbehauptung aus weiterem Ringschluss oder normiertem
+   Winkelbild. Die Richtungsentscheidung und Ausfuehrungsgrenzen bleiben
+   unveraendert; kein neuer Vielknoten- oder Langmemory-Ziellauf.
    Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
    ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue
