@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-06 (stochastischer Quantenanschluss mit expliziten Zusatzannahmen abgeglichen; stationaere Dichte, Dynamik und globale Phase getrennt; kein neuer Ziellauf).
+Stand: 2026-11-06 (mitlaufende lineare Memory auf geschlossenen Quantenanschluss geprueft; Doppel-Praeparation und freie Ausbreitung begrenzen diese direkte Route; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,19 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [mitlaufende lineare Memory-Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)
+liefert einen exakten Kontrast: Gleiche Gauss-Ortsdichte und gleicher
+Strom koennen wegen verschiedener Memory-Varianz verschieden evolvieren.
+Die Zuordnung zu derselben reinen skalaren Wellenfunktion schliesst
+deshalb nicht auf der ganzen geprueften Praeparationsklasse. Ein anfangs
+passender Quanten-Breitenwert ist nicht dynamisch invariant. Alle festen
+translationskovarianten linearen Ortsauslesen im stabilen Vergleich
+bleiben langfristig diffusiv, auch das Memory-Zentrum. Das ist keine
+geschlossene freie Teilchendynamik bei fester Zeit-/Laengenkalibrierung.
+18 neue algebraische Kontrollen, kein nichtlinearer FIFO-No-go und keine
+neue Zielsimulation. Ein bestandener klassischer Gauss-Schervergleich
+zeigt umgekehrt, dass auch passende Breiten allein nicht genuegen.
 
 Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
 grenzt den Anschluss an Wasserstoff ab: Native Memory-Spur und

@@ -241,6 +241,14 @@ klassische kollektive Coulomb-Antwort schliessen die Quantenluecke allein.
 
 ## Verifikation
 
+Fortsetzung am selben Tag: Der
+[mitlaufende lineare Memory-Vergleich](linear_memory_quantum_closure_2026-11-06.md)
+prueft jetzt mehr als eingefrorenen OU-Drift. Er liefert einen exakten
+Doppel-Praeparationskontrast, eine nichtinvariante momentane
+Quantenanpassung und die freie Ausbreitungsgrenze fuer feste lineare
+Ortsauslesen. Sein Befund gilt fuer den angegebenen Vergleich, nicht
+als allgemeiner Ausschluss nichtlinearer oder kollektiver Quantenmodelle.
+
 [Konstruierte Tests](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_stochastic_quantum_bridge.py)
 pruefen den nativen Historienkontrast, den OU-Operator auf drei Moden,
 stationaere Dichte, Zeitfaktoren, drei Gaussbreiten, fuenf Ringumlaeufe,

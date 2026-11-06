@@ -199,6 +199,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    ausgeben. Referenz-Quantenaxiome bleiben im getrennten Referenzzweig;
    eine Uebernahme in den Emergenzzweig bleibt Autorenentscheidung.
    Kein neuer Oszillator-, Ring- oder Wasserstoff-Ziellauf ist freigegeben.
+   Die [mitlaufende lineare Memory-Pruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)
+   schliesst nun die direkte reine Phasenzuordnung fuer ihre ganze
+   Praeparationsklasse aus und trennt ihre freie Ausbreitung vom
+   geschlossenen Quantenteilchen. **Diesen linearen Anschluss nicht mit
+   weiteren Radius-, Rausch- oder Massenfits verfolgen.** Ein weiterer
+   Kandidat braucht einen benannten Mechanismus und einen dynamisch
+   geschlossenen Zustands-/Praeparationsvertrag; eine anfangs passende
+   Bedingung genuegt nicht. Nichtlineare oder kollektive Alternativen
+   bleiben offen, werden aber nicht durch eine neue Regel vorweggenommen.
    Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
    ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue

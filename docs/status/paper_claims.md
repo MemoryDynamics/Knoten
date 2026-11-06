@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-06 (OU-Dichtetreffer ist keine Quantenherleitung; lokale Stroemung und globale Phasenbedingung getrennt; Paper-I-Baseline unveraendert).
+Stand: 2026-11-06 (mitlaufende lineare Memory liefert keinen automatischen reinen Quantenabschluss; freie Ausbreitung im stabilen Vergleich bleibt diffusiv; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [lineare Memory-Quantenvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)
+gilt fuer seinen expliziten kontinuierlichen Zweizustandsprozess,
+nicht bereits als kontrollierter Langzeittransfer vom nichtlinearen FIFO.
+Gleiches $p,j$ identifiziert keine allgemeine gemischte Quantendichtematrix;
+der Doppel-Praeparationskontrast betrifft die gepruefte reine skalare
+Phasenzuordnung. Die diffusive freie Ausbreitung schliesst den festen
+linearen Ortsreadout als exakte geschlossene freie Quantendynamik fuer
+alle Zeiten aus, nicht offene Systeme, andere Readouts oder singulaere
+Grenzgaenge. Keine neue Modellwahl, Quantisierung oder Zielsimulation.
 
 Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
 enthaelt Referenzalgebra und einen begrenzten Primaerquellenabgleich,
