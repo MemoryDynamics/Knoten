@@ -46,6 +46,19 @@ identifiziert die noch ungeprueften 3D-Normalmoden. Der Satz ueber den
 Rotationsquotienten in R0 schliesst raeumliche Orientierungen als
 kollektive Koordinaten nicht aus; er unterscheidet sie von internen Moden.
 
+Ergaenzung 2026-11-06: Der
+[stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
+prueft nun Nelsons Autorenbuch an den relevanten Gleichungen sowie
+ausgewaehlte Volltextabschnitte von Reddiger/Poirier und Hushwater.
+Die Originalartikel von Nelson (1966) und Wallstrom (1994) bleiben in der
+unten datierten Quellenliste Abstract-Pruefungen. Ein stationaerer
+OU-Dichtetreffer ist kein Nachweis unitarrer Zeitentwicklung; lokale
+Stroemungsgleichungen legen den globalen Phasensektor nicht allein fest.
+Memory-Spur und Ensemble-Ortsdichte bleiben getrennt. Der historische
+Trajektorien-/Schroedinger-Chat enthaelt sowohl fruehe Ueberbehauptungen
+als auch spaetere Kalibrierungskorrekturen, keinen heutigen Quantennachweis.
+Keine neue Mikrodynamik oder Entscheidung fuer Quantenaxiome als Input.
+
 ## 2. Annahmen und Resultate
 
 | Bereich | Input | Belegt / hergeleitet | Fehlender Schritt / entscheidender Gegenbefund |

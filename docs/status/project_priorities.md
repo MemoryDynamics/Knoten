@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-05 (bedingter Langmemory-Umlauf und kollektive Antwort getrennt; normierte Winkelbilder reichen nicht; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
+Stand: 2026-11-06 (Quantenanschluss des Wasserstoffziels explizit abgeglichen; kollektive Coulomb-Antwort allein reicht nicht; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -189,6 +189,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    keine Durchstichbehauptung aus weiterem Ringschluss oder normiertem
    Winkelbild. Die Richtungsentscheidung und Ausfuehrungsgrenzen bleiben
    unveraendert; kein neuer Vielknoten- oder Langmemory-Ziellauf.
+   Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
+   konkretisiert die zweite unverzichtbare Verbindung zum Wasserstoffziel:
+   Ein klassischer Coulomb-Abschluss oder eine passende stationaere Dichte
+   ersetzt keine Quantendynamik. Fuer einen Kandidaten zugleich den
+   Ensemble-/Stromabschluss, globale Phasenbedingungen und die gemeinsame
+   Massen-/Wirkungskalibrierung ausweisen. Nelsons Zusatzannahmen nicht
+   durch Phasenumschreibung oder OU-Grundzustandsfit als hergeleitet
+   ausgeben. Referenz-Quantenaxiome bleiben im getrennten Referenzzweig;
+   eine Uebernahme in den Emergenzzweig bleibt Autorenentscheidung.
+   Kein neuer Oszillator-, Ring- oder Wasserstoff-Ziellauf ist freigegeben.
    Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
    ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue

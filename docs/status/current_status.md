@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-05 (bedingter Langmemory-Umlaufgrenzfall und kollektive Spektralgrenze getrennt; neue Primaerliteratur abgeglichen; Richtungsentscheidung offen; kein neuer Ziellauf).
+Stand: 2026-11-06 (stochastischer Quantenanschluss mit expliziten Zusatzannahmen abgeglichen; stationaere Dichte, Dynamik und globale Phase getrennt; kein neuer Ziellauf).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
+grenzt den Anschluss an Wasserstoff ab: Native Memory-Spur und
+Ensemble-Ortsdichte sind nicht identisch. Die OU-Grundzustandstransformation
+liefert Imaginarzeit, nicht von selbst unitaere Echtzeitdynamik. Ein
+stationaerer Nelson-Oszillatorvergleich bleibt moeglich; beliebige
+OU-Transienten tragen nicht dasselbe Kraftgesetz. Die Ringkontrolle
+trennt lokale Gleichung und globalen Phasensektor. 16 neue konstruierte
+Kontrollen bestehen; keine neue Zielsimulation oder Quantenherleitung.
+Die abgeschlossenen AL1-Archive bestehen erneut ihre elf lesenden
+Kontrollen; die bereits verbrauchte Freigabe wurde nicht erneut genutzt.
 
 Die [Umlauf-/Kollektivpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/loop_flux_limits_2026-11-05.md)
 liefert einen bedingten positiven Grenzfall: Vorgegebene periodische

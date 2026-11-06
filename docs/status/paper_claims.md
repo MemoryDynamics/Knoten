@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-05 (vorgegebener Umlaufgrenzfall ist keine native Bahnherleitung; unabhaengiges Loopensemble ist keine Coulomb-Phase; Paper-I-Baseline unveraendert).
+Stand: 2026-11-06 (OU-Dichtetreffer ist keine Quantenherleitung; lokale Stroemung und globale Phasenbedingung getrennt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
+enthaelt Referenzalgebra und einen begrenzten Primaerquellenabgleich,
+keine native Schroedinger-Herleitung. OU-Imaginarzeit und unitarrer
+Referenzpropagator, stationaere Dichte und Transienten sowie lokale
+Stroemung und globaler Phasensektor bleiben getrennt. Die Ringkontrolle
+gilt fuer ihren festen spinlosen Randvertrag, nicht als allgemeines
+No-go fuer stochastische Quantenmodelle. Fruehe historische Zusagen
+werden unter Beruecksichtigung der spaeteren Korrekturen desselben
+Chats eingeordnet; keine neue Quanten-, Massen- oder Wasserstoffbehauptung.
 
 Die [Umlaufgrenzen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/loop_flux_limits_2026-11-05.md)
 sind bedingte Readout- und Ensembleaussagen. Gleichgewichtung im
