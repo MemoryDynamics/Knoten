@@ -2,6 +2,13 @@
 
 Stand: 2026-09-08.
 
+Ergaenzung 2026-10-25: Die folgende Evidenzchronik bewahrt den damaligen
+Stand. Der aktuelle [Experimentkatalog](experiment_catalog.md) fuehrt
+inzwischen den separaten G4-Root- und den direkten G5-Pass bei $H=2400$.
+Die neue [FIFO-Strukturanalyse](fifo_structure_candidate.md) untersucht
+Orientierungsrahmen und bedingte Topologie. Der lokale 2D-Stabilitaetspass
+wird darin nicht als Stabilitaet gegen neue 3D-Normalrichtungen ausgegeben.
+
 Diese Seite ist die kanonische Frontdoor fuer den positiven raeumlichen
 Schleifenast des unveraenderten skalaren K0-H-Modells. Das kritische
 Reviewergebnis lautet:

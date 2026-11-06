@@ -11,14 +11,29 @@ nav:
   - Projektsteuerung:
       - Aktueller Stand: status/current_status.md
       - Prioritaeten: status/project_priorities.md
+      - Forschungsroadmap: status/research_roadmap.md
+      - Architekturentscheidung: status/architecture_decision.md
       - Paper-Claims: status/paper_claims.md
   - Modell und Gleichungen:
       - Theorie: reference/THEORETICAL_CONTEXT.md
       - Modellvokabular: reference/model_vocabulary.md
       - Implementierte Gleichungen: reference/implemented_equations.md
+      - Physikalische Machbarkeit: reference/foundation_feasibility.md
+      - Zustand und Interventionen: reference/operational_contract.md
+      - Wasserstoff und Materie:
+          - Zielbenchmark: reference/hydrogen_benchmark.md
+          - Direkter Paar-Audit: reference/hydrogen_pair_audit.md
+          - Memory-Paarreduktion: reference/memory_pair_reduction.md
+          - Lesepotential und FIFO-Bilanz: reference/memory_pair_energy.md
+          - Form und gemittelte Paarwirkung: reference/memory_pair_finite_separation.md
+          - Referenz und Emergenz: reference/matter_reference_contract.md
+          - Raeumliche Nukleonreferenz: reference/nucleon_spatial_reference.md
       - Center-Filter und Rotation: reference/scalar_memory_center_filter.md
   - Rotation und Interaktion:
       - Native Rotating Waves: reference/rotating_wave_foundation.md
+      - FIFO-Strukturkandidat: reference/fifo_structure_candidate.md
+      - FIFO-Normalstabilitaet: reference/fifo_normal_stability_contract.md
+      - FIFO-Strukturgrenzen: reference/fifo_rigid_structure_limits.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md

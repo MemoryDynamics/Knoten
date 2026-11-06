@@ -1,0 +1,68 @@
+{
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_sha256": "cde1873049a20779cede8d64135c2496faa9d3587d3af752a0209882d186560e",
+  "envelope": {
+    "claim_class": "exact_model_inequality_binary64_evaluation_not_interval_certificate",
+    "closes_numerically": true,
+    "closure_margin": 0.0018270293149457387,
+    "closure_rhs": 0.008172970685054261,
+    "common_lag_perturbation_bound": 0.00017492273523621416,
+    "common_lag_variance_bound": 1.5450928101021395e-08,
+    "common_multiplier": 0.5422317489859725,
+    "convex_gain": 0.6088534881698123,
+    "cross_gain": 0.020000000000000014,
+    "cubic_coefficient": 0.7160493827160493,
+    "dimension": 3,
+    "failure_probability_bound": 3.5006809740545107e-14,
+    "gaussian_threshold": 10.0,
+    "global_gradient_bound": 7.682721689693357,
+    "horizon": 600,
+    "initial_common_inner": 7.073886767098274e-05,
+    "initial_common_offset": 0.0004810804016897487,
+    "initial_relative_bound": 0.0010536431182582228,
+    "inner_bound": 0.0037830430577533154,
+    "inner_variance_bound": 1.3883636809806567e-08,
+    "innovation_bound": 0.0017320508075688772,
+    "nonlinear_update_bound": 1.1210635655190195e-07,
+    "proposed_diameter": 0.01,
+    "reference_diameter_bound": 0.007409386369819292,
+    "relative_covariance": [
+      [
+        3.3511556920928664e-08,
+        5.602234874574544e-09
+      ],
+      [
+        5.602234874574544e-09,
+        5.461987025095378e-09
+      ]
+    ],
+    "relative_matrix": [
+      [
+        0.5477088373595682,
+        0.4122911626404318
+      ],
+      [
+        0.005477088373595682,
+        0.9941229116264043
+      ]
+    ],
+    "relative_perturbation_bound": 0.0005886615799987544,
+    "scalar_gaussian_count": 90750000,
+    "self_gain": 0.4322911626404318,
+    "tail_update_bound": 2.828371379280113e-07,
+    "updates": 50000
+  },
+  "geometric_weight_max_binary64_difference": 1.734723475976807e-18,
+  "hypothetical_two_pair_budget": {
+    "hoeffding_half_width": 1.7785844653571496e-06,
+    "includes_numerical_error": false,
+    "local_contrast_norm_bound": 7.597293411028726e-07,
+    "total_half_width": 1.7785855411474555e-06,
+    "unconditional_truncation_bias_bound": 1.0757903059226182e-12
+  },
+  "parameter_search": false,
+  "schema": "emergenz-knoten.memory-pair-path-envelope.v1",
+  "source_report": "reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.json",
+  "source_report_sha256_utf8_lf": "54f76fc01669fa10cdfa88653c9024a7e98240121e751397eed32ed5c33ba264",
+  "target_trajectories_generated": 0
+}

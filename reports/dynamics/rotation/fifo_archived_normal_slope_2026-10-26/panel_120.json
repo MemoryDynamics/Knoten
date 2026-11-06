@@ -1,0 +1,35 @@
+{
+  "elapsed_seconds": 1.5160000000614673,
+  "finished_utc": "2026-10-26T21:56:02.780585+00:00",
+  "precision_dps": 120,
+  "result": {
+    "archived_schur_decision": "inconclusive",
+    "arithmetic": "exact fractions of archived binary endpoints",
+    "decision": "positive-real-normal-mode-certified",
+    "lag_count": 1199,
+    "precision_dps": 120,
+    "schema": "fifo-archived-normal-slope-v1",
+    "slope": {
+      "lower": {
+        "approximate_decimal_not_used_for_decision": "-0.3276456990433840337505836",
+        "denominator": "88725430211866075506509253892578678509965986412026130405455346579667881849780019937279180995332466499116518750764914298527173050368",
+        "numerator": "-29070505604691845462563646740799822209787887048522013771814281480705498916505767924160627421643504155863022608854261143234780838339"
+      },
+      "upper": {
+        "approximate_decimal_not_used_for_decision": "-0.3276456990433840337505836",
+        "denominator": "22181357552966518876627313473144669627491496603006532601363836644916970462445004984319795248833116624779129687691228574631793262592",
+        "numerator": "-7267626401172961365640911685199955548886675826562460743018939183088072796735330527422514223457745259016183218322207846246862824841"
+      }
+    },
+    "source": {
+      "path": "reports/dynamics/rotation/fifo_normal_anchor_attempt_1_2026-10-25/panel_120.json",
+      "revision": "fdbd24fd437187a4db185d413f4c3bd022104b3b",
+      "sha256_git_blob_bytes": "682067781a845115a4df058134d55795ed4c3ff24debba25665f64cbfca4830c"
+    },
+    "trust_basis": "archived root/coefficient enclosure from mpmath.iv; no recertification"
+  },
+  "returncode": 0,
+  "started_utc": "2026-10-26T21:56:01.269223+00:00",
+  "status": "completed",
+  "stderr": ""
+}
