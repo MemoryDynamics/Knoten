@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-07 (kollektive Stabilisierung auf gemeinsame und relative History-Moden eingegrenzt; phasenversetzter Ansatz analytisch vorbereitet, aber kein kollektiver Orbit nachgewiesen).
+Stand: 2026-11-07 (antipodales Paar analytisch bis zu normalen und ebenen History-Bloecken aufgeloest; bedingtes Abklingkriterium, aber kein stabiler kollektiver Orbit nachgewiesen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,11 +16,19 @@ gemeinsamer Instabilitaet. Additive Kreuzkopplung veraendert bereits
 deren Gesamtstaerke. Phasenversetzte Historien veraendern hingegen die
 Kruemmungsgewichte; fuer einen Polygonansatz sind Existenzgleichung,
 voller Normalblock und hinreichender Instabilitaetstest hergeleitet.
-30 kleine Kontrollen bestehen, einschliesslich nativer Paarregel fuer
-einen konstruierten Schritt und nichtsynchronem Jacobian-Abgleich.
+Die antipodale Spezialisierung trennt zusaetzlich Summen-/Differenzantwort
+und vollstaendige mitrotierende ebene Bloecke. Ein hinreichendes
+Abklingkriterium fuer den gemeinsamen Normalblock ist bewiesen; es ist
+nicht als an einem nativen Orbit erfuellt nachgewiesen. Rein repulsive
+Chordbereiche scheitern bereits an der radialen Existenzgleichung.
+45 kleine Kontrollen bestehen, einschliesslich nativer Paarregel fuer
+einen konstruierten Schritt, nichtsynchronem Jacobian-Abgleich und
+korrekt mitrotierender kompletter Historie.
 Keine neue Zielsimulation, keine Stabilitaets-, Teilchen- oder QFT-
-Herleitung. Der Literaturvergleich zeigt klassische verzoegerungsbedingte
-Stabilisierung, nicht ihre Ableitung aus diesem FIFO. Modell-/
+Herleitung. Der erweiterte Literaturvergleich mit orbitierenden
+Walking-Droplet-Paaren trennt vorgegebene Traegheit, 2D-Untergrund,
+Antrieb und semiempirische Auftreffphasenanpassung von nativer
+FIFO-Dynamik. Modell-/
 Normierungsentscheidung ist beim Autor angefragt, nicht vorweggenommen.
 
 Der [mitlaufende lineare Memory-Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)

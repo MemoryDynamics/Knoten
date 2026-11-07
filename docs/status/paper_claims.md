@@ -13,6 +13,13 @@ vorhandenen Paars, kein neuer implementierter Vielknotennachweis.
 Phasenversetzte Polygone sind Ansaetze mit noch offener Existenz- und
 Stabilitaetspruefung. Ihr negatives Steigungskriterium waere hinreichend
 fuer Instabilitaet; ein nichtnegativer Wert ersetzt keinen vollen Modentest.
+Die antipodale Paaranalyse ergaenzt einen hinreichenden Abklingsatz nur
+fuer den gemeinsamen Normalblock sowie die uebrigen Blockformeln;
+kein bekannter nativer Orbit besteht damit schon die Gesamtpruefung.
+Eine vorhandene attraktive Kreuzantwort bei festgehaltener Geometrie
+ist keine Stabilisierung eines tatsaechlichen Orbits. Orbitierende
+Troepfchenpaare aus der Referenz haben andere Dynamik und aeusseren
+Antrieb; geometrische Ortsphase und Auftreffphase bleiben getrennt.
 Die archivierte H=1200-Instabilitaet erzwingt weder weitere Knoten noch
 ein quantisiertes Feld. Klassischer Schwingungsstillstand aus der gelesenen
 Referenz ist kein Knoten-, Spin-, Quark- oder Quantenfeldresultat.

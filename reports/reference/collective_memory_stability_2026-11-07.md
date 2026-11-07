@@ -31,6 +31,11 @@ Das sind Kriterien fuer die Auswahl eines Mechanismus, keine neuen
 Teilchenbefunde. Selbst eine bestandene mechanische Pruefung waere noch
 kein Spin-, Ladungs-, Quantenfeld- oder Wasserstoffnachweis. Drei
 History-Labels sind insbesondere keine hergeleiteten Farbfreiheitsgrade.
+Die anschliessende Paar-Spezialisierung in Abschnitt 7 trennt nun alle
+normalen und ebenen Stoerungen, gibt ein hinreichendes Stabilitaetskriterium
+fuer **nur einen** Block und eine notwendige geometrische Bedingung an.
+Abschnitt 8 ordnet die naheliegende Troepfchen-Referenz ein. Auch damit
+liegt noch kein stabiler nativer Paarorbit vor.
 
 ## 1. Was im Code steht und was nur bedingt verallgemeinert wird
 
@@ -239,7 +244,7 @@ Kein Review aller kollektiven Mechanismen oder Neuheitsnachweis.
 
 ## 6. Verifikation und Entscheidungsgrundlage
 
-Die [30 konstruierten Kontrollen](../../tests/test_collective_memory_stability.py)
+Die ersten [30 konstruierten Kontrollen](../../tests/test_collective_memory_stability.py)
 pruefen die unveraenderte gemeinsame Regel fuer N=1,2,3,4, ihren vollen
 History-Jacobian, additive Gain-Veraenderung, relative Graphmoden,
 Rueckwirkung und Translation, die native Paarimplementierung fuer einen
@@ -251,10 +256,23 @@ die einseitige Aussagekraft des Steigungskriteriums. Keine H=1200-
 Rechnung, neue Zielbahn oder Parametersuche. Tests belegen diese
 Identitaeten, nicht die Existenz oder Stabilitaet eines kollektiven Knotens.
 
-Verifikation am 2026-11-07: 77 betroffene Tests einschliesslich dieser
+Verifikation der ersten Stufe am 2026-11-07: 77 betroffene Tests einschliesslich dieser
 30 Kontrollen bestanden in 6.13 s. Vollstaendige konfigurierte Ruff-
 Pruefung und strikter MkDocs-Build bestanden. Diese Softwarechecks sind
 kein empirischer Nachweis einer neuen physikalischen Struktur.
+
+Die anschliessende Paar-Spezialisierung ergaenzt 15 Kontrollen, insgesamt
+45 in derselben Testdatei: Summen-/Differenzbloecke, Existenz-/Neigungs-
+Residuum, vollstaendig mitrotierender ebener Operator samt Symmetrien,
+bedingtes gemeinsames Abklingen und dessen Randfall, repulsiver
+Existenz-Ausschluss sowie ein vorgeschriebenes Zweialter-Gegenbeispiel.
+105 betroffene Tests bestanden in 2.71 s; konfigurierte Ruff-Pruefung
+und strikter MkDocs-Build bestanden ebenfalls. Ein erster Testlauf
+traf bei der trigonometrischen Darstellung des exakten Vierteldrehungs-
+Beispiels auf 4.44e-16 Rundungsrest. Die Kontrolle prueft nun die beiden
+Koeffizientenidentitaeten exakt und erlaubt fuer die trigonometrische
+Auswertung acht Maschinen-Epsilon; kein physikalisches Kriterium wurde
+nachtraeglich gelockert. Kein Zielorbit wurde berechnet.
 
 Die kanonische [Prioritaetenliste](../../docs/status/project_priorities.md)
 enthaelt den naechsten Entscheidungspunkt: Kopplungs-/Normierungsvertrag
@@ -264,3 +282,211 @@ eine Kontrolle der dadurch veraenderten Gesamtstaerke, volle gemeinsame
 und relative Stoerungen, sowie Ausschluss von Kollaps in einen trivialen
 Ruhezustand. Quantisierung und Teilchenidentifikation bleiben separate
 Nachweispflichten; keine feste aeussere Falle als Emergenz ausgeben.
+
+## 7. Antipodales Paar: konkreter Mechanismus und vollstaendige Moden
+
+Analytische Fortsetzung am selben Tag, ohne Entscheidung ueber neue
+Kopplungsregeln oder einen festen Kreuz-Gain. Grundlage ist die bereits
+implementierte identische Paarregel mit Selbststaerke $\eta\geq0$ und
+Kreuzstaerke $\chi\geq0$, beide weiter symbolisch. Der Winkel $\pi$
+bezeichnet den **Ortsphasenversatz** der zwei Historien, nicht einen
+Spinwinkel oder die Schwingungsphase eines zusaetzlichen Feldes.
+
+Sei $x_{B,n}=-x_{A,n}$, $r>0$, $0<\theta<\pi$. Schreibe mit Altersindex
+$\ell=0,\ldots,H-1$ und $\nabla K(z)=k(|z|^2)z$:
+
+$$
+d_{s,\ell}^2=2r^2(1-\cos\ell\theta),\qquad
+d_{c,\ell}^2=2r^2(1+\cos\ell\theta),
+$$
+
+$$
+a_\ell=\eta w_\ell k(d_{s,\ell}^2),\qquad
+b_\ell=\chi w_\ell k(d_{c,\ell}^2),\qquad
+c_\ell=a_\ell+b_\ell,\quad d_\ell=a_\ell-b_\ell.
+$$
+
+Hier bezeichnet $b_\ell$ nur den Kreuzanteil, nicht die Zeilensumme aus
+Abschnitt 4. Die exakten Existenzresiduen sind
+
+$$
+F_R=\cos\theta-1+\sum_\ell[a_\ell(1-\cos\ell\theta)
+                                  +b_\ell(1+\cos\ell\theta)],
+$$
+
+$$
+F_T=\sin\theta+\sum_\ell d_\ell\sin\ell\theta.
+$$
+
+Nur $F_R=F_T=0$ beschreibt den Kreisorbit. Ein normal stabiler Operator
+an einer beliebigen vorbereiteten Geometrie ist kein Ersatz dafuer.
+
+### Gemeinsame und relative Normalmode
+
+Fuer $z_+=(z_A+z_B)/2$ und $z_-=(z_A-z_B)/2$ gilt exakt
+
+$$
+z_{+,n+1}=(1-\sum_\ell c_\ell)z_{+,n}
+                  +\sum_\ell c_\ell z_{+,n-\ell},
+$$
+
+$$
+z_{-,n+1}=(1-\sum_\ell c_\ell)z_{-,n}
+                  +\sum_\ell d_\ell z_{-,n-\ell}.
+$$
+
+Das ist die konkrete stabilisierende Moeglichkeit: Ein positiver
+Kreuzanteil erhoeht bei **festgehaltener Geometrie**
+$S_+=1+\sum_{\ell\geq1}\ell c_\ell$, wirkt aber im relativen
+Quellenfeedback mit dem anderen Vorzeichen. Positive $b_\ell$ fuer alle
+Alter sind nicht vorausgesetzt; mit langen Historien koennen auch
+Kreuzpunkte nahe am empfangenden Punkt liegen. Eine echte Bahn aendert
+bei veraendertem $\chi$ im Allgemeinen auch $r$ und $\theta$. Daher ist
+die Steigungsverbesserung bei festem $r,\theta$ **kein** Stabilitaetsbeleg.
+
+Ein positiver bedingter Satz geht weiter als der negative Steigungstest:
+
+$$
+c_\ell\geq0\ (\ell\geq1),\qquad
+C=\sum_{\ell\geq1}c_\ell<1
+\quad\Longrightarrow\quad
+\text{alle gemeinsamen Normalmoden ausser Translation klingen asymptotisch ab.}
+$$
+
+Fuer einen nichtverschwindenden Multiplikator gilt
+$\mu=1-C+\sum_{\ell\geq1}c_\ell\mu^{-\ell}$.
+Bei $|\mu|\geq1$ erzwingt die Dreiecksungleichung $|\mu|\leq1$.
+Im Gleichheitsfall fixiert der strikt positive Term $1-C$ die Phase auf
+$\mu=1$; diese Nullstelle ist wegen $S_+>0$ einfach. Nullmultiplikatoren
+sind kontrahierend. Das beweist den Satz auch bei verschwindenden
+Einzelgewichten. Bei $C=1$ koennen weitere ungedaempfte Moden auftreten.
+Die Bedingungen sind hinreichend, nicht notwendig; ihre Erfuellung an
+einem tatsaechlichen nativen Paarorbit wurde hier nicht gezeigt.
+
+Die beiden Neigungen der Kreisebene liegen beim antipodalen Paar im
+**relativen** Normalblock. Mit $v_\ell=e^{-i\ell\theta}$ und dessen
+History-Matrix $T_-$ gilt sogar abseits eines Roots
+
+$$
+T_-v-e^{i\theta}v=-(F_R+iF_T)e_0.
+$$
+
+Erst bei exakter Kreisbalance sind also $e^{\pm i\theta}$ echte neutrale
+Neigungsmoden. Die gemeinsame normale Translation hat stets $\mu=1$.
+Weitere relative Formmoden sind gesondert zu kontrollieren, nicht als
+Neigungen zu entfernen.
+
+### Ebener Block und mitrotierende Historie
+
+Setze im gemeinsamen mitrotierenden Koordinatensystem
+$A_\ell=\eta w_\ell\nabla^2K(x_A-y_{A,\ell})|_{xy}$,
+$B_\ell=\chi w_\ell\nabla^2K(x_A-y_{B,\ell})|_{xy}$ und
+$R_-=R(-\theta)$. Wegen der geraden radialen Hessian sind die beiden
+Diagonalknotenbloecke identisch und ebenso die beiden Kreuzbloecke.
+Fuer die gemeinsamen/relativen ebenen Variationen lautet der volle
+mitrotierende History-Operator
+
+$$
+u_0'=R_-\left([I-\sum_\ell(A_\ell+B_\ell)]u_0
+                  +\sum_\ell(A_\ell\pm B_\ell)u_\ell\right),\qquad
+u_{\ell+1}'=R_-u_\ell.
+$$
+
+Auch **alle verschobenen Historienpunkte** muessen mitrotieren. Nur den
+aktuellen Punkt zu drehen und den Tail mit Identitaetsbloecken zu
+schieben erzeugt einen anderen Operator. Die Tests vergleichen beide
+ebenen Bloecke mit dem vollstaendigen, gemeinsam rotierten Paar-Jacobian.
+Bei einem exakten Orbit liegen die ebenen Translationsmoden im
+gemeinsamen Block bei $e^{\pm i\theta}$, die Rotation innerhalb der
+Ebene im relativen Block bei eins. Diese Symmetrien sind keine Daempfung.
+Ein Spektralnachweis muss zudem die Semisimplizitaet der neutralen
+Moden bzw. moegliche Jordan-Verstaerkung und die verbleibenden Moden
+beachten; ein paar Stichprobenwinkel reichen nicht.
+
+### Zwei notwendige Gegenpruefungen
+
+Erstens verlangt die radiale Existenzgleichung
+
+$$
+\sum_\ell[a_\ell(1-\cos\ell\theta)+b_\ell(1+\cos\ell\theta)]
+=1-\cos\theta>0.
+$$
+
+Liegen alle beteiligten Abstaende im rein repulsiven Bereich $k\leq0$,
+ist das unmoeglich. Fuer den Zweigausskernel mit breiterer attraktiver
+Komponente, positiven Amplituden und $k(0)<0$ gibt es genau einen
+positiven Kraftnullpunkt
+
+$$
+d_*^2=\frac{2\log(A_{rep}\sigma_{att}^2/(A_{att}\sigma_{rep}^2))}
+                 {\sigma_{rep}^{-2}-\sigma_{att}^{-2}}.
+$$
+
+Da jede Chordlaenge hoechstens $2r$ ist, ist $r>d_*/2$ notwendig.
+Dies verwendet die bereits vorhandene Funktion
+[`double_gaussian_force_crossing_radius`](../../src/emergenz_knoten/rotating_wave.py),
+keine neue Kernelwahl. Es ist eine geometrische Bedingung in
+Modelllaengeneinheiten, kein Teilchenradius- oder Massengesetz.
+
+Zweitens ist selbst eine exakt passende relative Rotation nicht genug:
+Bei **nur zwei Altersplaetzen und einer Vierteldrehung pro Schritt**
+($H=2,\theta=\pi/2$) erzwingt $F_T=0$ die Beziehung $a_1-b_1=-1$.
+Die Selbst-/Kreuzchords sind dann gleich lang; bei gleichem Kernel,
+$\eta,\chi>0$ und positiven Gewichten gilt
+
+$$
+|c_1|=\frac{\eta+\chi}{|\eta-\chi|}>1.
+$$
+
+Fuer $\eta=\chi$ ist bereits die Tangentialbalance unmoeglich.
+Sonst hat der gemeinsame Normalblock neben eins den Multiplikator
+$-c_1$ und ist instabil. Das ist **nur** dieser Zweialter-Vierteldrehungs-
+Ausschluss, kein No-go fuer andere Winkel, laengere Memory oder das
+H=1200-Paar. Die algebraische Gegenkontrolle setzt Koeffizienten vor;
+sie behauptet nicht deren Realisierung durch einen gefundenen Gaussorbit.
+
+## 8. Nahe Referenz: Paare mit gemeinsamem Wellengedaechtnis
+
+Gezielte Primaerquellensuche am 2026-11-07 nach orbitierenden
+Walking-Droplet-Paaren, keine systematische Literaturuebersicht.
+
+**Oza, Siefert, Harris, Molacek und Bush (2017),**
+[Orbiting pairs of walking droplets: Dynamics and stability](https://thales.mit.edu/bush/wp-content/uploads/2017/12/Oza-OrbitsPRF2017.pdf),
+PR Fluids 2, 053601, DOI 10.1103/PhysRevFluids.2.053601.
+Gelesen: Abstract, Modellgleichungen (1)-(10) und Diskussionsauszuege aus
+III A-C und IV; kein vollstaendiger Audit des Anhangs oder der
+Messdaten. Die Arbeit untersucht experimentell und theoretisch antipodal
+orbitierende Paare. Das Modell summiert beide alternden Wellenspuren,
+enthaelt jedoch vorgegebene Traegheit, Reibung, raeumlich gedaempfte
+Besselwellen und einen angetriebenen Fluessigkeitsuntergrund. Eine
+semiempirisch angepasste Abhaengigkeit der Auftreffphase von der lokalen
+Wellenhoehe verbessert die Orbitalstabilitaet und den Messvergleich;
+sie folgt nicht aus dem reduzierten horizontalen Modell selbst.
+Die gemeinsame/relative Modentrennung ist dort bereits vorhanden.
+**Einordnung:** hilfreicher klassischer Mechanismusvergleich, kein
+Beleg fuer unsere freie 3D-Normalstabilitaet oder QFT. Die Auftreffphase
+ist von unserem geometrischen $\pi$-Versatz zu unterscheiden. Eine
+fehlende horizontale Falle bedeutet nicht fehlende aeussere Energiezufuhr.
+Der alternative `math.mit.edu/sites/bush`-PDF-Link lieferte 404; gelesen
+wurde die verlinkte Autorenfassung auf `thales.mit.edu`.
+
+**Valani und Slim (2018),**
+[Pilot-wave dynamics of two identical, in-phase bouncing droplets](https://arxiv.org/pdf/1806.10264v1),
+arXiv v1 vom 27.06.2018; veroeffentlicht in Chaos 28, 096114,
+DOI 10.1063/1.5032128 laut
+[institutionellem Publikationseintrag](https://research.monash.edu/en/publications/pilot-wave-dynamics-of-two-identical-in-phase-bouncing-droplets/).
+Gelesen: Einleitung, Modellgleichungen in II, Beginn IV und IX einschliesslich der
+Experimentgrenzen; kein Volltext-/Numerikaudit aller Regime.
+Die Gleichungen (1)-(2) koppeln zwei vorgegebene massive Punkte an die
+Summe exponentiell alternder Besselspuren. Das liefert einen direkten
+Vergleich fuer Selbst-/Kreuzmemory, aber weder unser endliches FIFO noch
+einen Nachweis emergenter Masse. Die Autoren unterscheiden vorhergesagte
+Paarregime von experimentell zugaenglichen Parametern und weisen auf
+moegliche Aenderungen durch die vernachlaessigte variable Auftreffphase
+hin. Das untersuchte Ortsproblem ist horizontal, nicht freie 3D-Bewegung.
+
+Diese Vergleiche begruenden weder eine neue Impulsvariable noch einen
+feldabhaengigen Gain in unserem Modell. Beides waeren zu entscheidende
+Erweiterungen. Kollektive Bindung ist ein bekannter klassischer Effekt;
+unser Ziel verlangt zusaetzlich einen eigenstaendigen Nachweis von
+Quantendynamik, Ladung, Spin und dem Gravitationsanschluss.

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-07 (kollektive Stabilisierung analytisch praezisiert: gemeinsame Mode, Gesamtstaerke und phasenversetzte Historien trennen; keine neue Modellwahl oder Ziellauffreigabe).
+Stand: 2026-11-07 (antipodale Paargeometrie mit vollstaendigen normalen/ebenen Moden und bedingtem Abklingkriterium praezisiert; keine neue Modellwahl oder Ziellauffreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -214,7 +214,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Kreuzkopplung aendert dagegen bereits die Einzelgleichung. Fuer einen
    phasenversetzten Polygonansatz liegen Existenzgleichung und ein
    hinreichendes Normal-Instabilitaetskriterium vor; kein Orbit gefunden
-   und keine Stabilitaet nachgewiesen. 30 konstruierte Kontrollen bestehen.
+   und keine Stabilitaet nachgewiesen. Die antipodale Paar-Spezialisierung
+   trennt nun normale und ebene gemeinsame/relative History-Bloecke.
+   Ein hinreichendes Abklingkriterium gilt nur fuer den gemeinsamen
+   Normalblock; seine Erfuellung an einem Orbit und die anderen Bloecke
+   bleiben offen. Der rein repulsive Kernbereich kann die radiale
+   Kreisbalance nicht erfuellen. Insgesamt 45 konstruierte Kontrollen
+   bestehen. Die nahe Walking-Droplet-Literatur zeigt klassische
+   kollektive Orbits mit zusaetzlichen physikalischen Inputs, keinen
+   Transfer auf unsere freie 3D-Normalstabilitaet.
    **Naechste Richtungsentscheidung:** vorhandene additive Paarregel
    mit effektiver Einzel-Gain-Kontrolle weiter analytisch untersuchen
    (Empfehlung) oder ein festes gemeinsames Lesebudget als neue Hypothese

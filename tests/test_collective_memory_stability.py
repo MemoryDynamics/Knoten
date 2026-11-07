@@ -14,6 +14,10 @@ from emergenz_knoten.kernels import (
     exponential_memory_weights,
 )
 from emergenz_knoten.reciprocal_nodes import reciprocal_pair_response
+from emergenz_knoten.rotating_wave import (
+    double_gaussian_force_crossing_radius,
+    double_gaussian_gradient_factor,
+)
 from emergenz_knoten.state import memory_centroid, place_finite_memory_state
 
 
@@ -315,3 +319,200 @@ def test_nonnegative_slope_does_not_certify_normal_stability():
     assert 1 + np.arange(1, 3) @ coefficients > 0
     roots = np.linalg.eigvals(_normal_companion(coefficients))
     np.testing.assert_allclose(np.sort(np.abs(roots)), [1, np.sqrt(2), np.sqrt(2)])
+
+
+def _antipodal_coefficients(radius, angle, self_gain, cross_gain):
+    phase = np.arange(len(WEIGHTS)) * angle
+    own_distance = np.sqrt(2 * radius**2 * (1 - np.cos(phase)))
+    other_distance = np.sqrt(2 * radius**2 * (1 + np.cos(phase)))
+    own = self_gain * WEIGHTS * double_gaussian_gradient_factor(own_distance, **KERNEL)
+    other = (
+        cross_gain * WEIGHTS * double_gaussian_gradient_factor(other_distance, **KERNEL)
+    )
+    return own, other
+
+
+def _antipodal_residual(own, other, angle):
+    phase = np.arange(len(own)) * angle
+    radial = np.cos(angle) - 1 + own @ (1 - np.cos(phase)) + other @ (1 + np.cos(phase))
+    tangent = np.sin(angle) + (own - other) @ np.sin(phase)
+    return radial + 1j * tangent
+
+
+def _antipodal_normal_block(own, other, sign):
+    horizon = len(own)
+    result = np.zeros((horizon, horizon))
+    result[0] = own + sign * other
+    result[0, 0] += 1 - sum(own + other)
+    result[1:, :-1] = np.eye(horizon - 1)
+    return result
+
+
+@pytest.mark.parametrize("radius,angle", [(0.7, 0.3), (1.2, 1.1), (0.25, 0.6)])
+def test_antipodal_split_balance_and_tilt_residual(radius, angle):
+    own, other = _antipodal_coefficients(radius, angle, 0.07, 0.04)
+    residual = _antipodal_residual(own, other, angle)
+    histories = _polygon(2, radius, angle)
+    moved = _step(histories, np.array([[0.07, 0.04], [0.04, 0.07]]))[0, 0]
+    np.testing.assert_allclose(
+        moved[0] + 1j * moved[1] - radius * np.exp(1j * angle),
+        -radius * residual,
+        atol=4e-16,
+    )
+    vector = np.exp(-1j * angle * np.arange(4))
+    defect = (
+        _antipodal_normal_block(own, other, -1) @ vector - np.exp(1j * angle) * vector
+    )
+    np.testing.assert_allclose(defect, [-residual, 0, 0, 0], atol=4e-16)
+
+
+@pytest.mark.parametrize("self_gain,cross_gain", [(0.07, 0.04), (0.1, 0.1)])
+def test_antipodal_sum_and_difference_normal_blocks(self_gain, cross_gain):
+    histories = _polygon(2)
+    coupling = np.array([[self_gain, cross_gain], [cross_gain, self_gain]])
+    full = _jacobian(histories, coupling)
+    indices = np.arange(histories.size).reshape(histories.shape)[:, :, 2].ravel()
+    normal = full[np.ix_(indices, indices)]
+    own, other = _antipodal_coefficients(0.7, 0.3, self_gain, cross_gain)
+    for sign in (-1, 1):
+        embedding = np.kron(np.array([[1], [sign]]), np.eye(4))
+        np.testing.assert_allclose(
+            normal @ embedding,
+            embedding @ _antipodal_normal_block(own, other, sign),
+            atol=3e-16,
+        )
+    np.testing.assert_allclose(
+        _antipodal_normal_block(own, other, 1), _normal_companion((own + other)[1:])
+    )
+
+
+def _antipodal_planar_block(histories, self_gain, cross_gain, angle, sign):
+    horizon = histories.shape[1]
+    own = np.stack(
+        [
+            self_gain
+            * double_gaussian_hessian(
+                histories[0, 0, :2],
+                histories[0, age : age + 1, :2],
+                WEIGHTS[age : age + 1],
+                **KERNEL,
+            )
+            for age in range(horizon)
+        ]
+    )
+    other = np.stack(
+        [
+            cross_gain
+            * double_gaussian_hessian(
+                histories[0, 0, :2],
+                histories[1, age : age + 1, :2],
+                WEIGHTS[age : age + 1],
+                **KERNEL,
+            )
+            for age in range(horizon)
+        ]
+    )
+    rotation = np.array(
+        [[np.cos(angle), np.sin(angle)], [-np.sin(angle), np.cos(angle)]]
+    )
+    result = np.zeros((2 * horizon, 2 * horizon))
+    result[:2, :2] = rotation @ (np.eye(2) - np.sum(own + other, axis=0))
+    for age in range(horizon):
+        result[:2, 2 * age : 2 * age + 2] += rotation @ (own[age] + sign * other[age])
+        if age > 0:
+            result[2 * age : 2 * age + 2, 2 * age - 2 : 2 * age] = rotation
+    return result
+
+
+@pytest.mark.parametrize("self_gain,cross_gain", [(0.07, 0.04), (0.1, 0.1)])
+def test_antipodal_planar_blocks_rotate_the_entire_history(self_gain, cross_gain):
+    angle = 0.3
+    histories = _polygon(2, angle=angle)
+    coupling = np.array([[self_gain, cross_gain], [cross_gain, self_gain]])
+    indices = np.arange(histories.size).reshape(histories.shape)[:, :, :2].ravel()
+    full = _jacobian(histories, coupling)[np.ix_(indices, indices)]
+    rotation = np.array(
+        [[np.cos(angle), np.sin(angle)], [-np.sin(angle), np.cos(angle)]]
+    )
+    corotating = np.kron(np.eye(8), rotation) @ full
+    for sign in (-1, 1):
+        embedding = np.kron(np.array([[1], [sign]]), np.eye(8))
+        block = _antipodal_planar_block(histories, self_gain, cross_gain, angle, sign)
+        np.testing.assert_allclose(
+            corotating @ embedding, embedding @ block, atol=3e-16
+        )
+        np.testing.assert_allclose(block[2:4, :2], rotation)
+        assert not np.allclose(block[2:4, :2], np.eye(2))
+    translations = np.tile(np.eye(2), (4, 1))
+    common = _antipodal_planar_block(histories, self_gain, cross_gain, angle, 1)
+    np.testing.assert_allclose(
+        common @ translations, translations @ rotation, atol=4e-16
+    )
+    quarter_turn = np.array([[0, -1], [1, 0]])
+    phase_vector = (histories[0, :, :2] @ quarter_turn.T).ravel()
+    relative = _antipodal_planar_block(histories, self_gain, cross_gain, angle, -1)
+    moved = _step(histories, coupling)[0, 0, :2]
+    defect = np.zeros(8)
+    defect[:2] = quarter_turn @ (rotation @ moved - histories[0, 0, :2])
+    np.testing.assert_allclose(
+        relative @ phase_vector - phase_vector, defect, atol=4e-16
+    )
+
+
+def test_attractive_cross_memory_increases_slope_only_at_fixed_geometry():
+    own, other = _antipodal_coefficients(1.2, 0.1, 0.07, 0.04)
+    ages = np.arange(4)
+    assert np.all(other > 0)
+    assert 1 + ages @ (own + other) > 1 + ages @ own
+    assert abs(_antipodal_residual(own, other, 0.1)) > 0.01
+    assert (
+        abs(
+            _antipodal_residual(own, other, 0.1)
+            - _antipodal_residual(own, np.zeros(4), 0.1)
+        )
+        > 1e-3
+    )
+
+
+@pytest.mark.parametrize("coefficients", [[0, 0], [0.2, 0.15, 0.1], [0.1, 0, 0.05]])
+def test_convex_common_feedback_has_only_one_unit_multiplier(coefficients):
+    assert min(coefficients) >= 0 and sum(coefficients) < 1
+    matrix = _normal_companion(coefficients)
+    np.testing.assert_allclose(matrix.sum(axis=1), 1)
+    roots = np.linalg.eigvals(matrix)
+    translation = np.argmin(np.abs(roots - 1))
+    np.testing.assert_allclose(roots[translation], 1, atol=2e-15)
+    assert np.max(np.abs(np.delete(roots, translation))) < 1
+
+
+def test_convex_boundary_can_retain_additional_undamped_modes():
+    roots = np.linalg.eigvals(_normal_companion([0, 1]))
+    np.testing.assert_allclose(np.abs(roots), 1)
+
+
+@pytest.mark.parametrize("angle", [0.2, 1.1])
+def test_orbit_inside_repulsive_kernel_core_fails_radial_balance(angle):
+    crossing = double_gaussian_force_crossing_radius(**KERNEL)
+    radius = 0.45 * crossing
+    own, other = _antipodal_coefficients(radius, angle, 0.07, 0.04)
+    assert np.max(own) < 0 and np.max(other) < 0
+    residual = _antipodal_residual(own, other, angle)
+    assert residual.real < np.cos(angle) - 1 < 0
+    moved = _step(_polygon(2, radius, angle), np.array([[0.07, 0.04], [0.04, 0.07]]))
+    assert np.linalg.norm(moved[0, 0]) > radius
+
+
+def test_two_age_quarter_turn_coefficient_fixture_is_normal_unstable():
+    # This is prescribed coefficient algebra, not a fitted Gaussian orbit.
+    own, other = np.array([0.0, -2.0]), np.array([2.0, -1.0])
+    assert own[1] - other[1] == -1
+    assert own[1] + other[1] + 2 * other[0] == 1
+    np.testing.assert_allclose(
+        _antipodal_residual(own, other, np.pi / 2),
+        0,
+        atol=8 * np.finfo(float).eps,
+    )
+    relative = np.linalg.eigvals(_antipodal_normal_block(own, other, -1))
+    np.testing.assert_allclose(np.sort(np.abs(relative)), [1, 1])
+    common = np.linalg.eigvals(_antipodal_normal_block(own, other, 1))
+    np.testing.assert_allclose(np.sort(common), [1, 3])
