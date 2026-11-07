@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-06 (mitlaufende lineare Memory auf geschlossenen Quantenanschluss geprueft; Doppel-Praeparation und freie Ausbreitung begrenzen diese direkte Route; kein neuer Ziellauf).
+Stand: 2026-11-07 (kollektive Stabilisierung auf gemeinsame und relative History-Moden eingegrenzt; phasenversetzter Ansatz analytisch vorbereitet, aber kein kollektiver Orbit nachgewiesen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,20 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
+liefert einen exakten bedingten Befund: Deckungsgleiche identische
+Historien bei gleicher Zeilensumme behalten die Einzelgleichung samt
+gemeinsamer Instabilitaet. Additive Kreuzkopplung veraendert bereits
+deren Gesamtstaerke. Phasenversetzte Historien veraendern hingegen die
+Kruemmungsgewichte; fuer einen Polygonansatz sind Existenzgleichung,
+voller Normalblock und hinreichender Instabilitaetstest hergeleitet.
+30 kleine Kontrollen bestehen, einschliesslich nativer Paarregel fuer
+einen konstruierten Schritt und nichtsynchronem Jacobian-Abgleich.
+Keine neue Zielsimulation, keine Stabilitaets-, Teilchen- oder QFT-
+Herleitung. Der Literaturvergleich zeigt klassische verzoegerungsbedingte
+Stabilisierung, nicht ihre Ableitung aus diesem FIFO. Modell-/
+Normierungsentscheidung ist beim Autor angefragt, nicht vorweggenommen.
 
 Der [mitlaufende lineare Memory-Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)
 liefert einen exakten Kontrast: Gleiche Gauss-Ortsdichte und gleicher

@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-06 (Quantenanschluss des Wasserstoffziels explizit abgeglichen; kollektive Coulomb-Antwort allein reicht nicht; Grenzfall-/Erweiterungsentscheidung weiterhin offen).
+Stand: 2026-11-07 (kollektive Stabilisierung analytisch praezisiert: gemeinsame Mode, Gesamtstaerke und phasenversetzte Historien trennen; keine neue Modellwahl oder Ziellauffreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -208,6 +208,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    geschlossenen Zustands-/Praeparationsvertrag; eine anfangs passende
    Bedingung genuegt nicht. Nichtlineare oder kollektive Alternativen
    bleiben offen, werden aber nicht durch eine neue Regel vorweggenommen.
+   Auf Autorenanregung ist der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
+   nun konkretisiert: Deckungsgleiche Historien mit gleicher Gesamtstaerke
+   erben die instabile gemeinsame Einzelmode. Zusaetzliche unnormierte
+   Kreuzkopplung aendert dagegen bereits die Einzelgleichung. Fuer einen
+   phasenversetzten Polygonansatz liegen Existenzgleichung und ein
+   hinreichendes Normal-Instabilitaetskriterium vor; kein Orbit gefunden
+   und keine Stabilitaet nachgewiesen. 30 konstruierte Kontrollen bestehen.
+   **Naechste Richtungsentscheidung:** vorhandene additive Paarregel
+   mit effektiver Einzel-Gain-Kontrolle weiter analytisch untersuchen
+   (Empfehlung) oder ein festes gemeinsames Lesebudget als neue Hypothese
+   festlegen. Die Autorenfrage ist gestellt; noch kein N-Runner, Gain-
+   Scan oder neuer Ziellauf. Vor einem Vergleich N=1,2,3,4 zuerst
+   Kandidatenexistenz, Kopplungsnormierung und volle Rueckwirkung
+   schliessen. Drei Labels, laengere Lebensdauer oder klassische
+   Synchronisation liefern fuer sich weder Quarks noch QFT.
    Eine laengere Lebensdauer allein ersetzt weder exakte Ladung noch
    ihren Wechselwirkungsanschluss.
    Keine Gauss-Nebenbedingung, Inverse-Laplace-Wirkung oder neue

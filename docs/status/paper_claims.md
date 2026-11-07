@@ -1,9 +1,22 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-06 (mitlaufende lineare Memory liefert keinen automatischen reinen Quantenabschluss; freie Ausbreitung im stabilen Vergleich bleibt diffusiv; Paper-I-Baseline unveraendert).
+Stand: 2026-11-07 (kollektive History-Moden und Polygon-Existenzbedingungen analytisch getrennt; keine kollektive Stabilitaet oder QFT-Emergenz belegt; Paper-I-Baseline unveraendert).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
+beweist eine gemeinsame Instabilitaetsuebertragung nur fuer identische
+deckungsgleiche Historien mit gleicher gesamter Lesestaerke. Der
+N-Ausdruck ist eine deklarierte algebraische Verallgemeinerung des
+vorhandenen Paars, kein neuer implementierter Vielknotennachweis.
+Phasenversetzte Polygone sind Ansaetze mit noch offener Existenz- und
+Stabilitaetspruefung. Ihr negatives Steigungskriterium waere hinreichend
+fuer Instabilitaet; ein nichtnegativer Wert ersetzt keinen vollen Modentest.
+Die archivierte H=1200-Instabilitaet erzwingt weder weitere Knoten noch
+ein quantisiertes Feld. Klassischer Schwingungsstillstand aus der gelesenen
+Referenz ist kein Knoten-, Spin-, Quark- oder Quantenfeldresultat.
+Keine neue Modellregel oder Zielsimulation; keine Aenderung an Paper I.
 
 Der [lineare Memory-Quantenvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/linear_memory_quantum_closure_2026-11-06.md)
 gilt fuer seinen expliziten kontinuierlichen Zweizustandsprozess,
