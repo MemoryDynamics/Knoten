@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-07 (antipodales Paar analytisch bis zu normalen und ebenen History-Bloecken aufgeloest; bedingtes Abklingkriterium, aber kein stabiler kollektiver Orbit nachgewiesen).
+Stand: 2026-11-08 (Positivitaetsvoraussetzung des einfachen Paar-Abklingkriteriums im definierten Ankerbereich ausgeschlossen; keine neue Instabilitaets- oder Stabilitaetsbehauptung fuer Paarorbits).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -18,10 +18,16 @@ Kruemmungsgewichte; fuer einen Polygonansatz sind Existenzgleichung,
 voller Normalblock und hinreichender Instabilitaetstest hergeleitet.
 Die antipodale Spezialisierung trennt zusaetzlich Summen-/Differenzantwort
 und vollstaendige mitrotierende ebene Bloecke. Ein hinreichendes
-Abklingkriterium fuer den gemeinsamen Normalblock ist bewiesen; es ist
-nicht als an einem nativen Orbit erfuellt nachgewiesen. Rein repulsive
+Abklingkriterium fuer den gemeinsamen Normalblock ist bewiesen.
+Die anschliessende Kompatibilitaetspruefung zeigt jedoch: Beim identischen
+Ankerkernel, $r\theta<6/13$ und hinreichender Historie bis zur naechsten
+Halbwendung ist mindestens ein gemeinsamer Koeffizient negativ, fuer
+jedes nichtnegative nichttriviale Selbst-/Kreuz-Gain-Paar. Die gespeicherte
+Geometrie wurde nur anhand ihrer Parameter zugeordnet. Der einfache
+Positivitaetssatz hilft dort nicht; ein signiertes stabiles Gegenpolynom
+verhindert den Fehlschluss auf allgemeine Paarinstabilitaet. Rein repulsive
 Chordbereiche scheitern bereits an der radialen Existenzgleichung.
-45 kleine Kontrollen bestehen, einschliesslich nativer Paarregel fuer
+54 kleine Kontrollen bestehen, einschliesslich nativer Paarregel fuer
 einen konstruierten Schritt, nichtsynchronem Jacobian-Abgleich und
 korrekt mitrotierender kompletter Historie.
 Keine neue Zielsimulation, keine Stabilitaets-, Teilchen- oder QFT-

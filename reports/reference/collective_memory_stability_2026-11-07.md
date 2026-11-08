@@ -1,6 +1,6 @@
 # Kollektive Stabilisierung: gemeinsame Mode und phasenversetzte Historien
 
-Stand: 2026-11-07. Analytischer Anschluss an die Autorenhypothese eines
+Stand: 2026-11-08, begonnen am 2026-11-07. Analytischer Anschluss an die Autorenhypothese eines
 gemeinsam stabilisierten Knotens bzw. eines Dreier-FIFO. **Keine neue
 Zielsimulation, Parametersuche, Modellfreigabe oder Quantenherleitung.**
 Bestandsbasis: `e82b71c782b4b9494a636461369c5bec0061b4fe`.
@@ -36,6 +36,11 @@ normalen und ebenen Stoerungen, gibt ein hinreichendes Stabilitaetskriterium
 fuer **nur einen** Block und eine notwendige geometrische Bedingung an.
 Abschnitt 8 ordnet die naheliegende Troepfchen-Referenz ein. Auch damit
 liegt noch kein stabiler nativer Paarorbit vor.
+**Gegenpruefung vom 2026-11-08:** Abschnitt 9 zeigt, dass die einfache
+Positivitaetsvoraussetzung des Abklingkriteriums beim dokumentierten
+Ankerkernel in einem ganzen Bereich um die archivierte Geometrie
+unerreichbar ist, fuer jedes nichtnegative Selbst-/Kreuz-Gain-Verhaeltnis.
+Das schliesst diesen Nachweisweg dort aus, nicht stabile Paarorbits.
 
 ## 1. Was im Code steht und was nur bedingt verallgemeinert wird
 
@@ -362,6 +367,8 @@ sind kontrahierend. Das beweist den Satz auch bei verschwindenden
 Einzelgewichten. Bei $C=1$ koennen weitere ungedaempfte Moden auftreten.
 Die Bedingungen sind hinreichend, nicht notwendig; ihre Erfuellung an
 einem tatsaechlichen nativen Paarorbit wurde hier nicht gezeigt.
+Die spaetere Kompatibilitaetspruefung in Abschnitt 9 schliesst ihre
+Erfuellbarkeit im dort benannten Ankerbereich sogar aus.
 
 Die beiden Neigungen der Kreisebene liegen beim antipodalen Paar im
 **relativen** Normalblock. Mit $v_\ell=e^{-i\ell\theta}$ und dessen
@@ -490,3 +497,120 @@ feldabhaengigen Gain in unserem Modell. Beides waeren zu entscheidende
 Erweiterungen. Kollektive Bindung ist ein bekannter klassischer Effekt;
 unser Ziel verlangt zusaetzlich einen eigenstaendigen Nachweis von
 Quantendynamik, Ladung, Spin und dem Gravitationsanschluss.
+
+## 9. Gegenpruefung: Positivitaetskriterium im Ankerbereich ausgeschlossen
+
+Ergaenzung vom 2026-11-08 auf Grundlage von `ceb9d6a`. Keine neue
+Zielrechnung oder Modellwahl. Geprueft wird die **Anwendbarkeit** des
+hinreichenden Kriteriums, nicht erneut dessen mathematische Gueltigkeit.
+
+### Zwei positive Altersgewichte genuegen zum Ausschluss
+
+Fuer denselben effektiven Zweigausskernel auf beiden Ports schreibe
+
+$$
+k(u)=-P e^{-u/(2\sigma_r^2)}+Q e^{-u/(2\sigma_a^2)},\qquad
+P=A_r/\sigma_r^2,\quad Q=A_a/\sigma_a^2,\quad P>2Q>0.
+$$
+
+Es gilt global fuer $u\geq0$
+
+$$
+k(0)+k(u)\leq-P+2Q,\qquad
+|k'(u)|\leq L:=P/(2\sigma_r^2)+Q/(2\sigma_a^2).
+$$
+
+Definiere den gemeinsamen Koeffizienten ohne sein positives Altersgewicht:
+
+$$
+f(\varphi)=\eta k(2r^2(1-\cos\varphi))
+             +\chi k(2r^2(1+\cos\varphi)),\qquad
+c_\ell=w_\ell f(\ell\theta).
+$$
+
+Es seien $\eta,\chi\geq0$, $\eta+\chi>0$, $r>0$, $0<\theta<\pi$ und
+$m=\lceil\pi/\theta\rceil\leq H-1$. Die Altersplaetze 1 und $m$ seien
+mit strikt positiven Gewichten besetzt, wie bei geometrischer Memory
+mit $0<\alpha<1$. Mit $\delta=m\theta-\pi\in[0,\theta)$ folgt aus
+$2(1-\cos t)\leq t^2$ und der Lipschitzschranke fuer $k$:
+
+$$
+f(\theta)+f(m\theta)
+\leq(\eta+\chi)[-(P-2Q)+Lr^2(\theta^2+\delta^2)]
+\leq(\eta+\chi)[-(P-2Q)+2Lr^2\theta^2].
+$$
+
+Die Ausgangssumme ist $f(0)+f(\pi)=(\eta+\chi)[k(0)+k(4r^2)]$;
+beide Argumentverschiebungen aendern die quadrierten Chordlaengen um
+hoechstens $r^2\theta^2$ bzw. $r^2\delta^2$. Damit ist bewiesen:
+
+$$
+r\theta<\sqrt{\frac{P-2Q}{2L}},\quad
+H-1\geq\lceil\pi/\theta\rceil
+\quad\Longrightarrow\quad
+c_1<0\ \text{oder}\ c_m<0.
+$$
+
+Mindestens eine Positivitaetsvoraussetzung des gemeinsamen Abklingsatzes
+scheitert also. Wichtig: Wir verwenden **nicht** den Altersnullterm,
+der aus diesem Normalblock herausfaellt. Der Befund ist unabhaengig
+vom positiven Gain-Verhaeltnis und von der Groesse der beiden positiven
+Altersgewichte. Eine Vorzeichenpruefung nur bei einer Querphase oder
+kurzer sichtbarer Teilhistorie kann ihn uebersehen.
+
+### Anwendung auf die dokumentierten Parameter, ohne neue Koeffizienten
+
+Die gelesene
+[Ankerspezifikation](../dynamics/rotation/scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json)
+setzt $\sigma_r=1$, $\sigma_a=3$, $A_r=1$, $A_a=7/2$ und Delta-Deposition.
+Es sind daher exakt
+
+$$
+P=1,\quad Q=7/18,\quad P-2Q=2/9,\quad L=169/324,\qquad
+\sqrt{(P-2Q)/(2L)}=6/13.
+$$
+
+Die in der Spezifikation gespeicherten Dezimalzahlen erfuellen
+$0<r<1$, $1/100<\theta<1/50$ und $H\geq400$.
+Dieser **ganze offene Geometriebereich** erfuellt die Schranken:
+$r\theta<1/50<6/13$ und
+$m\leq\lceil100\pi\rceil\leq315<H$.
+Die Lesepruefung verwendet exakte Brueche aus den JSON-Dezimalzahlen,
+nicht neu erzeugte H=1200-Koeffizienten, Root-Suche oder Trajektorien.
+Sie zertifiziert keinen neuen Paarorbit aus dem alten Einzelkreis.
+
+Die Aussage gilt fuer identische Ports und positive gemeinsame
+Altersgewichte. Andere Kernel, verschiedene Gewichte, negative Gains,
+zu kurze Historien oder Geometrien ausserhalb der Schranke sind damit
+nicht beurteilt. Innerhalb des Bereichs hilft dem **Positivitaetskriterium**
+weder eine additive Gain-Erhoehung noch eine Umverteilung bei fester
+Gesamtstaerke. Aendert eine echte Bahn dabei Radius oder Winkel so weit,
+dass sie den Bereich verlaesst, greift dieser Ausschluss nicht mehr.
+
+### Warum das kein Instabilitaetsbeweis ist
+
+Die Koeffizienten $c_1=-1/5$, $c_2=1/5$ liefern beispielsweise
+
+$$
+p(\mu)=(\mu-1)(\mu^2+1/5).
+$$
+
+Trotz negativem $c_1$ liegen alle Moden ausser der einfachen Translation
+streng innerhalb des Einheitskreises. Dieses vorgeschriebene Polynom
+ist eine algebraische Gegenkontrolle, kein nachgewiesener Gaussorbit.
+Deshalb bleibt die volle Pruefung signierter gemeinsamer und relativer
+Normalbloecke sowie der ebenen Bloecke erforderlich.
+
+Die neun ergaenzten Kontrollen pruefen die rationalen Konstanten, sechs
+vorab festgelegte kleine Zweiphasenbeispiele, die reine Parameter-
+Zuordnung des Archivs und dieses Gegenbeispiel. Die frueheren
+Konstruktionstests verwendeten bewusst auch andere Kernelparameter;
+ihre bestandenen Identitaeten waren kein Nachweis fuer die Ankergeometrie.
+Es wurde keine Suche nach einem guenstigen Gain oder Radius ausgefuehrt.
+
+Verifikation der Gegenpruefung am 2026-11-08: 114 betroffene Tests
+bestanden in 5.81 s, darunter alle 54 Kontrollen dieser Testdatei.
+Vollstaendige konfigurierte Ruff-Pruefung und strikter MkDocs-Build
+bestanden ebenfalls. Der analytische Ausschluss gilt fuer den oben
+angegebenen ganzen Bereich; die sechs Punktkontrollen ersetzen seinen
+Beweis nicht. Keine neue Literaturbehauptung oder Zielrechnung.

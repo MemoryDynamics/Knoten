@@ -1,6 +1,6 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-07 (kollektive History-Moden und Polygon-Existenzbedingungen analytisch getrennt; keine kollektive Stabilitaet oder QFT-Emergenz belegt; Paper-I-Baseline unveraendert).
+Stand: 2026-11-08 (Positivitaetszertifikat im benannten Ankerbereich unerreichbar, aber kein allgemeiner Paar-No-go; weiterhin keine kollektive Stabilitaet oder QFT-Emergenz belegt).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
@@ -16,6 +16,13 @@ fuer Instabilitaet; ein nichtnegativer Wert ersetzt keinen vollen Modentest.
 Die antipodale Paaranalyse ergaenzt einen hinreichenden Abklingsatz nur
 fuer den gemeinsamen Normalblock sowie die uebrigen Blockformeln;
 kein bekannter nativer Orbit besteht damit schon die Gesamtpruefung.
+Die Gegenpruefung vom 2026-11-08 schliesst die Positivitaetsvoraussetzung
+dieses Satzes fuer den identischen Ankerkernel im Bereich
+$r\theta<6/13$, $H-1\geq\lceil\pi/\theta\rceil$ mit positiven
+Altersgewichten aus. Dies ist kein Instabilitaetsbeweis: Signierte
+Koeffizienten koennen ein stabiles Spektrum besitzen. Die Archivzuordnung
+liest ausschliesslich gespeicherte Parameter; kein neuer Paarroot,
+Koeffizientensatz oder Bahnlauf und keine neue Modellregel.
 Eine vorhandene attraktive Kreuzantwort bei festgehaltener Geometrie
 ist keine Stabilisierung eines tatsaechlichen Orbits. Orbitierende
 Troepfchenpaare aus der Referenz haben andere Dynamik und aeusseren

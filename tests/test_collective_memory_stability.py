@@ -4,6 +4,11 @@ N>2 is a declared algebraic extension of the existing pair, not a new solver
 or an adopted physical rule. No root search or archived target is executed.
 """
 
+from fractions import Fraction
+import json
+from math import ceil
+from pathlib import Path
+
 import numpy as np
 import pytest
 
@@ -516,3 +521,74 @@ def test_two_age_quarter_turn_coefficient_fixture_is_normal_unstable():
     np.testing.assert_allclose(np.sort(np.abs(relative)), [1, 1])
     common = np.linalg.eigvals(_antipodal_normal_block(own, other, 1))
     np.testing.assert_allclose(np.sort(common), [1, 3])
+
+
+def test_native_kernel_exclusion_constants_are_exact_rationals():
+    repulsive, attractive = Fraction(1), Fraction(7, 18)
+    derivative_bound = repulsive / 2 + attractive / 18
+    gap = repulsive - 2 * attractive
+    assert derivative_bound == Fraction(169, 324)
+    assert gap == Fraction(2, 9)
+    assert gap / (2 * derivative_bound) == Fraction(6, 13) ** 2
+    assert -gap + 2 * derivative_bound * Fraction(1, 50) ** 2 < 0
+
+
+@pytest.mark.parametrize("radius,angle", [(1.0, 0.4), (2.0, 0.2)])
+@pytest.mark.parametrize("self_gain,cross_gain", [(0.07, 0.04), (0.0, 0.1), (0.1, 0.0)])
+def test_two_constructed_phases_exclude_nonnegative_common_coefficients(
+    radius, angle, self_gain, cross_gain
+):
+    # Two scalar readouts only, with no orbit solver or generated history.
+    kernel = dict(sigma_rep=1.0, sigma_att=3.0, amplitude_rep=1.0, amplitude_att=3.5)
+    opposite_age = ceil(np.pi / angle)
+    phase = np.array([angle, opposite_age * angle])
+    assert 0 <= phase[1] - np.pi < angle
+    assert opposite_age >= 2 and radius * angle < 6 / 13
+    own_distance = np.sqrt(2 * radius**2 * (1 - np.cos(phase)))
+    other_distance = np.sqrt(2 * radius**2 * (1 + np.cos(phase)))
+    coefficient_over_weight = self_gain * double_gaussian_gradient_factor(
+        own_distance, **kernel
+    ) + cross_gain * double_gaussian_gradient_factor(other_distance, **kernel)
+    bound = (self_gain + cross_gain) * (-2 / 9 + 169 / 162 * (radius * angle) ** 2)
+    assert coefficient_over_weight.sum() <= bound + 5e-16
+    assert bound < 0 and coefficient_over_weight.min() < 0
+
+
+def test_archived_geometry_is_in_exclusion_box_without_target_evaluation(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("this test reads declared parameters only")
+
+    for name in ("double_gaussian_gradient_factor", "_antipodal_coefficients", "_step"):
+        monkeypatch.setitem(globals(), name, forbidden)
+    path = Path(__file__).resolve().parents[1] / (
+        "reports/dynamics/rotation/"
+        "scalar_memory_rotating_wave_initial_state_spec_2026-08-20.json"
+    )
+    archive = json.loads(path.read_text(encoding="utf-8"), parse_float=Fraction)
+    parameters = archive["parameters"]
+    assert parameters["sigma_rep"] == parameters["amplitude_rep"] == 1
+    assert parameters["sigma_att"] == 3
+    assert parameters["amplitude_att"] == Fraction(7, 2)
+    assert parameters["deposition_kernel"] == "delta"
+    assert parameters["deposition_sigma"] == 0
+    radius = archive["rotating_wave"]["radius"]
+    angle = archive["rotating_wave"]["theta_per_update"]
+    assert 0 < radius < 1
+    assert Fraction(1, 100) < angle < Fraction(1, 50)
+    assert parameters["horizon"] >= 400
+    assert radius * angle < Fraction(6, 13)
+    assert ceil(Fraction(22, 7) / Fraction(1, 100)) < parameters["horizon"]
+
+
+def test_signed_common_coefficients_can_still_be_spectrally_stable():
+    coefficients = [-0.2, 0.2]
+    assert min(coefficients) < 0
+    matrix = _normal_companion(coefficients)
+    np.testing.assert_allclose(
+        np.poly(matrix), np.polymul([1, -1], [1, 0, 0.2]), atol=2e-15
+    )
+    np.testing.assert_allclose(
+        np.sort(np.abs(np.linalg.eigvals(matrix))),
+        [np.sqrt(0.2), np.sqrt(0.2), 1],
+        atol=2e-15,
+    )

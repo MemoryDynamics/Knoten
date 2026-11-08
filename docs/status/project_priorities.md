@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-07 (antipodale Paargeometrie mit vollstaendigen normalen/ebenen Moden und bedingtem Abklingkriterium praezisiert; keine neue Modellwahl oder Ziellauffreigabe).
+Stand: 2026-11-08 (einfache Positivitaetsroute im definierten Ankerbereich ausgeschlossen; volle signierte Paarmoden bleiben erforderlich; keine neue Modellwahl oder Ziellauffreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -217,9 +217,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    und keine Stabilitaet nachgewiesen. Die antipodale Paar-Spezialisierung
    trennt nun normale und ebene gemeinsame/relative History-Bloecke.
    Ein hinreichendes Abklingkriterium gilt nur fuer den gemeinsamen
-   Normalblock; seine Erfuellung an einem Orbit und die anderen Bloecke
-   bleiben offen. Der rein repulsive Kernbereich kann die radiale
-   Kreisbalance nicht erfuellen. Insgesamt 45 konstruierte Kontrollen
+   Normalblock. Die Gegenpruefung vom 2026-11-08 schliesst dessen
+   Positivitaetsvoraussetzung beim identischen Ankerkernel fuer
+   $r\theta<6/13$ und eine mindestens bis zur naechsten Halbwendung
+   reichende Historie aus, unabhaengig vom nichtnegativen Gain-Verhaeltnis.
+   Die gespeicherte Ankergeometrie liegt in diesem Bereich; kein neuer
+   Paarorbit wurde daraus erzeugt. **Keine Suche nach positiven
+   Koeffizienten in diesem Bereich; der volle signierte Modentest
+   bleibt erforderlich.** Negative Koeffizienten allein beweisen keine
+   Instabilitaet. Der rein repulsive Kernbereich kann zudem die radiale
+   Kreisbalance nicht erfuellen. Insgesamt 54 kleine Kontrollen
    bestehen. Die nahe Walking-Droplet-Literatur zeigt klassische
    kollektive Orbits mit zusaetzlichen physikalischen Inputs, keinen
    Transfer auf unsere freie 3D-Normalstabilitaet.
