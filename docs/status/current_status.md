@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-08 (Positivitaetsvoraussetzung des einfachen Paar-Abklingkriteriums im definierten Ankerbereich ausgeschlossen; keine neue Instabilitaets- oder Stabilitaetsbehauptung fuer Paarorbits).
+Stand: 2026-11-08 (Paar-Existenz-/Instabilitaetsauswerter an kleinem konstruiertem Orbit geprueft; kein neuer H1200-Ziellauf oder kollektiver Stabilitaetsnachweis).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [antipodale Methodenauswerter](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_method_2026-11-08.md)
+trennt jetzt feste Newton-Schritte, einen Krawczyk-Existenznachweis und
+den hinreichenden gemeinsamen Normal-Instabilitaetstest. Ein algebraisch
+konstruiertes natives H=2-Beispiel besteht die Existenzpruefung, ist aber
+normal instabil. 37 neue Methodenchecks bestehen, 166 im betroffenen
+Regressionspanel. Keine Stabilitaetsklassifikation, kein neuer Ankerlauf
+oder Gain-Scan. Parameterwahl und begrenzter Einmal-Runner bleiben offen;
+die Bibliothek allein ist keine Ausfuehrungsfreigabe.
 
 Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
 liefert einen exakten bedingten Befund: Deckungsgleiche identische

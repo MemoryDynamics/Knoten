@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-08 (einfache Positivitaetsroute im definierten Ankerbereich ausgeschlossen; volle signierte Paarmoden bleiben erforderlich; keine neue Modellwahl oder Ziellauffreigabe).
+Stand: 2026-11-08 (Paar-Existenzmethode implementiert und synthetisch geprueft; volle signierte Paarmoden bleiben erforderlich; keine neue Modellwahl oder Ziellauffreigabe).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -213,7 +213,7 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    erben die instabile gemeinsame Einzelmode. Zusaetzliche unnormierte
    Kreuzkopplung aendert dagegen bereits die Einzelgleichung. Fuer einen
    phasenversetzten Polygonansatz liegen Existenzgleichung und ein
-   hinreichendes Normal-Instabilitaetskriterium vor; kein Orbit gefunden
+   hinreichendes Normal-Instabilitaetskriterium vor; kein Zielorbit gefunden
    und keine Stabilitaet nachgewiesen. Die antipodale Paar-Spezialisierung
    trennt nun normale und ebene gemeinsame/relative History-Bloecke.
    Ein hinreichendes Abklingkriterium gilt nur fuer den gemeinsamen
@@ -230,6 +230,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    bestehen. Die nahe Walking-Droplet-Literatur zeigt klassische
    kollektive Orbits mit zusaetzlichen physikalischen Inputs, keinen
    Transfer auf unsere freie 3D-Normalstabilitaet.
+   Die [Paar-Existenzmethode](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_method_2026-11-08.md)
+   ist jetzt implementiert: feste Newton-Schritte, Krawczyk-Box und
+   bedingter Normal-Instabilitaetstest. Ein konstruierter H=2-Testorbit
+   besteht die Existenzpruefung, bleibt aber normal instabil. Keine
+   Ankerrechnung oder automatische Auswahl von Gains/Box/Startwert.
+   Nach Kopplungsentscheidung ein festes Existenzpanel und den begrenzten
+   Einmal-Runner pruefen, erst danach eine konkrete Zielfreigabe einholen.
    **Naechste Richtungsentscheidung:** vorhandene additive Paarregel
    mit effektiver Einzel-Gain-Kontrolle weiter analytisch untersuchen
    (Empfehlung) oder ein festes gemeinsames Lesebudget als neue Hypothese

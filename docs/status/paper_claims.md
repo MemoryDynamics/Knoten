@@ -1,17 +1,24 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-08 (Positivitaetszertifikat im benannten Ankerbereich unerreichbar, aber kein allgemeiner Paar-No-go; weiterhin keine kollektive Stabilitaet oder QFT-Emergenz belegt).
+Stand: 2026-11-08 (Paar-Existenzmethode an konstruiertem instabilem H=2-Orbit validiert; weiterhin keine kollektive Stabilitaet oder QFT-Emergenz belegt).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [neue Paar-Intervallmethode](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_method_2026-11-08.md)
+zertifiziert einen kleinen konstruierten H=2-Testorbit und dessen
+gemeinsame normale Instabilitaet. Das ist eine Methoden-Gegenprobe,
+kein physikalisch ausgewaehlter Knoten oder H1200-Befund. Der lokale
+Nullstellennachweis betrifft nur Radius und Winkel in einer festen Box;
+keine globale Eindeutigkeit, volle Stabilitaet oder neue Quantenaussage.
 
 Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
 beweist eine gemeinsame Instabilitaetsuebertragung nur fuer identische
 deckungsgleiche Historien mit gleicher gesamter Lesestaerke. Der
 N-Ausdruck ist eine deklarierte algebraische Verallgemeinerung des
 vorhandenen Paars, kein neuer implementierter Vielknotennachweis.
-Phasenversetzte Polygone sind Ansaetze mit noch offener Existenz- und
-Stabilitaetspruefung. Ihr negatives Steigungskriterium waere hinreichend
+Phasenversetzte Zielpolygone bleiben Ansaetze mit offener Existenz- und
+Stabilitaetspruefung. Ihr negatives Steigungskriterium ist hinreichend
 fuer Instabilitaet; ein nichtnegativer Wert ersetzt keinen vollen Modentest.
 Die antipodale Paaranalyse ergaenzt einen hinreichenden Abklingsatz nur
 fuer den gemeinsamen Normalblock sowie die uebrigen Blockformeln;

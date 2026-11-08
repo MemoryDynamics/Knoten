@@ -25,7 +25,7 @@ Hier wird eine konkrete Unterscheidung hergeleitet:
 - Phasenversetzte Historien aendern auch bei gleicher Gesamtstaerke die
   gemeinsame Rueckwirkung. Fuer einen regelmaessig versetzten Kreisansatz
   liegen unten eine exakte Existenzgleichung und ein hinreichender
-  Normal-Instabilitaetstest vor. **Noch kein solcher Orbit nachgewiesen.**
+  Normal-Instabilitaetstest vor. **Noch kein Zielorbit nachgewiesen.**
 
 Das sind Kriterien fuer die Auswahl eines Mechanismus, keine neuen
 Teilchenbefunde. Selbst eine bestandene mechanische Pruefung waere noch
@@ -41,6 +41,10 @@ Positivitaetsvoraussetzung des Abklingkriteriums beim dokumentierten
 Ankerkernel in einem ganzen Bereich um die archivierte Geometrie
 unerreichbar ist, fuer jedes nichtnegative Selbst-/Kreuz-Gain-Verhaeltnis.
 Das schliesst diesen Nachweisweg dort aus, nicht stabile Paarorbits.
+Der [anschliessende Methodentest](antipodal_pair_method_2026-11-08.md)
+zertifiziert nun einen algebraisch konstruierten kleinen nativen H=2-Orbit
+und zugleich dessen normale Instabilitaet. Er validiert Existenz- und
+Instabilitaetsauswertung, nicht einen stabilen Zielknoten.
 
 ## 1. Was im Code steht und was nur bedingt verallgemeinert wird
 
