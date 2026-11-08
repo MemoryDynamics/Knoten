@@ -11,6 +11,11 @@ gemeinsame normale Instabilitaet. Das ist eine Methoden-Gegenprobe,
 kein physikalisch ausgewaehlter Knoten oder H1200-Befund. Der lokale
 Nullstellennachweis betrifft nur Radius und Winkel in einer festen Box;
 keine globale Eindeutigkeit, volle Stabilitaet oder neue Quantenaussage.
+Der [folgende Einmal-Laufvorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_attempt_proposal_2026-11-08.md)
+ist nur vorbereitet und technisch klein getestet. Seine vorgeschlagenen
+gleichen additiven Gains erhoehen die Zeilensumme auf 0.30; sie sind
+kein schon akzeptierter physikalischer Parameter oder Stabilitaetsbefund.
+Kein neuer H1200-Root, kein Spektrum oder Ziellauf daraus berichtet.
 
 Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
 beweist eine gemeinsame Instabilitaetsuebertragung nur fuer identische

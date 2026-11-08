@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-08 (Paar-Existenzmethode implementiert und synthetisch geprueft; volle signierte Paarmoden bleiben erforderlich; keine neue Modellwahl oder Ziellauffreigabe).
+Stand: 2026-11-08 (fester additiver Paar-Existenzvorschlag mit getestetem Einmal-Runner vorbereitet; konkrete Autorenentscheidung und Zielfreigabe offen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -235,12 +235,17 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    bedingter Normal-Instabilitaetstest. Ein konstruierter H=2-Testorbit
    besteht die Existenzpruefung, bleibt aber normal instabil. Keine
    Ankerrechnung oder automatische Auswahl von Gains/Box/Startwert.
-   Nach Kopplungsentscheidung ein festes Existenzpanel und den begrenzten
-   Einmal-Runner pruefen, erst danach eine konkrete Zielfreigabe einholen.
-   **Naechste Richtungsentscheidung:** vorhandene additive Paarregel
-   mit effektiver Einzel-Gain-Kontrolle weiter analytisch untersuchen
-   (Empfehlung) oder ein festes gemeinsames Lesebudget als neue Hypothese
-   festlegen. Die Autorenfrage ist gestellt; noch kein N-Runner, Gain-
+   Der [konkrete erste Laufvorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_attempt_proposal_2026-11-08.md)
+   liegt nun samt 40 Runner-Kontrollen vor: bestehende additive Paarregel,
+   vorgeschlagen $\eta=\chi=0.15$, H=1200, ein alter Startwert, 80 dps,
+   hoechstens 12 Newton-Schritte, feste Box und 300-s-Einmal-Worker.
+   **Jetzt konkrete Autorenentscheidung/Freigabe einholen; keine
+   Zielausfuehrung zuvor.** Der Vorschlag macht die offene Normierungsfrage
+   explizit: Zeilensumme 0.30, keine versteckte Budgetnormierung.
+   Ein spaeterer positiver Stabilitaetsbefund benoetigt weiterhin einen
+   passenden Einzel-Gain-Gegenvergleich; dieser erste Existenztest fuehrt
+   ihn noch nicht aus. Eine andere Normierung verlangt Aenderung vor
+   Ausfuehrung, keinen automatischen Nachlauf. Noch kein N-Runner, Gain-
    Scan oder neuer Ziellauf. Vor einem Vergleich N=1,2,3,4 zuerst
    Kandidatenexistenz, Kopplungsnormierung und volle Rueckwirkung
    schliessen. Drei Labels, laengere Lebensdauer oder klassische

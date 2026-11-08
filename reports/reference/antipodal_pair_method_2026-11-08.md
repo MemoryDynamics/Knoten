@@ -157,6 +157,10 @@ ein festes Parameter-/Seed-/Box-/Iterationspanel und ein separat gepruefter
 Einmal-Runner mit harter Zeitgrenze, einem CPU-Thread, sauberem
 Code-Commit und ohne automatische Wiederholung erforderlich.
 Alte AL1-/FIFO-Freigaben werden nicht wiederverwendet.
+Der [anschliessende konkrete Laufvorschlag](antipodal_pair_attempt_proposal_2026-11-08.md)
+enthaelt jetzt ein festes additives Panel und den separat getesteten
+Einmal-Runner. Er bleibt ohne Autorenfreigabe; diese Methodenbibliothek
+selbst startet ihn nicht.
 
 Ein erhoehter additiver Gesamt-Gain darf spaeter nicht ohne passende
 Einzelreferenz als kollektiver Stabilisierungseffekt ausgegeben werden.

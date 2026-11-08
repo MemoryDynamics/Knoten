@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-08 (Paar-Existenz-/Instabilitaetsauswerter an kleinem konstruiertem Orbit geprueft; kein neuer H1200-Ziellauf oder kollektiver Stabilitaetsnachweis).
+Stand: 2026-11-08 (additiver Paar-Existenzvorschlag und Einmal-Runner vorbereitet, nur kleine Runner-Tests ausgefuehrt; H1200-Freigabe offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -15,8 +15,12 @@ den hinreichenden gemeinsamen Normal-Instabilitaetstest. Ein algebraisch
 konstruiertes natives H=2-Beispiel besteht die Existenzpruefung, ist aber
 normal instabil. 37 neue Methodenchecks bestehen, 166 im betroffenen
 Regressionspanel. Keine Stabilitaetsklassifikation, kein neuer Ankerlauf
-oder Gain-Scan. Parameterwahl und begrenzter Einmal-Runner bleiben offen;
-die Bibliothek allein ist keine Ausfuehrungsfreigabe.
+oder Gain-Scan. Der [konkrete Vorschlag](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_attempt_proposal_2026-11-08.md)
+enthaelt jetzt einen separat getesteten Einmal-Runner und das explizit
+vorgeschlagene additive Gain-Paar 0.15/0.15. 40 neue Runner-Kontrollen
+bestehen, einschliesslich echtem kleinen H=2-Worker und gepruefter
+Zeitlimit-Prozessbeendigung. Die konkrete Autorenentscheidung und
+Freigabe stehen aus; kein H1200-Ziellauf oder neuer physikalischer Befund.
 
 Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
 liefert einen exakten bedingten Befund: Deckungsgleiche identische
