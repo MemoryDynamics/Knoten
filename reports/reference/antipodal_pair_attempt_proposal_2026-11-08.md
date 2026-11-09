@@ -1,5 +1,11 @@
 # Vorschlag: genau ein antipodaler Paar-Existenztest
 
+**Nachtrag 2026-11-09:** Nach der Autorenrueckfrage zur Teilchenzuordnung
+vorerst zurueckgestellt, weiterhin weder freigegeben noch ausgefuehrt.
+Der [datengebundene Benchmark](../../docs/reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
+hat Vorrang. Dieser Vorschlag bleibt als mechanischer Methodentest erhalten,
+ist aber kein Meson- oder Leptonpaarmodell und kein aktueller Startauftrag.
+
 Stand: 2026-11-08. **Vorschlag, nicht freigegeben und nicht ausgefuehrt.**
 Die frueheren FIFO-/AL1-Freigaben sind nicht anwendbar. Dieser konkrete
 Vorschlag verbindet die noch offene Kopplungsentscheidung mit einem

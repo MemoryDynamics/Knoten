@@ -1,9 +1,18 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-08 (Paar-Existenzmethode an konstruiertem instabilem H=2-Orbit validiert; weiterhin keine kollektive Stabilitaet oder QFT-Emergenz belegt).
+Stand: 2026-11-09 (datengebundene Kalibrierung ist von Vorhersagen getrennt; keine Teilchenidentifikation oder neue Zielsimulation).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [datengebundene Einstieg](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
+reduziert den geplanten Modellvergleich durch reale Referenzbedingungen,
+leitet aber keine FIFO-Parameter aus QCD ab. Ein angepasstes
+Massenverhaeltnis ist keine Massenvorhersage. Insbesondere gelten weder
+Pauli als klassischer Zusatz-Abstossungskernel noch laufende Quarkmassen
+als additive Proton-Massenanteile. Ein-Knoten-plus-Feld und AAB/uud sind
+offene Modellansaetze; der vorbereitete antipodale Paarlauf bleibt
+ungestartet und ist seit dem 2026-11-09 vorerst zurueckgestellt.
 
 Die [neue Paar-Intervallmethode](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_method_2026-11-08.md)
 zertifiziert einen kleinen konstruierten H=2-Testorbit und dessen

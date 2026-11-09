@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-08 (additiver Paar-Existenzvorschlag und Einmal-Runner vorbereitet, nur kleine Runner-Tests ausgefuehrt; H1200-Freigabe offen).
+Stand: 2026-11-09 (reale Referenzdaten und Kalibrierungsgrenzen im Wasserstoff-Benchmark ergaenzt; unzugeordneter Paarlauf zurueckgestellt, keine neue Zielrechnung).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Auf Autorenanregung trennt der [datengebundene Benchmark](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
+jetzt reale Vergleichswerte, gemeinsame Einheiten und freie Memory-
+Zuordnungen. CODATA-Werte und die betreffenden PDG-2026-Abschnitte sind
+nachgelesen; wenige Referenzverhaeltnisse wurden arithmetisch umgerechnet.
+Keine Teilchenmasse, Feldgleichung oder Schrittzahl daraus hergeleitet.
+N als moeglicher Massentraeger ist begrifflich noch offen. Der Vorschlag
+eines einzelnen Knotens mit dynamischem Feld ist eine Empfehlung fuer
+die naechste Modellentscheidung, kein Elektronenbefund. Die bestehende
+AL1-Referenz bleibt getrennt. Der folgende Paarlauf ist vorerst
+zurueckgestellt, nicht automatisch freigegeben.
 
 Der [antipodale Methodenauswerter](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/antipodal_pair_method_2026-11-08.md)
 trennt jetzt feste Newton-Schritte, einen Krawczyk-Existenznachweis und
@@ -19,8 +30,8 @@ oder Gain-Scan. Der [konkrete Vorschlag](https://github.com/MemoryDynamics/Knote
 enthaelt jetzt einen separat getesteten Einmal-Runner und das explizit
 vorgeschlagene additive Gain-Paar 0.15/0.15. 40 neue Runner-Kontrollen
 bestehen, einschliesslich echtem kleinen H=2-Worker und gepruefter
-Zeitlimit-Prozessbeendigung. Die konkrete Autorenentscheidung und
-Freigabe stehen aus; kein H1200-Ziellauf oder neuer physikalischer Befund.
+Zeitlimit-Prozessbeendigung. Keine Freigabe oder Ausfuehrung; seit dem
+2026-11-09 zugunsten der physikalischen Benchmark-Zuordnung zurueckgestellt.
 
 Der [kollektive Stabilitaetsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_memory_stability_2026-11-07.md)
 liefert einen exakten bedingten Befund: Deckungsgleiche identische

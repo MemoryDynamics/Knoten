@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-08 (fester additiver Paar-Existenzvorschlag mit getestetem Einmal-Runner vorbereitet; konkrete Autorenentscheidung und Zielfreigabe offen).
+Stand: 2026-11-09 (datengebundener Teilchenbenchmark vor unzugeordnetem Paarlauf; Bedeutung von N und konkrete Feld-/Memory-Zuordnung offen; keine neue Simulation).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -239,8 +239,23 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    liegt nun samt 40 Runner-Kontrollen vor: bestehende additive Paarregel,
    vorgeschlagen $\eta=\chi=0.15$, H=1200, ein alter Startwert, 80 dps,
    hoechstens 12 Newton-Schritte, feste Box und 300-s-Einmal-Worker.
-   **Jetzt konkrete Autorenentscheidung/Freigabe einholen; keine
-   Zielausfuehrung zuvor.** Der Vorschlag macht die offene Normierungsfrage
+   **Seit der Autorenrueckfrage vom 2026-11-09 vorerst zurueckgestellt,
+   nicht ausgefuehrt:** Der Test ist weder Meson noch Leptonpaar.
+   Statt weiterer Freigabe-Nachfragen zu diesem unzugeordneten Kandidaten
+   jetzt den [datengebundenen Einstieg](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
+   konkretisieren. Reale Ladungen, Massen, Radien und atomare Verhaeltnisse
+   liefern Referenzbedingungen; ihre Abbildung auf Gains, H oder N ist
+   noch keine bekannte Kalibrierung. Die Bedeutung von N ist beim Autor
+   nachgefragt. Empfehlung: zuerst ein einzelner Knoten mit dynamischer
+   Feldrueckwirkung als moeglicher Leptonkandidat, danach der uud-Vergleich
+   im selben Beobachtungs-/Energierahmen. Die genaue Feldgleichung ist
+   dabei eine offene Modellentscheidung, kein schon freigegebener Lauf.
+   Protokollieren, welche wenigen Werte Inputs sind und welche unabhaengig
+   vorhergesagt werden sollen; keine freien Nachfits fuer jede Observable.
+   Laufende Quarkmassen nicht als additive Massenanteile oder groesseren
+   d-Knoten interpretieren. Bekannte AL1-Ergebnisse als Referenz behalten,
+   keine neue Quarksimulation ohne neuen Vertrag.
+   Der zurueckgestellte Paarvorschlag macht seine Normierungsfrage
    explizit: Zeilensumme 0.30, keine versteckte Budgetnormierung.
    Ein spaeterer positiver Stabilitaetsbefund benoetigt weiterhin einen
    passenden Einzel-Gain-Gegenvergleich; dieser erste Existenztest fuehrt

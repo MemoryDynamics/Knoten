@@ -1,6 +1,6 @@
 # Wasserstoff als gemeinsamer Zielbenchmark
 
-Stand: 2026-10-28. Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
+Stand: 2026-11-09. Datengebundener Einstieg ergaenzt; Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
 Ergebnis, keine neue Modellregel und keine Ausfuehrungsfreigabe. Die einzige
 Arbeitsreihenfolge bleibt in den [Projektprioritaeten](../status/project_priorities.md).
 
@@ -36,6 +36,130 @@ Magnetische Momente freier und gebundener Teilchen sind zu unterscheiden.
 In der hier verwendeten Konvention gilt
 $\boldsymbol\mu_i=g_i e\mathbf S_i/(2m_i)$ mit $e>0$; ein negatives
 Elektronen-$g$ darf nicht nochmals mit einem negativen $q_e$ multipliziert werden.
+
+## Datengebundener Einstieg statt freier Parametersuche
+
+Autorenanregung vom 2026-11-09: Reale Teilchendaten sollen die
+Moeglichkeiten einschraenken, auch wenn damit zunaechst ein
+phaenomenologisches Modell statt einer Herleitung aller Parameter
+entsteht. Das ist mit dem getrennten Referenzvertrag vereinbar:
+**eingesetzte Werte sind Kalibrierung, nicht spaetere Vorhersagen.**
+Der antipodale Zweierlauf vom 2026-11-08 bleibt ungestartet und ist als
+unzugeordneter mechanischer Test vorerst zurueckgestellt. Er beschreibt
+weder ein Meson noch zwei bereits identifizierte Leptonen.
+
+### Referenzwerte und ein gemeinsames Einheitensystem
+
+Die folgende Tabelle verwendet zentrale Vergleichswerte, keine bereits
+vereinbarten Simulationsfehler. Quelle der dimensionsbehafteten Lepton-/
+Protonwerte und Konstanten ist die am 2026-11-09 gelesene
+[NIST-Tabelle, CODATA 2022](https://physics.nist.gov/cuu/Constants/Table/allascii.txt).
+Setze auf der **Referenzseite** $\hbar=c=m_e=1$, messe Ladungen in $e$
+und Laengen in $\bar\lambda_e=\hbar/(m_ec)=386.15926744\,\mathrm{fm}$.
+Diese Laengeneinheit ist kein Elektronenradius und keine bereits aus
+Memory hergeleitete Wirkungsskala oder Grenzgeschwindigkeit.
+
+| Groesse | Reale Referenz / dimensionsloser Vergleich | Rolle im vorgeschlagenen Einstieg |
+| --- | --- | --- |
+| Elektronenmasse | $m_ec^2\simeq0.510999$ MeV; $m_e=1$ | Eine gemeinsame Masseneinheit festlegen, nicht nochmals als Vorhersage zaehlen. |
+| Protonmasse | $m_pc^2\simeq938.2721$ MeV; $m_p/m_e=1836.152673426$ | Vergleich der beiden Kandidaten; nur dann unabhaengiger Test, wenn das Verhaeltnis nicht eingestellt wurde. |
+| Elektromagnetische Staerke | $\alpha_{\rm em}^{-1}=137.035999177$ | Referenzeingabe; erst nach definiertem Ladungs-/Kraftport auf einen Modellgain uebertragbar. Nicht die FIFO-Vergessensrate `alpha`. |
+| Ladungen | $q_e/e=-1$, $q_p/e=+1$; im Valenzvergleich $q_u/e=2/3$, $q_d/e=-1/3$ | Zunaechst Referenzlabels. Ihre Addition beweist keinen emergenten Ladungsport. |
+| Proton-Ladungsradius | $r_{E,p}=0.84075$ fm, also $r_{E,p}/\bar\lambda_e\simeq0.00217721$ | Vorzugsweise nicht zur Anpassung verwenden; ein Memory-rms-Radius ist nicht automatisch dieser Formfaktorradius. |
+| Protonmoment | $\mu_p/\mu_N=2.79284734463$ | Weiterer unabhaengiger Test derselben Masse-/Ladungs-/Spinbeschreibung, kein separater Momentenfit. |
+
+Die Ladungs- und Valenzzuordnung folgt dem
+[PDG-Quarkmodell 2026, Abschnitte 15.1--15.2](https://pdg.lbl.gov/2026/reviews/rpp2026-rev-quark-model.pdf).
+Proton und Elektron sind unterschiedliche Zielobjekte; das Proton ist
+zusammengesetzt, nicht selbst ein Elementarteilchen.
+
+Als **abgeleiteter Referenzvergleich**, nicht neue Simulation, folgt aus
+den unten bereits angegebenen Coulomb-Gleichungen mit reduzierter Masse
+
+$$
+\frac{a_H}{\bar\lambda_e}
+=\frac{1+m_e/m_p}{\alpha_{\rm em}}\simeq137.1106,
+\qquad
+\frac{B_H}{m_ec^2}
+=\frac{\alpha_{\rm em}^2}{2(1+m_e/m_p)}\simeq2.66112\times10^{-5}.
+$$
+
+Das entspricht $B_H\simeq13.5983$ eV im nichtrelativistischen
+punktfoermigen Coulomb-Modell, nicht der vollstaendigen gemessenen
+Ionisationsenergie mit allen Korrekturen. Einmal festgelegte Einheiten
+und Kopplungen duerfen nicht fuer diese atomaren Groessen neu angepasst
+werden. Die hier gerundeten Umrechnungen wurden mit Dezimalarithmetik
+aus den Tabellenwerten kontrolliert; keine Unsicherheitsfortpflanzung
+oder neue Zielbahn.
+
+### Warum uud noch keine Schrittzahlen festlegt
+
+Zum Groessenvergleich nennt der
+[PDG-Massenreview 2026, Gleichungen 60.7--60.9](https://pdg.lbl.gov/2026/reviews/rpp2026-rev-quark-masses.pdf)
+$m_u\simeq2.20$ MeV und $m_d\simeq4.69$ MeV im
+$\overline{\rm MS}$-Schema bei 2 GeV. Das sind QCD-Massenparameter,
+keine drei lokal addierbaren Proton-Massenanteile oder Quarkradien.
+$2m_u+m_d\simeq9.09$ MeV ist deshalb keine Protonmassenrechnung.
+Effektive Constituent-Massen sind davon zu trennen; unsere vorhandene
+[AL1-Referenz](nucleon_spatial_reference.md) setzt sogar
+$m_u=m_d=315$ MeV. Ein schwereres laufendes d-Quark erzwingt somit
+weder einen groesseren d-Knoten noch $N_d/N_u\simeq2.1$.
+
+Die Bedeutung von $N$ ist beim Autor nachgefragt. Drei Dinge duerfen
+nicht gleichgesetzt werden:
+
+- `SimulationConfig.steps` ist die Beobachtungsdauer einer Rechnung,
+  kein Teilchenparameter. Eine verlaengerte Auswertung macht denselben
+  Kandidaten nicht schwerer.
+- Gespeicherte Historienlaenge $H$, Relaxationszeit und innere Umlaufdauer
+  sind unterschiedliche dynamische Groessen. Nur unter dem benannten
+  [kontinuierlichen Filterabschluss](memory_pair_reduction.md) gilt
+  $m_{\rm filter}=\tau/\mu_F$; die physikalische Kraftnormierung bleibt
+  dort eine Voraussetzung. Daraus folgt kein allgemeines $m\propto H$.
+- Wuerde man stattdessen zusaetzlich eine innere Periode
+  $T=N\Delta t$ mit $mc^2=\hbar\,2\pi/T$ identifizieren, folgte bei
+  gemeinsamer Zeiteinheit sogar $m\propto1/N$. Auch diese Verbindung
+  ist nicht aus FIFO hergeleitet. Das illustriert die Mehrdeutigkeit,
+  nicht die Wahl eines neuen Massengesetzes.
+
+Zwei u-Komponenten sollen identische Regeln haben; unterschiedliche
+Zustaende sind dadurch nicht verboten. Farbe, Flavor, Spin und innere
+Raumrichtungen bleiben getrennt. Ein Dreieransatz ist zunaechst ein
+Zwei-Typen-Modell AAB; die Bezeichnung uud braucht entsprechende
+Observablen und Austausch-/Farbrelationen.
+
+### Feldkandidat und unabhaengige Tests
+
+Empfehlung fuer die naechste Modellentscheidung: zuerst **ein
+lokalisierter Memory-Kandidat mit dynamischem rueckwirkendem Feld**,
+danach derselbe begruendete Beobachtungs-/Energierahmen fuer den
+Dreikomponentenvergleich. Das ist weniger Komponentenkomplexitaet,
+kein bereits geloestes Elektronenproblem. Feldgleichung, Rueckwirkung,
+Randbedingungen und verbleibende freie Parameter sind vor Ausfuehrung
+zu benennen. Ein unveraendertes aeusseres Fangpotential beweist keinen
+freien stabilen Teilchenzustand. Die
+[Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
+liefert noch keine Variante mit gemeinsam geschlossenem Energie- und
+elektromagnetischem Ladungsport. Keine davon wird hier stillschweigend
+ausgewaehlt oder als Maxwell-/Dirac-Feld umbenannt.
+
+Identische Elektronen wechselwirken elektrisch repulsiv; das
+Pauliprinzip ist dagegen eine Antisymmetriebedingung des gesamten
+Quantenzustands, kein zusaetzlicher beliebiger Abstossungskernel.
+Ein gemeinsames raeumliches Orbital ist mit antisymmetrischem Spinanteil
+moeglich, wie der Helium-Grundzustand im Orbitalmodell zeigt:
+[Tong, Atoms, Gleichungen 7.21--7.23](https://www.damtp.cam.ac.uk/user/tong/aqm/aqmseven.pdf).
+Hier wurde die indexierte Passage gelesen; der direkte PDF-Abruf
+scheiterte mit HTTP 502. Eine Pauli-Wirkung im Memory-Modell ist nicht implementiert.
+
+Fuer einen publizierbaren begrenzten Modellbeitrag waeren ein benannter
+neuer Mechanismus, robuste Ergebnisse, nachvollziehbare Kalibrierung
+und nicht nachjustierte Vergleichsobservablen erforderlich. Eine
+vollstaendige Teilchenidentifikation verlangt zusaetzlich insbesondere
+Spin/Statistik und Wechselwirkungen. Der Rahmen reduziert Freiheitsgrade,
+macht aber aus einem passenden klassischen Orbit noch kein Elektron,
+Proton oder eine abgeleitete Quantentheorie. Keine neue Simulation
+oder Erweiterung der Claims von Paper I ist damit freigegeben.
 
 ## Innere Struktur und aeussere Dimension
 
