@@ -1,6 +1,6 @@
 # Wasserstoff als gemeinsamer Zielbenchmark
 
-Stand: 2026-11-09. Datengebundener Einstieg ergaenzt; Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
+Stand: 2026-11-10. Datengebundener Einstieg und Feld-/Quellenkriterien ergaenzt; Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
 Ergebnis, keine neue Modellregel und keine Ausfuehrungsfreigabe. Die einzige
 Arbeitsreihenfolge bleibt in den [Projektprioritaeten](../status/project_priorities.md).
 
@@ -142,6 +142,17 @@ freien stabilen Teilchenzustand. Die
 liefert noch keine Variante mit gemeinsam geschlossenem Energie- und
 elektromagnetischem Ladungsport. Keine davon wird hier stillschweigend
 ausgewaehlt oder als Maxwell-/Dirac-Feld umbenannt.
+
+Der [vertiefte Feldabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
+trennt jetzt Kernstabilisierung von elektrischer Fernladung. Fuer die
+deklarierte lineare Eichfeld-Referenzklasse muss ein masseloser Kanal
+vorhanden sein **und** der Kern eine nichtverschwindende Quellenprojektion
+darauf besitzen. Minimale Stroeme ausschliesslich kondensierter Spezies
+erfuellen Letzteres nicht. Ein zusaetzlicher leerer Maxwell-Kanal loest
+das Problem nicht. Die volle Feldrueckwirkung ist auch beim Stabilitaetstest
+mitzufuehren; ein eingefrorenes Selbstfeld kann ein falsches Minimum zeigen.
+Diese Bedingungen reduzieren die Modellwahl vor einem Parameterfit,
+legen aber keine neue Dynamik fest.
 
 Identische Elektronen wechselwirken elektrisch repulsiv; das
 Pauliprinzip ist dagegen eine Antisymmetriebedingung des gesamten

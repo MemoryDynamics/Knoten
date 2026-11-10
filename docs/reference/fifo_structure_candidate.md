@@ -229,6 +229,11 @@ Ein solcher neuer Loesungsast ist nicht nachgewiesen.
 
 Geprueft am 2026-10-25. Quellenbefunde, keine eigene Reproduktion:
 
+Vertiefung vom 2026-11-10: Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
+ergaenzt die inzwischen gepruefte PRL-Fassung von Eto--Hamada--Nitta und
+den Volltext von Jaeykkae--Speight. Die folgende Tabelle dokumentiert den
+urspruenglichen Leseumfang; Feldstabilisierung ist keine Fernladungsherleitung.
+
 | Primaerquelle und gelesener Umfang | Verwendbare Aussage | Fehlende Uebertragung |
 | --- | --- | --- |
 | [Krzyzanowska--Nowel, 1507.04892v2](https://arxiv.org/pdf/1507.04892v2), Einleitung und Definitionen in Abschnitt 2 | Der Raum unabhaengiger geordneter Rahmen und seine Homotopie sind bekannte mathematische Strukturen, insbesondere die $\mathbb Z_2$-Gruppe fuer zwei Rahmenvektoren in 3D. | Keine physikalischen Zustaende oder Quantenstatistik aus dem Rahmenbegriff; die 4D-Gegenkontrolle oben ist eine eigene elementare Rechnung. |

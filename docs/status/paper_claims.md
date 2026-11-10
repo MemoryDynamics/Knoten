@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-09 (datengebundene Kalibrierung ist von Vorhersagen getrennt; keine Teilchenidentifikation oder neue Zielsimulation).
+Stand: 2026-11-10 (Feld-/Quellenkriterien gelten fuer deklarierte Referenzklassen; keine Teilchenidentifikation oder neue Zielsimulation).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
+beweist weder allgemeine Feld-Destabilisierung noch die Notwendigkeit
+zweier Eichfelder. Die Schur-Kruemmung gilt fuer eine stationaere
+Energieklasse, nicht unmittelbar fuer FIFO-Orbits. Nullraum und
+Quellenprojektion betreffen kanonisch normierte lineare abelsche
+Referenzkanaele; das Neutralitaetskorollar setzt ausschliesslich minimale
+Stroeme der kondensierten Spezies voraus. Nichtminimale oder weitere
+geladene Quellen bleiben offen. Keine native Ladungs-, Spin-, QFT- oder
+Gravitationsherleitung; kein neuer Lauf und keine Aenderung an Paper I.
 
 Der [datengebundene Einstieg](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
 reduziert den geplanten Modellvergleich durch reale Referenzbedingungen,

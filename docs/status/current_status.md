@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-09 (reale Referenzdaten und Kalibrierungsgrenzen im Wasserstoff-Benchmark ergaenzt; unzugeordneter Paarlauf zurueckgestellt, keine neue Zielrechnung).
+Stand: 2026-11-10 (Feldstabilisierung und Fernladung getrennt geprueft; Quellenprojektion als konkretes Auswahlkriterium, keine neue Zielrechnung).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
+vertieft zwei Literaturvergleiche und liefert einen bedingten analytischen
+Test: Ein masseloser Kanal nutzt nur bei nichtverschwindender Kernquellen-
+Projektion. Minimale Stroeme ausschliesslich kondensierter Spezies haben
+im deklarierten abelschen Higgs-Vergleich keine solche Projektion.
+Ein eingefrorenes Selbstfeld kann ausserdem ein falsches Energieminimum
+anzeigen. Keine neue Feldregel, Teilchenidentifikation oder Zielsimulation;
+der Kern-/Quellenmechanismus bleibt eine offene Modellentscheidung.
+22 neue Kontrollen, 55 betroffene Tests, Lint und strikter Dokumentationsbau
+bestanden; keine Solitonreproduktion und kein neuer Produktionssolver.
 
 Auf Autorenanregung trennt der [datengebundene Benchmark](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
 jetzt reale Vergleichswerte, gemeinsame Einheiten und freie Memory-

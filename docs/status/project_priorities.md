@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-09 (datengebundener Teilchenbenchmark vor unzugeordnetem Paarlauf; Bedeutung von N und konkrete Feld-/Memory-Zuordnung offen; keine neue Simulation).
+Stand: 2026-11-10 (Feldbenchmark durch volle Rueckwirkung und ungeschirmte Quellenprojektion eingegrenzt; Bedeutung von N und Modellwahl offen; keine neue Simulation).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -250,6 +250,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Feldrueckwirkung als moeglicher Leptonkandidat, danach der uud-Vergleich
    im selben Beobachtungs-/Energierahmen. Die genaue Feldgleichung ist
    dabei eine offene Modellentscheidung, kein schon freigegebener Lauf.
+   Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
+   liefert jetzt eine konkrete Auswahlbedingung: Stabilisierung mit voller
+   Feldrueckwirkung und nichtverschwindende Projektion der Kernquelle auf
+   einen ungeschirmten Kanal getrennt nachweisen. Im deklarierten abelschen
+   Higgs-Vergleich liefern minimale Stroeme nur kondensierter Spezies
+   keine solche Ladung. Daher als naechstes den **gemeinsamen Kern-/
+   Quellenmechanismus** bestimmen, nicht bloss ein zusaetzliches masseloses
+   Feld einsetzen. Eine nichtkondensierte geladene oder nichtminimal
+   gekoppelte Quelle waere eine explizite Erweiterung, kein Memory-Befund.
+   Kein allgemeiner Zwang zu zwei Eichfeldern und keine neue Regel gewaehlt.
    Protokollieren, welche wenigen Werte Inputs sind und welche unabhaengig
    vorhergesagt werden sollen; keine freien Nachfits fuer jede Observable.
    Laufende Quarkmassen nicht als additive Massenanteile oder groesseren
