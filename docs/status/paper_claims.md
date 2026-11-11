@@ -1,9 +1,29 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-10 (Feld-/Quellenkriterien gelten fuer deklarierte Referenzklassen; keine Teilchenidentifikation oder neue Zielsimulation).
+Stand: 2026-11-11 (aus Memory abgeleiteter Readout ist kein erhaltener Kernfreiheitsgrad; Witten-Wirkung ausschliesslich Referenz, keine neue Zielsimulation).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Memory-/Kernphasenanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
+leitet einen komplexen Modenreadout, keine Quantenamplitude oder lokale
+Eichsymmetrie her. Seine Nichtabschluss- und Entwindungsbeispiele gelten
+fuer die angegebene endliche Displacement-Klasse; keine allgemeine
+Unmoeglichkeit kollektiver Topologie und kein beobachteter Zerfall.
+Der Witten-Referenzvertrag setzt Felder, Raumzeit und Kopplungen voraus.
+Seine On-shell-Erhaltung ist nicht native FIFO-Erhaltung, klassische
+Ladung nicht automatisch quantisiert. Vakuumkontrolle und lineare
+Kondensationsbedingung beweisen keine stabile Schleife oder Spin 1/2.
+Keine Referenzparameter gewaehlt und keine neue Ausfuehrungsfreigabe.
+
+Die [Mischkopplungsfortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md#6-konkreter-anschluss-mischkopplung-mit-kernstrom)
+schliesst einen A-Strom kinematisch, nicht die vollstaendige Wirkung
+oder gekoppelte Dynamik. Bulk-Teilcharge ist keine Gesamtladung. Die
+Herleitung setzt Defektgeometrie, regulaeres X ohne Monopole und den
+angegebenen Rand voraus. Kompakter Kernzustand und dessen erlaubte
+Perioden waeren Inputs; kein Ladungsquant, Elektronenspin oder
+Fermionfeld daraus emergiert. Kein allgemeines No-go fuer topologische
+Ladung und keine Uebernahme von Weak-Gravity-Vermutungen als Beweis.
 
 Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
 beweist weder allgemeine Feld-Destabilisierung noch die Notwendigkeit

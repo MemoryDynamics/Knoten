@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-10 (Feldbenchmark durch volle Rueckwirkung und ungeschirmte Quellenprojektion eingegrenzt; Bedeutung von N und Modellwahl offen; keine neue Simulation).
+Stand: 2026-11-11 (Autorenentscheidung umgesetzt: Freiheitsgrade erst aus Memory herleiten, Feld-/Kernreferenz getrennt ausarbeiten; Modenreadout und Witten-Vertrag konkretisiert, keine neue Zielsimulation).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -153,12 +153,10 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Speicher allein ist damit kein Erhaltungsmechanismus fuer diese
    Klasse. Die alpha-/H-Grenzen und die native Massennormierung sind
    vor einem Skalierungsargument getrennt festzulegen.
-   **Jetzt die Richtungsentscheidung anhand dieses Befunds vorbereiten:
-   kontrollierten Grenzfall des Bestands auf einen konkreten
-   Erhaltungsmechanismus pruefen oder eine explizite Erweiterung als
-   getrennte Hypothese entwerfen.** Empfehlung bis zur Autorenentscheidung:
-   nur die Annahmen und benoetigten Nachweise der Grenzfaelle analytisch
-   abgleichen, keine Regel aendern. Der Feldzustands-Grenzfall ist wie
+   Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
+   neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
+   parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import
+   ihrer Wirkung oder Ladungstraeger als native Regel. Der Feldzustands-Grenzfall ist wie
    oben eingegrenzt; eine rein groessere-H-Diagnose wird nicht vorbereitet.
    Der [topologische Zustandsraumabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/topological_state_contract_2026-11-04.md)
    liegt jetzt vor: Einzelnormierung der Richtungen garantiert weder
@@ -166,8 +164,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Fuer einen konkreten Sektor bleiben Zielraum/Rand und Erhaltung
    unter der nativen Dynamik nachzuweisen. Die Hopf-Referenz liefert
    Kriterien, keine Erlaubnis zum stillschweigenden Einbau von S2-Zwang,
-   Skyrme-Term oder FR-Quantisierung. Die bereits gestellte
-   Richtungsfrage bleibt offen; kein neuer Ziellauf wird vorbereitet.
+   Skyrme-Term oder FR-Quantisierung. Die neue Zweigentscheidung hebt
+   diese Trennung nicht auf; kein neuer Ziellauf wird vorbereitet.
    Der [kollektive Ladungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_charge_constraints_2026-11-05.md)
    ergaenzt jetzt die davon verschiedene Defektroute. Ein naiver
    altersgewichteter Linienfluss entlang einer geschlossenen FIFO-Bahn
@@ -187,8 +185,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Spektralamplitude. Daher jeden Kandidaten zugleich an nativer
    Zustandskontrolle und einer begruendeten kollektiven Antwort messen;
    keine Durchstichbehauptung aus weiterem Ringschluss oder normiertem
-   Winkelbild. Die Richtungsentscheidung und Ausfuehrungsgrenzen bleiben
-   unveraendert; kein neuer Vielknoten- oder Langmemory-Ziellauf.
+   Winkelbild. Die Ausfuehrungsgrenzen bleiben trotz der neuen
+   Zweigentscheidung bestehen; kein neuer Vielknoten- oder Langmemory-Ziellauf.
    Der [stochastische Quantenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/stochastic_quantum_bridge_2026-11-06.md)
    konkretisiert die zweite unverzichtbare Verbindung zum Wasserstoffziel:
    Ein klassischer Coulomb-Abschluss oder eine passende stationaere Dichte
@@ -259,7 +257,33 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Quellenmechanismus** bestimmen, nicht bloss ein zusaetzliches masseloses
    Feld einsetzen. Eine nichtkondensierte geladene oder nichtminimal
    gekoppelte Quelle waere eine explizite Erweiterung, kein Memory-Befund.
-   Kein allgemeiner Zwang zu zwei Eichfeldern und keine neue Regel gewaehlt.
+   Kein allgemeiner Zwang zu zwei Eichfeldern und keine neue native Regel gewaehlt.
+   Die [konkrete Mischkopplungspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md#6-konkreter-anschluss-mischkopplung-mit-kernstrom)
+   liefert nun eine lokale Quelle im ungeschirmten Kanal, aber der reine
+   Bulk-Strom ist bei allgemeinen Stoerungen nicht erhalten. Ein benannter
+   Kernstrom schliesst diese kinematische Bilanz. Im angegebenen
+   geschlossenen Vergleich hebt sich die Verknuepfungsabhaengigkeit aus
+   der Gesamtladung heraus; ein zusaetzlicher Kernzustand bleibt erforderlich.
+   Die Autorenentscheidung verlangt beide getrennten Straenge:
+   Freiheitsgrade im Emergenzzweig zuerst aus Memory herleiten und
+   den phaenomenologischen Feld-/Kernbenchmark ausarbeiten. Keinen
+   Bulk-only-Simulator bauen. Die Referenzliteratur liefert keine
+   FIFO-Ableitung, keinen Spinbefund und keinen Beweis der Weak Gravity
+   Conjecture. Der [Memory-/Kernphasenanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
+   setzt die Entscheidung nun konkret um: komplexer Historienreadout,
+   exakte Einspeisungs-/Tailbilanz und bedingte Phasenfehlerkontrolle;
+   zugleich ein expliziter Entwindungspfad fuer den mehrkomponentigen
+   Readout. **Naechster Memory-Nachweis ist die dynamische Isolation
+   eines tragfaehigen Modenraums samt Amplituden-/Leckagekontrolle,
+   nicht dessen Normierung oder Benennung als U(1).** Es fehlt weiterhin
+   der Anschluss eines zeitlichen Readouts an einen lokalen Kernstrom.
+   Der getrennte Witten-Vertrag benennt Wirkung, Vakuum, Ladung und
+   linearen Kondensationsoperator. Vor einem Referenzlauf ein festes,
+   physikalisch begruendetes Parameter-/Ladungsproblem bestimmen;
+   keine Suche nach beliebig grossen stabilen Ladungen als Elektronenbeleg.
+   Ein Literaturerfolg im neutralen Stromgrenzfall ersetzt nicht die
+   elektromagnetische Rueckwirkung. Keine Kernparameter oder Laeufe
+   ausgewaehlt. Die N-Frage bleibt davon getrennt.
    Protokollieren, welche wenigen Werte Inputs sind und welche unabhaengig
    vorhergesagt werden sollen; keine freien Nachfits fuer jede Observable.
    Laufende Quarkmassen nicht als additive Massenanteile oder groesseren

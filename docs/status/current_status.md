@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-10 (Feldstabilisierung und Fernladung getrennt geprueft; Quellenprojektion als konkretes Auswahlkriterium, keine neue Zielrechnung).
+Stand: 2026-11-11 (Memory-Phasenreadout und getrennter phaenomenologischer Kernbenchmark ausgearbeitet; keine neue native Regel oder Zielrechnung).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -9,6 +9,27 @@ vollstaendige vorherige Stand liegt im
 
 ## Evidenz
 
+Auf Autorenentscheidung sind im [Memory-/Kernphasenanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
+beide Straenge getrennt konkretisiert. Ein komplexer Vektorreadout folgt
+aus vorhandenen Displacement-Historien, einschliesslich exakter
+FIFO-Randbilanz und bedingter Phasenfehlerkontrolle. Ein expliziter
+Historienpfad loest die projizierte Wicklung bei nichtverschwindendem
+Gesamtreadout auf; dynamischer Schutz folgt nicht aus mehr Dimensionen.
+Der Referenzzweig besitzt nun einen Witten-Wirkungsvertrag mit explizitem
+geladenem Kernfeld, globaler Vakuumkontrolle und Kondensationsoperator.
+Keine Memory-Herleitung dieser Felder, keine quantisierte Ladung oder
+Elektronenidentifikation. 19 neue konstruierte Kontrollen, 103 Tests im
+betroffenen Panel bestanden; keine Zieltrajektorien oder Parametersuche.
+
+Die [Fortsetzung zur Mischkopplung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md#6-konkreter-anschluss-mischkopplung-mit-kernstrom)
+benennt jetzt einen nichtminimalen Quellenansatz und seinen fehlenden
+Kernstrom. Dessen kinematische Vervollstaendigung erhaelt den Gesamtstrom;
+unter den angegebenen Rand-/Defektannahmen haengt die Gesamtladung
+vom eigenen Kernzustand statt allein von der Verknuepfung ab. Ein glatter
+Regulator zeigt, dass Abschneiden der Singularitaet das Problem nicht
+loest. Keine gekoppelte Feldloesung oder native Emergenz. Die jetzt
+freigegebene Referenzausarbeitung bleibt davon und von Memory getrennt.
+
 Der [Feld-/Quellenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/field_stabilization_channels_2026-11-10.md)
 vertieft zwei Literaturvergleiche und liefert einen bedingten analytischen
 Test: Ein masseloser Kanal nutzt nur bei nichtverschwindender Kernquellen-
@@ -16,9 +37,10 @@ Projektion. Minimale Stroeme ausschliesslich kondensierter Spezies haben
 im deklarierten abelschen Higgs-Vergleich keine solche Projektion.
 Ein eingefrorenes Selbstfeld kann ausserdem ein falsches Energieminimum
 anzeigen. Keine neue Feldregel, Teilchenidentifikation oder Zielsimulation;
-der Kern-/Quellenmechanismus bleibt eine offene Modellentscheidung.
-22 neue Kontrollen, 55 betroffene Tests, Lint und strikter Dokumentationsbau
-bestanden; keine Solitonreproduktion und kein neuer Produktionssolver.
+der native Kern-/Quellenmechanismus bleibt offen. Die Mischkopplungs-
+Fortsetzung ergaenzte 15 Kontrollen auf insgesamt 37 in dieser Testdatei;
+70 Tests im damaligen Panel, Lint und strikter Dokumentationsbau bestanden.
+Keine Solitonreproduktion und kein neuer Produktionssolver.
 
 Auf Autorenanregung trennt der [datengebundene Benchmark](../reference/hydrogen_benchmark.md#datengebundener-einstieg-statt-freier-parametersuche)
 jetzt reale Vergleichswerte, gemeinsame Einheiten und freie Memory-

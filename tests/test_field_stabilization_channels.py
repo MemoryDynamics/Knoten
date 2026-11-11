@@ -5,6 +5,7 @@ import math
 
 import numpy as np
 import pytest
+from scipy.integrate import quad
 
 
 @pytest.mark.parametrize("coupling", [Fraction(0), Fraction(1, 2), Fraction(2)])
@@ -168,3 +169,98 @@ def test_nonsingular_kinetic_normalization_does_not_create_a_nullspace():
     assert np.linalg.det(canonical_mass) == pytest.approx(
         np.linalg.det(transform) ** 2 * np.linalg.det(mass_squared)
     )
+
+
+@pytest.mark.parametrize("size", [12, 20])
+def test_single_valued_phase_can_have_local_charge_but_zero_periodic_monopole(size):
+    grid = np.arange(size) * (2 * math.pi / size)
+    x, y, z = np.meshgrid(grid, grid, grid, indexing="ij")
+    # theta=sin(x), B=curl(sin(z), sin(x), sin(y)) has zero divergence.
+    gradient = np.stack([np.cos(x), np.zeros_like(x), np.zeros_like(x)])
+    magnetic = np.stack([np.cos(y), np.cos(z), np.cos(x)])
+    density = np.sum(gradient * magnetic, axis=0)
+    assert np.max(np.abs(density)) > 0.9
+    assert abs(float(np.mean(density))) < 2e-16
+
+
+@pytest.mark.parametrize("width", [0.25, 1.0, 3.0])
+def test_smoothed_vortex_source_has_nonzero_transverse_continuity_residual(width):
+    winding, coupling, tangent_field = 2, 0.3, 0.7
+
+    def transverse_density(radius):
+        return 2 * winding * width**2 / (radius**2 + width**2) ** 2
+
+    integral, error = quad(
+        lambda radius: 2 * math.pi * radius * transverse_density(radius),
+        0,
+        np.inf,
+        epsabs=1e-10,
+        epsrel=1e-10,
+    )
+    assert error < 1e-8
+    assert integral == pytest.approx(2 * math.pi * winding, rel=1e-12)
+    assert coupling * tangent_field * integral > 0
+    radius = 2.0
+    finite_integral, _ = quad(
+        lambda r: 2 * math.pi * r * transverse_density(r), 0, radius
+    )
+    circulation = 2 * math.pi * winding * radius**2 / (radius**2 + width**2)
+    assert finite_integral == pytest.approx(circulation, rel=1e-12)
+
+
+@pytest.mark.parametrize("x,y,width", [(0, 0, 1), (1, 2, 3), (-2, 3, 2)])
+def test_regularized_bulk_divergence_and_core_charge_rate_cancel_exactly(x, y, width):
+    denominator = Fraction(x * x + y * y + width * width)
+    coupling, winding, tangent_field = Fraction(2, 5), 2, Fraction(3, 7)
+    radial_gain = coupling * winding * tangent_field
+    bulk_divergence = radial_gain * (
+        2 / denominator - 2 * (x * x + y * y) / denominator**2
+    )
+    source = 2 * radial_gain * width**2 / denominator**2
+    assert bulk_divergence == source > 0
+    core_charge_rate = -source
+    assert bulk_divergence + core_charge_rate == 0
+
+
+def test_worldsheet_completion_is_invariant_under_regular_gauge_change():
+    coefficient = Fraction(3, 5)
+    connection = np.array([Fraction(0), Fraction(7, 4)], dtype=object)
+    phase_derivative = np.array([Fraction(2), Fraction(-1, 3)], dtype=object)
+    gauge_derivative = np.array([Fraction(-5, 3), Fraction(4, 7)], dtype=object)
+    current = -coefficient * connection + phase_derivative
+    transformed = (
+        -coefficient * (connection + gauge_derivative)
+        + phase_derivative
+        + coefficient * gauge_derivative
+    )
+    np.testing.assert_array_equal(transformed, current)
+
+
+@pytest.mark.parametrize("linking", [-2, 0, 1, 3])
+def test_link_charge_is_not_total_charge_in_completed_current(linking):
+    coefficient, tube_flux = Fraction(3, 7), Fraction(5, 2)
+    bulk_charge = coefficient * tube_flux * linking
+    for phase_period in (Fraction(0), Fraction(2, 3)):
+        core_charge = -bulk_charge + phase_period
+        assert bulk_charge + core_charge == phase_period
+    if linking:
+        assert bulk_charge != 0
+
+
+def test_core_winding_requires_periodic_field_not_a_single_valued_real_phase():
+    period, winding = 1.7, 2
+    angles = np.arange(24) * (2 * math.pi / 24)
+    derivative = period * winding / (2 * math.pi) + 0.2 * np.cos(angles)
+    assert (2 * math.pi * np.mean(derivative)) == pytest.approx(period * winding)
+    assert abs(float(2 * math.pi * np.mean(0.2 * np.cos(angles)))) < 2e-15
+
+
+def test_nonminimal_bulk_source_can_project_onto_unbroken_channel():
+    p_zero = np.diag([0, 1])
+    minimal_source = np.array([3, 0])
+    phase_gradient = np.array([1, 2, -1])
+    massive_magnetic = np.array([2, 0, 1])
+    mixed_source = np.array([0, phase_gradient @ massive_magnetic])
+    np.testing.assert_array_equal(p_zero @ minimal_source, [0, 0])
+    np.testing.assert_array_equal(p_zero @ mixed_source, [0, 1])
+    # A pointwise source projection says nothing about its spatial integral.

@@ -1,6 +1,6 @@
 # Wasserstoff als gemeinsamer Zielbenchmark
 
-Stand: 2026-11-10. Datengebundener Einstieg und Feld-/Quellenkriterien ergaenzt; Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
+Stand: 2026-11-11. Memory-Phasenanschluss und getrennter Witten-Referenzvertrag ergaenzt; Ziel- und Hypothesenvertrag mit getrenntem QCD-/QFT-Referenzzweig auf Autorenwunsch, kein
 Ergebnis, keine neue Modellregel und keine Ausfuehrungsfreigabe. Die einzige
 Arbeitsreihenfolge bleibt in den [Projektprioritaeten](../status/project_priorities.md).
 
@@ -153,6 +153,22 @@ das Problem nicht. Die volle Feldrueckwirkung ist auch beim Stabilitaetstest
 mitzufuehren; ein eingefrorenes Selbstfeld kann ein falsches Minimum zeigen.
 Diese Bedingungen reduzieren die Modellwahl vor einem Parameterfit,
 legen aber keine neue Dynamik fest.
+Der anschliessend gepruefte Mischkopplungsansatz liefert eine nichtminimale
+Bulk-Quelle, benoetigt jedoch einen eigenen Kernstrom fuer deren Erhaltung.
+Im dokumentierten geschlossenen Vergleich bestimmt die Verknuepfung
+allein nicht die Gesamtladung. Ein zusaetzlicher Kernzustand samt Dynamik
+waere daher eine neue phaenomenologische Annahme.
+
+Autorenentscheidung vom 2026-11-11: neue Freiheitsgrade zuerst aus Memory
+herleiten und gleichzeitig die Referenz getrennt ausarbeiten. Der
+[konkrete Anschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
+definiert einen komplexen Vektorreadout mit exakter FIFO-Randbilanz und
+beweist, warum seine projizierte Wicklung noch keinen Schutz besitzt.
+Der getrennte Witten-Vertrag verwendet dagegen explizite Kernfelder
+und eine relativistische Wirkung; deren Erhaltung ist keine Memory-
+Herleitung. Einheitsladung, dynamische Stabilitaet bei elektromagnetischer
+Rueckwirkung und Spin/Statistik bleiben eigenstaendige Pruefungen.
+Keine freien Kernparameter oder neuen Simulationslaeufe ausgewaehlt.
 
 Identische Elektronen wechselwirken elektrisch repulsiv; das
 Pauliprinzip ist dagegen eine Antisymmetriebedingung des gesamten
