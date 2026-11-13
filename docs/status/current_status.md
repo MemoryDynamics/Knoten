@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-11 (Memory-Phasenreadout und getrennter phaenomenologischer Kernbenchmark ausgearbeitet; keine neue native Regel oder Zielrechnung).
+Stand: 2026-11-14 (Alignment-Normalvariation samt Richtungsrueckwirkung implementiert; Intensitaetsbilanz schliesst automatische Ladungsdeutung aus, keine Zielrechnung).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [dynamische Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
+leitet die volle Normalvariation der vorhandenen aktiven Vektormemory
+her. Der neue Pruefer veraendert keine Simulationsregel; Ein-Schritt-
+Gegenkontrollen erfassen auch die beweglichen gespeicherten Richtungen.
+Translations-/Kippmoden werden von Formmoden unterschieden. Die normale
+Instabilitaetshuerde ist um den Alignment-Beitrag erweitert, aber kein
+neuer Orbit oder Stabilitaetsbefund erzeugt. Die separate Modenintensitaet
+hat eine explizite Quellen-/Verlustbilanz und ist nicht allgemein erhalten;
+ein exakt auswertbarer aktiver Update aendert sie von 1 auf 1/2.
+28 neue Kontrollen, 170 betroffene Tests, Lint und strikter Dokumentationsbau
+bestanden. Noch keine Ladung, kein Teilchen und keine neue Zielsimulation.
 
 Auf Autorenentscheidung sind im [Memory-/Kernphasenanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
 beide Straenge getrennt konkretisiert. Ein komplexer Vektorreadout folgt

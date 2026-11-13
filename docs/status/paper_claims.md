@@ -1,9 +1,21 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-11 (aus Memory abgeleiteter Readout ist kein erhaltener Kernfreiheitsgrad; Witten-Wirkung ausschliesslich Referenz, keine neue Zielsimulation).
+Stand: 2026-11-14 (aktive Alignment-Ableitung geprueft, kein nativer Stabilitaets- oder Ladungspass; Referenzwirkung weiterhin getrennt).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Normalantwort-Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
+betrifft den rauschfreien, gefuellten, bahnkonsistenten Alignment-Kanal
+an planaren Historien mit nichtverschwindenden aktiven Schritten.
+Der Ein-Schritt-Jacobian ist kein Floquet-Nachweis und die binary64-
+Auswertung kein Intervallzertifikat. Kippfaktoren gelten nur am wirklichen
+Kreisorbit; positive Translationssteigung beweist keine Stabilitaet.
+Die Intensitaetsbilanz widerlegt nur deren automatische Erhaltung,
+nicht alle denkbaren Ladungsdefinitionen. Ein stetiger erhaltener Wert
+ist im Einzugsgebiet eines einzelnen periodischen Attraktors konstant;
+ein fester Artenwert wird dadurch nicht ausgeschlossen. Keine neue
+Memory-Regel, kein ausgefuehrtes Zielpanel und keine Teilchenidentifikation.
 
 Der [Memory-/Kernphasenanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md)
 leitet einen komplexen Modenreadout, keine Quantenamplitude oder lokale

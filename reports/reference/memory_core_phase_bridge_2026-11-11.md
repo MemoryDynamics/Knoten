@@ -1,6 +1,6 @@
 # Kernphase aus Memory und getrennter Feldbenchmark
 
-Stand: 2026-11-11. Umsetzung der Autorenentscheidung: neue Freiheitsgrade
+Stand: 2026-11-14; begonnen am 2026-11-11. Umsetzung der Autorenentscheidung: neue Freiheitsgrade
 im Emergenzzweig erst herleiten, den phaenomenologischen Feld-/Kernvergleich
 trotzdem ausarbeiten. Keine neue native Regel, keine Zielsimulation.
 Die Arbeitsreihenfolge steht nur in den
@@ -23,6 +23,13 @@ auf Modellebene, beweist aber weder einen stabilen Einheitsladungssoliton
 noch ein Elektron. Sie ersetzt nicht die bisherige Mischkopplung durch
 eine behauptete Memory-Ableitung; sie ist eine **andere, explizite
 Referenzarchitektur** ohne Axionterm oder nachtraeglichen Bilanzrest.
+
+Fortsetzung vom 2026-11-13: Abschnitt 6 leitet die volle normale
+Rueckwirkung des bereits vorhandenen aktiven Alignment-Kanals her.
+Die Referenzwirkung wird dabei nicht benutzt. Ein implementierter
+Ableitungspruefer erfasst auch die beweglichen Orientierungsdeposits;
+eine separate Bilanz zeigt, warum Modenintensitaet keine automatisch
+erhaltene Ladung ist. Noch kein stabiler Ladungstraeger nachgewiesen.
 
 ## 1. Ein wirklich aus Historie abgeleiteter Kandidat
 
@@ -287,3 +294,195 @@ in 11.08 s, abschliessend **103 Tests bestanden in 3.62 s**, einschliesslich
 der direkt verwendeten Historien-/Vektormemory-Funktionen. Konfigurierte
 Ruff-Pruefung, strikter MkDocs-Bau und Whitespacepruefung bestanden.
 Keine vollstaendige Repository-Testsuite und kein neuer Produktionssolver.
+
+## 6. Dynamischer Anschluss: Normalantwort und Ladung
+
+### Bestehende aktive Regel statt neues Feld
+
+Autorenfreigabe vom 2026-11-13: zuerst den Memory-basierten Ladungstraeger
+verfolgen. Hier wird nur der bereits implementierte deterministische
+Alignment-Kanal untersucht, kein Maxwell-Feld eingebaut und kein Gain
+fuer einen Ziellauf gewaehlt. Im gefuellten, bahnkonsistenten Zustand ist
+
+$$
+x_{n+1}=x_n-\eta\sum_{j=0}^{H_s-1}w_j\nabla K(x_n-x_{n-j})
+ +\eta_v\sum_{j=0}^{H_v-1}v_jG_v(x_n-x_{n-j})p_{n-j},
+$$
+
+$$
+p_{n-j}=\frac{x_{n-j}-x_{n-j-1}}{\ell_j},\qquad
+\ell_j=|x_{n-j}-x_{n-j-1}|,\qquad
+G_v(d)=e^{-|d|^2/(2\sigma_v^2)}.
+$$
+
+Die $p_j$ sind im Simulator **Einheitsrichtungen**, im Unterschied zu
+den Displacement-Readouts aus Abschnitt 1. Skalare und vektorielle
+Gewichte/Horizonte duerfen verschieden sein. Zur Darstellung der letzten
+aktiven Richtung ist ein zusaetzlicher Vorgaenger erforderlich; er darf
+nicht aus einer kuerzeren skalaren Historie erfunden werden. Eine
+gespeicherte Einheitsrichtung allein enthaelt ihre urspruengliche
+Schrittlaenge nicht. Der neue Pruefer verlangt deshalb die deklarierte
+vollstaendige Positionshistorie als Eingang, nicht nur einen Snapshot
+der komprimierten Richtungen.
+
+Die folgende Ableitung gilt bei $\ell_j>0$ fuer alle beitragenden
+Vektordeposits. `normalize_orientation(0)` ist zwar implementiert, aber
+die Normierung hat dort keine regulaere Ableitung. Solche aktiven
+Zustaende werden nicht durch einen kuenstlichen Nenner-Epsilon repariert.
+Ausgeschaltete oder exakt nullgewichtete Deposits erzeugen dagegen keine
+solche Ableitungsbedingung.
+
+### Vollstaendige Normalvariation
+
+Sei die ungestoerte Historie in einer Ebene und z eine beliebige
+Koordinate senkrecht dazu. Fuer den effektiven radialen Skalargradienten
+schreibe $\nabla K(d)=a(|d|^2)d$. In der Gauss-Konvention des Repositorys
+
+$$
+a(r^2)=-\frac{A_{\rm rep}}{\sigma_{\rm rep}^2}e^{-r^2/(2\sigma_{\rm rep}^2)}
+ +\frac{A_{\rm att}}{\sigma_{\rm att}^2}e^{-r^2/(2\sigma_{\rm att}^2)}.
+$$
+
+Bei gefalteten Deposits werden die vorhandenen effektiven Breiten und
+Amplituden benutzt, einschliesslich ihrer Abhaengigkeit von der
+Umgebungsdimension d. Die erste Variation der Abstandsfaktoren in
+Normalrichtung verschwindet. Fuer die Orientierung gilt dagegen
+$D(u/|u|)\delta u=(I-pp^T)\delta u/|u|$, also hier
+$\delta p_{n-j,z}=(z_{n-j}-z_{n-j-1})/\ell_j$.
+Mit $c_j=\eta w_ja(|x_n-x_{n-j}|^2)$ und
+$b_j=\eta_vv_jG_v(x_n-x_{n-j})/\ell_j$ folgt exakt
+
+$$
+z_{n+1}=z_n-\sum_{j=0}^{H_s-1}c_j(z_n-z_{n-j})
+                  +\sum_{j=0}^{H_v-1}b_j(z_{n-j}-z_{n-j-1}).
+$$
+
+Der letzte Summand fehlt bei eingefrorenen Orientierungen. Die Funktion
+[`planar_alignment_normal_row`](../../src/emergenz_knoten/vector_memory.py)
+liefert die erste Zeile dieser Historienabbildung; alle folgenden Zeilen
+schieben die Historie weiter. Sie laesst die Simulationsregel unveraendert.
+Bei einer allgemeinen planaren Bahn sind die Koeffizienten zeitabhaengig:
+Eigenwerte eines einzelnen Schritts sind dann kein Floquet-Nachweis.
+Alle d-2 Normalrichtungen haben denselben Block, solange die deklarierte
+isotrope Alignment-Regel und planare Grundbahn gelten. Ein positiver
+Normalbefund wuerde die ebenen Formmoden noch nicht pruefen.
+
+Eine codeunabhaengige Symmetriekontrolle ist besonders streng: Die
+Zeilensumme ist 1, und fuer jede infinitesimale starre Kippung
+$z_j=a_1y_{j1}+a_2y_{j2}$ muss dieselbe Zeile genau die entsprechende
+Komponente des **nichtlinearen** naechsten Punkts liefern. Die Tests
+pruefen dies an den vorhandenen Gradienten-/Vektorprimitive-Funktionen,
+nicht an einem behaupteten Zielorbit.
+
+### Bedingter Kreistest, keine neue Kreissuche
+
+Nur fuer einen existierenden gleichfoermigen Kreis
+$x_n=R(\cos n\theta,\sin n\theta)$ sind c,b konstant. Mit
+$\lambda=e^{i\theta}$, $0<\theta<\pi$, lautet seine Existenzgleichung
+
+$$
+\lambda-1=-\sum_jc_j(1-\lambda^{-j})
+              +(1-\lambda^{-1})\sum_jb_j\lambda^{-j}.
+$$
+
+Die normale charakteristische Funktion ist daher
+
+$$
+F(\mu)=\mu-1+\sum_jc_j(1-\mu^{-j})
+                    -(1-\mu^{-1})\sum_jb_j\mu^{-j}.
+$$
+
+Translation liefert $F(1)=0$. **Erst die erfuellte Existenzgleichung**
+liefert auch $F(e^{\pm i\theta})=0$: starre Kippungen der Kreisebene,
+keine instabilen Formmoden. Fuer die zwei Kippmoden gibt es hier d-2
+Kopien, keine bevorzugte aeussere Ebene. Die schon vorhandene
+Polynomdivision durch $(\mu-1)(\mu^2-2\cos\theta\mu+1)$ kann diese
+Symmetrien abtrennen, darf einen verbleibenden Rest aber nicht wegwerfen.
+An beliebigen Kreis-Startwerten ohne Existenznachweis waere das ein
+falscher Stabilitaetsnachweis.
+
+Die leicht pruefbare notwendige Huerde wird
+
+$$
+S=F'(1)=1+\sum_j j c_j-\sum_j b_j.
+$$
+
+Bei $S<0$ ist F unmittelbar rechts von 1 negativ und fuer grosse
+positive $\mu$ positiv. Daher existiert eine wachsende reelle Normalmode
+$\mu>1$. Bei $S\ge0$ bleibt Stabilitaet offen: andere reelle oder
+komplexe Wurzeln koennen ausserhalb des Einheitskreises liegen.
+Ein rigoroser numerischer Instabilitaetsbefund braeuchte eingeschlossene
+Koeffizienten und einen bewiesenen Zielorbit. Die neue binary64-Ableitung
+liefert kein solches Zertifikat. Positives Alignment verringert S bei
+**festgehaltener Geometrie**, veraendert aber zugleich die Existenzgleichung;
+daraus folgt keine allgemeine Destabilisierung aller aktiven Orbits.
+
+### Warum selbst eine stabile Phase noch keine Ladung ist
+
+Fuer den abgeleiteten Readout aus Abschnitt 1 setze
+$Z'=qe^{i\omega}Z+d$, wobei d genau neue Einspeisung und FIFO-Tail
+enthaelt. Der naheliegende Intensitaetskandidat $I=Z^\dagger Z$ erfuellt
+
+$$
+I'-I=(q^2-1)I+2\operatorname{Re}[(qe^{i\omega}Z)^\dagger d]+d^\dagger d.
+$$
+
+Es gibt also eine explizite Quellen-/Verlustbilanz, kein allgemeines
+Erhaltungsgesetz aus dieser Identitaet allein. Eine exakte Gegenprobe
+bindet die Aussage an die vorhandene aktive Regel: $H_s=3$, $\eta=0$,
+$q=1/2$, $w_0=1$, $H_v=1$, $v_0=1$, $\eta_v=1/2$ und die Historie
+$(y_0,y_1,y_2)=(0,-e_1,-e_1)$. Die einzige aktive Einheitsrichtung ist
+$e_1$, ihr Kernelwert am aktuellen Punkt 1, also $x^+=e_1/2$.
+Bei $\omega=\pi/2$ gilt exakt $Z=e_1$, $Z'=(1+i)e_1/2$ und
+$I'-I=-1/2$. Das sind konstruierte rationale Kontrollwerte, kein
+Teilchenfit. Das Beispiel widerlegt automatische Erhaltung in der
+vorhandenen Modellfamilie, nicht jeden speziellen Parameterbereich
+oder die Erhaltung einer anderen Groesse auf einem eingeschraenkten Sektor.
+
+Konstante Intensitaet auf einem speziellen Orbit kann
+durch diese Terme bilanziert sein; sie beweist keine Erhaltung unter
+Stoerungen oder Kopplung an einen zweiten Traeger. I ist zudem
+nichtnegativ und noch keine zustandsabhaengige Plus-/Minus-Ladung.
+Die Gleichung ist eine algebraische Identitaet fuer diesen Readout,
+kein Ausschluss aller anderen moeglichen Ladungsdefinitionen.
+
+Eine weitere elementare Begrenzung: Ist Q stetig und unter jedem Update
+erhalten, und zieht eine einzelne endliche periodische Bahn alle
+Zustaende eines Bereichs an, dann ist Q dort konstant. Auf der Bahn
+haben alle Punkte wegen Erhaltung denselben Wert; durch Stetigkeit und
+Annaeherung gilt dieser auch im ganzen Einzugsgebiet. Dasselbe Argument
+gilt fuer eine kompakte Attraktormenge, **wenn Q auf ihr konstant ist**.
+Eine stabile Struktur koennte also durchaus einen festen Artenwert
+tragen. Eine variable konservierte Ladung folgt aber nicht aus der
+relaxierenden Amplitude oder aus der blossen Existenz einer Umlaufphase.
+Getrennte Sektoren oder eine Familie mit einer weiteren erhaltenen
+Koordinate waeren zusaetzlich nachzuweisen, nicht einzubauen.
+
+Als Methodenabgleich wurden bei
+[Guillamon--Huguet, SIADS 8 (2009), DOI 10.1137/080737666](https://doi.org/10.1137/080737666)
+im [Autoren-Volltext](https://web.mat.upc.edu/gemma.huguet/papers/GuillamonHuguet09.pdf)
+die Abschnitte 2.1--2.3 gelesen: asymptotische Phase, Isochronen und
+Phasen-/Amplitudenkoordinaten nahe hyperbolischen Zyklen. Diese Theorie
+setzt den geeigneten Zyklus voraus und beschreibt einen klassischen
+Zeitparameter. Hier wurde weder ihr numerisches Verfahren reproduziert
+noch ihr kontinuierlicher Satz auf unser FIFO als bereits bewiesen
+uebertragen. Die obigen diskreten Bilanzen folgen direkt aus der Regel.
+
+### Verifikation und verbleibender Nachweis
+
+Die [28 neuen kleinen Kontrollen](../../tests/test_vector_memory_normal.py)
+pruefen alle Historienableitungen fuer d=3,5,7 und drei Depositionsarten,
+Translation/Kippung, die Fehlantwort eingefrorener Richtungen, passive
+und singulaere Grenzen, den exakt wegfallenden skalaren Selbstterm,
+formale stabile/instabile Polynome und die Intensitaetsbilanz an nativen
+Updates. Die formalen Polynome sind keine realisierten Memory-Orbits.
+Erste Pruefung mit 25 neuen Kontrollen: 54 betroffene Tests bestanden
+in 5.90 s. Nach Ergaenzung der Gegenkontrollen: **170 betroffene Tests
+bestanden in 2.51 s**, davon 28 in der neuen Datei. Konfigurierte Ruff-
+Pruefung, strikter MkDocs-Bau und Whitespacepruefung bestanden;
+keine vollstaendige Repository-Testsuite oder unabhaengiger Beweisaudit.
+
+Damit ist der **Pruefoperator**, nicht der Ladungstraeger, weiterentwickelt.
+Noch fehlen ein geeigneter nativer Zustand, seine volle Stabilitaet und
+eine zu demselben Zustand gehoerende erhaltene Quellen-/Stromgroesse.
+Kein neuer Root, Ziellauf, Gain-Scan oder Referenz-Soliton wurde erzeugt.

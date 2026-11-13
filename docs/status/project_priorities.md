@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-11 (Autorenentscheidung umgesetzt: Freiheitsgrade erst aus Memory herleiten, Feld-/Kernreferenz getrennt ausarbeiten; Modenreadout und Witten-Vertrag konkretisiert, keine neue Zielsimulation).
+Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; volle Alignment-Normalantwort implementiert, Modenintensitaet nicht erhalten; Referenzzweig getrennt, keine neue Zielsimulation).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -277,6 +277,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    eines tragfaehigen Modenraums samt Amplituden-/Leckagekontrolle,
    nicht dessen Normierung oder Benennung als U(1).** Es fehlt weiterhin
    der Anschluss eines zeitlichen Readouts an einen lokalen Kernstrom.
+   Die [Fortsetzung zur aktiven Normalantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
+   liefert jetzt einen geprueften Ableitungsbaustein fuer die bestehende
+   Alignment-Regel, einschliesslich Orientierungsrueckwirkung und
+   verschieden langer Historien. Starre Kippungen nicht als Formzerfall
+   zaehlen; Symmetriefaktoren nur bei erfuellter Existenzgleichung
+   abtrennen. Keine neue Kreissuche daraus ableiten. Die exakte
+   Intensitaetsbilanz enthaelt weiterhin Quellen und Verluste.
+   **Kandidaten daher gleichzeitig an voller Formstabilitaet und einer
+   eigenen erhaltenen Quellen-/Stromgroesse messen.** Eine attraktive
+   Umlaufphase darf nicht als solche Ladung umbenannt werden; feste
+   Artenwerte oder weitere erhaltene Koordinaten brauchen eigene Belege.
+   Auf Autorenwunsch bleibt dieser Memory-Anschluss vor der Ausfuehrung
+   des phaenomenologischen Vergleichs. Noch kein Ladungstraeger,
+   Zielorbit, numerischer Stabilitaetspass oder zusaetzlicher Lauf.
    Der getrennte Witten-Vertrag benennt Wirkung, Vakuum, Ladung und
    linearen Kondensationsoperator. Vor einem Referenzlauf ein festes,
    physikalisch begruendetes Parameter-/Ladungsproblem bestimmen;
