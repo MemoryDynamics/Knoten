@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-14 (Memory-Defekt mit Index +1 konstruiert; nativer FIFO-Schritt kann ihn entfernen; kein geschuetzter Ladungstraeger und keine Zielrechnung).
+Stand: 2026-11-14 (exakter gebundener Defektzyklus konstruiert und als instabil bewiesen; minimale History-Klasse liefert nur Index +1; kein geschuetzter Ladungstraeger).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,19 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Rekurrenz- und Vorzeichenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_recurrence_2026-11-14.md)
+klassifiziert jetzt den minimalen Readout: d+1 aktive gerichtete
+Depositionen in d Dimensionen koennen nur regulaere Defekte mit Index
++1 tragen, auch bei offenen Historien. Der regulaere Tetraeder-Umlauf
+scheitert bei nichtnegativem Alignment-Gain an den Existenzgleichungen,
+fuer Horizonte aus ganzen Vierperioden. Der vorhandene negative
+Vektorgain erlaubt dagegen eine exakte rauschfreie Vierperiode mit
+gebundenem Defekt. Ein rational abgesicherter Spurtest beweist jedoch
+einen Vier-Schritt-Floquet-Multiplikator vom Betrag groesser als 3.
+Die volle History-Variation trennt ihn von Translation und Raumrotation.
+23 neue Kontrollen und 153 betroffene Tests bestanden. Keine
+Parametersuche, neue Simulationsregel, Zieltrajektorie oder Teilchenidentifikation.
 
 Der [Memory-Defektanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_charge_2026-11-14.md)
 liefert einen lokalen ganzzahligen Index ohne zusaetzliches Materiefeld:

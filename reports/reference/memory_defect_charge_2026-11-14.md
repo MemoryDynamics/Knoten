@@ -398,6 +398,15 @@ Mehrschritt-Kontrolle ist noch offen. Keine neue Kopplung wurde gewaehlt.
 Die aktive Arbeitsreihenfolge bleibt ausschliesslich in den
 [Projektprioritaeten](../../docs/status/project_priorities.md).
 
+Die anschliessende [Rekurrenzpruefung](memory_defect_recurrence_2026-11-14.md)
+erweitert den Befund: Die gesamte minimale d+1-Depositionsklasse liefert
+als nichttrivialen lokalen Index nur +1. Ein regulaerer Tetraeder-Vierzyklus ist bei nichtnegativem
+Vektorgain und den angegebenen Phasengewichten ausgeschlossen. Ein
+exakter Kontrollzyklus mit vorhandenem negativem Gain traegt einen
+periodisch gebundenen Defekt, ist aber nach voller History-Variation
+instabil. Damit bleibt die Ein-Schritt-Konstruktion ein Baustein,
+kein geschuetzter Materiekern.
+
 Die [kleinen Kontrollen](../../tests/test_memory_defect_charge.py)
 verwenden die vorhandenen Feld-, Orientierungs- und Push-Funktionen.
 Geprueft werden die exakte Nullstellenformel in 2D/3D/5D, beide

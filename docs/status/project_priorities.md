@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; lokaler Defektindex vorhanden, nativer Schutz offen; Referenzzweig getrennt, keine neue Zielsimulation).
+Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; minimale Defektklasse vorzeichenbeschraenkt, gebundene Vierzyklus-Kontrolle instabil; nichtminimalen Anschluss analytisch pruefen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -304,12 +304,25 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    ersetzt keine Mehrschritt-Erhaltung. Der vorhandene skalare Kernel
    kann den Ein-Schritt-Verlust oberhalb einer abgeleiteten Schwelle
    verhindern, aber der feste positive Kontrollfall verlagert die
-   Nullstelle weit aus der Memory-Wolke. Zuerst diesen bestehenden
-   Skalar-/Vektor-Mechanismus auf einen geschlossenen, raeumlich
-   begrenzten Zustandsbereich pruefen. Keine Nachsuche am Kontrollfall,
+   Nullstelle weit aus der Memory-Wolke. Die folgende Rekurrenzpruefung
+   konkretisiert den offenen geschlossenen, raeumlich begrenzten
+   Zustandsbereich. Keine Nachsuche am Kontrollfall,
    kein Normzwang und keine neue Kopplungsregel.
    Negative Gegenladung und elektrische Wirkung bleiben eigenstaendige
    Nachweise. Keine Zielsimulation aus dieser Konstruktion ableiten.
+   Die [Rekurrenz- und Vorzeichenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_recurrence_2026-11-14.md)
+   liefert nun einen exakten, aber vollstaendig als instabil zertifizierten
+   gebundenen Vierzyklus mit vorhandenem negativem Gain. Kein Nachfit
+   oder Stabilisierungslauf an dieser Kontrolle. Zugleich besitzt die
+   gesamte minimale d+1-Depositionsklasse nur den nichttrivialen Index +1.
+   **Den Ladungstraeger-Anschluss deshalb an einer nichtminimalen
+   Memory-Struktur weiterpruefen: zuerst beide Indexvorzeichen im
+   selben Readout und lokale Bindung, danach deren gemeinsame native
+   Erhaltung und Formstabilitaet.** H>=5 in 3D ist nur notwendig;
+   keine H-Suche, neue Feldregel oder Teilchenzuordnung daraus ableiten.
+   Rauschfreie Strukturerhaltung von endlicher Lebensdauer bei Rauschen
+   weiterhin trennen. Der positive-Gain-Ausschluss fuer regulaere
+   Tetraederzyklen ist kein Ausschluss aller nichtregulaeren Strukturen.
    Der getrennte Witten-Vertrag benennt Wirkung, Vakuum, Ladung und
    linearen Kondensationsoperator. Vor einem Referenzlauf ein festes,
    physikalisch begruendetes Parameter-/Ladungsproblem bestimmen;

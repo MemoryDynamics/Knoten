@@ -1,9 +1,23 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-14 (lokaler Memory-Defektindex hergeleitet, seine automatische FIFO-Erhaltung widerlegt; kein elektrischer Ladungs- oder Stabilitaetspass).
+Stand: 2026-11-14 (minimaler Defektindex nur positiv; exakter gebundener Vierzyklus mit negativem Gain instabil; keine elektrische Ladung oder volle Materiestruktur).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Rekurrenzbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_recurrence_2026-11-14.md)
+trennt drei Aussagen: Die Vorzeichenklassifikation betrifft alle
+minimalen bahnkonsistenten Gaussreadouts mit positiven Gewichten;
+der Existenz-Ausschluss nur regulaere Tetraeder-Vierperioden mit
+nichtnegativem Vektorgain und Horizonten aus ganzen Vierperioden;
+das Instabilitaetszertifikat nur den vollstaendig angegebenen negativen
+Gain-Kontrollfall mit H_s=H_v=4. Die Klasse mit negativem Vektorgain wird weder
+allgemein ausgeschlossen noch als neue physikalische Kopplung gewaehlt.
+H>=5 in 3D ist fuer beide Indexvorzeichen eine notwendige Huerde,
+keine Konstruktion. Speicherbeitrag ist kein Teilchenlabel. R mit
+det R=-1 ist keine eigentliche Rotation und liefert keinen Spinbefund.
+Keine Herleitung von Elektrizitaet, QFT oder Gravitation und keine
+Aenderung an Paper I.
 
 Der [Simplex-Defektsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_charge_2026-11-14.md)
 betrifft eine konstruierte bahnkonsistente Historie, keinen nativen
