@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-14 (Alignment-Normalvariation samt Richtungsrueckwirkung implementiert; Intensitaetsbilanz schliesst automatische Ladungsdeutung aus, keine Zielrechnung).
+Stand: 2026-11-14 (Memory-Defekt mit Index +1 konstruiert; nativer FIFO-Schritt kann ihn entfernen; kein geschuetzter Ladungstraeger und keine Zielrechnung).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,24 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Memory-Defektanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_charge_2026-11-14.md)
+liefert einen lokalen ganzzahligen Index ohne zusaetzliches Materiefeld:
+Eine geschlossene Simplex-Historie hat genau eine regulaere +1-Nullstelle
+des bestehenden Gauss-Vektorfelds, auch mit positiven nativen
+Vergessensgewichten und Einheitsrichtungen. Ein aktiver Alignment-Schritt
+kann bei der regulaeren Vierpunkt-Historie jedoch alle Feldnullstellen
+entfernen; ein globaler Halbraumbeweis ersetzt die Nullstellensuche.
+Notwendige Richtungsumfassung und ein hinreichendes Quellen-/Tail-
+Randkriterium sind abgeleitet. Lokale strukturelle Robustheit ist nicht
+zeitlicher Schutz; weder elektrische Ladung noch ein Teilchen gewonnen.
+Der vorhandene skalare Kanal kann oberhalb einer expliziten Schwelle
+nach einem Schritt wieder einen +1-Defekt liefern. Die feste positive
+Kontrolle liegt jedoch weit ausserhalb der Memory-Wolke; daraus folgt
+keine raeumliche Bindung oder weitergehende Erhaltung.
+Keine Simulationsregel geaendert und keine Zieltrajektorie ausgefuehrt.
+29 neue konstruierte Kontrollen, 130 betroffene Tests, Lint und strikter
+Dokumentationsbau bestanden; keine vollstaendige Repository-Testsuite.
 
 Die [dynamische Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
 leitet die volle Normalvariation der vorhandenen aktiven Vektormemory

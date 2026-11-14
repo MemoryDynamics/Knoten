@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; volle Alignment-Normalantwort implementiert, Modenintensitaet nicht erhalten; Referenzzweig getrennt, keine neue Zielsimulation).
+Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; lokaler Defektindex vorhanden, nativer Schutz offen; Referenzzweig getrennt, keine neue Zielsimulation).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -273,9 +273,9 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    setzt die Entscheidung nun konkret um: komplexer Historienreadout,
    exakte Einspeisungs-/Tailbilanz und bedingte Phasenfehlerkontrolle;
    zugleich ein expliziter Entwindungspfad fuer den mehrkomponentigen
-   Readout. **Naechster Memory-Nachweis ist die dynamische Isolation
+   Readout. Ein Modenansatz benoetigt die dynamische Isolation
    eines tragfaehigen Modenraums samt Amplituden-/Leckagekontrolle,
-   nicht dessen Normierung oder Benennung als U(1).** Es fehlt weiterhin
+   nicht bloss dessen Normierung oder Benennung als U(1). Es fehlt weiterhin
    der Anschluss eines zeitlichen Readouts an einen lokalen Kernstrom.
    Die [Fortsetzung zur aktiven Normalantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
    liefert jetzt einen geprueften Ableitungsbaustein fuer die bestehende
@@ -291,6 +291,25 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Auf Autorenwunsch bleibt dieser Memory-Anschluss vor der Ausfuehrung
    des phaenomenologischen Vergleichs. Noch kein Ladungstraeger,
    Zielorbit, numerischer Stabilitaetspass oder zusaetzlicher Lauf.
+   Der [Memory-Defektanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_charge_2026-11-14.md)
+   liefert jetzt einen anderen Kandidaten: lokalen Index +1 aus einer
+   bahnkonsistenten Simplex-Historie mit nativen Gewichten. Ein aktiver
+   FIFO-Schritt kann aber alle Nullstellen entfernen. **Als naechsten
+   Diskriminator eine dynamisch regenerierte Richtungsumfassung mit
+   raeumlicher Kernbindung und kontrolliertem Defektrandfluss pruefen**,
+   bevor ein Index als
+   Ladungstraeger oder als Quelle des Referenzfelds eingesetzt wird.
+   Die notwendige konvexe Richtungsbedingung und hinreichende
+   Quellen-/Tail-Randschranke stehen im Bericht; ein Anfangspass
+   ersetzt keine Mehrschritt-Erhaltung. Der vorhandene skalare Kernel
+   kann den Ein-Schritt-Verlust oberhalb einer abgeleiteten Schwelle
+   verhindern, aber der feste positive Kontrollfall verlagert die
+   Nullstelle weit aus der Memory-Wolke. Zuerst diesen bestehenden
+   Skalar-/Vektor-Mechanismus auf einen geschlossenen, raeumlich
+   begrenzten Zustandsbereich pruefen. Keine Nachsuche am Kontrollfall,
+   kein Normzwang und keine neue Kopplungsregel.
+   Negative Gegenladung und elektrische Wirkung bleiben eigenstaendige
+   Nachweise. Keine Zielsimulation aus dieser Konstruktion ableiten.
    Der getrennte Witten-Vertrag benennt Wirkung, Vakuum, Ladung und
    linearen Kondensationsoperator. Vor einem Referenzlauf ein festes,
    physikalisch begruendetes Parameter-/Ladungsproblem bestimmen;

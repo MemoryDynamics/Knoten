@@ -1,9 +1,26 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-14 (aktive Alignment-Ableitung geprueft, kein nativer Stabilitaets- oder Ladungspass; Referenzwirkung weiterhin getrennt).
+Stand: 2026-11-14 (lokaler Memory-Defektindex hergeleitet, seine automatische FIFO-Erhaltung widerlegt; kein elektrischer Ladungs- oder Stabilitaetspass).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Simplex-Defektsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_charge_2026-11-14.md)
+betrifft eine konstruierte bahnkonsistente Historie, keinen nativen
+Attraktor. Sein Index +1 bleibt bei kleinen Zustandsstoerungen lokal
+erhalten, nicht automatisch beim diskreten Update. Der Verlustsatz
+gilt fuer H_vector=4, regulaere Tetraeder-Eckenfolge, positiven
+Alignment-Gain und ausgeschalteten skalaren Drift/Rauschen, mit der
+angegebenen offenen Inkrementreserve. Kein allgemeiner Ausschluss
+anderer Sektoren. Drei Richtungen reichen nicht fuer einen regulaeren
+3D-Punktdefekt; dies ist keine Aussage gegen drei zusammengesetzte
+Knoten. Dimension, negative Gegenladung, physikalischer Strom und
+elektrische Kopplung sind nicht hergeleitet. Keine Aenderung an Paper I.
+Die ergaenzte Skalar-Schwelle gilt nur fuer den angegebenen einen
+Schritt aus regulaerer Geometrie. Die erneut existierende Nullstelle
+muss nicht nahe der Historie bleiben; im festen Kontrollfall liegt
+sie weit ausserhalb. Keine iterative Anwendung der Schwelle oder
+Behauptung eines lokalisierten, geschuetzten Kerns.
 
 Die [Normalantwort-Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_core_phase_bridge_2026-11-11.md#6-dynamischer-anschluss-normalantwort-und-ladung)
 betrifft den rauschfreien, gefuellten, bahnkonsistenten Alignment-Kanal
