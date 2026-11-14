@@ -1,6 +1,6 @@
 # Theoretical Context
 
-Stand: 2026-08-20.
+Stand: 2026-08-20; Klarstellung zur optionalen Vektormemory-Rueckkopplung 2026-11-02.
 
 Diese Datei ist der kuratierte theoretische Kontext. Sie ersetzt die frueheren
 Parallelseiten zur Non-Markovian Basis, Markov-Architektur und
@@ -25,6 +25,14 @@ konstitutive Erweiterung.
 | K1: passives orientiertes Memory | $(x_n,\rho_n,p_n,v_n)$ | Richtungstraeger und gerichtete Deposits; $x_n$ liest weiterhin nur $\rho_n$ | implementierter Diagnose-/One-Way-Pilot, kein Source-Selbstfeld |
 | K2: inertiales aktives Vektorfeld | $(m(x,t),\pi(x,t))$ | Hamilton-artiger Austausch plus Daempfung | isolierter analytischer Vorschlag; nicht im Knotensimulator |
 | K3: moegliche Kopplung | $(x,\rho,m,\pi)$ | noch nicht festgelegt | gesperrt, bis Herleitung oder Identifizierbarkeit besteht |
+
+Die K1-Zeile beschreibt den passiven Diagnosezweig, nicht die gesamte
+Vektormemory-API. `VectorMemoryConfig` in `vector_memory.py` bietet auch
+`eta_vector != 0` mit Alignment- oder 2D-Transversal-Rueckkopplung an.
+Diese optionale lokale Gauss-Force ist eine zusaetzliche Regel, kein
+K2-Selbstfeld und keine bereits geschlossene gemeinsame Energie.
+Die [Energie-/Fernfeld-Bestandspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/interaction_structure_inventory_2026-11-02.md)
+trennt diese Faelle und die anderen vorhandenen Feldarchitekturen.
 
 Ab hier bezeichnet $v_n$ ausschliesslich das passive gerichtete Memory und
 $m(x,t)$ ausschliesslich den aktiven K2-Feldvorschlag. Aeltere Vektormemory-

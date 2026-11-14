@@ -174,7 +174,20 @@ def test_p4rs_frontdoors_report_reviewed_result_and_sealed_p5_target() -> None:
         in repository_map
     )
     assert "Runner und Target fehlen weiterhin" not in report_index
-    assert "wird deshalb nicht in den Paper-I-\nHauptclaim eingemischt" in paper_i
-    assert "| Evidenz | P4-R-S" in paper_i
-    assert "| Inferenz |" in paper_i
-    assert "| Hypothese |" in paper_i
+    normalized_paper_i = " ".join(paper_i.split())
+    assert (
+        "Existenz- und Stabilitaetsclaims dieses anderen Arms sind keine "
+        "Voraussetzung und keine Evidenz fuer Paper I."
+    ) in normalized_paper_i
+    for name in ("content.tex", "appendix.tex"):
+        body = (audit.ROOT / "paper/paper_i/manuscript" / name).read_text(
+            encoding="utf-8"
+        )
+        assert "p4rs-anchor-scale-transfer-pass" not in body
+        assert "P4-R-S" not in body
+    p4rs_claim = next(
+        line for line in claims.splitlines()
+        if line.startswith("| P4-R-S Anchor-Skalenholdout -- reviewed Pass |")
+    )
+    assert "keine unabhaengige Replikation" in p4rs_claim
+    assert "kein Mechanik-, Spin-, Impuls-, Traegheits- oder Masseclaim" in p4rs_claim

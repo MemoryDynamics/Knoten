@@ -12,7 +12,11 @@ from .core import (
     memory_horizon,
     validate_simulation_config,
 )
-from .kernels import double_gaussian_gradient, exponential_memory_weights
+from .kernels import (
+    double_gaussian_gradient,
+    effective_double_gaussian_parameters,
+    exponential_memory_weights,
+)
 from .markov.features import augmented_feature_names, memory_summary_features
 from .state import FiniteMemoryState
 
@@ -334,6 +338,82 @@ def vector_memory_force(
             raise ValueError("transverse_2d force_mode requires dim=2")
         return np.array([-field[1], field[0]], dtype=float)
     raise ValueError("unknown force_mode")
+
+
+def planar_alignment_normal_row(
+    history: np.ndarray, config: VectorMemoryConfig
+) -> np.ndarray:
+    """Linearize one normal coordinate of a consistent, filled planar history.
+
+    ``history`` contains newest-first 2D positions, including one predecessor
+    for every active vector deposit. The ambient dimension and kernel
+    convolution are taken from ``config.scalar``. The returned row maps the
+    normal history to the next normal position; subsequent rows just shift.
+    This is a deterministic local derivative, not an orbit or stability test.
+    """
+    _validate_vector_config(config)
+    scalar = config.scalar
+    if scalar.dim < 3 or config.force_mode != "alignment":
+        raise ValueError("normal row requires alignment in ambient dimension >= 3")
+    if scalar.epsilon != 0:
+        raise ValueError("normal row requires a deterministic epsilon=0 config")
+    scalar_count = memory_horizon(scalar)
+    active_vector = config.eta_vector != 0 and config.vector_mass != 0
+    vector_count = _vector_horizon(config) if active_vector else 0
+    count = max(scalar_count, vector_count + 1)
+    positions = np.asarray(history, dtype=float)
+    if positions.shape != (count, 2) or not np.isfinite(positions).all():
+        raise ValueError(f"history must be finite with shape ({count}, 2)")
+    weights = exponential_memory_weights(
+        scalar.alpha, scalar_count, memory_mass=scalar.memory_mass
+    )
+    params = effective_double_gaussian_parameters(
+        dim=scalar.dim,
+        sigma_rep=scalar.sigma_rep,
+        sigma_att=scalar.sigma_att,
+        amplitude_rep=scalar.amplitude_rep,
+        amplitude_att=scalar.amplitude_att,
+        deposition_kernel=scalar.deposition_kernel,
+        deposition_sigma=scalar.deposition_sigma,
+    )
+    differences = positions[0] - positions
+    squared_distances = np.einsum("ij,ij->i", differences, differences)
+    rep_variance, att_variance = params["sigma_rep"] ** 2, params["sigma_att"] ** 2
+    radial = -params["amplitude_rep"] / rep_variance * np.exp(
+        -squared_distances[:scalar_count] / (2 * rep_variance)
+    ) + params["amplitude_att"] / att_variance * np.exp(
+        -squared_distances[:scalar_count] / (2 * att_variance)
+    )
+    scalar_couplings = scalar.eta * weights * radial
+    # Receiver and youngest scalar deposit move together; their difference is zero.
+    scalar_couplings[0] = 0.0
+    row = np.zeros(count)
+    row[0] = 1 - scalar_couplings.sum()
+    row[:scalar_count] += scalar_couplings
+    if active_vector:
+        vector_weights = exponential_memory_weights(
+            _lambda_vector(config), vector_count, memory_mass=config.vector_mass
+        )
+        lengths = np.linalg.norm(
+            positions[:vector_count] - positions[1 : vector_count + 1], axis=1
+        )
+        used = vector_weights != 0
+        if np.any(lengths[used] == 0):
+            raise ValueError("active unit-orientation deposit has zero step length")
+        vector_couplings = np.zeros(vector_count)
+        vector_couplings[used] = (
+            config.eta_vector
+            * vector_weights[used]
+            * np.exp(
+                -squared_distances[:vector_count][used] / (2 * config.sigma_vector**2)
+            )
+            / lengths[used]
+        )
+        row[:vector_count] += vector_couplings
+        row[1 : vector_count + 1] -= vector_couplings
+    if not np.isfinite(row).all():
+        raise ValueError("normal row is not finite in floating-point arithmetic")
+    return row
 
 
 def simulate_vector_memory(
