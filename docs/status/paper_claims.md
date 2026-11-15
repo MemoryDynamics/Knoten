@@ -1,9 +1,26 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (endliche Defektfortsetzung und bedingte diffusive Vektorreadout-Grenze; keine native Langzeitbindung oder elektrische Ladung).
+Stand: 2026-11-16 (Fixraum-Hindernis fuer starre FIFO-Regeneration; notwendige Phasen-/Deformationsreserve, keine stabile Materie).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Fixraum-/Phasensatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
+betrifft regulaere Punktdefekte des positiv gewichteten gerichteten
+Gaussreadouts. Der Ein-Schritt-Ausschluss setzt eine gemeinsame
+eigentliche Rotation und ungerade Dimension voraus, nicht bloss
+irgendeine wiederkehrende Bahn. Fuer m-Schritt-Wiederkehr ist
+min(m,H)>=dim ker(I-Q)+1 notwendig. Die positive Jacobian-Reserve
+erzwingt zudem eine Mindestabweichung von starrer Ein-Schritt-
+Regeneration. Kein Existenz-/Stabilitaetssatz fuer m=2, keine neue
+Simulationsregel oder Wahl der Zweiphasenparameter. Die zwei
+Altersklassen sind weder zwei Teilchen noch Spin 1/2. Uneigentliche
+Transformationen, gerade Dimension ohne Fixraum und nichtstarre
+Zustaende werden durch den Ein-Schritt-Satz nicht ausgeschlossen.
+Der Literaturvergleich betrifft ein anderes Mehragentensystem;
+dessen Stabilitaetszertifikat wurde nicht reproduziert. Keine
+allgemeine Alignment-Instabilitaet, Dimensionsauswahl oder elektrische
+Quellenwirkung abgeleitet. Keine Aenderung an Paper I.
 
 Der [Fortsetzungs-/Skalierungsbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_transport_2026-11-16.md)
 ist dreigeteilt: hinreichendes Ein-Schritt-Kontraktionskriterium fuer

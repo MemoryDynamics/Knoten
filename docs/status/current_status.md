@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (endliche Defekt-/Kernfortsetzung und bedingte diffusive Readout-Grenze hergeleitet; native Selbstregeneration bleibt offen).
+Stand: 2026-11-16 (starre Ein-Schritt-Rotation fuer regulaere 3D-FIFO-Punktdefekte ausgeschlossen; mehrphasige native Regeneration bleibt offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,24 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [FIFO-/Rotationsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
+liefert eine von Gains und Gaussbreite unabhaengige notwendige Huerde: Ein
+einzelner gefuellter FIFO mit pro Schritt gemeinsam eigentlich
+rotierenden Richtungen traegt in ungerader Dimension keinen regulaeren
+Punktdefekt dieses Readouts. Der Alters-Shift erzwingt gleiche
+Fixraumprojektionen. Mehrphasige Wiederkehr verlangt mindestens
+dim ker(I-Q)+1 zeitliche Klassen; dies sind keine neuen Freiheitsgrade.
+Eine quantitative Grenze verbindet beinahe starre Regeneration mit
+der Jacobian-Reserve. Fuer zwei Phasen sind nun die beiden nativen
+Kopfgleichungen und die Achsenbilanz formuliert, ohne Parameterwahl
+oder Loesung. Der bekannte uneigentliche Vierzyklus ist eine passende,
+weiterhin instabile Gegenkontrolle. Neue Literatur zu stabilen
+gerichteten Agentenrotationen ist kein direkter FIFO-Transfer und
+verbietet pauschale Alignment-Zerfallsbehauptungen. 27 neue feste
+Kontrollen und 277 Tests im betroffenen Panel bestehen, ebenso Lint
+und strikter Dokumentationsbau; keine vollstaendige Repository-Testsuite.
+Kein stabiler Traeger oder elektrische Ladung.
 
 Der [Defekttransport-/Zeitskalierungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_transport_2026-11-16.md)
 ergaenzt den bisherigen Gesamtgradschutz um ein hinreichendes endliches

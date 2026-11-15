@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; native Selbstregeneration der Defekt-/Kernreserven; kleine Schritte nicht mit dynamischem Schutz verwechseln).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; nichtstarre oder mehrphasige native Regeneration, kein Transfer freier Agentenrotationen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -361,6 +361,22 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Begruendung und Autorenentscheidung einfuehren. Der skalare
    Querbilanztest bleibt ein notwendiger Bewegungscheck, kein Auftrag
    fuer eine neue Kraft.
+   Der [Fixraum-/Phasenabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
+   schaerft diesen Schritt: **Keine starre eigentliche Ein-Schritt-
+   Rotation als regulaeren 3D-Punktdefekt verfolgen.** Die FIFO-
+   Altersverschiebung erzwingt gleiche Achsenprojektionen und damit
+   fehlende Nullstellen oder fehlenden vollen Rang. Bei mehrphasiger
+   Wiederkehr brauchen die vorhandenen Eintraege unterschiedliche
+   zeitliche Klassen; keine neuen Agenten daraus machen. Den nun
+   formulierten Zweiphasenvertrag mit beiden nativen Kopfgleichungen,
+   axialer Feldbalance und voller History-Ableitung analytisch pruefen,
+   bevor ein Parameterproblem oder Solverlauf vorgeschlagen wird.
+   m=2 ist fuer eigentliche 3D-Rotationswiederkehr minimal zulaessig,
+   keine Festlegung oder Stabilitaetsvermutung. Beinahe starre Historien an der quantitativen
+   Jacobian-/Deformationsreserve messen. Der alte uneigentliche
+   Vierzyklus bleibt instabil; keine Wiederbelebung durch Literatur-
+   Spektren. Gerichtete Agentenmodelle erlauben stabile Rotationen,
+   ihre frei waehlbaren Kopplungen sind aber keine Memory-Ableitung.
    Nichtperiodische oder deformierte gebundene Zustandsbereiche sind
    nicht ausgeschlossen. Keine weitere statische Formensammlung,
    neue Feldvariable oder neue Ziellauffreigabe daraus ableiten.
