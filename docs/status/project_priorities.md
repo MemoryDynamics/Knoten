@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-15 (zuerst Memory-Ladungstraeger; beide statischen Indexvorzeichen lokal konstruiert; jetzt native Regeneration und raeumliche Kontrolle analytisch pruefen).
+Stand: 2026-11-15 (zuerst Memory-Ladungstraeger; Zweischalenumlauf bei gleichem Vergessen ausgeschlossen; verbleibende native Existenzbedingungen statt Gain-Fit pruefen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -329,6 +329,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Der negative Ortsjacobian des eingefrorenen Readouts ersetzt den
    vollen History-Stabilitaetstest nicht. Statistische Abschirmung und
    elektrische Quellenwirkung bleiben gesondert herzuleiten.
+   Die [native Zweischalenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_recurrence_2026-11-15.md)
+   schliesst jetzt diese starre Achtfolge bei gleichem Vergessen und
+   Horizonten aus ganzen Perioden fuer jeden konstanten Vektorgain aus.
+   **Keine Gain-/Breiten-Nachsuche oder Floquet-Rechnung in dieser
+   ausgeschlossenen Klasse.** Bei getrenntem Vergessen verlangt der
+   feste geometrische Zeuge bereits s<1/4000 statt q=99/100; diese
+   notwendige Bedingung nicht als Kalibrierung uebernehmen. Zuerst die
+   verbleibende volle Bewegungsbilanz samt tatsaechlichen Horizonten
+   analytisch pruefen. Der hergeleitete skalare Querbilanztest benennt
+   einen fehlenden nativen Beitrag, keinen Auftrag fuer eine neue Kraft.
+   Nichtperiodische oder deformierte gebundene Zustandsbereiche sind
+   nicht ausgeschlossen. Keine weitere statische Formensammlung,
+   neue Feldvariable oder neue Ziellauffreigabe daraus ableiten.
    Rauschfreie Strukturerhaltung von endlicher Lebensdauer bei Rauschen
    weiterhin trennen. Der positive-Gain-Ausschluss fuer regulaere
    Tetraederzyklen ist kein Ausschluss aller nichtregulaeren Strukturen.

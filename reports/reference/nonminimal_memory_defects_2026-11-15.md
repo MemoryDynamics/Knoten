@@ -6,6 +6,12 @@ Feste konstruierte Historien und Softwarekontrollen, keine Zielbahn,
 Nullstellen- oder Parametersuche. Paper I und die native Dynamik bleiben
 unveraendert.
 
+Die anschliessende [native Regenerationspruefung](nonminimal_memory_recurrence_2026-11-15.md)
+schliesst den starren Zweischalenumlauf bei gleichem skalarem/vektoriellem
+Vergessen und Horizonten aus ganzen Achtperioden aus. Der statische
+Existenzsatz unten bleibt davon unberuehrt; getrenntes Vergessen liefert
+zunaechst nur eine notwendige, keine hinreichende Umlaufbedingung.
+
 ## Ergebnis und Reichweite
 
 **Die Vorzeichenhuerde ist fuer den bestehenden Readout nicht allgemein:**

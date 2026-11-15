@@ -1,9 +1,23 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-15 (nichtminimaler nativer Readout erlaubt beide lokale Defektvorzeichen; kein zeitlich geschuetzter oder elektrisch gekoppelter Traeger).
+Stand: 2026-11-15 (statische nichtminimale Defekte nicht mit nativen Orbits verwechseln; Zweischalen-Ausschluss bei gleichem Vergessen, keine universelle Traeger-Unmoeglichkeit).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Zweischalen-Ausschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_recurrence_2026-11-15.md)
+setzt die angegebene starre Tetraederfolge, Einheitsrichtungen,
+rauschfreies Alignment, gleiche Retention 0<q=s<1 und H_s,H_v aus
+ganzen Achtperioden voraus. Er gilt fuer jeden konstanten reellen
+Vektorgain und radialen glatten skalaren Kernel, nicht fuer alle
+Memory-Orbits. Die Residualschranke >7/3 betrifft die beiden festen
+Phasen bei a=1,b=5,sigma_vector=1,q=99/100, keine parameterunabhaengige
+Umgebung deformierter Orbits. Die notwendige Retention s<1/4000 bei
+getrenntem Vergessen ist kein vollstaendiger Existenznachweis oder
+physikalisch begruendeter Parameterwert. Unvollstaendige Perioden,
+andere Geometrien und nichtperiodische gebundene Zustaende bleiben offen.
+Keine Herleitung der Notwendigkeit externer Felder, keine neue
+Stabilitaetsklassifikation und keine Aenderung an Paper I.
 
 Der [nichtminimale Existenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_defects_2026-11-15.md)
 betrifft feste konstruierte gefuellte H=8-Historien mit q=99/100,

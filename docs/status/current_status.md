@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-15 (beide lokale Defektvorzeichen mit nativer nichtminimaler Memory konstruiert; zeitliche Regeneration und elektrische Wirkung offen).
+Stand: 2026-11-15 (beide statischen Defektvorzeichen vorhanden; starrer Zweischalenumlauf bei gleichem Vergessen ausgeschlossen; kein nativer Ladungstraeger).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,22 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [native Zweischalenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_recurrence_2026-11-15.md)
+zeigt jetzt eine konkrete dynamische Huerde: Gleiche skalare und
+vektorielle Retention und Horizonte aus ganzen Achtperioden erlauben
+die starre zweischalige Tetraederfolge nicht, unabhaengig vom konstanten
+Vektorgain und radialen skalaren Kernel. Eine Tangentialprojektion
+beweist den Ausschluss fuer alle inneren/aeusseren Radien und positiven
+Gaussbreiten. Beim festen H=8-Zeugen bleibt in mindestens einer von
+zwei Phasen ein Inkrementfehler groesser als 7/3. Getrenntes Vergessen
+ist nicht generell ausgeschlossen; fuer denselben geometrischen
+Zeugen verlangt bereits die ferne Tangentialbilanz s<1/4000 bei
+q=99/100. Kein Existenzpass oder ausgewaehlter Parameter. 27 neue
+Kraft-/Algebrakontrollen und 203 Tests im betroffenen Panel bestanden,
+ebenso Lint und strikter Dokumentationsbau. Keine vollstaendige
+Repository-Testsuite. Keine Zielbahn, kein Gain-Fit,
+keine neue Regel; der statische Vorzeichenbeweis bleibt gueltig.
 
 Der [nichtminimale Defektbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_defects_2026-11-15.md)
 schliesst die statische Vorzeichenhuerde: Eine feste H=8-Historie aus
