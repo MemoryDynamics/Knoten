@@ -5,6 +5,11 @@ Stand: 2026-11-14. Fortsetzung des
 Analytische Resultate und endliche konstruierte Rechenkontrollen,
 keine Parameter- oder Orbitsuche und keine neue Zieltrajektorie.
 
+Fortsetzung vom 2026-11-15:
+[Nichtminimale Memory mit beiden lokalen Defektvorzeichen](nonminimal_memory_defects_2026-11-15.md).
+Die H=8-Konstruktion ueberwindet die unten bewiesene minimale
+Vorzeichenhuerde, nicht die offene native Stabilitaets-/Ladungshuerde.
+
 ## Ergebnis
 
 Die Ein-Schritt-Konstruktion laesst sich jetzt klarer einordnen:

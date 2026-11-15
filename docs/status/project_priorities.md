@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-14 (zuerst Memory-Ladungstraeger; minimale Defektklasse vorzeichenbeschraenkt, gebundene Vierzyklus-Kontrolle instabil; nichtminimalen Anschluss analytisch pruefen).
+Stand: 2026-11-15 (zuerst Memory-Ladungstraeger; beide statischen Indexvorzeichen lokal konstruiert; jetzt native Regeneration und raeumliche Kontrolle analytisch pruefen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -315,11 +315,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    gebundenen Vierzyklus mit vorhandenem negativem Gain. Kein Nachfit
    oder Stabilisierungslauf an dieser Kontrolle. Zugleich besitzt die
    gesamte minimale d+1-Depositionsklasse nur den nichttrivialen Index +1.
-   **Den Ladungstraeger-Anschluss deshalb an einer nichtminimalen
-   Memory-Struktur weiterpruefen: zuerst beide Indexvorzeichen im
-   selben Readout und lokale Bindung, danach deren gemeinsame native
-   Erhaltung und Formstabilitaet.** H>=5 in 3D ist nur notwendig;
-   keine H-Suche, neue Feldregel oder Teilchenzuordnung daraus ableiten.
+   Der [nichtminimale Anschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_defects_2026-11-15.md)
+   liefert nun beide Indexvorzeichen mit demselben nativen H=8-Readout:
+   jeweils ein lokalisierter regulaerer Defekt in zwei festen Historien.
+   Im negativen Kontrollfeld liegt zusaetzlich ein positiver Gesamtgrad
+   +2 im aeusseren Ring, aber kein neutrales Paar oder Nachweis bestimmter
+   Einzeldefekte. **Jetzt einen unter nativen Updates regenerierten,
+   raeumlich kontrollierten nichtminimalen Zustandsbereich pruefen,
+   einschliesslich Defektrandbilanz und voller Formstabilitaet.** Keine
+   weiteren statischen Vorzeichenbeispiele als Ersatz fuer diesen Schritt.
+   H>=5 in 3D bleibt nur notwendig, H=8 ist ein konstruktiver Zeuge;
+   keine H-Suche, Gain-Anpassung, neue Feldregel oder Teilchenzuordnung.
+   Der negative Ortsjacobian des eingefrorenen Readouts ersetzt den
+   vollen History-Stabilitaetstest nicht. Statistische Abschirmung und
+   elektrische Quellenwirkung bleiben gesondert herzuleiten.
    Rauschfreie Strukturerhaltung von endlicher Lebensdauer bei Rauschen
    weiterhin trennen. Der positive-Gain-Ausschluss fuer regulaere
    Tetraederzyklen ist kein Ausschluss aller nichtregulaeren Strukturen.

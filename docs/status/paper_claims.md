@@ -1,9 +1,23 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-14 (minimaler Defektindex nur positiv; exakter gebundener Vierzyklus mit negativem Gain instabil; keine elektrische Ladung oder volle Materiestruktur).
+Stand: 2026-11-15 (nichtminimaler nativer Readout erlaubt beide lokale Defektvorzeichen; kein zeitlich geschuetzter oder elektrisch gekoppelter Traeger).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [nichtminimale Existenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_defects_2026-11-15.md)
+betrifft feste konstruierte gefuellte H=8-Historien mit q=99/100,
+Einheitsrichtungen und sigma_vector=1. Er beweist einen lokalisierten
+regulaeren -1-Defekt und einen separaten lokalisierten +1-Kontrollfall
+bei gleichen Parametern. H=8 ist ausreichend, nicht als minimal bewiesen.
+Der zusaetzliche Grad +2 im aeusseren Ring des negativen Kontrollfelds
+ist keine bestimmte Zahl regulaerer Einzeldefekte und keine Neutralitaet.
+Kleine statische Stoerungsrobustheit und negativer Ortsjacobian des
+eingefrorenen Felds sind weder native zeitliche Erhaltung noch volle
+Formstabilitaet. 3D bleibt Input; Indexquantisierung ist keine Herleitung
+elektrischer Ladung, Materie, Spin oder QFT. Gausskernel erlauben keinen
+automatischen Transfer statistischer Zufallsfeld-Abschirmtheoreme.
+Keine neue Regel, Zielsimulation oder Aenderung an Paper I.
 
 Der [Rekurrenzbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_recurrence_2026-11-14.md)
 trennt drei Aussagen: Die Vorzeichenklassifikation betrifft alle
@@ -13,8 +27,9 @@ nichtnegativem Vektorgain und Horizonten aus ganzen Vierperioden;
 das Instabilitaetszertifikat nur den vollstaendig angegebenen negativen
 Gain-Kontrollfall mit H_s=H_v=4. Die Klasse mit negativem Vektorgain wird weder
 allgemein ausgeschlossen noch als neue physikalische Kopplung gewaehlt.
-H>=5 in 3D ist fuer beide Indexvorzeichen eine notwendige Huerde,
-keine Konstruktion. Speicherbeitrag ist kein Teilchenlabel. R mit
+H>=5 in 3D ist fuer beide Indexvorzeichen eine notwendige Huerde;
+die neue H=8-Konstruktion schaerft sie nicht auf ein Minimum.
+Speicherbeitrag ist kein Teilchenlabel. R mit
 det R=-1 ist keine eigentliche Rotation und liefert keinen Spinbefund.
 Keine Herleitung von Elektrizitaet, QFT oder Gravitation und keine
 Aenderung an Paper I.

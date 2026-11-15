@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-14 (exakter gebundener Defektzyklus konstruiert und als instabil bewiesen; minimale History-Klasse liefert nur Index +1; kein geschuetzter Ladungstraeger).
+Stand: 2026-11-15 (beide lokale Defektvorzeichen mit nativer nichtminimaler Memory konstruiert; zeitliche Regeneration und elektrische Wirkung offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,22 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [nichtminimale Defektbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_defects_2026-11-15.md)
+schliesst die statische Vorzeichenhuerde: Eine feste H=8-Historie aus
+nahen und aeusseren Tetraederpositionen hat genau einen regulaeren
+-1-Defekt im Radius 1/6, innerhalb der nahen konvexen Memory-Huelle.
+Die Richtungen sind aus der Historie abgeleitet, die positiven
+Vergessensgewichte unveraendert. Bei gleichen Parametern besitzt eine
+andere Historie einen lokalisierten +1-Defekt. Im negativen Kontrollfeld
+erzwingt der Aussenrand ausserdem den Gesamtindex +2 im Ringgebiet;
+kein neutraler Zweiteilchenzustand und keine bestimmte Zahl aeusserer
+Einzeldefekte. Die Beweise nutzen uniforme analytische Schranken samt
+rationalen Reserven; 23 neue feste Kontrollen und 176 Tests im
+betroffenen Panel bestanden, ebenso Lint und strikter Dokumentationsbau.
+Keine vollstaendige Repository-Testsuite. Kein
+Nullstellensucher, Ziellauf oder neue Feldregel. Native Regeneration,
+volle Formstabilitaet und elektrische Quellenwirkung sind noch offen.
 
 Die [Rekurrenz- und Vorzeichenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_recurrence_2026-11-14.md)
 klassifiziert jetzt den minimalen Readout: d+1 aktive gerichtete
