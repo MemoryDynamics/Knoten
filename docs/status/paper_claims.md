@@ -1,9 +1,25 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (fester Zweischalen-Zeuge auch bei getrenntem Vergessen mit nativem Double-Gaussian-Kernel unvertraeglich; kein allgemeines Memory-No-go).
+Stand: 2026-11-16 (endliche Defektfortsetzung und bedingte diffusive Vektorreadout-Grenze; keine native Langzeitbindung oder elektrische Ladung).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Fortsetzungs-/Skalierungsbefund](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_transport_2026-11-16.md)
+ist dreigeteilt: hinreichendes Ein-Schritt-Kontraktionskriterium fuer
+einen regulaeren Defekt samt Kernrelativfehler; Unstetigkeit der
+Einheitsdeposition am Nullinkrement bei festem Gewicht; O(sqrt(h))-
+L2-Grenze des erzeugten Vektorfelds bei idealem unabhaengigem
+Gaussrauschen epsilon=sigma_B sqrt(h), q=exp(-gamma h), festem M/ell
+und gleichmaessig beschraenktem vorhersehbarem Drift. Die letzte
+Aussage schliesst keine beliebige Anfangshistorie ein; der Anschluss
+an bewegte Orte verlangt Straffheit und folgt erst aus dem separaten
+Kompaktheitsargument. Weder universelles Verschwinden topologischer
+Indizes noch ein alternativer normierter Grenzprozess ist bewiesen.
+Keine physikalische Zeitinterpretation, Gain-/Massenreskalierung oder neue Deposition
+gewaehlt. Ein-Schritt-Eindeutigkeit ist keine Mehrschritt-Stabilitaet,
+der geometrische Memory-Schwerpunkt keine physikalische Masse.
+Keine elektrische Ladung, QFT-Ableitung oder Aenderung an Paper I.
 
 Die [Zwei-Term-Inkompatibilitaet](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_kernel_obstruction_2026-11-16.md)
 gilt fuer den festen geometrischen/vektoriellen Zeugen a=1,b=5,

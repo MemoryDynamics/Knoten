@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; festen Zweischalen-Zeugen als statisches Beispiel abschliessen; native Defektregeneration nicht durch Kernel-Nachfit ersetzen).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; native Selbstregeneration der Defekt-/Kernreserven; kleine Schritte nicht mit dynamischem Schutz verwechseln).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -345,9 +345,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    oder phasenweise geschalteten Kraeften.** Der offene Anschluss
    bleibt eine unter der vollen nativen Dynamik regenerierte, raeumlich
    kontrollierte Defektumgebung, nicht die Rettung der festen Achtfolge.
-   Dafuer den vorhandenen lokalen Quellen-/Tail- und Kernbindungs-
-   Vertrag mit dem tatsaechlichen Update verbinden, bevor eine weitere
-   Geometrie oder ein neuer Ziellauf ausgewaehlt wird. Der skalare
+   Der [endliche Fortsetzungsanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_transport_2026-11-16.md)
+   verbindet nun Quellen-/Tail-Kompensation, lokalen Jacobian und
+   geometrischen Memory-Schwerpunkt mit lokal genau einem regulaeren Defekt
+   nach dem wirklichen Update. **Jetzt die gemeinsame Selbstregeneration
+   dieser Reserven und die volle Historienrueckwirkung untersuchen**,
+   bevor eine weitere Geometrie oder Zielbahn ausgewaehlt wird. Ein
+   Anfangszertifikat oder eine bloss summierte Driftgrenze genuegt nicht.
+   Kleinere Gains erzeugen bei Einheitsdeposition keinen stetigen
+   Nullschritt. Der explizit untersuchte diffusive Grenzgang laesst
+   dagegen den erzeugten Readout bei fester Masse/Breite verschwinden;
+   er ist keine automatische Rettung des Traegers. Anfangsmemory und
+   bewegte Abfragen getrennt behandeln. Keine Gegenreskalierung,
+   unnormierte Deposition oder physikalische Zeitinterpretation ohne
+   Begruendung und Autorenentscheidung einfuehren. Der skalare
    Querbilanztest bleibt ein notwendiger Bewegungscheck, kein Auftrag
    fuer eine neue Kraft.
    Nichtperiodische oder deformierte gebundene Zustandsbereiche sind

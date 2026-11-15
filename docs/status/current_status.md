@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (statischer Zweischalen-Defektzeuge auch bei getrenntem Vergessen nicht im nativen Zwei-Gauss-Kernel regenerierbar; kein Ladungstraeger).
+Stand: 2026-11-16 (endliche Defekt-/Kernfortsetzung und bedingte diffusive Readout-Grenze hergeleitet; native Selbstregeneration bleibt offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,23 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Defekttransport-/Zeitskalierungsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_transport_2026-11-16.md)
+ergaenzt den bisherigen Gesamtgradschutz um ein hinreichendes endliches
+Kriterium fuer lokal genau einen regulaeren Defekt nach dem wirklichen Update,
+gleichen Index und einen Ortsfehler relativ zum geometrischen
+Memory-Schwerpunkt. Noch kein invarianter Historienbereich. Kleine
+Bewegungs-Gains allein regularisieren die Einheitsdeposition nicht:
+bei festem Gewicht bleibt ein endlicher Sprung am Nullinkrement.
+Unter expliziter diffusiver Zeitverfeinerung mit festem Memory-Massstab,
+festen Breiten und beschraenktem adaptivem Drift verschwindet der neu
+erzeugte Vektorreadout punktweise im L2 mit O(sqrt(h)). Eine beliebige
+Anfangshistorie und bewegte Abfrageorte sind gesondert behandelt.
+Kein allgemeines Defekt-No-go oder gewaehlter physikalischer Grenzfall;
+kleine Amplitude loescht Indizes nicht automatisch. 27 neue feste
+Kontrollen und 250 Tests im betroffenen Panel bestehen, ebenso Lint
+und strikter Dokumentationsbau; keine vollstaendige Repository-Testsuite.
+Keine Zielbahn, neue Regel oder Gain-Anpassung.
 
 Die [volle Kernelpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_kernel_obstruction_2026-11-16.md)
 schliesst jetzt auch den festen Zweischalen-Zeugen mit getrenntem
