@@ -5,6 +5,12 @@ Stand: 2026-11-15. Dynamische Fortsetzung des
 Eigene analytische Existenzpruefung und feste Codekontrollen;
 keine Zieltrajektorie, kein Gain-Fit und keine Parametersuche.
 
+Die [vollstaendige Kernelpruefung](nonminimal_kernel_obstruction_2026-11-16.md)
+schliesst inzwischen auch den hier noch offenen Fall getrennten
+Vergessens fuer den festen Zeugen a=1,b=5,sigma_vector=1,q=99/100
+im vorhandenen Double-Gaussian-Modell aus. Die folgenden notwendigen
+Bedingungen bleiben gueltig; sie sind kein positiver Umlaufkandidat.
+
 ## Befund
 
 Die konstruierte negative Defektstruktur ist weiterhin ein gueltiger

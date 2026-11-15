@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-15 (zuerst Memory-Ladungstraeger; Zweischalenumlauf bei gleichem Vergessen ausgeschlossen; verbleibende native Existenzbedingungen statt Gain-Fit pruefen).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; festen Zweischalen-Zeugen als statisches Beispiel abschliessen; native Defektregeneration nicht durch Kernel-Nachfit ersetzen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -335,10 +335,21 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    **Keine Gain-/Breiten-Nachsuche oder Floquet-Rechnung in dieser
    ausgeschlossenen Klasse.** Bei getrenntem Vergessen verlangt der
    feste geometrische Zeuge bereits s<1/4000 statt q=99/100; diese
-   notwendige Bedingung nicht als Kalibrierung uebernehmen. Zuerst die
-   verbleibende volle Bewegungsbilanz samt tatsaechlichen Horizonten
-   analytisch pruefen. Der hergeleitete skalare Querbilanztest benennt
-   einen fehlenden nativen Beitrag, keinen Auftrag fuer eine neue Kraft.
+   notwendige Bedingung nicht als Kalibrierung uebernehmen. Die
+   [vollstaendige Zwei-Gauss-Pruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_kernel_obstruction_2026-11-16.md)
+   schliesst auch diesen verbleibenden Fall fuer den festen Zeugen aus:
+   Die vollen Phasenbilanzen erfordern eine Krafttabelle, die kein
+   gemeinsamer nativer Double-Gaussian-Kernel realisiert. **Diesen
+   Zeugen als statisches Vorzeichenbeispiel abschliessen; keine
+   Nachsuche nach anderem Gain, anderem Vergessen, drittem Kernelterm
+   oder phasenweise geschalteten Kraeften.** Der offene Anschluss
+   bleibt eine unter der vollen nativen Dynamik regenerierte, raeumlich
+   kontrollierte Defektumgebung, nicht die Rettung der festen Achtfolge.
+   Dafuer den vorhandenen lokalen Quellen-/Tail- und Kernbindungs-
+   Vertrag mit dem tatsaechlichen Update verbinden, bevor eine weitere
+   Geometrie oder ein neuer Ziellauf ausgewaehlt wird. Der skalare
+   Querbilanztest bleibt ein notwendiger Bewegungscheck, kein Auftrag
+   fuer eine neue Kraft.
    Nichtperiodische oder deformierte gebundene Zustandsbereiche sind
    nicht ausgeschlossen. Keine weitere statische Formensammlung,
    neue Feldvariable oder neue Ziellauffreigabe daraus ableiten.

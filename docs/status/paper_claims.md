@@ -1,9 +1,24 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-15 (statische nichtminimale Defekte nicht mit nativen Orbits verwechseln; Zweischalen-Ausschluss bei gleichem Vergessen, keine universelle Traeger-Unmoeglichkeit).
+Stand: 2026-11-16 (fester Zweischalen-Zeuge auch bei getrenntem Vergessen mit nativem Double-Gaussian-Kernel unvertraeglich; kein allgemeines Memory-No-go).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Zwei-Term-Inkompatibilitaet](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_kernel_obstruction_2026-11-16.md)
+gilt fuer den festen geometrischen/vektoriellen Zeugen a=1,b=5,
+sigma_vector=1,q=99/100, starre Achtfolge, rauschfreies Alignment
+und Horizonte aus ganzen Perioden. Sie erfasst alle nativen skalaren
+Retentionsfaktoren, konstanten reellen Gains und Double-Gaussian-
+Parameter einschliesslich isotroper Gaussdeposition. Die notwendigen
+Kraftwerte sind keine angepassten Modellparameter; ihre formale
+Bewegungsbilanz ist kein Existenzpass des unvereinbaren nativen Kernels.
+Andere Geometrien, Vektorbreiten/Retentionsfaktoren, Resthorizonte,
+mehr Kernelterme oder nichtperiodische Zustaende sind nicht durch
+diesen Satz klassifiziert. Kein allgemeiner Ausschluss dynamischer
+Defekte, keine Notwendigkeit externer QFT-Felder und keine Aenderung
+an Paper I. Das endliche rationale Zertifikat ist kein unabhaengiger
+mathematischer Review oder maschinenverifizierter Gesamtbeweis.
 
 Der [Zweischalen-Ausschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_recurrence_2026-11-15.md)
 setzt die angegebene starre Tetraederfolge, Einheitsrichtungen,

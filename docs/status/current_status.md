@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-15 (beide statischen Defektvorzeichen vorhanden; starrer Zweischalenumlauf bei gleichem Vergessen ausgeschlossen; kein nativer Ladungstraeger).
+Stand: 2026-11-16 (statischer Zweischalen-Defektzeuge auch bei getrenntem Vergessen nicht im nativen Zwei-Gauss-Kernel regenerierbar; kein Ladungstraeger).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,21 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [volle Kernelpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_kernel_obstruction_2026-11-16.md)
+schliesst jetzt auch den festen Zweischalen-Zeugen mit getrenntem
+Vergessen aus, fuer a=1,b=5,sigma_vector=1,q=99/100 und Horizonte aus
+ganzen Achtperioden. Die beiden vollen Bewegungsbilanzen erzwingen
+vier gemeinsame skalare Kraftwerte, die keine reelle Summe aus zwei
+Gaussfunktionen annehmen kann. Ein rationales Intervallzertifikat
+sichert den Widerspruch; die formale Tabelle wird unabhaengig an
+allen acht Phasen gegen den nativen Vektorreadout geprueft, aber
+nicht als Kernel installiert. 20 neue Kontrollen und 223 Tests im
+betroffenen Panel bestanden, ebenso Lint und strikter Dokumentationsbau;
+keine vollstaendige Repository-Testsuite.
+Kein Fit, kein Ziellauf und kein pauschales No-go fuer andere
+Memory-Strukturen. Der feste Zeuge bleibt ein statisches Beispiel,
+kein nativer Orbit; die folgende Retentionsbedingung ist nur notwendig.
 
 Die [native Zweischalenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/nonminimal_memory_recurrence_2026-11-15.md)
 zeigt jetzt eine konkrete dynamische Huerde: Gleiche skalare und
