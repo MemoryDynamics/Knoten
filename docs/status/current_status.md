@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (starre Ein-Schritt-Rotation fuer regulaere 3D-FIFO-Punktdefekte ausgeschlossen; mehrphasige native Regeneration bleibt offen).
+Stand: 2026-11-16 (native Zweiphasenbilanz verlangt unter expliziten Horizontbedingungen ausreichende skalare Rueckstellung; Existenz und Stabilitaet bleiben offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,24 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [native Zweiphasenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
+liefert jetzt beide Kopfkraefte und einen gemeinsamen axialen
+Existenzfilter. Ganze Vektorspeicher-Umlaufperioden besitzen eine
+strikt positive Zweimal-zwei-Determinante; der Beweis nutzt die
+Gausskernel-Positivitaet und den symmetrisierten Altersoperator.
+Positives Alignment allein oder mit ausschliesslich repulsiver
+Skalarwirkung kann diese beschraenkte Zweiphasenklasse daher nicht
+regenerieren. Die erforderliche gewichtete skalare Rueckstellung hat
+eine explizite Untergrenze. Fuer andere endliche Horizonte sind Tail
+und Positivitaet separat zu pruefen; ein formales Gegenbeispiel
+verhindert den ungeprueften Transfer vom unendlichen Speicher.
+21 neue feste Kontrollen und 298 Tests im betroffenen Panel bestehen,
+einschliesslich des bekannten negativen-Gain-Vierzyklus; ebenso Lint
+und strikter Dokumentationsbau, keine vollstaendige Repository-Testsuite.
+Kein neuer Orbit, Gain-Fit, Stabilitaetspass oder
+Zwang zu externen Feldern. Querbilanzen und volle History-Stabilitaet
+sind weiterhin offen.
 
 Der [FIFO-/Rotationsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
 liefert eine von Gains und Gaussbreite unabhaengige notwendige Huerde: Ein

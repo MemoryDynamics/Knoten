@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; nichtstarre oder mehrphasige native Regeneration, kein Transfer freier Agentenrotationen).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; notwendige Zweiphasen-Rueckstellung mit Querbilanzen und voller Stabilitaet zusammenbringen).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -377,6 +377,19 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Vierzyklus bleibt instabil; keine Wiederbelebung durch Literatur-
    Spektren. Gerichtete Agentenmodelle erlauben stabile Rotationen,
    ihre frei waehlbaren Kopplungen sind aber keine Memory-Ableitung.
+   Die [native Zweiphasen-Kraftbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
+   liefert jetzt die gemeinsame Achsenbedingung: Bei positiver
+   Zweimal-zwei-Determinante braucht positives Alignment ausreichende
+   skalare Rueckstellung. Ganze Vektorspeicher-Umlaufperioden und die
+   deklarierte Tailklasse erfuellen diese Positivitaet; andere
+   Horizonte nicht ungeprueft damit gleichsetzen. **Als naechstes die
+   Vertraeglichkeit dieser notwendigen Rueckstellung mit beiden
+   Querbilanzen und der vollen History-Antwort analytisch pruefen.**
+   Weder den skalaren Gain nachfitten noch aus der Schranke bereits
+   Stabilitaet oder die Notwendigkeit eines externen Feldes ableiten.
+   Der vorhandene negative-Gain-Vierzyklus bleibt nur eine instabile
+   Vorzeichenkontrolle. Kein Solver-/Ziellauf freigegeben und keine
+   physikalische Zeitskalierung dadurch ausgewaehlt.
    Nichtperiodische oder deformierte gebundene Zustandsbereiche sind
    nicht ausgeschlossen. Keine weitere statische Formensammlung,
    neue Feldvariable oder neue Ziellauffreigabe daraus ableiten.

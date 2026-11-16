@@ -1,9 +1,26 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (Fixraum-Hindernis fuer starre FIFO-Regeneration; notwendige Phasen-/Deformationsreserve, keine stabile Materie).
+Stand: 2026-11-16 (bedingte Zweiphasen-Rueckstellhuerde aus nativen Kraeften; kein allgemeines Alignment-No-go oder stabiler Ladungstraeger).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Zweiphasen-Rueckstellsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
+gilt fuer beschraenkte rauschfreie relative Zweiphasenwiederkehr mit
+verschiedenen Achsenhoehen, nativen Einheitsrichtungen, positivem
+geometrischem Vergessen und Gauss-Vektorreadout. Die positive
+Determinantenreserve ist bewiesen fuer H_v=2N oder 2N+1 mit Q^N=I,
+den getrennten untrunkierten Vergleich und eine hinreichende
+endliche Tailklasse. Beliebige Resthorizonte sind nicht pauschal
+klassifiziert. Der Ausschluss des reinen Vektorkanals verlangt
+eta_vector>=0; die repulsive Skalar-Erweiterung eta_scalar>=0.
+Negative Gains bleiben ausserhalb dieses Ausschlusses. Die attraktive
+Staerkeschranke setzt nichtnegative Skalaramplituden voraus und
+verwendet bei Gaussdeposition effektive Parameter. Sie ist kein
+Gain-Vorschlag und keine hinreichende Existenz-/Stabilitaetsbedingung.
+Die vier Querkomponenten, Defekt-/Kernbindung und volle History-
+Stabilitaet sind nicht damit erledigt. Kein Beweis externer QFT-
+Notwendigkeit, keine Ladung und keine Aenderung an Paper I.
 
 Der [Fixraum-/Phasensatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
 betrifft regulaere Punktdefekte des positiv gewichteten gerichteten
