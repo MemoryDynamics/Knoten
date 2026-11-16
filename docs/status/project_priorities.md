@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; positive native Vierphasenfamilie analytisch geschlossen, volle Formstabilitaet als naechste Huerde).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; voller Acht-Formmoden-Test analytisch reduziert, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -397,6 +397,16 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Gains folgen als Bedingungen aus der Geometrie; kein empirischer
    Nachfit oder physikalische Parameterprognose. 21 feste Kontrollen
    pruefen die Herleitung, nicht ihre Stabilitaet.
+   Der [analytische Formquotient](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_shape_quotient_2026-11-16.md)
+   trennt jetzt sechs Symmetrierichtungen und die redundante
+   aelteste Schrittlaenge von acht Formmoden. Produkt und Spur
+   liefern notwendige Kriterien ohne Eigenwertrundung. Ein rigoros
+   gesicherter Produktbetrag >1 oder Spurbetrag >8 beweist Wachstum;
+   Gleichheit allein nicht. Bei bestandenen ersten Kriterien bleibt
+   der volle Schur-/Formtest erforderlich.
+   Gemeinsame Laengen- oder kompensierte Massennormierungs-
+   Reskalierungen aendern das Spektrum nicht; keine neue Suche
+   ueber solche scheinbaren Stabilitaetsparameter vorbereiten.
    **Als naechstes volle Formstabilitaet dieser exakten Familie
    diskriminierend pruefen, nicht weitere Formen sammeln.**
    Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
@@ -408,6 +418,8 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    aus wirklichen Zwischenhistorien bilden und Symmetrierichtungen
    begruendet von Formmoden trennen. Kein positiver Stabilitaetsbefund
    aus blossen Achsensteigungen oder Innenlage des Defekts.
+   Den analytischen Ausschluss bei q gegen null nicht als Antwort
+   auf den angefragten innenliegenden hohen-q-Kandidaten ausgeben.
    Die Herleitung ersetzt weder die fehlende -1-Gegenladung noch
    Energie-/Quellenport und Quantenstruktur. Keine Notwendigkeit
    externer Felder aus frueheren Misserfolgen ableiten.

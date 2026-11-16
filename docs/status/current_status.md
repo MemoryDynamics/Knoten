@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (positive native Vierphasenfamilie samt innenliegendem +1-Defekt analytisch konstruiert; volle Stabilitaet noch offen).
+Stand: 2026-11-16 (acht echte Formmoden der Vierphasenfamilie identifiziert; notwendige Produkt-/Spurtests hergeleitet, fester positiver Kandidat noch ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,22 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [volle Formquotient](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_shape_quotient_2026-11-16.md)
+trennt sechs euklidische Symmetrierichtungen und einen redundanten
+Nullanteil von acht verbleibenden Formmoden. Die Produkt- und
+Spurbedingungen folgen aus der vollen Historienableitung, nicht
+aus einer isolierten Hoehenmode. Gleichzeitige Laengen- und
+kompensierte Massennormierungs-Reskalierungen lassen die lokalen
+Multiplikatoren unveraendert. Bei fester Geometrie ist hinreichend
+rasches Vergessen analytisch instabil; dieser Grenzfall entscheidet
+nicht den angefragten innenliegenden hohen-q-Kandidaten. Dessen
+Auswertung bleibt geschlossen. Die neuen Methoden werden nur an
+Nicht-Orbits, formalen Koeffizienten und dem alten negativen
+Kontrollorbit geprueft; kein neuer positiver Stabilitaetsbefund.
+15 neue feste Kontrollen und 372 Tests im betroffenen Panel bestehen,
+ebenso Lint und strikter Dokumentationsbau; keine vollstaendige
+Repository-Testsuite.
 
 Die [abgeflachte Vierphasenfamilie](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_cycle_2026-11-16.md)
 erfuellt nun alle nativen Kraftkomponenten mit positivem Alignment

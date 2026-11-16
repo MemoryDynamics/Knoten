@@ -1,9 +1,24 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (analytische positive Vierphasen-Rekurrenz mit innenliegendem +1-Defekt; Stabilitaet und physikalische Ladung nicht nachgewiesen).
+Stand: 2026-11-16 (voller Acht-Formmoden-Quotient und notwendige Produkt-/Spurbedingungen; fester positiver Stabilitaetskandidat nicht ausgewertet).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [Acht-Formmoden-Abgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_shape_quotient_2026-11-16.md)
+leitet am exakten nichtplanaren H_s=H_v=4-Vierzyklus die Faktoren
+lambda*(lambda^2-1)*(lambda^2+1)^2 und den monischen Restgrad acht
+her. Nur die nachgewiesenen Symmetrierichtungen und die redundante
+aelteste Schrittlaenge werden entfernt; weitere Null- oder
+Einheitskreiswurzeln bleiben im Formquotienten. Produktbetrag ueber
+eins oder Spurbetrag ueber acht beweisen Wachstum, kleinere Werte
+allein keine Stabilitaet. Die geschlossenen Formeln setzen den
+angegebenen Gausskernel voraus. Gemeinsame reskalierte Modelle
+besitzen gleiche Ableitungen; das ist keine weitere Symmetriemode
+bei festen Parametern und kein Massenbegriff. Der schnelle
+Vergessensgrenzfall ist bei fester Geometrie instabil, betrifft aber
+nicht den innenliegenden hohen-q-Zieltest. Keine Auswertung des
+angefragten positiven Vertreters oder neue Teilchenbehauptung.
 
 Der [positive Vierphasen-Existenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_cycle_2026-11-16.md)
 gilt fuer konsistente gefuellte rauschfreie H_s=H_v=4-Historien,

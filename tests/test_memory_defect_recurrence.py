@@ -296,6 +296,50 @@ def test_gap_slope_formula_matches_native_head_and_history_derivative():
     np.testing.assert_allclose(head, difference[0], atol=5e-9)
 
 
+def test_old_negative_control_has_six_symmetry_factors_and_one_redundant_zero():
+    m_zero, m_log = _reduced_jacobian_parts()
+    matrix = np.asarray(m_zero, dtype=float) + np.log(2) * np.asarray(
+        m_log, dtype=float
+    )
+    history = _history()
+    columns = [np.tile(axis, 5) for axis in np.eye(3)]
+    for first, second in [(0, 1), (0, 2), (1, 2)]:
+        generator = np.zeros((3, 3))
+        generator[first, second], generator[second, first] = 1, -1
+        columns.append((history @ generator.T).ravel())
+    redundant = np.zeros_like(history)
+    redundant[-1] = history[-2] - history[-1]
+    columns.append(redundant.ravel())
+    basis, triangular = np.linalg.qr(np.column_stack(columns), mode="complete")
+    assert np.min(np.abs(np.diag(triangular[:7]))) > 0.1
+    transformed = basis.T @ matrix @ basis
+    np.testing.assert_allclose(transformed[7:, :7], 0, atol=2e-14)
+    quotient = transformed[7:, 7:]
+    assert quotient.shape == (8, 8)
+    assert np.trace(quotient) == pytest.approx(np.trace(matrix), abs=2e-14)
+    assert np.linalg.det(quotient) == pytest.approx(27 / 8 * np.log(2), rel=2e-12)
+    for value in [0.4, -1.4, 0.31 + 0.27j]:
+        direct = np.linalg.det(value * np.eye(15) - matrix)
+        factored = (
+            value
+            * (value**2 - 1)
+            * (value**2 + 1) ** 2
+            * np.linalg.det(value * np.eye(8) - quotient)
+        )
+        assert direct == pytest.approx(factored, rel=3e-11, abs=2e-11)
+
+
+def test_old_negative_control_product_coefficient_is_exactly_positive_logarithmic():
+    b, q, g = Fraction(-24), Fraction(1, 2), Fraction(1, 2)
+    c_one, s = Fraction(-108), Fraction(1, 6)
+    gamma, four_scalar_height = Fraction(1, 2), Fraction(1, 2)
+    constant = (b * q**3 * g) ** 2 * c_one * s**3 * (gamma - four_scalar_height)
+    # 4 h^2 / sigma_vector^2 = log(2), while the scalar width is different.
+    logarithmic = -((b * q**3 * g) ** 3)
+    assert constant == 0 and logarithmic == Fraction(27, 8)
+    assert logarithmic * Fraction(69, 100) > 1
+
+
 @pytest.mark.parametrize("q", [Fraction(1, 3), Fraction(1, 2), Fraction(4, 5)])
 @pytest.mark.parametrize("g", [Fraction(1, 3), Fraction(1, 2)])
 def test_regular_cycle_equalities_force_outward_motion_for_positive_alignment(q, g):
