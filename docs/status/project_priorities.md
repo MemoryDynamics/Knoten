@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; Achsen- und Querbilanzen gemeinsam pruefen, volle History-Ableitung statt ungeschlossener Hoehenmode).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; positive native Vierphasenfamilie analytisch geschlossen, volle Formstabilitaet als naechste Huerde).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -389,15 +389,28 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Hoehenmode selbst nach zwei Schritten mit axialer Translation
    nicht abgeschlossen ist. Kein Stabilitaetsurteil aus zwei
    skalaren Rueckstellsteigungen; alle Historienkoordinaten einbeziehen.
-   **Als naechstes die vier Querkomponenten zusammen mit der
-   notwendigen Achsenrueckstellung auf gleichzeitig erfuellbare
-   native Bedingungen reduzieren, vor jedem Parameter-/Solverproblem.**
-   Nur an einem nachgewiesenen Orbit den vollen Rueckkehroperator
+   Die [abgeflachte positive Vierphasenfamilie](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_cycle_2026-11-16.md)
+   schliesst jetzt Achsen- und Querbilanzen fuer H_s=H_v=4, 0<h<r/2
+   und den vorhandenen rein attraktiven gleichbreiten Skalarfall.
+   Der +1-Defekt wird nativ regeneriert und liegt in einem offenen
+   q-Intervall innerhalb der Memory-Huelle. Retention und positive
+   Gains folgen als Bedingungen aus der Geometrie; kein empirischer
+   Nachfit oder physikalische Parameterprognose. 21 feste Kontrollen
+   pruefen die Herleitung, nicht ihre Stabilitaet.
+   **Als naechstes volle Formstabilitaet dieser exakten Familie
+   diskriminierend pruefen, nicht weitere Formen sammeln.**
+   Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
+   lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
+   CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.
+   Keine Trajektorie, Suche, automatische Wiederholung oder Nachanpassung.
+   Bis zur Antwort nur analytisch weiterarbeiten; aus der offenen
+   Anfrage keine Ausfuehrungsbefugnis ableiten. Den Rueckkehroperator
    aus wirklichen Zwischenhistorien bilden und Symmetrierichtungen
-   begruendet von Formmoden trennen. Die Ableitung allein beweist
-   weder Traegerexistenz noch Stabilitaet.
-   Weder den skalaren Gain nachfitten noch aus der Schranke bereits
-   Stabilitaet oder die Notwendigkeit eines externen Feldes ableiten.
+   begruendet von Formmoden trennen. Kein positiver Stabilitaetsbefund
+   aus blossen Achsensteigungen oder Innenlage des Defekts.
+   Die Herleitung ersetzt weder die fehlende -1-Gegenladung noch
+   Energie-/Quellenport und Quantenstruktur. Keine Notwendigkeit
+   externer Felder aus frueheren Misserfolgen ableiten.
    Der vorhandene negative-Gain-Vierzyklus bleibt nur eine instabile
    Vorzeichenkontrolle. Kein Solver-/Ziellauf freigegeben und keine
    physikalische Zeitskalierung dadurch ausgewaehlt.

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (volle lokale History-Antwort geprueft; isolierte Hoehenmode am exakten Kontrollorbit nicht abgeschlossen; Traegerexistenz weiter offen).
+Stand: 2026-11-16 (positive native Vierphasenfamilie samt innenliegendem +1-Defekt analytisch konstruiert; volle Stabilitaet noch offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,24 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [abgeflachte Vierphasenfamilie](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_cycle_2026-11-16.md)
+erfuellt nun alle nativen Kraftkomponenten mit positivem Alignment
+und dem vorhandenen rein attraktiven skalaren Memory. Fuer 0<h<r/2,
+H_s=H_v=4 und gleichbreite Gausslesekerne folgen Retention und Gains
+analytisch aus den Gleichungen. Es ist eine inverse Existenzkonstruktion,
+keine Parameterprognose oder Simulation. Der eindeutige regulaere
++1-Felddefekt bewegt sich exakt mit und liegt fuer ein angegebenes
+offenes q-Intervall strikt innerhalb der Memory-Huelle.
+21 neue feste Algebra-/Kraft-/Feldkontrollen und 357 Tests im betroffenen
+Panel bestehen, ebenso Lint und strikter Dokumentationsbau; keine
+vollstaendige Repository-Testsuite. Der regulaere
+Tetraeder bleibt vom frueheren Ausschluss betroffen; die neue
+abgeflachte Klasse liegt ausserhalb seiner Voraussetzungen.
+Volle Formstabilitaet und ein robuster Ladungstraeger sind nicht
+nachgewiesen. Ein einmaliger begrenzter Stabilitaetstest ist angefragt,
+noch nicht ausgefuehrt. Keine elektrische Quellenwirkung, Gegenladung,
+Spin- oder Dimensionsherleitung und keine Aenderung an Paper I.
 
 Die [volle Historienantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_history_response_2026-11-16.md)
 variiert jetzt alle Orte und daraus abgeleiteten Einheitsrichtungen
@@ -19,8 +37,10 @@ Am bekannten negativen-Gain-Vierzyklus ist der Hoehenunterraum selbst
 mit axialer Translation unter zwei Schritten nicht invariant, exakt
 rational-logarithmisch nachgewiesen. Die allgemeine Ableitung
 reproduziert den frueheren vollen Rueckkehroperator; der Kontrollorbit
-bleibt instabil. Kein neuer Orbit, Gain-Fit oder Ziellauf. Beide
-Querbilanzen und ein stabiler gebundener Memory-Traeger bleiben offen.
+bleibt instabil. Dieser Ableitungsbericht enthielt keinen neuen Orbit,
+Gain-Fit oder Ziellauf. Die Querbilanzen sind nun fuer die oben
+genannte Sonderfamilie geloest; ein stabiler gebundener Memory-Traeger
+bleibt offen.
 Keine elektrische Ladung oder Aenderung an Paper I.
 
 Die [native Zweiphasenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
@@ -37,9 +57,10 @@ verhindert den ungeprueften Transfer vom unendlichen Speicher.
 21 neue feste Kontrollen und 298 Tests im betroffenen Panel bestehen,
 einschliesslich des bekannten negativen-Gain-Vierzyklus; ebenso Lint
 und strikter Dokumentationsbau, keine vollstaendige Repository-Testsuite.
-Kein neuer Orbit, Gain-Fit, Stabilitaetspass oder
-Zwang zu externen Feldern. Querbilanzen und volle History-Stabilitaet
-sind weiterhin offen.
+Dieser Bilanzbericht enthielt keinen neuen Orbit, Gain-Fit,
+Stabilitaetspass oder Zwang zu externen Feldern. Seine notwendige
+Achsenhuerde bleibt gueltig; die oben genannte Sonderfamilie erfuellt
+nun auch die Querbilanzen, nicht bereits die volle History-Stabilitaet.
 
 Der [FIFO-/Rotationsabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_rigid_regeneration_2026-11-16.md)
 liefert eine von Gains und Gaussbreite unabhaengige notwendige Huerde: Ein
@@ -50,8 +71,8 @@ Fixraumprojektionen. Mehrphasige Wiederkehr verlangt mindestens
 dim ker(I-Q)+1 zeitliche Klassen; dies sind keine neuen Freiheitsgrade.
 Eine quantitative Grenze verbindet beinahe starre Regeneration mit
 der Jacobian-Reserve. Fuer zwei Phasen sind nun die beiden nativen
-Kopfgleichungen und die Achsenbilanz formuliert, ohne Parameterwahl
-oder Loesung. Der bekannte uneigentliche Vierzyklus ist eine passende,
+Kopfgleichungen und die Achsenbilanz in jenem Bericht formuliert,
+noch ohne Loesung. Der bekannte negative-Gain-Vierzyklus ist eine passende,
 weiterhin instabile Gegenkontrolle. Neue Literatur zu stabilen
 gerichteten Agentenrotationen ist kein direkter FIFO-Transfer und
 verbietet pauschale Alignment-Zerfallsbehauptungen. 27 neue feste

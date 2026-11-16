@@ -1,9 +1,27 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (volle lokale History-Ableitung und exakte Nichtinvarianz einer isolierten Hoehenmode; kein neuer stabiler Ladungstraeger).
+Stand: 2026-11-16 (analytische positive Vierphasen-Rekurrenz mit innenliegendem +1-Defekt; Stabilitaet und physikalische Ladung nicht nachgewiesen).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [positive Vierphasen-Existenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_cycle_2026-11-16.md)
+gilt fuer konsistente gefuellte rauschfreie H_s=H_v=4-Historien,
+Einheitsdeposition und den bereits zulaessigen rein attraktiven
+Skalarkernel mit Delta-Deposition und sigma_att=sigma_vector.
+0<h<r/2 liefert eine offene Geometriefamilie; skalare Retention
+und positive Gains sind daraus abgeleitete Bedingungen, nicht
+unabhaengige Vorhersagen. Die eindeutige regulaere Feldnullstelle
+hat +1-Index und fuer q>exp(-tau_*) eine strikte Innenlage in der
+Memory-Huelle entlang der exakten Bahn. Dies beweist keine
+Stoerungsstabilitaet, kein Erhaltungsprinzip und keinen elektrischen
+Quellenport. Die minimale Klasse besitzt weiterhin keine regulaere
+-1-Gegenladung. Uneigentliche Ein-Schritt- und eigentliche
+Zweischrittrotation sind zu unterscheiden. Der Satz widerspricht
+weder dem regulaeren Tetraederausschluss noch dem Fixraum-No-go.
+Keine neue Simulationsregel, keine Parametersuche und kein Ziellauf;
+ein voller lokaler Stabilitaetstest ist nur angefragt. Keine
+Teilchenidentifikation, Quantenstatistik oder Aenderung an Paper I.
 
 Die [volle lokale History-Ableitung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_history_response_2026-11-16.md)
 gilt fuer deterministische gefuellte konsistente Alignment-Historien
