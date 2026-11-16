@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (acht echte Formmoden der Vierphasenfamilie identifiziert; notwendige Produkt-/Spurtests hergeleitet, fester positiver Kandidat noch ungeprueft).
+Stand: 2026-11-16 (begrenzter voller Formtest vorbereitet und nichtzielbezogen kontrolliert; fester positiver Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,18 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [begrenzte Stabilitaetspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_stability_preflight_2026-11-16.md)
+ist nun mit Quellenbindung, hartem 30-Sekunden-Workerlimit und
+verweigertem Zweitstart vorbereitet. 49 neue Kontrollen und 453 Tests
+im betroffenen Panel bestehen, ebenso Lint und strikter Dokumentationsbau;
+keine vollstaendige Repository-Testsuite. Die neue positive Zielhistorie
+wurde nicht ausgewertet und ihr Versuchsordner nicht angelegt.
+Nur der alte negative Kontrollorbit, eine Off-Orbit-Abweisung und
+synthetische Daten dienen der Methodenpruefung. Ein rigoroser
+Produktbetrag ueber eins kann Wachstum belegen; kleinere Werte und
+Gleitkomma-Eigenwerte liefern keinen Stabilitaetsnachweis. Freigabe
+weiter offen, keine neue Ladungs- oder Teilchenbehauptung.
 
 Der [volle Formquotient](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_shape_quotient_2026-11-16.md)
 trennt sechs euklidische Symmetrierichtungen und einen redundanten

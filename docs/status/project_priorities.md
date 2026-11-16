@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; voller Acht-Formmoden-Test analytisch reduziert, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; begrenzter voller Formtest vorbereitet, konkrete positive Auswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -413,6 +413,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
    CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.
    Keine Trajektorie, Suche, automatische Wiederholung oder Nachanpassung.
+   Der [begrenzte Runner](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_stability_preflight_2026-11-16.md)
+   ist jetzt vorbereitet und mit 49 neuen nichtzielbezogenen Kontrollen
+   abgesichert. Quellenbindung, exklusiver Versuch und hartes Workerlimit
+   sind geprueft; der echte Versuchsordner bleibt unangetastet.
+   Sein Produkttest kann Instabilitaet belegen, nicht Stabilitaet;
+   bei bestandenem notwendigen Kriterium bleibt ein voller rigoroser
+   Schur-/Intervalltest offen. Gleitkommawurzeln nur diagnostisch lesen.
    Bis zur Antwort nur analytisch weiterarbeiten; aus der offenen
    Anfrage keine Ausfuehrungsbefugnis ableiten. Den Rueckkehroperator
    aus wirklichen Zwischenhistorien bilden und Symmetrierichtungen

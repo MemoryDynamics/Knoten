@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from emergenz_knoten.core import SimulationConfig
+from emergenz_knoten.flat_memory_stability import history_diagnostics
 from emergenz_knoten.kernels import double_gaussian_gradient, exponential_memory_weights
 from emergenz_knoten.vector_memory import (
     VectorMemoryConfig,
@@ -338,6 +339,42 @@ def test_old_negative_control_product_coefficient_is_exactly_positive_logarithmi
     logarithmic = -((b * q**3 * g) ** 3)
     assert constant == 0 and logarithmic == Fraction(27, 8)
     assert logarithmic * Fraction(69, 100) > 1
+
+
+def test_prepared_full_probe_reproduces_only_the_old_negative_control():
+    result = history_diagnostics(_history(), _symmetry(), _config())
+    assert result["checks_passed"] is True
+    assert result["form_product_approximate"] == pytest.approx(
+        27 / 8 * np.log(2), rel=2e-12
+    )
+    assert len(result["form_eigenvalues_approximate"]) == 8
+    assert result["spectral_radius_approximate"] > 1
+
+
+def test_prepared_probe_rejects_an_off_orbit_history_before_spectral_work(monkeypatch):
+    history = _history()
+    history[0, 0] += 0.1
+    monkeypatch.setattr(
+        np.linalg,
+        "eigvals",
+        lambda *arguments: pytest.fail("off-orbit spectrum forbidden"),
+    )
+    result = history_diagnostics(history, _symmetry(), _config())
+    assert result["checks_passed"] is False
+    assert result["reason"] == "orbit-residual"
+
+
+@pytest.mark.parametrize("kind", ["shape", "nan", "symmetry"])
+def test_prepared_probe_rejects_invalid_local_state(kind):
+    history, symmetry = _history(), _symmetry()
+    if kind == "shape":
+        history = history[:-1]
+    elif kind == "nan":
+        history[0, 0] = np.nan
+    else:
+        symmetry = np.eye(3)
+    with pytest.raises(ValueError):
+        history_diagnostics(history, symmetry, _config())
 
 
 @pytest.mark.parametrize("q", [Fraction(1, 3), Fraction(1, 2), Fraction(4, 5)])

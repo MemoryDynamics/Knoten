@@ -1,9 +1,19 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (voller Acht-Formmoden-Quotient und notwendige Produkt-/Spurbedingungen; fester positiver Stabilitaetskandidat nicht ausgewertet).
+Stand: 2026-11-16 (begrenzter Formtest vorbereitet; kein neuer Zielbefund und kein positiver Stabilitaetsnachweis).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [Pruefvorbereitung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_stability_preflight_2026-11-16.md)
+ist ein Methodenbefund, kein Resultat fuer den festen positiven
+Vertreter. Das Intervallkriterium kann nur hinreichendes lokales
+Formwachstum am analytischen reell parametrisierten Orbit bescheinigen.
+Die gerundete Implementierung und ihre Eigenwerte bleiben Diagnostik;
+bestandene notwendige Kriterien sind kein Stabilitaetszertifikat.
+Synthetische Runnertests und der alte negative Kontrollorbit ersetzen
+nicht die ausstehende Autorenfreigabe oder Zielauswertung. Keine neue
+Trajektorie, Ladungsidentifikation oder Aenderung an Paper I.
 
 Der [Acht-Formmoden-Abgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_shape_quotient_2026-11-16.md)
 leitet am exakten nichtplanaren H_s=H_v=4-Vierzyklus die Faktoren
