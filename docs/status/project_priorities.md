@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; notwendige Zweiphasen-Rueckstellung mit Querbilanzen und voller Stabilitaet zusammenbringen).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; Achsen- und Querbilanzen gemeinsam pruefen, volle History-Ableitung statt ungeschlossener Hoehenmode).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -382,9 +382,20 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Zweimal-zwei-Determinante braucht positives Alignment ausreichende
    skalare Rueckstellung. Ganze Vektorspeicher-Umlaufperioden und die
    deklarierte Tailklasse erfuellen diese Positivitaet; andere
-   Horizonte nicht ungeprueft damit gleichsetzen. **Als naechstes die
-   Vertraeglichkeit dieser notwendigen Rueckstellung mit beiden
-   Querbilanzen und der vollen History-Antwort analytisch pruefen.**
+   Horizonte nicht ungeprueft damit gleichsetzen. Die
+   [volle lokale History-Antwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_history_response_2026-11-16.md)
+   ist nun implementiert und mit 36 neuen festen Kontrollen geprueft.
+   Der vorhandene exakte Kontrollorbit zeigt, dass die isolierte
+   Hoehenmode selbst nach zwei Schritten mit axialer Translation
+   nicht abgeschlossen ist. Kein Stabilitaetsurteil aus zwei
+   skalaren Rueckstellsteigungen; alle Historienkoordinaten einbeziehen.
+   **Als naechstes die vier Querkomponenten zusammen mit der
+   notwendigen Achsenrueckstellung auf gleichzeitig erfuellbare
+   native Bedingungen reduzieren, vor jedem Parameter-/Solverproblem.**
+   Nur an einem nachgewiesenen Orbit den vollen Rueckkehroperator
+   aus wirklichen Zwischenhistorien bilden und Symmetrierichtungen
+   begruendet von Formmoden trennen. Die Ableitung allein beweist
+   weder Traegerexistenz noch Stabilitaet.
    Weder den skalaren Gain nachfitten noch aus der Schranke bereits
    Stabilitaet oder die Notwendigkeit eines externen Feldes ableiten.
    Der vorhandene negative-Gain-Vierzyklus bleibt nur eine instabile

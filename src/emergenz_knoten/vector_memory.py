@@ -14,6 +14,7 @@ from .core import (
 )
 from .kernels import (
     double_gaussian_gradient,
+    double_gaussian_hessian,
     effective_double_gaussian_parameters,
     exponential_memory_weights,
 )
@@ -338,6 +339,84 @@ def vector_memory_force(
             raise ValueError("transverse_2d force_mode requires dim=2")
         return np.array([-field[1], field[0]], dtype=float)
     raise ValueError("unknown force_mode")
+
+
+def alignment_history_head_jacobian(
+    history: np.ndarray, config: VectorMemoryConfig
+) -> np.ndarray:
+    """Return all-coordinate head blocks for a consistent, filled history.
+
+    Positions are newest first, including a predecessor for each active unit
+    deposit. Blocks have axes (age, output coordinate, input coordinate).
+    The head JVP is ``einsum('aij,aj->i', blocks, tangent)``; remaining history
+    rows shift ``tangent[:-1]`` unchanged. No directions are frozen or varied
+    independently of their source positions. This deterministic derivative
+    neither constructs an orbit nor classifies stability.
+    """
+    _validate_vector_config(config)
+    scalar = config.scalar
+    if config.force_mode != "alignment" or scalar.epsilon != 0:
+        raise ValueError("head Jacobian requires deterministic epsilon=0 alignment")
+    scalar_count = memory_horizon(scalar)
+    active_vector = config.eta_vector != 0 and config.vector_mass != 0
+    vector_count = _vector_horizon(config) if active_vector else 0
+    count = max(scalar_count, vector_count + 1)
+    positions = np.asarray(history, dtype=float)
+    if positions.shape != (count, scalar.dim) or not np.isfinite(positions).all():
+        raise ValueError(f"history must be finite with shape ({count}, {scalar.dim})")
+    identity = np.eye(scalar.dim)
+    blocks = np.zeros((count, scalar.dim, scalar.dim))
+    blocks[0] = identity
+    if scalar.eta != 0 and scalar.memory_mass != 0:
+        weights = exponential_memory_weights(
+            scalar.alpha, scalar_count, memory_mass=scalar.memory_mass
+        )
+        # The self deposit moves with the receiver and cancels before evaluation.
+        for age in range(1, scalar_count):
+            if weights[age] == 0:
+                continue
+            coupling = scalar.eta * double_gaussian_hessian(
+                positions[0],
+                positions[age : age + 1],
+                weights[age : age + 1],
+                sigma_rep=scalar.sigma_rep,
+                sigma_att=scalar.sigma_att,
+                amplitude_rep=scalar.amplitude_rep,
+                amplitude_att=scalar.amplitude_att,
+                deposition_kernel=scalar.deposition_kernel,
+                deposition_sigma=scalar.deposition_sigma,
+            )
+            blocks[0] -= coupling
+            blocks[age] += coupling
+    if active_vector:
+        weights = exponential_memory_weights(
+            _lambda_vector(config), vector_count, memory_mass=config.vector_mass
+        )
+        for age in np.flatnonzero(weights):
+            step = positions[age] - positions[age + 1]
+            length = float(np.linalg.norm(step))
+            if length == 0 or not np.isfinite(length):
+                raise ValueError(
+                    "active unit-orientation step length must be finite and nonzero"
+                )
+            direction = step / length
+            radial = positions[0] - positions[age]
+            variance = config.sigma_vector**2
+            coefficient = (
+                config.eta_vector
+                * weights[age]
+                * np.exp(-(radial @ radial) / (2 * variance))
+            )
+            orientation = (
+                coefficient / length * (identity - np.outer(direction, direction))
+            )
+            kernel = -coefficient / variance * np.outer(direction, radial)
+            blocks[age] += orientation - kernel
+            blocks[age + 1] -= orientation
+            blocks[0] += kernel
+    if not np.isfinite(blocks).all():
+        raise ValueError("head Jacobian is not finite in floating-point arithmetic")
+    return blocks
 
 
 def planar_alignment_normal_row(

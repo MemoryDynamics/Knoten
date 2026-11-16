@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (native Zweiphasenbilanz verlangt unter expliziten Horizontbedingungen ausreichende skalare Rueckstellung; Existenz und Stabilitaet bleiben offen).
+Stand: 2026-11-16 (volle lokale History-Antwort geprueft; isolierte Hoehenmode am exakten Kontrollorbit nicht abgeschlossen; Traegerexistenz weiter offen).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,20 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [volle Historienantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_history_response_2026-11-16.md)
+variiert jetzt alle Orte und daraus abgeleiteten Einheitsrichtungen
+der bestehenden Regel gemeinsam. 36 neue feste Kontrollen und
+336 betroffene Tests bestehen, einschliesslich Kernel-Audit; ebenso
+Lint und strikter Dokumentationsbau, keine vollstaendige Repository-Testsuite.
+Die Achsen-Rueckstellung erlaubt noch keinen skalaren Stabilitaetstest:
+Am bekannten negativen-Gain-Vierzyklus ist der Hoehenunterraum selbst
+mit axialer Translation unter zwei Schritten nicht invariant, exakt
+rational-logarithmisch nachgewiesen. Die allgemeine Ableitung
+reproduziert den frueheren vollen Rueckkehroperator; der Kontrollorbit
+bleibt instabil. Kein neuer Orbit, Gain-Fit oder Ziellauf. Beide
+Querbilanzen und ein stabiler gebundener Memory-Traeger bleiben offen.
+Keine elektrische Ladung oder Aenderung an Paper I.
 
 Die [native Zweiphasenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
 liefert jetzt beide Kopfkraefte und einen gemeinsamen axialen

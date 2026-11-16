@@ -10,6 +10,7 @@ from emergenz_knoten.kernels import double_gaussian_gradient, exponential_memory
 from emergenz_knoten.vector_memory import (
     VectorMemoryConfig,
     _validate_vector_config,
+    alignment_history_head_jacobian,
     normalize_orientation,
     vector_gaussian_field,
     vector_memory_force,
@@ -230,6 +231,69 @@ def test_exact_trace_certificate_proves_instability_without_eigenvalue_rounding(
     assert lower_trace > 26 > 15
     # |tr(M^2)| <= 15 rho(M)^2 and D(F^4)=M^4 at this orbit.
     assert Fraction(26, 15) ** 2 > 3
+
+
+def test_general_head_blocks_reproduce_exact_orbit_matrix_and_two_step_return():
+    history, config, rotation = _history(), _config(), _symmetry()
+
+    def full_jacobian(state):
+        blocks = alignment_history_head_jacobian(state, config)
+        matrix = np.zeros((15, 15))
+        matrix[:3] = np.concatenate(blocks, axis=1)
+        matrix[3:, :-3] = np.eye(12)
+        return matrix
+
+    native = full_jacobian(history)
+    frame = np.kron(np.eye(5), rotation.T)
+    reduced = frame @ native
+    m_zero, m_log = _reduced_jacobian_parts()
+    expected = np.asarray(m_zero, dtype=float) + np.log(2) * np.asarray(
+        m_log, dtype=float
+    )
+    np.testing.assert_allclose(reduced, expected, atol=2e-14)
+    actual = _map(history)
+    np.testing.assert_allclose(actual, history @ rotation.T, atol=2e-14)
+    return_two = frame @ frame @ full_jacobian(actual) @ native
+    np.testing.assert_allclose(return_two, reduced @ reduced, atol=2e-12)
+    trace = 97 / 16 - 63 / 4 * np.log(2) + 261 / 4 * np.log(2) ** 2
+    assert np.trace(return_two) == pytest.approx(trace, abs=3e-12)
+
+
+def test_exact_gap_direction_is_not_closed_even_after_two_steps_and_translation():
+    m_zero, m_log = _reduced_jacobian_parts()
+    gap = np.zeros((5, 3), dtype=object)
+    gap[:, 1] = np.array([1, -1, 1, -1, 1], dtype=object) * Fraction(1, 2)
+    # R flips the y coordinate: the native head response is -M's head response.
+    assert -(m_zero @ gap.ravel())[1] == 0
+    assert -(m_log @ gap.ravel())[1] == Fraction(-15, 2)
+    constant = (m_zero @ m_zero @ gap.ravel()).reshape(5, 3)
+    linear = ((m_zero @ m_log + m_log @ m_zero) @ gap.ravel()).reshape(5, 3)
+    quadratic = (m_log @ m_log @ gap.ravel()).reshape(5, 3)
+    assert constant[1, 1] == 0
+    assert linear[1, 1] == Fraction(-15, 2)
+    assert quadratic[1, 1] == 0
+    # Tail ages 2,3 force unit gap amplitude and zero common y translation.
+    np.testing.assert_array_equal(constant[2:, 1], gap[2:, 1])
+    np.testing.assert_array_equal(linear[2:, 1], 0)
+    np.testing.assert_array_equal(quadratic[2:, 1], 0)
+    # log(2)>69/100 was bounded independently in the trace-certificate test.
+    assert Fraction(15, 2) * Fraction(69, 100) - Fraction(1, 2) > 4
+
+
+def test_gap_slope_formula_matches_native_head_and_history_derivative():
+    history, config = _history(), _config()
+    tangent = np.zeros_like(history)
+    tangent[:, 1] = history[:, 1]
+    blocks = alignment_history_head_jacobian(history, config)
+    head = np.einsum("aij,aj->i", blocks, tangent)
+    scalar_slope = 37 / 4
+    vector_slope = 39 / 4 - 15 / 2 * np.log(2)
+    axial_slope = scalar_slope - vector_slope
+    assert head[1] == pytest.approx(-0.5 - axial_slope, abs=2e-14)
+    difference = (
+        _map(history + 1e-6 * tangent) - _map(history - 1e-6 * tangent)
+    ) / 2e-6
+    np.testing.assert_allclose(head, difference[0], atol=5e-9)
 
 
 @pytest.mark.parametrize("q", [Fraction(1, 3), Fraction(1, 2), Fraction(4, 5)])

@@ -1,9 +1,23 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (bedingte Zweiphasen-Rueckstellhuerde aus nativen Kraeften; kein allgemeines Alignment-No-go oder stabiler Ladungstraeger).
+Stand: 2026-11-16 (volle lokale History-Ableitung und exakte Nichtinvarianz einer isolierten Hoehenmode; kein neuer stabiler Ladungstraeger).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Die [volle lokale History-Ableitung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_history_response_2026-11-16.md)
+gilt fuer deterministische gefuellte konsistente Alignment-Historien
+mit nichtverschwindenden aktiv gewichteten Einheitsdepositionen.
+Sie ist keine Aenderung der Regel oder Stabilitaetsklassifikation.
+Die exakte Nichtinvarianz des Abstand-plus-Axialtranslation-Unterraums
+ist am bereits bekannten negativen-Gain-Kontrollorbit bewiesen, nicht
+fuer jede Zweiphasenloesung. Isolierte Achsenableitungen definieren
+ohne Abschlussnachweis keine Floquet-Multiplikatoren. Eine vorgegebene
+Zwischenphase darf die wirkliche Zwischenhistorie nicht ersetzen.
+Der Literaturabgleich prueft die Methodik eines anderen Agentenmodells,
+nicht dessen Stabilitaetszertifikat oder einen FIFO-Transfer.
+Kein positiver Existenzbefund, kein allgemeines Instabilitaets-No-go,
+keine elektrische Ladung und keine Aenderung an Paper I.
 
 Der [Zweiphasen-Rueckstellsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_two_phase_balance_2026-11-16.md)
 gilt fuer beschraenkte rauschfreie relative Zweiphasenwiederkehr mit

@@ -5,12 +5,18 @@ from fractions import Fraction
 import numpy as np
 import pytest
 
+from emergenz_knoten.core import SimulationConfig
 from emergenz_knoten.kernels import (
     double_gaussian_gradient,
     effective_double_gaussian_parameters,
     exponential_memory_weights,
 )
-from emergenz_knoten.vector_memory import normalize_orientation, vector_gaussian_field
+from emergenz_knoten.vector_memory import (
+    VectorMemoryConfig,
+    alignment_history_head_jacobian,
+    normalize_orientation,
+    vector_gaussian_field,
+)
 
 
 def _rotation(angle):
@@ -73,6 +79,85 @@ def _cross_sums(a, b, matrix, q, pairs, ell):
     c = weights @ k[:-1]
     d = weights @ _gaussian(b - powers[:-1] @ a, ell)
     return c, d, k[0], k[-1]
+
+
+@pytest.mark.parametrize("deposition", ["delta", "gaussian", "matched_gaussian"])
+@pytest.mark.parametrize("hs,hv", [(4, 4), (7, 5)])
+def test_gap_derivative_includes_both_length_and_kernel_changes(deposition, hs, hv):
+    a, b = _geometry()
+    matrix, q, s, ell = _rotation(0.73), 0.6, 0.7, 1.2
+    config = VectorMemoryConfig(
+        scalar=SimulationConfig(
+            steps=4,
+            dim=3,
+            epsilon=0,
+            alpha=1 - s,
+            max_memory=hs,
+            memory_factor=10,
+            memory_mass=1.1,
+            eta=0.3,
+            sigma_rep=0.7,
+            sigma_att=1.4,
+            amplitude_rep=0.8,
+            amplitude_att=1.2,
+            deposition_kernel=deposition,
+            deposition_sigma=0.3 if deposition == "gaussian" else 0,
+        ),
+        lambda_vector=1 - q,
+        max_vector_memory=hv,
+        vector_memory_factor=10,
+        vector_mass=0.8,
+        eta_vector=0.4,
+        sigma_vector=ell,
+    )
+    effective = effective_double_gaussian_parameters(
+        dim=3,
+        sigma_rep=0.7,
+        sigma_att=1.4,
+        amplitude_rep=0.8,
+        amplitude_att=1.2,
+        deposition_kernel=deposition,
+        deposition_sigma=config.scalar.deposition_sigma,
+    )
+    weights = exponential_memory_weights(1 - s, hs, memory_mass=1.1)
+    even, odd, axial, _, _, lengths = _coefficients(a, b, matrix, q, hv, ell)
+    gap = b[2] - a[2]
+    axial_derivative = -gap * even / lengths**3 + gap * odd * (
+        1 / (ell**2 * lengths[::-1]) + 1 / lengths[::-1] ** 3
+    )
+    for phase in range(2):
+        history = _history(a, b, matrix, phase, max(hs, hv + 1))
+        radii = np.sum((history[0] - history[:hs]) ** 2, axis=1)
+        radial, radial_prime = np.zeros(hs), np.zeros(hs)
+        for label, sign in [("rep", -1), ("att", 1)]:
+            variance = effective[f"sigma_{label}"] ** 2
+            term = (
+                sign
+                * effective[f"amplitude_{label}"]
+                / variance
+                * np.exp(-radii / (2 * variance))
+            )
+            radial += term
+            radial_prime -= term / (2 * variance)
+        restoring = (weights * radial)[1::2].sum()
+        restoring_prime = 2 * gap * (weights * radial_prime)[1::2].sum()
+        factor = (
+            config.scalar.eta * restoring
+            - config.eta_vector * (1 - q) * config.vector_mass * axial[phase]
+        )
+        factor_prime = (
+            config.scalar.eta * restoring_prime
+            - config.eta_vector * (1 - q) * config.vector_mass * axial_derivative[phase]
+        )
+        sign = 1 if phase == 0 else -1
+        tangent = np.zeros_like(history)
+        tangent[:, 2] = -sign * (-1.0) ** np.arange(len(history)) / 2
+        blocks = alignment_history_head_jacobian(history, config)
+        head = np.einsum("aij,aj->i", blocks, tangent)
+        assert head[2] == pytest.approx(
+            sign * (-0.5 + factor + gap * factor_prime), abs=3e-16
+        )
+        assert abs(factor - 1) > 0.5  # Fixed off-orbit control, not a solution.
 
 
 @pytest.mark.parametrize("deposition", ["delta", "gaussian", "matched_gaussian"])
