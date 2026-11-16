@@ -1,9 +1,21 @@
 # Paper-Claims und Status
 
-Stand: 2026-11-16 (begrenzter Formtest vorbereitet; kein neuer Zielbefund und kein positiver Stabilitaetsnachweis).
+Stand: 2026-11-16 (bedingter orbitaler Bindungssatz; seine strikte Stabilitaetsvoraussetzung bleibt offen).
 
 Diese Datei ist das aktive Claim-Register. Sie trennt Modelldefinition,
 strukturelle Resultate, numerische Beobachtungen und Future Work.
+
+Der [orbitale Bindungsanschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
+ist eine Implikation fuer feste innenliegende exakte Vierzyklen,
+gefuellten Speicher, nichtverschwindende Schritte und epsilon=0:
+Strikte Schur-Stabilitaet aller acht Formmultiplikatoren impliziert
+lokale exponentielle orbitale Anziehung und persistente lokale
++1-Defektbindung. Die strikte Voraussetzung ist nicht nachgewiesen.
+Die Konstruktion behaelt neun nichtlineare Formkoordinaten und braucht
+keine inverse FIFO-Karte. Ein konkreter Radius, Entstehung aus leerer
+Memory, gaussische Rauschlebensdauer, Ladung, Masse und Quantenstruktur
+folgen nicht. Die Lyapunov-Metrik ist keine physikalische Energie;
+Spiegelungsphasen sind weder Gegenladung noch Spin 1/2.
 
 Die [Pruefvorbereitung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_stability_preflight_2026-11-16.md)
 ist ein Methodenbefund, kein Resultat fuer den festen positiven

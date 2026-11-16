@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; begrenzter voller Formtest vorbereitet, konkrete positive Auswertung weiter freigabepflichtig).
+Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; bedingter nichtlinearer Bindungsanschluss geklaert, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -420,6 +420,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Sein Produkttest kann Instabilitaet belegen, nicht Stabilitaet;
    bei bestandenem notwendigen Kriterium bleibt ein voller rigoroser
    Schur-/Intervalltest offen. Gleitkommawurzeln nur diagnostisch lesen.
+   Der [bedingte Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
+   klaert jetzt, was ein strikter Schur-Nachweis leisten wuerde:
+   lokale orbitale Anziehung und ein an die Memory-Huelle gebundener
+   +1-Defekt. Neun nichtlineare Formkoordinaten beibehalten; den
+   linearen Nullfaktor nicht ungeprueft als Symmetrie quotieren.
+   Erst bei nachgewiesener strikter Stabilitaet einen gemeinsamen
+   endlichen Kontraktions-/Defektradius zertifizieren. Die bedingte
+   Existenz eines kleinen Radius ist noch keine berechnete Toleranz,
+   Rauschlebensdauer oder physikalische Ladung.
    Bis zur Antwort nur analytisch weiterarbeiten; aus der offenen
    Anfrage keine Ausfuehrungsbefugnis ableiten. Den Rueckkehroperator
    aus wirklichen Zwischenhistorien bilden und Symmetrierichtungen

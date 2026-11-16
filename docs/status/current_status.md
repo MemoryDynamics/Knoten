@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (begrenzter voller Formtest vorbereitet und nichtzielbezogen kontrolliert; fester positiver Kandidat weiter ungeprueft).
+Stand: 2026-11-16 (bedingter Anschluss von strikter Formstabilitaet an lokale Defektbindung hergeleitet; fester positiver Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,20 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [bedingte orbitale Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
+verbindet einen kuenftigen strikten Schur-Nachweis mit einer kleinen
+vorwaertsinvarianten Umgebung, orbitaler Konvergenz und einem innen
+gebundenen regulaeren +1-Defekt. Die Voraussetzung ist fuer keinen
+positiven Vertreter belegt. Neun nichtlineare Formkoordinaten behalten
+die vergessene aelteste Schrittlaenge; acht nichttriviale Multiplikatoren
+bleiben das lineare Kriterium. Explizite Feld-/Huellenreserven ergaenzen
+den Beweis, ohne einen konkreten dynamischen Radius auszuwerten.
+16 neue statische Kontrollen und 469 Tests im betroffenen Panel bestehen,
+ebenso Lint und strikter Dokumentationsbau; keine volle Repository-Suite.
+Der Literaturabgleich grenzt Fluss- und Diffeomorphismussaetze vom
+singulaeren FIFO ab. Kein neuer Ziellauf, stabiler Traegernachweis,
+elektrischer Quellenport oder physikalischer Energiebegriff.
 
 Die [begrenzte Stabilitaetspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/flat_memory_stability_preflight_2026-11-16.md)
 ist nun mit Quellenbindung, hartem 30-Sekunden-Workerlimit und
