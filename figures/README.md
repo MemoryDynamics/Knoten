@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-08-16.
+Stand: 2026-11-19.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -68,6 +68,13 @@ zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
 
 Der kanonische Reportpfad fuer diese Entscheidungen steht in
 `reports/README.md`.
+
+## Leserabbildungen
+
+- `draft/memory_charge_2026-11-19/`: analytische 3D-Vierzyklusgeometrie
+  mit farbcodierten Draufsichten und eine strikt getrennte Spinor-Referenz.
+  Keine neue Simulation, Stabilitaetsaussage oder Teilchenidentifikation.
+  [Leseschluessel und Reproduktion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/docs/reference/memory_spin_visual_guide.md).
 
 ## Aufnahmeregeln
 
