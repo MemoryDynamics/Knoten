@@ -20,6 +20,14 @@ Periodenverdopplung. Ihr eingebetteter Gauss-Vektorfeldnullpunkt wird
 zur Nullstellenlinie, nicht zum regulaeren 4D-Punktdefekt.
 Keine neue Zieltrajektorie, Stabilitaetsentscheidung oder Aenderung an Paper I.
 
+Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
+zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
+Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener
+antisymmetrischer Stromtensor hat Rang zwei; eine Hodge-Vervollstaendigung
+liefert algebraisch den Referenzgenerator, ist aber keine hergeleitete
+dynamische Antwort. Deshalb kein Spinnachweis aus einem einzelnen
+720-Grad-Umlauf, auch nicht mit beliebig genauer Bahnmessung.
+
 Der [bedingte orbitale Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
 verbindet einen kuenftigen strikten Schur-Nachweis mit einer kleinen
 vorwaertsinvarianten Umgebung, orbitaler Konvergenz und einem innen

@@ -418,6 +418,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Komponenten samt physikalischem Readout pruefen; weder eine vierte
    Ortskoordinate noch die Referenzrotation als Spinnachweis
    oder Ersatz fuer die folgende Stabilitaetsfrage verwenden.
+   Der [Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
+   verlangt dafuer eine hergeleitete Antwort auch ausserhalb der
+   Umlaufebene: Derselbe Kreis identifiziert den komplementaeren
+   Rotationsanteil nicht. Eine Hodge-Vervollstaendigung des nativen
+   Stromtensors nicht ohne Dynamikableitung als neue Kopfregel einsetzen.
    Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
    lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
    CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.

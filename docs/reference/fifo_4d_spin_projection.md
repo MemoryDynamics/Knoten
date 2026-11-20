@@ -161,6 +161,12 @@ Stabile Bildung, relative Phasenbeobachtung und elektrische Quellenwirkung
 bleiben eigenstaendige Anforderungen. Der ausstehende begrenzte native
 Stabilitaetstest wird durch diese Referenz weder ausgefuehrt noch ersetzt.
 
+Der [Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
+zeigt zusaetzlich: Verschiedene 4D-Generatoren erzeugen exakt dieselbe
+Kreisgeschichte. Der native Umlauftensor erfasst nur deren Ebene;
+eine quaternionische Vervollstaendigung ist algebraisch moeglich, aber
+ihre komplementaere Wirkung noch nicht aus Memory hergeleitet.
+
 ## Reproduktion und Kontrolle
 
 - [Skript](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/fifo_4d_spin_projection.py)
