@@ -1,6 +1,6 @@
 # Abbildungs-Index
 
-Stand: 2026-11-19.
+Stand: 2026-11-20.
 
 Abbildungen sind Darstellungen von Evidenz, nicht eigenstaendige Evidenz. Die
 zugehoerige Hypothese, Kontrolle, Seedbasis und Claim-Grenze stehen im Report.
@@ -70,6 +70,11 @@ Der kanonische Reportpfad fuer diese Entscheidungen steht in
 `reports/README.md`.
 
 ## Leserabbildungen
+
+- `draft/fifo_4d_spin_2026-11-20/`: reelle Vierkomponenten-Referenz mit
+  vier FIFO-Speicherplaetzen, acht inneren Phasen und vier Phasen eines
+  gewaehlten quadratischen 3D-Readouts. Kein nativer Memory-Orbit.
+  [Konstruktion und Einbettungsgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/docs/reference/fifo_4d_spin_projection.md).
 
 - `draft/memory_charge_2026-11-19/`: analytische 3D-Vierzyklusgeometrie
   mit farbcodierten Draufsichten und eine strikt getrennte Spinor-Referenz.

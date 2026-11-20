@@ -35,6 +35,7 @@ nav:
       - FIFO-Normalstabilitaet: reference/fifo_normal_stability_contract.md
       - FIFO-Strukturgrenzen: reference/fifo_rigid_structure_limits.md
       - Memory-Struktur und Spin im Bild: reference/memory_spin_visual_guide.md
+      - FIFO in 4D und Spinprojektion: reference/fifo_4d_spin_projection.md
       - Horizonttransfer erklaert: reference/horizon_transfer_guide.md
       - P4-R-S allgemein erklaert: status/p4rs_plain_language_summary.md
   - Experimente: reference/experiment_catalog.md

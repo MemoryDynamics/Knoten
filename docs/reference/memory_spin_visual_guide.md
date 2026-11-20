@@ -108,6 +108,10 @@ wird durch diese Abbildungen nicht hinzugefuegt.
 
 ## Dateien und Reproduktion
 
+Fortsetzung: [FIFO in 4D und die 720-Grad-Wiederkehr](fifo_4d_spin_projection.md)
+zeigt dieselbe Spinorkinematik rein reell mit einer ganzen vierplaetzigen
+Historie und grenzt sie von einer nativen raeumlichen 4D-Einbettung ab.
+
 - Struktur: [PNG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/memory_structure.png), [SVG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/memory_structure.svg), [PDF](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/memory_structure.pdf).
 - Spinreferenz: [PNG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/spinor_reference.png), [SVG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/spinor_reference.svg), [PDF](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/spinor_reference.pdf).
 - [Erzeugendes Skript](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/memory_spin_illustrations.py), [Kontrollen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_memory_spin_illustrations.py), [Provenienz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/memory_charge_2026-11-19/provenance.json).

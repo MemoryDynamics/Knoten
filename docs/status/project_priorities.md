@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-16 (zuerst Memory-Ladungstraeger; bedingter nichtlinearer Bindungsanschluss geklaert, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
+Stand: 2026-11-20 (Memory-Ladungstraeger zuerst; reelle Spinreferenz von nativer 4D-Einbettung getrennt, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -409,6 +409,15 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    ueber solche scheinbaren Stabilitaetsparameter vorbereiten.
    **Als naechstes volle Formstabilitaet dieser exakten Familie
    diskriminierend pruefen, nicht weitere Formen sammeln.**
+   Die auf Autorenwunsch erstellte [4D-/3D-Referenz](../reference/fifo_4d_spin_projection.md)
+   zeigt die 720-Grad-Wiederkehr mit vorgegebenem reellem Generator und
+   quadratischem Readout, nicht mit hergeleitetem Memory-Feedback.
+   Eine blosse raeumliche 4D-Einbettung erhaelt die native Periode und
+   macht aus dem isolierten 3D-Gaussfelddefekt eine Nullstellenlinie.
+   Einen spaeteren Spinanschluss deshalb als Ableitung interner
+   Komponenten samt physikalischem Readout pruefen; weder eine vierte
+   Ortskoordinate noch die Referenzrotation als Spinnachweis
+   oder Ersatz fuer die folgende Stabilitaetsfrage verwenden.
    Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
    lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
    CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-16 (bedingter Anschluss von strikter Formstabilitaet an lokale Defektbindung hergeleitet; fester positiver Kandidat weiter ungeprueft).
+Stand: 2026-11-20 (reelle 4D-/3D-Spinreferenz von nativer FIFO-Einbettung getrennt; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,17 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [4D-FIFO-/Spinprojektion](../reference/fifo_4d_spin_projection.md)
+realisiert die angefragte 720-Grad-Wiederkehr als rein reelle Referenz:
+vier Speicherplaetze, acht innere Umlaufphasen und vier Phasen des
+gewaehlten quadratischen 3D-Readouts. Kopfrotation und Readout sind
+Inputs, keine Memory-Emergenz. 19 feste Algebra-/Einbettungskontrollen
+bestehen. Die unveraenderte rauschfreie native Regel mit Delta-Deposition
+ist dagegen mit isometrischer 3D-/4D-Einbettung vertraeglich: keine
+Periodenverdopplung. Ihr eingebetteter Gauss-Vektorfeldnullpunkt wird
+zur Nullstellenlinie, nicht zum regulaeren 4D-Punktdefekt.
+Keine neue Zieltrajektorie, Stabilitaetsentscheidung oder Aenderung an Paper I.
 
 Der [bedingte orbitale Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
 verbindet einen kuenftigen strikten Schur-Nachweis mit einer kleinen
