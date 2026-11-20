@@ -1,6 +1,6 @@
 # Kanonisches Modellvokabular
 
-Stand: 2026-09-02.
+Stand: 2026-10-21 (Point-deposition-Notation des abgeschlossenen Paper-I-Baselines ergaenzt).
 
 Diese Seite ist die verbindliche Zielsprache fuer aktive Dokumentation, neue
 Gleichungen und kuenftige Code-Remediation. Historische Reports und
@@ -13,7 +13,7 @@ dokumentiert die gefundenen Kollisionen und die Migrationsgrenze.
 
 ## 1. Grundregel
 
-Der Modellkern wird immer zuerst in der Paper-I-Sprache angegeben:
+Der allgemeine Modellkern wird mit getrennten Memory-Parametern angegeben:
 
 $$
 x_{n+1}=x_n+\varepsilon\xi_n-\eta\nabla\Phi_n(x_n),
@@ -29,6 +29,21 @@ Im normierten Spezialfall gilt
 $\lambda_{\rm m}=\beta_\rho=\alpha$. Erweiterungen muessen ihre Groessen aus
 diesen Grundgroessen ableiten oder als neue Annahme markieren; sie duerfen
 den Kern nicht stillschweigend umbenennen.
+
+Die Paper-I-Baseline vom 2026-10-09 verwendet fuer Point-deposition das
+Mass $\mu_n$ statt einer glatten Dichte $\rho_n$. Bei $M_0=1$ lautet der
+gleiche normierte Spezialfall
+
+$$
+\mu_{n+1}=q\mu_n+\alpha\delta_{x_{n+1}},\qquad q=1-\alpha.
+$$
+
+Die allgemeinen Parameter sind damit weiterhin
+$\lambda_{\rm m}=\beta_\rho=\alpha$; die kuerzere Manuskriptnotation fuehrt
+keinen neuen Depositionsparameter ein. $\mu_n$ ist das Memory-Mass,
+$\mu_{\rm w}$ dagegen die unten definierte Portmobilitaet. Der gemeinsame
+Paper-I-Text liegt in `content.tex`; `main.tex` und `main_compact.tex` sind
+nur Dokumenthuellen.
 
 ## 2. Kanonische Grundgroessen
 

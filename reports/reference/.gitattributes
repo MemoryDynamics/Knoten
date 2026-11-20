@@ -1,0 +1,5 @@
+# Preserve exact Windows output bytes; CRLF is not trailing whitespace.
+nucleon_al1_attempt1_2026-10-28.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+delta_al1_attempt1_2026-10-28.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+nucleon_al1_attempt1_summary_2026-10-28.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*_al1_attempt1_2026-10-28.json.*.log -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

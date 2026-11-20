@@ -1,0 +1,492 @@
+{
+  "files": {
+    "data/processed/p38f_canonical_write_2026-08-15/shards/p38f_seed1.npz": {
+      "array_count": 147,
+      "array_groups": [
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "perturbation_fractions"
+          ],
+          "shape": [
+            2
+          ]
+        },
+        {
+          "count": 12,
+          "dtype": "float64",
+          "example_keys": [
+            "active_f0_a0__plus_kicks",
+            "active_f0_a1__plus_kicks",
+            "active_f0_a2__plus_kicks"
+          ],
+          "shape": [
+            2,
+            3
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "kr_values"
+          ],
+          "shape": [
+            5
+          ]
+        },
+        {
+          "count": 12,
+          "dtype": "float64",
+          "example_keys": [
+            "active_f0_a0__control_radius_ratios",
+            "active_f0_a1__control_radius_ratios",
+            "active_f0_a2__control_radius_ratios"
+          ],
+          "shape": [
+            801
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "int64",
+          "example_keys": [
+            "sample_steps"
+          ],
+          "shape": [
+            801
+          ]
+        },
+        {
+          "count": 12,
+          "dtype": "float64",
+          "example_keys": [
+            "active_f0_a0__branch_radius_ratios",
+            "active_f0_a1__branch_radius_ratios",
+            "active_f0_a2__branch_radius_ratios"
+          ],
+          "shape": [
+            801,
+            2
+          ]
+        },
+        {
+          "count": 12,
+          "dtype": "float64",
+          "example_keys": [
+            "active_f0_a0__branch_positions",
+            "active_f0_a1__branch_positions",
+            "active_f0_a2__branch_positions"
+          ],
+          "shape": [
+            801,
+            2,
+            3
+          ]
+        },
+        {
+          "count": 72,
+          "dtype": "float64",
+          "example_keys": [
+            "active_f0_a0__control_positions",
+            "active_f0_a0__memory_center_even_leakage",
+            "active_f0_a0__memory_center_response"
+          ],
+          "shape": [
+            801,
+            3
+          ]
+        },
+        {
+          "count": 24,
+          "dtype": "complex128",
+          "example_keys": [
+            "active_f0_a0__centered_mode_even_leakage",
+            "active_f0_a0__centered_mode_response",
+            "active_f0_a1__centered_mode_even_leakage"
+          ],
+          "shape": [
+            801,
+            5
+          ]
+        }
+      ],
+      "bytes": 2223350,
+      "sha256": "ca652c06ec4739d427bedc4008fd897df821c5bc633e796351831e0b4b9646bf"
+    },
+    "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz": {
+      "array_count": 4,
+      "array_groups": [
+        {
+          "count": 1,
+          "dtype": "<U1087",
+          "example_keys": [
+            "manifest"
+          ],
+          "shape": []
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "x"
+          ],
+          "shape": [
+            3
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "weights"
+          ],
+          "shape": [
+            600
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "memory"
+          ],
+          "shape": [
+            600,
+            3
+          ]
+        }
+      ],
+      "bytes": 19385,
+      "sha256": "cde1873049a20779cede8d64135c2496faa9d3587d3af752a0209882d186560e"
+    },
+    "experiments/current/memory/closure/p38f_canonical_write_gate.py": {
+      "bytes": 36815,
+      "sha256": "f19527f7859af01fcf223cf4fac23939f44aefda3b9dac9fb506ce3352567fb3",
+      "sha256_utf8_lf": "0f4c2f875d3bd1bbf122f84048b08e9379e59bbb204507c56737ce6e2c130bb2"
+    },
+    "experiments/current/memory/synchronization/reciprocity/p32_accumulation_control.py": {
+      "bytes": 17236,
+      "sha256": "b5fa32ec454636c140bdac88333a48b6cde05720416365c8f6cd15b3b16c36cf",
+      "sha256_utf8_lf": "e82bd4b6c4085a463ef6c22778dcdd2f7f635e03158dc952705dab97170c66be"
+    },
+    "experiments/current/memory/synchronization/reciprocity/reciprocal_full_knot_gate.py": {
+      "bytes": 34766,
+      "sha256": "c52976336977362820d661e1bbccc53f99252b92cff9a4fafd3166ca1a2b69f6",
+      "sha256_utf8_lf": "9f3b1add19c1d808df1e99251c1a6e0c8904a485ac9d9a5ce11e783bdbcaeea3"
+    },
+    "experiments/current/memory/synchronization/reciprocity/retarded_reciprocal_full_knot_gate.py": {
+      "bytes": 38582,
+      "sha256": "bc4d8e8841acfe01de0dcfa43504985dc84cc01874ec492e308b3f06756c6fe7",
+      "sha256_utf8_lf": "adf02caa6e9c9847a62d8370f5938ce9dff1f4bc94fc7bee9f49febd1cea91dc"
+    },
+    "reports/memory/closure/emergent_modal_state_reconciliation_2026-08-13.responses.npz": {
+      "array_count": 148,
+      "array_groups": [
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "perturbation_fractions"
+          ],
+          "shape": [
+            2
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "kr_values"
+          ],
+          "shape": [
+            5
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64",
+          "example_keys": [
+            "profile_grams"
+          ],
+          "shape": [
+            18,
+            5,
+            5
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "int64",
+          "example_keys": [
+            "sample_steps"
+          ],
+          "shape": [
+            161
+          ]
+        },
+        {
+          "count": 72,
+          "dtype": "float64",
+          "example_keys": [
+            "features_0",
+            "features_1",
+            "features_10"
+          ],
+          "shape": [
+            161,
+            5,
+            3
+          ]
+        },
+        {
+          "count": 72,
+          "dtype": "complex128",
+          "example_keys": [
+            "modes_0",
+            "modes_1",
+            "modes_10"
+          ],
+          "shape": [
+            161,
+            5,
+            5
+          ]
+        }
+      ],
+      "bytes": 4948085,
+      "sha256": "d9b988cbe2e4ff84144572d6de122628f60d46f628f022c997a51df6c911753c"
+    },
+    "reports/response/reciprocal/p32_accumulation_control_N500k_2026-08-06.json": {
+      "bytes": 87198,
+      "condition_keys": [
+        "channel_off",
+        "instantaneous_reciprocal",
+        "retarded_one_way",
+        "retarded_reciprocal"
+      ],
+      "condition_record_keys": [
+        "candidate_pass",
+        "channel_detected",
+        "final_pair_distance_r",
+        "mediator_detected",
+        "mediator_input_rms",
+        "mediator_readout_rms",
+        "mode_segments",
+        "mode_summary",
+        "node_shape_metrics",
+        "response_rms_r",
+        "shape_bounded_coherent_pass"
+      ],
+      "declared_git_status": "",
+      "declared_revision": "72ae14528e7a807e9484093c1503e2ec9f3f72a9",
+      "list_count": 295,
+      "longest_lists": [
+        {
+          "length": 4,
+          "path": "$.accumulation_rows[0].conditions.channel_off.epochs"
+        },
+        {
+          "length": 4,
+          "path": "$.accumulation_rows[0].conditions.instantaneous_reciprocal.epochs"
+        },
+        {
+          "length": 4,
+          "path": "$.accumulation_rows[0].conditions.retarded_one_way.epochs"
+        },
+        {
+          "length": 4,
+          "path": "$.accumulation_rows[0].conditions.retarded_reciprocal.epochs"
+        },
+        {
+          "length": 4,
+          "path": "$.accumulation_rows[1].conditions.channel_off.epochs"
+        }
+      ],
+      "parameters": {
+        "future_seeds": "1,2",
+        "sample_every": 10,
+        "updates": 500000
+      },
+      "root_keys": [
+        "accumulation_rows",
+        "accumulation_windows_memory_times",
+        "base_gate",
+        "created_utc",
+        "gate",
+        "git_revision",
+        "git_status",
+        "preregistration",
+        "schema",
+        "schema_version"
+      ],
+      "row_count": 2,
+      "schema": "emergenz-knoten.p32-accumulation-control",
+      "sha256": "1fec7ce752d72527563191501ebbfeb829301afdd80d366f8a279c3c67f8424d",
+      "sha256_utf8_lf": "68012cbf6b31d34236d0aebaae0f5dd3c7a8db5ff85a30e2fc2598c5a2e498d4"
+    },
+    "reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.json": {
+      "bytes": 114317,
+      "condition_keys": [
+        "channel_off",
+        "one_way",
+        "reciprocal"
+      ],
+      "condition_record_keys": [
+        "candidate_pass",
+        "channel_detected",
+        "final_pair_distance_r",
+        "mode_segments",
+        "mode_summary",
+        "node_shape_metrics",
+        "response_rms_r",
+        "shape_bounded_coherent_pass"
+      ],
+      "declared_git_status": "",
+      "declared_revision": "3a68e582fbf800ed9e620249c6da3fb22027ca68",
+      "list_count": 517,
+      "longest_lists": [
+        {
+          "length": 5,
+          "path": "$.rows"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.channel_off.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.one_way.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.reciprocal.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[1].conditions.channel_off.mode_segments"
+        }
+      ],
+      "parameters": {
+        "future_seeds": "1,2,3,4,5",
+        "sample_every": 1,
+        "updates": 50000
+      },
+      "root_keys": [
+        "analytic_relative_mode",
+        "checkpoint",
+        "checkpoint_update_index",
+        "config",
+        "continuation_updates_per_second",
+        "created_utc",
+        "derived",
+        "formation_seed",
+        "gate",
+        "git_revision",
+        "git_status",
+        "parameters",
+        "rows",
+        "runtime_seconds",
+        "schema",
+        "schema_version",
+        "thresholds"
+      ],
+      "row_count": 5,
+      "schema": "emergenz-knoten.reciprocal-full-knot-gate",
+      "sha256": "05583f4b8b6f4fd74c988c14ed1ea293f08e408967c542cfecb0874b53cfd909",
+      "sha256_utf8_lf": "54f76fc01669fa10cdfa88653c9024a7e98240121e751397eed32ed5c33ba264"
+    },
+    "reports/response/reciprocal/retarded_reciprocal_full_knot_gate_2026-08-04.json": {
+      "bytes": 156734,
+      "condition_keys": [
+        "channel_off",
+        "instantaneous_reciprocal",
+        "retarded_one_way",
+        "retarded_reciprocal"
+      ],
+      "condition_record_keys": [
+        "candidate_pass",
+        "channel_detected",
+        "final_pair_distance_r",
+        "mediator_detected",
+        "mediator_input_rms",
+        "mediator_readout_rms",
+        "mode_segments",
+        "mode_summary",
+        "node_shape_metrics",
+        "response_rms_r",
+        "shape_bounded_coherent_pass"
+      ],
+      "declared_git_status": "",
+      "declared_revision": "9b6bd5eeedd8ad969afd307539b61bf9c0d63693",
+      "list_count": 687,
+      "longest_lists": [
+        {
+          "length": 5,
+          "path": "$.rows"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.channel_off.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.instantaneous_reciprocal.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.retarded_one_way.mode_segments"
+        },
+        {
+          "length": 4,
+          "path": "$.rows[0].conditions.retarded_reciprocal.mode_segments"
+        }
+      ],
+      "parameters": {
+        "future_seeds": "1,2,3,4,5",
+        "sample_every": 1,
+        "updates": 50000
+      },
+      "root_keys": [
+        "checkpoint",
+        "checkpoint_update_index",
+        "config",
+        "continuation_updates_per_second",
+        "created_utc",
+        "derived",
+        "direct_analytic_relative_mode",
+        "formation_seed",
+        "gate",
+        "git_revision",
+        "git_status",
+        "mediator",
+        "mediator_grid",
+        "parameters",
+        "rows",
+        "runtime_seconds",
+        "schema",
+        "schema_version",
+        "thresholds"
+      ],
+      "row_count": 5,
+      "schema": "emergenz-knoten.retarded-reciprocal-full-knot-gate",
+      "sha256": "48e1b6e30ee010fdd221acbf746909aef08b6fac76548d61d51da4437160b7ae",
+      "sha256_utf8_lf": "e7d7a38241bb31ca3ef2def4e716426bc1a251f9811a9c12245a6070ffdb9c82"
+    },
+    "src/emergenz_knoten/canonical_write_port.py": {
+      "bytes": 10921,
+      "sha256": "e928149b8b97e46f59f89bd175b57db543ffb01bfcb44117d8857311ba0634ef",
+      "sha256_utf8_lf": "19e4b5059ee9e917dfe4b479b08af95467e9f5e37e2f309ff4e38485b5143249"
+    },
+    "src/emergenz_knoten/reciprocal_nodes.py": {
+      "bytes": 15017,
+      "sha256": "8dd313d9f69f482eb7fc902ea2d6156031b5c779464e305c8afd48cebe2755b2",
+      "sha256_utf8_lf": "84d4ce4a1acf5a9dc371bba38c9a773cc5250d14296394ab8896f67419f9a644"
+    }
+  },
+  "hash_convention": "sha256: working-tree bytes; sha256_utf8_lf: UTF-8 text with universal newlines normalized to LF",
+  "operation": "read bytes, JSON layouts and NPZ arrays only; no trajectory replay",
+  "schema": "emergenz-knoten.memory-pair-archive-inventory.v1",
+  "scope": "explicit file selection; not an exhaustive filesystem search"
+}

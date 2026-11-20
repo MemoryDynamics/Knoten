@@ -6,6 +6,8 @@ from emergenz_knoten import (
     ScalarReadoutKernel,
     SimulationConfig,
     calibrate_frozen_source_cross_eta,
+    double_gaussian_gradient,
+    double_gaussian_hessian,
     paired_frozen_source_response,
     translate_finite_memory_state,
 )
@@ -112,6 +114,117 @@ def test_zero_cross_coupling_reproduces_baseline_and_free_controls() -> None:
     np.testing.assert_array_equal(
         response.baseline_radius_ratios,
         response.free_radius_ratios,
+    )
+
+
+@pytest.mark.parametrize("distance", [4.0, 9.0])
+@pytest.mark.parametrize("cross_eta", [0.0, 0.15])
+def test_one_step_source_response_matches_drift_hessian_and_write_order(
+    distance: float,
+    cross_eta: float,
+) -> None:
+    base = _target_state()
+    memory = base.memory.copy()
+    memory[0] = [0.02, -0.01]
+    target = FiniteMemoryState(x=memory[0], memory=memory, weights=base.weights)
+    source = _source_state()
+    config = _config(eta=0.15, epsilon=0.03)
+    noise = np.array([[0.3, -0.4]])
+    perturbation = 1e-5
+    response = paired_frozen_source_response(
+        target,
+        source,
+        config,
+        directions=np.eye(2),
+        source_center_offset=[distance, 0.0],
+        perturbation=perturbation,
+        noise=noise,
+        sample_steps=[0, 1],
+        cross_eta=cross_eta,
+        pulse_steps=1,
+    )
+    kernel = {
+        "sigma_rep": config.sigma_rep,
+        "sigma_att": config.sigma_att,
+        "amplitude_rep": config.amplitude_rep,
+        "amplitude_att": config.amplitude_att,
+    }
+    source_memory = response.baseline_source_center[None, :]
+    self_gradient = double_gaussian_gradient(
+        target.x, target.memory, target.weights, **kernel
+    )
+    source_gradient = double_gaussian_gradient(
+        target.x, source_memory, source.weights, **kernel
+    )
+    expected_free = target.x + config.epsilon * noise[0] - config.eta * self_gradient
+    expected_position = expected_free - cross_eta * source_gradient
+    expected_jacobian = cross_eta * double_gaussian_hessian(
+        target.x, source_memory, source.weights, **kernel
+    )
+
+    np.testing.assert_array_equal(response.baseline_positions[0], target.x)
+    np.testing.assert_array_equal(response.free_positions[0], target.x)
+    np.testing.assert_array_equal(response.position_jacobians[0], 0.0)
+    np.testing.assert_allclose(
+        response.source_centers,
+        response.baseline_source_center
+        + perturbation * np.eye(2)[:, None, :] * np.array([1.0, -1.0])[None, :, None],
+        atol=1e-15,
+    )
+    np.testing.assert_allclose(response.free_positions[1], expected_free, atol=1e-15)
+    np.testing.assert_allclose(
+        response.baseline_positions[1], expected_position, atol=1e-15
+    )
+    np.testing.assert_allclose(
+        response.position_jacobians[1], expected_jacobian, rtol=2e-8, atol=2e-12
+    )
+    new_history = np.vstack((expected_position, target.memory[:-1]))
+    np.testing.assert_allclose(
+        response.baseline_memory_centers[1],
+        np.average(new_history, axis=0, weights=target.weights),
+        atol=1e-15,
+    )
+    np.testing.assert_allclose(
+        response.memory_center_jacobians[1],
+        target.weights[0] / np.sum(target.weights) * expected_jacobian,
+        rtol=2e-8,
+        atol=2e-12,
+    )
+    if cross_eta > 0.0:
+        assert abs(response.position_jacobians[1, 1, 1]) > 1e-3
+    else:
+        np.testing.assert_array_equal(response.position_jacobians, 0.0)
+        np.testing.assert_array_equal(
+            response.baseline_positions, response.free_positions
+        )
+
+
+def test_common_noise_shifts_positions_but_not_one_step_response() -> None:
+    config = _config(eta=0.15, epsilon=0.2)
+    kwargs = {
+        "directions": np.eye(2),
+        "source_center_offset": [4.0, 0.0],
+        "perturbation": 1e-5,
+        "sample_steps": [0, 1],
+        "cross_eta": 0.15,
+        "pulse_steps": 1,
+    }
+    responses = [
+        paired_frozen_source_response(
+            _target_state(), _source_state(), config, noise=noise, **kwargs
+        )
+        for noise in (np.zeros((1, 2)), np.array([[0.5, -0.25]]))
+    ]
+    np.testing.assert_allclose(
+        responses[1].baseline_positions[1] - responses[0].baseline_positions[1],
+        config.epsilon * np.array([0.5, -0.25]),
+        atol=1e-15,
+    )
+    np.testing.assert_allclose(
+        responses[1].position_jacobians,
+        responses[0].position_jacobians,
+        rtol=1e-9,
+        atol=2e-12,
     )
 
 
