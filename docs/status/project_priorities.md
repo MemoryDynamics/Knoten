@@ -487,6 +487,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    mit ausweisen; exakt starre Fortbewegung des ruhenden Referenzzyklus
    scheitert an der Fensterueberlappung, in 4D einschliesslich
    der gespeicherten Richtung.
+   Der [axiale Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_axial_response_2026-11-21.md)
+   ersetzt starres Mitwandern durch eine bedingt fortgesetzte
+   relative Zweiperiode. Bei einer spaeter separat freigegebenen
+   Antwortpruefung zuerst spektrale Voraussetzung, vorzeichenbehaftete
+   Drift und Formstoerung am deklarierten Kopfinput trennen.
+   Konstanter axialer Input ist weder Paarwechselwirkung noch
+   physikalisch kalibrierte Kraft.
    Erst bei nachgewiesener strikter Stabilitaet einen gemeinsamen
    endlichen Kontraktions-/Defektradius zertifizieren. Die bedingte
    Existenz eines kleinen Radius ist noch keine berechnete Toleranz,

@@ -219,3 +219,6 @@ kein Lauf am angefragten Kandidaten und keine Tragfaehigkeitsbehauptung.
 Ein kuenftiger mechanischer oder gravitativer Test muss die
 aktive Formabweichung neben der Centerbewegung ausweisen;
 der ausstehende volle Formtest bleibt Voraussetzung.
+Die [axiale Fortsetzung](four_cycle_axial_response_2026-11-21.md)
+zeigt getrennt, wie eine deformierte Bewegung bei konstantem Kopfinput
+unter einer spektralen Nichtresonanzbedingung fortbestehen kann.

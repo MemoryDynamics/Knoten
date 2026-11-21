@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (exakter aktiver Formabschluss und starre FIFO-Ueberlappung; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (bedingte axiale Antwort des FIFO-Vierzyklus; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [axiale Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_axial_response_2026-11-21.md)
+liefert bei fehlenden Formmultiplikatoren +1 und -1 im mitgedrehten
+Einschrittblock eine deformierte relative Zweiperiode unter kleinem
+konstantem Kopfinput. Axialer Versatz ist ungerade, die zusaetzliche
+Drehung gerade. Eine 3-mal-3-Gleichung liefert axiale Antwort und
+Formstoerung; ein strikt innenliegender regulaerer Defekt bleibt
+auf der fortgesetzten Bahn innen. Kein Ergebnis fuer Betrag,
+Vorzeichen oder Stabilitaet am nativen Zielkandidaten; kein
+physikalischer Kraftport.
 
 Der [aktive Formabschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_active_form_2026-11-21.md)
 reduziert die native nichtlineare Regel auf vier Orte und die
