@@ -173,6 +173,13 @@ Kreisgeschichte. Der native Umlauftensor erfasst nur deren Ebene;
 eine quaternionische Vervollstaendigung ist algebraisch moeglich, aber
 ihre komplementaere Wirkung noch nicht aus Memory hergeleitet.
 
+Die [alterskonsistente Pfadgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_spin_path_memory_2026-11-21.md)
+zeigt eine weitere Trennung: Bei 0, 360 und 720 Grad aeusserer
+Drehung koennen die aufgezeichneten Rahmenwege Liftzeichen
++,-,+ haben und dennoch nach vier gemeinsamen Updates denselben
+nativen Zustand liefern. Weghebung allein traegt das
+Vorzeichen nicht in den FIFO-Kopf.
+
 Die [volle lineare Zusatzrichtung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_extra_dimensions_2026-11-20.md)
 des eingebetteten nativen Vierzyklus ist ebenfalls analytisch getrennt:
 vier Symmetrietangenten und eine echte Formmode mit Faktor Bq^3g je

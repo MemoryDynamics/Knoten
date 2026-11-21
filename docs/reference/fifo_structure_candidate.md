@@ -104,6 +104,11 @@ damit nicht hergeleitet. Das Auftreten von $SO(3)$ und seiner Doppel-
 ueberlagerung allein beweist weder Spin $1/2$ noch eine interne $SU(2)$-
 Eichwechselwirkung.
 
+Die [spaetere Pfadgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_spin_path_memory_2026-11-21.md)
+realisiert verschiedene Wegklassen mit ueberlappenden, alterskonsistenten
+FIFO-Fenstern und exakt gleicher Endhistorie. Das Endzeichen des Lifts
+steht dann im aufgezeichneten Drehpfad, nicht im aktuellen Speicher.
+
 **Dimensionsgrenze:** Bei frei zugaenglichem $d\geq4$ ist der natuerliche
 Zweirahmenraum $V_2(\mathbb R^d)$, nicht $SO(3)$. Die Projektion auf den
 ersten Einheitsvektor hat Faser $S^{d-2}$ und Basis $S^{d-1}$. Beide sind

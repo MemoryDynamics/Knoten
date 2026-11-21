@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (analytische Stabilitaetsausschluesse in 3D und bei Einbettung in 4D; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-21 (720-Grad-Pfadzeichen vom FIFO-Zustand getrennt; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [720-Grad-Pfadgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_spin_path_memory_2026-11-21.md)
+konstruiert alterskonsistente Folgen mit Liftzeichen +,-,+,
+aber identischem aktiven FIFO nach einer gemeinsamen Endfolge.
+Ein idealisierter unendlicher exponentieller Speicher laesst
+die Pfadunterschiede exakt geometrisch abklingen; ein stetiges
+diskretes Label kann sie dort nicht dauerhaft tragen.
+Keine native Zielbahn oder hergeleitete Spinor-Dynamik.
 
 Die [Gebietsausschluesse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_stability_exclusions_2026-11-21.md)
 schliessen im gleichbreiten attraktiven FIFO sehr kleine Radien mit

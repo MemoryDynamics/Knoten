@@ -461,6 +461,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Umlaufebene: Derselbe Kreis identifiziert den komplementaeren
    Rotationsanteil nicht. Eine Hodge-Vervollstaendigung des nativen
    Stromtensors nicht ohne Dynamikableitung als neue Kopfregel einsetzen.
+   Die [FIFO-konsistente Pfadgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_spin_path_memory_2026-11-21.md)
+   trennt das Liftzeichen vom aktuellen Speicher: Nach gemeinsamer
+   Endfolge ist der Zustand identisch. Ein Spinbenchmark muss die
+   dynamisch erhaltene relative Phase und einen unterscheidenden
+   Readout nachweisen, nicht nur den Drehpfad nachtraeglich heben.
    Fuer eine spaetere raeumliche 4D-Fortsetzung ist jetzt der
    [zusaetzliche Normalquotient](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_extra_dimensions_2026-11-20.md)
    bekannt: Je Zusatzdimension ist |Bq^3g|<1 zusaetzlich zum vollen
