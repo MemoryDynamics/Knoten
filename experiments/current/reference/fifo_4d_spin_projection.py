@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -9,7 +10,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, PillowWriter
 from matplotlib.colors import LinearSegmentedColormap, Normalize
+from matplotlib.patches import FancyArrowPatch
 import numpy as np
 
 from .memory_spin_illustrations import DEFECT, GRID, HIGH, INK, LOW, MUTED, _style
@@ -58,6 +61,11 @@ def real_orbit(alpha):
 def fifo_reference(step):
     if type(step) is not int:
         raise ValueError("an integer reference step is required")
+    return _fifo_phase(step)
+
+
+def _fifo_phase(step):
+    """Continue the prescribed orbit between the integer FIFO updates."""
     return real_orbit(INTERNAL_STEP * (step - np.arange(4)))
 
 
@@ -84,7 +92,10 @@ def draw_reference():
     fig = plt.figure(figsize=(8, 8.8))
     fig.text(0.06, 0.956, "Ein 4D-Umlauf, zwei 3D-Umdrehungen", fontsize=20)
     fig.text(
-        0.06, 0.919, "Vier FIFO-Speicherpl\u00e4tze; Winkel des 3D-Readouts", fontsize=13
+        0.06,
+        0.919,
+        "Vier FIFO-Speicherpl\u00e4tze; Winkel des 3D-Readouts",
+        fontsize=13,
     )
     fig.text(
         0.06,
@@ -195,8 +206,109 @@ def draw_reference():
     plt.close(fig)
 
 
+def draw_animation():
+    _style()
+    fig = plt.figure(figsize=(8.6, 5.2))
+    fig.text(0.055, 0.924, "4D-FIFO: erst nach 720\u00b0 wieder am Start", fontsize=19)
+    fig.text(0.27, 0.836, "Innere 4D-Historie", ha="center")
+    fig.text(0.74, 0.836, "Sichtbare 3D-Richtung", ha="center")
+
+    inner = fig.add_axes([0.045, 0.237, 0.45, 0.58], projection="3d")
+    inner.set_proj_type("ortho")
+    inner.view_init(elev=23, azim=-54)
+    inner.set_box_aspect((1, 1, 1))
+    inner.set(xlim=(-0.8, 0.8), ylim=(-0.8, 0.8), zlim=(-0.8, 0.8))
+    inner.set_axis_off()
+    angles = np.linspace(0, 2 * np.pi, 241)
+    trace = real_orbit(angles)
+    inner.plot(*trace[:, :3].T, color=GRID, lw=1.5)
+    (chain,) = inner.plot([], [], [], color=MUTED, lw=1.5, zorder=3)
+    markers = [
+        inner.plot(
+            [], [], [], linestyle="", marker="o", ms=size, mec=INK, mew=0.8, zorder=4
+        )[0]
+        for size in (12, 8, 6.5, 5)
+    ]
+    (ring,) = inner.plot(
+        [], [], [], linestyle="", marker="o", ms=17, mfc="none", mec=INK, zorder=5
+    )
+    cmap = LinearSegmentedColormap.from_list(
+        "fourth_coordinate", [LOW, "#eeeeee", HIGH]
+    )
+    norm = Normalize(-1 / np.sqrt(2), 1 / np.sqrt(2))
+    colorbar = fig.colorbar(
+        matplotlib.cm.ScalarMappable(norm=norm, cmap=cmap),
+        cax=fig.add_axes([0.158, 0.232, 0.225, 0.022]),
+        orientation="horizontal",
+        ticks=[-0.5, 0, 0.5],
+    )
+    colorbar.ax.tick_params(labelsize=9, length=2)
+    fig.text(0.27, 0.157, "Farbe = 4. reelle Koordinate", ha="center", fontsize=11)
+
+    outer = fig.add_axes([0.55, 0.24, 0.38, 0.54])
+    outer.set(xlim=(-1.25, 1.25), ylim=(-1.25, 1.25), aspect="equal")
+    outer.axis("off")
+    outer.axhline(0, color=GRID, lw=0.8)
+    outer.axvline(0, color=GRID, lw=0.8)
+    outer.plot(np.cos(angles), np.sin(angles), color=GRID, lw=1.4)
+    outer.plot(1, 0, "o", ms=9, mfc="white", mec=MUTED)
+    outer.text(1.1, -0.13, "x", fontsize=10)
+    outer.text(0.11, 1.08, "y", fontsize=10)
+    arrow = FancyArrowPatch(
+        (0, 0), (1, 0), arrowstyle="-|>", mutation_scale=17, color=DEFECT, lw=2.4
+    )
+    outer.add_patch(arrow)
+    counter = fig.text(0.74, 0.225, "", ha="center", fontsize=16)
+    fig.text(
+        0.74, 0.157, "Quadratisches Richtungsbild (z = 0)", ha="center", fontsize=11
+    )
+    caption = fig.text(0.5, 0.084, "", ha="center", fontsize=12)
+    fig.text(
+        0.5,
+        0.035,
+        "Kinematische Referenz, keine native Memory-Bahn.",
+        ha="center",
+        fontsize=10,
+        color=MUTED,
+    )
+    key_captions = {
+        0: "Start: innerer Zustand Q\u2080",
+        40: "Eine Drehung: gleicher Pfeil, alle FIFO-Eintr\u00e4ge negiert",
+        80: "Zwei Drehungen: der ganze FIFO ist wieder am Start",
+    }
+
+    def update(frame):
+        state = _fifo_phase(frame / 10)
+        chain.set_data_3d(*state[:, :3].T)
+        for marker, point in zip(markers, state, strict=True):
+            marker.set_data_3d(*point[:3, None])
+            marker.set_markerfacecolor(cmap(norm(point[3])))
+        ring.set_data_3d(*state[0, :3, None])
+        arrow.set_positions((0, 0), direction_readout(state[0])[:2])
+        counter.set_text(f"{9 * frame}\u00b0")
+        caption.set_text(key_captions.get(frame, ""))
+
+    frames = [
+        frame for frame in range(81) for _ in range(16 if frame in key_captions else 1)
+    ]
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    animation = FuncAnimation(fig, update, frames=frames)
+    try:
+        animation.save(
+            OUTPUT / "fifo_4d_projection.gif", writer=PillowWriter(fps=16), dpi=100
+        )
+    finally:
+        plt.close(fig)
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--animation-only", action="store_true")
+    if parser.parse_args().animation_only:
+        draw_animation()
+        return
     draw_reference()
+    draw_animation()
     provenance = {
         "scope": "analytic real-coordinate construction; no native trajectory or stability evaluation",
         "fifo_slots": 4,

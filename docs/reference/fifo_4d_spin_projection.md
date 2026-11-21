@@ -13,6 +13,12 @@ Auswertung des ausstehenden Stabilitaetskandidaten.
 die innere FIFO-Historie negiert; nach 720 Grad ist sie wieder identisch.
 Die sichtbare Richtung selbst wiederholt sich bereits nach 360 Grad.
 
+![Animation: Vier farbcodierte FIFO-Eintraege und ein 3D-Richtungspfeil. Nach 360 Grad steht der Pfeil wieder am Start, die innere Historie ist negiert. Nach 720 Grad sind beide zurueck.](https://raw.githubusercontent.com/MemoryDynamics/Knoten/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.gif)
+
+Die Animation haelt bei 0, 360 und 720 Grad an. Ein FIFO-Schritt
+entspricht 90 Grad im Richtungsbild; die Zwischenbilder setzen den
+vorgegebenen Umlauf analytisch fort und sind keine weiteren Updates.
+
 ![Reelle 4D-FIFO-Historien bei null, 360 und 720 Grad des quadratischen 3D-Readouts. Drei Koordinaten sind raeumlich dargestellt, die vierte farblich. Nach 360 Grad ist die Historie negiert; das untere Richtungsreadout ist bereits gleich.](https://raw.githubusercontent.com/MemoryDynamics/Knoten/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.png)
 
 Der Umlauf und das quadratische Readout sind hier **eingesetzte
@@ -175,13 +181,16 @@ weiterer Ortsdimension. Der bisherige 3D-Formtest bleibt erforderlich.
 ## Reproduktion und Kontrolle
 
 - [Skript](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/fifo_4d_spin_projection.py)
-- [19 feste Kontrollen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_fifo_4d_spin_projection.py)
+- [20 feste Kontrollen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/tests/test_fifo_4d_spin_projection.py)
+- [Animation](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.gif)
 - [PNG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.png), [SVG](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.svg), [Provenienz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/provenance.json)
 
 ```bash
 python -m experiments.current.reference.fifo_4d_spin_projection
 pytest -q tests/test_fifo_4d_spin_projection.py
 ```
+
+Mit `--animation-only` wird nur die GIF-Datei neu erzeugt.
 
 Die Kontrollen pruefen exakte ganzzahlige Generatorrelationen, mehrere
 Rotationsachsen, den gesamten FIFO-Shift, die getrennten Perioden,

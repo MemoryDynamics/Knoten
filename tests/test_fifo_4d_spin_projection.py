@@ -9,6 +9,7 @@ from experiments.current.reference.fifo_4d_spin_projection import (
     GENERATORS,
     INITIAL,
     INTERNAL_STEP,
+    _fifo_phase,
     direction_readout,
     fifo_reference,
     real_orbit,
@@ -76,6 +77,19 @@ def test_entire_reference_fifo_negates_after_four_steps_and_returns_after_eight(
         direction_readout(fifo_reference(4)), direction_readout(initial), atol=1e-15
     )
     assert np.linalg.norm(fifo_reference(4)[:, :3] - initial[:, :3]) > 1
+
+
+def test_animation_continues_the_same_real_rotation_between_integer_steps():
+    step = 2.3
+    angle = 2 * INTERNAL_STEP * step
+    initial = fifo_reference(0)
+    rotation = real_rotation([0, 0, 1], angle)
+    np.testing.assert_allclose(_fifo_phase(step), initial @ rotation.T, atol=7e-16)
+    np.testing.assert_allclose(
+        _fifo_phase(step + 1)[1:], _fifo_phase(step)[:-1], atol=7e-16
+    )
+    with pytest.raises(ValueError, match="integer"):
+        fifo_reference(step)
 
 
 def test_readout_has_whole_phase_fibers_not_only_two_preimages():
