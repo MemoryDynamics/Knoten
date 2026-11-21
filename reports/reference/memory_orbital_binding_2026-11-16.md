@@ -50,8 +50,12 @@ Ihre radiale Variation kann vom naechsten nativen Update vollstaendig
 vergessen werden, bezeichnet vorher aber einen anderen Zustand.
 Der [lineare Acht-Formmoden-Quotient](memory_shape_quotient_2026-11-16.md)
 darf diesen nachgewiesenen Nullfaktor fuer den Spektraltest entfernen.
-Ein nichtlinearer Acht-Koordinaten-Abschluss folgt daraus nicht.
-Hier bleibt die neunte, kontrahierende Nullrichtung deshalb erhalten.
+Aus dem linearen Faktor allein folgt kein nichtlinearer Abschluss.
+Der Beweis hier behaelt deshalb den Neun-Koordinaten-Lift.
+Eine [spaetere explizite Faktorisierung](four_cycle_active_form_2026-11-21.md)
+weist den exakten Acht-Koordinaten-Abschluss fuer den aktiven Zustand
+separat nach, ohne die alte Richtung zu verwerfen oder Stabilitaet
+zu evaluieren.
 
 Auch die uneigentliche Ein-Schritt-Symmetrie S wird nicht mit SO(3)
 verwechselt. Eine Spiegelung kehrt in dieser Karte die beiden

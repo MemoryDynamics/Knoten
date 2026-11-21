@@ -178,6 +178,13 @@ des eingebetteten nativen Vierzyklus ist ebenfalls analytisch getrennt:
 vier Symmetrietangenten und eine echte Formmode mit Faktor Bq^3g je
 weiterer Ortsdimension. Der bisherige 3D-Formtest bleibt erforderlich.
 
+Die [aktive FIFO-Ueberlappung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_active_form_2026-11-21.md)
+schliesst fuer den eingebetteten tetraedrischen Vierzyklus eine
+zusaetzliche exakt starre Poseaenderung auch in 4D aus: Drei gemeinsame
+Orte lassen eine Drehung zu, die gespeicherte Schrittrichtung nicht.
+Das ist ein Befund zur nativen Ortsgeschichte, nicht zur internen
+Referenzrotation.
+
 ## Reproduktion und Kontrolle
 
 - [Skript](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/fifo_4d_spin_projection.py)

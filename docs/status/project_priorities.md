@@ -480,8 +480,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Der [bedingte Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
    klaert jetzt, was ein strikter Schur-Nachweis leisten wuerde:
    lokale orbitale Anziehung und ein an die Memory-Huelle gebundener
-   +1-Defekt. Neun nichtlineare Formkoordinaten beibehalten; den
-   linearen Nullfaktor nicht ungeprueft als Symmetrie quotieren.
+   +1-Defekt. Den Neun-Koordinaten-Positionslift vom
+   [exakten aktiven Acht-Koordinaten-Abschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_active_form_2026-11-21.md)
+   trennen: Nur die aelteste Laenge faellt bei der Faktorisierung weg,
+   nicht die Richtung. Bei kuenftiger Centerantwort Formabweichung
+   mit ausweisen; exakt starre Fortbewegung des ruhenden Referenzzyklus
+   scheitert an der Fensterueberlappung, in 4D einschliesslich
+   der gespeicherten Richtung.
    Erst bei nachgewiesener strikter Stabilitaet einen gemeinsamen
    endlichen Kontraktions-/Defektradius zertifizieren. Die bedingte
    Existenz eines kleinen Radius ist noch keine berechnete Toleranz,

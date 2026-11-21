@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Passivitaets- und Nyquist-Vergleich des Memory-Paares; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (exakter aktiver Formabschluss und starre FIFO-Ueberlappung; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [aktive Formabschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_active_form_2026-11-21.md)
+reduziert die native nichtlineare Regel auf vier Orte und die
+aelteste Einheitsrichtung, ohne die aelteste Schrittlaenge.
+In 3D bleiben acht lokale Formkoordinaten. Drei geteilte Orte
+schliessen eine zusaetzliche exakt starre Poseaenderung aus.
+In 4D schliesst erst die gespeicherte Richtung die verbleibende
+Drehfreiheit fuer den eingebetteten tetraedrischen Vierzyklus.
+Die Fehlerschranken trennen Poseaenderung und Formabweichung;
+keine Aussage ueber Stabilitaet oder Mobilitaet deformierter Zustaende.
 
 Der [Paar-Zeitumkehrtest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_time_reversal_2026-11-21.md)
 trennt den reziproken Center-Transfer von den gemeinsamen stationaeren
@@ -66,7 +76,7 @@ Die [4D-FIFO-/Spinprojektion](../reference/fifo_4d_spin_projection.md)
 realisiert die angefragte 720-Grad-Wiederkehr als rein reelle Referenz:
 vier Speicherplaetze, acht innere Umlaufphasen und vier Phasen des
 gewaehlten quadratischen 3D-Readouts. Kopfrotation und Readout sind
-Inputs, keine Memory-Emergenz. 19 feste Algebra-/Einbettungskontrollen
+Inputs, keine Memory-Emergenz. 20 feste Algebra-/Einbettungskontrollen
 bestehen. Die unveraenderte rauschfreie native Regel mit Delta-Deposition
 ist dagegen mit isometrischer 3D-/4D-Einbettung vertraeglich: keine
 Periodenverdopplung. Ihr eingebetteter Gauss-Vektorfeldnullpunkt wird
@@ -96,9 +106,10 @@ Der [bedingte orbitale Bindungssatz](https://github.com/MemoryDynamics/Knoten/bl
 verbindet einen kuenftigen strikten Schur-Nachweis mit einer kleinen
 vorwaertsinvarianten Umgebung, orbitaler Konvergenz und einem innen
 gebundenen regulaeren +1-Defekt. Die Voraussetzung ist fuer keinen
-positiven Vertreter belegt. Neun nichtlineare Formkoordinaten behalten
-die vergessene aelteste Schrittlaenge; acht nichttriviale Multiplikatoren
-bleiben das lineare Kriterium. Explizite Feld-/Huellenreserven ergaenzen
+positiven Vertreter belegt. Im vollstaendigen Positionslift behalten
+neun Formkoordinaten die aelteste Schrittlaenge; der aktive Abschluss
+braucht sie nicht. Acht nichttriviale Multiplikatoren bleiben das
+lineare Kriterium. Explizite Feld-/Huellenreserven ergaenzen
 den Beweis, ohne einen konkreten dynamischen Radius auszuwerten.
 16 neue statische Kontrollen und 469 Tests im betroffenen Panel bestehen,
 ebenso Lint und strikter Dokumentationsbau; keine volle Repository-Suite.
