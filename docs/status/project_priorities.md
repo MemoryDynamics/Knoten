@@ -154,6 +154,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Vor einer Fernfelduebertragung den nichtlinearen Zeit-/Groessen-
    Grenzgang kontrollieren; weder kritische Stabilitaet noch ihre
    Widerlegung aus dem linearen Pol ableiten. Keine neue Lauffreigabe.
+   Die [stationaere nichtlineare Schalenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_stationary_tail_2026-11-21.md)
+   schliesst nun das isotrope 1/r-Dichteprofil dieses deterministischen
+   Vergleichs aus; kein erneuter linearer Fit als Ersatz. Andere Profile,
+   Zeitdynamik und das stochastische Vielteilchenlimit bleiben davon
+   getrennt. Keine Aenderung der offenen Traeger-Stabilitaetsaufgabe.
    Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
    schliesst die lokale Massenbilanz einschliesslich Tail, legt aber
    keinen eindeutigen physikalischen Strom fest. 19 kleine Kontrollen

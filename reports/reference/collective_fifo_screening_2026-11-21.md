@@ -17,6 +17,10 @@ Die [anschliessende Fluktuationspruefung](critical_fifo_fluctuations_2026-11-21.
 bestimmt die exakte bedingte Dichteinnovation und einen nichtlinearen
 Skalenindikator. Sie kontrolliert nicht den Fortbestand der Fernantwort
 im kritischen nichtlinearen Vielteilchen-Grenzfall.
+Die [nichtlineare stationaere Schalenbilanz](critical_fifo_stationary_tail_2026-11-21.md)
+schliesst inzwischen das hier linear vorhergesagte isotrope 1/r-Profil
+im exakten deterministischen Dichteupdate aus. Der lineare Transferpol
+bleibt erhalten, aber nicht seine uniforme Uebertragung auf feste Quellen.
 
 ## 1. Vergleichsmodell und exakte erste Variation
 

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Fluktuationsgrenze des kritischen Fernfeldvergleichs; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (nichtlinearer Ausschluss des kritischen stationaeren 1/r-Profils; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [stationaere Schalenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_stationary_tail_2026-11-21.md)
+schliesst das linear vorhergesagte isotrope 1/r-Dichteprofil in der
+exakten nichtlinearen deterministischen Mittelfeldregel aus. Der
+quadratische Transport hinterlaesst einen Schalenrest festen Vorzeichens.
+Auch ein entsprechendes Potential bei u=O(1/r) ist ausgeschlossen.
+Der lineare Transferpol bleibt korrekt; keine Aussage zum stochastischen
+Vielteilchenlimit oder zur Existenz anderer stationaerer Profile.
 
 Der [kritische FIFO-Mittelfeldvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_fifo_screening_2026-11-21.md)
 liefert aus attraktiver kollektiver Gauss-Rueckkopplung eine statische
