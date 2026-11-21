@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-20 (Memory-Ladungstraeger zuerst; reelle Spinreferenz von nativer 4D-Einbettung getrennt, konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
+Stand: 2026-11-21 (Memory-Ladungstraeger zuerst; linearer Raumnormalquotient und exakte FIFO-Volumenbilanz; konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -423,6 +423,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Umlaufebene: Derselbe Kreis identifiziert den komplementaeren
    Rotationsanteil nicht. Eine Hodge-Vervollstaendigung des nativen
    Stromtensors nicht ohne Dynamikableitung als neue Kopfregel einsetzen.
+   Fuer eine spaetere raeumliche 4D-Fortsetzung ist jetzt der
+   [zusaetzliche Normalquotient](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_extra_dimensions_2026-11-20.md)
+   bekannt: Je Zusatzdimension ist |Bq^3g|<1 zusaetzlich zum vollen
+   3D-Formtest noetig. Keine Auswertung am positiven Kandidaten,
+   Dimensionssuche oder Lockerung des folgenden Freigabevorbehalts.
    Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
    lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
    CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.

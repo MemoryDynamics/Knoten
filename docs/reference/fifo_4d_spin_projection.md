@@ -167,6 +167,11 @@ Kreisgeschichte. Der native Umlauftensor erfasst nur deren Ebene;
 eine quaternionische Vervollstaendigung ist algebraisch moeglich, aber
 ihre komplementaere Wirkung noch nicht aus Memory hergeleitet.
 
+Die [volle lineare Zusatzrichtung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_extra_dimensions_2026-11-20.md)
+des eingebetteten nativen Vierzyklus ist ebenfalls analytisch getrennt:
+vier Symmetrietangenten und eine echte Formmode mit Faktor Bq^3g je
+weiterer Ortsdimension. Der bisherige 3D-Formtest bleibt erforderlich.
+
 ## Reproduktion und Kontrolle
 
 - [Skript](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/experiments/current/reference/fifo_4d_spin_projection.py)

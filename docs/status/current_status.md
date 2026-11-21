@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-20 (reelle 4D-/3D-Spinreferenz von nativer FIFO-Einbettung getrennt; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Raumnormalquotient und exakte FIFO-Volumenbilanz; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -27,6 +27,17 @@ antisymmetrischer Stromtensor hat Rang zwei; eine Hodge-Vervollstaendigung
 liefert algebraisch den Referenzgenerator, ist aber keine hergeleitete
 dynamische Antwort. Deshalb kein Spinnachweis aus einem einzelnen
 720-Grad-Umlauf, auch nicht mit beliebig genauer Bahnmessung.
+
+Der [zusaetzliche Raumnormalblock](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_extra_dimensions_2026-11-20.md)
+ist fuer den exakten raeumlichen Vierzyklus analytisch bestimmt:
+Pro weiterer Ortsdimension kommen vier Symmetrierichtungen und genau
+eine Formmode mit Faktor Bq^3g hinzu. Der Quotient ist die normale
+Abweichung zwischen aktuellem und vier Schritte altem Ort. Keine
+Periodenverdopplung, Spin- oder Dimensionsselektion; kein positiver
+Parametersatz wurde auf dieses neue Stabilitaetskriterium ausgewertet.
+Abseits des Orbits skaliert der Koeffizient des aeltesten Vorgaengers
+das orientierte Vierervolumen exakt. Nichtentartetes Rauschen treibt
+dieses Volumen bei regulaerer 3D-Basis bereits im naechsten Update an.
 
 Der [bedingte orbitale Bindungssatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_orbital_binding_2026-11-16.md)
 verbindet einen kuenftigen strikten Schur-Nachweis mit einer kleinen
