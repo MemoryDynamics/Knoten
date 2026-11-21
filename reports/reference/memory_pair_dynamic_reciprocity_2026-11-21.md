@@ -16,6 +16,11 @@ Ortsreadout nicht durch zwei konstante Mobilitaeten ausgleichen.
 Damit ist auch ein symmetrischer Center-Transfer noch kein Nachweis
 einer reziproken physikalischen Kraft.
 
+Der [anschliessende Zeitumkehrtest](memory_pair_time_reversal_2026-11-21.md)
+zeigt fuer unabhaengige Gauss-Kopfinnovationen: Verschiedene geometrische
+Altersfilter lassen die Center-Inkremente gemeinsam irreversibel, auch
+wenn die deterministische Center-Antwort symmetrisiert wurde.
+
 ## 1. Native Linearisierung mit vollem FIFO
 
 Berechnet wird die gepaarte Antwort des bestehenden synchronen

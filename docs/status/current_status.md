@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (nichtlinearer Ausschluss des kritischen stationaeren 1/r-Profils; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Zeitumkehrtest fuer das endliche Memory-Paar; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Paar-Zeitumkehrtest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_time_reversal_2026-11-21.md)
+trennt den reziproken Center-Transfer von den gemeinsamen stationaeren
+Fluktuationen der Center-Inkremente. Verschiedene geometrische
+Altersfilter verhindern im attraktiven linearen Gauss-Vergleich
+Zeitumkehrsymmetrie fuer alle positiven unabhaengigen Rauschvarianzen.
+Theoretisch genuegen endlich viele positive Kreuzlags; keine
+physikalische Entropie-, Kraft- oder Quantenidentifikation.
 
 Die [stationaere Schalenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_stationary_tail_2026-11-21.md)
 schliesst das linear vorhergesagte isotrope 1/r-Dichteprofil in der

@@ -22,6 +22,12 @@ Gleichung. Negativer Bestandsbefund: Diese Struktur ist aus unserer
 FIFO-Regel nicht hergeleitet. Das ist kein allgemeiner Unmoeglichkeits-
 beweis gegen stochastische oder kollektive Quantenmodelle.
 
+Der spaetere [Zeitumkehrtest am endlichen Paar](memory_pair_time_reversal_2026-11-21.md)
+zeigt eine getrennte Grenze: Eine symmetrische mittlere Center-Antwort
+impliziert keine Zeitumkehrsymmetrie der gemeinsamen Fluktuationen.
+Das ist ein Test fuer den klassischen linearen Gleichgewichtsabschluss,
+kein Ausschluss allgemein nichtstationaerer Quantenzustaende.
+
 ## 1. Memory-Dichte ist keine Ensemble-Ortsdichte
 
 Der [native Schritt](https://github.com/MemoryDynamics/Knoten/blob/09c2d07/src/emergenz_knoten/core.py)

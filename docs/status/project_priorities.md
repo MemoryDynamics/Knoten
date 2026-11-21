@@ -79,6 +79,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Beim spaeteren Paarvergleich denselben Punktantrieb und getrennte
    Orts-/Centerreadouts festlegen; keine Reziprozitaet aus einem einzelnen
    Zeitpunkt oder allein dem Centertransfer ableiten.
+   Der [Paar-Zeitumkehrtest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_time_reversal_2026-11-21.md)
+   verlangt zusaetzlich getrennte zeitversetzte Kreuzkovarianzen der
+   Center-Inkremente, bevor eine Gleichgewichtsauslegung geprueft wird.
+   Ungleiche geometrische Altersfilter sind im unabhaengig getriebenen
+   linearen Gaussvergleich nicht durch Rauschskalierung kompensierbar.
+   Keine neue Zielfreigabe und kein Transfer auf rotierende Paare.
    Die anschliessende [native Potentialbilanz](../reference/memory_pair_energy.md)
    ist nun exakt bestimmt, mit acht synthetischen Kontrollen. Ihr FIFO-
    Anteil kann das Lesepotential selbst bei einem stillstehenden Punkt
