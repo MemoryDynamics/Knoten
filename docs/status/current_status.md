@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (bedingte axiale Antwort des FIFO-Vierzyklus; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Translation und Kippen des FIFO-Vierzyklus bei konstantem Input; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Vierphasen-Poseantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_pose_response_2026-11-21.md)
+trennt unter Nichtresonanz eine moegliche spiegelungerade Querdrift
+von der linearen Kippantwort. Ein axialer Input erkennt keine der
+beiden Raten. Bei strikter Formstabilitaet stimmen Schwerpunktdrift
+und ueber vier Phasen gemittelte Nullpunktdrift linear ueberein,
+nicht notwendig fuer eine einzelne Phase. Keine nativen
+Koeffizienten, keine physikalische Kraft oder Masse bestimmt.
 
 Die [axiale Fortsetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_axial_response_2026-11-21.md)
 liefert bei fehlenden Formmultiplikatoren +1 und -1 im mitgedrehten

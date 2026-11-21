@@ -494,6 +494,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Drift und Formstoerung am deklarierten Kopfinput trennen.
    Konstanter axialer Input ist weder Paarwechselwirkung noch
    physikalisch kalibrierte Kraft.
+   Die [Vierphasen-Poseantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_pose_response_2026-11-21.md)
+   bestimmt nach staerkerer Nichtresonanzpruefung fuenf lineare
+   Koeffizienten aus einem axialen und einem lateralen Input.
+   Querrate durch Spiegelung pruefen, Kippen von Translation
+   getrennt ausweisen, Nullpunkt ueber alle vier Phasen mitteln.
+   Eine skalare Antwort nicht aus rein axialem Input folgern;
+   keine neue Ziel- oder Antwortpruefung freigegeben.
    Erst bei nachgewiesener strikter Stabilitaet einen gemeinsamen
    endlichen Kontraktions-/Defektradius zertifizieren. Die bedingte
    Existenz eines kleinen Radius ist noch keine berechnete Toleranz,

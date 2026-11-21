@@ -188,6 +188,9 @@ vorzeichenbehaftete axiale Antwort, Veraenderung der aktiven Form,
 und Bindung des Nullpunkts. Keine transversale oder zeitabhaengige
 Antwort, Reziprozitaet, eigenstaendige physikalische Kopplung oder
 Gravitation folgt aus dem vorgegebenen konstanten Input.
+Die [richtungsallgemeine Folgeanalyse](four_cycle_pose_response_2026-11-21.md)
+leitet getrennt Translation und Kippen fuer beliebige konstante
+Inputs her und benoetigt dafuer eine staerkere Nichtresonanzbedingung.
 
 ## Literatur und Kontrolle
 

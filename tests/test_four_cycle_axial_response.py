@@ -98,3 +98,100 @@ def test_geometrically_simple_translation_can_have_a_zero_response_denominator()
     assert np.linalg.matrix_rank(shifted @ shifted, tol=1e-10) <= 13
     assert np.linalg.matrix_rank(square, tol=1e-10) == 2
     assert abs(np.linalg.det(np.column_stack([m[:, :2], EZ]))) > 0.9
+
+
+def _pose_tangents(positions):
+    return np.vstack([np.column_stack([SPACE, -_cross(point)]) for point in positions])
+
+
+def _project_period_response(positions, jac, phase_rotation=S):
+    frame = np.kron(np.eye(5), phase_rotation)
+    linear = frame.T @ jac
+    period = np.linalg.matrix_power(linear, 4)
+    head = IDENTITY[:, :3]
+    port = sum(
+        np.linalg.matrix_power(linear, k)
+        @ head
+        @ np.linalg.matrix_power(phase_rotation, k)
+        for k in range(4)
+    )
+    pose = _pose_tangents(positions)
+    complement = np.linalg.qr(pose, mode="complete")[0][:, 6:]
+    bordered = np.column_stack([(period - IDENTITY) @ complement, 4 * pose])
+    response = np.linalg.solve(bordered, port)[-6:]
+    return period, port, response
+
+
+@pytest.mark.parametrize("delayed_difference", [0, 1])
+def test_general_response_has_two_distinct_transverse_channels(delayed_difference):
+    positions, blocks, jac = _control(delayed_difference)
+    _, port, response = _project_period_response(positions, jac)
+    direct = np.zeros_like(port)
+    for phase in range(4):
+        rotation = np.linalg.matrix_power(S_ALL, phase)
+        direct = (rotation @ jac @ rotation.T) @ direct + IDENTITY[:, :3]
+    np.testing.assert_allclose(port, direct, atol=3e-15)
+    translation, rotation = response[:3], response[3:]
+    np.testing.assert_allclose(translation @ S, S @ translation, atol=2e-14)
+    np.testing.assert_allclose(rotation @ S, -S @ rotation, atol=2e-14)
+    np.testing.assert_allclose(rotation, rotation.T, atol=2e-14)
+    assert abs(translation[1, 0]) > 0.01
+    assert np.linalg.det(rotation[:2, :2]) < -0.0001
+
+    m, v, _ = _head_reduction(blocks)
+    axial = np.linalg.solve(np.column_stack([m[:, :2], v]), EZ)[-1]
+    np.testing.assert_allclose(response[:, 2], np.r_[0, 0, axial, 0, 0, 0], atol=2e-14)
+
+
+def test_phase_invariance_and_mirror_odd_translation():
+    positions, _, jac = _control(0)
+    _, _, original = _project_period_response(positions, jac)
+    mirror = np.diag([1, -1, 1])
+    for transform in [S, S @ S, S.T, mirror]:
+        frame = np.kron(np.eye(5), transform)
+        _, _, measured = _project_period_response(
+            positions @ transform.T, frame @ jac @ frame.T, transform @ S @ transform.T
+        )
+        expected = np.vstack(
+            [
+                transform @ original[:3] @ transform.T,
+                np.linalg.det(transform) * transform @ original[3:] @ transform.T,
+            ]
+        )
+        np.testing.assert_allclose(measured, expected, atol=2e-15)
+        factor = -1 if np.array_equal(transform, mirror) else 1
+        assert measured[1, 0] == pytest.approx(factor * original[1, 0], abs=2e-15)
+        if factor == 1:
+            np.testing.assert_allclose(measured, original, atol=2e-15)
+
+
+def test_phase_average_removes_rotational_motion_of_an_equivariant_landmark():
+    positions, _, jac = _control(0)
+    period, port, response = _project_period_response(positions, jac)
+    pose = _pose_tangents(positions)
+    complement = np.linalg.qr(pose, mode="complete")[0][:, 6:]
+    assert np.max(np.abs(np.linalg.eigvals(complement.T @ period @ complement))) < 0.5
+    kick = np.array([0.5, -0.3, 0.2])
+    expected_translation, expected_rotation = (response @ kick).reshape(2, 3)
+    # Difference of two formal linear responses one cycle apart.
+    increment = np.linalg.matrix_power(period, 32) @ port @ kick / 4
+    marker = np.array([0.21, -0.13, 0.08])
+    marker_rates = []
+    for phase in range(4):
+        symmetry = np.linalg.matrix_power(S, phase)
+        full = np.kron(np.eye(5), symmetry)
+        phase_pose = _pose_tangents(positions @ symmetry.T)
+        np.testing.assert_allclose(
+            increment,
+            phase_pose @ np.r_[expected_translation, expected_rotation],
+            atol=4e-14,
+        )
+        center_rate = increment.reshape(5, 3)[:4].mean(axis=0)
+        np.testing.assert_allclose(center_rate, expected_translation, atol=4e-14)
+        decoupled = np.linalg.lstsq(phase_pose, increment, rcond=None)[0]
+        marker_rates.append(decoupled[:3] + np.cross(decoupled[3:], symmetry @ marker))
+        increment = (full @ jac @ full.T) @ increment
+    assert np.linalg.norm(marker_rates[0] - expected_translation) > 0.001
+    np.testing.assert_allclose(
+        np.mean(marker_rates, axis=0), expected_translation, atol=4e-14
+    )
