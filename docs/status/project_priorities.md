@@ -1,6 +1,6 @@
 # Projektprioritaeten
 
-Stand: 2026-11-21 (Memory-Ladungstraeger zuerst; linearer Raumnormalquotient und exakte FIFO-Volumenbilanz; konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
+Stand: 2026-11-21 (Memory-Ladungstraeger zuerst; endlicher Paartransfer trennt Center- und Ortsantwort; konkrete positive Stabilitaetsauswertung weiter freigabepflichtig).
 
 Dies ist die einzige aktive Arbeitsreihenfolge des Repositorys. Der
 [Stand bis 2026-09-09](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/project_priorities_through_2026-09-09.md)
@@ -73,6 +73,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Grenzmodell klingt jede freie komplexe Normalmode pro Periode um
    mindestens den Faktor $e^{2\pi}$ ab. Dies gilt nicht allgemein fuer
    das volle FIFO oder nichtlineare endliche Abstaende.
+   Der [endliche Transferabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_dynamic_reciprocity_2026-11-21.md)
+   trennt um konstante stationaere Historien Center- und Ortsantwort:
+   Der Ortstransfer braucht zusaetzlich gleiche normierte Altersfilter.
+   Beim spaeteren Paarvergleich denselben Punktantrieb und getrennte
+   Orts-/Centerreadouts festlegen; keine Reziprozitaet aus einem einzelnen
+   Zeitpunkt oder allein dem Centertransfer ableiten.
    Die anschliessende [native Potentialbilanz](../reference/memory_pair_energy.md)
    ist nun exakt bestimmt, mit acht synthetischen Kontrollen. Ihr FIFO-
    Anteil kann das Lesepotential selbst bei einem stillstehenden Punkt
@@ -729,12 +735,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
 
 ## Naechstes abnehmbares Ergebnis
 
-Zu Prioritaet 1: Der gekoppelte Solver und der feste Ausfuehrungsvorschlag
-liegen vor. Nach ausdruecklicher Freigabe die zwei einmaligen AL1-
-Referenzlaeufe ausfuehren und Energie **sowie** Strukturobservablen nach den
-vorab festgelegten Kriterien einordnen. Die synthetischen Tests sind
-kein Nukleonergebnis. Ohne Freigabe keinen Zielprozess starten; weitere
-unabhaengige analytische Memory-Arbeit bleibt moeglich.
+Zu Prioritaet 1: Die beiden genehmigten AL1-Referenzlaeufe sind abgeschlossen
+und nicht zu wiederholen. Der naechste offene Memory-Nachweis ist die
+volle Formstabilitaet des festgelegten positiven 3D-Vierzyklus. Die
+einmalige begrenzte Kandidatenauswertung bleibt von ihrer konkreten
+Freigabe abhaengig. Ein bestandenes notwendiges Produktkriterium ersetzt
+kein striktes Schur-Zertifikat. Unabhaengige analytische Arbeit bleibt
+moeglich, ist aber kein Ersatz fuer diesen Kandidatentest.
 
 Das gemeinsame Ziel bleibt der Wasserstoff-Durchstich samt unabhaengigem
 Memory-Anschluss. Ein korrekt reproduziertes Quarkmodell allein loest

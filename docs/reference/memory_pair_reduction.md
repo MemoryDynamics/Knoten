@@ -21,6 +21,12 @@ Restschranke, die gemeinsame Kraftnormierungsbedingung und die
 Anwendung einer bekannten Spektralschranke. Keine neue allgemeine
 Traegheits- oder Laplace-Theorie wird beansprucht.
 
+Der [endliche Transferabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_dynamic_reciprocity_2026-11-21.md)
+zeigt fuer stationaere konstante Historien: Dieselbe deklarierte
+Antriebsnormierung kann den Center-Transfer exakt symmetrisieren,
+waehrend der Orts-Transfer zusaetzlich gleiche Altersfilter verlangt.
+Dies ist keine Identifikation eines physikalischen Arbeitsports.
+
 ## 1. Exakter endlicher FIFO
 
 Fuer $i=A,B$, $k\ne i$, seien $y_{ij,n}$ die nach Alter geordneten

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Raumnormalquotient und exakte FIFO-Volumenbilanz; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (endlicher Paartransfer und FIFO-Volumenbilanz; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [endliche Paartransfer](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_dynamic_reciprocity_2026-11-21.md)
+trennt um stationaere konstante Historien exakt Center- und Ortsantwort.
+Der Centertransfer wird mit passend normiertem additivem Punktantrieb
+symmetrisch; der Ortstransfer braucht zusaetzlich gleiche Altersfilter.
+Diese Differenz kann beim ersten Kreuzsignal verborgen bleiben, zeigt
+sich bei ungleicher geometrischer Retention aber beim naechsten Schritt.
+Kein physikalischer Kraftport und kein Transferbeleg fuer rotierende Knoten.
 
 Die [4D-FIFO-/Spinprojektion](../reference/fifo_4d_spin_projection.md)
 realisiert die angefragte 720-Grad-Wiederkehr als rein reelle Referenz:
