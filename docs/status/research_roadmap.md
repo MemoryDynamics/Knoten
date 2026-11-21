@@ -74,6 +74,9 @@ Rueckkopplung kurzreichweitiger Gaussquellen. Dieselbe Mode zeigt
 quartische Relaxation statt relativistischer Ausbreitung; H=1
 reproduziert die statische Antwort. Der Dichteabschluss, die
 Kritikalitaet und 3D sind vorausgesetzt. R2 und R3 bleiben offen.
+Die [Fluktuationsgrenze](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_fluctuations_2026-11-21.md)
+quantifiziert, warum diese kritische Analogie nicht ohne gleichmaessige
+nichtlineare Kontrolle auf grosse 3D-Systeme uebertragen werden kann.
 
 | Stufe | Frage und gefordertes Ergebnis | Status / Entscheidungspunkt |
 | --- | --- | --- |

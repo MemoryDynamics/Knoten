@@ -148,6 +148,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    H=1 reproduziert den Pol; die Zeitrate k^4 ist nicht ballistisch.
    Kein Ziellauf und keine Annahme eines kontrollierten kritischen
    Grenzfalls, universeller Kopplung oder einer neuen Feldregel.
+   Die [Fluktuationsgrenze](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_fluctuations_2026-11-21.md)
+   zeigt an diesem kritischen Vergleich eine wachsende relative
+   Zweitharmonische trotz sinkender absoluter Langwellenvarianz in 3D.
+   Vor einer Fernfelduebertragung den nichtlinearen Zeit-/Groessen-
+   Grenzgang kontrollieren; weder kritische Stabilitaet noch ihre
+   Widerlegung aus dem linearen Pol ableiten. Keine neue Lauffreigabe.
    Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
    schliesst die lokale Massenbilanz einschliesslich Tail, legt aber
    keinen eindeutigen physikalischen Strom fest. 19 kleine Kontrollen

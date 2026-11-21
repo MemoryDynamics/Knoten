@@ -13,6 +13,11 @@ eine einzelne Gaussquelle oder einen eingesetzten Poisson-Operator.
 Kritikalitaet und Dichteabschluss sind Voraussetzungen, keine
 aus den Knoten nachgewiesenen dynamischen Eigenschaften.
 
+Die [anschliessende Fluktuationspruefung](critical_fifo_fluctuations_2026-11-21.md)
+bestimmt die exakte bedingte Dichteinnovation und einen nichtlinearen
+Skalenindikator. Sie kontrolliert nicht den Fortbestand der Fernantwort
+im kritischen nichtlinearen Vielteilchen-Grenzfall.
+
 ## 1. Vergleichsmodell und exakte erste Variation
 
 Der [Paarcode](../../src/emergenz_knoten/reciprocal_nodes.py) liest beide

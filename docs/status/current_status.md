@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (kritischer Fernfeldvergleich und endlicher Paartransfer; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Fluktuationsgrenze des kritischen Fernfeldvergleichs; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,6 +16,13 @@ quartisch statt ballistisch. Bei gleicher Gesamtstaerke liefert H=1
 denselben Pol; der Altersfilter aendert die Rate erst in Ordnung k^6.
 Kein Nachweis eines kontrollierten kritischen Vielteilchen-Grenzfalls,
 einer universellen Kopplung oder von Gravitation.
+
+Die [Fluktuationspruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_fluctuations_2026-11-21.md)
+liefert die exakte Ein-Schritt-Kovarianz der empirischen Dichtemoden.
+Die lineare kritische Referenz hat Varianz der Ordnung 1/(N k^2).
+Das relative Zweitharmonische Signal waechst in zwei begrenzten
+Vergleichen bei fester 3D-Dichte wie L^(3/2). Das markiert die fehlende
+nichtlineare Kontrolle, beweist aber keinen Verlust des Fernfelds.
 
 Der [endliche Paartransfer](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_dynamic_reciprocity_2026-11-21.md)
 trennt um stationaere konstante Historien exakt Center- und Ortsantwort.
