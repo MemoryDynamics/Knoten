@@ -42,7 +42,9 @@ def _lags(m, b, c, variance, limit):
     noise = diff @ b
     output = c @ (m - np.eye(dimension + 1)) @ embed
     direct = c @ b
-    sigma = np.diag(variance)
+    sigma = np.asarray(variance)
+    if sigma.ndim == 1:
+        sigma = np.diag(sigma)
     cov = solve_discrete_lyapunov(stable, noise @ sigma @ noise.T)
     start = stable @ cov @ output.T + noise @ sigma @ direct.T
     return np.array(
@@ -122,3 +124,52 @@ def test_reciprocal_transfer_can_have_an_exact_nonzero_spectral_bracket():
         spectrum[0, 1].imag * abs(a_a * a_b - 0.25 * 0.15) ** 2 / abs(1 - 1 / z) ** 2
     )
     assert bracket == pytest.approx(369 / 3400, abs=2e-15)
+
+
+def test_two_slots_can_recover_reversibility_with_a_fixed_white_covariance():
+    horizon = 2
+    m, b, c, age, g = _matrices(horizon, (0.5, 0.6), (0.5, 1 / 6))
+    sigma = np.array([[685 / 21, 1], [1, 789 / 35]])
+    assert np.linalg.eigvalsh(sigma).min() > 20
+    m_lags = _lags(m, b, c, sigma, 2 * horizon - 1)
+    no_cross = _lags(m, b, c, np.diag(sigma), 2 * horizon - 1)
+    np.testing.assert_allclose(m_lags, m_lags.transpose(0, 2, 1), atol=2e-14, rtol=0)
+    assert np.max(abs(no_cross - no_cross.transpose(0, 2, 1))) > 0.01
+    for z in np.exp(1j * np.array([0.33, 0.78, 1.4, 2.3])):
+        transfer = (1 - 1 / z) * c @ np.linalg.solve(z * np.eye(4) - m, b)
+        spectrum = transfer @ sigma @ transfer.conj().T
+        assert spectrum[0, 1].imag == pytest.approx(0, abs=2e-14)
+        diagonal = (z - (0.5, 1 / 6)) / (age @ z ** -np.arange(horizon)) - g
+        imaginary_part = (
+            sigma[0, 0] * H_CROSS[1] * diagonal[1].imag
+            - sigma[1, 1] * H_CROSS[0] * diagonal[0].imag
+            + sigma[0, 1] * (diagonal[1] * diagonal[0].conjugate()).imag
+        )
+        assert imaginary_part == pytest.approx(0, abs=2e-14)
+
+
+@pytest.mark.parametrize(
+    "horizon,stay,rank",
+    [
+        (2, (0.5, 1 / 6), 2),
+        (2, (0.5, 0.2), 3),
+        (3, (0.5, 1 / 6), 3),
+        (4, (0.5, 1 / 6), 3),
+    ],
+)
+def test_linear_map_from_symmetric_white_covariance_to_odd_lags(horizon, stay, rank):
+    m, b, c, _, _ = _matrices(horizon, (0.5, 0.6), stay)
+    # Use a symmetric basis, including its indefinite off-diagonal element.
+    covariance_basis = (
+        [[1, 0], [0, 0]],
+        [[0, 0], [0, 1]],
+        [[0, 1], [1, 0]],
+    )
+    observations = []
+    for sigma in covariance_basis:
+        lags = _lags(m, b, c, sigma, 2 * horizon - 1)
+        observations.append(lags[:, 0, 1] - lags[:, 1, 0])
+    singular_values = np.linalg.svd(np.column_stack(observations), compute_uv=False)
+    assert singular_values[rank - 1] > 1e-5
+    if rank < 3:
+        assert singular_values[rank] < 1e-15

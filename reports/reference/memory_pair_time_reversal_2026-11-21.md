@@ -12,6 +12,11 @@ der deterministische Center-Transfer exakt reziprok sein. Den Unterschied
 koennen zwei einzeln beobachtete Center-Zeitreihen nicht erkennen; der
 Zeittest braucht ihre verzoegerten Kreuzkorrelationen.
 
+Der [anschliessende Abgleich gemeinsam weissen Rauschens](memory_pair_white_noise_2026-11-21.md)
+laesst auch eine konstante Kreuzkovarianz zu: Ab drei Speicherplaetzen
+bleibt der Ausschluss bei verschiedenen Retentionen bestehen; bei
+genau zwei gibt es eine konstruktive Ausnahme.
+
 ## 1. Stationaere Beobachtung trotz freier Translation
 
 Wie im Paartransfer-Bericht linearisieren wir eine raeumliche

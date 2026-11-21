@@ -85,6 +85,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Ungleiche geometrische Altersfilter sind im unabhaengig getriebenen
    linearen Gaussvergleich nicht durch Rauschskalierung kompensierbar.
    Keine neue Zielfreigabe und kein Transfer auf rotierende Paare.
+   Der [Abgleich gemeinsam weisser Anstoesse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_white_noise_2026-11-21.md)
+   schliesst fuer gleiche H>=3 auch eine bloss konstante Kreuzkovarianz
+   als Reparatur bei ungleichen geometrischen Retentionen aus. H=2
+   hat eine algebraische Ausnahme; keinen universellen Rauschausschluss
+   oder eine neue Badkopplung daraus ableiten.
    Die anschliessende [native Potentialbilanz](../reference/memory_pair_energy.md)
    ist nun exakt bestimmt, mit acht synthetischen Kontrollen. Ihr FIFO-
    Anteil kann das Lesepotential selbst bei einem stillstehenden Punkt

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Zeitumkehrtest fuer das endliche Memory-Paar; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Zeitumkehrgrenze bei gemeinsam weissem Paarrauschen; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -16,6 +16,12 @@ Altersfilter verhindern im attraktiven linearen Gauss-Vergleich
 Zeitumkehrsymmetrie fuer alle positiven unabhaengigen Rauschvarianzen.
 Theoretisch genuegen endlich viele positive Kreuzlags; keine
 physikalische Entropie-, Kraft- oder Quantenidentifikation.
+
+Der [Abgleich korrelierter weisser Anstoesse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_white_noise_2026-11-21.md)
+erhaelt diese Zeitumkehrgrenze fuer gleiche H>=3 und verschiedene
+geometrische Retentionen bei beliebiger konstanter Kovarianz.
+Der explizite H=2-Gegenfall begrenzt den Satz. Zeitlich strukturierte
+Umgebungsantwort und physikalische FDT bleiben offen.
 
 Die [stationaere Schalenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_stationary_tail_2026-11-21.md)
 schliesst das linear vorhergesagte isotrope 1/r-Dichteprofil in der
