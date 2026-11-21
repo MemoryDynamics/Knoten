@@ -143,6 +143,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    entfernt beim masselosen Grenzgang auch die Quellstaerke. Eine
    relaxierende skalare Feldenergie hat bei positiver Greenfunktion
    zudem die andere Vorzeichenregel als elektrische Ladung.
+   Der davon getrennte [kritische kollektive Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_fifo_screening_2026-11-21.md)
+   erzeugt bedingt eine statische 1/r-Fernantwort aus Gauss-Rueckkopplung.
+   H=1 reproduziert den Pol; die Zeitrate k^4 ist nicht ballistisch.
+   Kein Ziellauf und keine Annahme eines kontrollierten kritischen
+   Grenzfalls, universeller Kopplung oder einer neuen Feldregel.
    Die [FIFO-Strom-/Invariantenpruefung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_current_invariants_2026-11-04.md)
    schliesst die lokale Massenbilanz einschliesslich Tail, legt aber
    keinen eindeutigen physikalischen Strom fest. 19 kleine Kontrollen

@@ -1,6 +1,6 @@
 # Forschungsroadmap
 
-Stand: 2026-10-28. Grobe, schrittweise zu verfeinernde Zielarchitektur.
+Stand: 2026-11-21. Grobe, schrittweise zu verfeinernde Zielarchitektur.
 Die Ausfuehrungsreihenfolge steht ausschliesslich in den
 [Projektprioritaeten](project_priorities.md).
 
@@ -67,6 +67,13 @@ Dieser Anschluss ist ein Vergleichsmassstab, kein Emergenzmechanismus.
 
 Die Stufen beschreiben Abhaengigkeiten, keine zugesicherte Erfolgsfolge.
 Die Quanten-Machbarkeit wird bereits in R0 geprueft.
+
+Zur Grenze R2/R3: Der [kritische Dichtevergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_fifo_screening_2026-11-21.md)
+liefert bedingt eine statische 1/r-Fernantwort durch kollektive
+Rueckkopplung kurzreichweitiger Gaussquellen. Dieselbe Mode zeigt
+quartische Relaxation statt relativistischer Ausbreitung; H=1
+reproduziert die statische Antwort. Der Dichteabschluss, die
+Kritikalitaet und 3D sind vorausgesetzt. R2 und R3 bleiben offen.
 
 | Stufe | Frage und gefordertes Ergebnis | Status / Entscheidungspunkt |
 | --- | --- | --- |
