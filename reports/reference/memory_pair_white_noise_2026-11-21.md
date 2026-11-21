@@ -161,6 +161,11 @@ die separate Wirkung der Kreuzkovarianz und die Rangaussage
 an festen H=2-, H=3- und H=4-Kontrollen. Kein Ziellauf und
 keine Auswertung der offenen 3D-Traegerstabilitaet.
 
+Der [anschliessende Portvergleich](memory_pair_port_spectrum_2026-11-21.md)
+bestimmt am deklarierten Center-Arbeitsport ein zeitlich korreliertes
+Nyquist-Referenzspektrum. Bei grossen Retentionen und H>=3 kann
+harmonische Aktivitaet auch dieses passive Vergleichsbad ausschliessen.
+
 Verifikation: 57 Tests im gezielten Panel bestanden, davon fuenf
 neue Kontrollen. Das Panel umfasst ferner Paartransfer, Paarreduktion,
 endlichen Abstand, Potentialbilanz und Markdown-Formeln.

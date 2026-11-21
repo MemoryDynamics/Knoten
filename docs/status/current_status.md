@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Zeitumkehrgrenze bei gemeinsam weissem Paarrauschen; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (Passivitaets- und Nyquist-Vergleich des Memory-Paares; fester positiver Stabilitaetskandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -22,6 +22,14 @@ erhaelt diese Zeitumkehrgrenze fuer gleiche H>=3 und verschiedene
 geometrische Retentionen bei beliebiger konstanter Kovarianz.
 Der explizite H=2-Gegenfall begrenzt den Satz. Zeitlich strukturierte
 Umgebungsantwort und physikalische FDT bleiben offen.
+
+Der [passive Rauschvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_port_spectrum_2026-11-21.md)
+liefert am deklarierten Center-Arbeitsanschluss ein eindeutig
+bestimmtes farbiges Referenzspektrum bis auf eine gemeinsame Skala.
+Bei H=2 ist es positiv und kausal realisierbar. Laengerer Speicher
+mit langsamem Vergessen kann trotz linearer Stabilitaet harmonisch
+aktiv sein; dann ist dieses passive Bad nicht moeglich. Keine
+physikalische Portselektion oder Modell-Implementierung.
 
 Die [stationaere Schalenbilanz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/critical_fifo_stationary_tail_2026-11-21.md)
 schliesst das linear vorhergesagte isotrope 1/r-Dichteprofil in der

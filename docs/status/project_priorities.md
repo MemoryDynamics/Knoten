@@ -90,6 +90,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    als Reparatur bei ungleichen geometrischen Retentionen aus. H=2
    hat eine algebraische Ausnahme; keinen universellen Rauschausschluss
    oder eine neue Badkopplung daraus ableiten.
+   Der [passive Portvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_port_spectrum_2026-11-21.md)
+   bestimmt ein positives farbiges Referenzspektrum fuer H=2, zeigt
+   aber harmonische Aktivitaet bei manchen langsam vergessenden
+   laengeren Speichern. Lineare Stabilitaet darf nicht als Ersatz fuer
+   einen passiven physischen Arbeitsport oder einen FDT-Nachweis dienen.
    Die anschliessende [native Potentialbilanz](../reference/memory_pair_energy.md)
    ist nun exakt bestimmt, mit acht synthetischen Kontrollen. Ihr FIFO-
    Anteil kann das Lesepotential selbst bei einem stillstehenden Punkt
