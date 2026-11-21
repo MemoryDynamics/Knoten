@@ -172,6 +172,11 @@ dieser Topologie robuste Vorzeichenerhaltung schon.
 Es wird kein nativer unendlicher Bewegungsverlauf
 simuliert oder vorausgesetzt.
 
+Die [stochastische Folgeanalyse](fading_memory_future_mixing_2026-11-21.md)
+ersetzt die hier vorgeschriebene gemeinsame Endfolge durch eine
+Kopplung der nativen bedingten Inkrementgesetze bei positivem Rauschen.
+Sie kontrolliert die statistische Zukunft, nicht das formale Tail.
+
 ## 4. Konsequenz fuer einen Spinbenchmark
 
 Der aktuelle Zustand kann den Unterschied **dieser**

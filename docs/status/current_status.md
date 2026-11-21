@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (720-Grad-Pfadzeichen vom FIFO-Zustand getrennt; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-21 (exponentielles Vergessen in kuenftigen Schritten; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [stochastische Zukunftskopplung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_future_mixing_2026-11-21.md)
+beweist exponentielles Vergessen in der kuenftigen Inkrementfolge
+bei festem positiven Gaussrauschen und geometrischer Retention,
+auch fuer unendliches relatives Skalar-/Alignment-Gedaechtnis.
+Das stationaere Gesetz ist eindeutig; der volle unendliche Tail
+mischt nicht in Totalvariation. Der Fehler fester stationaerer
+Fenster beim Trunkieren ist durch die verworfenen Gewichte beschraenkt.
+Kein Transportkoeffizient, Kleinrauschlimes oder Ziellauf.
 
 Die [720-Grad-Pfadgegenprobe](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_spin_path_memory_2026-11-21.md)
 konstruiert alterskonsistente Folgen mit Liftzeichen +,-,+,

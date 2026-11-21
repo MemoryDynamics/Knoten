@@ -22,6 +22,12 @@ kein Ausschluss aller topologischen Ladungen auf eingeschraenkten
 physikalischen Zustandsraeumen. Die Wahl des Zustandsraums und seiner
 Topologie ist Teil der Annahmen, keine nachtraegliche Nebensache.
 
+Eine [spaetere Kopplungsrechnung](fading_memory_future_mixing_2026-11-21.md)
+beweist getrennt exponentielles Vergessen in der kuenftigen
+Inkrementfolge des geometrischen Skalar-/Alignment-Gedaechtnisses.
+Das ist keine Totalvariationsmischung der ganzen unendlichen Historie
+und widerspricht nicht der Erhaltung unstetiger Tail-Labels.
+
 ## 1. Modell und kontrollierte Schreibfolge
 
 Verwendet wird die untrunkierte Punktdeposition aus
