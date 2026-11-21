@@ -466,6 +466,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    bekannt: Je Zusatzdimension ist |Bq^3g|<1 zusaetzlich zum vollen
    3D-Formtest noetig. Keine Auswertung am positiven Kandidaten,
    Dimensionssuche oder Lockerung des folgenden Freigabevorbehalts.
+   Der [Gebietstest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_stability_exclusions_2026-11-21.md)
+   schliesst sehr kleine Radien mit Innenlage sowie sehr grosse
+   Hoehen in 3D aus. Einbettung mit Innenlage und f>=1/2 scheitert
+   bereits an der Zusatzrichtung. Die zusaetzliche Normalgrenze
+   nicht als 3D-Stabilitaetsnachweis oder Dimensionsselektion lesen.
    Fuer einen festen Vertreter g=2/3,f=1/2,q=99/100 ist eine einmalige
    lokale 15-Koordinaten-Pruefung mit hoechstens 30 Sekunden auf einem
    CPU-Thread angefragt, noch nicht freigegeben oder ausgefuehrt.

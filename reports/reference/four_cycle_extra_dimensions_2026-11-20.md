@@ -167,6 +167,13 @@ vollen 3D-Formtest erforderlich. Der bekannte negative Kontrollorbit
 mit B=-24 und g=q=1/2 besitzt mu_perp=-3/2; dies kontrolliert die
 Formel an einem bereits als instabil bekannten Fall.
 
+Die [spaetere Gebietsauswertung](four_cycle_stability_exclusions_2026-11-21.md)
+beweist Wachstum im innenliegenden Bereich mit $f\geq 1/2$,
+eine eindeutige Normalgrenze entlang definierter Parameterscharen
+und im strikt wachsenden Fall nichtlineares Verlassen eines
+Orbit-Nahbereichs bei nichtverschwindendem Vierervolumen.
+Das bleibt vom offenen intrinsischen 3D-Test getrennt.
+
 Ein kuenftiger gemeinsamer strikter Pass wuerde zunaechst volle
 lineare Formstabilitaet modulo euklidische Symmetrien belegen. Ein
 nichtlinearer Attraktionssatz samt endlicher Toleranz benoetigt seinen

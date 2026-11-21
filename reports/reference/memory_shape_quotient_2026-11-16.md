@@ -174,6 +174,11 @@ rasches Vergessen instabil. Dieser Grenzfall verletzt bei festem r,h
 auch die Innenlagebedingung des Defekts; er entscheidet **nicht**
 den angefragten hohen-q-Kandidaten.
 
+Der [spaetere Gebietstest](four_cycle_stability_exclusions_2026-11-21.md)
+verwendet dieselbe Spur, um sehr kleine Radien mit Innenlage
+und sehr grosse Hoehen analytisch auszuschliessen.
+Das ist keine Auswertung des angefragten 3D-Kandidaten.
+
 ## 5. Welche Reskalierungen nichts an der Stabilitaet aendern
 
 Fuer a,b_s,b_v,c>0 reskaliere gleichzeitig

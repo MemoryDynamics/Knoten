@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (Translation und Kippen des FIFO-Vierzyklus bei konstantem Input; fester positiver Stabilitaetskandidat weiter ungeprueft).
+Stand: 2026-11-21 (analytische Stabilitaetsausschluesse in 3D und bei Einbettung in 4D; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Gebietsausschluesse](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_stability_exclusions_2026-11-21.md)
+schliessen im gleichbreiten attraktiven FIFO sehr kleine Radien mit
+innenliegendem Defekt und sehr grosse Hoehen in 3D aus. Eine weitere
+Ortsdimension ist bei innenliegendem Defekt und f>=1/2 transversal
+instabil. Bei festem Seitenverhaeltnis und normierter Retention
+gibt es genau eine Grenze der zusaetzlichen Formmode; nahe der
+oberen Seitenverhaeltnisgrenze ueberlappen 3D- und 4D-Ausschluss.
+Keine Dimensionsauswahl, Spin- oder Kandidatenauswertung.
 
 Die [Vierphasen-Poseantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/four_cycle_pose_response_2026-11-21.md)
 trennt unter Nichtresonanz eine moegliche spiegelungerade Querdrift
