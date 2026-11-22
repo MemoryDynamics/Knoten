@@ -3,7 +3,8 @@
 Stand: 2026-11-22. Analytische Gegenprobe zur
 [aktiven 4D-FIFO-Referenz](../../docs/reference/fifo_4d_spin_projection.md).
 Zwei vorbereitete Speicher, vorhandener skalarer Kernel als Auslese,
-keine Rueckkopplung auf die Bahn, keine native Zieltrajektorie.
+ergaenzt um einen internen Rueckkopplungstest ueber einen Umlauf.
+Keine Rueckkopplung auf eine 3D-Bahn, keine native Zieltrajektorie.
 
 **Ergebnis.** Eine 3D-Auslese, die nur die Rahmen der beiden FIFOs
 empfaengt, ist fuer das relative Minus exakt blind. Im gemeinsamen
@@ -146,6 +147,69 @@ Ein nur von 3D-Ortsdeposits gespeister Kernel aendert sich bei
 gleichbleibenden Ortsdaten mit keiner dieser Spinrichtungen.
 Das Kernelvorzeichen bleibt fuer physikalische Kandidaten offen.
 
+### Dynamischer Vorzeichentest ueber einen Umlauf
+
+Der momentane Drift ist noch kein Test der verzoegerten Dynamik.
+In einem begrenzten Referenzmodell wird zunaechst der aelteste
+Eintrag negiert und als neuer Kopf vorgeschlagen. Auf diesen
+Vorschlag wirkt der Gauss-Gradient des **bisherigen** Fensters
+der jeweils anderen Seite. Beide Koepfe werden danach auf die
+Einheitssphaere normiert und gleichzeitig uebernommen. Sonst
+bleibt die FIFO-Regel unveraendert. Beide Lesrichtungen haben
+dasselbe vorzeichenbehaftete Gewicht $\lambda$; Breite, Altersgewichte
+und Startfenster sind fest. Getestet wird die gemeinsame Umkehr
+beider Kreuzkopplungen, nicht ein Vorzeichenwechsel nur in einer
+Leserichtung. Das ist ein gesetzter interner Vergleich, keine
+native 3D-Wechselwirkung.
+
+Alle Eintraege bleiben in derselben 4D-Umlaufebene. Sei
+$\delta$ die innere Phase von B minus A und $\alpha_j=(j+1)\pi/4$;
+der zusaetzliche Schritt in $\alpha_j$ kommt vom vorgeschlagenen
+Kopf gegenueber dem alten Quellfenster. Die tangentiale
+Korrektur pro neuem Kopf ergibt sich aus dem Skalarprodukt des
+negativen Gradienten mit dem Tangentenvektor; die Normierung
+entfernt in erster Ordnung nur den radialen Anteil.
+Die Differenz der beiden Winkelkorrekturen ist $\lambda H(\delta)$
+in erster Ordnung, mit
+
+$$
+H(\delta)=\sum_{j=0}^3 w_j
+\left[
+ e^{-1+\cos(\alpha_j+\delta)}\sin(\alpha_j+\delta)
+ -
+ e^{-1+\cos(\alpha_j-\delta)}\sin(\alpha_j-\delta)
+\right].
+$$
+
+Die Negation eines alten Eintrags fuegt seiner Phase $\pi$ hinzu,
+laesst aber einen bereits angesammelten Winkelfehler unveraendert.
+In acht Schritten wird jeder Platz zweimal neu beschrieben. Auf
+dem ungekoppelten, gemeinsam rotierenden Paar ist $H$ in allen
+acht Schritten gleich. Mit $\delta_0=\pi/2$ lautet deshalb fuer
+jeden der vier Plaetze die relative Phase nach einem Umlauf
+
+$$
+\delta_8-\frac{\pi}{2}
+ = 2\lambda H(\pi/2)+O(\lambda^2)
+ = \frac{4\lambda}{e}
+ \left[\frac{w_0-w_2}{\sqrt{2}}\cosh(1/\sqrt{2})-w_3\right]
+ +O(\lambda^2).
+$$
+
+Die Steigung ist bei den festen Gewichten etwa $0.800$.
+Die Nullkontrolle kehrt exakt zurueck; bei kleiner positiver
+Kopplung wachsen die Abstaende der entsprechenden **internen**
+Eintraege, bei negativer schrumpfen sie. Trotzdem weichen die
+ausgelesenen 3D-Pfeile in beiden Faellen vom antiparallelen Start
+ab: Nahe $\delta=\pi/2$ ist ihr Winkel
+$\pi-2|\delta-\pi/2|$. Der ungerichtete 3D-Winkel zeigt somit
+die Abweichung, aber nicht ihr Vorzeichen in erster Ordnung.
+Die feste Acht-Schritte-Kontrolle prueft $\lambda=0$ und
+$\lambda=\pm10^{-5}$ gegen die analytische Steigung; sie sucht
+weder nach stabilen Fenstern noch nach einem passenden Kernel.
+Ein interner Abstandsverlust ist kein Nachweis einer 3D-Bindung
+oder zweier entgegengesetzter Ladungen.
+
 ### Offene Herleitung
 
 Der positive Kontrollfall hat bereits eine gemeinsame interne
@@ -173,5 +237,6 @@ unterscheidet nicht $Q_B$ von $-Q_B$ bei identischen Rahmenfolgen.
 Die [festen Kontrollen](../../tests/test_fifo_4d_relative_phase.py)
 werten vorhandene Potentiale und Gradienten direkt aus. Sie pruefen
 beide Zeitmittel, das vollstaendige Rahmenbild, die antipodalen
-Gewichte, die Ausloeschung nur der ersten Harmonischen und beide
-Kernelvorzeichen fuer antiparallele Richtungen.
+Gewichte, die Ausloeschung nur der ersten Harmonischen, beide
+Kernelvorzeichen fuer antiparallele Richtungen und den
+dynamischen Vorzeichenwechsel nach einem Umlauf.

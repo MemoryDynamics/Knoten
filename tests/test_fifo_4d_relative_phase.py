@@ -134,3 +134,52 @@ def test_antiparallel_directions_allow_either_sign_of_the_cross_drift():
     expected = np.sum(WEIGHTS * np.exp(-distances) * (distances + np.cos(age)))
     np.testing.assert_allclose(separation_rate, expected, rtol=2e-15)
     assert separation_rate > 0
+
+
+def _coupled_reference_cycle(a, b, amplitude):
+    for _ in range(8):
+        next_a, next_b = delayed_step(a), delayed_step(b)
+        for advanced, other in ((next_a, b), (next_b, a)):
+            head = advanced[0]
+            head -= gaussian_gradient(
+                head, other, WEIGHTS, sigma=1.0, amplitude=amplitude
+            )
+            head /= np.linalg.norm(head)
+        a, b = next_a, next_b
+    return a, b
+
+
+def test_antiparallel_reference_cycle_separates_signs_in_4d_but_not_by_3d_alignment():
+    axis = [0, 0, 1]
+    a = coherent_history(axis)
+    b = a @ real_rotation(axis, np.pi).T
+    tangent = GENERATORS[2] @ INITIAL
+
+    def relative_phase(first, second):
+        def phases(history):
+            return np.arctan2(history @ tangent, history @ INITIAL)
+
+        return (phases(second) - phases(first)) % (2 * np.pi)
+
+    neutral = _coupled_reference_cycle(a, b, 0.0)
+    np.testing.assert_allclose(neutral, (a, b), atol=3e-16)
+    np.testing.assert_allclose(relative_phase(*neutral), np.pi / 2, atol=3e-16)
+    weight = (WEIGHTS[0] - WEIGHTS[2]) * np.cosh(1 / np.sqrt(2)) / np.sqrt(2)
+    predicted_slope = 4 / np.e * (weight - WEIGHTS[3])
+    assert predicted_slope > 0
+    amplitude = 1e-5
+
+    for sign in (1, -1):
+        first, second = _coupled_reference_cycle(a, b, sign * amplitude)
+        slip = relative_phase(first, second) - np.pi / 2
+        # Each original slot has been rewritten twice.
+        np.testing.assert_allclose(
+            slip / (sign * amplitude), predicted_slope, rtol=5e-5
+        )
+        distance = np.linalg.norm(first - second, axis=1)
+        assert np.all(sign * (distance - np.sqrt(2)) > 0)
+        first_dir, second_dir = direction_readout([first[0], second[0]])
+        angle_loss = np.arctan2(
+            np.linalg.norm(np.cross(first_dir, second_dir)), -(first_dir @ second_dir)
+        )
+        np.testing.assert_allclose(angle_loss, 2 * abs(slip[0]), atol=5e-16)

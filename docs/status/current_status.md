@@ -195,10 +195,15 @@ Im gemeinsamen internen 4D-Koordinatensystem ist der Gauss-Kernel
 fuer alle Phasen genau bei antipodal gleichen Altersgewichten blind.
 Eine ruhende Abfrage mittelt anders als ein mitlaufender Referenz-FIFO.
 Die gemeinsame interne Referenz ist eingesetzt, nicht hergeleitet;
-keine Rueckkopplung, Synchronisation oder Bindung nachgewiesen.
+keine native Rueckkopplung, Synchronisation oder Bindung nachgewiesen.
 Fuer tatsaechlich antiparallele 3D-Richtungen werden beide
 Kernelvorzeichen getrennt kontrolliert; das Driftvorzeichen folgt
-aus dem Kernel, nicht aus dem Spinlabel.
+aus dem Kernel, nicht aus dem Spinlabel. Ein anschliessender
+begrenzter Referenztest mit Rueckkopplung ueber acht Schritte
+bestaetigt: Der interne Abstand waechst bzw. schrumpft, obwohl
+die 3D-Pfeile in beiden Faellen die Antiparallelitaet verlieren.
+Nullkopplung kehrt exakt zurueck. Das Kernelvorzeichen bleibt
+offen; eine 3D-Ortskraft oder Bindung wurde nicht getestet.
 
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
