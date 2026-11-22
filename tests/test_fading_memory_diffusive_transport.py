@@ -2,9 +2,12 @@
 
 import math
 
+import numpy as np
 import pytest
 from scipy.integrate import quad
 from scipy.special import ndtr
+
+from emergenz_knoten.kernels import double_gaussian_gradient
 
 
 def _normal_density(z):
@@ -75,3 +78,113 @@ def test_correlation_sum_and_martingale_agree_for_bounded_sign_feedback(amplitud
         assert covariance > epsilon**2
     else:
         assert covariance == epsilon**2
+
+
+@pytest.mark.parametrize("amplitude", [-0.75, 0, 0.75])
+def test_constant_input_response_matches_gaussian_innovation_weight(amplitude):
+    epsilon = 0.8
+    eigenvalue = 2 * ndtr(amplitude / epsilon) - 1
+    corrector = amplitude / (1 - eigenvalue)
+
+    def average_increment(bias):
+        plus, minus = (
+            ndtr((bias + amplitude) / epsilon),
+            ndtr((bias - amplitude) / epsilon),
+        )
+        positive_sign = minus / (1 - plus + minus)
+        return bias + amplitude * (2 * positive_sign - 1)
+
+    expected = 1 + 2 * corrector * _normal_density(amplitude / epsilon) / epsilon
+    delta = 1e-5
+    slope = (average_increment(delta) - average_increment(-delta)) / (2 * delta)
+    assert slope == pytest.approx(expected, abs=3e-10)
+
+    threshold = -amplitude / epsilon
+    cross = sum(
+        quad(
+            lambda z: (
+                (amplitude + epsilon * z + corrector * (sign - 1))
+                * (epsilon * z)
+                * _normal_density(z)
+            ),
+            lower,
+            upper,
+            epsabs=1e-13,
+        )[0]
+        for sign, lower, upper in (
+            (-1, -math.inf, threshold),
+            (1, threshold, math.inf),
+        )
+    )
+    assert cross / epsilon**2 == pytest.approx(expected, abs=2e-14)
+    abs_step = (
+        2 * epsilon * _normal_density(amplitude / epsilon) + amplitude * eigenvalue
+    )
+    covariance = amplitude**2 + epsilon**2 + 2 * corrector * abs_step
+    assert covariance >= epsilon**2 * expected**2 - 1e-15
+
+
+@pytest.mark.parametrize("dimension", [1, 3, 4])
+def test_native_weak_response_uses_the_exact_radial_gaussian_moment(dimension):
+    epsilon, sigma = 0.62, 1.16
+    probe = np.linspace(0.25, 0.6, dimension)
+    gradient = double_gaussian_gradient(
+        np.zeros(dimension),
+        np.vstack([np.zeros(dimension), -probe]),
+        np.array([0.7, 0.3]),
+        amplitude_rep=0,
+        amplitude_att=1,
+        sigma_rep=sigma,
+        sigma_att=sigma,
+    )
+    np.testing.assert_allclose(
+        -(sigma**2) * gradient / 0.3,
+        -probe * np.exp(-(probe @ probe) / (2 * sigma**2)),
+        atol=2e-16,
+    )
+
+    def moment(power):
+        return quad(
+            lambda z: (
+                (epsilon * z) ** power
+                * math.exp(-((epsilon * z / sigma) ** 2) / 2)
+                * _normal_density(z)
+            ),
+            -math.inf,
+            math.inf,
+            epsabs=1e-13,
+        )[0]
+
+    coefficient = -moment(2) * moment(0) ** (dimension - 1)
+    assert coefficient < 0
+    assert coefficient == pytest.approx(
+        -(epsilon**2) * (1 + (epsilon / sigma) ** 2) ** (-dimension / 2 - 1),
+        rel=2e-14,
+    )
+
+
+def test_scalar_gaussian_two_place_cycle_is_not_reversible():
+    amplitude, sigma, epsilon = 0.1, 1.16, 0.62
+    y, z = 0.4, 0.9
+
+    def log_kernel(new, old):
+        drift = -amplitude * old * math.exp(-((old / sigma) ** 2) / 2)
+        return -(((new - drift) / epsilon) ** 2) / 2
+
+    change = (
+        log_kernel(y, 0)
+        + log_kernel(z, y)
+        + log_kernel(0, z)
+        - log_kernel(z, 0)
+        - log_kernel(y, z)
+        - log_kernel(0, y)
+    )
+    expected = (
+        amplitude
+        * y
+        * z
+        / epsilon**2
+        * (math.exp(-((z / sigma) ** 2) / 2) - math.exp(-((y / sigma) ** 2) / 2))
+    )
+    assert change == pytest.approx(expected, abs=1e-15)
+    assert expected < 0

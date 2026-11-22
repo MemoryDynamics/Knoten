@@ -173,6 +173,11 @@ Reziprozitaetsrelation. Korrelationen koennen den
 freien Diffusionswert erhoehen oder vermindern;
 die positive Schranke entscheidet nicht die Richtung.
 
+Die [stationaere Antwortrechnung](fading_memory_stationary_mobility_2026-11-22.md)
+leitet die davon verschiedene Innovationskorrelation fuer einen
+konstanten Kopfinput her. Die frei kalibrierte Einstein-Proportionalitaet
+scheitert bereits im schwach attraktiven skalaren Zwei-Orte-FIFO.
+
 ## 4. Fehler des Langzeitkoeffizienten beim Trunkieren
 
 Seien $A_H,A_\infty$ die Kovarianzen mit und ohne

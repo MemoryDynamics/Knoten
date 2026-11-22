@@ -200,6 +200,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Rausch- und Retentionsparametern: strikt positive Brownsche Grenze
    und Konvergenz ihres Koeffizienten beim Trunkieren. Das ist
    kein Kurzzeit- oder Traegheitstest und keine Freigabe eines Laufs.
+   Die [stationaere Kopfantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_stationary_mobility_2026-11-22.md)
+   trennt den Antwortkoeffizienten von Diffusion: Innovation statt
+   ganzem Schritt. Die freie Einstein-Kalibrierung nicht ungeprueft
+   auf Memory-Paare uebertragen. Der konstante additive Eingang ist
+   kein abgeleiteter Kraftport und kein reziprokes Paarmodell.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
    parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import

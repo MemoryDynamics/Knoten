@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-22 (positiver diffusiver Langzeittransport bei festem Rauschen; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-22 (stationaere Antwort am additiven Kopfinput; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,14 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [stationaere Kopfantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_stationary_mobility_2026-11-22.md)
+leitet Mobilitaet bei festem Gaussrauschen als absolut summierbare
+Innovationskorrelation her, auch fuer unendliches geometrisches Memory.
+Diffusion ist eine andere Korrelation. Die am freien Lauf kalibrierte
+Einstein-Proportionalitaet scheitert schon im schwach attraktiven nativen
+Zwei-Orte-Skalar-FIFO; dessen Inkremente verletzen detaillierte Balance.
+Kein physikalischer Kraftport, keine Entropie- oder Zielauswertung.
 
 Der [diffusive Langzeitgrenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_diffusive_transport_2026-11-21.md)
 liefert bei festem positivem Gaussrauschen und geometrischen
