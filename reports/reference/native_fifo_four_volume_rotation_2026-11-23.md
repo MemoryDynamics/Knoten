@@ -195,6 +195,10 @@ sind unterscheidbare naechste Wege, nicht schon Loesungen.
 Es folgt keine Quantisierung, kein 720-Grad-Readout und
 keine Kopplung an eine Ortskraft anderer Knoten.
 
+Der [Anschluss mit fuenf Richtungsdeposits](native_fifo_five_deposit_defect_2026-11-23.md)
+liefert eine native Familie mit innenliegendem $+1$-Defekt,
+schliesst aber deren dynamische Stabilitaet analytisch aus.
+
 Repulsive verzoegerte Eigenwechselwirkung und persistente
 Bewegung sind aus anderen Modellen bekannt; siehe
 [Kopp und Klapp, PRE 107, 024611 (2023)](https://doi.org/10.1103/PhysRevE.107.024611).

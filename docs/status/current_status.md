@@ -229,6 +229,13 @@ Fuenfzyklus mit dieser Gegenkopplung existiert, ist aber
 analytisch instabil und besitzt mit vier unabhaengigen
 Deposits keine Nullstelle des nativen Vektorreadouts.
 
+Die [native Fuenf-Deposit-Familie](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/native_fifo_five_deposit_defect_2026-11-23.md)
+liefert mit positivem Alignment und rein attraktivem Gauss-Kernel
+einen bei jedem Schritt regenerierten, in einem ganzen Teilbereich
+strikt innenliegenden $+1$-Defekt. Die volle Historienableitung
+erzwingt ueber die Spur auf dem gesamten konstruierten Zweig
+eine wachsende Mode. Kein robuster Traeger und keine Gegenladung.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne
