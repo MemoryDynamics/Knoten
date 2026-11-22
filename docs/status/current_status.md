@@ -227,6 +227,14 @@ spaeteren Zeiten. Die exakte Fourier-Darstellung der Gauss-Pfaddichte
 behaelt die Kausalitaet bei, liefert aber nur klassische Statistik.
 Ein erweiterter Wirkungsabschluss bleibt offen.
 
+Der [lineare Zwei-Bahn-Vergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_gaussian_influence_2026-11-22.md)
+liefert dafuer einen exakten Test: Eine kausale Verzoegerung im
+Gaussschen Einflussfaktor legt eine Mindest-Dephasierung fest.
+Unterhalb koennen drei Historien trotz unauffaelliger Paarbetraege
+keine gemeinsame Quantenumgebung haben. An der Grenze existiert
+eine kontrollierte Vakuum-Moden-Referenz; ihre Zuordnung zum
+nativen Rauschen, Lokalitaet und Massenkopplung bleiben offen.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

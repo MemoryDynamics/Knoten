@@ -143,6 +143,11 @@ traegt. Ein mathematisches Verdoppeln der Koordinaten oder
 ein externer bekannter Potentialterm ist noch keine Herleitung
 dieses Abschlusses aus Memory.
 
+Der [lineare Zwei-Bahn-Vergleich](fifo_gaussian_influence_2026-11-22.md)
+prueft diese Route mit einer exakten Positivitaetsgrenze fuer Antwort
+und Dephasierung. Er konstruiert eine Quantenmedien-Positivkontrolle,
+ohne die native Ortsinnovation als Quantenrauschen umzudeuten.
+
 Die [festen Kontrollen](../../tests/test_memory_path_action.py)
 pruefen am vorhandenen Gauss-Kernel die gemischten Zeitableitungen,
 den Zusatzterm, den Einheits-Jacobian und die positive Fourier-
