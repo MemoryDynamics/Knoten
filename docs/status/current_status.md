@@ -252,6 +252,14 @@ waechst spaet exakt linear, waehrend die Vakuum-Dephasierung
 bei festem Armabstand einen endlichen Grenzwert hat. Wellengleichung,
 Massenkopplung und Quantisierung sind nicht aus Knoten hergeleitet.
 
+Der [Horizontvergleich des Dichtekanals](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_fifo_horizon_response_2026-11-22.md)
+zeigt: Kein nichtnegatives Altersprofil baut den kollektiven Anteil
+schneller auf als H=1, selbst bei mit der Wellenlaenge wachsendem
+Horizont. Endlich beschraenkte signierte Altersfilter aendern
+den Ausschluss einer starken akustischen Antwort nicht. Fuer einen
+nativen Wellenkandidaten ist ein eigenstaendiger langsamer Strom
+im Vektorkanal zu pruefen, nicht eine laengere skalare Liste.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

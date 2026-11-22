@@ -83,6 +83,59 @@ def test_fixed_time_critical_potential_has_no_static_pole(k):
         assert 0 < response / kernel - 1 <= count * drive[0]
 
 
+@pytest.mark.parametrize("ages", [(0.3, 0.4, 0.3), (0.0,) * 18 + (1.0,)])
+def test_memoryless_step_bounds_forced_history_response_at_each_update(ages):
+    k = 0.32
+    matrix, drive, p, _ = _mode(k, DIFFUSION, ages)
+    feedback = drive[0]
+    history = np.zeros(len(ages))
+    envelope = 0.0
+    for tick in range(31):
+        assert abs(ages @ history) <= envelope + 2e-16
+        assert abs(history[0]) <= envelope + 2e-16
+        # Compare a nonconstant input to the unit step envelope.
+        source = np.cos(0.6 * tick)
+        history = matrix @ history + drive * source
+        envelope = (p + feedback) * envelope + feedback
+
+
+def test_pure_long_lag_has_only_the_direct_potential_until_its_first_read():
+    lag, k = 35, 0.18
+    ages = (0.0,) * lag + (1.0,)
+    matrix, drive, p, _ = _mode(k, DIFFUSION, ages)
+    history = np.zeros(len(ages))
+    for tick in range(lag + 1):
+        assert ages @ history == 0
+        expected = drive[0] * (1 - p**tick) / (1 - p)
+        assert history[0] == pytest.approx(expected, abs=1e-15)
+        history = matrix @ history + drive
+    assert ages @ history == drive[0]
+
+
+@pytest.mark.parametrize("k", [0.02, 0.035])
+@pytest.mark.parametrize(
+    ("offset", "weights"),
+    [
+        ((0, 1, 2), (0.2, 0.3, 0.5)),
+        ((0, 20000), (0.3, 0.7)),
+        ((0, 20000), (2.0, -1.0)),
+    ],
+)
+def test_acoustic_band_bound_does_not_depend_on_horizon(k, offset, weights):
+    _, drive, p, kernel = _mode(k, DIFFUSION, (1.0,))
+    theta = 0.7 * k
+    z = np.exp(1j * theta)
+    terms = np.asarray(weights) * np.exp(-1j * theta * np.asarray(offset))
+    age_filter = np.sum(terms)
+    variation = sum(map(abs, weights))
+    feedback = drive[0]
+    response = kernel * (z - p) / (z - p - feedback * age_filter)
+    bound = feedback * variation / (abs(np.sin(theta)) - feedback * variation)
+    assert bound > 0
+    assert abs(response / kernel - 1) <= bound
+    assert abs(response) < 1.2 * abs(kernel)
+
+
 def _phase_fraction(k, updates, ages):
     ages = np.asarray(ages)
     matrix, drive, p, _ = _mode(k, DIFFUSION, ages)
