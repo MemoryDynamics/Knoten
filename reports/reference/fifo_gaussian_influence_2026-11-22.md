@@ -170,6 +170,12 @@ bei Rekombination zu bestimmen. Der Test stellt beide
 gegen dieselbe Positivitaetsgrenze, statt eine Hoehenphase
 und die Dephasierung getrennt anzupassen.
 
+Die [thermische Abtastgegenprobe](fifo_thermal_sampling_2026-11-22.md)
+ergaenzt eine staerkere Bedingung: Aufgeloestes Detailgleichgewicht
+vertraegt nur farbige Dephasierung fuer die endliche Verzugsantwort.
+Weisse abgetastete Daten koennen dennoch durch hochfrequente
+Gleichgewichtsbaeder entstehen, die sich zwischen den Proben unterscheiden.
+
 Die [feste Referenzimplementierung](../../experiments/current/reference/fifo_gaussian_influence.py)
 und die [Kontrollen](../../tests/test_fifo_gaussian_influence.py)
 pruefen das negative Dreipfadbeispiel, die Vakuumrealisierung

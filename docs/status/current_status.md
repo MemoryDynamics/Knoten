@@ -235,6 +235,15 @@ keine gemeinsame Quantenumgebung haben. An der Grenze existiert
 eine kontrollierte Vakuum-Moden-Referenz; ihre Zuordnung zum
 nativen Rauschen, Lokalitaet und Massenkopplung bleiben offen.
 
+Der [thermische Abtasttest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_thermal_sampling_2026-11-22.md)
+trennt jetzt einen aufgeloesten Gleichgewichtskanal von diskreter
+Positivitaet: Eine endliche Verzoegerungsantwort und exakt weisse
+Dephasierung passen dort nicht zusammen. Oberhalb der diskreten
+Grenze lassen sich dieselben FIFO-Daten mit hochfrequenten
+thermischen Baedern reproduzieren, die zwischen den Proben
+unterschiedlich sind. Bandbreite und Messintervall werden damit
+Teil des physikalischen Vergleichs, keine freien Fits.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener
