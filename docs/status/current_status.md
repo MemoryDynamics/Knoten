@@ -205,6 +205,15 @@ die 3D-Pfeile in beiden Faellen die Antiparallelitaet verlieren.
 Nullkopplung kehrt exakt zurueck. Das Kernelvorzeichen bleibt
 offen; eine 3D-Ortskraft oder Bindung wurde nicht getestet.
 
+Das [orientierte Vierplatzvolumen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_oriented_volume_2026-11-23.md)
+liefert ein aus den Speichervektoren bestimmtes relatives Vorzeichen,
+das die 3D-Rahmen nicht verraten; auf dem planaren Referenzumlauf ist
+es null. Fuer den freien FIFO ist es exakt erhalten. Bei jeder
+nichtkonstanten glatten radialen Kernelform gibt es Fenster, fuer
+die das einzelne Kopfschreiben die Volumensumme schon bei
+beliebig schwacher Kreuzkopplung verletzt. Ein anderer radialer
+Kernel allein schliesst die Quellenbilanz also nicht.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne

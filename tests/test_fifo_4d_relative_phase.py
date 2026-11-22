@@ -136,16 +136,18 @@ def test_antiparallel_directions_allow_either_sign_of_the_cross_drift():
     assert separation_rate > 0
 
 
+def _coupled_reference_step(a, b, amplitude):
+    next_a, next_b = delayed_step(a), delayed_step(b)
+    for advanced, other in ((next_a, b), (next_b, a)):
+        head = advanced[0]
+        head -= gaussian_gradient(head, other, WEIGHTS, sigma=1.0, amplitude=amplitude)
+        head /= np.linalg.norm(head)
+    return next_a, next_b
+
+
 def _coupled_reference_cycle(a, b, amplitude):
     for _ in range(8):
-        next_a, next_b = delayed_step(a), delayed_step(b)
-        for advanced, other in ((next_a, b), (next_b, a)):
-            head = advanced[0]
-            head -= gaussian_gradient(
-                head, other, WEIGHTS, sigma=1.0, amplitude=amplitude
-            )
-            head /= np.linalg.norm(head)
-        a, b = next_a, next_b
+        a, b = _coupled_reference_step(a, b, amplitude)
     return a, b
 
 
@@ -183,3 +185,65 @@ def test_antiparallel_reference_cycle_separates_signs_in_4d_but_not_by_3d_alignm
             np.linalg.norm(np.cross(first_dir, second_dir)), -(first_dir @ second_dir)
         )
         np.testing.assert_allclose(angle_loss, 2 * abs(slip[0]), atol=5e-16)
+
+
+def test_oriented_volume_is_conserved_but_hidden_from_the_full_frame_history():
+    a = np.eye(4)
+    b = a.copy()
+    b[3] *= -1
+
+    for _ in range(8):
+        assert np.linalg.det(a) == 1
+        assert np.linalg.det(b) == -1
+        for first, second in zip(a, b, strict=True):
+            np.testing.assert_array_equal(frame_readout(first), frame_readout(second))
+        a, b = delayed_step(a), delayed_step(b)
+
+    np.testing.assert_array_equal(a, np.eye(4))
+    np.testing.assert_allclose(np.linalg.det(coherent_history()), 0, atol=1e-16)
+
+
+def test_relative_orientation_is_recoverable_from_gaussian_slot_comparisons():
+    a = np.eye(4)
+    b = a.copy()
+    b[3] *= -1
+    reflection = np.diag([-1, 1, 1, 1])
+    sigma = 0.8
+
+    def gauss_gram(first, second):
+        values = [
+            [gaussian_potential(x, [y], [1.0], sigma=sigma) for y in second]
+            for x in first
+        ]
+        return 1 + sigma**2 * np.log(values)
+
+    for first, second, expected in (
+        (a, a, 1),
+        (a, b, -1),
+        (a @ reflection, b @ reflection, -1),
+        (a, coherent_history(), 0),
+    ):
+        gram = gauss_gram(first, second)
+        np.testing.assert_allclose(gram, first @ second.T, atol=4e-16)
+        np.testing.assert_allclose(np.linalg.det(gram), expected, atol=1e-15)
+
+
+def test_symmetric_gaussian_cross_write_creates_unbalanced_oriented_volume():
+    e1, e2, e3, e4 = np.eye(4)
+    a = np.stack((e1, e2, e3, e1))
+    t = 0.25
+    beta = np.sqrt(1 - t**2)
+    b = np.tile(t * e1 + beta * e4, (4, 1))
+    assert np.linalg.det(a) == np.linalg.det(b) == 0
+
+    for amplitude in (0.0, 0.01, -0.01):
+        next_a, next_b = _coupled_reference_step(a, b, amplitude)
+        strength = amplitude * WEIGHTS.sum() * np.exp(-(1 + t))
+        head_norm = np.hypot(1 + strength * (1 + t), strength * beta)
+        expected = strength * beta / head_norm
+        np.testing.assert_allclose(np.linalg.det(next_a), expected, atol=1e-17)
+        assert np.linalg.det(next_b) == 0
+
+    a[3] = np.sqrt(1 - 1e-8) * e1 + 1e-4 * e4
+    after, _ = _coupled_reference_step(a, b, -0.01)
+    assert np.linalg.det(a) > 0 > np.linalg.det(after)

@@ -229,6 +229,11 @@ verschwindet. Erst dann waere zu testen, ob das Signal
 auf die 3D-Dynamik zurueckwirkt. Der jetzige Vergleich
 zeigt weder Bindung noch Quantisierung noch emergenten Spin.
 
+Der [Anschluss ueber das orientierte Vierplatzvolumen](fifo_oriented_volume_2026-11-23.md)
+trennt ein diskretes relatives Orientierungsvorzeichen von
+der Spinrichtung. Er zeigt aber auch, warum die bisherige
+Kreuzkopplung dieses Volumen nicht als Ladung erhaelt.
+
 Der [Vergleich gespeicherter 3D-Drehwege](fifo_relative_frame_lift_2026-11-22.md)
 unterscheidet sich davon: Er braucht keine gemeinsame 4D-Basis,
 aber nachweisbar verschiedene, aufgeloeste Rahmenfolgen. Er
