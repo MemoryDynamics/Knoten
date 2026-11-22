@@ -269,6 +269,15 @@ Wellengeschwindigkeit. Ein Pol und eine endliche nichtverschwindende
 Wellengeschwindigkeit kommen dort nicht gleichzeitig vor.
 Kein nativer Vielteilchen-Grenzwert oder Impulsnachweis.
 
+Die [akkumulierte longitudinale Stromauslese](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_accumulated_current_2026-11-22.md)
+rekonstruiert im selben linearen Abschluss einen akustischen
+Wellenresolventen mit statischem $1/k^2$-Pol. Das ist eine
+neue Auslese, keine Kraft: Der vorhandene stationaere Schritt
+ist gegenueber ihrem Gradienten um $O(k^2)$ unterdrueckt.
+Auch eine kompakte Richtungsquelle liefert am alten skalaren
+Lesekanal keinen Monopolpol. Retention und physikalische
+Kopplung der akkumulierten Groesse bleiben offen.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

@@ -177,6 +177,12 @@ Quelloperatoren oder nichtlineare Abschluesse sind
 hier nicht ausgeschlossen. Ein eingesetzter anderer
 Quellport waere aber keine Herleitung.
 
+Die [Stromrekonstruktion](collective_accumulated_current_2026-11-22.md)
+identifiziert inzwischen einen Wellen-/Poisson-Transfer im
+akkumulierten Transport. Am gegenwaertigen Kraftport ist
+der statische Gradient dieser Auslese jedoch um $O(k^2)$
+unterdrueckt. Die neue Auslese ist keine native Kraft.
+
 Die enge Analogie sind polare Ordnungsuebergaenge und
 gekoppelte Dichte-/Richtungsgleichungen bei aktiver Materie:
 [Vicsek et al. (1995)](https://doi.org/10.1103/PhysRevLett.75.1226)

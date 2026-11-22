@@ -98,3 +98,71 @@ def test_cancelling_the_static_denominator_removes_nonzero_sound_speed():
     roots = np.linalg.eigvals(block)
     close = roots[np.argsort(np.abs(roots - 1))[:2]]
     assert max(abs(close - 1)) / k < 0.03
+
+
+@pytest.mark.parametrize("frequency_scale", [0, 0.3, 0.25 + 0.4j])
+def test_reconstructed_potential_has_both_static_pole_and_acoustic_resolvent(
+    frequency_scale,
+):
+    b = -(EPSILON**2) / 2
+    coefficient = -b / (4 / 3 * frequency_scale**2 + EPSILON**2 + b)
+    for k in (0.012, 0.006):
+        matrix, source = _mode(k, b)
+        z = np.exp(k * frequency_scale)
+        density = np.linalg.solve(z * np.eye(3) - matrix, source)[0]
+        reconstructed = density / k**2
+        assert reconstructed * k**2 == pytest.approx(coefficient, rel=0.015)
+        assert abs(density) < 3
+
+
+def test_integrating_exact_linear_transport_recovers_longitudinal_potential_gradient():
+    k = 0.17
+    p = np.exp(-(EPSILON**2) * k**2 / 2)
+    gain = np.exp(-(SIGMA**2) * k**2 / 2) / CHI
+    b = -(EPSILON**2) / 2 * np.exp(-SCALAR_WIDTH * k**2)
+    block, drive = _mode(k, -(EPSILON**2) / 2)
+    state = np.zeros(3, dtype=complex)
+    accumulated = 0j
+    for tick in range(18):
+        source = 0.3 * np.cos(tick / 3)
+        step = gain * (VECTOR_AGES @ state[1:]) - 1j * k * b * (state[0] + source)
+        flux = p * step - 1j * (1 - p) * state[0] / k
+        accumulated += flux
+        state = block @ state + source * drive
+        assert accumulated == pytest.approx(1j * state[0] / k, abs=2e-15)
+
+
+def test_compact_directional_source_can_supply_dipole_but_not_monopole_pole():
+    b = -(EPSILON**2) / 2
+    previous = None
+    for k in (0.02, 0.01):
+        p = np.exp(-(EPSILON**2) * k**2 / 2)
+        gain = np.exp(-(SIGMA**2) * k**2 / 2) / CHI
+        _, response = _moments(k)
+        block, _ = _mode(k, b)
+        source = gain * np.array([-1j * k * p, response, 0])
+        density = np.linalg.solve(np.eye(3) - block, source)[0]
+        assert k * density == pytest.approx(-1j / (CHI * (EPSILON**2 + b)), rel=4e-4)
+        centered_source_density = np.linalg.solve(np.eye(3) - block, 1j * k * source)[0]
+        assert centered_source_density == pytest.approx(
+            1 / (CHI * (EPSILON**2 + b)), rel=4e-4
+        )
+        if previous is not None:
+            assert density / previous == pytest.approx(2, rel=4e-4)
+        previous = density
+
+
+def test_stationary_native_step_is_quadratically_suppressed_against_reconstructed_field():
+    k = 0.025
+    b = -(EPSILON**2) / 2
+    block, source = _mode(k, b)
+    state = np.linalg.solve(np.eye(3) - block, source)
+    gain = np.exp(-(SIGMA**2) * k**2 / 2) / CHI
+    native = gain * (VECTOR_AGES @ state[1:]) - 1j * k * b * np.exp(
+        -SCALAR_WIDTH * k**2
+    ) * (1 + state[0])
+    field = 1j * state[0] / k
+    suppression = np.expm1(EPSILON**2 * k**2 / 2)
+    assert abs(field) > 30
+    assert abs(native) < 0.01
+    assert native / field == pytest.approx(suppression, abs=1e-15)
