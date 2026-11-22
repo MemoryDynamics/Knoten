@@ -247,6 +247,11 @@ ohne den Gain oder die Definition fuer das zweite Vorzeichen umzudrehen.
 Das sind zunaechst **zwei verschiedene Zustaende**, keine nachgewiesene
 Umwandlung, Paarerzeugung oder Wechselwirkung.
 
+Die [gemeinsame Fernindexpruefung](memory_defect_far_degree_2026-11-23.md)
+zeigt inzwischen: Die beiden lokalen Grade koennen im gemeinsamen
+Feld gleichzeitig bestehen, ohne eine global neutrale Quelle zu liefern.
+Jede geschlossene voll affine Spur dieser Klasse hat global Grad $+1$.
+
 ## 4. Was das negative Kontrollfeld aussen erzwingt
 
 Auch im einzelnen negativen Kontrollfeld ist der kleine Defekt nicht

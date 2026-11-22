@@ -304,6 +304,15 @@ oder ein Netto-Monopol behalten ein positives Translationsresiduum
 und damit den wachsenden Zweig. Es ist eine gesetzte
 vorzeichenbehaftete Referenz, kein universeller Massenport.
 
+Der [Fernindex geschlossener FIFO-Spuren](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_defect_far_degree_2026-11-23.md)
+ist fuer endliche voll affine Spuren mit positiven Gewichten
+immer $+1$, auch nach positiver Ueberlagerung mehrerer Spuren.
+Ein gemeinsames Feld kann die lokalen Grade $+1/-1$ behalten,
+muss aber ausserhalb beider Kerne Restgrad $+1$ tragen.
+Diese lokalen Vorzeichen liefern daher nicht die neutrale
+Gesamtquelle des Materialvergleichs. Der unnormierte
+Gaussfeldfluss verschwindet am Fernrand.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

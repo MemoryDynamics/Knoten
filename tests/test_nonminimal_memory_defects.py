@@ -82,6 +82,70 @@ def test_histories_are_closed_and_use_native_unnormalized_age_weights(kind):
     assert weights.sum() < 0.08
 
 
+def _scaled_radial(history, weights, direction, distance):
+    sites = history[:-1]
+    chord_norm = np.linalg.norm(sites - history[1:], axis=1)
+    projection = sites @ direction
+    deficits = distance * (projection.max() - projection)
+    coefficients = weights * np.exp(-np.sum(sites**2, axis=1) / 2) / chord_norm
+    return np.sum(coefficients * np.exp(-deficits) * (np.roll(deficits, -1) - deficits))
+
+
+def test_scaled_radial_identity_matches_native_field_without_losing_its_sign():
+    history = _history("negative")
+    points, directions, weights = _readout(history)
+    direction = np.array([1, 0.1, -0.2]) / np.sqrt(1.05)
+    distance = 7.0
+    direct = direction @ _field(distance * direction, points, directions, weights)
+    factor = distance * np.exp(distance**2 / 2 - distance * (points @ direction).max())
+    assert _scaled_radial(history, weights, direction, distance) == pytest.approx(
+        factor * direct, rel=1e-13
+    )
+
+
+def test_positive_weights_do_not_force_outward_field_at_every_finite_radius():
+    history = np.array([[2, 0, 0], [1, 1, 0], [-1, 0, 1], [0, 0, 0], [2, 0, 0]])
+    sites = history[:-1]
+    chord_norm = np.linalg.norm(sites - history[1:], axis=1)
+    weights = (
+        np.array([1, 0.2, 2, 8]) * chord_norm * np.exp(np.sum(sites**2, axis=1) / 2)
+    )
+    assert _scaled_radial(history, weights, [1, 0, 0], 0.1) < 0
+    assert _scaled_radial(history, weights, [1, 0, 0], 4) > 0
+
+
+def test_closed_opposite_cores_keep_their_margins_under_a_fixed_separation():
+    separation = 20
+    maximum_source_radius = 5
+    negative_history = _history("negative")
+    positive_history = _history("positive")
+    _, _, weights = _readout(negative_history)
+    source_bound = len(weights) * weights[0]
+    cross_bound = source_bound * np.exp(
+        -((separation - RADIUS - maximum_source_radius) ** 2) / 2
+    )
+    negative_margin = weights[0] * (41 / 6000)
+    positive_margin = weights[0] / 20
+    assert cross_bound < min(negative_margin, positive_margin)
+
+    direction = np.array([0, 0, 1])
+    for history, margin, sign in (
+        (negative_history, negative_margin, -1),
+        (positive_history, positive_margin, 1),
+    ):
+        native = _field(RADIUS * direction, *_readout(history))
+        assert np.linalg.norm(native) > margin
+        assert sign * (native @ direction) > cross_bound
+
+
+def test_full_dimensional_open_chain_can_have_no_defect():
+    history = np.array([[3, 0, 0], [2, 1, 0], [1, 0, 1], [0, 0, 0], [-1, 0, 0]])
+    points, directions, weights = _readout(history)
+    assert np.linalg.matrix_rank(points[1:] - points[0]) == 3
+    assert np.all(directions[:, 0] > 0)
+    assert np.all(weights > 0)
+
+
 def test_negative_history_directions_are_not_independent_inputs():
     positions, directions, _ = _readout(_history("negative"))
     vertices = _vertices()
