@@ -182,6 +182,13 @@ Periodenverdopplung. Ihr eingebetteter Gauss-Vektorfeldnullpunkt wird
 zur Nullstellenlinie, nicht zum regulaeren 4D-Punktdefekt.
 Keine neue Zieltrajektorie, Stabilitaetsentscheidung oder Aenderung an Paper I.
 
+Die [aktive 4D-FIFO-Variante](../reference/fifo_4d_spin_projection.md#aktiver-fifo-der-speicher-liefert-den-naechsten-schritt)
+liest den neuen Kopf aus dem negierten aeltesten Eintrag. Damit gilt
+exakt $F^4=-I$, $F^8=I$. Ein passend phasenversetztes Fenster dreht
+einen ganzen ausgelesenen 3D-Rahmen; das Gegenbeispiel mit vier anfangs
+gleichen Eintraegen hat dieselbe interne Periode bei festem Rahmen.
+Diese gesetzte Speicherregel ist neutral und keine native Spinableitung.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

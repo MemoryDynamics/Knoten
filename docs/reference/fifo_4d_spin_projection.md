@@ -5,6 +5,58 @@ Autorenidee, einen FIFO in vier reelle Dimensionen zu setzen.
 Kein neuer nativer Ziellauf, keine Parametersuche und keine
 Auswertung des ausstehenden Stabilitaetskandidaten.
 
+## Aktiver FIFO: Der Speicher liefert den naechsten Schritt
+
+Im folgenden Modell kommt der neue Kopf nicht aus einer externen
+Uhr. Vier Eintraege mit je vier reellen Komponenten werden um einen
+Platz verschoben; der aelteste Eintrag wird negiert und vorne wieder
+eingesetzt. Fuer das altersgeordnete Fenster gilt also
+
+$$
+F(u_0,u_1,u_2,u_3)=(-u_3,u_0,u_1,u_2).
+$$
+
+![Aktiver 4D-FIFO und ausgelesener 3D-Rahmen bei 0, 360 und 720 Grad.](https://raw.githubusercontent.com/MemoryDynamics/Knoten/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_delayed_spin.gif)
+
+Jeder Eintrag passiert die Vorzeichenumkehr genau einmal pro vier
+Schritte. Daher gilt $F^4=-I$ und $F^8=I$; jedes von null verschiedene
+Fenster hat minimale Periode acht. Das Argument braucht weder eine
+Winkelvariable im Zustand noch einen zeitabhaengigen Kopfinput.
+
+**Woher die Drehung kommt.** Sei $U(\theta)$ die unten erklaerte reelle
+Rotationsmatrix fuer eine feste schraege 3D-Achse und
+$u_j=U(-j\pi/2)u_0$ fuer $j=1,2,3$. Weil $U(2\pi)=-I$, ist
+$-u_3=U(\pi/2)u_0$. Auch die drei Shiftzeilen stimmen mit
+$U(\pi/2)$ ueberein. Beginnt der FIFO mit diesem Fenster, rotiert
+folglich jeder Eintrag pro Schritt mit derselben 4D-Matrix. Die
+Animation rechnet die ganzen Schritte aus der FIFO-Regel. Die
+markierten Zwischenbilder interpolieren den kohaerenten Umlauf.
+
+Rechts ist nun ein ganzer 3D-Rahmen zu sehen, nicht nur ein Pfeil.
+Die orthonormale Basis $(u_0,J_xu_0,J_yu_0,J_zu_0)$ mit normiertem
+Startkopf identifiziert die vier Komponenten des normierten Kopfes
+mit dem Einheitsquaternion des Rahmens. Seine quadratische Abbildung
+auf 3D dreht den Rahmen pro Schritt um 90 Grad; $u$ und $-u$ ergeben
+denselben Rahmen. Siehe [Shoemake, SIGGRAPH 1985](https://doi.org/10.1145/325334.325242).
+Nach 360 Grad steht der Rahmen folglich wieder am Start, obwohl die
+gesamte FIFO-Historie negiert ist. Erst nach 720 Grad stimmt die
+Historie wieder mit der Ausgangshistorie ueberein.
+
+**Gegenprobe.** Startet man stattdessen mit vier identischen
+Eintraegen, hat der FIFO ebenfalls Periode acht, aber der 3D-Rahmen
+bleibt stehen. Die Vorzeichenumkehr ist eine gewaehlte Speicherregel;
+die gemeinsame Drehung ergibt sich nur fuer passend phasenversetzte
+Fenster und das gewaehlte Readout. $F$ ist eine Isometrie, zieht also
+keine gestoerten Fenster auf den gezeigten Umlauf. Das ist ein
+autonomes FIFO-Referenzmodell, keine Herleitung der Regel aus nativen
+Kraeften, keine Stabilitaetsaussage zum nativen Knoten und kein
+Nachweis von physikalischem Spin.
+
+```bash
+python -m experiments.current.reference.fifo_4d_delayed_spin
+pytest -q tests/test_fifo_4d_delayed_spin.py
+```
+
 ## Ergebnis in einem Bild
 
 **Das gewuenschte Wiederkehrverhalten ist konstruierbar:** Ein reeller
@@ -21,7 +73,7 @@ vorgegebenen Umlauf analytisch fort und sind keine weiteren Updates.
 
 ![Reelle 4D-FIFO-Historien bei null, 360 und 720 Grad des quadratischen 3D-Readouts. Drei Koordinaten sind raeumlich dargestellt, die vierte farblich. Nach 360 Grad ist die Historie negiert; das untere Richtungsreadout ist bereits gleich.](https://raw.githubusercontent.com/MemoryDynamics/Knoten/codex/paper-i-finalization/figures/draft/fifo_4d_spin_2026-11-20/fifo_4d_projection.png)
 
-Der Umlauf und das quadratische Readout sind hier **eingesetzte
+In dieser aelteren Darstellung sind Umlauf und quadratisches Readout **eingesetzte
 Referenzregeln**, nicht aus dem skalaren/vektoriellen Memory-Feedback
 gewonnen. Die vier alten Eintraege werden gespeichert, beeinflussen
 aber den vorgegebenen neuen Kopf nicht. Insbesondere ist dies kein
