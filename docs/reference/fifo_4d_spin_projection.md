@@ -52,6 +52,11 @@ autonomes FIFO-Referenzmodell, keine Herleitung der Regel aus nativen
 Kraeften, keine Stabilitaetsaussage zum nativen Knoten und kein
 Nachweis von physikalischem Spin.
 
+Die [relative Auslese mit einem zweiten FIFO](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_4d_relative_phase_2026-11-22.md)
+trennt die exakt vorzeichenblinden 3D-Rahmen vom Zugriff auf alle vier
+internen Komponenten. Sie zeigt, wann die Altersgewichte den Kontrast
+ausmitteln und warum ein mitlaufender Empfaenger ihn bewahren kann.
+
 ```bash
 python -m experiments.current.reference.fifo_4d_delayed_spin
 pytest -q tests/test_fifo_4d_delayed_spin.py

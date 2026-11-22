@@ -189,6 +189,17 @@ einen ganzen ausgelesenen 3D-Rahmen; das Gegenbeispiel mit vier anfangs
 gleichen Eintraegen hat dieselbe interne Periode bei festem Rahmen.
 Diese gesetzte Speicherregel ist neutral und keine native Spinableitung.
 
+Die [relative 4D-FIFO-Auslese](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_4d_relative_phase_2026-11-22.md)
+liefert einen exakten Gegenvergleich: Nur Rahmenzugriff bleibt blind.
+Im gemeinsamen internen 4D-Koordinatensystem ist der Gauss-Kernel
+fuer alle Phasen genau bei antipodal gleichen Altersgewichten blind.
+Eine ruhende Abfrage mittelt anders als ein mitlaufender Referenz-FIFO.
+Die gemeinsame interne Referenz ist eingesetzt, nicht hergeleitet;
+keine Rueckkopplung, Synchronisation oder Bindung nachgewiesen.
+Fuer tatsaechlich antiparallele 3D-Richtungen werden beide
+Kernelvorzeichen getrennt kontrolliert; das Driftvorzeichen folgt
+aus dem Kernel, nicht aus dem Spinlabel.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

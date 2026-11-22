@@ -483,8 +483,13 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    **Als naechstes volle Formstabilitaet dieser exakten Familie
    diskriminierend pruefen, nicht weitere Formen sammeln.**
    Die auf Autorenwunsch erstellte [4D-/3D-Referenz](../reference/fifo_4d_spin_projection.md)
-   zeigt die 720-Grad-Wiederkehr mit vorgegebenem reellem Generator und
-   quadratischem Readout, nicht mit hergeleitetem Memory-Feedback.
+   zeigt die 720-Grad-Wiederkehr mit einer gesetzten Rueckkopplung
+   vom aeltesten Eintrag und quadratischem Readout, nicht mit
+   hergeleitetem nativem Memory-Feedback.
+   Die [relative Auslese](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_4d_relative_phase_2026-11-22.md)
+   verlangt Zugriff auf mehr als die sichtbaren Einzelrahmen und
+   einen Kontrast, der die vorgesehene Grobkoernung uebersteht.
+   Das Vorzeichen des Kreuzkernels nicht aus dem Spinlabel ableiten.
    Eine blosse raeumliche 4D-Einbettung erhaelt die native Periode und
    macht aus dem isolierten 3D-Gaussfelddefekt eine Nullstellenlinie.
    Einen spaeteren Spinanschluss deshalb als Ableitung interner
