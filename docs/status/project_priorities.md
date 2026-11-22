@@ -220,6 +220,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    bei denselben FIFO- und Rauschannahmen. Fuer stationaere Bindung
    reicht es daher nicht, nur das direkte Fernfeld zu ersetzen.
    Andere Rauschmodelle, Mediatoren und Grenzfaelle separat pruefen.
+   Der [raeumliche Feldrauschvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_spatial_noise_2026-11-22.md)
+   schliesst stationaere getrennte Bindung auch bei kurzreichweitig
+   korrelierten frischen Gaussinnovationen aus. Exakte Ueberlagerung
+   bei rein gemeinsamem Rauschen nicht als Proton-/Elektronpaar lesen.
+   Zeitdynamik, Tensorstruktur und Rueckwirkung eines Mediums bleiben
+   eigenstaendige Anforderungen; keine Solver-Erweiterung freigegeben.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
    parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import

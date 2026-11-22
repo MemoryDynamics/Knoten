@@ -258,6 +258,13 @@ Weder Gravitation noch ein
 gravitatives Rauschgesetz sind
 als Input aus Memory hergeleitet.
 
+Der [separate raeumliche Feldrauschvergleich](memory_pair_spatial_noise_2026-11-22.md)
+klaert einen Teil der hier offenen korrelierten
+Faelle: Eine kurzreichweitige gemeinsame
+Stoerung mit positivem unabhaengigem Anteil
+erhaelt die Flucht; im reinen Feld bleibt
+exakte Ueberlagerung moeglich.
+
 Die Zerlegung benutzt
 [Athreya und Neys Regenerationsprinzip](https://repository.ias.ac.in/1112/)
 und den Gauss-Spezialfall des

@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-22 (fast sichere Trennung bei quadratisch summierbarem direktem Kreuzantrieb; positiver 3D-Formkandidat weiter ungeprueft).
+Stand: 2026-11-22 (raeumlich gemeinsames Rauschen bindet getrennte Knoten nicht stationaer; positiver 3D-Formkandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [raeumliche Feldrauschvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_spatial_noise_2026-11-22.md)
+kontrolliert kurzreichweitig korrelierte, pro Schritt frische
+Gaussinnovationen. Bei festem unabhaengigem Rauschanteil bleibt
+in d>=3 fast sichere Trennung. Bei rein gemeinsamem Feld ist die
+exakte Diagonale identischer Historien invariant, aber keine
+stationaere Verteilung getrennter Orte moeglich. Ein isotropes
+Skalarfeld erlaubt keine perfekte Korrelationsschale bei r>0.
+Getrennter Rauschvertrag, keine emergente Felddynamik.
 
 Die [Besetzungs- und Budgetabschaetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_summable_cross_drift_2026-11-22.md)
 liefert in d>=3 fast sichere Trennung und aequivalente freie
