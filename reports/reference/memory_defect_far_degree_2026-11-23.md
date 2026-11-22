@@ -159,6 +159,11 @@ Quellenauslesen ist nichts entschieden. Die
 Konstruktion erhaelt den Grad nicht unter
 beliebigen nativen FIFO-Schritten.
 
+Der [polarisierte Randvergleich](collective_polarized_background_2026-11-23.md)
+zeigt einen anderen Randvertrag: Ein konstanter kollektiver
+Richtungshintergrund erlaubt Fernindex null. Der schwache
+selbstkonsistente homogene Zweig ist aber longitudinal instabil.
+
 [Feste Kontrollen](../../tests/test_nonminimal_memory_defects.py)
 pruefen die reskalierte Radialformel, das
 Randreserve-Gegenpaar und eine offene Historie.

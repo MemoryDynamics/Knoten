@@ -313,6 +313,14 @@ Diese lokalen Vorzeichen liefern daher nicht die neutrale
 Gesamtquelle des Materialvergleichs. Der unnormierte
 Gaussfeldfluss verschwindet am Fernrand.
 
+Der [polarisierte Richtungsabschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_polarized_background_2026-11-23.md)
+hat oberhalb der Alignment-Schwelle einen homogenen Zweig mit
+freier Richtung und kontinuierlich einsetzender Amplitude.
+Als eingefrorener Rand kann er die lokalen Grade $+1/-1$ bei
+Fernindex null erhalten. Nahe der Schwelle ist der Zweig
+jedoch gegen longitudinale Dichtestoerungen instabil, obwohl
+die uniforme radiale Mode relaxiert. Kein stabiler nativer Rand.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

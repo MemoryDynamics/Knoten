@@ -146,6 +146,17 @@ def test_full_dimensional_open_chain_can_have_no_defect():
     assert np.all(weights > 0)
 
 
+def test_small_frozen_background_dominates_far_field_not_the_core_margins():
+    _, _, weights = _readout(_history("negative"))
+    w0 = weights[0]
+    background = w0 / 300
+    core_overlap = 8 * w0 * np.exp(-((20 - 5 - RADIUS) ** 2) / 2)
+    far_surround = 16 * w0 * np.exp(-((35 - 20 - 5) ** 2) / 2)
+    assert far_surround < background
+    assert background + core_overlap < w0 * 41 / 6000
+    assert background + core_overlap < w0 / 20
+
+
 def test_negative_history_directions_are_not_independent_inputs():
     positions, directions, _ = _readout(_history("negative"))
     vertices = _vertices()
