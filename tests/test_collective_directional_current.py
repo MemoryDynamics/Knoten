@@ -2,6 +2,7 @@
 
 import numpy as np
 import pytest
+from scipy.optimize import brentq
 from scipy.special import roots_legendre
 
 
@@ -166,3 +167,70 @@ def test_stationary_native_step_is_quadratically_suppressed_against_reconstructe
     assert abs(field) > 30
     assert abs(native) < 0.01
     assert native / field == pytest.approx(suppression, abs=1e-15)
+
+
+def _field_feedback_matrix(k, gain):
+    matrix, _ = _mode(k, -(EPSILON**2) / 2)
+    p = np.exp(-(EPSILON**2) * k**2 / 2)
+    _, response = _moments(k)
+    matrix[:, 0] += (1j * gain / k) * np.array([-1j * k * p, response, 0])
+    return matrix
+
+
+@pytest.mark.parametrize("z", [1, 1.12, 1.02 + 0.14j])
+def test_self_feedback_determinant_has_exact_signed_shift(z):
+    k, gain = 0.06, 0.015
+    reference, _ = _mode(k, -(EPSILON**2) / 2)
+    closed = _field_feedback_matrix(k, gain)
+    p = np.exp(-(EPSILON**2) * k**2 / 2)
+    difference = np.linalg.det(z * np.eye(3) - closed) - np.linalg.det(
+        z * np.eye(3) - reference
+    )
+    # The full 3x3 determinant carries one extra shift-state factor z.
+    assert difference == pytest.approx(-gain * p * z**2, abs=2e-16)
+
+
+def test_attractive_feedback_has_nonvanishing_growth_as_wavenumber_decreases():
+    gain = 0.016
+
+    def limiting_equation(z):
+        ages = VECTOR_AGES @ np.array([1, 1 / z])
+        return (z - 1) * (1 - ages / z) - gain
+
+    predicted = brentq(limiting_equation, 1, 2)
+    for k in (0.016, 0.008):
+        roots = np.linalg.eigvals(_field_feedback_matrix(k, gain))
+        growing = roots[np.argmax(roots.real)]
+        assert growing.real > 1.1
+        assert growing == pytest.approx(predicted, abs=4e-4)
+
+
+def test_delayed_attraction_still_has_a_real_growing_root():
+    k, gain, lag = 0.025, 0.009, 4
+
+    def determinant(z):
+        matrix = _field_feedback_matrix(k, gain * z**-lag)
+        return np.linalg.det(z * np.eye(3) - matrix).real
+
+    assert determinant(1) < 0 < determinant(2)
+    assert brentq(determinant, 1, 2) > 1.05
+
+
+def test_leading_jeans_threshold_changes_growth_to_oscillation():
+    k = 0.013
+    c = EPSILON**2 / 2
+    for scaled_gain in (1.5 * c, 0.5 * c):
+        roots = np.linalg.eigvals(_field_feedback_matrix(k, scaled_gain * k**2))
+        close = roots[np.argsort(np.abs(roots - 1))[:2]]
+        squared_speed = (scaled_gain - c) / (4 / 3)
+        np.testing.assert_allclose(((close - 1) / k) ** 2, squared_speed, rtol=0.06)
+
+
+def test_formal_static_response_is_not_a_stable_screened_limit():
+    k, gain = 0.018, 0.02
+    scalar = -(EPSILON**2) / 2
+    matrix = _field_feedback_matrix(k, gain)
+    _, source = _mode(k, scalar)
+    potential = np.linalg.solve(np.eye(3) - matrix, source)[0] / k**2
+    assert potential == pytest.approx(scalar / gain, rel=0.01)
+    assert max(np.linalg.eigvals(matrix).real) > 1

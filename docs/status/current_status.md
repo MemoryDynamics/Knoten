@@ -278,6 +278,14 @@ Auch eine kompakte Richtungsquelle liefert am alten skalaren
 Lesekanal keinen Monopolpol. Retention und physikalische
 Kopplung der akkumulierten Groesse bleiben offen.
 
+Der [geschlossene Rueckwirkungstest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_accumulated_feedback_2026-11-23.md)
+findet beim eingesetzten anziehenden Kraftport eine Jeans-artige
+wachsende Langwellenmode fuer jede feste positive Selbstkopplung.
+Zeitverzoegerung mit gleicher statischer Lesestaerke verhindert
+das nicht. Eine rueckwirkungsfreie Probe darf deshalb nicht als
+stabile Eigendynamik desselben Mediums ausgegeben werden.
+Keine neue native Regel und kein allgemeiner Ausschluss von Gravitation.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

@@ -182,6 +182,11 @@ zeigt, wie ein solcher Vertrag aussehen wuerde.
 Keine dynamische Speicherung des Akkumulators, reziproke
 Kraft oder Quantisierung wird in dieser Notiz behauptet.
 
+Der [Selbstkopplungsvergleich](collective_accumulated_feedback_2026-11-23.md)
+prueft inzwischen die einfachste anziehende Rueckwirkung auf die
+erzeugende Dichte. Sie liefert eine Jeans-artige Langwelleninstabilitaet,
+auch mit Delay gleicher statischer Kopplungsstaerke.
+
 [Feste Kontrollen](../../tests/test_collective_directional_current.py)
 pruefen die kompakte Quelle, die diskrete Teleskopidentitaet
 und den Potenzialtransfer im statischen und im
