@@ -205,6 +205,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    ganzem Schritt. Die freie Einstein-Kalibrierung nicht ungeprueft
    auf Memory-Paare uebertragen. Der konstante additive Eingang ist
    kein abgeleiteter Kraftport und kein reziprokes Paarmodell.
+   Der [breite direkte Paargrenzfall](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diffusive_limit_2026-11-22.md)
+   liefert eine gekoppelte Orts-SDE ohne stationaere relative
+   Bindung auf der deklarierten Weitbereichsskala. Keine
+   festbreite Paar- oder Quantenbehauptung daraus ableiten.
+   Bei Vergleichen Mittelpunktdrift und Relativrauschkopplung
+   getrennt ausweisen; eine driftfreie Gewichtung ist keine Masse.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
    parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import

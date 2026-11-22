@@ -12,6 +12,12 @@ Fuer lokalisierte Quellen und endlich viele feste Gaussbreiten fehlt ihm
 ein asymptotischer Coulomb-Schwanz. Dies begrenzt diesen direkten Readout,
 nicht jede moegliche kollektive effektive Theorie des Gesamtmodells.
 
+Der [spaetere breite Paargrenzfall](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diffusive_limit_2026-11-22.md)
+leitet fuer diesen Kreuzkanal auf festgelegter diffuser Skala eine
+gekoppelte Ortsdiffusion her. Ihr Relativort hat bei beschraenktem
+Gauss-Potential keine stationaere Wahrscheinlichkeitsverteilung auf
+freiem Raum. Kein Nachweis fuer festbreite native Langzeitlaeufe.
+
 ## Gepruefte Regel und Eingaben
 
 Codebasis: [`reciprocal_nodes.py`](https://github.com/MemoryDynamics/Knoten/blob/88d56c84d9546df4cc5ab8afe79da8c270433cf8/src/emergenz_knoten/reciprocal_nodes.py),

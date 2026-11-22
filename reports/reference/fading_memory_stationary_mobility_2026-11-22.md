@@ -237,6 +237,12 @@ Das betrifft nur diesen stationaeren Prozess,
 nicht thermodynamische Entropieproduktion oder
 einen physikalischen Kraftport.
 
+Der [breite Paargrenzfall](memory_pair_diffusive_limit_2026-11-22.md)
+verwendet anschliessend die getrennten Koeffizienten fuer
+den deklarierten direkten Gauss-Kreuzkanal. Er zeigt,
+wann ein driftfreier Mittelpunkt trotzdem mit dem
+Relativrauschen korreliert bleibt.
+
 ## 4. Einordnung und feste Gegenproben
 
 [Warren und Allen, PRL 109, 250601 (2012)](https://doi.org/10.1103/PhysRevLett.109.250601)

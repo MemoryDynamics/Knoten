@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-22 (stationaere Antwort am additiven Kopfinput; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-22 (diffusiver Grenzprozess der breiten direkten Paarkopplung; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [breite Paargrenzfall](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diffusive_limit_2026-11-22.md)
+kontrolliert direkte Gauss-Kreuzkopplung auf einer gemeinsamen
+Weitbereichs- und Diffusionsskala. Im Kreuzterm bleibt die
+Quellenmasse; die Selbsthistorie bestimmt getrennt Mobilitaet
+und Diffusion. Gleiche Quellen erzwingen keinen
+driftfreien einfachen Mittelpunkt. Der relative Grenzprozess
+besitzt bei beschraenktem Gauss-Potential keine stationaere
+Abstandsverteilung auf freiem Raum. Kein Paar-Ziellauf und
+keine Aussage zum festbreiten nativen Langzeitprozess.
 
 Die [stationaere Kopfantwort](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_stationary_mobility_2026-11-22.md)
 leitet Mobilitaet bei festem Gaussrauschen als absolut summierbare
