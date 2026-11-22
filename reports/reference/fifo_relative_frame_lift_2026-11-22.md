@@ -133,6 +133,10 @@ andere ersetzt noch das externe $mgz$ als Memory-Ergebnis
 gezaehlt. Kein Transportfeld, keine Born-Regel und keine
 Dynamik des Detektors wurden eingefuehrt oder nachgewiesen.
 
+Der [skalare Bahnphasentest](memory_gravity_action_phase_2026-11-22.md)
+prueft separat, ob ein vorhandener Memory-Kanal ueberhaupt den
+zur Haltezeit proportionalen Hoehenkontrast liefern kann.
+
 Die [Implementierung](../../experiments/current/reference/fifo_relative_frame_lift.py)
 nutzt ausschliesslich Rahmenmatrizen. Die
 [festen Kontrollen](../../tests/test_fifo_relative_frame_lift.py)

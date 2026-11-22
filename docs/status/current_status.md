@@ -209,6 +209,15 @@ stabil und verschwindet aus der Auslese nach dem Altern der
 unterschiedlichen Proben. Dieses Bit ist kein stetiger
 gravitativer Aktionsphasenbeitrag.
 
+Der [skalare Bahnphasentest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_gravity_action_phase_2026-11-22.md)
+schliesst eine zur Haltezeit proportionale Hoehenphase fuer die
+additive translationsinvariante Eigenmemory-Auslese mit summierbaren
+Altersgewichten aus. Fuer den gemeinsamen linearen kritischen Kanal
+betragt der kumulierte Anteil nach einer Relaxationszeit etwa 37
+Prozent der stationaeren Referenz; die Zeit skaliert mit $k^{-4}$
+auch ohne FIFO-Verzoegerung. Phasenregel, mechanische Masse und
+universeller Kraftport bleiben unabgeleitet.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

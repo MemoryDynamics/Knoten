@@ -83,6 +83,42 @@ def test_fixed_time_critical_potential_has_no_static_pole(k):
         assert 0 < response / kernel - 1 <= count * drive[0]
 
 
+def _phase_fraction(k, updates, ages):
+    ages = np.asarray(ages)
+    matrix, drive, p, _ = _mode(k, DIFFUSION, ages)
+    # Accumulate all steps through one power of a small affine matrix.
+    block = np.eye(len(ages) + 1)
+    block[:-1, :-1] = matrix
+    block[:-1, -1] = 1
+    elapsed = np.linalg.matrix_power(block, updates)[:-1, -1]
+    return 1 - drive[0] / (1 - p) * (ages @ elapsed) / updates
+
+
+def test_phase_fraction_matches_direct_step_response_at_finite_time():
+    ages, k, updates = (0.6, 0.3, 0.1), 0.5, 21
+    matrix, drive, _, kernel = _mode(k, DIFFUSION, ages)
+    state = np.zeros(len(ages))
+    total = 0.0
+    for _ in range(updates):
+        total += kernel * (1 + ages @ state)
+        state = matrix @ state + drive
+    steady = np.linalg.solve(np.eye(len(ages)) - matrix, drive)
+    expected = total / (kernel * (1 + ages @ steady) * updates)
+    assert _phase_fraction(k, updates, ages) == pytest.approx(expected, abs=2e-15)
+
+
+@pytest.mark.parametrize("ages", [(1.0,), (0.4, 0.3, 0.2, 0.1)])
+@pytest.mark.parametrize("scaled_time", [0.4, 1, 3])
+def test_phase_response_has_the_same_quartic_time_scaling_with_or_without_fifo(
+    scaled_time, ages
+):
+    k = 0.04
+    d4 = DIFFUSION * WIDTH + DIFFUSION**2 / 2
+    updates = round(scaled_time / (d4 * k**4))
+    expected = 1 + np.expm1(-scaled_time) / scaled_time
+    assert _phase_fraction(k, updates, ages) == pytest.approx(expected, abs=0.002)
+
+
 def test_pushforward_derivative_matches_the_mode_rule_on_a_fixed_torus():
     # Direct Fourier quadrature of one nonlinear push and an exact Gaussian convolution.
     x = np.arange(8192) * (2 * np.pi / 8192)

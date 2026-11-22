@@ -82,6 +82,11 @@ Im deterministischen Dichtevergleich schliesst die
 das linear vorhergesagte gemeinsame stationaere 1/r-Dichte- und
 Potentialprofil bereits ohne Fluktuationen aus. Der lineare Pol ist
 damit kein Kandidat fuer einen unveraenderten nichtlinearen Fernschluss.
+Der [Bahnphasentest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_gravity_action_phase_2026-11-22.md)
+trennt eine extensive Hoehenphase von den transienten Eigenmemory-
+Beitraegen. Auch ein gemeinsamer statischer Pol genuegt nicht:
+Zeitantwort und dieselbe Kopplung in mechanischer Beschleunigung
+und quantenmechanischer Phase muessen getrennt kontrolliert werden.
 
 | Stufe | Frage und gefordertes Ergebnis | Status / Entscheidungspunkt |
 | --- | --- | --- |
