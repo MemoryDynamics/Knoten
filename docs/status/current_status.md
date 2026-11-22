@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-22 (keine stationaeren Abstaende beim direkten Gauss-Paar in d>=3; positiver 3D-Formkandidat weiter ungeprueft).
+Stand: 2026-11-22 (fast sichere Trennung bei quadratisch summierbarem direktem Kreuzantrieb; positiver 3D-Formkandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,16 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Die [Besetzungs- und Budgetabschaetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_summable_cross_drift_2026-11-22.md)
+liefert in d>=3 fast sichere Trennung und aequivalente freie
+und gekoppelte Pfadmasse fuer endliche direkte Paare mit
+beschraenktem Kraftschwanz O(r^-p), p>1, und unabhaengigem
+positivem Gaussrauschen. Das umfasst feste Gausskerne und
+den regulaeren 1/r^2-Vergleich. Bei festen Kerneln stimmt
+der Brown-Grenzprozess mit dem freien Paar ueberein.
+Keine Aussage ueber Verweilzeiten, singulaere Kerne
+oder vermittelte Wechselwirkung.
 
 Der [Fluchtbeweis bei fester Breite](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_fixed_range_escape_2026-11-22.md)
 schliesst in d>=3 eine stationaere Abstandsverteilung

@@ -16,6 +16,12 @@ Weitbereichsskalierung und keine Klein-Gain-Annahme.
 Er beweist weder Flucht mit Wahrscheinlichkeit eins
 noch eine kurze Aufenthaltsdauer eines nahen Paars.
 
+Eine [spaetere Besetzungsabschaetzung](memory_pair_summable_cross_drift_2026-11-22.md)
+erhaelt ein startunabhaengiges erwartetes Quadratbudget.
+Sie schaerft die Flucht auf Wahrscheinlichkeit eins
+und erfasst auch regulaere Potenzen $r^{-p}$ mit $p>1$.
+Der vorliegende Beweis allein beansprucht diese Schaerfung nicht.
+
 ## 1. Regel und Ort der offenen Frage
 
 Seien $x_{1,n},x_{2,n}\in\mathbb R^d$ die beiden

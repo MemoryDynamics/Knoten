@@ -215,6 +215,10 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    schliesst stationaere Bindung des festen direkten Gauss-Paars in
    d>=3 bei endlichem H und unabhaengigem positivem Rauschen aus.
    Kurzzeitige Naehe deshalb nicht als stationaere Bindung werten.
+   Die [Schaerfung per Besetzungsbudget](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_summable_cross_drift_2026-11-22.md)
+   ergibt fast sichere Flucht auch mit regulaerem 1/r^2-Schwanz
+   bei denselben FIFO- und Rauschannahmen. Fuer stationaere Bindung
+   reicht es daher nicht, nur das direkte Fernfeld zu ersetzen.
    Andere Rauschmodelle, Mediatoren und Grenzfaelle separat pruefen.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,

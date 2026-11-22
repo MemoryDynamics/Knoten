@@ -22,6 +22,11 @@ beweist mit unabhhaengigem positivem Gaussrauschen in d>=3
 positive Fluchtwahrscheinlichkeit von jedem Start und damit
 fehlende stationaere Relativbindung auch ohne Weitbereichsgrenze.
 Keine Aussage zu metastabilen Verweilzeiten.
+Die [spaetere Budgetabschaetzung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_summable_cross_drift_2026-11-22.md)
+verschaerft das Ergebnis auf fast sichere Flucht
+und erfasst auch einen regulaeren $1/r^2$-Kraftschwanz
+als getrennte Referenz. Das ist kein Vergleich mit einem
+singulaeren Hamilton- oder quantenmechanischen Coulomb-System.
 
 ## Gepruefte Regel und Eingaben
 
