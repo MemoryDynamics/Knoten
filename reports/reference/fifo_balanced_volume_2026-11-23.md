@@ -161,6 +161,11 @@ herleiten. Keine davon wurde hier als Physik vorausgesetzt.
 Es folgen insbesondere keine Bindung, Quantisierung oder
 langreichweitige Ortskraft aus der Bilanz.
 
+Die [native 4D-Gegenprobe](native_fifo_four_volume_rotation_2026-11-23.md)
+liefert eine exakte vollrangige Fuenfperiode ohne eingesetzte
+Bilanzbedingung. Sie ist analytisch instabil und kein
+Bildungsnachweis aus planaren Saaten.
+
 Die Verwendung eines Multiplikators zum exakten Erfuellen
 einer Nebenbedingung ist aus der Molekulardynamik bekannt,
 beispielsweise bei
