@@ -214,6 +214,13 @@ die das einzelne Kopfschreiben die Volumensumme schon bei
 beliebig schwacher Kreuzkopplung verletzt. Ein anderer radialer
 Kernel allein schliesst die Quellenbilanz also nicht.
 
+Der [bilanzierte Volumentransfer](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_balanced_volume_2026-11-23.md)
+korrigiert als Referenz den rohen Kopfdrift minimal bei festem
+Gesamtvolumen. Der endliche Transfer ist nicht null. Die Bilanz
+ist eingesetzt, nicht nativ hergeleitet. Eine allgemeine Sperre
+bleibt: Stetige Ein-Kopf-Updates mit exakter Volumenerhaltung
+koennen rein planare Fenster nicht aus ihren alten Ebenen heben.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne

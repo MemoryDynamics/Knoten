@@ -132,6 +132,11 @@ Normalenbeitraege herleiten (gegebenenfalls einschliesslich
 eines separaten Feldflusses), nicht bloss ein attraktives
 Kernelvorzeichen einsetzen.
 
+Der [bilanzierte Schreibbenchmark](fifo_balanced_volume_2026-11-23.md)
+konstruiert einen solchen Transfer als Referenz und zeigt eine
+allgemeinere Grenze: Exakte Erhaltung bei stetigem Ein-Kopf-Update
+sperrt die Bildung nichtplanarer Fenster aus rein planaren Saaten.
+
 [Harris, Kamien und Lubensky, PRL 78, 1476 (1997)](https://arxiv.org/abs/cond-mat/9607084v3)
 konstruieren in einem anderen Modell ein geometrisches
 Chiralitaetsmass und leiten daraus zusammen mit mikroskopischen
