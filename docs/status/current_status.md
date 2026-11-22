@@ -200,6 +200,15 @@ Fuer tatsaechlich antiparallele 3D-Richtungen werden beide
 Kernelvorzeichen getrennt kontrolliert; das Driftvorzeichen folgt
 aus dem Kernel, nicht aus dem Spinlabel.
 
+Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
+benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
+Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne
+Richtungspfeil bleibt dabei konstant. Der Lift ist fuer die
+Vierteldrehungsprobe bei Rahmenfehlern unter 45 Grad garantiert
+stabil und verschwindet aus der Auslese nach dem Altern der
+unterschiedlichen Proben. Dieses Bit ist kein stetiger
+gravitativer Aktionsphasenbeitrag.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

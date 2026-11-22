@@ -165,6 +165,11 @@ verschwindet. Erst dann waere zu testen, ob das Signal
 auf die 3D-Dynamik zurueckwirkt. Der jetzige Vergleich
 zeigt weder Bindung noch Quantisierung noch emergenten Spin.
 
+Der [Vergleich gespeicherter 3D-Drehwege](fifo_relative_frame_lift_2026-11-22.md)
+unterscheidet sich davon: Er braucht keine gemeinsame 4D-Basis,
+aber nachweisbar verschiedene, aufgeloeste Rahmenfolgen. Er
+unterscheidet nicht $Q_B$ von $-Q_B$ bei identischen Rahmenfolgen.
+
 Die [festen Kontrollen](../../tests/test_fifo_4d_relative_phase.py)
 werten vorhandene Potentiale und Gradienten direkt aus. Sie pruefen
 beide Zeitmittel, das vollstaendige Rahmenbild, die antipodalen
