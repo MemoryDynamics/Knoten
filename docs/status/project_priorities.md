@@ -194,8 +194,12 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    Die [Zukunftskopplung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_future_mixing_2026-11-21.md)
    kontrolliert stationaere Inkrementfenster sowie ihren Trunkierungsfehler
    bei festem Rauschen. Nicht auf den vollen unendlichen Tail,
-   praktische Lebensdauer, integrierten Transport oder den
-   Kleinrauschlimes uebertragen; diese benoetigen eigene Schranken.
+   praktische Lebensdauer oder den Kleinrauschlimes uebertragen.
+   Die [separate Transportfolge](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_diffusive_transport_2026-11-21.md)
+   schliesst nun den integrierten Langzeittransport bei festen
+   Rausch- und Retentionsparametern: strikt positive Brownsche Grenze
+   und Konvergenz ihres Koeffizienten beim Trunkieren. Das ist
+   kein Kurzzeit- oder Traegheitstest und keine Freigabe eines Laufs.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
    parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import

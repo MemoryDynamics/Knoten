@@ -248,6 +248,9 @@ Das ist eine feste-Fenster-Aussage bei festem
 Rauschen und Retentionen. Sie sagt nichts ueber
 ungleichmaessige Rauschgrenzwerte oder zeitintegrierte
 Transportgroessen aus.
+Die [separate Transportfolge](fading_memory_diffusive_transport_2026-11-21.md)
+kontrolliert die integrierten Korrelationen mit einem
+Poisson-Korrektor und einer zusaetzlichen Momentabschaetzung.
 
 ## 6. Reichweite, Literatur und Gegenproben
 

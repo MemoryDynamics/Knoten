@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-21 (exponentielles Vergessen in kuenftigen Schritten; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-22 (positiver diffusiver Langzeittransport bei festem Rauschen; fester positiver 3D-Kandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [diffusive Langzeitgrenzsatz](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_diffusive_transport_2026-11-21.md)
+liefert bei festem positivem Gaussrauschen und geometrischen
+Altersgewichten eine isotrope Brownsche Ortsgrenze mit strikt
+positiver Kovarianz, ohne Annahme kleiner Gains. Der
+Koeffizient ist durch eine konvergente Korrelationssumme
+bestimmt und konvergiert beim Trunkieren ohne Nachnormierung.
+Kein Zahlenwert fuer den nativen Kandidaten, kein gemeinsamer
+Rausch-/Retentionsgrenzwert und keine aus Memory abgeleitete Traegheit.
 
 Die [stochastische Zukunftskopplung](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fading_memory_future_mixing_2026-11-21.md)
 beweist exponentielles Vergessen in der kuenftigen Inkrementfolge
