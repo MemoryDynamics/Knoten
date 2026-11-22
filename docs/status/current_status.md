@@ -260,6 +260,15 @@ den Ausschluss einer starken akustischen Antwort nicht. Fuer einen
 nativen Wellenkandidaten ist ein eigenstaendiger langsamer Strom
 im Vektorkanal zu pruefen, nicht eine laengere skalare Liste.
 
+Der [gemeinsame Dichte-/Richtungsabschluss](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_directional_current_2026-11-22.md)
+findet diesen zusaetzlichen linearen Modus bei kritischer
+Alignment-Staerke; ein fester Zweialter-Block hat gedaempfte
+Langwellen. Am selben skalaren Quellport kontrolliert jedoch
+derselbe Koeffizient den statischen Nenner und die quadratische
+Wellengeschwindigkeit. Ein Pol und eine endliche nichtverschwindende
+Wellengeschwindigkeit kommen dort nicht gleichzeitig vor.
+Kein nativer Vielteilchen-Grenzwert oder Impulsnachweis.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

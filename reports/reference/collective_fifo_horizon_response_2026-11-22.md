@@ -165,6 +165,12 @@ liefert eine getrennte klassische Positivreferenz fuer
 Richtungspersistenz und Telegraphendynamik, nicht fuer
 die hier untersuchte reine Altersgewichtung.
 
+Der [Richtungsabschluss](collective_directional_current_2026-11-22.md)
+liefert jetzt den gesuchten zweiten linearen Strommodus bei exakt
+kritischer Ausrichtung. Er zeigt aber auch, dass am selben skalaren
+Quellport der statische Pol mit nichtverschwindender Wellengeschwindigkeit
+verschwindet.
+
 Die [festen Kontrollen](../../tests/test_collective_fifo_screening.py)
 pruefen die Zeitbereichsschranke, einen langen reinen Lag
 und normierte sowie signierte Filter im akustischen Band.
