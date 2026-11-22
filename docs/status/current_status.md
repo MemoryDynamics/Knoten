@@ -218,6 +218,15 @@ Prozent der stationaeren Referenz; die Zeit skaliert mit $k^{-4}$
 auch ohne FIFO-Verzoegerung. Phasenregel, mechanische Masse und
 universeller Kraftport bleiben unabgeleitet.
 
+Der [Zwei-Zeiten-Wirkungstest](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_single_path_action_2026-11-22.md)
+schliesst fuer den unveraenderten retardierten Eigenmemory-Drift
+eine Darstellung als Wirkungsgradient auf einer einzelnen Bahn aus: Die spaetere
+Kraft haengt vom frueheren Ort ab, nicht umgekehrt. Die summierten
+Lesepotentiale liefern beim Variieren einen zusaetzlichen Term aus
+spaeteren Zeiten. Die exakte Fourier-Darstellung der Gauss-Pfaddichte
+behaelt die Kausalitaet bei, liefert aber nur klassische Statistik.
+Ein erweiterter Wirkungsabschluss bleibt offen.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

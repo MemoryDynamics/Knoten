@@ -145,6 +145,11 @@ Der native erste Drift ist kein solcher Kraftport. Eine passende
 Steigung fuer einen Armvergleich weist weder Universalitaet noch
 kohaerente Rekombination, Gravitation oder Quantisierung nach.
 
+Der [Wirkungstest am nativen Lesepotential](memory_single_path_action_2026-11-22.md)
+zeigt jetzt, warum die unveraenderte retardierte Leseregel kein
+solcher Einbahn-Wirkungsgradient ist. Die positive bedingte
+Pfaddichte liefert auch in Fourier-Schreibweise keine relative Phase.
+
 Feste Kontrollen: [Eigenkanal](../../tests/test_memory_action_phase.py)
 und [kollektiver Einschaltvergleich](../../tests/test_collective_fifo_screening.py).
 Letzterer benutzt kleine Matrixpotenzen und zum Abgleich 21
