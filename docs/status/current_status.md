@@ -286,6 +286,15 @@ das nicht. Eine rueckwirkungsfreie Probe darf deshalb nicht als
 stabile Eigendynamik desselben Mediums ausgegeben werden.
 Keine neue native Regel und kein allgemeiner Ausschluss von Gravitation.
 
+Der [getrennte Feld-/Materievergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_medium_matter_split_2026-11-23.md)
+findet bei frei diffundierender Materie weiterhin eine wachsende
+Langwellenmode, hier mit Rate $k^{2/3}$. Ein gesetzter verankerter
+Materialkanal erlaubt gedaempfte Wellen plus statischen $1/k^2$-Pol.
+Die Verankerung folgt nicht aus einer inneren Knotenbindung:
+Bei massenproportionaler Kopplung bleibt der Monopol am frei
+beweglichen Schwerpunkt, waehrend interne Formvariationen erst
+in Ordnung $k^2$ sichtbar werden.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

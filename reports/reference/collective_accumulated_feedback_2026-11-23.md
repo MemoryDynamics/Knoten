@@ -170,6 +170,11 @@ Die Rekonstruktion leitet weiterhin weder den
 Kraftport noch die Phasenkopplung des
 [gemeinsamen Benchmarks](retarded_scalar_interferometer_2026-11-22.md) her.
 
+Der [getrennte Materiekanal](collective_medium_matter_split_2026-11-23.md)
+zeigt danach den Unterschied zwischen frei diffundierenden und
+verankerten Quellen. Nur die gesetzte Verankerung erlaubt in
+der Positivkontrolle simultan gedaempfte Wellen und einen statischen Pol.
+
 [Feste Kontrollen](../../tests/test_collective_directional_current.py)
 pruefen die Determinantenverschiebung, den Grenzmultiplikator,
 eine verzoegerte Rueckwirkung sowie beide Seiten der

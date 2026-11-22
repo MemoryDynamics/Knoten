@@ -234,3 +234,66 @@ def test_formal_static_response_is_not_a_stable_screened_limit():
     potential = np.linalg.solve(np.eye(3) - matrix, source)[0] / k**2
     assert potential == pytest.approx(scalar / gain, rel=0.01)
     assert max(np.linalg.eigvals(matrix).real) > 1
+
+
+def _material_medium_block(k, retention, mobility, sourcing, transport):
+    matrix, source = _mode(k, -(EPSILON**2) / 2)
+    coupled = np.zeros((4, 4), dtype=complex)
+    coupled[:3, :3] = matrix
+    coupled[:3, 3] = sourcing * source
+    coupled[3, 0] = mobility * transport
+    coupled[3, 3] = retention
+    return coupled, np.r_[source, 0]
+
+
+def test_separate_mobile_material_still_grows_at_fractional_wavenumber_rate():
+    mobility, sourcing = 0.2, 0.2
+    coefficient = (mobility * sourcing * (EPSILON**2 / 2) / (4 / 3)) ** (1 / 3)
+    errors = []
+    for k in (0.008, 0.004):
+        p_m = np.exp(-0.27 * k**2)
+        coupled, _ = _material_medium_block(k, p_m, mobility, sourcing, p_m)
+        roots = np.linalg.eigvals(coupled)
+        growing = roots[np.argmax(roots.real)]
+        scaled = (growing - 1) / k ** (2 / 3)
+        assert growing.real > 1
+        assert scaled == pytest.approx(coefficient, rel=0.14)
+        errors.append(abs(scaled - coefficient))
+    assert errors[1] < errors[0]
+
+
+def test_anchored_material_keeps_a_static_pole_and_damped_longitudinal_waves():
+    k, retention, mobility, sourcing = 0.012, 0.48, 0.2, 0.2
+    matrix, drive = _material_medium_block(k, retention, mobility, sourcing, 1)
+    c = EPSILON**2 / 2
+    coupling = c * sourcing * mobility
+    restored = c - coupling / (1 - retention)
+    stationary = np.linalg.solve(np.eye(4) - matrix, drive)
+    assert stationary[0] == pytest.approx(c / restored, rel=4e-4)
+    roots = np.linalg.eigvals(matrix)
+    assert np.all(np.abs(roots) < 1)
+    waves = roots[np.argsort(np.abs(roots - 1))[:2]]
+    logs = np.log(waves)
+    speed_squared = restored / (4 / 3)
+    np.testing.assert_allclose(np.abs(logs.imag / k), np.sqrt(speed_squared), rtol=5e-4)
+    vector_width = SIGMA**2 / 2 + 6 / 5 * EPSILON**2
+    damping = (
+        speed_squared
+        - vector_width
+        + EPSILON**2 / 6
+        - coupling * retention / (1 - retention) ** 2
+    ) / (8 / 3)
+    np.testing.assert_allclose(logs.real / k**2, damping, rtol=8e-4)
+
+
+def test_internal_shape_change_does_not_polarize_a_mass_proportional_monopole():
+    masses = np.array([1, 3])
+
+    def contrast(k, charges):
+        offsets = np.array([-0.75, 0.25])
+        return abs(charges @ (np.exp(-1j * k * offsets) - np.exp(-2j * k * offsets)))
+
+    for charges, exponent in ((masses, 2), (np.ones(2), 1)):
+        assert contrast(0.02, charges) / contrast(0.01, charges) == pytest.approx(
+            2**exponent, rel=3e-4
+        )
