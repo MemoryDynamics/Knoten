@@ -244,6 +244,14 @@ thermischen Baedern reproduzieren, die zwischen den Proben
 unterschiedlich sind. Bandbreite und Messintervall werden damit
 Teil des physikalischen Vergleichs, keine freien Fits.
 
+Der [retardierte Skalarfeld-Benchmark](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/retarded_scalar_interferometer_2026-11-22.md)
+liefert getrennt davon eine gemeinsame raeumliche Referenz fuer
+Kraft, relative Phase und Kontrast. Fuer kompakte Quellen setzt
+die Antwort erst nach Signallaufzeit ein; der Phasenunterschied
+waechst spaet exakt linear, waehrend die Vakuum-Dephasierung
+bei festem Armabstand einen endlichen Grenzwert hat. Wellengleichung,
+Massenkopplung und Quantisierung sind nicht aus Knoten hergeleitet.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

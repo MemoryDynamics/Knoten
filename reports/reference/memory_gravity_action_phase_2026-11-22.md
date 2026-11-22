@@ -150,6 +150,11 @@ zeigt jetzt, warum die unveraenderte retardierte Leseregel kein
 solcher Einbahn-Wirkungsgradient ist. Die positive bedingte
 Pfaddichte liefert auch in Fourier-Schreibweise keine relative Phase.
 
+Ein [gemeinsamer Skalarfeld-Vergleich](retarded_scalar_interferometer_2026-11-22.md)
+liefert nun eine raeumliche Positivkontrolle: Laufzeit,
+Phasensteigung und Vakuumsichtbarkeit folgen aus derselben
+gesetzten Kopplung. Der Referenzkanal ist nicht aus Memory abgeleitet.
+
 Feste Kontrollen: [Eigenkanal](../../tests/test_memory_action_phase.py)
 und [kollektiver Einschaltvergleich](../../tests/test_collective_fifo_screening.py).
 Letzterer benutzt kleine Matrixpotenzen und zum Abgleich 21
