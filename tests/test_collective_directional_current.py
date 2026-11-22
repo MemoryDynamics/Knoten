@@ -297,3 +297,67 @@ def test_internal_shape_change_does_not_polarize_a_mass_proportional_monopole():
         assert contrast(0.02, charges) / contrast(0.01, charges) == pytest.approx(
             2**exponent, rel=3e-4
         )
+
+
+def _paired_material_block(k, charges, spring):
+    mobility = np.array([0.7, 1.3])
+    translation = 1 / np.sqrt(mobility)
+    internal = np.sqrt(mobility) * np.array([1, -1])
+    response = np.eye(2) - spring * np.outer(internal, internal)
+    coupling = np.sqrt(mobility) * charges
+    p_m = np.exp(-0.27 * k**2)
+    field, source = _mode(k, -(EPSILON**2) / 2)
+    matrix = np.zeros((5, 5), dtype=complex)
+    matrix[:3, :3] = field
+    matrix[:3, 3:] = np.outer(source, coupling)
+    matrix[3:, 0] = p_m * coupling
+    matrix[3:, 3:] = p_m * response
+    return matrix, np.r_[source, 0, 0], translation, coupling
+
+
+def test_bound_pair_center_and_internal_response_have_nonnegative_residues():
+    k, z, spring = 0.09, 1.08 + 0.05j, 0.24
+    charges = np.array([0.2, -0.15])
+    matrix, _, translation, coupling = _paired_material_block(k, charges, spring)
+    p_m = np.exp(-0.27 * k**2)
+    monopole = charges.sum() ** 2 / (translation @ translation)
+    polarization = coupling @ coupling - monopole
+    assert monopole > 0 and polarization > 0
+    expected = p_m * (monopole / (z - p_m) + polarization / (z - 0.52 * p_m))
+    actual = coupling @ np.linalg.solve(z * np.eye(2) - matrix[3:, 3:], matrix[3:, 0])
+    assert actual == pytest.approx(expected, rel=1e-14)
+
+
+def test_neutral_bound_pair_retains_damped_sound_and_pole_without_fixed_anchors():
+    k, spring = 0.012, 0.24
+    charges = np.array([0.15, -0.15])
+    matrix, source, translation, coupling = _paired_material_block(k, charges, spring)
+    assert coupling @ translation == pytest.approx(0, abs=1e-16)
+    c = EPSILON**2 / 2
+    restored = c * (1 - (coupling @ coupling) / (1 - 0.52))
+    static = np.linalg.solve(np.eye(5) - matrix, source)
+    assert static[0] == pytest.approx(c / restored, rel=4e-4)
+
+    roots = np.linalg.eigvals(matrix)
+    assert np.all(np.abs(roots) < 1)
+    p_m = np.exp(-0.27 * k**2)
+    assert min(abs(roots - p_m)) < 1e-14
+    waves = roots[np.abs(roots.imag) > 1e-3]
+    assert len(waves) == 2
+    np.testing.assert_allclose(
+        np.abs(np.log(waves).imag / k), np.sqrt(restored / (4 / 3)), rtol=6e-4
+    )
+
+    disconnected, *_ = _paired_material_block(k, charges, 0)
+    assert max(np.linalg.eigvals(disconnected).real) > 1
+
+
+def test_nonzero_monopole_restores_growth_in_spite_of_internal_binding():
+    charges = np.array([0.15, 0.15])
+    for k in (0.006, 0.003):
+        matrix, _, translation, _ = _paired_material_block(k, charges, 0.24)
+        monopole = charges.sum() ** 2 / (translation @ translation)
+        expected = ((EPSILON**2 / 2) * monopole / (4 / 3)) ** (1 / 3)
+        largest = max(np.linalg.eigvals(matrix).real)
+        assert largest > 1
+        assert (largest - 1) / k ** (2 / 3) == pytest.approx(expected, rel=0.13)

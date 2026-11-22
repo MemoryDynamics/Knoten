@@ -295,6 +295,15 @@ Bei massenproportionaler Kopplung bleibt der Monopol am frei
 beweglichen Schwerpunkt, waehrend interne Formvariationen erst
 in Ordnung $k^2$ sichtbar werden.
 
+Der [neutrale Verbundvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_neutral_material_response_2026-11-23.md)
+haelt den Schwerpunkt frei und laesst innere Federmoden den
+Rueckkanal tragen. Bei Neutralitaet jedes verbundenen Verbunds
+koennen gedaempfte Langwellen und ein statischer Fremdquellenpol
+ohne aeusseren Anker koexistieren. Ungebundene Gegenladungen
+oder ein Netto-Monopol behalten ein positives Translationsresiduum
+und damit den wachsenden Zweig. Es ist eine gesetzte
+vorzeichenbehaftete Referenz, kein universeller Massenport.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener

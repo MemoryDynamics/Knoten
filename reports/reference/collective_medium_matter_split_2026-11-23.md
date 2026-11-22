@@ -181,6 +181,11 @@ verankerten Quellpunkten darf freie Materietraeger
 nicht ersetzen. Eine gemeinsame mechanische und
 quantenmechanische Phasenkopplung bleibt unabgeleitet.
 
+Der [neutrale Verbundvergleich](collective_neutral_material_response_2026-11-23.md)
+realisiert die interne Polarisation ohne fixierten Anker. Er zeigt,
+warum die frei bewegliche Mode nur bei Neutralitaet jedes
+gebundenen Verbunds aus dem Quellenkanal verschwindet.
+
 [Feste Matrix- und Formfaktorkontrollen](../../tests/test_collective_directional_current.py)
 pruefen beide dynamischen Vergleichsfaelle und die
 fehlende universelle Dipolkopplung einer internen
