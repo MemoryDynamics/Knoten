@@ -17,6 +17,11 @@ leitet fuer diesen Kreuzkanal auf festgelegter diffuser Skala eine
 gekoppelte Ortsdiffusion her. Ihr Relativort hat bei beschraenktem
 Gauss-Potential keine stationaere Wahrscheinlichkeitsverteilung auf
 freiem Raum. Kein Nachweis fuer festbreite native Langzeitlaeufe.
+Die [separate Fortsetzung bei fester Breite](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_fixed_range_escape_2026-11-22.md)
+beweist mit unabhhaengigem positivem Gaussrauschen in d>=3
+positive Fluchtwahrscheinlichkeit von jedem Start und damit
+fehlende stationaere Relativbindung auch ohne Weitbereichsgrenze.
+Keine Aussage zu metastabilen Verweilzeiten.
 
 ## Gepruefte Regel und Eingaben
 

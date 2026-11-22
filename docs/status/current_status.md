@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Stand: 2026-11-22 (diffusiver Grenzprozess der breiten direkten Paarkopplung; fester positiver 3D-Kandidat weiter ungeprueft).
+Stand: 2026-11-22 (keine stationaeren Abstaende beim direkten Gauss-Paar in d>=3; positiver 3D-Formkandidat weiter ungeprueft).
 
 Diese Seite berichtet nur den gegenwaertigen Befund. Die Arbeitsreihenfolge
 steht ausschliesslich in den [Projektprioritaeten](project_priorities.md); der
@@ -8,6 +8,15 @@ vollstaendige vorherige Stand liegt im
 [Repository-Archiv](https://github.com/MemoryDynamics/Knoten/blob/codex/p5-interaction-design/docs/archive/status/current_status_through_2026-09-02.md).
 
 ## Evidenz
+
+Der [Fluchtbeweis bei fester Breite](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_fixed_range_escape_2026-11-22.md)
+schliesst in d>=3 eine stationaere Abstandsverteilung
+fuer endliche direkte Gauss-FIFOs bei unabhaengigem
+positivem Rauschen aus. Aus jedem Start bleibt eine
+positive Fluchtwahrscheinlichkeit; alte Quelldeposits
+werden auf den Vergleichspfaden mit kontrolliert.
+Keine Weitbereichsgrenze, keine sichere Flucht oder
+Angabe einer metastabilen Lebensdauer.
 
 Der [breite Paargrenzfall](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_diffusive_limit_2026-11-22.md)
 kontrolliert direkte Gauss-Kreuzkopplung auf einer gemeinsamen

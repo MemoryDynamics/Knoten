@@ -211,6 +211,11 @@ Diese Befunde ordnen Prioritaet 3 ein, sind aber keine weiteren Arbeitspunkte.
    festbreite Paar- oder Quantenbehauptung daraus ableiten.
    Bei Vergleichen Mittelpunktdrift und Relativrauschkopplung
    getrennt ausweisen; eine driftfreie Gewichtung ist keine Masse.
+   Der [separate Fluchtbeweis](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_pair_fixed_range_escape_2026-11-22.md)
+   schliesst stationaere Bindung des festen direkten Gauss-Paars in
+   d>=3 bei endlichem H und unabhaengigem positivem Rauschen aus.
+   Kurzzeitige Naehe deshalb nicht als stationaere Bindung werten.
+   Andere Rauschmodelle, Mediatoren und Grenzfaelle separat pruefen.
    Die Autorenentscheidung vom 2026-11-11 konkretisiert diesen Punkt:
    neue Freiheitsgrade auf der Emergenzseite erst aus Memory herleiten,
    parallel eine explizite Feld-/Kernreferenz ausarbeiten. Kein Import

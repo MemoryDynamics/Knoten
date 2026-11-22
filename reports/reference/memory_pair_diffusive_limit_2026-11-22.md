@@ -256,6 +256,11 @@ einer stillschweigenden Vertauschung von
 $\delta\downarrow0$ mit stationaerem
 Langzeitverhalten des nativen Paars.
 
+Der [separate Fluchtbeweis](memory_pair_fixed_range_escape_2026-11-22.md)
+schliesst stationaere Abstaende spaeter auch bei festen
+Gaussbreiten in $d\geq3$ aus. Er wechselt das Pfadgesetz
+statt die beiden Grenzwerte zu vertauschen.
+
 ## 5. Reichweite, Literatur und Kontrollen
 
 Die Mittelung durch eine Poisson-Gleichung
