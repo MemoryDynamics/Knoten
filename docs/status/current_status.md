@@ -924,6 +924,14 @@ Querimpuls nicht aendern, solange sie den kollinearen
 Austausch erhaelt und die Register passiv laesst.
 Keine Bindung aus Memory und keine native Zieltrajektorie.
 
+Die [Kraft aus dem FIFO-Zentrum](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_memory_center_cycle_2026-11-24.md)
+erhaelt die vorbereitete Rueckkehr und aendert die Querantwort
+durch einen Gegenimpuls an die Eintraege. Ein konvexes Zentrum
+mit positivem Gewicht des juengsten Orts macht den Kopierfehler
+exponentiell instabil; beim verbleibenden Dreiplatzfall waechst
+er linear trotz Spektrums auf dem Einheitskreis. Die Speicherorte
+stehen im Flug weiter still. Keine native Zieltrajektorie.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

@@ -262,3 +262,9 @@ Der Ausschluss fuer alle ungeraden
 $H\ge3$ folgt aus dem Polynom, nicht
 aus einem Horizontscan oder einem
 numerischen Ziellauf.
+
+Eine [reziproke Kraft aus dem FIFO-Zentrum](fifo_memory_center_cycle_2026-11-24.md)
+laesst die Speichereintraege im Querblock mitwirken. Sie erhaelt
+die vorbereitete Zweiperiode, zeigt aber einen neuen instabilen
+Ortsmodus fuer alle kompatiblen konvexen Zentren mit positivem
+Gewicht des juengsten Eintrags.
