@@ -932,6 +932,14 @@ exponentiell instabil; beim verbleibenden Dreiplatzfall waechst
 er linear trotz Spektrums auf dem Einheitskreis. Die Speicherorte
 stehen im Flug weiter still. Keine native Zieltrajektorie.
 
+Der [bewegliche FIFO-Speicher](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_mobile_memory_cycle_2026-11-24.md)
+behaelt die vorbereitete Zweiperiode bei endlicher Masse
+der Eintraege. Fuer das Zentrum der zwei juengsten Orte
+ist sie bei jedem ganzzahligen Frequenzverhaeltnis instabil.
+Eine feste Gegenprobe mit gleichen Massen zeigt ebenfalls
+einen wachsenden Kopierfehler. Andere nichtganzzahlige
+Faelle und nichtkollineare Zyklen bleiben offen.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

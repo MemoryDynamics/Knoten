@@ -94,6 +94,57 @@ class MemoryCenterClock(CarrierClock):
         return q, p
 
 
+@dataclass(frozen=True)
+class MobileMemoryClock(MemoryCenterClock):
+    """Give each record an independent kinetic term with a common mass."""
+
+    record_mass: float = 1.0
+
+    def __post_init__(self):
+        super().__post_init__()
+        if not np.isfinite(self.record_mass) or self.record_mass <= 0:
+            raise ValueError("record mass must be finite and positive")
+
+    @property
+    def balance_frequency(self):
+        return self.frequency * sqrt(
+            1 + 2 * self.body_mass * np.square(self.weights).sum() / self.record_mass
+        )
+
+    def internal_energy(self, q, p):
+        return super().internal_energy(q, p) + np.square(p[1:-1]).sum() / (
+            2 * self.record_mass
+        )
+
+    def flight(self, position, momentum, duration):
+        if len(self.weights) != len(position) - 2:
+            raise ValueError("one weight is required for each memory row")
+        inverse_mass = np.full(len(position), 1 / self.record_mass)
+        inverse_mass[[0, -1]] = 1 / self.body_mass
+        velocity = inverse_mass[:, None] * momentum
+        q = position + duration * velocity
+        v = velocity.copy()
+        relative = np.zeros(len(position))
+        relative[[0, -1]] = (1, -1)
+        balance = np.r_[0.5, -np.asarray(self.weights), 0.5]
+
+        # The two mass-orthogonal oscillators replace their free-flight pieces.
+        for normal, frequency in (
+            (relative, self.frequency),
+            (balance, self.balance_frequency),
+        ):
+            direction = inverse_mass * normal
+            direction /= normal @ direction
+            coordinate, speed = normal @ position, normal @ velocity
+            phase = frequency * duration
+            c, s = cos(phase), sin(phase)
+            q += direction[:, None] * (
+                (c - 1) * coordinate + (s / frequency - duration) * speed
+            )
+            v += direction[:, None] * ((c - 1) * speed - frequency * s * coordinate)
+        return q, v / inverse_mass[:, None]
+
+
 def clock_return(incoming, model):
     """Resolve the seam and advance to the next arrival without clock resets."""
     event = write_boundary(incoming, model.internal_energy, clock_mass=model.clock_mass)

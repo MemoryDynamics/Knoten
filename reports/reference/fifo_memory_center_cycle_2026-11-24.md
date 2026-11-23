@@ -159,3 +159,8 @@ pruefen exakte Wiederkehr, Gegenimpuls, Energie und Drehimpuls,
 den vollen Querblock, das charakteristische Polynom und den
 linearen Kopierfehler. Die Ausschluesse folgen aus der Algebra,
 nicht aus einem Gewichts- oder Laengenscan.
+
+Die [bewegliche Speicherreferenz](fifo_mobile_memory_cycle_2026-11-24.md)
+gibt den Eintraegen endliche Traegheit, behaelt die exakte
+Schreibbahn und prueft analytisch ganzzahlige Verhaeltnisse
+zwischen den beiden Rueckkehrfrequenzen.
