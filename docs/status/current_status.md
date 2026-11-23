@@ -940,6 +940,14 @@ Eine feste Gegenprobe mit gleichen Massen zeigt ebenfalls
 einen wachsenden Kopierfehler. Andere nichtganzzahlige
 Faelle und nichtkollineare Zyklen bleiben offen.
 
+Der [Ausschluss rotierender Schreibgeometrien](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_rotating_section_2026-11-24.md)
+zeigt bei konstanter Halbperiode, dass die Rueckkehr bei
+jedem ganzzahligen Frequenzverhaeltnis nur $\pm1$ auf
+dem Einheitskreis traegt. Fuer drei Eintraege und gleiche
+Massen gilt das auch mit rationaler Fehlerschranke.
+Keine periodische Folge von mehr als zwei Schreibpunkten
+in diesen Klassen; andere Flugzeiten bleiben offen.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

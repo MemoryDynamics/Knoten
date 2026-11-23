@@ -174,3 +174,7 @@ und [feste Kontrollen](../../tests/test_fifo_mobile_memory_cycle.py)
 pruefen zwei Writes, Energiesprung, Beweglichkeit,
 Energie und Impulse, inverse Entwicklung und beide
 Querpolynome sowie die volle nichtganzzahlige Ableitung.
+
+Der [Ausschluss rotierender Schreibgeometrien](fifo_rotating_section_2026-11-24.md)
+prueft den konstant getakteten Referenzflug selbst auf
+neutrale Rotationsmoden, noch vor einer Stabilitaetsanalyse.
