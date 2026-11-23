@@ -168,7 +168,12 @@ zeigt, dass gerade dieser schwache Hintergrund
 kein belastbarer stationaerer Modus des
 gekoppelten Mittelfelds ist. Eine nichtlineare
 inhomogene Phase oder ein stabiler Bereich
-weiter weg bleiben offen. Selbst bei einem
+weiter weg waren in dieser Rechnung offen.
+Der [Anschluss fuer den ganzen polaren Zweig](collective_polarized_full_branch_2026-11-23.md)
+schliesst den homogenen attraktiven Hintergrund
+inzwischen bei jeder Amplitude aus; repulsive
+und inhomogene Faelle bleiben gesondert.
+Selbst bei einem
 stabilen polarisierten Rand waere ein
 topologischer Grad noch keine mechanische
 oder quantenmechanische Quellenladung.

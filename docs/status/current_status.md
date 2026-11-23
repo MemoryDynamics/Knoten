@@ -388,6 +388,14 @@ Fernindex null erhalten. Nahe der Schwelle ist der Zweig
 jedoch gegen longitudinale Dichtestoerungen instabil, obwohl
 die uniforme radiale Mode relaxiert. Kein stabiler nativer Rand.
 
+Der [Langwellenbefund fuer den gesamten polaren Zweig](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/collective_polarized_full_branch_2026-11-23.md)
+schliesst den homogenen attraktiven Hintergrund bei jeder
+Amplitude aus. In einem Winkelbereich um die Querrichtung
+waechst die Dichtemode sogar linear mit dem Wellenbetrag.
+Repulsive Achsendaempfung ist nur unter Bedingungen moeglich;
+zu grosse skalare Verzoegerung schliesst sie nahe der
+Schwelle auf beiden Achsen gleichzeitig aus.
+
 Der [Memory-Generatorabgleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/memory_spin_generator_2026-11-20.md)
 zeigt eine exakte Nichtidentifizierbarkeit: Unterschiedliche komplementaere
 Rotationen erzeugen dieselbe gesamte Referenzhistorie. Ihr vorhandener
