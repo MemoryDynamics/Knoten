@@ -244,6 +244,14 @@ Zehn vorgegebene Deposits mit nativen Gewichten erlauben
 beide lokalen Vorzeichen, aber noch keine native Rekurrenz
 des Minusdefekts oder eine isolierte Gegenladung.
 
+Die [Phasen- und Kraftpruefung des Zehn-Deposit-Zeugen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_negative_phase_recurrence_2026-11-23.md)
+bestaetigt den Minusindex in jedem vorbereiteten Fenster.
+Die native Kraftbilanz scheitert aber fuer diese Geometrie
+an zwei tangentialen Bedingungen, auch bei getrenntem
+Vergessen und beliebigem radialem Skalarprofil. Periodische
+Orbits aus derselben affinen Ein-Schritt-Abbildung koennen
+unabhaengig von ihrer Phasenzahl keinen Minusindex tragen.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne

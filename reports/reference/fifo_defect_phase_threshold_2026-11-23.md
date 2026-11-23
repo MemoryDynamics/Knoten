@@ -179,6 +179,13 @@ einen Minusdefekt mit kontrollierter Randreserve
 phaseweise reproduziert; mehr Speicher bei derselben
 kurzen Bahn ist dafuer nachweislich wirkungslos.
 
+Die [anschliessende Phasen- und Kraftpruefung](fifo_negative_phase_recurrence_2026-11-23.md)
+bestaetigt den vorbereiteten Minusindex ueber alle Phasen,
+schliesst aber die native Selbstreproduktion dieses
+Zeugen aus. Ein einziger affiner Schrittoperator
+kann auch auf laengeren periodischen Bahnen keinen
+Minusindex liefern.
+
 Der Uebergang zu einer logarithmischen Gleichung
 in positiven Nullraumkoordinaten folgt der
 bekannten Idee der
