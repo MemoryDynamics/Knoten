@@ -260,6 +260,13 @@ die Interpolationswerte erzwingen keine Stabilitaet.
 Keine Herleitung des Doppel-Gauss-Kernels, keine
 spontane Bildung und kein interagierendes Paar.
 
+Die [radiale Vorzeichenobstruktion](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_radial_sign_obstruction_2026-11-23.md)
+erzwingt bei den beiden inversen Referenzbahnen mindestens
+drei bzw. zwei skalare Kraftvorzeichenwechsel fuer jeden
+Vektorgain. Das schliesst den nativen Doppel-Gauss-Kernel auf
+beiden Geometrien und eine Dreifach-Gauss-Summe auf der
+Plusgeometrie aus, ohne Parameterfit oder Zieltrajektorie.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne

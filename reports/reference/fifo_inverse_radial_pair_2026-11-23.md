@@ -188,6 +188,11 @@ exakten Existenzzertifikats. Eine physikalische
 Weiterarbeit braucht einen **vorab** beschraenkten
 Kernel, eine unabhaengige Stabilitaetspruefung und
 erst danach einen Test gemeinsamer Feldrueckwirkung.
+Die [nachfolgende Vorzeichenpruefung](fifo_radial_sign_obstruction_2026-11-23.md)
+schliesst den nativen Doppel-Gauss-Kernel fuer beide
+Referenzbahnen bei den geprueften Retentionen aus,
+unabhaengig von Amplituden, Breiten und Vektorgain.
+
 Inverses Design isotroper Potentiale ist auch in
 anderen Modellen bekannt, siehe
 [Rechtsman, Stillinger und Torquato (2005)](https://arxiv.org/abs/cond-mat/0508495).
