@@ -169,3 +169,8 @@ erfuellen; die Flugzeiten duerfen nicht unabhaengig
 gesetzt werden. Eine nichtkollineare Kopierfolge mit
 dieser Bilanz waere ein echter Vergleich zur
 vorbereiteten kollinearen Zweiperiode.
+
+Die [Pruefung mit veraenderlicher Rotorzeit](fifo_timing_cycle_2026-11-24.md)
+trennt exakte Rueckkehr, Kopie und schrittweisen Energieabschluss
+und liefert einen analytischen Rangtest fuer alle kurzen
+positiven Zeiten sowie fuer allgemeine Timing-Profile.

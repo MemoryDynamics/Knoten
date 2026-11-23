@@ -948,6 +948,15 @@ Massen gilt das auch mit rationaler Fehlerschranke.
 Keine periodische Folge von mehr als zwei Schreibpunkten
 in diesen Klassen; andere Flugzeiten bleiben offen.
 
+Der [Rangtest fuer veraenderliche Rotorzeiten](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_timing_cycle_2026-11-24.md)
+trennt Kopie und Rueckkehr von der schrittweisen
+Energiebilanz. Fuer jedes feste ungerade FIFO-Fenster
+und jede feste Periodenzahl gibt es bei hinreichend
+kurzen Fluegen nur stationaere absolute Rueckkehr.
+Bei allgemeinen Zeiten muss eine nichtkollineare
+Folge auf einer Ausnahmemenge liegen. Kein Nachweis,
+dass die autonome Dynamik diese Menge verfehlt.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
