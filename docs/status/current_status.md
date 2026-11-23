@@ -889,6 +889,15 @@ Das ist weder ein No-go fuer eine Memory-/Mediumsenergie noch ein
 physikalischer Arbeits- oder Massennachweis. Die bereits deklarierten
 Center-Aktuatoren sind nicht mit der nativen Kopplung gleichgesetzt.
 
+Der [reziproke Kernel-Oszillator](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_kernel_oscillator_energy_2026-11-24.md)
+bilanziert Modulationsarbeit und Oszillatorenergie exakt,
+laesst den FIFO-Schreibterm aber als separaten Arbeitsposten
+offen. Eine native repulsive Zweiplatz-Loesung hat
+konstante gespeicherte Energie bei positivem Schreibdurchsatz.
+Negative statische Kruemmung im eingefrorenen Vergleich
+kann die Oszillatorfrequenz nicht stabilisieren.
+Kein Zufallstest und keine physikalische Schreibquelle.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
