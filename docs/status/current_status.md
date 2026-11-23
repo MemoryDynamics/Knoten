@@ -898,6 +898,14 @@ Negative statische Kruemmung im eingefrorenen Vergleich
 kann die Oszillatorfrequenz nicht stabilisieren.
 Kein Zufallstest und keine physikalische Schreibquelle.
 
+Der [vom Kernel-Oszillator bezahlte Schreibschritt](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_kernel_paid_write_2026-11-24.md)
+fuehrt den offenen Arbeitsposten auf eine Energiegrenze
+zurueck. Bei ausreichender Anregung behalten feste oder
+zufaellig vorgegebene Phasen dieselbe Gesamtenergie.
+Das geschlossene ueberdaempfte Budget kann keine
+dauerhafte Positionsbewegung finanzieren, und der
+FIFO-Schritt verliert weiterhin den alten Eintrag.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

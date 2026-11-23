@@ -247,3 +247,9 @@ Entscheidung: erst die Energiequelle oder
 Rueckbuchung des Schreibens spezifizieren,
 dann deterministische und stochastische
 Modulation bei gleicher Bilanz vergleichen.
+
+Der [energiegleiche Schreibvergleich](fifo_kernel_paid_write_2026-11-24.md)
+liefert inzwischen einen expliziten Referenztransfer
+in den Kernel-Oszillator, samt Schwelle und
+energiegleicher Phasenaenderung. Eine mikroskopische
+Schreibregel wird dadurch nicht hergeleitet.

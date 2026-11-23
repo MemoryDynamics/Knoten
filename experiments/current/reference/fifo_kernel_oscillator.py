@@ -75,10 +75,8 @@ class KernelLedger:
         return self.final_energy - self.initial_energy - self.motion - self.write
 
 
-def oscillator_write_split(state, model, *, write=True):
-    """One fixed-step split; the filled FIFO write is booked, not powered here."""
+def _read_setup(state, model):
     x, memory = np.asarray(state.x, dtype=float), np.asarray(state.memory, dtype=float)
-    a, p = state.amplitude, state.momentum
     if (
         x.ndim != 1
         or memory.ndim != 2
@@ -88,7 +86,7 @@ def oscillator_write_split(state, model, *, write=True):
         raise ValueError(
             "a finite filled memory and a matching vector head are required"
         )
-    if not np.isfinite([a, p]).all():
+    if not np.isfinite([state.amplitude, state.momentum]).all():
         raise ValueError("oscillator state must be finite")
     weights = exponential_memory_weights(1 - model.retention, len(memory))
     base = dict(sigma=model.base_sigma, amplitude=model.base_amplitude)
@@ -96,11 +94,23 @@ def oscillator_write_split(state, model, *, write=True):
         sigma=model.modulation_sigma, amplitude=model.modulation_amplitude
     )
 
+    return x, memory, weights, base, modulation
+
+
+def _components(head, history, weights, base, modulation):
+    return (
+        gaussian_potential(head, history, weights, **base),
+        gaussian_potential(head, history, weights, **modulation),
+    )
+
+
+def oscillator_write_split(state, model, *, write=True):
+    """One fixed-step split; the filled FIFO write is booked, not powered here."""
+    x, memory, weights, base, modulation = _read_setup(state, model)
+    a, p = state.amplitude, state.momentum
+
     def components(head, history):
-        return (
-            gaussian_potential(head, history, weights, **base),
-            gaussian_potential(head, history, weights, **modulation),
-        )
+        return _components(head, history, weights, base, modulation)
 
     oscillator_energy = model.oscillator_energy
     base0, mod0 = components(x, memory)
@@ -133,3 +143,73 @@ def oscillator_write_split(state, model, *, write=True):
     return KernelState(x1, memory1, a1, p1), KernelLedger(
         energy0, energy1, motion, modulation_work, oscillator, write_work
     )
+
+
+@dataclass(frozen=True)
+class MatchedWriteLedger:
+    minimum_change: float
+    excitation_before: float
+    excitation_after: float
+    read_change: float
+    oscillator_change: float
+
+    @property
+    def energy_residual(self):
+        return self.read_change + self.oscillator_change
+
+
+def energy_matched_fifo_write(state, model, *, phase_shift=0.0, birth_phase=None):
+    """Write at fixed x by transferring energy between the read and oscillator terms.
+
+    A positive excitation is moved to the new shell at the old phase plus
+    phase_shift. Launch from zero excitation needs an explicit birth_phase.
+    No write is performed if the new shell is energetically inaccessible.
+    """
+    x, old, weights, base, modulation = _read_setup(state, model)
+    if not np.isfinite(phase_shift) or (
+        birth_phase is not None and not np.isfinite(birth_phase)
+    ):
+        raise ValueError("phase inputs must be finite")
+    new = np.vstack((x, old[:-1]))
+    u0, u1 = _components(x, old, weights, base, modulation)
+    v0, v1 = _components(x, new, weights, base, modulation)
+    stiffness, inertia = model.stiffness, model.inertia
+    old_center, new_center = -u1 / stiffness, -v1 / stiffness
+    scale_a, scale_p = sqrt(stiffness), sqrt(inertia)
+    za = scale_a * (state.amplitude - old_center)
+    zp = state.momentum / scale_p
+    excitation = (za**2 + zp**2) / 2
+    change = (v0 - u0) - (v1 - u1) * (v1 + u1) / (2 * stiffness)
+    available = excitation - change
+
+    if available < 0:
+        raise ValueError("new FIFO minimum exceeds the available energy")
+    if available == 0:
+        za1, zp1 = 0.0, 0.0
+    elif excitation == 0:
+        if birth_phase is None:
+            raise ValueError("positive excitation from zero requires a declared phase")
+        radius = sqrt(2 * available)
+        angle = birth_phase + phase_shift
+        za1, zp1 = radius * cos(angle), radius * sin(angle)
+    else:
+        scale = sqrt(available / excitation)
+        c, s = cos(phase_shift), sin(phase_shift)
+        za1, zp1 = scale * (c * za - s * zp), scale * (s * za + c * zp)
+
+    a1, p1 = new_center + za1 / scale_a, scale_p * zp1
+    read_change = v0 - u0 + a1 * v1 - state.amplitude * u1
+    oscillator = model.oscillator_energy
+    oscillator_change = oscillator(a1, p1) - oscillator(state.amplitude, state.momentum)
+    return KernelState(x, new, a1, p1), MatchedWriteLedger(
+        change, excitation, (za1**2 + zp1**2) / 2, read_change, oscillator_change
+    )
+
+
+def energy_closed_step(state, model, *, phase_shift=0.0, birth_phase=None):
+    """Combine passive motion, reciprocal modulation, and a paid FIFO write."""
+    moved, before_write = oscillator_write_split(state, model, write=False)
+    written, paid = energy_matched_fifo_write(
+        moved, model, phase_shift=phase_shift, birth_phase=birth_phase
+    )
+    return written, before_write, paid
