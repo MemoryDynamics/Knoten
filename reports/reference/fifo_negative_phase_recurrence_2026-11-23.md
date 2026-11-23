@@ -212,6 +212,12 @@ Der Fernindex $+1$ der geschlossenen Spur
 und damit der Restindex $+2$ ausserhalb
 eines Minuskerns bleiben unveraendert.
 
+Der [inverse Referenzbenchmark](fifo_inverse_radial_pair_2026-11-23.md)
+liefert eine exakte Wiederkehr nach kleiner
+Symmetriebrechung, aber nur mit einem frei
+interpolierten radialen Profil. Er widerlegt
+den Ausschluss der unverformten Geometrie nicht.
+
 Die [festen Kontrollen](../../tests/test_fifo_defect_phase_threshold.py)
 pruefen alle zehn vorbereiteten Phasen beider
 Vorzeichen, einen nichtorthogonalen affinen

@@ -252,6 +252,14 @@ Vergessen und beliebigem radialem Skalarprofil. Periodische
 Orbits aus derselben affinen Ein-Schritt-Abbildung koennen
 unabhaengig von ihrer Phasenzahl keinen Minusindex tragen.
 
+Der [inverse radiale Referenzbenchmark](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_inverse_radial_pair_2026-11-23.md)
+konstruiert zwei deformierte Zehn-Phasen-Orbits beider
+Vorzeichen mit demselben freien Skalarprofil und nativem
+Vektorport. Er erfuellt exakt die Kopfgleichungen, aber
+die Interpolationswerte erzwingen keine Stabilitaet.
+Keine Herleitung des Doppel-Gauss-Kernels, keine
+spontane Bildung und kein interagierendes Paar.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne
