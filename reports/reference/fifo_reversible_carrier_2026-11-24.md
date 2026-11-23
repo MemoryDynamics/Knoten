@@ -181,3 +181,7 @@ Naechster Pruefstein: ein autonom wiederkehrender
 Takt mit endlicher Registerpraeparation. Keine Aussage
 ueber gebundene Knoten, Gravitation oder spontane
 Quantendynamik.
+
+Der [autonome Taktvergleich](fifo_carrier_clock_cycle_2026-11-24.md)
+realisiert zwei exakte Writes mit demselben vorbereiteten
+Traeger und prueft die Querinstabilitaet ohne externen Reset.

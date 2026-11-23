@@ -915,6 +915,15 @@ des vorigen Modells hat bei geometrieabhaengiger Arbeit
 keinen globalen Lift mit unveraenderter Phase und Geometrie.
 Keine hergeleitete Traegerversorgung oder Quantendynamik.
 
+Der [autonome FIFO-Taktvergleich](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_carrier_clock_cycle_2026-11-24.md)
+fuehrt denselben Traeger mit endlicher Energie ohne Reset
+zu einer vorbereiteten Zweiperiode zurueck. Fuer jede
+ungerade Laenge ab drei ist sie quer instabil. Eine
+skalare zentrale Kernel-Modulation kann den wachsenden
+Querimpuls nicht aendern, solange sie den kollinearen
+Austausch erhaelt und die Register passiv laesst.
+Keine Bindung aus Memory und keine native Zieltrajektorie.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
