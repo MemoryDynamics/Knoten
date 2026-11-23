@@ -126,3 +126,9 @@ bedingte Flaechenerhaltung und den Verlust des alten Eintrags.
 Der naechste physikalische Vergleich ist ein Speicher, der
 den alten Eintrag aufnimmt, oder ein offenes Bad mit
 definierter Energiezufuhr.
+
+Der [reversible Traegervergleich](fifo_reversible_carrier_2026-11-24.md)
+speichert den ausgeschiedenen Eintrag und bilanziert
+die Registerarbeit mit einem separaten Taktimpuls.
+Er zeigt auch die globale kanonische Grenze der
+hier verwendeten phasentreuen Aktionstranslation.

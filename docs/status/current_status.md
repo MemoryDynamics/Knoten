@@ -906,6 +906,15 @@ Das geschlossene ueberdaempfte Budget kann keine
 dauerhafte Positionsbewegung finanzieren, und der
 FIFO-Schritt verliert weiterhin den alten Eintrag.
 
+Der [reversible FIFO-Traegerschritt](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_reversible_carrier_2026-11-24.md)
+haelt den alten Eintrag, uebertraegt Impuls kanonisch und
+bilanziert einen erfolgreichen Write durch einen endlichen
+Taktimpuls. Ohne passende Traegerpraeparation schreibt er
+keine exakte Kopie. Die bedingte Oszillatorflaechenerhaltung
+des vorigen Modells hat bei geometrieabhaengiger Arbeit
+keinen globalen Lift mit unveraenderter Phase und Geometrie.
+Keine hergeleitete Traegerversorgung oder Quantendynamik.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
