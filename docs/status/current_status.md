@@ -236,6 +236,14 @@ strikt innenliegenden $+1$-Defekt. Die volle Historienableitung
 erzwingt ueber die Spur auf dem gesamten konstruierten Zweig
 eine wachsende Mode. Kein robuster Traeger und keine Gegenladung.
 
+Die [Sechsphasen-Grenze](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_defect_phase_threshold_2026-11-23.md)
+beweist fuer geschlossene vollrangige Sechs-Deposit-Spuren
+in 4D genau eine regulaere Nullstelle mit Index $+1$.
+Laengere Fenster mit denselben Phasen aendern das nicht.
+Zehn vorgegebene Deposits mit nativen Gewichten erlauben
+beide lokalen Vorzeichen, aber noch keine native Rekurrenz
+des Minusdefekts oder eine isolierte Gegenladung.
+
 Der [relative Vergleich zweier gespeicherter Rahmenwege](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_relative_frame_lift_2026-11-22.md)
 benoetigt bei gegenlaeufigen Halbdrehungen minimal drei Proben je
 Arm, aber keine gemeinsame interne 4D-Basis. Der einzelne

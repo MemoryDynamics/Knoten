@@ -197,6 +197,12 @@ Paar beider Indexvorzeichen ist daher eine andere
 Memory-Geometrie noetig. Ein Ladungsanspruch braucht
 zusaetzlich eine Quellenbilanz.
 
+Die [naechste Vorzeichenklassifikation](fifo_defect_phase_threshold_2026-11-23.md)
+schliesst Minus auf jeder periodischen 4D-Bahn mit
+hoechstens sechs Phasen aus, auch mit laengerem Fenster.
+Zehn vorgegebene Deposits liefern dagegen statische
+Zeugen fuer beide Vorzeichen.
+
 [Bacot et al., PRL 122, 104303 (2019)](https://arxiv.org/abs/1812.08825v2)
 zeigen stabile freie Zustaende mit kohaerenter Wellenerinnerung
 in einem anderen System. Die hiesige Instabilitaet ist kein
