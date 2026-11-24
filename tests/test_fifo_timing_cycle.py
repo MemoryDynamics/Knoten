@@ -44,6 +44,12 @@ def test_variable_flight_constraints_reproduce_actual_section_and_clock_energy()
         expected[:-1, 4] - expected[:-1, 3],
         atol=2e-14,
     )
+    past = (np.arange(3)[:, None] - np.arange(1, 4)) % 3
+    np.testing.assert_allclose(
+        cycle.faithful_history_rows @ phase,
+        expected[:-1, 1:4] - expected[past, 0],
+        atol=2e-14,
+    )
     np.testing.assert_allclose(_gram_energy(cycle, phase), gaps, atol=2e-14)
     # The first cyclic loss assumes the last flight preceded the prefix.
     np.testing.assert_allclose(cycle.rotor_energy_loss[1:], gaps[1:], atol=3e-14)
@@ -62,6 +68,7 @@ def test_rank_of_gram_is_not_the_rank_of_the_written_geometry():
     phase = np.vstack([q + translation, np.zeros_like(q)])
     cycle = fixed_timing_constraints(model, [np.pi, np.pi])
     np.testing.assert_allclose(cycle.closure_and_copy @ phase, 0, atol=2e-15)
+    np.testing.assert_allclose(cycle.faithful_history_rows @ phase, 0, atol=2e-15)
     np.testing.assert_allclose(
         _gram_energy(cycle, phase), cycle.rotor_energy_loss, atol=2e-15
     )

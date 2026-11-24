@@ -15,6 +15,15 @@ class TimingCycle:
     energy_forms: np.ndarray
     rotor_energy_loss: np.ndarray
 
+    @property
+    def faithful_history_rows(self):
+        """Additional constraints for the records to equal past head samples."""
+        period = len(self.returns) - 1
+        size = self.returns.shape[-1] // 2
+        ages = np.arange(1, size - 1)
+        past = (np.arange(period)[:, None] - ages) % period
+        return self.returns[:-1, 1 : size - 1] - self.returns[past, 0]
+
 
 def fixed_timing_constraints(model, durations):
     """Build linear geometry and quadratic energy constraints, not a solver.

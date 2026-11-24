@@ -187,3 +187,9 @@ Fluege und die lineare Kopfimpuls-Ableitung werden
 fuer feste Horizonte gegengeprueft. Der allgemeine
 Rangausschluss folgt aus der Algebra, nicht aus
 den ausgewaehlten Zeiten.
+
+Der [Treue-Test fuer die gesamte Historie](fifo_faithful_history_2026-11-24.md)
+unterscheidet exakte Kopie am Schnitt von exakter Aufbewahrung.
+Mit treuen historischen Proben sind mehr als zwei Schreiborte
+im beweglichen Ein-Zentrum-Modell auch bei beliebigem Takt
+ausgeschlossen. Der Test fuer driftende Eintraege bleibt offen.

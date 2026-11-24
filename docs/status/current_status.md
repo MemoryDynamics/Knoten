@@ -957,6 +957,15 @@ Bei allgemeinen Zeiten muss eine nichtkollineare
 Folge auf einer Ausnahmemenge liegen. Kein Nachweis,
 dass die autonome Dynamik diese Menge verfehlt.
 
+Der [Treue-Test fuer die FIFO-Historie](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_faithful_history_2026-11-24.md)
+fordert zusaetzlich, dass alle Speicherorte am Schnitt
+wirklich fruehere Kopfpositionen sind. Im beweglichen
+Ein-Zentrum-Modell gibt es dann fuer jedes Fenster ab
+zwei, beliebige nichtnegative Gewichte und variable
+Rotorzeiten nur hoechstens zwei Schreiborte auf einer
+absolut periodischen oder dauerhaft beschraenkten Bahn.
+Die Kopierbedingung allein schliesst Drift nicht aus.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
