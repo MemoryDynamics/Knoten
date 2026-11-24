@@ -188,3 +188,9 @@ solchen Kopplung aus dem Projektmodell. Aus der
 diskreten Geometrie allein folgt noch kein Spin,
 keine topologische Bindung und keine Wechselwirkung
 zwischen selbststabilen Knoten.
+
+Eine [resonante Rueckstellkraft fuer die freie Speichermode](fifo_restored_hexagon_2026-11-24.md)
+erhaelt das Sechseck, beseitigt aber den wachsenden
+Kopierfehler nicht. Ein Phasenausgleich beschreibt,
+welche andere Kopplung die Erhaltung der Historie
+bei nichtganzzahligen Speicherphasen erfordern wuerde.

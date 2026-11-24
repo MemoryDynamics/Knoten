@@ -183,20 +183,54 @@ class TwoCenterClock(CarrierClock):
             + 2 * (symmetric @ symmetric + antisymmetric @ antisymmetric)
         )
 
+    def _modes(self):
+        symmetric, antisymmetric = self.balance_frequencies
+        return (
+            (np.array([1, 0, 0, 0, -1]), self.frequency),
+            (np.array([0.5, -0.25, -0.5, -0.25, 0.5]), symmetric),
+            (np.array([0, 1, 0, -1, 0]), antisymmetric),
+        )
+
+    def _inverse_masses(self):
+        inverse_mass = np.full(5, 1 / self.record_mass)
+        inverse_mass[[0, -1]] = 1 / self.body_mass
+        return inverse_mass
+
     def flight(self, position, momentum, duration):
         if len(position) != 5:
             raise ValueError(
                 "the symmetric two-center reference has three history rows"
             )
-        inverse_mass = np.full(5, 1 / self.record_mass)
-        inverse_mass[[0, -1]] = 1 / self.body_mass
-        symmetric, antisymmetric = self.balance_frequencies
-        modes = (
-            (np.array([1, 0, 0, 0, -1]), self.frequency),
-            (np.array([0.5, -0.25, -0.5, -0.25, 0.5]), symmetric),
-            (np.array([0, 1, 0, -1, 0]), antisymmetric),
+        return _modal_flight(
+            position, momentum, duration, self._inverse_masses(), self._modes()
         )
-        return _modal_flight(position, momentum, duration, inverse_mass, modes)
+
+
+@dataclass(frozen=True)
+class RestoredCenterClock(TwoCenterClock):
+    """Bind the last internal free coordinate without pinning translation."""
+
+    restoring_ratio: float = 6.0
+
+    def __post_init__(self):
+        super().__post_init__()
+        if not np.isfinite(self.restoring_ratio) or self.restoring_ratio <= 0:
+            raise ValueError("restoring frequency ratio must be finite and positive")
+
+    def _restoring_mode(self):
+        ratio = self.record_mass / self.body_mass
+        normal = np.array([-0.5, 1 + ratio, -1 - 2 * ratio, 1 + ratio, -0.5])
+        return normal, self.restoring_ratio * self.frequency
+
+    def _modes(self):
+        return (*super()._modes(), self._restoring_mode())
+
+    def internal_energy(self, q, p):
+        base = super().internal_energy(q, p)
+        normal, frequency = self._restoring_mode()
+        coordinate = normal @ q
+        norm = normal @ (self._inverse_masses() * normal)
+        return base + (frequency**2 / (2 * norm)) * (coordinate @ coordinate)
 
 
 def prepared_hexagon(radius=1.0):

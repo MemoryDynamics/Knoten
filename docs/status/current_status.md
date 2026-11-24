@@ -974,6 +974,13 @@ die Anfangslage ist vorbereitet. Eine analytische
 Spurschranke belegt Querinstabilitaet; keine stabile
 Bindung, keine native Zieltrajektorie.
 
+Die [Rueckstellung der freien Speichermode](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_restored_hexagon_2026-11-24.md)
+erhaelt das treue Sechseck, wenn diese Mode je Write ganz
+zurueckkehrt. Trotz fehlender interner Drift bleibt ein
+reeller wachsender Kopierfehler zwischen Faktor $6/5$ und
+$5/4$ je Write. Ein notwendiger Phasenausgleich grenzt
+weitere Rueckkopplungen ein; kein Stabilitaetspass.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
