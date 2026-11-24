@@ -201,3 +201,7 @@ Offen ist der andere Fall aus dem Phasenausgleich:
 mehrere nichtganzzahlige Moden mit jeweils
 nichtverschwindender Ortsprojektion und
 kompensierenden Impulsaenderungen.
+
+Die [Zweiphasen-Kompensation](fifo_compensated_hexagon_2026-11-24.md)
+konstruiert genau solch einen treuen Umlauf; sein
+Querwachstum ist durch Intervallvorzeichen belegt.

@@ -988,6 +988,13 @@ Treue Historie und autonomer Takt bleiben erhalten.
 Das reziproke Polynom beweist Querinstabilitaet fuer
 jede positive Speichermasse. Keine native Zieltrajektorie.
 
+Die [Zweiphasen-Kompensation am Sechseck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_compensated_hexagon_2026-11-24.md)
+erhaelt treue Historie und autonomen Takt, obwohl zwei
+angeregte Speichermoden ausserhalb ganzer und halber
+Perioden zurueckkehren. Beim konstruierten Massenverhaeltnis
+$16/9$ beweisen Intervallvorzeichen weiterhin Querwachstum.
+Andere Kompensationen bleiben offen, keine native Zieltrajektorie.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer
