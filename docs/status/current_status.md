@@ -981,6 +981,13 @@ reeller wachsender Kopierfehler zwischen Faktor $6/5$ und
 $5/4$ je Write. Ein notwendiger Phasenausgleich grenzt
 weitere Rueckkopplungen ein; kein Stabilitaetspass.
 
+Das [Sechseck mit Impulsumkehr](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_half_turn_hexagon_2026-11-24.md)
+nutzt eine andere Speicherrichtung, die nach einer halben
+Periode ihren Impuls umkehrt und ihren Ort behaelt.
+Treue Historie und autonomer Takt bleiben erhalten.
+Das reziproke Polynom beweist Querinstabilitaet fuer
+jede positive Speichermasse. Keine native Zieltrajektorie.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

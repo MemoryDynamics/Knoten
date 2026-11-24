@@ -233,6 +233,48 @@ class RestoredCenterClock(TwoCenterClock):
         return base + (frequency**2 / (2 * norm)) * (coordinate @ coordinate)
 
 
+@dataclass(frozen=True)
+class HalfTurnCenterClock(CarrierClock):
+    """A three-record reference with one half-turn and two full-turn modes."""
+
+    record_mass: float = 1.0
+
+    def __post_init__(self):
+        super().__post_init__()
+        if not np.isfinite(self.record_mass) or self.record_mass <= 0:
+            raise ValueError("record mass must be finite and positive")
+
+    def _modal_data(self, row_count):
+        if row_count != 5:
+            raise ValueError("the half-turn reference has three history rows")
+        inverse_mass = np.full(5, 1 / self.record_mass)
+        inverse_mass[[0, -1]] = 1 / self.body_mass
+        freq = self.frequency
+        half_turn = np.array([-0.5, 1, -1, 1, -0.5])
+        symmetric = np.array([0.5, -0.25, -0.5, -0.25, 0.5])
+        tau = 1 / (1 + 6 * self.body_mass / self.record_mass)
+        modes = (
+            (np.array([1, 0, 0, 0, -1]), freq),
+            (half_turn, 3 * freq),
+            (symmetric + tau * half_turn, 12 * freq),
+            (np.array([0, 1, 0, -1, 0]), 6 * freq),
+        )
+        return inverse_mass, modes
+
+    def internal_energy(self, q, p):
+        inverse_mass, modes = self._modal_data(len(q))
+        energy = (inverse_mass @ np.square(p).sum(axis=1)) / 2
+        for normal, frequency in modes:
+            coordinate = normal @ q
+            norm = normal @ (inverse_mass * normal)
+            energy += (frequency**2 / (2 * norm)) * (coordinate @ coordinate)
+        return energy
+
+    def flight(self, position, momentum, duration):
+        inverse_mass, modes = self._modal_data(len(position))
+        return _modal_flight(position, momentum, duration, inverse_mass, modes)
+
+
 def prepared_hexagon(radius=1.0):
     """Return the normalized two-center model and its exact planar seed."""
     if not np.isfinite(radius) or radius <= 0:
@@ -245,6 +287,26 @@ def prepared_hexagon(radius=1.0):
     carrier = (1 - rotation) * pair / 2
     positions = np.r_[radius, radius * history, -radius]
     momenta = np.r_[pair - carrier, carrier * history, carrier]
+    q = np.column_stack((positions.real, positions.imag))
+    p = np.column_stack((momenta.real, momenta.imag))
+    clock = model.clock_mass * model.circumference * model.frequency / angle
+    return model, BoundaryState(q, p, clock)
+
+
+def prepared_half_turn_hexagon(radius=1.0, record_mass=1.0):
+    """Return the symmetric geometry with a nonzero modal momentum reflection."""
+    if not np.isfinite(radius) or radius <= 0:
+        raise ValueError("hexagon radius must be finite and positive")
+    model = HalfTurnCenterClock(spring=0.5, record_mass=record_mass)
+    angle = pi / 3
+    rotation = complex(cos(angle), sin(angle))
+    relative = 2j * model.body_mass * model.frequency * radius
+    impulse = relative / (0.5 + 1j * sqrt(3) * model.body_mass / model.record_mass)
+    carrier = ((1 - rotation) * relative - impulse) / (2 * rotation)
+    newest = (carrier + impulse) / rotation
+    second = (newest - impulse) / rotation
+    positions = np.r_[radius, radius * rotation ** -np.arange(1, 4), -radius]
+    momenta = np.r_[relative + carrier, newest, second, -carrier, carrier]
     q = np.column_stack((positions.real, positions.imag))
     p = np.column_stack((momenta.real, momenta.imag))
     clock = model.clock_mass * model.circumference * model.frequency / angle

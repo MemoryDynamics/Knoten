@@ -195,3 +195,8 @@ aber nicht querstabil. Offen bleibt, ob zwei
 gezielt entgegengesetzte Speicherphasen den
 Kopierfehler unterdruecken, ohne Rotor und
 Historie von aussen zu steuern.
+
+Die [Halbperioden-Konstruktion](fifo_half_turn_hexagon_2026-11-24.md)
+aendert die Kraftprofile und laesst eine Mode bei Ortswert
+null netto Impuls umkehren. Sie erhaelt die Historie, ist
+aber fuer jedes positive Massenverhaeltnis quer instabil.
