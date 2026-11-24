@@ -1,0 +1,12 @@
+{
+  "scope": "analytic real-coordinate construction; no native trajectory or stability evaluation",
+  "fifo_slots": 4,
+  "four_dimensional_orbit_period_steps": 8,
+  "quadratic_readout_period_steps": 4,
+  "internal_step_radians": "pi/4",
+  "readout_angle": "theta=2*alpha, derived for the chosen quadratic map",
+  "head_rule": "prescribed exp((pi/4)*J_z), not native Memory feedback",
+  "readout": "normalized quadratic Bloch map, not native Gaussian vector readout",
+  "source": "https://arxiv.org/html/1411.4999v2 (sections 2.1-2.2)",
+  "native_embedding": "separate analytic identity, no new candidate evaluated"
+}

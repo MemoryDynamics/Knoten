@@ -1,0 +1,3504 @@
+{
+  "method": "Median over five seeds of terminal temporal RMS / fixed linear FIFO RMS",
+  "confidence": "IQR is seed dispersion, not a confidence interval",
+  "reference_checks": [
+    {
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "energies": [
+        2.8353427779050158,
+        2.860725544526469
+      ],
+      "doubling_error": 0.0,
+      "spectral_error": 1.0058620603103918e-13
+    },
+    {
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "energies": [
+        1.4325394437944021,
+        1.4464074995006588
+      ],
+      "doubling_error": 0.0,
+      "spectral_error": 3.5638159090467525e-14
+    },
+    {
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "energies": [
+        49.014874206954595,
+        48.53864141001722
+      ],
+      "doubling_error": 2.9276581159365378e-12,
+      "spectral_error": 5.023093052614058e-12
+    }
+  ],
+  "errors": {
+    "active_relative_median": 0.0008963062896107932,
+    "active_relative_max": 0.00760755286763426,
+    "active_cloud_median": 0.0007603697838498569,
+    "active_cloud_max": 0.00983870927483288,
+    "controls_relative_median": 0.008241149518361746,
+    "controls_relative_max": 0.01979735408570038,
+    "controls_cloud_median": 0.0075999277950341,
+    "controls_cloud_max": 0.021223297248777806
+  },
+  "slices": [
+    {
+      "slice": 0,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "gain": 0.18289241496325967,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0076075528676343,
+      "relative_q1": 1.0047221140205127,
+      "relative_q3": 1.0105070057234347,
+      "cloud_ratio": 1.0098387092748329,
+      "cloud_q1": 1.0037133901412227,
+      "cloud_q3": 1.0116526725014523
+    },
+    {
+      "slice": 1,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.003683497943729,
+      "relative_q1": 1.0008351176306132,
+      "relative_q3": 1.0040557065641982,
+      "cloud_ratio": 1.004454505607677,
+      "cloud_q1": 1.0001233158344927,
+      "cloud_q3": 1.0050439414191494
+    },
+    {
+      "slice": 2,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0018570857423426,
+      "relative_q1": 0.9972507563478022,
+      "relative_q3": 1.0018694094218232,
+      "cloud_ratio": 1.001823162369274,
+      "cloud_q1": 0.9979400777539023,
+      "cloud_q3": 1.0019023965935812
+    },
+    {
+      "slice": 3,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.001155244890541,
+      "relative_q1": 0.9984664633225749,
+      "relative_q3": 1.0043452707304281,
+      "cloud_ratio": 1.0013136854546172,
+      "cloud_q1": 0.9983981039506337,
+      "cloud_q3": 1.0053407363504698
+    },
+    {
+      "slice": 4,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0000948463085424,
+      "relative_q1": 0.9979629127915856,
+      "relative_q3": 1.0004751980794933,
+      "cloud_ratio": 1.00010718473263,
+      "cloud_q1": 0.9980141356571327,
+      "cloud_q3": 1.0005646981919627
+    },
+    {
+      "slice": 5,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0000899520376731,
+      "relative_q1": 0.9971590240448429,
+      "relative_q3": 1.0004814533997572,
+      "cloud_ratio": 1.000038324419925,
+      "cloud_q1": 0.9971171718526517,
+      "cloud_q3": 1.0002956990084317
+    },
+    {
+      "slice": 6,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.9998050948625432,
+      "relative_q1": 0.9982068770916673,
+      "relative_q3": 1.0018497929838681,
+      "cloud_ratio": 0.9997276276157583,
+      "cloud_q1": 0.9985558465644371,
+      "cloud_q3": 1.0016152262597424
+    },
+    {
+      "slice": 7,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.9991036937103892,
+      "relative_q1": 0.9962984950174071,
+      "relative_q3": 0.9996689716390094,
+      "cloud_ratio": 0.9992396302161501,
+      "cloud_q1": 0.9965671766341977,
+      "cloud_q3": 0.9997669031426105
+    },
+    {
+      "slice": 8,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "gain": 0.4322911626404319,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.000014220680452,
+      "relative_q1": 0.9980999793013047,
+      "relative_q3": 1.0000977435278857,
+      "cloud_ratio": 1.0001134454581684,
+      "cloud_q1": 0.9982830073512797,
+      "cloud_q3": 1.000116494283786
+    },
+    {
+      "slice": 9,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "gain": 0.0,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0087429927427018,
+      "relative_q1": 0.9732766888135388,
+      "relative_q3": 1.0126631860426274,
+      "cloud_ratio": 1.0094494952890982,
+      "cloud_q1": 0.9794166427608874,
+      "cloud_q3": 1.0158122587104994
+    },
+    {
+      "slice": 10,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.9871669398785651,
+      "relative_q1": 0.9834873320593771,
+      "relative_q3": 1.00506151974178,
+      "cloud_ratio": 0.9925696286364942,
+      "cloud_q1": 0.9799894250373427,
+      "cloud_q3": 1.0066368645405832
+    },
+    {
+      "slice": 11,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0079106333720635,
+      "relative_q1": 0.9677990185136419,
+      "relative_q3": 1.0187788843291274,
+      "cloud_ratio": 1.009180395416096,
+      "cloud_q1": 0.9663331004954825,
+      "cloud_q3": 1.018474893394316
+    },
+    {
+      "slice": 12,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.9914283343353401,
+      "relative_q1": 0.9861818286385053,
+      "relative_q3": 1.0188431668475975,
+      "cloud_ratio": 0.9922305157734376,
+      "cloud_q1": 0.9873186849822997,
+      "cloud_q3": 1.016122979662683
+    },
+    {
+      "slice": 13,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.9955724173677641,
+      "relative_q1": 0.990216092102565,
+      "relative_q3": 0.9971386448190092,
+      "cloud_ratio": 0.993694470796206,
+      "cloud_q1": 0.9865076774149288,
+      "cloud_q3": 0.9959222655805356
+    },
+    {
+      "slice": 14,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 0.998844329026739,
+      "relative_q1": 0.9910282458835176,
+      "relative_q3": 1.0018894080993448,
+      "cloud_ratio": 0.9982705769169915,
+      "cloud_q1": 0.9895903113565859,
+      "cloud_q3": 1.002085290168229
+    },
+    {
+      "slice": 15,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0019242808608524,
+      "relative_q1": 0.9929491818843393,
+      "relative_q3": 1.0090905593614652,
+      "cloud_ratio": 1.0026744157132632,
+      "cloud_q1": 0.9928954947406579,
+      "cloud_q3": 1.0094821916269743
+    },
+    {
+      "slice": 16,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "gain": 0.0,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "count": 10001,
+      "stride": 1,
+      "relative_ratio": 1.0197973540857004,
+      "relative_q1": 0.9822026260663032,
+      "relative_q3": 1.022074695525769,
+      "cloud_ratio": 1.0212232972487778,
+      "cloud_q1": 0.9825192891008927,
+      "cloud_q3": 1.0227414651028495
+    }
+  ],
+  "seeds": [
+    {
+      "key": "slice00_seed1",
+      "slice": 0,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "a86b98163025284ccf854393fe9e3523f795330625f67b60451030d37508afa2",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00029471533981007713,
+      "observed_cloud": 0.00029636721393967117,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "half_window_ratios": {
+        "relative": [
+          0.9935691894292612,
+          1.0271688624486488
+        ],
+        "cloud": [
+          0.9943403785624128,
+          1.0286770225815713
+        ]
+      },
+      "relative_ratio": 1.0105070057234347,
+      "cloud_ratio": 1.0116526725014523
+    },
+    {
+      "key": "slice00_seed2",
+      "slice": 0,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "ae09fdbd1f5462e4a61d67d0c76d51dacd52661b37f77c93f66922bb6be8ed26",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00029302817058281326,
+      "observed_cloud": 0.00029404137320624665,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "half_window_ratios": {
+        "relative": [
+          0.9964488218119145,
+          1.012929469197005
+        ],
+        "cloud": [
+          0.9957480675814311,
+          1.011617571158444
+        ]
+      },
+      "relative_ratio": 1.0047221140205127,
+      "cloud_ratio": 1.0037133901412227
+    },
+    {
+      "key": "slice00_seed3",
+      "slice": 0,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "98cfd4bed77144830b2138c29869d888e032a8d6af8d1f6d08b1ba70b1a706aa",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002938697115968924,
+      "observed_cloud": 0.00029583580702277656,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "half_window_ratios": {
+        "relative": [
+          1.013895581033339,
+          1.0012787672267616
+        ],
+        "cloud": [
+          1.0150193945332797,
+          1.004630264420951
+        ]
+      },
+      "relative_ratio": 1.0076075528676343,
+      "cloud_ratio": 1.0098387092748329
+    },
+    {
+      "key": "slice00_seed4",
+      "slice": 0,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "46193a4d68a246203e81c4b494671ff22d5bc62044f48c79b79fc3292e4501be",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002958232961268071,
+      "observed_cloud": 0.000297260449001311,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "half_window_ratios": {
+        "relative": [
+          1.0170989291586132,
+          1.0115046330723616
+        ],
+        "cloud": [
+          1.0184691530422807,
+          1.010919529254385
+        ]
+      },
+      "relative_ratio": 1.0143059176525278,
+      "cloud_ratio": 1.014701739991974
+    },
+    {
+      "key": "slice00_seed5",
+      "slice": 0,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.18289241496325967,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "f87afd1a0456b9e0faeee6a34e53050d75ffa25516e822df4181dcb0c7adcb19",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002861203344160118,
+      "observed_cloud": 0.00028746209350038587,
+      "predicted_relative": 0.0002916509614884725,
+      "predicted_cloud": 0.00029295352248401806,
+      "half_window_ratios": {
+        "relative": [
+          0.9690240843404313,
+          0.9929066061614362
+        ],
+        "cloud": [
+          0.9702095859130413,
+          0.9921795284449866
+        ]
+      },
+      "relative_ratio": 0.9810368289402012,
+      "cloud_ratio": 0.9812549480986978
+    },
+    {
+      "key": "slice01_seed1",
+      "slice": 1,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_35_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "f23beae37c9a14d87cd38d263270742634858536fa315de6521994d13b4f7294",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002087841912171622,
+      "observed_cloud": 0.00020993035242203626,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "half_window_ratios": {
+        "relative": [
+          0.9992431115420126,
+          1.0149486804115577
+        ],
+        "cloud": [
+          1.0001028717923637,
+          1.015416909862831
+        ]
+      },
+      "relative_ratio": 1.007125726199774,
+      "cloud_ratio": 1.0077882140451615
+    },
+    {
+      "key": "slice01_seed2",
+      "slice": 1,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_35_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "15ce8489edb3c13ae57f554c343d8812a815889b70c81898c1f67a40fcf0a671",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00020748010416208137,
+      "observed_cloud": 0.00020833369276654576,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "half_window_ratios": {
+        "relative": [
+          0.9983873358859232,
+          1.0032774150951569
+        ],
+        "cloud": [
+          0.9978120909776506,
+          1.0024296725386599
+        ]
+      },
+      "relative_ratio": 1.0008351176306132,
+      "cloud_ratio": 1.0001233158344927
+    },
+    {
+      "key": "slice01_seed3",
+      "slice": 1,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_35_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "f195a91628bcb9f3141a6a8b31ef8e5c6af7ecc36a12e6816337591d84a42d0a",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002080705932782683,
+      "observed_cloud": 0.00020935869846588567,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "half_window_ratios": {
+        "relative": [
+          1.0128546512271561,
+          0.9944259071346349
+        ],
+        "cloud": [
+          1.0134459313767819,
+          0.9965694158844116
+        ]
+      },
+      "relative_ratio": 1.003683497943729,
+      "cloud_ratio": 1.0050439414191494
+    },
+    {
+      "key": "slice01_seed4",
+      "slice": 1,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_35_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "0a215fc5291137b8de756967b70feb714d4f40440c7f3912c7a9584e994df548",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00020814775472273057,
+      "observed_cloud": 0.0002092359142678686,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "half_window_ratios": {
+        "relative": [
+          1.0072260516935363,
+          1.000874682098936
+        ],
+        "cloud": [
+          1.008121409143435,
+          1.0007734289605381
+        ]
+      },
+      "relative_ratio": 1.0040557065641982,
+      "cloud_ratio": 1.004454505607677
+    },
+    {
+      "key": "slice01_seed5",
+      "slice": 1,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_35_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "8af8636eb7a7c3ef36ad54630530c319f0227862e9012bedda89ec9419e2c5da",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00020604604673034058,
+      "observed_cloud": 0.0002070988714666724,
+      "predicted_relative": 0.00020730697844942913,
+      "predicted_cloud": 0.00020830800509106644,
+      "half_window_ratios": {
+        "relative": [
+          0.9900383905850018,
+          0.9977824246181772
+        ],
+        "cloud": [
+          0.9900924368776992,
+          0.9982824209269133
+        ]
+      },
+      "relative_ratio": 0.9939175625995815,
+      "cloud_ratio": 0.9941954529118292
+    },
+    {
+      "key": "slice02_seed1",
+      "slice": 2,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "d139f21fc1c8d2198dfcc696cddca6052448285769c4dcd6dc4e1b749e356404",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00023982497414111556,
+      "observed_cloud": 0.00024097189700812897,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "half_window_ratios": {
+        "relative": [
+          0.9985407365976097,
+          1.0051877218548517
+        ],
+        "cloud": [
+          0.9984796548904176,
+          1.0051562135780407
+        ]
+      },
+      "relative_ratio": 1.0018694094218232,
+      "cloud_ratio": 1.001823162369274
+    },
+    {
+      "key": "slice02_seed2",
+      "slice": 2,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "972c9bc08b91dcbda372cbb007f420d778345b0d7ef9558ee376a677bbfb1b9a",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002402047932355724,
+      "observed_cloud": 0.00024127892356468563,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "half_window_ratios": {
+        "relative": [
+          0.999723456191504,
+          1.0071756620973462
+        ],
+        "cloud": [
+          1.0006712856371112,
+          1.0055225399085888
+        ]
+      },
+      "relative_ratio": 1.0034561046073993,
+      "cloud_ratio": 1.0030996029818098
+    },
+    {
+      "key": "slice02_seed3",
+      "slice": 2,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "55e147b4ecee44a0d2c79365514fb0da77c71cea7d83f504a14cada0a17a0f03",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00023858510212214153,
+      "observed_cloud": 0.00024003788559657778,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "half_window_ratios": {
+        "relative": [
+          1.0037315645593332,
+          0.9895965883055075
+        ],
+        "cloud": [
+          1.0064187590683003,
+          0.989387022406494
+        ]
+      },
+      "relative_ratio": 0.9966898410642875,
+      "cloud_ratio": 0.9979400777539023
+    },
+    {
+      "key": "slice02_seed4",
+      "slice": 2,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "0ae3cb3b71b1fb9b25d9932563461977f3a3db9d8b98c67c411da69cca820b2a",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00023871937260899263,
+      "observed_cloud": 0.0002398720941445889,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "half_window_ratios": {
+        "relative": [
+          1.0018558454787088,
+          0.9926233755759797
+        ],
+        "cloud": [
+          1.0023746246210588,
+          0.9920995041698131
+        ]
+      },
+      "relative_ratio": 0.9972507563478022,
+      "cloud_ratio": 0.997250811832077
+    },
+    {
+      "key": "slice02_seed5",
+      "slice": 2,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "28f09a7f1865e3853f9e2117ddbfe68aef7acbcc87828e373f0f3f494cb8d8b2",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00023982202412978177,
+      "observed_cloud": 0.00024099095548277445,
+      "predicted_relative": 0.00023937747962533167,
+      "predicted_cloud": 0.00024053336562736234,
+      "half_window_ratios": {
+        "relative": [
+          0.9929334201926528,
+          1.0107037269830677
+        ],
+        "cloud": [
+          0.9937554614610479,
+          1.0099852271767575
+        ]
+      },
+      "relative_ratio": 1.0018570857423426,
+      "cloud_ratio": 1.0019023965935812
+    },
+    {
+      "key": "slice03_seed1",
+      "slice": 3,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "122891f9a0ab123cbb3b3e14616a76fd5cfc34a34f3a5ba911651ac97cfaa6db",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002672217346314991,
+      "observed_cloud": 0.0002684936891405906,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "half_window_ratios": {
+        "relative": [
+          1.0008660191422372,
+          0.9960606452341009
+        ],
+        "cloud": [
+          1.000947497642562,
+          0.9958416718955484
+        ]
+      },
+      "relative_ratio": 0.9984664633225749,
+      "cloud_ratio": 0.9983981039506337
+    },
+    {
+      "key": "slice03_seed2",
+      "slice": 3,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "9c1990882cd39db06bf21ae5d165e53001ca378f2bf3b43004008e1c4f58a920",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002694764302500223,
+      "observed_cloud": 0.0002707409803955164,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "half_window_ratios": {
+        "relative": [
+          1.008417354851393,
+          1.0053621617048725
+        ],
+        "cloud": [
+          1.0082522052910052,
+          1.0052546490133962
+        ]
+      },
+      "relative_ratio": 1.0068910698135112,
+      "cloud_ratio": 1.0067546926478372
+    },
+    {
+      "key": "slice03_seed3",
+      "slice": 3,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "bce2fb9e0f5c8e11930806ef8ac17a279ee4f7440739e0e19a5c181e7aba1623",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00026653742338528415,
+      "observed_cloud": 0.00026783309760181653,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "half_window_ratios": {
+        "relative": [
+          0.9967966121265011,
+          0.9950215267763874
+        ],
+        "cloud": [
+          0.997992179344689,
+          0.9938865462667462
+        ]
+      },
+      "relative_ratio": 0.9959095536806167,
+      "cloud_ratio": 0.9959416836827721
+    },
+    {
+      "key": "slice03_seed4",
+      "slice": 3,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "c2934efb091cc5b135ce5261e937ed2adfb6d0cc4e918c28a7ffc4fe47fd215a",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00026879509254665974,
+      "observed_cloud": 0.0002703607329360495,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "half_window_ratios": {
+        "relative": [
+          1.0095897370301756,
+          0.999072217688811
+        ],
+        "cloud": [
+          1.0099739940686578,
+          1.0006850933944733
+        ]
+      },
+      "relative_ratio": 1.0043452707304281,
+      "cloud_ratio": 1.0053407363504698
+    },
+    {
+      "key": "slice03_seed5",
+      "slice": 3,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "22b43dc42546670c85048dc02f7c9e1d99796728ef935562c354951cb4d1d5d2",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0002679413390458989,
+      "observed_cloud": 0.00026927776037519836,
+      "predicted_relative": 0.00026763215836240627,
+      "predicted_cloud": 0.00026892447819979674,
+      "half_window_ratios": {
+        "relative": [
+          0.9973042721596896,
+          1.0049922271730911
+        ],
+        "cloud": [
+          0.9966001043282023,
+          1.0060061177130977
+        ]
+      },
+      "relative_ratio": 1.001155244890541,
+      "cloud_ratio": 1.0013136854546172
+    },
+    {
+      "key": "slice04_seed1",
+      "slice": 4,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "7b880dbe97c50ade4ae881b6f7e5d48a3d007d4e71ec77f07b54e17578e06bb2",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00031669667494089825,
+      "observed_cloud": 0.00031822983945633025,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "half_window_ratios": {
+        "relative": [
+          1.0001992534896633,
+          0.9999904073417505
+        ],
+        "cloud": [
+          0.999674835005131,
+          1.0005394340485336
+        ]
+      },
+      "relative_ratio": 1.0000948463085424,
+      "cloud_ratio": 1.00010718473263
+    },
+    {
+      "key": "slice04_seed2",
+      "slice": 4,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "8c8891c86a2a66b66a7f8c61b43e2d097283f986e2db071f16809bf007a6d44f",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0003140263448662444,
+      "observed_cloud": 0.0003156346435381698,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "half_window_ratios": {
+        "relative": [
+          0.994348793261924,
+          0.9889678177291824
+        ],
+        "cloud": [
+          0.9949780614157042,
+          0.9889144887596698
+        ]
+      },
+      "relative_ratio": 0.9916622243174766,
+      "cloud_ratio": 0.9919512114022372
+    },
+    {
+      "key": "slice04_seed3",
+      "slice": 4,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "fc0593af1b7ed68e41ce28dce7eb95418ec8fcc643d4132e2a51ae9bb351af61",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00031681711965832947,
+      "observed_cloud": 0.00031837541828721473,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "half_window_ratios": {
+        "relative": [
+          1.0020816698156532,
+          0.9988658205953754
+        ],
+        "cloud": [
+          1.0017447015792833,
+          0.9993830651193787
+        ]
+      },
+      "relative_ratio": 1.0004751980794933,
+      "cloud_ratio": 1.0005646981919627
+    },
+    {
+      "key": "slice04_seed4",
+      "slice": 4,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "d8b81d633a57285a2e56899b5e6d4c736bef3b3d1538c28ed3a709b828e9028a",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0003160215627167853,
+      "observed_cloud": 0.00031756384017001595,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "half_window_ratios": {
+        "relative": [
+          0.9968991984822455,
+          0.999025706913022
+        ],
+        "cloud": [
+          0.9971714330466348,
+          0.9988562956342846
+        ]
+      },
+      "relative_ratio": 0.9979629127915856,
+      "cloud_ratio": 0.9980141356571327
+    },
+    {
+      "key": "slice04_seed5",
+      "slice": 4,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "0610ac1de2c4abbfb7b1492f1118cee9686059d1d7e248aa52541ad1978c7066",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0003180859335301726,
+      "observed_cloud": 0.00031970461456540077,
+      "predicted_relative": 0.0003166666402790293,
+      "predicted_cloud": 0.0003181957337316862,
+      "half_window_ratios": {
+        "relative": [
+          1.0119253351505444,
+          0.9969815478887984
+        ],
+        "cloud": [
+          1.0101877375082633,
+          0.9992654659424852
+        ]
+      },
+      "relative_ratio": 1.0044819790613015,
+      "cloud_ratio": 1.004741989517015
+    },
+    {
+      "key": "slice05_seed1",
+      "slice": 5,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "15f1ec418d2d2c52eccb3ead476f7445b721afddf18eab77767baa2746ad4150",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00037986998844739166,
+      "observed_cloud": 0.00038157609546558347,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          1.0031707232730103,
+          1.0041263727820529
+        ],
+        "cloud": [
+          1.0031467783731858,
+          1.0034763988102986
+        ]
+      },
+      "relative_ratio": 1.003648613993082,
+      "cloud_ratio": 1.0033115856487453
+    },
+    {
+      "key": "slice05_seed2",
+      "slice": 5,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "979ce1d226fb77189b9af6f6bbfa46514e7feaaadc54e8021e5568ce8dd91190",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0003758575541735439,
+      "observed_cloud": 0.000377481779813078,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          0.9940885881606821,
+          0.992004957584245
+        ],
+        "cloud": [
+          0.9931781753513584,
+          0.9919133781052997
+        ]
+      },
+      "relative_ratio": 0.9930474235327745,
+      "cloud_ratio": 0.9925460414276129
+    },
+    {
+      "key": "slice05_seed3",
+      "slice": 5,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "45edf960e9b325dff7733965fbfa4bfffb61061164ffb770a692356602aa2376",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00037852307394261193,
+      "observed_cloud": 0.0003803312197390418,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          0.9987080022461056,
+          1.0014702706674359
+        ],
+        "cloud": [
+          0.9990148858145536,
+          1.0010609210831287
+        ]
+      },
+      "relative_ratio": 1.0000899520376731,
+      "cloud_ratio": 1.000038324419925
+    },
+    {
+      "key": "slice05_seed4",
+      "slice": 5,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "4bc0287193b98a41c6d972bc3bb707bf73b1058b8dde5fe26f324242794eff4d",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00037867125291264045,
+      "observed_cloud": 0.00038042910357887703,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          1.0003641288939513,
+          1.000598787609535
+        ],
+        "cloud": [
+          0.9996351676901156,
+          1.0009559264173835
+        ]
+      },
+      "relative_ratio": 1.0004814533997572,
+      "cloud_ratio": 1.0002956990084317
+    },
+    {
+      "key": "slice05_seed5",
+      "slice": 5,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "475b2ef1ec493a78302a0f254f78730c5e81f0f0fa55ca766066af8ba3262be8",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0003774137498552235,
+      "observed_cloud": 0.00037922025679709725,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          0.99882389532581,
+          0.9954910346072308
+        ],
+        "cloud": [
+          0.9988306184572504,
+          0.9954004322126725
+        ]
+      },
+      "relative_ratio": 0.9971590240448429,
+      "cloud_ratio": 0.9971171718526517
+    },
+    {
+      "key": "slice06_seed1",
+      "slice": 6,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "cad898724e7b5668bb7f0f0db2be84bcf3b49d6c8363e44b1cabfb412d918b9e",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00043077007725783215,
+      "observed_cloud": 0.0004330014666940905,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "half_window_ratios": {
+        "relative": [
+          0.9993341538265911,
+          0.9970781000431124
+        ],
+        "cloud": [
+          1.0008760750245163,
+          0.9962297486181528
+        ]
+      },
+      "relative_ratio": 0.9982068770916673,
+      "cloud_ratio": 0.9985558465644371
+    },
+    {
+      "key": "slice06_seed2",
+      "slice": 6,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "95b475d1523a12e6d830929c8719cdbdff1a428f1c2ae1d7684b1dcfdb87cb1d",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0004323421553473953,
+      "observed_cloud": 0.0004343280984491386,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "half_window_ratios": {
+        "relative": [
+          0.9987151423699439,
+          1.0049752902529705
+        ],
+        "cloud": [
+          0.9983781989413135,
+          1.0048424700598992
+        ]
+      },
+      "relative_ratio": 1.0018497929838681,
+      "cloud_ratio": 1.0016152262597424
+    },
+    {
+      "key": "slice06_seed3",
+      "slice": 6,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "d55d15d11739d7fcb375cc85dd47d19e21bc29d0326c583df616c3cf96232fb8",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00043071614007066035,
+      "observed_cloud": 0.00043287173431680754,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "half_window_ratios": {
+        "relative": [
+          1.0018866558788657,
+          0.9942618001785961
+        ],
+        "cloud": [
+          1.0023255049757627,
+          0.9941703586511307
+        ]
+      },
+      "relative_ratio": 0.9980818905292101,
+      "cloud_ratio": 0.9982566673842517
+    },
+    {
+      "key": "slice06_seed4",
+      "slice": 6,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "11e960b12c83a6956361d5d87f5577ea8803275acabc2818193a0e20e84beb5f",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0004325123374686488,
+      "observed_cloud": 0.00043454951043884945,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "half_window_ratios": {
+        "relative": [
+          1.000673410273927,
+          1.0038127441817413
+        ],
+        "cloud": [
+          1.0008967149732897,
+          1.0033536850404738
+        ]
+      },
+      "relative_ratio": 1.0022441494463101,
+      "cloud_ratio": 1.0021258301579536
+    },
+    {
+      "key": "slice06_seed5",
+      "slice": 6,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "e4dd11a878cd2a281ccd456e9031cc55142d3b11f4ec6304240fbc594d693096",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0004314597783693301,
+      "observed_cloud": 0.00043350958340645276,
+      "predicted_relative": 0.00043154388849023494,
+      "predicted_cloud": 0.0004336276916146911,
+      "half_window_ratios": {
+        "relative": [
+          0.9987955419801703,
+          1.0008138309822374
+        ],
+        "cloud": [
+          0.9983417967182022,
+          1.0011118167114026
+        ]
+      },
+      "relative_ratio": 0.9998050948625432,
+      "cloud_ratio": 0.9997276276157583
+    },
+    {
+      "key": "slice07_seed1",
+      "slice": 7,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_baseline_seed1_steps30000000.json",
+      "source_sha256": "f9e5d00ebee778062315a4750442a975f7e97e53e951ef9f452f6a9e548e71cc",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0005363089905427306,
+      "observed_cloud": 0.0005388418330197069,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "half_window_ratios": {
+        "relative": [
+          1.0016891218553643,
+          1.0022142560576919
+        ],
+        "cloud": [
+          1.001280825348995,
+          1.002410996613724
+        ]
+      },
+      "relative_ratio": 1.0019516971060396,
+      "cloud_ratio": 1.0018460138451506
+    },
+    {
+      "key": "slice07_seed2",
+      "slice": 7,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_baseline_seed2_steps30000000.json",
+      "source_sha256": "d39cd87edd38ba2cf311758ede14db147c8cdd13c330719d56f21557dfd87da9",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0005332216268340885,
+      "observed_cloud": 0.000535768825941894,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "half_window_ratios": {
+        "relative": [
+          0.9944585689877073,
+          0.9979063395103668
+        ],
+        "cloud": [
+          0.9944616223852736,
+          0.9978009143848878
+        ]
+      },
+      "relative_ratio": 0.9961837734612632,
+      "cloud_ratio": 0.9961325007087045
+    },
+    {
+      "key": "slice07_seed3",
+      "slice": 7,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_baseline_seed3_steps30000000.json",
+      "source_sha256": "28dd6c53c4f722519e85b74b379ef90cde69c113e2a6452483320861b6cea2f6",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0005332830331894515,
+      "observed_cloud": 0.0005360026159347926,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "half_window_ratios": {
+        "relative": [
+          0.9966379977321815,
+          0.9959588086375956
+        ],
+        "cloud": [
+          0.9971240034409252,
+          0.9960099270705667
+        ]
+      },
+      "relative_ratio": 0.9962984950174071,
+      "cloud_ratio": 0.9965671766341977
+    },
+    {
+      "key": "slice07_seed4",
+      "slice": 7,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_baseline_seed4_steps30000000.json",
+      "source_sha256": "189625468b78251414a46e752b3d866355de9a295da47c2e0481ca9511d27042",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0005347845559511279,
+      "observed_cloud": 0.0005374399923048721,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "half_window_ratios": {
+        "relative": [
+          0.9976168071304877,
+          1.0005886674761217
+        ],
+        "cloud": [
+          0.9976602395556302,
+          1.0008168435712006
+        ]
+      },
+      "relative_ratio": 0.9991036937103892,
+      "cloud_ratio": 0.9992396302161501
+    },
+    {
+      "key": "slice07_seed5",
+      "slice": 7,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_baseline_seed5_steps30000000.json",
+      "source_sha256": "1ca58266f5249ac8d3cb097fbd77925b834b3ab7113accf97aa7bbb362a46ae6",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0005350871290553503,
+      "observed_cloud": 0.0005377235854981065,
+      "predicted_relative": 0.0005352643167248125,
+      "predicted_cloud": 0.0005378489563995935,
+      "half_window_ratios": {
+        "relative": [
+          0.9995543675752209,
+          0.9997835854827348
+        ],
+        "cloud": [
+          0.9995997719901873,
+          0.9999340397782189
+        ]
+      },
+      "relative_ratio": 0.9996689716390094,
+      "cloud_ratio": 0.9997669031426105
+    },
+    {
+      "key": "slice08_seed1",
+      "slice": 8,
+      "seed": 1,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_baseline_seed1_steps300000000.json",
+      "source_sha256": "b017ecea5b63728402c0250231b49ccf5afe9f060d28daddc2cea08f9c3e09f2",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0003784944104548219,
+      "observed_cloud": 0.00038036094903935274,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          1.0016799204452005,
+          0.9983454077917466
+        ],
+        "cloud": [
+          1.0020251964852565,
+          0.9982037595537359
+        ]
+      },
+      "relative_ratio": 1.000014220680452,
+      "cloud_ratio": 1.000116494283786
+    },
+    {
+      "key": "slice08_seed2",
+      "slice": 8,
+      "seed": 2,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_baseline_seed2_steps300000000.json",
+      "source_sha256": "c5686f6f34c2e7a269bf01a9716673fa2194b541f12eceab3cf429bfbcad42cf",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0003785260229361698,
+      "observed_cloud": 0.00038035978952022473,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          0.9962838653745912,
+          1.003897891025099
+        ],
+        "cloud": [
+          0.9967135655381704,
+          1.0035024831254862
+        ]
+      },
+      "relative_ratio": 1.0000977435278857,
+      "cloud_ratio": 1.0001134454581684
+    },
+    {
+      "key": "slice08_seed3",
+      "slice": 8,
+      "seed": 3,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_baseline_seed3_steps300000000.json",
+      "source_sha256": "0742687416ce79c42c8fb327ff370e0f35522579660f7e8a030274f5b6dee5d6",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.00037776989109571156,
+      "observed_cloud": 0.00037966364344176957,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          1.0077318989912183,
+          0.9883722442054763
+        ],
+        "cloud": [
+          1.0073216714130444,
+          0.9891599214671382
+        ]
+      },
+      "relative_ratio": 0.9980999793013047,
+      "cloud_ratio": 0.9982830073512797
+    },
+    {
+      "key": "slice08_seed4",
+      "slice": 8,
+      "seed": 4,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_baseline_seed4_steps300000000.json",
+      "source_sha256": "ecda30f9456bc7f086880ff11f1ceb60c6939597994e49caaef7c69c46cc1e23",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.00038012559460935496,
+      "observed_cloud": 0.00038204782208504137,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          1.005752070808055,
+          1.0028935034569342
+        ],
+        "cloud": [
+          1.0067971729612386,
+          1.0023012228600157
+        ]
+      },
+      "relative_ratio": 1.0043239470754113,
+      "cloud_ratio": 1.004551937935446
+    },
+    {
+      "key": "slice08_seed5",
+      "slice": 8,
+      "seed": 5,
+      "condition": "baseline",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.4322911626404319,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_baseline_seed5_steps300000000.json",
+      "source_sha256": "ff99151bdea23a31e06e9d8ee7a09da79be8b7e2dbab3350d485a54025567803",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.00037712372334879486,
+      "observed_cloud": 0.00037897081490183363,
+      "predicted_relative": 0.0003784890280832989,
+      "predicted_cloud": 0.0003803166443242603,
+      "half_window_ratios": {
+        "relative": [
+          0.9962923129701823,
+          0.9964931959979282
+        ],
+        "cloud": [
+          0.9970383493156916,
+          0.9958837854819186
+        ]
+      },
+      "relative_ratio": 0.9963927495034187,
+      "cloud_ratio": 0.9964612923401817
+    },
+    {
+      "key": "slice09_seed1",
+      "slice": 9,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "b55282a3b24e4cfcafa902b0f62c94211d8616fd685b30ff1eb3647f2413a43e",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0012279751991603229,
+      "observed_cloud": 0.0012257951115576065,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "half_window_ratios": {
+        "relative": [
+          0.9765788927237586,
+          1.0475120424593591
+        ],
+        "cloud": [
+          0.9834554880535241,
+          1.0471758834503642
+        ]
+      },
+      "relative_ratio": 1.0126631860426274,
+      "cloud_ratio": 1.0158122587104994
+    },
+    {
+      "key": "slice09_seed2",
+      "slice": 9,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "d4bd8b564e9336b12107db0ef79074ad19a0d49b19248542797a5a0327d0cde7",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0013058067264911574,
+      "observed_cloud": 0.0012946542948540894,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "half_window_ratios": {
+        "relative": [
+          1.0486854680756337,
+          1.1042975862546554
+        ],
+        "cloud": [
+          1.0441241457487505,
+          1.1008820008677471
+        ]
+      },
+      "relative_ratio": 1.0768478067868419,
+      "cloud_ratio": 1.0728756307682312
+    },
+    {
+      "key": "slice09_seed3",
+      "slice": 9,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "19845e3d5240eb324588018c697673fcf483917fe87358c4e7f556081664f847",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.001180214361750873,
+      "observed_cloud": 0.0011818760037395966,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "half_window_ratios": {
+        "relative": [
+          0.9934177251836579,
+          0.9527057924741898
+        ],
+        "cloud": [
+          1.0062223434405981,
+          0.9518507606269282
+        ]
+      },
+      "relative_ratio": 0.9732766888135388,
+      "cloud_ratio": 0.9794166427608874
+    },
+    {
+      "key": "slice09_seed4",
+      "slice": 9,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "998337e98d37bad40e33025c3db6f7bc496b4c257d1867caa6a4349a72207f07",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0012232214960391152,
+      "observed_cloud": 0.0012181170743700536,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "half_window_ratios": {
+        "relative": [
+          1.0083468615941171,
+          1.0091390475720996
+        ],
+        "cloud": [
+          1.0033736467827699,
+          1.0154901958868787
+        ]
+      },
+      "relative_ratio": 1.0087429927427018,
+      "cloud_ratio": 1.0094494952890982
+    },
+    {
+      "key": "slice09_seed5",
+      "slice": 9,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 3,
+      "steps": 30000000,
+      "amplitude_att": 20.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/dynamic_center_trace_q3_Aatt_20_N30M_seed1-5_eps1em4_rerun_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "145e2bfa2d373269c5daf5bee448854021f931c8846eef728a4bcd646a9df7cb",
+      "source_revision": "4e11415",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0011427018830298566,
+      "observed_cloud": 0.0011379378145581342,
+      "predicted_relative": 0.0012126195719221417,
+      "predicted_cloud": 0.0012067142339015136,
+      "half_window_ratios": {
+        "relative": [
+          0.9411538979078061,
+          0.9435280695449422
+        ],
+        "cloud": [
+          0.9429678583131904,
+          0.943042575977766
+        ]
+      },
+      "relative_ratio": 0.9423416127273474,
+      "cloud_ratio": 0.9430052141499868
+    },
+    {
+      "key": "slice10_seed1",
+      "slice": 10,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "196cbd7490a2bcdb7f26f2e9da47f895cff11a75973f5eae054af1de72abc08e",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0013770912289422154,
+      "observed_cloud": 0.0013655109689598354,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "half_window_ratios": {
+        "relative": [
+          1.0551675943820367,
+          0.9061383923797652
+        ],
+        "cloud": [
+          1.0451159468620892,
+          0.9102004319768044
+        ]
+      },
+      "relative_ratio": 0.9834873320593771,
+      "cloud_ratio": 0.9799894250373427
+    },
+    {
+      "key": "slice10_seed2",
+      "slice": 10,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "aef53f63ce7a9fe0dd823342ac3b725e5c049db0eff2f1fe3bb76afeeea1f390",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0012894645156290342,
+      "observed_cloud": 0.0012833999128693814,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "half_window_ratios": {
+        "relative": [
+          0.8990559976665643,
+          0.9422543009604146
+        ],
+        "cloud": [
+          0.9046911193209536,
+          0.9371473670627758
+        ]
+      },
+      "relative_ratio": 0.9209063202264067,
+      "cloud_ratio": 0.9210605929177524
+    },
+    {
+      "key": "slice10_seed3",
+      "slice": 10,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "693c1534a7eb93419cbadf7f9c7c8cce68b0bc85846b4f73fc2e4422d7d0e58d",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0013822434617047265,
+      "observed_cloud": 0.0013830401438340795,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "half_window_ratios": {
+        "relative": [
+          1.0221494189884481,
+          0.9508909724392639
+        ],
+        "cloud": [
+          1.0334571254747416,
+          0.9499151211324937
+        ]
+      },
+      "relative_ratio": 0.9871669398785651,
+      "cloud_ratio": 0.9925696286364942
+    },
+    {
+      "key": "slice10_seed4",
+      "slice": 10,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "70b4e18cb8e32cafd9d098835e0a6229db9e437f816bf9d642ac8def7d7d7963",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0014072996756202012,
+      "observed_cloud": 0.0014026413399686676,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "half_window_ratios": {
+        "relative": [
+          0.9810442063154879,
+          1.0285227865102802
+        ],
+        "cloud": [
+          0.9808553367403325,
+          1.0317793420151857
+        ]
+      },
+      "relative_ratio": 1.00506151974178,
+      "cloud_ratio": 1.0066368645405832
+    },
+    {
+      "key": "slice10_seed5",
+      "slice": 10,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 4,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d4_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "306e2692c40531c3352b5c16ecae3979e3c7bf256a3408978adb48ec909599d8",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0014733964080355575,
+      "observed_cloud": 0.0014645768167812385,
+      "predicted_relative": 0.0014002124725477144,
+      "predicted_cloud": 0.0013933935755559837,
+      "half_window_ratios": {
+        "relative": [
+          1.0706527026664205,
+          1.0335491023666077
+        ],
+        "cloud": [
+          1.0697814137155734,
+          1.0320486289809323
+        ]
+      },
+      "relative_ratio": 1.0522663073802532,
+      "cloud_ratio": 1.0510862418730844
+    },
+    {
+      "key": "slice11_seed1",
+      "slice": 11,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "59fd1f0a7035d77bc833b7857d1469ee8ea3de4def3315b4275146174c3d1f2f",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0015150749779054573,
+      "observed_cloud": 0.001505413014749936,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "half_window_ratios": {
+        "relative": [
+          0.9805379249756815,
+          0.9548875819801542
+        ],
+        "cloud": [
+          0.9867699214290033,
+          0.9454504013146744
+        ]
+      },
+      "relative_ratio": 0.9677990185136419,
+      "cloud_ratio": 0.9663331004954825
+    },
+    {
+      "key": "slice11_seed2",
+      "slice": 11,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "fa8ef853f6f30d797d6d46861c10a6e40e4fe4f38996ec8e79040a18da277905",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0015778691147384435,
+      "observed_cloud": 0.0015721631606232863,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "half_window_ratios": {
+        "relative": [
+          1.0310419394192116,
+          0.984231058319348
+        ],
+        "cloud": [
+          1.0359645411670637,
+          0.9816601524646288
+        ]
+      },
+      "relative_ratio": 1.0079106333720635,
+      "cloud_ratio": 1.009180395416096
+    },
+    {
+      "key": "slice11_seed3",
+      "slice": 11,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "ce9e31e4e6300cadbb16e32704ba09e8c41d87a0b2d93f5dd528d571ee894b30",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0014821662021187814,
+      "observed_cloud": 0.0014785189702034175,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "half_window_ratios": {
+        "relative": [
+          0.9358974386345549,
+          0.9575362079618228
+        ],
+        "cloud": [
+          0.938633491074123,
+          0.9593943688636772
+        ]
+      },
+      "relative_ratio": 0.9467775632250985,
+      "cloud_ratio": 0.9490696616937276
+    },
+    {
+      "key": "slice11_seed4",
+      "slice": 11,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "614996639c54da4dd01ebc5aa92d9d226c314effc2787538085252003facfa2a",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.001602647650864663,
+      "observed_cloud": 0.0015952755511233032,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "half_window_ratios": {
+        "relative": [
+          1.0019474232945451,
+          1.045079837205091
+        ],
+        "cloud": [
+          1.003097675944301,
+          1.0445202640811684
+        ]
+      },
+      "relative_ratio": 1.023738657260566,
+      "cloud_ratio": 1.024016369167428
+    },
+    {
+      "key": "slice11_seed5",
+      "slice": 11,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 5,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d5_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "1492e9de1f47d317d32e34bdd9deab3f606da2b670b427693195f639dc03acc2",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0015948832000636523,
+      "observed_cloud": 0.0015866427000438082,
+      "predicted_relative": 0.0015654851357798738,
+      "predicted_cloud": 0.0015578613771773345,
+      "half_window_ratios": {
+        "relative": [
+          1.0323725344377657,
+          1.0049986089151595
+        ],
+        "cloud": [
+          1.0339620260609232,
+          1.0027454254897126
+        ]
+      },
+      "relative_ratio": 1.0187788843291274,
+      "cloud_ratio": 1.018474893394316
+    },
+    {
+      "key": "slice12_seed1",
+      "slice": 12,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "dc59674b3c334048a3d2a7829ad5a00151c2e990b31e8659514688fc48f46090",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0018258949010848892,
+      "observed_cloud": 0.0018199111436686974,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "half_window_ratios": {
+        "relative": [
+          0.9927830939811294,
+          0.9786467605401887
+        ],
+        "cloud": [
+          0.9909332526654118,
+          0.9836901087675926
+        ]
+      },
+      "relative_ratio": 0.9857409751579944,
+      "cloud_ratio": 0.9873186849822997
+    },
+    {
+      "key": "slice12_seed2",
+      "slice": 12,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "ca79e3e68af6cdb5766bf4657dfe3db02965954676fe4e6c5136d94e488c90f0",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0018267114970695103,
+      "observed_cloud": 0.001817461079854412,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "half_window_ratios": {
+        "relative": [
+          1.017000701619692,
+          0.9543617888479377
+        ],
+        "cloud": [
+          1.019230430127113,
+          0.9515811041650033
+        ]
+      },
+      "relative_ratio": 0.9861818286385053,
+      "cloud_ratio": 0.9859895026254256
+    },
+    {
+      "key": "slice12_seed3",
+      "slice": 12,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "783c72201f6e9d4f24a00d3b584015ca79a753cd454142870e5ef423f24ed2ad",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.00183642963625798,
+      "observed_cloud": 0.0018289650547599953,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "half_window_ratios": {
+        "relative": [
+          1.0165920222120246,
+          0.9656038726005918
+        ],
+        "cloud": [
+          1.0159181698450195,
+          0.9679584450669937
+        ]
+      },
+      "relative_ratio": 0.9914283343353401,
+      "cloud_ratio": 0.9922305157734376
+    },
+    {
+      "key": "slice12_seed4",
+      "slice": 12,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "e880c2f70650b837c3a10d873bff43903389a93111bfe3b5c28bb9028ac1fd48",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0018872103222188166,
+      "observed_cloud": 0.00187300570945754,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "half_window_ratios": {
+        "relative": [
+          1.0198158183493753,
+          1.0178693910947176
+        ],
+        "cloud": [
+          1.017570229908613,
+          1.0146733751056403
+        ]
+      },
+      "relative_ratio": 1.0188431668475975,
+      "cloud_ratio": 1.016122979662683
+    },
+    {
+      "key": "slice12_seed5",
+      "slice": 12,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 7,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d7_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "f7a05ceada2e00b67a5755ee58cdbfc48f5d4ffc557ece946dbfa52393921e84",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0018981221301932112,
+      "observed_cloud": 0.0018898895061247572,
+      "predicted_relative": 0.0018523069925060536,
+      "predicted_cloud": 0.0018432864396781107,
+      "half_window_ratios": {
+        "relative": [
+          1.0345586811278815,
+          1.0148124068640483
+        ],
+        "cloud": [
+          1.0274041084362753,
+          1.0231562590861507
+        ]
+      },
+      "relative_ratio": 1.024734095305213,
+      "cloud_ratio": 1.0252825960433933
+    },
+    {
+      "key": "slice13_seed1",
+      "slice": 13,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "94fb450102429d8af3899112e71592d0da58147017cc822a1086e5d151a3217b",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0021922694204620247,
+      "observed_cloud": 0.002173423095101372,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          0.9723839101435386,
+          1.0077362496704108
+        ],
+        "cloud": [
+          0.9651321467030473,
+          1.0074339075418108
+        ]
+      },
+      "relative_ratio": 0.990216092102565,
+      "cloud_ratio": 0.9865076774149288
+    },
+    {
+      "key": "slice13_seed2",
+      "slice": 13,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "3cc45179fa121058f3b774b9613ab741b16b652d4ec04c9c646ccfd0a88dc6c6",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.002204127951320689,
+      "observed_cloud": 0.002189256669509551,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          1.00940724812263,
+          0.9815397781922132
+        ],
+        "cloud": [
+          1.0054165739330205,
+          0.9818300406310254
+        ]
+      },
+      "relative_ratio": 0.9955724173677641,
+      "cloud_ratio": 0.993694470796206
+    },
+    {
+      "key": "slice13_seed3",
+      "slice": 13,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "3fea671ea798f5216137ded45e9c554a6281a9a26ca0a81b495582078b488799",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0021579663034138235,
+      "observed_cloud": 0.0021435424773261387,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          0.9663990707010551,
+          0.982975856356691
+        ],
+        "cloud": [
+          0.9626178484289076,
+          0.9831656937588521
+        ]
+      },
+      "relative_ratio": 0.974721874925897,
+      "cloud_ratio": 0.972944989640235
+    },
+    {
+      "key": "slice13_seed4",
+      "slice": 13,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "40b0d2c0d5c610f9e799c6a2c69bc0cbeaffdd80a9e538f8f0663e6a3a8c35fa",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0022821115098892934,
+      "observed_cloud": 0.0022747091321663414,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          1.0525600042411818,
+          1.0085588834126886
+        ],
+        "cloud": [
+          1.0524864614486207,
+          1.0120760268127846
+        ]
+      },
+      "relative_ratio": 1.0307964522848687,
+      "cloud_ratio": 1.0324809871698182
+    },
+    {
+      "key": "slice13_seed5",
+      "slice": 13,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d10_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "cd502a7b9d2c387f2d6f4d1eb2c19f68eb8ad7be918c922c0ccb7bb67ce0f407",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0022075954697484716,
+      "observed_cloud": 0.002194164832665561,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          1.0112384424441658,
+          0.9828337107384851
+        ],
+        "cloud": [
+          1.0114134965217885,
+          0.9801830635097359
+        ]
+      },
+      "relative_ratio": 0.9971386448190092,
+      "cloud_ratio": 0.9959222655805356
+    },
+    {
+      "key": "slice14_seed1",
+      "slice": 14,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "02f8fc415f2d12b52af54eb793f5d57a2dd9fec330a5c4fd53dd8e61a254c168",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0025016218129653343,
+      "observed_cloud": 0.002485827103830394,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "half_window_ratios": {
+        "relative": [
+          1.0051801496944268,
+          0.9766684109299185
+        ],
+        "cloud": [
+          1.0035007343391456,
+          0.9754787029425848
+        ]
+      },
+      "relative_ratio": 0.9910282458835176,
+      "cloud_ratio": 0.9895903113565859
+    },
+    {
+      "key": "slice14_seed2",
+      "slice": 14,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "b47b5832212bd6502050cd1aa2c077aebd4173a866329ec4d4b1ffc2c90a9adb",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.002529038307324731,
+      "observed_cloud": 0.0025172141906230983,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "half_window_ratios": {
+        "relative": [
+          0.9899233065461224,
+          1.013716620228132
+        ],
+        "cloud": [
+          0.987904138472315,
+          1.0160713138361663
+        ]
+      },
+      "relative_ratio": 1.0018894080993448,
+      "cloud_ratio": 1.002085290168229
+    },
+    {
+      "key": "slice14_seed3",
+      "slice": 14,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "e62eb915edb52453ea96da9ae9ffd0be833c72227de6a3e657d58623398db812",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0024448101625312462,
+      "observed_cloud": 0.0024408745104120204,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "half_window_ratios": {
+        "relative": [
+          0.9832180957944541,
+          0.9535965732831915
+        ],
+        "cloud": [
+          0.9864786229858029,
+          0.9566799262189717
+        ]
+      },
+      "relative_ratio": 0.9685220660990107,
+      "cloud_ratio": 0.9716949996317165
+    },
+    {
+      "key": "slice14_seed4",
+      "slice": 14,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "f83ed91e66cebe7c6c45ee84e20c9d809ac47971f51b13a9281981612a78d09c",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0025213517088227442,
+      "observed_cloud": 0.0025076317225204473,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "half_window_ratios": {
+        "relative": [
+          0.980527437775042,
+          1.0168348844407058
+        ],
+        "cloud": [
+          0.9833063074634691,
+          1.0130167450486747
+        ]
+      },
+      "relative_ratio": 0.998844329026739,
+      "cloud_ratio": 0.9982705769169915
+    },
+    {
+      "key": "slice14_seed5",
+      "slice": 14,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 13,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d13_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "acc6e5350e8fd2467ccc11732f4dce7bde9c191d04770165bd01d2320be2b5d9",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0025642815608134537,
+      "observed_cloud": 0.002550612117662265,
+      "predicted_relative": 0.002524268933157499,
+      "predicted_cloud": 0.002511975991784603,
+      "half_window_ratios": {
+        "relative": [
+          1.005259329839601,
+          1.0263358023550349
+        ],
+        "cloud": [
+          1.0047328592118183,
+          1.0259202704152697
+        ]
+      },
+      "relative_ratio": 1.0158511746234204,
+      "cloud_ratio": 1.0153807703592794
+    },
+    {
+      "key": "slice15_seed1",
+      "slice": 15,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed1_steps30000000.json",
+      "source_sha256": "a42651d4c6f2fade6e534cfaa945e4d4cd4a5978a3fb296d15f659d06bf4fe80",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.003033513154415464,
+      "observed_cloud": 0.003019023120360159,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "half_window_ratios": {
+        "relative": [
+          0.962625873407453,
+          0.975081718271724
+        ],
+        "cloud": [
+          0.9601309259882755,
+          0.9777189788750281
+        ]
+      },
+      "relative_ratio": 0.9688731898767811,
+      "cloud_ratio": 0.968963979911448
+    },
+    {
+      "key": "slice15_seed2",
+      "slice": 15,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed2_steps30000000.json",
+      "source_sha256": "d43dcc869c5e41a0bb4df937dccd9ce4dd2b56324a98becb9025ce8c0a36fc01",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.0031594325426723443,
+      "observed_cloud": 0.003145266634567984,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "half_window_ratios": {
+        "relative": [
+          0.9889576378553658,
+          1.0288334898427
+        ],
+        "cloud": [
+          0.9858155910679178,
+          1.032611086137726
+        ]
+      },
+      "relative_ratio": 1.0090905593614652,
+      "cloud_ratio": 1.0094821916269743
+    },
+    {
+      "key": "slice15_seed3",
+      "slice": 15,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed3_steps30000000.json",
+      "source_sha256": "bc0888e750e6bd214bb66e5ece8bc810da6ed334da0e982ea9e238bf7bd769b6",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.003108894369649439,
+      "observed_cloud": 0.0030935870856597042,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "half_window_ratios": {
+        "relative": [
+          1.018870596058199,
+          0.9663272914778028
+        ],
+        "cloud": [
+          1.0181134298685266,
+          0.9670149058703367
+        ]
+      },
+      "relative_ratio": 0.9929491818843393,
+      "cloud_ratio": 0.9928954947406579
+    },
+    {
+      "key": "slice15_seed4",
+      "slice": 15,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed4_steps30000000.json",
+      "source_sha256": "24830f0303a315dc006f53c2e9091030de4392b6b6a9086bdcfb53590ab3018f",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.003136995137729208,
+      "observed_cloud": 0.0031240554922470866,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "half_window_ratios": {
+        "relative": [
+          0.9925180760771778,
+          1.011244851578379
+        ],
+        "cloud": [
+          0.9877925748689493,
+          1.0173414968673158
+        ]
+      },
+      "relative_ratio": 1.0019242808608524,
+      "cloud_ratio": 1.0026744157132632
+    },
+    {
+      "key": "slice15_seed5",
+      "slice": 15,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 20,
+      "steps": 30000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N30M_d20_seed1-5_eps1em4_2026-07-13/case_eta_zero_seed5_steps30000000.json",
+      "source_sha256": "8a281244131a48f30e5f02cf567cd8e8276908161adfa00cd4e471ec1429a6dc",
+      "source_revision": "c1e8c79",
+      "count": 10001,
+      "first_step": 29990000,
+      "last_step": 30000000,
+      "stride": 1,
+      "observed_relative": 0.003209890849374671,
+      "observed_cloud": 0.0031970552295376847,
+      "predicted_relative": 0.0031309702715597476,
+      "predicted_cloud": 0.003115722754354669,
+      "half_window_ratios": {
+        "relative": [
+          1.028628187230007,
+          1.021772522800155
+        ],
+        "cloud": [
+          1.0314630322078209,
+          1.020715524665948
+        ]
+      },
+      "relative_ratio": 1.0252064283496398,
+      "cloud_ratio": 1.0261038871540613
+    },
+    {
+      "key": "slice16_seed1",
+      "slice": 16,
+      "seed": 1,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_eta_zero_seed1_steps300000000.json",
+      "source_sha256": "41d5171d53a58e855f62f43761e78732d9db8d1bafc99febb068096c467a8879",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0021745281651104724,
+      "observed_cloud": 0.002164636082620462,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          0.9795067004546332,
+          0.9848917091701227
+        ],
+        "cloud": [
+          0.9801825037054054,
+          0.9848509956450401
+        ]
+      },
+      "relative_ratio": 0.9822026260663032,
+      "cloud_ratio": 0.9825192891008927
+    },
+    {
+      "key": "slice16_seed2",
+      "slice": 16,
+      "seed": 2,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_eta_zero_seed2_steps300000000.json",
+      "source_sha256": "d1d214fb249d923561733aab548bc5b601c60decdb857b111f2707f723a3f01d",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0022577602729956414,
+      "observed_cloud": 0.0022499067673880007,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          0.9983408458812092,
+          1.0408157871042076
+        ],
+        "cloud": [
+          1.0004476591109528,
+          1.0415886555486242
+        ]
+      },
+      "relative_ratio": 1.0197973540857004,
+      "cloud_ratio": 1.0212232972487778
+    },
+    {
+      "key": "slice16_seed3",
+      "slice": 16,
+      "seed": 3,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_eta_zero_seed3_steps300000000.json",
+      "source_sha256": "76c38f299b93b572b083e49904916f747348562e2d84a4e5354d0e3fa435f7d1",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0021288028589659634,
+      "observed_cloud": 0.002120154159503177,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          1.007941226953541,
+          0.9127923273121519
+        ],
+        "cloud": [
+          1.00516412452684,
+          0.9174872942561305
+        ]
+      },
+      "relative_ratio": 0.9615491728283035,
+      "cloud_ratio": 0.9623291297341839
+    },
+    {
+      "key": "slice16_seed4",
+      "slice": 16,
+      "seed": 4,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_eta_zero_seed4_steps300000000.json",
+      "source_sha256": "91a1aa4591fc95f62f65248bf15b37749fb0239041624f55871488bb4fe16203",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.0022902211380477658,
+      "observed_cloud": 0.0022783377802465723,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          1.0140433481542714,
+          1.0544843157059984
+        ],
+        "cloud": [
+          1.0186194882624588,
+          1.049410410474718
+        ]
+      },
+      "relative_ratio": 1.0344594529309277,
+      "cloud_ratio": 1.0341280153981702
+    },
+    {
+      "key": "slice16_seed5",
+      "slice": 16,
+      "seed": 5,
+      "condition": "eta_zero",
+      "dim": 10,
+      "steps": 300000000,
+      "amplitude_att": 35.0,
+      "epsilon": 0.0001,
+      "alpha": 0.01,
+      "horizon": 600,
+      "gain": 0.0,
+      "stored_mass": 0.997594990708689,
+      "source": "data/processed/long_run_metastability/ambient_dim_memory_shape_Aatt_35_N300M_d10_seed1-5_eps1em4_foreground_2026-07-14/case_eta_zero_seed5_steps300000000.json",
+      "source_sha256": "1363f6ac6154b53be84efec13fde9f5ffb51230f6549c1d9bb483e04546cc643",
+      "source_revision": "93150b0",
+      "count": 10001,
+      "first_step": 299990000,
+      "last_step": 300000000,
+      "stride": 1,
+      "observed_relative": 0.002262802148237653,
+      "observed_cloud": 0.0022532515169037125,
+      "predicted_relative": 0.002213930310713384,
+      "predicted_cloud": 0.002203148687901414,
+      "half_window_ratios": {
+        "relative": [
+          0.9889522874268769,
+          1.0541632044767169
+        ],
+        "cloud": [
+          0.9893220891452017,
+          1.0551092176606616
+        ]
+      },
+      "relative_ratio": 1.022074695525769,
+      "cloud_ratio": 1.0227414651028495
+    }
+  ]
+}

@@ -3,9 +3,20 @@
 This directory is a planning surface for a later companion programme. It is not
 a result of Paper 0 and should not be cited as evidence for quantum mechanics,
 particle spectra, gauge structure, physical constants, or Standard-Model
-phenomenology. It deliberately keeps that route open as a future research
-question, but only behind reproducible knot, synchronization, and collective-mode
-evidence.
+phenomenology. It keeps that route open as a future research question.
+The classical mode programme needs reproducible knot, synchronization, and
+collective-mode evidence; quantum feasibility must be assessed earlier.
+
+Update 2026-10-21: the bounded
+[R0 feasibility audit](../../docs/reference/foundation_feasibility.md)
+requires an early quantum/locality assessment, in parallel with classical
+mode analysis. Synchronization is not a prerequisite for asking whether the
+model can support the required measurement statistics. The
+[B1 inventory](../../docs/reference/operational_contract.md) now specifies
+the existing classical source-response channel. A justified physical
+multisystem and measurement law remains missing; this is not a particle-label scan.
+Only the [project priorities](../../docs/status/project_priorities.md) govern
+execution; this page describes hypotheses and possible dependencies.
 
 ## Reframed Aim
 
@@ -50,7 +61,8 @@ These are hypotheses, not claims:
 
 ## Required Demonstrations
 
-A credible Paper-III path requires the following, in order:
+The classical mode route would need the following demonstrations. They do
+not establish quantum mechanics, and do not postpone the early R0/B1 audit:
 
 1. **Single-knot mode extraction**
    - center or external coordinate;
@@ -93,10 +105,17 @@ This programme does not currently claim:
 - real particles;
 - that `d=3` is selected by the current simulations.
 
-## Concrete Next Step
+## Operational Boundary
 
-The next implementable unit is not another dimension scan. It is a
-synchronization measurement stack:
+B1 identifies the state, source intervention, readouts, information access,
+response and conditional probability structure in the inspected classical
+branch. It does not derive independent measurement stations or establish
+which multisystem extension is physically intended. The remaining choice
+is whether to derive such operations from the unchanged rule or explicitly
+adopt additional assumptions. Any new microscopic or measurement rule
+requires an explicit model decision; no existing execution gate is reopened.
+
+A possible later classical synchronization stack remains:
 
 ```text
 single-knot observables

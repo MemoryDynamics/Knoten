@@ -1,0 +1,19 @@
+{
+  "scope": "analytic illustration only; no dynamics or stability evaluation",
+  "memory_inputs": {
+    "f": "1/2",
+    "g": "2/3",
+    "q": "99/100",
+    "sigma": 1
+  },
+  "geometry_source": "reports/reference/flat_memory_cycle_2026-11-16.md",
+  "memory_boundary": "four deposition sites of one history; not four particles; stability open",
+  "spin_reference": "psi(theta)=(exp(-i theta/2),exp(+i theta/2))/sqrt(2)",
+  "spin_boundary": "assumed quantum reference, not memory-derived; no extra spatial coordinate",
+  "spin_source": "https://live.ocw.mit.edu/courses/22-51-quantum-theory-of-radiation-interactions-fall-2012/fb8b6e60579e7a4e1584e44e597c7c05_MIT22_51F12_Ch4.pdf (4.2.4)",
+  "interferometer": "balanced coherent arms; U_z(theta) in one arm; zero baseline path phase; spin-insensitive output",
+  "figures": [
+    "memory_structure",
+    "spinor_reference"
+  ]
+}

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 348" role="img" aria-labelledby="title desc">
+  <title id="title">Sechs Schreibpunkte und die FIFO-Historie</title>
+  <desc id="desc">Ein Sechseck mit dem Kopf rechts. Die drei vergangenen Kopfpositionen liegen im Uhrzeigersinn darunter und links. Der Traeger liegt am aeltesten Eintrag. Linien verbinden nur Schreibpunkte.</desc>
+  <rect width="600" height="348" fill="#fff"/>
+  <g font-family="system-ui, sans-serif" fill="#14252b">
+    <text x="24" y="30" font-size="18" font-weight="650">Sechs autonome Schreibpunkte</text>
+    <text x="24" y="322" font-size="13" fill="#46565b">Schnittansicht bei n = 0. Linien sind keine Flugbahn.</text>
+    <path d="M 302,166 247,70.737 137,70.737 82,166 137,261.263 247,261.263 Z"
+          fill="none" stroke="#94a5a9" stroke-width="1.5" stroke-dasharray="4 5"/>
+    <circle cx="192" cy="166" r="2" fill="#94a5a9"/>
+    <g fill="#edf2f3" stroke="#52666d" stroke-width="1.5">
+      <circle cx="247" cy="70.737" r="6"/>
+      <circle cx="137" cy="70.737" r="6"/>
+    </g>
+    <g fill="#00756f" stroke="#fff" stroke-width="1.5">
+      <circle cx="247" cy="261.263" r="7"/>
+      <circle cx="137" cy="261.263" r="7"/>
+      <circle cx="82" cy="166" r="7"/>
+    </g>
+    <circle cx="82" cy="166" r="12" fill="none" stroke="#593d76" stroke-width="2.5"/>
+    <circle cx="302" cy="166" r="8" fill="#b64725"/>
+    <g font-size="13">
+      <text x="255" y="63">x(1)</text>
+      <text x="110" y="63">x(2)</text>
+      <text x="27" y="171">x(3)</text>
+      <text x="110" y="285">x(4)</text>
+      <text x="255" y="285">x(5)</text>
+      <text x="312" y="171">x(0)</text>
+    </g>
+    <g font-size="14">
+      <circle cx="376" cy="112" r="6" fill="#b64725"/>
+      <text x="392" y="117">Kopf: x(0)</text>
+      <circle cx="376" cy="155" r="6" fill="#00756f"/>
+      <text x="392" y="160">Historie: x(5), x(4), x(3)</text>
+      <circle cx="376" cy="198" r="7" fill="none" stroke="#593d76" stroke-width="2"/>
+      <text x="392" y="203">Traeger bei x(3)</text>
+    </g>
+  </g>
+</svg>

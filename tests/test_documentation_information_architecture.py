@@ -98,11 +98,23 @@ def test_canonical_vocabulary_separates_core_filter_and_port_symbols() -> None:
         "docs/reference/THEORETICAL_CONTEXT.md",
         "paper/paper_i/manuscript/main.tex",
         "paper/paper_i/manuscript/main_compact.tex",
+        "paper/paper_i/manuscript/content.tex",
+        "paper/paper_i/manuscript/appendix.tex",
     ):
         text = (ROOT / relative).read_text(encoding="utf-8")
         assert not re.search(r"\\beta(?![_A-Za-z])", text), relative
 
-    paper = (ROOT / "paper/paper_i/manuscript/main.tex").read_text(
+    assert r"\lambda_{\rm m}=\beta_\rho=\alpha" in vocabulary
+    assert r"\mu_{n+1}=q\mu_n+\alpha\delta_{x_{n+1}}" in vocabulary
+
+    manuscript = ROOT / "paper/paper_i/manuscript"
+    for name in ("main.tex", "main_compact.tex"):
+        wrapper = (manuscript / name).read_text(encoding="utf-8")
+        assert r"\input{content}" in wrapper, name
+
+    paper = (manuscript / "content.tex").read_text(
         encoding="utf-8"
     )
-    assert "\\lambda_{\\mathrm m}=\\beta_\\rho=\\alpha" in paper
+    compact = re.sub(r"\s+", "", paper)
+    assert r"\mu_{n+1}&=q\mu_n+\alpha\delta_{x_{n+1}}" in compact
+    assert r"q=1-\alpha" in compact

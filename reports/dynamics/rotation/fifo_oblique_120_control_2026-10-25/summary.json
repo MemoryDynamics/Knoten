@@ -1,0 +1,32 @@
+{
+  "absolute_tolerance": 9.465175048042239e-12,
+  "baseline": {
+    "max_absolute_difference": 0.0,
+    "max_fraction_of_tolerance": 0.0,
+    "pass": true
+  },
+  "claim_boundary": "Finite-window code/symmetry check only; no independent replication, general stability or physical validation.",
+  "decision": "mirror-control-pass",
+  "pairs": [
+    {
+      "final_ratio_120": 2087.4775253218772,
+      "final_ratio_60": 2087.4775253218663,
+      "max_absolute_difference": 1.0061396160665481e-16,
+      "max_fraction_of_tolerance": 4.85943748607422e-07,
+      "pass": true,
+      "sign_120": -1,
+      "sign_60": 1
+    },
+    {
+      "final_ratio_120": 2087.333257063465,
+      "final_ratio_60": 2087.333257063462,
+      "max_absolute_difference": 3.122502256758253e-17,
+      "max_fraction_of_tolerance": 1.5762117947686048e-07,
+      "pass": true,
+      "sign_120": 1,
+      "sign_60": -1
+    }
+  ],
+  "relative_tolerance": 1e-08,
+  "status": "completed"
+}

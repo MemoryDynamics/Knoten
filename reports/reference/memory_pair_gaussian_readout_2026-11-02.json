@@ -1,0 +1,61 @@
+{
+  "checkpoint": "data/processed/reference_states/scalar_Aatt35_N100M_d3_d10_seed1_2026-07-16/scalar_Aatt35_d3_seed1_N100000000.npz",
+  "checkpoint_sha256": "cde1873049a20779cede8d64135c2496faa9d3587d3af752a0209882d186560e",
+  "comparison_transfer_budget": {
+    "claim_class": "upper_bound_evaluation_not_actual_error_or_interval_certificate",
+    "inner_path_difference_bound": 0.0006178056034133829,
+    "paired_contrast_bad_event_expectation_bound": 2.1515806118452364e-12,
+    "paired_contrast_good_event_error_bound": 3.478831146560599e-07,
+    "paired_contrast_total_expectation_error_bound": 3.478852662366717e-07
+  },
+  "elapsed_seconds": 18.730918399989605,
+  "gaussian_comparison": {
+    "claim_class": "finite_window_linear_Gaussian_comparison_only_not_native_prediction",
+    "cubic_error_bound": [
+      3.6050925933025163e-17,
+      3.6050925933025163e-17
+    ],
+    "cubic_gradient_contrast": [
+      [
+        1.3611837840434906e-14,
+        9.185052409186489e-24,
+        1.5818730026998722e-23
+      ],
+      [
+        -1.3611837840434906e-14,
+        -9.185052409186489e-24,
+        -1.5818730026998722e-23
+      ]
+    ],
+    "exact_gradient_contrast": [
+      [
+        1.361183115158846e-14,
+        9.185047895698445e-24,
+        1.5818722253755295e-23
+      ],
+      [
+        -1.361183115158846e-14,
+        -9.185047895698445e-24,
+        -1.5818722253755295e-23
+      ]
+    ],
+    "ideal_readout_zero_at_zero_mean": true,
+    "linear_reference_gradient_norm": 0.0015286083074052706,
+    "mean_absolute_cross_covariance_per_coordinate": 9.077643514197146e-12,
+    "mean_cross_covariance_per_coordinate": 9.059594333204701e-12,
+    "source_ages": 600,
+    "start": 10000,
+    "stationary_inner_variance_per_coordinate": 1.3883636809806567e-08,
+    "stationary_lag_zero_cross_covariance": -9.002886309103275e-13,
+    "stationary_weighted_cross_covariance_per_coordinate": 9.059594329173383e-12,
+    "stop": 50000,
+    "target_trajectories_generated": 0
+  },
+  "parameter_search": false,
+  "schema": "emergenz-knoten.memory-pair-gaussian-readout.v1",
+  "source_envelope": "reports/reference/memory_pair_path_envelope_2026-11-01.json",
+  "source_envelope_sha256_utf8_lf": "5c0b90ce3aefe95c888ee2882e0a7ff10c5befa5c229873dbd556843d43c72e4",
+  "source_report": "reports/response/reciprocal/reciprocal_full_knot_gate_2026-08-04.json",
+  "source_report_sha256_utf8_lf": "54f76fc01669fa10cdfa88653c9024a7e98240121e751397eed32ed5c33ba264",
+  "target_trajectories_generated": 0
+}
