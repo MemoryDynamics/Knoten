@@ -995,6 +995,14 @@ Perioden zurueckkehren. Beim konstruierten Massenverhaeltnis
 $16/9$ beweisen Intervallvorzeichen weiterhin Querwachstum.
 Andere Kompensationen bleiben offen, keine native Zieltrajektorie.
 
+Das [linear stabile FIFO-Sechseck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_center_free_hexagon_2026-11-24.md)
+nutzt die algebraisch schwerpunktsfreie Richtung.
+Bei gleichen Massen und Radius $1/25$ zertifizieren
+Intervalle beschraenkte innere Stoerungen in der
+Ebene und quer, mit Rotorableitung auf fester Energie
+und nach Symmetriereduktion. Treue Historie bleibt.
+Keine nichtlineare Bindung oder native Knotenbildung.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

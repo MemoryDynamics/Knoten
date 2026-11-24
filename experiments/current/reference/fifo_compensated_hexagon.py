@@ -19,8 +19,11 @@ def _compensated_modes():
         np.array([[15 * sqrt(3), 5 * sqrt(1155)], [5 * sqrt(1155), -77 * sqrt(3)]])
         / 224
     )
+    return _robin_modes(robin, np.vstack((antisymmetric, symmetric)))
+
+
+def _robin_modes(robin, basis):
     values, directions = np.linalg.eigh(robin)
-    basis = np.vstack((antisymmetric, symmetric))
     result = []
     for target, direction in zip(values, directions.T, strict=True):
         # Use just the first branch of the requested sign, away from the pole.

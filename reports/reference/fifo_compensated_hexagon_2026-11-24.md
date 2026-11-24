@@ -192,3 +192,8 @@ Kopplung aus der nativen Knoten-Dynamik. Die
 algebraisch andere erhaltene Richtung und andere
 Frequenzzweige bleiben offen; der hier ausgeschlossene
 Fall darf nicht auf alle Kompensationen verallgemeinert werden.
+
+Die [schwerpunktsfreie Richtung](fifo_center_free_hexagon_2026-11-24.md)
+liefert bei gleichen Massen einen linear stabilen
+Vergleich in der Ebene und quer dazu, einschliesslich
+Rotorableitung und expliziter Symmetriereduktion.
