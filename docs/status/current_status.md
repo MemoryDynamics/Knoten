@@ -966,6 +966,14 @@ Rotorzeiten nur hoechstens zwei Schreiborte auf einer
 absolut periodischen oder dauerhaft beschraenkten Bahn.
 Die Kopierbedingung allein schliesst Drift nicht aus.
 
+Das [FIFO-Sechseck mit zwei Kraftprofilen](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_two_center_hexagon_2026-11-24.md)
+hat im konservativen Referenzmodell sechs treue
+Schreibpunkte ohne Reset. Zwei abgestimmte Normalmoden
+kehren je Write ganz zurueck. Der Rotor bleibt intern,
+die Anfangslage ist vorbereitet. Eine analytische
+Spurschranke belegt Querinstabilitaet; keine stabile
+Bindung, keine native Zieltrajektorie.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

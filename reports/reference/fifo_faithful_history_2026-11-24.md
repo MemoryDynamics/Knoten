@@ -187,3 +187,7 @@ Kein Ausschluss fuer ein driftendes Gedaechtnis
 oder fuer mehrere unabhaengige Kraftprofile:
 Gerade die Impulskopplung durch nur ein Profil
 ist die angreifbare Modellannahme.
+
+Das [exakte Sechseck mit zwei Kraftprofilen](fifo_two_center_hexagon_2026-11-24.md)
+ueberwindet die Ein-Profil-Barriere konstruktiv, bleibt aber
+gegen Stoerungen senkrecht zur Schreibebene instabil.

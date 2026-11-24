@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import cos, sin, sqrt
+from math import cos, pi, sin, sqrt
 
 import numpy as np
 
@@ -121,28 +121,100 @@ class MobileMemoryClock(MemoryCenterClock):
             raise ValueError("one weight is required for each memory row")
         inverse_mass = np.full(len(position), 1 / self.record_mass)
         inverse_mass[[0, -1]] = 1 / self.body_mass
-        velocity = inverse_mass[:, None] * momentum
-        q = position + duration * velocity
-        v = velocity.copy()
         relative = np.zeros(len(position))
         relative[[0, -1]] = (1, -1)
         balance = np.r_[0.5, -np.asarray(self.weights), 0.5]
+        modes = (relative, self.frequency), (balance, self.balance_frequency)
+        return _modal_flight(position, momentum, duration, inverse_mass, modes)
 
-        # The two mass-orthogonal oscillators replace their free-flight pieces.
-        for normal, frequency in (
-            (relative, self.frequency),
-            (balance, self.balance_frequency),
-        ):
-            direction = inverse_mass * normal
-            direction /= normal @ direction
-            coordinate, speed = normal @ position, normal @ velocity
-            phase = frequency * duration
-            c, s = cos(phase), sin(phase)
-            q += direction[:, None] * (
-                (c - 1) * coordinate + (s / frequency - duration) * speed
+
+def _modal_flight(position, momentum, duration, inverse_mass, modes):
+    velocity = inverse_mass[:, None] * momentum
+    q = position + duration * velocity
+    v = velocity.copy()
+    # Each mass-orthogonal oscillator replaces its free-flight contribution.
+    for normal, frequency in modes:
+        direction = inverse_mass * normal
+        direction /= normal @ direction
+        coordinate, speed = normal @ position, normal @ velocity
+        phase = frequency * duration
+        c, s = cos(phase), sin(phase)
+        q += direction[:, None] * (
+            (c - 1) * coordinate + (s / frequency - duration) * speed
+        )
+        v += direction[:, None] * ((c - 1) * speed - frequency * s * coordinate)
+    return q, v / inverse_mass[:, None]
+
+
+@dataclass(frozen=True)
+class TwoCenterClock(CarrierClock):
+    """Three mobile history rows read by two symmetric convex profiles."""
+
+    record_mass: float = 3 / 572
+    profile_offset: float = sqrt(27 / 572)
+
+    def __post_init__(self):
+        super().__post_init__()
+        if not np.isfinite(self.record_mass) or self.record_mass <= 0:
+            raise ValueError("record mass must be finite and positive")
+        if not 0 < self.profile_offset <= 0.25:
+            raise ValueError("profile offset must give two distinct convex profiles")
+
+    @property
+    def balance_frequencies(self):
+        ratio = self.body_mass / self.record_mass
+        return (
+            self.frequency * sqrt(1 + 0.75 * ratio),
+            self.frequency * 2 * self.profile_offset * sqrt(ratio),
+        )
+
+    def internal_energy(self, q, p):
+        if len(q) != 5:
+            raise ValueError(
+                "the symmetric two-center reference has three history rows"
             )
-            v += direction[:, None] * ((c - 1) * speed - frequency * s * coordinate)
-        return q, v / inverse_mass[:, None]
+        relative = q[0] - q[-1]
+        symmetric = (q[0] + q[-1]) / 2 - (q[1] + 2 * q[2] + q[3]) / 4
+        antisymmetric = self.profile_offset * (q[1] - q[3])
+        kinetic = np.square(p[[0, -1]]).sum() / (2 * self.body_mass)
+        kinetic += np.square(p[1:-1]).sum() / (2 * self.record_mass)
+        return kinetic + self.spring * (
+            (relative @ relative) / 2
+            + 2 * (symmetric @ symmetric + antisymmetric @ antisymmetric)
+        )
+
+    def flight(self, position, momentum, duration):
+        if len(position) != 5:
+            raise ValueError(
+                "the symmetric two-center reference has three history rows"
+            )
+        inverse_mass = np.full(5, 1 / self.record_mass)
+        inverse_mass[[0, -1]] = 1 / self.body_mass
+        symmetric, antisymmetric = self.balance_frequencies
+        modes = (
+            (np.array([1, 0, 0, 0, -1]), self.frequency),
+            (np.array([0.5, -0.25, -0.5, -0.25, 0.5]), symmetric),
+            (np.array([0, 1, 0, -1, 0]), antisymmetric),
+        )
+        return _modal_flight(position, momentum, duration, inverse_mass, modes)
+
+
+def prepared_hexagon(radius=1.0):
+    """Return the normalized two-center model and its exact planar seed."""
+    if not np.isfinite(radius) or radius <= 0:
+        raise ValueError("hexagon radius must be finite and positive")
+    model = TwoCenterClock(spring=0.5)
+    angle = pi / 3
+    rotation = complex(cos(angle), sin(angle))
+    history = rotation ** -np.arange(1, 4)
+    pair = 2j * model.body_mass * model.frequency * radius / rotation
+    carrier = (1 - rotation) * pair / 2
+    positions = np.r_[radius, radius * history, -radius]
+    momenta = np.r_[pair - carrier, carrier * history, carrier]
+    q = np.column_stack((positions.real, positions.imag))
+    p = np.column_stack((momenta.real, momenta.imag))
+    clock = model.clock_mass * model.circumference * model.frequency / angle
+    return model, BoundaryState(q, p, clock)
 
 
 def clock_return(incoming, model):
