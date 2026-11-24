@@ -61,6 +61,33 @@ def test_planar_clock_derivative_matches_the_fixed_energy_return():
     )
 
 
+def test_finite_impulse_probe_keeps_invariants_but_changes_the_next_copy():
+    model, base = prepared_center_free_hexagon()
+    q = np.c_[base.position, np.zeros(5)]
+    p0 = np.c_[base.momentum, np.zeros(5)]
+    amplitude = 1e-4
+    p = p0.copy()
+    p[-1, 2] += amplitude
+    p[-2, 2] -= amplitude
+    clock = np.sqrt(base.clock_momentum**2 - 2 * amplitude**2)
+    initial = replace(base, position=q, momentum=p, clock_momentum=clock)
+    np.testing.assert_array_equal(q[-1], q[-2])
+    np.testing.assert_allclose(p.sum(axis=0), p0.sum(axis=0), atol=3e-17, rtol=0)
+    np.testing.assert_allclose(
+        np.cross(q, p).sum(axis=0), np.cross(q, p0).sum(axis=0), atol=3e-17, rtol=0
+    )
+    assert model.internal_energy(q, p) + clock**2 / 2 == pytest.approx(
+        model.internal_energy(q, p0) + base.clock_momentum**2 / 2, abs=2e-16
+    )
+    arrived, event, _ = clock_return(initial, model)
+    assert event.crossed
+    np.testing.assert_allclose(event.state.position[1], q[0], atol=2e-17, rtol=0)
+    error = (arrived.position[-1, 2] - arrived.position[-2, 2]) / amplitude
+    newest_drift = arrived.position[1, 2] / amplitude
+    assert -0.0162 < error < -0.0159
+    assert 0.1208 < newest_drift < 0.1212
+
+
 def _as_interval(rational):
     return iv.mpf(rational.numerator) / rational.denominator
 
@@ -243,7 +270,52 @@ def _reduced_coefficients(matrix, symmetry_roots):
     return poly
 
 
-def test_certified_simple_roots_inside_the_rotation_band_for_both_blocks():
+def _sign(interval):
+    if interval.a > 0:
+        return 1
+    assert interval.b < 0
+    return -1
+
+
+def _isolate_roots(poly, boxes):
+    assert len(boxes) == len(poly) - 1
+
+    def evaluate(rational):
+        x = _as_interval(rational)
+        result = iv.mpf(0)
+        for coefficient in poly:
+            result = result * x + coefficient
+        return result
+
+    roots = []
+    for lo, hi in boxes:
+        left, right = map(Fraction, (lo, hi))
+        sign_left = _sign(evaluate(left))
+        assert sign_left != _sign(evaluate(right))
+        for _ in range(28):
+            center = (left + right) / 2
+            if _sign(evaluate(center)) == sign_left:
+                left = center
+            else:
+                right = center
+        roots.append(iv.mpf([_as_interval(left).a, _as_interval(right).b]))
+    return roots
+
+
+def _frequency_sums(angles, start, remaining, total, order=0):
+    # A fixed positive first coefficient removes the duplicate negated vector.
+    for j in range(start, len(angles)):
+        for multiplicity in range(1, remaining + 1):
+            for sign in (1,) if order == 0 else (-1, 1):
+                combined = total + (sign * multiplicity) * angles[j]
+                new_order = order + multiplicity
+                yield combined, new_order
+                yield from _frequency_sums(
+                    angles, j + 1, remaining - multiplicity, combined, new_order
+                )
+
+
+def test_stable_reduced_blocks_have_no_nontrivial_resonance_through_degree_five():
     saved = iv.dps
     iv.dps = 75
     try:
@@ -264,18 +336,35 @@ def test_certified_simple_roots_inside_the_rotation_band_for_both_blocks():
                 ],
             ),
         )
-        for matrix, symmetry_roots, boxes in cases:
-            poly = _reduced_coefficients(matrix, symmetry_roots)
-            assert len(boxes) == len(poly) - 1
+        roots = [
+            u / 2
+            for matrix, symmetry_roots, boxes in cases
+            for u in _isolate_roots(
+                _reduced_coefficients(matrix, symmetry_roots), boxes
+            )
+        ]
+        angles = [iv.atan2(iv.sqrt(1 - x**2), x) for x in roots]
+        margins = [iv.mpf(string) for string in ("0.0058", "0.001", "0.000024")]
+        turns = [2 * j * iv.pi for j in range(-2, 3)]
+        for total, order in _frequency_sums(angles, 0, 5, iv.mpf(0)):
+            margin = margins[max(0, order - 3)]
+            for turn in turns:
+                excess = total - turn
+                assert excess.a > margin or excess.b < -margin
 
-            def evaluate(x):
-                result = iv.mpf(0)
-                for coefficient in poly:
-                    result = result * x + coefficient
-                return result
-
-            for lo, hi in boxes:
-                left, right = evaluate(iv.mpf(lo)), evaluate(iv.mpf(hi))
-                assert left.b < 0 < right.a or right.b < 0 < left.a
+        probe = iv.matrix([0, 0, 0, 0, 0, 0, 0, 0, -1, 1])
+        tangent = normal * probe
+        error = tangent[4] - tangent[3]
+        assert iv.mpf("-0.0162") < error.a <= error.b < iv.mpf("-0.0159")
+        assert iv.mpf("0.1208") < tangent[1].a <= tangent[1].b < iv.mpf("0.1212")
+        orbit, _, _ = _exact_modes_and_orbit()
+        angular = (
+            sum(
+                orbit[i].real * orbit[i + 5].imag - orbit[i].imag * orbit[i + 5].real
+                for i in range(5)
+            )
+            / 25**2
+        )
+        assert angular.a > iv.mpf("0.0028")
     finally:
         iv.dps = saved

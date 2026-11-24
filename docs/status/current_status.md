@@ -1003,6 +1003,15 @@ Ebene und quer, mit Rotorableitung auf fester Energie
 und nach Symmetriereduktion. Treue Historie bleibt.
 Keine nichtlineare Bindung oder native Knotenbildung.
 
+Die [nichtlineare Naehepruefung am FIFO-Sechseck](https://github.com/MemoryDynamics/Knoten/blob/codex/paper-i-finalization/reports/reference/fifo_hexagon_effective_stability_2026-11-24.md)
+verifiziert Nichtresonanz bis Grad fuenf nach voller
+Impulsreduktion. Die endliche Normalform gibt
+$O(\epsilon)$-Naehe fuer mindestens $c\epsilon^{-4}$
+Writes bei festen Invarianten; $c$ ist nicht
+numerisch kalibriert. Ein Einzelschritt widerlegt
+exakte Historientreue fuer eine impulserhaltende Stoerung.
+Kein Langzeitnachweis oder nativer Kandidatenlauf.
+
 Die [Memory-Paarreduktion](../reference/memory_pair_reduction.md) liefert
 eine exakte Center-Gleichung mit endlichem FIFO-Rand und nichtlinearem
 Rest samt Schranke. 14 kleine synthetische Tests bestehen; kein neuer

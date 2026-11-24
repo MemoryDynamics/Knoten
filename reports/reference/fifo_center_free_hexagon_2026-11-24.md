@@ -198,3 +198,8 @@ Historie und positiver Rotorreserve. Erst
 danach waere die Kopplung zweier solcher
 Referenzknoten als naechster physikalischer
 Benchmark aussagekraeftig.
+
+Die [nichtlineare Naehepruefung](fifo_hexagon_effective_stability_2026-11-24.md)
+liefert ein endliches $c\epsilon^{-4}$-Fenster bei
+fixierten Impulsen und unterscheidet kleine Fehler
+von exakter Historientreue.
